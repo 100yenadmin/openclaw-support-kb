@@ -5,10 +5,13 @@ import {
   canonicalSourceDir,
   compareSemver,
   ensureGbrainSource,
+  gbrainSyncArgs,
   GBRAIN_VERIFY_QUERIES,
-  GBRAIN_SOURCE_ID,
+  gbrainUpgradeHint,
   readJsonIfExists,
+  resolveGbrainCommand,
   validateGbrainSearchOutput,
+  verifyNamedGbrainSource,
 } from "./lib/openclaw-support-kb.mjs";
 
 const target =
@@ -16,6 +19,7 @@ const target =
   canonicalSourceDir();
 const channel = process.env.OPENCLAW_KB_CHANNEL || "stable";
 const allowNoGbrain = process.env.OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN === "1";
+let gbrainCommand = "gbrain";
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, { stdio: "inherit", ...options });
@@ -51,7 +55,7 @@ function verifyGbrainSearch() {
   }
   const loose = process.env.OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY === "1";
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const search = capture("gbrain", ["search", item.query]);
+    const search = capture(gbrainCommand, ["search", item.query]);
     const output = `${search.stdout}\n${search.stderr}`;
     const verified = validateGbrainSearchOutput(output, {
       strictPatterns: loose ? [] : item.strictPatterns,
@@ -69,7 +73,9 @@ function verifyGbrainSearch() {
 
 run(process.execPath, [new URL("./build-kb.mjs", import.meta.url).pathname, "--out", target, "--channel", channel]);
 
-const gbrainCheck = capture("gbrain", ["--version"]);
+const resolvedGbrain = resolveGbrainCommand({ captureNoExit });
+gbrainCommand = resolvedGbrain.command;
+const gbrainCheck = resolvedGbrain.check;
 if (gbrainCheck.missing) {
   const message = `gbrain not found. KB source is ready at ${target}, but it was not indexed. Install GBrain or set OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1 for explicit degraded rg-only mode.`;
   if (allowNoGbrain) {
@@ -79,13 +85,19 @@ if (gbrainCheck.missing) {
   console.error(message);
   process.exit(2);
 }
+if (gbrainCheck.status !== 0) {
+  console.error(
+    `gbrain was found at ${gbrainCommand}, but '${gbrainCommand} --version' failed. Output: ${`${gbrainCheck.stdout ?? ""}\n${gbrainCheck.stderr ?? ""}`.trim()}`,
+  );
+  process.exit(gbrainCheck.status ?? 2);
+}
 
 const manifest = (await readJsonIfExists(path.join(target, "kb-manifest.json"))) ?? {};
 if (manifest.minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CHECK !== "1") {
   const installedVersion = `${gbrainCheck.stdout} ${gbrainCheck.stderr}`.trim();
   const versionCompare = compareSemver(installedVersion, manifest.minGbrainVersion);
   if (versionCompare === -1) {
-    console.error(`gbrain ${installedVersion} is older than required ${manifest.minGbrainVersion}. Update GBrain before indexing.`);
+    console.error(gbrainUpgradeHint({ command: gbrainCommand, installedVersion, minVersion: manifest.minGbrainVersion }));
     process.exit(2);
   }
   if (versionCompare === null) {
@@ -93,11 +105,22 @@ if (manifest.minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CH
   }
 }
 
+let sourceResult;
 try {
-  ensureGbrainSource({ targetDir: target, run, captureNoExit });
+  sourceResult = ensureGbrainSource({ targetDir: target, run, captureNoExit, gbrainCommand });
 } catch (error) {
   failGbrainSourceRegistration(error);
 }
-run("gbrain", ["sync", "--repo", target, "--source", GBRAIN_SOURCE_ID]);
-run("gbrain", ["embed", "--stale"]);
+run(gbrainCommand, gbrainSyncArgs(target, sourceResult));
+run(gbrainCommand, ["embed", "--stale"]);
+if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_SOURCE_VERIFY !== "1") {
+  const namedSource = verifyNamedGbrainSource({ captureNoExit, gbrainCommand });
+  if (!namedSource.ok) {
+    console.error(`GBrain named-source verification failed: ${namedSource.reason}.`);
+    if (namedSource.source?.line) console.error(`Source line: ${namedSource.source.line}`);
+    if (namedSource.result?.stdout) console.error(namedSource.result.stdout.trim());
+    if (namedSource.result?.stderr) console.error(namedSource.result.stderr.trim());
+    process.exit(2);
+  }
+}
 verifyGbrainSearch();

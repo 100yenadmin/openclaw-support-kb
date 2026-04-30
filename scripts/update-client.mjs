@@ -1,31 +1,41 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readdir, rename, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
   compareSemver,
   canonicalSourceDir,
   ensureGbrainSource,
+  gbrainSyncArgs,
   GBRAIN_VERIFY_QUERIES,
-  GBRAIN_SOURCE_ID,
   isFullCommitSha,
   isOfficialRepoUrl,
+  normalizeRepoUrl,
   pathExists,
   readJsonIfExists,
   repoRootFromImportMeta,
+  resolveGbrainCommand,
+  SOURCE_MARKER_FILE,
   validateGbrainSearchOutput,
+  verifyNamedGbrainSource,
+  gbrainUpgradeHint,
 } from "./lib/openclaw-support-kb.mjs";
 
+const DEFAULT_REPO_URL = "https://github.com/100yenadmin/openclaw-support-kb.git";
 const repoRoot = repoRootFromImportMeta(import.meta.url);
 const targetDir =
   process.env.OPENCLAW_SUPPORT_KB_DIR ||
   canonicalSourceDir();
-const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || "";
+const repoUrl =
+  process.env.OPENCLAW_SUPPORT_KB_REPO ||
+  (path.resolve(repoRoot) === path.resolve(targetDir) ? "" : DEFAULT_REPO_URL);
 const branch = process.env.OPENCLAW_SUPPORT_KB_BRANCH || "main";
 const allowNoGbrain = process.env.OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN === "1";
 const allowUntrustedRepo = process.env.OPENCLAW_SUPPORT_KB_ALLOW_UNTRUSTED_REPO === "1";
+const allowDevBuildSource = process.env.OPENCLAW_SUPPORT_KB_DEV_BUILD_SOURCE === "1";
 const pinnedRef = process.env.OPENCLAW_SUPPORT_KB_PINNED_REF || "";
+let gbrainCommand = "gbrain";
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, { stdio: "inherit", ...options });
@@ -61,7 +71,7 @@ function verifyGbrainSearch() {
   }
   const loose = process.env.OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY === "1";
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const search = capture("gbrain", ["search", item.query]);
+    const search = capture(gbrainCommand, ["search", item.query]);
     const output = `${search.stdout}\n${search.stderr}`;
     const verified = validateGbrainSearchOutput(output, {
       strictPatterns: loose ? [] : item.strictPatterns,
@@ -107,16 +117,92 @@ function warnIfLocalCheckoutOriginIsUnexpected() {
   }
 }
 
+function ensureExistingTargetOriginMatchesTrustPolicy() {
+  const origin = captureNoExit("git", ["-C", targetDir, "remote", "get-url", "origin"]);
+  if (origin.status !== 0) {
+    console.error(`Refusing to update ${targetDir}: could not verify git origin.`);
+    if (origin.stderr) console.error(origin.stderr.trim());
+    process.exit(origin.status ?? 3);
+  }
+  const originUrl = origin.stdout.trim();
+  if (isOfficialRepoUrl(repoUrl)) {
+    if (isOfficialRepoUrl(originUrl)) return;
+    console.error(`Refusing to update ${targetDir}: existing origin is not the official support KB repo (${originUrl}).`);
+    process.exit(3);
+  }
+  if (normalizeRepoUrl(originUrl) !== normalizeRepoUrl(repoUrl)) {
+    console.error(`Refusing to update ${targetDir}: existing origin ${originUrl} does not match ${repoUrl}.`);
+    process.exit(3);
+  }
+}
+
+async function directoryIsEmpty(dir) {
+  try {
+    return (await readdir(dir)).length === 0;
+  } catch (error) {
+    if (error.code === "ENOENT") return false;
+    throw error;
+  }
+}
+
+function cloneTarget() {
+  run("git", ["clone", "--depth", "1", "--branch", branch, repoUrl, targetDir]);
+  if (pinnedRef) {
+    run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
+    run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
+  }
+}
+
+async function migrateMarkedSourceToGitCheckout() {
+  const markerPath = path.join(targetDir, SOURCE_MARKER_FILE);
+  if (!(await pathExists(markerPath))) {
+    console.error(
+      `Refusing to clone into populated non-git directory ${targetDir}. Move it aside, empty it, or create ${SOURCE_MARKER_FILE} only for a managed OpenClaw support KB source.`,
+    );
+    process.exit(3);
+  }
+
+  const backupDir = path.join(path.dirname(targetDir), `${path.basename(targetDir)}.pre-git-${Date.now()}`);
+  await rm(backupDir, { recursive: true, force: true });
+  console.warn(`Migrating marked non-git OpenClaw support KB source to git checkout. Backup: ${backupDir}`);
+  await rename(targetDir, backupDir);
+  try {
+    cloneTarget();
+  } catch (error) {
+    await rm(targetDir, { recursive: true, force: true });
+    await rename(backupDir, targetDir).catch(() => {});
+    throw error;
+  }
+  await rm(backupDir, { recursive: true, force: true });
+}
+
 async function updateRepo() {
   ensureRepoTrust();
   if (!repoUrl) {
-    if (path.resolve(repoRoot) === path.resolve(targetDir)) return;
+    if (path.resolve(repoRoot) === path.resolve(targetDir)) {
+      if (await pathExists(path.join(targetDir, ".git"))) return;
+      console.error(
+        `Refusing to sync ${targetDir}: this support KB source is not a git checkout. Run scripts/run-client-update.mjs to migrate it to the published repo checkout, or reinstall from ${DEFAULT_REPO_URL}.`,
+      );
+      process.exit(3);
+    }
+    if (!allowDevBuildSource) {
+      console.error(
+        `Refusing to build a non-git support KB source at ${targetDir}. Use OPENCLAW_SUPPORT_KB_REPO=${DEFAULT_REPO_URL} for customer installs or set OPENCLAW_SUPPORT_KB_DEV_BUILD_SOURCE=1 for a local generated source.`,
+      );
+      process.exit(3);
+    }
+    if (await pathExists(path.join(targetDir, ".git"))) {
+      console.error(`Refusing to build a generated dev source over git checkout ${targetDir}.`);
+      process.exit(3);
+    }
     run(process.execPath, [path.join(repoRoot, "scripts", "build-kb.mjs"), "--out", targetDir]);
     return;
   }
 
   await mkdir(path.dirname(targetDir), { recursive: true });
   if (await pathExists(path.join(targetDir, ".git"))) {
+    ensureExistingTargetOriginMatchesTrustPolicy();
     run("git", ["-C", targetDir, "fetch", "--prune", "origin"]);
     if (pinnedRef) {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
@@ -126,10 +212,10 @@ async function updateRepo() {
       run("git", ["-C", targetDir, "pull", "--ff-only", "origin", branch]);
     }
   } else {
-    run("git", ["clone", "--depth", "1", "--branch", branch, repoUrl, targetDir]);
-    if (pinnedRef) {
-      run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
-      run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
+    if ((await pathExists(targetDir)) && !(await directoryIsEmpty(targetDir))) {
+      await migrateMarkedSourceToGitCheckout();
+    } else {
+      cloneTarget();
     }
   }
 }
@@ -147,21 +233,32 @@ await updateRepo();
 verifyPinnedRef();
 warnIfLocalCheckoutOriginIsUnexpected();
 
-const gbrainCheck = capture("gbrain", ["--version"]);
+const resolvedGbrain = resolveGbrainCommand({ captureNoExit });
+gbrainCommand = resolvedGbrain.command;
+const gbrainCheck = resolvedGbrain.check;
+const runtimeRoot = await pathExists(path.join(targetDir, "scripts", "install-skills.mjs")) ? targetDir : repoRoot;
 if (gbrainCheck.missing) {
+  run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")], {
+    env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
+  });
   if (allowNoGbrain) {
     console.warn(
       `gbrain not found. Proceeding only because OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1 is set. Skills will be installed, but the KB will not be indexed and agents must not claim GBrain-indexed results.`,
     );
-    const runtimeRoot = await pathExists(path.join(targetDir, "scripts", "install-skills.mjs")) ? targetDir : repoRoot;
-    run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")], {
-      env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
-    });
     process.exit(0);
   }
-  const message = `gbrain not found. KB source is ready at ${targetDir}, but skills were not installed and the KB was not indexed. Install GBrain or set OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1 for explicit degraded rg-only mode.`;
+  const message = `gbrain not found. KB source and skills are ready at ${targetDir}, but the KB was not indexed. Install GBrain, add it to PATH, or set GBRAIN_BIN=/path/to/gbrain.`;
   console.error(message);
   process.exit(2);
+}
+if (gbrainCheck.status !== 0) {
+  run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")], {
+    env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
+  });
+  console.error(
+    `gbrain was found at ${gbrainCommand}, but '${gbrainCommand} --version' failed. Output: ${`${gbrainCheck.stdout ?? ""}\n${gbrainCheck.stderr ?? ""}`.trim()}`,
+  );
+  process.exit(gbrainCheck.status ?? 2);
 }
 
 const manifest =
@@ -173,7 +270,10 @@ if (minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CHECK !== "
   const installedVersion = `${gbrainCheck.stdout} ${gbrainCheck.stderr}`.trim();
   const versionCompare = compareSemver(installedVersion, minGbrainVersion);
   if (versionCompare === -1) {
-    console.error(`gbrain ${installedVersion} is older than required ${minGbrainVersion}. Update GBrain before indexing.`);
+    run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")], {
+      env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
+    });
+    console.error(gbrainUpgradeHint({ command: gbrainCommand, installedVersion, minVersion: minGbrainVersion }));
     process.exit(2);
   }
   if (versionCompare === null) {
@@ -181,18 +281,28 @@ if (minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CHECK !== "
   }
 }
 
-const runtimeRoot = await pathExists(path.join(targetDir, "scripts", "install-skills.mjs")) ? targetDir : repoRoot;
 run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")], {
   env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
 });
 
+let sourceResult;
 try {
-  ensureGbrainSource({ targetDir, run, captureNoExit });
+  sourceResult = ensureGbrainSource({ targetDir, run, captureNoExit, gbrainCommand });
 } catch (error) {
   failGbrainSourceRegistration(error);
 }
-run("gbrain", ["sync", "--repo", targetDir, "--source", GBRAIN_SOURCE_ID]);
-run("gbrain", ["embed", "--stale"]);
+run(gbrainCommand, gbrainSyncArgs(targetDir, sourceResult));
+run(gbrainCommand, ["embed", "--stale"]);
+if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_SOURCE_VERIFY !== "1") {
+  const namedSource = verifyNamedGbrainSource({ captureNoExit, gbrainCommand });
+  if (!namedSource.ok) {
+    console.error(`GBrain named-source verification failed: ${namedSource.reason}.`);
+    if (namedSource.source?.line) console.error(`Source line: ${namedSource.source.line}`);
+    if (namedSource.result?.stdout) console.error(namedSource.result.stdout.trim());
+    if (namedSource.result?.stderr) console.error(namedSource.result.stderr.trim());
+    process.exit(2);
+  }
+}
 verifyGbrainSearch();
 
 console.log(`OpenClaw support KB updated, indexed, and query-verified from ${targetDir}`);

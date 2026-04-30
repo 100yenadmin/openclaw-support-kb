@@ -83,22 +83,37 @@ Local alias from this repo directory: `npm run setup`.
 Setup installs the four OpenClaw support skills into `~/.openclaw/skills`, writes
 an agent hint block to active OpenClaw workspace `AGENTS.md` files, and syncs
 this source into GBrain. Override skills destination with `OPENCLAW_SKILLS_DIR`.
+When setup runs outside the canonical source directory, it keeps
+`~/.gbrain/sources/openclaw-support-kb` as a git checkout of the published repo
+instead of generating a non-git directory that GBrain cannot sync.
 
 `sync:local` builds the KB into `~/.gbrain/sources/openclaw-support-kb`,
-registers the federated GBrain source `openclaw-support-kb`, then runs:
+registers the federated GBrain source `openclaw-support-kb` when the installed
+GBrain supports named sources, then runs:
 
 ```bash
 gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb && \
   gbrain embed --stale
 ```
 
-If `gbrain` is not installed, setup fails unless
+If the discovered GBrain satisfies `kb-manifest.json` `minGbrainVersion` but
+lacks named-source commands, `ensureGbrainSource()` falls back to:
+
+```bash
+gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb && gbrain embed --stale
+```
+
+GBrain versions older than `minGbrainVersion` stop before indexing instead of
+using the legacy fallback. If `gbrain` is not installed, setup fails unless
 `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` is explicitly set for a degraded
-read-only install. A normal install also runs a verification search after
-embedding. The verification runs two searches: one for this KB's manifest and
-one for the Telegram docs. It fails on empty/no-result searches or missing
-expected markers. Use `OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only if a
-known-good GBrain version formats search output too tersely for marker checks.
+read-only install. The installer checks `PATH`, `GBRAIN_BIN`, and common local
+locations such as `~/gbrain/bin/gbrain`. If the discovered GBrain is older than
+`kb-manifest.json` requires, skills are still installed but indexing stops with
+an explicit `gbrain upgrade` hint. A normal install also runs a verification
+search after embedding. The verification runs two searches: one for this KB's
+manifest and one for the Telegram docs. It fails on empty/no-result searches or
+missing expected markers. Use `OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only
+if a known-good GBrain version formats search output too tersely for marker checks.
 
 The installed skills assume helper scripts are available from:
 
@@ -116,23 +131,36 @@ node scripts/install-auto-update.mjs --mode crontab --run-now
 
 The installer appends or replaces only the managed
 `openclaw-support-kb:auto-update` crontab block. It does not replace unrelated
-crontab entries. The scheduled command runs:
+crontab entries. Running without `--mode crontab` prints the managed block and
+fleet command without changing the machine. The scheduled command runs:
 
 ```bash
 node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason cron
 ```
 
-`run-client-update.mjs` is also the fleet/control-panel entrypoint. Call it on
-release or KB publish events to reduce freshness lag:
-
-```bash
-node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason fleet-release
-```
+`run-client-update.mjs` is also the fleet/control-panel entrypoint. To reduce
+freshness lag, register the full `Fleet/control-panel immediate update command:`
+printed by `node scripts/install-auto-update.mjs --mode print`; that command
+preserves the `OPENCLAW_SUPPORT_KB_*`, `OPENCLAW_KB_CHANNEL`, and `PATH`
+prefixes needed on customer machines.
 
 The runner is lock-protected, pulls the published repo with `git pull --ff-only`,
-runs `scripts/update-client.mjs`, syncs the named GBrain source, embeds stale
-chunks, verifies search, and writes status JSON to
+runs `scripts/update-client.mjs`, syncs the named GBrain source when available
+or legacy repo sync otherwise, embeds stale chunks, verifies search, and writes
+status JSON to
 `~/.gbrain/state/openclaw-support-kb-update.json`.
+
+Check install health at any time:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs
+node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs --json
+```
+
+The status command checks the source checkout, manifest, installed skills,
+GBrain version, named-source page count, stale import checkpoints, local update
+lock, search verification, and cron registration. It exits 0 only when the KB is
+healthy or an update is clearly running.
 
 ```mermaid
 flowchart TD
@@ -142,7 +170,7 @@ flowchart TD
   C --> D
   D --> E["update-client installs skills and AGENTS hints"]
   E --> F["Register/federate GBrain source openclaw-support-kb"]
-  F --> G["gbrain sync --repo ... --source openclaw-support-kb"]
+  F --> G["gbrain sync --repo ... (--source when supported)"]
   G --> H["gbrain embed --stale"]
   H --> I["Verification searches + status JSON"]
 ```

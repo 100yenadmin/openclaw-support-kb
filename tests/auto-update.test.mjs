@@ -219,6 +219,64 @@ test("cron helpers are stable for shell quoting and minute jitter", () => {
   assert.ok(defaultCronMinute("same-host") < 60);
 });
 
+test("auto-update installer help and default print mode do not touch crontab", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-cron-help-"));
+  try {
+    const fakeBin = path.join(tempDir, "bin");
+    await mkdir(fakeBin, { recursive: true });
+    await writeFile(path.join(fakeBin, "crontab"), "#!/bin/sh\necho crontab should not run >&2\nexit 99\n", {
+      mode: 0o755,
+    });
+    const env = {
+      ...process.env,
+      PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+      OPENCLAW_SUPPORT_KB_DIR: path.join(tempDir, "source"),
+    };
+
+    const help = spawnSync(process.execPath, ["scripts/install-auto-update.mjs", "--help"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env,
+    });
+    assert.equal(help.status, 0, help.stderr);
+    assert.match(help.stdout, /Defaults to print/);
+    assert.doesNotMatch(help.stderr, /crontab should not run/);
+
+    const printed = spawnSync(process.execPath, ["scripts/install-auto-update.mjs"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env,
+    });
+    assert.equal(printed.status, 0, printed.stderr);
+    assert.match(printed.stdout, /openclaw-support-kb:auto-update/);
+    assert.doesNotMatch(printed.stderr, /crontab should not run/);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("auto-update installer rejects unknown args before crontab mutation", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-cron-args-"));
+  try {
+    const fakeBin = path.join(tempDir, "bin");
+    await mkdir(fakeBin, { recursive: true });
+    await writeFile(path.join(fakeBin, "crontab"), "#!/bin/sh\necho crontab should not run >&2\nexit 99\n", {
+      mode: 0o755,
+    });
+
+    const result = spawnSync(process.execPath, ["scripts/install-auto-update.mjs", "--bogus"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: { ...process.env, PATH: `${fakeBin}${path.delimiter}${process.env.PATH}` },
+    });
+    assert.equal(result.status, 2);
+    assert.match(result.stderr, /Unknown argument/);
+    assert.doesNotMatch(result.stderr, /crontab should not run/);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
 test("client updater treats a live lock owner as active past stale timeout", async () => {
   const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-lock-"));
   try {
@@ -315,6 +373,157 @@ test("client updater migrates a marked non-git managed source into a git checkou
     const status = JSON.parse(await readFile(statusFile, "utf8"));
     assert.equal(status.ok, true);
     assert.equal(status.reason, "test-migrate");
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("direct client setup clones the published repo instead of building a non-git source", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-direct-clone-"));
+  try {
+    const { remote } = await createRemoteFixture(tempDir);
+    const sourceDir = path.join(tempDir, "source");
+    const fakeBin = path.join(tempDir, "bin");
+    await mkdir(fakeBin, { recursive: true });
+    await writeFile(
+      path.join(fakeBin, "gbrain"),
+      [
+        "#!/bin/sh",
+        "if [ \"$1\" = \"--version\" ]; then echo 'gbrain 0.27.0'; exit 0; fi",
+        "if [ \"$1\" = \"sources\" ] && [ \"$2\" = \"list\" ]; then echo 'openclaw-support-kb   federated   3 pages  synced'; exit 0; fi",
+        "if [ \"$1\" = \"sources\" ]; then exit 0; fi",
+        "if [ \"$1\" = \"sync\" ]; then exit 0; fi",
+        "if [ \"$1\" = \"embed\" ]; then exit 0; fi",
+        "if [ \"$1\" = \"search\" ]; then echo 'openclaw-support-kb kb-manifest sourceCount minGbrainVersion telegram allowFrom groupAllowFrom channels/telegram'; exit 0; fi",
+        "exit 0",
+        "",
+      ].join("\n"),
+      { mode: 0o755 },
+    );
+
+    const result = spawnSync(process.execPath, ["scripts/update-client.mjs"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        HOME: tempDir,
+        PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SKILLS_DIR: path.join(tempDir, "skills"),
+        OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD: "1",
+        GIT_CONFIG_COUNT: "1",
+        GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
+        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    assert.equal(await exists(path.join(sourceDir, ".git")), true);
+    assert.equal(await exists(path.join(sourceDir, SOURCE_MARKER_FILE)), false);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("direct client setup refuses pre-existing git source with untrusted origin", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-bad-origin-"));
+  try {
+    const sourceDir = path.join(tempDir, "source");
+    runGit(["init", "--initial-branch=main", sourceDir]);
+    runGit(["remote", "add", "origin", "https://example.com/not-the-support-kb.git"], { cwd: sourceDir });
+
+    const result = spawnSync(process.execPath, ["scripts/update-client.mjs"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        HOME: tempDir,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN: "1",
+        OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD: "1",
+      },
+    });
+
+    assert.equal(result.status, 3);
+    assert.match(result.stderr, /existing origin is not the official support KB repo/);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("status command reports healthy installs and stale checkpoints", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-status-"));
+  try {
+    const sourceDir = path.join(tempDir, "source");
+    const skillsDir = path.join(tempDir, "skills");
+    const fakeBin = path.join(tempDir, "bin");
+    const checkpointFile = path.join(tempDir, "checkpoint.json");
+    await mkdir(path.join(sourceDir, ".git"), { recursive: true });
+    await mkdir(fakeBin, { recursive: true });
+    await writeFile(
+      path.join(sourceDir, "kb-manifest.json"),
+      JSON.stringify({ channel: "stable", sourceCount: 3, minGbrainVersion: "0.19.0" }),
+    );
+    for (const skill of [
+      "openclaw-support-kb",
+      "openclaw-config-repair",
+      "openclaw-skill-discovery",
+      "openclaw-support-escalation",
+    ]) {
+      await mkdir(path.join(skillsDir, skill), { recursive: true });
+      await writeFile(path.join(skillsDir, skill, "SKILL.md"), `# ${skill}\n`);
+    }
+    await writeFile(
+      path.join(fakeBin, "gbrain"),
+      [
+        "#!/bin/sh",
+        "if [ \"$1\" = \"--version\" ]; then echo 'gbrain 0.27.0'; exit 0; fi",
+        "if [ \"$1\" = \"sources\" ] && [ \"$2\" = \"list\" ]; then echo 'openclaw-support-kb   federated   3 pages  synced'; exit 0; fi",
+        "exit 0",
+        "",
+      ].join("\n"),
+      { mode: 0o755 },
+    );
+
+    const env = {
+      ...process.env,
+      HOME: tempDir,
+      PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+      OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+      OPENCLAW_SKILLS_DIR: skillsDir,
+      OPENCLAW_SUPPORT_KB_IMPORT_CHECKPOINT_FILE: checkpointFile,
+      OPENCLAW_SUPPORT_KB_STATUS_SKIP_SEARCH: "1",
+    };
+
+    const healthy = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env,
+    });
+    assert.equal(healthy.status, 0, healthy.stderr);
+    assert.equal(JSON.parse(healthy.stdout).status, "healthy");
+
+    await writeFile(
+      checkpointFile,
+      JSON.stringify({
+        dir: sourceDir,
+        totalFiles: 10,
+        processedIndex: 4,
+        completedFiles: 4,
+        timestamp: "2000-01-01T00:00:00.000Z",
+      }),
+    );
+
+    const stale = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: { ...env, OPENCLAW_SUPPORT_KB_CHECKPOINT_STALE_MS: "1" },
+    });
+    assert.equal(stale.status, 1);
+    const staleStatus = JSON.parse(stale.stdout);
+    assert.equal(staleStatus.status, "repair-needed");
+    assert.equal(staleStatus.checkpoint.stale, true);
+    assert.ok(staleStatus.problems.some((problem) => /checkpoint/.test(problem)));
   } finally {
     await rm(tempDir, { recursive: true, force: true });
   }

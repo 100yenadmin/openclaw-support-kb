@@ -9,28 +9,69 @@ import {
   shellQuote,
   upsertManagedCronBlock,
 } from "./lib/auto-update.mjs";
-import { canonicalSourceDir } from "./lib/openclaw-support-kb.mjs";
+import { canonicalSourceDir, withCommandPathFallbacks } from "./lib/openclaw-support-kb.mjs";
+
+const args = parseArgs(process.argv.slice(2));
+if (args.help) {
+  printUsage();
+  process.exit(0);
+}
 
 const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
-const mode = readArg("--mode") || "crontab";
-const schedule = readArg("--schedule") || `${defaultCronMinute()} * * * *`;
-const channel = process.env.OPENCLAW_KB_CHANNEL || readArg("--channel") || "stable";
+const mode = args.mode || "print";
+const schedule = args.schedule || `${defaultCronMinute()} * * * *`;
+const channel = process.env.OPENCLAW_KB_CHANNEL || args.channel || "stable";
 const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || "https://github.com/100yenadmin/openclaw-support-kb.git";
 const logPath =
   process.env.OPENCLAW_SUPPORT_KB_LOG_FILE ||
   path.join(os.homedir(), ".gbrain", "logs", "openclaw-support-kb-update.log");
 const scriptPath = path.join(targetDir, "scripts", "run-client-update.mjs");
-const runNow = process.argv.includes("--run-now");
+const runNow = args.runNow;
+const pathValue = withCommandPathFallbacks(process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin");
 
-function readArg(name) {
-  const index = process.argv.indexOf(name);
-  if (index === -1) return "";
-  const value = process.argv[index + 1];
-  if (!value || value.startsWith("-")) {
-    console.error(`Missing value for ${name}.`);
+function printUsage() {
+  console.log(`Usage: node scripts/install-auto-update.mjs [options]
+
+Options:
+  --mode print|crontab   Print the managed command/block, or install it into crontab.
+                         Defaults to print; crontab mutation must be explicit.
+  --schedule "CRON"      Five-field cron schedule. Defaults to a stable hourly minute.
+  --channel stable|beta  KB channel to pass to client updates.
+  --run-now             After --mode crontab install, run one immediate update.
+  -h, --help            Show this help without changing crontab.
+`);
+}
+
+function parseArgs(argv) {
+  const parsed = { help: false, mode: "", schedule: "", channel: "", runNow: false };
+  const valueArgs = new Set(["--mode", "--schedule", "--channel"]);
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === "--help" || arg === "-h") {
+      parsed.help = true;
+      continue;
+    }
+    if (arg === "--run-now") {
+      parsed.runNow = true;
+      continue;
+    }
+    if (valueArgs.has(arg)) {
+      const value = argv[index + 1];
+      if (!value || value.startsWith("-")) {
+        console.error(`Missing value for ${arg}.`);
+        process.exit(2);
+      }
+      parsed[arg.slice(2).replace(/-([a-z])/g, (_, char) => char.toUpperCase())] = value;
+      index += 1;
+      continue;
+    }
+    console.error(`Unknown argument: ${arg}`);
+    printUsage();
     process.exit(2);
   }
-  return value;
+
+  return parsed;
 }
 
 function captureNoExit(command, args, options = {}) {
@@ -84,7 +125,7 @@ const block = managedCronBlock({
   targetDir,
   channel,
   repoUrl,
-  pathValue: process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
+  pathValue,
 });
 
 if (mode === "print") {
@@ -96,7 +137,7 @@ if (mode === "print") {
       `OPENCLAW_SUPPORT_KB_DIR=${shellQuote(targetDir)}`,
       `OPENCLAW_SUPPORT_KB_REPO=${shellQuote(repoUrl)}`,
       `OPENCLAW_KB_CHANNEL=${shellQuote(channel)}`,
-      `PATH=${shellQuote(process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin")}`,
+      `PATH=${shellQuote(pathValue)}`,
       shellQuote(process.execPath),
       shellQuote(scriptPath),
       "--reason",
@@ -123,6 +164,7 @@ if (runNow) {
       OPENCLAW_SUPPORT_KB_DIR: targetDir,
       OPENCLAW_SUPPORT_KB_REPO: repoUrl,
       OPENCLAW_KB_CHANNEL: channel,
+      PATH: pathValue,
     },
   });
 }
