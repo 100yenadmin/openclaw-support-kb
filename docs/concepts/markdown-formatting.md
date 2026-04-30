@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Markdown formatting"
 source: "https://docs.openclaw.ai/concepts/markdown-formatting"
 source_hash: "2e99c4acf6f02b9e7100dddd7fd0f681410f9bfd8200562bf397b1d843a5de12"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/markdown-formatting.md"
 original_doc_path: "concepts/markdown-formatting.md"
 duplicate_index: 1

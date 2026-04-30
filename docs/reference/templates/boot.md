@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "BOOT.md template"
 source: "https://docs.openclaw.ai/reference/templates/BOOT"
 source_hash: "b56bfa1d95d454d27e4349818358491407f6f0d43b136cea49059c38b5637e6a"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "reference/templates/boot.md"
 original_doc_path: "reference/templates/boot.md"
 duplicate_index: 1

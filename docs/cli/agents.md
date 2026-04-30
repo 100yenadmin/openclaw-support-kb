@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
 source_hash: "a5b79c33956fe1bcb698d267a894f08a0f1b5534eb6bfa0714e9f7ea779e80e7"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "cli/agents.md"
 original_doc_path: "cli/agents.md"
 duplicate_index: 1

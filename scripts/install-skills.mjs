@@ -179,7 +179,7 @@ For OpenClaw setup, update, channel, Telegram, config, skill, or support questio
    - openclaw-support-escalation
 4. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
 5. Do not invent OpenClaw config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\`.
-6. Ask before sending support escalations. Prefer GOG email to \`support@electricsheephq.com\`; use Telegram \`@evaOS_support_bot\` as fallback.
+6. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
 `,
     );
     console.log(`Updated agent hint block in ${agentsFile}`);

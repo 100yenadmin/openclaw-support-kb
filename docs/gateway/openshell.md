@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenShell"
 source: "https://docs.openclaw.ai/gateway/openshell"
 source_hash: "e0fe04e506c378b188c531c7e4d03cc3b3ceca67be486c0ddbb7868baf4c4431"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/openshell.md"
 original_doc_path: "gateway/openshell.md"
 duplicate_index: 1

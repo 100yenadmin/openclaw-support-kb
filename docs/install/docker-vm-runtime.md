@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
 source_hash: "5eda1601cec85cc6a9ca76719f07634a0eb36b1dbafc0f673988f02ba1fe1202"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "install/docker-vm-runtime.md"
 original_doc_path: "install/docker-vm-runtime.md"
 duplicate_index: 1

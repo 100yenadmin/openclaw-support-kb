@@ -98,22 +98,9 @@ OpenClaw installs.
 
 Agents must draft and ask before sending support escalations. The helper binds
 the approved draft, recipient, subject, transport, and account before sending.
-Email uses GOG:
-
-```bash
-gog gmail send --account <explicit-account> \
-  --to support@electricsheephq.com \
-  --subject "[OpenClaw Support] <short issue>" \
-  --body-file <approved-draft.md>
-```
-
-Telegram uses OpenClaw:
-
-```bash
-openclaw message send --channel telegram \
-  --target @evaOS_support_bot \
-  --message "$(cat <approved-draft.md>)"
-```
+Use `scripts/support-escalation.mjs`; do not call raw GOG or raw Telegram send
+commands directly for support escalation. The helper uses GOG for email when
+available and OpenClaw Telegram messaging for `@evaOS_support_bot` fallback.
 
 ## CI
 

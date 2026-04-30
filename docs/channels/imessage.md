@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
 source_hash: "d8588dcab968e58f529b7be56238a59aa14a6b910549cf6d8a16b03ee3c70272"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "channels/imessage.md"
 original_doc_path: "channels/imessage.md"
 duplicate_index: 1

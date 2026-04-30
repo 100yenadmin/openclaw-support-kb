@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
 source_hash: "1e308693addd0d28d135d02aaedd57478d85b8e4b618bf8e411a6ece485220d6"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "plugins/sdk-setup.md"
 original_doc_path: "plugins/sdk-setup.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenProse"
 source: "https://docs.openclaw.ai/prose"
 source_hash: "79bc52dfb52768cf8bc2ec8a4daa45de9096be4703ff4e30f1585e72c3bc8124"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "prose.md"
 original_doc_path: "prose.md"
 duplicate_index: 1

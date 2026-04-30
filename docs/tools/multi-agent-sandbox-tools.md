@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
 source_hash: "1f6ac8fe9ef7f5f05e53fa89e145d777b60c4719581f56e8ec3afb88a2375982"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/multi-agent-sandbox-tools.md"
 original_doc_path: "tools/multi-agent-sandbox-tools.md"
 duplicate_index: 1

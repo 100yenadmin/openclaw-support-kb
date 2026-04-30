@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
 source_hash: "23382ba1f30b44abda2a846e419b32c8aa127e6a383049143bb5a713fdd352c8"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "channels/groups.md"
 original_doc_path: "channels/groups.md"
 duplicate_index: 1

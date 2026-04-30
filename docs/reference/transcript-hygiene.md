@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
 source_hash: "cc8d8d61ec9cbfa3cb801258f1f2f9e1c787e3edafd34a46f796ab5143d2c746"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "reference/transcript-hygiene.md"
 original_doc_path: "reference/transcript-hygiene.md"
 duplicate_index: 1

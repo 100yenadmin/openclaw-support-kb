@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
 source_hash: "fa5dc1b08bd4156991f4e7411d0278059144af89add7a291076baa30a9d0205d"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1

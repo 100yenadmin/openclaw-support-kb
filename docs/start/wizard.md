@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
 source_hash: "2d57cd72860346af1b26542df12b221330bfd19e554910e337ae4c36ccde45f3"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "start/wizard.md"
 original_doc_path: "start/wizard.md"
 duplicate_index: 1

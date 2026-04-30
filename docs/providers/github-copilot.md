@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "GitHub Copilot"
 source: "https://docs.openclaw.ai/providers/github-copilot"
 source_hash: "40559f8fa0b6eacf4986ada837851e200f1595d4affd9ad47fb4cc2fa5259731"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/github-copilot.md"
 original_doc_path: "providers/github-copilot.md"
 duplicate_index: 1

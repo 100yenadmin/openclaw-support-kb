@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
 source_hash: "20e38d0e0ca62c6c07dbc8f6d9d21809847968d66b02383d6220a0a28bc5c946"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/bedrock.md"
 original_doc_path: "providers/bedrock.md"
 duplicate_index: 1

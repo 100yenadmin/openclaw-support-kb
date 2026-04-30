@@ -1,15 +1,14 @@
 #!/usr/bin/env node
-import { DEFAULT_AGENT_SCAN_SPEC } from "./lib/openclaw-support-kb.mjs";
+import { DEFAULT_AGENT_SCAN_SPEC, validateAgentScanSpec } from "./lib/openclaw-support-kb.mjs";
 
 const spec = process.env.SNYK_AGENT_SCAN_SPEC || DEFAULT_AGENT_SCAN_SPEC;
-const match = /^([^@]+)@(.+)$/.exec(spec);
-if (!match || match[2] === "latest") {
-  console.error(`Scanner spec must be pinned as package@version, got ${spec}`);
+const validated = validateAgentScanSpec(spec);
+if (!validated.ok) {
+  console.error(`Scanner spec must be pinned as snyk-agent-scan@version, got ${spec}: ${validated.reason}`);
   process.exit(1);
 }
 
-const [, packageName, version] = match;
-const response = await fetch(`https://pypi.org/pypi/${encodeURIComponent(packageName)}/json`, {
+const response = await fetch(`https://pypi.org/pypi/${encodeURIComponent(validated.packageName)}/json`, {
   headers: { accept: "application/json", "user-agent": "openclaw-support-kb-scanner-check" },
 });
 if (!response.ok) {
@@ -18,7 +17,7 @@ if (!response.ok) {
 }
 
 const metadata = await response.json();
-if (!metadata.releases?.[version]?.length) {
+if (!metadata.releases?.[validated.version]?.length) {
   console.error(`Pinned scanner spec does not exist on PyPI: ${spec}`);
   process.exit(1);
 }

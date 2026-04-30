@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
 source_hash: "a189f97fd49372efd455b9beb0253b8035fe97e5211dc6432ff942e8389ed4b7"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/azure-speech.md"
 original_doc_path: "providers/azure-speech.md"
 duplicate_index: 1

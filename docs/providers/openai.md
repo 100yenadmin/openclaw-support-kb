@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
 source_hash: "1ed219f85f5bf395c263026b3e6a04d968abca9f58fadaf7b1e7dd3a4f1e565b"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
 source_hash: "86059683f882a3bb2be8eab98be10bd6c737b6c911b727cf7542359fe63a5855"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/diffs.md"
 original_doc_path: "tools/diffs.md"
 duplicate_index: 1

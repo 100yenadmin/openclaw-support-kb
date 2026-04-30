@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Remote control"
 source: "https://docs.openclaw.ai/platforms/mac/remote"
 source_hash: "43ba0d2fae1a2d1f08d18617a69e4a71a65796e2e7c77985fc9e3909bc5da226"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "platforms/mac/remote.md"
 original_doc_path: "platforms/mac/remote.md"
 duplicate_index: 1

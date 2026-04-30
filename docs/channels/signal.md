@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
 source_hash: "dc69e3f32996756afb39f850e6ae32db3b4e6ad72caeea53cb9bf71a7b17e569"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "channels/signal.md"
 original_doc_path: "channels/signal.md"
 duplicate_index: 1

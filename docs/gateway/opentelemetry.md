@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
 source_hash: "5f9eb13712a7a136d27ce502ef8c5791b706e4a1b7dff2493579ccf912d46472"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1

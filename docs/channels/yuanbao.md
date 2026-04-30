@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Yuanbao"
 source: "https://docs.openclaw.ai/channels/yuanbao"
 source_hash: "9f1c946748a31aaa78db14ae8f1407248fecd305c765f03c39df5625763e1abf"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "channels/yuanbao.md"
 original_doc_path: "channels/yuanbao.md"
 duplicate_index: 1

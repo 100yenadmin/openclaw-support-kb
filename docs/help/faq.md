@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
 source_hash: "1394fb154cedde8436f0605fd34da26a6c74dea555a7a9f55ff96141c29be03a"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "help/faq.md"
 original_doc_path: "help/faq.md"
 duplicate_index: 1

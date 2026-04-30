@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
 source_hash: "be32539b7eb6c0599c516804d65b929125e317e24c16751570fa90c6faf699a5"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/gradium.md"
 original_doc_path: "providers/gradium.md"
 duplicate_index: 1

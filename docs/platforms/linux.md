@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
 source_hash: "6269d489c8bfbd534bef9e1ea527f1dbd31f4e3136e4cc92f564b323a40f6836"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "platforms/linux.md"
 original_doc_path: "platforms/linux.md"
 duplicate_index: 1

@@ -61,6 +61,18 @@ export function isFullCommitSha(value) {
   return /^[a-f0-9]{40}$/i.test(String(value || ""));
 }
 
+export function validateAgentScanSpec(value) {
+  const spec = String(value || "").trim();
+  if (!spec) return { ok: false, reason: "scanner spec is empty" };
+  const match = /^(snyk-agent-scan)@(.+)$/.exec(spec);
+  if (!match) return { ok: false, reason: "scanner spec must be snyk-agent-scan@<version>" };
+  if (match[2] === "latest") return { ok: false, reason: "scanner spec must be pinned to a version, not latest" };
+  if (!/^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(match[2])) {
+    return { ok: false, reason: "scanner spec version must be an explicit semver" };
+  }
+  return { ok: true, packageName: match[1], version: match[2], spec };
+}
+
 export function canonicalSourceDir(home = os.homedir()) {
   return path.join(home, ".gbrain", "sources", "openclaw-support-kb");
 }

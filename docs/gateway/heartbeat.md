@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Heartbeat"
 source: "https://docs.openclaw.ai/gateway/heartbeat"
 source_hash: "afb946e892bf0e858749e0932436ab38323d63683aa072f9c60c840e92a3b19d"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/heartbeat.md"
 original_doc_path: "gateway/heartbeat.md"
 duplicate_index: 1

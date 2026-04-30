@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
 source_hash: "715b4ce6a5d6ed6d9631a06a6fd01bed2db6bccd1867c96d4e72a78caa7b0660"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "channels/feishu.md"
 original_doc_path: "channels/feishu.md"
 duplicate_index: 1

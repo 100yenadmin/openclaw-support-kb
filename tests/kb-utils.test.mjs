@@ -6,6 +6,7 @@ import {
   redactSensitive,
   selectRelease,
   splitLlmsFull,
+  validateAgentScanSpec,
   validateGbrainSearchOutput,
 } from "../scripts/lib/openclaw-support-kb.mjs";
 
@@ -90,4 +91,11 @@ channels.telegram.allowFrom accepts numeric user IDs; groupAllowFrom gates group
   });
   assert.equal(sourced.ok, true);
   assert.deepEqual(sourced.warnings, []);
+});
+
+test("validateAgentScanSpec requires pinned snyk-agent-scan semver", () => {
+  assert.equal(validateAgentScanSpec("snyk-agent-scan@0.5.0").ok, true);
+  assert.equal(validateAgentScanSpec("snyk-agent-scan@latest").ok, false);
+  assert.equal(validateAgentScanSpec("other-agent-scan@0.5.0").ok, false);
+  assert.equal(validateAgentScanSpec("snyk-agent-scan").ok, false);
 });

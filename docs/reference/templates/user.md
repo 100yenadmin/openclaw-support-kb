@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "USER template"
 source: "https://docs.openclaw.ai/reference/templates/USER"
 source_hash: "42452d233e6d38b6481554a1ae0164b36e0656ec8f7878567a8c87843d50b3ce"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "reference/templates/user.md"
 original_doc_path: "reference/templates/user.md"
 duplicate_index: 1

@@ -26,6 +26,8 @@ grounded in current docs before they edit config or escalate support.
 - Prefer docs and runbooks over memory.
 - Prefer `openclaw config set`, `openclaw config patch --dry-run`, and
   `openclaw config validate` over hand-editing `openclaw.json`.
-- Ask before sending anything to support.
-- Use GOG for email escalation when available.
-- Scan community skills with `snyk-agent-scan --skills` before install.
+- Ask before sending anything to support; send only through
+  `scripts/support-escalation.mjs` after hash-bound approval.
+- Use GOG for email escalation through the support helper when available.
+- Scan community skills with `scripts/scan-skill.mjs`; do not run raw
+  `snyk-agent-scan` for install approval.

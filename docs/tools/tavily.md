@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Tavily"
 source: "https://docs.openclaw.ai/tools/tavily"
 source_hash: "2ab4ef4cc5975fef0dcd589cd3429bb722da175f4933bf536bb7305fb05ebd82"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/tavily.md"
 original_doc_path: "tools/tavily.md"
 duplicate_index: 1

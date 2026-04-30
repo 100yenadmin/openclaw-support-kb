@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Talk mode"
 source: "https://docs.openclaw.ai/nodes/talk"
 source_hash: "2d9262a924e7d5c006d2649540fb489276072b635472cc436e71138f5c06f2f8"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "nodes/talk.md"
 original_doc_path: "nodes/talk.md"
 duplicate_index: 1

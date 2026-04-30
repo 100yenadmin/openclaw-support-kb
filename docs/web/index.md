@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Web"
 source: "https://docs.openclaw.ai/web/index"
 source_hash: "c7e961d7b13a0851890f36a5e8765a3b61633c069a0631ef444903122014cb17"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "web/index.md"
 original_doc_path: "web/index.md"
 duplicate_index: 1

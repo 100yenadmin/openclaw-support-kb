@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Voice wake"
 source: "https://docs.openclaw.ai/nodes/voicewake"
 source_hash: "a7c5d6796239eb85b48fc4bbeeda2b087de78437f06f3e33a41f0e2d507cb6f0"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "nodes/voicewake.md"
 original_doc_path: "nodes/voicewake.md"
 duplicate_index: 1

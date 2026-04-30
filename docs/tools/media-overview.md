@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
 source_hash: "82f6bdb3039b3e5e8f91ea16f65b919609d6450bcdfbdb0f4b8b1182f007ef18"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/media-overview.md"
 original_doc_path: "tools/media-overview.md"
 duplicate_index: 1

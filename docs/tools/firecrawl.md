@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Firecrawl"
 source: "https://docs.openclaw.ai/tools/firecrawl"
 source_hash: "5b0dac41832013c321e55b11f81b1833b03eeb05e5323a2ef5a77aaf308e5a44"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/firecrawl.md"
 original_doc_path: "tools/firecrawl.md"
 duplicate_index: 1

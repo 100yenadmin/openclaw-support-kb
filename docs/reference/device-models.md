@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Device model database"
 source: "https://docs.openclaw.ai/reference/device-models"
 source_hash: "84e02d7aef5e8f83e000ac52c417c327f344fb8798352fb3041a1edc6463fcde"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "reference/device-models.md"
 original_doc_path: "reference/device-models.md"
 duplicate_index: 1

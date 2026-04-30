@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes/index"
 source_hash: "06e450184cdc204bef3a52bf4cbd5c9d418f9eecabf4bec49189d2a6327ffe89"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "nodes/index.md"
 original_doc_path: "nodes/index.md"
 duplicate_index: 1

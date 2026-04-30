@@ -103,19 +103,7 @@ Never send support messages without asking the user first. Draft, redact, show
 the draft, generate an approval context hash for the exact transport/recipient,
 and wait for approval.
 
-Preferred support email path:
-
-```bash
-gog gmail send --account <explicit-account> \
-  --to support@electricsheephq.com \
-  --subject "[OpenClaw Support] <short issue>" \
-  --body-file <approved-draft.md>
-```
-
-Telegram fallback:
-
-```bash
-openclaw message send --channel telegram \
-  --target @evaOS_support_bot \
-  --message "$(cat <approved-draft.md>)"
-```
+Send only through `scripts/support-escalation.mjs`. The helper uses GOG for
+approved email escalation to `support@electricsheephq.com` and OpenClaw
+Telegram messaging for approved fallback to `@evaOS_support_bot`; agents should
+not call raw transport commands directly for support escalation.

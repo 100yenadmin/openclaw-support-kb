@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
 source_hash: "c84685a1381aaa7ac2ff7b123273beb9d4c65828d41f5019a9e36d4952ff36cd"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "automation/cron-jobs.md"
 original_doc_path: "automation/cron-jobs.md"
 duplicate_index: 1

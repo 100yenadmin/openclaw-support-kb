@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
 source_hash: "a10c48181388edd384ae8b1ff6e30a31c7aac7243568d8cf00d1d831c0e9d92b"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "web/tui.md"
 original_doc_path: "web/tui.md"
 duplicate_index: 1

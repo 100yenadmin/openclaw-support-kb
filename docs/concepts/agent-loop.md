@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Agent loop"
 source: "https://docs.openclaw.ai/concepts/agent-loop"
 source_hash: "d6bb79216a492d6e220119958c70871d496325319944c32b5707c9ca435df041"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/agent-loop.md"
 original_doc_path: "concepts/agent-loop.md"
 duplicate_index: 1

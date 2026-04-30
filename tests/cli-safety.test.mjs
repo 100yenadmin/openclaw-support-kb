@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -62,4 +62,29 @@ test("support email send refuses omitted subject before invoking transport", () 
 
   assert.equal(result.status, 1);
   assert.match(result.stderr, /without explicit --subject/);
+});
+
+test("scan-skill refuses unpinned scanner override before invoking uvx", () => {
+  const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-scan-"));
+  const candidate = path.join(tmp, "candidate");
+  const fakeBin = path.join(tmp, "bin");
+  mkdirSync(candidate);
+  mkdirSync(fakeBin);
+  writeFileSync(path.join(candidate, "SKILL.md"), "# Test skill\n");
+  writeFileSync(path.join(fakeBin, "uvx"), "#!/bin/sh\necho should-not-run\nexit 0\n", { mode: 0o755 });
+
+  const result = spawnSync(process.execPath, ["scripts/scan-skill.mjs", candidate], {
+    cwd: repoRoot,
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+      SNYK_TOKEN: "dummy",
+      SNYK_AGENT_SCAN_SPEC: "snyk-agent-scan@latest",
+    },
+  });
+
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /must be pinned/);
+  assert.doesNotMatch(result.stdout, /should-not-run/);
 });

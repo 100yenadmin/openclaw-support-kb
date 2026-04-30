@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
 source_hash: "dbce1de3ddd508ffa61ff378829a0a41c3b9165cc70c56f0cb655dbde42b7981"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/configuration.md"
 original_doc_path: "gateway/configuration.md"
 duplicate_index: 1

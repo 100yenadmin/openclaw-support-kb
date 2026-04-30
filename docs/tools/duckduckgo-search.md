@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "DuckDuckGo search"
 source: "https://docs.openclaw.ai/tools/duckduckgo-search"
 source_hash: "caf837cddab7c35f4dd7e6dd5668bbf3b02343fe620aa3d9e54b0bb7de05f892"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/duckduckgo-search.md"
 original_doc_path: "tools/duckduckgo-search.md"
 duplicate_index: 1

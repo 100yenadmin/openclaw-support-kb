@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Migrating from Claude"
 source: "https://docs.openclaw.ai/install/migrating-claude"
 source_hash: "f74d6d597ee941d3c8149aba8628a2ef26d5f167609641c35d824e52c52afd11"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "install/migrating-claude.md"
 original_doc_path: "install/migrating-claude.md"
 duplicate_index: 1

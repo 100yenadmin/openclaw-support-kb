@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenClaw App SDK"
 source: "https://docs.openclaw.ai/concepts/openclaw-sdk"
 source_hash: "6035834bba89f8e18fd3a95a9ebe5e8f0df378c9614dd50fbada75aff2cd8dec"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/openclaw-sdk.md"
 original_doc_path: "concepts/openclaw-sdk.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
 source_hash: "8e871e94801b566d2cbfbdf9c4c09d1151c0676617bf3c89ea2928f85bcc0e57"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "plugins/codex-computer-use.md"
 original_doc_path: "plugins/codex-computer-use.md"
 duplicate_index: 1

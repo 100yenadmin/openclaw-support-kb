@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
 source_hash: "4a110e064588e4d1fd55b01f8707842e91a48cf611665ae1710095ecbec269eb"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1

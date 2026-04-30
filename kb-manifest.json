@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-04-30T12:18:14.365Z",
+  "generatedAt": "2026-04-30T12:26:35.225Z",
   "openclawReleaseTag": "v2026.4.27",
   "docsSha256": "080c22c32f6930f47c89bd148edb16fda86569aea86c522404451503e7ed845f",
-  "artifactSha256": "8eb5b399ade522a1ade526c1cb90cf736d5bd496bdd12875a95c929e3d2954dc",
+  "artifactSha256": "4ca1d69a79ce701674bcfd044111d43d27fe4ca76a0bd18bcab57babf84effad",
   "sourceCount": 450,
   "minGbrainVersion": "0.19.0",
   "notes": "Local-first OpenClaw support KB for GBrain. Search locally before escalating."

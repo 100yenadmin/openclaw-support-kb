@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Delegate architecture"
 source: "https://docs.openclaw.ai/concepts/delegate-architecture"
 source_hash: "43f109f7f046bd5eb88cc1ce055203c4803c021f0c33ab02a26dee410c283e66"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/delegate-architecture.md"
 original_doc_path: "concepts/delegate-architecture.md"
 duplicate_index: 1

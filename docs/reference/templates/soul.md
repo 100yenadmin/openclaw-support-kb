@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "SOUL.md template"
 source: "https://docs.openclaw.ai/reference/templates/SOUL"
 source_hash: "ea9a365a65b3cb58da516ec809232c0286abab19e758e5e541d84fcab9a575f5"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "reference/templates/soul.md"
 original_doc_path: "reference/templates/soul.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
 source_hash: "09a76f9ff7338b0c4240af8e9d2ba42f6da0a9ff8af0999fb951813ef6648b65"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "install/digitalocean.md"
 original_doc_path: "install/digitalocean.md"
 duplicate_index: 1

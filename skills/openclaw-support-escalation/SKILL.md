@@ -46,16 +46,8 @@ Before any send:
 
 ## Preferred Email Path
 
-Use GOG because OpenClaw onboarding teaches agents to use it:
-
-```bash
-gog gmail send --account <explicit-account> \
-  --to support@electricsheephq.com \
-  --subject "[OpenClaw Support] <short issue>" \
-  --body-file <approved-draft.md>
-```
-
-Helper:
+Use the helper only. It uses GOG internally because OpenClaw onboarding teaches
+agents to use it, but support escalation must not call raw `gog gmail send`.
 
 ```bash
 node ~/.gbrain/sources/openclaw-support-kb/scripts/support-escalation.mjs approval-context \
@@ -76,13 +68,9 @@ node ~/.gbrain/sources/openclaw-support-kb/scripts/support-escalation.mjs send-e
 
 ## Telegram Fallback
 
-```bash
-openclaw message send --channel telegram \
-  --target @evaOS_support_bot \
-  --message "$(cat <approved-draft.md>)"
-```
-
-Helper:
+Use the helper only. It uses OpenClaw Telegram messaging internally for
+`@evaOS_support_bot`, but support escalation must not call raw
+`openclaw message send`.
 
 ```bash
 node ~/.gbrain/sources/openclaw-support-kb/scripts/support-escalation.mjs approval-context \

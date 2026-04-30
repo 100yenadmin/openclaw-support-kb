@@ -66,14 +66,8 @@ node ~/.gbrain/sources/openclaw-support-kb/scripts/support-escalation.mjs send-e
   --subject "[OpenClaw Support] <short issue>"
 ```
 
-Underlying transport:
-
-```bash
-gog gmail send --account <explicit-account> \
-  --to support@electricsheephq.com \
-  --subject "[OpenClaw Support] <short issue>" \
-  --body-file <approved-draft.md>
-```
+The helper uses GOG internally. Do not call raw `gog gmail send` for support
+escalation because it bypasses the approval context gate.
 
 ## Telegram
 
@@ -90,13 +84,9 @@ node ~/.gbrain/sources/openclaw-support-kb/scripts/support-escalation.mjs send-t
   --approved-context-sha <approved-context-sha>
 ```
 
-Underlying transport:
-
-```bash
-openclaw message send --channel telegram \
-  --target @evaOS_support_bot \
-  --message "$(cat <approved-draft.md>)"
-```
+The helper uses OpenClaw Telegram messaging internally. Do not call raw
+`openclaw message send` for support escalation because it bypasses the approval
+context gate.
 
 ## Minimum Draft
 

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
 source_hash: "5e21f151270e9b1ed4fc6e4ac8b211907906928e9572898b1281a5abeb3ad6eb"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "tools/tts-2.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 2

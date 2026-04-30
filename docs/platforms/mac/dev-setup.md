@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
 source_hash: "f565b3cc61a9ef7faf99aae2d628adeec47cfadc6d447f5f011c205922d0dd56"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "platforms/mac/dev-setup.md"
 original_doc_path: "platforms/mac/dev-setup.md"
 duplicate_index: 1

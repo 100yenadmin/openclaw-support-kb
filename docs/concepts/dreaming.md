@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
 source_hash: "ace6d0bd6ef23c03ed56ac6977a47c8c267c673a751de0b592624bb01b0c09c6"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/dreaming.md"
 original_doc_path: "concepts/dreaming.md"
 duplicate_index: 1

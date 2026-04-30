@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Community plugins"
 source: "https://docs.openclaw.ai/plugins/community"
 source_hash: "f45131485aeb0f3787c0584449661ac061f5b729b4510b7ed6140f76037bdac2"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "plugins/community.md"
 original_doc_path: "plugins/community.md"
 duplicate_index: 1

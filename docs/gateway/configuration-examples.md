@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
 source_hash: "dccd3155d27536addc3778a5ee64a02db73326f5f8dec727c57018d6876f5a89"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/configuration-examples.md"
 original_doc_path: "gateway/configuration-examples.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Bridge protocol"
 source: "https://docs.openclaw.ai/gateway/bridge-protocol"
 source_hash: "66e7ce28d2b5b61517272e82aed8d9d169ad01cf3d0db8b3833b40ce9f8125b7"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "gateway/bridge-protocol.md"
 original_doc_path: "gateway/bridge-protocol.md"
 duplicate_index: 1

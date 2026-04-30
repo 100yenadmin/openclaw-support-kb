@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Testing"
 source: "https://docs.openclaw.ai/help/testing"
 source_hash: "9030516eb767059c13367ef556e79e3deb31263e85afba98f0b01d779ea209aa"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "help/testing.md"
 original_doc_path: "help/testing.md"
 duplicate_index: 1

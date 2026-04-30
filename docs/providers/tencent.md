@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Tencent Cloud (TokenHub)"
 source: "https://docs.openclaw.ai/providers/tencent"
 source_hash: "adc53c52fa6126d071cb21c1122517f87e2e2bedd3148247c42f66cbe9b66ba9"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "providers/tencent.md"
 original_doc_path: "providers/tencent.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
 source_hash: "2646628158adee9fcbe1a1aa02a0b45fcf63826666e46bcd9dd77a427d2d9039"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "plugins/architecture.md"
 original_doc_path: "plugins/architecture.md"
 duplicate_index: 1

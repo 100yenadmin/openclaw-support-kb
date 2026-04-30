@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
 source_hash: "35373513c55ceb7c8a9aaffef151378dce84163d13920fdc8f4d52bc61ddf04c"
-generated_at: "2026-04-30T12:18:14.365Z"
+generated_at: "2026-04-30T12:26:35.225Z"
 doc_path: "concepts/session-tool.md"
 original_doc_path: "concepts/session-tool.md"
 duplicate_index: 1
