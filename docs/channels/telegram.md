@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "348bcca4017afb5bc27e806b2f81211fdc9b1b8e0da5e8655dbe9a5b51a53788"
+source_hash: "50abb1e2859db61d686b94557d25a44b2967c1ea38d4e9a6edb3132889f41bea"
 doc_path: "channels/telegram.md"
 original_doc_path: "channels/telegram.md"
 duplicate_index: 1
@@ -709,7 +709,7 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
     * `channels.telegram.textChunkLimit` default is 4000.
     * `channels.telegram.chunkMode="newline"` prefers paragraph boundaries (blank lines) before length splitting.
     * `channels.telegram.mediaMaxMb` (default 100) caps inbound and outbound Telegram media size.
-    * `channels.telegram.timeoutSeconds` overrides Telegram API client timeout (if unset, grammY default applies).
+    * `channels.telegram.timeoutSeconds` overrides Telegram API client timeout (if unset, grammY default applies). Long-polling bot clients clamp configured values below the 45-second `getUpdates` request guard so idle polls are not aborted before the 30-second poll window completes.
     * `channels.telegram.pollingStallThresholdMs` defaults to `120000`; tune between `30000` and `600000` only for false-positive polling-stall restarts.
     * group context history uses `channels.telegram.historyLimit` or `messages.groupChat.historyLimit` (default 50); `0` disables.
     * reply/quote/forward supplemental context is currently passed as received.
@@ -838,6 +838,7 @@ Per-account, per-group, and per-topic overrides are supported (same inheritance 
     * Node 22+ + custom fetch/proxy can trigger immediate abort behavior if AbortSignal types mismatch.
     * Some hosts resolve `api.telegram.org` to IPv6 first; broken IPv6 egress can cause intermittent Telegram API failures.
     * If logs include `TypeError: fetch failed` or `Network request for 'getUpdates' failed!`, OpenClaw now retries these as recoverable network errors.
+    * If Telegram sockets recycle on a short fixed cadence, check for a low `channels.telegram.timeoutSeconds`; long-polling bot clients clamp configured values below the `getUpdates` request guard, but older releases could abort every poll when this was set below the long-poll timeout.
     * If logs include `Polling stall detected`, OpenClaw restarts polling and rebuilds the Telegram transport after 120 seconds without completed long-poll liveness by default.
     * `openclaw channels status --probe` and `openclaw doctor` warn when a running polling account has not completed `getUpdates` after startup grace, when a running webhook account has not completed `setWebhook` after startup grace, or when the last successful polling transport activity is stale.
     * Increase `channels.telegram.pollingStallThresholdMs` only when long-running `getUpdates` calls are healthy but your host still reports false polling-stall restarts. Persistent stalls usually point to proxy, DNS, IPv6, or TLS egress issues between the host and `api.telegram.org`.

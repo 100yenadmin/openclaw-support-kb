@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway lock"
 source: "https://docs.openclaw.ai/gateway/gateway-lock"
-source_hash: "71d4ef1d0a73e24f46585340b365d0a728755751c62e0d822438ce17663de6cd"
+source_hash: "1d48a128b93de389b23e35c7de58498b7e472e5716a51a1137213dfa3c67bdf9"
 doc_path: "gateway/gateway-lock.md"
 original_doc_path: "gateway/gateway-lock.md"
 duplicate_index: 1
@@ -35,7 +35,7 @@ Source: https://docs.openclaw.ai/gateway/gateway-lock
 ## Operational notes
 
 * If the port is occupied by *another* process, the error is the same; free the port or choose another with `openclaw gateway --port <port>`.
-* Under a service supervisor, a new gateway process that sees an existing healthy `/healthz` responder exits successfully and leaves that process in control. If the existing process never becomes healthy, retries are bounded and startup fails with a clear lock error instead of looping forever.
+* Under a service supervisor, a new gateway process that sees an existing healthy `/healthz` responder leaves that process in control. On systemd, the duplicate starter exits with code 78 so the default `RestartPreventExitStatus=78` stops `Restart=always` from looping on a lock or `EADDRINUSE` conflict. If the existing process never becomes healthy, retries are bounded and startup fails with a clear lock error instead of looping forever.
 * The macOS app still maintains its own lightweight PID guard before spawning the gateway; the runtime lock is enforced by the lock file plus HTTP/WebSocket bind.
 
 ## Related
