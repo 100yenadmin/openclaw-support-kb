@@ -2,7 +2,14 @@
 import { cp, mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { artifactSha256, canonicalSourceDir, pathExists, readJsonIfExists, repoRootFromImportMeta } from "./lib/openclaw-support-kb.mjs";
+import {
+  artifactSha256,
+  canonicalSourceDir,
+  GBRAIN_SOURCE_ID,
+  pathExists,
+  readJsonIfExists,
+  repoRootFromImportMeta,
+} from "./lib/openclaw-support-kb.mjs";
 
 const repoRoot = repoRootFromImportMeta(import.meta.url);
 const sourceDir = path.join(repoRoot, "skills");
@@ -168,6 +175,7 @@ For OpenClaw setup, update, channel, Telegram, config, skill, or support questio
 
 1. Confirm the local KB is installed:
    - source: \`${kbDir}\`
+   - GBrain source id: \`${GBRAIN_SOURCE_ID}\`
    - manifest: \`${path.join(kbDir, "kb-manifest.json")}\`
 2. Search local GBrain before answering or editing config:
    \`gbrain query "OpenClaw <question>"\`

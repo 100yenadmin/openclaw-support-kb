@@ -61,9 +61,11 @@ What setup does:
 1. installs four support skills into `~/.openclaw/skills`
 2. writes a managed OpenClaw agent hint block to active workspace `AGENTS.md`
    files, including `~/.openclaw/workspace/AGENTS.md`
-3. runs `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb`
-4. runs `gbrain embed --stale`
-5. verifies local search returns from the indexed KB
+3. registers `openclaw-support-kb` as a federated GBrain source at
+   `~/.gbrain/sources/openclaw-support-kb`
+4. runs `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb`
+5. runs `gbrain embed --stale`
+6. verifies local search returns from the indexed KB
 
 Search verification runs two checks: one for this KB's manifest and one for the
 Telegram docs. Empty/no-result output or missing expected markers fails. Use
@@ -78,6 +80,7 @@ managed by this KB, setup backs it up before installing the managed copy.
 ```bash
 test -f "$HOME/.gbrain/sources/openclaw-support-kb/kb-manifest.json"
 test -f "$HOME/.openclaw/skills/openclaw-support-kb/SKILL.md"
+gbrain sources list
 gbrain search "Telegram allowFrom groupAllowFrom groups"
 gbrain query "How should I safely repair OpenClaw config?"
 ```

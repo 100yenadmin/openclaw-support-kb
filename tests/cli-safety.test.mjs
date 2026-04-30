@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -87,4 +87,13 @@ test("scan-skill refuses unpinned scanner override before invoking uvx", () => {
   assert.equal(result.status, 2);
   assert.match(result.stderr, /must be pinned/);
   assert.doesNotMatch(result.stdout, /should-not-run/);
+});
+
+test("client sync registers and uses the named GBrain source", () => {
+  for (const script of ["scripts/update-client.mjs", "scripts/sync-local.mjs"]) {
+    const text = readFileSync(path.join(repoRoot, script), "utf8");
+    assert.match(text, /gbrain", \["sources", "add", GBRAIN_SOURCE_ID/);
+    assert.match(text, /gbrain", \["sources", "federate", GBRAIN_SOURCE_ID\]/);
+    assert.match(text, /gbrain", \["sync", "--repo", [^,]+, "--source", GBRAIN_SOURCE_ID\]/);
+  }
 });

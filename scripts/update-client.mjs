@@ -7,6 +7,8 @@ import {
   compareSemver,
   canonicalSourceDir,
   GBRAIN_VERIFY_QUERIES,
+  GBRAIN_SOURCE_ID,
+  GBRAIN_SOURCE_NAME,
   isFullCommitSha,
   isOfficialRepoUrl,
   pathExists,
@@ -66,6 +68,11 @@ function verifyGbrainSearch() {
     }
     if (loose) console.warn(`Loose GBrain search verification passed for ${item.label}.`);
   }
+}
+
+function ensureGbrainSource() {
+  run("gbrain", ["sources", "add", GBRAIN_SOURCE_ID, "--path", targetDir, "--name", GBRAIN_SOURCE_NAME, "--federated"]);
+  run("gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]);
 }
 
 function ensureRepoTrust() {
@@ -177,7 +184,8 @@ run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")],
   env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
 });
 
-run("gbrain", ["sync", "--repo", targetDir]);
+ensureGbrainSource();
+run("gbrain", ["sync", "--repo", targetDir, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();
 

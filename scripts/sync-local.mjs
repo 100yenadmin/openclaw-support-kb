@@ -5,6 +5,8 @@ import {
   canonicalSourceDir,
   compareSemver,
   GBRAIN_VERIFY_QUERIES,
+  GBRAIN_SOURCE_ID,
+  GBRAIN_SOURCE_NAME,
   readJsonIfExists,
   validateGbrainSearchOutput,
 } from "./lib/openclaw-support-kb.mjs";
@@ -52,6 +54,11 @@ function verifyGbrainSearch() {
   }
 }
 
+function ensureGbrainSource() {
+  run("gbrain", ["sources", "add", GBRAIN_SOURCE_ID, "--path", target, "--name", GBRAIN_SOURCE_NAME, "--federated"]);
+  run("gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]);
+}
+
 run(process.execPath, [new URL("./build-kb.mjs", import.meta.url).pathname, "--out", target, "--channel", channel]);
 
 const gbrainCheck = capture("gbrain", ["--version"]);
@@ -78,6 +85,7 @@ if (manifest.minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CH
   }
 }
 
-run("gbrain", ["sync", "--repo", target]);
+ensureGbrainSource();
+run("gbrain", ["sync", "--repo", target, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();

@@ -16,6 +16,8 @@ export const COMPOSIO_TOOLKITS_URL = "https://composio.dev/toolkits";
 
 export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
 export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
+export const GBRAIN_SOURCE_ID = "openclaw-support-kb";
+export const GBRAIN_SOURCE_NAME = "OpenClaw Support KB";
 export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
 export const GBRAIN_VERIFY_QUERIES = [
   {
