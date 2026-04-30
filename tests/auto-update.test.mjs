@@ -4,6 +4,7 @@ import {
   AUTO_UPDATE_CRON_END,
   AUTO_UPDATE_CRON_START,
   defaultCronMinute,
+  escapeCronPercents,
   managedCronBlock,
   shellQuote,
   upsertManagedCronBlock,
@@ -24,6 +25,20 @@ test("managed cron block quotes paths and preserves command ordering", () => {
   assert.match(block, /'\/Users\/test\/Node Bin\/node'/);
   assert.match(block, /--reason cron/);
   assert.match(block, new RegExp(`${AUTO_UPDATE_CRON_END}$`));
+});
+
+test("managed cron block escapes cron percent characters", () => {
+  const block = managedCronBlock({
+    schedule: "17 * * * *",
+    nodePath: "/usr/local/bin/node",
+    scriptPath: "/tmp/run-client-update.mjs",
+    logPath: "/tmp/openclaw%kb.log",
+    repoUrl: "https://example.com/kb%20repo.git",
+  });
+
+  assert.match(block, /kb\\%20repo/);
+  assert.match(block, /openclaw\\%kb\.log/);
+  assert.equal(escapeCronPercents("a%b"), "a\\%b");
 });
 
 test("managed cron block appends without replacing existing crontab entries", () => {

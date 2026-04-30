@@ -210,7 +210,7 @@ try {
     durationMs: Date.now() - startedAt.getTime(),
   });
   console.error(error.message);
-  process.exit(error.status ?? 1);
+  process.exitCode = error.status ?? 1;
 } finally {
   if (locked) await releaseLock();
 }

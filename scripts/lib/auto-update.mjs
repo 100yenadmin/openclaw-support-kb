@@ -8,6 +8,10 @@ export function shellQuote(value) {
   return `'${String(value).replace(/'/g, `'\\''`)}'`;
 }
 
+export function escapeCronPercents(value) {
+  return String(value).replace(/%/g, "\\%");
+}
+
 export function defaultCronMinute(seed = os.hostname()) {
   const hash = createHash("sha256").update(String(seed || "openclaw-support-kb")).digest();
   return hash[0] % 60;
@@ -26,7 +30,7 @@ export function managedCronBlock({
   if (!scriptPath) throw new Error("managedCronBlock requires scriptPath");
   if (!logPath) throw new Error("managedCronBlock requires logPath");
 
-  const command = [
+  const command = escapeCronPercents([
     `OPENCLAW_SUPPORT_KB_REPO=${shellQuote(repoUrl)}`,
     `OPENCLAW_KB_CHANNEL=${shellQuote(channel)}`,
     shellQuote(nodePath),
@@ -36,7 +40,7 @@ export function managedCronBlock({
     ">>",
     shellQuote(logPath),
     "2>&1",
-  ].join(" ");
+  ].join(" "));
 
   return [AUTO_UPDATE_CRON_START, `${schedule} ${command}`, AUTO_UPDATE_CRON_END].join("\n");
 }
