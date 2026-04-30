@@ -16,12 +16,15 @@ export const COMPOSIO_TOOLKITS_URL = "https://composio.dev/toolkits";
 
 export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
 export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
+export const GBRAIN_SOURCE_ID = "openclaw-support-kb";
+export const GBRAIN_SOURCE_NAME = "OpenClaw Support KB";
 export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
+const GBRAIN_SOURCE_ID_PATTERN = new RegExp(`\\b${escapeRegExp(GBRAIN_SOURCE_ID)}\\b`, "i");
 export const GBRAIN_VERIFY_QUERIES = [
   {
     label: "OpenClaw Support KB manifest",
-    query: "openclaw-support-kb kb-manifest sourceCount minGbrainVersion",
-    strictPatterns: [/\bopenclaw-support-kb\b/i, /\b(kb-manifest|sourceCount|minGbrainVersion)\b/i],
+    query: `${GBRAIN_SOURCE_ID} kb-manifest sourceCount minGbrainVersion`,
+    strictPatterns: [GBRAIN_SOURCE_ID_PATTERN, /\b(kb-manifest|sourceCount|minGbrainVersion)\b/i],
   },
   {
     label: "OpenClaw Telegram docs",
@@ -59,6 +62,10 @@ export function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+export function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export function isFullCommitSha(value) {
   return /^[a-f0-9]{40}$/i.test(String(value || ""));
 }
@@ -76,7 +83,63 @@ export function validateAgentScanSpec(value) {
 }
 
 export function canonicalSourceDir(home = os.homedir()) {
-  return path.join(home, ".gbrain", "sources", "openclaw-support-kb");
+  return path.join(home, ".gbrain", "sources", GBRAIN_SOURCE_ID);
+}
+
+export function resultOutput(result) {
+  return `${result?.stdout ?? ""}\n${result?.stderr ?? ""}`.trim();
+}
+
+export function isBenignExistingGbrainSourceError(result) {
+  return /\b(already exists|already registered|duplicate source|source already exists)\b/i.test(resultOutput(result));
+}
+
+export function makeGbrainSourceError(action, result) {
+  const error = new Error(`gbrain sources ${action} failed for ${GBRAIN_SOURCE_ID}`);
+  error.status = result?.status ?? 1;
+  error.stdout = result?.stdout ?? "";
+  error.stderr = result?.stderr ?? "";
+  return error;
+}
+
+export function ensureGbrainSource({ targetDir, run, captureNoExit, warn = console.warn } = {}) {
+  if (!targetDir) throw new Error("ensureGbrainSource requires targetDir");
+  if (typeof run !== "function") throw new Error("ensureGbrainSource requires run(command, args)");
+
+  const addArgs = [
+    "sources",
+    "add",
+    GBRAIN_SOURCE_ID,
+    "--path",
+    targetDir,
+    "--name",
+    GBRAIN_SOURCE_NAME,
+    "--federated",
+  ];
+  const federateArgs = ["sources", "federate", GBRAIN_SOURCE_ID];
+
+  if (typeof captureNoExit !== "function") {
+    run("gbrain", addArgs);
+    run("gbrain", federateArgs);
+    return { ok: true };
+  }
+
+  const addResult = captureNoExit("gbrain", addArgs);
+  if (addResult.missing) return addResult;
+  if (addResult.status !== 0 && !isBenignExistingGbrainSourceError(addResult)) {
+    throw makeGbrainSourceError("add", addResult);
+  }
+  if (addResult.status !== 0) {
+    warn(`GBrain source ${GBRAIN_SOURCE_ID} already exists; refreshing federation.`);
+  }
+
+  const federateResult = captureNoExit("gbrain", federateArgs);
+  if (federateResult.missing) return federateResult;
+  if (federateResult.status !== 0) {
+    throw makeGbrainSourceError("federate", federateResult);
+  }
+
+  return { ok: true };
 }
 
 export async function assertManagedSourceTarget(dir, { repoRoot, force = false } = {}) {

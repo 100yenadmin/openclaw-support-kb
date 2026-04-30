@@ -22,6 +22,12 @@ The canonical install location is:
 ~/.gbrain/sources/openclaw-support-kb
 ```
 
+The canonical GBrain source id is:
+
+```bash
+openclaw-support-kb
+```
+
 Users do not push this repo. The publisher updates it; user machines pull it
 read-only and sync it into local GBrain.
 
@@ -78,11 +84,12 @@ Setup installs the four OpenClaw support skills into `~/.openclaw/skills`, write
 an agent hint block to active OpenClaw workspace `AGENTS.md` files, and syncs
 this source into GBrain. Override skills destination with `OPENCLAW_SKILLS_DIR`.
 
-`sync:local` builds the KB into `~/.gbrain/sources/openclaw-support-kb`, then
-runs:
+`sync:local` builds the KB into `~/.gbrain/sources/openclaw-support-kb`,
+registers the federated GBrain source `openclaw-support-kb`, then runs:
 
 ```bash
-gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb && gbrain embed --stale
+gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb && \
+  gbrain embed --stale
 ```
 
 If `gbrain` is not installed, setup fails unless

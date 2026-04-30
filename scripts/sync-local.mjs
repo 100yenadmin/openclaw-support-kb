@@ -4,7 +4,9 @@ import path from "node:path";
 import {
   canonicalSourceDir,
   compareSemver,
+  ensureGbrainSource,
   GBRAIN_VERIFY_QUERIES,
+  GBRAIN_SOURCE_ID,
   readJsonIfExists,
   validateGbrainSearchOutput,
 } from "./lib/openclaw-support-kb.mjs";
@@ -27,6 +29,19 @@ function capture(command, args, options = {}) {
   if (result.error?.code === "ENOENT") return { missing: true };
   if (result.status !== 0) process.exit(result.status ?? 1);
   return { ok: true, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
+}
+
+function captureNoExit(command, args, options = {}) {
+  const result = spawnSync(command, args, { encoding: "utf8", ...options });
+  if (result.error?.code === "ENOENT") return { missing: true };
+  return { status: result.status ?? 1, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
+}
+
+function failGbrainSourceRegistration(error) {
+  console.error(error.message);
+  if (error.stdout) console.error(error.stdout.trim());
+  if (error.stderr) console.error(error.stderr.trim());
+  process.exit(error.status ?? 1);
 }
 
 function verifyGbrainSearch() {
@@ -78,6 +93,11 @@ if (manifest.minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CH
   }
 }
 
-run("gbrain", ["sync", "--repo", target]);
+try {
+  ensureGbrainSource({ targetDir: target, run, captureNoExit });
+} catch (error) {
+  failGbrainSourceRegistration(error);
+}
+run("gbrain", ["sync", "--repo", target, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();

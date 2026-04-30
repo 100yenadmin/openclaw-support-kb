@@ -6,7 +6,9 @@ import path from "node:path";
 import {
   compareSemver,
   canonicalSourceDir,
+  ensureGbrainSource,
   GBRAIN_VERIFY_QUERIES,
+  GBRAIN_SOURCE_ID,
   isFullCommitSha,
   isOfficialRepoUrl,
   pathExists,
@@ -43,6 +45,13 @@ function captureNoExit(command, args, options = {}) {
   const result = spawnSync(command, args, { encoding: "utf8", ...options });
   if (result.error?.code === "ENOENT") return { missing: true };
   return { status: result.status ?? 1, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
+}
+
+function failGbrainSourceRegistration(error) {
+  console.error(error.message);
+  if (error.stdout) console.error(error.stdout.trim());
+  if (error.stderr) console.error(error.stderr.trim());
+  process.exit(error.status ?? 1);
 }
 
 function verifyGbrainSearch() {
@@ -177,7 +186,12 @@ run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")],
   env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
 });
 
-run("gbrain", ["sync", "--repo", targetDir]);
+try {
+  ensureGbrainSource({ targetDir, run, captureNoExit });
+} catch (error) {
+  failGbrainSourceRegistration(error);
+}
+run("gbrain", ["sync", "--repo", targetDir, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();
 
