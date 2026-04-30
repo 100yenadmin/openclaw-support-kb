@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "23382ba1f30b44abda2a846e419b32c8aa127e6a383049143bb5a713fdd352c8"
+source_hash: "731be69c2493b50869627443b0c2461b0f25d4e4062be8ed9577f19ea5b82061"
 doc_path: "channels/groups.md"
 original_doc_path: "channels/groups.md"
 duplicate_index: 1
@@ -66,6 +66,9 @@ To restore legacy automatic final replies for group/channel rooms:
   },
 }
 ```
+
+The gateway hot-reloads `messages` config after the file is saved. Restart only
+when file watching or config reload is disabled in the deployment.
 
 To require visible output to go through the message tool for every source chat:
 

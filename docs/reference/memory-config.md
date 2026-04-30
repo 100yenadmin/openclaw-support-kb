@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "11fd09d3d1a11f9844a53771065ff5f23b15a3a3f20749685ed3d6ea5eb2298b"
+source_hash: "fe677ef931d19870a14cf51345611bcb733281a21ac3f3c0c772744b21a9900b"
 doc_path: "reference/memory-config.md"
 original_doc_path: "reference/memory-config.md"
 duplicate_index: 1
@@ -301,7 +301,7 @@ For custom OpenAI-compatible endpoints or overriding provider defaults:
     | `local.modelCacheDir` | `string`           | node-llama-cpp default | Cache dir for downloaded models                                                                                                                                                                                                                                                                                        |
     | `local.contextSize`   | `number \| "auto"` | `4096`                 | Context window size for the embedding context. 4096 covers typical chunks (128–512 tokens) while bounding non-weight VRAM. Lower to 1024–2048 on constrained hosts. `"auto"` uses the model's trained maximum — not recommended for 8B+ models (Qwen3-Embedding-8B: 40 960 tokens → \~32 GB VRAM vs \~8.8 GB at 4096). |
 
-    Default model: `embeddinggemma-300m-qat-Q8_0.gguf` (\~0.6 GB, auto-downloaded). Requires native build: `pnpm approve-builds` then `pnpm rebuild node-llama-cpp`.
+    Default model: `embeddinggemma-300m-qat-Q8_0.gguf` (\~0.6 GB, auto-downloaded). Packaged installs repair the native `node-llama-cpp` runtime through managed plugin runtime deps when `provider: "local"` is configured. Source checkouts still require native build approval: `pnpm approve-builds` then `pnpm rebuild node-llama-cpp`.
 
     Use the standalone CLI to verify the same provider path the Gateway uses:
 
