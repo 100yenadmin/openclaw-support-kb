@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "c8db5a86d7439d4a4e47d3e88f79b54cecd81505203b5f7b6c124109e4ff2d9d"
+source_hash: "50d833e147a469ec5e9370e2353a9f2b6716f03989a3071b88c5dae05a9e5c2b"
 doc_path: "automation/tasks.md"
 original_doc_path: "automation/tasks.md"
 duplicate_index: 1
@@ -254,6 +254,7 @@ openclaw tasks notify <lookup> state_changes
     Reconciliation is runtime-aware:
 
     * ACP/subagent tasks check their backing child session.
+    * Subagent tasks whose child session has a restart-recovery tombstone are marked lost instead of being treated as recoverable backing sessions.
     * Cron tasks check whether the cron runtime still owns the job, then recover terminal status from persisted cron run logs/job state before falling back to `lost`. Only the Gateway process is authoritative for the in-memory cron active-job set; offline CLI audit uses durable history but does not mark a cron task lost solely because that local Set is empty.
     * Chat-backed CLI tasks check the owning live run context, not just the chat session row.
 

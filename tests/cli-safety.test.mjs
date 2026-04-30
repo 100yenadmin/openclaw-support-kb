@@ -5,6 +5,7 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { ensureGbrainSource, GBRAIN_SOURCE_ID, GBRAIN_SOURCE_NAME } from "../scripts/lib/openclaw-support-kb.mjs";
 
 const repoRoot = path.resolve(import.meta.dirname, "..");
 
@@ -90,10 +91,59 @@ test("scan-skill refuses unpinned scanner override before invoking uvx", () => {
 });
 
 test("client sync registers and uses the named GBrain source", () => {
+  const calls = [];
+  ensureGbrainSource({
+    targetDir: "/tmp/openclaw-support-kb",
+    run(command, args) {
+      calls.push([command, args]);
+      return { ok: true };
+    },
+  });
+
+  assert.deepEqual(calls, [
+    [
+      "gbrain",
+      [
+        "sources",
+        "add",
+        GBRAIN_SOURCE_ID,
+        "--path",
+        "/tmp/openclaw-support-kb",
+        "--name",
+        GBRAIN_SOURCE_NAME,
+        "--federated",
+      ],
+    ],
+    ["gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]],
+  ]);
+
   for (const script of ["scripts/update-client.mjs", "scripts/sync-local.mjs"]) {
     const text = readFileSync(path.join(repoRoot, script), "utf8");
-    assert.match(text, /gbrain", \["sources", "add", GBRAIN_SOURCE_ID/);
-    assert.match(text, /gbrain", \["sources", "federate", GBRAIN_SOURCE_ID\]/);
-    assert.match(text, /gbrain", \["sync", "--repo", [^,]+, "--source", GBRAIN_SOURCE_ID\]/);
+    assert.match(text, /import\s+\{[\s\S]*ensureGbrainSource[\s\S]*\}\s+from\s+"\.\/lib\/openclaw-support-kb\.mjs"/);
+    assert.match(text, /ensureGbrainSource\s*\(\s*\{[\s\S]*targetDir[\s\S]*run[\s\S]*captureNoExit[\s\S]*\}\s*\)/);
+    assert.match(text, /run\s*\(\s*"gbrain"\s*,\s*\[[\s\S]*"sync"[\s\S]*"--source"[\s\S]*GBRAIN_SOURCE_ID[\s\S]*\]\s*\)/);
+    assert.doesNotMatch(text, /"sources"\s*,\s*"add"/);
   }
+});
+
+test("GBrain source registration tolerates existing sources before refederating", () => {
+  const calls = [];
+  assert.doesNotThrow(() =>
+    ensureGbrainSource({
+      targetDir: "/tmp/openclaw-support-kb",
+      run() {
+        throw new Error("run should not be used when captureNoExit exists");
+      },
+      captureNoExit(command, args) {
+        calls.push([command, args]);
+        if (args[1] === "add") return { status: 1, stdout: "source already exists", stderr: "" };
+        return { status: 0, stdout: "", stderr: "" };
+      },
+      warn() {},
+    }),
+  );
+
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0][1][2], GBRAIN_SOURCE_ID);
+  assert.deepEqual(calls[1][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
 });

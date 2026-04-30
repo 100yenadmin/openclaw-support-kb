@@ -4,9 +4,9 @@ import path from "node:path";
 import {
   canonicalSourceDir,
   compareSemver,
+  ensureGbrainSource,
   GBRAIN_VERIFY_QUERIES,
   GBRAIN_SOURCE_ID,
-  GBRAIN_SOURCE_NAME,
   readJsonIfExists,
   validateGbrainSearchOutput,
 } from "./lib/openclaw-support-kb.mjs";
@@ -31,6 +31,19 @@ function capture(command, args, options = {}) {
   return { ok: true, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
 }
 
+function captureNoExit(command, args, options = {}) {
+  const result = spawnSync(command, args, { encoding: "utf8", ...options });
+  if (result.error?.code === "ENOENT") return { missing: true };
+  return { status: result.status ?? 1, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
+}
+
+function failGbrainSourceRegistration(error) {
+  console.error(error.message);
+  if (error.stdout) console.error(error.stdout.trim());
+  if (error.stderr) console.error(error.stderr.trim());
+  process.exit(error.status ?? 1);
+}
+
 function verifyGbrainSearch() {
   if (process.env.OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY === "1") {
     console.warn("Skipping GBrain search verification because OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY=1 is set.");
@@ -52,11 +65,6 @@ function verifyGbrainSearch() {
     }
     if (loose) console.warn(`Loose GBrain search verification passed for ${item.label}.`);
   }
-}
-
-function ensureGbrainSource() {
-  run("gbrain", ["sources", "add", GBRAIN_SOURCE_ID, "--path", target, "--name", GBRAIN_SOURCE_NAME, "--federated"]);
-  run("gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]);
 }
 
 run(process.execPath, [new URL("./build-kb.mjs", import.meta.url).pathname, "--out", target, "--channel", channel]);
@@ -85,7 +93,11 @@ if (manifest.minGbrainVersion && process.env.OPENCLAW_SUPPORT_KB_SKIP_VERSION_CH
   }
 }
 
-ensureGbrainSource();
+try {
+  ensureGbrainSource({ targetDir: target, run, captureNoExit });
+} catch (error) {
+  failGbrainSourceRegistration(error);
+}
 run("gbrain", ["sync", "--repo", target, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();

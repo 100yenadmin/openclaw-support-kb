@@ -6,9 +6,9 @@ import path from "node:path";
 import {
   compareSemver,
   canonicalSourceDir,
+  ensureGbrainSource,
   GBRAIN_VERIFY_QUERIES,
   GBRAIN_SOURCE_ID,
-  GBRAIN_SOURCE_NAME,
   isFullCommitSha,
   isOfficialRepoUrl,
   pathExists,
@@ -47,6 +47,13 @@ function captureNoExit(command, args, options = {}) {
   return { status: result.status ?? 1, stdout: result.stdout ?? "", stderr: result.stderr ?? "" };
 }
 
+function failGbrainSourceRegistration(error) {
+  console.error(error.message);
+  if (error.stdout) console.error(error.stdout.trim());
+  if (error.stderr) console.error(error.stderr.trim());
+  process.exit(error.status ?? 1);
+}
+
 function verifyGbrainSearch() {
   if (process.env.OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY === "1") {
     console.warn("Skipping GBrain search verification because OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY=1 is set.");
@@ -68,11 +75,6 @@ function verifyGbrainSearch() {
     }
     if (loose) console.warn(`Loose GBrain search verification passed for ${item.label}.`);
   }
-}
-
-function ensureGbrainSource() {
-  run("gbrain", ["sources", "add", GBRAIN_SOURCE_ID, "--path", targetDir, "--name", GBRAIN_SOURCE_NAME, "--federated"]);
-  run("gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]);
 }
 
 function ensureRepoTrust() {
@@ -184,7 +186,11 @@ run(process.execPath, [path.join(runtimeRoot, "scripts", "install-skills.mjs")],
   env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: targetDir },
 });
 
-ensureGbrainSource();
+try {
+  ensureGbrainSource({ targetDir, run, captureNoExit });
+} catch (error) {
+  failGbrainSourceRegistration(error);
+}
 run("gbrain", ["sync", "--repo", targetDir, "--source", GBRAIN_SOURCE_ID]);
 run("gbrain", ["embed", "--stale"]);
 verifyGbrainSearch();

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "ae34992ef7e5ce6c5f2f1ee33468128a9670e1e1698f7a92e4929fbff5e01ca8"
+source_hash: "45a89bedf25c32773155e7acf21c7b863edac4f3a2e21c46f4a3f472fe338541"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -98,6 +98,7 @@ cat ~/.openclaw/openclaw.json
   <Accordion title="State and integrity">
     * Session lock file inspection and stale lock cleanup.
     * Session transcript repair for duplicated prompt-rewrite branches created by affected 2026.4.24 builds.
+    * Wedged subagent restart-recovery tombstone detection, with `--fix` support for clearing stale aborted recovery flags so startup does not keep treating the child as restart-aborted.
     * State integrity and permissions checks (sessions, transcripts, state dir).
     * Config file permission checks (chmod 600) when running locally.
     * Model auth health: checks OAuth expiry, can refresh expiring tokens, and reports auth-profile cooldown/disabled states.

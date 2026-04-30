@@ -88,8 +88,8 @@ this source into GBrain. Override skills destination with `OPENCLAW_SKILLS_DIR`.
 registers the federated GBrain source `openclaw-support-kb`, then runs:
 
 ```bash
-gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb
-gbrain embed --stale
+gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb && \
+  gbrain embed --stale
 ```
 
 If `gbrain` is not installed, setup fails unless
