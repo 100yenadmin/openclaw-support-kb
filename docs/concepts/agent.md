@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
 source_hash: "25276b10d1a644e3e51c64c718510659bb7fb7b31eb0fdf46e7e59a5e3f26b3b"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/agent.md"
 original_doc_path: "concepts/agent.md"
 duplicate_index: 1

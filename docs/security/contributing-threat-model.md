@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Contributing to the threat model"
 source: "https://docs.openclaw.ai/security/CONTRIBUTING-THREAT-MODEL"
 source_hash: "d5028cc4ad6aef792eeced0e16b66b8df0b75c3e428b4567302c16d2f646ac89"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "security/contributing-threat-model.md"
 original_doc_path: "security/contributing-threat-model.md"
 duplicate_index: 1

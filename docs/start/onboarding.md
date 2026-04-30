@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
 source_hash: "11e47b99b92c8a43b45601367ee36e4fff3b1549b80afc6d7f37761e198dab71"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "start/onboarding.md"
 original_doc_path: "start/onboarding.md"
 duplicate_index: 1

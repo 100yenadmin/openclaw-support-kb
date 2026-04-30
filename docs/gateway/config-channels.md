@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
 source_hash: "be9844856fb03af2733cfe8f2d38532edce4645ed148c86b19180a4c989ff344"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1

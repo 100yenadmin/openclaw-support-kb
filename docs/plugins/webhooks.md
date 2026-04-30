@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Webhooks plugin"
 source: "https://docs.openclaw.ai/plugins/webhooks"
 source_hash: "fb2ab1d03da0e880dbda1c71256256d73c9d13bfcf7dd140f6a48bbe97d9f683"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "plugins/webhooks.md"
 original_doc_path: "plugins/webhooks.md"
 duplicate_index: 1

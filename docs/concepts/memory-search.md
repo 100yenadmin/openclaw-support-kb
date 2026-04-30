@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
 source_hash: "a65e07bf70170fd143aeb0e4cb45e2d3a10f32e720a9a3a86674477bbb741ea2"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/memory-search.md"
 original_doc_path: "concepts/memory-search.md"
 duplicate_index: 1

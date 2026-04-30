@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Memory overview"
 source: "https://docs.openclaw.ai/concepts/memory"
 source_hash: "fc2a9a3f869e3f6b670a3b5fcbb4bec49ae9778bf7561374d8b967a97503cb6f"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/memory.md"
 original_doc_path: "concepts/memory.md"
 duplicate_index: 1

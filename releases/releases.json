@@ -195,7 +195,7 @@
         "state": "uploaded",
         "size": 50595360,
         "digest": "sha256:7b5683d7fbb5c154f2fa7a896e92edb996c44eabfe450532a498dd86c29358cb",
-        "download_count": 2605,
+        "download_count": 2650,
         "created_at": "2026-04-29T23:55:20Z",
         "updated_at": "2026-04-29T23:55:22Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.27/OpenClaw-2026.4.27.zip"

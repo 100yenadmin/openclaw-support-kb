@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
 source_hash: "22a8c26a605396de92678434ca7e56a58b705f50a498121bd60989e345fc8108"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "install/fly.md"
 original_doc_path: "install/fly.md"
 duplicate_index: 1

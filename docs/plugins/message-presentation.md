@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
 source_hash: "b1ed812d384ef95f02272e738855cfea4d8ef2b3ee6f9dbd1eb4c7ae7d634657"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "plugins/message-presentation.md"
 original_doc_path: "plugins/message-presentation.md"
 duplicate_index: 1

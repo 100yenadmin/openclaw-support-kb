@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Remote gateway setup"
 source: "https://docs.openclaw.ai/gateway/remote-gateway-readme"
 source_hash: "37baa7a5e7c574340d05fc154913a8cfa9efd8b26a78ea85cd64a111bf8bd689"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "gateway/remote-gateway-readme.md"
 original_doc_path: "gateway/remote-gateway-readme.md"
 duplicate_index: 1

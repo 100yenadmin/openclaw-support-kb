@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "RPC adapters"
 source: "https://docs.openclaw.ai/reference/rpc"
 source_hash: "79e26687949d167a4805a7793457cd3aeb4482edcbee2d1f6c723739c3ccc7f7"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "reference/rpc.md"
 original_doc_path: "reference/rpc.md"
 duplicate_index: 1

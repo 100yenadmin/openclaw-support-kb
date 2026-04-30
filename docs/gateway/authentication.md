@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Authentication"
 source: "https://docs.openclaw.ai/gateway/authentication"
 source_hash: "8af0f3c4295a0b2ce623fa9c028e384f436f6e24087a715a7cfa2c47377b9bd0"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "gateway/authentication.md"
 original_doc_path: "gateway/authentication.md"
 duplicate_index: 1

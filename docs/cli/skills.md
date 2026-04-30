@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
 source_hash: "4f5a29ff8ba3978e97061d2e899f6a273512c975e917c5e454a15ec2246c40f0"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/skills.md"
 original_doc_path: "cli/skills.md"
 duplicate_index: 1

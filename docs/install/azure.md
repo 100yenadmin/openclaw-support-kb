@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Azure"
 source: "https://docs.openclaw.ai/install/azure"
 source_hash: "7d6851d46fd857ed21e8845858986cd49a8e9307dd9870e8eee73398a0e2f2b7"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "install/azure.md"
 original_doc_path: "install/azure.md"
 duplicate_index: 1

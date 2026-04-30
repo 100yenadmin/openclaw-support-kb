@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
 source_hash: "a340de3caa0e9c11bd9749e172eb2944bcba866f1a33df992681ef4f06a5f0e3"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "plugins/sdk-entrypoints.md"
 original_doc_path: "plugins/sdk-entrypoints.md"
 duplicate_index: 1

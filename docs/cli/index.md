@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli/index"
 source_hash: "cf3c9fe1f4ccf54883dab7addde4709e0bbfae3e621809c7660f88280dd23c29"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/index.md"
 original_doc_path: "cli/index.md"
 duplicate_index: 1

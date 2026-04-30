@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Perplexity"
 source: "https://docs.openclaw.ai/providers/perplexity-provider"
 source_hash: "98da51d9cf17cb10afac1238d341663e159ee19296ace8e7eeb4e8858dc012a0"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/perplexity-provider.md"
 original_doc_path: "providers/perplexity-provider.md"
 duplicate_index: 1

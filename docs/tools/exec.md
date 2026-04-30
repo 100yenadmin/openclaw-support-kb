@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
 source_hash: "747ee2a02ddfc6485b2891ca37f0893439852e842104d78a4a5c026637e97f07"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/exec.md"
 original_doc_path: "tools/exec.md"
 duplicate_index: 1

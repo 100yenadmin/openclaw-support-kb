@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
 source_hash: "914c42808b19ad41a7be0cd27777273f81b918ced937eafc36a7fc757506ad88"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "reference/secretref-credential-surface.md"
 original_doc_path: "reference/secretref-credential-surface.md"
 duplicate_index: 1

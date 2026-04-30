@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
 source_hash: "9d8ecb9d3181557fba46f5e7785e1461700b2a17e5a874e6fed216476a88687b"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/llm-task.md"
 original_doc_path: "tools/llm-task.md"
 duplicate_index: 1

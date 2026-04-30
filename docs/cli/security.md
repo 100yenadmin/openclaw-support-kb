@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/cli/security"
 source_hash: "3518ab22ae09af8c4b6b037665a34a19aaf101166148ec7f47710373dfdf5387"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/security.md"
 original_doc_path: "cli/security.md"
 duplicate_index: 1

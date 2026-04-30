@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "`openclaw commitments`"
 source: "https://docs.openclaw.ai/cli/commitments"
 source_hash: "61fd4998888e92b24cc0e652c845d7aee220c0f7e9fe8b1b3db5b27d529cc867"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/commitments.md"
 original_doc_path: "cli/commitments.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
 source_hash: "6e30aaaf98341cbe7ee69e744feaf4f735b3d7b852baa903dd580c52d5af10d1"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/sessions.md"
 original_doc_path: "cli/sessions.md"
 duplicate_index: 1

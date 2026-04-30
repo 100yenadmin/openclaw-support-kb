@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Tools and plugins"
 source: "https://docs.openclaw.ai/tools/index"
 source_hash: "c2636b80ad1419c96b788a3dfa8d720bff5acd78190583813f3599a20cbcf516"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/index.md"
 original_doc_path: "tools/index.md"
 duplicate_index: 1

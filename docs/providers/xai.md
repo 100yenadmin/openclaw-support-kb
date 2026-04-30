@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
 source_hash: "52edb01851b7dc914e69b5b4d9c0888f4325be3601fe8012ca10048b8b409892"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/xai.md"
 original_doc_path: "providers/xai.md"
 duplicate_index: 1

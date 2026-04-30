@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Active memory"
 source: "https://docs.openclaw.ai/concepts/active-memory"
 source_hash: "e4d3b6d71dab2ef73b56fd623d86532d36506a9bbe2535e1dacffc9820ed11d6"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/active-memory.md"
 original_doc_path: "concepts/active-memory.md"
 duplicate_index: 1

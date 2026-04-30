@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Channel location parsing"
 source: "https://docs.openclaw.ai/channels/location"
 source_hash: "4240b3902742d6bea269d192433898f93a0570e18e87f05206ca0b7a4cfcc3a2"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/location.md"
 original_doc_path: "channels/location.md"
 duplicate_index: 1

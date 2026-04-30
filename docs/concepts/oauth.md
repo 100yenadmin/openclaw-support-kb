@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
 source_hash: "806fcca1a0cc092b07e0bfedcad317843fd0b975dc1200cbdb203dd56113eb3b"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/oauth.md"
 original_doc_path: "concepts/oauth.md"
 duplicate_index: 1

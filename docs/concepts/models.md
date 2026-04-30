@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Models CLI"
 source: "https://docs.openclaw.ai/concepts/models"
 source_hash: "99745d8f7ab508a374ba359dccd1d2c65c6ae222a056441cb67405432f45a1b1"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/models.md"
 original_doc_path: "concepts/models.md"
 duplicate_index: 1

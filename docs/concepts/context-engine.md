@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
 source_hash: "c889cfe62dabdbf35347437ed2c5cdad6a5f0764686cbdf67bf66a70a20a2099"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/context-engine.md"
 original_doc_path: "concepts/context-engine.md"
 duplicate_index: 1

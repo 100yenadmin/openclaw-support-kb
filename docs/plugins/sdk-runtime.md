@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
 source_hash: "d4a6a12b5264650c4503ac9872d911e06e54295ff994918814e283888b07e74e"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "plugins/sdk-runtime.md"
 original_doc_path: "plugins/sdk-runtime.md"
 duplicate_index: 1

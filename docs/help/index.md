@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Help"
 source: "https://docs.openclaw.ai/help/index"
 source_hash: "dc93c9bd5ab04c5c96e9e89e5ef78ecf03af4549409e2a5851ca96a4d3805558"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "help/index.md"
 original_doc_path: "help/index.md"
 duplicate_index: 1

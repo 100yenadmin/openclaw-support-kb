@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
 source_hash: "bcb25bd7efa7a22c0e02fa488b35fb08286c47edc48b58b9dd3397947dcb5ea1"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/music-generation.md"
 original_doc_path: "tools/music-generation.md"
 duplicate_index: 1

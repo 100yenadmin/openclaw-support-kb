@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Cloudflare AI gateway"
 source: "https://docs.openclaw.ai/providers/cloudflare-ai-gateway"
 source_hash: "eb2e97eff4d4a62a1e444da6e6c9d0ad1605d79763a956036d8bd9a363da0d81"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/cloudflare-ai-gateway.md"
 original_doc_path: "providers/cloudflare-ai-gateway.md"
 duplicate_index: 1

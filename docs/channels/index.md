@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels/index"
 source_hash: "6bb0eadd8ccabd0b31af6fe6f19168531efb71239659c28bf3afd062355d3ecf"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/index.md"
 original_doc_path: "channels/index.md"
 duplicate_index: 1

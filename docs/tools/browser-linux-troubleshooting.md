@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Browser troubleshooting"
 source: "https://docs.openclaw.ai/tools/browser-linux-troubleshooting"
 source_hash: "3503679a5530813a4569f9f27ecd0af4437bddb955528a1cad7b2c710b57f1d6"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/browser-linux-troubleshooting.md"
 original_doc_path: "tools/browser-linux-troubleshooting.md"
 duplicate_index: 1

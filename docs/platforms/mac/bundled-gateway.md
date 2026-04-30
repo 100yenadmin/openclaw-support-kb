@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
 source_hash: "ea9f6ec234c7e6c966cfcf282e146091c0a69d830792d5e093799cefc95d726f"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "platforms/mac/bundled-gateway.md"
 original_doc_path: "platforms/mac/bundled-gateway.md"
 duplicate_index: 1

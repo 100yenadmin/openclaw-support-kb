@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Group messages"
 source: "https://docs.openclaw.ai/channels/group-messages"
 source_hash: "64830a57f304cb4a95885052b421f228ffa768c35282b9488324c1cfda98fab0"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/group-messages.md"
 original_doc_path: "channels/group-messages.md"
 duplicate_index: 1

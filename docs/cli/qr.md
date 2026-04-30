@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "QR"
 source: "https://docs.openclaw.ai/cli/qr"
 source_hash: "20073a3e559b2967cdcf45513982c001788df91fc5b37aa0fe3430378970e29c"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/qr.md"
 original_doc_path: "cli/qr.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Session pruning"
 source: "https://docs.openclaw.ai/concepts/session-pruning"
 source_hash: "223b31e213cbaf2b766755325b6c571977ca1420ea5973678ecb088f248e0800"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/session-pruning.md"
 original_doc_path: "concepts/session-pruning.md"
 duplicate_index: 1

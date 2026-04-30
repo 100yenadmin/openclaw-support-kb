@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
 source_hash: "86f84a38b4d2176cd7632bfa1cd13996eb549a1bc643e30ebd1bb0ae108c460b"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/gateway.md"
 original_doc_path: "cli/gateway.md"
 duplicate_index: 1

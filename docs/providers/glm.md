@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "GLM (Zhipu)"
 source: "https://docs.openclaw.ai/providers/glm"
 source_hash: "90fe5f87675c3e4544e77c4721dd01b4820a9e42e5e52a68f46129ab1c2466a2"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/glm.md"
 original_doc_path: "providers/glm.md"
 duplicate_index: 1

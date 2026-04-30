@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "DNS"
 source: "https://docs.openclaw.ai/cli/dns"
 source_hash: "fc0543e5e8a2aeaf090340c449dfea61b5deb441a7c2d5c3d18cdb9c6cf894e3"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/dns.md"
 original_doc_path: "cli/dns.md"
 duplicate_index: 1

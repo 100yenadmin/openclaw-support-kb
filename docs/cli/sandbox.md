@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
 source_hash: "d9cecf723e4ac3597aee4ae2c53ca9ed1a81c06ffae94595c74c69d55d396863"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "cli/sandbox.md"
 original_doc_path: "cli/sandbox.md"
 duplicate_index: 1

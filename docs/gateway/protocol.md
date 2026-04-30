@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
 source_hash: "de78727d539c3a9bf578d2eaa7ac5dc9fc313671d790513f7cd40b1120e38b96"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "gateway/protocol.md"
 original_doc_path: "gateway/protocol.md"
 duplicate_index: 1

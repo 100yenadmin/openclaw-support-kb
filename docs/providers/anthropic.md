@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
 source_hash: "91fe7e1cc261fc7a290a934f234a65267689f28b4542a01de9cd56652f376f80"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/anthropic.md"
 original_doc_path: "providers/anthropic.md"
 duplicate_index: 1

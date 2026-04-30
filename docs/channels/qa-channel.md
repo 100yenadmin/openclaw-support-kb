@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
 source_hash: "4ab4513a6fac1063b6349b5e346314f95bf8b059f5c293bb77dd92516908d8fe"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/qa-channel.md"
 original_doc_path: "channels/qa-channel.md"
 duplicate_index: 1

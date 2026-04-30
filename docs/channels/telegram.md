@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
 source_hash: "b5e0c862181ee0322bae23640ce95ec05464af94b520ddc00a55fc2e9b164efc"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/telegram.md"
 original_doc_path: "channels/telegram.md"
 duplicate_index: 1

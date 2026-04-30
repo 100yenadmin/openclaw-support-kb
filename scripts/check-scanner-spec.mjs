@@ -12,7 +12,7 @@ const response = await fetch(`https://pypi.org/pypi/${encodeURIComponent(validat
   headers: { accept: "application/json", "user-agent": "openclaw-support-kb-scanner-check" },
 });
 if (!response.ok) {
-  console.error(`Could not fetch PyPI metadata for ${packageName}: ${response.status} ${response.statusText}`);
+  console.error(`Could not fetch PyPI metadata for ${validated.packageName}: ${response.status} ${response.statusText}`);
   process.exit(1);
 }
 

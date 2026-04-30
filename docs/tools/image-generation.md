@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
 source_hash: "da69537d0706527cbcac21cb947dd3572256bc1383abc79d0fe692d9cd0f7767"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/image-generation.md"
 original_doc_path: "tools/image-generation.md"
 duplicate_index: 1

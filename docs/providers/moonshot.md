@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Moonshot AI"
 source: "https://docs.openclaw.ai/providers/moonshot"
 source_hash: "084769bef28430dc39a32a60c4a6cfb1e282dd977b79689409bd51595d4de046"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/moonshot.md"
 original_doc_path: "providers/moonshot.md"
 duplicate_index: 1

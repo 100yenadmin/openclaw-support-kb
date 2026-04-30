@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Bun (experimental)"
 source: "https://docs.openclaw.ai/install/bun"
 source_hash: "cc564e13740608e69d510ddd87a1531390d0ef690f1d6f734178817fc0dbcb46"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "install/bun.md"
 original_doc_path: "install/bun.md"
 duplicate_index: 1

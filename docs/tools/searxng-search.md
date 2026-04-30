@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "SearXNG search"
 source: "https://docs.openclaw.ai/tools/searxng-search"
 source_hash: "e48f8ee28de90efa2643838ce8cbb505e397b63c1126941fa2d7df0862765c11"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "tools/searxng-search.md"
 original_doc_path: "tools/searxng-search.md"
 duplicate_index: 1

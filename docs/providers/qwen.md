@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Qwen"
 source: "https://docs.openclaw.ai/providers/qwen"
 source_hash: "ac1beb339f36ce4f1dbea6277ee77522846c0ea52c6a6174ad36a803aabf169f"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/qwen.md"
 original_doc_path: "providers/qwen.md"
 duplicate_index: 1

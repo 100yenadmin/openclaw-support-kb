@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
 source_hash: "b5c4d1268b0ea7902d57cad8401a17f82e2582af8de740fb3f3e3bfc435eb64f"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/zai.md"
 original_doc_path: "providers/zai.md"
 duplicate_index: 1

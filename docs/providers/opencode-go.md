@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenCode Go"
 source: "https://docs.openclaw.ai/providers/opencode-go"
 source_hash: "1947fdde13e58c4555f98425a2a08ee08238b5aa6048f5bb68cbdb092b139f59"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "providers/opencode-go.md"
 original_doc_path: "providers/opencode-go.md"
 duplicate_index: 1

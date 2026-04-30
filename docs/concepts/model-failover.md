@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
 source_hash: "3b0765053218c83ce073a818f4ec15dc183e4e0bc294e281b7be097c4a65ad0f"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/model-failover.md"
 original_doc_path: "concepts/model-failover.md"
 duplicate_index: 1

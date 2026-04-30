@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
 source_hash: "d14760719e35add82916cc0ed1eaf1552cb001f3423cff8dfe0e6260c9d73e7d"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "channels/slack.md"
 original_doc_path: "channels/slack.md"
 duplicate_index: 1

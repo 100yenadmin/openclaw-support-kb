@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Context"
 source: "https://docs.openclaw.ai/concepts/context"
 source_hash: "41976dd205c9e25bab625c2e5374313bb8bbfa0724e01ceccc8e5cd8a8c210d9"
-generated_at: "2026-04-30T12:26:35.225Z"
+generated_at: "2026-04-30T12:30:37.668Z"
 doc_path: "concepts/context.md"
 original_doc_path: "concepts/context.md"
 duplicate_index: 1
