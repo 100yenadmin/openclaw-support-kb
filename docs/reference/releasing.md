@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "43b918952734519e9ccf6806dd7e000ad5fbb8fe8e11bab79c23a054f0142450"
+source_hash: "dc6344d338ea3a94220c3d021819fd1531a8aae0e8d6418b8e39a2ce563f0c6b"
 doc_path: "reference/releasing.md"
 original_doc_path: "reference/releasing.md"
 duplicate_index: 1
@@ -200,7 +200,9 @@ the maintainer-only release runbook.
     `openclaw/releases-private/.github/workflows/openclaw-npm-dist-tags.yml`
     for security, because `npm dist-tag add` still needs `NPM_TOKEN` while the
     public repo keeps OIDC-only publish
-  * public `macOS Release` is validation-only
+  * public `macOS Release` is validation-only; when a tag lives only on a
+    release branch but the workflow is dispatched from `main`, set
+    `public_release_branch=release/YYYY.M.D`
   * real private mac publish must pass successful private mac
     `preflight_run_id` and `validate_run_id`
   * the real publish paths promote prepared artifacts instead of rebuilding
