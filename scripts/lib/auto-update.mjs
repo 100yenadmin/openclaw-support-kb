@@ -30,7 +30,10 @@ export function managedCronBlock({
   repoUrl = "https://github.com/100yenadmin/openclaw-support-kb.git",
   pathValue = process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
 } = {}) {
-  if (!schedule) throw new Error("managedCronBlock requires schedule");
+  const cronSchedule = String(schedule || "").trim();
+  if (!cronSchedule) throw new Error("managedCronBlock requires schedule");
+  if (/[\r\n]/.test(cronSchedule)) throw new Error("managedCronBlock schedule must be a single line");
+  validateCronSchedule(cronSchedule);
   if (!nodePath) throw new Error("managedCronBlock requires nodePath");
   if (!scriptPath) throw new Error("managedCronBlock requires scriptPath");
   if (!logPath) throw new Error("managedCronBlock requires logPath");
@@ -50,7 +53,7 @@ export function managedCronBlock({
     "2>&1",
   ].join(" "));
 
-  return [AUTO_UPDATE_CRON_START, `${schedule} ${command}`, AUTO_UPDATE_CRON_END].join("\n");
+  return [AUTO_UPDATE_CRON_START, `${cronSchedule} ${command}`, AUTO_UPDATE_CRON_END].join("\n");
 }
 
 export function upsertManagedCronBlock(existingCrontab, managedBlock) {
@@ -59,6 +62,7 @@ export function upsertManagedCronBlock(existingCrontab, managedBlock) {
   if (!block.includes(AUTO_UPDATE_CRON_START) || !block.includes(AUTO_UPDATE_CRON_END)) {
     throw new Error("managed block is missing auto-update markers");
   }
+  assertManagedMarkersBalanced(existing);
 
   const pattern = new RegExp(
     `${escapeRegExp(AUTO_UPDATE_CRON_START)}[\\s\\S]*?${escapeRegExp(AUTO_UPDATE_CRON_END)}`,
@@ -71,4 +75,32 @@ export function upsertManagedCronBlock(existingCrontab, managedBlock) {
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function validateCronSchedule(schedule) {
+  const fields = schedule.split(/\s+/);
+  if (fields.length !== 5) throw new Error("managedCronBlock schedule must contain exactly five cron fields");
+  for (const field of fields) {
+    if (!/^[A-Za-z0-9_*?,#./-]+$/.test(field)) {
+      throw new Error(`managedCronBlock schedule contains unsupported cron field: ${field}`);
+    }
+  }
+}
+
+function assertManagedMarkersBalanced(existingCrontab) {
+  const markerPattern = new RegExp(
+    `${escapeRegExp(AUTO_UPDATE_CRON_START)}|${escapeRegExp(AUTO_UPDATE_CRON_END)}`,
+    "g",
+  );
+  let depth = 0;
+  for (const match of String(existingCrontab || "").matchAll(markerPattern)) {
+    if (match[0] === AUTO_UPDATE_CRON_START) {
+      if (depth !== 0) throw new Error("existing crontab has nested openclaw-support-kb auto-update markers");
+      depth = 1;
+    } else {
+      if (depth !== 1) throw new Error("existing crontab has unmatched openclaw-support-kb auto-update end marker");
+      depth = 0;
+    }
+  }
+  if (depth !== 0) throw new Error("existing crontab has unmatched openclaw-support-kb auto-update start marker");
 }

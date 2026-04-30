@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -11,6 +11,7 @@ import {
   normalizeRepoUrl,
   pathExists,
   readJsonIfExists,
+  SOURCE_MARKER_FILE,
 } from "./lib/openclaw-support-kb.mjs";
 
 const DEFAULT_REPO_URL = "https://github.com/100yenadmin/openclaw-support-kb.git";
@@ -200,6 +201,45 @@ function ensureExistingOriginMatchesTrustPolicy() {
   }
 }
 
+async function directoryIsEmpty(dir) {
+  try {
+    return (await readdir(dir)).length === 0;
+  } catch (error) {
+    if (error.code === "ENOENT") return false;
+    throw error;
+  }
+}
+
+function cloneTarget() {
+  run("git", ["clone", "--branch", branch, repoUrl, targetDir]);
+  if (pinnedRef) {
+    run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
+    run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
+  }
+}
+
+async function migrateMarkedSourceToGitCheckout() {
+  const markerPath = path.join(targetDir, SOURCE_MARKER_FILE);
+  if (!(await pathExists(markerPath))) {
+    throw new Error(
+      `Refusing to clone into populated non-git directory ${targetDir}. Move it aside, empty it, or create ${SOURCE_MARKER_FILE} only for a managed OpenClaw support KB source.`,
+    );
+  }
+
+  const backupDir = path.join(path.dirname(targetDir), `${path.basename(targetDir)}.pre-git-${Date.now()}`);
+  await rm(backupDir, { recursive: true, force: true });
+  console.warn(`Migrating marked non-git OpenClaw support KB source to git checkout. Backup: ${backupDir}`);
+  await rename(targetDir, backupDir);
+  try {
+    cloneTarget();
+  } catch (error) {
+    await rm(targetDir, { recursive: true, force: true });
+    await rename(backupDir, targetDir).catch(() => {});
+    throw error;
+  }
+  await rm(backupDir, { recursive: true, force: true });
+}
+
 async function updateCheckout() {
   ensureRepoTrust();
   await mkdir(path.dirname(targetDir), { recursive: true });
@@ -210,18 +250,19 @@ async function updateCheckout() {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
       run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
     } else {
-      run("git", ["-C", targetDir, "fetch", "--prune", "--depth", "1", "origin", branch]);
+      run("git", ["-C", targetDir, "fetch", "--prune", "origin", branch]);
       run("git", ["-C", targetDir, "checkout", branch]);
       run("git", ["-C", targetDir, "merge", "--ff-only", "FETCH_HEAD"]);
     }
     return;
   }
 
-  run("git", ["clone", "--depth", "1", "--branch", branch, repoUrl, targetDir]);
-  if (pinnedRef) {
-    run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
-    run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
+  if ((await pathExists(targetDir)) && !(await directoryIsEmpty(targetDir))) {
+    await migrateMarkedSourceToGitCheckout();
+    return;
   }
+
+  cloneTarget();
 }
 
 function updateClient() {

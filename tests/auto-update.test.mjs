@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   AUTO_UPDATE_CRON_END,
   AUTO_UPDATE_CRON_START,
@@ -13,8 +14,10 @@ import {
   shellQuote,
   upsertManagedCronBlock,
 } from "../scripts/lib/auto-update.mjs";
+import { SOURCE_MARKER_FILE } from "../scripts/lib/openclaw-support-kb.mjs";
 
 const targetDir = "/Users/test/.gbrain/sources/openclaw-support-kb";
+const repoRoot = path.resolve(import.meta.dirname, "..");
 
 async function exists(filePath) {
   try {
@@ -23,6 +26,26 @@ async function exists(filePath) {
   } catch {
     return false;
   }
+}
+
+function runGit(args, options = {}) {
+  const result = spawnSync("git", args, { encoding: "utf8", ...options });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  return result;
+}
+
+async function createRemoteFixture(tempDir) {
+  const remote = path.join(tempDir, "remote.git");
+  const work = path.join(tempDir, "work");
+  runGit(["init", "--bare", "--initial-branch=main", remote]);
+  runGit(["clone", remote, work]);
+  runGit(["config", "user.email", "test@example.com"], { cwd: work });
+  runGit(["config", "user.name", "OpenClaw KB Test"], { cwd: work });
+  await writeFile(path.join(work, "README.md"), "one\n");
+  runGit(["add", "."], { cwd: work });
+  runGit(["commit", "-m", "one"], { cwd: work });
+  runGit(["push", "origin", "main"], { cwd: work });
+  return { remote, work };
 }
 
 test("managed cron block quotes paths and preserves command ordering", () => {
@@ -59,6 +82,42 @@ test("managed cron block escapes cron percent characters", () => {
   assert.match(block, /kb\\%20repo/);
   assert.match(block, /openclaw\\%kb\.log/);
   assert.equal(escapeCronPercents("a%b"), "a\\%b");
+});
+
+test("managed cron block rejects multiline schedules", () => {
+  assert.throws(
+    () =>
+      managedCronBlock({
+        schedule: "17 * * * *\n* * * * * echo injected",
+        nodePath: "/usr/local/bin/node",
+        scriptPath: "/tmp/run-client-update.mjs",
+        logPath: "/tmp/update.log",
+        targetDir,
+      }),
+    /single line/,
+  );
+  assert.throws(
+    () =>
+      managedCronBlock({
+        schedule: "17 * * * * echo injected",
+        nodePath: "/usr/local/bin/node",
+        scriptPath: "/tmp/run-client-update.mjs",
+        logPath: "/tmp/update.log",
+        targetDir,
+      }),
+    /exactly five/,
+  );
+  assert.throws(
+    () =>
+      managedCronBlock({
+        schedule: "17 * * * ; touch /tmp/injected",
+        nodePath: "/usr/local/bin/node",
+        scriptPath: "/tmp/run-client-update.mjs",
+        logPath: "/tmp/update.log",
+        targetDir,
+      }),
+    /unsupported cron field|exactly five/,
+  );
 });
 
 test("managed cron block appends without replacing existing crontab entries", () => {
@@ -131,6 +190,26 @@ test("managed cron block collapses duplicate managed blocks", () => {
   assert.equal((next.match(new RegExp(AUTO_UPDATE_CRON_START, "g")) || []).length, 1);
 });
 
+test("managed cron block refuses malformed managed marker state", () => {
+  const block = managedCronBlock({
+    schedule: "42 * * * *",
+    nodePath: "/usr/local/bin/node",
+    scriptPath: "/tmp/run-client-update.mjs",
+    logPath: "/tmp/update.log",
+    targetDir,
+  });
+
+  assert.throws(() => upsertManagedCronBlock(`${AUTO_UPDATE_CRON_START}\n21 * * * * echo old\n`, block), /unmatched/);
+  assert.throws(
+    () => upsertManagedCronBlock(`${AUTO_UPDATE_CRON_END}\n21 * * * * echo old\n`, block),
+    /unmatched/,
+  );
+  assert.throws(
+    () => upsertManagedCronBlock(`${AUTO_UPDATE_CRON_START}\n${AUTO_UPDATE_CRON_START}\n${AUTO_UPDATE_CRON_END}\n`, block),
+    /nested/,
+  );
+});
+
 test("cron helpers are stable for shell quoting and minute jitter", () => {
   assert.equal(shellQuote("it's fine"), "'it'\\''s fine'");
   assert.throws(() => shellQuote("bad\nvalue"), /newlines/);
@@ -170,6 +249,72 @@ test("client updater treats a live lock owner as active past stale timeout", asy
     assert.equal(status.skipped, true);
     assert.equal(status.status, "locked");
     assert.equal(status.existingLock.id, "other-process");
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("lagged shallow checkouts can fast-forward with the client updater fetch sequence", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-shallow-"));
+  try {
+    const { remote, work } = await createRemoteFixture(tempDir);
+    const client = path.join(tempDir, "client");
+    runGit(["clone", "--depth", "1", "--branch", "main", pathToFileURL(remote).href, client]);
+
+    await writeFile(path.join(work, "README.md"), "one\ntwo\n");
+    runGit(["commit", "-am", "two"], { cwd: work });
+    await writeFile(path.join(work, "README.md"), "one\ntwo\nthree\n");
+    runGit(["commit", "-am", "three"], { cwd: work });
+    runGit(["push", "origin", "main"], { cwd: work });
+
+    runGit(["fetch", "--prune", "origin", "main"], { cwd: client });
+    runGit(["checkout", "main"], { cwd: client });
+    runGit(["merge", "--ff-only", "FETCH_HEAD"], { cwd: client });
+
+    const script = await readFile(path.join(repoRoot, "scripts", "run-client-update.mjs"), "utf8");
+    assert.doesNotMatch(script, /"fetch", "--prune", "--depth", "1"/);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("client updater migrates a marked non-git managed source into a git checkout", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-migrate-"));
+  try {
+    const { remote, work } = await createRemoteFixture(tempDir);
+    await mkdir(path.join(work, "scripts"), { recursive: true });
+    await writeFile(path.join(work, "scripts", "update-client.mjs"), "console.log('stub update-client ran');\n");
+    await writeFile(path.join(work, "kb-manifest.json"), '{"channel":"stable","generatedAt":"test","sourceCount":1}\n');
+    runGit(["add", "."], { cwd: work });
+    runGit(["commit", "-m", "add updater"], { cwd: work });
+    runGit(["push", "origin", "main"], { cwd: work });
+
+    const sourceDir = path.join(tempDir, "source");
+    const statusFile = path.join(tempDir, "state", "status.json");
+    await mkdir(sourceDir, { recursive: true });
+    await writeFile(path.join(sourceDir, SOURCE_MARKER_FILE), "managed source\n");
+    await writeFile(path.join(sourceDir, "old-generated.md"), "old\n");
+
+    const result = spawnSync(process.execPath, ["scripts/run-client-update.mjs", "--reason", "test-migrate"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SUPPORT_KB_LOCK_DIR: path.join(tempDir, "locks"),
+        OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
+        GIT_CONFIG_COUNT: "1",
+        GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
+        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(await exists(path.join(sourceDir, ".git")), true);
+    assert.equal(await exists(path.join(sourceDir, "old-generated.md")), false);
+    const status = JSON.parse(await readFile(statusFile, "utf8"));
+    assert.equal(status.ok, true);
+    assert.equal(status.reason, "test-migrate");
   } finally {
     await rm(tempDir, { recursive: true, force: true });
   }
