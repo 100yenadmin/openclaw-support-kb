@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -23,6 +24,8 @@ const stateDir = process.env.OPENCLAW_SUPPORT_KB_STATE_DIR || path.join(os.homed
 const lockDir = process.env.OPENCLAW_SUPPORT_KB_LOCK_DIR || path.join(os.homedir(), ".gbrain", "locks");
 const statusPath = process.env.OPENCLAW_SUPPORT_KB_STATUS_FILE || path.join(stateDir, "openclaw-support-kb-update.json");
 const lockPath = path.join(lockDir, "openclaw-support-kb-update.lock");
+const lockOwnerPath = path.join(lockPath, "owner.json");
+const lockId = randomUUID();
 const reason = readArg("--reason") || process.env.OPENCLAW_SUPPORT_KB_UPDATE_REASON || "manual";
 const startedAt = new Date();
 
@@ -100,8 +103,8 @@ async function createLockOwner() {
   await mkdir(lockPath);
   try {
     await writeFile(
-      path.join(lockPath, "owner.json"),
-      `${JSON.stringify({ pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
+      lockOwnerPath,
+      `${JSON.stringify({ id: lockId, pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
     );
   } catch (error) {
     await rm(lockPath, { recursive: true, force: true });
@@ -132,7 +135,7 @@ async function reacquireAfterStaleLockRemoval() {
 
 async function readExistingLock() {
   try {
-    return JSON.parse(await readFile(path.join(lockPath, "owner.json"), "utf8"));
+    return JSON.parse(await readFile(lockOwnerPath, "utf8"));
   } catch {
     try {
       const lockStat = await stat(lockPath);
@@ -143,8 +146,20 @@ async function readExistingLock() {
   }
 }
 
+function processIsRunning(pid) {
+  const parsed = Number(pid);
+  if (!Number.isInteger(parsed) || parsed <= 0) return false;
+  try {
+    process.kill(parsed, 0);
+    return true;
+  } catch (error) {
+    return error.code === "EPERM";
+  }
+}
+
 function lockIsStale(owner) {
   if (!Number.isFinite(staleLockMs) || staleLockMs <= 0) return false;
+  if (processIsRunning(owner?.pid)) return false;
   const started = Date.parse(owner?.startedAt || "");
   if (!Number.isFinite(started)) {
     if (Number.isFinite(owner?.mtimeMs)) return Date.now() - owner.mtimeMs > staleLockMs;
@@ -154,6 +169,11 @@ function lockIsStale(owner) {
 }
 
 async function releaseLock() {
+  const owner = await readExistingLock();
+  if (owner?.id !== lockId) {
+    console.warn(`OpenClaw support KB lock owner changed; leaving ${lockPath} in place.`);
+    return;
+  }
   await rm(lockPath, { recursive: true, force: true });
 }
 

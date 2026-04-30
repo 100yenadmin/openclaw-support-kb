@@ -1,5 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import {
   AUTO_UPDATE_CRON_END,
   AUTO_UPDATE_CRON_START,
@@ -11,6 +15,15 @@ import {
 } from "../scripts/lib/auto-update.mjs";
 
 const targetDir = "/Users/test/.gbrain/sources/openclaw-support-kb";
+
+async function exists(filePath) {
+  try {
+    await stat(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 test("managed cron block quotes paths and preserves command ordering", () => {
   const block = managedCronBlock({
@@ -125,4 +138,39 @@ test("cron helpers are stable for shell quoting and minute jitter", () => {
   assert.equal(defaultCronMinute("same-host"), defaultCronMinute("same-host"));
   assert.ok(defaultCronMinute("same-host") >= 0);
   assert.ok(defaultCronMinute("same-host") < 60);
+});
+
+test("client updater treats a live lock owner as active past stale timeout", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-lock-"));
+  try {
+    const lockDir = path.join(tempDir, "locks");
+    const lockPath = path.join(lockDir, "openclaw-support-kb-update.lock");
+    const statusFile = path.join(tempDir, "state", "status.json");
+    await mkdir(lockPath, { recursive: true });
+    await writeFile(
+      path.join(lockPath, "owner.json"),
+      `${JSON.stringify({ id: "other-process", pid: process.pid, startedAt: "2000-01-01T00:00:00.000Z" })}\n`,
+    );
+
+    const result = spawnSync(process.execPath, ["scripts/run-client-update.mjs", "--reason", "test-live-lock"], {
+      cwd: path.resolve(import.meta.dirname, ".."),
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        OPENCLAW_SUPPORT_KB_DIR: path.join(tempDir, "source"),
+        OPENCLAW_SUPPORT_KB_LOCK_DIR: lockDir,
+        OPENCLAW_SUPPORT_KB_LOCK_STALE_MS: "1",
+        OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(await exists(lockPath), true);
+    const status = JSON.parse(await readFile(statusFile, "utf8"));
+    assert.equal(status.skipped, true);
+    assert.equal(status.status, "locked");
+    assert.equal(status.existingLock.id, "other-process");
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
 });
