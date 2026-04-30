@@ -22,14 +22,14 @@ export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
 const GBRAIN_SOURCE_ID_PATTERN = new RegExp(`\\b${escapeRegExp(GBRAIN_SOURCE_ID)}\\b`, "i");
 export const GBRAIN_VERIFY_QUERIES = [
   {
-    label: "OpenClaw Support KB manifest",
-    query: `${GBRAIN_SOURCE_ID} kb-manifest sourceCount minGbrainVersion`,
-    strictPatterns: [GBRAIN_SOURCE_ID_PATTERN, /\b(kb-manifest|sourceCount|minGbrainVersion)\b/i],
+    label: "OpenClaw Support KB install guide",
+    query: "Install OpenClaw Support KB For Agents",
+    strictPatterns: [/\bInstall OpenClaw Support KB For Agents\b/i, /\bOpenClaw Support KB\b/i],
   },
   {
     label: "OpenClaw Telegram docs",
-    query: "docs.openclaw.ai/channels/telegram allowFrom groupAllowFrom",
-    strictPatterns: [/\b(allowFrom|groupAllowFrom|dmPolicy|botToken|TELEGRAM_BOT_TOKEN)\b/, /\b(telegram|channels\/telegram)\b/i],
+    query: "Telegram Setup And Repair",
+    strictPatterns: [/\bTelegram Setup And Repair\b/i, /\btelegram\b/i],
   },
 ];
 export const OFFICIAL_REPO_URLS = [

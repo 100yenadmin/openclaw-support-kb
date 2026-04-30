@@ -206,7 +206,7 @@ function readSearch(gbrain) {
 
   const checks = [];
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const result = captureNoExit(gbrain.command, ["search", item.query]);
+    const result = captureNoExit(gbrain.command, ["search", item.query, "--source", GBRAIN_SOURCE_ID]);
     const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
     const verified =
       result.status === 0
@@ -240,7 +240,8 @@ function readSourceGitStatus(sourceIsGit) {
   const files = result.stdout
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((line) => !/^\?\? \.gbrain-source$/.test(line));
   return { checked: true, dirty: files.length > 0, files };
 }
 

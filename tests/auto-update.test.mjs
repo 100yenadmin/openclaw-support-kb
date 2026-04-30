@@ -438,7 +438,7 @@ test("direct client setup clones the published repo instead of building a non-gi
         "if [ \"$1\" = \"sources\" ]; then exit 0; fi",
         "if [ \"$1\" = \"sync\" ]; then exit 0; fi",
         "if [ \"$1\" = \"embed\" ]; then exit 0; fi",
-        "if [ \"$1\" = \"search\" ]; then echo 'openclaw-support-kb kb-manifest sourceCount minGbrainVersion telegram allowFrom groupAllowFrom channels/telegram'; exit 0; fi",
+        "if [ \"$1\" = \"search\" ]; then echo 'Install OpenClaw Support KB For Agents openclaw-support-kb Telegram Setup And Repair telegram'; exit 0; fi",
         "exit 0",
         "",
       ].join("\n"),
