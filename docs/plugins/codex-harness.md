@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "07fe2c7c0ec5930e7c137ffa7fccd5dceb4f7f7ab4982d6584b174322c475e08"
+source_hash: "240db4979002bcc8a60ba6b2d5dee1a5cf51d0b3783553de26960fbda818113a"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1
@@ -25,6 +25,52 @@ If you are trying to orient yourself, start with
 [Agent runtimes](/concepts/agent-runtimes). The short version is:
 `openai/gpt-5.5` is the model ref, `codex` is the runtime, and Telegram,
 Discord, Slack, or another channel remains the communication surface.
+
+## Quick config
+
+To use the Codex harness for GPT agent turns, keep the model ref canonical as
+`openai/gpt-*`, enable the bundled `codex` plugin, and set
+`agentRuntime.id: "codex"`:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  plugins: {
+    entries: {
+      codex: {
+        enabled: true,
+      },
+    },
+  },
+  agents: {
+    defaults: {
+      model: "openai/gpt-5.5",
+      agentRuntime: {
+        id: "codex",
+        fallback: "none",
+      },
+    },
+  },
+}
+```
+
+If your config uses `plugins.allow`, include `codex` there too:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  plugins: {
+    allow: ["codex"],
+    entries: {
+      codex: {
+        enabled: true,
+      },
+    },
+  },
+}
+```
+
+Do not use `openai-codex/gpt-*` for this path. That selects Codex OAuth through
+the normal PI runner unless you separately force a runtime. Config changes apply
+to new or reset sessions; existing sessions keep their recorded runtime.
 
 ## What this plugin changes
 
@@ -197,49 +243,6 @@ OpenClaw on the protocol surface it has been tested against.
 For live and Docker smoke tests, auth usually comes from the Codex CLI account
 or an OpenClaw `openai-codex` auth profile. Local stdio app-server launches can
 also fall back to `CODEX_API_KEY` / `OPENAI_API_KEY` when no account is present.
-
-## Minimal config
-
-Use `openai/gpt-5.5`, enable the bundled plugin, and force the `codex` harness:
-
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-{
-  plugins: {
-    entries: {
-      codex: {
-        enabled: true,
-      },
-    },
-  },
-  agents: {
-    defaults: {
-      model: "openai/gpt-5.5",
-      agentRuntime: {
-        id: "codex",
-      },
-    },
-  },
-}
-```
-
-If your config uses `plugins.allow`, include `codex` there too:
-
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-{
-  plugins: {
-    allow: ["codex"],
-    entries: {
-      codex: {
-        enabled: true,
-      },
-    },
-  },
-}
-```
-
-Legacy configs that set `agents.defaults.model` or an agent model to
-`codex/<model>` still auto-enable the bundled `codex` plugin. New configs should
-prefer `openai/<model>` plus the explicit `agentRuntime` entry above.
 
 ## Add Codex alongside other models
 
