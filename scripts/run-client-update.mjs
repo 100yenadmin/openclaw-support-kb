@@ -98,10 +98,15 @@ async function acquireLock() {
 
 async function createLockOwner() {
   await mkdir(lockPath);
-  await writeFile(
-    path.join(lockPath, "owner.json"),
-    `${JSON.stringify({ pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
-  );
+  try {
+    await writeFile(
+      path.join(lockPath, "owner.json"),
+      `${JSON.stringify({ pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
+    );
+  } catch (error) {
+    await rm(lockPath, { recursive: true, force: true });
+    throw error;
+  }
 }
 
 async function reacquireAfterStaleLockRemoval() {

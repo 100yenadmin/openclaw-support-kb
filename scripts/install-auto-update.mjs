@@ -76,8 +76,6 @@ async function installCrontab(block) {
   }
 }
 
-await mkdir(path.dirname(logPath), { recursive: true });
-
 const block = managedCronBlock({
   schedule,
   nodePath: process.execPath,
@@ -113,6 +111,7 @@ if (mode !== "crontab") {
   process.exit(2);
 }
 
+await mkdir(path.dirname(logPath), { recursive: true });
 await installCrontab(block);
 console.log(`Installed OpenClaw support KB auto-update crontab: ${schedule}`);
 console.log(`Log: ${logPath}`);
