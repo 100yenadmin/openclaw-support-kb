@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
 source_hash: "11fd09d3d1a11f9844a53771065ff5f23b15a3a3f20749685ed3d6ea5eb2298b"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/memory-config.md"
 original_doc_path: "reference/memory-config.md"
 duplicate_index: 1

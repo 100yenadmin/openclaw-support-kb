@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
 source_hash: "69929e2471b28d5d95a13fe46171e22e0265b7016d65f16104813db9815aba45"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1

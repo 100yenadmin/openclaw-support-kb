@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "System"
 source: "https://docs.openclaw.ai/cli/system"
 source_hash: "df0015fb4072d5fa3ca75d7df8eeb28b6ed5ab2e97b01572d00c42a0f81757ae"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/system.md"
 original_doc_path: "cli/system.md"
 duplicate_index: 1

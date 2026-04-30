@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
 source_hash: "024a319d2c0b730e015a53d68bf355c3baee7faae8c3124cb653ae78117ce161"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/groq.md"
 original_doc_path: "providers/groq.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
 source_hash: "0fd002a2488fec24b305c851c573c1ad7514b017572d973f1ac624a1cd2207c1"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/sdk-agent-harness.md"
 original_doc_path: "plugins/sdk-agent-harness.md"
 duplicate_index: 1

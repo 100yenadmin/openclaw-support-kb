@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Health checks (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/health"
 source_hash: "942e432e54626f93ad127bc3d732ac4bf1c7bdd62e2a9c299a50f614ebb343c0"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/health.md"
 original_doc_path: "platforms/mac/health.md"
 duplicate_index: 1

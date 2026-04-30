@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Voicecall"
 source: "https://docs.openclaw.ai/cli/voicecall"
 source_hash: "61bc57af210c1ec4183a280bc89569e3199b143864346336e03b8cb337708d14"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/voicecall.md"
 original_doc_path: "cli/voicecall.md"
 duplicate_index: 1

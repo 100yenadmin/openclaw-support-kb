@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Kilocode"
 source: "https://docs.openclaw.ai/providers/kilocode"
 source_hash: "f087d44b7f93a595a922002d542fb58e7699918ca948a72dd3ef357d1df98cbf"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/kilocode.md"
 original_doc_path: "providers/kilocode.md"
 duplicate_index: 1

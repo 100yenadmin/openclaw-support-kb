@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Tool-loop detection"
 source: "https://docs.openclaw.ai/tools/loop-detection"
 source_hash: "5a817392fe8bf1b2d7cb19ab87c934e264bb4d3ac4676dfd5255b2a1b2537e1e"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/loop-detection.md"
 original_doc_path: "tools/loop-detection.md"
 duplicate_index: 1

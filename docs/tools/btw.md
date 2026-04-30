@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "BTW side questions"
 source: "https://docs.openclaw.ai/tools/btw"
 source_hash: "35a157d9e57058ce58f4ffd654e845037be12a876d5209c4c231a7587be39c30"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/btw.md"
 original_doc_path: "tools/btw.md"
 duplicate_index: 1

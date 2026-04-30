@@ -1,0 +1,181 @@
+---
+type: composio_doc
+title: "Tools"
+source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
+source_hash: "a148d81dad2a5ae55447baff7447bdd4bcc75f1ecd477f58da1d8d527f94029d"
+doc_path: "reference/sdk-reference/python/tools.md"
+original_doc_path: "reference/sdk-reference/python/tools.md"
+duplicate_index: 1
+---
+
+# Tools (/reference/sdk-reference/python/tools)
+Source: https://docs.composio.dev/reference/sdk-reference/python/tools.md
+
+
+# Methods
+
+## get\_raw\_composio\_tool\_by\_slug()
+
+Returns schema for the given tool slug.
+
+```python
+def get_raw_composio_tool_by_slug(slug: str) -> Tool
+```
+
+**Parameters**
+
+| Name   | Type  |
+| ------ | ----- |
+| `slug` | `str` |
+
+**Returns**
+
+`Tool`
+
+***
+
+## get\_raw\_composio\_tools()
+
+Get a list of tool schemas based on the provided filters.
+
+```python
+def get_raw_composio_tools(tools: list[str | None] = ..., search: str | None = ..., toolkits: list[str | None] = ..., scopes: List[str | None] = ..., limit: int | None = ...) -> list[Tool]
+```
+
+**Parameters**
+
+| Name        | Type                |
+| ----------- | ------------------- |
+| `tools?`    | `list[str \| None]` |
+| `search?`   | `str \| None`       |
+| `toolkits?` | `list[str \| None]` |
+| `scopes?`   | `List[str \| None]` |
+| `limit?`    | `int \| None`       |
+
+**Returns**
+
+`list[Tool]`
+
+***
+
+## get\_raw\_tool\_router\_meta\_tools()
+
+Fetches the meta tools for a tool router session.  This method fetches the meta tools from the Composio API and transforms them to the expected format. It provides access to the underlying meta tool data without provider-specific wrapping.
+
+```python
+def get_raw_tool_router_meta_tools(session_id: str, modifiers: 'Modifiers' | None = ...) -> list[Tool]
+```
+
+**Parameters**
+
+| Name         | Type                  |
+| ------------ | --------------------- |
+| `session_id` | `str`                 |
+| `modifiers?` | `'Modifiers' \| None` |
+
+**Returns**
+
+`list[Tool]` — The list of meta tools
+
+**Example**
+
+````python
+```python
+from composio import Composio
+
+composio = Composio()
+tools_model = composio.tools
+
+# Get meta tools for a session
+meta_tools = tools_model.get_raw_tool_router_meta_tools("session_123")
+print(meta_tools)
+
+# Get meta tools with schema modifiers
+from composio.core.models import schema_modifier
+
+@schema_modifier
+def modify_schema(tool: str, toolkit: str, schema):
+# Customize the schema
+schema.description = f"Modified: {schema.description}"
+return schema
+
+meta_tools = tools_model.get_raw_tool_router_meta_tools(
+"session_123",
+modifiers=[modify_schema]
+)
+````
+````
+
+--------- | ------------------- |
+| `user_id`    | `str`               |
+| `slug?`      | `str \| None`       |
+| `tools?`     | `list[str \| None]` |
+| `search?`    | `str \| None`       |
+| `toolkits?`  | `list[str \| None]` |
+| `scopes?`    | `List[str \| None]` |
+| `modifiers?` | `Modifiers \| None` |
+| `limit?`     | `int \| None`       |
+
+**Returns**
+
+`TToolCollection` — Provider-specific tool collection (TToolCollection).
+
+***
+
+## execute()
+
+Execute a tool with the provided parameters.  This method calls the Composio API or a custom tool handler to execute the tool and returns the response. It automatically determines whether to use a custom tool or a Composio API tool based on the slug.
+
+```python
+def execute(slug: str, arguments: Dict, connected_account_id: str | None = ..., custom_auth_params: tool_execute_params.CustomAuthParams | None = ..., custom_connection_data: tool_execute_params.CustomConnectionData | None = ..., user_id: str | None = ..., text: str | None = ..., version: str | None = ..., dangerously_skip_version_check: bool | None = ..., modifiers: Modifiers | None = ...) -> ToolExecutionResponse
+```
+
+**Parameters**
+
+| Name                              | Type                                               |
+| --------------------------------- | -------------------------------------------------- |
+| `slug`                            | `str`                                              |
+| `arguments`                       | `Dict`                                             |
+| `connected_account_id?`           | `str \| None`                                      |
+| `custom_auth_params?`             | `tool_execute_params.CustomAuthParams \| None`     |
+| `custom_connection_data?`         | `tool_execute_params.CustomConnectionData \| None` |
+| `user_id?`                        | `str \| None`                                      |
+| `text?`                           | `str \| None`                                      |
+| `version?`                        | `str \| None`                                      |
+| `dangerously_skip_version_check?` | `bool \| None`                                     |
+| `modifiers?`                      | `Modifiers \| None`                                |
+
+**Returns**
+
+`ToolExecutionResponse` — The response from the tool.
+
+***
+
+## proxy()
+
+Proxy a tool call to the Composio API
+
+```python
+def proxy(endpoint: str, method: Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD'], body: object | None = ..., connected_account_id: str | None = ..., parameters: List[tool_proxy_params.Parameter | None] = ..., custom_connection_data: tool_proxy_params.CustomConnectionData | None = ...) -> tool_proxy_response.ToolProxyResponse
+```
+
+**Parameters**
+
+| Name                      | Type                                                       |
+| ------------------------- | ---------------------------------------------------------- |
+| `endpoint`                | `str`                                                      |
+| `method`                  | `Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD']` |
+| `body?`                   | `object \| None`                                           |
+| `connected_account_id?`   | `str \| None`                                              |
+| `parameters?`             | `List[tool_proxy_params.Parameter \| None]`                |
+| `custom_connection_data?` | `tool_proxy_params.CustomConnectionData \| None`           |
+
+**Returns**
+
+`tool_proxy_response.ToolProxyResponse`
+
+***
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tools.py#L80)
+
+---

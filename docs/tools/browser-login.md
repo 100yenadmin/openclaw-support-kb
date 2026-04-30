@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Browser login"
 source: "https://docs.openclaw.ai/tools/browser-login"
 source_hash: "e27785d4f875e97650e28585ed0404b0294e89a01271e3bbdda38a1eb4def598"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/browser-login.md"
 original_doc_path: "tools/browser-login.md"
 duplicate_index: 1

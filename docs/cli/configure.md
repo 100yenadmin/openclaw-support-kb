@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Configure"
 source: "https://docs.openclaw.ai/cli/configure"
 source_hash: "e3d6c2baa41a2d0249fb327c670d875d1b9031111b1175400cef39538a8f7d3e"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/configure.md"
 original_doc_path: "cli/configure.md"
 duplicate_index: 1

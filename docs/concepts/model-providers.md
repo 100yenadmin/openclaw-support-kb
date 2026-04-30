@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
 source_hash: "1cc540471f9555bfd1029bd945cb26ff398e51a14590c0537f81bcbc771e093c"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/model-providers.md"
 original_doc_path: "concepts/model-providers.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Steering queue"
 source: "https://docs.openclaw.ai/concepts/queue-steering"
 source_hash: "127b3e70bb34d7957fe2c251c152ea8fca28fcd90ee3e88f12d10d91e208d38a"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/queue-steering.md"
 original_doc_path: "concepts/queue-steering.md"
 duplicate_index: 1

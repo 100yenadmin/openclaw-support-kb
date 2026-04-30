@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "macOS permissions"
 source: "https://docs.openclaw.ai/platforms/mac/permissions"
 source_hash: "01b3f6c0cb10a8fab17902286e288d4515d633470d921be03c7de679a32784c5"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/permissions.md"
 original_doc_path: "platforms/mac/permissions.md"
 duplicate_index: 1

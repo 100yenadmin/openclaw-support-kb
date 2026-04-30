@@ -1,0 +1,144 @@
+---
+type: composio_doc
+title: "ConnectedAccounts"
+source: "https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md"
+source_hash: "391a408a66e04807875eaeabf6cea6b4d12ef154d670a9bb926d818c11699c9a"
+doc_path: "reference/sdk-reference/python/connected-accounts.md"
+original_doc_path: "reference/sdk-reference/python/connected-accounts.md"
+duplicate_index: 1
+---
+
+# ConnectedAccounts (/reference/sdk-reference/python/connected-accounts)
+Source: https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
+
+
+# Methods
+
+## update()
+
+Update a connected account's alias and/or credentials.
+
+```python
+def update(nanoid: str, alias: str | None = ..., connection: connected_account_patch_params.Connection | None = ...) -> connected_account_patch_response.ConnectedAccountPatchRes...
+```
+
+**Parameters**
+
+| Name          | Type                                                |
+| ------------- | --------------------------------------------------- |
+| `nanoid`      | `str`                                               |
+| `alias?`      | `str \| None`                                       |
+| `connection?` | `connected_account_patch_params.Connection \| None` |
+
+**Returns**
+
+`connected_account_patch_response.ConnectedAccountPatchRes...` — Response with `id`, `status`, and `success`.
+
+**Example**
+
+```python
+# Set an alias
+    composio.connected_accounts.update('ca_abc123', alias='work-gmail')
+
+    # Clear an alias
+    composio.connected_accounts.update('ca_abc123', alias='')
+```
+
+***
+
+## initiate()
+
+Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.
+
+```python
+def initiate(user_id: str, auth_config_id: str, callback_url: str | None = ..., allow_multiple: bool = ..., config: connected_account_create_params.ConnectionState | None = ..., alias: str | None = ...) -> ConnectionRequest
+```
+
+**Parameters**
+
+| Name              | Type                                                      |
+| ----------------- | --------------------------------------------------------- |
+| `user_id`         | `str`                                                     |
+| `auth_config_id`  | `str`                                                     |
+| `callback_url?`   | `str \| None`                                             |
+| `allow_multiple?` | `bool`                                                    |
+| `config?`         | `connected_account_create_params.ConnectionState \| None` |
+| `alias?`          | `str \| None`                                             |
+
+**Returns**
+
+`ConnectionRequest` — The connection request.
+
+***
+
+## link()
+
+Create a Composio Connect Link for a user to connect their account to a given auth config.  This method will return an external link which you can use for the user to connect their account.
+
+```python
+def link(user_id: str, auth_config_id: str, callback_url: str | None = ..., alias: str | None = ...) -> ConnectionRequest
+```
+
+**Parameters**
+
+| Name             | Type          |
+| ---------------- | ------------- |
+| `user_id`        | `str`         |
+| `auth_config_id` | `str`         |
+| `callback_url?`  | `str \| None` |
+| `alias?`         | `str \| None` |
+
+**Returns**
+
+`ConnectionRequest` — Connection request object.
+
+**Example**
+
+```python
+# Create a connection request and redirect the user to the redirect url
+    connection_request = composio.connected_accounts.link('user_123', 'auth_config_123')
+    redirect_url = connection_request.redirect_url
+    print(f"Visit: {redirect_url} to authenticate your account")
+
+    # Wait for the connection to be established
+    connected_account = connection_request.wait_for_connection()
+
+    # Create a connection request with callback URL
+    connection_request = composio.connected_accounts.link(
+        'user_123',
+        'auth_config_123',
+        callback_url='https://your-app.com/callback'
+    )
+    redirect_url = connection_request.redirect_url
+    print(f"Visit: {redirect_url} to authenticate your account")
+
+    # Wait for the connection to be established
+    connected_account = composio.connected_accounts.wait_for_connection(connection_request.id)
+```
+
+***
+
+## wait\_for\_connection()
+
+Wait for connected account with given ID to be active
+
+```python
+def wait_for_connection(id: str, timeout: float | None = ...) -> connected_account_retrieve_response.ConnectedAccountRetri...
+```
+
+**Parameters**
+
+| Name       | Type            |
+| ---------- | --------------- |
+| `id`       | `str`           |
+| `timeout?` | `float \| None` |
+
+**Returns**
+
+`connected_account_retrieve_response.ConnectedAccountRetri...`
+
+***
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/connected_accounts.py#L321)
+
+---

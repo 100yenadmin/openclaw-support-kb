@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
 source_hash: "ddf4c9c17d72c54bf86e50bb344a1e701f16381bbe24baf59028d7bd266923a4"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "install/installer.md"
 original_doc_path: "install/installer.md"
 duplicate_index: 1

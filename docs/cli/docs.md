@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Docs"
 source: "https://docs.openclaw.ai/cli/docs"
 source_hash: "337828f9fe8e96ec6519648ca9404f42741090dcd19052dcb745e8472973a4a0"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/docs.md"
 original_doc_path: "cli/docs.md"
 duplicate_index: 1

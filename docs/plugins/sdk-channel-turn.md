@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Channel turn kernel"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-turn"
 source_hash: "c6935b9b547b35a3462b5ac66fbe0d1065d377b1f4e3f52a8ef4e53131ff87cc"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/sdk-channel-turn.md"
 original_doc_path: "plugins/sdk-channel-turn.md"
 duplicate_index: 1

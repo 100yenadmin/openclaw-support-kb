@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
 source_hash: "8ca83bff40abe1f80b516a84ba005cba274c790798e52f7fc1e537a735c69394"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/migrate.md"
 original_doc_path: "cli/migrate.md"
 duplicate_index: 1

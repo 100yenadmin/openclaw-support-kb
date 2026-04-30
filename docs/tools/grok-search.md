@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Grok search"
 source: "https://docs.openclaw.ai/tools/grok-search"
 source_hash: "ff315414fd8770103c7d5ecbe745ed88312cf1cc8fd8424b6c77da7677c9061c"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/grok-search.md"
 original_doc_path: "tools/grok-search.md"
 duplicate_index: 1

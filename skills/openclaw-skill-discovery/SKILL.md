@@ -19,10 +19,12 @@ description: Use when the user wants to find, evaluate, install, update, or impr
    openclaw skills search "<task or app>" --limit 10 --json
    openclaw skills info <candidate-slug> --json
    ```
-3. If the task is for a SaaS app or chief-of-staff workflow, search the Composio integration guide:
+3. If the task is for a SaaS app or chief-of-staff workflow, search the local Composio docs and toolkit catalog:
    ```bash
-   gbrain search "Source: https://composio.dev/claw"
-   gbrain query "Composio OpenClaw <app or workflow>"
+   gbrain search "Source: https://composio.dev/toolkits <app or workflow>"
+   gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md"
+   gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md"
+   gbrain query "Composio toolkit MCP OAuth <app or workflow>"
    ```
 4. Read `runbooks/skill-discovery.md` for the install workflow.
 5. Prefer bundled/native skills first, then verified ClawHub/OpenClaw sources, then the VoltAgent snapshot as discovery metadata.
@@ -56,6 +58,8 @@ MCP/OAuth integration and follow current OpenClaw MCP docs instead.
 Before adding anything:
 
 - Ask which app/account the user wants to connect.
+- Search `integrations/composio/toolkits.md` for the app or category.
+- Search `integrations/composio/docs/` for current Composio setup/auth guidance.
 - Prefer read-only or draft-only scopes where possible.
 - Use `openclaw mcp list` and `openclaw mcp show composio --json` before changes.
 - Validate config after changes.

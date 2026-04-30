@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Camera capture"
 source: "https://docs.openclaw.ai/nodes/camera"
 source_hash: "b3f9c493d9f5539352501474ffdb4a49043e7b893541dd4db7bb9fb808356aa6"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "nodes/camera.md"
 original_doc_path: "nodes/camera.md"
 duplicate_index: 1

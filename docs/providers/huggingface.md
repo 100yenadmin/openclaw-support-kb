@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Hugging Face (inference)"
 source: "https://docs.openclaw.ai/providers/huggingface"
 source_hash: "a1665474df53334c01ba94ce90180088f1f21aea67e327038b0ae1c5a2e22c49"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/huggingface.md"
 original_doc_path: "providers/huggingface.md"
 duplicate_index: 1

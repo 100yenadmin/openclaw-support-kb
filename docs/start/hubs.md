@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
 source_hash: "4fb623c0592b7e33ce0949b1e178422447b22fc32baa373de47c0bc733f1becb"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/hubs.md"
 original_doc_path: "start/hubs.md"
 duplicate_index: 1

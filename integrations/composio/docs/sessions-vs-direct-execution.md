@@ -1,0 +1,193 @@
+---
+type: composio_doc
+title: "Sessions vs Direct Execution"
+source: "https://docs.composio.dev/docs/sessions-vs-direct-execution.md"
+source_hash: "4920e7dabdbc1c7c9535c594545cf855f57aa6708587c20239b1d2d1c6f86acf"
+doc_path: "sessions-vs-direct-execution.md"
+original_doc_path: "sessions-vs-direct-execution.md"
+duplicate_index: 1
+---
+
+# Sessions vs Direct Execution (/docs/sessions-vs-direct-execution)
+Source: https://docs.composio.dev/docs/sessions-vs-direct-execution.md
+
+
+**Sessions** give your agent [meta tools](/docs/tools-and-toolkits#meta-tools). The agent discovers which app tools to use, authenticates users, and executes tools at runtime through these meta tools.
+
+**Direct execution** gives your code specific tool schemas. You decide which tools to fetch, manage auth yourself, and call `tools.execute()` directly.
+
+Use sessions unless you need full control over which tools are available and when they run.
+
+|                                  | Sessions                                                                                                                                                                                | Direct execution                                                                      |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Discovery**                    | Agent finds tools at runtime and resolves dependencies automatically (e.g., if a tool needs an ID from another API, the agent finds that tool, runs it, and continues)                  | You select all tools upfront and need to account for any dependencies between them    |
+| **Context cost**                 | Only meta tools in context, app tools loaded on demand                                                                                                                                  | Every tool schema you select is loaded upfront                                        |
+| **Guidance**                     | Search returns recommended steps and common pitfalls alongside schemas                                                                                                                  | You get tool schemas only                                                             |
+| **Memory**                       | Meta tools share context across calls, storing discovered IDs and relationships                                                                                                         | You manage state between calls                                                        |
+| **Auth**                         | [In-chat](/docs/authenticating-users/in-chat-authentication): agent prompts the user to connect when needed. Also supports [manual](/docs/authenticating-users/manually-authenticating) | You build the auth flow with [connect links](/docs/tools-direct/authenticating-tools) |
+| **[Workbench](/docs/workbench)** | Built in, large responses offloaded automatically                                                                                                                                       | Not available                                                                         |
+| **Human approval**               | You configure approval rules on the session. Harder to intercept individual calls since tools are discovered dynamically                                                                | You intercept before each call in your code                                           |
+| **Latency**                      | Multiple LLM turns (search, then execute)                                                                                                                                               | Single call                                                                           |
+
+Sessions are configurable. You can [enable or disable specific toolkits](/docs/toolkits/enable-and-disable-toolkits), set [auth configs](/docs/auth-configuration/custom-auth-configs) for white-labeled OAuth, and pin specific [connected accounts](/docs/configuring-sessions#account-selection). See [Configuring Sessions](/docs/configuring-sessions) for the full list.
+
+# Sessions
+
+`composio.create()` returns [meta tools](/docs/tools-and-toolkits#meta-tools):
+
+**Python:**
+
+```python
+from composio import Composio
+from composio_openai import OpenAIProvider
+
+composio = Composio(provider=OpenAIProvider())
+session = composio.create(user_id="user_123")
+tools = session.tools()
+# Returns meta tools like COMPOSIO_SEARCH_TOOLS, COMPOSIO_MANAGE_CONNECTIONS,
+# COMPOSIO_MULTI_EXECUTE_TOOL, COMPOSIO_REMOTE_WORKBENCH, etc.
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+import { OpenAIProvider } from '@composio/openai';
+
+const composio = new Composio({
+  apiKey: process.env.COMPOSIO_API_KEY,
+  provider: new OpenAIProvider(),
+});
+const session = await composio.create("user_123");
+const tools = await session.tools();
+// Returns meta tools like COMPOSIO_SEARCH_TOOLS, COMPOSIO_MANAGE_CONNECTIONS,
+// COMPOSIO_MULTI_EXECUTE_TOOL, COMPOSIO_REMOTE_WORKBENCH, etc.
+```
+
+The agent discovers app tools through `COMPOSIO_SEARCH_TOOLS`:
+
+```
+User: "Create a GitHub issue for the login bug"
+
+> Agent calls COMPOSIO_SEARCH_TOOLS({ query: "create github issue" })
+  Returns: GITHUB_CREATE_ISSUE schema + connection status
+
+> Agent calls COMPOSIO_MANAGE_CONNECTIONS({ toolkits: ["github"] })
+  Returns: confirms connected (or auth link if not)
+
+> Agent calls COMPOSIO_MULTI_EXECUTE_TOOL({ tool: "GITHUB_CREATE_ISSUE", args: {...} })
+  Returns: issue details
+
+Agent: "Created issue #42 on your-org/your-repo"
+```
+
+> `session.tools()` returns **meta tools** (COMPOSIO\_SEARCH\_TOOLS, etc.), not app tools (GMAIL\_SEND\_EMAIL, etc.). The agent discovers app tools at runtime through search. For app tools directly, use direct execution.
+
+## Configuration
+
+Restrict toolkits, set auth configs, pin connected accounts:
+
+**Python:**
+
+```python
+session = composio.create(
+    user_id="user_123",
+    toolkits=["github", "gmail"],
+    auth_configs={"github": "ac_my_config"},
+    connected_accounts={"gmail": "ca_work"},
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123", {
+  toolkits: ["github", "gmail"],
+  authConfigs: { github: "ac_my_config" },
+  connectedAccounts: { gmail: "ca_work" },
+});
+```
+
+See [Configuring Sessions](/docs/configuring-sessions) for details.
+
+# Direct execution
+
+Fetch tools by slug or toolkit. Pass them to your LLM or call `tools.execute()` without one.
+
+**Python:**
+
+```python
+from composio import Composio
+from composio_openai import OpenAIProvider
+
+composio = Composio(provider=OpenAIProvider())
+
+# Fetch specific tools
+tools = composio.tools.get(
+    user_id="user_123",
+    tools=["GITHUB_CREATE_ISSUE", "GITHUB_LIST_ISSUES"]
+)
+
+# Or by toolkit
+tools = composio.tools.get(
+    user_id="user_123",
+    toolkits=["github"],
+    limit=50
+)
+
+# Execute without an LLM
+result = composio.tools.execute(
+    "GITHUB_CREATE_ISSUE",
+    user_id="user_123",
+    arguments={"owner": "my-org", "repo": "my-repo", "title": "Fix login bug"}
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+import { OpenAIProvider } from '@composio/openai';
+
+const composio = new Composio({
+  apiKey: process.env.COMPOSIO_API_KEY,
+  provider: new OpenAIProvider(),
+});
+
+// Fetch specific tools
+const tools = await composio.tools.get("user_123", {
+  tools: ["GITHUB_CREATE_ISSUE", "GITHUB_LIST_ISSUES"],
+});
+
+// Or by toolkit
+const allTools = await composio.tools.get("user_123", {
+  toolkits: ["github"],
+  limit: 50,
+});
+
+// Execute without an LLM
+const result = await composio.tools.execute("GITHUB_CREATE_ISSUE", {
+  userId: "user_123",
+  arguments: { owner: "my-org", repo: "my-repo", title: "Fix login bug" },
+});
+```
+
+> `tools.get()` returns 20 tools by default. When fetching from multiple toolkits (e.g., `toolkits=["gmail", "github", "tavily"]`), the limit may cut off tools from later toolkits. Increase `limit` or fetch each toolkit separately.
+
+With direct execution, you manage [auth configs](/docs/auth-configuration/custom-auth-configs), [connect links](/docs/tools-direct/authenticating-tools), and [toolkit versioning](/docs/tools-direct/toolkit-versioning) yourself.
+
+# Migrating
+
+See the [migration guide](/docs/migration-guide/direct-to-sessions). Auth configs and connected accounts carry over.
+
+# Next steps
+
+- [Quickstart](/docs/quickstart): Build an agent with sessions
+
+- [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, and connected accounts
+
+- [Direct Tool Execution](/docs/tools-direct/executing-tools): Fetch and execute specific tools
+
+---

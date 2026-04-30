@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
 source_hash: "5e25050dee2cb299af47519c1c9aa341d98230d654762ba94089116ea5d76362"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/fireworks.md"
 original_doc_path: "providers/fireworks.md"
 duplicate_index: 1

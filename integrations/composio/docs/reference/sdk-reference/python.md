@@ -1,0 +1,107 @@
+---
+type: composio_doc
+title: "Python SDK Reference"
+source: "https://docs.composio.dev/reference/sdk-reference/python.md"
+source_hash: "9a4a4f02c54d28a8b640afcaf0ae6f754c9c2fa9c2072e40098db3b90611b88e"
+doc_path: "reference/sdk-reference/python.md"
+original_doc_path: "reference/sdk-reference/python.md"
+duplicate_index: 1
+---
+
+# Python SDK Reference (/reference/sdk-reference/python)
+Source: https://docs.composio.dev/reference/sdk-reference/python.md
+
+
+# Python SDK Reference
+
+Complete API reference for the `composio` Python package.
+
+# Installation
+
+```bash
+pip install composio
+```
+
+Or with uv:
+
+```bash
+uv add composio
+```
+
+# Classes
+
+| Class                                                                        | Description                                                                         |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`Composio`](/reference/sdk-reference/python/composio)                       | Composio SDK for Python.  Generic parameters: TTool: The individual tool type re... |
+| [`Tools`](/reference/sdk-reference/python/tools)                             | Tools class definition  This class is used to manage tools in the Composio SDK. ... |
+| [`Toolkits`](/reference/sdk-reference/python/toolkits)                       | Toolkits are a collectiono of tools that can be used to perform various tasks. T... |
+| [`Triggers`](/reference/sdk-reference/python/triggers)                       | Triggers (instance) class                                                           |
+| [`ConnectedAccounts`](/reference/sdk-reference/python/connected-accounts)    | Manage connected accounts.  This class is used to manage connected accounts in t... |
+| [`AuthConfigs`](/reference/sdk-reference/python/auth-configs)                | Manage authentication configurations.                                               |
+| [`MCP`](/reference/sdk-reference/python/mcp)                                 | MCP (Model Control Protocol) class. Provides enhanced MCP server operations  Thi... |
+| [`ToolRouterSession`](/reference/sdk-reference/python/tool-router-session)   | Tool router session containing session information and methods.  Generic Paramet... |
+| [`SessionContextImpl`](/reference/sdk-reference/python/session-context-impl) | Concrete implementation of SessionContext.  One instance is created per session ... |
+
+# Quick Start
+
+```python
+from composio import Composio
+
+composio = Composio(api_key="your-api-key")
+
+# Get tools for a user
+tools = composio.tools.get("user-123", toolkits=["github"])
+
+# Execute a tool
+result = composio.tools.execute(
+    "GITHUB_GET_REPOS",
+    arguments={"owner": "composio"},
+    user_id="user-123"
+)
+```
+
+# Decorators
+
+## before\_execute
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L183)
+
+```python
+@before_execute(modifier: BeforeExecute | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
+def my_modifier(...):
+    ...
+```
+
+## after\_execute
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L144)
+
+```python
+@after_execute(modifier: AfterExecute | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
+def my_modifier(...):
+    ...
+```
+
+## before\_file\_upload
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L236)
+
+```python
+@before_file_upload(modifier: BeforeFileUploadCallable | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
+def my_modifier(path: str, tool: str, toolkit: str) -> str | bool:
+    ...
+```
+
+Builds a [Modifier](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py) for the file-upload hook. See [Before file upload (Python)](/docs/tools-direct/modify-tool-behavior/before-execution-modifiers#before-file-upload-python) for usage and examples.
+
+## schema\_modifier
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L222)
+
+```python
+@schema_modifier(modifier: SchemaModifier | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
+def my_modifier(...):
+    ...
+```
+
+---

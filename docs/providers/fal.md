@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Fal"
 source: "https://docs.openclaw.ai/providers/fal"
 source_hash: "a852c49d0f389f1ebe8e166e26f6cae4b5295834ab670ed3d84b2ff5d1bc7dbe"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/fal.md"
 original_doc_path: "providers/fal.md"
 duplicate_index: 1

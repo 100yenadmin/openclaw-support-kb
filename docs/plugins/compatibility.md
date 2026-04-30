@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
 source_hash: "d1b3ff45e2b6f6f796d7a7cfb51a2255882625af87e8f9aa19b4e41a503c6110"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/compatibility.md"
 original_doc_path: "plugins/compatibility.md"
 duplicate_index: 1

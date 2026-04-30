@@ -1,0 +1,426 @@
+---
+type: composio_doc
+title: "ConnectedAccounts"
+source: "https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md"
+source_hash: "f19a317e83a48d0e642cfa492eb7728b21dce8024f156a87e3798f945b534292"
+doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
+original_doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
+duplicate_index: 1
+---
+
+# ConnectedAccounts (/reference/sdk-reference/typescript/connected-accounts)
+Source: https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md
+
+
+# Usage
+
+Access this class through the `composio.connectedAccounts` property:
+
+```typescript
+const composio = new Composio({ apiKey: 'your-api-key' });
+const result = await composio.connectedAccounts.list();
+```
+
+# Methods
+
+## delete()
+
+Deletes a connected account.
+
+This method permanently removes a connected account from the Composio platform.
+This action cannot be undone.
+
+```typescript
+async delete(nanoid: string): Promise
+```
+
+**Parameters**
+
+| Name     | Type     | Description                                              |
+| -------- | -------- | -------------------------------------------------------- |
+| `nanoid` | `string` | The unique identifier of the connected account to delete |
+
+**Returns**
+
+`Promise` — The deletion response
+
+**Example**
+
+```typescript
+// Delete a connected account
+await composio.connectedAccounts.delete('conn_abc123');
+```
+
+***
+
+## disable()
+
+Disable a connected account
+
+```typescript
+async disable(nanoid: string): Promise
+```
+
+**Parameters**
+
+| Name     | Type     | Description                                |
+| -------- | -------- | ------------------------------------------ |
+| `nanoid` | `string` | Unique identifier of the connected account |
+
+**Returns**
+
+`Promise` — Updated connected account details
+
+**Example**
+
+```typescript
+// Disable a connected account
+const disabledAccount = await composio.connectedAccounts.disable('conn_abc123');
+console.log(disabledAccount.isDisabled); // true
+
+// You can also use updateStatus with a reason
+// const disabledAccount = await composio.connectedAccounts.updateStatus('conn_abc123', {
+//   enabled: false,
+//   reason: 'No longer needed'
+// });
+```
+
+***
+
+## enable()
+
+Enable a connected account
+
+```typescript
+async enable(nanoid: string): Promise
+```
+
+**Parameters**
+
+| Name     | Type     | Description                                |
+| -------- | -------- | ------------------------------------------ |
+| `nanoid` | `string` | Unique identifier of the connected account |
+
+**Returns**
+
+`Promise` — Updated connected account details
+
+**Example**
+
+```typescript
+// Enable a previously disabled connected account
+const enabledAccount = await composio.connectedAccounts.enable('conn_abc123');
+console.log(enabledAccount.isDisabled); // false
+```
+
+***
+
+## get()
+
+Retrieves a specific connected account by its ID.
+
+This method fetches detailed information about a single connected account
+and transforms the response to the SDK's standardized format.
+
+```typescript
+async get(nanoid: string): Promise<...>
+```
+
+**Parameters**
+
+| Name     | Type     | Description                                    |
+| -------- | -------- | ---------------------------------------------- |
+| `nanoid` | `string` | The unique identifier of the connected account |
+
+**Returns**
+
+`Promise<...>` — The connected account details
+
+**Example**
+
+```typescript
+// Get a connected account by ID
+const account = await composio.connectedAccounts.get('conn_abc123');
+console.log(account.status); // e.g., 'ACTIVE'
+console.log(account.toolkit.slug); // e.g., 'github'
+```
+
+***
+
+## initiate()
+
+Compound function to create a new connected account.
+This function creates a new connected account and returns a connection request.
+Users can then wait for the connection to be established using the `waitForConnection` method.
+
+```typescript
+async initiate(userId: string, authConfigId: string, options?: object): Promise
+```
+
+**Parameters**
+
+| Name           | Type     | Description                                  |
+| -------------- | -------- | -------------------------------------------- |
+| `userId`       | `string` | User ID of the connected account             |
+| `authConfigId` | `string` | Auth config ID of the connected account      |
+| `options?`     | `object` | Options for creating a new connected account |
+
+**Returns**
+
+`Promise` — Connection request object
+
+**Example**
+
+```typescript
+// For OAuth2 authentication
+const connectionRequest = await composio.connectedAccounts.initiate(
+  'user_123',
+  'auth_config_123',
+  {
+    callbackUrl: 'https://your-app.com/callback',
+    config: AuthScheme.OAuth2({
+      access_token: 'your_access_token',
+      token_type: 'Bearer'
+    })
+  }
+);
+
+// For API Key authentication
+const connectionRequest = await composio.connectedAccounts.initiate(
+  'user_123',
+  'auth_config_123',
+  {
+    config: AuthScheme.ApiKey({
+      api_key: 'your_api_key'
+    })
+  }
+);
+
+// For Basic authentication
+const connectionRequest = await composio.connectedAccounts.initiate(
+  'user_123',
+  'auth_config_123',
+  {
+    config: AuthScheme.Basic({
+      username: 'your_username',
+      password: 'your_password'
+    })
+  }
+);
+```
+
+***
+
+## link()
+
+```typescript
+async link(userId: string, authConfigId: string, options?: { alias?: string; callbackUrl?: string }): Promise
+```
+
+**Parameters**
+
+| Name           | Type     | Description                                                                      |
+| -------------- | -------- | -------------------------------------------------------------------------------- |
+| `userId`       | `string` | \{string} - The external user ID to create the connected account for.            |
+| `authConfigId` | `string` | \{string} - The auth config ID to create the connected account for.              |
+| `options?`     | `object` | \{CreateConnectedAccountOptions} - Options for creating a new connected account. |
+
+**Returns**
+
+`Promise` — Connection request object
+
+**Example**
+
+```typescript
+// create a connection request and redirect the user to the redirect url
+const connectionRequest = await composio.connectedAccounts.link('user_123', 'auth_config_123');
+const redirectUrl = connectionRequest.redirectUrl;
+console.log(`Visit: ${redirectUrl} to authenticate your account`);
+
+// Wait for the connection to be established
+const connectedAccount = await connectionRequest.waitForConnection()
+```
+
+```typescript
+// create a connection request and redirect the user to the redirect url
+const connectionRequest = await composio.connectedAccounts.link('user_123', 'auth_config_123', {
+  callbackUrl: 'https://your-app.com/callback'
+});
+const redirectUrl = connectionRequest.redirectUrl;
+console.log(`Visit: ${redirectUrl} to authenticate your account`);
+
+// Wait for the connection to be established
+const connectedAccount = await composio.connectedAccounts.waitForConnection(connectionRequest.id);
+```
+
+***
+
+## list()
+
+Lists all connected accounts based on provided filter criteria.
+
+This method retrieves connected accounts from the Composio API with optional filtering.
+
+```typescript
+async list(query?: object): Promise<...>
+```
+
+**Parameters**
+
+| Name     | Type     | Description                                                |
+| -------- | -------- | ---------------------------------------------------------- |
+| `query?` | `object` | Optional query parameters for filtering connected accounts |
+
+**Returns**
+
+`Promise<...>` — A paginated list of connected accounts
+
+**Example**
+
+```typescript
+// List all connected accounts
+const allAccounts = await composio.connectedAccounts.list();
+
+// List accounts for a specific user
+const userAccounts = await composio.connectedAccounts.list({
+  userIds: ['user123']
+});
+
+// List accounts for a specific toolkit
+const githubAccounts = await composio.connectedAccounts.list({
+  toolkitSlugs: ['github']
+});
+```
+
+***
+
+## refresh()
+
+Refreshes a connected account's authentication credentials.
+
+This method attempts to refresh OAuth tokens or other credentials associated with
+the connected account. This is useful when a token has expired or is about to expire.
+
+```typescript
+async refresh(nanoid: string, options?: { redirectUrl?: string; validateCredentials?: boolean }): Promise
+```
+
+**Parameters**
+
+| Name       | Type     | Description                                               |
+| ---------- | -------- | --------------------------------------------------------- |
+| `nanoid`   | `string` | The unique identifier of the connected account to refresh |
+| `options?` | `object` |                                                           |
+
+**Returns**
+
+`Promise` — The response containing the refreshed account details
+
+**Example**
+
+```typescript
+// Refresh a connected account's credentials
+const refreshedAccount = await composio.connectedAccounts.refresh('conn_abc123');
+```
+
+***
+
+## update()
+
+Update a connected account's alias and/or credentials.
+
+```typescript
+async update(nanoid: string, params: ConnectedAccountUpdateStatusParams): Promise
+```
+
+**Parameters**
+
+| Name     | Type                                 | Description                                    |
+| -------- | ------------------------------------ | ---------------------------------------------- |
+| `nanoid` | `string`                             | The unique identifier of the connected account |
+| `params` | `ConnectedAccountUpdateStatusParams` | The update parameters                          |
+
+**Returns**
+
+`Promise` — The update response
+
+**Example**
+
+```typescript
+// Disable an account
+await composio.connectedAccounts.update('ca_abc123', { enabled: false });
+```
+
+***
+
+## updateStatus()
+
+Update the status of a connected account
+
+```typescript
+async updateStatus(nanoid: string, params: ConnectedAccountUpdateStatusParams): Promise
+```
+
+**Parameters**
+
+| Name     | Type                                 | Description                                |
+| -------- | ------------------------------------ | ------------------------------------------ |
+| `nanoid` | `string`                             | Unique identifier of the connected account |
+| `params` | `ConnectedAccountUpdateStatusParams` | Parameters for updating the status         |
+
+**Returns**
+
+`Promise` — Updated connected account details
+
+**Example**
+
+```typescript
+// Enable a connected account
+const updatedAccount = await composio.connectedAccounts.updateStatus('conn_abc123', {
+  enabled: true
+});
+
+// Disable a connected account with a reason
+const disabledAccount = await composio.connectedAccounts.updateStatus('conn_abc123', {
+  enabled: false,
+  reason: 'Token expired'
+});
+```
+
+***
+
+## waitForConnection()
+
+Waits for a connection request to complete and become active.
+
+This method continuously polls the Composio API to check the status of a connection
+until it either becomes active, enters a terminal error state, or times out.
+
+```typescript
+async waitForConnection(connectedAccountId: string, timeout?: number): Promise<...>
+```
+
+**Parameters**
+
+| Name                 | Type     | Description                                                |
+| -------------------- | -------- | ---------------------------------------------------------- |
+| `connectedAccountId` | `string` | The ID of the connected account to wait for                |
+| `timeout?`           | `number` | Maximum time to wait in milliseconds (default: 60 seconds) |
+
+**Returns**
+
+`Promise<...>` — The finalized connected account data
+
+**Example**
+
+```typescript
+// Wait for a connection to complete with default timeout
+const connectedAccount = await composio.connectedAccounts.waitForConnection('conn_123abc');
+
+// Wait with a custom timeout of 2 minutes
+const connectedAccount = await composio.connectedAccounts.waitForConnection('conn_123abc', 120000);
+```
+
+***
+
+---

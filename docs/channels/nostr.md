@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Nostr"
 source: "https://docs.openclaw.ai/channels/nostr"
 source_hash: "c77410c8cf48426cb7e870337873903f9a764fa279aee5f5aded33a2439ea0fa"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/nostr.md"
 original_doc_path: "channels/nostr.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Vercel AI gateway"
 source: "https://docs.openclaw.ai/providers/vercel-ai-gateway"
 source_hash: "058b1ec7d5c130b1c561f2b97dab0a29610ac953cff74a849590e7faf250d4cd"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/vercel-ai-gateway.md"
 original_doc_path: "providers/vercel-ai-gateway.md"
 duplicate_index: 1

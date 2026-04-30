@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Inferrs"
 source: "https://docs.openclaw.ai/providers/inferrs"
 source_hash: "ebfdfc419444d1afc9300e3aff926ad252f9e2ebc581f51b91d5d3d27efb47ed"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/inferrs.md"
 original_doc_path: "providers/inferrs.md"
 duplicate_index: 1

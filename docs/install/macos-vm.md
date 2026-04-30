@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "macOS VMs"
 source: "https://docs.openclaw.ai/install/macos-vm"
 source_hash: "c11c5dbdd123ada7ccb6f4bf5f63ab65dcde30a69a0e38846b8b2c21dd8c238a"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "install/macos-vm.md"
 original_doc_path: "install/macos-vm.md"
 duplicate_index: 1

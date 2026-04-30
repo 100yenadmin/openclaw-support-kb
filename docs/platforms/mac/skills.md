@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Skills (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/skills"
 source_hash: "c9bcd945665537acdaacf82bec1c3853490b0b682ff690b78c26ac756133835f"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/skills.md"
 original_doc_path: "platforms/mac/skills.md"
 duplicate_index: 1

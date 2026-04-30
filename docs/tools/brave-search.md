@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Brave search"
 source: "https://docs.openclaw.ai/tools/brave-search"
 source_hash: "3149c1b5311f6ff22000acf26f67e23e18e6c4b00fe37915811bf8836428aeee"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/brave-search.md"
 original_doc_path: "tools/brave-search.md"
 duplicate_index: 1

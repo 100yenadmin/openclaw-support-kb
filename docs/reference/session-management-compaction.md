@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
 source_hash: "b6f53fe5f59ea80742be6d458db5fb5009b3b4f7d734cd49e1dbda8ebec1b841"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/session-management-compaction.md"
 original_doc_path: "reference/session-management-compaction.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Network proxy"
 source: "https://docs.openclaw.ai/security/network-proxy"
 source_hash: "a2d7cd0e018d0158f007edd135d9db4d4364f3e9749bca38d5ff5ab7bc80d59c"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "security/network-proxy.md"
 original_doc_path: "security/network-proxy.md"
 duplicate_index: 1

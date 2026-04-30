@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Migration guide"
 source: "https://docs.openclaw.ai/install/migrating"
 source_hash: "be902b16604667b9f12771041779a846af228337d23c80babaa4a69111b28008"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "install/migrating.md"
 original_doc_path: "install/migrating.md"
 duplicate_index: 1

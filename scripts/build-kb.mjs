@@ -4,12 +4,15 @@ import path from "node:path";
 import {
   AGENT_SCAN_URL,
   AWESOME_SKILLS_URL,
-  COMPOSIO_OPENCLAW_URL,
+  COMPOSIO_DOCS_FULL_URL,
+  COMPOSIO_DOCS_INDEX_URL,
+  COMPOSIO_TOOLKITS_URL,
   DEFAULT_MIN_GBRAIN_VERSION,
   DOCS_URL,
   RELEASES_URL,
   agentScanPolicyPage,
-  composioOpenClawPolicyPage,
+  composioIntegrationPolicyPage,
+  composioToolkitCatalogPage,
   artifactSha256,
   assertManagedSourceTarget,
   ensureCleanDir,
@@ -19,8 +22,10 @@ import {
   frontmatterPage,
   repoRootFromImportMeta,
   sanitizeSkillsIndex,
+  sanitizeReleases,
   selectRelease,
   sha256,
+  splitComposioLlmsFull,
   splitLlmsFull,
   writeTextFile,
   writeSourceMarker,
@@ -138,34 +143,94 @@ async function writeSecurity(outDir, generatedAt) {
   );
 }
 
-async function writeIntegrations(outDir, composioPage, generatedAt) {
-  await ensureCleanDir(path.join(outDir, "integrations"));
-  const body = composioOpenClawPolicyPage();
-  await writeTextFile(
-    path.join(outDir, "integrations", "composio-openclaw.md"),
-    frontmatterPage({
-      type: "openclaw_integration_guide",
-      title: "Composio For OpenClaw",
-      source: COMPOSIO_OPENCLAW_URL,
-      generatedAt,
-      body,
-      extra: { source_snapshot_sha256: sha256(composioPage) },
-    }),
-  );
+async function writeComposioDocs(outDir, docsFullText, generatedAt) {
+  const docsDir = path.join(outDir, "integrations", "composio", "docs");
+  await ensureCleanDir(docsDir);
+  const pages = splitComposioLlmsFull(docsFullText);
+  const seenPaths = new Map();
+  for (const page of pages) {
+    const duplicateIndex = (seenPaths.get(page.path) ?? 0) + 1;
+    seenPaths.set(page.path, duplicateIndex);
+    const parsed = path.parse(page.path);
+    const outputPath =
+      duplicateIndex === 1 ? page.path : path.join(parsed.dir, `${parsed.name}-${duplicateIndex}${parsed.ext || ".md"}`);
+    await writeTextFile(
+      path.join(docsDir, outputPath),
+      frontmatterPage({
+        type: "composio_doc",
+        title: page.title,
+        source: page.source,
+        generatedAt,
+        body: page.body,
+        extra: { doc_path: outputPath, original_doc_path: page.path, duplicate_index: duplicateIndex },
+      }),
+    );
+  }
+  return pages;
 }
 
-async function writeManifest(outDir, { channel, generatedAt, docsText, pages, releases, minGbrainVersion }) {
+async function writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, composioToolkitsHtml }, generatedAt) {
+  await ensureCleanDir(path.join(outDir, "integrations"));
+  const composioDir = path.join(outDir, "integrations", "composio");
+  await ensureCleanDir(composioDir);
+  const toolkitCatalog = composioToolkitCatalogPage(composioToolkitsHtml);
+  const composioPages = await writeComposioDocs(outDir, composioDocsFull, generatedAt);
+  await writeTextFile(
+    path.join(composioDir, "llms-index.md"),
+    frontmatterPage({
+      type: "composio_docs_index",
+      title: "Composio Documentation Index",
+      source: COMPOSIO_DOCS_INDEX_URL,
+      generatedAt,
+      body: composioDocsIndex,
+    }),
+  );
+  await writeTextFile(
+    path.join(composioDir, "toolkits.md"),
+    frontmatterPage({
+      type: "composio_toolkit_catalog",
+      title: "Composio Toolkit Catalog Snapshot",
+      source: COMPOSIO_TOOLKITS_URL,
+      generatedAt,
+      body: toolkitCatalog,
+      extra: { catalog_snapshot_sha256: sha256(toolkitCatalog) },
+    }),
+  );
+  const body = composioIntegrationPolicyPage();
+  await writeTextFile(
+    path.join(composioDir, "guide.md"),
+    frontmatterPage({
+      type: "openclaw_integration_guide",
+      title: "Composio Integration Guide For OpenClaw Agents",
+      source: COMPOSIO_DOCS_INDEX_URL,
+      generatedAt,
+      body,
+      extra: {
+        docs_full_sha256: sha256(composioDocsFull),
+        docs_index_sha256: sha256(composioDocsIndex),
+        toolkit_catalog_sha256: sha256(toolkitCatalog),
+      },
+    }),
+  );
+  return composioPages;
+}
+
+async function writeManifest(outDir, { channel, generatedAt, docsText, pages, releases, minGbrainVersion, composioDocsFull, composioDocsIndex, composioToolkitsHtml, composioPages }) {
   const selected = selectRelease(releases, channel);
+  const toolkitCatalog = composioToolkitCatalogPage(composioToolkitsHtml);
   const manifest = {
     schemaVersion: 1,
     channel,
     generatedAt,
     openclawReleaseTag: selected?.tag_name ?? null,
     docsSha256: sha256(docsText),
+    composioDocsSha256: sha256(composioDocsFull),
+    composioDocsIndexSha256: sha256(composioDocsIndex),
+    composioToolkitsSha256: sha256(toolkitCatalog),
     artifactSha256: await artifactSha256(outDir),
-    sourceCount: pages.length,
+    sourceCount: pages.length + composioPages.length + 3,
     minGbrainVersion,
-    notes: "Local-first OpenClaw support KB for GBrain. Search locally before escalating.",
+    notes: "Local-first OpenClaw support KB for GBrain. Includes OpenClaw docs plus Composio docs/toolkit catalog for approved app integrations.",
   };
   await writeTextFile(path.join(outDir, "kb-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
   return manifest;
@@ -181,19 +246,22 @@ async function main() {
   if (path.resolve(outDir) !== repoRoot) await writeSourceMarker(outDir);
   await copyStaticMarkdown(outDir);
 
-  const [docsText, releases, skillsReadme, agentScanReadme, composioPage] = await Promise.all([
+  const [docsText, rawReleases, skillsReadme, agentScanReadme, composioDocsIndex, composioDocsFull, composioToolkitsHtml] = await Promise.all([
     fetchText(DOCS_URL),
     fetchJson(RELEASES_URL),
     fetchText(AWESOME_SKILLS_URL),
     fetchText(AGENT_SCAN_URL),
-    fetchText(COMPOSIO_OPENCLAW_URL),
+    fetchText(COMPOSIO_DOCS_INDEX_URL),
+    fetchText(COMPOSIO_DOCS_FULL_URL),
+    fetchText(COMPOSIO_TOOLKITS_URL),
   ]);
+  const releases = sanitizeReleases(rawReleases);
 
   const pages = await writeDocs(outDir, docsText, generatedAt);
   await writeReleases(outDir, releases, options.channel);
   await writeSkillsIndex(outDir, skillsReadme, generatedAt);
   await writeSecurity(outDir, generatedAt);
-  await writeIntegrations(outDir, composioPage, generatedAt);
+  const composioPages = await writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, composioToolkitsHtml }, generatedAt);
   const manifest = await writeManifest(outDir, {
     channel: options.channel,
     generatedAt,
@@ -201,6 +269,10 @@ async function main() {
     pages,
     releases,
     minGbrainVersion: options.minGbrainVersion,
+    composioDocsFull,
+    composioDocsIndex,
+    composioToolkitsHtml,
+    composioPages,
   });
 
   console.log(

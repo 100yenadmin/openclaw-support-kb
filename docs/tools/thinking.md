@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
 source_hash: "289a26b77b458af1937a4a7f156de4329fe909a7d9c46c1bcc1bf8af5cc58f4d"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/thinking.md"
 original_doc_path: "tools/thinking.md"
 duplicate_index: 1

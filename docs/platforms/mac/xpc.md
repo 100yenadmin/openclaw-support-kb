@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "macOS IPC"
 source: "https://docs.openclaw.ai/platforms/mac/xpc"
 source_hash: "06f53119b7a279fb278c6dc356c805cdd88fc691425523b95d675400052f65e9"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/xpc.md"
 original_doc_path: "platforms/mac/xpc.md"
 duplicate_index: 1

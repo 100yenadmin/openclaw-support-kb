@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Vydra"
 source: "https://docs.openclaw.ai/providers/vydra"
 source_hash: "86fee54ea79b64811521304b30dd5a8fab4099c87ebcdf5b4c878e89d19081c5"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/vydra.md"
 original_doc_path: "providers/vydra.md"
 duplicate_index: 1

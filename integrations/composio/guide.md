@@ -1,15 +1,18 @@
 ---
 type: openclaw_integration_guide
-title: "Composio For OpenClaw"
-source: "https://composio.dev/claw"
-source_hash: "239e633e887159044acebd347a71ffe2b26c0b5b2ed1ed28e646bda4f907b2fc"
-generated_at: "2026-04-30T13:41:35.154Z"
-source_snapshot_sha256: "cc6c791e96f2f9857f8ce2e8979dd2e871dc8e3b395a818cd5607ad88e139ca2"
+title: "Composio Integration Guide For OpenClaw Agents"
+source: "https://docs.composio.dev/llms.txt"
+source_hash: "6d5245aa9e5c9d1ce58fc5c837bc3ade492e457dd620b9bf6f98cb253cf40f72"
+docs_full_sha256: "005ea08e317f23aa28b7aa797930675289c9734a6a8daabb888342d635235b7a"
+docs_index_sha256: "469b157ab3d8e61e35399c41f34f0c4dcbc8d26d692bd7f2ef210b5035e331a7"
+toolkit_catalog_sha256: "8cd3515d4da44e0d7a0866d7d0183232fd6657dd9cbc77fd648181b2079a8b65"
 ---
 
-# Composio For OpenClaw
+# Composio Integration Guide For OpenClaw Agents
 
-Source: https://composio.dev/claw
+Source: https://docs.composio.dev/llms.txt
+Source: https://docs.composio.dev/llms-full.txt
+Source: https://composio.dev/toolkits
 
 Use this page when the user wants a small-business or chief-of-staff workflow that may need SaaS integrations such as CRM, email, calendar, support, finance, e-commerce, or content tools.
 
@@ -19,14 +22,19 @@ Use this page when the user wants a small-business or chief-of-staff workflow th
 - Prefer a native/bundled/OpenClaw skill when it already solves the task locally.
 - Prefer Composio over browser automation for supported app actions after the user approves connecting the relevant app.
 - Do not add Composio or connect apps without user approval.
+- Search `integrations/composio/toolkits.md` for app coverage before proposing Composio.
+- Search `integrations/composio/docs/` for current setup, auth, tools/toolkits, MCP, and troubleshooting guidance.
 
-## OpenClaw Setup Shape
+## Composio Setup Shape
 
-Composio's OpenClaw setup page describes an MCP server named `composio` using HTTP transport at `https://connect.composio.dev/mcp` and says not to add authentication headers because OAuth is handled by Composio.
+Composio's current docs describe two integration modes: Native Tools using a provider package, and MCP using a session MCP URL. Treat the local Composio docs as the source of truth before suggesting setup steps.
 
 Use current OpenClaw MCP docs before changing config:
 
 ```bash
+gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md"
+gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md"
+gbrain search "Source: https://composio.dev/toolkits"
 gbrain search "Source: https://docs.openclaw.ai/cli/mcp"
 gbrain search "Source: https://docs.openclaw.ai/gateway/configuration-reference"
 openclaw mcp list

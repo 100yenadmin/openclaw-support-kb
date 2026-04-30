@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
 source_hash: "ebde0c601abf103bf253ca7ffc854c9a4b2d85dee3453f643a4bc2c3d90c2a4c"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/browser.md"
 original_doc_path: "tools/browser.md"
 duplicate_index: 1

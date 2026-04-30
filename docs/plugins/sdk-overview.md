@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
 source_hash: "67769bf374a5f9990c497ffc22656d44e3a331bfc76875232c984096aa8a94ac"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/sdk-overview.md"
 original_doc_path: "plugins/sdk-overview.md"
 duplicate_index: 1

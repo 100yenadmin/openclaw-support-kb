@@ -49,7 +49,9 @@ The builder fetches:
 - `https://api.github.com/repos/openclaw/openclaw/releases`
 - `https://raw.githubusercontent.com/VoltAgent/awesome-openclaw-skills/main/README.md`
 - `https://raw.githubusercontent.com/snyk/agent-scan/main/README.md`
-- `https://composio.dev/claw`
+- `https://docs.composio.dev/llms.txt`
+- `https://docs.composio.dev/llms-full.txt`
+- `https://composio.dev/toolkits`
 
 It writes source-preserving docs/release Markdown, source-indexed policy
 summaries, and `kb-manifest.json`.
@@ -57,8 +59,8 @@ Run `node scripts/check-manifest.mjs` after local edits to confirm the manifest 
 matches the indexed artifact.
 
 Skill discovery is intentionally layered: local VoltAgent snapshot, current
-OpenClaw/ClawHub search, Snyk scan attestation before skill install, and
-Composio as an MCP/OAuth integration path for SaaS workflows.
+OpenClaw/ClawHub search, Snyk scan attestation before skill install, and local
+Composio docs/toolkit catalog snapshots for approved SaaS workflows.
 
 Builds refuse to replace arbitrary directories. The default managed target is
 `~/.gbrain/sources/openclaw-support-kb`; non-default build targets need the

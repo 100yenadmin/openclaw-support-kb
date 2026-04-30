@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
 source_hash: "473da38dff578bfdfa230abc672764cb969bace059f25d1423a85286f934d520"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "help/environment.md"
 original_doc_path: "help/environment.md"
 duplicate_index: 1

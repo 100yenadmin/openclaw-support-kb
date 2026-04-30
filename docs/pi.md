@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Pi integration architecture"
 source: "https://docs.openclaw.ai/pi"
 source_hash: "591b57d2f35253bbb6aa374a40772e6ac4a9684e17adbb998e7cba19d3aa77db"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "pi.md"
 original_doc_path: "pi.md"
 duplicate_index: 1

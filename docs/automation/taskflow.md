@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Task flow"
 source: "https://docs.openclaw.ai/automation/taskflow"
 source_hash: "9b0c297f401b74a6a1b1278d6b206ac77f4df39025fffce619c8bd4daea341f8"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "automation/taskflow.md"
 original_doc_path: "automation/taskflow.md"
 duplicate_index: 1

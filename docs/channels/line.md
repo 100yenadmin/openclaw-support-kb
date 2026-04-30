@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "LINE"
 source: "https://docs.openclaw.ai/channels/line"
 source_hash: "9fe92481ff4275a09a58e6fdb733b1594acaf15d2f4270b0dc92ce1b458ecb2a"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/line.md"
 original_doc_path: "channels/line.md"
 duplicate_index: 1

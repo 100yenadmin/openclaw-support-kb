@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Secrets"
 source: "https://docs.openclaw.ai/cli/secrets"
 source_hash: "16e3335f96b6fe858abefbcb1d8ba62ef3621fea16103bdd3c18992df88814b7"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/secrets.md"
 original_doc_path: "cli/secrets.md"
 duplicate_index: 1

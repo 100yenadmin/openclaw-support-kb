@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Docs directory"
 source: "https://docs.openclaw.ai/start/docs-directory"
 source_hash: "0ef2c427268d6375a29b26bd533520076bc641a0bc557e6eec0908ce74455e0a"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/docs-directory.md"
 original_doc_path: "start/docs-directory.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
 source_hash: "41864b150d1db7571f0e60f865a1584b0906743c04901aa1d0115536d5a88429"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/manifest.md"
 original_doc_path: "plugins/manifest.md"
 duplicate_index: 1

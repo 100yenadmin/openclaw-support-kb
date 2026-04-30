@@ -10,7 +10,9 @@ export const RELEASES_URL = "https://api.github.com/repos/openclaw/openclaw/rele
 export const AWESOME_SKILLS_URL =
   "https://raw.githubusercontent.com/VoltAgent/awesome-openclaw-skills/main/README.md";
 export const AGENT_SCAN_URL = "https://raw.githubusercontent.com/snyk/agent-scan/main/README.md";
-export const COMPOSIO_OPENCLAW_URL = "https://composio.dev/claw";
+export const COMPOSIO_DOCS_INDEX_URL = "https://docs.composio.dev/llms.txt";
+export const COMPOSIO_DOCS_FULL_URL = "https://docs.composio.dev/llms-full.txt";
+export const COMPOSIO_TOOLKITS_URL = "https://composio.dev/toolkits";
 
 export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
 export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
@@ -191,10 +193,161 @@ export function splitLlmsFull(text) {
   });
 }
 
+export function composioDocsSourceFromPath(docPath) {
+  const cleanPath = String(docPath || "").trim();
+  if (!cleanPath || !cleanPath.startsWith("/")) return COMPOSIO_DOCS_FULL_URL;
+  return `https://docs.composio.dev${cleanPath}${cleanPath.endsWith(".md") ? "" : ".md"}`;
+}
+
+export function splitComposioLlmsFull(text) {
+  const lines = text.replace(/\r\n/g, "\n").split("\n");
+  const starts = [];
+  let inFence = false;
+  const outputPathForSource = (source) => {
+    const outputPath = docsPathFromSource(source);
+    return outputPath.startsWith("docs/") ? outputPath.slice("docs/".length) : outputPath;
+  };
+
+  for (let i = 0; i < lines.length; i += 1) {
+    if (/^\s*```/.test(lines[i])) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+
+    const pathMatch = /^#\s+(.+?)\s+\((\/[^)]+)\)\s*$/.exec(lines[i]);
+    if (pathMatch) {
+      starts.push({
+        index: i,
+        title: pathMatch[1].trim(),
+        source: composioDocsSourceFromPath(pathMatch[2]),
+        path: outputPathForSource(composioDocsSourceFromPath(pathMatch[2])),
+      });
+      continue;
+    }
+
+    if (i === 0 && /^#\s+Composio Documentation\s*$/.test(lines[i])) {
+      starts.push({
+        index: i,
+        title: "Composio Documentation Overview",
+        source: COMPOSIO_DOCS_FULL_URL,
+        path: "overview.md",
+      });
+      continue;
+    }
+
+    if (/^#\s+Composio SDK\s+/.test(lines[i])) {
+      starts.push({
+        index: i,
+        title: lines[i].replace(/^#\s+/, "").trim(),
+        source: COMPOSIO_DOCS_FULL_URL,
+        path: "ai-code-generator-instructions.md",
+      });
+    }
+  }
+
+  return starts.map((start, idx) => {
+    const end = starts[idx + 1]?.index ?? lines.length;
+    const section = lines.slice(start.index, end);
+    const body = [section[0], `Source: ${start.source}`, "", ...section.slice(1)].join("\n").trimEnd() + "\n";
+    return {
+      title: start.title,
+      source: start.source,
+      path: start.path,
+      body,
+      hash: sha256(body),
+    };
+  });
+}
+
+export function htmlToPlainText(html) {
+  return String(html || "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "\n")
+    .replace(/<style[\s\S]*?<\/style>/gi, "\n")
+    .replace(/<[^>]+>/g, "\n")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\n[ \t]+/g, "\n")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+export function composioToolkitCatalogPage(html) {
+  const text = htmlToPlainText(html);
+  const exploreStart = text.indexOf("Explore Toolkits");
+  const exploreEnd = text.indexOf("Load More", exploreStart);
+  const browseStart = text.indexOf("Browse by Category");
+  const browseEnd = text.indexOf("Never worry about agent reliability", browseStart);
+  const exploreText = exploreStart >= 0 ? text.slice(exploreStart, exploreEnd > exploreStart ? exploreEnd : undefined).trim() : "";
+  const categoryText = browseStart >= 0 ? text.slice(browseStart, browseEnd > browseStart ? browseEnd : undefined).trim() : "";
+  const slugs = [
+    ...new Set(
+      [...String(html || "").matchAll(/href="\/toolkits\/([^"#?]+)"/g)]
+        .map((match) => match[1])
+        .filter((slug) => !slug.startsWith("_next/"))
+        .filter((slug) => !slug.startsWith("logos/"))
+        .filter((slug) => !slug.startsWith("category/"))
+        .filter((slug) => !/\.(?:svg|png|jpg|jpeg|webp|css|js|otf)$/i.test(slug)),
+    ),
+  ];
+  const countMatch = /Showing\s+(\d+)\s+of\s+(\d+)\s+toolkits/i.exec(exploreText);
+
+  return [
+    "# Composio Toolkit Catalog Snapshot",
+    "",
+    `Source: ${COMPOSIO_TOOLKITS_URL}`,
+    "",
+    "Use this local snapshot to discover whether Composio may support an external business app. Re-check live Composio docs/toolkits before changing config or connecting accounts.",
+    "",
+    "## Catalog Count",
+    "",
+    countMatch ? `- Public catalog page showed ${countMatch[1]} of ${countMatch[2]} toolkits in the initial rendered catalog.` : "- Public catalog page advertises 1000+ toolkits.",
+    "",
+    "## Initial Rendered Toolkit Catalog",
+    "",
+    exploreText || "No rendered toolkit text captured.",
+    "",
+    "## Toolkit Slugs Captured From Static Page",
+    "",
+    ...(slugs.length ? slugs.map((slug) => `- ${slug} - ${COMPOSIO_TOOLKITS_URL}/${slug}`) : ["- No toolkit slugs captured."]),
+    "",
+    "## Categories",
+    "",
+    categoryText || "No category text captured.",
+    "",
+  ].join("\n");
+}
+
 export function selectRelease(releases, channel = "stable") {
   const filtered =
     channel === "beta" ? releases.filter((release) => !release.draft) : releases.filter((release) => !release.draft && !release.prerelease);
   return filtered[0] ?? null;
+}
+
+export function sanitizeReleases(releases) {
+  return releases.map((release) => ({
+    html_url: release.html_url,
+    tag_name: release.tag_name,
+    name: release.name,
+    draft: Boolean(release.draft),
+    prerelease: Boolean(release.prerelease),
+    created_at: release.created_at,
+    published_at: release.published_at,
+    body: release.body ?? "",
+    assets: (release.assets ?? []).map((asset) => ({
+      name: asset.name,
+      content_type: asset.content_type,
+      state: asset.state,
+      size: asset.size,
+      digest: asset.digest,
+      created_at: asset.created_at,
+      updated_at: asset.updated_at,
+      browser_download_url: asset.browser_download_url,
+    })),
+  }));
 }
 
 export function formatReleasesMarkdown(releases, channel = "stable") {
@@ -217,7 +370,7 @@ export function frontmatterPage({ type, title, source, generatedAt, body, extra 
     .filter(([, value]) => value !== undefined && value !== null)
     .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
     .join("\n");
-  return `---\ntype: ${type}\ntitle: ${JSON.stringify(title)}\nsource: ${JSON.stringify(source)}\nsource_hash: ${JSON.stringify(sha256(body))}\ngenerated_at: ${JSON.stringify(generatedAt)}${extraLines ? `\n${extraLines}` : ""}\n---\n\n${body.trimEnd()}\n`;
+  return `---\ntype: ${type}\ntitle: ${JSON.stringify(title)}\nsource: ${JSON.stringify(source)}\nsource_hash: ${JSON.stringify(sha256(body))}${extraLines ? `\n${extraLines}` : ""}\n---\n\n${body.trimEnd()}\n`;
 }
 
 export function sanitizeSkillsIndex(readme) {
@@ -305,11 +458,13 @@ export function agentScanPolicyPage() {
   ].join("\n");
 }
 
-export function composioOpenClawPolicyPage() {
+export function composioIntegrationPolicyPage() {
   return [
-    "# Composio For OpenClaw",
+    "# Composio Integration Guide For OpenClaw Agents",
     "",
-    "Source: https://composio.dev/claw",
+    `Source: ${COMPOSIO_DOCS_INDEX_URL}`,
+    `Source: ${COMPOSIO_DOCS_FULL_URL}`,
+    `Source: ${COMPOSIO_TOOLKITS_URL}`,
     "",
     "Use this page when the user wants a small-business or chief-of-staff workflow that may need SaaS integrations such as CRM, email, calendar, support, finance, e-commerce, or content tools.",
     "",
@@ -319,14 +474,19 @@ export function composioOpenClawPolicyPage() {
     "- Prefer a native/bundled/OpenClaw skill when it already solves the task locally.",
     "- Prefer Composio over browser automation for supported app actions after the user approves connecting the relevant app.",
     "- Do not add Composio or connect apps without user approval.",
+    "- Search `integrations/composio/toolkits.md` for app coverage before proposing Composio.",
+    "- Search `integrations/composio/docs/` for current setup, auth, tools/toolkits, MCP, and troubleshooting guidance.",
     "",
-    "## OpenClaw Setup Shape",
+    "## Composio Setup Shape",
     "",
-    "Composio's OpenClaw setup page describes an MCP server named `composio` using HTTP transport at `https://connect.composio.dev/mcp` and says not to add authentication headers because OAuth is handled by Composio.",
+    "Composio's current docs describe two integration modes: Native Tools using a provider package, and MCP using a session MCP URL. Treat the local Composio docs as the source of truth before suggesting setup steps.",
     "",
     "Use current OpenClaw MCP docs before changing config:",
     "",
     "```bash",
+    "gbrain search \"Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md\"",
+    "gbrain search \"Source: https://docs.composio.dev/docs/tools-and-toolkits.md\"",
+    "gbrain search \"Source: https://composio.dev/toolkits\"",
     "gbrain search \"Source: https://docs.openclaw.ai/cli/mcp\"",
     "gbrain search \"Source: https://docs.openclaw.ai/gateway/configuration-reference\"",
     "openclaw mcp list",

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
 source_hash: "dc73390a33209b877b514c477755d00b1bad713f3202e87d061b21adce8a0787"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/remote.md"
 original_doc_path: "gateway/remote.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
 source_hash: "2bde58c6cd96d13a380ff1d0f9f3b242d70a36199791c3728b40e0d7d0c1d5f1"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/minimax-search.md"
 original_doc_path: "tools/minimax-search.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
 source_hash: "d4b00ad5cecb3183c678bdd665aca814980696777c3537fe80d5cd2b6406d3d7"
-generated_at: "2026-04-30T13:41:35.154Z"
 ---
 
 # Awesome OpenClaw Skills Snapshot

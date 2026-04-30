@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
 source_hash: "bda001c119e954173a24d664704d84e2ff55cc7677d233e6be830f10814f0c20"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1

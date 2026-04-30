@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
 source_hash: "9b407f9c51db68d079f66e566b52b4862196b1383deba73f1f48862f146ef7cf"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/creating-skills.md"
 original_doc_path: "tools/creating-skills.md"
 duplicate_index: 1

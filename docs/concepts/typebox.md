@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
 source_hash: "eaccadca3f563cad41650d5ca1536ab59dd63e9483cf9501f9c2a1fb1634aa47"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/typebox.md"
 original_doc_path: "concepts/typebox.md"
 duplicate_index: 1

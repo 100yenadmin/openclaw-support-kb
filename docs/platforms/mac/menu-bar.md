@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Menu bar"
 source: "https://docs.openclaw.ai/platforms/mac/menu-bar"
 source_hash: "48117313a69dec1e2aff40a64652e65d81bfb3127406ba5b41fc36e4ecb527f6"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/menu-bar.md"
 original_doc_path: "platforms/mac/menu-bar.md"
 duplicate_index: 1

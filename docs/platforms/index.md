@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms/index"
 source_hash: "a4470fde0b6a91746fd2bbb0d9162346799e692aee22bda6ea85cde824d63689"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/index.md"
 original_doc_path: "platforms/index.md"
 duplicate_index: 1

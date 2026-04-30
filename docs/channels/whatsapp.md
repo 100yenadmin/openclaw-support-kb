@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
 source_hash: "dd4d0fffea86603859332c63e60fbb63612fd67ba765b9719eda46957204b480"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/whatsapp.md"
 original_doc_path: "channels/whatsapp.md"
 duplicate_index: 1

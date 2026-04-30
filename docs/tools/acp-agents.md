@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
 source_hash: "e2af0578856b5ed3434f1edb0957c107a77e09d9e3c31c817b8d20e4d0a8045b"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/acp-agents.md"
 original_doc_path: "tools/acp-agents.md"
 duplicate_index: 1

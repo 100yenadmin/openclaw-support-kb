@@ -1,0 +1,268 @@
+---
+type: composio_doc
+title: "Migrating from Direct Tools to Sessions"
+source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
+source_hash: "bc97b43d70359c14a2745a619bba478b0cf19b57ae8c4e54a87240ac1a5e0ac2"
+doc_path: "migration-guide/direct-to-sessions.md"
+original_doc_path: "migration-guide/direct-to-sessions.md"
+duplicate_index: 1
+---
+
+# Migrating from Direct Tools to Sessions (/docs/migration-guide/direct-to-sessions)
+Source: https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md
+
+
+This guide is for developers who are using Composio's **direct tool execution** pattern and want to migrate to **sessions**. For a comparison of the two patterns, see [Sessions vs Direct Execution](/docs/sessions-vs-direct-execution).
+
+With sessions, you don't need to manage tool fetching, authentication, or execution yourself. You create a session and it handles everything. Your existing auth configs and connected accounts carry over, so your users don't need to re-authenticate.
+
+If you're starting fresh, skip this guide and head to the [Quickstart](/docs/quickstart).
+
+# What changes
+
+|                      | Direct tools                                      | Sessions                                                               |
+| -------------------- | ------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Tool discovery**   | You fetch specific tools by name/toolkit          | Agent discovers tools at runtime via meta tools                        |
+| **Authentication**   | You manage connect links and wait for connections | In-chat auth prompts users automatically, or use `session.authorize()` |
+| **Execution**        | You call `tools.execute()` with version pinning   | Agent executes tools through `COMPOSIO_MULTI_EXECUTE_TOOL`             |
+| **Toolkit versions** | You manage versions manually                      | Handled automatically                                                  |
+
+# Migrating
+
+#### Pass your existing auth configs to the session
+
+You already have auth configs (e.g. `ac_github_config`, `ac_slack_config`). Pass them when creating a session so it uses your existing OAuth credentials and your users' connected accounts carry over.
+
+**Python:**
+
+```python
+from composio import Composio
+
+composio = Composio()
+
+# Before: manual tool fetching with user_id
+# tools = composio.tools.get(user_id="user_123", toolkits=["GITHUB", "SLACK"])
+
+# After: create a session with your existing auth configs
+session = composio.create(
+    user_id="user_123",
+    auth_configs={
+        "github": "ac_your_github_config",
+        "slack": "ac_your_slack_config"
+    }
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+// Before: manual tool fetching with userId
+// const tools = await composio.tools.get("user_123", { toolkits: ["GITHUB", "SLACK"] });
+
+// After: create a session with your existing auth configs
+const session = await composio.create("user_123", {
+  authConfigs: {
+    github: "ac_your_github_config",
+    slack: "ac_your_slack_config",
+  },
+});
+```
+
+Since the session uses the same `user_id` and auth configs, it automatically picks up existing connected accounts. No re-authentication needed.
+
+#### Replace manual tool fetching with session tools
+
+Instead of fetching specific tools by name, get the session's meta tools. These let the agent discover, authenticate, and execute any tool at runtime.
+
+**Python:**
+
+```python
+# Before: manually specifying which tools to fetch
+# tools = composio.tools.get(user_id="user_123", toolkits=["GITHUB"])
+
+# After: session provides meta tools that handle discovery
+tools = session.tools()
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+// Before: manually specifying which tools to fetch
+// const tools = await composio.tools.get("user_123", { toolkits: ["GITHUB"] });
+
+// After: session provides meta tools that handle discovery
+const tools = await session.tools();
+```
+
+#### Remove manual auth flows
+
+If you were manually creating connect links and waiting for connections, sessions handle this automatically. When a tool requires authentication, the agent prompts the user with a connect link in-chat.
+
+**Python:**
+
+```python
+# Before: manual auth flow
+# connection_request = composio.connected_accounts.link(
+#     user_id="user_123",
+#     auth_config_id="ac_your_github_config",
+#     callback_url="https://your-app.com/callback"
+# )
+# redirect_url = connection_request.redirect_url
+
+# After: auth happens automatically in-chat
+# Or if you need to pre-authenticate outside of chat:
+connection_request = session.authorize("github")
+print(connection_request.redirect_url)
+connected_account = connection_request.wait_for_connection()
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+// Before: manual auth flow
+// const connectionRequest = await composio.connectedAccounts.link("user_123", "ac_your_github_config", {
+//   callbackUrl: "https://your-app.com/callback"
+// });
+// const redirectUrl = connectionRequest.redirectUrl;
+
+// After: auth happens automatically in-chat
+// Or if you need to pre-authenticate outside of chat:
+const connectionRequest = await session.authorize("github", {
+  callbackUrl: "https://your-app.com/callback",
+});
+console.log(connectionRequest.redirectUrl);
+const connectedAccount = await connectionRequest.waitForConnection();
+```
+
+#### Remove toolkit version management
+
+If you were pinning toolkit versions in your code or environment variables, you can remove that. Sessions handle versioning automatically.
+
+**Python:**
+
+```python
+# Before: manual version pinning
+# composio = Composio(
+#     toolkit_versions={
+#         "github": "20251027_00",
+#         "slack": "20251027_00",
+#     }
+# )
+
+# After: no version management needed
+composio = Composio()
+session = composio.create(user_id="user_123")
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+// Before: manual version pinning
+// const composio = new Composio({
+//   toolkitVersions: {
+//     github: "20251027_00",
+//     slack: "20251027_00",
+//   },
+// });
+
+// After: no version management needed
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+```
+
+# Restricting toolkits
+
+If you were fetching tools from specific toolkits, you can restrict the session to only those toolkits:
+
+**Python:**
+
+```python
+session = composio.create(
+    user_id="user_123",
+    toolkits=["github", "gmail", "slack"],
+    auth_configs={
+        "github": "ac_your_github_config",
+        "gmail": "ac_your_gmail_config",
+        "slack": "ac_your_slack_config"
+    }
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123", {
+  toolkits: ["github", "gmail", "slack"],
+  authConfigs: {
+    github: "ac_your_github_config",
+    gmail: "ac_your_gmail_config",
+    slack: "ac_your_slack_config",
+  },
+});
+```
+
+# Multiple connected accounts
+
+If your users have multiple accounts for the same toolkit (e.g., work and personal Gmail), you can specify which one to use per session:
+
+**Python:**
+
+```python
+session = composio.create(
+    user_id="user_123",
+    auth_configs={
+        "gmail": "ac_your_gmail_config"
+    },
+    connected_accounts={
+        "gmail": "ca_work_gmail"
+    }
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123", {
+  authConfigs: {
+    gmail: "ac_your_gmail_config",
+  },
+  connectedAccounts: {
+    gmail: "ca_work_gmail",
+  },
+});
+```
+
+If you don't specify, the most recently connected account is used. See [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts) for details.
+
+# Triggers
+
+Triggers don't work with sessions yet. Continue using them the same way you do today with `composio.triggers.create()`, `composio.triggers.enable()`, and webhook subscriptions.
+
+See [Triggers](/docs/triggers) for setup instructions.
+
+# White labeling
+
+If you've set up white-labeled OAuth screens with custom auth configs, those carry over automatically. Just pass the same auth config IDs to your session via `auth_configs` / `authConfigs`. Your users will continue to see your branding on consent screens.
+
+See [White-labeling authentication](/docs/white-labeling-authentication) for more.
+
+# Get started
+
+- [Quickstart](/docs/quickstart): Build your first agent with sessions
+
+- [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, and session methods
+
+---

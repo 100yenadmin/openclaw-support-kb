@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
 source_hash: "43b918952734519e9ccf6806dd7e000ad5fbb8fe8e11bab79c23a054f0142450"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/releasing.md"
 original_doc_path: "reference/releasing.md"
 duplicate_index: 1

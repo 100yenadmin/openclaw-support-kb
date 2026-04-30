@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "CLI automation"
 source: "https://docs.openclaw.ai/start/wizard-cli-automation"
 source_hash: "641fa336f3c62af3a9d57eeb2efbb957c76a549836bedfd847a589aedb155180"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/wizard-cli-automation.md"
 original_doc_path: "start/wizard-cli-automation.md"
 duplicate_index: 1

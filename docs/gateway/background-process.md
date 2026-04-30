@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
 source_hash: "acb79a8c13a99fbb8b81ebcb3060dc0f07d4f6614489163c5ba9e5b055b6390f"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/background-process.md"
 original_doc_path: "gateway/background-process.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Voice overlay"
 source: "https://docs.openclaw.ai/platforms/mac/voice-overlay"
 source_hash: "50aa17ea6e2d3d59c1da38d9e60645dd27e887b28cdc7f2b8185026879c28798"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/voice-overlay.md"
 original_doc_path: "platforms/mac/voice-overlay.md"
 duplicate_index: 1

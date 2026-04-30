@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
 source_hash: "309ddfde1fc9bbef7ca61bf55637ae722d20cc558ca69d6b0767489212109ca1"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/subagents.md"
 original_doc_path: "tools/subagents.md"
 duplicate_index: 1

@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
 source_hash: "3b8321eb14ed11c2e01cbedb3f19d783ac38ce447e9a0d8c806b5907d7919600"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "web/control-ui.md"
 original_doc_path: "web/control-ui.md"
 duplicate_index: 1

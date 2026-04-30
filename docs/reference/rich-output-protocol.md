@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Rich output protocol"
 source: "https://docs.openclaw.ai/reference/rich-output-protocol"
 source_hash: "d25eab089d72ff2b91a96c9b31a6153ef05880cf34d6700e7f6d61b8899eda99"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/rich-output-protocol.md"
 original_doc_path: "reference/rich-output-protocol.md"
 duplicate_index: 1

@@ -1,0 +1,170 @@
+---
+type: composio_doc
+title: "Triggers"
+source: "https://docs.composio.dev/reference/sdk-reference/python/triggers.md"
+source_hash: "c361c0ce3dec8ff16dbf76e176d5e5b5052554cdf83bdeb3296cdbea0de7d58d"
+doc_path: "reference/sdk-reference/python/triggers.md"
+original_doc_path: "reference/sdk-reference/python/triggers.md"
+duplicate_index: 1
+---
+
+# Triggers (/reference/sdk-reference/python/triggers)
+Source: https://docs.composio.dev/reference/sdk-reference/python/triggers.md
+
+
+# Methods
+
+## get\_type()
+
+Get a trigger type by its slug Uses the global toolkit version provided when initializing composio instance to fetch trigger for specific toolkit version
+
+```python
+def get_type(slug: str) -> TriggersTypeRetrieveResponse
+```
+
+**Parameters**
+
+| Name   | Type  |
+| ------ | ----- |
+| `slug` | `str` |
+
+**Returns**
+
+`TriggersTypeRetrieveResponse` — The trigger type
+
+***
+
+## list\_active()
+
+List all active triggers
+
+```python
+def list_active(trigger_ids: list[str | None] = ..., trigger_names: list[str | None] = ..., auth_config_ids: list[str | None] = ..., connected_account_ids: list[str | None] = ..., show_disabled: bool | None = ..., limit: int | None = ..., cursor: str | None = ...)
+```
+
+**Parameters**
+
+| Name                     | Type                |
+| ------------------------ | ------------------- |
+| `trigger_ids?`           | `list[str \| None]` |
+| `trigger_names?`         | `list[str \| None]` |
+| `auth_config_ids?`       | `list[str \| None]` |
+| `connected_account_ids?` | `list[str \| None]` |
+| `show_disabled?`         | `bool \| None`      |
+| `limit?`                 | `int \| None`       |
+| `cursor?`                | `str \| None`       |
+
+***
+
+## list()
+
+List all the trigger types.
+
+```python
+def list(cursor: str | None = ..., limit: int | None = ..., toolkit_slugs: list[str | None] = ...)
+```
+
+**Parameters**
+
+| Name             | Type                |
+| ---------------- | ------------------- |
+| `cursor?`        | `str \| None`       |
+| `limit?`         | `int \| None`       |
+| `toolkit_slugs?` | `list[str \| None]` |
+
+***
+
+## create()
+
+Create a trigger instance
+
+```python
+def create(slug: str, user_id: str | None = ..., connected_account_id: str | None = ..., trigger_config: Dict[str, Any | None] = ...) -> trigger_instance_upsert_response.TriggerInstanceUpsertRes...
+```
+
+**Parameters**
+
+| Name                    | Type                     |
+| ----------------------- | ------------------------ |
+| `slug`                  | `str`                    |
+| `user_id?`              | `str \| None`            |
+| `connected_account_id?` | `str \| None`            |
+| `trigger_config?`       | `Dict[str, Any \| None]` |
+
+**Returns**
+
+`trigger_instance_upsert_response.TriggerInstanceUpsertRes...` — The trigger instance
+
+***
+
+## subscribe()
+
+Subscribe to a trigger and receive trigger events.
+
+```python
+def subscribe(timeout: float = ...) -> TriggerSubscription
+```
+
+**Parameters**
+
+| Name       | Type    |
+| ---------- | ------- |
+| `timeout?` | `float` |
+
+**Returns**
+
+`TriggerSubscription` — The trigger subscription handler.
+
+***
+
+## verify\_webhook()
+
+Verify an incoming webhook payload and signature.  This method validates that the webhook request is authentic by: 1. Validating the webhook timestamp is within the tolerance window 2. Verifying the HMAC-SHA256 signature using the correct algorithm 3. Parsing the payload and detecting the webhook version (V1, V2, or V3)
+
+```python
+def verify_webhook(id: str, payload: str, secret: str, signature: str, timestamp: str, tolerance: int = ...) -> VerifyWebhookResult
+```
+
+**Parameters**
+
+| Name         | Type  |
+| ------------ | ----- |
+| `id`         | `str` |
+| `payload`    | `str` |
+| `secret`     | `str` |
+| `signature`  | `str` |
+| `timestamp`  | `str` |
+| `tolerance?` | `int` |
+
+**Returns**
+
+`VerifyWebhookResult` — VerifyWebhookResult containing version, normalized payload, and raw payload :raises WebhookSignatureVerificationError: If the signature verification fails :raises WebhookPayloadError: If the payload cannot be parsed or is invalid
+
+**Example**
+
+```python
+# In a Flask webhook handler
+    @app.route('/webhook', methods=['POST'])
+    def webhook():
+        try:
+            result = composio.triggers.verify_webhook(
+                id=request.headers.get('webhook-id', ''),
+                payload=request.get_data(as_text=True),
+                signature=request.headers.get('webhook-signature', ''),
+                timestamp=request.headers.get('webhook-timestamp', ''),
+                secret=os.environ['COMPOSIO_WEBHOOK_SECRET'],
+            )
+
+            # Process the verified payload
+            print(f"Version: {result['version']}")
+            print(f"Received trigger: {result['payload']['trigger_slug']}")
+            return 'OK', 200
+        except WebhookSignatureVerificationError:
+            return 'Unauthorized', 401
+```
+
+***
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/triggers.py#L701)
+
+---

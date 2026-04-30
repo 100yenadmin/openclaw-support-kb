@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
 source_hash: "99e026d03bd5cbd61de37fe0fb63f78fe9684e49961fb16f2ea35918ba67b541"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/sandboxing.md"
 original_doc_path: "gateway/sandboxing.md"
 duplicate_index: 1

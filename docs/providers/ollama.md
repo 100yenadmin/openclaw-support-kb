@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
 source_hash: "03eefc08eb0ddb90d0394ac6c81436e8693f114f24aa108aed5f929454f65f45"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/ollama.md"
 original_doc_path: "providers/ollama.md"
 duplicate_index: 1

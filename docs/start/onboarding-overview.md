@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Onboarding overview"
 source: "https://docs.openclaw.ai/start/onboarding-overview"
 source_hash: "fd284219646645a10a8df634706c592d88ac6790b030c8c0e18cd97a8f39d614"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/onboarding-overview.md"
 original_doc_path: "start/onboarding-overview.md"
 duplicate_index: 1

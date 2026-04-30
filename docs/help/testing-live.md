@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
 source_hash: "7d70c9e0ccf72281d0e84b0536ce990f546305f0bd4f094dc49a2b5d5c4813d8"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "help/testing-live.md"
 original_doc_path: "help/testing-live.md"
 duplicate_index: 1

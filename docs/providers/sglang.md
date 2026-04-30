@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "SGLang"
 source: "https://docs.openclaw.ai/providers/sglang"
 source_hash: "8e7a50b62f08a13f0f18a3b549956154183633e6bceca89042eba94911969a05"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/sglang.md"
 original_doc_path: "providers/sglang.md"
 duplicate_index: 1

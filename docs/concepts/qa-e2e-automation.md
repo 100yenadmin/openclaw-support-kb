@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
 source_hash: "76fc1c4ad116828385d1f9e92cdb5d86e56167ec21fb67d061ac5e8f27168cbc"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/qa-e2e-automation.md"
 original_doc_path: "concepts/qa-e2e-automation.md"
 duplicate_index: 1

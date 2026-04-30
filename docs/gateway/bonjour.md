@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Bonjour discovery"
 source: "https://docs.openclaw.ai/gateway/bonjour"
 source_hash: "d274f342e766a55d8059a16cdf74eaf3d78f034b282404878ccc28cf5b4f4582"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/bonjour.md"
 original_doc_path: "gateway/bonjour.md"
 duplicate_index: 1

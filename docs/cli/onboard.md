@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
 source_hash: "d1bf3db30bce998fef423e0a32aea0e895b4ea0d94339abeb4a5f26f5072b57d"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/onboard.md"
 original_doc_path: "cli/onboard.md"
 duplicate_index: 1

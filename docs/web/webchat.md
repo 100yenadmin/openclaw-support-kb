@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "WebChat"
 source: "https://docs.openclaw.ai/web/webchat"
 source_hash: "86ad320264e032de949ae26406e3d5c8f1e0b04f13fa7f3456b8917bc8cabc65"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "web/webchat.md"
 original_doc_path: "web/webchat.md"
 duplicate_index: 1

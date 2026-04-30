@@ -1,0 +1,229 @@
+---
+type: composio_doc
+title: "Composio"
+source: "https://docs.composio.dev/reference/sdk-reference/typescript/composio.md"
+source_hash: "baef00edb03c25ffd0abec02777a15a2e2154470d3105e6e824abf45658d4dc8"
+doc_path: "reference/sdk-reference/typescript/composio.md"
+original_doc_path: "reference/sdk-reference/typescript/composio.md"
+duplicate_index: 1
+---
+
+# Composio (/reference/sdk-reference/typescript/composio)
+Source: https://docs.composio.dev/reference/sdk-reference/typescript/composio.md
+
+
+# Constructor
+
+## constructor()
+
+Creates a new instance of the Composio SDK.
+
+The constructor initializes the SDK with the provided configuration options,
+sets up the API client, and initializes all core models (tools, toolkits, etc.).
+
+```typescript
+constructor(config?: ComposioConfig): Composio
+```
+
+**Parameters**
+
+| Name      | Type             | Description                                |
+| --------- | ---------------- | ------------------------------------------ |
+| `config?` | `ComposioConfig` | Configuration options for the Composio SDK |
+
+**Returns**
+
+`Composio`
+
+**Example**
+
+```typescript
+// Initialize with default configuration
+const composio = new Composio();
+
+// Initialize with custom API key and base URL
+const composio = new Composio({
+  apiKey: 'your-api-key',
+  baseURL: 'https://api.composio.dev'
+});
+
+// Initialize with custom provider
+const composio = new Composio({
+  apiKey: 'your-api-key',
+  provider: new CustomProvider()
+});
+```
+
+***
+
+# Properties
+
+| Name                | Type                               | Description                                                                      |
+| ------------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| `authConfigs`       | `AuthConfigs`                      | Manage authentication configurations for toolkits                                |
+| `connectedAccounts` | `ConnectedAccounts`                | Manage authenticated connections                                                 |
+| `create`            | `object`                           | Creates a new tool router session for a user.                                    |
+| `files`             | `Files`                            | Upload and download files                                                        |
+| `mcp`               | `MCP`                              | Model Context Protocol server management                                         |
+| `provider`          | `TProvider`                        | The tool provider instance used for wrapping tools in framework-specific formats |
+| `toolkits`          | `Toolkits`                         | Retrieve toolkit metadata and authorize user connections                         |
+| `toolRouter`        | `ToolRouter`                       | Experimental feature, use with caution                                           |
+| `tools`             | `Tools`                            | List, retrieve, and execute tools                                                |
+| `triggers`          | `Triggers`                         | Manage webhook triggers and event subscriptions                                  |
+| `use`               | `(id: string) => Promise` | Use an existing tool router session                                              |
+
+# Methods
+
+## createSession()
+
+Creates a new instance of the Composio SDK with custom request options while preserving the existing configuration.
+This method is particularly useful when you need to:
+
+* Add custom headers for specific requests
+* Track request contexts with unique identifiers
+* Override default request behavior for a subset of operations
+
+The new instance inherits all configuration from the parent instance (apiKey, baseURL, provider, etc.)
+but allows you to specify custom request options that will be used for all API calls made through this session.
+
+```typescript
+createSession(options?: { headers?: ComposioRequestHeaders }): Composio
+```
+
+**Parameters**
+
+| Name       | Type     |
+| ---------- | -------- |
+| `options?` | `object` |
+
+**Returns**
+
+`Composio` — A new Composio instance with the custom request options applied.
+
+**Example**
+
+```typescript
+// Create a base Composio instance
+const composio = new Composio({
+  apiKey: 'your-api-key'
+});
+
+// Create a session with request tracking headers
+const composioWithCustomHeaders = composio.createSession({
+  headers: {
+    'x-request-id': '1234567890',
+    'x-correlation-id': 'session-abc-123',
+    'x-custom-header': 'custom-value'
+  }
+});
+
+// Use the session for making API calls with the custom headers
+await composioWithCustomHeaders.tools.list();
+```
+
+***
+
+## flush()
+
+Flush any pending telemetry and wait for it to complete.
+
+In Node.js-compatible environments, telemetry is automatically flushed on process exit.
+However, in environments like Cloudflare Workers that don't support process exit events,
+you should call this method manually to ensure all telemetry is sent.
+
+```typescript
+async flush(): Promise<void>
+```
+
+**Returns**
+
+`Promise<void>` — A promise that resolves when all pending telemetry has been sent.
+
+**Example**
+
+```typescript
+// In a Cloudflare Worker, use ctx.waitUntil to ensure telemetry is flushed
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+    const composio = new Composio({ apiKey: env.COMPOSIO_API_KEY });
+
+    // Do your work...
+    const result = await composio.tools.execute(...);
+
+    // Ensure telemetry flushes before worker terminates
+    ctx.waitUntil(composio.flush());
+
+    return new Response(JSON.stringify(result));
+  }
+};
+```
+
+***
+
+## getClient()
+
+Get the Composio SDK client.
+
+```typescript
+getClient(): Composio
+```
+
+**Returns**
+
+`Composio` — The Composio API client.
+
+***
+
+## getConfig()
+
+Get the configuration SDK is initialized with
+
+```typescript
+getConfig(): ComposioConfig
+```
+
+**Returns**
+
+`ComposioConfig` — The configuration SDK is initialized with
+
+***
+
+# File upload security
+
+When `dangerouslyAllowAutoUploadDownloadFiles` is true, the SDK can read local file paths and upload them before tool execution (this behavior is **off** by default). The constructor accepts options that work together with the optional `beforeFileUpload` modifier on `tools.execute` (see [Executing tools: security](/docs/tools-direct/executing-tools#security-for-local-file-paths)).
+
+| Option                          | Type                | Default              | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------- | ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sensitiveFileUploadProtection` | `boolean`           | `true`               | When true, local path strings for auto-upload and `files.upload` are checked against a built-in denylist of path segments (for example `.ssh`, `.aws`) and credential-like file names. Set to `false` only if you accept the security tradeoff.                                                                                                                                                                                |
+| `fileUploadPathDenySegments`    | `string[]`          | `undefined`          | Additional single path *components* (directory or file names) merged with the built-in list; matched anywhere in the resolved path.                                                                                                                                                                                                                                                                                            |
+| `fileUploadDirs`                | `string[] \| false` | `[~/.composio/temp]` | Allowlist of directories the SDK may read during **automatic** upload (when `dangerouslyAllowAutoUploadDownloadFiles: true`). Pass `false` (or `[]`) to reject every local path; URLs and `File`/`Blob` objects still work. Providing a list **replaces** the default — include `~/.composio/temp` explicitly if you want the default staging dir to keep working. Does **not** affect manual `composio.files.upload()` calls. |
+| `fileDownloadDir`               | `string`            | `~/.composio/files`  | Directory where files from tool responses marked `file_downloadable` are streamed.                                                                                                                                                                                                                                                                                                                                             |
+
+Pass **`beforeFileUpload`** on the **third argument** to `composio.tools.execute` (with `beforeExecute` / `afterExecute`), not on the constructor. The hook runs for each `file_uploadable` value before read/upload: return a path string, `false` to abort, or throw. The hook's context includes a `source` field (`'path' | 'url' | 'file'`) so it can scope its logic to local paths vs URLs vs `File` objects.
+
+**Related errors:** `ComposioSensitiveFilePathBlockedError`, `ComposioFileUploadAbortedError`, `ComposioFileUploadPathNotAllowedError`, `ComposioFileNotFoundError` (from `@composio/core`).
+
+## Restricting automatic uploads to specific directories
+
+When `dangerouslyAllowAutoUploadDownloadFiles: true`, the SDK only reads local
+files from directories in `fileUploadDirs`. This stacks with (it does NOT
+replace) the sensitive-path denylist.
+
+```typescript
+import { Composio } from '@composio/core';
+
+const composio = new Composio({
+  apiKey: process.env.COMPOSIO_API_KEY!,
+  dangerouslyAllowAutoUploadDownloadFiles: true,
+  // Replaces the default `[~/.composio/temp]`. List every directory you want
+  // the SDK to read from during tool execution.
+  fileUploadDirs: ['/srv/agent/uploads', '~/.composio/temp'],
+});
+```
+
+Pass `fileUploadDirs: false` (or `[]`) to reject every filesystem path; URLs
+and in-memory `File`/`Blob` objects still upload normally.
+
+***
+
+---

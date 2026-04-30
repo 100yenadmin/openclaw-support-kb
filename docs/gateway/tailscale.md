@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Tailscale"
 source: "https://docs.openclaw.ai/gateway/tailscale"
 source_hash: "9675b094e09f41fdda075a55430584ae3a21f3cbde5642d5c7accc405060f350"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/tailscale.md"
 original_doc_path: "gateway/tailscale.md"
 duplicate_index: 1

@@ -7,8 +7,8 @@ search_role: "workflow_not_source"
 # Skill Discovery And Safe Install
 
 This runbook is a workflow. The local VoltAgent skills snapshot, OpenClaw
-ClawHub docs, security guide, and Composio guide are discovery sources. Do not
-install from a registry description alone.
+ClawHub docs, security guide, and Composio docs/toolkit catalog are discovery
+sources. Do not install from a registry description alone.
 
 ## Search Contract
 
@@ -18,7 +18,9 @@ gbrain search "Source: https://github.com/VoltAgent/awesome-openclaw-skills"
 gbrain search "Source: https://docs.openclaw.ai/tools/clawhub"
 gbrain search "Source: https://docs.openclaw.ai/cli/skills"
 gbrain search "Source: https://github.com/snyk/agent-scan"
-gbrain search "Source: https://composio.dev/claw"
+gbrain search "Source: https://composio.dev/toolkits"
+gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md"
+gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md"
 ```
 
 Sources to cite:
@@ -27,7 +29,9 @@ Sources to cite:
 - `docs/tools/clawhub.md`
 - `docs/cli/skills.md`
 - https://github.com/snyk/agent-scan
-- `integrations/composio-openclaw.md`
+- `integrations/composio/guide.md`
+- `integrations/composio/toolkits.md`
+- `integrations/composio/docs/tools-and-toolkits.md`
 
 ## Workflow
 
@@ -43,7 +47,8 @@ Sources to cite:
    ```
 4. If no good skill exists, or the user needs a SaaS app action, evaluate Composio as an integration option:
    ```bash
-   gbrain query "Composio OpenClaw <app or workflow>"
+   gbrain query "Composio toolkit MCP OAuth <app or workflow>"
+   gbrain search "Source: https://composio.dev/toolkits <app>"
    openclaw mcp list
    openclaw mcp show composio --json
    ```
@@ -80,7 +85,8 @@ downloaded OpenClaw skill.
 Before adding Composio:
 
 - ask which app and account the user wants to connect
-- explain that OAuth is handled by Composio
+- search `integrations/composio/toolkits.md` and `integrations/composio/docs/`
+- explain the current Composio auth/MCP shape from the local docs
 - do not paste OAuth tokens or add auth headers manually
 - use current OpenClaw MCP docs and validate config afterward
 - require separate approval for write/send actions such as email, CRM updates,

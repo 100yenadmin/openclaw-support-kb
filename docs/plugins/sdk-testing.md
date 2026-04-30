@@ -3,7 +3,6 @@ type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
 source_hash: "b0e30a01d2829fb72861db21b042a1250e75d4e9e37c4221faad689662751a1c"
-generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/sdk-testing.md"
 original_doc_path: "plugins/sdk-testing.md"
 duplicate_index: 1
