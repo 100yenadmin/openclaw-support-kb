@@ -91,7 +91,7 @@ export function resultOutput(result) {
 }
 
 export function isBenignExistingGbrainSourceError(result) {
-  return /\b(already exists|already registered|duplicate|conflict|exists)\b/i.test(resultOutput(result));
+  return /\b(already exists|already registered|duplicate source|source already exists)\b/i.test(resultOutput(result));
 }
 
 export function makeGbrainSourceError(action, result) {

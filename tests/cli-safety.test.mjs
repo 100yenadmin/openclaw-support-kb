@@ -5,7 +5,12 @@ import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { ensureGbrainSource, GBRAIN_SOURCE_ID, GBRAIN_SOURCE_NAME } from "../scripts/lib/openclaw-support-kb.mjs";
+import {
+  ensureGbrainSource,
+  GBRAIN_SOURCE_ID,
+  GBRAIN_SOURCE_NAME,
+  isBenignExistingGbrainSourceError,
+} from "../scripts/lib/openclaw-support-kb.mjs";
 
 const repoRoot = path.resolve(import.meta.dirname, "..");
 
@@ -146,4 +151,10 @@ test("GBrain source registration tolerates existing sources before refederating"
   assert.equal(calls.length, 2);
   assert.equal(calls[0][1][2], GBRAIN_SOURCE_ID);
   assert.deepEqual(calls[1][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+});
+
+test("GBrain source registration does not hide unrelated exists errors", () => {
+  assert.equal(isBenignExistingGbrainSourceError({ stdout: "source already exists", stderr: "" }), true);
+  assert.equal(isBenignExistingGbrainSourceError({ stdout: "duplicate source id", stderr: "" }), true);
+  assert.equal(isBenignExistingGbrainSourceError({ stdout: "path exists but is not a valid source", stderr: "" }), false);
 });
