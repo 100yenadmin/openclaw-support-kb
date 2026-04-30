@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
 source_hash: "d5e340c3b7ff27cde59fd9c7d1756e654e71f81245c6aa8c016649d24b741ae5"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/cli-backends.md"
 original_doc_path: "gateway/cli-backends.md"
 duplicate_index: 1

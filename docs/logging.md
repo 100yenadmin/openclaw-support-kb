@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
 source_hash: "cefcaa449683d6797d0866471f1c51a2fa03fcc0ee5240b4b26af35cc9e9dfe0"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "logging.md"
 original_doc_path: "logging.md"
 duplicate_index: 1

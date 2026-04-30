@@ -28,6 +28,8 @@ jobs:
       - name: Check release freshness
         id: release
         run: node scripts/check-release-update.mjs
+      - name: Check scanner pin
+        run: npm run check:scanner
       - name: Build KB
         if: github.event_name != 'schedule' || github.event.schedule == '17 9 * * 1' || steps.release.outputs.should_build == 'true'
         run: node scripts/build-kb.mjs --channel "${{ github.event.inputs.channel || 'stable' }}"

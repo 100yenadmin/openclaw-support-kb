@@ -4,7 +4,7 @@ import path from "node:path";
 import {
   canonicalSourceDir,
   compareSemver,
-  GBRAIN_VERIFY_QUERY,
+  GBRAIN_VERIFY_QUERIES,
   readJsonIfExists,
   validateGbrainSearchOutput,
 } from "./lib/openclaw-support-kb.mjs";
@@ -34,20 +34,21 @@ function verifyGbrainSearch() {
     console.warn("Skipping GBrain search verification because OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY=1 is set.");
     return;
   }
-  const search = capture("gbrain", ["search", GBRAIN_VERIFY_QUERY]);
-  const output = `${search.stdout}\n${search.stderr}`;
-  const verified = validateGbrainSearchOutput(output, {
-    strict: process.env.OPENCLAW_SUPPORT_KB_STRICT_SEARCH_VERIFY === "1",
-  });
-  if (!verified.ok) {
-    console.error(`GBrain search verification failed: ${verified.reason}.`);
-    console.error(`Query: ${GBRAIN_VERIFY_QUERY}`);
-    console.error("Search output preview:");
-    console.error(output.trim().slice(0, 4000) || "[empty]");
-    process.exit(2);
-  }
-  for (const warning of verified.warnings ?? []) {
-    console.warn(`GBrain search verification warning: ${warning}.`);
+  const loose = process.env.OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY === "1";
+  for (const item of GBRAIN_VERIFY_QUERIES) {
+    const search = capture("gbrain", ["search", item.query]);
+    const output = `${search.stdout}\n${search.stderr}`;
+    const verified = validateGbrainSearchOutput(output, {
+      strictPatterns: loose ? [] : item.strictPatterns,
+    });
+    if (!verified.ok) {
+      console.error(`GBrain search verification failed for ${item.label}: ${verified.reason}.`);
+      console.error(`Query: ${item.query}`);
+      console.error("Search output preview:");
+      console.error(output.trim().slice(0, 4000) || "[empty]");
+      process.exit(2);
+    }
+    if (loose) console.warn(`Loose GBrain search verification passed for ${item.label}.`);
   }
 }
 

@@ -31,7 +31,7 @@ description: Use when the user wants to find, evaluate, install, update, or impr
    - Manual scanned artifact: fetch candidate skill code to a temporary directory at a pinned commit/ref, scan it, then install that exact folder.
 7. For manual scanned artifacts, scan before installing:
    ```bash
-   SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.4.0 \
+   SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.5.0 \
      node ~/.gbrain/sources/openclaw-support-kb/scripts/scan-skill.mjs \
        <candidate-skill-path> \
        --expected-sha <pinned-candidate-sha>

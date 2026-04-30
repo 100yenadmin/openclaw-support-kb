@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
 source_hash: "947bbca89cd7f7da14018c73dd4a95e9533c4f4ab4f3bd6c7edb9f350c0bcbd1"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/lobster.md"
 original_doc_path: "tools/lobster.md"
 duplicate_index: 1

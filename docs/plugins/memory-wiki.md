@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
 source_hash: "d28a98ebbe6d5632100197a6d74600e758884ac326d5b5b62b7d8c11c8b36ab9"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/memory-wiki.md"
 original_doc_path: "plugins/memory-wiki.md"
 duplicate_index: 1

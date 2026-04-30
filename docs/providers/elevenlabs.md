@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "ElevenLabs"
 source: "https://docs.openclaw.ai/providers/elevenlabs"
 source_hash: "813bfb96716cab5f17a86afaa789bbbb121266c5716df7c6950b93e97e588888"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/elevenlabs.md"
 original_doc_path: "providers/elevenlabs.md"
 duplicate_index: 1

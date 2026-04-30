@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Standing orders"
 source: "https://docs.openclaw.ai/automation/standing-orders"
 source_hash: "8970a95447e398cf415e5c72728bf70ebff2a2e160dd3c96251eae87712f21b4"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "automation/standing-orders.md"
 original_doc_path: "automation/standing-orders.md"
 duplicate_index: 1

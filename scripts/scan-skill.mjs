@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, realpath, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { DEFAULT_AGENT_SCAN_SPEC } from "./lib/openclaw-support-kb.mjs";
 
 const args = process.argv.slice(2);
 
@@ -20,7 +21,7 @@ if (!target || args.includes("--help")) {
   process.exit(args.includes("--help") ? 0 : 1);
 }
 
-const scannerSpec = process.env.SNYK_AGENT_SCAN_SPEC || "snyk-agent-scan@0.4.0";
+const scannerSpec = process.env.SNYK_AGENT_SCAN_SPEC || DEFAULT_AGENT_SCAN_SPEC;
 const expectedSha = argValue("--expected-sha", process.env.OPENCLAW_CANDIDATE_SKILL_SHA || "");
 const attestationOut =
   argValue("--attestation-out") ||

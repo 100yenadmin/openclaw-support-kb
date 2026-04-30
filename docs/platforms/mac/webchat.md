@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "WebChat (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/webchat"
 source_hash: "e4647c7e23fe6015481e81b0e092b568f02b7329046e5f4bfabf2a94a8a08c09"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "platforms/mac/webchat.md"
 original_doc_path: "platforms/mac/webchat.md"
 duplicate_index: 1

@@ -2,8 +2,8 @@
 type: openclaw_security_guide
 title: "Snyk Agent Scan Guide"
 source: "https://github.com/snyk/agent-scan"
-source_hash: "15679dd3398001600cf07647aee6a794139798a92f74efb8ee75c65cf7b3d74b"
-generated_at: "2026-04-30T12:08:08.028Z"
+source_hash: "4090fef0a67b2e830cf34fcc042d31b80382ee1cf990fdefaf3edf680f33a00f"
+generated_at: "2026-04-30T12:18:14.365Z"
 ---
 
 # Snyk Agent Scan Guide
@@ -16,7 +16,7 @@ This page is a local OpenClaw policy summary, not a verbatim upstream README. Us
 
 - Require `SNYK_TOKEN` before automatic community skill install.
 - Scan the fetched candidate at a pinned commit or immutable archive.
-- Keep the scanner spec pinned with `SNYK_AGENT_SCAN_SPEC`; default local policy is `snyk-agent-scan@0.4.0`.
+- Keep the scanner spec pinned with `SNYK_AGENT_SCAN_SPEC`; default local policy is `snyk-agent-scan@0.5.0`.
 - Refuse automatic install when the scanner is missing, exits non-zero, or no attestation is written.
 - Refuse candidates containing symlinks, oversized files, or paths that resolve outside the candidate root.
 - Do not run MCP-server scan modes or unsafe consent-bypass flags for skill install review.
@@ -24,7 +24,7 @@ This page is a local OpenClaw policy summary, not a verbatim upstream README. Us
 ## Command
 
 ```bash
-SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.4.0 \
+SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.5.0 \
   node ~/.gbrain/sources/openclaw-support-kb/scripts/scan-skill.mjs <candidate-skill-path>
 ```
 

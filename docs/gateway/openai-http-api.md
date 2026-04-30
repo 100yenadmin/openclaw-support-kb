@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenAI chat completions"
 source: "https://docs.openclaw.ai/gateway/openai-http-api"
 source_hash: "421f68883de83a77c8c68bf31a4293fd09cab49b8006a44228e0fef77feef292"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/openai-http-api.md"
 original_doc_path: "gateway/openai-http-api.md"
 duplicate_index: 1

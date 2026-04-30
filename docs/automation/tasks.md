@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
 source_hash: "c8db5a86d7439d4a4e47d3e88f79b54cecd81505203b5f7b6c124109e4ff2d9d"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "automation/tasks.md"
 original_doc_path: "automation/tasks.md"
 duplicate_index: 1

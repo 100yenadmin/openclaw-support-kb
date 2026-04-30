@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
 source_hash: "d36b487a8d977be2ba3f60f66a6dbc88df79f8e185d005a1f4a071f437c1a276"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/slash-commands.md"
 original_doc_path: "tools/slash-commands.md"
 duplicate_index: 1

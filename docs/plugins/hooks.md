@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
 source_hash: "c8f499bec14979b523a7f01722ededc7f79b36591c21e444d1cb23cfa2d8d412"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/hooks.md"
 original_doc_path: "plugins/hooks.md"
 duplicate_index: 1

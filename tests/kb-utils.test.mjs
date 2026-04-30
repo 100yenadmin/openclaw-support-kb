@@ -72,19 +72,22 @@ test("buildSupportDraft includes manifest and redacts diagnostics", () => {
   assert.doesNotMatch(draft, /hunter2/);
 });
 
-test("validateGbrainSearchOutput is light by default and strict on request", () => {
+test("validateGbrainSearchOutput rejects empty results and enforces requested markers", () => {
   assert.equal(validateGbrainSearchOutput("").ok, false);
   assert.equal(validateGbrainSearchOutput("No results found").ok, false);
 
-  const loose = validateGbrainSearchOutput("OpenClaw Telegram result without source");
+  const loose = validateGbrainSearchOutput("OpenClaw Telegram result without source", { strictPatterns: [] });
   assert.equal(loose.ok, true);
-  assert.ok(loose.warnings.length > 0);
 
-  const strict = validateGbrainSearchOutput("OpenClaw Telegram result without source", { strict: true });
+  const strict = validateGbrainSearchOutput("OpenClaw Telegram result without source", {
+    strictPatterns: [/\ballowFrom\b/, /\bchannels\/telegram\b/],
+  });
   assert.equal(strict.ok, false);
 
   const sourced = validateGbrainSearchOutput(`Source: https://docs.openclaw.ai/channels/telegram
-channels.telegram.allowFrom accepts numeric user IDs; groupAllowFrom gates group senders.`);
+channels.telegram.allowFrom accepts numeric user IDs; groupAllowFrom gates group senders.`, {
+    strictPatterns: [/\ballowFrom\b/, /\bchannels\/telegram\b/],
+  });
   assert.equal(sourced.ok, true);
   assert.deepEqual(sourced.warnings, []);
 });

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Render"
 source: "https://docs.openclaw.ai/install/render"
 source_hash: "984bfe9bfe388a93af30be6f85cef7f7792db00cbd6a3ab56d307a73d65b9167"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/render.md"
 original_doc_path: "install/render.md"
 duplicate_index: 1

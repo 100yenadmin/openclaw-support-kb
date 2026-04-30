@@ -90,9 +90,18 @@ async function upsertManagedBlock(filePath, block) {
   await writeFile(filePath, next);
 }
 
+async function readSkillMarkerBestEffort(skillDir) {
+  try {
+    return await readJsonIfExists(path.join(skillDir, ".openclaw-support-kb-skill.json"));
+  } catch (error) {
+    console.warn(`Warning: could not read managed skill marker in ${skillDir}: ${error.message}`);
+    return null;
+  }
+}
+
 async function backupExistingSkillIfNeeded(skillDir) {
   if (!(await pathExists(skillDir))) return;
-  const marker = await readJsonIfExists(path.join(skillDir, ".openclaw-support-kb-skill.json"));
+  const marker = await readSkillMarkerBestEffort(skillDir);
   if (marker?.managedBy === "openclaw-support-kb") return;
 
   const backupDir = `${skillDir}.bak-openclaw-support-kb-${Date.now()}`;
@@ -120,8 +129,19 @@ async function installManagedSkill(from, to, name) {
   );
 }
 
+async function readOpenClawConfigBestEffort(filePath) {
+  try {
+    return JSON.parse(await readFile(filePath, "utf8"));
+  } catch (error) {
+    if (error.code === "ENOENT") return {};
+    console.warn(`Warning: could not read OpenClaw config from ${filePath}: ${error.message}`);
+    console.warn("Continuing support-skill install with default AGENTS.md targets only.");
+    return {};
+  }
+}
+
 await mkdir(targetDir, { recursive: true });
-const config = (await readJsonIfExists(configFile)) ?? {};
+const config = await readOpenClawConfigBestEffort(configFile);
 
 const entries = await readdir(sourceDir, { withFileTypes: true });
 const installed = [];

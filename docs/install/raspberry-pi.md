@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
 source_hash: "270944951778c7d61899f42e13bfd95a49cae1b77d69c6204ea6654b0c484f9b"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/raspberry-pi.md"
 original_doc_path: "install/raspberry-pi.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Multiple gateways"
 source: "https://docs.openclaw.ai/gateway/multiple-gateways"
 source_hash: "eb0dd03d1e39018272df0b2e0a5d98e77d5363368439b1a8e2bd31d094cc5c58"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/multiple-gateways.md"
 original_doc_path: "gateway/multiple-gateways.md"
 duplicate_index: 1

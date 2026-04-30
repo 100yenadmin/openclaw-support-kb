@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Claude Max API proxy"
 source: "https://docs.openclaw.ai/providers/claude-max-api-proxy"
 source_hash: "9be410d0f63a53f154c47b0b66aa44f0476327afe2342211501a242b6578fc34"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/claude-max-api-proxy.md"
 original_doc_path: "providers/claude-max-api-proxy.md"
 duplicate_index: 1

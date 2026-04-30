@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
 source_hash: "d8bdd7ff4faad5e6cf43f2e58c2ac3b195ad848449a4d9068479245679db45f7"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/config-agents.md"
 original_doc_path: "gateway/config-agents.md"
 duplicate_index: 1

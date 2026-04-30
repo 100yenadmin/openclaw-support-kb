@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
 source_hash: "bdf480a4df301f7ac84c7ff1cadf6714fc571369586e58069ded68fcbd523ed8"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/sdk-migration.md"
 original_doc_path: "plugins/sdk-migration.md"
 duplicate_index: 1

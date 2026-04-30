@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
 source_hash: "3edd857365dadb8c475f7f1582ed353b8a6ae7c8d0bddd27cbcea77bda5634f1"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/channels.md"
 original_doc_path: "cli/channels.md"
 duplicate_index: 1

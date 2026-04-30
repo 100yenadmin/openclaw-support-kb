@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Backup"
 source: "https://docs.openclaw.ai/cli/backup"
 source_hash: "96a381cb59d839f8be1a1f1f5e6786e7a6f41efbc52a6097f19ce629eec2f252"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/backup.md"
 original_doc_path: "cli/backup.md"
 duplicate_index: 1

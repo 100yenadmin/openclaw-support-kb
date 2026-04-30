@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Compaction"
 source: "https://docs.openclaw.ai/concepts/compaction"
 source_hash: "37650bbe4ac4f9afcb770028fac0bb972f773787b437df52d6e89391907f5e69"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "concepts/compaction.md"
 original_doc_path: "concepts/compaction.md"
 duplicate_index: 1

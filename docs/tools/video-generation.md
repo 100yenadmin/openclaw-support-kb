@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
 source_hash: "20f397ade7305499a6ae9692348097e74fbc00058a7f37e2f50dbd45523676f4"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/video-generation.md"
 original_doc_path: "tools/video-generation.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Status"
 source: "https://docs.openclaw.ai/cli/status"
 source_hash: "afcddf8662ea2556e9b9bda120107a40127d7ff0964961e0c45915ac5fff6569"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/status.md"
 original_doc_path: "cli/status.md"
 duplicate_index: 1

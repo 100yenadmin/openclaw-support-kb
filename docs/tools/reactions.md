@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
 source_hash: "1486d30e391042b3986a9fc859a4bec4699027e404c27d044746f0f22aa6c86b"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/reactions.md"
 original_doc_path: "tools/reactions.md"
 duplicate_index: 1

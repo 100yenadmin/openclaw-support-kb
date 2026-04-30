@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Date and time"
 source: "https://docs.openclaw.ai/date-time"
 source_hash: "3b9f37dec186d3f21fa90828a9bc26747ae47bdeeaf9707508a43497cef455c8"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "date-time.md"
 original_doc_path: "date-time.md"
 duplicate_index: 1

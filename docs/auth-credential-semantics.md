@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Auth credential semantics"
 source: "https://docs.openclaw.ai/auth-credential-semantics"
 source_hash: "021b0ac0506b85896e220fcf579a7af5b82a3852e05491c515b01499c227598e"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "auth-credential-semantics.md"
 original_doc_path: "auth-credential-semantics.md"
 duplicate_index: 1

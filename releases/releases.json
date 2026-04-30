@@ -123,7 +123,7 @@
         "state": "uploaded",
         "size": 37460858,
         "digest": "sha256:b0b60b033d4220fe32a6733432ba88fd29be653e41fbf8ea7ff135b8166428b5",
-        "download_count": 1283,
+        "download_count": 1308,
         "created_at": "2026-04-29T23:55:20Z",
         "updated_at": "2026-04-29T23:55:21Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.27/OpenClaw-2026.4.27.dmg"
@@ -159,7 +159,7 @@
         "state": "uploaded",
         "size": 34943053,
         "digest": "sha256:386d9c901c88c1270a4160f8f3faa389ad5d41de9f8704a1cdee209c63c7739a",
-        "download_count": 179,
+        "download_count": 180,
         "created_at": "2026-04-29T23:55:20Z",
         "updated_at": "2026-04-29T23:55:21Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.27/OpenClaw-2026.4.27.dSYM.zip"
@@ -195,7 +195,7 @@
         "state": "uploaded",
         "size": 50595360,
         "digest": "sha256:7b5683d7fbb5c154f2fa7a896e92edb996c44eabfe450532a498dd86c29358cb",
-        "download_count": 2528,
+        "download_count": 2569,
         "created_at": "2026-04-29T23:55:20Z",
         "updated_at": "2026-04-29T23:55:22Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.27/OpenClaw-2026.4.27.zip"
@@ -287,7 +287,7 @@
         "state": "uploaded",
         "size": 35685724,
         "digest": "sha256:bfb5fc53520851ff0b81412318462756d23468ceac96f0f78498e320b1b4537a",
-        "download_count": 5355,
+        "download_count": 5356,
         "created_at": "2026-04-28T02:44:23Z",
         "updated_at": "2026-04-28T02:44:25Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.26/OpenClaw-2026.4.26.dmg"
@@ -323,7 +323,7 @@
         "state": "uploaded",
         "size": 34814334,
         "digest": "sha256:d5141da15e3b15b978212901f033bc9ccce6c19845619d92ea3e2d8374609cb9",
-        "download_count": 482,
+        "download_count": 483,
         "created_at": "2026-04-28T02:44:23Z",
         "updated_at": "2026-04-28T02:44:25Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.26/OpenClaw-2026.4.26.dSYM.zip"
@@ -359,7 +359,7 @@
         "state": "uploaded",
         "size": 48222029,
         "digest": "sha256:ef96aef6d0aeca68ba55a3c7831495f86707d1d90ebd75daf9c3aa76c1ca8606",
-        "download_count": 8539,
+        "download_count": 8540,
         "created_at": "2026-04-28T02:44:23Z",
         "updated_at": "2026-04-28T02:44:25Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.26/OpenClaw-2026.4.26.zip"
@@ -823,7 +823,7 @@
         "state": "uploaded",
         "size": 35732276,
         "digest": "sha256:8e165721c23b0f9e6b3633294ed54d7a37887693010c2865e96461d6d3ac78ec",
-        "download_count": 5167,
+        "download_count": 5168,
         "created_at": "2026-04-25T19:39:06Z",
         "updated_at": "2026-04-25T19:39:07Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.24/OpenClaw-2026.4.24.dmg"
@@ -859,7 +859,7 @@
         "state": "uploaded",
         "size": 34709366,
         "digest": "sha256:354ec518b0b41a9b551dfb00c40c1940c977b7c42c5be261fd335c156d9caf2f",
-        "download_count": 439,
+        "download_count": 440,
         "created_at": "2026-04-25T19:39:06Z",
         "updated_at": "2026-04-25T19:39:07Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.24/OpenClaw-2026.4.24.dSYM.zip"
@@ -895,7 +895,7 @@
         "state": "uploaded",
         "size": 48033180,
         "digest": "sha256:0c33111862a90d7fe468d2079d6859ff1f644984e4b9f29518a08ac6a7f1f52c",
-        "download_count": 7696,
+        "download_count": 7697,
         "created_at": "2026-04-25T19:39:06Z",
         "updated_at": "2026-04-25T19:39:08Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.24/OpenClaw-2026.4.24.zip"

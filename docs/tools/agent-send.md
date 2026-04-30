@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
 source_hash: "de7100a59eac3f3cfc56c50cc24b1ee5a20896ef3ef4c953faebe7c4eaf334a6"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/agent-send.md"
 original_doc_path: "tools/agent-send.md"
 duplicate_index: 1

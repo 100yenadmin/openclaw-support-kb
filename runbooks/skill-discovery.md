@@ -58,7 +58,7 @@ Sources to cite:
    - Manual scanned artifact: fetch the candidate to a temporary directory at a pinned commit or immutable archive, then scan and install the exact scanned folder manually.
 7. For manual scanned artifacts, scan it:
    ```bash
-   SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.4.0 \
+   SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.5.0 \
      node ~/.gbrain/sources/openclaw-support-kb/scripts/scan-skill.mjs \
        <candidate-skill-path> \
        --expected-sha <pinned-candidate-sha>

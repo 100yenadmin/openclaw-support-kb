@@ -58,9 +58,10 @@ What setup does:
 4. runs `gbrain embed --stale`
 5. verifies local search returns from the indexed KB
 
-Search verification is deliberately simple for production installs: empty/no
-result output fails, unusual source formatting warns, and strict source matching
-is only enabled with `OPENCLAW_SUPPORT_KB_STRICT_SEARCH_VERIFY=1`.
+Search verification runs two checks: one for this KB's manifest and one for the
+Telegram docs. Empty/no-result output or missing expected markers fails. Use
+`OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only if a known-good GBrain version
+formats search output too tersely for marker checks.
 
 If an existing support skill directory is present and was not previously
 managed by this KB, setup backs it up before installing the managed copy.

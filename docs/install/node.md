@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
 source_hash: "46d1a79436d928c6ab7c0dd22c27d17da22ff13249dd58eecd02e8528fc3e5ea"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/node.md"
 original_doc_path: "install/node.md"
 duplicate_index: 1

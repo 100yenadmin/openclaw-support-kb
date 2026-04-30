@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Skill workshop plugin"
 source: "https://docs.openclaw.ai/plugins/skill-workshop"
 source_hash: "59904fabefe1a2c4ba8ce7478eb1fb21fbf23f5f7c0936defb50258297d92757"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/skill-workshop.md"
 original_doc_path: "plugins/skill-workshop.md"
 duplicate_index: 1

@@ -13,8 +13,20 @@ export const AGENT_SCAN_URL = "https://raw.githubusercontent.com/snyk/agent-scan
 export const COMPOSIO_OPENCLAW_URL = "https://composio.dev/claw";
 
 export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
+export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
 export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
-export const GBRAIN_VERIFY_QUERY = "Source: https://docs.openclaw.ai/channels/telegram allowFrom groupAllowFrom";
+export const GBRAIN_VERIFY_QUERIES = [
+  {
+    label: "OpenClaw Support KB manifest",
+    query: "openclaw-support-kb kb-manifest sourceCount minGbrainVersion",
+    strictPatterns: [/\bopenclaw-support-kb\b/i, /\b(kb-manifest|sourceCount|minGbrainVersion)\b/i],
+  },
+  {
+    label: "OpenClaw Telegram docs",
+    query: "docs.openclaw.ai/channels/telegram allowFrom groupAllowFrom",
+    strictPatterns: [/\b(allowFrom|groupAllowFrom|dmPolicy|botToken|TELEGRAM_BOT_TOKEN)\b/, /\b(telegram|channels\/telegram)\b/i],
+  },
+];
 export const OFFICIAL_REPO_URLS = [
   "https://github.com/100yenadmin/openclaw-support-kb.git",
   "git@github.com:100yenadmin/openclaw-support-kb.git",
@@ -101,35 +113,20 @@ export function compareSemver(a, b) {
   return 0;
 }
 
-export function validateGbrainSearchOutput(output, { strict = false } = {}) {
+export function validateGbrainSearchOutput(output, { strictPatterns = [] } = {}) {
   const text = String(output ?? "").trim();
   if (!text) return { ok: false, reason: "gbrain search returned no output" };
   if (/\b(no results|0 results|nothing found|no matches)\b/i.test(text)) {
     return { ok: false, reason: "gbrain search reported no results" };
   }
 
-  const warnings = [];
-  const hasTelegramSource = [
-    /Source:\s*https:\/\/docs\.openclaw\.ai\/channels\/telegram/i,
-    /docs\/channels\/telegram\.md/i,
-    /channels\/telegram/i,
-  ].some((pattern) => pattern.test(text));
-  if (!hasTelegramSource) {
-    const reason = "gbrain search did not show the Telegram source page or path";
-    if (strict) return { ok: false, reason };
-    warnings.push(reason);
+  for (const pattern of strictPatterns) {
+    if (!pattern.test(text)) {
+      return { ok: false, reason: `gbrain search output did not match ${pattern}` };
+    }
   }
 
-  const hasConfigContent = [/\ballowFrom\b/, /\bgroupAllowFrom\b/, /\bdmPolicy\b/, /\bbotToken\b/, /\bTELEGRAM_BOT_TOKEN\b/].some(
-    (pattern) => pattern.test(text),
-  );
-  if (!hasConfigContent) {
-    const reason = "gbrain search did not show Telegram config content";
-    if (strict) return { ok: false, reason };
-    warnings.push(reason);
-  }
-
-  return { ok: true, warnings };
+  return { ok: true, warnings: [] };
 }
 
 export function slugify(value) {
@@ -271,7 +268,7 @@ export function agentScanPolicyPage() {
     "",
     "- Require `SNYK_TOKEN` before automatic community skill install.",
     "- Scan the fetched candidate at a pinned commit or immutable archive.",
-    "- Keep the scanner spec pinned with `SNYK_AGENT_SCAN_SPEC`; default local policy is `snyk-agent-scan@0.4.0`.",
+    `- Keep the scanner spec pinned with \`SNYK_AGENT_SCAN_SPEC\`; default local policy is \`${DEFAULT_AGENT_SCAN_SPEC}\`.`,
     "- Refuse automatic install when the scanner is missing, exits non-zero, or no attestation is written.",
     "- Refuse candidates containing symlinks, oversized files, or paths that resolve outside the candidate root.",
     "- Do not run MCP-server scan modes or unsafe consent-bypass flags for skill install review.",
@@ -279,7 +276,7 @@ export function agentScanPolicyPage() {
     "## Command",
     "",
     "```bash",
-    "SNYK_AGENT_SCAN_SPEC=snyk-agent-scan@0.4.0 \\",
+    `SNYK_AGENT_SCAN_SPEC=${DEFAULT_AGENT_SCAN_SPEC} \\`,
     "  node ~/.gbrain/sources/openclaw-support-kb/scripts/scan-skill.mjs <candidate-skill-path>",
     "```",
     "",

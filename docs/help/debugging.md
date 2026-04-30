@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
 source_hash: "90d33c64a4646fabe19e5208c6fa884c37c4428c17b56ecab37f7b3f37875b98"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "help/debugging.md"
 original_doc_path: "help/debugging.md"
 duplicate_index: 1

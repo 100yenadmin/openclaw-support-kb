@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Trusted proxy auth"
 source: "https://docs.openclaw.ai/gateway/trusted-proxy-auth"
 source_hash: "e809fb3b4f2082b7b181fde70e06f33785b93037c358ced67224779e6c22eabf"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/trusted-proxy-auth.md"
 original_doc_path: "gateway/trusted-proxy-auth.md"
 duplicate_index: 1

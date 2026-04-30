@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenClaw App SDK API design"
 source: "https://docs.openclaw.ai/reference/openclaw-sdk-api-design"
 source_hash: "97876023471c530375e3231226a21893863b4c0db95799b7adc062880723e27b"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "reference/openclaw-sdk-api-design.md"
 original_doc_path: "reference/openclaw-sdk-api-design.md"
 duplicate_index: 1

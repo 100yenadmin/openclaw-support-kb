@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
 source_hash: "1858f533aa7c0b0136e5d5b5ed3a98db45ca062fc700b91011f446809148b26b"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/wiki.md"
 original_doc_path: "cli/wiki.md"
 duplicate_index: 1

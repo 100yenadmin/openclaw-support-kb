@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
 source_hash: "d392e4173b35d1760b8c71ff545c24b25b1d23c33fddf3a8c93c36c12d734115"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/security/audit-checks.md"
 original_doc_path: "gateway/security/audit-checks.md"
 duplicate_index: 1

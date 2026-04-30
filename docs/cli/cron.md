@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
 source_hash: "ccc869a381561354603ea945e5d182a8ddf9fee4eece129ca1500aa3e10a2b11"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/cron.md"
 original_doc_path: "cli/cron.md"
 duplicate_index: 1

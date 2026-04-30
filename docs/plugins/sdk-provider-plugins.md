@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
 source_hash: "846428b59db80567931cde9df3b07c857b9f1811e22076ff97ece031d208bc4c"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/sdk-provider-plugins.md"
 original_doc_path: "plugins/sdk-provider-plugins.md"
 duplicate_index: 1

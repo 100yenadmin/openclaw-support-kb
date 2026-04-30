@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
 source_hash: "e20ad391a5cd44e378ebdd008184259b55fae00676ff5f8e0a53e29456658a3a"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1

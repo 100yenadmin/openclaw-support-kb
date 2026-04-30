@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "vLLM"
 source: "https://docs.openclaw.ai/providers/vllm"
 source_hash: "03561b041a59b85e56cb076b8e454a23179ed301580d44dc15618ef939379f46"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/vllm.md"
 original_doc_path: "providers/vllm.md"
 duplicate_index: 1

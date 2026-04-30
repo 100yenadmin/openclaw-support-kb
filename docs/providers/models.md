@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Model provider quickstart"
 source: "https://docs.openclaw.ai/providers/models"
 source_hash: "a23c0dd5147f003ecdbbb8bb4f2adcc96a1afcd75a7fd5aa51df5988d13c1c0f"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/models.md"
 original_doc_path: "providers/models.md"
 duplicate_index: 1

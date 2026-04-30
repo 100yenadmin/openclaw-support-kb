@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Kubernetes"
 source: "https://docs.openclaw.ai/install/kubernetes"
 source_hash: "93c3caddbfdd74c51d89f25ae69ca6ed72719b7d4a794ae2b8373200c8293748"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/kubernetes.md"
 original_doc_path: "install/kubernetes.md"
 duplicate_index: 1

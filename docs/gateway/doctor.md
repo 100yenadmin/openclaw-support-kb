@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
 source_hash: "ae34992ef7e5ce6c5f2f1ee33468128a9670e1e1698f7a92e4929fbff5e01ca8"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1

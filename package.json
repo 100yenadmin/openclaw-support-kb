@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node scripts/build-kb.mjs",
     "check:release": "node scripts/check-release-update.mjs",
+    "check:scanner": "node scripts/check-scanner-spec.mjs",
     "setup": "node scripts/update-client.mjs",
     "sync:local": "node scripts/sync-local.mjs",
     "update:client": "node scripts/update-client.mjs",

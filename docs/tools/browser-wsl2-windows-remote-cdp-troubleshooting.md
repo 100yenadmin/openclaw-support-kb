@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "WSL2 + Windows + remote Chrome CDP troubleshooting"
 source: "https://docs.openclaw.ai/tools/browser-wsl2-windows-remote-cdp-troubleshooting"
 source_hash: "d05af0b5175d95e6f4bd4514e884e9357fd880167b2762c9ddd55c8d25669f4e"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/browser-wsl2-windows-remote-cdp-troubleshooting.md"
 original_doc_path: "tools/browser-wsl2-windows-remote-cdp-troubleshooting.md"
 duplicate_index: 1

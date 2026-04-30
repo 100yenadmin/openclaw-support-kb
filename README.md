@@ -78,9 +78,10 @@ gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb && gbrain embed --stale
 If `gbrain` is not installed, setup fails unless
 `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` is explicitly set for a degraded
 read-only install. A normal install also runs a verification search after
-embedding. The verification is intentionally lightweight: it fails on empty/no
-result searches, warns on unusual output shape, and only enforces source-shape
-matching when `OPENCLAW_SUPPORT_KB_STRICT_SEARCH_VERIFY=1` is set.
+embedding. The verification runs two searches: one for this KB's manifest and
+one for the Telegram docs. It fails on empty/no-result searches or missing
+expected markers. Use `OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only if a
+known-good GBrain version formats search output too tersely for marker checks.
 
 The installed skills assume helper scripts are available from:
 

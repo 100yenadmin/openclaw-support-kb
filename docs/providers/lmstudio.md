@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
 source_hash: "533f99a216079622405ce1dc76573ef0ed2bb999d3f59ab67510210bb5b8cd1c"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/lmstudio.md"
 original_doc_path: "providers/lmstudio.md"
 duplicate_index: 1

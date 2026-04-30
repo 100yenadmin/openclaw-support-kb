@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
 source_hash: "3858e8ddeae8de18ba00e601b48204dde635cce416c69ef083fb4ed5bc00e45f"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "channels/pairing.md"
 original_doc_path: "channels/pairing.md"
 duplicate_index: 1

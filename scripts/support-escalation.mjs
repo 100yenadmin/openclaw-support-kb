@@ -134,9 +134,12 @@ async function approvalContext(args) {
 }
 
 async function sendEmail(args) {
-  const subject = argValue(args, "--subject", "[OpenClaw Support] Support request");
+  const subject = argValue(args, "--subject");
   const account = argValue(args, "--account");
   const approvedRecipient = argValue(args, "--approved-recipient");
+  if (!subject) {
+    throw new Error("Refusing to send email without explicit --subject. The user must approve the exact subject.");
+  }
   const { draftPath } = await requireApprovedDraft(args, "email");
   if (approvedRecipient !== "support@electricsheephq.com") {
     throw new Error("Refusing to send email: approved recipient must be support@electricsheephq.com");

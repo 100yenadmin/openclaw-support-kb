@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
 source_hash: "f709cc4cad1a59b44ae81d2d3d94e58dcc530f4f1cef891a986390db3afbfba0"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "concepts/agent-workspace.md"
 original_doc_path: "concepts/agent-workspace.md"
 duplicate_index: 1

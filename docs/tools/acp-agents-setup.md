@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
 source_hash: "bad642a662d18ec76c566e00852563ac361687cdd076d29b6bcda0f87236bb14"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/acp-agents-setup.md"
 original_doc_path: "tools/acp-agents-setup.md"
 duplicate_index: 1

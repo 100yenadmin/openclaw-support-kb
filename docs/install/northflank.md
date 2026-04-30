@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Northflank"
 source: "https://docs.openclaw.ai/install/northflank"
 source_hash: "6689f483695e3ffd3e33764e61b3b00d18f9bf7cea90905d6e713598093b7fbd"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/northflank.md"
 original_doc_path: "install/northflank.md"
 duplicate_index: 1

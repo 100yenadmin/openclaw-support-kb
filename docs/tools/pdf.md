@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
 source_hash: "cb8467c701bfbbc6bec37fe8986904d06a8c0858cf530e43a44e4b14e96c2af7"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "tools/pdf.md"
 original_doc_path: "tools/pdf.md"
 duplicate_index: 1

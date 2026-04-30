@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
 source_hash: "dca6058b8ed1bf49a18ac3c3cbf1232c8c67d0b050b793e7bf22db26d309ae70"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/docker.md"
 original_doc_path: "install/docker.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
 source_hash: "937ab7dbba4425d5519b4e73ee9491fe0bf129aded99d337e29cc1500ad656fe"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "concepts/features.md"
 original_doc_path: "concepts/features.md"
 duplicate_index: 1

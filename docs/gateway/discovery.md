@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Discovery and transports"
 source: "https://docs.openclaw.ai/gateway/discovery"
 source_hash: "5b24696129ce6a085ac820a8d318ef543b432f581fe0e1765405093cf8385b8c"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "gateway/discovery.md"
 original_doc_path: "gateway/discovery.md"
 duplicate_index: 1

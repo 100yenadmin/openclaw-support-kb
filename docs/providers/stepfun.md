@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "StepFun"
 source: "https://docs.openclaw.ai/providers/stepfun"
 source_hash: "c00f9e186a1d3e80b5b5d094bc6f27e929e74116df3cbe650a568c3312ea9391"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "providers/stepfun.md"
 original_doc_path: "providers/stepfun.md"
 duplicate_index: 1

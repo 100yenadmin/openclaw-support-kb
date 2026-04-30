@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Devices"
 source: "https://docs.openclaw.ai/cli/devices"
 source_hash: "3688ce09fe0e71c4490d1617c65a5f57e3761bcaf27486dc5644f72aca87b4b4"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/devices.md"
 original_doc_path: "cli/devices.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Automation & tasks"
 source: "https://docs.openclaw.ai/automation/index"
 source_hash: "b8fddc64fdab360185cf53a5e94b65f96d78b514c41b57b74b46032ff3fe53cb"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "automation/index.md"
 original_doc_path: "automation/index.md"
 duplicate_index: 1

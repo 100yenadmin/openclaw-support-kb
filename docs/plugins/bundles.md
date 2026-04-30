@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin bundles"
 source: "https://docs.openclaw.ai/plugins/bundles"
 source_hash: "356f309764011dbf314509fa8811dc39612ef4228499147615ea78b8d5f52b38"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/bundles.md"
 original_doc_path: "plugins/bundles.md"
 duplicate_index: 1

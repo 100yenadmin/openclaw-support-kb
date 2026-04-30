@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
 source_hash: "2a7faf82431ce4e36f06e2155e0da18823a912679556d9e273c95086b9c228cf"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "install/uninstall.md"
 original_doc_path: "install/uninstall.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
 source_hash: "615384de3f4144857367176b012fa19c71df3f36f39532a4e70b9f9ed79f9380"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "plugins/sdk-channel-plugins.md"
 original_doc_path: "plugins/sdk-channel-plugins.md"
 duplicate_index: 1

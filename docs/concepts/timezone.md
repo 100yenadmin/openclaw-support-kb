@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Timezones"
 source: "https://docs.openclaw.ai/concepts/timezone"
 source_hash: "0b28190af234c5897ae0d0dea5a7096eca09fb5cb0fdf56c2c53af12d63935de"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "concepts/timezone.md"
 original_doc_path: "concepts/timezone.md"
 duplicate_index: 1

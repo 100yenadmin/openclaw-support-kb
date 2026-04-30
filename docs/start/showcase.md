@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
 source_hash: "e979235fbedf27d34f95465db4c120209da0bc798bb0b0dcd32e80a8e6be460c"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "start/showcase.md"
 original_doc_path: "start/showcase.md"
 duplicate_index: 1

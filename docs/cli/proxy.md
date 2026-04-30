@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Proxy"
 source: "https://docs.openclaw.ai/cli/proxy"
 source_hash: "955332a07135d9d1146d71f8ddcab25303ef4d0ba5db514599ffd8628a5c2e35"
-generated_at: "2026-04-30T12:08:08.028Z"
+generated_at: "2026-04-30T12:18:14.365Z"
 doc_path: "cli/proxy.md"
 original_doc_path: "cli/proxy.md"
 duplicate_index: 1
