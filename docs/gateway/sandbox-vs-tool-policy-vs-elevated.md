@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Sandbox vs tool policy vs elevated"
 source: "https://docs.openclaw.ai/gateway/sandbox-vs-tool-policy-vs-elevated"
 source_hash: "09c105f30953bfd056ce51574c9466164858eab9240556996dd62428e1ee949a"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/sandbox-vs-tool-policy-vs-elevated.md"
 original_doc_path: "gateway/sandbox-vs-tool-policy-vs-elevated.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Health"
 source: "https://docs.openclaw.ai/cli/health"
 source_hash: "36fcff671b25feb12a682a2c3282c51623707bfeebcb3b9b5d0d1eb5da9196d7"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/health.md"
 original_doc_path: "cli/health.md"
 duplicate_index: 1

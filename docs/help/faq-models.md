@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
 source_hash: "0e0d93dbe37eb2eaa3458eff2834c78dd4f0b7649b555bf3d1461e7fcd31a17d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "help/faq-models.md"
 original_doc_path: "help/faq-models.md"
 duplicate_index: 1

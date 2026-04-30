@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Inference CLI"
 source: "https://docs.openclaw.ai/cli/infer"
 source_hash: "225301cb7df545ad7af774d7e08a6ba8a75c67f0912036a3ae97e948c047fd27"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/infer.md"
 original_doc_path: "cli/infer.md"
 duplicate_index: 1

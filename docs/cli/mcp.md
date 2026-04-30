@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
 source_hash: "285161d98428417a8720b91066fa29eaeb90576c9dae9a7b255395645fde0810"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/mcp.md"
 original_doc_path: "cli/mcp.md"
 duplicate_index: 1

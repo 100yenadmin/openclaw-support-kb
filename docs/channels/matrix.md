@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Matrix"
 source: "https://docs.openclaw.ai/channels/matrix"
 source_hash: "4e4923a604c83c881363c6c87c20347b7e162d317d1bdb214b1fdca86261cdf2"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/matrix.md"
 original_doc_path: "channels/matrix.md"
 duplicate_index: 1

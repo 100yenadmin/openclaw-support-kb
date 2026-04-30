@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Diagnostics flags"
 source: "https://docs.openclaw.ai/diagnostics/flags"
 source_hash: "65fac505cad7700d2cf591084cf206cce6ca8748dd53e764852b79810cefcd71"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "diagnostics/flags.md"
 original_doc_path: "diagnostics/flags.md"
 duplicate_index: 1

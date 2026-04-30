@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
 source_hash: "7c022a65b992405ad4ff9f68875745acacb56e0b9c87539dbc08f2866cae2e08"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/android.md"
 original_doc_path: "platforms/android.md"
 duplicate_index: 1

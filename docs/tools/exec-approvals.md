@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
 source_hash: "0e5a5b101a3cf82e1ac94b8c1959c85e56850c5c27b8813ed1555cc8f54548c0"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/exec-approvals.md"
 original_doc_path: "tools/exec-approvals.md"
 duplicate_index: 1

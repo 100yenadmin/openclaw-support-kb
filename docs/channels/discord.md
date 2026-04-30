@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
 source_hash: "edac143bf6edeb8a1921d7ad59613d3d2ee5e5bcaecfaa2e7b1e7957eb8b6cca"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1

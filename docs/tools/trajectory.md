@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Trajectory bundles"
 source: "https://docs.openclaw.ai/tools/trajectory"
 source_hash: "4954b50d8d5af2538418e3755ce1f21d0776671a0dc8dce69c4e9d397774cd2d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/trajectory.md"
 original_doc_path: "tools/trajectory.md"
 duplicate_index: 1

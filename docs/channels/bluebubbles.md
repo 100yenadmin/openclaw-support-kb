@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "BlueBubbles"
 source: "https://docs.openclaw.ai/channels/bluebubbles"
 source_hash: "1ff79e244172caf2c5fc540941fd8eb49fa0f4fea50d2ee64427d39a7bd24ce1"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/bluebubbles.md"
 original_doc_path: "channels/bluebubbles.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Onboarding reference"
 source: "https://docs.openclaw.ai/reference/wizard"
 source_hash: "8958429cb79f6f136bc3d4781cc28d31c19aced80c86c492cbdba501bb14b30e"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/wizard.md"
 original_doc_path: "reference/wizard.md"
 duplicate_index: 1

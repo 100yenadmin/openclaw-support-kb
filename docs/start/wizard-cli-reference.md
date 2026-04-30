@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
 source_hash: "1b4c18246c51dcb1654db6e2fd6ed468a292ecc24884097b71e6bd7e64cebf43"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/wizard-cli-reference.md"
 original_doc_path: "start/wizard-cli-reference.md"
 duplicate_index: 1

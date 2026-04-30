@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Gateway-owned pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
 source_hash: "fe3e900bbe666dabb93ebc65cd298ac0baf5050e2740f524bc2996b135d79517"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/pairing.md"
 original_doc_path: "gateway/pairing.md"
 duplicate_index: 1

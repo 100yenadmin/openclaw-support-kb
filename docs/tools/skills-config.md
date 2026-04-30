@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
 source_hash: "473ef118378989ffaabac6b455bece6bcc707abc39759ddca00ac0990f125deb"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/skills-config.md"
 original_doc_path: "tools/skills-config.md"
 duplicate_index: 1

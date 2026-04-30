@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
 source_hash: "5e19fad677427248cbe35eaaadb5ec6c05ae2a6710a9ea81b75fbddc28bbbcd6"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/browser-control.md"
 original_doc_path: "tools/browser-control.md"
 duplicate_index: 1

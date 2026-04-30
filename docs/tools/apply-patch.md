@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "apply_patch tool"
 source: "https://docs.openclaw.ai/tools/apply-patch"
 source_hash: "cfdcebd88df8c46a7c49f2d2fd2a058e8cdab2e106dad294eb5f1a1b65ca2bf8"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/apply-patch.md"
 original_doc_path: "tools/apply-patch.md"
 duplicate_index: 1

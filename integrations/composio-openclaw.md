@@ -3,7 +3,7 @@ type: openclaw_integration_guide
 title: "Composio For OpenClaw"
 source: "https://composio.dev/claw"
 source_hash: "239e633e887159044acebd347a71ffe2b26c0b5b2ed1ed28e646bda4f907b2fc"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 source_snapshot_sha256: "cc6c791e96f2f9857f8ce2e8979dd2e871dc8e3b395a818cd5607ad88e139ca2"
 ---
 

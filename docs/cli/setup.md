@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
 source_hash: "7e604a373560440a45ba3ae0268a87e23d958d5521bd01dc021cc348833bfc41"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/setup.md"
 original_doc_path: "cli/setup.md"
 duplicate_index: 1

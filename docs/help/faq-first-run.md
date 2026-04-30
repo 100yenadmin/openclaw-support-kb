@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
 source_hash: "6dce6fb0f0664d45ef66e4cd62dec32e934a1b1cdce2e294e43ba26ff79bb184"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "help/faq-first-run.md"
 original_doc_path: "help/faq-first-run.md"
 duplicate_index: 1

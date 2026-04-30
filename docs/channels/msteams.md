@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
 source_hash: "be0e85f8f72481f8a48ebbca1a7af93ef96a62e39eb0ef699fc41fde4ea64367"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/msteams.md"
 original_doc_path: "channels/msteams.md"
 duplicate_index: 1

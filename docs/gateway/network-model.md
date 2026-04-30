@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Network model"
 source: "https://docs.openclaw.ai/gateway/network-model"
 source_hash: "5448353abe06e8db149cf580ec0b13cc1f86d5989916eac6c37b5c249f35786b"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/network-model.md"
 original_doc_path: "gateway/network-model.md"
 duplicate_index: 1

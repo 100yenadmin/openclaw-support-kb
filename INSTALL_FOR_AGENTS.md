@@ -12,6 +12,11 @@ fresh local KB before guessing or escalating.
 Users do **not** push to this repo. The publisher updates the repo; each user
 machine pulls it read-only and syncs it into GBrain.
 
+This repo is **not** an npm package and does not install a global command.
+`package.json` only provides local aliases after this repo is cloned and the
+agent has changed into the repo directory. Prefer the explicit
+`node scripts/...` commands below.
+
 ## Install
 
 Use the official published repo URL:
@@ -42,8 +47,10 @@ Run setup:
 
 ```bash
 cd "$OPENCLAW_SUPPORT_KB_DIR"
-npm run setup
+node scripts/update-client.mjs
 ```
+
+Equivalent local alias from this repo directory: `npm run setup`.
 
 Setup requires `gbrain`. If `gbrain` is missing, stop and install/fix GBrain.
 Use `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` only for an explicit degraded
@@ -88,13 +95,13 @@ support/config/setup questions:
 ```bash
 cd "$HOME/.gbrain/sources/openclaw-support-kb"
 git pull --ff-only
-npm run setup
+node scripts/update-client.mjs
 ```
 
 For beta/prerelease docs:
 
 ```bash
-OPENCLAW_KB_CHANNEL=beta npm run setup
+OPENCLAW_KB_CHANNEL=beta node scripts/update-client.mjs
 ```
 
 ## Support Escalation Policy

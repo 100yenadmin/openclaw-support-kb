@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Oracle Cloud"
 source: "https://docs.openclaw.ai/install/oracle"
 source_hash: "e4b83ca5b96277cdff6c7ab923f89a4db7b1643dd78a5f90ea186a9cb5597008"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "install/oracle.md"
 original_doc_path: "install/oracle.md"
 duplicate_index: 1

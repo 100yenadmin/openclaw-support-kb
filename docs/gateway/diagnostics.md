@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Diagnostics export"
 source: "https://docs.openclaw.ai/gateway/diagnostics"
 source_hash: "6c06342fd5d9ac788757b2ca7634bc78e7b9f1c25b209300d21a8bbd16f9b246"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/diagnostics.md"
 original_doc_path: "gateway/diagnostics.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Matrix push rules for quiet previews"
 source: "https://docs.openclaw.ai/channels/matrix-push-rules"
 source_hash: "835c5f594a0f25dcec8008a586d31ba5ae6f2fcdc2848d7323318ba0f33fe870"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/matrix-push-rules.md"
 original_doc_path: "channels/matrix-push-rules.md"
 duplicate_index: 1

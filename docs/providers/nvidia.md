@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
 source_hash: "515982cd87c3a97cec9654cc03c3589f5a22008d2d0519b0f0702d7acca94f42"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/nvidia.md"
 original_doc_path: "providers/nvidia.md"
 duplicate_index: 1

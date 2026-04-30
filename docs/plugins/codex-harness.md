@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
 source_hash: "74d3f6f5cc98a80f368ed3f3a67cb69a58d4bdb789bf5cb0115197772b760327"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1

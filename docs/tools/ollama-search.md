@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Ollama web search"
 source: "https://docs.openclaw.ai/tools/ollama-search"
 source_hash: "213b4eefad81851276061900425924e5dc9c27b787bc3938c767610274689a5b"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/ollama-search.md"
 original_doc_path: "tools/ollama-search.md"
 duplicate_index: 1

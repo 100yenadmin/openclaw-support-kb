@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
 source_hash: "f9bc6cad1ea6fce2583957cef5b95a6a074c5e588c5c28e19fd4f5b129257e65"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/local-models.md"
 original_doc_path: "gateway/local-models.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "GPT-5.5 / Codex parity maintainer notes"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity-maintainers"
 source_hash: "9c5b2e4f7294b44918750a5157e91387a48febc5d6c0afe7aea76fabfba5391f"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
 original_doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
 duplicate_index: 1

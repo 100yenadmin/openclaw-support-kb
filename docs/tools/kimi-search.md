@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Kimi search"
 source: "https://docs.openclaw.ai/tools/kimi-search"
 source_hash: "dae8f5f8c31016aa352123996bd57da1d3b299ee2673cb8003c77eebdff53e63"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "tools/kimi-search.md"
 original_doc_path: "tools/kimi-search.md"
 duplicate_index: 1

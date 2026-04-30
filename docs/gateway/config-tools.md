@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
 source_hash: "7a0fbe32ae48ae9d0c834eba6674fa3132ac83d8425c241c6e92807892319ce7"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/config-tools.md"
 original_doc_path: "gateway/config-tools.md"
 duplicate_index: 1

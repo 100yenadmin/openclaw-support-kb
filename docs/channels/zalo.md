@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Zalo"
 source: "https://docs.openclaw.ai/channels/zalo"
 source_hash: "98d026e25dea14a2b23085ab9436349a658e16ee27e06b6acc9ca04f5285add6"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/zalo.md"
 original_doc_path: "channels/zalo.md"
 duplicate_index: 1

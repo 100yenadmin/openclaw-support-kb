@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
 source_hash: "4f75746bbb8b3ba03b2da99573c3a775b15f2fbb5c1f3e488fae342c364ada1a"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/memory-lancedb.md"
 original_doc_path: "plugins/memory-lancedb.md"
 duplicate_index: 1

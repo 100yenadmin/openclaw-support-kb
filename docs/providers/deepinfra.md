@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Deepinfra"
 source: "https://docs.openclaw.ai/providers/deepinfra"
 source_hash: "7d2dc1c16a8f5930a311499dfa70c0628267681f9748da737ef87f3cd22af571"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/deepinfra.md"
 original_doc_path: "providers/deepinfra.md"
 duplicate_index: 1

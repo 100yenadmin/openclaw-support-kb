@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
 source_hash: "1445e7efcbe01e010150bd501d18e57b2ae7531fa5ef5a260a77b334c4ebea47"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/daemon.md"
 original_doc_path: "cli/daemon.md"
 duplicate_index: 1

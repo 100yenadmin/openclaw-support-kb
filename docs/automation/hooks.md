@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
 source_hash: "1b94093b75bff58f51b05ce1e3359bb425cf02d59a707675f6d4b11b2720266a"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "automation/hooks.md"
 original_doc_path: "automation/hooks.md"
 duplicate_index: 1

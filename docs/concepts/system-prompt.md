@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
 source_hash: "a63536dcc979a0008af36ff8603b56a6d469a77161e3bcc3196dc7f2ebe6a3db"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/system-prompt.md"
 original_doc_path: "concepts/system-prompt.md"
 duplicate_index: 1

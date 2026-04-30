@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Plugin SDK subpaths"
 source: "https://docs.openclaw.ai/plugins/sdk-subpaths"
 source_hash: "83b181328e914fa7f2624886e062ad34391884e4d5933060093677fb69c2e1d9"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/sdk-subpaths.md"
 original_doc_path: "plugins/sdk-subpaths.md"
 duplicate_index: 1

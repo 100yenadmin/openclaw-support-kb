@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
 source_hash: "884ad54e3a4e6b53c9eed453afbb9d15a5aaa7db3e0be4c2f7c1b2dc845d6eab"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "start/openclaw.md"
 original_doc_path: "start/openclaw.md"
 duplicate_index: 1

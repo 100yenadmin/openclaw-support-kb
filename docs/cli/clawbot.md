@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Clawbot"
 source: "https://docs.openclaw.ai/cli/clawbot"
 source_hash: "4bbf82248703ae57f3c8138797488c469a54baf40de0ac566782c70642041398"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/clawbot.md"
 original_doc_path: "cli/clawbot.md"
 duplicate_index: 1

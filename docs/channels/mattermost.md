@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
 source_hash: "6899405e08af481120cdb90bce37686b0f5615967c50891882ca7c39327e8936"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/mattermost.md"
 original_doc_path: "channels/mattermost.md"
 duplicate_index: 1

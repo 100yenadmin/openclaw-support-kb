@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Zalo personal plugin"
 source: "https://docs.openclaw.ai/plugins/zalouser"
 source_hash: "a8e7028b32322d860d20cea34c0d5cec016fd2cad473a8867a439bbc47490e5f"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/zalouser.md"
 original_doc_path: "plugins/zalouser.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
 source_hash: "f8e8ecab111418f0a6d969c9983d22950a7c8a7f497bae98de42ca506f2798b4"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "reference/agents.default.md"
 original_doc_path: "reference/agents.default.md"
 duplicate_index: 1

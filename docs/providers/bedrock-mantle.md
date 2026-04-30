@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Amazon Bedrock Mantle"
 source: "https://docs.openclaw.ai/providers/bedrock-mantle"
 source_hash: "0501adf323778b8dea195a088bbfd364736b68e95ad7fa283a0dfe9cd672d728"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/bedrock-mantle.md"
 original_doc_path: "providers/bedrock-mantle.md"
 duplicate_index: 1

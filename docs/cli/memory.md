@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
 source_hash: "47960a52418747ca9681c99a6930356cfef041b45b48302a1a2ba31c4b63afa4"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/memory.md"
 original_doc_path: "cli/memory.md"
 duplicate_index: 1

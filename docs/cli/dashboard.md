@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Dashboard"
 source: "https://docs.openclaw.ai/cli/dashboard"
 source_hash: "8d94d6dc5aaae04ef23deefd9ae4b98b5d1740707d571ac1ab32e37b79c934a8"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/dashboard.md"
 original_doc_path: "cli/dashboard.md"
 duplicate_index: 1

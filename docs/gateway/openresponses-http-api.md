@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
 source_hash: "9df40986cf1e2870e62d87e6c7fd7bbf97bc1d71b1baf03b70ce389104e3b338"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/openresponses-http-api.md"
 original_doc_path: "gateway/openresponses-http-api.md"
 duplicate_index: 1

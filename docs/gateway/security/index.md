@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security/index"
 source_hash: "2754f6189e02a75c4fc04cacfa4278dd2863054b9ac793de7e25126ed46b749e"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/security/index.md"
 original_doc_path: "gateway/security/index.md"
 duplicate_index: 1

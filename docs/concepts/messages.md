@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
 source_hash: "b9c8b87b4c7ae82a6f849abc1e1b328a6d470f2addf1b977abcc39548e75c8ce"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "concepts/messages.md"
 original_doc_path: "concepts/messages.md"
 duplicate_index: 1

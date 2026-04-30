@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
 source_hash: "065a087b8b5ad54c95b28ea467839cc428866025324d93247221e7e08460908d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "nodes/media-understanding.md"
 original_doc_path: "nodes/media-understanding.md"
 duplicate_index: 1

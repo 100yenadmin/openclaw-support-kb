@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Health checks"
 source: "https://docs.openclaw.ai/gateway/health"
 source_hash: "954f16bcbcac6ccce1ad33e1ba6f4cdbba0fcb86847d74f6f7468bfddfeefb63"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "gateway/health.md"
 original_doc_path: "gateway/health.md"
 duplicate_index: 1

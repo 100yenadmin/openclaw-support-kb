@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
 source_hash: "6b0dd84d2b7e21197f7f3d9e6616232788465e7fd0d130ce7c75aeb0c6cd723d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1

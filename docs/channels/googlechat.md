@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
 source_hash: "0444f2e790bbf61acf02c1d276b472a170a5cb9894384981ef5805379015308d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/googlechat.md"
 original_doc_path: "channels/googlechat.md"
 duplicate_index: 1

@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
 source_hash: "2bdfb0560ba27df8dfc5b3360d5b66e01a2248f151778ea41eec2ad453868f91"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "install/updating.md"
 original_doc_path: "install/updating.md"
 duplicate_index: 1

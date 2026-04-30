@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Audio and voice notes"
 source: "https://docs.openclaw.ai/nodes/audio"
 source_hash: "78bc3e5c42e2ce84c23c232891285f124707d880da5f754662094d49f8deb28d"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "nodes/audio.md"
 original_doc_path: "nodes/audio.md"
 duplicate_index: 1

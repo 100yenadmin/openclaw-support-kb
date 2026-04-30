@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "DeepSeek"
 source: "https://docs.openclaw.ai/providers/deepseek"
 source_hash: "9d4df965efd4f29749802c47e26ae2a88e81b575cf8d568cd3665e6bdd043ce1"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/deepseek.md"
 original_doc_path: "providers/deepseek.md"
 duplicate_index: 1

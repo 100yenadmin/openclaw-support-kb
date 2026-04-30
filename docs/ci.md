@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "CI pipeline"
 source: "https://docs.openclaw.ai/ci"
 source_hash: "3c1bb1c213d6a8cf08ad93535c7fe5c79a84b6704de1ba53115b02c037b5c511"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "ci.md"
 original_doc_path: "ci.md"
 duplicate_index: 1

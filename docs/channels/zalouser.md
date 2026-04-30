@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
 source_hash: "780e55b7ec24849fa21b8e60db76a59ab714de54b1d05553215f35fc67147f05"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "channels/zalouser.md"
 original_doc_path: "channels/zalouser.md"
 duplicate_index: 1

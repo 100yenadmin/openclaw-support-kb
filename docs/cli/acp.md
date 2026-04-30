@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "ACP"
 source: "https://docs.openclaw.ai/cli/acp"
 source_hash: "50d9037005c64f8a5e7cca0b79f4fe9cc51b6318804c651a31e48a68eabada2a"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "cli/acp.md"
 original_doc_path: "cli/acp.md"
 duplicate_index: 1

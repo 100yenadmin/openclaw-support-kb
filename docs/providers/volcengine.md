@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
 source_hash: "0568a60adfdd6f37e1a93e5b2b409e6a06f463a3afb6f9e55b9c2742231a7cff"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "providers/volcengine.md"
 original_doc_path: "providers/volcengine.md"
 duplicate_index: 1

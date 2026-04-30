@@ -30,11 +30,18 @@ must be pinned with `OPENCLAW_SUPPORT_KB_PINNED_REF` and explicitly allowed.
 The official published repo is `100yenadmin/openclaw-support-kb`; upstream
 OpenClaw release/docs data still comes from `openclaw/openclaw`.
 
+This repo is not published as an npm package. `package.json` is only a local
+script runner for agents/CI after they have already cloned this repo and changed
+into the repo directory. The explicit `node scripts/...` commands below are the
+canonical commands; `npm run ...` aliases are just convenience wrappers.
+
 ## Build
 
 ```bash
-npm run build
+node scripts/build-kb.mjs
 ```
+
+Local alias from this repo directory: `npm run build`.
 
 The builder fetches:
 
@@ -46,7 +53,7 @@ The builder fetches:
 
 It writes source-preserving docs/release Markdown, source-indexed policy
 summaries, and `kb-manifest.json`.
-Run `npm run check:manifest` after local edits to confirm the manifest still
+Run `node scripts/check-manifest.mjs` after local edits to confirm the manifest still
 matches the indexed artifact.
 
 Skill discovery is intentionally layered: local VoltAgent snapshot, current
@@ -60,13 +67,14 @@ Builds refuse to replace arbitrary directories. The default managed target is
 ## Install On An Agent Machine
 
 ```bash
-npm run setup
+node scripts/update-client.mjs
 ```
 
-`setup` installs the four OpenClaw support skills into `~/.openclaw/skills`,
-writes an agent hint block to active OpenClaw workspace `AGENTS.md` files, and
-syncs this source into GBrain. Override skills destination with
-`OPENCLAW_SKILLS_DIR`.
+Local alias from this repo directory: `npm run setup`.
+
+Setup installs the four OpenClaw support skills into `~/.openclaw/skills`, writes
+an agent hint block to active OpenClaw workspace `AGENTS.md` files, and syncs
+this source into GBrain. Override skills destination with `OPENCLAW_SKILLS_DIR`.
 
 `sync:local` builds the KB into `~/.gbrain/sources/openclaw-support-kb`, then
 runs:

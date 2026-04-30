@@ -3,7 +3,7 @@ type: openclaw_doc
 title: "Voice wake (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/voicewake"
 source_hash: "c3571b1f6ec220a17d3df3a240d85e3f7db1f32c1d4fe9816fd15503c1f9f9aa"
-generated_at: "2026-04-30T12:30:37.668Z"
+generated_at: "2026-04-30T13:41:35.154Z"
 doc_path: "platforms/mac/voicewake.md"
 original_doc_path: "platforms/mac/voicewake.md"
 duplicate_index: 1
