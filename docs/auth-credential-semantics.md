@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Auth credential semantics"
 source: "https://docs.openclaw.ai/auth-credential-semantics"
-source_hash: "021b0ac0506b85896e220fcf579a7af5b82a3852e05491c515b01499c227598e"
+source_hash: "7b8a2d37765f01ad94513f1f8545d6b49e1144380ac5b561893c1fb4e08a6698"
 doc_path: "auth-credential-semantics.md"
 original_doc_path: "auth-credential-semantics.md"
 duplicate_index: 1
@@ -92,6 +92,9 @@ the target agent signs in separately and creates its own local profile.
 * Runtime-only credentials owned by external CLIs are discovered only when the
   provider, runtime, or auth profile is in scope for the current operation, or
   when a stored local profile for that external source already exists.
+* Auth-store callers should choose an explicit external-CLI discovery mode:
+  `none` for persisted/plugin auth only, `existing` for refreshing already
+  stored external CLI profiles, or `scoped` for a concrete provider/profile set.
 * Read-only/status paths pass `allowKeychainPrompt: false`; they use file-backed
   external CLI credentials only and do not read or reuse macOS Keychain results.
 

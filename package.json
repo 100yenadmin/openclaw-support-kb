@@ -13,6 +13,7 @@
     "update:client": "node scripts/update-client.mjs",
     "update:run": "node scripts/run-client-update.mjs",
     "status": "node scripts/status.mjs",
+    "repair:index": "node scripts/repair-index.mjs",
     "install:auto-update": "node scripts/install-auto-update.mjs",
     "install:skills": "node scripts/install-skills.mjs",
     "check:manifest": "node scripts/check-manifest.mjs",

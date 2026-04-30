@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
-import { readFile, stat } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -8,7 +8,9 @@ import {
   compareSemver,
   GBRAIN_SOURCE_ID,
   GBRAIN_VERIFY_QUERIES,
-  parseGbrainSourcesList,
+  isLegacyPreGitBackupName,
+  meaningfulGitStatusLines,
+  readGbrainSourceInfo,
   pathExists,
   readJsonIfExists,
   resolveGbrainCommand,
@@ -178,22 +180,25 @@ function readGbrain(minGbrainVersion) {
 
 function readSourceRegistry(gbrain) {
   if (gbrain.missing || gbrain.versionStatus !== 0) return { checked: false, reason: "gbrain unavailable" };
-  const listed = captureNoExit(gbrain.command, ["sources", "list"]);
-  if (listed.missing) return { checked: false, reason: "gbrain unavailable" };
-  if (listed.status !== 0) {
+  const info = readGbrainSourceInfo({ captureNoExit, gbrainCommand: gbrain.command, sourceId: GBRAIN_SOURCE_ID });
+  if (info.result?.missing) return { checked: false, reason: "gbrain unavailable" };
+  if (!info.ok) {
     return {
       checked: true,
       supported: false,
-      status: listed.status,
-      output: `${listed.stdout}\n${listed.stderr}`.trim(),
+      status: info.result?.status ?? 1,
+      output: `${info.result?.stdout ?? ""}\n${info.result?.stderr ?? ""}`.trim(),
     };
   }
-  const source = parseGbrainSourcesList(`${listed.stdout}\n${listed.stderr}`, GBRAIN_SOURCE_ID);
+  const source = info.source;
   return {
     checked: true,
     supported: true,
     found: source.found,
     pageCount: source.pageCount,
+    localPath: source.localPath,
+    localPathKnown: Boolean(source.localPathKnown),
+    pathMatchesTarget: source.found && source.localPathKnown ? path.resolve(source.localPath || "") === path.resolve(targetDir) : null,
     line: source.line,
   };
 }
@@ -237,12 +242,22 @@ function readSourceGitStatus(sourceIsGit) {
   if (result.status !== 0) {
     return { checked: true, dirty: true, error: `${result.stdout}\n${result.stderr}`.trim(), files: [] };
   }
-  const files = result.stdout
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .filter((line) => !/^\?\? \.gbrain-source$/.test(line));
+  const files = meaningfulGitStatusLines(result.stdout);
   return { checked: true, dirty: files.length > 0, files };
+}
+
+async function readLegacySourceBackups() {
+  const sourcesDir = path.dirname(targetDir);
+  let entries = [];
+  try {
+    entries = await readdir(sourcesDir, { withFileTypes: true });
+  } catch {
+    return { checked: false, sourcesDir, entries: [] };
+  }
+  const backups = entries
+    .filter((entry) => entry.isDirectory() && isLegacyPreGitBackupName(entry.name, targetDir))
+    .map((entry) => path.join(sourcesDir, entry.name));
+  return { checked: true, sourcesDir, entries: backups };
 }
 
 async function collectStatus() {
@@ -253,6 +268,7 @@ async function collectStatus() {
   const skills = await installedSkills();
   const lock = await readLock();
   const checkpoint = await readCheckpoint(lock);
+  const legacyBackups = await readLegacySourceBackups();
   const gbrain = readGbrain(manifest?.minGbrainVersion);
   const sourceRegistry = readSourceRegistry(gbrain);
   const search = readSearch(gbrain);
@@ -271,7 +287,13 @@ async function collectStatus() {
     else if (gbrain.versionStatus !== 0) problems.push("gbrain --version failed");
     else if (gbrain.tooOld) problems.push(`gbrain is older than required ${gbrain.minGbrainVersion}`);
     if (checkpoint.stale) problems.push("GBrain import checkpoint is stale and incomplete");
+    if (legacyBackups.entries.length > 0) {
+      problems.push("legacy pre-git support KB backup directories remain under GBrain sources");
+    }
     if (sourceRegistry.supported && !sourceRegistry.found) problems.push(`${GBRAIN_SOURCE_ID} source is not registered`);
+    if (sourceRegistry.supported && sourceRegistry.found && sourceRegistry.pathMatchesTarget === false) {
+      problems.push(`${GBRAIN_SOURCE_ID} source points at ${sourceRegistry.localPath || "no path"} instead of ${targetDir}`);
+    }
     if (sourceRegistry.supported && sourceRegistry.pageCount === 0) {
       problems.push(`${GBRAIN_SOURCE_ID} source has 0 indexed pages`);
     }
@@ -293,6 +315,7 @@ async function collectStatus() {
     skills,
     lock,
     checkpoint,
+    legacyBackups,
     gbrain,
     sourceRegistry,
     search,
@@ -313,7 +336,9 @@ function printHuman(status) {
   if (status.gbrain.versionText) console.log(`GBrain: ${status.gbrain.command} ${status.gbrain.versionText}`);
   if (status.sourceRegistry.supported) {
     console.log(`GBrain source pages: ${status.sourceRegistry.pageCount ?? "unknown"}`);
+    if (status.sourceRegistry.localPath) console.log(`GBrain source path: ${status.sourceRegistry.localPath}`);
   }
+  if (status.legacyBackups?.entries?.length) console.log(`Legacy source backups: ${status.legacyBackups.entries.length}`);
   if (status.lock.active) console.log("Update runner: active");
   if (status.checkpoint.exists && status.checkpoint.incomplete) {
     console.log(`Import checkpoint: ${status.checkpoint.completedFiles}/${status.checkpoint.totalFiles}`);

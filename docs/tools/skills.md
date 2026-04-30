@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "644fa68ee8e64afe02761d52c653e9f5e3867c967b90832b0a4af41abab44290"
+source_hash: "735a3031e717a35369bd0d001d47c2fd8c3510c9384c35794057c9d5e322dcf5"
 doc_path: "tools/skills.md"
 original_doc_path: "tools/skills.md"
 duplicate_index: 1
@@ -33,6 +33,14 @@ OpenClaw loads skills from these sources, **highest precedence first**:
 | 6 | Extra skill folders   | `skills.load.extraDirs` (config) |
 
 If a skill name conflicts, the highest source wins.
+
+Codex CLI's native `$CODEX_HOME/skills` directory is not one of these OpenClaw
+skill roots. In Codex harness mode, local app-server launches use isolated
+per-agent Codex homes, so personal Codex CLI skills are not loaded implicitly.
+Use `openclaw migrate codex --dry-run` to inventory them and
+`openclaw migrate codex` to choose skill directories with an interactive
+checkbox prompt before copying them into the current OpenClaw agent workspace.
+For non-interactive runs, repeat `--skill <name>` for the exact skills to copy.
 
 ## Per-agent vs shared skills
 

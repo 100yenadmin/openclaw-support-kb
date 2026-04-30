@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security/index"
-source_hash: "2754f6189e02a75c4fc04cacfa4278dd2863054b9ac793de7e25126ed46b749e"
+source_hash: "0aafc297493bc08c7c3b71777d08578fd19c75af6377a5c4932383f4e2fcc832"
 doc_path: "gateway/security/index.md"
 original_doc_path: "gateway/security/index.md"
 duplicate_index: 1
@@ -242,6 +242,7 @@ Use this when auditing access or deciding what to back up:
   * `~/.openclaw/credentials/<channel>-allowFrom.json` (default account)
   * `~/.openclaw/credentials/<channel>-<accountId>-allowFrom.json` (non-default accounts)
 * **Model auth profiles**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+* **Codex runtime state**: `~/.openclaw/agents/<agentId>/agent/codex-home/`
 * **File-backed secrets payload (optional)**: `~/.openclaw/secrets.json`
 * **Legacy OAuth import**: `~/.openclaw/credentials/oauth.json`
 
@@ -970,6 +971,7 @@ Assume anything under `~/.openclaw/` (or `$OPENCLAW_STATE_DIR/`) may contain sec
 * `openclaw.json`: config may include tokens (gateway, remote gateway), provider settings, and allowlists.
 * `credentials/**`: channel credentials (example: WhatsApp creds), pairing allowlists, legacy OAuth imports.
 * `agents/<agentId>/agent/auth-profiles.json`: API keys, token profiles, OAuth tokens, and optional `keyRef`/`tokenRef`.
+* `agents/<agentId>/agent/codex-home/**`: per-agent Codex app-server account, config, skills, plugins, native thread state, and diagnostics.
 * `secrets.json` (optional): file-backed secret payload used by `file` SecretRef providers (`secrets.providers`).
 * `agents/<agentId>/agent/auth.json`: legacy compatibility file. Static `api_key` entries are scrubbed when discovered.
 * `agents/<agentId>/sessions/**`: session transcripts (`*.jsonl`) + routing metadata (`sessions.json`) that can contain private messages and tool output.

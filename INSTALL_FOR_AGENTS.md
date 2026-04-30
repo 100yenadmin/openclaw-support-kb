@@ -76,7 +76,8 @@ What setup does:
    files, including `~/.openclaw/workspace/AGENTS.md`
 3. registers `openclaw-support-kb` as a federated GBrain source at
    `~/.gbrain/sources/openclaw-support-kb` when the installed GBrain supports
-   named sources
+   named sources, and recreates that source if its registered path points at an
+   old `.pre-git-*` backup
 4. runs `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb`
    when supported, otherwise legacy `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb`
 5. runs `gbrain embed --stale`
@@ -86,6 +87,15 @@ Search verification runs two checks: one for this KB's manifest and one for the
 Telegram docs. Empty/no-result output or missing expected markers fails. Use
 `OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only if a known-good GBrain version
 formats search output too tersely for marker checks.
+
+GBrain does not re-embed the whole KB on every update. It syncs from git commit
+state, imports changed/deleted files, and `gbrain embed --stale` only fills
+chunks missing embeddings. If `status.mjs` reports legacy pre-git backups under
+the GBrain sources directory, move them to the archive folder with:
+
+```bash
+node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/repair-index.mjs"
+```
 
 If an existing support skill directory is present and was not previously
 managed by this KB, setup backs it up before installing the managed copy.
@@ -148,8 +158,9 @@ gbrain query "How should I safely repair OpenClaw config?"
 Use `node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs" --json`
 for fleet or agent health checks. It reports whether the source checkout is git
 managed, whether the four skills are installed, whether GBrain is new enough,
-whether the `openclaw-support-kb` named source has pages, and whether an import
-checkpoint is stale or an update is currently running.
+whether the `openclaw-support-kb` named source has pages and points at the
+current checkout, whether old pre-git backups remain under GBrain sources, and
+whether an import checkpoint is stale or an update is currently running.
 
 If `gbrain sources list` reports `Unknown command: sources`, continue with the
 two search/query checks. That means this machine has an older GBrain without

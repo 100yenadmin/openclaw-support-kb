@@ -186,8 +186,9 @@ For OpenClaw setup, update, channel, Telegram, config, skill, or support questio
    - openclaw-skill-discovery
    - openclaw-support-escalation
 4. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
-5. Do not invent OpenClaw config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\`.
-6. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
+5. If search or citations mention \`.pre-git-\` or backup/archive paths, run \`node ${path.join(kbDir, "scripts", "status.mjs")}\` and do not cite that stale copy.
+6. Do not invent OpenClaw config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\`.
+7. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
 `,
     );
     console.log(`Updated agent hint block in ${agentsFile}`);

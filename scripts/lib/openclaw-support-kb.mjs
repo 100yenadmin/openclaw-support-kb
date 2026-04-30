@@ -86,6 +86,36 @@ export function canonicalSourceDir(home = os.homedir()) {
   return path.join(home, ".gbrain", "sources", GBRAIN_SOURCE_ID);
 }
 
+export function gbrainRootForSourceDir(targetDir) {
+  const sourceParent = path.dirname(path.resolve(targetDir));
+  if (path.basename(sourceParent) === "sources") return path.dirname(sourceParent);
+  return sourceParent;
+}
+
+export function archiveRootForSourceDir(targetDir) {
+  return process.env.OPENCLAW_SUPPORT_KB_ARCHIVE_DIR || path.join(gbrainRootForSourceDir(targetDir), "archive", GBRAIN_SOURCE_ID);
+}
+
+export function managedPreGitBackupDir(targetDir, { now = Date.now() } = {}) {
+  return path.join(archiveRootForSourceDir(targetDir), `pre-git-${now}`);
+}
+
+export function isLegacyPreGitBackupName(name, targetDir = canonicalSourceDir()) {
+  return new RegExp(`^${escapeRegExp(path.basename(targetDir))}\\.pre-git-\\d+$`).test(String(name || ""));
+}
+
+export function isIgnorableGitStatusLine(line) {
+  return /^\?\?\s+\.gbrain-source$/.test(String(line || "").trim());
+}
+
+export function meaningfulGitStatusLines(output) {
+  return String(output || "")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .filter((line) => !isIgnorableGitStatusLine(line));
+}
+
 export function commandPathFallbacks(home = os.homedir()) {
   return [
     path.join(home, "gbrain", "bin"),
@@ -195,6 +225,21 @@ export function ensureGbrainSource({ targetDir, run, captureNoExit, warn = conso
     warn(`GBrain source ${GBRAIN_SOURCE_ID} already exists; refreshing federation.`);
   }
 
+  const sourceInfo = readGbrainSourceInfo({ captureNoExit, gbrainCommand, sourceId: GBRAIN_SOURCE_ID });
+  if (sourceInfo.ok && sourceInfo.source?.found && sourceInfo.source.localPathKnown && !pathsEqual(sourceInfo.source.localPath, targetDir)) {
+    warn(
+      `GBrain source ${GBRAIN_SOURCE_ID} points to ${sourceInfo.source.localPath || "(no path)"}; ` +
+        `recreating it at ${targetDir}.`,
+    );
+    const removeResult = captureNoExit(gbrainCommand, ["sources", "remove", GBRAIN_SOURCE_ID, "--yes"]);
+    if (removeResult.missing) return removeResult;
+    if (removeResult.status !== 0) throw makeGbrainSourceError("remove", removeResult);
+
+    const reAddResult = captureNoExit(gbrainCommand, addArgs);
+    if (reAddResult.missing) return reAddResult;
+    if (reAddResult.status !== 0) throw makeGbrainSourceError("add", reAddResult);
+  }
+
   const federateResult = captureNoExit(gbrainCommand, federateArgs);
   if (federateResult.missing) return federateResult;
   if (federateResult.status !== 0) {
@@ -221,31 +266,78 @@ export function gbrainUpgradeHint({ command = "gbrain", installedVersion = "", m
 
 export function parseGbrainSourcesList(output, sourceId = GBRAIN_SOURCE_ID) {
   const text = String(output || "");
-  const line = text
+  const lines = text
     .split(/\r?\n/)
-    .map((entry) => entry.trim())
-    .find((entry) => new RegExp(`^${escapeRegExp(sourceId)}\\b`).test(entry));
-  if (!line) return { found: false, sourceId, pageCount: null, line: "" };
+    .map((entry) => entry.trim());
+  const lineIndex = lines.findIndex((entry) => new RegExp(`^${escapeRegExp(sourceId)}\\b`).test(entry));
+  const line = lineIndex >= 0 ? lines[lineIndex] : "";
+  if (!line) return { found: false, sourceId, pageCount: null, localPath: null, localPathKnown: false, line: "" };
 
   const pageMatch = /\b(\d+)\s+pages?\b/i.exec(line);
+  const nextLine = lines[lineIndex + 1] || "";
+  const localPath =
+    nextLine && !/\bpages?\b|\blast sync\b|\bnever synced\b/i.test(nextLine) ? nextLine : null;
   return {
     found: true,
     sourceId,
     pageCount: pageMatch ? Number(pageMatch[1]) : null,
+    localPath,
+    localPathKnown: Boolean(localPath),
     line,
   };
 }
 
-export function verifyNamedGbrainSource({ captureNoExit, gbrainCommand = "gbrain", sourceId = GBRAIN_SOURCE_ID } = {}) {
-  if (typeof captureNoExit !== "function") throw new Error("verifyNamedGbrainSource requires captureNoExit");
+export function parseGbrainSourcesJson(output, sourceId = GBRAIN_SOURCE_ID) {
+  const parsed = JSON.parse(String(output || "{}"));
+  const sources = Array.isArray(parsed?.sources) ? parsed.sources : [];
+  const source = sources.find((entry) => entry?.id === sourceId);
+  if (!source) return { found: false, sourceId, pageCount: null, localPath: null, localPathKnown: false, line: "" };
+  return {
+    found: true,
+    sourceId,
+    pageCount: Number.isFinite(Number(source.page_count)) ? Number(source.page_count) : null,
+    localPath: source.local_path ?? null,
+    localPathKnown: Object.hasOwn(source, "local_path"),
+    federated: typeof source.federated === "boolean" ? source.federated : null,
+    line: "",
+    raw: source,
+  };
+}
+
+export function pathsEqual(left, right) {
+  if (!left || !right) return false;
+  return path.resolve(String(left)) === path.resolve(String(right));
+}
+
+export function readGbrainSourceInfo({ captureNoExit, gbrainCommand = "gbrain", sourceId = GBRAIN_SOURCE_ID } = {}) {
+  if (typeof captureNoExit !== "function") throw new Error("readGbrainSourceInfo requires captureNoExit");
+
+  const jsonResult = captureNoExit(gbrainCommand, ["sources", "list", "--json"]);
+  if (jsonResult.missing) return { ok: false, reason: "gbrain command missing", result: jsonResult };
+  if (jsonResult.status === 0) {
+    try {
+      return { ok: true, result: jsonResult, source: parseGbrainSourcesJson(jsonResult.stdout, sourceId) };
+    } catch {
+      // Fall through to human output parsing. Some older source-enabled builds
+      // accepted --json later than the base sources command.
+    }
+  }
+
   const result = captureNoExit(gbrainCommand, ["sources", "list"]);
   if (result.missing) return { ok: false, reason: "gbrain command missing", result };
   if (result.status !== 0) return { ok: false, reason: "gbrain sources list failed", result };
+  return { ok: true, result, source: parseGbrainSourcesList(`${result.stdout ?? ""}\n${result.stderr ?? ""}`, sourceId) };
+}
 
-  const source = parseGbrainSourcesList(`${result.stdout ?? ""}\n${result.stderr ?? ""}`, sourceId);
-  if (!source.found) return { ok: false, reason: `${sourceId} source not found`, result, source };
-  if (source.pageCount === 0) return { ok: false, reason: `${sourceId} has 0 indexed pages`, result, source };
-  return { ok: true, result, source };
+export function verifyNamedGbrainSource({ captureNoExit, gbrainCommand = "gbrain", sourceId = GBRAIN_SOURCE_ID } = {}) {
+  if (typeof captureNoExit !== "function") throw new Error("verifyNamedGbrainSource requires captureNoExit");
+  const info = readGbrainSourceInfo({ captureNoExit, gbrainCommand, sourceId });
+  if (!info.ok) return info;
+
+  const source = info.source;
+  if (!source.found) return { ok: false, reason: `${sourceId} source not found`, result: info.result, source };
+  if (source.pageCount === 0) return { ok: false, reason: `${sourceId} has 0 indexed pages`, result: info.result, source };
+  return { ok: true, result: info.result, source };
 }
 
 export async function assertManagedSourceTarget(dir, { repoRoot, force = false } = {}) {
@@ -301,6 +393,9 @@ export function validateGbrainSearchOutput(output, { strictPatterns = [] } = {})
   if (!text) return { ok: false, reason: "gbrain search returned no output" };
   if (/\b(no results|0 results|nothing found|no matches)\b/i.test(text)) {
     return { ok: false, reason: "gbrain search reported no results" };
+  }
+  if (new RegExp(`${escapeRegExp(GBRAIN_SOURCE_ID)}\\.pre-git-|\\.gbrain/sources/[^\\s]*\\.pre-git-`, "i").test(text)) {
+    return { ok: false, reason: "gbrain search output referenced a legacy pre-git backup path" };
   }
 
   for (const pattern of strictPatterns) {

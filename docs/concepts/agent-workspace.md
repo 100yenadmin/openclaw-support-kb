@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "f709cc4cad1a59b44ae81d2d3d94e58dcc530f4f1cef891a986390db3afbfba0"
+source_hash: "56fb7f18d83bca3e6b417b92d5200dc4ab401ad3380f097677d3ab43910495c9"
 doc_path: "concepts/agent-workspace.md"
 original_doc_path: "concepts/agent-workspace.md"
 duplicate_index: 1
@@ -125,6 +125,7 @@ These live under `~/.openclaw/` and should NOT be committed to the workspace rep
 
 * `~/.openclaw/openclaw.json` (config)
 * `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` (model auth profiles: OAuth + API keys)
+* `~/.openclaw/agents/<agentId>/agent/codex-home/` (per-agent Codex runtime account, config, skills, plugins, and native thread state)
 * `~/.openclaw/credentials/` (channel/provider state plus legacy OAuth import data)
 * `~/.openclaw/agents/<agentId>/sessions/` (session transcripts + metadata)
 * `~/.openclaw/skills/` (managed skills)

@@ -20,23 +20,36 @@ gbrain search "Source: https://docs.openclaw.ai/install/updating"
 ## Refresh KB
 
 ```bash
-OPENCLAW_KB_CHANNEL=stable npm run sync:local
+OPENCLAW_KB_CHANNEL=stable \
+  node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason manual
 ```
 
 For beta:
 
 ```bash
-OPENCLAW_KB_CHANNEL=beta npm run sync:local
+OPENCLAW_KB_CHANNEL=beta \
+  node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason manual
 ```
 
 ## Verify Local Index
 
 ```bash
 cat ~/.gbrain/sources/openclaw-support-kb/kb-manifest.json
+node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs
 gbrain search "OpenClaw Telegram allowFrom groupAllowFrom"
 ```
 
-If `gbrain` is missing, the Markdown source can still be searched with `rg`.
+GBrain sync is git-commit based and `gbrain embed --stale` fills only missing
+chunk embeddings. If `status.mjs` reports a named-source path mismatch or
+legacy `.pre-git-*` backup directories under `~/.gbrain/sources`, run:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/repair-index.mjs
+node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason repair
+```
+
+If `gbrain` is missing, the Markdown source can still be searched with `rg`,
+but the agent should say local GBrain retrieval is not available yet.
 
 ## Update OpenClaw Install
 

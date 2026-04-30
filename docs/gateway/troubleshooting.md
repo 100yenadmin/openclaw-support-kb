@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "5e9016d642fd2178e12f9d644cec50b196b4eb8b62df9ba9ba65c9420b5b23d5"
+source_hash: "79751516c7436dcc442f2e1f7023207a8b85b1134b1d453f350232ccb93bb508"
 doc_path: "gateway/troubleshooting.md"
 original_doc_path: "gateway/troubleshooting.md"
 duplicate_index: 1
@@ -351,6 +351,7 @@ Look for:
     * `.clobbered.*` exists → an external direct edit or startup read was restored.
     * `.rejected.*` exists → an OpenClaw-owned config write failed schema or clobber checks before commit.
     * `Config write rejected:` → the write tried to drop required shape, shrink the file sharply, or persist invalid config.
+    * `Rejected validation details:` → the recovery log or main-agent notice includes the schema path that caused the restore, such as `agents.defaults.execution` or `gateway.auth.password.source`.
     * `missing-meta-vs-last-good`, `gateway-mode-missing-vs-last-good`, or `size-drop-vs-last-good:*` → startup treated the current file as clobbered because it lost fields or size compared with the last-known-good backup.
     * `Config last-known-good promotion skipped` → the candidate contained redacted secret placeholders such as `***`.
   </Accordion>
