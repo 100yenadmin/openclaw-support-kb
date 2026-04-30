@@ -118,7 +118,7 @@ function warnIfLocalCheckoutOriginIsUnexpected() {
 }
 
 function ensureExistingTargetOriginMatchesTrustPolicy() {
-  const origin = captureNoExit("git", ["-C", targetDir, "remote", "get-url", "origin"]);
+  const origin = captureNoExit("git", ["-C", targetDir, "config", "--get", "remote.origin.url"]);
   if (origin.status !== 0) {
     console.error(`Refusing to update ${targetDir}: could not verify git origin.`);
     if (origin.stderr) console.error(origin.stderr.trim());
@@ -153,6 +153,16 @@ function cloneTarget() {
   }
 }
 
+function checkoutHasLocalChanges() {
+  const status = captureNoExit("git", ["-C", targetDir, "status", "--porcelain"]);
+  if (status.status !== 0) {
+    console.error(`Refusing to update ${targetDir}: could not inspect git status.`);
+    if (status.stderr) console.error(status.stderr.trim());
+    process.exit(status.status ?? 3);
+  }
+  return Boolean(status.stdout.trim());
+}
+
 async function migrateMarkedSourceToGitCheckout() {
   const markerPath = path.join(targetDir, SOURCE_MARKER_FILE);
   if (!(await pathExists(markerPath))) {
@@ -164,7 +174,7 @@ async function migrateMarkedSourceToGitCheckout() {
 
   const backupDir = path.join(path.dirname(targetDir), `${path.basename(targetDir)}.pre-git-${Date.now()}`);
   await rm(backupDir, { recursive: true, force: true });
-  console.warn(`Migrating marked non-git OpenClaw support KB source to git checkout. Backup: ${backupDir}`);
+  console.warn(`Migrating marked OpenClaw support KB source to git checkout. Backup retained at ${backupDir}`);
   await rename(targetDir, backupDir);
   try {
     cloneTarget();
@@ -173,7 +183,6 @@ async function migrateMarkedSourceToGitCheckout() {
     await rename(backupDir, targetDir).catch(() => {});
     throw error;
   }
-  await rm(backupDir, { recursive: true, force: true });
 }
 
 async function updateRepo() {
@@ -203,6 +212,14 @@ async function updateRepo() {
   await mkdir(path.dirname(targetDir), { recursive: true });
   if (await pathExists(path.join(targetDir, ".git"))) {
     ensureExistingTargetOriginMatchesTrustPolicy();
+    if (checkoutHasLocalChanges()) {
+      if (await pathExists(path.join(targetDir, SOURCE_MARKER_FILE))) {
+        await migrateMarkedSourceToGitCheckout();
+        return;
+      }
+      console.error(`Refusing to update dirty support KB checkout ${targetDir}; commit, stash, or move local changes first.`);
+      process.exit(3);
+    }
     run("git", ["-C", targetDir, "fetch", "--prune", "origin"]);
     if (pinnedRef) {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);

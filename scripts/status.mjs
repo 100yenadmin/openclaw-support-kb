@@ -231,9 +231,23 @@ function readCrontab() {
   };
 }
 
+function readSourceGitStatus(sourceIsGit) {
+  if (!sourceIsGit) return { checked: false, dirty: false, files: [] };
+  const result = captureNoExit("git", ["-C", targetDir, "status", "--porcelain"]);
+  if (result.status !== 0) {
+    return { checked: true, dirty: true, error: `${result.stdout}\n${result.stderr}`.trim(), files: [] };
+  }
+  const files = result.stdout
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  return { checked: true, dirty: files.length > 0, files };
+}
+
 async function collectStatus() {
   const sourceExists = await pathExists(targetDir);
   const sourceIsGit = await pathExists(path.join(targetDir, ".git"));
+  const sourceGitStatus = readSourceGitStatus(sourceIsGit);
   const manifest = (await readJsonIfExists(path.join(targetDir, "kb-manifest.json"))) ?? null;
   const skills = await installedSkills();
   const lock = await readLock();
@@ -247,6 +261,7 @@ async function collectStatus() {
   if (!lock.active) {
     if (!sourceExists) problems.push("support KB source directory is missing");
     else if (!sourceIsGit) problems.push("support KB source directory is not a git checkout");
+    else if (sourceGitStatus.dirty) problems.push("support KB source checkout has local changes");
     if (!manifest) problems.push("kb-manifest.json is missing or unreadable");
     for (const skill of skills) {
       if (!skill.installed) problems.push(`missing support skill ${skill.id}`);
@@ -271,7 +286,7 @@ async function collectStatus() {
     ok: status === "healthy" || status === "running",
     status,
     targetDir,
-    source: { exists: sourceExists, isGit: sourceIsGit },
+    source: { exists: sourceExists, isGit: sourceIsGit, gitStatus: sourceGitStatus },
     manifest,
     skillsDir,
     skills,

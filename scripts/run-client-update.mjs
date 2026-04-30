@@ -191,7 +191,7 @@ function ensureRepoTrust() {
 }
 
 function ensureExistingOriginMatchesTrustPolicy() {
-  const originUrl = capture("git", ["-C", targetDir, "remote", "get-url", "origin"]).stdout.trim();
+  const originUrl = capture("git", ["-C", targetDir, "config", "--get", "remote.origin.url"]).stdout.trim();
   if (isOfficialRepoUrl(repoUrl)) {
     if (isOfficialRepoUrl(originUrl)) return;
     throw new Error(`Refusing to update ${targetDir}: existing origin is not the official repo (${originUrl}).`);
@@ -218,6 +218,10 @@ function cloneTarget() {
   }
 }
 
+function checkoutHasLocalChanges() {
+  return Boolean(capture("git", ["-C", targetDir, "status", "--porcelain"]).stdout.trim());
+}
+
 async function migrateMarkedSourceToGitCheckout() {
   const markerPath = path.join(targetDir, SOURCE_MARKER_FILE);
   if (!(await pathExists(markerPath))) {
@@ -228,7 +232,7 @@ async function migrateMarkedSourceToGitCheckout() {
 
   const backupDir = path.join(path.dirname(targetDir), `${path.basename(targetDir)}.pre-git-${Date.now()}`);
   await rm(backupDir, { recursive: true, force: true });
-  console.warn(`Migrating marked non-git OpenClaw support KB source to git checkout. Backup: ${backupDir}`);
+  console.warn(`Migrating marked OpenClaw support KB source to git checkout. Backup retained at ${backupDir}`);
   await rename(targetDir, backupDir);
   try {
     cloneTarget();
@@ -237,7 +241,6 @@ async function migrateMarkedSourceToGitCheckout() {
     await rename(backupDir, targetDir).catch(() => {});
     throw error;
   }
-  await rm(backupDir, { recursive: true, force: true });
 }
 
 async function updateCheckout() {
@@ -246,6 +249,13 @@ async function updateCheckout() {
 
   if (await pathExists(path.join(targetDir, ".git"))) {
     ensureExistingOriginMatchesTrustPolicy();
+    if (checkoutHasLocalChanges()) {
+      if (await pathExists(path.join(targetDir, SOURCE_MARKER_FILE))) {
+        await migrateMarkedSourceToGitCheckout();
+        return;
+      }
+      throw new Error(`Refusing to update dirty support KB checkout ${targetDir}; commit, stash, or move local changes first.`);
+    }
     if (pinnedRef) {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
       run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -378,6 +378,50 @@ test("client updater migrates a marked non-git managed source into a git checkou
   }
 });
 
+test("client updater reclones dirty marked git source and keeps backup", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-dirty-git-"));
+  try {
+    const { remote, work } = await createRemoteFixture(tempDir);
+    await mkdir(path.join(work, "scripts"), { recursive: true });
+    await writeFile(path.join(work, "scripts", "update-client.mjs"), "console.log('stub update-client ran');\n");
+    await writeFile(path.join(work, "kb-manifest.json"), '{"channel":"stable","generatedAt":"test","sourceCount":1}\n');
+    runGit(["add", "."], { cwd: work });
+    runGit(["commit", "-m", "add updater"], { cwd: work });
+    runGit(["push", "origin", "main"], { cwd: work });
+
+    const sourceDir = path.join(tempDir, "source");
+    const statusFile = path.join(tempDir, "state", "status.json");
+    runGit(["clone", pathToFileURL(remote).href, sourceDir]);
+    runGit(["remote", "set-url", "origin", "https://github.com/100yenadmin/openclaw-support-kb.git"], { cwd: sourceDir });
+    await writeFile(path.join(sourceDir, SOURCE_MARKER_FILE), "managed source\n");
+    await writeFile(path.join(sourceDir, "README.md"), "locally generated dirty content\n");
+
+    const result = spawnSync(process.execPath, ["scripts/run-client-update.mjs", "--reason", "test-dirty-git"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SUPPORT_KB_LOCK_DIR: path.join(tempDir, "locks"),
+        OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
+        GIT_CONFIG_COUNT: "1",
+        GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
+        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(await exists(path.join(sourceDir, ".git")), true);
+    assert.equal(await exists(path.join(sourceDir, SOURCE_MARKER_FILE)), false);
+    assert.equal((await readFile(path.join(sourceDir, "README.md"), "utf8")).trim(), "one");
+    const backupEntries = (await readdir(tempDir)).filter((entry) => entry.startsWith("source.pre-git-"));
+    assert.equal(backupEntries.length, 1);
+    assert.equal(await exists(path.join(tempDir, backupEntries[0], SOURCE_MARKER_FILE)), true);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
 test("direct client setup clones the published repo instead of building a non-git source", async () => {
   const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-direct-clone-"));
   try {
@@ -458,12 +502,16 @@ test("status command reports healthy installs and stale checkpoints", async () =
     const skillsDir = path.join(tempDir, "skills");
     const fakeBin = path.join(tempDir, "bin");
     const checkpointFile = path.join(tempDir, "checkpoint.json");
-    await mkdir(path.join(sourceDir, ".git"), { recursive: true });
+    runGit(["init", "--initial-branch=main", sourceDir]);
+    runGit(["config", "user.email", "test@example.com"], { cwd: sourceDir });
+    runGit(["config", "user.name", "OpenClaw KB Test"], { cwd: sourceDir });
     await mkdir(fakeBin, { recursive: true });
     await writeFile(
       path.join(sourceDir, "kb-manifest.json"),
       JSON.stringify({ channel: "stable", sourceCount: 3, minGbrainVersion: "0.19.0" }),
     );
+    runGit(["add", "kb-manifest.json"], { cwd: sourceDir });
+    runGit(["commit", "-m", "manifest"], { cwd: sourceDir });
     for (const skill of [
       "openclaw-support-kb",
       "openclaw-config-repair",
@@ -502,6 +550,18 @@ test("status command reports healthy installs and stale checkpoints", async () =
     });
     assert.equal(healthy.status, 0, healthy.stderr);
     assert.equal(JSON.parse(healthy.stdout).status, "healthy");
+
+    await writeFile(path.join(sourceDir, "local-change.md"), "dirty\n");
+    const dirty = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env,
+    });
+    assert.equal(dirty.status, 1);
+    const dirtyStatus = JSON.parse(dirty.stdout);
+    assert.equal(dirtyStatus.source.gitStatus.dirty, true);
+    assert.ok(dirtyStatus.problems.some((problem) => /local changes/.test(problem)));
+    await rm(path.join(sourceDir, "local-change.md"), { force: true });
 
     await writeFile(
       checkpointFile,
