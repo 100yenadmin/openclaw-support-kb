@@ -11,6 +11,8 @@
     "setup": "node scripts/update-client.mjs",
     "sync:local": "node scripts/sync-local.mjs",
     "update:client": "node scripts/update-client.mjs",
+    "update:run": "node scripts/run-client-update.mjs",
+    "install:auto-update": "node scripts/install-auto-update.mjs",
     "install:skills": "node scripts/install-skills.mjs",
     "check:manifest": "node scripts/check-manifest.mjs",
     "eval:scenarios": "node scripts/evaluate-scenarios.mjs",

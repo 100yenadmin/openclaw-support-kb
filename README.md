@@ -106,6 +106,47 @@ The installed skills assume helper scripts are available from:
 ~/.gbrain/sources/openclaw-support-kb/scripts/
 ```
 
+## Automatic Updates
+
+Install a managed local cron fallback after setup:
+
+```bash
+node scripts/install-auto-update.mjs --mode crontab --run-now
+```
+
+The installer appends or replaces only the managed
+`openclaw-support-kb:auto-update` crontab block. It does not replace unrelated
+crontab entries. The scheduled command runs:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason cron
+```
+
+`run-client-update.mjs` is also the fleet/control-panel entrypoint. Call it on
+release or KB publish events to reduce freshness lag:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs --reason fleet-release
+```
+
+The runner is lock-protected, pulls the published repo with `git pull --ff-only`,
+runs `scripts/update-client.mjs`, syncs the named GBrain source, embeds stale
+chunks, verifies search, and writes status JSON to
+`~/.gbrain/state/openclaw-support-kb-update.json`.
+
+```mermaid
+flowchart TD
+  A["GitHub publisher updates 100yenadmin/openclaw-support-kb"] --> B["Fleet/control panel calls run-client-update"]
+  A --> C["Local cron fallback calls run-client-update"]
+  B --> D["Client pulls repo with git pull --ff-only"]
+  C --> D
+  D --> E["update-client installs skills and AGENTS hints"]
+  E --> F["Register/federate GBrain source openclaw-support-kb"]
+  F --> G["gbrain sync --repo ... --source openclaw-support-kb"]
+  G --> H["gbrain embed --stale"]
+  H --> I["Verification searches + status JSON"]
+```
+
 ## Channels
 
 The default channel is `stable`. Use `OPENCLAW_KB_CHANNEL=beta` on prerelease

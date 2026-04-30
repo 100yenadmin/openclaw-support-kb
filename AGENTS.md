@@ -25,6 +25,8 @@ grounded in current docs before they edit config or escalate support.
   registered as a federated source so default GBrain search can find it.
 - Users do not push to this repo; they pull the published repo and sync it into
   local GBrain.
+- Keep client installs fresh through `scripts/run-client-update.mjs`; fleet
+  control may call it on release, and local cron should call it as a fallback.
 - Prefer docs and runbooks over memory.
 - Prefer `openclaw config set`, `openclaw config patch --dry-run`, and
   `openclaw config validate` over hand-editing `openclaw.json`.
