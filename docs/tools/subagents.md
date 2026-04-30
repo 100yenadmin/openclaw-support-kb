@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "76c4a85c98105cf6f3656a913dd2d82a7df8c579fa8b156bcda974aee116752d"
+source_hash: "309ddfde1fc9bbef7ca61bf55637ae722d20cc558ca69d6b0767489212109ca1"
 doc_path: "tools/subagents.md"
 original_doc_path: "tools/subagents.md"
 duplicate_index: 1
@@ -534,14 +534,6 @@ their child session is marked `abortedLastRun: true`. Those
 restart-aborted child sessions remain recoverable through the sub-agent
 orphan recovery flow, which sends a synthetic resume message before
 clearing the aborted marker.
-
-Automatic restart recovery is bounded per child session. If the same
-sub-agent child is accepted for orphan recovery repeatedly inside the
-rapid re-wedge window, OpenClaw persists a recovery tombstone on that
-session and stops auto-resuming it on later restarts. Run
-`openclaw tasks maintenance --apply` to reconcile the task record, or
-`openclaw doctor --fix` to clear stale aborted recovery flags on
-tombstoned sessions.
 
 <Note>
   If a sub-agent spawn fails with Gateway `PAIRING_REQUIRED` /

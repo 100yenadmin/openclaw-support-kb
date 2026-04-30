@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "0c91f409fed6d7f3d725439b2aef0f0f5b6e9d92a82b07c2623c57e1fa3e11e3"
+source_hash: "1ed219f85f5bf395c263026b3e6a04d968abca9f58fadaf7b1e7dd3a4f1e565b"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1
@@ -214,18 +214,23 @@ Choose your preferred auth method and follow the setup steps.
 
     ### Route summary
 
-    | Model ref                   | Runtime config             | Route                                                     | Auth                  |
-    | --------------------------- | -------------------------- | --------------------------------------------------------- | --------------------- |
-    | `openai-codex/gpt-5.5`      | omitted / `runtime: "pi"`  | ChatGPT/Codex OAuth through PI                            | Codex sign-in         |
-    | `openai-codex/gpt-5.4-mini` | omitted / `runtime: "pi"`  | ChatGPT/Codex OAuth through PI                            | Codex sign-in         |
-    | `openai-codex/gpt-5.5`      | `runtime: "auto"`          | Still PI unless a plugin explicitly claims `openai-codex` | Codex sign-in         |
-    | `openai/gpt-5.5`            | `agentRuntime.id: "codex"` | Codex app-server harness                                  | Codex app-server auth |
+    | Model ref              | Runtime config             | Route                                                     | Auth                  |
+    | ---------------------- | -------------------------- | --------------------------------------------------------- | --------------------- |
+    | `openai-codex/gpt-5.5` | omitted / `runtime: "pi"`  | ChatGPT/Codex OAuth through PI                            | Codex sign-in         |
+    | `openai-codex/gpt-5.5` | `runtime: "auto"`          | Still PI unless a plugin explicitly claims `openai-codex` | Codex sign-in         |
+    | `openai/gpt-5.5`       | `agentRuntime.id: "codex"` | Codex app-server harness                                  | Codex app-server auth |
 
     <Note>
       Keep using the `openai-codex` provider id for auth/profile commands. The
       `openai-codex/*` model prefix is also the explicit PI route for Codex OAuth.
       It does not select or auto-enable the bundled Codex app-server harness.
     </Note>
+
+    <Warning>
+      `openai-codex/gpt-5.4-mini` is not a supported Codex OAuth route. Use
+      `openai/gpt-5.4-mini` with an OpenAI API key, or use
+      `openai-codex/gpt-5.5` with Codex OAuth.
+    </Warning>
 
     ### Config example
 

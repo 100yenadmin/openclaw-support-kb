@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "6b5ead93a72ba98abd1a163ac6506bf8a90087e995ef933c01c265d0369f443e"
+source_hash: "a65e07bf70170fd143aeb0e4cb45e2d3a10f32e720a9a3a86674477bbb741ea2"
 doc_path: "concepts/memory-search.md"
 original_doc_path: "concepts/memory-search.md"
 duplicate_index: 1
@@ -39,9 +39,8 @@ For multi-endpoint setups, `provider` can also be a custom
 `models.providers.<id>` entry, such as `ollama-5080`, when that provider sets
 `api: "ollama"` or another embedding adapter owner.
 
-For local embeddings with no API key, set `provider: "local"`. Packaged
-installs retain the native `node-llama-cpp` runtime in OpenClaw's managed plugin
-runtime-deps tree; run `openclaw doctor --fix` if that tree needs repair.
+For local embeddings with no API key, install the optional `node-llama-cpp`
+runtime package next to OpenClaw and use `provider: "local"`.
 
 Some OpenAI-compatible embedding endpoints require asymmetric labels such as
 `input_type: "query"` for searches and `input_type: "document"` or `"passage"`

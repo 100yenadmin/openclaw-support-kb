@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "60d60d134655e1612627145415dfc8a31960433845cbf358c46e72c83d352c1e"
+source_hash: "d14760719e35add82916cc0ed1eaf1552cb001f3423cff8dfe0e6260c9d73e7d"
 doc_path: "channels/slack.md"
 original_doc_path: "channels/slack.md"
 duplicate_index: 1
@@ -573,8 +573,6 @@ Current Slack message actions include `send`, `upload-file`, `download-file`, `r
     * `tools`, `toolsBySender`
     * `toolsBySender` key format: `id:`, `e164:`, `username:`, `name:`, or `"*"` wildcard
       (legacy unprefixed keys still map to `id:` only)
-
-    `allowBots` is conservative for channels and private channels: bot-authored room messages are accepted only when the sending bot is explicitly listed in that room's `users` allowlist, or when at least one explicit Slack owner ID from `channels.slack.allowFrom` is currently a room member. Wildcards and display-name owner entries do not satisfy owner presence. Owner presence uses Slack `conversations.members`; make sure the app has the matching read scope for the room type (`channels:read` for public channels, `groups:read` for private channels). If the member lookup fails, OpenClaw drops the bot-authored room message.
   </Tab>
 </Tabs>
 

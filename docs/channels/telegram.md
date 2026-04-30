@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "348bcca4017afb5bc27e806b2f81211fdc9b1b8e0da5e8655dbe9a5b51a53788"
+source_hash: "b5e0c862181ee0322bae23640ce95ec05464af94b520ddc00a55fc2e9b164efc"
 doc_path: "channels/telegram.md"
 original_doc_path: "channels/telegram.md"
 duplicate_index: 1
@@ -306,6 +306,8 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
     For complex replies (for example media payloads), OpenClaw falls back to normal final delivery and then cleans up the preview message.
 
     Preview streaming is separate from block streaming. When block streaming is explicitly enabled for Telegram, OpenClaw skips the preview stream to avoid double-streaming.
+
+    If native draft transport is unavailable/rejected, OpenClaw automatically falls back to `sendMessage` + `editMessageText`.
 
     Telegram-only reasoning stream:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools and plugins"
 source: "https://docs.openclaw.ai/tools/index"
-source_hash: "bc714d141f6be2612c3b733e72ebe438a2685fa01575f1a5a35be9a9a4d98201"
+source_hash: "c2636b80ad1419c96b788a3dfa8d720bff5acd78190583813f3599a20cbcf516"
 doc_path: "tools/index.md"
 original_doc_path: "tools/index.md"
 duplicate_index: 1
@@ -161,10 +161,6 @@ but not the full browser-control tool. Browser automation can drive real
 sessions and logged-in profiles, so add it explicitly with
 `tools.alsoAllow: ["browser"]` or a per-agent
 `agents.list[].tools.alsoAllow: ["browser"]`.
-
-<Note>
-  Configuring `tools.exec` or `tools.fs` under a restrictive profile (`messaging`, `minimal`) does not implicitly widen the profile's allowlist. Add explicit `tools.alsoAllow` entries (for example `["exec", "process"]` for exec, or `["read", "write", "edit"]` for fs) when you want a restrictive profile to use those configured sections. OpenClaw logs a startup warning when a config section is present without a matching `alsoAllow` grant.
-</Note>
 
 The `coding` and `messaging` profiles also allow configured bundle MCP tools
 under the plugin key `bundle-mcp`. Add `tools.deny: ["bundle-mcp"]` when you
