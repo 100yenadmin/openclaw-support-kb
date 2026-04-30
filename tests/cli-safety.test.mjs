@@ -70,6 +70,71 @@ test("support email send refuses omitted subject before invoking transport", () 
   assert.match(result.stderr, /without explicit --subject/);
 });
 
+test("support Telegram send keeps approved draft content out of process argv", () => {
+  const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-telegram-"));
+  const draft = path.join(tmp, "draft.md");
+  const fakeBin = path.join(tmp, "bin");
+  const capturePath = path.join(tmp, "openclaw-args.txt");
+  const body = "# OpenClaw Support Request\n\nSECRET CUSTOMER DIAGNOSTIC\n";
+  writeFileSync(draft, body);
+  mkdirSync(fakeBin);
+  writeFileSync(
+    path.join(fakeBin, "openclaw"),
+    "#!/bin/sh\nif [ \"$1\" = \"--version\" ]; then exit 0; fi\nprintf '%s\\n' \"$@\" > \"$OPENCLAW_CAPTURE_ARGS\"\nexit 0\n",
+    { mode: 0o755 },
+  );
+
+  const approval = spawnSync(
+    process.execPath,
+    [
+      "scripts/support-escalation.mjs",
+      "approval-context",
+      "--channel",
+      "Telegram",
+      "--draft",
+      draft,
+      "--recipient",
+      "@evaOS_support_bot",
+    ],
+    { cwd: repoRoot, encoding: "utf8" },
+  );
+  assert.equal(approval.status, 0, approval.stderr);
+  const approvedContextSha = approval.stdout.match(/approvedContextSha=([a-f0-9]+)/)?.[1];
+  assert.ok(approvedContextSha);
+
+  const result = spawnSync(
+    process.execPath,
+    [
+      "scripts/support-escalation.mjs",
+      "send-telegram",
+      "--draft",
+      draft,
+      "--approved-recipient",
+      "@evaOS_support_bot",
+      "--approved-draft-sha",
+      sha256(body),
+      "--approved-context-sha",
+      approvedContextSha,
+    ],
+    {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+        OPENCLAW_CAPTURE_ARGS: capturePath,
+      },
+    },
+  );
+
+  assert.equal(result.status, 0, result.stderr);
+  const args = readFileSync(capturePath, "utf8");
+  assert.match(args, /--message/);
+  assert.match(args, /sha256=/);
+  assert.match(args, /--media/);
+  assert.doesNotMatch(args, /SECRET CUSTOMER DIAGNOSTIC/);
+});
+
 test("scan-skill refuses unpinned scanner override before invoking uvx", () => {
   const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-scan-"));
   const candidate = path.join(tmp, "candidate");

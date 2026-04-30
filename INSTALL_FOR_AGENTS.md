@@ -75,6 +75,45 @@ formats search output too tersely for marker checks.
 If an existing support skill directory is present and was not previously
 managed by this KB, setup backs it up before installing the managed copy.
 
+## Enable Automatic Updates
+
+Client machines should not rely on a person remembering to re-run setup. After
+the first successful setup, install the managed local fallback:
+
+```bash
+cd "$OPENCLAW_SUPPORT_KB_DIR"
+node scripts/install-auto-update.mjs --mode crontab --run-now
+```
+
+This appends or replaces only the managed
+`openclaw-support-kb:auto-update` crontab block. It preserves unrelated crontab
+entries and logs to `~/.gbrain/logs/openclaw-support-kb-update.log`.
+
+For environments where the fleet/control panel owns scheduling, print the exact
+managed command instead:
+
+```bash
+cd "$OPENCLAW_SUPPORT_KB_DIR"
+node scripts/install-auto-update.mjs --mode print
+```
+
+Fleet/control-panel immediate refresh command:
+
+```bash
+node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs" --reason fleet-release
+```
+
+Best production posture is both:
+
+1. fleet/control-panel calls `run-client-update.mjs` on KB publish or OpenClaw
+   release events for near-immediate freshness
+2. local cron fallback runs the same command hourly so missed fleet events heal
+   themselves
+
+The runner uses a lock so duplicate fleet and cron updates do not overlap. It
+writes the last result to
+`~/.gbrain/state/openclaw-support-kb-update.json`.
+
 ## Verify
 
 ```bash
@@ -99,6 +138,12 @@ support/config/setup questions:
 cd "$HOME/.gbrain/sources/openclaw-support-kb"
 git pull --ff-only
 node scripts/update-client.mjs
+```
+
+Preferred automated update entrypoint:
+
+```bash
+node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs" --reason manual
 ```
 
 For beta/prerelease docs:

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -163,12 +163,33 @@ async function sendTelegram(args) {
     throw new Error("Refusing to send Telegram: approved recipient must be @evaOS_support_bot");
   }
   if (!commandAvailable("openclaw")) throw new Error("openclaw is not available on PATH");
-  const result = spawnSync(
-    "openclaw",
-    ["message", "send", "--channel", "telegram", "--target", "@evaOS_support_bot", "--message", content],
-    { stdio: "inherit" },
-  );
-  process.exit(result.status ?? 1);
+  const draftSha = sha256(content);
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-support-telegram-"));
+  const attachmentPath = path.join(tempDir, "approved-draft.md");
+  await writeFile(attachmentPath, content, { mode: 0o600 });
+  let status = 1;
+  try {
+    const result = spawnSync(
+      "openclaw",
+      [
+        "message",
+        "send",
+        "--channel",
+        "telegram",
+        "--target",
+        "@evaOS_support_bot",
+        "--message",
+        `Approved OpenClaw support draft attached. sha256=${draftSha}`,
+        "--media",
+        attachmentPath,
+      ],
+      { stdio: "inherit" },
+    );
+    status = result.status ?? 1;
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+  process.exit(status);
 }
 
 const [command, ...args] = process.argv.slice(2);
