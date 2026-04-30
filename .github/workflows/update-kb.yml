@@ -1,0 +1,48 @@
+name: Update OpenClaw Support KB
+
+on:
+  schedule:
+    - cron: "17 9 * * 1"
+    - cron: "23 * * * *"
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: "KB channel to publish"
+        required: false
+        default: "stable"
+  repository_dispatch:
+    types:
+      - openclaw-release
+
+permissions:
+  contents: write
+
+jobs:
+  update-kb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check release freshness
+        id: release
+        run: node scripts/check-release-update.mjs
+      - name: Build KB
+        if: github.event_name != 'schedule' || github.event.schedule == '17 9 * * 1' || steps.release.outputs.should_build == 'true'
+        run: node scripts/build-kb.mjs --channel "${{ github.event.inputs.channel || 'stable' }}"
+      - name: Test
+        if: github.event_name != 'schedule' || github.event.schedule == '17 9 * * 1' || steps.release.outputs.should_build == 'true'
+        run: npm test
+      - name: Commit changes
+        if: github.event_name != 'schedule' || github.event.schedule == '17 9 * * 1' || steps.release.outputs.should_build == 'true'
+        run: |
+          if git diff --quiet; then
+            echo "No KB changes"
+            exit 0
+          fi
+          git config user.name "openclaw-kb-bot"
+          git config user.email "support@electricsheephq.com"
+          git add .
+          git commit -m "Update OpenClaw support KB"
+          git push

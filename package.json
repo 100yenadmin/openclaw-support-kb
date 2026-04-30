@@ -1,0 +1,21 @@
+{
+  "name": "openclaw-support-kb",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-first OpenClaw support knowledge base and GBrain skillpack.",
+  "scripts": {
+    "build": "node scripts/build-kb.mjs",
+    "check:release": "node scripts/check-release-update.mjs",
+    "setup": "node scripts/update-client.mjs",
+    "sync:local": "node scripts/sync-local.mjs",
+    "update:client": "node scripts/update-client.mjs",
+    "install:skills": "node scripts/install-skills.mjs",
+    "check:manifest": "node scripts/check-manifest.mjs",
+    "eval:scenarios": "node scripts/evaluate-scenarios.mjs",
+    "test": "npm run eval:scenarios && npm run check:manifest && node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

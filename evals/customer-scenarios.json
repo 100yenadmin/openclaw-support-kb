@@ -1,0 +1,72 @@
+[
+  {
+    "id": "install-kb",
+    "prompt": "Install this OpenClaw Support KB repo into my agent.",
+    "mustMention": ["INSTALL_FOR_AGENTS.md", "npm run setup", "gbrain sync", "gbrain embed"],
+    "mustHaveDocs": ["INSTALL_FOR_AGENTS.md", "README.md"],
+    "mustHaveRunbooks": []
+  },
+  {
+    "id": "explain-system",
+    "prompt": "I'm not technical. Explain how OpenClaw works.",
+    "mustMention": ["gbrain query", "Gateway", "agent runtime", "workspace", "channels"],
+    "mustHaveDocs": ["docs/concepts/architecture.md", "docs/concepts/agent.md", "docs/concepts/agent-workspace.md", "docs/channels/index.md"],
+    "mustHaveRunbooks": ["runbooks/system-explainer.md"]
+  },
+  {
+    "id": "create-agent",
+    "prompt": "Create a separate ops agent and make Telegram route to it.",
+    "mustMention": ["openclaw agents add", "openclaw agents bind", "gbrain query", "--non-interactive", "workspace isolation"],
+    "mustHaveDocs": ["docs/cli/agents.md", "docs/concepts/agent-workspace.md", "docs/concepts/multi-agent.md", "docs/gateway/config-agents.md"],
+    "mustHaveRunbooks": ["runbooks/agent-creation.md"]
+  },
+  {
+    "id": "telegram-setup",
+    "prompt": "Help me set up Telegram so I can talk to OpenClaw.",
+    "mustMention": ["gbrain query", "BotFather", "openclaw channels add --channel telegram", "openclaw config validate", "openclaw pairing list telegram"],
+    "mustHaveDocs": ["docs/channels/telegram.md", "docs/channels/pairing.md", "docs/channels/troubleshooting.md"],
+    "mustHaveRunbooks": ["runbooks/telegram-setup.md"]
+  },
+  {
+    "id": "another-channel",
+    "prompt": "Help me add Discord or Slack.",
+    "mustMention": ["gbrain query", "openclaw channels status --probe", "openclaw config validate"],
+    "mustHaveDocs": ["docs/channels/index.md", "docs/channels/discord.md", "docs/channels/slack.md", "docs/channels/troubleshooting.md"],
+    "mustHaveRunbooks": ["runbooks/channel-setup.md"]
+  },
+  {
+    "id": "config-repair",
+    "prompt": "My openclaw.json is broken after an agent changed it.",
+    "mustMention": ["gbrain search", "openclaw config validate --json", "openclaw config schema", "openclaw config patch", "--dry-run"],
+    "mustHaveDocs": ["docs/cli/config.md", "docs/gateway/configuration.md", "docs/gateway/configuration-reference.md"],
+    "mustHaveRunbooks": ["runbooks/config-repair.md"]
+  },
+  {
+    "id": "skill-install",
+    "prompt": "Find and install a skill that can do browser automation.",
+    "mustMention": ["gbrain search", "awesome openclaw skills", "openclaw skills search", "snyk-agent-scan", "SNYK_TOKEN", "attestation"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/tools/clawhub.md", "docs/cli/skills.md", "security/agent-scan.md"],
+    "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
+  },
+  {
+    "id": "chief-of-staff-integration",
+    "prompt": "Find tools or skills to help my small business chief-of-staff agent work with CRM, email, calendar, and support apps.",
+    "mustMention": ["VoltAgent", "ClawHub", "Composio", "openclaw mcp list", "OAuth", "approval"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/tools/clawhub.md", "docs/cli/mcp.md", "integrations/composio-openclaw.md"],
+    "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
+  },
+  {
+    "id": "update-openclaw",
+    "prompt": "Help me update OpenClaw safely.",
+    "mustMention": ["openclaw update status", "openclaw update --dry-run", "openclaw doctor", "stable", "beta"],
+    "mustHaveDocs": ["docs/install/updating.md", "docs/cli/update.md", "releases/releases.md"],
+    "mustHaveRunbooks": ["runbooks/updates.md"]
+  },
+  {
+    "id": "support-escalation",
+    "prompt": "This still doesn't work, contact support.",
+    "mustMention": ["ask", "approval", "approved-draft-sha", "gog gmail send", "support@electricsheephq.com", "@evaOS_support_bot"],
+    "mustHaveDocs": ["support/contacts.md"],
+    "mustHaveRunbooks": ["runbooks/self-diagnostics.md", "runbooks/support-escalation.md"]
+  }
+]

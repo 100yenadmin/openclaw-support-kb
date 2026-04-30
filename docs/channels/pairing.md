@@ -1,0 +1,179 @@
+---
+type: openclaw_doc
+title: "Pairing"
+source: "https://docs.openclaw.ai/channels/pairing"
+source_hash: "3858e8ddeae8de18ba00e601b48204dde635cce416c69ef083fb4ed5bc00e45f"
+generated_at: "2026-04-30T12:08:08.028Z"
+doc_path: "channels/pairing.md"
+original_doc_path: "channels/pairing.md"
+duplicate_index: 1
+---
+
+# Pairing
+Source: https://docs.openclaw.ai/channels/pairing
+
+
+
+“Pairing” is OpenClaw’s explicit access approval step.
+It is used in two places:
+
+1. **DM pairing** (who is allowed to talk to the bot)
+2. **Node pairing** (which devices/nodes are allowed to join the gateway network)
+
+Security context: [Security](/gateway/security)
+
+## 1) DM pairing (inbound chat access)
+
+When a channel is configured with DM policy `pairing`, unknown senders get a short code and their message is **not processed** until you approve.
+
+Default DM policies are documented in: [Security](/gateway/security)
+
+`dmPolicy: "open"` is public only when the effective DM allowlist includes `"*"`.
+Setup and validation require that wildcard for public-open configs. If existing
+state contains `open` with concrete `allowFrom` entries, runtime still admits
+only those senders, and pairing-store approvals do not widen `open` access.
+
+Pairing codes:
+
+* 8 characters, uppercase, no ambiguous chars (`0O1I`).
+* **Expire after 1 hour**. The bot only sends the pairing message when a new request is created (roughly once per hour per sender).
+* Pending DM pairing requests are capped at **3 per channel** by default; additional requests are ignored until one expires or is approved.
+
+### Approve a sender
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw pairing list telegram
+openclaw pairing approve telegram <CODE>
+```
+
+If no command owner is configured yet, approving a DM pairing code also bootstraps
+`commands.ownerAllowFrom` to the approved sender, such as `telegram:123456789`.
+That gives first-time setups an explicit owner for privileged commands and exec
+approval prompts. After an owner exists, later pairing approvals only grant DM
+access; they do not add more owners.
+
+Supported channels: `bluebubbles`, `discord`, `feishu`, `googlechat`, `imessage`, `irc`, `line`, `matrix`, `mattermost`, `msteams`, `nextcloud-talk`, `nostr`, `openclaw-weixin`, `signal`, `slack`, `synology-chat`, `telegram`, `twitch`, `whatsapp`, `zalo`, `zalouser`.
+
+### Where the state lives
+
+Stored under `~/.openclaw/credentials/`:
+
+* Pending requests: `<channel>-pairing.json`
+* Approved allowlist store:
+  * Default account: `<channel>-allowFrom.json`
+  * Non-default account: `<channel>-<accountId>-allowFrom.json`
+
+Account scoping behavior:
+
+* Non-default accounts read/write only their scoped allowlist file.
+* Default account uses the channel-scoped unscoped allowlist file.
+
+Treat these as sensitive (they gate access to your assistant).
+
+<Note>
+  The pairing allowlist store is for DM access. Group authorization is separate.
+  Approving a DM pairing code does not automatically allow that sender to run group
+  commands or control the bot in groups. First-owner bootstrap is separate config
+  state in `commands.ownerAllowFrom`, and group chat delivery still follows the
+  channel's group allowlists (for example `groupAllowFrom`, `groups`, or per-group
+  or per-topic overrides depending on the channel).
+</Note>
+
+## 2) Node device pairing (iOS/Android/macOS/headless nodes)
+
+Nodes connect to the Gateway as **devices** with `role: node`. The Gateway
+creates a device pairing request that must be approved.
+
+### Pair via Telegram (recommended for iOS)
+
+If you use the `device-pair` plugin, you can do first-time device pairing entirely from Telegram:
+
+1. In Telegram, message your bot: `/pair`
+2. The bot replies with two messages: an instruction message and a separate **setup code** message (easy to copy/paste in Telegram).
+3. On your phone, open the OpenClaw iOS app → Settings → Gateway.
+4. Paste the setup code and connect.
+5. Back in Telegram: `/pair pending` (review request IDs, role, and scopes), then approve.
+
+The setup code is a base64-encoded JSON payload that contains:
+
+* `url`: the Gateway WebSocket URL (`ws://...` or `wss://...`)
+* `bootstrapToken`: a short-lived single-device bootstrap token used for the initial pairing handshake
+
+That bootstrap token carries the built-in pairing bootstrap profile:
+
+* primary handed-off `node` token stays `scopes: []`
+* any handed-off `operator` token stays bounded to the bootstrap allowlist:
+  `operator.approvals`, `operator.read`, `operator.talk.secrets`, `operator.write`
+* bootstrap scope checks are role-prefixed, not one flat scope pool:
+  operator scope entries only satisfy operator requests, and non-operator roles
+  must still request scopes under their own role prefix
+* later token rotation/revocation remains bounded by both the device's approved
+  role contract and the caller session's operator scopes
+
+Treat the setup code like a password while it is valid.
+
+### Approve a node device
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw devices list
+openclaw devices approve <requestId>
+openclaw devices reject <requestId>
+```
+
+If the same device retries with different auth details (for example different
+role/scopes/public key), the previous pending request is superseded and a new
+`requestId` is created.
+
+<Note>
+  An already paired device does not get broader access silently. If it reconnects asking for more scopes or a broader role, OpenClaw keeps the existing approval as-is and creates a fresh pending upgrade request. Use `openclaw devices list` to compare the currently approved access with the newly requested access before you approve.
+</Note>
+
+### Optional trusted-CIDR node auto-approve
+
+Device pairing remains manual by default. For tightly controlled node networks,
+you can opt in to first-time node auto-approval with explicit CIDRs or exact IPs:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  gateway: {
+    nodes: {
+      pairing: {
+        autoApproveCidrs: ["192.168.1.0/24"],
+      },
+    },
+  },
+}
+```
+
+This only applies to fresh `role: node` pairing requests with no requested
+scopes. Operator, browser, Control UI, and WebChat clients still require manual
+approval. Role, scope, metadata, and public-key changes still require manual
+approval.
+
+### Node pairing state storage
+
+Stored under `~/.openclaw/devices/`:
+
+* `pending.json` (short-lived; pending requests expire)
+* `paired.json` (paired devices + tokens)
+
+### Notes
+
+* The legacy `node.pair.*` API (CLI: `openclaw nodes pending|approve|reject|remove|rename`) is a
+  separate gateway-owned pairing store. WS nodes still require device pairing.
+* The pairing record is the durable source of truth for approved roles. Active
+  device tokens stay bounded to that approved role set; a stray token entry
+  outside the approved roles does not create new access.
+
+## Related docs
+
+* Security model + prompt injection: [Security](/gateway/security)
+* Updating safely (run doctor): [Updating](/install/updating)
+* Channel configs:
+  * Telegram: [Telegram](/channels/telegram)
+  * WhatsApp: [WhatsApp](/channels/whatsapp)
+  * Signal: [Signal](/channels/signal)
+  * BlueBubbles (iMessage): [BlueBubbles](/channels/bluebubbles)
+  * iMessage (legacy): [iMessage](/channels/imessage)
+  * Discord: [Discord](/channels/discord)
+  * Slack: [Slack](/channels/slack)
