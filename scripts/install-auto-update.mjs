@@ -78,8 +78,10 @@ const block = managedCronBlock({
   nodePath: process.execPath,
   scriptPath,
   logPath,
+  targetDir,
   channel,
   repoUrl,
+  pathValue: process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
 });
 
 if (mode === "print") {
@@ -91,6 +93,7 @@ if (mode === "print") {
       `OPENCLAW_SUPPORT_KB_DIR=${shellQuote(targetDir)}`,
       `OPENCLAW_SUPPORT_KB_REPO=${shellQuote(repoUrl)}`,
       `OPENCLAW_KB_CHANNEL=${shellQuote(channel)}`,
+      `PATH=${shellQuote(process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin")}`,
       shellQuote(process.execPath),
       shellQuote(scriptPath),
       "--reason",

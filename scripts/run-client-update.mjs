@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -99,14 +99,22 @@ async function readExistingLock() {
   try {
     return JSON.parse(await readFile(path.join(lockPath, "owner.json"), "utf8"));
   } catch {
-    return { path: lockPath, startedAt: null };
+    try {
+      const lockStat = await stat(lockPath);
+      return { path: lockPath, startedAt: null, mtimeMs: lockStat.mtimeMs };
+    } catch {
+      return { path: lockPath, startedAt: null, mtimeMs: Date.now() };
+    }
   }
 }
 
 function lockIsStale(owner) {
   if (!Number.isFinite(staleLockMs) || staleLockMs <= 0) return false;
   const started = Date.parse(owner?.startedAt || "");
-  if (!Number.isFinite(started)) return true;
+  if (!Number.isFinite(started)) {
+    if (Number.isFinite(owner?.mtimeMs)) return Date.now() - owner.mtimeMs > staleLockMs;
+    return false;
+  }
   return Date.now() - started > staleLockMs;
 }
 
@@ -143,13 +151,13 @@ async function updateCheckout() {
 
   if (await pathExists(path.join(targetDir, ".git"))) {
     ensureExistingOriginMatchesTrustPolicy();
-    run("git", ["-C", targetDir, "fetch", "--prune", "origin"]);
     if (pinnedRef) {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
       run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
     } else {
+      run("git", ["-C", targetDir, "fetch", "--prune", "--depth", "1", "origin", branch]);
       run("git", ["-C", targetDir, "checkout", branch]);
-      run("git", ["-C", targetDir, "pull", "--ff-only", "origin", branch]);
+      run("git", ["-C", targetDir, "merge", "--ff-only", "FETCH_HEAD"]);
     }
     return;
   }

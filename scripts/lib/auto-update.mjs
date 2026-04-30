@@ -22,15 +22,20 @@ export function managedCronBlock({
   nodePath,
   scriptPath,
   logPath,
+  targetDir,
   channel = "stable",
   repoUrl = "https://github.com/100yenadmin/openclaw-support-kb.git",
+  pathValue = process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
 } = {}) {
   if (!schedule) throw new Error("managedCronBlock requires schedule");
   if (!nodePath) throw new Error("managedCronBlock requires nodePath");
   if (!scriptPath) throw new Error("managedCronBlock requires scriptPath");
   if (!logPath) throw new Error("managedCronBlock requires logPath");
+  if (!targetDir) throw new Error("managedCronBlock requires targetDir");
 
   const command = escapeCronPercents([
+    `PATH=${shellQuote(pathValue)}`,
+    `OPENCLAW_SUPPORT_KB_DIR=${shellQuote(targetDir)}`,
     `OPENCLAW_SUPPORT_KB_REPO=${shellQuote(repoUrl)}`,
     `OPENCLAW_KB_CHANNEL=${shellQuote(channel)}`,
     shellQuote(nodePath),
