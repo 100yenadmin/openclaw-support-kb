@@ -5,7 +5,10 @@ export const AUTO_UPDATE_CRON_START = "# openclaw-support-kb:auto-update:start";
 export const AUTO_UPDATE_CRON_END = "# openclaw-support-kb:auto-update:end";
 
 export function shellQuote(value) {
-  return `'${String(value).replace(/'/g, `'\\''`)}'`;
+  const text = String(value);
+  if (text.includes("\0")) throw new Error("shellQuote cannot quote values containing null bytes");
+  if (/[\r\n]/.test(text)) throw new Error("shellQuote cannot quote values containing newlines");
+  return `'${text.replace(/'/g, `'\\''`)}'`;
 }
 
 export function escapeCronPercents(value) {

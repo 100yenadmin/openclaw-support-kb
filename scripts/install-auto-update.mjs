@@ -25,7 +25,12 @@ const runNow = process.argv.includes("--run-now");
 function readArg(name) {
   const index = process.argv.indexOf(name);
   if (index === -1) return "";
-  return process.argv[index + 1] || "";
+  const value = process.argv[index + 1];
+  if (!value || value.startsWith("-")) {
+    console.error(`Missing value for ${name}.`);
+    process.exit(2);
+  }
+  return value;
 }
 
 function captureNoExit(command, args, options = {}) {

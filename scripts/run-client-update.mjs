@@ -29,7 +29,12 @@ const startedAt = new Date();
 function readArg(name) {
   const index = process.argv.indexOf(name);
   if (index === -1) return "";
-  return process.argv[index + 1] || "";
+  const value = process.argv[index + 1];
+  if (!value || value.startsWith("-")) {
+    console.error(`Missing value for ${name}.`);
+    process.exit(2);
+  }
+  return value;
 }
 
 function run(command, args, options = {}) {
@@ -68,11 +73,7 @@ async function writeStatus(status) {
 async function acquireLock() {
   await mkdir(lockDir, { recursive: true });
   try {
-    await mkdir(lockPath);
-    await writeFile(
-      path.join(lockPath, "owner.json"),
-      `${JSON.stringify({ pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
-    );
+    await createLockOwner();
     return true;
   } catch (error) {
     if (error.code !== "EEXIST") throw error;
@@ -91,7 +92,36 @@ async function acquireLock() {
       return false;
     }
     await rm(lockPath, { recursive: true, force: true });
-    return acquireLock();
+    return reacquireAfterStaleLockRemoval();
+  }
+}
+
+async function createLockOwner() {
+  await mkdir(lockPath);
+  await writeFile(
+    path.join(lockPath, "owner.json"),
+    `${JSON.stringify({ pid: process.pid, startedAt: startedAt.toISOString(), reason }, null, 2)}\n`,
+  );
+}
+
+async function reacquireAfterStaleLockRemoval() {
+  try {
+    await createLockOwner();
+    return true;
+  } catch (error) {
+    if (error.code !== "EEXIST") throw error;
+    const owner = await readExistingLock();
+    await writeStatus({
+      ok: true,
+      skipped: true,
+      reason,
+      targetDir,
+      status: "locked",
+      existingLock: owner,
+      finishedAt: new Date().toISOString(),
+    });
+    console.warn(`OpenClaw support KB update already running at ${lockPath}; skipping.`);
+    return false;
   }
 }
 

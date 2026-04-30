@@ -81,6 +81,7 @@ Client machines should not rely on a person remembering to re-run setup. After
 the first successful setup, install the managed local fallback:
 
 ```bash
+cd "$OPENCLAW_SUPPORT_KB_DIR"
 node scripts/install-auto-update.mjs --mode crontab --run-now
 ```
 
@@ -92,6 +93,7 @@ For environments where the fleet/control panel owns scheduling, print the exact
 managed command instead:
 
 ```bash
+cd "$OPENCLAW_SUPPORT_KB_DIR"
 node scripts/install-auto-update.mjs --mode print
 ```
 

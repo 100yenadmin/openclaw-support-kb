@@ -120,6 +120,8 @@ test("managed cron block collapses duplicate managed blocks", () => {
 
 test("cron helpers are stable for shell quoting and minute jitter", () => {
   assert.equal(shellQuote("it's fine"), "'it'\\''s fine'");
+  assert.throws(() => shellQuote("bad\nvalue"), /newlines/);
+  assert.throws(() => shellQuote("bad\0value"), /null bytes/);
   assert.equal(defaultCronMinute("same-host"), defaultCronMinute("same-host"));
   assert.ok(defaultCronMinute("same-host") >= 0);
   assert.ok(defaultCronMinute("same-host") < 60);
