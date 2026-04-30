@@ -50,13 +50,11 @@ export function upsertManagedCronBlock(existingCrontab, managedBlock) {
 
   const pattern = new RegExp(
     `${escapeRegExp(AUTO_UPDATE_CRON_START)}[\\s\\S]*?${escapeRegExp(AUTO_UPDATE_CRON_END)}`,
-    "m",
+    "gm",
   );
 
-  if (pattern.test(existing)) {
-    return `${existing.replace(pattern, block).trimEnd()}\n`;
-  }
-  return `${existing}${existing ? "\n\n" : ""}${block}\n`;
+  const withoutManagedBlocks = existing.replace(pattern, "").trim();
+  return `${withoutManagedBlocks}${withoutManagedBlocks ? "\n\n" : ""}${block}\n`;
 }
 
 function escapeRegExp(value) {

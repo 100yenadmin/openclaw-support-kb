@@ -6,11 +6,11 @@ import path from "node:path";
 import {
   defaultCronMinute,
   managedCronBlock,
+  shellQuote,
   upsertManagedCronBlock,
 } from "./lib/auto-update.mjs";
-import { canonicalSourceDir, repoRootFromImportMeta } from "./lib/openclaw-support-kb.mjs";
+import { canonicalSourceDir } from "./lib/openclaw-support-kb.mjs";
 
-const repoRoot = repoRootFromImportMeta(import.meta.url);
 const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const mode = readArg("--mode") || "crontab";
 const schedule = readArg("--schedule") || `${defaultCronMinute()} * * * *`;
@@ -86,7 +86,17 @@ if (mode === "print") {
   console.log(block);
   console.log("");
   console.log("Fleet/control-panel immediate update command:");
-  console.log(`${process.execPath} ${path.join(repoRoot, "scripts", "run-client-update.mjs")} --reason fleet-release`);
+  console.log(
+    [
+      `OPENCLAW_SUPPORT_KB_DIR=${shellQuote(targetDir)}`,
+      `OPENCLAW_SUPPORT_KB_REPO=${shellQuote(repoUrl)}`,
+      `OPENCLAW_KB_CHANNEL=${shellQuote(channel)}`,
+      shellQuote(process.execPath),
+      shellQuote(scriptPath),
+      "--reason",
+      "fleet-release",
+    ].join(" "),
+  );
   process.exit(0);
 }
 
@@ -100,5 +110,12 @@ console.log(`Installed OpenClaw support KB auto-update crontab: ${schedule}`);
 console.log(`Log: ${logPath}`);
 
 if (runNow) {
-  run(process.execPath, [path.join(repoRoot, "scripts", "run-client-update.mjs"), "--reason", "install"]);
+  run(process.execPath, [scriptPath, "--reason", "install"], {
+    env: {
+      ...process.env,
+      OPENCLAW_SUPPORT_KB_DIR: targetDir,
+      OPENCLAW_SUPPORT_KB_REPO: repoUrl,
+      OPENCLAW_KB_CHANNEL: channel,
+    },
+  });
 }

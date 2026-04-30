@@ -7,6 +7,7 @@ import {
   canonicalSourceDir,
   isFullCommitSha,
   isOfficialRepoUrl,
+  normalizeRepoUrl,
   pathExists,
   readJsonIfExists,
 } from "./lib/openclaw-support-kb.mjs";
@@ -125,11 +126,23 @@ function ensureRepoTrust() {
   }
 }
 
+function ensureExistingOriginMatchesTrustPolicy() {
+  const originUrl = capture("git", ["-C", targetDir, "remote", "get-url", "origin"]).stdout.trim();
+  if (isOfficialRepoUrl(repoUrl)) {
+    if (isOfficialRepoUrl(originUrl)) return;
+    throw new Error(`Refusing to update ${targetDir}: existing origin is not the official repo (${originUrl}).`);
+  }
+  if (normalizeRepoUrl(originUrl) !== normalizeRepoUrl(repoUrl)) {
+    throw new Error(`Refusing to update ${targetDir}: existing origin ${originUrl} does not match ${repoUrl}.`);
+  }
+}
+
 async function updateCheckout() {
   ensureRepoTrust();
   await mkdir(path.dirname(targetDir), { recursive: true });
 
   if (await pathExists(path.join(targetDir, ".git"))) {
+    ensureExistingOriginMatchesTrustPolicy();
     run("git", ["-C", targetDir, "fetch", "--prune", "origin"]);
     if (pinnedRef) {
       run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);

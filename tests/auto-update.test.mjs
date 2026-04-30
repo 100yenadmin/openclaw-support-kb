@@ -62,6 +62,34 @@ test("managed cron block replaces only its own prior block", () => {
   assert.equal((next.match(new RegExp(AUTO_UPDATE_CRON_START, "g")) || []).length, 1);
 });
 
+test("managed cron block collapses duplicate managed blocks", () => {
+  const first = managedCronBlock({
+    schedule: "21 * * * *",
+    nodePath: "/usr/local/bin/node",
+    scriptPath: "/tmp/run-client-update.mjs",
+    logPath: "/tmp/update.log",
+  });
+  const second = managedCronBlock({
+    schedule: "22 * * * *",
+    nodePath: "/usr/local/bin/node",
+    scriptPath: "/tmp/run-client-update.mjs",
+    logPath: "/tmp/update.log",
+  });
+  const replacement = managedCronBlock({
+    schedule: "42 * * * *",
+    nodePath: "/usr/local/bin/node",
+    scriptPath: "/tmp/run-client-update.mjs",
+    logPath: "/tmp/update.log",
+  });
+
+  const next = upsertManagedCronBlock(`0 0 * * * echo keep\n\n${first}\n\n${second}\n`, replacement);
+  assert.match(next, /echo keep/);
+  assert.doesNotMatch(next, /21 \* \* \* \*/);
+  assert.doesNotMatch(next, /22 \* \* \* \*/);
+  assert.match(next, /42 \* \* \* \*/);
+  assert.equal((next.match(new RegExp(AUTO_UPDATE_CRON_START, "g")) || []).length, 1);
+});
+
 test("cron helpers are stable for shell quoting and minute jitter", () => {
   assert.equal(shellQuote("it's fine"), "'it'\\''s fine'");
   assert.equal(defaultCronMinute("same-host"), defaultCronMinute("same-host"));
