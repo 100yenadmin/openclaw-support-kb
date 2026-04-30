@@ -52,9 +52,22 @@ node scripts/update-client.mjs
 
 Equivalent local alias from this repo directory: `npm run setup`.
 
-Setup requires `gbrain`. If `gbrain` is missing, stop and install/fix GBrain.
-Use `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` only for an explicit degraded
-read-only install where the agent must not claim GBrain-indexed results.
+Setup requires `gbrain`. The installer checks `PATH`, `GBRAIN_BIN`, and common
+local locations such as `~/gbrain/bin/gbrain`. If `gbrain` is missing, stop and
+install/fix GBrain. Use `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` only for an
+explicit degraded read-only install where the agent must not claim
+GBrain-indexed results.
+
+If the discovered GBrain is older than `kb-manifest.json` requires, setup still
+installs the OpenClaw support skills but stops before indexing. Run the printed
+upgrade command, usually:
+
+```bash
+gbrain upgrade
+```
+
+If `~/gbrain` is a source checkout but `~/gbrain/bin/gbrain --version` is old,
+rebuild or reinstall that checkout so the binary matches the checkout version.
 
 What setup does:
 
@@ -62,8 +75,10 @@ What setup does:
 2. writes a managed OpenClaw agent hint block to active workspace `AGENTS.md`
    files, including `~/.openclaw/workspace/AGENTS.md`
 3. registers `openclaw-support-kb` as a federated GBrain source at
-   `~/.gbrain/sources/openclaw-support-kb`
+   `~/.gbrain/sources/openclaw-support-kb` when the installed GBrain supports
+   named sources
 4. runs `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb`
+   when supported, otherwise legacy `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb`
 5. runs `gbrain embed --stale`
 6. verifies local search returns from the indexed KB
 
@@ -87,7 +102,9 @@ node scripts/install-auto-update.mjs --mode crontab --run-now
 
 This appends or replaces only the managed
 `openclaw-support-kb:auto-update` crontab block. It preserves unrelated crontab
-entries and logs to `~/.gbrain/logs/openclaw-support-kb-update.log`.
+entries and logs to `~/.gbrain/logs/openclaw-support-kb-update.log`. The script
+defaults to `--mode print`; crontab mutation requires explicit
+`--mode crontab`.
 
 For environments where the fleet/control panel owns scheduling, print the exact
 managed command instead:
@@ -99,9 +116,12 @@ node scripts/install-auto-update.mjs --mode print
 
 Fleet/control-panel immediate refresh command:
 
-```bash
-node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/run-client-update.mjs" --reason fleet-release
-```
+Register the full `Fleet/control-panel immediate update command:` printed by
+`node scripts/install-auto-update.mjs --mode print`. Do not replace it with a
+bare `node .../run-client-update.mjs` call: the printed command includes the
+`OPENCLAW_SUPPORT_KB_DIR`, `OPENCLAW_SUPPORT_KB_REPO`, `OPENCLAW_KB_CHANNEL`,
+and `PATH` prefixes needed to find local installs such as
+`~/gbrain/bin/gbrain`.
 
 Best production posture is both:
 
@@ -119,10 +139,21 @@ writes the last result to
 ```bash
 test -f "$HOME/.gbrain/sources/openclaw-support-kb/kb-manifest.json"
 test -f "$HOME/.openclaw/skills/openclaw-support-kb/SKILL.md"
+node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs"
 gbrain sources list
 gbrain search "Telegram allowFrom groupAllowFrom groups"
 gbrain query "How should I safely repair OpenClaw config?"
 ```
+
+Use `node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs" --json`
+for fleet or agent health checks. It reports whether the source checkout is git
+managed, whether the four skills are installed, whether GBrain is new enough,
+whether the `openclaw-support-kb` named source has pages, and whether an import
+checkpoint is stale or an update is currently running.
+
+If `gbrain sources list` reports `Unknown command: sources`, continue with the
+two search/query checks. That means this machine has an older GBrain without
+named-source management; the installer uses legacy repo sync on those builds.
 
 The agent should now use these installed skills automatically for OpenClaw
 support/config/setup questions:

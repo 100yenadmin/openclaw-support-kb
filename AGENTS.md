@@ -22,7 +22,8 @@ grounded in current docs before they edit config or escalate support.
   and cite source URLs or local source paths.
 - The canonical local source path is `~/.gbrain/sources/openclaw-support-kb`.
 - The canonical GBrain source id is `openclaw-support-kb`; it should be
-  registered as a federated source so default GBrain search can find it.
+  registered as a federated source when the installed GBrain supports named
+  sources. Older GBrain builds use legacy `gbrain sync --repo` fallback.
 - Users do not push to this repo; they pull the published repo and sync it into
   local GBrain.
 - Keep client installs fresh through `scripts/run-client-update.mjs`; fleet

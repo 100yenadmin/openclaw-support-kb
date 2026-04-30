@@ -9,7 +9,12 @@ import {
   ensureGbrainSource,
   GBRAIN_SOURCE_ID,
   GBRAIN_SOURCE_NAME,
+  gbrainSyncArgs,
   isBenignExistingGbrainSourceError,
+  parseGbrainSourcesList,
+  resolveGbrainCommand,
+  verifyNamedGbrainSource,
+  withCommandPathFallbacks,
 } from "../scripts/lib/openclaw-support-kb.mjs";
 
 const repoRoot = path.resolve(import.meta.dirname, "..");
@@ -186,14 +191,73 @@ test("client sync registers and uses the named GBrain source", () => {
     ],
     ["gbrain", ["sources", "federate", GBRAIN_SOURCE_ID]],
   ]);
+  assert.deepEqual(gbrainSyncArgs("/tmp/openclaw-support-kb", { sourceScoped: true }), [
+    "sync",
+    "--repo",
+    "/tmp/openclaw-support-kb",
+    "--source",
+    GBRAIN_SOURCE_ID,
+  ]);
+  assert.deepEqual(gbrainSyncArgs("/tmp/openclaw-support-kb", { sourceScoped: false }), [
+    "sync",
+    "--repo",
+    "/tmp/openclaw-support-kb",
+  ]);
 
   for (const script of ["scripts/update-client.mjs", "scripts/sync-local.mjs"]) {
     const text = readFileSync(path.join(repoRoot, script), "utf8");
     assert.match(text, /import\s+\{[\s\S]*ensureGbrainSource[\s\S]*\}\s+from\s+"\.\/lib\/openclaw-support-kb\.mjs"/);
-    assert.match(text, /ensureGbrainSource\s*\(\s*\{[\s\S]*targetDir[\s\S]*run[\s\S]*captureNoExit[\s\S]*\}\s*\)/);
-    assert.match(text, /run\s*\(\s*"gbrain"\s*,\s*\[[\s\S]*"sync"[\s\S]*"--source"[\s\S]*GBRAIN_SOURCE_ID[\s\S]*\]\s*\)/);
+    assert.match(text, /ensureGbrainSource\s*\(\s*\{[\s\S]*targetDir[\s\S]*run[\s\S]*captureNoExit[\s\S]*gbrainCommand[\s\S]*\}\s*\)/);
+    assert.match(text, /run\s*\(\s*gbrainCommand\s*,\s*gbrainSyncArgs/);
     assert.doesNotMatch(text, /"sources"\s*,\s*"add"/);
   }
+});
+
+test("GBrain command discovery checks PATH then common local install paths", () => {
+  const calls = [];
+  const resolved = resolveGbrainCommand({
+    home: "/Users/test",
+    captureNoExit(command, args) {
+      calls.push([command, args]);
+      if (command === "/Users/test/gbrain/bin/gbrain") return { status: 0, stdout: "gbrain 0.27.0", stderr: "" };
+      return { missing: true };
+    },
+  });
+
+  assert.equal(resolved.command, "/Users/test/gbrain/bin/gbrain");
+  assert.deepEqual(calls[0], ["gbrain", ["--version"]]);
+  assert.ok(calls.some(([command]) => command === "/Users/test/gbrain/bin/gbrain"));
+});
+
+test("GBRAIN_BIN override is probed before PATH and local fallbacks", () => {
+  const previous = process.env.GBRAIN_BIN;
+  process.env.GBRAIN_BIN = "/Users/test/custom/bin/gbrain";
+  try {
+    const calls = [];
+    const resolved = resolveGbrainCommand({
+      home: "/Users/test",
+      captureNoExit(command, args) {
+        calls.push([command, args]);
+        if (command === "/Users/test/custom/bin/gbrain") {
+          return { status: 0, stdout: "gbrain 0.27.0", stderr: "" };
+        }
+        return { status: 0, stdout: "gbrain 0.99.0", stderr: "" };
+      },
+    });
+
+    assert.equal(resolved.command, "/Users/test/custom/bin/gbrain");
+    assert.deepEqual(calls[0], ["/Users/test/custom/bin/gbrain", ["--version"]]);
+    assert.equal(calls.length, 1);
+  } finally {
+    if (previous === undefined) delete process.env.GBRAIN_BIN;
+    else process.env.GBRAIN_BIN = previous;
+  }
+});
+
+test("auto-update PATH includes local GBrain and OpenClaw fallbacks", () => {
+  const value = withCommandPathFallbacks("/usr/bin:/bin", "/Users/test");
+  assert.match(value, /\/Users\/test\/gbrain\/bin/);
+  assert.match(value, /\/Users\/test\/\.openclaw\/bin/);
 });
 
 test("GBrain source registration tolerates existing sources before refederating", () => {
@@ -216,6 +280,65 @@ test("GBrain source registration tolerates existing sources before refederating"
   assert.equal(calls.length, 2);
   assert.equal(calls[0][1][2], GBRAIN_SOURCE_ID);
   assert.deepEqual(calls[1][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+});
+
+test("GBrain source registration falls back for legacy GBrain without sources command", () => {
+  const calls = [];
+  const result = ensureGbrainSource({
+    targetDir: "/tmp/openclaw-support-kb",
+    run() {
+      throw new Error("run should not be used when captureNoExit exists");
+    },
+    captureNoExit(command, args) {
+      calls.push([command, args]);
+      return { status: 1, stdout: "Unknown command: sources", stderr: "Run gbrain --help" };
+    },
+    warn() {},
+    gbrainCommand: "/Users/test/gbrain/bin/gbrain",
+  });
+
+  assert.equal(result.sourceScoped, false);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0][0], "/Users/test/gbrain/bin/gbrain");
+});
+
+test("GBrain legacy source fallback requires sources-specific unsupported command errors", () => {
+  assert.throws(
+    () =>
+      ensureGbrainSource({
+        targetDir: "/tmp/openclaw-support-kb",
+        run() {
+          throw new Error("run should not be used when captureNoExit exists");
+        },
+        captureNoExit() {
+          return { status: 1, stdout: "invalid command option: --federated", stderr: "" };
+        },
+        warn() {},
+      }),
+    /gbrain sources add failed/,
+  );
+});
+
+test("named GBrain source verification detects missing or empty source pages", () => {
+  const good = parseGbrainSourcesList("openclaw-support-kb   federated   616 pages  just synced\n");
+  assert.equal(good.found, true);
+  assert.equal(good.pageCount, 616);
+
+  const empty = verifyNamedGbrainSource({
+    captureNoExit() {
+      return { status: 0, stdout: "openclaw-support-kb   federated   0 pages  never synced\n", stderr: "" };
+    },
+  });
+  assert.equal(empty.ok, false);
+  assert.match(empty.reason, /0 indexed pages/);
+
+  const missing = verifyNamedGbrainSource({
+    captureNoExit() {
+      return { status: 0, stdout: "default   federated   616 pages  just synced\n", stderr: "" };
+    },
+  });
+  assert.equal(missing.ok, false);
+  assert.match(missing.reason, /not found/);
 });
 
 test("GBrain source registration does not hide unrelated exists errors", () => {
