@@ -4,3 +4,4 @@ node_modules/
 tmp/
 coverage/
 *.log
+.gbrain-source

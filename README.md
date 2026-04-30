@@ -96,6 +96,14 @@ gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-suppo
   gbrain embed --stale
 ```
 
+GBrain freshness is git based. `sync` records a per-source commit, imports only
+the git diff after the first sync, deletes pages for deleted files, and forces a
+full walk when its chunker version changes. `embed --stale` does not re-embed
+everything; it fills only chunks whose embedding is missing. When a source row
+already exists, GBrain's `sources add` keeps the old row, so setup verifies the
+registered `local_path` and recreates the `openclaw-support-kb` source if it
+still points at an old `.pre-git-*` backup.
+
 If the discovered GBrain satisfies `kb-manifest.json` `minGbrainVersion` but
 lacks named-source commands, `ensureGbrainSource()` falls back to:
 
@@ -158,9 +166,15 @@ node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs --json
 ```
 
 The status command checks the source checkout, manifest, installed skills,
-GBrain version, named-source page count, stale import checkpoints, local update
-lock, search verification, and cron registration. It exits 0 only when the KB is
-healthy or an update is clearly running.
+GBrain version, named-source page count and path, stale import checkpoints,
+legacy `.pre-git-*` source backups, local update lock, search verification, and
+cron registration. It exits 0 only when the KB is healthy or an update is
+clearly running. If legacy backups are reported, move them out of the GBrain
+sources directory with:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/repair-index.mjs
+```
 
 ```mermaid
 flowchart TD
@@ -169,10 +183,11 @@ flowchart TD
   B --> D["Client pulls repo with git pull --ff-only"]
   C --> D
   D --> E["update-client installs skills and AGENTS hints"]
-  E --> F["Register/federate GBrain source openclaw-support-kb"]
-  F --> G["gbrain sync --repo ... (--source when supported)"]
-  G --> H["gbrain embed --stale"]
-  H --> I["Verification searches + status JSON"]
+  E --> F["Register/federate source and verify local_path"]
+  F --> G["Recreate source if it points at a pre-git backup"]
+  G --> H["gbrain sync --repo ... (--source when supported)"]
+  H --> I["gbrain embed --stale"]
+  I --> J["Verification searches + status JSON"]
 ```
 
 ## Channels

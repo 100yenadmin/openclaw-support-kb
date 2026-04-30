@@ -414,9 +414,36 @@ test("client updater reclones dirty marked git source and keeps backup", async (
     assert.equal(await exists(path.join(sourceDir, ".git")), true);
     assert.equal(await exists(path.join(sourceDir, SOURCE_MARKER_FILE)), false);
     assert.equal((await readFile(path.join(sourceDir, "README.md"), "utf8")).trim(), "one");
-    const backupEntries = (await readdir(tempDir)).filter((entry) => entry.startsWith("source.pre-git-"));
+    const archiveDir = path.join(tempDir, "archive", "openclaw-support-kb");
+    const backupEntries = (await readdir(archiveDir)).filter((entry) => entry.startsWith("pre-git-"));
     assert.equal(backupEntries.length, 1);
-    assert.equal(await exists(path.join(tempDir, backupEntries[0], SOURCE_MARKER_FILE)), true);
+    assert.equal(await exists(path.join(archiveDir, backupEntries[0], SOURCE_MARKER_FILE)), true);
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("repair-index moves legacy pre-git backups out of the sources directory", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-repair-index-"));
+  try {
+    const sourcesDir = path.join(tempDir, "sources");
+    const sourceDir = path.join(sourcesDir, "openclaw-support-kb");
+    const legacyBackup = path.join(sourcesDir, "openclaw-support-kb.pre-git-123");
+    await mkdir(sourceDir, { recursive: true });
+    await mkdir(legacyBackup, { recursive: true });
+    await writeFile(path.join(legacyBackup, "old.md"), "old\n");
+
+    const result = spawnSync(process.execPath, ["scripts/repair-index.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: { ...process.env, OPENCLAW_SUPPORT_KB_DIR: sourceDir },
+    });
+
+    assert.equal(result.status, 0, result.stderr);
+    const payload = JSON.parse(result.stdout);
+    assert.equal(payload.moved, 1);
+    assert.equal(await exists(legacyBackup), false);
+    assert.equal(await exists(path.join(tempDir, "archive", "openclaw-support-kb", "pre-git-123", "old.md")), true);
   } finally {
     await rm(tempDir, { recursive: true, force: true });
   }
@@ -434,6 +461,7 @@ test("direct client setup clones the published repo instead of building a non-gi
       [
         "#!/bin/sh",
         "if [ \"$1\" = \"--version\" ]; then echo 'gbrain 0.27.0'; exit 0; fi",
+        `if [ "$1" = "sources" ] && [ "$2" = "list" ] && [ "$3" = "--json" ]; then echo '{"sources":[{"id":"openclaw-support-kb","local_path":"${sourceDir}","page_count":3,"federated":true}]}'; exit 0; fi`,
         "if [ \"$1\" = \"sources\" ] && [ \"$2\" = \"list\" ]; then echo 'openclaw-support-kb   federated   3 pages  synced'; exit 0; fi",
         "if [ \"$1\" = \"sources\" ]; then exit 0; fi",
         "if [ \"$1\" = \"sync\" ]; then exit 0; fi",
@@ -526,6 +554,7 @@ test("status command reports healthy installs and stale checkpoints", async () =
       [
         "#!/bin/sh",
         "if [ \"$1\" = \"--version\" ]; then echo 'gbrain 0.27.0'; exit 0; fi",
+        `if [ "$1" = "sources" ] && [ "$2" = "list" ] && [ "$3" = "--json" ]; then echo '{"sources":[{"id":"openclaw-support-kb","local_path":"${sourceDir}","page_count":3,"federated":true}]}'; exit 0; fi`,
         "if [ \"$1\" = \"sources\" ] && [ \"$2\" = \"list\" ]; then echo 'openclaw-support-kb   federated   3 pages  synced'; exit 0; fi",
         "exit 0",
         "",
@@ -550,6 +579,15 @@ test("status command reports healthy installs and stale checkpoints", async () =
     });
     assert.equal(healthy.status, 0, healthy.stderr);
     assert.equal(JSON.parse(healthy.stdout).status, "healthy");
+
+    await writeFile(path.join(sourceDir, ".gbrain-source"), "openclaw-support-kb\n");
+    const attached = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env,
+    });
+    assert.equal(attached.status, 0, attached.stderr);
+    assert.equal(JSON.parse(attached.stdout).source.gitStatus.dirty, false);
 
     await writeFile(path.join(sourceDir, "local-change.md"), "dirty\n");
     const dirty = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {

@@ -28,10 +28,20 @@ openclaw doctor
 openclaw config validate --json
 openclaw logs --tail 200
 cat ~/.gbrain/sources/openclaw-support-kb/kb-manifest.json
+node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs
 ```
 
 Redact tokens, passwords, bot tokens, bearer headers, OAuth values, and private
 user content before showing or sending diagnostics.
+
+If status reports old `openclaw-support-kb.pre-git-*` directories under
+`~/.gbrain/sources`, move them to the archive with:
+
+```bash
+node ~/.gbrain/sources/openclaw-support-kb/scripts/repair-index.mjs
+```
+
+Do not cite search results or filesystem paths from those backup directories.
 
 If the issue is channel setup, include:
 

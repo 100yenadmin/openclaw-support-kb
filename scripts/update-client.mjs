@@ -11,6 +11,8 @@ import {
   GBRAIN_VERIFY_QUERIES,
   isFullCommitSha,
   isOfficialRepoUrl,
+  managedPreGitBackupDir,
+  meaningfulGitStatusLines,
   normalizeRepoUrl,
   pathExists,
   readJsonIfExists,
@@ -160,7 +162,7 @@ function checkoutHasLocalChanges() {
     if (status.stderr) console.error(status.stderr.trim());
     process.exit(status.status ?? 3);
   }
-  return Boolean(status.stdout.trim());
+  return meaningfulGitStatusLines(status.stdout).length > 0;
 }
 
 async function migrateMarkedSourceToGitCheckout() {
@@ -172,7 +174,8 @@ async function migrateMarkedSourceToGitCheckout() {
     process.exit(3);
   }
 
-  const backupDir = path.join(path.dirname(targetDir), `${path.basename(targetDir)}.pre-git-${Date.now()}`);
+  const backupDir = managedPreGitBackupDir(targetDir);
+  await mkdir(path.dirname(backupDir), { recursive: true });
   await rm(backupDir, { recursive: true, force: true });
   console.warn(`Migrating marked OpenClaw support KB source to git checkout. Backup retained at ${backupDir}`);
   await rename(targetDir, backupDir);

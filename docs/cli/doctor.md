@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "01e862160a824ffbc1987c62b4ff9f305b3a1c91bd72d04b47d591b995d5c5c7"
+source_hash: "96ac1adfaeda6f368fda1ec714637967563b4ea342c6fa7884b8bfe0766a236c"
 doc_path: "cli/doctor.md"
 original_doc_path: "cli/doctor.md"
 duplicate_index: 1
@@ -59,6 +59,7 @@ Notes:
 * Repeat `doctor --fix` runs no longer report/apply Talk normalization when the only difference is object key order.
 * Doctor includes a memory-search readiness check and can recommend `openclaw configure --section model` when embedding credentials are missing.
 * Doctor warns when no command owner is configured. The command owner is the human operator account allowed to run owner-only commands and approve dangerous actions. DM pairing only lets someone talk to the bot; if you approved a sender before first-owner bootstrap existed, set `commands.ownerAllowFrom` explicitly.
+* Doctor warns when Codex-mode agents are configured and personal Codex CLI assets exist in the operator's Codex home. Local Codex app-server launches use isolated per-agent homes, so use `openclaw migrate codex --dry-run` to inventory assets that should be promoted deliberately.
 * If sandbox mode is enabled but Docker is unavailable, doctor reports a high-signal warning with remediation (`install Docker` or `openclaw config set agents.defaults.sandbox.mode off`).
 * If `gateway.auth.token`/`gateway.auth.password` are SecretRef-managed and unavailable in the current command path, doctor reports a read-only warning and does not write plaintext fallback credentials.
 * If channel SecretRef inspection fails in a fix path, doctor continues and reports a warning instead of exiting early.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent loop"
 source: "https://docs.openclaw.ai/concepts/agent-loop"
-source_hash: "d6bb79216a492d6e220119958c70871d496325319944c32b5707c9ca435df041"
+source_hash: "d9bcd69a10b5deb3f32b9e2879582067d35bf9e6864d89605d12f46f37317c6d"
 doc_path: "concepts/agent-loop.md"
 original_doc_path: "concepts/agent-loop.md"
 duplicate_index: 1
@@ -39,6 +39,7 @@ wired end-to-end.
    * resolves model + auth profile and builds the pi session
    * subscribes to pi events and streams assistant/tool deltas
    * enforces timeout -> aborts run if exceeded
+   * for Codex app-server turns, aborts an accepted turn that stops producing app-server progress before a terminal event
    * returns payloads + usage metadata
 4. `subscribeEmbeddedPiSession` bridges pi-agent-core events to OpenClaw `agent` stream:
    * tool events => `stream: "tool"`

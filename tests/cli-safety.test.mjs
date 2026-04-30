@@ -271,15 +271,64 @@ test("GBrain source registration tolerates existing sources before refederating"
       captureNoExit(command, args) {
         calls.push([command, args]);
         if (args[1] === "add") return { status: 1, stdout: "source already exists", stderr: "" };
+        if (args[1] === "list" && args[2] === "--json") {
+          return {
+            status: 0,
+            stdout: JSON.stringify({ sources: [{ id: GBRAIN_SOURCE_ID, local_path: "/tmp/openclaw-support-kb", page_count: 616 }] }),
+            stderr: "",
+          };
+        }
         return { status: 0, stdout: "", stderr: "" };
       },
       warn() {},
     }),
   );
 
-  assert.equal(calls.length, 2);
+  assert.equal(calls.length, 3);
   assert.equal(calls[0][1][2], GBRAIN_SOURCE_ID);
-  assert.deepEqual(calls[1][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+  assert.deepEqual(calls[2][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+});
+
+test("GBrain source registration recreates stale existing source paths", () => {
+  const calls = [];
+  let addCount = 0;
+  assert.doesNotThrow(() =>
+    ensureGbrainSource({
+      targetDir: "/tmp/openclaw-support-kb",
+      run() {
+        throw new Error("run should not be used when captureNoExit exists");
+      },
+      captureNoExit(command, args) {
+        calls.push([command, args]);
+        if (args[1] === "add") {
+          addCount += 1;
+          return addCount === 1 ? { status: 1, stdout: "source already exists", stderr: "" } : { status: 0, stdout: "", stderr: "" };
+        }
+        if (args[1] === "list" && args[2] === "--json") {
+          return {
+            status: 0,
+            stdout: JSON.stringify({
+              sources: [
+                {
+                  id: GBRAIN_SOURCE_ID,
+                  local_path: "/tmp/openclaw-support-kb.pre-git-123",
+                  page_count: 616,
+                  federated: true,
+                },
+              ],
+            }),
+            stderr: "",
+          };
+        }
+        return { status: 0, stdout: "", stderr: "" };
+      },
+      warn() {},
+    }),
+  );
+
+  assert.ok(calls.some(([, args]) => args.join(" ") === `sources remove ${GBRAIN_SOURCE_ID} --yes`));
+  assert.equal(calls.filter(([, args]) => args[1] === "add").length, 2);
+  assert.deepEqual(calls.at(-1)[1], ["sources", "federate", GBRAIN_SOURCE_ID]);
 });
 
 test("GBrain source registration falls back for legacy GBrain without sources command", () => {
@@ -320,9 +369,10 @@ test("GBrain legacy source fallback requires sources-specific unsupported comman
 });
 
 test("named GBrain source verification detects missing or empty source pages", () => {
-  const good = parseGbrainSourcesList("openclaw-support-kb   federated   616 pages  just synced\n");
+  const good = parseGbrainSourcesList("openclaw-support-kb   federated   616 pages  just synced\n  /tmp/openclaw-support-kb\n");
   assert.equal(good.found, true);
   assert.equal(good.pageCount, 616);
+  assert.equal(good.localPath, "/tmp/openclaw-support-kb");
 
   const empty = verifyNamedGbrainSource({
     captureNoExit() {

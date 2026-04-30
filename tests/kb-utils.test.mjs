@@ -194,6 +194,10 @@ channels.telegram.allowFrom accepts numeric user IDs; groupAllowFrom gates group
   });
   assert.equal(sourced.ok, true);
   assert.deepEqual(sourced.warnings, []);
+
+  const stalePath = validateGbrainSearchOutput("[0.9] /Users/test/.gbrain/sources/openclaw-support-kb.pre-git-123/docs/index.md");
+  assert.equal(stalePath.ok, false);
+  assert.match(stalePath.reason, /pre-git backup/);
 });
 
 test("validateAgentScanSpec requires pinned snyk-agent-scan semver", () => {
