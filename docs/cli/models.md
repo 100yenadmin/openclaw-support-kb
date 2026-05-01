@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "ed1ed7a3725902e42d26b9ae5a5aebcfe43aabf66d82ee3cb8bc03e7cc70bb19"
+source_hash: "e635a705646ebfa8593edd180701482d4d2d7021fb1c71b598f02af55dda7cf3"
 doc_path: "cli/models.md"
 original_doc_path: "cli/models.md"
 duplicate_index: 1
@@ -63,6 +63,11 @@ Notes:
   rows from plugin manifests or bundled provider catalog metadata even when you
   have not authenticated with that provider yet. Those rows still show as
   unavailable until matching auth is configured.
+* `models list` keeps the control plane responsive while provider catalog
+  discovery is slow. The default and configured views fall back to configured or
+  synthetic model rows after a short wait and let discovery finish in the
+  background. Use `--all` when you need the exact full discovered catalog and
+  are willing to wait for provider discovery.
 * Broad `models list --all` merges manifest catalog rows over registry rows
   without loading provider runtime supplement hooks. Provider-filtered manifest
   fast paths use only providers marked `static`; providers marked `refreshable`

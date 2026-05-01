@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "de700d0b427455ec3d2a16cc69683ccae6a7383d95c80d216d93a7b1d6d852b5"
+source_hash: "a94d44e86cd77a65173a7e083bd97b74a815e30dfdec6d265ac7385807c08cc7"
 doc_path: "channels/groups.md"
 original_doc_path: "channels/groups.md"
 duplicate_index: 1
@@ -48,6 +48,10 @@ otherwise -> reply
 
 For group/channel rooms, OpenClaw defaults to `messages.groupChat.visibleReplies: "message_tool"`.
 That means the agent still processes the turn and can update memory/session state, but its normal final answer is not automatically posted back into the room. To speak visibly, the agent uses `message(action=send)`.
+
+If the message tool is unavailable under the active tool policy, OpenClaw falls
+back to automatic visible replies instead of silently suppressing the response.
+`openclaw doctor` warns about this mismatch.
 
 For direct chats and any other source turn, use `messages.visibleReplies: "message_tool"` to apply the same tool-only visible-reply behavior globally. `messages.groupChat.visibleReplies` remains the more specific override for group/channel rooms.
 

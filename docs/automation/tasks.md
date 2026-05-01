@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "50d833e147a469ec5e9370e2353a9f2b6716f03989a3071b88c5dae05a9e5c2b"
+source_hash: "f22f11ec0f0b83eb718e803d5096c49aaee5bc0168b2948130e3f22117cb72a9"
 doc_path: "automation/tasks.md"
 original_doc_path: "automation/tasks.md"
 duplicate_index: 1
@@ -102,13 +102,13 @@ Tasks do **not** replace sessions, cron jobs, or heartbeats — they are the **a
 | Subagent orchestration | `subagent`   | Spawning a subagent via `sessions_spawn`               | `done_only`           |
 | Cron jobs (all types)  | `cron`       | Every cron execution (main-session and isolated)       | `silent`              |
 | CLI operations         | `cli`        | `openclaw agent` commands that run through the gateway | `silent`              |
-| Agent media jobs       | `cli`        | Session-backed `video_generate` runs                   | `silent`              |
+| Agent media jobs       | `cli`        | Session-backed `music_generate`/`video_generate` runs  | `silent`              |
 
 <AccordionGroup>
   <Accordion title="Notify defaults for cron and media">
     Main-session cron tasks use `silent` notify policy by default — they create records for tracking but do not generate notifications. Isolated cron tasks also default to `silent` but are more visible because they run in their own session.
 
-    Session-backed `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished video itself. If you opt into `tools.media.asyncCompletion.directSend`, async `music_generate` and `video_generate` completions try direct channel delivery first before falling back to the requester-session wake path.
+    Session-backed `music_generate` and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. If you opt into `tools.media.asyncCompletion.directSend`, async `video_generate` completions can try direct channel delivery first; async `music_generate` completions stay on the requester-session wake path.
   </Accordion>
 
   <Accordion title="Concurrent video_generate guardrail">

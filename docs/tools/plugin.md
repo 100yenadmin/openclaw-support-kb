@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "fa5dc1b08bd4156991f4e7411d0278059144af89add7a291076baa30a9d0205d"
+source_hash: "31398c7e1db3c12f7ef09aa2dad4a1b19e3146feebb20b1b76c61d87eeba4e08"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -218,6 +218,12 @@ Looking for third-party plugins? See [Community Plugins](/plugins/community).
 | `load.paths`     | Extra plugin files/directories                            |
 | `slots`          | Exclusive slot selectors (e.g. `memory`, `contextEngine`) |
 | `entries.\<id\>` | Per-plugin toggles + config                               |
+
+`plugins.allow` is exclusive. When it is non-empty, only listed plugins can load
+or expose tools, even if `tools.allow` contains `"*"` or a specific plugin-owned
+tool name. If a tool allowlist references plugin tools, add the owning plugin ids
+to `plugins.allow` or remove `plugins.allow`; `openclaw doctor` warns about this
+shape.
 
 Config changes **require a gateway restart**. If the Gateway is running with config
 watch + in-process restart enabled (the default `openclaw gateway` path), that

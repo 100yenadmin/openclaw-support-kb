@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "bc2222ec8286457bb0a6151baedfe3f471c470020d539a9d5337029c7f87c37a"
+source_hash: "ac1d8493a9a698e0406f0557e357bceb4d13b35b1f0ded7e479ecd2542071642"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1
@@ -779,6 +779,8 @@ See the full channel index: [Channels](/channels).
 Group messages default to **require mention** (metadata mention or safe regex patterns). Applies to WhatsApp, Telegram, Discord, Google Chat, and iMessage group chats.
 
 Visible replies are controlled separately. Group/channel rooms default to `messages.groupChat.visibleReplies: "message_tool"`: OpenClaw still processes the turn, but normal final replies stay private and visible room output requires `message(action=send)`. Set `"automatic"` only when you want the legacy behavior where normal replies are posted back to the room. To apply the same tool-only visible-reply behavior to direct chats too, set `messages.visibleReplies: "message_tool"`.
+
+If the message tool is unavailable under the active tool policy, OpenClaw falls back to automatic visible replies instead of silently suppressing the response. `openclaw doctor` warns about this mismatch.
 
 The gateway hot-reloads `messages` config after the file is saved. Restart only when file watching or config reload is disabled in the deployment.
 

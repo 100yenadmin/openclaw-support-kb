@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "7a0fbe32ae48ae9d0c834eba6674fa3132ac83d8425c241c6e92807892319ce7"
+source_hash: "19662dbcd49c0f4a7a0efb7d99be50e8606dc0c92c030bc2142b45621f70d1d8"
 doc_path: "gateway/config-tools.md"
 original_doc_path: "gateway/config-tools.md"
 duplicate_index: 1
@@ -212,7 +212,7 @@ Configures inbound media understanding (image/audio/video):
     media: {
       concurrency: 2,
       asyncCompletion: {
-        directSend: false, // opt-in: send finished async music/video directly to the channel
+        directSend: false, // opt-in: send finished async video directly to the channel
       },
       audio: {
         enabled: true,
@@ -265,7 +265,7 @@ Configures inbound media understanding (image/audio/video):
 
     **Async completion fields:**
 
-    * `asyncCompletion.directSend`: when `true`, completed async `music_generate` and `video_generate` tasks try direct channel delivery first. Default: `false` (legacy requester-session wake/model-delivery path).
+    * `asyncCompletion.directSend`: when `true`, completed async media tasks that support direct completion delivery try direct channel delivery first. Default: `false` (requester-session wake/model-delivery path). Today this applies to async `video_generate`; async `music_generate` completions stay requester-session mediated even when this is enabled.
   </Accordion>
 </AccordionGroup>
 
