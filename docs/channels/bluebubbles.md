@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BlueBubbles"
 source: "https://docs.openclaw.ai/channels/bluebubbles"
-source_hash: "1ff79e244172caf2c5fc540941fd8eb49fa0f4fea50d2ee64427d39a7bd24ce1"
+source_hash: "c47758acbcfc439925fde761e3e9ee2b030fb8876fb7ceef27a4d4ad362e7a1e"
 doc_path: "channels/bluebubbles.md"
 original_doc_path: "channels/bluebubbles.md"
 duplicate_index: 1
@@ -591,6 +591,7 @@ Full configuration: [Configuration](/gateway/configuration)
     * `channels.bluebubbles.coalesceSameSenderDms`: Merge consecutive same-sender DM webhooks into one agent turn so Apple's text+URL split-send arrives as a single message (default: `false`). See [Coalescing split-send DMs](#coalescing-split-send-dms-command--url-in-one-composition) for scenarios, window tuning, and trade-offs. Widens the default inbound debounce window from 500 ms to 2500 ms when enabled without an explicit `messages.inbound.byChannel.bluebubbles`.
     * `channels.bluebubbles.historyLimit`: Max group messages for context (0 disables).
     * `channels.bluebubbles.dmHistoryLimit`: DM history limit.
+    * `channels.bluebubbles.replyContextApiFallback`: When an inbound reply lands without `replyToBody`/`replyToSender` and the in-memory reply-context cache misses, fetch the original message from the BlueBubbles HTTP API as a best-effort fallback (default: `false`). Useful for multi-instance deployments sharing one BlueBubbles account, after process restarts, or after long-lived TTL/LRU cache eviction. The fetch is SSRF-guarded by the same policy as every other BlueBubbles client request, never throws, and populates the cache so subsequent replies amortize. Per-account override: `channels.bluebubbles.accounts.<accountId>.replyContextApiFallback`. A channel-level setting propagates to accounts that omit the flag.
   </Accordion>
 
   <Accordion title="Actions and accounts">

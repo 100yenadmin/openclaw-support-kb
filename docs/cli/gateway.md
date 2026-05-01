@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "86f84a38b4d2176cd7632bfa1cd13996eb549a1bc643e30ebd1bb0ae108c460b"
+source_hash: "76a9f45f776784dec85d677f0b0b06d107a8ebdcdc3fae05cc42fdb140d2f54c"
 doc_path: "cli/gateway.md"
 original_doc_path: "cli/gateway.md"
 duplicate_index: 1
@@ -168,7 +168,7 @@ All query commands use WebSocket RPC.
 openclaw gateway health --url ws://127.0.0.1:18789
 ```
 
-The HTTP `/healthz` endpoint is a liveness probe: it returns once the server can answer HTTP. The HTTP `/readyz` endpoint is stricter and stays red while startup sidecars, channels, or configured hooks are still settling. Local or authenticated detailed readiness responses include an `eventLoop` diagnostic block with event-loop delay, event-loop utilization, CPU core ratio, and a `degraded` flag.
+The HTTP `/healthz` endpoint is a liveness probe: it returns once the server can answer HTTP. The HTTP `/readyz` endpoint is stricter and stays red while startup plugin runtime dependencies, sidecars, channels, or configured hooks are still settling. Local or authenticated detailed readiness responses include an `eventLoop` diagnostic block with event-loop delay, event-loop utilization, CPU core ratio, and a `degraded` flag.
 
 ### `gateway usage-cost`
 

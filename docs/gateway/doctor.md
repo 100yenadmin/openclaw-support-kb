@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "f77474725257b7ef02a45968e47cee39994ea62b7965c94b383442e3ac742624"
+source_hash: "c748cf01989b01c183cfaed00ee80d1f5cf7bd245eef87cf8d33536d68bac9d4"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -355,7 +355,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   <Accordion title="7b. Bundled plugin runtime deps">
     Doctor verifies runtime dependencies only for bundled plugins that are active in the current config or enabled by their bundled manifest default, for example `plugins.entries.discord.enabled: true`, legacy `channels.discord.enabled: true`, configured `models.providers.*` / agent model refs, or a default-enabled bundled plugin without provider ownership. If any are missing, doctor reports the packages and installs them in `openclaw doctor --fix` / `openclaw doctor --repair` mode. External plugins still use `openclaw plugins install` / `openclaw plugins update`; doctor does not install dependencies for arbitrary plugin paths.
 
-    During doctor repair, bundled runtime-dependency npm installs report spinner progress in TTY sessions and periodic line progress in piped/headless output. The Gateway and local CLI can also repair active bundled plugin runtime dependencies on demand before importing a bundled plugin. These installs are scoped to the plugin runtime install root, run with scripts disabled, do not write a package lock, and are guarded by an install-root lock so concurrent CLI or Gateway starts do not mutate the same `node_modules` tree at the same time.
+    During doctor repair, bundled runtime-dependency npm installs report spinner progress in TTY sessions and periodic line progress in piped/headless output. The Gateway and local CLI can also repair active bundled plugin runtime dependencies on demand before importing a bundled plugin. These installs are scoped to the plugin runtime install root, run with scripts disabled, do not write a package lock, and are guarded by an install-root lock so concurrent CLI or Gateway starts do not mutate the same `node_modules` tree at the same time. Stale legacy locks from killed Docker/container starts are reclaimed when their owner metadata cannot prove a current process incarnation and the lock files are old.
   </Accordion>
 
   <Accordion title="8. Gateway service migrations and cleanup hints">

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "e2af0578856b5ed3434f1edb0957c107a77e09d9e3c31c817b8d20e4d0a8045b"
+source_hash: "0ab5b7677ddbce5fb231a2827922f26479de90875e4cfdb6327a2fd7df0c19ea"
 doc_path: "tools/acp-agents.md"
 original_doc_path: "tools/acp-agents.md"
 duplicate_index: 1
@@ -44,7 +44,8 @@ Each ACP session spawn is tracked as a [background task](/automation/tasks).
 
 Usually yes. Fresh installs ship the bundled `acpx` runtime plugin enabled
 by default with a plugin-local pinned `acpx` binary that OpenClaw probes
-and self-repairs on startup. Run `/acp doctor` for a readiness check.
+and self-repairs immediately after the Gateway HTTP listener is live. Run
+`/acp doctor` for a readiness check.
 
 OpenClaw only teaches agents about ACP spawning when ACP is **truly
 usable**: ACP must be enabled, dispatch must not be disabled, the current

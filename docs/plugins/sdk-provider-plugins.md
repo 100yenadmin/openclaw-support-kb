@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "846428b59db80567931cde9df3b07c857b9f1811e22076ff97ece031d208bc4c"
+source_hash: "1d69a5840ecc36cf14582858485b82e05cee3ea00cac81bb6a7c3b3288112a5d"
 doc_path: "plugins/sdk-provider-plugins.md"
 original_doc_path: "plugins/sdk-provider-plugins.md"
 duplicate_index: 1
@@ -599,6 +599,7 @@ API key auth, and dynamic model resolution.
             connect: async () => {},
             sendAudio: () => {},
             setMediaTimestamp: () => {},
+            handleBargeIn: () => {},
             submitToolResult: () => {},
             acknowledgeMark: () => {},
             close: () => {},
@@ -606,6 +607,10 @@ API key auth, and dynamic model resolution.
           }),
         });
         ```
+
+        Implement `handleBargeIn` when a transport can detect that a human is
+        interrupting assistant playback and the provider supports truncating or
+        clearing the active audio response.
       </Tab>
 
       <Tab title="Media understanding">

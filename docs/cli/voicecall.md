@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voicecall"
 source: "https://docs.openclaw.ai/cli/voicecall"
-source_hash: "61bc57af210c1ec4183a280bc89569e3199b143864346336e03b8cb337708d14"
+source_hash: "f5de65ce7a9f8a31860e057cce3079f0c650a5cdd4c5f7f56ab2bd14f86678ff"
 doc_path: "cli/voicecall.md"
 original_doc_path: "cli/voicecall.md"
 duplicate_index: 1
@@ -17,6 +17,11 @@ Source: https://docs.openclaw.ai/cli/voicecall
 
 `voicecall` is a plugin-provided command. It only appears if the voice-call plugin is installed and enabled.
 
+When the Gateway is running, operational commands (`call`, `start`,
+`continue`, `speak`, `dtmf`, `end`, and `status`) are sent to that Gateway's
+voice-call runtime. If no Gateway is reachable, they fall back to a standalone
+CLI runtime.
+
 Primary doc:
 
 * Voice-call plugin: [Voice Call](/plugins/voice-call)
@@ -26,6 +31,7 @@ Primary doc:
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw voicecall setup
 openclaw voicecall smoke
+openclaw voicecall status --json
 openclaw voicecall status --call-id <id>
 openclaw voicecall call --to "+15555550123" --message "Hello" --mode notify
 openclaw voicecall continue --call-id <id> --message "Any questions?"
@@ -39,6 +45,9 @@ scripts:
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw voicecall setup --json
 ```
+
+`status` prints active calls as JSON by default. Pass `--call-id <id>` to inspect
+one call.
 
 For external providers (`twilio`, `telnyx`, `plivo`), setup must resolve a public
 webhook URL from `publicUrl`, a tunnel, or Tailscale exposure. A loopback/private

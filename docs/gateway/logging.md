@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "7cd00627a9f8ec0f1e128616d62bd57497cdd11846df5ccc8cc54e35bd0af354"
+source_hash: "d8400de7f1a3a43814c172182b2359b1dbaefbe65c256abaa287a4ff87c873ef"
 doc_path: "gateway/logging.md"
 original_doc_path: "gateway/logging.md"
 duplicate_index: 1
@@ -70,7 +70,7 @@ masked before JSONL lines or messages are written to disk.
 * `logging.redactPatterns`: array of regex strings (overrides defaults)
   * Use raw regex strings (auto `gi`), or `/pattern/flags` if you need custom flags.
   * Matches are masked by keeping the first 6 + last 4 chars (length >= 18), otherwise `***`.
-  * Defaults cover common key assignments, CLI flags, JSON fields, bearer headers, PEM blocks, and popular token prefixes.
+  * Defaults cover common key assignments, CLI flags, JSON fields, bearer headers, PEM blocks, popular token prefixes, and payment credential field names such as card number, CVC/CVV, shared payment token, and payment credential.
 
 Some safety boundaries always redact regardless of `logging.redactSensitive`.
 That includes Control UI tool-call events, `sessions_history` tool output,

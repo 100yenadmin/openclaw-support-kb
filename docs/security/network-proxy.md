@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Network proxy"
 source: "https://docs.openclaw.ai/security/network-proxy"
-source_hash: "a2d7cd0e018d0158f007edd135d9db4d4364f3e9749bca38d5ff5ab7bc80d59c"
+source_hash: "b74c9752930b1d57506993c21a9675910a8485b54299edce15478d3a70298245"
 doc_path: "security/network-proxy.md"
 original_doc_path: "security/network-proxy.md"
 duplicate_index: 1
@@ -143,12 +143,42 @@ If your cloud provider or network platform documents additional metadata hosts o
 Validate the proxy from the same host, container, or service account that runs OpenClaw:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw proxy validate --proxy-url http://127.0.0.1:3128
+```
+
+By default, when no custom destinations are provided, the command checks that `https://example.com/` succeeds and starts a temporary loopback canary that the proxy must not reach. The default denied check passes when the proxy returns a non-2xx denial response or blocks the canary with a transport failure; it fails if a successful response reaches the canary. If no proxy is enabled and configured, validation reports a config problem; use `--proxy-url` for a one-off preflight before changing config. Use `--allowed-url` and `--denied-url` to test deployment-specific expectations. Custom denied destinations are fail-closed: any HTTP response means the destination was reachable through the proxy, and any transport error is reported as inconclusive because OpenClaw cannot prove the proxy blocked a reachable origin. On validation failure, the command exits with code 1.
+
+Use `--json` for automation. The JSON output contains the overall result, the effective proxy config source, any config errors, and each destination check. Proxy URL credentials are redacted in text and JSON output:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  "ok": true,
+  "config": {
+    "enabled": true,
+    "proxyUrl": "http://127.0.0.1:3128/",
+    "source": "override",
+    "errors": []
+  },
+  "checks": [
+    {
+      "kind": "allowed",
+      "url": "https://example.com/",
+      "ok": true,
+      "status": 200
+    }
+  ]
+}
+```
+
+You can also validate manually with `curl`:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 curl -x http://127.0.0.1:3128 https://example.com/
 curl -x http://127.0.0.1:3128 http://127.0.0.1/
 curl -x http://127.0.0.1:3128 http://169.254.169.254/
 ```
 
-The public request should succeed. The loopback and metadata requests should fail at the proxy.
+The public request should succeed. The loopback and metadata requests should be blocked by the proxy. For `openclaw proxy validate`, the built-in loopback canary can distinguish a proxy denial from a reachable origin. Custom `--denied-url` checks do not have that canary, so treat both HTTP responses and ambiguous transport failures as validation failures unless your proxy exposes a deployment-specific denial signal you can verify separately.
 
 Then enable OpenClaw proxy routing:
 

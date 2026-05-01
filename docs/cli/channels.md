@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "3edd857365dadb8c475f7f1582ed353b8a6ae7c8d0bddd27cbcea77bda5634f1"
+source_hash: "c626ab1e3d381264a32ab52b164a022ba576624b4a0984f5f22ea56507deac0d"
 doc_path: "cli/channels.md"
 original_doc_path: "cli/channels.md"
 duplicate_index: 1
@@ -57,6 +57,8 @@ openclaw channels remove --channel telegram --delete
 <Tip>
   `openclaw channels add --help` shows per-channel flags (token, private key, app token, signal-cli paths, etc).
 </Tip>
+
+`channels remove` only operates on installed/configured channel plugins. Use `channels add` first for installable catalog channels.
 
 Common non-interactive add surfaces include:
 
@@ -139,6 +141,7 @@ Notes:
 * Use `--kind user|group|auto` to force the target type.
 * Resolution prefers active matches when multiple entries share the same name.
 * `channels resolve` is read-only. If a selected account is configured via SecretRef but that credential is unavailable in the current command path, the command returns degraded unresolved results with notes instead of aborting the entire run.
+* `channels resolve` does not install channel plugins. Use `channels add --channel <name>` before resolving names for an installable catalog channel.
 
 ## Related
 

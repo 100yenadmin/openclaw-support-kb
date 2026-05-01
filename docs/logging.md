@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "cefcaa449683d6797d0866471f1c51a2fa03fcc0ee5240b4b26af35cc9e9dfe0"
+source_hash: "e8057eeb84a383a099960870cbe0e8fdb85438dbb1d576310277ee2206ec6714"
 doc_path: "logging.md"
 original_doc_path: "logging.md"
 duplicate_index: 1
@@ -225,6 +225,10 @@ File logs and session transcripts stay JSONL, but matching secret values are
 masked before the line or message is written to disk. Redaction is best-effort:
 it applies to text-bearing message content and log strings, not every
 identifier or binary payload field.
+
+The built-in defaults cover common API credentials and payment-credential field
+names such as card number, CVC/CVV, shared payment token, and payment credential
+when they appear as JSON fields, URL parameters, CLI flags, or assignments.
 
 `logging.redactSensitive: "off"` only disables this general log/transcript
 policy. OpenClaw still redacts safety-boundary payloads that can be shown to UI

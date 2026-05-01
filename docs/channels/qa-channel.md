@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "4ab4513a6fac1063b6349b5e346314f95bf8b059f5c293bb77dd92516908d8fe"
+source_hash: "c993377632e71f636f2538a014f1a6c30f8eb84b7b7958503c14dc926d64f214"
 doc_path: "channels/qa-channel.md"
 original_doc_path: "channels/qa-channel.md"
 duplicate_index: 1
@@ -20,7 +20,9 @@ Source: https://docs.openclaw.ai/channels/qa-channel
 * Slack-class target grammar:
   * `dm:<user>`
   * `channel:<room>`
+  * `group:<room>`
   * `thread:<room>/<thread>`
+* Shared `channel:` and `group:` conversations are surfaced to agents as group/channel room turns, so they exercise the same visible-reply and message-tool routing policy used by Discord, Slack, Telegram, and similar transports.
 * HTTP-backed synthetic bus for inbound message injection, outbound transcript capture, thread creation, reactions, edits, deletes, and search/read actions.
 * Host-side self-check runner that writes a Markdown report to `.artifacts/qa-e2e/`.
 

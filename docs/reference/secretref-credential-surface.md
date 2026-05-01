@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "914c42808b19ad41a7be0cd27777273f81b918ced937eafc36a7fc757506ad88"
+source_hash: "024a42ec449ebf7de54671f20cbe79ee32fdc6f6ab8bfb81a5ce480fb04de8e5"
 doc_path: "reference/secretref-credential-surface.md"
 original_doc_path: "reference/secretref-credential-surface.md"
 duplicate_index: 1
@@ -56,6 +56,8 @@ Scope intent:
 * `plugins.entries.firecrawl.config.webSearch.apiKey`
 * `plugins.entries.minimax.config.webSearch.apiKey`
 * `plugins.entries.tavily.config.webSearch.apiKey`
+* `plugins.entries.voice-call.config.realtime.providers.*.apiKey`
+* `plugins.entries.voice-call.config.streaming.providers.*.apiKey`
 * `plugins.entries.voice-call.config.tts.providers.*.apiKey`
 * `plugins.entries.voice-call.config.twilio.authToken`
 * `tools.web.search.apiKey`
