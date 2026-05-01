@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "5850288859b103414c652e187148c97a16bac72d091d6e493242946d1f49187f"
+source_hash: "66c03ce2ac7198006aefb96d61426fd10a3f1db3ae8b0b0161a872a7ae2d5397"
 doc_path: "reference/session-management-compaction.md"
 original_doc_path: "reference/session-management-compaction.md"
 duplicate_index: 1
@@ -85,7 +85,7 @@ Session persistence has automatic maintenance controls (`session.maintenance`) f
 * `maxDiskBytes`: optional sessions-directory budget
 * `highWaterBytes`: optional target after cleanup (default `80%` of `maxDiskBytes`)
 
-Normal Gateway writes batch `maxEntries` cleanup for production-sized caps, so a store may briefly exceed the configured cap before the next high-water cleanup rewrites it back down. `openclaw sessions cleanup --enforce` still applies the configured cap immediately.
+Normal Gateway writes batch `maxEntries` cleanup for production-sized caps, so a store may briefly exceed the configured cap before the next high-water cleanup rewrites it back down. Session store reads do not prune or cap entries during Gateway startup; use writes or `openclaw sessions cleanup --enforce` for cleanup. `openclaw sessions cleanup --enforce` still applies the configured cap immediately.
 
 OpenClaw no longer creates automatic `sessions.json.bak.*` rotation backups during Gateway writes. The legacy `session.maintenance.rotateBytes` key is ignored and `openclaw doctor --fix` removes it from older configs.
 

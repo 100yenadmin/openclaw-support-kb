@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "b5c4d1268b0ea7902d57cad8401a17f82e2582af8de740fb3f3e3bfc435eb64f"
+source_hash: "53f12fbff33e4660ee4d14c1548cf1e1455065ba395ed1de002439b69e969fb9"
 doc_path: "providers/zai.md"
 original_doc_path: "providers/zai.md"
 duplicate_index: 1
@@ -43,9 +43,9 @@ with a Z.AI API key.
         ```
       </Step>
 
-      <Step title="Verify the model is available">
+      <Step title="Verify the model is listed">
         ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-        openclaw models list --provider zai
+        openclaw models list --all --provider zai
         ```
       </Step>
     </Steps>
@@ -80,9 +80,9 @@ with a Z.AI API key.
         ```
       </Step>
 
-      <Step title="Verify the model is available">
+      <Step title="Verify the model is listed">
         ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-        openclaw models list --provider zai
+        openclaw models list --all --provider zai
         ```
       </Step>
     </Steps>
@@ -91,7 +91,14 @@ with a Z.AI API key.
 
 ## Built-in catalog
 
-OpenClaw currently seeds the bundled `zai` provider with:
+OpenClaw ships the bundled `zai` provider catalog in the plugin manifest, so read-only
+listing can show known GLM rows without loading provider runtime:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw models list --all --provider zai
+```
+
+The manifest-backed catalog currently includes:
 
 | Model ref            | Notes         |
 | -------------------- | ------------- |

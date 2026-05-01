@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "60d60d134655e1612627145415dfc8a31960433845cbf358c46e72c83d352c1e"
+source_hash: "dfb73207cba843f42c58089f86a7429eb094bf4f299ae8e9a63b4651d466c654"
 doc_path: "channels/slack.md"
 original_doc_path: "channels/slack.md"
 duplicate_index: 1
@@ -167,6 +167,7 @@ Base manifest (Socket Mode default):
   "features": {
     "bot_user": { "display_name": "OpenClaw", "always_online": true },
     "app_home": {
+      "home_tab_enabled": true,
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
@@ -210,6 +211,7 @@ Base manifest (Socket Mode default):
     "socket_mode_enabled": true,
     "event_subscriptions": {
       "bot_events": [
+        "app_home_opened",
         "app_mention",
         "channel_rename",
         "member_joined_channel",
@@ -261,6 +263,8 @@ For **HTTP Request URLs mode**, replace `settings` with the HTTP variant and add
 ### Additional manifest settings
 
 Surface different features that extend the above defaults.
+
+The default manifest enables the Slack App Home **Home** tab and subscribes to `app_home_opened`. When a workspace member opens the Home tab, OpenClaw publishes a safe default Home view with `views.publish`; no conversation payload or private configuration is included. The **Messages** tab remains enabled for Slack DMs.
 
 <AccordionGroup>
   <Accordion title="Optional native slash commands">

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "0de6a3b2be8bde7b2fbc91bf49e2631341807aeaafd06a4dd554ec61307654b9"
+source_hash: "e60ba225f421d6eab9dfdacd927db99c23452ec71252c13282675682c46ed40a"
 doc_path: "concepts/session.md"
 original_doc_path: "concepts/session.md"
 duplicate_index: 1
@@ -131,7 +131,7 @@ to `"enforce"` for automatic cleanup:
 }
 ```
 
-For production-sized `maxEntries` limits, Gateway runtime writes use a small high-water buffer and clean back down to the configured cap in batches. This avoids running full store cleanup on every isolated cron session. `openclaw sessions cleanup --enforce` applies the cap immediately.
+For production-sized `maxEntries` limits, Gateway runtime writes use a small high-water buffer and clean back down to the configured cap in batches. Session store reads do not prune or cap entries during Gateway startup. This avoids running full store cleanup on every startup or isolated cron session. `openclaw sessions cleanup --enforce` applies the cap immediately.
 
 Preview with `openclaw sessions cleanup --dry-run`.
 

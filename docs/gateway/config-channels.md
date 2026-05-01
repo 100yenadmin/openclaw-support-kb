@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "a763de2e76a0052a83fb31df51c153a7f4e78ed54271c87a9c04b016e3a3dbe2"
+source_hash: "aefff69aa3dd2c40a3711b40f36a0cbab74874f23fc421f07b518b016a58e625"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1
@@ -342,7 +342,7 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
   * `spawnSubagentSessions`: opt-in switch for `sessions_spawn({ thread: true })` auto thread creation/binding
 * Top-level `bindings[]` entries with `type: "acp"` configure persistent ACP bindings for channels and threads (use channel/thread id in `match.peer.id`). Field semantics are shared in [ACP Agents](/tools/acp-agents#channel-specific-settings).
 * `channels.discord.ui.components.accentColor` sets the accent color for Discord components v2 containers.
-* `channels.discord.voice` enables Discord voice channel conversations and optional auto-join + LLM + TTS overrides.
+* `channels.discord.voice` enables Discord voice channel conversations and optional auto-join + LLM + TTS overrides. Text-only Discord configs leave voice off by default; set `channels.discord.voice.enabled=true` to opt in.
 * `channels.discord.voice.model` optionally overrides the LLM model used for Discord voice channel responses.
 * `channels.discord.voice.daveEncryption` and `channels.discord.voice.decryptionFailureTolerance` pass through to `@discordjs/voice` DAVE options (`true` and `24` by default).
 * `channels.discord.voice.connectTimeoutMs` controls the initial `@discordjs/voice` Ready wait for `/vc join` and auto-join attempts (`30000` by default).

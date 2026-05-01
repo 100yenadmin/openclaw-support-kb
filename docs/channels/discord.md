@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "4b45e53ad7f6ca0dc87ac0018b8bec1d84045af3a6aacd179618eef37ed3b1b2"
+source_hash: "8e70194f5c2f15b3c266fccbca42ff98a50bb0906b0cc9d303ed86a602d95221"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -1049,8 +1049,8 @@ Notes:
 * STT uses `tools.media.audio`; `voice.model` does not affect transcription.
 * Per-channel Discord `systemPrompt` overrides apply to voice transcript turns for that voice channel.
 * Voice transcript turns derive owner status from Discord `allowFrom` (or `dm.allowFrom`); non-owner speakers cannot access owner-only tools (for example `gateway` and `cron`).
-* Voice is enabled by default; set `channels.discord.voice.enabled=false` to disable voice runtime and the `GuildVoiceStates` gateway intent.
-* `channels.discord.intents.voiceStates` can explicitly override voice-state intent subscription. Leave it unset for the intent to follow `voice.enabled`.
+* Discord voice is opt-in for text-only configs; set `channels.discord.voice.enabled=true` (or keep an existing `channels.discord.voice` block) to enable `/vc` commands, the voice runtime, and the `GuildVoiceStates` gateway intent.
+* `channels.discord.intents.voiceStates` can explicitly override voice-state intent subscription. Leave it unset for the intent to follow effective voice enablement.
 * `voice.daveEncryption` and `voice.decryptionFailureTolerance` pass through to `@discordjs/voice` join options.
 * `@discordjs/voice` defaults are `daveEncryption=true` and `decryptionFailureTolerance=24` if unset.
 * `voice.connectTimeoutMs` controls the initial `@discordjs/voice` Ready wait for `/vc join` and auto-join attempts. Default: `30000`.

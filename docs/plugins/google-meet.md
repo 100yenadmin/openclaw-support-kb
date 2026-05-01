@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "84c6b810b12c6ba2a6ddcdbc4589373ecc54579971d2e559544ec2fd9a5119e2"
+source_hash: "1ec35d83c691a9b541a03b5ab5cc27548ef5d7fea9f69dddf1b44d601f84347c"
 doc_path: "plugins/google-meet.md"
 original_doc_path: "plugins/google-meet.md"
 duplicate_index: 1
@@ -175,7 +175,12 @@ and will not talk back into the meeting. Chrome joins in this mode also avoid
 OpenClaw's microphone/camera permission grant and avoid the Meet **Use
 microphone** path. If Meet shows an audio-choice interstitial, automation tries
 the no-microphone path and otherwise reports a manual action instead of opening
-the local microphone.
+the local microphone. In transcribe mode, managed Chrome transports also install
+a best-effort Meet caption observer. `googlemeet status --json` and
+`googlemeet doctor` surface `captioning`, `captionsEnabledAttempted`,
+`transcriptLines`, `lastCaptionAt`, `lastCaptionSpeaker`, `lastCaptionText`,
+and a short `recentTranscript` tail so operators can tell whether the browser
+joined the call and whether Meet captions are producing text.
 
 During realtime sessions, `google_meet` status includes browser and audio bridge
 health such as `inCall`, `manualActionRequired`, `providerConnected`,
@@ -1303,9 +1308,15 @@ openclaw googlemeet doctor
 ```
 
 Use `mode: "realtime"` for listen/talk-back. `mode: "transcribe"` intentionally
-does not start the duplex realtime voice bridge. `googlemeet test-speech`
-always checks the realtime path and reports whether bridge output bytes were
-observed for that invocation. If `speechOutputVerified` is false and
+does not start the duplex realtime voice bridge. For observe-only debugging,
+run `openclaw googlemeet status --json <session-id>` after participants speak
+and check `captioning`, `transcriptLines`, and `lastCaptionText`. If `inCall` is
+true but `transcriptLines` stays at `0`, Meet captions may be disabled, no one
+has spoken since the observer was installed, the Meet UI changed, or live
+captions are unavailable for the meeting language/account.
+
+`googlemeet test-speech` always checks the realtime path and reports whether
+bridge output bytes were observed for that invocation. If `speechOutputVerified` is false and
 `speechOutputTimedOut` is true, the realtime provider may have accepted the
 utterance but OpenClaw did not see new output bytes reach the Chrome audio
 bridge.
@@ -1444,6 +1455,8 @@ before entering the PIN.
 If the phone call is created but the Meet roster never shows the dial-in
 participant:
 
+* Run `openclaw googlemeet doctor <session-id>` to confirm the delegated Twilio
+  call ID, whether DTMF was queued, and whether the intro greeting was requested.
 * Run `openclaw voicecall status --call-id <id>` and confirm the call is still
   active.
 * Run `openclaw voicecall tail` and check that Twilio webhooks are arriving at

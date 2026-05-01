@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "a880b1af6011a8ea3484732df7def430d1f5f55e93ba5c3ef4d8c886ec285402"
+source_hash: "b9cfe944c808302492419d271dca64f348c7a6de5ea6d314facb8ceec9998952"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1
@@ -675,6 +675,12 @@ configured `publicUrl` still fails when it points at local or private network
 space, because the carrier cannot call back into those addresses. Do not use
 `localhost`, `127.0.0.1`, `0.0.0.0`, `10.x`, `172.16.x`-`172.31.x`,
 `192.168.x`, `169.254.x`, `fc00::/7`, or `fd00::/8` as `publicUrl`.
+
+Twilio notify-mode outbound calls send their initial `<Say>` TwiML directly in
+the create-call request, so the first spoken message does not depend on Twilio
+fetching webhook TwiML. A public webhook is still required for status callbacks,
+conversation calls, pre-connect DTMF, realtime streams, and post-connect call
+control.
 
 Use one public exposure path:
 

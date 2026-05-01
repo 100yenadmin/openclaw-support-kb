@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "240db4979002bcc8a60ba6b2d5dee1a5cf51d0b3783553de26960fbda818113a"
+source_hash: "cbd973f62854bb31cb3956318fdc81eecb44bf57cf8ff83689456fa70c3263cc"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1
@@ -584,6 +584,19 @@ If a deployment needs additional environment isolation, add those variables to
 ```
 
 `appServer.clearEnv` only affects the spawned Codex app-server child process.
+
+Codex dynamic tools default to the `native-first` profile. In that mode,
+OpenClaw does not expose dynamic tools that duplicate Codex-native workspace
+operations: `read`, `write`, `edit`, `apply_patch`, `exec`, `process`, and
+`update_plan`. OpenClaw integration tools such as messaging, sessions, media,
+cron, browser, nodes, gateway, and `web_search` remain available.
+
+Supported top-level Codex plugin fields:
+
+| Field                      | Default          | Meaning                                                                                   |
+| -------------------------- | ---------------- | ----------------------------------------------------------------------------------------- |
+| `codexDynamicToolsProfile` | `"native-first"` | Use `"openclaw-compat"` to expose the full OpenClaw dynamic tool set to Codex app-server. |
+| `codexDynamicToolsExclude` | `[]`             | Additional OpenClaw dynamic tool names to omit from Codex app-server turns.               |
 
 Supported `appServer` fields:
 
