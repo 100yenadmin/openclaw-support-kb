@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "aefff69aa3dd2c40a3711b40f36a0cbab74874f23fc421f07b518b016a58e625"
+source_hash: "2c805e8811cf436482e61932878bd00e46e29a8d5a01d2bde5b9b4f36d64c7e9"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1
@@ -782,7 +782,7 @@ See the full channel index: [Channels](/channels).
 
 Group messages default to **require mention** (metadata mention or safe regex patterns). Applies to WhatsApp, Telegram, Discord, Google Chat, and iMessage group chats.
 
-Visible replies are controlled separately. Group/channel rooms default to `messages.groupChat.visibleReplies: "message_tool"`: OpenClaw still processes the turn, but normal final replies stay private and visible room output requires `message(action=send)`. Set `"automatic"` only when you want the legacy behavior where normal replies are posted back to the room. To apply the same tool-only visible-reply behavior to direct chats too, set `messages.visibleReplies: "message_tool"`.
+Visible replies are controlled separately. Group/channel rooms default to `messages.groupChat.visibleReplies: "message_tool"`: OpenClaw still processes the turn, but normal final replies stay private and visible room output requires `message(action=send)`. Set `"automatic"` only when you want the legacy behavior where normal replies are posted back to the room. To apply the same tool-only visible-reply behavior to direct chats too, set `messages.visibleReplies: "message_tool"`; the Codex harness also uses that tool-only behavior as its unset direct-chat default.
 
 If the message tool is unavailable under the active tool policy, OpenClaw falls back to automatic visible replies instead of silently suppressing the response. `openclaw doctor` warns about this mismatch.
 
@@ -797,7 +797,7 @@ The gateway hot-reloads `messages` config after the file is saved. Restart only 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   messages: {
-    visibleReplies: "automatic", // global default for direct/source chats
+    visibleReplies: "automatic", // global default for direct/source chats; Codex harness defaults unset direct chats to message_tool
     groupChat: {
       historyLimit: 50,
       visibleReplies: "message_tool", // default; use "automatic" for legacy final replies
@@ -811,7 +811,7 @@ The gateway hot-reloads `messages` config after the file is saved. Restart only 
 
 `messages.groupChat.historyLimit` sets the global default. Channels can override with `channels.<channel>.historyLimit` (or per-account). Set `0` to disable.
 
-`messages.visibleReplies` is the global source-turn default; `messages.groupChat.visibleReplies` overrides it for group/channel source turns. Channel allowlists and mention gating still decide whether a turn is processed.
+`messages.visibleReplies` is the global source-turn default; `messages.groupChat.visibleReplies` overrides it for group/channel source turns. When `messages.visibleReplies` is unset, a harness can provide its own direct/source default; the Codex harness defaults to `message_tool`. Channel allowlists and mention gating still decide whether a turn is processed.
 
 #### DM history limits
 

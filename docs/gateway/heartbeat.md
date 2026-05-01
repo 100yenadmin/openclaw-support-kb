@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Heartbeat"
 source: "https://docs.openclaw.ai/gateway/heartbeat"
-source_hash: "afb946e892bf0e858749e0932436ab38323d63683aa072f9c60c840e92a3b19d"
+source_hash: "57602568d3d418e8d6e648504da1bd1f80b8ce6e28a74ce09e744b9d4daf4b96"
 doc_path: "gateway/heartbeat.md"
 original_doc_path: "gateway/heartbeat.md"
 duplicate_index: 1
@@ -90,6 +90,7 @@ If you want a heartbeat to do something very specific (e.g. "check Gmail PubSub 
 ## Response contract
 
 * If nothing needs attention, reply with **`HEARTBEAT_OK`**.
+* Tool-capable heartbeat runs may instead call `heartbeat_respond` with `notify: false` for no visible update, or `notify: true` plus `notificationText` for an alert. When present, the structured tool response takes precedence over the text fallback.
 * During heartbeat runs, OpenClaw treats `HEARTBEAT_OK` as an ack when it appears at the **start or end** of the reply. The token is stripped and the reply is dropped if the remaining content is **≤ `ackMaxChars`** (default: 300).
 * If `HEARTBEAT_OK` appears in the **middle** of a reply, it is not treated specially.
 * For alerts, **do not** include `HEARTBEAT_OK`; return only the alert text.

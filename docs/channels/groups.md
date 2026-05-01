@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "a94d44e86cd77a65173a7e083bd97b74a815e30dfdec6d265ac7385807c08cc7"
+source_hash: "cf0a3c4d83af3ca7318429b8eb3d5e73207c96d90689fd888bed8f0cd4ebc020"
 doc_path: "channels/groups.md"
 original_doc_path: "channels/groups.md"
 duplicate_index: 1
@@ -53,7 +53,7 @@ If the message tool is unavailable under the active tool policy, OpenClaw falls
 back to automatic visible replies instead of silently suppressing the response.
 `openclaw doctor` warns about this mismatch.
 
-For direct chats and any other source turn, use `messages.visibleReplies: "message_tool"` to apply the same tool-only visible-reply behavior globally. `messages.groupChat.visibleReplies` remains the more specific override for group/channel rooms.
+For direct chats and any other source turn, use `messages.visibleReplies: "message_tool"` to apply the same tool-only visible-reply behavior globally. Harnesses can also choose this as their unset default; the Codex harness does this for Codex-mode direct chats. `messages.groupChat.visibleReplies` remains the more specific override for group/channel rooms.
 
 This replaces the old pattern of forcing the model to answer `NO_REPLY` for most lurk-mode turns. In tool-only mode, doing nothing visible simply means not calling the message tool.
 

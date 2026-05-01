@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-05-01T15:18:29.076Z",
+  "generatedAt": "2026-05-01T19:42:58.038Z",
   "openclawReleaseTag": "v2026.4.29",
-  "docsSha256": "e2ba66da6d92f83c4f550d3be3e7f4fc7ab25b169a2ab6ad7b785d8d337a9368",
+  "docsSha256": "3324d7e100cd3dd2c3e3c0754a8d6554e0b04e64e11b69a4f542b859821ae61f",
   "composioDocsSha256": "fb52a1e589c4af8c8de34cb3ee4ec0ae1b358d0e9b6ffa5a2a54ebc086deb4f5",
   "composioDocsIndexSha256": "ab07415d4dea480cf456c7b25374f8b61d53781c84d0e3d56b83f607f5cc1f09",
   "composioToolkitsSha256": "8cd3515d4da44e0d7a0866d7d0183232fd6657dd9cbc77fd648181b2079a8b65",
-  "artifactSha256": "8c0e589d24bf3418c3cdb437b54014868e8cbdec40422c34d7ad51b714e1dbb2",
+  "artifactSha256": "d5f7f040eeeef2b9cdecd9034cf1a74259c4c58f79b9bacb57a339c37ebdd990",
   "sourceCount": 618,
   "minGbrainVersion": "0.19.0",
   "notes": "Local-first OpenClaw support KB for GBrain. Includes OpenClaw docs plus Composio docs/toolkit catalog for approved app integrations."

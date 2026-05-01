@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "6899405e08af481120cdb90bce37686b0f5615967c50891882ca7c39327e8936"
+source_hash: "a345582667726b2136bc99b2cbe77de803caf44d7d687c5399eb6d0468e577e8"
 doc_path: "channels/mattermost.md"
 original_doc_path: "channels/mattermost.md"
 duplicate_index: 1
@@ -102,7 +102,9 @@ Native slash commands are opt-in. When enabled, OpenClaw registers `oc_*` slash 
     * If `callbackUrl` is omitted, OpenClaw derives one from gateway host/port + `callbackPath`.
     * For multi-account setups, `commands` can be set at the top level or under `channels.mattermost.accounts.<id>.commands` (account values override top-level fields).
     * Command callbacks are validated with the per-command tokens returned by Mattermost when OpenClaw registers `oc_*` commands.
-    * Slash callbacks fail closed when registration failed, startup was partial, or the callback token does not match one of the registered commands.
+    * OpenClaw refreshes current Mattermost command registration before accepting each callback so stale tokens from deleted or regenerated slash commands stop being accepted without a gateway restart.
+    * Callback validation fails closed if the Mattermost API cannot confirm the command is still current; failed validations are cached briefly, concurrent lookups are coalesced, and fresh lookup starts are rate-limited per command to bound replay pressure.
+    * Slash callbacks fail closed when registration failed, startup was partial, or the callback token does not match the resolved command's registered token (a token valid for one command cannot reach upstream validation for a different command).
   </Accordion>
 
   <Accordion title="Reachability requirement">

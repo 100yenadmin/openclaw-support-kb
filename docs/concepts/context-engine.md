@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "c889cfe62dabdbf35347437ed2c5cdad6a5f0764686cbdf67bf66a70a20a2099"
+source_hash: "6ec162e22ce0553e437796d05f1d82c95db4f4a90d2f21c12a1fc0febcadaa86"
 doc_path: "concepts/context-engine.md"
 original_doc_path: "concepts/context-engine.md"
 duplicate_index: 1
@@ -209,6 +209,18 @@ Required members:
 
 <ParamField type="string">
   Prepended to the system prompt.
+</ParamField>
+
+<ParamField type="&#x22;assembled&#x22; | &#x22;preassembly_may_overflow&#x22;">
+  Controls which token estimate the runner uses for preemptive overflow
+  prechecks. Defaults to `"assembled"`, which means only the assembled
+  prompt's estimate is checked — appropriate for engines that return a
+  windowed, self-contained context. Set to `"preassembly_may_overflow"` only
+  when your assembled view can hide overflow risk in the underlying
+  transcript; the runner then takes the maximum of the assembled estimate
+  and the pre-assembly (unwindowed) session-history estimate when deciding
+  whether to preemptively compact. Either way, the messages you return are
+  still what the model sees — `promptAuthority` only affects the precheck.
 </ParamField>
 
 `compact` returns a `CompactResult`. When compaction rotates the active
