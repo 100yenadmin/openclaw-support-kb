@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CI pipeline"
 source: "https://docs.openclaw.ai/ci"
-source_hash: "80d561c75b2b173646b9e32bf71d631fb2fa74cfe8dc5d6ceb7e525dd20e6f32"
+source_hash: "d61e05add8dd1f9af3ea1e6cf6bab5b9a8f91fbfb7568781bd27556ef53aec75"
 doc_path: "ci.md"
 original_doc_path: "ci.md"
 duplicate_index: 1
@@ -175,7 +175,7 @@ Keep `workflow_ref` and `package_ref` separate. `workflow_ref` is the trusted wo
 ### Suite profiles
 
 * `smoke` — `npm-onboard-channel-agent`, `gateway-network`, `config-reload`
-* `package` — `npm-onboard-channel-agent`, `doctor-switch`, `update-channel-switch`, `upgrade-survivor`, `bundled-channel-deps-compat`, `plugins-offline`, `plugin-update`
+* `package` — `npm-onboard-channel-agent`, `doctor-switch`, `update-channel-switch`, `upgrade-survivor`, `published-upgrade-survivor`, `bundled-channel-deps-compat`, `plugins-offline`, `plugin-update`
 * `product` — `package` plus `mcp-channels`, `cron-mcp-cleanup`, `openai-web-search-minimal`, `openwebui`
 * `full` — full Docker release-path chunks with OpenWebUI
 * `custom` — exact `docker_lanes`; required when `suite_profile=custom`

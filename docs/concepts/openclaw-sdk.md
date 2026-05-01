@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK"
 source: "https://docs.openclaw.ai/concepts/openclaw-sdk"
-source_hash: "6035834bba89f8e18fd3a95a9ebe5e8f0df378c9614dd50fbada75aff2cd8dec"
+source_hash: "e08c80281ab7341e76d2a95619e8e2359e4f14866264f5ce75c5be1f4124430f"
 doc_path: "concepts/openclaw-sdk.md"
 original_doc_path: "concepts/openclaw-sdk.md"
 duplicate_index: 1
@@ -44,6 +44,7 @@ resources.
 | `Session.send()`          | Ready   | Calls `sessions.send` and returns a `Run`.                                   |
 | `oc.models`               | Ready   | Calls `models.list` and the current `models.authStatus` status RPC.          |
 | `oc.tools`                | Partial | Lists tool catalog and effective tools; direct tool invocation is not wired. |
+| `oc.artifacts`            | Ready   | Lists, gets, and downloads Gateway transcript artifacts.                     |
 | `oc.approvals`            | Ready   | Lists and resolves exec approvals through Gateway approval RPCs.             |
 | `oc.rawEvents()`          | Ready   | Exposes raw Gateway events for advanced consumers.                           |
 | `normalizeGatewayEvent()` | Ready   | Converts raw Gateway events into the stable SDK event shape.                 |
@@ -52,8 +53,10 @@ The SDK also exports the core types used by those surfaces:
 `AgentRunParams`, `RunResult`, `RunStatus`, `OpenClawEvent`,
 `OpenClawEventType`, `GatewayEvent`, `OpenClawTransport`,
 `GatewayRequestOptions`, `SessionCreateParams`, `SessionSendParams`,
-`RuntimeSelection`, `EnvironmentSelection`, `WorkspaceSelection`,
-`ApprovalMode`, and related result types.
+`ArtifactSummary`, `ArtifactQuery`, `ArtifactsListResult`,
+`ArtifactsGetResult`, `ArtifactsDownloadResult`, `RuntimeSelection`,
+`EnvironmentSelection`, `WorkspaceSelection`, `ApprovalMode`, and related
+result types.
 
 ## Connect To A Gateway
 
@@ -209,7 +212,7 @@ for await (const event of run.events()) {
 For app-wide streams, use `oc.events()`. For raw Gateway frames, use
 `oc.rawEvents()`.
 
-## Models, Tools, And Approvals
+## Models, Tools, Artifacts, And Approvals
 
 Model helpers map to current Gateway methods:
 
@@ -223,6 +226,21 @@ Tool helpers expose the Gateway catalog and effective tool view:
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 await oc.tools.list();
 await oc.tools.effective({ sessionKey: "main" });
+```
+
+Artifact helpers expose the Gateway artifact projection for session, run, or
+task context. Each call requires one explicit `sessionKey`, `runId`, or
+`taskId` scope:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+const { artifacts } = await oc.artifacts.list({ sessionKey: "main" });
+const first = artifacts[0];
+
+if (first) {
+  const { artifact } = await oc.artifacts.get(first.id, { sessionKey: "main" });
+  const download = await oc.artifacts.download(artifact.id, { sessionKey: "main" });
+  console.log(download.encoding, download.url);
+}
 ```
 
 Approval helpers use the exec approval RPCs:
@@ -244,10 +262,6 @@ await oc.tasks.get("task-id");
 await oc.tasks.cancel("task-id");
 
 await oc.tools.invoke("tool-name", {});
-
-await oc.artifacts.list();
-await oc.artifacts.get("artifact-id");
-await oc.artifacts.download("artifact-id");
 
 await oc.environments.list();
 await oc.environments.create({});
