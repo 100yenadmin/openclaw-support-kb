@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "dd4d0fffea86603859332c63e60fbb63612fd67ba765b9719eda46957204b480"
+source_hash: "33118183c837debcba6b8520c155aac64fb7096e05673a2c4d4d9e5c90684065"
 doc_path: "channels/whatsapp.md"
 original_doc_path: "channels/whatsapp.md"
 duplicate_index: 1
@@ -479,6 +479,8 @@ Behavior notes:
   <Accordion title="Logout behavior">
     `openclaw channels logout --channel whatsapp [--account <id>]` clears WhatsApp auth state for that account.
 
+    When a Gateway is reachable, logout first stops the live WhatsApp listener for the selected account so the linked session does not keep receiving messages until the next restart. `openclaw channels remove --channel whatsapp` also stops the live listener before disabling or deleting account config.
+
     In legacy auth directories, `oauth.json` is preserved while Baileys auth files are removed.
   </Accordion>
 </AccordionGroup>
@@ -535,6 +537,14 @@ Behavior notes:
     openclaw doctor
     openclaw logs --follow
     ```
+
+    If `~/.openclaw/logs/whatsapp-health.log` says `Gateway inactive` but
+    `openclaw gateway status` and `openclaw channels status --probe` show the
+    gateway and WhatsApp are healthy, run `openclaw doctor`. On Linux, doctor
+    warns about legacy crontab entries that still invoke
+    `~/.openclaw/bin/ensure-whatsapp.sh`; remove those stale entries with
+    `crontab -e` because cron can lack the systemd user-bus environment and
+    make that old script misreport gateway health.
 
     If needed, re-link with `channels login`.
   </Accordion>

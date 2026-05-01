@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "cff5e9a6133c2d73f5de8a6ac648d1c17853e6fc6ad7ed1404f32de0a6ce1113"
+source_hash: "8359b1f9726c738d757d4167994ba1388d7fe43733c563d798c4e7eff21cb003"
 doc_path: "cli/onboard.md"
 original_doc_path: "cli/onboard.md"
 duplicate_index: 1
@@ -131,8 +131,8 @@ Gateway token options in non-interactive mode:
 * With `--install-daemon`, if token mode requires a token and the configured token SecretRef is unresolved, onboarding fails closed with remediation guidance.
 * With `--install-daemon`, if both `gateway.auth.token` and `gateway.auth.password` are configured and `gateway.auth.mode` is unset, onboarding blocks install until mode is set explicitly.
 * Local onboarding writes `gateway.mode="local"` into the config. If a later config file is missing `gateway.mode`, treat that as config damage or an incomplete manual edit, not as a valid local-mode shortcut.
-* Local onboarding materializes newly required bundled plugin runtime dependencies after writing config, before workspace/bootstrap, daemon install, or health checks continue. This is a narrow package-manager repair step, not a full `openclaw doctor` run.
-* Remote onboarding only writes connection info for the remote Gateway and does not install local bundled plugin dependencies.
+* Local onboarding installs selected downloadable plugins when the chosen setup path requires them.
+* Remote onboarding only writes connection info for the remote Gateway and does not install local plugin packages.
 * `--allow-unconfigured` is a separate gateway runtime escape hatch. It does not mean onboarding may omit `gateway.mode`.
 
 Example:

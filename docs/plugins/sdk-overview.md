@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "67769bf374a5f9990c497ffc22656d44e3a331bfc76875232c984096aa8a94ac"
+source_hash: "0379996638fc02114556479a360689f93bc8666d78b9db95ccb180760e4b96d0"
 doc_path: "plugins/sdk-overview.md"
 original_doc_path: "plugins/sdk-overview.md"
 duplicate_index: 1
@@ -360,8 +360,8 @@ Facade-loaded bundled plugin public surfaces (`api.ts`, `runtime-api.ts`,
 active runtime config snapshot when OpenClaw is already running. If no runtime
 snapshot exists yet, they fall back to the resolved config file on disk.
 Packaged bundled plugin facades should be loaded through OpenClaw's plugin
-facade loaders; direct imports from `dist/extensions/...` bypass staged runtime
-dependency mirrors that packaged installs use for plugin-owned dependencies.
+facade loaders; direct imports from `dist/extensions/...` bypass the manifest
+and runtime sidecar checks that packaged installs use for plugin-owned code.
 
 Provider plugins can expose a narrow plugin-local contract barrel when a
 helper is intentionally provider-specific and does not belong in a generic SDK

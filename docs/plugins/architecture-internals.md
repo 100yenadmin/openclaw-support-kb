@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "ba1fb5ebf1f51a024a042067a3a162f05d9acec806fe886592d32d7a7e63282b"
+source_hash: "9c90eea7c5f762763d61c7e607d27bdf740c58701f3f16cc8757f4de0b0139a2"
 doc_path: "plugins/architecture-internals.md"
 original_doc_path: "plugins/architecture-internals.md"
 duplicate_index: 1
@@ -124,8 +124,7 @@ loader state when code or installed artifacts are actually loaded, such as:
 * `PluginLoaderCacheState` and compatible active runtime registries
 * jiti/module caches and public-surface loader caches used to avoid importing
   the same runtime surface repeatedly
-* runtime dependency mirrors and filesystem caches for installed plugin
-  artifacts
+* filesystem caches for installed plugin artifacts
 * short-lived per-call maps for path normalization or duplicate resolution
 
 Those caches are data-plane implementation details. They must not answer

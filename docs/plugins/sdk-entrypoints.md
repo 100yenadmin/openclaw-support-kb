@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "a340de3caa0e9c11bd9749e172eb2944bcba866f1a33df992681ef4f06a5f0e3"
+source_hash: "d294ba4ff9a045e627b9fc240fb33b828e75582a899e33c831e463c4eb069692"
 doc_path: "plugins/sdk-entrypoints.md"
 original_doc_path: "plugins/sdk-entrypoints.md"
 duplicate_index: 1
@@ -33,9 +33,12 @@ JavaScript when available:
 `extensions` and `setupEntry` remain valid source entries for workspace and git
 checkout development. `runtimeExtensions` and `runtimeSetupEntry` are preferred
 when OpenClaw loads an installed package and let npm packages avoid runtime
-TypeScript compilation. If an installed package only declares a TypeScript
-source entry, OpenClaw will use a matching built `dist/*.js` peer when one
-exists, then fall back to the TypeScript source.
+TypeScript compilation. Explicit runtime entries are required: `runtimeSetupEntry`
+requires `setupEntry`, and missing `runtimeExtensions` or `runtimeSetupEntry`
+artifacts fail install/discovery instead of silently falling back to source. If
+an installed package only declares a TypeScript source entry, OpenClaw will use a
+matching built `dist/*.js` peer when one exists, then fall back to the TypeScript
+source.
 
 All entry paths must stay inside the plugin package directory. Runtime entries
 and inferred built JavaScript peers do not make an escaping `extensions` or

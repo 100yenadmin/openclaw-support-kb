@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "276bdcfa7aa5e4dc7ad92d60d694b116004017dc2bb4be7f5b7a14fe78ee22f2"
+source_hash: "280a98f0161846326afdda6c8a3e3fee30f9eb1fde5bb1cacc31ea86fcb64c7c"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -98,22 +98,15 @@ Gateway startup skips plugin discovery/load work and `openclaw doctor` preserves
 the disabled plugin config instead of auto-removing it. Re-enable plugins before
 running doctor cleanup if you want stale plugin ids removed.
 
-Packaged OpenClaw installs do not eagerly install every bundled plugin's
-runtime dependency tree. When a bundled OpenClaw-owned plugin is active from
-plugin config, legacy channel config, or a default-enabled manifest, startup
-repairs only that plugin's declared runtime dependencies before importing it.
-Persisted channel auth state alone does not activate a bundled channel for
-Gateway startup runtime-dependency repair.
-Explicit disablement still wins: `plugins.entries.<id>.enabled: false`,
-`plugins.deny`, `plugins.enabled: false`, and `channels.<id>.enabled: false`
-prevent automatic bundled runtime-dependency repair for that plugin/channel.
-A non-empty `plugins.allow` also bounds default-enabled bundled runtime-dependency
-repair; explicit bundled channel enablement (`channels.<id>.enabled: true`) can
-still repair that channel's plugin dependencies.
-External plugins and custom load paths must still be installed through
-`openclaw plugins install`.
-See [Plugin dependency resolution](/plugins/dependency-resolution) for the full
-planning and staging lifecycle.
+Plugin dependency installation happens only during explicit install/update or
+doctor repair flows. Gateway startup, config reload, and runtime inspection do
+not run package managers or repair dependency trees. Local plugins must already
+have their dependencies installed, while npm, git, and ClawHub plugins are
+installed under OpenClaw's managed plugin roots with package-local
+dependencies. External plugins and custom load paths must still be installed
+through `openclaw plugins install`.
+See [Plugin dependency resolution](/plugins/dependency-resolution) for the
+install-time lifecycle.
 
 ## Plugin types
 
@@ -139,7 +132,9 @@ peer such as `src/index.ts` to `dist/index.js`.
 Use `openclaw.runtimeExtensions` when published runtime files do not live at the
 same paths as the source entries. When present, `runtimeExtensions` must contain
 exactly one entry for every `extensions` entry. Mismatched lists fail install and
-plugin discovery rather than silently falling back to source paths.
+plugin discovery rather than silently falling back to source paths. If you also
+publish `openclaw.setupEntry`, use `openclaw.runtimeSetupEntry` for its built
+JavaScript peer; that file is required when declared.
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -194,7 +189,7 @@ current OpenClaw or a local checkout until a newer npm package is published.
 
   <Accordion title="Memory plugins">
     * `memory-core` — bundled memory search (default via `plugins.slots.memory`)
-    * `memory-lancedb` — install-on-demand long-term memory with auto-recall/capture (set `plugins.slots.memory = "memory-lancedb"`)
+    * `memory-lancedb` — LanceDB-backed long-term memory with auto-recall/capture (set `plugins.slots.memory = "memory-lancedb"`)
 
     See [Memory LanceDB](/plugins/memory-lancedb) for OpenAI-compatible
     embedding setup, Ollama examples, recall limits, and troubleshooting.

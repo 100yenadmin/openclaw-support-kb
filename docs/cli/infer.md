@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inference CLI"
 source: "https://docs.openclaw.ai/cli/infer"
-source_hash: "225301cb7df545ad7af774d7e08a6ba8a75c67f0912036a3ae97e948c047fd27"
+source_hash: "b6165359028aa4902b75a8e86d4d4d7edbf5dee6356ad20c81d7806185bb63c8"
 doc_path: "cli/infer.md"
 original_doc_path: "cli/infer.md"
 duplicate_index: 1
@@ -56,8 +56,8 @@ Benefits:
 
 For end-to-end provider checks, prefer `openclaw infer ...` once lower-level
 provider tests are green. It exercises the shipped CLI, config loading,
-default-agent resolution, bundled plugin activation, runtime-dependency repair,
-and the shared capability runtime before the provider request is made.
+default-agent resolution, bundled plugin activation, and the shared capability
+runtime before the provider request is made.
 
 ## Command tree
 

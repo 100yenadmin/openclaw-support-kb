@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
-source_hash: "2646628158adee9fcbe1a1aa02a0b45fcf63826666e46bcd9dd77a427d2d9039"
+source_hash: "bc54f99a050ff7aebf06faff63944db7b2fea205a6bfa1267fa192c16fe38c2a"
 doc_path: "plugins/architecture.md"
 original_doc_path: "plugins/architecture.md"
 duplicate_index: 1
@@ -136,7 +136,7 @@ OpenClaw's plugin system has four layers:
   </Step>
 
   <Step title="Runtime loading">
-    Native OpenClaw plugins are loaded in-process via jiti and register capabilities into a central registry. Compatible bundles are normalized into registry records without importing runtime code.
+    Native OpenClaw plugins are loaded in-process and register capabilities into a central registry. Packaged JavaScript loads through native `require`; source TypeScript falls back to Jiti. Compatible bundles are normalized into registry records without importing runtime code.
   </Step>
 
   <Step title="Surface consumption">

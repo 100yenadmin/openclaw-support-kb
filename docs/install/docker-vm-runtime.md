@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
-source_hash: "5eda1601cec85cc6a9ca76719f07634a0eb36b1dbafc0f673988f02ba1fe1202"
+source_hash: "a08de4cb1a1735f788ea129a9d7cec1cf8f80222bf82404d871bd740224d31df"
 doc_path: "install/docker-vm-runtime.md"
 original_doc_path: "install/docker-vm-runtime.md"
 duplicate_index: 1
@@ -129,19 +129,19 @@ Expected output:
 OpenClaw runs in Docker, but Docker is not the source of truth.
 All long-lived state must survive restarts, rebuilds, and reboots.
 
-| Component           | Location                                 | Persistence mechanism  | Notes                                                         |
-| ------------------- | ---------------------------------------- | ---------------------- | ------------------------------------------------------------- |
-| Gateway config      | `/home/node/.openclaw/`                  | Host volume mount      | Includes `openclaw.json`, `.env`                              |
-| Model auth profiles | `/home/node/.openclaw/agents/`           | Host volume mount      | `agents/<agentId>/agent/auth-profiles.json` (OAuth, API keys) |
-| Skill configs       | `/home/node/.openclaw/skills/`           | Host volume mount      | Skill-level state                                             |
-| Agent workspace     | `/home/node/.openclaw/workspace/`        | Host volume mount      | Code and agent artifacts                                      |
-| WhatsApp session    | `/home/node/.openclaw/`                  | Host volume mount      | Preserves QR login                                            |
-| Gmail keyring       | `/home/node/.openclaw/`                  | Host volume + password | Requires `GOG_KEYRING_PASSWORD`                               |
-| Plugin runtime deps | `/var/lib/openclaw/plugin-runtime-deps/` | Docker named volume    | Generated bundled plugin deps and runtime mirrors             |
-| External binaries   | `/usr/local/bin/`                        | Docker image           | Must be baked at build time                                   |
-| Node runtime        | Container filesystem                     | Docker image           | Rebuilt every image build                                     |
-| OS packages         | Container filesystem                     | Docker image           | Do not install at runtime                                     |
-| Docker container    | Ephemeral                                | Restartable            | Safe to destroy                                               |
+| Component           | Location                                               | Persistence mechanism  | Notes                                                         |
+| ------------------- | ------------------------------------------------------ | ---------------------- | ------------------------------------------------------------- |
+| Gateway config      | `/home/node/.openclaw/`                                | Host volume mount      | Includes `openclaw.json`, `.env`                              |
+| Model auth profiles | `/home/node/.openclaw/agents/`                         | Host volume mount      | `agents/<agentId>/agent/auth-profiles.json` (OAuth, API keys) |
+| Skill configs       | `/home/node/.openclaw/skills/`                         | Host volume mount      | Skill-level state                                             |
+| Agent workspace     | `/home/node/.openclaw/workspace/`                      | Host volume mount      | Code and agent artifacts                                      |
+| WhatsApp session    | `/home/node/.openclaw/`                                | Host volume mount      | Preserves QR login                                            |
+| Gmail keyring       | `/home/node/.openclaw/`                                | Host volume + password | Requires `GOG_KEYRING_PASSWORD`                               |
+| Plugin packages     | `/home/node/.openclaw/npm`, `/home/node/.openclaw/git` | Host volume mount      | Downloadable plugin package roots                             |
+| External binaries   | `/usr/local/bin/`                                      | Docker image           | Must be baked at build time                                   |
+| Node runtime        | Container filesystem                                   | Docker image           | Rebuilt every image build                                     |
+| OS packages         | Container filesystem                                   | Docker image           | Do not install at runtime                                     |
+| Docker container    | Ephemeral                                              | Restartable            | Safe to destroy                                               |
 
 ## Updates
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "86059683f882a3bb2be8eab98be10bd6c737b6c911b727cf7542359fe63a5855"
+source_hash: "e9df310b4e058d94d093f64be8715e4cc18e3b3f2152052aba5c98f90c10b56e"
 doc_path: "tools/diffs.md"
 original_doc_path: "tools/diffs.md"
 duplicate_index: 1
@@ -31,6 +31,12 @@ When enabled, the plugin prepends concise usage guidance into system-prompt spac
 ## Quick start
 
 <Steps>
+  <Step title="Install the plugin">
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw plugins install diffs
+    ```
+  </Step>
+
   <Step title="Enable the plugin">
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {

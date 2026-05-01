@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Compaction"
 source: "https://docs.openclaw.ai/concepts/compaction"
-source_hash: "37650bbe4ac4f9afcb770028fac0bb972f773787b437df52d6e89391907f5e69"
+source_hash: "44874f9a3e385e7f9a43ff7f95320ad14f0c9957ab246761bdb6ba15d6a80cb4"
 doc_path: "concepts/compaction.md"
 original_doc_path: "concepts/compaction.md"
 duplicate_index: 1
@@ -95,7 +95,7 @@ This works with local models too, for example a second Ollama model dedicated to
 }
 ```
 
-When unset, compaction uses the agent's primary model.
+When unset, compaction starts with the active session model. If summarization fails with a model-fallback-eligible provider error, OpenClaw retries that compaction attempt through the session's existing model fallback chain. The fallback choice is temporary and is not written back to session state. An explicit `agents.defaults.compaction.model` override remains exact and does not inherit the session fallback chain.
 
 ### Identifier preservation
 

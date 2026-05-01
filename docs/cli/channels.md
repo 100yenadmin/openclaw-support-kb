@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "c626ab1e3d381264a32ab52b164a022ba576624b4a0984f5f22ea56507deac0d"
+source_hash: "ecff84fe52252898a47ea246966b361821f5962be81e4f122664568be62d422b"
 doc_path: "cli/channels.md"
 original_doc_path: "cli/channels.md"
 duplicate_index: 1
@@ -59,6 +59,7 @@ openclaw channels remove --channel telegram --delete
 </Tip>
 
 `channels remove` only operates on installed/configured channel plugins. Use `channels add` first for installable catalog channels.
+For runtime-backed channel plugins, `channels remove` also asks the running Gateway to stop the selected account before it updates config, so disabling or deleting an account does not leave the old listener active until restart.
 
 Common non-interactive add surfaces include:
 
@@ -101,6 +102,7 @@ openclaw channels logout --channel whatsapp
 
 * `channels login` supports `--verbose`.
 * `channels login` and `logout` can infer the channel when only one supported login target is configured.
+* `channels logout` prefers the live Gateway path when reachable, so logout stops any active listener before clearing channel auth state. If a local Gateway is not reachable, it falls back to local auth cleanup.
 * Run `channels login` from a terminal on the gateway host. Agent `exec` blocks this interactive login flow; channel-native agent login tools, such as `whatsapp_login`, should be used from chat when available.
 
 ## Troubleshooting

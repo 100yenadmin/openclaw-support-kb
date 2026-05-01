@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
-source_hash: "4f75746bbb8b3ba03b2da99573c3a775b15f2fbb5c1f3e488fae342c364ada1a"
+source_hash: "57fb1346a0cf05513c5e273e971181ed0359e053cfd17e71436c160a7cf40831"
 doc_path: "plugins/memory-lancedb.md"
 original_doc_path: "plugins/memory-lancedb.md"
 duplicate_index: 1
@@ -299,9 +299,9 @@ supports `${ENV_VAR}` expansion:
 ## Runtime dependencies
 
 `memory-lancedb` depends on the native `@lancedb/lancedb` package. Packaged
-OpenClaw installs first try the bundled runtime dependency and can repair the
-plugin runtime dependency under OpenClaw state when the bundled import is not
-available.
+OpenClaw treats that package as part of the plugin package. Gateway startup
+does not repair plugin dependencies; if the dependency is missing, reinstall or
+update the plugin package and restart the Gateway.
 
 If an older install logs a missing `dist/package.json` or missing
 `@lancedb/lancedb` error during plugin load, upgrade OpenClaw and restart the

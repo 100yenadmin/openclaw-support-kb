@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "253fc2b78f01a2c3f3aa384698bfef008b923ba5cdd4de08f0166933482356a3"
+source_hash: "0e4d6536edc65fee2a310c89fe09aee092e4b07eeac0345c28e69b36674103fb"
 doc_path: "gateway/configuration.md"
 original_doc_path: "gateway/configuration.md"
 duplicate_index: 1
@@ -518,6 +518,12 @@ cannot roll back unrelated user settings.
     * **Unsupported write-through**: root includes, include arrays, and includes
       with sibling overrides fail closed for OpenClaw-owned writes instead of
       flattening the config
+    * **Confinement**: `$include` paths must resolve under the directory holding
+      `openclaw.json`. To share a tree across machines or users, set
+      `OPENCLAW_INCLUDE_ROOTS` to a path-list (`:` on POSIX, `;` on Windows) of
+      additional directories that includes may reference. Symlinks are resolved
+      and re-checked, so a path that lexically lives in a config dir but whose
+      real target escapes every allowed root is still rejected.
     * **Error handling**: clear errors for missing files, parse errors, and circular includes
   </Accordion>
 </AccordionGroup>

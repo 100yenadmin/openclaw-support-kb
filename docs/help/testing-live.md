@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "7d70c9e0ccf72281d0e84b0536ce990f546305f0bd4f094dc49a2b5d5c4813d8"
+source_hash: "cf18c4f2c90e9b0d3964fba98376667f3ddaa1d1fcb868e9a87c6c2b42233b19"
 doc_path: "help/testing-live.md"
 original_doc_path: "help/testing-live.md"
 duplicate_index: 1
@@ -506,8 +506,8 @@ openclaw infer image generate \
 ```
 
 This covers CLI argument parsing, config/default-agent resolution, bundled
-plugin activation, on-demand bundled runtime-dependency repair, the shared
-image-generation runtime, and the live provider request.
+plugin activation, the shared image-generation runtime, and the live provider
+request. Plugin dependencies are expected to be present before runtime load.
 
 ## Music generation live
 

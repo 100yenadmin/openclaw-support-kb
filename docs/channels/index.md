@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels/index"
-source_hash: "6bb0eadd8ccabd0b31af6fe6f19168531efb71239659c28bf3afd062355d3ecf"
+source_hash: "5270bec07025affd7c5a9d4f5a9a93e4902a264958a07fe0066267ddaf068eb4"
 doc_path: "channels/index.md"
 original_doc_path: "channels/index.md"
 duplicate_index: 1
@@ -23,8 +23,8 @@ Text is supported everywhere; media and reactions vary by channel.
 * Slack multi-person DMs route as group chats, so group policy, mention
   behavior, and group-session rules apply to MPIM conversations.
 * WhatsApp setup is install-on-demand: onboarding can show the setup flow before
-  Baileys runtime dependencies are staged, and the Gateway loads the WhatsApp
-  runtime only when the channel is actually active.
+  the plugin package is installed, and the Gateway loads the WhatsApp runtime
+  only when the channel is actually active.
 
 ## Supported channels
 

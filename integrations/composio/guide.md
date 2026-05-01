@@ -3,8 +3,8 @@ type: openclaw_integration_guide
 title: "Composio Integration Guide For OpenClaw Agents"
 source: "https://docs.composio.dev/llms.txt"
 source_hash: "6d5245aa9e5c9d1ce58fc5c837bc3ade492e457dd620b9bf6f98cb253cf40f72"
-docs_full_sha256: "fb52a1e589c4af8c8de34cb3ee4ec0ae1b358d0e9b6ffa5a2a54ebc086deb4f5"
-docs_index_sha256: "ab07415d4dea480cf456c7b25374f8b61d53781c84d0e3d56b83f607f5cc1f09"
+docs_full_sha256: "634f3fdf85b599e067d4f4ae71f2bd03715ba6b1f0a855561d5dad641e79a25b"
+docs_index_sha256: "d23ab75aa0c9982741bd1cce9905ee04743022873c84eb157b13a6ccbf50942b"
 toolkit_catalog_sha256: "8cd3515d4da44e0d7a0866d7d0183232fd6657dd9cbc77fd648181b2079a8b65"
 ---
 
