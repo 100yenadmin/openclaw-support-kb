@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "92665ff9a684d681b9da0ef81ea2de7ca14d8bd3cdf6cdcfb38f1a1ce87dbe60"
+source_hash: "bafc02bd95b64166747cc5a973df860274b2b6e07911f29a8f4f12e8887851af"
 doc_path: "configuring-sessions.md"
 original_doc_path: "configuring-sessions.md"
 duplicate_index: 1
@@ -195,6 +195,49 @@ When disabled:
 * `COMPOSIO_REMOTE_WORKBENCH` and `COMPOSIO_REMOTE_BASH_TOOL` are excluded from the session
 * Workbench-related system prompt lines are stripped
 * Direct workbench calls are rejected with a 400 error
+
+# Sandbox compute tier
+
+The workbench runs in a per-session sandbox. You can pick a compute tier to match the workload — heavier code execution or larger in-memory data benefits from a bigger sandbox. The tier is passed via `workbench.sandbox_size` (snake\_case on the wire; `sandboxSize` in the TypeScript SDK).
+
+> Requires `@composio/core` ≥ `0.8.1` (TypeScript) or `composio` ≥ `0.12.1` (Python). Older SDKs reject `sandboxSize` (TypeScript) or silently drop `sandbox_size` (Python). See the [release notes](/docs/changelog/2026/04/28).
+
+| Tier       | vCPU | RAM  |
+| ---------- | ---- | ---- |
+| `standard` | 1    | 1 GB |
+| `medium`   | 2    | 2 GB |
+| `large`    | 4    | 4 GB |
+| `xlarge`   | 8    | 8 GB |
+
+Defaults to `standard` when omitted.
+
+**Python:**
+
+```python
+session = composio.create(
+    user_id="user_123",
+    workbench={
+        "sandbox_size": "large",
+    },
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123", {
+  workbench: {
+    enable: true,
+    sandboxSize: "large",
+  },
+});
+```
+
+> **Pricing:** Sandboxes are not billed today. Composio plans to begin billing for sandbox usage soon (metered by tier and runtime). Pick a tier that matches your workload — but expect future pricing to track actual usage.
+
+Changing `sandbox_size` on an existing session recreates the sandbox on next access. The sandbox's in-memory filesystem state is lost, but the persistent `/mnt/files/` mount survives the restart.
 
 # Session methods
 

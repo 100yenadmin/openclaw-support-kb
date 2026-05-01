@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "50fa3d6f0987532438354a87f9352a587f02fdc196db07861640da2bdc9c82bf"
+source_hash: "a880b1af6011a8ea3484732df7def430d1f5f55e93ba5c3ef4d8c886ec285402"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1
@@ -215,6 +215,7 @@ Current runtime behaviour:
 * Bundled realtime voice providers: Google Gemini Live (`google`) and OpenAI (`openai`), registered by their provider plugins.
 * Provider-owned raw config lives under `realtime.providers.<providerId>`.
 * Voice Call exposes the shared `openclaw_agent_consult` realtime tool by default. The realtime model can call it when the caller asks for deeper reasoning, current information, or normal OpenClaw tools.
+* `realtime.fastContext.enabled` is default-off. When enabled, Voice Call first searches indexed memory/session context for the consult question and returns those snippets to the realtime model within `realtime.fastContext.timeoutMs` before falling back to the full consult agent only if `realtime.fastContext.fallbackToConsult` is true.
 * If `realtime.provider` points at an unregistered provider, or no realtime voice provider is registered at all, Voice Call logs a warning and skips realtime media instead of failing the whole plugin.
 * Consult session keys reuse the existing voice session when available, then fall back to the caller/callee phone number so follow-up consult calls keep context during the call.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "edac143bf6edeb8a1921d7ad59613d3d2ee5e5bcaecfaa2e7b1e7957eb8b6cca"
+source_hash: "4b45e53ad7f6ca0dc87ac0018b8bec1d84045af3a6aacd179618eef37ed3b1b2"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -1030,6 +1030,8 @@ Auto-join example:
         ],
         daveEncryption: true,
         decryptionFailureTolerance: 24,
+        connectTimeoutMs: 30000,
+        reconnectGraceMs: 15000,
         tts: {
           provider: "openai",
           openai: { voice: "onyx" },
@@ -1045,11 +1047,14 @@ Notes:
 * `voice.tts` overrides `messages.tts` for voice playback only.
 * `voice.model` overrides the LLM used for Discord voice channel responses only. Leave it unset to inherit the routed agent model.
 * STT uses `tools.media.audio`; `voice.model` does not affect transcription.
+* Per-channel Discord `systemPrompt` overrides apply to voice transcript turns for that voice channel.
 * Voice transcript turns derive owner status from Discord `allowFrom` (or `dm.allowFrom`); non-owner speakers cannot access owner-only tools (for example `gateway` and `cron`).
 * Voice is enabled by default; set `channels.discord.voice.enabled=false` to disable voice runtime and the `GuildVoiceStates` gateway intent.
 * `channels.discord.intents.voiceStates` can explicitly override voice-state intent subscription. Leave it unset for the intent to follow `voice.enabled`.
 * `voice.daveEncryption` and `voice.decryptionFailureTolerance` pass through to `@discordjs/voice` join options.
 * `@discordjs/voice` defaults are `daveEncryption=true` and `decryptionFailureTolerance=24` if unset.
+* `voice.connectTimeoutMs` controls the initial `@discordjs/voice` Ready wait for `/vc join` and auto-join attempts. Default: `30000`.
+* `voice.reconnectGraceMs` controls how long OpenClaw waits for a disconnected voice session to begin reconnecting before destroying it. Default: `15000`.
 * OpenClaw also watches receive decrypt failures and auto-recovers by leaving/rejoining the voice channel after repeated failures in a short window.
 * If receive logs repeatedly show `DecryptionFailed(UnencryptedWhenPassthroughDisabled)` after updating, collect a dependency report and logs. The bundled `@discordjs/voice` line includes the upstream padding fix from discord.js PR #11449, which closed discord.js issue #11419.
 
@@ -1057,7 +1062,7 @@ Voice channel pipeline:
 
 * Discord PCM capture is converted to a WAV temp file.
 * `tools.media.audio` handles STT, for example `openai/gpt-4o-mini-transcribe`.
-* The transcript is sent through normal Discord ingress and routing.
+* The transcript is sent through Discord ingress and routing while the response LLM runs with a voice-output policy that hides the agent `tts` tool and asks for returned text, because Discord voice owns final TTS playback.
 * `voice.model`, when set, overrides only the response LLM for this voice-channel turn.
 * `voice.tts` is merged over `messages.tts`; the resulting audio is played in the joined channel.
 

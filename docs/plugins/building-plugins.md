@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "69929e2471b28d5d95a13fe46171e22e0265b7016d65f16104813db9815aba45"
+source_hash: "de57609fa222281a5a2eabff77e1c9a2fd79edbf4f382f451f4297923ed182bb"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -254,6 +254,47 @@ Users enable optional tools in config:
 * Tools with malformed registration objects, including missing `parameters`, are skipped and reported in plugin diagnostics instead of breaking agent runs
 * Use `optional: true` for tools with side effects or extra binary requirements
 * Users can enable all tools from a plugin by adding the plugin id to `tools.allow`
+
+## Registering CLI commands
+
+Plugins can add root `openclaw` command groups with `api.registerCli`. Provide
+`descriptors` for every top-level command root so OpenClaw can show and route
+the command without eagerly loading every plugin runtime.
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+register(api) {
+  api.registerCli(
+    ({ program }) => {
+      const demo = program
+        .command("demo-plugin")
+        .description("Run demo plugin commands");
+
+      demo
+        .command("ping")
+        .description("Check that the plugin CLI is executable")
+        .action(() => {
+          console.log("demo-plugin:pong");
+        });
+    },
+    {
+      descriptors: [
+        {
+          name: "demo-plugin",
+          description: "Run demo plugin commands",
+          hasSubcommands: true,
+        },
+      ],
+    },
+  );
+}
+```
+
+After install, verify the runtime registration and execute the command:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins inspect demo-plugin --runtime --json
+openclaw demo-plugin ping
+```
 
 ## Import conventions
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "017fc5486b84b94e344820dd83f0578e072cc9f3edbdec1f4f774ddfa17e01aa"
+source_hash: "03867d94311922273b873f55af2a1270a6e8916f93c951b04d9f2b2ce3b63d30"
 doc_path: "cli/update.md"
 original_doc_path: "cli/update.md"
 duplicate_index: 1
@@ -89,7 +89,11 @@ install method aligned:
 * `beta` → prefers npm dist-tag `beta`, but falls back to `latest` when beta is
   missing or older than the current stable release.
 
-The Gateway core auto-updater (when enabled via config) reuses this same update path.
+The Gateway core auto-updater (when enabled via config) launches the CLI update path
+outside the live Gateway request handler. Control-plane `update.run` package-manager
+updates force a non-deferred, no-cooldown update restart after the package swap,
+because the old Gateway process may still have in-memory chunks that point at
+files removed by the new package.
 
 For package-manager installs, `openclaw update` resolves the target package
 version before invoking the package manager. npm global installs use a staged
@@ -166,7 +170,7 @@ it manually.
 <Note>
   Post-update plugin sync failures fail the update result and stop restart follow-up work. Fix the plugin install or update error, then rerun `openclaw update`.
 
-  When the updated Gateway starts, enabled bundled plugin runtime dependencies are staged before plugin activation. Update-triggered restarts drain any active runtime-dependency staging before closing the Gateway, so service-manager restarts do not interrupt an in-flight npm install.
+  When the updated Gateway starts, enabled bundled plugin runtime dependencies are staged before plugin activation. Package-manager `update.run` restarts bypass the normal idle deferral and restart cooldown after the package tree has been swapped, so the old process cannot keep lazy-loading removed chunks. Service-manager restarts still drain runtime-dependency staging before closing the Gateway.
 
   If pnpm bootstrap still fails, the updater stops early with a package-manager-specific error instead of trying `npm run build` inside the checkout.
 </Note>

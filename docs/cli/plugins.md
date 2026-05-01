@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "9e95fb12f5f8b7a7efa31ee87fb2a58b824bec8d134b46340b615517b36c77cc"
+source_hash: "0aa652996ac9f934dcbed7de21b44a227bd95e581feff6f635a68ab220fbd0dd"
 doc_path: "cli/plugins.md"
 original_doc_path: "cli/plugins.md"
 duplicate_index: 1
@@ -80,6 +80,8 @@ to stderr and keeps JSON output parseable. See [Debugging](/help/debugging#plugi
 openclaw plugins install <package>                      # ClawHub first, then npm
 openclaw plugins install clawhub:<package>              # ClawHub only
 openclaw plugins install npm:<package>                  # npm only
+openclaw plugins install git:github.com/<owner>/<repo>  # git repo
+openclaw plugins install git:github.com/<owner>/<repo>@<ref>
 openclaw plugins install <package> --force              # overwrite existing install
 openclaw plugins install <package> --pin                # pin version
 openclaw plugins install <package> --dangerously-force-unsafe-install
@@ -117,7 +119,7 @@ openclaw plugins install <plugin> --marketplace https://github.com/<owner>/<repo
   </Accordion>
 
   <Accordion title="--pin scope">
-    `--pin` applies to npm installs only. It is not supported with `--marketplace`, because marketplace installs persist marketplace source metadata instead of an npm spec.
+    `--pin` applies to npm installs only. It is not supported with `git:` installs; use an explicit git ref such as `git:github.com/acme/plugin@v1.2.3` when you want a pinned source. It is not supported with `--marketplace`, because marketplace installs persist marketplace source metadata instead of an npm spec.
   </Accordion>
 
   <Accordion title="--dangerously-force-unsafe-install">
@@ -138,6 +140,14 @@ openclaw plugins install <plugin> --marketplace https://github.com/<owner>/<repo
     Bare specs and `@latest` stay on the stable track. If npm resolves either of those to a prerelease, OpenClaw stops and asks you to opt in explicitly with a prerelease tag such as `@beta`/`@rc` or an exact prerelease version such as `@1.2.3-beta.4`.
 
     If a bare install spec matches a bundled plugin id (for example `diffs`), OpenClaw installs the bundled plugin directly. To install an npm package with the same name, use an explicit scoped spec (for example `@scope/diffs`).
+  </Accordion>
+
+  <Accordion title="Git repositories">
+    Use `git:<repo>` to install directly from a git repository. Supported forms include `git:github.com/owner/repo`, `git:owner/repo`, full `https://`, `ssh://`, `git://`, `file://`, and `git@host:owner/repo.git` clone URLs. Add `@<ref>` or `#<ref>` to check out a branch, tag, or commit before install.
+
+    Git installs clone into a temporary directory, check out the requested ref when present, then use the normal plugin directory installer. That means manifest validation, dangerous-code scanning, runtime dependency staging, and install records behave like local-path installs. Recorded git installs include the source URL/ref plus the resolved commit so `openclaw plugins update` can re-resolve the source later.
+
+    After installing from git, use `openclaw plugins inspect <id> --runtime --json` to verify runtime registrations such as gateway methods and CLI commands. If the plugin registered a CLI root with `api.registerCli`, execute that command directly through the OpenClaw root CLI, for example `openclaw demo-plugin ping`.
   </Accordion>
 
   <Accordion title="Archives">
@@ -338,6 +348,8 @@ openclaw plugins inspect <id> --json
 ```
 
 Inspect shows identity, load status, source, manifest capabilities, policy flags, diagnostics, install metadata, bundle capabilities, and any detected MCP or LSP server support without importing plugin runtime by default. Add `--runtime` to load the plugin module and include registered hooks, tools, commands, services, gateway methods, and HTTP routes. Runtime inspection fails with a repair hint when bundled runtime dependencies are missing; use `openclaw plugins deps --repair` to repair them explicitly.
+
+Plugin-owned CLI commands are installed as root `openclaw` command groups. After `inspect --runtime` shows a command under `cliCommands`, run it as `openclaw <command> ...`; for example a plugin that registers `demo-git` can be verified with `openclaw demo-git ping`.
 
 Each plugin is classified by what it actually registers at runtime:
 

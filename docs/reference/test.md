@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
-source_hash: "35a10576311ec67783ea2a39c32b3771d0c4b5f3f3597b136d2907cda973c4ef"
+source_hash: "7c750cc958b94d4983e2ae46f6adaef57160ea996074ac9bfbbbd360780c13ae"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1
@@ -87,7 +87,7 @@ Source: https://docs.openclaw.ai/reference/test
 
 * `pnpm test:docker:upgrade-survivor`: Installs the packed OpenClaw tarball over a dirty old-user fixture, runs package update plus non-interactive doctor without live provider or channel keys, then starts a loopback Gateway and checks that agents, channel config, plugin allowlists, workspace/session files, stale plugin runtime-deps state, startup, and RPC status survive.
 
-* `pnpm test:docker:published-upgrade-survivor`: Installs `openclaw@latest` by default, seeds realistic existing-user files without live provider or channel keys, configures that baseline with a baked `openclaw config set` command recipe, updates that published install to the packed OpenClaw tarball, runs non-interactive doctor, writes `.artifacts/upgrade-survivor/summary.json`, then starts a loopback Gateway and checks that configured intents, workspace/session files, stale plugin config/runtime-deps state, startup, and RPC status survive or repair cleanly. Override the baseline with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC`; Package Acceptance exposes the same value as `published_upgrade_survivor_baseline`.
+* `pnpm test:docker:published-upgrade-survivor`: Installs `openclaw@latest` by default, seeds realistic existing-user files without live provider or channel keys, configures that baseline with a baked `openclaw config set` command recipe, updates that published install to the packed OpenClaw tarball, runs non-interactive doctor, writes `.artifacts/upgrade-survivor/summary.json`, then starts a loopback Gateway and checks that configured intents, workspace/session files, stale plugin config/runtime-deps state, startup, `/healthz`, `/readyz`, and RPC status survive or repair cleanly. Override one baseline with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC`, expand an exact matrix with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPECS`, or add scenario fixtures with `OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues`; Package Acceptance exposes those as `published_upgrade_survivor_baseline`, `published_upgrade_survivor_baselines`, and `published_upgrade_survivor_scenarios`.
 
 ## Local PR gate
 

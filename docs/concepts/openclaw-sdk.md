@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK"
 source: "https://docs.openclaw.ai/concepts/openclaw-sdk"
-source_hash: "e08c80281ab7341e76d2a95619e8e2359e4f14866264f5ce75c5be1f4124430f"
+source_hash: "cf6ae9559ac4fc027f0e6cdbb9227490fff5e617b4775b07e5b0053c80b3db71"
 doc_path: "concepts/openclaw-sdk.md"
 original_doc_path: "concepts/openclaw-sdk.md"
 duplicate_index: 1
@@ -30,24 +30,24 @@ resources.
 
 `@openclaw/sdk` ships with:
 
-| Surface                   | Status  | What it does                                                                 |
-| ------------------------- | ------- | ---------------------------------------------------------------------------- |
-| `OpenClaw`                | Ready   | Main client entry point. Owns transport, connection, requests, and events.   |
-| `GatewayClientTransport`  | Ready   | WebSocket transport backed by the Gateway client.                            |
-| `oc.agents`               | Ready   | Lists, creates, updates, deletes, and gets agent handles.                    |
-| `Agent.run()`             | Ready   | Starts a Gateway `agent` run and returns a `Run`.                            |
-| `oc.runs`                 | Ready   | Creates, gets, waits for, cancels, and streams runs.                         |
-| `Run.events()`            | Ready   | Streams normalized per-run events with replay for fast runs.                 |
-| `Run.wait()`              | Ready   | Calls `agent.wait` and returns a stable `RunResult`.                         |
-| `Run.cancel()`            | Ready   | Calls `sessions.abort` by run id, with session key when available.           |
-| `oc.sessions`             | Ready   | Creates, resolves, sends to, patches, compacts, and gets session handles.    |
-| `Session.send()`          | Ready   | Calls `sessions.send` and returns a `Run`.                                   |
-| `oc.models`               | Ready   | Calls `models.list` and the current `models.authStatus` status RPC.          |
-| `oc.tools`                | Partial | Lists tool catalog and effective tools; direct tool invocation is not wired. |
-| `oc.artifacts`            | Ready   | Lists, gets, and downloads Gateway transcript artifacts.                     |
-| `oc.approvals`            | Ready   | Lists and resolves exec approvals through Gateway approval RPCs.             |
-| `oc.rawEvents()`          | Ready   | Exposes raw Gateway events for advanced consumers.                           |
-| `normalizeGatewayEvent()` | Ready   | Converts raw Gateway events into the stable SDK event shape.                 |
+| Surface                   | Status | What it does                                                               |
+| ------------------------- | ------ | -------------------------------------------------------------------------- |
+| `OpenClaw`                | Ready  | Main client entry point. Owns transport, connection, requests, and events. |
+| `GatewayClientTransport`  | Ready  | WebSocket transport backed by the Gateway client.                          |
+| `oc.agents`               | Ready  | Lists, creates, updates, deletes, and gets agent handles.                  |
+| `Agent.run()`             | Ready  | Starts a Gateway `agent` run and returns a `Run`.                          |
+| `oc.runs`                 | Ready  | Creates, gets, waits for, cancels, and streams runs.                       |
+| `Run.events()`            | Ready  | Streams normalized per-run events with replay for fast runs.               |
+| `Run.wait()`              | Ready  | Calls `agent.wait` and returns a stable `RunResult`.                       |
+| `Run.cancel()`            | Ready  | Calls `sessions.abort` by run id, with session key when available.         |
+| `oc.sessions`             | Ready  | Creates, resolves, sends to, patches, compacts, and gets session handles.  |
+| `Session.send()`          | Ready  | Calls `sessions.send` and returns a `Run`.                                 |
+| `oc.models`               | Ready  | Calls `models.list` and the current `models.authStatus` status RPC.        |
+| `oc.tools`                | Ready  | Lists, scopes, and invokes Gateway tools through the policy pipeline.      |
+| `oc.artifacts`            | Ready  | Lists, gets, and downloads Gateway transcript artifacts.                   |
+| `oc.approvals`            | Ready  | Lists and resolves exec approvals through Gateway approval RPCs.           |
+| `oc.rawEvents()`          | Ready  | Exposes raw Gateway events for advanced consumers.                         |
+| `normalizeGatewayEvent()` | Ready  | Converts raw Gateway events into the stable SDK event shape.               |
 
 The SDK also exports the core types used by those surfaces:
 `AgentRunParams`, `RunResult`, `RunStatus`, `OpenClawEvent`,
@@ -221,11 +221,19 @@ await oc.models.list();
 await oc.models.status({ probe: false }); // calls models.authStatus
 ```
 
-Tool helpers expose the Gateway catalog and effective tool view:
+Tool helpers expose the Gateway catalog, effective tool view, and direct
+Gateway tool invocation. `oc.tools.invoke()` returns a typed envelope instead
+of throwing for policy or approval refusals.
 
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 await oc.tools.list();
 await oc.tools.effective({ sessionKey: "main" });
+await oc.tools.invoke("tool-name", {
+  args: { input: "value" },
+  sessionKey: "main",
+  confirm: false,
+  idempotencyKey: "tool-call-1",
+});
 ```
 
 Artifact helpers expose the Gateway artifact projection for session, run, or
@@ -260,8 +268,6 @@ errors:
 await oc.tasks.list();
 await oc.tasks.get("task-id");
 await oc.tasks.cancel("task-id");
-
-await oc.tools.invoke("tool-name", {});
 
 await oc.environments.list();
 await oc.environments.create({});

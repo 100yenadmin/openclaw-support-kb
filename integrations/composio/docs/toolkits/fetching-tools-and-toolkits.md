@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Fetching tools and toolkits"
 source: "https://docs.composio.dev/docs/toolkits/fetching-tools-and-toolkits.md"
-source_hash: "0b3bb87befd7de370313dfa48c3af0f9e0d15c7d3bf179094973346b91c87fb3"
+source_hash: "dcba1efc7b239ff62a7e19006ad7dd9747dda3dc0a10ef087200ce206a78cc7e"
 doc_path: "toolkits/fetching-tools-and-toolkits.md"
 original_doc_path: "toolkits/fetching-tools-and-toolkits.md"
 duplicate_index: 1
@@ -88,7 +88,7 @@ const allToolkits: any[] = [];
 let cursor: string | undefined;
 
 do {
-  const { items, nextCursor } = await session.toolkits({ limit: 20, nextCursor: cursor });
+  const { items, cursor: nextCursor } = await session.toolkits({ limit: 20, cursor });
   allToolkits.push(...items);
   cursor = nextCursor;
 } while (cursor);

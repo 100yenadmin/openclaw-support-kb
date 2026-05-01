@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "dbce1de3ddd508ffa61ff378829a0a41c3b9165cc70c56f0cb655dbde42b7981"
+source_hash: "253fc2b78f01a2c3f3aa384698bfef008b923ba5cdd4de08f0166933482356a3"
 doc_path: "gateway/configuration.md"
 original_doc_path: "gateway/configuration.md"
 duplicate_index: 1
@@ -334,7 +334,7 @@ cannot roll back unrelated user settings.
     }
     ```
 
-    Build the image first: `scripts/sandbox-setup.sh`
+    Build the image first — from a source checkout run `scripts/sandbox-setup.sh`, or from an npm install see the inline `docker build` command in [Sandboxing § Images and setup](/gateway/sandboxing#images-and-setup).
 
     See [Sandboxing](/gateway/sandboxing) for the full guide and [full reference](/gateway/config-agents#agentsdefaultssandbox) for all options.
   </Accordion>

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "1e7baa1832a123723129fcf4128f644948c4cf906f35903eba179144a2bbc1d5"
+source_hash: "b7f2322f58dcadc459782f70c4fd9dfd6c845308130f776c300f626ef5331795"
 doc_path: "install/ansible.md"
 original_doc_path: "install/ansible.md"
 duplicate_index: 1
@@ -216,9 +216,11 @@ This is idempotent and safe to run multiple times.
     # Check sandbox image
     sudo docker images | grep openclaw-sandbox
 
-    # Build sandbox image if missing
+    # Build sandbox image if missing (requires source checkout)
     cd /opt/openclaw/openclaw
     sudo -u openclaw ./scripts/sandbox-setup.sh
+    # For npm installs without a source checkout, see
+    # https://docs.openclaw.ai/gateway/sandboxing#images-and-setup
     ```
   </Accordion>
 

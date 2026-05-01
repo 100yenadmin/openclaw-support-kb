@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "d36b487a8d977be2ba3f60f66a6dbc88df79f8e185d005a1f4a071f437c1a276"
+source_hash: "872a06b4ce79438868ac50100787a9794694c8a8f0184ba6deeee1b21e69f35f"
 doc_path: "tools/slash-commands.md"
 original_doc_path: "tools/slash-commands.md"
 duplicate_index: 1
@@ -267,7 +267,7 @@ User-invocable skills are also exposed as slash commands:
     - In multi-account channels, config-targeted `/allowlist --account <id>` and `/config set channels.<provider>.accounts.<id>...` also honor the target account's `configWrites`.
     - `/usage` controls the per-response usage footer; `/usage cost` prints a local cost summary from OpenClaw session logs.
     - `/restart` is enabled by default; set `commands.restart: false` to disable it.
-    - `/plugins install <spec>` accepts the same plugin specs as `openclaw plugins install`: local path/archive, npm package, or `clawhub:<pkg>`.
+    - `/plugins install <spec>` accepts the same plugin specs as `openclaw plugins install`: local path/archive, npm package, `git:<repo>`, or `clawhub:<pkg>`.
     - `/plugins enable|disable` updates plugin config and may prompt for a restart.
   </Accordion>
 

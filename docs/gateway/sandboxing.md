@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "99e026d03bd5cbd61de37fe0fb63f78fe9684e49961fb16f2ea35918ba67b541"
+source_hash: "9a9c1dfbebca8732580425ca9d906f5a10aac2e811b21a08ff4269c7a0101328"
 doc_path: "gateway/sandboxing.md"
 original_doc_path: "gateway/sandboxing.md"
 duplicate_index: 1
@@ -368,31 +368,65 @@ Example (read-only source + an extra data directory):
 
 Default Docker image: `openclaw-sandbox:bookworm-slim`
 
+<Note>
+  **Source checkout vs npm install**
+
+  The `scripts/sandbox-setup.sh`, `scripts/sandbox-common-setup.sh`, and `scripts/sandbox-browser-setup.sh` helper scripts are only available when running from a [source checkout](https://github.com/openclaw/openclaw). They are not included in the npm package.
+
+  If you installed OpenClaw via `npm install -g openclaw`, use the inline `docker build` commands shown below instead.
+</Note>
+
 <Steps>
   <Step title="Build the default image">
+    From a source checkout:
+
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     scripts/sandbox-setup.sh
     ```
 
+    From an npm install (no source checkout needed):
+
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    docker build -t openclaw-sandbox:bookworm-slim - <<'DOCKERFILE'
+    FROM debian:bookworm-slim
+    ENV DEBIAN_FRONTEND=noninteractive
+    RUN apt-get update && apt-get install -y --no-install-recommends \
+      bash ca-certificates curl git jq python3 ripgrep \
+      && rm -rf /var/lib/apt/lists/*
+    RUN useradd --create-home --shell /bin/bash sandbox
+    USER sandbox
+    WORKDIR /home/sandbox
+    CMD ["sleep", "infinity"]
+    DOCKERFILE
+    ```
+
     The default image does **not** include Node. If a skill needs Node (or other runtimes), either bake a custom image or install via `sandbox.docker.setupCommand` (requires network egress + writable root + root user).
 
-    OpenClaw does not silently substitute plain `debian:bookworm-slim` when `openclaw-sandbox:bookworm-slim` is missing. Sandbox runs that target the default image fail fast with a build instruction until you run `scripts/sandbox-setup.sh`, because the bundled image carries `python3` for sandbox write/edit helpers.
+    OpenClaw does not silently substitute plain `debian:bookworm-slim` when `openclaw-sandbox:bookworm-slim` is missing. Sandbox runs that target the default image fail fast with a build instruction until you build it, because the bundled image carries `python3` for sandbox write/edit helpers.
   </Step>
 
   <Step title="Optional: build the common image">
     For a more functional sandbox image with common tooling (for example `curl`, `jq`, `nodejs`, `python3`, `git`):
 
+    From a source checkout:
+
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     scripts/sandbox-common-setup.sh
     ```
+
+    From an npm install, build the default image first (see above), then build the common image on top using the [`Dockerfile.sandbox-common`](https://github.com/openclaw/openclaw/blob/main/Dockerfile.sandbox-common) from the repository.
 
     Then set `agents.defaults.sandbox.docker.image` to `openclaw-sandbox-common:bookworm-slim`.
   </Step>
 
   <Step title="Optional: build the sandbox browser image">
+    From a source checkout:
+
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     scripts/sandbox-browser-setup.sh
     ```
+
+    From an npm install, build using the [`Dockerfile.sandbox-browser`](https://github.com/openclaw/openclaw/blob/main/Dockerfile.sandbox-browser) from the repository.
   </Step>
 </Steps>
 
