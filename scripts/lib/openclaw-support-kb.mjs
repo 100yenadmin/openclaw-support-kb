@@ -775,12 +775,25 @@ export function composioIntegrationPolicyPage() {
   ].join("\n");
 }
 
+export function headersForFetch(url, env = process.env) {
+  const headers = {
+    "user-agent": "openclaw-support-kb-builder",
+    accept: "text/plain, application/json;q=0.9, */*;q=0.8",
+  };
+
+  const parsed = new URL(url);
+  const githubToken = env.GITHUB_TOKEN || env.GH_TOKEN;
+  if (githubToken && parsed.hostname === "api.github.com") {
+    headers.authorization = `Bearer ${githubToken}`;
+    headers["x-github-api-version"] = "2022-11-28";
+  }
+
+  return headers;
+}
+
 export async function fetchText(url) {
   const response = await fetch(url, {
-    headers: {
-      "user-agent": "openclaw-support-kb-builder",
-      accept: "text/plain, application/json;q=0.9, */*;q=0.8",
-    },
+    headers: headersForFetch(url),
   });
   if (!response.ok) throw new Error(`Fetch failed ${response.status} ${response.statusText}: ${url}`);
   return response.text();
