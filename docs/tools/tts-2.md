@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "5e21f151270e9b1ed4fc6e4ac8b211907906928e9572898b1281a5abeb3ad6eb"
+source_hash: "c01a8b2755a26e2a8af02f3a9f5a7026ec2abe38fa3c6a7cadef581f9598ef19"
 doc_path: "tools/tts-2.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 2
@@ -926,6 +926,7 @@ OpenAI and ElevenLabs output formats are fixed per channel as listed above.
     <ParamField type="string">OpenAI TTS model id (e.g. `gpt-4o-mini-tts`).</ParamField>
     <ParamField type="string">Voice name (e.g. `alloy`, `cedar`).</ParamField>
     <ParamField type="string">Explicit OpenAI `instructions` field. When set, persona prompt fields are **not** auto-mapped.</ParamField>
+    <ParamField type="Record<string, unknown>">Extra JSON fields merged into `/audio/speech` request bodies after generated OpenAI TTS fields. Use this for OpenAI-compatible endpoints such as Kokoro that require provider-specific keys like `lang`; unsafe prototype keys are ignored.</ParamField>
 
     <ParamField type="string">
       Override the OpenAI TTS endpoint. Resolution order: config → `OPENAI_TTS_BASE_URL` → `https://api.openai.com/v1`. Non-default values are treated as OpenAI-compatible TTS endpoints, so custom model and voice names are accepted.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "d1b3ff45e2b6f6f796d7a7cfb51a2255882625af87e8f9aa19b4e41a503c6110"
+source_hash: "fdf54523aaee309b1029461ff40aa86ab024e2fac3169b32177889aae57eb852"
 doc_path: "plugins/compatibility.md"
 original_doc_path: "plugins/compatibility.md"
 duplicate_index: 1
@@ -141,9 +141,6 @@ Current compatibility records include:
 * legacy channel route key and comparable-target helper aliases while plugins
   move to `openclaw/plugin-sdk/channel-route`
 * activation hints that are being replaced by manifest contribution ownership
-* deprecated implicit startup sidecar loading for plugins that have not declared
-  `activation.onStartup`; maintainers can test the future stricter behavior with
-  `OPENCLAW_DISABLE_LEGACY_IMPLICIT_STARTUP_SIDECARS=1`
 * `setup-api` runtime fallback while setup descriptors move to cold
   `setup.requiresRuntime: false` metadata
 * provider `discovery` hooks while provider catalog hooks move to

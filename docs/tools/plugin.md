@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "280a98f0161846326afdda6c8a3e3fee30f9eb1fde5bb1cacc31ea86fcb64c7c"
+source_hash: "23dc26f81e76a61253a29cc591b7d27621761a1ead3637266a87b6910872d3fc"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -332,6 +332,37 @@ do not run in live chat traffic, check these first:
 * For proof of the effective session model, use `openclaw sessions` or the
   Gateway session/status surfaces and, when debugging provider payloads, start
   the Gateway with `--raw-stream --raw-stream-path <path>`.
+
+### Slow plugin tool setup
+
+If agent turns appear to stall while preparing tools, enable trace logging and
+check for plugin tool factory timing lines:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw config set logging.level trace
+openclaw logs --follow
+```
+
+Look for:
+
+```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+[trace:plugin-tools] factory timings ...
+```
+
+The summary lists total factory time and the slowest plugin tool factories,
+including plugin id, declared tool names, result shape, and whether the tool is
+optional. Slow lines are promoted to warnings when a single factory takes at
+least 1s or total plugin tool factory prep takes at least 5s.
+
+If one plugin dominates the timing, inspect its runtime registrations:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins inspect <plugin-id> --runtime --json
+```
+
+Then update, reinstall, or disable that plugin. Plugin authors should move
+expensive dependency loading behind the tool execution path instead of doing it
+inside the tool factory.
 
 ### Duplicate channel or tool ownership
 

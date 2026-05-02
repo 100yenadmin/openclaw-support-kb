@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "ad44c4a484a9d18c99bc8743885ad746507bd0ee6039b3af2ca59da9e407d5b3"
+source_hash: "bae7d53334ebca0ffaffa4d1958857fc176fe1f0bc1ba962a02939f0bdd9ca8e"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -66,8 +66,9 @@ Local plugins are treated as developer-controlled directories. OpenClaw does not
 run `npm install`, `pnpm install`, or dependency repair for them. If a local
 plugin has dependencies, install them in that plugin before loading it.
 
-TypeScript local plugins can use the emergency Jiti path. Packaged JavaScript
-plugins load through native import/require instead of Jiti.
+Third-party TypeScript local plugins can use the emergency Jiti path. Packaged
+JavaScript plugins and bundled internal plugins load through native
+import/require instead of Jiti.
 
 ## Startup and reload
 

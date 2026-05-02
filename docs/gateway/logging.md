@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "d8400de7f1a3a43814c172182b2359b1dbaefbe65c256abaa287a4ff87c873ef"
+source_hash: "ab5e0c50799a5bb821c8a640389bdeadc17fbcffebf04e84b8b95de56a1e0a52"
 doc_path: "gateway/logging.md"
 original_doc_path: "gateway/logging.md"
 duplicate_index: 1
@@ -48,6 +48,9 @@ openclaw logs --follow
   raise the file log level.
 * To capture verbose-only details in file logs, set `logging.level` to `debug` or
   `trace`.
+* Trace logging also includes diagnostic timing summaries for selected hot paths,
+  such as plugin tool factory preparation. See
+  [/tools/plugin#slow-plugin-tool-setup](/tools/plugin#slow-plugin-tool-setup).
 
 ## Console capture
 

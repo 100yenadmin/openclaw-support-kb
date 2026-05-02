@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "aa0c94bd3139c943c4996680d1ad5de07424301751e1c54fa7ab3034dbfd97f2"
+source_hash: "5f60dd0ea834c4f8525fd213aeb6e6e0860767ed4f7c48292c417cf54ac8adb4"
 doc_path: "concepts/queue.md"
 original_doc_path: "concepts/queue.md"
 duplicate_index: 1
@@ -122,7 +122,7 @@ keys.
 * If commands seem stuck, enable verbose logs and look for “queued for …ms” lines to confirm the queue is draining.
 * If you need queue depth, enable verbose logs and watch for queue timing lines.
 * Codex app-server runs that accept a turn and then stop emitting progress are interrupted by the Codex adapter so the active session lane can release instead of waiting for the outer run timeout.
-* When diagnostics are enabled, sessions that remain in `processing` past `diagnostics.stuckSessionWarnMs` log a stuck-session warning. Active embedded runs, active reply operations, and active lane tasks remain warning-only by default; stale startup bookkeeping with no active session work can release the affected session lane so queued work drains.
+* When diagnostics are enabled, sessions that remain in `processing` past `diagnostics.stuckSessionWarnMs` with no observed reply, tool, status, block, or ACP progress are classified by current activity. Active work logs as `session.long_running`; active work with no recent progress logs as `session.stalled`; `session.stuck` is reserved for stale session bookkeeping with no active work, and only that path can release the affected session lane so queued work drains. Repeated `session.stuck` diagnostics back off while the session remains unchanged.
 
 ## Related
 

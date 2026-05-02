@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Help"
 source: "https://docs.openclaw.ai/help/index"
-source_hash: "dc93c9bd5ab04c5c96e9e89e5ef78ecf03af4549409e2a5851ca96a4d3805558"
+source_hash: "3215376110bf51d1cca6824e23b2c4d7cdaabe29a6b1f06571510969db937cd4"
 doc_path: "help/index.md"
 original_doc_path: "help/index.md"
 duplicate_index: 1
@@ -36,6 +36,7 @@ Quick "get unstuck" path for the most common problems:
 ## Testing
 
 * [Testing](/help/testing) — test suites and Docker runners
+* [Update and plugin tests](/help/testing-updates-plugins) — package update, migration, and plugin install validation
 * [Live tests](/help/testing-live) — network-touching provider and CLI smokes
 
 ## Community and meta
