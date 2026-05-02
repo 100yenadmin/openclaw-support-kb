@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "958f7fb42452f2ad4e2ae45c0415093319d8909a72a85a793549d35ae9840889"
+source_hash: "76c27f515b4dc7bd1207e9da468bb2bcf30d245952c1b4d33a80a3f3a7d5a3eb"
 doc_path: "quickstart.md"
 original_doc_path: "quickstart.md"
 duplicate_index: 1
@@ -13,6 +13,8 @@ Source: https://docs.composio.dev/docs/quickstart.md
 
 
 Build your first AI agent with Composio Tools. You'll create a [session](/docs/users-and-sessions) for a user, give your agent access to [tools](/docs/tools-and-toolkits), and let it take action across 1000+ apps.
+
+> If you are an AI agent setting up Composio for yourself, you can [sign up as an agent](/docs/signing-up-as-an-agent) without a human-created account first.
 
 ## OpenAI Agents
 

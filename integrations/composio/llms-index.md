@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "766ba0ccdaf1085a856f82dd36dbd24daed11f31862a226160dfdc1a11a740e6"
+source_hash: "dc0568d1bf101ba323b77a1d6209a8e831862e75a1bd32abdd04a64f5e2826ed"
 ---
 
 # Composio Documentation
@@ -120,6 +120,7 @@ source_hash: "766ba0ccdaf1085a856f82dd36dbd24daed11f31862a226160dfdc1a11a740e6"
 
 ## Resources
 
+- https://docs.composio.dev/docs/signing-up-as-an-agent.md
 - https://docs.composio.dev/docs/common-faq.md
 - https://docs.composio.dev/docs/glossary.md
 - https://docs.composio.dev/docs/debugging-info.md
