@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "dea9e03cb80d9e8d153702e9a0304837b4d93b581c87c989e93f48290dbd6505"
+source_hash: "3424c8f70aebd41b5fd43a70a86e2cd73c7c3a7f965fe0347b120ef8ba5a0ac7"
 doc_path: "reference/releasing.md"
 original_doc_path: "reference/releasing.md"
 duplicate_index: 1
@@ -322,7 +322,7 @@ ref once as `release-package-under-test` and reuses that artifact in both
 release-path Docker checks and Package Acceptance. This keeps all
 package-facing boxes on the same bytes and avoids repeated package builds.
 The cross-OS OpenAI install smoke uses `OPENCLAW_CROSS_OS_OPENAI_MODEL` when the
-repo/org variable is set, otherwise `openai/gpt-5.5`, because this lane is
+repo/org variable is set, otherwise `openai/gpt-5.4`, because this lane is
 proving package install, onboarding, gateway startup, and one live agent turn
 rather than benchmarking the slowest default model. The broader live provider
 matrix remains the place for model-specific coverage.

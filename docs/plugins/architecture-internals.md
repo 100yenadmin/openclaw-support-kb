@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "a5dd515635be77a0675e9b7b9c523c3dcf2ac60cf32aa9e812b8306161d4bea8"
+source_hash: "8863638cee60703e12ef36714a5df7823f2d9a002d00a8eee43aece4b8685b77"
 doc_path: "plugins/architecture-internals.md"
 original_doc_path: "plugins/architecture-internals.md"
 duplicate_index: 1
@@ -69,6 +69,12 @@ to narrow plugin loading before broader registry materialization:
 * Gateway startup planning uses `activation.onStartup` for explicit startup
   imports and startup opt-outs; plugins without startup metadata load only
   through narrower activation triggers
+
+Request-time runtime preloads that ask for the broad `all` scope still derive an
+explicit effective plugin id set from config, startup planning, configured
+channels, slots, and auto-enable rules. If that derived set is empty, OpenClaw
+loads an empty runtime registry instead of widening to every discoverable
+plugin.
 
 The activation planner exposes both an ids-only API for existing callers and a
 plan API for new diagnostics. Plan entries report why a plugin was selected,

@@ -20,6 +20,11 @@ export function defaultCronMinute(seed = os.hostname()) {
   return hash[0] % 60;
 }
 
+export function defaultCronHour(seed = os.hostname()) {
+  const hash = createHash("sha256").update(String(seed || "openclaw-support-kb")).digest();
+  return hash[1] % 24;
+}
+
 export function managedCronBlock({
   schedule,
   nodePath,

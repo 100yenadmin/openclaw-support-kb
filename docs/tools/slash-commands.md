@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "0c770ae8e538afc6c079e1d25bd40750050ae6e6b47a53e4423ad8d2f546a7d7"
+source_hash: "2c09f6f2e5fdad9d19fba4068668cd3272958d1a617f43d5ba2ca3fd3fa1e74a"
 doc_path: "tools/slash-commands.md"
 original_doc_path: "tools/slash-commands.md"
 duplicate_index: 1
@@ -271,8 +271,8 @@ User-invocable skills are also exposed as slash commands:
     - In multi-account channels, config-targeted `/allowlist --account <id>` and `/config set channels.<provider>.accounts.<id>...` also honor the target account's `configWrites`.
     - `/usage` controls the per-response usage footer; `/usage cost` prints a local cost summary from OpenClaw session logs.
     - `/restart` is enabled by default; set `commands.restart: false` to disable it.
-    - `/plugins install <spec>` accepts the same plugin specs as `openclaw plugins install`: local path/archive, npm package, `git:<repo>`, or `clawhub:<pkg>`.
-    - `/plugins enable|disable` updates plugin config and may prompt for a restart.
+    - `/plugins install <spec>` accepts the same plugin specs as `openclaw plugins install`: local path/archive, npm package, `git:<repo>`, or `clawhub:<pkg>`, then requests a Gateway restart because plugin source modules changed.
+    - `/plugins enable|disable` updates plugin config and triggers Gateway plugin reload for new agent turns.
   </Accordion>
 
   <Accordion title="Channel-specific behavior">
@@ -449,8 +449,9 @@ Examples:
 
 <Note>
   * `/plugins list` and `/plugins show` use real plugin discovery against the current workspace plus on-disk config.
+  * `/plugins install` installs from ClawHub, npm, git, local directories, and archives.
   * `/plugins enable|disable` updates plugin config only; it does not install or uninstall plugins.
-  * After enable/disable changes, restart the gateway to apply them.
+  * Enable and disable changes hot-reload Gateway plugin runtime surfaces for new agent turns; install requests a Gateway restart because plugin source modules changed.
 </Note>
 
 ## Surface notes
