@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "5a4b7640a77729f60743029009fe04e64ee978f479fb6950a7adc7e1071a8d31"
+source_hash: "1aa6a8e48a3d3f4c84f32979273d64d2d73f4a54235c18a4cc146140e7307137"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -494,7 +494,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   <Accordion title="17. Gateway runtime best practices">
     Doctor warns when the gateway service runs on Bun or a version-managed Node path (`nvm`, `fnm`, `volta`, `asdf`, etc.). WhatsApp + Telegram channels require Node, and version-manager paths can break after upgrades because the service does not load your shell init. Doctor offers to migrate to a system Node install when available (Homebrew/apt/choco).
 
-    Newly installed or repaired services keep explicit environment roots (`NVM_DIR`, `FNM_DIR`, `VOLTA_HOME`, `ASDF_DATA_DIR`, `BUN_INSTALL`, `PNPM_HOME`) and stable user-bin directories, but guessed version-manager fallback directories are only written to the service PATH when those directories exist on disk. This keeps the generated supervisor PATH aligned with the same minimal-PATH audit doctor runs later.
+    Newly installed or repaired macOS LaunchAgents use a canonical system PATH (`/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`) instead of copying the interactive shell PATH, so Volta, asdf, fnm, pnpm, and other version-manager directories do not change which Node child processes resolve. Linux services still keep explicit environment roots (`NVM_DIR`, `FNM_DIR`, `VOLTA_HOME`, `ASDF_DATA_DIR`, `BUN_INSTALL`, `PNPM_HOME`) and stable user-bin directories, but guessed version-manager fallback directories are only written to the service PATH when those directories exist on disk.
   </Accordion>
 
   <Accordion title="18. Config write + wizard metadata">

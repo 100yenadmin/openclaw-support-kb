@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "0f6fd2f1e0c1f0621f2e92c0d488669d335243e470aec893917172eef11ccb13"
+source_hash: "7dcbbffcf9334e6f9d165774624a640d636361fd0711959684d38f851e2d8787"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -99,6 +99,9 @@ It does not repair dependencies for an already-installed local plugin.
 Lightweight and core-critical bundled plugins are shipped as part of OpenClaw.
 They should either have no heavy runtime dependency tree or be moved out to a
 downloadable package on ClawHub/npm.
+
+For the current generated list of plugins that ship in the core package, install
+externally, or stay source-only, see [Plugin inventory](/plugins/plugin-inventory).
 
 Bundled plugin manifests must not request dependency staging. Large or optional
 plugin functionality should be packaged as a normal plugin and installed through

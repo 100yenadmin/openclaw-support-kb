@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "1b94093b75bff58f51b05ce1e3359bb425cf02d59a707675f6d4b11b2720266a"
+source_hash: "8ea60e09dd54391a7b63b1b94ca594407b01575a31c3078a2573dc5f646e6d13"
 doc_path: "automation/hooks.md"
 original_doc_path: "automation/hooks.md"
 duplicate_index: 1
@@ -121,7 +121,7 @@ Each event includes: `type`, `action`, `sessionKey`, `timestamp`, `messages` (pu
 
 **Command events** (`command:new`, `command:reset`): `context.sessionEntry`, `context.previousSessionEntry`, `context.commandSource`, `context.workspaceDir`, `context.cfg`.
 
-**Message events** (`message:received`): `context.from`, `context.content`, `context.channelId`, `context.metadata` (provider-specific data including `senderId`, `senderName`, `guildId`).
+**Message events** (`message:received`): `context.from`, `context.content`, `context.channelId`, `context.metadata` (provider-specific data including `senderId`, `senderName`, `guildId`). `context.content` prefers a nonblank command body for command-like messages, then falls back to the raw inbound body and generic body; it does not include agent-only enrichment such as thread history or link summaries.
 
 **Message events** (`message:sent`): `context.to`, `context.content`, `context.success`, `context.channelId`.
 

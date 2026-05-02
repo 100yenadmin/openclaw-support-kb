@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "36f9168876871765dc41619cf81a88aa40ae69a5ac9a42c7d2668150e85865ca"
+source_hash: "8e96de7a02a47e3f7ee13bbe49f00c248baf3e3225431890ed2d20cef208343d"
 doc_path: "gateway/configuration-reference.md"
 original_doc_path: "gateway/configuration-reference.md"
 duplicate_index: 1
@@ -81,10 +81,10 @@ The `models` root also owns global model-catalog behavior.
 
 * `models.mode`: provider catalog behavior (`merge` or `replace`).
 * `models.providers`: custom provider map keyed by provider id.
-* `models.pricing.enabled`: controls the background pricing bootstrap. When
-  `false`, Gateway startup skips OpenRouter and LiteLLM pricing-catalog fetches;
-  configured `models.providers.*.models[].cost` values still work for local cost
-  estimates.
+* `models.pricing.enabled`: controls the background pricing bootstrap that
+  starts after sidecars and channels reach the Gateway ready path. When `false`,
+  the Gateway skips OpenRouter and LiteLLM pricing-catalog fetches; configured
+  `models.providers.*.models[].cost` values still work for local cost estimates.
 
 ## MCP
 
@@ -594,6 +594,7 @@ Validation and safety notes:
   - Templates like `{{messages[0].subject}}` read from the payload.
   - `transform` can point to a JS/TS module returning a hook action.
     * `transform.module` must be a relative path and stays within `hooks.transformsDir` (absolute paths and traversal are rejected).
+    * Keep `hooks.transformsDir` under `~/.openclaw/hooks/transforms`; workspace skill directories are rejected. If `openclaw doctor` reports this path as invalid, move the transform module into the hooks transforms directory or remove `hooks.transformsDir`.
   - `agentId` routes to a specific agent; unknown IDs fall back to default.
   - `allowedAgentIds`: restricts explicit routing (`*` or omitted = allow all, `[]` = deny all).
   - `defaultSessionKey`: optional fixed session key for hook agent runs without explicit `sessionKey`.

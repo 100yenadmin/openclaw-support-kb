@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "b056ef16386bf518fb0471d16f7322b3052f47a63d0bbccc2e7ffcc77f636e41"
+source_hash: "0c770ae8e538afc6c079e1d25bd40750050ae6e6b47a53e4423ad8d2f546a7d7"
 doc_path: "tools/slash-commands.md"
 original_doc_path: "tools/slash-commands.md"
 duplicate_index: 1
@@ -147,6 +147,7 @@ Current source-of-truth:
 <AccordionGroup>
   <Accordion title="Sessions and runs">
     * `/new [model]` starts a new session; `/reset` is the reset alias.
+    * Control UI intercepts typed `/new` to create and switch to a fresh dashboard session; typed `/reset` still runs the Gateway's in-place reset.
     * `/reset soft [message]` keeps the current transcript, drops reused CLI backend session ids, and reruns startup/system-prompt loading in-place.
     * `/compact [instructions]` compacts the session context. See [Compaction](/concepts/compaction).
     * `/stop` aborts the current run.

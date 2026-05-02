@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "1e3068334fea74ebb4d30dbcb5337896e9880656ee3456c0e3d4787655143a88"
+source_hash: "b119379976a9543dff7af34c499b2c8cb4662ee818b78041ce2b4e3a0b46c5f1"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -366,6 +366,12 @@ The summary lists total factory time and the slowest plugin tool factories,
 including plugin id, declared tool names, result shape, and whether the tool is
 optional. Slow lines are promoted to warnings when a single factory takes at
 least 1s or total plugin tool factory prep takes at least 5s.
+
+OpenClaw caches successful plugin tool factory results for repeated resolutions
+with the same effective request context. The cache key includes the effective
+runtime config, workspace, agent/session ids, sandbox policy, browser settings,
+delivery context, requester identity, and ownership state, so factories that
+depend on those trusted fields are re-run when the context changes.
 
 If one plugin dominates the timing, inspect its runtime registrations:
 

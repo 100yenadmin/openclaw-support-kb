@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "ace6d0bd6ef23c03ed56ac6977a47c8c267c673a751de0b592624bb01b0c09c6"
+source_hash: "e445a98b4a127f8deb8dda5c4aaa0848265c1953fe5058cd719960ddec618a68"
 doc_path: "concepts/dreaming.md"
 original_doc_path: "concepts/dreaming.md"
 duplicate_index: 1
@@ -113,6 +113,8 @@ Light and REM phase hits add a small recency-decayed boost from `memory/.dreams/
 ## Scheduling
 
 When enabled, `memory-core` auto-manages one cron job for a full dreaming sweep. Each sweep runs phases in order: light → REM → deep.
+
+The sweep includes the primary runtime workspace and any configured agent workspaces, deduped by path, so subagent workspace fan-out does not exclude the main agent's `DREAMS.md` and memory state.
 
 Default cadence behavior:
 

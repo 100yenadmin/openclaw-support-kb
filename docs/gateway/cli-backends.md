@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "d5e340c3b7ff27cde59fd9c7d1756e654e71f81245c6aa8c016649d24b741ae5"
+source_hash: "61e21ff0b5f31953540ecf68c837bf6935d5e77e7cba2d2aca9af1f03823ea2d"
 doc_path: "gateway/cli-backends.md"
 original_doc_path: "gateway/cli-backends.md"
 duplicate_index: 1
@@ -216,6 +216,12 @@ binary is not already on `PATH`.
   ids are verified against an existing readable project transcript before
   resume, so phantom bindings are cleared with `reason=transcript-missing`
   instead of silently starting a fresh Claude CLI session under `--resume`.
+* Claude live sessions keep bounded JSONL output guards. Defaults allow up to
+  8 MiB and 20,000 raw JSONL lines per turn. Tool-heavy Claude turns can raise
+  them per backend with
+  `agents.defaults.cliBackends.claude-cli.reliability.outputLimits.maxTurnRawChars`
+  and `maxTurnLines`; OpenClaw clamps those settings to 64 MiB and 100,000
+  lines.
 * Stored CLI sessions are provider-owned continuity. The implicit daily session
   reset does not cut them; `/reset` and explicit `session.reset` policies still
   do.

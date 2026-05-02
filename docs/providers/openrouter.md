@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "fe432ce63ccadc79fadc9cc504dd7f8c3b0ade244d5811a33d08274a9d91e07b"
+source_hash: "63efeff86e1fbe35b1ccec41ce935ada2ec53c435a69a8865428f17fd4a8decd"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1
@@ -178,6 +178,13 @@ OpenRouter's documented app-attribution headers:
     `openrouter/auto` skip that reasoning injection. Hunter Alpha also skips
     proxy reasoning for stale configured model refs because OpenRouter could
     return final answer text in reasoning fields for that retired route.
+  </Accordion>
+
+  <Accordion title="DeepSeek V4 reasoning replay">
+    On verified OpenRouter routes, `openrouter/deepseek/deepseek-v4-flash` and
+    `openrouter/deepseek/deepseek-v4-pro` fill missing `reasoning_content` on
+    replayed assistant turns so thinking/tool conversations keep DeepSeek V4's
+    required follow-up shape.
   </Accordion>
 
   <Accordion title="OpenAI-only request shaping">

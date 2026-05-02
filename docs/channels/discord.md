@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "c6e9357aa323e6c36f2a438bbddc4056680e76228b42b91c8dead141cbd34f48"
+source_hash: "4ffbeac26fc6625d2712e7781feb746c5410485c3affd14c5821e038066d503b"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -572,6 +572,8 @@ Example:
     * explicit bot mention
     * configured mention patterns (`agents.list[].groupChat.mentionPatterns`, fallback `messages.groupChat.mentionPatterns`)
     * implicit reply-to-bot behavior in supported cases
+
+    When writing outbound Discord messages, use canonical mention syntax: `<@USER_ID>` for users, `<#CHANNEL_ID>` for channels, and `<@&ROLE_ID>` for roles. Do not use the legacy `<@!USER_ID>` nickname mention form.
 
     `requireMention` is configured per guild/channel (`channels.discord.guilds...`).
     `ignoreOtherMentions` optionally drops messages that mention another user/role but not the bot (excluding @everyone/@here).

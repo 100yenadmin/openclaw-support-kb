@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "bd6b01afb4e15cc7fbabc22c08b048ebb31f61dc75c9cd77c453cb172a0551ed"
+source_hash: "e3ed679833e5aaa1e6e6d6bfbfe210cced511db5206cb11b0cb63dda8dee20ad"
 doc_path: "plugins/google-meet.md"
 original_doc_path: "plugins/google-meet.md"
 duplicate_index: 1
@@ -28,7 +28,8 @@ Google Meet participant support for OpenClaw — the plugin is explicit by desig
 * There is no automatic consent announcement.
 * The default Chrome audio backend is `BlackHole 2ch`.
 * Chrome can run locally or on a paired node host.
-* Twilio accepts a dial-in number plus optional PIN or DTMF sequence.
+* Twilio accepts a dial-in number plus optional PIN or DTMF sequence; it
+  cannot dial a Meet URL directly.
 * The CLI command is `googlemeet`; `meet` is reserved for broader agent
   teleconference workflows.
 
@@ -1556,19 +1557,21 @@ participant:
 * Run `openclaw voicecall tail` and check that Twilio webhooks are arriving at
   the Gateway.
 * Run `openclaw logs --follow` and look for the Twilio Meet sequence: Google
-  Meet delegates the join, Voice Call stores pre-connect DTMF TwiML, serves
-  that initial TwiML, then serves realtime TwiML and starts the realtime bridge
-  with `initialGreeting=queued`.
+  Meet delegates the join, Voice Call starts the phone leg, Google Meet waits
+  `voiceCall.dtmfDelayMs`, sends DTMF with `voicecall.dtmf`, waits
+  `voiceCall.postDtmfSpeechDelayMs`, then requests intro speech with
+  `voicecall.speak`.
 * Re-run `openclaw googlemeet setup --transport twilio`; a green setup check is
   required but does not prove the meeting PIN sequence is correct.
 * Confirm the dial-in number belongs to the same Meet invitation and region as
   the PIN.
-* Increase the leading pauses in `--dtmf-sequence` if Meet answers slowly, for
-  example `wwww123456#`.
+* Increase `voiceCall.dtmfDelayMs` if Meet answers slowly or the call transcript
+  still shows the prompt asking for a PIN after DTMF was sent.
 * If the participant joins but you do not hear the greeting, check
-  `openclaw logs --follow` for realtime TwiML, realtime bridge startup, and
-  `initialGreeting=queued`. The greeting is generated from the initial
-  `voicecall.start` message after the realtime bridge connects.
+  `openclaw logs --follow` for the post-DTMF `voicecall.speak` request and
+  either media-stream TTS playback or the Twilio `<Say>` fallback. If the call
+  transcript still contains "enter the meeting PIN", the phone leg has not joined
+  the Meet room yet, so meeting participants will not hear speech.
 
 If webhooks do not arrive, debug the Voice Call plugin first: the provider must
 reach `plugins.entries.voice-call.config.publicUrl` or the configured tunnel.

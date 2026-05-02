@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "c1363da35613b99ce50b52d3e573d3dfdbdb166e2e9e051126c25548da6dc81a"
+source_hash: "da8001dd7a50a66f1dcdf6818c7098c94d5a135da7ab348cd46a47901e2f6c18"
 doc_path: "reference/token-use.md"
 original_doc_path: "reference/token-use.md"
 duplicate_index: 1
@@ -127,12 +127,13 @@ These are **USD per 1M tokens** for `input`, `output`, `cacheRead`, and
 `cacheWrite`. If pricing is missing, OpenClaw shows tokens only. OAuth tokens
 never show dollar cost.
 
-Gateway startup also performs an optional background pricing bootstrap for
-configured model refs that do not already have local pricing. That bootstrap
-fetches remote OpenRouter and LiteLLM pricing catalogs. Set
-`models.pricing.enabled: false` to skip those startup catalog fetches on offline
-or restricted networks; explicit `models.providers.*.models[].cost` entries
-continue to drive local cost estimates.
+After sidecars and channels reach the Gateway ready path, OpenClaw starts an
+optional background pricing bootstrap for configured model refs that do not
+already have local pricing. That bootstrap fetches remote OpenRouter and LiteLLM
+pricing catalogs. Set `models.pricing.enabled: false` to skip those catalog
+fetches on offline or restricted networks; explicit
+`models.providers.*.models[].cost` entries continue to drive local cost
+estimates.
 
 ## Cache TTL and pruning impact
 
