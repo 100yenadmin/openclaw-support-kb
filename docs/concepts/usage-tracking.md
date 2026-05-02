@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "4dcd41da6c4e8b2e2d8c6005e969369d81f66cff2453e27c6379492797032cd0"
+source_hash: "d37fb191d329f08f77d0e2dc27fec673801622686d1d1cb0736c250fc006bf59"
 doc_path: "concepts/usage-tracking.md"
 original_doc_path: "concepts/usage-tracking.md"
 duplicate_index: 1
@@ -46,6 +46,9 @@ Source: https://docs.openclaw.ai/concepts/usage-tracking
   `minimax`, `minimax-cn`, and `minimax-portal` as the same MiniMax quota
   surface, prefers stored MiniMax OAuth when present, and otherwise falls back
   to `MINIMAX_CODE_PLAN_KEY`, `MINIMAX_CODING_API_KEY`, or `MINIMAX_API_KEY`.
+  Usage polling derives the Coding Plan host from `models.providers.minimax-portal.baseUrl`
+  or `models.providers.minimax.baseUrl` when configured, and otherwise uses the
+  MiniMax CN host.
   MiniMax's raw `usage_percent` / `usagePercent` fields mean **remaining**
   quota, so OpenClaw inverts them before display; count-based fields win when
   present.

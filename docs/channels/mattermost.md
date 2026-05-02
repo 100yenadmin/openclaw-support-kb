@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "a345582667726b2136bc99b2cbe77de803caf44d7d687c5399eb6d0468e577e8"
+source_hash: "e9fb3a82cf7bda6c51cb2e5328b787d8413a6e69a1a0b4d2f9748c542b9074fc"
 doc_path: "channels/mattermost.md"
 original_doc_path: "channels/mattermost.md"
 duplicate_index: 1
@@ -13,15 +13,11 @@ Source: https://docs.openclaw.ai/channels/mattermost
 
 
 
-Status: bundled plugin (bot token + WebSocket events). Channels, groups, and DMs are supported. Mattermost is a self-hostable team messaging platform; see the official site at [mattermost.com](https://mattermost.com) for product details and downloads.
+Status: downloadable plugin (bot token + WebSocket events). Channels, groups, and DMs are supported. Mattermost is a self-hostable team messaging platform; see the official site at [mattermost.com](https://mattermost.com) for product details and downloads.
 
-## Bundled plugin
+## Install
 
-<Note>
-  Mattermost ships as a bundled plugin in current OpenClaw releases, so normal packaged builds do not need a separate install.
-</Note>
-
-If you are on an older build or a custom install that excludes Mattermost, install a current npm package when one is published:
+Install Mattermost before configuring the channel:
 
 <Tabs>
   <Tab title="npm registry">
@@ -36,10 +32,6 @@ If you are on an older build or a custom install that excludes Mattermost, insta
     ```
   </Tab>
 </Tabs>
-
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
 
 Details: [Plugins](/tools/plugin)
 

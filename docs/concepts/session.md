@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "e60ba225f421d6eab9dfdacd927db99c23452ec71252c13282675682c46ed40a"
+source_hash: "e146f92355c914add72186c6e169d462a7437dbc342bb0fbbb825579f4979c17"
 doc_path: "concepts/session.md"
 original_doc_path: "concepts/session.md"
 duplicate_index: 1
@@ -132,6 +132,10 @@ to `"enforce"` for automatic cleanup:
 ```
 
 For production-sized `maxEntries` limits, Gateway runtime writes use a small high-water buffer and clean back down to the configured cap in batches. Session store reads do not prune or cap entries during Gateway startup. This avoids running full store cleanup on every startup or isolated cron session. `openclaw sessions cleanup --enforce` applies the cap immediately.
+
+Maintenance preserves durable external conversation pointers, including group
+sessions and thread-scoped chat sessions, while still allowing synthetic cron,
+hook, heartbeat, ACP, and sub-agent entries to age out.
 
 Preview with `openclaw sessions cleanup --dry-run`.
 

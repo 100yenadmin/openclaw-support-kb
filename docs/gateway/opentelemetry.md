@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "82d7854a9773b7666f2b075a2c6c49d4aae5ffb57f92d60079663dc6df523f48"
+source_hash: "63064ff6e95fc65a087b70842002a5112f882a143ea2d4125d08fdb389971035"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/gateway/opentelemetry
 
 
 
-OpenClaw exports diagnostics through the bundled `diagnostics-otel` plugin
+OpenClaw exports diagnostics through the official `diagnostics-otel` plugin
 using **OTLP/HTTP (protobuf)**. Any collector or backend that accepts OTLP/HTTP
 works without code changes. For local file logs and how to read them, see
 [Logging](/logging).
@@ -32,6 +32,12 @@ works without code changes. For local file logs and how to read them, see
   enabled, so the in-process cost stays near zero by default.
 
 ## Quick start
+
+For packaged installs, install the plugin first:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install @openclaw/diagnostics-otel
+```
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {

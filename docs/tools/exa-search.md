@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exa search"
 source: "https://docs.openclaw.ai/tools/exa-search"
-source_hash: "bc3f01c53dc0d4de34b7d1db05bb9032a31cb5e6ce3750f8b83e07e70a433864"
+source_hash: "5a6d23398b3b31cb2b3922da54ad5b96f644ae420944cee180d7b3ceb660fd9b"
 doc_path: "tools/exa-search.md"
 original_doc_path: "tools/exa-search.md"
 duplicate_index: 1
@@ -44,6 +44,7 @@ extraction (highlights, text, summaries).
         config: {
           webSearch: {
             apiKey: "exa-...", // optional if EXA_API_KEY is set
+            baseUrl: "https://api.exa.ai", // optional; OpenClaw appends /search
           },
         },
       },
@@ -61,6 +62,14 @@ extraction (highlights, text, summaries).
 
 **Environment alternative:** set `EXA_API_KEY` in the Gateway environment.
 For a gateway install, put it in `~/.openclaw/.env`.
+
+## Base URL override
+
+Set `plugins.entries.exa.config.webSearch.baseUrl` when Exa search requests
+should go through a compatible proxy or alternate Exa endpoint. OpenClaw
+normalizes bare hosts by prepending `https://` and appends `/search` unless the
+path already ends there. The resolved endpoint is included in the search cache
+key, so results from different Exa endpoints are not shared.
 
 ## Tool parameters
 

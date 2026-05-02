@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels/index"
-source_hash: "5270bec07025affd7c5a9d4f5a9a93e4902a264958a07fe0066267ddaf068eb4"
+source_hash: "55dae8838c38d8d7488d88c329299a66bf1239e69b52e0b3f57800c9659be1e8"
 doc_path: "channels/index.md"
 original_doc_path: "channels/index.md"
 duplicate_index: 1
@@ -31,12 +31,12 @@ Text is supported everywhere; media and reactions vary by channel.
 * [BlueBubbles](/channels/bluebubbles) — **Recommended for iMessage**; uses the BlueBubbles macOS server REST API with full feature support (bundled plugin; edit, unsend, effects, reactions, group management — edit currently broken on macOS 26 Tahoe).
 * [Discord](/channels/discord) — Discord Bot API + Gateway; supports servers, channels, and DMs.
 * [Feishu](/channels/feishu) — Feishu/Lark bot via WebSocket (bundled plugin).
-* [Google Chat](/channels/googlechat) — Google Chat API app via HTTP webhook.
+* [Google Chat](/channels/googlechat) — Google Chat API app via HTTP webhook (downloadable plugin).
 * [iMessage (legacy)](/channels/imessage) — Legacy macOS integration via imsg CLI (deprecated, use BlueBubbles for new setups).
 * [IRC](/channels/irc) — Classic IRC servers; channels + DMs with pairing/allowlist controls.
-* [LINE](/channels/line) — LINE Messaging API bot (bundled plugin).
-* [Matrix](/channels/matrix) — Matrix protocol (bundled plugin).
-* [Mattermost](/channels/mattermost) — Bot API + WebSocket; channels, groups, DMs (bundled plugin).
+* [LINE](/channels/line) — LINE Messaging API bot (downloadable plugin).
+* [Matrix](/channels/matrix) — Matrix protocol (downloadable plugin).
+* [Mattermost](/channels/mattermost) — Bot API + WebSocket; channels, groups, DMs (downloadable plugin).
 * [Microsoft Teams](/channels/msteams) — Bot Framework; enterprise support (bundled plugin).
 * [Nextcloud Talk](/channels/nextcloud-talk) — Self-hosted chat via Nextcloud Talk (bundled plugin).
 * [Nostr](/channels/nostr) — Decentralized DMs via NIP-04 (bundled plugin).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics flags"
 source: "https://docs.openclaw.ai/diagnostics/flags"
-source_hash: "65fac505cad7700d2cf591084cf206cce6ca8748dd53e764852b79810cefcd71"
+source_hash: "6175253026d7b3a6afa2c2fefdbf0c14ea28274c48deb5053dddeb7daaf4c958"
 doc_path: "diagnostics/flags.md"
 original_doc_path: "diagnostics/flags.md"
 duplicate_index: 1
@@ -38,7 +38,7 @@ Multiple flags:
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   "diagnostics": {
-    "flags": ["telegram.http", "gateway.*"]
+    "flags": ["telegram.http", "brave.http", "gateway.*"]
   }
 }
 ```
@@ -118,6 +118,12 @@ Filter for Telegram HTTP diagnostics:
 rg "telegram http error" /tmp/openclaw/openclaw-*.log
 ```
 
+Filter for Brave Search HTTP diagnostics:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+rg "brave http" /tmp/openclaw/openclaw-*.log
+```
+
 Or tail while reproducing:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
@@ -129,6 +135,7 @@ For remote gateways, you can also use `openclaw logs --follow` (see [/cli/logs](
 ## Notes
 
 * If `logging.level` is set higher than `warn`, these logs may be suppressed. Default `info` is fine.
+* `brave.http` logs Brave Search request URLs/query params, response status/timing, and cache hit/miss/write events. It does not log API keys or response bodies, but search queries can be sensitive.
 * Flags are safe to leave enabled; they only affect log volume for the specific subsystem.
 * Use [/logging](/logging) to change log destinations, levels, and redaction.
 

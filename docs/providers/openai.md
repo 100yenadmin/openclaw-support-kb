@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "15931be4aeea2284616283f02e0ee8ed0da5589a2277557261cbcb6df520e806"
+source_hash: "eddbfc8d07991fd46397822a72e9333537207b0a7b049c826d22aaec48d0b707"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1
@@ -202,9 +202,9 @@ Choose your preferred auth method and follow the setup steps.
 
       <Step title="Use the native Codex runtime">
         ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-        openclaw config set plugins.entries.codex '{ enabled: true }' --strict-json --merge
+        openclaw config set plugins.entries.codex '{"enabled":true}' --strict-json --merge
         openclaw config set agents.defaults.model.primary openai/gpt-5.5
-        openclaw config set agents.defaults.agentRuntime '{ id: "codex", fallback: "none" }' --strict-json
+        openclaw config set agents.defaults.agentRuntime '{"id":"codex","fallback":"none"}' --strict-json
         ```
       </Step>
 

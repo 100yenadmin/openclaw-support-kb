@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health checks"
 source: "https://docs.openclaw.ai/gateway/health"
-source_hash: "954f16bcbcac6ccce1ad33e1ba6f4cdbba0fcb86847d74f6f7468bfddfeefb63"
+source_hash: "50a43335ff5617b88839d696d5caaa2d883305db6e86ab3a6ee42b06febb3698"
 doc_path: "gateway/health.md"
 original_doc_path: "gateway/health.md"
 duplicate_index: 1
@@ -25,6 +25,12 @@ Short guide to verify channel connectivity without guessing.
 * `openclaw health --json` — machine-readable health snapshot output.
 * Send `/status` as a standalone message in WhatsApp/WebChat to get a status reply without invoking the agent.
 * Logs: tail `/tmp/openclaw/openclaw-*.log` and filter for `web-heartbeat`, `web-reconnect`, `web-auto-reply`, `web-inbound`.
+
+For Discord and other chat providers, session rows are not socket liveness.
+`openclaw sessions`, Gateway `sessions.list`, and the agent `sessions_list` tool
+read stored conversation state. A provider can reconnect and show healthy channel
+status before any new session row is materialized. Use the channel status and
+health commands above for live connectivity checks.
 
 ## Deep diagnostics
 

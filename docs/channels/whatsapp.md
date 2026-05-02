@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "4727fe8106d16c12a70322c2eeb7d38ae64f88b1dd8c6a3562b1982a40db5ce5"
+source_hash: "a70dc0dc5b60dd0a2890e2005bad682eb599fd64da841237ed637e8c217dfcac"
 doc_path: "channels/whatsapp.md"
 original_doc_path: "channels/whatsapp.md"
 duplicate_index: 1
@@ -218,6 +218,7 @@ content and identifiers.
     Runtime behavior details:
 
     * pairings are persisted in channel allow-store and merged with configured `allowFrom`
+    * scheduled automation and heartbeat recipient fallback use explicit delivery targets or configured `allowFrom`; DM pairing approvals are not implicit cron or heartbeat recipients
     * if no allowlist is configured, the linked self number is allowed by default
     * OpenClaw never auto-pairs outbound `fromMe` DMs (messages you send to yourself from the linked device)
   </Tab>

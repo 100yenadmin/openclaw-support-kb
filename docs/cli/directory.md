@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "e4fed58202da39ea19478d1e230d758fc87d50354b7cbbe10bd8f070d9c9fd82"
+source_hash: "af65e95e656a59687e5a5209645ac30aa1230832bbe0cbf684b5a8778e0b36d1"
 doc_path: "cli/directory.md"
 original_doc_path: "cli/directory.md"
 duplicate_index: 1
@@ -27,6 +27,7 @@ Directory lookups for channels that support it (contacts/peers, groups, and “m
 
 * `directory` is meant to help you find IDs you can paste into other commands (especially `openclaw message send --target ...`).
 * For many channels, results are config-backed (allowlists / configured groups) rather than a live provider directory.
+* Installed channel plugins can still omit directory support; in that case the command reports the unsupported directory operation instead of reinstalling the plugin.
 * Default output is `id` (and sometimes `name`) separated by a tab; use `--json` for scripting.
 
 ## Using results with `message send`

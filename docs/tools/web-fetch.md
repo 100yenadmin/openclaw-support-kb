@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "6b0564dc4bebb16a3881d9598b2a5e9bd0d2de419fd881776ef04f79d3b25b79"
+source_hash: "4d00743a9f0fcf14b6fb7d2e6487e63b4196d4cbadb2b1a44eecb0ed06658446"
 doc_path: "tools/web-fetch.md"
 original_doc_path: "tools/web-fetch.md"
 duplicate_index: 1
@@ -134,8 +134,9 @@ Legacy `tools.web.fetch.firecrawl.*` config is auto-migrated by `openclaw doctor
 </Note>
 
 <Note>
-  Firecrawl `baseUrl` overrides are locked down: they must use `https://` and
-  the official Firecrawl host (`api.firecrawl.dev`).
+  Firecrawl `baseUrl` overrides are locked down: hosted traffic uses
+  `https://api.firecrawl.dev`; self-hosted overrides must target private or
+  internal endpoints, and `http://` is accepted only for those private targets.
 </Note>
 
 Current runtime behavior:

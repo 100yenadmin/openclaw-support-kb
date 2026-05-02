@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Active memory"
 source: "https://docs.openclaw.ai/concepts/active-memory"
-source_hash: "e4d3b6d71dab2ef73b56fd623d86532d36506a9bbe2535e1dacffc9820ed11d6"
+source_hash: "9c8b93efc7eed37a98f4bc9b0e4d940d1fc23661efd0ede68cec11a60e02a0a8"
 doc_path: "concepts/active-memory.md"
 original_doc_path: "concepts/active-memory.md"
 duplicate_index: 1
@@ -561,24 +561,25 @@ plugins.entries.active-memory
 
 The most important fields are:
 
-| Key                         | Type                                                                                                 | Meaning                                                                                                |
-| --------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `enabled`                   | `boolean`                                                                                            | Enables the plugin itself                                                                              |
-| `config.agents`             | `string[]`                                                                                           | Agent ids that may use active memory                                                                   |
-| `config.model`              | `string`                                                                                             | Optional blocking memory sub-agent model ref; when unset, active memory uses the current session model |
-| `config.allowedChatTypes`   | `("direct" \| "group" \| "channel")[]`                                                               | Session types that may run Active Memory; defaults to direct-message style sessions                    |
-| `config.allowedChatIds`     | `string[]`                                                                                           | Optional per-conversation allowlist applied after `allowedChatTypes`; non-empty lists fail closed      |
-| `config.deniedChatIds`      | `string[]`                                                                                           | Optional per-conversation denylist that overrides allowed session types and allowed ids                |
-| `config.queryMode`          | `"message" \| "recent" \| "full"`                                                                    | Controls how much conversation the blocking memory sub-agent sees                                      |
-| `config.promptStyle`        | `"balanced" \| "strict" \| "contextual" \| "recall-heavy" \| "precision-heavy" \| "preference-only"` | Controls how eager or strict the blocking memory sub-agent is when deciding whether to return memory   |
-| `config.thinking`           | `"off" \| "minimal" \| "low" \| "medium" \| "high" \| "xhigh" \| "adaptive" \| "max"`                | Advanced thinking override for the blocking memory sub-agent; default `off` for speed                  |
-| `config.promptOverride`     | `string`                                                                                             | Advanced full prompt replacement; not recommended for normal use                                       |
-| `config.promptAppend`       | `string`                                                                                             | Advanced extra instructions appended to the default or overridden prompt                               |
-| `config.timeoutMs`          | `number`                                                                                             | Hard timeout for the blocking memory sub-agent, capped at 120000 ms                                    |
-| `config.maxSummaryChars`    | `number`                                                                                             | Maximum total characters allowed in the active-memory summary                                          |
-| `config.logging`            | `boolean`                                                                                            | Emits active memory logs while tuning                                                                  |
-| `config.persistTranscripts` | `boolean`                                                                                            | Keeps blocking memory sub-agent transcripts on disk instead of deleting temp files                     |
-| `config.transcriptDir`      | `string`                                                                                             | Relative blocking memory sub-agent transcript directory under the agent sessions folder                |
+| Key                          | Type                                                                                                 | Meaning                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `enabled`                    | `boolean`                                                                                            | Enables the plugin itself                                                                              |
+| `config.agents`              | `string[]`                                                                                           | Agent ids that may use active memory                                                                   |
+| `config.model`               | `string`                                                                                             | Optional blocking memory sub-agent model ref; when unset, active memory uses the current session model |
+| `config.allowedChatTypes`    | `("direct" \| "group" \| "channel")[]`                                                               | Session types that may run Active Memory; defaults to direct-message style sessions                    |
+| `config.allowedChatIds`      | `string[]`                                                                                           | Optional per-conversation allowlist applied after `allowedChatTypes`; non-empty lists fail closed      |
+| `config.deniedChatIds`       | `string[]`                                                                                           | Optional per-conversation denylist that overrides allowed session types and allowed ids                |
+| `config.queryMode`           | `"message" \| "recent" \| "full"`                                                                    | Controls how much conversation the blocking memory sub-agent sees                                      |
+| `config.promptStyle`         | `"balanced" \| "strict" \| "contextual" \| "recall-heavy" \| "precision-heavy" \| "preference-only"` | Controls how eager or strict the blocking memory sub-agent is when deciding whether to return memory   |
+| `config.thinking`            | `"off" \| "minimal" \| "low" \| "medium" \| "high" \| "xhigh" \| "adaptive" \| "max"`                | Advanced thinking override for the blocking memory sub-agent; default `off` for speed                  |
+| `config.promptOverride`      | `string`                                                                                             | Advanced full prompt replacement; not recommended for normal use                                       |
+| `config.promptAppend`        | `string`                                                                                             | Advanced extra instructions appended to the default or overridden prompt                               |
+| `config.timeoutMs`           | `number`                                                                                             | Hard timeout for the blocking memory sub-agent, capped at 120000 ms                                    |
+| `config.setupGraceTimeoutMs` | `number`                                                                                             | Advanced extra setup budget before the recall timeout expires; defaults to 0 and is capped at 30000 ms |
+| `config.maxSummaryChars`     | `number`                                                                                             | Maximum total characters allowed in the active-memory summary                                          |
+| `config.logging`             | `boolean`                                                                                            | Emits active memory logs while tuning                                                                  |
+| `config.persistTranscripts`  | `boolean`                                                                                            | Keeps blocking memory sub-agent transcripts on disk instead of deleting temp files                     |
+| `config.transcriptDir`       | `string`                                                                                             | Relative blocking memory sub-agent transcript directory under the agent sessions folder                |
 
 Useful tuning fields:
 

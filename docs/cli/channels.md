@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "ecff84fe52252898a47ea246966b361821f5962be81e4f122664568be62d422b"
+source_hash: "a01821d95a9ffd87dac853adedad20e2c104612f1b7d912f3b78b2bf49634021"
 doc_path: "cli/channels.md"
 original_doc_path: "cli/channels.md"
 duplicate_index: 1
@@ -45,6 +45,12 @@ openclaw channels logs --channel all
 state plus probe results such as `works`, `probe failed`, `audit ok`, or `audit failed`.
 If the gateway is unreachable, `channels status` falls back to config-only summaries
 instead of live probe output.
+
+Do not use `openclaw sessions`, Gateway `sessions.list`, or the agent
+`sessions_list` tool as a channel socket-health signal. Those surfaces report
+stored conversation rows, not provider runtime state. After a Discord provider
+restart, a connected but quiet account may be healthy while no Discord session
+row appears until the next inbound or outbound conversation event.
 
 ## Add / remove accounts
 

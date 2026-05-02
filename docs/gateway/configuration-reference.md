@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "84108cb9b3c8af58e73bd4d849c1d86591ba6c89fe186c9274f8a416a2e4f84c"
+source_hash: "36f9168876871765dc41619cf81a88aa40ae69a5ac9a42c7d2668150e85865ca"
 doc_path: "gateway/configuration-reference.md"
 original_doc_path: "gateway/configuration-reference.md"
 duplicate_index: 1
@@ -204,7 +204,7 @@ See [MCP](/cli/mcp#openclaw-as-an-mcp-client-registry) and
 * Channel plugin account/runtime settings live under `channels.<id>` and should be described by the owning plugin's manifest `channelConfigs` metadata, not by a central OpenClaw option registry.
 * `plugins.entries.firecrawl.config.webFetch`: Firecrawl web-fetch provider settings.
   * `apiKey`: Firecrawl API key (accepts SecretRef). Falls back to `plugins.entries.firecrawl.config.webSearch.apiKey`, legacy `tools.web.fetch.firecrawl.apiKey`, or `FIRECRAWL_API_KEY` env var.
-  * `baseUrl`: Firecrawl API base URL (default: `https://api.firecrawl.dev`).
+  * `baseUrl`: Firecrawl API base URL (default: `https://api.firecrawl.dev`; self-hosted overrides must target private/internal endpoints).
   * `onlyMainContent`: extract only the main content from pages (default: `true`).
   * `maxAgeMs`: maximum cache age in milliseconds (default: `172800000` / 2 days).
   * `timeoutSeconds`: scrape request timeout in seconds (default: `60`).
@@ -1019,7 +1019,7 @@ Notes:
 * `enabled`: global ACP feature gate (default: `true`; set `false` to hide ACP dispatch and spawn affordances).
 * `dispatch.enabled`: independent gate for ACP session turn dispatch (default: `true`). Set `false` to keep ACP commands available while blocking execution.
 * `backend`: default ACP runtime backend id (must match a registered ACP runtime plugin).
-  If `plugins.allow` is set, include the backend plugin id (for example `acpx`) or the bundled default plugin will not load.
+  Install the backend plugin first, and if `plugins.allow` is set, include the backend plugin id (for example `acpx`) or the ACP backend will not load.
 * `defaultAgent`: fallback ACP target agent id when spawns do not specify an explicit target.
 * `allowedAgents`: allowlist of agent ids permitted for ACP runtime sessions; empty means no additional restriction.
 * `maxConcurrentSessions`: maximum concurrently active ACP sessions.

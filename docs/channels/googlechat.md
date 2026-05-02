@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "0444f2e790bbf61acf02c1d276b472a170a5cb9894384981ef5805379015308d"
+source_hash: "9cd8ed18c8b34665dd7ad2df1a7aae822793e0bfb354a6f2c41578bbf38d1239"
 doc_path: "channels/googlechat.md"
 original_doc_path: "channels/googlechat.md"
 duplicate_index: 1
@@ -13,7 +13,21 @@ Source: https://docs.openclaw.ai/channels/googlechat
 
 
 
-Status: ready for DMs + spaces via Google Chat API webhooks (HTTP only).
+Status: downloadable plugin for DMs + spaces via Google Chat API webhooks (HTTP only).
+
+## Install
+
+Install Google Chat before configuring the channel:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install @openclaw/googlechat
+```
+
+Local checkout (when running from a git repo):
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install ./path/to/local/googlechat-plugin
+```
 
 ## Quick setup (beginner)
 

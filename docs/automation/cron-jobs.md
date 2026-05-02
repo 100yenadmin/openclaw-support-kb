@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "42d0bd8a0efc9cfc769b7f9bb800ada8ac2031e1343c56789cf11d80a493f722"
+source_hash: "0d31c51251aceb4543ec2fb9a907f428607820801498f3fc6c13446fac91c76c"
 doc_path: "automation/cron-jobs.md"
 original_doc_path: "automation/cron-jobs.md"
 duplicate_index: 1
@@ -175,6 +175,8 @@ When announce delivery uses `channel: "last"` or omits `channel`, a provider-pre
 For isolated jobs, chat delivery is shared. If a chat route is available, the agent can use the `message` tool even when the job uses `--no-deliver`. If the agent sends to the configured/current target, OpenClaw skips the fallback announce. Otherwise `announce`, `webhook`, and `none` only control what the runner does with the final reply after the agent turn.
 
 When an agent creates an isolated reminder from an active chat, OpenClaw stores the preserved live delivery target for the fallback announce route. Internal session keys may be lowercase; provider delivery targets are not reconstructed from those keys when current chat context is available.
+
+Implicit announce delivery uses configured channel allowlists to validate and reroute stale targets. DM pairing-store approvals are not fallback automation recipients; set `delivery.to` or configure the channel `allowFrom` entry when a scheduled job should proactively send to a DM.
 
 Failure notifications follow a separate destination path:
 

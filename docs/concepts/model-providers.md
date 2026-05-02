@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "95fed571900f43c93690ad5f45abdcc5a816131a00ae8ad597b799f9d1cccd61"
+source_hash: "592ea4084f5a681c7f80ee6c55239e22763aa7c05672273e6b913fce0e1fde7a"
 doc_path: "concepts/model-providers.md"
 original_doc_path: "concepts/model-providers.md"
 duplicate_index: 1
@@ -567,7 +567,7 @@ Then set a model (replace with one of the IDs returned by `http://localhost:1234
 }
 ```
 
-OpenClaw uses LM Studio's native `/api/v1/models` and `/api/v1/models/load` for discovery + auto-load, with `/v1/chat/completions` for inference by default. See [/providers/lmstudio](/providers/lmstudio) for setup and troubleshooting.
+OpenClaw uses LM Studio's native `/api/v1/models` and `/api/v1/models/load` for discovery + auto-load, with `/v1/chat/completions` for inference by default. If you want LM Studio JIT loading, TTL, and auto-evict to own model lifecycle, set `models.providers.lmstudio.params.preload: false`. See [/providers/lmstudio](/providers/lmstudio) for setup and troubleshooting.
 
 ### Ollama
 

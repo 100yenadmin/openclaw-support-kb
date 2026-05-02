@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "76c4a85c98105cf6f3656a913dd2d82a7df8c579fa8b156bcda974aee116752d"
+source_hash: "a213905e56a2e16bfde881ab6491608bb1d9cd8d784c0ea7ccfea27d265b903a"
 doc_path: "tools/subagents.md"
 original_doc_path: "tools/subagents.md"
 duplicate_index: 1
@@ -32,7 +32,9 @@ Primary goals:
   and keep your main agent on a higher-quality model. Configure via
   `agents.defaults.subagents.model` or per-agent overrides. When a child
   genuinely needs the requester's current transcript, the agent can request
-  `context: "fork"` on that one spawn.
+  `context: "fork"` on that one spawn. Thread-bound subagent sessions default
+  to `context: "fork"` because they branch the current conversation into a
+  follow-up thread.
 </Note>
 
 ## Slash command
@@ -196,7 +198,7 @@ session to confirm the effective tool list.
 </ParamField>
 
 <ParamField type="&#x22;isolated&#x22; | &#x22;fork&#x22;">
-  `fork` branches the requester's current transcript into the child session. Native sub-agents only. Use `fork` only when the child needs the current transcript.
+  `fork` branches the requester's current transcript into the child session. Native sub-agents only. Thread-bound spawns default to `fork`; non-thread spawns default to `isolated`.
 </ParamField>
 
 <Warning>
@@ -220,7 +222,7 @@ persistent thread-bound subagent sessions (`sessions_spawn` with
 `channels.discord.threadBindings.enabled`,
 `channels.discord.threadBindings.idleHours`,
 `channels.discord.threadBindings.maxAgeHours`, and
-`channels.discord.threadBindings.spawnSubagentSessions`.
+`channels.discord.threadBindings.spawnSessions`.
 
 ### Quick flow
 

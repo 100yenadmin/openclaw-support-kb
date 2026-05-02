@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "cc8d8d61ec9cbfa3cb801258f1f2f9e1c787e3edafd34a46f796ab5143d2c746"
+source_hash: "37c3324b125ee8f7e378b96cd5a3c906918d8e3402dc24c32cc09d8312b0a93e"
 doc_path: "reference/transcript-hygiene.md"
 original_doc_path: "reference/transcript-hygiene.md"
 duplicate_index: 1
@@ -182,6 +182,12 @@ inter-session user turns that only have provenance metadata.
 **OpenRouter Gemini**
 
 * Thought signature cleanup: strip non-base64 `thought_signature` values (keep base64).
+
+**OpenRouter Anthropic**
+
+* Trailing assistant prefill turns are stripped from verified OpenRouter
+  OpenAI-compatible Anthropic model payloads when reasoning is enabled, matching
+  direct Anthropic and Cloudflare Anthropic replay behavior.
 
 **Everything else**
 

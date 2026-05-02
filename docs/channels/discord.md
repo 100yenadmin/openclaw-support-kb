@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "766b2d112787d3e0d3b1b754dc1faed28e0a86e013ee0c6f64cf1696ddc477ba"
+source_hash: "c6e9357aa323e6c36f2a438bbddc4056680e76228b42b91c8dead141cbd34f48"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -728,7 +728,8 @@ Default slash command settings:
             enabled: true,
             idleHours: 24,
             maxAgeHours: 0,
-            spawnSubagentSessions: false, // opt-in
+            spawnSessions: true,
+            defaultSpawnContext: "fork",
           },
         },
       },
@@ -739,8 +740,9 @@ Default slash command settings:
 
     * `session.threadBindings.*` sets global defaults.
     * `channels.discord.threadBindings.*` overrides Discord behavior.
-    * `spawnSubagentSessions` must be true to auto-create/bind threads for `sessions_spawn({ thread: true })`.
-    * `spawnAcpSessions` must be true to auto-create/bind threads for ACP (`/acp spawn ... --thread ...` or `sessions_spawn({ runtime: "acp", thread: true })`).
+    * `spawnSessions` controls auto-create/bind threads for `sessions_spawn({ thread: true })` and ACP thread spawns. Default: `true`.
+    * `defaultSpawnContext` controls native subagent context for thread-bound spawns. Default: `"fork"`.
+    * Deprecated `spawnSubagentSessions`/`spawnAcpSessions` keys are migrated by `openclaw doctor --fix`.
     * If thread bindings are disabled for an account, `/focus` and related thread binding operations are unavailable.
 
     See [Sub-agents](/tools/subagents), [ACP Agents](/tools/acp-agents), and [Configuration Reference](/gateway/configuration-reference).
@@ -805,7 +807,7 @@ Default slash command settings:
 
     * `/acp spawn codex --bind here` binds the current channel or thread in place and keeps future messages on the same ACP session. Thread messages inherit the parent channel binding.
     * In a bound channel or thread, `/new` and `/reset` reset the same ACP session in place. Temporary thread bindings can override target resolution while active.
-    * `spawnAcpSessions` is only required when OpenClaw needs to create/bind a child thread via `--thread auto|here`.
+    * `spawnSessions` gates child thread creation/binding via `--thread auto|here`.
 
     See [ACP Agents](/tools/acp-agents) for binding behavior details.
   </Accordion>

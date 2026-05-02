@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "159bdb6457b365fdb449b96ebdfdc8b816be028e073701215e30dcb17b25786c"
+source_hash: "59f81662c2a34c2c26b940bd90f4b70750034a8a01a7b199ae0fe6ae35220dab"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1
@@ -289,7 +289,8 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
         enabled: true,
         idleHours: 24,
         maxAgeHours: 0,
-        spawnSubagentSessions: false, // opt-in for sessions_spawn({ thread: true })
+        spawnSessions: true,
+        defaultSpawnContext: "fork",
       },
       voice: {
         enabled: true,
@@ -340,7 +341,8 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
   * `enabled`: Discord override for thread-bound session features (`/focus`, `/unfocus`, `/agents`, `/session idle`, `/session max-age`, and bound delivery/routing)
   * `idleHours`: Discord override for inactivity auto-unfocus in hours (`0` disables)
   * `maxAgeHours`: Discord override for hard max age in hours (`0` disables)
-  * `spawnSubagentSessions`: opt-in switch for `sessions_spawn({ thread: true })` auto thread creation/binding
+  * `spawnSessions`: switch for `sessions_spawn({ thread: true })` and ACP thread-spawn auto thread creation/binding (default: `true`)
+  * `defaultSpawnContext`: native subagent context for thread-bound spawns (`"fork"` by default)
 * Top-level `bindings[]` entries with `type: "acp"` configure persistent ACP bindings for channels and threads (use channel/thread id in `match.peer.id`). Field semantics are shared in [ACP Agents](/tools/acp-agents#channel-specific-settings).
 * `channels.discord.ui.components.accentColor` sets the accent color for Discord components v2 containers.
 * `channels.discord.voice` enables Discord voice channel conversations and optional auto-join + LLM + TTS overrides. Text-only Discord configs leave voice off by default; set `channels.discord.voice.enabled=true` to opt in.

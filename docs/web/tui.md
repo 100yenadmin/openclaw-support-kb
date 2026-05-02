@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "a10c48181388edd384ae8b1ff6e30a31c7aac7243568d8cf00d1d831c0e9d92b"
+source_hash: "819500f71e212f45ca74f4f736866498614c5194e69e98c766e5b9c3e17e7edd"
 doc_path: "web/tui.md"
 original_doc_path: "web/tui.md"
 duplicate_index: 1
@@ -75,6 +75,7 @@ Notes:
   * `per-sender` (default): each agent has many sessions.
   * `global`: the TUI always uses the `global` session (the picker may be empty).
 * The current agent + session are always visible in the footer.
+* When started without `--session`, gateway-mode TUI resumes the last selected session for the same gateway, agent, and session scope if that session still exists. Passing `--session`, `/session`, `/new`, or `/reset` remains explicit.
 
 ## Sending + delivery
 

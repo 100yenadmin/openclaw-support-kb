@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "ddf4c9c17d72c54bf86e50bb344a1e701f16381bbe24baf59028d7bd266923a4"
+source_hash: "27568c241a1fa7df5731df242379fedb4b27f9a2c34b309f8fa4e2126b727e9e"
 doc_path: "install/installer.md"
 original_doc_path: "install/installer.md"
 duplicate_index: 1
@@ -298,7 +298,7 @@ The script exits with code `2` for invalid method selection or invalid `--instal
   </Step>
 
   <Step title="Install OpenClaw">
-    * `npm` method (default): global npm install using selected `-Tag`
+    * `npm` method (default): global npm install using selected `-Tag`, launched from a writable installer temp directory so shells opened in protected folders such as `C:\` still work
     * `git` method: clone/update repo, install/build with pnpm, and install wrapper at `%USERPROFILE%\.local\bin\openclaw.cmd`
   </Step>
 

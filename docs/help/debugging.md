@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "90d33c64a4646fabe19e5208c6fa884c37c4428c17b56ecab37f7b3f37875b98"
+source_hash: "a683b6ccdbc0a2ea483ea69ae2d3c3170f5e43f560cd703015d60dd0fa4018a7"
 doc_path: "help/debugging.md"
 original_doc_path: "help/debugging.md"
 duplicate_index: 1
@@ -257,6 +257,8 @@ The tmux wrapper carries common non-secret runtime selectors such as
 `OPENCLAW_GATEWAY_PORT`, and `OPENCLAW_SKIP_CHANNELS` into the pane. Put
 provider credentials in your normal profile/config, or use raw foreground mode
 for one-off ephemeral secrets.
+The managed tmux pane also defaults to colored Gateway logs for readability;
+set `FORCE_COLOR=0` when starting `pnpm gateway:watch` to disable ANSI output.
 
 The watcher restarts on build-relevant files under `src/`, extension source files,
 extension `package.json` and `openclaw.plugin.json` metadata, `tsconfig.json`,

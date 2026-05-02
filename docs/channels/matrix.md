@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix"
 source: "https://docs.openclaw.ai/channels/matrix"
-source_hash: "4e4923a604c83c881363c6c87c20347b7e162d317d1bdb214b1fdca86261cdf2"
+source_hash: "2885434eae1229ed696b6def520b1d01b7bd51293410efd42319f6ee40f8f479"
 doc_path: "channels/matrix.md"
 original_doc_path: "channels/matrix.md"
 duplicate_index: 1
@@ -13,22 +13,16 @@ Source: https://docs.openclaw.ai/channels/matrix
 
 
 
-Matrix is a bundled channel plugin for OpenClaw.
+Matrix is a downloadable channel plugin for OpenClaw.
 It uses the official `matrix-js-sdk` and supports DMs, rooms, threads, media, reactions, polls, location, and E2EE.
 
-## Bundled plugin
+## Install
 
-Current packaged OpenClaw releases ship the Matrix plugin in the box. You do not need to install anything; configuring `channels.matrix.*` (see [Setup](#setup)) is what activates it.
-
-For older builds or custom installs that exclude Matrix, install a current npm
-package when one is published:
+Install Matrix before configuring the channel:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw plugins install @openclaw/matrix
 ```
-
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or a local checkout until a newer npm package is published.
 
 From a local checkout:
 
@@ -532,7 +526,7 @@ Explicit conversation bindings always win over `sessionScope`, so bound rooms an
 * Message-tool sends auto-inherit the current Matrix thread when targeting the same room (or the same DM user target), unless an explicit `threadId` is provided.
 * DM user-target reuse only kicks in when the current session metadata proves the same DM peer on the same Matrix account; otherwise OpenClaw falls back to normal user-scoped routing.
 * `/focus`, `/unfocus`, `/agents`, `/session idle`, `/session max-age`, and thread-bound `/acp spawn` all work in Matrix rooms and DMs.
-* Top-level `/focus` creates a new Matrix thread and binds it to the target session when `threadBindings.spawnSubagentSessions: true`.
+* Top-level `/focus` creates a new Matrix thread and binds it to the target session when `threadBindings.spawnSessions` is enabled.
 * Running `/focus` or `/acp spawn --thread here` inside an existing Matrix thread binds that thread in place.
 
 When OpenClaw detects a Matrix DM room colliding with another DM room on the same shared session, it posts a one-time `m.notice` in that room pointing to the `/focus` escape hatch and suggesting a `dm.sessionScope` change. The notice only appears when thread bindings are enabled.
@@ -552,7 +546,7 @@ Fast operator flow:
 Notes:
 
 * `--bind here` does not create a child Matrix thread.
-* `threadBindings.spawnAcpSessions` is only required for `/acp spawn --thread auto|here`, where OpenClaw needs to create or bind a child Matrix thread.
+* `threadBindings.spawnSessions` gates `/acp spawn --thread auto|here`, where OpenClaw needs to create or bind a child Matrix thread.
 
 ### Thread binding config
 
@@ -561,13 +555,13 @@ Matrix inherits global defaults from `session.threadBindings`, and also supports
 * `threadBindings.enabled`
 * `threadBindings.idleHours`
 * `threadBindings.maxAgeHours`
-* `threadBindings.spawnSubagentSessions`
-* `threadBindings.spawnAcpSessions`
+* `threadBindings.spawnSessions`
+* `threadBindings.defaultSpawnContext`
 
-Matrix thread-bound spawn flags are opt-in:
+Matrix thread-bound session spawns default on:
 
-* Set `threadBindings.spawnSubagentSessions: true` to allow top-level `/focus` to create and bind new Matrix threads.
-* Set `threadBindings.spawnAcpSessions: true` to allow `/acp spawn --thread auto|here` to bind ACP sessions to Matrix threads.
+* Set `threadBindings.spawnSessions: false` to block top-level `/focus` and `/acp spawn --thread auto|here` from creating/binding Matrix threads.
+* Set `threadBindings.defaultSpawnContext: "isolated"` when native subagent thread spawns should not fork the parent transcript.
 
 ## Reactions
 

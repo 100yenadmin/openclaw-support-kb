@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "bcb25bd7efa7a22c0e02fa488b35fb08286c47edc48b58b9dd3397947dcb5ea1"
+source_hash: "3a8ab4cbeccd2c0f53203da96e6b3d51adfb1ea8deed11d5f6a1df9d58d786e1"
 doc_path: "tools/music-generation.md"
 original_doc_path: "tools/music-generation.md"
 duplicate_index: 1
@@ -175,7 +175,7 @@ Direct generation example:
 </ParamField>
 
 <ParamField type="string">Output filename hint.</ParamField>
-<ParamField type="number">Optional provider request timeout in milliseconds.</ParamField>
+<ParamField type="number">Optional provider request timeout in milliseconds. Values below 10000ms are raised to 10000ms and reported in the tool result.</ParamField>
 
 <Note>
   Not all providers support all parameters. OpenClaw still validates hard

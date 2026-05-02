@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "4a110e064588e4d1fd55b01f8707842e91a48cf611665ae1710095ecbec269eb"
+source_hash: "fe432ce63ccadc79fadc9cc504dd7f8c3b0ade244d5811a33d08274a9d91e07b"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1
@@ -163,6 +163,13 @@ OpenRouter's documented app-attribution headers:
     On verified OpenRouter routes, Anthropic model refs keep the
     OpenRouter-specific Anthropic `cache_control` markers that OpenClaw uses for
     better prompt-cache reuse on system/developer prompt blocks.
+  </Accordion>
+
+  <Accordion title="Anthropic reasoning prefill">
+    On verified OpenRouter routes, Anthropic model refs with reasoning enabled
+    drop trailing assistant prefill turns before the request reaches OpenRouter,
+    matching Anthropic's requirement that reasoning conversations end with a user
+    turn.
   </Accordion>
 
   <Accordion title="Thinking / reasoning injection">

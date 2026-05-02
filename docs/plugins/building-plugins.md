@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "9164ba2cef5c96e822e7d37c0218faa0184a532a2054e82280d56bde37bec909"
+source_hash: "b2b385923e141122c9d282f1b22866fcd451c9a5ab071dd307a93436111081bd"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -85,6 +85,9 @@ and provider plugins have dedicated guides linked above.
         "id": "my-plugin",
         "name": "My Plugin",
         "description": "Adds a custom tool to OpenClaw",
+        "contracts": {
+          "tools": ["my_tool"]
+        },
         "activation": {
           "onStartup": true
         },
@@ -96,9 +99,10 @@ and provider plugins have dedicated guides linked above.
       ```
     </CodeGroup>
 
-    Every plugin needs a manifest, even with no config, and every plugin should
-    declare `activation.onStartup` intentionally. Runtime-registered tools need
-    startup import, so this example sets it to `true`. See
+    Every plugin needs a manifest, even with no config. Runtime-registered tools
+    must be listed in `contracts.tools` so OpenClaw can discover the owning
+    plugin without loading every plugin runtime. Plugins should also declare
+    `activation.onStartup` intentionally. This example sets it to `true`. See
     [Manifest](/plugins/manifest) for the full schema. The canonical ClawHub
     publish snippets live in `docs/snippets/plugin-publish/`.
   </Step>
@@ -241,6 +245,17 @@ register(api) {
     },
     { optional: true },
   );
+}
+```
+
+Every tool registered with `api.registerTool(...)` must also be declared in the
+plugin manifest:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  "contracts": {
+    "tools": ["my_tool", "workflow_tool"]
+  }
 }
 ```
 

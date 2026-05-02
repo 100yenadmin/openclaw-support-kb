@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "533f99a216079622405ce1dc76573ef0ed2bb999d3f59ab67510210bb5b8cd1c"
+source_hash: "ad51f19d372753a22595d88b0ad85ecb42ba37f722f04184963eb88d7dfffb72"
 doc_path: "providers/lmstudio.md"
 original_doc_path: "providers/lmstudio.md"
 duplicate_index: 1
@@ -183,7 +183,22 @@ If setup reports HTTP 401, verify your API key:
 
 ### Just-in-time model loading
 
-LM Studio supports just-in-time (JIT) model loading, where models are loaded on first request. Make sure you have this enabled to avoid 'Model not loaded' errors.
+LM Studio supports just-in-time (JIT) model loading, where models are loaded on first request. OpenClaw preloads models through LM Studio's native load endpoint by default, which helps when JIT is disabled. To let LM Studio's JIT, idle TTL, and auto-evict behavior own model lifecycle, disable OpenClaw's preload step:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  models: {
+    providers: {
+      lmstudio: {
+        baseUrl: "http://localhost:1234/v1",
+        api: "openai-completions",
+        params: { preload: false },
+        models: [{ id: "qwen/qwen3.5-9b" }],
+      },
+    },
+  },
+}
+```
 
 ### LAN or tailnet LM Studio host
 

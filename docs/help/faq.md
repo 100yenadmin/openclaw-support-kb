@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "1394fb154cedde8436f0605fd34da26a6c74dea555a7a9f55ff96141c29be03a"
+source_hash: "201ffb6d461eaeee0b6d1247739309cdc542b9da85c650a35b8afd544d1d35a5"
 doc_path: "help/faq.md"
 original_doc_path: "help/faq.md"
 duplicate_index: 1
@@ -215,7 +215,7 @@ lives on the [First-run FAQ](/help/faq-first-run).
 
     * Global defaults: `session.threadBindings.enabled`, `session.threadBindings.idleHours`, `session.threadBindings.maxAgeHours`.
     * Discord overrides: `channels.discord.threadBindings.enabled`, `channels.discord.threadBindings.idleHours`, `channels.discord.threadBindings.maxAgeHours`.
-    * Auto-bind on spawn: set `channels.discord.threadBindings.spawnSubagentSessions: true`.
+    * Auto-bind on spawn: `channels.discord.threadBindings.spawnSessions` defaults to `true`; set it to `false` to disable thread-bound session spawns.
 
     Docs: [Sub-agents](/tools/subagents), [Discord](/channels/discord), [Configuration Reference](/gateway/configuration-reference), [Slash commands](/tools/slash-commands).
   </Accordion>
