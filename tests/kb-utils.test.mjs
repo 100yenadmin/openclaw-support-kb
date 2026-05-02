@@ -5,6 +5,7 @@ import {
   docsPathFromSource,
   composioToolkitCatalogPage,
   frontmatterPage,
+  headersForFetch,
   redactSensitive,
   sanitizeReleases,
   selectRelease,
@@ -145,6 +146,19 @@ test("frontmatterPage keeps build timestamps out of generated pages", () => {
 
   assert.doesNotMatch(page, /generated_at:/);
   assert.match(page, /source_hash:/);
+});
+
+test("headersForFetch authenticates GitHub API calls only", () => {
+  const githubHeaders = headersForFetch("https://api.github.com/repos/openclaw/openclaw/releases?per_page=50", {
+    GITHUB_TOKEN: "ghs_test_token",
+  });
+  assert.equal(githubHeaders.authorization, "Bearer ghs_test_token");
+  assert.equal(githubHeaders["x-github-api-version"], "2022-11-28");
+
+  const docsHeaders = headersForFetch("https://docs.openclaw.ai/llms-full.txt", {
+    GITHUB_TOKEN: "ghs_test_token",
+  });
+  assert.equal(docsHeaders.authorization, undefined);
 });
 
 test("redactSensitive removes common secret shapes", () => {
