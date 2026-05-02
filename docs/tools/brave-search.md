@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave search"
 source: "https://docs.openclaw.ai/tools/brave-search"
-source_hash: "3149c1b5311f6ff22000acf26f67e23e18e6c4b00fe37915811bf8836428aeee"
+source_hash: "02fb47f82c13ce9eb0b9293eb20cd179e246fc3b62e9208173fd40e4f2d6bede"
 doc_path: "tools/brave-search.md"
 original_doc_path: "tools/brave-search.md"
 duplicate_index: 1
@@ -127,7 +127,7 @@ await web_search({
 * Each Brave plan includes **\$5/month in free credit** (renewing). The Search plan costs \$5 per 1,000 requests, so the credit covers 1,000 queries/month. Set your usage limit in the Brave dashboard to avoid unexpected charges. See the [Brave API portal](https://brave.com/search/api/) for current plans.
 * The Search plan includes the LLM Context endpoint and AI inference rights. Storing results to train or tune models requires a plan with explicit storage rights. See the Brave [Terms of Service](https://api-dashboard.search.brave.com/terms-of-service).
 * `llm-context` mode returns grounded source entries instead of the normal web-search snippet shape.
-* `llm-context` mode does not support `ui_lang`, `freshness`, `date_after`, or `date_before`.
+* `llm-context` mode supports `freshness` and bounded `date_after` + `date_before` ranges. It does not support `ui_lang`; `date_before` without `date_after` is rejected because Brave requires custom freshness ranges to include both start and end dates.
 * `ui_lang` must include a region subtag like `en-US`.
 * Results are cached for 15 minutes by default (configurable via `cacheTtlMinutes`).
 

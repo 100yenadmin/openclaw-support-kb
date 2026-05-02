@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CI pipeline"
 source: "https://docs.openclaw.ai/ci"
-source_hash: "39a9a15bc0d672128d9f4079cd08c6697dae9d7b5bf0d29cd72c7c39c3d3c699"
+source_hash: "c5a60c75cd8dd43b845751fd899485fdd0323a4f05cb921c78775732e4799626"
 doc_path: "ci.md"
 original_doc_path: "ci.md"
 duplicate_index: 1
@@ -138,6 +138,20 @@ pnpm test:perf:groups:compare .artifacts/test-perf/baseline-before.json .artifac
 See [Full release validation](/reference/full-release-validation) for the
 stage matrix, exact workflow job names, profile differences, artifacts, and
 focused rerun handles.
+
+For pinned commit proof on a fast-moving branch, use the helper instead of
+`gh workflow run ... --ref main -f ref=<sha>`:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+pnpm ci:full-release --sha <full-sha>
+```
+
+GitHub workflow dispatch refs must be branches or tags, not raw commit SHAs. The
+helper pushes a temporary `release-ci/<sha>-...` branch at the target SHA,
+dispatches `Full Release Validation` from that pinned ref, verifies every child
+workflow `headSha` matches the target, and deletes the temporary branch when the
+run completes. The umbrella verifier also fails if any child workflow ran at a
+different SHA.
 
 `release_profile` controls live/provider breadth passed into release checks. The
 manual release workflows default to `stable`; use `full` only when you

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synology Chat"
 source: "https://docs.openclaw.ai/channels/synology-chat"
-source_hash: "721d99baca3d0a8a00b52961f72327492d18473ea54b1a14288ab42f2758a532"
+source_hash: "ae8d30119ca896e3946006f1f676db3797c624235c1f277312e5a41ed284cf90"
 doc_path: "channels/synology-chat.md"
 original_doc_path: "channels/synology-chat.md"
 duplicate_index: 1
@@ -117,6 +117,7 @@ Examples:
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw message send --channel synology-chat --target 123456 --text "Hello from OpenClaw"
 openclaw message send --channel synology-chat --target synology-chat:123456 --text "Hello again"
+openclaw message send --channel synology-chat --target synology:123456 --text "Short prefix"
 ```
 
 Media sends are supported by URL-based file delivery.

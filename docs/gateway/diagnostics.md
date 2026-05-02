@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics export"
 source: "https://docs.openclaw.ai/gateway/diagnostics"
-source_hash: "6c06342fd5d9ac788757b2ca7634bc78e7b9f1c25b209300d21a8bbd16f9b246"
+source_hash: "e684ac079e1f46fffcbcae8c0aa1fc447fadd1643b6b2d4ac775cfd481cd581a"
 doc_path: "gateway/diagnostics.md"
 original_doc_path: "gateway/diagnostics.md"
 duplicate_index: 1
@@ -120,11 +120,13 @@ export keeps only that a message was omitted and the byte count.
 The Gateway records a bounded, payload-free stability stream by default when
 diagnostics are enabled. It is for operational facts, not content.
 
-The same diagnostic heartbeat records liveness warnings when the Gateway keeps
+The same diagnostic heartbeat records liveness samples when the Gateway keeps
 running but the Node.js event loop or CPU looks saturated. These
 `diagnostic.liveness.warning` events include event-loop delay, event-loop
-utilization, CPU-core ratio, and active/waiting/queued session counts. They do
-not restart the Gateway by themselves.
+utilization, CPU-core ratio, and active/waiting/queued session counts. Idle
+samples stay in telemetry at `info` level; they are only logged as Gateway
+warnings when diagnostic work is active, waiting, or queued. They do not
+restart the Gateway by themselves.
 
 Inspect the live recorder:
 

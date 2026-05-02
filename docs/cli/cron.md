@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "ccc869a381561354603ea945e5d182a8ddf9fee4eece129ca1500aa3e10a2b11"
+source_hash: "65bd9f774aa25194223e38210985fc9c9b1e735df82cd3d47884b1e00b55df1c"
 doc_path: "cli/cron.md"
 original_doc_path: "cli/cron.md"
 duplicate_index: 1
@@ -41,6 +41,8 @@ Manage cron jobs for the Gateway scheduler.
 ## Delivery
 
 `openclaw cron list` and `openclaw cron show <job-id>` preview the resolved delivery route. For `channel: "last"`, the preview shows whether the route resolved from the main or current session, or will fail closed.
+
+Provider-prefixed targets can disambiguate unresolved announce channels. For example, `to: "telegram:123"` selects Telegram when `delivery.channel` is omitted or `last`. Only prefixes advertised by the loaded plugin are provider selectors. If `delivery.channel` is explicit, the prefix must match that channel; `channel: "whatsapp"` with `to: "telegram:123"` is rejected. Service prefixes such as `imessage:` and `sms:` remain channel-owned target syntax.
 
 <Note>
   Isolated `cron add` jobs default to `--announce` delivery. Use `--no-deliver` to keep output internal. `--deliver` remains as a deprecated alias for `--announce`.

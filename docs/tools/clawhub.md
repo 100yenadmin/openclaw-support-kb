@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawHub"
 source: "https://docs.openclaw.ai/tools/clawhub"
-source_hash: "50b2e9d38e9854efb32ff4ae94022f1230fc3943ad12a43bfe99840e8be85ff3"
+source_hash: "ae49ebd799780e39340bae28c766752c4a376eb7f30653d6bb709f0fb779cb09"
 doc_path: "tools/clawhub.md"
 original_doc_path: "tools/clawhub.md"
 duplicate_index: 1
@@ -67,11 +67,14 @@ Site: [clawhub.ai](https://clawhub.ai)
 
   <Tab title="Plugins">
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw plugins search "calendar"
     openclaw plugins install clawhub:<package>
     openclaw plugins update --all
     ```
 
-    Bare npm-safe plugin specs are also tried against ClawHub before npm:
+    `plugins search` queries the ClawHub plugin catalog and prints install-ready
+    package names. Bare npm-safe plugin specs are also tried against ClawHub
+    before npm:
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openclaw plugins install openclaw-codex-app-server

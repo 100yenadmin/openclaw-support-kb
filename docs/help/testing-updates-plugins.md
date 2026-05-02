@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "fc863e9684ae8228fa3c5ed2e25557dd4d6c098d51380b70794f1161e82f41a6"
+source_hash: "73ece4818b8bfcaee1451fa552c27b0fadc2fcac07eb54571bd9f345fc3228c0"
 doc_path: "help/testing-updates-plugins.md"
 original_doc_path: "help/testing-updates-plugins.md"
 duplicate_index: 1
@@ -38,8 +38,8 @@ Update and plugin tests protect these contracts:
 * Plugin npm dependencies are installed in the managed npm root, scanned before
   trust, and removed through npm during uninstall so hoisted dependencies do not
   linger.
-* Plugin update is stable when nothing changed: install records, resolved source,
-  and enabled state stay intact.
+* Plugin update is stable when nothing changed: install records, resolved
+  source, installed dependency layout, and enabled state stay intact.
 
 ## Local proof during development
 
@@ -88,9 +88,11 @@ pnpm test:docker:update-migration
 Important lanes:
 
 * `test:docker:plugins` validates plugin install smoke, local folder installs,
-  local folders with preinstalled dependencies, git installs with package
-  dependencies, npm package dependency installs, local ClawHub fixture installs,
-  marketplace update behavior, and Claude-bundle enable/inspect. Set
+  local folder update skip behavior, local folders with preinstalled
+  dependencies, `file:` package installs, git installs with CLI execution, git
+  moving-ref updates, npm registry installs with hoisted transitive
+  dependencies, npm update no-ops, local ClawHub fixture installs and update
+  no-ops, marketplace update behavior, and Claude-bundle enable/inspect. Set
   `OPENCLAW_PLUGINS_E2E_CLAWHUB=0` to keep the ClawHub block hermetic/offline.
 * `test:docker:plugin-update` validates that an unchanged installed plugin does
   not reinstall or lose install metadata during `openclaw plugins update`.
@@ -239,6 +241,10 @@ can fail for the right reason:
 * Published-release migration behavior: `published-upgrade-survivor` scenario.
 * Registry/package source behavior: `test:docker:plugins` fixture or ClawHub
   fixture server.
+* Dependency layout or cleanup behavior: assert both runtime execution and the
+  filesystem boundary. npm dependencies may be hoisted under the managed npm
+  root, so tests should prove the root is scanned/cleaned instead of assuming a
+  package-local `node_modules` tree.
 
 Keep new Docker fixtures hermetic by default. Use local fixture registries and
 fake packages unless the point of the test is live registry behavior.

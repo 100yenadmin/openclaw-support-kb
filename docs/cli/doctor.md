@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "85f0e2db889e0c27733f22d853545f39af463ca749a20904a4d4839219ca4b08"
+source_hash: "30b6b1276bbfd2a534207e1f65e5a1df98657550cbe4eaf782d9dbcec1933981"
 doc_path: "cli/doctor.md"
 original_doc_path: "cli/doctor.md"
 duplicate_index: 1
@@ -65,6 +65,7 @@ Notes:
 * If sandbox mode is enabled but Docker is unavailable, doctor reports a high-signal warning with remediation (`install Docker` or `openclaw config set agents.defaults.sandbox.mode off`).
 * If `gateway.auth.token`/`gateway.auth.password` are SecretRef-managed and unavailable in the current command path, doctor reports a read-only warning and does not write plaintext fallback credentials.
 * If channel SecretRef inspection fails in a fix path, doctor continues and reports a warning instead of exiting early.
+* After state-directory migrations, doctor warns when enabled default Telegram or Discord accounts depend on env fallback and `TELEGRAM_BOT_TOKEN` or `DISCORD_BOT_TOKEN` is unavailable to the doctor process.
 * Telegram `allowFrom` username auto-resolution (`doctor --fix`) requires a resolvable Telegram token in the current command path. If token inspection is unavailable, doctor reports a warning and skips auto-resolution for that pass.
 
 ## macOS: `launchctl` env overrides

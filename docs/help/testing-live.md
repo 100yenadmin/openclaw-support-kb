@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "cf18c4f2c90e9b0d3964fba98376667f3ddaa1d1fcb868e9a87c6c2b42233b19"
+source_hash: "166a1d263528a04dfa118bcd3b3d12021fc4ba1fc5c5e4d04381106c6180853f"
 doc_path: "help/testing-live.md"
 original_doc_path: "help/testing-live.md"
 duplicate_index: 1
@@ -82,7 +82,7 @@ Live tests are split into two layers so we can isolate failures:
   * `pnpm test:live` (or `OPENCLAW_LIVE_TEST=1` if invoking Vitest directly)
 * Set `OPENCLAW_LIVE_MODELS=modern` (or `all`, alias for modern) to actually run this suite; otherwise it skips to keep `pnpm test:live` focused on gateway smoke
 * How to select models:
-  * `OPENCLAW_LIVE_MODELS=modern` to run the modern allowlist (Opus/Sonnet 4.6+, GPT-5.2 + Codex, Gemini 3, DeepSeek V4, GLM 4.7, MiniMax M2.7, Grok 4)
+  * `OPENCLAW_LIVE_MODELS=modern` to run the modern allowlist (Opus/Sonnet 4.6+, GPT-5.2 + Codex, Gemini 3, DeepSeek V4, GLM 4.7, MiniMax M2.7, Grok 4.3)
   * `OPENCLAW_LIVE_MODELS=all` is an alias for the modern allowlist
   * or `OPENCLAW_LIVE_MODELS="openai/gpt-5.5,openai-codex/gpt-5.5,anthropic/claude-opus-4-6,..."` (comma allowlist)
   * Modern/all sweeps default to a curated high-signal cap; set `OPENCLAW_LIVE_MAX_MODELS=0` for an exhaustive modern sweep or a positive number for a smaller cap.
@@ -116,7 +116,7 @@ Live tests are split into two layers so we can isolate failures:
 * How to enable:
   * `pnpm test:live` (or `OPENCLAW_LIVE_TEST=1` if invoking Vitest directly)
 * How to select models:
-  * Default: modern allowlist (Opus/Sonnet 4.6+, GPT-5.2 + Codex, Gemini 3, DeepSeek V4, GLM 4.7, MiniMax M2.7, Grok 4)
+  * Default: modern allowlist (Opus/Sonnet 4.6+, GPT-5.2 + Codex, Gemini 3, DeepSeek V4, GLM 4.7, MiniMax M2.7, Grok 4.3)
   * `OPENCLAW_LIVE_GATEWAY_MODELS=all` is an alias for the modern allowlist
   * Or set `OPENCLAW_LIVE_GATEWAY_MODELS="provider/model"` (or comma list) to narrow
   * Modern/all gateway sweeps default to a curated high-signal cap; set `OPENCLAW_LIVE_GATEWAY_MAX_MODELS=0` for an exhaustive modern sweep or a positive number for a smaller cap.
@@ -399,7 +399,7 @@ Pick at least one per provider family:
 
 Optional additional coverage (nice to have):
 
-* xAI: `xai/grok-4` (or latest available)
+* xAI: `xai/grok-4.3` (or latest available)
 * Mistral: `mistral/`… (pick one “tools” capable model you have enabled)
 * Cerebras: `cerebras/`… (if you have access)
 * LM Studio: `lmstudio/`… (local; tool calling depends on API mode)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "824696a29ba5827840feecb31aaad6c4381848dd6198602d0279f6c7ddf26a91"
+source_hash: "cb181da5188907a2193c3a8ae7991913f068bfa82250bd450da60dfa2ec9fca8"
 doc_path: "concepts/agent-runtimes.md"
 original_doc_path: "concepts/agent-runtimes.md"
 duplicate_index: 1
@@ -43,17 +43,17 @@ There are two runtime families:
   through Claude CLI." `claude-cli` is not an embedded harness id and must not
   be passed to AgentHarness selection.
 
-## Three things named Codex
+## Codex surfaces
 
-Most confusion comes from three different surfaces sharing the Codex name:
+Most confusion comes from several different surfaces sharing the Codex name:
 
-| Surface                                              | OpenClaw name/config                 | What it does                                                                                        |
-| ---------------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| Codex OAuth provider route                           | `openai-codex/*` model refs          | Uses ChatGPT/Codex subscription OAuth through the normal OpenClaw PI runner.                        |
-| Native Codex app-server runtime                      | `agentRuntime.id: "codex"`           | Runs the embedded agent turn through the bundled Codex app-server harness.                          |
-| Codex ACP adapter                                    | `runtime: "acp"`, `agentId: "codex"` | Runs Codex through the external ACP/acpx control plane. Use only when ACP/acpx is explicitly asked. |
-| Native Codex chat-control command set                | `/codex ...`                         | Binds, resumes, steers, stops, and inspects Codex app-server threads from chat.                     |
-| OpenAI Platform API route for GPT/Codex-style models | `openai/*` model refs                | Uses OpenAI API-key auth unless a runtime override, such as `runtime: "codex"`, runs the turn.      |
+| Surface                                              | OpenClaw name/config                       | What it does                                                                                               |
+| ---------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Native Codex app-server runtime                      | `openai/*` plus `agentRuntime.id: "codex"` | Runs the embedded agent turn through Codex app-server. This is the usual ChatGPT/Codex subscription setup. |
+| Codex OAuth provider route                           | `openai-codex/*` model refs                | Uses ChatGPT/Codex subscription OAuth through the normal OpenClaw PI runner.                               |
+| Codex ACP adapter                                    | `runtime: "acp"`, `agentId: "codex"`       | Runs Codex through the external ACP/acpx control plane. Use only when ACP/acpx is explicitly asked.        |
+| Native Codex chat-control command set                | `/codex ...`                               | Binds, resumes, steers, stops, and inspects Codex app-server threads from chat.                            |
+| OpenAI Platform API route for GPT/Codex-style models | `openai/*` model refs                      | Uses OpenAI API-key auth unless a runtime override, such as `agentRuntime.id: "codex"`, runs the turn.     |
 
 Those surfaces are intentionally independent. Enabling the `codex` plugin makes
 the native app-server features available; it does not rewrite
@@ -61,7 +61,8 @@ the native app-server features available; it does not rewrite
 not make ACP the Codex default. Selecting `openai-codex/*` means "use the Codex
 OAuth provider route" unless you separately force a runtime.
 
-The common Codex setup uses the `openai` provider with the `codex` runtime:
+The common ChatGPT/Codex subscription setup uses Codex OAuth for auth, but keeps
+the model ref as `openai/*` and selects the `codex` runtime:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -77,8 +78,9 @@ The common Codex setup uses the `openai` provider with the `codex` runtime:
 ```
 
 That means OpenClaw selects an OpenAI model ref, then asks the Codex app-server
-runtime to run the embedded agent turn. It does not mean the channel, model
-provider catalog, or OpenClaw session store becomes Codex.
+runtime to run the embedded agent turn. It does not mean "use API billing," and
+it does not mean the channel, model provider catalog, or OpenClaw session store
+becomes Codex.
 
 When the bundled `codex` plugin is enabled, natural-language Codex control
 should use the native `/codex` command surface (`/codex bind`, `/codex threads`,
@@ -91,7 +93,8 @@ This is the agent-facing decision tree:
 
 1. If the user asks for **Codex bind/control/thread/resume/steer/stop**, use the
    native `/codex` command surface when the bundled `codex` plugin is enabled.
-2. If the user asks for **Codex as the embedded runtime**, use
+2. If the user asks for **Codex as the embedded runtime** or wants the normal
+   subscription-backed Codex agent experience, use
    `openai/<model>` with `agentRuntime.id: "codex"`.
 3. If the user asks for **Codex OAuth/subscription auth on the normal OpenClaw
    runner**, use `openai-codex/<model>` and leave the runtime as PI.
@@ -148,10 +151,10 @@ OpenClaw chooses an embedded runtime after provider and model resolution:
    `fallback: "none"` to make unmatched `auto`-mode selection fail instead.
 
 Explicit plugin runtimes fail closed by default. For example,
-`runtime: "codex"` means Codex or a clear selection error unless you set
+`agentRuntime.id: "codex"` means Codex or a clear selection error unless you set
 `fallback: "pi"` in the same override scope. A runtime override does not inherit
-a broader fallback setting, so an agent-level `runtime: "codex"` is not silently
-routed back to PI just because defaults used `fallback: "pi"`.
+a broader fallback setting, so an agent-level `agentRuntime.id: "codex"` is not
+silently routed back to PI just because defaults used `fallback: "pi"`.
 
 CLI backend aliases are different from embedded harness ids. The preferred
 Claude CLI form is:

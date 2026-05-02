@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Retry policy"
 source: "https://docs.openclaw.ai/concepts/retry"
-source_hash: "83112fadc64a0b6384650e58484ed824de8051f9dbdadbe516c95e422533d487"
+source_hash: "6475123e592829941d627c4aef13a7a9748256049431b4a2ab6805ac4ab24d67"
 doc_path: "concepts/retry.md"
 original_doc_path: "concepts/retry.md"
 duplicate_index: 1
@@ -44,7 +44,9 @@ Source: https://docs.openclaw.ai/concepts/retry
 
 ### Discord
 
-* Retries only on rate-limit errors (HTTP 429).
+* Retries on rate-limit errors (HTTP 429), request timeouts, HTTP 5xx responses,
+  and transient transport failures such as DNS lookup failures, connection
+  resets, socket closes, and fetch failures.
 * Uses Discord `retry_after` when available, otherwise exponential backoff.
 
 ### Telegram

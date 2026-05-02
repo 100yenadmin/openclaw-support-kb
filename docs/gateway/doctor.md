@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "6ee8064065147375ff75e3cbbaae2dc3c71d8a280ccb87d8ebae71e3302c04a0"
+source_hash: "5a4b7640a77729f60743029009fe04e64ee978f479fb6950a7adc7e1071a8d31"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -268,7 +268,7 @@ That stages grounded durable candidates into the short-term dreaming store while
     Doctor does not repair this automatically because both routes are valid:
 
     * `openai-codex/*` + PI means "use Codex OAuth/subscription auth through the normal OpenClaw runner."
-    * `openai/*` + `runtime: "codex"` means "run the embedded turn through native Codex app-server."
+    * `openai/*` + `agentRuntime.id: "codex"` means "run the embedded turn through native Codex app-server."
     * `/codex ...` means "control or bind a native Codex conversation from chat."
     * `/acp ...` or `runtime: "acp"` means "use the external ACP/acpx adapter."
 

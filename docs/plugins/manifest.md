@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "e0fafe2b9d12f91e38f729fe47c488d90a3de17ae2dee3c13a9094ce3a02f302"
+source_hash: "d048430d073a2bce6e4695d79644ccfbede95bf10a3e68cdec2570b9340e0746"
 doc_path: "plugins/manifest.md"
 original_doc_path: "plugins/manifest.md"
 duplicate_index: 1
@@ -1029,7 +1029,7 @@ Important examples:
 | `openclaw.channel.persistedAuthState`                             | Lightweight persisted-auth checker metadata that can answer "is anything already signed in?" without loading the full channel runtime.                                               |
 | `openclaw.install.npmSpec` / `openclaw.install.localPath`         | Install/update hints for bundled and externally published plugins.                                                                                                                   |
 | `openclaw.install.defaultChoice`                                  | Preferred install path when multiple install sources are available.                                                                                                                  |
-| `openclaw.install.minHostVersion`                                 | Minimum supported OpenClaw host version, using a semver floor like `>=2026.3.22`.                                                                                                    |
+| `openclaw.install.minHostVersion`                                 | Minimum supported OpenClaw host version, using a semver floor like `>=2026.3.22` or `>=2026.5.1-beta.1`.                                                                             |
 | `openclaw.install.expectedIntegrity`                              | Expected npm dist integrity string such as `sha512-...`; install and update flows verify the fetched artifact against it.                                                            |
 | `openclaw.install.allowInvalidConfigRecovery`                     | Allows a narrow bundled-plugin reinstall recovery path when config is invalid.                                                                                                       |
 | `openclaw.startup.deferConfiguredChannelFullLoadUntilAfterListen` | Lets setup-only channel surfaces load before the full channel plugin during startup.                                                                                                 |
@@ -1040,8 +1040,9 @@ onboarding how to fetch or enable that plugin when the user picks one of those
 choices. Do not move install hints into `openclaw.plugin.json`.
 
 `openclaw.install.minHostVersion` is enforced during install and manifest
-registry loading. Invalid values are rejected; newer-but-valid values skip the
-plugin on older hosts.
+registry loading for non-bundled plugin sources. Invalid values are rejected;
+newer-but-valid values skip external plugins on older hosts. Bundled source
+plugins are assumed to be co-versioned with the host checkout.
 
 Exact npm version pinning already lives in `npmSpec`, for example
 `"npmSpec": "@wecom/wecom-openclaw-plugin@1.2.3"`. Official external catalog

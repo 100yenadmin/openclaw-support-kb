@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "c01a8b2755a26e2a8af02f3a9f5a7026ec2abe38fa3c6a7cadef581f9598ef19"
+source_hash: "52453872d47669a0a786e9bb7914292effc27f530fdf361c169ae6521cdb72ba"
 doc_path: "tools/tts.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 1
@@ -55,6 +55,9 @@ audio attachments everywhere else, and PCM/Ulaw streams for telephony and Talk.
 <Note>
   Auto-TTS is **off** by default. When `messages.tts.provider` is unset,
   OpenClaw picks the first configured provider in registry auto-select order.
+  The built-in `tts` agent tool is explicit-intent only: ordinary chat stays
+  text unless the user asks for audio, uses `/tts`, or enables Auto-TTS/directive
+  speech.
 </Note>
 
 ## Supported providers

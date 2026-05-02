@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configure"
 source: "https://docs.openclaw.ai/cli/configure"
-source_hash: "3e16ef6505709cc1d5cd2ede6c38fb95db9d4ad33fea976915e5fd33812c1f63"
+source_hash: "cd8e8ae3fc1a3b80e702590d20ecb2438d68fbc0da8dd6a64ee2fa4cf2efb173"
 doc_path: "cli/configure.md"
 original_doc_path: "cli/configure.md"
 duplicate_index: 1
@@ -18,7 +18,9 @@ Source: https://docs.openclaw.ai/cli/configure
 Interactive prompt to set up credentials, devices, and agent defaults.
 
 <Note>
-  The **Model** section includes a multi-select for the `agents.defaults.models` allowlist (what shows up in `/model` and the model picker). Provider-scoped setup choices merge their selected models into the existing allowlist instead of replacing unrelated providers already in the config. Re-running provider auth from configure preserves an existing `agents.defaults.model.primary`. Use `openclaw models auth login --provider <id> --set-default` or `openclaw models set <model>` when you intentionally want to change the default model.
+  The **Model** section includes a multi-select for the `agents.defaults.models` allowlist (what shows up in `/model` and the model picker). Provider-scoped setup choices merge their selected models into the existing allowlist instead of replacing unrelated providers already in the config.
+
+  Re-running provider auth from configure preserves an existing `agents.defaults.model.primary`, even when the provider's auth step returns a config patch with its own recommended default model. That means adding or reauthing xAI, OpenRouter, or another provider should make the new model available without taking over from your current primary model. Use `openclaw models auth login --provider <id> --set-default` or `openclaw models set <model>` when you intentionally want to change the default model.
 </Note>
 
 When configure starts from a provider auth choice, the default-model and allowlist pickers prefer that provider automatically. For paired providers such as Volcengine and BytePlus, the same preference also matches their coding-plan variants (`volcengine-plan/*`, `byteplus-plan/*`). If the preferred-provider filter would produce an empty list, configure falls back to the unfiltered catalog instead of showing a blank picker.

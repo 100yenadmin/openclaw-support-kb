@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "50abb1e2859db61d686b94557d25a44b2967c1ea38d4e9a6edb3132889f41bea"
+source_hash: "46065b8818be02ca87f151f137108cec9246a46446c5a2903f20455580a21bd3"
 doc_path: "channels/telegram.md"
 original_doc_path: "channels/telegram.md"
 duplicate_index: 1
@@ -852,7 +852,7 @@ Per-account, per-group, and per-topic overrides are supported (same inheritance 
         proxy: socks5://<user>:<password>@proxy-host:1080
     ```
 
-    * Node 22+ defaults to `autoSelectFamily=true` (except WSL2) and `dnsResultOrder=ipv4first`.
+    * Node 22+ defaults to `autoSelectFamily=true` (except WSL2). Telegram DNS result order honors `OPENCLAW_TELEGRAM_DNS_RESULT_ORDER`, then `channels.telegram.network.dnsResultOrder`, then the process default such as `NODE_OPTIONS=--dns-result-order=ipv4first`; if none applies, Node 22+ falls back to `ipv4first`.
     * If your host is WSL2 or explicitly works better with IPv4-only behavior, force family selection:
 
     ```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}

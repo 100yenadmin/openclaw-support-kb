@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
-source_hash: "2bde58c6cd96d13a380ff1d0f9f3b242d70a36199791c3728b40e0d7d0c1d5f1"
+source_hash: "474e70b23b395ba2d7b7377677249c1f5addc2635d67ee781b5b146c15df7bee"
 doc_path: "tools/minimax-search.md"
 original_doc_path: "tools/minimax-search.md"
 duplicate_index: 1
@@ -14,15 +14,16 @@ Source: https://docs.openclaw.ai/tools/minimax-search
 
 
 OpenClaw supports MiniMax as a `web_search` provider through the MiniMax
-Coding Plan search API. It returns structured search results with titles, URLs,
+Token Plan search API. It returns structured search results with titles, URLs,
 snippets, and related queries.
 
-## Get a Coding Plan key
+## Get a Token Plan credential
 
 <Steps>
   <Step title="Create a key">
-    Create or copy a MiniMax Coding Plan key from
+    Create or copy a MiniMax Token Plan key from
     [MiniMax Platform](https://platform.minimax.io/user-center/basic-information/interface-key).
+    OAuth setups can reuse `MINIMAX_OAUTH_TOKEN` instead.
   </Step>
 
   <Step title="Store the key">
@@ -34,8 +35,9 @@ snippets, and related queries.
   </Step>
 </Steps>
 
-OpenClaw also accepts `MINIMAX_CODING_API_KEY` as an env alias. `MINIMAX_API_KEY`
-is still read as a compatibility fallback when it already points at a coding-plan token.
+OpenClaw also accepts `MINIMAX_CODING_API_KEY` and `MINIMAX_OAUTH_TOKEN` as env
+aliases. `MINIMAX_API_KEY` is still read as a compatibility fallback when it
+already points at a token-plan credential.
 
 ## Config
 
@@ -46,7 +48,7 @@ is still read as a compatibility fallback when it already points at a coding-pla
       minimax: {
         config: {
           webSearch: {
-            apiKey: "sk-cp-...", // optional if MINIMAX_CODE_PLAN_KEY is set
+            apiKey: "sk-cp-...", // optional if a MiniMax Token Plan env var is set
             region: "global", // or "cn"
           },
         },
@@ -63,7 +65,8 @@ is still read as a compatibility fallback when it already points at a coding-pla
 }
 ```
 
-**Environment alternative:** set `MINIMAX_CODE_PLAN_KEY` in the Gateway environment.
+**Environment alternative:** set `MINIMAX_CODE_PLAN_KEY` or `MINIMAX_OAUTH_TOKEN`
+in the Gateway environment.
 For a gateway install, put it in `~/.openclaw/.env`.
 
 ## Region selection
@@ -86,7 +89,8 @@ automatically keeps MiniMax Search on the CN host too.
 
 Even when you authenticated MiniMax through the OAuth `minimax-portal` path,
 web search still registers as provider id `minimax`; the OAuth provider base URL
-is only used as a region hint for CN/global host selection.
+is used as a region hint for CN/global host selection, and `MINIMAX_OAUTH_TOKEN`
+can satisfy the MiniMax Search bearer credential.
 
 ## Supported parameters
 

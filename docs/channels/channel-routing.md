@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "6ca90d4c3496daaae3c1ce9e16927b23cb68dabc997e1d18114c94d9d819fc20"
+source_hash: "409a8015119d2339b139a4d069cef0410c0dd9c1662396dd3f98e8aee64e251e"
 doc_path: "channels/channel-routing.md"
 original_doc_path: "channels/channel-routing.md"
 duplicate_index: 1
@@ -28,6 +28,12 @@ host configuration.
   * In multi-account setups, set an explicit default (`defaultAccount` or `accounts.default`) when two or more accounts are configured. Without it, fallback routing may pick the first normalized account ID.
 * **AgentId**: an isolated workspace + session store (“brain”).
 * **SessionKey**: the bucket key used to store context and control concurrency.
+
+## Outbound target prefixes
+
+Explicit outbound targets may include a provider prefix, such as `telegram:123` or `tg:123`. Core treats that prefix as a channel-selection hint only when the selected channel is `last` or otherwise unresolved, and only when the loaded plugin advertises that prefix. If the caller already selected an explicit channel, the provider prefix must match that channel; cross-channel combinations such as WhatsApp delivery to `telegram:123` fail before plugin-specific target normalization.
+
+Target-kind and service prefixes such as `channel:<id>`, `user:<id>`, `room:<id>`, `thread:<id>`, `imessage:<handle>`, and `sms:<number>` stay inside the selected channel's grammar. They do not select the provider by themselves.
 
 ## Session key shapes (examples)
 

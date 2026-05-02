@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "52edb01851b7dc914e69b5b4d9c0888f4325be3601fe8012ca10048b8b409892"
+source_hash: "3225099353a26d87371c8dfe1b02621ba92cf8ff2f1db86ba9ad2009e9414655"
 doc_path: "providers/xai.md"
 original_doc_path: "providers/xai.md"
 duplicate_index: 1
@@ -33,7 +33,7 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
   <Step title="Pick a model">
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
-      agents: { defaults: { model: { primary: "xai/grok-4" } } },
+      agents: { defaults: { model: { primary: "xai/grok-4.3" } } },
     }
     ```
   </Step>
@@ -45,6 +45,8 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
   and remote `code_execution`.
   If you store an xAI key under `plugins.entries.xai.config.webSearch.apiKey`,
   the bundled xAI model provider reuses that key as a fallback too.
+  Set `plugins.entries.xai.config.webSearch.baseUrl` to route Grok `web_search`
+  and, by default, `x_search` through an operator xAI Responses proxy.
   `code_execution` tuning lives under `plugins.entries.xai.config.codeExecution`.
 </Note>
 
@@ -55,6 +57,7 @@ OpenClaw includes these xAI model families out of the box:
 | Family         | Model ids                                                                |
 | -------------- | ------------------------------------------------------------------------ |
 | Grok 3         | `grok-3`, `grok-3-fast`, `grok-3-mini`, `grok-3-mini-fast`               |
+| Grok 4.3       | `grok-4.3`                                                               |
 | Grok 4         | `grok-4`, `grok-4-0709`                                                  |
 | Grok 4 Fast    | `grok-4-fast`, `grok-4-fast-non-reasoning`                               |
 | Grok 4.1 Fast  | `grok-4-1-fast`, `grok-4-1-fast-non-reasoning`                           |
@@ -65,8 +68,8 @@ The plugin also forward-resolves newer `grok-4*` and `grok-code-fast*` ids when
 they follow the same API shape.
 
 <Tip>
-  `grok-4-fast`, `grok-4-1-fast`, and the `grok-4.20-beta-*` variants are the
-  current image-capable Grok refs in the bundled catalog.
+  `grok-4.3`, `grok-4-fast`, `grok-4-1-fast`, and the `grok-4.20-beta-*`
+  variants are the current image-capable Grok refs in the bundled catalog.
 </Tip>
 
 ## OpenClaw feature coverage
@@ -344,6 +347,7 @@ Legacy aliases still normalize to the canonical bundled ids:
     | ----------------- | ------- | --------------- | ----------------------------------- |
     | `enabled`         | boolean | —               | Enable or disable x\_search         |
     | `model`           | string  | `grok-4-1-fast` | Model used for x\_search requests   |
+    | `baseUrl`         | string  | —               | xAI Responses base URL override     |
     | `inlineCitations` | boolean | —               | Include inline citations in results |
     | `maxTurns`        | number  | —               | Maximum conversation turns          |
     | `timeoutSeconds`  | number  | —               | Request timeout in seconds          |
@@ -358,6 +362,7 @@ Legacy aliases still normalize to the canonical bundled ids:
               xSearch: {
                 enabled: true,
                 model: "grok-4-1-fast",
+                baseUrl: "https://api.x.ai/v1",
                 inlineCitations: true,
               },
             },
@@ -428,6 +433,9 @@ Legacy aliases still normalize to the canonical bundled ids:
     * `web_search`, `x_search`, and `code_execution` are exposed as OpenClaw
       tools. OpenClaw enables the specific xAI built-in it needs inside each tool
       request instead of attaching all native tools to every chat turn.
+    * Grok `web_search` reads `plugins.entries.xai.config.webSearch.baseUrl`.
+      `x_search` reads `plugins.entries.xai.config.xSearch.baseUrl`, then
+      falls back to the Grok web-search base URL.
     * `x_search` and `code_execution` are owned by the bundled xAI plugin rather
       than hardcoded into the core model runtime.
     * `code_execution` is remote xAI sandbox execution, not local

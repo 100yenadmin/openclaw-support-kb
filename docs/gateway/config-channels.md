@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "2c805e8811cf436482e61932878bd00e46e29a8d5a01d2bde5b9b4f36d64c7e9"
+source_hash: "159bdb6457b365fdb449b96ebdfdc8b816be028e073701215e30dcb17b25786c"
 doc_path: "gateway/config-channels.md"
 original_doc_path: "gateway/config-channels.md"
 duplicate_index: 1
@@ -334,6 +334,7 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
 * Guild slugs are lowercase with spaces replaced by `-`; channel keys use the slugged name (no `#`). Prefer guild IDs.
 * Bot-authored messages are ignored by default. `allowBots: true` enables them; use `allowBots: "mentions"` to only accept bot messages that mention the bot (own messages still filtered).
 * `channels.discord.guilds.<id>.ignoreOtherMentions` (and channel overrides) drops messages that mention another user or role but not the bot (excluding @everyone/@here).
+* `channels.discord.mentionAliases` maps stable outbound `@handle` text to Discord user IDs before sending, so known teammates can be mentioned deterministically even when the transient directory cache is empty. Per-account overrides live under `channels.discord.accounts.<accountId>.mentionAliases`.
 * `maxLinesPerMessage` (default 17) splits tall messages even when under 2000 chars.
 * `channels.discord.threadBindings` controls Discord thread-bound routing:
   * `enabled`: Discord override for thread-bound session features (`/focus`, `/unfocus`, `/agents`, `/session idle`, `/session max-age`, and bound delivery/routing)

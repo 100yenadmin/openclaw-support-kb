@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "872a06b4ce79438868ac50100787a9794694c8a8f0184ba6deeee1b21e69f35f"
+source_hash: "b056ef16386bf518fb0471d16f7322b3052f47a63d0bbccc2e7ffcc77f636e41"
 doc_path: "tools/slash-commands.md"
 original_doc_path: "tools/slash-commands.md"
 duplicate_index: 1
@@ -74,6 +74,8 @@ There are two related systems:
 <ParamField type="boolean | &#x22;auto&#x22;">
   Registers native commands. Auto: on for Discord/Telegram; off for Slack (until you add slash commands); ignored for providers without native support. Set `channels.discord.commands.native`, `channels.telegram.commands.native`, or `channels.slack.commands.native` to override per provider (bool or `"auto"`). `false` clears previously registered commands on Discord/Telegram at startup. Slack commands are managed in the Slack app and are not removed automatically.
 </ParamField>
+
+On Discord, native command specs may include `descriptionLocalizations`, which OpenClaw publishes as Discord `description_localizations` and includes in reconcile comparisons.
 
 <ParamField type="boolean | &#x22;auto&#x22;">
   Registers **skill** commands natively when supported. Auto: on for Discord/Telegram; off for Slack (Slack requires creating a slash command per skill). Set `channels.discord.commands.nativeSkills`, `channels.telegram.commands.nativeSkills`, or `channels.slack.commands.nativeSkills` to override per provider (bool or `"auto"`).
@@ -257,6 +259,7 @@ User-invocable skills are also exposed as slash commands:
 * `/skill <name> [input]` always works as the generic entrypoint.
 * skills may also appear as direct commands like `/prose` when the skill/plugin registers them.
 * native skill-command registration is controlled by `commands.nativeSkills` and `channels.<provider>.commands.nativeSkills`.
+* command specs can provide `descriptionLocalizations` for native surfaces that support localized descriptions, including Discord.
 
 <AccordionGroup>
   <Accordion title="Argument and parser notes">

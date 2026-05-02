@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
-source_hash: "6b96c6c4d4469152069b15e39e0bb60130a43963a619d676c0989fc25546c540"
+source_hash: "ec89f2e4a1b63680fa42a83c3db318aa4cf27cfd6f99b9807870b664fdb49f66"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1
@@ -92,6 +92,8 @@ Source: https://docs.openclaw.ai/reference/test
 * `pnpm test:docker:published-upgrade-survivor`: Installs `openclaw@latest` by default, seeds realistic existing-user files without live provider or channel keys, configures that baseline with a baked `openclaw config set` command recipe, updates that published install to the packed OpenClaw tarball, runs non-interactive doctor, writes `.artifacts/upgrade-survivor/summary.json`, then starts a loopback Gateway and checks that configured intents, workspace/session files, stale plugin config and legacy dependency state, startup, `/healthz`, `/readyz`, and RPC status survive or repair cleanly. Override one baseline with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC`, expand an exact matrix with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPECS`, or add scenario fixtures with `OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues`; Package Acceptance exposes those as `published_upgrade_survivor_baseline`, `published_upgrade_survivor_baselines`, and `published_upgrade_survivor_scenarios`.
 
 * `pnpm test:docker:update-migration`: Runs the published-upgrade survivor harness in the cleanup-heavy `plugin-deps-cleanup` scenario, starting at `openclaw@2026.4.23` by default. The separate `Update Migration` workflow expands this lane with `baselines=all-since-2026.4.23` so every stable published package from `.23` onward updates to the candidate and proves configured-plugin dependency cleanup outside Full Release CI.
+
+* `pnpm test:docker:plugins`: Runs install/update smoke for local path, `file:`, npm registry packages with hoisted dependencies, git moving refs, ClawHub fixtures, marketplace updates, and Claude-bundle enable/inspect.
 
 ## Local PR gate
 

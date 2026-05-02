@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "49447662da4d29dc641770e85f93f7268cce48b6e5f93ef304e631ad67be54c6"
+source_hash: "4d68e4ea416812734be5cc871812e675818ffdc0bad6598416e42d56a99f64b7"
 doc_path: "cli/message.md"
 original_doc_path: "cli/message.md"
 duplicate_index: 1
@@ -108,7 +108,8 @@ Name lookup:
 * `read`
   * Channels: Discord/Slack/Matrix
   * Required: `--target`
-  * Optional: `--limit`, `--before`, `--after`
+  * Optional: `--limit`, `--message-id`, `--before`, `--after`
+  * Slack only: `--message-id` reads a specific Slack message timestamp; combine with `--thread-id` to read an exact thread reply.
   * Discord only: `--around`
 
 * `edit`

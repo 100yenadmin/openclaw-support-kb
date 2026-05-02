@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migration guide"
 source: "https://docs.openclaw.ai/install/migrating"
-source_hash: "be902b16604667b9f12771041779a846af228337d23c80babaa4a69111b28008"
+source_hash: "f0d3353e30ba6dcb81c5914425333aa418d1cd0e1f9c01b5cb4f3c438c735dd5"
 doc_path: "install/migrating.md"
 original_doc_path: "install/migrating.md"
 duplicate_index: 1
@@ -85,6 +85,14 @@ Copy the **state directory** (`~/.openclaw/` by default) and your **workspace** 
     ```
   </Step>
 </Steps>
+
+If Telegram or Discord uses the default env fallback (`TELEGRAM_BOT_TOKEN` or `DISCORD_BOT_TOKEN`), verify the migrated state-dir `.env` contains those keys without printing the secret values:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+awk -F= '/^(TELEGRAM_BOT_TOKEN|DISCORD_BOT_TOKEN)=/ { print $1 "=present" }' ~/.openclaw/.env
+```
+
+`openclaw doctor` also warns when an enabled default Telegram or Discord account has no configured token and the matching env variable is unavailable to the doctor process.
 
 ### Common pitfalls
 

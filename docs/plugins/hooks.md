@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "c8f499bec14979b523a7f01722ededc7f79b36591c21e444d1cb23cfa2d8d412"
+source_hash: "252d06f3790431fe67238b653627fa37706f82bdabf5fa7add4b35f9edd616f4"
 doc_path: "plugins/hooks.md"
 original_doc_path: "plugins/hooks.md"
 duplicate_index: 1
@@ -217,6 +217,11 @@ identify the active run. The same value is also available on `ctx.runId`.
 Cron-driven runs also expose `ctx.jobId` (the originating cron job id) so
 plugin hooks can scope metrics, side effects, or state to a specific scheduled
 job.
+
+For channel-originated runs, `ctx.messageProvider` is the provider surface such
+as `discord` or `telegram`, while `ctx.channelId` is the conversation target
+identifier when OpenClaw can derive one from the session key or delivery
+metadata.
 
 `agent_end` is an observation hook and runs fire-and-forget after the turn. The
 hook runner applies a 30 second timeout so a wedged plugin or embedding

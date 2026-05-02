@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "e9dbea791b11ba7d0b2ecfa772327f321bbfb19224989b69994b49619c7a966e"
+source_hash: "2254a3cbd2ee877453e6e42a414ef1adc3a1bbb574dc74404ab74085f88a9a92"
 doc_path: "plugins/sdk-setup.md"
 original_doc_path: "plugins/sdk-setup.md"
 duplicate_index: 1
@@ -165,14 +165,14 @@ Example:
 
 `openclaw.install` is package metadata, not manifest metadata.
 
-| Field                        | Type                 | What it means                                                                    |
-| ---------------------------- | -------------------- | -------------------------------------------------------------------------------- |
-| `npmSpec`                    | `string`             | Canonical npm spec for install/update flows.                                     |
-| `localPath`                  | `string`             | Local development or bundled install path.                                       |
-| `defaultChoice`              | `"npm"` \| `"local"` | Preferred install source when both are available.                                |
-| `minHostVersion`             | `string`             | Minimum supported OpenClaw version in the form `>=x.y.z`.                        |
-| `expectedIntegrity`          | `string`             | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.   |
-| `allowInvalidConfigRecovery` | `boolean`            | Lets bundled-plugin reinstall flows recover from specific stale-config failures. |
+| Field                        | Type                 | What it means                                                                     |
+| ---------------------------- | -------------------- | --------------------------------------------------------------------------------- |
+| `npmSpec`                    | `string`             | Canonical npm spec for install/update flows.                                      |
+| `localPath`                  | `string`             | Local development or bundled install path.                                        |
+| `defaultChoice`              | `"npm"` \| `"local"` | Preferred install source when both are available.                                 |
+| `minHostVersion`             | `string`             | Minimum supported OpenClaw version in the form `>=x.y.z` or `>=x.y.z-prerelease`. |
+| `expectedIntegrity`          | `string`             | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.    |
+| `allowInvalidConfigRecovery` | `boolean`            | Lets bundled-plugin reinstall flows recover from specific stale-config failures.  |
 
 <AccordionGroup>
   <Accordion title="Onboarding behavior">
@@ -180,7 +180,7 @@ Example:
   </Accordion>
 
   <Accordion title="minHostVersion enforcement">
-    If `minHostVersion` is set, install and manifest-registry loading both enforce it. Older hosts skip the plugin; invalid version strings are rejected.
+    If `minHostVersion` is set, install and non-bundled manifest-registry loading both enforce it. Older hosts skip external plugins; invalid version strings are rejected. Bundled source plugins are assumed to be co-versioned with the host checkout.
   </Accordion>
 
   <Accordion title="Pinned npm installs">

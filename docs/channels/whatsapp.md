@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "33118183c837debcba6b8520c155aac64fb7096e05673a2c4d4d9e5c90684065"
+source_hash: "4727fe8106d16c12a70322c2eeb7d38ae64f88b1dd8c6a3562b1982a40db5ce5"
 doc_path: "channels/whatsapp.md"
 original_doc_path: "channels/whatsapp.md"
 duplicate_index: 1
@@ -289,6 +289,10 @@ When the linked self number is also present in `allowFrom`, WhatsApp self-chat s
     ```
 
     Reply metadata fields are also populated when available (`ReplyToId`, `ReplyToBody`, `ReplyToSender`, sender JID/E.164).
+    When the quoted reply target is downloadable media, OpenClaw saves it through
+    the normal inbound media store and exposes it as `MediaPath`/`MediaType` so
+    the agent can inspect the referenced image instead of only seeing
+    `<media:image>`.
   </Accordion>
 
   <Accordion title="Media placeholders and location/contact extraction">

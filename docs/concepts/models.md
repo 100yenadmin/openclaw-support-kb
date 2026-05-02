@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models CLI"
 source: "https://docs.openclaw.ai/concepts/models"
-source_hash: "99745d8f7ab508a374ba359dccd1d2c65c6ae222a056441cb67405432f45a1b1"
+source_hash: "53c2a4588440b1326e669238be90726ab695124ec8a8fde0ed962d8064829445"
 doc_path: "concepts/models.md"
 original_doc_path: "concepts/models.md"
 duplicate_index: 1
@@ -31,7 +31,7 @@ Source: https://docs.openclaw.ai/concepts/models
   </Card>
 </CardGroup>
 
-Model refs choose a provider and model. They do not usually choose the low-level agent runtime. For example, `openai/gpt-5.5` can run through the normal OpenAI provider path or through the Codex app-server runtime, depending on `agents.defaults.agentRuntime.id`. See [Agent runtimes](/concepts/agent-runtimes).
+Model refs choose a provider and model. They do not usually choose the low-level agent runtime. For example, `openai/gpt-5.5` can run through the normal OpenAI provider path or through the Codex app-server runtime, depending on `agents.defaults.agentRuntime.id`. In Codex runtime mode, the `openai/gpt-*` ref does not imply API-key billing; auth can come from a Codex account or `openai-codex` auth profile. See [Agent runtimes](/concepts/agent-runtimes).
 
 ## How model selection works
 

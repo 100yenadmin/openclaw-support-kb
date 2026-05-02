@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "e3ed683ff9c1584f67bf9c3aca8ae935b764ecc9cecc0d07a8fd3ae8c578de62"
+source_hash: "16333e1455e2d79735da0b2398998c7c8a175a8dddada167df5d3de5302f3b26"
 doc_path: "providers/minimax.md"
 original_doc_path: "providers/minimax.md"
 duplicate_index: 1
@@ -20,7 +20,7 @@ MiniMax also provides:
 * Bundled speech synthesis via T2A v2
 * Bundled image understanding via `MiniMax-VL-01`
 * Bundled music generation via `music-2.6`
-* Bundled `web_search` through the MiniMax Coding Plan search API
+* Bundled `web_search` through the MiniMax Token Plan search API
 
 Provider split:
 
@@ -370,16 +370,16 @@ when the bundled text-provider catalog still shows text-only M2.7 chat refs.
 
 ### Web search
 
-The MiniMax plugin also registers `web_search` through the MiniMax Coding Plan
+The MiniMax plugin also registers `web_search` through the MiniMax Token Plan
 search API.
 
 * Provider id: `minimax`
 * Structured results: titles, URLs, snippets, related queries
 * Preferred env var: `MINIMAX_CODE_PLAN_KEY`
-* Accepted env alias: `MINIMAX_CODING_API_KEY`
-* Compatibility fallback: `MINIMAX_API_KEY` when it already points at a coding-plan token
+* Accepted env aliases: `MINIMAX_CODING_API_KEY`, `MINIMAX_OAUTH_TOKEN`
+* Compatibility fallback: `MINIMAX_API_KEY` when it already points at a token-plan credential
 * Region reuse: `plugins.entries.minimax.config.webSearch.region`, then `MINIMAX_API_HOST`, then MiniMax provider base URLs
-* Search stays on provider id `minimax`; OAuth CN/global setup can still steer region indirectly through `models.providers.minimax-portal.baseUrl`
+* Search stays on provider id `minimax`; OAuth CN/global setup can steer region indirectly through `models.providers.minimax-portal.baseUrl` and can provide bearer auth through `MINIMAX_OAUTH_TOKEN`
 
 Config lives under `plugins.entries.minimax.config.webSearch.*`.
 
@@ -509,7 +509,7 @@ Config lives under `plugins.entries.minimax.config.webSearch.*`.
   </Card>
 
   <Card title="MiniMax Search" href="/tools/minimax-search" icon="magnifying-glass">
-    Web search configuration via MiniMax Coding Plan.
+    Web search configuration via MiniMax Token Plan.
   </Card>
 
   <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">

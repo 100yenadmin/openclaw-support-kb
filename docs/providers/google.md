@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "e20ad391a5cd44e378ebdd008184259b55fae00676ff5f8e0a53e29456658a3a"
+source_hash: "9fe6566a2037189d5176adac065cc69c92852a884939c4774cbd651a6282668b"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1
@@ -152,6 +152,36 @@ Choose your preferred auth method and follow the setup steps.
 | Web search (Grounding) | Yes                           |
 | Thinking/reasoning     | Yes (Gemini 2.5+ / Gemini 3+) |
 | Gemma 4 models         | Yes                           |
+
+## Web search
+
+The bundled `gemini` web-search provider uses Gemini Google Search grounding.
+Configure a dedicated search key under `plugins.entries.google.config.webSearch`,
+or let it reuse `models.providers.google.apiKey` after `GEMINI_API_KEY`:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  plugins: {
+    entries: {
+      google: {
+        config: {
+          webSearch: {
+            apiKey: "AIza...", // optional if GEMINI_API_KEY or models.providers.google.apiKey is set
+            baseUrl: "https://generativelanguage.googleapis.com/v1beta", // falls back to models.providers.google.baseUrl
+            model: "gemini-2.5-flash",
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+Credential precedence is dedicated `webSearch.apiKey`, then `GEMINI_API_KEY`,
+then `models.providers.google.apiKey`. `webSearch.baseUrl` is optional and
+exists for operator proxies or compatible Gemini API endpoints; when omitted,
+Gemini web search reuses `models.providers.google.baseUrl`. See
+[Gemini search](/tools/gemini-search) for the provider-specific tool behavior.
 
 <Tip>
   Gemini 3 models use `thinkingLevel` rather than `thinkingBudget`. OpenClaw maps

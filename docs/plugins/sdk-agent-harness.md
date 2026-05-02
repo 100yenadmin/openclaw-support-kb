@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "0fd002a2488fec24b305c851c573c1ad7514b017572d973f1ac624a1cd2207c1"
+source_hash: "f14c479bfddf099bc8cb73479293c20741ccb14d035a4b042d109c62afd8117b"
 doc_path: "plugins/sdk-agent-harness.md"
 original_doc_path: "plugins/sdk-agent-harness.md"
 duplicate_index: 1
@@ -221,10 +221,10 @@ to PI.
 
 In `auto` mode, set `fallback: "none"` when you need missing plugin harness
 selection to fail instead of using PI. Explicit plugin runtimes such as
-`runtime: "codex"` already fail closed by default, unless `fallback: "pi"` is
-set in the same config or environment override scope. Selected plugin harness
-failures always fail hard. This does not block an explicit `runtime: "pi"` or
-`OPENCLAW_AGENT_RUNTIME=pi`.
+`agentRuntime.id: "codex"` already fail closed by default, unless
+`fallback: "pi"` is set in the same config or environment override scope.
+Selected plugin harness failures always fail hard. This does not block an
+explicit `agentRuntime.id: "pi"` or `OPENCLAW_AGENT_RUNTIME=pi`.
 
 For Codex-only embedded runs:
 

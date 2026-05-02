@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "c84685a1381aaa7ac2ff7b123273beb9d4c65828d41f5019a9e36d4952ff36cd"
+source_hash: "42d0bd8a0efc9cfc769b7f9bb800ada8ac2031e1343c56789cf11d80a493f722"
 doc_path: "automation/cron-jobs.md"
 original_doc_path: "automation/cron-jobs.md"
 duplicate_index: 1
@@ -169,6 +169,8 @@ Before an isolated cron run enters the agent runner, OpenClaw checks reachable l
 | `none`     | No runner fallback delivery                                         |
 
 Use `--announce --channel telegram --to "-1001234567890"` for channel delivery. For Telegram forum topics, use `-1001234567890:topic:123`; direct RPC/config callers may also pass `delivery.threadId` as a string or number. Slack/Discord/Mattermost targets should use explicit prefixes (`channel:<id>`, `user:<id>`). Matrix room IDs are case-sensitive; use the exact room ID or `room:!room:server` form from Matrix.
+
+When announce delivery uses `channel: "last"` or omits `channel`, a provider-prefixed target such as `telegram:123` can select the channel before cron falls back to session history or a single configured channel. Only prefixes advertised by the loaded plugin are provider selectors. If `delivery.channel` is explicit, the target prefix must name the same provider; for example, `channel: "whatsapp"` with `to: "telegram:123"` is rejected instead of letting WhatsApp interpret the Telegram ID as a phone number. Target-kind and service prefixes such as `channel:<id>`, `user:<id>`, `imessage:<handle>`, and `sms:<number>` remain channel-owned target syntax, not provider selectors.
 
 For isolated jobs, chat delivery is shared. If a chat route is available, the agent can use the `message` tool even when the job uses `--no-deliver`. If the agent sends to the configured/current target, OpenClaw skips the fallback announce. Otherwise `announce`, `webhook`, and `none` only control what the runner does with the final reply after the agent turn.
 
