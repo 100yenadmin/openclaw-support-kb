@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CI pipeline"
 source: "https://docs.openclaw.ai/ci"
-source_hash: "89abdc7f00329d7be229651f02502988d855d420cd1fbbe5d9e64b7aa25571f4"
+source_hash: "39a9a15bc0d672128d9f4079cd08c6697dae9d7b5bf0d29cd72c7c39c3d3c699"
 doc_path: "ci.md"
 original_doc_path: "ci.md"
 duplicate_index: 1
@@ -63,6 +63,23 @@ The slowest Node test families are split or balanced so each job stays small wit
 Android CI runs both `testPlayDebugUnitTest` and `testThirdPartyDebugUnitTest` and then builds the Play debug APK. The third-party flavor has no separate source set or manifest; its unit-test lane still compiles the flavor with the SMS/call-log BuildConfig flags, while avoiding a duplicate debug APK packaging job on every Android-relevant push.
 
 The `check-dependencies` shard runs `pnpm deadcode:dependencies` (a production Knip dependency-only pass pinned to the latest Knip version, with pnpm's minimum release age disabled for the `dlx` install) and `pnpm deadcode:unused-files`, which compares Knip's production unused-file findings against `scripts/deadcode-unused-files.allowlist.mjs`. The unused-file guard fails when a PR adds a new unreviewed unused file or leaves a stale allowlist entry, while preserving intentional dynamic plugin, generated, build, live-test, and package bridge surfaces that Knip cannot resolve statically.
+
+## ClawSweeper activity forwarding
+
+`.github/workflows/clawsweeper-dispatch.yml` is the target-side bridge from OpenClaw repository activity into ClawSweeper. It does not check out or execute untrusted pull request code. The workflow creates a GitHub App token from `CLAWSWEEPER_APP_PRIVATE_KEY`, then dispatches compact `repository_dispatch` payloads to `openclaw/clawsweeper`.
+
+The workflow has four lanes:
+
+* `clawsweeper_item` for exact issue and pull request review requests;
+* `clawsweeper_comment` for explicit ClawSweeper commands in issue comments;
+* `clawsweeper_commit_review` for commit-level review requests on `main` pushes;
+* `github_activity` for general GitHub activity that the ClawSweeper agent may inspect.
+
+The `github_activity` lane forwards normalized metadata only: event type, action, actor, repository, item number, URL, title, state, and short excerpts for comments or reviews when present. It intentionally avoids forwarding the full webhook body. The receiving workflow in `openclaw/clawsweeper` is `.github/workflows/github-activity.yml`, which posts the normalized event to the OpenClaw Gateway hook for the ClawSweeper agent.
+
+General activity is observation, not delivery-by-default. The ClawSweeper agent receives the Discord target in its prompt and should post to `#clawsweeper` only when the event is surprising, actionable, risky, or operationally useful. Routine opens, edits, bot churn, duplicate webhook noise, and normal review traffic should result in `NO_REPLY`.
+
+Treat GitHub titles, comments, bodies, review text, branch names, and commit messages as untrusted data throughout this path. They are input for summarization and triage, not instructions for the workflow or agent runtime.
 
 ## Manual dispatches
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "de57609fa222281a5a2eabff77e1c9a2fd79edbf4f382f451f4297923ed182bb"
+source_hash: "9164ba2cef5c96e822e7d37c0218faa0184a532a2054e82280d56bde37bec909"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -27,7 +27,9 @@ falls back to npm automatically for packages that still use npm distribution.
 
 * Node >= 22 and a package manager (npm or pnpm)
 * Familiarity with TypeScript (ESM)
-* For in-repo plugins: repository cloned and `pnpm install` done
+* For in-repo plugins: repository cloned and `pnpm install` done. Source
+  checkout plugin development is pnpm-only because OpenClaw loads bundled
+  plugins from the `extensions/*` workspace packages.
 
 ## What kind of plugin?
 

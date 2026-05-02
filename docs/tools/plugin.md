@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "23dc26f81e76a61253a29cc591b7d27621761a1ead3637266a87b6910872d3fc"
+source_hash: "259239ab70eda1d6ad56bc07bb9b7cb7ff68cf980f91a2d6f49308f847c5ed36"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -107,6 +107,12 @@ dependencies. External plugins and custom load paths must still be installed
 through `openclaw plugins install`.
 See [Plugin dependency resolution](/plugins/dependency-resolution) for the
 install-time lifecycle.
+
+Source checkouts are pnpm workspaces. If you clone OpenClaw to hack on bundled
+plugins, run `pnpm install`; OpenClaw then loads bundled plugins from
+`extensions/<id>` so edits and package-local dependencies are used directly.
+Plain npm root installs are for packaged OpenClaw, not source checkout
+development.
 
 ## Plugin types
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "bae7d53334ebca0ffaffa4d1958857fc176fe1f0bc1ba962a02939f0bdd9ca8e"
+source_hash: "92975858ee5d95bf296d0cb24f603d87c6accfb98f9870b02fdfd278b5fc07ea"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -97,6 +97,12 @@ downloadable package on ClawHub/npm.
 Bundled plugin manifests must not request dependency staging. Large or optional
 plugin functionality should be packaged as a normal plugin and installed through
 the same npm/git/ClawHub path as third-party plugins.
+
+In source checkouts, OpenClaw treats the repository as a pnpm monorepo. After
+`pnpm install`, bundled plugins load from `extensions/<id>` so package-local
+workspace dependencies are available and edits are picked up directly. Source
+checkout development is pnpm-only; plain `npm install` at the repository root is
+not a supported way to prepare bundled plugin dependencies.
 
 ## Legacy cleanup
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawHub"
 source: "https://docs.openclaw.ai/tools/clawhub"
-source_hash: "e6584af01558d51111c6bc7e54288a2071c8a97c49709180628e52a8979c781a"
+source_hash: "50b2e9d38e9854efb32ff4ae94022f1230fc3943ad12a43bfe99840e8be85ff3"
 doc_path: "tools/clawhub.md"
 original_doc_path: "tools/clawhub.md"
 duplicate_index: 1
@@ -87,7 +87,11 @@ Site: [clawhub.ai](https://clawhub.ai)
     Plugin installs validate advertised `pluginApi` and
     `minGatewayVersion` compatibility before archive install runs, so
     incompatible hosts fail closed early instead of partially installing
-    the package.
+    the package. When a package version publishes a ClawPack artifact,
+    OpenClaw prefers that artifact, verifies the ClawHub digest header and
+    downloaded bytes, and records the ClawPack digest metadata for later
+    updates. Older package versions without ClawPack metadata still use the
+    legacy package archive verification path.
   </Tab>
 </Tabs>
 
