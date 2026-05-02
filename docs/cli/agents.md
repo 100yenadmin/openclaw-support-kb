@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
-source_hash: "a5b79c33956fe1bcb698d267a894f08a0f1b5534eb6bfa0714e9f7ea779e80e7"
+source_hash: "41c725771afbe9817fbb81283db132302095ffd3ee0e6de58f4c4ea6e308c860"
 doc_path: "cli/agents.md"
 original_doc_path: "cli/agents.md"
 duplicate_index: 1
@@ -160,6 +160,7 @@ Notes:
 * `main` cannot be deleted.
 * Without `--force`, interactive confirmation is required.
 * Workspace, agent state, and session transcript directories are moved to Trash, not hard-deleted.
+* When the Gateway is reachable, deletion is sent through the Gateway so config and session-store cleanup share the same writer as runtime traffic. If the Gateway cannot be reached, the CLI falls back to the offline local path.
 * If another agent's workspace is the same path, inside this workspace, or contains this workspace,
   the workspace is retained and `--json` reports `workspaceRetained`,
   `workspaceRetainedReason`, and `workspaceSharedWith`.

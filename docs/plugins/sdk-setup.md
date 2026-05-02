@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "2254a3cbd2ee877453e6e42a414ef1adc3a1bbb574dc74404ab74085f88a9a92"
+source_hash: "1f2d6c4864a6632d7c4ff21e42b39e314405eb3cf5a05057fcc90f80e2b1ee3f"
 doc_path: "plugins/sdk-setup.md"
 original_doc_path: "plugins/sdk-setup.md"
 duplicate_index: 1
@@ -165,18 +165,19 @@ Example:
 
 `openclaw.install` is package metadata, not manifest metadata.
 
-| Field                        | Type                 | What it means                                                                     |
-| ---------------------------- | -------------------- | --------------------------------------------------------------------------------- |
-| `npmSpec`                    | `string`             | Canonical npm spec for install/update flows.                                      |
-| `localPath`                  | `string`             | Local development or bundled install path.                                        |
-| `defaultChoice`              | `"npm"` \| `"local"` | Preferred install source when both are available.                                 |
-| `minHostVersion`             | `string`             | Minimum supported OpenClaw version in the form `>=x.y.z` or `>=x.y.z-prerelease`. |
-| `expectedIntegrity`          | `string`             | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.    |
-| `allowInvalidConfigRecovery` | `boolean`            | Lets bundled-plugin reinstall flows recover from specific stale-config failures.  |
+| Field                        | Type                                | What it means                                                                     |
+| ---------------------------- | ----------------------------------- | --------------------------------------------------------------------------------- |
+| `clawhubSpec`                | `string`                            | Canonical ClawHub spec for install/update and onboarding install-on-demand flows. |
+| `npmSpec`                    | `string`                            | Canonical npm spec for install/update fallback flows.                             |
+| `localPath`                  | `string`                            | Local development or bundled install path.                                        |
+| `defaultChoice`              | `"clawhub"` \| `"npm"` \| `"local"` | Preferred install source when multiple sources are available.                     |
+| `minHostVersion`             | `string`                            | Minimum supported OpenClaw version in the form `>=x.y.z` or `>=x.y.z-prerelease`. |
+| `expectedIntegrity`          | `string`                            | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.    |
+| `allowInvalidConfigRecovery` | `boolean`                           | Lets bundled-plugin reinstall flows recover from specific stale-config failures.  |
 
 <AccordionGroup>
   <Accordion title="Onboarding behavior">
-    Interactive onboarding also uses `openclaw.install` for install-on-demand surfaces. If your plugin exposes provider auth choices or channel setup/catalog metadata before runtime loads, onboarding can show that choice, prompt for npm vs local install, install or enable the plugin, then continue the selected flow. Npm onboarding choices require trusted catalog metadata with a registry `npmSpec`; exact versions and `expectedIntegrity` are optional pins. If `expectedIntegrity` is present, install/update flows enforce it. Keep the "what to show" metadata in `openclaw.plugin.json` and the "how to install it" metadata in `package.json`.
+    Interactive onboarding also uses `openclaw.install` for install-on-demand surfaces. If your plugin exposes provider auth choices or channel setup/catalog metadata before runtime loads, onboarding can show that choice, prompt for ClawHub, npm, or local install, install or enable the plugin, then continue the selected flow. ClawHub onboarding choices use `clawhubSpec` and are preferred when present; npm choices require trusted catalog metadata with a registry `npmSpec`; exact versions and `expectedIntegrity` are optional npm pins. If `expectedIntegrity` is present, install/update flows enforce it for npm. Keep the "what to show" metadata in `openclaw.plugin.json` and the "how to install it" metadata in `package.json`.
   </Accordion>
 
   <Accordion title="minHostVersion enforcement">

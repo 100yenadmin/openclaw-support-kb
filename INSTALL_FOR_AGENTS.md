@@ -137,8 +137,8 @@ Best production posture is both:
 
 1. fleet/control-panel calls `run-client-update.mjs` on KB publish or OpenClaw
    release events for near-immediate freshness
-2. local cron fallback runs the same command hourly so missed fleet events heal
-   themselves
+2. local cron fallback runs the same command daily at a stable per-host time so
+   missed fleet events heal themselves without noisy polling
 
 The runner uses a lock so duplicate fleet and cron updates do not overlap. It
 writes the last result to

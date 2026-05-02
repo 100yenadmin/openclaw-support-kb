@@ -4,6 +4,7 @@ import { mkdir } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import {
+  defaultCronHour,
   defaultCronMinute,
   managedCronBlock,
   shellQuote,
@@ -19,7 +20,7 @@ if (args.help) {
 
 const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const mode = args.mode || "print";
-const schedule = args.schedule || `${defaultCronMinute()} * * * *`;
+const schedule = args.schedule || `${defaultCronMinute()} ${defaultCronHour()} * * *`;
 const channel = process.env.OPENCLAW_KB_CHANNEL || args.channel || "stable";
 const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || "https://github.com/100yenadmin/openclaw-support-kb.git";
 const logPath =
@@ -35,7 +36,7 @@ function printUsage() {
 Options:
   --mode print|crontab   Print the managed command/block, or install it into crontab.
                          Defaults to print; crontab mutation must be explicit.
-  --schedule "CRON"      Five-field cron schedule. Defaults to a stable hourly minute.
+  --schedule "CRON"      Five-field cron schedule. Defaults to a stable daily time.
   --channel stable|beta  KB channel to pass to client updates.
   --run-now             After --mode crontab install, run one immediate update.
   -h, --help            Show this help without changing crontab.

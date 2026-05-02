@@ -206,4 +206,4 @@ available and OpenClaw Telegram messaging for `@evaOS_support_bot` fallback.
 ## CI
 
 `.github/workflows/update-kb.yml` rebuilds weekly, on OpenClaw release events,
-and on hourly release/docs freshness checks.
+and on daily release/docs freshness checks.

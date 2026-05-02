@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools and plugins"
 source: "https://docs.openclaw.ai/tools/index"
-source_hash: "bc714d141f6be2612c3b733e72ebe438a2685fa01575f1a5a35be9a9a4d98201"
+source_hash: "2592500358fbe698857f5db8377f61b86c60770444a19ecd6feb1dd9b87eb2f8"
 doc_path: "tools/index.md"
 original_doc_path: "tools/index.md"
 duplicate_index: 1
@@ -113,6 +113,12 @@ Plugins can register additional tools. Some examples:
 * [Music Generation](/tools/music-generation) — shared `music_generate` tool with workflow-backed providers
 * [OpenProse](/prose) — markdown-first workflow orchestration
 * [Tokenjuice](/tools/tokenjuice) — compact noisy `exec` and `bash` tool results
+
+Plugin tools are still authored with `api.registerTool(...)` and declared in
+the plugin manifest's `contracts.tools` list. OpenClaw captures the validated
+tool descriptor during discovery and caches it by plugin source and contract, so
+later tool planning can skip plugin runtime loading. Tool execution still loads
+the owning plugin and calls the live registered implementation.
 
 ## Tool configuration
 

@@ -8,6 +8,7 @@ import { pathToFileURL } from "node:url";
 import {
   AUTO_UPDATE_CRON_END,
   AUTO_UPDATE_CRON_START,
+  defaultCronHour,
   defaultCronMinute,
   escapeCronPercents,
   managedCronBlock,
@@ -210,13 +211,16 @@ test("managed cron block refuses malformed managed marker state", () => {
   );
 });
 
-test("cron helpers are stable for shell quoting and minute jitter", () => {
+test("cron helpers are stable for shell quoting and daily jitter", () => {
   assert.equal(shellQuote("it's fine"), "'it'\\''s fine'");
   assert.throws(() => shellQuote("bad\nvalue"), /newlines/);
   assert.throws(() => shellQuote("bad\0value"), /null bytes/);
   assert.equal(defaultCronMinute("same-host"), defaultCronMinute("same-host"));
+  assert.equal(defaultCronHour("same-host"), defaultCronHour("same-host"));
   assert.ok(defaultCronMinute("same-host") >= 0);
   assert.ok(defaultCronMinute("same-host") < 60);
+  assert.ok(defaultCronHour("same-host") >= 0);
+  assert.ok(defaultCronHour("same-host") < 24);
 });
 
 test("auto-update installer help and default print mode do not touch crontab", async () => {
@@ -249,6 +253,7 @@ test("auto-update installer help and default print mode do not touch crontab", a
     });
     assert.equal(printed.status, 0, printed.stderr);
     assert.match(printed.stdout, /openclaw-support-kb:auto-update/);
+    assert.match(printed.stdout, /^\d{1,2} \d{1,2} \* \* \*/m);
     assert.doesNotMatch(printed.stderr, /crontab should not run/);
   } finally {
     await rm(tempDir, { recursive: true, force: true });

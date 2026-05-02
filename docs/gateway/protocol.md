@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "048b874b813606b5073fdef69c8b2ce4bdc4a1868c189bef33728c8e58a5094f"
+source_hash: "7b7cba5ad4adcd9d4538b21ab3fbcbf1677fd69750eff6648dcace55f48ac9cb"
 doc_path: "gateway/protocol.md"
 original_doc_path: "gateway/protocol.md"
 duplicate_index: 1
@@ -398,6 +398,7 @@ enumeration of `src/gateway/server-methods/*.ts`.
     * `sessions.subscribe` and `sessions.unsubscribe` toggle session change event subscriptions for the current WS client.
     * `sessions.messages.subscribe` and `sessions.messages.unsubscribe` toggle transcript/message event subscriptions for one session.
     * `sessions.preview` returns bounded transcript previews for specific session keys.
+    * `sessions.describe` returns one Gateway session row for an exact session key.
     * `sessions.resolve` resolves or canonicalizes a session target.
     * `sessions.create` creates a new session entry.
     * `sessions.send` sends a message into an existing session.

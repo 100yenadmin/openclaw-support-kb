@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "77349ed730f3b1031147b7daaeb0d096ebee76e13f497f298393e242af8acabb"
+source_hash: "39448c37c9d5dc0a3a491f3cd0bcb7ae807b66b5df77d04702f3e6bdab625bd1"
 doc_path: "cli/sessions.md"
 original_doc_path: "cli/sessions.md"
 duplicate_index: 1
@@ -112,6 +112,10 @@ openclaw sessions cleanup --json
 * `--store <path>`: run against a specific `sessions.json` file.
 
 * `--json`: print a JSON summary. With `--all-agents`, output includes one summary per store.
+
+When a Gateway is reachable, non-dry-run cleanup for configured agent stores is
+sent through the Gateway so it shares the same session-store writer as runtime
+traffic. Use `--store <path>` for explicit offline repair of a store file.
 
 `openclaw sessions cleanup --all-agents --dry-run --json`:
 

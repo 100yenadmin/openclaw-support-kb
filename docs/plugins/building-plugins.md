@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "b2b385923e141122c9d282f1b22866fcd451c9a5ab071dd307a93436111081bd"
+source_hash: "dedf61f4b600ed77c1e8dff940286ff459cbe9bec311a9db010ead94739f33f4"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -258,6 +258,11 @@ plugin manifest:
   }
 }
 ```
+
+OpenClaw captures and caches the validated descriptor from the registered tool,
+so plugins do not duplicate `description` or schema data in the manifest. The
+manifest contract only declares ownership and discovery; execution still calls
+the live registered tool implementation.
 
 Users enable optional tools in config:
 

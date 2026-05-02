@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "b119379976a9543dff7af34c499b2c8cb4662ee818b78041ce2b4e3a0b46c5f1"
+source_hash: "ddd463513715accd37d4760d943f7afbeade9cc5eacd5d2b3a0229b9b4f32447"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -56,6 +56,15 @@ temporary set of OpenClaw-owned plugin packages while that migration finishes.
     ```
 
     Then configure under `plugins.entries.\<id\>.config` in your config file.
+  </Step>
+
+  <Step title="Chat-native management">
+    In a running Gateway, owner-only `/plugins enable` and `/plugins disable`
+    trigger the Gateway config reloader. The Gateway reloads plugin runtime
+    surfaces in process, and new agent turns rebuild their tool list from the
+    refreshed registry. `/plugins install` changes plugin source code, so the
+    Gateway requests a restart instead of pretending the current process can
+    safely reload already-imported modules.
   </Step>
 
   <Step title="Verify the plugin">
@@ -251,20 +260,19 @@ tool name. If a tool allowlist references plugin tools, add the owning plugin id
 to `plugins.allow` or remove `plugins.allow`; `openclaw doctor` warns about this
 shape.
 
-Config changes **require a gateway restart**. If the Gateway is running with config
-watch + in-process restart enabled (the default `openclaw gateway` path), that
-restart is usually performed automatically a moment after the config write lands.
-There is no supported hot-reload path for native plugin runtime code or lifecycle
-hooks; restart the Gateway process that is serving the live channel before
-expecting updated `register(api)` code, `api.on(...)` hooks, tools, services, or
-provider/runtime hooks to run.
+Config changes made through `/plugins enable` or `/plugins disable` trigger an
+in-process Gateway plugin reload. New agent turns rebuild their tool list from
+the refreshed plugin registry. Source-changing operations such as install,
+update, and uninstall still restart the Gateway process because already-imported
+plugin modules cannot be safely replaced in place.
 
 `openclaw plugins list` is a local plugin registry/config snapshot. An
 `enabled` plugin there means the persisted registry and current config allow the
 plugin to participate. It does not prove that an already-running remote Gateway
-child has restarted into the same plugin code. On VPS/container setups with
-wrapper processes, send restarts to the actual `openclaw gateway run` process,
-or use `openclaw gateway restart` against the running Gateway.
+has reloaded or restarted into the same plugin code. On VPS/container setups
+with wrapper processes, send restarts or reload-triggering writes to the actual
+`openclaw gateway run` process, or use `openclaw gateway restart` against the
+running Gateway when the reload reports a failure.
 
 <Accordion title="Plugin states: disabled vs missing vs invalid">
   * **Disabled**: plugin exists but enablement rules turned it off. Config is preserved.

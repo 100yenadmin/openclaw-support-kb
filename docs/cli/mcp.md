@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "285161d98428417a8720b91066fa29eaeb90576c9dae9a7b255395645fde0810"
+source_hash: "3e1002634b4995cd8c057a2fdae13bbd122d867bc5f75cbfc19cbc42ca57eda1"
 doc_path: "cli/mcp.md"
 original_doc_path: "cli/mcp.md"
 duplicate_index: 1
@@ -159,7 +159,7 @@ The current bridge exposes these MCP tools:
   </Accordion>
 
   <Accordion title="conversation_get">
-    Returns one conversation by `session_key`.
+    Returns one conversation by `session_key` using a direct Gateway session lookup.
   </Accordion>
 
   <Accordion title="messages_read">

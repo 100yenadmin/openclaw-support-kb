@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent loop"
 source: "https://docs.openclaw.ai/concepts/agent-loop"
-source_hash: "ec5de21c8b9f42c580d05ddfbc45e7eea681cf75a860faaffafe201533693ca4"
+source_hash: "52e2f84715e7729ce6be90fa2baae6405d16125bf69812fdecd02dd9793100e1"
 doc_path: "concepts/agent-loop.md"
 original_doc_path: "concepts/agent-loop.md"
 duplicate_index: 1
@@ -57,7 +57,8 @@ wired end-to-end.
   See [Command Queue](/concepts/queue).
 * Transcript writes are also protected by a session write lock on the session file. The lock is
   process-aware and file-based, so it catches writers that bypass the in-process queue or come from
-  another process.
+  another process. Session transcript writers wait up to `session.writeLock.acquireTimeoutMs`
+  before reporting the session as busy; the default is `60000` ms.
 * Session write locks are non-reentrant by default. If a helper intentionally nests acquisition of
   the same lock while preserving one logical writer, it must opt in explicitly with
   `allowReentrant: true`.
