@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "1880fd2918b4b1f476c99c7b83d930b216470db5d628af09a3db8dbfcef5394a"
+source_hash: "20b500faed96769def609bfcea58c2fde041b5a17b4608e55ee44fea0da5fb53"
 doc_path: "channels/slack.md"
 original_doc_path: "channels/slack.md"
 duplicate_index: 1
@@ -639,8 +639,8 @@ Notes:
 `channels.slack.streaming.nativeTransport` controls Slack native text streaming when `channels.slack.streaming.mode` is `partial` (default: `true`).
 
 * A reply thread must be available for native text streaming and Slack assistant thread status to appear. Thread selection still follows `replyToMode`.
-* Channel and group-chat roots can still use the normal draft preview when native streaming is unavailable.
-* Top-level Slack DMs stay off-thread by default, so they do not show the thread-style preview; use thread replies or `typingReaction` if you want visible progress there.
+* Channel, group-chat, and top-level DM roots can still use the normal draft preview when native streaming is unavailable or no reply thread exists.
+* Top-level Slack DMs stay off-thread by default, so they do not show Slack's thread-style native stream/status preview; OpenClaw posts and edits a draft preview in the DM instead.
 * Media and non-text payloads fall back to normal delivery.
 * Media/error finals cancel pending preview edits; eligible text/block finals flush only when they can edit the preview in place.
 * If streaming fails mid-reply, OpenClaw falls back to normal delivery for remaining payloads.

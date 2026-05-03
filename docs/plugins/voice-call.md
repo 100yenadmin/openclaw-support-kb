@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "4bbd769f2e51715025d4e129fc48466a312303531728809acd8d0dc58afce359"
+source_hash: "5c3d45d65e40e4df3c709b5c15d3a674763fab54f773b49af3161e83c01278b0"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1
@@ -47,9 +47,8 @@ speech), `mock` (dev/no network).
       </Tab>
     </Tabs>
 
-    If npm reports the OpenClaw-owned package as deprecated, that package version
-    is from an older external package train; use a current packaged OpenClaw
-    build or the local folder path until a newer npm package is published.
+    Use the bare package to follow the current official release tag. Pin an
+    exact version only when you need a reproducible install.
 
     Restart the Gateway afterwards so the plugin loads.
   </Step>

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "6237fae60b47c789fe51cb15d8cb386c6af4f12ba04773c5b2abd12d98d4dd3f"
+source_hash: "fdb625f0665972522650da3c668ace00e2cdc33f2d28257d38ef17ad1fde43dd"
 doc_path: "plugins/manifest.md"
 original_doc_path: "plugins/manifest.md"
 duplicate_index: 1
@@ -1156,6 +1156,9 @@ If you are unsure where a piece of metadata belongs, use this rule:
 
 Some pre-runtime plugin metadata intentionally lives in `package.json` under the
 `openclaw` block instead of `openclaw.plugin.json`.
+`openclaw.bundle` and `openclaw.bundle.json` are not OpenClaw plugin contracts;
+native plugins must use `openclaw.plugin.json` plus the supported
+`package.json#openclaw` fields below.
 
 Important examples:
 

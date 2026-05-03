@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "f721d9ce5c818d8af20ede6fbf2119d8b766c73de4aff8469199e2fd4aea9388"
+source_hash: "80aa8a7ca7472d519b2f6a04e87609c046e42a957457c54a38bf427b10a8849e"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1
@@ -67,7 +67,6 @@ Then enable the bundled `codex` plugin and force the Codex runtime:
       model: "openai/gpt-5.5",
       agentRuntime: {
         id: "codex",
-        fallback: "none",
       },
     },
   },
@@ -265,6 +264,20 @@ For live and Docker smoke tests, auth usually comes from the Codex CLI account
 or an OpenClaw `openai-codex` auth profile. Local stdio app-server launches can
 also fall back to `CODEX_API_KEY` / `OPENAI_API_KEY` when no account is present.
 
+## Workspace bootstrap files
+
+Codex handles `AGENTS.md` itself through native project-doc discovery. OpenClaw
+does not write synthetic Codex project-doc files or depend on Codex fallback
+filenames for persona files, because Codex fallbacks only apply when
+`AGENTS.md` is missing.
+
+For OpenClaw workspace parity, the Codex harness resolves the other bootstrap
+files (`SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`,
+`BOOTSTRAP.md`, and `MEMORY.md` when present) and forwards them through Codex
+config instructions on `thread/start` and `thread/resume`. This keeps
+`SOUL.md` and related workspace persona/profile context visible without
+duplicating `AGENTS.md`.
+
 ## Add Codex alongside other models
 
 Do not set `agentRuntime.id: "codex"` globally if the same agent should freely switch
@@ -297,7 +310,6 @@ adds a separate Codex agent:
     defaults: {
       agentRuntime: {
         id: "auto",
-        fallback: "pi",
       },
     },
     list: [
@@ -350,8 +362,8 @@ routing.
 ## Codex-only deployments
 
 Force the Codex harness when you need to prove that every embedded agent turn
-uses Codex. Explicit plugin runtimes default to no PI fallback, so
-`fallback: "none"` is optional but often useful as documentation:
+uses Codex. Explicit plugin runtimes fail closed and are never silently retried
+through PI:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -360,7 +372,6 @@ uses Codex. Explicit plugin runtimes default to no PI fallback, so
       model: "openai/gpt-5.5",
       agentRuntime: {
         id: "codex",
-        fallback: "none",
       },
     },
   },
@@ -374,9 +385,7 @@ OPENCLAW_AGENT_RUNTIME=codex openclaw gateway run
 ```
 
 With Codex forced, OpenClaw fails early if the Codex plugin is disabled, the
-app-server is too old, or the app-server cannot start. Set
-`OPENCLAW_AGENT_HARNESS_FALLBACK=pi` only if you intentionally want PI to handle
-missing harness selection.
+app-server is too old, or the app-server cannot start.
 
 ## Per-agent Codex
 
@@ -389,7 +398,6 @@ auto-selection:
     defaults: {
       agentRuntime: {
         id: "auto",
-        fallback: "pi",
       },
     },
     list: [
@@ -404,7 +412,6 @@ auto-selection:
         model: "openai/gpt-5.5",
         agentRuntime: {
           id: "codex",
-          fallback: "none",
         },
       },
     ],
@@ -703,7 +710,6 @@ Minimal config:
       model: "openai/gpt-5.5",
       agentRuntime: {
         id: "codex",
-        fallback: "none",
       },
     },
   },
@@ -1051,9 +1057,8 @@ new configs. Select an `openai/gpt-*` model with
 **OpenClaw uses PI instead of Codex:** `agentRuntime.id: "auto"` can still use PI as the
 compatibility backend when no Codex harness claims the run. Set
 `agentRuntime.id: "codex"` to force Codex selection while testing. A
-forced Codex runtime now fails instead of falling back to PI unless you
-explicitly set `agentRuntime.fallback: "pi"`. Once Codex app-server is
-selected, its failures surface directly without extra fallback config.
+forced Codex runtime fails instead of falling back to PI. Once Codex app-server
+is selected, its failures surface directly.
 
 **The app-server is rejected:** upgrade Codex so the app-server handshake
 reports version `0.125.0` or newer. Same-version prereleases or build-suffixed

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "d8d3caa6c19df17b988e387d7553d3341154b90c4c975f63a5eca6ced713fefd"
+source_hash: "7e649cd690068ed1471ed308fe4cfffced4df4c4593ef5149dbb64ca7f7e8701"
 doc_path: "cli/hooks.md"
 original_doc_path: "cli/hooks.md"
 duplicate_index: 1
@@ -204,7 +204,7 @@ openclaw hooks disable command-logger
 ## Install hook packs
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw plugins install <package>        # ClawHub first, then npm
+openclaw plugins install <package>        # npm by default
 openclaw plugins install npm:<package>    # npm only
 openclaw plugins install <package> --pin  # pin version
 openclaw plugins install <path>           # local path

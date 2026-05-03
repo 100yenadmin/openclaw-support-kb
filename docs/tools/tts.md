@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "52453872d47669a0a786e9bb7914292effc27f530fdf361c169ae6521cdb72ba"
+source_hash: "c5173e838af5929c3175470de86cf9f5263354c61455f0f9fa91b7689c1c2ce6"
 doc_path: "tools/tts.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 1
@@ -886,6 +886,8 @@ OpenAI and ElevenLabs output formats are fixed per channel as listed above.
   </Accordion>
 
   <Accordion title="Inworld">
+    ### Inworld primary
+
     <ParamField type="string">Env: `INWORLD_API_KEY`.</ParamField>
     <ParamField type="string">Default `https://api.inworld.ai`.</ParamField>
     <ParamField type="string">Default `inworld-tts-1.5-max`. Also: `inworld-tts-1.5-mini`, `inworld-tts-1-max`, `inworld-tts-1`.</ParamField>

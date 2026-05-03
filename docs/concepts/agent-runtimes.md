@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "cb181da5188907a2193c3a8ae7991913f068bfa82250bd450da60dfa2ec9fca8"
+source_hash: "cef00365dc0b216c4b954cc289243b4aab304c3c901eaabf28322b9729a60f6c"
 doc_path: "concepts/agent-runtimes.md"
 original_doc_path: "concepts/agent-runtimes.md"
 duplicate_index: 1
@@ -146,15 +146,13 @@ OpenClaw chooses an embedded runtime after provider and model resolution:
    supported CLI backend alias such as `claude-cli`.
 4. In `auto` mode, registered plugin runtimes can claim supported provider/model
    pairs.
-5. If no runtime claims a turn in `auto` mode and `fallback: "pi"` is set
-   (the default), OpenClaw uses PI as the compatibility fallback. Set
-   `fallback: "none"` to make unmatched `auto`-mode selection fail instead.
+5. If no runtime claims a turn in `auto` mode, OpenClaw uses PI as the
+   compatibility runtime. Use an explicit runtime id when the run must be
+   strict.
 
-Explicit plugin runtimes fail closed by default. For example,
-`agentRuntime.id: "codex"` means Codex or a clear selection error unless you set
-`fallback: "pi"` in the same override scope. A runtime override does not inherit
-a broader fallback setting, so an agent-level `agentRuntime.id: "codex"` is not
-silently routed back to PI just because defaults used `fallback: "pi"`.
+Explicit plugin runtimes fail closed. For example, `agentRuntime.id: "codex"`
+means Codex or a clear selection/runtime error; it is never silently routed back
+to PI.
 
 CLI backend aliases are different from embedded harness ids. The preferred
 Claude CLI form is:

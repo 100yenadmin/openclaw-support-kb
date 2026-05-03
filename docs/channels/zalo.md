@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo"
 source: "https://docs.openclaw.ai/channels/zalo"
-source_hash: "98d026e25dea14a2b23085ab9436349a658e16ee27e06b6acc9ca04f5285add6"
+source_hash: "97bf1c46e1fb78c27aecfd4eb0c422e11eb89f14cbc468e23e815ce9bafeac53"
 doc_path: "channels/zalo.md"
 original_doc_path: "channels/zalo.md"
 duplicate_index: 1
@@ -20,16 +20,13 @@ Status: experimental. DMs are supported. The [Capabilities](#capabilities) secti
 Zalo ships as a bundled plugin in current OpenClaw releases, so normal packaged
 builds do not need a separate install.
 
-If you are on an older build or a custom install that excludes Zalo, install a
-current npm package when one is published:
+If you are on an older build or a custom install that excludes Zalo, install the
+npm package directly:
 
 * Install via CLI: `openclaw plugins install @openclaw/zalo`
+* Pinned version: `openclaw plugins install @openclaw/zalo@2026.5.2`
 * Or from a source checkout: `openclaw plugins install ./path/to/local/zalo-plugin`
 * Details: [Plugins](/tools/plugin)
-
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
 
 ## Quick setup (beginner)
 

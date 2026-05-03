@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "dedf61f4b600ed77c1e8dff940286ff459cbe9bec311a9db010ead94739f33f4"
+source_hash: "e4d07ad942eeda7d6ac462ddfa0e7a00bca21c2ecf673e2c5ec2aaf6dd670864"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -20,8 +20,8 @@ combination.
 
 You do not need to add your plugin to the OpenClaw repository. Publish to
 [ClawHub](/tools/clawhub) and users install with
-`openclaw plugins install <package-name>`. OpenClaw tries ClawHub first and
-falls back to npm automatically for packages that still use npm distribution.
+`openclaw plugins install clawhub:<package-name>`. Bare package specs still
+install from npm during the launch cutover.
 
 ## Prerequisites
 
@@ -144,9 +144,8 @@ and provider plugins have dedicated guides linked above.
     openclaw plugins install clawhub:@myorg/openclaw-my-plugin
     ```
 
-    OpenClaw also checks ClawHub before npm for bare package specs like
-    `@myorg/openclaw-my-plugin`; npm remains a fallback for packages that have
-    not migrated to ClawHub yet.
+    Bare package specs like `@myorg/openclaw-my-plugin` install from npm during
+    the launch cutover. Use `clawhub:` when you want ClawHub resolution.
 
     **In-repo plugins:** place under the bundled plugin workspace tree — automatically discovered.
 

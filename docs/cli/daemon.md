@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "1445e7efcbe01e010150bd501d18e57b2ae7531fa5ef5a260a77b334c4ebea47"
+source_hash: "f09d2f2e7c033039f31307643649e1636e669e432dff56dcb18af9e8265dc089"
 doc_path: "cli/daemon.md"
 original_doc_path: "cli/daemon.md"
 duplicate_index: 1
@@ -43,7 +43,8 @@ openclaw daemon uninstall
 
 * `status`: `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json`
 * `install`: `--port`, `--runtime <node|bun>`, `--token`, `--force`, `--json`
-* lifecycle (`uninstall|start|stop|restart`): `--json`
+* `restart`: `--force`, `--wait <duration>`, `--json`
+* lifecycle (`uninstall|start|stop`): `--json`
 
 Notes:
 

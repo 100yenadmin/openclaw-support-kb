@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "4558c915c197a9820eab32960a1df781a19fe09a89e6d7abd0da805c19a7582f"
+source_hash: "084d75038086a2ad3f76b345b18cc65545579fc9272f535718e5a52285b353b1"
 doc_path: "cli/update.md"
 original_doc_path: "cli/update.md"
 duplicate_index: 1
@@ -159,9 +159,14 @@ it manually.
   </Step>
 
   <Step title="Sync plugins">
-    Syncs plugins to the active channel. Dev uses bundled plugins; stable and beta use npm. Updates npm-installed plugins.
+    Syncs plugins to the active channel. Dev uses bundled plugins; stable and beta use npm. Updates tracked plugin installs.
   </Step>
 </Steps>
+
+On the beta update channel, tracked npm and ClawHub plugin installs that follow
+the default/latest line try a plugin `@beta` release first. If the plugin has no
+beta release, OpenClaw falls back to the recorded default/latest spec. Exact
+versions and explicit tags are not rewritten.
 
 <Warning>
   If an exact pinned npm plugin update resolves to an artifact whose integrity differs from the stored install record, `openclaw update` aborts that plugin artifact update instead of installing it. Reinstall or update the plugin explicitly only after verifying that you trust the new artifact.

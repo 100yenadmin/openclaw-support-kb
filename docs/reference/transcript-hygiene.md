@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "37c3324b125ee8f7e378b96cd5a3c906918d8e3402dc24c32cc09d8312b0a93e"
+source_hash: "51b21a4344f0ea53aa8f324db73228fb62b6b358d3a4268d63a98565ff78badc"
 doc_path: "reference/transcript-hygiene.md"
 original_doc_path: "reference/transcript-hygiene.md"
 duplicate_index: 1
@@ -13,9 +13,7 @@ Source: https://docs.openclaw.ai/reference/transcript-hygiene
 
 
 
-OpenClaw applies **provider-specific fixes** to transcripts before a run (building model context). Most of these are **in-memory** adjustments used to satisfy strict provider requirements. A separate session-file repair pass may also rewrite stored JSONL before the session is loaded, either by dropping malformed JSONL lines or by repairing persisted turns that are syntactically valid but known to be rejected by a
-provider during replay. When a repair occurs, the original file is backed up alongside
-the session file.
+OpenClaw applies **provider-specific fixes** to transcripts before a run (building model context). Most of these are **in-memory** adjustments used to satisfy strict provider requirements. A separate session-file repair pass may also rewrite stored JSONL before the session is loaded, but only for malformed lines or persisted turns that are invalid durable records. Delivered assistant replies are preserved on disk; provider-specific assistant-prefill stripping happens only while constructing outbound payloads. When a repair occurs, the original file is backed up alongside the session file.
 
 Scope includes:
 

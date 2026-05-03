@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "63064ff6e95fc65a087b70842002a5112f882a143ea2d4125d08fdb389971035"
+source_hash: "5f5fcfc77a0642e88835a8e53f691b1aeef907f2657a2f634a22173f4207e9b8"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1
@@ -36,7 +36,7 @@ works without code changes. For local file logs and how to read them, see
 For packaged installs, install the plugin first:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw plugins install @openclaw/diagnostics-otel
+openclaw plugins install clawhub:@openclaw/diagnostics-otel
 ```
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}

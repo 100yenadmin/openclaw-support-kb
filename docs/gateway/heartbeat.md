@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Heartbeat"
 source: "https://docs.openclaw.ai/gateway/heartbeat"
-source_hash: "57602568d3d418e8d6e648504da1bd1f80b8ce6e28a74ce09e744b9d4daf4b96"
+source_hash: "31fc29e6f33d1695595ce700fad6fd56b503ecd52d025a1acb187f8402552b0b"
 doc_path: "gateway/heartbeat.md"
 original_doc_path: "gateway/heartbeat.md"
 duplicate_index: 1
@@ -490,9 +490,9 @@ Heartbeats run full agent turns. Shorter intervals burn more tokens. To reduce c
 
 ## Context overflow after heartbeat
 
-If a heartbeat uses a smaller local model, for example an Ollama model with a 32k window, and the next main-session turn reports context overflow, check whether the previous heartbeat left the session on the heartbeat model. OpenClaw's reset message calls this out when the last runtime model matches configured `heartbeat.model`.
+If a heartbeat previously left an existing session on a smaller local model, for example an Ollama model with a 32k window, and the next main-session turn reports context overflow, reset the session runtime model back to the configured primary model. OpenClaw's reset message calls this out when the last runtime model matches configured `heartbeat.model`.
 
-Use `isolatedSession: true` to run heartbeats in a fresh session, combine it with `lightContext: true` for the smallest prompt, or choose a heartbeat model with a context window large enough for the shared session.
+Current heartbeats preserve the shared session's existing runtime model after the run completes. You can still use `isolatedSession: true` to run heartbeats in a fresh session, combine it with `lightContext: true` for the smallest prompt, or choose a heartbeat model with a context window large enough for the shared session.
 
 ## Related
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "94529a880ad145c862d4ddc7c5aeff5c35bdd35651245d1805b68aeca3350125"
+source_hash: "4c3b2af3256296955df020baad265abd0aaf3b983ff834f07c727d1a54e3a41c"
 doc_path: "help/testing-live.md"
 original_doc_path: "help/testing-live.md"
 duplicate_index: 1
@@ -295,8 +295,8 @@ Docker notes:
 * Optional image probe: `OPENCLAW_LIVE_CODEX_HARNESS_IMAGE_PROBE=1`
 * Optional MCP/tool probe: `OPENCLAW_LIVE_CODEX_HARNESS_MCP_PROBE=1`
 * Optional Guardian probe: `OPENCLAW_LIVE_CODEX_HARNESS_GUARDIAN_PROBE=1`
-* The smoke sets `OPENCLAW_AGENT_HARNESS_FALLBACK=none` so a broken Codex
-  harness cannot pass by silently falling back to PI.
+* The smoke uses `agentRuntime.id: "codex"` so a broken Codex harness cannot
+  pass by silently falling back to PI.
 * Auth: Codex app-server auth from the local Codex subscription login. Docker
   smokes can also provide `OPENAI_API_KEY` for non-Codex probes when applicable,
   plus optional copied `~/.codex/auth.json` and `~/.codex/config.toml`.
@@ -331,9 +331,8 @@ Docker notes:
   `OPENCLAW_LIVE_CODEX_HARNESS_MCP_PROBE=0` or
   `OPENCLAW_LIVE_CODEX_HARNESS_GUARDIAN_PROBE=0` when you need a narrower debug
   run.
-* Docker also exports `OPENCLAW_AGENT_HARNESS_FALLBACK=none`, matching the live
-  test config so legacy aliases or PI fallback cannot hide a Codex harness
-  regression.
+* Docker uses the same explicit Codex runtime config, so legacy aliases or PI
+  fallback cannot hide a Codex harness regression.
 
 ### Recommended live recipes
 

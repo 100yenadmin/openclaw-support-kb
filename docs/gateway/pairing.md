@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway-owned pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "fe3e900bbe666dabb93ebc65cd298ac0baf5050e2740f524bc2996b135d79517"
+source_hash: "4f0e15ec3df11a33dbf2f0ca5169931cae924366d82e39c45bff8039da9ffd95"
 doc_path: "gateway/pairing.md"
 original_doc_path: "gateway/pairing.md"
 duplicate_index: 1
@@ -75,6 +75,8 @@ Notes:
   metadata and the latest allowlisted declared command snapshot for operator visibility.
 * Approval **always** generates a fresh token; no token is ever returned from
   `node.pair.request`.
+* Operator scope levels and approval-time checks are summarized in
+  [Operator scopes](/gateway/operator-scopes).
 * Requests may include `silent: true` as a hint for auto-approval flows.
 * `node.pair.approve` uses the pending request's declared commands to enforce
   extra approval scopes:

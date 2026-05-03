@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
-source_hash: "ec89f2e4a1b63680fa42a83c3db318aa4cf27cfd6f99b9807870b664fdb49f66"
+source_hash: "027dcaa0dbb92e69c3fd46a344ccbe5092f11c3ac3eb50772aacdab46ef5406e"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1
@@ -89,7 +89,7 @@ Source: https://docs.openclaw.ai/reference/test
 
 * `pnpm test:docker:upgrade-survivor`: Installs the packed OpenClaw tarball over a dirty old-user fixture, runs package update plus non-interactive doctor without live provider or channel keys, then starts a loopback Gateway and checks that agents, channel config, plugin allowlists, workspace/session files, stale legacy plugin dependency state, startup, and RPC status survive.
 
-* `pnpm test:docker:published-upgrade-survivor`: Installs `openclaw@latest` by default, seeds realistic existing-user files without live provider or channel keys, configures that baseline with a baked `openclaw config set` command recipe, updates that published install to the packed OpenClaw tarball, runs non-interactive doctor, writes `.artifacts/upgrade-survivor/summary.json`, then starts a loopback Gateway and checks that configured intents, workspace/session files, stale plugin config and legacy dependency state, startup, `/healthz`, `/readyz`, and RPC status survive or repair cleanly. Override one baseline with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC`, expand an exact matrix with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPECS`, or add scenario fixtures with `OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues`; Package Acceptance exposes those as `published_upgrade_survivor_baseline`, `published_upgrade_survivor_baselines`, and `published_upgrade_survivor_scenarios`.
+* `pnpm test:docker:published-upgrade-survivor`: Installs `openclaw@latest` by default, seeds realistic existing-user files without live provider or channel keys, configures that baseline with a baked `openclaw config set` command recipe, updates that published install to the packed OpenClaw tarball, runs non-interactive doctor, writes `.artifacts/upgrade-survivor/summary.json`, then starts a loopback Gateway and checks that configured intents, workspace/session files, stale plugin config and legacy dependency state, startup, `/healthz`, `/readyz`, and RPC status survive or repair cleanly. Override one baseline with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC`, expand an exact matrix with `OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPECS` such as `all-since-2026.4.23`, or add scenario fixtures with `OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues`; the reported-issues set includes `configured-plugin-installs` to verify configured external OpenClaw plugins install automatically during upgrade. Package Acceptance exposes those as `published_upgrade_survivor_baseline`, `published_upgrade_survivor_baselines`, and `published_upgrade_survivor_scenarios`.
 
 * `pnpm test:docker:update-migration`: Runs the published-upgrade survivor harness in the cleanup-heavy `plugin-deps-cleanup` scenario, starting at `openclaw@2026.4.23` by default. The separate `Update Migration` workflow expands this lane with `baselines=all-since-2026.4.23` so every stable published package from `.23` onward updates to the candidate and proves configured-plugin dependency cleanup outside Full Release CI.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "ddd463513715accd37d4760d943f7afbeade9cc5eacd5d2b3a0229b9b4f32447"
+source_hash: "ae7142cb5c12d7584c3c8c344780d2f73c4e363a7f8d87f15852f5558250a0cd"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -22,6 +22,9 @@ are **external**. Most external plugins are published and discovered through
 temporary set of OpenClaw-owned plugin packages while that migration finishes.
 
 ## Quick start
+
+For copy-paste install, list, uninstall, update, and publishing examples, see
+[Manage plugins](/plugins/manage-plugins).
 
 <Steps>
   <Step title="See what is loaded">
@@ -91,7 +94,7 @@ If you prefer chat-native control, enable `commands.plugins: true` and use:
 
 The install path uses the same resolver as the CLI: local path/archive, explicit
 `clawhub:<pkg>`, explicit `npm:<pkg>`, explicit `git:<repo>`, or bare package
-spec (ClawHub first, then npm fallback).
+spec through npm.
 
 If config is invalid, install normally fails closed and points you at
 `openclaw doctor --fix`. The only recovery exception is a narrow bundled-plugin
@@ -121,6 +124,8 @@ installed under OpenClaw's managed plugin roots. npm dependencies may be hoisted
 within OpenClaw's managed npm root; install/update scans that managed root before
 trust and uninstall removes npm-managed packages through npm. External plugins
 and custom load paths must still be installed through `openclaw plugins install`.
+Use `openclaw plugins list --json` to see the static `dependencyStatus` for each
+visible plugin without importing runtime code or repairing dependencies.
 See [Plugin dependency resolution](/plugins/dependency-resolution) for the
 install-time lifecycle.
 
@@ -463,7 +468,7 @@ openclaw plugins registry                  # inspect persisted registry state
 openclaw plugins registry --refresh        # rebuild persisted registry
 openclaw doctor --fix                      # repair plugin registry state
 
-openclaw plugins install <package>         # install (ClawHub first, then npm)
+openclaw plugins install <package>         # install from npm by default
 openclaw plugins install clawhub:<pkg>     # install from ClawHub only
 openclaw plugins install npm:<pkg>         # install from npm only
 openclaw plugins install git:<repo>        # install from git
@@ -521,6 +526,9 @@ Passing the package name without a version moves an exact pinned install back to
 the registry's default release line. If the installed npm plugin already matches
 the resolved version and recorded artifact identity, OpenClaw skips the update
 without downloading, reinstalling, or rewriting config.
+When `openclaw update` runs on the beta channel, default-line npm and ClawHub
+plugin records try `@beta` first and fall back to default/latest when no plugin
+beta release exists. Exact versions and explicit tags stay pinned.
 
 `--pin` is npm-only. It is not supported with `--marketplace`, because
 marketplace installs persist marketplace source metadata instead of an npm spec.

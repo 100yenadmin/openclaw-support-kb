@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal plugin"
 source: "https://docs.openclaw.ai/plugins/zalouser"
-source_hash: "a8e7028b32322d860d20cea34c0d5cec016fd2cad473a8867a439bbc47490e5f"
+source_hash: "f644352eec5b5438a685bac9c3943f355fedf1b9dfe2eca7c7a318876d31fcb8"
 doc_path: "plugins/zalouser.md"
 original_doc_path: "plugins/zalouser.md"
 duplicate_index: 1
@@ -41,9 +41,8 @@ No external `zca`/`openzca` CLI binary is required.
 openclaw plugins install @openclaw/zalouser
 ```
 
-If npm reports the OpenClaw-owned package as deprecated, that package version is
-from an older external package train; use a current packaged OpenClaw build or
-the local folder path until a newer npm package is published.
+Use the bare package to follow the current official release tag. Pin an exact
+version only when you need a reproducible install.
 
 Restart the Gateway afterwards.
 

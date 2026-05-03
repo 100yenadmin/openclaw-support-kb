@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "747ee2a02ddfc6485b2891ca37f0893439852e842104d78a4a5c026637e97f07"
+source_hash: "9d59192f3903ccb472042c1cbc73351bb84a0ad6b24406212e79b6774914b786"
 doc_path: "tools/exec.md"
 original_doc_path: "tools/exec.md"
 duplicate_index: 1
@@ -108,7 +108,7 @@ Notes:
 * `tools.exec.host` (default: `auto`; resolves to `sandbox` when sandbox runtime is active, `gateway` otherwise)
 * `tools.exec.security` (default: `deny` for sandbox, `full` for gateway + node when unset)
 * `tools.exec.ask` (default: `off`)
-* No-approval host exec is the default for gateway + node. If you want approvals/allowlist behavior, tighten both `tools.exec.*` and the host `~/.openclaw/exec-approvals.json`; see [Exec approvals](/tools/exec-approvals#no-approval-yolo-mode).
+* No-approval host exec is the default for gateway + node. If you want approvals/allowlist behavior, tighten both `tools.exec.*` and the host `~/.openclaw/exec-approvals.json`; see [Exec approvals](/tools/exec-approvals#yolo-mode-no-approval).
 * YOLO comes from the host-policy defaults (`security=full`, `ask=off`), not from `host=auto`. If you want to force gateway or node routing, set `tools.exec.host` or use `/exec host=...`.
 * In `security=full` plus `ask=off` mode, host exec follows the configured policy directly; there is no extra heuristic command-obfuscation prefilter or script-preflight rejection layer.
 * `tools.exec.node` (default: unset)

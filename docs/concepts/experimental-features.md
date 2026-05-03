@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "cf937e61280728ec8836af2a22d667080510b13ea07550960e92d6a921db40f8"
+source_hash: "3afea4cbb7e19e3c9062dfd5e940e3851e680f33c71e378a28c3a07c698fda9e"
 doc_path: "concepts/experimental-features.md"
 original_doc_path: "concepts/experimental-features.md"
 duplicate_index: 1
@@ -35,13 +35,53 @@ Treat them differently from normal config:
 
 ## Local model lean mode
 
-`agents.defaults.experimental.localModelLean: true` is a pressure-release valve
-for weaker local-model setups. It trims heavyweight default tools like
-`browser`, `cron`, and `message` so the prompt shape is smaller and less brittle
-for small-context or stricter OpenAI-compatible backends.
+`agents.defaults.experimental.localModelLean: true` is a pressure-release valve for weaker local-model setups. When it is on, OpenClaw drops three default tools — `browser`, `cron`, and `message` — from the agent's tool surface for every turn. Nothing else changes.
 
-That is intentionally **not** the normal path. If your backend handles the full
-runtime cleanly, leave this off.
+### Why these three tools
+
+These three tools have the largest descriptions and the most parameter shapes in the default OpenClaw runtime. On a small-context or stricter OpenAI-compatible backend that is the difference between:
+
+* Tool schemas fitting cleanly in the prompt vs. crowding out conversation history.
+* The model picking the right tool vs. emitting malformed tool calls because there are too many similar-looking schemas.
+* The Chat Completions adapter staying inside the server's structured-output limits vs. tripping a 400 on tool-call payload size.
+
+Removing them does not silently rewire OpenClaw — it just makes the tool list shorter. The model still has `read`, `write`, `edit`, `exec`, `apply_patch`, web search/fetch (when configured), memory, and session/agent tools available.
+
+### When to turn it on
+
+Enable lean mode when you have already proved the model can talk to the Gateway but full agent turns misbehave. The typical signal chain is:
+
+1. `openclaw infer model run --gateway --model <ref> --prompt "Reply with exactly: pong"` succeeds.
+2. A normal agent turn fails with malformed tool calls, oversized prompts, or the model ignoring its tools.
+3. Toggling `localModelLean: true` clears the failure.
+
+### When to leave it off
+
+If your backend handles the full default runtime cleanly, leave this off. Lean mode is a workaround, not a default. It exists because some local stacks need a smaller tool surface to behave; hosted models and well-resourced local rigs do not.
+
+Lean mode also does not replace `tools.profile`, `tools.allow`/`tools.deny`, or the model `compat.supportsTools: false` escape hatch. If you need a permanent narrower tool surface for a specific agent, prefer those stable knobs over the experimental flag.
+
+### Enable
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  agents: {
+    defaults: {
+      experimental: {
+        localModelLean: true,
+      },
+    },
+  },
+}
+```
+
+Restart the Gateway after changing the flag, then confirm the trimmed tool list with:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw status --deep
+```
+
+The deep status output lists the active agent tools; `browser`, `cron`, and `message` should be absent when lean mode is on.
 
 ## Experimental does not mean hidden
 

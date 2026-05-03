@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Prometheus metrics"
 source: "https://docs.openclaw.ai/gateway/prometheus"
-source_hash: "f1d88aead7d046dd57eefa3ee1b5a67c1e9e7eab9d4f66d037d77cdc87f9df49"
+source_hash: "6ffddb6ebd8c517dd0072f623e4a8f9d85d5c1c71fa485b56856114e4daddb5b"
 doc_path: "gateway/prometheus.md"
 original_doc_path: "gateway/prometheus.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/gateway/prometheus
 
 
 
-OpenClaw can expose diagnostics metrics through the bundled `diagnostics-prometheus` plugin. It listens to trusted internal diagnostics and renders a Prometheus text endpoint at:
+OpenClaw can expose diagnostics metrics through the official `diagnostics-prometheus` plugin. It listens to trusted internal diagnostics and renders a Prometheus text endpoint at:
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
 GET /api/diagnostics/prometheus
@@ -30,6 +30,12 @@ For traces, logs, OTLP push, and OpenTelemetry GenAI semantic attributes, see [O
 ## Quick start
 
 <Steps>
+  <Step title="Install the plugin">
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw plugins install clawhub:@openclaw/diagnostics-prometheus
+    ```
+  </Step>
+
   <Step title="Enable the plugin">
     <Tabs>
       <Tab title="Config">

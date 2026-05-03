@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WebChat"
 source: "https://docs.openclaw.ai/web/webchat"
-source_hash: "12732d16d01184daa01eebd6d77dc99af8fa242523820e22f56a0c18d0d972cc"
+source_hash: "5287f88773f290027fe91abb10266084bdc146ea0b0078941698dc4a2dc0fa9c"
 doc_path: "web/webchat.md"
 original_doc_path: "web/webchat.md"
 duplicate_index: 1
@@ -33,6 +33,7 @@ Status: the macOS/iOS SwiftUI chat UI talks directly to the Gateway WebSocket.
 * The UI connects to the Gateway WebSocket and uses `chat.history`, `chat.send`, and `chat.inject`.
 * `chat.history` is bounded for stability: Gateway may truncate long text fields, omit heavy metadata, and replace oversized entries with `[chat.history omitted: message too large]`.
 * `chat.history` follows the active transcript branch for modern append-only session files, so abandoned rewrite branches and superseded prompt copies are not rendered in WebChat.
+* Compaction entries render as an explicit compacted-history divider. The divider explains that earlier turns are preserved in a checkpoint and links to the Sessions checkpoint controls, where operators can branch or restore the pre-compaction view when their permissions allow it.
 * Control UI remembers the backing Gateway `sessionId` returned by `chat.history` and includes it on follow-up `chat.send` calls, so reconnects and page refreshes continue the same stored conversation unless the user starts or resets a session.
 * Control UI coalesces duplicate in-flight submits for the same session, message, and attachments before generating a new `chat.send` run id; the Gateway still dedupes repeated requests that reuse the same idempotency key.
 * `chat.history` is also display-normalized: runtime-only OpenClaw context,

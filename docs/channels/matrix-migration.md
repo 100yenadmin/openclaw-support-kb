@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix migration"
 source: "https://docs.openclaw.ai/channels/matrix-migration"
-source_hash: "38713a46fa27bae849e7f2a2432b8fbae3cf131acf35782b43fad08f854f2e8e"
+source_hash: "6112f9d5fc5e969f9b15789465c51bc30ce88bd103e133a3b85078f71a6353fb"
 doc_path: "channels/matrix-migration.md"
 original_doc_path: "channels/matrix-migration.md"
 duplicate_index: 1
@@ -220,9 +220,6 @@ If the old store reports room keys that were never backed up, OpenClaw warns ins
 
 * Meaning: OpenClaw found old encrypted Matrix state, but it could not load the helper entrypoint from the Matrix plugin that normally inspects that store.
 * What to do: reinstall or repair the Matrix plugin (`openclaw plugins install @openclaw/matrix`, or `openclaw plugins install ./path/to/local/matrix-plugin` for a repo checkout), then rerun `openclaw doctor --fix` or restart the gateway.
-* If npm reports the OpenClaw-owned Matrix package as deprecated, use the bundled
-  plugin from a current packaged OpenClaw build or the local checkout path until
-  a newer npm package is published.
 
 `Matrix plugin helper path is unsafe: ... Reinstall @openclaw/matrix and try again.`
 
@@ -245,9 +242,6 @@ If the old store reports room keys that were never backed up, OpenClaw warns ins
 
 * Meaning: Matrix is pinned to a path install, so mainline updates do not automatically replace it with the repo's standard Matrix package.
 * What to do: reinstall with `openclaw plugins install @openclaw/matrix` when you want to return to the default Matrix plugin.
-* If npm reports the OpenClaw-owned Matrix package as deprecated, use the bundled
-  plugin from a current packaged OpenClaw build until a newer npm package is
-  published.
 
 ### Encrypted-state recovery messages
 
@@ -351,9 +345,6 @@ new backup key can load correctly after restart.
 
 * Meaning: your plugin install record points at a local path that is gone.
 * What to do: reinstall with `openclaw plugins install @openclaw/matrix`, or if you are running from a repo checkout, `openclaw plugins install ./path/to/local/matrix-plugin`.
-* If npm reports the OpenClaw-owned Matrix package as deprecated, use the bundled
-  plugin from a current packaged OpenClaw build or the local checkout path until
-  a newer npm package is published.
 
 ## If encrypted history still does not come back
 

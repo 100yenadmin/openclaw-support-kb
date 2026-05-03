@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "a2be77bfdf33287299fcf6301bac66da9501e4e7e476418609fb7708a073fba4"
+source_hash: "6597041eaf585e7012f3ec923403fc6955082e99a6cd4be9c03c6f1e8eeb4d2f"
 doc_path: "cli/gateway.md"
 original_doc_path: "cli/gateway.md"
 duplicate_index: 1
@@ -517,11 +517,14 @@ openclaw gateway restart
   <Accordion title="Command options">
     * `gateway status`: `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json`
     * `gateway install`: `--port`, `--runtime <node|bun>`, `--token`, `--wrapper <path>`, `--force`, `--json`
-    * `gateway uninstall|start|stop|restart`: `--json`
+    * `gateway restart`: `--force`, `--wait <duration>`, `--json`
+    * `gateway uninstall|start|stop`: `--json`
   </Accordion>
 
   <Accordion title="Lifecycle behavior">
     * Use `gateway restart` to restart a managed service. Do not chain `gateway stop` and `gateway start` as a restart substitute; on macOS, `gateway stop` intentionally disables the LaunchAgent before stopping it.
+    * `gateway restart --wait 30s` overrides the configured restart drain budget for that restart. Bare numbers are milliseconds; units such as `s`, `m`, and `h` are accepted. `--wait 0` waits indefinitely.
+    * `gateway restart --force` skips the active-work drain and restarts immediately. Use it when an operator has already inspected the listed task blockers and wants the gateway back now.
     * Lifecycle commands accept `--json` for scripting.
   </Accordion>
 

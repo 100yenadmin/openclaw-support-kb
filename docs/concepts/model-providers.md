@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "592ea4084f5a681c7f80ee6c55239e22763aa7c05672273e6b913fce0e1fde7a"
+source_hash: "f523dec653d3cce8632e0247cac44ffdff2db02cc87cadd7ab536681d97b5156"
 doc_path: "concepts/model-providers.md"
 original_doc_path: "concepts/model-providers.md"
 duplicate_index: 1
@@ -161,7 +161,7 @@ OpenClaw ships with the pi‑ai catalog. These providers require **no** `models.
   agents: {
     defaults: {
       model: { primary: "openai/gpt-5.5" },
-      agentRuntime: { id: "codex", fallback: "none" },
+      agentRuntime: { id: "codex" },
     },
   },
 }

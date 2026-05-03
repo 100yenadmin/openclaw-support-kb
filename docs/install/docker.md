@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "44ddceb6a6e934c7117c8bb500de2780b574780c1cbec40a59b66a18a9498ddc"
+source_hash: "81f945fe0787e689119d6263a22759e9cab9b6855c2e7e2cef666bda497a1be7"
 doc_path: "install/docker.md"
 original_doc_path: "install/docker.md"
 duplicate_index: 1
@@ -164,15 +164,17 @@ export OTEL_SERVICE_NAME="openclaw-gateway"
 ./scripts/docker/setup.sh
 ```
 
-Install the official `@openclaw/diagnostics-otel` plugin in packaged Docker
-installs before enabling export. Custom source-built images can still include
-the local plugin source with `OPENCLAW_EXTENSIONS=diagnostics-otel`. To enable
-export, allow and enable the `diagnostics-otel` plugin in config, then set
+Install the official `@openclaw/diagnostics-otel` plugin from ClawHub in
+packaged Docker installs before enabling export. Custom source-built images can
+still include the local plugin source with
+`OPENCLAW_EXTENSIONS=diagnostics-otel`. To enable export, allow and enable the
+`diagnostics-otel` plugin in config, then set
 `diagnostics.otel.enabled=true` or use the config example in [OpenTelemetry
 export](/gateway/opentelemetry). Collector auth headers are configured through
 `diagnostics.otel.headers`, not through Docker environment variables.
 
-Prometheus metrics use the already-published Gateway port. Enable the
+Prometheus metrics use the already-published Gateway port. Install
+`clawhub:@openclaw/diagnostics-prometheus`, enable the
 `diagnostics-prometheus` plugin, then scrape:
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}

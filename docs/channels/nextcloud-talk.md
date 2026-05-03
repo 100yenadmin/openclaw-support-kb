@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nextcloud Talk"
 source: "https://docs.openclaw.ai/channels/nextcloud-talk"
-source_hash: "251eb1c3f84042b785cf5e9428698b13a6347f71b1ca8aacfd3ef10c0d111231"
+source_hash: "1e86633c9bb907e721c5cbd5f103314c282761635d29318d427e1cdb3460bf7a"
 doc_path: "channels/nextcloud-talk.md"
 original_doc_path: "channels/nextcloud-talk.md"
 duplicate_index: 1
@@ -21,17 +21,16 @@ Nextcloud Talk ships as a bundled plugin in current OpenClaw releases, so
 normal packaged builds do not need a separate install.
 
 If you are on an older build or a custom install that excludes Nextcloud Talk,
-install a current npm package when one is published:
+install the npm package directly:
 
-Install via CLI (npm registry, when a current package exists):
+Install via CLI (npm registry):
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw plugins install @openclaw/nextcloud-talk
 ```
 
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
+Use the bare package to follow the current official release tag. Pin an exact
+version only when you need a reproducible install.
 
 Local checkout (when running from a git repo):
 

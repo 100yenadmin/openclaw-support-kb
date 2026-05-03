@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "e445a98b4a127f8deb8dda5c4aaa0848265c1953fe5058cd719960ddec618a68"
+source_hash: "44a2ec3250742b8e76e681fb9d43a319d5016cf0a2eb227eb451524eba08836b"
 doc_path: "concepts/dreaming.md"
 original_doc_path: "concepts/dreaming.md"
 duplicate_index: 1
@@ -241,6 +241,10 @@ When enabled, the Gateway **Dreams** tab shows:
 * next scheduled run timing
 * a distinct grounded Scene lane for staged historical replay entries
 * an expandable Dream Diary reader backed by `doctor.memory.dreamDiary`
+
+## Dreaming never runs: status shows blocked
+
+If `openclaw memory status` reports `Dreaming status: blocked`, the managed cron exists but the default agent heartbeat is not firing. Check that heartbeat is enabled for the default agent and that its target is not `none`, then run `openclaw memory status --deep` again after the next heartbeat interval.
 
 ## Related
 

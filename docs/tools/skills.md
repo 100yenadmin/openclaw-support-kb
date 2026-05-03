@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "735a3031e717a35369bd0d001d47c2fd8c3510c9384c35794057c9d5e322dcf5"
+source_hash: "0180a5448967c11a2a9fb8a3bc2bbb4b121ec6598a17bf4b404ecd768675e2d3"
 doc_path: "tools/skills.md"
 original_doc_path: "tools/skills.md"
 duplicate_index: 1
@@ -195,7 +195,9 @@ instructions to reference the skill folder path.
 </ParamField>
 
 <ParamField type="boolean">
-  When `true`, the skill is excluded from the model prompt (still available via user invocation).
+  When `true`, OpenClaw keeps the skill's instructions out of the agent's normal
+  prompt. The skill is still installed and can still be run explicitly as a
+  slash command when `user-invocable` is also `true`.
 </ParamField>
 
 <ParamField type="&#x22;tool&#x22;">

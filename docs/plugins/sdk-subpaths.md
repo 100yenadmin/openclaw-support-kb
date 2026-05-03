@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK subpaths"
 source: "https://docs.openclaw.ai/plugins/sdk-subpaths"
-source_hash: "83b181328e914fa7f2624886e062ad34391884e4d5933060093677fb69c2e1d9"
+source_hash: "759ca2c3ed10fc09c30bc32b8cbc9c39657384cd474799441e27d1b870bea1bf"
 doc_path: "plugins/sdk-subpaths.md"
 original_doc_path: "plugins/sdk-subpaths.md"
 duplicate_index: 1
@@ -29,7 +29,7 @@ For the plugin authoring guide, see [Plugin SDK overview](/plugins/sdk-overview)
 | Subpath                                   | Key exports                                                                                                                                                                  |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `plugin-sdk/plugin-entry`                 | `definePluginEntry`                                                                                                                                                          |
-| `plugin-sdk/core`                         | `defineChannelPluginEntry`, `createChatChannelPlugin`, `createChannelPluginBase`, `defineSetupPluginEntry`, `buildChannelConfigSchema`                                       |
+| `plugin-sdk/core`                         | `defineChannelPluginEntry`, `createChatChannelPlugin`, `createChannelPluginBase`, `defineSetupPluginEntry`, `buildChannelConfigSchema`, `buildJsonChannelConfigSchema`       |
 | `plugin-sdk/config-schema`                | `OpenClawSchema`                                                                                                                                                             |
 | `plugin-sdk/provider-entry`               | `defineSingleProviderPluginEntry`                                                                                                                                            |
 | `plugin-sdk/testing`                      | Broad compatibility barrel for legacy plugin tests; prefer focused test subpaths for new extension tests                                                                     |
@@ -65,7 +65,7 @@ For the plugin authoring guide, see [Plugin SDK overview](/plugins/sdk-overview)
     | `plugin-sdk/channel-pairing`               | `createChannelPairingController`                                                                                                                                                                                                                                                             |
     | `plugin-sdk/channel-reply-pipeline`        | `createChannelReplyPipeline`, `resolveChannelSourceReplyDeliveryMode`                                                                                                                                                                                                                        |
     | `plugin-sdk/channel-config-helpers`        | `createHybridChannelConfigAdapter`, `resolveChannelDmAccess`, `resolveChannelDmAllowFrom`, `resolveChannelDmPolicy`, `normalizeChannelDmPolicy`, `normalizeLegacyDmAliases`                                                                                                                  |
-    | `plugin-sdk/channel-config-schema`         | Shared channel config schema primitives and generic builder                                                                                                                                                                                                                                  |
+    | `plugin-sdk/channel-config-schema`         | Shared channel config schema primitives plus Zod and direct JSON/TypeBox builders                                                                                                                                                                                                            |
     | `plugin-sdk/bundled-channel-config-schema` | Bundled OpenClaw channel config schemas for maintained bundled plugins only                                                                                                                                                                                                                  |
     | `plugin-sdk/channel-config-schema-legacy`  | Deprecated compatibility alias for bundled-channel config schemas                                                                                                                                                                                                                            |
     | `plugin-sdk/telegram-command-config`       | Telegram custom-command normalization/validation helpers with bundled-contract fallback                                                                                                                                                                                                      |

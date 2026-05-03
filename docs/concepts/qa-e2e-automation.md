@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "76fc1c4ad116828385d1f9e92cdb5d86e56167ec21fb67d061ac5e8f27168cbc"
+source_hash: "a63e77043932f3948c423fb0273b3711f79f13dbb0fb09588db02e30215682c5"
 doc_path: "concepts/qa-e2e-automation.md"
 original_doc_path: "concepts/qa-e2e-automation.md"
 duplicate_index: 1
@@ -37,7 +37,7 @@ script aliases; both forms are supported.
 | `qa run`                                            | Bundled QA self-check; writes a Markdown report.                                                                                                                       |
 | `qa suite`                                          | Run repo-backed scenarios against the QA gateway lane. Aliases: `pnpm openclaw qa suite --runner multipass` for a disposable Linux VM.                                 |
 | `qa coverage`                                       | Print the markdown scenario-coverage inventory (`--json` for machine output).                                                                                          |
-| `qa parity-report`                                  | Compare two `qa-suite-summary.json` files and write the agentic parity-gate report.                                                                                    |
+| `qa parity-report`                                  | Compare two `qa-suite-summary.json` files and write the agentic parity report.                                                                                         |
 | `qa character-eval`                                 | Run the character QA scenario across multiple live models with a judged report. See [Reporting](#reporting).                                                           |
 | `qa manual`                                         | Run a one-off prompt against the selected provider/model lane.                                                                                                         |
 | `qa ui`                                             | Start the QA debugger UI and local QA bus (alias: `pnpm qa:lab:ui`).                                                                                                   |

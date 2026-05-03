@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "7b7cba5ad4adcd9d4538b21ab3fbcbf1677fd69750eff6648dcace55f48ac9cb"
+source_hash: "774b0ee29b6746aa57b3a52057af61daa1d3407cd9e69b45960ede1ead3d2f0d"
 doc_path: "gateway/protocol.md"
 original_doc_path: "gateway/protocol.md"
 duplicate_index: 1
@@ -216,6 +216,9 @@ roles still need scopes under their own role prefix.
 Side-effecting methods require **idempotency keys** (see schema).
 
 ## Roles + scopes
+
+For the full operator scope model, approval-time checks, and shared-secret
+semantics, see [Operator scopes](/gateway/operator-scopes).
 
 ### Roles
 

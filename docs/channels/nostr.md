@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nostr"
 source: "https://docs.openclaw.ai/channels/nostr"
-source_hash: "c77410c8cf48426cb7e870337873903f9a764fa279aee5f5aded33a2439ea0fa"
+source_hash: "75f7b6d216c61b674bd2d744d61e4cc9efd7e3e13688412c092fd828154c3c69"
 doc_path: "channels/nostr.md"
 original_doc_path: "channels/nostr.md"
 duplicate_index: 1
@@ -26,15 +26,14 @@ builds do not need a separate install.
 
 * Onboarding (`openclaw onboard`) and `openclaw channels add` still surface
   Nostr from the shared channel catalog.
-* If your build excludes bundled Nostr, install a current npm package when one
-  is published.
+* If your build excludes bundled Nostr, install the npm package directly.
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw plugins install @openclaw/nostr
 ```
 
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or a local checkout until a newer npm package is published.
+Use the bare package to follow the current official release tag. Pin an exact
+version only when you need a reproducible install.
 
 Use a local checkout (dev workflows):
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "b0e30a01d2829fb72861db21b042a1250e75d4e9e37c4221faad689662751a1c"
+source_hash: "5647b854d040f029c7f187bd98231dec2166c158b21895b859eb923c7c924f0e"
 doc_path: "plugins/sdk-testing.md"
 original_doc_path: "plugins/sdk-testing.md"
 duplicate_index: 1
@@ -356,8 +356,8 @@ For contract tests only:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 pnpm test -- src/plugins/contracts/shape.contract.test.ts
-pnpm test -- src/plugins/contracts/auth.contract.test.ts
-pnpm test -- src/plugins/contracts/runtime.contract.test.ts
+pnpm test -- src/plugins/contracts/auth-choice.contract.test.ts
+pnpm test -- src/plugins/contracts/runtime-seams.contract.test.ts
 ```
 
 ## Lint enforcement (in-repo plugins)

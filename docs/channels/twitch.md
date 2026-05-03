@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Twitch"
 source: "https://docs.openclaw.ai/channels/twitch"
-source_hash: "d9202d6b83e6f2b599874a943a2619d200a3ef3267735b3ce21b5dd2028d479d"
+source_hash: "6e7075d68b2e60cb9bfd43caa46bbac6ea96d5873e51858260c3a187fb96065a"
 doc_path: "channels/twitch.md"
 original_doc_path: "channels/twitch.md"
 duplicate_index: 1
@@ -21,7 +21,7 @@ Twitch chat support via IRC connection. OpenClaw connects as a Twitch user (bot 
   Twitch ships as a bundled plugin in current OpenClaw releases, so normal packaged builds do not need a separate install.
 </Note>
 
-If you are on an older build or a custom install that excludes Twitch, install a current npm package when one is published:
+If you are on an older build or a custom install that excludes Twitch, install the npm package directly:
 
 <Tabs>
   <Tab title="npm registry">
@@ -37,9 +37,8 @@ If you are on an older build or a custom install that excludes Twitch, install a
   </Tab>
 </Tabs>
 
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
+Use the bare package to follow the current official release tag. Pin an exact
+version only when you need a reproducible install.
 
 Details: [Plugins](/tools/plugin)
 

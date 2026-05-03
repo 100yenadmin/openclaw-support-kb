@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Rich output protocol"
 source: "https://docs.openclaw.ai/reference/rich-output-protocol"
-source_hash: "d25eab089d72ff2b91a96c9b31a6153ef05880cf34d6700e7f6d61b8899eda99"
+source_hash: "fc1e9df74bacc1254a7a60b5142c0d032f2d2d7fb222ef0ad8dc09cf4e9be002"
 doc_path: "reference/rich-output-protocol.md"
 original_doc_path: "reference/rich-output-protocol.md"
 duplicate_index: 1
@@ -23,6 +23,10 @@ Assistant output can carry a small set of delivery/render directives:
 Remote `MEDIA:` attachments must be public `https:` URLs. Plain `http:`,
 loopback, link-local, private, and internal hostnames are ignored as attachment
 directives; server-side media fetchers still enforce their own network guards.
+
+Local `MEDIA:` attachments can use absolute paths, workspace-relative paths, or
+home-relative `~/` paths. They still pass through the agent file-read policy and
+media type checks before delivery.
 
 Plain Markdown image syntax stays text by default. Channels that intentionally
 map Markdown image replies to media attachments opt in at their outbound

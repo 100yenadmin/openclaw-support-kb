@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Community plugins"
 source: "https://docs.openclaw.ai/plugins/community"
-source_hash: "f45131485aeb0f3787c0584449661ac061f5b729b4510b7ed6140f76037bdac2"
+source_hash: "ec2620bc914be521dca799ee6ce8801545f46f2749f49928c5922c34e3e6ddef"
 doc_path: "plugins/community.md"
 original_doc_path: "plugins/community.md"
 duplicate_index: 1
@@ -16,18 +16,18 @@ Source: https://docs.openclaw.ai/plugins/community
 Community plugins are third-party packages that extend OpenClaw with new
 channels, tools, providers, or other capabilities. They are built and maintained
 by the community, usually published on [ClawHub](/tools/clawhub), and installable
-with a single command. Npm remains a supported fallback for packages that have
-not moved to ClawHub yet.
+with a single command. Npm remains the launch default for bare package specs
+while ClawHub pack installs roll out.
 
 ClawHub is the canonical discovery surface for community plugins. Do not open
 docs-only PRs just to add your plugin here for discoverability; publish it on
 ClawHub instead.
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw plugins install <package-name>
+openclaw plugins install clawhub:<package-name>
 ```
 
-OpenClaw checks ClawHub first and falls back to npm automatically.
+Use `openclaw plugins install <package-name>` for npm-hosted packages.
 
 ## Listed plugins
 

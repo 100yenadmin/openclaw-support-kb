@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "9b1507ebe35567ab6fcf091912a99811df7938da671fa8ceff59c9006131d92a"
+source_hash: "c7bd6ddf3dff209c7712450a7d5c90d8d9af8a57363b9490e29f0a7f0855804c"
 doc_path: "reference/memory-config.md"
 original_doc_path: "reference/memory-config.md"
 duplicate_index: 1
@@ -230,6 +230,8 @@ For custom OpenAI-compatible endpoints or overriding provider defaults:
   </Accordion>
 
   <Accordion title="Bedrock">
+    ### Bedrock embedding config
+
     Bedrock uses the AWS SDK default credential chain — no API keys needed. If OpenClaw runs on EC2 with a Bedrock-enabled instance role, just set the provider and model:
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}

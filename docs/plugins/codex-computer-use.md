@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "8e871e94801b566d2cbfbdf9c4c09d1151c0676617bf3c89ea2928f85bcc0e57"
+source_hash: "a66ee73629a521c3aa2bda5cbfe30b167a57a0a8d657a67e309e7b9de00032ea"
 doc_path: "plugins/codex-computer-use.md"
 original_doc_path: "plugins/codex-computer-use.md"
 duplicate_index: 1
@@ -102,7 +102,6 @@ Computer Use available before a thread starts:
       model: "openai/gpt-5.5",
       agentRuntime: {
         id: "codex",
-        fallback: "none",
       },
     },
   },

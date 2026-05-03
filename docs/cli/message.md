@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "4d68e4ea416812734be5cc871812e675818ffdc0bad6598416e42d56a99f64b7"
+source_hash: "a3b216e61926a7d3413d8b6c58eed7a75d4fb4c7f072c3d3b22c93d210ed259b"
 doc_path: "cli/message.md"
 original_doc_path: "cli/message.md"
 duplicate_index: 1
@@ -33,7 +33,7 @@ Channel selection:
 
 Target formats (`--target`):
 
-* WhatsApp: E.164 or group JID
+* WhatsApp: E.164, group JID, or WhatsApp Channel/Newsletter JID (`...@newsletter`)
 * Telegram: chat id or `@username`
 * Discord: `channel:<id>` or `user:<id>` (or `<@id>` mention; raw numeric ids are treated as channels)
 * Google Chat: `spaces/<spaceId>` or `users/<userId>`
@@ -83,7 +83,7 @@ Name lookup:
   * Telegram only: `--thread-id` (forum topic id)
   * Slack only: `--thread-id` (thread timestamp; `--reply-to` uses the same field)
   * Telegram + Discord: `--silent`
-  * WhatsApp only: `--gif-playback`
+  * WhatsApp only: `--gif-playback`; WhatsApp Channels/Newsletters are addressed with their native `@newsletter` JID.
 
 * `poll`
   * Channels: WhatsApp/Telegram/Discord/Matrix/Microsoft Teams

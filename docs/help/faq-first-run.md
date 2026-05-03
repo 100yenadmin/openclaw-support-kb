@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "0d03f079b2c280d1b5e0aab98ecfb60c96d84843aec858c22699e5721bae401c"
+source_hash: "565f3e208005c501f9dcf48d7857849e36159a96d7970fb7945de1f787e44c0d"
 doc_path: "help/faq-first-run.md"
 original_doc_path: "help/faq-first-run.md"
 duplicate_index: 1
@@ -63,7 +63,7 @@ and troubleshooting see the main [FAQ](/help/faq).
     Other useful CLI checks: `openclaw status --all`, `openclaw logs --follow`,
     `openclaw gateway status`, `openclaw health --verbose`.
 
-    Quick debug loop: [First 60 seconds if something is broken](#first-60-seconds-if-something-is-broken).
+    Quick debug loop: [First 60 seconds if something is broken](/help/faq#first-60-seconds-if-something-is-broken).
     Install docs: [Install](/install), [Installer flags](/install/installer), [Updating](/install/updating).
   </Accordion>
 
@@ -223,7 +223,7 @@ and troubleshooting see the main [FAQ](/help/faq).
     up **memory + bootstrap files**, but **not** session history or auth. Those live
     under `~/.openclaw/` (for example `~/.openclaw/agents/<agentId>/sessions/`).
 
-    Related: [Migrating](/install/migrating), [Where things live on disk](#where-things-live-on-disk),
+    Related: [Migrating](/install/migrating), [Where things live on disk](/help/faq#where-things-live-on-disk),
     [Agent workspace](/concepts/agent-workspace), [Doctor](/gateway/doctor),
     [Remote mode](/gateway/remote).
   </Accordion>
@@ -763,7 +763,7 @@ and troubleshooting see the main [FAQ](/help/faq).
     curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method npm
     ```
 
-    Backup tips: see [Backup strategy](#where-things-live-on-disk).
+    Backup tips: see [Backup strategy](/help/faq#where-things-live-on-disk).
   </Accordion>
 
   <Accordion title="Should I run the Gateway on my laptop or a VPS?">

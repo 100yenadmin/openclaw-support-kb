@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
-source_hash: "780e55b7ec24849fa21b8e60db76a59ab714de54b1d05553215f35fc67147f05"
+source_hash: "a0396c1c50d9668bd8fc79bd4f42997beee428906cbd6d66580d8df97937d527"
 doc_path: "channels/zalouser.md"
 original_doc_path: "channels/zalouser.md"
 duplicate_index: 1
@@ -25,15 +25,12 @@ Zalo Personal ships as a bundled plugin in current OpenClaw releases, so normal
 packaged builds do not need a separate install.
 
 If you are on an older build or a custom install that excludes Zalo Personal,
-install a current npm package when one is published:
+install the npm package directly:
 
 * Install via CLI: `openclaw plugins install @openclaw/zalouser`
+* Pinned version: `openclaw plugins install @openclaw/zalouser@2026.5.2`
 * Or from a source checkout: `openclaw plugins install ./path/to/local/zalouser-plugin`
 * Details: [Plugins](/tools/plugin)
-
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
 
 No external `zca`/`openzca` CLI binary is required.
 

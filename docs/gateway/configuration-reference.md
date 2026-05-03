@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "8e96de7a02a47e3f7ee13bbe49f00c248baf3e3225431890ed2d20cef208343d"
+source_hash: "fa440e8c604c93782403cfae4359e8a96559e8f5f0a06816bbedf97f7f75bc09"
 doc_path: "gateway/configuration-reference.md"
 original_doc_path: "gateway/configuration-reference.md"
 duplicate_index: 1
@@ -230,6 +230,17 @@ See [Plugins](/tools/plugin).
 
 ***
 
+## Commitments
+
+`commitments` controls inferred follow-up memory: OpenClaw can detect check-ins from conversation turns and deliver them through heartbeat runs.
+
+* `commitments.enabled`: enable hidden LLM extraction, storage, and heartbeat delivery for inferred follow-up commitments. Default: `false`.
+* `commitments.maxPerDay`: maximum inferred follow-up commitments delivered per agent session in a rolling day. Default: `3`.
+
+See [Inferred commitments](/concepts/commitments).
+
+***
+
 ## Browser
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
@@ -373,6 +384,7 @@ See [Plugins](/tools/plugin).
       // root: "dist/control-ui",
       // embedSandbox: "scripts", // strict | scripts | trusted
       // allowExternalEmbedUrls: false, // dangerous: allow absolute external http(s) embed URLs
+      // chatMessageMaxWidth: "min(1280px, 82%)", // optional grouped chat message max-width
       // allowedOrigins: ["https://control.example.com"], // required for non-loopback Control UI
       // dangerouslyAllowHostHeaderOriginFallback: false, // dangerous Host-header origin fallback mode
       // allowInsecureAuth: false,
@@ -433,6 +445,7 @@ See [Plugins](/tools/plugin).
     lock out a different origin.
   * `tailscale.mode`: `serve` (tailnet only, loopback bind) or `funnel` (public, requires auth).
   * `controlUi.allowedOrigins`: explicit browser-origin allowlist for Gateway WebSocket connects. Required when browser clients are expected from non-loopback origins.
+  * `controlUi.chatMessageMaxWidth`: optional max-width for grouped Control UI chat messages. Accepts constrained CSS width values such as `960px`, `82%`, `min(1280px, 82%)`, and `calc(100% - 2rem)`.
   * `controlUi.dangerouslyAllowHostHeaderOriginFallback`: dangerous mode that enables Host-header origin fallback for deployments that intentionally rely on Host-header origin policy.
   * `remote.transport`: `ssh` (default) or `direct` (ws/wss). For `direct`, `remote.url` must be `ws://` or `wss://`.
   * `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1`: client-side process-environment

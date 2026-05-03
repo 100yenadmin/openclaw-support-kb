@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "ad51f19d372753a22595d88b0ad85ecb42ba37f722f04184963eb88d7dfffb72"
+source_hash: "e8e67bf71c53eebfe4cb42fc4078ace888cfd3b2467109c7e0879db9e484ca1e"
 doc_path: "providers/lmstudio.md"
 original_doc_path: "providers/lmstudio.md"
 duplicate_index: 1
@@ -124,10 +124,13 @@ Same streaming usage behavior applies to these OpenAI-compatible local backends:
 ### Thinking compatibility
 
 When LM Studio's `/api/v1/models` discovery reports model-specific reasoning
-options, OpenClaw preserves those native values in model compat metadata. For
-binary thinking models that advertise `allowed_options: ["off", "on"]`,
-OpenClaw maps disabled thinking to `off` and enabled `/think` levels to `on`
-instead of sending OpenAI-only values such as `low` or `medium`.
+options, OpenClaw exposes the matching OpenAI-compatible `reasoning_effort`
+values in model compat metadata. Current LM Studio builds can advertise binary
+UI options such as `allowed_options: ["off", "on"]` while rejecting those values
+on `/v1/chat/completions`; OpenClaw normalizes that binary discovery shape to
+`none`, `minimal`, `low`, `medium`, `high`, and `xhigh` before sending requests.
+Older saved LM Studio config that contains `off`/`on` reasoning maps is
+normalized the same way when the catalog is loaded.
 
 ### Explicit configuration
 

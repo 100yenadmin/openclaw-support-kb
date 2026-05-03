@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "1aa6a8e48a3d3f4c84f32979273d64d2d73f4a54235c18a4cc146140e7307137"
+source_hash: "3b43edd3c16f6dcca913e3b2fe3621ddee748fd32c25662b0f10e2f28969bae3"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -127,6 +127,7 @@ cat ~/.openclaw/openclaw.json
   <Accordion title="Workspace and shell">
     * systemd linger check on Linux.
     * Workspace bootstrap file size check (truncation/near-limit warnings for context files).
+    * Skills readiness check for the default agent; reports allowed skills with missing bins, env, config, or OS requirements, and `--fix` can disable unavailable skills in `skills.entries`.
     * Shell completion status check and auto-install/upgrade.
     * Memory search embedding provider readiness check (local model, remote API key, or QMD binary).
     * Source install checks (pnpm workspace mismatch, missing UI assets, missing tsx binary).
@@ -357,7 +358,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   <Accordion title="7b. Plugin install cleanup">
     Doctor removes legacy OpenClaw-generated plugin dependency staging state in `openclaw doctor --fix` / `openclaw doctor --repair` mode. This covers stale generated dependency roots, old install-stage directories, and package-local debris from earlier bundled-plugin dependency repair code.
 
-    Doctor can also reinstall configured downloadable plugins when the config references them but the local plugin registry cannot find them. Gateway startup and config reload do not run package managers; plugin installs remain explicit doctor/install/update work.
+    Doctor can also reinstall configured downloadable plugins when the config references them but the local plugin registry cannot find them. For the 2026.5.2 bundled-plugin externalization, doctor automatically installs downloadable plugins that the existing config already uses and then relies on `meta.lastTouchedVersion` to run that release pass only once. Gateway startup and config reload do not run package managers; plugin installs remain explicit doctor/install/update work.
   </Accordion>
 
   <Accordion title="8. Gateway service migrations and cleanup hints">

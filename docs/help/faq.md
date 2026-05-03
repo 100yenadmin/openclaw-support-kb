@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "201ffb6d461eaeee0b6d1247739309cdc542b9da85c650a35b8afd544d1d35a5"
+source_hash: "8e9e9b32597e712031ac66f7d83c2909affebb334a6a936b4e2e80c85dda91a6"
 doc_path: "help/faq.md"
 original_doc_path: "help/faq.md"
 duplicate_index: 1
@@ -1795,7 +1795,7 @@ lives on the [Models FAQ](/help/faq-models).
     to **inherit**. Also confirm you are not using a bot profile with `verboseDefault` set
     to `on` in config.
 
-    Docs: [Thinking and verbose](/tools/thinking), [Security](/gateway/security#reasoning-verbose-output-in-groups).
+    Docs: [Thinking and verbose](/tools/thinking), [Security](/gateway/security/index#reasoning-and-verbose-output-in-groups).
   </Accordion>
 
   <Accordion title="How do I stop/cancel a running task?">

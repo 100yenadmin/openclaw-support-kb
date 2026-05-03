@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
-source_hash: "1654c86c939b36a42d630b4498acaa5dd2fa2194d656eca22c13311dc4532832"
+source_hash: "3144d2e5a9b1c7dccd9ff0f6ea8de4a44313479a60904b5037770b61e4f30c06"
 doc_path: "web/control-ui.md"
 original_doc_path: "web/control-ui.md"
 duplicate_index: 1
@@ -252,6 +252,22 @@ Example:
 </Warning>
 
 Absolute external `http(s)` embed URLs stay blocked by default. If you intentionally want `[embed url="https://..."]` to load third-party pages, set `gateway.controlUi.allowExternalEmbedUrls: true`.
+
+## Chat message width
+
+Grouped chat messages use a readable default max-width. Wide-monitor deployments can override it without patching bundled CSS by setting `gateway.controlUi.chatMessageMaxWidth`:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  gateway: {
+    controlUi: {
+      chatMessageMaxWidth: "min(1280px, 82%)",
+    },
+  },
+}
+```
+
+The value is validated before it reaches the browser. Supported values include plain lengths and percentages such as `960px` or `82%`, plus constrained `min(...)`, `max(...)`, `clamp(...)`, `calc(...)`, and `fit-content(...)` width expressions.
 
 ## Tailnet access (recommended)
 

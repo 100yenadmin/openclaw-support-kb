@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "eddbfc8d07991fd46397822a72e9333537207b0a7b049c826d22aaec48d0b707"
+source_hash: "70942899dc946cf20e44e5292cbccfd0fc0a574df4b427436cae624334d5de86"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1
@@ -204,7 +204,7 @@ Choose your preferred auth method and follow the setup steps.
         ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
         openclaw config set plugins.entries.codex '{"enabled":true}' --strict-json --merge
         openclaw config set agents.defaults.model.primary openai/gpt-5.5
-        openclaw config set agents.defaults.agentRuntime '{"id":"codex","fallback":"none"}' --strict-json
+        openclaw config set agents.defaults.agentRuntime '{"id":"codex"}' --strict-json
         ```
       </Step>
 
@@ -244,7 +244,7 @@ Choose your preferred auth method and follow the setup steps.
       agents: {
         defaults: {
           model: { primary: "openai/gpt-5.5" },
-          agentRuntime: { id: "codex", fallback: "none" },
+          agentRuntime: { id: "codex" },
         },
       },
     }

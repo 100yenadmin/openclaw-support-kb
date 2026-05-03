@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "1d69a5840ecc36cf14582858485b82e05cee3ea00cac81bb6a7c3b3288112a5d"
+source_hash: "f191f62086b168a4248d7efbc6e6ae9345cdde9363ebcad4a03184ec27c77af3"
 doc_path: "plugins/sdk-provider-plugins.md"
 original_doc_path: "plugins/sdk-provider-plugins.md"
 duplicate_index: 1
@@ -34,6 +34,8 @@ API key auth, and dynamic model resolution.
 
 <Steps>
   <Step title="Package and manifest">
+    ### Step 1: Package and manifest
+
     <CodeGroup>
       ```json package.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
       {
@@ -485,6 +487,8 @@ API key auth, and dynamic model resolution.
   </Step>
 
   <Step title="Add extra capabilities (optional)">
+    ### Step 5: Add extra capabilities
+
     A provider plugin can register speech, realtime transcription, realtime
     voice, media understanding, image generation, video generation, web fetch,
     and web search alongside text inference. OpenClaw classifies this as a
@@ -691,6 +695,8 @@ API key auth, and dynamic model resolution.
   </Step>
 
   <Step title="Test">
+    ### Step 6: Test
+
     ```typescript src/provider.test.ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
     import { describe, it, expect } from "vitest";
     // Export your provider config object from index.ts or a dedicated file

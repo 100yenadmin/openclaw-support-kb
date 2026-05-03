@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
-source_hash: "7e604a373560440a45ba3ae0268a87e23d958d5521bd01dc021cc348833bfc41"
+source_hash: "b4c9501c4e83e1dc25680ccca1a8592bf536a5e50f621cfab1118996aa9c579b"
 doc_path: "cli/setup.md"
 original_doc_path: "cli/setup.md"
 duplicate_index: 1
@@ -53,6 +53,7 @@ openclaw setup --wizard
 Notes:
 
 * Plain `openclaw setup` initializes config + workspace without the full onboarding flow.
+* After plain setup, run `openclaw configure` to choose models, channels, Gateway, plugins, skills, or health checks.
 * Onboarding auto-runs when any onboarding flags are present (`--wizard`, `--non-interactive`, `--mode`, `--import-from`, `--import-source`, `--import-secrets`, `--remote-url`, `--remote-token`).
 * If Hermes state is detected, interactive onboarding can offer migration automatically. Import onboarding requires a fresh setup; use [Migrate](/cli/migrate) for dry-run plans, backups, and overwrite mode outside onboarding.
 

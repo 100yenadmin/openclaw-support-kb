@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "1f2d6c4864a6632d7c4ff21e42b39e314405eb3cf5a05057fcc90f80e2b1ee3f"
+source_hash: "d5a08c7925c3a1176f19125ba2661fdd2536f07b7eb3a63c7ddefb7be1bb6e11"
 doc_path: "plugins/sdk-setup.md"
 original_doc_path: "plugins/sdk-setup.md"
 duplicate_index: 1
@@ -411,6 +411,20 @@ const accountSchema = z.object({
 const configSchema = buildChannelConfigSchema(accountSchema);
 ```
 
+If you already author the contract as JSON Schema or TypeBox, use the direct helper so OpenClaw can skip Zod-to-JSON-Schema conversion on metadata paths:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+import { Type } from "typebox";
+import { buildJsonChannelConfigSchema } from "openclaw/plugin-sdk/channel-config-schema";
+
+const configSchema = buildJsonChannelConfigSchema(
+  Type.Object({
+    token: Type.Optional(Type.String()),
+    allowFrom: Type.Optional(Type.Array(Type.String())),
+  }),
+);
+```
+
 For third-party plugins, the cold-path contract is still the plugin manifest: mirror the generated JSON Schema into `openclaw.plugin.json#channelConfigs` so config schema, setup, and UI surfaces can inspect `channels.<id>` without loading runtime code.
 
 ## Setup wizards
@@ -494,12 +508,12 @@ The `ChannelSetupWizard` type supports `credentials`, `textInputs`, `dmPolicy`, 
 **External plugins:** publish to [ClawHub](/tools/clawhub), then install:
 
 <Tabs>
-  <Tab title="Auto (ClawHub then npm)">
+  <Tab title="npm">
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openclaw plugins install @myorg/openclaw-my-plugin
     ```
 
-    OpenClaw tries ClawHub first and falls back to npm automatically.
+    Bare package specs install from npm during the launch cutover.
   </Tab>
 
   <Tab title="ClawHub only">

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "38de8c347000eac03c9ad56ce2a37d8ef965f7fb116a416a70096739bc0b9761"
+source_hash: "b011590bb28d6a1e8f5a7a732769e37b6995d38d6979cee2d3031b349614d122"
 doc_path: "concepts/streaming.md"
 original_doc_path: "concepts/streaming.md"
 duplicate_index: 1
@@ -145,7 +145,7 @@ Modes:
 Slack-only:
 
 * `channels.slack.streaming.nativeTransport` toggles Slack native streaming API calls when `channels.slack.streaming.mode="partial"` (default: `true`).
-* Slack native streaming and Slack assistant thread status require a reply thread target; top-level DMs do not show that thread-style preview.
+* Slack native streaming and Slack assistant thread status require a reply thread target. Top-level DMs do not show that thread-style preview, but they can still use Slack draft preview posts and edits.
 
 Legacy key migration:
 
@@ -174,6 +174,7 @@ Slack:
 * `partial` can use Slack native streaming (`chat.startStream`/`append`/`stop`) when available.
 * `block` uses append-style draft previews.
 * `progress` uses status preview text, then final answer.
+* Top-level DMs without a reply thread use draft preview posts and edits instead of Slack native streaming.
 * Native and draft preview streaming suppress block replies for that turn, so a Slack reply is streamed by one delivery path only.
 * Final media/error payloads and progress finals do not create throwaway draft messages; only text/block finals that can edit the preview flush pending draft text.
 

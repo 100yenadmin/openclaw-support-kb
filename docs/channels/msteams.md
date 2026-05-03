@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
-source_hash: "be0e85f8f72481f8a48ebbca1a7af93ef96a62e39eb0ef699fc41fde4ea64367"
+source_hash: "ebbad2e85df4d661229ec69377722f01cbba6c63d3254460690598a9d0a05079"
 doc_path: "channels/msteams.md"
 original_doc_path: "channels/msteams.md"
 duplicate_index: 1
@@ -21,15 +21,14 @@ Microsoft Teams ships as a bundled plugin in current OpenClaw releases, so no
 separate install is required in the normal packaged build.
 
 If you are on an older build or a custom install that excludes bundled Teams,
-install a current npm package when one is published:
+install the npm package directly:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw plugins install @openclaw/msteams
 ```
 
-If npm reports the OpenClaw-owned package as deprecated, use a current packaged
-OpenClaw build or the local checkout path until a newer npm package is
-published.
+Use the bare package to follow the current official release tag. Pin an exact
+version only when you need a reproducible install.
 
 Local checkout (when running from a git repo):
 
