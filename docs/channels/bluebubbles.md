@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BlueBubbles"
 source: "https://docs.openclaw.ai/channels/bluebubbles"
-source_hash: "c47758acbcfc439925fde761e3e9ee2b030fb8876fb7ceef27a4d4ad362e7a1e"
+source_hash: "6c16911203faf7be78c105ff04dfcaa107dc2d51ec2aa39a891462c042b3ff5e"
 doc_path: "channels/bluebubbles.md"
 original_doc_path: "channels/bluebubbles.md"
 duplicate_index: 1
@@ -277,15 +277,7 @@ With the BlueBubbles Private API enabled, inbound messages arrive with short mes
     bluebubbles: {
       groups: {
         "iMessage;+;chat-family": {
-          systemPrompt: [
-            "When replying in this group, always call action=reply with the",
-            "[[reply_to:N]] messageId from context so your response threads",
-            "under the triggering message. Never send a new unlinked message.",
-            "",
-            "For short acknowledgements ('ok', 'got it', 'on it'), use",
-            "action=react with an appropriate tapback emoji (❤️, 👍, 😂, ‼️, ❓)",
-            "instead of sending a text reply.",
-          ].join(" "),
+          systemPrompt: "When replying in this group, always call action=reply with the [[reply_to:N]] messageId from context so your response threads under the triggering message. Never send a new unlinked message. For short acknowledgements ('ok', 'got it', 'on it'), use action=react with an appropriate tapback emoji (❤️, 👍, 😂, ‼️, ❓) instead of sending a text reply.",
         },
       },
     },

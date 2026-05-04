@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "e6a497eedab7396dbada2b1c4926201ad61fdb7457b99a38a7ef4d6b55082644"
+source_hash: "d3789a591bce947098c071e41ce2b7bf7ef6705d22eaa471bf57456e9db821e7"
 doc_path: "channels/qqbot.md"
 original_doc_path: "channels/qqbot.md"
 duplicate_index: 1
@@ -88,12 +88,28 @@ File-backed AppSecret:
 }
 ```
 
+Env SecretRef AppSecret:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  channels: {
+    qqbot: {
+      enabled: true,
+      appId: "YOUR_APP_ID",
+      clientSecret: { source: "env", provider: "default", id: "QQBOT_CLIENT_SECRET" },
+    },
+  },
+}
+```
+
 Notes:
 
 * Env fallback applies to the default QQ Bot account only.
 * `openclaw channels add --channel qqbot --token-file ...` provides the
   AppSecret only; the AppID must already be set in config or `QQBOT_APP_ID`.
 * `clientSecret` also accepts SecretRef input, not just a plaintext string.
+* Legacy `secretref:/...` marker strings are not valid `clientSecret` values;
+  use structured SecretRef objects like the example above.
 
 ### Multi-account setup
 
@@ -199,7 +215,7 @@ STT and TTS support two-level configuration with priority fallback:
         voice: "your-voice",
       },
       accounts: {
-        qq-main: {
+        "qq-main": {
           tts: {
             providers: {
               openai: { voice: "shimmer" },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "4ffbeac26fc6625d2712e7781feb746c5410485c3affd14c5821e038066d503b"
+source_hash: "f64916193a0722ba7d7c3a72bbf76118d0f69c68eb84522d9ad1f0a5f90cd0a5"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -249,6 +249,8 @@ Once DMs are working, you can set up your Discord server as a full workspace whe
     By default, your agent only responds in guild channels when @mentioned. For a private server, you probably want it to respond to every message.
 
     In guild channels, normal assistant final replies stay private by default. Visible Discord output must be sent explicitly with the `message` tool, so the agent can lurk by default and only post when it decides a channel reply is useful.
+
+    This means the selected model must reliably call tools. If Discord shows typing and the logs show token usage but no posted message, check the session log for assistant text with `didSendViaMessagingTool: false`. That means the model produced a private final answer instead of calling `message(action=send)`. Switch to a stronger tool-calling model, or use the config below to restore legacy automatic final replies.
 
     <Tabs>
       <Tab title="Ask your agent">
@@ -615,7 +617,7 @@ Use `bindings[].match.roles` to route Discord guild members to different agents 
 
 * `commands.native` defaults to `"auto"` and is enabled for Discord.
 * Per-channel override: `channels.discord.commands.native`.
-* `commands.native=false` explicitly clears previously registered Discord native commands.
+* `commands.native=false` skips Discord slash-command registration and cleanup during startup. Previously registered commands may remain visible in Discord until you remove them from the Discord app.
 * Native command auth uses the same Discord allowlists/policies as normal message handling.
 * Commands may still be visible in Discord UI for users who are not authorized; execution still enforces OpenClaw auth and returns "not authorized".
 
@@ -652,7 +654,7 @@ Default slash command settings:
   </Accordion>
 
   <Accordion title="Live stream preview">
-    OpenClaw can stream draft replies by sending a temporary message and editing it as text arrives. `channels.discord.streaming` takes `off` (default) | `partial` | `block` | `progress`. `progress` maps to `partial` on Discord; `streamMode` is a legacy alias and is auto-migrated.
+    OpenClaw can stream draft replies by sending a temporary message and editing it as text arrives. `channels.discord.streaming` takes `off` (default) | `partial` | `block` | `progress`. `progress` keeps one editable status draft and updates it with tool progress until final delivery; `streamMode` is a legacy alias and is auto-migrated.
 
     Default stays `off` because Discord preview edits hit rate limits quickly when multiple bots or gateways share an account.
 
@@ -675,6 +677,25 @@ Default slash command settings:
     * `block` emits draft-sized chunks (use `draftChunk` to tune size and breakpoints, clamped to `textChunkLimit`).
     * Media, error, and explicit-reply finals cancel pending preview edits.
     * `streaming.preview.toolProgress` (default `true`) controls whether tool/progress updates reuse the preview message.
+    * `streaming.preview.commandText` / `streaming.progress.commandText` controls command/exec detail in compact progress lines: `raw` (default) or `status` (tool label only).
+
+    Hide raw command/exec text while keeping compact progress lines:
+
+    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      "channels": {
+        "discord": {
+          "streaming": {
+            "mode": "progress",
+            "progress": {
+              "toolProgress": true,
+              "commandText": "status"
+            }
+          }
+        }
+      }
+    }
+    ```
 
     Preview streaming is text-only; media replies fall back to normal delivery. When `block` streaming is explicitly enabled, OpenClaw skips the preview stream to avoid double-streaming.
   </Accordion>
@@ -1287,6 +1308,29 @@ message(action="send", channel="discord", target="channel:123", path="/path/to/a
 
     If you set `channels.discord.allowBots=true`, use strict mention and allowlist rules to avoid loop behavior.
     Prefer `channels.discord.allowBots="mentions"` to only accept bot messages that mention the bot.
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      channels: {
+        discord: {
+          accounts: {
+            mantis: {
+              // Mantis listens to other bots only when they mention her.
+              allowBots: "mentions",
+            },
+            molty: {
+              // Molty listens to all bot-authored Discord messages.
+              allowBots: true,
+              mentionAliases: {
+                // Lets Molty write "@Mantis" and send a real Discord mention.
+                Mantis: "MANTIS_DISCORD_USER_ID",
+              },
+            },
+          },
+        },
+      },
+    }
+    ```
   </Accordion>
 
   <Accordion title="Voice STT drops with DecryptionFailed(...)">

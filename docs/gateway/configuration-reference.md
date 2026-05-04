@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "fa440e8c604c93782403cfae4359e8a96559e8f5f0a06816bbedf97f7f75bc09"
+source_hash: "b616583cfae1d96884c519fec06cb9995747213105807a3b54bd370e5d266706"
 doc_path: "gateway/configuration-reference.md"
 original_doc_path: "gateway/configuration-reference.md"
 duplicate_index: 1
@@ -690,8 +690,10 @@ Validation and safety notes:
 }
 ```
 
-* `minimal` (default): omit `cliPath` + `sshPort` from TXT records.
-* `full`: include `cliPath` + `sshPort`.
+* `minimal` (default when the bundled `bonjour` plugin is enabled): omit `cliPath` + `sshPort` from TXT records.
+* `full`: include `cliPath` + `sshPort`; LAN multicast advertising still requires the bundled `bonjour` plugin to be enabled.
+* `off`: suppress LAN multicast advertising without changing plugin enablement.
+* The bundled `bonjour` plugin auto-starts on macOS hosts and is opt-in on Linux, Windows, and containerized Gateway deployments.
 * Hostname defaults to the system hostname when it is a valid DNS label, falling back to `openclaw`. Override with `OPENCLAW_MDNS_HOSTNAME`.
 
 ### Wide-area (DNS-SD)

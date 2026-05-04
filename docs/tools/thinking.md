@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "3f69b3e514b79268ce28a33be4a630b225c7eff742c6b3f5daa9244f3f6cb0f9"
+source_hash: "12bb8478ba4c23bc8f4547bc73323bc3c13876a875ca6f60cf38f858b3addb8b"
 doc_path: "tools/thinking.md"
 original_doc_path: "tools/thinking.md"
 duplicate_index: 1
@@ -88,9 +88,12 @@ Source: https://docs.openclaw.ai/tools/thinking
 * `/verbose off` stores an explicit session override; clear it via the Sessions UI by choosing `inherit`.
 * Inline directive affects only that message; session/global defaults apply otherwise.
 * Send `/verbose` (or `/verbose:`) with no argument to see the current verbose level.
-* When verbose is on, agents that emit structured tool results (Pi, other JSON agents) send each tool call back as its own metadata-only message, prefixed with `<emoji> <tool-name>: <arg>` when available (path/command). These tool summaries are sent as soon as each tool starts (separate bubbles), not as streaming deltas.
+* When verbose is on, agents that emit structured tool results (Pi, other JSON agents) send each tool call back as its own metadata-only message, prefixed with `<emoji> <tool-name>: <arg>` when available. These tool summaries are sent as soon as each tool starts (separate bubbles), not as streaming deltas.
 * Tool failure summaries remain visible in normal mode, but raw error detail suffixes are hidden unless verbose is `on` or `full`.
 * When verbose is `full`, tool outputs are also forwarded after completion (separate bubble, truncated to a safe length). If you toggle `/verbose on|full|off` while a run is in-flight, subsequent tool bubbles honor the new setting.
+* `agents.defaults.toolProgressDetail` controls the shape of `/verbose` tool summaries and progress-draft tool lines. Use `"explain"` (default) for compact human labels such as `🛠️ Exec: checking JS syntax`; use `"raw"` when you also want the raw command/detail appended for debugging. Per-agent `agents.list[].toolProgressDetail` overrides the default.
+  * `explain`: `🛠️ Exec: check JS syntax for /tmp/app.js`
+  * `raw`: `🛠️ Exec: check JS syntax for /tmp/app.js, node --check /tmp/app.js`
 
 ## Plugin trace directives (/trace)
 

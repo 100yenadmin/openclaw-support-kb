@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steering queue"
 source: "https://docs.openclaw.ai/concepts/queue-steering"
-source_hash: "127b3e70bb34d7957fe2c251c152ea8fca28fcd90ee3e88f12d10d91e208d38a"
+source_hash: "0ab3c7ff24e9927e93ba4410de63eec210d8eb0cbbd3b5cea86b61d7a899e508"
 doc_path: "concepts/queue-steering.md"
 original_doc_path: "concepts/queue-steering.md"
 duplicate_index: 1
@@ -45,6 +45,9 @@ internal steering queue. OpenClaw adapts the same modes there:
 Codex review and manual compaction turns reject same-turn steering. When a
 runtime cannot accept steering, OpenClaw falls back to the followup queue where
 that mode allows it.
+
+This page explains queue-mode steering for normal inbound messages. For the
+explicit `/steer <message>` command, see [Steer](/tools/steer).
 
 ## Modes
 
@@ -92,5 +95,6 @@ sending the batched `turn/steer`.
 ## Related
 
 * [Command queue](/concepts/queue)
+* [Steer](/tools/steer)
 * [Messages](/concepts/messages)
 * [Agent loop](/concepts/agent-loop)

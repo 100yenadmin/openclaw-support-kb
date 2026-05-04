@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "22a8c26a605396de92678434ca7e56a58b705f50a498121bd60989e345fc8108"
+source_hash: "7edb1a85512e1bebed25eeb3b2828c48130a920d2ef4a9f2d644533ca50fd34a"
 doc_path: "install/fly.md"
 original_doc_path: "install/fly.md"
 duplicate_index: 1
@@ -51,7 +51,7 @@ Source: https://docs.openclaw.ai/install/fly
   <Step title="Configure fly.toml">
     Edit `fly.toml` to match your app name and requirements.
 
-    **Security note:** The default config exposes a public URL. For a hardened deployment with no public IP, see [Private Deployment](#private-deployment-hardened) or use `fly.private.toml`.
+    **Security note:** The default config exposes a public URL. For a hardened deployment with no public IP, see [Private Deployment](#private-deployment-hardened) or use `deploy/fly.private.toml`.
 
     ```toml theme={"theme":{"light":"min-light","dark":"min-dark"}}
     app = "my-openclaw"  # Your app name
@@ -393,11 +393,11 @@ For a hardened deployment with **no public exposure**, use the private template.
 
 ### Setup
 
-Use `fly.private.toml` instead of the standard config:
+Use `deploy/fly.private.toml` instead of the standard config:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 # Deploy with private config
-fly deploy -c fly.private.toml
+fly deploy -c deploy/fly.private.toml
 ```
 
 Or convert an existing deployment:
@@ -412,7 +412,7 @@ fly ips release <public-ipv6> -a my-openclaw
 
 # Switch to private config so future deploys don't re-allocate public IPs
 # (remove [http_service] or deploy with the private template)
-fly deploy -c fly.private.toml
+fly deploy -c deploy/fly.private.toml
 
 # Allocate private-only IPv6
 fly ips allocate-v6 --private -a my-openclaw

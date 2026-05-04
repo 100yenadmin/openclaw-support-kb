@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
-source_hash: "1486d30e391042b3986a9fc859a4bec4699027e404c27d044746f0f22aa6c86b"
+source_hash: "47ffc3162f640adf56aef239d2f60a05890546381a8d809b5fbea55de22c2c1b"
 doc_path: "tools/reactions.md"
 original_doc_path: "tools/reactions.md"
 duplicate_index: 1
@@ -29,6 +29,9 @@ tool with the `react` action. Reaction behavior varies by channel and transport.
 * `emoji` is required when adding a reaction.
 * Set `emoji` to an empty string (`""`) to remove the bot's reaction(s).
 * Set `remove: true` to remove a specific emoji (requires non-empty `emoji`).
+* On channels that support status reactions, `trackToolCalls: true` on a
+  reaction lets the runtime use that reacted message for subsequent tool
+  progress reactions during the same turn.
 
 ## Channel behavior
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "774b0ee29b6746aa57b3a52057af61daa1d3407cd9e69b45960ede1ead3d2f0d"
+source_hash: "cf0159e31554136a45895fb8730adea29496cbdde5573c17386a395f85496a9f"
 doc_path: "gateway/protocol.md"
 original_doc_path: "gateway/protocol.md"
 duplicate_index: 1
@@ -382,7 +382,7 @@ enumeration of `src/gateway/server-methods/*.ts`.
     * `config.apply` validates + replaces the full config payload.
     * `config.schema` returns the live config schema payload used by Control UI and CLI tooling: schema, `uiHints`, version, and generation metadata, including plugin + channel schema metadata when the runtime can load it. The schema includes field `title` / `description` metadata derived from the same labels and help text used by the UI, including nested object, wildcard, array-item, and `anyOf` / `oneOf` / `allOf` composition branches when matching field documentation exists.
     * `config.schema.lookup` returns a path-scoped lookup payload for one config path: normalized path, a shallow schema node, matched hint + `hintPath`, and immediate child summaries for UI/CLI drill-down. Lookup schema nodes keep the user-facing docs and common validation fields (`title`, `description`, `type`, `enum`, `const`, `format`, `pattern`, numeric/string/array/object bounds, and flags like `additionalProperties`, `deprecated`, `readOnly`, `writeOnly`). Child summaries expose `key`, normalized `path`, `type`, `required`, `hasChildren`, plus the matched `hint` / `hintPath`.
-    * `update.run` runs the gateway update flow and schedules a restart only when the update itself succeeded. Package-manager updates force a non-deferred, no-cooldown update restart after the package swap so the old Gateway process does not keep lazy-loading from a replaced `dist` tree.
+    * `update.run` runs the gateway update flow and schedules a restart only when the update itself succeeded; callers with a session can include `continuationMessage` so startup resumes one follow-up agent turn through the restart continuation queue. Package-manager updates force a non-deferred, no-cooldown update restart after the package swap so the old Gateway process does not keep lazy-loading from a replaced `dist` tree.
     * `update.status` returns the latest cached update restart sentinel, including the post-restart running version when available.
     * `wizard.start`, `wizard.next`, `wizard.status`, and `wizard.cancel` expose the onboarding wizard over WS RPC.
   </Accordion>

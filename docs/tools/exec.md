@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "9d59192f3903ccb472042c1cbc73351bb84a0ad6b24406212e79b6774914b786"
+source_hash: "f74f551e9dce81104a1e448675c289bf728ba34f8beb3fbbf76aea9e4a6d3eb2"
 doc_path: "tools/exec.md"
 original_doc_path: "tools/exec.md"
 duplicate_index: 1
@@ -271,6 +271,7 @@ Notes:
 
 * Only available for OpenAI/OpenAI Codex models.
 * Tool policy still applies; `allow: ["write"]` implicitly allows `apply_patch`.
+* `deny: ["write"]` does not deny `apply_patch`; deny `apply_patch` explicitly or use `deny: ["group:fs"]` when patch writes should also be blocked.
 * Config lives under `tools.exec.applyPatch`.
 * `tools.exec.applyPatch.enabled` defaults to `true`; set it to `false` to disable the tool for OpenAI models.
 * `tools.exec.applyPatch.workspaceOnly` defaults to `true` (workspace-contained). Set it to `false` only if you intentionally want `apply_patch` to write/delete outside the workspace directory.

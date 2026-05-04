@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "c2e0549b0ebe760e231f44a84c064a931821eb204c3d3fc7d555eb6a239941b9"
+source_hash: "0c1db86ff05e367dfe1adfde32c693a9a02f8a8adfcb637a944a6740affd11b4"
 doc_path: "concepts/memory-builtin.md"
 original_doc_path: "concepts/memory-builtin.md"
 duplicate_index: 1
@@ -134,7 +134,10 @@ when `memorySearch.local.modelPath` points to an existing local file.
 may miss changes in rare edge cases.
 
 **sqlite-vec not loading?** OpenClaw falls back to in-process cosine similarity
-automatically. Check logs for the specific load error.
+automatically. `openclaw memory status --deep` reports the local vector store
+separately from the embedding provider, so `Vector store: unavailable` points
+at sqlite-vec loading while `Embeddings: unavailable` points at provider/auth
+or model readiness. Check logs for the specific load error.
 
 ## Configuration
 

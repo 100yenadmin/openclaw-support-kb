@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "5c3d45d65e40e4df3c709b5c15d3a674763fab54f773b49af3161e83c01278b0"
+source_hash: "1383453a249f996f62a513456dfae906a1b7f08a4a3599dc814d9a34b897063d"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1
@@ -255,6 +255,9 @@ Current runtime behaviour:
     Defaults: API key from `realtime.providers.google.apiKey`,
     `GEMINI_API_KEY`, or `GOOGLE_GENERATIVE_AI_API_KEY`; model
     `gemini-2.5-flash-native-audio-preview-12-2025`; voice `Kore`.
+    `sessionResumption` and `contextWindowCompression` default on for longer,
+    reconnectable calls. Use `silenceDurationMs`, `startSensitivity`, and
+    `endSensitivity` to tune faster turn-taking on telephony audio.
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
@@ -275,6 +278,8 @@ Current runtime behaviour:
                     apiKey: "${GEMINI_API_KEY}",
                     model: "gemini-2.5-flash-native-audio-preview-12-2025",
                     voice: "Kore",
+                    silenceDurationMs: 500,
+                    startSensitivity: "high",
                   },
                 },
               },

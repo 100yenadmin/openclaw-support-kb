@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "8ea60e09dd54391a7b63b1b94ca594407b01575a31c3078a2573dc5f646e6d13"
+source_hash: "64fe63fd1be07da8f10b221cc48e3bdd194d104adaf048b446ff555c95a13f6f"
 doc_path: "automation/hooks.md"
 original_doc_path: "automation/hooks.md"
 duplicate_index: 1
@@ -167,12 +167,13 @@ Npm specs are registry-only (package name + optional exact version or dist-tag).
 
 ## Bundled hooks
 
-| Hook                  | Events                         | What it does                                          |
-| --------------------- | ------------------------------ | ----------------------------------------------------- |
-| session-memory        | `command:new`, `command:reset` | Saves session context to `<workspace>/memory/`        |
-| bootstrap-extra-files | `agent:bootstrap`              | Injects additional bootstrap files from glob patterns |
-| command-logger        | `command`                      | Logs all commands to `~/.openclaw/logs/commands.log`  |
-| boot-md               | `gateway:startup`              | Runs `BOOT.md` when the gateway starts                |
+| Hook                  | Events                                            | What it does                                                   |
+| --------------------- | ------------------------------------------------- | -------------------------------------------------------------- |
+| session-memory        | `command:new`, `command:reset`                    | Saves session context to `<workspace>/memory/`                 |
+| bootstrap-extra-files | `agent:bootstrap`                                 | Injects additional bootstrap files from glob patterns          |
+| command-logger        | `command`                                         | Logs all commands to `~/.openclaw/logs/commands.log`           |
+| compaction-notifier   | `session:compact:before`, `session:compact:after` | Sends visible chat notices when session compaction starts/ends |
+| boot-md               | `gateway:startup`                                 | Runs `BOOT.md` when the gateway starts                         |
 
 Enable any bundled hook:
 
@@ -212,6 +213,12 @@ Paths resolve relative to workspace. Only recognized bootstrap basenames are loa
 ### command-logger details
 
 Logs every slash command to `~/.openclaw/logs/commands.log`.
+
+<a />
+
+### compaction-notifier details
+
+Sends short status messages into the current conversation when OpenClaw starts and finishes compacting the session transcript. This makes long turns less confusing on chat surfaces because the user can see that the assistant is summarizing context and will continue after compaction.
 
 <a />
 

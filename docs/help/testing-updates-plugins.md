@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "1e8c325187163a51fa01e1b8236275300f2cce2e284f2ceff359c957aa06243b"
+source_hash: "15ca42ea7ce86520c34542d3998d14160778e4538d4e406d22ac79522c9ae9da"
 doc_path: "help/testing-updates-plugins.md"
 original_doc_path: "help/testing-updates-plugins.md"
 duplicate_index: 1
@@ -79,6 +79,7 @@ Use focused lanes while iterating:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 pnpm test:docker:plugins
+pnpm test:docker:plugin-lifecycle-matrix
 pnpm test:docker:plugin-update
 pnpm test:docker:upgrade-survivor
 pnpm test:docker:published-upgrade-survivor
@@ -94,6 +95,10 @@ Important lanes:
   dependencies, npm update no-ops, local ClawHub fixture installs and update
   no-ops, marketplace update behavior, and Claude-bundle enable/inspect. Set
   `OPENCLAW_PLUGINS_E2E_CLAWHUB=0` to keep the ClawHub block hermetic/offline.
+* `test:docker:plugin-lifecycle-matrix` installs the candidate package in a bare
+  container, runs an npm plugin through install, inspect, disable, enable,
+  explicit upgrade, explicit downgrade, and uninstall after deleting the plugin
+  code. It logs RSS and CPU metrics for each phase.
 * `test:docker:plugin-update` validates that an unchanged installed plugin does
   not reinstall or lose install metadata during `openclaw plugins update`.
 * `test:docker:upgrade-survivor` installs the candidate tarball over a dirty

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "39448c37c9d5dc0a3a491f3cd0bcb7ae807b66b5df77d04702f3e6bdab625bd1"
+source_hash: "83273b7b7d95f9e4a1c0861ac0e71962f994d0d09e39283e4545c5b51809edb3"
 doc_path: "cli/sessions.md"
 original_doc_path: "cli/sessions.md"
 duplicate_index: 1
@@ -23,6 +23,12 @@ other channel can reconnect successfully without creating a new session row
 until a message is processed. Use `openclaw channels status --probe`,
 `openclaw status --deep`, or `openclaw health --verbose` when you need live
 channel connectivity.
+
+Gateway `sessions.list` responses are bounded by default so large long-lived
+stores cannot monopolize the Gateway event loop. Pass an explicit positive
+`limit` from RPC clients when a different result window is needed; responses
+include `totalCount`, `limitApplied`, and `hasMore` when callers need to show
+that more rows exist.
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw sessions

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "fd8ad9ea26946a88c5e833243441c899a4591f22ca236f158007e39a293bb489"
+source_hash: "b5d0c5283a9df079b45c1f0b725a6e667ff418638968d43d997f83a75f8673e1"
 doc_path: "install/updating.md"
 original_doc_path: "install/updating.md"
 duplicate_index: 1
@@ -31,6 +31,12 @@ openclaw update --channel dev
 openclaw update --tag main
 openclaw update --dry-run   # preview without applying
 ```
+
+`openclaw update` does not accept `--verbose`. For update diagnostics, use
+`--dry-run` to preview the planned actions, `--json` for structured results, or
+`openclaw update status --json` to inspect channel and availability state. The
+installer has its own `--verbose` flag, but that flag is not part of
+`openclaw update`.
 
 `--channel beta` prefers beta, but the runtime falls back to stable/latest when
 the beta tag is missing or older than the latest stable release. Use `--tag beta`
@@ -93,6 +99,12 @@ curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method npm --ve
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 npm i -g openclaw@latest
 ```
+
+Prefer `openclaw update` for supervised installs because it can coordinate the
+package swap with the running Gateway service. If you update manually while a
+managed Gateway is running, restart the Gateway immediately after the package
+manager finishes so the old process does not keep serving from replaced package
+files.
 
 When `openclaw update` manages a global npm install, it installs the target into
 a temporary npm prefix first, verifies the packaged `dist` inventory, then swaps

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "5f5fcfc77a0642e88835a8e53f691b1aeef907f2657a2f634a22173f4207e9b8"
+source_hash: "d44390bac2a768205ea1918ce1a891ba142c154a9e775b500597dc0913552008"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1
@@ -221,9 +221,11 @@ OpenClaw classifies sessions by the work it can still observe:
 * `session.long_running`: active embedded work, model calls, or tool calls are
   still making progress.
 * `session.stalled`: active work exists, but the active run has not reported
-  recent progress.
-* `session.stuck`: stale session bookkeeping with no active work. This is the
-  only liveness classification that releases the affected session lane.
+  recent progress. Stalled embedded runs stay observe-only at first, then
+  abort-drain after at least 10 minutes and 5x `diagnostics.stuckSessionWarnMs`
+  with no progress so queued turns behind the lane can resume.
+* `session.stuck`: stale session bookkeeping with no active work. This releases
+  the affected session lane immediately.
 
 Only `session.stuck` emits the `openclaw.session.stuck` counter, the
 `openclaw.session.stuck_age_ms` histogram, and the `openclaw.session.stuck`
@@ -272,11 +274,11 @@ heartbeat tick. For the config knob and defaults, see
 * `openclaw.exec`
   * `openclaw.exec.target`, `openclaw.exec.mode`, `openclaw.outcome`, `openclaw.failureKind`, `openclaw.exec.command_length`, `openclaw.exec.exit_code`, `openclaw.exec.timed_out`
 * `openclaw.webhook.processed`
-  * `openclaw.channel`, `openclaw.webhook`, `openclaw.chatId`
+  * `openclaw.channel`, `openclaw.webhook`
 * `openclaw.webhook.error`
-  * `openclaw.channel`, `openclaw.webhook`, `openclaw.chatId`, `openclaw.error`
+  * `openclaw.channel`, `openclaw.webhook`, `openclaw.error`
 * `openclaw.message.processed`
-  * `openclaw.channel`, `openclaw.outcome`, `openclaw.chatId`, `openclaw.messageId`, `openclaw.reason`
+  * `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`
 * `openclaw.message.delivery`
   * `openclaw.channel`, `openclaw.delivery.kind`, `openclaw.outcome`, `openclaw.errorCategory`, `openclaw.delivery.result_count`
 * `openclaw.session.stuck`

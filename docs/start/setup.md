@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/start/setup"
-source_hash: "4dc8e4d64ebef6ad38ef68d3ba54e0ea0e9a0291fd5abc350343469ae4cb86ae"
+source_hash: "07e177751719bbb92dadd879862b6737ba1a232f2d56cfb250b2f7d1cfc70bf9"
 doc_path: "start/setup.md"
 original_doc_path: "start/setup.md"
 duplicate_index: 1
@@ -110,7 +110,10 @@ session and auto-attaches from interactive terminals. Non-interactive shells sta
 detached and print `tmux attach -t openclaw-gateway-watch-main`; use
 `OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch` to keep an interactive run
 detached, or `pnpm gateway:watch:raw` for foreground watch mode. The watcher
-reloads on relevant source, config, and bundled-plugin metadata changes.
+reloads on relevant source, config, and bundled-plugin metadata changes. If the
+watched Gateway exits during startup, `gateway:watch` runs
+`openclaw doctor --fix --non-interactive` once and retries; set
+`OPENCLAW_GATEWAY_WATCH_AUTO_DOCTOR=0` to disable that dev-only repair pass.
 `pnpm openclaw setup` is the one-time local config/workspace initialization step for a fresh checkout.
 `pnpm gateway:watch` does not rebuild `dist/control-ui`, so rerun `pnpm ui:build` after `ui/` changes or use `pnpm ui:dev` while developing the Control UI.
 

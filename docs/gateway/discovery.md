@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discovery and transports"
 source: "https://docs.openclaw.ai/gateway/discovery"
-source_hash: "5b24696129ce6a085ac820a8d318ef543b432f581fe0e1765405093cf8385b8c"
+source_hash: "175ab05118a0e0ca44dd439ae74289c27051a8ad223437b45795655dd06788cd"
 doc_path: "gateway/discovery.md"
 original_doc_path: "gateway/discovery.md"
 duplicate_index: 1
@@ -60,7 +60,9 @@ same gateway beacon via a configured wide-area DNS-SD domain, so discovery can c
 
 Target direction:
 
-* The **gateway** advertises its WS endpoint via Bonjour.
+* The **gateway** advertises its WS endpoint via Bonjour when the bundled
+  `bonjour` plugin is enabled. The plugin auto-starts on macOS hosts and is
+  opt-in elsewhere.
 * Clients browse and show a “pick a gateway” list, then store the chosen endpoint.
 
 Troubleshooting and beacon details: [Bonjour](/gateway/bonjour).
@@ -89,12 +91,16 @@ Security notes:
 * TLS pinning must never allow an advertised `gatewayTlsSha256` to override a previously stored pin.
 * iOS/Android nodes should require an explicit “trust this fingerprint” confirmation before storing a first-time pin (out-of-band verification) whenever the chosen route is secure/TLS-based.
 
-Disable/override:
+Enable/disable/override:
 
+* `openclaw plugins enable bonjour` enables LAN multicast advertising.
 * `OPENCLAW_DISABLE_BONJOUR=1` disables advertising.
-* When `OPENCLAW_DISABLE_BONJOUR` is unset, Bonjour advertises on normal hosts
-  and auto-disables inside detected containers. Use `0` only on host, macvlan,
-  or another mDNS-capable network; use `1` to force-disable.
+* When the Bonjour plugin is enabled and `OPENCLAW_DISABLE_BONJOUR` is unset,
+  Bonjour advertises on normal hosts and auto-disables inside detected containers.
+  Empty-config macOS Gateway startup enables the plugin automatically; Linux,
+  Windows, and containerized deployments need explicit enablement.
+  Use `0` only on host, macvlan, or another mDNS-capable network; use `1` to
+  force-disable.
 * `gateway.bind` in `~/.openclaw/openclaw.json` controls the Gateway bind mode.
 * `OPENCLAW_SSH_PORT` overrides the SSH port advertised when `sshPort` is emitted.
 * `OPENCLAW_TAILNET_DNS` publishes a `tailnetDns` hint (MagicDNS).

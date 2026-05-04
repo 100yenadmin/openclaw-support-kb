@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "19662dbcd49c0f4a7a0efb7d99be50e8606dc0c92c030bc2142b45621f70d1d8"
+source_hash: "8ce8e2eeadd5d7c1977cdffa683f469ae6f53769f551eff76fa9975a8651cb09"
 doc_path: "gateway/config-tools.md"
 original_doc_path: "gateway/config-tools.md"
 duplicate_index: 1
@@ -56,6 +56,14 @@ Global tool allow/deny policy (deny wins). Case-insensitive, supports `*` wildca
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   tools: { deny: ["browser", "canvas"] },
+}
+```
+
+`write` and `apply_patch` are separate tool ids. `allow: ["write"]` also enables `apply_patch` for compatible models, but `deny: ["write"]` does not deny `apply_patch`. To block all file mutation, deny `group:fs` or list each mutating tool explicitly:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  tools: { deny: ["write", "edit", "apply_patch"] },
 }
 ```
 

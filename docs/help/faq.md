@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "8e9e9b32597e712031ac66f7d83c2909affebb334a6a936b4e2e80c85dda91a6"
+source_hash: "e6cf54aabea827fc16ebd306f654fcc06d2046283c2c56c14486984917f72016"
 doc_path: "help/faq.md"
 original_doc_path: "help/faq.md"
 duplicate_index: 1
@@ -777,15 +777,15 @@ lives on the [First-run FAQ](/help/faq-first-run).
 
     * OpenClaw-owned config writes validate the full post-change config before writing.
     * Invalid or destructive OpenClaw-owned writes are rejected and saved as `openclaw.json.rejected.*`.
-    * If a direct edit breaks startup or hot reload, the Gateway restores the last-known-good config and saves the rejected file as `openclaw.json.clobbered.*`.
-    * The main agent receives a boot warning after recovery so it does not blindly write the bad config again.
+    * If a direct edit breaks startup or hot reload, Gateway fails closed or skips the reload; it does not rewrite `openclaw.json`.
+    * `openclaw doctor --fix` owns repair and can restore last-known-good while saving the rejected file as `openclaw.json.clobbered.*`.
 
     Recover:
 
-    * Check `openclaw logs --follow` for `Config auto-restored from last-known-good`, `Config write rejected:`, or `config reload restored last-known-good config`.
+    * Check `openclaw logs --follow` for `Invalid config at`, `Config write rejected:`, or `config reload skipped (invalid config)`.
     * Inspect the newest `openclaw.json.clobbered.*` or `openclaw.json.rejected.*` beside the active config.
-    * Keep the active restored config if it works, then copy only the intended keys back with `openclaw config set` or `config.patch`.
-    * Run `openclaw config validate` and `openclaw doctor`.
+    * Run `openclaw config validate` and `openclaw doctor --fix`.
+    * Copy only the intended keys back with `openclaw config set` or `config.patch`.
     * If you have no last-known-good or rejected payload, restore from backup, or re-run `openclaw doctor` and reconfigure channels/models.
     * If this was unexpected, file a bug and include your last known config or any backup.
     * A local coding agent can often reconstruct a working config from logs or history.
@@ -798,7 +798,7 @@ lives on the [First-run FAQ](/help/faq-first-run).
     * Use `config.patch` for partial RPC edits; keep `config.apply` for full-config replacement only.
     * If you are using the owner-only `gateway` tool from an agent run, it will still reject writes to `tools.exec.ask` / `tools.exec.security` (including legacy `tools.bash.*` aliases that normalize to the same protected exec paths).
 
-    Docs: [Config](/cli/config), [Configure](/cli/configure), [Gateway troubleshooting](/gateway/troubleshooting#gateway-restored-last-known-good-config), [Doctor](/gateway/doctor).
+    Docs: [Config](/cli/config), [Configure](/cli/configure), [Gateway troubleshooting](/gateway/troubleshooting#gateway-rejected-invalid-config), [Doctor](/gateway/doctor).
   </Accordion>
 
   <Accordion title="How do I run a central Gateway with specialized workers across devices?">

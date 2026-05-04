@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "dcbd81717090dcccff47a4ba478a20e839e0f880d2dbae93f95be73b7acaf8cc"
+source_hash: "17471e4808419044cb0304dfbe5a6a85b90a212d62ec580413e1a8f456b520e4"
 doc_path: "gateway/operator-scopes.md"
 original_doc_path: "gateway/operator-scopes.md"
 duplicate_index: 1
@@ -84,8 +84,9 @@ When approving a device request:
   `operator.admin`.
 
 For paired-device token sessions, management is self-scoped unless the caller
-also has `operator.admin`: non-admin callers can rotate, revoke, or remove only
-their own device entry.
+also has `operator.admin`: non-admin callers see only their own pairing entries,
+can approve or reject only their own pending request, and can rotate, revoke, or
+remove only their own device entry.
 
 ## Node pairing approvals
 

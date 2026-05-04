@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "f6f80e3523f1c63291cb43064d092a7e780d2330d96066e4a83d279939baf483"
+source_hash: "113aa33427685b70bf750738cbccc5fa72c0467af01d1b8cbf03da5e967c53f3"
 doc_path: "channels/groups.md"
 original_doc_path: "channels/groups.md"
 duplicate_index: 1
@@ -47,7 +47,16 @@ otherwise -> reply
 ## Visible replies
 
 For group/channel rooms, OpenClaw defaults to `messages.groupChat.visibleReplies: "message_tool"`.
+`openclaw doctor --fix` writes this default into configured-channel configs that omit it.
 That means the agent still processes the turn and can update memory/session state, but its normal final answer is not automatically posted back into the room. To speak visibly, the agent uses `message(action=send)`.
+
+This default depends on a model/runtime that reliably calls tools. If logs show
+assistant text but `didSendViaMessagingTool: false`, the model answered
+privately instead of calling the message tool. That is not a
+Discord/Slack/Telegram send failure. Use a tool-call-reliable model for
+group/channel sessions, or set
+`messages.groupChat.visibleReplies: "automatic"` to restore legacy visible
+final replies.
 
 If the message tool is unavailable under the active tool policy, OpenClaw falls
 back to automatic visible replies instead of silently suppressing the response.

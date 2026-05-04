@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "63efeff86e1fbe35b1ccec41ce935ada2ec53c435a69a8865428f17fd4a8decd"
+source_hash: "fe2db6e053b071f36e123a441f58295eb28d8230cf3f6a09581121e78d5a9a0c"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1
@@ -145,11 +145,11 @@ OpenRouter uses a Bearer token with your API key under the hood.
 On real OpenRouter requests (`https://openrouter.ai/api/v1`), OpenClaw also adds
 OpenRouter's documented app-attribution headers:
 
-| Header                    | Value                 |
-| ------------------------- | --------------------- |
-| `HTTP-Referer`            | `https://openclaw.ai` |
-| `X-OpenRouter-Title`      | `OpenClaw`            |
-| `X-OpenRouter-Categories` | `cli-agent`           |
+| Header                    | Value                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `HTTP-Referer`            | `https://openclaw.ai`                                                                                  |
+| `X-OpenRouter-Title`      | `OpenClaw`                                                                                             |
+| `X-OpenRouter-Categories` | `cli-agent,cloud-agent,programming-app,creative-writing,writing-assistant,general-chat,personal-agent` |
 
 <Warning>
   If you repoint the OpenRouter provider at some other proxy or base URL, OpenClaw
@@ -159,6 +159,38 @@ OpenRouter's documented app-attribution headers:
 ## Advanced configuration
 
 <AccordionGroup>
+  <Accordion title="Response caching">
+    OpenRouter response caching is opt-in. Enable it per OpenRouter model with
+    model params:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      agents: {
+        defaults: {
+          models: {
+            "openrouter/auto": {
+              params: {
+                responseCache: true,
+                responseCacheTtlSeconds: 300,
+              },
+            },
+          },
+        },
+      },
+    }
+    ```
+
+    OpenClaw sends `X-OpenRouter-Cache: true` and, when configured,
+    `X-OpenRouter-Cache-TTL`. `responseCacheClear: true` forces a refresh for
+    the current request and stores the replacement response. Snake\_case aliases
+    (`response_cache`, `response_cache_ttl_seconds`, and
+    `response_cache_clear`) are also accepted.
+
+    This is separate from provider prompt caching and from OpenRouter's
+    Anthropic `cache_control` markers. It is only applied on verified
+    `openrouter.ai` routes, not custom proxy base URLs.
+  </Accordion>
+
   <Accordion title="Anthropic cache markers">
     On verified OpenRouter routes, Anthropic model refs keep the
     OpenRouter-specific Anthropic `cache_control` markers that OpenClaw uses for

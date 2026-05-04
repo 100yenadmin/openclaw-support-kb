@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "252d06f3790431fe67238b653627fa37706f82bdabf5fa7add4b35f9edd616f4"
+source_hash: "5a16fb78254655ebb98019f31a6d45d87efd7a33a26eb99237ddbd050fb5a024"
 doc_path: "plugins/hooks.md"
 original_doc_path: "plugins/hooks.md"
 duplicate_index: 1
@@ -66,6 +66,32 @@ keep registration order.
   letting slow setup or recall work consume the caller's configured model
   timeout. Omit it to use the default observation/decision timeout that the
   hook runner applies generically.
+
+Operators can also set hook budgets without patching plugin code:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  "plugins": {
+    "entries": {
+      "my-plugin": {
+        "hooks": {
+          "timeoutMs": 30000,
+          "timeouts": {
+            "before_prompt_build": 90000,
+            "agent_end": 60000
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+`hooks.timeouts.<hookName>` overrides `hooks.timeoutMs`, which overrides the
+plugin-authored `api.on(..., { timeoutMs })` value. Each configured value must
+be a positive integer no greater than 600000 milliseconds. Prefer per-hook
+overrides for known slow hooks so one plugin does not get a longer budget
+everywhere.
 
 Each hook receives `event.context.pluginConfig`, the resolved config for the
 plugin that registered that handler. Use it for hook decisions that need

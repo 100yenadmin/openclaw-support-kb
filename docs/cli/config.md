@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "54b56f4d9d677b78507c4f9246f2d8718a5f71e42113baa38d4491c2b837b7e0"
+source_hash: "1a05d742b73053321a93b76e6c45894ab5efe23d2bca463d9334731ccb24107b"
 doc_path: "cli/config.md"
 original_doc_path: "cli/config.md"
 duplicate_index: 1
@@ -445,9 +445,9 @@ ls -lt "$CONFIG".rejected.* 2>/dev/null | head
 openclaw config validate
 ```
 
-Direct editor writes are still allowed, but the running Gateway treats them as untrusted until they validate. Invalid direct edits can be restored from the last-known-good backup during startup or hot reload. See [Gateway troubleshooting](/gateway/troubleshooting#gateway-restored-last-known-good-config).
+Direct editor writes are still allowed, but the running Gateway treats them as untrusted until they validate. Invalid direct edits fail startup or are skipped by hot reload; Gateway does not rewrite `openclaw.json`. Run `openclaw doctor --fix` to repair prefixed/clobbered config or restore the last-known-good copy. See [Gateway troubleshooting](/gateway/troubleshooting#gateway-rejected-invalid-config).
 
-Whole-file recovery is reserved for globally broken config, such as parse errors, root-level schema failures, legacy migration failures, or mixed plugin and root failures. If validation fails only under `plugins.entries.<id>...`, OpenClaw keeps the active `openclaw.json` in place and reports the plugin-local issue instead of restoring `.last-good`. This prevents plugin schema changes or `minHostVersion` skew from rolling back unrelated user settings such as models, providers, auth profiles, channels, gateway exposure, tools, memory, browser, or cron config.
+Whole-file recovery is reserved for doctor repair. Plugin schema changes or `minHostVersion` skew stay loud instead of rolling back unrelated user settings such as models, providers, auth profiles, channels, gateway exposure, tools, memory, browser, or cron config.
 
 ## Subcommands
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Proxy"
 source: "https://docs.openclaw.ai/cli/proxy"
-source_hash: "93906f2539f7d3f124e21322d75fe2a2d8da1ec4179a33f7c7053a694633857a"
+source_hash: "1959668806fdb44614106424029d7e6bb82b91864bdf03df9beab6a5acb379f6"
 doc_path: "cli/proxy.md"
 original_doc_path: "cli/proxy.md"
 duplicate_index: 1
@@ -74,6 +74,7 @@ semantics.
 
 * `start` defaults to `127.0.0.1` unless `--host` is set.
 * `run` starts a local debug proxy and then runs the command after `--`.
+* The debug proxy's direct upstream forwarding opens upstream sockets for diagnostics. When OpenClaw managed proxy mode is active, direct forwarding for proxy requests and CONNECT tunnels is disabled by default; set `OPENCLAW_DEBUG_PROXY_ALLOW_DIRECT_CONNECT_WITH_MANAGED_PROXY=1` only for approved local diagnostics.
 * `validate` exits with code 1 when proxy config or destination checks fail.
 * Captures are local debugging data; use `openclaw proxy purge` when finished.
 

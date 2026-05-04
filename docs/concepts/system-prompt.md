@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "7d00c95d71f156182f7a2887ff74fe72cb0a33af01c76b2768c6bd6382196b21"
+source_hash: "d0408f2c13765ebf4c5ab0574134ad2f73398a7eeb5f15c46a5d81ebcba921f3"
 doc_path: "concepts/system-prompt.md"
 original_doc_path: "concepts/system-prompt.md"
 duplicate_index: 1
@@ -124,8 +124,9 @@ selected app-server thread/turn params plus a reconstructed model-bound prompt
 layer stack for Telegram direct, Discord group, and heartbeat turns. That stack
 includes a pinned Codex `gpt-5.5` model prompt fixture generated from Codex's
 model catalog/cache shape, the Codex happy-path permission developer text,
-OpenClaw developer instructions, user turn input, and references to the dynamic
-tool specs.
+OpenClaw developer instructions, turn-scoped collaboration-mode instructions
+when OpenClaw provides them, user turn input, and references to the dynamic tool
+specs.
 
 Refresh the pinned Codex model prompt fixture with
 `pnpm prompt:snapshots:sync-codex-model`. By default, the script looks for
@@ -138,9 +139,9 @@ or `models.json` file.
 
 These snapshots are still not a byte-for-byte raw OpenAI request capture. Codex
 can add runtime-owned workspace context such as `AGENTS.md`, environment
-context, memories, app/plugin instructions, and future collaboration-mode
-instructions inside the Codex runtime after OpenClaw sends thread and turn
-params.
+context, memories, app/plugin instructions, and built-in Default
+collaboration-mode instructions inside the Codex runtime after OpenClaw sends
+thread and turn params.
 
 Regenerate them with `pnpm prompt:snapshots:gen` and verify drift with
 `pnpm prompt:snapshots:check`. CI runs the drift check in the additional
@@ -182,9 +183,10 @@ Large files are truncated with a marker. The max per-file size is controlled by
 `agents.defaults.bootstrapMaxChars` (default: 12000). Total injected bootstrap
 content across files is capped by `agents.defaults.bootstrapTotalMaxChars`
 (default: 60000). Missing files inject a short missing-file marker. When truncation
-occurs, OpenClaw can inject a warning block in Project Context; control this with
+occurs, OpenClaw can inject a concise system-prompt warning notice; control this with
 `agents.defaults.bootstrapPromptTruncationWarning` (`off`, `once`, `always`;
-default: `once`).
+default: `once`). Detailed raw/injected counts stay in diagnostics such as
+`/context`, `/status`, doctor, and logs.
 
 Sub-agent sessions only inject `AGENTS.md` and `TOOLS.md` (other bootstrap files
 are filtered out to keep the sub-agent context small).

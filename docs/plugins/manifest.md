@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "fdb625f0665972522650da3c668ace00e2cdc33f2d28257d38ef17ad1fde43dd"
+source_hash: "38324984e5d026a33af2a2aabda27a92a368c72d440bf77a8b4c92749d445b68"
 doc_path: "plugins/manifest.md"
 original_doc_path: "plugins/manifest.md"
 duplicate_index: 1
@@ -157,6 +157,7 @@ or npm install metadata. Those belong in your plugin code and `package.json`.
 | `id`                                 | Yes      | `string`                         | Canonical plugin id. This is the id used in `plugins.entries.<id>`.                                                                                                                                                                 |
 | `configSchema`                       | Yes      | `object`                         | Inline JSON Schema for this plugin's config.                                                                                                                                                                                        |
 | `enabledByDefault`                   | No       | `true`                           | Marks a bundled plugin as enabled by default. Omit it, or set any non-`true` value, to leave the plugin disabled by default.                                                                                                        |
+| `enabledByDefaultOnPlatforms`        | No       | `string[]`                       | Marks a bundled plugin as enabled by default only on the listed Node.js platforms, for example `["darwin"]`. Explicit config still wins.                                                                                            |
 | `legacyPluginIds`                    | No       | `string[]`                       | Legacy ids that normalize to this canonical plugin id.                                                                                                                                                                              |
 | `autoEnableWhenConfiguredProviders`  | No       | `string[]`                       | Provider ids that should auto-enable this plugin when auth, config, or model refs mention them.                                                                                                                                     |
 | `kind`                               | No       | `"memory"` \| `"context-engine"` | Declares an exclusive plugin kind used by `plugins.slots.*`.                                                                                                                                                                        |

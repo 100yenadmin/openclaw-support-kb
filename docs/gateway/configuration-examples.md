@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "dccd3155d27536addc3778a5ee64a02db73326f5f8dec727c57018d6876f5a89"
+source_hash: "d672a26e73527718603b78b48e5099dbc736bd415838bc1a49faafac1b284d99"
 doc_path: "gateway/configuration-examples.md"
 original_doc_path: "gateway/configuration-examples.md"
 duplicate_index: 1
@@ -255,6 +255,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
       skills: ["github", "weather"], // inherited by agents that omit list[].skills
       thinkingDefault: "low",
       verboseDefault: "off",
+      toolProgressDetail: "explain",
       reasoningDefault: "off",
       elevatedDefault: "on",
       blockStreamingDefault: "off",

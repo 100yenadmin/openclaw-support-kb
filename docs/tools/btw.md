@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BTW side questions"
 source: "https://docs.openclaw.ai/tools/btw"
-source_hash: "35a157d9e57058ce58f4ffd654e845037be12a876d5209c4c231a7587be39c30"
+source_hash: "5e43038c04231bc74cac38833dd140e3e348dc80a7f9f468c7b3e95f77cfeec8"
 doc_path: "tools/btw.md"
 original_doc_path: "tools/btw.md"
 duplicate_index: 1
@@ -14,7 +14,7 @@ Source: https://docs.openclaw.ai/tools/btw
 
 
 `/btw` lets you ask a quick side question about the **current session** without
-turning that question into normal conversation history.
+turning that question into normal conversation history. `/side` is an alias.
 
 It is modeled after Claude Code's `/btw` behavior, but adapted to OpenClaw's
 Gateway and multi-channel architecture.
@@ -128,6 +128,7 @@ Examples:
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
 /btw what file are we editing?
+/side what changed while the main run continued?
 /btw what does this error mean?
 /btw summarize the current task in one sentence
 /btw what is 17 * 19?

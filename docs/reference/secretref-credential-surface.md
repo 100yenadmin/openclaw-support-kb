@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "024a42ec449ebf7de54671f20cbe79ee32fdc6f6ab8bfb81a5ce480fb04de8e5"
+source_hash: "0647872417a6a896b16fa073c735231d50810ec2cfbca530a606060a388fba27"
 doc_path: "reference/secretref-credential-surface.md"
 original_doc_path: "reference/secretref-credential-surface.md"
 duplicate_index: 1
@@ -96,6 +96,8 @@ Scope intent:
 * `channels.feishu.accounts.*.appSecret`
 * `channels.feishu.accounts.*.encryptKey`
 * `channels.feishu.accounts.*.verificationToken`
+* `channels.qqbot.clientSecret`
+* `channels.qqbot.accounts.*.clientSecret`
 * `channels.msteams.appPassword`
 * `channels.mattermost.botToken`
 * `channels.mattermost.accounts.*.botToken`

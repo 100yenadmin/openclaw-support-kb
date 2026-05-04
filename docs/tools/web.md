@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "9f7b3f2b64179b991b1a76a35a70c15f4f877061dd477bcd7b48847892a4880f"
+source_hash: "d6604b930762b1c679fa508df056fccc65d001271e9ad995775d42dc887be111"
 doc_path: "tools/web.md"
 original_doc_path: "tools/web.md"
 duplicate_index: 1
@@ -169,6 +169,18 @@ Codex-capable models can optionally use the provider-native Responses `web_searc
 ```
 
 If native Codex search is enabled but the current model is not Codex-capable, OpenClaw keeps the normal managed `web_search` behavior.
+
+## Network safety
+
+Managed `web_search` provider calls use OpenClaw's guarded fetch path. For
+trusted provider API hosts, OpenClaw allows Surge, Clash, and sing-box fake-IP
+DNS answers in `198.18.0.0/15` and `fc00::/7` only for that provider hostname.
+Other private, loopback, link-local, and metadata destinations remain blocked.
+
+This automatic allowance does not apply to arbitrary `web_fetch` URLs. For
+`web_fetch`, enable `tools.web.fetch.ssrfPolicy.allowRfc2544BenchmarkRange` and
+`tools.web.fetch.ssrfPolicy.allowIpv6UniqueLocalRange` explicitly only when your
+trusted proxy owns those synthetic ranges.
 
 ## Setting up web search
 

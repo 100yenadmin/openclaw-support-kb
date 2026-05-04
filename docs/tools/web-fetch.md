@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "4d00743a9f0fcf14b6fb7d2e6487e63b4196d4cbadb2b1a44eecb0ed06658446"
+source_hash: "533960124d470a6a3c3ad0b376dccbf45639ef07554a15da33891907cb8bf98b"
 doc_path: "tools/web-fetch.md"
 original_doc_path: "tools/web-fetch.md"
 duplicate_index: 1
@@ -80,6 +80,7 @@ await web_fetch({ url: "https://example.com/article" });
         timeoutSeconds: 30,
         cacheTtlMinutes: 15,
         maxRedirects: 3,
+        useTrustedEnvProxy: false, // let a trusted HTTP(S) env proxy resolve DNS
         readability: true, // use Readability extraction
         userAgent: "Mozilla/5.0 ...", // override User-Agent
         ssrfPolicy: {
@@ -150,6 +151,22 @@ Current runtime behavior:
 * If Readability is disabled, `web_fetch` skips straight to the selected
   provider fallback. If no provider is available, it fails closed.
 
+## Trusted Env Proxy
+
+If your deployment requires `web_fetch` to go through a trusted outbound
+HTTP(S) proxy, set `tools.web.fetch.useTrustedEnvProxy: true`.
+
+In this mode, OpenClaw still applies hostname-based SSRF checks before sending
+the request, but it lets the proxy resolve DNS instead of doing local DNS
+pinning. Enable this only when the proxy is operator-controlled and enforces
+outbound policy after DNS resolution.
+
+<Note>
+  If no HTTP(S) proxy env var is configured, or the target host is excluded by
+  `NO_PROXY`, `web_fetch` falls back to the normal strict path with local DNS
+  pinning.
+</Note>
+
 ## Limits and safety
 
 * `maxChars` is clamped to `tools.web.fetch.maxCharsCap`
@@ -161,6 +178,9 @@ Current runtime behavior:
   for trusted fake-IP proxy stacks; leave them unset unless your proxy owns
   those synthetic ranges and enforces its own destination policy
 * Redirects are checked and limited by `maxRedirects`
+* `useTrustedEnvProxy` is an explicit opt-in and should only be enabled for
+  operator-controlled proxies that still enforce outbound policy after DNS
+  resolution
 * `web_fetch` is best-effort -- some sites need the [Web Browser](/tools/browser)
 
 ## Tool profiles

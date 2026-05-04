@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "8863638cee60703e12ef36714a5df7823f2d9a002d00a8eee43aece4b8685b77"
+source_hash: "bdc8aa074e12528650675b229e5fe463a457dd177dd790f91589b393871d0907"
 doc_path: "plugins/architecture-internals.md"
 original_doc_path: "plugins/architecture-internals.md"
 duplicate_index: 1
@@ -40,6 +40,11 @@ At startup, OpenClaw does roughly this:
 The safety gates happen **before** runtime execution. Candidates are blocked
 when the entry escapes the plugin root, the path is world-writable, or path
 ownership looks suspicious for non-bundled plugins.
+
+Blocked candidates remain tied to their plugin id for diagnostics. If config
+still references that id, validation reports the plugin as present but blocked
+and points back to the path-safety warning instead of treating the config entry
+as stale.
 
 ### Manifest-first behavior
 

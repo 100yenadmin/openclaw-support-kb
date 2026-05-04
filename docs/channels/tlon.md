@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tlon"
 source: "https://docs.openclaw.ai/channels/tlon"
-source_hash: "c40dd9481d031d441ae49b77216dc04c30b346c694798b9fc18452964afb3355"
+source_hash: "be7be0ab4c81ce5a6f2be809f7c1f00f75ff10caf2aca14640e7ee64c5fa6067"
 doc_path: "channels/tlon.md"
 original_doc_path: "channels/tlon.md"
 duplicate_index: 1
@@ -198,17 +198,21 @@ Auto-accept DM invites (for ships in dmAllowlist):
 }
 ```
 
-Auto-accept group invites:
+Auto-accept group invites from trusted ships:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   channels: {
     tlon: {
       autoAcceptGroupInvites: true,
+      groupInviteAllowlist: ["~zod"],
     },
   },
 }
 ```
+
+`autoAcceptGroupInvites` fails closed when `groupInviteAllowlist` is empty. Set the
+allowlist to the ships whose group invites should be accepted automatically.
 
 ## Delivery targets (CLI/cron)
 
@@ -276,7 +280,8 @@ Provider options:
 * `channels.tlon.ownerShip`: owner ship for approval system (always authorized).
 * `channels.tlon.dmAllowlist`: ships allowed to DM (empty = none).
 * `channels.tlon.autoAcceptDmInvites`: auto-accept DMs from allowlisted ships.
-* `channels.tlon.autoAcceptGroupInvites`: auto-accept all group invites.
+* `channels.tlon.autoAcceptGroupInvites`: auto-accept group invites from allowlisted ships.
+* `channels.tlon.groupInviteAllowlist`: ships whose group invites may be auto-accepted.
 * `channels.tlon.autoDiscoverChannels`: auto-discover group channels (default: true).
 * `channels.tlon.groupChannels`: manually pinned channel nests.
 * `channels.tlon.defaultAuthorizedShips`: ships authorized for all channels.

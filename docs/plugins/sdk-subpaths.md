@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK subpaths"
 source: "https://docs.openclaw.ai/plugins/sdk-subpaths"
-source_hash: "759ca2c3ed10fc09c30bc32b8cbc9c39657384cd474799441e27d1b870bea1bf"
+source_hash: "d5f397faa9dfa183bba1fb2c9a46ab5038bcda85ffc5bf0e1dc34657cf09da74"
 doc_path: "plugins/sdk-subpaths.md"
 original_doc_path: "plugins/sdk-subpaths.md"
 duplicate_index: 1
@@ -182,6 +182,8 @@ For the plugin authoring guide, see [Plugin SDK overview](/plugins/sdk-overview)
     | `plugin-sdk/runtime-env`                  | Narrow runtime env, logger, timeout, retry, and backoff helpers                                                                                                                                                                                                                          |
     | `plugin-sdk/browser-config`               | Supported browser config facade for normalized profile/defaults, CDP URL parsing, and browser-control auth helpers                                                                                                                                                                       |
     | `plugin-sdk/channel-runtime-context`      | Generic channel runtime-context registration and lookup helpers                                                                                                                                                                                                                          |
+    | `plugin-sdk/matrix`                       | Deprecated Matrix compatibility facade for older third-party channel packages; new plugins should import `plugin-sdk/run-command` directly                                                                                                                                               |
+    | `plugin-sdk/mattermost`                   | Deprecated Mattermost compatibility facade for older third-party channel packages; new plugins should import generic SDK subpaths directly                                                                                                                                               |
     | `plugin-sdk/runtime-store`                | `createPluginRuntimeStore`                                                                                                                                                                                                                                                               |
     | `plugin-sdk/plugin-runtime`               | Shared plugin command/hook/http/interactive helpers                                                                                                                                                                                                                                      |
     | `plugin-sdk/hook-runtime`                 | Shared webhook/internal hook pipeline helpers                                                                                                                                                                                                                                            |

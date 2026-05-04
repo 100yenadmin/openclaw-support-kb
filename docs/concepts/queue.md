@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "5f60dd0ea834c4f8525fd213aeb6e6e0860767ed4f7c48292c417cf54ac8adb4"
+source_hash: "4d86fa877227ef850ed42d76051c9df92a88d17bdf56f97b2bbcbae6eb66ec5e"
 doc_path: "concepts/queue.md"
 original_doc_path: "concepts/queue.md"
 duplicate_index: 1
@@ -58,7 +58,8 @@ streaming surfaces can look like duplicates. Prefer `collect`/`steer` if you wan
 one response per inbound message.
 
 For runtime-specific timing and dependency behavior, see
-[Steering queue](/concepts/queue-steering).
+[Steering queue](/concepts/queue-steering). For the explicit `/steer <message>`
+command, see [Steer](/tools/steer).
 
 Configure globally or per channel via `messages.queue`:
 
@@ -128,4 +129,5 @@ keys.
 
 * [Session management](/concepts/session)
 * [Steering queue](/concepts/queue-steering)
+* [Steer](/tools/steer)
 * [Retry policy](/concepts/retry)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "715b4ce6a5d6ed6d9631a06a6fd01bed2db6bccd1867c96d4e72a78caa7b0660"
+source_hash: "a5e4e080b9c31febb3c32e6c2d53f54c66e52bd435cb88e556754ba9716feca6"
 doc_path: "channels/feishu.md"
 original_doc_path: "channels/feishu.md"
 duplicate_index: 1
@@ -281,13 +281,13 @@ Feishu/Lark supports streaming replies via interactive cards. When enabled, the 
   channels: {
     feishu: {
       streaming: true, // enable streaming card output (default: true)
-      blockStreaming: true, // enable block-level streaming (default: true)
+      blockStreaming: true, // opt into completed-block streaming
     },
   },
 }
 ```
 
-Set `streaming: false` to send the complete reply in one message.
+Set `streaming: false` to send the complete reply in one message. `blockStreaming` is off by default; enable it only when you want completed assistant blocks flushed before the final reply.
 
 ### Quota optimization
 
@@ -436,7 +436,7 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.textChunkLimit`                  | Message chunk size                                                               | `2000`           |
 | `channels.feishu.mediaMaxMb`                      | Media size limit                                                                 | `30`             |
 | `channels.feishu.streaming`                       | Streaming card output                                                            | `true`           |
-| `channels.feishu.blockStreaming`                  | Block-level streaming                                                            | `true`           |
+| `channels.feishu.blockStreaming`                  | Completed-block reply streaming                                                  | `false`          |
 | `channels.feishu.typingIndicator`                 | Send typing reactions                                                            | `true`           |
 | `channels.feishu.resolveSenderNames`              | Resolve sender display names                                                     | `true`           |
 

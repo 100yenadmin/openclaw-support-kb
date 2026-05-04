@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "9fe6566a2037189d5176adac065cc69c92852a884939c4774cbd651a6282668b"
+source_hash: "3cc34a0c3cdd40f6e76601519be9c28815c952fb7ddb2a5bbcdaade9f587bafb"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1
@@ -352,6 +352,8 @@ Gemini Live API for backend audio bridges such as Voice Call and Google Meet.
 | Activity handling     | `...google.activityHandling`                                        | Google default, `start-of-activity-interrupts`                                        |
 | Turn coverage         | `...google.turnCoverage`                                            | Google default, `only-activity`                                                       |
 | Disable auto VAD      | `...google.automaticActivityDetectionDisabled`                      | `false`                                                                               |
+| Session resumption    | `...google.sessionResumption`                                       | `true`                                                                                |
+| Context compression   | `...google.contextWindowCompression`                                | `true`                                                                                |
 | API key               | `...google.apiKey`                                                  | Falls back to `models.providers.google.apiKey`, `GEMINI_API_KEY`, or `GOOGLE_API_KEY` |
 
 Example Voice Call realtime config:

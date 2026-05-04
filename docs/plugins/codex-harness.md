@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "80aa8a7ca7472d519b2f6a04e87609c046e42a957457c54a38bf427b10a8849e"
+source_hash: "b56d65ed318a1221b3a273ad6348db10669cd7fdf45628c87d3a04a89d928173"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1
@@ -31,6 +31,11 @@ legacy automatic delivery path.
 Codex heartbeat turns also get the `heartbeat_respond` tool by default, so the
 agent can record whether the wake should stay quiet or notify without encoding
 that control flow in final text.
+
+Heartbeat-specific initiative guidance is sent as a Codex collaboration-mode
+developer instruction on the heartbeat turn itself. Ordinary chat turns restore
+Codex Default mode instead of carrying heartbeat philosophy in their normal
+runtime prompt.
 
 If you are trying to orient yourself, start with
 [Agent runtimes](/concepts/agent-runtimes). The short version is:

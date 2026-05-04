@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "a213905e56a2e16bfde881ab6491608bb1d9cd8d784c0ea7ccfea27d265b903a"
+source_hash: "febb736e786b6ed2e419bf464c43ec4127debb5e5a5b342ba0130c27caa5b991"
 doc_path: "tools/subagents.md"
 original_doc_path: "tools/subagents.md"
 duplicate_index: 1
@@ -52,6 +52,8 @@ session**:
 /subagents spawn <agentId> <task> [--model <model>] [--thinking <level>]
 ```
 
+Use top-level [`/steer <message>`](/tools/steer) to steer the current requester session's active run. Use `/subagents steer <id|#> <message>` when the target is a child run.
+
 `/subagents info` shows run metadata (status, timestamps, session id,
 transcript path, cleanup). Use `sessions_history` for a bounded,
 safety-filtered recall view; inspect the transcript path on disk when you
@@ -86,7 +88,8 @@ requester chat when the run finishes.
 
   <Accordion title="Manual-spawn delivery resilience">
     * OpenClaw tries direct `agent` delivery first with a stable idempotency key.
-    * If direct delivery fails, it falls back to queue routing.
+    * If the requester-agent completion turn fails, produces no visible output, or returns an obviously incomplete prefix of the captured child result, OpenClaw falls back to direct completion delivery from the captured child result.
+    * If direct delivery cannot be used, it falls back to queue routing.
     * If queue routing is still not available, the announce is retried with a short exponential backoff before final give-up.
     * Completion delivery keeps the resolved requester route: thread-bound or conversation-bound completion routes win when available; if the completion origin only provides a channel, OpenClaw fills the missing target/account from the requester session's resolved route (`lastChannel` / `lastTo` / `lastAccountId`) so direct delivery still works.
   </Accordion>

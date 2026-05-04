@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
-source_hash: "c7a662c705a5f9b5caad1671832365357ce88468afc72dcfd5510be9d534fad9"
+source_hash: "ae27f10b506a7381a78f86ae95c3ea9d572b92c62d82f1d266da7abbb9b707b7"
 doc_path: "gateway/config-agents.md"
 original_doc_path: "gateway/config-agents.md"
 duplicate_index: 1
@@ -122,12 +122,16 @@ Max total characters injected across all workspace bootstrap files. Default: `60
 
 ### `agents.defaults.bootstrapPromptTruncationWarning`
 
-Controls agent-visible warning text when bootstrap context is truncated.
+Controls the agent-visible system-prompt notice when bootstrap context is truncated.
 Default: `"once"`.
 
-* `"off"`: never inject warning text into the system prompt.
-* `"once"`: inject warning once per unique truncation signature (recommended).
-* `"always"`: inject warning on every run when truncation exists.
+* `"off"`: never inject truncation notice text into the system prompt.
+* `"once"`: inject a concise notice once per unique truncation signature (recommended).
+* `"always"`: inject a concise notice on every run when truncation exists.
+
+Detailed raw/injected counts and config tuning fields stay in diagnostics such
+as context/status reports and logs; routine WebChat user/runtime context only
+gets the concise recovery notice.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -345,6 +349,7 @@ Time format in system prompt. Default: `auto` (OS preference).
       pdfMaxPages: 20,
       thinkingDefault: "low",
       verboseDefault: "off",
+      toolProgressDetail: "explain",
       reasoningDefault: "off",
       elevatedDefault: "on",
       timeoutSeconds: 600,
@@ -385,6 +390,7 @@ Time format in system prompt. Default: `auto` (OS preference).
 * `pdfMaxBytesMb`: default PDF size limit for the `pdf` tool when `maxBytesMb` is not passed at call time.
 * `pdfMaxPages`: default maximum pages considered by extraction fallback mode in the `pdf` tool.
 * `verboseDefault`: default verbose level for agents. Values: `"off"`, `"on"`, `"full"`. Default: `"off"`.
+* `toolProgressDetail`: detail mode for `/verbose` tool summaries and progress-draft tool lines. Values: `"explain"` (default, compact human labels) or `"raw"` (append raw command/detail when available). Per-agent `agents.list[].toolProgressDetail` overrides this default.
 * `reasoningDefault`: default reasoning visibility for agents. Values: `"off"`, `"on"`, `"stream"`. Per-agent `agents.list[].reasoningDefault` overrides this default. Configured reasoning defaults are only applied for owners, authorized senders, or operator-admin gateway contexts when no per-message or session reasoning override is set.
 * `elevatedDefault`: default elevated-output level for agents. Values: `"off"`, `"on"`, `"ask"`, `"full"`. Default: `"on"`.
 * `model.primary`: format `provider/model` (e.g. `openai/gpt-5.5` for API-key access or `openai-codex/gpt-5.5` for Codex OAuth). If you omit the provider, OpenClaw tries an alias first, then a unique configured-provider match for that exact model id, and only then falls back to the configured default provider (deprecated compatibility behavior, so prefer explicit `provider/model`). If that provider no longer exposes the configured default model, OpenClaw falls back to the first configured provider/model instead of surfacing a stale removed-provider default.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
-source_hash: "9d8ecb9d3181557fba46f5e7785e1461700b2a17e5a874e6fed216476a88687b"
+source_hash: "9f86b31bedc3c94296b35be0183c68241563d6e54ba289405bdfacb6c9925f06"
 doc_path: "tools/llm-task.md"
 original_doc_path: "tools/llm-task.md"
 duplicate_index: 1
@@ -33,20 +33,17 @@ without writing custom OpenClaw code for each workflow.
 }
 ```
 
-2. Allowlist the tool (it is registered with `optional: true`):
+2. Allow the optional tool:
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  "agents": {
-    "list": [
-      {
-        "id": "main",
-        "tools": { "allow": ["llm-task"] }
-      }
-    ]
+  "tools": {
+    "alsoAllow": ["llm-task"]
   }
 }
 ```
+
+Use `tools.allow` only when you want restrictive allowlist mode.
 
 ## Config (optional)
 

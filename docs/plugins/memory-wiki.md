@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "d28a98ebbe6d5632100197a6d74600e758884ac326d5b5b62b7d8c11c8b36ab9"
+source_hash: "fa1797902290548c704a0322a0b4ed220ec6108842a023334b85448bafd44fd0"
 doc_path: "plugins/memory-wiki.md"
 original_doc_path: "plugins/memory-wiki.md"
 duplicate_index: 1
@@ -447,6 +447,9 @@ knowledge layer:
 {
   memory: {
     backend: "qmd",
+  },
+  plugins: {
+    entries: {
       "memory-wiki": {
         enabled: true,
         config: {

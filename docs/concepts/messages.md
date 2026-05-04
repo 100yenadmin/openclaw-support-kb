@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "0830a71a833d6adc4cf0bd938dda970cdae34c090f228e737fcb0f330f8db5c4"
+source_hash: "db9e3e9ec9fbc26cab41d62a836e606a50aa7febba7e8c42621883af40261c8d"
 doc_path: "concepts/messages.md"
 original_doc_path: "concepts/messages.md"
 duplicate_index: 1
@@ -172,7 +172,7 @@ OpenClaw can expose or hide model reasoning:
 
 * `/reasoning on|off|stream` controls visibility.
 * Reasoning content still counts toward token usage when produced by the model.
-* Telegram supports reasoning stream into the draft bubble.
+* Telegram supports reasoning stream into a transient draft bubble that is deleted after final delivery; use `/reasoning on` for persistent reasoning output.
 
 Details: [Thinking + reasoning directives](/tools/thinking) and [Token use](/reference/token-use).
 

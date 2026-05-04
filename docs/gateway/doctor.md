@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "3b43edd3c16f6dcca913e3b2fe3621ddee748fd32c25662b0f10e2f28969bae3"
+source_hash: "854124ab64198b275974a7bd518c5a8e004a9b0acc77eb8f76ca83cec69bf90a"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -194,6 +194,7 @@ That stages grounded durable candidates into the short-term dreaming store while
     * `routing.groupChat.requireMention` → `channels.whatsapp/telegram/imessage.groups."*".requireMention`
     * `routing.groupChat.historyLimit` → `messages.groupChat.historyLimit`
     * `routing.groupChat.mentionPatterns` → `messages.groupChat.mentionPatterns`
+    * configured-channel configs missing visible reply policy → `messages.groupChat.visibleReplies: "message_tool"`
     * `routing.queue` → `messages.queue`
     * `routing.bindings` → top-level `bindings`
     * `routing.agents`/`routing.defaultAgentId` → `agents.list` + `agents.list[].default`
@@ -356,7 +357,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   </Accordion>
 
   <Accordion title="7b. Plugin install cleanup">
-    Doctor removes legacy OpenClaw-generated plugin dependency staging state in `openclaw doctor --fix` / `openclaw doctor --repair` mode. This covers stale generated dependency roots, old install-stage directories, and package-local debris from earlier bundled-plugin dependency repair code.
+    Doctor removes legacy OpenClaw-generated plugin dependency staging state in `openclaw doctor --fix` / `openclaw doctor --repair` mode. This covers stale generated dependency roots, old install-stage directories, package-local debris from earlier bundled-plugin dependency repair code, and orphaned managed npm copies of bundled `@openclaw/*` plugins that can shadow the current bundled manifest.
 
     Doctor can also reinstall configured downloadable plugins when the config references them but the local plugin registry cannot find them. For the 2026.5.2 bundled-plugin externalization, doctor automatically installs downloadable plugins that the existing config already uses and then relies on `meta.lastTouchedVersion` to run that release pass only once. Gateway startup and config reload do not run package managers; plugin installs remain explicit doctor/install/update work.
   </Accordion>

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "9cd8ed18c8b34665dd7ad2df1a7aae822793e0bfb354a6f2c41578bbf38d1239"
+source_hash: "f7ca64059fc9b511ee1e5bb33309229c9b607d6ba4b4484535f50d06e4a289a9"
 doc_path: "channels/googlechat.md"
 original_doc_path: "channels/googlechat.md"
 duplicate_index: 1
@@ -200,7 +200,7 @@ Use these identifiers for delivery and allowlists:
       groupPolicy: "allowlist",
       groups: {
         "spaces/AAAA": {
-          allow: true,
+          enabled: true,
           requireMention: true,
           users: ["users/1234567890"],
           systemPrompt: "Short answers only.",

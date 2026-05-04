@@ -1,21 +1,25 @@
 ---
 type: openclaw_release_index
 channel: stable
-selected_release: v2026.5.2
-stable_release: v2026.5.2
-beta_release: v2026.5.2
+selected_release: v2026.5.3-1
+stable_release: v2026.5.3-1
+beta_release: v2026.5.3-1
 ---
 
 # OpenClaw Releases
 
-Selected stable release: v2026.5.2
+Selected stable release: v2026.5.3-1
 
-Latest stable release: v2026.5.2
+Latest stable release: v2026.5.3-1
 
-Latest beta/prerelease: v2026.5.2
+Latest beta/prerelease: v2026.5.3-1
 
 Source: https://github.com/openclaw/openclaw/releases
 
+- v2026.5.3-1 (stable, 2026-05-04T09:35:36Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3-1
+- v2026.5.3 (stable, 2026-05-04T07:01:29Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3
+- v2026.5.3-beta.3 (beta, 2026-05-04T02:20:18Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3-beta.3
+- v2026.5.3-beta.2 (beta, 2026-05-03T21:26:05Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3-beta.2
 - v2026.5.2 (stable, 2026-05-02T23:37:55Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.2
 - v2026.5.2-beta.3 (beta, 2026-05-02T22:15:21Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.2-beta.3
 - v2026.5.2-beta.2 (beta, 2026-05-02T20:40:17Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.2-beta.2
@@ -62,7 +66,3 @@ Source: https://github.com/openclaw/openclaw/releases
 - v2026.4.9-beta.1 (beta, 2026-04-09T01:26:28Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.9-beta.1
 - v2026.4.8 (stable, 2026-04-08T05:59:44Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.8
 - v2026.4.7 (stable, 2026-04-08T02:12:57Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.7
-- v2026.4.5 (stable, 2026-04-06T03:04:54Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.5
-- v2026.4.2 (stable, 2026-04-02T18:30:45Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.2
-- v2026.4.1 (stable, 2026-04-01T16:58:06Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.1
-- v2026.4.1-beta.1 (beta, 2026-04-01T14:10:49Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.1-beta.1

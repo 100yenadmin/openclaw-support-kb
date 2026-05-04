@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Broadcast groups"
 source: "https://docs.openclaw.ai/channels/broadcast-groups"
-source_hash: "a2153d2462379065b60f250fc1ff2f1b5cf4a1832f78b4eec535db90892cb798"
+source_hash: "1d91da53b46520e80a00d9f4a06bb8df1f7bf8092be4be29c058eaf074b4c933"
 doc_path: "channels/broadcast-groups.md"
 original_doc_path: "channels/broadcast-groups.md"
 duplicate_index: 1
@@ -267,14 +267,16 @@ In group `120363403215116621@g.us` with agents `["alfred", "baerbel"]`:
     {
       "agents": {
         "reviewer": {
-          "tools": { "allow": ["read", "exec"] } // Read-only
+          "tools": { "allow": ["read", "exec"] }
         },
         "fixer": {
-          "tools": { "allow": ["read", "write", "edit", "exec"] } // Read-write
+          "tools": { "allow": ["read", "write", "edit", "exec"] }
         }
       }
     }
     ```
+
+    `reviewer` is read-only. `fixer` can read and write.
   </Accordion>
 
   <Accordion title="4. Monitor performance">

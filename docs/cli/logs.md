@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logs"
 source: "https://docs.openclaw.ai/cli/logs"
-source_hash: "af2f962c823296363752312c0e5d51b07de35fa9d050066d5ea5c846fe885b92"
+source_hash: "d8eeedcd4909b89a82ec28aaa399d8ead5c3e47c892014ad43d42ac1e5615bec"
 doc_path: "cli/logs.md"
 original_doc_path: "cli/logs.md"
 duplicate_index: 1
@@ -64,6 +64,7 @@ openclaw logs --url ws://127.0.0.1:18789 --token "$OPENCLAW_GATEWAY_TOKEN"
 
 * Use `--local-time` to render timestamps in your local timezone.
 * If the implicit local loopback Gateway asks for pairing, closes during connect, or times out before `logs.tail` answers, `openclaw logs` falls back to the configured Gateway file log automatically. Explicit `--url` targets do not use this fallback.
+* When using `--follow`, transient gateway disconnects (WebSocket close, timeout, connection drop) trigger automatic reconnection with exponential backoff (up to 8 retries, capped at 30 s between attempts). A warning is printed to stderr on each retry, and a `[logs] gateway reconnected` notice is printed once a poll succeeds. In `--json` mode both the retry warning and the reconnect transition are emitted as `{"type":"notice"}` records on stderr. Non-recoverable errors (auth failure, bad configuration) still exit immediately.
 
 ## Related
 

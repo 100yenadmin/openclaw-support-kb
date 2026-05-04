@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "47960a52418747ca9681c99a6930356cfef041b45b48302a1a2ba31c4b63afa4"
+source_hash: "0e5f0ac368045483ded32493a651229d0b15e8f4797f67553279509b1a600ebe"
 doc_path: "cli/memory.md"
 original_doc_path: "cli/memory.md"
 duplicate_index: 1
@@ -57,7 +57,7 @@ openclaw memory index --agent main --verbose
 
 `memory status`:
 
-* `--deep`: probe vector + embedding availability. Plain `memory status` stays fast and does not run a live embedding ping. QMD lexical `searchMode: "search"` skips semantic vector probes and embedding maintenance even with `--deep`.
+* `--deep`: probe local vector-store readiness, embedding-provider readiness, and semantic vector-search readiness. Plain `memory status` stays fast and does not run live embedding or provider discovery work; unknown vector-store or semantic-vector state means it was not probed in that command. QMD lexical `searchMode: "search"` skips semantic vector probes and embedding maintenance even with `--deep`.
 * `--index`: run a reindex if the store is dirty (implies `--deep`).
 * `--fix`: repair stale recall locks and normalize promotion metadata.
 * `--json`: print JSON output.
