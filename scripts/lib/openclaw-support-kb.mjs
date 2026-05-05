@@ -32,7 +32,11 @@ export const GBRAIN_VERIFY_QUERIES = [
     strictPatterns: [/\bTelegram Setup And Repair\b/i, /\btelegram\b/i],
   },
 ];
+export const CANONICAL_REPO_URL = "https://github.com/electricsheephq/openclaw-support-kb.git";
+export const CANONICAL_REPO_SSH_URL = "git@github.com:electricsheephq/openclaw-support-kb.git";
 export const OFFICIAL_REPO_URLS = [
+  CANONICAL_REPO_URL,
+  CANONICAL_REPO_SSH_URL,
   "https://github.com/100yenadmin/openclaw-support-kb.git",
   "git@github.com:100yenadmin/openclaw-support-kb.git",
 ];
@@ -118,6 +122,7 @@ export function meaningfulGitStatusLines(output) {
 
 export function commandPathFallbacks(home = os.homedir()) {
   return [
+    path.join(home, ".openclaw", "extensions", "gbrain", "bin"),
     path.join(home, "gbrain", "bin"),
     path.join(home, ".gbrain", "bin"),
     path.join(home, ".local", "bin"),
@@ -148,11 +153,12 @@ export function withCommandPathFallbacks(pathValue = process.env.PATH || "", hom
 export function gbrainCommandCandidates(home = os.homedir()) {
   return [
     process.env.GBRAIN_BIN,
-    "gbrain",
+    path.join(home, ".openclaw", "extensions", "gbrain", "bin", "gbrain"),
     path.join(home, "gbrain", "bin", "gbrain"),
     path.join(home, ".gbrain", "bin", "gbrain"),
     path.join(home, ".local", "bin", "gbrain"),
     path.join(home, ".openclaw", "bin", "gbrain"),
+    "gbrain",
   ].filter(Boolean);
 }
 

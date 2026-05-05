@@ -4,6 +4,11 @@
   "private": true,
   "type": "module",
   "description": "Local-first OpenClaw support knowledge base and GBrain skillpack.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electricsheephq/openclaw-support-kb.git"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "node scripts/build-kb.mjs",
     "check:release": "node scripts/check-release-update.mjs",

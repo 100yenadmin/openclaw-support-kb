@@ -22,7 +22,7 @@ const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const mode = args.mode || "print";
 const schedule = args.schedule || `${defaultCronMinute()} ${defaultCronHour()} * * *`;
 const channel = process.env.OPENCLAW_KB_CHANNEL || args.channel || "stable";
-const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || "https://github.com/100yenadmin/openclaw-support-kb.git";
+const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || "https://github.com/electricsheephq/openclaw-support-kb.git";
 const logPath =
   process.env.OPENCLAW_SUPPORT_KB_LOG_FILE ||
   path.join(os.homedir(), ".gbrain", "logs", "openclaw-support-kb-update.log");

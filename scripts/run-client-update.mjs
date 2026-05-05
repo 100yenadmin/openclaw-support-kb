@@ -16,7 +16,7 @@ import {
   SOURCE_MARKER_FILE,
 } from "./lib/openclaw-support-kb.mjs";
 
-const DEFAULT_REPO_URL = "https://github.com/100yenadmin/openclaw-support-kb.git";
+const DEFAULT_REPO_URL = "https://github.com/electricsheephq/openclaw-support-kb.git";
 const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || DEFAULT_REPO_URL;
 const branch = process.env.OPENCLAW_SUPPORT_KB_BRANCH || "main";

@@ -32,7 +32,7 @@ export function managedCronBlock({
   logPath,
   targetDir,
   channel = "stable",
-  repoUrl = "https://github.com/100yenadmin/openclaw-support-kb.git",
+  repoUrl = "https://github.com/electricsheephq/openclaw-support-kb.git",
   pathValue = process.env.PATH || "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin",
 } = {}) {
   const cronSchedule = String(schedule || "").trim();

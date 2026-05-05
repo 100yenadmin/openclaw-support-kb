@@ -1,3 +1,9 @@
+---
+type: openclaw_skill_resolver
+title: "OpenClaw Support Skill Resolver"
+search_role: "skill_routing"
+---
+
 # OpenClaw Support Skill Resolver
 
 Read the matching skill before acting.

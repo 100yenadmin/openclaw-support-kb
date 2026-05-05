@@ -1,3 +1,9 @@
+---
+type: openclaw_agent_protocol
+title: "OpenClaw Support KB Agent Protocol"
+search_role: "agent_protocol"
+---
+
 # OpenClaw Support KB Agent Protocol
 
 This repo is public/customer-safe. Use it to keep OpenClaw customer agents

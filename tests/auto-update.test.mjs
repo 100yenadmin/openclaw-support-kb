@@ -63,7 +63,7 @@ test("managed cron block quotes paths and preserves command ordering", () => {
   assert.match(block, /17 \* \* \* \*/);
   assert.match(block, /PATH='\/usr\/local\/bin:\/usr\/bin:\/bin'/);
   assert.match(block, /OPENCLAW_SUPPORT_KB_DIR='\/Users\/test\/\.gbrain\/sources\/openclaw-support-kb'/);
-  assert.match(block, /OPENCLAW_SUPPORT_KB_REPO='https:\/\/github\.com\/100yenadmin\/openclaw-support-kb\.git'/);
+  assert.match(block, /OPENCLAW_SUPPORT_KB_REPO='https:\/\/github\.com\/electricsheephq\/openclaw-support-kb\.git'/);
   assert.match(block, /OPENCLAW_KB_CHANNEL='stable'/);
   assert.match(block, /'\/Users\/test\/Node Bin\/node'/);
   assert.match(block, /--reason cron/);
@@ -368,7 +368,7 @@ test("client updater migrates a marked non-git managed source into a git checkou
         OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
         GIT_CONFIG_COUNT: "1",
         GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
-        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+        GIT_CONFIG_VALUE_0: "https://github.com/electricsheephq/openclaw-support-kb.git",
       },
     });
 
@@ -397,7 +397,7 @@ test("client updater reclones dirty marked git source and keeps backup", async (
     const sourceDir = path.join(tempDir, "source");
     const statusFile = path.join(tempDir, "state", "status.json");
     runGit(["clone", pathToFileURL(remote).href, sourceDir]);
-    runGit(["remote", "set-url", "origin", "https://github.com/100yenadmin/openclaw-support-kb.git"], { cwd: sourceDir });
+    runGit(["remote", "set-url", "origin", "https://github.com/electricsheephq/openclaw-support-kb.git"], { cwd: sourceDir });
     await writeFile(path.join(sourceDir, SOURCE_MARKER_FILE), "managed source\n");
     await writeFile(path.join(sourceDir, "README.md"), "locally generated dirty content\n");
 
@@ -411,7 +411,7 @@ test("client updater reclones dirty marked git source and keeps backup", async (
         OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
         GIT_CONFIG_COUNT: "1",
         GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
-        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+        GIT_CONFIG_VALUE_0: "https://github.com/electricsheephq/openclaw-support-kb.git",
       },
     });
 
@@ -490,7 +490,7 @@ test("direct client setup clones the published repo instead of building a non-gi
         OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD: "1",
         GIT_CONFIG_COUNT: "1",
         GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
-        GIT_CONFIG_VALUE_0: "https://github.com/100yenadmin/openclaw-support-kb.git",
+        GIT_CONFIG_VALUE_0: "https://github.com/electricsheephq/openclaw-support-kb.git",
       },
     });
 
