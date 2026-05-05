@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "1dd2c92fe8b52fc4b008d1ce82d711b916afbc88d4795290929044ec6ddd00e2"
+source_hash: "2005258eaace49cc0a243fc78357a6aaaa5d0f8e542074c11f540156c19db34c"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -90,9 +90,10 @@ openclaw plugins install <source>
 openclaw doctor --fix
 ```
 
-`doctor --fix` can clean legacy OpenClaw-generated dependency state and install
-configured downloadable plugins that are missing from the local install records.
-It does not repair dependencies for an already-installed local plugin.
+`doctor --fix` can clean legacy OpenClaw-generated dependency state and recover
+downloadable plugins that are missing from the local install records when config
+references them. Doctor does not repair dependencies for an already-installed
+local plugin.
 
 ## Bundled plugins
 

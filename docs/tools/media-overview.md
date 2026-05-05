@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "82f6bdb3039b3e5e8f91ea16f65b919609d6450bcdfbdb0f4b8b1182f007ef18"
+source_hash: "c605c4fff9890e5d879535bbbfdf5fcf847b5e5e52fcc6296e32ca0083875a2a"
 doc_path: "tools/media-overview.md"
 original_doc_path: "tools/media-overview.md"
 duplicate_index: 1
@@ -90,19 +90,22 @@ provider is configured.
 
 ## Async vs synchronous
 
-| Capability      | Mode         | Why                                                                |
-| --------------- | ------------ | ------------------------------------------------------------------ |
-| Image           | Synchronous  | Provider responses return in seconds; completes inline with reply. |
-| Text-to-speech  | Synchronous  | Provider responses return in seconds; attached to the reply audio. |
-| Video           | Asynchronous | Provider processing takes 30 s to several minutes.                 |
-| Music (shared)  | Asynchronous | Same provider-processing characteristic as video.                  |
-| Music (ComfyUI) | Synchronous  | Local workflow runs inline against the configured ComfyUI server.  |
+| Capability      | Mode         | Why                                                                                                  |
+| --------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
+| Image           | Synchronous  | Provider responses return in seconds; completes inline with reply.                                   |
+| Text-to-speech  | Synchronous  | Provider responses return in seconds; attached to the reply audio.                                   |
+| Video           | Asynchronous | Provider processing takes 30 s to several minutes; slow queues can run up to the configured timeout. |
+| Music (shared)  | Asynchronous | Same provider-processing characteristic as video.                                                    |
+| Music (ComfyUI) | Synchronous  | Local workflow runs inline against the configured ComfyUI server.                                    |
 
 For async tools, OpenClaw submits the request to the provider, returns a task
 id immediately, and tracks the job in the task ledger. The agent continues
 responding to other messages while the job runs. When the provider finishes,
-OpenClaw wakes the agent so it can post the finished media back into the
-original channel.
+OpenClaw wakes the agent with the generated media paths so it can tell the
+user and, when required by source-delivery policy, relay the result through
+the message tool. For message-tool-only group/channel routes, OpenClaw treats
+missing message-tool delivery evidence as a failed completion attempt and sends
+the generated media fallback directly to the original channel.
 
 ## Speech-to-text and Voice Call
 

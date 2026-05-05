@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "819500f71e212f45ca74f4f736866498614c5194e69e98c766e5b9c3e17e7edd"
+source_hash: "f1da9cf8b7339d509e9870cb1f249919f9040054dd3e19654e8071f6525828a0"
 doc_path: "web/tui.md"
 original_doc_path: "web/tui.md"
 duplicate_index: 1
@@ -89,7 +89,7 @@ Notes:
 
 * Model picker: list available models and set the session override.
 * Agent picker: choose a different agent.
-* Session picker: shows only sessions for the current agent.
+* Session picker: shows up to 50 sessions for the current agent updated in the last 7 days. Use `/session <key>` to jump to an older known session.
 * Settings: toggle deliver, tool output expansion, and thinking visibility.
 
 ## Keyboard shortcuts

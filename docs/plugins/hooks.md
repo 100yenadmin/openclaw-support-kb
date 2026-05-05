@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "5a16fb78254655ebb98019f31a6d45d87efd7a33a26eb99237ddbd050fb5a024"
+source_hash: "9e941af11b0703985fc79d60d42b5aba4dcaf3e001530ad580d61aa4224aa121"
 doc_path: "plugins/hooks.md"
 original_doc_path: "plugins/hooks.md"
 duplicate_index: 1
@@ -269,6 +269,22 @@ the harness for one more model pass before finalization, `{ action:
 "finalize", reason? }` to force finalization, or omit a result to continue.
 Codex native `Stop` hooks are relayed into this hook as OpenClaw
 `before_agent_finalize` decisions.
+
+When returning `action: "revise"`, plugins can include `retry` metadata to make
+the extra model pass bounded and replay-safe:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+type BeforeAgentFinalizeRetry = {
+  instruction: string;
+  idempotencyKey?: string;
+  maxAttempts?: number;
+};
+```
+
+`instruction` is appended to the revision reason sent to the harness.
+`idempotencyKey` lets the host count retries for the same plugin request across
+equivalent finalize decisions, and `maxAttempts` caps how many extra passes the
+host will allow before continuing with the natural final answer.
 
 Non-bundled plugins that need `llm_input`, `llm_output`,
 `before_agent_finalize`, or `agent_end` must set:

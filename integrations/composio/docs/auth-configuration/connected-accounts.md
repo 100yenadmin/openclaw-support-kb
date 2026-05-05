@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/docs/auth-configuration/connected-accounts.md"
-source_hash: "ec3632c1c0418095aba033208193178e625f878fe425b44ea5712ff847214fed"
+source_hash: "6a6337f4ebcb19a12ff6f78ab2c6fec61c6329de4ceb502d05255edd79368149"
 doc_path: "auth-configuration/connected-accounts.md"
 original_doc_path: "auth-configuration/connected-accounts.md"
 duplicate_index: 1
@@ -247,7 +247,9 @@ curl -X PATCH https://backend.composio.dev/api/v3.1/org/project/config \
 
 Users can connect multiple accounts for the same toolkit (e.g., personal and work Gmail).
 
-> Use `link()` for creating accounts, as it provides hosted authentication and allows multiple accounts by default. See [Connect Link authentication](/docs/tools-direct/authenticating-tools#hosted-authentication-connect-link).
+> **For Composio-managed OAuth, prefer `link()`.** The `initiate()` examples below will stop working for Composio-managed OAuth auth configs starting **2026-05-08** (new orgs) / **2026-07-03** (all orgs). `link()` provides hosted authentication, allows multiple accounts by default, and is unaffected by the rollout. See [Connect Link authentication](/docs/tools-direct/authenticating-tools#hosted-authentication-connect-link), the [migration guide](/docs/auth-configuration/migrating-initiate-to-link), or the [changelog entry](/docs/changelog/2026/04/24).
+
+The `initiate()` examples remain accurate for **custom auth configs** (your own OAuth app) and **non-OAuth schemes** (API key, bearer, basic) — those are unaffected.
 
 **Python:**
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "8420cdce35b2f57d6f1a7dc2bcbdfcfd2c816561d6184dc04a51053e0397d257"
+source_hash: "936404c195ef78c27053dc43cd4677b2200b61657f0205792c65dbf7d774c5d0"
 doc_path: "channels/whatsapp.md"
 original_doc_path: "channels/whatsapp.md"
 duplicate_index: 1
@@ -33,6 +33,16 @@ openclaw plugins install @openclaw/whatsapp
 
 Use the bare package to follow the current official release tag. Pin an exact
 version only when you need a reproducible install.
+
+On Windows, the WhatsApp plugin needs Git on `PATH` during npm install because
+one of its Baileys/libsignal dependencies is fetched from a git URL. Install
+Git for Windows, then restart the shell and rerun the install:
+
+```powershell theme={"theme":{"light":"min-light","dark":"min-dark"}}
+winget install --id Git.Git -e
+```
+
+Portable Git also works if its `bin` directory is on `PATH`.
 
 <CardGroup>
   <Card title="Pairing" icon="link" href="/channels/pairing">

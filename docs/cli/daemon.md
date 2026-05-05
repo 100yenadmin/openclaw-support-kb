@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "f09d2f2e7c033039f31307643649e1636e669e432dff56dcb18af9e8265dc089"
+source_hash: "c9302066d5149adcc489f9d3d6ad03440c3cfd3437568ff649a4467d2a03e8eb"
 doc_path: "cli/daemon.md"
 original_doc_path: "cli/daemon.md"
 duplicate_index: 1
@@ -43,7 +43,7 @@ openclaw daemon uninstall
 
 * `status`: `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json`
 * `install`: `--port`, `--runtime <node|bun>`, `--token`, `--force`, `--json`
-* `restart`: `--force`, `--wait <duration>`, `--json`
+* `restart`: `--safe`, `--force`, `--wait <duration>`, `--json`
 * lifecycle (`uninstall|start|stop`): `--json`
 
 Notes:
@@ -60,6 +60,7 @@ Notes:
 * If both `gateway.auth.token` and `gateway.auth.password` are configured and `gateway.auth.mode` is unset, install is blocked until mode is set explicitly.
 * On macOS, `install` keeps LaunchAgent plists owner-only and loads managed service environment values through an owner-only file and wrapper instead of serializing API keys or auth-profile env refs into `EnvironmentVariables`.
 * If you intentionally run multiple gateways on one host, isolate ports, config/state, and workspaces; see [/gateway#multiple-gateways-same-host](/gateway#multiple-gateways-same-host).
+* `restart --safe` asks the running Gateway to preflight active work and schedule one coalesced restart after active work drains. Plain `restart` keeps the existing service-manager behavior; `--force` remains the immediate override path.
 
 ## Prefer
 

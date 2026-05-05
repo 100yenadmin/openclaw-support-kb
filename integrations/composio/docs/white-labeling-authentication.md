@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling authentication"
 source: "https://docs.composio.dev/docs/white-labeling-authentication.md"
-source_hash: "0cc65e106ae17b2a313d538ac2bc96ccad90561a92a803b8c3da16785c75ba37"
+source_hash: "26853f1fe1af4f164988e8f1f1f2a764cd2629bae2ed87193d0b9f228bdbb5c0"
 doc_path: "white-labeling-authentication.md"
 original_doc_path: "white-labeling-authentication.md"
 duplicate_index: 1
@@ -12,13 +12,14 @@ duplicate_index: 1
 Source: https://docs.composio.dev/docs/white-labeling-authentication.md
 
 
-There are three places where Composio branding shows up during authentication:
+There are four places where Composio branding shows up during authentication:
 
-| Where                                                                | What users see                                                  | How to fix                             |
-| -------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------- |
-| [**Connect Link page**](#customizing-the-connect-link)               | Composio logo and name on the hosted auth page                  | Change logo + app title in dashboard   |
-| [**OAuth consent screen**](#using-your-own-oauth-apps)               | "Composio wants to access your account" on Google, GitHub, etc. | Use your own OAuth app                 |
-| [**Browser address bar**](#routing-the-callback-through-your-domain) | `backend.composio.dev` flashes during OAuth redirect-back       | Proxy the redirect through your domain |
+| Where                                                                 | What users see                                                  | How to fix                                          |
+| --------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| [**Connect Link page**](#customizing-the-connect-link)                | Composio logo and name on the hosted auth page                  | Change logo + app title in dashboard                |
+| [**OAuth consent screen**](#using-your-own-oauth-apps)                | "Composio wants to access your account" on Google, GitHub, etc. | Use your own OAuth app                              |
+| [**Browser address bar**](#routing-the-callback-through-your-domain)  | `backend.composio.dev` flashes during OAuth redirect-back       | Proxy the redirect through your domain              |
+| [**Post-auth success page**](#redirecting-users-after-authentication) | Composio-branded success page after OAuth completes             | Pass a `callbackUrl` when initiating the connection |
 
 # Customizing the Connect Link
 
@@ -211,6 +212,32 @@ flowchart TD
 ```
 
 > For FAQs and setup guides for individual toolkits, browse the [toolkits page](/toolkits).
+
+# Redirecting users after authentication
+
+By default, after OAuth completes, users land on a Composio-hosted success page that shows Composio branding. To bypass this page and send users to your own domain instead, pass a `callbackUrl` when calling `session.authorize()`:
+
+**Python:**
+
+```python
+connection_request = session.authorize(
+    "gmail",
+    callback_url="https://your-app.com/callback"
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+const connectionRequest = await session.authorize("gmail", {
+  callbackUrl: "https://your-app.com/callback",
+});
+```
+
+After authentication, Composio redirects the user to your callback URL instead of the default success page. For full details on the parameters appended to your callback URL, see [Manually authenticating users → Redirecting users after authentication](/docs/authenticating-users/manually-authenticating#redirecting-users-after-authentication).
 
 # What to read next
 

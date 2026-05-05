@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "d4b26540a5dc578c5fa9f0fb0905af5eb879a4617c3966c9d8b704e012c938a6"
+source_hash: "6a2d9916438b1be230a481d5e5b107fbd93dc037aa8216837d6a8567e8fec6eb"
 doc_path: "plugins/plugin-inventory.md"
 original_doc_path: "plugins/plugin-inventory.md"
 duplicate_index: 1
@@ -31,6 +31,26 @@ pnpm plugins:inventory:gen
 Source checkouts are different from npm installs: after `pnpm install`, bundled
 plugins load from `extensions/<id>` so local edits and package-local workspace
 dependencies are available.
+
+## Install a plugin
+
+Use the **Distribution** column to decide whether install is needed. Plugins that
+say `included in OpenClaw` are already present in the core package. Official
+external packages need one install, then a Gateway restart.
+
+For example, Discord is an official external package:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install @openclaw/discord
+openclaw gateway restart
+openclaw plugins inspect discord --runtime --json
+```
+
+Bare package specs try ClawHub first, then npm fallback. To force a source, use
+`clawhub:@openclaw/discord` or `npm:@openclaw/discord`. After install, follow
+the plugin's setup doc, such as [Discord](/channels/discord), to add credentials
+and channel config. See [Manage plugins](/plugins/manage-plugins) for update,
+uninstall, and publishing commands.
 
 ## Core npm package
 

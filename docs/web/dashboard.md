@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dashboard"
 source: "https://docs.openclaw.ai/web/dashboard"
-source_hash: "cf70b50c9a6d841c9746a7f6ec41bcf982431060283c2194a371a1cb240acb80"
+source_hash: "210d7e482401f34bb866a11105a7d2915a8be84b9a2bf8f073d4a985b938d62b"
 doc_path: "web/dashboard.md"
 original_doc_path: "web/dashboard.md"
 duplicate_index: 1
@@ -47,6 +47,10 @@ Prefer localhost, Tailscale Serve, or an SSH tunnel.
 
 * After onboarding, the CLI auto-opens the dashboard and prints a clean (non-tokenized) link.
 * Re-open anytime: `openclaw dashboard` (copies link, opens browser if possible, shows SSH hint if headless).
+* If clipboard and browser delivery fail, `openclaw dashboard` still prints the
+  clean URL and tells you to use the token from `OPENCLAW_GATEWAY_TOKEN` or
+  `gateway.auth.token` as the URL fragment key `token`; it does not print token
+  values in logs.
 * If the UI prompts for shared-secret auth, paste the configured token or
   password into Control UI settings.
 

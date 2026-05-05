@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "8f99296980a8fb601fc8dc5186a4bcf19d8e05f889b8869f96c932bd8d4ae29d"
+source_hash: "d3944ffb615e83a21a145391442706bd5064e0432958b82776c104c45819f80e"
 doc_path: "cli/update.md"
 original_doc_path: "cli/update.md"
 duplicate_index: 1
@@ -182,8 +182,9 @@ manually.
 
 On the beta update channel, tracked npm and ClawHub plugin installs that follow
 the default/latest line try a plugin `@beta` release first. If the plugin has no
-beta release, OpenClaw falls back to the recorded default/latest spec. Exact
-versions and explicit tags are not rewritten.
+beta release, OpenClaw falls back to the recorded default/latest spec. For npm
+plugins, OpenClaw also falls back when the beta package exists but fails install
+validation. Exact versions and explicit tags are not rewritten.
 
 <Warning>
   If an exact pinned npm plugin update resolves to an artifact whose integrity differs from the stored install record, `openclaw update` aborts that plugin artifact update instead of installing it. Reinstall or update the plugin explicitly only after verifying that you trust the new artifact.

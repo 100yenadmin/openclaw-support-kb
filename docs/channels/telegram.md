@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "a171b52ca0754359c07297b7bec9d23fafcb6dd9478566f8d26c7610c0c7d556"
+source_hash: "9149ee62ebab9346ae6b794752c9c8b7fd809b900465d4bcbb4827a3b42b505e"
 doc_path: "channels/telegram.md"
 original_doc_path: "channels/telegram.md"
 duplicate_index: 1
@@ -341,6 +341,7 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
     For text-only replies:
 
     * short DM/group/topic previews: OpenClaw keeps the same preview message and performs a final edit in place, unless a visible non-preview message was sent after the preview appeared
+    * long text finals that split into multiple Telegram messages reuse the existing preview as the first final chunk when possible, then send only the remaining chunks
     * previews followed by visible non-preview output: OpenClaw sends the completed reply as a fresh final message and cleans up the older preview, so the final answer appears after intermediate output
     * previews older than about one minute: OpenClaw sends the completed reply as a fresh final message and then cleans up the preview, so Telegram's visible timestamp reflects completion time instead of the preview creation time
 

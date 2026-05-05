@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "3a8ab4cbeccd2c0f53203da96e6b3d51adfb1ea8deed11d5f6a1df9d58d786e1"
+source_hash: "91c3607db35475422263361cedff68667aad4cc03249ae9d5f764938dcdadcd8"
 doc_path: "tools/music-generation.md"
 original_doc_path: "tools/music-generation.md"
 duplicate_index: 1
@@ -19,8 +19,12 @@ MiniMax, and workflow-configured ComfyUI today.
 
 For session-backed agent runs, OpenClaw starts music generation as a
 background task, tracks it in the task ledger, then wakes the agent again
-when the track is ready so the agent can post the finished audio back into
-the original channel.
+when the track is ready so the agent can tell the user and attach the
+finished audio. In group/channel chats that use message-tool-only visible
+delivery, the agent relays the result through the message tool. If the
+completion agent writes only a private final reply, OpenClaw falls back to a
+direct channel send with the generated media. The completion wake explicitly
+warns the agent that normal final replies are private in those routes.
 
 <Note>
   The built-in shared tool only appears when at least one music-generation

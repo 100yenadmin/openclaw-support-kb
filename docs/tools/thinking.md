@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "12bb8478ba4c23bc8f4547bc73323bc3c13876a875ca6f60cf38f858b3addb8b"
+source_hash: "e25d1ca60205f2fde1d48bc32a888addbd9e1828bb48abccb996f839201cc305"
 doc_path: "tools/thinking.md"
 original_doc_path: "tools/thinking.md"
 duplicate_index: 1
@@ -34,7 +34,8 @@ Source: https://docs.openclaw.ai/tools/thinking
   * Anthropic Claude Opus 4.7 does not default to adaptive thinking. Its API effort default remains provider-owned unless you explicitly set a thinking level.
   * Anthropic Claude Opus 4.7 maps `/think xhigh` to adaptive thinking plus `output_config.effort: "xhigh"`, because `/think` is a thinking directive and `xhigh` is the Opus 4.7 effort setting.
   * Anthropic Claude Opus 4.7 also exposes `/think max`; it maps to the same provider-owned max effort path.
-  * DeepSeek V4 models expose `/think xhigh|max`; both map to DeepSeek `reasoning_effort: "max"` while lower non-off levels map to `high`.
+  * Direct DeepSeek V4 models expose `/think xhigh|max`; both map to DeepSeek `reasoning_effort: "max"` while lower non-off levels map to `high`.
+  * OpenRouter-routed DeepSeek V4 models expose `/think xhigh` and send OpenRouter-supported `reasoning_effort` values. Stored `max` overrides fall back to `xhigh`.
   * Ollama thinking-capable models expose `/think low|medium|high|max`; `max` maps to native `think: "high"` because Ollama's native API accepts `low`, `medium`, and `high` effort strings.
   * OpenAI GPT models map `/think` through model-specific Responses API effort support. `/think off` sends `reasoning.effort: "none"` only when the target model supports it; otherwise OpenClaw omits the disabled reasoning payload instead of sending an unsupported value.
   * Custom OpenAI-compatible catalog entries can opt into `/think xhigh` by setting `models.providers.<provider>.models[].compat.supportedReasoningEfforts` to include `"xhigh"`. This uses the same compat metadata that maps outbound OpenAI reasoning effort payloads, so menus, session validation, agent CLI, and `llm-task` agree with transport behavior.
@@ -62,6 +63,7 @@ Source: https://docs.openclaw.ai/tools/thinking
 ## Application by agent
 
 * **Embedded Pi**: the resolved level is passed to the in-process Pi agent runtime.
+* **Claude CLI backend**: non-off levels are passed to Claude Code as `--effort` when using `claude-cli`; see [CLI backends](/gateway/cli-backends).
 
 ## Fast mode (/fast)
 

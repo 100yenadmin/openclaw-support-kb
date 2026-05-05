@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Trajectory bundles"
 source: "https://docs.openclaw.ai/tools/trajectory"
-source_hash: "4954b50d8d5af2538418e3755ce1f21d0776671a0dc8dce69c4e9d397774cd2d"
+source_hash: "850790cfc85be1bd7e4109aad9f27907c457abcfb9d180feecf4f6a786db2f6a"
 doc_path: "tools/trajectory.md"
 original_doc_path: "tools/trajectory.md"
 duplicate_index: 1
@@ -186,7 +186,7 @@ OpenClaw redacts sensitive values before writing export files:
 
 The exporter also bounds input size:
 
-* runtime sidecar files: 50 MiB
+* runtime sidecar files: live capture stops at 10 MiB and records a truncation event when space remains; export accepts existing runtime sidecars up to 50 MiB
 * session files: 50 MiB
 * runtime events: 200,000
 * total exported events: 250,000

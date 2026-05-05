@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "fe2db6e053b071f36e123a441f58295eb28d8230cf3f6a09581121e78d5a9a0c"
+source_hash: "ef79eba19cdfa7d0c7a0b2211b44900aca44a6d38c1b4d481040d95f47396898"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1
@@ -216,7 +216,9 @@ OpenRouter's documented app-attribution headers:
     On verified OpenRouter routes, `openrouter/deepseek/deepseek-v4-flash` and
     `openrouter/deepseek/deepseek-v4-pro` fill missing `reasoning_content` on
     replayed assistant turns so thinking/tool conversations keep DeepSeek V4's
-    required follow-up shape.
+    required follow-up shape. OpenClaw sends OpenRouter-supported
+    `reasoning_effort` values for these routes; `xhigh` is the highest advertised
+    level, and stale `max` overrides are mapped to `xhigh`.
   </Accordion>
 
   <Accordion title="OpenAI-only request shaping">

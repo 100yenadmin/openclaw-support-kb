@@ -1,21 +1,25 @@
 ---
 type: openclaw_release_index
 channel: stable
-selected_release: v2026.5.3-1
-stable_release: v2026.5.3-1
-beta_release: v2026.5.3-1
+selected_release: v2026.5.4
+stable_release: v2026.5.4
+beta_release: v2026.5.4
 ---
 
 # OpenClaw Releases
 
-Selected stable release: v2026.5.3-1
+Selected stable release: v2026.5.4
 
-Latest stable release: v2026.5.3-1
+Latest stable release: v2026.5.4
 
-Latest beta/prerelease: v2026.5.3-1
+Latest beta/prerelease: v2026.5.4
 
 Source: https://github.com/openclaw/openclaw/releases
 
+- v2026.5.4 (stable, 2026-05-05T08:24:01Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4
+- v2026.5.4-beta.3 (beta, 2026-05-05T06:14:48Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.3
+- v2026.5.4-beta.2 (beta, 2026-05-05T01:43:03Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.2
+- v2026.5.4-beta.1 (beta, 2026-05-04T18:22:09Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.1
 - v2026.5.3-1 (stable, 2026-05-04T09:35:36Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3-1
 - v2026.5.3 (stable, 2026-05-04T07:01:29Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3
 - v2026.5.3-beta.3 (beta, 2026-05-04T02:20:18Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.3-beta.3
@@ -62,7 +66,3 @@ Source: https://github.com/openclaw/openclaw/releases
 - v2026.4.11 (stable, 2026-04-12T00:18:03Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.11
 - v2026.4.11-beta.1 (beta, 2026-04-11T15:15:03Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.11-beta.1
 - v2026.4.10 (stable, 2026-04-11T02:43:25Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.10
-- v2026.4.9 (stable, 2026-04-09T02:25:28Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.9
-- v2026.4.9-beta.1 (beta, 2026-04-09T01:26:28Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.9-beta.1
-- v2026.4.8 (stable, 2026-04-08T05:59:44Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.8
-- v2026.4.7 (stable, 2026-04-08T02:12:57Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.7

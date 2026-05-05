@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "51b21a4344f0ea53aa8f324db73228fb62b6b358d3a4268d63a98565ff78badc"
+source_hash: "6e2808e78544cf61e6b708cfa0d1ae7c59c55f99c9f1dadb0bd4828c53e9a9ea"
 doc_path: "reference/transcript-hygiene.md"
 original_doc_path: "reference/transcript-hygiene.md"
 duplicate_index: 1
@@ -123,6 +123,7 @@ inter-session user turns that only have provenance metadata.
 * Image sanitization only.
 * Drop orphaned reasoning signatures (standalone reasoning items without a following content block) for OpenAI Responses/Codex transcripts, and drop replayable OpenAI reasoning after a model route switch.
 * Preserve replayable OpenAI Responses reasoning item payloads, including encrypted empty-summary items, so manual/WebSocket replay keeps required `rs_*` state paired with assistant output items.
+* Native ChatGPT Codex Responses follows Codex wire parity by replaying prior Responses reasoning/message/function payloads without prior item IDs while preserving session `prompt_cache_key`.
 * No tool call id sanitization.
 * Tool result pairing repair may move real matched outputs and synthesize Codex-style `aborted` outputs for missing tool calls.
 * No turn validation or reordering.

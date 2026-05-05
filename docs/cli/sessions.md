@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "83273b7b7d95f9e4a1c0861ac0e71962f994d0d09e39283e4545c5b51809edb3"
+source_hash: "bb176069b689d13cd4730e97bf233e4f5864664af7095931dbdbb3b04b78a2dc"
 doc_path: "cli/sessions.md"
 original_doc_path: "cli/sessions.md"
 duplicate_index: 1
@@ -24,17 +24,19 @@ until a message is processed. Use `openclaw channels status --probe`,
 `openclaw status --deep`, or `openclaw health --verbose` when you need live
 channel connectivity.
 
-Gateway `sessions.list` responses are bounded by default so large long-lived
-stores cannot monopolize the Gateway event loop. Pass an explicit positive
-`limit` from RPC clients when a different result window is needed; responses
-include `totalCount`, `limitApplied`, and `hasMore` when callers need to show
-that more rows exist.
+`openclaw sessions` and Gateway `sessions.list` responses are bounded by
+default so large long-lived stores cannot monopolize the CLI process or Gateway
+event loop. The CLI returns the newest 100 sessions by default; pass
+`--limit <n>` for a smaller/larger window or `--limit all` when you intentionally
+need the full store. JSON responses include `totalCount`, `limitApplied`, and
+`hasMore` when callers need to show that more rows exist.
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw sessions
 openclaw sessions --agent work
 openclaw sessions --all-agents
 openclaw sessions --active 120
+openclaw sessions --limit 25
 openclaw sessions --verbose
 openclaw sessions --json
 ```
@@ -46,6 +48,7 @@ Scope selection:
 * `--agent <id>`: one configured agent store
 * `--all-agents`: aggregate all configured agent stores
 * `--store <path>`: explicit store path (cannot be combined with `--agent` or `--all-agents`)
+* `--limit <n|all>`: max rows to output (default `100`; `all` restores full output)
 
 Export a trajectory bundle for a stored session:
 
@@ -77,6 +80,9 @@ JSON examples:
   ],
   "allAgents": true,
   "count": 2,
+  "totalCount": 2,
+  "limitApplied": 100,
+  "hasMore": false,
   "activeMinutes": null,
   "sessions": [
     { "agentId": "main", "key": "agent:main:main", "model": "gpt-5" },
@@ -101,6 +107,8 @@ openclaw sessions cleanup --json
 `openclaw sessions cleanup` uses `session.maintenance` settings from config:
 
 * Scope note: `openclaw sessions cleanup` maintains session stores, transcripts, and trajectory sidecars. It does not prune cron run logs (`cron/runs/<jobId>.jsonl`), which are managed by `cron.runLog.maxBytes` and `cron.runLog.keepLines` in [Cron configuration](/automation/cron-jobs#configuration) and explained in [Cron maintenance](/automation/cron-jobs#maintenance).
+
+* Cleanup also prunes unreferenced primary transcripts, compaction checkpoints, and trajectory sidecars older than `session.maintenance.pruneAfter`; files still referenced by `sessions.json` are preserved.
 
 * `--dry-run`: preview how many entries would be pruned/capped without writing.
   * In text mode, dry-run prints a per-session action table (`Action`, `Key`, `Age`, `Model`, `Flags`) so you can see what would be kept vs removed.

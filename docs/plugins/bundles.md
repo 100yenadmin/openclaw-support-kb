@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin bundles"
 source: "https://docs.openclaw.ai/plugins/bundles"
-source_hash: "c9612c6fe3abb0fc84cc18901bb446321441ee5128f228eb500d478c736a2782"
+source_hash: "b83702f988a42dfa96b399e917c2c2b8de3a925add69f9dfc5e8a5f45b782ce6"
 doc_path: "plugins/bundles.md"
 original_doc_path: "plugins/bundles.md"
 duplicate_index: 1
@@ -262,8 +262,8 @@ dual-format packages from being partially installed as bundles.
   downloadable through the plugin installer. Gateway startup never runs a
   package manager for them.
 * `openclaw doctor --fix` removes legacy staged dependency directories and can
-  install configured downloadable plugins that are missing from the local
-  plugin index.
+  recover downloadable plugins that are missing from the local plugin index when
+  config references them.
 
 ## Security
 

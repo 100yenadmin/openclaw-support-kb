@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "64fe63fd1be07da8f10b221cc48e3bdd194d104adaf048b446ff555c95a13f6f"
+source_hash: "6a1be4db3f6482e668d576be1f9942eaec2b87e470acf44cd5ca21b3967fd05c"
 doc_path: "automation/hooks.md"
 original_doc_path: "automation/hooks.md"
 duplicate_index: 1
@@ -185,7 +185,7 @@ openclaw hooks enable <hook-name>
 
 ### session-memory details
 
-Extracts the last 15 user/assistant messages, generates a descriptive filename slug via LLM, and saves to `<workspace>/memory/YYYY-MM-DD-slug.md` using the host local date. Requires `workspace.dir` to be configured.
+Extracts the last 15 user/assistant messages and saves to `<workspace>/memory/YYYY-MM-DD-HHMM.md` using the host local date. Memory capture runs in the background so `/new` and `/reset` acknowledgements are not delayed by transcript reads or optional slug generation. Set `hooks.internal.entries.session-memory.llmSlug: true` to generate descriptive filename slugs with the configured model. Requires `workspace.dir` to be configured.
 
 <a />
 

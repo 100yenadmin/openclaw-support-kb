@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "7e649cd690068ed1471ed308fe4cfffced4df4c4593ef5149dbb64ca7f7e8701"
+source_hash: "8cbbbfb8a0a7957bfc538d66e1eb464fcef430a25d0454e75bc1a4d8c124517e"
 doc_path: "cli/hooks.md"
 original_doc_path: "cli/hooks.md"
 duplicate_index: 1
@@ -289,7 +289,7 @@ Saves session context to memory when you issue `/new` or `/reset`.
 openclaw hooks enable session-memory
 ```
 
-**Output:** `~/.openclaw/workspace/memory/YYYY-MM-DD-slug.md`
+**Output:** `~/.openclaw/workspace/memory/YYYY-MM-DD-HHMM.md` by default. Set `hooks.internal.entries.session-memory.llmSlug: true` for model-generated filename slugs.
 
 **See:** [session-memory documentation](/automation/hooks#session-memory)
 

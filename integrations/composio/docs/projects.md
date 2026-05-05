@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/docs/projects.md"
-source_hash: "9206d522a4185f9edfafed83baa9ce849d679bc757bcfbbec05bead9bc985434"
+source_hash: "6de0faffe00a47799317db02d99f86423e3b154dad18b36061acacf4246c8611"
 doc_path: "projects.md"
 original_doc_path: "projects.md"
 duplicate_index: 1
@@ -39,6 +39,8 @@ You can manage projects from the [dashboard](https://platform.composio.dev?next_
 > Project management endpoints use the `x-org-api-key` header, not the regular `x-api-key`. You can find your org API key in the dashboard under **Settings > Organization**.
 
 ## Create a project
+
+There is no limit on the number of projects per organization. Project names must be unique within the organization.
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/org/owner/project/new \

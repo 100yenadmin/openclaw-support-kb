@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "ed9c30a5e0defeeb131d8cc5220ee8764bbfcd20feb23d4a700066e7930f13b5"
+source_hash: "ff4844ba373d708de831aa771d4e3d83b638fcb2d01c2d9ab1b26a27c346076f"
 doc_path: "help/debugging.md"
 original_doc_path: "help/debugging.md"
 duplicate_index: 1
@@ -95,6 +95,17 @@ OPENCLAW_RUN_NODE_CPU_PROF_DIR=.artifacts/cli-cpu pnpm openclaw status
 The source runner adds Node CPU profile flags and writes a `.cpuprofile` for the
 command. Use this before adding temporary instrumentation to command code.
 
+For startup stalls that look like synchronous filesystem or module-loader work,
+add Node's sync I/O trace flag through the source runner:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+OPENCLAW_TRACE_SYNC_IO=1 pnpm openclaw gateway --force
+```
+
+`pnpm gateway:watch` enables this flag by default for the watched Gateway child.
+Set `OPENCLAW_TRACE_SYNC_IO=0` to suppress Node sync I/O trace output in watch
+mode.
+
 ## Gateway watch mode
 
 For fast iteration, run the gateway under the file watcher:
@@ -152,6 +163,11 @@ Use `--benchmark-dir <path>` when you want profiles somewhere else.
 Use `--benchmark-no-force` when you want the benchmarked child to skip the
 default `--force` port cleanup and fail fast if the Gateway port is already in
 use.
+Benchmark mode suppresses sync-I/O trace spam by default. Set
+`OPENCLAW_TRACE_SYNC_IO=1` with `--benchmark` when you explicitly want both CPU
+profiles and Node sync-I/O stack traces. In benchmark mode those trace blocks
+are written to `gateway-watch-output.log` under the benchmark directory and
+filtered from the terminal pane; normal Gateway logs remain visible.
 
 The tmux wrapper carries common non-secret runtime selectors such as
 `OPENCLAW_PROFILE`, `OPENCLAW_CONFIG_PATH`, `OPENCLAW_STATE_DIR`,

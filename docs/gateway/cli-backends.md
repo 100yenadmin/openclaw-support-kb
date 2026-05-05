@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "61e21ff0b5f31953540ecf68c837bf6935d5e77e7cba2d2aca9af1f03823ea2d"
+source_hash: "de48028f363fcde4994a89f894aed7e6749301ad44be44b841cf722d9b3fee52"
 doc_path: "gateway/cli-backends.md"
 original_doc_path: "gateway/cli-backends.md"
 duplicate_index: 1
@@ -183,6 +183,12 @@ Per-agent `agents.list[].tools.exec` settings override global `tools.exec` for
 that agent. To force a different Claude mode, set explicit raw backend args
 such as `--permission-mode default` or `--permission-mode acceptEdits` under
 `agents.defaults.cliBackends.claude-cli.args` and matching `resumeArgs`.
+
+The bundled Anthropic `claude-cli` backend also maps OpenClaw `/think` levels
+to Claude Code's native `--effort` flag for non-off levels. `minimal` and
+`low` map to `low`, `adaptive` and `medium` map to `medium`, and `high`,
+`xhigh`, and `max` map directly. Other CLI backends need their owning plugin to
+declare an equivalent argv mapper before `/think` can affect the spawned CLI.
 
 Before OpenClaw can use the bundled `claude-cli` backend, Claude Code itself
 must already be logged in on the same host:

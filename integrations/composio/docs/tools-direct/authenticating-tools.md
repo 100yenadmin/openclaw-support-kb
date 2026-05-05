@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authenticating Tools"
 source: "https://docs.composio.dev/docs/tools-direct/authenticating-tools.md"
-source_hash: "3f0f573b91018601bcec4d57c621b83ccf6c3f90443491ae08792b298b351d39"
+source_hash: "2fa2109a1200fa17f41a175168130a5ca6ba95bc44030a70d5187a919d52a827"
 doc_path: "tools-direct/authenticating-tools.md"
 original_doc_path: "tools-direct/authenticating-tools.md"
 duplicate_index: 1
@@ -91,6 +91,10 @@ https://your-app.com/callback?user_id=user_123&status=success&connected_account_
 **Choose the section below that matches your toolkit's authentication method:**
 
 ### OAuth Connections
+
+> **`initiate()` is being retired for Composio-managed OAuth.** If your auth config is Composio-managed (the default — you didn't bring your own OAuth client credentials), `initiate()` will start returning `400 BadRequest` on **2026-05-08** for new organizations and **2026-07-03** for all remaining organizations. Use [Hosted Authentication (Connect Link)](#hosted-authentication-connect-link) above with `composio.connectedAccounts.link()` (TS) / `composio.connected_accounts.link()` (Python) instead — same return shape, same `redirectUrl` / `redirect_url` field, and it works for every redirectable scheme.
+
+Custom auth configs (your own OAuth app) and non-OAuth schemes (API key, bearer token, basic) continue to work on `initiate()` unchanged. See the [migration guide](/docs/auth-configuration/migrating-initiate-to-link) and the [changelog entry](/docs/changelog/2026/04/24).
 
 For OAuth flows, you'll redirect users to complete authorization. You can specify a callback URL to control where users return after authentication:
 

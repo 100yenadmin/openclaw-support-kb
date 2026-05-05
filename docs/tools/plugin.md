@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "012b1a53251f0d5fde7512c8aa258e6c017649af9c66717f0737d093003af350"
+source_hash: "0191f7e32c061e5a3456c9bd4e2e59a45da15f3592235c80ad77c7ec85510cc2"
 doc_path: "tools/plugin.md"
 original_doc_path: "tools/plugin.md"
 duplicate_index: 1
@@ -259,20 +259,28 @@ Looking for third-party plugins? See [Community Plugins](/plugins/community).
 }
 ```
 
-| Field            | Description                                               |
-| ---------------- | --------------------------------------------------------- |
-| `enabled`        | Master toggle (default: `true`)                           |
-| `allow`          | Plugin allowlist (optional)                               |
-| `deny`           | Plugin denylist (optional; deny wins)                     |
-| `load.paths`     | Extra plugin files/directories                            |
-| `slots`          | Exclusive slot selectors (e.g. `memory`, `contextEngine`) |
-| `entries.\<id\>` | Per-plugin toggles + config                               |
+| Field              | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| `enabled`          | Master toggle (default: `true`)                           |
+| `allow`            | Plugin allowlist (optional)                               |
+| `bundledDiscovery` | Bundled plugin discovery mode (`allowlist` by default)    |
+| `deny`             | Plugin denylist (optional; deny wins)                     |
+| `load.paths`       | Extra plugin files/directories                            |
+| `slots`            | Exclusive slot selectors (e.g. `memory`, `contextEngine`) |
+| `entries.\<id\>`   | Per-plugin toggles + config                               |
 
 `plugins.allow` is exclusive. When it is non-empty, only listed plugins can load
 or expose tools, even if `tools.allow` contains `"*"` or a specific plugin-owned
 tool name. If a tool allowlist references plugin tools, add the owning plugin ids
 to `plugins.allow` or remove `plugins.allow`; `openclaw doctor` warns about this
 shape.
+
+`plugins.bundledDiscovery` defaults to `"allowlist"` for new configs, so a
+restrictive `plugins.allow` inventory also blocks omitted bundled provider
+plugins, including runtime web-search provider discovery. Doctor stamps older
+restrictive allowlist configs with `"compat"` during migration so upgrades keep
+legacy bundled provider behavior until the operator opts into the stricter mode.
+An empty `plugins.allow` is still treated as unset/open.
 
 Config changes made through `/plugins enable` or `/plugins disable` trigger an
 in-process Gateway plugin reload. New agent turns rebuild their tool list from

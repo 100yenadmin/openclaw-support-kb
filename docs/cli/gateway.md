@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "6597041eaf585e7012f3ec923403fc6955082e99a6cd4be9c03c6f1e8eeb4d2f"
+source_hash: "fa5a62483eb9cafcad0c32e1863f8395aa5c787c6a693266cc902d92ff5c7547"
 doc_path: "cli/gateway.md"
 original_doc_path: "cli/gateway.md"
 duplicate_index: 1
@@ -127,6 +127,16 @@ openclaw gateway run
 <ParamField type="string">
   Raw stream jsonl path.
 </ParamField>
+
+## Restart the Gateway
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw gateway restart
+openclaw gateway restart --safe
+openclaw gateway restart --force
+```
+
+`openclaw gateway restart --safe` asks the running Gateway to preflight active OpenClaw work before restarting. If queued operations, reply delivery, embedded runs, or task runs are active, the Gateway reports the blockers, coalesces duplicate safe restart requests, and restarts once the active work drains. Plain `restart` keeps the existing service-manager behavior for compatibility. Use `--force` only when you explicitly want the immediate override path.
 
 <Warning>
   Inline `--password` can be exposed in local process listings. Prefer `--password-file`, env, or a SecretRef-backed `gateway.auth.password`.
@@ -325,6 +335,7 @@ openclaw gateway status --require-rpc
     * If the probe succeeds, unresolved auth-ref warnings are suppressed to avoid false positives.
     * Use `--require-rpc` in scripts and automation when a listening service is not enough and you need read-scope RPC calls to be healthy too.
     * `--deep` adds a best-effort scan for extra launchd/systemd/schtasks installs. When multiple gateway-like services are detected, human output prints cleanup hints and warns that most setups should run one gateway per machine.
+    * `--deep` also reports a recent Gateway supervisor restart handoff when the service process exited cleanly for an external supervisor restart.
     * Human output includes the resolved file log path plus the CLI-vs-service config paths/validity snapshot to help diagnose profile or state-dir drift.
   </Accordion>
 
@@ -517,12 +528,13 @@ openclaw gateway restart
   <Accordion title="Command options">
     * `gateway status`: `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json`
     * `gateway install`: `--port`, `--runtime <node|bun>`, `--token`, `--wrapper <path>`, `--force`, `--json`
-    * `gateway restart`: `--force`, `--wait <duration>`, `--json`
+    * `gateway restart`: `--safe`, `--force`, `--wait <duration>`, `--json`
     * `gateway uninstall|start|stop`: `--json`
   </Accordion>
 
   <Accordion title="Lifecycle behavior">
     * Use `gateway restart` to restart a managed service. Do not chain `gateway stop` and `gateway start` as a restart substitute; on macOS, `gateway stop` intentionally disables the LaunchAgent before stopping it.
+    * `gateway restart --safe` asks the running Gateway to preflight active OpenClaw work and defer the restart until reply delivery, embedded runs, and task runs drain. `--safe` cannot be combined with `--force` or `--wait`.
     * `gateway restart --wait 30s` overrides the configured restart drain budget for that restart. Bare numbers are milliseconds; units such as `s`, `m`, and `h` are accepted. `--wait 0` waits indefinitely.
     * `gateway restart --force` skips the active-work drain and restarts immediately. Use it when an operator has already inspected the listed task blockers and wants the gateway back now.
     * Lifecycle commands accept `--json` for scripting.

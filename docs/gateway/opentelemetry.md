@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "d44390bac2a768205ea1918ce1a891ba142c154a9e775b500597dc0913552008"
+source_hash: "589ad2801527228b965b31eaa34ad3091f622fdde69105b010dfcd70d0a1d54c"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1
@@ -222,10 +222,17 @@ OpenClaw classifies sessions by the work it can still observe:
   still making progress.
 * `session.stalled`: active work exists, but the active run has not reported
   recent progress. Stalled embedded runs stay observe-only at first, then
-  abort-drain after at least 10 minutes and 5x `diagnostics.stuckSessionWarnMs`
-  with no progress so queued turns behind the lane can resume.
+  abort-drain after `diagnostics.stuckSessionAbortMs` with no progress so queued
+  turns behind the lane can resume. When unset, the abort threshold defaults to
+  the safer extended window of at least 10 minutes and 5x
+  `diagnostics.stuckSessionWarnMs`.
 * `session.stuck`: stale session bookkeeping with no active work. This releases
   the affected session lane immediately.
+
+Recovery emits structured `session.recovery.requested` and
+`session.recovery.completed` events. Diagnostic session state is marked idle
+only after a mutating recovery outcome (`aborted` or `released`) and only if the
+same processing generation is still current.
 
 Only `session.stuck` emits the `openclaw.session.stuck` counter, the
 `openclaw.session.stuck_age_ms` histogram, and the `openclaw.session.stuck`

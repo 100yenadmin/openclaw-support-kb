@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "65bd9f774aa25194223e38210985fc9c9b1e735df82cd3d47884b1e00b55df1c"
+source_hash: "83baf7bed0fa60600fecfd3c44aedf9b7c16b29623cbdbdfcffc72f1fbc96928"
 doc_path: "cli/cron.md"
 original_doc_path: "cli/cron.md"
 duplicate_index: 1
@@ -218,11 +218,14 @@ Manual run and inspection:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw cron list
+openclaw cron list --agent ops
 openclaw cron show <job-id>
 openclaw cron run <job-id>
 openclaw cron run <job-id> --due
 openclaw cron runs --id <job-id> --limit 50
 ```
+
+`openclaw cron list` shows all matching jobs by default. Pass `--agent <id>` to show only jobs whose effective normalized agent id matches; jobs without a stored agent id count as the configured default agent.
 
 `cron runs` entries include delivery diagnostics with the intended cron target, the resolved target, message-tool sends, fallback use, and delivered state.
 

@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "dc0568d1bf101ba323b77a1d6209a8e831862e75a1bd32abdd04a64f5e2826ed"
+source_hash: "8185dc93cbf3923d5fdd13e24d3ee47598a5cb3839b02f88fe5950f99160749a"
 ---
 
 # Composio Documentation
@@ -117,6 +117,7 @@ source_hash: "dc0568d1bf101ba323b77a1d6209a8e831862e75a1bd32abdd04a64f5e2826ed"
 - https://docs.composio.dev/docs/auth-configuration/programmatic-auth-configs.md
 - https://docs.composio.dev/docs/auth-configuration/custom-auth-params.md
 - https://docs.composio.dev/docs/auth-configuration/connected-accounts.md
+- https://docs.composio.dev/docs/auth-configuration/migrating-initiate-to-link.md
 
 ## Resources
 
@@ -185,8 +186,8 @@ source_hash: "dc0568d1bf101ba323b77a1d6209a8e831862e75a1bd32abdd04a64f5e2826ed"
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
 - https://docs.composio.dev/reference/api-reference/migration.md
-- https://docs.composio.dev/reference/api-reference/organization.md
 - https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/organization.md
 - https://docs.composio.dev/reference/api-reference/tool-router.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md

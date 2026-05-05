@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "f2a1311c4f9d26802404c2cb673e475b731418d63e7e4bdbfffc7cf93a0c0eee"
+source_hash: "7032d68f29b4efbf27498494c352c65da8f69852cf912cb4a06a732e34876419"
 doc_path: "plugins/manage-plugins.md"
 original_doc_path: "plugins/manage-plugins.md"
 duplicate_index: 1
@@ -97,7 +97,9 @@ when it was previously pinned to an exact version or tag.
 When `openclaw update` runs on the beta channel, default-line npm and ClawHub
 plugin records try the matching plugin `@beta` release first. If that beta
 release does not exist, OpenClaw falls back to the recorded default/latest spec.
-Exact versions and explicit tags such as `@rc` or `@beta` are preserved.
+For npm plugins, OpenClaw also falls back when the beta package exists but fails
+install validation. Exact versions and explicit tags such as `@rc` or `@beta`
+are preserved.
 
 ## Uninstall plugins
 

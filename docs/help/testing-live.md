@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "4c3b2af3256296955df020baad265abd0aaf3b983ff834f07c727d1a54e3a41c"
+source_hash: "785c41a20accf971752cef775dd003bd7945662c3d0a6e16ead29961c65e0b1e"
 doc_path: "help/testing-live.md"
 original_doc_path: "help/testing-live.md"
 duplicate_index: 1
@@ -206,6 +206,15 @@ Notes:
 * `pnpm test:docker:live-cli-backend:claude-subscription` requires portable Claude Code subscription OAuth through either `~/.claude/.credentials.json` with `claudeAiOauth.subscriptionType` or `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token`. It first proves direct `claude -p` in Docker, then runs two Gateway CLI-backend turns without preserving Anthropic API-key env vars. This subscription lane disables the Claude MCP/tool and image probes by default because Claude currently routes third-party app usage through extra-usage billing instead of normal subscription plan limits.
 * The live CLI-backend smoke now exercises the same end-to-end flow for Claude, Codex, and Gemini: text turn, image classification turn, then MCP `cron` tool call verified through the gateway CLI.
 * Claude's default smoke also patches the session from Sonnet to Opus and verifies the resumed session still remembers an earlier note.
+
+## Live: APNs HTTP/2 proxy reachability
+
+* Test: `src/infra/push-apns-http2.live.test.ts`
+* Goal: tunnel through a local HTTP CONNECT proxy to Apple's sandbox APNs endpoint, send the APNs HTTP/2 validation request, and assert Apple's real `403 InvalidProviderToken` response comes back through the proxy path.
+* Enable:
+  * `OPENCLAW_LIVE_TEST=1 OPENCLAW_LIVE_APNS_REACHABILITY=1 pnpm test:live src/infra/push-apns-http2.live.test.ts`
+* Optional timeout:
+  * `OPENCLAW_LIVE_APNS_TIMEOUT_MS=30000`
 
 ## Live: ACP bind smoke (`/acp spawn ... --bind here`)
 

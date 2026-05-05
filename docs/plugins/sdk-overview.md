@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "f6492739e7889b36b0b36f5993221388d7ca808c5ab61668d2bf5588ab760a10"
+source_hash: "f86b1b1e0f90ec3d0a06e3585db4a9f1fea6438ff53063fb710672c24a8f3f1b"
 doc_path: "plugins/sdk-overview.md"
 original_doc_path: "plugins/sdk-overview.md"
 duplicate_index: 1
@@ -262,6 +262,9 @@ AI CLI backend such as `codex-cli`.
   plugin default before running the CLI.
 * Use `normalizeConfig` when a backend needs compatibility rewrites after merge
   (for example normalizing old flag shapes).
+* Use `resolveExecutionArgs` for request-scoped argv rewrites that belong to
+  the CLI dialect, such as mapping OpenClaw thinking levels to a native effort
+  flag.
 
 ### Exclusive slots
 

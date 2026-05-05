@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Proxy"
 source: "https://docs.openclaw.ai/cli/proxy"
-source_hash: "1959668806fdb44614106424029d7e6bb82b91864bdf03df9beab6a5acb379f6"
+source_hash: "880012c2604ac554ffae80daf0e6058fd95fbb6344c6edcf6eac6f02c78675aa"
 doc_path: "cli/proxy.md"
 original_doc_path: "cli/proxy.md"
 duplicate_index: 1
@@ -29,7 +29,7 @@ captured blobs, and purge local capture data.
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw proxy start [--host <host>] [--port <port>]
 openclaw proxy run [--host <host>] [--port <port>] -- <cmd...>
-openclaw proxy validate [--json] [--proxy-url <url>] [--allowed-url <url>] [--denied-url <url>] [--timeout-ms <ms>]
+openclaw proxy validate [--json] [--proxy-url <url>] [--allowed-url <url>] [--denied-url <url>] [--apns-reachable] [--apns-authority <url>] [--timeout-ms <ms>]
 openclaw proxy coverage
 openclaw proxy sessions [--limit <count>]
 openclaw proxy query --preset <name> [--session <id>]
@@ -46,7 +46,10 @@ before changing config. By default it verifies that a public destination succeed
 through the proxy and that the proxy cannot reach a temporary loopback canary.
 Custom denied destinations are fail-closed: HTTP responses and ambiguous
 transport failures both fail unless you can verify a deployment-specific denial
-signal separately.
+signal separately. Add `--apns-reachable` to also open an APNs HTTP/2 CONNECT
+tunnel through the proxy and confirm sandbox APNs responds; the probe uses an
+intentionally invalid provider token, so an APNs `403 InvalidProviderToken`
+response is a successful reachability signal.
 
 Options:
 
@@ -54,6 +57,8 @@ Options:
 * `--proxy-url <url>`: validate this proxy URL instead of config or env.
 * `--allowed-url <url>`: add a destination expected to succeed through the proxy. Repeat to check multiple destinations.
 * `--denied-url <url>`: add a destination expected to be blocked by the proxy. Repeat to check multiple destinations.
+* `--apns-reachable`: also verify sandbox APNs HTTP/2 is reachable through the proxy.
+* `--apns-authority <url>`: APNs authority to probe with `--apns-reachable` (`https://api.sandbox.push.apple.com` by default; production is `https://api.push.apple.com`).
 * `--timeout-ms <ms>`: per-request timeout in milliseconds.
 
 See [Network Proxy](/security/network-proxy) for deployment guidance and denial

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "b56d65ed318a1221b3a273ad6348db10669cd7fdf45628c87d3a04a89d928173"
+source_hash: "126055228377afdcd03af66d09ce5a55ec2739216314ce377f57e35b4c4ae9ea"
 doc_path: "plugins/codex-harness.md"
 original_doc_path: "plugins/codex-harness.md"
 duplicate_index: 1
@@ -850,6 +850,10 @@ Common forms:
 * `/codex account` shows account and rate-limit status.
 * `/codex mcp` lists Codex app-server MCP server status.
 * `/codex skills` lists Codex app-server skills.
+
+When Codex reports a usage-limit failure, OpenClaw includes the next
+app-server reset time when Codex provided one. Use `/codex account` in the same
+conversation to inspect the current account and rate-limit windows.
 
 ### Common debugging workflow
 

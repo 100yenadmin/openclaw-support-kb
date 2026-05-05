@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "e635a705646ebfa8593edd180701482d4d2d7021fb1c71b598f02af55dda7cf3"
+source_hash: "19d88701ece89062f0a4813fad8e7f4ca2af315f94bd7db12b21a2a62ec517e8"
 doc_path: "cli/models.md"
 original_doc_path: "cli/models.md"
 duplicate_index: 1
@@ -169,6 +169,7 @@ openclaw models fallbacks list
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw models auth add
+openclaw models auth list [--provider <id>] [--json]
 openclaw models auth login --provider <id>
 openclaw models auth setup-token --provider <id>
 openclaw models auth paste-token
@@ -178,16 +179,22 @@ openclaw models auth paste-token
 flow (OAuth/API key) or guide you into manual token paste, depending on the
 provider you choose.
 
+`models auth list` lists saved auth profiles for the selected agent without
+printing token, API-key, or OAuth secret material. Use `--provider <id>` to
+filter to one provider, such as `openai-codex`, and `--json` for scripting.
+
 `models auth login` runs a provider plugin’s auth flow (OAuth/API key). Use
 `openclaw plugins list` to see which providers are installed.
 Use `openclaw models auth --agent <id> <subcommand>` to write auth results to a
 specific configured agent store. The parent `--agent` flag is honored by
-`add`, `login`, `setup-token`, `paste-token`, and `login-github-copilot`.
+`add`, `list`, `login`, `setup-token`, `paste-token`, and
+`login-github-copilot`.
 
 Examples:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw models auth login --provider openai-codex --set-default
+openclaw models auth list --provider openai-codex
 ```
 
 Notes:

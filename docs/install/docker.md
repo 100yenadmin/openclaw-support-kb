@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "81f945fe0787e689119d6263a22759e9cab9b6855c2e7e2cef666bda497a1be7"
+source_hash: "0058663525c5a8f5b47ec70b552e971714389f2044bd8f58f7129afd31abc145"
 doc_path: "install/docker.md"
 original_doc_path: "install/docker.md"
 duplicate_index: 1
@@ -333,7 +333,7 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     `openclaw-cli` uses `network_mode: "service:openclaw-gateway"` so CLI
     commands can reach the gateway over `127.0.0.1`. Treat this as a shared
     trust boundary. The compose config drops `NET_RAW`/`NET_ADMIN` and enables
-    `no-new-privileges` on `openclaw-cli`.
+    `no-new-privileges` on both `openclaw-gateway` and `openclaw-cli`.
   </Accordion>
 
   <Accordion title="Permissions and EACCES">

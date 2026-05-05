@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "f68fb970ba24bcd36ec1c299e0823769107bb99c9026718dd33d9ee12e02945a"
+source_hash: "6fe12b1db205aed621a2a46cdd46ca5d04c5c12fd3753038acfe4862bd489fb9"
 doc_path: "channels/troubleshooting.md"
 original_doc_path: "channels/troubleshooting.md"
 duplicate_index: 1
@@ -38,12 +38,13 @@ Healthy baseline:
 
 ### WhatsApp failure signatures
 
-| Symptom                         | Fastest check                                       | Fix                                                                                                                              |
-| ------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Connected but no DM replies     | `openclaw pairing list whatsapp`                    | Approve sender or switch DM policy/allowlist.                                                                                    |
-| Group messages ignored          | Check `requireMention` + mention patterns in config | Mention the bot or relax mention policy for that group.                                                                          |
-| QR login times out with 408     | Check gateway `HTTPS_PROXY` / `HTTP_PROXY` env      | Set a reachable proxy; use `NO_PROXY` only for bypasses.                                                                         |
-| Random disconnect/relogin loops | `openclaw channels status --probe` + logs           | Recent reconnects are flagged even when currently connected; watch logs, restart the gateway, then relink if flapping continues. |
+| Symptom                             | Fastest check                                       | Fix                                                                                                                              |
+| ----------------------------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Connected but no DM replies         | `openclaw pairing list whatsapp`                    | Approve sender or switch DM policy/allowlist.                                                                                    |
+| Group messages ignored              | Check `requireMention` + mention patterns in config | Mention the bot or relax mention policy for that group.                                                                          |
+| QR login times out with 408         | Check gateway `HTTPS_PROXY` / `HTTP_PROXY` env      | Set a reachable proxy; use `NO_PROXY` only for bypasses.                                                                         |
+| Random disconnect/relogin loops     | `openclaw channels status --probe` + logs           | Recent reconnects are flagged even when currently connected; watch logs, restart the gateway, then relink if flapping continues. |
+| Replies arrive seconds/minutes late | `openclaw doctor --fix`                             | Doctor stops verified stale local TUI clients when they are degrading the Gateway event loop.                                    |
 
 Full troubleshooting: [WhatsApp troubleshooting](/channels/whatsapp#troubleshooting)
 
