@@ -33,7 +33,7 @@ read-only and sync it into local GBrain.
 
 The install script trusts the official repo URL by default. Development forks
 must be pinned with `OPENCLAW_SUPPORT_KB_PINNED_REF` and explicitly allowed.
-The official published repo is `100yenadmin/openclaw-support-kb`; upstream
+The official published repo is `electricsheephq/openclaw-support-kb`; upstream
 OpenClaw release/docs data still comes from `openclaw/openclaw`.
 
 This repo is not published as an npm package. `package.json` is only a local
@@ -178,7 +178,7 @@ node ~/.gbrain/sources/openclaw-support-kb/scripts/repair-index.mjs
 
 ```mermaid
 flowchart TD
-  A["GitHub publisher updates 100yenadmin/openclaw-support-kb"] --> B["Fleet/control panel calls run-client-update"]
+  A["GitHub publisher updates electricsheephq/openclaw-support-kb"] --> B["Fleet/control panel calls run-client-update"]
   A --> C["Local cron fallback calls run-client-update"]
   B --> D["Client pulls repo with git pull --ff-only"]
   C --> D

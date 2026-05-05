@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import {
   compareSemver,
+  CANONICAL_REPO_URL,
   canonicalSourceDir,
   ensureGbrainSource,
   gbrainSyncArgs,
@@ -24,7 +25,7 @@ import {
   gbrainUpgradeHint,
 } from "./lib/openclaw-support-kb.mjs";
 
-const DEFAULT_REPO_URL = "https://github.com/100yenadmin/openclaw-support-kb.git";
+const DEFAULT_REPO_URL = CANONICAL_REPO_URL;
 const repoRoot = repoRootFromImportMeta(import.meta.url);
 const targetDir =
   process.env.OPENCLAW_SUPPORT_KB_DIR ||
@@ -114,7 +115,7 @@ function warnIfLocalCheckoutOriginIsUnexpected() {
   const originUrl = origin.stdout?.trim();
   if (origin.status === 0 && originUrl && !isOfficialRepoUrl(originUrl)) {
     console.warn(
-      `Warning: local checkout origin is not the official repo (${originUrl}). The official repo is https://github.com/100yenadmin/openclaw-support-kb.git.`,
+      `Warning: local checkout origin is not the official repo (${originUrl}). The official repo is https://github.com/electricsheephq/openclaw-support-kb.git.`,
     );
   }
 }
@@ -128,7 +129,12 @@ function ensureExistingTargetOriginMatchesTrustPolicy() {
   }
   const originUrl = origin.stdout.trim();
   if (isOfficialRepoUrl(repoUrl)) {
-    if (isOfficialRepoUrl(originUrl)) return;
+    if (isOfficialRepoUrl(originUrl)) {
+      if (normalizeRepoUrl(originUrl) !== normalizeRepoUrl(DEFAULT_REPO_URL)) {
+        run("git", ["-C", targetDir, "remote", "set-url", "origin", DEFAULT_REPO_URL]);
+      }
+      return;
+    }
     console.error(`Refusing to update ${targetDir}: existing origin is not the official support KB repo (${originUrl}).`);
     process.exit(3);
   }

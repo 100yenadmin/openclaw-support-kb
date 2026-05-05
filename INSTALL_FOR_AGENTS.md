@@ -1,3 +1,9 @@
+---
+type: openclaw_install_guide
+title: "Install OpenClaw Support KB For Agents"
+search_role: "installer"
+---
+
 # Install OpenClaw Support KB For Agents
 
 Use this file when a user points you at this repository and asks you to install
@@ -22,7 +28,7 @@ agent has changed into the repo directory. Prefer the explicit
 Use the official published repo URL:
 
 ```bash
-export OPENCLAW_SUPPORT_KB_REPO="https://github.com/100yenadmin/openclaw-support-kb.git"
+export OPENCLAW_SUPPORT_KB_REPO="https://github.com/electricsheephq/openclaw-support-kb.git"
 export OPENCLAW_SUPPORT_KB_DIR="$HOME/.gbrain/sources/openclaw-support-kb"
 ```
 
