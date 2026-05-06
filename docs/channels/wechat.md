@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WeChat"
 source: "https://docs.openclaw.ai/channels/wechat"
-source_hash: "92d3c6a3e91c78a6eabc85ea4f1f06e2a13bb324d75b74384fd7b4211e95849e"
+source_hash: "cc48d580f1f585fb784b119d310bf36f683ec5eee934ff3e897fedc1e0a63f83"
 doc_path: "channels/wechat.md"
 original_doc_path: "channels/wechat.md"
 duplicate_index: 1
@@ -154,6 +154,11 @@ npm view @tencent-weixin/openclaw-weixin version
 openclaw plugins install "@tencent-weixin/openclaw-weixin" --force
 openclaw gateway restart
 ```
+
+If startup reports that the installed plugin package `requires compiled runtime
+output for TypeScript entry`, the npm package was published without the compiled
+JavaScript runtime files OpenClaw needs. Update/reinstall after the plugin
+publisher ships a fixed package, or temporarily disable/uninstall the plugin.
 
 Temporary disable:
 

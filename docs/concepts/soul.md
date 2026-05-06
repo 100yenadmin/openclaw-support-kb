@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SOUL.md personality guide"
 source: "https://docs.openclaw.ai/concepts/soul"
-source_hash: "22178aa4ab85317c9b83626be60b58099f837dce92644d3a75061b4a8640c56e"
+source_hash: "d5a9365eb5f6cd193d5197f4ea09d7fd7bc0cf24f71ba68a39c7c3af46ccc09f"
 doc_path: "concepts/soul.md"
 original_doc_path: "concepts/soul.md"
 duplicate_index: 1
@@ -107,8 +107,18 @@ surfaces, make sure the tone still fits the room.
 
 Sharp is good. Annoying is not.
 
-## Related docs
+## Related
 
-* [Agent workspace](/concepts/agent-workspace)
-* [System prompt](/concepts/system-prompt)
-* [SOUL.md template](/reference/templates/SOUL)
+<CardGroup>
+  <Card title="Agent workspace" href="/concepts/agent-workspace" icon="folder-open">
+    Workspace files OpenClaw injects into the system prompt.
+  </Card>
+
+  <Card title="System prompt" href="/concepts/system-prompt" icon="message-lines">
+    How `SOUL.md` is composed into the per-turn system prompt.
+  </Card>
+
+  <Card title="SOUL.md template" href="/reference/templates/SOUL" icon="file-lines">
+    Starter template for a personality file.
+  </Card>
+</CardGroup>

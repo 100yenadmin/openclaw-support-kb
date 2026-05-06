@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK"
 source: "https://docs.openclaw.ai/concepts/openclaw-sdk"
-source_hash: "cf6ae9559ac4fc027f0e6cdbb9227490fff5e617b4775b07e5b0053c80b3db71"
+source_hash: "c151838e7cf3f491304ef755d327881b461b7c262109196551a7aa9a989b035b"
 doc_path: "concepts/openclaw-sdk.md"
 original_doc_path: "concepts/openclaw-sdk.md"
 duplicate_index: 1
@@ -26,28 +26,29 @@ resources.
   register providers, channels, tools, hooks, or trusted runtimes.
 </Note>
 
-## What Ships Today
+## What ships today
 
 `@openclaw/sdk` ships with:
 
-| Surface                   | Status | What it does                                                               |
-| ------------------------- | ------ | -------------------------------------------------------------------------- |
-| `OpenClaw`                | Ready  | Main client entry point. Owns transport, connection, requests, and events. |
-| `GatewayClientTransport`  | Ready  | WebSocket transport backed by the Gateway client.                          |
-| `oc.agents`               | Ready  | Lists, creates, updates, deletes, and gets agent handles.                  |
-| `Agent.run()`             | Ready  | Starts a Gateway `agent` run and returns a `Run`.                          |
-| `oc.runs`                 | Ready  | Creates, gets, waits for, cancels, and streams runs.                       |
-| `Run.events()`            | Ready  | Streams normalized per-run events with replay for fast runs.               |
-| `Run.wait()`              | Ready  | Calls `agent.wait` and returns a stable `RunResult`.                       |
-| `Run.cancel()`            | Ready  | Calls `sessions.abort` by run id, with session key when available.         |
-| `oc.sessions`             | Ready  | Creates, resolves, sends to, patches, compacts, and gets session handles.  |
-| `Session.send()`          | Ready  | Calls `sessions.send` and returns a `Run`.                                 |
-| `oc.models`               | Ready  | Calls `models.list` and the current `models.authStatus` status RPC.        |
-| `oc.tools`                | Ready  | Lists, scopes, and invokes Gateway tools through the policy pipeline.      |
-| `oc.artifacts`            | Ready  | Lists, gets, and downloads Gateway transcript artifacts.                   |
-| `oc.approvals`            | Ready  | Lists and resolves exec approvals through Gateway approval RPCs.           |
-| `oc.rawEvents()`          | Ready  | Exposes raw Gateway events for advanced consumers.                         |
-| `normalizeGatewayEvent()` | Ready  | Converts raw Gateway events into the stable SDK event shape.               |
+| Surface                   | Status  | What it does                                                                      |
+| ------------------------- | ------- | --------------------------------------------------------------------------------- |
+| `OpenClaw`                | Ready   | Main client entry point. Owns transport, connection, requests, and events.        |
+| `GatewayClientTransport`  | Ready   | WebSocket transport backed by the Gateway client.                                 |
+| `oc.agents`               | Ready   | Lists, creates, updates, deletes, and gets agent handles.                         |
+| `Agent.run()`             | Ready   | Starts a Gateway `agent` run and returns a `Run`.                                 |
+| `oc.runs`                 | Ready   | Creates, gets, waits for, cancels, and streams runs.                              |
+| `Run.events()`            | Ready   | Streams normalized per-run events with replay for fast runs.                      |
+| `Run.wait()`              | Ready   | Calls `agent.wait` and returns a stable `RunResult`.                              |
+| `Run.cancel()`            | Ready   | Calls `sessions.abort` by run id, with session key when available.                |
+| `oc.sessions`             | Ready   | Creates, resolves, sends to, patches, compacts, and gets session handles.         |
+| `Session.send()`          | Ready   | Calls `sessions.send` and returns a `Run`.                                        |
+| `oc.models`               | Ready   | Calls `models.list` and the current `models.authStatus` status RPC.               |
+| `oc.tools`                | Ready   | Lists, scopes, and invokes Gateway tools through the policy pipeline.             |
+| `oc.artifacts`            | Ready   | Lists, gets, and downloads Gateway transcript artifacts.                          |
+| `oc.approvals`            | Ready   | Lists and resolves exec approvals through Gateway approval RPCs.                  |
+| `oc.environments`         | Partial | Lists Gateway-local and node environment candidates; create/delete are not wired. |
+| `oc.rawEvents()`          | Ready   | Exposes raw Gateway events for advanced consumers.                                |
+| `normalizeGatewayEvent()` | Ready   | Converts raw Gateway events into the stable SDK event shape.                      |
 
 The SDK also exports the core types used by those surfaces:
 `AgentRunParams`, `RunResult`, `RunStatus`, `OpenClawEvent`,
@@ -58,7 +59,7 @@ The SDK also exports the core types used by those surfaces:
 `EnvironmentSelection`, `WorkspaceSelection`, `ApprovalMode`, and related
 result types.
 
-## Connect To A Gateway
+## Connect to a Gateway
 
 Create a client with an explicit Gateway URL, or inject a custom transport for
 tests and embedded app runtimes.
@@ -67,7 +68,7 @@ tests and embedded app runtimes.
 import { OpenClaw } from "@openclaw/sdk";
 
 const oc = new OpenClaw({
-  url: "ws://127.0.0.1:14565",
+  url: "ws://127.0.0.1:18789",
   token: process.env.OPENCLAW_GATEWAY_TOKEN,
   requestTimeoutMs: 30_000,
 });
@@ -93,7 +94,7 @@ const oc = new OpenClaw({
 });
 ```
 
-## Run An Agent
+## Run an agent
 
 Use `oc.agents.get(id)` when the app wants an agent handle, then call
 `agent.run()`.
@@ -128,7 +129,7 @@ while the run is still active returns `status: "accepted"` instead of pretending
 the run itself timed out. Runtime timeouts, aborted runs, and cancelled runs are
 normalized into `timed_out` or `cancelled`.
 
-## Create And Reuse Sessions
+## Create and reuse sessions
 
 Use sessions when the app wants durable transcript state.
 
@@ -151,7 +152,7 @@ await session.patch({ label: "renamed-session" });
 await session.compact({ maxLines: 200 });
 ```
 
-## Stream Events
+## Stream events
 
 The SDK normalizes raw Gateway events into a stable `OpenClawEvent` envelope:
 
@@ -212,7 +213,7 @@ for await (const event of run.events()) {
 For app-wide streams, use `oc.events()`. For raw Gateway frames, use
 `oc.rawEvents()`.
 
-## Models, Tools, Artifacts, And Approvals
+## Models, tools, artifacts, and approvals
 
 Model helpers map to current Gateway methods:
 
@@ -258,7 +259,14 @@ const approvals = await oc.approvals.list();
 await oc.approvals.respond("approval-id", { decision: "approve" });
 ```
 
-## Explicitly Unsupported Today
+Environment helpers expose read-only Gateway-local and node discovery:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+const { environments } = await oc.environments.list();
+await oc.environments.status(environments[0].id);
+```
+
+## Explicitly unsupported today
 
 The SDK includes names for the product model we want, but it does not silently
 pretend Gateway RPCs exist. These calls currently throw explicit unsupported
@@ -269,9 +277,7 @@ await oc.tasks.list();
 await oc.tasks.get("task-id");
 await oc.tasks.cancel("task-id");
 
-await oc.environments.list();
 await oc.environments.create({});
-await oc.environments.status("environment-id");
 await oc.environments.delete("environment-id");
 ```
 
@@ -281,7 +287,7 @@ the `agent` RPC. If callers pass them, the SDK throws before submitting the run
 so work does not accidentally execute with default workspace, runtime,
 environment, or approval behavior.
 
-## App SDK Versus Plugin SDK
+## App SDK vs Plugin SDK
 
 Use the App SDK when code lives outside OpenClaw:
 
@@ -303,7 +309,7 @@ Use the Plugin SDK when code runs inside OpenClaw:
 App SDK code should import from `@openclaw/sdk`. Plugin code should import from
 documented `openclaw/plugin-sdk/*` subpaths. Do not mix the two contracts.
 
-## Related Docs
+## Related
 
 * [OpenClaw App SDK API design](/reference/openclaw-sdk-api-design)
 * [Gateway RPC reference](/reference/rpc)

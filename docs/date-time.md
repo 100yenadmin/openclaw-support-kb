@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Date and time"
 source: "https://docs.openclaw.ai/date-time"
-source_hash: "3b9f37dec186d3f21fa90828a9bc26747ae47bdeeaf9707508a43497cef455c8"
+source_hash: "12ad09462647d332ba05fcac3bba9fbd368c81dfb573e47f71b00225eb43ac57"
 doc_path: "date-time.md"
 original_doc_path: "date-time.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/date-time
 
 
-
-# Date & Time
 
 OpenClaw defaults to **host-local time for transport timestamps** and **user timezone only in the system prompt**.
 Provider timestamps are preserved so tools keep their native semantics (current time is available via `session_status`).
@@ -69,7 +67,7 @@ You can override this behavior:
 [WhatsApp +1555 +30s 2026-01-18T05:19Z] follow-up
 ```
 
-## System prompt: Current Date & Time
+## System prompt: current date and time
 
 If the user timezone is known, the system prompt includes a dedicated
 **Current Date & Time** section with the **time zone only** (no clock/time format)

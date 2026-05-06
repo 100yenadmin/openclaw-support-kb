@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "1fdec97d234f9489bae5b8406c7310c80284709ecbf25f36ce6a8afef2505f61"
+source_hash: "a30d5bac2ad7f626f9e0b036bb1d4dccda04f242c7f3ef252abc71f7f39c8883"
 doc_path: "cli/migrate.md"
 original_doc_path: "cli/migrate.md"
 duplicate_index: 1
@@ -137,9 +137,10 @@ your personal Codex CLI state by default.
 
 Running `openclaw migrate codex` in an interactive terminal previews the full
 plan, then opens a checkbox selector for skill copy items before the final
-apply confirmation. All skills start selected; uncheck any skill you do not want
-copied into this agent. For scripted or exact runs, pass `--skill <name>` once
-per skill, for example:
+apply confirmation. Use `Toggle all on` or `Toggle all off` for bulk selection;
+planned skills start checked, conflict skills start unchecked, and `Skip for now`
+leaves skills unchanged without applying. For scripted or exact runs, pass
+`--skill <name>` once per skill, for example:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw migrate codex --dry-run --skill gog-vault77-google-workspace

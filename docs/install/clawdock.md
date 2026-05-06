@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawDock"
 source: "https://docs.openclaw.ai/install/clawdock"
-source_hash: "e610b9362d1bf060d2df4f364295f70427dc17b0c907855adb56dc79f9e8af49"
+source_hash: "cd969c8f38bf62c760c5129ff8b5487db7226e1f6586b3759fd1b95e0491e715"
 doc_path: "install/clawdock.md"
 original_doc_path: "install/clawdock.md"
 duplicate_index: 1
@@ -104,8 +104,18 @@ ClawDock works with the same Docker config split described in [Docker](/install/
 
 Use `clawdock-show-config` when you want to inspect the `.env` files and `openclaw.json` quickly. It redacts `.env` values in its printed output.
 
-## Related pages
+## Related
 
-* [Docker](/install/docker)
-* [Docker VM Runtime](/install/docker-vm-runtime)
-* [Updating](/install/updating)
+<CardGroup>
+  <Card title="Docker" href="/install/docker" icon="docker">
+    Canonical Docker install for OpenClaw.
+  </Card>
+
+  <Card title="Docker VM runtime" href="/install/docker-vm-runtime" icon="cube">
+    Docker-managed VM runtime for hardened isolation.
+  </Card>
+
+  <Card title="Updating" href="/install/updating" icon="arrow-up-right-from-square">
+    Updating the OpenClaw package and managed services.
+  </Card>
+</CardGroup>

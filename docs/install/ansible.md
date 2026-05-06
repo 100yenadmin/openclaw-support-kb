@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "b7f2322f58dcadc459782f70c4fd9dfd6c845308130f776c300f626ef5331795"
+source_hash: "87d8ff7e720e0b576b972d00dd37d951099175bfbeac2d32e2f8f58a2f66f23d"
 doc_path: "install/ansible.md"
 original_doc_path: "install/ansible.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/ansible
 
 
-
-# Ansible Installation
 
 Deploy OpenClaw to production servers with **[openclaw-ansible](https://github.com/openclaw/openclaw-ansible)** -- an automated installer with security-first architecture.
 

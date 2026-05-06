@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
-source_hash: "26ced2eff2d5b5c4f98cbd80a9184bc9cd22cfe8fd26ab6c52babdeb8aa2ab7b"
+source_hash: "d0e902c718324f8b8854dc31a1272e51bf0f788ffb28c50ba572f0a72e34fc75"
 doc_path: "gateway/local-models.md"
 original_doc_path: "gateway/local-models.md"
 duplicate_index: 1
@@ -76,7 +76,7 @@ Best current local stack. Load a large model in LM Studio (for example, a full-s
 **Setup checklist**
 
 * Install LM Studio: [https://lmstudio.ai](https://lmstudio.ai)
-* In LM Studio, download the **largest model build available** (avoid “small”/heavily quantized variants), start the server, confirm `http://127.0.0.1:1234/v1/models` lists it.
+* In LM Studio, download the **largest model build available** (avoid "small"/heavily quantized variants), start the server, confirm `http://127.0.0.1:1234/v1/models` lists it.
 * Replace `my-local-model` with the actual model ID shown in LM Studio.
 * Keep the model loaded; cold-load adds startup latency.
 * Adjust `contextWindow`/`maxTokens` if your LM Studio build differs.
@@ -326,7 +326,7 @@ If the model loads cleanly but full agent turns misbehave, work top-down — con
 ## Troubleshooting
 
 * Gateway can reach the proxy? `curl http://127.0.0.1:1234/v1/models`.
-* LM Studio model unloaded? Reload; cold start is a common “hanging” cause.
+* LM Studio model unloaded? Reload; cold start is a common "hanging" cause.
 * Local server says `terminated`, `ECONNRESET`, or closes the stream mid-turn?
   OpenClaw records a low-cardinality `model.call.error.failureKind` plus the
   OpenClaw process RSS/heap snapshot in diagnostics. For LM Studio/Ollama

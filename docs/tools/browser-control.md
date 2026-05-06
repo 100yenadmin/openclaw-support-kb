@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "7d33ddae684d0163fc9fb0218a9d55f95a2cc860e681c9e15a186c717504b2ec"
+source_hash: "fe70e80e27fb72d56faba332022403e71edf6e5bbbea17819b727ddeee3860ea"
 doc_path: "tools/browser-control.md"
 original_doc_path: "tools/browser-control.md"
 duplicate_index: 1
@@ -76,7 +76,7 @@ Other runtime failures may still return `{ "error": "<message>" }` without a
 ### Playwright requirement
 
 Some features (navigate/act/AI snapshot/role snapshot, element screenshots,
-PDF) require Playwright. If Playwright isn’t installed, those endpoints return
+PDF) require Playwright. If Playwright isn't installed, those endpoints return
 a clear 501 error.
 
 What still works without Playwright:
@@ -238,12 +238,12 @@ Snapshot flags at a glance:
 
 ## Snapshots and refs
 
-OpenClaw supports two “snapshot” styles:
+OpenClaw supports two "snapshot" styles:
 
 * **AI snapshot (numeric refs)**: `openclaw browser snapshot` (default; `--format ai`)
   * Output: a text snapshot that includes numeric refs.
   * Actions: `openclaw browser click 12`, `openclaw browser type 23 "hello"`.
-  * Internally, the ref is resolved via Playwright’s `aria-ref`.
+  * Internally, the ref is resolved via Playwright's `aria-ref`.
 
 * **Role snapshot (role refs like `e12`)**: `openclaw browser snapshot --interactive` (or `--compact`, `--depth`, `--selector`, `--frame`)
   * Output: a role-based list/tree with `[ref=e12]` (and optional `[nth=1]`).
@@ -302,7 +302,7 @@ openclaw browser wait "#main" \
 
 ## Debug workflows
 
-When an action fails (e.g. “not visible”, “strict mode violation”, “covered”):
+When an action fails (e.g. "not visible", "strict mode violation", "covered"):
 
 1. `openclaw browser snapshot --interactive`
 2. Use `click <ref>` / `type <ref>` (prefer role refs in interactive mode)
@@ -332,7 +332,7 @@ Role snapshots in JSON include `refs` plus a small `stats` block (lines/chars/re
 
 ## State and environment knobs
 
-These are useful for “make the site behave like X” workflows:
+These are useful for "make the site behave like X" workflows:
 
 * Cookies: `cookies`, `cookies set`, `cookies clear`
 * Storage: `storage local|session get|set|clear`
@@ -372,7 +372,7 @@ Strict-mode example (block private/internal destinations by default):
 
 ## Related
 
-* [Browser](/tools/browser) — overview, configuration, profiles, security
-* [Browser login](/tools/browser-login) — signing in to sites
+* [Browser](/tools/browser) - overview, configuration, profiles, security
+* [Browser login](/tools/browser-login) - signing in to sites
 * [Browser Linux troubleshooting](/tools/browser-linux-troubleshooting)
 * [Browser WSL2 troubleshooting](/tools/browser-wsl2-windows-remote-cdp-troubleshooting)

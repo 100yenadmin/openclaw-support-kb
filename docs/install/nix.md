@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nix"
 source: "https://docs.openclaw.ai/install/nix"
-source_hash: "b9930e8321e528d42437a2c5f8b16c6fd7828a23bf6ba04c89f4254ac9ca145a"
+source_hash: "17630110ee4dc0c167ed77ca2fbb0a81e7f4ddab97df4eda2cbd8d57fce94d67"
 doc_path: "install/nix.md"
 original_doc_path: "install/nix.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/install/nix
 
 
 
-Install OpenClaw declaratively with **[nix-openclaw](https://github.com/openclaw/nix-openclaw)** — a batteries-included Home Manager module.
+Install OpenClaw declaratively with **[nix-openclaw](https://github.com/openclaw/nix-openclaw)** - a batteries-included Home Manager module.
 
 <Info>
   The [nix-openclaw](https://github.com/openclaw/nix-openclaw) repo is the source of truth for Nix installation. This page is a quick overview.
@@ -98,13 +98,27 @@ plugins and tools that shell out to `nix`-installed executables work without
 manual PATH setup:
 
 * When `NIX_PROFILES` is set, every entry is added to the service PATH in
-  right-to-left precedence (matches Nix shell precedence — rightmost wins).
+  right-to-left precedence (matches Nix shell precedence - rightmost wins).
 * When `NIX_PROFILES` is unset, `~/.nix-profile/bin` is added as a fallback.
 
 This applies to both macOS launchd and Linux systemd service environments.
 
 ## Related
 
-* [nix-openclaw](https://github.com/openclaw/nix-openclaw) -- full setup guide
-* [Wizard](/start/wizard) -- non-Nix CLI setup
-* [Docker](/install/docker) -- containerized setup
+<CardGroup>
+  <Card title="nix-openclaw" href="https://github.com/openclaw/nix-openclaw" icon="arrow-up-right-from-square">
+    Source-of-truth Home Manager module and full setup guide.
+  </Card>
+
+  <Card title="Setup wizard" href="/start/wizard" icon="wand-magic-sparkles">
+    Non-Nix CLI setup walkthrough.
+  </Card>
+
+  <Card title="Docker" href="/install/docker" icon="docker">
+    Containerized setup as a non-Nix alternative.
+  </Card>
+
+  <Card title="Updating" href="/install/updating" icon="arrow-up-right-from-square">
+    Updating Home Manager-managed installs alongside the package.
+  </Card>
+</CardGroup>

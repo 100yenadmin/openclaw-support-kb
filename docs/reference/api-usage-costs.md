@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "420d9fb87f1a913e4c8179645713bbdc23903452dd9c0df3c30f2bb24ea2d49e"
+source_hash: "b98bdbc81943841997d140dc04c8f62d3903c530ffc06b083b301f40bf9671aa"
 doc_path: "reference/api-usage-costs.md"
 original_doc_path: "reference/api-usage-costs.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/reference/api-usage-costs
 
 
-
-# API usage & costs
 
 This doc lists **features that can invoke API keys** and where their costs show up. It focuses on
 OpenClaw features that can generate provider usage or paid API calls.
@@ -160,7 +158,7 @@ See [Web tools](/tools/web).
 
 * `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webFetch.apiKey`
 
-If Firecrawl isn’t configured, the tool falls back to direct fetch plus the bundled `web-readability` plugin (no paid API). Disable `plugins.entries.web-readability.enabled` to skip local Readability extraction.
+If Firecrawl isn't configured, the tool falls back to direct fetch plus the bundled `web-readability` plugin (no paid API). Disable `plugins.entries.web-readability.enabled` to skip local Readability extraction.
 
 See [Web tools](/tools/web).
 
@@ -199,7 +197,7 @@ See [Talk mode](/nodes/talk).
 ### 10) Skills (third-party APIs)
 
 Skills can store `apiKey` in `skills.entries.<name>.apiKey`. If a skill uses that key for external
-APIs, it can incur costs according to the skill’s provider.
+APIs, it can incur costs according to the skill's provider.
 
 See [Skills](/tools/skills).
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "361379da322409788e1333c5de193bc029442683e87c5401b44a2608103b3356"
+source_hash: "9427297322b14864d120c6c13dfd40f2320cc08c7bb82201ce499a28b08660ce"
 doc_path: "platforms/ios.md"
 original_doc_path: "platforms/ios.md"
 duplicate_index: 1
@@ -269,6 +269,10 @@ openclaw nodes invoke --node "iOS Node" --command canvas.snapshot --params '{"ma
 ## Voice wake + talk mode
 
 * Voice wake and talk mode are available in Settings.
+* Talk-capable iOS nodes advertise the `talk` capability and can declare
+  `talk.ptt.start`, `talk.ptt.stop`, `talk.ptt.cancel`, and `talk.ptt.once`;
+  the Gateway allows those push-to-talk commands by default for trusted
+  Talk-capable nodes.
 * iOS may suspend background audio; treat voice features as best-effort when the app is not active.
 
 ## Common errors

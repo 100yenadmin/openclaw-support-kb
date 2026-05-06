@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WebChat (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/webchat"
-source_hash: "e4647c7e23fe6015481e81b0e092b568f02b7329046e5f4bfabf2a94a8a08c09"
+source_hash: "cb33d003a238f01086655ca23c5bb420d320291d41c8b98914b92898d87f1a7b"
 doc_path: "platforms/mac/webchat.md"
 original_doc_path: "platforms/mac/webchat.md"
 duplicate_index: 1
@@ -21,11 +21,11 @@ agent (with a session switcher for other sessions).
 * **Remote mode**: forwards the Gateway control port over SSH and uses that
   tunnel as the data plane.
 
-## Launch & debugging
+## Launch and debugging
 
-* Manual: Lobster menu → “Open Chat”.
+* Manual: Lobster menu → "Open Chat".
 
-* Auto‑open for testing:
+* Auto-open for testing:
 
   ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
   dist/OpenClaw.app/Contents/MacOS/OpenClaw --webchat
@@ -47,7 +47,7 @@ agent (with a session switcher for other sessions).
   omitted, and oversized rows can be replaced with placeholders.
 * Session: defaults to the primary session (`main`, or `global` when scope is
   global). The UI can switch between sessions.
-* Onboarding uses a dedicated session to keep first‑run setup separate.
+* Onboarding uses a dedicated session to keep first-run setup separate.
 
 ## Security surface
 

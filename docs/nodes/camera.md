@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Camera capture"
 source: "https://docs.openclaw.ai/nodes/camera"
-source_hash: "b3f9c493d9f5539352501474ffdb4a49043e7b893541dd4db7bb9fb808356aa6"
+source_hash: "717565e547433641da2415c9d212a3a455a1204c9d64fa29ce3f69ae69491293"
 doc_path: "nodes/camera.md"
 original_doc_path: "nodes/camera.md"
 duplicate_index: 1
@@ -123,7 +123,7 @@ The macOS companion app exposes a checkbox:
 
 * **Settings → General → Allow Camera** (`openclaw.cameraEnabled`)
   * Default: **off**
-  * When off: camera requests return “Camera disabled by user”.
+  * When off: camera requests return "Camera disabled by user".
 
 ### CLI helper (node invoke)
 

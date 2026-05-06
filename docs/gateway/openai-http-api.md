@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI chat completions"
 source: "https://docs.openclaw.ai/gateway/openai-http-api"
-source_hash: "421f68883de83a77c8c68bf31a4293fd09cab49b8006a44228e0fef77feef292"
+source_hash: "65617f395eabc7be2b8207ecdb81856fa09c772c86f62cadc69ada22ea267031"
 doc_path: "gateway/openai-http-api.md"
 original_doc_path: "gateway/openai-http-api.md"
 duplicate_index: 1
@@ -13,14 +13,14 @@ Source: https://docs.openclaw.ai/gateway/openai-http-api
 
 
 
-OpenClaw’s Gateway can serve a small OpenAI-compatible Chat Completions endpoint.
+OpenClaw's Gateway can serve a small OpenAI-compatible Chat Completions endpoint.
 
 This endpoint is **disabled by default**. Enable it in config first.
 
 * `POST /v1/chat/completions`
 * Same port as the Gateway (WS + HTTP multiplex): `http://<gateway-host>:<port>/v1/chat/completions`
 
-When the Gateway’s OpenAI-compatible HTTP surface is enabled, it also serves:
+When the Gateway's OpenAI-compatible HTTP surface is enabled, it also serves:
 
 * `GET /v1/models`
 * `GET /v1/models/{id}`

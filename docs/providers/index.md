@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers/index"
-source_hash: "6f3495217ce5b7534d412e7956ea0f27334c206e5ee10c8cf5b455e0512f9810"
+source_hash: "516d4dc3655ee0106da15c6408d8963721dc404224acb515225ff51b5f5ec30a"
 doc_path: "providers/index.md"
 original_doc_path: "providers/index.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/index
 
 
-
-# Model Providers
 
 OpenClaw can use many LLM providers. Pick a provider, authenticate, then set the
 default model as `provider/model`.

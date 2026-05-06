@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "f74f551e9dce81104a1e448675c289bf728ba34f8beb3fbbf76aea9e4a6d3eb2"
+source_hash: "1442200b2775615772cebbe2464d492abae5532b4498e34e6433b69802dc41ba"
 doc_path: "tools/exec.md"
 original_doc_path: "tools/exec.md"
 duplicate_index: 1
@@ -103,7 +103,7 @@ Notes:
 ## Config
 
 * `tools.exec.notifyOnExit` (default: true): when true, backgrounded exec sessions enqueue a system event and request a heartbeat on exit.
-* `tools.exec.approvalRunningNoticeMs` (default: 10000): emit a single “running” notice when an approval-gated exec runs longer than this (0 disables).
+* `tools.exec.approvalRunningNoticeMs` (default: 10000): emit a single "running" notice when an approval-gated exec runs longer than this (0 disables).
 * `tools.exec.timeoutSec` (default: 1800): default per-command exec timeout in seconds. Per-call `timeout` overrides it; per-call `timeout: 0` disables the exec process timeout.
 * `tools.exec.host` (default: `auto`; resolves to `sandbox` when sandbox runtime is active, `gateway` otherwise)
 * `tools.exec.security` (default: `deny` for sandbox, `full` for gateway + node when unset)
@@ -150,7 +150,7 @@ openclaw config get agents.list
 openclaw config set agents.list[0].tools.exec.node "node-id-or-name"
 ```
 
-Control UI: the Nodes tab includes a small “Exec node binding” panel for the same settings.
+Control UI: the Nodes tab includes a small "Exec node binding" panel for the same settings.
 
 ## Session overrides (`/exec`)
 

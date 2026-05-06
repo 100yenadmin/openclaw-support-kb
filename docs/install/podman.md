@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Podman"
 source: "https://docs.openclaw.ai/install/podman"
-source_hash: "6e1e9353eb8f46bf7feffb5b9fc3a155c6bde99eb9a88c59f2b971aba4e181db"
+source_hash: "4ca2614a7d9c93fbe519998f6c2ec3a76ba15fb841a14fcb1054de7fd1c82a4a"
 doc_path: "install/podman.md"
 original_doc_path: "install/podman.md"
 duplicate_index: 1
@@ -106,11 +106,11 @@ openclaw channels login
 
 On macOS, Podman machine may make the browser appear non-local to the gateway.
 If the Control UI reports device-auth errors after launch, use the Tailscale guidance in
-[Podman + Tailscale](#podman--tailscale).
+[Podman and Tailscale](#podman--tailscale).
 
 <a />
 
-## Podman + Tailscale
+## Podman and Tailscale
 
 For HTTPS or remote browser access, follow the main Tailscale docs.
 

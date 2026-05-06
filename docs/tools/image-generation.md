@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "da69537d0706527cbcac21cb947dd3572256bc1383abc79d0fe692d9cd0f7767"
+source_hash: "742ccf21e4bcbf639de947366f2e05c375323d126aa0a901154cfdab9161104f"
 doc_path: "tools/image-generation.md"
 original_doc_path: "tools/image-generation.md"
 duplicate_index: 1
@@ -58,7 +58,7 @@ attachments in the agent's reply.
     *"Generate an image of a friendly robot mascot."*
 
     The agent calls `image_generate` automatically. No tool allow-listing
-    needed — it is enabled by default when a provider is available.
+    needed - it is enabled by default when a provider is available.
   </Step>
 </Steps>
 
@@ -115,10 +115,10 @@ Use `action: "list"` to inspect available providers and models at runtime:
 | Capability            | ComfyUI            | DeepInfra | fal               | Google         | MiniMax               | OpenAI         | Vydra | xAI            |
 | --------------------- | ------------------ | --------- | ----------------- | -------------- | --------------------- | -------------- | ----- | -------------- |
 | Generate (max count)  | Workflow-defined   | 4         | 4                 | 4              | 9                     | 4              | 1     | 4              |
-| Edit / reference      | 1 image (workflow) | 1 image   | 1 image           | Up to 5 images | 1 image (subject ref) | Up to 5 images | —     | Up to 5 images |
-| Size control          | —                  | ✓         | ✓                 | ✓              | —                     | Up to 4K       | —     | —              |
-| Aspect ratio          | —                  | —         | ✓ (generate only) | ✓              | ✓                     | —              | —     | ✓              |
-| Resolution (1K/2K/4K) | —                  | —         | ✓                 | ✓              | —                     | —              | —     | 1K, 2K         |
+| Edit / reference      | 1 image (workflow) | 1 image   | 1 image           | Up to 5 images | 1 image (subject ref) | Up to 5 images | -     | Up to 5 images |
+| Size control          | -                  | ✓         | ✓                 | ✓              | -                     | Up to 4K       | -     | -              |
+| Aspect ratio          | -                  | -         | ✓ (generate only) | ✓              | ✓                     | -              | -     | ✓              |
+| Resolution (1K/2K/4K) | -                  | -         | ✓                 | ✓              | -                     | -              | -     | 1K, 2K         |
 
 ## Tool parameters
 
@@ -166,7 +166,7 @@ Use `action: "list"` to inspect available providers and models at runtime:
   `outputFormat: "png"` or `"webp"` for transparency-capable providers.
 </ParamField>
 
-<ParamField type="number">Number of images to generate (1–4).</ParamField>
+<ParamField type="number">Number of images to generate (1-4).</ParamField>
 <ParamField type="number">Optional provider request timeout in milliseconds.</ParamField>
 <ParamField type="string">Output filename hint.</ParamField>
 
@@ -213,7 +213,7 @@ OpenClaw tries providers in this order:
 1. **`model` parameter** from the tool call (if the agent specifies one).
 2. **`imageGenerationModel.primary`** from config.
 3. **`imageGenerationModel.fallbacks`** in order.
-4. **Auto-detection** — auth-backed provider defaults only:
+4. **Auto-detection** - auth-backed provider defaults only:
    * current default provider first;
    * remaining registered image-generation providers in provider-id order.
 
@@ -268,7 +268,7 @@ OpenAI, OpenRouter, Google, and xAI support up to 5 reference images via the
     image request through the Codex Responses backend. Legacy Codex base
     URLs such as `https://chatgpt.com/backend-api` are canonicalized to
     `https://chatgpt.com/backend-api/codex` for image requests. OpenClaw
-    does **not** silently fall back to `OPENAI_API_KEY` for that request —
+    does **not** silently fall back to `OPENAI_API_KEY` for that request -
     to force direct OpenAI Images API routing, configure
     `models.providers.openai` explicitly with an API key, custom base URL,
     or Azure endpoint.
@@ -420,13 +420,13 @@ as ignored for them.
 
 ## Related
 
-* [Tools overview](/tools) — all available agent tools
-* [ComfyUI](/providers/comfy) — local ComfyUI and Comfy Cloud workflow setup
-* [fal](/providers/fal) — fal image and video provider setup
-* [Google (Gemini)](/providers/google) — Gemini image provider setup
-* [MiniMax](/providers/minimax) — MiniMax image provider setup
-* [OpenAI](/providers/openai) — OpenAI Images provider setup
-* [Vydra](/providers/vydra) — Vydra image, video, and speech setup
-* [xAI](/providers/xai) — Grok image, video, search, code execution, and TTS setup
-* [Configuration reference](/gateway/config-agents#agent-defaults) — `imageGenerationModel` config
-* [Models](/concepts/models) — model configuration and failover
+* [Tools overview](/tools) - all available agent tools
+* [ComfyUI](/providers/comfy) - local ComfyUI and Comfy Cloud workflow setup
+* [fal](/providers/fal) - fal image and video provider setup
+* [Google (Gemini)](/providers/google) - Gemini image provider setup
+* [MiniMax](/providers/minimax) - MiniMax image provider setup
+* [OpenAI](/providers/openai) - OpenAI Images provider setup
+* [Vydra](/providers/vydra) - Vydra image, video, and speech setup
+* [xAI](/providers/xai) - Grok image, video, search, code execution, and TTS setup
+* [Configuration reference](/gateway/config-agents#agent-defaults) - `imageGenerationModel` config
+* [Models](/concepts/models) - model configuration and failover

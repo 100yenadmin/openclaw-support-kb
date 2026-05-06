@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "d0408f2c13765ebf4c5ab0574134ad2f73398a7eeb5f15c46a5d81ebcba921f3"
+source_hash: "9efb023127f4c715d99970f3d9d6d156de557ffce6be3465ed420746ac9a49fa"
 doc_path: "concepts/system-prompt.md"
 original_doc_path: "concepts/system-prompt.md"
 duplicate_index: 1
@@ -54,7 +54,7 @@ The prompt is intentionally compact and uses fixed sections:
 * **Documentation**: local path to OpenClaw docs (repo or npm package) and when to read them.
 * **Workspace Files (injected)**: indicates bootstrap files are included below.
 * **Sandbox** (when enabled): indicates sandboxed runtime, sandbox paths, and whether elevated exec is available.
-* **Current Date & Time**: user-local time, timezone, and time format.
+* **Current Date & Time**: time zone only (cache-stable; the live clock comes from `session_status`).
 * **Reply Tags**: optional reply tag syntax for supported providers.
 * **Heartbeats**: heartbeat prompt and ack behavior, when heartbeats are enabled for the default agent.
 * **Runtime**: host, OS, node, model, repo root (when detected), thinking level (one line).

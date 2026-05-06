@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "948bac587eaceeadce84525aae59c0697d44a3eb7cae4744b8bd33b21a734447"
+source_hash: "bb88592d247335d30f93afbc519b9b49f0f60a5adcfb07d0f6752f1bdfeb2bc9"
 doc_path: "tools/exec-approvals-advanced.md"
 original_doc_path: "tools/exec-approvals-advanced.md"
 duplicate_index: 1
@@ -112,7 +112,7 @@ automatically.
 | ---------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | Goal             | Auto-allow narrow stdin filters                        | Explicitly trust specific executables                                              |
 | Match type       | Executable name + safe-bin argv policy                 | Resolved executable path glob, or bare command-name glob for PATH-invoked commands |
-| Argument scope   | Restricted by safe-bin profile and literal-token rules | Path match only; arguments are otherwise your responsibility                       |
+| Argument scope   | Restricted by safe-bin profile and literal-token rules | Path match by default; optional `argPattern` can restrict parsed argv              |
 | Typical examples | `head`, `tail`, `tr`, `wc`                             | `jq`, `python3`, `node`, `ffmpeg`, custom CLIs                                     |
 | Best use         | Low-risk text transforms in pipelines                  | Any tool with broader behavior or side effects                                     |
 

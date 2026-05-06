@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity search"
 source: "https://docs.openclaw.ai/tools/perplexity-search"
-source_hash: "ce45c15f6a71f3d81b1b80436f9c9a7d2ff0ac49fabe32af76e565fb3786882f"
+source_hash: "37f2089c0b3da7d9292529253677db4a4ac9ad03d78f24e9ab812ae555e2e74c"
 doc_path: "tools/perplexity-search.md"
 original_doc_path: "tools/perplexity-search.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/tools/perplexity-search
 
 
-
-# Perplexity Search API
 
 OpenClaw supports Perplexity Search API as a `web_search` provider.
 It returns structured results with `title`, `url`, and `snippet` fields.
@@ -111,7 +109,7 @@ These parameters apply to the native Perplexity Search API path.
 </ParamField>
 
 <ParamField type="number">
-  Number of results to return (1–10).
+  Number of results to return (1-10).
 </ParamField>
 
 <ParamField type="string">
@@ -123,7 +121,7 @@ These parameters apply to the native Perplexity Search API path.
 </ParamField>
 
 <ParamField type="'day' | 'week' | 'month' | 'year'">
-  Time filter — `day` is 24 hours.
+  Time filter - `day` is 24 hours.
 </ParamField>
 
 <ParamField type="string">
@@ -213,7 +211,20 @@ await web_search({
 
 ## Related
 
-* [Web Search overview](/tools/web) -- all providers and auto-detection
-* [Perplexity Search API docs](https://docs.perplexity.ai/docs/search/quickstart) -- official Perplexity documentation
-* [Brave Search](/tools/brave-search) -- structured results with country/language filters
-* [Exa Search](/tools/exa-search) -- neural search with content extraction
+<CardGroup>
+  <Card title="Web search overview" href="/tools/web" icon="globe">
+    All providers and auto-detection rules.
+  </Card>
+
+  <Card title="Brave search" href="/tools/brave-search" icon="shield">
+    Structured results with country and language filters.
+  </Card>
+
+  <Card title="Exa search" href="/tools/exa-search" icon="magnifying-glass">
+    Neural search with content extraction.
+  </Card>
+
+  <Card title="Perplexity Search API docs" href="https://docs.perplexity.ai/docs/search/quickstart" icon="arrow-up-right-from-square">
+    Official Perplexity Search API quickstart and reference.
+  </Card>
+</CardGroup>

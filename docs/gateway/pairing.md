@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway-owned pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "4f0e15ec3df11a33dbf2f0ca5169931cae924366d82e39c45bff8039da9ffd95"
+source_hash: "eb20608450afd636edd189f6ab0280432b4bf98ef4dc3499adcafa6e387b3b86"
 doc_path: "gateway/pairing.md"
 original_doc_path: "gateway/pairing.md"
 duplicate_index: 1
@@ -33,8 +33,8 @@ Only clients that explicitly call `node.pair.*` use this flow.
 1. A node connects to the Gateway WS and requests pairing.
 2. The Gateway stores a **pending request** and emits `node.pair.requested`.
 3. You approve or reject the request (CLI or UI).
-4. On approval, the Gateway issues a **new token** (tokens are rotated on re‑pair).
-5. The node reconnects using the token and is now “paired”.
+4. On approval, the Gateway issues a **new token** (tokens are rotated on re-pair).
+5. The node reconnects using the token and is now "paired".
 
 Pending requests expire automatically after **5 minutes**.
 
@@ -55,17 +55,17 @@ openclaw nodes rename --node <id|name|ip> --name "Living Room iPad"
 
 Events:
 
-* `node.pair.requested` — emitted when a new pending request is created.
-* `node.pair.resolved` — emitted when a request is approved/rejected/expired.
+* `node.pair.requested` - emitted when a new pending request is created.
+* `node.pair.resolved` - emitted when a request is approved/rejected/expired.
 
 Methods:
 
-* `node.pair.request` — create or reuse a pending request.
-* `node.pair.list` — list pending + paired nodes (`operator.pairing`).
-* `node.pair.approve` — approve a pending request (issues token).
-* `node.pair.reject` — reject a pending request.
-* `node.pair.remove` — remove a stale paired node entry.
-* `node.pair.verify` — verify `{ nodeId, token }`.
+* `node.pair.request` - create or reuse a pending request.
+* `node.pair.list` - list pending + paired nodes (`operator.pairing`).
+* `node.pair.approve` - approve a pending request (issues token).
+* `node.pair.reject` - reject a pending request.
+* `node.pair.remove` - remove a stale paired node entry.
+* `node.pair.verify` - verify `{ nodeId, token }`.
 
 Notes:
 
@@ -125,7 +125,7 @@ The macOS app can optionally attempt a **silent approval** when:
 * the request is marked `silent`, and
 * the app can verify an SSH connection to the gateway host using the same user.
 
-If silent approval fails, it falls back to the normal “Approve/Reject” prompt.
+If silent approval fails, it falls back to the normal "Approve/Reject" prompt.
 
 ## Trusted-CIDR device auto-approval
 
@@ -164,7 +164,7 @@ to trusted non-browser local reconnects that already proved possession of local
 or shared credentials, including same-host native app reconnects after OS
 version metadata changes. Browser/Control UI clients and remote clients still
 use the explicit re-approval flow. Scope upgrades (read to write/admin) and
-public key changes are **not** eligible for metadata-upgrade auto-approval —
+public key changes are **not** eligible for metadata-upgrade auto-approval -
 they stay as explicit re-approval requests.
 
 ## QR pairing helpers
@@ -204,7 +204,7 @@ Security notes:
 
 * The transport is **stateless**; it does not store membership.
 * If the Gateway is offline or pairing is disabled, nodes cannot pair.
-* If the Gateway is in remote mode, pairing still happens against the remote Gateway’s store.
+* If the Gateway is in remote mode, pairing still happens against the remote Gateway's store.
 
 ## Related
 

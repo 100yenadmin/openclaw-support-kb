@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "19d88701ece89062f0a4813fad8e7f4ca2af315f94bd7db12b21a2a62ec517e8"
+source_hash: "2d24e1d23becf9ab9d54dcfc841885f780fce9949f1a35122770044bf5b291fe"
 doc_path: "cli/models.md"
 original_doc_path: "cli/models.md"
 duplicate_index: 1
@@ -43,7 +43,7 @@ In `--json` output, `auth.providers` is the env/config/store-aware provider
 overview, while `auth.oauth` is auth-store profile health only.
 Add `--probe` to run live auth probes against each configured provider profile.
 Probes are real requests (may consume tokens and trigger rate limits).
-Use `--agent <id>` to inspect a configured agent’s model/auth state. When omitted,
+Use `--agent <id>` to inspect a configured agent's model/auth state. When omitted,
 the command uses `OPENCLAW_AGENT_DIR`/`PI_CODING_AGENT_DIR` if set, otherwise the
 configured default agent.
 Probe rows can come from auth profiles, env credentials, or `models.json`.
@@ -183,7 +183,7 @@ provider you choose.
 printing token, API-key, or OAuth secret material. Use `--provider <id>` to
 filter to one provider, such as `openai-codex`, and `--json` for scripting.
 
-`models auth login` runs a provider plugin’s auth flow (OAuth/API key). Use
+`models auth login` runs a provider plugin's auth flow (OAuth/API key). Use
 `openclaw plugins list` to see which providers are installed.
 Use `openclaw models auth --agent <id> <subcommand>` to write auth results to a
 specific configured agent store. The parent `--agent` flag is honored by

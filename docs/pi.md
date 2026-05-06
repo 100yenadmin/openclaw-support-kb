@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pi integration architecture"
 source: "https://docs.openclaw.ai/pi"
-source_hash: "591b57d2f35253bbb6aa374a40772e6ac4a9684e17adbb998e7cba19d3aa77db"
+source_hash: "d43e9a0e9b21b8a7cecd9451f0459a2733bce80732bed95f56f9db9ad876fb70"
 doc_path: "pi.md"
 original_doc_path: "pi.md"
 duplicate_index: 1
@@ -30,10 +30,10 @@ OpenClaw uses the pi SDK to embed an AI coding agent into its messaging gateway 
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  "@mariozechner/pi-agent-core": "0.70.2",
-  "@mariozechner/pi-ai": "0.70.2",
-  "@mariozechner/pi-coding-agent": "0.70.2",
-  "@mariozechner/pi-tui": "0.70.2"
+  "@mariozechner/pi-agent-core": "0.73.0",
+  "@mariozechner/pi-ai": "0.73.0",
+  "@mariozechner/pi-coding-agent": "0.73.0",
+  "@mariozechner/pi-tui": "0.73.0"
 }
 ```
 
@@ -344,7 +344,7 @@ const compactResult = await compactEmbeddedPiSessionDirect({
 });
 ```
 
-## Authentication & Model Resolution
+## Authentication and model resolution
 
 ### Auth profiles
 
@@ -425,7 +425,7 @@ if (cfg?.agents?.defaults?.contextPruning?.mode === "cache-ttl") {
 }
 ```
 
-## Streaming & Block Replies
+## Streaming and block replies
 
 ### Block chunking
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "49abbaf43df3b067f0a4ef53bdec7cc6e04450aaefddf8458e753f2810ab0d3c"
+source_hash: "cc3b455eff157f2855af93128bfce540af3966d0dfb7499af0b5bbc38e9a834f"
 doc_path: "start/bootstrapping.md"
 original_doc_path: "start/bootstrapping.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/start/bootstrapping
 
 
 
-Bootstrapping is the **first‑run** ritual that prepares an agent workspace and
+Bootstrapping is the **first-run** ritual that prepares an agent workspace and
 collects identity details. It happens after onboarding, when the agent starts
 for the first time.
 

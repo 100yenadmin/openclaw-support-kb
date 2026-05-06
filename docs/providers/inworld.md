@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld"
 source: "https://docs.openclaw.ai/providers/inworld"
-source_hash: "5b60e2c9a9ca76e89a4f7cba1bf8a9a62d094e96b2079f7613fe567ffb141d31"
+source_hash: "01be0d13d0b8d8a6891ae7ce791bdd698a1c5df3c82544c96d2cd11b016df76e"
 doc_path: "providers/inworld.md"
 original_doc_path: "providers/inworld.md"
 duplicate_index: 1
@@ -21,13 +21,18 @@ OpenClaw posts to Inworld's streaming TTS endpoint, concatenates the
 returned base64 audio chunks into a single buffer, and hands the result to
 the standard reply-audio pipeline.
 
-| Detail        | Value                                                       |
-| ------------- | ----------------------------------------------------------- |
-| Website       | [inworld.ai](https://inworld.ai)                            |
-| Docs          | [docs.inworld.ai/tts/tts](https://docs.inworld.ai/tts/tts)  |
-| Auth          | `INWORLD_API_KEY` (HTTP Basic, Base64 dashboard credential) |
-| Default voice | `Sarah`                                                     |
-| Default model | `inworld-tts-1.5-max`                                       |
+| Property      | Value                                                            |
+| ------------- | ---------------------------------------------------------------- |
+| Provider id   | `inworld`                                                        |
+| Plugin        | bundled, `enabledByDefault: true`                                |
+| Contract      | `speechProviders` (TTS only)                                     |
+| Auth env var  | `INWORLD_API_KEY` (HTTP Basic, Base64 dashboard credential)      |
+| Base URL      | `https://api.inworld.ai`                                         |
+| Default voice | `Sarah`                                                          |
+| Default model | `inworld-tts-1.5-max`                                            |
+| Output        | MP3 (default), OGG\_OPUS (voice notes), PCM 22050 Hz (telephony) |
+| Website       | [inworld.ai](https://inworld.ai)                                 |
+| Docs          | [docs.inworld.ai/tts/tts](https://docs.inworld.ai/tts/tts)       |
 
 ## Getting started
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "c605c4fff9890e5d879535bbbfdf5fcf847b5e5e52fcc6296e32ca0083875a2a"
+source_hash: "5d14595ef11b4f9def388b5236769c6ece2a44deb2ac6c16f158b598ea828781"
 doc_path: "tools/media-overview.md"
 original_doc_path: "tools/media-overview.md"
 duplicate_index: 1
@@ -18,6 +18,12 @@ OpenClaw generates images, videos, and music, understands inbound media
 media capabilities are tool-driven: the agent decides when to use them based
 on the conversation, and each tool only appears when at least one backing
 provider is configured.
+
+Live speech uses the Talk session contract instead of the one-shot media tool
+path. Talk has three modes: provider-native `realtime`, local or streaming
+`stt-tts`, and `transcription` for observe-only speech capture. Those modes
+share provider catalogs, event envelopes, and cancellation semantics with
+telephony, meetings, browser realtime, and native push-to-talk clients.
 
 ## Capabilities
 
@@ -120,6 +126,11 @@ Deepgram, ElevenLabs, Mistral, OpenAI, and xAI also register Voice Call
 streaming STT providers, so live phone audio can be forwarded to the selected
 vendor without waiting for a completed recording.
 
+For live user conversations, prefer [Talk mode](/nodes/talk). Batch audio
+attachments stay on the media path; browser realtime, native push-to-talk,
+telephony, and meeting audio should use Talk events and the session-scoped
+catalogs returned by the Gateway.
+
 ## Provider mappings (how vendors split across surfaces)
 
 <AccordionGroup>
@@ -157,3 +168,4 @@ vendor without waiting for a completed recording.
 * [Text-to-speech](/tools/tts)
 * [Media understanding](/nodes/media-understanding)
 * [Audio nodes](/nodes/audio)
+* [Talk mode](/nodes/talk)

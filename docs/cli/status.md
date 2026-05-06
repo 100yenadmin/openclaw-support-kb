@@ -1,19 +1,17 @@
 ---
 type: openclaw_doc
-title: "Status"
+title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "77a08051160704bd9f3c47a1063691d84097fcc1e5e872a6233d6d1dece105f9"
+source_hash: "117f5ec2fd1b9a504e4169710c70f6d3e7540da3e53eacb853674a625b5e2b0c"
 doc_path: "cli/status.md"
 original_doc_path: "cli/status.md"
 duplicate_index: 1
 ---
 
-# Status
+# openclaw status
 Source: https://docs.openclaw.ai/cli/status
 
 
-
-# `openclaw status`
 
 Diagnostics for channels + sessions.
 
@@ -41,8 +39,8 @@ Notes:
 * Overview includes update channel + git SHA (for source checkouts).
 * Update info surfaces in the Overview; if an update is available, status prints a hint to run `openclaw update` (see [Updating](/install/updating)).
 * Read-only status surfaces (`status`, `status --json`, `status --all`) resolve supported SecretRefs for their targeted config paths when possible.
-* If a supported channel SecretRef is configured but unavailable in the current command path, status stays read-only and reports degraded output instead of crashing. Human output shows warnings such as “configured token unavailable in this command path”, and JSON output includes `secretDiagnostics`.
-* When command-local SecretRef resolution succeeds, status prefers the resolved snapshot and clears transient “secret unavailable” channel markers from the final output.
+* If a supported channel SecretRef is configured but unavailable in the current command path, status stays read-only and reports degraded output instead of crashing. Human output shows warnings such as "configured token unavailable in this command path", and JSON output includes `secretDiagnostics`.
+* When command-local SecretRef resolution succeeds, status prefers the resolved snapshot and clears transient "secret unavailable" channel markers from the final output.
 * `status --all` includes a Secrets overview row and a diagnosis section that summarizes secret diagnostics (truncated for readability) without stopping report generation.
 
 ## Related

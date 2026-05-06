@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Location command"
 source: "https://docs.openclaw.ai/nodes/location-command"
-source_hash: "5fff6fa46f25939ccbdb3f13f1e5f60a90691e2d1cf56008e976193ebabb7df2"
+source_hash: "4bfc4d988f3a08b6cb84eebefa13a9725d719b5a40e82addaa2fbe7fd4adef75"
 doc_path: "nodes/location-command.md"
 original_doc_path: "nodes/location-command.md"
 duplicate_index: 1
@@ -26,7 +26,7 @@ OS permissions are multi-level. We can expose a selector in-app, but the OS stil
 
 * iOS/macOS may expose **While Using** or **Always** in system prompts/Settings.
 * Android app currently supports foreground location only.
-* Precise location is a separate grant (iOS 14+ “Precise”, Android “fine” vs “coarse”).
+* Precise location is a separate grant (iOS 14+ "Precise", Android "fine" vs "coarse").
 
 Selector in UI drives our requested mode; actual grant lives in OS settings.
 
@@ -98,9 +98,9 @@ Errors (stable codes):
 
 ## UX copy (suggested)
 
-* Off: “Location sharing is disabled.”
-* While Using: “Only when OpenClaw is open.”
-* Precise: “Use precise GPS location. Toggle off to share approximate location.”
+* Off: "Location sharing is disabled."
+* While Using: "Only when OpenClaw is open."
+* Precise: "Use precise GPS location. Toggle off to share approximate location."
 
 ## Related
 

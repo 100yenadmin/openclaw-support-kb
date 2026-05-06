@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "7c2b1e286b681a33e0dc8846b6aee032ddb55605b6a6cc497b83f7d820e5b68b"
+source_hash: "7f563eaf3f1fb6cb04edd7a7a1dcd9417378da26fe375506a90d68a7d37bd9d5"
 doc_path: "cli/plugins.md"
 original_doc_path: "cli/plugins.md"
 duplicate_index: 1
@@ -84,6 +84,7 @@ openclaw plugins search "calendar"                   # search ClawHub plugins
 openclaw plugins install <package>                      # npm by default
 openclaw plugins install clawhub:<package>              # ClawHub only
 openclaw plugins install npm:<package>                  # npm only
+openclaw plugins install npm-pack:<path.tgz>            # local npm pack through npm install semantics
 openclaw plugins install git:github.com/<owner>/<repo>  # git repo
 openclaw plugins install git:github.com/<owner>/<repo>@<ref>
 openclaw plugins install <package> --force              # overwrite existing install
@@ -160,6 +161,12 @@ not skills. Use `openclaw skills search` for ClawHub skills.
 
   <Accordion title="Archives">
     Supported archives: `.zip`, `.tgz`, `.tar.gz`, `.tar`. Native OpenClaw plugin archives must contain a valid `openclaw.plugin.json` at the extracted plugin root; archives that only contain `package.json` are rejected before OpenClaw writes install records.
+
+    Use `npm-pack:<path.tgz>` when the file is an npm-pack tarball and you want
+    to test the same managed npm-root install path used by registry installs,
+    including `package-lock.json` verification, hoisted dependency scanning, and
+    npm install records. Plain archive paths still install as local archives
+    under the plugin extensions root.
 
     Claude marketplace installs are also supported.
   </Accordion>

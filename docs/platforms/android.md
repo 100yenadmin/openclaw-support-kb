@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "7c022a65b992405ad4ff9f68875745acacb56e0b9c87539dbc08f2866cae2e08"
+source_hash: "64a641238d1eb62af5eb37c4235bc644efd9bb2251531d8bb2f4eb1a6b662d08"
 doc_path: "platforms/android.md"
 original_doc_path: "platforms/android.md"
 duplicate_index: 1
@@ -43,7 +43,7 @@ For Tailscale or public hosts, Android requires a secure endpoint:
 
 ### Prerequisites
 
-* You can run the Gateway on the “master” machine.
+* You can run the Gateway on the "master" machine.
 * Android device/emulator can reach the gateway WebSocket:
   * Same LAN with mDNS/NSD, **or**
   * Same Tailscale tailnet using Wide-Area Bonjour / unicast DNS-SD (see below), **or**
@@ -90,7 +90,7 @@ service endpoint instead of TXT-only hints.
 
 #### Tailnet (Vienna ⇄ London) discovery via unicast DNS-SD
 
-Android NSD/mDNS discovery won’t cross networks. If your Android node and the gateway are on different networks but connected via Tailscale, use Wide-Area Bonjour / unicast DNS-SD instead.
+Android NSD/mDNS discovery won't cross networks. If your Android node and the gateway are on different networks but connected via Tailscale, use Wide-Area Bonjour / unicast DNS-SD instead.
 
 Discovery alone is not sufficient for tailnet/public Android pairing. The discovered route still needs a secure endpoint (`wss://` or Tailscale Serve):
 

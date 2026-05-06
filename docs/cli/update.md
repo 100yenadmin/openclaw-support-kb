@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "d3944ffb615e83a21a145391442706bd5064e0432958b82776c104c45819f80e"
+source_hash: "3c2fdb83c47924b05679587d6bc362a4e05f2b1938d6c61bde73de22d759d351"
 doc_path: "cli/update.md"
 original_doc_path: "cli/update.md"
 duplicate_index: 1
@@ -44,8 +44,9 @@ openclaw --update
 * `--tag <dist-tag|version|spec>`: override the package target for this update only. For package installs, `main` maps to `github:openclaw/openclaw#main`.
 * `--dry-run`: preview planned update actions (channel/tag/target/restart flow) without writing config, installing, syncing plugins, or restarting.
 * `--json`: print machine-readable `UpdateRunResult` JSON, including
-  `postUpdate.plugins.integrityDrifts` when npm plugin artifact drift is
-  detected during post-update plugin sync.
+  `postUpdate.plugins.warnings` when corrupt or unloadable managed plugins need
+  repair after the core update succeeds, and `postUpdate.plugins.integrityDrifts`
+  when npm plugin artifact drift is detected during post-update plugin sync.
 * `--timeout <seconds>`: per-step timeout (default is 1800s).
 * `--yes`: skip confirmation prompts (for example downgrade confirmation).
 
@@ -156,7 +157,7 @@ manually.
   </Step>
 
   <Step title="Preflight build (dev only)">
-    Runs lint and TypeScript build in a temp worktree. If the tip fails, walks back up to 10 commits to find the newest clean build.
+    Runs the TypeScript build in a temp worktree. If the tip fails, walks back up to 10 commits to find the newest buildable commit. Set `OPENCLAW_UPDATE_PREFLIGHT_LINT=1` to also run lint during this preflight; lint runs in constrained serial mode because user update hosts are often smaller than CI runners.
   </Step>
 
   <Step title="Rebase">
@@ -191,7 +192,7 @@ validation. Exact versions and explicit tags are not rewritten.
 </Warning>
 
 <Note>
-  Post-update plugin sync failures fail the update result and stop restart follow-up work. Fix the plugin install or update error, then rerun `openclaw update`.
+  Post-update plugin sync failures that are scoped to a managed plugin are reported as warnings after the core update succeeds. The JSON result keeps the top-level update `status: "ok"` and reports `postUpdate.plugins.status: "warning"` with `openclaw doctor --fix` and `openclaw plugins inspect <id> --runtime --json` guidance. Unexpected updater or sync exceptions still fail the update result. Fix the plugin install or update error, then rerun `openclaw doctor --fix` or `openclaw update`.
 
   When the updated Gateway starts, plugin loading is verify-only: startup does not run package managers or mutate dependency trees. Package-manager `update.run` restarts bypass the normal idle deferral and restart cooldown after the package tree has been swapped, so the old process cannot keep lazy-loading removed chunks.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
-source_hash: "09a76f9ff7338b0c4240af8e9d2ba42f6da0a9ff8af0999fb951813ef6648b65"
+source_hash: "fbba48494fe79bc695416dc73c8ccbb1052821394ef15fd04a5c0b5e83180618"
 doc_path: "install/digitalocean.md"
 original_doc_path: "install/digitalocean.md"
 duplicate_index: 1
@@ -13,7 +13,12 @@ Source: https://docs.openclaw.ai/install/digitalocean
 
 
 
-Run a persistent OpenClaw Gateway on a DigitalOcean Droplet.
+Run a persistent OpenClaw Gateway on a DigitalOcean Droplet (\~\$6/month for the 1 GB Basic plan).
+
+DigitalOcean is the simplest paid VPS path. If you prefer cheaper or free options:
+
+* [Hetzner](/install/hetzner) — €3.79/mo, more cores/RAM per dollar.
+* [Oracle Cloud](/install/oracle) — Always Free ARM (up to 4 OCPU, 24 GB RAM), but signup can be finicky and ARM-only.
 
 ## Prerequisites
 
@@ -104,6 +109,8 @@ Run a persistent OpenClaw Gateway on a DigitalOcean Droplet.
 
     Then open `https://<magicdns>/` from any device on your tailnet.
 
+    Tailscale Serve authenticates Control UI and WebSocket traffic via tailnet identity headers, which assumes the gateway host itself is trusted. HTTP API endpoints follow the gateway's normal auth mode (token/password) regardless. To require explicit shared-secret credentials over Serve, set `gateway.auth.allowTailscale: false` and use `gateway.auth.mode: "token"` or `"password"`.
+
     **Option C: Tailnet bind (no Serve)**
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
@@ -114,6 +121,30 @@ Run a persistent OpenClaw Gateway on a DigitalOcean Droplet.
     Then open `http://<tailscale-ip>:18789` (token required).
   </Step>
 </Steps>
+
+## Persistence and backups
+
+OpenClaw state lives under:
+
+* `~/.openclaw/` — `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
+* `~/.openclaw/workspace/` — the agent workspace (SOUL.md, memory, artifacts).
+
+These survive Droplet reboots. To take a portable snapshot:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw backup create
+```
+
+DigitalOcean snapshots back the whole Droplet up; `openclaw backup create` is portable across hosts.
+
+## 1 GB RAM tips
+
+The \$6 Droplet only has 1 GB RAM. To keep things smooth:
+
+* Make sure the swap step above is in `/etc/fstab` so it survives reboots.
+* Prefer API-based models (Claude, GPT) over local ones — local LLM inference does not fit in 1 GB.
+* Set `agents.defaults.model.primary` to a smaller model if you hit OOMs on large prompts.
+* Monitor with `free -h` and `htop`.
 
 ## Troubleshooting
 

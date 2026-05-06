@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "e8057eeb84a383a099960870cbe0e8fdb85438dbb1d576310277ee2206ec6714"
+source_hash: "b2f1120f0b35204ba87aade7eb890a7b806b44438e224d3ff814cbc8cd60c337"
 doc_path: "logging.md"
 original_doc_path: "logging.md"
 duplicate_index: 1
@@ -92,8 +92,8 @@ openclaw doctor
 
 ### Control UI (web)
 
-The Control UI’s **Logs** tab tails the same file using `logs.tail`.
-See [/web/control-ui](/web/control-ui) for how to open it.
+The Control UI's **Logs** tab tails the same file using `logs.tail`.
+See [Control UI](/web/control-ui) for how to open it.
 
 ### Channel-only logs
 

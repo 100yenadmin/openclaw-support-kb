@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice wake"
 source: "https://docs.openclaw.ai/nodes/voicewake"
-source_hash: "a7c5d6796239eb85b48fc4bbeeda2b087de78437f06f3e33a41f0e2d507cb6f0"
+source_hash: "a8077e2e5b2f057072f5d7c39036e0cb1a696a6a22a85484302bafd23d155d50"
 doc_path: "nodes/voicewake.md"
 original_doc_path: "nodes/voicewake.md"
 duplicate_index: 1
@@ -74,14 +74,14 @@ Route targets support exactly one of:
 Who receives it:
 
 * All WebSocket clients (macOS app, WebChat, etc.)
-* All connected nodes (iOS/Android), and also on node connect as an initial “current state” push.
+* All connected nodes (iOS/Android), and also on node connect as an initial "current state" push.
 
 ## Client behavior
 
 ### macOS app
 
 * Uses the global list to gate `VoiceWakeRuntime` triggers.
-* Editing “Trigger words” in Voice Wake settings calls `voicewake.set` and then relies on the broadcast to keep other clients in sync.
+* Editing "Trigger words" in Voice Wake settings calls `voicewake.set` and then relies on the broadcast to keep other clients in sync.
 
 ### iOS node
 

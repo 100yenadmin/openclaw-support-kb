@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "b7ac041ca499c2aa77bbeedcb701e39f79af998871c7ca49813b2df0d3b8594e"
+source_hash: "1b61f8134bc6cc94b68cfebd6dd536a4473f0ce9cd053bcff6ffd5caa561d757"
 doc_path: "channels/pairing.md"
 original_doc_path: "channels/pairing.md"
 duplicate_index: 1
@@ -140,12 +140,11 @@ That bootstrap token carries the built-in pairing bootstrap profile:
 
 Treat the setup code like a password while it is valid.
 
-For Tailscale, public, or other non-loopback mobile pairing, use Tailscale
-Serve/Funnel or another `wss://` Gateway URL. Direct non-loopback `ws://` setup
-URLs are rejected before QR/setup-code issuance. Plaintext `ws://` setup codes
-are limited to loopback URLs; private-network `ws://` clients still require the explicit
-`OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` break-glass described in the remote
-Gateway guide.
+For Tailscale, public, or other remote mobile pairing, use Tailscale Serve/Funnel
+or another `wss://` Gateway URL. Plaintext `ws://` setup codes are accepted only
+for loopback, private LAN addresses, `.local` Bonjour hosts, and the Android
+emulator host. Tailnet CGNAT addresses, `.ts.net` names, and public hosts still
+fail closed before QR/setup-code issuance.
 
 ### Approve a node device
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "4fb623c0592b7e33ce0949b1e178422447b22fc32baa373de47c0bc733f1becb"
+source_hash: "c2d0029cb6a5e910c3b38c2f4fb8433619e45de659510b685b950e9ff43006f9"
 doc_path: "start/hubs.md"
 original_doc_path: "start/hubs.md"
 duplicate_index: 1
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/start/hubs
   If you are new to OpenClaw, start with [Getting Started](/start/getting-started).
 </Note>
 
-Use these hubs to discover every page, including deep dives and reference docs that don’t appear in the left nav.
+Use these hubs to discover every page, including deep dives and reference docs that don't appear in the left nav.
 
 ## Start here
 
@@ -92,7 +92,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 ## Gateway + operations
 
 * [Gateway runbook](/gateway)
-* [Network model](/gateway/network-model)
+* [Network model](/network#core-model)
 * [Gateway pairing](/gateway/pairing)
 * [Gateway lock](/gateway/gateway-lock)
 * [Background process](/gateway/background-process)

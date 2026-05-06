@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image and media support"
 source: "https://docs.openclaw.ai/nodes/images"
-source_hash: "9f5a4ce549e8fc3ee5c5036e878eb47e407bb471420da0b06dd8be678d210b53"
+source_hash: "216361d8c4b92815ad40a2f5e5f1ac2c3ca76824ef91d95a9f3c97e90da7ecd2"
 doc_path: "nodes/images.md"
 original_doc_path: "nodes/images.md"
 duplicate_index: 1
@@ -59,7 +59,7 @@ The WhatsApp channel runs via **Baileys Web**. This document captures the curren
   * If the active primary image model already supports vision natively, OpenClaw skips the `[Image]` summary block and passes the original image to the model instead.
 * By default only the first matching image/audio/video attachment is processed; set `tools.media.<cap>.attachments` to process multiple attachments.
 
-## Limits & Errors
+## Limits and errors
 
 **Outbound send caps (WhatsApp web send)**
 

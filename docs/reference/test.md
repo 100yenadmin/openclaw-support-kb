@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
-source_hash: "09843039cf172b75582fb6c5656e803af5c9068e3382c7c52efa6fc30f383bb8"
+source_hash: "7dde6efb918ad1dc46774a125528e8ee4da8355e0ed5009bce23a81ec14f9379"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1
@@ -17,9 +17,9 @@ Source: https://docs.openclaw.ai/reference/test
 
 * Update and plugin package validation: [Testing updates and plugins](/help/testing-updates-plugins)
 
-* `pnpm test:force`: Kills any lingering gateway process holding the default control port, then runs the full Vitest suite with an isolated gateway port so server tests don’t collide with a running instance. Use this when a prior gateway run left port 18789 occupied.
+* `pnpm test:force`: Kills any lingering gateway process holding the default control port, then runs the full Vitest suite with an isolated gateway port so server tests don't collide with a running instance. Use this when a prior gateway run left port 18789 occupied.
 
-* `pnpm test:coverage`: Runs the unit suite with V8 coverage (via `vitest.unit.config.ts`). This is a loaded-file unit coverage gate, not whole-repo all-file coverage. Thresholds are 70% lines/functions/statements and 55% branches. Because `coverage.all` is false, the gate measures files loaded by the unit coverage suite instead of treating every split-lane source file as uncovered.
+* `pnpm test:coverage`: Runs the unit suite with V8 coverage (via `vitest.unit.config.ts`). This is a default-unit-lane coverage gate, not whole-repo all-file coverage. Thresholds are 70% lines/functions/statements and 55% branches. Because `coverage.all` is false and the default lane scopes coverage includes to non-fast unit tests with sibling source files, the gate measures source owned by this lane instead of every transitive import it happens to load.
 
 * `pnpm test:coverage:changed`: Runs unit coverage only for files changed since `origin/main`.
 
@@ -119,7 +119,7 @@ Usage:
 
 * `source ~/.profile && pnpm tsx scripts/bench-model.ts --runs 10`
 * Optional env: `MINIMAX_API_KEY`, `MINIMAX_BASE_URL`, `MINIMAX_MODEL`, `ANTHROPIC_API_KEY`
-* Default prompt: “Reply with a single word: ok. No punctuation or extra text.”
+* Default prompt: "Reply with a single word: ok. No punctuation or extra text."
 
 Last run (2025-12-31, 20 runs):
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
-source_hash: "f565b3cc61a9ef7faf99aae2d628adeec47cfadc6d447f5f011c205922d0dd56"
+source_hash: "4c7a1ce6a5aa0d8903e67aeeb4394a4b81aa80b2eb0eefbe06a4b85527029009"
 doc_path: "platforms/mac/dev-setup.md"
 original_doc_path: "platforms/mac/dev-setup.md"
 duplicate_index: 1
@@ -84,7 +84,7 @@ xcodebuild -version
 xcrun swift --version
 ```
 
-If versions don’t match, update macOS/Xcode and re-run the build.
+If versions don't match, update macOS/Xcode and re-run the build.
 
 ### App crashes on permission grant
 

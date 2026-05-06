@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawHub"
 source: "https://docs.openclaw.ai/tools/clawhub"
-source_hash: "95bbda48bf3713226050ade002cbff0431d00eec43e1c98f20e18034ab11deb5"
+source_hash: "53351ede23a2ebc2b20fcb30801f33adbb5f3c10b905dc5b859139f7bb858e62"
 doc_path: "tools/clawhub.md"
 original_doc_path: "tools/clawhub.md"
 duplicate_index: 1
@@ -36,7 +36,7 @@ Site: [clawhub.ai](https://clawhub.ai)
   </Step>
 
   <Step title="Use">
-    Start a new OpenClaw session — it picks up the new skill.
+    Start a new OpenClaw session - it picks up the new skill.
   </Step>
 
   <Step title="Publish (optional)">
@@ -158,7 +158,7 @@ shared, and gated, see [Skills](/tools/skills).
 
 ## Security and moderation
 
-ClawHub is open by default — anyone can upload skills, but a GitHub
+ClawHub is open by default - anyone can upload skills, but a GitHub
 account must be **at least one week old** to publish. This slows down
 abuse without blocking legitimate contributors.
 
@@ -231,9 +231,9 @@ publish/sync.
 
     Login options:
 
-    * `--token <token>` — paste an API token.
-    * `--label <label>` — label stored for browser login tokens (default: `CLI token`).
-    * `--no-browser` — do not open a browser (requires `--token`).
+    * `--token <token>` - paste an API token.
+    * `--label <label>` - label stored for browser login tokens (default: `CLI token`).
+    * `--no-browser` - do not open a browser (requires `--token`).
   </Accordion>
 
   <Accordion title="Search">
@@ -243,7 +243,7 @@ publish/sync.
 
     Searches skills. For plugin/package discovery, use `clawhub package explore`.
 
-    * `--limit <n>` — max results.
+    * `--limit <n>` - max results.
   </Accordion>
 
   <Accordion title="Browse / inspect plugins">
@@ -257,12 +257,12 @@ publish/sync.
 
     Options:
 
-    * `--family skill|code-plugin|bundle-plugin` — filter package family.
-    * `--official` — show only official packages.
-    * `--executes-code` — show only packages that execute code.
-    * `--version <version>` / `--tag <tag>` — inspect a specific package version.
-    * `--versions`, `--files`, `--file <path>` — inspect package history and files.
-    * `--json` — machine-readable output.
+    * `--family skill|code-plugin|bundle-plugin` - filter package family.
+    * `--official` - show only official packages.
+    * `--executes-code` - show only packages that execute code.
+    * `--version <version>` / `--tag <tag>` - inspect a specific package version.
+    * `--versions`, `--files`, `--file <path>` - inspect package history and files.
+    * `--json` - machine-readable output.
   </Accordion>
 
   <Accordion title="Install / update / list">
@@ -275,8 +275,8 @@ publish/sync.
 
     Options:
 
-    * `--version <version>` — install or update to a specific version (single slug only on `update`).
-    * `--force` — overwrite if the folder already exists, or when local files do not match any published version.
+    * `--version <version>` - install or update to a specific version (single slug only on `update`).
+    * `--force` - overwrite if the folder already exists, or when local files do not match any published version.
     * `clawhub list` reads `.clawhub/lock.json`.
   </Accordion>
 
@@ -287,11 +287,11 @@ publish/sync.
 
     Options:
 
-    * `--slug <slug>` — skill slug.
-    * `--name <name>` — display name.
-    * `--version <version>` — semver version.
-    * `--changelog <text>` — changelog text (can be empty).
-    * `--tags <tags>` — comma-separated tags (default: `latest`).
+    * `--slug <slug>` - skill slug.
+    * `--name <name>` - display name.
+    * `--version <version>` - semver version.
+    * `--changelog <text>` - changelog text (can be empty).
+    * `--tags <tags>` - comma-separated tags (default: `latest`).
   </Accordion>
 
   <Accordion title="Publish plugins">
@@ -304,9 +304,9 @@ publish/sync.
 
     Options:
 
-    * `--dry-run` — build the exact publish plan without uploading anything.
-    * `--json` — emit machine-readable output for CI.
-    * `--source-repo`, `--source-commit`, `--source-ref` — optional overrides when auto-detection is not enough.
+    * `--dry-run` - build the exact publish plan without uploading anything.
+    * `--json` - emit machine-readable output for CI.
+    * `--source-repo`, `--source-commit`, `--source-ref` - optional overrides when auto-detection is not enough.
   </Accordion>
 
   <Accordion title="Request rescans">
@@ -340,13 +340,13 @@ publish/sync.
 
     Options:
 
-    * `--root <dir...>` — extra scan roots.
-    * `--all` — upload everything without prompts.
-    * `--dry-run` — show what would be uploaded.
-    * `--bump <type>` — `patch|minor|major` for updates (default: `patch`).
-    * `--changelog <text>` — changelog for non-interactive updates.
-    * `--tags <tags>` — comma-separated tags (default: `latest`).
-    * `--concurrency <n>` — registry checks (default: `4`).
+    * `--root <dir...>` - extra scan roots.
+    * `--all` - upload everything without prompts.
+    * `--dry-run` - show what would be uploaded.
+    * `--bump <type>` - `patch|minor|major` for updates (default: `patch`).
+    * `--changelog <text>` - changelog for non-interactive updates.
+    * `--tags <tags>` - comma-separated tags (default: `latest`).
+    * `--concurrency <n>` - registry checks (default: `4`).
   </Accordion>
 </AccordionGroup>
 

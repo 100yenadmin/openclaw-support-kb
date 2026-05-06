@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "d73c5d9912bcd50d38fd9d0bbbc53e794044211c88493db5bb51545b5d5d9a5c"
+source_hash: "116e06fa9b2576b7f90a16f88c162baeb3538f7c6f6536d73e4b5c0f79cf4439"
 doc_path: "concepts/agent.md"
 original_doc_path: "concepts/agent.md"
 duplicate_index: 1
@@ -13,14 +13,14 @@ Source: https://docs.openclaw.ai/concepts/agent
 
 
 
-OpenClaw runs a **single embedded agent runtime** — one agent process per
+OpenClaw runs a **single embedded agent runtime** - one agent process per
 Gateway, with its own workspace, bootstrap files, and session store. This page
 covers that runtime contract: what the workspace must contain, which files get
 injected, and how sessions bootstrap against it.
 
 ## Workspace (required)
 
-OpenClaw uses a single agent workspace directory (`agents.defaults.workspace`) as the agent’s **only** working directory (`cwd`) for tools and context.
+OpenClaw uses a single agent workspace directory (`agents.defaults.workspace`) as the agent's **only** working directory (`cwd`) for tools and context.
 
 Recommended: use `openclaw setup` to create `~/.openclaw/openclaw.json` if missing and initialize the workspace files.
 
@@ -34,18 +34,18 @@ per-session workspaces under `agents.defaults.sandbox.workspaceRoot` (see
 
 Inside `agents.defaults.workspace`, OpenClaw expects these user-editable files:
 
-* `AGENTS.md` — operating instructions + “memory”
-* `SOUL.md` — persona, boundaries, tone
-* `TOOLS.md` — user-maintained tool notes (e.g. `imsg`, `sag`, conventions)
-* `BOOTSTRAP.md` — one-time first-run ritual (deleted after completion)
-* `IDENTITY.md` — agent name/vibe/emoji
-* `USER.md` — user profile + preferred address
+* `AGENTS.md` - operating instructions + "memory"
+* `SOUL.md` - persona, boundaries, tone
+* `TOOLS.md` - user-maintained tool notes (e.g. `imsg`, `sag`, conventions)
+* `BOOTSTRAP.md` - one-time first-run ritual (deleted after completion)
+* `IDENTITY.md` - agent name/vibe/emoji
+* `USER.md` - user profile + preferred address
 
 On the first turn of a new session, OpenClaw injects the contents of these files into the system prompt's Project Context.
 
 Blank files are skipped. Large files are trimmed and truncated with a marker so prompts stay lean (read the file for full content).
 
-If a file is missing, OpenClaw injects a single “missing file” marker line (and `openclaw setup` will create a safe default template).
+If a file is missing, OpenClaw injects a single "missing file" marker line (and `openclaw setup` will create a safe default template).
 
 `BOOTSTRAP.md` is only created for a **brand new workspace** (no other bootstrap files present). While it is pending, OpenClaw keeps it in Project Context and adds system-prompt bootstrap guidance for the initial ritual instead of copying it into the user message. If you delete it after completing the ritual, it should not be recreated on later restarts.
 
@@ -59,7 +59,7 @@ To disable bootstrap file creation entirely (for pre-seeded workspaces), set:
 
 Core tools (read/exec/edit/write and related system tools) are always available,
 subject to tool policy. `apply_patch` is optional and gated by
-`tools.exec.applyPatch`. `TOOLS.md` does **not** control which tools exist; it’s
+`tools.exec.applyPatch`. `TOOLS.md` does **not** control which tools exist; it's
 guidance for how *you* want them used.
 
 ## Skills
@@ -108,7 +108,7 @@ Block streaming sends completed assistant blocks as soon as they finish; it is
 **off by default** (`agents.defaults.blockStreamingDefault: "off"`).
 Tune the boundary via `agents.defaults.blockStreamingBreak` (`text_end` vs `message_end`; defaults to text\_end).
 Control soft block chunking with `agents.defaults.blockStreamingChunk` (defaults to
-800–1200 chars; prefers paragraph breaks, then newlines; sentences last).
+800-1200 chars; prefers paragraph breaks, then newlines; sentences last).
 Coalesce streamed chunks with `agents.defaults.blockStreamingCoalesce` to reduce
 single-line spam (idle-based merging before send). Non-Telegram channels require
 explicit `*.blockStreaming: true` to enable block replies.

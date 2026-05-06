@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
-source_hash: "46d1a79436d928c6ab7c0dd22c27d17da22ff13249dd58eecd02e8528fc3e5ea"
+source_hash: "a2c40488c1bd8df89380e698061bb96b39f5690fbf30acbc41faf88a7a444eb1"
 doc_path: "install/node.md"
 original_doc_path: "install/node.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/install/node
 
 
 
-OpenClaw requires **Node 22.14 or newer**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically — this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
+OpenClaw requires **Node 22.14 or newer**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
 
 ## Check your version
 
@@ -73,9 +73,9 @@ If this prints `v24.x.x` or higher, you're on the recommended default. If it pri
 <Accordion title="Using a version manager (nvm, fnm, mise, asdf)">
   Version managers let you switch between Node versions easily. Popular options:
 
-  * [**fnm**](https://github.com/Schniz/fnm) — fast, cross-platform
-  * [**nvm**](https://github.com/nvm-sh/nvm) — widely used on macOS/Linux
-  * [**mise**](https://mise.jdx.dev/) — polyglot (Node, Python, Ruby, etc.)
+  * [**fnm**](https://github.com/Schniz/fnm) - fast, cross-platform
+  * [**nvm**](https://github.com/nvm-sh/nvm) - widely used on macOS/Linux
+  * [**mise**](https://mise.jdx.dev/) - polyglot (Node, Python, Ruby, etc.)
 
   Example with fnm:
 
@@ -143,6 +143,6 @@ Add the `export PATH=...` line to your `~/.bashrc` or `~/.zshrc` to make it perm
 
 ## Related
 
-* [Install Overview](/install) — all installation methods
-* [Updating](/install/updating) — keeping OpenClaw up to date
-* [Getting Started](/start/getting-started) — first steps after install
+* [Install Overview](/install) - all installation methods
+* [Updating](/install/updating) - keeping OpenClaw up to date
+* [Getting Started](/start/getting-started) - first steps after install

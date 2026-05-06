@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Network"
 source: "https://docs.openclaw.ai/network"
-source_hash: "f9cf4da6028497b581712802113245f745733d28f8a8747e487df9abf0a150d4"
+source_hash: "c456dcdc8692983ebbb0cec44b5fa420f4ce1e1c5720b9d0f04329585e73ac55"
 doc_path: "network.md"
 original_doc_path: "network.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/network
 
 
-
-# Network hub
 
 This hub links the core docs for how OpenClaw connects, pairs, and secures
 devices across localhost, LAN, and tailnet.
@@ -55,7 +53,7 @@ Local trust:
 
 ## Discovery + transports
 
-* [Discovery & transports](/gateway/discovery)
+* [Discovery and transports](/gateway/discovery)
 * [Bonjour / mDNS](/gateway/bonjour)
 * [Remote access (SSH)](/gateway/remote)
 * [Tailscale](/gateway/tailscale)
@@ -76,5 +74,5 @@ Local trust:
 
 ## Related
 
-* [Gateway network model](/gateway/network-model)
+* [Gateway runbook](/gateway)
 * [Remote access](/gateway/remote)

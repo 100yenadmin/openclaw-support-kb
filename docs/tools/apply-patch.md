@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "apply_patch tool"
 source: "https://docs.openclaw.ai/tools/apply-patch"
-source_hash: "cfdcebd88df8c46a7c49f2d2fd2a058e8cdab2e106dad294eb5f1a1b65ca2bf8"
+source_hash: "daf65ea36c8c6526f8923910af40d2dd0e40f796eee93104caec12a9359da6ff"
 doc_path: "tools/apply-patch.md"
 original_doc_path: "tools/apply-patch.md"
 duplicate_index: 1
@@ -58,6 +58,16 @@ The tool accepts a single `input` string that wraps one or more file operations:
 
 ## Related
 
-* [Diffs](/tools/diffs)
-* [Exec tool](/tools/exec)
-* [Code execution](/tools/code-execution)
+<CardGroup>
+  <Card title="Diffs" href="/tools/diffs" icon="code-compare">
+    Read-only diff viewer for change presentation.
+  </Card>
+
+  <Card title="Exec tool" href="/tools/exec" icon="terminal">
+    Shell command execution from the agent.
+  </Card>
+
+  <Card title="Code execution" href="/tools/code-execution" icon="square-code">
+    Sandboxed remote Python analysis with xAI.
+  </Card>
+</CardGroup>

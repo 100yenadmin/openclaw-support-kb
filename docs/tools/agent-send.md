@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
-source_hash: "de7100a59eac3f3cfc56c50cc24b1ee5a20896ef3ef4c953faebe7c4eaf334a6"
+source_hash: "6bf88a4f06b3c536b1ec7c6ca9e895d677e1072b9ba12a9a1c41f665d5313836"
 doc_path: "tools/agent-send.md"
 original_doc_path: "tools/agent-send.md"
 duplicate_index: 1
@@ -97,6 +97,20 @@ openclaw agent --agent ops --message "Alert" --deliver --reply-channel telegram 
 
 ## Related
 
-* [Agent CLI reference](/cli/agent)
-* [Sub-agents](/tools/subagents) — background sub-agent spawning
-* [Sessions](/concepts/session) — how session keys work
+<CardGroup>
+  <Card title="Agent CLI reference" href="/cli/agent" icon="terminal">
+    Full `openclaw agent` flag and option reference.
+  </Card>
+
+  <Card title="Sub-agents" href="/tools/subagents" icon="users">
+    Background sub-agent spawning.
+  </Card>
+
+  <Card title="Sessions" href="/concepts/session" icon="comments">
+    How session keys work and how `--to`, `--agent`, and `--session-id` resolve them.
+  </Card>
+
+  <Card title="Slash commands" href="/tools/slash-commands" icon="slash">
+    Native command catalog used inside agent sessions.
+  </Card>
+</CardGroup>

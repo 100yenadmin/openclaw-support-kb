@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
-source_hash: "cb8467c701bfbbc6bec37fe8986904d06a8c0858cf530e43a44e4b14e96c2af7"
+source_hash: "ff22a0fda3ad9dc4af26d20fc7abb6b136e0a9a667e501eacb9d89e29051affb"
 doc_path: "tools/pdf.md"
 original_doc_path: "tools/pdf.md"
 duplicate_index: 1
@@ -197,5 +197,5 @@ Page-filtered fallback model:
 
 ## Related
 
-* [Tools Overview](/tools) — all available agent tools
-* [Configuration Reference](/gateway/config-agents#agent-defaults) — pdfMaxBytesMb and pdfMaxPages config
+* [Tools Overview](/tools) - all available agent tools
+* [Configuration Reference](/gateway/config-agents#agent-defaults) - pdfMaxBytesMb and pdfMaxPages config

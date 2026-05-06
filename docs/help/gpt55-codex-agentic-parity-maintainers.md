@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex parity maintainer notes"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity-maintainers"
-source_hash: "9c5b2e4f7294b44918750a5157e91387a48febc5d6c0afe7aea76fabfba5391f"
+source_hash: "c30fdb04b1091ff79e0c26714296baf78f93935390dece7e52ffbc805f233da9"
 doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
 original_doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
 duplicate_index: 1
@@ -105,7 +105,7 @@ PR D is the proof layer. It should not be the reason runtime-correctness PRs are
 
 ### PR B
 
-* auth/proxy/runtime failures stop collapsing into generic “model failed” handling
+* auth/proxy/runtime failures stop collapsing into generic "model failed" handling
 * `/elevated full` is only described as available when it is actually available
 * blocked reasons are visible to both the model and the user-facing runtime
 

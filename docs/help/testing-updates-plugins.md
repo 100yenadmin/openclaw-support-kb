@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "e0d5aa5d95886f83871b0a467fa0c4c5872702aa4b61996e26ffea963a88c91a"
+source_hash: "04da3a7875f94f054bcd85a4887d8407808f5143759151202e88ea1d13d671f8"
 doc_path: "help/testing-updates-plugins.md"
 original_doc_path: "help/testing-updates-plugins.md"
 duplicate_index: 1
@@ -177,7 +177,7 @@ targets the shipped npm package instead.
 Release checks call Package Acceptance with the package/update/restart/plugin set:
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
-doctor-switch update-channel-switch upgrade-survivor published-upgrade-survivor update-restart-auth plugins-offline plugin-update
+doctor-switch update-channel-switch update-corrupt-plugin upgrade-survivor published-upgrade-survivor update-restart-auth plugins-offline plugin-update
 ```
 
 When release soak is enabled, they also pass:
@@ -188,10 +188,10 @@ published_upgrade_survivor_scenarios=reported-issues
 telegram_mode=mock-openai
 ```
 
-This keeps package migration, update channel switching, stale plugin dependency
-cleanup, offline plugin coverage, plugin update behavior, and Telegram package
-QA on the same resolved artifact without making the default release package gate
-walk every published release.
+This keeps package migration, update channel switching, corrupt managed-plugin
+tolerance, stale plugin dependency cleanup, offline plugin coverage, plugin
+update behavior, and Telegram package QA on the same resolved artifact without
+making the default release package gate walk every published release.
 
 `last-stable-4` resolves to the four latest stable npm-published OpenClaw
 releases. Release package acceptance pins `2026.4.23` as the first plugin-update

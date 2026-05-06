@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS signing"
 source: "https://docs.openclaw.ai/platforms/mac/signing"
-source_hash: "285b74ab5fda30d470b02df54b2118da4827fa01af83d4a4bdabbc21f522442a"
+source_hash: "10d936a0b4418471b1827c152970af26b22a0577c3fc0ecceed3d2be95b0e237"
 doc_path: "platforms/mac/signing.md"
 original_doc_path: "platforms/mac/signing.md"
 duplicate_index: 1
@@ -48,11 +48,11 @@ When signing with `SIGN_IDENTITY="-"` (ad-hoc), the script automatically disable
 * `OpenClawBuildTimestamp`: ISO8601 UTC at package time
 * `OpenClawGitCommit`: short git hash (or `unknown` if unavailable)
 
-The About tab reads these keys to show version, build date, git commit, and whether it’s a debug build (via `#if DEBUG`). Run the packager to refresh these values after code changes.
+The About tab reads these keys to show version, build date, git commit, and whether it's a debug build (via `#if DEBUG`). Run the packager to refresh these values after code changes.
 
 ## Why
 
-TCC permissions are tied to the bundle identifier *and* code signature. Unsigned debug builds with changing UUIDs were causing macOS to forget grants after each rebuild. Signing the binaries (ad‑hoc by default) and keeping a fixed bundle id/path (`dist/OpenClaw.app`) preserves the grants between builds, matching the VibeTunnel approach.
+TCC permissions are tied to the bundle identifier *and* code signature. Unsigned debug builds with changing UUIDs were causing macOS to forget grants after each rebuild. Signing the binaries (ad-hoc by default) and keeping a fixed bundle id/path (`dist/OpenClaw.app`) preserves the grants between builds, matching the VibeTunnel approach.
 
 ## Related
 

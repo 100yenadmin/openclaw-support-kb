@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "da8001dd7a50a66f1dcdf6818c7098c94d5a135da7ab348cd46a47901e2f6c18"
+source_hash: "9d7c51bb96c1b7002133399c34b40f04ade915e7e31dedee320c65057399c094"
 doc_path: "reference/token-use.md"
 original_doc_path: "reference/token-use.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/reference/token-use
 
 
-
-# Token use & costs
 
 OpenClaw tracks **tokens**, not characters. Tokens are model-specific, but most
 OpenAI-style models average \~4 characters per token for English text.
@@ -70,7 +68,7 @@ For a practical breakdown (per injected file, tools, skills, and system prompt s
 
 Use these in chat:
 
-* `/status` → **emoji‑rich status card** with the session model, context usage,
+* `/status` → **emoji-rich status card** with the session model, context usage,
   last response input/output tokens, and **estimated cost** (API key only).
 * `/usage off|tokens|full` → appends a **per-response usage footer** to every reply.
   * Persists per session (stored as `responseUsage`).
@@ -156,7 +154,7 @@ per agent with `agents.list[].params.cacheRetention`.
 For a full knob-by-knob guide, see [Prompt Caching](/reference/prompt-caching).
 
 For Anthropic API pricing, cache reads are significantly cheaper than input
-tokens, while cache writes are billed at a higher multiplier. See Anthropic’s
+tokens, while cache writes are billed at a higher multiplier. See Anthropic's
 prompt caching pricing for the latest rates and TTL multipliers:
 [https://docs.anthropic.com/docs/build-with-claude/prompt-caching](https://docs.anthropic.com/docs/build-with-claude/prompt-caching)
 

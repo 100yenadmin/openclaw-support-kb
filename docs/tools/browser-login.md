@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser login"
 source: "https://docs.openclaw.ai/tools/browser-login"
-source_hash: "e27785d4f875e97650e28585ed0404b0294e89a01271e3bbdda38a1eb4def598"
+source_hash: "a7f87682383d342b8f52f8b97ca1f6b2560e01e16a9e05c83079ed1ba43917d0"
 doc_path: "tools/browser-login.md"
 original_doc_path: "tools/browser-login.md"
 duplicate_index: 1
@@ -13,19 +13,17 @@ Source: https://docs.openclaw.ai/tools/browser-login
 
 
 
-# Browser login + X/Twitter posting
-
 ## Manual login (recommended)
 
 When a site requires login, **sign in manually** in the **host** browser profile (the openclaw browser).
 
-Do **not** give the model your credentials. Automated logins often trigger anti‑bot defenses and can lock the account.
+Do **not** give the model your credentials. Automated logins often trigger anti-bot defenses and can lock the account.
 
 Back to the main browser docs: [Browser](/tools/browser).
 
 ## Which Chrome profile is used?
 
-OpenClaw controls a **dedicated Chrome profile** (named `openclaw`, orange‑tinted UI). This is separate from your daily browser profile.
+OpenClaw controls a **dedicated Chrome profile** (named `openclaw`, orange-tinted UI). This is separate from your daily browser profile.
 
 For agent browser tool calls:
 

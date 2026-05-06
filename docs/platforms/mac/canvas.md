@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "d2cd13e961cca567ff933548be0fee8504c2c715deb02ae6326c8176caa456a7"
+source_hash: "6b41fcf114cd0855aaec53b52843a8bc26bfd144164c63522bf1fe9a644c8aaf"
 doc_path: "platforms/mac/canvas.md"
 original_doc_path: "platforms/mac/canvas.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/platforms/mac/canvas
 
 
 
-The macOS app embeds an agent‑controlled **Canvas panel** using `WKWebView`. It
+The macOS app embeds an agent-controlled **Canvas panel** using `WKWebView`. It
 is a lightweight visual workspace for HTML/CSS/JS, A2UI, and small interactive
 UI surfaces.
 
@@ -33,13 +33,13 @@ Examples:
 * `openclaw-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
 * `openclaw-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
 
-If no `index.html` exists at the root, the app shows a **built‑in scaffold page**.
+If no `index.html` exists at the root, the app shows a **built-in scaffold page**.
 
 ## Panel behavior
 
 * Borderless, resizable panel anchored near the menu bar (or mouse cursor).
 * Remembers size/position per session.
-* Auto‑reloads when local canvas files change.
+* Auto-reloads when local canvas files change.
 * Only one Canvas panel is visible at a time (session is switched as needed).
 
 Canvas can be disabled from Settings → **Allow Canvas**. When disabled, canvas
@@ -71,7 +71,7 @@ Notes:
 ## A2UI in Canvas
 
 A2UI is hosted by the Gateway canvas host and rendered inside the Canvas panel.
-When the Gateway advertises a Canvas host, the macOS app auto‑navigates to the
+When the Gateway advertises a Canvas host, the macOS app auto-navigates to the
 A2UI host page on first open.
 
 Default A2UI host URL:

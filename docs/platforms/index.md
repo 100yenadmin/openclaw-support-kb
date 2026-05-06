@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms/index"
-source_hash: "a4470fde0b6a91746fd2bbb0d9162346799e692aee22bda6ea85cde824d63689"
+source_hash: "c33ac511436713460c800d139758473d7e18029284ef4bd287c98e3033e22ca9"
 doc_path: "platforms/index.md"
 original_doc_path: "platforms/index.md"
 duplicate_index: 1
@@ -29,7 +29,7 @@ Native companion apps for Windows are also planned; the Gateway is recommended v
 * Windows: [Windows](/platforms/windows)
 * Linux: [Linux](/platforms/linux)
 
-## VPS & hosting
+## VPS and hosting
 
 * VPS hub: [VPS hosting](/vps)
 * Fly.io: [Fly.io](/install/fly)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "0aafd8da156d4cb3345ff3ac92f46e777105c5ef64f6ef89926c503dd115e81e"
+source_hash: "a3495ffc64a75d3ddddbd27af5d34735a7e82ecf2e30b728aeca7786a1942d93"
 doc_path: "help/troubleshooting.md"
 original_doc_path: "help/troubleshooting.md"
 duplicate_index: 1
@@ -86,6 +86,40 @@ Example:
 ```
 
 Reference: [Plugin architecture](/plugins/architecture)
+
+## Plugin present but blocked by suspicious ownership
+
+If `openclaw doctor`, setup, or startup warnings show:
+
+```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+blocked plugin candidate: suspicious ownership (... uid=1000, expected uid=0 or root)
+plugin present but blocked
+```
+
+the plugin files are owned by a different Unix user than the process loading
+them. Do not remove the plugin config. Fix the file ownership or run OpenClaw as
+the same user that owns the state directory.
+
+Docker installs normally run as `node` (uid `1000`). For the default Docker
+setup, repair the host bind mounts:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+sudo chown -R 1000:1000 /path/to/openclaw-config /path/to/openclaw-workspace
+openclaw doctor --fix
+```
+
+If you intentionally run OpenClaw as root, repair the managed plugin root to
+root ownership instead:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+sudo chown -R root:root /path/to/openclaw-config/npm
+openclaw doctor --fix
+```
+
+Deeper docs:
+
+* [Plugin path ownership](/tools/plugin#blocked-plugin-path-ownership)
+* [Docker permissions](/install/docker#permissions-and-eacces)
 
 ## Decision tree
 

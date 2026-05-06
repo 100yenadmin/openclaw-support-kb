@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave search"
 source: "https://docs.openclaw.ai/tools/brave-search"
-source_hash: "5361fbec1e2379a633fa2c2b0af7fc0180618bbc1b6c4627004b4b4252cfae56"
+source_hash: "0993b3b9c7c0be50445cabca8f893149637c7e90c5e7c1b078d50a49b956960a"
 doc_path: "tools/brave-search.md"
 original_doc_path: "tools/brave-search.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/tools/brave-search
 
 
-
-# Brave Search API
 
 OpenClaw supports Brave Search API as a `web_search` provider.
 

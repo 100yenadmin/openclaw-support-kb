@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS VMs"
 source: "https://docs.openclaw.ai/install/macos-vm"
-source_hash: "c11c5dbdd123ada7ccb6f4bf5f63ab65dcde30a69a0e38846b8b2c21dd8c238a"
+source_hash: "ad5677d130b17681a5b6d3e57d3d60ab7367a7dd900b83ac23d6109145f4b46f"
 doc_path: "install/macos-vm.md"
 original_doc_path: "install/macos-vm.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/macos-vm
 
 
-
-# OpenClaw on macOS VMs (Sandboxing)
 
 ## Recommended default (most users)
 

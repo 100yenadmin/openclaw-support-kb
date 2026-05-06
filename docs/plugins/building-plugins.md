@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "43d82d500101f85f2b933d471a481d70f5e59d96a53d000d3f385ccb078b5718"
+source_hash: "a2e8bc4c510dcb83a26f651e0b44e60e8021e72e36ccbad67ea983b1784ae2d4"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -43,7 +43,7 @@ install from npm during the launch cutover.
   </Card>
 
   <Card title="Tool / hook plugin" icon="wrench" href="/plugins/hooks">
-    Register agent tools, event hooks, or services — continue below
+    Register agent tools, event hooks, or services - continue below
   </Card>
 </CardGroup>
 
@@ -131,7 +131,7 @@ and provider plugins have dedicated guides linked above.
     ```
 
     `definePluginEntry` is for non-channel plugins. For channels, use
-    `defineChannelPluginEntry` — see [Channel Plugins](/plugins/sdk-channel-plugins).
+    `defineChannelPluginEntry` - see [Channel Plugins](/plugins/sdk-channel-plugins).
     For full entry point options, see [Entry Points](/plugins/sdk-entrypoints).
   </Step>
 
@@ -147,7 +147,7 @@ and provider plugins have dedicated guides linked above.
     Bare package specs like `@myorg/openclaw-my-plugin` install from npm during
     the launch cutover. Use `clawhub:` when you want ClawHub resolution.
 
-    **In-repo plugins:** place under the bundled plugin workspace tree — automatically discovered.
+    **In-repo plugins:** place under the bundled plugin workspace tree - automatically discovered.
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     pnpm test -- <bundled-plugin-root>/my-plugin/
@@ -222,7 +222,7 @@ available) or optional (user opt-in):
 
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 register(api) {
-  // Required tool — always available
+  // Required tool - always available
   api.registerTool({
     name: "my_tool",
     description: "Do a thing",
@@ -232,7 +232,7 @@ register(api) {
     },
   });
 
-  // Optional tool — user must add to allowlist
+  // Optional tool - user must add to allowlist
   api.registerTool(
     {
       name: "workflow_tool",
@@ -340,7 +340,7 @@ import { ... } from "openclaw/plugin-sdk";
 For the full subpath reference, see [SDK Overview](/plugins/sdk-overview).
 
 Within your plugin, use local barrel files (`api.ts`, `runtime-api.ts`) for
-internal imports — never import your own plugin through its SDK path.
+internal imports - never import your own plugin through its SDK path.
 
 For provider plugins, keep provider-specific helpers in those package-root
 barrels unless the seam is truly generic. Current bundled examples:
@@ -405,8 +405,8 @@ reserved surfaces, not as the default pattern for new third-party plugins.
 
 ## Related
 
-* [Plugin Architecture](/plugins/architecture) — internal architecture deep dive
-* [SDK Overview](/plugins/sdk-overview) — Plugin SDK reference
-* [Manifest](/plugins/manifest) — plugin manifest format
-* [Channel Plugins](/plugins/sdk-channel-plugins) — building channel plugins
-* [Provider Plugins](/plugins/sdk-provider-plugins) — building provider plugins
+* [Plugin Architecture](/plugins/architecture) - internal architecture deep dive
+* [SDK Overview](/plugins/sdk-overview) - Plugin SDK reference
+* [Manifest](/plugins/manifest) - plugin manifest format
+* [Channel Plugins](/plugins/sdk-channel-plugins) - building channel plugins
+* [Provider Plugins](/plugins/sdk-provider-plugins) - building provider plugins

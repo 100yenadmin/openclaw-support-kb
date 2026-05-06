@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "de48028f363fcde4994a89f894aed7e6749301ad44be44b841cf722d9b3fee52"
+source_hash: "2cb20550382f23e84deaaea762559cfd259898fd90c8f8c418ec0e67dffcc2f6"
 doc_path: "gateway/cli-backends.md"
 original_doc_path: "gateway/cli-backends.md"
 duplicate_index: 1
@@ -23,7 +23,7 @@ rate-limited, or temporarily misbehaving. This is intentionally conservative:
 * **Images can be passed through** if the CLI accepts image paths.
 
 This is designed as a **safety net** rather than a primary path. Use it when you
-want “always works” text responses without relying on external APIs.
+want "always works" text responses without relying on external APIs.
 
 If you want a full harness runtime with ACP session controls, background tasks,
 thread/conversation binding, and persistent external coding sessions, use
@@ -55,7 +55,7 @@ command path:
 }
 ```
 
-That’s it. No keys, no extra auth config needed beyond the CLI itself.
+That's it. No keys, no extra auth config needed beyond the CLI itself.
 
 If you use a bundled CLI backend as the **primary message provider** on a
 gateway host, OpenClaw now auto-loads the owning bundled plugin when your config
@@ -403,7 +403,7 @@ children and Streamable HTTP/SSE streams do not outlive the run.
   `bundleMcp: true`.
 * **Streaming is backend-specific.** Some backends stream JSONL; others buffer
   until exit.
-* **Structured outputs** depend on the CLI’s JSON format.
+* **Structured outputs** depend on the CLI's JSON format.
 * **Codex CLI sessions** resume via text output (no JSONL), which is less
   structured than the initial `--json` run. OpenClaw sessions still work
   normally.

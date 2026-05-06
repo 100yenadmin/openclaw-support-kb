@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QR"
 source: "https://docs.openclaw.ai/cli/qr"
-source_hash: "20073a3e559b2967cdcf45513982c001788df91fc5b37aa0fe3430378970e29c"
+source_hash: "24361d73b6c7060cf24c2b126bd76f4724ad2bc9f530a3ea9739c1b929ec6e69"
 doc_path: "cli/qr.md"
 original_doc_path: "cli/qr.md"
 duplicate_index: 1
@@ -45,7 +45,7 @@ openclaw qr --url wss://gateway.example/ws
 * In the built-in node/operator bootstrap flow, the primary node token still lands with `scopes: []`.
 * If bootstrap handoff also issues an operator token, it stays bounded to the bootstrap allowlist: `operator.approvals`, `operator.read`, `operator.talk.secrets`, `operator.write`.
 * Bootstrap scope checks are role-prefixed. That operator allowlist only satisfies operator requests; non-operator roles still need scopes under their own role prefix.
-* Mobile pairing fails closed for Tailscale/public `ws://` gateway URLs. Private LAN `ws://` remains supported, but Tailscale/public mobile routes should use Tailscale Serve/Funnel or a `wss://` gateway URL.
+* Mobile pairing fails closed for Tailscale/public `ws://` gateway URLs. Private LAN addresses and `.local` Bonjour hosts remain supported over `ws://`, but Tailscale/public mobile routes should use Tailscale Serve/Funnel or a `wss://` gateway URL.
 * With `--remote`, OpenClaw requires either `gateway.remote.url` or
   `gateway.tailscale.mode=serve|funnel`.
 * With `--remote`, if effectively active remote credentials are configured as SecretRefs and you do not pass `--token` or `--password`, the command resolves them from the active gateway snapshot. If gateway is unavailable, the command fails fast.

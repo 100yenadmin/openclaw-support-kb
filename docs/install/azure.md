@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure"
 source: "https://docs.openclaw.ai/install/azure"
-source_hash: "7d6851d46fd857ed21e8845858986cd49a8e9307dd9870e8eee73398a0e2f2b7"
+source_hash: "ef6cb14757d70d2a8ff2a33d250e16e611b610931afecaaf5bc1fc47542627e2"
 doc_path: "install/azure.md"
 original_doc_path: "install/azure.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/azure
 
 
-
-# OpenClaw on Azure Linux VM
 
 This guide sets up an Azure Linux VM with the Azure CLI, applies Network Security Group (NSG) hardening, configures Azure Bastion for SSH access, and installs OpenClaw.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SenseAudio"
 source: "https://docs.openclaw.ai/providers/senseaudio"
-source_hash: "d597a03cc386fb7afaf1756ba50ea18b85b8dea09c786f1bda843cb866ba291f"
+source_hash: "c9aa2f294d3f784a4a8d036d5202819f5b0cf34cda15ce581fe1b09e34d8ac4c"
 doc_path: "providers/senseaudio.md"
 original_doc_path: "providers/senseaudio.md"
 duplicate_index: 1
@@ -13,22 +13,20 @@ Source: https://docs.openclaw.ai/providers/senseaudio
 
 
 
-# SenseAudio
+SenseAudio can transcribe inbound audio and voice-note attachments through OpenClaw's shared `tools.media.audio` pipeline. OpenClaw posts multipart audio to the OpenAI-compatible transcription endpoint and injects the returned text as `{{Transcript}}` plus an `[Audio]` block.
 
-SenseAudio can transcribe inbound audio/voice-note attachments through
-OpenClaw's shared `tools.media.audio` pipeline. OpenClaw posts multipart audio
-to the OpenAI-compatible transcription endpoint and injects the returned text
-as `{{Transcript}}` plus an `[Audio]` block.
-
-| Detail        | Value                                            |
+| Property      | Value                                            |
 | ------------- | ------------------------------------------------ |
-| Website       | [senseaudio.cn](https://senseaudio.cn)           |
-| Docs          | [senseaudio.cn/docs](https://senseaudio.cn/docs) |
-| Auth          | `SENSEAUDIO_API_KEY`                             |
+| Provider id   | `senseaudio`                                     |
+| Plugin        | bundled, `enabledByDefault: true`                |
+| Contract      | `mediaUnderstandingProviders` (audio)            |
+| Auth env var  | `SENSEAUDIO_API_KEY`                             |
 | Default model | `senseaudio-asr-pro-1.5-260319`                  |
 | Default URL   | `https://api.senseaudio.cn/v1`                   |
+| Website       | [senseaudio.cn](https://senseaudio.cn)           |
+| Docs          | [senseaudio.cn/docs](https://senseaudio.cn/docs) |
 
-## Getting Started
+## Getting started
 
 <Steps>
   <Step title="Set your API key">
@@ -72,3 +70,8 @@ as `{{Transcript}}` plus an `[Audio]` block.
   SenseAudio is batch STT only in OpenClaw. Voice Call realtime transcription
   continues to use providers with streaming STT support.
 </Note>
+
+## Related
+
+* [Media understanding (audio)](/nodes/audio)
+* [Model providers](/concepts/model-providers)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "b6d7106dc39c34377ee533defb09bef897f23d26fb341ac35df38d7883474631"
+source_hash: "7ef4a499a9bf8867512f2f7de4302af2b3f29123319bff41d0ee51bb4e6481d0"
 doc_path: "providers/runway.md"
 original_doc_path: "providers/runway.md"
 duplicate_index: 1
@@ -13,13 +13,17 @@ Source: https://docs.openclaw.ai/providers/runway
 
 
 
-OpenClaw ships a bundled `runway` provider for hosted video generation.
+OpenClaw ships a bundled `runway` provider for hosted video generation. The plugin is enabled by default and registers the `runway` provider against the `videoGenerationProviders` contract.
 
-| Property    | Value                                                             |
-| ----------- | ----------------------------------------------------------------- |
-| Provider id | `runway`                                                          |
-| Auth        | `RUNWAYML_API_SECRET` (canonical) or `RUNWAY_API_KEY`             |
-| API         | Runway task-based video generation (`GET /v1/tasks/{id}` polling) |
+| Property        | Value                                                             |
+| --------------- | ----------------------------------------------------------------- |
+| Provider id     | `runway`                                                          |
+| Plugin          | bundled, `enabledByDefault: true`                                 |
+| Auth env vars   | `RUNWAYML_API_SECRET` (canonical) or `RUNWAY_API_KEY`             |
+| Onboarding flag | `--auth-choice runway-api-key`                                    |
+| Direct CLI flag | `--runway-api-key <key>`                                          |
+| API             | Runway task-based video generation (`GET /v1/tasks/{id}` polling) |
+| Default model   | `runway/gen4.5`                                                   |
 
 ## Getting started
 
@@ -41,22 +45,30 @@ OpenClaw ships a bundled `runway` provider for hosted video generation.
   </Step>
 </Steps>
 
-## Supported modes
+## Supported modes and models
 
-| Mode           | Model              | Reference input         |
-| -------------- | ------------------ | ----------------------- |
-| Text-to-video  | `gen4.5` (default) | None                    |
-| Image-to-video | `gen4.5`           | 1 local or remote image |
-| Video-to-video | `gen4_aleph`       | 1 local or remote video |
+The provider exposes seven Runway models split across three modes. The same model id can serve more than one mode (for example `gen4.5` works for both text-to-video and image-to-video).
 
-<Note>
-  Local image and video references are supported via data URIs. Text-only runs
-  currently expose `16:9` and `9:16` aspect ratios.
-</Note>
+| Mode           | Models                                                                 | Reference input         |
+| -------------- | ---------------------------------------------------------------------- | ----------------------- |
+| Text-to-video  | `gen4.5` (default), `veo3.1`, `veo3.1_fast`, `veo3`                    | None                    |
+| Image-to-video | `gen4.5`, `gen4_turbo`, `gen3a_turbo`, `veo3.1`, `veo3.1_fast`, `veo3` | 1 local or remote image |
+| Video-to-video | `gen4_aleph`                                                           | 1 local or remote video |
+
+Local image and video references are supported via data URIs.
+
+| Aspect ratios         | Allowed values                              |
+| --------------------- | ------------------------------------------- |
+| Text-to-video         | `16:9`, `9:16`                              |
+| Image and video edits | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `21:9` |
 
 <Warning>
-  Video-to-video currently requires `runway/gen4_aleph` specifically.
+  Video-to-video currently requires `runway/gen4_aleph`. Other Runway model ids reject video reference inputs.
 </Warning>
+
+<Note>
+  Picking a Runway model id from the wrong column produces an explicit error before the API request leaves OpenClaw. The provider validates `model` against the mode's allowlist (`TEXT_ONLY_MODELS`, `IMAGE_MODELS`, `VIDEO_MODELS`) in `extensions/runway/video-generation-provider.ts`.
+</Note>
 
 ## Configuration
 

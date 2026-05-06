@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hetzner"
 source: "https://docs.openclaw.ai/install/hetzner"
-source_hash: "23fe25b8852708ed409b111c234aacdec52cca724cb2da83892e9af0fb0ce4ec"
+source_hash: "fc23420622c219e549894d85676ad6746ebdfed5ebb0679255e9e675f53c917c"
 doc_path: "install/hetzner.md"
 original_doc_path: "install/hetzner.md"
 duplicate_index: 1
@@ -19,7 +19,7 @@ Source: https://docs.openclaw.ai/install/hetzner
 
 Run a persistent OpenClaw Gateway on a Hetzner VPS using Docker, with durable state, baked-in binaries, and safe restart behavior.
 
-If you want “OpenClaw 24/7 for \~\$5”, this is the simplest reliable setup.
+If you want "OpenClaw 24/7 for \~\$5", this is the simplest reliable setup.
 Hetzner pricing changes; pick the smallest Debian/Ubuntu VPS and scale up if you hit OOMs.
 
 Security model reminder:

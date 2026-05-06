@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "d1cd5d5c5095910ce160175104d8f86f23616267b926111234cc8a529e649b71"
+source_hash: "29d138d93752ec38633cfcdcfb63fef8096b8331291099f633b3974e9b15eeb8"
 doc_path: "providers/mistral.md"
 original_doc_path: "providers/mistral.md"
 duplicate_index: 1
@@ -13,13 +13,21 @@ Source: https://docs.openclaw.ai/providers/mistral
 
 
 
-OpenClaw supports Mistral for both text/image model routing (`mistral/...`) and
-audio transcription via Voxtral in media understanding.
-Mistral can also be used for memory embeddings (`memorySearch.provider = "mistral"`).
+OpenClaw includes a bundled Mistral plugin that registers four contracts: chat completions, media understanding (Voxtral batch transcription), realtime STT for Voice Call (Voxtral Realtime), and memory embeddings (`mistral-embed`).
 
-* Provider: `mistral`
-* Auth: `MISTRAL_API_KEY`
-* API: Mistral Chat Completions (`https://api.mistral.ai/v1`)
+| Property         | Value                                       |
+| ---------------- | ------------------------------------------- |
+| Provider id      | `mistral`                                   |
+| Plugin           | bundled, `enabledByDefault: true`           |
+| Auth env var     | `MISTRAL_API_KEY`                           |
+| Onboarding flag  | `--auth-choice mistral-api-key`             |
+| Direct CLI flag  | `--mistral-api-key <key>`                   |
+| API              | OpenAI-compatible (`openai-completions`)    |
+| Base URL         | `https://api.mistral.ai/v1`                 |
+| Default model    | `mistral/mistral-large-latest`              |
+| Embedding model  | `mistral-embed`                             |
+| Voxtral batch    | `voxtral-mini-latest` (audio transcription) |
+| Voxtral realtime | `voxtral-mini-transcribe-realtime-2602`     |
 
 ## Getting started
 
@@ -163,10 +171,10 @@ streaming STT provider.
   </Accordion>
 
   <Accordion title="Auth and base URL">
-    * Mistral auth uses `MISTRAL_API_KEY`.
-    * Provider base URL defaults to `https://api.mistral.ai/v1`.
+    * Mistral auth uses `MISTRAL_API_KEY` (Bearer header).
+    * Provider base URL defaults to `https://api.mistral.ai/v1` and accepts the standard OpenAI-compatible chat-completions request shape.
     * Onboarding default model is `mistral/mistral-large-latest`.
-    * Z.AI uses Bearer auth with your API key.
+    * Override the base URL under `models.providers.mistral.baseUrl` only when Mistral explicitly publishes a regional endpoint you need.
   </Accordion>
 </AccordionGroup>
 

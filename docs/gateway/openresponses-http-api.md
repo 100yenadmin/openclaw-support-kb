@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
-source_hash: "9df40986cf1e2870e62d87e6c7fd7bbf97bc1d71b1baf03b70ce389104e3b338"
+source_hash: "5b3729a09e36aeae5c81ac48587a15b8cec84f49ae9462cb35adc9e6d975f19d"
 doc_path: "gateway/openresponses-http-api.md"
 original_doc_path: "gateway/openresponses-http-api.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/gateway/openresponses-http-api
 
 
 
-OpenClaw’s Gateway can serve an OpenResponses-compatible `POST /v1/responses` endpoint.
+OpenClaw's Gateway can serve an OpenResponses-compatible `POST /v1/responses` endpoint.
 
 This endpoint is **disabled by default**. Enable it in config first.
 
@@ -102,7 +102,7 @@ Supported:
 Roles: `system`, `developer`, `user`, `assistant`.
 
 * `system` and `developer` are appended to the system prompt.
-* The most recent `user` or `function_call_output` item becomes the “current message.”
+* The most recent `user` or `function_call_output` item becomes the "current message."
 * Earlier user/assistant messages are included as history for context.
 
 ### `function_call_output` (turn-based tools)

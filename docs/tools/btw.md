@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BTW side questions"
 source: "https://docs.openclaw.ai/tools/btw"
-source_hash: "5e43038c04231bc74cac38833dd140e3e348dc80a7f9f468c7b3e95f77cfeec8"
+source_hash: "44d073c71f69757124a76320a45ae25a2502440487fd6278bd800ff7f1775053"
 doc_path: "tools/btw.md"
 original_doc_path: "tools/btw.md"
 duplicate_index: 1
@@ -143,6 +143,20 @@ In that case, ask normally in the main session instead of using BTW.
 
 ## Related
 
-* [Slash commands](/tools/slash-commands)
-* [Thinking Levels](/tools/thinking)
-* [Session](/concepts/session)
+<CardGroup>
+  <Card title="Slash commands" href="/tools/slash-commands" icon="terminal">
+    Native command catalog and chat directives.
+  </Card>
+
+  <Card title="Thinking levels" href="/tools/thinking" icon="brain">
+    Reasoning effort levels for the side-question model call.
+  </Card>
+
+  <Card title="Session" href="/concepts/session" icon="comments">
+    Session keys, history, and persistence semantics.
+  </Card>
+
+  <Card title="Steer command" href="/tools/steer" icon="arrow-right">
+    Inject a steering message into the active run without ending it.
+  </Card>
+</CardGroup>

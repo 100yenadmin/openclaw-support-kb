@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway runbook"
 source: "https://docs.openclaw.ai/gateway/index"
-source_hash: "b73bf327c508b68859ddfc7c2c9caa4c4d031117492064f808ce460929048b44"
+source_hash: "9c5f73904985dfaa218d18020aaf93a0a6b738dd2772fba558e7982e07ba9158"
 doc_path: "gateway/index.md"
 original_doc_path: "gateway/index.md"
 duplicate_index: 1
@@ -88,7 +88,7 @@ Use this page for day-1 startup and day-2 operations of the Gateway service.
 
 ## OpenAI-compatible endpoints
 
-OpenClaw’s highest-leverage compatibility surface is now:
+OpenClaw's highest-leverage compatibility surface is now:
 
 * `GET /v1/models`
 * `GET /v1/models/{id}`
@@ -188,42 +188,6 @@ OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b opencla
 ```
 
 Detailed setup: [/gateway/multiple-gateways](/gateway/multiple-gateways).
-
-## VoiceClaw real-time brain endpoint
-
-OpenClaw exposes a VoiceClaw-compatible real-time WebSocket endpoint at
-`/voiceclaw/realtime`. Use it when a VoiceClaw desktop client should talk
-directly to a real-time OpenClaw brain instead of going through a separate relay
-process.
-
-The endpoint uses Gemini Live for real-time audio and calls OpenClaw as the
-brain by exposing OpenClaw tools directly to Gemini Live. Tool calls return an
-immediate `working` result to keep the voice turn responsive, then OpenClaw
-executes the actual tool asynchronously and injects the result back into the
-live session. Set `GEMINI_API_KEY` in the gateway process environment. If
-gateway auth is enabled, the desktop client sends the gateway token or password
-in its first `session.config` message.
-
-Real-time brain access runs owner-authorized OpenClaw agent commands. Keep
-`gateway.auth.mode: "none"` limited to loopback-only test instances. Non-local
-real-time brain connections require gateway auth.
-
-For an isolated test gateway, run a separate instance with its own port, config,
-and state:
-
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-OPENCLAW_CONFIG_PATH=/path/to/openclaw-realtime/openclaw.json \
-OPENCLAW_STATE_DIR=/path/to/openclaw-realtime/state \
-OPENCLAW_SKIP_CHANNELS=1 \
-GEMINI_API_KEY=... \
-openclaw gateway --port 19789
-```
-
-Then configure VoiceClaw to use:
-
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
-ws://127.0.0.1:19789/voiceclaw/realtime
-```
 
 ## Remote access
 

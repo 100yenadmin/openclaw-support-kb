@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "937ab7dbba4425d5519b4e73ee9491fe0bf129aded99d337e29cc1500ad656fe"
+source_hash: "aeb1ae60aabbf9d6326bb6ae64bf010f58357a5eda2949ca831100a1722158a4"
 doc_path: "concepts/features.md"
 original_doc_path: "concepts/features.md"
 duplicate_index: 1
@@ -88,5 +88,20 @@ Source: https://docs.openclaw.ai/concepts/features
 
 ## Related
 
-* [Experimental features](/concepts/experimental-features)
-* [Agent runtime](/concepts/agent)
+<CardGroup>
+  <Card title="Experimental features" href="/concepts/experimental-features" icon="flask">
+    Opt-in features that have not yet shipped to the default surface.
+  </Card>
+
+  <Card title="Agent runtime" href="/concepts/agent" icon="robot">
+    Agent runtime model and how runs are dispatched.
+  </Card>
+
+  <Card title="Channels" href="/channels" icon="message-square">
+    Connect Telegram, WhatsApp, Discord, Slack, and more from one Gateway.
+  </Card>
+
+  <Card title="Plugins" href="/tools/plugin" icon="plug">
+    Bundled and third-party plugins that extend OpenClaw.
+  </Card>
+</CardGroup>

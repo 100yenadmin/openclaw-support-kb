@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK API design"
 source: "https://docs.openclaw.ai/reference/openclaw-sdk-api-design"
-source_hash: "97876023471c530375e3231226a21893863b4c0db95799b7adc062880723e27b"
+source_hash: "ca7d17bcb9f0ec9aeba120a21301ee880b612db0a164ac11acfd9a5cfd411570"
 doc_path: "reference/openclaw-sdk-api-design.md"
 original_doc_path: "reference/openclaw-sdk-api-design.md"
 duplicate_index: 1
@@ -63,18 +63,18 @@ oc.models.list();
 oc.models.status(); // Gateway models.authStatus
 
 oc.tools.list();
-oc.tools.invoke(...); // future API: current SDK throws unsupported
+oc.tools.invoke("tool-name", { sessionKey, idempotencyKey });
 
-oc.artifacts.list({ runId }); // future API: current SDK throws unsupported
-oc.artifacts.get(artifactId); // future API: current SDK throws unsupported
-oc.artifacts.download(artifactId); // future API: current SDK throws unsupported
+oc.artifacts.list({ runId });
+oc.artifacts.get(artifactId, { runId });
+oc.artifacts.download(artifactId, { runId });
 
 oc.approvals.list();
 oc.approvals.respond(approvalId, ...);
 
-oc.environments.list(); // future API: current SDK throws unsupported
+oc.environments.list();
 oc.environments.create(...); // future API: current SDK throws unsupported
-oc.environments.status(environmentId); // future API: current SDK throws unsupported
+oc.environments.status(environmentId);
 oc.environments.delete(environmentId); // future API: current SDK throws unsupported
 ```
 
@@ -384,7 +384,7 @@ Benefits:
 * low-level consumers still have full protocol access
 * high-level consumers get the small product API
 
-## Related docs
+## Related
 
 * [OpenClaw App SDK](/concepts/openclaw-sdk)
 * [Gateway RPC reference](/reference/rpc)

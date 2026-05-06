@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "e95cb4d590780029851f202cc8d782b6ef677e709d8e2d0a1af9e696e617cbf5"
+source_hash: "50dabe41c29bacb489899de04b4759870db0b84b46b29f49eeb64144a4959a70"
 doc_path: "gateway/logging.md"
 original_doc_path: "gateway/logging.md"
 duplicate_index: 1
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/gateway/logging
 
 For a user-facing overview (CLI + Control UI + config), see [/logging](/logging).
 
-OpenClaw has two log “surfaces”:
+OpenClaw has two log "surfaces":
 
 * **Console output** (what you see in the terminal / Debug UI).
 * **File logs** (JSON lines) written by the gateway logger.
@@ -97,7 +97,7 @@ does not make them emit raw secrets.
 
 The gateway prints WebSocket protocol logs in two modes:
 
-* **Normal mode (no `--verbose`)**: only “interesting” RPC results are printed:
+* **Normal mode (no `--verbose`)**: only "interesting" RPC results are printed:
   * errors (`ok=false`)
   * slow calls (default threshold: `>= 50ms`)
   * parse errors

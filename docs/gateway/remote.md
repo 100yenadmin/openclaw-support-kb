@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "dc73390a33209b877b514c477755d00b1bad713f3202e87d061b21adce8a0787"
+source_hash: "961eb7786f30e3f1bfce44936d9b2e874559ddf2c2d3d6d3243bed3ce45855dd"
 doc_path: "gateway/remote.md"
 original_doc_path: "gateway/remote.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/gateway/remote
 
 
 
-This repo supports “remote over SSH” by keeping a single Gateway (the master) running on a dedicated host (desktop/server) and connecting clients to it.
+This repo supports "remote over SSH" by keeping a single Gateway (the master) running on a dedicated host (desktop/server) and connecting clients to it.
 
 * For **operators (you / the macOS app)**: SSH tunneling is the universal fallback.
 * For **nodes (iOS/Android and future devices)**: connect to the Gateway **WebSocket** (LAN/tailnet or SSH tunnel as needed).
@@ -69,7 +69,7 @@ Flow example (Telegram → node):
 Notes:
 
 * **Nodes do not run the gateway service.** Only one gateway should run per host unless you intentionally run isolated profiles (see [Multiple gateways](/gateway/multiple-gateways)).
-* macOS app “node mode” is just a node client over the Gateway WebSocket.
+* macOS app "node mode" is just a node client over the Gateway WebSocket.
 
 ## SSH tunnel (CLI + tools)
 
@@ -109,7 +109,7 @@ You can persist a remote target so CLI commands use it by default:
 ```
 
 When the gateway is loopback-only, keep the URL at `ws://127.0.0.1:18789` and open the SSH tunnel first.
-In the macOS app’s SSH tunnel transport, discovered gateway hostnames belong in
+In the macOS app's SSH tunnel transport, discovered gateway hostnames belong in
 `gateway.remote.sshTarget`; `gateway.remote.url` remains the local tunnel URL.
 
 ## Credential precedence
@@ -135,7 +135,7 @@ Gateway credential resolution follows one shared contract across call/probe/stat
 WebChat no longer uses a separate HTTP port. The SwiftUI chat UI connects directly to the Gateway WebSocket.
 
 * Forward `18789` over SSH (see above), then connect clients to `ws://127.0.0.1:18789`.
-* On macOS, prefer the app’s “Remote over SSH” mode, which manages the tunnel automatically.
+* On macOS, prefer the app's "Remote over SSH" mode, which manages the tunnel automatically.
 
 ## macOS app Remote over SSH
 
@@ -145,7 +145,7 @@ Runbook: [macOS remote access](/platforms/mac/remote).
 
 ## Security rules (remote/VPN)
 
-Short version: **keep the Gateway loopback-only** unless you’re sure you need a bind.
+Short version: **keep the Gateway loopback-only** unless you're sure you need a bind.
 
 * **Loopback + SSH/Tailscale Serve** is the safest default (no public exposure).
 * Plaintext `ws://` is loopback-only by default. For trusted private networks,

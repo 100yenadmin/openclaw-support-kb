@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "e9a39a604e9358d0580fd2536285b8757eb8db1b4f76d4279914355932d3ac21"
+source_hash: "1d6f68360cc023c9969f50a12c32bab9485fc6911acbd90402f6601a2469b8cc"
 doc_path: "channels/signal.md"
 original_doc_path: "channels/signal.md"
 duplicate_index: 1
@@ -233,7 +233,7 @@ Groups:
 
 * Use `message action=react` with `channel=signal`.
 * Targets: sender E.164 or UUID (use `uuid:<id>` from pairing output; bare UUID works too).
-* `messageId` is the Signal timestamp for the message you’re reacting to.
+* `messageId` is the Signal timestamp for the message you're reacting to.
 * Group reactions require `targetAuthor` or `targetAuthorUuid`.
 
 Examples:

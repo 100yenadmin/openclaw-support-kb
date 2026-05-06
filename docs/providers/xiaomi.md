@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "11dcc7cb174e2aeba058710af67b45b66ca3e7ae8907113f2e04c589a57ca16a"
+source_hash: "0b5c0d02b39a1f7185326547ba81c65627bc524b434751532f60a6b12e4b84a2"
 doc_path: "providers/xiaomi.md"
 original_doc_path: "providers/xiaomi.md"
 duplicate_index: 1
@@ -13,15 +13,20 @@ Source: https://docs.openclaw.ai/providers/xiaomi
 
 
 
-Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw uses the Xiaomi
-OpenAI-compatible endpoint with API-key authentication.
+Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw includes a bundled `xiaomi` plugin that registers both an OpenAI-compatible chat provider and a speech (TTS) provider against the same `XIAOMI_API_KEY`.
 
-| Property | Value                           |
-| -------- | ------------------------------- |
-| Provider | `xiaomi`                        |
-| Auth     | `XIAOMI_API_KEY`                |
-| API      | OpenAI-compatible               |
-| Base URL | `https://api.xiaomimimo.com/v1` |
+| Property        | Value                                    |
+| --------------- | ---------------------------------------- |
+| Provider id     | `xiaomi`                                 |
+| Plugin          | bundled, `enabledByDefault: true`        |
+| Auth env var    | `XIAOMI_API_KEY`                         |
+| Onboarding flag | `--auth-choice xiaomi-api-key`           |
+| Direct CLI flag | `--xiaomi-api-key <key>`                 |
+| Contracts       | chat completions + `speechProviders`     |
+| API             | OpenAI-compatible (`openai-completions`) |
+| Base URL        | `https://api.xiaomimimo.com/v1`          |
+| Default model   | `xiaomi/mimo-v2-flash`                   |
+| TTS default     | `mimo-v2.5-tts`, voice `mimo_default`    |
 
 ## Getting started
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "70942899dc946cf20e44e5292cbccfd0fc0a574df4b427436cae624334d5de86"
+source_hash: "a1451c50132fb432ba9dd4c42821c6e091a8549b5788d15c369e21dfb769a803"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1
@@ -226,6 +226,14 @@ Choose your preferred auth method and follow the setup steps.
     | `openai-codex/gpt-5.5`      | omitted / `runtime: "pi"`  | ChatGPT/Codex OAuth through PI                            | Codex sign-in                                    |
     | `openai-codex/gpt-5.4-mini` | omitted / `runtime: "pi"`  | ChatGPT/Codex OAuth through PI                            | Codex sign-in                                    |
     | `openai-codex/gpt-5.5`      | `runtime: "auto"`          | Still PI unless a plugin explicitly claims `openai-codex` | Codex sign-in                                    |
+
+    <Warning>
+      Do not configure older `openai-codex/gpt-5.1*`, `openai-codex/gpt-5.2*`, or
+      `openai-codex/gpt-5.3*` model refs. ChatGPT/Codex OAuth accounts now reject
+      those models. Use `openai-codex/gpt-5.5` for the PI OAuth route, or
+      `openai/gpt-5.5` with `agentRuntime.id: "codex"` for native Codex runtime
+      execution.
+    </Warning>
 
     <Note>
       Keep using the `openai-codex` provider id for auth/profile commands. The

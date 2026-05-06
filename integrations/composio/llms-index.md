@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "8185dc93cbf3923d5fdd13e24d3ee47598a5cb3839b02f88fe5950f99160749a"
+source_hash: "ed1f63235fc1366ef8a6e51783c96f3d8b3783dc3979b4f0d716f33cd5ec8555"
 ---
 
 # Composio Documentation
@@ -186,8 +186,8 @@ source_hash: "8185dc93cbf3923d5fdd13e24d3ee47598a5cb3839b02f88fe5950f99160749a"
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
 - https://docs.composio.dev/reference/api-reference/migration.md
-- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/organization.md
+- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/tool-router.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md

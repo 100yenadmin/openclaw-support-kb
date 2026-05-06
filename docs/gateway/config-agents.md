@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
-source_hash: "ae27f10b506a7381a78f86ae95c3ea9d572b92c62d82f1d266da7abbb9b707b7"
+source_hash: "0440e51f22d44027a0bf3d70909807169d13068fabe02e2a1b87cb60ef7c0056"
 doc_path: "gateway/config-agents.md"
 original_doc_path: "gateway/config-agents.md"
 duplicate_index: 1
@@ -1378,6 +1378,18 @@ Defaults for Talk mode (macOS/iOS/Android).
     speechLocale: "ru-RU",
     silenceTimeoutMs: 1500,
     interruptOnSpeech: true,
+    realtime: {
+      provider: "openai",
+      providers: {
+        openai: {
+          model: "gpt-realtime",
+          voice: "alloy",
+        },
+      },
+      mode: "realtime",
+      transport: "webrtc",
+      brain: "agent-consult",
+    },
   },
 }
 ```

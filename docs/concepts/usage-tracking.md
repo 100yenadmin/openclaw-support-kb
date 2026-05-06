@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "d37fb191d329f08f77d0e2dc27fec673801622686d1d1cb0736c250fc006bf59"
+source_hash: "a070be23961e3c9939cdf651bb02f7fa5ca89acccf8b9f6f089335251a17a3df"
 doc_path: "concepts/usage-tracking.md"
 original_doc_path: "concepts/usage-tracking.md"
 duplicate_index: 1
@@ -27,12 +27,12 @@ Source: https://docs.openclaw.ai/concepts/usage-tracking
 
 ## Where it shows up
 
-* `/status` in chats: emoji‑rich status card with session tokens + estimated cost (API key only). Provider usage shows for the **current model provider** when available as a normalized `X% left` window.
+* `/status` in chats: emoji-rich status card with session tokens + estimated cost (API key only). Provider usage shows for the **current model provider** when available as a normalized `X% left` window.
 * `/usage off|tokens|full` in chats: per-response usage footer (OAuth shows tokens only).
 * `/usage cost` in chats: local cost summary aggregated from OpenClaw session logs.
 * CLI: `openclaw status --usage` prints a full per-provider breakdown.
 * CLI: `openclaw channels list` prints the same usage snapshot alongside provider config (use `--no-usage` to skip).
-* macOS menu bar: “Usage” section under Context (only if available).
+* macOS menu bar: "Usage" section under Context (only if available).
 
 ## Providers + credentials
 

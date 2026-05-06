@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Oracle Cloud"
 source: "https://docs.openclaw.ai/install/oracle"
-source_hash: "e4b83ca5b96277cdff6c7ab923f89a4db7b1643dd78a5f90ea186a9cb5597008"
+source_hash: "151d7518c69b42978f7ab49e798d7141adce3ffc1be1ed986c7f4c22157d547e"
 doc_path: "install/oracle.md"
 original_doc_path: "install/oracle.md"
 duplicate_index: 1
@@ -126,6 +126,62 @@ Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up
     Replace `<tailnet-name>` with your tailnet name (visible in `tailscale status`).
   </Step>
 </Steps>
+
+## Verify the security posture
+
+With the VCN locked down (only UDP 41641 open) and the Gateway bound to loopback, public traffic is blocked at the network edge and admin access is tailnet-only. That removes the need for several traditional VPS hardening steps:
+
+| Traditional step   | Needed?     | Why                                                                       |
+| ------------------ | ----------- | ------------------------------------------------------------------------- |
+| UFW firewall       | No          | The VCN blocks traffic before it reaches the instance.                    |
+| fail2ban           | No          | Port 22 is blocked at the VCN; no brute-force surface.                    |
+| sshd hardening     | No          | Tailscale SSH does not use sshd.                                          |
+| Disable root login | No          | Tailscale authenticates by tailnet identity, not system users.            |
+| SSH key-only auth  | No          | Same — tailnet identity replaces system SSH keys.                         |
+| IPv6 hardening     | Usually not | Depends on VCN/subnet settings; verify what is actually assigned/exposed. |
+
+Still recommended:
+
+* `chmod 700 ~/.openclaw` to restrict credential file permissions.
+* `openclaw security audit` for an OpenClaw-specific posture check.
+* Regular `sudo apt update && sudo apt upgrade` for OS patches.
+* Review devices in the [Tailscale admin console](https://login.tailscale.com/admin) periodically.
+
+Quick verification commands:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+# Confirm no public ports are listening
+sudo ss -tlnp | grep -v '127.0.0.1\|::1'
+
+# Verify Tailscale SSH is active
+tailscale status | grep -q 'offers: ssh' && echo "Tailscale SSH active"
+
+# Optional: disable sshd entirely once Tailscale SSH is confirmed working
+sudo systemctl disable --now ssh
+```
+
+## ARM notes
+
+The Always Free tier is ARM (`aarch64`). Most OpenClaw features work fine; a small number of native binaries need ARM builds:
+
+* Node.js, Telegram, WhatsApp (Baileys): pure JavaScript, no issues.
+* Most npm packages with native code: pre-built `linux-arm64` artifacts available.
+* Optional CLI helpers (e.g. Go/Rust binaries shipped by skills): check for an `aarch64` / `linux-arm64` release before installing.
+
+Verify the architecture with `uname -m` (should print `aarch64`). For binaries without an ARM build, install from source or skip them.
+
+## Persistence and backups
+
+OpenClaw state lives under:
+
+* `~/.openclaw/` — `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
+* `~/.openclaw/workspace/` — the agent workspace (SOUL.md, memory, artifacts).
+
+These survive reboots. To take a portable snapshot:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw backup create
+```
 
 ## Fallback: SSH tunnel
 

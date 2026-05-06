@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "e9fb3a82cf7bda6c51cb2e5328b787d8413a6e69a1a0b4d2f9748c542b9074fc"
+source_hash: "1ce7b04f45209b4d15fd4f8f2173575731adca922e1ad6e5ac9f7fbd6898a737"
 doc_path: "channels/mattermost.md"
 original_doc_path: "channels/mattermost.md"
 duplicate_index: 1
@@ -373,7 +373,7 @@ When a user clicks a button:
 <AccordionGroup>
   <Accordion title="Implementation notes">
     * Button callbacks use HMAC-SHA256 verification (automatic, no config needed).
-    * Mattermost strips callback data from its API responses (security feature), so all buttons are removed on click — partial removal is not possible.
+    * Mattermost strips callback data from its API responses (security feature), so all buttons are removed on click - partial removal is not possible.
     * Action IDs containing hyphens or underscores are sanitized automatically (Mattermost routing limitation).
   </Accordion>
 
@@ -402,7 +402,7 @@ External scripts and webhooks can post buttons directly via the Mattermost REST 
       {
         actions: [
           {
-            id: "mybutton01", // alphanumeric only — see below
+            id: "mybutton01", // alphanumeric only - see below
             type: "button", // required, or clicks are silently ignored
             name: "Approve", // display label
             style: "primary", // optional: "default", "primary", "danger"
@@ -427,11 +427,11 @@ External scripts and webhooks can post buttons directly via the Mattermost REST 
   **Critical rules**
 
   1. Attachments go in `props.attachments`, not top-level `attachments` (silently ignored).
-  2. Every action needs `type: "button"` — without it, clicks are swallowed silently.
-  3. Every action needs an `id` field — Mattermost ignores actions without IDs.
+  2. Every action needs `type: "button"` - without it, clicks are swallowed silently.
+  3. Every action needs an `id` field - Mattermost ignores actions without IDs.
   4. Action `id` must be **alphanumeric only** (`[a-zA-Z0-9]`). Hyphens and underscores break Mattermost's server-side action routing (returns 404). Strip them before use.
   5. `context.action_id` must match the button's `id` so the confirmation message shows the button name (e.g., "Approve") instead of a raw ID.
-  6. `context.action_id` is required — the interaction handler returns 400 without it.
+  6. `context.action_id` is required - the interaction handler returns 400 without it.
 </Warning>
 
 **HMAC token generation**
@@ -481,7 +481,7 @@ context = {**ctx, "_token": token}
   <Accordion title="Common HMAC pitfalls">
     * Python's `json.dumps` adds spaces by default (`{"key": "val"}`). Use `separators=(",", ":")` to match JavaScript's compact output (`{"key":"val"}`).
     * Always sign **all** context fields (minus `_token`). The gateway strips `_token` then signs everything remaining. Signing a subset causes silent verification failure.
-    * Use `sort_keys=True` — the gateway sorts keys before signing, and Mattermost may reorder context fields when storing the payload.
+    * Use `sort_keys=True` - the gateway sorts keys before signing, and Mattermost may reorder context fields when storing the payload.
     * Derive the secret from the bot token (deterministic), not random bytes. The secret must be the same across the process that creates buttons and the gateway that verifies.
   </Accordion>
 </AccordionGroup>
@@ -490,7 +490,7 @@ context = {**ctx, "_token": token}
 
 The Mattermost plugin includes a directory adapter that resolves channel and user names via the Mattermost API. This enables `#channel-name` and `@username` targets in `openclaw message send` and cron/webhook deliveries.
 
-No configuration is needed — the adapter uses the bot token from the account config.
+No configuration is needed - the adapter uses the bot token from the account config.
 
 ## Multi-account
 
@@ -544,8 +544,8 @@ Mattermost supports multiple accounts under `channels.mattermost.accounts`:
 
 ## Related
 
-* [Channel Routing](/channels/channel-routing) — session routing for messages
-* [Channels Overview](/channels) — all supported channels
-* [Groups](/channels/groups) — group chat behavior and mention gating
-* [Pairing](/channels/pairing) — DM authentication and pairing flow
-* [Security](/gateway/security) — access model and hardening
+* [Channel Routing](/channels/channel-routing) - session routing for messages
+* [Channels Overview](/channels) - all supported channels
+* [Groups](/channels/groups) - group chat behavior and mention gating
+* [Pairing](/channels/pairing) - DM authentication and pairing flow
+* [Security](/gateway/security) - access model and hardening

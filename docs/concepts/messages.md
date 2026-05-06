@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "db9e3e9ec9fbc26cab41d62a836e606a50aa7febba7e8c42621883af40261c8d"
+source_hash: "c3a87bce8766baf4f9ee88ed66adee9ef7d048b209b2832bdf19c0c0c6821da2"
 doc_path: "concepts/messages.md"
 original_doc_path: "concepts/messages.md"
 duplicate_index: 1
@@ -187,7 +187,7 @@ Details: [Configuration](/gateway/config-agents#messages) and channel docs.
 
 ## Silent replies
 
-The exact silent token `NO_REPLY` / `no_reply` means “do not deliver a user-visible reply”.
+The exact silent token `NO_REPLY` / `no_reply` means "do not deliver a user-visible reply".
 When a turn also has pending tool media, such as generated TTS audio, OpenClaw
 strips the silent text but still delivers the media attachment.
 OpenClaw resolves that behavior by conversation type:
@@ -212,6 +212,7 @@ parent stays quiet until the child completion event delivers the real reply.
 
 ## Related
 
+* [Message lifecycle refactor](/concepts/message-lifecycle-refactor) - target durable send and receive design
 * [Streaming](/concepts/streaming) — real-time message delivery
 * [Retry](/concepts/retry) — message delivery retry behavior
 * [Queue](/concepts/queue) — message processing queue

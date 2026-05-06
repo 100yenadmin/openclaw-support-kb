@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "d294ba4ff9a045e627b9fc240fb33b828e75582a899e33c831e463c4eb069692"
+source_hash: "90b5d7ae8cfffd5a40054dcaa1dc7c8836d9f6403961a5e9a0cba7e5708919cf"
 doc_path: "plugins/sdk-entrypoints.md"
 original_doc_path: "plugins/sdk-entrypoints.md"
 duplicate_index: 1
@@ -76,12 +76,12 @@ export default definePluginEntry({
 
 | Field          | Type                                                             | Required | Default             |
 | -------------- | ---------------------------------------------------------------- | -------- | ------------------- |
-| `id`           | `string`                                                         | Yes      | —                   |
-| `name`         | `string`                                                         | Yes      | —                   |
-| `description`  | `string`                                                         | Yes      | —                   |
-| `kind`         | `string`                                                         | No       | —                   |
+| `id`           | `string`                                                         | Yes      | -                   |
+| `name`         | `string`                                                         | Yes      | -                   |
+| `description`  | `string`                                                         | Yes      | -                   |
+| `kind`         | `string`                                                         | No       | -                   |
 | `configSchema` | `OpenClawPluginConfigSchema \| () => OpenClawPluginConfigSchema` | No       | Empty object schema |
-| `register`     | `(api: OpenClawPluginApi) => void`                               | Yes      | —                   |
+| `register`     | `(api: OpenClawPluginApi) => void`                               | Yes      | -                   |
 
 * `id` must match your `openclaw.plugin.json` manifest.
 * `kind` is for exclusive slots: `"memory"` or `"context-engine"`.
@@ -117,14 +117,14 @@ export default defineChannelPluginEntry({
 
 | Field                 | Type                                                             | Required | Default             |
 | --------------------- | ---------------------------------------------------------------- | -------- | ------------------- |
-| `id`                  | `string`                                                         | Yes      | —                   |
-| `name`                | `string`                                                         | Yes      | —                   |
-| `description`         | `string`                                                         | Yes      | —                   |
-| `plugin`              | `ChannelPlugin`                                                  | Yes      | —                   |
+| `id`                  | `string`                                                         | Yes      | -                   |
+| `name`                | `string`                                                         | Yes      | -                   |
+| `description`         | `string`                                                         | Yes      | -                   |
+| `plugin`              | `ChannelPlugin`                                                  | Yes      | -                   |
 | `configSchema`        | `OpenClawPluginConfigSchema \| () => OpenClawPluginConfigSchema` | No       | Empty object schema |
-| `setRuntime`          | `(runtime: PluginRuntime) => void`                               | No       | —                   |
-| `registerCliMetadata` | `(api: OpenClawPluginApi) => void`                               | No       | —                   |
-| `registerFull`        | `(api: OpenClawPluginApi) => void`                               | No       | —                   |
+| `setRuntime`          | `(runtime: PluginRuntime) => void`                               | No       | -                   |
+| `registerCliMetadata` | `(api: OpenClawPluginApi) => void`                               | No       | -                   |
+| `registerFull`        | `(api: OpenClawPluginApi) => void`                               | No       | -                   |
 
 * `setRuntime` is called during registration so you can store the runtime reference
   (typically via `createPluginRuntimeStore`). It is skipped during CLI metadata
@@ -280,8 +280,8 @@ Use `openclaw plugins inspect <id>` to see a plugin's shape.
 
 ## Related
 
-* [SDK Overview](/plugins/sdk-overview) — registration API and subpath reference
-* [Runtime Helpers](/plugins/sdk-runtime) — `api.runtime` and `createPluginRuntimeStore`
-* [Setup and Config](/plugins/sdk-setup) — manifest, setup entry, deferred loading
-* [Channel Plugins](/plugins/sdk-channel-plugins) — building the `ChannelPlugin` object
-* [Provider Plugins](/plugins/sdk-provider-plugins) — provider registration and hooks
+* [SDK Overview](/plugins/sdk-overview) - registration API and subpath reference
+* [Runtime Helpers](/plugins/sdk-runtime) - `api.runtime` and `createPluginRuntimeStore`
+* [Setup and Config](/plugins/sdk-setup) - manifest, setup entry, deferred loading
+* [Channel Plugins](/plugins/sdk-channel-plugins) - building the `ChannelPlugin` object
+* [Provider Plugins](/plugins/sdk-provider-plugins) - provider registration and hooks

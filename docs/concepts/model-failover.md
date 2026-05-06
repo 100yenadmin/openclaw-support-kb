@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "3b0765053218c83ce073a818f4ec15dc183e4e0bc294e281b7be097c4a65ad0f"
+source_hash: "1d3bd4ab77f79777f9ee0f31b705c48515d19771ded4487d546379f99c8a00b2"
 doc_path: "concepts/model-failover.md"
 original_doc_path: "concepts/model-failover.md"
 duplicate_index: 1
@@ -119,7 +119,7 @@ When a provider has multiple profiles, OpenClaw chooses an order like this:
   </Step>
 </Steps>
 
-If no explicit order is configured, OpenClaw uses a round‑robin order:
+If no explicit order is configured, OpenClaw uses a round-robin order:
 
 * **Primary key:** profile type (**OAuth before API keys**).
 * **Secondary key:** `usageStats.lastUsed` (oldest first, within each type).
@@ -141,7 +141,7 @@ Manual selection via `/model …@<profileId>` sets a **user override** for that 
 
 ### Why OAuth can "look lost"
 
-If you have both an OAuth profile and an API key profile for the same provider, round‑robin can switch between them across messages unless pinned. To force a single profile:
+If you have both an OAuth profile and an API key profile for the same provider, round-robin can switch between them across messages unless pinned. To force a single profile:
 
 * Pin with `auth.order[provider] = ["provider:profileId"]`, or
 * Use a per-session override via `/model …` with a profile override (when supported by your UI/chat surface).

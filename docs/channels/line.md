@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LINE"
 source: "https://docs.openclaw.ai/channels/line"
-source_hash: "c58c0063c7fb1d09047820cd4e13633c34d72aa96bd960a9d4af93cf9d100dd2"
+source_hash: "a9d606a59c18036299415e35e592368b69ee6a094f5ddbda87a1f8398a6d99f9"
 doc_path: "channels/line.md"
 original_doc_path: "channels/line.md"
 duplicate_index: 1
@@ -48,7 +48,7 @@ openclaw plugins install ./path/to/local/line-plugin
 https://gateway-host/line/webhook
 ```
 
-The gateway responds to LINE’s webhook verification (GET) and inbound events (POST).
+The gateway responds to LINE's webhook verification (GET) and inbound events (POST).
 If you need a custom path, set `channels.line.webhookPath` or
 `channels.line.accounts.<id>.webhookPath` and update the URL accordingly.
 
@@ -69,6 +69,22 @@ Minimal config:
       channelAccessToken: "LINE_CHANNEL_ACCESS_TOKEN",
       channelSecret: "LINE_CHANNEL_SECRET",
       dmPolicy: "pairing",
+    },
+  },
+}
+```
+
+Public DM config:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  channels: {
+    line: {
+      enabled: true,
+      channelAccessToken: "LINE_CHANNEL_ACCESS_TOKEN",
+      channelSecret: "LINE_CHANNEL_SECRET",
+      dmPolicy: "open",
+      allowFrom: ["*"],
     },
   },
 }
@@ -125,7 +141,7 @@ openclaw pairing approve line <CODE>
 Allowlists and policies:
 
 * `channels.line.dmPolicy`: `pairing | allowlist | open | disabled`
-* `channels.line.allowFrom`: allowlisted LINE user IDs for DMs
+* `channels.line.allowFrom`: allowlisted LINE user IDs for DMs; `dmPolicy: "open"` requires `["*"]`
 * `channels.line.groupPolicy`: `allowlist | open | disabled`
 * `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups
 * Per-group overrides: `channels.line.groups.<groupId>.allowFrom`

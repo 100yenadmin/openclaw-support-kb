@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools and plugins"
 source: "https://docs.openclaw.ai/tools/index"
-source_hash: "6791378ddd4e34cb50dfe057ff2225f823f54500a5cf48cd67f516a2c7503aee"
+source_hash: "9c4c4e1282aa0cbc78e4e13b67c2675ddd775df0b7a3d712da00fe209252cc75"
 doc_path: "tools/index.md"
 original_doc_path: "tools/index.md"
 duplicate_index: 1
@@ -199,10 +199,10 @@ Use `group:*` shorthands in allow/deny lists:
 | `group:memory`     | memory\_search, memory\_get                                                                                     |
 | `group:web`        | web\_search, x\_search, web\_fetch                                                                              |
 | `group:ui`         | browser, canvas                                                                                                 |
-| `group:automation` | cron, gateway                                                                                                   |
+| `group:automation` | heartbeat\_respond, cron, gateway                                                                               |
 | `group:messaging`  | message                                                                                                         |
 | `group:nodes`      | nodes                                                                                                           |
-| `group:agents`     | agents\_list                                                                                                    |
+| `group:agents`     | agents\_list, update\_plan                                                                                      |
 | `group:media`      | image, image\_generate, music\_generate, video\_generate, tts                                                   |
 | `group:openclaw`   | All built-in OpenClaw tools (excludes plugin tools)                                                             |
 

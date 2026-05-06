@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "c993377632e71f636f2538a014f1a6c30f8eb84b7b7958503c14dc926d64f214"
+source_hash: "cb941718f33239c8c2d1cfca9a82a500c28af75c7cfe42aa95c5a9119f94dfb4"
 doc_path: "channels/qa-channel.md"
 original_doc_path: "channels/qa-channel.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/channels/qa-channel
 
 
 
-`qa-channel` is a bundled synthetic message transport for automated OpenClaw QA. It is not a production channel — it exists to exercise the same channel plugin boundary used by real transports while keeping state deterministic and fully inspectable.
+`qa-channel` is a bundled synthetic message transport for automated OpenClaw QA. It is not a production channel - it exists to exercise the same channel plugin boundary used by real transports while keeping state deterministic and fully inspectable.
 
 ## What it does
 
@@ -44,20 +44,20 @@ Source: https://docs.openclaw.ai/channels/qa-channel
 
 Account keys:
 
-* `enabled` — master toggle for this account.
-* `name` — optional display label.
-* `baseUrl` — synthetic bus URL.
-* `botUserId` — Matrix-style bot user id used in target grammar.
-* `botDisplayName` — display name for outbound messages.
-* `pollTimeoutMs` — long-poll wait window. Integer between 100 and 30000.
-* `allowFrom` — sender allowlist (user ids or `"*"`).
-* `defaultTo` — fallback target when none is supplied.
-* `actions.messages` / `actions.reactions` / `actions.search` / `actions.threads` — per-action tool gating.
+* `enabled` - master toggle for this account.
+* `name` - optional display label.
+* `baseUrl` - synthetic bus URL.
+* `botUserId` - Matrix-style bot user id used in target grammar.
+* `botDisplayName` - display name for outbound messages.
+* `pollTimeoutMs` - long-poll wait window. Integer between 100 and 30000.
+* `allowFrom` - sender allowlist (user ids or `"*"`).
+* `defaultTo` - fallback target when none is supplied.
+* `actions.messages` / `actions.reactions` / `actions.search` / `actions.threads` - per-action tool gating.
 
 Multi-account keys at the top level:
 
-* `accounts` — record of named per-account overrides keyed by account id.
-* `defaultAccount` — preferred account id when multiple are configured.
+* `accounts` - record of named per-account overrides keyed by account id.
+* `defaultAccount` - preferred account id when multiple are configured.
 
 ## Runners
 
@@ -87,8 +87,8 @@ Builds the QA site, starts the Docker-backed gateway + QA Lab stack, and prints 
 
 ## Related
 
-* [QA overview](/concepts/qa-e2e-automation) — overall stack, transport adapters, scenario authoring
-* [Matrix QA](/concepts/qa-matrix) — example live-transport runner that drives a real channel
+* [QA overview](/concepts/qa-e2e-automation) - overall stack, transport adapters, scenario authoring
+* [Matrix QA](/concepts/qa-matrix) - example live-transport runner that drives a real channel
 * [Pairing](/channels/pairing)
 * [Groups](/channels/groups)
 * [Channels overview](/channels)

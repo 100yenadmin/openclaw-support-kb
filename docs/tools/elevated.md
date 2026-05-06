@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Elevated mode"
 source: "https://docs.openclaw.ai/tools/elevated"
-source_hash: "44a137aff44a07c01a36241313e4ae0a28a47c6d8d63c5857797a71f0b2e2ff0"
+source_hash: "deed806ffc5400b8ef74138c3632a31aaa27b6586cd024b16028c802a0f0d98d"
 doc_path: "tools/elevated.md"
 original_doc_path: "tools/elevated.md"
 duplicate_index: 1
@@ -107,13 +107,30 @@ Allowlist entry formats:
 
 ## What elevated does not control
 
-* **Tool policy**: if `exec` is denied by tool policy, elevated cannot override it
+* **Tool policy**: if `exec` is denied by tool policy, elevated cannot override it.
 * **Host selection policy**: elevated does not turn `auto` into a free cross-host override. It uses the configured/session exec target rules, choosing `node` only when the target is already `node`.
-* **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults for authorized senders and does not require elevated mode
+* **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults for authorized senders and does not require elevated mode.
+
+<Note>
+  The bash chat command (`!` prefix; `/bash` alias) is a separate gate that requires `tools.elevated` to be enabled in addition to its own `tools.bash.enabled` flag. Disabling elevated locks `!` shell commands out as well.
+</Note>
 
 ## Related
 
-* [Exec tool](/tools/exec) — shell command execution
-* [Exec approvals](/tools/exec-approvals) — approval and allowlist system
-* [Sandboxing](/gateway/sandboxing) — sandbox configuration
-* [Sandbox vs Tool Policy vs Elevated](/gateway/sandbox-vs-tool-policy-vs-elevated)
+<CardGroup>
+  <Card title="Exec tool" href="/tools/exec" icon="terminal">
+    Shell command execution from the agent.
+  </Card>
+
+  <Card title="Exec approvals" href="/tools/exec-approvals" icon="shield">
+    Approval and allowlist system for `exec`.
+  </Card>
+
+  <Card title="Sandboxing" href="/gateway/sandboxing" icon="box">
+    Gateway-level sandbox configuration.
+  </Card>
+
+  <Card title="Sandbox vs Tool Policy vs Elevated" href="/gateway/sandbox-vs-tool-policy-vs-elevated" icon="scale-balanced">
+    How the three gates compose during a tool call.
+  </Card>
+</CardGroup>

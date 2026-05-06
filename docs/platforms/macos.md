@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS app"
 source: "https://docs.openclaw.ai/platforms/macos"
-source_hash: "02828ea0e06c1c105a571d3fb57defb615605640d4c9486262d0970669f81085"
+source_hash: "8230f4593197f4bd51504cf82e4c19ae7a48366712ddb07ebc90c90769a6a6db"
 doc_path: "platforms/macos.md"
 original_doc_path: "platforms/macos.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/platforms/macos
 
 
 
-The macOS app is the **menu‑bar companion** for OpenClaw. It owns permissions,
+The macOS app is the **menu-bar companion** for OpenClaw. It owns permissions,
 manages/attaches to the Gateway locally (launchd or manual), and exposes macOS
 capabilities to the agent as a node.
 
@@ -23,7 +23,7 @@ capabilities to the agent as a node.
 * Owns TCC prompts (Notifications, Accessibility, Screen Recording, Microphone,
   Speech Recognition, Automation/AppleScript).
 * Runs or connects to the Gateway (local or remote).
-* Exposes macOS‑only tools (Canvas, Camera, Screen Recording, `system.run`).
+* Exposes macOS-only tools (Canvas, Camera, Screen Recording, `system.run`).
 * Starts the local node host service in **remote** mode (launchd), and stops it in **local** mode.
 * Optionally hosts **PeekabooBridge** for UI automation.
 * Installs the global CLI (`openclaw`) on request via npm, pnpm, or bun (the app prefers npm, then pnpm, then bun; Node remains the recommended Gateway runtime).
@@ -41,7 +41,7 @@ capabilities to the agent as a node.
 
 ## Launchd control
 
-The app manages a per‑user LaunchAgent labeled `ai.openclaw.gateway`
+The app manages a per-user LaunchAgent labeled `ai.openclaw.gateway`
 (or `ai.openclaw.<profile>` when using `--profile`/`OPENCLAW_PROFILE`; legacy `com.openclaw.*` still unloads).
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
@@ -51,7 +51,7 @@ launchctl bootout gui/$UID/ai.openclaw.gateway
 
 Replace the label with `ai.openclaw.<profile>` when running a named profile.
 
-If the LaunchAgent isn’t installed, enable it from the app or run
+If the LaunchAgent isn't installed, enable it from the app or run
 `openclaw gateway install`.
 
 ## Node capabilities (mac)
@@ -63,7 +63,7 @@ The macOS app presents itself as a node. Common commands:
 * Screen: `screen.snapshot`, `screen.record`
 * System: `system.run`, `system.notify`
 
-The node reports a `permissions` map so agents can decide what’s allowed.
+The node reports a `permissions` map so agents can decide what's allowed.
 
 Node service + app IPC:
 
@@ -111,8 +111,8 @@ Notes:
 
 * `allowlist` entries are glob patterns for resolved binary paths, or bare command names for PATH-invoked commands.
 * Raw shell command text that contains shell control or expansion syntax (`&&`, `||`, `;`, `|`, `` ` ``, `$`, `<`, `>`, `(`, `)`) is treated as an allowlist miss and requires explicit approval (or allowlisting the shell binary).
-* Choosing “Always Allow” in the prompt adds that command to the allowlist.
-* `system.run` environment overrides are filtered (drops `PATH`, `DYLD_*`, `LD_*`, `NODE_OPTIONS`, `PYTHON*`, `PERL*`, `RUBYOPT`, `SHELLOPTS`, `PS4`) and then merged with the app’s environment.
+* Choosing "Always Allow" in the prompt adds that command to the allowlist.
+* `system.run` environment overrides are filtered (drops `PATH`, `DYLD_*`, `LD_*`, `NODE_OPTIONS`, `PYTHON*`, `PERL*`, `RUBYOPT`, `SHELLOPTS`, `PS4`) and then merged with the app's environment.
 * For shell wrappers (`bash|sh|zsh ... -c/-lc`), request-scoped environment overrides are reduced to a small explicit allowlist (`TERM`, `LANG`, `LC_*`, `COLORTERM`, `NO_COLOR`, `FORCE_COLOR`).
 * For allow-always decisions in allowlist mode, known dispatch wrappers (`env`, `nice`, `nohup`, `stdbuf`, `timeout`) persist inner executable paths instead of wrapper paths. If unwrapping is not safe, no allowlist entry is persisted automatically.
 
@@ -169,7 +169,7 @@ If `openclaw doctor` detects state under:
 
 it will warn and recommend moving back to a local path.
 
-## Build & dev workflow (native)
+## Build and dev workflow (native)
 
 * `cd apps/macos && swift build`
 * `swift run OpenClaw` (or Xcode)
@@ -196,7 +196,7 @@ Connect options:
 
 Discovery options:
 
-* `--include-local`: include gateways that would be filtered as “local”
+* `--include-local`: include gateways that would be filtered as "local"
 * `--timeout <ms>`: overall discovery window (default: `2000`)
 * `--json`: structured output for diffing
 

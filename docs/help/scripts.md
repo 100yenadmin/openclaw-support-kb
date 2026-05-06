@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scripts"
 source: "https://docs.openclaw.ai/help/scripts"
-source_hash: "8c8f70042ff0576542a47096fbfd5d77918225d328102abde9fa55b857a33632"
+source_hash: "4c1ec1736d8d6bb5c4c6b5524f92d3571fb44b70f5aefcbccf2ca51d6b1e13db"
 doc_path: "help/scripts.md"
 original_doc_path: "help/scripts.md"
 duplicate_index: 1
@@ -20,7 +20,7 @@ Use these when a task is clearly tied to a script; otherwise prefer the CLI.
 
 * Scripts are **optional** unless referenced in docs or release checklists.
 * Prefer CLI surfaces when they exist (example: auth monitoring uses `openclaw models status --check`).
-* Assume scripts are host‑specific; read them before running on a new machine.
+* Assume scripts are host-specific; read them before running on a new machine.
 
 ## Auth monitoring scripts
 

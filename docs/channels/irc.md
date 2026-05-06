@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "IRC"
 source: "https://docs.openclaw.ai/channels/irc"
-source_hash: "fd886f96ee70fda9deae4d8d8bc7a60caa46d607c3ce56494c8da65d1fcc90bb"
+source_hash: "93961059d3b92583dca67ce36ad2d1530ec49b21d46e5004909596fea2b2bc76"
 doc_path: "channels/irc.md"
 original_doc_path: "channels/irc.md"
 duplicate_index: 1
@@ -54,7 +54,7 @@ openclaw gateway run
 
 ## Access control
 
-There are two separate “gates” for IRC channels:
+There are two separate "gates" for IRC channels:
 
 1. **Channel access** (`groupPolicy` + `groups`): whether the bot accepts messages from a channel at all.
 2. **Sender access** (`groupAllowFrom` / per-channel `groups["#channel"].allowFrom`): who is allowed to trigger the bot inside that channel.
@@ -75,7 +75,7 @@ If you see logs like:
 
 * `irc: drop group sender alice!ident@host (policy=allowlist)`
 
-…it means the sender wasn’t allowed for **group/channel** messages. Fix it by either:
+...it means the sender wasn't allowed for **group/channel** messages. Fix it by either:
 
 * setting `channels.irc.groupAllowFrom` (global for all channels), or
 * setting per-channel sender allowlists: `channels.irc.groups["#channel"].allowFrom`

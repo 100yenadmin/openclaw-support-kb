@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "84d8accf8c0a68caf13f151ffeba85444f3f3dd3155178fc1c7bf24950864ad4"
+source_hash: "7420cf34397caadaea0b3885ec4848b2fe5bd80bb819ca2f979a0fb76cba75b5"
 doc_path: "concepts/model-providers.md"
 original_doc_path: "concepts/model-providers.md"
 duplicate_index: 1
@@ -86,7 +86,7 @@ The full list of provider-SDK hooks and bundled-plugin examples lives in [Provid
 
 ## Built-in providers (pi-ai catalog)
 
-OpenClaw ships with the pi‑ai catalog. These providers require **no** `models.providers` config; just set auth + pick a model.
+OpenClaw ships with the pi-ai catalog. These providers require **no** `models.providers` config; just set auth + pick a model.
 
 ### OpenAI
 
@@ -154,6 +154,7 @@ OpenClaw ships with the pi‑ai catalog. These providers require **no** `models.
 * Policy note: OpenAI Codex OAuth is explicitly supported for external tools/workflows like OpenClaw.
 * For the common subscription plus native Codex runtime route, sign in with `openai-codex` auth but configure `openai/gpt-5.5` plus `agents.defaults.agentRuntime.id: "codex"`.
 * Use `openai-codex/gpt-5.5` only when you want the Codex OAuth/subscription route through PI; use `openai/gpt-5.5` without the Codex runtime override when your API-key setup and local catalog expose the public API route.
+* Older `openai-codex/gpt-5.1*`, `openai-codex/gpt-5.2*`, and `openai-codex/gpt-5.3*` refs are suppressed because ChatGPT/Codex OAuth accounts reject them; use `openai-codex/gpt-5.5` or the native Codex runtime route instead.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -304,11 +305,11 @@ See [/providers/kilocode](/providers/kilocode) for setup details.
 | ----------------------- | -------------------------------- | ------------------------------------------------------------ | --------------------------------------------- |
 | BytePlus                | `byteplus` / `byteplus-plan`     | `BYTEPLUS_API_KEY`                                           | `byteplus-plan/ark-code-latest`               |
 | Cerebras                | `cerebras`                       | `CEREBRAS_API_KEY`                                           | `cerebras/zai-glm-4.7`                        |
-| Cloudflare AI Gateway   | `cloudflare-ai-gateway`          | `CLOUDFLARE_AI_GATEWAY_API_KEY`                              | —                                             |
+| Cloudflare AI Gateway   | `cloudflare-ai-gateway`          | `CLOUDFLARE_AI_GATEWAY_API_KEY`                              | -                                             |
 | DeepInfra               | `deepinfra`                      | `DEEPINFRA_API_KEY`                                          | `deepinfra/deepseek-ai/DeepSeek-V3.2`         |
 | DeepSeek                | `deepseek`                       | `DEEPSEEK_API_KEY`                                           | `deepseek/deepseek-v4-flash`                  |
-| GitHub Copilot          | `github-copilot`                 | `COPILOT_GITHUB_TOKEN` / `GH_TOKEN` / `GITHUB_TOKEN`         | —                                             |
-| Groq                    | `groq`                           | `GROQ_API_KEY`                                               | —                                             |
+| GitHub Copilot          | `github-copilot`                 | `COPILOT_GITHUB_TOKEN` / `GH_TOKEN` / `GITHUB_TOKEN`         | -                                             |
+| Groq                    | `groq`                           | `GROQ_API_KEY`                                               | -                                             |
 | Hugging Face Inference  | `huggingface`                    | `HUGGINGFACE_HUB_TOKEN` or `HF_TOKEN`                        | `huggingface/deepseek-ai/DeepSeek-R1`         |
 | Kilo Gateway            | `kilocode`                       | `KILOCODE_API_KEY`                                           | `kilocode/kilo/auto`                          |
 | Kimi Coding             | `kimi`                           | `KIMI_API_KEY` or `KIMICODE_API_KEY`                         | `kimi/kimi-code`                              |
@@ -321,7 +322,7 @@ See [/providers/kilocode](/providers/kilocode) for setup details.
 | Qwen Cloud              | `qwen`                           | `QWEN_API_KEY` / `MODELSTUDIO_API_KEY` / `DASHSCOPE_API_KEY` | `qwen/qwen3.5-plus`                           |
 | StepFun                 | `stepfun` / `stepfun-plan`       | `STEPFUN_API_KEY`                                            | `stepfun/step-3.5-flash`                      |
 | Together                | `together`                       | `TOGETHER_API_KEY`                                           | `together/moonshotai/Kimi-K2.5`               |
-| Venice                  | `venice`                         | `VENICE_API_KEY`                                             | —                                             |
+| Venice                  | `venice`                         | `VENICE_API_KEY`                                             | -                                             |
 | Vercel AI Gateway       | `vercel-ai-gateway`              | `AI_GATEWAY_API_KEY`                                         | `vercel-ai-gateway/anthropic/claude-opus-4.6` |
 | Volcano Engine (Doubao) | `volcengine` / `volcengine-plan` | `VOLCANO_ENGINE_API_KEY`                                     | `volcengine-plan/ark-code-latest`             |
 | xAI                     | `xai`                            | `XAI_API_KEY`                                                | `xai/grok-4.3`                                |
@@ -357,7 +358,7 @@ See [/providers/kilocode](/providers/kilocode) for setup details.
 
 ## Providers via `models.providers` (custom/base URL)
 
-Use `models.providers` (or `models.json`) to add **custom** providers or OpenAI/Anthropic‑compatible proxies.
+Use `models.providers` (or `models.json`) to add **custom** providers or OpenAI/Anthropic-compatible proxies.
 
 Many of the bundled provider plugins below already publish a default catalog. Use explicit `models.providers.<id>` entries only when you want to override the default base URL, headers, or model list.
 
@@ -647,7 +648,7 @@ See [/providers/sglang](/providers/sglang) for details.
 
 ### Local proxies (LM Studio, vLLM, LiteLLM, etc.)
 
-Example (OpenAI‑compatible):
+Example (OpenAI-compatible):
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -719,7 +720,7 @@ See also: [Configuration](/gateway/configuration) for full configuration example
 
 ## Related
 
-* [Configuration reference](/gateway/config-agents#agent-defaults) — model config keys
-* [Model failover](/concepts/model-failover) — fallback chains and retry behavior
-* [Models](/concepts/models) — model configuration and aliases
-* [Providers](/providers) — per-provider setup guides
+* [Configuration reference](/gateway/config-agents#agent-defaults) - model config keys
+* [Model failover](/concepts/model-failover) - fallback chains and retry behavior
+* [Models](/concepts/models) - model configuration and aliases
+* [Providers](/providers) - per-provider setup guides

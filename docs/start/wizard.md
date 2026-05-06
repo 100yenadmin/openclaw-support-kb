@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "2d57cd72860346af1b26542df12b221330bfd19e554910e337ae4c36ccde45f3"
+source_hash: "0647e71d7ebabc57201803aa57e66593f00c222002cbbd6b268cbcd5354875ef"
 doc_path: "start/wizard.md"
 original_doc_path: "start/wizard.md"
 duplicate_index: 1
@@ -55,7 +55,7 @@ Onboarding starts with **QuickStart** (defaults) vs **Advanced** (full control).
     * Local gateway (loopback)
     * Workspace default (or existing workspace)
     * Gateway port **18789**
-    * Gateway auth **Token** (auto‑generated, even on loopback)
+    * Gateway auth **Token** (auto-generated, even on loopback)
     * Tool policy default for new local setups: `tools.profile: "coding"` (existing explicit profile is preserved)
     * DM isolation default: local onboarding writes `session.dmScope: "per-channel-peer"` when unset. Details: [CLI Setup Reference](/start/wizard-cli-reference#outputs-and-internals)
     * Tailscale exposure **Off**

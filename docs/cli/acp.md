@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP"
 source: "https://docs.openclaw.ai/cli/acp"
-source_hash: "50d9037005c64f8a5e7cca0b79f4fe9cc51b6318804c651a31e48a68eabada2a"
+source_hash: "7a00d803ce21a6ed09d067f4cb2d1b2bbeb6afd4f3864be849274afd5134c667"
 doc_path: "cli/acp.md"
 original_doc_path: "cli/acp.md"
 duplicate_index: 1
@@ -125,7 +125,7 @@ Permission model (client debug mode):
 * `read` auto-approval is scoped to the current working directory (`--cwd` when set).
 * ACP only auto-approves narrow readonly classes: scoped `read` calls under the active cwd plus readonly search tools (`search`, `web_search`, `memory_search`). Unknown/non-core tools, out-of-scope reads, exec-capable tools, control-plane tools, mutating tools, and interactive flows always require explicit prompt approval.
 * Server-provided `toolCall.kind` is treated as untrusted metadata (not an authorization source).
-* This ACP bridge policy is separate from ACPX harness permissions. If you run OpenClaw through the `acpx` backend, `plugins.entries.acpx.config.permissionMode=approve-all` is the break-glass “yolo” switch for that harness session.
+* This ACP bridge policy is separate from ACPX harness permissions. If you run OpenClaw through the `acpx` backend, `plugins.entries.acpx.config.permissionMode=approve-all` is the break-glass "yolo" switch for that harness session.
 
 ## How to use this
 
@@ -225,7 +225,7 @@ pull contextual information from an OpenClaw agent without scraping a terminal.
 
 ## Zed editor setup
 
-Add a custom ACP agent in `~/.config/zed/settings.json` (or use Zed’s Settings UI):
+Add a custom ACP agent in `~/.config/zed/settings.json` (or use Zed's Settings UI):
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -263,7 +263,7 @@ To target a specific Gateway or agent:
 }
 ```
 
-In Zed, open the Agent panel and select “OpenClaw ACP” to start a thread.
+In Zed, open the Agent panel and select "OpenClaw ACP" to start a thread.
 
 ## Session mapping
 

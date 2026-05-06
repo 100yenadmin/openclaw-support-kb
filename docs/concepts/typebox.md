@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "eaccadca3f563cad41650d5ca1536ab59dd63e9483cf9501f9c2a1fb1634aa47"
+source_hash: "c460e9fd8e6bef21a00ae8a2f851642cc129fff552c1046f7e68cc5c0a81bafc"
 doc_path: "concepts/typebox.md"
 original_doc_path: "concepts/typebox.md"
 duplicate_index: 1
@@ -12,10 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/concepts/typebox
 
 
-
-# TypeBox as protocol source of truth
-
-Last updated: 2026-01-10
 
 TypeBox is a TypeScript-first schema library. We use it to define the **Gateway
 WebSocket protocol** (handshake, request/response, server events). Those schemas
@@ -76,7 +72,7 @@ Authoritative advertised **discovery** inventory lives in
 ## Current pipeline
 
 * `pnpm protocol:gen`
-  * writes JSON Schema (draft‑07) to `dist/protocol.schema.json`
+  * writes JSON Schema (draft-07) to `dist/protocol.schema.json`
 * `pnpm protocol:gen:swift`
   * generates Swift gateway models
 * `pnpm protocol:check`

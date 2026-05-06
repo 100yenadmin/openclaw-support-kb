@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent loop"
 source: "https://docs.openclaw.ai/concepts/agent-loop"
-source_hash: "f03f44f2dc08833ba0eb24a5e35f4fe38d10269dc62ed11a46130bdd766b8ae0"
+source_hash: "7f50ffd8fdea4b682c0e0804984aff2e99ee7c5fcc9fe1da8ae339a1cca9ff41"
 doc_path: "concepts/agent-loop.md"
 original_doc_path: "concepts/agent-loop.md"
 duplicate_index: 1
@@ -13,8 +13,8 @@ Source: https://docs.openclaw.ai/concepts/agent-loop
 
 
 
-An agentic loop is the full “real” run of an agent: intake → context assembly → model inference →
-tool execution → streaming replies → persistence. It’s the authoritative path that turns a message
+An agentic loop is the full "real" run of an agent: intake → context assembly → model inference →
+tool execution → streaming replies → persistence. It's the authoritative path that turns a message
 into actions and a final reply, while keeping session state consistent.
 
 In OpenClaw, a loop is a single, serialized run per session that emits lifecycle and stream events
@@ -74,7 +74,7 @@ wired end-to-end.
 
 ## Prompt assembly + system prompt
 
-* System prompt is built from OpenClaw’s base prompt, skills prompt, bootstrap context, and per-run overrides.
+* System prompt is built from OpenClaw's base prompt, skills prompt, bootstrap context, and per-run overrides.
 * Model-specific limits and compaction reserve tokens are enforced.
 * See [System prompt](/concepts/system-prompt) for what the model sees.
 

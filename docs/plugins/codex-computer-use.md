@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "a66ee73629a521c3aa2bda5cbfe30b167a57a0a8d657a67e309e7b9de00032ea"
+source_hash: "b591f5caf414c19dc3c0b85f8ea486fbb45f9d10e18b00c8a2e1d3bde0059c44"
 doc_path: "plugins/codex-computer-use.md"
 original_doc_path: "plugins/codex-computer-use.md"
 duplicate_index: 1
@@ -292,3 +292,9 @@ registrations are dropped, then retry.
 source with explicit `/codex computer-use install --source <marketplace-source>`
 first, then future turn-start auto-install can use the discovered local
 marketplace.
+
+## Related
+
+* [Codex harness](/plugins/codex-harness)
+* [Peekaboo bridge](/platforms/mac/peekaboo)
+* [iOS app](/platforms/ios)

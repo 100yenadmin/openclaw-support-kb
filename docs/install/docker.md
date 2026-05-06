@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "0058663525c5a8f5b47ec70b552e971714389f2044bd8f58f7129afd31abc145"
+source_hash: "ae98c1b17fac500e2135e9db9cc502ca96e34d6c351bddc05d0f05baa9f52069"
 doc_path: "install/docker.md"
 original_doc_path: "install/docker.md"
 duplicate_index: 1
@@ -343,6 +343,14 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     sudo chown -R 1000:1000 /path/to/openclaw-config /path/to/openclaw-workspace
     ```
+
+    The same mismatch can show up as a plugin warning such as
+    `blocked plugin candidate: suspicious ownership (... uid=1000, expected uid=0 or root)`
+    followed by `plugin present but blocked`. That means the process uid and the
+    mounted plugin directory owner disagree. Prefer running the container as the
+    default uid 1000 and fixing the bind mount ownership. Only chown
+    `/path/to/openclaw-config/npm` to `root:root` if you intentionally run
+    OpenClaw as root long term.
   </Accordion>
 
   <Accordion title="Faster rebuilds">

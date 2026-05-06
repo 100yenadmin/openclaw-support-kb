@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skill workshop plugin"
 source: "https://docs.openclaw.ai/plugins/skill-workshop"
-source_hash: "59904fabefe1a2c4ba8ce7478eb1fb21fbf23f5f7c0936defb50258297d92757"
+source_hash: "45913c3eb4a9cc91e5e24c787cc596dfd80ae2266e2bab6fe6329bfebd8cda29"
 doc_path: "plugins/skill-workshop.md"
 original_doc_path: "plugins/skill-workshop.md"
 duplicate_index: 1
@@ -43,7 +43,7 @@ Skill Workshop is useful when the agent learns a procedure such as:
 
 It is not intended for:
 
-* facts like “the user likes blue”
+* facts like "the user likes blue"
 * broad autobiographical memory
 * raw transcript archiving
 * secrets, credentials, or hidden prompt text
@@ -222,7 +222,7 @@ The reviewer has no tools:
 * `toolsAllow: []`
 * `disableMessageTool: true`
 
-The reviewer returns either `{ "action": "none" }` or one proposal. The `action` field is `create`, `append`, or `replace` — prefer `append`/`replace` when a relevant skill already exists; use `create` only when no existing skill fits.
+The reviewer returns either `{ "action": "none" }` or one proposal. The `action` field is `create`, `append`, or `replace` - prefer `append`/`replace` when a relevant skill already exists; use `create` only when no existing skill fits.
 
 Example `create`:
 
@@ -576,12 +576,12 @@ warning/debug message and skips that review pass.
 
 Use Skill Workshop when the user says:
 
-* “next time, do X”
-* “from now on, prefer Y”
-* “make sure to verify Z”
-* “save this as a workflow”
-* “this took a while; remember the process”
-* “update the local skill for this”
+* "next time, do X"
+* "from now on, prefer Y"
+* "make sure to verify Z"
+* "save this as a workflow"
+* "this took a while; remember the process"
+* "update the local skill for this"
 
 Good skill text:
 

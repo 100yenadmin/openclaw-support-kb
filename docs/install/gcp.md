@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GCP"
 source: "https://docs.openclaw.ai/install/gcp"
-source_hash: "eb410a1aceddb45e4721355143210b4565fd8db0528e84e4d9cc3fc1c2a2db34"
+source_hash: "dd3ad9746fe6f7ed964aee8970a138a6fe6011194becd9ce69c9db95b461f9ad"
 doc_path: "install/gcp.md"
 original_doc_path: "install/gcp.md"
 duplicate_index: 1
@@ -12,10 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/gcp
 
 
-
-# OpenClaw on GCP Compute Engine (Docker, Production VPS Guide)
-
-## Goal
 
 Run a persistent OpenClaw Gateway on a GCP Compute Engine VM using Docker, with durable state, baked-in binaries, and safe restart behavior.
 

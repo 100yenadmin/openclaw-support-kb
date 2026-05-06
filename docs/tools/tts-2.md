@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "c5173e838af5929c3175470de86cf9f5263354c61455f0f9fa91b7689c1c2ce6"
+source_hash: "d27db6aeef8374c5ef187b0fd721c0f594e3f8ae7b2511e29a788846bf8e2e2e"
 doc_path: "tools/tts-2.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 2
@@ -16,6 +16,11 @@ Source: https://docs.openclaw.ai/tools/tts
 OpenClaw can convert outbound replies into audio across **14 speech providers**
 and deliver native voice messages on Feishu, Matrix, Telegram, and WhatsApp,
 audio attachments everywhere else, and PCM/Ulaw streams for telephony and Talk.
+
+TTS is the speech-output half of Talk's `stt-tts` mode. Provider-native
+`realtime` Talk sessions synthesize speech inside the realtime provider instead
+of calling this TTS path, while `transcription` sessions do not synthesize an
+assistant voice response.
 
 ## Quick start
 
@@ -606,6 +611,11 @@ attempted provider:
 
 The whole TTS request only fails when **every** attempted provider is skipped
 or fails.
+
+Talk session provider selection is session-scoped. A Talk client should choose
+provider ids, model ids, voice ids, and locales from `talk.catalog` and pass
+them through the Talk session or handoff request. Opening a voice session should
+not mutate `messages.tts` or global Talk provider defaults.
 
 ## Model-driven directives
 

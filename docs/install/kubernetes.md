@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kubernetes"
 source: "https://docs.openclaw.ai/install/kubernetes"
-source_hash: "93c3caddbfdd74c51d89f25ae69ca6ed72719b7d4a794ae2b8373200c8293748"
+source_hash: "1fc5c80dfb37b4d0b09b0fb378eeeb0308688853f9a12d82ce25d97ece9dd1ac"
 doc_path: "install/kubernetes.md"
 original_doc_path: "install/kubernetes.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/kubernetes
 
 
-
-# OpenClaw on Kubernetes
 
 A minimal starting point for running OpenClaw on Kubernetes — not a production-ready deployment. It covers the core resources and is meant to be adapted to your environment.
 
