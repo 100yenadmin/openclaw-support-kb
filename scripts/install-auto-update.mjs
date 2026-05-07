@@ -93,7 +93,7 @@ function run(command, args, options = {}) {
 async function installCrontab(block) {
   const current = captureNoExit("crontab", ["-l"]);
   if (current.missing) {
-    console.error("crontab is not available. Use --mode print and register the shown command in OpenClaw cron or fleet control.");
+    console.error("crontab is not available. Use --mode print and register the shown command in system cron, systemd, or fleet control.");
     process.exit(2);
   }
   const noExistingCrontab = current.status !== 0 && /\b(no crontab|no crontab for)\b/i.test(current.stderr);
@@ -109,7 +109,7 @@ async function installCrontab(block) {
     stdio: ["pipe", "inherit", "pipe"],
   });
   if (installed.error?.code === "ENOENT") {
-    console.error("crontab is not available. Use --mode print and register the shown command in OpenClaw cron or fleet control.");
+    console.error("crontab is not available. Use --mode print and register the shown command in system cron, systemd, or fleet control.");
     process.exit(2);
   }
   if (installed.status !== 0) {

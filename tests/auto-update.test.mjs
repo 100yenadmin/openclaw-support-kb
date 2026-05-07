@@ -233,7 +233,15 @@ test("auto-update installer help and default print mode do not touch crontab", a
     });
     const env = {
       ...process.env,
-      PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+      PATH: [
+        fakeBin,
+        path.join(tempDir, ".codex", "tmp", "runtime", "bin"),
+        "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin",
+        "/Applications/Codex.app/Contents/Resources",
+        "relative-bin",
+        "/tmp/openclaw-kb-runtime-bin",
+        process.env.PATH,
+      ].join(path.delimiter),
       OPENCLAW_SUPPORT_KB_DIR: path.join(tempDir, "source"),
     };
 
@@ -254,6 +262,11 @@ test("auto-update installer help and default print mode do not touch crontab", a
     assert.equal(printed.status, 0, printed.stderr);
     assert.match(printed.stdout, /openclaw-support-kb:auto-update/);
     assert.match(printed.stdout, /^\d{1,2} \d{1,2} \* \* \*/m);
+    assert.doesNotMatch(printed.stdout, /\.codex\/tmp/);
+    assert.doesNotMatch(printed.stdout, /codex\.system\/bootstrap/);
+    assert.doesNotMatch(printed.stdout, /Codex\.app\/Contents\/Resources/);
+    assert.doesNotMatch(printed.stdout, /relative-bin/);
+    assert.doesNotMatch(printed.stdout, /\/tmp\/openclaw-kb-runtime-bin/);
     assert.doesNotMatch(printed.stderr, /crontab should not run/);
   } finally {
     await rm(tempDir, { recursive: true, force: true });
