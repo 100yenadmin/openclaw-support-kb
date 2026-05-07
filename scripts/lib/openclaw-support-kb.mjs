@@ -99,7 +99,7 @@ function unquoteEnvValue(value) {
   if (!raw) return "";
   const quote = raw[0];
   if (quote !== "'" && quote !== '"') {
-    return raw.replace(/\s+#.*$/u, "").trimEnd();
+    return stripInlineComment(raw);
   }
 
   let output = "";
@@ -118,6 +118,15 @@ function unquoteEnvValue(value) {
     output += char;
   }
   return output;
+}
+
+function stripInlineComment(raw) {
+  for (let i = 0; i < raw.length; i += 1) {
+    if (raw[i] !== "#") continue;
+    const prev = raw[i - 1];
+    if (prev === " " || prev === "\t") return raw.slice(0, i).trimEnd();
+  }
+  return raw.trimEnd();
 }
 
 export function parseGbrainEnvContent(content) {
