@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "7edb1a85512e1bebed25eeb3b2828c48130a920d2ef4a9f2d644533ca50fd34a"
+source_hash: "06b01217e2aab91fb1b4f70e4a8b0b67f15993415d81397afbd22dab68f81544"
 doc_path: "install/fly.md"
 original_doc_path: "install/fly.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/fly
 
 
-
-# Fly.io Deployment
 
 **Goal:** OpenClaw Gateway running on a [Fly.io](https://fly.io) machine with persistent storage, automatic HTTPS, and Discord/channel access.
 

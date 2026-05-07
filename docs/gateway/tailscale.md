@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tailscale"
 source: "https://docs.openclaw.ai/gateway/tailscale"
-source_hash: "9675b094e09f41fdda075a55430584ae3a21f3cbde5642d5c7accc405060f350"
+source_hash: "a56984ef12485c64c63ec6fd6416f31ad55f8a4ce8c05acf3e17721d28a8278a"
 doc_path: "gateway/tailscale.md"
 original_doc_path: "gateway/tailscale.md"
 duplicate_index: 1
@@ -42,7 +42,7 @@ Control UI/WebSocket auth can use Tailscale identity headers
 the identity by resolving the `x-forwarded-for` address via the local Tailscale
 daemon (`tailscale whois`) and matching it to the header before accepting it.
 OpenClaw only treats a request as Serve when it arrives from loopback with
-Tailscale’s `x-forwarded-for`, `x-forwarded-proto`, and `x-forwarded-host`
+Tailscale's `x-forwarded-for`, `x-forwarded-proto`, and `x-forwarded-host`
 headers.
 For Control UI operator sessions that include browser device identity, this
 verified Serve path also skips the device-pairing round trip. It does not bypass

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "f64916193a0722ba7d7c3a72bbf76118d0f69c68eb84522d9ad1f0a5f90cd0a5"
+source_hash: "64f0674d8ff6fd54a428063eed1c06b57866aa274e44c38a6a27e09bc22e55c3"
 doc_path: "channels/discord.md"
 original_doc_path: "channels/discord.md"
 duplicate_index: 1
@@ -654,19 +654,21 @@ Default slash command settings:
   </Accordion>
 
   <Accordion title="Live stream preview">
-    OpenClaw can stream draft replies by sending a temporary message and editing it as text arrives. `channels.discord.streaming` takes `off` (default) | `partial` | `block` | `progress`. `progress` keeps one editable status draft and updates it with tool progress until final delivery; `streamMode` is a legacy alias and is auto-migrated.
+    OpenClaw can stream draft replies by sending a temporary message and editing it as text arrives. `channels.discord.streaming` takes `off` | `partial` | `block` | `progress` (default). `progress` keeps one editable status draft and updates it with tool progress until final delivery; `streamMode` is a legacy runtime alias. Run `openclaw doctor --fix` to rewrite persisted config to the canonical key.
 
-    Default stays `off` because Discord preview edits hit rate limits quickly when multiple bots or gateways share an account.
+    Set `channels.discord.streaming.mode` to `off` to disable Discord preview edits. If Discord block streaming is explicitly enabled, OpenClaw skips the preview stream to avoid double-streaming.
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
       channels: {
         discord: {
-          streaming: "block",
-          draftChunk: {
-            minChars: 200,
-            maxChars: 800,
-            breakPreference: "paragraph",
+          streaming: {
+            mode: "progress",
+            progress: {
+              label: "auto",
+              maxLines: 8,
+              toolProgress: true,
+            },
           },
         },
       },
@@ -1135,6 +1137,12 @@ Use `/vc join|leave|status` to control sessions. The command uses the account de
 /vc leave
 ```
 
+To inspect the bot's effective permissions before joining, run:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw channels capabilities --channel discord --target channel:<voice-channel-id>
+```
+
 Auto-join example:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
@@ -1177,8 +1185,12 @@ Notes:
 * `@discordjs/voice` defaults are `daveEncryption=true` and `decryptionFailureTolerance=24` if unset.
 * `voice.connectTimeoutMs` controls the initial `@discordjs/voice` Ready wait for `/vc join` and auto-join attempts. Default: `30000`.
 * `voice.reconnectGraceMs` controls how long OpenClaw waits for a disconnected voice session to begin reconnecting before destroying it. Default: `15000`.
+* Voice playback does not stop just because another user starts speaking. To avoid feedback loops, OpenClaw ignores new voice capture while TTS is playing; speak after playback finishes for the next turn.
+* `voice.captureSilenceGraceMs` controls how long OpenClaw waits after Discord reports a speaker has stopped before finalizing that audio segment for STT. Default: `2500`; raise this if Discord splits normal pauses into choppy partial transcripts.
+* When ElevenLabs is the selected TTS provider, Discord voice playback uses streaming TTS and starts from the provider response stream. Providers without streaming support fall back to the synthesized temp-file path.
 * OpenClaw also watches receive decrypt failures and auto-recovers by leaving/rejoining the voice channel after repeated failures in a short window.
 * If receive logs repeatedly show `DecryptionFailed(UnencryptedWhenPassthroughDisabled)` after updating, collect a dependency report and logs. The bundled `@discordjs/voice` line includes the upstream padding fix from discord.js PR #11449, which closed discord.js issue #11419.
+* `The operation was aborted` receive events are expected when OpenClaw finalizes a captured speaker segment; they are verbose diagnostics, not warnings.
 
 Voice channel pipeline:
 
@@ -1186,7 +1198,7 @@ Voice channel pipeline:
 * `tools.media.audio` handles STT, for example `openai/gpt-4o-mini-transcribe`.
 * The transcript is sent through Discord ingress and routing while the response LLM runs with a voice-output policy that hides the agent `tts` tool and asks for returned text, because Discord voice owns final TTS playback.
 * `voice.model`, when set, overrides only the response LLM for this voice-channel turn.
-* `voice.tts` is merged over `messages.tts`; the resulting audio is played in the joined channel.
+* `voice.tts` is merged over `messages.tts`; streaming-capable providers feed the player directly, otherwise the resulting audio file is played in the joined channel.
 
 Credentials are resolved per component: LLM route auth for `voice.model`, STT auth for `tools.media.audio`, and TTS auth for `messages.tts`/`voice.tts`.
 

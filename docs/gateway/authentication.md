@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Authentication"
 source: "https://docs.openclaw.ai/gateway/authentication"
-source_hash: "60e82b9c057dbe92c107a35bcfb310fd4aa0f4dd7f3704f105e128f031fa0e8b"
+source_hash: "4eb9e784267b91f5b87e85fc074fe01e0cf86b68d9c1d5f446ff87a157807d2d"
 doc_path: "gateway/authentication.md"
 original_doc_path: "gateway/authentication.md"
 duplicate_index: 1
@@ -116,6 +116,8 @@ openclaw models auth paste-token --provider openrouter
 ```
 
 OpenClaw expects the canonical `version` + `profiles` shape at runtime. If an older install still has a flat file such as `{ "openrouter": { "apiKey": "..." } }`, run `openclaw doctor --fix` to rewrite it as an `openrouter:default` API-key profile; doctor keeps a `.legacy-flat.*.bak` copy beside the original. Endpoint details such as `baseUrl`, `api`, model ids, headers, and timeouts belong under `models.providers.<id>` in `openclaw.json` or `models.json`, not in `auth-profiles.json`.
+
+External auth routes such as Bedrock `auth: "aws-sdk"` are also not credentials. If you want a named Bedrock route, put `auth.profiles.<id>.mode: "aws-sdk"` in `openclaw.json`; do not write `type: "aws-sdk"` into `auth-profiles.json`. `openclaw doctor --fix` moves legacy AWS SDK markers from the credential store into config metadata.
 
 Auth profile refs are also supported for static credentials:
 

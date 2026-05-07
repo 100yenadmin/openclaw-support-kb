@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ElevenLabs"
 source: "https://docs.openclaw.ai/providers/elevenlabs"
-source_hash: "47efbc01b9cf4fa3286e5148e70d2054a2e737c996a6591b203ae89318d5c98c"
+source_hash: "b6046204e515abe0ea9e9547a48396d8513622c5b22c063bfd110c0b91481980"
 doc_path: "providers/elevenlabs.md"
 original_doc_path: "providers/elevenlabs.md"
 duplicate_index: 1
@@ -51,6 +51,13 @@ export ELEVENLABS_API_KEY="..."
 
 Set `modelId` to `eleven_v3` to use ElevenLabs v3 TTS. OpenClaw keeps
 `eleven_multilingual_v2` as the default for existing installs.
+
+Discord voice channels use ElevenLabs' streaming TTS endpoint when ElevenLabs is
+the selected `voice.tts`/`messages.tts` provider. Playback starts from the
+returned audio stream instead of waiting for OpenClaw to download and write the
+whole audio file first. `latencyTier` maps to ElevenLabs'
+`optimize_streaming_latency` query parameter for models that accept it; OpenClaw
+omits that parameter for `eleven_v3`, which rejects it.
 
 ## Speech-to-text
 

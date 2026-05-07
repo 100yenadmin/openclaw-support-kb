@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs directory"
 source: "https://docs.openclaw.ai/start/docs-directory"
-source_hash: "0ef2c427268d6375a29b26bd533520076bc641a0bc557e6eec0908ce74455e0a"
+source_hash: "43bbbb7b328c4a05eb7d7072316346ff08dac144f3c8c8b1c75a467c5b7b95df"
 doc_path: "start/docs-directory.md"
 original_doc_path: "start/docs-directory.md"
 duplicate_index: 1
@@ -47,9 +47,9 @@ Source: https://docs.openclaw.ai/start/docs-directory
 * [Telegram](/channels/telegram)
 * [Discord](/channels/discord)
 * [Mattermost](/channels/mattermost)
-* [BlueBubbles (iMessage)](/channels/bluebubbles)
+* [BlueBubbles (legacy iMessage bridge)](/channels/bluebubbles)
 * [QQ Bot](/channels/qqbot)
-* [iMessage (legacy)](/channels/imessage)
+* [iMessage](/channels/imessage)
 * [Groups](/channels/groups)
 * [WhatsApp group messages](/channels/group-messages)
 * [Media images](/nodes/images)

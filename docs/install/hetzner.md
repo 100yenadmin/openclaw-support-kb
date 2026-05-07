@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hetzner"
 source: "https://docs.openclaw.ai/install/hetzner"
-source_hash: "fc23420622c219e549894d85676ad6746ebdfed5ebb0679255e9e675f53c917c"
+source_hash: "122fbc5f57ed905deaaf59a23f250bb475161247759385baba00651242510849"
 doc_path: "install/hetzner.md"
 original_doc_path: "install/hetzner.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/hetzner
 
 
-
-# OpenClaw on Hetzner (Docker, Production VPS Guide)
 
 ## Goal
 
@@ -146,10 +144,11 @@ For the generic Docker flow, see [Docker](/install/docker).
     XDG_CONFIG_HOME=/home/node/.openclaw
     ```
 
-    Leave `OPENCLAW_GATEWAY_TOKEN` blank unless you explicitly want to
-    manage it through `.env`; OpenClaw writes a random gateway token to
-    config on first start. Generate a keyring password and paste it into
-    `GOG_KEYRING_PASSWORD`:
+    Set `OPENCLAW_GATEWAY_TOKEN` when you want to manage the stable gateway
+    token through `.env`; otherwise configure `gateway.auth.token` before
+    relying on clients across restarts. If neither source exists, OpenClaw uses
+    a runtime-only token for that startup. Generate a keyring password and paste
+    it into `GOG_KEYRING_PASSWORD`:
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openssl rand -hex 32

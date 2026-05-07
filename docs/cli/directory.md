@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "80418f366ebdbf270e477b5d27b9c1b3220323bbf024cbda789559f57b07e0dd"
+source_hash: "a7ebb220226312e3c5dadd31bd492741286e9ebbc6deebe0d2f49a3c8e67741d"
 doc_path: "cli/directory.md"
 original_doc_path: "cli/directory.md"
 duplicate_index: 1
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/cli/directory
 
 # `openclaw directory`
 
-Directory lookups for channels that support it (contacts/peers, groups, and “me”).
+Directory lookups for channels that support it (contacts/peers, groups, and "me").
 
 ## Common flags
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "c2d0029cb6a5e910c3b38c2f4fb8433619e45de659510b685b950e9ff43006f9"
+source_hash: "b2a503b626c6e3a36e04397b1ff6d9314eee2c93ba3d3892f67a88cf70c78b88"
 doc_path: "start/hubs.md"
 original_doc_path: "start/hubs.md"
 duplicate_index: 1
@@ -81,9 +81,9 @@ Use these hubs to discover every page, including deep dives and reference docs t
 * [Discord](/channels/discord)
 * [Mattermost](/channels/mattermost)
 * [Signal](/channels/signal)
-* [BlueBubbles (iMessage)](/channels/bluebubbles)
+* [BlueBubbles (legacy iMessage bridge)](/channels/bluebubbles)
 * [QQ Bot](/channels/qqbot)
-* [iMessage (legacy)](/channels/imessage)
+* [iMessage](/channels/imessage)
 * [Location parsing](/channels/location)
 * [WebChat](/web/webchat)
 * [Webhooks](/automation/cron-jobs#webhooks)

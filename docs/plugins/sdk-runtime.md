@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "dad52300d56b4e059f3632a82f22f953f8365ee970ad56d35781990f47e2bb52"
+source_hash: "07ef717a5839e05aedaa9eea8575a72cae7b88433f87c62546db07aaac5afcea"
 doc_path: "plugins/sdk-runtime.md"
 original_doc_path: "plugins/sdk-runtime.md"
 duplicate_index: 1
@@ -31,7 +31,7 @@ register(api) {
 }
 ```
 
-## Config Loading And Writes
+## Config loading and writes
 
 Prefer config that was already passed into the active call path, for example `api.config` during registration or a `cfg` argument on channel/provider callbacks. This keeps one process snapshot flowing through the work instead of reparsing config on hot paths.
 

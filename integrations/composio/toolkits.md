@@ -2,8 +2,8 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "8cd3515d4da44e0d7a0866d7d0183232fd6657dd9cbc77fd648181b2079a8b65"
-catalog_snapshot_sha256: "8cd3515d4da44e0d7a0866d7d0183232fd6657dd9cbc77fd648181b2079a8b65"
+source_hash: "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4"
+catalog_snapshot_sha256: "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -36,13 +36,13 @@ Gmail is Google's email service with powerful spam protection, search, and G Sui
 
 OAUTH2
 
-BEARER TOKEN
-
 Outlook
 
 Outlook is Microsoft's email and calendaring platform for unified communications and scheduling. It helps users stay org…
 
 OAUTH2
+
+S2S OAUTH2
 
 Google Calendar
 
@@ -50,23 +50,17 @@ Google Calendar is a time management service for scheduling meetings, events, an
 
 OAUTH2
 
-BEARER TOKEN
-
 Google Drive
 
 Google Drive is a cloud storage platform for uploading, sharing, and collaborating on files. It's perfect for keeping yo…
 
 OAUTH2
 
-BEARER TOKEN
-
 Twitter
 
 Twitter is a social media platform for sharing real-time updates, conversations, and news. Stay connected, informed, and…
 
 OAUTH2
-
-BEARER TOKEN
 
 Google Sheets
 
@@ -102,15 +96,11 @@ Slack is a channel-based messaging platform for teams and organizations. It help
 
 OAUTH2
 
-BEARER TOKEN
-
 Airtable
 
 Airtable combines the flexibility of spreadsheets with the power of a database for easy project and data management. Tea…
 
 OAUTH2
-
-BEARER TOKEN
 
 API KEY
 
@@ -120,15 +110,11 @@ Google Docs is a cloud-based word processor that enables document creation and r
 
 OAUTH2
 
-BEARER TOKEN
-
 Google Super
 
 Google Super is an all-in-one suite combining Gmail, Drive, Calendar, Sheets, Analytics, and more. It gives you a unifie…
 
 OAUTH2
-
-BEARER TOKEN
 
 API KEY
 
@@ -138,7 +124,7 @@ HubSpot is an all-in-one marketing, sales, and customer service platform. It let
 
 OAUTH2
 
-BEARER TOKEN
+API KEY
 
 Codeinterpreter
 
@@ -149,6 +135,8 @@ NO AUTH
 Gong
 
 Gong is a platform for video meetings, call recording, and team collaboration. It helps teams capture conversations, ana…
+
+BASIC
 
 OAUTH2
 
@@ -161,6 +149,8 @@ OAUTH2
 Ashby
 
 Ashby is an applicant tracking system that handles job postings, candidate management, and hiring analytics.
+
+API KEY
 
 Pipedrive
 
@@ -190,13 +180,13 @@ GitHub is a code hosting platform for version control and collaborative software
 
 OAUTH2
 
-SERVICE ACCOUNT
-
 Microsoft teams
 
 Microsoft Teams is a collaboration platform that combines chat, meetings, and file sharing within Microsoft 365. It keep…
 
 OAUTH2
+
+S2S OAUTH2
 
 Firecrawl
 
@@ -224,6 +214,8 @@ Salesforce is a leading CRM platform that helps businesses manage sales, service
 
 OAUTH2
 
+S2S OAUTH2
+
 Tavily
 
 Tavily offers powerful search and data retrieval from documents, databases, and the web. It helps teams locate and filte…
@@ -235,6 +227,8 @@ Jira
 Jira is Atlassian’s platform for bug tracking, issue tracking, and agile project management. It helps teams organize wor…
 
 OAUTH2
+
+S2S OAUTH2
 
 API KEY
 
@@ -280,46 +274,4 @@ API KEY
 
 ## Categories
 
-Browse by Category
-
-Developer Tools & DevOps
-
-Collaboration & Communication
-
-AI & Machine Learning
-
-Document & File Management
-
-Productivity & Project Management
-
-CRM
-
-Analytics & Data
-
-Entertainment & Media
-
-Education & LMS
-
-Design & Creative Tools
-
-Marketing & Social Media
-
-Scheduling & Booking
-
-E-commerce
-
-Finance & Accounting
-
-Sales & Customer Support
-
-HR & Recruiting
-
-Social Media
-
-Workflow Automation
-
-Data & Analytics
-
-Advertising & Marketing
-
-Used by agents from
+No category text captured.

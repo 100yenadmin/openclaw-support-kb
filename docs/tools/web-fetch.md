@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "533960124d470a6a3c3ad0b376dccbf45639ef07554a15da33891907cb8bf98b"
+source_hash: "3f17d4360fceba4c20322d1b7afac043320e2b19e5bcd023a0da2eda01712266"
 doc_path: "tools/web-fetch.md"
 original_doc_path: "tools/web-fetch.md"
 duplicate_index: 1
@@ -151,7 +151,7 @@ Current runtime behavior:
 * If Readability is disabled, `web_fetch` skips straight to the selected
   provider fallback. If no provider is available, it fails closed.
 
-## Trusted Env Proxy
+## Trusted env proxy
 
 If your deployment requires `web_fetch` to go through a trusted outbound
 HTTP(S) proxy, set `tools.web.fetch.useTrustedEnvProxy: true`.

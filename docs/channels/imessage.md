@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "d8588dcab968e58f529b7be56238a59aa14a6b910549cf6d8a16b03ee3c70272"
+source_hash: "b7c88c7cb84253a3608b779cd053422a6f808801df7e03382b013f10b6d7a02b"
 doc_path: "channels/imessage.md"
 original_doc_path: "channels/imessage.md"
 duplicate_index: 1
@@ -13,17 +13,15 @@ Source: https://docs.openclaw.ai/channels/imessage
 
 
 
-<Warning>
-  For new iMessage deployments, use <a href="/channels/bluebubbles">BlueBubbles</a>.
+<Note>
+  For new OpenClaw iMessage deployments, start here when you can run `imsg` on a signed-in macOS Messages host. BlueBubbles remains available as a legacy fallback for existing setups that depend on its HTTP server, webhooks, or richer private-API actions.
+</Note>
 
-  The `imsg` integration is legacy and may be removed in a future release.
-</Warning>
-
-Status: legacy external CLI integration. Gateway spawns `imsg rpc` and communicates over JSON-RPC on stdio (no separate daemon/port).
+Status: native external CLI integration. Gateway spawns `imsg rpc` and communicates over JSON-RPC on stdio (no separate daemon/port).
 
 <CardGroup>
-  <Card title="BlueBubbles (recommended)" icon="message-circle" href="/channels/bluebubbles">
-    Preferred iMessage path for new setups.
+  <Card title="BlueBubbles (legacy fallback)" icon="message-circle" href="/channels/bluebubbles">
+    Keep using it for existing BlueBubbles-backed routing; avoid it for new setups when imsg fits.
   </Card>
 
   <Card title="Pairing" icon="link" href="/channels/pairing">

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "83baf7bed0fa60600fecfd3c44aedf9b7c16b29623cbdbdfcffc72f1fbc96928"
+source_hash: "0a87f6aafe89feb4ddf04061d2bf99d317f8827ef4c6b2494e9de0e423ffe204"
 doc_path: "cli/cron.md"
 original_doc_path: "cli/cron.md"
 duplicate_index: 1
@@ -226,6 +226,8 @@ openclaw cron runs --id <job-id> --limit 50
 ```
 
 `openclaw cron list` shows all matching jobs by default. Pass `--agent <id>` to show only jobs whose effective normalized agent id matches; jobs without a stored agent id count as the configured default agent.
+
+`cron list --json` and `cron show <job-id> --json` include a top-level `status` field on each job, computed from `enabled`, `state.runningAtMs`, and `state.lastRunStatus`. Values: `disabled`, `running`, `ok`, `error`, `skipped`, or `idle`. This mirrors the human-readable status column so external tooling can read job state without re-deriving it.
 
 `cron runs` entries include delivery diagnostics with the intended cron target, the resolved target, message-tool sends, fallback use, and delivered state.
 

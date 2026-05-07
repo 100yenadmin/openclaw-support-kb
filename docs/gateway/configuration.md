@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "b5825e5f2b7dab6c64131b5af68924dda2dc478725cdaedfa3857c82b10e8441"
+source_hash: "a78679c20b34918ff95a58853844142acfa8b4d30014801cbf4099aab06a93ff"
 doc_path: "gateway/configuration.md"
 original_doc_path: "gateway/configuration.md"
 duplicate_index: 1
@@ -570,7 +570,7 @@ Most fields hot-apply without downtime. In `hybrid` mode, restart-required chang
 | Tools & media       | `tools`, `browser`, `skills`, `mcp`, `audio`, `talk`              | No              |
 | UI & misc           | `ui`, `logging`, `identity`, `bindings`                           | No              |
 | Gateway server      | `gateway.*` (port, bind, auth, tailscale, TLS, HTTP)              | **Yes**         |
-| Infrastructure      | `discovery`, `canvasHost`, `plugins`                              | **Yes**         |
+| Infrastructure      | `discovery`, `plugins`                                            | **Yes**         |
 
 <Note>
   `gateway.reload` and `gateway.remote` are exceptions - changing them does **not** trigger a restart.

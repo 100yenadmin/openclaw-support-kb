@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools and plugins"
 source: "https://docs.openclaw.ai/tools/index"
-source_hash: "9c4c4e1282aa0cbc78e4e13b67c2675ddd775df0b7a3d712da00fe209252cc75"
+source_hash: "29efaf3774a7391a863f7b45344e188483c6926d227d8e179a9151fb2cd585ca"
 doc_path: "tools/index.md"
 original_doc_path: "tools/index.md"
 duplicate_index: 1
@@ -63,7 +63,6 @@ These tools ship with OpenClaw and are available without installing any plugins:
 | `read` / `write` / `edit`                  | File I/O in the workspace                                             |                                                              |
 | `apply_patch`                              | Multi-hunk file patches                                               | [Apply Patch](/tools/apply-patch)                            |
 | `message`                                  | Send messages across all channels                                     | [Agent Send](/tools/agent-send)                              |
-| `canvas`                                   | Drive node Canvas (present, eval, snapshot)                           |                                                              |
 | `nodes`                                    | Discover and target paired devices                                    |                                                              |
 | `cron` / `gateway`                         | Manage scheduled jobs; inspect, patch, restart, or update the gateway |                                                              |
 | `image` / `image_generate`                 | Analyze or generate images                                            | [Image Generation](/tools/image-generation)                  |
@@ -107,6 +106,7 @@ legacy `tools.bash.*` aliases normalize to the same protected exec paths.
 
 Plugins can register additional tools. Some examples:
 
+* [Canvas](/plugins/reference/canvas) — experimental bundled plugin for node Canvas control and A2UI rendering
 * [Diffs](/tools/diffs) — diff viewer and renderer
 * [LLM Task](/tools/llm-task) — JSON-only LLM step for structured output
 * [Lobster](/tools/lobster) — typed workflow runtime with resumable approvals
@@ -198,7 +198,7 @@ Use `group:*` shorthands in allow/deny lists:
 | `group:sessions`   | sessions\_list, sessions\_history, sessions\_send, sessions\_spawn, sessions\_yield, subagents, session\_status |
 | `group:memory`     | memory\_search, memory\_get                                                                                     |
 | `group:web`        | web\_search, x\_search, web\_fetch                                                                              |
-| `group:ui`         | browser, canvas                                                                                                 |
+| `group:ui`         | browser, canvas when the bundled Canvas plugin is enabled                                                       |
 | `group:automation` | heartbeat\_respond, cron, gateway                                                                               |
 | `group:messaging`  | message                                                                                                         |
 | `group:nodes`      | nodes                                                                                                           |

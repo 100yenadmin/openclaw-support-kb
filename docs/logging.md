@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "b2f1120f0b35204ba87aade7eb890a7b806b44438e224d3ff814cbc8cd60c337"
+source_hash: "0739ac98df8dab8352d7c47fff59c84ba570bc71a40e867e90005c4d8487fc9c"
 doc_path: "logging.md"
 original_doc_path: "logging.md"
 duplicate_index: 1
@@ -122,6 +122,11 @@ available:
 OpenClaw preserves the original structured log arguments alongside these fields
 so existing parsers that read numbered tslog argument keys keep working.
 
+Talk, realtime voice, and managed-room activity emits bounded lifecycle log
+records through this same file-log pipeline. These records include event type,
+mode, transport, provider, and size/timing measurements when available, but omit
+transcript text, audio payloads, turn ids, call ids, and provider item ids.
+
 ### Console output
 
 Console logs are **TTY-aware** and formatted for readability:
@@ -189,6 +194,9 @@ the request trace when they do not pass an explicit trace context. Agent run and
 model-call traces become children of the active request trace, so local logs,
 diagnostic snapshots, OTEL spans, and trusted provider `traceparent` headers can
 be joined by `traceId` without logging raw request or model content.
+
+Talk lifecycle log records also flow to OTLP logs when OpenTelemetry log export
+is enabled, using the same bounded attributes as file logs.
 
 ### Model call size and timing
 

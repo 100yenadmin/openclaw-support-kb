@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "8cbbbfb8a0a7957bfc538d66e1eb464fcef430a25d0454e75bc1a4d8c124517e"
+source_hash: "083b1a21028451c2c304902d744a872968f4f651896a96634c7457a5ba90356a"
 doc_path: "cli/hooks.md"
 original_doc_path: "cli/hooks.md"
 duplicate_index: 1
@@ -137,7 +137,7 @@ openclaw hooks enable <name>
 
 Enable a specific hook by adding it to your config (`~/.openclaw/openclaw.json` by default).
 
-**Note:** Workspace hooks are disabled by default until enabled here or in config. Hooks managed by plugins show `plugin:<id>` in `openclaw hooks list` and can’t be enabled/disabled here. Enable/disable the plugin instead.
+**Note:** Workspace hooks are disabled by default until enabled here or in config. Hooks managed by plugins show `plugin:<id>` in `openclaw hooks list` and can't be enabled/disabled here. Enable/disable the plugin instead.
 
 **Arguments:**
 

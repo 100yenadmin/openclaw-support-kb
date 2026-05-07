@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "91fe7e1cc261fc7a290a934f234a65267689f28b4542a01de9cd56652f376f80"
+source_hash: "20a54ba903610c5930755641e38d24ca3e7cedce30197eb864892e93c380b844"
 doc_path: "providers/anthropic.md"
 original_doc_path: "providers/anthropic.md"
 duplicate_index: 1
@@ -260,7 +260,7 @@ OpenClaw supports Anthropic's prompt caching feature for API-key auth.
 
     | Property        | Value                 |
     | --------------- | --------------------- |
-    | Default model   | `claude-opus-4-6`     |
+    | Default model   | `claude-opus-4-7`     |
     | Supported input | Images, PDF documents |
 
     When an image or PDF is attached to a conversation, OpenClaw automatically

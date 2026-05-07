@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "7032d68f29b4efbf27498494c352c65da8f69852cf912cb4a06a732e34876419"
+source_hash: "50bb7de4d00053be5dde1424e906908cee334b52f672a08c90ed5bcd356a6b9c"
 doc_path: "plugins/manage-plugins.md"
 original_doc_path: "plugins/manage-plugins.md"
 duplicate_index: 1
@@ -113,6 +113,11 @@ openclaw gateway restart
 Uninstall removes the plugin's config entry, plugin index record, allow/deny list
 entries, and linked load paths when applicable. Managed install directories are
 removed unless you pass `--keep-files`.
+
+In Nix mode (`OPENCLAW_NIX_MODE=1`), plugin install, update, uninstall, enable,
+and disable commands are disabled. Manage those choices in the Nix source for
+the install instead; for nix-openclaw, use the agent-first
+[Quick Start](https://github.com/openclaw/nix-openclaw#quick-start).
 
 ## Publish plugins
 

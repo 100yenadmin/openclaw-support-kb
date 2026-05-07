@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
-source_hash: "289bbbf6f0400373d5479b718a51e5c6eeb72dc17e9b9ae5f7ca7a8630bd5835"
+source_hash: "433762a77048cae342ca157b4e5a4e57ca08118ffaefb67938adf7bb688eb534"
 doc_path: "channels/zalouser.md"
 original_doc_path: "channels/zalouser.md"
 duplicate_index: 1
@@ -63,7 +63,7 @@ No external `zca`/`openzca` CLI binary is required.
 * Runs entirely in-process via `zca-js`.
 * Uses native event listeners to receive inbound messages.
 * Sends replies directly through the JS API (text/media/link).
-* Designed for “personal account” use cases where Zalo Bot API is not available.
+* Designed for "personal account" use cases where Zalo Bot API is not available.
 
 ## Naming
 

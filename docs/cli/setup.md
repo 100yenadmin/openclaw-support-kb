@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
-source_hash: "b4c9501c4e83e1dc25680ccca1a8592bf536a5e50f621cfab1118996aa9c579b"
+source_hash: "66b68b4f1d9dff99fd97d45a1970ea3a9dfb95bc47283c151b91ccfbc760ced4"
 doc_path: "cli/setup.md"
 original_doc_path: "cli/setup.md"
 duplicate_index: 1
@@ -16,6 +16,10 @@ Source: https://docs.openclaw.ai/cli/setup
 # `openclaw setup`
 
 Initialize `~/.openclaw/openclaw.json` and the agent workspace.
+
+<Note>
+  `openclaw setup` is for mutable config installs. In Nix mode (`OPENCLAW_NIX_MODE=1`), OpenClaw refuses setup writes because the config file is managed by Nix. Agents should use the first-party [nix-openclaw Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) or the equivalent source config for another Nix package.
+</Note>
 
 Related:
 

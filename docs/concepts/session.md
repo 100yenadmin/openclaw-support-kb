@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "e146f92355c914add72186c6e169d462a7437dbc342bb0fbbb825579f4979c17"
+source_hash: "b5d4d428757e354c2f5e017ff8f17a50fb8f6f068df908dd2281ff590bfe7dd4"
 doc_path: "concepts/session.md"
 original_doc_path: "concepts/session.md"
 duplicate_index: 1
@@ -136,6 +136,12 @@ For production-sized `maxEntries` limits, Gateway runtime writes use a small hig
 Maintenance preserves durable external conversation pointers, including group
 sessions and thread-scoped chat sessions, while still allowing synthetic cron,
 hook, heartbeat, ACP, and sub-agent entries to age out.
+
+If you previously used direct-message isolation and later returned
+`session.dmScope` to `main`, preview stale peer-keyed DM rows with
+`openclaw sessions cleanup --dry-run --fix-dm-scope`. Applying the same flag
+retires those old direct-DM rows and keeps their transcripts as deleted
+archives.
 
 Preview with `openclaw sessions cleanup --dry-run`.
 

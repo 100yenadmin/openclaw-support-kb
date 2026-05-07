@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "fb32793aec6798d1d305d3848dd02f7e11133f21779b2e3a6e442ea47d622e7a"
+source_hash: "7141363cc2858bf8c97e5db0ea7c11c705774ce3a5b2aaa0a08a6cafbb668fbe"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/plugins/dependency-resolution
 
 
-
-# Plugin dependency resolution
 
 OpenClaw keeps plugin dependency work at install/update time. Runtime loading
 does not run package managers, repair dependency trees, or mutate the OpenClaw
@@ -48,7 +46,7 @@ OpenClaw uses stable per-source roots:
 npm installs run in the npm root with:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-npm install --prefix ~/.openclaw/npm <spec> --omit=dev --ignore-scripts --no-audit --no-fund
+npm install --prefix ~/.openclaw/npm <spec> --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund
 ```
 
 `openclaw plugins install npm-pack:<path.tgz>` uses that same managed npm root
@@ -66,10 +64,10 @@ runtime dependencies stay inside the managed cleanup boundary.
 Plugins that import `openclaw/plugin-sdk/*` declare `openclaw` as a peer
 dependency. OpenClaw does not let npm install a separate registry copy of the
 host package into the managed root, because stale host packages can affect npm
-peer resolution during later plugin installs. Instead, after npm finishes
-mutating the shared root during install, update, or uninstall, OpenClaw reasserts
+peer resolution during later plugin installs. Managed npm installs skip npm peer
+resolution/materialization for the shared root and OpenClaw reasserts
 plugin-local `node_modules/openclaw` links for installed packages that declare
-the host peer.
+the host peer after install, update, or uninstall.
 
 git installs clone or refresh the repository, then run:
 

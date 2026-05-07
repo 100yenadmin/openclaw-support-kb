@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "9b2faa1dece6be439167d21e68d05ebf42de79a990b61e62aa0df02cffe4881e"
+source_hash: "ac7a634543f46a5790e07456d8bad4889a1b6153343d6e27dfcc8e13c4ada922"
 doc_path: "channels/slack.md"
 original_doc_path: "channels/slack.md"
 duplicate_index: 1
@@ -1007,9 +1007,10 @@ Use draft preview instead of Slack native text streaming:
 
 Legacy keys:
 
-* `channels.slack.streamMode` (`replace | status_final | append`) is auto-migrated to `channels.slack.streaming.mode`.
-* boolean `channels.slack.streaming` is auto-migrated to `channels.slack.streaming.mode` and `channels.slack.streaming.nativeTransport`.
-* legacy `channels.slack.nativeStreaming` is auto-migrated to `channels.slack.streaming.nativeTransport`.
+* `channels.slack.streamMode` (`replace | status_final | append`) is a legacy runtime alias for `channels.slack.streaming.mode`.
+* boolean `channels.slack.streaming` is a legacy runtime alias for `channels.slack.streaming.mode` and `channels.slack.streaming.nativeTransport`.
+* legacy `channels.slack.nativeStreaming` is a runtime alias for `channels.slack.streaming.nativeTransport`.
+* Run `openclaw doctor --fix` to rewrite persisted Slack streaming config to the canonical keys.
 
 ## Typing reaction fallback
 

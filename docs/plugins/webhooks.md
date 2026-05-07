@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Webhooks plugin"
 source: "https://docs.openclaw.ai/plugins/webhooks"
-source_hash: "fb2ab1d03da0e880dbda1c71256256d73c9d13bfcf7dd140f6a48bbe97d9f683"
+source_hash: "dd749c60087f73a681ae3157624049ba49dcddf96bc1cc55f1f29810d4bbb485"
 doc_path: "plugins/webhooks.md"
 original_doc_path: "plugins/webhooks.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/plugins/webhooks
 
 
-
-# Webhooks (plugin)
 
 The Webhooks plugin adds authenticated HTTP routes that bind external
 automation to OpenClaw TaskFlows.

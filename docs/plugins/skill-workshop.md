@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skill workshop plugin"
 source: "https://docs.openclaw.ai/plugins/skill-workshop"
-source_hash: "45913c3eb4a9cc91e5e24c787cc596dfd80ae2266e2bab6fe6329bfebd8cda29"
+source_hash: "1e7181c1a64e0b64087d74ca04b368ca8cf8b07a0641518d600178bc17749075"
 doc_path: "plugins/skill-workshop.md"
 original_doc_path: "plugins/skill-workshop.md"
 duplicate_index: 1
@@ -362,7 +362,7 @@ Create a proposal. With `approvalPolicy: "pending"` (default), this queues inste
 ```
 
 <AccordionGroup>
-  <Accordion title="Force a safe write (apply: true)">
+  <Accordion title="Request immediate write in auto mode (apply: true)">
     ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
       "action": "suggest",
@@ -372,6 +372,9 @@ Create a proposal. With `approvalPolicy: "pending"` (default), this queues inste
       "body": "## Workflow\n\n- Verify true animation.\n- Record attribution."
     }
     ```
+
+    With `approvalPolicy: "pending"`, `apply: true` still queues the proposal. Review it, then use
+    the `apply` action after approval.
   </Accordion>
 
   <Accordion title="Force pending under auto policy (apply: false)">
@@ -413,6 +416,9 @@ Create a proposal. With `approvalPolicy: "pending"` (default), this queues inste
 ### `apply`
 
 Apply a pending proposal.
+
+With `approvalPolicy: "pending"`, this action asks for operator approval before writing the
+workspace skill.
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -548,8 +554,8 @@ The guidance emphasizes:
 
 The write mode text changes with `approvalPolicy`:
 
-* pending mode: queue suggestions; apply only after explicit approval
-* auto mode: apply safe workspace-skill updates when clearly reusable
+* pending mode: queue suggestions; use `apply` after explicit approval
+* auto mode: apply safe workspace-skill updates unless `apply: false` queues instead
 
 ## Costs and runtime behavior
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/cli/nodes"
-source_hash: "fd9c8861d110ec766bb43b60aadfb940ae7fd9c1cc0d3193659e6ca76866ddab"
+source_hash: "526e1e52ece7c3fbf97a67d5e30e0d1c6cd341d821aba6a6a3642c9c16572b90"
 doc_path: "cli/nodes.md"
 original_doc_path: "cli/nodes.md"
 duplicate_index: 1
@@ -75,7 +75,7 @@ Invoke flags:
 
 For shell execution on a node, use the `exec` tool with `host=node` instead of `openclaw nodes run`.
 The `nodes` CLI is now capability-focused: direct RPC via `nodes invoke`, plus pairing, camera,
-screen, location, canvas, and notifications.
+screen, location, Canvas, and notifications. Canvas commands are implemented by the bundled experimental Canvas plugin; core keeps a compatibility hook so they remain under `openclaw nodes canvas`.
 
 ## Related
 

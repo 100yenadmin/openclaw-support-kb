@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "9427297322b14864d120c6c13dfd40f2320cc08c7bb82201ce499a28b08660ce"
+source_hash: "267f2a3eef9a7b53aab512d31814f31d406e2527b9dce7dae9419d1662ec806d"
 doc_path: "platforms/ios.md"
 original_doc_path: "platforms/ios.md"
 duplicate_index: 1
@@ -278,7 +278,7 @@ openclaw nodes invoke --node "iOS Node" --command canvas.snapshot --params '{"ma
 ## Common errors
 
 * `NODE_BACKGROUND_UNAVAILABLE`: bring the iOS app to the foreground (canvas/camera/screen commands require it).
-* `A2UI_HOST_NOT_CONFIGURED`: the Gateway did not advertise a canvas host URL; check `canvasHost` in [Gateway configuration](/gateway/configuration).
+* `A2UI_HOST_NOT_CONFIGURED`: the Gateway did not advertise the Canvas plugin surface URL; check `plugins.entries.canvas.config.host` in [Gateway configuration](/gateway/configuration).
 * Pairing prompt never appears: run `openclaw devices list` and approve manually.
 * Reconnect fails after reinstall: the Keychain pairing token was cleared; re-pair the node.
 

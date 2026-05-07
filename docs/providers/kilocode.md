@@ -1,19 +1,17 @@
 ---
 type: openclaw_doc
-title: "Kilocode"
+title: "Kilo Gateway"
 source: "https://docs.openclaw.ai/providers/kilocode"
-source_hash: "f087d44b7f93a595a922002d542fb58e7699918ca948a72dd3ef357d1df98cbf"
+source_hash: "d83f2c0693b5bb7c7e41335f565b1fd999b71ef79c2e68be5a5468e440daf92d"
 doc_path: "providers/kilocode.md"
 original_doc_path: "providers/kilocode.md"
 duplicate_index: 1
 ---
 
-# Kilocode
+# Kilo Gateway
 Source: https://docs.openclaw.ai/providers/kilocode
 
 
-
-# Kilo Gateway
 
 Kilo Gateway provides a **unified API** that routes requests to many models behind a single
 endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switching the base URL.

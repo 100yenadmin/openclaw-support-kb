@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "50dabe41c29bacb489899de04b4759870db0b84b46b29f49eeb64144a4959a70"
+source_hash: "d1ed164fa113355093bb73636a7d9964ab9aa98d708d64b93dcbd3c644a7b576"
 doc_path: "gateway/logging.md"
 original_doc_path: "gateway/logging.md"
 duplicate_index: 1
@@ -44,6 +44,11 @@ default agent or model `fastMode` params.
   * `logging.level`
 
 The file format is one JSON object per line.
+
+Talk, realtime voice, and managed-room code paths use the shared file logger for
+bounded lifecycle records. These records are intended for operational debugging
+and OTLP log export; transcript text, audio payloads, turn ids, call ids, and
+provider item ids are not copied into the log record.
 
 The Control UI Logs tab tails this file via the gateway (`logs.tail`).
 CLI can do the same:

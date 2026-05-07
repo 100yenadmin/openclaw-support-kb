@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "aefe9a32e0d22f497a5de0d6e31e9ed291d5a33c5a17ff4393da37525bf2bd67"
+source_hash: "a072677fff443d7ffbb9c83d8a48b9b6e4c17a16187d94bc1d39fb4e875b4755"
 doc_path: "concepts/qa-e2e-automation.md"
 original_doc_path: "concepts/qa-e2e-automation.md"
 duplicate_index: 1
@@ -321,13 +321,23 @@ Required env when `--credential-source env`:
 Optional:
 
 * `OPENCLAW_QA_DISCORD_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts.
+* `OPENCLAW_QA_DISCORD_VOICE_CHANNEL_ID` selects the voice/stage channel for `discord-voice-autojoin`; without it, the scenario picks the first visible voice/stage channel for the SUT bot.
 
 Scenarios (`extensions/qa-lab/src/live-transports/discord/discord-live.runtime.ts:36`):
 
 * `discord-canary`
 * `discord-mention-gating`
 * `discord-native-help-command-registration`
+* `discord-voice-autojoin` - opt-in voice scenario. Runs by itself, enables `channels.discord.voice.autoJoin`, and verifies the SUT bot's current Discord voice state is the target voice/stage channel. Convex Discord credentials may include optional `voiceChannelId`; otherwise the runner discovers the first visible voice/stage channel in the guild.
 * `discord-status-reactions-tool-only` - opt-in Mantis scenario. Runs by itself because it switches the SUT to always-on, tool-only guild replies with `messages.statusReactions.enabled=true`, then captures a REST reaction timeline plus HTML/PNG visual artifacts. Mantis before/after reports also preserve scenario-provided MP4 artifacts as `baseline.mp4` and `candidate.mp4`.
+
+Run the Discord voice auto-join scenario explicitly:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+pnpm openclaw qa discord \
+  --scenario discord-voice-autojoin \
+  --provider-mode mock-openai
+```
 
 Run the Mantis status-reaction scenario explicitly:
 

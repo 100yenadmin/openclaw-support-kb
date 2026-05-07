@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GCP"
 source: "https://docs.openclaw.ai/install/gcp"
-source_hash: "dd3ad9746fe6f7ed964aee8970a138a6fe6011194becd9ce69c9db95b461f9ad"
+source_hash: "282828c098405ce4ad80cb50e50cb76d4c9b96c16041db85502678f45e282986"
 doc_path: "install/gcp.md"
 original_doc_path: "install/gcp.md"
 duplicate_index: 1
@@ -219,10 +219,11 @@ For the generic Docker flow, see [Docker](/install/docker).
     XDG_CONFIG_HOME=/home/node/.openclaw
     ```
 
-    Leave `OPENCLAW_GATEWAY_TOKEN` blank unless you explicitly want to
-    manage it through `.env`; OpenClaw writes a random gateway token to
-    config on first start. Generate a keyring password and paste it into
-    `GOG_KEYRING_PASSWORD`:
+    Set `OPENCLAW_GATEWAY_TOKEN` when you want to manage the stable gateway
+    token through `.env`; otherwise configure `gateway.auth.token` before
+    relying on clients across restarts. If neither source exists, OpenClaw uses
+    a runtime-only token for that startup. Generate a keyring password and paste
+    it into `GOG_KEYRING_PASSWORD`:
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openssl rand -hex 32

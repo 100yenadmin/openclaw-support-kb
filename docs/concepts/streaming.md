@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "720ceac3ca3c9274e5975383a0e130fad3a39ea8d34dc73548868f0090ce5e83"
+source_hash: "54056086aa883bf3d23ae53b22595a452a6053ab7329d3c40fc846eb5a5864c7"
 doc_path: "concepts/streaming.md"
 original_doc_path: "concepts/streaming.md"
 duplicate_index: 1
@@ -158,8 +158,8 @@ Slack-only:
 Legacy key migration:
 
 * Telegram: legacy `streamMode` and scalar/boolean `streaming` values are detected and migrated by doctor/config compatibility paths to `streaming.mode`.
-* Discord: `streamMode` + boolean `streaming` auto-migrate to `streaming` enum.
-* Slack: `streamMode` auto-migrates to `streaming.mode`; boolean `streaming` auto-migrates to `streaming.mode` plus `streaming.nativeTransport`; legacy `nativeStreaming` auto-migrates to `streaming.nativeTransport`.
+* Discord: `streamMode` + boolean `streaming` remain runtime aliases for the `streaming` enum; run `openclaw doctor --fix` to rewrite persisted config.
+* Slack: `streamMode` remains a runtime alias for `streaming.mode`; boolean `streaming` remains a runtime alias for `streaming.mode` plus `streaming.nativeTransport`; legacy `nativeStreaming` remains a runtime alias for `streaming.nativeTransport`. Run `openclaw doctor --fix` to rewrite persisted config.
 
 ### Runtime behavior
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "3c2fdb83c47924b05679587d6bc362a4e05f2b1938d6c61bde73de22d759d351"
+source_hash: "fc8f88963fd3ddb71defd53f2cabea24e8851e4354b3d6b4368ba4f57db44a85"
 doc_path: "cli/update.md"
 original_doc_path: "cli/update.md"
 duplicate_index: 1
@@ -57,6 +57,10 @@ availability details. If you are debugging Gateway logs around an update,
 console verbosity and file log level are separate: Gateway `--verbose` affects
 terminal/WebSocket output, while file logs require `logging.level: "debug"` or
 `"trace"` in config. See [Gateway logging](/gateway/logging).
+
+<Note>
+  In Nix mode (`OPENCLAW_NIX_MODE=1`), mutating `openclaw update` runs are disabled. Update the Nix source or flake input for this install instead; for nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start). `openclaw update status` and `openclaw update --dry-run` remain read-only.
+</Note>
 
 <Warning>
   Downgrades require confirmation because older versions can break configuration.

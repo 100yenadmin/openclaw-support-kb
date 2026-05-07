@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw tasks`"
 source: "https://docs.openclaw.ai/cli/tasks"
-source_hash: "c7d5a8a198cd3ac792ea35d6def08883b2ed2e8b2e9498bc691b05d15720436c"
+source_hash: "200bcbdf2155ac923854345d6f4c7399262fba340338b4ba1a48986a858b29ec"
 doc_path: "cli/tasks.md"
 original_doc_path: "cli/tasks.md"
 duplicate_index: 1
@@ -94,7 +94,9 @@ Previews or applies task and Task Flow reconciliation, cleanup stamping, and pru
 For cron tasks, reconciliation uses persisted run logs/job state before marking an
 old active task `lost`, so completed cron runs do not become false audit errors
 just because the in-memory Gateway runtime state is gone. Offline CLI audit is
-not authoritative for the Gateway's process-local cron active-job set.
+not authoritative for the Gateway's process-local cron active-job set. CLI tasks
+with a run id/source id are marked `lost` when their live Gateway run context is
+gone, even if an old child-session row remains.
 
 ### `flow`
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "e96dfcee854ef5bda5bb1db363a21bdb29b70282995300a611498cf9247974ee"
+source_hash: "19af52304ab0145100ce9fe54cf2d5c21f79f88f49d7c1ea8fb7deda54ed272f"
 doc_path: "cli/doctor.md"
 original_doc_path: "cli/doctor.md"
 duplicate_index: 1
@@ -32,6 +32,15 @@ openclaw doctor --repair --non-interactive
 openclaw doctor --generate-gateway-token
 ```
 
+For channel-specific permissions, use the channel probes instead of `doctor`:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw channels capabilities --channel discord --target channel:<channel-id>
+openclaw channels status --probe
+```
+
+The targeted Discord capabilities probe reports the bot's effective channel permissions; the status probe audits configured Discord channels and voice auto-join targets.
+
 ## Options
 
 * `--no-workspace-suggestions`: disable workspace memory/search suggestions
@@ -45,6 +54,7 @@ openclaw doctor --generate-gateway-token
 
 Notes:
 
+* In Nix mode (`OPENCLAW_NIX_MODE=1`), read-only doctor checks still work, but `doctor --fix`, `doctor --repair`, `doctor --yes`, and `doctor --generate-gateway-token` are disabled because `openclaw.json` is immutable. Edit the Nix source for this install instead; for nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start).
 * Interactive prompts (like keychain/OAuth fixes) only run when stdin is a TTY and `--non-interactive` is **not** set. Headless runs (cron, Telegram, no terminal) will skip prompts.
 * Performance: non-interactive `doctor` runs skip eager plugin loading so headless health checks stay fast. Interactive sessions still fully load plugins when a check needs their contribution.
 * `--fix` (alias for `--repair`) writes a backup to `~/.openclaw/openclaw.json.bak` and drops unknown config keys, listing each removal.
@@ -74,7 +84,7 @@ Notes:
 
 ## macOS: `launchctl` env overrides
 
-If you previously ran `launchctl setenv OPENCLAW_GATEWAY_TOKEN ...` (or `...PASSWORD`), that value overrides your config file and can cause persistent “unauthorized” errors.
+If you previously ran `launchctl setenv OPENCLAW_GATEWAY_TOKEN ...` (or `...PASSWORD`), that value overrides your config file and can cause persistent "unauthorized" errors.
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 launchctl getenv OPENCLAW_GATEWAY_TOKEN

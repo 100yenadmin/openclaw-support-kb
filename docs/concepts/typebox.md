@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "c460e9fd8e6bef21a00ae8a2f851642cc129fff552c1046f7e68cc5c0a81bafc"
+source_hash: "6805498d7089196d397b6b915e18c9e5e529379ac0af4785f62482452e4c4171"
 doc_path: "concepts/typebox.md"
 original_doc_path: "concepts/typebox.md"
 duplicate_index: 1
@@ -102,8 +102,8 @@ Connect (first message):
   "id": "c1",
   "method": "connect",
   "params": {
-    "minProtocol": 3,
-    "maxProtocol": 3,
+    "minProtocol": 4,
+    "maxProtocol": 4,
     "client": {
       "id": "openclaw-macos",
       "displayName": "macos",
@@ -125,7 +125,7 @@ Hello-ok response:
   "ok": true,
   "payload": {
     "type": "hello-ok",
-    "protocol": 3,
+    "protocol": 4,
     "server": { "version": "dev", "connId": "ws-1" },
     "features": { "methods": ["health"], "events": ["tick"] },
     "snapshot": {
@@ -171,8 +171,8 @@ ws.on("open", () => {
       id: "c1",
       method: "connect",
       params: {
-        minProtocol: 3,
-        maxProtocol: 3,
+        minProtocol: 4,
+        maxProtocol: 4,
         client: {
           id: "cli",
           displayName: "example",
@@ -280,7 +280,7 @@ Unknown frame types are preserved as raw payloads for forward compatibility.
 
 ## Versioning + compatibility
 
-* `PROTOCOL_VERSION` lives in `src/gateway/protocol/schema.ts`.
+* `PROTOCOL_VERSION` lives in `src/gateway/protocol/version.ts`.
 * Clients send `minProtocol` + `maxProtocol`; the server rejects mismatches.
 * The Swift models keep unknown frame types to avoid breaking older clients.
 

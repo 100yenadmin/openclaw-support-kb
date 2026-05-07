@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "8963887d6400a61322e31d57a10d0925d17945f1b102455df0ca29654193af24"
+source_hash: "b8d2c93df5bf230ddb3a1a16cee6fee93512f4b5a0b3449e28c1de70431929e5"
 doc_path: "plugins/google-meet.md"
 original_doc_path: "plugins/google-meet.md"
 duplicate_index: 1
@@ -1268,7 +1268,7 @@ a session ended.
 }
 ```
 
-## Agent And Bidi Modes
+## Agent and bidi modes
 
 Chrome `agent` mode is optimized for "my agent is in the meeting" behavior. The
 realtime transcription provider hears the meeting audio, final participant

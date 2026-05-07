@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels/index"
-source_hash: "72fd4ee9062bc26198656003e78a9a18350b5853dcf40fece429ca9e5a48a4fe"
+source_hash: "726ae7155e8702374f6e79d312d7dec0654292afc4b0046d2b9ac62a90c504f5"
 doc_path: "channels/index.md"
 original_doc_path: "channels/index.md"
 duplicate_index: 1
@@ -28,11 +28,11 @@ Text is supported everywhere; media and reactions vary by channel.
 
 ## Supported channels
 
-* [BlueBubbles](/channels/bluebubbles) - **Recommended for iMessage**; uses the BlueBubbles macOS server REST API with full feature support (bundled plugin; edit, unsend, effects, reactions, group management - edit currently broken on macOS 26 Tahoe).
+* [BlueBubbles](/channels/bluebubbles) - Legacy iMessage bridge via the BlueBubbles macOS server REST API; deprecated for new OpenClaw setups but still supported for existing configs and richer private-API actions.
 * [Discord](/channels/discord) - Discord Bot API + Gateway; supports servers, channels, and DMs.
 * [Feishu](/channels/feishu) - Feishu/Lark bot via WebSocket (bundled plugin).
 * [Google Chat](/channels/googlechat) - Google Chat API app via HTTP webhook (downloadable plugin).
-* [iMessage (legacy)](/channels/imessage) - Legacy macOS integration via imsg CLI (deprecated, use BlueBubbles for new setups).
+* [iMessage](/channels/imessage) - Native macOS integration via the imsg CLI; preferred for new OpenClaw iMessage setups when host permissions and Messages access fit.
 * [IRC](/channels/irc) - Classic IRC servers; channels + DMs with pairing/allowlist controls.
 * [LINE](/channels/line) - LINE Messaging API bot (downloadable plugin).
 * [Matrix](/channels/matrix) - Matrix protocol (downloadable plugin).

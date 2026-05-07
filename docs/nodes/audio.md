@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audio and voice notes"
 source: "https://docs.openclaw.ai/nodes/audio"
-source_hash: "2a9c746ddc23fb06ac10405b3effd588aa2d91c6dca45e1e5e9a18a0dd5e5ece"
+source_hash: "962417360d0a1df9880e9754747dd77262efa8dca6924a4abd5b4e345040309e"
 doc_path: "nodes/audio.md"
 original_doc_path: "nodes/audio.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/nodes/audio
 
 
-
-# Audio / Voice Notes (2026-01-17)
 
 ## What works
 

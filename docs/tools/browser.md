@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "3ece652c233b60aab3a21f57348bdf5b3d991db670f09344a4fbe52258df6281"
+source_hash: "1d6e5ca340dd3a9778f480d908edbaced0c19b37bdc81d61ededf90173d52804"
 doc_path: "tools/browser.md"
 original_doc_path: "tools/browser.md"
 duplicate_index: 1
@@ -488,7 +488,10 @@ Key ideas:
 * Tailscale Serve identity headers and `gateway.auth.mode: "trusted-proxy"` do
   **not** authenticate this standalone loopback browser API.
 * If browser control is enabled and no shared-secret auth is configured, OpenClaw
-  auto-generates `gateway.auth.token` on startup and persists it to config.
+  generates a runtime-only gateway token for that startup. Configure
+  `gateway.auth.token`, `gateway.auth.password`, `OPENCLAW_GATEWAY_TOKEN`, or
+  `OPENCLAW_GATEWAY_PASSWORD` explicitly if clients need a stable secret across
+  restarts.
 * OpenClaw does **not** auto-generate that token when `gateway.auth.mode` is
   already `password`, `none`, or `trusted-proxy`.
 * Keep the Gateway and any node hosts on a private network (Tailscale); avoid public exposure.

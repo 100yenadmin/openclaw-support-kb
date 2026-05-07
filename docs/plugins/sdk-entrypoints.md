@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "90b5d7ae8cfffd5a40054dcaa1dc7c8836d9f6403961a5e9a0cba7e5708919cf"
+source_hash: "176a630d6a009ff48120aa20c510d6ff0df1256ab6845ebe955cfb65701b0946"
 doc_path: "plugins/sdk-entrypoints.md"
 original_doc_path: "plugins/sdk-entrypoints.md"
 duplicate_index: 1
@@ -145,8 +145,13 @@ export default defineChannelPluginEntry({
   memoizes the resolved schema on first access.
 * For plugin-owned root CLI commands, prefer `api.registerCli(..., { descriptors: [...] })`
   when you want the command to stay lazy-loaded without disappearing from the
-  root CLI parse tree. For channel plugins, prefer registering those descriptors
-  from `registerCliMetadata(...)` and keep `registerFull(...)` focused on runtime-only work.
+  root CLI parse tree. For paired-node feature commands, prefer
+  `api.registerNodeCliFeature(...)` so the command lands under `openclaw nodes`.
+  For other nested plugin commands, add `parentPath` and register commands on
+  the `program` object passed to the registrar; OpenClaw resolves it to the
+  parent command before calling the plugin. For channel plugins, prefer
+  registering those descriptors from `registerCliMetadata(...)` and keep
+  `registerFull(...)` focused on runtime-only work.
 * If `registerFull(...)` also registers gateway RPC methods, keep them on a
   plugin-specific prefix. Reserved core admin namespaces (`config.*`,
   `exec.approvals.*`, `wizard.*`, `update.*`) are always coerced to

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "3cc34a0c3cdd40f6e76601519be9c28815c952fb7ddb2a5bbcdaade9f587bafb"
+source_hash: "a1b46a210ad8e0041a145fd2afab6386cf5d0c432ea9eed2dcafeaaa6c13e0cf"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1
@@ -295,6 +295,11 @@ The bundled `google` speech provider uses the Gemini API TTS path with
 * Auth: `messages.tts.providers.google.apiKey`, `models.providers.google.apiKey`, `GEMINI_API_KEY`, or `GOOGLE_API_KEY`
 * Output: WAV for regular TTS attachments, Opus for voice-note targets, PCM for Talk/telephony
 * Voice-note output: Google PCM is wrapped as WAV and transcoded to 48 kHz Opus with `ffmpeg`
+
+Google's batch Gemini TTS path returns generated audio in the completed
+`generateContent` response. For lowest-latency spoken conversations, use the
+Google realtime voice provider backed by the Gemini Live API instead of batch
+TTS.
 
 To use Google as the default TTS provider:
 

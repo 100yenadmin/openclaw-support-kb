@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "2cb20550382f23e84deaaea762559cfd259898fd90c8f8c418ec0e67dffcc2f6"
+source_hash: "2f158320201fed11b25963eacb5aba8d834244d3f9ae8b63f0fd2e4415ecaa93"
 doc_path: "gateway/cli-backends.md"
 original_doc_path: "gateway/cli-backends.md"
 duplicate_index: 1
@@ -28,6 +28,12 @@ want "always works" text responses without relying on external APIs.
 If you want a full harness runtime with ACP session controls, background tasks,
 thread/conversation binding, and persistent external coding sessions, use
 [ACP Agents](/tools/acp-agents) instead. CLI backends are not ACP.
+
+<Tip>
+  Building a new backend plugin? Use
+  [CLI backend plugins](/plugins/cli-backend-plugins). This page is for users
+  configuring and operating an already registered backend.
+</Tip>
 
 ## Beginner-friendly quick start
 

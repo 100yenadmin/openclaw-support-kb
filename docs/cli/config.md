@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "1a05d742b73053321a93b76e6c45894ab5efe23d2bca463d9334731ccb24107b"
+source_hash: "a167d8a2fe46939f34f39d90fcbe530b80d86aa3daf729fded2bb6042eaeee96"
 doc_path: "cli/config.md"
 original_doc_path: "cli/config.md"
 duplicate_index: 1
@@ -14,6 +14,10 @@ Source: https://docs.openclaw.ai/cli/config
 
 
 Config helpers for non-interactive edits in `openclaw.json`: get/set/patch/unset/file/schema/validate values by path and print the active config file. Run without a subcommand to open the configure wizard (same as `openclaw configure`).
+
+<Note>
+  When `OPENCLAW_NIX_MODE=1`, OpenClaw treats `openclaw.json` as immutable. Read-only commands such as `config get`, `config file`, `config schema`, and `config validate` still work, but config writers refuse. Agents should edit the Nix source for the install instead; for the first-party nix-openclaw distribution, use [nix-openclaw Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) and set values under `programs.openclaw.config` or `instances.<name>.config`.
+</Note>
 
 ## Root options
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "d672a26e73527718603b78b48e5099dbc736bd415838bc1a49faafac1b284d99"
+source_hash: "860ad89ad4e397c4b7a20f1d5fb0ceb148b45c97423545f70087f01c046ea6dc"
 doc_path: "gateway/configuration-examples.md"
 original_doc_path: "gateway/configuration-examples.md"
 duplicate_index: 1
@@ -538,7 +538,7 @@ public-key upgrades still require manual approval.
 
 ### Secure DM mode (shared inbox / multi-user DMs)
 
-If more than one person can DM your bot (multiple entries in `allowFrom`, pairing approvals for multiple people, or `dmPolicy: "open"`), enable **secure DM mode** so DMs from different senders don’t share one context by default:
+If more than one person can DM your bot (multiple entries in `allowFrom`, pairing approvals for multiple people, or `dmPolicy: "open"`), enable **secure DM mode** so DMs from different senders don't share one context by default:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -660,7 +660,7 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 * If you set `dmPolicy: "open"`, the matching `allowFrom` list must include `"*"`.
 * Provider IDs differ (phone numbers, user IDs, channel IDs). Use the provider docs to confirm the format.
-* Optional sections to add later: `web`, `browser`, `ui`, `discovery`, `canvasHost`, `talk`, `signal`, `imessage`.
+* Optional sections to add later: `web`, `browser`, `ui`, `discovery`, `plugins`, `talk`, `signal`, `imessage`.
 * See [Providers](/providers) and [Troubleshooting](/gateway/troubleshooting) for deeper setup notes.
 
 ## Related

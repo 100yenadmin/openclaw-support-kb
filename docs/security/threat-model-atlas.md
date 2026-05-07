@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Threat model (MITRE ATLAS)"
 source: "https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS"
-source_hash: "7efaba636a7c2fadef5d1465a868da2a83a62a6bd452dae01580ad2838681c15"
+source_hash: "335f44ba415a4506d9772b375722d04574017b86143811441d5b761603afe8f9"
 doc_path: "security/threat-model-atlas.md"
 original_doc_path: "security/threat-model-atlas.md"
 duplicate_index: 1
@@ -13,9 +13,7 @@ Source: https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS
 
 
 
-# OpenClaw Threat Model v1.0
-
-## MITRE ATLAS Framework
+## MITRE ATLAS framework
 
 **Version:** 1.0-draft
 **Last Updated:** 2026-02-04

@@ -1,5 +1,16 @@
 [
   {
+    "html_url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.6",
+    "tag_name": "v2026.5.6",
+    "name": "openclaw 2026.5.6",
+    "draft": false,
+    "prerelease": false,
+    "created_at": "2026-05-06T16:58:58Z",
+    "published_at": "2026-05-06T17:51:03Z",
+    "body": "## 2026.5.6\n\n### Fixes\n\n- Doctor/OpenAI Codex: revert the 2026.5.5 `doctor --fix` repair that rewrote valid `openai-codex/*` ChatGPT/Codex OAuth routes to `openai/*`, which could break OAuth-only GPT-5.5 setups or accidentally move users onto the OpenAI API-key route. If 2026.5.5 already changed your default model, run `openclaw models set openai-codex/gpt-5.5 && openclaw config validate` to switch the default agent back to the Codex OAuth PI route. Fixes #78407.\n- Plugins/runtime fetch: drop third-party symbol metadata from plain request header dictionaries before passing them into native `fetch` or `Headers`, so SDK and guarded/proxy fetch paths do not reject otherwise valid plugin requests. Fixes #77846. Thanks @shakkernerd.\n- Debug proxy: normalize captured fetch header dictionaries before replaying requests so symbol metadata from caller-owned header objects cannot make debug-proxy fetches fail.\n- Web fetch: bound guarded dispatcher cleanup after request timeouts so timed-out fetches return tool errors instead of leaving Gateway tool lanes active. (#78439) Thanks @obviyus.\n\nRecovery docs: https://docs.openclaw.ai/providers/openai#check-and-recover-codex-oauth-routing\n",
+    "assets": []
+  },
+  {
     "html_url": "https://github.com/openclaw/openclaw/releases/tag/v2026.5.5",
     "tag_name": "v2026.5.5",
     "name": "openclaw 2026.5.5",
@@ -1000,48 +1011,6 @@
         "created_at": "2026-04-12T00:38:29Z",
         "updated_at": "2026-04-12T00:38:31Z",
         "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.11/OpenClaw-2026.4.11.zip"
-      }
-    ]
-  },
-  {
-    "html_url": "https://github.com/openclaw/openclaw/releases/tag/v2026.4.11-beta.1",
-    "tag_name": "v2026.4.11-beta.1",
-    "name": "openclaw 2026.4.11-beta.1",
-    "draft": false,
-    "prerelease": true,
-    "created_at": "2026-04-11T15:14:40Z",
-    "published_at": "2026-04-11T15:15:03Z",
-    "body": "\n### Changes\n\n- Dreaming/memory-wiki: add ChatGPT import ingestion plus new `Imported Insights` and `Memory Palace` diary subtabs so Dreaming can inspect imported source chats, compiled wiki pages, and full source pages directly from the UI. (#64505)\n- Control UI/webchat: render assistant media/reply/voice directives as structured chat bubbles, add the `[embed ...]` rich output tag, and gate external embed URLs behind config. (#64104)\n- Tools/video_generate: add URL-only generated asset delivery, typed `providerOptions`, reference audio inputs, per-asset role hints, `adaptive` aspect-ratio support, and a higher image-input cap so video providers can expose richer generation modes without forcing large files into memory. (#61987, #61988) Thanks @xieyongliang.\n- Feishu: improve document comment sessions with richer context parsing, comment reactions, and typing feedback so document-thread conversations behave more like chat conversations. (#63785)\n- Microsoft Teams: add reaction support, reaction listing, Graph pagination, and delegated OAuth setup for sending reactions while preserving application-auth read paths. (#51646)\n- Plugins: allow plugin manifests to declare activation and setup descriptors so plugin setup flows can describe required auth, pairing, and configuration steps without hardcoded core special cases. (#64780)\n- Ollama: cache `/api/show` context-window and capability metadata during model discovery so repeated picker refreshes stop refetching unchanged models, while still retrying after empty responses and invalidating on digest changes. (#64753) Thanks @ImLukeF.\n- Models/providers: surface how configured OpenAI-compatible endpoints are classified in embedded-agent debug logs, so local and proxy routing issues are easier to diagnose. (#64754) Thanks @ImLukeF.\n- QA/parity: add the GPT-5.4 vs Opus 4.6 agentic parity report gate with shared scenario coverage checks, stricter evidence heuristics, and skipped-scenario accounting for maintainer review. (#64441) Thanks @100yenadmin.\n\n### Fixes\n\n- OpenAI/Codex OAuth: stop rewriting the upstream authorize URL scopes so new Codex sign-ins do not fail with `invalid_scope` before returning an authorization code. (#64713) Thanks @fuller-stack-dev.\n- Audio transcription: disable pinned DNS only for OpenAI-compatible multipart requests, while still validating hostnames, so OpenAI, Groq, and Mistral transcription works again without weakening other request paths. (#64766) Thanks @GodsBoy.\n- macOS/Talk Mode: after granting microphone permission on first enable, continue starting Talk Mode instead of requiring a second toggle. (#62459) Thanks @ggarber.\n- Control UI/webchat: persist agent-run TTS audio replies into webchat history and preserve interleaved tool card pairing so generated audio and mixed tool output stay attached to the right messages. (#63514) Thanks @bittoby.\n- WhatsApp: honor the configured default account when the active listener helper is used without an explicit account id, so named default accounts do not get registered under `default`. (#53918) Thanks @yhyatt.\n- ACP/agents: suppress commentary-phase child assistant relay text in ACP parent stream updates, so spawned child runs stop leaking internal progress chatter into the parent session. Thanks @vincentkoc.\n- Agents/timeouts: honor explicit run timeouts in the LLM idle watchdog and align default timeout config so slow models can keep working until the configured limit instead of using the wrong idle window.\n- Config: include `asyncCompletion` in the generated zod schema so documented async completion config no longer fails with an unrecognized-key error. (#63618)\n- Google/Veo: stop sending the unsupported `numberOfVideos` request field so Gemini Developer API Veo runs do not fail before OpenClaw can complete the intended Google video generation path. (#64723) Thanks @velvet-shark.\n- QA/packaging: stop packaged CLI startup and completion cache generation from reading repo-only QA scenario markdown, ship the bundled QA scenario pack in npm releases, and keep `openclaw completion --write-state` working even if QA setup is broken. (#64648) Thanks @obviyus.\n- Codex/QA: keep Codex app-server coordination chatter out of visible replies, add a live QA leak scenario, and classify leaked harness meta text as a QA failure instead of a successful reply. Thanks @vincentkoc.\n- WhatsApp: route `message react` through the gateway-owned action path so reactions use the live WhatsApp listener in both DM and group chats, matching `message send` and `message poll`. Thanks @mcaxtr.\n\n",
-    "assets": [
-      {
-        "name": "OpenClaw-2026.4.11-beta.1.dmg",
-        "content_type": "application/x-apple-diskimage",
-        "state": "uploaded",
-        "size": 35251162,
-        "digest": "sha256:fe2f0ceb265c18f80750ac89362857133dd92a2baf342743b0c4eebca69de795",
-        "created_at": "2026-04-11T15:52:54Z",
-        "updated_at": "2026-04-11T15:52:56Z",
-        "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.11-beta.1/OpenClaw-2026.4.11-beta.1.dmg"
-      },
-      {
-        "name": "OpenClaw-2026.4.11-beta.1.dSYM.zip",
-        "content_type": "application/zip",
-        "state": "uploaded",
-        "size": 131065504,
-        "digest": "sha256:de860d4399fa6308a52c2bab9c6090cb916a09634935cee07c4271099bc1fd60",
-        "created_at": "2026-04-11T15:52:54Z",
-        "updated_at": "2026-04-11T15:52:58Z",
-        "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.11-beta.1/OpenClaw-2026.4.11-beta.1.dSYM.zip"
-      },
-      {
-        "name": "OpenClaw-2026.4.11-beta.1.zip",
-        "content_type": "application/zip",
-        "state": "uploaded",
-        "size": 47317919,
-        "digest": "sha256:5447f27ecce92a16247a1aa30afcd55096e0187ffc25b87a659ec9af97734706",
-        "created_at": "2026-04-11T15:52:54Z",
-        "updated_at": "2026-04-11T15:52:56Z",
-        "browser_download_url": "https://github.com/openclaw/openclaw/releases/download/v2026.4.11-beta.1/OpenClaw-2026.4.11-beta.1.zip"
       }
     ]
   }

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "32f571acf3389444e78bad7c4c97d388aa34dbd53180f0435841c42a64396a71"
+source_hash: "068ee71e662471165eceed3132884fd34ef666911e0bc3b6fe3d304ba676b53a"
 doc_path: "cli/node.md"
 original_doc_path: "cli/node.md"
 duplicate_index: 1
@@ -29,7 +29,7 @@ Common use cases:
 * Keep exec **sandboxed** on the gateway, but delegate approved runs to other hosts.
 * Provide a lightweight, headless execution target for automation or CI nodes.
 
-Execution is still guarded by **exec approvals** and per‑agent allowlists on the
+Execution is still guarded by **exec approvals** and per-agent allowlists on the
 node host, so you can keep command access scoped and explicit.
 
 ## Browser proxy (zero-config)

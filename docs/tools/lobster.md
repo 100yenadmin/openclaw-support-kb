@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
-source_hash: "0a07bd5fe8a009da12edc00f9009796a2e3ff22617bfba176a3ef5c4279109bc"
+source_hash: "60a0f7f0f4e993c49db5f567891a2beb1e2590e6a417bd50d72e110ca6c3d4fc"
 doc_path: "tools/lobster.md"
 original_doc_path: "tools/lobster.md"
 duplicate_index: 1
@@ -107,7 +107,19 @@ Enable the tool:
 }
 ```
 
-Use it in a pipeline:
+### Important limitation: embedded Lobster vs `openclaw.invoke`
+
+The bundled Lobster plugin runs workflows **in-process** inside the gateway. In that embedded mode, `openclaw.invoke` does **not** automatically inherit a gateway URL/auth context for nested OpenClaw CLI tool calls.
+
+That means this pattern is **not currently reliable in the embedded runner**:
+
+```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw.invoke --tool llm-task --action json --args-json '{ ... }'
+```
+
+Use the example below only when running the **standalone Lobster CLI** in an environment where `openclaw.invoke` is already configured with the correct gateway/auth context.
+
+Use it in a standalone Lobster CLI pipeline:
 
 ```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw.invoke --tool llm-task --action json --args-json '{
@@ -125,6 +137,11 @@ openclaw.invoke --tool llm-task --action json --args-json '{
   }
 }'
 ```
+
+If you are using the embedded Lobster plugin today, prefer either:
+
+* a direct `llm-task` tool call outside Lobster, or
+* non-`openclaw.invoke` steps inside the Lobster pipeline until a supported embedded bridge is added.
 
 See [LLM Task](/tools/llm-task) for details and configuration options.
 

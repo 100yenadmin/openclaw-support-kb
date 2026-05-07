@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "1b61f8134bc6cc94b68cfebd6dd536a4473f0ce9cd053bcff6ffd5caa561d757"
+source_hash: "af2e0da8063ad8de964a64d6d56e1a7c5e44d69e989d5f19531c8a69a66cc97f"
 doc_path: "channels/pairing.md"
 original_doc_path: "channels/pairing.md"
 duplicate_index: 1
@@ -13,7 +13,7 @@ Source: https://docs.openclaw.ai/channels/pairing
 
 
 
-“Pairing” is OpenClaw’s explicit access approval step.
+"Pairing" is OpenClaw's explicit access approval step.
 It is used in two places:
 
 1. **DM pairing** (who is allowed to talk to the bot)
@@ -214,7 +214,7 @@ Stored under `~/.openclaw/devices/`:
   * Telegram: [Telegram](/channels/telegram)
   * WhatsApp: [WhatsApp](/channels/whatsapp)
   * Signal: [Signal](/channels/signal)
-  * BlueBubbles (iMessage): [BlueBubbles](/channels/bluebubbles)
-  * iMessage (legacy): [iMessage](/channels/imessage)
+  * iMessage: [iMessage](/channels/imessage)
+  * BlueBubbles (legacy iMessage bridge): [BlueBubbles](/channels/bluebubbles)
   * Discord: [Discord](/channels/discord)
   * Slack: [Slack](/channels/slack)

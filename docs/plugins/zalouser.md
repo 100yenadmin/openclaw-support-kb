@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal plugin"
 source: "https://docs.openclaw.ai/plugins/zalouser"
-source_hash: "f644352eec5b5438a685bac9c3943f355fedf1b9dfe2eca7c7a318876d31fcb8"
+source_hash: "a229e8fc0311d44cd4f33b0ccf670b7ccd677d0c0fb49930512afbd171f4a423"
 doc_path: "plugins/zalouser.md"
 original_doc_path: "plugins/zalouser.md"
 duplicate_index: 1
@@ -12,8 +12,6 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/plugins/zalouser
 
 
-
-# Zalo Personal (plugin)
 
 Zalo Personal support for OpenClaw via a plugin, using native `zca-js` to automate a normal Zalo user account.
 

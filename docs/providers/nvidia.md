@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "515982cd87c3a97cec9654cc03c3589f5a22008d2d0519b0f0702d7acca94f42"
+source_hash: "7fb095959f94d5040315ce83386a8d0f742f8c5f3fd2206122222dafd6cb1e23"
 doc_path: "providers/nvidia.md"
 original_doc_path: "providers/nvidia.md"
 duplicate_index: 1
@@ -96,6 +96,37 @@ openclaw onboard --auth-choice nvidia-api-key --nvidia-api-key "nvapi-..."
   <Accordion title="OpenAI-compatible endpoint">
     NVIDIA uses the standard `/v1` completions endpoint. Any OpenAI-compatible
     tooling should work out of the box with the NVIDIA base URL.
+  </Accordion>
+
+  <Accordion title="Slow custom provider responses">
+    Some NVIDIA-hosted custom models can take longer than the default model idle
+    watchdog before they emit a first response chunk. For custom NVIDIA provider
+    entries, raise the provider timeout instead of raising the whole agent
+    runtime timeout:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      models: {
+        providers: {
+          "custom-integrate-api-nvidia-com": {
+            baseUrl: "https://integrate.api.nvidia.com/v1",
+            api: "openai-completions",
+            apiKey: "NVIDIA_API_KEY",
+            timeoutSeconds: 300,
+          },
+        },
+      },
+      agents: {
+        defaults: {
+          models: {
+            "custom-integrate-api-nvidia-com/meta/llama-3.1-70b-instruct": {
+              params: { thinking: "off" },
+            },
+          },
+        },
+      },
+    }
+    ```
   </Accordion>
 </AccordionGroup>
 

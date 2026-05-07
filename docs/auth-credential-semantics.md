@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Auth credential semantics"
 source: "https://docs.openclaw.ai/auth-credential-semantics"
-source_hash: "7b8a2d37765f01ad94513f1f8545d6b49e1144380ac5b561893c1fb4e08a6698"
+source_hash: "1b8da7b38236b771dc4ff15e5a84d6df8c4f23128eff9478e3e564afe8e4afbf"
 doc_path: "auth-credential-semantics.md"
 original_doc_path: "auth-credential-semantics.md"
 duplicate_index: 1
@@ -68,6 +68,18 @@ Explicit copy flows, such as `openclaw agents add`, use this portability policy:
 
 Non-portable profiles remain available through read-through inheritance unless
 the target agent signs in separately and creates its own local profile.
+
+## Config-only auth routes
+
+`auth.profiles` entries with `mode: "aws-sdk"` are routing metadata, not stored
+credentials. They are valid when the target provider uses
+`models.providers.<id>.auth: "aws-sdk"` or the built-in Amazon Bedrock default
+AWS SDK route. These profile ids may appear in `auth.order` and session
+overrides even when no matching entry exists in `auth-profiles.json`.
+
+Do not write `type: "aws-sdk"` into `auth-profiles.json`. If a legacy install
+has such a marker, `openclaw doctor --fix` moves it to `auth.profiles` and
+removes the marker from the credential store.
 
 ## Explicit auth order filtering
 

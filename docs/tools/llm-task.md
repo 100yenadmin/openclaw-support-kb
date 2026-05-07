@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
-source_hash: "9f86b31bedc3c94296b35be0183c68241563d6e54ba289405bdfacb6c9925f06"
+source_hash: "31eec6f3f69c86df733e6bcde86862dfbcae4fba9c4ef32936cdcedcb71c74d1"
 doc_path: "tools/llm-task.md"
 original_doc_path: "tools/llm-task.md"
 duplicate_index: 1
@@ -91,6 +91,23 @@ Returns `details.json` containing the parsed JSON (and validates against
 `schema` when provided).
 
 ## Example: Lobster workflow step
+
+### Important limitation
+
+The example below assumes the **standalone Lobster CLI** is running in an environment where `openclaw.invoke` already has the correct gateway URL/auth context.
+
+For the bundled **embedded** Lobster runner inside OpenClaw, this nested CLI pattern is **not currently reliable**:
+
+```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw.invoke --tool llm-task --action json --args-json '{ ... }'
+```
+
+Until embedded Lobster has a supported bridge for this flow, prefer either:
+
+* direct `llm-task` tool calls outside Lobster, or
+* Lobster steps that do not rely on nested `openclaw.invoke` calls.
+
+Standalone Lobster CLI example:
 
 ```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw.invoke --tool llm-task --action json --args-json '{
