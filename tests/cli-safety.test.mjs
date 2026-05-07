@@ -9,6 +9,8 @@ import {
   ensureGbrainSource,
   GBRAIN_SOURCE_ID,
   GBRAIN_SOURCE_NAME,
+  loadGbrainEnvFile,
+  parseGbrainEnvContent,
   gbrainSyncArgs,
   isBenignExistingGbrainSourceError,
   isStableCommandPathEntry,
@@ -294,6 +296,45 @@ test("auto-update PATH filters transient agent entries before printing cron comm
   assert.doesNotMatch(value, /(^|:)\/tmp\/runtime-bin(:|$)/);
   assert.match(value, /\/usr\/bin/);
   assert.match(value, /\/Users\/test\/\.openclaw\/extensions\/gbrain\/bin/);
+});
+
+test("GBrain env loader supplies embedding credentials without overriding process env", async () => {
+  const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-gbrain-env-"));
+  const envFile = path.join(tmp, ".gbrain", "gbrain.env");
+  mkdirSync(path.dirname(envFile), { recursive: true });
+  writeFileSync(
+    envFile,
+    [
+      "# Local GBrain provider config",
+      "export VOYAGE_API_KEY='voyage-secret # not a comment'",
+      'GBRAIN_EMBEDDING_MODEL="voyage:voyage-4-large"',
+      "GBRAIN_EMBEDDING_DIMENSIONS=2048 # inline comment",
+      "BAD-NAME=ignored",
+      "",
+    ].join("\n"),
+  );
+
+  assert.deepEqual(parseGbrainEnvContent("A=one\nexport B='two # kept'\nC=three # dropped\nBAD-NAME=no\n"), {
+    A: "one",
+    B: "two # kept",
+    C: "three",
+  });
+
+  const env = { VOYAGE_API_KEY: "already-set" };
+  const loaded = await loadGbrainEnvFile({ home: tmp, env });
+
+  assert.equal(loaded.ok, true);
+  assert.equal(loaded.loaded, true);
+  assert.equal(env.VOYAGE_API_KEY, "already-set");
+  assert.equal(env.GBRAIN_EMBEDDING_MODEL, "voyage:voyage-4-large");
+  assert.equal(env.GBRAIN_EMBEDDING_DIMENSIONS, "2048");
+  assert.equal(env["BAD-NAME"], undefined);
+
+  for (const script of ["scripts/update-client.mjs", "scripts/run-client-update.mjs"]) {
+    const text = readFileSync(path.join(repoRoot, script), "utf8");
+    assert.match(text, /import\s+\{[\s\S]*loadGbrainEnvFile[\s\S]*\}\s+from\s+"\.\/lib\/openclaw-support-kb\.mjs"/);
+    assert.match(text, /await\s+loadGbrainEnvFile\s*\(\s*\)/);
+  }
 });
 
 test("GBrain source registration tolerates existing sources before refederating", () => {

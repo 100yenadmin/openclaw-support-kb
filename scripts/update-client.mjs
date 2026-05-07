@@ -12,6 +12,7 @@ import {
   GBRAIN_VERIFY_QUERIES,
   isFullCommitSha,
   isOfficialRepoUrl,
+  loadGbrainEnvFile,
   managedPreGitBackupDir,
   meaningfulGitStatusLines,
   normalizeRepoUrl,
@@ -39,6 +40,8 @@ const allowUntrustedRepo = process.env.OPENCLAW_SUPPORT_KB_ALLOW_UNTRUSTED_REPO 
 const allowDevBuildSource = process.env.OPENCLAW_SUPPORT_KB_DEV_BUILD_SOURCE === "1";
 const pinnedRef = process.env.OPENCLAW_SUPPORT_KB_PINNED_REF || "";
 let gbrainCommand = "gbrain";
+
+await loadGbrainEnvFile();
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, { stdio: "inherit", ...options });

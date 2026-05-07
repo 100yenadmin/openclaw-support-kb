@@ -90,6 +90,71 @@ export function canonicalSourceDir(home = os.homedir()) {
   return path.join(home, ".gbrain", "sources", GBRAIN_SOURCE_ID);
 }
 
+export function gbrainEnvFilePath({ home = os.homedir(), env = process.env } = {}) {
+  return env.GBRAIN_ENV_FILE || env.GBRAIN_ENV_PATH || path.join(home, ".gbrain", "gbrain.env");
+}
+
+function unquoteEnvValue(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const quote = raw[0];
+  if (quote !== "'" && quote !== '"') {
+    return raw.replace(/\s+#.*$/u, "").trimEnd();
+  }
+
+  let output = "";
+  for (let i = 1; i < raw.length; i += 1) {
+    const char = raw[i];
+    if (char === quote) return output;
+    if (quote === '"' && char === "\\" && i + 1 < raw.length) {
+      const next = raw[i + 1];
+      if (next === "n") output += "\n";
+      else if (next === "r") output += "\r";
+      else if (next === "t") output += "\t";
+      else output += next;
+      i += 1;
+      continue;
+    }
+    output += char;
+  }
+  return output;
+}
+
+export function parseGbrainEnvContent(content) {
+  const values = {};
+  for (const rawLine of String(content || "").split(/\r?\n/u)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+    const assignment = line.replace(/^export\s+/u, "");
+    const separator = assignment.indexOf("=");
+    if (separator <= 0) continue;
+
+    const key = assignment.slice(0, separator).trim();
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/u.test(key)) continue;
+    values[key] = unquoteEnvValue(assignment.slice(separator + 1));
+  }
+  return values;
+}
+
+export async function loadGbrainEnvFile({ home = os.homedir(), env = process.env, filePath = gbrainEnvFilePath({ home, env }) } = {}) {
+  let content;
+  try {
+    content = await readFile(filePath, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return { ok: true, loaded: false, filePath, applied: 0, parsed: 0 };
+    throw error;
+  }
+
+  const parsed = parseGbrainEnvContent(content);
+  let applied = 0;
+  for (const [key, value] of Object.entries(parsed)) {
+    if (Object.hasOwn(env, key)) continue;
+    env[key] = value;
+    applied += 1;
+  }
+  return { ok: true, loaded: true, filePath, applied, parsed: Object.keys(parsed).length };
+}
+
 export function gbrainRootForSourceDir(targetDir) {
   const sourceParent = path.dirname(path.resolve(targetDir));
   if (path.basename(sourceParent) === "sources") return path.dirname(sourceParent);

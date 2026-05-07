@@ -8,6 +8,7 @@ import {
   canonicalSourceDir,
   isFullCommitSha,
   isOfficialRepoUrl,
+  loadGbrainEnvFile,
   managedPreGitBackupDir,
   meaningfulGitStatusLines,
   normalizeRepoUrl,
@@ -31,6 +32,8 @@ const lockOwnerPath = path.join(lockPath, "owner.json");
 const lockId = randomUUID();
 const reason = readArg("--reason") || process.env.OPENCLAW_SUPPORT_KB_UPDATE_REASON || "manual";
 const startedAt = new Date();
+
+await loadGbrainEnvFile();
 
 function readArg(name) {
   const index = process.argv.indexOf(name);
