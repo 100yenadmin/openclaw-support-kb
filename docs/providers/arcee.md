@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "227788d83aaf6a93731249562f408006eaacf5898216a9314e4be6ef2656e884"
+source_hash: "697f94b291eba9a8a96451b105e3ecb0d8011e5f8f51608331ed5eaa46642eae"
 doc_path: "providers/arcee.md"
 original_doc_path: "providers/arcee.md"
 duplicate_index: 1
@@ -120,12 +120,12 @@ OpenClaw currently ships this bundled Arcee catalog:
 
 ## Supported features
 
-| Feature                                       | Supported                    |
-| --------------------------------------------- | ---------------------------- |
-| Streaming                                     | Yes                          |
-| Tool use / function calling                   | Yes                          |
-| Structured output (JSON mode and JSON schema) | Yes                          |
-| Extended thinking                             | Yes (Trinity Large Thinking) |
+| Feature                                       | Supported                                    |
+| --------------------------------------------- | -------------------------------------------- |
+| Streaming                                     | Yes                                          |
+| Tool use / function calling                   | Yes (Trinity Mini, Trinity Large Preview)    |
+| Structured output (JSON mode and JSON schema) | Yes                                          |
+| Extended thinking                             | Yes (Trinity Large Thinking; tools disabled) |
 
 <AccordionGroup>
   <Accordion title="Environment note">

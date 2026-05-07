@@ -114,8 +114,9 @@ gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb && gbrain embed --stale
 GBrain versions older than `minGbrainVersion` stop before indexing instead of
 using the legacy fallback. If `gbrain` is not installed, setup fails unless
 `OPENCLAW_SUPPORT_KB_ALLOW_NO_GBRAIN=1` is explicitly set for a degraded
-read-only install. The installer checks `PATH`, `GBRAIN_BIN`, and common local
-locations such as `~/gbrain/bin/gbrain`. If the discovered GBrain is older than
+read-only install. The installer checks `GBRAIN_BIN`, the Bun-linked source
+install at `~/.bun/bin/gbrain`, `PATH`, and older local locations such as
+`~/gbrain/bin/gbrain`. If the discovered GBrain is older than
 `kb-manifest.json` requires, skills are still installed but indexing stops with
 an explicit `gbrain upgrade` hint. A normal install also runs a verification
 search after embedding. The verification runs two searches: one for this KB's

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Meta Tools"
 source: "https://docs.composio.dev/reference/meta-tools.md"
-source_hash: "3a3817bdfff64cb4578d491d4a97afab8554eeafa4b2f0e9d6bddfa64aa8e098"
+source_hash: "ca5ac26c13f1da9e216c8d429be9febcbf0baf210a4d21c2fb88e51c1a74553a"
 doc_path: "reference/meta-tools.md"
 original_doc_path: "reference/meta-tools.md"
 duplicate_index: 1
@@ -24,9 +24,9 @@ Meta tools are system-level tools available in [sessions](/docs/tools-and-toolki
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [`COMPOSIO_GET_TOOL_SCHEMAS`](/reference/meta-tools/get_tool_schemas)     | Retrieve input schemas for tools by slug                                                                                 |
 | [`COMPOSIO_MANAGE_CONNECTIONS`](/reference/meta-tools/manage_connections) | Create or manage connections to user's apps                                                                              |
-| [`COMPOSIO_MULTI_EXECUTE_TOOL`](/reference/meta-tools/multi_execute_tool) | Fast and parallel tool executor for tools and recipes discovered through COMPOSIO\_SEARCH\_TOOLS                         |
+| [`COMPOSIO_MULTI_EXECUTE_TOOL`](/reference/meta-tools/multi_execute_tool) | Fast and parallel tool executor for tools discovered through COMPOSIO\_SEARCH\_TOOLS                                     |
 | [`COMPOSIO_REMOTE_BASH_TOOL`](/reference/meta-tools/remote_bash_tool)     | Execute bash commands in a REMOTE sandbox for file operations, data processing, and system tasks                         |
 | [`COMPOSIO_REMOTE_WORKBENCH`](/reference/meta-tools/remote_workbench)     | Process REMOTE FILES or script BULK TOOL EXECUTIONS using Python code IN A REMOTE SANDBOX                                |
-| [`COMPOSIO_SEARCH_TOOLS`](/reference/meta-tools/search_tools)             | MCP Server Info: COMPOSIO MCP connects 500+ apps—Slack, GitHub, Notion, Google Workspace (Gmail, Sheets, Drive, Calen... |
+| [`COMPOSIO_SEARCH_TOOLS`](/reference/meta-tools/search_tools)             | Tool Server Info: Composio connects 500+ apps—Slack, GitHub, Notion, Google Workspace (Gmail, Sheets, Drive, Calendar... |
 
 ---

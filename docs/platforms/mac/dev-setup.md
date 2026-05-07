@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
-source_hash: "4c7a1ce6a5aa0d8903e67aeeb4394a4b81aa80b2eb0eefbe06a4b85527029009"
+source_hash: "bcfe91f7cc06e08845d848d6ed9199d94e843733fde3e9e12b1ce3f0ba177186"
 doc_path: "platforms/mac/dev-setup.md"
 original_doc_path: "platforms/mac/dev-setup.md"
 duplicate_index: 1
@@ -22,7 +22,7 @@ Build and run the OpenClaw macOS application from source.
 Before building the app, ensure you have the following installed:
 
 1. **Xcode 26.2+**: Required for Swift development.
-2. **Node.js 24 & pnpm**: Recommended for the gateway, CLI, and packaging scripts. Node 22 LTS, currently `22.14+`, remains supported for compatibility.
+2. **Node.js 24 & pnpm**: Recommended for the gateway, CLI, and packaging scripts. Node 22 LTS, currently `22.16+`, remains supported for compatibility.
 
 ## 1. Install Dependencies
 

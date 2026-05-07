@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "8f00dc5843f264b5417fc3b2e909585ea8a894a7ff06f9ee5a5135c4a28b0f21"
+source_hash: "fa9fd2ea1c4174fd7e3f350af07952824ed9ec1d42381392278c8bd1833d8638"
 doc_path: "platforms/mac/bundled-gateway.md"
 original_doc_path: "platforms/mac/bundled-gateway.md"
 duplicate_index: 1
@@ -20,7 +20,7 @@ running (or attaches to an existing local Gateway if one is already running).
 
 ## Install the CLI (required for local mode)
 
-Node 24 is the default runtime on the Mac. Node 22 LTS, currently `22.14+`, still works for compatibility. Then install `openclaw` globally:
+Node 24 is the default runtime on the Mac. Node 22 LTS, currently `22.16+`, still works for compatibility. Then install `openclaw` globally:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 npm install -g openclaw@<version>

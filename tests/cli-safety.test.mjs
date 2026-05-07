@@ -229,8 +229,26 @@ test("GBrain command discovery prefers the OpenClaw extension before stale PATH 
   });
 
   assert.equal(resolved.command, "/Users/test/.openclaw/extensions/gbrain/bin/gbrain");
-  assert.deepEqual(calls[0], ["/Users/test/.openclaw/extensions/gbrain/bin/gbrain", ["--version"]]);
+  assert.deepEqual(calls[0], ["/Users/test/.bun/bin/gbrain", ["--version"]]);
+  assert.ok(calls.some(([command]) => command === "/Users/test/.openclaw/extensions/gbrain/bin/gbrain"));
   assert.ok(!calls.some(([command]) => command === "gbrain"));
+});
+
+test("GBrain command discovery prefers Bun-linked Eva Brain before stale legacy shims", () => {
+  const calls = [];
+  const resolved = resolveGbrainCommand({
+    home: "/Users/test",
+    captureNoExit(command, args) {
+      calls.push([command, args]);
+      if (command === "/Users/test/.bun/bin/gbrain") return { status: 0, stdout: "gbrain 0.28.10", stderr: "" };
+      if (command === "/Users/test/gbrain/bin/gbrain") return { status: 0, stdout: "gbrain 0.26.6", stderr: "" };
+      return { missing: true };
+    },
+  });
+
+  assert.equal(resolved.command, "/Users/test/.bun/bin/gbrain");
+  assert.deepEqual(calls[0], ["/Users/test/.bun/bin/gbrain", ["--version"]]);
+  assert.ok(!calls.some(([command]) => command === "/Users/test/gbrain/bin/gbrain"));
 });
 
 test("GBRAIN_BIN override is probed before PATH and local fallbacks", () => {
@@ -260,6 +278,7 @@ test("GBRAIN_BIN override is probed before PATH and local fallbacks", () => {
 
 test("auto-update PATH includes local GBrain and OpenClaw fallbacks", () => {
   const value = withCommandPathFallbacks("/usr/bin:/bin", "/Users/test");
+  assert.match(value, /\/Users\/test\/\.bun\/bin/);
   assert.match(value, /\/Users\/test\/\.openclaw\/extensions\/gbrain\/bin/);
   assert.match(value, /\/Users\/test\/gbrain\/bin/);
   assert.match(value, /\/Users\/test\/\.openclaw\/bin/);

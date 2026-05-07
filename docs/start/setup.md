@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/start/setup"
-source_hash: "48930708d598c3c769eda093eda9fb555492c9b93096eb21f9c1dc391b0a4762"
+source_hash: "2470693c6ddb76d5ff517cdb820b68e66db78f0d7964ee29dd02b49a0f2f635e"
 doc_path: "start/setup.md"
 original_doc_path: "start/setup.md"
 duplicate_index: 1
@@ -28,7 +28,7 @@ Pick a setup workflow based on how often you want updates and whether you want t
 
 ## Prereqs (from source)
 
-* Node 24 recommended (Node 22 LTS, currently `22.14+`, still supported)
+* Node 24 recommended (Node 22 LTS, currently `22.16+`, still supported)
 * `pnpm` required for source checkouts. OpenClaw loads bundled plugins from the
   `extensions/*` pnpm workspace packages in dev mode, so root `npm install` does
   not prepare the full source tree.
