@@ -11,6 +11,7 @@ import {
   GBRAIN_SOURCE_NAME,
   gbrainSyncArgs,
   isBenignExistingGbrainSourceError,
+  isStableCommandPathEntry,
   parseGbrainSourcesList,
   resolveGbrainCommand,
   verifyNamedGbrainSource,
@@ -260,6 +261,39 @@ test("auto-update PATH includes local GBrain and OpenClaw fallbacks", () => {
   assert.match(value, /\/Users\/test\/\.openclaw\/extensions\/gbrain\/bin/);
   assert.match(value, /\/Users\/test\/gbrain\/bin/);
   assert.match(value, /\/Users\/test\/\.openclaw\/bin/);
+});
+
+test("auto-update PATH filters transient agent entries before printing cron commands", () => {
+  assert.equal(isStableCommandPathEntry("/usr/bin"), true);
+  assert.equal(isStableCommandPathEntry("/Users/test/.codex/tmp/abc/bin"), false);
+  assert.equal(isStableCommandPathEntry("/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"), false);
+  assert.equal(isStableCommandPathEntry("/Applications/Codex.app/Contents/Resources"), false);
+  assert.equal(isStableCommandPathEntry("/private/var/folders/zz/temp/bin"), false);
+  assert.equal(isStableCommandPathEntry("/tmp/runtime-bin"), false);
+  assert.equal(isStableCommandPathEntry("relative/bin"), false);
+
+  const value = withCommandPathFallbacks(
+    [
+      "/Users/test/.codex/tmp/abc/bin",
+      "/usr/bin",
+      "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin",
+      "/Applications/Codex.app/Contents/Resources",
+      "relative/bin",
+      "/private/var/folders/zz/temp/bin",
+      "/bin",
+      "/tmp/runtime-bin",
+    ].join(path.delimiter),
+    "/Users/test",
+  );
+
+  assert.doesNotMatch(value, /\.codex\/tmp/);
+  assert.doesNotMatch(value, /codex\.system\/bootstrap/);
+  assert.doesNotMatch(value, /Codex\.app\/Contents\/Resources/);
+  assert.doesNotMatch(value, /private\/var\/folders/);
+  assert.doesNotMatch(value, /(^|:)relative\/bin(:|$)/);
+  assert.doesNotMatch(value, /(^|:)\/tmp\/runtime-bin(:|$)/);
+  assert.match(value, /\/usr\/bin/);
+  assert.match(value, /\/Users\/test\/\.openclaw\/extensions\/gbrain\/bin/);
 });
 
 test("GBrain source registration tolerates existing sources before refederating", () => {

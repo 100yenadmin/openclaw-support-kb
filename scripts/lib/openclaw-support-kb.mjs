@@ -134,11 +134,25 @@ export function commandPathFallbacks(home = os.homedir()) {
   ];
 }
 
+export function isStableCommandPathEntry(entry) {
+  const value = String(entry || "");
+  if (!value || !path.isAbsolute(value)) return false;
+  const normalized = value.replace(/\\/g, "/");
+  if (normalized.includes("/.codex/tmp/")) return false;
+  if (normalized.includes("/codex.system/bootstrap/")) return false;
+  if (normalized.includes("/Codex.app/Contents/Resources")) return false;
+  if (normalized.startsWith("/tmp/") || normalized === "/tmp") return false;
+  if (normalized.startsWith("/private/tmp/") || normalized === "/private/tmp") return false;
+  if (normalized.startsWith("/var/folders/")) return false;
+  if (normalized.startsWith("/private/var/folders/")) return false;
+  return true;
+}
+
 export function withCommandPathFallbacks(pathValue = process.env.PATH || "", home = os.homedir()) {
   const seen = new Set();
   const parts = [];
   for (const entry of String(pathValue || "").split(path.delimiter)) {
-    if (!entry || seen.has(entry)) continue;
+    if (!isStableCommandPathEntry(entry) || seen.has(entry)) continue;
     seen.add(entry);
     parts.push(entry);
   }
