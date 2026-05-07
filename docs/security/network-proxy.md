@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Network proxy"
 source: "https://docs.openclaw.ai/security/network-proxy"
-source_hash: "2e2e0d88292bec437e65fb7f4743c3688ba0d11f83b822b50127e259bd9fc545"
+source_hash: "61964c8e9efdd1a4058f4ef37040ff998ef0e190a299a21e04975c437cf30be7"
 doc_path: "security/network-proxy.md"
 original_doc_path: "security/network-proxy.md"
 duplicate_index: 1
@@ -227,3 +227,12 @@ proxy:
 * Gateway control-plane proxy bypass is intentionally limited to `localhost` and literal loopback IP URLs. Use `ws://127.0.0.1:18789`, `ws://[::1]:18789`, or `ws://localhost:18789` for local direct Gateway control-plane connections; other hostnames route like ordinary hostname-based traffic.
 * OpenClaw does not inspect, test, or certify your proxy policy.
 * Treat proxy policy changes as security-sensitive operational changes.
+
+| Surface                                                      | Managed proxy status                                                                               |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `fetch`, `node:http`, `node:https`, common WebSocket clients | Routed through managed proxy hooks when configured.                                                |
+| APNs direct HTTP/2                                           | Routed through the APNs managed CONNECT helper.                                                    |
+| Gateway control-plane loopback                               | Direct only for the configured local loopback Gateway URL.                                         |
+| Debug proxy upstream forwarding                              | Disabled while managed proxy mode is active unless explicitly enabled for local diagnostics.       |
+| IRC                                                          | Raw TCP/TLS; not proxied by managed HTTP proxy mode. Disable unless direct IRC egress is approved. |
+| Other raw `net`, `tls`, or `http2` client calls              | Must be classified by the raw socket guard before landing.                                         |

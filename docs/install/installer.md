@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "27568c241a1fa7df5731df242379fedb4b27f9a2c34b309f8fa4e2126b727e9e"
+source_hash: "5cd40b8cf9d352bf7e4ec9370c78c5a0e626075766d7e3d20a70e27131876a91"
 doc_path: "install/installer.md"
 original_doc_path: "install/installer.md"
 duplicate_index: 1
@@ -77,7 +77,7 @@ OpenClaw ships three installer scripts, served from `openclaw.ai`.
   </Step>
 
   <Step title="Ensure Node.js 24 by default">
-    Checks Node version and installs Node 24 if needed (Homebrew on macOS, NodeSource setup scripts on Linux apt/dnf/yum). OpenClaw still supports Node 22 LTS, currently `22.14+`, for compatibility.
+    Checks Node version and installs Node 24 if needed (Homebrew on macOS, NodeSource setup scripts on Linux apt/dnf/yum). OpenClaw still supports Node 22 LTS, currently `22.16+`, for compatibility.
   </Step>
 
   <Step title="Ensure Git">
@@ -294,7 +294,7 @@ The script exits with code `2` for invalid method selection or invalid `--instal
   </Step>
 
   <Step title="Ensure Node.js 24 by default">
-    If missing, attempts install via winget, then Chocolatey, then Scoop. Node 22 LTS, currently `22.14+`, remains supported for compatibility.
+    If missing, attempts install via winget, then Chocolatey, then Scoop. Node 22 LTS, currently `22.16+`, remains supported for compatibility.
   </Step>
 
   <Step title="Install OpenClaw">

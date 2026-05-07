@@ -196,6 +196,7 @@ export function meaningfulGitStatusLines(output) {
 
 export function commandPathFallbacks(home = os.homedir()) {
   return [
+    path.join(home, ".bun", "bin"),
     path.join(home, ".openclaw", "extensions", "gbrain", "bin"),
     path.join(home, "gbrain", "bin"),
     path.join(home, ".gbrain", "bin"),
@@ -241,6 +242,7 @@ export function withCommandPathFallbacks(pathValue = process.env.PATH || "", hom
 export function gbrainCommandCandidates(home = os.homedir()) {
   return [
     process.env.GBRAIN_BIN,
+    path.join(home, ".bun", "bin", "gbrain"),
     path.join(home, ".openclaw", "extensions", "gbrain", "bin", "gbrain"),
     path.join(home, "gbrain", "bin", "gbrain"),
     path.join(home, ".gbrain", "bin", "gbrain"),

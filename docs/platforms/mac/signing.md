@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS signing"
 source: "https://docs.openclaw.ai/platforms/mac/signing"
-source_hash: "10d936a0b4418471b1827c152970af26b22a0577c3fc0ecceed3d2be95b0e237"
+source_hash: "ab452ea10a4bbb607303da433269b9254715b87aa4ceff6b5d81b365e752c250"
 doc_path: "platforms/mac/signing.md"
 original_doc_path: "platforms/mac/signing.md"
 duplicate_index: 1
@@ -22,7 +22,7 @@ This app is usually built from [`scripts/package-mac-app.sh`](https://github.com
 * calls [`scripts/codesign-mac-app.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/codesign-mac-app.sh) to sign the main binary and app bundle so macOS treats each rebuild as the same signed bundle and keeps TCC permissions (notifications, accessibility, screen recording, mic, speech). For stable permissions, use a real signing identity; ad-hoc is opt-in and fragile (see [macOS permissions](/platforms/mac/permissions)).
 * uses `CODESIGN_TIMESTAMP=auto` by default; it enables trusted timestamps for Developer ID signatures. Set `CODESIGN_TIMESTAMP=off` to skip timestamping (offline debug builds).
 * inject build metadata into Info.plist: `OpenClawBuildTimestamp` (UTC) and `OpenClawGitCommit` (short hash) so the About pane can show build, git, and debug/release channel.
-* **Packaging defaults to Node 24**: the script runs TS builds and the Control UI build. Node 22 LTS, currently `22.14+`, remains supported for compatibility.
+* **Packaging defaults to Node 24**: the script runs TS builds and the Control UI build. Node 22 LTS, currently `22.16+`, remains supported for compatibility.
 * reads `SIGN_IDENTITY` from the environment. Add `export SIGN_IDENTITY="Apple Development: Your Name (TEAMID)"` (or your Developer ID Application cert) to your shell rc to always sign with your cert. Ad-hoc signing requires explicit opt-in via `ALLOW_ADHOC_SIGNING=1` or `SIGN_IDENTITY="-"` (not recommended for permission testing).
 * runs a Team ID audit after signing and fails if any Mach-O inside the app bundle is signed by a different Team ID. Set `SKIP_TEAM_ID_CHECK=1` to bypass.
 

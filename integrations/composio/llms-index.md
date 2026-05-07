@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "d7ffab8f065da392c632f97db1790f5698534b335e4c28ba42d0bb64d41a6743"
+source_hash: "3d1a6985c271cde7c620d386c443dd9c1a25642632d11d67e814611d994334e9"
 ---
 
 # Composio Documentation
@@ -39,6 +39,7 @@ source_hash: "d7ffab8f065da392c632f97db1790f5698534b335e4c28ba42d0bb64d41a6743"
 - https://docs.composio.dev/docs/providers/custom-providers/typescript.md
 - https://docs.composio.dev/docs/providers/custom-providers/python.md
 - https://docs.composio.dev/docs/cli.md
+- https://docs.composio.dev/docs/claude-code-plugin.md
 
 ## Core Concepts
 
@@ -183,7 +184,9 @@ source_hash: "d7ffab8f065da392c632f97db1790f5698534b335e4c28ba42d0bb64d41a6743"
 - https://docs.composio.dev/reference/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/api-reference/authentication.md
 - https://docs.composio.dev/reference/api-reference/connected-accounts.md
+- https://docs.composio.dev/reference/api-reference/consumer.md
 - https://docs.composio.dev/reference/api-reference/files.md
+- https://docs.composio.dev/reference/api-reference/invite-codes.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
 - https://docs.composio.dev/reference/api-reference/migration.md
 - https://docs.composio.dev/reference/api-reference/organization.md
@@ -215,8 +218,8 @@ source_hash: "d7ffab8f065da392c632f97db1790f5698534b335e4c28ba42d0bb64d41a6743"
 - https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
-- https://docs.composio.dev/reference/v3/api-reference/authentication.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/v3/api-reference/authentication.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md

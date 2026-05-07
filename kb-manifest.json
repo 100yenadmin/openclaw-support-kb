@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-05-07T11:22:54.246Z",
-  "openclawReleaseTag": "v2026.5.6",
-  "docsSha256": "8fb58a5a2c45003edc4f24e6277a2a14e37f5ce49c56af0b51dcabf448461395",
-  "composioDocsSha256": "639bda9feb1071566fbb46e9b3d7430b7513064c2be28dfb3162e57ea2353163",
-  "composioDocsIndexSha256": "d7ffab8f065da392c632f97db1790f5698534b335e4c28ba42d0bb64d41a6743",
+  "generatedAt": "2026-05-07T21:14:12.529Z",
+  "openclawReleaseTag": "v2026.5.7",
+  "docsSha256": "d0b923a7fe87601b0af98f628091f9c3abc70510e29bbfaf807f18f3f2429a30",
+  "composioDocsSha256": "2b2a0c793e324105454904fee638d6ee7da5124086a2d100901b0f196648350f",
+  "composioDocsIndexSha256": "3d1a6985c271cde7c620d386c443dd9c1a25642632d11d67e814611d994334e9",
   "composioToolkitsSha256": "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4",
-  "artifactSha256": "a0ce0d8973ad65209d465a14a6346fe537b61c97516e0f52f180f0d98e350fa2",
-  "sourceCount": 637,
+  "artifactSha256": "822de9ccd1be8fc4e30c91fd2ed2278522d72a588db696322813bb72ca018de0",
+  "sourceCount": 640,
   "minGbrainVersion": "0.19.0",
   "notes": "Local-first OpenClaw support KB for GBrain. Includes OpenClaw docs plus Composio docs/toolkit catalog for approved app integrations."
 }

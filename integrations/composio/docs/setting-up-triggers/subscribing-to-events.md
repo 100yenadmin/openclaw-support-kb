@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Subscribing to triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md"
-source_hash: "e6d4504461e669ccb97350be41be041afa99a5f31b4a375d84d5d16ae88534a9"
+source_hash: "351d626e86c73cea050144c115280ee1eca4311723e48b0b5c0ceec55d74cfa6"
 doc_path: "setting-up-triggers/subscribing-to-events.md"
 original_doc_path: "setting-up-triggers/subscribing-to-events.md"
 duplicate_index: 1
@@ -33,6 +33,8 @@ curl -X POST https://backend.composio.dev/api/v3.1/webhook_subscriptions \
     "enabled_events": ["composio.trigger.message"]
   }'
 ```
+
+> Your webhook endpoint must be publicly accessible — Composio's outbound IPs are dynamic, so IP allowlisting and private/VPN-only endpoints will not work. Use [signature verification](/docs/webhook-verification) to authenticate payloads instead.
 
 > The response includes a `secret` for [verifying webhook signatures](/docs/webhook-verification). This is only returned at creation time or when you [rotate the secret](/reference/api-reference/webhooks/postWebhookSubscriptionsByIdRotateSecret). Store it securely.
 
