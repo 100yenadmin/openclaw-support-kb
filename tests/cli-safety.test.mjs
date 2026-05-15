@@ -366,7 +366,6 @@ test("GBrain source registration tolerates existing sources before refederating"
       },
       captureNoExit(command, args) {
         calls.push([command, args]);
-        if (args[1] === "add") return { status: 1, stdout: "source already exists", stderr: "" };
         if (args[1] === "list" && args[2] === "--json") {
           return {
             status: 0,
@@ -380,14 +379,14 @@ test("GBrain source registration tolerates existing sources before refederating"
     }),
   );
 
-  assert.equal(calls.length, 3);
-  assert.equal(calls[0][1][2], GBRAIN_SOURCE_ID);
-  assert.deepEqual(calls[2][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+  assert.equal(calls.length, 2);
+  assert.deepEqual(calls[0][1], ["sources", "list", "--json"]);
+  assert.deepEqual(calls[1][1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+  assert.ok(!calls.some(([, args]) => args[1] === "add"));
 });
 
 test("GBrain source registration recreates stale existing source paths", () => {
   const calls = [];
-  let addCount = 0;
   assert.doesNotThrow(() =>
     ensureGbrainSource({
       targetDir: "/tmp/openclaw-support-kb",
@@ -396,10 +395,6 @@ test("GBrain source registration recreates stale existing source paths", () => {
       },
       captureNoExit(command, args) {
         calls.push([command, args]);
-        if (args[1] === "add") {
-          addCount += 1;
-          return addCount === 1 ? { status: 1, stdout: "source already exists", stderr: "" } : { status: 0, stdout: "", stderr: "" };
-        }
         if (args[1] === "list" && args[2] === "--json") {
           return {
             status: 0,
@@ -416,6 +411,7 @@ test("GBrain source registration recreates stale existing source paths", () => {
             stderr: "",
           };
         }
+        if (args[1] === "add") return { status: 0, stdout: "", stderr: "" };
         return { status: 0, stdout: "", stderr: "" };
       },
       warn() {},
@@ -423,8 +419,47 @@ test("GBrain source registration recreates stale existing source paths", () => {
   );
 
   assert.ok(calls.some(([, args]) => args.join(" ") === `sources remove ${GBRAIN_SOURCE_ID} --yes`));
-  assert.equal(calls.filter(([, args]) => args[1] === "add").length, 2);
+  assert.equal(calls.filter(([, args]) => args[1] === "add").length, 1);
   assert.deepEqual(calls.at(-1)[1], ["sources", "federate", GBRAIN_SOURCE_ID]);
+});
+
+test("GBrain source registration skips add when list already proves the correct source", () => {
+  const calls = [];
+  assert.doesNotThrow(() =>
+    ensureGbrainSource({
+      targetDir: "/tmp/openclaw-support-kb",
+      run() {
+        throw new Error("run should not be used when captureNoExit exists");
+      },
+      captureNoExit(command, args) {
+        calls.push([command, args]);
+        if (args[1] === "list" && args[2] === "--json") {
+          return {
+            status: 0,
+            stdout: JSON.stringify({
+              sources: [
+                {
+                  id: GBRAIN_SOURCE_ID,
+                  local_path: "/tmp/openclaw-support-kb",
+                  page_count: 616,
+                  federated: true,
+                },
+              ],
+            }),
+            stderr: "",
+          };
+        }
+        if (args[1] === "add") return { status: 1, stdout: "", stderr: "Error: command failed" };
+        return { status: 0, stdout: "", stderr: "" };
+      },
+      warn() {},
+    }),
+  );
+
+  assert.deepEqual(calls.map(([, args]) => args), [
+    ["sources", "list", "--json"],
+    ["sources", "federate", GBRAIN_SOURCE_ID],
+  ]);
 });
 
 test("GBrain source registration falls back for legacy GBrain without sources command", () => {
@@ -443,8 +478,23 @@ test("GBrain source registration falls back for legacy GBrain without sources co
   });
 
   assert.equal(result.sourceScoped, false);
-  assert.equal(calls.length, 1);
-  assert.equal(calls[0][0], "/Users/test/gbrain/bin/gbrain");
+  assert.deepEqual(calls.map(([command, args]) => [command, args]), [
+    ["/Users/test/gbrain/bin/gbrain", ["sources", "list", "--json"]],
+    ["/Users/test/gbrain/bin/gbrain", ["sources", "list"]],
+    [
+      "/Users/test/gbrain/bin/gbrain",
+      [
+        "sources",
+        "add",
+        GBRAIN_SOURCE_ID,
+        "--path",
+        "/tmp/openclaw-support-kb",
+        "--name",
+        GBRAIN_SOURCE_NAME,
+        "--federated",
+      ],
+    ],
+  ]);
 });
 
 test("GBrain legacy source fallback requires sources-specific unsupported command errors", () => {

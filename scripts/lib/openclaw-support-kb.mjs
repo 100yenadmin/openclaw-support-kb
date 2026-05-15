@@ -308,20 +308,7 @@ export function ensureGbrainSource({ targetDir, run, captureNoExit, warn = conso
     return { ok: true, sourceScoped: true };
   }
 
-  const addResult = captureNoExit(gbrainCommand, addArgs);
-  if (addResult.missing) return addResult;
-  if (addResult.status !== 0 && isUnsupportedGbrainSourcesError(addResult)) {
-    warn(`GBrain does not support named sources yet; syncing ${GBRAIN_SOURCE_ID} with legacy repo sync.`);
-    return { ok: true, sourceScoped: false, legacy: true };
-  }
-  if (addResult.status !== 0 && !isBenignExistingGbrainSourceError(addResult)) {
-    throw makeGbrainSourceError("add", addResult);
-  }
-  if (addResult.status !== 0) {
-    warn(`GBrain source ${GBRAIN_SOURCE_ID} already exists; refreshing federation.`);
-  }
-
-  const sourceInfo = readGbrainSourceInfo({ captureNoExit, gbrainCommand, sourceId: GBRAIN_SOURCE_ID });
+  let sourceInfo = readGbrainSourceInfo({ captureNoExit, gbrainCommand, sourceId: GBRAIN_SOURCE_ID });
   if (sourceInfo.ok && sourceInfo.source?.found && sourceInfo.source.localPathKnown && !pathsEqual(sourceInfo.source.localPath, targetDir)) {
     warn(
       `GBrain source ${GBRAIN_SOURCE_ID} points to ${sourceInfo.source.localPath || "(no path)"}; ` +
@@ -334,6 +321,35 @@ export function ensureGbrainSource({ targetDir, run, captureNoExit, warn = conso
     const reAddResult = captureNoExit(gbrainCommand, addArgs);
     if (reAddResult.missing) return reAddResult;
     if (reAddResult.status !== 0) throw makeGbrainSourceError("add", reAddResult);
+  } else if (sourceInfo.ok && sourceInfo.source?.found) {
+    warn(`GBrain source ${GBRAIN_SOURCE_ID} already exists; refreshing federation.`);
+  } else {
+    const addResult = captureNoExit(gbrainCommand, addArgs);
+    if (addResult.missing) return addResult;
+    if (addResult.status !== 0 && isUnsupportedGbrainSourcesError(addResult)) {
+      warn(`GBrain does not support named sources yet; syncing ${GBRAIN_SOURCE_ID} with legacy repo sync.`);
+      return { ok: true, sourceScoped: false, legacy: true };
+    }
+    if (addResult.status !== 0 && !isBenignExistingGbrainSourceError(addResult)) {
+      throw makeGbrainSourceError("add", addResult);
+    }
+    if (addResult.status !== 0) {
+      warn(`GBrain source ${GBRAIN_SOURCE_ID} already exists; refreshing federation.`);
+      sourceInfo = readGbrainSourceInfo({ captureNoExit, gbrainCommand, sourceId: GBRAIN_SOURCE_ID });
+      if (sourceInfo.ok && sourceInfo.source?.found && sourceInfo.source.localPathKnown && !pathsEqual(sourceInfo.source.localPath, targetDir)) {
+        warn(
+          `GBrain source ${GBRAIN_SOURCE_ID} points to ${sourceInfo.source.localPath || "(no path)"}; ` +
+            `recreating it at ${targetDir}.`,
+        );
+        const removeResult = captureNoExit(gbrainCommand, ["sources", "remove", GBRAIN_SOURCE_ID, "--yes"]);
+        if (removeResult.missing) return removeResult;
+        if (removeResult.status !== 0) throw makeGbrainSourceError("remove", removeResult);
+
+        const reAddResult = captureNoExit(gbrainCommand, addArgs);
+        if (reAddResult.missing) return reAddResult;
+        if (reAddResult.status !== 0) throw makeGbrainSourceError("add", reAddResult);
+      }
+    }
   }
 
   const federateResult = captureNoExit(gbrainCommand, federateArgs);
