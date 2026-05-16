@@ -14,9 +14,9 @@ KB for current Telegram docs and cite those docs in the final answer.
 Run:
 
 ```bash
-gbrain query "OpenClaw Telegram setup BotFather dmPolicy pairing groups allowFrom groupAllowFrom"
-gbrain search "Source: https://docs.openclaw.ai/channels/telegram"
-gbrain search "Telegram troubleshooting getMe returned 401 setMyCommands BOT_COMMANDS_TOO_MUCH"
+gbrain search "OpenClaw Telegram setup BotFather dmPolicy pairing groups allowFrom groupAllowFrom" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/telegram" --source openclaw-support-kb
+gbrain search "Telegram troubleshooting getMe returned 401 setMyCommands BOT_COMMANDS_TOO_MUCH" --source openclaw-support-kb
 ```
 
 Use these docs as the factual source:

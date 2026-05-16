@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tests"
 source: "https://docs.openclaw.ai/reference/test"
-source_hash: "7dde6efb918ad1dc46774a125528e8ee4da8355e0ed5009bce23a81ec14f9379"
+source_hash: "099e9b8f3e6e4bc35c3e409ac2228eeef6bb49460b64e9f5e9460c94f381bc40"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/test.md"
 original_doc_path: "reference/test.md"
 duplicate_index: 1
@@ -30,6 +32,10 @@ Source: https://docs.openclaw.ai/reference/test
 * `pnpm changed:lanes`: shows the architectural lanes triggered by the diff against `origin/main`.
 
 * `pnpm check:changed`: runs the smart changed check gate for the diff against `origin/main`. It runs typecheck, lint, and guard commands for the affected architectural lanes, but does not run Vitest tests. Use `pnpm test:changed` or explicit `pnpm test <target>` for test proof.
+
+* Codex worktrees and linked/sparse checkouts: avoid direct local `pnpm test*`, `pnpm check*`, and `pnpm crabbox:run` unless you have verified pnpm will not reconcile dependencies. For tiny explicit-file proof use `node scripts/run-vitest.mjs <path-or-filter>`; for changed gates or broad proof use `node scripts/crabbox-wrapper.mjs run --provider blacksmith-testbox ... --shell -- "pnpm check:changed"` so pnpm runs inside Testbox.
+
+* `OPENCLAW_HEAVY_CHECK_LOCK_SCOPE=worktree <local-heavy-check command>`: keeps heavy-check serialization inside the current worktree instead of the Git common dir for commands such as `pnpm check:changed` and targeted `pnpm test ...`. Use it only on high-capacity local hosts when you intentionally run independent checks across linked worktrees.
 
 * `pnpm test`: routes explicit file/directory targets through scoped Vitest lanes. Untargeted runs use fixed shard groups and expand to leaf configs for local parallel execution; the extension group always expands to the per-extension shard configs instead of one giant root-project process.
 
@@ -81,9 +87,11 @@ Source: https://docs.openclaw.ai/reference/test
 
 * `pnpm test:docker:browser-cdp-snapshot`: Builds a Chromium-backed source E2E container, starts raw CDP plus an isolated Gateway, runs `browser doctor --deep`, and verifies CDP role snapshots include link URLs, cursor-promoted clickables, iframe refs, and frame metadata.
 
-* CLI backend live Docker probes can be run as focused lanes, for example `pnpm test:docker:live-cli-backend:codex`, `pnpm test:docker:live-cli-backend:codex:resume`, or `pnpm test:docker:live-cli-backend:codex:mcp`. Claude and Gemini have matching `:resume` and `:mcp` aliases.
+* `pnpm test:docker:skill-install`: Installs the packed OpenClaw tarball in a bare Docker runner, disables `skills.install.allowUploadedArchives`, resolves a current skill slug from live ClawHub search, installs it through `openclaw skills install`, and verifies `SKILL.md`, `.clawhub/origin.json`, `.clawhub/lock.json`, and `skills info --json`.
 
-* `pnpm test:docker:openwebui`: Starts Dockerized OpenClaw + Open WebUI, signs in through Open WebUI, checks `/api/models`, then runs a real proxied chat through `/api/chat/completions`. Requires a usable live model key (for example OpenAI in `~/.profile`), pulls an external Open WebUI image, and is not expected to be CI-stable like the normal unit/e2e suites.
+* CLI backend live Docker probes can be run as focused lanes, for example `pnpm test:docker:live-cli-backend:claude`, `pnpm test:docker:live-cli-backend:claude:resume`, or `pnpm test:docker:live-cli-backend:claude:mcp`. Gemini has matching `:resume` and `:mcp` aliases.
+
+* `pnpm test:docker:openwebui`: Starts Dockerized OpenClaw + Open WebUI, signs in through Open WebUI, checks `/api/models`, then runs a real proxied chat through `/api/chat/completions`. Requires a usable live model key, pulls an external Open WebUI image, and is not expected to be CI-stable like the normal unit/e2e suites.
 
 * `pnpm test:docker:mcp-channels`: Starts a seeded Gateway container and a second client container that spawns `openclaw mcp serve`, then verifies routed conversation discovery, transcript reads, attachment metadata, live event queue behavior, outbound send routing, and Claude-style channel + permission notifications over the real stdio bridge. The Claude notification assertion reads the raw stdio MCP frames directly so the smoke reflects what the bridge actually emits.
 
@@ -117,7 +125,7 @@ Script: [`scripts/bench-model.ts`](https://github.com/openclaw/openclaw/blob/mai
 
 Usage:
 
-* `source ~/.profile && pnpm tsx scripts/bench-model.ts --runs 10`
+* `pnpm tsx scripts/bench-model.ts --runs 10`
 * Optional env: `MINIMAX_API_KEY`, `MINIMAX_BASE_URL`, `MINIMAX_MODEL`, `ANTHROPIC_API_KEY`
 * Default prompt: "Reply with a single word: ok. No punctuation or extra text."
 

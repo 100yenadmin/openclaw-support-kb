@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Claude Agent SDK"
 source: "https://docs.composio.dev/docs/providers/claude-agent-sdk.md"
-source_hash: "360d80582ba25518cf0f6dae43203420ff9ab326123d68f2d9a5026dddb34d53"
+source_hash: "1be5816ee09069d1f322123d369d748b014ba04a892c4b75d054c2c1465138a7"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/claude-agent-sdk.md"
 original_doc_path: "providers/claude-agent-sdk.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Claude Agent SDK (/docs/providers/claude-agent-sdk)
 Source: https://docs.composio.dev/docs/providers/claude-agent-sdk.md

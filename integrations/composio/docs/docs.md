@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Welcome"
 source: "https://docs.composio.dev/docs.md"
-source_hash: "28dc8791a63fc27b0217b2e6029cebecbaa64308f5d30271396c19b99f250fc5"
+source_hash: "c28abe64672f15761615fcea5b0b7187b1684943fcabf0966fb88e0e613e9a92"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "docs.md"
 original_doc_path: "docs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Welcome (/docs)
 Source: https://docs.composio.dev/docs.md

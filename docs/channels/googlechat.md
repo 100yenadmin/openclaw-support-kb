@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "0578d9f19cc351041119407549af3458226e11b1bd1687b5ad80fa2ad7347316"
+source_hash: "a17bdb4033baa3d05558f6652ec85b14ae01eaa46002301a8e4d5d56c0bd267c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/googlechat.md"
 original_doc_path: "channels/googlechat.md"
 duplicate_index: 1
@@ -193,6 +195,7 @@ Use these identifiers for delivery and allowlists:
       audience: "https://gateway.example.com/googlechat",
       webhookPath: "/googlechat",
       botUser: "users/1234567890", // optional; helps mention detection
+      allowBots: false,
       dm: {
         policy: "pairing",
         allowFrom: ["users/1234567890"],
@@ -224,6 +227,7 @@ Notes:
 * Message actions expose `send` for text and `upload-file` for explicit attachment sends. `upload-file` accepts `media` / `filePath` / `path` plus optional `message`, `filename`, and thread targeting.
 * `typingIndicator` supports `none`, `message` (default), and `reaction` (reaction requires user OAuth).
 * Attachments are downloaded through the Chat API and stored in the media pipeline (size capped by `mediaMaxMb`).
+* Bot-authored Google Chat messages are ignored by default. If you intentionally set `allowBots: true`, accepted bot-authored messages use shared [bot loop protection](/channels/bot-loop-protection). Configure `channels.defaults.botLoopProtection`, then override with `channels.googlechat.botLoopProtection` or `channels.googlechat.groups.<space>.botLoopProtection` when one space needs a different budget.
 
 Secrets reference details: [Secrets Management](/gateway/secrets).
 

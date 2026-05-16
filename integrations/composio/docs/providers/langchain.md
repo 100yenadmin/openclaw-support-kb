@@ -2,11 +2,16 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "e060686d74618982c122b352557301d0970c1bb5a6a6b4dfec3625712e8b2045"
+source_hash: "d30a7948e2bda4854081eeeed3602b4d08bbde63aa754dedd0794893538333f8"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/langchain.md"
 original_doc_path: "providers/langchain.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # LangChain (/docs/providers/langchain)
 Source: https://docs.composio.dev/docs/providers/langchain.md

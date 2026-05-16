@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Talk mode"
 source: "https://docs.openclaw.ai/nodes/talk"
-source_hash: "83a2467e60a8fd0d9c46a7a2bddc70cdb8502ebfc51d38c5e8f219873d9e677b"
+source_hash: "efb23a57c6f277c9020b8d641bbcbcd5be823b6d4438f139f532db85b69fafaa"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "nodes/talk.md"
 original_doc_path: "nodes/talk.md"
 duplicate_index: 1
@@ -88,10 +90,11 @@ Supported keys:
       providers: {
         openai: {
           apiKey: "openai_api_key",
-          model: "gpt-realtime",
-          voice: "alloy",
+          model: "gpt-realtime-2",
+          voice: "cedar",
         },
       },
+      instructions: "Speak warmly and keep answers brief.",
       mode: "realtime",
       transport: "webrtc",
       brain: "agent-consult",
@@ -109,9 +112,13 @@ Defaults:
 * `providers.elevenlabs.modelId`: defaults to `eleven_v3` when unset.
 * `providers.mlx.modelId`: defaults to `mlx-community/Soprano-80M-bf16` when unset.
 * `providers.elevenlabs.apiKey`: falls back to `ELEVENLABS_API_KEY` (or gateway shell profile if available).
+* `consultThinkingLevel`: optional thinking level override for the full OpenClaw agent run behind realtime `openclaw_agent_consult` calls.
+* `consultFastMode`: optional fast-mode override for realtime `openclaw_agent_consult` calls.
 * `realtime.provider`: selects the active browser/server realtime voice provider. Use `openai` for WebRTC, `google` for provider WebSocket, or a bridge-only provider through Gateway relay.
 * `realtime.providers.<provider>` stores provider-owned realtime config. The browser receives only ephemeral or constrained session credentials, never a standard API key.
+* `realtime.providers.openai.voice`: built-in OpenAI Realtime voice id. Current `gpt-realtime-2` voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`; `marin` and `cedar` are recommended for best quality.
 * `realtime.brain`: `agent-consult` routes realtime tool calls through Gateway policy; `direct-tools` is owner-only compatibility behavior; `none` is for transcription or external orchestration.
+* `realtime.instructions`: appends provider-facing system instructions to OpenClaw's built-in realtime prompt. Use it for voice style and tone; OpenClaw keeps the default `openclaw_agent_consult` guidance.
 * `talk.catalog` exposes each provider's valid modes, transports, brain strategies, realtime audio formats, and capability flags so first-party Talk clients can avoid unsupported combinations.
 * Streaming transcription providers are discovered through `talk.catalog.transcription`. The current Gateway relay uses the Voice Call streaming provider config until the dedicated Talk transcription config surface is added.
 * `speechLocale`: optional BCP 47 locale id for on-device Talk speech recognition on iOS/macOS. Leave unset to use the device default.

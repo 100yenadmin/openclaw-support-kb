@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "AGENTS.md template"
 source: "https://docs.openclaw.ai/reference/templates/AGENTS"
-source_hash: "0ba2a4666d2a16e3f2fbf0d047f56cc0a4035a3f1310b6155c1720b11bb9e977"
+source_hash: "5712db8e0226113d8e9befd3efeeb0806ab5189e472efd9d736d2ae75e2da864"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/templates/agents.md"
 original_doc_path: "reference/templates/agents.md"
 duplicate_index: 1

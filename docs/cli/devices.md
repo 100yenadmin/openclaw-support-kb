@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Devices"
 source: "https://docs.openclaw.ai/cli/devices"
-source_hash: "760858a857b827213578ec2e4046a24338d19cc3174435ea74640d6123364990"
+source_hash: "03da9c47e0c89cec134ba8ae6c5f46a833dcb984bf3c4b9012ad27d408054d8b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/devices.md"
 original_doc_path: "cli/devices.md"
 duplicate_index: 1
@@ -164,7 +166,7 @@ Returns the revoke result as JSON.
 
 ## Token drift recovery checklist
 
-Use this when Control UI or other clients keep failing with `AUTH_TOKEN_MISMATCH` or `AUTH_DEVICE_TOKEN_MISMATCH`.
+Use this when Control UI or other clients keep failing with `AUTH_TOKEN_MISMATCH`, `AUTH_DEVICE_TOKEN_MISMATCH`, or `AUTH_SCOPE_MISMATCH`.
 
 1. Confirm current gateway token source:
 
@@ -198,6 +200,7 @@ Notes:
 
 * Normal reconnect auth precedence is explicit shared token/password first, then explicit `deviceToken`, then stored device token, then bootstrap token.
 * Trusted `AUTH_TOKEN_MISMATCH` recovery can temporarily send both the shared token and the stored device token together for the one bounded retry.
+* `AUTH_SCOPE_MISMATCH` means the device token was recognized but does not carry the requested scope set; fix the pairing/scope approval contract before changing shared gateway auth.
 
 Related:
 

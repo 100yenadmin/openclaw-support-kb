@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
-source_hash: "ff22a0fda3ad9dc4af26d20fc7abb6b136e0a9a667e501eacb9d89e29051affb"
+source_hash: "714ce014264455ca8e6043964d5b77c2399104d345e1d00144d659090876532f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/pdf.md"
 original_doc_path: "tools/pdf.md"
 duplicate_index: 1

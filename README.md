@@ -1,18 +1,19 @@
-# OpenClaw Support KB
+# Customer Support KB
 
-Local-first OpenClaw support knowledge base and GBrain skillpack.
+Local-first customer support knowledge base and GBrain skillpack.
 
-This repo turns the public OpenClaw docs, release notes, safe support runbooks,
-skill/integration discovery guidance, and escalation contacts into a searchable
-local GBrain source. Cortex/GitHub should publish updates; every agent machine
-keeps a local copy so support answers do not depend on a live cloud lookup.
+This repo turns public OpenClaw, Hermes Agent, Paperclip Mission Control,
+Composio, release, safe runbook, skill discovery, and escalation knowledge into
+a searchable local GBrain source. Cortex/GitHub should publish updates; every
+agent machine keeps a local copy so support answers do not depend on a live
+cloud lookup.
 
 ## Agent Install
 
 Point the agent at this repo and tell it:
 
 ```text
-Follow INSTALL_FOR_AGENTS.md in this repository. Install the OpenClaw Support KB
+Follow INSTALL_FOR_AGENTS.md in this repository. Install the Customer Support KB
 into GBrain and verify local search works.
 ```
 
@@ -22,14 +23,17 @@ The canonical install location is:
 ~/.gbrain/sources/openclaw-support-kb
 ```
 
-The canonical GBrain source id is:
+The canonical physical GBrain source id is:
 
 ```bash
 openclaw-support-kb
 ```
 
 Users do not push this repo. The publisher updates it; user machines pull it
-read-only and sync it into local GBrain.
+read-only and sync it into local GBrain. The physical source stays
+`openclaw-support-kb` for backwards compatibility, and `kb-sources.json`
+declares logical namespaces for OpenClaw, Hermes Agent, Paperclip Mission
+Control, and Composio so agents can avoid mixing config instructions.
 
 The install script trusts the official repo URL by default. Development forks
 must be pinned with `OPENCLAW_SUPPORT_KB_PINNED_REF` and explicitly allowed.
@@ -58,11 +62,22 @@ The builder fetches:
 - `https://docs.composio.dev/llms.txt`
 - `https://docs.composio.dev/llms-full.txt`
 - `https://composio.dev/toolkits`
+- `https://hermes-agent.nousresearch.com/docs/llms.txt`
+- `https://hermes-agent.nousresearch.com/docs/llms-full.txt`
+- `https://paperclip.ing/llms.txt`
+- `https://api.github.com/repos/paperclipai/paperclip/git/trees/master?recursive=1`
+- selected Markdown docs from `https://github.com/paperclipai/paperclip`
 
 It writes source-preserving docs/release Markdown, source-indexed policy
-summaries, and `kb-manifest.json`.
+summaries, `kb-sources.json`, and `kb-manifest.json`.
 Run `node scripts/check-manifest.mjs` after local edits to confirm the manifest still
 matches the indexed artifact.
+
+Source routing is intentionally layered: OpenClaw docs remain under `docs/`;
+Hermes lives under `systems/hermes/`; Paperclip lives under
+`systems/paperclip/`; Composio lives under `integrations/composio/`. Router
+skills require the agent to identify the target system before applying config
+or repair steps.
 
 Skill discovery is intentionally layered: local VoltAgent snapshot, current
 OpenClaw/ClawHub search, Snyk scan attestation before skill install, and local
@@ -80,7 +95,7 @@ node scripts/update-client.mjs
 
 Local alias from this repo directory: `npm run setup`.
 
-Setup installs the four OpenClaw support skills into `~/.openclaw/skills`, writes
+Setup installs the managed customer KB skills into `~/.openclaw/skills`, writes
 an agent hint block to active OpenClaw workspace `AGENTS.md` files, and syncs
 this source into GBrain. Override skills destination with `OPENCLAW_SKILLS_DIR`.
 When setup runs outside the canonical source directory, it keeps
@@ -128,6 +143,14 @@ The installed skills assume helper scripts are available from:
 
 ```bash
 ~/.gbrain/sources/openclaw-support-kb/scripts/
+```
+
+Routing expectation:
+
+```bash
+gbrain search "OpenClaw <question> Source: https://docs.openclaw.ai" --source openclaw-support-kb
+gbrain search "Hermes Agent <question> Local KB namespace: hermes-agent" --source openclaw-support-kb
+gbrain search "Paperclip Mission Control <question> Local KB namespace: paperclip-mission-control" --source openclaw-support-kb
 ```
 
 ## Automatic Updates

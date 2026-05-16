@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tlon"
 source: "https://docs.openclaw.ai/channels/tlon"
-source_hash: "be7be0ab4c81ce5a6f2be809f7c1f00f75ff10caf2aca14640e7ee64c5fa6067"
+source_hash: "2645b7fe8826b126b1ca4b0f360eda1525bdd59b8984c2dfae1bd3bc26c9a252"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/tlon.md"
 original_doc_path: "channels/tlon.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gateway lock"
 source: "https://docs.openclaw.ai/gateway/gateway-lock"
-source_hash: "1d48a128b93de389b23e35c7de58498b7e472e5716a51a1137213dfa3c67bdf9"
+source_hash: "89abf78c3777de87be9edb0c22d5a4182af4fa035e3b00dbe111ebdfcf25a51d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/gateway-lock.md"
 original_doc_path: "gateway/gateway-lock.md"
 duplicate_index: 1

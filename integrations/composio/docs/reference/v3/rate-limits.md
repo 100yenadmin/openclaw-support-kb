@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Rate Limits"
 source: "https://docs.composio.dev/reference/v3/rate-limits.md"
-source_hash: "964a0f87aafa78f70d4dfd9cf453bed36103507813c85bee20e6fa1edd2d08e4"
+source_hash: "e5847fa9f028e9ac476bca30ca857e3d70cc7c3c86b40e193df61ff77fed42b4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/v3/rate-limits.md"
 original_doc_path: "reference/v3/rate-limits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Rate Limits (/reference/v3/rate-limits)
 Source: https://docs.composio.dev/reference/v3/rate-limits.md
@@ -58,10 +63,10 @@ When you exceed the rate limit, you'll receive a `429 Too Many Requests` respons
 
 If you're hitting rate limits regularly, consider upgrading your plan or [talk to us](https://calendly.com/composiohq/enterprise) to discuss custom limits for your use case.
 
-- [Errors](/reference/v3/errors): 
+- [Errors](/reference/v3/errors):
 Understanding API error responses
 
-- [Pricing](https://composio.dev/pricing): 
+- [Pricing](https://composio.dev/pricing):
 Compare plans and limits
 
 ---

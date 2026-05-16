@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "WebChat"
 source: "https://docs.openclaw.ai/web/webchat"
-source_hash: "e7b13e75760d70206010884ee659641e9d50499954bf930bb5f8dbeaa26f5b63"
+source_hash: "0b6843a75556bd37e2351880645afe7125fc1e60c45970b391c9023c5918b16a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "web/webchat.md"
 original_doc_path: "web/webchat.md"
 duplicate_index: 1
@@ -59,6 +61,7 @@ WebChat has two separate data paths:
 
 * The session JSONL file is the durable model/runtime transcript. For normal agent runs, Pi persists model-visible `user`, `assistant`, and `toolResult` messages through its session manager. WebChat does not write arbitrary delivery, status, or helper text into that transcript.
 * Gateway `ReplyPayload` events are the live delivery projection. They can be normalized for WebChat/channel display, block streaming, directive tags, media embedding, TTS/audio flags, and UI fallback behavior. They are not themselves the canonical session log.
+* Harnesses that require visible replies through `tools.message` still use WebChat as a current-run internal source reply sink. A targetless `message.send` from that active WebChat run is projected into the same chat and mirrored to the session transcript; WebChat does not become a reusable outbound channel and never inherits `lastChannel`.
 * WebChat injects assistant transcript entries only when the Gateway owns a displayed message outside a normal Pi assistant turn: `chat.inject`, non-agent command replies, aborted partial output, and WebChat-managed media transcript supplements.
 * `chat.history` reads the stored session transcript and applies WebChat display projection. If live assistant text appears during a run but disappears after history reload, first check whether the raw JSONL contains the assistant text, then whether `chat.history` projection stripped it, then whether the Control UI optimistic-tail merge replaced local delivery state with the persisted snapshot.
 

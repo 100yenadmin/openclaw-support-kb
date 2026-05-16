@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Elevated mode"
 source: "https://docs.openclaw.ai/tools/elevated"
-source_hash: "deed806ffc5400b8ef74138c3632a31aaa27b6586cd024b16028c802a0f0d98d"
+source_hash: "5b227455a82ad5ec6a5b42cd6296f1fbf77e3474c1e051b4c276ffc54754fb46"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/elevated.md"
 original_doc_path: "tools/elevated.md"
 duplicate_index: 1

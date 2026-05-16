@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "0647872417a6a896b16fa073c735231d50810ec2cfbca530a606060a388fba27"
+source_hash: "7cb9e9988deb619011954e1060dd5b2452440222ca83ab217d8e2c40e7410846"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
 original_doc_path: "reference/secretref-credential-surface.md"
 duplicate_index: 1
@@ -88,8 +90,6 @@ Scope intent:
 * `channels.irc.nickserv.password`
 * `channels.irc.accounts.*.password`
 * `channels.irc.accounts.*.nickserv.password`
-* `channels.bluebubbles.password`
-* `channels.bluebubbles.accounts.*.password`
 * `channels.feishu.appSecret`
 * `channels.feishu.encryptKey`
 * `channels.feishu.verificationToken`

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Backup"
 source: "https://docs.openclaw.ai/cli/backup"
-source_hash: "96a381cb59d839f8be1a1f1f5e6786e7a6f41efbc52a6097f19ce629eec2f252"
+source_hash: "369d020d693e2d64df2c9c871cea1d2a83fef1f3075a54f72a5569eeb11f0246"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/backup.md"
 original_doc_path: "cli/backup.md"
 duplicate_index: 1
@@ -59,6 +61,8 @@ they are not duplicated as separate top-level backup sources. Missing paths are
 skipped.
 
 The archive payload stores file contents from those source trees, and the embedded `manifest.json` records the resolved absolute source paths plus the archive layout used for each asset.
+
+During archive creation, OpenClaw skips known live-mutation files that do not have restoration value, including active agent session transcripts, cron run logs, rolling logs, delivery queues, socket/pid/temp files under the state directory, and related durable-queue temp files. The JSON result includes `skippedVolatileCount` so automation can see how many files were intentionally omitted.
 
 Installed plugin source and manifest files under the state directory's
 `extensions/` tree are included, but their nested `node_modules/` dependency

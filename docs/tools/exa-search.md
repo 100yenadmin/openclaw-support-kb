@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Exa search"
 source: "https://docs.openclaw.ai/tools/exa-search"
-source_hash: "5a6d23398b3b31cb2b3922da54ad5b96f644ae420944cee180d7b3ceb660fd9b"
+source_hash: "af5fcefd394efcc03c02e3bfdb9f1700e7124b7abde409d60024bf682cb08343"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/exa-search.md"
 original_doc_path: "tools/exa-search.md"
 duplicate_index: 1

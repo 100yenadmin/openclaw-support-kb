@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "8d8ea5c4ae602ec76ed58eabd199ab5f42ed0a26326631eb4d967f45a74eff54"
+source_hash: "9164a8a37fb0bef3d603353a3b0b3ab0a7eada66f1f7b6cc9136fb0bd4ce592b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/channels.md"
 original_doc_path: "cli/channels.md"
 duplicate_index: 1
@@ -39,7 +41,7 @@ openclaw channels logs --channel all
 
 ## Status / capabilities / resolve / logs
 
-* `channels status`: `--probe`, `--timeout <ms>`, `--json`
+* `channels status`: `--channel <name>`, `--probe`, `--timeout <ms>`, `--json`
 * `channels capabilities`: `--channel <name>`, `--account <id>` (only with `--channel`), `--target <dest>`, `--timeout <ms>`, `--json`
 * `channels resolve`: `<entries...>`, `--channel <name>`, `--account <id>`, `--kind <auto|user|group>`, `--json`
 * `channels logs`: `--channel <name|all>`, `--lines <n>`, `--json`
@@ -87,7 +89,7 @@ When you run `openclaw channels add` without flags, the interactive wizard can p
 
 * account ids per selected channel
 * optional display names for those accounts
-* `Bind configured channel accounts to agents now?`
+* `Route these channel accounts to agents now?`
 
 If you confirm bind now, the wizard asks which agent should own each configured channel account and writes account-scoped routing bindings.
 

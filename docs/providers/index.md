@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers/index"
-source_hash: "516d4dc3655ee0106da15c6408d8963721dc404224acb515225ff51b5f5ec30a"
+source_hash: "1db6599567a4acee94eb71f51eabe28224e5d4cb23651b5995417e669a8a5446"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/index.md"
 original_doc_path: "providers/index.md"
 duplicate_index: 1
@@ -43,6 +45,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 * [Cloudflare AI Gateway](/providers/cloudflare-ai-gateway)
 * [ComfyUI](/providers/comfy)
 * [DeepSeek](/providers/deepseek)
+* [ds4 (local DeepSeek V4)](/providers/ds4)
 * [ElevenLabs](/providers/elevenlabs)
 * [fal](/providers/fal)
 * [Fireworks](/providers/fireworks)

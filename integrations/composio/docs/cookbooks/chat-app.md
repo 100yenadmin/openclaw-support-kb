@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Build a Chat App"
 source: "https://docs.composio.dev/cookbooks/chat-app.md"
-source_hash: "8062aaf7dbabbef1f0ba7c2552096eff94226980ce4670cd13235a09e9683d5f"
+source_hash: "ea7182b4d106467184e1ac2b7ac1429fe14401a6ef5afcc0d5244eb0aa79cdb4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/chat-app.md"
 original_doc_path: "cookbooks/chat-app.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Build a Chat App (/cookbooks/chat-app)
 Source: https://docs.composio.dev/cookbooks/chat-app.md
@@ -71,10 +76,18 @@ import {
 
 const composio = new Composio({ provider: new VercelProvider() });
 
+// In production, store session IDs per user in your database
+let sessionId: string | null = null;
+
 export async function POST(req: Request) {
   const { messages }: { messages: UIMessage[] } = await req.json();
 
-  const session = await composio.create("user_123");
+  // Reuse existing session or create a new one
+  const session = sessionId
+    ? await composio.use(sessionId)
+    : await composio.create("user_123");
+  sessionId = session.sessionId;
+
   const tools = await session.tools();
 
   const result = streamText({
@@ -92,7 +105,7 @@ export async function POST(req: Request) {
 }
 
 ```
-That's the entire backend. `composio.create("user_123")` creates a session that lets the agent search for tools, authenticate users, and execute actions. This ID scopes all connections and credentials to this user. In production, use the user ID from your auth system.
+That's the entire backend. On the first request, `composio.create("user_123")` creates a session that lets the agent search for tools, authenticate users, and execute actions. Subsequent requests reuse the same session via `composio.use(sessionId)` so tool access and connected accounts carry over. In production, store the session ID per user in your database and use the user ID from your auth system.
 
 # Build the chat UI
 
@@ -118,18 +131,18 @@ export default function Chat() {
     <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Composio Chat</h1>
 
-      
+
         {messages.length === 0 && (
           <p className="text-gray-400 text-center py-12">
             Try: &quot;Star the composio repo on GitHub&quot;
           </p>
         )}
         {messages.map((m) => (
-          
+
             <span className="font-semibold shrink-0">
               {m.role === "user" ? "You:" : "Agent:"}
             </span>
-            
+
               {m.parts.map((part, i) =>
                 part.type === "text" ? (
                   <span key={i}>
@@ -145,13 +158,13 @@ export default function Chat() {
                   </span>
                 ) : null
               )}
-            
-          
+
+
         ))}
         {isLoading && (
           <p className="text-gray-400 text-sm">Thinking...</p>
         )}
-      
+
 
       <form
         onSubmit={(e) => {
@@ -227,7 +240,7 @@ export function ToolCallDisplay({
   const [expanded, setExpanded] = useState(false);
 
   return (
-    
+
       <button
         onClick={() => setExpanded(!expanded)}
         className={`inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-xs transition-colors ${
@@ -252,7 +265,7 @@ export function ToolCallDisplay({
             : String(JSON.stringify(input, null, 2))}
         </pre>
       )}
-    
+
   );
 }
 
@@ -280,18 +293,18 @@ export default function Chat() {
     <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Composio Chat</h1>
 
-      
+
         {messages.length === 0 && (
           <p className="text-gray-400 text-center py-12">
             Try: &quot;Star the composio repo on GitHub&quot;
           </p>
         )}
         {messages.map((m) => (
-          
+
             <span className="font-semibold shrink-0">
               {m.role === "user" ? "You:" : "Agent:"}
             </span>
-            
+
               {m.parts.map((part, i) => {
                 if (part.type === "text") {
                   return (
@@ -310,18 +323,18 @@ export default function Chat() {
                 }
                 if (isToolUIPart(part)) {
                   return (
-                    
+
                   );
                 }
                 return null;
               })}
-            
-          
+
+
         ))}
         {isLoading && (
           <p className="text-gray-400 text-sm">Thinking...</p>
         )}
-      
+
 
       <form
         onSubmit={(e) => {
@@ -367,16 +380,16 @@ Try a few more requests:
 
 # Take it further
 
-- [Build an App Connections Dashboard](/cookbooks/app-connections-dashboard): 
+- [Build an App Connections Dashboard](/cookbooks/app-connections-dashboard):
 A dedicated page where users manage their app connections
 
-- [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts): 
+- [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts):
 Let users connect multiple accounts for the same toolkit
 
-- [Configuring sessions](/docs/configuring-sessions): 
+- [Configuring sessions](/docs/configuring-sessions):
 Lock down which toolkits your agent can access
 
-- [How Composio works](/docs/how-composio-works): 
+- [How Composio works](/docs/how-composio-works):
 Understand sessions, tool discovery, and execution under the hood
 
 ---

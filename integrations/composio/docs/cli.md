@@ -2,11 +2,16 @@
 type: composio_doc
 title: "CLI"
 source: "https://docs.composio.dev/docs/cli.md"
-source_hash: "5a6f224c470c290ba119a6fa47dc3ed338350b2e6e83ad714db3a18e680a3924"
+source_hash: "faa3a2b040789d428d8048a8a434a7824888cfa5cafbf082db45cbc29b04cf6f"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cli.md"
 original_doc_path: "cli.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # CLI (/docs/cli)
 Source: https://docs.composio.dev/docs/cli.md

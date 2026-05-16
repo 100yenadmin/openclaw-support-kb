@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Retry policy"
 source: "https://docs.openclaw.ai/concepts/retry"
-source_hash: "6475123e592829941d627c4aef13a7a9748256049431b4a2ab6805ac4ab24d67"
+source_hash: "1bc0e559180cf7e51412f9f7b772051b03bc84c6df147c18162e9e71c961b0ab"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/retry.md"
 original_doc_path: "concepts/retry.md"
 duplicate_index: 1

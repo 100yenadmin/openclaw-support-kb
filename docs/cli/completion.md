@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Completion"
 source: "https://docs.openclaw.ai/cli/completion"
-source_hash: "6dec0501db2354dc73941184174183a52c7e0a937e61782cb94e385dc0cf4f7a"
+source_hash: "bff1762ccb5641027d0604af14d27b54d75e1bacb4f968f34ebc2ad4867ce920"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/completion.md"
 original_doc_path: "cli/completion.md"
 duplicate_index: 1

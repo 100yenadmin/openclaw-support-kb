@@ -12,10 +12,10 @@ of truth. Search them before proposing any config key.
 ## Search Contract
 
 ```bash
-gbrain search "<exact config error or path>"
-gbrain query "OpenClaw config schema patch dry-run validate rejected clobbered"
-gbrain search "Source: https://docs.openclaw.ai/cli/config"
-gbrain search "Source: https://docs.openclaw.ai/gateway/configuration-reference"
+gbrain search "OpenClaw <exact config error or path>" --source openclaw-support-kb
+gbrain search "OpenClaw config schema patch dry-run validate rejected clobbered" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/cli/config" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/gateway/configuration-reference" --source openclaw-support-kb
 ```
 
 Use these docs as the factual source:

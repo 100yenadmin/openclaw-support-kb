@@ -2,11 +2,16 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "ba285f29377288ec2953f704ed517faa949dfd385b370cdc8e682df5a375299d"
+source_hash: "6b3968e77949fbf2ac5f56420f7449827716e1433f1444962a264b8a52ddeaef"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/crewai.md"
 original_doc_path: "providers/crewai.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # CrewAI (/docs/providers/crewai)
 Source: https://docs.composio.dev/docs/providers/crewai.md

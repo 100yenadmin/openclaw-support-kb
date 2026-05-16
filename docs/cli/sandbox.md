@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
-source_hash: "ba69bee74b6b63ee1f0ddabdd174ca44bb05c19d1e4a44f7a8eb11bfbd2d7e36"
+source_hash: "2c2e5d9eec11937074fbc74036697ba58bf2e46d039a167fcfbdfd75b6ffe529"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/sandbox.md"
 original_doc_path: "cli/sandbox.md"
 duplicate_index: 1

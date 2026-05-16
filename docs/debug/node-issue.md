@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Node + tsx crash"
 source: "https://docs.openclaw.ai/debug/node-issue"
-source_hash: "65009ca4885f356d4372033598a62ed129defafcf54e4e1c0cc89bd97970a4a6"
+source_hash: "06fc9f07f7efae25f0539e4f152ec011899d9588e652bfb0766d960ec7630617"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "debug/node-issue.md"
 original_doc_path: "debug/node-issue.md"
 duplicate_index: 1

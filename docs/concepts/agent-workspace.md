@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "70faea06e1078143a4492065ebf7af8749a434e417d09aafb981e113a18b8db1"
+source_hash: "bacaed32ab28518fff9e1b4b4e7ac622357cab29c3b6eb733d2154ad0b47d157"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
 original_doc_path: "concepts/agent-workspace.md"
 duplicate_index: 1
@@ -103,7 +105,7 @@ These are the standard files OpenClaw expects inside the workspace:
   </Accordion>
 
   <Accordion title="MEMORY.md - curated long-term memory (optional)">
-    Curated long-term memory. Only load in the main, private session (not shared/group contexts). See [Memory](/concepts/memory) for the workflow and automatic memory flush.
+    Curated long-term memory: durable facts, preferences, decisions, and short summaries. Keep detailed logs in `memory/YYYY-MM-DD.md` so memory tools can retrieve them on demand without injecting them into every prompt. Only load `MEMORY.md` in the main, private session (not shared/group contexts). See [Memory](/concepts/memory) for the workflow and automatic memory flush.
   </Accordion>
 
   <Accordion title="skills/ - workspace skills (optional)">

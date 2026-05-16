@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/reference/authentication.md"
-source_hash: "6b6bc1c0b533eb54e6b125a8604026d83856e8fa247af45df5a99209c1df2007"
+source_hash: "7613cc1994ce2d783cded1a62fa4b6ee71f5122eba0ba3e6abf02fc90477d5f4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/authentication.md"
 original_doc_path: "reference/authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Authentication (/reference/authentication)
 Source: https://docs.composio.dev/reference/authentication.md
@@ -50,10 +55,10 @@ curl https://backend.composio.dev/api/v3.1/org/projects \
   -H "x-org-api-key: $COMPOSIO_ORG_API_KEY"
 ```
 
-- [Errors](/reference/errors): 
+- [Errors](/reference/errors):
 Understanding API error responses
 
-- [Rate Limits](/reference/rate-limits): 
+- [Rate Limits](/reference/rate-limits):
 API rate limits by plan
 
 ---

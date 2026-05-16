@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "02f5df6525078e66959b0e970b20e638301238140b13ef9df3186fc4dafb5b78"
+source_hash: "3912cf6267e5b0216ba06419a58c7705115f9d3627d8a1b202fea1cf129e4b20"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
 original_doc_path: "cli/skills.md"
 duplicate_index: 1
@@ -21,7 +23,7 @@ Related:
 
 * Skills system: [Skills](/tools/skills)
 * Skills config: [Skills config](/tools/skills-config)
-* ClawHub installs: [ClawHub](/tools/clawhub)
+* ClawHub installs: [ClawHub](/clawhub/cli)
 
 ## Commands
 

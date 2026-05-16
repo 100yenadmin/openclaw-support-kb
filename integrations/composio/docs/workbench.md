@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Workbench"
 source: "https://docs.composio.dev/docs/workbench.md"
-source_hash: "a52c7777777142e2b8eae735c2fd0a8b885444d603e743e9bf994e41ef1ac5e5"
+source_hash: "23b9928c6a3ac78d64786914984075dd62891c062a788f0f679fedb38f87f126"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "workbench.md"
 original_doc_path: "workbench.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Workbench (/docs/workbench)
 Source: https://docs.composio.dev/docs/workbench.md

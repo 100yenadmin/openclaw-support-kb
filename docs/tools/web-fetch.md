@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "3f17d4360fceba4c20322d1b7afac043320e2b19e5bcd023a0da2eda01712266"
+source_hash: "2ed6a8db937f73df733bb806007f7793efc517b0c6d21a3b9265c3ff9e87c269"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/web-fetch.md"
 original_doc_path: "tools/web-fetch.md"
 duplicate_index: 1

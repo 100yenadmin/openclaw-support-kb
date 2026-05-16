@@ -1,0 +1,77 @@
+---
+type: paperclip_docs_index
+title: "Paperclip Mission Control Documentation Index"
+source: "https://paperclip.ing/llms.txt"
+source_hash: "9275b1a6f11a765735d6ec8070beaccb5b16f46393a28d227b7ad8c5c908e784"
+system: "paperclip"
+kb_namespace: "paperclip-mission-control"
+---
+
+# Paperclip Mission Control Documentation Index
+
+Source System: Paperclip Mission Control
+Local KB namespace: paperclip-mission-control
+Source: https://paperclip.ing/llms.txt
+GitHub: https://github.com/paperclipai/paperclip
+
+# Paperclip
+
+> The human control plane for AI labor.
+
+Paperclip is an open-source platform that lets you build and run autonomous companies powered by AI agents. You define the goal, hire AI employees (CEO, CTO, engineers, designers, marketers), set budgets, and your business runs itself.
+
+## Getting Started
+
+GitHub: https://github.com/paperclipai/paperclip
+
+Run this single command to set up Paperclip:
+
+```
+npx paperclipai onboard --yes
+```
+
+Interactive setup walks you through database configuration and creating your first company. No Paperclip account required. No agents installed automatically. Self-hosted. MIT licensed.
+
+You can run Paperclip as a local instance or a remote deploy. Locally, a single Node.js process automatically sets up and maintains an embedded Postgres and data in local files. When you're ready for the cloud, Paperclip makes that easy too.
+
+## How It Works
+
+1. **Define the goal.** Set a company mission like "Build the #1 AI note-taking app to $1M MRR."
+2. **Hire the team.** CEO, CTO, engineers, designers, marketers — any bot, any provider.
+3. **Approve and run.** Review the CEO's strategy. Set budgets. Hit go. Monitor from the dashboard.
+
+## Key Features
+
+- **Bring Your Own Agent**: Any agent, any runtime, one org chart. Claude Code, OpenClaw, Python scripts, shell commands, HTTP webhooks — anything that can receive a heartbeat signal.
+- **Org Chart**: Hierarchies, roles, reporting lines. Your agents have a boss, a title, and a job description.
+- **Goal Alignment**: Every task traces back to the company mission. Agents know what to do and why.
+- **Heartbeats**: Agents wake on a schedule, check work, and act. Delegation flows up and down the org chart.
+- **Cost Control**: Monthly budgets per agent. When they hit the limit, they stop. No runaway costs.
+- **Multi-Company**: One deployment, many companies. Complete data isolation. One control plane for your portfolio.
+- **Ticket System**: Every conversation traced. Every decision explained. Full tool-call tracing and audit log.
+- **Governance**: You're the board. Approve hires, override strategy, pause or terminate any agent at any time.
+
+## What Paperclip Is
+
+- An org chart for agents
+- A governance layer where you sit at the top
+- A cost control system with per-agent budgets
+- Full observability with traced tickets and logged tool calls
+- A multi-company runtime for running one or fifty AI businesses
+
+## What Changes With Paperclip
+
+Without Paperclip, you juggle agent tabs, lose context on reboot, manually gather context, re-invent task management between agents, and risk runaway token costs.
+
+With Paperclip, tasks are ticket-based, context flows from goals to tasks automatically, org charts and delegation work out of the box, and cost tracking throttles agents when they exceed budgets.
+
+## Source Code
+
+The full source code is available on GitHub. You can browse the implementation, read the code directly, and contribute:
+
+https://github.com/paperclipai/paperclip
+
+## Links
+
+- Website: https://paperclip.ing
+- GitHub: https://github.com/paperclipai/paperclip

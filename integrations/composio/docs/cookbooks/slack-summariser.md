@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Slack Summarizer"
 source: "https://docs.composio.dev/cookbooks/slack-summariser.md"
-source_hash: "12ff66ec84c0ca6003d4efc41c4a70860e1e2946be3b2f9edc041e7386ebeb9d"
+source_hash: "5e44cbeed419751ad033082f788f4d7353434bb4818785c21213ee1aad0708ff"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/slack-summariser.md"
 original_doc_path: "cookbooks/slack-summariser.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Slack Summarizer (/cookbooks/slack-summariser)
 Source: https://docs.composio.dev/cookbooks/slack-summariser.md

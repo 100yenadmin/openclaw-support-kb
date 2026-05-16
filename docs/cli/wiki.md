@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
-source_hash: "1858f533aa7c0b0136e5d5b5ed3a98db45ca062fc700b91011f446809148b26b"
+source_hash: "f3a253561728c1df810910926905342806122d8ca9c2c32fcf691409e4678296"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/wiki.md"
 original_doc_path: "cli/wiki.md"
 duplicate_index: 1

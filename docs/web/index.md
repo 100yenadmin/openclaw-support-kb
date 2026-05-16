@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Web"
 source: "https://docs.openclaw.ai/web/index"
-source_hash: "c7e961d7b13a0851890f36a5e8765a3b61633c069a0631ef444903122014cb17"
+source_hash: "0a81e2f2207f75a5815be2d6be1077ac073782cf90ea929e214c15354552271e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "web/index.md"
 original_doc_path: "web/index.md"
 duplicate_index: 1
@@ -25,6 +27,12 @@ Capabilities live in [Control UI](/web/control-ui). The rest of this page focuse
 
 When `hooks.enabled=true`, the Gateway also exposes a small webhook endpoint on the same HTTP server.
 See [Gateway configuration](/gateway/configuration) → `hooks` for auth + payloads.
+
+## Admin HTTP RPC
+
+Admin HTTP RPC exposes selected Gateway control-plane methods at `POST /api/v1/admin/rpc`.
+It is off by default and is registered only when the `admin-http-rpc` plugin is enabled.
+See [Admin HTTP RPC](/plugins/admin-http-rpc) for the auth model, allowed methods, and WebSocket comparison.
 
 ## Config (default-on)
 

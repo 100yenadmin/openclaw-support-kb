@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tools and toolkits"
 source: "https://docs.composio.dev/docs/tools-and-toolkits.md"
-source_hash: "3b313a85f63db4c632be7463ebd7375478df84006c20b57ee5356a12b2f1f4d3"
+source_hash: "b5d506baddc3f6db45516214761108fce7e35271fa81d7bd58c9ef0c313958e0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-and-toolkits.md"
 original_doc_path: "tools-and-toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tools and toolkits (/docs/tools-and-toolkits)
 Source: https://docs.composio.dev/docs/tools-and-toolkits.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gateway architecture"
 source: "https://docs.openclaw.ai/concepts/architecture"
-source_hash: "00db9d87e1cb236eeade57e7974b5d3e7b1d5c79d678fbdb45b6c288f3981d05"
+source_hash: "72cd73149cea542fd77de2cc533808b1ee01e498d25c84a512281aaf59b2128c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/architecture.md"
 original_doc_path: "concepts/architecture.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Zalo personal plugin"
 source: "https://docs.openclaw.ai/plugins/zalouser"
-source_hash: "a229e8fc0311d44cd4f33b0ccf670b7ccd677d0c0fb49930512afbd171f4a423"
+source_hash: "4b2868533fd01490cce9b0c3ffac977496d1661e03109e16047d583c443cfbd4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/zalouser.md"
 original_doc_path: "plugins/zalouser.md"
 duplicate_index: 1
@@ -90,4 +92,4 @@ Channel message actions also support `react` for message reactions.
 ## Related
 
 * [Building plugins](/plugins/building-plugins)
-* [Community plugins](/plugins/community)
+* [ClawHub](/clawhub)

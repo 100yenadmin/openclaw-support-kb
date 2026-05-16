@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "ComfyUI"
 source: "https://docs.openclaw.ai/providers/comfy"
-source_hash: "afc5771c710aa0580b8affbb4ec8c9131999a8eb217e01d2edddf86056edaaac"
+source_hash: "317f70991048f41a8e623ea66bd69d7977b8e9bd0d74d3b5cd77b08d247bf50b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/comfy.md"
 original_doc_path: "providers/comfy.md"
 duplicate_index: 1

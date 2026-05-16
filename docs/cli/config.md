@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "a167d8a2fe46939f34f39d90fcbe530b80d86aa3daf729fded2bb6042eaeee96"
+source_hash: "e89a8f131dac06a6b6f7eaf85e3ed1b280d2bb818a6b5ef614c0b32f860c3502"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/config.md"
 original_doc_path: "cli/config.md"
 duplicate_index: 1

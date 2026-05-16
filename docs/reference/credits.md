@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Credits"
 source: "https://docs.openclaw.ai/reference/credits"
-source_hash: "12cd2349ed86bd0732a9cdcceb2ce6cca05280ace10fba2c3fdf628ed1b87b74"
+source_hash: "8b4fbf062861feca591c60413d81cc8e45c300231221c5509fc725634c9fad49"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/credits.md"
 original_doc_path: "reference/credits.md"
 duplicate_index: 1

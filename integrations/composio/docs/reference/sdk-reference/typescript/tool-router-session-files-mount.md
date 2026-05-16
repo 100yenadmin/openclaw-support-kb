@@ -2,11 +2,16 @@
 type: composio_doc
 title: "ToolRouterSessionFilesMount"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tool-router-session-files-mount.md"
-source_hash: "1b882bdc17a8d45f8d57048f9413b6f175aad155d1d79baa1f1b47fa78fb94d1"
+source_hash: "be736827701cff79d5a6c9b1be21bd7fc7df1fde0dc95f17c94210e001acd661"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tool-router-session-files-mount.md"
 original_doc_path: "reference/sdk-reference/typescript/tool-router-session-files-mount.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # ToolRouterSessionFilesMount (/reference/sdk-reference/typescript/tool-router-session-files-mount)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/tool-router-session-files-mount.md

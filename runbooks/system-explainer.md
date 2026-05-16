@@ -12,11 +12,11 @@ answer from this runbook alone; search the current docs and cite them.
 ## Search Contract
 
 ```bash
-gbrain query "OpenClaw architecture Gateway agent runtime channels workspace simple explanation"
-gbrain search "Source: https://docs.openclaw.ai/concepts/architecture"
-gbrain search "Source: https://docs.openclaw.ai/concepts/agent"
-gbrain search "Source: https://docs.openclaw.ai/concepts/agent-workspace"
-gbrain search "Source: https://docs.openclaw.ai/channels/index"
+gbrain search "OpenClaw architecture Gateway agent runtime channels workspace simple explanation" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/concepts/architecture" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/concepts/agent" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/concepts/agent-workspace" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/index" --source openclaw-support-kb
 ```
 
 ## Explanation Shape

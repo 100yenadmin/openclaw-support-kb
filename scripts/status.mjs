@@ -6,6 +6,7 @@ import path from "node:path";
 import {
   canonicalSourceDir,
   compareSemver,
+  gbrainSearchArgs,
   GBRAIN_SOURCE_ID,
   GBRAIN_VERIFY_QUERIES,
   isLegacyPreGitBackupName,
@@ -18,10 +19,14 @@ import {
 } from "./lib/openclaw-support-kb.mjs";
 
 const EXPECTED_SKILLS = [
+  "customer-kb-router",
+  "cross-system-recovery",
+  "hermes-support-kb",
   "openclaw-support-kb",
   "openclaw-config-repair",
   "openclaw-skill-discovery",
   "openclaw-support-escalation",
+  "paperclip-mission-control",
 ];
 
 const args = parseArgs(process.argv.slice(2));
@@ -203,15 +208,16 @@ function readSourceRegistry(gbrain) {
   };
 }
 
-function readSearch(gbrain) {
+function readSearch(gbrain, sourceRegistry = {}) {
   if (skipSearch) return { checked: false, skipped: true };
   if (gbrain.missing || gbrain.versionStatus !== 0 || gbrain.tooOld) {
     return { checked: false, reason: "gbrain unavailable" };
   }
 
   const checks = [];
+  const sourceScoped = sourceRegistry.supported !== false;
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const result = captureNoExit(gbrain.command, ["search", item.query, "--source", GBRAIN_SOURCE_ID]);
+    const result = captureNoExit(gbrain.command, gbrainSearchArgs(item.query, { sourceScoped }));
     const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
     const verified =
       result.status === 0
@@ -223,7 +229,7 @@ function readSearch(gbrain) {
       reason: verified.reason ?? "",
     });
   }
-  return { checked: true, checks };
+  return { checked: true, sourceScoped, legacyUnscoped: !sourceScoped, checks };
 }
 
 function readCrontab() {
@@ -271,7 +277,7 @@ async function collectStatus() {
   const legacyBackups = await readLegacySourceBackups();
   const gbrain = readGbrain(manifest?.minGbrainVersion);
   const sourceRegistry = readSourceRegistry(gbrain);
-  const search = readSearch(gbrain);
+  const search = readSearch(gbrain, sourceRegistry);
   const crontab = readCrontab();
 
   const problems = [];

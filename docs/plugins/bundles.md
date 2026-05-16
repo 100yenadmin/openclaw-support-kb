@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin bundles"
 source: "https://docs.openclaw.ai/plugins/bundles"
-source_hash: "b83702f988a42dfa96b399e917c2c2b8de3a925add69f9dfc5e8a5f45b782ce6"
+source_hash: "4ed2dd07b37f036da10502a0cf27205dad34811131930ef9d57dad5a56fe4071"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/bundles.md"
 original_doc_path: "plugins/bundles.md"
 duplicate_index: 1
@@ -168,6 +170,8 @@ OpenClaw registers bundle MCP tools with provider-safe names in the form
 `memory_search` tool registers as `vigil-harbor__memory_search`.
 
 * characters outside `A-Za-z0-9_-` are replaced with `-`
+* fragments that would start with a non-letter get a letter prefix, so numeric
+  server keys such as `12306` become provider-safe tool prefixes
 * server prefixes are capped at 30 characters
 * full tool names are capped at 64 characters
 * empty server names fall back to `mcp`

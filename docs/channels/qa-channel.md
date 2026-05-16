@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "cb941718f33239c8c2d1cfca9a82a500c28af75c7cfe42aa95c5a9119f94dfb4"
+source_hash: "9a3c1b1c7c07f21c421732fde14efbc67ad206990ac8512280d543bb08f8486b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/qa-channel.md"
 original_doc_path: "channels/qa-channel.md"
 duplicate_index: 1
@@ -50,7 +52,14 @@ Account keys:
 * `botUserId` - Matrix-style bot user id used in target grammar.
 * `botDisplayName` - display name for outbound messages.
 * `pollTimeoutMs` - long-poll wait window. Integer between 100 and 30000.
-* `allowFrom` - sender allowlist (user ids or `"*"`).
+* `allowFrom` - sender allowlist (user ids or `"*"`). Direct messages and
+  allowlisted group policy both use these synthetic sender ids.
+* `groupPolicy` - shared-room policy: `"open"` (default), `"allowlist"`, or
+  `"disabled"`.
+* `groupAllowFrom` - optional shared-room sender allowlist. When omitted under
+  `"allowlist"`, QA Channel falls back to `allowFrom`.
+* `groups.<room>.requireMention` - require a bot mention before replying in a
+  specific group/channel room. `groups."*"` sets the default.
 * `defaultTo` - fallback target when none is supplied.
 * `actions.messages` / `actions.reactions` / `actions.search` / `actions.threads` - per-action tool gating.
 

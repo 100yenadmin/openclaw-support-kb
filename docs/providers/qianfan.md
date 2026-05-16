@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Qianfan"
 source: "https://docs.openclaw.ai/providers/qianfan"
-source_hash: "44fce3abc44c22de590b576dd30e737a5ef8069a3f16903005dd5fab497bf943"
+source_hash: "b5b9768dbcca6e0e2341ea6a0ef8fb9e6a3525e718a467fa5da0defca6ee327d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/qianfan.md"
 original_doc_path: "providers/qianfan.md"
 duplicate_index: 1

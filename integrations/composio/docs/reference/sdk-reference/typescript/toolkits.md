@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md"
-source_hash: "eea698e87b6f00309a8624c77ba76e07cbe2631c7377c38812f68485c27d5ad4"
+source_hash: "0431cb15b92254ac0866af308dc97d7b3dd8d03ef984099f9b002342d5c0fd53"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/toolkits.md"
 original_doc_path: "reference/sdk-reference/typescript/toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Toolkits (/reference/sdk-reference/typescript/toolkits)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "6da937214129921dd105918574eec01d484aafbec70393c6219125964a47a794"
+source_hash: "4197f7181bbc14dc47ff4295b7e70a45bf797a35ada7020cc5e9fae42da8980f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
 original_doc_path: "cli/browser.md"
 duplicate_index: 1

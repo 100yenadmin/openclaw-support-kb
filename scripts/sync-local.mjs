@@ -6,6 +6,7 @@ import {
   compareSemver,
   ensureGbrainSource,
   gbrainEmbedStaleArgs,
+  gbrainSearchArgs,
   gbrainSyncArgs,
   GBRAIN_VERIFY_QUERIES,
   gbrainUpgradeHint,
@@ -49,14 +50,14 @@ function failGbrainSourceRegistration(error) {
   process.exit(error.status ?? 1);
 }
 
-function verifyGbrainSearch() {
+function verifyGbrainSearch(sourceResult = {}) {
   if (process.env.OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY === "1") {
     console.warn("Skipping GBrain search verification because OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY=1 is set.");
     return;
   }
   const loose = process.env.OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY === "1";
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const search = capture(gbrainCommand, ["search", item.query]);
+    const search = capture(gbrainCommand, gbrainSearchArgs(item.query, sourceResult));
     const output = `${search.stdout}\n${search.stderr}`;
     const verified = validateGbrainSearchOutput(output, {
       strictPatterns: loose ? [] : item.strictPatterns,
@@ -124,4 +125,4 @@ if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_
     process.exit(2);
   }
 }
-verifyGbrainSearch();
+verifyGbrainSearch(sourceResult);

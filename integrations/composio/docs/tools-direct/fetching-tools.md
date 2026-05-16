@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Fetching tools and schemas"
 source: "https://docs.composio.dev/docs/tools-direct/fetching-tools.md"
-source_hash: "8543858fc7a63643ab7cdd8eb7d39a4b70d4269d4e599a4d2dd2c4a99c0ba23c"
+source_hash: "1268a57bd0b0651cb147805cc15242d9db6a8b73a5c585ba003c04fa0d17f042"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-direct/fetching-tools.md"
 original_doc_path: "tools-direct/fetching-tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Fetching tools and schemas (/docs/tools-direct/fetching-tools)
 Source: https://docs.composio.dev/docs/tools-direct/fetching-tools.md

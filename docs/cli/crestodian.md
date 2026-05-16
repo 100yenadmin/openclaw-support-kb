@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Crestodian"
 source: "https://docs.openclaw.ai/cli/crestodian"
-source_hash: "5fcacc2c02deaf88a28374849015bb5d041588ef034dd9ff32ebdff64c8f7d6c"
+source_hash: "aad390a043aee050766a1bcdf45eb1dcf2a84e44f9c78e9c726875abaa9da778"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/crestodian.md"
 original_doc_path: "cli/crestodian.md"
 duplicate_index: 1
@@ -161,7 +163,7 @@ order and tells you what it chose:
 * `OPENAI_API_KEY` -> `openai/gpt-5.5`
 * `ANTHROPIC_API_KEY` -> `anthropic/claude-opus-4-7`
 * Claude Code CLI -> `claude-cli/claude-opus-4-7`
-* Codex CLI -> `codex-cli/gpt-5.5`
+* Codex -> `openai/gpt-5.5` through the Codex app-server harness
 
 If none are available, setup still writes the default workspace and leaves the
 model unset. Install or log into Codex/Claude Code, or expose
@@ -176,8 +178,7 @@ configured OpenClaw model. If no configured model is usable yet, it can fall
 back to local runtimes already present on the machine:
 
 * Claude Code CLI: `claude-cli/claude-opus-4-7`
-* Codex app-server harness: `openai/gpt-5.5` with `agentRuntime.id: "codex"`
-* Codex CLI: `codex-cli/gpt-5.5`
+* Codex app-server harness: `openai/gpt-5.5`
 
 The model-assisted planner cannot mutate config directly. It must translate the
 request into one of Crestodian's typed commands, then the normal approval and

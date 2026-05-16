@@ -1,19 +1,20 @@
 ---
-type: openclaw_install_guide
-title: "Install OpenClaw Support KB For Agents"
+type: customer_kb_install_guide
+title: "Install Customer Support KB For Agents"
 search_role: "installer"
 ---
 
-# Install OpenClaw Support KB For Agents
+# Install Customer Support KB For Agents
 
 Use this file when a user points you at this repository and asks you to install
-the OpenClaw support knowledge base.
+the customer support knowledge base.
 
 ## Goal
 
-Install this repository as a local GBrain source so OpenClaw agents can answer
-OpenClaw setup, update, config, Telegram, skill, and support questions from a
-fresh local KB before guessing or escalating.
+Install this repository as a local GBrain source so customer agents can answer
+OpenClaw, Hermes Agent, Paperclip Mission Control, Composio, update, config,
+Telegram, skill, and support questions from a fresh local KB before guessing or
+escalating.
 
 Users do **not** push to this repo. The publisher updates the repo; each user
 machine pulls it read-only and syncs it into GBrain.
@@ -65,7 +66,7 @@ explicit degraded read-only install where the agent must not claim
 GBrain-indexed results.
 
 If the discovered GBrain is older than `kb-manifest.json` requires, setup still
-installs the OpenClaw support skills but stops before indexing. Run the printed
+installs the customer KB skills but stops before indexing. Run the printed
 upgrade command, usually:
 
 ```bash
@@ -77,7 +78,7 @@ rebuild or reinstall that checkout so the binary matches the checkout version.
 
 What setup does:
 
-1. installs four support skills into `~/.openclaw/skills`
+1. installs the managed customer KB skills into `~/.openclaw/skills`
 2. writes a managed OpenClaw agent hint block to active workspace `AGENTS.md`
    files, including `~/.openclaw/workspace/AGENTS.md`
 3. registers `openclaw-support-kb` as a federated GBrain source at
@@ -87,12 +88,13 @@ What setup does:
 4. runs `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb --source openclaw-support-kb`
    when supported, otherwise legacy `gbrain sync --repo ~/.gbrain/sources/openclaw-support-kb`
 5. runs `gbrain embed --stale`
-6. verifies local search returns from the indexed KB
+6. verifies local search returns OpenClaw, Hermes, and Paperclip content from the indexed KB
 
-Search verification runs two checks: one for this KB's manifest and one for the
-Telegram docs. Empty/no-result output or missing expected markers fails. Use
-`OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1` only if a known-good GBrain version
-formats search output too tersely for marker checks.
+Search verification checks this KB's install guide, OpenClaw Telegram docs,
+Hermes config docs, and Paperclip Mission Control docs. Empty/no-result output
+or missing expected markers fails. Use `OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY=1`
+only if a known-good GBrain version formats search output too tersely for marker
+checks.
 
 GBrain does not re-embed the whole KB on every update. It syncs from git commit
 state, imports changed/deleted files, and `gbrain embed --stale` only fills
@@ -157,28 +159,40 @@ test -f "$HOME/.gbrain/sources/openclaw-support-kb/kb-manifest.json"
 test -f "$HOME/.openclaw/skills/openclaw-support-kb/SKILL.md"
 node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs"
 gbrain sources list
-gbrain search "Telegram allowFrom groupAllowFrom groups"
-gbrain query "How should I safely repair OpenClaw config?"
+gbrain search "OpenClaw Telegram allowFrom groupAllowFrom groups" --source openclaw-support-kb
+gbrain search "OpenClaw config repair schema dry-run validate" --source openclaw-support-kb
 ```
 
 Use `node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs" --json`
 for fleet or agent health checks. It reports whether the source checkout is git
-managed, whether the four skills are installed, whether GBrain is new enough,
+managed, whether the managed customer KB skills are installed, whether GBrain is new enough,
 whether the `openclaw-support-kb` named source has pages and points at the
 current checkout, whether old pre-git backups remain under GBrain sources, and
 whether an import checkpoint is stale or an update is currently running.
 
 If `gbrain sources list` reports `Unknown command: sources`, continue with the
-two search/query checks. That means this machine has an older GBrain without
+two search checks without `--source`. That means this machine has an older GBrain without
 named-source management; the installer uses legacy repo sync on those builds.
 
-The agent should now use these installed skills automatically for OpenClaw
+The agent should now use these installed skills automatically for customer
 support/config/setup questions:
 
+- `customer-kb-router`
+- `cross-system-recovery`
+- `hermes-support-kb`
 - `openclaw-support-kb`
 - `openclaw-config-repair`
 - `openclaw-skill-discovery`
 - `openclaw-support-escalation`
+- `paperclip-mission-control`
+
+For source routing, agents should search with target-system markers:
+
+```bash
+gbrain search "OpenClaw <question> Source: https://docs.openclaw.ai" --source openclaw-support-kb
+gbrain search "Hermes Agent <question> Local KB namespace: hermes-agent" --source openclaw-support-kb
+gbrain search "Paperclip Mission Control <question> Local KB namespace: paperclip-mission-control" --source openclaw-support-kb
+```
 
 ## Update Later
 

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Honcho memory"
 source: "https://docs.openclaw.ai/concepts/memory-honcho"
-source_hash: "c17b373a57d8024b5f5f5dec8710803a116f86c7824b4635beffa43519711f8e"
+source_hash: "813ade313dff8bd7283127a22229eb098ebebb5d5e5f3c0e2caac2fcc00ff963"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/memory-honcho.md"
 original_doc_path: "concepts/memory-honcho.md"
 duplicate_index: 1

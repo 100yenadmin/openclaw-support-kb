@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Secrets apply plan contract"
 source: "https://docs.openclaw.ai/gateway/secrets-plan-contract"
-source_hash: "4182cf88458f1f7097105ede479022e3121a5ee6c1ff8c21611bd049dc7e8717"
+source_hash: "893788a5ca699f0255d81ffe0d1113b17c55d16be9b30803d82caaeea1476187"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/secrets-plan-contract.md"
 original_doc_path: "gateway/secrets-plan-contract.md"
 duplicate_index: 1

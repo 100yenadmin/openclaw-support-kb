@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Pi development workflow"
 source: "https://docs.openclaw.ai/pi-dev"
-source_hash: "d3281e6c237cc1470c1ad4667e44abb1d5f81d987aebe4582d4105d6eed33bb8"
+source_hash: "2ce18bc7e6e44b01f2463ba301ded23b15be441fe95ec8c4b029b4cc3fe896fa"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "pi-dev.md"
 original_doc_path: "pi-dev.md"
 duplicate_index: 1

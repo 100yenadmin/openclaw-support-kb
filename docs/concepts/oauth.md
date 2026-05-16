@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "bb58fdc85f27bcf0b2e6e016758bed23f57e9a6e027dc898f4db236dfaae1af1"
+source_hash: "40d23fd62b01dc9630291696a2b09bfb510fba0b554c07a57f35b6e0bf2f72ba"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
 original_doc_path: "concepts/oauth.md"
 duplicate_index: 1
@@ -51,8 +53,10 @@ To reduce that, OpenClaw treats `auth-profiles.json` as a **token sink**:
 * we can keep multiple profiles and route them deterministically
 * external CLI reuse is provider-specific: Codex CLI can bootstrap an empty
   `openai-codex:default` profile, but once OpenClaw has a local OAuth profile,
-  the local refresh token is canonical; other integrations can remain
-  externally managed and re-read their CLI auth store
+  the local refresh token is canonical. If that local refresh token is rejected,
+  OpenClaw can use a usable same-account Codex CLI token as a runtime-only
+  fallback; other integrations can remain externally managed and re-read their
+  CLI auth store
 * status and startup paths that already know the configured provider set scope
   external CLI discovery to that set, so an unrelated CLI login store is not
   probed for a single-provider setup
@@ -110,7 +114,7 @@ Claude login on the host, onboarding/configure can reuse it directly.
 
 ## OAuth exchange (how login works)
 
-OpenClaw's interactive login flows are implemented in `@mariozechner/pi-ai` and wired into the wizards/commands.
+OpenClaw's interactive login flows are implemented in `@earendil-works/pi-ai` and wired into the wizards/commands.
 
 ### Anthropic setup-token
 
@@ -151,7 +155,9 @@ At runtime:
   re-reads those CLI auth stores instead of spending copied refresh tokens.
   Codex CLI bootstrap is intentionally narrower: it seeds an empty
   `openai-codex:default` profile, then OpenClaw-owned refreshes keep the local
-  profile canonical.
+  profile canonical. If the local Codex refresh fails and Codex CLI has a
+  usable token for the same account, OpenClaw may use that token for the current
+  runtime request without writing it back to `auth-profiles.json`.
 
 The refresh flow is automatic; you generally don't need to manage tokens manually.
 

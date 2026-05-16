@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/sdk-reference/python/toolkits.md"
-source_hash: "76588bcc86b5e34d049b3afedc37c5313ead9183e100aa03238965edf21771c0"
+source_hash: "a21ccf1db11561790f1bd05825eb58fa72a1d20b25edaec5998e9ec3b0f10fdb"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/toolkits.md"
 original_doc_path: "reference/sdk-reference/python/toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Toolkits (/reference/sdk-reference/python/toolkits)
 Source: https://docs.composio.dev/reference/sdk-reference/python/toolkits.md

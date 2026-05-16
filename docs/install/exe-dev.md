@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "exe.dev"
 source: "https://docs.openclaw.ai/install/exe-dev"
-source_hash: "3cc383b8251bf97daa8b98dc30983622f9db719b88fbb0a1f7375c3e92a445e4"
+source_hash: "b87817172b26f9e9bd510d0a804396ffac1b0d2854160c2fc03c3e5f7fc49a4b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/exe-dev.md"
 original_doc_path: "install/exe-dev.md"
 duplicate_index: 1

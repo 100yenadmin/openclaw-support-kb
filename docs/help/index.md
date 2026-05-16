@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Help"
 source: "https://docs.openclaw.ai/help/index"
-source_hash: "9b11222d2558f830d45a8b4300e2e0a47eedc718ea56e94d8d45814762bfbb2c"
+source_hash: "194f25325db7e99c646c615513965eaa4363bbeefce75e84d1585dbeece77f35"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/index.md"
 original_doc_path: "help/index.md"
 duplicate_index: 1

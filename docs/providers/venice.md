@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Venice AI"
 source: "https://docs.openclaw.ai/providers/venice"
-source_hash: "2fbfd027a0f16cc67cb25e7834131616376bcb161a586c6687b9277be10d028c"
+source_hash: "0b87fb599d548796f6f6fd44b814fa3696f1e0cb1c7e336b960cfa3ee3b943bc"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/venice.md"
 original_doc_path: "providers/venice.md"
 duplicate_index: 1

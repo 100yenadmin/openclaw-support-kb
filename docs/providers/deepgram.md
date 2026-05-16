@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "ee04bc54f372ee8ed4d41c51885d6443888ab31f7fd9f2fe31a4b65969c5f270"
+source_hash: "d1853a5b6324ac0298ab9122d2217e31f1bfbf5b1ca7d878aa113da57416d05b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
 original_doc_path: "providers/deepgram.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "64a641238d1eb62af5eb37c4235bc644efd9bb2251531d8bb2f4eb1a6b662d08"
+source_hash: "f2c91d4d01e2bdf188dea0b1076bd307a552755e75b79137fb43fa3730b235e2"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/android.md"
 original_doc_path: "platforms/android.md"
 duplicate_index: 1
@@ -14,14 +16,14 @@ Source: https://docs.openclaw.ai/platforms/android
 
 
 <Note>
-  The Android app has not been publicly released yet. The source code is available in the [OpenClaw repository](https://github.com/openclaw/openclaw) under `apps/android`. You can build it yourself using Java 17 and the Android SDK (`./gradlew :app:assemblePlayDebug`). See [apps/android/README.md](https://github.com/openclaw/openclaw/blob/main/apps/android/README.md) for build instructions.
+  The official Android app is available on [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app\&hl=en_IN). It is a companion node and requires a running OpenClaw Gateway. The source code is also available in the [OpenClaw repository](https://github.com/openclaw/openclaw) under `apps/android`; see [apps/android/README.md](https://github.com/openclaw/openclaw/blob/main/apps/android/README.md) for build instructions.
 </Note>
 
 ## Support snapshot
 
 * Role: companion node app (Android does not host the Gateway).
 * Gateway required: yes (run it on macOS, Linux, or Windows via WSL2).
-* Install: [Getting Started](/start/getting-started) + [Pairing](/channels/pairing).
+* Install: [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app\&hl=en_IN) for the app, [Getting Started](/start/getting-started) for the Gateway, then [Pairing](/channels/pairing).
 * Gateway: [Runbook](/gateway) + [Configuration](/gateway/configuration).
   * Protocols: [Gateway protocol](/gateway/protocol) (nodes + control plane).
 

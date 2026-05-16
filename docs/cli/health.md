@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Health"
 source: "https://docs.openclaw.ai/cli/health"
-source_hash: "36fcff671b25feb12a682a2c3282c51623707bfeebcb3b9b5d0d1eb5da9196d7"
+source_hash: "b7e1c91e719423d589b6a1cb001b27ff09da105b515ad27cbff0ccf74ef7e802"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/health.md"
 original_doc_path: "cli/health.md"
 duplicate_index: 1
@@ -17,12 +19,14 @@ Source: https://docs.openclaw.ai/cli/health
 
 Fetch health from the running Gateway.
 
-Options:
+## Options
 
-* `--json`: machine-readable output
-* `--timeout <ms>`: connection timeout in milliseconds (default `10000`)
-* `--verbose`: verbose logging
-* `--debug`: alias for `--verbose`
+| Flag             | Default | Description                                                        |
+| ---------------- | ------- | ------------------------------------------------------------------ |
+| `--json`         | `false` | Print machine-readable JSON instead of text.                       |
+| `--timeout <ms>` | `10000` | Connection timeout in milliseconds.                                |
+| `--verbose`      | `false` | Verbose logging. Forces a live probe and expands per-agent output. |
+| `--debug`        | `false` | Alias for `--verbose`.                                             |
 
 Examples:
 

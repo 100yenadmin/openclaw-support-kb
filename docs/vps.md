@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Linux server"
 source: "https://docs.openclaw.ai/vps"
-source_hash: "d11b45695409883f3ca348cacb4608712bb5c4dc4263461945cd881d9310fa70"
+source_hash: "d57ed74c2ef35d344a872d39bbc704b4548f391bb638dabe488644d2cb03bd59"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "vps.md"
 original_doc_path: "vps.md"
 duplicate_index: 1

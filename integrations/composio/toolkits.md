@@ -2,8 +2,10 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4"
-catalog_snapshot_sha256: "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4"
+source_hash: "18f2eebef331657e8b1657fce94213200bb4891fca851fcf93dd029bf252aab7"
+system: "composio"
+kb_namespace: "composio"
+catalog_snapshot_sha256: "5af1e9688d9b80bba60785bd8aaffb3f64fbcbe32b16b2b7134700f2f816e4ce"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -14,7 +16,7 @@ Use this local snapshot to discover whether Composio may support an external bus
 
 ## Catalog Count
 
-- Public catalog page showed 30 of 982 toolkits in the initial rendered catalog.
+- Public catalog page advertises 1000+ toolkits.
 
 ## Initial Rendered Toolkit Catalog
 
@@ -24,11 +26,7 @@ Sort by
 
 Popularity
 
-Showing
-30
-of
-982
-toolkits
+Showing 1-30 of 985 toolkits
 
 Gmail
 
@@ -237,6 +235,182 @@ Exa
 Exa is a data extraction and search platform for gathering and analyzing information from websites, APIs, or databases.…
 
 API KEY
+
+Previous
+
+1
+
+2
+
+3
+
+...
+
+33
+
+Next
+
+Used by agents from
+
+Never worry about agent reliability
+
+We handle tool reliability, observability, and security so you never have to second-guess an agent action.
+
+Get started for free
+
+Get a demo
+↗
+
+Harsha Gaddipati
+
+Co-founder, Slashy
+
+Karan skipped his own birthday party to fix our critical issue. It was 10 pm and he diverted his Waymo to help us instead. This really sets the bar, shows you the commitment you need to have when users rely on your software.
+
+Abhi Arya
+
+Co-founder, Opennote
+
+A lot of students tell us that the moment their connected tools start talking to each other inside Opennote feels almost magical. The agent just knows them, and it has immensely helped in keeping new users on the platform.
+
+Nirman Dave
+
+CEO, Zams
+
+We chose Composio over Pipedream because it delivered depth where it mattered. It supported niche tools and tricky edge cases that other platforms simply ignored. Giving us confidence to scale without compromising.
+
+Ryan Yu
+
+Founder, Extra Thursday
+
+As a solo builder, shipping fast is life or death. The only way I can outcompete incumbents is by outmanoeuvring them. Getting bogged down in the complexities of managing agent auth would have been a death sentence for Extra Thursday.
+
+Tomisin Jenrola
+
+Founder & CEO, SwarmZero
+
+Before partnering with Composio, adding tool integrations was a slow, resource-intensive process. Each integration could take weeks or months of engineering time, and maintaining them meant constantly keeping up with API changes.
+
+Jerome Leclanche
+
+Co-Founder, Ingram Technologies
+
+With hands-on help from their founder, we integrated Gmail and Google Drive in just 30 minutes. This level of personal support and commitment is exactly what startups should strive for.
+
+Harsha Gaddipati
+
+Co-founder, Slashy
+
+Karan skipped his own birthday party to fix our critical issue. It was 10 pm and he diverted his Waymo to help us instead. This really sets the bar, shows you the commitment you need to have when users rely on your software.
+
+Abhi Arya
+
+Co-founder, Opennote
+
+A lot of students tell us that the moment their connected tools start talking to each other inside Opennote feels almost magical. The agent just knows them, and it has immensely helped in keeping new users on the platform.
+
+Nirman Dave
+
+CEO, Zams
+
+We chose Composio over Pipedream because it delivered depth where it mattered. It supported niche tools and tricky edge cases that other platforms simply ignored. Giving us confidence to scale without compromising.
+
+Ryan Yu
+
+Founder, Extra Thursday
+
+As a solo builder, shipping fast is life or death. The only way I can outcompete incumbents is by outmanoeuvring them. Getting bogged down in the complexities of managing agent auth would have been a death sentence for Extra Thursday.
+
+Tomisin Jenrola
+
+Founder & CEO, SwarmZero
+
+Before partnering with Composio, adding tool integrations was a slow, resource-intensive process. Each integration could take weeks or months of engineering time, and maintaining them meant constantly keeping up with API changes.
+
+Jerome Leclanche
+
+Co-Founder, Ingram Technologies
+
+With hands-on help from their founder, we integrated Gmail and Google Drive in just 30 minutes. This level of personal support and commitment is exactly what startups should strive for.
+
+Harsha Gaddipati
+
+Co-founder, Slashy
+
+Karan skipped his own birthday party to fix our critical issue. It was 10 pm and he diverted his Waymo to help us instead. This really sets the bar, shows you the commitment you need to have when users rely on your software.
+
+Abhi Arya
+
+Co-founder, Opennote
+
+A lot of students tell us that the moment their connected tools start talking to each other inside Opennote feels almost magical. The agent just knows them, and it has immensely helped in keeping new users on the platform.
+
+Nirman Dave
+
+CEO, Zams
+
+We chose Composio over Pipedream because it delivered depth where it mattered. It supported niche tools and tricky edge cases that other platforms simply ignored. Giving us confidence to scale without compromising.
+
+Ryan Yu
+
+Founder, Extra Thursday
+
+As a solo builder, shipping fast is life or death. The only way I can outcompete incumbents is by outmanoeuvring them. Getting bogged down in the complexities of managing agent auth would have been a death sentence for Extra Thursday.
+
+Tomisin Jenrola
+
+Founder & CEO, SwarmZero
+
+Before partnering with Composio, adding tool integrations was a slow, resource-intensive process. Each integration could take weeks or months of engineering time, and maintaining them meant constantly keeping up with API changes.
+
+Jerome Leclanche
+
+Co-Founder, Ingram Technologies
+
+With hands-on help from their founder, we integrated Gmail and Google Drive in just 30 minutes. This level of personal support and commitment is exactly what startups should strive for.
+
+Composio
+
+Composio
+
+Stay updated.
+
+Join discord
+
+PRODUCT
+
+enterprise
+
+pricing
+
+agent auth
+
+RESOURCES
+
+docs
+
+blog
+
+OAuth2 guides
+
+Case Studies
+
+COMPANY
+
+Careers
+
+trust
+
+Support
+
+Terms
+
+Privacy Policy
+
+© Composio
+2026
+
+Composio toolkits | MCP and API Integrations for AI Agents
 
 ## Toolkit Slugs Captured From Static Page
 

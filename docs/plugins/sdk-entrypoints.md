@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "176a630d6a009ff48120aa20c510d6ff0df1256ab6845ebe955cfb65701b0946"
+source_hash: "85574495971e2d250ab0ec718cf67e0da4e71099b6cf94bfc12e8e798034a6c3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
 original_doc_path: "plugins/sdk-entrypoints.md"
 duplicate_index: 1
@@ -178,7 +180,7 @@ In practice, pair `defineSetupPluginEntry(...)` with the narrow setup helper
 families:
 
 * `openclaw/plugin-sdk/setup-runtime` for runtime-safe setup helpers such as
-  import-safe setup patch adapters, lookup-note output,
+  `createSetupTranslator`, import-safe setup patch adapters, lookup-note output,
   `promptResolvedAllowFrom`, `splitSetupEntries`, and delegated setup proxies
 * `openclaw/plugin-sdk/channel-setup` for optional-install setup surfaces
 * `openclaw/plugin-sdk/setup-tools` for setup/install CLI/archive/docs helpers

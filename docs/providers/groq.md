@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
-source_hash: "2c446c0f7b7e6e93fa41fb4a16aa380599873c0082fb3114e30715f48697b9ac"
+source_hash: "76a2f04ccf24e72ff85eb38dea722ab1f1df50deb5c4800eacb6e3f39e1c176d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/groq.md"
 original_doc_path: "providers/groq.md"
 duplicate_index: 1
@@ -147,7 +149,7 @@ To make Groq the default audio backend:
     If the Gateway runs as a managed service (launchd, systemd, Docker), `GROQ_API_KEY` must be visible to that process — not just to your interactive shell.
 
     <Warning>
-      A key sitting only in `~/.profile` will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
+      A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
     </Warning>
   </Accordion>
 

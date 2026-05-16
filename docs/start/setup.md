@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/start/setup"
-source_hash: "2470693c6ddb76d5ff517cdb820b68e66db78f0d7964ee29dd02b49a0f2f635e"
+source_hash: "2cbad4574440c21bd8f05ef07d6b86414c17ad05e4b58e96f3ff8425b3274578"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/setup.md"
 original_doc_path: "start/setup.md"
 duplicate_index: 1

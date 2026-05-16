@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Custom Tools and Toolkits (Experimental)"
 source: "https://docs.composio.dev/docs/toolkits/custom-tools-and-toolkits.md"
-source_hash: "843e275c258562d4af3c598f20852499ce83fa65af5b116950858a91d3b13c5c"
+source_hash: "98042561926249c85be60ce3acd3658fa1f760a51471a92aa588823e026c3245"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "toolkits/custom-tools-and-toolkits.md"
 original_doc_path: "toolkits/custom-tools-and-toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Custom Tools and Toolkits (Experimental) (/docs/toolkits/custom-tools-and-toolkits)
 Source: https://docs.composio.dev/docs/toolkits/custom-tools-and-toolkits.md
@@ -91,8 +96,12 @@ const getUserProfile = experimental_createTool("GET_USER_PROFILE", {
 from pydantic import BaseModel, Field
 
 from composio import Composio
+from composio_openai_agents import OpenAIAgentsProvider
 
-composio = Composio(api_key="your_api_key")
+composio = Composio(
+    api_key="your_api_key",
+    provider=OpenAIAgentsProvider(),
+)
 
 class UserLookupInput(BaseModel):
     user_id: str = Field(description="User ID")
@@ -341,7 +350,11 @@ A custom toolkit groups related standalone tools under a namespace. Tools inside
 **TypeScript:**
 
 ```typescript
-import { Composio, experimental_createTool, experimental_createToolkit } from "@composio/core";
+import {
+  Composio,
+  experimental_createTool,
+  experimental_createToolkit,
+} from "@composio/core";
 import { z } from "zod/v3";
 
 const userManagement = experimental_createToolkit("USER_MANAGEMENT", {
@@ -425,6 +438,83 @@ session = composio.create(
 tools = session.tools()
 ```
 
+# Preloading custom tools
+
+Custom tools are searchable by default. Set `preload: true` / `preload=True` on a
+custom tool when it should be returned directly from `session.tools()`. Toolkit
+preload applies to all tools in that toolkit; set `preload: false` /
+`preload=False` on one tool to opt it out.
+
+**TypeScript:**
+
+```typescript
+import { Composio, experimental_createTool } from "@composio/core";
+import { OpenAIAgentsProvider } from "@composio/openai-agents";
+import { z } from "zod/v3";
+
+const composio = new Composio({
+  apiKey: "your_api_key",
+  provider: new OpenAIAgentsProvider(),
+});
+
+const replyGuide = experimental_createTool("GET_REPLY_STYLE_GUIDE", {
+  name: "Get reply style guide",
+  description: "Return the team's email reply style guide",
+  preload: true,
+  inputParams: z.object({
+    topic: z.string().describe("Email topic"),
+  }),
+  execute: async ({ topic }) => ({ topic, tone: "concise and helpful" }),
+});
+
+const session = await composio.create("user_1", {
+  experimental: {
+    customTools: [replyGuide],
+  },
+});
+
+const tools = await session.tools();
+console.log(tools.map((tool) => tool.name));
+// LOCAL_GET_REPLY_STYLE_GUIDE
+// COMPOSIO_SEARCH_TOOLS
+// ... other default meta tools
+```
+
+**Python:**
+
+```python
+from pydantic import BaseModel, Field
+
+from composio import Composio
+from composio_openai_agents import OpenAIAgentsProvider
+
+composio = Composio(
+    api_key="your_api_key",
+    provider=OpenAIAgentsProvider(),
+)
+
+class ReplyGuideInput(BaseModel):
+    topic: str = Field(description="Email topic")
+
+@composio.experimental.tool(preload=True)
+def get_reply_style_guide(input: ReplyGuideInput, ctx):
+    """Return the team's email reply style guide."""
+    return {"topic": input.topic, "tone": "concise and helpful"}
+
+session = composio.create(
+    user_id="user_1",
+    experimental={
+        "custom_tools": [get_reply_style_guide],
+    },
+)
+
+tools = session.tools()
+print([tool.name for tool in tools])
+# LOCAL_GET_REPLY_STYLE_GUIDE
+# COMPOSIO_SEARCH_TOOLS
+# ... other default meta tools
+```
+
 # Meta tools integration
 
 Custom tools work automatically with Composio's meta tools:
@@ -479,6 +569,37 @@ const customToolkits = session.customToolkits();
 ```python
 custom_tools = session.custom_tools()
 custom_toolkits = session.custom_toolkits()
+```
+
+# Reusing a session with custom tools
+
+When [reusing a session](/docs/users-and-sessions#reusing-a-session) via `composio.use()`, you can attach custom tools at the same time:
+
+**TypeScript:**
+
+```typescript
+import { Composio, experimental_createTool } from "@composio/core";
+import { z } from "zod/v3";
+
+declare const getUserProfile: ReturnType<typeof experimental_createTool>;
+const composio = new Composio({ apiKey: "your_api_key" });
+
+const session = await composio.use("session_id", {
+  customTools: [getUserProfile],
+});
+```
+
+**Python:**
+
+```python
+from composio import Composio
+
+composio = Composio(api_key="your_api_key")
+
+session = composio.use(
+    "session_id",
+    custom_tools=[get_user_profile],
+)
 ```
 
 # Programmatic execution

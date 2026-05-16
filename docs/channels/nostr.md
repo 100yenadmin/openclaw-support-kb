@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Nostr"
 source: "https://docs.openclaw.ai/channels/nostr"
-source_hash: "75f7b6d216c61b674bd2d744d61e4cc9efd7e3e13688412c092fd828154c3c69"
+source_hash: "c8923777c866b32a5cb8ad5b2187117bd9a119cb10d44f63aa69a7ce19dccb81"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/nostr.md"
 original_doc_path: "channels/nostr.md"
 duplicate_index: 1

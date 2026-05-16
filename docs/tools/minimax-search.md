@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
-source_hash: "2f29b32ca347dabdf6d2d2cd4ea9768b39bef7386cecdcca6279a294de2ecfe2"
+source_hash: "e22d83d1b406181edb80bbf2edd28f6a88464cae8c22f8964cfddf7c6f5b2e55"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/minimax-search.md"
 original_doc_path: "tools/minimax-search.md"
 duplicate_index: 1
@@ -95,10 +97,10 @@ can satisfy the MiniMax Search bearer credential.
 
 ## Supported parameters
 
-MiniMax Search supports:
-
-* `query`
-* `count` (OpenClaw trims the returned result list to the requested count)
+| Parameter | Type    | Constraints | Description                                                                 |
+| --------- | ------- | ----------- | --------------------------------------------------------------------------- |
+| `query`   | string  | required    | Search query string.                                                        |
+| `count`   | integer | 1-10        | Number of results to return. OpenClaw trims the returned list to this size. |
 
 Provider-specific filters are not currently supported.
 

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenShell"
 source: "https://docs.openclaw.ai/gateway/openshell"
-source_hash: "e0fe04e506c378b188c531c7e4d03cc3b3ceca67be486c0ddbb7868baf4c4431"
+source_hash: "1082849adc641170507904b78b2c99cd71b9bc3084763d8afb173f1e97f575b5"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/openshell.md"
 original_doc_path: "gateway/openshell.md"
 duplicate_index: 1
@@ -24,6 +26,7 @@ and an optional `mirror` workspace mode.
 
 ## Prerequisites
 
+* OpenShell plugin installed (`openclaw plugins install @openclaw/openshell-sandbox`)
 * The `openshell` CLI installed and on `PATH` (or set a custom path via
   `plugins.entries.openshell.config.command`)
 * An OpenShell account with sandbox access
@@ -31,7 +34,11 @@ and an optional `mirror` workspace mode.
 
 ## Quick start
 
-1. Enable the plugin and set the sandbox backend:
+1. Install and enable the plugin, then set the sandbox backend:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install @openclaw/openshell-sandbox
+```
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {

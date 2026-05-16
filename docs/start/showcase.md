@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "e979235fbedf27d34f95465db4c120209da0bc798bb0b0dcd32e80a8e6be460c"
+source_hash: "0e6e15c9e701ad1dc9cb207f7f8c4409e1d6cda6a9b5ad2ebe5019d76c5b5344"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
 original_doc_path: "start/showcase.md"
 duplicate_index: 1

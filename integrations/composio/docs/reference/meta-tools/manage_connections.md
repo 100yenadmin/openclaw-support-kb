@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Manage Connections"
 source: "https://docs.composio.dev/reference/meta-tools/manage_connections.md"
-source_hash: "31787160318c64af0c0f688dc3dcb3b4b129dafd79c12660de8c69baaea1c719"
+source_hash: "5476c6b789a5bf9635f1fe9959b0517526065891e5c434003d73a5b097b7f052"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools/manage_connections.md"
 original_doc_path: "reference/meta-tools/manage_connections.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Manage Connections (/reference/meta-tools/manage_connections)
 Source: https://docs.composio.dev/reference/meta-tools/manage_connections.md

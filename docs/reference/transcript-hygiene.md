@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "6e2808e78544cf61e6b708cfa0d1ae7c59c55f99c9f1dadb0bd4828c53e9a9ea"
+source_hash: "d6b9f964404bc332493c6db5d86d8f2917dcf34508b26458aedf13b7c2b70d3b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
 original_doc_path: "reference/transcript-hygiene.md"
 duplicate_index: 1
@@ -130,12 +132,15 @@ inter-session user turns that only have provenance metadata.
 * Missing OpenAI Responses-family tool outputs are synthesized as `aborted` to match Codex replay normalization.
 * No thought signature stripping.
 
-**OpenAI-compatible Gemma 4**
+**OpenAI-compatible Chat Completions**
 
-* Historical assistant thinking/reasoning blocks are stripped before replay so local
-  OpenAI-compatible Gemma 4 servers do not receive prior-turn reasoning content.
+* Historical assistant thinking/reasoning blocks are stripped before replay so
+  local and proxy-style OpenAI-compatible servers do not receive prior-turn
+  reasoning fields such as `reasoning` or `reasoning_content`.
 * Current same-turn tool-call continuations keep the assistant reasoning block
   attached to the tool call until the tool result has been replayed.
+* Provider-owned exceptions can opt out when their wire protocol requires
+  replayed reasoning metadata.
 
 **Google (Generative AI / Gemini CLI / Antigravity)**
 

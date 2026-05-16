@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "HEARTBEAT.md template"
 source: "https://docs.openclaw.ai/reference/templates/HEARTBEAT"
-source_hash: "2be5cc00c0058354fd5a7525198e910fc2468b018e7a0330aa26b292ba6f3882"
+source_hash: "a2ce6549264066459dc8f49c7aa10ae185e994bfc665a34b45b7db2050adbad0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/templates/heartbeat.md"
 original_doc_path: "reference/templates/heartbeat.md"
 duplicate_index: 1

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Toolkit Versioning"
 source: "https://docs.composio.dev/docs/tools-direct/toolkit-versioning.md"
-source_hash: "9fab162dfa0d9030c5accc2c5435ee667158753b191595c00d1c461cd8e6c115"
+source_hash: "cc5fe89a677f7f6285f9f73d3489d2feb7c3781235dd57db34c4ba41e5a46e54"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-direct/toolkit-versioning.md"
 original_doc_path: "tools-direct/toolkit-versioning.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Toolkit Versioning (/docs/tools-direct/toolkit-versioning)
 Source: https://docs.composio.dev/docs/tools-direct/toolkit-versioning.md

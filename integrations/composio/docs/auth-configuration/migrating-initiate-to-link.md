@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Migrating from initiate() to link()"
 source: "https://docs.composio.dev/docs/auth-configuration/migrating-initiate-to-link.md"
-source_hash: "b2e5a719ca90d91838544444805ec0e8503132dc66c816c6e43ae8408c5c2bcc"
+source_hash: "50ce9012a3c5f81c0139f480cdf4d3f401c97a5c89d5df09ba6fef66e66ee984"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "auth-configuration/migrating-initiate-to-link.md"
 original_doc_path: "auth-configuration/migrating-initiate-to-link.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Migrating from initiate() to link() (/docs/auth-configuration/migrating-initiate-to-link)
 Source: https://docs.composio.dev/docs/auth-configuration/migrating-initiate-to-link.md

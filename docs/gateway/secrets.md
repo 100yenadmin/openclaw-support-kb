@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "49319f22b339cec2b4227eba2b2ce193da9488930121abf62ab86f4eecf62aa3"
+source_hash: "2499c3d619424e5781df8cfd2b55b4809cd1d98ca5866d29e6253581b833a05a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
 original_doc_path: "gateway/secrets.md"
 duplicate_index: 1

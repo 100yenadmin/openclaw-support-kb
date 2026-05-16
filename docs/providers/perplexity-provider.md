@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Perplexity"
 source: "https://docs.openclaw.ai/providers/perplexity-provider"
-source_hash: "98da51d9cf17cb10afac1238d341663e159ee19296ace8e7eeb4e8858dc012a0"
+source_hash: "5e68ea76338b1722550f436e75a2d9ab39aeb5f34c11142359c85315b73e9350"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/perplexity-provider.md"
 original_doc_path: "providers/perplexity-provider.md"
 duplicate_index: 1
@@ -97,10 +99,10 @@ When using the native Perplexity API, searches support the following filters:
     `PERPLEXITY_API_KEY` is available to that process.
 
     <Warning>
-      A key set only in `~/.profile` will not be visible to a launchd/systemd
-      daemon unless that environment is explicitly imported. Set the key in
-      `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway process can
-      read it.
+      A key exported only in an interactive shell will not be visible to a
+      launchd/systemd daemon unless that environment is explicitly imported. Set
+      the key in `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway
+      process can read it.
     </Warning>
   </Accordion>
 

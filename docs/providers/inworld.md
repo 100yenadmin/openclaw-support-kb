@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Inworld"
 source: "https://docs.openclaw.ai/providers/inworld"
-source_hash: "01be0d13d0b8d8a6891ae7ce791bdd698a1c5df3c82544c96d2cd11b016df76e"
+source_hash: "d02b4a2e0b1439ad0760abdab3e36fde635445ac8833e55322542d77180a2ea8"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/inworld.md"
 original_doc_path: "providers/inworld.md"
 duplicate_index: 1

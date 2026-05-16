@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Manually authenticating users"
 source: "https://docs.composio.dev/docs/authenticating-users/manually-authenticating.md"
-source_hash: "efe97bb90e954f9301d39a171ea76f8a77e2772869bfa07a6d61a868d0fcf03b"
+source_hash: "a284492427f906a6ef010deb6add1c0cc164dc7ce692f693c4157037825b4401"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "authenticating-users/manually-authenticating.md"
 original_doc_path: "authenticating-users/manually-authenticating.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Manually authenticating users (/docs/authenticating-users/manually-authenticating)
 Source: https://docs.composio.dev/docs/authenticating-users/manually-authenticating.md

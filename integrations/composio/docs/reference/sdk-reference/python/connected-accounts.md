@@ -2,11 +2,16 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md"
-source_hash: "391a408a66e04807875eaeabf6cea6b4d12ef154d670a9bb926d818c11699c9a"
+source_hash: "5fa0d5f21002d3870e4568f4d4f23d96f6775acfaa00cf0646bb6143dc64d8c7"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/connected-accounts.md"
 original_doc_path: "reference/sdk-reference/python/connected-accounts.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # ConnectedAccounts (/reference/sdk-reference/python/connected-accounts)
 Source: https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md

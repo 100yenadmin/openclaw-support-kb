@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Glossary"
 source: "https://docs.composio.dev/docs/glossary.md"
-source_hash: "91151f088c72919c93ccf0d187613c861144f78781e3e8230c2c263d0b6f3022"
+source_hash: "6babbbc6dff556f8811e76de79d5fa5d0a126997d8597dee79c0db38eff182e7"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "glossary.md"
 original_doc_path: "glossary.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Glossary (/docs/glossary)
 Source: https://docs.composio.dev/docs/glossary.md
@@ -46,7 +51,7 @@ The object returned when you initiate authentication. Contains the Connect Link 
 
 ### Custom Tool
 
-A user-defined tool used alongside Composio's built-in tools. For sessions, use local experimental custom tools and custom toolkits (TypeScript only) via [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits). For direct execution, see [Creating custom tools](/docs/tools-direct/custom-tools).
+A user-defined tool used alongside Composio's built-in tools. For sessions, use local experimental custom tools and custom toolkits via [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits). For direct execution, see [Creating custom tools](/docs/tools-direct/custom-tools).
 
 ### In-Chat Authentication
 
@@ -122,11 +127,19 @@ Pinning a toolkit to a specific version so your integration uses a consistent se
 
 ### Trigger
 
-Sends structured payloads to your application when something happens in a connected app. Two delivery types: **webhook** (the app pushes events in real time, e.g. GitHub, Slack) and **polling** (Composio periodically checks for new data, e.g. Gmail). See [Triggers](/docs/triggers).
+Sends structured payloads to your application when something happens in a connected app. Two delivery types: **webhook** (the provider pushes events in real time, e.g. Slack, GitHub, Asana) and **polling** (Composio polls the provider on a schedule, e.g. Gmail). See [Triggers](/docs/triggers).
 
 ### Trigger Instance
 
 A specific, active trigger scoped to a user's connected account.
+
+### Webhook Endpoint
+
+The ingress URL Composio issues per OAuth app for webhook triggers, plus the signing secret used to verify each inbound request. Composio configures it for you in most cases. When a trigger type's `requires_webhook_endpoint_setup` flag is true, you configure it yourself once per OAuth app via the [Webhook Endpoints API](/reference/api-reference/webhook-endpoints). See [Configuring the webhook endpoint](/docs/setting-up-triggers/creating-triggers#configuring-the-webhook-endpoint).
+
+### Webhook Subscription
+
+The URL Composio delivers signed events to in your application. One per project, configured via the dashboard or the [Webhook Subscriptions API](/reference/api-reference/webhook-subscriptions). See [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events).
 
 ### User ID
 

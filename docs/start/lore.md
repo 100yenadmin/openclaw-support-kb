@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenClaw lore"
 source: "https://docs.openclaw.ai/start/lore"
-source_hash: "1f2c5ceab8c09513b1e9baabc56a4737743192f40d0a99cb17c5821dd7fbd58b"
+source_hash: "3dfdd7b0a133a6955fcb22221b7c04e554ca05ea70431065d1163891da81450d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/lore.md"
 original_doc_path: "start/lore.md"
 duplicate_index: 1

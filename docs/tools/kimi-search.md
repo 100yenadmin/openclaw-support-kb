@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Kimi search"
 source: "https://docs.openclaw.ai/tools/kimi-search"
-source_hash: "8e263ef45e0bab98205f514d849ab9355943274062333ae4a7d91ac2433b64c3"
+source_hash: "5553d0eedef3844b72f58c2bc4451fb3807d71ba25f1414e812ec7c53dfe15e7"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/kimi-search.md"
 original_doc_path: "tools/kimi-search.md"
 duplicate_index: 1

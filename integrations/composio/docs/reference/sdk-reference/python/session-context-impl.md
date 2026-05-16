@@ -2,11 +2,16 @@
 type: composio_doc
 title: "SessionContextImpl"
 source: "https://docs.composio.dev/reference/sdk-reference/python/session-context-impl.md"
-source_hash: "64a80d6a43a3cfb7f2639d8419e770b0631c5df9596fcb42cc45f331f4105f2d"
+source_hash: "87694fea928146079d0630c244b8bb9c029e088a4882f15791a74e8b1d1cb161"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/session-context-impl.md"
 original_doc_path: "reference/sdk-reference/python/session-context-impl.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # SessionContextImpl (/reference/sdk-reference/python/session-context-impl)
 Source: https://docs.composio.dev/reference/sdk-reference/python/session-context-impl.md

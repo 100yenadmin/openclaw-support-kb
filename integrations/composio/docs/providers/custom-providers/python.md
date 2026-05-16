@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Python Custom Provider"
 source: "https://docs.composio.dev/docs/providers/custom-providers/python.md"
-source_hash: "e91f9cbe59be26137faa324dbe18ef4dcc5ed0e4ba634a1a5f55547f442db722"
+source_hash: "02ffc0bd762742fef1b48a5e534248670d232125ef4ab1dbd491856208d9a068"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/custom-providers/python.md"
 original_doc_path: "providers/custom-providers/python.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Python Custom Provider (/docs/providers/custom-providers/python)
 Source: https://docs.composio.dev/docs/providers/custom-providers/python.md

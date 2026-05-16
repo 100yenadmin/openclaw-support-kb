@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Perplexity search"
 source: "https://docs.openclaw.ai/tools/perplexity-search"
-source_hash: "37f2089c0b3da7d9292529253677db4a4ac9ad03d78f24e9ab812ae555e2e74c"
+source_hash: "8dc95abf18204c56bd10bfd194f6693b9b3dd6849f107e1b2b3099d7a66877e6"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/perplexity-search.md"
 original_doc_path: "tools/perplexity-search.md"
 duplicate_index: 1

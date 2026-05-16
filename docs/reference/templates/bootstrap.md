@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "BOOTSTRAP.md template"
 source: "https://docs.openclaw.ai/reference/templates/BOOTSTRAP"
-source_hash: "4246e2c77e22365369b346201e148d9f78a2055fdf9986681ad623896c3c8be5"
+source_hash: "5009de3344cd53d62cfc5d0e0e901381a915c7f4d325624067f688b2060f6489"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/templates/bootstrap.md"
 original_doc_path: "reference/templates/bootstrap.md"
 duplicate_index: 1

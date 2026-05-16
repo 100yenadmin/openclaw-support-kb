@@ -12,9 +12,9 @@ refreshing this local support KB. Do not substitute one for the other.
 ## Search Contract
 
 ```bash
-gbrain search "OpenClaw releases stable beta prerelease update"
-gbrain search "Source: https://docs.openclaw.ai/cli/update"
-gbrain search "Source: https://docs.openclaw.ai/install/updating"
+gbrain search "OpenClaw releases stable beta prerelease update" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/cli/update" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/install/updating" --source openclaw-support-kb
 ```
 
 ## Refresh KB
@@ -36,7 +36,7 @@ OPENCLAW_KB_CHANNEL=beta \
 ```bash
 cat ~/.gbrain/sources/openclaw-support-kb/kb-manifest.json
 node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs
-gbrain search "OpenClaw Telegram allowFrom groupAllowFrom"
+gbrain search "OpenClaw Telegram allowFrom groupAllowFrom" --source openclaw-support-kb
 ```
 
 GBrain sync is git-commit based and `gbrain embed --stale` fills only missing
@@ -92,8 +92,8 @@ Use `stable` unless:
 
 - Weekly rebuild catches docs edits.
 - OpenClaw release webhook rebuilds after stable or beta releases.
-- Hourly release polling catches missed webhooks.
-- Hourly docs hash checks catch non-release documentation changes.
+- Daily release/docs freshness checks catch missed webhooks and non-release documentation changes.
+- Fleet/control-panel update calls can run `run-client-update.mjs` immediately after a publish event.
 
 ## Stop Conditions
 

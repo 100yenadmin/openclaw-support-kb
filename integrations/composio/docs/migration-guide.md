@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Migration guides"
 source: "https://docs.composio.dev/docs/migration-guide.md"
-source_hash: "75ec6ff593c312bb378949fb13c94f192d01ebebb6775925021f41a6b3f50f62"
+source_hash: "b7b2649e78f0cba018c91b818462331a1c670ba01c2596cf73579be69605ae3c"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "migration-guide.md"
 original_doc_path: "migration-guide.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Migration guides (/docs/migration-guide)
 Source: https://docs.composio.dev/docs/migration-guide.md

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "f49a10ee9af68f4e6b8f2579cc5e23c450c378f447598edafc4114614e1f09fd"
+source_hash: "6000bdecdf74e37147b038ba5c91bdc8dd40ce61ecdedf3f924778ba8a3347e8"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/openai.md"
 original_doc_path: "providers/openai.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # OpenAI (/docs/providers/openai)
 Source: https://docs.composio.dev/docs/providers/openai.md
@@ -266,6 +271,42 @@ while (response.choices[0].message.tool_calls) {
 }
 
 console.log(response.choices[0].message.content);
+```
+# Multi-turn chat
+
+For multi-turn apps, create the session once and reuse it across requests with `composio.use()`. Store the session ID in your database or chat state:
+
+**Python:**
+
+```python
+from composio import Composio
+
+composio = Composio()
+
+# First request — create and store the session ID
+session = composio.create(user_id="user_123")
+session_id = session.session_id
+# store session_id in your database or chat state
+
+# Subsequent requests — reuse the session
+session = composio.use(session_id)
+tools = session.tools()
+```
+**TypeScript:**
+
+```typescript
+// @noErrors
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+// ---cut---
+// First request — create and store the session ID
+const session = await composio.create("user_123");
+const sessionId = session.sessionId;
+// store sessionId in your database or chat state
+
+// Subsequent requests — reuse the session
+const session = await composio.use(sessionId);
+const tools = await session.tools();
 ```
 
 ---

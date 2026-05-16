@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "SenseAudio"
 source: "https://docs.openclaw.ai/providers/senseaudio"
-source_hash: "c9aa2f294d3f784a4a8d036d5202819f5b0cf34cda15ce581fe1b09e34d8ac4c"
+source_hash: "48db24c08cc19b6fcb25bf63c38623140796c299d20ed2ec234cf5a52184625c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/senseaudio.md"
 original_doc_path: "providers/senseaudio.md"
 duplicate_index: 1

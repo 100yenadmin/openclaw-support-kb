@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "fb9d6eb180553e6ea3a16582c6d3066553b26a69454ff0c2e2b6d6616859690d"
+source_hash: "143a0b77812b8b8a9b8020b0d1d78a069dc4ac7b8ff88d9839cdd23dba899439"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/configuration-reference.md"
 original_doc_path: "gateway/configuration-reference.md"
 duplicate_index: 1
@@ -55,6 +57,8 @@ Moved to a dedicated page - see
 * `session.*` (session lifecycle, compaction, pruning)
 * `messages.*` (message delivery, TTS, markdown rendering)
 * `talk.*` (Talk mode)
+  * `talk.consultThinkingLevel`: thinking level override for the full OpenClaw agent run behind Control UI Talk realtime consults
+  * `talk.consultFastMode`: one-shot fast-mode override for Control UI Talk realtime consults
   * `talk.speechLocale`: optional BCP 47 locale id for Talk speech recognition on iOS/macOS
   * `talk.silenceTimeoutMs`: when unset, Talk keeps the platform default pause window before sending the transcript (`700 ms on macOS and Android, 900 ms on iOS`)
 
@@ -81,6 +85,10 @@ The `models` root also owns global model-catalog behavior.
 
 * `models.mode`: provider catalog behavior (`merge` or `replace`).
 * `models.providers`: custom provider map keyed by provider id.
+* `models.providers.*.localService`: optional on-demand process manager for
+  local model servers. OpenClaw probes the configured health endpoint, starts
+  the absolute `command` when needed, waits for readiness, then sends the model
+  request. See [Local model services](/gateway/local-model-services).
 * `models.pricing.enabled`: controls the background pricing bootstrap that
   starts after sidecars and channels reach the Gateway ready path. When `false`,
   the Gateway skips OpenRouter and LiteLLM pricing-catalog fetches; configured
@@ -109,6 +117,11 @@ target server during config edits.
         headers: {
           Authorization: "Bearer ${MCP_REMOTE_TOKEN}",
         },
+        // Optional Codex app-server projection controls.
+        codex: {
+          agents: ["main"],
+          defaultToolsApprovalMode: "approve", // auto | prompt | approve
+        },
       },
     },
   },
@@ -120,6 +133,17 @@ target server during config edits.
   Remote entries use `transport: "streamable-http"` or `transport: "sse"`;
   `type: "http"` is a CLI-native alias that `openclaw mcp set` and
   `openclaw doctor --fix` normalize into the canonical `transport` field.
+* `mcp.servers.<name>.codex`: optional Codex app-server projection controls.
+  This block is OpenClaw metadata for Codex app-server threads only; it does not
+  affect ACP sessions, generic Codex harness config, or other runtime adapters.
+  Non-empty `codex.agents` limits the server to the listed OpenClaw agent ids.
+  Empty, blank, or invalid scoped agent lists are rejected by config validation
+  and omitted by the runtime projection path instead of becoming global.
+  `codex.defaultToolsApprovalMode` emits Codex's native
+  `default_tools_approval_mode` for that server. OpenClaw strips the `codex`
+  block before passing native `mcp_servers` config to Codex. Omit the block to
+  keep the server projected for every Codex app-server agent with Codex's
+  default MCP approval behavior.
 * `mcp.sessionIdleTtlMs`: idle TTL for session-scoped bundled MCP runtimes.
   One-shot embedded runs request run-end cleanup; this TTL is the backstop for
   long-lived sessions and future callers.
@@ -138,10 +162,12 @@ See [MCP](/cli/mcp#openclaw-as-an-mcp-client-registry) and
     allowBundled: ["gemini", "peekaboo"],
     load: {
       extraDirs: ["~/Projects/agent-scripts/skills"],
+      allowSymlinkTargets: ["~/Projects/manager/skills"],
     },
     install: {
       preferBrew: true,
       nodeManager: "npm", // npm | pnpm | yarn | bun
+      allowUploadedArchives: false,
     },
     entries: {
       "image-lab": {
@@ -157,10 +183,16 @@ See [MCP](/cli/mcp#openclaw-as-an-mcp-client-registry) and
 
 * `allowBundled`: optional allowlist for bundled skills only (managed/workspace skills unaffected).
 * `load.extraDirs`: extra shared skill roots (lowest precedence).
+* `load.allowSymlinkTargets`: trusted real target roots that skill symlinks may
+  resolve into when the link lives outside its configured source root.
 * `install.preferBrew`: when true, prefer Homebrew installers when `brew` is
   available before falling back to other installer kinds.
 * `install.nodeManager`: node installer preference for `metadata.openclaw.install`
   specs (`npm` | `pnpm` | `yarn` | `bun`).
+* `install.allowUploadedArchives`: allow trusted `operator.admin` Gateway
+  clients to install private zip archives staged through `skills.upload.*`
+  (default: false). This only enables the uploaded-archive path; normal ClawHub
+  installs do not require it.
 * `entries.<skillKey>.enabled: false` disables a skill even if bundled/installed.
 * `entries.<skillKey>.apiKey`: convenience for skills declaring a primary env var (plaintext string or SecretRef object).
 
@@ -205,8 +237,76 @@ See [MCP](/cli/mcp#openclaw-as-an-mcp-client-registry) and
 * `plugins.entries.<id>.hooks.allowConversationAccess`: when `true`, trusted non-bundled plugins may read raw conversation content from typed hooks such as `llm_input`, `llm_output`, `before_model_resolve`, `before_agent_reply`, `before_agent_run`, `before_agent_finalize`, and `agent_end`.
 * `plugins.entries.<id>.subagent.allowModelOverride`: explicitly trust this plugin to request per-run `provider` and `model` overrides for background subagent runs.
 * `plugins.entries.<id>.subagent.allowedModels`: optional allowlist of canonical `provider/model` targets for trusted subagent overrides. Use `"*"` only when you intentionally want to allow any model.
+* `plugins.entries.<id>.llm.allowModelOverride`: explicitly trust this plugin to request model overrides for `api.runtime.llm.complete`.
+* `plugins.entries.<id>.llm.allowedModels`: optional allowlist of canonical `provider/model` targets for trusted plugin LLM completion overrides. Use `"*"` only when you intentionally want to allow any model.
+* `plugins.entries.<id>.llm.allowAgentIdOverride`: explicitly trust this plugin to run `api.runtime.llm.complete` against a non-default agent id.
 * `plugins.entries.<id>.config`: plugin-defined config object (validated by native OpenClaw plugin schema when available).
 * Channel plugin account/runtime settings live under `channels.<id>` and should be described by the owning plugin's manifest `channelConfigs` metadata, not by a central OpenClaw option registry.
+
+### Codex harness plugin config
+
+The bundled `codex` plugin owns native Codex app-server harness settings under
+`plugins.entries.codex.config`. See
+[Codex harness reference](/plugins/codex-harness-reference) for the full config
+surface and [Codex harness](/plugins/codex-harness) for the runtime model.
+
+`codexPlugins` applies only to sessions that select the native Codex harness.
+It does not enable Codex plugins for Pi, normal OpenAI provider runs, ACP
+conversation bindings, or any non-Codex harness.
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  plugins: {
+    entries: {
+      codex: {
+        enabled: true,
+        config: {
+          codexPlugins: {
+            enabled: true,
+            allow_destructive_actions: true,
+            plugins: {
+              "google-calendar": {
+                enabled: true,
+                marketplaceName: "openai-curated",
+                pluginName: "google-calendar",
+                allow_destructive_actions: false,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+* `plugins.entries.codex.config.codexPlugins.enabled`: enables native Codex
+  plugin/app support for the Codex harness. Default: `false`.
+* `plugins.entries.codex.config.codexPlugins.allow_destructive_actions`:
+  default destructive-action policy for migrated plugin app elicitations.
+  Default: `true`.
+* `plugins.entries.codex.config.codexPlugins.plugins.<key>.enabled`: enables a
+  migrated plugin entry when global `codexPlugins.enabled` is also true.
+  Default: `true` for explicit entries.
+* `plugins.entries.codex.config.codexPlugins.plugins.<key>.marketplaceName`:
+  stable marketplace identity. V1 only supports `"openai-curated"`.
+* `plugins.entries.codex.config.codexPlugins.plugins.<key>.pluginName`: stable
+  Codex plugin identity from migration, for example `"google-calendar"`.
+* `plugins.entries.codex.config.codexPlugins.plugins.<key>.allow_destructive_actions`:
+  per-plugin destructive-action override. When omitted, the global
+  `allow_destructive_actions` value is used.
+
+`codexPlugins.enabled` is the global enablement directive. Explicit plugin
+entries written by migration are the durable install and repair eligibility set.
+`plugins["*"]` is not supported, there is no `install` switch, and local
+`marketplacePath` values are intentionally not config fields because they are
+host-specific.
+
+`app/list` readiness checks are cached for one hour and refreshed
+asynchronously when stale. Codex thread app config is computed at Codex harness
+session establishment, not on every turn; use `/new`, `/reset`, or a gateway
+restart after changing native plugin config.
+
 * `plugins.entries.firecrawl.config.webFetch`: Firecrawl web-fetch provider settings.
   * `apiKey`: Firecrawl API key (accepts SecretRef). Falls back to `plugins.entries.firecrawl.config.webSearch.apiKey`, legacy `tools.web.fetch.firecrawl.apiKey`, or `FIRECRAWL_API_KEY` env var.
   * `baseUrl`: Firecrawl API base URL (default: `https://api.firecrawl.dev`; self-hosted overrides must target private/internal endpoints).
@@ -449,6 +549,10 @@ See [Inferred commitments](/concepts/commitments).
     value, so repeated failures from one localhost origin do not automatically
     lock out a different origin.
   * `tailscale.mode`: `serve` (tailnet only, loopback bind) or `funnel` (public, requires auth).
+  * `tailscale.preserveFunnel`: when `true` and `tailscale.mode = "serve"`, OpenClaw
+    checks `tailscale funnel status` before re-applying Serve at startup and skips
+    it if an externally configured Funnel route already covers the gateway port.
+    Default `false`.
   * `controlUi.allowedOrigins`: explicit browser-origin allowlist for Gateway WebSocket connects. Required when browser clients are expected from non-loopback origins.
   * `controlUi.chatMessageMaxWidth`: optional max-width for grouped Control UI chat messages. Accepts constrained CSS width values such as `960px`, `82%`, `min(1280px, 82%)`, and `calc(100% - 2rem)`.
   * `controlUi.dangerouslyAllowHostHeaderOriginFallback`: dangerous mode that enables Host-header origin fallback for deployments that intentionally rely on Host-header origin policy.
@@ -483,6 +587,7 @@ See [Inferred commitments](/concepts/commitments).
 
 ### OpenAI-compatible endpoints
 
+* Admin HTTP RPC: off by default as the `admin-http-rpc` plugin. Enable the plugin to register `POST /api/v1/admin/rpc`. See [Admin HTTP RPC](/plugins/admin-http-rpc).
 * Chat Completions: disabled by default. Enable with `gateway.http.endpoints.chatCompletions.enabled: true`.
 * Responses API: `gateway.http.endpoints.responses.enabled`.
 * Responses URL-input hardening:
@@ -931,7 +1036,7 @@ Notes:
     enabled: true,
     flags: ["telegram.*"],
     stuckSessionWarnMs: 30000,
-    stuckSessionAbortMs: 600000,
+    stuckSessionAbortMs: 300000,
 
     otel: {
       enabled: false,
@@ -971,7 +1076,7 @@ Notes:
 * `enabled`: master toggle for instrumentation output (default: `true`).
 * `flags`: array of flag strings enabling targeted log output (supports wildcards like `"telegram.*"` or `"*"`).
 * `stuckSessionWarnMs`: no-progress age threshold in ms for classifying long-running processing sessions as `session.long_running`, `session.stalled`, or `session.stuck`. Reply, tool, status, block, and ACP progress reset the timer; repeated `session.stuck` diagnostics back off while unchanged.
-* `stuckSessionAbortMs`: no-progress age threshold in ms before eligible stalled active work may be abort-drained for recovery. When unset, OpenClaw uses the safer extended embedded-run window of at least 10 minutes and 5x `stuckSessionWarnMs`.
+* `stuckSessionAbortMs`: no-progress age threshold in ms before eligible stalled active work may be abort-drained for recovery. When unset, OpenClaw uses the safer extended embedded-run window of at least 5 minutes and 3x `stuckSessionWarnMs`.
 * `otel.enabled`: enables the OpenTelemetry export pipeline (default: `false`). For the full configuration, signal catalog, and privacy model, see [OpenTelemetry export](/gateway/opentelemetry).
 * `otel.endpoint`: collector URL for OTel export.
 * `otel.tracesEndpoint` / `otel.metricsEndpoint` / `otel.logsEndpoint`: optional signal-specific OTLP endpoints. When set, they override `otel.endpoint` for that signal only.

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "IRC"
 source: "https://docs.openclaw.ai/channels/irc"
-source_hash: "93961059d3b92583dca67ce36ad2d1530ec49b21d46e5004909596fea2b2bc76"
+source_hash: "098b482dfcf65b0812b8fe1d5dcf3b8e365a66837285dfe9f39458f693222045"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/irc.md"
 original_doc_path: "channels/irc.md"
 duplicate_index: 1

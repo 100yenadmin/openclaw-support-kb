@@ -13,23 +13,39 @@ export const AGENT_SCAN_URL = "https://raw.githubusercontent.com/snyk/agent-scan
 export const COMPOSIO_DOCS_INDEX_URL = "https://docs.composio.dev/llms.txt";
 export const COMPOSIO_DOCS_FULL_URL = "https://docs.composio.dev/llms-full.txt";
 export const COMPOSIO_TOOLKITS_URL = "https://composio.dev/toolkits";
+export const HERMES_DOCS_INDEX_URL = "https://hermes-agent.nousresearch.com/docs/llms.txt";
+export const HERMES_DOCS_FULL_URL = "https://hermes-agent.nousresearch.com/docs/llms-full.txt";
+export const PAPERCLIP_DOCS_INDEX_URL = "https://paperclip.ing/llms.txt";
+export const PAPERCLIP_REPO_URL = "https://github.com/paperclipai/paperclip";
+export const PAPERCLIP_TREE_URL = "https://api.github.com/repos/paperclipai/paperclip/git/trees/master?recursive=1";
+export const PAPERCLIP_RAW_BASE_URL = "https://raw.githubusercontent.com/paperclipai/paperclip/master";
 
 export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
 export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
 export const GBRAIN_SOURCE_ID = "openclaw-support-kb";
-export const GBRAIN_SOURCE_NAME = "OpenClaw Support KB";
+export const GBRAIN_SOURCE_NAME = "Customer Support KB";
 export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
 const GBRAIN_SOURCE_ID_PATTERN = new RegExp(`\\b${escapeRegExp(GBRAIN_SOURCE_ID)}\\b`, "i");
 export const GBRAIN_VERIFY_QUERIES = [
   {
-    label: "OpenClaw Support KB install guide",
-    query: "Install OpenClaw Support KB For Agents",
-    strictPatterns: [/\bInstall OpenClaw Support KB For Agents\b/i, /\bOpenClaw Support KB\b/i],
+    label: "Customer Support KB install guide",
+    query: "Install Customer Support KB For Agents",
+    strictPatterns: [/\bInstall Customer Support KB For Agents\b/i, /\bCustomer Support KB\b/i],
   },
   {
     label: "OpenClaw Telegram docs",
     query: "Telegram Setup And Repair",
     strictPatterns: [/\bTelegram Setup And Repair\b/i, /\btelegram\b/i],
+  },
+  {
+    label: "Hermes configuration docs",
+    query: "Hermes Agent configuration config.yaml gateway",
+    strictPatterns: [/\bHermes Agent\b/i, /\bconfig\.yaml\b/i],
+  },
+  {
+    label: "Paperclip Mission Control docs",
+    query: "Paperclip Mission Control heartbeat budget agent runtime",
+    strictPatterns: [/\bPaperclip\b/i, /\b(heartbeat|budget|agent)\b/i],
   },
 ];
 export const CANONICAL_REPO_URL = "https://github.com/electricsheephq/openclaw-support-kb.git";
@@ -48,10 +64,11 @@ export const MANIFEST_PREFIXES = [
   "security",
   "skills-index",
   "integrations",
+  "systems",
   "skills",
   "scripts",
 ];
-export const MANIFEST_ROOT_FILES = ["README.md", "INSTALL_FOR_AGENTS.md", "AGENTS.md", "package.json"];
+export const MANIFEST_ROOT_FILES = ["README.md", "INSTALL_FOR_AGENTS.md", "AGENTS.md", "package.json", "kb-sources.json"];
 
 export function repoRootFromImportMeta(metaUrl) {
   let current = path.dirname(fileURLToPath(metaUrl));
@@ -367,6 +384,12 @@ export function gbrainSyncArgs(targetDir, sourceResult = {}) {
   return args;
 }
 
+export function gbrainSearchArgs(query, sourceResult = {}) {
+  const args = ["search", query];
+  if (sourceResult.sourceScoped !== false) args.push("--source", GBRAIN_SOURCE_ID);
+  return args;
+}
+
 export function gbrainEmbedStaleArgs(sourceResult = {}) {
   const args = ["embed", "--stale"];
   if (sourceResult.sourceScoped !== false) args.push("--source", GBRAIN_SOURCE_ID);
@@ -591,14 +614,9 @@ export function splitComposioLlmsFull(text) {
   };
 
   for (let i = 0; i < lines.length; i += 1) {
-    if (/^\s*```/.test(lines[i])) {
-      inFence = !inFence;
-      continue;
-    }
-    if (inFence) continue;
-
     const pathMatch = /^#\s+(.+?)\s+\((\/[^)]+)\)\s*$/.exec(lines[i]);
     if (pathMatch) {
+      if (!/^\/(?:docs|reference|toolkits|cookbooks)\b/.test(pathMatch[2])) continue;
       starts.push({
         index: i,
         title: pathMatch[1].trim(),
@@ -607,6 +625,12 @@ export function splitComposioLlmsFull(text) {
       });
       continue;
     }
+
+    if (/^\s*```/.test(lines[i])) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
 
     if (i === 0 && /^#\s+Composio Documentation\s*$/.test(lines[i])) {
       starts.push({
@@ -642,15 +666,177 @@ export function splitComposioLlmsFull(text) {
   });
 }
 
+function sourcePathToMarkdownPath(sourcePath, prefixesToStrip = []) {
+  let cleanPath = String(sourcePath || "").trim().replace(/^\/+/, "");
+  for (const prefix of prefixesToStrip) {
+    if (cleanPath.startsWith(prefix)) cleanPath = cleanPath.slice(prefix.length);
+  }
+  if (!cleanPath) cleanPath = "overview.md";
+  cleanPath = cleanPath.replace(/\.(mdx?|MDX?)$/u, ".md");
+  if (!cleanPath.endsWith(".md")) cleanPath += ".md";
+  return cleanPath
+    .split("/")
+    .map((part) => slugify(part).replace(/^\.+$/, "page") || "page")
+    .join("/");
+}
+
+export function hermesDocsSourceFromPath(sourcePath) {
+  let cleanPath = String(sourcePath || "").trim().replace(/^website\/docs\//u, "");
+  cleanPath = cleanPath.replace(/\.(mdx?|MDX?)$/u, "");
+  cleanPath = cleanPath.replace(/\/index$/u, "");
+  return `https://hermes-agent.nousresearch.com/docs${cleanPath ? `/${cleanPath}` : ""}`;
+}
+
+export function splitHermesLlmsFull(text) {
+  const lines = String(text || "").replace(/\r\n/g, "\n").split("\n");
+  const starts = [];
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const sourceMatch = /^<!--\s*source:\s*(.+?)\s*-->\s*$/.exec(lines[index]);
+    if (!sourceMatch) continue;
+    starts.push({ index, sourcePath: sourceMatch[1].trim() });
+  }
+
+  return starts.map((start, idx) => {
+    const end = starts[idx + 1]?.index ?? lines.length;
+    const sectionLines = lines.slice(start.index + 1, end);
+    const title =
+      sectionLines
+        .map((line) => /^#\s+(.+?)\s*$/.exec(line)?.[1]?.trim())
+        .find(Boolean) ?? "Hermes Documentation";
+    const source = hermesDocsSourceFromPath(start.sourcePath);
+    const path = sourcePathToMarkdownPath(start.sourcePath, ["website/docs/"]);
+    const headingIndex = sectionLines.findIndex((line) => /^#\s+/.test(line));
+    const heading = headingIndex >= 0 ? sectionLines[headingIndex] : `# ${title}`;
+    const rest =
+      headingIndex >= 0
+        ? [...sectionLines.slice(0, headingIndex), ...sectionLines.slice(headingIndex + 1)]
+        : sectionLines;
+    const body = [
+      heading,
+      "",
+      "Source System: Hermes Agent",
+      "Local KB namespace: hermes-agent",
+      `Source: ${source}`,
+      "",
+      ...rest,
+    ].join("\n").trimEnd() + "\n";
+    return {
+      title,
+      source,
+      path,
+      body,
+      hash: sha256(body),
+    };
+  });
+}
+
+export function paperclipRawUrl(docPath) {
+  const encodedPath = String(docPath || "")
+    .split("/")
+    .map((part) => encodeURIComponent(part))
+    .join("/");
+  return `${PAPERCLIP_RAW_BASE_URL}/${encodedPath}`;
+}
+
+export function isPaperclipDocsPath(docPath) {
+  const value = String(docPath || "");
+  if (!/\.(md|mdx)$/i.test(value)) return false;
+  if (value.startsWith("docs/plans/") || value.startsWith("doc/plans/") || value.startsWith("doc/experimental/")) {
+    return false;
+  }
+  if (value.startsWith("docs/")) return true;
+  if (value.startsWith("doc/spec/") || value.startsWith("doc/plugins/")) return true;
+  return /^doc\/(?:CLI|CLIPHUB|DATABASE|DEPLOYMENT-MODES|DEVELOPING|DOCKER|GOAL|OPENCLAW_ONBOARDING|PRODUCT|SECRETS-AWS-PROVIDER|SPEC|TASKS|TASKS-mcp|execution-semantics)\.md$/u.test(
+    value,
+  );
+}
+
+export function paperclipDocsFromTree(tree, { limit = 140 } = {}) {
+  const entries = Array.isArray(tree?.tree) ? tree.tree : [];
+  return entries
+    .filter((entry) => entry?.type === "blob" && isPaperclipDocsPath(entry.path))
+    .map((entry) => entry.path)
+    .sort()
+    .slice(0, limit);
+}
+
+export function paperclipDocsSourceFromPath(docPath) {
+  return `${PAPERCLIP_REPO_URL}/blob/master/${String(docPath || "")
+    .split("/")
+    .map((part) => encodeURIComponent(part))
+    .join("/")}`;
+}
+
+export function paperclipDocsOutputPath(docPath) {
+  const value = String(docPath || "");
+  if (value.startsWith("docs/")) return sourcePathToMarkdownPath(`site/${value.slice("docs/".length)}`);
+  if (value.startsWith("doc/")) return sourcePathToMarkdownPath(`repo/${value.slice("doc/".length)}`);
+  return sourcePathToMarkdownPath(value);
+}
+
+export function paperclipDocBody({ docPath, text }) {
+  const title = String(text || "")
+    .split(/\r?\n/u)
+    .map((line) => /^#\s+(.+?)\s*$/.exec(line)?.[1]?.trim())
+    .find(Boolean) ?? path.basename(docPath, path.extname(docPath));
+  return {
+    title,
+    source: paperclipDocsSourceFromPath(docPath),
+    path: paperclipDocsOutputPath(docPath),
+    body:
+      [
+        `# ${title}`,
+        "",
+        "Source System: Paperclip Mission Control",
+        "Local KB namespace: paperclip-mission-control",
+        `Source: ${paperclipDocsSourceFromPath(docPath)}`,
+        `Raw source: ${paperclipRawUrl(docPath)}`,
+        "",
+        String(text || "").trimEnd(),
+        "",
+      ].join("\n"),
+  };
+}
+
+function stripRawTextElement(html, tagName) {
+  const input = String(html || "");
+  const lower = input.toLowerCase();
+  const openNeedle = `<${tagName.toLowerCase()}`;
+  const closeNeedle = `</${tagName.toLowerCase()}`;
+  let output = "";
+  let cursor = 0;
+
+  while (cursor < input.length) {
+    const start = lower.indexOf(openNeedle, cursor);
+    if (start === -1) return output + input.slice(cursor);
+    const next = input[start + openNeedle.length] ?? "";
+    if (next && !/[\s>/]/u.test(next)) {
+      output += input.slice(cursor, start + openNeedle.length);
+      cursor = start + openNeedle.length;
+      continue;
+    }
+    output += input.slice(cursor, start);
+    const openEnd = input.indexOf(">", start + openNeedle.length);
+    if (openEnd === -1) return `${output}\n`;
+    const closeStart = lower.indexOf(closeNeedle, openEnd + 1);
+    if (closeStart === -1) return `${output}\n`;
+    const closeEnd = input.indexOf(">", closeStart + closeNeedle.length);
+    if (closeEnd === -1) return `${output}\n`;
+    output += "\n";
+    cursor = closeEnd + 1;
+  }
+
+  return output;
+}
+
 export function htmlToPlainText(html) {
-  return String(html || "")
-    .replace(/<script[\s\S]*?<\/script>/gi, "\n")
-    .replace(/<style[\s\S]*?<\/style>/gi, "\n")
+  return stripRawTextElement(stripRawTextElement(html, "script"), "style")
     .replace(/<[^>]+>/g, "\n")
-    .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#x27;/g, "'")
     .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
     .replace(/\n[ \t]+/g, "\n")
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
@@ -752,7 +938,8 @@ export function frontmatterPage({ type, title, source, generatedAt, body, extra 
     .filter(([, value]) => value !== undefined && value !== null)
     .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
     .join("\n");
-  return `---\ntype: ${type}\ntitle: ${JSON.stringify(title)}\nsource: ${JSON.stringify(source)}\nsource_hash: ${JSON.stringify(sha256(body))}${extraLines ? `\n${extraLines}` : ""}\n---\n\n${body.trimEnd()}\n`;
+  const normalizedBody = String(body || "").trimEnd().replace(/[ \t]+$/gm, "");
+  return `---\ntype: ${type}\ntitle: ${JSON.stringify(title)}\nsource: ${JSON.stringify(source)}\nsource_hash: ${JSON.stringify(sha256(normalizedBody))}${extraLines ? `\n${extraLines}` : ""}\n---\n\n${normalizedBody}\n`;
 }
 
 export function sanitizeSkillsIndex(readme) {

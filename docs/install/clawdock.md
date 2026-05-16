@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "ClawDock"
 source: "https://docs.openclaw.ai/install/clawdock"
-source_hash: "cd969c8f38bf62c760c5129ff8b5487db7226e1f6586b3759fd1b95e0491e715"
+source_hash: "92033af6f11e3cd8fcb6dbe904e996289bac8fe0267331149c4e64b25abf4e3f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/clawdock.md"
 original_doc_path: "install/clawdock.md"
 duplicate_index: 1

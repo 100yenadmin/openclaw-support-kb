@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Chutes"
 source: "https://docs.openclaw.ai/providers/chutes"
-source_hash: "86ee0c6029c2780beeb458406fe147607f49a8dc6fd0216128fdb633d9b70984"
+source_hash: "9f98760dff7323f863e9be63d9c85d3ce86a61bf93cb75b46b65422c15a5f52b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/chutes.md"
 original_doc_path: "providers/chutes.md"
 duplicate_index: 1

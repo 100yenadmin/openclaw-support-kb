@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Channel docking"
 source: "https://docs.openclaw.ai/concepts/channel-docking"
-source_hash: "c569357ebbb7dc72fb95df6bfea7217ab6dd4796f6c5cc67f8b83322d6216ac5"
+source_hash: "a727dcfc45b316551d9ed1b59c769ab24759074fcc51c4a0bc3ae073a024e6d3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/channel-docking.md"
 original_doc_path: "concepts/channel-docking.md"
 duplicate_index: 1

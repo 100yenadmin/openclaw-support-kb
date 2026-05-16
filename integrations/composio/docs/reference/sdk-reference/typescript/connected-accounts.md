@@ -2,11 +2,16 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md"
-source_hash: "f19a317e83a48d0e642cfa492eb7728b21dce8024f156a87e3798f945b534292"
+source_hash: "7aac5e66686e5c2660dcad67c0711168e9ecfa0b1ecea2ddd71c4a67385aefae"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
 original_doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # ConnectedAccounts (/reference/sdk-reference/typescript/connected-accounts)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md

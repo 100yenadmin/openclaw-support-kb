@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gateway runbook"
 source: "https://docs.openclaw.ai/gateway/index"
-source_hash: "9c5f73904985dfaa218d18020aaf93a0a6b738dd2772fba558e7982e07ba9158"
+source_hash: "00bf9092a2c7cf62dd33be190a3359542c93d8229a79e4765edaa6745e31addc"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/index.md"
 original_doc_path: "gateway/index.md"
 duplicate_index: 1
@@ -78,7 +80,8 @@ Use this page for day-1 startup and day-2 operations of the Gateway service.
 * One always-on process for routing, control plane, and channel connections.
 * Single multiplexed port for:
   * WebSocket control/RPC
-  * HTTP APIs, OpenAI compatible (`/v1/models`, `/v1/embeddings`, `/v1/chat/completions`, `/v1/responses`, `/tools/invoke`)
+  * HTTP APIs (`/v1/models`, `/v1/embeddings`, `/v1/chat/completions`, `/v1/responses`, `/tools/invoke`)
+  * Plugin HTTP routes, such as optional `/api/v1/admin/rpc`
   * Control UI and hooks
 * Default bind mode: `loopback`.
 * Auth is required by default. Shared-secret setups use
@@ -109,6 +112,8 @@ Planning note:
 * Use `x-openclaw-model` when you want a backend provider/model override; otherwise the selected agent's normal model and embedding setup stays in control.
 
 All of these run on the main Gateway port and use the same trusted operator auth boundary as the rest of the Gateway HTTP API.
+
+Admin HTTP RPC (`POST /api/v1/admin/rpc`) is a separate, default-off plugin route for host tooling that cannot use WebSocket RPC. See [Admin HTTP RPC](/plugins/admin-http-rpc).
 
 ### Port and bind precedence
 
@@ -221,7 +226,9 @@ Use supervised runs for production-like reliability.
     openclaw gateway stop
     ```
 
-    Use `openclaw gateway restart` for restarts. Do not chain `openclaw gateway stop` and `openclaw gateway start`; on macOS, `gateway stop` intentionally disables the LaunchAgent before stopping it.
+    Use `openclaw gateway restart` for restarts. Do not chain `openclaw gateway stop` and `openclaw gateway start` as a restart substitute.
+
+    On macOS, `gateway stop` uses `launchctl bootout` by default — this removes the LaunchAgent from the current boot session without persisting a disable, so KeepAlive auto-recovery still works after unexpected crashes and `gateway start` re-enables cleanly. To persistently suppress auto-respawn across reboots, pass `--disable`: `openclaw gateway stop --disable`.
 
     LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `openclaw doctor` audits and repairs service config drift.
   </Tab>

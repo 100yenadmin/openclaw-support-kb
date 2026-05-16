@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "TOOLS.md template"
 source: "https://docs.openclaw.ai/reference/templates/TOOLS"
-source_hash: "0e5c273856a0f221c1a946c71dd9b7894ac3982724df913ca0da9ba434f93ade"
+source_hash: "2c7d438cfbdb8b5a7e655779cdd08c111b46fa377c26b5f305dcd0842035908d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/templates/tools.md"
 original_doc_path: "reference/templates/tools.md"
 duplicate_index: 1

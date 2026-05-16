@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Basic Hono Server"
 source: "https://docs.composio.dev/cookbooks/hono.md"
-source_hash: "2af70082195dfdb59df1df1b55bf48cb881da173e49701a73208fb1fada85995"
+source_hash: "a3d899e61fd6d9225bedfb5cf0c20f6676bcc83c349dfab1e52bfc4d96ba0a6a"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/hono.md"
 original_doc_path: "cookbooks/hono.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Basic Hono Server (/cookbooks/hono)
 Source: https://docs.composio.dev/cookbooks/hono.md

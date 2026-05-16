@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Dashboard"
 source: "https://docs.openclaw.ai/web/dashboard"
-source_hash: "210d7e482401f34bb866a11105a7d2915a8be84b9a2bf8f073d4a985b938d62b"
+source_hash: "f662d5ed55b58b1edd25efbd8d7e21ee62185c5583faa7a039f26527e4d5762c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "web/dashboard.md"
 original_doc_path: "web/dashboard.md"
 duplicate_index: 1
@@ -91,6 +93,7 @@ Prefer localhost, Tailscale Serve, or an SSH tunnel.
 
 * Ensure the gateway is reachable (local: `openclaw status`; remote: SSH tunnel `ssh -N -L 18789:127.0.0.1:18789 user@host` then open `http://127.0.0.1:18789/`).
 * For `AUTH_TOKEN_MISMATCH`, clients may do one trusted retry with a cached device token when the gateway returns retry hints. That cached-token retry reuses the token's cached approved scopes; explicit `deviceToken` / explicit `scopes` callers keep their requested scope set. If auth still fails after that retry, resolve token drift manually.
+* For `AUTH_SCOPE_MISMATCH`, the device token was recognized but does not carry the dashboard's requested scopes; re-pair or approve the requested scope contract instead of rotating the shared gateway token.
 * Outside that retry path, connect auth precedence is explicit shared token/password first, then explicit `deviceToken`, then stored device token, then bootstrap token.
 * On the async Tailscale Serve Control UI path, failed attempts for the same
   `{scope, ip}` are serialized before the failed-auth limiter records them, so

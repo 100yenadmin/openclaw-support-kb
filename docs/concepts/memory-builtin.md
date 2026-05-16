@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "0c1db86ff05e367dfe1adfde32c693a9a02f8a8adfcb637a944a6740affd11b4"
+source_hash: "aefc847e5fb8dc1aeb2982e02a6b2a7565162e05e6e6a7db9398293f6c2dbfe8"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
 original_doc_path: "concepts/memory-builtin.md"
 duplicate_index: 1

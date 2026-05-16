@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
-source_hash: "57fb1346a0cf05513c5e273e971181ed0359e053cfd17e71436c160a7cf40831"
+source_hash: "ca3b748dc4ab12bb36f46c252c355c2f02a6e72c804098fbc831fd8f8342eae3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/memory-lancedb.md"
 original_doc_path: "plugins/memory-lancedb.md"
 duplicate_index: 1
@@ -201,10 +203,11 @@ in. For example, ZhiPu `embedding-3` uses `2048` dimensions:
 
 `memory-lancedb` has two separate text limits:
 
-| Setting           | Default | Range     | Applies to                                    |
-| ----------------- | ------- | --------- | --------------------------------------------- |
-| `recallMaxChars`  | `1000`  | 100-10000 | text sent to the embedding API for recall     |
-| `captureMaxChars` | `500`   | 100-10000 | assistant message length eligible for capture |
+| Setting           | Default | Range     | Applies to                                                |
+| ----------------- | ------- | --------- | --------------------------------------------------------- |
+| `recallMaxChars`  | `1000`  | 100-10000 | text sent to the embedding API for recall                 |
+| `captureMaxChars` | `500`   | 100-10000 | message length eligible for auto-capture                  |
+| `customTriggers`  | `[]`    | 0-50      | literal phrases that make auto-capture consider a message |
 
 `recallMaxChars` controls auto-recall, the `memory_recall` tool, the
 `memory_forget` query path, and `openclaw ltm search`. Auto-recall prefers the
@@ -214,6 +217,10 @@ out of the embedding request.
 
 `captureMaxChars` controls whether a response is short enough to be considered
 for automatic capture. It does not cap recall query embeddings.
+
+`customTriggers` lets you add literal auto-capture phrases without writing
+regular expressions. The built-in triggers include common English, Czech,
+Chinese, Japanese, and Korean memory phrases.
 
 ## Commands
 

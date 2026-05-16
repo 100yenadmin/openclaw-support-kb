@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tool Type Generator"
 source: "https://docs.composio.dev/cookbooks/tool-generator.md"
-source_hash: "be50894042fccc8a2894ae68fa87f4b7c6a07aa3f6dc35d3daaea957c0c457cc"
+source_hash: "2f69444f8fa3419bfe392c414c10e586aab59d123bc01e110e6fd6265a271fc2"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/tool-generator.md"
 original_doc_path: "cookbooks/tool-generator.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tool Type Generator (/cookbooks/tool-generator)
 Source: https://docs.composio.dev/cookbooks/tool-generator.md

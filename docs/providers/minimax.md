@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "c51ed4dcb63e639e1ec467e9a10a3525fdaccc0bb99fb9d7ca5cfe575a7d7390"
+source_hash: "e4e1acecb41e65158e793c4bc4b26e51333159b6eb2efc29f50c145278c7d53c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/minimax.md"
 original_doc_path: "providers/minimax.md"
 duplicate_index: 1

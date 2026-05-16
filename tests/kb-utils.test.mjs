@@ -6,10 +6,17 @@ import {
   composioToolkitCatalogPage,
   frontmatterPage,
   headersForFetch,
+  hermesDocsSourceFromPath,
+  htmlToPlainText,
+  isPaperclipDocsPath,
+  paperclipDocBody,
+  paperclipDocsFromTree,
+  paperclipRawUrl,
   redactSensitive,
   sanitizeReleases,
   selectRelease,
   splitComposioLlmsFull,
+  splitHermesLlmsFull,
   splitLlmsFull,
   validateAgentScanSpec,
   validateGbrainSearchOutput,
@@ -60,13 +67,73 @@ Toolkit docs.
 # Native Tools vs MCP (/docs/native-tools-vs-mcp)
 
 MCP docs.
+
+\`\`\`text
+unclosed fence from upstream docs
+
+# Reference Errors (/reference/errors)
+
+Reference docs.
 `);
 
-  assert.equal(pages.length, 3);
+  assert.equal(pages.length, 4);
   assert.equal(pages[1].source, "https://docs.composio.dev/docs/tools-and-toolkits.md");
   assert.equal(pages[1].path, "tools-and-toolkits.md");
   assert.match(pages[1].body, /Source: https:\/\/docs\.composio\.dev\/docs\/tools-and-toolkits\.md/);
   assert.equal(pages[2].path, "native-tools-vs-mcp.md");
+  assert.equal(pages[3].source, "https://docs.composio.dev/reference/errors.md");
+  assert.equal(pages[3].path, "reference/errors.md");
+});
+
+test("splitHermesLlmsFull preserves source comments and namespaces pages", () => {
+  const pages = splitHermesLlmsFull(`# Hermes Agent — Full Documentation
+
+---
+
+<!-- source: website/docs/user-guide/configuration.md -->
+# Configuration
+
+Hermes uses \`~/.hermes/config.yaml\`.
+
+---
+
+<!-- source: website/docs/user-guide/messaging/telegram.md -->
+# Telegram
+
+Gateway setup docs.
+`);
+
+  assert.equal(pages.length, 2);
+  assert.equal(pages[0].title, "Configuration");
+  assert.equal(pages[0].source, "https://hermes-agent.nousresearch.com/docs/user-guide/configuration");
+  assert.equal(pages[0].path, "user-guide/configuration.md");
+  assert.match(pages[0].body, /Source System: Hermes Agent/);
+  assert.match(pages[0].body, /Local KB namespace: hermes-agent/);
+  assert.equal(hermesDocsSourceFromPath("website/docs/user-guide/messaging/index.md"), "https://hermes-agent.nousresearch.com/docs/user-guide/messaging");
+});
+
+test("paperclip doc helpers select public docs and preserve source paths", () => {
+  const tree = {
+    tree: [
+      { type: "blob", path: "docs/api/agents.md" },
+      { type: "blob", path: "docs/plans/ignore.md" },
+      { type: "blob", path: "doc/OPENCLAW_ONBOARDING.md" },
+      { type: "blob", path: "README.md" },
+    ],
+  };
+
+  assert.equal(isPaperclipDocsPath("docs/api/agents.md"), true);
+  assert.equal(isPaperclipDocsPath("docs/plans/ignore.md"), false);
+  assert.deepEqual(paperclipDocsFromTree(tree), ["doc/OPENCLAW_ONBOARDING.md", "docs/api/agents.md"]);
+  assert.equal(
+    paperclipRawUrl("docs/api/agents.md"),
+    "https://raw.githubusercontent.com/paperclipai/paperclip/master/docs/api/agents.md",
+  );
+
+  const page = paperclipDocBody({ docPath: "docs/api/agents.md", text: "# Agents API\n\nAgent docs." });
+  assert.equal(page.path, "site/api/agents.md");
+  assert.match(page.body, /Source System: Paperclip Mission Control/);
+  assert.match(page.source, /github\.com\/paperclipai\/paperclip\/blob\/master\/docs\/api\/agents\.md/);
 });
 
 test("composioToolkitCatalogPage keeps public catalog cues", () => {
@@ -91,6 +158,19 @@ Never worry about agent reliability</section>
   assert.match(page, /30 of 982/);
   assert.match(page, /gmail - https:\/\/composio\.dev\/toolkits\/gmail/);
   assert.doesNotMatch(page, /category\/crm -/);
+});
+
+test("htmlToPlainText removes script/style blocks and avoids double entity decoding", () => {
+  const output = htmlToPlainText(`<main>Visible &quot;ok&quot; &amp;quot;still encoded&amp;quot;
+<script type="text/javascript">alert("&quot;hidden&quot;")</script >
+<script type="text/javascript">alert("also hidden")</script\t
+ bar>
+<style>.hidden{display:none}</style\t
+ media>
+</main>`);
+
+  assert.match(output, /Visible "ok" &quot;still encoded&quot;/);
+  assert.doesNotMatch(output, /hidden|display:none|media/);
 });
 
 test("selectRelease chooses stable or beta channel", () => {

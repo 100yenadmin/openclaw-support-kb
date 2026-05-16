@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tencent Cloud (TokenHub)"
 source: "https://docs.openclaw.ai/providers/tencent"
-source_hash: "08c729f62a9d3ca5ffef530ef4e508980baef4c96f784c3424e7dac9ffc413c7"
+source_hash: "29a2cb6baf9018eb96b91bb463096bb868d9a0fca83c03f158212bc832858519"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/tencent.md"
 original_doc_path: "providers/tencent.md"
 duplicate_index: 1
@@ -111,7 +113,7 @@ Rates are per million tokens in USD as advertised by Tencent. Override pricing u
     If the Gateway runs as a managed service (launchd, systemd, Docker), `TOKENHUB_API_KEY` must be visible to that process. Set it in `~/.openclaw/.env` or via `env.shellEnv` so launchd, systemd, or Docker exec environments can read it.
 
     <Warning>
-      Keys set only in `~/.profile` are not visible to managed gateway processes. Use the env file or config seam for persistent availability.
+      Keys exported only in an interactive shell are not visible to managed gateway processes. Use the env file or config seam for persistent availability.
     </Warning>
   </Accordion>
 </AccordionGroup>

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
-source_hash: "be32539b7eb6c0599c516804d65b929125e317e24c16751570fa90c6faf699a5"
+source_hash: "4d9885ba25ed3f28c8dd9cb094cf86a3e3b986fa25df1b5b5c64670e69db34f2"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/gradium.md"
 original_doc_path: "providers/gradium.md"
 duplicate_index: 1
@@ -13,17 +15,46 @@ Source: https://docs.openclaw.ai/providers/gradium
 
 
 
-Gradium is a bundled text-to-speech provider for OpenClaw. It can generate normal audio replies, voice-note-compatible Opus output, and 8 kHz u-law audio for telephony surfaces.
+[Gradium](https://gradium.ai) is a bundled text-to-speech provider for OpenClaw. The plugin can render normal audio replies (WAV), voice-note-compatible Opus output, and 8 kHz u-law audio for telephony surfaces.
+
+| Property      | Value                                |
+| ------------- | ------------------------------------ |
+| Provider id   | `gradium`                            |
+| Auth          | `GRADIUM_API_KEY` or config `apiKey` |
+| Base URL      | `https://api.gradium.ai` (default)   |
+| Default voice | `Emma` (`YTpq7expH9539ERJ`)          |
 
 ## Setup
 
-Create a Gradium API key, then expose it to OpenClaw:
+Create a Gradium API key, then expose it to OpenClaw with either an env var or the config key.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-export GRADIUM_API_KEY="gsk_..."
-```
+<Tabs>
+  <Tab title="Env var">
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    export GRADIUM_API_KEY="gsk_..."
+    ```
+  </Tab>
 
-You can also store the key in config under `messages.tts.providers.gradium.apiKey`.
+  <Tab title="Config key">
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      messages: {
+        tts: {
+          auto: "always",
+          provider: "gradium",
+          providers: {
+            gradium: {
+              apiKey: "${GRADIUM_API_KEY}",
+            },
+          },
+        },
+      },
+    }
+    ```
+  </Tab>
+</Tabs>
+
+The plugin checks the resolved `apiKey` first and falls back to the `GRADIUM_API_KEY` environment variable.
 
 ## Config
 
@@ -45,6 +76,14 @@ You can also store the key in config under `messages.tts.providers.gradium.apiKe
 }
 ```
 
+| Key                                      | Type   | Description                                                                                   |
+| ---------------------------------------- | ------ | --------------------------------------------------------------------------------------------- |
+| `messages.tts.providers.gradium.apiKey`  | string | Resolved API key. Supports `${ENV}` and secret refs.                                          |
+| `messages.tts.providers.gradium.baseUrl` | string | Override the API origin. Trailing slashes are stripped. Defaults to `https://api.gradium.ai`. |
+| `messages.tts.providers.gradium.voiceId` | string | Default voice id used when no directive override is present.                                  |
+
+The output audio format is selected automatically by the runtime based on the target surface and is not configurable from `openclaw.json`. See [Output](#output) below.
+
 ## Voices
 
 | Name      | Voice ID           |
@@ -59,11 +98,33 @@ You can also store the key in config under `messages.tts.providers.gradium.apiKe
 
 Default voice: Emma.
 
+### Per-message voice override
+
+When the active speech policy allows voice overrides, you can switch voices inline using a directive token. All of these resolve to the same `voiceId` override:
+
+```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+/voice:LFZvm12tW_z0xfGo
+/voice_id:LFZvm12tW_z0xfGo
+/voiceid:LFZvm12tW_z0xfGo
+/gradium_voice:LFZvm12tW_z0xfGo
+/gradiumvoice:LFZvm12tW_z0xfGo
+```
+
+If the speech policy disables voice overrides, the directive is consumed but ignored.
+
 ## Output
 
-* Audio-file replies use WAV.
-* Voice-note replies use Opus and are marked voice-compatible.
-* Telephony synthesis uses `ulaw_8000` at 8 kHz.
+The runtime picks the output format from the target surface. The provider does not synthesize other formats today.
+
+| Target         | Format      | File ext | Sample rate | Voice-compatible flag |
+| -------------- | ----------- | -------- | ----------- | --------------------- |
+| Standard audio | `wav`       | `.wav`   | provider    | no                    |
+| Voice note     | `opus`      | `.opus`  | provider    | yes                   |
+| Telephony      | `ulaw_8000` | n/a      | 8 kHz       | n/a                   |
+
+## Auto-select order
+
+Among configured TTS providers, Gradium's auto-select order is `30`. See [Text-to-Speech](/tools/tts) for how OpenClaw picks the active provider when `messages.tts.provider` is not pinned.
 
 ## Related
 

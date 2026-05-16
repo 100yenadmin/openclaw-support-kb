@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Amazon Bedrock Mantle"
 source: "https://docs.openclaw.ai/providers/bedrock-mantle"
-source_hash: "0501adf323778b8dea195a088bbfd364736b68e95ad7fa283a0dfe9cd672d728"
+source_hash: "b0e11a5c99d586c1cef0ecf8f337cbc94ed44f983de64074bed6bc5d1388c2fd"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/bedrock-mantle.md"
 original_doc_path: "providers/bedrock-mantle.md"
 duplicate_index: 1
@@ -96,6 +98,13 @@ region's `/v1/models` endpoint.
 | ----------------- | ------------------------- |
 | Discovery cache   | Results cached for 1 hour |
 | IAM token refresh | Hourly                    |
+
+To keep the Mantle plugin enabled but suppress automatic discovery and IAM
+bearer-token generation, disable the plugin-owned discovery toggle:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw config set plugins.entries.amazon-bedrock-mantle.config.discovery.enabled false
+```
 
 <Note>
   The bearer token is the same `AWS_BEARER_TOKEN_BEDROCK` used by the standard [Amazon Bedrock](/providers/bedrock) provider.

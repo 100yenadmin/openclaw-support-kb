@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
-source_hash: "433762a77048cae342ca157b4e5a4e57ca08118ffaefb67938adf7bb688eb534"
+source_hash: "b8d19c3c903fd76c469838de6bb4c534d58f1e0f7bfca7e74938a7408894df4a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/zalouser.md"
 original_doc_path: "channels/zalouser.md"
 duplicate_index: 1
@@ -88,7 +90,7 @@ openclaw directory groups list --channel zalouser --query "work"
 
 `channels.zalouser.dmPolicy` supports: `pairing | allowlist | open | disabled` (default: `pairing`).
 
-`channels.zalouser.allowFrom` should use stable Zalo user IDs. During interactive setup, entered names can be resolved to IDs using the plugin's in-process contact lookup.
+`channels.zalouser.allowFrom` should use stable Zalo user IDs. It can also reference static sender access groups (`accessGroup:<name>`). During interactive setup, entered names can be resolved to IDs using the plugin's in-process contact lookup.
 
 If a raw name remains in config, startup resolves it only when `channels.zalouser.dangerouslyAllowNameMatching: true` is enabled. Without that opt-in, runtime sender checks are ID-only and raw names are ignored for authorization.
 
@@ -103,7 +105,7 @@ Approve via:
 * Restrict to an allowlist with:
   * `channels.zalouser.groupPolicy = "allowlist"`
   * `channels.zalouser.groups` (keys should be stable group IDs; names are resolved to IDs on startup only when `channels.zalouser.dangerouslyAllowNameMatching: true` is enabled)
-  * `channels.zalouser.groupAllowFrom` (controls which senders in allowed groups can trigger the bot)
+  * `channels.zalouser.groupAllowFrom` (controls which senders in allowed groups can trigger the bot; static sender access groups can be referenced with `accessGroup:<name>`)
 * Block all groups: `channels.zalouser.groupPolicy = "disabled"`.
 * The configure wizard can prompt for group allowlists.
 * On startup, OpenClaw resolves group/user names in allowlists to IDs and logs the mapping only when `channels.zalouser.dangerouslyAllowNameMatching: true` is enabled.

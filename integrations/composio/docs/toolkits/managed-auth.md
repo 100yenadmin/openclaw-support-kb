@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Managed Auth"
 source: "https://docs.composio.dev/toolkits/managed-auth.md"
-source_hash: "4b0d69de9c9801a5701b2f5ac0916fd3dd17305655ab4bb7ad5a0ac52e68f194"
+source_hash: "ebb5e74dc042d1e7c99c51b06e39a53d8c16d9bb25dd4889f1417c7dd7ceb16e"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "toolkits/managed-auth.md"
 original_doc_path: "toolkits/managed-auth.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Managed Auth (/toolkits/managed-auth)
 Source: https://docs.composio.dev/toolkits/managed-auth.md

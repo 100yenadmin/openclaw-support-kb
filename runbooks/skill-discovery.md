@@ -13,20 +13,21 @@ sources. Do not install from a registry description alone.
 ## Search Contract
 
 ```bash
-gbrain query "OpenClaw skills <task user wants> awesome openclaw skills"
-gbrain search "Source: https://github.com/VoltAgent/awesome-openclaw-skills"
-gbrain search "Source: https://docs.openclaw.ai/tools/clawhub"
-gbrain search "Source: https://docs.openclaw.ai/cli/skills"
-gbrain search "Source: https://github.com/snyk/agent-scan"
-gbrain search "Source: https://composio.dev/toolkits"
-gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md"
-gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md"
+gbrain search "OpenClaw skills <task user wants> awesome openclaw skills" --source openclaw-support-kb
+gbrain search "Source: https://github.com/VoltAgent/awesome-openclaw-skills" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/clawhub/index" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/cli/skills" --source openclaw-support-kb
+gbrain search "Source: https://github.com/snyk/agent-scan" --source openclaw-support-kb
+gbrain search "Source: https://composio.dev/toolkits" --source openclaw-support-kb
+gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md" --source openclaw-support-kb
+gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md" --source openclaw-support-kb
 ```
 
 Sources to cite:
 
 - https://github.com/VoltAgent/awesome-openclaw-skills
-- `docs/tools/clawhub.md`
+- `docs/clawhub/index.md`
+- `docs/clawhub/cli.md`
 - `docs/cli/skills.md`
 - https://github.com/snyk/agent-scan
 - `integrations/composio/guide.md`
@@ -46,12 +47,12 @@ Sources to cite:
    openclaw skills info <candidate-slug> --json
    ```
 4. If no good skill exists, or the user needs a SaaS app action, evaluate Composio as an integration option:
-   ```bash
-   gbrain query "Composio toolkit MCP OAuth <app or workflow>"
-   gbrain search "Source: https://composio.dev/toolkits <app>"
-   openclaw mcp list
-   openclaw mcp show composio --json
-   ```
+```bash
+gbrain search "Composio toolkit MCP OAuth <app or workflow>" --source openclaw-support-kb
+gbrain search "Source: https://composio.dev/toolkits <app>" --source openclaw-support-kb
+openclaw mcp list
+openclaw mcp show composio --json
+```
 5. Rank candidates with this order:
    - bundled/native OpenClaw skill already visible to the agent
    - verified or official ClawHub/OpenClaw skill

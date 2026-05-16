@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Secure file operations"
 source: "https://docs.openclaw.ai/gateway/security/secure-file-operations"
-source_hash: "f4039815bf74e5d9a6b27812e0d7458cc7e4b05f0eead00e808a11f7a4a30db1"
+source_hash: "5f298a56424dcb44cccb11ece87f46d5fc389b87a4d1cadabdf9c2b2a4bd5ba7"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/security/secure-file-operations.md"
 original_doc_path: "gateway/security/secure-file-operations.md"
 duplicate_index: 1

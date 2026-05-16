@@ -2,11 +2,16 @@
 type: composio_doc
 title: "SDKs"
 source: "https://docs.composio.dev/docs/troubleshooting/sdks.md"
-source_hash: "04b2b598aaec6a1a401691f404f272518cef1b75ae13e57974d6b797ee386b42"
+source_hash: "21fcdf50a5ae909ba4ca856484317b66f1fb4880fad840595bc476f9c6af9f75"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/sdks.md"
 original_doc_path: "troubleshooting/sdks.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # SDKs (/docs/troubleshooting/sdks)
 Source: https://docs.composio.dev/docs/troubleshooting/sdks.md

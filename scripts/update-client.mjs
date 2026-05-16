@@ -8,6 +8,7 @@ import {
   CANONICAL_REPO_URL,
   canonicalSourceDir,
   ensureGbrainSource,
+  gbrainSearchArgs,
   gbrainSyncArgs,
   GBRAIN_VERIFY_QUERIES,
   isFullCommitSha,
@@ -71,14 +72,14 @@ function failGbrainSourceRegistration(error) {
   process.exit(error.status ?? 1);
 }
 
-function verifyGbrainSearch() {
+function verifyGbrainSearch(sourceResult = {}) {
   if (process.env.OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY === "1") {
     console.warn("Skipping GBrain search verification because OPENCLAW_SUPPORT_KB_SKIP_SEARCH_VERIFY=1 is set.");
     return;
   }
   const loose = process.env.OPENCLAW_SUPPORT_KB_LOOSE_SEARCH_VERIFY === "1";
   for (const item of GBRAIN_VERIFY_QUERIES) {
-    const search = capture(gbrainCommand, ["search", item.query]);
+    const search = capture(gbrainCommand, gbrainSearchArgs(item.query, sourceResult));
     const output = `${search.stdout}\n${search.stderr}`;
     const verified = validateGbrainSearchOutput(output, {
       strictPatterns: loose ? [] : item.strictPatterns,
@@ -158,10 +159,19 @@ async function directoryIsEmpty(dir) {
 }
 
 function cloneTarget() {
-  run("git", ["clone", "--depth", "1", "--branch", branch, repoUrl, targetDir]);
+  const cloneUrl = isOfficialRepoUrl(repoUrl) ? DEFAULT_REPO_URL : repoUrl;
+  run("git", ["clone", "--depth", "1", "--branch", branch, cloneUrl, targetDir]);
   if (pinnedRef) {
     run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
     run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);
+  }
+}
+
+function canonicalizeLocalOfficialOrigin() {
+  const origin = captureNoExit("git", ["-C", targetDir, "config", "--get", "remote.origin.url"]);
+  const originUrl = origin.stdout?.trim();
+  if (origin.status === 0 && originUrl && isOfficialRepoUrl(originUrl) && normalizeRepoUrl(originUrl) !== normalizeRepoUrl(DEFAULT_REPO_URL)) {
+    run("git", ["-C", targetDir, "remote", "set-url", "origin", DEFAULT_REPO_URL]);
   }
 }
 
@@ -202,7 +212,10 @@ async function updateRepo() {
   ensureRepoTrust();
   if (!repoUrl) {
     if (path.resolve(repoRoot) === path.resolve(targetDir)) {
-      if (await pathExists(path.join(targetDir, ".git"))) return;
+      if (await pathExists(path.join(targetDir, ".git"))) {
+        canonicalizeLocalOfficialOrigin();
+        return;
+      }
       console.error(
         `Refusing to sync ${targetDir}: this support KB source is not a git checkout. Run scripts/run-client-update.mjs to migrate it to the published repo checkout, or reinstall from ${DEFAULT_REPO_URL}.`,
       );
@@ -333,6 +346,6 @@ if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_
     process.exit(2);
   }
 }
-verifyGbrainSearch();
+verifyGbrainSearch(sourceResult);
 
 console.log(`OpenClaw support KB updated, indexed, and query-verified from ${targetDir}`);

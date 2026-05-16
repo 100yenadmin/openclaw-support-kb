@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Release channels"
 source: "https://docs.openclaw.ai/install/development-channels"
-source_hash: "30f7aa3db197897101f9a10c259f53b8d295e078a1d719c028d7d72382f3de67"
+source_hash: "f2d7a35946a13794691a53a593dfd3d0954bdcd37e95acd679fd10c79748acdb"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/development-channels.md"
 original_doc_path: "install/development-channels.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms/index"
-source_hash: "c33ac511436713460c800d139758473d7e18029284ef4bd287c98e3033e22ca9"
+source_hash: "d85afeb19083de678266854bb06bc9a0f3c3b6e1ab17cc458fe2eebfa05ef153"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/index.md"
 original_doc_path: "platforms/index.md"
 duplicate_index: 1

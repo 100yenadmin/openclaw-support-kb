@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Standing orders"
 source: "https://docs.openclaw.ai/automation/standing-orders"
-source_hash: "e84d57784e504358148d6e70e2da0f69a251b3a0f6c88377235cc1fe35720ca4"
+source_hash: "4b19842af0d4af17f6a492c2f253c9c903640f33652307b00ccd58d860fd6cf4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "automation/standing-orders.md"
 original_doc_path: "automation/standing-orders.md"
 duplicate_index: 1
@@ -96,7 +98,7 @@ openclaw cron add \
   --tz America/New_York \
   --timeout-seconds 300 \
   --announce \
-  --channel bluebubbles \
+  --channel imessage \
   --to "+1XXXXXXXXXX" \
   --message "Execute daily inbox triage per standing orders. Check mail for new alerts. Parse, categorize, and persist each item. Report summary to owner. Escalate unknowns."
 ```
@@ -249,7 +251,7 @@ Each program should have:
 
 ## Related
 
-* [Automation and tasks](/automation): all automation mechanisms at a glance.
+* [Automation](/automation): all automation mechanisms at a glance.
 * [Cron jobs](/automation/cron-jobs): schedule enforcement for standing orders.
 * [Hooks](/automation/hooks): event-driven scripts for agent lifecycle events.
 * [Webhooks](/automation/cron-jobs#webhooks): inbound HTTP event triggers.

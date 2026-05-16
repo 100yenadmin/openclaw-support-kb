@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
-source_hash: "1f6ac8fe9ef7f5f05e53fa89e145d777b60c4719581f56e8ec3afb88a2375982"
+source_hash: "8c8632efaa460e25e4868e68a1db2e922ec3a6de9f2a7239b867ea1292520e13"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/multi-agent-sandbox-tools.md"
 original_doc_path: "tools/multi-agent-sandbox-tools.md"
 duplicate_index: 1
@@ -59,8 +61,14 @@ Each agent in a multi-agent setup can override the global sandbox and tool polic
               "scope": "agent"
             },
             "tools": {
-              "allow": ["read"],
-              "deny": ["exec", "write", "edit", "apply_patch", "process", "browser"]
+              "allow": ["read", "message"],
+              "deny": ["exec", "write", "edit", "apply_patch", "process", "browser"],
+              "message": {
+                "crossContext": {
+                  "allowWithinProvider": false,
+                  "allowAcrossProviders": false
+                }
+              }
             }
           }
         ]
@@ -84,7 +92,7 @@ Each agent in a multi-agent setup can override the global sandbox and tool polic
     **Result:**
 
     * `main` agent: runs on host, full tool access.
-    * `family` agent: runs in Docker (one container per agent), only `read` tool.
+    * `family` agent: runs in Docker (one container per agent), only `read` and current-conversation message sends.
   </Accordion>
 
   <Accordion title="Example 2: Work agent with shared sandbox">
@@ -319,7 +327,7 @@ Per-agent elevated overrides (`agents.list[].tools.elevated`) can further restri
     ```
   </Tab>
 
-  <Tab title="Safe execution (no file modifications)">
+  <Tab title="Shell execution with filesystem tools disabled">
     ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
       "tools": {
@@ -328,6 +336,10 @@ Per-agent elevated overrides (`agents.list[].tools.elevated`) can further restri
       }
     }
     ```
+
+    <Warning>
+      This policy disables OpenClaw filesystem tools, but `exec` is still a shell and can write files wherever the selected host or sandbox filesystem allows. For a read-only agent, deny `exec` and `process`, or combine shell access with sandbox filesystem controls such as `agents.defaults.sandbox.workspaceAccess: "ro"` or `"none"`.
+    </Warning>
   </Tab>
 
   <Tab title="Communication-only">
