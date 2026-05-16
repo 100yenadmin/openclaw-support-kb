@@ -19,6 +19,7 @@ import {
   resolveGbrainCommand,
   verifyNamedGbrainSource,
   withCommandPathFallbacks,
+  gbrainEmbedStaleArgs,
 } from "../scripts/lib/openclaw-support-kb.mjs";
 
 const repoRoot = path.resolve(import.meta.dirname, "..");
@@ -207,6 +208,8 @@ test("client sync registers and uses the named GBrain source", () => {
     "--repo",
     "/tmp/openclaw-support-kb",
   ]);
+  assert.deepEqual(gbrainEmbedStaleArgs({ sourceScoped: true }), ["embed", "--stale", "--source", GBRAIN_SOURCE_ID]);
+  assert.deepEqual(gbrainEmbedStaleArgs({ sourceScoped: false }), ["embed", "--stale"]);
   assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: true }), [
     "search",
     "Hermes config",
@@ -220,6 +223,8 @@ test("client sync registers and uses the named GBrain source", () => {
     assert.match(text, /import\s+\{[\s\S]*ensureGbrainSource[\s\S]*\}\s+from\s+"\.\/lib\/openclaw-support-kb\.mjs"/);
     assert.match(text, /ensureGbrainSource\s*\(\s*\{[\s\S]*targetDir[\s\S]*run[\s\S]*captureNoExit[\s\S]*gbrainCommand[\s\S]*\}\s*\)/);
     assert.match(text, /run\s*\(\s*gbrainCommand\s*,\s*gbrainSyncArgs/);
+    assert.match(text, /run\s*\(\s*gbrainCommand\s*,\s*gbrainEmbedStaleArgs/);
+    assert.doesNotMatch(text, /\[\s*"embed"\s*,\s*"--stale"\s*\]/);
     assert.doesNotMatch(text, /"sources"\s*,\s*"add"/);
   }
 });
