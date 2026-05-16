@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "04da3a7875f94f054bcd85a4887d8407808f5143759151202e88ea1d13d671f8"
+source_hash: "496f9da9897148f1b88e55abad8a5642e2fb1e417b4164592bb17689b7fe65f8"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
 original_doc_path: "help/testing-updates-plugins.md"
 duplicate_index: 1
@@ -93,9 +95,10 @@ Important lanes:
   local folder update skip behavior, local folders with preinstalled
   dependencies, `file:` package installs, git installs with CLI execution, git
   moving-ref updates, npm registry installs with hoisted transitive
-  dependencies, npm update no-ops, local ClawHub fixture installs and update
-  no-ops, marketplace update behavior, and Claude-bundle enable/inspect. Set
-  `OPENCLAW_PLUGINS_E2E_CLAWHUB=0` to keep the ClawHub block hermetic/offline.
+  dependencies, npm update no-ops, malformed npm package metadata rejection,
+  local ClawHub fixture installs and update no-ops, marketplace update behavior,
+  and Claude-bundle enable/inspect. Set `OPENCLAW_PLUGINS_E2E_CLAWHUB=0` to
+  keep the ClawHub block hermetic/offline.
 * `test:docker:plugin-lifecycle-matrix` installs the candidate package in a bare
   container, runs an npm plugin through install, inspect, disable, enable,
   explicit upgrade, explicit downgrade, and uninstall after deleting the plugin

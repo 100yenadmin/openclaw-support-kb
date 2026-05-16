@@ -2,11 +2,16 @@
 type: composio_doc
 title: "LangGraph"
 source: "https://docs.composio.dev/docs/providers/langgraph.md"
-source_hash: "a88779c6677741ea52f4300807903e574eb6b0b033ff54d3bfa9c7146d12f2d9"
+source_hash: "c185921efd9662b7e97f7ffcc26a9a7d323a5ff85fced95cc34da7297bf6326b"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/langgraph.md"
 original_doc_path: "providers/langgraph.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # LangGraph (/docs/providers/langgraph)
 Source: https://docs.composio.dev/docs/providers/langgraph.md

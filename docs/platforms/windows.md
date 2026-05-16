@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Windows"
 source: "https://docs.openclaw.ai/platforms/windows"
-source_hash: "24a4ccbcf798baf408ee00fabed7c8da93b987cf9eb27da0d66ea800552fa751"
+source_hash: "2822811cae62f358251743c0d54c613f4e841f536fc1d36f0b20ea350fd2e5da"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/windows.md"
 original_doc_path: "platforms/windows.md"
 duplicate_index: 1

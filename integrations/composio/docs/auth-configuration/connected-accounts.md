@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/docs/auth-configuration/connected-accounts.md"
-source_hash: "6a6337f4ebcb19a12ff6f78ab2c6fec61c6329de4ceb502d05255edd79368149"
+source_hash: "6eb574ca25a82aa4f88d17cebbac8911bff36d6ee651a7fb8f73a9ede5bdd8e9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "auth-configuration/connected-accounts.md"
 original_doc_path: "auth-configuration/connected-accounts.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Connected Accounts (/docs/auth-configuration/connected-accounts)
 Source: https://docs.composio.dev/docs/auth-configuration/connected-accounts.md

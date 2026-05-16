@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "15298c325f2cfcc8426899e0686782217d6ff7ad50746e40ce61008b51b94ba0"
+source_hash: "df36b69712b666f53169809ee440230cdb318703c376b955eefa8c3ea8c4ff40"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
 original_doc_path: "providers/anthropic.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Anthropic (/docs/providers/anthropic)
 Source: https://docs.composio.dev/docs/providers/anthropic.md
@@ -139,6 +144,42 @@ for (const block of response.content) {
         console.log(block.text);
     }
 }
+```
+# Multi-turn chat
+
+For multi-turn apps, create the session once and reuse it across requests with `composio.use()`:
+
+**Python:**
+
+```python
+from composio import Composio
+
+composio = Composio()
+
+# First request — create and store the session ID
+session = composio.create(user_id="user_123")
+session_id = session.session_id
+# store session_id in your database or chat state
+
+# Subsequent requests — reuse the session
+session = composio.use(session_id)
+tools = session.tools()
+```
+**TypeScript:**
+
+```typescript
+// @noErrors
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+// ---cut---
+// First request — create and store the session ID
+const session = await composio.create("user_123");
+const sessionId = session.sessionId;
+// store sessionId in your database or chat state
+
+// Subsequent requests — reuse the session
+const session = await composio.use(sessionId);
+const tools = await session.tools();
 ```
 
 ---

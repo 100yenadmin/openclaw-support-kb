@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "7141363cc2858bf8c97e5db0ea7c11c705774ce3a5b2aaa0a08a6cafbb668fbe"
+source_hash: "e2a21249347ad6f578917aa50b6f6cd96680dc82554c5e9642525cf94379b92c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/dependency-resolution.md"
 original_doc_path: "plugins/dependency-resolution.md"
 duplicate_index: 1
@@ -46,7 +48,8 @@ OpenClaw uses stable per-source roots:
 npm installs run in the npm root with:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-npm install --prefix ~/.openclaw/npm <spec> --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund
+cd ~/.openclaw/npm
+npm install --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund
 ```
 
 `openclaw plugins install npm-pack:<path.tgz>` uses that same managed npm root

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "When to use your own developer credentials"
 source: "https://docs.composio.dev/docs/custom-app-vs-managed-app.md"
-source_hash: "f57dbdc83dc0548187f9a5d02b53a669e3f2e96954d1fd6363d07ad07872a62e"
+source_hash: "190e040ddbaf1026fa387faff4fec1196603cceca85868d6c2a239881c1f5083"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "custom-app-vs-managed-app.md"
 original_doc_path: "custom-app-vs-managed-app.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # When to use your own developer credentials (/docs/custom-app-vs-managed-app)
 Source: https://docs.composio.dev/docs/custom-app-vs-managed-app.md

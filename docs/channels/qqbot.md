@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "d3789a591bce947098c071e41ce2b7bf7ef6705d22eaa471bf57456e9db821e7"
+source_hash: "bb50d067fc6a34255d46254ce33743ad9c78570a4f3e5c8649527549c18012d8"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
 original_doc_path: "channels/qqbot.md"
 duplicate_index: 1

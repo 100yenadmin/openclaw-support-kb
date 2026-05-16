@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "860ad89ad4e397c4b7a20f1d5fb0ceb148b45c97423545f70087f01c046ea6dc"
+source_hash: "07454d33bccd64a39ae735d72f649e73aee2f335f4b6478033db0c1e99316681"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
 original_doc_path: "gateway/configuration-examples.md"
 duplicate_index: 1
@@ -21,7 +23,7 @@ Examples below are aligned with the current config schema. For the exhaustive re
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  agent: { workspace: "~/.openclaw/workspace" },
+  agents: { defaults: { workspace: "~/.openclaw/workspace" } },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } },
 }
 ```
@@ -32,14 +34,21 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  identity: {
-    name: "Clawd",
-    theme: "helpful assistant",
-    emoji: "🦞",
-  },
-  agent: {
-    workspace: "~/.openclaw/workspace",
-    model: { primary: "anthropic/claude-sonnet-4-6" },
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      model: { primary: "anthropic/claude-sonnet-4-6" },
+    },
+    list: [
+      {
+        id: "main",
+        identity: {
+          name: "Clawd",
+          theme: "helpful assistant",
+          emoji: "🦞",
+        },
+      },
+    ],
   },
   channels: {
     whatsapp: {
@@ -89,12 +98,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
     },
   },
 
-  // Identity
-  identity: {
-    name: "Samantha",
-    theme: "helpful sloth",
-    emoji: "🦥",
-  },
+  // Identity is per agent — set it on agents.list[].identity below.
 
   // Logging
   logging: {
@@ -117,18 +121,18 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
       visibleReplies: "message_tool", // normal final replies stay private in groups/channels
     },
     queue: {
-      mode: "steer",
+      mode: "followup",
       debounceMs: 500,
       cap: 20,
       drop: "summarize",
       byChannel: {
-        whatsapp: "steer",
-        telegram: "steer",
-        discord: "steer",
-        slack: "steer",
-        signal: "steer",
-        imessage: "steer",
-        webchat: "steer",
+        whatsapp: "followup",
+        telegram: "followup",
+        discord: "collect",
+        slack: "collect",
+        signal: "followup",
+        imessage: "followup",
+        webchat: "followup",
       },
     },
   },
@@ -313,6 +317,11 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
       {
         id: "main",
         default: true,
+        identity: {
+          name: "Samantha",
+          theme: "helpful sloth",
+          emoji: "🦥",
+        },
         // inherits defaults.skills -> github, weather
         groupChat: {
           mentionPatterns: ["@openclaw", "openclaw"],
@@ -453,10 +462,12 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
     allowBundled: ["gemini", "peekaboo"],
     load: {
       extraDirs: ["~/Projects/agent-scripts/skills"],
+      allowSymlinkTargets: ["~/Projects/agent-scripts/skills"],
     },
     install: {
       preferBrew: true,
       nodeManager: "npm", // npm | pnpm | yarn | bun
+      allowUploadedArchives: false,
     },
     entries: {
       "image-lab": {
@@ -469,6 +480,26 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
   },
 }
 ```
+
+### Symlinked sibling skill repo
+
+Use this when a built-in skill root contains a symlink into a sibling repo, for
+example `~/.agents/skills/manager -> ~/Projects/manager/skills`.
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  skills: {
+    load: {
+      extraDirs: ["~/Projects/manager/skills"],
+      allowSymlinkTargets: ["~/Projects/manager/skills"],
+    },
+  },
+}
+```
+
+* `extraDirs` scans the sibling repo as an explicit skill root.
+* `allowSymlinkTargets` lets symlinked skill folders resolve into that trusted
+  real target root without allowing arbitrary symlink escapes.
 
 ## Common patterns
 
@@ -497,7 +528,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  agent: { workspace: "~/.openclaw/workspace" },
+  agents: { defaults: { workspace: "~/.openclaw/workspace" } },
   channels: {
     whatsapp: { allowFrom: ["+15555550123"] },
     telegram: {
@@ -589,11 +620,13 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
       },
     },
   },
-  agent: {
-    workspace: "~/.openclaw/workspace",
-    model: {
-      primary: "anthropic/claude-opus-4-6",
-      fallbacks: ["minimax/MiniMax-M2.7"],
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      model: {
+        primary: "anthropic/claude-opus-4-6",
+        fallbacks: ["minimax/MiniMax-M2.7"],
+      },
     },
   },
 }
@@ -603,13 +636,20 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  identity: {
-    name: "WorkBot",
-    theme: "professional assistant",
-  },
-  agent: {
-    workspace: "~/work-openclaw",
-    elevated: { enabled: false },
+  agents: {
+    defaults: {
+      workspace: "~/work-openclaw",
+      elevatedDefault: "off",
+    },
+    list: [
+      {
+        id: "main",
+        identity: {
+          name: "WorkBot",
+          theme: "professional assistant",
+        },
+      },
+    ],
   },
   channels: {
     slack: {
@@ -628,9 +668,11 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  agent: {
-    workspace: "~/.openclaw/workspace",
-    model: { primary: "lmstudio/my-local-model" },
+  agents: {
+    defaults: {
+      workspace: "~/.openclaw/workspace",
+      model: { primary: "lmstudio/my-local-model" },
+    },
   },
   models: {
     mode: "merge",

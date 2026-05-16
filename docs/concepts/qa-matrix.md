@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Matrix QA"
 source: "https://docs.openclaw.ai/concepts/qa-matrix"
-source_hash: "2ec6711c1393ef6b4f271207ee41bdc2d0b5bf2c8d694ecff89c74d77b325054"
+source_hash: "3a2ffa274fd5d8f863ba0c3065e267ad7d9a8aa3797115fe7b4a0812d1ea5722"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/qa-matrix.md"
 original_doc_path: "concepts/qa-matrix.md"
 duplicate_index: 1

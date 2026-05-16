@@ -2,11 +2,16 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "69fc838eb5de956a8b2526a1f48769074022f5cba2ea9465a589d9bf78355e3e"
+source_hash: "2ec649e8e077c5f90ece8f3442498594dd03cf3d91d5d0da4b1ddbab9f09ec8c"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
 original_doc_path: "providers/llamaindex.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # LlamaIndex (/docs/providers/llamaindex)
 Source: https://docs.composio.dev/docs/providers/llamaindex.md

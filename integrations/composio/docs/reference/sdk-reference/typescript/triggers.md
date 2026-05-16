@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md"
-source_hash: "08897ffc6d0febfe3e70583d816f0c2ac3afd9f4e77e7a58cdd7776a65867195"
+source_hash: "35754a6e02a6f3c4b719ba13e5d254e756f63da9e8fb259aa0b42e4d421db73f"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/triggers.md"
 original_doc_path: "reference/sdk-reference/typescript/triggers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Triggers (/reference/sdk-reference/typescript/triggers)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md

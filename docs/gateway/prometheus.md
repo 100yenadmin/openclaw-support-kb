@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Prometheus metrics"
 source: "https://docs.openclaw.ai/gateway/prometheus"
-source_hash: "26bc73d1ae954f756bc75097a80b28ceb204d1e8482860fbf5c1c616ca5865b1"
+source_hash: "b6b418ac7a1ddd4bc6d511608af9dc36ae5538277302b5ef40ce9aa48878012b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/prometheus.md"
 original_doc_path: "gateway/prometheus.md"
 duplicate_index: 1

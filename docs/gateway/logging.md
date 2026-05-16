@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "d1ed164fa113355093bb73636a7d9964ab9aa98d708d64b93dcbd3c644a7b576"
+source_hash: "10497f9a6448ef96392fea713041c0ec301eb1a4e459d9dab679e7919f83a638"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
 original_doc_path: "gateway/logging.md"
 duplicate_index: 1

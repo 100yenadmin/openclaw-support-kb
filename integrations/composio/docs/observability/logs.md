@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tool execution logs"
 source: "https://docs.composio.dev/docs/observability/logs.md"
-source_hash: "bd43be512820136bbf85c8ec25f82aae9f061c310992e5a958efb0f375674efc"
+source_hash: "dd42d0bf7ac199fcba45cd3885970f01e700a1374fbee824c47a0c06b8106fb2"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "observability/logs.md"
 original_doc_path: "observability/logs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tool execution logs (/docs/observability/logs)
 Source: https://docs.composio.dev/docs/observability/logs.md

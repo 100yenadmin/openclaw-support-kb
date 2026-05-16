@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "6805498d7089196d397b6b915e18c9e5e529379ac0af4785f62482452e4c4171"
+source_hash: "373167546ffc498357f7eb84a4a72bbcdb3377bbf7fcd80bd9d1d1fd34df0111"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/typebox.md"
 original_doc_path: "concepts/typebox.md"
 duplicate_index: 1
@@ -102,7 +104,7 @@ Connect (first message):
   "id": "c1",
   "method": "connect",
   "params": {
-    "minProtocol": 4,
+    "minProtocol": 3,
     "maxProtocol": 4,
     "client": {
       "id": "openclaw-macos",
@@ -274,14 +276,15 @@ The Swift generator emits:
 
 * `GatewayFrame` enum with `req`, `res`, `event`, and `unknown` cases
 * Strongly typed payload structs/enums
-* `ErrorCode` values and `GATEWAY_PROTOCOL_VERSION`
+* `ErrorCode` values, `GATEWAY_PROTOCOL_VERSION`, and `GATEWAY_MIN_PROTOCOL_VERSION`
 
 Unknown frame types are preserved as raw payloads for forward compatibility.
 
 ## Versioning + compatibility
 
 * `PROTOCOL_VERSION` lives in `src/gateway/protocol/version.ts`.
-* Clients send `minProtocol` + `maxProtocol`; the server rejects mismatches.
+* Clients send `minProtocol` + `maxProtocol`; the server rejects ranges that
+  do not include its current protocol.
 * The Swift models keep unknown frame types to avoid breaking older clients.
 
 ## Schema patterns and conventions

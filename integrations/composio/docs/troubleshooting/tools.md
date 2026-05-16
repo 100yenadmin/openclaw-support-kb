@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tools & Toolkits"
 source: "https://docs.composio.dev/docs/troubleshooting/tools.md"
-source_hash: "5556c7b79f395e06385d1a8dffd279fb3bdd97382e613ac5008616e40cca5dd6"
+source_hash: "d4fdb5f721d86a0249e104c75eed3b89d9cde3cbf035053817d8a62b30c8dccd"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/tools.md"
 original_doc_path: "troubleshooting/tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tools & Toolkits (/docs/troubleshooting/tools)
 Source: https://docs.composio.dev/docs/troubleshooting/tools.md

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Build an App Connections Dashboard"
 source: "https://docs.composio.dev/cookbooks/app-connections-dashboard.md"
-source_hash: "a79bd956c2ca01432df58432bafe5dc661d90b93b2dcc44b666b2008093923c0"
+source_hash: "452806f9edce738788cf90d1b1bade224b165be7c50d4cb638d6fafc610b946c"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/app-connections-dashboard.md"
 original_doc_path: "cookbooks/app-connections-dashboard.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Build an App Connections Dashboard (/cookbooks/app-connections-dashboard)
 Source: https://docs.composio.dev/cookbooks/app-connections-dashboard.md
@@ -138,7 +143,7 @@ type Toolkit = {
 export default function Dashboard() {
   const [toolkits, setToolkits] = useState
               )}
-              
+
                 <p className="font-medium">{t.name}</p>
                 <p
                   className={`text-xs ${
@@ -147,8 +152,8 @@ export default function Dashboard() {
                 >
                   {t.isConnected ? "Connected" : "Not connected"}
                 </p>
-              
-            
+
+
             {t.isConnected ? (
               <button
                 onClick={() => disconnect(t.connectedAccountId!)}
@@ -164,9 +169,9 @@ export default function Dashboard() {
                 Connect
               </button>
             )}
-          
+
         ))}
-      
+
     </main>
   );
 }
@@ -235,10 +240,10 @@ Open [localhost:3000](http://localhost:3000). You'll see all available apps with
 
 # Take it further
 
-- [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts): 
+- [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts):
 Let users connect multiple accounts for the same toolkit
 
-- [Connected accounts](/docs/auth-configuration/connected-accounts): 
+- [Connected accounts](/docs/auth-configuration/connected-accounts):
 List, refresh, disable, and delete user connections
 
 ---

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "b591f5caf414c19dc3c0b85f8ea486fbb45f9d10e18b00c8a2e1d3bde0059c44"
+source_hash: "53c6822dad163fd3ab7d7bded60875ed89f2333029679cd8500a5dae817afbe5"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
 original_doc_path: "plugins/codex-computer-use.md"
 duplicate_index: 1
@@ -100,9 +102,6 @@ Computer Use available before a thread starts:
   agents: {
     defaults: {
       model: "openai/gpt-5.5",
-      agentRuntime: {
-        id: "codex",
-      },
     },
   },
 }
@@ -118,9 +117,8 @@ register the bundled Codex marketplace from
 fails. If setup still cannot make the MCP server available, the turn fails
 before the thread starts.
 
-Existing sessions keep their runtime and Codex thread binding. After changing
-`agentRuntime` or Computer Use config, use `/new` or `/reset` in the affected
-chat before testing.
+After changing Computer Use config, use `/new` or `/reset` in the affected chat
+before testing if an existing Codex thread has already started.
 
 ## Commands
 

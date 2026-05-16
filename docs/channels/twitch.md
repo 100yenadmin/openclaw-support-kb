@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Twitch"
 source: "https://docs.openclaw.ai/channels/twitch"
-source_hash: "6e7075d68b2e60cb9bfd43caa46bbac6ea96d5873e51858260c3a187fb96065a"
+source_hash: "7574ece7dbac3132de1fc8c3f36ce1a29367639ff6b5508a61812d726ba1950d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/twitch.md"
 original_doc_path: "channels/twitch.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "117f5ec2fd1b9a504e4169710c70f6d3e7540da3e53eacb853674a625b5e2b0c"
+source_hash: "590d67b2c10899879b0c20a6d9e295a8856eea1e5b0c74701ccf18c0e5965621"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/status.md"
 original_doc_path: "cli/status.md"
 duplicate_index: 1
@@ -38,6 +40,8 @@ Notes:
 * Overview includes Gateway + node host service install/runtime status when available.
 * Overview includes update channel + git SHA (for source checkouts).
 * Update info surfaces in the Overview; if an update is available, status prints a hint to run `openclaw update` (see [Updating](/install/updating)).
+* Model pricing refresh failures are shown as optional pricing warnings. They do
+  not mean the Gateway or channels are unhealthy.
 * Read-only status surfaces (`status`, `status --json`, `status --all`) resolve supported SecretRefs for their targeted config paths when possible.
 * If a supported channel SecretRef is configured but unavailable in the current command path, status stays read-only and reports degraded output instead of crashing. Human output shows warnings such as "configured token unavailable in this command path", and JSON output includes `secretDiagnostics`.
 * When command-local SecretRef resolution succeeds, status prefers the resolved snapshot and clears transient "secret unavailable" channel markers from the final output.

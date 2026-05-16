@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
-source_hash: "47ffc3162f640adf56aef239d2f60a05890546381a8d809b5fbea55de22c2c1b"
+source_hash: "1ca85bc1534bc7dca12f2e80357a3836f1a16c6e9d36f8f2e7b7d1d9732b606c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/reactions.md"
 original_doc_path: "tools/reactions.md"
 duplicate_index: 1
@@ -54,6 +56,7 @@ tool with the `react` action. Reaction behavior varies by channel and transport.
   <Accordion title="WhatsApp">
     * Empty `emoji` removes the bot reaction.
     * `remove: true` maps to empty emoji internally (still requires `emoji` in the tool call).
+    * WhatsApp has one bot reaction slot per message; status reaction updates replace that slot rather than stacking multiple emoji.
   </Accordion>
 
   <Accordion title="Zalo Personal (zalouser)">
@@ -68,6 +71,11 @@ tool with the `react` action. Reaction behavior varies by channel and transport.
 
   <Accordion title="Signal">
     * Inbound reaction notifications are controlled by `channels.signal.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot messages, and `"all"` emits events for all reactions.
+  </Accordion>
+
+  <Accordion title="iMessage">
+    * Outbound reactions are iMessage tapbacks (`love`, `like`, `dislike`, `laugh`, `emphasize`, and `question`).
+    * Inbound tapback notifications are controlled by `channels.imessage.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot-authored messages, and `"all"` emits events for all tapbacks from authorized senders.
   </Accordion>
 </AccordionGroup>
 

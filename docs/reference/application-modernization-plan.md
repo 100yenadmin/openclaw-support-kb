@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Application modernization plan"
 source: "https://docs.openclaw.ai/reference/application-modernization-plan"
-source_hash: "31d419b5e8c7242a0baa8ed736cd3ba3588b4fbb374f99f8ce8882cbb77e0161"
+source_hash: "8dca0f0ee0bd6c7addf5ce57661c4bddf55d7689948706f998e006d60b3e804a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/application-modernization-plan.md"
 original_doc_path: "reference/application-modernization-plan.md"
 duplicate_index: 1

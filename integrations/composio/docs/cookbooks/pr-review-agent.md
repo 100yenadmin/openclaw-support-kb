@@ -2,11 +2,16 @@
 type: composio_doc
 title: "PR review agent"
 source: "https://docs.composio.dev/cookbooks/pr-review-agent.md"
-source_hash: "66d42def77b32d48f19526db6863e785ddfa0a2ff08f4584c85b4e6e1f18853c"
+source_hash: "cc71f4422d4ef20b5a216b5a7edb51ad9b9fcef064aad2ab92f6f70cf7cdf82b"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/pr-review-agent.md"
 original_doc_path: "cookbooks/pr-review-agent.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # PR review agent (/cookbooks/pr-review-agent)
 Source: https://docs.composio.dev/cookbooks/pr-review-agent.md
@@ -239,13 +244,13 @@ Composio handles OAuth, tool discovery, and API execution. You don't write any G
 
 # Take it further
 
-- [Build a Chat App](/cookbooks/chat-app): 
+- [Build a Chat App](/cookbooks/chat-app):
 Build a full chat interface with tool calling
 
-- [Configuring sessions](/docs/configuring-sessions): 
+- [Configuring sessions](/docs/configuring-sessions):
 Lock down which toolkits and tools your agent can access
 
-- [Authenticating users](/docs/authenticating-users/manually-authenticating): 
+- [Authenticating users](/docs/authenticating-users/manually-authenticating):
 Authenticate users ahead of time during onboarding
 
 ---

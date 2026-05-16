@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "cc3b455eff157f2855af93128bfce540af3966d0dfb7499af0b5bbc38e9a834f"
+source_hash: "0a647f02d138f012bf7b78ffe5525ef1c40b2c50432fe2635d17ae5d0e7762f3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/bootstrapping.md"
 original_doc_path: "start/bootstrapping.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "GitHub Copilot"
 source: "https://docs.openclaw.ai/providers/github-copilot"
-source_hash: "40559f8fa0b6eacf4986ada837851e200f1595d4affd9ad47fb4cc2fa5259731"
+source_hash: "79bdc045e466aeb5231dd5ae3af11bf3b05d09ea6c68ae9e0b9a912d6de8930f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/github-copilot.md"
 original_doc_path: "providers/github-copilot.md"
 duplicate_index: 1
@@ -106,6 +108,34 @@ back to `COPILOT_GITHUB_TOKEN`, `GH_TOKEN`, then `GITHUB_TOKEN`. Use
   <Accordion title="Model availability depends on your plan">
     Copilot model availability depends on your GitHub plan. If a model is
     rejected, try another ID (for example `github-copilot/gpt-4.1`).
+  </Accordion>
+
+  <Accordion title="Live catalog refresh from the Copilot API">
+    Once the device-login (or env-var) auth path has resolved a GitHub token,
+    OpenClaw refreshes the model catalog on demand from `${baseUrl}/models`
+    (the same endpoint VS Code Copilot uses) so the runtime tracks
+    per-account entitlement and accurate context windows without manifest
+    churn. Newly published Copilot models become visible without an OpenClaw
+    upgrade, and context windows reflect the real per-model limits
+    (e.g. 400k for the gpt-5.x series, 1M for the internal
+    `claude-opus-*-1m` variants).
+
+    The bundled static catalog stays as the visible fallback when discovery
+    is disabled, the user has no GitHub auth profile, the token-exchange
+    fails, or the `/models` HTTPS call errors. To opt out and rely entirely
+    on the static manifest catalog (offline / air-gapped scenarios):
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      plugins: {
+        entries: {
+          "github-copilot": {
+            config: { discovery: { enabled: false } },
+          },
+        },
+      },
+    }
+    ```
   </Accordion>
 
   <Accordion title="Transport selection">

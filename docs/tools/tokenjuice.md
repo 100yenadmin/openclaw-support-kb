@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tokenjuice"
 source: "https://docs.openclaw.ai/tools/tokenjuice"
-source_hash: "62ed21cfcb9367ba06dfc0dab4700fb6634858b8afb7efb93a23901831c187ae"
+source_hash: "e053df20b6e184d0ea6ffe104c509a7af0c72336589916019eabb43228604590"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/tokenjuice.md"
 original_doc_path: "tools/tokenjuice.md"
 duplicate_index: 1

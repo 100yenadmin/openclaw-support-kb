@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "7d632e1f90893479884b7c722a951b27df34195ee2e1c9e6fe42fa7210f4a653"
+source_hash: "4e9e9ab34d3d90bb8464c7c853f144569549811b6bfe4ff47502ed488db75ebd"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
 original_doc_path: "gateway/doctor.md"
 duplicate_index: 1
@@ -92,7 +94,7 @@ cat ~/.openclaw/openclaw.json
     * Legacy on-disk state migration (sessions/agent dir/WhatsApp auth).
     * Legacy plugin manifest contract key migration (`speechProviders`, `realtimeTranscriptionProviders`, `realtimeVoiceProviders`, `mediaUnderstandingProviders`, `imageGenerationProviders`, `videoGenerationProviders`, `webFetchProviders`, `webSearchProviders` → `contracts`).
     * Legacy cron store migration (`jobId`, `schedule.cron`, top-level delivery/payload fields, payload `provider`, simple `notify: true` webhook fallback jobs).
-    * Legacy agent runtime-policy migration to `agents.defaults.agentRuntime` and `agents.list[].agentRuntime`.
+    * Legacy whole-agent runtime-policy cleanup; provider/model runtime policy is the active route selector.
     * Stale plugin config cleanup when plugins are enabled; when `plugins.enabled=false`, stale plugin references are treated as inert containment config and are preserved.
   </Accordion>
 
@@ -114,7 +116,7 @@ cat ~/.openclaw/openclaw.json
     * Channel status warnings (probed from the running gateway).
     * Channel-specific permission checks live under `openclaw channels capabilities`; for example, Discord voice channel permissions are audited with `openclaw channels capabilities --channel discord --target channel:<channel-id>`.
     * WhatsApp responsiveness checks for degraded Gateway event-loop health with local TUI clients still running; `--fix` stops only verified local TUI clients.
-    * Codex route repair for legacy `openai-codex/*` model refs in primary models, fallbacks, heartbeat/subagent/compaction overrides, hooks, channel model overrides, and session route pins; `--fix` rewrites them to `openai/*` and selects `agentRuntime.id: "codex"` only when the Codex plugin is installed, enabled, contributes the `codex` harness, and has usable OAuth. Otherwise it selects `agentRuntime.id: "pi"`.
+    * Codex route repair for legacy `openai-codex/*` model refs in primary models, fallbacks, heartbeat/subagent/compaction overrides, hooks, channel model overrides, and session route pins; `--fix` rewrites them to `openai/*`, removes stale session/whole-agent runtime pins, and leaves canonical OpenAI agent refs on the default Codex harness.
     * Supervisor config audit (launchd/systemd/schtasks) with optional repair.
     * Embedded proxy environment cleanup for gateway services that captured shell `HTTP_PROXY` / `HTTPS_PROXY` / `NO_PROXY` values during install or update.
     * Gateway runtime best-practice checks (Node vs Bun, version-manager paths).
@@ -223,11 +225,12 @@ That stages grounded durable candidates into the short-term dreaming store while
     * `identity` → `agents.list[].identity`
     * `agent.*` → `agents.defaults` + `tools.*` (tools/elevated/exec/sandbox/subagents)
     * `agent.model`/`allowedModels`/`modelAliases`/`modelFallbacks`/`imageModelFallbacks` → `agents.defaults.models` + `agents.defaults.model.primary/fallbacks` + `agents.defaults.imageModel.primary/fallbacks`
-    * remove `agents.defaults.llm`; use `models.providers.<id>.timeoutSeconds` for slow provider/model timeouts
+    * remove `agents.defaults.llm`; use `models.providers.<id>.timeoutSeconds` for slow provider/model timeouts, and keep the agent/run timeout above that value when the whole run must last longer
     * `browser.ssrfPolicy.allowPrivateNetwork` → `browser.ssrfPolicy.dangerouslyAllowPrivateNetwork`
     * `browser.profiles.*.driver: "extension"` → `"existing-session"`
     * remove `browser.relayBindHost` (legacy extension relay setting)
     * legacy `models.providers.*.api: "openai"` → `"openai-completions"` (gateway startup also skips providers whose `api` is set to a future or unknown enum value rather than failing closed)
+    * remove `plugins.entries.codex.config.codexDynamicToolsProfile`; Codex app-server always keeps Codex-native workspace tools native
 
     Doctor warnings also include account-default guidance for multi-account channels:
 
@@ -236,7 +239,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   </Accordion>
 
   <Accordion title="2b. OpenCode provider overrides">
-    If you've added `models.providers.opencode`, `opencode-zen`, or `opencode-go` manually, it overrides the built-in OpenCode catalog from `@mariozechner/pi-ai`. That can force models onto the wrong API or zero out costs. Doctor warns so you can remove the override and restore per-model API routing + costs.
+    If you've added `models.providers.opencode`, `opencode-zen`, or `opencode-go` manually, it overrides the built-in OpenCode catalog from `@earendil-works/pi-ai`. That can force models onto the wrong API or zero out costs. Doctor warns so you can remove the override and restore per-model API routing + costs.
   </Accordion>
 
   <Accordion title="2c. Browser migration and Chrome MCP readiness">
@@ -277,10 +280,11 @@ That stages grounded durable candidates into the short-term dreaming store while
     In `--fix` / `--repair` mode, doctor rewrites affected default-agent and per-agent refs, including primary models, fallbacks, heartbeat/subagent/compaction overrides, hooks, channel model overrides, and stale persisted session route state:
 
     * `openai-codex/gpt-*` becomes `openai/gpt-*`.
-    * The matching agent runtime becomes `agentRuntime.id: "codex"` only when Codex is installed, enabled, contributes the `codex` harness, and has usable OAuth.
-    * Otherwise the matching agent runtime becomes `agentRuntime.id: "pi"`.
+    * Codex intent moves to provider/model-scoped `agentRuntime.id: "codex"` entries for repaired agent model refs so `openai-codex:...` auth profiles can still be selected after the model ref becomes `openai/*`.
+    * Stale whole-agent runtime config and persisted session runtime pins are removed because runtime selection is provider/model-scoped.
+    * Existing provider/model runtime policy is preserved unless the repaired legacy model ref needs Codex routing to keep the old auth path.
     * Existing model fallback lists are preserved with their legacy entries rewritten; copied per-model settings move from the legacy key to the canonical `openai/*` key.
-    * Persisted session `modelProvider`/`providerOverride`, `model`/`modelOverride`, fallback notices, auth-profile pins, and Codex harness pins are repaired across all discovered agent session stores.
+    * Persisted session `modelProvider`/`providerOverride`, `model`/`modelOverride`, fallback notices, and auth-profile pins are repaired across all discovered agent session stores.
     * `/codex ...` means "control or bind a native Codex conversation from chat."
     * `/acp ...` or `runtime: "acp"` means "use the external ACP/acpx adapter."
   </Accordion>
@@ -327,7 +331,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   </Accordion>
 
   <Accordion title="3c. Session lock cleanup">
-    Doctor scans every agent session directory for stale write-lock files — files left behind when a session exited abnormally. For each lock file found it reports: the path, PID, whether the PID is still alive, lock age, and whether it is considered stale (dead PID or older than 30 minutes). In `--fix` / `--repair` mode it removes stale lock files automatically; otherwise it prints a note and instructs you to rerun with `--fix`.
+    Doctor scans every agent session directory for stale write-lock files — files left behind when a session exited abnormally. For each lock file found it reports: the path, PID, whether the PID is still alive, lock age, and whether it is considered stale (dead PID, older than 30 minutes, or a live PID that can be proven to belong to a non-OpenClaw process). In `--fix` / `--repair` mode it removes stale lock files automatically; otherwise it prints a note and instructs you to rerun with `--fix`.
   </Accordion>
 
   <Accordion title="3d. Session transcript branch repair">
@@ -371,7 +375,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   </Accordion>
 
   <Accordion title="7b. Plugin install cleanup">
-    Doctor removes legacy OpenClaw-generated plugin dependency staging state in `openclaw doctor --fix` / `openclaw doctor --repair` mode. This covers stale generated dependency roots, old install-stage directories, package-local debris from earlier bundled-plugin dependency repair code, and orphaned or recovered managed npm copies of bundled `@openclaw/*` plugins that can shadow the current bundled manifest.
+    Doctor removes legacy OpenClaw-generated plugin dependency staging state in `openclaw doctor --fix` / `openclaw doctor --repair` mode. This covers stale generated dependency roots, old install-stage directories, package-local debris from earlier bundled-plugin dependency repair code, and orphaned or recovered managed npm copies of bundled `@openclaw/*` plugins that can shadow the current bundled manifest. Doctor also relinks the host `openclaw` package into managed npm plugins that declare `peerDependencies.openclaw`, so package-local runtime imports such as `openclaw/plugin-sdk/*` keep resolving after updates or npm repairs.
 
     Doctor can also reinstall missing downloadable plugins when config references them but the local plugin registry cannot find them. Examples include material `plugins.entries`, configured channel/provider/search settings, and configured agent runtimes. During package updates, doctor avoids running package-manager plugin repair while the core package is being swapped; run `openclaw doctor --fix` again after the update if a configured plugin still needs recovery. Gateway startup and config reload do not run package managers; plugin installs remain explicit doctor/install/update work.
   </Accordion>
@@ -510,7 +514,7 @@ That stages grounded durable candidates into the short-term dreaming store while
   <Accordion title="17. Gateway runtime best practices">
     Doctor warns when the gateway service runs on Bun or a version-managed Node path (`nvm`, `fnm`, `volta`, `asdf`, etc.). WhatsApp + Telegram channels require Node, and version-manager paths can break after upgrades because the service does not load your shell init. Doctor offers to migrate to a system Node install when available (Homebrew/apt/choco).
 
-    Newly installed or repaired macOS LaunchAgents use a canonical system PATH (`/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`) instead of copying the interactive shell PATH, so Volta, asdf, fnm, pnpm, and other version-manager directories do not change which Node child processes resolve. Linux services still keep explicit environment roots (`NVM_DIR`, `FNM_DIR`, `VOLTA_HOME`, `ASDF_DATA_DIR`, `BUN_INSTALL`, `PNPM_HOME`) and stable user-bin directories, but guessed version-manager fallback directories are only written to the service PATH when those directories exist on disk.
+    Newly installed or repaired macOS LaunchAgents use a canonical system PATH (`/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`) instead of copying the interactive shell PATH, so Homebrew-managed system binaries remain available while Volta, asdf, fnm, pnpm, and other version-manager directories do not change which Node child processes resolve. Linux services still keep explicit environment roots (`NVM_DIR`, `FNM_DIR`, `VOLTA_HOME`, `ASDF_DATA_DIR`, `BUN_INSTALL`, `PNPM_HOME`) and stable user-bin directories, but guessed version-manager fallback directories are only written to the service PATH when those directories exist on disk.
   </Accordion>
 
   <Accordion title="18. Config write + wizard metadata">

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
-source_hash: "60a0f7f0f4e993c49db5f567891a2beb1e2590e6a417bd50d72e110ca6c3d4fc"
+source_hash: "112742a0fccc72e116e73acc2de94397f5f389a0dfe2dfd5e6963824f180edfa"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/lobster.md"
 original_doc_path: "tools/lobster.md"
 duplicate_index: 1
@@ -367,6 +369,6 @@ One public example: a "second brain" CLI + Lobster pipelines that manage three M
 
 ## Related
 
-* [Automation & Tasks](/automation) - scheduling Lobster workflows
+* [Automation](/automation) - scheduling Lobster workflows
 * [Automation Overview](/automation) - all automation mechanisms
 * [Tools Overview](/tools) - all available agent tools

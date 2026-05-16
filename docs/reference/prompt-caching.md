@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Prompt caching"
 source: "https://docs.openclaw.ai/reference/prompt-caching"
-source_hash: "5940a9cde264989a9eaa7d1eb45ffee5ff4a40c323a5ef9497aee1628ab24eff"
+source_hash: "5fdc4c5a98a00fbf571abb291113d4bd986e61f01e1da54897d237541beebfd3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/prompt-caching.md"
 original_doc_path: "reference/prompt-caching.md"
 duplicate_index: 1

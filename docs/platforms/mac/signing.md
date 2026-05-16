@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "macOS signing"
 source: "https://docs.openclaw.ai/platforms/mac/signing"
-source_hash: "ab452ea10a4bbb607303da433269b9254715b87aa4ceff6b5d81b365e752c250"
+source_hash: "ba9679ff008ab917381e703ce31e9cc3d4625f38e37484803b597d7d37984f7e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/signing.md"
 original_doc_path: "platforms/mac/signing.md"
 duplicate_index: 1

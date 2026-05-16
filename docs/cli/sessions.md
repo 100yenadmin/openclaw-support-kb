@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "bf143c9d220aa88bed08c9925d0924255edbc2ae5727ae15bfc2ede2fae8aae8"
+source_hash: "ff91afc360d74ca32760abff6d7f76b0c53fdea812da1861e6bdbdca999980aa"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/sessions.md"
 original_doc_path: "cli/sessions.md"
 duplicate_index: 1

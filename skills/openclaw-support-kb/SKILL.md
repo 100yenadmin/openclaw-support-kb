@@ -8,20 +8,21 @@ description: Use for OpenClaw setup, channel configuration, update, runtime, tro
 ## Workflow
 
 1. Search local GBrain first:
-   ```bash
-   gbrain query "OpenClaw <user question>"
-   gbrain search "<exact error or config key>"
-   ```
-2. If a runbook appears, treat it as a workflow only. Run its Search Contract before answering.
-3. Ignore any result or filesystem path containing `.pre-git-`, `archive/openclaw-support-kb`, or another backup-looking support KB copy. Run `node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs` and retry exact source URL searches if that appears.
-4. Use `docs/` pages as factual source, `runbooks/` as process, and `releases/` for version context.
-5. Cite source URLs from `docs/` whenever possible. Cite a runbook only for workflow choices.
-6. If the question touches config, chain into `openclaw-config-repair`.
-7. If local results are missing or stale, run:
+```bash
+gbrain search "OpenClaw <user question> Source: https://docs.openclaw.ai" --source openclaw-support-kb
+gbrain search "OpenClaw <exact error or config key> Source: https://docs.openclaw.ai" --source openclaw-support-kb
+```
+2. If the user may mean Hermes Agent or Paperclip Mission Control, chain into `customer-kb-router` before giving commands.
+3. If a runbook appears, treat it as a workflow only. Run its Search Contract before answering.
+4. Ignore any result or filesystem path containing `.pre-git-`, `archive/openclaw-support-kb`, or another backup-looking support KB copy. Run `node ~/.gbrain/sources/openclaw-support-kb/scripts/status.mjs` and retry exact source URL searches if that appears.
+5. Use `docs/` pages as factual source, `runbooks/` as process, and `releases/` for version context.
+6. Cite source URLs from `docs/` whenever possible. Cite a runbook only for workflow choices.
+7. If the question touches config, chain into `openclaw-config-repair`.
+8. If local results are missing or stale, run:
    ```bash
    openclaw docs "<query>"
    ```
-8. If the user still needs help, chain into `openclaw-support-escalation`.
+9. If the user still needs help, chain into `openclaw-support-escalation`.
 
 ## Scenario Routing
 
@@ -32,10 +33,12 @@ description: Use for OpenClaw setup, channel configuration, update, runtime, tro
 - "Config broke / openclaw.json" -> `openclaw-config-repair`
 - "Find/install a skill" -> `openclaw-skill-discovery`
 - "Contact support" -> `openclaw-support-escalation`
+- "Hermes, Paperclip, Mission Control, or unclear system" -> `customer-kb-router`
 
 ## Answer Rules
 
 - Do not invent OpenClaw config keys or channel settings.
+- Do not apply OpenClaw config guidance to Hermes `~/.hermes/config.yaml` or Paperclip control-plane settings.
 - Mention uncertainty clearly when the KB does not contain a fact.
 - Do not cite stale support KB backups. Citations should come from current `docs/`, `runbooks/`, `releases/`, `integrations/`, `security/`, or source URLs.
 - Prefer short, actionable steps the customer can run locally.

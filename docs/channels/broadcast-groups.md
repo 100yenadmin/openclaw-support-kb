@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Broadcast groups"
 source: "https://docs.openclaw.ai/channels/broadcast-groups"
-source_hash: "1d91da53b46520e80a00d9f4a06bb8df1f7bf8092be4be29c058eaf074b4c933"
+source_hash: "5a042145e14c4a6ee44dc3875718c5a5d13fb3371db12e9be612765c4a1b7dcf"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/broadcast-groups.md"
 original_doc_path: "channels/broadcast-groups.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gateway lifecycle on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/child-process"
-source_hash: "ea9036b220af21e2ec44448aea79fa2f64467bb130d9a3ced2a34165a89943c0"
+source_hash: "5364cfd2c43206d7e6d1cb669b7b43b55fd5deaafc2d58f295c34fb4e86f3634"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/child-process.md"
 original_doc_path: "platforms/mac/child-process.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "9b407f9c51db68d079f66e566b52b4862196b1383deba73f1f48862f146ef7cf"
+source_hash: "1f067a5a270757c540d72d466a37256c7fa695420f2ec02cb78adc4819c65f04"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
 original_doc_path: "tools/creating-skills.md"
 duplicate_index: 1
@@ -118,5 +120,5 @@ The YAML frontmatter supports these fields:
 
 * [Skills reference](/tools/skills) — loading, precedence, and gating rules
 * [Skills config](/tools/skills-config) — `skills.*` config schema
-* [ClawHub](/tools/clawhub) — public skill registry
+* [ClawHub](/clawhub) — public skill registry
 * [Building Plugins](/plugins/building-plugins) — plugins can ship skills

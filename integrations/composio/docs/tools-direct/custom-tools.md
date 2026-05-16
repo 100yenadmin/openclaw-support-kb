@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Creating Custom Tools"
 source: "https://docs.composio.dev/docs/tools-direct/custom-tools.md"
-source_hash: "bca6a224ab34bc67b02e1b0b94903563ba125302d6e6bf68a1fba53219ed43fe"
+source_hash: "5cc23f9e5a5130fa6da2a0f3bf42d646fcaca10db3b7355e09c77a2b47e72b72"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-direct/custom-tools.md"
 original_doc_path: "tools-direct/custom-tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Creating Custom Tools (/docs/tools-direct/custom-tools)
 Source: https://docs.composio.dev/docs/tools-direct/custom-tools.md

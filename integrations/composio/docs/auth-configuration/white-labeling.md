@@ -2,11 +2,16 @@
 type: composio_doc
 title: "White-labeling (direct execution)"
 source: "https://docs.composio.dev/docs/auth-configuration/white-labeling.md"
-source_hash: "d8efa9318ab3ef46ec78ed0d17d610f5c2a3202b90b212b14ecf9353b7786559"
+source_hash: "e8152656a5535aea18eb43809a0cbf13cbe1f222499455387284cd947eb20688"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "auth-configuration/white-labeling.md"
 original_doc_path: "auth-configuration/white-labeling.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # White-labeling (direct execution) (/docs/auth-configuration/white-labeling)
 Source: https://docs.composio.dev/docs/auth-configuration/white-labeling.md

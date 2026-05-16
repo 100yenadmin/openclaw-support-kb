@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tool-loop detection"
 source: "https://docs.openclaw.ai/tools/loop-detection"
-source_hash: "93a8a5555e4c51739c2b3be249885a77581ab2e2d1bd538a6d7326bcb02acabd"
+source_hash: "97195a511b1353b96b6219a113586ed7c5cf5ad7c5b8500d2331d6b6a96a57b1"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/loop-detection.md"
 original_doc_path: "tools/loop-detection.md"
 duplicate_index: 1
@@ -82,10 +84,10 @@ Per-agent override (optional):
 | `enabled`                        | `false` | Master switch for the rolling-history detectors. Setting `false` also disables the post-compaction guard.                       |
 | `historySize`                    | `30`    | Number of recent tool calls kept for analysis.                                                                                  |
 | `warningThreshold`               | `10`    | Threshold before a pattern is classified as warning-only.                                                                       |
-| `criticalThreshold`              | `20`    | Threshold for blocking repetitive loop patterns.                                                                                |
+| `criticalThreshold`              | `20`    | Threshold for blocking repetitive no-progress loop patterns.                                                                    |
 | `unknownToolThreshold`           | `10`    | Block repeated calls to the same unavailable tool after this many misses.                                                       |
 | `globalCircuitBreakerThreshold`  | `30`    | Global no-progress breaker threshold across all detectors.                                                                      |
-| `detectors.genericRepeat`        | `true`  | Detects repeated same-tool + same-params patterns.                                                                              |
+| `detectors.genericRepeat`        | `true`  | Warns on repeated same-tool + same-params patterns and blocks when the same calls also return identical outcomes.               |
 | `detectors.knownPollNoProgress`  | `true`  | Detects known polling-like patterns with no state change.                                                                       |
 | `detectors.pingPong`             | `true`  | Detects alternating ping-pong patterns.                                                                                         |
 | `postCompactionGuard.windowSize` | `3`     | Number of post-compaction tool calls during which the guard stays armed and the count of identical triples that aborts the run. |

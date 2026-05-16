@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Network"
 source: "https://docs.openclaw.ai/network"
-source_hash: "c456dcdc8692983ebbb0cec44b5fa420f4ce1e1c5720b9d0f04329585e73ac55"
+source_hash: "ac4eaf5470013e9297c4c89388da9cfcb2e14e9a583f62859182bedbb4a61b56"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "network.md"
 original_doc_path: "network.md"
 duplicate_index: 1

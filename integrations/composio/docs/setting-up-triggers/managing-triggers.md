@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Managing triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md"
-source_hash: "556ddfabf64878167f6ec4fb8161634daae92f985820179fdcf1af757a8dfbc9"
+source_hash: "ffe51db6f548421ecaa01ad9e6c0375178a56e51c259221b440e388172b877e9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "setting-up-triggers/managing-triggers.md"
 original_doc_path: "setting-up-triggers/managing-triggers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Managing triggers (/docs/setting-up-triggers/managing-triggers)
 Source: https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md

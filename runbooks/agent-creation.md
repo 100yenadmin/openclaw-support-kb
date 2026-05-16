@@ -12,12 +12,12 @@ current docs and schema before changing config.
 ## Search Contract
 
 ```bash
-gbrain query "OpenClaw create new agent agents add workspace bind channel skills"
-gbrain search "Source: https://docs.openclaw.ai/cli/agents"
-gbrain search "Source: https://docs.openclaw.ai/concepts/agent-workspace"
-gbrain search "Source: https://docs.openclaw.ai/concepts/multi-agent"
-gbrain search "Source: https://docs.openclaw.ai/gateway/config-agents"
-gbrain search "Source: https://docs.openclaw.ai/tools/skills-config"
+gbrain search "OpenClaw create new agent agents add workspace bind channel skills" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/cli/agents" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/concepts/agent-workspace" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/concepts/multi-agent" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/gateway/config-agents" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/tools/skills-config" --source openclaw-support-kb
 ```
 
 ## Guided Workflow

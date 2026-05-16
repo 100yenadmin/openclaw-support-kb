@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "e8e67bf71c53eebfe4cb42fc4078ace888cfd3b2467109c7e0879db9e484ca1e"
+source_hash: "3877f03c5498718f23cc884f149e7b1a2f782d867897b1d2f01eb02e11067102"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/lmstudio.md"
 original_doc_path: "providers/lmstudio.md"
 duplicate_index: 1
@@ -101,7 +103,7 @@ This writes `models.providers.lmstudio` and sets the default model to
 `lmstudio:default` auth profile.
 
 Interactive setup can prompt for an optional preferred load context length and applies it across the discovered LM Studio models it saves into config.
-LM Studio plugin config trusts the configured LM Studio endpoint for model requests, including loopback, LAN, and tailnet hosts. You can opt out by setting `models.providers.lmstudio.request.allowPrivateNetwork: false`.
+LM Studio plugin config trusts the configured LM Studio endpoint for model requests, including loopback, LAN, and tailnet hosts. Metadata/link-local origins still require explicit opt-in. You can opt out by setting `models.providers.lmstudio.request.allowPrivateNetwork: false`.
 
 ## Configuration
 
@@ -222,7 +224,7 @@ Use the LM Studio host's reachable address, keep `/v1`, and make sure LM Studio 
 }
 ```
 
-Unlike generic OpenAI-compatible providers, `lmstudio` automatically trusts its configured local/private endpoint for guarded model requests. Custom loopback provider IDs such as `localhost` or `127.0.0.1` are also trusted automatically; for LAN, tailnet, or private DNS custom provider IDs, set `models.providers.<id>.request.allowPrivateNetwork: true` explicitly.
+`lmstudio` automatically trusts its configured local/private endpoint for guarded model requests. Custom/local OpenAI-compatible provider entries also trust their exact configured `baseUrl` origin, except metadata/link-local origins; requests to different private ports or destinations still require `models.providers.<id>.request.allowPrivateNetwork: true`. Set `models.providers.<id>.request.allowPrivateNetwork: false` to opt out of exact-origin trust.
 
 ## Related
 

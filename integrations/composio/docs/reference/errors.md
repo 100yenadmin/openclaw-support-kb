@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/errors.md"
-source_hash: "96401950affa35423a6be22362764acea7acf5dec44d09baf5a00e714cf1e4d9"
+source_hash: "b55c2515695a1d00b61f07df9da79b88e3c1fe5830d3b03eef67fcf112191397"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/errors.md"
 original_doc_path: "reference/errors.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Errors (/reference/errors)
 Source: https://docs.composio.dev/reference/errors.md
@@ -109,16 +114,16 @@ When you hit rate limits, you'll receive a `429` status code. See [Rate Limits](
 
 When contacting support, include the `request_id` from the error response.
 
-- [Troubleshooting](/docs/troubleshooting): 
+- [Troubleshooting](/docs/troubleshooting):
 Common issues and solutions
 
-- [Discord](https://discord.com/channels/1170785031560646836/1268871288156323901): 
+- [Discord](https://discord.com/channels/1170785031560646836/1268871288156323901):
 Community support
 
-- [Email](mailto:support@composio.dev): 
+- [Email](mailto:support@composio.dev):
 Contact support team
 
-- [GitHub](https://github.com/ComposioHQ/composio/issues/new?labels=bug): 
+- [GitHub](https://github.com/ComposioHQ/composio/issues/new?labels=bug):
 Report a bug
 
 ---

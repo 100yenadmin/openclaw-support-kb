@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "b5d4d428757e354c2f5e017ff8f17a50fb8f6f068df908dd2281ff590bfe7dd4"
+source_hash: "f4341a125126b75e1d7bde070a157e1731ddc4f898400513b24a1f9a2d3ae960"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/session.md"
 original_doc_path: "concepts/session.md"
 duplicate_index: 1

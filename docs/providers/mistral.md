@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "29d138d93752ec38633cfcdcfb63fef8096b8331291099f633b3974e9b15eeb8"
+source_hash: "31f99ef753c6c190d11fbf488fba75794e6ff083f86210799f878a93a27c2a4e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
 original_doc_path: "providers/mistral.md"
 duplicate_index: 1
@@ -66,17 +68,40 @@ OpenClaw includes a bundled Mistral plugin that registers four contracts: chat c
 
 ## Built-in LLM catalog
 
+[Mistral Medium 3.5](https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04)
+is the current blended Medium model in the bundled catalog: 128B dense weights,
+text and image input, 256K context, function calling, structured output, coding,
+and adjustable reasoning through the Chat Completions API. Use
+`mistral/mistral-medium-3-5` when you want Mistral's newer unified
+agentic/coding model instead of the default `mistral/mistral-large-latest`.
+
 OpenClaw currently ships this bundled Mistral catalog:
 
 | Model ref                        | Input       | Context | Max output | Notes                                                            |
 | -------------------------------- | ----------- | ------- | ---------- | ---------------------------------------------------------------- |
 | `mistral/mistral-large-latest`   | text, image | 262,144 | 16,384     | Default model                                                    |
 | `mistral/mistral-medium-2508`    | text, image | 262,144 | 8,192      | Mistral Medium 3.1                                               |
+| `mistral/mistral-medium-3-5`     | text, image | 262,144 | 8,192      | Mistral Medium 3.5; adjustable reasoning                         |
 | `mistral/mistral-small-latest`   | text, image | 128,000 | 16,384     | Mistral Small 4; adjustable reasoning via API `reasoning_effort` |
 | `mistral/pixtral-large-latest`   | text, image | 128,000 | 32,768     | Pixtral                                                          |
 | `mistral/codestral-latest`       | text        | 256,000 | 4,096      | Coding                                                           |
 | `mistral/devstral-medium-latest` | text        | 262,144 | 32,768     | Devstral 2                                                       |
 | `mistral/magistral-small`        | text        | 128,000 | 40,000     | Reasoning-enabled                                                |
+
+After onboarding, smoke-test Medium 3.5 without starting the Gateway:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw infer model run --local \
+  --model mistral/mistral-medium-3-5 \
+  --prompt "Reply with exactly: mistral-ok" \
+  --json
+```
+
+To browse the bundled catalog row before changing config:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw models list --all --provider mistral --plain
+```
 
 ## Audio transcription (Voxtral)
 
@@ -145,8 +170,8 @@ streaming STT provider.
 ## Advanced configuration
 
 <AccordionGroup>
-  <Accordion title="Adjustable reasoning (mistral-small-latest)">
-    `mistral/mistral-small-latest` maps to Mistral Small 4 and supports [adjustable reasoning](https://docs.mistral.ai/capabilities/reasoning/adjustable) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer).
+  <Accordion title="Adjustable reasoning">
+    `mistral/mistral-small-latest` (Mistral Small 4) and `mistral/mistral-medium-3-5` support [adjustable reasoning](https://docs.mistral.ai/studio-api/conversations/reasoning/adjustable) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer). Mistral recommends `reasoning_effort="high"` for Medium 3.5 agentic and code use cases.
 
     OpenClaw maps the session **thinking** level to Mistral's API:
 
@@ -154,6 +179,33 @@ streaming STT provider.
     | -------------------------------------------------------------------- | -------------------------- |
     | **off** / **minimal**                                                | `none`                     |
     | **low** / **medium** / **high** / **xhigh** / **adaptive** / **max** | `high`                     |
+
+    <Warning>
+      Do not combine Medium 3.5 reasoning mode with `temperature: 0`. The Mistral
+      HTTP API rejects `reasoning_effort="high"` plus `temperature: 0` with a 400
+      response. Leave temperature unset so Mistral uses its default, or follow
+      the [Medium 3.5 recommended settings](https://huggingface.co/mistralai/Mistral-Medium-3.5-128B)
+      and use `temperature: 0.7` for high reasoning. For deterministic direct
+      answers, turn thinking off/minimal so OpenClaw sends
+      `reasoning_effort: "none"` before you lower temperature.
+    </Warning>
+
+    Example model-scoped config for Medium 3.5 reasoning:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      agents: {
+        defaults: {
+          model: { primary: "mistral/mistral-medium-3-5" },
+          models: {
+            "mistral/mistral-medium-3-5": {
+              params: { thinking: "high" },
+            },
+          },
+        },
+      },
+    }
+    ```
 
     <Note>
       Other bundled Mistral catalog models do not use this parameter. Keep using `magistral-*` models when you want Mistral's native reasoning-first behavior.

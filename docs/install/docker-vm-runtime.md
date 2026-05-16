@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
-source_hash: "a08de4cb1a1735f788ea129a9d7cec1cf8f80222bf82404d871bd740224d31df"
+source_hash: "6124f905184731e06cc1cd45ace88aa5bb26df015eb346a875eae0f4017bea53"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/docker-vm-runtime.md"
 original_doc_path: "install/docker-vm-runtime.md"
 duplicate_index: 1
@@ -133,6 +135,7 @@ All long-lived state must survive restarts, rebuilds, and reboots.
 | ------------------- | ------------------------------------------------------ | ---------------------- | ------------------------------------------------------------- |
 | Gateway config      | `/home/node/.openclaw/`                                | Host volume mount      | Includes `openclaw.json`, `.env`                              |
 | Model auth profiles | `/home/node/.openclaw/agents/`                         | Host volume mount      | `agents/<agentId>/agent/auth-profiles.json` (OAuth, API keys) |
+| Auth profile key    | `/home/node/.config/openclaw/`                         | Host volume mount      | Local encryption key for OAuth auth profile token material    |
 | Skill configs       | `/home/node/.openclaw/skills/`                         | Host volume mount      | Skill-level state                                             |
 | Agent workspace     | `/home/node/.openclaw/workspace/`                      | Host volume mount      | Code and agent artifacts                                      |
 | WhatsApp session    | `/home/node/.openclaw/`                                | Host volume mount      | Preserves QR login                                            |

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "SOUL.md personality guide"
 source: "https://docs.openclaw.ai/concepts/soul"
-source_hash: "d5a9365eb5f6cd193d5197f4ea09d7fd7bc0cf24f71ba68a39c7c3af46ccc09f"
+source_hash: "70e1b5da262e3a300ae2ce5ab2d161408a4e4caee3abcb39e7dfdbf7097ec44b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/soul.md"
 original_doc_path: "concepts/soul.md"
 duplicate_index: 1

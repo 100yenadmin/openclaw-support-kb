@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Observability"
 source: "https://docs.composio.dev/docs/observability.md"
-source_hash: "7ddfefaf506ede307d99782c6313043938b6facb9456c01621ce888c664121b9"
+source_hash: "b9a20e58faf366841c45c950550b28f4f439ba4fb676b4a47bf514abbce226d6"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "observability.md"
 original_doc_path: "observability.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Observability (/docs/observability)
 Source: https://docs.composio.dev/docs/observability.md

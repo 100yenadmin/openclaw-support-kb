@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Location command"
 source: "https://docs.openclaw.ai/nodes/location-command"
-source_hash: "4bfc4d988f3a08b6cb84eebefa13a9725d719b5a40e82addaa2fbe7fd4adef75"
+source_hash: "7a7d908de45ab80d2022de71601c20e566d52d318b7a48f4182a55df72799cd0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "nodes/location-command.md"
 original_doc_path: "nodes/location-command.md"
 duplicate_index: 1

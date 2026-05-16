@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Composio"
 source: "https://docs.composio.dev/reference/sdk-reference/python/composio.md"
-source_hash: "f75ac5c0db13b6db7c7fed6aae891b6a25ee4bc76eefe9d75a97d1fc90197511"
+source_hash: "dc7ad98487d83ccc11d7bb946deb098251af2084babb34e3963adb6fa7fa17fb"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/composio.md"
 original_doc_path: "reference/sdk-reference/python/composio.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Composio (/reference/sdk-reference/python/composio)
 Source: https://docs.composio.dev/reference/sdk-reference/python/composio.md

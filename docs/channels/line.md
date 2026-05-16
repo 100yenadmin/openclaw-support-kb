@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "LINE"
 source: "https://docs.openclaw.ai/channels/line"
-source_hash: "a9d606a59c18036299415e35e592368b69ee6a094f5ddbda87a1f8398a6d99f9"
+source_hash: "0a1d337d0430259ef1c1b076ce276d970b5c9ee7233b5cc7f10dc3c746028e13"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/line.md"
 original_doc_path: "channels/line.md"
 duplicate_index: 1
@@ -48,7 +50,9 @@ openclaw plugins install ./path/to/local/line-plugin
 https://gateway-host/line/webhook
 ```
 
-The gateway responds to LINE's webhook verification (GET) and inbound events (POST).
+The gateway responds to LINE's webhook verification (GET) and acknowledges signed
+inbound events (POST) immediately after signature and payload validation; agent
+processing continues asynchronously.
 If you need a custom path, set `channels.line.webhookPath` or
 `channels.line.accounts.<id>.webhookPath` and update the URL accordingly.
 
@@ -145,6 +149,7 @@ Allowlists and policies:
 * `channels.line.groupPolicy`: `allowlist | open | disabled`
 * `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups
 * Per-group overrides: `channels.line.groups.<groupId>.allowFrom`
+* Static sender access groups can be referenced from `allowFrom`, `groupAllowFrom`, and per-group `allowFrom` with `accessGroup:<name>`.
 * Runtime note: if `channels.line` is completely missing, runtime falls back to `groupPolicy="allowlist"` for group checks (even if `channels.defaults.groupPolicy` is set).
 
 LINE IDs are case-sensitive. Valid IDs look like:

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Composio"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/composio.md"
-source_hash: "baef00edb03c25ffd0abec02777a15a2e2154470d3105e6e824abf45658d4dc8"
+source_hash: "7272931bcef8b283400927ec222c5c5af31651677b7a4d6f58e5107f2b1cc1e8"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/composio.md"
 original_doc_path: "reference/sdk-reference/typescript/composio.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Composio (/reference/sdk-reference/typescript/composio)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/composio.md

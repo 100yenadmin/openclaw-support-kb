@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Inferred commitments"
 source: "https://docs.openclaw.ai/concepts/commitments"
-source_hash: "9ab89caf7f8a021dbc4c9bfd550cb244be3e38458744cf2c781b1dad9ae89b4f"
+source_hash: "133cd50c17b472b22aeea8b9059be8e91d09a15e9fc8a3443e85bbb22adaec17"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/commitments.md"
 original_doc_path: "concepts/commitments.md"
 duplicate_index: 1

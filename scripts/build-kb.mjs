@@ -9,6 +9,11 @@ import {
   COMPOSIO_TOOLKITS_URL,
   DEFAULT_MIN_GBRAIN_VERSION,
   DOCS_URL,
+  HERMES_DOCS_FULL_URL,
+  HERMES_DOCS_INDEX_URL,
+  PAPERCLIP_DOCS_INDEX_URL,
+  PAPERCLIP_REPO_URL,
+  PAPERCLIP_TREE_URL,
   RELEASES_URL,
   agentScanPolicyPage,
   composioIntegrationPolicyPage,
@@ -26,7 +31,11 @@ import {
   selectRelease,
   sha256,
   splitComposioLlmsFull,
+  splitHermesLlmsFull,
   splitLlmsFull,
+  paperclipDocBody,
+  paperclipDocsFromTree,
+  paperclipRawUrl,
   writeTextFile,
   writeSourceMarker,
 } from "./lib/openclaw-support-kb.mjs";
@@ -76,7 +85,12 @@ async function writeDocs(outDir, docsText, generatedAt) {
   await ensureCleanDir(docsDir);
   const pages = splitLlmsFull(docsText);
   const seenPaths = new Map();
+  const seenSourceHashes = new Set();
+  const writtenPages = [];
   for (const page of pages) {
+    const sourceHashKey = `${page.source}\0${page.hash}`;
+    if (seenSourceHashes.has(sourceHashKey)) continue;
+    seenSourceHashes.add(sourceHashKey);
     const duplicateIndex = (seenPaths.get(page.path) ?? 0) + 1;
     seenPaths.set(page.path, duplicateIndex);
     const parsed = path.parse(page.path);
@@ -89,11 +103,18 @@ async function writeDocs(outDir, docsText, generatedAt) {
       source: page.source,
       generatedAt,
       body: page.body,
-      extra: { doc_path: outputPath, original_doc_path: page.path, duplicate_index: duplicateIndex },
+      extra: {
+        system: "openclaw",
+        kb_namespace: "openclaw",
+        doc_path: outputPath,
+        original_doc_path: page.path,
+        duplicate_index: duplicateIndex,
+      },
     });
     await writeTextFile(filePath, content);
+    writtenPages.push({ ...page, path: outputPath });
   }
-  return pages;
+  return writtenPages;
 }
 
 async function writeReleases(outDir, releases, channel) {
@@ -124,6 +145,7 @@ async function writeSkillsIndex(outDir, readme, generatedAt) {
       source: "https://github.com/VoltAgent/awesome-openclaw-skills",
       generatedAt,
       body,
+      extra: { system: "openclaw", kb_namespace: "openclaw" },
     }),
   );
 }
@@ -139,6 +161,7 @@ async function writeSecurity(outDir, generatedAt) {
       source: "https://github.com/snyk/agent-scan",
       generatedAt,
       body,
+      extra: { system: "openclaw", kb_namespace: "openclaw" },
     }),
   );
 }
@@ -161,8 +184,14 @@ async function writeComposioDocs(outDir, docsFullText, generatedAt) {
         title: page.title,
         source: page.source,
         generatedAt,
-        body: page.body,
-        extra: { doc_path: outputPath, original_doc_path: page.path, duplicate_index: duplicateIndex },
+        body: ["Source System: Composio Integration", "Local KB namespace: composio", "", page.body].join("\n"),
+        extra: {
+          system: "composio",
+          kb_namespace: "composio",
+          doc_path: outputPath,
+          original_doc_path: page.path,
+          duplicate_index: duplicateIndex,
+        },
       }),
     );
   }
@@ -182,7 +211,8 @@ async function writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, 
       title: "Composio Documentation Index",
       source: COMPOSIO_DOCS_INDEX_URL,
       generatedAt,
-      body: composioDocsIndex,
+      body: ["# Composio Documentation Index", "", "Source System: Composio Integration", "Local KB namespace: composio", `Source: ${COMPOSIO_DOCS_INDEX_URL}`, "", composioDocsIndex].join("\n"),
+      extra: { system: "composio", kb_namespace: "composio" },
     }),
   );
   await writeTextFile(
@@ -193,7 +223,7 @@ async function writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, 
       source: COMPOSIO_TOOLKITS_URL,
       generatedAt,
       body: toolkitCatalog,
-      extra: { catalog_snapshot_sha256: sha256(toolkitCatalog) },
+      extra: { system: "composio", kb_namespace: "composio", catalog_snapshot_sha256: sha256(toolkitCatalog) },
     }),
   );
   const body = composioIntegrationPolicyPage();
@@ -206,6 +236,8 @@ async function writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, 
       generatedAt,
       body,
       extra: {
+        system: "composio",
+        kb_namespace: "composio",
         docs_full_sha256: sha256(composioDocsFull),
         docs_index_sha256: sha256(composioDocsIndex),
         toolkit_catalog_sha256: sha256(toolkitCatalog),
@@ -215,9 +247,216 @@ async function writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, 
   return composioPages;
 }
 
-async function writeManifest(outDir, { channel, generatedAt, docsText, pages, releases, minGbrainVersion, composioDocsFull, composioDocsIndex, composioToolkitsHtml, composioPages }) {
+async function writeHermesDocs(outDir, { hermesDocsIndex, hermesDocsFull }, generatedAt) {
+  const hermesDir = path.join(outDir, "systems", "hermes");
+  const docsDir = path.join(hermesDir, "docs");
+  await ensureCleanDir(hermesDir);
+  await ensureCleanDir(docsDir);
+  const pages = splitHermesLlmsFull(hermesDocsFull);
+  const seenPaths = new Map();
+  for (const page of pages) {
+    const duplicateIndex = (seenPaths.get(page.path) ?? 0) + 1;
+    seenPaths.set(page.path, duplicateIndex);
+    const parsed = path.parse(page.path);
+    const outputPath =
+      duplicateIndex === 1 ? page.path : path.join(parsed.dir, `${parsed.name}-${duplicateIndex}${parsed.ext || ".md"}`);
+    await writeTextFile(
+      path.join(docsDir, outputPath),
+      frontmatterPage({
+        type: "hermes_doc",
+        title: page.title,
+        source: page.source,
+        generatedAt,
+        body: page.body,
+        extra: {
+          system: "hermes",
+          kb_namespace: "hermes-agent",
+          doc_path: outputPath,
+          original_doc_path: page.path,
+          duplicate_index: duplicateIndex,
+        },
+      }),
+    );
+  }
+
+  await writeTextFile(
+    path.join(hermesDir, "llms-index.md"),
+    frontmatterPage({
+      type: "hermes_docs_index",
+      title: "Hermes Agent Documentation Index",
+      source: HERMES_DOCS_INDEX_URL,
+      generatedAt,
+      body: [
+        "# Hermes Agent Documentation Index",
+        "",
+        "Source System: Hermes Agent",
+        "Local KB namespace: hermes-agent",
+        `Source: ${HERMES_DOCS_INDEX_URL}`,
+        "",
+        hermesDocsIndex,
+      ].join("\n"),
+      extra: { system: "hermes", kb_namespace: "hermes-agent" },
+    }),
+  );
+  return pages;
+}
+
+async function writePaperclipDocs(outDir, { paperclipDocsIndex, paperclipTree }, generatedAt) {
+  const paperclipDir = path.join(outDir, "systems", "paperclip");
+  const docsDir = path.join(paperclipDir, "docs");
+  await ensureCleanDir(paperclipDir);
+  await ensureCleanDir(docsDir);
+
+  const docPaths = paperclipDocsFromTree(paperclipTree);
+  const docTexts = await Promise.all(docPaths.map(async (docPath) => [docPath, await fetchText(paperclipRawUrl(docPath))]));
+  const pages = [];
+  for (const [docPath, text] of docTexts) {
+    const page = paperclipDocBody({ docPath, text });
+    pages.push(page);
+    await writeTextFile(
+      path.join(docsDir, page.path),
+      frontmatterPage({
+        type: "paperclip_doc",
+        title: page.title,
+        source: page.source,
+        generatedAt,
+        body: page.body,
+        extra: {
+          system: "paperclip",
+          kb_namespace: "paperclip-mission-control",
+          doc_path: page.path,
+          original_doc_path: docPath,
+        },
+      }),
+    );
+  }
+
+  await writeTextFile(
+    path.join(paperclipDir, "llms-index.md"),
+    frontmatterPage({
+      type: "paperclip_docs_index",
+      title: "Paperclip Mission Control Documentation Index",
+      source: PAPERCLIP_DOCS_INDEX_URL,
+      generatedAt,
+      body: [
+        "# Paperclip Mission Control Documentation Index",
+        "",
+        "Source System: Paperclip Mission Control",
+        "Local KB namespace: paperclip-mission-control",
+        `Source: ${PAPERCLIP_DOCS_INDEX_URL}`,
+        `GitHub: ${PAPERCLIP_REPO_URL}`,
+        "",
+        paperclipDocsIndex,
+      ].join("\n"),
+      extra: { system: "paperclip", kb_namespace: "paperclip-mission-control" },
+    }),
+  );
+  return pages;
+}
+
+async function writeSourceCatalog(outDir, { generatedAt, counts }) {
+  const catalog = {
+    schemaVersion: 1,
+    generatedAt,
+    physicalGbrainSourceId: "openclaw-support-kb",
+    note: "This v1 repo installs as one GBrain source for backwards compatibility. Agents must use logical namespaces and source/path filters to avoid mixing OpenClaw, Hermes, Paperclip, and Composio facts.",
+    logicalSources: [
+      {
+        id: "openclaw",
+        displayName: "OpenClaw",
+        pathPrefix: "docs/",
+        pathPrefixes: ["docs/", "releases/", "runbooks/", "skills-index/", "security/", "support/"],
+        sourceSystem: "OpenClaw",
+        configSurface: "openclaw.json",
+        commandPrefix: "openclaw",
+        searchMustInclude: ["OpenClaw", "Source: https://docs.openclaw.ai"],
+        count: counts.openclawDocs + counts.openclawSupport,
+      },
+      {
+        id: "hermes-agent",
+        displayName: "Hermes Agent",
+        pathPrefix: "systems/hermes/",
+        pathPrefixes: ["systems/hermes/"],
+        sourceSystem: "Hermes Agent",
+        configSurface: "~/.hermes/config.yaml",
+        commandPrefix: "hermes",
+        searchMustInclude: ["Hermes Agent", "Local KB namespace: hermes-agent"],
+        count: counts.hermesDocs,
+      },
+      {
+        id: "paperclip-mission-control",
+        displayName: "Paperclip Mission Control",
+        pathPrefix: "systems/paperclip/",
+        pathPrefixes: ["systems/paperclip/"],
+        sourceSystem: "Paperclip Mission Control",
+        configSurface: "Paperclip database/env/deploy configuration",
+        commandPrefix: "npx paperclipai",
+        searchMustInclude: ["Paperclip Mission Control", "Local KB namespace: paperclip-mission-control"],
+        count: counts.paperclipDocs,
+      },
+      {
+        id: "composio",
+        displayName: "Composio Integrations",
+        pathPrefix: "integrations/composio/",
+        pathPrefixes: ["integrations/composio/"],
+        sourceSystem: "Composio Integration",
+        configSurface: "OpenClaw MCP/integration config",
+        commandPrefix: "openclaw mcp",
+        searchMustInclude: ["Composio", "Source: https://docs.composio.dev"],
+        count: counts.composioDocs,
+      },
+    ],
+  };
+
+  await writeTextFile(path.join(outDir, "kb-sources.json"), JSON.stringify(catalog, null, 2) + "\n");
+  await writeTextFile(
+    path.join(outDir, "systems", "README.md"),
+    frontmatterPage({
+      type: "customer_kb_source_catalog",
+      title: "Customer KB Source Routing",
+      source: "kb-sources.json",
+      generatedAt,
+      body: [
+        "# Customer KB Source Routing",
+        "",
+        "This repository is installed as the GBrain source `openclaw-support-kb` for backwards compatibility, then divided into logical system namespaces.",
+        "",
+        "- OpenClaw facts live under `docs/`, `releases/`, `runbooks/`, `skills-index/`, `security/`, and `support/`.",
+        "- Hermes Agent facts live under `systems/hermes/`.",
+        "- Paperclip Mission Control facts live under `systems/paperclip/`.",
+        "- Composio integration facts live under `integrations/composio/`.",
+        "",
+        "Agents must identify the target system before using setup, config, repair, or install instructions. When one runtime is fixing another, search the target system first and the acting runtime second.",
+        "",
+      ].join("\n"),
+      extra: { system: "customer-kb", kb_namespace: "source-router" },
+    }),
+  );
+}
+
+async function writeManifest(
+  outDir,
+  {
+    channel,
+    generatedAt,
+    docsText,
+    pages,
+    releases,
+    minGbrainVersion,
+    composioDocsFull,
+    composioDocsIndex,
+    composioToolkitsHtml,
+    composioPages,
+    hermesDocsFull,
+    hermesDocsIndex,
+    hermesPages,
+    paperclipDocsIndex,
+    paperclipPages,
+  },
+) {
   const selected = selectRelease(releases, channel);
   const toolkitCatalog = composioToolkitCatalogPage(composioToolkitsHtml);
+  const paperclipDocsCombinedHash = sha256(paperclipPages.map((page) => `${page.source}\n${page.body}`).join("\n---\n"));
   const manifest = {
     schemaVersion: 1,
     channel,
@@ -227,10 +466,20 @@ async function writeManifest(outDir, { channel, generatedAt, docsText, pages, re
     composioDocsSha256: sha256(composioDocsFull),
     composioDocsIndexSha256: sha256(composioDocsIndex),
     composioToolkitsSha256: sha256(toolkitCatalog),
+    hermesDocsSha256: sha256(hermesDocsFull),
+    hermesDocsIndexSha256: sha256(hermesDocsIndex),
+    paperclipDocsIndexSha256: sha256(paperclipDocsIndex),
+    paperclipDocsSha256: paperclipDocsCombinedHash,
     artifactSha256: await artifactSha256(outDir),
-    sourceCount: pages.length + composioPages.length + 3,
+    sourceCount: pages.length + composioPages.length + hermesPages.length + paperclipPages.length + 8,
+    logicalSources: {
+      openclaw: pages.length,
+      composio: composioPages.length,
+      hermes: hermesPages.length,
+      paperclip: paperclipPages.length,
+    },
     minGbrainVersion,
-    notes: "Local-first OpenClaw support KB for GBrain. Includes OpenClaw docs plus Composio docs/toolkit catalog for approved app integrations.",
+    notes: "Local-first customer KB for GBrain. Installs as openclaw-support-kb for compatibility, with logical namespaces for OpenClaw, Hermes Agent, Paperclip Mission Control, and Composio integrations.",
   };
   await writeTextFile(path.join(outDir, "kb-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
   return manifest;
@@ -246,7 +495,19 @@ async function main() {
   if (path.resolve(outDir) !== repoRoot) await writeSourceMarker(outDir);
   await copyStaticMarkdown(outDir);
 
-  const [docsText, rawReleases, skillsReadme, agentScanReadme, composioDocsIndex, composioDocsFull, composioToolkitsHtml] = await Promise.all([
+  const [
+    docsText,
+    rawReleases,
+    skillsReadme,
+    agentScanReadme,
+    composioDocsIndex,
+    composioDocsFull,
+    composioToolkitsHtml,
+    hermesDocsIndex,
+    hermesDocsFull,
+    paperclipDocsIndex,
+    paperclipTree,
+  ] = await Promise.all([
     fetchText(DOCS_URL),
     fetchJson(RELEASES_URL),
     fetchText(AWESOME_SKILLS_URL),
@@ -254,6 +515,10 @@ async function main() {
     fetchText(COMPOSIO_DOCS_INDEX_URL),
     fetchText(COMPOSIO_DOCS_FULL_URL),
     fetchText(COMPOSIO_TOOLKITS_URL),
+    fetchText(HERMES_DOCS_INDEX_URL),
+    fetchText(HERMES_DOCS_FULL_URL),
+    fetchText(PAPERCLIP_DOCS_INDEX_URL),
+    fetchJson(PAPERCLIP_TREE_URL),
   ]);
   const releases = sanitizeReleases(rawReleases);
 
@@ -262,6 +527,19 @@ async function main() {
   await writeSkillsIndex(outDir, skillsReadme, generatedAt);
   await writeSecurity(outDir, generatedAt);
   const composioPages = await writeIntegrations(outDir, { composioDocsIndex, composioDocsFull, composioToolkitsHtml }, generatedAt);
+  await ensureCleanDir(path.join(outDir, "systems"));
+  const hermesPages = await writeHermesDocs(outDir, { hermesDocsIndex, hermesDocsFull }, generatedAt);
+  const paperclipPages = await writePaperclipDocs(outDir, { paperclipDocsIndex, paperclipTree }, generatedAt);
+  await writeSourceCatalog(outDir, {
+    generatedAt,
+    counts: {
+      openclawDocs: pages.length,
+      openclawSupport: 8,
+      composioDocs: composioPages.length,
+      hermesDocs: hermesPages.length,
+      paperclipDocs: paperclipPages.length,
+    },
+  });
   const manifest = await writeManifest(outDir, {
     channel: options.channel,
     generatedAt,
@@ -273,6 +551,11 @@ async function main() {
     composioDocsIndex,
     composioToolkitsHtml,
     composioPages,
+    hermesDocsFull,
+    hermesDocsIndex,
+    hermesPages,
+    paperclipDocsIndex,
+    paperclipPages,
   });
 
   console.log(

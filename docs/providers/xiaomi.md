@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "0b5c0d02b39a1f7185326547ba81c65627bc524b434751532f60a6b12e4b84a2"
+source_hash: "bea8a5fe68b1080068ee76d539d6a230b767af7def1818b76b841f4fb87f4370"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
 original_doc_path: "providers/xiaomi.md"
 duplicate_index: 1

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Schema Modifiers"
 source: "https://docs.composio.dev/docs/tools-direct/modify-tool-behavior/schema-modifiers.md"
-source_hash: "725e07632686f415f2bbfe8e0e73a5c2f3ba11b7547920ad24c1654bb6a6c765"
+source_hash: "40834289221505e3bc3622feaf8207648835a5c704161dcb048b039be9537958"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-direct/modify-tool-behavior/schema-modifiers.md"
 original_doc_path: "tools-direct/modify-tool-behavior/schema-modifiers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Schema Modifiers (/docs/tools-direct/modify-tool-behavior/schema-modifiers)
 Source: https://docs.composio.dev/docs/tools-direct/modify-tool-behavior/schema-modifiers.md

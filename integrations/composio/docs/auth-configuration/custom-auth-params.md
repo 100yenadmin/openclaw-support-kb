@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Custom Auth Parameters"
 source: "https://docs.composio.dev/docs/auth-configuration/custom-auth-params.md"
-source_hash: "bd5892631e873558cba9f021411c3ff868eb08d804e4abae8731e53b8d9df0eb"
+source_hash: "b13880e3e9980a08c5c7d286fa569d7e73266d25b3b8c969893260dbb948e895"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "auth-configuration/custom-auth-params.md"
 original_doc_path: "auth-configuration/custom-auth-params.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Custom Auth Parameters (/docs/auth-configuration/custom-auth-params)
 Source: https://docs.composio.dev/docs/auth-configuration/custom-auth-params.md

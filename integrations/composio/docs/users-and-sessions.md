@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Users & Sessions"
 source: "https://docs.composio.dev/docs/users-and-sessions.md"
-source_hash: "94033186f7fd4f326035d0b779a76af1c2b126c521b21f8d5c8abff315fc55be"
+source_hash: "90ca247cb7dc8e00e6ecb825abcd6a17c0bf7fb3be7114f3e34e9bb564fcf038"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "users-and-sessions.md"
 original_doc_path: "users-and-sessions.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Users & Sessions (/docs/users-and-sessions)
 Source: https://docs.composio.dev/docs/users-and-sessions.md
@@ -104,15 +109,62 @@ const toolkits = await session.toolkits();
 
 # How sessions behave
 
-A session ties together a user, a set of available toolkits, auth configuration for those toolkits, and connected accounts. Call `create()` whenever you want to do a task. Each session is designed for a particular agentic task, and if you want to change the context of the task, create a new session.
+A session ties together a user, a set of available toolkits, auth configuration for those toolkits, and connected accounts. Each session is designed for a particular agentic task.
 
-You don't need to cache session IDs, manage session lifetimes, or worry about expiration. Sessions persist on the server and don't expire. Just call `create()` with what you need.
+Every call to `create()` returns a new session ID, even if the configuration is identical. This gives you clean isolation between tasks and makes it easy to trace activity back to a specific session in logs and analytics.
 
-## Sessions are immutable
+Sessions persist on the server and don't expire. For multi-turn conversations, store the session ID and reuse it with `composio.use()` rather than calling `create()` again.
 
-A session's configuration is fixed at creation. You cannot change the toolkits, auth configs, or connected accounts on an existing session.
+## Reusing a session
 
-This means the boundary for a new session isn't a new chat or a new request. It's when the contract changes. If a user starts with "search my personal Gmail" and then says "actually use my work email," that's a different session because the auth changed.
+In multi-turn chat apps, you create a session once and reuse it across requests. Store the session ID and call `composio.use()` to rehydrate it:
+
+**Python:**
+
+```python
+session = composio.use("session_id")
+tools = session.tools()
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.use("session_id");
+const tools = await session.tools();
+```
+
+This returns the same session with the same toolkits, auth configs, and connected accounts.
+
+## Updating a session
+
+Use `session.update()` to modify a session's configuration without creating a new one. Only the fields you pass are changed — everything else is preserved.
+
+**Python:**
+
+```python
+session.update(
+    toolkits=["gmail", "slack"],
+    auth_configs={"gmail": "ac_new_config"},
+    connected_accounts={"slack": ["ca_work_slack"]},
+)
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+await session.update({
+  toolkits: ["gmail", "slack"],
+  authConfigs: { gmail: "ac_new_config" },
+  connectedAccounts: { slack: ["ca_work_slack"] },
+});
+```
+
+You can update toolkits, auth configs, connected accounts, workbench settings, multi-account config, manage connections, tags, tools, and preload. See [Configuring Sessions](/docs/configuring-sessions) for the full list of options.
 
 ## Connected accounts persist across sessions
 
@@ -120,7 +172,7 @@ Connections are tied to the user ID, not the session. A user who connected Gmail
 
 **When should I create a new session?**
 
-Create a new session when the config changes: different toolkits, different auth config, or a different connected account. You don't need to store or manage session IDs. Just call `create()` each time.
+Reuse a session with `composio.use()` for multi-turn conversations. Create a new session when you need a fundamentally different setup (e.g., a different user or a completely different set of toolkits).
 
 # What to read next
 

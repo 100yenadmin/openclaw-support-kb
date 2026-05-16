@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "9bbc79005348238e1f947a03f976d449f4f2c23aa5a869bf6e5ce6f98ceef224"
+source_hash: "e81cfaf872b39291ed413d890c900ba3e70c812ac29d7037e0d8f1092641a386"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/mastra.md"
 original_doc_path: "providers/mastra.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Mastra (/docs/providers/mastra)
 Source: https://docs.composio.dev/docs/providers/mastra.md

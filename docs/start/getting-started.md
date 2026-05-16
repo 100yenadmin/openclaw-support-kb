@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "d67fc12fc8654bf3090f08e7d4d68321e011857c0ccf280352052a65419dd09c"
+source_hash: "198d436e2a913ca2b9bc8d0adf829bbc26c5afc139e1f42fcfa167ac26766555"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
 original_doc_path: "start/getting-started.md"
 duplicate_index: 1

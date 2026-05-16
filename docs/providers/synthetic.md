@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Synthetic"
 source: "https://docs.openclaw.ai/providers/synthetic"
-source_hash: "1dfd5c5659404e81b5c821e96120337dcc2ee4c5395ba5e2ce1ec286355e9f61"
+source_hash: "bb3e6bd67aa5fa2e29868d548d551dc854fc8439e5aae9c6818cfd113b8b5b38"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/synthetic.md"
 original_doc_path: "providers/synthetic.md"
 duplicate_index: 1

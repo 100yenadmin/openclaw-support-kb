@@ -2,11 +2,16 @@
 type: composio_doc
 title: "TypeScript SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript.md"
-source_hash: "199db1c6a5b561a575c957e39d7a939b9aa3b3972d480ecf851550d370e5032e"
+source_hash: "c752a8dd2f22c85268649c89a7e993b761d0231c366d6a24f6b06afd900d04b4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript.md"
 original_doc_path: "reference/sdk-reference/typescript.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # TypeScript SDK Reference (/reference/sdk-reference/typescript)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript.md

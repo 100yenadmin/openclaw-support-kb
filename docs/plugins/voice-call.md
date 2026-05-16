@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "0d893c0918f9d0db0cb7d02159a4cbe7040f55d763c2ef561e3b7be7ef0c994f"
+source_hash: "9d5c5353a3955e8489835c9328021369e4aa4fbbdea89ea02ee3c0eebd7b4037"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
 original_doc_path: "plugins/voice-call.md"
 duplicate_index: 1
@@ -321,6 +323,8 @@ for tool work, current information, memory lookups, or workspace state.
                 instructions: "Speak briefly. Call openclaw_agent_consult before using deeper tools.",
                 toolPolicy: "safe-read-only",
                 consultPolicy: "substantive",
+                consultThinkingLevel: "low",
+                consultFastMode: true,
                 agentContext: { enabled: true },
                 providers: {
                   google: {

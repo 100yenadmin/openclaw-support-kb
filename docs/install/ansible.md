@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "9316f716d1ea83b5ffec32e05b590789a814bc349bc767190a67cc5af649bd34"
+source_hash: "937abc548ef0f3b1b89ce56038f933f9f1dff121c180a382f13febad5a2740a9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/ansible.md"
 original_doc_path: "install/ansible.md"
 duplicate_index: 1

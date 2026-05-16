@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "db90d53dc4f7ca5769b1934fa4d2427fe15fd85134434bd21a0f79dcffbe9af3"
+source_hash: "37e8484903244a12dcbe08b4ab7826004b1b46bef3ecc3b5137cbee130927b91"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
 original_doc_path: "tools/tts.md"
 duplicate_index: 1
@@ -730,8 +732,6 @@ delivery.
   `audio/ogg; codecs=opus`. If conversion fails, Feishu receives the original
   file as an attachment; WhatsApp send fails rather than posting an incompatible
   PTT payload.
-* **BlueBubbles**: keeps provider synthesis on the normal audio-file path; MP3
-  and CAF outputs are marked for iMessage voice memo delivery.
 * **Other channels**: MP3 (`mp3_44100_128` from ElevenLabs, `mp3` from OpenAI).
   * 44.1kHz / 128kbps is the default balance for speech clarity.
 * **MiniMax**: MP3 (`speech-2.8-hd` model, 32kHz sample rate) for normal audio attachments. For channel-advertised voice-note targets, OpenClaw transcodes the MiniMax MP3 to 48kHz Opus with `ffmpeg` before delivery when the channel advertises transcoding.

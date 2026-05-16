@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Bun (experimental)"
 source: "https://docs.openclaw.ai/install/bun"
-source_hash: "6365c33026632453179c3bd4f4557f4598e6a21d21b9c1ffe53a8bc0eb3a6e45"
+source_hash: "714cd78b3b52b8b9dce4086af4aaab6703633f80a03b7375aed481dd54e8dbd7"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/bun.md"
 original_doc_path: "install/bun.md"
 duplicate_index: 1
@@ -46,13 +48,13 @@ Bun is an optional local runtime for running TypeScript directly (`bun run ...`,
 
 Bun blocks dependency lifecycle scripts unless explicitly trusted. For this repo, the commonly blocked scripts are not required:
 
-* `@whiskeysockets/baileys` `preinstall` -- checks Node major >= 20 (OpenClaw defaults to Node 24 and still supports Node 22 LTS, currently `22.16+`)
+* `baileys` `preinstall` -- checks Node major >= 20 (OpenClaw defaults to Node 24 and still supports Node 22 LTS, currently `22.16+`)
 * `protobufjs` `postinstall` -- emits warnings about incompatible version schemes (no build artifacts)
 
 If you hit a runtime issue that requires these scripts, trust them explicitly:
 
 ```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
-bun pm trust @whiskeysockets/baileys protobufjs
+bun pm trust baileys protobufjs
 ```
 
 ## Caveats

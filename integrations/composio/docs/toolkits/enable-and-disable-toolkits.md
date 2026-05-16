@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Enable and disable toolkits"
 source: "https://docs.composio.dev/docs/toolkits/enable-and-disable-toolkits.md"
-source_hash: "4e1971e7d496896314f83502ac1106f9bcb20b8b472ea9bff8b6e0789895a7c9"
+source_hash: "a349520b3c79690a7d59abcb8639fccde57ca7232a13ca16b5c91bfec2e3a7d5"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "toolkits/enable-and-disable-toolkits.md"
 original_doc_path: "toolkits/enable-and-disable-toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Enable and disable toolkits (/docs/toolkits/enable-and-disable-toolkits)
 Source: https://docs.composio.dev/docs/toolkits/enable-and-disable-toolkits.md

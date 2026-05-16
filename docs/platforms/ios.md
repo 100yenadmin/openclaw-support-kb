@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "267f2a3eef9a7b53aab512d31814f31d406e2527b9dce7dae9419d1662ec806d"
+source_hash: "ee21e8bbdba576467f95583f9afe1f8b13c754cad05b1fdccf2db66d6ac087c9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
 original_doc_path: "platforms/ios.md"
 duplicate_index: 1

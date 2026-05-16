@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Parallel specialist lanes"
 source: "https://docs.openclaw.ai/concepts/parallel-specialist-lanes"
-source_hash: "c0ca2e88ee85a4202dbfe640fd83b7410070ae74330b322f196b0b5d4bdf2682"
+source_hash: "5ca1b35dd665b6836d0842ef06ff5387f787e655270d4f407825025630bf0aa8"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/parallel-specialist-lanes.md"
 original_doc_path: "concepts/parallel-specialist-lanes.md"
 duplicate_index: 1
@@ -61,7 +63,7 @@ Tune queue and model capacity around the business value of each lane:
   agents: {
     defaults: {
       maxConcurrent: 4,
-      subagents: { maxConcurrent: 8 },
+      subagents: { maxConcurrent: 8, delegationMode: "prefer" },
     },
   },
   messages: {

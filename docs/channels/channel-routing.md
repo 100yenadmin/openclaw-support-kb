@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "1d9792396f088c866e8e0521f8690746f6c181e5638f556d2814a3aa79c4e422"
+source_hash: "44264bf99a8d3f427371ced95f8a381493c73e04e94bf894f0abe8ebcdce497e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
 original_doc_path: "channels/channel-routing.md"
 duplicate_index: 1

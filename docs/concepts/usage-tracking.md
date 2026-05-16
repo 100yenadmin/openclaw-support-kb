@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "a070be23961e3c9939cdf651bb02f7fa5ca89acccf8b9f6f089335251a17a3df"
+source_hash: "4d271dc8ef7e1203de94932cb2dea6b28480cb9c0924370c8bf1a479fae9c58c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/usage-tracking.md"
 original_doc_path: "concepts/usage-tracking.md"
 duplicate_index: 1

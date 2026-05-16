@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "GCP"
 source: "https://docs.openclaw.ai/install/gcp"
-source_hash: "282828c098405ce4ad80cb50e50cb76d4c9b96c16041db85502678f45e282986"
+source_hash: "f1c767eb79256bc67a4ccdfe4236c224c2a722aa14df6252a5d0b89db8644fd4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/gcp.md"
 original_doc_path: "install/gcp.md"
 duplicate_index: 1

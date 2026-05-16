@@ -2,11 +2,16 @@
 type: composio_doc
 title: "AuthConfigs"
 source: "https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md"
-source_hash: "15030de6374fffa3c47a220dfb31da45e711551d6c68f2f984f250210e8a9c91"
+source_hash: "a61292dc6fea3c1f01e900770db81fad3a5b294185a5571b6b5e55954d3c9376"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/auth-configs.md"
 original_doc_path: "reference/sdk-reference/python/auth-configs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # AuthConfigs (/reference/sdk-reference/python/auth-configs)
 Source: https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md

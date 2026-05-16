@@ -2,11 +2,16 @@
 type: composio_doc
 title: "How Composio works"
 source: "https://docs.composio.dev/docs/how-composio-works.md"
-source_hash: "7ccb0e703efb3fd0bba72aa39e036d8506e775b103a41e9f907d10437ca4f1c6"
+source_hash: "e7a7e98a53318f9739fb85f56f5c136480fb371a6f2a1679bb12532cbe193d54"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "how-composio-works.md"
 original_doc_path: "how-composio-works.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # How Composio works (/docs/how-composio-works)
 Source: https://docs.composio.dev/docs/how-composio-works.md

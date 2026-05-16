@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Synology Chat"
 source: "https://docs.openclaw.ai/channels/synology-chat"
-source_hash: "ae8d30119ca896e3946006f1f676db3797c624235c1f277312e5a41ed284cf90"
+source_hash: "79301db7e0c17048ee4c8072a8018e0d994565d081d513188314e4473e2b4150"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/synology-chat.md"
 original_doc_path: "channels/synology-chat.md"
 duplicate_index: 1

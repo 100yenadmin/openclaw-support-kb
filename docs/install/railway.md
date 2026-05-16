@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Railway"
 source: "https://docs.openclaw.ai/install/railway"
-source_hash: "af8d564127c3ebae26b19cd4a5a93b29005cdbb20a6dd94e5450d95b08b1b523"
+source_hash: "26eec0fae0bb452cdbf3a1f48d47c2791df67d900cee643b2ac814fe29f2d245"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/railway.md"
 original_doc_path: "install/railway.md"
 duplicate_index: 1

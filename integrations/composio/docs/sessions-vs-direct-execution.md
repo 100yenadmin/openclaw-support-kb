@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Sessions vs Direct Execution"
 source: "https://docs.composio.dev/docs/sessions-vs-direct-execution.md"
-source_hash: "4920e7dabdbc1c7c9535c594545cf855f57aa6708587c20239b1d2d1c6f86acf"
+source_hash: "3c038daeee276ff9051bdd456cd22c1a73e455904f76b2406eb2e2c881fc568f"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "sessions-vs-direct-execution.md"
 original_doc_path: "sessions-vs-direct-execution.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Sessions vs Direct Execution (/docs/sessions-vs-direct-execution)
 Source: https://docs.composio.dev/docs/sessions-vs-direct-execution.md
@@ -94,7 +99,7 @@ session = composio.create(
     user_id="user_123",
     toolkits=["github", "gmail"],
     auth_configs={"github": "ac_my_config"},
-    connected_accounts={"gmail": "ca_work"},
+    connected_accounts={"gmail": ["ca_work"]},
 )
 ```
 
@@ -106,7 +111,7 @@ const composio = new Composio({ apiKey: 'your_api_key' });
 const session = await composio.create("user_123", {
   toolkits: ["github", "gmail"],
   authConfigs: { github: "ac_my_config" },
-  connectedAccounts: { gmail: "ca_work" },
+  connectedAccounts: { gmail: ["ca_work"] },
 });
 ```
 

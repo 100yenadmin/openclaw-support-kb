@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Background Agent"
 source: "https://docs.composio.dev/cookbooks/background-agent.md"
-source_hash: "150b753ec203089e033646b533d7023bdc99ed5c7e32bab15df475c5f746c491"
+source_hash: "5e967205049798d9f4c339fe1a0d1dc2c12afdc68276c1aec99d1473d32c36b5"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/background-agent.md"
 original_doc_path: "cookbooks/background-agent.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Background Agent (/cookbooks/background-agent)
 Source: https://docs.composio.dev/cookbooks/background-agent.md

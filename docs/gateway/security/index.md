@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security/index"
-source_hash: "19b56d9179d27f6b3821532cfee213b6d2245522f414e95e77e2e7a2514a2047"
+source_hash: "9bd2d13adc277419d005800348e79aed94e74628a7641ec572d23f6102003f69"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/security/index.md"
 original_doc_path: "gateway/security/index.md"
 duplicate_index: 1
@@ -226,6 +228,7 @@ Advisory triage guidance:
 
 * **Inbound access** (DM policies, group policies, allowlists): can strangers trigger the bot?
 * **Tool blast radius** (elevated tools + open rooms): could prompt injection turn into shell/file/network actions?
+* **Exec filesystem drift**: are mutating filesystem tools denied while `exec`/`process` remain available without sandbox filesystem constraints?
 * **Exec approval drift** (`security=full`, `autoAllowSkills`, interpreter allowlists without `strictInlineEval`): are host-exec guardrails still doing what you think they are?
   * `security="full"` is a broad posture warning, not proof of a bug. It is the chosen default for trusted personal-assistant setups; tighten it only when your threat model needs approval or allowlist guardrails.
 * **Network exposure** (Gateway bind/auth, Tailscale Serve/Funnel, weak/short auth tokens).
@@ -931,9 +934,9 @@ configured HTTP auth mode.
 Important boundary note:
 
 * Gateway HTTP bearer auth is effectively all-or-nothing operator access.
-* Treat credentials that can call `/v1/chat/completions`, `/v1/responses`, or `/api/channels/*` as full-access operator secrets for that gateway.
+* Treat credentials that can call `/v1/chat/completions`, `/v1/responses`, plugin routes such as `/api/v1/admin/rpc`, or `/api/channels/*` as full-access operator secrets for that gateway.
 * On the OpenAI-compatible HTTP surface, shared-secret bearer auth restores the full default operator scopes (`operator.admin`, `operator.approvals`, `operator.pairing`, `operator.read`, `operator.talk.secrets`, `operator.write`) and owner semantics for agent turns; narrower `x-openclaw-scopes` values do not reduce that shared-secret path.
-* Per-request scope semantics on HTTP only apply when the request comes from an identity-bearing mode such as trusted proxy auth or `gateway.auth.mode="none"` on a private ingress.
+* Per-request scope semantics on HTTP only apply when the request comes from an identity-bearing mode such as trusted proxy auth, or from an explicitly no-auth private ingress.
 * In those identity-bearing modes, omitting `x-openclaw-scopes` falls back to the normal operator default scope set; send the header explicitly when you want a narrower scope set.
 * `/tools/invoke` follows the same shared-secret rule: token/password bearer auth is treated as full operator access there too, while identity-bearing modes still honor declared scopes.
 * Do not share these credentials with untrusted callers; prefer separate gateways per trust boundary.

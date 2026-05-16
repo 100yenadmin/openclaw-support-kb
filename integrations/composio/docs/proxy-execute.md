@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/proxy-execute.md"
-source_hash: "b6591483fedfe023f6af3052d82f557f40ab3d8250f5dbc719d6e9c6ef5338d3"
+source_hash: "38e0398c1150e0c6cebf7921cc512511bd2fd1d700fe11adf25cda934fdf6d95"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "proxy-execute.md"
 original_doc_path: "proxy-execute.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Proxy execute (/docs/proxy-execute)
 Source: https://docs.composio.dev/docs/proxy-execute.md

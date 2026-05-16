@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Channel turn kernel"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-turn"
-source_hash: "1c8c3db3b1b4108be86d5f6300fb914d9029ce4dafd934bd41904165f4044bd5"
+source_hash: "c30811cafda967746166b8774facfe5fd6da03076da166c6b81f2b54e588da14"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-turn.md"
 original_doc_path: "plugins/sdk-channel-turn.md"
 duplicate_index: 1
@@ -69,6 +71,7 @@ The runtime exposes three preferred entry points so adapters can opt in at the l
 
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 runtime.channel.turn.run(...)             // adapter-driven full pipeline
+runtime.channel.turn.runAssembled(...)    // already-built context + delivery adapter
 runtime.channel.turn.runPrepared(...)     // channel owns dispatch; kernel runs record + finalize
 runtime.channel.turn.buildContext(...)    // pure facts to FinalizedMsgContext mapping
 ```
@@ -77,7 +80,7 @@ Two older runtime helpers remain available for Plugin SDK compatibility:
 
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 runtime.channel.turn.runResolved(...)      // deprecated compatibility alias; prefer run
-runtime.channel.turn.dispatchAssembled(...) // deprecated compatibility alias; prefer run or runPrepared
+runtime.channel.turn.dispatchAssembled(...) // deprecated compatibility alias; prefer runAssembled
 ```
 
 ### run
@@ -118,6 +121,41 @@ await runtime.channel.turn.run({
 ```
 
 `run` is the right shape when the channel has small adapter logic and benefits from owning the lifecycle through hooks.
+
+### runAssembled
+
+Use when the channel has already resolved routing, built a `FinalizedMsgContext`,
+and only needs the shared record, reply-pipeline, dispatch, and finalize
+ordering. This is the preferred shape for simple bundled inbound paths that
+would otherwise repeat `createChannelMessageReplyPipeline(...)` and
+`runPrepared(...)` boilerplate.
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+await runtime.channel.turn.runAssembled({
+  cfg,
+  channel: "irc",
+  accountId,
+  agentId: route.agentId,
+  routeSessionKey: route.sessionKey,
+  storePath,
+  ctxPayload,
+  recordInboundSession: runtime.channel.session.recordInboundSession,
+  dispatchReplyWithBufferedBlockDispatcher:
+    runtime.channel.reply.dispatchReplyWithBufferedBlockDispatcher,
+  delivery: {
+    deliver: async (payload) => {
+      await sendPlatformReply(payload);
+    },
+    onError: (err, info) => {
+      runtime.error?.(`reply ${info.kind} failed: ${String(err)}`);
+    },
+  },
+});
+```
+
+Choose `runAssembled` over `runPrepared` when the only channel-owned dispatch
+behavior is final payload delivery plus optional typing, reply options, durable
+delivery, or error logging.
 
 ### runPrepared
 
@@ -283,6 +321,150 @@ Supplemental context covers quote, forwarded, and thread-bootstrap context. The 
 ### InboundMediaFacts
 
 Media is fact-shaped. Platform download, auth, SSRF policy, CDN rules, and decryption stay channel-local. The kernel maps facts into `MediaPath`, `MediaUrl`, `MediaType`, `MediaPaths`, `MediaUrls`, `MediaTypes`, and `MediaTranscribedIndexes`.
+
+Use `toInboundMediaFacts(...)` from `openclaw/plugin-sdk/channel-inbound` when
+your channel has a resolved media list and only needs to attach generic facts:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+media: toInboundMediaFacts(resolvedMedia, {
+  kind: "image",
+  messageId: input.id,
+});
+```
+
+If media mixes local files and URL-only entries, keep the list as media facts.
+Core preserves array indexes when it writes legacy context fields so downstream
+media understanding, transcription markers, and prompt notes continue to refer
+to the same attachment.
+
+For skipped group messages that should be available to a later mention, pass
+media facts through the turn `preflight.media` field. The kernel converts those
+facts into bounded history media entries before recording:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+preflight(input) {
+  return {
+    admission: { kind: "drop", reason: "missing_mention", recordHistory: true },
+    media: () => toInboundMediaFacts(resolveLocalImages(input), {
+      kind: "image",
+      messageId: input.id,
+    }),
+    history: {
+      key: historyKey,
+      limit: historyLimit,
+      mediaLimit: 4,
+      shouldRecord: () => stillCurrent(input),
+    },
+  };
+}
+```
+
+History media is intentionally conservative: image-only today, local readable
+paths only, bounded by the configured media limit, and still tied to the
+channel history key. Authenticated provider URLs should be downloaded by the
+plugin before they become model-visible media.
+
+## History windows
+
+Message-turn code should use `createChannelHistoryWindow(...)` instead of
+calling low-level `reply-history` map helpers directly. The old map helpers
+remain importable as deprecated compatibility exports, but new plugin runtime
+code should not call them. The window facade keeps text context, structured
+`InboundHistory`, history-media normalization, and clearing behind one
+core-owned API while still letting the channel choose how a history line is
+rendered.
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+const history = createChannelHistoryWindow({ historyMap: groupHistories });
+
+await history.recordWithMedia({
+  historyKey,
+  limit: historyLimit,
+  entry,
+  media: () =>
+    toInboundMediaFacts(resolvedImages, {
+      kind: "image",
+      messageId: entry.messageId,
+    }),
+});
+
+const combinedBody = history.buildPendingContext({
+  historyKey,
+  limit: historyLimit,
+  currentMessage,
+  formatEntry: (entry) => `${entry.sender}: ${entry.body}`,
+});
+```
+
+The older `buildPendingHistoryContextFromMap`,
+`buildInboundHistoryFromMap`, `recordPendingHistoryEntry*`, and
+`clearHistoryEntries*` exports remain as deprecated compatibility for plugins
+that have not migrated yet. New channel work should use the window or the turn
+kernel record/finalize options.
+
+## Common message patterns
+
+Text-only group with mention required:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+preflight(input) {
+  const decision = resolveInboundMentionDecision({ facts, policy });
+  if (decision.shouldSkip) {
+    return {
+      admission: { kind: "drop", reason: "missing_mention", recordHistory: true },
+      history: { key: historyKey, limit: historyLimit },
+    };
+  }
+  return { access: { mentions: decision } };
+}
+```
+
+Image-only message followed by a later mention:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+preflight(input) {
+  if (!wasMentioned && resolvedImages.length > 0) {
+    return {
+      admission: { kind: "drop", reason: "missing_mention", recordHistory: true },
+      media: () => toInboundMediaFacts(resolvedImages, {
+        kind: "image",
+        messageId: input.id,
+      }),
+      history: { key: historyKey, limit: historyLimit, mediaLimit: 4 },
+    };
+  }
+  return {};
+}
+```
+
+Explicit reply-to-image:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+resolveTurn(input, _eventClass, preflight) {
+  return {
+    ...assembled,
+    media: toInboundMediaFacts([...currentMedia, ...referencedReplyMedia]),
+    supplemental: {
+      quote: preflight.supplemental?.quote,
+    },
+  };
+}
+```
+
+Direct message with history:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+resolveTurn(input) {
+  return {
+    ...assembled,
+    history: undefined,
+    message: {
+      rawBody: input.rawText,
+      bodyForAgent: input.textForAgent,
+    },
+  };
+}
+```
 
 ## Adapter contract
 

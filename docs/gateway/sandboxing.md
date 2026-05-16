@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "0655cbc800131ad4f4a6a9a137cd98eff303148f3932cfd2246cd6e2cbdfc7ff"
+source_hash: "8b05ab215eae40506be97e9c29d044f989cec68a32e9926ac980ee55d898e3a9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
 original_doc_path: "gateway/sandboxing.md"
 duplicate_index: 1
@@ -105,6 +107,7 @@ To expose host GPUs to Docker sandboxes, set `agents.defaults.sandbox.docker.gpu
 
   * **Config requires host paths**: The `openclaw.json` `workspace` configuration MUST contain the **Host's absolute path** (e.g. `/home/user/.openclaw/workspaces`), not the internal Gateway container path. When OpenClaw asks the Docker daemon to spawn a sandbox, the daemon evaluates paths relative to the Host OS namespace, not the Gateway namespace.
   * **FS bridge parity (identical volume map)**: The OpenClaw Gateway native process also writes heartbeat and bridge files to the `workspace` directory. Because the Gateway evaluates the exact same string (the host path) from within its own containerized environment, the Gateway deployment MUST include an identical volume map linking the host namespace natively (`-v /home/user/.openclaw:/home/user/.openclaw`).
+  * **Codex code mode**: When an OpenClaw sandbox is active, OpenClaw constrains Codex app-server turns to Codex `workspace-write` sandboxing even if the Codex plugin default is `danger-full-access`. Do not mount the host Docker socket into agent sandbox containers or custom Codex sandboxes.
 
   If you map paths internally without absolute host parity, OpenClaw natively throws an `EACCES` permission error attempting to write its heartbeat inside the container environment because the fully qualified path string doesn't exist natively.
 </Warning>

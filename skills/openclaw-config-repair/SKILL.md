@@ -7,16 +7,18 @@ description: Use when a user or agent needs to inspect, change, repair, validate
 
 ## Safe Path
 
+Use this skill only for OpenClaw config. If the target is Hermes Agent or Paperclip Mission Control, switch to `customer-kb-router` and the matching target skill.
+
 1. Inspect the active file:
    ```bash
    openclaw config file
    openclaw config validate --json
    ```
 2. Search local KB for the exact path/error:
-   ```bash
-   gbrain search "<config path or error>"
-   gbrain query "OpenClaw config schema patch dry-run validate rejected clobbered <intent>"
-   ```
+```bash
+gbrain search "OpenClaw <config path or error>" --source openclaw-support-kb
+gbrain search "OpenClaw config schema patch dry-run validate rejected clobbered <intent>" --source openclaw-support-kb
+```
 3. Read `runbooks/config-repair.md` for the workflow, then inspect schema before proposing a key:
    ```bash
    openclaw config schema > /tmp/openclaw.schema.json

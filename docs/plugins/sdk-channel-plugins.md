@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "69ce02507648290e989dfc8cf0bd3a633832e0e4b470d2a64110c1c4318af6a6"
+source_hash: "e156983c73a0086ca05548b33ffa6e27653ddbd520370fe96809fc0e3069a5c5"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
 original_doc_path: "plugins/sdk-channel-plugins.md"
 duplicate_index: 1
@@ -78,6 +80,16 @@ Legacy reply/turn helpers such as `createChannelTurnReplyPipeline`,
 remain available for compatibility dispatchers. Do not use those names for new
 channel code; new plugins should start with the `message` adapter, receipts, and
 receive/send lifecycle helpers on `openclaw/plugin-sdk/channel-message`.
+
+Channels migrating inbound authorization can use the experimental
+`openclaw/plugin-sdk/channel-ingress-runtime` subpath from runtime receive
+paths. The subpath keeps platform lookup and side effects in the plugin, while
+sharing allowlist state resolution, route/sender/command/event/activation
+decisions, redacted diagnostics, and turn-admission mapping. Keep plugin
+identity normalization in the descriptor you pass to the resolver; do not
+serialize raw match values from the resolved state or decision. See
+[Channel ingress API](/plugins/sdk-channel-ingress) for the API design,
+ownership boundary, and test expectations.
 
 If your channel supports typing indicators outside inbound replies, expose
 `heartbeat.sendTyping(...)` on the channel plugin. Core calls it with the
@@ -182,7 +194,7 @@ need one part of that family:
 * `openclaw/plugin-sdk/channel-runtime-context`
 
 Likewise, prefer `openclaw/plugin-sdk/setup-runtime`,
-`openclaw/plugin-sdk/setup-adapter-runtime`,
+`openclaw/plugin-sdk/setup-runtime`,
 `openclaw/plugin-sdk/reply-runtime`,
 `openclaw/plugin-sdk/reply-dispatch-runtime`,
 `openclaw/plugin-sdk/reply-reference`, and
@@ -192,13 +204,13 @@ surface.
 For setup specifically:
 
 * `openclaw/plugin-sdk/setup-runtime` covers the runtime-safe setup helpers:
-  import-safe setup patch adapters (`createPatchedAccountSetupAdapter`,
+  `createSetupTranslator`, import-safe setup patch adapters (`createPatchedAccountSetupAdapter`,
   `createEnvPatchedAccountSetupAdapter`,
   `createSetupInputPresenceValidator`), lookup-note output,
   `promptResolvedAllowFrom`, `splitSetupEntries`, and the delegated
   setup-proxy builders
-* `openclaw/plugin-sdk/setup-adapter-runtime` is the narrow env-aware adapter
-  seam for `createEnvPatchedAccountSetupAdapter`
+* `openclaw/plugin-sdk/setup-runtime` includes the env-aware adapter seam for
+  `createEnvPatchedAccountSetupAdapter`
 * `openclaw/plugin-sdk/channel-setup` covers the optional-install setup
   builders plus a few setup-safe primitives:
   `createOptionalChannelSetupSurface`, `createOptionalChannelSetupAdapter`,

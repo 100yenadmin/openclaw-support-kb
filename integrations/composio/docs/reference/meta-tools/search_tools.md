@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Search Tools"
 source: "https://docs.composio.dev/reference/meta-tools/search_tools.md"
-source_hash: "14b7850b67f9cb0338de9cc9736605fe8acc3638e201487bed02a76744866591"
+source_hash: "b455f094c7a63446a81077bcaa3b8e25691f60c3883550d113a379b285096534"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools/search_tools.md"
 original_doc_path: "reference/meta-tools/search_tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Search Tools (/reference/meta-tools/search_tools)
 Source: https://docs.composio.dev/reference/meta-tools/search_tools.md

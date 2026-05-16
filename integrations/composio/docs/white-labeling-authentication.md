@@ -2,11 +2,16 @@
 type: composio_doc
 title: "White-labeling authentication"
 source: "https://docs.composio.dev/docs/white-labeling-authentication.md"
-source_hash: "26853f1fe1af4f164988e8f1f1f2a764cd2629bae2ed87193d0b9f228bdbb5c0"
+source_hash: "d3e8fd07372d9c1aa71cdedefe0eb9a198a7fd674e39e60ae6458809591b2834"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "white-labeling-authentication.md"
 original_doc_path: "white-labeling-authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # White-labeling authentication (/docs/white-labeling-authentication)
 Source: https://docs.composio.dev/docs/white-labeling-authentication.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "3e1002634b4995cd8c057a2fdae13bbd122d867bc5f75cbfc19cbc42ca57eda1"
+source_hash: "4fc19b4ef9ee46fd92b54c77667d8e44ee5a2bf836a5ff5944e0a2d02f2571b3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/mcp.md"
 original_doc_path: "cli/mcp.md"
 duplicate_index: 1
@@ -391,6 +393,17 @@ Those saved definitions are for runtimes that OpenClaw launches or configures la
 </AccordionGroup>
 
 Runtime adapters may normalize this shared registry into the shape their downstream client expects. For example, embedded Pi consumes OpenClaw `transport` values directly, while Claude Code and Gemini receive CLI-native `type` values such as `http`, `sse`, or `stdio`.
+
+Codex app-server also honors an optional `codex` block on each server. This is
+OpenClaw projection metadata for Codex app-server threads only; it does not
+change ACP sessions, generic Codex harness config, or other runtime adapters.
+Use non-empty `codex.agents` to project a server only into specific OpenClaw
+agent ids. Empty, blank, or invalid agent lists are rejected by config
+validation and omitted by the runtime projection path instead of becoming
+global. Use `codex.defaultToolsApprovalMode` (`auto`, `prompt`, or `approve`)
+to emit Codex's native `default_tools_approval_mode` for a trusted server.
+OpenClaw strips the `codex` metadata before handing the native `mcp_servers`
+config to Codex.
 
 ### Saved MCP server definitions
 

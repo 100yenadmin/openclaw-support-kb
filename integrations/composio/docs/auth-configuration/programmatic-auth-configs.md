@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Programmatic Auth Configs"
 source: "https://docs.composio.dev/docs/auth-configuration/programmatic-auth-configs.md"
-source_hash: "ecc7a1a4aec8f5e630748b498789fce6ebc7e75da9e87d569902244d750845e0"
+source_hash: "4857447f55af3e1530a16b92a24b0b620aa5aeffeb577ce5f0fcf9d06a415daf"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "auth-configuration/programmatic-auth-configs.md"
 original_doc_path: "auth-configuration/programmatic-auth-configs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Programmatic Auth Configs (/docs/auth-configuration/programmatic-auth-configs)
 Source: https://docs.composio.dev/docs/auth-configuration/programmatic-auth-configs.md

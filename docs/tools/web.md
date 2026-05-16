@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "d6604b930762b1c679fa508df056fccc65d001271e9ad995775d42dc887be111"
+source_hash: "5d24309440a4517798da88a72f241c12b98de35ac229bba54f451df8ac2b5b46"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/web.md"
 original_doc_path: "tools/web.md"
 duplicate_index: 1
@@ -272,7 +274,8 @@ When you choose **Kimi** during `openclaw onboard` or
 * the default Kimi web-search model (defaults to `kimi-k2.6`)
 
 For `x_search`, configure `plugins.entries.xai.config.xSearch.*`. It uses the
-same `XAI_API_KEY` fallback as Grok web search.
+same xAI auth profile as chat, or the `XAI_API_KEY` / plugin web-search
+credential used by Grok web search.
 Legacy `tools.web.x_search.*` config is auto-migrated by `openclaw doctor --fix`.
 When you choose Grok during `openclaw onboard` or `openclaw configure --section web`,
 OpenClaw can also offer optional `x_search` setup with the same key.
@@ -383,7 +386,7 @@ tool on the request that serves this tool call.
             cacheTtlMinutes: 15,
           },
           webSearch: {
-            apiKey: "xai-...", // optional if XAI_API_KEY is set
+            apiKey: "xai-...", // optional if an xAI auth profile or XAI_API_KEY is set
             baseUrl: "https://api.x.ai/v1", // optional shared xAI Responses base URL
           },
         },

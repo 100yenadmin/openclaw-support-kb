@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Vercel AI gateway"
 source: "https://docs.openclaw.ai/providers/vercel-ai-gateway"
-source_hash: "058b1ec7d5c130b1c561f2b97dab0a29610ac953cff74a849590e7faf250d4cd"
+source_hash: "c081903926beae2fe19920b09d42ee8472f060b6adbab46d8340584f7d70efea"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/vercel-ai-gateway.md"
 original_doc_path: "providers/vercel-ai-gateway.md"
 duplicate_index: 1
@@ -96,10 +98,10 @@ runtime:
     `AI_GATEWAY_API_KEY` is available to that process.
 
     <Warning>
-      A key set only in `~/.profile` will not be visible to a launchd/systemd
-      daemon unless that environment is explicitly imported. Set the key in
-      `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway process can
-      read it.
+      A key exported only in an interactive shell will not be visible to a
+      launchd/systemd daemon unless that environment is explicitly imported. Set
+      the key in `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway
+      process can read it.
     </Warning>
   </Accordion>
 

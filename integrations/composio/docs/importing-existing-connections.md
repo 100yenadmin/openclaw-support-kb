@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Importing existing connections"
 source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "df7da10322049ccc6e9e4084e29f4133347a127a5057d649515060ab3d10c5e7"
+source_hash: "d1f5c63cb8fd0add89227384193b4a9bebf8e9687e79742c375ad96d4350c255"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "importing-existing-connections.md"
 original_doc_path: "importing-existing-connections.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Importing existing connections (/docs/importing-existing-connections)
 Source: https://docs.composio.dev/docs/importing-existing-connections.md

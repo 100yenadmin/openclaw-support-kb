@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "1b4c18246c51dcb1654db6e2fd6ed468a292ecc24884097b71e6bd7e64cebf43"
+source_hash: "17127d04804c4a48eb48935f6056ca3781dae29d5a219c4a3678530fd2569837"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
 original_doc_path: "start/wizard-cli-reference.md"
 duplicate_index: 1
@@ -23,7 +25,7 @@ Local mode (default) walks you through:
 * Model and auth setup (OpenAI Code subscription OAuth, Anthropic Claude CLI or API key, plus MiniMax, GLM, Ollama, Moonshot, StepFun, and AI Gateway options)
 * Workspace location and bootstrap files
 * Gateway settings (port, bind, auth, tailscale)
-* Channels and providers (Telegram, WhatsApp, Discord, Google Chat, Mattermost, Signal, BlueBubbles, and other bundled channel plugins)
+* Channels and providers (Telegram, WhatsApp, Discord, Google Chat, Mattermost, Signal, iMessage, and other bundled channel plugins)
 * Daemon install (LaunchAgent, systemd user unit, or native Windows Scheduled Task with Startup-folder fallback)
 * Health check
 * Skills setup
@@ -76,8 +78,7 @@ It does not install or modify anything on the remote host.
     * [Google Chat](/channels/googlechat): service account JSON + webhook audience
     * [Mattermost](/channels/mattermost): bot token + base URL
     * [Signal](/channels/signal): optional `signal-cli` install + account config
-    * [BlueBubbles](/channels/bluebubbles): recommended for iMessage; server URL + password + webhook
-    * [iMessage](/channels/imessage): legacy `imsg` CLI path + DB access
+    * [iMessage](/channels/imessage): `imsg` CLI path + Messages DB access; use an SSH wrapper when the Gateway runs off-Mac
     * DM security: default is pairing. First DM sends a code; approve via
       `openclaw pairing approve <channel> <code>` or use allowlists.
   </Step>
@@ -145,13 +146,13 @@ What you set:
   <Accordion title="OpenAI Code subscription (OAuth)">
     Browser flow; paste `code#state`.
 
-    Sets `agents.defaults.model` to `openai-codex/gpt-5.5` when model is unset or already OpenAI-family.
+    Sets `agents.defaults.model` to `openai/gpt-5.5` through the Codex runtime when model is unset or already OpenAI-family.
   </Accordion>
 
   <Accordion title="OpenAI Code subscription (device pairing)">
     Browser pairing flow with a short-lived device code.
 
-    Sets `agents.defaults.model` to `openai-codex/gpt-5.5` when model is unset or already OpenAI-family.
+    Sets `agents.defaults.model` to `openai/gpt-5.5` through the Codex runtime when model is unset or already OpenAI-family.
   </Accordion>
 
   <Accordion title="OpenAI API key">

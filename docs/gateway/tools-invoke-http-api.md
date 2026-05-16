@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Tools invoke API"
 source: "https://docs.openclaw.ai/gateway/tools-invoke-http-api"
-source_hash: "c7c5aa8767b86627c88dc9a7acc3840488380f302bad19977c094d712d5e5c24"
+source_hash: "676546145d3f0592043807a7f449e25564c30455e491fbbb40141c590c6cfdf3"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/tools-invoke-http-api.md"
 original_doc_path: "gateway/tools-invoke-http-api.md"
 duplicate_index: 1
@@ -104,6 +106,7 @@ If a tool is not allowed by policy, the endpoint returns **404**.
 Important boundary notes:
 
 * Exec approvals are operator guardrails, not a separate authorization boundary for this HTTP endpoint. If a tool is reachable here via Gateway auth + tool policy, `/tools/invoke` does not add an extra per-call approval prompt.
+* If `exec` is reachable here, treat it as a mutating shell surface. Denying `write`, `edit`, `apply_patch`, or HTTP filesystem-write tools does not make shell execution read-only.
 * Do not share Gateway bearer credentials with untrusted callers. If you need separation across trust boundaries, run separate gateways (and ideally separate OS users/hosts).
 
 Gateway HTTP also applies a hard deny list by default (even if session policy allows the tool):

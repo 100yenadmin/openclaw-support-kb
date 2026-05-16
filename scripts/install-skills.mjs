@@ -16,12 +16,7 @@ const sourceDir = path.join(repoRoot, "skills");
 const targetDir = process.env.OPENCLAW_SKILLS_DIR || path.join(os.homedir(), ".openclaw", "skills");
 const kbDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const configFile = process.env.OPENCLAW_CONFIG_FILE || path.join(os.homedir(), ".openclaw", "openclaw.json");
-const supportSkills = [
-  "openclaw-support-kb",
-  "openclaw-config-repair",
-  "openclaw-skill-discovery",
-  "openclaw-support-escalation",
-];
+const supportSkills = [];
 
 function expandUser(value) {
   if (!value) return null;
@@ -157,10 +152,11 @@ for (const entry of entries) {
   const from = path.join(sourceDir, entry.name);
   const to = path.join(targetDir, entry.name);
   await installManagedSkill(from, to, entry.name);
+  supportSkills.push(entry.name);
   installed.push(to);
 }
 
-console.log(`Installed ${installed.length} OpenClaw support skills into ${targetDir}`);
+console.log(`Installed ${installed.length} customer KB skills into ${targetDir}`);
 for (const item of installed) console.log(`- ${item}`);
 
 if (process.env.OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD !== "1") {
@@ -169,26 +165,32 @@ if (process.env.OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD !== "1") {
     await upsertManagedBlock(
       agentsFile,
     `
-## OpenClaw Support KB
+## Customer Support KB
 
-For OpenClaw setup, update, channel, Telegram, config, skill, or support questions:
+For OpenClaw, Hermes Agent, Paperclip Mission Control, Composio, update, channel, Telegram, config, skill, or support questions:
 
 1. Confirm the local KB is installed:
    - source: \`${kbDir}\`
    - GBrain source id: \`${GBRAIN_SOURCE_ID}\`
    - manifest: \`${path.join(kbDir, "kb-manifest.json")}\`
-2. Search local GBrain before answering or editing config:
-   \`gbrain query "OpenClaw <question>"\`
-   \`gbrain search "<exact error, command, config key, or Source URL>"\`
-3. Use the installed OpenClaw support skills for routing:
+   - source catalog: \`${path.join(kbDir, "kb-sources.json")}\`
+2. Identify the target system before giving setup/config commands. Do not apply OpenClaw config docs to Hermes, Hermes config docs to OpenClaw, or Paperclip control-plane docs to either runtime.
+3. Search local GBrain with the named source before answering or editing config:
+   \`gbrain search "<target system> <question>" --source ${GBRAIN_SOURCE_ID}\`
+   \`gbrain search "<target system> <exact error, command, config key, or Source URL>" --source ${GBRAIN_SOURCE_ID}\`
+4. Use the installed customer KB skills for routing:
+   - customer-kb-router
    - openclaw-support-kb
    - openclaw-config-repair
    - openclaw-skill-discovery
    - openclaw-support-escalation
-4. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
-5. If search or citations mention \`.pre-git-\` or backup/archive paths, run \`node ${path.join(kbDir, "scripts", "status.mjs")}\` and do not cite that stale copy.
-6. Do not invent OpenClaw config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\`.
-7. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
+   - hermes-support-kb
+   - paperclip-mission-control
+   - cross-system-recovery
+5. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
+6. If search or citations mention \`.pre-git-\` or backup/archive paths, run \`node ${path.join(kbDir, "scripts", "status.mjs")}\` and do not cite that stale copy.
+7. Do not invent config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\` for OpenClaw; prefer Hermes/Paperclip docs and read-only diagnostics for those systems.
+8. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
 `,
     );
     console.log(`Updated agent hint block in ${agentsFile}`);

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Signing Up as an Agent"
 source: "https://docs.composio.dev/docs/signing-up-as-an-agent.md"
-source_hash: "500f86aa963366124b9a056c3250b433308471f4e62ab4d5b1d66e8a3cc49a1d"
+source_hash: "fb8ce5f1d03921d74ab459ea4aaf00351ba35a0bf1ae3cdea831416439eeb319"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "signing-up-as-an-agent.md"
 original_doc_path: "signing-up-as-an-agent.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Signing Up as an Agent (/docs/signing-up-as-an-agent)
 Source: https://docs.composio.dev/docs/signing-up-as-an-agent.md

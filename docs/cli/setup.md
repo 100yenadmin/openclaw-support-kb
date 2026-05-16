@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
-source_hash: "66b68b4f1d9dff99fd97d45a1970ea3a9dfb95bc47283c151b91ccfbc760ced4"
+source_hash: "980d4f26e65064c29a13291bae602f0185840f3b20b374b4943f009d81952c1e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/setup.md"
 original_doc_path: "cli/setup.md"
 duplicate_index: 1
@@ -15,16 +17,31 @@ Source: https://docs.openclaw.ai/cli/setup
 
 # `openclaw setup`
 
-Initialize `~/.openclaw/openclaw.json` and the agent workspace.
+Initialize the baseline config and agent workspace. With any onboarding flag present, also runs the wizard.
 
 <Note>
-  `openclaw setup` is for mutable config installs. In Nix mode (`OPENCLAW_NIX_MODE=1`), OpenClaw refuses setup writes because the config file is managed by Nix. Agents should use the first-party [nix-openclaw Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) or the equivalent source config for another Nix package.
+  `openclaw setup` is for mutable config installs. In Nix mode (`OPENCLAW_NIX_MODE=1`) OpenClaw refuses setup writes because the config file is managed by Nix. Use the first-party [nix-openclaw Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) or the equivalent source config for another Nix package.
 </Note>
 
-Related:
+## Options
 
-* Getting started: [Getting started](/start/getting-started)
-* CLI onboarding: [Onboarding (CLI)](/start/wizard)
+| Flag                       | Description                                                                                         |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| `--workspace <dir>`        | Agent workspace directory (default `~/.openclaw/workspace`; stored as `agents.defaults.workspace`). |
+| `--wizard`                 | Run interactive onboarding.                                                                         |
+| `--non-interactive`        | Run onboarding without prompts.                                                                     |
+| `--mode <mode>`            | Onboarding mode: `local` or `remote`.                                                               |
+| `--import-from <provider>` | Migration provider to run during onboarding.                                                        |
+| `--import-source <path>`   | Source agent home for `--import-from`.                                                              |
+| `--import-secrets`         | Import supported secrets during onboarding migration.                                               |
+| `--remote-url <url>`       | Remote Gateway WebSocket URL.                                                                       |
+| `--remote-token <token>`   | Remote Gateway token (optional).                                                                    |
+
+### Wizard auto-trigger
+
+`openclaw setup` runs the wizard when any of these flags are explicitly present, even without `--wizard`:
+
+`--wizard`, `--non-interactive`, `--mode`, `--import-from`, `--import-source`, `--import-secrets`, `--remote-url`, `--remote-token`.
 
 ## Examples
 
@@ -36,32 +53,15 @@ openclaw setup --wizard --import-from hermes --import-source ~/.hermes
 openclaw setup --non-interactive --mode remote --remote-url wss://gateway-host:18789 --remote-token <token>
 ```
 
-## Options
+## Notes
 
-* `--workspace <dir>`: agent workspace directory (stored as `agents.defaults.workspace`)
-* `--wizard`: run onboarding
-* `--non-interactive`: run onboarding without prompts
-* `--mode <local|remote>`: onboarding mode
-* `--import-from <provider>`: migration provider to run during onboarding
-* `--import-source <path>`: source agent home for `--import-from`
-* `--import-secrets`: import supported secrets during onboarding migration
-* `--remote-url <url>`: remote Gateway WebSocket URL
-* `--remote-token <token>`: remote Gateway token
-
-To run onboarding via setup:
-
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw setup --wizard
-```
-
-Notes:
-
-* Plain `openclaw setup` initializes config + workspace without the full onboarding flow.
-* After plain setup, run `openclaw configure` to choose models, channels, Gateway, plugins, skills, or health checks.
-* Onboarding auto-runs when any onboarding flags are present (`--wizard`, `--non-interactive`, `--mode`, `--import-from`, `--import-source`, `--import-secrets`, `--remote-url`, `--remote-token`).
+* Plain `openclaw setup` initializes config and workspace without running the full onboarding flow.
+* After plain setup, run `openclaw onboard` for the full guided journey, `openclaw configure` for targeted changes, or `openclaw channels add` to add channel accounts.
 * If Hermes state is detected, interactive onboarding can offer migration automatically. Import onboarding requires a fresh setup; use [Migrate](/cli/migrate) for dry-run plans, backups, and overwrite mode outside onboarding.
 
 ## Related
 
 * [CLI reference](/cli)
+* [Onboarding (CLI)](/start/wizard)
+* [Getting started](/start/getting-started)
 * [Install overview](/install)

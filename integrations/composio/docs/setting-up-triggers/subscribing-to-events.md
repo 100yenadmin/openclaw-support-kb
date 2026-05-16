@@ -1,14 +1,19 @@
 ---
 type: composio_doc
-title: "Subscribing to triggers"
+title: "Subscribing to events"
 source: "https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md"
-source_hash: "351d626e86c73cea050144c115280ee1eca4311723e48b0b5c0ceec55d74cfa6"
+source_hash: "617731f4304db59d3186114d8403c79c1a073989624b78bcd460794c3006f542"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "setting-up-triggers/subscribing-to-events.md"
 original_doc_path: "setting-up-triggers/subscribing-to-events.md"
 duplicate_index: 1
 ---
 
-# Subscribing to triggers (/docs/setting-up-triggers/subscribing-to-events)
+Source System: Composio Integration
+Local KB namespace: composio
+
+# Subscribing to events (/docs/setting-up-triggers/subscribing-to-events)
 Source: https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md
 
 
@@ -22,7 +27,7 @@ Webhooks are the recommended way to receive trigger events in production. To sta
 | `composio.connected_account.expired` | Fired when a connected account expires and needs re-authentication. See [Subscribing to connection expiry events](/docs/subscribing-to-connection-expiry-events).                                                                                                                     |
 | `composio.trigger.disabled`          | **Fired when** Composio automatically disables a trigger — expired connection, webhook refresh failure, or unhealthy polling. **Not fired when** you disable a trigger through the manage API or deactivate its connected account via `PATCH /api/v3/connected_accounts/{id}/status`. |
 
-Set your webhook URL in the [dashboard settings](https://platform.composio.dev?next_page=/settings/webhook) or via the [Webhook Subscriptions API](/reference/api-reference/webhooks):
+Set your webhook URL in the [dashboard settings](https://platform.composio.dev?next_page=/settings/webhook) or via the [Webhook Subscriptions API](/reference/api-reference/webhook-subscriptions):
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/webhook_subscriptions \
@@ -36,7 +41,7 @@ curl -X POST https://backend.composio.dev/api/v3.1/webhook_subscriptions \
 
 > Your webhook endpoint must be publicly accessible — Composio's outbound IPs are dynamic, so IP allowlisting and private/VPN-only endpoints will not work. Use [signature verification](/docs/webhook-verification) to authenticate payloads instead.
 
-> The response includes a `secret` for [verifying webhook signatures](/docs/webhook-verification). This is only returned at creation time or when you [rotate the secret](/reference/api-reference/webhooks/postWebhookSubscriptionsByIdRotateSecret). Store it securely.
+> The response includes a `secret` for [verifying webhook signatures](/docs/webhook-verification). Store it securely.
 
 ## Handling events
 

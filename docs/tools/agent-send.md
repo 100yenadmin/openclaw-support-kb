@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
-source_hash: "6bf88a4f06b3c536b1ec7c6ca9e895d677e1072b9ba12a9a1c41f665d5313836"
+source_hash: "1cd9eeba8f70384c7453a464755cc39db061ae1f131865a4a58c7f95d62dca51"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/agent-send.md"
 original_doc_path: "tools/agent-send.md"
 duplicate_index: 1
@@ -81,6 +83,9 @@ programmatic delivery.
   preserve isolation; direct chats collapse to `main`).
 * Thinking and verbose flags persist into the session store.
 * Output: plain text by default, or `--json` for structured payload + metadata.
+* With `--json --deliver`, the JSON includes delivery status for sent,
+  suppressed, partial, and failed sends. See
+  [JSON delivery status](/cli/agent#json-delivery-status).
 
 ## Examples
 

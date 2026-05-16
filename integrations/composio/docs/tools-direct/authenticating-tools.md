@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Authenticating Tools"
 source: "https://docs.composio.dev/docs/tools-direct/authenticating-tools.md"
-source_hash: "2fa2109a1200fa17f41a175168130a5ca6ba95bc44030a70d5187a919d52a827"
+source_hash: "d088b3d7441f919d52c4944a4e16386d359718497fee4cea7d9f959c66e6a873"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "tools-direct/authenticating-tools.md"
 original_doc_path: "tools-direct/authenticating-tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Authenticating Tools (/docs/tools-direct/authenticating-tools)
 Source: https://docs.composio.dev/docs/tools-direct/authenticating-tools.md

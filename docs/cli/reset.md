@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Reset"
 source: "https://docs.openclaw.ai/cli/reset"
-source_hash: "54e30dfd33cf1a42f0e65e772984e24022afa280f33bf66dd4dfb83231611625"
+source_hash: "979a1215eb233e680c4fab76420a8a80a5258de004a771934774c5ca91f608ed"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/reset.md"
 original_doc_path: "cli/reset.md"
 duplicate_index: 1

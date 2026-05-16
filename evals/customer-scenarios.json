@@ -1,36 +1,43 @@
 [
   {
     "id": "install-kb",
-    "prompt": "Install this OpenClaw Support KB repo into my agent.",
-    "mustMention": ["INSTALL_FOR_AGENTS.md", "npm run setup", "gbrain sync", "gbrain embed"],
-    "mustHaveDocs": ["INSTALL_FOR_AGENTS.md", "README.md"],
+    "prompt": "Install this customer support KB repo into my agent.",
+    "mustMention": ["INSTALL_FOR_AGENTS.md", "npm run setup", "gbrain sync", "gbrain embed", "kb-sources.json"],
+    "mustHaveDocs": ["INSTALL_FOR_AGENTS.md", "README.md", "kb-sources.json"],
     "mustHaveRunbooks": []
+  },
+  {
+    "id": "ambiguous-routing",
+    "prompt": "My bot config is broken, fix it.",
+    "mustMention": ["customer-kb-router", "OpenClaw", "Hermes Agent", "Paperclip Mission Control", "target system", "gbrain search"],
+    "mustHaveDocs": ["skills/customer-kb-router/SKILL.md", "skills/RESOLVER.md"],
+    "mustHaveRunbooks": ["runbooks/customer-kb-routing.md"]
   },
   {
     "id": "explain-system",
     "prompt": "I'm not technical. Explain how OpenClaw works.",
-    "mustMention": ["gbrain query", "Gateway", "agent runtime", "workspace", "channels"],
+    "mustMention": ["gbrain search", "--source openclaw-support-kb", "Gateway", "agent runtime", "workspace", "channels"],
     "mustHaveDocs": ["docs/concepts/architecture.md", "docs/concepts/agent.md", "docs/concepts/agent-workspace.md", "docs/channels/index.md"],
     "mustHaveRunbooks": ["runbooks/system-explainer.md"]
   },
   {
     "id": "create-agent",
     "prompt": "Create a separate ops agent and make Telegram route to it.",
-    "mustMention": ["openclaw agents add", "openclaw agents bind", "gbrain query", "--non-interactive", "workspace isolation"],
+    "mustMention": ["openclaw agents add", "openclaw agents bind", "gbrain search", "--source openclaw-support-kb", "--non-interactive", "workspace isolation"],
     "mustHaveDocs": ["docs/cli/agents.md", "docs/concepts/agent-workspace.md", "docs/concepts/multi-agent.md", "docs/gateway/config-agents.md"],
     "mustHaveRunbooks": ["runbooks/agent-creation.md"]
   },
   {
     "id": "telegram-setup",
     "prompt": "Help me set up Telegram so I can talk to OpenClaw.",
-    "mustMention": ["gbrain query", "BotFather", "openclaw channels add --channel telegram", "openclaw config validate", "openclaw pairing list telegram"],
+    "mustMention": ["gbrain search", "--source openclaw-support-kb", "BotFather", "openclaw channels add --channel telegram", "openclaw config validate", "openclaw pairing list telegram"],
     "mustHaveDocs": ["docs/channels/telegram.md", "docs/channels/pairing.md", "docs/channels/troubleshooting.md"],
     "mustHaveRunbooks": ["runbooks/telegram-setup.md"]
   },
   {
     "id": "another-channel",
     "prompt": "Help me add Discord or Slack.",
-    "mustMention": ["gbrain query", "openclaw channels status --probe", "openclaw config validate"],
+    "mustMention": ["gbrain search", "--source openclaw-support-kb", "openclaw channels status --probe", "openclaw config validate"],
     "mustHaveDocs": ["docs/channels/index.md", "docs/channels/discord.md", "docs/channels/slack.md", "docs/channels/troubleshooting.md"],
     "mustHaveRunbooks": ["runbooks/channel-setup.md"]
   },
@@ -45,14 +52,14 @@
     "id": "skill-install",
     "prompt": "Find and install a skill that can do browser automation.",
     "mustMention": ["gbrain search", "awesome openclaw skills", "openclaw skills search", "snyk-agent-scan", "SNYK_TOKEN", "attestation"],
-    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/tools/clawhub.md", "docs/cli/skills.md", "security/agent-scan.md"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/clawhub/index.md", "docs/cli/skills.md", "security/agent-scan.md"],
     "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
   },
   {
     "id": "chief-of-staff-integration",
     "prompt": "Find tools or skills to help my small business chief-of-staff agent work with CRM, email, calendar, and support apps.",
     "mustMention": ["VoltAgent", "ClawHub", "Composio", "toolkit", "openclaw mcp list", "OAuth", "approval"],
-    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/tools/clawhub.md", "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", "integrations/composio/docs/tools-and-toolkits.md"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/clawhub/index.md", "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", "integrations/composio/docs/tools-and-toolkits.md"],
     "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
   },
   {
@@ -68,5 +75,26 @@
     "mustMention": ["ask", "approval", "approved-draft-sha", "gog gmail send", "support@electricsheephq.com", "@evaOS_support_bot"],
     "mustHaveDocs": ["support/contacts.md"],
     "mustHaveRunbooks": ["runbooks/self-diagnostics.md", "runbooks/support-escalation.md"]
+  },
+  {
+    "id": "hermes-fixes-openclaw",
+    "prompt": "Use Hermes to fix my broken OpenClaw agent config.",
+    "mustMention": ["cross-system-recovery", "target system", "actor", "openclaw config schema", "openclaw config patch --dry-run", "Hermes"],
+    "mustHaveDocs": ["skills/cross-system-recovery/SKILL.md", "skills/openclaw-config-repair/SKILL.md"],
+    "mustHaveRunbooks": ["runbooks/cross-system-recovery.md", "runbooks/config-repair.md"]
+  },
+  {
+    "id": "openclaw-fixes-hermes",
+    "prompt": "OpenClaw needs to fix Hermes because Hermes is not responding.",
+    "mustMention": ["hermes-support-kb", "~/.hermes/config.yaml", "hermes doctor", "hermes gateway status", "cross-system-recovery"],
+    "mustHaveDocs": ["skills/hermes-support-kb/SKILL.md", "systems/hermes/llms-index.md"],
+    "mustHaveRunbooks": ["runbooks/cross-system-recovery.md"]
+  },
+  {
+    "id": "paperclip-mission-control",
+    "prompt": "Help my agents work with Paperclip Mission Control budgets, heartbeats, and tickets.",
+    "mustMention": ["paperclip-mission-control", "Paperclip Mission Control", "heartbeats", "budgets", "tickets", "systems/paperclip"],
+    "mustHaveDocs": ["skills/paperclip-mission-control/SKILL.md", "systems/paperclip/llms-index.md"],
+    "mustHaveRunbooks": ["runbooks/customer-kb-routing.md"]
   }
 ]

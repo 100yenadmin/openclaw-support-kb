@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Native Tools vs MCP"
 source: "https://docs.composio.dev/docs/native-tools-vs-mcp.md"
-source_hash: "de5d1d0d6e0edf5ccf4a3386ebdee3b358fd6ccd05861e341550ce692a26e9cb"
+source_hash: "6f84d23cc7a9b2c79e4321f8484975f1b86343466dc983887179edddf072b2c9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "native-tools-vs-mcp.md"
 original_doc_path: "native-tools-vs-mcp.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Native Tools vs MCP (/docs/native-tools-vs-mcp)
 Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md

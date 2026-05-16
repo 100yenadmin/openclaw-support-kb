@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "a062f3b0a2ca842faef4817119ac896f6f584a7148f8b19554fa17ddbeffc837"
+source_hash: "2e3cbf5d8cdbcfec6f110b029e8034eae7399b918a9defb6f957c6da4f90a60f"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
 original_doc_path: "reference/api-reference/toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Toolkits (/reference/api-reference/toolkits)
 Source: https://docs.composio.dev/reference/api-reference/toolkits.md

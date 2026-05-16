@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Remote Workbench"
 source: "https://docs.composio.dev/reference/meta-tools/remote_workbench.md"
-source_hash: "e5b70dbca60d6c35bad90b65ea302a5a2bba5a191387c53b99b0879d0e747026"
+source_hash: "fb0a655c1e4a53dfb0fef67703b1183b3902158e18e5a6ca23226d3929861bf4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools/remote_workbench.md"
 original_doc_path: "reference/meta-tools/remote_workbench.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Remote Workbench (/reference/meta-tools/remote_workbench)
 Source: https://docs.composio.dev/reference/meta-tools/remote_workbench.md

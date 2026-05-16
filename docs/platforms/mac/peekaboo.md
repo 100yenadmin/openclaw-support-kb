@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Peekaboo bridge"
 source: "https://docs.openclaw.ai/platforms/mac/peekaboo"
-source_hash: "3772f1579ae1b111226960da825ee4bc6bf4d0c32733158decc785451857161e"
+source_hash: "a2473a365766f962c54a1be1b77435e5fa95f3947a159ee13adb5ef06c66431f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/peekaboo.md"
 original_doc_path: "platforms/mac/peekaboo.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "c642bfb12e52e4a4330159eaa93f0809114c00be4a09c2c0d8687bb6158f1aad"
+source_hash: "f0102f5b55dd46dc571f0851c012ae139cd812ff114ba089db648a5b4d8c875b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
 original_doc_path: "platforms/linux.md"
 duplicate_index: 1

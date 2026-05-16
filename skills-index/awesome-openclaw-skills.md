@@ -2,7 +2,9 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "d4b00ad5cecb3183c678bdd665aca814980696777c3537fe80d5cd2b6406d3d7"
+source_hash: "f899d69b6c382cf6f1ad8aefe9a2af63191eb616eb66515837390d360b4323e0"
+system: "openclaw"
+kb_namespace: "openclaw"
 ---
 
 # Awesome OpenClaw Skills Snapshot
@@ -381,6 +383,8 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [agent-selfie](https://clawskills.sh/skills/iisweetheartii-agent-selfie) - AI agent self-portrait generator.
 - [agent-sentinel](https://clawskills.sh/skills/jimmystacks-agent-sentinel) - The operational circuit breaker for this agent.
 
+- [agentbase](https://github.com/openclaw/skills/tree/main/skills/revmischa/agentbase/SKILL.md) - Shared knowledge base for AI agents via MCP.
+
 - [add-analytics](https://clawskills.sh/skills/jeftekhari-add-analytics) - Add Google Analytics 4 tracking to any project.
 - [amplitude-automation](https://clawskills.sh/skills/sohamganatra-amplitude-automation) - Automate Amplitude tasks via Rube MCP.
 - [canva](https://clawskills.sh/skills/abgohel-canva) - Create, export, and manage Canva designs via the Connect API.
@@ -679,6 +683,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [eachlabs-product-visuals](https://clawskills.sh/skills/eftalyurtseven-eachlabs-product-visuals) - Generate e-commerce product photography and videos.
 
 - [accli](https://clawskills.sh/skills/joargp-accli) - This skill should be used when interacting with Apple Calendar on macOS.
+- [accli-plus](https://clawhub.ai/gopaljigaur/accli-plus) - Extended Apple Calendar CLI for macOS  adds search, export, dry-run, recurring events, alerts, and full error codes on top of accli.
 - [advanced-calendar](https://clawskills.sh/skills/toughworm-advanced-calendar) - Advanced calendar skill with natural language.
 - [agency-guardian](https://clawskills.sh/skills/aranej-agency-guardian) - Gentle reminders to stay human while using AI.
 - [agent-tinman](https://clawskills.sh/skills/oliveskin-agent-tinman) - AI security scanner with active prevention - 168 detection.
@@ -794,6 +799,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [facebook](https://clawskills.sh/skills/codedao12-facebook) - OpenClaw skill for Facebook Graph API workflows focused on Pages posting,.
 - [feelgoodbot](https://clawskills.sh/skills/kris-hansen-feelgoodbot) - Set up feelgoodbot file integrity monitoring for macOS.
 - [skill-provenance](https://clawskills.sh/skills/snapsynapse-skill-provenance) - Version tracking and integrity verification for skill bundles
+- [trentclaw](https://github.com/openclaw/skills/tree/main/skills/trent-ai-release/trentclaw/SKILL.md) - Finds chained attack paths across config, secrets, and permissions.
 
 - [agent-relay-digest](https://clawskills.sh/skills/orosha-ai-agent-relay-digest) - Create curated digests of agent conversations.
 - [agentchat](https://clawskills.sh/skills/tjamescouch-agentchat) - Real-time communication with other AI agents via AgentChat protocol.

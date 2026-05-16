@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Hetzner"
 source: "https://docs.openclaw.ai/install/hetzner"
-source_hash: "122fbc5f57ed905deaaf59a23f250bb475161247759385baba00651242510849"
+source_hash: "0e529350b5a768a66f370af66a035258aebeb563c5b2991a6535cc5b640f9046"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/hetzner.md"
 original_doc_path: "install/hetzner.md"
 duplicate_index: 1

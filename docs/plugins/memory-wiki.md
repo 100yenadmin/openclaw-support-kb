@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "fa1797902290548c704a0322a0b4ed220ec6108842a023334b85448bafd44fd0"
+source_hash: "d7c66f11282fd61455914b84c597c04e01e214b21be0a27e3dcf5140e1dc219a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/memory-wiki.md"
 original_doc_path: "plugins/memory-wiki.md"
 duplicate_index: 1

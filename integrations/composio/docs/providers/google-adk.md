@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Google ADK"
 source: "https://docs.composio.dev/docs/providers/google-adk.md"
-source_hash: "11c686dea6185a0c976d86f799afad9944b5a63cce673dd0d998721228dac6b0"
+source_hash: "9f285ef68b4b358365b85ee3ec61eb42026f16b3d7dfff6fca21894a45211b16"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/google-adk.md"
 original_doc_path: "providers/google-adk.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Google ADK (/docs/providers/google-adk)
 Source: https://docs.composio.dev/docs/providers/google-adk.md

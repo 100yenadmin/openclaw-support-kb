@@ -1,14 +1,16 @@
 ---
 type: openclaw_doc
-title: "Automation and tasks"
+title: "Automation"
 source: "https://docs.openclaw.ai/automation/index"
-source_hash: "ae45efb28be8d4f2e707b6545fa7d015a55dd7c7adab8daf3eb79d3ac003d4aa"
+source_hash: "4fe18c2518e185435a711d184413c7db6187d80c99a258e0c38891412b505e50"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "automation/index.md"
 original_doc_path: "automation/index.md"
 duplicate_index: 1
 ---
 
-# Automation and tasks
+# Automation
 Source: https://docs.openclaw.ai/automation/index
 
 
@@ -114,7 +116,7 @@ See [Hooks](/automation/hooks).
 
 ### Heartbeat
 
-Heartbeat is a periodic main-session turn (default every 30 minutes). It batches multiple checks (inbox, calendar, notifications) in one agent turn with full session context. Heartbeat turns do not create task records and do not extend daily/idle session reset freshness. Use `HEARTBEAT.md` for a small checklist, or a `tasks:` block when you want due-only periodic checks inside heartbeat itself. Empty heartbeat files skip as `empty-heartbeat-file`; due-only task mode skips as `no-tasks-due`. Heartbeats defer while cron work is active or queued, and `heartbeat.skipWhenBusy` can also defer them while subagent or nested lanes are busy.
+Heartbeat is a periodic main-session turn (default every 30 minutes). It batches multiple checks (inbox, calendar, notifications) in one agent turn with full session context. Heartbeat turns do not create task records and do not extend daily/idle session reset freshness. Use `HEARTBEAT.md` for a small checklist, or a `tasks:` block when you want due-only periodic checks inside heartbeat itself. Empty heartbeat files skip as `empty-heartbeat-file`; due-only task mode skips as `no-tasks-due`. Heartbeats defer while cron work is active or queued, and `heartbeat.skipWhenBusy` can also defer an agent while that same agent's session-keyed subagent or nested lanes are busy.
 
 See [Heartbeat](/gateway/heartbeat).
 

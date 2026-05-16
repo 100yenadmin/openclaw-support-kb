@@ -2,11 +2,16 @@
 type: composio_doc
 title: "API"
 source: "https://docs.composio.dev/docs/troubleshooting/api.md"
-source_hash: "259d1a75a3cc718f13455e487da0e5bfb19bc0fd34ef3b0ff155a5e52a8b9f34"
+source_hash: "814c5d96d67207284569124aa02ca0582a34570fe98e7634ae02ab1948c8a0a4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/api.md"
 original_doc_path: "troubleshooting/api.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # API (/docs/troubleshooting/api)
 Source: https://docs.composio.dev/docs/troubleshooting/api.md

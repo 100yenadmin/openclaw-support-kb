@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Nextcloud Talk"
 source: "https://docs.openclaw.ai/channels/nextcloud-talk"
-source_hash: "1e86633c9bb907e721c5cbd5f103314c282761635d29318d427e1cdb3460bf7a"
+source_hash: "ab76f8bcff30321661bf009c1ea44df3203a835c1df9bef5bf5f1ff8958874d4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/nextcloud-talk.md"
 original_doc_path: "channels/nextcloud-talk.md"
 duplicate_index: 1
@@ -49,7 +51,7 @@ Details: [Plugins](/tools/plugin)
 2. On your Nextcloud server, create a bot:
 
    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-   ./occ talk:bot:install "OpenClaw" "<shared-secret>" "<webhook-url>" --feature reaction
+   ./occ talk:bot:install "OpenClaw" "<shared-secret>" "<webhook-url>" --feature webhook --feature response --feature reaction
    ```
 
 3. Enable the bot in the target room settings.
@@ -168,6 +170,7 @@ Provider options:
 * `channels.nextcloud-talk.groupPolicy`: `allowlist | open | disabled`.
 * `channels.nextcloud-talk.groupAllowFrom`: group allowlist (user IDs).
 * `channels.nextcloud-talk.rooms`: per-room settings and allowlist.
+* Static sender access groups can be referenced from `allowFrom` and `groupAllowFrom` with `accessGroup:<name>`.
 * `channels.nextcloud-talk.historyLimit`: group history limit (0 disables).
 * `channels.nextcloud-talk.dmHistoryLimit`: DM history limit (0 disables).
 * `channels.nextcloud-talk.dms`: per-DM overrides (historyLimit).

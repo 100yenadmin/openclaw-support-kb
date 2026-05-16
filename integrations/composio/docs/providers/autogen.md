@@ -2,11 +2,16 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "a0a0fb4887e9104b23f440815cf160ab71e8d187b0d07eb322e937645a73c14f"
+source_hash: "9db41ae99cc1577860db656a7338333023fb76fbccf3320b30235309f0c39801"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/autogen.md"
 original_doc_path: "providers/autogen.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # AutoGen (/docs/providers/autogen)
 Source: https://docs.composio.dev/docs/providers/autogen.md

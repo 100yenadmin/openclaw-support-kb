@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Subscribing to connection expiry events"
 source: "https://docs.composio.dev/docs/subscribing-to-connection-expiry-events.md"
-source_hash: "b10adff4be57eebc965adc4fa010fcbe3b77390ddf78c252a66eb5d9cc463eeb"
+source_hash: "463904773ce3b582d3936646a1322b85ee5b0ddeb22c807621fafa10b66093e3"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "subscribing-to-connection-expiry-events.md"
 original_doc_path: "subscribing-to-connection-expiry-events.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Subscribing to connection expiry events (/docs/subscribing-to-connection-expiry-events)
 Source: https://docs.composio.dev/docs/subscribing-to-connection-expiry-events.md

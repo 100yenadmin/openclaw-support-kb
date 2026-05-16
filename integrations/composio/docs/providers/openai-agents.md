@@ -2,11 +2,16 @@
 type: composio_doc
 title: "OpenAI Agents SDK"
 source: "https://docs.composio.dev/docs/providers/openai-agents.md"
-source_hash: "c9d5373076f8bac7c7a7089963f2424c0a2f1e35a31d75f72c832b6a76687aca"
+source_hash: "4f3352c5901c3509440d0c252e232d96894b7b2398c49839ca7e8b6cc40b6213"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/openai-agents.md"
 original_doc_path: "providers/openai-agents.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # OpenAI Agents SDK (/docs/providers/openai-agents)
 Source: https://docs.composio.dev/docs/providers/openai-agents.md

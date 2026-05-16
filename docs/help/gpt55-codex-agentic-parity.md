@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex agentic parity"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity"
-source_hash: "2efe04f2e3b3c46196032e11a79d3393e6366808c9809b2a8b503db9608e0f67"
+source_hash: "392eebd4a6ea00c81a71676177b0b09a63ef80887acd84be18f86f720d106961"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/gpt55-codex-agentic-parity.md"
 original_doc_path: "help/gpt55-codex-agentic-parity.md"
 duplicate_index: 1

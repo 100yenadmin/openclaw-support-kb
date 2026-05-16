@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "bc97b43d70359c14a2745a619bba478b0cf19b57ae8c4e54a87240ac1a5e0ac2"
+source_hash: "3b45a2015f0dd7c407fafff066fee23a956e3ba948531ace22b3041ca948c15e"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
 original_doc_path: "migration-guide/direct-to-sessions.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Migrating from Direct Tools to Sessions (/docs/migration-guide/direct-to-sessions)
 Source: https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md
@@ -225,7 +230,7 @@ session = composio.create(
         "gmail": "ac_your_gmail_config"
     },
     connected_accounts={
-        "gmail": "ca_work_gmail"
+        "gmail": ["ca_work_gmail"]
     }
 )
 ```
@@ -240,7 +245,7 @@ const session = await composio.create("user_123", {
     gmail: "ac_your_gmail_config",
   },
   connectedAccounts: {
-    gmail: "ca_work_gmail",
+    gmail: ["ca_work_gmail"],
   },
 });
 ```

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "9d7c51bb96c1b7002133399c34b40f04ade915e7e31dedee320c65057399c094"
+source_hash: "b4068cbd8deefc5ffaa182b120ab0e63673e4790394c9020398d75b0bfb7451d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/token-use.md"
 original_doc_path: "reference/token-use.md"
 duplicate_index: 1

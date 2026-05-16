@@ -13,8 +13,8 @@ Before escalating, the agent should gather safe, redacted facts:
 Search the exact failure before drafting support:
 
 ```bash
-gbrain search "<exact error text>"
-gbrain query "OpenClaw <channel or feature> troubleshooting <symptom>"
+gbrain search "OpenClaw <exact error text>" --source openclaw-support-kb
+gbrain search "OpenClaw <channel or feature> troubleshooting <symptom>" --source openclaw-support-kb
 ```
 
 Use current docs pages and the KB manifest as source context.

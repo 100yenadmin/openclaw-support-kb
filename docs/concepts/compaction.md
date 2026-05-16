@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Compaction"
 source: "https://docs.openclaw.ai/concepts/compaction"
-source_hash: "44874f9a3e385e7f9a43ff7f95320ad14f0c9957ab246761bdb6ba15d6a80cb4"
+source_hash: "81817e56236879f3ec59e61951d83880789b1d99018f354532f5c82fc90abebd"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/compaction.md"
 original_doc_path: "concepts/compaction.md"
 duplicate_index: 1
@@ -31,6 +33,7 @@ Auto-compaction is on by default. It runs when the session nears the context lim
 
 You will see:
 
+* `embedded run auto-compaction start` / `complete` in normal Gateway logs.
 * `🧹 Auto-compaction complete` in verbose mode.
 * `/status` showing `🧹 Compactions: <count>`.
 

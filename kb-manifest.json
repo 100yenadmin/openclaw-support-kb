@@ -1,14 +1,24 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-05-07T21:14:12.529Z",
-  "openclawReleaseTag": "v2026.5.7",
-  "docsSha256": "d0b923a7fe87601b0af98f628091f9c3abc70510e29bbfaf807f18f3f2429a30",
-  "composioDocsSha256": "2b2a0c793e324105454904fee638d6ee7da5124086a2d100901b0f196648350f",
-  "composioDocsIndexSha256": "3d1a6985c271cde7c620d386c443dd9c1a25642632d11d67e814611d994334e9",
-  "composioToolkitsSha256": "f31a92da02b35a161e84f43a2a33b6afe1c865f6e4efb3c12b1ff649f2b4c8f4",
-  "artifactSha256": "822de9ccd1be8fc4e30c91fd2ed2278522d72a588db696322813bb72ca018de0",
-  "sourceCount": 640,
+  "generatedAt": "2026-05-16T10:17:37.399Z",
+  "openclawReleaseTag": "v2026.5.12",
+  "docsSha256": "8c2d620267f4ca234abd3f34f67bbddafc59fcfaa56d2dc592f2cf851ff6ce53",
+  "composioDocsSha256": "7bbb4470a5956877e88e78fe8d868994893f1b26e270a6f30e8cc503fb524ae0",
+  "composioDocsIndexSha256": "069e4ba9230accbabc345fa35eb3530715f66b393e8e128eb4d99910274b058b",
+  "composioToolkitsSha256": "5af1e9688d9b80bba60785bd8aaffb3f64fbcbe32b16b2b7134700f2f816e4ce",
+  "hermesDocsSha256": "6d26efd114b4589ab3cd9086b68d64afc5d4247d2ba7e1ff1e4a330dcee2deff",
+  "hermesDocsIndexSha256": "57ba8901c6fef4c8aa6c5dd8f68575b4c526c6eecf24fc1ce68ef831d70ff807",
+  "paperclipDocsIndexSha256": "dea15772e7b77a3492af0f81d98a66999ff22cccaf812e6ed00a6bc24b5e756e",
+  "paperclipDocsSha256": "c1223f2ce0fc8fd1f4564bce3ea9c24d438d4253168cf2242e33a50e0ea0867e",
+  "artifactSha256": "bda63ee38be38de414b5aa3d0ff25e9490a6b999e63b57a8cc1dd09e5247e5fb",
+  "sourceCount": 916,
+  "logicalSources": {
+    "openclaw": 494,
+    "composio": 171,
+    "hermes": 157,
+    "paperclip": 86
+  },
   "minGbrainVersion": "0.19.0",
-  "notes": "Local-first OpenClaw support KB for GBrain. Includes OpenClaw docs plus Composio docs/toolkit catalog for approved app integrations."
+  "notes": "Local-first customer KB for GBrain. Installs as openclaw-support-kb for compatibility, with logical namespaces for OpenClaw, Hermes Agent, Paperclip Mission Control, and Composio integrations."
 }

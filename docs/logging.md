@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "0739ac98df8dab8352d7c47fff59c84ba570bc71a40e867e90005c4d8487fc9c"
+source_hash: "cd972570dd240ff09bd403f96b105bd5f18ceb68afda9b57cccc9b54462fe0f4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "logging.md"
 original_doc_path: "logging.md"
 duplicate_index: 1
@@ -180,6 +182,39 @@ You can override both via the **`OPENCLAW_LOG_LEVEL`** environment variable (e.g
 
 `--verbose` only affects console output and WS log verbosity; it does not change
 file log levels.
+
+### Targeted model transport diagnostics
+
+When debugging provider calls, use targeted environment flags instead of raising
+all logs to `debug`:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+OPENCLAW_DEBUG_MODEL_TRANSPORT=1 openclaw gateway
+OPENCLAW_DEBUG_MODEL_PAYLOAD=tools OPENCLAW_DEBUG_SSE=events openclaw gateway
+```
+
+Available flags:
+
+* `OPENCLAW_DEBUG_MODEL_TRANSPORT=1`: emit request start, fetch response, SDK
+  headers, first streaming event, stream completion, and transport errors at
+  `info` level.
+* `OPENCLAW_DEBUG_MODEL_PAYLOAD=summary`: include a bounded request payload
+  summary in model request logs.
+* `OPENCLAW_DEBUG_MODEL_PAYLOAD=tools`: include all model-facing tool names in
+  the payload summary.
+* `OPENCLAW_DEBUG_MODEL_PAYLOAD=full-redacted`: include a redacted, capped JSON
+  payload snapshot. Use only while debugging; secrets are redacted but prompts
+  and message text may still be present.
+* `OPENCLAW_DEBUG_SSE=events`: emit first-event and stream-completion timing.
+* `OPENCLAW_DEBUG_SSE=peek`: also emit the first five redacted SSE event
+  payloads, capped per event.
+* `OPENCLAW_DEBUG_CODE_MODE=1`: emit code-mode model-surface diagnostics,
+  including when native provider tools are hidden because code mode owns the
+  tool surface.
+
+These flags log through normal OpenClaw logging, so `openclaw logs --follow`
+and the Control UI Logs tab show them. Without the flags, the same diagnostics
+remain available at `debug` level.
 
 ### Trace correlation
 

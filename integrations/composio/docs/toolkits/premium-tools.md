@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Premium Tools"
 source: "https://docs.composio.dev/toolkits/premium-tools.md"
-source_hash: "7a6140e777a689103c5895b9c85f4ae259b6519c3cf2ee12848b98739387dbe1"
+source_hash: "58865cee5c030aa00a3fdc49c8259cdb635d3a342e2669bda01a67ab563299ac"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "toolkits/premium-tools.md"
 original_doc_path: "toolkits/premium-tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Premium Tools (/toolkits/premium-tools)
 Source: https://docs.composio.dev/toolkits/premium-tools.md

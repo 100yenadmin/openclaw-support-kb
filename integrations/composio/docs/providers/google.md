@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Google Generative AI"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "c860d7b9874a9f02868d2ebf02c9adeeac08a152240dd6af1273701048b922d4"
+source_hash: "03bdebf76f112ad8b2e53875625dd8347edde23d4f75527633b7b28b3d9449e0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Google Generative AI (/docs/providers/google)
 Source: https://docs.composio.dev/docs/providers/google.md

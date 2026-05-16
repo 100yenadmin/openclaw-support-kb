@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Composio Connect"
 source: "https://docs.composio.dev/docs/composio-connect.md"
-source_hash: "d199f5758354b4edc33ff9236e37f890a1ece3109af663cf5b34a624b48b889e"
+source_hash: "bdd9ddf827d86f09e94adeac12e483872e7e67382e9851e60721b5ed3b04472c"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "composio-connect.md"
 original_doc_path: "composio-connect.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Composio Connect (/docs/composio-connect)
 Source: https://docs.composio.dev/docs/composio-connect.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "1fb1ea07db3df1d9fba9381c06ef2c5da8e6f5d432294a888411d2076595bb85"
+source_hash: "8e888a2ef258ee5c8946e085a3bf6e6ba4e831fd7fdf6487ea4e0193a4a9fd7f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
 original_doc_path: "reference/session-management-compaction.md"
 duplicate_index: 1
@@ -206,7 +208,7 @@ The store is safe to edit, but the Gateway is the authority: it may rewrite or r
 
 ## Transcript structure (`*.jsonl`)
 
-Transcripts are managed by `@mariozechner/pi-coding-agent`'s `SessionManager`.
+Transcripts are managed by `@earendil-works/pi-coding-agent`'s `SessionManager`.
 
 The file is JSONL:
 
@@ -382,6 +384,7 @@ You can observe compaction and session state via:
 * `/status` (in any chat session)
 * `openclaw status` (CLI)
 * `openclaw sessions` / `sessions --json`
+* Gateway logs (`pnpm gateway:watch` or `openclaw logs --follow`): `embedded run auto-compaction start` + `complete`
 * Verbose mode: `🧹 Auto-compaction complete` + compaction count
 
 ***

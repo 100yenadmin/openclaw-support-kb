@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Debugging Info"
 source: "https://docs.composio.dev/docs/debugging-info.md"
-source_hash: "3a25974a3f7b3d81950406afe6964c7ec497a0dcfbfdcf55d67da2dedbfa5b82"
+source_hash: "7403ac71213cd3e9f3b602008dd9a5f5f12fe73a52f7208ae8cce27aaca8c958"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "debugging-info.md"
 original_doc_path: "debugging-info.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Debugging Info (/docs/debugging-info)
 Source: https://docs.composio.dev/docs/debugging-info.md

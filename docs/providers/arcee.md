@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "697f94b291eba9a8a96451b105e3ecb0d8011e5f8f51608331ed5eaa46642eae"
+source_hash: "6271a4f77032c84aded59e7df39fa95aa4d282b21767c436f4c0063f595a1492"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/arcee.md"
 original_doc_path: "providers/arcee.md"
 duplicate_index: 1

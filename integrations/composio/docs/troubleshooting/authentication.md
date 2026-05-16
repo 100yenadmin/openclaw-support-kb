@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/docs/troubleshooting/authentication.md"
-source_hash: "f19e00de3835eb02cd7defac3a88299f46e5c9b61d9d93dcd831ef76c781c528"
+source_hash: "f53fa516fc7bc6fd9179761b75c5bdaf90322667fc1faad2c54c266550d828c0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/authentication.md"
 original_doc_path: "troubleshooting/authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Authentication (/docs/troubleshooting/authentication)
 Source: https://docs.composio.dev/docs/troubleshooting/authentication.md

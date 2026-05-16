@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "0e5f0ac368045483ded32493a651229d0b15e8f4797f67553279509b1a600ebe"
+source_hash: "de9e660395ee038b3e4251af3fd0af2f807a68f5bb0e1cc02327553d29b912f2"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
 original_doc_path: "cli/memory.md"
 duplicate_index: 1

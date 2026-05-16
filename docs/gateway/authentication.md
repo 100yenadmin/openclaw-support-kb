@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Authentication"
 source: "https://docs.openclaw.ai/gateway/authentication"
-source_hash: "4eb9e784267b91f5b87e85fc074fe01e0cf86b68d9c1d5f446ff87a157807d2d"
+source_hash: "0d47904dd7f59b03f763d214dfae4cc9fc42c3fa1965d7ec86f33d170f21a3f0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/authentication.md"
 original_doc_path: "gateway/authentication.md"
 duplicate_index: 1
@@ -185,6 +187,18 @@ hits a provider rate limit.
   `workers_ai ... quota limit exceeded`).
 * Non-rate-limit errors are not retried with alternate keys.
 * If all keys fail, the final error from the last attempt is returned.
+
+## Removing provider auth while the gateway is running
+
+When provider auth is removed through the Gateway control plane, OpenClaw deletes
+the saved auth profiles for that provider and aborts active chat or agent runs
+whose selected model provider matches the removed provider. The aborted runs emit
+the normal chat cancellation and lifecycle events with
+`stopReason: "auth-revoked"`, so connected clients can show that the run was
+stopped because credentials were removed.
+
+Removing saved auth does not revoke keys at the provider. Rotate or revoke the
+key in the provider dashboard when you need provider-side invalidation.
 
 ## Controlling which credential is used
 

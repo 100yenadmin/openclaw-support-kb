@@ -2,11 +2,16 @@
 type: composio_doc
 title: "SessionContextImpl"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/session-context-impl.md"
-source_hash: "89a083da92bb00ac0f7ef106584cbdbea7eb2bef3f137f0b6affdb1c9898c404"
+source_hash: "d305338d01f772dd3b99bd4e2138a87e301fd85e6a8755043e8245021889f723"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/session-context-impl.md"
 original_doc_path: "reference/sdk-reference/typescript/session-context-impl.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # SessionContextImpl (/reference/sdk-reference/typescript/session-context-impl)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/session-context-impl.md

@@ -2,7 +2,9 @@
 type: openclaw_security_guide
 title: "Snyk Agent Scan Guide"
 source: "https://github.com/snyk/agent-scan"
-source_hash: "4090fef0a67b2e830cf34fcc042d31b80382ee1cf990fdefaf3edf680f33a00f"
+source_hash: "f6dad571185666b8a525a901f6ba303f06ea8d146cc25d31770a497a0c2d0f92"
+system: "openclaw"
+kb_namespace: "openclaw"
 ---
 
 # Snyk Agent Scan Guide

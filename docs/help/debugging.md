@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "0b07a6e28e61510d746c9fbb05fe675d8bfe21b13a9e2143372bf76f7fce1b6b"
+source_hash: "4a9806411af539ff12d7cda8d04ed1b4120fb23c6eb1c1eaadcc94b806d13e75"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/debugging.md"
 original_doc_path: "help/debugging.md"
 duplicate_index: 1
@@ -102,9 +104,9 @@ add Node's sync I/O trace flag through the source runner:
 OPENCLAW_TRACE_SYNC_IO=1 pnpm openclaw gateway --force
 ```
 
-`pnpm gateway:watch` enables this flag by default for the watched Gateway child.
-Set `OPENCLAW_TRACE_SYNC_IO=0` to suppress Node sync I/O trace output in watch
-mode.
+`pnpm gateway:watch` leaves this flag disabled by default for the watched
+Gateway child. Set `OPENCLAW_TRACE_SYNC_IO=1` when you explicitly want Node
+sync I/O trace output in watch mode.
 
 ## Gateway watch mode
 

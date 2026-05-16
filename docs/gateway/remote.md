@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "961eb7786f30e3f1bfce44936d9b2e874559ddf2c2d3d6d3243bed3ce45855dd"
+source_hash: "50dbfdfca30f956bc63b9052b9eec0aa40f5beb9790bb7b2952c5106cef89b83"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/remote.md"
 original_doc_path: "gateway/remote.md"
 duplicate_index: 1
@@ -156,7 +158,7 @@ Short version: **keep the Gateway loopback-only** unless you're sure you need a 
 * `gateway.remote.token` / `.password` are client credential sources. They do **not** configure server auth by themselves.
 * Local call paths can use `gateway.remote.*` as fallback only when `gateway.auth.*` is unset.
 * If `gateway.auth.token` / `gateway.auth.password` is explicitly configured via SecretRef and unresolved, resolution fails closed (no remote fallback masking).
-* `gateway.remote.tlsFingerprint` pins the remote TLS cert when using `wss://`.
+* `gateway.remote.tlsFingerprint` pins the remote TLS cert when using `wss://`, including macOS direct mode. Without a configured or previously stored pin, macOS only pins a first-use certificate after normal system trust passes; self-signed or private-CA gateways that macOS does not already trust need an explicit fingerprint or Remote over SSH.
 * **Tailscale Serve** can authenticate Control UI/WebSocket traffic via identity
   headers when `gateway.auth.allowTailscale: true`; HTTP API endpoints do not
   use that Tailscale header auth and instead follow the gateway's normal HTTP

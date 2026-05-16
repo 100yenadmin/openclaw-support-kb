@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Managing multiple connected accounts"
 source: "https://docs.composio.dev/docs/managing-multiple-connected-accounts.md"
-source_hash: "f575dfcc71624454cb5a9ceb0006eb7f1d23386a9ade172109b24fee684d59bf"
+source_hash: "889f2039e3997ed33085588c265e6c92edde43016b1ef56f642945b10488c001"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "managing-multiple-connected-accounts.md"
 original_doc_path: "managing-multiple-connected-accounts.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Managing multiple connected accounts (/docs/managing-multiple-connected-accounts)
 Source: https://docs.composio.dev/docs/managing-multiple-connected-accounts.md
@@ -188,8 +193,8 @@ Pin a session to specific accounts by passing their IDs in the session config. T
 session = composio.create(
     user_id="user_123",
     connected_accounts={
-        "gmail": "ca_work_gmail_id",
-        "github": "ca_personal_github_id",
+        "gmail": ["ca_work_gmail_id"],
+        "github": ["ca_personal_github_id"],
     },
 )
 ```
@@ -201,8 +206,8 @@ import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 const session = await composio.create("user_123", {
   connectedAccounts: {
-    gmail: "ca_work_gmail_id",
-    github: "ca_personal_github_id",
+    gmail: ["ca_work_gmail_id"],
+    github: ["ca_personal_github_id"],
   },
 });
 ```

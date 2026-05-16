@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/docs/projects.md"
-source_hash: "6de0faffe00a47799317db02d99f86423e3b154dad18b36061acacf4246c8611"
+source_hash: "ae7b4aeacb132c75fafb87d04649e32667833f7498be9e8fb445d4d85c7994a0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "projects.md"
 original_doc_path: "projects.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Projects (/docs/projects)
 Source: https://docs.composio.dev/docs/projects.md

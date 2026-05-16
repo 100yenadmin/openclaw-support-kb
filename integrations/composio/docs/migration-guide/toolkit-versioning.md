@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Toolkit versioning migration"
 source: "https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md"
-source_hash: "50ffb69aa0ef41e0fbd9a2655ab84eae10909c85e6102a87c0322a5f9d2bbcbb"
+source_hash: "4b8f4e2018497b52aeda0e2aa78778b5a06a4b2b99bf32b9196b5d5705f2d76d"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "migration-guide/toolkit-versioning.md"
 original_doc_path: "migration-guide/toolkit-versioning.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Toolkit versioning migration (/docs/migration-guide/toolkit-versioning)
 Source: https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md

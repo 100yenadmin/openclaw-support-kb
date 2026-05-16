@@ -2,11 +2,16 @@
 type: composio_doc
 title: "General FAQs"
 source: "https://docs.composio.dev/docs/common-faq.md"
-source_hash: "83565989b898b8fbe1dee45fc678162c57f1b1c44d1ccf73deb0c4eb08bc5eb2"
+source_hash: "411824fc7ea7938d446d9e18a7aac6eb5b4dd4101a6fafe0aa52e0c7bc12e083"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "common-faq.md"
 original_doc_path: "common-faq.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # General FAQs (/docs/common-faq)
 Source: https://docs.composio.dev/docs/common-faq.md
@@ -113,7 +118,7 @@ See [Toolkit versioning](/docs/tools-direct/toolkit-versioning) for more details
 
 Yes. Triggers let you listen for events from connected apps, like a new email in Gmail, a new issue in GitHub, or a new message in Slack. When the event fires, Composio sends a webhook to your endpoint with the event payload.
 
-See [Triggers](/docs/triggers) for setup and [Subscribing to triggers](/docs/setting-up-triggers/subscribing-to-events) for receiving events.
+See [Triggers](/docs/triggers) for setup and [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events) for receiving events.
 
 # Authentication & Connections
 

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/docs/troubleshooting/triggers.md"
-source_hash: "c835334fdbeb8056e1f3021a36a0fd89fc11a067393a6ae110b945ca91ba5244"
+source_hash: "9603ec56c2ccaf6759dee6fe15fd2e99cb88098513a0eec2d753d33d84b56544"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/triggers.md"
 original_doc_path: "troubleshooting/triggers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Triggers (/docs/troubleshooting/triggers)
 Source: https://docs.composio.dev/docs/troubleshooting/triggers.md
