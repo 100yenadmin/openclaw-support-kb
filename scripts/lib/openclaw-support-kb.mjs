@@ -367,6 +367,12 @@ export function gbrainSyncArgs(targetDir, sourceResult = {}) {
   return args;
 }
 
+export function gbrainEmbedStaleArgs(sourceResult = {}) {
+  const args = ["embed", "--stale"];
+  if (sourceResult.sourceScoped !== false) args.push("--source", GBRAIN_SOURCE_ID);
+  return args;
+}
+
 export function gbrainUpgradeHint({ command = "gbrain", installedVersion = "", minVersion = DEFAULT_MIN_GBRAIN_VERSION } = {}) {
   const versionText = installedVersion ? ` (${installedVersion})` : "";
   return [

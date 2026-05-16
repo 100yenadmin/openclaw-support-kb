@@ -24,6 +24,7 @@ import {
   validateGbrainSearchOutput,
   verifyNamedGbrainSource,
   gbrainUpgradeHint,
+  gbrainEmbedStaleArgs,
 } from "./lib/openclaw-support-kb.mjs";
 
 const DEFAULT_REPO_URL = CANONICAL_REPO_URL;
@@ -321,7 +322,7 @@ try {
   failGbrainSourceRegistration(error);
 }
 run(gbrainCommand, gbrainSyncArgs(targetDir, sourceResult));
-run(gbrainCommand, ["embed", "--stale"]);
+run(gbrainCommand, gbrainEmbedStaleArgs(sourceResult));
 if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_SOURCE_VERIFY !== "1") {
   const namedSource = verifyNamedGbrainSource({ captureNoExit, gbrainCommand });
   if (!namedSource.ok) {

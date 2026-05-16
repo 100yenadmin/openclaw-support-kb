@@ -5,6 +5,7 @@ import {
   canonicalSourceDir,
   compareSemver,
   ensureGbrainSource,
+  gbrainEmbedStaleArgs,
   gbrainSyncArgs,
   GBRAIN_VERIFY_QUERIES,
   gbrainUpgradeHint,
@@ -112,7 +113,7 @@ try {
   failGbrainSourceRegistration(error);
 }
 run(gbrainCommand, gbrainSyncArgs(target, sourceResult));
-run(gbrainCommand, ["embed", "--stale"]);
+run(gbrainCommand, gbrainEmbedStaleArgs(sourceResult));
 if (sourceResult.sourceScoped !== false && process.env.OPENCLAW_SUPPORT_KB_SKIP_SOURCE_VERIFY !== "1") {
   const namedSource = verifyNamedGbrainSource({ captureNoExit, gbrainCommand });
   if (!namedSource.ok) {
