@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Remote Bash Tool"
 source: "https://docs.composio.dev/reference/meta-tools/remote_bash_tool.md"
-source_hash: "05dde9514c99ec6028deb413ebc8b4da15d1db382fc395d766b51895820b8182"
+source_hash: "2f7e8ffc0ee6c676bb9a018664a603069241c727781f51a57d8b120b5f677ee9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools/remote_bash_tool.md"
 original_doc_path: "reference/meta-tools/remote_bash_tool.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Remote Bash Tool (/reference/meta-tools/remote_bash_tool)
 Source: https://docs.composio.dev/reference/meta-tools/remote_bash_tool.md

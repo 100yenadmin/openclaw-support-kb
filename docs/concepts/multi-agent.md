@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "4c6a8714b1a75c9129014c0a43359baa350ceb53c6961d5ed7ca047cc1a4917f"
+source_hash: "0e21c1918945f550d22abf8530abe56c8be85714d66f83182a6f8fe48bce1166"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
 original_doc_path: "concepts/multi-agent.md"
 duplicate_index: 1
@@ -276,7 +278,7 @@ Common channels supporting this pattern include:
 
 * `whatsapp`, `telegram`, `discord`, `slack`, `signal`, `imessage`
 * `irc`, `line`, `googlechat`, `mattermost`, `matrix`, `nextcloud-talk`
-* `bluebubbles`, `zalo`, `zalouser`, `nostr`, `feishu`
+* `zalo`, `zalouser`, `nostr`, `feishu`
 
 ## Concepts
 

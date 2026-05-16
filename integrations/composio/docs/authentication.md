@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/docs/authentication.md"
-source_hash: "bf4c343556077edb3bcd2234450c09c3b936ea6e6e8bfdda80fc812ea7659e3c"
+source_hash: "d7960983a7b8e18308cb0a64fbf0de36b8e33d865806c14075cfa0330217d30e"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "authentication.md"
 original_doc_path: "authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Authentication (/docs/authentication)
 Source: https://docs.composio.dev/docs/authentication.md
@@ -33,7 +38,7 @@ By default, when a tool requires authentication, the agent prompts the user with
 >
 > **Agent:** Here's a summary of your emails from today...
 
-- [In-chat authentication guide](/docs/authenticating-users/in-chat-authentication): 
+- [In-chat authentication guide](/docs/authenticating-users/in-chat-authentication):
 Configuration, callback URLs, and full examples
 
 # Manual authentication
@@ -44,7 +49,7 @@ Use `session.authorize()` to generate Connect Links programmatically when you wa
 * **Settings page**: let users manage their connections from a dedicated UI
 * **Pre-flight checks**: verify all required connections are active before starting a task
 
-- [Manual authentication guide](/docs/authenticating-users/manually-authenticating): 
+- [Manual authentication guide](/docs/authenticating-users/manually-authenticating):
 `session.authorize()` API, callback URLs, and connection status checks
 
 # How Composio manages authentication

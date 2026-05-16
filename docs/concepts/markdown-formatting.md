@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Markdown formatting"
 source: "https://docs.openclaw.ai/concepts/markdown-formatting"
-source_hash: "ac452194c577468d2c3b72d5ad379f1795b4a305333ddfca45950b12ac37e7e0"
+source_hash: "c1278e01f2b3dbb4b406a09a1197571da741071d1dd7bd31088bd4e482e17bd6"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/markdown-formatting.md"
 original_doc_path: "concepts/markdown-formatting.md"
 duplicate_index: 1
@@ -71,7 +73,7 @@ Markdown tables are not consistently supported across chat clients. Use
 `markdown.tables` to control conversion per channel (and per account).
 
 * `code`: render tables as code blocks (default for most channels).
-* `bullets`: convert each row into bullet points (default for Signal + WhatsApp).
+* `bullets`: convert each row into bullet points (default for Matrix, Signal, and WhatsApp).
 * `off`: disable table parsing and conversion; raw table text passes through.
 
 Config keys:

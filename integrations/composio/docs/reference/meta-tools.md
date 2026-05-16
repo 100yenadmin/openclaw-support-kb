@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Meta Tools"
 source: "https://docs.composio.dev/reference/meta-tools.md"
-source_hash: "ca5ac26c13f1da9e216c8d429be9febcbf0baf210a4d21c2fb88e51c1a74553a"
+source_hash: "738b8eebeee025003b81c6c2b1268bebbd8153efe8504f5cefc0038f3e6c5b07"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools.md"
 original_doc_path: "reference/meta-tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Meta Tools (/reference/meta-tools)
 Source: https://docs.composio.dev/reference/meta-tools.md

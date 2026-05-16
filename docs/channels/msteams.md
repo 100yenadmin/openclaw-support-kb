@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
-source_hash: "68443182afca6a557078e26b5bebc1dc7c880a099ee98cee01e06964e29c32a4"
+source_hash: "b36edaedb90063cb6a604554036c4c6df2e796d2c97d33241c312c1de29f477f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/msteams.md"
 original_doc_path: "channels/msteams.md"
 duplicate_index: 1
@@ -154,14 +156,14 @@ Disable with:
 **DM access**
 
 * Default: `channels.msteams.dmPolicy = "pairing"`. Unknown senders are ignored until approved.
-* `channels.msteams.allowFrom` should use stable AAD object IDs.
+* `channels.msteams.allowFrom` should use stable AAD object IDs or static sender access groups such as `accessGroup:core-team`.
 * Do not rely on UPN/display-name matching for allowlists - they can change. OpenClaw disables direct name matching by default; opt in explicitly with `channels.msteams.dangerouslyAllowNameMatching: true`.
 * The wizard can resolve names to IDs via Microsoft Graph when credentials allow.
 
 **Group access**
 
 * Default: `channels.msteams.groupPolicy = "allowlist"` (blocked unless you add `groupAllowFrom`). Use `channels.defaults.groupPolicy` to override the default when unset.
-* `channels.msteams.groupAllowFrom` controls which senders can trigger in group chats/channels (falls back to `channels.msteams.allowFrom`).
+* `channels.msteams.groupAllowFrom` controls which senders or static sender access groups can trigger in group chats/channels (falls back to `channels.msteams.allowFrom`).
 * Set `groupPolicy: "open"` to allow any member (still mention-gated by default).
 * To allow **no channels**, set `channels.msteams.groupPolicy: "disabled"`.
 
@@ -172,7 +174,7 @@ Example:
   channels: {
     msteams: {
       groupPolicy: "allowlist",
-      groupAllowFrom: ["user@org.com"],
+      groupAllowFrom: ["00000000-0000-0000-0000-000000000000", "accessGroup:core-team"],
     },
   },
 }
@@ -707,7 +709,7 @@ Key settings (see `/gateway/configuration` for shared channel patterns):
 * `channels.msteams.teams.<teamId>.channels.<conversationId>.tools`: per-channel tool policy overrides (`allow`/`deny`/`alsoAllow`).
 * `channels.msteams.teams.<teamId>.channels.<conversationId>.toolsBySender`: per-channel per-sender tool policy overrides (`"*"` wildcard supported).
 * `toolsBySender` keys should use explicit prefixes:
-  `id:`, `e164:`, `username:`, `name:` (legacy unprefixed keys still map to `id:` only).
+  `channel:`, `id:`, `e164:`, `username:`, `name:` (legacy unprefixed keys still map to `id:` only).
 * `channels.msteams.actions.memberInfo`: enable or disable the Graph-backed member info action (default: enabled when Graph credentials are available).
 * `channels.msteams.authType`: authentication type - `"secret"` (default) or `"federated"`.
 * `channels.msteams.certificatePath`: path to PEM certificate file (federated + certificate auth).

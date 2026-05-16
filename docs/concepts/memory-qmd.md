@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "QMD memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-qmd"
-source_hash: "b3a516eea677742e7b873144385f4f997a5b694adc7e0f6e30937a39070361d1"
+source_hash: "5125e64dfd5bc818bf6268127176f3f9a28d704438b6364ed672a28ba85df3c6"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/memory-qmd.md"
 original_doc_path: "concepts/memory-qmd.md"
 duplicate_index: 1

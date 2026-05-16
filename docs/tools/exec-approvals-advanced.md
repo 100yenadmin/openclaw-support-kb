@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "168eece82ea4d53563985f3b4753e0774dcda75533d420089b96fb3b83e7c97b"
+source_hash: "ef24428b6d58428b0c2250703b8f4cb6fe75f8f7edb66c271ab96b4a87033e78"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
 original_doc_path: "tools/exec-approvals-advanced.md"
 duplicate_index: 1

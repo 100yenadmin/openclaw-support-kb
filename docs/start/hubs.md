@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "b2a503b626c6e3a36e04397b1ff6d9314eee2c93ba3d3892f67a88cf70c78b88"
+source_hash: "9d20671a6ea982a4d9bc4446dd256b68385e31b321f40d499a485ac34dc8d176"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
 original_doc_path: "start/hubs.md"
 duplicate_index: 1
@@ -81,7 +83,6 @@ Use these hubs to discover every page, including deep dives and reference docs t
 * [Discord](/channels/discord)
 * [Mattermost](/channels/mattermost)
 * [Signal](/channels/signal)
-* [BlueBubbles (legacy iMessage bridge)](/channels/bluebubbles)
 * [QQ Bot](/channels/qqbot)
 * [iMessage](/channels/imessage)
 * [Location parsing](/channels/location)
@@ -118,7 +119,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 * [PDF tool](/tools/pdf)
 * [Elevated mode](/tools/elevated)
 * [Cron jobs](/automation/cron-jobs)
-* [Automation & Tasks](/automation)
+* [Automation](/automation)
 * [Thinking + verbose](/tools/thinking)
 * [Models](/concepts/models)
 * [Sub-agents](/tools/subagents)
@@ -176,7 +177,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 * [Plugin manifest](/plugins/manifest)
 * [Agent tools](/plugins/building-plugins#registering-agent-tools)
 * [Plugin bundles](/plugins/bundles)
-* [Community plugins](/plugins/community)
+* [ClawHub](/clawhub)
 * [Capability cookbook](/tools/capability-cookbook)
 * [Voice call plugin](/plugins/voice-call)
 * [Zalo user plugin](/plugins/zalouser)
@@ -184,7 +185,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 ## Workspace + templates
 
 * [Skills](/tools/skills)
-* [ClawHub](/tools/clawhub)
+* [ClawHub](/clawhub)
 * [Skills config](/tools/skills-config)
 * [Default AGENTS](/reference/AGENTS.default)
 * [Templates: AGENTS](/reference/templates/AGENTS)

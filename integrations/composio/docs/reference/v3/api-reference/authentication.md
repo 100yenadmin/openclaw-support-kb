@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/reference/v3/api-reference/authentication.md"
-source_hash: "823256322a723eccc41ba9303f5bcc13f7eba93629f42f3fd2bdf34c1309e957"
+source_hash: "80d28d3a747c2d914430afe5a00be949cd0df6ff61c375d205c696aac3ef2b26"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/authentication.md"
 original_doc_path: "reference/v3/api-reference/authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Authentication (/reference/v3/api-reference/authentication)
 Source: https://docs.composio.dev/reference/v3/api-reference/authentication.md

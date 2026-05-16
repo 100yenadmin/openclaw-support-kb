@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Zalo"
 source: "https://docs.openclaw.ai/channels/zalo"
-source_hash: "97bf1c46e1fb78c27aecfd4eb0c422e11eb89f14cbc468e23e815ce9bafeac53"
+source_hash: "86564abd3c314b940debb5a2dff2626f7e8f7d177def1ddee5191f85dfa6ff70"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/zalo.md"
 original_doc_path: "channels/zalo.md"
 duplicate_index: 1

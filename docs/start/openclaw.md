@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "b6a0be2629a42b88455edce1463ef89b64692190eac7b575ededd7f23488ee78"
+source_hash: "2466bb48cd3167ecfa018a9d667f0b1d15c54db834b9054dcec4f07973d20165"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
 original_doc_path: "start/openclaw.md"
 duplicate_index: 1
@@ -127,13 +129,24 @@ Example:
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   logging: { level: "info" },
-  agent: {
-    model: "anthropic/claude-opus-4-6",
-    workspace: "~/.openclaw/workspace",
-    thinkingDefault: "high",
-    timeoutSeconds: 1800,
-    // Start with 0; enable later.
-    heartbeat: { every: "0m" },
+  agents: {
+    defaults: {
+      model: { primary: "anthropic/claude-opus-4-6" },
+      workspace: "~/.openclaw/workspace",
+      thinkingDefault: "high",
+      timeoutSeconds: 1800,
+      // Start with 0; enable later.
+      heartbeat: { every: "0m" },
+    },
+    list: [
+      {
+        id: "main",
+        default: true,
+        groupChat: {
+          mentionPatterns: ["@openclaw", "openclaw"],
+        },
+      },
+    ],
   },
   channels: {
     whatsapp: {
@@ -141,11 +154,6 @@ Example:
       groups: {
         "*": { requireMention: true },
       },
-    },
-  },
-  routing: {
-    groupChat: {
-      mentionPatterns: ["@openclaw", "openclaw"],
     },
   },
   session: {
@@ -181,8 +189,10 @@ Set `agents.defaults.heartbeat.every: "0m"` to disable.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  agent: {
-    heartbeat: { every: "30m" },
+  agents: {
+    defaults: {
+      heartbeat: { every: "30m" },
+    },
   },
 }
 ```

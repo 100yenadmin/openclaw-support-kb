@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "17471e4808419044cb0304dfbe5a6a85b90a212d62ec580413e1a8f456b520e4"
+source_hash: "c37814b38fbbeecc6958069050d33dbc32fcfd13e0d53a9408457b09f3442517"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
 original_doc_path: "gateway/operator-scopes.md"
 duplicate_index: 1

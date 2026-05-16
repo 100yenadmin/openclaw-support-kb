@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "af2e0da8063ad8de964a64d6d56e1a7c5e44d69e989d5f19531c8a69a66cc97f"
+source_hash: "4f9d37f4d544d27fd0a1bffb42e503a8fdc679295f074020a2f0527f21cf7a81"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/pairing.md"
 original_doc_path: "channels/pairing.md"
 duplicate_index: 1
@@ -51,7 +53,7 @@ That gives first-time setups an explicit owner for privileged commands and exec
 approval prompts. After an owner exists, later pairing approvals only grant DM
 access; they do not add more owners.
 
-Supported channels: `bluebubbles`, `discord`, `feishu`, `googlechat`, `imessage`, `irc`, `line`, `matrix`, `mattermost`, `msteams`, `nextcloud-talk`, `nostr`, `openclaw-weixin`, `signal`, `slack`, `synology-chat`, `telegram`, `twitch`, `whatsapp`, `zalo`, `zalouser`.
+Supported channels: `discord`, `feishu`, `googlechat`, `imessage`, `irc`, `line`, `matrix`, `mattermost`, `msteams`, `nextcloud-talk`, `nostr`, `openclaw-weixin`, `signal`, `slack`, `synology-chat`, `telegram`, `twitch`, `whatsapp`, `zalo`, `zalouser`.
 
 ### Reusable sender groups
 
@@ -129,12 +131,10 @@ The setup code is a base64-encoded JSON payload that contains:
 
 That bootstrap token carries the built-in pairing bootstrap profile:
 
-* primary handed-off `node` token stays `scopes: []`
-* any handed-off `operator` token stays bounded to the bootstrap allowlist:
-  `operator.approvals`, `operator.read`, `operator.talk.secrets`, `operator.write`
-* bootstrap scope checks are role-prefixed, not one flat scope pool:
-  operator scope entries only satisfy operator requests, and non-operator roles
-  must still request scopes under their own role prefix
+* the built-in setup profile allows only the `node` role
+* after approval, the handed-off `node` token stays `scopes: []`
+* the built-in setup-code flow does not hand off an `operator` token
+* operator access requires a separate approved operator pairing or token flow
 * later token rotation/revocation remains bounded by both the device's approved
   role contract and the caller session's operator scopes
 
@@ -215,6 +215,5 @@ Stored under `~/.openclaw/devices/`:
   * WhatsApp: [WhatsApp](/channels/whatsapp)
   * Signal: [Signal](/channels/signal)
   * iMessage: [iMessage](/channels/imessage)
-  * BlueBubbles (legacy iMessage bridge): [BlueBubbles](/channels/bluebubbles)
   * Discord: [Discord](/channels/discord)
   * Slack: [Slack](/channels/slack)

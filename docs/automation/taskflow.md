@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Task flow"
 source: "https://docs.openclaw.ai/automation/taskflow"
-source_hash: "9b0c297f401b74a6a1b1278d6b206ac77f4df39025fffce619c8bd4daea341f8"
+source_hash: "d348f75649dbe942e189c2b63ca9472c985f69be5613d309c9a023daa9ccde73"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "automation/taskflow.md"
 original_doc_path: "automation/taskflow.md"
 duplicate_index: 1
@@ -96,7 +98,7 @@ Recommended data provenance fields for every collected item:
 
 Have the workflow reject or mark stale items before summarization. The LLM step should receive only structured JSON and should be asked to preserve `sourceUrl`, `retrievedAt`, and `asOf` in its output. Use [LLM Task](/tools/llm-task) when you need a schema-validated model step inside the workflow.
 
-For reusable team or community workflows, package the CLI, `.lobster` files, and any setup notes as a skill or plugin and publish it through [ClawHub](/tools/clawhub). Keep workflow-specific guardrails in that package unless the plugin API is missing a needed generic capability.
+For reusable team or community workflows, package the CLI, `.lobster` files, and any setup notes as a skill or plugin and publish it through [ClawHub](/clawhub). Keep workflow-specific guardrails in that package unless the plugin API is missing a needed generic capability.
 
 ## Sync modes
 

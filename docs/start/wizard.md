@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "0647e71d7ebabc57201803aa57e66593f00c222002cbbd6b268cbcd5354875ef"
+source_hash: "49a4a5561dd761658c93fd394d3441258fdbbd0e9a17e6a099efa01464c1a81e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
 original_doc_path: "start/wizard.md"
 duplicate_index: 1
@@ -21,6 +23,20 @@ and workspace defaults in one guided flow.
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw onboard
 ```
+
+## Locale
+
+The CLI wizard localizes fixed onboarding copy. It resolves locale from
+`OPENCLAW_LOCALE`, then `LC_ALL`, then `LC_MESSAGES`, then `LANG`, and falls
+back to English. Supported wizard locales are `en`, `zh-CN`, and `zh-TW`.
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+OPENCLAW_LOCALE=zh-CN openclaw onboard
+```
+
+Names and stable identifiers stay literal: `OpenClaw`, `Gateway`, `Tailscale`,
+commands, config keys, URLs, provider IDs, model IDs, and plugin/channel labels
+are not translated.
 
 <Info>
   Fastest first chat: open the Control UI (no channel setup needed). Run
@@ -82,7 +98,7 @@ Onboarding starts with **QuickStart** (defaults) vs **Advanced** (full control).
 3. **Gateway** — Port, bind address, auth mode, Tailscale exposure.
    In interactive token mode, choose default plaintext token storage or opt into SecretRef.
    Non-interactive token SecretRef path: `--gateway-token-ref-env <ENV_VAR>`.
-4. **Channels** — built-in and bundled chat channels such as BlueBubbles, Discord, Feishu, Google Chat, Mattermost, Microsoft Teams, QQ Bot, Signal, Slack, Telegram, WhatsApp, and more.
+4. **Channels** — built-in and official plugin chat channels such as iMessage, Discord, Feishu, Google Chat, Mattermost, Microsoft Teams, QQ Bot, Signal, Slack, Telegram, WhatsApp, and more.
 5. **Daemon** — Installs a LaunchAgent (macOS), systemd user unit (Linux/WSL2), or native Windows Scheduled Task with per-user Startup-folder fallback.
    If token auth requires a token and `gateway.auth.token` is SecretRef-managed, daemon install validates it but does not persist the resolved token into supervisor service environment metadata.
    If token auth requires a token and the configured token SecretRef is unresolved, daemon install is blocked with actionable guidance.

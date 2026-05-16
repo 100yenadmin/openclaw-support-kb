@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Image and media support"
 source: "https://docs.openclaw.ai/nodes/images"
-source_hash: "9026395c87a6d290ff0b76eb7343a4ea2335400dec237579bd82da438bb56f6f"
+source_hash: "dfac39d610698ae6c3d9b39312e4b4374768f710ecd8d8c2ccacc566933ceebb"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "nodes/images.md"
 original_doc_path: "nodes/images.md"
 duplicate_index: 1

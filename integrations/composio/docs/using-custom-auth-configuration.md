@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Using custom auth configuration"
 source: "https://docs.composio.dev/docs/using-custom-auth-configuration.md"
-source_hash: "fcd3e683d1e721eec2e88491af4ad7310f3379abdc6b5dc431878d95b5f6c09b"
+source_hash: "3d89c9cbe65acd101c94fbcc657652f47fcaa811014bfea9d46ca652bf9d90af"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "using-custom-auth-configuration.md"
 original_doc_path: "using-custom-auth-configuration.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Using custom auth configuration (/docs/using-custom-auth-configuration)
 Source: https://docs.composio.dev/docs/using-custom-auth-configuration.md

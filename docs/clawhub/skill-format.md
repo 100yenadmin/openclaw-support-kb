@@ -1,0 +1,202 @@
+---
+type: openclaw_doc
+title: "Skill format"
+source: "https://docs.openclaw.ai/clawhub/skill-format"
+source_hash: "1a3fd14eab78a5b55f80891eeb2c946a16be5abc93a23851933cc50a455c6987"
+system: "openclaw"
+kb_namespace: "openclaw"
+doc_path: "clawhub/skill-format.md"
+original_doc_path: "clawhub/skill-format.md"
+duplicate_index: 1
+---
+
+# Skill format
+Source: https://docs.openclaw.ai/clawhub/skill-format
+
+
+
+# Skill format
+
+## On disk
+
+A skill is a folder.
+
+Required:
+
+* `SKILL.md` (or `skill.md`)
+
+Optional:
+
+* any supporting *text-based* files (see “Allowed files”)
+* `.clawhubignore` (ignore patterns for publish/sync, legacy `.clawdhubignore`)
+* `.gitignore` (also honored)
+
+Local install metadata (written by the CLI):
+
+* `<skill>/.clawhub/origin.json` (legacy `.clawdhub`)
+
+Workdir install state (written by the CLI):
+
+* `<workdir>/.clawhub/lock.json` (legacy `.clawdhub`)
+
+## `SKILL.md`
+
+* Markdown with optional YAML frontmatter.
+* The server extracts metadata from frontmatter during publish.
+* `description` is used as the skill summary in the UI/search.
+
+## Frontmatter metadata
+
+Skill metadata is declared in the YAML frontmatter at the top of your `SKILL.md`. This tells the registry (and security analysis) what your skill needs to run.
+
+### Basic frontmatter
+
+```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+---
+name: my-skill
+description: Short summary of what this skill does.
+version: 1.0.0
+---
+```
+
+### Runtime metadata (`metadata.openclaw`)
+
+Declare your skill's runtime requirements under `metadata.openclaw` (aliases: `metadata.clawdbot`, `metadata.clawdis`).
+
+```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+---
+name: my-skill
+description: Manage tasks via the Todoist API.
+metadata:
+  openclaw:
+    requires:
+      env:
+        - TODOIST_API_KEY
+      bins:
+        - curl
+    primaryEnv: TODOIST_API_KEY
+---
+```
+
+Use `requires.env` for environment variables that must be present before the skill can run. Use `envVars` when you need per-variable metadata, including optional variables with `required: false`.
+
+### Full field reference
+
+| Field              | Type       | Description                                                                                                                                  |
+| ------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `requires.env`     | `string[]` | Required environment variables your skill expects.                                                                                           |
+| `requires.bins`    | `string[]` | CLI binaries that must all be installed.                                                                                                     |
+| `requires.anyBins` | `string[]` | CLI binaries where at least one must exist.                                                                                                  |
+| `requires.config`  | `string[]` | Config file paths your skill reads.                                                                                                          |
+| `primaryEnv`       | `string`   | The main credential env var for your skill.                                                                                                  |
+| `envVars`          | `array`    | Environment variable declarations with `name`, optional `required`, and optional `description`. Set `required: false` for optional env vars. |
+| `always`           | `boolean`  | If `true`, skill is always active (no explicit install needed).                                                                              |
+| `skillKey`         | `string`   | Override the skill's invocation key.                                                                                                         |
+| `emoji`            | `string`   | Display emoji for the skill.                                                                                                                 |
+| `homepage`         | `string`   | URL to the skill's homepage or docs.                                                                                                         |
+| `os`               | `string[]` | OS restrictions (e.g. `["macos"]`, `["linux"]`).                                                                                             |
+| `install`          | `array`    | Install specs for dependencies (see below).                                                                                                  |
+| `nix`              | `object`   | Nix plugin spec (see README).                                                                                                                |
+| `config`           | `object`   | Clawdbot config spec (see README).                                                                                                           |
+
+### Install specs
+
+If your skill needs dependencies installed, declare them in the `install` array:
+
+```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+metadata:
+  openclaw:
+    install:
+      - kind: brew
+        formula: jq
+        bins: [jq]
+      - kind: node
+        package: typescript
+        bins: [tsc]
+```
+
+Supported install kinds: `brew`, `node`, `go`, `uv`.
+
+### Optional environment variables
+
+Declare optional environment variables under `metadata.openclaw.envVars` and set `required: false`. Do not add optional entries to `requires.env`, because `requires.env` means the skill cannot run without them.
+
+```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+metadata:
+  openclaw:
+    primaryEnv: TODOIST_API_KEY
+    envVars:
+      - name: TODOIST_API_KEY
+        required: true
+        description: Todoist API token used for authenticated requests.
+      - name: TODOIST_PROJECT_ID
+        required: false
+        description: Optional default project ID when the user does not specify one.
+```
+
+### Why this matters
+
+ClawHub's security analysis checks that what your skill declares matches what it actually does. If your code references `TODOIST_API_KEY` but your frontmatter doesn't declare it under `requires.env`, `primaryEnv`, or `envVars`, the analysis will flag a metadata mismatch. Keeping declarations accurate helps your skill pass review and helps users understand what they're installing.
+
+### Example: complete frontmatter
+
+```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+---
+name: todoist-cli
+description: Manage Todoist tasks, projects, and labels from the command line.
+version: 1.2.0
+metadata:
+  openclaw:
+    requires:
+      env:
+        - TODOIST_API_KEY
+      bins:
+        - curl
+    primaryEnv: TODOIST_API_KEY
+    envVars:
+      - name: TODOIST_API_KEY
+        required: true
+        description: Todoist API token.
+      - name: TODOIST_PROJECT_ID
+        required: false
+        description: Optional default project ID.
+    emoji: "\u2705"
+    homepage: https://github.com/example/todoist-cli
+---
+```
+
+## Allowed files
+
+Only “text-based” files are accepted by publish.
+
+* Extension allowlist is in `packages/schema/src/textFiles.ts` (`TEXT_FILE_EXTENSIONS`).
+* Script files are still scanned after upload; PowerShell `.ps1`, `.psm1`, and `.psd1` files are accepted as text.
+* Content types starting with `text/` are treated as text; plus a small allowlist (JSON/YAML/TOML/JS/TS/Markdown/SVG).
+
+Limits (server-side):
+
+* Total bundle size: 50MB.
+* Embedding text includes `SKILL.md` + up to \~40 non-`.md` files (best-effort cap).
+
+## Slugs
+
+* Derived from folder name by default.
+* Must be lowercase and URL-safe: `^[a-z0-9][a-z0-9-]*$`.
+
+## Versioning + tags
+
+* Each publish creates a new version (semver).
+* Tags are string pointers to a version; `latest` is commonly used.
+
+## License
+
+* All skills published on ClawHub are licensed under `MIT-0`.
+* Anyone may use, modify, and redistribute published skills, including commercially.
+* Attribution is not required.
+* Do not add conflicting license terms in `SKILL.md`; ClawHub does not support per-skill license overrides.
+
+## Paid skills
+
+* ClawHub does not support paid skills, per-skill pricing, paywalls, or revenue sharing.
+* Do not add pricing metadata to `SKILL.md`; it is not part of the skill format and will not make a published skill paid.
+* If your skill integrates with a paid third-party service, document the external cost and required account clearly in the skill instructions and env declarations (`requires.env` for required variables, or `envVars` with `required: false` for optional variables).

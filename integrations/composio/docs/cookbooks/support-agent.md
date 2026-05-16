@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Support Knowledge Agent"
 source: "https://docs.composio.dev/cookbooks/support-agent.md"
-source_hash: "acc605ed283d663e54b221aac47aad58bc531357be108ca4f0f6fa32e640c1ea"
+source_hash: "6f82be252818bf99f420dd5a8abea4971e572119e2ae991f1ccce7f1ee98008b"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/support-agent.md"
 original_doc_path: "cookbooks/support-agent.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Support Knowledge Agent (/cookbooks/support-agent)
 Source: https://docs.composio.dev/cookbooks/support-agent.md

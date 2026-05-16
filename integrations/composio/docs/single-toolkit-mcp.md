@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "cf886a717f0d45766826ab8e6c54c00ff740aa8c6bf16fb0edbb15e5ffc6e0d9"
+source_hash: "000eb17ff4846527138aaa3acbff8022ecd6c6e7e3e024a99dbf66df0e9ab94e"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
 original_doc_path: "single-toolkit-mcp.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Single Toolkit MCP (/docs/single-toolkit-mcp)
 Source: https://docs.composio.dev/docs/single-toolkit-mcp.md
@@ -296,10 +301,10 @@ if (result.deleted) {
 
 # Next steps
 
-- [Providers](/docs/providers): 
+- [Providers](/docs/providers):
 Use with Anthropic, OpenAI, and other frameworks
 
-- [Quickstart](/docs/quickstart): 
+- [Quickstart](/docs/quickstart):
 Build an agent (recommended)
 
 ---

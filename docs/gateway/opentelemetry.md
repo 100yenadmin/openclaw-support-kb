@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "29d3baafa5e01d4230b27f23f48246333373d2306b50b161082bc6c678670bf0"
+source_hash: "159b9f6cb5c8e5d2d5750d51ca2fdb93c279965aba33fefe581146bdbda50f29"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
 original_doc_path: "gateway/opentelemetry.md"
 duplicate_index: 1
@@ -236,7 +238,7 @@ OpenClaw classifies sessions by the work it can still observe:
   recent progress. Stalled embedded runs stay observe-only at first, then
   abort-drain after `diagnostics.stuckSessionAbortMs` with no progress so queued
   turns behind the lane can resume. When unset, the abort threshold defaults to
-  the safer extended window of at least 10 minutes and 5x
+  the safer extended window of at least 5 minutes and 3x
   `diagnostics.stuckSessionWarnMs`.
 * `session.stuck`: stale session bookkeeping with no active work. This releases
   the affected session lane immediately.

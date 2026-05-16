@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "6b1410c8d4b3fa96c438083e91f5cc68c1ecf25fbb8e666ee412365f64da6e5e"
+source_hash: "f8389ba8b73dc02a54625d09b843e9c0f2499f34d6292e75eb1d7f043daf000b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
 original_doc_path: "plugins/building-plugins.md"
 duplicate_index: 1
@@ -19,7 +21,7 @@ generation, video generation, web fetch, web search, agent tools, or any
 combination.
 
 You do not need to add your plugin to the OpenClaw repository. Publish to
-[ClawHub](/tools/clawhub) and users install with
+[ClawHub](/clawhub) and users install with
 `openclaw plugins install clawhub:<package-name>`. Bare package specs still
 install from npm during the launch cutover.
 
@@ -199,6 +201,11 @@ plugin-specific prefix. Core admin namespaces (`config.*`,
 `exec.approvals.*`, `wizard.*`, `update.*`) stay reserved and always resolve to
 `operator.admin`, even if a plugin asks for a narrower scope.
 
+`openclaw/plugin-sdk/gateway-method-runtime` is a reserved control-plane bridge
+for plugin HTTP routes that declare
+`contracts.gatewayMethodDispatch: ["authenticated-request"]`. It is an
+intentional-use guard for reviewed native plugins, not a sandbox boundary.
+
 Hook guard semantics to keep in mind:
 
 * `before_tool_call`: `{ block: true }` is terminal and stops lower-priority handlers.
@@ -250,6 +257,14 @@ register(api) {
   );
 }
 ```
+
+Tool factories receive a runtime-supplied context object. Use
+`ctx.activeModel` when a tool needs to log, display, or adapt to the active
+model for the current turn. The object can include `provider`, `modelId`, and
+`modelRef`. Treat it as informational runtime metadata, not as a security
+boundary against the local operator, installed plugin code, or a modified
+OpenClaw runtime. For sensitive local tools, keep an explicit plugin or operator
+opt-in and fail closed when the active model metadata is missing or unsuitable.
 
 Every tool registered with `api.registerTool(...)` must also be declared in the
 plugin manifest:

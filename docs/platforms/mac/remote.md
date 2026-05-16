@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Remote control"
 source: "https://docs.openclaw.ai/platforms/mac/remote"
-source_hash: "7496a84f35a6ecfe30f08e69c5d10b849ad0d2e2df15ecd245b89e1c60321981"
+source_hash: "f86d8899dec655670d25654b04246150c3641488ad4ca70db1e1af3c143eb98c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/remote.md"
 original_doc_path: "platforms/mac/remote.md"
 duplicate_index: 1
@@ -89,7 +91,7 @@ node.
 * **Health probe failed**: check SSH reachability, PATH, and that Baileys is logged in (`openclaw status --json`).
 * **Web Chat stuck**: confirm the gateway is running on the remote host and the forwarded port matches the gateway WS port; the UI requires a healthy WS connection.
 * **Node IP shows 127.0.0.1**: expected with the SSH tunnel. Switch **Transport** to **Direct (ws/wss)** if you want the gateway to see the real client IP.
-* **Dashboard works but Mac capabilities are offline**: this means the app's operator/control connection is healthy, but the companion node connection is not connected or is missing its command surface. Open the menu bar device section and check whether the Mac is `paired · disconnected`. For `wss://*.ts.net` Tailscale Serve endpoints, the app detects stale legacy TLS leaf pins after certificate rotation, clears the stale pin when macOS trusts the new certificate, and retries automatically. If the certificate is not system-trusted or the host is not a Tailscale Serve name, review the certificate or switch to **Remote over SSH**.
+* **Dashboard works but Mac capabilities are offline**: this means the app's operator/control connection is healthy, but the companion node connection is not connected or is missing its command surface. Open the menu bar device section and check whether the Mac is `paired · disconnected`. For `wss://*.ts.net` Tailscale Serve endpoints, the app detects stale legacy TLS leaf pins after certificate rotation, clears the stale pin when macOS trusts the new certificate, and retries automatically. If the certificate is not system-trusted or the host is not a Tailscale Serve name, set `gateway.remote.tlsFingerprint` to the expected certificate fingerprint, review the certificate, or switch to **Remote over SSH**.
 * **Voice Wake**: trigger phrases are forwarded automatically in remote mode; no separate forwarder is needed.
 
 ## Notification sounds

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "In-chat authentication"
 source: "https://docs.composio.dev/docs/authenticating-users/in-chat-authentication.md"
-source_hash: "f44953f71fbaefce4dcf876cdc8278656b095c21080213702b7bd9912614f964"
+source_hash: "e8f17368551daf39e0cc2a6ad11ece60a2c6ba6e7a1ee2c6651fd463a4effb64"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "authenticating-users/in-chat-authentication.md"
 original_doc_path: "authenticating-users/in-chat-authentication.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # In-chat authentication (/docs/authenticating-users/in-chat-authentication)
 Source: https://docs.composio.dev/docs/authenticating-users/in-chat-authentication.md

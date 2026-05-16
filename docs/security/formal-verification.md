@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Formal verification (security models)"
 source: "https://docs.openclaw.ai/security/formal-verification"
-source_hash: "602e9f86b2a28eff53af3b4479ea5fe1f4a8ff3b435cee7e25ee957733950489"
+source_hash: "aa61e3010be3778847bbb785e699aa3891e5f668ad836f1227a86b8cb6fde987"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "security/formal-verification.md"
 original_doc_path: "security/formal-verification.md"
 duplicate_index: 1

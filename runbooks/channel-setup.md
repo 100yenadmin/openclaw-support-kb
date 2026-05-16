@@ -12,11 +12,11 @@ runbook. Search current channel docs first.
 ## Search Contract
 
 ```bash
-gbrain query "OpenClaw channel setup <channel> pairing allowlist group policy troubleshooting"
-gbrain search "Source: https://docs.openclaw.ai/channels/index"
-gbrain search "Source: https://docs.openclaw.ai/channels/<channel>"
-gbrain search "Source: https://docs.openclaw.ai/channels/troubleshooting"
-gbrain search "Source: https://docs.openclaw.ai/channels/pairing"
+gbrain search "OpenClaw channel setup <channel> pairing allowlist group policy troubleshooting" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/index" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/<channel>" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/troubleshooting" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/channels/pairing" --source openclaw-support-kb
 ```
 
 ## Guided Workflow

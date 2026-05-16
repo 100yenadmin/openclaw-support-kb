@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "20a54ba903610c5930755641e38d24ca3e7cedce30197eb864892e93c380b844"
+source_hash: "d16e1d3e2632c6d20b34394b5fd4f91f746621f106df058e5ed1882008434e9a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/anthropic.md"
 original_doc_path: "providers/anthropic.md"
 duplicate_index: 1
@@ -116,7 +118,11 @@ Anthropic builds the **Claude** model family. OpenClaw supports two auth routes:
       agents: {
         defaults: {
           model: { primary: "anthropic/claude-opus-4-7" },
-          agentRuntime: { id: "claude-cli" },
+          models: {
+            "anthropic/claude-opus-4-7": {
+              agentRuntime: { id: "claude-cli" },
+            },
+          },
         },
       },
     }
@@ -124,7 +130,7 @@ Anthropic builds the **Claude** model family. OpenClaw supports two auth routes:
 
     Legacy `claude-cli/claude-opus-4-7` model refs still work for
     compatibility, but new config should keep provider/model selection as
-    `anthropic/*` and put the execution backend in `agentRuntime.id`.
+    `anthropic/*` and put the execution backend in provider/model runtime policy.
 
     <Tip>
       If you want the clearest billing path, use an Anthropic API key instead. OpenClaw also supports subscription-style options from [OpenAI Codex](/providers/openai), [Qwen Cloud](/providers/qwen), [MiniMax](/providers/minimax), and [Z.AI / GLM](/providers/glm).

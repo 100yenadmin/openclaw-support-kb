@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "1d6e5ca340dd3a9778f480d908edbaced0c19b37bdc81d61ededf90173d52804"
+source_hash: "76d453c2099166696fc165c9b023debe60617c1447418888b5100a68439c725b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
 original_doc_path: "tools/browser.md"
 duplicate_index: 1
@@ -675,7 +677,8 @@ Platforms:
 * macOS: checks `/Applications` and `~/Applications`.
 * Linux: checks common Chrome/Brave/Edge/Chromium locations under `/usr/bin`,
   `/snap/bin`, `/opt/google`, `/opt/brave.com`, `/usr/lib/chromium`, and
-  `/usr/lib/chromium-browser`.
+  `/usr/lib/chromium-browser`, plus Playwright-managed Chromium under
+  `PLAYWRIGHT_BROWSERS_PATH` or `~/.cache/ms-playwright`.
 * Windows: checks common install locations.
 
 ## Control API (optional)

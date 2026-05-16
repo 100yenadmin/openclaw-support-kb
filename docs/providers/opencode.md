@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "903e408d4149c0d55cf021130ba25a43210c89106b7adb610a490f3736c3c8e9"
+source_hash: "a99712542ea730c911986ddf875e8d9575ed85a7d659e40938ea6e950509a969"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
 original_doc_path: "providers/opencode.md"
 duplicate_index: 1

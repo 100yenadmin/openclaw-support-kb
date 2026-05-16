@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Model provider quickstart"
 source: "https://docs.openclaw.ai/providers/models"
-source_hash: "81f2541c579f9e4ed3a20c4eb51878b7975f59debc4969260e3289f52732cb4a"
+source_hash: "e7adb33a0f2e00671e2885b0db2e1ac788edf684ceff5b5a5d844ef39d310741"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/models.md"
 original_doc_path: "providers/models.md"
 duplicate_index: 1
@@ -56,9 +58,9 @@ model as `provider/model`.
 * [xAI](/providers/xai)
 * [Z.AI](/providers/zai)
 
-## Additional bundled provider variants
+## Additional provider variants
 
-* `anthropic-vertex` - implicit Anthropic on Google Vertex support when Vertex credentials are available; no separate onboarding auth choice
+* `anthropic-vertex` - install `@openclaw/anthropic-vertex-provider` for implicit Anthropic on Google Vertex support when Vertex credentials are available; no separate onboarding auth choice
 * `copilot-proxy` - local VS Code Copilot Proxy bridge; use `openclaw onboard --auth-choice copilot-proxy`
 * `google-gemini-cli` - unofficial Gemini CLI OAuth flow; requires a local `gemini` install (`brew install gemini-cli` or `npm install -g @google/gemini-cli`); default model `google-gemini-cli/gemini-3-flash-preview`; use `openclaw onboard --auth-choice google-gemini-cli` or `openclaw models auth login --provider google-gemini-cli --set-default`
 

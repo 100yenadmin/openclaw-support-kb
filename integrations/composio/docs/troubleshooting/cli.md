@@ -2,11 +2,16 @@
 type: composio_doc
 title: "CLI"
 source: "https://docs.composio.dev/docs/troubleshooting/cli.md"
-source_hash: "ce8aec176001b392cdf6e2720b315259e37478e9abbefabc8728d7d191519616"
+source_hash: "e24545fed3e379649caf75790a7dff2f13487eb6fc0678a6b4caf30dddbedbe9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/cli.md"
 original_doc_path: "troubleshooting/cli.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # CLI (/docs/troubleshooting/cli)
 Source: https://docs.composio.dev/docs/troubleshooting/cli.md

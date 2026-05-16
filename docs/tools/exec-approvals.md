@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "8f4e09c66fd2fde21aa456cf70442896995563702e5a7c9e0ac69e4ad19c8ae1"
+source_hash: "99e486943400fb16016b82068445dc345cb0114c721718da4852bf30f18d51ab"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
 original_doc_path: "tools/exec-approvals.md"
 duplicate_index: 1
@@ -61,7 +63,8 @@ Exec approvals are enforced locally on the execution host:
 
 * Gateway-authenticated callers are trusted operators for that Gateway.
 * Paired nodes extend that trusted operator capability onto the node host.
-* Exec approvals reduce accidental execution risk, but are **not** a per-user auth boundary.
+* Exec approvals reduce accidental execution risk, but are **not** a per-user auth boundary or filesystem read-only policy.
+* Once approved, a command can mutate files according to the selected host or sandbox filesystem permissions.
 * Approved node-host runs bind canonical execution context: canonical cwd, exact argv, env binding when present, and pinned executable path when applicable.
 * For shell scripts and direct interpreter/runtime file invocations, OpenClaw also tries to bind one concrete local file operand. If that bound file changes after approval but before execution, the run is denied instead of executing drifted content.
 * File binding is intentionally best-effort, **not** a complete semantic model of every interpreter/runtime loader path. If approval mode cannot identify exactly one concrete local file to bind, it refuses to mint an approval-backed run instead of pretending full coverage.
@@ -166,6 +169,20 @@ Examples that strict mode catches:
 In strict mode these commands still need explicit approval, and
 `allow-always` does not persist new allowlist entries for them
 automatically.
+
+### `tools.exec.commandHighlighting`
+
+<ParamField type="boolean">
+  Controls only presentation in exec approval prompts. When enabled,
+  OpenClaw may attach parser-derived command spans so Web approval
+  prompts can highlight command tokens. Set it to `true` to enable
+  command text highlighting.
+</ParamField>
+
+This setting does **not** change `security`, `ask`, allowlist matching,
+strict inline-eval behavior, approval forwarding, or command execution.
+It can be set globally under `tools.exec.commandHighlighting` or per
+agent under `agents.list[].tools.exec.commandHighlighting`.
 
 ## YOLO mode (no-approval)
 

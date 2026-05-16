@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Scripts"
 source: "https://docs.openclaw.ai/help/scripts"
-source_hash: "4c1ec1736d8d6bb5c4c6b5524f92d3571fb44b70f5aefcbccf2ca51d6b1e13db"
+source_hash: "316883b065bd59f392688adeec5fffbf3694fe9d91e06580e8c912496319442f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/scripts.md"
 original_doc_path: "help/scripts.md"
 duplicate_index: 1

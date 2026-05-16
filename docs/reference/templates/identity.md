@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "IDENTITY template"
 source: "https://docs.openclaw.ai/reference/templates/IDENTITY"
-source_hash: "69a4ef0add0aeba1dcb3ebfa8974c81e87ad84f1bdf0e8fdb2d9694ec76aacac"
+source_hash: "cff95a9aaea5d88a4d93dd4382f3dceefdb9fd363ab405751b58611fd00ee969"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/templates/identity.md"
 original_doc_path: "reference/templates/identity.md"
 duplicate_index: 1

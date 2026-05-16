@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Nix"
 source: "https://docs.openclaw.ai/install/nix"
-source_hash: "c0959878d42ccc317b23c9a4df7ba800f0c26343e8c2bd48403025df3c029ff2"
+source_hash: "5c81e3e6e1dc307f036351ed85b9bc884f37a04854ba69c9ba392e849a3c07d9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/nix.md"
 original_doc_path: "install/nix.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Approvals"
 source: "https://docs.openclaw.ai/cli/approvals"
-source_hash: "a2a9dac5598cd33fbc569b3de8a187411d8878a553834fa81ed29d840c79a8e1"
+source_hash: "4f3c4146c8a7b5d8b663f9ed33d54b624afc2855baac16c85a18926e0f4770a6"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/approvals.md"
 original_doc_path: "cli/approvals.md"
 duplicate_index: 1

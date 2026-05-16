@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes/index"
-source_hash: "b744800f2a49f104c94910d521ed892510ca3077cd1be8a924a725616a4572f0"
+source_hash: "b8712101e6b68db6fbb267aa1d3754b26d069af2652e3b1b6363e3e8ba8416bb"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "nodes/index.md"
 original_doc_path: "nodes/index.md"
 duplicate_index: 1

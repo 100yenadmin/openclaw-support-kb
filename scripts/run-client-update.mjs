@@ -5,6 +5,7 @@ import { mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/p
 import os from "node:os";
 import path from "node:path";
 import {
+  CANONICAL_REPO_URL,
   canonicalSourceDir,
   isFullCommitSha,
   isOfficialRepoUrl,
@@ -17,7 +18,7 @@ import {
   SOURCE_MARKER_FILE,
 } from "./lib/openclaw-support-kb.mjs";
 
-const DEFAULT_REPO_URL = "https://github.com/electricsheephq/openclaw-support-kb.git";
+const DEFAULT_REPO_URL = CANONICAL_REPO_URL;
 const targetDir = process.env.OPENCLAW_SUPPORT_KB_DIR || canonicalSourceDir();
 const repoUrl = process.env.OPENCLAW_SUPPORT_KB_REPO || DEFAULT_REPO_URL;
 const branch = process.env.OPENCLAW_SUPPORT_KB_BRANCH || "main";
@@ -198,7 +199,12 @@ function ensureRepoTrust() {
 function ensureExistingOriginMatchesTrustPolicy() {
   const originUrl = capture("git", ["-C", targetDir, "config", "--get", "remote.origin.url"]).stdout.trim();
   if (isOfficialRepoUrl(repoUrl)) {
-    if (isOfficialRepoUrl(originUrl)) return;
+    if (isOfficialRepoUrl(originUrl)) {
+      if (normalizeRepoUrl(originUrl) !== normalizeRepoUrl(DEFAULT_REPO_URL)) {
+        run("git", ["-C", targetDir, "remote", "set-url", "origin", DEFAULT_REPO_URL]);
+      }
+      return;
+    }
     throw new Error(`Refusing to update ${targetDir}: existing origin is not the official repo (${originUrl}).`);
   }
   if (normalizeRepoUrl(originUrl) !== normalizeRepoUrl(repoUrl)) {
@@ -216,7 +222,8 @@ async function directoryIsEmpty(dir) {
 }
 
 function cloneTarget() {
-  run("git", ["clone", "--branch", branch, repoUrl, targetDir]);
+  const cloneUrl = isOfficialRepoUrl(repoUrl) ? DEFAULT_REPO_URL : repoUrl;
+  run("git", ["clone", "--branch", branch, cloneUrl, targetDir]);
   if (pinnedRef) {
     run("git", ["-C", targetDir, "fetch", "--depth", "1", "origin", pinnedRef]);
     run("git", ["-C", targetDir, "checkout", "--detach", "FETCH_HEAD"]);

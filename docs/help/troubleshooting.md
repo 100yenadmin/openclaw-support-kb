@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "a3495ffc64a75d3ddddbd27af5d34735a7e82ecf2e30b728aeca7786a1942d93"
+source_hash: "06b1e7d5fdc292078c78d9776ed705f6497496da9455e6a6ee37b76b1ed04176"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
 original_doc_path: "help/troubleshooting.md"
 duplicate_index: 1

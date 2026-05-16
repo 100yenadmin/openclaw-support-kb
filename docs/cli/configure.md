@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Configure"
 source: "https://docs.openclaw.ai/cli/configure"
-source_hash: "cd8e8ae3fc1a3b80e702590d20ecb2438d68fbc0da8dd6a64ee2fa4cf2efb173"
+source_hash: "64e4579c58c0cd3df328f646d376c23707c128295e6546eccd7937d3597f12ef"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/configure.md"
 original_doc_path: "cli/configure.md"
 duplicate_index: 1
@@ -15,7 +17,9 @@ Source: https://docs.openclaw.ai/cli/configure
 
 # `openclaw configure`
 
-Interactive prompt to set up credentials, devices, and agent defaults.
+Interactive prompt for targeted changes to an existing setup: credentials, devices, agent defaults, gateway, channels, plugins, skills, and health checks.
+
+Use `openclaw onboard` for the full guided first-run journey, `openclaw setup` for the baseline config/workspace only, and `openclaw channels add` when you only need channel account setup.
 
 <Note>
   The **Model** section includes a multi-select for the `agents.defaults.models` allowlist (what shows up in `/model` and the model picker). Provider-scoped setup choices merge their selected models into the existing allowlist instead of replacing unrelated providers already in the config.

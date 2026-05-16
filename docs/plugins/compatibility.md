@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "fdf54523aaee309b1029461ff40aa86ab024e2fac3169b32177889aae57eb852"
+source_hash: "6fa50aeb552ae5c85b4775321e0fb5b8e97d7a3dd7d16434b9ada5002d539fb1"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
 original_doc_path: "plugins/compatibility.md"
 duplicate_index: 1
@@ -75,16 +77,14 @@ not publish the inspector binary from the main `openclaw` package.
 
 ### Maintainer acceptance lane
 
-Use Blacksmith Testbox for the installable-package acceptance lane when validating
-the external inspector against OpenClaw plugin packages. Run it from a clean
-OpenClaw checkout after the package is built:
+Use Crabbox-backed Blacksmith Testbox for the installable-package acceptance
+lane when validating the external inspector against OpenClaw plugin packages.
+Run it from a clean OpenClaw checkout after the package is built:
 
 ```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
-blacksmith testbox warmup ci-check-testbox.yml --ref main --idle-timeout 90
-blacksmith testbox run --id <tbx_id> "pnpm install && pnpm build && npm exec --yes @openclaw/plugin-inspector@0.1.0 -- ./extensions/telegram --json"
-blacksmith testbox run --id <tbx_id> "npm exec --yes @openclaw/plugin-inspector@0.1.0 -- ./extensions/discord --json"
-blacksmith testbox run --id <tbx_id> "npm exec --yes @openclaw/plugin-inspector@0.1.0 -- <clawhub-plugin-dir> --json"
-blacksmith testbox stop <tbx_id>
+pnpm crabbox:run -- --provider blacksmith-testbox --timing-json --shell -- "pnpm install && pnpm build && npm exec --yes @openclaw/plugin-inspector@0.1.0 -- ./extensions/telegram --json"
+pnpm crabbox:run -- --provider blacksmith-testbox --timing-json --shell -- "npm exec --yes @openclaw/plugin-inspector@0.1.0 -- ./extensions/discord --json"
+pnpm crabbox:run -- --provider blacksmith-testbox --timing-json --shell -- "npm exec --yes @openclaw/plugin-inspector@0.1.0 -- <clawhub-plugin-dir> --json"
 ```
 
 Keep this lane opt-in for maintainers because it installs an external npm

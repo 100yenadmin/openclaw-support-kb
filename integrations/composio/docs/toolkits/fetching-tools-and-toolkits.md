@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Fetching tools and toolkits"
 source: "https://docs.composio.dev/docs/toolkits/fetching-tools-and-toolkits.md"
-source_hash: "dcba1efc7b239ff62a7e19006ad7dd9747dda3dc0a10ef087200ce206a78cc7e"
+source_hash: "e062222d583adb1f3e86ca02a0d7dbf8fcca8cd26fba03f0ae5a5dc2864974ad"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "toolkits/fetching-tools-and-toolkits.md"
 original_doc_path: "toolkits/fetching-tools-and-toolkits.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Fetching tools and toolkits (/docs/toolkits/fetching-tools-and-toolkits)
 Source: https://docs.composio.dev/docs/toolkits/fetching-tools-and-toolkits.md

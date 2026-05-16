@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Steer"
 source: "https://docs.openclaw.ai/tools/steer"
-source_hash: "c7e5db2cef7c7aa07987512088014f343d6173f5dd6408840e43e7ff3efe2400"
+source_hash: "325a3ba02ace2ad96340ebe9a6623ea4ef4e7c608883a1fa700bb58ea8cddd0e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/steer.md"
 original_doc_path: "tools/steer.md"
 duplicate_index: 1
@@ -13,8 +15,10 @@ Source: https://docs.openclaw.ai/tools/steer
 
 
 
-`/steer` sends guidance to an already-active run. It is for "adjust this
-run while it is still working" moments, not for starting a new turn.
+`/steer` first tries to send guidance to an already-active run. It is for
+"adjust this run while it is still working" moments. If the current runtime
+cannot accept steering, OpenClaw sends the message as a normal prompt instead
+of dropping it.
 
 ## Current session
 
@@ -29,27 +33,31 @@ Behavior:
 
 * Targets only the current session's active run.
 * Works independently of the session's `/queue` mode.
-* Does not start a new run when the session is idle.
-* Replies with a warning when there is no active run to steer.
+* Starts a normal turn with the same message when the session is idle or the
+  active run cannot accept steering.
 * Uses the active runtime's steering path, so the model sees the guidance at
   the next supported runtime boundary.
 
 ## Steer vs queue
 
-`/queue steer` changes how normal inbound messages behave when they arrive
-while a run is active. `/steer <message>` is an explicit command that tries to
-inject that command's message into the active run at the next supported runtime
-boundary, regardless of the stored `/queue` setting.
+`/queue steer` makes normal inbound messages try to steer the active run when
+they arrive while a run is active. `/steer <message>` is an explicit command
+that tries to inject that command's message into the active run at the next
+supported runtime boundary, regardless of the stored `/queue` setting. When
+that injection is not available, the command prefix is stripped and `<message>`
+continues as a normal prompt.
 
 Use:
 
 * `/steer <message>` when you want to guide the active run right now.
 * `/queue steer` when you want future normal messages to steer active runs by
   default.
-* `/queue collect` or `/queue followup` when new messages should wait for a
-  later turn instead of steering the active run.
+* `/queue collect` or `/queue followup` when future normal messages should wait
+  for a later turn instead of steering the active run.
+* `/queue interrupt` when the newest message should replace the active run
+  instead of steering it.
 
-For queue modes and fallback behavior, see [Command queue](/concepts/queue) and
+For queue modes and steering boundaries, see [Command queue](/concepts/queue) and
 [Steering queue](/concepts/queue-steering).
 
 ## Sub-agents

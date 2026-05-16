@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Composio SDK — Instructions for AI Code Generators"
 source: "https://docs.composio.dev/llms-full.txt"
-source_hash: "93f0afe0022a96390f6b1af89082c96fb71ad03db359d80213992afd470c44ed"
+source_hash: "2ea9a040284917a2f851afeb5396892a35556da095e6514ae40125cf0bb72eac"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "ai-code-generator-instructions.md"
 original_doc_path: "ai-code-generator-instructions.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Composio SDK — Instructions for AI Code Generators
 Source: https://docs.composio.dev/llms-full.txt

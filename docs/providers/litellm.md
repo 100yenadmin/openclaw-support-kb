@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "LiteLLM"
 source: "https://docs.openclaw.ai/providers/litellm"
-source_hash: "6aa33187194b12ed90dd634917bd92aaf186939a74520616fdfd8c10d3a68b89"
+source_hash: "866430ee8d2f8a3c4a82655026cdbcafb7d9bd170042bca8e0b3d25236b60906"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/litellm.md"
 original_doc_path: "providers/litellm.md"
 duplicate_index: 1

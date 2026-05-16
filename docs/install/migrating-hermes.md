@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Migrating from Hermes"
 source: "https://docs.openclaw.ai/install/migrating-hermes"
-source_hash: "33560b1b2e25bd7db002f70ff54879846c8bbc7cd548b0ca4e749632c259d1a7"
+source_hash: "d8a8177f800b84880d31986eefe618165f452a0acc63c9da7c76ced898ba6d30"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/migrating-hermes.md"
 original_doc_path: "install/migrating-hermes.md"
 duplicate_index: 1

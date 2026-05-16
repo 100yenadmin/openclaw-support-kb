@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "81db69ef4698c6e62bcdf4915e3264cbb59aa3b2a793b4660df141a6527693c6"
+source_hash: "cf839fd134787c25165291fb3885b0b16cac823710291b4a560939ed86d7be75"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
 original_doc_path: "migration-guide/tool-router-beta.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Migrating from Experimental Tool Router (/docs/migration-guide/tool-router-beta)
 Source: https://docs.composio.dev/docs/migration-guide/tool-router-beta.md

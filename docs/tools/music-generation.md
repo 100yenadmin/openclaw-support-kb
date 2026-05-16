@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "91c3607db35475422263361cedff68667aad4cc03249ae9d5f764938dcdadcd8"
+source_hash: "18e309002a34a68b470ba70bde6725a931ca3d43caa0fe8c48f4f6cabcba0078"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
 original_doc_path: "tools/music-generation.md"
 duplicate_index: 1
@@ -179,7 +181,7 @@ Direct generation example:
 </ParamField>
 
 <ParamField type="string">Output filename hint.</ParamField>
-<ParamField type="number">Optional provider request timeout in milliseconds. Values below 10000ms are raised to 10000ms and reported in the tool result.</ParamField>
+<ParamField type="number">Optional provider request timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.musicGenerationModel.timeoutMs` if configured. Values below 10000ms are raised to 10000ms and reported in the tool result.</ParamField>
 
 <Note>
   Not all providers support all parameters. OpenClaw still validates hard
@@ -342,10 +344,9 @@ Repo wrapper:
 pnpm test:live:media music
 ```
 
-This live file loads missing provider env vars from `~/.profile`, prefers
-live/env API keys ahead of stored auth profiles by default, and runs both
-`generate` and declared `edit` coverage when the provider enables edit
-mode. Coverage today:
+This live file uses already-exported provider env vars ahead of stored auth
+profiles by default, and runs both `generate` and declared `edit` coverage when
+the provider enables edit mode. Coverage today:
 
 * `google`: `generate` plus `edit`
 * `minimax`: `generate` only

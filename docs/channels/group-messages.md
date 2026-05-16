@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "WhatsApp group messages"
 source: "https://docs.openclaw.ai/channels/group-messages"
-source_hash: "3413beb442066791d5d9b9ae0584e1249dcd10ad5ac34b3f4ec601716b1ddd29"
+source_hash: "897bebe87753bebd3a4a9156058c6707b675393fbeac70d9ab7c777bddadf454"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/group-messages.md"
 original_doc_path: "channels/group-messages.md"
 duplicate_index: 1

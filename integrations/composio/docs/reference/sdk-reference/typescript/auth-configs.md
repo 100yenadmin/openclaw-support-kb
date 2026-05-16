@@ -2,11 +2,16 @@
 type: composio_doc
 title: "AuthConfigs"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md"
-source_hash: "76e6abf474c0d7b7cff3f455ef85668fce7e9e53c3dfc5043437105cafda9441"
+source_hash: "f601732d716a8d12432a0d7aa6c0feab414e87dc7fef807e29783c8bfc8334c4"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/auth-configs.md"
 original_doc_path: "reference/sdk-reference/typescript/auth-configs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # AuthConfigs (/reference/sdk-reference/typescript/auth-configs)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md

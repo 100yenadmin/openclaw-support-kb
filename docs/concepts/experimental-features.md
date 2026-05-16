@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "3afea4cbb7e19e3c9062dfd5e940e3851e680f33c71e378a28c3a07c698fda9e"
+source_hash: "0604199ea1c00673339185245b9dd404c376f66672cce7959a5f87ceeb44059a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/experimental-features.md"
 original_doc_path: "concepts/experimental-features.md"
 duplicate_index: 1

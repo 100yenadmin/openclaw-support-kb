@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Menu bar icon"
 source: "https://docs.openclaw.ai/platforms/mac/icon"
-source_hash: "a4d93d568fcbd7c67666d4190068aad89e6fd769d5e9df00ceda2a99cd8d91a4"
+source_hash: "e28218600ed6b37c82e9f3a0e3dab9903c6bff36f4051e896458dc04d6672740"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/icon.md"
 original_doc_path: "platforms/mac/icon.md"
 duplicate_index: 1

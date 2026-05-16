@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "WeChat"
 source: "https://docs.openclaw.ai/channels/wechat"
-source_hash: "cc48d580f1f585fb784b119d310bf36f683ec5eee934ff3e897fedc1e0a63f83"
+source_hash: "a967009f86c845e70d679be03af7fe18c3800e184fca772ccb68588b5d6c3d55"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/wechat.md"
 original_doc_path: "channels/wechat.md"
 duplicate_index: 1

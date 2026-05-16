@@ -2,11 +2,16 @@
 type: composio_doc
 title: "TypeScript Custom Provider"
 source: "https://docs.composio.dev/docs/providers/custom-providers/typescript.md"
-source_hash: "7402a7ce3bf9ec327e44f8e9621f26a56d09afc52841ba3cef6498537ab02a02"
+source_hash: "3ae409747d831bb2ab53e3777b2f39dd22a3ab93b93a4339ddeb385b389179ea"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/custom-providers/typescript.md"
 original_doc_path: "providers/custom-providers/typescript.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # TypeScript Custom Provider (/docs/providers/custom-providers/typescript)
 Source: https://docs.composio.dev/docs/providers/custom-providers/typescript.md

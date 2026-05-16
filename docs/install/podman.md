@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Podman"
 source: "https://docs.openclaw.ai/install/podman"
-source_hash: "4ca2614a7d9c93fbe519998f6c2ec3a76ba15fb841a14fcb1054de7fd1c82a4a"
+source_hash: "2578622e5937613ee9f5d50fefb842134fa7e1784fd73d08e6237fe77df70e71"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/podman.md"
 original_doc_path: "install/podman.md"
 duplicate_index: 1

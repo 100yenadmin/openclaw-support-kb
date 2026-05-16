@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "BTW side questions"
 source: "https://docs.openclaw.ai/tools/btw"
-source_hash: "44d073c71f69757124a76320a45ae25a2502440487fd6278bd800ff7f1775053"
+source_hash: "5f96138ae729eafabcca43d88e85d90def581070aecda5e13e753eb1563cbc80"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/btw.md"
 original_doc_path: "tools/btw.md"
 duplicate_index: 1
@@ -30,7 +32,7 @@ When you send:
 OpenClaw:
 
 1. snapshots the current session context,
-2. runs a separate **tool-less** model call,
+2. runs a separate ephemeral side query,
 3. answers only the side question,
 4. leaves the main run alone,
 5. does **not** write the BTW question or answer to session history,
@@ -40,9 +42,17 @@ The important mental model is:
 
 * same session context
 * separate one-shot side query
-* no tool calls
+* same native harness transport when the session uses a native harness
 * no future context pollution
 * no transcript persistence
+
+For Codex harness sessions, BTW stays inside Codex by forking the active
+app-server thread as an ephemeral side thread. That keeps Codex OAuth and native
+thread behavior intact while still isolating the side answer from the parent
+transcript. Like Codex `/side`, the side thread keeps the current Codex
+permissions and native tool surface, with guardrails that tell the model not to
+treat inherited parent-thread work as active instructions. Non-Codex runtimes
+keep the older direct one-shot path.
 
 ## What it does not do
 
@@ -50,7 +60,6 @@ The important mental model is:
 
 * create a new durable session,
 * continue the unfinished main task,
-* run tools or agent tool loops,
 * write BTW question/answer data to transcript history,
 * appear in `chat.history`,
 * survive a reload.
@@ -67,7 +76,7 @@ explicitly telling the model:
 
 * answer only the side question,
 * do not resume or complete the unfinished main task,
-* do not emit tool calls or pseudo-tool calls.
+* do not steer the parent conversation.
 
 That keeps BTW isolated from the main run while still making it aware of what
 the session is about.

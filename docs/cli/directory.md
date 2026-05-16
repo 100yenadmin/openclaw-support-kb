@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "a7ebb220226312e3c5dadd31bd492741286e9ebbc6deebe0d2f49a3c8e67741d"
+source_hash: "e7311b7aa696abe82d33b0e162189a34810f22ac09c19585859ff8f301847f6b"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/directory.md"
 original_doc_path: "cli/directory.md"
 duplicate_index: 1

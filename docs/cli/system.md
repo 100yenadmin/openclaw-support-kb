@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "System"
 source: "https://docs.openclaw.ai/cli/system"
-source_hash: "df0015fb4072d5fa3ca75d7df8eeb28b6ed5ab2e97b01572d00c42a0f81757ae"
+source_hash: "81dc923247ae080687ec9d4494dbf1ebb1804266fe9d1bf9df5e44e2cb4955d4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/system.md"
 original_doc_path: "cli/system.md"
 duplicate_index: 1
@@ -37,14 +39,28 @@ openclaw system presence
 
 ## `system event`
 
-Enqueue a system event on the **main** session. The next heartbeat will inject
-it as a `System:` line in the prompt. Use `--mode now` to trigger the heartbeat
-immediately; `next-heartbeat` waits for the next scheduled tick.
+Enqueue a system event on the **main** session by default. The next heartbeat
+will inject it as a `System:` line in the prompt. Use `--mode now` to trigger
+the heartbeat immediately; `next-heartbeat` waits for the next scheduled tick.
+
+Pass `--session-key` to target a specific session (for example to relay an
+async-task completion back to the channel that started it).
+
+> **Timing exception with `--session-key`:** when `--session-key` is supplied,
+> `--mode next-heartbeat` collapses to an immediate targeted wake instead of
+> waiting for the next scheduled tick. Targeted wakes use heartbeat intent
+> `immediate` so they bypass the runner's not-due gate that would otherwise
+> defer (and effectively drop) an `event`-intent wake. If you want delayed
+> delivery, omit `--session-key` so the event lands on the main session and
+> rides the next regular heartbeat.
 
 Flags:
 
 * `--text <text>`: required system event text.
 * `--mode <mode>`: `now` or `next-heartbeat` (default).
+* `--session-key <sessionKey>`: optional; target a specific agent session
+  instead of the agent's main session. Keys that do not belong to the
+  resolved agent fall back to the agent's main session.
 * `--json`: machine-readable output.
 * `--url`, `--token`, `--timeout`, `--expect-final`: shared Gateway RPC flags.
 

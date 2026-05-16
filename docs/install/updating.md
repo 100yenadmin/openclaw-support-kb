@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "b5d0c5283a9df079b45c1f0b725a6e667ff418638968d43d997f83a75f8673e1"
+source_hash: "170577d8836165cda1d34417bb5a254b3624656d9f03ca739d2e4894ddb73706"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/updating.md"
 original_doc_path: "install/updating.md"
 duplicate_index: 1
@@ -41,6 +43,10 @@ installer has its own `--verbose` flag, but that flag is not part of
 `--channel beta` prefers beta, but the runtime falls back to stable/latest when
 the beta tag is missing or older than the latest stable release. Use `--tag beta`
 if you want the raw npm beta dist-tag for a one-off package update.
+
+For managed plugins, beta-channel fallback is a warning: the core update can
+still succeed while a plugin uses its recorded default/latest release because no
+plugin beta is available.
 
 See [Development channels](/install/development-channels) for channel semantics.
 
@@ -172,11 +178,13 @@ The gateway also logs an update hint on startup (disable with `update.checkOnSta
 For downgrade or incident recovery, set `OPENCLAW_NO_AUTO_UPDATE=1` in the gateway environment to block automatic applies even when `update.auto.enabled` is configured. Startup update hints can still run unless `update.checkOnStart` is also disabled.
 
 Package-manager updates requested through the live Gateway control-plane handler
-force a non-deferred, no-cooldown update restart after the package swap. That
-avoids leaving an old in-memory process around long enough to lazy-load chunks
-from a package tree that has already been replaced. Shell `openclaw update`
-remains the preferred path for supervised installs because it can stop and
-restart the service around the update.
+do not replace the package tree inside the running Gateway process. On managed
+service installs, the Gateway starts a detached handoff, exits, and lets the
+normal `openclaw update --yes --json` CLI path stop the service, replace the
+package, refresh service metadata, restart, verify the Gateway version and
+reachability, and recover an installed-but-unloaded macOS LaunchAgent when
+possible. If the Gateway cannot make that handoff safely, `update.run` reports a
+safe shell command instead of running the package manager in-process.
 
 ## After updating
 

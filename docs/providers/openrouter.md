@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "ef79eba19cdfa7d0c7a0b2211b44900aca44a6d38c1b4d481040d95f47396898"
+source_hash: "71c374009255dc850a50ec24c9fd5cdeece6e017b88e78182f7456c7cf70b14a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
 original_doc_path: "providers/openrouter.md"
 duplicate_index: 1
@@ -64,6 +66,7 @@ Bundled fallback examples:
 | --------------------------------- | ---------------------------- |
 | `openrouter/auto`                 | OpenRouter automatic routing |
 | `openrouter/moonshotai/kimi-k2.6` | Kimi K2.6 via MoonshotAI     |
+| `openrouter/moonshotai/kimi-k2.5` | Kimi K2.5 via MoonshotAI     |
 
 ## Image generation
 
@@ -137,6 +140,29 @@ OpenRouter can also be used as a TTS provider through its OpenAI-compatible
 
 If `messages.tts.providers.openrouter.apiKey` is omitted, TTS reuses
 `models.providers.openrouter.apiKey`, then `OPENROUTER_API_KEY`.
+
+## Speech-to-text (inbound audio)
+
+OpenRouter can transcribe inbound voice/audio attachments through the shared
+`tools.media.audio` path using its STT endpoint (`/audio/transcriptions`).
+This applies to any channel plugin that forwards inbound voice/audio into
+media understanding preflight.
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  tools: {
+    media: {
+      audio: {
+        enabled: true,
+        models: [{ provider: "openrouter", model: "openai/whisper-large-v3-turbo" }],
+      },
+    },
+  },
+}
+```
+
+OpenClaw sends OpenRouter STT requests as JSON with base64 audio under
+`input_audio` (OpenRouter STT contract), not as multipart OpenAI form uploads.
 
 ## Authentication and headers
 

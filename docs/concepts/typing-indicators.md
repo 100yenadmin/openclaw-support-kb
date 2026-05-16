@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Typing indicators"
 source: "https://docs.openclaw.ai/concepts/typing-indicators"
-source_hash: "be394f98db3f8b44218ffa66c8e658f942be0fe6f6c85cabd5fb9309c1f677f6"
+source_hash: "a8e28c69a647d4dd4a83d1587d7d5459bc3a4d15481d7b324cc857f22bfcd8b4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/typing-indicators.md"
 original_doc_path: "concepts/typing-indicators.md"
 duplicate_index: 1
@@ -44,16 +46,20 @@ Order of "how early it fires":
 
 ## Configuration
 
+Set the agent-level default:
+
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  agent: {
-    typingMode: "thinking",
-    typingIntervalSeconds: 6,
+  agents: {
+    defaults: {
+      typingMode: "thinking",
+      typingIntervalSeconds: 6,
+    },
   },
 }
 ```
 
-You can override mode or cadence per session:
+Override mode or cadence per session:
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Building CLI backend plugins"
 source: "https://docs.openclaw.ai/plugins/cli-backend-plugins"
-source_hash: "5c3780f182db30af1732e073b4043640f85fb298bd3fc376c87229731eba2933"
+source_hash: "f1c6e7c01a80f33ff856dc68e7f02d5c619afc87ed76eb3cd8a110cb998b13b9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/cli-backend-plugins.md"
 original_doc_path: "plugins/cli-backend-plugins.md"
 duplicate_index: 1

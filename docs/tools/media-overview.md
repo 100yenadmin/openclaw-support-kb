@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "5d14595ef11b4f9def388b5236769c6ece2a44deb2ac6c16f158b598ea828781"
+source_hash: "cd7842a421fe5fec7570f956c1853a731919e018166af72b2b2060a2308c464c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
 original_doc_path: "tools/media-overview.md"
 duplicate_index: 1
@@ -77,7 +79,7 @@ telephony, meetings, browser realtime, and native push-to-talk clients.
 | MiniMax     |   ✓   |   ✓   |   ✓   |  ✓  |     |                |                     |
 | Mistral     |       |       |       |     |  ✓  |                |                     |
 | OpenAI      |   ✓   |   ✓   |       |  ✓  |  ✓  |        ✓       |          ✓          |
-| OpenRouter  |   ✓   |   ✓   |       |  ✓  |     |                |          ✓          |
+| OpenRouter  |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
 | Qwen        |       |   ✓   |       |     |     |                |                     |
 | Runway      |       |   ✓   |       |     |     |                |                     |
 | SenseAudio  |       |       |       |     |  ✓  |                |                     |
@@ -115,7 +117,7 @@ the generated media fallback directly to the original channel.
 
 ## Speech-to-text and Voice Call
 
-Deepgram, DeepInfra, ElevenLabs, Mistral, OpenAI, SenseAudio, and xAI can all transcribe
+Deepgram, DeepInfra, ElevenLabs, Mistral, OpenAI, OpenRouter, SenseAudio, and xAI can all transcribe
 inbound audio through the batch `tools.media.audio` path when configured.
 Channel plugins that preflight a voice note for mention gating or command
 parsing mark the transcribed attachment on the inbound context, so the shared

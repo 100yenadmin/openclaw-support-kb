@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "5647b854d040f029c7f187bd98231dec2166c158b21895b859eb923c7c924f0e"
+source_hash: "699b97fdd81c96849e8c1a5526eee8560fc641ac5fcc23d97f1e9856b388815d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/sdk-testing.md"
 original_doc_path: "plugins/sdk-testing.md"
 duplicate_index: 1
@@ -23,6 +25,9 @@ plugins.
 </Tip>
 
 ## Test utilities
+
+These test-helper subpaths are repo-local source entrypoints for OpenClaw's own
+bundled plugin tests. They are not package exports for third-party plugins.
 
 **Plugin API mock import:** `openclaw/plugin-sdk/plugin-test-api`
 
@@ -52,7 +57,7 @@ Prefer the focused subpaths below for new plugin tests. The broad
 `openclaw/plugin-sdk/testing` barrel is legacy compatibility only.
 Repo guardrails reject new real imports from `plugin-sdk/testing` and
 `plugin-sdk/test-utils`; those names remain only as deprecated compatibility
-surfaces for external plugins and compatibility-record tests.
+surfaces for compatibility-record tests.
 
 ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
 import {
@@ -167,7 +172,7 @@ import type {
   ChannelAccountSnapshot,
   ChannelGatewayContext,
 } from "openclaw/plugin-sdk/channel-contract";
-import type { OpenClawConfig } from "openclaw/plugin-sdk/config-types";
+import type { OpenClawConfig } from "openclaw/plugin-sdk/config-contracts";
 import type { MockFn, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/plugin-test-runtime";
 ```
 

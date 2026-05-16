@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "1f12885f851799190f9f3701f23b48fcdc75f6212a49f021edf06568bc570a71"
+source_hash: "ba8037d5475d923f3a89948362e9dade981057ddaddb35f0f506ab16f5108d60"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
 original_doc_path: "providers/fireworks.md"
 duplicate_index: 1
@@ -119,7 +121,7 @@ OpenClaw accepts any Fireworks model or router id at runtime. Use the exact id s
     If the Gateway runs as a managed service (launchd, systemd, Docker), the Fireworks key must be visible to that process — not just to your interactive shell.
 
     <Warning>
-      A key sitting only in `~/.profile` will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
+      A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
     </Warning>
 
     On macOS, `openclaw gateway install` already wires `~/.openclaw/.env` into the LaunchAgent environment file. Re-run install (or `openclaw doctor --fix`) after rotating the key.

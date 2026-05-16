@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "06b01217e2aab91fb1b4f70e4a8b0b67f15993415d81397afbd22dab68f81544"
+source_hash: "d9f81f2c5b61faa861e9439d84051cb86540c942ba3124eb34551deaf77dfb38"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/fly.md"
 original_doc_path: "install/fly.md"
 duplicate_index: 1
@@ -83,6 +85,8 @@ Source: https://docs.openclaw.ai/install/fly
       source = "openclaw_data"
       destination = "/data"
     ```
+
+    The OpenClaw Docker image uses `tini` as its entrypoint. Fly process commands replace Docker `CMD` without replacing `ENTRYPOINT`, so the process still runs under `tini`.
 
     **Key settings:**
 

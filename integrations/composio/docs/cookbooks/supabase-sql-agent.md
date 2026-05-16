@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Supabase SQL Agent"
 source: "https://docs.composio.dev/cookbooks/supabase-sql-agent.md"
-source_hash: "49db0ab287fff025ad1f2d2b7d9bbf9cd27c02459bca01e5e8520cd4ddbff307"
+source_hash: "f388e856da96c934ca523e0b788463749fc5950ed365409d2bd94026fbe4eeaa"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/supabase-sql-agent.md"
 original_doc_path: "cookbooks/supabase-sql-agent.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Supabase SQL Agent (/cookbooks/supabase-sql-agent)
 Source: https://docs.composio.dev/cookbooks/supabase-sql-agent.md

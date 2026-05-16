@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
-source_hash: "5b3729a09e36aeae5c81ac48587a15b8cec84f49ae9462cb35adc9e6d975f19d"
+source_hash: "7c8051e8f066a9a3c7cca5b67af13cb5e211fdfc88102c122ad0a73b7cc7a7ba"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/openresponses-http-api.md"
 original_doc_path: "gateway/openresponses-http-api.md"
 duplicate_index: 1
@@ -81,6 +83,8 @@ The request follows the OpenResponses API with item-based input. Current support
 * `tool_choice`: filter or require client tools.
 * `stream`: enables SSE streaming.
 * `max_output_tokens`: best-effort output limit (provider dependent).
+* `temperature`: best-effort sampling temperature forwarded to the provider. Ignored by the ChatGPT-based Codex Responses backend, which uses fixed server-side sampling.
+* `top_p`: best-effort nucleus sampling forwarded to the provider. Same Codex Responses caveat as `temperature`.
 * `user`: stable session routing.
 
 Accepted but **currently ignored**:

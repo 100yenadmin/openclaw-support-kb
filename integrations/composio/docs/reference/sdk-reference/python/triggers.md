@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/python/triggers.md"
-source_hash: "c361c0ce3dec8ff16dbf76e176d5e5b5052554cdf83bdeb3296cdbea0de7d58d"
+source_hash: "4120d2619a51cc0163f0a2c4e1bfa36c6255bf27165cab78f14fd6d84692dce9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/triggers.md"
 original_doc_path: "reference/sdk-reference/python/triggers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Triggers (/reference/sdk-reference/python/triggers)
 Source: https://docs.composio.dev/reference/sdk-reference/python/triggers.md

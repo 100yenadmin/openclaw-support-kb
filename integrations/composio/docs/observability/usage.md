@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Usage metering"
 source: "https://docs.composio.dev/docs/observability/usage.md"
-source_hash: "47d2034765bdd78830961da02f6f6f0bacf2add9b6b6c73519e70e1b8566faa8"
+source_hash: "acaf9e990e4fce346f3757362d41ed9eb0825f6f2c9df24c6e54cebb00a0ecc0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "observability/usage.md"
 original_doc_path: "observability/usage.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Usage metering (/docs/observability/usage)
 Source: https://docs.composio.dev/docs/observability/usage.md

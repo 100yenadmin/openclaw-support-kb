@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "b98bdbc81943841997d140dc04c8f62d3903c530ffc06b083b301f40bf9671aa"
+source_hash: "997729959af3ca5f54876e3cb8a1cd643314f769eab45c62417487bf6f5f507f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/api-usage-costs.md"
 original_doc_path: "reference/api-usage-costs.md"
 duplicate_index: 1

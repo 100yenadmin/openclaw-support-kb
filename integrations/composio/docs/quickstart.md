@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "76c27f515b4dc7bd1207e9da468bb2bcf30d245952c1b4d33a80a3f3a7d5a3eb"
+source_hash: "aaf45806b5cd02e22d6dae2e76e8971115d082fa913129640784511c5c6edc56"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "quickstart.md"
 original_doc_path: "quickstart.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Quickstart (/docs/quickstart)
 Source: https://docs.composio.dev/docs/quickstart.md
@@ -64,6 +69,10 @@ user_id = "user_123"
 session = composio.create(user_id=user_id)
 tools = session.tools()
 
+# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# session_id = session.session_id
+# session = composio.use(session_id)
+
 agent = Agent(
     name="Personal Assistant",
     instructions="You are a helpful personal assistant. Use Composio tools to take action.",
@@ -108,6 +117,10 @@ const composio = new Composio({ provider: new OpenAIAgentsProvider() });
 const userId = "user_123";
 const session = await composio.create(userId);
 const tools = await session.tools();
+
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = session.sessionId;
+// const session = await composio.use(sessionId);
 
 const agent = new Agent({
   name: "Personal Assistant",
@@ -178,6 +191,10 @@ composio = Composio()
 user_id = "user_123"
 session = composio.create(user_id=user_id)
 
+# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# session_id = session.session_id
+# session = composio.use(session_id)
+
 agent = Agent(
     name="Personal Assistant",
     instructions="You are a helpful personal assistant. Use Composio tools to take action.",
@@ -229,6 +246,10 @@ const composio = new Composio();
 // Create a session for your user
 const userId = "user_123";
 const session = await composio.create(userId);
+
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = session.sessionId;
+// const session = await composio.use(sessionId);
 
 const agent = new Agent({
   name: "Personal Assistant",
@@ -312,6 +333,10 @@ user_id = "user_123"
 session = composio.create(user_id=user_id)
 tools = session.tools()
 
+# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# session_id = session.session_id
+# session = composio.use(session_id)
+
 custom_server = create_sdk_mcp_server(name="composio", version="1.0.0", tools=tools)
 
 async def main():
@@ -363,6 +388,10 @@ const composio = new Composio({ provider: new ClaudeAgentSDKProvider() });
 const userId = "user_123";
 const session = await composio.create(userId);
 const tools = await session.tools();
+
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = session.sessionId;
+// const session = await composio.use(sessionId);
 
 const customServer = createSdkMcpServer({
   name: "composio",
@@ -450,6 +479,10 @@ composio = Composio()
 user_id = "user_123"
 session = composio.create(user_id=user_id)
 
+# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# session_id = session.session_id
+# session = composio.use(session_id)
+
 options = ClaudeAgentOptions(
     system_prompt=(
         "You are a helpful assistant with access to external tools. "
@@ -508,6 +541,10 @@ const composio = new Composio();
 // Create a session for your user
 const userId = "user_123";
 const session = await composio.create(userId);
+
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = session.sessionId;
+// const session = await composio.use(sessionId);
 
 const options: Options = {
   systemPrompt: `You are a helpful assistant with access to external tools. ` +
@@ -596,6 +633,10 @@ const userId = "user_123";
 const session = await composio.create(userId);
 const tools = await session.tools();
 
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = session.sessionId;
+// const session = await composio.use(sessionId);
+
 const readline = createInterface({ input: process.stdin, output: process.stdout });
 
 console.log(`
@@ -669,7 +710,12 @@ const composio = new Composio();
 
 // Create a session for your user
 const userId = "user_123";
-const { mcp } = await composio.create(userId);
+const composioSession = await composio.create(userId);
+const { mcp } = composioSession;
+
+// For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+// const sessionId = composioSession.sessionId;
+// const composioSession = await composio.use(sessionId);
 
 // Create an MCP client to connect to Composio
 const client = await createMCPClient({
@@ -727,6 +773,8 @@ readline.close();
 ```
 
 > By default, sessions have access to **all available toolkits** in the Composio catalog. Your agent can discover and use any of them through `COMPOSIO_SEARCH_TOOLS`. To restrict which toolkits are available, see [Enable and disable toolkits](/docs/toolkits/enable-and-disable-toolkits).
+
+> Every `composio.create()` call returns a new session ID. For multi-turn conversations or web apps, store the session ID and call `composio.use(sessionId)` on subsequent requests instead of creating a new session each time. See [Reusing a session](/docs/users-and-sessions#reusing-a-session).
 
 # Next steps
 

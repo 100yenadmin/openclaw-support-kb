@@ -2,11 +2,16 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md"
-source_hash: "da1daf073023d40b0703010eb24050cb3b85ae81745dca7a266d215122f3fecb"
+source_hash: "81b6bfb819629dfc272bbdb3879de935efc14830cc4e2833703570a2c4c2afc5"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/mcp.md"
 original_doc_path: "reference/sdk-reference/typescript/mcp.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # MCP (/reference/sdk-reference/typescript/mcp)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md

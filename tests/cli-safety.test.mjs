@@ -11,6 +11,7 @@ import {
   GBRAIN_SOURCE_NAME,
   loadGbrainEnvFile,
   parseGbrainEnvContent,
+  gbrainSearchArgs,
   gbrainSyncArgs,
   isBenignExistingGbrainSourceError,
   isStableCommandPathEntry,
@@ -46,7 +47,7 @@ test("install-skills still installs when openclaw config is malformed", () => {
 
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stderr, /could not read OpenClaw config/);
-  assert.match(result.stdout, /Installed 4 OpenClaw support skills/);
+  assert.match(result.stdout, /Installed \d+ customer KB skills/);
 });
 
 test("support email send refuses omitted subject before invoking transport", () => {
@@ -206,6 +207,13 @@ test("client sync registers and uses the named GBrain source", () => {
     "--repo",
     "/tmp/openclaw-support-kb",
   ]);
+  assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: true }), [
+    "search",
+    "Hermes config",
+    "--source",
+    GBRAIN_SOURCE_ID,
+  ]);
+  assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: false }), ["search", "Hermes config"]);
 
   for (const script of ["scripts/update-client.mjs", "scripts/sync-local.mjs"]) {
     const text = readFileSync(path.join(repoRoot, script), "utf8");

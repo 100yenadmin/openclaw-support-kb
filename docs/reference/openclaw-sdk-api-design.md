@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "OpenClaw App SDK API design"
 source: "https://docs.openclaw.ai/reference/openclaw-sdk-api-design"
-source_hash: "ca7d17bcb9f0ec9aeba120a21301ee880b612db0a164ac11acfd9a5cfd411570"
+source_hash: "2a64efe3cc151bdd8bc79c5f103fa710bd02a898f14765da148135470d2f2cb4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/openclaw-sdk-api-design.md"
 original_doc_path: "reference/openclaw-sdk-api-design.md"
 duplicate_index: 1
@@ -54,9 +56,9 @@ oc.runs.events(runId, { after });
 oc.runs.wait(runId);
 oc.runs.cancel(runId);
 
-oc.tasks.list(); // future API: current SDK throws unsupported
-oc.tasks.get(taskId); // future API: current SDK throws unsupported
-oc.tasks.cancel(taskId); // future API: current SDK throws unsupported
+oc.tasks.list({ status: "running" });
+oc.tasks.get(taskId);
+oc.tasks.cancel(taskId, { reason });
 oc.tasks.events(taskId, { after }); // future API
 
 oc.models.list();

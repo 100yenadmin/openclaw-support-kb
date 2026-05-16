@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "42fd8a8d97e8fb909357b816e4a98d116041f46064a9ddc678472b84349c4854"
+source_hash: "1996f78add5ef80c1d8196a37b4fe5177e69b2aac084d1ef9e9c3e9777c4867c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/message.md"
 original_doc_path: "cli/message.md"
 duplicate_index: 1
@@ -79,7 +81,7 @@ Name lookup:
   * Optional: `--media`, `--presentation`, `--delivery`, `--pin`, `--reply-to`, `--thread-id`, `--gif-playback`, `--force-document`, `--silent`
   * Shared presentation payloads: `--presentation` sends semantic blocks (`text`, `context`, `divider`, `buttons`, `select`) that core renders through the selected channel's declared capabilities. See [Message Presentation](/plugins/message-presentation).
   * Generic delivery preferences: `--delivery` accepts delivery hints such as `{ "pin": true }`; `--pin` is shorthand for pinned delivery when the channel supports it.
-  * Telegram only: `--force-document` (send images and GIFs as documents to avoid Telegram compression)
+  * Telegram only: `--force-document` (send images, GIFs, and videos as documents to avoid Telegram compression)
   * Telegram only: `--thread-id` (forum topic id)
   * Slack only: `--thread-id` (thread timestamp; `--reply-to` uses the same field)
   * Telegram + Discord: `--silent`
@@ -290,6 +292,16 @@ Send Telegram inline buttons through generic presentation:
 openclaw message send --channel telegram --target @mychat --message "Choose:" \
   --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Yes","value":"cmd:yes"},{"label":"No","value":"cmd:no"}]}]}'
 ```
+
+Send a Telegram Mini App button through generic presentation:
+
+```
+openclaw message send --channel telegram --target 123456789 --message "Open app:" \
+  --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Launch","web_app":{"url":"https://example.com/app"}}]}]}'
+```
+
+Telegram `web_app` buttons are supported only in private chats between a user
+and the bot.
 
 Send a Teams card through generic presentation:
 

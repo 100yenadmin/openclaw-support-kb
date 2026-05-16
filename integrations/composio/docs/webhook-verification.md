@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Verifying webhooks"
 source: "https://docs.composio.dev/docs/webhook-verification.md"
-source_hash: "fd1f65d8090d735172dc351961f80058768f43dcef9bed3bd2d8746ec2658cdf"
+source_hash: "fc3257da72e1313e642316cbcbb616881b8673b19bfa6d9e2c49aa670e89dea2"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "webhook-verification.md"
 original_doc_path: "webhook-verification.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Verifying webhooks (/docs/webhook-verification)
 Source: https://docs.composio.dev/docs/webhook-verification.md
@@ -18,7 +23,7 @@ Composio signs every webhook request. Always verify signatures in production to 
 
 The SDK handles signature verification, payload parsing, and version detection (V1, V2, V3).
 
-> Your webhook secret is returned **only once**: when you [create a webhook subscription](/reference/api-reference/webhooks/postWebhookSubscriptions) or [rotate the secret](/reference/api-reference/webhooks/postWebhookSubscriptionsByIdRotateSecret). If you didn't copy it at creation time, rotate it to get a new one. Store it securely as `COMPOSIO_WEBHOOK_SECRET`.
+> Store the webhook secret securely as `COMPOSIO_WEBHOOK_SECRET`. You can fetch it from the [webhook subscription](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptionsById) at any time or [rotate it](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptionsByIdRotateSecret) if it leaks.
 
 **Python:**
 
@@ -62,7 +67,7 @@ try {
 
 If you are not using the Composio SDK and want to verify signatures manually.
 
-> Your webhook secret is returned **only once**: when you [create a webhook subscription](/reference/api-reference/webhooks/postWebhookSubscriptions) or [rotate the secret](/reference/api-reference/webhooks/postWebhookSubscriptionsByIdRotateSecret). If you didn't copy it at creation time, rotate it to get a new one. Store it securely as `COMPOSIO_WEBHOOK_SECRET`.
+> Store the webhook secret securely as `COMPOSIO_WEBHOOK_SECRET`. You can fetch it from the [webhook subscription](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptionsById) at any time or [rotate it](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptionsByIdRotateSecret) if it leaks.
 
 Every webhook request includes three headers: `webhook-signature`, `webhook-id`, and `webhook-timestamp`. Use these along with the raw request body to verify the signature:
 
@@ -193,6 +198,8 @@ Metadata fields are mixed into the `data` object alongside event data.
 # What to read next
 
 - [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events): Set up webhooks and SDK subscriptions to receive trigger events
+
+- [Creating triggers](/docs/setting-up-triggers/creating-triggers): Configure the webhook endpoint when needed and create trigger instances
 
 - [Triggers overview](/docs/triggers): How Composio delivers event data from connected apps
 

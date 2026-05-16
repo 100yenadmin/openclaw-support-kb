@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/cli/pairing"
-source_hash: "8592461bff76ec66ce610259d5757922272de2538c8f16191e3f33447f54fd8e"
+source_hash: "e803a856c75ea3c0787a72a3581ef1edf973aa9e0a5ad04c5043e1a222e34a73"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/pairing.md"
 original_doc_path: "cli/pairing.md"
 duplicate_index: 1

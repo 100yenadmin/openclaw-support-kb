@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "a1b46a210ad8e0041a145fd2afab6386cf5d0c432ea9eed2dcafeaaa6c13e0cf"
+source_hash: "94e15d2b635803553ba44c21cc9d9c05bf1a97d6957d93ac0ea750da2f4e9200"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/google.md"
 original_doc_path: "providers/google.md"
 duplicate_index: 1
@@ -20,7 +22,7 @@ Gemini Grounding.
 * Provider: `google`
 * Auth: `GEMINI_API_KEY` or `GOOGLE_API_KEY`
 * API: Google Gemini API
-* Runtime option: `agents.defaults.agentRuntime.id: "google-gemini-cli"`
+* Runtime option: provider/model `agentRuntime.id: "google-gemini-cli"`
   reuses Gemini CLI OAuth while keeping model refs canonical as `google/*`.
 
 ## Getting started
@@ -235,8 +237,8 @@ The bundled `google` plugin also registers video generation through the shared
 
 * Default video model: `google/veo-3.1-fast-generate-preview`
 * Modes: text-to-video, image-to-video, and single-video reference flows
-* Supports `aspectRatio`, `resolution`, and `audio`
-* Current duration clamp: **4 to 8 seconds**
+* Supports `aspectRatio` (`16:9`, `9:16`) and `resolution` (`720P`, `1080P`); audio output is not supported by Veo today
+* Supported durations: **4, 6, or 8 seconds** (other values snap to the nearest allowed value)
 
 To use Google as the default video provider:
 
@@ -407,9 +409,10 @@ Example Voice Call realtime config:
 
 For maintainer live verification, run
 `OPENAI_API_KEY=... GEMINI_API_KEY=... node --import tsx scripts/dev/realtime-talk-live-smoke.ts`.
-The Google leg mints the same constrained Live API token shape used by Control
-UI Talk, opens the browser WebSocket endpoint, sends the initial setup payload,
-and waits for `setupComplete`.
+The smoke also covers OpenAI backend/WebRTC paths; the Google leg mints the same
+constrained Live API token shape used by Control UI Talk, opens the browser
+WebSocket endpoint, sends the initial setup payload, and waits for
+`setupComplete`.
 
 ## Advanced configuration
 

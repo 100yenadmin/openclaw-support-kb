@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Code execution"
 source: "https://docs.openclaw.ai/tools/code-execution"
-source_hash: "982c7fe92cc1e5779f417a1b5dd462488b74d4b5408ef2022872c321b186fff7"
+source_hash: "cce741cac08b739741804aa96800da2ad849c8921f6b80871328758952f40fd0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/code-execution.md"
 original_doc_path: "tools/code-execution.md"
 duplicate_index: 1
@@ -15,14 +17,14 @@ Source: https://docs.openclaw.ai/tools/code-execution
 
 `code_execution` runs sandboxed remote Python analysis on xAI's Responses API. It is registered by the bundled `xai` plugin (under the `tools` contract) and dispatches to the same `https://api.x.ai/v1/responses` endpoint used by `x_search`.
 
-| Property           | Value                                                          |
-| ------------------ | -------------------------------------------------------------- |
-| Tool name          | `code_execution`                                               |
-| Provider plugin    | `xai` (bundled, `enabledByDefault: true`)                      |
-| Auth               | `XAI_API_KEY` or `plugins.entries.xai.config.webSearch.apiKey` |
-| Default model      | `grok-4-1-fast`                                                |
-| Default timeout    | 30 seconds                                                     |
-| Default `maxTurns` | unset (xAI applies its own internal limit)                     |
+| Property           | Value                                                                             |
+| ------------------ | --------------------------------------------------------------------------------- |
+| Tool name          | `code_execution`                                                                  |
+| Provider plugin    | `xai` (bundled, `enabledByDefault: true`)                                         |
+| Auth               | xAI auth profile, `XAI_API_KEY`, or `plugins.entries.xai.config.webSearch.apiKey` |
+| Default model      | `grok-4-1-fast`                                                                   |
+| Default timeout    | 30 seconds                                                                        |
+| Default `maxTurns` | unset (xAI applies its own internal limit)                                        |
 
 This is different from local [`exec`](/tools/exec):
 
@@ -43,7 +45,9 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
 
 <Steps>
   <Step title="Provide an xAI API key">
-    Set `XAI_API_KEY` in the gateway environment, or configure the key under the xAI plugin so the same credential covers `code_execution`, `x_search`, web search, and other xAI tools:
+    Run `openclaw onboard --auth-choice xai-api-key` for `code_execution` and
+    `x_search`, or set `XAI_API_KEY` / configure the key under the xAI plugin
+    when you also want Grok web search to use the same credential:
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     export XAI_API_KEY=xai-...
@@ -120,12 +124,12 @@ The tool takes a single `task` parameter internally, so the agent should send th
 
 ## Errors
 
-When the tool runs without auth, it returns a structured `missing_xai_api_key` error pointing at the env var and config path. The error is JSON, not a thrown exception, so the agent can self-correct:
+When the tool runs without auth, it returns a structured `missing_xai_api_key` error pointing at the auth-profile, env var, and config options. The error is JSON, not a thrown exception, so the agent can self-correct:
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   "error": "missing_xai_api_key",
-  "message": "code_execution needs an xAI API key. Set XAI_API_KEY in the Gateway environment, or configure plugins.entries.xai.config.webSearch.apiKey.",
+  "message": "code_execution needs an xAI API key. Run openclaw onboard --auth-choice xai-api-key, set XAI_API_KEY in the Gateway environment, or configure plugins.entries.xai.config.webSearch.apiKey.",
   "docs": "https://docs.openclaw.ai/tools/code-execution"
 }
 ```

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "1ce7b04f45209b4d15fd4f8f2173575731adca922e1ad6e5ac9f7fbd6898a737"
+source_hash: "e9a5fd0dbe5d3fbef32d5348fadd2cc8cda032fa49faf5e4e3b4cec25a93b02d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
 original_doc_path: "channels/mattermost.md"
 duplicate_index: 1
@@ -199,11 +201,13 @@ Notes:
   * `openclaw pairing list mattermost`
   * `openclaw pairing approve mattermost <CODE>`
 * Public DMs: `channels.mattermost.dmPolicy="open"` plus `channels.mattermost.allowFrom=["*"]`.
+* `channels.mattermost.allowFrom` accepts `accessGroup:<name>` entries. See [Access groups](/channels/access-groups).
 
 ## Channels (groups)
 
 * Default: `channels.mattermost.groupPolicy = "allowlist"` (mention-gated).
 * Allowlist senders with `channels.mattermost.groupAllowFrom` (user IDs recommended).
+* `channels.mattermost.groupAllowFrom` accepts `accessGroup:<name>` entries. See [Access groups](/channels/access-groups).
 * Per-channel mention overrides live under `channels.mattermost.groups.<channelId>.requireMention` or `channels.mattermost.groups["*"].requireMention` for a default.
 * `@username` matching is mutable and only enabled when `channels.mattermost.dangerouslyAllowNameMatching: true`.
 * Open channels: `channels.mattermost.groupPolicy="open"` (mention-gated).

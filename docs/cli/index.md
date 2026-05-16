@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli/index"
-source_hash: "cf3c9fe1f4ccf54883dab7addde4709e0bbfae3e621809c7660f88280dd23c29"
+source_hash: "61dca122998d0320a952db1fde24778cb3bb748fc6c2f0cd335f88180e13896a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/index.md"
 original_doc_path: "cli/index.md"
 duplicate_index: 1
@@ -17,6 +19,13 @@ Source: https://docs.openclaw.ai/cli/index
 dedicated reference page or is documented with the command it aliases; this
 index lists the commands, the global flags, and the output styling rules that
 apply across the CLI.
+
+Use the setup commands by intent:
+
+* `openclaw setup` creates the baseline config and workspace without walking the full guided onboarding flow.
+* `openclaw onboard` is the full guided first-run path for gateway, model auth, workspace, channels, skills, and health.
+* `openclaw configure` changes targeted parts of an existing setup, such as model auth, gateway, channels, plugins, or skills.
+* `openclaw channels add` configures channel accounts after the baseline exists; run it without flags for guided channel setup or with channel-specific flags for scripts.
 
 ## Command pages
 
@@ -35,7 +44,7 @@ apply across the CLI.
 | Pairing and channels | [`pairing`](/cli/pairing) · [`qr`](/cli/qr) · [`channels`](/cli/channels)                                                                                                                                                                 |
 | Security and plugins | [`security`](/cli/security) · [`secrets`](/cli/secrets) · [`skills`](/cli/skills) · [`plugins`](/cli/plugins) · [`proxy`](/cli/proxy)                                                                                                     |
 | Legacy aliases       | [`daemon`](/cli/daemon) (gateway service) · [`clawbot`](/cli/clawbot) (namespace)                                                                                                                                                         |
-| Plugins (optional)   | [`voicecall`](/cli/voicecall) (if installed)                                                                                                                                                                                              |
+| Plugins (optional)   | [`path`](/cli/path) · [`voicecall`](/cli/voicecall) (if installed)                                                                                                                                                                        |
 
 ## Global flags
 
@@ -127,6 +136,12 @@ Palette source of truth: `src/terminal/palette.ts`.
       status
       index
       search
+    path
+      resolve
+      find
+      set
+      validate
+      emit
     commitments
       list
       dismiss
@@ -249,6 +264,7 @@ Palette source of truth: `src/terminal/palette.ts`.
     cron
       status
       list
+      get
       add
       edit
       rm

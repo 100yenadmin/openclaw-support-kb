@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "07ef717a5839e05aedaa9eea8575a72cae7b88433f87c62546db07aaac5afcea"
+source_hash: "48de392bfb06f5ee9b5013dd14a171fe2344646cc223bbe563da0c9e7819ff4a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
 original_doc_path: "plugins/sdk-runtime.md"
 duplicate_index: 1
@@ -50,7 +52,7 @@ The mutation helpers return `afterWrite` plus a typed `followUp` summary so call
 `api.runtime.config.loadConfig()` and `api.runtime.config.writeConfigFile(...)` are deprecated compatibility helpers under `runtime-config-load-write`. They warn once at runtime, and remain available for old external plugins during the migration window. Bundled plugins must not use them; the config boundary guards fail if plugin code calls them or imports those helpers from plugin SDK subpaths.
 
 For direct SDK imports, use the focused config subpaths instead of the broad
-`openclaw/plugin-sdk/config-runtime` compatibility barrel: `config-types` for
+`openclaw/plugin-sdk/config-runtime` compatibility barrel: `config-contracts` for
 types, `plugin-config-runtime` for already-loaded config assertions and plugin
 entry lookup, `runtime-config-snapshot` for current process snapshots, and
 `config-mutation` for writes. Bundled plugin tests should mock these focused
@@ -59,6 +61,46 @@ subpaths directly instead of mocking the broad compatibility barrel.
 Internal OpenClaw runtime code has the same direction: load config once at the CLI, gateway, or process boundary, then pass that value through. Successful mutation writes refresh the process runtime snapshot and advance its internal revision; long-lived caches should key off the runtime-owned cache key instead of serializing config locally. Long-lived runtime modules have a zero-tolerance scanner for ambient `loadConfig()` calls; use a passed `cfg`, a request `context.getRuntimeConfig()`, or `getRuntimeConfig()` at an explicit process boundary.
 
 Provider and channel execution paths must use the active runtime config snapshot, not a file snapshot returned for config readback or editing. File snapshots preserve source values such as SecretRef markers for UI and writes; provider callbacks need the resolved runtime view. When a helper may be called with either the active source snapshot or the active runtime snapshot, route through `selectApplicableRuntimeConfig()` before reading credentials.
+
+## Reusable runtime utilities
+
+Use the channel-turn `botLoopProtection` facts for bot-authored inbound messages. Core applies the shared in-memory sliding-window guard before session record and dispatch, without tying the policy to one channel. The guard tracks `(scopeId, conversationId, participant pair)` keys, counts both directions of a pair together, applies a cooldown once the window budget is exceeded, and prunes inactive entries opportunistically.
+
+Channel plugins that expose this behavior to operators should prefer the shared `channels.defaults.botLoopProtection` shape for baseline budgets, then layer channel/provider-specific overrides on top. The shared config uses seconds because it is user-facing:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+type ChannelBotLoopProtectionConfig = {
+  enabled?: boolean;
+  maxEventsPerWindow?: number;
+  windowSeconds?: number;
+  cooldownSeconds?: number;
+};
+```
+
+Pass normalized bot-pair facts with the resolved turn. Core resolves defaults, unit conversion, and `enabled` semantics:
+
+```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+return {
+  channel: "example",
+  routeSessionKey,
+  storePath,
+  ctxPayload,
+  recordInboundSession,
+  runDispatch,
+  botLoopProtection: {
+    scopeId: "account-1",
+    conversationId: "channel-1",
+    senderId: "bot-a",
+    receiverId: "bot-b",
+    config: channelConfig.botLoopProtection,
+    defaultsConfig: runtimeConfig.channels?.defaults?.botLoopProtection,
+    defaultEnabled: allowBotsMode !== "off",
+  },
+};
+```
+
+Use `openclaw/plugin-sdk/pair-loop-guard-runtime` directly only for custom
+two-party event loops that do not go through the shared channel-turn kernel.
 
 ## Runtime namespaces
 
@@ -140,6 +182,31 @@ Provider and channel execution paths must use the active runtime config snapshot
     ```
   </Accordion>
 
+  <Accordion title="api.runtime.llm">
+    Run a host-owned text completion without importing provider internals or
+    duplicating OpenClaw model/auth/base URL preparation.
+
+    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    const result = await api.runtime.llm.complete({
+      messages: [{ role: "user", content: "Summarize this transcript." }],
+      purpose: "my-plugin.summary",
+      maxTokens: 512,
+      temperature: 0.2,
+    });
+    ```
+
+    The helper uses the same simple-completion preparation path as OpenClaw's
+    built-in runtime and the host-owned runtime config snapshot. Context engines
+    receive a session-bound `llm.complete` capability, so model calls use the
+    active session's agent and do not silently fall back to the default agent. The
+    result includes provider/model/agent attribution plus normalized token,
+    cache, and estimated cost usage when available.
+
+    <Warning>
+      Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. Use `plugins.entries.<id>.llm.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
+    </Warning>
+  </Accordion>
+
   <Accordion title="api.runtime.subagent">
     Launch and manage background subagent runs.
 
@@ -196,6 +263,11 @@ Provider and channel execution paths must use the active runtime config snapshot
 
   <Accordion title="api.runtime.tasks.managedFlows">
     Bind a Task Flow runtime to an existing OpenClaw session key or trusted tool context, then create and manage Task Flows without passing an owner on every call.
+
+    Task Flow tracks durable multi-step workflow state. It is not a scheduler:
+    use Cron or `api.session.workflow.scheduleSessionTurn(...)` for future
+    wakeups, then use `managedFlows` from the scheduled turn when that work
+    needs flow state, child tasks, waits, or cancellation.
 
     ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
     const taskFlow = api.runtime.tasks.managedFlows.fromToolContext(ctx);
@@ -278,6 +350,34 @@ Provider and channel execution paths must use the active runtime config snapshot
     // Generic file analysis
     const result = await api.runtime.mediaUnderstanding.runFile({
       filePath: "/tmp/inbound-file.pdf",
+      cfg: api.config,
+    });
+
+    // Structured image extraction through a specific provider/model.
+    // Include at least one image; text inputs are supplemental context.
+    const evidence = await api.runtime.mediaUnderstanding.extractStructuredWithModel({
+      provider: "codex",
+      model: "gpt-5.5",
+      input: [
+        {
+          type: "image",
+          buffer: receiptImageBuffer,
+          fileName: "receipt.png",
+          mime: "image/png",
+        },
+        { type: "text", text: "Prefer the printed total over handwritten notes." },
+      ],
+      instructions: "Extract vendor, total, and searchable tags.",
+      schemaName: "receipt.evidence",
+      jsonSchema: {
+        type: "object",
+        properties: {
+          vendor: { type: "string" },
+          total: { type: "number" },
+          tags: { type: "array", items: { type: "string" } },
+        },
+        required: ["vendor", "total"],
+      },
       cfg: api.config,
     });
     ```
@@ -448,6 +548,19 @@ Provider and channel execution paths must use the active runtime config snapshot
 
   <Accordion title="api.runtime.channel">
     Channel-specific runtime helpers (available when a channel plugin is loaded).
+
+    `api.runtime.channel.media` is the preferred surface for channel media downloads and storage:
+
+    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    const saved = await api.runtime.channel.media.saveRemoteMedia({
+      url,
+      subdir: "inbound",
+      maxBytes,
+      filePathHint: fileName,
+    });
+    ```
+
+    Use `saveRemoteMedia(...)` when a remote URL should become OpenClaw media. Use `saveResponseMedia(...)` when the plugin already fetched a `Response` with plugin-owned auth, redirect, or allowlist handling. Use `readRemoteMediaBuffer(...)` only when the plugin needs raw bytes for inspection, transforms, decryption, or reupload. `fetchRemoteMedia(...)` remains a deprecated compatibility alias for `readRemoteMediaBuffer(...)`.
 
     `api.runtime.channel.mentions` is the shared inbound mention-policy surface for bundled channel plugins that use runtime injection:
 

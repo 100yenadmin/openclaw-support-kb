@@ -2,11 +2,16 @@
 type: composio_doc
 title: "ToolRouterSession"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tool-router-session.md"
-source_hash: "3a8d5e8cceb11bd48aec42a56c2e6023b42923129def7bb55161270128d6cfda"
+source_hash: "c67a1e18652039a5b84c569592dac9ab6eebaca39cfa033009c690f39d4cccf0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tool-router-session.md"
 original_doc_path: "reference/sdk-reference/python/tool-router-session.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # ToolRouterSession (/reference/sdk-reference/python/tool-router-session)
 Source: https://docs.composio.dev/reference/sdk-reference/python/tool-router-session.md

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Migration"
 source: "https://docs.composio.dev/reference/api-reference/migration.md"
-source_hash: "32fc1ac84818fb629907e363f57917ed4a16d11ddabb54f9c75566d202435e1a"
+source_hash: "4c3f05bfa4fc5a17d1fb96e545b77f06ef16408727640b3a8273f7c03f2f8c7c"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/api-reference/migration.md"
 original_doc_path: "reference/api-reference/migration.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Migration (/reference/api-reference/migration)
 Source: https://docs.composio.dev/reference/api-reference/migration.md

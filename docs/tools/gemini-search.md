@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Gemini search"
 source: "https://docs.openclaw.ai/tools/gemini-search"
-source_hash: "39d77912ccb0b18f2dca55c9aaa3132fcee55e1994d630d7ae2f31e204ec5d5c"
+source_hash: "a8a7f1ca17b87c39f08503fa0dd41e17d97f7dad0e77671a78ce77488a19cb19"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/gemini-search.md"
 original_doc_path: "tools/gemini-search.md"
 duplicate_index: 1

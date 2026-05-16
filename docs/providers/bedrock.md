@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "20e38d0e0ca62c6c07dbc8f6d9d21809847968d66b02383d6220a0a28bc5c946"
+source_hash: "19c39bacdba0d276d94dea3516c06bcea4b1eb5460258971ac7aedfb369fd8a7"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
 original_doc_path: "providers/bedrock.md"
 duplicate_index: 1
@@ -261,6 +263,48 @@ openclaw models list
     No extra configuration is needed. As long as discovery is enabled and the IAM
     principal has `bedrock:ListInferenceProfiles`, profiles appear alongside
     foundation models in `openclaw models list`.
+  </Accordion>
+
+  <Accordion title="Service tier">
+    Some Bedrock models support a `service_tier` parameter to optimize for cost
+    or latency. The following tiers are available:
+
+    | Tier       | Description                                                          |
+    | ---------- | -------------------------------------------------------------------- |
+    | `default`  | Standard Bedrock tier                                                |
+    | `flex`     | Discounted processing for workloads that can tolerate longer latency |
+    | `priority` | Prioritized processing for latency-sensitive workloads               |
+    | `reserved` | Reserved capacity for steady-state workloads                         |
+
+    Set `serviceTier` (or `service_tier`) via `agents.defaults.params` for
+    Bedrock model requests, or per-model in
+    `agents.defaults.models["<model-key>"].params`:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      agents: {
+        defaults: {
+          params: {
+            serviceTier: "flex", // applies to all models
+          },
+          models: {
+            "amazon-bedrock/mistral.mistral-large-3-675b-instruct": {
+              params: {
+                serviceTier: "priority", // per-model override
+              },
+            },
+          },
+        },
+      },
+    }
+    ```
+
+    Valid values are `default`, `flex`, `priority`, and `reserved`. Not all
+    models support all tiers — if an unsupported tier is requested, Bedrock will
+    return a validation error. Note: the error message is somewhat misleading;
+    it may say "The provided model identifier is invalid" rather than indicating
+    an unsupported service tier. If you see this error, check whether the model
+    supports the requested tier.
   </Accordion>
 
   <Accordion title="Claude Opus 4.7 temperature">

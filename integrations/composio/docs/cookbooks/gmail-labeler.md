@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Gmail Labeler"
 source: "https://docs.composio.dev/cookbooks/gmail-labeler.md"
-source_hash: "cd84d8499a572316aa50b9a5b7831b7c393d6e9f5ff6a97c78149fb8f7185f39"
+source_hash: "e557701752f5348c6986a30c943321050f117c314eff035f55711ddf6365e066"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/gmail-labeler.md"
 original_doc_path: "cookbooks/gmail-labeler.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Gmail Labeler (/cookbooks/gmail-labeler)
 Source: https://docs.composio.dev/cookbooks/gmail-labeler.md

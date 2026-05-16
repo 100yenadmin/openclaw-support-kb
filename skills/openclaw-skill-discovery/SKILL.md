@@ -8,24 +8,24 @@ description: Use when the user wants to find, evaluate, install, update, or impr
 ## Workflow
 
 1. Search the local VoltAgent skills snapshot:
-   ```bash
-   gbrain search "<skill need> awesome openclaw skills"
-   gbrain query "OpenClaw skills install configure security scanner <skill need>"
-   ```
+```bash
+gbrain search "OpenClaw <skill need> awesome openclaw skills" --source openclaw-support-kb
+gbrain search "OpenClaw skills install configure security scanner <skill need>" --source openclaw-support-kb
+```
 2. Search current OpenClaw/ClawHub docs and the native registry path:
-   ```bash
-   gbrain search "Source: https://docs.openclaw.ai/tools/clawhub"
-   gbrain search "Source: https://docs.openclaw.ai/cli/skills"
-   openclaw skills search "<task or app>" --limit 10 --json
-   openclaw skills info <candidate-slug> --json
-   ```
+```bash
+gbrain search "Source: https://docs.openclaw.ai/clawhub/index" --source openclaw-support-kb
+gbrain search "Source: https://docs.openclaw.ai/cli/skills" --source openclaw-support-kb
+openclaw skills search "<task or app>" --limit 10 --json
+openclaw skills info <candidate-slug> --json
+```
 3. If the task is for a SaaS app or chief-of-staff workflow, search the local Composio docs and toolkit catalog:
-   ```bash
-   gbrain search "Source: https://composio.dev/toolkits <app or workflow>"
-   gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md"
-   gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md"
-   gbrain query "Composio toolkit MCP OAuth <app or workflow>"
-   ```
+```bash
+gbrain search "Source: https://composio.dev/toolkits <app or workflow>" --source openclaw-support-kb
+gbrain search "Source: https://docs.composio.dev/docs/tools-and-toolkits.md" --source openclaw-support-kb
+gbrain search "Source: https://docs.composio.dev/docs/native-tools-vs-mcp.md" --source openclaw-support-kb
+gbrain search "Composio toolkit MCP OAuth <app or workflow>" --source openclaw-support-kb
+```
 4. Read `runbooks/skill-discovery.md` for the install workflow.
 5. Prefer bundled/native skills first, then verified ClawHub/OpenClaw sources, then the VoltAgent snapshot as discovery metadata.
 6. Choose the install path:

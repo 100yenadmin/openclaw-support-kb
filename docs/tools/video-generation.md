@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "314aa0b628623c51362594b495e327daf1059e48a0132a6931fe9410f66d784e"
+source_hash: "ac1826a1011868dd4562bc27126d5747c6c17f0203f0d13082aaf5de8e21a7f9"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
 original_doc_path: "tools/video-generation.md"
 duplicate_index: 1
@@ -240,7 +242,7 @@ dimensions). Providers that do not declare it surface the value via
 
 <ParamField type="string">Provider/model override (e.g. `runway/gen4.5`).</ParamField>
 <ParamField type="string">Output filename hint.</ParamField>
-<ParamField type="number">Optional provider operation timeout in milliseconds.</ParamField>
+<ParamField type="number">Optional provider operation timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.videoGenerationModel.timeoutMs` if configured.</ParamField>
 
 <ParamField type="object">
   Provider-specific options as a JSON object (e.g. `{"seed": 42, "draft": true}`).
@@ -512,9 +514,8 @@ Repo wrapper:
 pnpm test:live:media video
 ```
 
-This live file loads missing provider env vars from `~/.profile`, prefers
-live/env API keys ahead of stored auth profiles by default, and runs a
-release-safe smoke by default:
+This live file uses already-exported provider env vars ahead of stored auth
+profiles by default, and runs a release-safe smoke by default:
 
 * `generate` for every non-FAL provider in the sweep.
 * One-second lobster prompt.

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Cookbooks"
 source: "https://docs.composio.dev/cookbooks.md"
-source_hash: "f9279b6a3d679a1d5fb00302e6ef907ab24ea0b5be3a98c5466c814abed2726f"
+source_hash: "1c615e68516120006658d5e8fcdc265ee982ca10a77a3c5278617174a85310c0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks.md"
 original_doc_path: "cookbooks.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Cookbooks (/cookbooks)
 Source: https://docs.composio.dev/cookbooks.md

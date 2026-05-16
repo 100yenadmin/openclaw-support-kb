@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
-source_hash: "bf9a7564dd214d5f3a3fb01a2184f85f188f70ba1797a88d5574cc2bc22bbd22"
+source_hash: "f1283f3ede0b5a5a3090b4c7768163538bc4728bc6e8beb0310818a06e366c7d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/session-tool.md"
 original_doc_path: "concepts/session-tool.md"
 duplicate_index: 1
@@ -110,7 +112,8 @@ provenance. The receiving agent should treat them as tool-routed data, not as a
 direct end-user-authored instruction.
 
 After the target responds, OpenClaw can run a **reply-back loop** where the
-agents alternate messages (up to 5 turns). The target agent can reply
+agents alternate messages (up to `session.agentToAgent.maxPingPongTurns`, range
+0-20, default 5). The target agent can reply
 `REPLY_SKIP` to stop early.
 
 ## Status and orchestration helpers
@@ -139,7 +142,9 @@ sub-agents. It supports:
 
 `sessions_spawn` creates an isolated session for a background task by default.
 It is always non-blocking -- it returns immediately with a `runId` and
-`childSessionKey`.
+`childSessionKey`. Native sub-agent runs receive the delegated task in the
+child session's first visible `[Subagent Task]` message, while the system
+prompt carries only sub-agent runtime rules and routing context.
 
 Key options:
 

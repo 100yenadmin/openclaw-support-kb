@@ -12,9 +12,9 @@ Never use it as a substitute for searching current docs first.
 ## Search Contract
 
 ```bash
-gbrain search "<exact error text>"
-gbrain query "OpenClaw <feature> troubleshooting repair"
-gbrain search "support escalation self diagnostics"
+gbrain search "OpenClaw <exact error text>" --source openclaw-support-kb
+gbrain search "OpenClaw <feature> troubleshooting repair" --source openclaw-support-kb
+gbrain search "support escalation self diagnostics" --source openclaw-support-kb
 ```
 
 Support contacts:

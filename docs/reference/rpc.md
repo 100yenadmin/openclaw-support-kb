@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "RPC adapters"
 source: "https://docs.openclaw.ai/reference/rpc"
-source_hash: "79e26687949d167a4805a7793457cd3aeb4482edcbee2d1f6c723739c3ccc7f7"
+source_hash: "e6555bba4a4d9920e4213a9024bf2303f3bda5fddd566918dff47c05299bff65"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "reference/rpc.md"
 original_doc_path: "reference/rpc.md"
 duplicate_index: 1
@@ -24,11 +26,9 @@ OpenClaw integrates external CLIs via JSON-RPC. Two patterns are used today.
 
 See [Signal](/channels/signal) for setup and endpoints.
 
-## Pattern B: stdio child process (legacy: imsg)
+## Pattern B: stdio child process (imsg)
 
-> **Note:** For new iMessage setups, use [BlueBubbles](/channels/bluebubbles) instead.
-
-* OpenClaw spawns `imsg rpc` as a child process (legacy iMessage integration).
+* OpenClaw spawns `imsg rpc` as a child process for [iMessage](/channels/imessage).
 * JSON-RPC is line-delimited over stdin/stdout (one JSON object per line).
 * No TCP port, no daemon required.
 

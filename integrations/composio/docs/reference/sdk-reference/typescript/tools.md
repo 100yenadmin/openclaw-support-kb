@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tools.md"
-source_hash: "bd42f6dac7a1737e9b1428f556701f0f481b94b1dc55ef9e1fd961a548020e58"
+source_hash: "d6a8194d2661cf5809649d42ba799898e0d1bd721bea0af390d0f9b2e084250d"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tools.md"
 original_doc_path: "reference/sdk-reference/typescript/tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tools (/reference/sdk-reference/typescript/tools)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/tools.md

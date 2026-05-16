@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Qwen"
 source: "https://docs.openclaw.ai/providers/qwen"
-source_hash: "ac1beb339f36ce4f1dbea6277ee77522846c0ea52c6a6174ad36a803aabf169f"
+source_hash: "ea87b141def459a06cf369b9d0152e233ac94a15f1c13f4fd59839946f42db07"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/qwen.md"
 original_doc_path: "providers/qwen.md"
 duplicate_index: 1

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Date and time"
 source: "https://docs.openclaw.ai/date-time"
-source_hash: "12ad09462647d332ba05fcac3bba9fbd368c81dfb573e47f71b00225eb43ac57"
+source_hash: "a5ac724803fe7af22a56fde6af954862098ba7c9845475cffa75bfbd5a16d2d4"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "date-time.md"
 original_doc_path: "date-time.md"
 duplicate_index: 1

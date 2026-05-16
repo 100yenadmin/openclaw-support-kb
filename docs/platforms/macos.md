@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "macOS app"
 source: "https://docs.openclaw.ai/platforms/macos"
-source_hash: "8230f4593197f4bd51504cf82e4c19ae7a48366712ddb07ebc90c90769a6a6db"
+source_hash: "e9218bc998653eac3490ac63db195aa22e136f777924eb153360b716269cda9e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/macos.md"
 original_doc_path: "platforms/macos.md"
 duplicate_index: 1

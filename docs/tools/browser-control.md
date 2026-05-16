@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "fe70e80e27fb72d56faba332022403e71edf6e5bbbea17819b727ddeee3860ea"
+source_hash: "5889e23e40695139f33c62831d2f072cdcbb9fe21b4e968db83df5a425489851"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/browser-control.md"
 original_doc_path: "tools/browser-control.md"
 duplicate_index: 1
@@ -110,7 +112,13 @@ browser binaries as shown below.
 #### Docker Playwright install
 
 If your Gateway runs in Docker, avoid `npx playwright` (npm override conflicts).
-Use the bundled CLI instead:
+For custom images, bake Chromium into the image:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+OPENCLAW_INSTALL_BROWSER=1 ./scripts/docker/setup.sh
+```
+
+For an existing image, install through the bundled CLI instead:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 docker compose run --rm openclaw-cli \
@@ -119,7 +127,8 @@ docker compose run --rm openclaw-cli \
 
 To persist browser downloads, set `PLAYWRIGHT_BROWSERS_PATH` (for example,
 `/home/node/.cache/ms-playwright`) and make sure `/home/node` is persisted via
-`OPENCLAW_HOME_VOLUME` or a bind mount. See [Docker](/install/docker).
+`OPENCLAW_HOME_VOLUME` or a bind mount. OpenClaw auto-detects the persisted
+Chromium on Linux. See [Docker](/install/docker).
 
 ## How it works (internal)
 

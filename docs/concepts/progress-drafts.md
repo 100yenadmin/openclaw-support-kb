@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "279464ef5ad4c7d6a612a98d8b601a7599a062044d193890240697fa180e44e3"
+source_hash: "1149ea23c29e6ec212ec68d1b559e7baec943a37f690e6dd09c52d67e75d6a36"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
 original_doc_path: "concepts/progress-drafts.md"
 duplicate_index: 1
@@ -23,9 +25,9 @@ into the final answer when the channel can do that safely.
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
 Shelling...
-📖 Read: from docs/concepts/progress-drafts.md
+📖 from docs/concepts/progress-drafts.md
 🔎 Web Search: for "discord edit message"
-🛠️ Exec: run tests
+🛠️ Bash: run tests
 ```
 
 Use progress drafts when you want one tidy status message during tool-heavy work
@@ -56,15 +58,17 @@ progress chatter for that turn.
 
 A progress draft has two parts:
 
-| Part           | Purpose                                                                     |
-| -------------- | --------------------------------------------------------------------------- |
-| Label          | A short title such as `Thinking...` or `Shelling...`.                       |
-| Progress lines | Compact run updates using the same tool labels and icons as verbose output. |
+| Part           | Purpose                                                                               |
+| -------------- | ------------------------------------------------------------------------------------- |
+| Label          | A short starter/status line such as `Thinking...` or `Shelling...`.                   |
+| Progress lines | Compact run updates using the same tool icons and detail formatter as verbose output. |
 
 The label appears after the agent starts meaningful work and either remains busy
-for five seconds or emits a second work event. Plain text-only replies do not
-show a progress draft. Progress lines are added only when the agent emits useful
-work updates, for example `🛠️ Exec`, `🔎 Web Search`, or `✍️ Write: to /tmp/file`.
+for five seconds or emits a second work event. It is part of the rolling progress
+line list, so the starter status scrolls away once enough concrete work appears.
+Plain text-only replies do not show a progress draft. Progress lines are added
+only when the agent emits useful work updates, for example `🛠️ Bash: run tests`,
+`🔎 Web Search: for "discord edit message"`, or `✍️ Write: to /tmp/file`.
 By default they use the same compact explain mode as `/verbose`; set
 `agents.defaults.toolProgressDetail: "raw"` when debugging and you also want raw
 commands/details appended.
@@ -194,16 +198,16 @@ OpenClaw uses the same formatter for progress drafts and `/verbose`:
 ```
 
 `"explain"` is the default and keeps drafts stable with concise labels like
-`🛠️ Exec: check JS syntax for /tmp/app.js`. `"raw"` appends the underlying
+`🛠️ check JS syntax for /tmp/app.js`. `"raw"` appends the underlying
 command/detail when available, which is useful while debugging but noisier in
 chat.
 
 For example, the same command appears differently depending on the detail mode:
 
-| Mode      | Progress line                                                         |
-| --------- | --------------------------------------------------------------------- |
-| `explain` | `🛠️ Exec: check JS syntax for /tmp/app.js`                           |
-| `raw`     | `🛠️ Exec: check JS syntax for /tmp/app.js, node --check /tmp/app.js` |
+| Mode      | Progress line                                                   |
+| --------- | --------------------------------------------------------------- |
+| `explain` | `🛠️ check JS syntax for /tmp/app.js`                           |
+| `raw`     | `🛠️ check JS syntax for /tmp/app.js, node --check /tmp/app.js` |
 
 Limit how many lines stay visible:
 

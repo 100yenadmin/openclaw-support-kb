@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "1442200b2775615772cebbe2464d492abae5532b4498e34e6433b69802dc41ba"
+source_hash: "f862e1674594d3cdef2cc6a4d796e777e930644d0106e20ed98402b8ef0fec46"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
 original_doc_path: "tools/exec.md"
 duplicate_index: 1
@@ -13,8 +15,9 @@ Source: https://docs.openclaw.ai/tools/exec
 
 
 
-Run shell commands in the workspace. Supports foreground + background execution via `process`.
-If `process` is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.
+Run shell commands in the workspace. `exec` is a mutating shell surface: commands can create, edit, or delete files wherever the selected host or sandbox filesystem permits. Disabling OpenClaw filesystem tools such as `write`, `edit`, or `apply_patch` does not make `exec` read-only.
+
+Supports foreground + background execution via `process`. If `process` is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.
 Background sessions are scoped per agent; `process` only sees sessions from the same agent.
 
 ## Parameters
@@ -52,7 +55,9 @@ Background sessions are scoped per agent; `process` only sees sessions from the 
 </ParamField>
 
 <ParamField type="'deny' | 'allowlist' | 'full'">
-  Enforcement mode for `gateway` / `node` execution.
+  Ignored for normal tool calls. `gateway` / `node` security is controlled by
+  `tools.exec.security` and `~/.openclaw/exec-approvals.json`; elevated mode can
+  force `security=full` only when the operator explicitly grants elevated access.
 </ParamField>
 
 <ParamField type="'off' | 'on-miss' | 'always'">
@@ -113,6 +118,7 @@ Notes:
 * In `security=full` plus `ask=off` mode, host exec follows the configured policy directly; there is no extra heuristic command-obfuscation prefilter or script-preflight rejection layer.
 * `tools.exec.node` (default: unset)
 * `tools.exec.strictInlineEval` (default: false): when true, inline interpreter eval forms such as `python -c`, `node -e`, `ruby -e`, `perl -e`, `php -r`, `lua -e`, and `osascript -e` always require explicit approval. `allow-always` can still persist benign interpreter/script invocations, but inline-eval forms still prompt each time.
+* `tools.exec.commandHighlighting` (default: false): when true, approval prompts can highlight parser-derived command spans in the command text. Set to `true` globally or per agent to enable command text highlighting without changing exec approval policy.
 * `tools.exec.pathPrepend`: list of directories to prepend to `PATH` for exec runs (gateway + sandbox only).
 * `tools.exec.safeBins`: stdin-only safe binaries that can run without explicit allowlist entries. For behavior details, see [Safe bins](/tools/exec-approvals-advanced#safe-bins-stdin-only).
 * `tools.exec.safeBinTrustedDirs`: additional explicit directories trusted for `safeBins` path checks. `PATH` entries are never auto-trusted. Built-in defaults are `/bin` and `/usr/bin`.

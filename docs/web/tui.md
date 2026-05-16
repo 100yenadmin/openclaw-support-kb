@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "f1da9cf8b7339d509e9870cb1f249919f9040054dd3e19654e8071f6525828a0"
+source_hash: "82929c88a498dbad83a96b89e4cba9dfb88deeb3304ef52fd6d2f959c06fd6d1"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "web/tui.md"
 original_doc_path: "web/tui.md"
 duplicate_index: 1
@@ -80,6 +82,7 @@ Notes:
 ## Sending + delivery
 
 * Messages are sent to the Gateway; delivery to providers is off by default.
+* The TUI is an internal source surface like WebChat, not a generic outbound channel. Harnesses that require `tools.message` for visible replies can satisfy the active TUI turn with a targetless `message.send`; explicit provider delivery still uses normal configured channels and never falls back to `lastChannel`.
 * Turn delivery on:
   * `/deliver on`
   * or the Settings panel

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "0a87f6aafe89feb4ddf04061d2bf99d317f8827ef4c6b2494e9de0e423ffe204"
+source_hash: "ca97dba779cc6ccbf75fad4687ef64e351ef0d17d1b2bb55e9bc9cfd89507c06"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
 original_doc_path: "cli/cron.md"
 duplicate_index: 1
@@ -77,6 +79,14 @@ Note: isolated cron runs treat run-level agent failures as job errors even when
 no reply payload is produced, so model/provider failures still increment error
 counters and trigger failure notifications.
 
+If an isolated run times out before the first model request, `openclaw cron show`
+and `openclaw cron runs` include a phase-specific error such as
+`setup timed out before runner start` or
+`stalled before first model call (last phase: context-engine)`.
+For CLI-backed providers, the pre-model watchdog stays active until the external
+CLI turn starts, so session lookup, hook, auth, prompt, and CLI setup stalls are
+reported as pre-model cron failures.
+
 ## Scheduling
 
 ### One-shot jobs
@@ -99,10 +109,23 @@ Note: cron job definitions live in `jobs.json`, while pending runtime state live
 
 ### Manual runs
 
-`openclaw cron run` returns as soon as the manual run is queued. Successful responses include `{ ok: true, enqueued: true, runId }`. Use `openclaw cron runs --id <job-id>` to follow the eventual outcome.
+`openclaw cron run <job-id>` force-runs by default and returns as soon as the manual run is queued. Successful responses include `{ ok: true, enqueued: true, runId }`. Use the returned `runId` to inspect the later result:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw cron run <job-id>
+openclaw cron runs --id <job-id> --run-id <run-id>
+```
+
+Add `--wait` when a script should block until that exact queued run records a terminal status:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw cron run <job-id> --wait --wait-timeout 10m --poll-interval 2s
+```
+
+With `--wait`, the CLI still calls `cron.run` first, then polls `cron.runs` for the returned `runId`. The command exits `0` only when the run finishes with status `ok`. It exits non-zero when the run finishes with `error` or `skipped`, when the Gateway response does not include a `runId`, or when `--wait-timeout` expires. `--poll-interval` must be greater than zero.
 
 <Note>
-  `openclaw cron run <job-id>` force-runs by default. Use `--due` to keep the older "only run if due" behavior.
+  Use `--due` when you want the manual command to run only if the job is currently due. If `--due --wait` does not enqueue a run, the command returns the normal non-run response instead of polling.
 </Note>
 
 ## Models
@@ -119,6 +142,8 @@ Cron `--model` is a **job primary**, not a chat-session `/model` override. That 
 * Per-job payload `fallbacks` replaces the configured fallback list when present.
 * An empty per-job fallback list (`fallbacks: []` in the job payload/API) makes the cron run strict.
 * When a job has `--model` but no fallback list is configured, OpenClaw passes an explicit empty fallback override so the agent primary is not appended as a hidden retry target.
+
+`openclaw doctor` reports jobs that already have `payload.model` set, including provider namespace counts and mismatches against `agents.defaults.model`. Use that check when auth, provider, or billing behavior looks different between live chat and scheduled jobs.
 
 ### Isolated cron model precedence
 
@@ -219,13 +244,19 @@ Manual run and inspection:
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw cron list
 openclaw cron list --agent ops
+openclaw cron get <job-id>
 openclaw cron show <job-id>
 openclaw cron run <job-id>
 openclaw cron run <job-id> --due
+openclaw cron run <job-id> --wait --wait-timeout 10m
+openclaw cron run <job-id> --wait --wait-timeout 10m --poll-interval 2s
 openclaw cron runs --id <job-id> --limit 50
+openclaw cron runs --id <job-id> --run-id <run-id>
 ```
 
 `openclaw cron list` shows all matching jobs by default. Pass `--agent <id>` to show only jobs whose effective normalized agent id matches; jobs without a stored agent id count as the configured default agent.
+
+`openclaw cron get <job-id>` returns the stored job JSON directly. Use `cron show <job-id>` when you want the human-readable view with delivery-route preview.
 
 `cron list --json` and `cron show <job-id> --json` include a top-level `status` field on each job, computed from `enabled`, `state.runningAtMs`, and `state.lastRunStatus`. Values: `disabled`, `running`, `ok`, `error`, `skipped`, or `idle`. This mirrors the human-readable status column so external tooling can read job state without re-deriving it.
 

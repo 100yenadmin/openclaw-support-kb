@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Hostinger"
 source: "https://docs.openclaw.ai/install/hostinger"
-source_hash: "2de2d7afdcc6db78a13f70d0a2aecb5f2240fa687775738db0d3e84cc55435ca"
+source_hash: "995e309654ebae8f4a5af9f5f2e1b4429a113c1feb58b3c3f854523fc5e1d75f"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/hostinger.md"
 original_doc_path: "install/hostinger.md"
 duplicate_index: 1

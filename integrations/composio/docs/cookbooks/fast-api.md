@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Basic FastAPI Server"
 source: "https://docs.composio.dev/cookbooks/fast-api.md"
-source_hash: "1bb1ba6008b98cccebd20d3f654aa8ceed84c5ac8a7ca41ad9eaaf4d9a23c559"
+source_hash: "0718ecaf97273498b40595566ff7653565bba351efcef6f8044679a7480a5e6f"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/fast-api.md"
 original_doc_path: "cookbooks/fast-api.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Basic FastAPI Server (/cookbooks/fast-api)
 Source: https://docs.composio.dev/cookbooks/fast-api.md

@@ -441,6 +441,48 @@ test("client updater reclones dirty marked git source and keeps backup", async (
   }
 });
 
+test("auto-update canonicalizes legacy official repo origins before fetch", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-canonical-origin-"));
+  try {
+    const { remote, work } = await createRemoteFixture(tempDir);
+    await mkdir(path.join(work, "scripts"), { recursive: true });
+    await writeFile(path.join(work, "scripts", "update-client.mjs"), "console.log('stub update-client ran');\n");
+    await writeFile(path.join(work, "kb-manifest.json"), '{"channel":"stable","generatedAt":"test","sourceCount":1}\n');
+    runGit(["add", "."], { cwd: work });
+    runGit(["commit", "-m", "add updater"], { cwd: work });
+    runGit(["push", "origin", "main"], { cwd: work });
+
+    const sourceDir = path.join(tempDir, "source");
+    const statusFile = path.join(tempDir, "state", "status.json");
+    runGit(["clone", pathToFileURL(remote).href, sourceDir]);
+    runGit(["remote", "set-url", "origin", "https://github.com/100yenadmin/openclaw-support-kb.git"], { cwd: sourceDir });
+
+    const result = spawnSync(process.execPath, ["scripts/run-client-update.mjs", "--reason", "test-canonical-origin"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SUPPORT_KB_LOCK_DIR: path.join(tempDir, "locks"),
+        OPENCLAW_SUPPORT_KB_STATUS_FILE: statusFile,
+        GIT_CONFIG_COUNT: "2",
+        GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
+        GIT_CONFIG_VALUE_0: "https://github.com/electricsheephq/openclaw-support-kb.git",
+        GIT_CONFIG_KEY_1: "url.file:///does-not-exist/.insteadOf",
+        GIT_CONFIG_VALUE_1: "https://github.com/100yenadmin/openclaw-support-kb.git",
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    assert.equal(
+      runGit(["config", "--get", "remote.origin.url"], { cwd: sourceDir }).stdout.trim(),
+      "https://github.com/electricsheephq/openclaw-support-kb.git",
+    );
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
 test("repair-index moves legacy pre-git backups out of the sources directory", async () => {
   const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-repair-index-"));
   try {
@@ -484,7 +526,7 @@ test("direct client setup clones the published repo instead of building a non-gi
         "if [ \"$1\" = \"sources\" ]; then exit 0; fi",
         "if [ \"$1\" = \"sync\" ]; then exit 0; fi",
         "if [ \"$1\" = \"embed\" ]; then exit 0; fi",
-        "if [ \"$1\" = \"search\" ]; then echo 'Install OpenClaw Support KB For Agents openclaw-support-kb Telegram Setup And Repair telegram'; exit 0; fi",
+        "if [ \"$1\" = \"search\" ]; then echo 'Install Customer Support KB For Agents Customer Support KB openclaw-support-kb Telegram Setup And Repair telegram Hermes Agent config.yaml Paperclip heartbeat budget agent'; exit 0; fi",
         "exit 0",
         "",
       ].join("\n"),
@@ -499,11 +541,14 @@ test("direct client setup clones the published repo instead of building a non-gi
         HOME: tempDir,
         PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
         OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SUPPORT_KB_REPO: "https://github.com/100yenadmin/openclaw-support-kb.git",
         OPENCLAW_SKILLS_DIR: path.join(tempDir, "skills"),
         OPENCLAW_SUPPORT_KB_SKIP_AGENTS_MD: "1",
-        GIT_CONFIG_COUNT: "1",
+        GIT_CONFIG_COUNT: "2",
         GIT_CONFIG_KEY_0: `url.${pathToFileURL(remote).href}.insteadOf`,
         GIT_CONFIG_VALUE_0: "https://github.com/electricsheephq/openclaw-support-kb.git",
+        GIT_CONFIG_KEY_1: "url.file:///does-not-exist/.insteadOf",
+        GIT_CONFIG_VALUE_1: "https://github.com/100yenadmin/openclaw-support-kb.git",
       },
     });
 
@@ -559,10 +604,14 @@ test("status command reports healthy installs and stale checkpoints", async () =
     runGit(["add", "kb-manifest.json"], { cwd: sourceDir });
     runGit(["commit", "-m", "manifest"], { cwd: sourceDir });
     for (const skill of [
+      "customer-kb-router",
+      "cross-system-recovery",
+      "hermes-support-kb",
       "openclaw-support-kb",
       "openclaw-config-repair",
       "openclaw-skill-discovery",
       "openclaw-support-escalation",
+      "paperclip-mission-control",
     ]) {
       await mkdir(path.join(skillsDir, skill), { recursive: true });
       await writeFile(path.join(skillsDir, skill, "SKILL.md"), `# ${skill}\n`);
@@ -640,6 +689,74 @@ test("status command reports healthy installs and stale checkpoints", async () =
     assert.equal(staleStatus.status, "repair-needed");
     assert.equal(staleStatus.checkpoint.stale, true);
     assert.ok(staleStatus.problems.some((problem) => /checkpoint/.test(problem)));
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+});
+
+test("status command treats legacy GBrain without named sources as unscoped search", async () => {
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), "openclaw-kb-status-legacy-gbrain-"));
+  try {
+    const sourceDir = path.join(tempDir, "source");
+    const skillsDir = path.join(tempDir, "skills");
+    const fakeBin = path.join(tempDir, "bin");
+    runGit(["init", "--initial-branch=main", sourceDir]);
+    runGit(["config", "user.email", "test@example.com"], { cwd: sourceDir });
+    runGit(["config", "user.name", "OpenClaw KB Test"], { cwd: sourceDir });
+    await mkdir(fakeBin, { recursive: true });
+    await writeFile(
+      path.join(sourceDir, "kb-manifest.json"),
+      JSON.stringify({ channel: "stable", sourceCount: 3, minGbrainVersion: "0.19.0" }),
+    );
+    runGit(["add", "kb-manifest.json"], { cwd: sourceDir });
+    runGit(["commit", "-m", "manifest"], { cwd: sourceDir });
+    for (const skill of [
+      "customer-kb-router",
+      "cross-system-recovery",
+      "hermes-support-kb",
+      "openclaw-support-kb",
+      "openclaw-config-repair",
+      "openclaw-skill-discovery",
+      "openclaw-support-escalation",
+      "paperclip-mission-control",
+    ]) {
+      await mkdir(path.join(skillsDir, skill), { recursive: true });
+      await writeFile(path.join(skillsDir, skill, "SKILL.md"), `# ${skill}\n`);
+    }
+    await writeFile(
+      path.join(fakeBin, "gbrain"),
+      [
+        "#!/bin/sh",
+        "if [ \"$1\" = \"--version\" ]; then echo 'gbrain 0.19.0'; exit 0; fi",
+        "if [ \"$1\" = \"sources\" ]; then echo 'Unknown command: sources' >&2; exit 1; fi",
+        "if [ \"$1\" = \"search\" ]; then",
+        "  for arg in \"$@\"; do if [ \"$arg\" = \"--source\" ]; then echo '--source should not be used for legacy GBrain' >&2; exit 9; fi; done",
+        "  echo 'Install Customer Support KB For Agents Customer Support KB Telegram Setup And Repair telegram Hermes Agent config.yaml Paperclip heartbeat budget agent'",
+        "  exit 0",
+        "fi",
+        "exit 0",
+        "",
+      ].join("\n"),
+      { mode: 0o755 },
+    );
+
+    const result = spawnSync(process.execPath, ["scripts/status.mjs", "--json"], {
+      cwd: repoRoot,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        HOME: tempDir,
+        PATH: `${fakeBin}${path.delimiter}${process.env.PATH}`,
+        OPENCLAW_SUPPORT_KB_DIR: sourceDir,
+        OPENCLAW_SKILLS_DIR: skillsDir,
+      },
+    });
+
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    const status = JSON.parse(result.stdout);
+    assert.equal(status.status, "healthy");
+    assert.equal(status.sourceRegistry.supported, false);
+    assert.equal(status.search.legacyUnscoped, true);
   } finally {
     await rm(tempDir, { recursive: true, force: true });
   }

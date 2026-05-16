@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Providers"
 source: "https://docs.composio.dev/docs/providers.md"
-source_hash: "cba65358d8bf3af14db2138cf4ed14051bf28b8beaacafe4f85a430e67f49c73"
+source_hash: "7b00f7fe84e6d1355e3bc3e5878fccf990bf6256adb06a8d16dd5089032235fe"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers.md"
 original_doc_path: "providers.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Providers (/docs/providers)
 Source: https://docs.composio.dev/docs/providers.md

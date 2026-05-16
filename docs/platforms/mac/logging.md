@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "macOS logging"
 source: "https://docs.openclaw.ai/platforms/mac/logging"
-source_hash: "7270dc32d33f1e9eac1a7facd6e1dc866f9647fd42cef83683c58587901553d9"
+source_hash: "ff0984d3df65875c85c53b42b350e29bbc778ca01c6c148abc275839db8c23d0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/logging.md"
 original_doc_path: "platforms/mac/logging.md"
 duplicate_index: 1

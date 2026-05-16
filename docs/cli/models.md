@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "7fdcca01824b603e0b980ebd1f2a590c3eb339647f024a4f3b9c7c041df01c4d"
+source_hash: "60d2104cda67093fa76e8e8d2aaec942c5cbf1e5415536105c0ec1a7b1dd5f56"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/models.md"
 original_doc_path: "cli/models.md"
 duplicate_index: 1
@@ -195,11 +197,17 @@ specific configured agent store. The parent `--agent` flag is honored by
 `add`, `list`, `login`, `setup-token`, `paste-token`, and
 `login-github-copilot`.
 
+For OpenAI models, `--provider openai` defaults to ChatGPT/Codex account login.
+Use `--method api-key` only when you want to add an OpenAI API-key profile,
+usually as a backup for Codex subscription limits. The legacy
+`--provider openai-codex` spelling still works for existing scripts.
+
 Examples:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw models auth login --provider openai-codex --set-default
-openclaw models auth list --provider openai-codex
+openclaw models auth login --provider openai --set-default
+openclaw models auth login --provider openai --method api-key
+openclaw models auth list --provider openai
 ```
 
 Notes:

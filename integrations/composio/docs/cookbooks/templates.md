@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Templates"
 source: "https://docs.composio.dev/cookbooks/templates.md"
-source_hash: "3462daf2a037d6199c75ed7f250120ae54270048601540bf2ddbd2c7f3805921"
+source_hash: "918e013b252d8e1455cb9ab5bacc4bb2d144c8f621987926bed8c4bc127bb540"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/templates.md"
 original_doc_path: "cookbooks/templates.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Templates (/cookbooks/templates)
 Source: https://docs.composio.dev/cookbooks/templates.md

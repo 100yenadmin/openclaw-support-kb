@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "e9df310b4e058d94d093f64be8715e4cc18e3b3f2152052aba5c98f90c10b56e"
+source_hash: "34046aefbc52fa80d4f215ab0c8e7b7b965565e074cf9b510c800ab0a803c619"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
 original_doc_path: "tools/diffs.md"
 duplicate_index: 1
@@ -313,6 +315,7 @@ Set plugin-wide defaults in `~/.openclaw/openclaw.json`:
             fileScale: 2,
             fileMaxWidth: 960,
             mode: "both",
+            ttlSeconds: 21600,
           },
         },
       },
@@ -337,6 +340,7 @@ Supported defaults:
 * `fileScale`
 * `fileMaxWidth`
 * `mode`
+* `ttlSeconds`
 
 Explicit tool parameters override these defaults.
 

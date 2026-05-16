@@ -2,11 +2,16 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/docs/troubleshooting/mcp.md"
-source_hash: "b406414b8baee31eebcbc0bce9b2ba3af0dc0938dd51bc083dac6cbbdae33a98"
+source_hash: "41d3a702b9fbf97c95dfc915f5e4bf0ef0a15d53c47796d5923c3e181aa29bb5"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/mcp.md"
 original_doc_path: "troubleshooting/mcp.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # MCP (/docs/troubleshooting/mcp)
 Source: https://docs.composio.dev/docs/troubleshooting/mcp.md

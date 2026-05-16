@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-16T10:17:37.399Z",
+  "physicalGbrainSourceId": "openclaw-support-kb",
+  "note": "This v1 repo installs as one GBrain source for backwards compatibility. Agents must use logical namespaces and source/path filters to avoid mixing OpenClaw, Hermes, Paperclip, and Composio facts.",
+  "logicalSources": [
+    {
+      "id": "openclaw",
+      "displayName": "OpenClaw",
+      "pathPrefix": "docs/",
+      "pathPrefixes": [
+        "docs/",
+        "releases/",
+        "runbooks/",
+        "skills-index/",
+        "security/",
+        "support/"
+      ],
+      "sourceSystem": "OpenClaw",
+      "configSurface": "openclaw.json",
+      "commandPrefix": "openclaw",
+      "searchMustInclude": [
+        "OpenClaw",
+        "Source: https://docs.openclaw.ai"
+      ],
+      "count": 502
+    },
+    {
+      "id": "hermes-agent",
+      "displayName": "Hermes Agent",
+      "pathPrefix": "systems/hermes/",
+      "pathPrefixes": [
+        "systems/hermes/"
+      ],
+      "sourceSystem": "Hermes Agent",
+      "configSurface": "~/.hermes/config.yaml",
+      "commandPrefix": "hermes",
+      "searchMustInclude": [
+        "Hermes Agent",
+        "Local KB namespace: hermes-agent"
+      ],
+      "count": 157
+    },
+    {
+      "id": "paperclip-mission-control",
+      "displayName": "Paperclip Mission Control",
+      "pathPrefix": "systems/paperclip/",
+      "pathPrefixes": [
+        "systems/paperclip/"
+      ],
+      "sourceSystem": "Paperclip Mission Control",
+      "configSurface": "Paperclip database/env/deploy configuration",
+      "commandPrefix": "npx paperclipai",
+      "searchMustInclude": [
+        "Paperclip Mission Control",
+        "Local KB namespace: paperclip-mission-control"
+      ],
+      "count": 86
+    },
+    {
+      "id": "composio",
+      "displayName": "Composio Integrations",
+      "pathPrefix": "integrations/composio/",
+      "pathPrefixes": [
+        "integrations/composio/"
+      ],
+      "sourceSystem": "Composio Integration",
+      "configSurface": "OpenClaw MCP/integration config",
+      "commandPrefix": "openclaw mcp",
+      "searchMustInclude": [
+        "Composio",
+        "Source: https://docs.composio.dev"
+      ],
+      "count": 171
+    }
+  ]
+}

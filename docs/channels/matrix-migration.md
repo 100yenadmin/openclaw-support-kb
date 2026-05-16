@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Matrix migration"
 source: "https://docs.openclaw.ai/channels/matrix-migration"
-source_hash: "6112f9d5fc5e969f9b15789465c51bc30ce88bd103e133a3b85078f71a6353fb"
+source_hash: "feee3b324ee1500ce646b7c02382104411839f8ebc705020c93b058fbba4a29e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/matrix-migration.md"
 original_doc_path: "channels/matrix-migration.md"
 duplicate_index: 1

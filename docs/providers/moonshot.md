@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Moonshot AI"
 source: "https://docs.openclaw.ai/providers/moonshot"
-source_hash: "084769bef28430dc39a32a60c4a6cfb1e282dd977b79689409bd51595d4de046"
+source_hash: "78488040ca60bce45e3cb18dbc65a64975da1ea4ddab799162639feedabf05c0"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/moonshot.md"
 original_doc_path: "providers/moonshot.md"
 duplicate_index: 1
@@ -15,7 +17,7 @@ Source: https://docs.openclaw.ai/providers/moonshot
 
 Moonshot provides the Kimi API with OpenAI-compatible endpoints. Configure the
 provider and set the default model to `moonshot/kimi-k2.6`, or use
-Kimi Coding with `kimi/kimi-code`.
+Kimi Coding with `kimi/kimi-for-coding`.
 
 <Warning>
   Moonshot and Kimi Coding are **separate providers**. Keys are not interchangeable, endpoints differ, and model refs differ (`moonshot/...` vs `kimi/...`).
@@ -194,7 +196,7 @@ Choose your provider and follow the setup steps.
     **Best for:** code-focused tasks via the Kimi Coding endpoint.
 
     <Note>
-      Kimi Coding uses a different API key and provider prefix (`kimi/...`) than Moonshot (`moonshot/...`). Legacy model ref `kimi/k2p5` remains accepted as a compatibility id.
+      Kimi Coding uses a different API key and provider prefix (`kimi/...`) than Moonshot (`moonshot/...`). The stable API model ref is `kimi/kimi-for-coding`; legacy refs `kimi/kimi-code` and `kimi/k2p5` remain accepted and normalize to that API model id.
     </Note>
 
     <Steps>
@@ -209,7 +211,7 @@ Choose your provider and follow the setup steps.
         {
           agents: {
             defaults: {
-              model: { primary: "kimi/kimi-code" },
+              model: { primary: "kimi/kimi-for-coding" },
             },
           },
         }
@@ -230,9 +232,9 @@ Choose your provider and follow the setup steps.
       env: { KIMI_API_KEY: "sk-..." },
       agents: {
         defaults: {
-          model: { primary: "kimi/kimi-code" },
+          model: { primary: "kimi/kimi-for-coding" },
           models: {
-            "kimi/kimi-code": { alias: "Kimi" },
+            "kimi/kimi-for-coding": { alias: "Kimi" },
           },
         },
       },

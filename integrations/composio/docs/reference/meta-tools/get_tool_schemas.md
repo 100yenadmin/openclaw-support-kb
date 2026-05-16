@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Get Tool Schemas"
 source: "https://docs.composio.dev/reference/meta-tools/get_tool_schemas.md"
-source_hash: "e2d7a7ce7f6906dee86e128ac700c6e14333412d1f4c31d3e33b2bd1d17b3590"
+source_hash: "0a596be1ee0dacd8bdfac7d34ae482a118564620a6d24c2863a6161bf0f85413"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/meta-tools/get_tool_schemas.md"
 original_doc_path: "reference/meta-tools/get_tool_schemas.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Get Tool Schemas (/reference/meta-tools/get_tool_schemas)
 Source: https://docs.composio.dev/reference/meta-tools/get_tool_schemas.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Onboarding overview"
 source: "https://docs.openclaw.ai/start/onboarding-overview"
-source_hash: "fd284219646645a10a8df634706c592d88ac6790b030c8c0e18cd97a8f39d614"
+source_hash: "a120993b8d352fe90c4acec8fa0f3bba18124a6707748f2de1323684a61d037e"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "start/onboarding-overview.md"
 original_doc_path: "start/onboarding-overview.md"
 duplicate_index: 1
@@ -37,7 +39,7 @@ Regardless of which path you choose, onboarding sets up:
 2. **Workspace** — directory for agent files, bootstrap templates, and memory
 3. **Gateway** — port, bind address, auth mode
 4. **Channels** (optional) — built-in and bundled chat channels such as
-   BlueBubbles, Discord, Feishu, Google Chat, Mattermost, Microsoft Teams,
+   iMessage, Discord, Feishu, Google Chat, Mattermost, Microsoft Teams,
    Telegram, WhatsApp, and more
 5. **Daemon** (optional) — background service so the Gateway starts automatically
 

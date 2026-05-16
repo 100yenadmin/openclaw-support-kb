@@ -2,11 +2,16 @@
 type: composio_doc
 title: "ToolRouterSession"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tool-router-session.md"
-source_hash: "ce36c70436c553cab937d7b061f1694d7674761376bd2aa35283af12b4a708f8"
+source_hash: "e68f72ce028d007a3fbe120d96c35b10c7ffe0a2bd1a3a218d341e5e1b2fcb5a"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tool-router-session.md"
 original_doc_path: "reference/sdk-reference/typescript/tool-router-session.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # ToolRouterSession (/reference/sdk-reference/typescript/tool-router-session)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/tool-router-session.md

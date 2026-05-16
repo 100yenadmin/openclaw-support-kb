@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "f7554064852ec0668b64ebca7f7c1deae075a9f4b3fac0d36b679593af86ed8d"
+source_hash: "d46cd02fc3ef81c18579142ea0aa8d12294bffc59d0f613923e523a26c6d6b00"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
 original_doc_path: "channels/feishu.md"
 duplicate_index: 1
@@ -31,7 +33,7 @@ Feishu/Lark is an all-in-one collaboration platform where teams chat, share docu
     openclaw channels login --channel feishu
     ```
 
-    Scan the QR code with your Feishu/Lark mobile app to create a Feishu/Lark bot automatically.
+    Choose manual setup to paste an App ID and App Secret from Feishu Open Platform, or choose QR setup to create a bot automatically. If the domestic Feishu mobile app does not react to the QR code, rerun setup and choose manual setup.
   </Step>
 
   <Step title="After setup completes, restart the gateway to apply the changes">
@@ -218,6 +220,13 @@ openclaw pairing list feishu
 4. Ensure all required permission scopes are granted
 5. Ensure the gateway is running: `openclaw gateway status`
 6. Check logs: `openclaw logs --follow`
+
+### QR setup does not react in the Feishu mobile app
+
+1. Rerun setup: `openclaw channels login --channel feishu`
+2. Choose manual setup
+3. In Feishu Open Platform, create a self-built app and copy its App ID and App Secret
+4. Paste those credentials into the setup wizard
 
 ### App Secret leaked
 

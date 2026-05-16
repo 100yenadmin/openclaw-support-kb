@@ -2,11 +2,16 @@
 type: composio_doc
 title: "RemoteFile"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/remote-file.md"
-source_hash: "947a64f347d993e57d104b408c1a182910907ac9917456162c0e728cc7358fc5"
+source_hash: "65507be190d4440574ad77a355c455e2ef82bdffbf67342942a8618c447a1a93"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/remote-file.md"
 original_doc_path: "reference/sdk-reference/typescript/remote-file.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # RemoteFile (/reference/sdk-reference/typescript/remote-file)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/remote-file.md

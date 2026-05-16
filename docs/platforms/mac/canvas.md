@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "6b41fcf114cd0855aaec53b52843a8bc26bfd144164c63522bf1fe9a644c8aaf"
+source_hash: "7390d166f9517e0db6e7a42d33bab69076f252d907de07af6c8a95b1e207ec0c"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
 original_doc_path: "platforms/mac/canvas.md"
 duplicate_index: 1

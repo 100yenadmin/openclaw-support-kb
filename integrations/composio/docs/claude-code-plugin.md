@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Claude Code Plugin"
 source: "https://docs.composio.dev/docs/claude-code-plugin.md"
-source_hash: "b599b6f3e12388c63b7fde1b2808bd954bc916b6b649316325798c92ce2ace0e"
+source_hash: "c60de56fd23c9414fb622bf2bbcf67bbcfde1aa551a52c8294243a5267ce9383"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "claude-code-plugin.md"
 original_doc_path: "claude-code-plugin.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Claude Code Plugin (/docs/claude-code-plugin)
 Source: https://docs.composio.dev/docs/claude-code-plugin.md

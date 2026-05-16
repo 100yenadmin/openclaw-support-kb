@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Auth Configs"
 source: "https://docs.composio.dev/reference/v3/api-reference/auth-configs.md"
-source_hash: "f482a06d291f36f0d29bd320c138bfb7c8a93573c546f9d69b94b9f768882aa2"
+source_hash: "a56d3d075ddf031ffc9b03dc617ac3a2995b220c98026d141289c9228d592df0"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/auth-configs.md"
 original_doc_path: "reference/v3/api-reference/auth-configs.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Auth Configs (/reference/v3/api-reference/auth-configs)
 Source: https://docs.composio.dev/reference/v3/api-reference/auth-configs.md

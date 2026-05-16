@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Browser login"
 source: "https://docs.openclaw.ai/tools/browser-login"
-source_hash: "a7f87682383d342b8f52f8b97ca1f6b2560e01e16a9e05c83079ed1ba43917d0"
+source_hash: "e8521e3af2cb490682a399303ddc58769cf2081584ec5d4b93100015b666e964"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "tools/browser-login.md"
 original_doc_path: "tools/browser-login.md"
 duplicate_index: 1
@@ -69,13 +71,13 @@ If the agent is sandboxed, the browser tool defaults to the sandbox. To allow ho
 }
 ```
 
-Then target the host browser:
+Then open the host browser yourself (CLI invocations always run against the host browser):
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw browser open https://x.com --browser-profile openclaw --target host
+openclaw browser open https://x.com --browser-profile openclaw
 ```
 
-Or disable sandboxing for the agent that posts updates.
+The agent's `browser` tool calls can then target the host once `sandbox.browser.allowHostControl: true` is set. Alternatively, disable sandboxing for the agent that posts updates.
 
 ## Related
 

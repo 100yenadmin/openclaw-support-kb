@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "b8d2c93df5bf230ddb3a1a16cee6fee93512f4b5a0b3449e28c1de70431929e5"
+source_hash: "cd62acc7eaa254d55bbf656fe56f7ebe40266285eb91d146421435af4aa4aa5d"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "plugins/google-meet.md"
 original_doc_path: "plugins/google-meet.md"
 duplicate_index: 1

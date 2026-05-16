@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "065a087b8b5ad54c95b28ea467839cc428866025324d93247221e7e08460908d"
+source_hash: "ecbe4395a6765e59d30265d1a5f40251f1a12168014a89e44e319c4a9361f5eb"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
 original_doc_path: "nodes/media-understanding.md"
 duplicate_index: 1
@@ -202,7 +204,7 @@ If `tools.media.<capability>.enabled` is **not** set to `false` and you haven't 
 
     Bundled fallback order:
 
-    * Audio: OpenAI → Groq → xAI → Deepgram → Google → SenseAudio → ElevenLabs → Mistral
+    * Audio: OpenAI → Groq → xAI → Deepgram → OpenRouter → Google → SenseAudio → ElevenLabs → Mistral
     * Image: OpenAI → Anthropic → Google → MiniMax → MiniMax Portal → Z.AI
     * Video: Google → Qwen → Moonshot
   </Step>
@@ -246,7 +248,7 @@ If you set `capabilities`, the entry only runs for those media types. For shared
 * `openai`, `anthropic`, `minimax`: **image**
 * `minimax-portal`: **image**
 * `moonshot`: **image + video**
-* `openrouter`: **image**
+* `openrouter`: **image + audio**
 * `google` (Gemini API): **image + audio + video**
 * `qwen`: **image + video**
 * `mistral`: **audio**
@@ -263,7 +265,7 @@ For CLI entries, **set `capabilities` explicitly** to avoid surprising matches. 
 | Capability | Provider integration                                                                                                         | Notes                                                                                                                                                                                                                                   |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Image      | OpenAI, OpenAI Codex OAuth, Codex app-server, OpenRouter, Anthropic, Google, MiniMax, Moonshot, Qwen, Z.AI, config providers | Vendor plugins register image support; `openai-codex/*` uses OAuth provider plumbing; `codex/*` uses a bounded Codex app-server turn; MiniMax and MiniMax OAuth both use `MiniMax-VL-01`; image-capable config providers auto-register. |
-| Audio      | OpenAI, Groq, xAI, Deepgram, Google, SenseAudio, ElevenLabs, Mistral                                                         | Provider transcription (Whisper/Groq/xAI/Deepgram/Gemini/SenseAudio/Scribe/Voxtral).                                                                                                                                                    |
+| Audio      | OpenAI, Groq, xAI, Deepgram, OpenRouter, Google, SenseAudio, ElevenLabs, Mistral                                             | Provider transcription (Whisper/Groq/xAI/Deepgram/OpenRouter STT/Gemini/SenseAudio/Scribe/Voxtral).                                                                                                                                     |
 | Video      | Google, Qwen, Moonshot                                                                                                       | Provider video understanding via vendor plugins; Qwen video understanding uses the Standard DashScope endpoints.                                                                                                                        |
 
 <Note>

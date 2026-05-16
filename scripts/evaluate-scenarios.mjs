@@ -6,54 +6,38 @@ import { pathExists, repoRootFromImportMeta } from "./lib/openclaw-support-kb.mj
 const repoRoot = repoRootFromImportMeta(import.meta.url);
 const scenarios = JSON.parse(await readFile(path.join(repoRoot, "evals", "customer-scenarios.json"), "utf8"));
 
-const candidateCorpusFiles = [
-  "README.md",
-  "INSTALL_FOR_AGENTS.md",
-  "AGENTS.md",
-  "skills/RESOLVER.md",
-  "skills/openclaw-support-kb/SKILL.md",
-  "skills/openclaw-config-repair/SKILL.md",
-  "skills/openclaw-skill-discovery/SKILL.md",
-  "skills/openclaw-support-escalation/SKILL.md",
-  "runbooks/system-explainer.md",
-  "runbooks/agent-creation.md",
-  "runbooks/channel-setup.md",
-  "runbooks/telegram-setup.md",
-  "runbooks/config-repair.md",
-  "runbooks/skill-discovery.md",
-  "runbooks/self-diagnostics.md",
-  "runbooks/support-escalation.md",
-  "runbooks/updates.md",
-  "support/contacts.md",
-];
-
-const corpusFiles = [];
-for (const file of candidateCorpusFiles) {
-  if (await pathExists(path.join(repoRoot, file))) corpusFiles.push(file);
-}
-
-const corpus = (
-  await Promise.all(
-    corpusFiles.map(async (file) => `${file}\n${await readFile(path.join(repoRoot, file), "utf8")}`),
-  )
-).join("\n\n");
-
 const failures = [];
 
+async function corpusForFiles(files) {
+  const existingFiles = [];
+  for (const file of files) {
+    if (await pathExists(path.join(repoRoot, file))) existingFiles.push(file);
+  }
+  return (
+    await Promise.all(
+      existingFiles.map(async (file) => `${file}\n${await readFile(path.join(repoRoot, file), "utf8")}`),
+    )
+  ).join("\n\n");
+}
+
 for (const scenario of scenarios) {
-  for (const file of [...scenario.mustHaveDocs, ...scenario.mustHaveRunbooks]) {
+  const scenarioFiles = [...scenario.mustHaveDocs, ...scenario.mustHaveRunbooks];
+  const scenarioCorpus = await corpusForFiles(scenarioFiles);
+  for (const file of scenarioFiles) {
     if (!(await pathExists(path.join(repoRoot, file)))) {
       failures.push(`${scenario.id}: missing expected file ${file}`);
     }
   }
   for (const needle of scenario.mustMention) {
-    if (!corpus.toLowerCase().includes(needle.toLowerCase())) {
-      failures.push(`${scenario.id}: missing expected guidance "${needle}"`);
+    if (!scenarioCorpus.toLowerCase().includes(needle.toLowerCase())) {
+      failures.push(`${scenario.id}: missing expected guidance "${needle}" in scenario files`);
     }
   }
 }
 
 const runbookFiles = [
+  "runbooks/customer-kb-routing.md",
+  "runbooks/cross-system-recovery.md",
   "runbooks/system-explainer.md",
   "runbooks/agent-creation.md",
   "runbooks/channel-setup.md",
@@ -81,7 +65,7 @@ for (const file of runbookFiles) {
   if (!/```bash/.test(text)) {
     failures.push(`${file}: missing command block`);
   }
-  if (!/(docs\/|Source: https:\/\/docs\.openclaw\.ai|support\/contacts|kb-manifest|https:\/\/github\.com\/)/.test(text)) {
+  if (!/(docs\/|Source: https:\/\/docs\.openclaw\.ai|Local KB namespace|support\/contacts|kb-manifest|https:\/\/github\.com\/)/.test(text)) {
     failures.push(`${file}: missing source path or source URL cue`);
   }
   if (!/## (Guided Workflow|Workflow|First Commands|Explanation Shape|Update OpenClaw Install|Rules)/.test(text)) {

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "7921794a20dce5416516a244a3f93bef918f32f106a99aa18f834b406a59dea1"
+source_hash: "7c2d80655799c3463fd3082a1e0a6cbe0d979f152ce4fab8c4eea8954e3cf1df"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
 original_doc_path: "concepts/presence.md"
 duplicate_index: 1

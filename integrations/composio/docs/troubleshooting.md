@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Troubleshooting"
 source: "https://docs.composio.dev/docs/troubleshooting.md"
-source_hash: "46fdf5219a94a762d44efea922ed5d8c716cc7f0b1ffccdf7847a2cd6734a9cd"
+source_hash: "c867e0180668e7bbc34d11057eef20f0489292cbd9aeb498a05400ca563077f8"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting.md"
 original_doc_path: "troubleshooting.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Troubleshooting (/docs/troubleshooting)
 Source: https://docs.composio.dev/docs/troubleshooting.md

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "a45fcb9385225fd5f173ce3e3fa2e31f5f74240e50b96f7a586328f1c6c10ab4"
+source_hash: "62a6c49cc2dc8124102f3ca36e27e8a19627127e758f856f067ffedac01e6a48"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "providers/vercel.md"
 original_doc_path: "providers/vercel.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Vercel AI SDK (/docs/providers/vercel)
 Source: https://docs.composio.dev/docs/providers/vercel.md
@@ -52,6 +57,35 @@ const { text } = await generateText({
 });
 
 console.log(text);
+```
+# Multi-turn chat
+
+For multi-turn apps, create the session once and reuse it across requests with `composio.use()`:
+
+```typescript
+// @noErrors
+import { anthropic } from "@ai-sdk/anthropic";
+import { Composio } from "@composio/core";
+import { VercelProvider } from "@composio/vercel";
+import { generateText, stepCountIs } from "ai";
+
+const composio = new Composio({ provider: new VercelProvider() });
+
+// First request — create and store the session ID
+const session = await composio.create("user_123");
+const sessionId = session.sessionId;
+// store sessionId in your database or chat state
+
+// Subsequent requests — reuse the session
+const session = await composio.use(sessionId);
+const tools = await session.tools();
+
+const { text } = await generateText({
+  model: anthropic("claude-opus-4-6"),
+  tools,
+  prompt: "What emails did I get today?",
+  stopWhen: stepCountIs(10),
+});
 ```
 
 ---

@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Dashboard"
 source: "https://docs.composio.dev/docs/troubleshooting/dashboard.md"
-source_hash: "a9ebc59fc14d64c90ad57a1b15cedc9dfe9d095a5309f6b9647f355c706119a2"
+source_hash: "089473289b7e83b20abe6746b26feefea92c20631665ffcb4a41a0bd4084cd77"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "troubleshooting/dashboard.md"
 original_doc_path: "troubleshooting/dashboard.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Dashboard (/docs/troubleshooting/dashboard)
 Source: https://docs.composio.dev/docs/troubleshooting/dashboard.md

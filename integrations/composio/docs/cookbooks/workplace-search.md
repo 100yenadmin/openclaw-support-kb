@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Workplace search agent"
 source: "https://docs.composio.dev/cookbooks/workplace-search.md"
-source_hash: "24577a4e5556de3fba96f1419fe267b69ab24cea0871c36468912e0e65d5f1ef"
+source_hash: "f51beaa49c6ff382e8d4f3823c89cbbd6de7f4feb9ca32f97c97b82a84b77fc9"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "cookbooks/workplace-search.md"
 original_doc_path: "cookbooks/workplace-search.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Workplace search agent (/cookbooks/workplace-search)
 Source: https://docs.composio.dev/cookbooks/workplace-search.md

@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "e2ba5f31f62a9c4bb26d5928ae6f277d900513605827d4dc7f78946756a47421"
+source_hash: "a5b205b69c1567165f39e138d2be1cac10367be4ff9bb052053f4dcfad7e4abb"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
 original_doc_path: "cli/tui.md"
 duplicate_index: 1
@@ -21,6 +23,23 @@ mode.
 Related:
 
 * TUI guide: [TUI](/web/tui)
+
+## Options
+
+| Flag                  | Default                                   | Description                                                                        |
+| --------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------- |
+| `--local`             | `false`                                   | Run against the local embedded agent runtime instead of a Gateway.                 |
+| `--url <url>`         | `gateway.remote.url` from config          | Gateway WebSocket URL.                                                             |
+| `--token <token>`     | (none)                                    | Gateway token if required.                                                         |
+| `--password <pass>`   | (none)                                    | Gateway password if required.                                                      |
+| `--session <key>`     | `main` (or `global` when scope is global) | Session key. Inside an agent workspace it auto-selects that agent unless prefixed. |
+| `--deliver`           | `false`                                   | Deliver assistant replies through configured channels.                             |
+| `--thinking <level>`  | (model default)                           | Thinking level override.                                                           |
+| `--message <text>`    | (none)                                    | Send an initial message after connecting.                                          |
+| `--timeout-ms <ms>`   | `agents.defaults.timeoutSeconds`          | Agent timeout. Invalid values log a warning and are ignored.                       |
+| `--history-limit <n>` | `200`                                     | History entries to load on attach.                                                 |
+
+Aliases: `openclaw chat` and `openclaw terminal` invoke the same command with `--local` implied.
 
 Notes:
 

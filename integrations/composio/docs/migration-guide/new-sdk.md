@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "b85c145fb3163164b9d1c5f2065eff56c39ef5b2829168e7ffc5129535865dc5"
+source_hash: "c662d71e811516208aa3e9d4bc24b77df604da090d7af5de8a58a741fc91fa45"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
 original_doc_path: "migration-guide/new-sdk.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Our next generation SDKs (/docs/migration-guide/new-sdk)
 Source: https://docs.composio.dev/docs/migration-guide/new-sdk.md

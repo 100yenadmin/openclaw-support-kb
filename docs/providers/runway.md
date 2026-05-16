@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "7ef4a499a9bf8867512f2f7de4302af2b3f29123319bff41d0ee51bb4e6481d0"
+source_hash: "5af08fc8cb9c894e8d7cf6063b70f240743aef497245e8e878335c92f393be7a"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
 original_doc_path: "providers/runway.md"
 duplicate_index: 1

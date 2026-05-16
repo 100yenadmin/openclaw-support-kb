@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "vLLM"
 source: "https://docs.openclaw.ai/providers/vllm"
-source_hash: "03561b041a59b85e56cb076b8e454a23179ed301580d44dc15618ef939379f46"
+source_hash: "70828660b43f50f756796a3fcf23c3f3db82c95a31cc7fd1e01968b6ee2c07b5"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/vllm.md"
 original_doc_path: "providers/vllm.md"
 duplicate_index: 1
@@ -15,7 +17,7 @@ Source: https://docs.openclaw.ai/providers/vllm
 
 vLLM can serve open-source (and some custom) models via an **OpenAI-compatible** HTTP API. OpenClaw connects to vLLM using the `openai-completions` API.
 
-OpenClaw can also **auto-discover** available models from vLLM when you opt in with `VLLM_API_KEY` (any value works if your server does not enforce auth) and you do not define an explicit `models.providers.vllm` entry.
+OpenClaw can also **auto-discover** available models from vLLM when you opt in with `VLLM_API_KEY` (any value works if your server does not enforce auth). Use `vllm/*` in `agents.defaults.models` to keep discovery dynamic when you also configure a custom vLLM base URL.
 
 OpenClaw treats `vllm` as a local OpenAI-compatible provider that supports
 streamed usage accounting, so status/context token counts can update from
@@ -79,7 +81,7 @@ GET http://127.0.0.1:8000/v1/models
 and converts the returned IDs into model entries.
 
 <Note>
-  If you set `models.providers.vllm` explicitly, auto-discovery is skipped and you must define models manually.
+  If you set `models.providers.vllm` explicitly, OpenClaw uses your declared models by default. Add `"vllm/*": {}` to `agents.defaults.models` when you want OpenClaw to query that configured provider's `/models` endpoint and include all advertised vLLM models.
 </Note>
 
 ## Explicit configuration (manual models)
@@ -99,7 +101,6 @@ Use explicit config when:
         baseUrl: "http://127.0.0.1:8000/v1",
         apiKey: "${VLLM_API_KEY}",
         api: "openai-completions",
-        request: { allowPrivateNetwork: true },
         timeoutSeconds: 300, // Optional: extend connect/header/body/request timeout for slow local models
         models: [
           {
@@ -112,6 +113,21 @@ Use explicit config when:
             maxTokens: 8192,
           },
         ],
+      },
+    },
+  },
+}
+```
+
+To keep this provider dynamic without manually listing every model, add a provider
+wildcard to the visible model catalog:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  agents: {
+    defaults: {
+      models: {
+        "vllm/*": {},
       },
     },
   },
@@ -257,7 +273,6 @@ Use explicit config when:
             baseUrl: "http://192.168.1.50:9000/v1",
             apiKey: "${VLLM_API_KEY}",
             api: "openai-completions",
-            request: { allowPrivateNetwork: true },
             timeoutSeconds: 300,
             models: [
               {
@@ -292,7 +307,6 @@ Use explicit config when:
             baseUrl: "http://192.168.1.50:8000/v1",
             apiKey: "${VLLM_API_KEY}",
             api: "openai-completions",
-            request: { allowPrivateNetwork: true },
             timeoutSeconds: 300,
             models: [{ id: "your-model-id", name: "Local vLLM Model" }],
           },
@@ -315,10 +329,12 @@ Use explicit config when:
     ```
 
     If you see a connection error, verify the host, port, and that vLLM started with the OpenAI-compatible server mode.
-    For explicit loopback, LAN, or Tailscale endpoints, also set
-    `models.providers.vllm.request.allowPrivateNetwork: true`; provider
-    requests block private-network URLs by default unless the provider is
-    explicitly trusted.
+    For explicit loopback, LAN, or Tailscale endpoints, OpenClaw trusts the
+    exact configured `models.providers.vllm.baseUrl` origin for guarded model
+    requests. Metadata/link-local origins remain blocked without explicit
+    opt-in. Set `models.providers.vllm.request.allowPrivateNetwork: true` only
+    when vLLM requests must reach another private origin, and set it to `false`
+    to opt out of exact-origin trust.
   </Accordion>
 
   <Accordion title="Auth errors on requests">
@@ -330,7 +346,7 @@ Use explicit config when:
   </Accordion>
 
   <Accordion title="No models discovered">
-    Auto-discovery requires `VLLM_API_KEY` to be set **and** no explicit `models.providers.vllm` config entry. If you have defined the provider manually, OpenClaw skips discovery and uses only your declared models.
+    Auto-discovery requires `VLLM_API_KEY` to be set. If you have defined `models.providers.vllm`, OpenClaw uses only your declared models unless `agents.defaults.models` includes `"vllm/*": {}`.
   </Accordion>
 
   <Accordion title="Tools render as raw text">

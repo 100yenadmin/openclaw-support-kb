@@ -2,11 +2,16 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
-source_hash: "a148d81dad2a5ae55447baff7447bdd4bcc75f1ecd477f58da1d8d527f94029d"
+source_hash: "d76421d4e06bf78e14757f9a97e4216ea3dd2f21a02948aee1cb5c362c5b5f55"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tools.md"
 original_doc_path: "reference/sdk-reference/python/tools.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # Tools (/reference/sdk-reference/python/tools)
 Source: https://docs.composio.dev/reference/sdk-reference/python/tools.md

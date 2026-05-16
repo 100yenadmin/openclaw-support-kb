@@ -2,11 +2,16 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/python/mcp.md"
-source_hash: "1a6e53476ff25271b62c602f5ab1b9b2a453c6c7c15bd3df425dce2b334b4415"
+source_hash: "deab23598b3fc582bf9e7485bb9127783f2e30f9b674e5fff50ce83cad42d7fe"
+system: "composio"
+kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/mcp.md"
 original_doc_path: "reference/sdk-reference/python/mcp.md"
 duplicate_index: 1
 ---
+
+Source System: Composio Integration
+Local KB namespace: composio
 
 # MCP (/reference/sdk-reference/python/mcp)
 Source: https://docs.composio.dev/reference/sdk-reference/python/mcp.md

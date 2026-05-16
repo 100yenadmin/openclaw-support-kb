@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Diagnostics export"
 source: "https://docs.openclaw.ai/gateway/diagnostics"
-source_hash: "048ecdd25dd29b0c593df14b0c9ee4d375de5c1ee1e444f9ab59b38d8599411d"
+source_hash: "61e5abd8dfe9655174c457273707bfa495b9081100eeb7101c42bf2d6e183502"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "gateway/diagnostics.md"
 original_doc_path: "gateway/diagnostics.md"
 duplicate_index: 1
@@ -75,7 +77,7 @@ That makes the common Codex debugging loop short: notice the bad behavior in
 Telegram, Discord, or another channel, run `/diagnostics`, approve once, share
 the report with support, then run the printed `codex resume <thread-id>` command
 locally if you want to inspect the native Codex thread yourself. See
-[Codex harness](/plugins/codex-harness#inspect-a-codex-thread-from-the-cli) for
+[Codex harness](/plugins/codex-harness#inspect-codex-threads-locally) for
 that inspection workflow.
 
 ## What the export contains

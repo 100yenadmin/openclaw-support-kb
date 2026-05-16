@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install/index"
-source_hash: "7b4516018d1de720e4bd725bde73dc1808f6ee32c5151f7164bf2d89ed7e3122"
+source_hash: "588cc3b698564e7096544dbc2420ba046e57b4cbf2139b20f147a70c307551f7"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "install/index.md"
 original_doc_path: "install/index.md"
 duplicate_index: 1

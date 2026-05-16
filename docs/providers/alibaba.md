@@ -2,7 +2,9 @@
 type: openclaw_doc
 title: "Alibaba Model Studio"
 source: "https://docs.openclaw.ai/providers/alibaba"
-source_hash: "29b2afa78815307cd6aaae3ae25a5a4278a56542f0c5d28900cd4fb191d4ca89"
+source_hash: "0e5c6a8dba4aebbf83cb6ac019f072f2cdcd536ee9da88a23fd245c8ce6f1441"
+system: "openclaw"
+kb_namespace: "openclaw"
 doc_path: "providers/alibaba.md"
 original_doc_path: "providers/alibaba.md"
 duplicate_index: 1
