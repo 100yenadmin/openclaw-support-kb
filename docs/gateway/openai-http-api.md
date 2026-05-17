@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI chat completions"
 source: "https://docs.openclaw.ai/gateway/openai-http-api"
-source_hash: "28c97b4319f75390fdfcd2b29e836b7d4de14661bf76eff685bf705fd764e7cc"
+source_hash: "70650d4509c616d6d5ab4136f82d210fd7c437cf3eaf836c898ee8b5a63d75d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openai-http-api.md"
@@ -52,6 +52,10 @@ Notes:
 * When `gateway.auth.mode="trusted-proxy"`, the HTTP request must come from a
   configured trusted proxy source; same-host loopback proxies require explicit
   `gateway.auth.trustedProxy.allowLoopback = true`.
+* Internal same-host callers that bypass the proxy can use
+  `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD` as a local direct
+  fallback. Any `Forwarded`, `X-Forwarded-*`, or `X-Real-IP` header evidence
+  keeps the request on the trusted-proxy path instead.
 * If `gateway.auth.rateLimit` is configured and too many auth failures occur, the endpoint returns `429` with `Retry-After`.
 
 ## Security boundary (important)

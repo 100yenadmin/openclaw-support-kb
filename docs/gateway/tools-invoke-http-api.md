@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools invoke API"
 source: "https://docs.openclaw.ai/gateway/tools-invoke-http-api"
-source_hash: "676546145d3f0592043807a7f449e25564c30455e491fbbb40141c590c6cfdf3"
+source_hash: "3da4c0e026c54f9b7030b2b0818c7ee929d884f76bfe28079d3ad4efc861489d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/tools-invoke-http-api.md"
@@ -43,6 +43,10 @@ Notes:
 * When `gateway.auth.mode="trusted-proxy"`, the HTTP request must come from a
   configured trusted proxy source; same-host loopback proxies require explicit
   `gateway.auth.trustedProxy.allowLoopback = true`.
+* Internal same-host callers that bypass the proxy can use
+  `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD` as a local direct
+  fallback. Any `Forwarded`, `X-Forwarded-*`, or `X-Real-IP` header evidence
+  keeps the request on the trusted-proxy path instead.
 * If `gateway.auth.rateLimit` is configured and too many auth failures occur, the endpoint returns `429` with `Retry-After`.
 
 ## Security boundary (important)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "ac1826a1011868dd4562bc27126d5747c6c17f0203f0d13082aaf5de8e21a7f9"
+source_hash: "a71864de080f158417b5228690d6f799f21011c38c5bf8ad04b0f798a0b01231"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -69,9 +69,9 @@ session:
 1. OpenClaw submits the request to the provider and immediately returns a task id.
 2. The provider processes the job in the background (typically 30 seconds to several minutes depending on the provider and resolution; slow queue-backed providers can run up to the configured timeout).
 3. When the video is ready, OpenClaw wakes the same session with an internal completion event.
-4. The agent tells the user and attaches the finished video. In group/channel
-   chats that use message-tool-only visible delivery, the agent relays the
-   result through the message tool instead of OpenClaw posting it directly.
+4. The agent tells the user and attaches the finished video through the
+   message tool. OpenClaw does not auto-post the video as a fallback if the
+   completion agent writes only a private final reply.
 
 While a job is in flight, duplicate `video_generate` calls in the same
 session return the current task status instead of starting another

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "1149ea23c29e6ec212ec68d1b559e7baec943a37f690e6dd09c52d67e75d6a36"
+source_hash: "9abb9cb69e6bf1bb1dee26d7385164b3fa062f301eefe5ac48c5730498d6decb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -229,8 +229,26 @@ Limit how many lines stay visible:
 Progress lines are compacted automatically to reduce chat-bubble reflow while the draft is edited.
 
 OpenClaw truncates long progress lines by default so repeated draft edits do not
-wrap differently on every update. The prefix stays readable, and long details
-such as paths or raw commands are shortened with an ellipsis.
+wrap differently on every update. The default per-line budget is 120 characters.
+Prose cuts at a word boundary, while long details such as paths or raw commands
+are shortened with a middle ellipsis so the suffix remains visible.
+
+Tune the per-line budget:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  channels: {
+    discord: {
+      streaming: {
+        mode: "progress",
+        progress: {
+          maxLineChars: 160,
+        },
+      },
+    },
+  },
+}
+```
 
 Slack can render progress lines as structured Block Kit fields instead of a
 single text body:

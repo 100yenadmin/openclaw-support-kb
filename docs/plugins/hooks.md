@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "90136ed9535737dccf9ced03dc1454e6f3b0c511945ac0dab59c941fde795ff3"
+source_hash: "d326802665dcf587de582e9f7ea81eb57e2fd24547f113871d9ae0195f2a0189"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -153,6 +153,7 @@ observation-only.
 **Lifecycle**
 
 * `gateway_start` / `gateway_stop` - start or stop plugin-owned services with the Gateway
+* `deactivate` - deprecated compatibility alias for `gateway_stop`; use `gateway_stop` in new plugins
 * `cron_changed` - observe gateway-owned cron lifecycle changes (added, updated, removed, started, finished, scheduled)
 * **`before_install`** - inspect skill or plugin install scans and optionally block
 
@@ -445,6 +446,8 @@ before the next major release:
 * **`before_agent_start`** remains for compatibility. New plugins should use
   `before_model_resolve` and `before_prompt_build` instead of the combined
   phase.
+* **`deactivate`** remains as a deprecated cleanup compatibility alias until
+  after 2026-08-16. New plugins should use `gateway_stop`.
 * **`onResolution` in `before_tool_call`** now uses the typed
   `PluginApprovalResolution` union (`allow-once` / `allow-always` / `deny` /
   `timeout` / `cancelled`) instead of a free-form `string`.

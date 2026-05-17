@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "0adc7b0ab5a808c099a95c60452b323f21c03e0b43948f1a95ba2234f183be0b"
+source_hash: "ac578fe04f31751fcce33770bcd81e5e86c49e8c43a4234e9880526b7ace0b84"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/protocol.md"
@@ -469,8 +469,9 @@ enumeration of `src/gateway/server-methods/*.ts`.
   events. In protocol v4, delta payloads carry `deltaText`; `message` remains
   the cumulative assistant snapshot. Non-prefix replacements set `replace=true`
   and use `deltaText` as the replacement text.
-* `session.message` and `session.tool`: transcript/event-stream updates for a
-  subscribed session.
+* `session.message`, `session.operation`, and `session.tool`: transcript,
+  in-flight session operation, and event-stream updates for a subscribed
+  session.
 * `sessions.changed`: session index or metadata changed.
 * `presence`: system presence snapshot updates.
 * `tick`: periodic keepalive / liveness event.

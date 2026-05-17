@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "07454d33bccd64a39ae735d72f649e73aee2f335f4b6478033db0c1e99316681"
+source_hash: "6c25d1c418401a9545ea2eb7bccfe2fc06aad681df94bbcca1c20d540416f410"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -59,7 +59,8 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
   messages: {
     visibleReplies: "automatic",
     groupChat: {
-      visibleReplies: "message_tool", // default; use "automatic" for legacy room replies
+      visibleReplies: "message_tool", // default; visible output requires message(action=send)
+      unmentionedInbound: "room_event",
     },
   },
 }
@@ -118,7 +119,8 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
     ackReactionScope: "group-mentions",
     groupChat: {
       historyLimit: 50,
-      visibleReplies: "message_tool", // normal final replies stay private in groups/channels
+      visibleReplies: "message_tool", // prefer message tool; final text falls back for normal requests
+      unmentionedInbound: "room_event",
     },
     queue: {
       mode: "followup",

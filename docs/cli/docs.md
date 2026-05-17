@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs"
 source: "https://docs.openclaw.ai/cli/docs"
-source_hash: "bb6b52b5c3b1875dffeee06bd82764594055c70de45c5a25d8ac29888e633cf3"
+source_hash: "1828a7aee995d37a3a8dd592b8efc3f0f52a260ef6cd2dd038ad027cc569dc6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/docs.md"
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/cli/docs
 
 # `openclaw docs`
 
-Search the live OpenClaw docs index from the terminal. The command shells out to the public Mintlify-hosted docs MCP search endpoint at `https://docs.openclaw.ai/mcp.SearchOpenClaw` and renders the results in your terminal.
+Search the live OpenClaw docs index from the terminal. The command shells out to the public Mintlify-hosted docs MCP search endpoint at `https://docs.openclaw.ai/mcp.search_open_claw` and renders the results in your terminal.
 
 ## Usage
 

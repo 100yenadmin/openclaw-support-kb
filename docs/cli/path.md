@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Path"
 source: "https://docs.openclaw.ai/cli/path"
-source_hash: "0bfd1cd183b49ba50b7591582a15933fefe9f2c8907b44437f53530d8a238112"
+source_hash: "8c4c2a5c187f888ba5a87ace88d3a608beee556a06de9fee09c069ad88f80890"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/path.md"
@@ -19,9 +19,9 @@ Source: https://docs.openclaw.ai/cli/path
 
 Plugin-provided shell access to the `oc://` addressing substrate: one
 kind-dispatched path scheme for inspecting and editing addressable workspace
-files (markdown, jsonc, jsonl). Self-hosters, plugin authors, and editor
-extensions use it to read, find, or update a narrow location without
-hand-rolling per-file parsers.
+files (markdown, jsonc, jsonl, yaml/yml/lobster). Self-hosters, plugin
+authors, and editor extensions use it to read, find, or update a narrow
+location without hand-rolling per-file parsers.
 
 The CLI mirrors the substrate's public verbs:
 
@@ -41,9 +41,10 @@ openclaw plugins enable oc-path
 ## Why use it
 
 OpenClaw state is spread across human-edited markdown, commented JSONC config,
-and append-only JSONL logs. Shell scripts, hooks, and agents often need one
-small value from those files: a frontmatter key, a plugin setting, a log record
-field, or a bullet item under a named section.
+append-only JSONL logs, and YAML workflow/spec files. Shell scripts, hooks,
+and agents often need one small value from those files: a frontmatter key, a
+plugin setting, a log record field, a YAML step, or a bullet item under a named
+section.
 
 `openclaw path` gives those callers a stable address instead of a one-off grep,
 regex, or parser for each file kind. The same `oc://` path can be validated,
@@ -113,9 +114,10 @@ result.
 1. Parses the `oc://` address into slots: file, section, item, field, and
    optional session.
 2. Chooses the file-kind adapter from the target extension (`.md`, `.jsonc`,
-   `.jsonl`, and related aliases).
+   `.jsonl`, `.yaml`, `.yml`, `.lobster`, and related aliases).
 3. Resolves the slots against that file kind's AST: markdown headings/items,
-   JSONC object keys/array indexes, or JSONL line records.
+   JSONC object keys/array indexes, JSONL line records, or YAML map/sequence
+   nodes.
 4. For `set`, emits edited bytes through the same adapter so the untouched
    parts of the file keep their comments, line endings, and nearby formatting
    where the kind supports it.
@@ -164,7 +166,8 @@ four slots:
 * **Wildcards** — `*` (single sub-segment) and `**` (zero-or-more,
   recursive). `find` accepts these; `resolve` and `set` reject them as
   ambiguous.
-* **Positional** — `$last` resolves to the last index / last-declared key.
+* **Positional** — `$first` / `$last` resolve to the first / last index or
+  declared key.
 * **Ordinal** — `#N` for Nth match by document order.
 * **Insertion markers** — `+`, `+key`, `+nnn` for keyed / indexed
   insertion (use with `set`).
@@ -182,11 +185,12 @@ Non-canonical query parameters are ignored except for the first non-empty
 
 ## Addressing by file kind
 
-| Kind       | Addressing model                                                                          |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| Markdown   | H2 sections by slug, bullet items by slug or `#N`, frontmatter via `[frontmatter]`.       |
-| JSONC/JSON | Object keys and array indexes; dots split nested sub-segments unless quoted.              |
-| JSONL      | Top-level line addresses (`L1`, `L2`, `$last`), then JSONC-style descent inside the line. |
+| Kind              | Addressing model                                                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------------- |
+| Markdown          | H2 sections by slug, bullet items by slug or `#N`, frontmatter via `[frontmatter]`.                 |
+| JSONC/JSON        | Object keys and array indexes; dots split nested sub-segments unless quoted.                        |
+| JSONL             | Top-level line addresses (`L1`, `L2`, `$first`, `$last`), then JSONC-style descent inside the line. |
+| YAML/YML/.lobster | Map keys and sequence indexes; comments and flow style are handled by the YAML document API.        |
 
 `resolve` returns a structured match: `root`, `node`, `leaf`, or
 `insertion-point`, with a 1-based line number. Leaf values are surfaced as text
@@ -207,6 +211,10 @@ the per-kind AST shape.
 * JSONL leaf writes coerce like JSONC inside a line. Whole-line replacement and
   append parse `<value>` as JSON. Rendered JSONL preserves the file's dominant
   LF/CRLF line-ending convention.
+* YAML leaf writes coerce to the existing scalar type (`string`, finite
+  `number`, `true`/`false`, or `null`). YAML insertions use the bundled
+  `yaml` package's document API for map/sequence updates. Malformed YAML
+  documents with parser errors are refused before mutation with `parse-error`.
 
 Use `--dry-run` before user-visible writes when the exact bytes matter. The
 substrate preserves byte-identical output for parse/emit round-trips, but a
@@ -259,6 +267,12 @@ openclaw path set 'oc://session.jsonl/+' '{"event":"checkpoint","ok":true}' --fi
 
 # Resolve the last JSONL value line
 openclaw path resolve 'oc://session.jsonl/$last/event' --file ./logs/session.jsonl
+
+# Resolve a YAML workflow step
+openclaw path resolve 'oc://workflow.yaml/steps/0/id'
+
+# Update a YAML scalar
+openclaw path set 'oc://workflow.yaml/steps/$last/id' 'classify-renamed' --dry-run
 
 # Address markdown frontmatter
 openclaw path resolve 'oc://AGENTS.md/[frontmatter]/name'
@@ -359,6 +373,37 @@ leaf @ L2: "2" (number)
 
 Each line is a record. Address by predicate (`[event=action]`) when you do not
 know the line number, or by the canonical `LN` segment when you do.
+
+### YAML
+
+```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+# workflow.yaml
+name: inbox-triage
+steps:
+  - id: fetch
+    command: gmail.search
+  - id: classify
+    command: openclaw.invoke
+```
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+$ openclaw path resolve 'oc://workflow.yaml/steps/0/id' --file workflow.yaml --human
+leaf @ L3: "fetch" (string)
+
+$ openclaw path set 'oc://workflow.yaml/steps/$last/id' 'classify-renamed' --file workflow.yaml --dry-run
+--dry-run: would write 99 bytes to /…/workflow.yaml
+name: inbox-triage
+steps:
+  - id: fetch
+    command: gmail.search
+  - id: classify-renamed
+    command: openclaw.invoke
+```
+
+YAML uses the `yaml` package's `Document` API rather than a hand-rolled parser,
+so ordinary parse/emit round-trips preserve comments and authoring shape while
+resolved paths use the same map-key / sequence-index model as JSONC. The same
+adapter handles `.yaml`, `.yml`, and `.lobster` files.
 
 ## Subcommand reference
 

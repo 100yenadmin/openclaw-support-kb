@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "f6a4513c09f7c34a4f1c7044481cbbd591d9dd04bbc201b9a537dfa26c46d119"
+source_hash: "a294b7ecfb90c586fb7e4136cd848e830ce169b17c04619d587804114a65e46d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -213,7 +213,7 @@ content across files is capped by `agents.defaults.bootstrapTotalMaxChars`
 (default: 60000). Missing files inject a short missing-file marker. When truncation
 occurs, OpenClaw can inject a concise system-prompt warning notice; control this with
 `agents.defaults.bootstrapPromptTruncationWarning` (`off`, `once`, `always`;
-default: `once`). Detailed raw/injected counts stay in diagnostics such as
+default: `always`). Detailed raw/injected counts stay in diagnostics such as
 `/context`, `/status`, doctor, and logs.
 
 For memory files, truncation is not data loss: the file remains intact on disk,

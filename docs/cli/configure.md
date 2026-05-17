@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configure"
 source: "https://docs.openclaw.ai/cli/configure"
-source_hash: "64e4579c58c0cd3df328f646d376c23707c128295e6546eccd7937d3597f12ef"
+source_hash: "1d9cd0448ad1bd49e957ed9f8ada16a17ad48ab8f2ceca915fd63a4ccd945e2c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/configure.md"
@@ -65,7 +65,7 @@ Available sections:
 
 Notes:
 
-* Choosing where the Gateway runs always updates `gateway.mode`. You can select "Continue" without other sections if that is all you need.
+* The full wizard and gateway-related sections ask where the Gateway runs and update `gateway.mode`. Section filters that do not include `gateway`, `daemon`, or `health` go directly to the requested setup.
 * After local config writes, configure installs selected downloadable plugins when the chosen setup path requires them. Remote gateway config does not install local plugin packages.
 * Channel-oriented services (Slack/Discord/Matrix/Microsoft Teams) prompt for channel/room allowlists during setup. You can enter names or IDs; the wizard resolves names to IDs when possible.
 * If you run the daemon install step, token auth requires a token, and `gateway.auth.token` is SecretRef-managed, configure validates the SecretRef but does not persist resolved plaintext token values into supervisor service environment metadata.

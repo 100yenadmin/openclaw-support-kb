@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "e2e0f62bcc72b8333998e25314d5fc9887dcb46b97bfd511e513ef41f7f1bfba"
+source_hash: "c7ee0146af6a8b3ecc3169b013a8a18f96e832777a30cb5cad2015f5e465cdb5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -146,6 +146,12 @@ The setup script accepts these optional environment variables:
 | `OTEL_SERVICE_NAME`                        | Service name used for OpenTelemetry resources                   |
 | `OTEL_SEMCONV_STABILITY_OPT_IN`            | Opt in to latest experimental GenAI semantic attributes         |
 | `OPENCLAW_OTEL_PRELOADED`                  | Skip starting a second OpenTelemetry SDK when one is preloaded  |
+
+The official Docker image does not ship Homebrew. During onboarding, OpenClaw
+hides brew-only skill dependency installers when it is running in a Linux
+container without `brew`; those dependencies must be provided by a custom image
+or installed manually. For dependencies available from Debian packages, use
+`OPENCLAW_DOCKER_APT_PACKAGES` during image build.
 
 Maintainers can test bundled plugin source against a packaged image by mounting
 one plugin source directory over its packaged source path, for example

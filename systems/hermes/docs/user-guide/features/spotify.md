@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/spotify.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/spotify"
-source_hash: "fc4ab6c5af441af6fe1684987354d801c24c82020ab5160175db85de8f256755"
+source_hash: "cead9445015535199156ee6f7f604a92e7fd25268d554ed5f28468baac6dc529"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/spotify.md"
@@ -31,7 +31,7 @@ Unlike Hermes' built-in OAuth integrations (Google, GitHub Copilot, Codex), Spot
 
 ## Setup
 
-### One-shot: `hermes tools`
+### One-shot: `hermes tools` or first-run setup
 
 The fastest path. Run:
 
@@ -39,7 +39,9 @@ The fastest path. Run:
 hermes tools
 ```
 
-Scroll to `🎵 Spotify`, press space to toggle it on, then `s` to save. Hermes drops you straight into the OAuth flow — if you don't have a Spotify app yet, it walks you through creating one inline. Once you finish, the toolset is enabled AND authenticated in one pass.
+Scroll to `🎵 Spotify`, press space to toggle it on, then `s` to save. The same toggle is also available during the first-run `hermes setup` / `hermes setup tools` flow. Spotify stays opt-in, so enabling it there runs the same provider-aware configuration as `hermes tools`.
+
+Hermes drops you straight into the OAuth flow — if you don't have a Spotify app yet, it walks you through creating one inline. Once you finish, the toolset is enabled AND authenticated in one pass.
 
 If you prefer to do the steps separately (or you're re-authing later), use the two-step flow below.
 
@@ -143,6 +145,12 @@ Control and inspect playback, plus fetch recently played history.
 |--------|---------|
 | `list` | Every Spotify Connect device visible to your account |
 | `transfer` | Move playback to `device_id`. Optional `play: true` starts playback on transfer |
+
+### Home Assistant-managed speakers
+
+If Home Assistant manages speakers that already support Spotify Connect (for example Sonos, Echo, Nest, or other Connect-capable speakers), they appear in `spotify_devices list` automatically whenever Spotify can see them. Hermes does not need a Home Assistant ↔ Spotify bridge for this path — Spotify handles the device routing natively.
+
+Ask Hermes to transfer playback by the speaker's display name (for example, “transfer Spotify to the kitchen speaker”), or call `spotify_devices list` and pass the exact `device_id` to `spotify_devices transfer` when scripting. If the speaker is missing, open the Spotify app or the speaker's Spotify integration once so Spotify registers it as an active Connect target.
 
 #### `spotify_queue`
 | Action | Purpose | Premium? |

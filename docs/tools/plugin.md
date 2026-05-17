@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "379271ce19711508ec0a6f8fff41c150350bad0b5b4368839bfe11c98224425f"
+source_hash: "e0e1ae9827c54c9efc6c6187cbfbb7c71c8177ff3ee707e716d70198b3c8ccf6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -33,7 +33,7 @@ Before installing a plugin, make sure you have:
 * network access to the selected source, such as ClawHub, npm, or a git host
 * any plugin-specific credentials, config keys, or operating-system tools named
   by that plugin's setup docs
-* permission to restart the Gateway that serves your channels
+* permission for the Gateway that serves your channels to reload or restart
 
 ## Quick start
 
@@ -85,15 +85,20 @@ Before installing a plugin, make sure you have:
     explicit install can load after restart.
   </Step>
 
-  <Step title="Restart the Gateway">
+  <Step title="Let the Gateway reload">
+    Installing, updating, or uninstalling plugin code requires a Gateway
+    restart. When a managed Gateway is already running with config reload
+    enabled, OpenClaw detects the changed plugin install record and restarts the
+    Gateway automatically. If the Gateway is not managed or reload is disabled,
+    restart it yourself:
+
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openclaw gateway restart
     ```
 
-    Installing, updating, or uninstalling plugin code requires a Gateway
-    restart. Enable and disable operations update config and refresh the cold
-    registry, but a restart is still the clearest verification path for live
-    runtime surfaces.
+    Enable and disable operations update config and refresh the cold registry.
+    A runtime inspect is still the clearest verification path for live runtime
+    surfaces.
   </Step>
 
   <Step title="Verify runtime registration">
@@ -205,9 +210,10 @@ openclaw plugins inspect <plugin-id> --runtime --json
 openclaw gateway restart
 ```
 
-On VPS or container installs, make sure the process you restart is the actual
-`openclaw gateway run` child that serves your channels, not only a wrapper or
-supervisor.
+Managed Gateways restart automatically after plugin install, update, and
+uninstall changes that alter plugin source. On VPS or container installs, make
+sure any manual restart targets the actual `openclaw gateway run` child that
+serves your channels, not only a wrapper or supervisor.
 
 ## Troubleshooting
 

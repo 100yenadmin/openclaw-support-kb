@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "e89a8f131dac06a6b6f7eaf85e3ed1b280d2bb818a6b5ef614c0b32f860c3502"
+source_hash: "7d3a3163da6e284b6169b6d62300894e5c4a0f68281b65f15a4f1e5b784b66af"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -343,7 +343,7 @@ openclaw config set channels.discord.token \
     * `checks.resolvabilityComplete`: whether resolvability checks ran to completion (false when exec refs are skipped)
     * `refsChecked`: number of refs actually resolved during dry-run
     * `skippedExecRefs`: number of exec refs skipped because `--allow-exec` was not set
-    * `errors`: structured schema/resolvability failures when `ok=false`
+    * `errors`: structured missing-path, schema, or resolvability failures when `ok=false`
   </Accordion>
 </AccordionGroup>
 
@@ -354,7 +354,7 @@ openclaw config set channels.discord.token \
   ok: boolean,
   operations: number,
   configPath: string,
-  inputModes: ["value" | "json" | "builder", ...],
+  inputModes: ["value" | "json" | "builder" | "unset", ...],
   checks: {
     schema: boolean,
     resolvability: boolean,
@@ -364,7 +364,7 @@ openclaw config set channels.discord.token \
   skippedExecRefs: number,
   errors?: [
     {
-      kind: "schema" | "resolvability",
+      kind: "missing-path" | "schema" | "resolvability",
       message: string,
       ref?: string, // present for resolvability errors
     },

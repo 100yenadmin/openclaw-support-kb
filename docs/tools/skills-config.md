@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "4537076a7b80362f8ea69e156bfeb57592c2fec1e4d442735b335ce0113ca6a7"
+source_hash: "bf3cf88e57c1d922da97742f69b1c15ed87de2722ba7690b41ea90a2dc128b54"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -183,6 +183,8 @@ Use one of:
 
 * `agents.defaults.sandbox.docker.env` for the Docker backend (or per-agent `agents.list[].sandbox.docker.env`).
 * Bake the env into your custom sandbox image or remote sandbox environment.
+
+For Docker sandboxes, configured `sandbox.docker.env` values become explicit container environment variables. Users with Docker daemon access can inspect them through Docker metadata, so use a mounted secret file, custom image, or another delivery path when that exposure is not acceptable.
 
 ## Related
 

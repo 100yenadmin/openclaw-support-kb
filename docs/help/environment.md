@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "e70864cc24434db14137cd13651642ccb937f653399f9712d4895bcdf4cf1f39"
+source_hash: "32d2b665fa9a59928b747c2a5a42cd6e82d61628c27868a0427b62e0a47f607f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -43,6 +43,38 @@ Two equivalent ways to set inline env vars (both are non-overriding):
   },
 }
 ```
+
+The config `env` block accepts literal string values only. It does not expand
+`file:...` values; for example, `XAI_API_KEY: "file:secrets/xai-api-key.txt"`
+is passed to providers as that exact string.
+
+For file-backed provider keys, use a SecretRef on the credential field that
+supports it:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  secrets: {
+    providers: {
+      xai_key_file: {
+        source: "file",
+        path: "~/.openclaw/secrets/xai-api-key.txt",
+        mode: "singleValue",
+      },
+    },
+  },
+  models: {
+    providers: {
+      xai: {
+        apiKey: { source: "file", provider: "xai_key_file", id: "value" },
+      },
+    },
+  },
+}
+```
+
+See [Secrets Management](/gateway/secrets) and the
+[SecretRef credential surface](/reference/secretref-credential-surface) for
+supported fields.
 
 ## Shell env import
 
@@ -108,6 +140,8 @@ OpenClaw supports two env-driven patterns:
 * SecretRef objects (`{ source: "env", provider: "default", id: "VAR" }`) for fields that support secrets references.
 
 Both resolve from process env at activation time. SecretRef details are documented in [Secrets Management](/gateway/secrets).
+The config `env` block itself does not resolve SecretRefs or `file:...`
+shorthand values.
 
 ## Path-related env vars
 

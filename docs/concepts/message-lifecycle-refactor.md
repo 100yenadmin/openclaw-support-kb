@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message lifecycle refactor"
 source: "https://docs.openclaw.ai/concepts/message-lifecycle-refactor"
-source_hash: "aa7fcca37328f9e698fa8af9256bdc91e49ae93415db241cf0f8c8ce9bde5d43"
+source_hash: "6cbefe896ae605588712e6769e78910c263b06fdd5d5682339f8293822d5b0fd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/message-lifecycle-refactor.md"
@@ -1011,14 +1011,14 @@ Unit tests:
 Integration tests:
 
 * `channel.turn.run` simple adapter still records and sends.
-* Legacy assembled-turn delivery does not become durable unless the channel
+* Legacy assembled-event delivery does not become durable unless the channel
   explicitly opts in.
 * `channel.turn.runPrepared` bridge still records and finalizes.
 * Public compatibility helpers call caller-owned delivery callbacks by default
   and do not generic-send before those callbacks.
 * Durable fallback delivery replays the whole projected payload array after
   restart and cannot leave the later payloads unrecorded after an early crash.
-* Durable assembled-turn delivery returns platform message ids to the buffered
+* Durable assembled-event delivery returns platform message ids to the buffered
   dispatcher.
 * Custom delivery hooks still return platform message ids when durable delivery
   is disabled or unavailable.

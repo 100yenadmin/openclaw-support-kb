@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security/index"
-source_hash: "9bd2d13adc277419d005800348e79aed94e74628a7641ec572d23f6102003f69"
+source_hash: "aa2e5d107d8a355f1b3580d930279e1d4ccdcf24c80054ae7f8cd6a04316c2fb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/index.md"
@@ -310,13 +310,16 @@ does not extend to node-role Control UI sessions.
 
 `openclaw security audit` raises `config.insecure_or_dangerous_flags` when
 known insecure/dangerous debug switches are enabled. Keep these unset in
-production.
+production. Each enabled flag is reported as its own finding. If audit
+suppressions are configured, `security.audit.suppressions.active` remains in the
+active audit output even when matching findings move to `suppressedFindings`.
 
 <AccordionGroup>
   <Accordion title="Flags tracked by the audit today">
     * `gateway.controlUi.allowInsecureAuth=true`
     * `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true`
     * `gateway.controlUi.dangerouslyDisableDeviceAuth=true`
+    * `security.audit.suppressions configured (<count>)`
     * `hooks.gmail.allowUnsafeExternalContent=true`
     * `hooks.mappings[<index>].allowUnsafeExternalContent=true`
     * `tools.exec.applyPatch.workspaceOnly=false`
@@ -880,10 +883,11 @@ Doctor can generate one for you: `openclaw doctor --generate-gateway-token`.
 </Note>
 
 Optional: pin remote TLS with `gateway.remote.tlsFingerprint` when using `wss://`.
-Plaintext `ws://` is loopback-only by default. For trusted private-network
-paths, set `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` on the client process as
-break-glass. This is intentionally process environment only, not an
-`openclaw.json` config key.
+Plaintext `ws://` is accepted for loopback, private IP literals, `.local`, and
+Tailnet `*.ts.net` gateway URLs. For other trusted private-DNS names, set
+`OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` on the client process as break-glass.
+This is intentionally process environment only, not an `openclaw.json` config
+key.
 Mobile pairing and Android manual or scanned gateway routes are stricter:
 cleartext is accepted for loopback, but private-LAN, link-local, `.local`, and
 dotless hostnames must use TLS unless you explicitly opt into the trusted

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "2c59a95ed884c9a45381bb75a0794155b7b251c0aac85563931c2c2038fef0f3"
+source_hash: "845cc1ff13c80ae2b4c3d36447c6671b6e75a643d900d288b7d9ecc5750d68e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/slack.md"
@@ -85,6 +85,17 @@ openclaw plugins install @openclaw/slack
                 "messages_tab_enabled": true,
                 "messages_tab_read_only_enabled": false
               },
+              "assistant_view": {
+                "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+                "suggested_prompts": [
+                  { "title": "What can you do?", "message": "What can you help me with?" },
+                  {
+                    "title": "Summarize this channel",
+                    "message": "Summarize the recent activity in this channel."
+                  },
+                  { "title": "Draft a reply", "message": "Help me draft a reply." }
+                ]
+              },
               "slash_commands": [
                 {
                   "command": "/openclaw",
@@ -128,6 +139,8 @@ openclaw plugins install @openclaw/slack
                 "bot_events": [
                   "app_home_opened",
                   "app_mention",
+                  "assistant_thread_context_changed",
+                  "assistant_thread_started",
                   "channel_rename",
                   "member_joined_channel",
                   "member_left_channel",
@@ -157,6 +170,17 @@ openclaw plugins install @openclaw/slack
                 "home_tab_enabled": true,
                 "messages_tab_enabled": true,
                 "messages_tab_read_only_enabled": false
+              },
+              "assistant_view": {
+                "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+                "suggested_prompts": [
+                  { "title": "What can you do?", "message": "What can you help me with?" },
+                  {
+                    "title": "Summarize this channel",
+                    "message": "Summarize the recent activity in this channel."
+                  },
+                  { "title": "Draft a reply", "message": "Help me draft a reply." }
+                ]
               },
               "slash_commands": [
                 {
@@ -190,6 +214,8 @@ openclaw plugins install @openclaw/slack
                 "bot_events": [
                   "app_home_opened",
                   "app_mention",
+                  "assistant_thread_context_changed",
+                  "assistant_thread_started",
                   "message.channels",
                   "message.groups",
                   "message.im"
@@ -267,6 +293,17 @@ openclaw plugins install @openclaw/slack
                 "messages_tab_enabled": true,
                 "messages_tab_read_only_enabled": false
               },
+              "assistant_view": {
+                "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+                "suggested_prompts": [
+                  { "title": "What can you do?", "message": "What can you help me with?" },
+                  {
+                    "title": "Summarize this channel",
+                    "message": "Summarize the recent activity in this channel."
+                  },
+                  { "title": "Draft a reply", "message": "Help me draft a reply." }
+                ]
+              },
               "slash_commands": [
                 {
                   "command": "/openclaw",
@@ -311,6 +348,8 @@ openclaw plugins install @openclaw/slack
                 "bot_events": [
                   "app_home_opened",
                   "app_mention",
+                  "assistant_thread_context_changed",
+                  "assistant_thread_started",
                   "channel_rename",
                   "member_joined_channel",
                   "member_left_channel",
@@ -346,6 +385,17 @@ openclaw plugins install @openclaw/slack
                 "messages_tab_enabled": true,
                 "messages_tab_read_only_enabled": false
               },
+              "assistant_view": {
+                "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+                "suggested_prompts": [
+                  { "title": "What can you do?", "message": "What can you help me with?" },
+                  {
+                    "title": "Summarize this channel",
+                    "message": "Summarize the recent activity in this channel."
+                  },
+                  { "title": "Draft a reply", "message": "Help me draft a reply." }
+                ]
+              },
               "slash_commands": [
                 {
                   "command": "/openclaw",
@@ -379,6 +429,8 @@ openclaw plugins install @openclaw/slack
                 "bot_events": [
                   "app_home_opened",
                   "app_mention",
+                  "assistant_thread_context_changed",
+                  "assistant_thread_started",
                   "message.channels",
                   "message.groups",
                   "message.im"
@@ -494,6 +546,17 @@ Base manifest (Socket Mode default):
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
+    "assistant_view": {
+      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+      "suggested_prompts": [
+        { "title": "What can you do?", "message": "What can you help me with?" },
+        {
+          "title": "Summarize this channel",
+          "message": "Summarize the recent activity in this channel."
+        },
+        { "title": "Draft a reply", "message": "Help me draft a reply." }
+      ]
+    },
     "slash_commands": [
       {
         "command": "/openclaw",
@@ -537,6 +600,8 @@ Base manifest (Socket Mode default):
       "bot_events": [
         "app_home_opened",
         "app_mention",
+        "assistant_thread_context_changed",
+        "assistant_thread_started",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -574,6 +639,8 @@ For **HTTP Request URLs mode**, replace `settings` with the HTTP variant and add
       "bot_events": [
         "app_home_opened",
         "app_mention",
+        "assistant_thread_context_changed",
+        "assistant_thread_started",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -600,7 +667,7 @@ For **HTTP Request URLs mode**, replace `settings` with the HTTP variant and add
 
 Surface different features that extend the above defaults.
 
-The default manifest enables the Slack App Home **Home** tab and subscribes to `app_home_opened`. When a workspace member opens the Home tab, OpenClaw publishes a safe default Home view with `views.publish`; no conversation payload or private configuration is included. The **Messages** tab remains enabled for Slack DMs.
+The default manifest enables the Slack App Home **Home** tab and subscribes to `app_home_opened`. When a workspace member opens the Home tab, OpenClaw publishes a safe default Home view with `views.publish`; no conversation payload or private configuration is included. The **Messages** tab remains enabled for Slack DMs. The manifest also enables Slack assistant threads with `features.assistant_view`, `assistant:write`, `assistant_thread_started`, and `assistant_thread_context_changed`; assistant threads route to their own OpenClaw thread sessions and keep Slack-provided thread context available to the agent.
 
 <AccordionGroup>
   <Accordion title="Optional native slash commands">
@@ -1281,7 +1348,8 @@ Primary reference: [Configuration reference - Slack](/gateway/config-channels#sl
     * channel allowlist (`channels.slack.channels`) — **keys must be channel IDs** (`C12345678`), not names (`#channel-name`). Name-based keys silently fail under `groupPolicy: "allowlist"` because channel routing is ID-first by default. To find an ID: right-click the channel in Slack → **Copy link** — the `C...` value at the end of the URL is the channel ID.
     * `requireMention`
     * per-channel `users` allowlist
-    * `messages.groupChat.visibleReplies`: if it is `"message_tool"` and logs show assistant text with no `message(action=send)` call, the turn was processed but the final answer was kept private. Set it to `"automatic"` if you want normal assistant final replies posted back to Slack channels.
+    * `messages.groupChat.visibleReplies`: if it is `"message_tool"` and logs show assistant text with no `message(action=send)` call, the model missed the visible message-tool path. Final text stays private in this mode; inspect the gateway verbose log for suppressed payload metadata, or set it to `"automatic"` if you want every normal assistant final reply posted through the legacy path.
+    * `messages.groupChat.unmentionedInbound`: if it is `"room_event"`, unmentioned allowed channel chatter is ambient context and stays silent unless the agent calls the `message` tool. See [Ambient room events](/channels/ambient-room-events).
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {

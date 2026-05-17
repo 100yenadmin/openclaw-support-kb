@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels/index"
-source_hash: "7934422b39f0c5ea25e96a7405bc27f84f0d05782bd59c8db79b474adc5ab87b"
+source_hash: "4679de262f59a2eed8a0d5734c006548715be0eb5b0c717f79f3fe8e5cf30247"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/index.md"
@@ -30,6 +30,9 @@ Text is supported everywhere; media and reactions vary by channel.
 * Channels that accept bot-authored inbound messages can use shared
   [bot loop protection](/channels/bot-loop-protection) to prevent bot pairs from
   replying to each other indefinitely.
+* Supported always-on rooms can use [ambient room events](/channels/ambient-room-events)
+  so unmentioned room chatter becomes quiet context unless the agent sends with
+  the `message` tool.
 
 ## Supported channels
 

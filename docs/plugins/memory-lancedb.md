@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
-source_hash: "ca3b748dc4ab12bb36f46c252c355c2f02a6e72c804098fbc831fd8f8342eae3"
+source_hash: "43e6342215efdcba18b7c813bdfaa7bbb97ac03f2d7e721a3c11779b3479140f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-lancedb.md"
@@ -15,13 +15,25 @@ Source: https://docs.openclaw.ai/plugins/memory-lancedb
 
 
 
-`memory-lancedb` is a bundled memory plugin that stores long-term memory in
+`memory-lancedb` is an official external memory plugin that stores long-term memory in
 LanceDB and uses embeddings for recall. It can automatically recall relevant
 memories before a model turn and capture important facts after a response.
 
 Use it when you want a local vector database for memory, need an
 OpenAI-compatible embedding endpoint, or want to keep a memory database outside
 the default built-in memory store.
+
+## Installation
+
+Install `memory-lancedb` before setting `plugins.slots.memory = "memory-lancedb"`:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins install @openclaw/memory-lancedb
+```
+
+The plugin is published to npm and is not bundled into the OpenClaw runtime image.
+The installer writes the plugin entry and switches the memory slot when no other
+plugin owns it.
 
 <Note>
   `memory-lancedb` is an active memory plugin. Enable it by selecting the memory

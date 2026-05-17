@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "170577d8836165cda1d34417bb5a254b3624656d9f03ca739d2e4894ddb73706"
+source_hash: "04fd471d1c2fa6ce695aad454eb3a40db9d721a9656b5cb39a939e9910745de1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -119,6 +119,12 @@ new package onto stale files from the old package. If the install command fails,
 OpenClaw retries once with `--omit=optional`. That retry helps hosts where native
 optional dependencies cannot compile, while keeping the original failure visible
 if the fallback also fails.
+
+OpenClaw-managed npm update and plugin-update commands also clear npm
+`min-release-age` quarantine for the child npm process. npm may report that
+policy as a derived `before` cutoff; both are useful for general supply-chain
+quarantine policies, but an explicit OpenClaw update means "install the selected
+OpenClaw release now."
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 pnpm add -g openclaw@latest

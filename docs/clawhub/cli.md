@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cli"
 source: "https://docs.openclaw.ai/clawhub/cli"
-source_hash: "43e500233b73fd0c432d5d863abfea0ec2a82d56d62c868c3b9e6c0983f4ffe7"
+source_hash: "94e369aefac5a7393153707a9362e27c7d786d69d6b461af333ebfde5ddca672"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/cli.md"
@@ -556,7 +556,7 @@ Notes:
 #### GitHub Actions
 
 ClawHub also ships an official reusable workflow at
-[`/.github/workflows/package-publish.yml`](https://github.com/openclaw/clawhub/blob/fd4d22d2c2b281a1b252a4fd8f4fe8cfeb6559ed/.github/workflows/package-publish.yml)
+[`/.github/workflows/package-publish.yml`](https://github.com/openclaw/clawhub/blob/8bbc66868d63c22ee905b327214982f60da4ac0a/.github/workflows/package-publish.yml)
 for plugin repos.
 
 Typical caller setup:

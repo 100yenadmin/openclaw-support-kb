@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway-owned pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "5c70d4c2fed99e077a4d0507a6ee69d899839aa5855669e4d24bf539a79689a0"
+source_hash: "eb7d2d47186198af23dca7fca3e5562dd2c187c2bb9cdac1b3c18a430c470f9c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/pairing.md"
@@ -181,12 +181,11 @@ device id, so `nodes pending` does not show orphaned rows after a revoke.
 
 Gateway pairing treats a connection as loopback only when both the raw socket
 and any upstream proxy evidence agree. If a request arrives on loopback but
-carries `X-Forwarded-For` / `X-Forwarded-Host` / `X-Forwarded-Proto` headers
-that point at a non-local origin, that forwarded-header evidence disqualifies
-the loopback locality claim. The pairing path then requires explicit approval
-instead of silently treating the request as a same-host connect. See
-[Trusted Proxy Auth](/gateway/trusted-proxy-auth) for the equivalent rule on
-operator auth.
+carries `Forwarded`, any `X-Forwarded-*`, or `X-Real-IP` header evidence, that
+forwarded-header evidence disqualifies the loopback locality claim. The pairing
+path then requires explicit approval instead of silently treating the request as
+a same-host connect. See [Trusted Proxy Auth](/gateway/trusted-proxy-auth) for
+the equivalent rule on operator auth.
 
 ## Storage (local, private)
 

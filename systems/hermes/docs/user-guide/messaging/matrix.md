@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Matrix"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/matrix"
-source_hash: "2252b3c1282f48c6f02ef3382a59f545307e1ac861fb23841a43ad8faf3b3a0d"
+source_hash: "9079d28de0c535d1607ac4980fe65815aba440be5e0df8f3e870a6b6c7b458f4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/matrix.md"
@@ -369,6 +369,23 @@ To find a Room ID: in Element, go to the room → **Settings** → **Advanced** 
 **Cause**: The bot hasn't joined the room, or `MATRIX_ALLOWED_USERS` doesn't include your User ID.
 
 **Fix**: Invite the bot to the room — it auto-joins on invite. Verify your User ID is in `MATRIX_ALLOWED_USERS` (use the full `@user:server` format). Restart the gateway.
+
+### Bot joins rooms but silently drops every message (clock skew)
+
+**Cause**: The host's system clock is set ahead of real time. The Matrix adapter applies a 5-second startup-grace filter (`event_ts < startup_ts - 5`) to ignore events replayed from initial sync. When the wall clock is ahead, every incoming event looks "older than startup" and is dropped before reaching the message handler — the bot appears connected but never replies. See [#12614](https://github.com/NousResearch/hermes-agent/issues/12614).
+
+**Symptom**: Gateway log shows `Matrix: dropped N live events as 'too old' more than 30s after startup`.
+
+**Fix**: Sync the host clock with NTP and restart the bot:
+
+```bash
+# Debian/Ubuntu
+sudo timedatectl set-ntp true
+timedatectl status   # confirm "System clock synchronized: yes"
+
+# macOS
+sudo sntp -sS time.apple.com
+```
 
 ### "Failed to authenticate" / "whoami failed" on startup
 

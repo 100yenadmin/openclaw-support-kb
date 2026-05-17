@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "a7b41786f730bc36c0a5f511b588c93972d4c6629d4038bbc07ab4a2613856a5"
+source_hash: "b1392cdd969c1288f0a599c1f66e79dc3a40de854b448fb50340090cc698d644"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -23,7 +23,7 @@ Most install workflows are:
 
 1. find a package
 2. install it from ClawHub, npm, git, or a local path
-3. restart the Gateway that serves your channels
+3. let the managed Gateway auto-restart, or restart it manually when unmanaged
 4. verify the plugin's runtime registrations
 
 ## List and search plugins
@@ -88,7 +88,10 @@ target. For routine upgrades of tracked npm, ClawHub, or hook-pack installs, use
 
 ## Restart and inspect
 
-After installing plugin code, restart the Gateway that serves your channels:
+After installing, updating, or uninstalling plugin code, a running managed
+Gateway with config reload enabled restarts automatically. If the Gateway is not
+managed or reload is disabled, restart it yourself before checking live runtime
+surfaces:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw gateway restart
@@ -134,12 +137,12 @@ matching `@beta` releases. For the exact fallback and pinning rules, see
 openclaw plugins uninstall <plugin-id> --dry-run
 openclaw plugins uninstall <plugin-id>
 openclaw plugins uninstall <plugin-id> --keep-files
-openclaw gateway restart
 ```
 
 Uninstall removes the plugin's config entry, persisted plugin index record,
 allow/deny list entries, and linked load paths when applicable. Managed install
-directories are removed unless you pass `--keep-files`.
+directories are removed unless you pass `--keep-files`. A running managed
+Gateway restarts automatically when the uninstall changes plugin source.
 
 In Nix mode (`OPENCLAW_NIX_MODE=1`), plugin install, update, uninstall, enable,
 and disable commands are disabled. Manage those choices in the Nix source for

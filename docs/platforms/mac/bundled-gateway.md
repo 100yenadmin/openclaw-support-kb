@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "09a95056190f6383633fa6d130283f63382f59f1aef8d867f58dbf1e3cb2df20"
+source_hash: "01315bf89495acf4690dc40ba0e5e2987bb1e048044b7499d87c175aa1ddab55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -57,7 +57,8 @@ Behavior:
 
 Logging:
 
-* launchd stdout/err: `/tmp/openclaw/openclaw-gateway.log`
+* launchd stdout: `~/Library/Logs/openclaw/gateway.log` (profiles use `gateway-<profile>.log`)
+* launchd stderr: suppressed
 
 ## Version compatibility
 

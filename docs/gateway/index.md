@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway runbook"
 source: "https://docs.openclaw.ai/gateway/index"
-source_hash: "00bf9092a2c7cf62dd33be190a3359542c93d8229a79e4765edaa6745e31addc"
+source_hash: "56f60ea30804263e508fcd8b69582f519f1acb0ef55a45a23c24b5a5ac21b06f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/index.md"
@@ -316,8 +316,9 @@ Defaults include isolated state/config and base gateway port `19001`.
   a generated dump of every callable helper route.
 * Requests: `req(method, params)` → `res(ok/payload|error)`.
 * Common events include `connect.challenge`, `agent`, `chat`,
-  `session.message`, `session.tool`, `sessions.changed`, `presence`, `tick`,
-  `health`, `heartbeat`, pairing/approval lifecycle events, and `shutdown`.
+  `session.message`, `session.operation`, `session.tool`, `sessions.changed`,
+  `presence`, `tick`, `health`, `heartbeat`, pairing/approval lifecycle events,
+  and `shutdown`.
 
 Agent runs are two-stage:
 

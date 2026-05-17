@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "ecbe4395a6765e59d30265d1a5f40251f1a12168014a89e44e319c4a9361f5eb"
+source_hash: "21aca953155216ecc20a6f0bec13c105ac3b9315b7a80563b7dbcaf3f4f4dd36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -271,8 +271,8 @@ For CLI entries, **set `capabilities` explicitly** to avoid surprising matches. 
 <Note>
   **MiniMax note**
 
-  * `minimax` and `minimax-portal` image understanding comes from the plugin-owned `MiniMax-VL-01` media provider.
-  * The bundled MiniMax text catalog still starts text-only; explicit `models.providers.minimax` entries materialize image-capable M2.7 chat refs.
+  * `minimax`, `minimax-cn`, `minimax-portal`, and `minimax-portal-cn` image understanding comes from the plugin-owned `MiniMax-VL-01` media provider.
+  * Automatic image routing keeps using `MiniMax-VL-01` even if legacy MiniMax M2.x chat metadata claims image input.
 </Note>
 
 ## Model selection guidance

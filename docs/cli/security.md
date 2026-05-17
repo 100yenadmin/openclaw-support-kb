@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/cli/security"
-source_hash: "34328e42f8f55e20ee8c8678be95c5091ffa6b74795000cdabd648a8cadfe12e"
+source_hash: "c39720784373e905ec56a8f8a67999900e9ddd928989d6f68da3e1abc2341c45"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/security.md"
@@ -52,6 +52,37 @@ It warns when channel allowlists rely on mutable names/emails/tags instead of st
 It warns when `gateway.auth.mode="none"` leaves Gateway HTTP APIs reachable without a shared secret (`/tools/invoke` plus any enabled `/v1/*` endpoint).
 Settings prefixed with `dangerous`/`dangerously` are explicit break-glass operator overrides; enabling one is not, by itself, a security vulnerability report.
 For the complete dangerous-parameter inventory, see the "Insecure or dangerous flags summary" section in [Security](/gateway/security).
+
+Intentional standing findings can be accepted with `security.audit.suppressions`.
+Each suppression matches an exact `checkId` and can be narrowed with
+`titleIncludes` and/or `detailIncludes` case-insensitive substrings:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  "security": {
+    "audit": {
+      "suppressions": [
+        {
+          "checkId": "plugins.tools_reachable_permissive_policy",
+          "detailIncludes": "Enabled extension plugins: gbrain",
+          "reason": "trusted local operator plugin"
+        }
+      ]
+    }
+  }
+}
+```
+
+Suppressed findings are removed from the active `summary` and `findings` list.
+JSON output keeps them under `suppressedFindings` for auditability.
+When suppressions are configured, active output also keeps an unsuppressible
+`security.audit.suppressions.active` info finding so readers can tell the audit
+was filtered. Dangerous config flags are emitted one flag per finding, so
+accepting one dangerous flag does not hide other enabled flags that share the
+same `config.insecure_or_dangerous_flags` checkId.
+Because suppressions can hide standing risk, adding or removing them through
+agent-run shell commands requires exec approval unless exec is already running
+with `security="full"` and `ask="off"` for trusted local automation.
 
 SecretRef behavior:
 

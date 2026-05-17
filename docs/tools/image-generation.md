@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "0e21f038f93e5d60602f1e40b36fa368c9d4b099d6b51113badd7da9cd01fed8"
+source_hash: "074a60dcb86dbe437a2372e2f3eaa4184163a4e0097444b86ba07393cb4a36dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -16,8 +16,11 @@ Source: https://docs.openclaw.ai/tools/image-generation
 
 
 The `image_generate` tool lets the agent create and edit images using your
-configured providers. Generated images are delivered automatically as media
-attachments in the agent's reply.
+configured providers. In chat sessions, image generation runs asynchronously:
+OpenClaw records a background task, returns the task id immediately, and wakes
+the agent when the provider finishes. The completion agent must send generated
+images through the `message` tool; OpenClaw does not auto-post a private final
+reply as a fallback.
 
 <Note>
   The tool only appears when at least one image-generation provider is
@@ -60,7 +63,9 @@ attachments in the agent's reply.
     *"Generate an image of a friendly robot mascot."*
 
     The agent calls `image_generate` automatically. No tool allow-listing
-    needed - it is enabled by default when a provider is available.
+    needed - it is enabled by default when a provider is available. The tool
+    returns a background task id, then the completion agent sends the generated
+    attachment through the `message` tool when it is ready.
   </Step>
 </Steps>
 
@@ -112,6 +117,13 @@ Use `action: "list"` to inspect available providers and models at runtime:
 /tool image_generate action=list
 ```
 
+Use `action: "status"` to inspect the active image-generation task for the
+current session:
+
+```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+/tool image_generate action=status
+```
+
 ## Provider capabilities
 
 | Capability            | ComfyUI            | DeepInfra | fal                       | Google         | MiniMax               | OpenAI         | Vydra | xAI            |
@@ -128,8 +140,9 @@ Use `action: "list"` to inspect available providers and models at runtime:
   Image generation prompt. Required for `action: "generate"`.
 </ParamField>
 
-<ParamField type="&#x22;generate&#x22; | &#x22;list&#x22;">
-  Use `"list"` to inspect available providers and models at runtime.
+<ParamField type="&#x22;generate&#x22; | &#x22;status&#x22; | &#x22;list&#x22;">
+  Use `"status"` to inspect the active session task or `"list"` to inspect
+  available providers and models at runtime.
 </ParamField>
 
 <ParamField type="string">
@@ -245,8 +258,10 @@ from each attempt.
   <Accordion title="Timeouts">
     Set `agents.defaults.imageGenerationModel.timeoutMs` for slow image
     backends. A per-call `timeoutMs` tool parameter overrides the configured
-    default. Codex dynamic-tool calls honor the same timeout budget, bounded
-    by OpenClaw's 600000 ms dynamic-tool bridge maximum.
+    default. Google, OpenRouter, and xAI hosted image providers use 180 second
+    defaults; Azure OpenAI image generation uses 600 seconds. Codex dynamic-tool
+    calls honor the same timeout budget, bounded by OpenClaw's 600000 ms
+    dynamic-tool bridge maximum.
   </Accordion>
 
   <Accordion title="Inspect at runtime">
@@ -365,7 +380,7 @@ ComfyUI support 1.
     The bundled xAI provider uses `/v1/images/generations` for prompt-only
     requests and `/v1/images/edits` when `image` or `images` is present.
 
-    * Models: `xai/grok-imagine-image`, `xai/grok-imagine-image-pro`
+    * Models: `xai/grok-imagine-image`, `xai/grok-imagine-image-quality`
     * Count: up to 4
     * References: one `image` or up to five `images`
     * Aspect ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `2:3`, `3:2`

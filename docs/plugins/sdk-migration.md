@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "2c5b666834291467f1a379d91cc0a6f75eff244fd876ee9b6f0d039481499db9"
+source_hash: "4116e88a0398a0b77c899fcf20dd011bdd1e346614abe60abcc980b1b174e8ff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -747,6 +747,28 @@ canonical replacement.
 
     Affected areas: `inbound_claim`, `message_received`, and any custom
     channel plugin that post-processed `channelEnvelope` text.
+  </Accordion>
+
+  <Accordion title="deactivate hook → gateway_stop">
+    **Old**: `api.on("deactivate", handler)`.
+
+    **New**: `api.on("gateway_stop", handler)`. The event and context are the
+    same shutdown cleanup contract; only the hook name changes.
+
+    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    // Before
+    api.on("deactivate", async (event, ctx) => {
+      await stopPluginService(ctx);
+    });
+
+    // After
+    api.on("gateway_stop", async (event, ctx) => {
+      await stopPluginService(ctx);
+    });
+    ```
+
+    `deactivate` remains wired as a deprecated compatibility alias until after
+    2026-08-16.
   </Accordion>
 
   <Accordion title="Provider discovery types → provider catalog types">

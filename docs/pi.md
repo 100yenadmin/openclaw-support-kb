@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pi integration architecture"
 source: "https://docs.openclaw.ai/pi"
-source_hash: "c66d497536701769b78a48e88a95d2cc0318cba41a25e106d698fce17e50d784"
+source_hash: "ce154ecd2346293e50857befe50d7df6a67c68df4efdc78a242f2fd4d697075a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "pi.md"
@@ -32,10 +32,10 @@ OpenClaw uses the pi SDK to embed an AI coding agent into its messaging gateway 
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
-  "@earendil-works/pi-agent-core": "0.74.0",
-  "@earendil-works/pi-ai": "0.74.0",
-  "@earendil-works/pi-coding-agent": "0.74.0",
-  "@earendil-works/pi-tui": "0.74.0"
+  "@earendil-works/pi-agent-core": "0.74.1",
+  "@earendil-works/pi-ai": "0.74.1",
+  "@earendil-works/pi-coding-agent": "0.74.1",
+  "@earendil-works/pi-tui": "0.74.1"
 }
 ```
 

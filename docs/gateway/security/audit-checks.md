@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "4799e3dea3e0954baaa4257b1edb96ad80e3038c595222096397a191d8a422fb"
+source_hash: "eb123f4db2ba150f2a899d412a075f7a412d9bd3d1a7dd581d177a626269a4c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -68,7 +68,8 @@ exhaustive):
 | `gateway.probe_auth_secretref_unavailable`                    | warn          | Deep probe could not resolve auth SecretRefs in this command path                    | deep-probe auth source / SecretRef availability                                                      | no       |
 | `gateway.probe_failed`                                        | warn/critical | Live Gateway probe failed                                                            | gateway reachability/auth                                                                            | no       |
 | `discovery.mdns_full_mode`                                    | warn/critical | mDNS full mode advertises `cliPath`/`sshPort` metadata on local network              | `discovery.mdns.mode`, `gateway.bind`                                                                | no       |
-| `config.insecure_or_dangerous_flags`                          | warn          | Any insecure/dangerous debug flags enabled                                           | multiple keys (see finding detail)                                                                   | no       |
+| `config.insecure_or_dangerous_flags`                          | warn          | One insecure/dangerous debug flag is enabled                                         | key named in finding detail                                                                          | no       |
+| `security.audit.suppressions.active`                          | info          | Audit output has configured suppressions and may be filtered                         | `security.audit.suppressions`                                                                        | no       |
 | `config.secrets.gateway_password_in_config`                   | warn          | Gateway password is stored directly in config                                        | `gateway.auth.password`                                                                              | no       |
 | `config.secrets.hooks_token_in_config`                        | warn          | Hook bearer token is stored directly in config                                       | `hooks.token`                                                                                        | no       |
 | `hooks.token_reuse_gateway_token`                             | critical      | Hook ingress token also unlocks Gateway auth                                         | `hooks.token`, `gateway.auth.token`                                                                  | no       |

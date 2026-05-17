@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install/index"
-source_hash: "588cc3b698564e7096544dbc2420ba046e57b4cbf2139b20f147a70c307551f7"
+source_hash: "9eaaf5e54fab921f945e8d069c576a93e2056c4d6ccb34dd65e6d4e32a1c9eb9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/index.md"
@@ -85,6 +85,12 @@ If you already manage Node yourself:
     npm install -g openclaw@latest
     openclaw onboard --install-daemon
     ```
+
+    <Note>
+      The hosted installer clears npm freshness filters such as `min-release-age`
+      for the OpenClaw package install. If you install manually with npm, your own
+      npm policy still applies.
+    </Note>
   </Tab>
 
   <Tab title="pnpm">

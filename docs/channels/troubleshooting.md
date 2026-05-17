@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "3ae0c69b0fa5b3001481e97bec8d1dadd6dcc6e7ade5d01d411014f2e4d2dd03"
+source_hash: "570cca576f918c9ed1e34bb63e51eac2516f997b6dabe905160042abd63a326f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/troubleshooting.md"
@@ -88,12 +88,12 @@ Full troubleshooting: [Telegram troubleshooting](/channels/telegram#troubleshoot
 
 ### Discord failure signatures
 
-| Symptom                                   | Fastest check                                                          | Fix                                                                                                                                                                     |
-| ----------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bot online but no guild replies           | `openclaw channels status --probe`                                     | Allow guild/channel and verify message content intent.                                                                                                                  |
-| Group messages ignored                    | Check logs for mention gating drops                                    | Mention bot or set guild/channel `requireMention: false`.                                                                                                               |
-| Typing/token usage but no Discord message | Session log shows assistant text with `didSendViaMessagingTool: false` | The model answered privately instead of calling the message tool. Use a tool-call-reliable model, or set `messages.groupChat.visibleReplies: "automatic"` to auto-post. |
-| DM replies missing                        | `openclaw pairing list discord`                                        | Approve DM pairing or adjust DM policy.                                                                                                                                 |
+| Symptom                                   | Fastest check                                                                       | Fix                                                                                                                                                                                                                                                                                                     |
+| ----------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bot online but no guild replies           | `openclaw channels status --probe`                                                  | Allow guild/channel and verify message content intent.                                                                                                                                                                                                                                                  |
+| Group messages ignored                    | Check logs for mention gating drops                                                 | Mention bot or set guild/channel `requireMention: false`.                                                                                                                                                                                                                                               |
+| Typing/token usage but no Discord message | Check whether this is an ambient room event or a missed `message(action=send)` call | Inspect the gateway verbose log for suppressed final payload metadata, verify `messages.groupChat.unmentionedInbound`, read [Ambient room events](/channels/ambient-room-events), or set `messages.groupChat.visibleReplies: "automatic"` to use the legacy final-reply path for normal group requests. |
+| DM replies missing                        | `openclaw pairing list discord`                                                     | Approve DM pairing or adjust DM policy.                                                                                                                                                                                                                                                                 |
 
 Full troubleshooting: [Discord troubleshooting](/channels/discord#troubleshooting)
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Gateway Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/gateway-internals"
-source_hash: "7551d8664fbc9030696908cf8cba67125ff4ae9b3cf6d574fc7047065efdfe36"
+source_hash: "ce226bdff5246ee8a9f90dafb13370fd935d33d630afa168d63027296310b0dd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/gateway-internals.md"
@@ -199,7 +199,7 @@ Outgoing deliveries (`gateway/delivery.py`) handle:
 
 - **Direct reply** — send response back to the originating chat
 - **Home channel delivery** — route cron job outputs and background results to a configured home channel
-- **Explicit target delivery** — `send_message` tool specifying `telegram:-1001234567890`
+- **Explicit target delivery** — `send_message` tool specifying `telegram:-1001234567890`, or the [`hermes send` CLI](/docs/guides/pipe-script-output) wrapping the same tool for shell scripts
 - **Cross-platform delivery** — deliver to a different platform than the originating message
 
 Cron job deliveries are NOT mirrored into gateway session history — they live in their own cron session only. This is a deliberate design choice to avoid message alternation violations.

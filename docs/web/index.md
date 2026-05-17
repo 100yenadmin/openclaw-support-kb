@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web"
 source: "https://docs.openclaw.ai/web/index"
-source_hash: "0a81e2f2207f75a5815be2d6be1077ac073782cf90ea929e214c15354552271e"
+source_hash: "cd033de36c1ae3c4d4abf46464d179b0c732e8834a604400ca086759f7661ccb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/index.md"
@@ -119,8 +119,9 @@ Open:
   `https://` dashboard URLs and `wss://` WebSocket URLs.
 * In identity-bearing modes such as Tailscale Serve or `trusted-proxy`, the
   WebSocket auth check is satisfied from request headers instead.
-* For non-loopback Control UI deployments, set `gateway.controlUi.allowedOrigins`
-  explicitly (full origins). Without it, gateway startup is refused by default.
+* For public non-loopback Control UI deployments, set `gateway.controlUi.allowedOrigins`
+  explicitly (full origins). Private same-origin LAN/Tailnet loads are accepted for loopback,
+  RFC1918/link-local, `.local`, `.ts.net`, and Tailscale CGNAT hosts.
 * `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true` enables
   Host-header origin fallback mode, but is a dangerous security downgrade.
 * With Serve, Tailscale identity headers can satisfy Control UI/WebSocket auth

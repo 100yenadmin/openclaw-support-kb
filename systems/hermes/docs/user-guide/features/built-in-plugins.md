@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/built-in-plugins"
-source_hash: "b797410000dd288a67efafe3e19cf7d8c18df4b00c6e484a25fa686b9fbe23e9"
+source_hash: "4bff619c870a585c34dc2ffa3a8e04b4d09198d155e898ca099f8370dc3ee7bc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/built-in-plugins.md"
@@ -133,22 +133,14 @@ Traces Hermes turns, LLM calls, and tool invocations to [Langfuse](https://langf
 
 The plugin is fail-open: no SDK installed, no credentials, or a transient Langfuse error — all turn into a silent no-op in the hook. The agent loop is never impacted.
 
-**Setup (interactive — recommended):**
-
-```bash
-hermes tools          # → Langfuse Observability → Cloud or Self-Hosted
-```
-
-The wizard collects your keys, `pip install`s the `langfuse` SDK, and adds `observability/langfuse` to `plugins.enabled` for you. Restart Hermes and the next turn ships a trace.
-
-**Setup (manual):**
+**Setup:**
 
 ```bash
 pip install langfuse
 hermes plugins enable observability/langfuse
 ```
 
-Then put the credentials in `~/.hermes/.env`:
+Or check the box in the interactive `hermes plugins` UI. Then put the credentials in `~/.hermes/.env`:
 
 ```bash
 HERMES_LANGFUSE_PUBLIC_KEY=pk-lf-...

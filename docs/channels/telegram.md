@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "45bf758c4e6eb6602e1cc747cdb710d3c4965f846d592a27e215e5e5c6b43474"
+source_hash: "8474ac2c7be9d5d605393e1b9c2fe00b9929a3da2cdadc9d7d28f67519471054"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -82,6 +82,7 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
 
 <Note>
   Token resolution order is account-aware. In practice, config values win over env fallback, and `TELEGRAM_BOT_TOKEN` only applies to the default account.
+  After a successful startup, OpenClaw caches the bot identity in the state directory for up to 24 hours so restarts can avoid an extra Telegram `getMe` call; changing or removing the token clears that cache.
 </Note>
 
 ## Telegram side settings

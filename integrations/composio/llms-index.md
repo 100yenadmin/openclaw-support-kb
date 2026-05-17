@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "f1b7e7ad0f60eacbb4ec8b91dd22e4fe232f34eb8c92e558610e2d4f8fb92312"
+source_hash: "e8e2ebe926fa4897d99299573e31b256a9b64f63e1c65f6030051fd97d233450"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -191,8 +191,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/authentication.md
+- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/consumer.md
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/invite-codes.md
@@ -206,6 +206,16 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
+- https://docs.composio.dev/reference/sdk-reference/python/composio.md
+- https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
+- https://docs.composio.dev/reference/sdk-reference/python.md
+- https://docs.composio.dev/reference/sdk-reference/python/mcp.md
+- https://docs.composio.dev/reference/sdk-reference/python/session-context-impl.md
+- https://docs.composio.dev/reference/sdk-reference/python/tool-router-session.md
+- https://docs.composio.dev/reference/sdk-reference/python/toolkits.md
+- https://docs.composio.dev/reference/sdk-reference/python/tools.md
+- https://docs.composio.dev/reference/sdk-reference/python/triggers.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/composio.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md
@@ -218,21 +228,11 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
-- https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
-- https://docs.composio.dev/reference/sdk-reference/python/composio.md
-- https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
-- https://docs.composio.dev/reference/sdk-reference/python.md
-- https://docs.composio.dev/reference/sdk-reference/python/mcp.md
-- https://docs.composio.dev/reference/sdk-reference/python/session-context-impl.md
-- https://docs.composio.dev/reference/sdk-reference/python/tool-router-session.md
-- https://docs.composio.dev/reference/sdk-reference/python/toolkits.md
-- https://docs.composio.dev/reference/sdk-reference/python/tools.md
-- https://docs.composio.dev/reference/sdk-reference/python/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/v3/api-reference/authentication.md
+- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/migration.md
 - https://docs.composio.dev/reference/v3/api-reference/organization.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md

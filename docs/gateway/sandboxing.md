@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "8b05ab215eae40506be97e9c29d044f989cec68a32e9926ac980ee55d898e3a9"
+source_hash: "7fa585380f3a166f4891fd078cb9da7c671ea734ea3b1e835c0dcae7d266f757"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -491,6 +491,7 @@ Paths:
     - `readOnlyRoot: true` prevents writes; set `readOnlyRoot: false` or bake a custom image.
     - `user` must be root for package installs (omit `user` or set `user: "0:0"`).
     - Sandbox exec does **not** inherit host `process.env`. Use `agents.defaults.sandbox.docker.env` (or a custom image) for skill API keys.
+    - Values in `agents.defaults.sandbox.docker.env` are passed as explicit Docker container environment variables. Anyone with Docker daemon access can inspect them with Docker metadata commands such as `docker inspect`. Use a custom image, mounted secret file, or another secret delivery path if that metadata exposure is not acceptable.
   </Accordion>
 </AccordionGroup>
 

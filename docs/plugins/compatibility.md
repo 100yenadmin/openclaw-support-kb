@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "6fa50aeb552ae5c85b4775321e0fb5b8e97d7a3dd7d16434b9ada5002d539fb1"
+source_hash: "10b2990810d89ce527c037b4c02bebb740201c9807c1f047afb432d526bb58f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
@@ -120,6 +120,8 @@ Current compatibility records include:
 
 * legacy broad SDK imports such as `openclaw/plugin-sdk/compat`
 * legacy hook-only plugin shapes and `before_agent_start`
+* legacy `api.on("deactivate", ...)` cleanup hook names while plugins migrate to
+  `gateway_stop`
 * legacy `activate(api)` plugin entrypoints while plugins migrate to
   `register(api)`
 * legacy SDK aliases such as `openclaw/extension-api`,

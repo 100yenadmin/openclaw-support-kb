@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics export"
 source: "https://docs.openclaw.ai/gateway/diagnostics"
-source_hash: "61e5abd8dfe9655174c457273707bfa495b9081100eeb7101c42bf2d6e183502"
+source_hash: "e64c77a281a09976ae3b96623094fbb764b89ab723fff18ebc2db91118d87965"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/diagnostics.md"
@@ -196,6 +196,21 @@ diagnostic event collection:
 
 Disabling diagnostics reduces bug-report detail. It does not affect normal
 Gateway logging.
+
+Critical memory pressure snapshots are off by default. To keep diagnostics
+events and also capture the pre-OOM stability snapshot:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  diagnostics: {
+    memoryPressureSnapshot: true,
+  },
+}
+```
+
+Use this only on hosts that can tolerate the extra file-system scan and snapshot
+write during critical memory pressure. Normal memory pressure events still
+record RSS, heap, threshold, and growth facts when the snapshot is off.
 
 ## Related
 

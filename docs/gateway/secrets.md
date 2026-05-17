@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "2499c3d619424e5781df8cfd2b55b4809cd1d98ca5866d29e6253581b833a05a"
+source_hash: "be1059e46d1f2eb2124f26acd232d13ff7e1dbbae2692ce9abb4d0e674964484"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -92,6 +92,13 @@ Use one object shape everywhere:
   <Tab title="env">
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     { source: "env", provider: "default", id: "OPENAI_API_KEY" }
+    ```
+
+    Supported SecretInput fields also accept exact string shorthands:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    "${OPENAI_API_KEY}"
+    "$OPENAI_API_KEY"
     ```
 
     Validation:
@@ -206,6 +213,41 @@ Define providers under `secrets.providers`:
     ```
   </Accordion>
 </AccordionGroup>
+
+## File-backed API keys
+
+Do not put `file:...` strings in the config `env` block. The `env` block is
+literal and non-overriding, so `file:...` is not resolved.
+
+Use a file SecretRef on a supported credential field instead:
+
+```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  secrets: {
+    providers: {
+      xai_key_file: {
+        source: "file",
+        path: "~/.openclaw/secrets/xai-api-key.txt",
+        mode: "singleValue",
+      },
+    },
+  },
+  models: {
+    providers: {
+      xai: {
+        apiKey: { source: "file", provider: "xai_key_file", id: "value" },
+      },
+    },
+  },
+}
+```
+
+For `mode: "singleValue"`, the SecretRef `id` is `"value"`. For
+`mode: "json"`, use an absolute JSON pointer such as
+`"/providers/xai/apiKey"`.
+
+See [SecretRef credential surface](/reference/secretref-credential-surface) for
+the config fields that accept SecretRefs.
 
 ## Exec integration examples
 
