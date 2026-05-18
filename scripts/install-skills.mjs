@@ -181,6 +181,7 @@ For OpenClaw, Hermes Agent, Paperclip Mission Control, Composio, update, channel
 4. Use the installed customer KB skills for routing:
    - customer-kb-router
    - openclaw-support-kb
+   - file-bug-report
    - openclaw-config-repair
    - openclaw-skill-discovery
    - openclaw-support-escalation

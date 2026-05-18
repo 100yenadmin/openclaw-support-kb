@@ -16,6 +16,7 @@ Read the matching skill before acting.
 | Create a new agent, configure an agent, bind a channel to an agent, or set agent identity | `skills/openclaw-support-kb/SKILL.md` then `runbooks/agent-creation.md` |
 | Set up Telegram | `skills/openclaw-support-kb/SKILL.md` then `runbooks/telegram-setup.md` |
 | Set up another chat channel | `skills/openclaw-support-kb/SKILL.md` then `runbooks/channel-setup.md` |
+| User says an OpenClaw agent is slow, broken, not responding, missing tools, degraded, or not as smart and needs a bug report | `skills/file-bug-report/SKILL.md` then `runbooks/file-bug-report.md` |
 | `openclaw.json`, config schema, invalid config, SecretRef, channel config, gateway will not start | `skills/openclaw-config-repair/SKILL.md` |
 | Hermes Agent setup, config, gateway, Telegram/messaging, MCP, memory, sessions, skills, cron, update, or troubleshooting | `skills/hermes-support-kb/SKILL.md` |
 | Paperclip, Mission Control, companies, goals, org chart, tickets, heartbeats, budgets, approvals, dashboard, API, deploy, or adapter questions | `skills/paperclip-mission-control/SKILL.md` |

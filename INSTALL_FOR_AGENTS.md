@@ -157,6 +157,7 @@ writes the last result to
 ```bash
 test -f "$HOME/.gbrain/sources/openclaw-support-kb/kb-manifest.json"
 test -f "$HOME/.openclaw/skills/openclaw-support-kb/SKILL.md"
+test -f "$HOME/.openclaw/skills/file-bug-report/SKILL.md"
 node "$HOME/.gbrain/sources/openclaw-support-kb/scripts/status.mjs"
 gbrain sources list
 gbrain search "OpenClaw Telegram allowFrom groupAllowFrom groups" --source openclaw-support-kb
@@ -179,6 +180,7 @@ support/config/setup questions:
 
 - `customer-kb-router`
 - `cross-system-recovery`
+- `file-bug-report`
 - `hermes-support-kb`
 - `openclaw-support-kb`
 - `openclaw-config-repair`

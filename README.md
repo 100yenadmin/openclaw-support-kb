@@ -83,6 +83,15 @@ Skill discovery is intentionally layered: local VoltAgent snapshot, current
 OpenClaw/ClawHub search, Snyk scan attestation before skill install, and local
 Composio docs/toolkit catalog snapshots for approved SaaS workflows.
 
+For vague reports that an OpenClaw agent is slow, broken, not responding,
+missing tools, degraded, or "not as smart," this repo mirrors the
+`file-bug-report` support skill and runbook. ClawHub remains the public install
+source of record:
+
+```bash
+openclaw skills install file-bug-report
+```
+
 Builds refuse to replace arbitrary directories. The default managed target is
 `~/.gbrain/sources/openclaw-support-kb`; non-default build targets need the
 `.openclaw-support-kb-source` marker or `--force-managed-target`.

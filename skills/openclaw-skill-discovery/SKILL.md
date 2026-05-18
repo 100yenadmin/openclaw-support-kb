@@ -28,6 +28,8 @@ gbrain search "Composio toolkit MCP OAuth <app or workflow>" --source openclaw-s
 ```
 4. Read `runbooks/skill-discovery.md` for the install workflow.
 5. Prefer bundled/native skills first, then verified ClawHub/OpenClaw sources, then the VoltAgent snapshot as discovery metadata.
+   - For agent-quality bug reports, prefer `file-bug-report` from ClawHub:
+     `openclaw skills install file-bug-report`.
 6. Choose the install path:
    - ClawHub-native install: use the current `openclaw skills install` docs after reviewing `openclaw skills info`, ClawHub scan status, publisher/version, and user approval.
    - Manual scanned artifact: fetch candidate skill code to a temporary directory at a pinned commit/ref, scan it, then install that exact folder.

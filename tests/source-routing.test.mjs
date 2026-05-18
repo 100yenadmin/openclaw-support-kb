@@ -30,7 +30,7 @@ test("logical source catalog keeps system config surfaces separate", async () =>
 
   assert.equal(catalog.physicalGbrainSourceId, "openclaw-support-kb");
   assert.equal(byId.get("openclaw").configSurface, "openclaw.json");
-  assert.deepEqual(byId.get("openclaw").pathPrefixes, ["docs/", "releases/", "runbooks/", "skills-index/", "security/", "support/"]);
+  assert.deepEqual(byId.get("openclaw").pathPrefixes, ["docs/", "releases/", "runbooks/", "skills/", "skills-index/", "security/", "support/"]);
   assert.equal(byId.get("hermes-agent").configSurface, "~/.hermes/config.yaml");
   assert.deepEqual(byId.get("hermes-agent").pathPrefixes, ["systems/hermes/"]);
   assert.match(byId.get("paperclip-mission-control").configSurface, /Paperclip/);

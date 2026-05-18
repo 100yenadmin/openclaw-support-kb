@@ -31,6 +31,7 @@ gbrain search "OpenClaw <exact error or config key> Source: https://docs.opencla
 - "Set up Telegram" -> `runbooks/telegram-setup.md`
 - "Set up another channel" -> `runbooks/channel-setup.md`
 - "Config broke / openclaw.json" -> `openclaw-config-repair`
+- "Agent is slow, broken, not responding, missing tools, degraded, or not as smart" -> `file-bug-report` and `runbooks/file-bug-report.md`
 - "Find/install a skill" -> `openclaw-skill-discovery`
 - "Contact support" -> `openclaw-support-escalation`
 - "Hermes, Paperclip, Mission Control, or unclear system" -> `customer-kb-router`

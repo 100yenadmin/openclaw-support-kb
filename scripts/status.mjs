@@ -21,6 +21,7 @@ import {
 const EXPECTED_SKILLS = [
   "customer-kb-router",
   "cross-system-recovery",
+  "file-bug-report",
   "hermes-support-kb",
   "openclaw-support-kb",
   "openclaw-config-repair",

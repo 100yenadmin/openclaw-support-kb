@@ -41,6 +41,7 @@ const runbookFiles = [
   "runbooks/system-explainer.md",
   "runbooks/agent-creation.md",
   "runbooks/channel-setup.md",
+  "runbooks/file-bug-report.md",
   "runbooks/telegram-setup.md",
   "runbooks/config-repair.md",
   "runbooks/skill-discovery.md",

@@ -49,6 +49,13 @@
     "mustHaveRunbooks": ["runbooks/config-repair.md"]
   },
   {
+    "id": "file-bug-report",
+    "prompt": "My OpenClaw agent is slow, broken, not responding, and not as smart as before.",
+    "mustMention": ["file-bug-report", "$file-bug-report", "openclaw skills install file-bug-report", "diagnostics-summary.md", "similar open and closed", "Do not post"],
+    "mustHaveDocs": ["skills/file-bug-report/SKILL.md", "skills/RESOLVER.md"],
+    "mustHaveRunbooks": ["runbooks/file-bug-report.md"]
+  },
+  {
     "id": "skill-install",
     "prompt": "Find and install a skill that can do browser automation.",
     "mustMention": ["gbrain search", "awesome openclaw skills", "openclaw skills search", "snyk-agent-scan", "SNYK_TOKEN", "attestation"],

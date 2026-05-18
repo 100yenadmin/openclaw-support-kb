@@ -59,6 +59,11 @@ openclaw mcp show composio --json
    - VoltAgent snapshot candidate with source/pinned commit
    - Composio MCP integration for supported external apps
    - browser automation only when the user prefers it or no scoped integration exists
+   For vague reports that an OpenClaw agent is slow, broken, not responding,
+   missing tools, degraded, or "not as smart," prefer the verified ClawHub skill:
+   ```bash
+   openclaw skills install file-bug-report
+   ```
 6. Choose the install path:
    - ClawHub-native: use `openclaw skills install <slug> --version <version>` only after reviewing `openclaw skills info`, ClawHub scan status, publisher, version, and user approval.
    - Manual scanned artifact: fetch the candidate to a temporary directory at a pinned commit or immutable archive, then scan and install the exact scanned folder manually.

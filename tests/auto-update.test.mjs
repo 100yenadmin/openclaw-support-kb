@@ -606,6 +606,7 @@ test("status command reports healthy installs and stale checkpoints", async () =
     for (const skill of [
       "customer-kb-router",
       "cross-system-recovery",
+      "file-bug-report",
       "hermes-support-kb",
       "openclaw-support-kb",
       "openclaw-config-repair",
@@ -713,6 +714,7 @@ test("status command treats legacy GBrain without named sources as unscoped sear
     for (const skill of [
       "customer-kb-router",
       "cross-system-recovery",
+      "file-bug-report",
       "hermes-support-kb",
       "openclaw-support-kb",
       "openclaw-config-repair",

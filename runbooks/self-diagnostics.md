@@ -57,6 +57,12 @@ If the issue is config, include:
 - validation output
 - whether `.rejected.*` or `.clobbered.*` exists
 
+If the issue is agent quality or responsiveness, such as slow replies, no
+response, missing tools, degraded reasoning, or "not as smart" reports, use
+`skills/file-bug-report/SKILL.md` and `runbooks/file-bug-report.md` before
+escalating. That path collects a conservative diagnostics bundle, searches
+similar public issues, and drafts the issue/support text for review.
+
 ## Stop Conditions
 
 Escalate instead of continuing if the next step would require guessing a secret,
