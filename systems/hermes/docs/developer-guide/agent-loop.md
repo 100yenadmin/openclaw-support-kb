@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Agent Loop Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/agent-loop"
-source_hash: "f5e2311dab987019559b45b0d752e0922213828b6bd0def1689dbc266188de50"
+source_hash: "6b1b1007748904f43ffaacc05fca5fd50530cba732d28ee23e1cd778ad971bb9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/agent-loop.md"
@@ -207,7 +207,7 @@ When the primary model fails (429 rate limit, 5xx server error, 401/403 auth err
 3. On success, continue the conversation with the new provider
 4. On 401/403, attempt credential refresh before failing over
 
-The fallback system also covers auxiliary tasks independently — vision, compression, web extraction, and session search each have their own fallback chain configurable via the `auxiliary.*` config section.
+The fallback system also covers auxiliary tasks independently — vision, compression, and web extraction each have their own fallback chain configurable via the `auxiliary.*` config section.
 
 ## Compression and Persistence
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/codex-app-server-runtime.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "bc379dd7948f540ec010c0f77d0f410c9d39e3d00accc103479a6740ec83a7af"
+source_hash: "adb029f88702032ad56427d8e69311054f3d8ac504859b665faa763fd3b2ebff"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -105,11 +105,11 @@ What works inside a codex-runtime worker:
 - The Hermes tool callback for browser_*, vision, image_gen, skills, TTS
 
 What also works because the MCP callback exposes them:
-- **`kanban_complete` / `kanban_block` / `kanban_comment` / `kanban_heartbeat`** — the worker handoff tools. These read `HERMES_KANBAN_TASK` from env (set by the dispatcher), gate access correctly, and write to `~/.hermes/kanban.db`. Without these in the callback, a worker on this runtime could do its task but couldn't report back, hanging until the dispatcher's timeout.
+- **`kanban_complete` / `kanban_block` / `kanban_comment` / `kanban_heartbeat`** — the worker handoff tools. These read `HERMES_KANBAN_TASK` from env (set by the dispatcher), gate access correctly, and write to the per-board SQLite DB pinned by `HERMES_KANBAN_DB`. Without these in the callback, a worker on this runtime could do its task but couldn't report back, hanging until the dispatcher's timeout.
 - **`kanban_show` / `kanban_list`** — read-only board queries for the worker to check its own context.
 - **`kanban_create` / `kanban_unblock` / `kanban_link`** — orchestrator-only operations. Available for orchestrator agents running on the codex runtime that need to dispatch new tasks.
 
-The kanban tools are gated by `HERMES_KANBAN_TASK` env var the dispatcher sets — that var is propagated to the codex subprocess (codex inherits env) and from there to the spawned `hermes-tools` MCP server subprocess. So the tools see the right task id and gate correctly.
+The kanban tools are gated by `HERMES_KANBAN_TASK` env var the dispatcher sets — that var is propagated to the codex subprocess (codex inherits env) and from there to the spawned `hermes-tools` MCP server subprocess. So the tools see the right task id and gate correctly. For Codex app-server workers, Hermes also passes narrow app-server sandbox overrides when `HERMES_KANBAN_TASK` is present: keep `workspace-write` sandboxing, add only the current board directory (derived from `HERMES_KANBAN_DB`) as an extra writable root, and keep network disabled by default. This avoids the brittle `:danger-no-sandbox` workaround while letting `kanban_complete` / `kanban_block` update the board DB.
 
 ### Cron jobs
 
@@ -256,7 +256,7 @@ default_permissions = ":read-only"
 
 ## Auxiliary tasks and ChatGPT subscription token cost
 
-When this runtime is on with the `openai-codex` provider, **auxiliary tasks (title generation, context compression, vision auto-detect, session search summarization, the background self-improvement review fork) also flow through your ChatGPT subscription by default**, because Hermes' auxiliary client uses the main provider/model when no per-task override is set.
+When this runtime is on with the `openai-codex` provider, **auxiliary tasks (title generation, context compression, vision auto-detect, the background self-improvement review fork) also flow through your ChatGPT subscription by default**, because Hermes' auxiliary client uses the main provider/model when no per-task override is set.
 
 This isn't specific to `codex_app_server` — it's true for the existing `codex_responses` path too — but it's more visible here because you're explicitly opting in for the subscription billing.
 
@@ -271,9 +271,6 @@ auxiliary:
     provider: openrouter
     model: google/gemini-3-flash-preview
   vision_detect:
-    provider: openrouter
-    model: google/gemini-3-flash-preview
-  session_search:
     provider: openrouter
     model: google/gemini-3-flash-preview
   goal_judge:

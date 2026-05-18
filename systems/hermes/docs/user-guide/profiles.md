@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/profiles"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "3d7234d7c97ef18bd2876f57a4b2a1a3c0481e968d0b74a8d728666eed19b03a"
+source_hash: "5df794e4a46b7f47820b93ae1182ac70495f74131568400b74d94ba0868c34be"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -46,6 +46,14 @@ hermes profile create mybot
 ```
 
 Creates a fresh profile with bundled skills seeded. Run `mybot setup` to configure API keys, model, and gateway tokens.
+
+If you plan to use this profile as a kanban worker (or want the kanban orchestrator to route work to it), pass `--description "<role>"` at create time so the orchestrator knows what it's good at:
+
+```bash
+hermes profile create researcher --description "Reads source code and external docs, writes findings."
+```
+
+You can also set or auto-generate the description later with `hermes profile describe` — see the [Kanban guide](./features/kanban#auto-vs-manual-orchestration) for the full routing model.
 
 ### Clone config only (`--clone`)
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "b18ea48b37392c5922e740f6397a3db98a2489e014fc0b07c9ff8fffbed00533"
+source_hash: "9b256d947b5038a539df330ca9d84611904c37120348ca879179617e1615b445"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -183,6 +183,10 @@ Paperclip stores secret metadata and versions in:
 
 - `company_secrets`
 - `company_secret_versions`
+- `company_secret_bindings`
+- `secret_access_events`
+
+Secret-aware env bindings are supported by agents, projects, and routines. Routine env lives in `routines.env`, is captured in `routine_revisions.snapshot`, and routine dispatches store `routine_runs.routine_revision_id` so runtime secret resolution uses the env snapshot that existed when the run was created. Routine secret refs bind with `target_type = 'routine'`, `target_id = routines.id`, and `config_path` values under `env.*`.
 
 For local/default installs, the active provider is `local_encrypted`:
 

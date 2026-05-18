@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Provider Runtime Resolution"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/provider-runtime"
-source_hash: "e8573740e24de2595a0eaac2264cf020f055d13b1c64fa3e6908bfa134b37b7f"
+source_hash: "572cf6a20c2d459f885cd80e74754e2d31e9fad6873ac10e4750e0f608b757a2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/provider-runtime.md"
@@ -163,7 +163,6 @@ Auxiliary tasks such as:
 - vision
 - web extraction summarization
 - context compression summaries
-- session search summarization
 - skills hub operations
 - MCP helper operations
 - memory flushes

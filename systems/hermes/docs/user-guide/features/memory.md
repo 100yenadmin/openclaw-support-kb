@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "35b91b1bc6e0797f5a86bc06236492f88b54f8dc71398be9c51096fa89dec74a"
+source_hash: "70ef0c2ced714712fb634efd39dc0000136afaf684e0d3030ce0cbe2e0c8dd94"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -190,19 +190,23 @@ Memory entries are scanned for injection and exfiltration patterns before being 
 Beyond MEMORY.md and USER.md, the agent can search its past conversations using the `session_search` tool:
 
 - All CLI and messaging sessions are stored in SQLite (`~/.hermes/state.db`) with FTS5 full-text search
-- Search queries return relevant past conversations with Gemini Flash summarization
+- Search queries return actual messages from the DB — no LLM summarization, no truncation
 - The agent can find things it discussed weeks ago, even if they're not in its active memory
+- The agent can also scroll forward/backward inside any session it finds
 
 ```bash
 hermes sessions list    # Browse past sessions
 ```
+
+See [Session Search Tool](/docs/user-guide/sessions#session-search-tool) for the three calling shapes (discovery / scroll / browse) and the response format.
 
 ### session_search vs memory
 
 | Feature | Persistent Memory | Session Search |
 |---------|------------------|----------------|
 | **Capacity** | ~1,300 tokens total | Unlimited (all sessions) |
-| **Speed** | Instant (in system prompt) | Requires search + LLM summarization |
+| **Speed** | Instant (in system prompt) | ~20ms FTS5 query, ~1ms scroll |
+| **Cost** | Token cost in every prompt | Free — no LLM calls |
 | **Use case** | Key facts always available | Finding specific past conversations |
 | **Management** | Manually curated by agent | Automatic — all sessions stored |
 | **Token cost** | Fixed per session (~1,300 tokens) | On-demand (searched when needed) |

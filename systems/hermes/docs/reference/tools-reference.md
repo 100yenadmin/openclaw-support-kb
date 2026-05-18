@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Tools Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/tools-reference"
-source_hash: "3fa1bc28e3e30b0a179592d4faa214ad1c329282d3b025874ed4e388e96f8042"
+source_hash: "b86439a02a37671ac900da4cc02c772128167442995bf47a36edb35bcb970e89"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/tools-reference.md"
@@ -165,7 +165,7 @@ Registered only when the agent is spawned by the kanban dispatcher (`HERMES_KANB
 
 | Tool | Description | Requires environment |
 |------|-------------|----------------------|
-| `session_search` | Search your long-term memory of past conversations. This is your recall -- every past session is searchable, and this tool summarizes what happened. USE THIS PROACTIVELY when: - The user says 'we did this before', 'remember when', 'last ti… | — |
+| `session_search` | Search past sessions stored in the local session DB, or scroll inside one. FTS5-backed retrieval; returns actual messages from the DB (no LLM calls). Three shapes: discovery (pass `query`), scroll (pass `session_id` + `around_message_id`), browse (no args). | — |
 
 ## `skills` toolset
 
