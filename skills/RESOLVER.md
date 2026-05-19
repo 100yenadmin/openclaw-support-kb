@@ -19,6 +19,7 @@ Read the matching skill before acting.
 | `openclaw.json`, config schema, invalid config, SecretRef, channel config, gateway will not start | `skills/openclaw-config-repair/SKILL.md` |
 | Hermes Agent setup, config, gateway, Telegram/messaging, MCP, memory, sessions, skills, cron, update, or troubleshooting | `skills/hermes-support-kb/SKILL.md` |
 | Paperclip, Mission Control, companies, goals, org chart, tickets, heartbeats, budgets, approvals, dashboard, API, deploy, or adapter questions | `skills/paperclip-mission-control/SKILL.md` |
+| evaOS Live Browser, KasmVNC, VNC, visible Chromium, CDP, screenshots, authenticated website testing, Arbostar UI, or WPForms browser tests | `skills/evaos-live-browser-operator/SKILL.md` then `runbooks/evaos-live-browser-agent-kit.md` |
 | One system needs to diagnose or repair another, including Hermes fixing OpenClaw, OpenClaw fixing Hermes, or either runtime handling Paperclip | `skills/cross-system-recovery/SKILL.md` then target-system skill |
 | Find, choose, install, vet, or improve OpenClaw skills; search VoltAgent/ClawHub; evaluate Composio or SaaS app integrations | `skills/openclaw-skill-discovery/SKILL.md` |
 | Contact support, escalate, send email, message `@evaOS_support_bot`, or support handoff | `skills/openclaw-support-escalation/SKILL.md` |
