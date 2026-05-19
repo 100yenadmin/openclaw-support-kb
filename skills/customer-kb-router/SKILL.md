@@ -18,6 +18,7 @@ gbrain search "OpenClaw <question or exact error> Source: https://docs.openclaw.
 gbrain search "Hermes Agent <question or exact error> Local KB namespace: hermes-agent" --source openclaw-support-kb
 gbrain search "Paperclip Mission Control <question or exact error> Local KB namespace: paperclip-mission-control" --source openclaw-support-kb
 gbrain search "Composio <app or workflow> Source: https://docs.composio.dev" --source openclaw-support-kb
+gbrain search "evaOS Live Browser KasmVNC CDP screenshot authenticated browser handoff" --source openclaw-support-kb
 ```
 
 If `--source` is unsupported, rerun the same search without it and reject stale `.pre-git-` citations.
@@ -29,6 +30,7 @@ If `--source` is unsupported, rerun the same search without it and reject stale 
 | OpenClaw | `openclaw.json`, `~/.openclaw`, workspace `AGENTS.md` | `openclaw ...`, `docs/`, `runbooks/` |
 | Hermes Agent | `~/.hermes/config.yaml`, `~/.hermes/.env`, `~/.hermes/skills` | `hermes ...`, `systems/hermes/` |
 | Paperclip Mission Control | Paperclip database, env/deploy config, companies, agents, tickets | `systems/paperclip/`, Paperclip CLI/API docs |
+| evaOS Live Browser | KasmVNC, visible Chromium, loopback CDP, screenshots | `evaos-live-browser`, `evaos-browser-control`, `runbooks/evaos-live-browser-agent-kit.md` |
 | Composio | Integration/MCP/OAuth app connection | `integrations/composio/`, OpenClaw MCP docs |
 
 ## Cross-System Work
@@ -38,6 +40,7 @@ When one runtime is fixing another, search the broken target first and the actin
 - Hermes fixing OpenClaw: OpenClaw docs/runbooks first, Hermes docs only for how Hermes should run the repair.
 - OpenClaw fixing Hermes: Hermes docs first, OpenClaw docs only for messaging/tool execution constraints.
 - Either runtime handling Paperclip: Paperclip docs first, runtime docs only for the executor.
+- Browser/VNC work on production sites: Live Browser docs first, then the target app docs.
 
 ## Stop Conditions
 
