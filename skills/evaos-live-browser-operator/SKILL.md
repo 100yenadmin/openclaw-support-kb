@@ -62,6 +62,15 @@ Use VNC only when the human needs to watch, complete a login, or rescue a UI
 state. Do not ask for credentials in chat. Ask the human to log in through the
 Live Browser tab, then resume with CDP/browser tools after they confirm.
 
+When finished, stop the visible browser cleanly and verify the controller status.
+Artifacts remain under `/root/agent-files/downloads/browser-runs` after the
+session stops.
+
+```bash
+evaos-live-browser stop
+evaos-live-browser status
+```
+
 ## Production Safety
 
 Arbostar, WPForms, and other customer production systems are read-only by

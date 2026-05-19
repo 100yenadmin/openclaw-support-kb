@@ -473,7 +473,7 @@ async function writeManifest(
     artifactSha256: await artifactSha256(outDir),
     sourceCount: pages.length + composioPages.length + hermesPages.length + paperclipPages.length + 8,
     logicalSources: {
-      openclaw: pages.length,
+      openclaw: pages.length + 8,
       composio: composioPages.length,
       hermes: hermesPages.length,
       paperclip: paperclipPages.length,
