@@ -28,9 +28,9 @@ export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
 const GBRAIN_SOURCE_ID_PATTERN = new RegExp(`\\b${escapeRegExp(GBRAIN_SOURCE_ID)}\\b`, "i");
 export const GBRAIN_VERIFY_QUERIES = [
   {
-    label: "Customer Support KB install guide",
-    query: "Install Customer Support KB For Agents",
-    strictPatterns: [/\bInstall Customer Support KB For Agents\b/i, /\bCustomer Support KB\b/i],
+    label: "Customer Support KB agent protocol",
+    query: "Customer Support KB Agent Protocol openclaw-support-kb",
+    strictPatterns: [/\bCustomer Support KB Agent Protocol\b/i, /\bopenclaw-support-kb\b/i],
   },
   {
     label: "OpenClaw Telegram docs",
