@@ -24,6 +24,31 @@ description: Use for Paperclip, Mission Control, companies, goals, org charts, a
    gbrain search "Paperclip deploy environment variables database" --source openclaw-support-kb
    ```
 
+## evaOS VM Runtime Rules
+
+When you are running inside an evaOS customer VM, use the VM-local Paperclip
+API for automation. Public Mission Control hosts such as
+`https://paperclip-<customer>.ecs.electricsheephq.com` are browser/dashboard
+routes and may return Electric Sheep login HTML instead of JSON.
+
+- CLI/server base: `http://127.0.0.1:3100`
+- Raw HTTP API base: `http://127.0.0.1:3100/api`
+- OpenClaw gateway adapter URL: `ws://127.0.0.1:18790/`
+
+If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists, load the
+agent token from that JSON file without printing it, then send it as
+`Authorization: Bearer <token>`. Prefer the short-lived `PAPERCLIP_API_KEY`
+from the current heartbeat/run environment when it is present.
+
+Before piping any response to `jq`, verify that the response is JSON. If the
+response starts with HTML or looks like a login page, stop using the public
+host and retry through the VM-local API base.
+
+Paperclip-launched OpenClaw agents are long-running workers. A two-hour adapter
+timeout is normal for Paperclip-owned task execution, but simple control-plane
+operations such as creating an agent, reading an issue, or posting a comment
+should still use the local API and should not spend the full timeout window.
+
 ## Stop Conditions
 
 Ask before changing budgets, pausing/terminating agents, importing/exporting company data, modifying secrets, or approving actions on behalf of the user.
