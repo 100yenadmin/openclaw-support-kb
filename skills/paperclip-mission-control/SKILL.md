@@ -49,6 +49,79 @@ timeout is normal for Paperclip-owned task execution, but simple control-plane
 operations such as creating an agent, reading an issue, or posting a comment
 should still use the local API and should not spend the full timeout window.
 
+## Creating Mission Control Agents On evaOS
+
+Mission Control agents may use the customer's `main` OpenClaw agent for
+CEO/orchestrator work, but they must never use the customer's primary
+`agent:main:main` OpenClaw session. The product contract is: share the main
+agent's context when useful, isolate the work into Paperclip-owned issue
+sessions.
+
+Canonical CEO/orchestrator adapter config:
+
+```json
+{
+  "adapterType": "openclaw_gateway",
+  "adapterConfig": {
+    "agentId": "main",
+    "sessionKeyStrategy": "issue",
+    "paperclipApiUrl": "http://127.0.0.1:3100",
+    "url": "ws://127.0.0.1:18790/",
+    "timeoutSec": 7200,
+    "waitTimeoutMs": 7200000
+  }
+}
+```
+
+Do not set `sessionKey`. Do not set `payloadTemplate.agentId` for new agents;
+`adapterConfig.agentId` is the authoritative OpenClaw target.
+
+Dedicated worker agents use the same adapter defaults, but the OpenClaw agent
+id must be created or confirmed first:
+
+```json
+{
+  "adapterType": "openclaw_gateway",
+  "adapterConfig": {
+    "agentId": "<openclaw-agent-id>",
+    "sessionKeyStrategy": "issue",
+    "paperclipApiUrl": "http://127.0.0.1:3100",
+    "url": "ws://127.0.0.1:18790/",
+    "timeoutSec": 7200,
+    "waitTimeoutMs": 7200000
+  }
+}
+```
+
+Paperclip display names may change. OpenClaw agent ids are stable routing
+targets and do not change unless the OpenClaw agent is intentionally recreated.
+After creating or renaming a Mission Control agent, run a routing audit:
+
+```bash
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run \
+  --map Aurelius=main
+
+# Dedicated worker example:
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run \
+  --map Argyle=atlas
+```
+
+From support-control, use the customer-scoped guard:
+
+```bash
+evaos-support paperclip-routing-audit \
+  --targets <customer_id> \
+  --customer-map <customer_id>:<PaperclipName>=<openclaw-agent-id> \
+  --run-id paperclip-routing-YYYYMMDD
+```
+
+Forbidden adapter shapes:
+
+- `sessionKeyStrategy=fixed`
+- `sessionKey=main`
+- any config that sends Paperclip work into `agent:main:main`
+- public Paperclip browser hosts as the VM-local API base
+
 ## Stop Conditions
 
 Ask before changing budgets, pausing/terminating agents, importing/exporting company data, modifying secrets, or approving actions on behalf of the user.

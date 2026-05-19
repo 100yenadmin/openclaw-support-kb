@@ -76,3 +76,87 @@ the VM-local API.
 When a run times out near the adapter limit, inspect the run log before
 increasing the timeout. Repeated `jq` parse errors or public-host API calls are
 configuration/instruction bugs, not a need for a longer wait window.
+
+## Mission Control Agent Creation Contract
+
+Paperclip/Mission Control may use the customer's `main` OpenClaw agent for
+CEO/orchestrator work, but it must never use the customer's primary
+`agent:main:main` OpenClaw session. The safe pattern is:
+
+- OpenClaw agent id: `main`
+- Paperclip session lane: issue-scoped
+- Paperclip API base: VM-local
+- gateway URL: VM-local
+
+Canonical CEO/orchestrator config:
+
+```json
+{
+  "adapterType": "openclaw_gateway",
+  "adapterConfig": {
+    "agentId": "main",
+    "sessionKeyStrategy": "issue",
+    "paperclipApiUrl": "http://127.0.0.1:3100",
+    "url": "ws://127.0.0.1:18790/",
+    "timeoutSec": 7200,
+    "waitTimeoutMs": 7200000
+  }
+}
+```
+
+There should be no `sessionKey` and no `payloadTemplate.agentId` for new
+Mission Control agents. `adapterConfig.agentId` is the routing source of truth.
+
+Dedicated worker config is the same except `adapterConfig.agentId` points at a
+stable OpenClaw agent id that already exists, for example `atlas`:
+
+```json
+{
+  "adapterType": "openclaw_gateway",
+  "adapterConfig": {
+    "agentId": "atlas",
+    "sessionKeyStrategy": "issue",
+    "paperclipApiUrl": "http://127.0.0.1:3100",
+    "url": "ws://127.0.0.1:18790/",
+    "timeoutSec": 7200,
+    "waitTimeoutMs": 7200000
+  }
+}
+```
+
+Renaming a Paperclip display name does not rename the OpenClaw agent id. If
+Paperclip shows `Argyle` but the OpenClaw worker is `atlas`, preserve that
+mapping explicitly.
+
+Post-create or post-rename audit:
+
+```bash
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run \
+  --map Aurelius=main
+
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run \
+  --map Argyle=atlas
+```
+
+From support-control:
+
+```bash
+evaos-support paperclip-routing-audit \
+  --targets <customer_id> \
+  --customer-map <customer_id>:<PaperclipName>=<openclaw-agent-id> \
+  --run-id paperclip-routing-YYYYMMDD
+```
+
+Apply only after the dry-run shows the expected changes:
+
+```bash
+evaos-support paperclip-routing-audit \
+  --targets <customer_id> \
+  --customer-map <customer_id>:<PaperclipName>=<openclaw-agent-id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id>
+```
+
+Do not approve any config that uses `sessionKeyStrategy=fixed` with
+`sessionKey=main`. That shape routes work into `agent:main:main` and can hijack
+the customer's normal OpenClaw main chat.
