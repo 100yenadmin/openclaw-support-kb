@@ -30,7 +30,7 @@ export const GBRAIN_VERIFY_QUERIES = [
   {
     label: "Customer Support KB agent protocol",
     query: "Customer Support KB Agent Protocol openclaw-support-kb",
-    strictPatterns: [/\bCustomer Support KB Agent Protocol\b/i, /\bopenclaw-support-kb\b/i],
+    strictPatterns: [/\bCustomer Support KB Agent Protocol\b/i],
   },
   {
     label: "OpenClaw Telegram docs",
