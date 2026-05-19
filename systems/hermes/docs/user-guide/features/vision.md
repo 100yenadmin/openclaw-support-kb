@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/vision"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/vision"
-source_hash: "c32eb80ba8100ef41593f210de4cefca78908f53142731fe7519de03a6638590"
+source_hash: "8fed548967c4872662ecd378d205726ff0ae2ba73dca0b7a69128e7538966416"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/vision.md"
@@ -214,5 +214,11 @@ When a user attaches an image — from the CLI clipboard, the gateway (Telegram/
 You don't configure this — Hermes looks up your current model's capability in the provider metadata and picks the right path automatically. The practical effect: you can switch between vision and non-vision models mid-session and image handling "just works" without changing your workflow. Text-only models get coherent context about the image rather than a broken multimodal payload they'd have to reject.
 
 Which auxiliary model handles the text-description path is configurable under `auxiliary.vision` — see [Auxiliary Models](/docs/user-guide/configuration#auxiliary-models).
+
+### `vision_analyze` has the same dual behavior
+
+The `vision_analyze` tool itself follows the same routing. When the active main model is vision-capable **and** its provider supports image content inside tool results (currently the Anthropic, OpenAI, Azure-OpenAI, and Gemini 3.x stacks), `vision_analyze` short-circuits the auxiliary describer and returns the raw image pixels as a multimodal tool-result envelope. The main model sees the image natively on its next turn — no aux call, no text-summary information loss, no extra latency.
+
+For text-only main models (or providers whose tool-result channel doesn't carry images), `vision_analyze` falls back to the legacy path: it asks the configured auxiliary vision model to describe the image and returns the description as plain text. Either way the calling tool signature is the same — the tool decides which path to take at runtime based on the active model.
 
 ---

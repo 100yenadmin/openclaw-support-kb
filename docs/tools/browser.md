@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "76d453c2099166696fc165c9b023debe60617c1447418888b5100a68439c725b"
+source_hash: "b386140bc6f9f4f270cf31860ef00bc353c62bfd1ae9d588e849e306a4760000"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -647,7 +647,8 @@ directory.
 
   * **Screenshots** - page captures and `--ref` element captures work; CSS `--element` selectors do not. `--full-page` cannot combine with `--ref` or `--element`. Playwright is not required for page or ref-based element screenshots.
   * **Actions** - `click`, `type`, `hover`, `scrollIntoView`, `drag`, and `select` require snapshot refs (no CSS selectors). `click-coords` clicks visible viewport coordinates and does not require a snapshot ref. `click` is left-button only. `type` does not support `slowly=true`; use `fill` or `press`. `press` does not support `delayMs`. `type`, `hover`, `scrollIntoView`, `drag`, `select`, `fill`, and `evaluate` do not support per-call timeouts. `select` accepts a single value.
-  * **Wait / upload / dialog** - `wait --url` supports exact, substring, and glob patterns; `wait --load networkidle` is not supported. Upload hooks require `ref` or `inputRef`, one file at a time, no CSS `element`. Dialog hooks do not support timeout overrides.
+  * **Wait / upload / dialog** - `wait --url` supports exact, substring, and glob patterns; `wait --load networkidle` is not supported. Upload hooks require `ref` or `inputRef`, one file at a time, no CSS `element`. Dialog hooks do not support timeout overrides or `dialogId`.
+  * **Dialog visibility** - Managed browser action responses include `blockedByDialog` and `browserState.dialogs.pending` when an action opens a modal dialog; snapshots also include pending dialog state. Respond with `browser dialog --accept/--dismiss --dialog-id <id>` while a dialog is pending. Dialogs handled outside OpenClaw appear under `browserState.dialogs.recent`.
   * **Managed-only features** - batch actions, PDF export, download interception, and `responsebody` still require the managed browser path.
 </Accordion>
 

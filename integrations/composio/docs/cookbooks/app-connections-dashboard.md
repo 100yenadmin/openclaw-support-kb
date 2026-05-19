@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Build an App Connections Dashboard"
 source: "https://docs.composio.dev/cookbooks/app-connections-dashboard.md"
-source_hash: "452806f9edce738788cf90d1b1bade224b165be7c50d4cb638d6fafc610b946c"
+source_hash: "b900d714380e934ee1fe7d7ebf2785b859e2859add5ecfa51b490587887c919e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/app-connections-dashboard.md"
@@ -57,7 +57,7 @@ const composio = new Composio();
 
 export const dynamic = "force-dynamic";
 ```
-`"user_123"` is a placeholder. In production, replace it with the authenticated user's ID from your auth system. See [Users & Sessions](/docs/users-and-sessions) for details.
+`"user_123"` is a placeholder. In production, replace it with the authenticated user's ID from your auth system. See [What is a session?](/docs/how-composio-works) for details.
 
 # List connections
 

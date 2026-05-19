@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/x-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "4185bea2b5f2a4c6c7b8f7a5a867667e1facf5d4b5375223e5624d9266878491"
+source_hash: "836660babf6b8b4fa78123e3f75eff27beed06142f9bde7ecf2516e1af36942c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -38,7 +38,7 @@ The tool's `check_fn` runs the xAI credential resolver every time the model's to
 
 ## Enabling the tool
 
-Off by default. Enable in `hermes tools`:
+Auto-enables when xAI credentials (OAuth token or `XAI_API_KEY`) are present. Disable explicitly via `hermes tools` → Search → x_search if you don't want this.
 
 ```bash
 hermes tools

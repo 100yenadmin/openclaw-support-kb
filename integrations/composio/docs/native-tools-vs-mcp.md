@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Native Tools vs MCP"
 source: "https://docs.composio.dev/docs/native-tools-vs-mcp.md"
-source_hash: "6f84d23cc7a9b2c79e4321f8484975f1b86343466dc983887179edddf072b2c9"
+source_hash: "4735897714af4871006f69ed69572b9ba43c1ade974e023b5543ea0c537c7b63"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "native-tools-vs-mcp.md"
@@ -144,12 +144,10 @@ const client = await createMCPClient({
 const tools = await client.tools();
 ```
 
-See the [quickstart](/docs/quickstart) for full working examples.
-
 # Next steps
 
-- [Quickstart](/docs/quickstart): Build an agent with sessions
-
 - [Providers](/docs/providers): OpenAI, Anthropic, Vercel AI, LangChain
+
+- [Configuring Sessions](/docs/configuring-sessions): Configure native tools or MCP endpoints for a session
 
 ---

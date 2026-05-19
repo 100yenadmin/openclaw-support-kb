@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "6000bdecdf74e37147b038ba5c91bdc8dd40ce61ecdedf3f924778ba8a3347e8"
+source_hash: "74be191a4abaa9b2176edaf8234ef6d4ef3b6035acceaecab8781b82a3256e75"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -17,13 +17,13 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/openai.md
 
 
-The OpenAI Provider is the default provider for the Composio SDK. It transforms Composio tools into a format compatible with OpenAI's function calling capabilities through both the Responses and Chat Completion APIs.
-
-> Looking for the OpenAI Agents SDK? See the [OpenAI Agents SDK](/docs/providers/openai-agents) provider page.
+Composio integrates with OpenAI through the [Responses API](https://platform.openai.com/docs/api-reference/responses), [Chat Completions API](https://platform.openai.com/docs/api-reference/chat), and [Agents SDK](https://openai.github.io/openai-agents-python/). Pick the tab that matches your integration.
 
 > Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
 
 ### Responses API
+
+The OpenAI Provider is the default provider for the Composio SDK. It transforms Composio tools into a format compatible with OpenAI function calling through the Responses API.
 
 **Install**
 
@@ -41,7 +41,7 @@ npm install @composio/core @composio/openai openai
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -155,6 +155,8 @@ for (const item of response.output) {
 ```
 ### Chat Completions
 
+The `OpenAIProvider` (Chat Completions) is the default provider used by the Composio SDK when no other provider is specified.
+
 **Install**
 
 **Python:**
@@ -169,7 +171,7 @@ npm install @composio/core @composio/openai openai
 ```
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -271,6 +273,89 @@ while (response.choices[0].message.tool_calls) {
 }
 
 console.log(response.choices[0].message.content);
+```
+### Agents SDK
+
+The OpenAI Agents SDK provider transforms Composio tools into the Agents SDK tool format with built-in execution.
+
+**Install**
+
+**Python:**
+
+```bash
+pip install composio composio-openai-agents openai-agents
+```
+**TypeScript:**
+
+```bash
+npm install @composio/core @composio/openai-agents @openai/agents
+```
+**Configure API Keys**
+
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+
+```txt title=".env"
+COMPOSIO_API_KEY=xxxxxxxxx
+OPENAI_API_KEY=xxxxxxxxx
+```
+**Create session and run**
+
+**Python:**
+
+```python
+import asyncio
+from composio import Composio
+from composio_openai_agents import OpenAIAgentsProvider
+from agents import Agent, Runner
+
+composio = Composio(provider=OpenAIAgentsProvider())
+
+# Create a session for your user
+session = composio.create(user_id="user_123")
+tools = session.tools()
+
+agent = Agent(
+    name="Email Agent",
+    instructions="You are a helpful assistant.",
+    tools=tools,
+)
+
+async def main():
+    result = await Runner.run(
+        starting_agent=agent,
+        input="Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'",
+    )
+    print(result.final_output)
+
+asyncio.run(main())
+```
+**TypeScript:**
+
+```typescript
+import { Composio } from "@composio/core";
+import { OpenAIAgentsProvider } from "@composio/openai-agents";
+import { Agent, run } from "@openai/agents";
+
+const composio = new Composio({
+  provider: new OpenAIAgentsProvider(),
+});
+
+// Create a session for your user
+const session = await composio.create("user_123");
+const tools = await session.tools();
+
+const agent = new Agent({
+  name: "Email Agent",
+  instructions: "You are a helpful assistant.",
+  tools,
+});
+
+const result = await run(
+  agent,
+  "Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'"
+);
+
+console.log(result.finalOutput);
 ```
 # Multi-turn chat
 

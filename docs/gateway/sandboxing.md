@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "7fa585380f3a166f4891fd078cb9da7c671ea734ea3b1e835c0dcae7d266f757"
+source_hash: "123ac5b873b2662d7b58f57753937dff5b11dfeb30bc914c2c48265789c7f95f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -107,7 +107,7 @@ To expose host GPUs to Docker sandboxes, set `agents.defaults.sandbox.docker.gpu
 
   * **Config requires host paths**: The `openclaw.json` `workspace` configuration MUST contain the **Host's absolute path** (e.g. `/home/user/.openclaw/workspaces`), not the internal Gateway container path. When OpenClaw asks the Docker daemon to spawn a sandbox, the daemon evaluates paths relative to the Host OS namespace, not the Gateway namespace.
   * **FS bridge parity (identical volume map)**: The OpenClaw Gateway native process also writes heartbeat and bridge files to the `workspace` directory. Because the Gateway evaluates the exact same string (the host path) from within its own containerized environment, the Gateway deployment MUST include an identical volume map linking the host namespace natively (`-v /home/user/.openclaw:/home/user/.openclaw`).
-  * **Codex code mode**: When an OpenClaw sandbox is active, OpenClaw constrains Codex app-server turns to Codex `workspace-write` sandboxing even if the Codex plugin default is `danger-full-access`. Do not mount the host Docker socket into agent sandbox containers or custom Codex sandboxes.
+  * **Codex code mode**: When an OpenClaw sandbox is active, OpenClaw constrains Codex app-server turns to Codex `workspace-write` sandboxing even if the Codex plugin default is `danger-full-access`. The Codex turn network flag follows the OpenClaw sandbox egress setting, so Docker `network: "none"` stays offline and `network: "bridge"` or a custom Docker network allows outbound access. Do not mount the host Docker socket into agent sandbox containers or custom Codex sandboxes.
 
   If you map paths internally without absolute host parity, OpenClaw natively throws an `EACCES` permission error attempting to write its heartbeat inside the container environment because the fully qualified path string doesn't exist natively.
 </Warning>

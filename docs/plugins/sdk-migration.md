@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "4116e88a0398a0b77c899fcf20dd011bdd1e346614abe60abcc980b1b174e8ff"
+source_hash: "df7ad783c4549021111671a715b145f9f5e06a308a24b303e5f6e7a368b936ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -602,7 +602,7 @@ releases.
   | `plugin-sdk/provider-web-search-config-contract` | Provider web-search config helpers                               | Narrow web-search config/credential helpers for providers that do not need plugin-enable wiring                                                                                                                                                          |
   | `plugin-sdk/provider-web-search-contract`        | Provider web-search contract helpers                             | Narrow web-search config/credential contract helpers such as `createWebSearchProviderContractFields`, `enablePluginInConfig`, `resolveProviderWebSearchPluginConfig`, and scoped credential setters/getters                                              |
   | `plugin-sdk/provider-web-search`                 | Provider web-search helpers                                      | Web-search provider registration/cache/runtime helpers                                                                                                                                                                                                   |
-  | `plugin-sdk/provider-tools`                      | Provider tool/schema compat helpers                              | `ProviderToolCompatFamily`, `buildProviderToolCompatFamilyHooks`, and Gemini schema cleanup + diagnostics                                                                                                                                                |
+  | `plugin-sdk/provider-tools`                      | Provider tool/schema compat helpers                              | `ProviderToolCompatFamily`, `buildProviderToolCompatFamilyHooks`, and DeepSeek/Gemini/OpenAI schema cleanup + diagnostics                                                                                                                                |
   | `plugin-sdk/provider-usage`                      | Provider usage helpers                                           | `fetchClaudeUsage`, `fetchGeminiUsage`, `fetchGithubCopilotUsage`, and other provider usage helpers                                                                                                                                                      |
   | `plugin-sdk/provider-stream`                     | Provider stream wrapper helpers                                  | `ProviderStreamFamily`, `buildProviderStreamFamilyHooks`, `composeProviderStreamWrappers`, stream wrapper types, and shared Anthropic/Bedrock/DeepSeek V4/Google/Kilocode/Moonshot/OpenAI/OpenRouter/Z.A.I/MiniMax/Copilot wrapper helpers               |
   | `plugin-sdk/provider-transport-runtime`          | Provider transport helpers                                       | Native provider transport helpers such as guarded fetch, transport message transforms, and writable transport event streams                                                                                                                              |

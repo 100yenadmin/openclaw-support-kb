@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Importing existing connections"
 source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "d1f5c63cb8fd0add89227384193b4a9bebf8e9687e79742c375ad96d4350c255"
+source_hash: "db4249c245ae0c5a4a26f7697b2979177de0769af82506d3c6278adf934925ea"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "importing-existing-connections.md"
@@ -324,10 +324,10 @@ const session = await composio.create('user_123', {
 
 # What to read next
 
-- [Custom auth configs](/docs/using-custom-auth-configuration): Set up auth configs with your own OAuth credentials
-
-- [Connected accounts](/docs/auth-configuration/connected-accounts): Manage connected accounts after importing
+- [Managing multiple accounts](/docs/managing-multiple-connected-accounts): Pin and select connected accounts for a user
 
 - [White-labeling](/docs/white-labeling-authentication): Use your own branding on OAuth consent screens
+
+- [Connection expiry events](/docs/subscribing-to-connection-expiry-events): Detect expired OAuth connections and prompt re-authentication
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "3855b8d419ad7c9d3d019e28253e514368d5cf1fd1e5dcfd3f4fb9e0ae46225b"
+source_hash: "ff0b50a5e56382fd8e3c6fd67550813e4e17602ff715627f847f82e6563001ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/dreaming.md"
@@ -111,6 +111,18 @@ Deep ranking uses six weighted base signals plus phase reinforcement:
 | Conceptual richness | 0.06   | Concept-tag density from snippet/path             |
 
 Light and REM phase hits add a small recency-decayed boost from `memory/.dreams/phase-signals.json`.
+
+## QA shadow trial report coverage
+
+QA Lab includes a report-only scenario for exploring how a future dreaming
+shadow trial could review a candidate memory before promotion. The scenario asks
+an agent to compare a baseline answer with an answer that can use the candidate
+memory, then write a local report with a verdict, reason, and risk flags.
+
+This coverage is intentionally scoped to QA. It verifies that the report artifact
+stays separate from `MEMORY.md` and that the agent does not claim the candidate
+was promoted. It does not add production shadow-trial behavior or change the
+deep-phase promotion engine.
 
 ## Scheduling
 

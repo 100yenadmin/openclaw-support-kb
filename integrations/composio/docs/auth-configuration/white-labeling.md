@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling (direct execution)"
 source: "https://docs.composio.dev/docs/auth-configuration/white-labeling.md"
-source_hash: "e8152656a5535aea18eb43809a0cbf13cbe1f222499455387284cd947eb20688"
+source_hash: "a52127aea5a298e772773c265126d9fe4135b9c8bdf890b1993adf58af2ac2cc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "auth-configuration/white-labeling.md"
@@ -34,7 +34,7 @@ The Connect Link is the hosted page your users see when connecting their account
 
 To replace it with your own branding:
 
-1. Go to **Project Settings** → [**Auth Screen**](https://platform.composio.dev?next_page=/settings/auth-screen)
+1. Go to **Project Settings** → [**Auth Screen**](https://dashboard.composio.dev/~/project/settings/auth-screen)
 2. Upload your **Logo** and set your **App Title**
 
 This applies to all Connect Link flows across all toolkits. Each project has one logo and app title, so if you need different branding per product, use separate projects.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "9b9e6a9513e4920ebac061ad41fb84a95d95d8fc9d596a5412b3f07fd7ab44a8"
+source_hash: "251860c877e684d8764b7b471d00bb3a6a261fc0757d546a506b75c6dd585d9a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -110,11 +110,11 @@ Tasks do **not** replace sessions, cron jobs, or heartbeats - they are the **act
   <Accordion title="Notify defaults for cron and media">
     Main-session cron tasks use `silent` notify policy by default - they create records for tracking but do not generate notifications. Isolated cron tasks also default to `silent` but are more visible because they run in their own session.
 
-    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. Group/channel completions follow the normal visible-reply policy, so the agent uses the message tool when source delivery requires it. If the completion agent fails to produce message-tool delivery evidence in a tool-only route, OpenClaw sends the completion fallback directly to the original channel instead of leaving the media private.
+    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. Generated-media completion events require message-tool delivery: the agent must send the finished media with the `message` tool, then reply `NO_REPLY`. If the completion agent only writes a private final reply or misses the media attachment, OpenClaw marks the completion handoff as failed; it does not auto-post the generated media as a fallback.
   </Accordion>
 
   <Accordion title="Concurrent media-generation guardrail">
-    While a session-backed media-generation task is still active, the tool also acts as a guardrail: repeated `image_generate`, `music_generate`, or `video_generate` calls in that same session return the active task status instead of starting a second concurrent generation. Use `action: "status"` when you want an explicit progress/status lookup from the agent side.
+    While a session-backed media-generation task is still active, media tools also act as guardrails for accidental retries. Repeated `image_generate` calls for the same prompt return the matching active task status, while a distinct image prompt can start its own task. `music_generate` and `video_generate` calls still return the active task status for that session instead of starting a second concurrent generation. Use `action: "status"` when you want an explicit progress/status lookup from the agent side.
   </Accordion>
 
   <Accordion title="What does not create tasks">

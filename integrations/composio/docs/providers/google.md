@@ -1,8 +1,8 @@
 ---
 type: composio_doc
-title: "Google Generative AI"
+title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "03bdebf76f112ad8b2e53875625dd8347edde23d4f75527633b7b28b3d9449e0"
+source_hash: "7e5100c735f94bbb9048b6bcc91114e0f974e2fc92dad2fabd043cdfe4c5f267"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -13,11 +13,17 @@ duplicate_index: 1
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Google Generative AI (/docs/providers/google)
+# Google (/docs/providers/google)
 Source: https://docs.composio.dev/docs/providers/google.md
 
 
-The Google Generative AI provider transforms Composio tools into a format compatible with [Gemini's function calling](https://ai.google.dev/) capabilities.
+Composio integrates with Google through [Gemini function calling](https://ai.google.dev/) and the [Agent Development Kit (ADK)](https://google.github.io/adk-docs/). Pick the tab that matches your integration.
+
+> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
+
+### Gemini
+
+The Google Generative AI provider transforms Composio tools into a format compatible with Gemini function calling.
 
 **Install**
 
@@ -35,7 +41,7 @@ npm install @composio/core @composio/google @google/genai
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -119,6 +125,68 @@ while (response.functionCalls && response.functionCalls.length > 0) {
 }
 
 console.log(response.text);
+```
+### ADK
+
+The Google ADK provider transforms Composio tools into Google ADK's FunctionTool format for use with Google ADK agents. ADK integration is Python-only.
+
+**Install**
+
+```bash
+pip install composio composio_google_adk google-adk
+```
+**Configure API Keys**
+
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
+
+```txt title=".env"
+COMPOSIO_API_KEY=xxxxxxxxx
+GOOGLE_API_KEY=xxxxxxxxx
+```
+**Create session and run**
+
+```python
+from composio import Composio
+from composio_google_adk import GoogleAdkProvider
+from google.adk.agents import Agent
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.genai import types
+
+composio = Composio(provider=GoogleAdkProvider())
+
+# Create a session for your user
+session = composio.create(user_id="user_123")
+tools = session.tools()
+
+agent = Agent(
+    name="email_agent",
+    model="gemini-3-pro-preview",
+    instruction="You are an AI agent that sends emails using Gmail.",
+    tools=tools,
+)
+
+session_service = InMemorySessionService()
+adk_session = session_service.create_session_sync(
+    app_name="email_agent",
+    user_id="user_123",
+    session_id="session_1",
+)
+runner = Runner(
+    agent=agent,
+    app_name="email_agent",
+    session_service=session_service,
+)
+
+content = types.Content(
+    role="user",
+    parts=[types.Part(text="Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'")],
+)
+
+events = runner.run(user_id="user_123", session_id="session_1", new_message=content)
+for event in events:
+    if event.is_final_response() and event.content and event.content.parts:
+        print(event.content.parts[0].text)
 ```
 
 ---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode"
-source_hash: "0b6a3dcac1bbdac9b87f8b5b9998dd3535706bdcaa25d1f9ac9c39308949e023"
+source_hash: "082aed9ae520db25bcdc9a3afec9503a286f76e6c782d51acbcea0df3b5eac3c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/voice-mode.md"
@@ -404,6 +404,11 @@ voice:
 
 # Speech-to-Text
 stt:
+  enabled: true                     # set to false to skip auto-transcription —
+                                    # the gateway still caches the audio file and
+                                    # passes its path to the agent as part of the
+                                    # inbound message, useful for custom pipelines
+                                    # (diarization, alignment, archival, etc.)
   provider: "local"                  # "local" (free) | "groq" | "openai"
   local:
     model: "base"                    # tiny, base, small, medium, large-v3

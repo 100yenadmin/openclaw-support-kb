@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/docs/triggers.md"
-source_hash: "74df250d6f5d2572e7babc572e92645b58c4aa69aa43581980f564068b0caa53"
+source_hash: "f4207dfe8ff3e31ee1505fa58119bf80336aba1462d18a8fc6828d4680e526d8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "triggers.md"
@@ -45,7 +45,7 @@ A trigger type is a template that defines what event to listen for and what conf
 
 **What is a trigger instance?**
 
-When you create a trigger from a type, it's scoped to a specific [user and connected account](/docs/users-and-sessions). For example, creating a `GITHUB_COMMIT_EVENT` trigger for user `alice` on the `composio` repo produces a trigger instance with its own `ti_*` ID that you can enable, disable, or delete independently.
+When you create a trigger from a type, it's scoped to a specific [user and connected account](/docs/how-composio-works). For example, creating a `GITHUB_COMMIT_EVENT` trigger for user `alice` on the `composio` repo produces a trigger instance with its own `ti_*` ID that you can enable, disable, or delete independently.
 
 > Triggers are scoped to a connected account. If you haven't set up authentication yet, see [Authentication](/docs/authentication).
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "3b45a2015f0dd7c407fafff066fee23a956e3ba948531ace22b3041ca948c15e"
+source_hash: "7cad17df61776c4d5b626798e9fca3a4e5de162d099b8da101f7d7ee7245dad9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -21,7 +21,7 @@ This guide is for developers who are using Composio's **direct tool execution** 
 
 With sessions, you don't need to manage tool fetching, authentication, or execution yourself. You create a session and it handles everything. Your existing auth configs and connected accounts carry over, so your users don't need to re-authenticate.
 
-If you're starting fresh, skip this guide and head to the [Quickstart](/docs/quickstart).
+If you're starting fresh, use [Configuring Sessions](/docs/configuring-sessions) instead.
 
 # What changes
 
@@ -266,8 +266,8 @@ See [White-labeling authentication](/docs/white-labeling-authentication) for mor
 
 # Get started
 
-- [Quickstart](/docs/quickstart): Build your first agent with sessions
-
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, and session methods
+
+- [What is a session?](/docs/how-composio-works): Understand how sessions scope tools and connected accounts
 
 ---

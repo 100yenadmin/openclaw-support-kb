@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "7cb9e9988deb619011954e1060dd5b2452440222ca83ab217d8e2c40e7410846"
+source_hash: "8198b352b25f224e65f9c0637710629f3488341e9fb2a73fb1b06ad419ccf2dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
@@ -62,6 +62,7 @@ Scope intent:
 * `plugins.entries.voice-call.config.streaming.providers.*.apiKey`
 * `plugins.entries.voice-call.config.tts.providers.*.apiKey`
 * `plugins.entries.voice-call.config.twilio.authToken`
+* `tools.web.search.*.apiKey`
 * `tools.web.search.apiKey`
 * `gateway.auth.password`
 * `gateway.auth.token`

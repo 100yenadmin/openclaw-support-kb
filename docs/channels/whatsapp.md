@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "9c1c36cc1723c37179f69df174c8df5fa439c3a79b4d28a1528692f01fdeab7a"
+source_hash: "af28b4da5fdd3f07978506ae22faa655f300fade720b7903bb7fc2b86863dd34"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -616,6 +616,8 @@ Behavior notes:
     * `groups` allowlist entries
     * mention gating (`requireMention` + mention patterns)
     * duplicate keys in `openclaw.json` (JSON5): later entries override earlier ones, so keep a single `groupPolicy` per scope
+
+    If `channels.whatsapp.groups` is present, WhatsApp can still observe messages from other groups, but OpenClaw drops them before session routing. Add the group JID to `channels.whatsapp.groups` or add `groups["*"]` to admit all groups while keeping sender authorization under `groupPolicy` and `groupAllowFrom`.
   </Accordion>
 
   <Accordion title="Bun runtime warning">

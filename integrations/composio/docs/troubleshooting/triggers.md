@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/docs/troubleshooting/triggers.md"
-source_hash: "9603ec56c2ccaf6759dee6fe15fd2e99cb88098513a0eec2d753d33d84b56544"
+source_hash: "5f3c6cee315a50c698099a8ad853dc6e96aeeccaef6a458714d32287a59a8d8e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "troubleshooting/triggers.md"
@@ -26,7 +26,7 @@ Check the error message — the connected account might not have sufficient perm
 * **Polling triggers** (e.g., Gmail): These check for new events on an interval you configure. For Composio managed auth, intervals below 15 minutes are not supported.
 * **Webhook URL**: Ensure your URL is publicly accessible and returns a `2xx` status code.
 * **Trigger status**: Verify the trigger is enabled, not disabled.
-* **Logs**: Check the [trigger logs](https://platform.composio.dev?next_page=/logs/triggers) in the dashboard for delivery attempts and errors.
+* **Logs**: Check the [trigger logs](https://dashboard.composio.dev/~/project/logs?tab=triggers) in the dashboard for delivery attempts and errors.
 
 # Type errors with trigger payloads
 

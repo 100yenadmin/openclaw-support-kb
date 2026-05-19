@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "3e47c55246858b7644faca119ae0665574839d993799b87ecc36bca445b5cb50"
+source_hash: "585e6494dded0ed137d67973b8a9c2a9ef3f07e5bcb2c3bc27ea1a72b0b7da30"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -21,8 +21,12 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
 
 <Steps>
   <Step title="Choose auth">
-    Use either an API key from the [xAI console](https://console.x.ai/) or
-    xAI Grok OAuth with a SuperGrok subscription.
+    Use either an API key from the [xAI console](https://console.x.ai/),
+    xAI OAuth browser sign-in with an eligible xAI account, or xAI device-code
+    sign-in for remote/VPS hosts where a localhost browser callback is awkward.
+    OAuth does not require an xAI API key, and OpenClaw does not require the
+    Grok Build app. xAI may still label the consent app as Grok Build because
+    OpenClaw uses xAI's shared OAuth client.
   </Step>
 
   <Step title="Sign in">
@@ -31,7 +35,9 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
     openclaw onboard --auth-choice xai-api-key
     openclaw onboard --auth-choice xai-oauth
+    openclaw onboard --auth-choice xai-device-code
     openclaw models auth login --provider xai --method oauth
+    openclaw models auth login --provider xai --device-code
     ```
   </Step>
 
@@ -47,7 +53,8 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
 <Note>
   OpenClaw uses the xAI Responses API as the bundled xAI transport. The same
   credential from `openclaw onboard --auth-choice xai-api-key` or
-  `openclaw onboard --auth-choice xai-oauth` can also power first-class
+  `openclaw onboard --auth-choice xai-oauth` /
+  `openclaw onboard --auth-choice xai-device-code` can also power first-class
   `x_search`, remote `code_execution`, and xAI image/video generation.
   Speech and transcription currently require `XAI_API_KEY` or provider config.
   `XAI_API_KEY` or plugin web-search config can power Grok-backed `web_search` too.
@@ -57,6 +64,12 @@ OpenClaw ships a bundled `xai` provider plugin for Grok models.
   and, by default, `x_search` through an operator xAI Responses proxy.
   `code_execution` tuning lives under `plugins.entries.xai.config.codeExecution`.
 </Note>
+
+<Tip>
+  Use `xai-device-code` when signing in from SSH, Docker, or a VPS. OpenClaw
+  prints an xAI URL and short code; finish sign-in in any local browser while the
+  remote process polls xAI for the completed token exchange.
+</Tip>
 
 ## Built-in catalog
 
@@ -416,9 +429,11 @@ Legacy aliases still normalize to the canonical bundled ids:
 
   <Accordion title="Known limits">
     * xAI auth can use an API key, environment variable, plugin config fallback,
-      or xAI Grok OAuth with a SuperGrok subscription. OAuth uses a local
-      callback on `127.0.0.1:56121`; for remote hosts, forward that port before
-      opening the sign-in URL.
+      or xAI OAuth browser sign-in with an eligible xAI account. OAuth uses a
+      local callback on `127.0.0.1:56121`; for remote hosts, forward that port
+      before opening the sign-in URL. xAI decides which accounts can receive
+      OAuth API tokens, and the consent page may show Grok Build even though
+      OpenClaw does not require the Grok Build app.
     * `grok-4.20-multi-agent-experimental-beta-0304` is not supported on the
       normal xAI provider path because it requires a different upstream API
       surface than the standard OpenClaw xAI transport.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
-source_hash: "43e6342215efdcba18b7c813bdfaa7bbb97ac03f2d7e721a3c11779b3479140f"
+source_hash: "de0b60f69967d8fcbe8405c49d22bc1ba95ffe80fd7211d97643e3c909c12c19"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-lancedb.md"
@@ -245,12 +245,12 @@ openclaw ltm search "project preferences"
 openclaw ltm stats
 ```
 
-The plugin also extends `openclaw memory` with a non-vector `query` subcommand
-that runs against the LanceDB table directly:
+The `query` subcommand runs a non-vector query against the LanceDB table
+directly:
 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw memory query --cols id,text,createdAt --limit 20
-openclaw memory query --filter "category = 'preference'" --order-by createdAt:desc
+openclaw ltm query --cols id,text,createdAt --limit 20
+openclaw ltm query --filter "category = 'preference'" --order-by createdAt:desc
 ```
 
 * `--cols <columns>`: comma-separated column allowlist (defaults to `id`, `text`, `importance`, `category`, `createdAt`).

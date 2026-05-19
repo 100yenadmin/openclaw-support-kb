@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
-source_hash: "b390517e9553a237f1e1686ee9d5583b9a7389b3c983e920b695110280cff55d"
+source_hash: "5d3891d5805c28d194ebd3b31e1c016cd70a62ff13b05df340e5afab89370276"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/node.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/install/node
 
 
 
-OpenClaw requires **Node 22.16 or newer**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
+OpenClaw requires **Node 22.19 or newer**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
 
 ## Check your version
 
@@ -23,7 +23,7 @@ OpenClaw requires **Node 22.16 or newer**. **Node 24 is the default and recommen
 node -v
 ```
 
-If this prints `v24.x.x` or higher, you're on the recommended default. If it prints `v22.16.x` or higher, you're on the supported Node 22 LTS path, but we still recommend upgrading to Node 24 when convenient. If Node isn't installed or the version is too old, pick an install method below.
+If this prints `v24.x.x` or higher, you're on the recommended default. If it prints `v22.19.x` or higher, you're on the supported Node 22 LTS path, but we still recommend upgrading to Node 24 when convenient. If Node isn't installed or the version is too old, pick an install method below.
 
 ## Install Node
 

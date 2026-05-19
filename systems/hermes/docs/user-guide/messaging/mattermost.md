@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Mattermost"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/mattermost"
-source_hash: "5dab9a3c11bfb3bf45dac88850deee60141dc9ec1053a645e47f48d5b151fa19"
+source_hash: "8948689cf738d465182a5f0252947beaf92379dc044bd96c1e759993925612f2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/mattermost.md"
@@ -237,6 +237,33 @@ By default, the bot only responds in channels when `@mentioned`. You can change 
 To find a channel ID in Mattermost: open the channel, click the channel name header, and look for the ID in the URL or channel details.
 
 When the bot is `@mentioned`, the mention is automatically stripped from the message before processing.
+
+## Channel allowlist (`allowed_channels`)
+
+Restrict the bot to a fixed set of Mattermost channels. When set, the bot **only** responds in channels whose ID appears in the list — messages from any other channel are silently ignored, even if the bot is `@mentioned`.
+
+**DMs are exempt** from this filter, so authorized users can always reach the bot in a direct message.
+
+```yaml
+mattermost:
+  allowed_channels:
+    - "abc123def456ghi789jkl012mno"   # #ops
+    - "xyz987uvw654rst321opq098nml"   # #incident-response
+```
+
+Or via env var (comma-separated):
+
+```bash
+MATTERMOST_ALLOWED_CHANNELS="abc123def456ghi789jkl012mno,xyz987uvw654rst321opq098nml"
+```
+
+Behavior:
+
+- Empty / unset → no restriction (fully backward compatible).
+- Non-empty → channel ID must be on the list, or the message is dropped before any other gating (mention requirement, `MATTERMOST_FREE_RESPONSE_CHANNELS`, etc.) runs.
+- Find a channel ID via the Mattermost UI → channel header → "View Info", or read it from the channel URL.
+
+See also: [admin/user slash command split](../../reference/slash-commands.md#permissions-and-adminuser-split).
 
 ## Troubleshooting
 

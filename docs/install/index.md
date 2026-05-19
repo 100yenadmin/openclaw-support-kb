@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install/index"
-source_hash: "9eaaf5e54fab921f945e8d069c576a93e2056c4d6ccb34dd65e6d4e32a1c9eb9"
+source_hash: "07903f577d84827bf06c4b0fa34820c0c5f180ec0feb2e9a20a54cbcd1608bf1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/index.md"
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/install/index
 
 ## System requirements
 
-* **Node 24** (recommended) or Node 22.16+ - the installer script handles this automatically
+* **Node 24** (recommended) or Node 22.19+ - the installer script handles this automatically
 * **macOS, Linux, or Windows** - both native Windows and WSL2 are supported; WSL2 is more stable. See [Windows](/platforms/windows).
 * `pnpm` is only needed if you build from source
 

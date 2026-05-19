@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "9abb9cb69e6bf1bb1dee26d7385164b3fa062f301eefe5ac48c5730498d6decb"
+source_hash: "3356a5b6a6a94f1fd391c145e343d3fdc05840a1a2d713a0256e97c6ae107c6a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -60,7 +60,7 @@ A progress draft has two parts:
 
 | Part           | Purpose                                                                               |
 | -------------- | ------------------------------------------------------------------------------------- |
-| Label          | A short starter/status line such as `Thinking...` or `Shelling...`.                   |
+| Label          | A short starter/status line such as `Working` or `Shelling`.                          |
 | Progress lines | Compact run updates using the same tool icons and detail formatter as verbose output. |
 
 The label appears after the agent starts meaningful work and either remains busy
@@ -102,29 +102,29 @@ normal block delivery. Use `streaming.block.enabled` or legacy
 Progress labels live under `channels.<channel>.streaming.progress`.
 
 The default label is `auto`, which chooses from OpenClaw's built-in
-single-word-with-ellipsis label pool:
+single-word label pool:
 
 ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
-Thinking...
-Shelling...
-Scuttling...
-Clawing...
-Pinching...
-Molting...
-Bubbling...
-Tiding...
-Reefing...
-Cracking...
-Sifting...
-Brining...
-Nautiling...
-Krilling...
-Barnacling...
-Lobstering...
-Tidepooling...
-Pearling...
-Snapping...
-Surfacing...
+Working
+Shelling
+Scuttling
+Clawing
+Pinching
+Molting
+Bubbling
+Tiding
+Reefing
+Cracking
+Sifting
+Brining
+Nautiling
+Krilling
+Barnacling
+Lobstering
+Tidepooling
+Pearling
+Snapping
+Surfacing
 ```
 
 Use a fixed label:

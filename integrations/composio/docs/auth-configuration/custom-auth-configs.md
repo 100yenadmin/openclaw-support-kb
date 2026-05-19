@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Auth Configs"
 source: "https://docs.composio.dev/docs/auth-configuration/custom-auth-configs.md"
-source_hash: "2d3bd3a09eb94d26289d36baffee62836ca3c69d8c820331eeec91b9ea3ffce1"
+source_hash: "db52b25e5158c3b31ad37cdb0e078b2c84371f7c85103676c7cc0cef518e9491"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "auth-configuration/custom-auth-configs.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/auth-configuration/custom-auth-configs.md
 
 
-> If you're building an agent, we recommend using [sessions](/docs/configuring-sessions) instead. See [Using custom auth configs](/docs/using-custom-auth-configuration) for how to use custom credentials with sessions.
+> If you're building an agent, we recommend using [sessions](/docs/configuring-sessions) instead. See [Managed vs custom auth](/docs/custom-app-vs-managed-app) for how to use custom credentials with sessions.
 
 Auth configs control how users authenticate with a toolkit. By default, Composio provides managed credentials for many toolkits. You create a custom auth config when the defaults don't fit your needs.
 

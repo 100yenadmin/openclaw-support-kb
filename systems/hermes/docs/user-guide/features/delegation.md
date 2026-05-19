@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "926073405192ffe587a6b2f4c80fe2a858b6e9eb94778878369b68a89abc2b66"
+source_hash: "9aebc1a7f0ce782c3c94bf83e8727a001a7664cf2940fe30b0851f2c9481908d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -281,6 +281,7 @@ delegation:
   # orchestrator_enabled: true              # Disable to force all children to leaf role.
   model: "google/gemini-3-flash-preview"             # Optional provider/model override
   provider: "openrouter"                             # Optional built-in provider
+  api_mode: anthropic_messages                       # optional; auto-detected from base_url for anthropic_messages endpoints
 
 # Or use a direct custom endpoint instead of provider:
 delegation:
@@ -289,6 +290,8 @@ delegation:
   api_key: "local-key"
   # api_mode: "anthropic_messages"  # Optional. Wire protocol override for base_url ("chat_completions", "codex_responses", or "anthropic_messages"). Empty = auto-detect from URL (e.g. /anthropic suffix). Set explicitly for endpoints the heuristic can't classify (Azure AI Foundry, MiniMax, Zhipu GLM, LiteLLM proxies, …).
 ```
+
+When `base_url` points at an Anthropic-compatible endpoint — for example a path ending in `/anthropic`, an Azure Foundry Claude route, or a MiniMax `/anthropic` proxy — `api_mode` is auto-detected as `anthropic_messages` so the subagent uses the right wire format without you setting anything. Set `api_mode` explicitly when the auto-detection guess is wrong (rare).
 
 :::tip
 The agent handles delegation automatically based on the task complexity. You don't need to explicitly ask it to delegate — it will do so when it makes sense.

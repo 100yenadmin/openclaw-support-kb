@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
-source_hash: "2208a30964d5381459d044eaf34ef955aac486b2558565d3be10f35bff2b1e06"
+source_hash: "e2bce044b83f6026c38938d39bab5d7b01a828a6bfa0bf36718430a55b5c39d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/raspberry-pi.md"
@@ -147,6 +147,8 @@ export OPENCLAW_NO_RESPAWN=1
 EOF
 source ~/.bashrc
 ```
+
+`OPENCLAW_NO_RESPAWN=1` keeps routine Gateway restarts in-process, which avoids extra process handoffs and keeps PID tracking simple on small hosts.
 
 **Reduce memory usage** -- For headless setups, free GPU memory and disable unused services:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "61cf06e86eee4ac682036908365fa64701deaf257c627e7ef68da4cd7f0e06fd"
+source_hash: "edbcfce539d95854817eec6231588e12a217de367026e4a70d71cd202349f4e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manifest.md"
@@ -250,12 +250,13 @@ stay in the plugin runtime.
 
 Each metadata entry supports:
 
-| Field           | Required | Type       | What it means                                                                                                                       |
-| --------------- | -------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `aliases`       | No       | `string[]` | Additional provider ids that should count as static auth aliases for the generation provider.                                       |
-| `authProviders` | No       | `string[]` | Provider ids whose configured auth profiles should count as auth for this generation provider.                                      |
-| `configSignals` | No       | `object[]` | Cheap config-only availability signals for local or self-hosted providers that can be configured without auth profiles or env vars. |
-| `authSignals`   | No       | `object[]` | Explicit auth signals. When present, these replace the default signal set from the provider id, `aliases`, and `authProviders`.     |
+| Field                  | Required | Type       | What it means                                                                                                                                       |
+| ---------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aliases`              | No       | `string[]` | Additional provider ids that should count as static auth aliases for the generation provider.                                                       |
+| `authProviders`        | No       | `string[]` | Provider ids whose configured auth profiles should count as auth for this generation provider.                                                      |
+| `configSignals`        | No       | `object[]` | Cheap config-only availability signals for local or self-hosted providers that can be configured without auth profiles or env vars.                 |
+| `authSignals`          | No       | `object[]` | Explicit auth signals. When present, these replace the default signal set from the provider id, `aliases`, and `authProviders`.                     |
+| `referenceAudioInputs` | No       | `boolean`  | Video-generation only. Set to `true` when the provider accepts reference audio assets; otherwise `video_generate` hides audio reference parameters. |
 
 Each `configSignals` entry supports:
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "2ec649e8e077c5f90ece8f3442498594dd03cf3d91d5d0da4b1ddbab9f09ec8c"
+source_hash: "d36e2f361d4d5e4726174813390da798102b53831822ff5df8170f8ffdb83980"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -35,7 +35,7 @@ npm install @composio/core @composio/llamaindex @llamaindex/openai @llamaindex/w
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

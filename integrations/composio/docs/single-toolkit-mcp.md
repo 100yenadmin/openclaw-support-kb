@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "000eb17ff4846527138aaa3acbff8022ecd6c6e7e3e024a99dbf66df0e9ab94e"
+source_hash: "9bf1a29b99f4a96c9de44e99e765d1c021e4c07df908897b1c056c2f343026a5"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/single-toolkit-mcp.md
 
 
-> For most use cases, we recommend using the [quickstart](/docs/quickstart). This provides dynamic tool access and a much better MCP experience with context management handled by us.
+> For most use cases, use a regular [session](/docs/configuring-sessions) instead. Sessions provide dynamic tool access and a much better MCP experience with context management handled by us.
 
 # Install the SDK
 
@@ -92,7 +92,7 @@ const server = await composio.mcp.create("my-gmail-server", {
 console.log(`Server created: ${server.id}`);
 ```
 
-> You can also create and manage MCP configs from the [Composio dashboard](https://platform.composio.dev?next_page=/mcp-configs).
+> You can also create and manage MCP configs from the [Composio dashboard](https://dashboard.composio.dev/~/org/connect/clients).
 
 ### Generate user URLs
 
@@ -304,7 +304,7 @@ if (result.deleted) {
 - [Providers](/docs/providers):
 Use with Anthropic, OpenAI, and other frameworks
 
-- [Quickstart](/docs/quickstart):
-Build an agent (recommended)
+- [Configuring Sessions](/docs/configuring-sessions):
+Configure the recommended dynamic MCP endpoint
 
 ---

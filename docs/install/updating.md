@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "04fd471d1c2fa6ce695aad454eb3a40db9d721a9656b5cb39a939e9910745de1"
+source_hash: "c568bb1fa417482f571351c7debef9ce10c4a79b754efd9aacb2f362e8da2c52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -107,10 +107,35 @@ npm i -g openclaw@latest
 ```
 
 Prefer `openclaw update` for supervised installs because it can coordinate the
-package swap with the running Gateway service. If you update manually while a
-managed Gateway is running, restart the Gateway immediately after the package
-manager finishes so the old process does not keep serving from replaced package
-files.
+package swap with the running Gateway service. If you update manually on a
+supervised install, stop the managed Gateway before the package manager starts.
+Package managers replace files in place, and a running Gateway can otherwise try
+to load core or plugin files while the package tree is temporarily half-swapped.
+Restart the Gateway after the package manager finishes so the service picks up
+the new install.
+
+For a root-owned Linux system-global install, if `openclaw update` fails with
+`EACCES` and you recover with system npm, keep the Gateway stopped through the
+manual package replacement. Use the same `openclaw` profile flags or environment
+you normally use for that Gateway. Replace `/usr/bin/npm` with the system npm
+that owns the root-owned global prefix on your host:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw gateway stop
+sudo /usr/bin/npm i -g openclaw@latest
+openclaw gateway install --force
+openclaw gateway restart
+```
+
+Then verify the service:
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw --version
+curl -fsS http://127.0.0.1:18789/readyz
+openclaw plugins list --json
+openclaw gateway status --deep --json
+openclaw doctor --lint --json
+```
 
 When `openclaw update` manages a global npm install, it installs the target into
 a temporary npm prefix first, verifies the packaged `dist` inventory, then swaps

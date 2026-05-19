@@ -1,21 +1,24 @@
 ---
 type: openclaw_release_index
 channel: stable
-selected_release: v2026.5.12
-stable_release: v2026.5.12
-beta_release: v2026.5.16-beta.7
+selected_release: v2026.5.18
+stable_release: v2026.5.18
+beta_release: v2026.5.19-beta.1
 ---
 
 # OpenClaw Releases
 
-Selected stable release: v2026.5.12
+Selected stable release: v2026.5.18
 
-Latest stable release: v2026.5.12
+Latest stable release: v2026.5.18
 
-Latest beta/prerelease: v2026.5.16-beta.7
+Latest beta/prerelease: v2026.5.19-beta.1
 
 Source: https://github.com/openclaw/openclaw/releases
 
+- v2026.5.19-beta.1 (beta, 2026-05-18T22:58:13Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.19-beta.1
+- v2026.5.18 (stable, 2026-05-18T18:54:22Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.18
+- v2026.5.18-beta.1 (beta, 2026-05-18T16:13:00Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.18-beta.1
 - v2026.5.16-beta.7 (beta, 2026-05-18T08:47:11Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.16-beta.7
 - v2026.5.16-beta.6 (beta, 2026-05-18T01:09:36Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.16-beta.6
 - v2026.5.16-beta.5 (beta, 2026-05-17T17:59:02Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.16-beta.5
@@ -63,6 +66,3 @@ Source: https://github.com/openclaw/openclaw/releases
 - v2026.4.26 (stable, 2026-04-28T01:11:02Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.26
 - v2026.4.25 (stable, 2026-04-27T12:45:30Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.25
 - v2026.4.25-beta.4 (beta, 2026-04-26T13:24:41Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.25-beta.4
-- v2026.4.25-beta.3 (beta, 2026-04-26T13:00:46Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.25-beta.3
-- v2026.4.25-beta.2 (beta, 2026-04-26T12:23:17Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.25-beta.2
-- v2026.4.25-beta.1 (beta, 2026-04-26T11:21:56Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.4.25-beta.1

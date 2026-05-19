@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "802e6d8cfea9680609a59808f3ea432b7674ad19093cbcf13b2887bac3269013"
+source_hash: "7a24fd7209490247ce0a024f37b93651cdea8fafa03d59322cad2073f1d41c25"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "configuring-sessions.md"
@@ -356,7 +356,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-See [White-labeling authentication](/docs/white-labeling-authentication) for branding, or [Using custom auth configs](/docs/using-custom-auth-configuration) for toolkits that require your own credentials.
+See [White-labeling authentication](/docs/white-labeling-authentication) for branding, or [Managed vs custom auth](/docs/custom-app-vs-managed-app) for toolkits that require your own credentials.
 
 # Account selection
 
@@ -499,7 +499,7 @@ const { mcp } = session;
 console.log(mcp.url);
 ```
 
-For framework examples, see provider-specific documentation like [OpenAI Agents](/docs/providers/openai-agents) or [Vercel AI SDK](/docs/providers/vercel).
+For framework examples, see provider-specific documentation like [OpenAI](/docs/providers/openai) or [Vercel AI SDK](/docs/providers/vercel).
 
 ## tools()
 
@@ -582,12 +582,12 @@ Returns the first 20 toolkits by default.
 
 # What to read next
 
-- [In-chat authentication](/docs/authenticating-users/in-chat-authentication): Let the agent prompt users to connect accounts during conversation
-
-- [Manual authentication](/docs/authenticating-users/manually-authenticating): Pre-authenticate users before chat using Connect Links and session.authorize()
+- [Tools and toolkits](/docs/tools-and-toolkits): Understand the meta tools and toolkit catalog behind session tools
 
 - [Enable & disable toolkits](/docs/toolkits/enable-and-disable-toolkits): Control which toolkits and individual tools are available in sessions
 
-- [White-labeling authentication](/docs/white-labeling-authentication): Use your own OAuth apps so users see your branding on consent screens
+- [Workbench](/docs/workbench): Configure the sandbox for bulk operations and data processing
+
+- [In-chat authentication](/docs/authenticating-users/in-chat-authentication): Let the agent prompt users to connect accounts during conversation
 
 ---

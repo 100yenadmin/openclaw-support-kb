@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "5fd2735e891dd90f2d62348e4e772313c07102aee523a064ffad9bde81e92f76"
+source_hash: "5c23b0ccf42499d224e078ebc7faf3451e4a0125ff26d59faa3937a74fde27af"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -646,6 +646,24 @@ discord:
 When the flag is on, any uploaded file is downloaded, cached under `~/.hermes/cache/documents/`, and surfaced to the agent as a `DOCUMENT`-typed message event with `application/octet-stream` MIME. The agent receives a context note pointing at the local path (auto-translated for Docker/Modal sandboxed terminals via `to_agent_visible_cache_path`) and can inspect the file with `terminal` (`ffprobe`, `unzip`, `file`, `strings`, etc.) or `read_file`. The file body is **not** inlined into the prompt — only the path — so binary uploads don't blow up the context window.
 
 Known-text formats already in the allowlist (`.txt`, `.md`, `.log`) continue to have their contents auto-injected up to 100 KiB; that behavior is unchanged when the flag is on.
+
+Equivalent env vars: `DISCORD_ALLOW_ANY_ATTACHMENT=true` and `DISCORD_MAX_ATTACHMENT_BYTES=33554432` (or `0` for no cap).
+
+:::warning Memory cost of unlimited
+Disabling the size cap (`max_attachment_bytes: 0`) means a user can drop a multi-GB file on the bot and the gateway will dutifully buffer it through memory while caching to disk. Only set this in trusted single-user installs. For shared bots, keep the default 32 MiB or raise it conservatively.
+:::
+
+## Interactive Prompts (clarify)
+
+When the agent calls the `clarify` tool — to ask which approach you prefer, get post-task feedback, or check before a non-trivial decision — Discord renders the question with **one button per choice**:
+
+> Which framework should I use for the dashboard?
+>
+> [1. Next.js] [2. Remix] [3. Astro] [Other (type answer)]
+
+Click a numbered button to answer, or click **Other** to type a free-form response (the next message you send in that channel becomes the answer). Open-ended `clarify` calls (no preset choices) skip the buttons and just capture your next message.
+
+The buttons disable themselves once a choice is made so duplicate clicks don't double-resolve the prompt. Configure the response timeout via `agent.clarify_timeout` in `~/.hermes/config.yaml` (default `600` seconds). If you don't respond within the timeout, the agent unblocks with a sentinel message and adapts rather than hanging.
 
 ## Home Channel
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "d30a7948e2bda4854081eeeed3602b4d08bbde63aa754dedd0794893538333f8"
+source_hash: "bb8d5815277479526370b38bb8c0f73cf3812253d66c35099ee6f4c3263e7e91"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -17,7 +17,13 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/langchain.md
 
 
-The LangChain provider transforms Composio tools into LangChain's [StructuredTool](https://python.langchain.com/docs/how_to/custom_tools/) format with built-in execution.
+Composio integrates with [LangChain](https://python.langchain.com/) and [LangGraph](https://langchain-ai.github.io/langgraph/). Pick the tab that matches your integration.
+
+> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
+
+### LangChain
+
+The LangChain provider transforms Composio tools into LangChain's StructuredTool format with built-in execution.
 
 **Install**
 
@@ -35,7 +41,7 @@ npm install @composio/core @composio/langchain @langchain/openai @langchain/lang
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -114,6 +120,43 @@ const finalState = await app.invoke({
   messages: [new HumanMessage("Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'")],
 });
 console.log(finalState.messages[finalState.messages.length - 1].content);
+```
+### LangGraph
+
+The LangGraph provider transforms Composio tools into LangChain StructuredTool format for use with LangGraph agents. LangGraph integration is Python-only.
+
+**Install**
+
+```bash
+pip install composio composio_langgraph langgraph langchain_openai
+```
+**Configure API Keys**
+
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+
+```txt title=".env"
+COMPOSIO_API_KEY=xxxxxxxxx
+OPENAI_API_KEY=xxxxxxxxx
+```
+**Create session and run**
+
+```python
+from composio import Composio
+from composio_langgraph import LanggraphProvider
+from langchain.agents import create_agent
+from langchain_openai import ChatOpenAI
+
+composio = Composio(provider=LanggraphProvider())
+llm = ChatOpenAI(model="gpt-5.2")
+
+# Create a session for your user
+session = composio.create(user_id="user_123")
+tools = session.tools()
+
+agent = create_agent(tools=tools, model=llm)
+result = agent.invoke({"messages": [("user", "Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'")]})
+
+print(result["messages"][-1].content)
 ```
 
 ---

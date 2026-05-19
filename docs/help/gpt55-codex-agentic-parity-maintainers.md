@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex parity maintainer notes"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity-maintainers"
-source_hash: "bc361a657dd6c853982aa04dcb55410b7a5dae4d57e3e935eb3bcd063091dc66"
+source_hash: "6f81e0cf737c3392987f4cfc970da8ebd687d22caa0f5d38c9cd47daa4c142ad"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
@@ -68,7 +68,7 @@ Does not own:
 
 Owns:
 
-* first-wave GPT-5.5 vs Opus 4.6 scenario pack
+* first-wave GPT-5.5 vs Opus 4.7 scenario pack
 * parity documentation
 * parity report and release-gate mechanics
 
@@ -132,7 +132,7 @@ Expected artifacts from PR D:
 
 ## Release gate
 
-Do not claim GPT-5.5 parity or superiority over Opus 4.6 until:
+Do not claim GPT-5.5 parity or superiority over Opus 4.7 until:
 
 * PR A, PR B, and PR C are merged
 * PR D runs the first-wave parity pack cleanly
@@ -142,7 +142,7 @@ Do not claim GPT-5.5 parity or superiority over Opus 4.6 until:
 ```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
 flowchart LR
     A["PR A-C merged"] --> B["Run GPT-5.5 parity pack"]
-    A --> C["Run Opus 4.6 parity pack"]
+    A --> C["Run Opus 4.7 parity pack"]
     B --> D["qa-suite-summary.json"]
     C --> E["qa-suite-summary.json"]
     D --> F["qa parity-report"]
@@ -155,7 +155,7 @@ flowchart LR
 
 The parity harness is not the only evidence source. Keep this split explicit in review:
 
-* PR D owns the scenario-based GPT-5.5 vs Opus 4.6 comparison
+* PR D owns the scenario-based GPT-5.5 vs Opus 4.7 comparison
 * PR B deterministic suites still own auth/proxy/DNS and full-access truthfulness evidence
 
 ## Quick maintainer merge workflow
@@ -188,7 +188,7 @@ If any one of the evidence bar items is missing, request changes instead of merg
 | No fake progress or fake tool completion | PR A + PR D   | parity fake-success count plus scenario-level report details        |
 | No false `/elevated full` guidance       | PR B          | deterministic runtime-truthfulness suites                           |
 | Replay/liveness failures remain explicit | PR C + PR D   | lifecycle/replay suites plus `compaction-retry-mutating-tool`       |
-| GPT-5.5 matches or beats Opus 4.6        | PR D          | `qa-agentic-parity-report.md` and `qa-agentic-parity-summary.json`  |
+| GPT-5.5 matches or beats Opus 4.7        | PR D          | `qa-agentic-parity-report.md` and `qa-agentic-parity-summary.json`  |
 
 ## Reviewer shorthand: before vs after
 

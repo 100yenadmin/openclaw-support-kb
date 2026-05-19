@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "d845a4c564a69815d6b21b951543303ee45207e5ed56a8d025d65303305ab62e"
+source_hash: "2d5cbf33d78a27d23d143553f49a968146931ee3ee1e6237b1e3aed6f1eecc0f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -321,16 +321,19 @@ lives on the [First-run FAQ](/help/faq-first-run).
     openclaw skills install <skill-slug>
     openclaw skills install <skill-slug> --version <version>
     openclaw skills install <skill-slug> --force
+    openclaw skills install <skill-slug> --global
     openclaw skills update --all
+    openclaw skills update --all --global
     openclaw skills list --eligible
     openclaw skills check
     ```
 
     Native `openclaw skills install` writes into the active workspace `skills/`
-    directory. Install the separate `clawhub` CLI only if you want to publish or
-    sync your own skills. For shared installs across agents, put the skill under
-    `~/.openclaw/skills` and use `agents.defaults.skills` or
-    `agents.list[].skills` if you want to narrow which agents can see it.
+    directory by default. Add `--global` to install into the shared managed
+    skills directory for all local agents. Install the separate `clawhub` CLI
+    only if you want to publish or sync your own skills. Use
+    `agents.defaults.skills` or `agents.list[].skills` if you want to narrow
+    which agents can see shared skills.
   </Accordion>
 
   <Accordion title="Can OpenClaw run tasks on a schedule or continuously in the background?">
@@ -404,7 +407,7 @@ lives on the [First-run FAQ](/help/faq-first-run).
     openclaw skills update --all
     ```
 
-    Native installs land in the active workspace `skills/` directory. For shared skills across agents, place them in `~/.openclaw/skills/<name>/SKILL.md`. If only some agents should see a shared install, configure `agents.defaults.skills` or `agents.list[].skills`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills), [Skills config](/tools/skills-config), and [ClawHub](/clawhub).
+    Native installs land in the active workspace `skills/` directory. For shared skills across all local agents, use `openclaw skills install <slug> --global` (or place them manually in `~/.openclaw/skills/<name>/SKILL.md`). If only some agents should see a shared install, configure `agents.defaults.skills` or `agents.list[].skills`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills), [Skills config](/tools/skills-config), and [ClawHub](/tools/clawhub).
   </Accordion>
 
   <Accordion title="How do I use my existing signed-in Chrome with OpenClaw?">
@@ -444,7 +447,7 @@ lives on the [First-run FAQ](/help/faq-first-run).
     include system packages, Homebrew, or bundled browsers. For a fuller setup:
 
     * Persist `/home/node` with `OPENCLAW_HOME_VOLUME` so caches survive.
-    * Bake system deps into the image with `OPENCLAW_DOCKER_APT_PACKAGES`.
+    * Bake system deps into the image with `OPENCLAW_IMAGE_APT_PACKAGES`.
     * Install Playwright browsers via the bundled CLI:
       `node /app/node_modules/playwright-core/cli.js install chromium`
     * Set `PLAYWRIGHT_BROWSERS_PATH` and ensure the path is persisted.

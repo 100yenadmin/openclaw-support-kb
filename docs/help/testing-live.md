@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "47cd6c8baf5f85f38cea20b1b91c250345e931a001d33aa4d9ec9dd9b5326e4c"
+source_hash: "b7a3c62daa6080d7622f6ca278cda7ee660a7bae581a52bb68d77399357bb359"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-live.md"
@@ -110,7 +110,7 @@ Live tests are split into two layers so we can isolate failures:
   * `read` probe: the test writes a nonce file in the workspace and asks the agent to `read` it and echo the nonce back.
   * `exec+read` probe: the test asks the agent to `exec`-write a nonce into a temp file, then `read` it back.
   * image probe: the test attaches a generated PNG (cat + randomized code) and expects the model to return `cat <CODE>`.
-  * Implementation reference: `src/gateway/gateway-models.profiles.live.test.ts` and `src/gateway/live-image-probe.ts`.
+  * Implementation reference: `src/gateway/gateway-models.profiles.live.test.ts` and `test/helpers/live-image-probe.ts`.
 * How to enable:
   * `pnpm test:live` (or `OPENCLAW_LIVE_TEST=1` if invoking Vitest directly)
 * How to select models:
@@ -124,7 +124,7 @@ Live tests are split into two layers so we can isolate failures:
   * `read` probe + `exec+read` probe (tool stress)
   * image probe runs when the model advertises image input support
   * Flow (high level):
-    * Test generates a tiny PNG with "CAT" + random code (`src/gateway/live-image-probe.ts`)
+    * Test generates a tiny PNG with "CAT" + random code (`test/helpers/live-image-probe.ts`)
     * Sends it via `agent` `attachments: [{ mimeType: "image/png", content: "<base64>" }]`
     * Gateway parses attachments into `images[]` (`src/gateway/server-methods/agent.ts` + `src/gateway/chat-attachments.ts`)
     * Embedded agent forwards a multimodal user message to the model

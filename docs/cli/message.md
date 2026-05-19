@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "d15ae4f2586cab53295b2eae7814d3576f2be034d8c6a37c6e165c79ae735b80"
+source_hash: "dd0ab3a9cb56dbc23a4a44317736234fcbcdee5ec913a460cb2b59e8d7f4f662"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/message.md"
@@ -95,12 +95,13 @@ Name lookup:
   * Telegram only: `--poll-duration-seconds` (5-600), `--silent`, `--poll-anonymous` / `--poll-public`, `--thread-id`
 
 * `react`
-  * Channels: Discord/Google Chat/Slack/Telegram/WhatsApp/Signal/Matrix
+  * Channels: Discord/Google Chat/Matrix/Nextcloud Talk/Signal/Slack/Telegram/WhatsApp
   * Required: `--message-id`, `--target`
   * Optional: `--emoji`, `--remove`, `--participant`, `--from-me`, `--target-author`, `--target-author-uuid`
   * Note: `--remove` requires `--emoji` (omit `--emoji` to clear own reactions where supported; see /tools/reactions)
   * WhatsApp only: `--participant`, `--from-me`
   * Signal group reactions: `--target-author` or `--target-author-uuid` required
+  * Nextcloud Talk: adding reactions only; `--remove` is rejected with a clear error (see /tools/reactions)
 
 * `reactions`
   * Channels: Discord/Google Chat/Slack/Matrix
@@ -297,11 +298,12 @@ Send a Telegram Mini App button through generic presentation:
 
 ```
 openclaw message send --channel telegram --target 123456789 --message "Open app:" \
-  --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Launch","web_app":{"url":"https://example.com/app"}}]}]}'
+  --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Launch","webApp":{"url":"https://example.com/app"}}]}]}'
 ```
 
-Telegram `web_app` buttons are supported only in private chats between a user
-and the bot.
+Telegram web app buttons are supported only in private chats between a user and
+the bot. Older JSON payloads using `web_app` still parse, but `webApp` is the
+canonical presentation field.
 
 Send a Teams card through generic presentation:
 

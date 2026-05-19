@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Http api"
 source: "https://docs.openclaw.ai/clawhub/http-api"
-source_hash: "af689a92133ac013fd8abfd26bc2781df8eb2526776fa5338d0ec016a3641eb3"
+source_hash: "6cf1a69c5c519e1179934ce5589c5812423793a696a87367618157502ecd3711"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/http-api.md"
@@ -1285,6 +1285,37 @@ Response:
 
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 { "ok": true, "alreadyUnbanned": false, "restoredSkills": 3 }
+```
+
+### `POST /api/v1/users/reclassify-ban`
+
+Change the stored reason for an existing ban without unbanning or restoring
+content (admin only). Defaults to dry-run unless `dryRun` is `false`.
+
+Body:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{ "handle": "user_handle", "reason": "bulk publishing spam", "dryRun": true }
+```
+
+or
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{ "userId": "users_...", "reason": "bulk publishing spam", "dryRun": false }
+```
+
+Response:
+
+```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+{
+  "ok": true,
+  "dryRun": false,
+  "userId": "users_...",
+  "handle": "user_handle",
+  "previousReason": "malware auto-ban",
+  "nextReason": "bulk publishing spam",
+  "changed": true
+}
 ```
 
 ### `POST /api/v1/users/role`

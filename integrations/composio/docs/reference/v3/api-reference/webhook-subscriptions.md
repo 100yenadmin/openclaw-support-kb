@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md"
-source_hash: "6e35d4e832a43e4b9aca289b028effdd725cba95a5cfb1fd6201255ac5116387"
+source_hash: "417ad268eb855ed5793908552fbf3d4ad935a626a93c4b30cf3b2f96210de007"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/webhook-subscriptions.md"
@@ -22,11 +22,5 @@ Source: https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptio
 Webhook delivery subscriptions. Outbound URLs Composio posts trigger events to, plus signing secret rotation and event-type filters.
 
 # Endpoints
-
----
-
-
-# Toolkits
-
 
 ---

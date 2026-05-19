@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux server"
 source: "https://docs.openclaw.ai/vps"
-source_hash: "d57ed74c2ef35d344a872d39bbc704b4548f391bb638dabe488644d2cb03bd59"
+source_hash: "f6b4ee15bb546ddf557466c6bf95da580212d783ab9de6401e6b0c10492d895d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "vps.md"
@@ -97,7 +97,7 @@ source ~/.bashrc
 ```
 
 * `NODE_COMPILE_CACHE` improves repeated command startup times.
-* `OPENCLAW_NO_RESPAWN=1` avoids extra startup overhead from a self-respawn path.
+* `OPENCLAW_NO_RESPAWN=1` keeps routine Gateway restarts in-process, which avoids extra process handoffs and keeps PID tracking simple on small hosts.
 * First command run warms the cache; subsequent runs are faster.
 * For Raspberry Pi specifics, see [Raspberry Pi](/install/raspberry-pi).
 

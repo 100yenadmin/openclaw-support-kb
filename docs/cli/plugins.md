@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "bfc1a0fdfc75861a2ce7bf40fa9d2e73d5d92a79c1104f9f84a8fcb5cf460ccf"
+source_hash: "5f369f45d1cb705534ffb598ccd554ef975788aa83aa1d5cf69e77eaff8b2728"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/plugins.md"
@@ -65,6 +65,11 @@ openclaw plugins update <id-or-npm-spec>
 openclaw plugins update --all
 openclaw plugins marketplace list <marketplace>
 openclaw plugins marketplace list <marketplace> --json
+openclaw plugins init <id>
+openclaw plugins init <id> --directory ./my-plugin --name "My Plugin"
+openclaw plugins build --entry ./dist/index.js
+openclaw plugins build --entry ./dist/index.js --check
+openclaw plugins validate --entry ./dist/index.js
 ```
 
 For slow install, inspect, uninstall, or registry-refresh investigation, run the
@@ -82,6 +87,28 @@ to stderr and keeps JSON output parseable. See [Debugging](/help/debugging#plugi
 
   `plugins list` shows `Format: openclaw` or `Format: bundle`. Verbose list/info output also shows the bundle subtype (`codex`, `claude`, or `cursor`) plus detected bundle capabilities.
 </Note>
+
+### Author
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+openclaw plugins init stock-quotes --name "Stock Quotes"
+cd stock-quotes
+npm run plugin:build
+npm run plugin:validate
+```
+
+`plugins init` creates a minimal TypeScript tool plugin that uses
+`defineToolPlugin`. `plugins build` imports that entry, reads its static tool
+metadata, writes `openclaw.plugin.json`, and keeps `package.json`
+`openclaw.extensions` aligned. `plugins validate` checks that the generated
+manifest, package metadata, and current entry export still agree. See
+[Tool Plugins](/plugins/tool-plugins) for the full authoring workflow.
+
+The scaffold writes TypeScript source but generates metadata from the built
+`./dist/index.js` entry so the workflow also works with the published CLI. Use
+`--entry <path>` when the entry is not the default package entry. Use
+`plugins build --check` in CI to fail when generated metadata is stale without
+rewriting files.
 
 ### Install
 

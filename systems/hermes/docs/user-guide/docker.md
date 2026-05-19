@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Docker"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/docker"
-source_hash: "ab91f09f5cc85f6514f61fb44eb9e83e3e615cc530641cf81cbccdb42377e812"
+source_hash: "fac10942ca2b3cbcfbd4325ae0e3f1ac6686008fc8e673cde9f572def6e10c4b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/docker.md"
@@ -208,6 +208,10 @@ docker run -it --rm \
 ```
 
 Direct `-e` flags override values from `.env`. This is useful for CI/CD or secrets-manager integrations where you don't want keys on disk.
+
+:::note Looking for Docker as the **terminal backend**?
+This page covers running Hermes itself inside Docker. If you want Hermes to execute the agent's `terminal` / `execute_code` calls inside a Docker sandbox container (one persistent container per Hermes process), that's a separate config block — `terminal.backend: docker` plus `terminal.docker_image`, `terminal.docker_volumes`, `terminal.docker_forward_env`, `terminal.docker_run_as_host_user`, and `terminal.docker_extra_args`. See [Configuration → Docker Backend](configuration.md#docker-backend) for the full set.
+:::
 
 ## Docker Compose example
 

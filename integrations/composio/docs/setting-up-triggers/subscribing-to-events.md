@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Subscribing to events"
 source: "https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md"
-source_hash: "617731f4304db59d3186114d8403c79c1a073989624b78bcd460794c3006f542"
+source_hash: "db1f1a71de78b5b7fbc219236c8d85d2cf437b423d4c80186368549939553d36"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/subscribing-to-events.md"
@@ -27,7 +27,7 @@ Webhooks are the recommended way to receive trigger events in production. To sta
 | `composio.connected_account.expired` | Fired when a connected account expires and needs re-authentication. See [Subscribing to connection expiry events](/docs/subscribing-to-connection-expiry-events).                                                                                                                     |
 | `composio.trigger.disabled`          | **Fired when** Composio automatically disables a trigger — expired connection, webhook refresh failure, or unhealthy polling. **Not fired when** you disable a trigger through the manage API or deactivate its connected account via `PATCH /api/v3/connected_accounts/{id}/status`. |
 
-Set your webhook URL in the [dashboard settings](https://platform.composio.dev?next_page=/settings/webhook) or via the [Webhook Subscriptions API](/reference/api-reference/webhook-subscriptions):
+Set your webhook URL in the [dashboard settings](https://dashboard.composio.dev/~/project/settings/webhook) or via the [Webhook Subscriptions API](/reference/api-reference/webhook-subscriptions):
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/webhook_subscriptions \
@@ -228,9 +228,9 @@ Use `trigger_id` to match events to a specific trigger instance, or `trigger_slu
 
 # What to read next
 
-- [Verifying webhooks](/docs/webhook-verification): Validate webhook signatures to ensure payloads are authentic
-
 - [Managing triggers](/docs/setting-up-triggers/managing-triggers): List, enable, disable, and delete trigger instances
+
+- [Verifying webhooks](/docs/webhook-verification): Validate webhook signatures to ensure payloads are authentic
 
 - [Troubleshooting triggers](/docs/troubleshooting/triggers): Not receiving events? Check common trigger issues and how to fix them
 

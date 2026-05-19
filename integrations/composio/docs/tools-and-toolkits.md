@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools and toolkits"
 source: "https://docs.composio.dev/docs/tools-and-toolkits.md"
-source_hash: "b5d506baddc3f6db45516214761108fce7e35271fa81d7bd58c9ef0c313958e0"
+source_hash: "237eb125f19399b580e5b9be8a9c4270260309e7cf21764fd30478895470caca"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-and-toolkits.md"
@@ -17,11 +17,17 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/tools-and-toolkits.md
 
 
-Composio offers 1000+ toolkits, but loading all the tools into context would overwhelm your agent. Instead, your agent has access to meta tools that discover, authenticate, and execute the right tools at runtime.
+A **toolkit** is a collection of related tools for a service. For example, the `github` toolkit contains tools for creating issues, managing pull requests, and starring repositories.
+
+A **tool** is an individual action your agent can execute. Each tool has an input schema (required and optional parameters) and an output schema (what it returns). Tools follow a `{TOOLKIT}_{ACTION}` naming pattern, like `GITHUB_CREATE_ISSUE`.
 
 # Meta tools
 
-When you create a session, your agent gets these meta tools:
+When using a Composio session, your agent primarily interfaces with tools and toolkits through meta tools. These tools let the agent search the catalog, inspect schemas, authenticate users, execute app tools, and use the workbench without loading every possible tool into context.
+
+If you know exactly which tools the agent should use, you can [preload those tools or use the direct tools preset](/docs/configuring-sessions#direct-tools-preset) to expose them directly and disable meta tools.
+
+A session provides these meta tools:
 
 | Meta tool                                                                 | What it does                                                  |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -74,21 +80,13 @@ For most tasks, `COMPOSIO_MULTI_EXECUTE_TOOL` returns results directly. But when
 
 * **`COMPOSIO_REMOTE_BASH_TOOL`** - Execute bash commands for simpler file operations and data extraction using tools like `jq`, `awk`, `sed`, and `grep`.
 
-# Toolkits and tools
-
-A **toolkit** is a collection of related tools for a service. For example, the `github` toolkit contains tools for creating issues, managing pull requests, and starring repositories.
-
-A **tool** is an individual action your agent can execute. Each tool has an input schema (required and optional parameters) and an output schema (what it returns). Tools follow a `{TOOLKIT}_{ACTION}` naming pattern, like `GITHUB_CREATE_ISSUE`.
-
-> If you know exactly which tools you need, you can [execute them directly](/docs/tools-direct/executing-tools) without meta tools.
+# Custom tools and toolkits
 
 You can also add local in-process tools to a session using the experimental custom tools and custom toolkits API. See [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits).
 
-# Default toolkit access
+# What toolkits does my agent have access to?
 
-**What toolkits can my agent access by default?**
-
-All of them. When you create a session without specifying a `toolkits` parameter, every toolkit in the Composio catalog is discoverable through `COMPOSIO_SEARCH_TOOLS`. The agent searches for relevant tools at runtime — it doesn't load them all into context at once.
+All toolkits are discoverable by default. When you create a session without specifying a `toolkits` parameter, every toolkit in the Composio catalog is available through `COMPOSIO_SEARCH_TOOLS`. The agent searches for relevant tools at runtime — it doesn't load them all into context at once.
 
 To restrict which toolkits are available, pass `toolkits` when creating the session. See [Enable and disable toolkits](/docs/toolkits/enable-and-disable-toolkits).
 
@@ -96,14 +94,22 @@ To restrict which toolkits are available, pass `toolkits` when creating the sess
 
 Tools execute with the user's authenticated credentials. When a user connects their GitHub account, all GitHub tools run with their permissions.
 
+For OAuth toolkits, Composio uses [managed apps](/docs/custom-app-vs-managed-app) by default. Use a custom app when you need your own OAuth branding, scopes, or consent screen.
+
 If a tool requires authentication and the user hasn't connected yet, the agent can use `COMPOSIO_MANAGE_CONNECTIONS` to prompt them.
 
-- [Authentication](/docs/authentication): Persistent Python sandbox for bulk operations and data processing
+- [Authentication](/docs/authentication): Learn how Composio handles user authentication
 
-- [Browse toolkits](/toolkits): Explore all available toolkits
+- [Managed vs custom apps](/docs/custom-app-vs-managed-app): Choose between Composio managed OAuth apps and your own OAuth app
+
+# What to read next
 
 - [Fetching tools](/docs/toolkits/fetching-tools-and-toolkits): Browse the catalog and fetch tools for sessions
 
-- [Direct tool execution](/docs/tools-direct/executing-tools): Execute tools without meta tools for deterministic workflows
+- [Enable & disable toolkits](/docs/toolkits/enable-and-disable-toolkits): Control which toolkits and individual tools are available in sessions
+
+- [Workbench](/docs/workbench): Persistent Python sandbox for bulk operations and data processing
+
+- [Browse toolkits](/toolkits): Explore all available toolkits
 
 ---

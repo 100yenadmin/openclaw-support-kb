@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Build a Chat App"
 source: "https://docs.composio.dev/cookbooks/chat-app.md"
-source_hash: "ea7182b4d106467184e1ac2b7ac1429fe14401a6ef5afcc0d5244eb0aa79cdb4"
+source_hash: "ec75d872b75e1caf273a42237d902dbdcb5d855473c4ee47170d7dd890a16667"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/chat-app.md"
@@ -389,7 +389,7 @@ Let users connect multiple accounts for the same toolkit
 - [Configuring sessions](/docs/configuring-sessions):
 Lock down which toolkits your agent can access
 
-- [How Composio works](/docs/how-composio-works):
+- [What is a session?](/docs/how-composio-works):
 Understand sessions, tool discovery, and execution under the hood
 
 ---

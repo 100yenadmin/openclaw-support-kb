@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "4197f7181bbc14dc47ff4295b7e70a45bf797a35ada7020cc5e9fae42da8980f"
+source_hash: "4690936b19af5cfe7d3753892b737d5b5f19803477b4c6d015aa1d51d627b4ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -199,7 +199,11 @@ openclaw browser select <ref> OptionA OptionB
 openclaw browser fill --fields '[{"ref":"1","value":"Ada"}]'
 openclaw browser wait --text "Done"
 openclaw browser evaluate --fn '(el) => el.textContent' --ref <ref>
+openclaw browser evaluate --timeout-ms 30000 --fn 'async () => { await window.ready; return true; }'
 ```
+
+Use `evaluate --timeout-ms <ms>` when the page-side function may need longer
+than the default evaluate timeout.
 
 Action responses return the current raw `targetId` after action-triggered page
 replacement when OpenClaw can prove the replacement tab. Scripts should still
@@ -212,12 +216,17 @@ openclaw browser upload /tmp/openclaw/uploads/file.pdf --ref <ref>
 openclaw browser waitfordownload
 openclaw browser download <ref> report.pdf
 openclaw browser dialog --accept
+openclaw browser dialog --dismiss --dialog-id d1
 ```
 
 Managed Chrome profiles save ordinary click-triggered downloads into the OpenClaw
 downloads directory (`/tmp/openclaw/downloads` by default, or the configured temp
 root). Use `waitfordownload` or `download` when the agent needs to wait for a
 specific file and return its path; those explicit waiters own the next download.
+When an action opens a modal dialog, the action response returns
+`blockedByDialog` with `browserState.dialogs.pending`; pass `--dialog-id` to
+answer it directly. Dialogs handled outside OpenClaw appear under
+`browserState.dialogs.recent`.
 
 ## State and storage
 

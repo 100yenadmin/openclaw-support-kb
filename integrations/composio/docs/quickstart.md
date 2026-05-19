@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "aaf45806b5cd02e22d6dae2e76e8971115d082fa913129640784511c5c6edc56"
+source_hash: "666b4a746d6c7afe45727487f15a8667539bff276d5f86ecf219273fe675b37a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -17,9 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/quickstart.md
 
 
-Build your first AI agent with Composio Tools. You'll create a [session](/docs/users-and-sessions) for a user, give your agent access to [tools](/docs/tools-and-toolkits), and let it take action across 1000+ apps.
-
-> If you are an AI agent setting up Composio for yourself, you can [sign up as an agent](/docs/signing-up-as-an-agent) without a human-created account first.
+Build your first AI agent with Composio Tools. You'll create a [session](/docs/how-composio-works) for a user, give your agent access to [tools](/docs/tools-and-toolkits), and let it take action across 1000+ apps.
 
 ## OpenAI Agents
 
@@ -772,9 +770,7 @@ await client.close();
 readline.close();
 ```
 
-> By default, sessions have access to **all available toolkits** in the Composio catalog. Your agent can discover and use any of them through `COMPOSIO_SEARCH_TOOLS`. To restrict which toolkits are available, see [Enable and disable toolkits](/docs/toolkits/enable-and-disable-toolkits).
-
-> Every `composio.create()` call returns a new session ID. For multi-turn conversations or web apps, store the session ID and call `composio.use(sessionId)` on subsequent requests instead of creating a new session each time. See [Reusing a session](/docs/users-and-sessions#reusing-a-session).
+By default, each `composio.create()` call returns a new session with access to all toolkits. Sessions are highly configurable beyond that: [Reusing a session](/docs/how-composio-works#how-sessions-behave) covers storing a session ID and calling `composio.use()` across multi-turn requests, while [Configuring Sessions](/docs/configuring-sessions) covers restricting toolkits, auth configs, and connected accounts.
 
 # Next steps
 
@@ -782,7 +778,7 @@ readline.close();
 
 - [Authenticating Users](/docs/authentication): Learn how users connect their accounts via Connect Links, OAuth, and API keys
 
-- [How Composio works](/docs/how-composio-works): Understand what happens under the hood: sessions, meta tools, and the tool execution lifecycle
+- [What is a session?](/docs/how-composio-works): Understand what happens under the hood: sessions, meta tools, and the tool execution lifecycle
 
 - [Build a chat app](/cookbooks/chat-app): Full Next.js tutorial: tool discovery, auth, and multi-turn conversations
 

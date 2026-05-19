@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "e9a5fd0dbe5d3fbef32d5348fadd2cc8cda032fa49faf5e4e3b4cec25a93b02d"
+source_hash: "abe379df0f6f98f3a2333a63e1cab1995fffc07eef3f04b81466c27cbf3db992"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
@@ -301,7 +301,7 @@ Enable via `channels.mattermost.streaming`:
 
   <Accordion title="Streaming behavior notes">
     * If the stream cannot be finalized in place (for example the post was deleted mid-stream), OpenClaw falls back to sending a fresh final post so the reply is never lost.
-    * Reasoning-only payloads are suppressed from channel posts, including text that arrives as a `> Reasoning:` blockquote. Set `/reasoning on` to see thinking in other surfaces; the Mattermost final post keeps the answer only.
+    * Thinking-only payloads are suppressed from channel posts, including text that arrives as a `> Thinking` blockquote. Set `/reasoning on` to see thinking in other surfaces; the Mattermost final post keeps the answer only.
     * See [Streaming](/concepts/streaming#preview-streaming-modes) for the channel-mapping matrix.
   </Accordion>
 </AccordionGroup>
@@ -329,6 +329,8 @@ Config:
 ## Interactive buttons (message tool)
 
 Send messages with clickable buttons. When a user clicks a button, the agent receives the selection and can respond.
+
+Normal agent replies can also include semantic `presentation` payloads. OpenClaw renders value buttons as Mattermost interactive buttons, keeps URL buttons visible in the message text, and downgrades select menus to readable text.
 
 Enable buttons by adding `inlineButtons` to the channel capabilities:
 

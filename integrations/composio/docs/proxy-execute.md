@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/proxy-execute.md"
-source_hash: "38e0398c1150e0c6cebf7921cc512511bd2fd1d700fe11adf25cda934fdf6d95"
+source_hash: "88b0f5c1241d8d068921f8dee3d0421c7397fb7d3c0d294918e1abdd6e135907"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "proxy-execute.md"
@@ -332,12 +332,10 @@ Proxy execute forwards the upstream response verbatim — `status`, `headers`, a
 
 # What to read next
 
-- [Executing tools](/docs/tools-direct/executing-tools): Run predefined Composio tools with sessions or direct calls
-
-- [Custom tools](/docs/tools-direct/custom-tools): Wrap a proxy call in a reusable custom tool with its own schema
-
-- [Connected accounts](/docs/auth-configuration/connected-accounts): Create, list, and manage the connected accounts used by proxy execute
-
 - [API reference](/reference/api-reference/tools/postToolsExecuteProxy): Full request and response schema for POST /api/v3.1/tools/execute/proxy
+
+- [Tools and toolkits](/docs/tools-and-toolkits): Understand how Composio tools are discovered and executed in sessions
+
+- [Authentication](/docs/authentication): How Composio manages OAuth, API keys, and connected accounts
 
 ---

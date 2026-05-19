@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md"
-source_hash: "ffe51db6f548421ecaa01ad9e6c0375178a56e51c259221b440e388172b877e9"
+source_hash: "32502f4fa1646dbafb50cc59e31bc17a6c85b3d0bfce9c806b31a7b0a8632d5a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/managing-triggers.md"
@@ -97,7 +97,7 @@ await composio.triggers.enable('ti_abcd123');
 
 You can also toggle triggers from the dashboard:
 
-1. Go to [Auth Configs](https://platform.composio.dev?next_page=/auth-configs) and select your auth config
+1. Go to [Auth Configs](https://dashboard.composio.dev/~/project/auth-configs) and select your auth config
 2. Navigate to **Active Triggers**
 3. Toggle the trigger on or off
 
@@ -126,10 +126,10 @@ await composio.triggers.delete('ti_abcd123');
 
 # What to read next
 
+- [Verifying webhooks](/docs/webhook-verification): Validate webhook signatures to ensure payloads are authentic
+
 - [Creating triggers](/docs/setting-up-triggers/creating-triggers): Create trigger instances to start receiving events from connected apps
 
 - [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events): Set up webhooks or SDK subscriptions to handle trigger events
-
-- [Verifying webhooks](/docs/webhook-verification): Validate webhook signatures to ensure payloads are authentic
 
 ---

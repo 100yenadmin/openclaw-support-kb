@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
-source_hash: "1ca85bc1534bc7dca12f2e80357a3836f1a16c6e9d36f8f2e7b7d1d9732b606c"
+source_hash: "5f02a3a7ecb8fb7559ec306ace30722e578fb4ed8540ffe77cbdc8228befb994"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/reactions.md"
@@ -46,6 +46,12 @@ tool with the `react` action. Reaction behavior varies by channel and transport.
   <Accordion title="Google Chat">
     * Empty `emoji` removes the app's reactions on the message.
     * `remove: true` removes just the specified emoji.
+  </Accordion>
+
+  <Accordion title="Nextcloud Talk">
+    * Adding reactions only: `emoji` is required and must be non-empty.
+    * Reaction removal is not supported yet; calls with `remove: true` (or empty `emoji`) are rejected with a clear error rather than silently no-oping.
+    * Requires the Talk bot to be registered with the `reaction` feature (see [Nextcloud Talk channel docs](/channels/nextcloud-talk)).
   </Accordion>
 
   <Accordion title="Telegram">

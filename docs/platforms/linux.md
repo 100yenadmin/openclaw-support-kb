@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "f0102f5b55dd46dc571f0851c012ae139cd812ff114ba089db648a5b4d8c875b"
+source_hash: "72c26cf952f0211d3ce68e4251e612d806854a1824615195c89388abd0a6dbb1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -22,7 +22,7 @@ Native Linux companion apps are planned. Contributions are welcome if you want t
 
 ## Beginner quick path (VPS)
 
-1. Install Node 24 (recommended; Node 22 LTS, currently `22.16+`, still works for compatibility)
+1. Install Node 24 (recommended; Node 22 LTS, currently `22.19+`, still works for compatibility)
 2. `npm i -g openclaw@latest`
 3. `openclaw onboard --install-daemon`
 4. From your laptop: `ssh -N -L 18789:127.0.0.1:18789 <user>@<host>`

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "3912cf6267e5b0216ba06419a58c7705115f9d3627d8a1b202fea1cf129e4b20"
+source_hash: "f219847804527ecd97250f65fecb0527a110410cba4458c725ab83233c3c5058"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
@@ -34,9 +34,12 @@ openclaw skills install <slug>
 openclaw skills install <slug> --version <version>
 openclaw skills install <slug> --force
 openclaw skills install <slug> --agent <id>
+openclaw skills install <slug> --global
 openclaw skills update <slug>
+openclaw skills update <slug> --global
 openclaw skills update --all
 openclaw skills update --all --agent <id>
+openclaw skills update --all --global
 openclaw skills list
 openclaw skills list --eligible
 openclaw skills list --json
@@ -50,12 +53,13 @@ openclaw skills check --agent <id>
 openclaw skills check --json
 ```
 
-`search`/`install`/`update` use ClawHub directly and install into the active
-workspace `skills/` directory. `list`/`info`/`check` still inspect the local
-skills visible to the current workspace and config. Workspace-backed commands
-resolve the target workspace from `--agent <id>`, then the current working
-directory when it is inside a configured agent workspace, then the default
-agent.
+`search`/`install`/`update` use ClawHub directly. By default, `install` and
+`update` target the active workspace `skills/` directory; with `--global`, they
+target the shared managed skills directory. `list`/`info`/`check` still inspect
+the local skills visible to the current workspace and config. Workspace-backed
+commands resolve the target workspace from `--agent <id>`, then the current
+working directory when it is inside a configured agent workspace, then the
+default agent.
 
 This CLI `install` command downloads skill folders from ClawHub. Gateway-backed
 skill dependency installs triggered from onboarding or Skills settings use the
@@ -68,9 +72,14 @@ Notes:
 * `search --limit <n>` caps returned results.
 * `install --force` overwrites an existing workspace skill folder for the same
   slug.
+* `--global` targets the shared managed skills directory and cannot be combined
+  with `--agent <id>`.
 * `--agent <id>` targets one configured agent workspace and overrides current
   working directory inference.
-* `update --all` only updates tracked ClawHub installs in the active workspace.
+* `update <slug>` updates a single tracked skill. Add `--global` to target the
+  shared managed skills directory instead of the workspace.
+* `update --all` updates tracked ClawHub installs in the selected workspace, or
+  in the shared managed skills directory when combined with `--global`.
 * `check --agent <id>` checks the selected agent's workspace and reports which
   ready skills are actually visible to that agent's prompt or command surface.
 * `list` is the default action when no subcommand is provided.

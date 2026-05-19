@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "cf839fd134787c25165291fb3885b0b16cac823710291b4a560939ed86d7be75"
+source_hash: "fb0b2ea86f5bfa5fb9a578829a5603a2cc84f1b464e0fc955e9571008896589c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/migration-guide/tool-router-beta.md
 
 This guide is for users who adopted the **experimental tool router** (`composio.experimental.tool_router`) during its beta period. The tool router has now graduated to a stable, first-class feature called **sessions** — with a simpler API, better auth handling, and full framework support.
 
-If you never used `composio.experimental.tool_router`, you can skip this guide and head straight to the [Quickstart](/docs/quickstart).
+If you never used `composio.experimental.tool_router`, you can skip this guide and start with [Configuring Sessions](/docs/configuring-sessions).
 
 # The basics
 
@@ -104,8 +104,8 @@ const session = await composio.create('user_123',
 
 # Get started
 
-- [Quickstart](/docs/quickstart): Build your first agent with the stable sessions API
-
 - [Configuring Sessions](/docs/configuring-sessions): Restrict toolkits, set auth configs, and select connected accounts
+
+- [What is a session?](/docs/how-composio-works): Understand the stable sessions model
 
 ---

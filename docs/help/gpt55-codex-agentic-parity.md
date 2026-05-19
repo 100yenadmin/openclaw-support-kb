@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex agentic parity"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity"
-source_hash: "392eebd4a6ea00c81a71676177b0b09a63ef80887acd84be18f86f720d106961"
+source_hash: "225218fdd8d32a6dc5f5428a4980bd7c410111ce348b5a3452e323da136052c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/gpt55-codex-agentic-parity.md"
@@ -21,7 +21,7 @@ OpenClaw already worked well with tool-using frontier models, but GPT-5.5 and Co
 * they could use strict OpenAI/Codex tool schemas incorrectly
 * they could ask for `/elevated full` even when full access was impossible
 * they could lose long-running task state during replay or compaction
-* parity claims against Claude Opus 4.6 were based on anecdotes instead of repeatable scenarios
+* parity claims against Claude Opus 4.7 were based on anecdotes instead of repeatable scenarios
 
 This parity program fixes those gaps in four reviewable slices.
 
@@ -59,7 +59,7 @@ The tool-compat work reduces schema friction for strict OpenAI/Codex tool regist
 
 ### PR D: parity harness
 
-This slice adds the first-wave QA-lab parity pack so GPT-5.5 and Opus 4.6 can be exercised through the same scenarios and compared using shared evidence.
+This slice adds the first-wave QA-lab parity pack so GPT-5.5 and Opus 4.7 can be exercised through the same scenarios and compared using shared evidence.
 
 The parity pack is the proof layer. It does not change runtime behavior by itself.
 
@@ -68,8 +68,8 @@ After you have two `qa-suite-summary.json` artifacts, generate the release-gate 
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 pnpm openclaw qa parity-report \
   --repo-root . \
-  --candidate-summary .artifacts/qa-e2e/gpt55/qa-suite-summary.json \
-  --baseline-summary .artifacts/qa-e2e/opus46/qa-suite-summary.json \
+  --candidate-summary .artifacts/qa-e2e/openai-candidate/qa-suite-summary.json \
+  --baseline-summary .artifacts/qa-e2e/anthropic-baseline/qa-suite-summary.json \
   --output-dir .artifacts/qa-e2e/parity
 ```
 
@@ -130,7 +130,7 @@ flowchart TD
 ```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
 flowchart LR
     A["Merged runtime slices (PR A-C)"] --> B["Run GPT-5.5 parity pack"]
-    A --> C["Run Opus 4.6 parity pack"]
+    A --> C["Run Opus 4.7 parity pack"]
     B --> D["qa-suite-summary.json"]
     C --> E["qa-suite-summary.json"]
     D --> F["openclaw qa parity-report"]
@@ -186,7 +186,7 @@ Required outcomes:
 * no fake completion without real execution
 * no incorrect `/elevated full` guidance
 * no silent replay or compaction abandonment
-* parity-pack metrics that are at least as strong as the agreed Opus 4.6 baseline
+* parity-pack metrics that are at least as strong as the agreed Opus 4.7 baseline
 
 For the first-wave harness, the gate compares:
 
@@ -197,7 +197,7 @@ For the first-wave harness, the gate compares:
 
 Parity evidence is intentionally split across two layers:
 
-* PR D proves same-scenario GPT-5.5 vs Opus 4.6 behavior with QA-lab
+* PR D proves same-scenario GPT-5.5 vs Opus 4.7 behavior with QA-lab
 * PR B deterministic suites prove auth, proxy, DNS, and `/elevated full` truthfulness outside the harness
 
 ## Goal-to-evidence matrix
@@ -208,13 +208,13 @@ Parity evidence is intentionally split across two layers:
 | GPT-5.5 no longer fakes progress or fake tool completion | PR A + PR D | parity report scenario outcomes and fake-success count             | no suspicious pass results and no commentary-only completion                             |
 | GPT-5.5 no longer gives false `/elevated full` guidance  | PR B        | deterministic truthfulness suites                                  | blocked reasons and full-access hints stay runtime-accurate                              |
 | Replay/liveness failures stay explicit                   | PR C + PR D | PR C lifecycle/replay suites plus `compaction-retry-mutating-tool` | mutating work keeps replay-unsafety explicit instead of silently disappearing            |
-| GPT-5.5 matches or beats Opus 4.6 on the agreed metrics  | PR D        | `qa-agentic-parity-report.md` and `qa-agentic-parity-summary.json` | same scenario coverage and no regression on completion, stop behavior, or valid tool use |
+| GPT-5.5 matches or beats Opus 4.7 on the agreed metrics  | PR D        | `qa-agentic-parity-report.md` and `qa-agentic-parity-summary.json` | same scenario coverage and no regression on completion, stop behavior, or valid tool use |
 
 ## How to read the parity verdict
 
 Use the verdict in `qa-agentic-parity-summary.json` as the final machine-readable decision for the first-wave parity pack.
 
-* `pass` means GPT-5.5 covered the same scenarios as Opus 4.6 and did not regress on the agreed aggregate metrics.
+* `pass` means GPT-5.5 covered the same scenarios as Opus 4.7 and did not regress on the agreed aggregate metrics.
 * `fail` means at least one hard gate tripped: weaker completion, worse unintended stops, weaker valid tool use, any fake-success case, or mismatched scenario coverage.
 * "shared/base CI issue" is not itself a parity result. If CI noise outside PR D blocks a run, the verdict should wait for a clean merged-runtime execution instead of being inferred from branch-era logs.
 * Auth, proxy, DNS, and `/elevated full` truthfulness still come from PR B's deterministic suites, so the final release claim needs both: a passing PR D parity verdict and green PR B truthfulness coverage.

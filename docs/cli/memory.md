@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "de9e660395ee038b3e4251af3fd0af2f807a68f5bb0e1cc02327553d29b912f2"
+source_hash: "b566842974834ae7d22095ed05e83cf44018f80ae3d54205589c0def6d39c4d3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
@@ -18,7 +18,9 @@ Source: https://docs.openclaw.ai/cli/memory
 # `openclaw memory`
 
 Manage semantic memory indexing and search.
-Provided by the active memory plugin (default: `memory-core`; set `plugins.slots.memory = "none"` to disable).
+Provided by the bundled `memory-core` plugin. The command is available when
+`plugins.slots.memory` selects `memory-core` (the default); other memory plugins
+expose their own CLI namespaces.
 
 Related:
 

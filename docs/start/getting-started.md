@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "198d436e2a913ca2b9bc8d0adf829bbc26c5afc139e1f42fcfa167ac26766555"
+source_hash: "8dd2cbfb11215e99d087ced840b91ae4f06a5d3f3b94c993330927440df68548"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -21,7 +21,7 @@ and a working chat session.
 
 ## What you need
 
-* **Node.js** — Node 24 recommended (Node 22.16+ also supported)
+* **Node.js** — Node 24 recommended (Node 22.19+ also supported)
 * **An API key** from a model provider (Anthropic, OpenAI, Google, etc.) — onboarding will prompt you
 
 <Tip>

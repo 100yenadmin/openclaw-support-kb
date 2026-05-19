@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Creating Skills"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills"
-source_hash: "2b76e5dc8012d60bce2f55bd98f1fd7461490949fbab5a64f28a01dbdc8604e2"
+source_hash: "138369bd528bb31616fd6d8325582e977cb4cdc012754ef3b9fe2048f065ca35"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/creating-skills.md"
@@ -284,6 +284,10 @@ Put the most common workflow first. Edge cases and advanced usage go at the bott
 ### Include Helper Scripts
 
 For XML/JSON parsing or complex logic, include helper scripts in `scripts/` — don't expect the LLM to write parsers inline every time.
+
+### Deliver media as documents (`[[as_document]]`)
+
+If your skill produces a high-resolution screenshot, chart, or any image where lossy preview compression would hurt — emit the literal directive `[[as_document]]` somewhere in the response (commonly the last line). The gateway strips the directive and delivers every extracted media path in that response as a downloadable file attachment instead of an inline image bubble. See [Skill output and media delivery](../user-guide/features/skills.md#skill-output-and-media-delivery) for the full semantics.
 
 #### Referencing bundled scripts from SKILL.md
 

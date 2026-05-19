@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
-source_hash: "cbd84d141825b442b80d22803badf26219ac656f09228550c455b111d6bcd441"
+source_hash: "b3aadd1b2ddd8c868b61f69ca0b04d531b0199c3c6c6c78877d785d024f61a8f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/control-ui.md"
@@ -221,7 +221,7 @@ Override the VAPID keypair through env vars on the Gateway process when you want
 
 * `OPENCLAW_VAPID_PUBLIC_KEY`
 * `OPENCLAW_VAPID_PRIVATE_KEY`
-* `OPENCLAW_VAPID_SUBJECT` (defaults to `mailto:openclaw@localhost`)
+* `OPENCLAW_VAPID_SUBJECT` (defaults to `https://openclaw.ai`)
 
 The Control UI uses these scope-gated Gateway methods to register and test browser subscriptions:
 

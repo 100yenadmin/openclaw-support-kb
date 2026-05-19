@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal agent benchmark pack"
 source: "https://docs.openclaw.ai/concepts/personal-agent-benchmark-pack"
-source_hash: "f3e6ffe9d7d7244d00475583bfa5970b71c148f2e907b4b2bf2a158bbac0aebe"
+source_hash: "d7e8e1e8da16f4dccdf58cbd1b4757a4e2b2ce8b663c00d69b8985f8543ed64c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/personal-agent-benchmark-pack.md"
@@ -29,6 +29,10 @@ The first pack is intentionally narrow:
 * fake preference recall from the temporary QA workspace memory files
 * fake secret no-echo checks
 * safe read-backed tool followthrough after a short approval-style turn
+* approval denial stop behavior for a sensitive local read request
+* proof-backed task status reporting that keeps pending, blocked, and done separate
+* share-safe diagnostics artifacts that keep useful status while omitting raw personal content
+* proof-backed completion claims that avoid fake progress before local evidence exists
 
 ## Scenarios
 
@@ -70,8 +74,6 @@ Add new cases under `qa/scenarios/personal/`, then add the scenario id to
 
 Good follow-up candidates:
 
-* approval denial correctness
-* multi-step task ledger assertions
 * redacted trajectory export checks
 * local-only plugin workflow checks
 

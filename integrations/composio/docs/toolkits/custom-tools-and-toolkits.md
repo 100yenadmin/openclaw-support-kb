@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Tools and Toolkits (Experimental)"
 source: "https://docs.composio.dev/docs/toolkits/custom-tools-and-toolkits.md"
-source_hash: "98042561926249c85be60ce3acd3658fa1f760a51471a92aa588823e026c3245"
+source_hash: "8ec114525fb7381457620e9c436b2935625ff17eea24bcacf66be40bb6d27bcb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/custom-tools-and-toolkits.md"
@@ -358,7 +358,7 @@ import {
 import { z } from "zod/v3";
 
 const userManagement = experimental_createToolkit("USER_MANAGEMENT", {
-  name: "User management",
+  name: "User scoping",
   description: "Manage user roles and permissions",
   tools: [
     experimental_createTool("ASSIGN_ROLE", {
@@ -385,7 +385,7 @@ composio = Composio(api_key="your_api_key")
 
 user_management = composio.experimental.Toolkit(
     slug="USER_MANAGEMENT",
-    name="User management",
+    name="User scoping",
     description="Manage user roles and permissions",
 )
 
@@ -573,7 +573,7 @@ custom_toolkits = session.custom_toolkits()
 
 # Reusing a session with custom tools
 
-When [reusing a session](/docs/users-and-sessions#reusing-a-session) via `composio.use()`, you can attach custom tools at the same time:
+When [reusing a session](/docs/how-composio-works#how-sessions-behave) via `composio.use()`, you can attach custom tools at the same time:
 
 **TypeScript:**
 

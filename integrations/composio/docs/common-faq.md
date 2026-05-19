@@ -2,7 +2,7 @@
 type: composio_doc
 title: "General FAQs"
 source: "https://docs.composio.dev/docs/common-faq.md"
-source_hash: "411824fc7ea7938d446d9e18a7aac6eb5b4dd4101a6fafe0aa52e0c7bc12e083"
+source_hash: "73c385e04d57050ce122384d4cd9d7871afdfd0dc4f1d453fde422fe0584560c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "common-faq.md"
@@ -21,9 +21,9 @@ Source: https://docs.composio.dev/docs/common-faq.md
 
 **Do I need an AI agent to use Composio?**
 
-No. If you're building an AI agent, Composio can give it [meta tools](/docs/quickstart) that handle tool discovery and execution automatically, or you can [fetch specific tools](/docs/tools-direct/fetching-tools) and pass them to your agent directly.
+No. If you're building an AI agent, Composio can give it [meta tools](/docs/tools-and-toolkits) that handle tool discovery and execution automatically.
 
-If you don't have an agent, you can [execute tools directly](/docs/tools-direct/executing-tools#direct-tool-execution) from any backend.
+If you don't have an agent, use the legacy direct execution guides under **Direct Tool Execution Guides (Legacy)**.
 
 **What is the difference between a tool and a toolkit?**
 
@@ -35,7 +35,7 @@ You connect to toolkits (via OAuth or API keys), and then execute individual too
 
 The User ID is how Composio identifies your end users. It maps each user to their connected accounts and sessions. Use any unique identifier from your system, like an email, database ID, or UUID.
 
-When you create a session with `composio.create(user_id="user_123")`, all connected accounts and tool executions are scoped to that user. See [Users and sessions](/docs/users-and-sessions).
+When you create a session with `composio.create(user_id="user_123")`, all connected accounts and tool executions are scoped to that user. See [What is a session?](/docs/how-composio-works).
 
 **What is the difference between an auth config and an MCP config in the dashboard?**
 
@@ -51,13 +51,13 @@ See [Native Tools vs MCP](/docs/native-tools-vs-mcp) for a full comparison.
 
 **When should I create a new session?**
 
-Create a new session when the config changes: different toolkits, different auth config, or a different connected account. You don't need to store or manage session IDs. Just call `create()` each time. See [Users and sessions](/docs/users-and-sessions).
+Create a new session when the config changes: different toolkits, different auth config, or a different connected account. You don't need to store or manage session IDs. Just call `create()` each time. See [What is a session?](/docs/how-composio-works).
 
 # Tools & Toolkits
 
 **Where can I see all available toolkits?**
 
-You can browse all toolkits on the [Toolkits page](/toolkits) in the docs or in the [Composio dashboard](https://platform.composio.dev?next_page=/marketplace). Both list every supported app along with available auth schemes and tools.
+You can browse all toolkits on the [Toolkits page](/toolkits) in the docs or in the [Composio dashboard](https://dashboard.composio.dev/~/project/toolkits). Both list every supported app along with available auth schemes and tools.
 
 **What toolkits are available by default in a session?**
 
@@ -128,13 +128,13 @@ An auth config is a blueprint that defines how authentication works for a toolki
 
 If you're using sessions with meta tools (`composio.create()`), you don't need to create auth configs yourself. When a user connects to a toolkit, Composio automatically uses a default auth config with managed credentials. The agent handles the entire flow through `COMPOSIO_MANAGE_CONNECTIONS`.
 
-You only need to create auth configs manually when you're [executing tools directly](/docs/tools-direct/authenticating-tools), want to [use your own OAuth app](/docs/white-labeling-authentication), need [custom scopes](/docs/auth-configuration/custom-auth-configs), or are working with a toolkit that doesn't have Composio-managed auth. See [Authentication](/docs/authentication) for the full overview and [When to use your own developer credentials](/docs/custom-app-vs-managed-app) for help deciding.
+You only need to create auth configs manually when you're [executing tools directly](/docs/tools-direct/authenticating-tools), want to [use your own OAuth app](/docs/white-labeling-authentication), need [custom scopes](/docs/auth-configuration/custom-auth-configs), or are working with a toolkit that doesn't have Composio-managed auth. See [Authentication](/docs/authentication) for the full overview and [Managed vs custom auth](/docs/custom-app-vs-managed-app) for help deciding.
 
 **What authentication types does Composio support?**
 
 Composio supports **OAuth2**, **OAuth1**, **API Key**, **Bearer Token**, and **Basic Auth**. Most toolkits use OAuth2. Each toolkit defines which auth types it supports. You can see the available schemes when creating an auth config in the dashboard.
 
-For toolkits with Composio-managed auth, you don't need to configure anything. For toolkits without it, you'll need to create a [custom auth config](/docs/using-custom-auth-configuration). See [Authentication](/docs/authentication) for the full overview.
+For toolkits with Composio-managed auth, you don't need to configure anything. For toolkits without it, you'll need to create a [custom auth config](/docs/custom-app-vs-managed-app). See [Authentication](/docs/authentication) for the full overview.
 
 **Can a user connect multiple accounts for the same app?**
 
@@ -189,11 +189,11 @@ Each user gets their own connected account scoped to their `user_id`, but they a
 
 **How do I configure sessions with custom auth configs?**
 
-Some toolkits require your own OAuth credentials or API keys. Create an auth config in the dashboard by selecting the toolkit, choosing the auth scheme, and entering your credentials. Then pass the auth config ID when creating a session using the `auth_configs` (or `auth_config_id`) parameter so the session uses your developer credentials instead of Composio-managed auth. See [Using custom auth configuration](/docs/using-custom-auth-configuration).
+Some toolkits require your own OAuth credentials or API keys. Create an auth config in the dashboard by selecting the toolkit, choosing the auth scheme, and entering your credentials. Then pass the auth config ID when creating a session using the `auth_configs` (or `auth_config_id`) parameter so the session uses your developer credentials instead of Composio-managed auth. See [Managed vs custom auth](/docs/custom-app-vs-managed-app).
 
 **When should I use my own developer credentials instead of Composio managed auth?**
 
-Use your own credentials when you're going to production and users will see OAuth consent screens, when you need custom scopes, when you're hitting shared rate limits, or when connecting to a self-hosted instance. For development and prototyping, Composio managed auth works out of the box with no setup. See [When to use your own developer credentials](/docs/custom-app-vs-managed-app).
+Use your own credentials when you're going to production and users will see OAuth consent screens, when you need custom scopes, when you're hitting shared rate limits, or when connecting to a self-hosted instance. For development and prototyping, Composio managed auth works out of the box with no setup. See [Managed vs custom auth](/docs/custom-app-vs-managed-app).
 
 **How do I check if a toolkit has Composio managed auth?**
 
@@ -242,7 +242,7 @@ Yes. White labeling works on all plans, including free. You can create custom au
 
 **How do I hide the Composio logo during authentication?**
 
-Go to your [project settings](https://platform.composio.dev/settings) and upload your own logo and app title. This replaces Composio branding on the Connect Link page. To also remove "Composio" from OAuth consent screens (Google, GitHub, Slack, etc.), create a custom auth config with your own OAuth credentials. See [White-labeling authentication](/docs/white-labeling-authentication) for the full guide.
+Go to your [auth screen settings](https://dashboard.composio.dev/~/project/settings/auth-screen) and upload your own logo and app title. This replaces Composio branding on the Connect Link page. To also remove "Composio" from OAuth consent screens (Google, GitHub, Slack, etc.), create a custom auth config with your own OAuth credentials. See [White-labeling authentication](/docs/white-labeling-authentication) for the full guide.
 
 **I changed my branding but still see 'Secured by Composio'**
 
@@ -260,7 +260,7 @@ See [Connected accounts](/docs/auth-configuration/connected-accounts#get-account
 
 **Where can I find execution logs?**
 
-Every tool execution is logged in the [Composio dashboard](https://platform.composio.dev?next_page=/logs/tools) under **Logs > Tools**. Each execution response includes a `log_id` you can use to look up detailed request and response data. Trigger delivery attempts are logged separately under **Logs > Triggers**.
+Every tool execution is logged in the [Composio dashboard](https://dashboard.composio.dev/~/project/logs) under **Logs > Tools**. Each execution response includes a `log_id` you can use to look up detailed request and response data. Trigger delivery attempts are logged separately under **Logs > Triggers**.
 
 See [Troubleshooting tools](/docs/troubleshooting/tools) for how to use logs to debug failed executions.
 

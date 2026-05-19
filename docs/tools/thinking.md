@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "c77180d1d167825ff855e83318de551fbcafb8524c898f59ffa5e7a97c2c423b"
+source_hash: "2419cfe5a1f5980f07793d213428a07c829fc9d2b69aa0b0dd7132dadcc65fe7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -113,7 +113,7 @@ Source: https://docs.openclaw.ai/tools/thinking
 
 * Levels: `on|off|stream`.
 * Directive-only message toggles whether thinking blocks are shown in replies.
-* When enabled, reasoning is sent as a **separate message** prefixed with `Reasoning:`.
+* When enabled, reasoning is sent as a **separate message** prefixed with `Thinking`.
 * `stream` (Telegram only): streams reasoning into the Telegram draft bubble while the reply is generating, then sends the final answer without reasoning.
 * Alias: `/reason`.
 * Send `/reasoning` (or `/reasoning:`) with no argument to see the current reasoning level.
@@ -128,7 +128,7 @@ Malformed local-model reasoning tags are handled conservatively. Closed `<think>
 ## Heartbeats
 
 * Heartbeat probe body is the configured heartbeat prompt (default: `Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.`). Inline directives in a heartbeat message apply as usual (but avoid changing session defaults from heartbeats).
-* Heartbeat delivery defaults to the final payload only. To also send the separate `Reasoning:` message (when available), set `agents.defaults.heartbeat.includeReasoning: true` or per-agent `agents.list[].heartbeat.includeReasoning: true`.
+* Heartbeat delivery defaults to the final payload only. To also send the separate `Thinking` message (when available), set `agents.defaults.heartbeat.includeReasoning: true` or per-agent `agents.list[].heartbeat.includeReasoning: true`.
 
 ## Web chat UI
 

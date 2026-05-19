@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Troubleshooting"
 source: "https://docs.composio.dev/docs/troubleshooting.md"
-source_hash: "c867e0180668e7bbc34d11057eef20f0489292cbd9aeb498a05400ca563077f8"
+source_hash: "a253b498f659afec38d5f72e35cecfb87b4a1758634ea995fd5148c3fbc92d8a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "troubleshooting.md"
@@ -25,7 +25,7 @@ This section is designed to help you quickly identify and resolve common issues 
 
 **How do I find the log ID for a failed tool execution?**
 
-Every tool execution response includes a `log_id` field. You can also find it in the [dashboard logs](https://platform.composio.dev?next_page=/logs/tools) under **Logs > Tools**. Use this ID when reporting issues to support.
+Every tool execution response includes a `log_id` field. You can also find it in the [dashboard logs](https://dashboard.composio.dev/~/project/logs) under **Logs > Tools**. Use this ID when reporting issues to support.
 
 See [Troubleshooting tools](/docs/troubleshooting/tools#reporting-tool-issues) for more details.
 

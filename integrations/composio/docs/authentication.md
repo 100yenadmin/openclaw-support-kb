@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/docs/authentication.md"
-source_hash: "d7960983a7b8e18308cb0a64fbf0de36b8e33d865806c14075cfa0330217d30e"
+source_hash: "a3f9dbac5ddefdb89b8f25215172dc6284eebca349523fdedd261e725f68cf89"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication.md"
@@ -30,13 +30,31 @@ Not sure? Start with in-chat. You can add manual auth later.
 
 By default, when a tool requires authentication, the agent prompts the user with a Connect Link. The user authenticates and confirms in chat. No setup needed. Just create a session and the agent handles OAuth flows, token refresh, and credential management automatically.
 
-> **You:** Summarize my emails from today
->
-> **Agent:** I need you to connect your Gmail account first. Please click here to authorize: [https://connect.composio.dev/link/ln\_abc123](https://connect.composio.dev/link/ln_abc123)
->
-> **You:** Done
->
-> **Agent:** Here's a summary of your emails from today...
+<p>
+<strong>You:</strong>
+
+Summarize my emails from today
+</p>
+
+<p>
+<strong>Agent:</strong>
+
+I need you to connect your Gmail account first. Please click here to authorize:
+
+<a href="https://connect.composio.dev/link/ln_abc123">[https://connect.composio.dev/link/ln_abc123](https://connect.composio.dev/link/ln_abc123)</a>
+</p>
+
+<p>
+<strong>You:</strong>
+
+Done
+</p>
+
+<p>
+<strong>Agent:</strong>
+
+Here's a summary of your emails from today...
+</p>
 
 - [In-chat authentication guide](/docs/authenticating-users/in-chat-authentication):
 Configuration, callback URLs, and full examples
@@ -62,7 +80,7 @@ An **auth config** is a blueprint that defines how authentication works for a to
 * **Scopes**: what actions your tools can perform
 * **Credentials**: your own app credentials or Composio's managed auth
 
-Composio creates one auth config per toolkit, and it applies to every user who connects that toolkit. When a user authenticates, Composio creates a **connected account** that stores their credentials (OAuth tokens or API keys) and links them to your user ID. When you need to use your own OAuth credentials or customize scopes, you can create [custom auth configs](/docs/using-custom-auth-configuration).
+Composio creates one auth config per toolkit, and it applies to every user who connects that toolkit. When a user authenticates, Composio creates a **connected account** that stores their credentials (OAuth tokens or API keys) and links them to your user ID. When you need to use your own OAuth credentials or customize scopes, you can create [custom auth configs](/docs/custom-app-vs-managed-app).
 
 ```mermaid
 graph LR
@@ -105,20 +123,16 @@ You only need to create a custom auth config when:
 * The toolkit doesn't have Composio managed auth
 * You have **existing auth configs** with connected accounts you want to use
 
-To bring your own OAuth apps or customize scopes, see [custom auth configs](/docs/using-custom-auth-configuration).
+To bring your own OAuth apps or customize scopes, see [custom auth configs](/docs/custom-app-vs-managed-app).
 
 # What to read next
-
-- [Tools and toolkits](/docs/tools-and-toolkits): How meta tools discover, authenticate, and execute tools
 
 - [In-chat authentication](/docs/authenticating-users/in-chat-authentication): Let the agent prompt users to authenticate during conversation
 
 - [Manual authentication](/docs/authenticating-users/manually-authenticating): Generate Connect Links programmatically in your app
 
-## Related guides
+- [Managed vs custom auth](/docs/custom-app-vs-managed-app): Decide when to use Composio managed auth or your own credentials
 
 - [White-labeling](/docs/white-labeling-authentication): Customize OAuth screens with your branding
-
-- [Custom auth configs](/docs/using-custom-auth-configuration): Use your own OAuth apps
 
 ---

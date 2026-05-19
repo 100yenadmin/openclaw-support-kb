@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Goals"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/goals"
-source_hash: "d7f77796b5d3c6f623fac2b95463fba93bd028587ae34a059293d95a8595788b"
+source_hash: "f9b61f4cc806df6c6822a43d1fc56baba67c09dafcfa24ef65bc5bd4478b4768"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/goals.md"
@@ -59,6 +59,21 @@ What you'll see:
 | `/goal clear` | Drop the goal entirely. |
 
 Works identically on the CLI and every gateway platform (Telegram, Discord, Slack, Matrix, Signal, WhatsApp, SMS, iMessage, Webhook, API server, and the web dashboard).
+
+## Adding criteria mid-goal: `/subgoal`
+
+While a goal is active you can append extra acceptance criteria with `/subgoal <text>` without resetting the loop. Each call adds one numbered item to the goal's subgoal list; the **continuation prompt** the agent sees on the next turn includes the original goal plus an "Additional criteria the user added mid-loop" block, and the **judge prompt** is rewritten so the verdict must consider every subgoal — the goal isn't marked done until the original objective **and** every subgoal are met.
+
+| Command | What it does |
+|---|---|
+| `/subgoal <text>` | Append a new criterion to the active goal. Requires an active `/goal`. |
+| `/subgoal` (no args) | Show the current numbered subgoal list. |
+| `/subgoal remove <N>` | Remove the Nth subgoal (1-based). |
+| `/subgoal clear` | Drop every subgoal but keep the original goal intact. |
+
+Subgoals are persisted alongside the goal in `SessionDB.state_meta`, so they survive `/resume`. Setting a new `/goal <text>` replaces the goal and clears the subgoal list; `/goal clear` does the same.
+
+Use this when you start a loop ("fix the failing tests") and notice partway through that you also want it to "and add a regression test for the bug you just patched" — `/subgoal add a regression test` tightens the success criteria without breaking the running loop.
 
 ## Behavior details
 

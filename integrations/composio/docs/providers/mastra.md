@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "e81cfaf872b39291ed413d890c900ba3e70c812ac29d7037e0d8f1092641a386"
+source_hash: "615124a10005b581dd4abb6b927010a5ce7b7e2db01d15cd9ecaa4ba5cf43d12"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -27,7 +27,7 @@ npm install @composio/core @composio/mastra @mastra/core @ai-sdk/openai
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

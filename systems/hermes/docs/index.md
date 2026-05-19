@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Agent Documentation"
 source: "https://hermes-agent.nousresearch.com/docs/index"
-source_hash: "8af4b71be2447f9144927e9871ac638697621402075535d459b6558fc4aa787d"
+source_hash: "3ab904ce99a4280818df694460f89500f176ceb4884e77c3c63055d6e6364301"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "index.md"
@@ -37,7 +37,7 @@ curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scri
 **Windows (native, PowerShell)** — *early beta, [details →](/docs/user-guide/windows-native)*
 
 ```powershell
-irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1 | iex
+iex (irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1)
 ```
 
 **Android (Termux)** — same curl one-liner as Linux; the installer auto-detects Termux.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "1554537c2d93f1018865bacf30bc4095a9ac94927ee644dff97f023173562eea"
+source_hash: "98a98d1375455549601c9a26c68988e51f9429c9c7b2b747d3c024b68c514a3c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -155,7 +155,7 @@ OpenClaw ships with the pi-ai catalog. These providers require **no** `models.pr
 * Policy note: OpenAI Codex OAuth is explicitly supported for external tools/workflows like OpenClaw.
 * For the common subscription plus native Codex runtime route, sign in with `openai-codex` auth but configure `openai/gpt-5.5`; OpenAI agent turns select Codex by default.
 * Use provider/model `agentRuntime.id: "pi"` only when you want a compatibility route through PI; otherwise keep `openai/gpt-5.5` on the default Codex harness.
-* Older `openai-codex/gpt-5.1*`, `openai-codex/gpt-5.2*`, and `openai-codex/gpt-5.3*` refs are suppressed because ChatGPT/Codex OAuth accounts reject them; use `openai-codex/gpt-5.5` or the native Codex runtime route instead.
+* `openai-codex/gpt-*` refs remain a legacy PI route. Prefer `openai/gpt-5.5` on the native Codex runtime for new agent config, and run `openclaw doctor --fix` when you want to migrate old `openai-codex/*` refs to canonical `openai/*` refs.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {

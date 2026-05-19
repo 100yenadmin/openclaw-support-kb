@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "9a76024fd5df1f8fcdab08a211035159c510cd407c4fc1d767d96378a0443e9f"
+source_hash: "9f3e6021bb53de1af1fab2c549cc042e6636c08dfedabce6a2c62710df1b47e4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/releasing.md"
@@ -193,10 +193,10 @@ the maintainer-only release runbook.
   * `custom`: exact `docker_lanes` selection for a focused rerun
 * Run the manual `CI` workflow directly when you only need full normal CI
   coverage for the release candidate. Manual CI dispatches bypass changed
-  scoping and force the Linux Node shards, bundled-plugin shards, channel
-  contracts, Node 22 compatibility, `check`, `check-additional`, build smoke,
-  docs checks, Python skills, Windows, macOS, Android, and Control UI i18n
-  lanes.
+  scoping and force the Linux Node shards, bundled-plugin shards, plugin and
+  channel contract shards, Node 22 compatibility, `check-*`, `check-additional-*`,
+  built-artifact smoke checks, docs checks, Python skills, Windows, macOS,
+  Android, and Control UI i18n lanes.
   Example: `gh workflow run ci.yml --ref release/YYYY.M.D`
 * Run `pnpm qa:otel:smoke` when validating release telemetry. It exercises
   QA-lab through a local OTLP/HTTP receiver and verifies the exported trace
@@ -450,16 +450,19 @@ Focused `npm-telegram` reruns require `release_package_spec` or
 `npm_telegram_package_spec`; full/all runs with `release_profile=full` use the
 release-checks package artifact. Focused
 cross-OS reruns can add `cross_os_suite_filter=windows/packaged-upgrade` or
-another OS/suite filter. QA release-check failures are advisory; a QA-only
-failure does not block release validation.
+another OS/suite filter. QA release-check failures are advisory except the
+standard runtime tool coverage gate, which blocks release validation when
+required OpenClaw dynamic tools drift or disappear from the standard tier
+summary.
 
 ### Vitest
 
 The Vitest box is the manual `CI` child workflow. Manual CI intentionally
 bypasses changed scoping and forces the normal test graph for the release
-candidate: Linux Node shards, bundled-plugin shards, channel contracts, Node 22
-compatibility, `check`, `check-additional`, build smoke, docs checks, Python
-skills, Windows, macOS, Android, and Control UI i18n.
+candidate: Linux Node shards, bundled-plugin shards, plugin and channel contract
+shards, Node 22 compatibility, `check-*`, `check-additional-*`,
+built-artifact smoke checks, docs checks, Python skills, Windows, macOS,
+Android, and Control UI i18n.
 
 Use this box to answer "did the source tree pass the full normal test suite?"
 It is not the same as release-path product validation. Evidence to keep:

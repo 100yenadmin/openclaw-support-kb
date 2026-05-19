@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Admin HTTP RPC plugin"
 source: "https://docs.openclaw.ai/plugins/admin-http-rpc"
-source_hash: "ec18eaf2c16f0f7e407b49cdc954dff56d8ea2ea2b958844ac80579d14d4920a"
+source_hash: "1fa3cbea9b480160d72804afa9998a543577f08c88239e97b771bef1ce0b91fb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/admin-http-rpc.md"
@@ -180,6 +180,7 @@ HTTP status follows the Gateway error when possible. For example, `INVALID_REQUE
 * gateway: `health`, `status`, `logs.tail`, `usage.status`, `usage.cost`, `gateway.restart.request`
 * config: `config.get`, `config.schema`, `config.schema.lookup`, `config.set`, `config.patch`, `config.apply`
 * channels: `channels.status`, `channels.start`, `channels.stop`, `channels.logout`
+* web: `web.login.start`, `web.login.wait`
 * models: `models.list`, `models.authStatus`
 * agents: `agents.list`, `agents.create`, `agents.update`, `agents.delete`
 * approvals: `exec.approvals.get`, `exec.approvals.set`, `exec.approvals.node.get`, `exec.approvals.node.set`

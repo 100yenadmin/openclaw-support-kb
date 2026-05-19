@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "6b3968e77949fbf2ac5f56420f7449827716e1433f1444962a264b8a52ddeaef"
+source_hash: "bc4d49da413b1a4161efc21b7e5fd84a3f4de84a6ac7e5b73a9eccbc13a56ea7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -27,7 +27,7 @@ pip install composio composio_crewai crewai
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
-source_hash: "b36edaedb90063cb6a604554036c4c6df2e796d2c97d33241c312c1de29f477f"
+source_hash: "63bd91ff757160c36f969ae3d4ea0a0537bfad8b4dc671fda9b6590bc9926a08"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/msteams.md"
@@ -876,9 +876,9 @@ OpenClaw sends Teams polls as Adaptive Cards (there is no native Teams poll API)
 
 ## Presentation cards
 
-Send semantic presentation payloads to Teams users or conversations using the `message` tool or CLI. OpenClaw renders them as Teams Adaptive Cards from the generic presentation contract.
+Send semantic presentation payloads to Teams users or conversations using the `message` tool, CLI, or normal reply delivery. OpenClaw renders them as Teams Adaptive Cards from the generic presentation contract.
 
-The `presentation` parameter accepts semantic blocks. When `presentation` is provided, the message text is optional.
+The `presentation` parameter accepts semantic blocks. When `presentation` is provided, the message text is optional. Buttons render as Adaptive Card submit or URL actions. Select menus are not native in the Teams renderer yet, so OpenClaw downgrades them to readable text before delivery.
 
 **Agent tool:**
 

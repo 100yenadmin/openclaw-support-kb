@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "f2c91d4d01e2bdf188dea0b1076bd307a552755e75b79137fb43fa3730b235e2"
+source_hash: "f80ca8216c54c3b732f67cd3706f0485f6f399c29bb0731fbe60b6e7cd43c5f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/android.md"
@@ -224,7 +224,8 @@ See [Camera node](/nodes/camera) for parameters and CLI helpers.
 
 * Voice tab: Android has two explicit capture modes. **Mic** is a manual Voice-tab session that sends each pause as a chat turn and stops when the app leaves the foreground or the user leaves the Voice tab. **Talk** is continuous Talk Mode and keeps listening until toggled off or the node disconnects.
 * Talk Mode promotes the existing foreground service from `dataSync` to `dataSync|microphone` before capture starts, then demotes it when Talk Mode stops. Android 14+ requires the `FOREGROUND_SERVICE_MICROPHONE` declaration, the `RECORD_AUDIO` runtime grant, and the microphone service type at runtime.
-* Spoken replies use `talk.speak` through the configured gateway Talk provider. Local system TTS is used only when `talk.speak` is unavailable.
+* By default, Android Talk uses native speech recognition, Gateway chat, and `talk.speak` through the configured gateway Talk provider. Local system TTS is used only when `talk.speak` is unavailable.
+* Android Talk uses realtime Gateway relay only when `talk.realtime.mode` is `realtime` and `talk.realtime.transport` is `gateway-relay`.
 * Voice wake remains disabled in the Android UX/runtime.
 * Additional Android command families (availability depends on device + permissions):
   * `device.status`, `device.info`, `device.permissions`, `device.health`

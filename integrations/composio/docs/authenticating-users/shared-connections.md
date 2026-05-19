@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Shared Connections (Experimental)"
 source: "https://docs.composio.dev/docs/authenticating-users/shared-connections.md"
-source_hash: "97ef9ab1e6b513939182f2ce1dac3da901288b39cefecf48b812cac154e91b66"
+source_hash: "3841cdce2871272e689b5ae8ba012c06b2668239f790e5c15facfe61ade241b0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authenticating-users/shared-connections.md"
@@ -409,10 +409,10 @@ try {
 
 # What to read next
 
-- [Connected accounts](/docs/auth-configuration/connected-accounts): Manage and monitor user connections to toolkits
-
 - [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts): Pin specific accounts into a session at runtime
 
 - [Configuring sessions](/docs/configuring-sessions): Session config — custom auth configs, pinned connections, multi-account
+
+- [Authentication overview](/docs/authentication): How users authenticate and how connected accounts are scoped
 
 ---

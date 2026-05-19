@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "f05d08ac4fec26e55d2eb12e8636db3459ac243182ac18bbf14dcbdc58c3e54b"
+source_hash: "954669bbd4ce64d248abd0bad070a032ed74566f51308004a61282185b542e8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -183,14 +183,14 @@ candidate contains redacted secret placeholders such as `***`.
   </Accordion>
 
   <Accordion title="Set up group chat mention gating">
-    Group messages default to **require mention**. Configure trigger patterns per agent, and keep visible room replies on the default message-tool path unless you intentionally want every normal group reply to use the legacy automatic final-reply path:
+    Group messages default to **require mention**. Configure trigger patterns per agent. Normal group/channel replies post automatically; opt into the message-tool path for shared rooms where the agent should decide when to speak:
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
       messages: {
         visibleReplies: "automatic", // set "message_tool" to require message-tool sends everywhere
         groupChat: {
-          visibleReplies: "message_tool", // default; visible output requires message(action=send)
+          visibleReplies: "message_tool", // opt-in; visible output requires message(action=send)
           unmentionedInbound: "room_event", // unmentioned always-on group chatter is quiet context
         },
       },

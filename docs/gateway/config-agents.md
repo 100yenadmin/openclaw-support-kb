@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
-source_hash: "37c39fc73ff9a03e08dcf10c23201620c4155545cac79abf6d9264c260006ab0"
+source_hash: "38bc66be6505ec54e8cf25982783758d82227ad3add76479b7e0c267588188f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-agents.md"
@@ -562,7 +562,7 @@ Replace the entire OpenClaw-assembled system prompt with a fixed string. Set at 
 
 ### `agents.defaults.promptOverlays`
 
-Provider-independent prompt overlays applied by model family. GPT-5-family model ids receive the shared behavior contract across providers; `personality` controls only the friendly interaction-style layer.
+Provider-independent prompt overlays applied by model family on OpenClaw-assembled prompt surfaces. GPT-5-family model ids receive the shared behavior contract across PI/provider routes; `personality` controls only the friendly interaction-style layer. Native Codex app-server routes keep Codex-owned base/model/personality instructions instead of this OpenClaw GPT-5 overlay.
 
 ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
@@ -967,6 +967,7 @@ Optional sandboxing for the embedded agent. See [Sandboxing](/gateway/sandboxing
   **Containers default to `network: "none"`** — set to `"bridge"` (or a custom bridge network) if the agent needs outbound access.
   `"host"` is blocked. `"container:<id>"` is blocked by default unless you explicitly set
   `sandbox.docker.dangerouslyAllowContainerNamespaceJoin: true` (break-glass).
+  Codex app-server turns in an active OpenClaw sandbox use this same egress setting for their native code-mode network access.
 
   **Inbound attachments** are staged into `media/inbound/*` in the active workspace.
 

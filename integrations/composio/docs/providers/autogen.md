@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "9db41ae99cc1577860db656a7338333023fb76fbccf3320b30235309f0c39801"
+source_hash: "5ec31390e85e246f9cf3338c21480e179db1e5a26da9af928a32eecf591135d6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -27,7 +27,7 @@ pip install composio composio_autogen autogen-agentchat
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

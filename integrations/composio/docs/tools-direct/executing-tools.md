@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Executing Tools"
 source: "https://docs.composio.dev/docs/tools-direct/executing-tools.md"
-source_hash: "f8702b16a75e74b0639bee2bace6b84b63022d5e01c2f217b6c2777316c89b90"
+source_hash: "7678fc89af3f6c13d10f09e86d397def7ad97339a1a453cea8d7760c445e780b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/executing-tools.md"
@@ -17,13 +17,13 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/tools-direct/executing-tools.md
 
 
-> If you're building an agent, we recommend using [sessions](/docs/configuring-sessions) instead. Sessions handle tool fetching, authentication, and execution automatically. See the [quickstart](/docs/quickstart) to get started, or [Sessions vs Direct Execution](/docs/sessions-vs-direct-execution) to understand the tradeoffs.
+> If you're building an agent, we recommend using [sessions](/docs/configuring-sessions) instead. Sessions handle tool fetching, authentication, and execution automatically. See [Sessions vs Direct Execution](/docs/sessions-vs-direct-execution) to understand the tradeoffs.
 
 LLMs on their own can only do generation. Tool calling changes that by letting them interact with external services. Instead of just drafting an email, the model can call `GMAIL_SEND_EMAIL` to actually send it. The tool's results feed back to the LLM, closing the loop so it can decide, act, observe, and adapt.
 
 In Composio, every **tool** is a single API action—fully described with schema, parameters, and return type. Tools live inside **toolkits** like Gmail, Slack, or GitHub, and Composio handles authentication and user scoping.
 
-> **User Scoping**: All tools are scoped to a specific user - that's why every example includes a `user_id`. Learn how to structure User IDs in [User Management](/docs/users-and-sessions). Each user must authenticate with their respective services (Gmail, Calendar, etc.) - see [Authentication](/docs/tools-direct/authenticating-tools).
+> **User Scoping**: All tools are scoped to a specific user - that's why every example includes a `user_id`. Learn how to structure User IDs in [User scoping](/docs/how-composio-works). Each user must authenticate with their respective services (Gmail, Calendar, etc.) - see [Authentication](/docs/tools-direct/authenticating-tools).
 
 # Using Chat Completions
 
@@ -195,7 +195,7 @@ If you just want to call a tool without using any framework or LLM provider, you
 
 > **Finding tool parameters and types:**
 
-**Platform UI**: [Auth Configs](https://platform.composio.dev?next_page=/auth-configs) → Select your toolkit → Tools & Triggers → Select the tool to see its required and optional parameters
+**Platform UI**: [Auth Configs](https://dashboard.composio.dev/~/project/auth-configs) → Select your toolkit → Tools & Triggers → Select the tool to see its required and optional parameters
 
 **CLI**: For Python and TypeScript projects, run `composio generate` to generate types. [Learn more →](/docs/cli#generate-type-definitions)
 

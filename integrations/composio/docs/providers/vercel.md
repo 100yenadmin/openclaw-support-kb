@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "62a6c49cc2dc8124102f3ca36e27e8a19627127e758f856f067ffedac01e6a48"
+source_hash: "a87f339f9fa980382f36ba1846877be3a67ab23b9e9e406bad538128126f8d96"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -27,7 +27,7 @@ npm install @composio/core @composio/vercel ai @ai-sdk/anthropic
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://platform.composio.dev/?next_page=/settings) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

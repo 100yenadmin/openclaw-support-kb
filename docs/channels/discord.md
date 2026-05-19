@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "8ee48c1ca961e435f3237b21d604c7a49929b3d8b7e329c8756714cb51ab7f7e"
+source_hash: "e69a0041ae6af8659f0f22861fbc4b620d9a34e6cad27ddb38c208ce294a4227"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/discord.md"
@@ -250,9 +250,9 @@ Once DMs are working, you can set up your Discord server as a full workspace whe
   <Step title="Allow responses without @mention">
     By default, your agent only responds in guild channels when @mentioned. For a private server, you probably want it to respond to every message.
 
-    In guild channels, visible Discord output should use the `message` tool by default, so the agent can lurk and only post when it decides a channel reply is useful. Ambient room events stay quiet unless the tool sends. See [Ambient room events](/channels/ambient-room-events) for the full lurk-mode config.
+    In guild channels, normal replies post automatically by default. For shared always-on rooms, opt into `messages.groupChat.visibleReplies: "message_tool"` so the agent can lurk and only post when it decides a channel reply is useful. This works best with latest-generation, tool-reliable models such as GPT 5.5. Ambient room events stay quiet unless the tool sends. See [Ambient room events](/channels/ambient-room-events) for the full lurk-mode config.
 
-    This means the selected model should reliably call tools. If Discord shows typing and the logs show token usage but no posted message, check whether the turn was configured as an ambient room event or use the config below to restore legacy automatic final replies for normal group requests.
+    If Discord shows typing and the logs show token usage but no posted message, check whether the turn was configured as an ambient room event or opted into message-tool visible replies.
 
     <Tabs>
       <Tab title="Ask your agent">
@@ -276,7 +276,7 @@ Once DMs are working, you can set up your Discord server as a full workspace whe
         }
         ```
 
-        To restore legacy automatic final replies for group/channel rooms, set `messages.groupChat.visibleReplies: "automatic"`.
+        To require message-tool sends for visible group/channel replies, set `messages.groupChat.visibleReplies: "message_tool"`.
       </Tab>
     </Tabs>
   </Step>
@@ -1600,7 +1600,7 @@ message(action="send", channel="discord", target="channel:123", path="/path/to/a
               // Molty listens to all bot-authored Discord messages.
               allowBots: true,
               mentionAliases: {
-                // Lets Molty write "@Mantis" and send a real Discord mention.
+                // Lets Molty write a Mantis Discord mention with the configured user id.
                 Mantis: "MANTIS_DISCORD_USER_ID",
               },
               botLoopProtection: {

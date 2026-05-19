@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Local Plugin Development"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/LOCAL_PLUGIN_DEVELOPMENT.md"
-source_hash: "df8302b7efdc7af33b00a49962a058923d7a509377d98f4d46eced5ea86e2712"
+source_hash: "1e5fcf52deee307ae446abcf7405f9b91d688666ad3d69a16ddcc6d7e879f7e2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/local_plugin_development.md"
@@ -20,7 +20,12 @@ Raw source: https://raw.githubusercontent.com/paperclipai/paperclip/master/doc/p
 
 This is the short happy-path guide for developing a Paperclip plugin from a folder on your machine. You will scaffold a plugin, run it in watch mode, install it into a running Paperclip instance from an absolute local path, and edit code with the plugin worker reloading after each rebuild.
 
-For the full alpha surface — manifest fields, capabilities, managed agents/projects/routines, UI slots, scoped API routes — see [`PLUGIN_AUTHORING_GUIDE.md`](./PLUGIN_AUTHORING_GUIDE.md).
+For the full alpha surface — manifest fields, capabilities, managed agents/projects/routines/skills, UI slots, scoped API routes — see [`PLUGIN_AUTHORING_GUIDE.md`](./PLUGIN_AUTHORING_GUIDE.md).
+
+If your plugin has background-like recurring work, model it as managed resources:
+declare managed routines plus managed agents/projects/skills, then reconcile those
+resources in worker actions. This gives operators visible work items, budgets,
+pause controls, and consistent audits instead of hidden daemon behavior.
 
 ## Prerequisites
 
@@ -144,7 +149,8 @@ When you are done iterating locally, publish the package and reinstall the npm-p
 
 - **Restart cleanly:** `paperclipai plugin disable <key>` pauses the plugin without removing it. `paperclipai plugin enable <key>` brings it back. `paperclipai plugin uninstall <key>` removes the install record; add `--force` to also purge plugin state and settings.
 - **Browse examples:** `paperclipai plugin examples` lists the bundled example plugins that ship with the repo, each with a ready-to-run `paperclipai plugin install <path>` line.
-- **Go deeper:** [`PLUGIN_AUTHORING_GUIDE.md`](./PLUGIN_AUTHORING_GUIDE.md) covers worker capabilities, managed agents/projects/routines, plugin database namespaces, scoped API routes, and the shared UI components in `@paperclipai/plugin-sdk/ui`. [`PLUGIN_SPEC.md`](./PLUGIN_SPEC.md) is the longer-form specification, including future ideas that are not yet implemented.
+- **Go deeper:** [`PLUGIN_AUTHORING_GUIDE.md`](./PLUGIN_AUTHORING_GUIDE.md) covers worker capabilities, managed agents/projects/routines/skills, plugin database namespaces, scoped API routes, and the shared UI components in `@paperclipai/plugin-sdk/ui`. [`PLUGIN_SPEC.md`](./PLUGIN_SPEC.md) is the longer-form specification, including future ideas that are not yet implemented.
+- **Routine-first automation:** If your plugin should produce periodic issue work, prefer managed routines and `ctx.routines.managed` reconciliation over custom process loops or unobserved cron code.
 
 ## Troubleshooting
 

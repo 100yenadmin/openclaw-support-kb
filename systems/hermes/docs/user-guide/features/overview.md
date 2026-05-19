@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Features Overview"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/overview"
-source_hash: "2cdabd65c0a31ad7109107f9a28157740ba0192833ef75e021ff72935c185f1e"
+source_hash: "d9367899e11dd67df8ca80d143485b385a9084115eb9dfe4aff31611ddc92a9e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/overview.md"
@@ -52,6 +52,7 @@ Hermes Agent includes a rich set of capabilities that extend far beyond basic ch
 - **[Provider Routing](provider-routing.md)** — Fine-grained control over which AI providers handle your requests. Optimize for cost, speed, or quality with sorting, whitelists, blacklists, and priority ordering.
 - **[Fallback Providers](fallback-providers.md)** — Automatic failover to backup LLM providers when your primary model encounters errors, including independent fallback for auxiliary tasks like vision and compression.
 - **[Credential Pools](credential-pools.md)** — Distribute API calls across multiple keys for the same provider. Automatic rotation on rate limits or failures.
+- **[Prompt caching](../configuration#prompt-caching)** — Built-in cross-session 1-hour prefix cache for Claude on native Anthropic, OpenRouter, and Nous Portal. Always-on; no configuration required.
 - **[Memory Providers](memory-providers.md)** — Plug in external memory backends (Honcho, OpenViking, Mem0, Hindsight, Holographic, RetainDB, ByteRover, Supermemory) for cross-session user modeling and personalization beyond the built-in memory system.
 - **[API Server](api-server.md)** — Expose Hermes as an OpenAI-compatible HTTP endpoint. Connect any frontend that speaks the OpenAI format — Open WebUI, LobeChat, LibreChat, and more.
 - **[IDE Integration (ACP)](acp.md)** — Use Hermes inside ACP-compatible editors such as VS Code, Zed, and JetBrains. Chat, tool activity, file diffs, and terminal commands render inside your editor.

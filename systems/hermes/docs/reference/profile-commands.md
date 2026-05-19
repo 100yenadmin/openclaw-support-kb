@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/profile-commands"
 source: "https://hermes-agent.nousresearch.com/docs/reference/profile-commands"
-source_hash: "aa2ff38155f118fcde889f580abaf5219d0325c43f45c5b261b0dcd3db2ec8d7"
+source_hash: "a8dcd4580b06248cffed6521135f3b151ff2d4e087c6de34b9fd9474b2262a66"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/profile-commands.md"
@@ -99,6 +99,7 @@ Creates a new profile.
 | `--clone-from <profile>` | Clone from a specific profile instead of the current one. Used with `--clone` or `--clone-all`. |
 | `--no-alias` | Skip wrapper script creation. |
 | `--description "<text>"` | One- or two-sentence description of what this profile is good at. Used by the kanban orchestrator to route tasks based on role instead of profile name alone. Skip and add later via `hermes profile describe`. Persisted in `<profile_dir>/profile.yaml`. |
+| `--no-skills` | Create an **empty** profile with zero bundled skills enabled. Writes a `.no-skills` marker into the profile so future `hermes update` runs won't re-seed the bundled set, and refuses to combine with `--clone` / `--clone-all` (which would copy skills in anyway). Useful for narrow orchestrator profiles or sandbox profiles that should not inherit the full skill catalog. |
 
 Creating a profile does **not** make that profile directory the default project/workspace directory for terminal commands. If you want a profile to start in a specific project, set `terminal.cwd` in that profile's `config.yaml`.
 

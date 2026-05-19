@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Manually authenticating users"
 source: "https://docs.composio.dev/docs/authenticating-users/manually-authenticating.md"
-source_hash: "a284492427f906a6ef010deb6add1c0cc164dc7ce692f693c4157037825b4401"
+source_hash: "355c48b68b15d880d7ce2c1770f6bdc15bdd75e19f0f6f2be2ea4134c1a59dd5"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authenticating-users/manually-authenticating.md"
@@ -218,12 +218,12 @@ console.log(`All toolkits connected! MCP URL: ${session.mcp.url}`);
 
 # What to read next
 
-- [Build an App Connections Dashboard](/cookbooks/app-connections-dashboard): Full working example of a connections page with OAuth and disconnect
-
-- [In-chat authentication](/docs/authenticating-users/in-chat-authentication): Let the agent prompt users to connect accounts during conversation instead
+- [Shared connections](/docs/authenticating-users/shared-connections): Share connected accounts across users while preserving access controls
 
 - [White-labeling authentication](/docs/white-labeling-authentication): Use your own OAuth apps so users see your branding on consent screens
 
 - [Managing multiple accounts](/docs/managing-multiple-connected-accounts): Handle users with multiple accounts for the same toolkit (e.g., work and personal Gmail)
+
+- [Build an App Connections Dashboard](/cookbooks/app-connections-dashboard): Full working example of a connections page with OAuth and disconnect
 
 ---

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkit versioning migration"
 source: "https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md"
-source_hash: "4b8f4e2018497b52aeda0e2aa78778b5a06a4b2b99bf32b9196b5d5705f2d76d"
+source_hash: "fdafa84cd39b07977b518cbdbb47d73d87aaa17783081a3a21f76a548ba78c2c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/toolkit-versioning.md"
@@ -162,10 +162,10 @@ const result = await composio.tools.execute({
 
 # What to read next
 
-- [Toolkit versioning](/docs/tools-direct/toolkit-versioning): Complete guide to version formats, resolution order, and managing versions
+- [Migrate to sessions](/docs/migration-guide/direct-to-sessions): Move from older tool execution patterns to sessions
 
-- [Migrate to sessions](/docs/migration-guide/direct-to-sessions): Move from direct tool execution to the sessions pattern
+- [Configuring sessions](/docs/configuring-sessions): Control toolkits, auth configs, connected accounts, and tool availability
 
-- [Quickstart](/docs/quickstart): Build your first agent with the sessions API
+- [Tools and toolkits](/docs/tools-and-toolkits): Understand tool discovery and toolkit access in sessions
 
 ---

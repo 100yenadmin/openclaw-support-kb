@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authenticating Tools"
 source: "https://docs.composio.dev/docs/tools-direct/authenticating-tools.md"
-source_hash: "d088b3d7441f919d52c4944a4e16386d359718497fee4cea7d9f959c66e6a873"
+source_hash: "1153d0e36d7e542db8a34a279a87a8f8c153b0392bb03371a4a6ccbbf57d336e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/authenticating-tools.md"
@@ -33,7 +33,7 @@ An **Auth Config** is a blueprint that defines how authentication works for a to
 
 #### Selecting a toolkit
 
-Navigate to [Auth Configs](https://platform.composio.dev?next_page=%2Fauth-configs) tab in your dashboard and click "**Create Auth Config**". Find and select the toolkit you want to integrate (e.g., **Gmail**, **Slack**, **GitHub**).
+Navigate to [Auth Configs](https://dashboard.composio.dev/~/project/auth-configs) tab in your dashboard and click "**Create Auth Config**". Find and select the toolkit you want to integrate (e.g., **Gmail**, **Slack**, **GitHub**).
 
 #### Selecting the Authentication method
 

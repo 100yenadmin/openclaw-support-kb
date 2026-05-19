@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/docs/projects.md"
-source_hash: "ae7b4aeacb132c75fafb87d04649e32667833f7498be9e8fb445d4d85c7994a0"
+source_hash: "d7186decc27de04fbee6009c351600b0901229c33c79f3acad84f60e7cde1b52"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "projects.md"
@@ -39,7 +39,7 @@ Common reasons to use multiple projects:
 
 # Managing projects
 
-You can manage projects from the [dashboard](https://platform.composio.dev?next_page=/settings) or via the API using an **organization API key** (`x-org-api-key`).
+You can manage projects from the [dashboard](https://dashboard.composio.dev/~/org/) or via the API using an **organization API key** (`x-org-api-key`).
 
 > Project management endpoints use the `x-org-api-key` header, not the regular `x-api-key`. You can find your org API key in the dashboard under **Settings > Organization**.
 
@@ -103,13 +103,13 @@ Notable security setting:
 
 * `require_mcp_api_key`: when `true`, MCP server requests must include a valid `x-api-key` header. This defaults to `true` for organizations created on or after March 5, 2026.
 
-You can also view and update these from **Settings > Project Settings** in the [dashboard](https://platform.composio.dev?next_page=/settings). See the [Projects API reference](/reference/api-reference/projects) for all available settings.
+You can also view and update these from **Settings > Project Settings** in the [dashboard](https://dashboard.composio.dev/~/project/settings/general). See the [Projects API reference](/reference/api-reference/projects) for all available settings.
 
 # What to read next
 
 - [Authentication](/docs/authentication): Auth configs are scoped to projects — learn how Composio manages auth
 
-- [Users & Sessions](/docs/users-and-sessions): Connected accounts and sessions live within a project
+- [What is a session?](/docs/how-composio-works): Connected accounts and sessions live within a project
 
 - [Triggers](/docs/triggers): Webhook configurations are project-scoped
 

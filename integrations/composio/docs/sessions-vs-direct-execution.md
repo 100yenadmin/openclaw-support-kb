@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Sessions vs Direct Execution"
 source: "https://docs.composio.dev/docs/sessions-vs-direct-execution.md"
-source_hash: "3c038daeee276ff9051bdd456cd22c1a73e455904f76b2406eb2e2c881fc568f"
+source_hash: "fd3e8f19114563e4fc29a97a023c4e6707463feb6edcff98967b9333cfdac040"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-vs-direct-execution.md"
@@ -189,10 +189,8 @@ See the [migration guide](/docs/migration-guide/direct-to-sessions). Auth config
 
 # Next steps
 
-- [Quickstart](/docs/quickstart): Build an agent with sessions
-
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, and connected accounts
 
-- [Direct Tool Execution](/docs/tools-direct/executing-tools): Fetch and execute specific tools
+- [Tools and toolkits](/docs/tools-and-toolkits): How sessions discover and execute tools at runtime
 
 ---

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Workbench"
 source: "https://docs.composio.dev/docs/workbench.md"
-source_hash: "23b9928c6a3ac78d64786914984075dd62891c062a788f0f679fedb38f87f126"
+source_hash: "6588cc95bd61ef9232c0fadfeed4807e87bf111f7918971a90576f9af0b8e4a6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "workbench.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/workbench.md
 
 
-The workbench is a persistent Python sandbox where your agent can write and execute code. It has access to all Composio tools programmatically, plus helper functions for calling LLMs, uploading files, and making API requests. State persists across calls within a [session](/docs/users-and-sessions). The `COMPOSIO_REMOTE_BASH_TOOL` meta tool also runs commands in the same sandbox.
+The workbench is a persistent Python sandbox where your agent can write and execute code. It has access to all Composio tools programmatically, plus helper functions for calling LLMs, uploading files, and making API requests. State persists across calls within a [session](/docs/how-composio-works). The `COMPOSIO_REMOTE_BASH_TOOL` meta tool also runs commands in the same sandbox.
 
 > The workbench is part of the [meta tools](/docs/tools-and-toolkits#meta-tools) system. It's available when you create sessions, not when [executing tools directly](/docs/tools-direct/executing-tools).
 
@@ -88,7 +88,7 @@ The sandbox preserves variables and files across calls. The agent can paginate t
 
 # What to read next
 
-- [Users & Sessions](/docs/users-and-sessions): How sessions scope tools, auth, and workbench state to a user
+- [What is a session?](/docs/how-composio-works): How sessions scope tools, auth, and workbench state to a user
 
 - [Tools and toolkits](/docs/tools-and-toolkits): How meta tools discover, authenticate, and execute tools at runtime
 

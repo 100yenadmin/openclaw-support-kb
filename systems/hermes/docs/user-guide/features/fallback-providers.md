@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/fallback-providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "e91f1f21a0b95b9719001609476bb5b0bb59ea7d9a45d0ff64d603e334b1c55d"
+source_hash: "7ad62dd5cde0a358cd6c4b4c4bab2ffdfb44bfcff2bfaded98c8bfa2a0508318"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -93,7 +93,7 @@ Both `provider` and `model` are **required**. If either is missing, the fallback
 | Kimi / Moonshot (China) | `kimi-coding-cn` | `KIMI_CN_API_KEY` |
 | StepFun | `stepfun` | `STEPFUN_API_KEY` |
 | Tencent TokenHub | `tencent-tokenhub` | `TOKENHUB_API_KEY` |
-| Azure AI Foundry | `azure-foundry` | `AZURE_FOUNDRY_API_KEY` + `AZURE_FOUNDRY_BASE_URL` |
+| Microsoft Foundry | `azure-foundry` | `AZURE_FOUNDRY_API_KEY` + `AZURE_FOUNDRY_BASE_URL` |
 | LM Studio (local) | `lmstudio` | `LM_API_KEY` (or none for local) + `LM_BASE_URL` |
 | Hugging Face | `huggingface` | `HF_TOKEN` |
 | Custom endpoint | `custom` | `base_url` + `key_env` (see below) |

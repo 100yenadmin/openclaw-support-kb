@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Enable and disable toolkits"
 source: "https://docs.composio.dev/docs/toolkits/enable-and-disable-toolkits.md"
-source_hash: "a349520b3c79690a7d59abcb8639fccde57ca7232a13ca16b5c91bfec2e3a7d5"
+source_hash: "0d9a276193e3669e558634a55c39ef7077371b0ba6bdb24bb2838daf4f5119e8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/enable-and-disable-toolkits.md"
@@ -269,10 +269,10 @@ const session = await composio.create("user_123", {
 
 # What to read next
 
+- [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits): Define local tools that run alongside remote Composio tools
+
 - [Fetching tools and toolkits](/docs/toolkits/fetching-tools-and-toolkits): List enabled toolkits, get meta tools, and browse the catalog
 
 - [Configuring sessions](/docs/configuring-sessions): Auth configs, connected accounts, and other session options
-
-- [Tools and toolkits](/docs/tools-and-toolkits): How meta tools discover, authenticate, and execute tools at runtime
 
 ---

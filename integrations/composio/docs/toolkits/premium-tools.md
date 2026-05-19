@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Premium Tools"
 source: "https://docs.composio.dev/toolkits/premium-tools.md"
-source_hash: "58865cee5c030aa00a3fdc49c8259cdb635d3a342e2669bda01a67ab563299ac"
+source_hash: "2a7cb1352c090ce7e0e664505d9b3de9a9b5b6327c8a870a669d20cf7414643c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/premium-tools.md"
@@ -17,34 +17,25 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/toolkits/premium-tools.md
 
 
-This is a quick overview of premium tools, what they are, how they are priced, what limits they have and such.
+Some tool calls cost more to run — search APIs, code sandboxes, ML inference. We call those premium tools and price them separately.
 
-# What are premium tools?
+# What counts as a premium tool?
 
-Premium tools are essential tool calls that cost us more to run, normally paying for more premium services or longer running tasks.
+- [Search APIs](/toolkits/composio_search): Composio Search, Perplexity, Exa, SerpAPI
 
-Think something like `E2B` or `Perplexity`, these are not really comparable to a `GMAIL_SEND_EMAIL` call.
+- [Code execution](/toolkits/codeinterpreter): Sandboxed runtimes like E2B
 
-These types of tools are separated out so we can price both of them competitively.
+} title="Web scraping & data extraction" description="Crawlers and structured extraction" />
 
-Premium tools include:
+} title="AI/ML inference" description="Hosted model calls and embeddings" />
 
-* Search APIs (Google, Bing, Perplexity, etc.)
-  * [Composio Search](/toolkits/composio_search)
-  * [Perplexity](/toolkits/perplexityai)
-  * [Exa](/toolkits/exa)
-  * [SerpAPI](/toolkits/serpapi)
-* Code execution environments (E2B)
-  * [Code Interpreter (E2B)](/toolkits/codeinterpreter)
-* Web scraping & data extraction
-* AI/ML model inference
-* Document processing & OCR
-* Advanced data transformations
-* Compute-intensive operations
+} title="Document processing & OCR" description="PDF, image, and document parsing" />
 
-# How are premium tools priced?
+} title="Compute-intensive operations" description="Long-running or heavy transforms" />
 
-As a rough guide, they are priced at 3x the cost of a standard tool call — the specifics depends on your plan and the tool.
+# Pricing
+
+Premium tool calls are roughly 3x the cost of a standard tool call. Full pricing is on the [pricing page](https://composio.dev/pricing).
 
 | Plan               | Included Standard Tool Calls | Included Premium Tool Calls | Usage Based Standard Tool Calls | Usage Based Premium Tool Calls |
 | ------------------ | ---------------------------- | --------------------------- | ------------------------------- | ------------------------------ |
@@ -53,22 +44,12 @@ As a rough guide, they are priced at 3x the cost of a standard tool call — the
 | Serious Business   | 2M                           | 50k                         | $0.249/1k                       | $0.747/1k                      |
 | Enterprise         | Flexible                     | Flexible                    | Flexible                        | Flexible                       |
 
-This is a quick call out — full pricing details are on the [pricing page](https://composio.dev/pricing).
+# Rate limits
 
-# What limits do premium tools have?
-
-Premium tools are also subject to lower rate limits than standard tool calls.
-
-If you need more than the default limits, please [contact us](mailto:billing@composio.dev) and we can find a workable solution.
+Premium tools have lower rate limits than standard tool calls. If you need more, [contact us](mailto:billing@composio.dev).
 
 | Spending Tier | Standard Tool Calls Rate Limit | Premium Tool Calls Rate Limit |
 | ------------- | ------------------------------ | ----------------------------- |
 | Free          | 100/min                        | 1,000/hour                    |
 | Paid          | 5,000/min                      | 10,000/hour                   |
 | Enterprise    | Custom                         | Custom                        |
-
-# Feedback on premium tools
-
-These pricing changes are not rolling out immediately, and we are very open to feedback on the pricing and the limits.
-
-There is a lot of room for improvement and iteration here, please reach out if you have suggestions [here](mailto:rahul@composio.dev).

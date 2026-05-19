@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Fetching tools and schemas"
 source: "https://docs.composio.dev/docs/tools-direct/fetching-tools.md"
-source_hash: "1268a57bd0b0651cb147805cc15242d9db6a8b73a5c585ba003c04fa0d17f042"
+source_hash: "3297f49bd511937f52e03ce2e5697ac3307f7643e7dc094ace3f4648af6b26b1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/fetching-tools.md"
@@ -43,7 +43,7 @@ const tools = await composio.tools.get(userId, {
 });
 ```
 
-Returns top 20 tools by default. Tools require a `user_id` because they're scoped to authenticated accounts. See [User management](/docs/users-and-sessions) and [Authentication](/docs/tools-direct/authenticating-tools).
+Returns top 20 tools by default. Tools require a `user_id` because they're scoped to authenticated accounts. See [User scoping](/docs/how-composio-works) and [Authentication](/docs/tools-direct/authenticating-tools).
 
 # Tool schemas
 

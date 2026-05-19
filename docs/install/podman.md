@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Podman"
 source: "https://docs.openclaw.ai/install/podman"
-source_hash: "2578622e5937613ee9f5d50fefb842134fa7e1784fd73d08e6237fe77df70e71"
+source_hash: "a58d40784338c00c11a71971caf6d81ebd2593ef9438fc024da6c5dc41248d14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/podman.md"
@@ -71,7 +71,8 @@ You can also set `OPENCLAW_PODMAN_QUADLET=1`.
 Optional build/setup env vars:
 
 * `OPENCLAW_IMAGE` or `OPENCLAW_PODMAN_IMAGE` -- use an existing/pulled image instead of building `openclaw:local`
-* `OPENCLAW_DOCKER_APT_PACKAGES` -- install extra apt packages during image build
+* `OPENCLAW_IMAGE_APT_PACKAGES` -- install extra apt packages during image build (also accepts legacy `OPENCLAW_DOCKER_APT_PACKAGES`)
+* `OPENCLAW_IMAGE_PIP_PACKAGES` -- install extra Python packages during image build; pin versions and use only package indexes you trust
 * `OPENCLAW_EXTENSIONS` -- pre-install plugin dependencies at build time
 * `OPENCLAW_INSTALL_BROWSER` -- pre-install Chromium and Xvfb for browser automation (set to `1` to enable)
 

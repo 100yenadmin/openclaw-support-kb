@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "937abc548ef0f3b1b89ce56038f933f9f1dff121c180a382f13febad5a2740a9"
+source_hash: "c2f90a07f7b1a764812c4b43c4afa556aa53238bc9f93de5ef4ae17f563c48ee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/ansible.md"
@@ -54,7 +54,7 @@ The Ansible playbook installs and configures:
 1. **Tailscale** -- mesh VPN for secure remote access
 2. **UFW firewall** -- SSH + Tailscale ports only
 3. **Docker CE + Compose V2** -- for the default agent sandbox backend
-4. **Node.js 24 + pnpm** -- runtime dependencies (Node 22 LTS, currently `22.16+`, remains supported)
+4. **Node.js 24 + pnpm** -- runtime dependencies (Node 22 LTS, currently `22.19+`, remains supported)
 5. **OpenClaw** -- host-based, not containerized
 6. **Systemd service** -- auto-start with security hardening
 

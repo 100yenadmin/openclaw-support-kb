@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "8e888a2ef258ee5c8946e085a3bf6e6ba4e831fd7fdf6487ea4e0193a4a9fd7f"
+source_hash: "08a1003d16e677c0526bad2f170d25c19c84e5d2c5ef02e0564a4c36c5b7b5df"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -105,7 +105,11 @@ OpenClaw no longer creates automatic `sessions.json.bak.*` rotation backups duri
 Transcript mutations use a session write lock on the transcript file. Lock acquisition waits up to
 `session.writeLock.acquireTimeoutMs` before surfacing a busy-session error; the default is `60000`
 ms. Raise this only when legitimate prep, cleanup, compaction, or transcript mirror work contends
-longer on slow machines. Stale-lock detection and maximum hold warnings remain separate policies.
+longer on slow machines. `session.writeLock.staleMs` controls when an existing lock can be
+reclaimed as stale; the default is `1800000` ms. `session.writeLock.maxHoldMs` controls the
+in-process watchdog release threshold; the default is `300000` ms. Emergency env overrides are
+`OPENCLAW_SESSION_WRITE_LOCK_ACQUIRE_TIMEOUT_MS`, `OPENCLAW_SESSION_WRITE_LOCK_STALE_MS`, and
+`OPENCLAW_SESSION_WRITE_LOCK_MAX_HOLD_MS`.
 
 Enforcement order for disk budget cleanup (`mode: "enforce"`):
 

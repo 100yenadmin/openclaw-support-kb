@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "c662d71e811516208aa3e9d4bc24b77df604da090d7af5de8a58a741fc91fa45"
+source_hash: "d76e9e6ed8947762f23b3424ea55737e79b2bf066cb816ef5534bb3f4575887d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/migration-guide/new-sdk.md
 
 
-> This guide covers migrating from the legacy SDK (v1) to the current SDK (v3). The recommended way to use Composio is now through **sessions** — see [Migrating from Direct Tools to Sessions](/docs/migration-guide/direct-to-sessions) or the [Quickstart](/docs/quickstart) if you're starting fresh.
+> This guide covers migrating from the legacy SDK (v1) to the current SDK (v3). The recommended way to use Composio is now through **sessions** — see [Migrating from Direct Tools to Sessions](/docs/migration-guide/direct-to-sessions) or [Configuring Sessions](/docs/configuring-sessions) if you're starting fresh.
 
 In the last few months, we have experienced very rapid growth in usage of our platform. As such, our team has been working hard to radically improve the performance and developer experience of our platform.
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Script-Only Cron Jobs (No LLM)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/cron-script-only"
-source_hash: "3a8eb650ac4a11187e507707b9998732ba139f07c81ed0c1ec066a07d3c1fecf"
+source_hash: "27dc561904e116b4737f1435bd0a23b7577068fd8fa24b95f85308341d040a85"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/cron-script-only.md"
@@ -23,6 +23,7 @@ Sometimes you already know exactly what message you want to send. You don't need
 
 Hermes calls this **no-agent mode**. It's the cron system minus the LLM.
 
+<!-- ascii-guard-ignore -->
 ```
    ┌──────────────────┐          ┌──────────────────┐
    │ scheduler tick   │  every   │ run script       │
@@ -36,6 +37,7 @@ Hermes calls this **no-agent mode**. It's the cron system minus the LLM.
                                  │ (telegram/disc…) │
                                  └──────────────────┘
 ```
+<!-- ascii-guard-ignore-end -->
 
 - **No LLM call.** Zero tokens, zero agent loop, zero model spend.
 - **Script is the job.** The script decides whether to alert. Emit output → message gets sent. Emit nothing → silent tick.

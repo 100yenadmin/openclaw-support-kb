@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "8474ac2c7be9d5d605393e1b9c2fe00b9929a3da2cdadc9d7d28f67519471054"
+source_hash: "96cdc4b05086597eeec988c522784538ff4bb00bbbf25286e219ad1c6164decb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -305,6 +305,7 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
 
     * direct chats: preview message + `editMessageText`
     * groups/topics: preview message + `editMessageText`
+    * direct-chat tool progress: optional native `sendMessageDraft` status preview when enabled and supported
 
     Requirement:
 
@@ -314,7 +315,28 @@ Production-ready for bot DMs and groups via grammY. Long polling is the default 
     * `streaming.preview.commandText` controls command/exec detail inside those tool-progress lines: `raw` (default, preserves released behavior) or `status` (tool label only)
     * legacy `channels.telegram.streamMode` and boolean `streaming` values are detected; run `openclaw doctor --fix` to migrate them to `channels.telegram.streaming.mode`
 
-    Tool-progress preview updates are the short status lines shown while tools run, for example command execution, file reads, planning updates, patch summaries, or Codex preamble/commentary text in Codex app-server mode. Telegram keeps these enabled by default to match released OpenClaw behavior from `v2026.4.22` and later. To keep the edited preview for answer text but hide tool-progress lines, set:
+    Tool-progress preview updates are the short status lines shown while tools run, for example command execution, file reads, planning updates, patch summaries, or Codex preamble/commentary text in Codex app-server mode. Telegram keeps these enabled by default to match released OpenClaw behavior from `v2026.4.22` and later.
+
+    Direct chats can use native Telegram drafts for these tool-progress lines without persisting tool chatter into chat history. Native drafts stop before answer text starts; final answers stay on the normal persistent delivery path. This lane is off by default and should be gated to trusted DM IDs first:
+
+    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      "channels": {
+        "telegram": {
+          "streaming": {
+            "mode": "partial",
+            "preview": {
+              "toolProgress": true,
+              "nativeToolProgress": true,
+              "nativeToolProgressAllowFrom": ["123456789"]
+            }
+          }
+        }
+      }
+    }
+    ```
+
+    To keep the edited preview for answer text but hide tool-progress lines, set:
 
     ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
