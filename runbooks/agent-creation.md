@@ -48,6 +48,41 @@ gbrain search "Source: https://docs.openclaw.ai/tools/skills-config" --source op
    ```
 10. Smoke-test with a harmless status/check message in the intended channel.
 
+## Mission Control / Paperclip Agents
+
+Use the Paperclip evaOS runtime runbook before creating or changing Mission
+Control agents:
+
+```bash
+gbrain search "Paperclip on evaOS VMs Mission Control Agent Creation Contract" --source openclaw-support-kb
+```
+
+The normal OpenClaw rule is still to choose a lowercase agent id that is not
+`main`. The exception is a Paperclip CEO/orchestrator agent: it may target
+OpenClaw `adapterConfig.agentId=main` so it can share the customer's main Eva
+context, but it must use `sessionKeyStrategy=issue` and must not set
+`sessionKey=main`. Paperclip must never route work into `agent:main:main`,
+which is the customer's primary OpenClaw main chat session.
+
+For dedicated Mission Control workers, create or confirm the OpenClaw agent id
+first, then point Paperclip at that stable id:
+
+```bash
+openclaw agents list --bindings
+openclaw agents add atlas --workspace ~/.openclaw/workspace-atlas --non-interactive --json
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run --map Argyle=atlas
+```
+
+For a CEO/orchestrator Paperclip agent that should use the main Eva context:
+
+```bash
+sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run --map Aurelius=main
+```
+
+Paperclip display names may be renamed later; OpenClaw agent ids are the stable
+routing targets. After every Paperclip agent create/rename/manual adapter edit,
+run the routing audit before assigning real work.
+
 ## Nontechnical User Prompts
 
 - "What should this agent be responsible for?"
