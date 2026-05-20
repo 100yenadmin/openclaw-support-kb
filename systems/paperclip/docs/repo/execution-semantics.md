@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Execution Semantics"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/execution-semantics.md"
-source_hash: "52f2ab9e520563d824d8232dd74c28a148a55b8366eaf69c7c93e613f66058d7"
+source_hash: "57100a0372da32e1ea27085cb96fe7ba55564f1f18c59a78bb9495b602d8cba0"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/execution-semantics.md"
@@ -347,6 +347,12 @@ Recovery rule:
 - if that continuation wake also finishes and the issue is still stranded, Paperclip moves the issue to `blocked` and opens or updates an explicit recovery action when a bounded owner/action is known; the visible comment is evidence, not the recovery path by itself
 
 This is an active-work continuity recovery.
+
+### 8.3 Recovery model-profile lane
+
+Cheap model profiles are only for status-only operational recovery overhead. Paperclip may request `modelProfile: "cheap"` for bounded recovery-owner work that updates task liveness, clears bad status, records a disposition, or asks for human/manager intervention. Those wakes must carry guard context such as `allowDeliverableWork: false`, `allowDocumentUpdates: false`, and `resumeRequiresNormalModel: true`.
+
+Automatic retries that can continue source work must use the original/normal model lane. This includes failed source-work retries, process-loss retries, transient/scheduled retries, max-turn continuations, source-assignee continuations, assigned-todo dispatch recovery, and any run that can update repo files, issue documents, plans, work products, or attachments. When a cheap status-only recovery determines that actual work remains, it must hand back to a normal-model worker run before source work or persistent deliverable updates resume. Cheap recovery hints must be scrubbed from copied retry, resume, child, and downstream source-work contexts.
 
 ## 9. Startup and Periodic Reconciliation
 

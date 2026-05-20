@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/v3/api-reference/mcp.md"
-source_hash: "5482a4023f25605cb6fbf8d169b04e63255cbbb3708588ab1b271793607250fc"
+source_hash: "48e6585f3c871b78ae22a2d126e391a1f3212d59cc377fee409d5906e482b676"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/mcp.md"
@@ -22,11 +22,5 @@ Source: https://docs.composio.dev/reference/v3/api-reference/mcp.md
 MCP server management
 
 # Endpoints
-
----
-
-
-# Toolkits
-
 
 ---

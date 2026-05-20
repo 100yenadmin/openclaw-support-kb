@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Basic FastAPI Server"
 source: "https://docs.composio.dev/cookbooks/fast-api.md"
-source_hash: "0718ecaf97273498b40595566ff7653565bba351efcef6f8044679a7480a5e6f"
+source_hash: "23b042750fbd7858ef8f2c1cbd8e165f5565ab4419b4672bee3363b7e0e52202"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/fast-api.md"
@@ -25,7 +25,7 @@ This cookbook builds a FastAPI server where users can chat with an AI agent that
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

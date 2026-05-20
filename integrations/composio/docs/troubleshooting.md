@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Troubleshooting"
 source: "https://docs.composio.dev/docs/troubleshooting.md"
-source_hash: "a253b498f659afec38d5f72e35cecfb87b4a1758634ea995fd5148c3fbc92d8a"
+source_hash: "ccab5be59a642442f6a393f69bf6f468d1f666216098c4756fc5784c2ee8d721"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "troubleshooting.md"
@@ -31,13 +31,13 @@ See [Troubleshooting tools](/docs/troubleshooting/tools#reporting-tool-issues) f
 
 **How do I find my auth config ID or connected account ID?**
 
-Go to the [dashboard](https://platform.composio.dev) and navigate to **Auth Configs** for your auth config ID, or **Connected Accounts** for the connected account ID. Both IDs are visible in the detail view of each entry.
+Go to the [dashboard](https://dashboard.composio.dev) and navigate to **Auth Configs** for your auth config ID, or **Connected Accounts** for the connected account ID. Both IDs are visible in the detail view of each entry.
 
 See [Troubleshooting authentication](/docs/troubleshooting/authentication#reporting-authentication-issues) for screenshots.
 
 **How do I find my MCP server ID?**
 
-Your MCP server ID is the UUID in the server URL (e.g., `https://backend.composio.dev/v3/mcp//mcp`). You can also find it in the [dashboard](https://platform.composio.dev) under your MCP server's detail page.
+Your MCP server ID is the UUID in the server URL (e.g., `https://backend.composio.dev/v3/mcp//mcp`). You can also find it in the [dashboard](https://dashboard.composio.dev) under your MCP server's detail page.
 
 See [Troubleshooting MCP](/docs/troubleshooting/mcp#reporting-mcp-issues) for a visual guide.
 
@@ -55,7 +55,7 @@ Generate a UUID at [uuidgenerator.net](https://www.uuidgenerator.net/). See [Tro
 
 **How do I find the trigger ID for a trigger instance?**
 
-Go to the [dashboard](https://platform.composio.dev) and navigate to **Active Triggers**. The trigger ID is shown for each trigger instance.
+Go to the [dashboard](https://dashboard.composio.dev) and navigate to **Active Triggers**. The trigger ID is shown for each trigger instance.
 
 See [Troubleshooting triggers](/docs/troubleshooting/triggers#reporting-issues) for a screenshot.
 

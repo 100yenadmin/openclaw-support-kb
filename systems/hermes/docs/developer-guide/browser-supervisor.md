@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/browser-supervisor.md"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/browser-supervisor"
-source_hash: "b48a21e65cf50a59d0fd4838646ac2932f20c9c83b85008a59c10c8656a46ae0"
+source_hash: "1fa3844137daf91e4ca64e91de7d13f21cd403ac427132bcb265a86c94382b14"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/browser-supervisor.md"
@@ -236,8 +236,8 @@ Issue planned against `jo-inc/camofox-browser` adding:
 Unit tests use an asyncio mock CDP server that speaks enough of the protocol
 to exercise all state transitions: attach, enable, navigate, dialog fire,
 dialog dismiss, frame attach/detach, child target attach, session teardown.
-Real-backend E2E (Browserbase + local Chrome) is manual — exercise via
-`/browser connect` to a live Chrome and run the dialog/frame test cases
-described above.
+Real-backend E2E (Browserbase + local Chromium-family browser) is manual — exercise via
+`/browser connect` to a live Chromium-family browser and run the dialog/frame
+test cases described above.
 
 ---

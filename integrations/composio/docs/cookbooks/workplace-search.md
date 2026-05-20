@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Workplace search agent"
 source: "https://docs.composio.dev/cookbooks/workplace-search.md"
-source_hash: "f51beaa49c6ff382e8d4f3823c89cbbd6de7f4feb9ca32f97c97b82a84b77fc9"
+source_hash: "88eb0caaf506c4134ebf8574513a4425ec9e60c0b97e3aeab79b46b38279f220"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/workplace-search.md"
@@ -31,7 +31,7 @@ Build a search agent that queries across your workplace tools and returns answer
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

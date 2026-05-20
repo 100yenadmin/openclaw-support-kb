@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/errors.md"
-source_hash: "b55c2515695a1d00b61f07df9da79b88e3c1fe5830d3b03eef67fcf112191397"
+source_hash: "76751868677c8b62ed0778d4799871c54a9dc5cead35fec068a8aa8016f4df01"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/errors.md"
@@ -64,12 +64,12 @@ Composio uses two types of API keys:
 * **Project API key** (`x-api-key`) — For project-level operations
 * **Organization API key** (`x-org-api-key`) — For organization-level access across projects
 
-| Error                      | Cause                                                                                              |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://platform.composio.dev/settings). |
-| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                  |
-| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                 |
-| Insufficient permissions   | The API key doesn't have access to this resource.                                                  |
+| Error                      | Cause                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://dashboard.composio.dev/settings). |
+| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                   |
+| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                  |
+| Insufficient permissions   | The API key doesn't have access to this resource.                                                   |
 
 > See [Authentication Troubleshooting](/docs/troubleshooting/authentication) for more help.
 

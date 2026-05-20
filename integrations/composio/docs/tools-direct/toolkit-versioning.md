@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkit Versioning"
 source: "https://docs.composio.dev/docs/tools-direct/toolkit-versioning.md"
-source_hash: "cc5fe89a677f7f6285f9f73d3489d2feb7c3781235dd57db34c4ba41e5a46e54"
+source_hash: "e1eb47cd61ad492765987d3a23ebb54b1d821f027de567d1ab09102cf95c40bc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/toolkit-versioning.md"
@@ -21,7 +21,7 @@ Source: https://docs.composio.dev/docs/tools-direct/toolkit-versioning.md
 
 Toolkit versioning ensures your tools behave consistently across deployments. You can pin specific versions in production, test new releases in development, and roll back when needed.
 
-To view available versions, go to [Dashboard](https://platform.composio.dev) > **All Toolkits** > select a toolkit. The version dropdown shows the latest and all available versions:
+To view available versions, go to [Dashboard](https://dashboard.composio.dev) > **All Toolkits** > select a toolkit. The version dropdown shows the latest and all available versions:
 
 <img alt="Toolkit version selector on the Composio dashboard" src={__img0} placeholder="blur" />
 
@@ -31,7 +31,7 @@ You can also find the latest version for each toolkit on the [Toolkits](/toolkit
 
 # Default version behavior
 
-> When no version is specified, the API defaults to the base version (`00000000_00`), **not** the latest version. This means the response may contain fewer tools than what's shown on the [platform UI](https://platform.composio.dev). To get all available tools including ones added in newer versions, explicitly set `toolkit_versions` to `"latest"` or a specific version.
+> When no version is specified, the API defaults to the base version (`00000000_00`), **not** the latest version. This means the response may contain fewer tools than what's shown on the [platform UI](https://dashboard.composio.dev). To get all available tools including ones added in newer versions, explicitly set `toolkit_versions` to `"latest"` or a specific version.
 
 This applies to both the SDK and direct REST API calls:
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "PR review agent"
 source: "https://docs.composio.dev/cookbooks/pr-review-agent.md"
-source_hash: "cc71f4422d4ef20b5a216b5a7edb51ad9b9fcef064aad2ab92f6f70cf7cdf82b"
+source_hash: "22bad1064711b2230a0d510ce04225f8f2f2ca719c17a5e5b6e83a13cf91a672"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/pr-review-agent.md"
@@ -30,7 +30,7 @@ Build a PR review agent that runs on every pull request, reads your repo's `CLAU
 # Prerequisites
 
 * Python 3.10+
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 * A GitHub repository where you have admin access (for adding secrets and workflows)
 
@@ -45,7 +45,7 @@ mkdir pr-review-agent && cd pr-review-agent
 pip install composio composio-openai-agents openai-agents
 ```
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
 
 Set your API keys:
 

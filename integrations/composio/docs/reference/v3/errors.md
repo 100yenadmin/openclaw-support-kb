@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/v3/errors.md"
-source_hash: "517223cf30596b79b856d1c8040798ad02f09de539af99effa60e8e7fec1ae80"
+source_hash: "a6753102d649a01b14dbe78a64a2ac0865a198420bcb76f98318ee03694171f7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/errors.md"
@@ -64,12 +64,12 @@ Composio uses two types of API keys:
 * **Project API key** (`x-api-key`) — For project-level operations
 * **Organization API key** (`x-org-api-key`) — For organization-level access across projects
 
-| Error                      | Cause                                                                                              |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://platform.composio.dev/settings). |
-| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                  |
-| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                 |
-| Insufficient permissions   | The API key doesn't have access to this resource.                                                  |
+| Error                      | Cause                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://dashboard.composio.dev/settings). |
+| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                   |
+| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                  |
+| Insufficient permissions   | The API key doesn't have access to this resource.                                                   |
 
 > See [Authentication Troubleshooting](/docs/troubleshooting/authentication) for more help.
 

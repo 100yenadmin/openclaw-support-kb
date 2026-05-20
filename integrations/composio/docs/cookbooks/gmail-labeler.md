@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Gmail Labeler"
 source: "https://docs.composio.dev/cookbooks/gmail-labeler.md"
-source_hash: "e557701752f5348c6986a30c943321050f117c314eff035f55711ddf6365e066"
+source_hash: "a5452a85fb41644ff611389ac8804ca511681f3c6f4871c09126bc05078be41b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/gmail-labeler.md"
@@ -25,7 +25,7 @@ This cookbook builds a Python script that connects to Gmail, listens for new mes
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [Anthropic API key](https://console.anthropic.com/settings/keys)
 
 # Project setup

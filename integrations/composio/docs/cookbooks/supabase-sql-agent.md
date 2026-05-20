@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Supabase SQL Agent"
 source: "https://docs.composio.dev/cookbooks/supabase-sql-agent.md"
-source_hash: "f388e856da96c934ca523e0b788463749fc5950ed365409d2bd94026fbe4eeaa"
+source_hash: "35bdf3e3eb7324f02a21619f9b7a2960a976f53e3ecf4e15981bb0b09df5dc2c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/supabase-sql-agent.md"
@@ -25,7 +25,7 @@ This cookbook builds a CLI agent that connects to your Supabase account and lets
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

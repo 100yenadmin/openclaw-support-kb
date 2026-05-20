@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "666b4a746d6c7afe45727487f15a8667539bff276d5f86ecf219273fe675b37a"
+source_hash: "4f4422a203c54b32995ca21a715ff6954901be0cf935edcc84ab542c75f04651"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -41,7 +41,7 @@ npm install @composio/core @composio/openai-agents @openai/agents
 
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -165,7 +165,7 @@ npm install dotenv @composio/core @openai/agents zod@3
 ```
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -304,7 +304,7 @@ npm install dotenv @composio/core @composio/claude-agent-sdk @anthropic-ai/claud
 ```
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -452,7 +452,7 @@ npm install dotenv @composio/core @anthropic-ai/claude-agent-sdk
 ```
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -607,7 +607,7 @@ npm install @composio/core @composio/vercel ai @ai-sdk/anthropic
 ```
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -687,7 +687,7 @@ npm install dotenv @composio/core ai @ai-sdk/anthropic @ai-sdk/mcp
 ```
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key

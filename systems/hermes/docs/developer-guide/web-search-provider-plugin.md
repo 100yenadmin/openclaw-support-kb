@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Search Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/web-search-provider-plugin"
-source_hash: "45d6d0f30dabe628ab40e7abe68ad7740ad73de6895173cd66ee4db0847779f2"
+source_hash: "46537ca0f3b7197cec8e2e732b09aa25674d0dbc278d65deebcf63770cb1f0a2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/web-search-provider-plugin.md"
@@ -259,6 +259,7 @@ If your provider wraps a third-party SDK (like DDGS does with the `ddgs` package
 - **`plugins/web/ddgs/`** — no-key provider that lazy-installs its SDK. Useful pattern for backends that wrap a Python package.
 - **`plugins/web/firecrawl/`** — full multi-capability provider (search + extract + crawl) with multiple format modes.
 - **`plugins/web/searxng/`** — self-hosted, URL-configured backend with no auth.
+- **`plugins/web/xai/`** — LLM-backed search via Grok's server-side `web_search` tool. Shows how to reuse an existing OAuth/env-var credential surface (`tools/xai_http.py`) without adding new env vars, and how to write a cheap `is_available()` that honors the no-network contract.
 
 ## Distribute via pip
 

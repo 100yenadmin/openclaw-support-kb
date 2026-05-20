@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Background Agent"
 source: "https://docs.composio.dev/cookbooks/background-agent.md"
-source_hash: "5e967205049798d9f4c339fe1a0d1dc2c12afdc68276c1aec99d1473d32c36b5"
+source_hash: "4c90ac681d41139c1276f1032af9f35dff5e4f8379788c1576d2fe89415c3acc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/background-agent.md"
@@ -26,7 +26,7 @@ Run it manually, put it on a cron, or deploy it. The agent does the rest.
 # Prerequisites
 
 * Node.js 18+
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

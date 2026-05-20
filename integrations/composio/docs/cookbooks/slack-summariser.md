@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Slack Summarizer"
 source: "https://docs.composio.dev/cookbooks/slack-summariser.md"
-source_hash: "5e44cbeed419751ad033082f788f4d7353434bb4818785c21213ee1aad0708ff"
+source_hash: "20dd5ed674f646490fa3627b69857a8eccc598d09daacb607ba02b5f778027fd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/slack-summariser.md"
@@ -25,7 +25,7 @@ This cookbook builds a standalone Python script that connects to a Slack workspa
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "9bf1a29b99f4a96c9de44e99e765d1c021e4c07df908897b1c056c2f343026a5"
+source_hash: "7d321a52a9240a9504a773e5a4f2cef69d09c9d23360061ee421623164a3e5d2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -306,5 +306,11 @@ Use with Anthropic, OpenAI, and other frameworks
 
 - [Configuring Sessions](/docs/configuring-sessions):
 Configure the recommended dynamic MCP endpoint
+
+---
+
+
+# Cookbooks
+
 
 ---

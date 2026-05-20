@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Build a Chat App"
 source: "https://docs.composio.dev/cookbooks/chat-app.md"
-source_hash: "ec75d872b75e1caf273a42237d902dbdcb5d855473c4ee47170d7dd890a16667"
+source_hash: "a6b33e15512db9a7e055cb99f7679224658db4c442ff6625aaca73ec39268218"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/chat-app.md"
@@ -30,7 +30,7 @@ Give your AI agent access to Gmail, GitHub, Slack, Notion, and 1000+ other apps.
 # Prerequisites
 
 * [Bun](https://bun.sh) (or Node.js 18+)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 **Stack:** Next.js, Vercel AI SDK, OpenAI, Composio
@@ -45,7 +45,7 @@ cd composio-chat
 bun add @composio/core @composio/vercel @ai-sdk/openai ai @ai-sdk/react
 ```
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://platform.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
 
 Add your API keys to a `.env.local` file in the project root:
 

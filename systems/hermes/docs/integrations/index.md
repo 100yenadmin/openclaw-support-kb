@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Integrations"
 source: "https://hermes-agent.nousresearch.com/docs/integrations"
-source_hash: "35a173e0685b4c9ee70648af3d18cb57999b7be6f1ba8c57838b0117ff6b7077"
+source_hash: "d53b69372d51e8ff3bd60d2301b6d401c673e87b4a391530989bd8f8af50c111"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/index.md"
@@ -59,7 +59,7 @@ Hermes includes full browser automation with multiple backend options for naviga
 
 - **Browserbase** — Managed cloud browsers with anti-bot tooling, CAPTCHA solving, and residential proxies
 - **Browser Use** — Alternative cloud browser provider
-- **Local Chrome via CDP** — Connect to your running Chrome instance using `/browser connect`
+- **Local Chromium-family CDP** — Connect to your running Chrome, Brave, Chromium, or Edge browser using `/browser connect`
 - **Local Chromium** — Headless local browser via the `agent-browser` CLI
 
 See [Browser Automation](/docs/user-guide/features/browser) for setup and usage.

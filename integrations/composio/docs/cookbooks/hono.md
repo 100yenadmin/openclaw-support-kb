@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Basic Hono Server"
 source: "https://docs.composio.dev/cookbooks/hono.md"
-source_hash: "a3d899e61fd6d9225bedfb5cf0c20f6676bcc83c349dfab1e52bfc4d96ba0a6a"
+source_hash: "e7385d34cef6269bd2c84952141c0b422e3b5407acb31d9afa80c73fd37b4b40"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/hono.md"
@@ -24,7 +24,7 @@ This cookbook builds a Hono.js server where users can chat with an AI agent that
 # Prerequisites
 
 * Node.js 18+
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

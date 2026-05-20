@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Fetching tools and toolkits"
 source: "https://docs.composio.dev/docs/toolkits/fetching-tools-and-toolkits.md"
-source_hash: "e062222d583adb1f3e86ca02a0d7dbf8fcca8cd26fba03f0ae5a5dc2864974ad"
+source_hash: "2dd4fe7919de609e1801145c1a8832c8f4d376de3dd09bb86cb94b64a47eaa48"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/fetching-tools-and-toolkits.md"
@@ -124,7 +124,7 @@ To restrict which toolkits or tools are discoverable by the meta tools, configur
 
 # Browsing the catalog
 
-Before configuring a session, you may want to explore what toolkits and tools are available. You can browse visually at [platform.composio.dev](https://platform.composio.dev) or in the [docs](/toolkits), or fetch programmatically:
+Before configuring a session, you may want to explore what toolkits and tools are available. You can browse visually at [dashboard.composio.dev](https://dashboard.composio.dev) or in the [docs](/toolkits), or fetch programmatically:
 
 **Python:**
 

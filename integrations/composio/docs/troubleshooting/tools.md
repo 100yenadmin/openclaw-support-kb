@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools & Toolkits"
 source: "https://docs.composio.dev/docs/troubleshooting/tools.md"
-source_hash: "d4fdb5f721d86a0249e104c75eed3b89d9cde3cbf035053817d8a62b30c8dccd"
+source_hash: "c7c6f55f13cc420d1a2d978bedbaa64be70d0dc59516659e891b078e0f56c4f2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "troubleshooting/tools.md"
@@ -35,7 +35,7 @@ Verify the connected account has necessary permissions:
 
 # API returning fewer tools than expected
 
-If the Get Tools API (`GET /api/v3.1/tools`) returns fewer tools than what's shown on the [platform UI](https://platform.composio.dev), you likely need to specify a toolkit version.
+If the Get Tools API (`GET /api/v3.1/tools`) returns fewer tools than what's shown on the [platform UI](https://dashboard.composio.dev), you likely need to specify a toolkit version.
 
 When `toolkit_versions` is not provided, the API defaults to the base version (`00000000_00`), which only includes tools from the initial release. Tools added in later versions won't appear.
 

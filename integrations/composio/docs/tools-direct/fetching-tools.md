@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Fetching tools and schemas"
 source: "https://docs.composio.dev/docs/tools-direct/fetching-tools.md"
-source_hash: "3297f49bd511937f52e03ce2e5697ac3307f7643e7dc094ace3f4648af6b26b1"
+source_hash: "58754e836cceeab2a041ff9a766be597d33e7b3ab96397677c4ab07dd639c488"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/fetching-tools.md"
@@ -65,7 +65,7 @@ const tool = await composio.tools.getRawComposioToolBySlug("GMAIL_SEND_EMAIL");
 
 Generate type-safe code for direct SDK execution with [`composio generate`](/docs/cli#generate-type-definitions). This creates TypeScript or Python types from tool schemas.
 
-> View tool parameters and schemas visually in the [Composio platform](https://platform.composio.dev). Navigate to any toolkit and select a tool to see its input/output parameters.
+> View tool parameters and schemas visually in the [Composio platform](https://dashboard.composio.dev). Navigate to any toolkit and select a tool to see its input/output parameters.
 
 # Filtering tools
 

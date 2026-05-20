@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/x-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "836660babf6b8b4fa78123e3f75eff27beed06142f9bde7ecf2516e1af36942c"
+source_hash: "b729d87f95e432f744e3dc308e8b2075ea845fe14eeb6aebeab46c95f48867a6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -29,7 +29,7 @@ The `x_search` tool lets the agent search X (Twitter) posts, profiles, and threa
 
 | Credential | Source | Setup |
 |------------|--------|-------|
-| **SuperGrok OAuth** (preferred) | Browser login at `accounts.x.ai`, refreshed automatically | `hermes auth add xai-oauth` — see [xAI Grok OAuth (SuperGrok Subscription)](../../guides/xai-grok-oauth.md) |
+| **SuperGrok / X Premium+ OAuth** (preferred) | Browser login at `accounts.x.ai`, refreshed automatically | `hermes auth add xai-oauth` — see [xAI Grok OAuth (SuperGrok / X Premium+)](../../guides/xai-grok-oauth.md) |
 | **`XAI_API_KEY`** | Paid xAI API key | Set in `~/.hermes/.env` |
 
 Both hit the same endpoint with the same payload — the only difference is the bearer token. **When both are configured, SuperGrok OAuth wins** so x_search runs against your subscription quota instead of paid API spend.

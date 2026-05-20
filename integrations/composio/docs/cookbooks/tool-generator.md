@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tool Type Generator"
 source: "https://docs.composio.dev/cookbooks/tool-generator.md"
-source_hash: "2f69444f8fa3419bfe392c414c10e586aab59d123bc01e110e6fd6265a271fc2"
+source_hash: "9c5299309a870e681a0bc334e71305bcd2dceba56dcc5ca15e0547d27d6ec3d6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/tool-generator.md"
@@ -25,7 +25,7 @@ This cookbook shows how to access the raw tool definitions and toolkit metadata 
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 
 # Project setup
 

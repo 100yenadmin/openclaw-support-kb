@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio Connect"
 source: "https://docs.composio.dev/docs/composio-connect.md"
-source_hash: "bdd9ddf827d86f09e94adeac12e483872e7e67382e9851e60721b5ed3b04472c"
+source_hash: "88c70d6a207c2aff12802de55952b31f20942ae02a28b96f8a05b8351e5aa6b6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "composio-connect.md"
@@ -356,11 +356,5 @@ Open [dashboard.composio.dev](https://dashboard.composio.dev) and click **Connec
 ## I still need help
 
 Reach out at [tech@composio.dev](mailto:tech@composio.dev) or join the [Composio Discord](https://discord.com/invite/cNruWaAhQk).
-
----
-
-
-# Cookbooks
-
 
 ---

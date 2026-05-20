@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slash Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/slash-commands"
-source_hash: "bd77b571f75a320a9966a583037008e0803d3e2d0c64cd76aebf70056a89532b"
+source_hash: "7d5c00ba524ec1c6278214bfbf942a96f44cb2627c765096d2afc5906e2a1843"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/slash-commands.md"
@@ -98,7 +98,7 @@ Type `/` in the CLI to open the autocomplete menu. Built-in commands are case-in
 |---------|-------------|
 | `/tools [list\|disable\|enable] [name...]` | Manage tools: list available tools, or disable/enable specific tools for the current session. Disabling a tool removes it from the agent's toolset and triggers a session reset. |
 | `/toolsets` | List available toolsets |
-| `/browser [connect\|disconnect\|status]` | Manage local Chrome CDP connection. `connect` attaches browser tools to a running Chrome instance (default: `ws://localhost:9222`). `disconnect` detaches. `status` shows current connection. Auto-launches Chrome if no debugger is detected. |
+| `/browser [connect\|disconnect\|status]` | Manage a local Chromium-family CDP connection. `connect` attaches browser tools to a running Chrome, Brave, Chromium, or Edge instance (default: `http://127.0.0.1:9222`). `disconnect` detaches. `status` shows current connection. Auto-launches a supported Chromium-family browser if no debugger is detected. |
 | `/skills` | Search, install, inspect, or manage skills from online registries |
 | `/cron` | Manage scheduled tasks (list, add/create, edit, pause, resume, run, remove) |
 | `/curator` | Background skill maintenance — `status`, `run`, `pin`, `archive`. See [Curator](/docs/user-guide/features/curator). |

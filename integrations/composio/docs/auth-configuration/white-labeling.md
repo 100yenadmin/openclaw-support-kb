@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling (direct execution)"
 source: "https://docs.composio.dev/docs/auth-configuration/white-labeling.md"
-source_hash: "a52127aea5a298e772773c265126d9fe4135b9c8bdf890b1993adf58af2ac2cc"
+source_hash: "a15d2e4a3e46efc09cf49359f479a68aac83839694c939d5fef24879724709b3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "auth-configuration/white-labeling.md"
@@ -65,7 +65,7 @@ Step-by-step guides: [Google](https://composio.dev/auth/googleapps) | [Slack](ht
 
 #### Create an auth config in Composio
 
-In the [Composio dashboard](https://platform.composio.dev):
+In the [Composio dashboard](https://dashboard.composio.dev):
 
     1. Go to **Authentication management** → **Create Auth Config**
     2. Select the toolkit (e.g., GitHub)

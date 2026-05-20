@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Environment Variables"
 source: "https://hermes-agent.nousresearch.com/docs/reference/environment-variables"
-source_hash: "ad5dec448a68160d873ac650818156501d22e5e61bb13d132586a292916d16b5"
+source_hash: "0dc78345307cd1115a3912e0737e832196b1909fb6a8d8308b77d6fe9cadb3ac"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/environment-variables.md"
@@ -95,7 +95,7 @@ All variables go in `~/.hermes/.env`. You can also set them with `hermes config 
 | `STEPFUN_BASE_URL` | Override StepFun base URL (default: `https://api.stepfun.com/v1`) |
 | `OLLAMA_API_KEY` | Ollama Cloud API key — managed Ollama catalog without local GPU ([ollama.com/settings/keys](https://ollama.com/settings/keys)) |
 | `OLLAMA_BASE_URL` | Override Ollama Cloud base URL (default: `https://ollama.com/v1`) |
-| `XAI_API_KEY` | xAI (Grok) API key for chat + TTS ([console.x.ai](https://console.x.ai/)) |
+| `XAI_API_KEY` | xAI (Grok) API key for chat + TTS + web search ([console.x.ai](https://console.x.ai/)) |
 | `XAI_BASE_URL` | Override xAI base URL (default: `https://api.x.ai/v1`) |
 | `MISTRAL_API_KEY` | Mistral API key for Voxtral TTS and Voxtral STT ([console.mistral.ai](https://console.mistral.ai)) |
 | `AWS_REGION` | AWS region for Bedrock inference (e.g. `us-east-1`, `eu-central-1`). Read by boto3. |

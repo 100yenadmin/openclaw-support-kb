@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Support Knowledge Agent"
 source: "https://docs.composio.dev/cookbooks/support-agent.md"
-source_hash: "6f82be252818bf99f420dd5a8abea4971e572119e2ae991f1ccce7f1ee98008b"
+source_hash: "24b93aa8d97c4dc488c1c6d4c0a903ac60ebefb40115d484250890bad75c8ec7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/support-agent.md"
@@ -25,7 +25,7 @@ This cookbook builds an **agentic RAG** system: an interactive CLI agent that tr
 
 * Python 3.10+
 * [UV](https://docs.astral.sh/uv/getting-started/installation/)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 * [OpenAI API key](https://platform.openai.com/api-keys)
 
 # Project setup

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Build an App Connections Dashboard"
 source: "https://docs.composio.dev/cookbooks/app-connections-dashboard.md"
-source_hash: "b900d714380e934ee1fe7d7ebf2785b859e2859add5ecfa51b490587887c919e"
+source_hash: "6c737d3ef597173cd10629b6a0e2d9834e75065f291bcae5db041a33990ad2ed"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cookbooks/app-connections-dashboard.md"
@@ -29,7 +29,7 @@ Source: https://docs.composio.dev/cookbooks/app-connections-dashboard.md
 # Prerequisites
 
 * [Bun](https://bun.sh) (or Node.js 18+)
-* [Composio API key](https://platform.composio.dev/settings)
+* [Composio API key](https://dashboard.composio.dev/settings)
 
 **Stack:** Next.js, `@composio/core`
 
