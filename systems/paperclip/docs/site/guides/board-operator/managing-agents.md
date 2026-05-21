@@ -50,6 +50,13 @@ Common adapter choices:
 - `openclaw_gateway` / `http` for webhook-based external agents
 - `process` for generic local command execution
 
+On evaOS Mission Control, use `openclaw_gateway` as the default supported
+backend for Paperclip child provisioning. Same-gateway children must inherit
+OpenClaw gateway auth from an authenticated parent and be provisioned with a
+real child OpenClaw agent/workspace plus `adapterConfig.claimedApiKeyPath`.
+Do not use Hermes for Paperclip child provisioning until there is a dedicated
+Hermes adapter/provisioner.
+
 For `opencode_local`, configure an explicit `adapterConfig.model` (`provider/model`).
 Paperclip validates the selected model against live `opencode models` output.
 

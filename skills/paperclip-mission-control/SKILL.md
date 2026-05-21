@@ -12,7 +12,9 @@ description: Use for Paperclip, Mission Control, companies, goals, org charts, a
    gbrain search "Paperclip Mission Control <question or exact error> Local KB namespace: paperclip-mission-control" --source openclaw-support-kb
    gbrain search "Source System: Paperclip Mission Control API CLI dashboard heartbeats budgets" --source openclaw-support-kb
    ```
-2. Use `systems/paperclip/` docs as facts. Use OpenClaw or Hermes docs only for the runtime that is acting on Paperclip.
+2. Use `systems/paperclip/` docs as facts. Use OpenClaw docs for the
+   supported evaOS Paperclip runtime. Do not use Hermes for Paperclip child
+   provisioning until Paperclip has a dedicated Hermes adapter/provisioner.
 3. Treat Paperclip as the control plane: companies, goals, org charts, tickets, budgets, approvals, heartbeats, and audit logs are Paperclip concepts.
 4. For first setup, cite the current Paperclip docs before using the public onboarding command:
    ```bash
@@ -39,6 +41,9 @@ routes and may return Electric Sheep login HTML instead of JSON.
 - Same-gateway OpenClaw child agents must also have a real OpenClaw
   agent/workspace, a matching `adapterConfig.agentId`, and a per-workspace
   `adapterConfig.claimedApiKeyPath`.
+- OpenClaw is the default supported backend for Paperclip child provisioning
+  on evaOS. Do not create Hermes-backed Paperclip children for this flow until
+  a Hermes-specific adapter/provisioner exists.
 
 If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists, load the
 agent token from that JSON file without printing it, then send it as
@@ -85,10 +90,14 @@ contract from the parent, issues a fresh child device key, derives a child
 OpenClaw `agentId` when omitted, and writes a child-specific claim path. The
 persisted child config must have `headers.x-openclaw-token` and a non-main
 `agentId` after creation even when the create request omitted the secret.
+Do not copy this minimal request shape into an unauthenticated context; it is
+only safe when the creating parent already has valid OpenClaw gateway auth and
+Paperclip can run the evaOS provisioner.
 
-Until that Paperclip server fix is deployed on the VM, or whenever you are
+Post-deploy safety net: until the deployed Paperclip version on that VM is
+confirmed to include the evaOS same-gateway provisioner, or whenever you are
 repairing agents created by older builds, run the support-control runtime
-audit/repair after creating the child:
+audit/repair after creating same-gateway children:
 
 ```bash
 evaos-support paperclip-runtime-config \

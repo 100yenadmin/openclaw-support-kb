@@ -57,6 +57,11 @@ Control agents:
 gbrain search "Paperclip on evaOS VMs Mission Control Agent Creation Contract" --source openclaw-support-kb
 ```
 
+For evaOS Paperclip children, OpenClaw is the default supported backend. Do not
+use Hermes for Paperclip child provisioning until Paperclip has a dedicated
+Hermes adapter/provisioner; the OpenClaw flow depends on inherited gateway
+auth plus the evaOS provisioner.
+
 The normal OpenClaw rule is still to choose a lowercase agent id that is not
 `main`. The exception is a Paperclip CEO/orchestrator agent: it may target
 OpenClaw `adapterConfig.agentId=main` so it can share the customer's main Eva
@@ -73,6 +78,12 @@ openclaw agents add atlas --workspace ~/.openclaw/workspace-atlas --non-interact
 sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run --map Argyle=atlas
 ```
 
+When a Paperclip `openclaw_gateway` parent creates or hires a same-gateway
+child, the create request may omit raw secrets only because Paperclip inherits
+the parent's VM-local gateway auth and provisions the child OpenClaw
+agent/workspace plus `adapterConfig.claimedApiKeyPath`. Do not approve examples
+that omit both the inherited-auth assumption and the provisioning contract.
+
 For a CEO/orchestrator Paperclip agent that should use the main Eva context:
 
 ```bash
@@ -82,6 +93,22 @@ sudo /root/evaos-golden/scripts/paperclip-agent-routing-audit.sh --dry-run --map
 Paperclip display names may be renamed later; OpenClaw agent ids are the stable
 routing targets. After every Paperclip agent create/rename/manual adapter edit,
 run the routing audit before assigning real work.
+
+Post-deploy safety net: until the deployed Paperclip build is confirmed to have
+the same-gateway provisioner, run the support-control runtime-config dry-run
+after creating same-gateway children and apply if it reports drift:
+
+```bash
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --run-id paperclip-runtime-YYYYMMDD
+
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id> \
+  --run-id paperclip-runtime-YYYYMMDD
+```
 
 ## Nontechnical User Prompts
 
