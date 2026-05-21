@@ -34,6 +34,8 @@ routes and may return Electric Sheep login HTML instead of JSON.
 - CLI/server base: `http://127.0.0.1:3100`
 - Raw HTTP API base: `http://127.0.0.1:3100/api`
 - OpenClaw gateway adapter URL: `ws://127.0.0.1:18790/`
+- Same-gateway OpenClaw child agents must persist a gateway auth header:
+  `adapterConfig.headers.x-openclaw-token`.
 
 If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists, load the
 agent token from that JSON file without printing it, then send it as
@@ -72,6 +74,33 @@ Canonical CEO/orchestrator adapter config:
   }
 }
 ```
+
+This request shape relies on the Paperclip same-gateway inheritance fix: when
+an authenticated `openclaw_gateway` parent creates or hires an
+`openclaw_gateway` child, Paperclip fills in the VM-local gateway URL/auth
+contract from the parent and issues a fresh child device key. The persisted
+child config must have `headers.x-openclaw-token` after creation even when the
+create request omitted the secret.
+
+Until that Paperclip server fix is deployed on the VM, or whenever you are
+repairing agents created by older builds, run the support-control runtime
+audit/repair after creating the child:
+
+```bash
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --run-id paperclip-runtime-YYYYMMDD
+
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id> \
+  --run-id paperclip-runtime-YYYYMMDD
+```
+
+The audit output must show header keys, not raw token values. If an
+`openclaw_gateway` child has no canonical `x-openclaw-token` header, treat it
+as adapter drift before waking that agent.
 
 Do not set `sessionKey`. Do not set `payloadTemplate.agentId` for new agents;
 `adapterConfig.agentId` is the authoritative OpenClaw target.
@@ -119,6 +148,7 @@ Forbidden adapter shapes:
 
 - `sessionKeyStrategy=fixed`
 - `sessionKey=main`
+- `openclaw_gateway` agents persisted without `headers.x-openclaw-token`
 - any config that sends Paperclip work into `agent:main:main`
 - public Paperclip browser hosts as the VM-local API base
 

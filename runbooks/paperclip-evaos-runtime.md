@@ -87,6 +87,7 @@ CEO/orchestrator work, but it must never use the customer's primary
 - Paperclip session lane: issue-scoped
 - Paperclip API base: VM-local
 - gateway URL: VM-local
+- persisted gateway auth: `adapterConfig.headers.x-openclaw-token`
 
 Canonical CEO/orchestrator config:
 
@@ -103,6 +104,31 @@ Canonical CEO/orchestrator config:
   }
 }
 ```
+
+This request shape is valid for same-gateway child creation after the
+Paperclip server-side inheritance fix is deployed. The authenticated
+`openclaw_gateway` parent supplies the VM-local gateway auth contract; the
+child receives its own device key and should persist
+`headers.x-openclaw-token` after create/hire even if the request body omitted
+the secret.
+
+For older Paperclip builds, or when repairing agents created before the fix,
+run the support-control drift audit/repair before waking the new agent:
+
+```bash
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --run-id paperclip-runtime-YYYYMMDD
+
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id> \
+  --run-id paperclip-runtime-YYYYMMDD
+```
+
+Audit output must list header keys only. Do not print or paste raw gateway
+tokens into runbooks, issue comments, or chat.
 
 There should be no `sessionKey` and no `payloadTemplate.agentId` for new
 Mission Control agents. `adapterConfig.agentId` is the routing source of truth.
@@ -160,3 +186,6 @@ evaos-support paperclip-routing-audit \
 Do not approve any config that uses `sessionKeyStrategy=fixed` with
 `sessionKey=main`. That shape routes work into `agent:main:main` and can hijack
 the customer's normal OpenClaw main chat.
+
+Do not wake an `openclaw_gateway` Paperclip child that is missing canonical
+`headers.x-openclaw-token`; repair it first with `paperclip-runtime-config`.
