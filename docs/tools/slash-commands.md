@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "360249df169e5421ecbed67c212bb27eca1a54b9fe20ac4f8a7d4278fa2fcccf"
+source_hash: "1ce0e7759e6cf13c5a730799d2d3596a75a08b266c60587b98abaa7df4568261"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -148,7 +148,7 @@ Current source-of-truth:
 
 <AccordionGroup>
   <Accordion title="Sessions and runs">
-    * `/new [model]` starts a new session; `/reset` is the reset alias.
+    * `/new [model]` archives the current session and starts a fresh one; `/reset` wipes the current session in place. They are not aliases.
     * Control UI intercepts typed `/new` to create and switch to a fresh dashboard session, except when `session.dmScope: "main"` is configured and the current parent is the agent's main session; in that case `/new` resets the main session in place. Typed `/reset` still runs the Gateway's in-place reset.
     * `/reset soft [message]` keeps the current transcript, drops reused CLI backend session ids, and reruns startup/system-prompt loading in-place.
     * `/compact [instructions]` compacts the session context. See [Compaction](/concepts/compaction).
@@ -188,7 +188,7 @@ Current source-of-truth:
   <Accordion title="Skills, allowlists, approvals">
     * `/skill <name> [input]` runs a skill by name.
     * `/allowlist [list|add|remove] ...` manages allowlist entries. Text-only.
-    * `/approve <id> <decision>` resolves exec approval prompts.
+    * `/approve <id> <decision>` resolves exec or plugin approval prompts.
     * `/btw <question>` asks a side question without changing future session context. Alias: `/side`. See [BTW](/tools/btw).
   </Accordion>
 
@@ -289,7 +289,7 @@ User-invocable skills are also exposed as slash commands:
     * `/trace` is narrower than `/verbose`: it only reveals plugin-owned trace/debug lines and keeps normal verbose tool chatter off.
     * `/fast on|off` persists a session override. Use the Sessions UI `inherit` option to clear it and fall back to config defaults.
     * `/fast` is provider-specific: OpenAI/OpenAI Codex map it to `service_tier=priority` on native Responses endpoints, while direct public Anthropic requests, including OAuth-authenticated traffic sent to `api.anthropic.com`, map it to `service_tier=auto` or `standard_only`. See [OpenAI](/providers/openai) and [Anthropic](/providers/anthropic).
-    * Tool failure summaries are still shown when relevant, but detailed failure text is only included when `/verbose` is `on` or `full`.
+    * Tool failure summaries are still shown when relevant, but detailed failure text is only included when `/verbose full` is enabled.
     * `/reasoning`, `/verbose`, and `/trace` are risky in group settings: they may reveal internal reasoning, tool output, or plugin diagnostics you did not intend to expose. Prefer leaving them off, especially in group chats.
   </Accordion>
 

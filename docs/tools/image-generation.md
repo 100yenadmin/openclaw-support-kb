@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "074a60dcb86dbe437a2372e2f3eaa4184163a4e0097444b86ba07393cb4a36dc"
+source_hash: "107a9c6673a351edf11ee31d116b2bde3f8b347132ee7b8541ddbb2afff11c62"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -260,8 +260,9 @@ from each attempt.
     backends. A per-call `timeoutMs` tool parameter overrides the configured
     default. Google, OpenRouter, and xAI hosted image providers use 180 second
     defaults; Azure OpenAI image generation uses 600 seconds. Codex dynamic-tool
-    calls honor the same timeout budget, bounded by OpenClaw's 600000 ms
-    dynamic-tool bridge maximum.
+    calls use a 120 second `image_generate` bridge default and honor the same
+    timeout budget when configured, bounded by OpenClaw's 600000 ms dynamic-tool
+    bridge maximum.
   </Accordion>
 
   <Accordion title="Inspect at runtime">

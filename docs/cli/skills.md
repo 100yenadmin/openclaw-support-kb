@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "f219847804527ecd97250f65fecb0527a110410cba4458c725ab83233c3c5058"
+source_hash: "2695cb5d7c867c173dec914bc51f3b2b50c3c7ece683faacf358c23f1a51bc7c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
@@ -17,7 +17,8 @@ Source: https://docs.openclaw.ai/cli/skills
 
 # `openclaw skills`
 
-Inspect local skills and install/update skills from ClawHub.
+Inspect local skills, search ClawHub, install skills from ClawHub/Git/local directories, and update
+ClawHub-tracked installs.
 
 Related:
 
@@ -32,6 +33,9 @@ openclaw skills search "calendar"
 openclaw skills search --limit 20 --json
 openclaw skills install <slug>
 openclaw skills install <slug> --version <version>
+openclaw skills install git:owner/repo
+openclaw skills install git:owner/repo@main
+openclaw skills install ./path/to/skill --as custom-name
 openclaw skills install <slug> --force
 openclaw skills install <slug> --agent <id>
 openclaw skills install <slug> --global
@@ -53,23 +57,36 @@ openclaw skills check --agent <id>
 openclaw skills check --json
 ```
 
-`search`/`install`/`update` use ClawHub directly. By default, `install` and
-`update` target the active workspace `skills/` directory; with `--global`, they
-target the shared managed skills directory. `list`/`info`/`check` still inspect
-the local skills visible to the current workspace and config. Workspace-backed
-commands resolve the target workspace from `--agent <id>`, then the current
-working directory when it is inside a configured agent workspace, then the
-default agent.
+`search` and `update` use ClawHub directly. `install <slug>` installs a ClawHub
+skill, `install git:owner/repo[@ref]` clones a Git skill, and `install ./path`
+copies a local skill directory. By default, `install` and `update` target the
+active workspace `skills/` directory; with `--global`, they target the shared
+managed skills directory. `list`/`info`/`check` still inspect the local skills
+visible to the current workspace and config. Workspace-backed commands resolve
+the target workspace from `--agent <id>`, then the current working directory
+when it is inside a configured agent workspace, then the default agent.
 
-This CLI `install` command downloads skill folders from ClawHub. Gateway-backed
-skill dependency installs triggered from onboarding or Skills settings use the
-separate `skills.install` request path instead.
+Git and local directory installs expect `SKILL.md` at the source root. The
+install slug comes from `SKILL.md` frontmatter `name` when it is valid, then the
+source directory or repository name; use `--as <slug>` to override it. `--version`
+is ClawHub-only. Skill installs do not support npm package specs or zip/archive
+paths, and `openclaw skills update` updates ClawHub-tracked installs only.
+
+Gateway-backed skill dependency installs triggered from onboarding or Skills
+settings use the separate `skills.install` request path instead.
 
 Notes:
 
 * `search [query...]` accepts an optional query; omit it to browse the default
   ClawHub search feed.
 * `search --limit <n>` caps returned results.
+* `install git:owner/repo[@ref]` installs a Git skill. Branch refs may contain
+  slashes, such as `git:owner/repo@feature/foo`.
+* `install ./path/to/skill` installs a local directory whose root contains
+  `SKILL.md`.
+* `install --as <slug>` overrides the inferred slug for Git and local directory
+  installs.
+* `install --version <version>` applies only to ClawHub skill slugs.
 * `install --force` overwrites an existing workspace skill folder for the same
   slug.
 * `--global` targets the shared managed skills directory and cannot be combined

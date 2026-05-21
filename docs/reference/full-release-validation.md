@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Full release validation"
 source: "https://docs.openclaw.ai/reference/full-release-validation"
-source_hash: "dc5005f80e98ee98777dfd77811946d5449690f7312f2e4915f1b38c8b31bdf8"
+source_hash: "7807b0cdb808433ba7076ee15ffc1c2d99fe9b0047f1d02f8593b0b0cc5a7fac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/full-release-validation.md"
@@ -46,6 +46,12 @@ beta publish, pass `release_package_spec=openclaw@YYYY.M.D-beta.N` to reuse the
 shipped npm package across release checks, Package Acceptance, cross-OS,
 release-path Docker, and package Telegram. Use `package_acceptance_package_spec`
 only when Package Acceptance should intentionally prove a different package.
+The Codex plugin live package lane follows the same state: published
+`release_package_spec` values derive `codex_plugin_spec=npm:@openclaw/codex@<version>`;
+SHA/artifact runs pack `extensions/codex` from the selected ref; and operators
+can set `codex_plugin_spec` directly for `npm:`, `npm-pack:`, or `git:` plugin
+sources. The lane grants the explicit Codex CLI install approval required by
+that plugin, then runs Codex CLI preflight and same-session OpenAI agent turns.
 
 ## Top-level stages
 
@@ -89,15 +95,15 @@ or Docker-facing stages need it.
 The Docker release-path stage runs these chunks when `live_suite_filter` is
 empty:
 
-| Chunk                                                           | Coverage                                                                                          |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `core`                                                          | Core Docker release-path smoke lanes.                                                             |
-| `package-update-openai`                                         | OpenAI package install/update behavior, Codex on-demand install, and Chat Completions tool calls. |
-| `package-update-anthropic`                                      | Anthropic package install and update behavior.                                                    |
-| `package-update-core`                                           | Provider-neutral package and update behavior.                                                     |
-| `plugins-runtime-plugins`                                       | Plugin runtime lanes that exercise plugin behavior.                                               |
-| `plugins-runtime-services`                                      | Service-backed and live plugin runtime lanes; includes OpenWebUI when requested.                  |
-| `plugins-runtime-install-a` through `plugins-runtime-install-h` | Plugin install/runtime batches split for parallel release validation.                             |
+| Chunk                                                           | Coverage                                                                                                                   |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `core`                                                          | Core Docker release-path smoke lanes.                                                                                      |
+| `package-update-openai`                                         | OpenAI package install/update behavior, Codex on-demand install, Codex plugin live turns, and Chat Completions tool calls. |
+| `package-update-anthropic`                                      | Anthropic package install and update behavior.                                                                             |
+| `package-update-core`                                           | Provider-neutral package and update behavior.                                                                              |
+| `plugins-runtime-plugins`                                       | Plugin runtime lanes that exercise plugin behavior.                                                                        |
+| `plugins-runtime-services`                                      | Service-backed and live plugin runtime lanes; includes OpenWebUI when requested.                                           |
+| `plugins-runtime-install-a` through `plugins-runtime-install-h` | Plugin install/runtime batches split for parallel release validation.                                                      |
 
 Use targeted `docker_lanes=<lane[,lane]>` on the reusable live/E2E workflow when
 only one Docker lane failed. The release artifacts include per-lane rerun

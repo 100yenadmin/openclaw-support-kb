@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "a9c666a8bbfd5cdde1c0671e8bec534b3b14b48a37194cf4cc428278c6f193cd"
+source_hash: "93763a804f5759123410c618cc7f54bda432a556b6d6cdb54bba7ff031736a4b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -364,7 +364,7 @@ See [Configuration reference](/gateway/configuration-reference) and
 ### Allowlist
 
 <ParamField type="string[]">
-  List of agent ids that can be targeted via explicit `agentId` (`["*"]` allows any). Default: only the requester agent. If you set a list and still want the requester to spawn itself with `agentId`, include the requester id in the list.
+  List of agent ids that can be targeted via explicit `agentId` (`["*"]` allows any configured target). Default: only the requester agent. If you set a list and still want the requester to spawn itself with `agentId`, include the requester id in the list.
 </ParamField>
 
 <ParamField type="string[]">

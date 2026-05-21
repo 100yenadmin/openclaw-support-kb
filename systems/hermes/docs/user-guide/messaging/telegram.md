@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Telegram"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
-source_hash: "42c4d5a7adb540a6d352d7ec70ffbf44ff1d146b55f13578b63bea4f8706d588"
+source_hash: "c480061d422c4a86158dd6c797b70d9b33a25d4e5daf4add23bb901cc19baee5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/telegram.md"
@@ -87,6 +87,32 @@ Telegram bots have a **privacy mode** that is **enabled by default**. This is th
 :::tip
 An alternative to disabling privacy mode: promote the bot to **group admin**. Admin bots always receive all messages regardless of the privacy setting, and this avoids needing to toggle the global privacy mode.
 :::
+
+### Observe group chatter without auto-replying
+
+For OpenClaw/Yuanbao-style group behavior, configure Telegram so the bot can **see** ordinary group messages but only **responds** when directly triggered:
+
+```yaml
+telegram:
+  allowed_chats:
+    - "-1001234567890"
+  group_allowed_chats:
+    - "-1001234567890"
+  require_mention: true
+  observe_unmentioned_group_messages: true
+```
+
+With this mode enabled, unmentioned group messages from explicitly allowlisted chats/topics are appended to the shared chat/topic session transcript as observed context, but they do not dispatch the agent. `allowed_chats` gates where the bot responds; `group_allowed_chats` authorizes the shared group session used for observed context, so use the same chat IDs for this mode. A later `@botname` mention, reply to the bot, or configured mention pattern in that same allowlisted chat/topic can use that observed context. The triggered message is also tagged with `[nickname|user_id]` and gets a per-turn safety prompt so the model treats prior observed lines as context, not instructions addressed to the bot.
+
+Equivalent environment variable:
+
+```bash
+TELEGRAM_ALLOWED_CHATS=-1001234567890
+TELEGRAM_GROUP_ALLOWED_CHATS=-1001234567890
+TELEGRAM_OBSERVE_UNMENTIONED_GROUP_MESSAGES=true
+```
+
+This requires Telegram to deliver ordinary group messages to the gateway, so disable BotFather privacy mode or promote the bot to group admin as described above.
 
 ## Step 4: Find Your User ID
 

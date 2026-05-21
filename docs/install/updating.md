@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "c568bb1fa417482f571351c7debef9ce10c4a79b754efd9aacb2f362e8da2c52"
+source_hash: "ebc70a92c54f1fdd98411c8128096094e065a255e6a11a3c71d52a4e0530cefa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -75,6 +75,13 @@ The `dev` channel ensures a git checkout, builds it, and installs the global CLI
 from that checkout. The `stable` and `beta` channels use package installs. If the
 gateway is already installed, `openclaw update` refreshes the service metadata
 and restarts it unless you pass `--no-restart`.
+
+For package installs with a managed Gateway service, `openclaw update` targets
+the package root used by that service. If the shell `openclaw` command comes
+from a different install, the updater prints both roots and the managed service
+Node path. The package update uses the package manager that owns the service
+root and checks the managed service Node against the target release engine
+before replacing the package.
 
 ## Alternative: re-run the installer
 

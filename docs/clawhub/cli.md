@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cli"
 source: "https://docs.openclaw.ai/clawhub/cli"
-source_hash: "c91c85bc6d11187360ca911c99ae25e58b3a3b2809edfa81fac535c6de2989e1"
+source_hash: "367d4bb6994ff4f762bb04088a88aa6c38bc7ead7f10d180f10fa8fa518d1f76"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/cli.md"
@@ -456,6 +456,17 @@ Example:
 clawhub package migration-status @openclaw/example-plugin
 ```
 
+### `publisher create <handle>`
+
+* Creates an org publisher owned by the authenticated user.
+* The handle is normalized to lowercase and may be passed with or without `@`.
+* Newly created org publishers are not trusted/official by default.
+* Fails if the handle is already used by an existing publisher, user, or reserved route.
+
+```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+clawhub publisher create opik --display-name "Opik"
+```
+
 ### `package publish <source>`
 
 * Publishes a code plugin or bundle plugin via `POST /api/v1/packages`.
@@ -556,7 +567,7 @@ Notes:
 #### GitHub Actions
 
 ClawHub also ships an official reusable workflow at
-[`/.github/workflows/package-publish.yml`](https://github.com/openclaw/clawhub/blob/c7935b6800dd41738cfd32c46adad5377ec2a8c2/.github/workflows/package-publish.yml)
+[`/.github/workflows/package-publish.yml`](https://github.com/openclaw/clawhub/blob/01e4418cccaee85c796d58d2146d2d1b31bc0e65/.github/workflows/package-publish.yml)
 for plugin repos.
 
 Typical caller setup:

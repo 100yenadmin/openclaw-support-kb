@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "e4e1acecb41e65158e793c4bc4b26e51333159b6eb2efc29f50c145278c7d53c"
+source_hash: "26e3360afe9933c80802733c87f182b8f8b8ee206d096e9ed868ba6c2a0eddab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/minimax.md"
@@ -307,7 +307,7 @@ The bundled MiniMax plugin registers music generation through the shared
 * Default music model: `minimax/music-2.6`
 * OAuth music model: `minimax-portal/music-2.6`
 * Also supports `minimax/music-2.5` and `minimax/music-2.0`
-* Prompt controls: `lyrics`, `instrumental`, `durationSeconds`
+* Prompt controls: `lyrics`, `instrumental`
 * Output format: `mp3`
 * Session-backed runs detach through the shared task/status flow, including `action: "status"`
 

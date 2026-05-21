@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models CLI"
 source: "https://docs.openclaw.ai/concepts/models"
-source_hash: "6f2d8ed19edbb7e5672df02dad19116c714183a99309e6c10e8b95fdfb11b5df"
+source_hash: "bb9e6dbe9583ca8fc66550746b6cf841486c1d9207cd73e78b6bef570cd7d855"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/models.md"
@@ -72,6 +72,7 @@ The same `provider/model` can mean different things depending on where it came f
 * Configured defaults (`agents.defaults.model.primary` and agent-specific primaries) are the normal starting point and use `agents.defaults.model.fallbacks`.
 * Auto fallback selections are temporary recovery state. They are stored with `modelOverrideSource: "auto"` so later turns can keep using the fallback chain without probing a known-bad primary every time; OpenClaw periodically probes the original primary again, clears the auto selection when it recovers, and announces fallback/recovery transitions once per state change.
 * User session selections are exact. `/model`, the model picker, `session_status(model=...)`, and `sessions.patch` store `modelOverrideSource: "user"`; if that selected provider/model is unreachable, OpenClaw fails visibly instead of falling through to another configured model.
+* Changing `agents.defaults.model.primary` does not rewrite existing session selections. If status says `This session is pinned to X; config primary Y will apply to new/unpinned sessions.`, switch the current session with `/model Y` or clear stale session state with `/reset`.
 * Cron `--model` / payload `model` is a per-job primary. It still uses configured fallbacks unless the job supplies explicit payload `fallbacks` (use `fallbacks: []` for a strict cron run).
 * CLI default-model and allowlist pickers respect `models.mode: "replace"` by listing explicit `models.providers.*.models` instead of loading the full built-in catalog.
 * The Control UI model picker asks the Gateway for its configured model view: `agents.defaults.models` when present, including provider-wide `provider/*` entries, otherwise explicit `models.providers.*.models` plus providers with usable auth. The full built-in catalog is reserved for explicit browse views such as `models.list` with `view: "all"` or `openclaw models list --all`.

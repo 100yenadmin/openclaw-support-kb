@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli/index"
-source_hash: "61dca122998d0320a952db1fde24778cb3bb748fc6c2f0cd335f88180e13896a"
+source_hash: "4e444119d23088b41440fa45e7dcd3c2f0ed04378342e384c75243f639041170"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/index.md"
@@ -44,7 +44,7 @@ Use the setup commands by intent:
 | Pairing and channels | [`pairing`](/cli/pairing) · [`qr`](/cli/qr) · [`channels`](/cli/channels)                                                                                                                                                                 |
 | Security and plugins | [`security`](/cli/security) · [`secrets`](/cli/secrets) · [`skills`](/cli/skills) · [`plugins`](/cli/plugins) · [`proxy`](/cli/proxy)                                                                                                     |
 | Legacy aliases       | [`daemon`](/cli/daemon) (gateway service) · [`clawbot`](/cli/clawbot) (namespace)                                                                                                                                                         |
-| Plugins (optional)   | [`path`](/cli/path) · [`voicecall`](/cli/voicecall) (if installed)                                                                                                                                                                        |
+| Plugins (optional)   | [`path`](/cli/path) · [`policy`](/cli/policy) · [`voicecall`](/cli/voicecall) (if installed)                                                                                                                                              |
 
 ## Global flags
 

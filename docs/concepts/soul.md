@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SOUL.md personality guide"
 source: "https://docs.openclaw.ai/concepts/soul"
-source_hash: "70e1b5da262e3a300ae2ce5ab2d161408a4e4caee3abcb39e7dfdbf7097ec44b"
+source_hash: "989891f30e2b397d63b42c5b02a6c021c800fff428514ec5bb67fe116e6970d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/soul.md"
@@ -113,11 +113,11 @@ Sharp is good. Annoying is not.
 
 <CardGroup>
   <Card title="Agent workspace" href="/concepts/agent-workspace" icon="folder-open">
-    Workspace files OpenClaw injects into the system prompt.
+    Workspace files OpenClaw injects into model context.
   </Card>
 
   <Card title="System prompt" href="/concepts/system-prompt" icon="message-lines">
-    How `SOUL.md` is composed into the per-turn system prompt.
+    How `SOUL.md` is composed into OpenClaw and Codex runtime context.
   </Card>
 
   <Card title="SOUL.md template" href="/reference/templates/SOUL" icon="file-lines">

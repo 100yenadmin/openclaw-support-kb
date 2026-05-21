@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "17127d04804c4a48eb48935f6056ca3781dae29d5a219c4a3678530fd2569837"
+source_hash: "0e981f5dc8949bfb3be5f6772565290000d330a90d6a0a54ea0c760178dad0b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -161,8 +161,20 @@ What you set:
     Sets `agents.defaults.model` to `openai/gpt-5.5` when model is unset, `openai/*`, or `openai-codex/*`.
   </Accordion>
 
+  <Accordion title="xAI (Grok) OAuth">
+    Browser sign-in for eligible SuperGrok or X Premium accounts. This is the
+    recommended xAI path for most users. OpenClaw stores the resulting auth
+    profile for Grok models, `x_search`, and `code_execution`.
+  </Accordion>
+
+  <Accordion title="xAI (Grok) device code">
+    Remote-friendly browser sign-in with a short code instead of a localhost
+    callback. Use this from SSH, Docker, or VPS hosts.
+  </Accordion>
+
   <Accordion title="xAI (Grok) API key">
-    Prompts for `XAI_API_KEY` and configures xAI as a model provider.
+    Prompts for `XAI_API_KEY` and configures xAI as a model provider. Use this
+    when you want an xAI Console API key instead of subscription OAuth.
   </Accordion>
 
   <Accordion title="OpenCode">

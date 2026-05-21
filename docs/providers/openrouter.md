@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "a0b181a78aa7f40fc7bcc780b2f1bab4c2af55cf896f14467596c3dc4c3fa2ef"
+source_hash: "ca9d13965866026126edf20784d1bf93e43f9b0e5ef45bd07c6df6d84e6f4591"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
@@ -288,8 +288,57 @@ OpenRouter's documented app-attribution headers:
   </Accordion>
 
   <Accordion title="Provider routing metadata">
-    If you pass OpenRouter provider routing under model params, OpenClaw forwards
-    it as OpenRouter routing metadata before the shared stream wrappers run.
+    OpenRouter supports a `provider` request object for underlying provider
+    routing. Configure a default policy for all OpenRouter text-model requests
+    with `models.providers.openrouter.params.provider`:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      models: {
+        providers: {
+          openrouter: {
+            params: {
+              provider: {
+                sort: "latency",
+                require_parameters: true,
+                data_collection: "deny",
+              },
+            },
+          },
+        },
+      },
+    }
+    ```
+
+    OpenClaw forwards that object to OpenRouter as the request `provider`
+    payload. Use OpenRouter's documented snake\_case fields, including `sort`,
+    `only`, `ignore`, `order`, `allow_fallbacks`, `require_parameters`,
+    `data_collection`, `quantizations`, `max_price`, `preferred_max_latency`,
+    `preferred_min_throughput`, `zdr`, and `enforce_distillable_text`.
+
+    Per-model params still override the provider-wide routing object:
+
+    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    {
+      agents: {
+        defaults: {
+          models: {
+            "openrouter/anthropic/claude-sonnet-4-6": {
+              params: {
+                provider: {
+                  order: ["anthropic"],
+                  allow_fallbacks: false,
+                },
+              },
+            },
+          },
+        },
+      },
+    }
+    ```
+
+    This only applies on OpenRouter chat-completions routes. Direct Anthropic,
+    Google, OpenAI, or custom provider routes ignore OpenRouter routing params.
   </Accordion>
 </AccordionGroup>
 

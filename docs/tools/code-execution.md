@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code execution"
 source: "https://docs.openclaw.ai/tools/code-execution"
-source_hash: "cce741cac08b739741804aa96800da2ad849c8921f6b80871328758952f40fd0"
+source_hash: "205bde7e4648b13de404f2d3718332aa0b4835faaf7e65500702028c41c27569"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-execution.md"
@@ -44,12 +44,29 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
 ## Setup
 
 <Steps>
-  <Step title="Provide an xAI API key">
-    Run `openclaw onboard --auth-choice xai-api-key` for `code_execution` and
-    `x_search`, or set `XAI_API_KEY` / configure the key under the xAI plugin
-    when you also want Grok web search to use the same credential:
+  <Step title="Provide xAI credentials">
+    Sign in with Grok OAuth using an eligible SuperGrok or X Premium subscription,
+    use the remote-friendly device-code flow, or store an API key. OAuth works
+    for `code_execution` and `x_search`; `XAI_API_KEY` or plugin web-search
+    config can also power Grok `web_search`.
 
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw models auth login --provider xai --method oauth
+    openclaw models auth login --provider xai --device-code
+    ```
+
+    During a fresh install, the same auth choices are available inside
+    onboarding:
+
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw onboard --install-daemon
+    openclaw onboard --install-daemon --auth-choice xai-device-code
+    ```
+
+    Or use an API key:
+
+    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    openclaw models auth login --provider xai --method api-key
     export XAI_API_KEY=xai-...
     ```
 
@@ -73,7 +90,9 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
   </Step>
 
   <Step title="Enable and tune code_execution">
-    The tool is gated on `plugins.entries.xai.config.codeExecution.enabled`. Default is off.
+    `code_execution` is available when xAI credentials are available. Set
+    `plugins.entries.xai.config.codeExecution.enabled` to `false` to disable it,
+    or use the same block to tune the model and timeout.
 
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
@@ -129,7 +148,7 @@ When the tool runs without auth, it returns a structured `missing_xai_api_key` e
 ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
 {
   "error": "missing_xai_api_key",
-  "message": "code_execution needs an xAI API key. Run openclaw onboard --auth-choice xai-api-key, set XAI_API_KEY in the Gateway environment, or configure plugins.entries.xai.config.webSearch.apiKey.",
+  "message": "code_execution needs xAI credentials. Run `openclaw onboard --auth-choice xai-oauth` to sign in with Grok, run `openclaw onboard --auth-choice xai-api-key`, set `XAI_API_KEY` in the Gateway environment, or configure `plugins.entries.xai.config.webSearch.apiKey`.",
   "docs": "https://docs.openclaw.ai/tools/code-execution"
 }
 ```

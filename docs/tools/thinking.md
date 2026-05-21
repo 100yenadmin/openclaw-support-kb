@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "2419cfe5a1f5980f07793d213428a07c829fc9d2b69aa0b0dd7132dadcc65fe7"
+source_hash: "150666536f7c5b58a5a58f9a7b10693d23b60956a811646e1235a7c4ccd1b36f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -94,7 +94,7 @@ Source: https://docs.openclaw.ai/tools/thinking
 * Inline directive affects only that message; session/global defaults apply otherwise.
 * Send `/verbose` (or `/verbose:`) with no argument to see the current verbose level.
 * When verbose is on, agents that emit structured tool results (Pi, other JSON agents) send each tool call back as its own metadata-only message, prefixed with `<emoji> <tool-name>: <arg>` when available. These tool summaries are sent as soon as each tool starts (separate bubbles), not as streaming deltas.
-* Tool failure summaries remain visible in normal mode, but raw error detail suffixes are hidden unless verbose is `on` or `full`.
+* Tool failure summaries remain visible in normal mode, but raw error detail suffixes are hidden unless verbose is `full`.
 * When verbose is `full`, tool outputs are also forwarded after completion (separate bubble, truncated to a safe length). If you toggle `/verbose on|full|off` while a run is in-flight, subsequent tool bubbles honor the new setting.
 * `agents.defaults.toolProgressDetail` controls the shape of `/verbose` tool summaries and progress-draft tool lines. Use `"explain"` (default) for compact human labels such as `🛠️ Exec: checking JS syntax`; use `"raw"` when you also want the raw command/detail appended for debugging. Per-agent `agents.list[].toolProgressDetail` overrides the default.
   * `explain`: `🛠️ Exec: check JS syntax for /tmp/app.js`

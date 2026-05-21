@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "50c622328002f5de167d9ea77538e4429e16c9cdfbc9b39c0be91de2ad1407c6"
+source_hash: "68b26c93c52013a67f4e830ab9fbbc0644b9140d606b058a688206289ae7e2f9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -105,13 +105,13 @@ Generate an energetic chiptune loop about launching a rocket at sunrise.
 
 ## Supported providers
 
-| Provider   | Default model                | Reference inputs | Supported controls                                        | Auth                                   |
-| ---------- | ---------------------------- | ---------------- | --------------------------------------------------------- | -------------------------------------- |
-| ComfyUI    | `workflow`                   | Up to 1 image    | Workflow-defined music or audio                           | `COMFY_API_KEY`, `COMFY_CLOUD_API_KEY` |
-| fal        | `fal-ai/minimax-music/v2.6`  | None             | `lyrics`, `instrumental`, `durationSeconds`, `format`     | `FAL_KEY` or `FAL_API_KEY`             |
-| Google     | `lyria-3-clip-preview`       | Up to 10 images  | `lyrics`, `instrumental`, `format`                        | `GEMINI_API_KEY`, `GOOGLE_API_KEY`     |
-| MiniMax    | `music-2.6`                  | None             | `lyrics`, `instrumental`, `durationSeconds`, `format=mp3` | `MINIMAX_API_KEY` or MiniMax OAuth     |
-| OpenRouter | `google/lyria-3-pro-preview` | Up to 1 image    | `lyrics`, `instrumental`, `durationSeconds`, `format`     | `OPENROUTER_API_KEY`                   |
+| Provider   | Default model                | Reference inputs | Supported controls                                    | Auth                                   |
+| ---------- | ---------------------------- | ---------------- | ----------------------------------------------------- | -------------------------------------- |
+| ComfyUI    | `workflow`                   | Up to 1 image    | Workflow-defined music or audio                       | `COMFY_API_KEY`, `COMFY_CLOUD_API_KEY` |
+| fal        | `fal-ai/minimax-music/v2.6`  | None             | `lyrics`, `instrumental`, `durationSeconds`, `format` | `FAL_KEY` or `FAL_API_KEY`             |
+| Google     | `lyria-3-clip-preview`       | Up to 10 images  | `lyrics`, `instrumental`, `format`                    | `GEMINI_API_KEY`, `GOOGLE_API_KEY`     |
+| MiniMax    | `music-2.6`                  | None             | `lyrics`, `instrumental`, `format=mp3`                | `MINIMAX_API_KEY` or MiniMax OAuth     |
+| OpenRouter | `google/lyria-3-pro-preview` | Up to 1 image    | `lyrics`, `instrumental`, `durationSeconds`, `format` | `OPENROUTER_API_KEY`                   |
 
 ### Capability matrix
 
@@ -297,8 +297,8 @@ explicit `model`, `primary`, and `fallbacks` entries.
 
   <Accordion title="MiniMax">
     Uses the batch `music_generation` endpoint. Supports prompt, optional
-    lyrics, instrumental mode, duration steering, and mp3 output through
-    either `minimax` API-key auth or `minimax-portal` OAuth.
+    lyrics, instrumental mode, and mp3 output through either `minimax`
+    API-key auth or `minimax-portal` OAuth.
   </Accordion>
 
   <Accordion title="OpenRouter">

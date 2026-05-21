@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "baa28f208be7047e998c7bd3f3e426646b421271ed621ac18e8373c19497c68c"
+source_hash: "6cb64b9446e61ca9d315215eb1e892b3715d9b60c2e8964448af8074fbf1a86f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -629,12 +629,15 @@ Use these as starting points and replace model IDs with the exact names from `ol
     ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
     {
       agents: {
-        defaults: {
-          experimental: {
-            localModelLean: true,
+        list: [
+          {
+            id: "local",
+            experimental: {
+              localModelLean: true,
+            },
+            model: { primary: "ollama/gemma4" },
           },
-          model: { primary: "ollama/gemma4" },
-        },
+        ],
       },
       models: {
         providers: {

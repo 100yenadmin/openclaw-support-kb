@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QR"
 source: "https://docs.openclaw.ai/cli/qr"
-source_hash: "669789e25d4eaae5cd28ae90f3c27e8a88cc70e8e3e8615dcd9a26ba8474723c"
+source_hash: "2b6d6fd9b3cf757f6701c2fb14bb0db84005adb83213063d9ec177768d82ed84"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/qr.md"
@@ -44,8 +44,8 @@ openclaw qr --url wss://gateway.example/ws
 
 * `--token` and `--password` are mutually exclusive.
 * The setup code itself now carries an opaque short-lived `bootstrapToken`, not the shared gateway token/password.
-* Built-in setup-code bootstrap is node-only. After approval, the primary node token lands with `scopes: []`.
-* The built-in setup-code flow does not return a handed-off operator token; operator access requires a separate approved operator pairing or token flow.
+* Built-in setup-code bootstrap returns a primary `node` token with `scopes: []` plus a bounded `operator` handoff token for trusted mobile onboarding.
+* The handed-off operator token is limited to `operator.approvals`, `operator.read`, and `operator.write`; `operator.admin`, `operator.pairing`, and `operator.talk.secrets` require a separate approved operator pairing or token flow.
 * Mobile pairing fails closed for Tailscale/public `ws://` gateway URLs. Private LAN addresses and `.local` Bonjour hosts remain supported over `ws://`, but Tailscale/public mobile routes should use Tailscale Serve/Funnel or a `wss://` gateway URL.
 * With `--remote`, OpenClaw requires either `gateway.remote.url` or
   `gateway.tailscale.mode=serve|funnel`.
