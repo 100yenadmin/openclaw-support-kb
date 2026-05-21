@@ -87,6 +87,7 @@ CEO/orchestrator work, but it must never use the customer's primary
 - Paperclip session lane: issue-scoped
 - Paperclip API base: VM-local
 - gateway URL: VM-local
+- persisted gateway auth: `adapterConfig.headers.x-openclaw-token`
 
 Canonical CEO/orchestrator config:
 
@@ -103,6 +104,90 @@ Canonical CEO/orchestrator config:
   }
 }
 ```
+
+This request shape is valid for same-gateway child creation after the
+Paperclip server-side inheritance fix is deployed. The authenticated
+`openclaw_gateway` parent supplies the VM-local gateway auth contract; the
+child receives its own device key and should persist
+`headers.x-openclaw-token` after create/hire even if the request body omitted
+the secret.
+
+Do not rely on a Paperclip version string alone until Mission Control exposes a
+stable feature flag for this behavior. For now, treat the support-control
+dry-run as the deployment and drift gate: if the dry-run reports
+`changedAgents=0`, `driftAgents=0`, and `checkedAgents` greater than zero, skip
+apply. If it reports drift on `headers.x-openclaw-token`,
+`runtimeConfig.heartbeat.maxConcurrentRuns`, or
+`runtimeConfig.heartbeat.gatewayMaxConcurrentRuns`, run the apply step before
+waking the new agent.
+
+Run this audit for older Paperclip builds, agents created before the fix, manual
+edits, or any same-gateway child whose create/hire behavior is uncertain:
+
+```bash
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --run-id paperclip-runtime-YYYYMMDD
+
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id> \
+  --run-id paperclip-runtime-YYYYMMDD
+```
+
+`<customer_id>` is the support-control target identifier from inventory, such
+as `jackie-david`, `eric-wilder`, or the customer/node UUID used by the support
+run. `<support-approval-or-issue-id>` is the internal approval record for the
+mutation, for example a support ticket, GitHub issue, or chat-scoped approval id
+such as `chat-YYYYMMDD-paperclip-runtime-repair`.
+
+Healthy dry-run output should be sanitized and look like this:
+
+```json
+{
+  "changedAgents": 0,
+  "driftAgents": 0,
+  "checkedAgents": 2,
+  "agents": [
+    {
+      "name": "Jane",
+      "adapterType": "openclaw_gateway",
+      "hasHeaders": true,
+      "headerKeys": ["x-openclaw-token"],
+      "runtime": {
+        "heartbeat": {
+          "maxConcurrentRuns": 1,
+          "gatewayMaxConcurrentRuns": 1
+        }
+      }
+    }
+  ]
+}
+```
+
+Drift output should name fields and redacted token metadata only:
+
+```json
+{
+  "changedAgents": 1,
+  "driftAgents": 1,
+  "checkedAgents": 2,
+  "driftKeys": [
+    "headers.x-openclaw-token",
+    "runtimeConfig.heartbeat.maxConcurrentRuns",
+    "runtimeConfig.heartbeat.gatewayMaxConcurrentRuns"
+  ],
+  "authHeaderRepair": {
+    "gatewayTokenAvailable": true,
+    "tokenLength": 44,
+    "tokenSha256Prefix": "abc123..."
+  }
+}
+```
+
+Audit output must list header keys and redacted token metadata only. Do not
+print or paste raw gateway tokens into runbooks, issue comments, or chat.
 
 There should be no `sessionKey` and no `payloadTemplate.agentId` for new
 Mission Control agents. `adapterConfig.agentId` is the routing source of truth.
@@ -160,3 +245,6 @@ evaos-support paperclip-routing-audit \
 Do not approve any config that uses `sessionKeyStrategy=fixed` with
 `sessionKey=main`. That shape routes work into `agent:main:main` and can hijack
 the customer's normal OpenClaw main chat.
+
+Do not wake an `openclaw_gateway` Paperclip child that is missing canonical
+`headers.x-openclaw-token`; repair it first with `paperclip-runtime-config`.

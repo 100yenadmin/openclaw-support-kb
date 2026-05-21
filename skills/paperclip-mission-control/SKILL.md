@@ -34,6 +34,11 @@ routes and may return Electric Sheep login HTML instead of JSON.
 - CLI/server base: `http://127.0.0.1:3100`
 - Raw HTTP API base: `http://127.0.0.1:3100/api`
 - OpenClaw gateway adapter URL: `ws://127.0.0.1:18790/`
+- Same-gateway OpenClaw child agents must persist a gateway auth header:
+  `adapterConfig.headers.x-openclaw-token`.
+- Same-gateway OpenClaw child agents must also have a real OpenClaw
+  agent/workspace, a matching `adapterConfig.agentId`, and a per-workspace
+  `adapterConfig.claimedApiKeyPath`.
 
 If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists, load the
 agent token from that JSON file without printing it, then send it as
@@ -73,17 +78,46 @@ Canonical CEO/orchestrator adapter config:
 }
 ```
 
+This request shape relies on the Paperclip same-gateway inheritance fix: when
+an authenticated `openclaw_gateway` parent creates or hires an
+`openclaw_gateway` child, Paperclip fills in the VM-local gateway URL/auth
+contract from the parent, issues a fresh child device key, derives a child
+OpenClaw `agentId` when omitted, and writes a child-specific claim path. The
+persisted child config must have `headers.x-openclaw-token` and a non-main
+`agentId` after creation even when the create request omitted the secret.
+
+Until that Paperclip server fix is deployed on the VM, or whenever you are
+repairing agents created by older builds, run the support-control runtime
+audit/repair after creating the child:
+
+```bash
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --run-id paperclip-runtime-YYYYMMDD
+
+evaos-support paperclip-runtime-config \
+  --targets <customer_id> \
+  --apply \
+  --approval-id <support-approval-or-issue-id> \
+  --run-id paperclip-runtime-YYYYMMDD
+```
+
+The audit output must show header keys, not raw token values. If an
+`openclaw_gateway` child has no canonical `x-openclaw-token` header, treat it
+as adapter drift before waking that agent.
+
 Do not set `sessionKey`. Do not set `payloadTemplate.agentId` for new agents;
 `adapterConfig.agentId` is the authoritative OpenClaw target.
 
 Dedicated worker agents use the same adapter defaults, but the OpenClaw agent
-id must be created or confirmed first:
+id and claim file must exist before the worker is expected to run:
 
 ```json
 {
   "adapterType": "openclaw_gateway",
   "adapterConfig": {
     "agentId": "<openclaw-agent-id>",
+    "claimedApiKeyPath": "~/.openclaw/workspace-<openclaw-agent-id>/paperclip-claimed-api-key.json",
     "sessionKeyStrategy": "issue",
     "paperclipApiUrl": "http://127.0.0.1:3100",
     "url": "ws://127.0.0.1:18790/",
@@ -92,6 +126,27 @@ id must be created or confirmed first:
   }
 }
 ```
+
+Until the auto-provisioning build is deployed, manually create the matching
+OpenClaw identity and save the worker's Paperclip API key in that workspace:
+
+```bash
+openclaw agents add <openclaw-agent-id> \
+  --workspace /root/.openclaw/workspace-<openclaw-agent-id> \
+  --model openai/gpt-5.5 \
+  --non-interactive \
+  --json
+
+# Save the child agent claim response as:
+# /root/.openclaw/workspace-<openclaw-agent-id>/paperclip-claimed-api-key.json
+# chmod 600 that file; never print the token.
+```
+
+For evaOS OpenClaw Gateway agents, keep `runtimeConfig.heartbeat.maxConcurrentRuns`
+and `runtimeConfig.heartbeat.gatewayMaxConcurrentRuns` at `1` unless a human
+explicitly raises the shared gateway capacity. Paperclip's older default was a
+per-agent limit of `20`, which can overwhelm a single local OpenClaw gateway
+when a CEO creates many child agents at once.
 
 Paperclip display names may change. OpenClaw agent ids are stable routing
 targets and do not change unless the OpenClaw agent is intentionally recreated.
@@ -119,6 +174,10 @@ Forbidden adapter shapes:
 
 - `sessionKeyStrategy=fixed`
 - `sessionKey=main`
+- `openclaw_gateway` agents persisted without `headers.x-openclaw-token`
+- `openclaw_gateway` worker agents pointed at `main` when they should have a
+  dedicated OpenClaw `agentId`
+- `openclaw_gateway` worker agents loading the main workspace claim file
 - any config that sends Paperclip work into `agent:main:main`
 - public Paperclip browser hosts as the VM-local API base
 
