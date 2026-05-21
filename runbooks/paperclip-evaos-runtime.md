@@ -89,6 +89,11 @@ CEO/orchestrator work, but it must never use the customer's primary
 - gateway URL: VM-local
 - persisted gateway auth: `adapterConfig.headers.x-openclaw-token`
 
+OpenClaw is the default supported Paperclip backend on evaOS right now. Do not
+use Hermes for Paperclip child provisioning until Paperclip has a dedicated
+Hermes adapter/provisioner with its own auth and workspace provisioning
+contract.
+
 Canonical CEO/orchestrator config:
 
 ```json
@@ -110,11 +115,14 @@ Paperclip server-side inheritance fix is deployed. The authenticated
 `openclaw_gateway` parent supplies the VM-local gateway auth contract; the
 child receives its own device key and should persist
 `headers.x-openclaw-token` after create/hire even if the request body omitted
-the secret.
+the secret. Do not use this minimal create shape from an unauthenticated
+caller; it depends on inherited OpenClaw gateway auth and the evaOS provisioner
+to create the child OpenClaw agent/workspace and claimed API key path.
 
-Do not rely on a Paperclip version string alone until Mission Control exposes a
-stable feature flag for this behavior. For now, treat the support-control
-dry-run as the deployment and drift gate: if the dry-run reports
+Post-deploy safety net: do not rely on a Paperclip version string alone until
+Mission Control exposes a stable feature flag for this behavior. For now,
+treat the support-control dry-run as the deployment and drift gate after
+creating same-gateway children: if the dry-run reports
 `changedAgents=0`, `driftAgents=0`, and `checkedAgents` greater than zero, skip
 apply. If it reports drift on `headers.x-openclaw-token`,
 `runtimeConfig.heartbeat.maxConcurrentRuns`, or
@@ -200,6 +208,7 @@ stable OpenClaw agent id that already exists, for example `atlas`:
   "adapterType": "openclaw_gateway",
   "adapterConfig": {
     "agentId": "atlas",
+    "claimedApiKeyPath": "~/.openclaw/workspace-atlas/paperclip-claimed-api-key.json",
     "sessionKeyStrategy": "issue",
     "paperclipApiUrl": "http://127.0.0.1:3100",
     "url": "ws://127.0.0.1:18790/",
