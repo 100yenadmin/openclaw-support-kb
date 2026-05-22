@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "1ce0e7759e6cf13c5a730799d2d3596a75a08b266c60587b98abaa7df4568261"
+source_hash: "9ffe16dbe742e80490466282105bcecd885e0e693a0ebcd5573fcbfe6e9f10f8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -112,7 +112,7 @@ On Discord, native command specs may include `descriptionLocalizations`, which O
 </ParamField>
 
 <ParamField type="string[]">
-  Sets the explicit owner allowlist for owner-only command/tool surfaces. This is the human operator account that can approve dangerous actions and run commands such as `/diagnostics`, `/export-trajectory`, and `/config`. It is separate from `commands.allowFrom` and from DM pairing access.
+  Sets the explicit owner allowlist for owner-only command surfaces and owner-gated channel actions. This is the human operator account that can approve dangerous actions and run commands such as `/diagnostics`, `/export-trajectory`, and `/config`. It is separate from `commands.allowFrom` and from DM pairing access.
 </ParamField>
 
 <ParamField type="boolean">

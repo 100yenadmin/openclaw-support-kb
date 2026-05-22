@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "56ce21a8b98d9c01667e71dd7c607deb2f54e2a60550c09752b93f803d37a5f6"
+source_hash: "b322eced73e54edf8dc2ef9192089ee33d5611c9db6e5dfb51fdbf434f9762d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -131,9 +131,9 @@ The script exits with code `2` for invalid method selection or invalid `--instal
     ```
   </Tab>
 
-  <Tab title="GitHub main via npm">
+  <Tab title="GitHub main checkout">
     ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --version main
+    curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method git --version main
     ```
   </Tab>
 
@@ -164,19 +164,19 @@ The script exits with code `2` for invalid method selection or invalid `--instal
   </Accordion>
 
   <Accordion title="Environment variables reference">
-    | Variable                                                | Description                                   |
-    | ------------------------------------------------------- | --------------------------------------------- |
-    | `OPENCLAW_INSTALL_METHOD=git\|npm`                      | Install method                                |
-    | `OPENCLAW_VERSION=latest\|next\|main\|<semver>\|<spec>` | npm version, dist-tag, or package spec        |
-    | `OPENCLAW_BETA=0\|1`                                    | Use beta if available                         |
-    | `OPENCLAW_GIT_DIR=<path>`                               | Checkout directory                            |
-    | `OPENCLAW_GIT_UPDATE=0\|1`                              | Toggle git updates                            |
-    | `OPENCLAW_NO_PROMPT=1`                                  | Disable prompts                               |
-    | `OPENCLAW_NO_ONBOARD=1`                                 | Skip onboarding                               |
-    | `OPENCLAW_DRY_RUN=1`                                    | Dry run mode                                  |
-    | `OPENCLAW_VERBOSE=1`                                    | Debug mode                                    |
-    | `OPENCLAW_NPM_LOGLEVEL=error\|warn\|notice`             | npm log level                                 |
-    | `SHARP_IGNORE_GLOBAL_LIBVIPS=0\|1`                      | Control sharp/libvips behavior (default: `1`) |
+    | Variable                                          | Description                                   |
+    | ------------------------------------------------- | --------------------------------------------- |
+    | `OPENCLAW_INSTALL_METHOD=git\|npm`                | Install method                                |
+    | `OPENCLAW_VERSION=latest\|next\|<semver>\|<spec>` | npm version, dist-tag, or package spec        |
+    | `OPENCLAW_BETA=0\|1`                              | Use beta if available                         |
+    | `OPENCLAW_GIT_DIR=<path>`                         | Checkout directory                            |
+    | `OPENCLAW_GIT_UPDATE=0\|1`                        | Toggle git updates                            |
+    | `OPENCLAW_NO_PROMPT=1`                            | Disable prompts                               |
+    | `OPENCLAW_NO_ONBOARD=1`                           | Skip onboarding                               |
+    | `OPENCLAW_DRY_RUN=1`                              | Dry run mode                                  |
+    | `OPENCLAW_VERBOSE=1`                              | Debug mode                                    |
+    | `OPENCLAW_NPM_LOGLEVEL=error\|warn\|notice`       | npm log level                                 |
+    | `SHARP_IGNORE_GLOBAL_LIBVIPS=0\|1`                | Control sharp/libvips behavior (default: `1`) |
   </Accordion>
 </AccordionGroup>
 
@@ -330,9 +330,9 @@ The script exits with code `2` for invalid method selection or invalid `--instal
     ```
   </Tab>
 
-  <Tab title="GitHub main via npm">
+  <Tab title="GitHub main checkout">
     ```powershell theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    & ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -Tag main
+    & ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -InstallMethod git -Tag main
     ```
   </Tab>
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "0e981f5dc8949bfb3be5f6772565290000d330a90d6a0a54ea0c760178dad0b0"
+source_hash: "3fc02afcc0e94d91fcf1e3e266def558e0aa0c71efb564462485d17880e49ba6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -164,7 +164,7 @@ What you set:
   <Accordion title="xAI (Grok) OAuth">
     Browser sign-in for eligible SuperGrok or X Premium accounts. This is the
     recommended xAI path for most users. OpenClaw stores the resulting auth
-    profile for Grok models, `x_search`, and `code_execution`.
+    profile for Grok models, Grok `web_search`, `x_search`, and `code_execution`.
   </Accordion>
 
   <Accordion title="xAI (Grok) device code">

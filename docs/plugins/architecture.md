@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
-source_hash: "1213faa492629151f7b7ebaec3bfb417bab8005e15237b8ef69bd3c761bb9cef"
+source_hash: "f2a9d385dc587cbcf1e86b5c804645cd0c9ffd6e6ba8489003674c43493680d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture.md"
@@ -47,6 +47,7 @@ Capabilities are the public **native plugin** model inside OpenClaw. Every nativ
 | ---------------------- | ------------------------------------------------ | ------------------------------------ |
 | Text inference         | `api.registerProvider(...)`                      | `openai`, `anthropic`                |
 | CLI inference backend  | `api.registerCliBackend(...)`                    | `openai`, `anthropic`                |
+| Embeddings             | `api.registerEmbeddingProvider(...)`             | Provider-owned vector plugins        |
 | Speech                 | `api.registerSpeechProvider(...)`                | `elevenlabs`, `microsoft`            |
 | Realtime transcription | `api.registerRealtimeTranscriptionProvider(...)` | `openai`                             |
 | Realtime voice         | `api.registerRealtimeVoiceProvider(...)`         | `openai`                             |

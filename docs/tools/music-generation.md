@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "68b26c93c52013a67f4e830ab9fbbc0644b9140d606b058a688206289ae7e2f9"
+source_hash: "e7793fec4517f800b36ca3c0b70397673c239c7583d807edc3c0a4c1850f6f02"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -23,8 +23,9 @@ For session-backed agent runs, OpenClaw starts music generation as a
 background task, tracks it in the task ledger, then wakes the agent again
 when the track is ready so the agent can tell the user and attach the
 finished audio. Generated-media completions are delivered by the agent through
-the message tool; OpenClaw does not auto-post the file as a fallback if the
-completion agent writes only a private final reply. The completion wake
+the message tool. If the requester session is inactive and some generated
+audio is still missing from message-tool delivery, OpenClaw sends an
+idempotent direct fallback with only the missing audio. The completion wake
 explicitly warns the agent that normal final replies are private for this
 route.
 

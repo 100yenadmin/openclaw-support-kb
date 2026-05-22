@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release channels"
 source: "https://docs.openclaw.ai/install/development-channels"
-source_hash: "f2d7a35946a13794691a53a593dfd3d0954bdcd37e95acd679fd10c79748acdb"
+source_hash: "b972f238d51ffbb5079c4be22f9b55f4995c2e228549fc02b1bffb11a88ff87d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/development-channels.md"
@@ -67,8 +67,8 @@ openclaw update --tag 2026.4.1-beta.1
 # Install from the beta dist-tag (one-off, does not persist)
 openclaw update --tag beta
 
-# Install from GitHub main branch (npm tarball)
-openclaw update --tag main
+# Switch to the moving GitHub main checkout
+openclaw update --channel dev
 
 # Install a specific npm package spec
 openclaw update --tag openclaw@2026.4.1-beta.1
@@ -79,6 +79,9 @@ Notes:
 * `--tag` applies to **package (npm) installs only**. Git installs ignore it.
 * The tag is not persisted. Your next `openclaw update` uses your configured
   channel as usual.
+* OpenClaw does not support npm GitHub source installs for `openclaw/openclaw`.
+  Use `--channel dev` or `--install-method git --version main` for the moving
+  `main` checkout.
 * Downgrade protection: if the target version is older than your current version,
   OpenClaw prompts for confirmation (skip with `--yes`).
 * `--channel beta` is different from `--tag beta`: the channel flow can fall back

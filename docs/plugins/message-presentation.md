@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "73f432ac006362077a20e3f140eac4e9a7c265fb5683c3b9a3d50b5137952f8d"
+source_hash: "303abb2efcc89be0d854ea49e0e1676e86dc2680e05c74817f2a94f7c011ac8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -68,6 +68,7 @@ type MessagePresentationButton = {
   web_app?: { url: string };
   priority?: number;
   disabled?: boolean;
+  reusable?: boolean;
   style?: "primary" | "secondary" | "success" | "danger";
 };
 
@@ -105,6 +106,10 @@ Button semantics:
   order is preserved.
 * `disabled` is optional. Channels must opt in with `supportsDisabled`; otherwise
   core degrades the disabled control to non-interactive fallback text.
+* `reusable` is optional. Channels that support reusable native callbacks may
+  keep the action available after a successful interaction. Use it for
+  repeatable or idempotent actions such as refresh, inspect, or more details;
+  leave it unset for normal one-shot approvals and destructive actions.
 
 Select semantics:
 

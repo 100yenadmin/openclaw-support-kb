@@ -47,14 +47,6 @@ When a heartbeat fires, Paperclip:
 | [Process](/adapters/process) | `process` | Executes arbitrary shell commands |
 | [HTTP](/adapters/http) | `http` | Sends webhooks to external agents |
 
-For evaOS Mission Control deployments, use `openclaw_gateway` as the default
-supported backend for Paperclip child provisioning. Same-gateway OpenClaw
-children depend on inherited gateway auth from an authenticated
-`openclaw_gateway` parent plus the evaOS provisioner that creates the child
-OpenClaw agent/workspace and `adapterConfig.claimedApiKeyPath`. Do not use
-`hermes_local` for Paperclip child provisioning until a dedicated Hermes
-adapter/provisioner exists.
-
 ### External (plugin) adapters
 
 These adapters ship as standalone npm packages and are installed via the plugin system:
@@ -104,11 +96,7 @@ my-adapter/
 
 ## Choosing an Adapter
 
-- **Need an evaOS Paperclip child agent?** Use `openclaw_gateway` and keep the
-  inherited gateway auth/provisioning contract in the create flow
-- **Need a coding agent outside the evaOS child-provisioning path?** Use
-  `claude_local`, `codex_local`, `opencode_local`, or install `droid_local` as
-  an external plugin
+- **Need a coding agent?** Use `claude_local`, `codex_local`, `opencode_local`, `hermes_local`, or install `droid_local` as an external plugin
 - **Need to run a script or command?** Use `process`
 - **Need to call an external service?** Use `http`
 - **Need something custom?** [Create your own adapter](/adapters/creating-an-adapter) or [build an external adapter plugin](/adapters/external-adapters)

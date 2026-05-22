@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "150666536f7c5b58a5a58f9a7b10693d23b60956a811646e1235a7c4ccd1b36f"
+source_hash: "35922576dfdfed5eeb45d2be1b4284c681de918f8e3a5b4b69adf46d87cea801"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -134,8 +134,8 @@ Malformed local-model reasoning tags are handled conservatively. Closed `<think>
 
 * The web chat thinking selector mirrors the session's stored level from the inbound session store/config when the page loads.
 * Picking another level writes the session override immediately via `sessions.patch`; it does not wait for the next send and it is not a one-shot `thinkingOnce` override.
-* The first option is always the clear-override choice. It shows `Inherited: <resolved level>` when the session is inheriting a non-off effective default, or `Off` when inherited thinking is disabled.
-* Explicit picker choices are labeled as overrides, while preserving provider labels when present (for example `Override: maximum` for a provider-labeled `max` option).
+* The first option is always the clear-override choice. It shows `Inherited: <resolved level>`, including `Inherited: Off` when inherited thinking is disabled.
+* Explicit picker choices use their direct level labels while preserving provider labels when present (for example `Maximum` for a provider-labeled `max` option).
 * The picker uses `thinkingLevels` returned by the gateway session row/defaults, with `thinkingOptions` kept as a legacy label list. The browser UI does not keep its own provider regex list; plugins own model-specific level sets.
 * `/think:<level>` still works and updates the same stored session level, so chat directives and the picker stay in sync.
 

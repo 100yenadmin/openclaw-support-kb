@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "50f48771c23aae042681d9d0d1167538bb54be67a4639780bec7ebfe2f586730"
+source_hash: "79b37c2ef6271e9b4860b7c1417faebb1e763e0957ccce91b6a82b59bd15b620"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -65,7 +65,7 @@ The prompt is intentionally compact and uses fixed sections:
 * **OpenClaw Self-Update**: how to inspect config safely with
   `config.schema.lookup`, patch config with `config.patch`, replace the full
   config with `config.apply`, and run `update.run` only on explicit user
-  request. The owner-only `gateway` tool also refuses to rewrite
+  request. The agent-facing `gateway` tool also refuses to rewrite
   `tools.exec.ask` / `tools.exec.security`, including legacy `tools.bash.*`
   aliases that normalize to those protected exec paths.
 * **Workspace**: working directory (`agents.defaults.workspace`).

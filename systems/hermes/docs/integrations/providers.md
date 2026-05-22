@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AI Providers"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/providers"
-source_hash: "59df62c249bf90bbd984bbafba123925874dcd66779d670aea815c674af562d8"
+source_hash: "7eedba47b982fce6313b905a11bda99fed71a2bd33923520a316b4d35e28f475"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/providers.md"
@@ -1239,6 +1239,26 @@ custom_providers:
     base_url: https://proxy.example.com/anthropic
     key_env: ANTHROPIC_PROXY_KEY
     api_mode: anthropic_messages  # for Anthropic-compatible proxies
+```
+
+Some OpenAI-compatible endpoints need provider-specific request body fields. Add an `extra_body` map to the matching custom provider and Hermes will merge it into each chat-completions request for that endpoint:
+
+```yaml
+custom_providers:
+  - name: gemma-local
+    base_url: http://localhost:8080/v1
+    model: google/gemma-4-31b-it
+    extra_body:
+      enable_thinking: true
+      reasoning_effort: high
+```
+
+Use the shape your server documents. For example, vLLM Gemma deployments and some NVIDIA NIM endpoints expect `enable_thinking` under `chat_template_kwargs` instead of as a top-level `extra_body` field:
+
+```yaml
+extra_body:
+  chat_template_kwargs:
+    enable_thinking: true
 ```
 
 The `hermes model` → Custom Endpoint wizard now prompts for `api_mode` explicitly and persists your answer to `config.yaml`. URL-based auto-detection (e.g. `/anthropic` paths → `anthropic_messages`) still happens as a fallback when the field is left blank.

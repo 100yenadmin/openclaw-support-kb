@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "5e272ef6ce3d144808c4959fc30f9e1fb767a7a12fa34b6c9672e97f4fff95ce"
+source_hash: "095004d86e6c87176b1d743aee028060f286e3a954d1272b7595a483483f4fb7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -348,7 +348,7 @@ See [/providers/kilocode](/providers/kilocode) for setup details.
   </Accordion>
 
   <Accordion title="xAI">
-    Uses the xAI Responses path. The recommended path is SuperGrok/X Premium OAuth; API keys still work via `XAI_API_KEY` or plugin config. `grok-4.3` is the bundled default chat model. `/fast` or `params.fastMode: true` rewrites `grok-3`, `grok-3-mini`, `grok-4`, and `grok-4-0709` to their `*-fast` variants. `tool_stream` defaults on; disable via `agents.defaults.models["xai/<model>"].params.tool_stream=false`.
+    Uses the xAI Responses path. The recommended path is SuperGrok/X Premium OAuth; API keys still work via `XAI_API_KEY` or plugin config, and Grok `web_search` reuses the same auth profile before API-key fallback. `grok-4.3` is the bundled default chat model, and `grok-build-0.1` is selectable for build/coding-focused work. `/fast` or `params.fastMode: true` rewrites `grok-3`, `grok-3-mini`, `grok-4`, and `grok-4-0709` to their `*-fast` variants. `tool_stream` defaults on; disable via `agents.defaults.models["xai/<model>"].params.tool_stream=false`.
   </Accordion>
 
   <Accordion title="Cerebras">

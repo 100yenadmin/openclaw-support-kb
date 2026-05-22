@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "48de392bfb06f5ee9b5013dd14a171fe2344646cc223bbe563da0c9e7819ff4a"
+source_hash: "6456b20901b6f4c4380535bd64b826850cc85875483f998ff2afd4b546eca005"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -161,16 +161,18 @@ two-party event loops that do not go through the shared channel-turn kernel.
     **Session store helpers** are under `api.runtime.agent.session`:
 
     ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    const storePath = api.runtime.agent.session.resolveStorePath(cfg);
-    const store = api.runtime.agent.session.loadSessionStore(storePath);
-    await api.runtime.agent.session.updateSessionStore(storePath, (nextStore) => {
-      // Patch one entry without replacing the whole file from stale state.
-      nextStore[sessionKey] = { ...nextStore[sessionKey], thinkingLevel: "high" };
+    const entry = api.runtime.agent.session.getSessionEntry({ agentId, sessionKey });
+    for (const { sessionKey, entry } of api.runtime.agent.session.listSessionEntries({ agentId })) {
+      // Iterate session rows without depending on the legacy sessions.json shape.
+    }
+    await api.runtime.agent.session.patchSessionEntry({
+      agentId,
+      sessionKey,
+      update: (entry) => ({ thinkingLevel: "high" }),
     });
-    const filePath = api.runtime.agent.session.resolveSessionFilePath(cfg, sessionId);
     ```
 
-    Prefer `updateSessionStore(...)` or `updateSessionStoreEntry(...)` for runtime writes. They route through the Gateway-owned session-store writer, preserve concurrent updates, and reuse the hot cache. `saveSessionStore(...)` remains available for compatibility and offline maintenance-style rewrites.
+    Prefer `getSessionEntry(...)`, `listSessionEntries(...)`, `patchSessionEntry(...)`, or `upsertSessionEntry(...)` for session workflows. These helpers address sessions by agent/session identity so plugins do not depend on the legacy `sessions.json` storage shape. Use `preserveActivity: true` for metadata-only patches that should not refresh session activity, and `replaceEntry: true` only when the callback returns a complete entry and deleted fields must stay deleted. `loadSessionStore(...)` remains as a deprecated compatibility escape hatch for callers that intentionally need a mutable whole-store clone.
   </Accordion>
 
   <Accordion title="api.runtime.agent.defaults">

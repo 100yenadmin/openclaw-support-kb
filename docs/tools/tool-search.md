@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool Search"
 source: "https://docs.openclaw.ai/tools/tool-search"
-source_hash: "fba5b0b5a02dff2d16ea4ae5ff0fda13a43b771fef0c3342aa95656a51220095"
+source_hash: "05f58c67a002e86d3b9c7e0d6cd7240b6e995e73d6b48e9114f4e2327e0aecaf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tool-search.md"
@@ -159,7 +159,7 @@ Normal OpenClaw behavior still applies to final calls:
 
 * tool allow and deny policies
 * per-agent and per-sandbox tool restrictions
-* owner-only gating
+* channel/runtime tool policy
 * approval hooks
 * plugin `before_tool_call` hooks
 * session identity, logs, and telemetry

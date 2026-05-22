@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "6c95aecf642e28e0041bf2cf983bc5ab65f4868974505d4c1ae75f1dd0d4f3d5"
+source_hash: "6a8ff204300f2e73087d2087aefe8783b7b158c623bd197cf05f12cb74dacf3b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/discord.md"
@@ -350,6 +350,8 @@ Supported blocks:
 By default, components are single use. Set `components.reusable=true` to allow buttons, selects, and forms to be used multiple times until they expire.
 
 To restrict who can click a button, set `allowedUsers` on that button (Discord user IDs, tags, or `*`). When configured, unmatched users receive an ephemeral denial.
+
+Component callbacks expire after 30 minutes by default. Set `channels.discord.agentComponents.ttlMs` to change that callback registry lifetime for the default Discord account, or `channels.discord.accounts.<accountId>.agentComponents.ttlMs` to override one account in a multi-account setup. The value is milliseconds, must be a positive integer, and is capped at `86400000` (24 hours). Longer TTLs are useful for review or approval workflows that need buttons to remain usable, but they also extend the window where an old Discord message can still trigger an action. Prefer the shortest TTL that fits the workflow, and keep the default when stale callbacks would be surprising.
 
 The `/model` and `/models` slash commands open an interactive model picker with provider, model, and compatible runtime dropdowns plus a Submit step. `/models add` is deprecated and now returns a deprecation message instead of registering models from chat. The picker reply is ephemeral and only the invoking user can use it. Discord select menus are limited to 25 options, so add `provider/*` entries to `agents.defaults.models` when you want the picker to show dynamically discovered models only for selected providers such as `openai-codex` or `vllm`.
 
@@ -1117,6 +1119,7 @@ OpenClaw uses Discord components v2 for exec approvals and cross-context markers
 
 * `channels.discord.ui.components.accentColor` sets the accent color used by Discord component containers (hex).
 * Set per account with `channels.discord.accounts.<id>.ui.components.accentColor`.
+* `channels.discord.agentComponents.ttlMs` controls how long sent Discord component callbacks remain registered (default `1800000`, maximum `86400000`). Set per account with `channels.discord.accounts.<id>.agentComponents.ttlMs`.
 * `embeds` are ignored when components v2 are present.
 * Plain URL previews are suppressed by default. Set `suppressEmbeds: false` on a message action when a single outbound link should expand.
 
@@ -1217,7 +1220,7 @@ Notes:
 * `voice.realtime.minBargeInAudioEndMs` controls the minimum assistant playback duration before an OpenAI realtime barge-in truncates audio. Default: `250`. Set `0` for immediate interruption in low-echo rooms, or raise it for echo-heavy speaker setups.
 * For an OpenAI voice on Discord playback, set `voice.tts.provider: "openai"` and choose a Text-to-speech voice under `voice.tts.openai.voice` or `voice.tts.providers.openai.voice`. `cedar` is a good masculine-sounding choice on the current OpenAI TTS model.
 * Per-channel Discord `systemPrompt` overrides apply to voice transcript turns for that voice channel.
-* Voice transcript turns derive owner status from Discord `allowFrom` (or `dm.allowFrom`); non-owner speakers cannot access owner-only tools (for example `gateway` and `cron`).
+* Voice transcript turns derive owner status from Discord `allowFrom` (or `dm.allowFrom`) for owner-gated commands and channel actions. Agent tool visibility follows the configured tool policy for the routed session.
 * Discord voice is opt-in for text-only configs; set `channels.discord.voice.enabled=true` (or keep an existing `channels.discord.voice` block) to enable `/vc` commands, the voice runtime, and the `GuildVoiceStates` gateway intent.
 * `channels.discord.intents.voiceStates` can explicitly override voice-state intent subscription. Leave it unset for the intent to follow effective voice enablement.
 * If `voice.autoJoin` has multiple entries for the same guild, OpenClaw joins the last configured channel for that guild.
@@ -1690,7 +1693,7 @@ Primary reference: [Configuration reference - Discord](/gateway/config-channels#
   * actions: `actions.*`
   * presence: `activity`, `status`, `activityType`, `activityUrl`
   * UI: `ui.components.accentColor`
-  * features: `threadBindings`, top-level `bindings[]` (`type: "acp"`), `pluralkit`, `execApprovals`, `intents`, `agentComponents`, `heartbeat`, `responsePrefix`
+  * features: `threadBindings`, top-level `bindings[]` (`type: "acp"`), `pluralkit`, `execApprovals`, `intents`, `agentComponents.enabled`, `agentComponents.ttlMs`, `heartbeat`, `responsePrefix`
 </Accordion>
 
 ## Safety and operations

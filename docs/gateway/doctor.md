@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "3b5bab4484caf03a5545412143af730580a1bd93b0e504fb3e0a83f9a884c26f"
+source_hash: "c4c75d302f6a25bf7d1e9ba5735f4f2f7ca5633b74a23bd4e535dfaf722ffbfe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -425,6 +425,8 @@ That stages grounded durable candidates into the short-term dreaming store while
 
     * short cooldowns (rate limits/timeouts/auth failures)
     * longer disables (billing/credit failures)
+
+    Legacy Codex OAuth profiles whose tokens live in macOS Keychain (older onboarding before the file-based sidecar layout) are not picked up by the embedded runtime path — that path runs with `allowKeychainPrompt: false` and cannot trigger a Keychain prompt. Run `openclaw doctor --fix` once to migrate Keychain-backed legacy tokens inline into `auth-profiles.json`; after that, embedded turns (Telegram, cron, sub-agent dispatch) resolve them like any other inline OAuth profile.
   </Accordion>
 
   <Accordion title="6. Hooks model validation">

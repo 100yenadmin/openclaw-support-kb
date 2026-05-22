@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "f862e1674594d3cdef2cc6a4d796e777e930644d0106e20ed98402b8ef0fec46"
+source_hash: "77b8c81859823244abdf8f7826aea554a78933da3c13f60fe0f072bfaa686ca0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -142,6 +142,7 @@ Example:
   rejected for host execution. The daemon itself still runs with a minimal `PATH`:
   * macOS: `/opt/homebrew/bin`, `/usr/local/bin`, `/usr/bin`, `/bin`
   * Linux: `/usr/local/bin`, `/usr/bin`, `/bin`
+    * To prevent user shell configuration (like `~/.zshenv` or `/etc/zshenv`) from overriding priority paths during startup, `tools.exec.pathPrepend` entries are securely prepended to the final `PATH` inside the shell command right before execution.
 * `host=sandbox`: runs `sh -lc` (login shell) inside the container, so `/etc/profile` may reset `PATH`.
   OpenClaw prepends `env.PATH` after profile sourcing via an internal env var (no shell interpolation);
   `tools.exec.pathPrepend` applies here too.
@@ -183,8 +184,9 @@ See [Exec approvals](/tools/exec-approvals) for the policy, allowlist, and UI fl
 
 When approvals are required, the exec tool returns immediately with
 `status: "approval-pending"` and an approval id. Once approved (or denied / timed out),
-the Gateway emits system events (`Exec finished` / `Exec denied`). If the command is still
-running after `tools.exec.approvalRunningNoticeMs`, a single `Exec running` notice is emitted.
+the Gateway emits command progress and completion system events only for approved runs
+(`Exec running` / `Exec finished`). Denied or timed-out approvals are terminal and do not
+wake the agent session with a denial system event.
 On channels with native approval cards/buttons, the agent should rely on that
 native UI first and only include a manual `/approve` command when the tool
 result explicitly says chat approvals are unavailable or manual approval is the

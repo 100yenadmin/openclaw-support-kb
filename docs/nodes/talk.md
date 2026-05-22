@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Talk mode"
 source: "https://docs.openclaw.ai/nodes/talk"
-source_hash: "655715de5a4e19d03fe8dc0f065f69080804c5d8c3c905f6b66712788cf76e4f"
+source_hash: "1e91bb60dc9994175b1e38a58061447ad03dd0f63b2fcca3d9723f3723cb9c09"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/talk.md"
@@ -119,7 +119,7 @@ Defaults:
 * `realtime.providers.<provider>` stores provider-owned realtime config. The browser receives only ephemeral or constrained session credentials, never a standard API key.
 * `realtime.providers.openai.voice`: built-in OpenAI Realtime voice id. Current `gpt-realtime-2` voices are `alloy`, `ash`, `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, and `cedar`; `marin` and `cedar` are recommended for best quality.
 * `realtime.transport`: `webrtc` and `provider-websocket` are browser realtime transports. Android uses realtime relay only when this is `gateway-relay`; otherwise Android Talk uses its native STT/TTS loop.
-* `realtime.brain`: `agent-consult` routes realtime tool calls through Gateway policy; `direct-tools` is owner-only compatibility behavior; `none` is for transcription or external orchestration.
+* `realtime.brain`: `agent-consult` routes realtime tool calls through Gateway policy; `direct-tools` is legacy direct-tool compatibility behavior; `none` is for transcription or external orchestration.
 * `realtime.instructions`: appends provider-facing system instructions to OpenClaw's built-in realtime prompt. Use it for voice style and tone; OpenClaw keeps the default `openclaw_agent_consult` guidance.
 * `talk.catalog` exposes each provider's valid modes, transports, brain strategies, realtime audio formats, and capability flags so first-party Talk clients can avoid unsupported combinations.
 * Streaming transcription providers are discovered through `talk.catalog.transcription`. The current Gateway relay uses the Voice Call streaming provider config until the dedicated Talk transcription config surface is added.

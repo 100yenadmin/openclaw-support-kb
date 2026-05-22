@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding reference"
 source: "https://docs.openclaw.ai/reference/wizard"
-source_hash: "457dbd41126db75b5ff739a36a5a0c82c4690b9d00d550393096f030f1f33ed5"
+source_hash: "cd954b02670f47c0bf82bdd89bfc229cf03ab1b4d84b034860829b8298a18b23"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/wizard.md"
@@ -45,7 +45,7 @@ For a high-level overview, see [Onboarding (CLI)](/start/wizard).
       * Sets `agents.defaults.model` to `openai/gpt-5.5` through the Codex runtime when model is unset or already OpenAI-family.
     * **OpenAI API key**: uses `OPENAI_API_KEY` if present or prompts for a key, then stores it in auth profiles.
       * Sets `agents.defaults.model` to `openai/gpt-5.5` when model is unset, `openai/*`, or `openai-codex/*`.
-    * **xAI (Grok) API key**: prompts for `XAI_API_KEY` and configures xAI as a model provider.
+    * **xAI (Grok) OAuth / API key**: signs in with xAI OAuth when chosen, or prompts for `XAI_API_KEY` on the API-key path, and configures xAI as a model provider.
     * **OpenCode**: prompts for `OPENCODE_API_KEY` (or `OPENCODE_ZEN_API_KEY`, get it at [https://opencode.ai/auth](https://opencode.ai/auth)) and lets you pick the Zen or Go catalog.
     * **Ollama**: offers **Cloud + Local**, **Cloud only**, or **Local only** first. `Cloud only` prompts for `OLLAMA_API_KEY` and uses `https://ollama.com`; the host-backed modes prompt for the Ollama base URL, discover available models, and auto-pull the selected local model when needed; `Cloud + Local` also checks whether that Ollama host is signed in for cloud access.
     * More detail: [Ollama](/providers/ollama)

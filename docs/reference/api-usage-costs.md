@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "997729959af3ca5f54876e3cb8a1cd643314f769eab45c62417487bf6f5f507f"
+source_hash: "358c5b3e6558248baed981fd06df080429eb4a74197f7a3cb07b85d5de13a107"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/api-usage-costs.md"
@@ -136,7 +136,7 @@ See [Memory](/concepts/memory).
 * **Exa**: `EXA_API_KEY` or `plugins.entries.exa.config.webSearch.apiKey`
 * **Firecrawl**: `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webSearch.apiKey`
 * **Gemini (Google Search)**: `GEMINI_API_KEY` or `plugins.entries.google.config.webSearch.apiKey`
-* **Grok (xAI)**: `XAI_API_KEY` or `plugins.entries.xai.config.webSearch.apiKey`
+* **Grok (xAI)**: xAI OAuth profile, `XAI_API_KEY`, or `plugins.entries.xai.config.webSearch.apiKey`
 * **Kimi (Moonshot)**: `KIMI_API_KEY`, `MOONSHOT_API_KEY`, or `plugins.entries.moonshot.config.webSearch.apiKey`
 * **MiniMax Search**: `MINIMAX_CODE_PLAN_KEY`, `MINIMAX_CODING_API_KEY`, `MINIMAX_API_KEY`, or `plugins.entries.minimax.config.webSearch.apiKey`
 * **Ollama Web Search**: key-free for a reachable signed-in local Ollama host; direct `https://ollama.com` search uses `OLLAMA_API_KEY`, and auth-protected hosts can reuse normal Ollama provider bearer auth

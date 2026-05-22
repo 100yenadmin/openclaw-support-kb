@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "c2ba0b273428847b415cbf583448305251b001078505bf99c8ea44a0526e2597"
+source_hash: "00adf84a4cba8c807d229601227839a2cf8854e4161fd4f8106bd5ea3ed6a47f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -517,9 +517,9 @@ API key auth, and dynamic model resolution.
   <Step title="Add extra capabilities (optional)">
     ### Step 5: Add extra capabilities
 
-    A provider plugin can register speech, realtime transcription, realtime
-    voice, media understanding, image generation, video generation, web fetch,
-    and web search alongside text inference. OpenClaw classifies this as a
+    A provider plugin can register embeddings, speech, realtime transcription,
+    realtime voice, media understanding, image generation, video generation,
+    web fetch, and web search alongside text inference. OpenClaw classifies this as a
     **hybrid-capability** plugin - the recommended pattern for company plugins
     (one plugin per vendor). See
     [Internals: Capability Ownership](/plugins/architecture#capability-ownership-model).
@@ -538,6 +538,7 @@ API key auth, and dynamic model resolution.
         api.registerSpeechProvider({
           id: "acme-ai",
           label: "Acme Speech",
+          defaultTimeoutMs: 120_000,
           isConfigured: ({ config }) => Boolean(config.messages?.tts),
           synthesize: async (req) => {
             const { response, release } = await postJsonRequest({
@@ -665,6 +666,39 @@ API key auth, and dynamic model resolution.
         ```
       </Tab>
 
+      <Tab title="Embeddings">
+        ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        api.registerEmbeddingProvider({
+          id: "acme-ai",
+          defaultModel: "acme-embed",
+          transport: "remote",
+          authProviderId: "acme-ai",
+          create: async ({ model }) => ({
+            provider: {
+              id: "acme-ai",
+              model,
+              dimensions: 1536,
+              embed: async (input) => {
+                const text = typeof input === "string" ? input : input.text;
+                return fetchAcmeEmbedding(text);
+              },
+              embedBatch: async (inputs) =>
+                Promise.all(
+                  inputs.map((input) =>
+                    fetchAcmeEmbedding(typeof input === "string" ? input : input.text),
+                  ),
+                ),
+            },
+          }),
+        });
+        ```
+
+        Declare the same id in `contracts.embeddingProviders`. This is the
+        general embedding contract for reusable vector generation. Use
+        `registerMemoryEmbeddingProvider(...)` only for memory-engine-specific
+        adapters.
+      </Tab>
+
       <Tab title="Image and video generation">
         Video capabilities use a **mode-aware** shape: `generate`,
         `imageToVideo`, and `videoToVideo`. Flat aggregate fields like
@@ -683,6 +717,7 @@ API key auth, and dynamic model resolution.
         api.registerVideoGenerationProvider({
           id: "acme-ai",
           label: "Acme Video",
+          defaultTimeoutMs: 600_000,
           capabilities: {
             generate: { maxVideos: 1, maxDurationSeconds: 10, supportsResolution: true },
             imageToVideo: {

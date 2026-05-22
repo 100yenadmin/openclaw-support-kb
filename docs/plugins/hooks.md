@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "d326802665dcf587de582e9f7ea81eb57e2fd24547f113871d9ae0195f2a0189"
+source_hash: "8e1eec63291b038e7a24c3273f4031a05588a4f2442b1f80c9427e6adc558b87"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -175,6 +175,11 @@ file.
 
 * `event.toolName`
 * `event.params`
+* optional `event.toolKind` and `event.toolInputKind`, host-authoritative
+  discriminators for tools that intentionally share names; for example, outer
+  code-mode `exec` calls use `toolKind: "code_mode_exec"` and
+  include `toolInputKind: "javascript" | "typescript"` when the input language
+  is known
 * optional `event.derivedPaths`, containing best-effort host-derived target path
   hints for well-known tool envelopes such as `apply_patch`; when present,
   these paths may be incomplete or may over-approximate what the tool will
@@ -182,7 +187,8 @@ file.
 * optional `event.runId`
 * optional `event.toolCallId`
 * context fields such as `ctx.agentId`, `ctx.sessionKey`, `ctx.sessionId`,
-  `ctx.runId`, `ctx.jobId` (set on cron-driven runs), and diagnostic `ctx.trace`
+  `ctx.runId`, `ctx.jobId` (set on cron-driven runs), `ctx.toolKind`,
+  `ctx.toolInputKind`, and diagnostic `ctx.trace`
 
 It can return:
 
@@ -285,11 +291,13 @@ as `discord` or `telegram`, while `ctx.channelId` is the conversation target
 identifier when OpenClaw can derive one from the session key or delivery
 metadata.
 
-`agent_end` is an observation hook and runs fire-and-forget after the turn. The
-hook runner applies a 30 second timeout so a wedged plugin or embedding
-endpoint cannot leave the hook promise pending forever. A timeout is logged and
-OpenClaw continues; it does not cancel plugin-owned network work unless the
-plugin also uses its own abort signal.
+`agent_end` is an observation hook. Gateway and persistent harness paths run it
+fire-and-forget after the turn, while short-lived one-shot CLI paths wait for the
+hook promise before process cleanup so trusted plugins can flush terminal
+observability or capture state. The hook runner applies a 30 second timeout so a
+wedged plugin or embedding endpoint cannot leave the hook promise pending
+forever. A timeout is logged and OpenClaw continues; it does not cancel
+plugin-owned network work unless the plugin also uses its own abort signal.
 
 Use `model_call_started` and `model_call_ended` for provider-call telemetry
 that should not receive raw prompts, history, responses, headers, request

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "c37814b38fbbeecc6958069050d33dbc32fcfd13e0d53a9408457b09f3442517"
+source_hash: "7001fe4f3465a59c1b685585fb55fd0cd9ada2b6c5ee38337e586e8d4b55b46a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -110,9 +110,9 @@ own `system.run` exec approval policy.
 ## Shared-secret auth
 
 Shared gateway token/password auth is treated as trusted operator access for
-that Gateway. OpenAI-compatible HTTP surfaces and `/tools/invoke` restore the
-normal full operator default scope set for shared-secret bearer auth, even if a
-caller sends narrower declared scopes.
+that Gateway. OpenAI-compatible HTTP surfaces, `/tools/invoke`, and HTTP session
+history endpoints restore the normal full operator default scope set for
+shared-secret bearer auth, even if a caller sends narrower declared scopes.
 
 Identity-bearing modes, such as trusted proxy auth or private-ingress `none`,
 can still honor explicit declared scopes. Use separate Gateways for real trust

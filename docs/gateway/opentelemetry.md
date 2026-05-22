@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "159b9f6cb5c8e5d2d5750d51ca2fdb93c279965aba33fefe581146bdbda50f29"
+source_hash: "2da32e817bd2c112d03a7f6a45812cbf86971bca5d339516cc331ef97c3de037"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -197,6 +197,10 @@ When any subkey is enabled, model and tool spans get bounded, redacted
 * `openclaw.webhook.error` (counter, attrs: `openclaw.channel`, `openclaw.webhook`)
 * `openclaw.webhook.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.webhook`)
 * `openclaw.message.queued` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+* `openclaw.message.received` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+* `openclaw.message.dispatch.started` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+* `openclaw.message.dispatch.completed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
+* `openclaw.message.dispatch.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
 * `openclaw.message.processed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`)
 * `openclaw.message.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`)
 * `openclaw.message.delivery.started` (counter, attrs: `openclaw.channel`, `openclaw.delivery.kind`)
@@ -217,6 +221,7 @@ When any subkey is enabled, model and tool spans get bounded, redacted
 * `openclaw.session.state` (counter, attrs: `openclaw.state`, `openclaw.reason`)
 * `openclaw.session.stuck` (counter, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
 * `openclaw.session.stuck_age_ms` (histogram, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
+* `openclaw.session.turn.created` (counter, attrs: `openclaw.agent`, `openclaw.channel`, `openclaw.trigger`)
 * `openclaw.session.recovery.requested` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.active_work_kind`, `openclaw.reason`)
 * `openclaw.session.recovery.completed` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.status`, `openclaw.active_work_kind`, `openclaw.reason`)
 * `openclaw.session.recovery.age_ms` (histogram, attrs: same as the matching recovery counter)

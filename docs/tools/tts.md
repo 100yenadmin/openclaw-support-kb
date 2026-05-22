@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "37e8484903244a12dcbe08b4ab7826004b1b46bef3ecc3b5137cbee130927b91"
+source_hash: "eba73c9cdb99a825b9cbfe433f2940bac30002cab3462f8cdb043cb8e4e2bd54"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -1000,7 +1000,9 @@ WhatsApp sends audio through Baileys as a PTT voice note (`audio` with
 clients do not consistently render captions on voice notes.
 
 The tool accepts optional `channel` and `timeoutMs` fields; `timeoutMs` is a
-per-call provider request timeout in milliseconds.
+per-call provider request timeout in milliseconds. Per-call values override
+`messages.tts.timeoutMs`; configured TTS timeouts override any plugin-authored
+provider default.
 
 ## Gateway RPC
 

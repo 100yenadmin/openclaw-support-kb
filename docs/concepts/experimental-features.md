@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "ff811b6c0083b1c6ddc1a4d61bf485661630130b4c70c2102ac4ee723ed867b1"
+source_hash: "d5e5cf9834bb42eece53f3983147bcc8c47257b1ca87a59a48ba0d80136c7e76"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/experimental-features.md"
@@ -29,11 +29,12 @@ Treat them differently from normal config:
 
 ## Currently documented flags
 
-| Surface                  | Key                                                                                        | Use it when                                                                                                    | More                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Local model runtime      | `agents.defaults.experimental.localModelLean`, `agents.list[].experimental.localModelLean` | A smaller or stricter local backend chokes on OpenClaw's full default tool surface                             | [Local Models](/gateway/local-models)                                                         |
-| Memory search            | `agents.defaults.memorySearch.experimental.sessionMemory`                                  | You want `memory_search` to index prior session transcripts and accept the extra storage/indexing cost         | [Memory configuration reference](/reference/memory-config#session-memory-search-experimental) |
-| Structured planning tool | `tools.experimental.planTool`                                                              | You want the structured `update_plan` tool exposed for multi-step work tracking in compatible runtimes and UIs | [Gateway configuration reference](/gateway/config-tools#toolsexperimental)                    |
+| Surface                  | Key                                                                                        | Use it when                                                                                                                       | More                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Local model runtime      | `agents.defaults.experimental.localModelLean`, `agents.list[].experimental.localModelLean` | A smaller or stricter local backend chokes on OpenClaw's full default tool surface                                                | [Local Models](/gateway/local-models)                                                         |
+| Memory search            | `agents.defaults.memorySearch.experimental.sessionMemory`                                  | You want `memory_search` to index prior session transcripts and accept the extra storage/indexing cost                            | [Memory configuration reference](/reference/memory-config#session-memory-search-experimental) |
+| Codex harness            | `plugins.entries.codex.config.appServer.experimental.sandboxExecServer`                    | You want native Codex app-server 0.132.0 or newer to target an OpenClaw sandbox-backed exec-server instead of disabling Code Mode | [Codex harness reference](/plugins/codex-harness-reference#sandboxed-native-execution)        |
+| Structured planning tool | `tools.experimental.planTool`                                                              | You want the structured `update_plan` tool exposed for multi-step work tracking in compatible runtimes and UIs                    | [Gateway configuration reference](/gateway/config-tools#toolsexperimental)                    |
 
 ## Local model lean mode
 

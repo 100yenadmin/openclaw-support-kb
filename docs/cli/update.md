@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "99c73a5255bc9a9dddac760e3cb81dc7aa18f2276bf46737f10547d16a64f4a8"
+source_hash: "e2ec5212ed4240e1b588491c769781ccc0f88abe824d0e34576b89fcb1a3cf90"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/update.md"
@@ -31,7 +31,6 @@ openclaw update wizard
 openclaw update --channel beta
 openclaw update --channel dev
 openclaw update --tag beta
-openclaw update --tag main
 openclaw update --dry-run
 openclaw update --no-restart
 openclaw update --yes
@@ -43,7 +42,7 @@ openclaw --update
 
 * `--no-restart`: skip restarting the Gateway service after a successful update. Package-manager updates that do restart the Gateway verify the restarted service reports the expected updated version before the command succeeds.
 * `--channel <stable|beta|dev>`: set the update channel (git + npm; persisted in config).
-* `--tag <dist-tag|version|spec>`: override the package target for this update only. For package installs, `main` maps to `github:openclaw/openclaw#main`.
+* `--tag <dist-tag|version|spec>`: override the package target for this update only. Use `--channel dev`, not `--tag main`, for the moving GitHub `main` checkout.
 * `--dry-run`: preview planned update actions (channel/tag/target/restart flow) without writing config, installing, syncing plugins, or restarting.
 * `--json`: print machine-readable `UpdateRunResult` JSON, including
   `postUpdate.plugins.warnings` when corrupt or unloadable managed plugins need

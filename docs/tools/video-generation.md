@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "a71864de080f158417b5228690d6f799f21011c38c5bf8ad04b0f798a0b01231"
+source_hash: "c8b92a48f1c3f8bff4ce95f9ba5a1f8fbb7a4391a9a55e43400bbc9a83c97f55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -70,8 +70,9 @@ session:
 2. The provider processes the job in the background (typically 30 seconds to several minutes depending on the provider and resolution; slow queue-backed providers can run up to the configured timeout).
 3. When the video is ready, OpenClaw wakes the same session with an internal completion event.
 4. The agent tells the user and attaches the finished video through the
-   message tool. OpenClaw does not auto-post the video as a fallback if the
-   completion agent writes only a private final reply.
+   message tool. If the requester session is inactive and some generated
+   video is still missing from message-tool delivery, OpenClaw sends an
+   idempotent direct fallback with only the missing video.
 
 While a job is in flight, duplicate `video_generate` calls in the same
 session return the current task status instead of starting another
@@ -242,7 +243,7 @@ dimensions). Providers that do not declare it surface the value via
 
 <ParamField type="string">Provider/model override (e.g. `runway/gen4.5`).</ParamField>
 <ParamField type="string">Output filename hint.</ParamField>
-<ParamField type="number">Optional provider operation timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.videoGenerationModel.timeoutMs` if configured.</ParamField>
+<ParamField type="number">Optional provider operation timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.videoGenerationModel.timeoutMs` if configured, otherwise the plugin-authored provider default when one exists.</ParamField>
 
 <ParamField type="object">
   Provider-specific options as a JSON object (e.g. `{"seed": 42, "draft": true}`).

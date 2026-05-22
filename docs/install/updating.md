@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "ebc70a92c54f1fdd98411c8128096094e065a255e6a11a3c71d52a4e0530cefa"
+source_hash: "61e936be2727aafbe64cdd6bd4683d9922e60f51506ba17c091c40aa664b1869"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -30,7 +30,6 @@ To switch channels or target a specific version:
 ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
 openclaw update --channel beta
 openclaw update --channel dev
-openclaw update --tag main
 openclaw update --dry-run   # preview without applying
 ```
 
@@ -43,6 +42,10 @@ installer has its own `--verbose` flag, but that flag is not part of
 `--channel beta` prefers beta, but the runtime falls back to stable/latest when
 the beta tag is missing or older than the latest stable release. Use `--tag beta`
 if you want the raw npm beta dist-tag for a one-off package update.
+
+Use `--channel dev` for the moving GitHub `main` checkout. Package updates do
+not support npm GitHub source installs for `openclaw/openclaw`; target a
+published dist-tag, exact version, or built tarball instead.
 
 For managed plugins, beta-channel fallback is a warning: the core update can
 still succeed while a plugin uses its recorded default/latest release because no

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "99e486943400fb16016b82068445dc345cb0114c721718da4852bf30f18d51ab"
+source_hash: "dba888d2e7a4a1c91396905ba9b41b6bf00a0f1697afadb6d7bd1a354f280f01"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -424,9 +424,11 @@ Exec lifecycle is surfaced as system messages:
 
 * `Exec running` (only if the command exceeds the running notice threshold).
 * `Exec finished`.
-* `Exec denied`.
 
 These are posted to the agent's session after the node reports the event.
+Denied exec approvals are terminal: OpenClaw can report the denial to the
+operator or direct chat route, but it does not post `Exec denied` back into the
+agent session or wake agent work.
 Gateway-host exec approvals emit the same lifecycle events when the
 command finishes (and optionally when running longer than the threshold).
 Approval-gated execs reuse the approval id as the `runId` in these
@@ -434,12 +436,11 @@ messages for easy correlation.
 
 ## Denied approval behavior
 
-When an async exec approval is denied, OpenClaw prevents the agent from
-reusing output from any earlier run of the same command in the session.
-The denial reason is passed with explicit guidance that no command output
-is available, which stops the agent from claiming there is new output or
-repeating the denied command with stale results from a prior successful
-run.
+When an async exec approval is denied, OpenClaw treats the request as terminal.
+It can show a concise denial to the operator or direct chat route, but it does
+not send denial guidance back through the agent session. That keeps a denied
+command from becoming another model turn and prevents the agent from reusing
+output from an earlier run of the same command.
 
 ## Implications
 

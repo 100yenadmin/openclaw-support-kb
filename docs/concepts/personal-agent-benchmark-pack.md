@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal agent benchmark pack"
 source: "https://docs.openclaw.ai/concepts/personal-agent-benchmark-pack"
-source_hash: "d7e8e1e8da16f4dccdf58cbd1b4757a4e2b2ce8b663c00d69b8985f8543ed64c"
+source_hash: "c7060b4b88f70e6d342f0369d729c9a00705d1d56f659b77350e55987e4a4abe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/personal-agent-benchmark-pack.md"
@@ -33,6 +33,7 @@ The first pack is intentionally narrow:
 * proof-backed task status reporting that keeps pending, blocked, and done separate
 * share-safe diagnostics artifacts that keep useful status while omitting raw personal content
 * proof-backed completion claims that avoid fake progress before local evidence exists
+* failure recovery that reports partial status and keeps retry boundaries clear
 
 ## Scenarios
 

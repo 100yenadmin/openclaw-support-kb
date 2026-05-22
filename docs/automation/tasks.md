@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "251860c877e684d8764b7b471d00bb3a6a261fc0757d546a506b75c6dd585d9a"
+source_hash: "1f27cbfc353b0b9cc4d26588be95d0865e294075537259791bfd232a1e49842d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -110,7 +110,7 @@ Tasks do **not** replace sessions, cron jobs, or heartbeats - they are the **act
   <Accordion title="Notify defaults for cron and media">
     Main-session cron tasks use `silent` notify policy by default - they create records for tracking but do not generate notifications. Isolated cron tasks also default to `silent` but are more visible because they run in their own session.
 
-    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. Generated-media completion events require message-tool delivery: the agent must send the finished media with the `message` tool, then reply `NO_REPLY`. If the completion agent only writes a private final reply or misses the media attachment, OpenClaw marks the completion handoff as failed; it does not auto-post the generated media as a fallback.
+    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. Generated-media completion events require message-tool delivery: the agent must send the finished media with the `message` tool, then reply `NO_REPLY`. If the requester session is no longer active and the completion agent misses some or all generated media, OpenClaw sends an idempotent direct fallback with only the missing media to the original channel target.
   </Accordion>
 
   <Accordion title="Concurrent media-generation guardrail">

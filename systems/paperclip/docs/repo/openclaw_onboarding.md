@@ -55,23 +55,6 @@ Security/control note:
 - Confirm gateway URL is `ws://...` or `wss://...`.
 - Confirm gateway token is non-trivial (not empty / not 1-char placeholder).
 - The OpenClaw Gateway adapter UI should not expose `disableDeviceAuth` for normal onboarding.
-- Treat OpenClaw as the default supported backend for evaOS Paperclip child
-  provisioning. Do not use Hermes for Paperclip child provisioning until a
-  dedicated Hermes adapter/provisioner exists.
-- For OpenClaw child workers created from another OpenClaw-backed Paperclip
-  agent, confirm the child has a dedicated OpenClaw target:
-  - same-gateway create/hire happened from an authenticated `openclaw_gateway`
-    parent, so the child inherited VM-local gateway auth without exposing raw
-    tokens
-  - `adapterConfig.headers.x-openclaw-token` exists in persisted config
-  - `adapterConfig.agentId` is the child OpenClaw id, not inherited from the parent
-  - `/root/.openclaw/agents/<agentId>` exists
-  - `/root/.openclaw/workspace-<agentId>/paperclip-claimed-api-key.json` exists
-  - `adapterConfig.claimedApiKeyPath` points at that per-workspace claim file
-- Confirm OpenClaw Gateway agents do not exceed the local gateway capacity.
-  On evaOS, use `runtimeConfig.heartbeat.maxConcurrentRuns=1` and
-  `runtimeConfig.heartbeat.gatewayMaxConcurrentRuns=1` unless support has
-  explicitly raised the gateway limit.
 - Confirm pairing mode is explicit:
   - required default: device auth enabled (`adapterConfig.disableDeviceAuth` false/absent) with persisted `adapterConfig.devicePrivateKeyPem`
   - do not rely on `disableDeviceAuth` for normal onboarding
@@ -81,20 +64,6 @@ AGENT_ID="<newly-created-agent-id>"
 curl -sS -H "Cookie: $PAPERCLIP_COOKIE" "http://127.0.0.1:3100/api/agents/$AGENT_ID" | jq '{adapterType,adapterConfig:{url:.adapterConfig.url,tokenLen:(.adapterConfig.headers["x-openclaw-token"] // .adapterConfig.headers["x-openclaw-auth"] // "" | length),disableDeviceAuth:(.adapterConfig.disableDeviceAuth // false),hasDeviceKey:(.adapterConfig.devicePrivateKeyPem // "" | length > 0)}}'
 ```
 - Expected: `adapterType=openclaw_gateway`, `tokenLen >= 16`, `hasDeviceKey=true`, and `disableDeviceAuth=false`.
-
-Same-gateway child-agent note:
-- A Paperclip child row alone is not enough. The matching OpenClaw agent and
-  workspace must exist, and the child must load its own Paperclip claimed API
-  key. If a child loads `/root/.openclaw/workspace/paperclip-claimed-api-key.json`,
-  `/api/agents/me` will return the parent/main Paperclip agent instead of the child.
-- Newer Mission Control builds derive/provision this automatically for local
-  same-gateway OpenClaw children. Older builds require support to run
-  `openclaw agents add <agentId> --workspace /root/.openclaw/workspace-<agentId>`
-  and save the child API key to that workspace before waking the child.
-- Until the deployed build is confirmed to include the same-gateway provisioner,
-  run support-control `paperclip-runtime-config` dry-run after creating
-  same-gateway children and apply the repair if it reports auth/provisioning or
-  concurrency drift.
 
 Pairing handshake note:
 - Clean run expectation: first task should succeed without manual pairing commands.

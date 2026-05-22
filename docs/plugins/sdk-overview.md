@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "7aa6f0806b6d9e20901ae50e09f38933c5b213b835419890bf7707325fa3ba44"
+source_hash: "926dc28cd320f8806009215bf0fc611a47ac6e08019f7ff547d08033ab5f5194"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -102,6 +102,7 @@ methods:
 | `api.registerAgentHarness(...)`                  | Experimental low-level agent executor |
 | `api.registerCliBackend(...)`                    | Local CLI inference backend           |
 | `api.registerChannel(...)`                       | Messaging channel                     |
+| `api.registerEmbeddingProvider(...)`             | Reusable vector embedding provider    |
 | `api.registerSpeechProvider(...)`                | Text-to-speech / STT synthesis        |
 | `api.registerRealtimeTranscriptionProvider(...)` | Streaming realtime transcription      |
 | `api.registerRealtimeVoiceProvider(...)`         | Duplex realtime voice sessions        |
@@ -111,6 +112,12 @@ methods:
 | `api.registerVideoGenerationProvider(...)`       | Video generation                      |
 | `api.registerWebFetchProvider(...)`              | Web fetch / scrape provider           |
 | `api.registerWebSearchProvider(...)`             | Web search                            |
+
+Embedding providers registered with `api.registerEmbeddingProvider(...)` must
+also be listed in `contracts.embeddingProviders` in the plugin manifest. This
+is the generic embedding surface for reusable vector generation. Memory-only
+adapters still use `api.registerMemoryEmbeddingProvider(...)` and
+`contracts.memoryEmbeddingProviders`.
 
 ### Tools and commands
 

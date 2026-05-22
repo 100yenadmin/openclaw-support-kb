@@ -66,13 +66,6 @@ External plugin adapters (install via the adapter manager or API):
 
 - `droid_local`: runs your local Factory Droid CLI (`@henkey/droid-paperclip-adapter`)
 
-For evaOS Mission Control, `openclaw_gateway` is the default supported backend
-for Paperclip child provisioning. Same-gateway children rely on inherited
-OpenClaw gateway auth from the authenticated parent and the evaOS provisioner
-that creates the child OpenClaw agent/workspace and claimed API key path. Do
-not use `hermes_local` for Paperclip child provisioning until Paperclip has a
-dedicated Hermes adapter/provisioner.
-
 For local CLI adapters (`claude_local`, `codex_local`, `opencode_local`, `hermes_local`, `droid_local`), Paperclip assumes the CLI is already installed and authenticated on the host machine.
 
 ## 3.2 Runtime behavior
@@ -202,9 +195,7 @@ Start with least privilege where possible, and avoid exposing secrets in broad r
 
 ## 10. Minimal setup checklist
 
-1. Choose adapter. On evaOS Paperclip child agents, use `openclaw_gateway` and
-   preserve the inherited gateway auth/provisioning contract. Outside that
-   path, choose the adapter that matches the installed runtime.
+1. Choose adapter (e.g. `claude_local`, `codex_local`, `opencode_local`, `hermes_local`, `cursor`, or `openclaw_gateway`). External plugins like `droid_local` are also available via the adapter manager.
 2. Set `cwd` to the target workspace (for local adapters).
 3. Optionally add a prompt template (`promptTemplate`) or use the managed instructions bundle.
 4. Configure heartbeat policy (timer and/or assignment wakeups).
