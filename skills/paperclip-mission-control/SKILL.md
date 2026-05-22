@@ -73,8 +73,10 @@ shortnames for `local-cli` in the current server.
 
 If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists on an
 evaOS VM, load its `token` field silently and export it as `PAPERCLIP_API_KEY`.
-Prefer a short-lived `PAPERCLIP_API_KEY` already present in the current
-environment.
+If that fixed path is missing, look in the active OpenClaw workspace and
+`/root/.openclaw/workspace-*/paperclip-claimed-api-key.json`; load an existing
+token silently, but do not copy, print, or persist secrets. Prefer a short-lived
+`PAPERCLIP_API_KEY` already present in the current environment.
 
 ## Resolution Rules
 
@@ -216,6 +218,13 @@ curl -fsS -X POST "$PAPERCLIP_API_BASE/companies/$PAPERCLIP_COMPANY_ID/agent-hir
   -H "Content-Type: application/json" \
   -d '{"name":"SEO Lead","role":"general","title":"SEO Lead","reportsTo":"<manager-agent-id>","capabilities":"Owns SEO strategy, audits, keyword plan, and delegation.","budgetMonthlyCents":5000,"runtimeConfig":{"heartbeat":{"enabled":false,"wakeOnDemand":true}}}'
 ```
+
+Do not use generic approval create (`paperclipai approval create` or a raw
+`hire_agent` approval) as a substitute for `/agent-hires`. It bypasses the hire
+workflow and can leave no pending agent row for the board to approve. For
+confirmed direct-hire requests, call `POST
+/api/companies/:companyId/agent-hires`, then verify the returned
+`approval.status` is `pending` when board approval is required.
 
 Hiring, direct agent creation, permission expansion, and budget increases are
 board-only unless the current identity has explicit delegated permission. If the
