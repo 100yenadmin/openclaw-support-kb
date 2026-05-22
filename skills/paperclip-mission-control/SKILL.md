@@ -5,6 +5,14 @@ description: Use for Paperclip, Mission Control, companies, goals, org charts, a
 
 # Paperclip Mission Control
 
+Use this skill when an OpenClaw agent is operating Paperclip from outside the
+Paperclip runtime. Paperclip already ships its own `paperclip` skill, a
+governance-aware `paperclip-create-agent` skill, `paperclipai agent local-cli`
+for local Codex/Claude identities, and an OpenClaw invite flow that can install
+`~/.openclaw/skills/paperclip/SKILL.md` during join. This skill is the external
+operator layer for OpenClaw agents: use it with the Paperclip CLI/API, evaOS
+local API rules, and the safety gates below.
+
 ## Workflow
 
 1. Search Paperclip first:
@@ -26,6 +34,276 @@ description: Use for Paperclip, Mission Control, companies, goals, org charts, a
    gbrain search "Paperclip deploy environment variables database" --source openclaw-support-kb
    ```
 
+## External Operator Setup
+
+Prefer the CLI for supported operations because it handles auth context, JSON
+output, and command shapes consistently. Use raw HTTP when the CLI does not
+cover the needed endpoint, such as `agent-hires`, issue-thread interactions,
+some budget operations, OpenClaw invite prompts, or company skill management.
+
+For CLI calls, use the server base without `/api`:
+
+```bash
+export PAPERCLIP_API_URL="${PAPERCLIP_API_URL:-http://127.0.0.1:3100}"
+paperclipai dashboard get --api-base "$PAPERCLIP_API_URL" --api-key "$PAPERCLIP_API_KEY" --company-id "$PAPERCLIP_COMPANY_ID" --json
+```
+
+For raw HTTP calls, use the API base with `/api`:
+
+```bash
+export PAPERCLIP_API_BASE="${PAPERCLIP_API_BASE:-${PAPERCLIP_API_URL:-http://127.0.0.1:3100}/api}"
+curl -fsS "$PAPERCLIP_API_BASE/health" -H "Accept: application/json"
+```
+
+The CLI also accepts `--api-base "$PAPERCLIP_API_URL"` and `--api-key
+"$PAPERCLIP_API_KEY"` on client commands. Pass them explicitly if the
+environment or profile is not already configured.
+
+If you need a local manual Paperclip identity for Codex/Claude, use:
+
+```bash
+paperclipai agent local-cli <agent-id> --company-id <company-id>
+```
+
+That creates an agent key, installs Paperclip skills for local Codex/Claude, and
+prints `PAPERCLIP_API_URL`, `PAPERCLIP_COMPANY_ID`, `PAPERCLIP_AGENT_ID`, and
+`PAPERCLIP_API_KEY` exports. Do not paste the token into chat, comments, logs,
+or issue descriptions. Resolve the agent to a UUID first; do not rely on
+shortnames for `local-cli` in the current server.
+
+If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists on an
+evaOS VM, load its `token` field silently and export it as `PAPERCLIP_API_KEY`.
+Prefer a short-lived `PAPERCLIP_API_KEY` already present in the current
+environment.
+
+## Resolution Rules
+
+- Resolve names to IDs before mutating. For "Alice", "CEO", or "SEO agent",
+  list agents and match exact `name`, `urlKey`, role, or title. Ask if
+  ambiguous.
+- Resolve issues by identifier or UUID, read the issue before changing it, and
+  preserve `projectId`, `goalId`, `parentId`, `billingCode`, and blockers when
+  creating follow-up work.
+- If an API response is not JSON, stop and fix the base URL before parsing.
+  Public Paperclip hosts may return Electric Sheep login HTML.
+- For issue mutations from an agent-authenticated run, include
+  `X-Paperclip-Run-Id: $PAPERCLIP_RUN_ID` on raw HTTP requests when it exists.
+  The current CLI reads `PAPERCLIP_API_KEY` but does not add this header for
+  client commands, so use raw HTTP when checkout ownership or run traceability
+  matters.
+
+## CLI Quick Reference
+
+```bash
+paperclipai agent list --company-id "$PAPERCLIP_COMPANY_ID" --json
+paperclipai agent get <agent-id> --json
+
+paperclipai dashboard get --company-id "$PAPERCLIP_COMPANY_ID" --json
+paperclipai activity list --company-id "$PAPERCLIP_COMPANY_ID" --agent-id <agent-id> --json
+
+paperclipai issue list --company-id "$PAPERCLIP_COMPANY_ID" --status todo,in_progress,blocked --json
+paperclipai issue get <issue-id-or-identifier> --json
+paperclipai issue create --company-id "$PAPERCLIP_COMPANY_ID" --title "..." --description "..." --status todo --priority medium --assignee-agent-id <agent-id> --json
+paperclipai issue update <issue-id> --assignee-agent-id <agent-id> --status todo --comment "Assigned for next action." --json
+paperclipai issue comment <issue-id> --body "..." --json
+
+paperclipai approval list --company-id "$PAPERCLIP_COMPANY_ID" --status pending --json
+paperclipai approval get <approval-id> --json
+paperclipai approval comment <approval-id> --body "..." --json
+
+paperclipai heartbeat run --agent-id <agent-id> --api-base "$PAPERCLIP_API_URL" --api-key "$PAPERCLIP_API_KEY"
+```
+
+## Playbook: Company Status Check
+
+For "check Paperclip", "how is the company doing", or "give me CEO feedback":
+
+1. Establish API base, token, and company id.
+2. Read `paperclipai dashboard get --company-id ... --json`.
+3. Read pending approvals with `paperclipai approval list --status pending`.
+4. Read active/blocked work with `paperclipai issue list --status todo,in_progress,in_review,blocked`.
+5. Read recent activity with `paperclipai activity list --company-id ... --json`.
+6. Summarize health, blocked work, stale work, budget utilization, pending
+   approvals, and recommended next actions.
+
+Do not change anything during a status check unless the user explicitly asks
+for an action.
+
+## Playbook: Agent Lookup And Current Work
+
+For "what is Alice doing" or "check on the CEO":
+
+1. `paperclipai agent list --company-id "$PAPERCLIP_COMPANY_ID" --json`.
+2. Resolve the requested person/role to one agent id. Ask on ambiguity.
+3. `paperclipai agent get <agent-id> --json`.
+4. `paperclipai issue list --company-id "$PAPERCLIP_COMPANY_ID" --assignee-agent-id <agent-id> --status todo,in_progress,in_review,blocked --json`.
+5. `paperclipai activity list --company-id "$PAPERCLIP_COMPANY_ID" --agent-id <agent-id> --json`.
+
+Return status, budget/spend, assigned issues, current blockers, recent comments,
+and whether a wake or reassignment is warranted.
+
+## Playbook: Create Or Assign Issue
+
+Before filing or assigning work, resolve company, assignee, issue title,
+priority, desired status, and whether it belongs under a project, goal, or
+parent issue. Use first-class fields, not just prose.
+
+Create assigned work:
+
+```bash
+paperclipai issue create --company-id "$PAPERCLIP_COMPANY_ID" \
+  --title "SEO audit for pricing pages" \
+  --description "..." \
+  --status todo \
+  --priority medium \
+  --assignee-agent-id <agent-id> \
+  --project-id <project-id> \
+  --goal-id <goal-id> \
+  --json
+```
+
+Assign or reassign existing work:
+
+```bash
+paperclipai issue update <issue-id> \
+  --assignee-agent-id <agent-id> \
+  --status todo \
+  --comment "Assigned to <name> for the next action." \
+  --json
+```
+
+If a task is actively checked out, do not steal it unless the acting identity has
+manager/board authority and the user explicitly asked for intervention.
+
+## Playbook: Issue Comments And Feedback
+
+For feedback, prefer a comment over a status update unless the requested action
+is specifically to move the issue. Resolve and read the issue first, then:
+
+```bash
+paperclipai issue comment <issue-id> --body "## Feedback
+
+- Please tighten the SEO title recommendations.
+- Keep the implementation plan under the existing project.
+" --json
+```
+
+`@AgentName` mentions can wake agents and spend budget. Use structured mentions
+or direct assignment only when the user intends to wake someone.
+
+## Playbook: CEO Delegation And Hiring Requests
+
+For "have the CEO make another agent" or "set up an SEO team", prefer CEO
+delegation over direct creation:
+
+1. Resolve the CEO agent.
+2. Create an issue assigned to the CEO with the desired business outcome, budget
+   envelope, reporting line, and constraints.
+3. Ask for a staged plan first when the request implies multiple hires or a new
+   department.
+4. Wake the CEO only if the user wants immediate action.
+
+For an SEO team, stage the request as a plan such as "SEO Lead first; then
+Technical SEO and Content SEO only after the lead's plan is approved." Avoid
+unbounded team creation.
+
+Only use the direct hire API when the user explicitly asks for a direct hire
+request or the CEO/board workflow requires it:
+
+```bash
+curl -fsS -X POST "$PAPERCLIP_API_BASE/companies/$PAPERCLIP_COMPANY_ID/agent-hires" \
+  -H "Authorization: Bearer $PAPERCLIP_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"SEO Lead","role":"general","title":"SEO Lead","reportsTo":"<manager-agent-id>","capabilities":"Owns SEO strategy, audits, keyword plan, and delegation.","budgetMonthlyCents":5000,"runtimeConfig":{"heartbeat":{"enabled":false,"wakeOnDemand":true}}}'
+```
+
+Hiring, direct agent creation, permission expansion, and budget increases are
+board-only unless the current identity has explicit delegated permission. If the
+response creates an approval, report the approval id and leave it pending.
+
+## Playbook: Approvals And Plan Confirmations
+
+First classify the pending item:
+
+- Company approval: use `paperclipai approval list/get/comment`.
+- Issue-thread plan confirmation or interaction: read the issue, comments, plan
+  document, and interactions through raw HTTP.
+
+Approving, rejecting, requesting revision, or accepting a plan is board-only.
+Before acting, show the payload, linked issues, requester, risks, and exact
+decision note, then require explicit user confirmation.
+
+Use comments freely for discussion:
+
+```bash
+paperclipai approval comment <approval-id> --body "Please add budget, reporting line, and success criteria before approval." --json
+```
+
+Use `paperclipai approval approve`, `reject`, or `request-revision` only after
+confirmation from the user or a board-authorized policy.
+
+## Playbook: Wake Agent
+
+Before waking an agent, resolve the agent, check status, budget, and whether a
+run is already queued/running. Do not wake paused, terminated, pending-approval,
+or over-budget agents unless the user explicitly confirms the reason.
+
+```bash
+paperclipai heartbeat run --agent-id <agent-id> \
+  --api-base "$PAPERCLIP_API_URL" \
+  --api-key "$PAPERCLIP_API_KEY"
+```
+
+If the goal is to wake an agent about a specific issue, comment or assign the
+issue first so the wake has context.
+
+## Playbook: Runaway Agent Triage
+
+For "stop", "pause", "delete", or "runaway":
+
+1. Inspect agent status, current run/activity, assigned issue, and budget.
+2. Prefer a pause over termination.
+3. Ask for explicit confirmation before pause/resume/terminate.
+4. Record an issue comment or approval note explaining why action was taken.
+
+Raw HTTP controls:
+
+```bash
+curl -fsS -X POST "$PAPERCLIP_API_BASE/agents/<agent-id>/pause" -H "Authorization: Bearer $PAPERCLIP_API_KEY"
+curl -fsS -X POST "$PAPERCLIP_API_BASE/agents/<agent-id>/resume" -H "Authorization: Bearer $PAPERCLIP_API_KEY"
+curl -fsS -X POST "$PAPERCLIP_API_BASE/agents/<agent-id>/terminate" -H "Authorization: Bearer $PAPERCLIP_API_KEY"
+```
+
+Termination is irreversible in normal operations. Treat delete/terminate as
+board-only and human-confirmed.
+
+## Playbook: Budgets
+
+For budget questions, first read costs and budget state:
+
+```bash
+curl -fsS "$PAPERCLIP_API_BASE/companies/$PAPERCLIP_COMPANY_ID/costs/summary" -H "Authorization: Bearer $PAPERCLIP_API_KEY"
+curl -fsS "$PAPERCLIP_API_BASE/companies/$PAPERCLIP_COMPANY_ID/budgets/overview" -H "Authorization: Bearer $PAPERCLIP_API_KEY"
+```
+
+For budget changes, ask whether the target is company or agent, show current
+spend and budget, convert dollars to cents, and require explicit confirmation.
+
+```bash
+curl -fsS -X PATCH "$PAPERCLIP_API_BASE/companies/$PAPERCLIP_COMPANY_ID/budgets" \
+  -H "Authorization: Bearer $PAPERCLIP_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"budgetMonthlyCents":5000}'
+
+curl -fsS -X PATCH "$PAPERCLIP_API_BASE/agents/<agent-id>/budgets" \
+  -H "Authorization: Bearer $PAPERCLIP_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"budgetMonthlyCents":2000}'
+```
+
+Budget patch routes are board-only. Do not assume an agent-delegated policy can
+change company or agent budgets through these endpoints.
+
 ## evaOS VM Runtime Rules
 
 When you are running inside an evaOS customer VM, use the VM-local Paperclip
@@ -35,7 +313,7 @@ routes and may return Electric Sheep login HTML instead of JSON.
 
 - CLI/server base: `http://127.0.0.1:3100`
 - Raw HTTP API base: `http://127.0.0.1:3100/api`
-- OpenClaw gateway adapter URL: `ws://127.0.0.1:18790/`
+- evaOS OpenClaw gateway adapter URL: `ws://127.0.0.1:18790/`
 - Same-gateway OpenClaw child agents must persist a gateway auth header:
   `adapterConfig.headers.x-openclaw-token`.
 - Same-gateway OpenClaw child agents must also have a real OpenClaw
@@ -44,6 +322,10 @@ routes and may return Electric Sheep login HTML instead of JSON.
 - OpenClaw is the default supported backend for Paperclip child provisioning
   on evaOS. Do not create Hermes-backed Paperclip children for this flow until
   a Hermes-specific adapter/provisioner exists.
+
+Stock Paperclip/local OpenClaw examples may use `ws://127.0.0.1:18789`. On
+evaOS, trust the support-control `paperclip-runtime-config` target state before
+changing an existing `openclaw_gateway` adapter URL.
 
 If `/root/.openclaw/workspace/paperclip-claimed-api-key.json` exists, load the
 agent token from that JSON file without printing it, then send it as
@@ -192,6 +474,12 @@ Forbidden adapter shapes:
 
 ## Stop Conditions
 
-Ask before changing budgets, pausing/terminating agents, importing/exporting company data, modifying secrets, or approving actions on behalf of the user.
+Ask before changing budgets, pausing/resuming/terminating agents, importing or
+exporting company data, modifying secrets, approving/rejecting/requesting
+revision on approvals, accepting plan confirmations, creating agents directly,
+submitting `agent-hires`, or expanding permissions.
+
+Never bypass required board approval. Never let an agent approve its own hire,
+strategy, budget increase, or permission expansion.
 
 Do not use OpenClaw `openclaw.json` or Hermes `config.yaml` to fix a Paperclip control-plane problem unless the issue is explicitly about the agent runtime connected to Paperclip.

@@ -96,5 +96,12 @@
     "mustMention": ["paperclip-mission-control", "Paperclip Mission Control", "heartbeats", "budgets", "tickets", "systems/paperclip"],
     "mustHaveDocs": ["skills/paperclip-mission-control/SKILL.md", "systems/paperclip/llms-index.md"],
     "mustHaveRunbooks": ["runbooks/customer-kb-routing.md"]
+  },
+  {
+    "id": "paperclip-external-agent-operator",
+    "prompt": "Have my OpenClaw agent manage Paperclip externally: check status, assign tasks, file issues, comment feedback, wake agents, and ask the CEO to hire an SEO team.",
+    "mustMention": ["agent local-cli", "paperclipai issue create", "paperclipai issue update", "paperclipai issue comment", "paperclipai heartbeat run", "agent-hires", "SEO team", "board-only", "127.0.0.1:3100/api", "PAPERCLIP_API_KEY"],
+    "mustHaveDocs": ["skills/paperclip-mission-control/SKILL.md", "systems/paperclip/llms-index.md"],
+    "mustHaveRunbooks": ["runbooks/paperclip-evaos-runtime.md"]
   }
 ]
