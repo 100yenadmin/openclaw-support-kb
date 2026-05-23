@@ -103,5 +103,12 @@
     "mustMention": ["agent local-cli", "paperclipai issue create", "paperclipai issue update", "paperclipai issue comment", "paperclipai heartbeat run", "agent-hires", "generic approval create", "SEO team", "board-only", "127.0.0.1:3100/api", "PAPERCLIP_API_KEY"],
     "mustHaveDocs": ["skills/paperclip-mission-control/SKILL.md", "systems/paperclip/llms-index.md"],
     "mustHaveRunbooks": ["runbooks/paperclip-evaos-runtime.md"]
+  },
+  {
+    "id": "evaos-company-os-router",
+    "prompt": "What is EVAOS made of and what should we work on next?",
+    "mustMention": ["EVAOS Company OS", "EVAOS Agent Handoff Queue", "open or search Notion", "Resolve the relevant Linear initiative/project", "Resolve the affected system", "EVAOS Systems", "canonical GitHub repo", "Read current evidence before recommending", "Linear owns the product roadmap", "GitHub owns implementation work", "Notion `EVAOS Company OS` is the agent operating manual", "Paperclip owns live execution/orchestration", "GBrain/evaBrain", "retrieval cache", "not a second canonical issue tracker", "separate AgentMD", "Required closeout", "Linear write tools are unavailable"],
+    "mustHaveDocs": ["skills/evaos-company-os/SKILL.md", "skills/RESOLVER.md"],
+    "mustHaveRunbooks": []
   }
 ]
