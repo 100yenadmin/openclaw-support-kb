@@ -11,6 +11,7 @@ Read the matching skill before acting.
 | Trigger | Skill |
 | --- | --- |
 | Ambiguous customer setup/config/support question; "agent", "bot", "gateway", "Telegram", "dashboard", or "config" without a clear target system | `skills/customer-kb-router/SKILL.md` then `runbooks/customer-kb-routing.md` |
+| EVAOS roadmap, architecture, release state, rollout evidence, system ownership, canonical repo, Company OS, or what agents should work on next | `skills/evaos-company-os/SKILL.md` |
 | OpenClaw setup, docs, channel, update, runtime, or customer support question | `skills/openclaw-support-kb/SKILL.md` |
 | Explain OpenClaw, architecture, Gateway, agent runtime, workspace, or how the system works | `skills/openclaw-support-kb/SKILL.md` then `runbooks/system-explainer.md` |
 | Create a new agent, configure an agent, bind a channel to an agent, or set agent identity | `skills/openclaw-support-kb/SKILL.md` then `runbooks/agent-creation.md` |
