@@ -107,7 +107,7 @@
   {
     "id": "evaos-company-os-router",
     "prompt": "What is EVAOS made of and what should we work on next?",
-    "mustMention": ["EVAOS Company OS", "EVAOS Agent Handoff Queue", "open or search Notion", "Resolve the relevant Linear initiative/project", "Resolve the affected system", "EVAOS Systems", "canonical GitHub repo", "Read current evidence before recommending", "Linear owns the product roadmap", "GitHub owns implementation work", "Notion `EVAOS Company OS` is the agent operating manual", "Paperclip owns live execution/orchestration", "GBrain/evaBrain", "retrieval cache", "not a second canonical issue tracker", "separate AgentMD", "Required closeout", "Linear write tools are unavailable"],
+    "mustMention": ["EVAOS Company OS", "EVAOS Agent Handoff Queue", "open or search Notion", "Resolve the relevant Linear initiative/project", "Resolve the affected system", "EVAOS Systems", "canonical GitHub repo", "Read current evidence before recommending", "Linear owns the product roadmap", "GitHub owns implementation work", "Notion `EVAOS Company OS` is the agent operating manual", "Paperclip owns live execution/orchestration", "GBrain/evaBrain", "retrieval cache", "not a second canonical issue tracker", "separate AgentMD", "Required closeout", "Linear write tools are unavailable", "one logical issue", "authenticated `gh` CLI", "Autonomous Triage Gate", "VISION.md"],
     "mustHaveDocs": ["skills/evaos-company-os/SKILL.md", "skills/RESOLVER.md"],
     "mustHaveRunbooks": []
   }
