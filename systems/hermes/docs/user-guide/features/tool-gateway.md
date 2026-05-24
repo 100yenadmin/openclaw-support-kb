@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Tool Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway"
-source_hash: "ae2bd54ba5248f1c703244497b375036834661c8dda50495917ec2ed66946bfa"
+source_hash: "ac5f58e7c22e1f452d20bf206731c77a75867f5a5d875c4ff28e1f94ce5191bd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-gateway.md"
@@ -51,8 +51,16 @@ Bring your own keys anytime — per-tool, whenever you want to. The gateway isn'
 
 ## Get started
 
+The fastest path for a fresh install:
+
 ```bash
-hermes model          # Pick Nous Portal as your provider
+hermes setup --portal     # Nous OAuth, set Nous as provider, and turn on the Tool Gateway in one go
+```
+
+Already have Hermes configured? Just switch your provider:
+
+```bash
+hermes model              # Pick Nous Portal — Hermes will offer to turn on the Tool Gateway
 ```
 
 When you select Nous Portal, Hermes offers to turn on the Tool Gateway. Accept, and you're done — every supported tool is live on the next run.
@@ -60,10 +68,12 @@ When you select Nous Portal, Hermes offers to turn on the Tool Gateway. Accept, 
 Check what's active at any time:
 
 ```bash
-hermes status
+hermes portal status      # Portal auth + Tool Gateway routing summary
+hermes portal tools       # Gateway catalog with current routing per tool
+hermes status             # Full system status (Tool Gateway is one section)
 ```
 
-You'll see a section like:
+`hermes portal status` shows a section like:
 
 ```
 ◆ Nous Tool Gateway

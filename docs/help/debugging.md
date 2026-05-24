@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "4a9806411af539ff12d7cda8d04ed1b4120fb23c6eb1c1eaadcc94b806d13e75"
+source_hash: "83e69142f550bd664e96465e534336d1652d356242a572bb2e7c22e6cd0ed9d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/debugging.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Debugging
 Source: https://docs.openclaw.ai/help/debugging
-
-
 
 Debugging helpers for streaming output, especially when a provider mixes reasoning into normal text.
 
@@ -41,7 +39,7 @@ without turning on full verbose mode.
 
 Examples:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /trace
 /trace on
 /trace off
@@ -60,13 +58,13 @@ to stderr, so JSON command output remains parseable.
 
 Example:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1 openclaw plugins install tokenjuice --force
 ```
 
 Example output:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 [plugins:lifecycle] phase="config read" ms=6.83 status=ok command="install"
 [plugins:lifecycle] phase="slot selection" ms=94.31 status=ok command="install" pluginId="tokenjuice"
 [plugins:lifecycle] phase="registry refresh" ms=51.56 status=ok command="install" reason="source-changed"
@@ -81,7 +79,7 @@ also measures source-runner overhead.
 
 Use the checked-in startup benchmark when a command feels slow:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test:startup:bench:smoke
 pnpm tsx scripts/bench-cli-startup.ts --preset real --case status --runs 3
 pnpm tsx scripts/bench-cli-startup.ts --preset real --cpu-prof-dir .artifacts/cli-cpu
@@ -90,7 +88,7 @@ pnpm tsx scripts/bench-cli-startup.ts --preset real --cpu-prof-dir .artifacts/cl
 For one-off profiling through the normal source runner, set
 `OPENCLAW_RUN_NODE_CPU_PROF_DIR`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_RUN_NODE_CPU_PROF_DIR=.artifacts/cli-cpu pnpm openclaw status
 ```
 
@@ -100,7 +98,7 @@ command. Use this before adding temporary instrumentation to command code.
 For startup stalls that look like synchronous filesystem or module-loader work,
 add Node's sync I/O trace flag through the source runner:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_TRACE_SYNC_IO=1 pnpm openclaw gateway --force
 ```
 
@@ -112,7 +110,7 @@ sync I/O trace output in watch mode.
 
 For fast iteration, run the gateway under the file watcher:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:watch
 ```
 
@@ -122,19 +120,19 @@ By default, this starts or restarts a tmux session named
 Non-interactive shells, CI, and agent exec calls stay detached and print attach
 instructions instead. Attach manually when needed:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 tmux attach -t openclaw-gateway-watch-main
 ```
 
 The tmux pane runs the raw watcher:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 node scripts/watch-node.mjs gateway --force
 ```
 
 Use foreground mode when tmux is not wanted:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:watch:raw
 # or
 OPENCLAW_GATEWAY_WATCH_TMUX=0 pnpm gateway:watch
@@ -142,13 +140,13 @@ OPENCLAW_GATEWAY_WATCH_TMUX=0 pnpm gateway:watch
 
 Disable auto-attach while keeping tmux management:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch
 ```
 
 Profile watched Gateway CPU time when debugging startup/runtime hotspots:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:watch --benchmark
 ```
 
@@ -157,7 +155,7 @@ one V8 `.cpuprofile` per Gateway child exit under
 `.artifacts/gateway-watch-profiles/`. Stop or restart the watched gateway to
 flush the current profile, then open it with Chrome DevTools or Speedscope:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npx speedscope .artifacts/gateway-watch-profiles/*.cpuprofile
 ```
 
@@ -199,14 +197,14 @@ are replaced instead of piling up.
 Use the dev profile to isolate state and spin up a safe, disposable setup for
 debugging. There are **two** `--dev` flags:
 
-* **Global `--dev` (profile):** isolates state under `~/.openclaw-dev` and
+- **Global `--dev` (profile):** isolates state under `~/.openclaw-dev` and
   defaults the gateway port to `19001` (derived ports shift with it).
-* **`gateway --dev`: tells the Gateway to auto-create a default config +
+- **`gateway --dev`: tells the Gateway to auto-create a default config +
   workspace** when missing (and skip BOOTSTRAP.md).
 
 Recommended flow (dev profile + dev bootstrap):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:dev
 OPENCLAW_PROFILE=dev openclaw tui
 ```
@@ -216,44 +214,44 @@ If you don't have a global install yet, run the CLI via `pnpm openclaw ...`.
 What this does:
 
 1. **Profile isolation** (global `--dev`)
-   * `OPENCLAW_PROFILE=dev`
-   * `OPENCLAW_STATE_DIR=~/.openclaw-dev`
-   * `OPENCLAW_CONFIG_PATH=~/.openclaw-dev/openclaw.json`
-   * `OPENCLAW_GATEWAY_PORT=19001` (browser/canvas shift accordingly)
+   - `OPENCLAW_PROFILE=dev`
+   - `OPENCLAW_STATE_DIR=~/.openclaw-dev`
+   - `OPENCLAW_CONFIG_PATH=~/.openclaw-dev/openclaw.json`
+   - `OPENCLAW_GATEWAY_PORT=19001` (browser/canvas shift accordingly)
 
 2. **Dev bootstrap** (`gateway --dev`)
-   * Writes a minimal config if missing (`gateway.mode=local`, bind loopback).
-   * Sets `agent.workspace` to the dev workspace.
-   * Sets `agent.skipBootstrap=true` (no BOOTSTRAP.md).
-   * Seeds the workspace files if missing:
+   - Writes a minimal config if missing (`gateway.mode=local`, bind loopback).
+   - Sets `agent.workspace` to the dev workspace.
+   - Sets `agent.skipBootstrap=true` (no BOOTSTRAP.md).
+   - Seeds the workspace files if missing:
      `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`.
-   * Default identity: **C3-PO** (protocol droid).
-   * Skips channel providers in dev mode (`OPENCLAW_SKIP_CHANNELS=1`).
+   - Default identity: **C3-PO** (protocol droid).
+   - Skips channel providers in dev mode (`OPENCLAW_SKIP_CHANNELS=1`).
 
 Reset flow (fresh start):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:dev:reset
 ```
 
-<Note>
-  `--dev` is a **global** profile flag and gets eaten by some runners. If you need to spell it out, use the env var form:
+Note
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  OPENCLAW_PROFILE=dev openclaw gateway --dev --reset
-  ```
-</Note>
+`--dev` is a **global** profile flag and gets eaten by some runners. If you need to spell it out, use the env var form:
+
+```bash
+OPENCLAW_PROFILE=dev openclaw gateway --dev --reset
+```
 
 `--reset` wipes config, credentials, sessions, and the dev workspace (using
 `trash`, not `rm`), then recreates the default dev setup.
 
-<Tip>
-  If a non-dev gateway is already running (launchd or systemd), stop it first:
+Tip
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  openclaw gateway stop
-  ```
-</Tip>
+If a non-dev gateway is already running (launchd or systemd), stop it first:
+
+```bash
+openclaw gateway stop
+```
 
 ## Raw stream logging (OpenClaw)
 
@@ -263,19 +261,19 @@ This is the best way to see whether reasoning is arriving as plain text deltas
 
 Enable it via CLI:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:watch --raw-stream
 ```
 
 Optional path override:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm gateway:watch --raw-stream --raw-stream-path ~/.openclaw/logs/raw-stream.jsonl
 ```
 
 Equivalent env vars:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_RAW_STREAM=1
 OPENCLAW_RAW_STREAM_PATH=~/.openclaw/logs/raw-stream.jsonl
 ```
@@ -289,13 +287,13 @@ Default file:
 To capture **raw OpenAI-compat chunks** before they are parsed into blocks,
 pi-mono exposes a separate logger:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 PI_RAW_STREAM=1
 ```
 
 Optional path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 PI_RAW_STREAM_PATH=~/.pi-mono/logs/raw-openai-completions.jsonl
 ```
 
@@ -308,9 +306,9 @@ Default file:
 
 ## Safety notes
 
-* Raw stream logs can include full prompts, tool output, and user data.
-* Keep logs local and delete them after debugging.
-* If you share logs, scrub secrets and PII first.
+- Raw stream logs can include full prompts, tool output, and user data.
+- Keep logs local and delete them after debugging.
+- If you share logs, scrub secrets and PII first.
 
 ## Debugging in VSCode
 
@@ -329,9 +327,9 @@ The default **Rebuild and Debug Gateway** configuration is batteries-included, i
 Alternatively - if you prefer to manage the build and debug processes manually:
 
 1. Open a terminal and enable source maps:
-   * **Linux/macOS**: `export OUTPUT_SOURCE_MAPS=1`
-   * **Windows (PowerShell)**: `$env:OUTPUT_SOURCE_MAPS="1"`
-   * **Windows (CMD)**: `set OUTPUT_SOURCE_MAPS=1`
+   - **Linux/macOS**: `export OUTPUT_SOURCE_MAPS=1`
+   - **Windows (PowerShell)**: `$env:OUTPUT_SOURCE_MAPS="1"`
+   - **Windows (CMD)**: `set OUTPUT_SOURCE_MAPS=1`
 2. In the same terminal, rebuild the project: `pnpm clean:dist && pnpm build`
 3. In the IDE, select the **Debug Gateway** option in the **Run and Debug** configuration dropdown and then press the **Start Debugging** button
 
@@ -339,12 +337,14 @@ You can now set breakpoints in your TypeScript source files (`src/` directory) a
 
 ### Notes
 
-* If using the **"Rebuild and Debug Gateway"** option - each time the debugger is launched it will completely delete the `/dist` folder and run a full `pnpm build` with source maps enabled before starting the Gateway
-* If using the **"Debug Gateway"** option - debug sessions can be started and stopped at any time without affecting the `/dist` folder, but you must use a separate terminal process to both enable debugging and manage the build cycle
-* Modify the `launch.json` settings for `args` to debug other sections of the project
-* If you need to use the built OpenClaw CLI for other tasks (i.e. `dashboard --no-open` if your debug session spawns a new auth token), you can execute it in another terminal as `node ./openclaw.mjs` or create a shell alias like `alias openclaw-build="node $(pwd)/openclaw.mjs"`
+- If using the **"Rebuild and Debug Gateway"** option - each time the debugger is launched it will completely delete the `/dist` folder and run a full `pnpm build` with source maps enabled before starting the Gateway
+- If using the **"Debug Gateway"** option - debug sessions can be started and stopped at any time without affecting the `/dist` folder, but you must use a separate terminal process to both enable debugging and manage the build cycle
+- Modify the `launch.json` settings for `args` to debug other sections of the project
+- If you need to use the built OpenClaw CLI for other tasks (i.e. `dashboard --no-open` if your debug session spawns a new auth token), you can execute it in another terminal as `node ./openclaw.mjs` or create a shell alias like `alias openclaw-build="node $(pwd)/openclaw.mjs"`
 
 ## Related
 
-* [Troubleshooting](/help/troubleshooting)
-* [FAQ](/help/faq)
+- [Troubleshooting](/help/troubleshooting)
+- [FAQ](/help/faq)
+
+---

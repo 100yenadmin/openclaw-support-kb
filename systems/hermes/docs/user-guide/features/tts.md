@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice & TTS"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tts"
-source_hash: "52e4d9cb361f2f3495ce34d259e481108736f3297045e301663154b66374f288"
+source_hash: "cc4d065558a067b9c440dca230e5ea1f07f68ff649ca7da3898ae491ecd4045c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tts.md"
@@ -22,7 +22,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/tts
 Hermes Agent supports both text-to-speech output and voice message transcription across all messaging platforms.
 
 :::tip Nous Subscribers
-If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, OpenAI TTS is available through the **[Tool Gateway](tool-gateway.md)** without a separate OpenAI API key. Run `hermes model` or `hermes tools` to enable it.
+If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, OpenAI TTS is available through the **[Tool Gateway](tool-gateway.md)** without a separate OpenAI API key. New installs can run `hermes setup --portal` to log in and turn on every gateway tool at once; existing installs can pick **Nous Subscription** for just TTS via `hermes model` or `hermes tools`.
 :::
 
 ## Text-to-Speech

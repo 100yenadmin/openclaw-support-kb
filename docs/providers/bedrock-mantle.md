@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock Mantle"
 source: "https://docs.openclaw.ai/providers/bedrock-mantle"
-source_hash: "b0e11a5c99d586c1cef0ecf8f337cbc94ed44f983de64074bed6bc5d1388c2fd"
+source_hash: "8ebbef29d7f3edc23191a1cc3ba30792e32025db7219b1983bf3431d9c460698"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock-mantle.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Amazon Bedrock Mantle
 Source: https://docs.openclaw.ai/providers/bedrock-mantle
-
-
 
 OpenClaw includes a bundled **Amazon Bedrock Mantle** provider that connects to
 the Mantle OpenAI-compatible endpoint. Mantle hosts open-source and
@@ -31,61 +29,79 @@ third-party models (GPT-OSS, Qwen, Kimi, GLM, and similar) through a standard
 
 Choose your preferred auth method and follow the setup steps.
 
-<Tabs>
-  <Tab title="Explicit bearer token">
+Tabs
+
+
+Explicit bearer token
+
     **Best for:** environments where you already have a Mantle bearer token.
 
-    <Steps>
-      <Step title="Set the bearer token on the gateway host">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Steps
+
+
+Set the bearer token on the gateway host
+
+        ```bash
         export AWS_BEARER_TOKEN_BEDROCK="..."
         ```
 
         Optionally set a region (defaults to `us-east-1`):
 
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```bash
         export AWS_REGION="us-west-2"
         ```
-      </Step>
 
-      <Step title="Verify models are discovered">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify models are discovered
+
+        ```bash
         openclaw models list
         ```
 
         Discovered models appear under the `amazon-bedrock-mantle` provider. No
         additional config is required unless you want to override defaults.
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="IAM credentials">
+
+
+
+
+
+IAM credentials
+
     **Best for:** using AWS SDK-compatible credentials (shared config, SSO, web identity, instance or task roles).
 
-    <Steps>
-      <Step title="Configure AWS credentials on the gateway host">
+
+Steps
+
+
+Configure AWS credentials on the gateway host
+
         Any AWS SDK-compatible auth source works:
 
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```bash
         export AWS_PROFILE="default"
         export AWS_REGION="us-west-2"
         ```
-      </Step>
 
-      <Step title="Verify models are discovered">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify models are discovered
+
+        ```bash
         openclaw models list
         ```
 
         OpenClaw generates a Mantle bearer token from the credential chain automatically.
-      </Step>
-    </Steps>
 
-    <Tip>
-      When `AWS_BEARER_TOKEN_BEDROCK` is not set, OpenClaw mints the bearer token for you from the AWS default credential chain, including shared credentials/config profiles, SSO, web identity, and instance or task roles.
-    </Tip>
-  </Tab>
-</Tabs>
+
+
+
+Tip
+
+    When `AWS_BEARER_TOKEN_BEDROCK` is not set, OpenClaw mints the bearer token for you from the AWS default credential chain, including shared credentials/config profiles, SSO, web identity, and instance or task roles.
+
+
+
 
 ## Automatic model discovery
 
@@ -102,13 +118,13 @@ region's `/v1/models` endpoint.
 To keep the Mantle plugin enabled but suppress automatic discovery and IAM
 bearer-token generation, disable the plugin-owned discovery toggle:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.amazon-bedrock-mantle.config.discovery.enabled false
 ```
 
-<Note>
-  The bearer token is the same `AWS_BEARER_TOKEN_BEDROCK` used by the standard [Amazon Bedrock](/providers/bedrock) provider.
-</Note>
+Note
+
+The bearer token is the same `AWS_BEARER_TOKEN_BEDROCK` used by the standard [Amazon Bedrock](/providers/bedrock) provider.
 
 ### Supported regions
 
@@ -120,7 +136,7 @@ openclaw config set plugins.entries.amazon-bedrock-mantle.config.discovery.enabl
 
 If you prefer explicit config instead of auto-discovery:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -148,25 +164,32 @@ If you prefer explicit config instead of auto-discovery:
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Reasoning support">
+AccordionGroup
+
+
+Reasoning support
+
     Reasoning support is inferred from model IDs containing patterns like
     `thinking`, `reasoner`, or `gpt-oss-120b`. OpenClaw sets `reasoning: true`
     automatically for matching models during discovery.
-  </Accordion>
 
-  <Accordion title="Endpoint unavailability">
+
+
+Endpoint unavailability
+
     If the Mantle endpoint is unavailable or returns no models, the provider is
     silently skipped. OpenClaw does not error; other configured providers
     continue to work normally.
-  </Accordion>
 
-  <Accordion title="Claude Opus 4.7 via the Anthropic Messages route">
+
+
+Claude Opus 4.7 via the Anthropic Messages route
+
     Mantle also exposes an Anthropic Messages route that carries Claude models through the same bearer-authenticated streaming path. Claude Opus 4.7 (`amazon-bedrock-mantle/claude-opus-4.7`) is callable through this route with provider-owned streaming, so AWS bearer tokens are not treated like Anthropic API keys.
 
     When you pin an Anthropic Messages model on the Mantle provider, OpenClaw uses the `anthropic-messages` API surface instead of `openai-completions` for that model. Auth still comes from `AWS_BEARER_TOKEN_BEDROCK` (or the minted IAM bearer token).
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       models: {
         providers: {
@@ -187,9 +210,12 @@ If you prefer explicit config instead of auto-discovery:
       },
     }
     ```
-  </Accordion>
 
-  <Accordion title="Relationship to Amazon Bedrock provider">
+
+
+
+Relationship to Amazon Bedrock provider
+
     Bedrock Mantle is a separate provider from the standard
     [Amazon Bedrock](/providers/bedrock) provider. Mantle uses an
     OpenAI-compatible `/v1` surface, while the standard Bedrock provider uses
@@ -197,25 +223,31 @@ If you prefer explicit config instead of auto-discovery:
 
     Both providers share the same `AWS_BEARER_TOKEN_BEDROCK` credential when
     present.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Amazon Bedrock" href="/providers/bedrock" icon="cloud">
+CardGroup
+
+
+Amazon Bedrock
+
     Native Bedrock provider for Anthropic Claude, Titan, and other models.
-  </Card>
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="OAuth and auth" href="/gateway/authentication" icon="key">
+
+OAuth and auth
+
     Auth details and credential reuse rules.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Common issues and how to resolve them.
-  </Card>
-</CardGroup>
+
+---

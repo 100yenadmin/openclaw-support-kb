@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Device model database"
 source: "https://docs.openclaw.ai/reference/device-models"
-source_hash: "0c23bfc4977a4470dbd633456442a51b9764503ab4ce652fc1088853b02d5090"
+source_hash: "4b82ca0c249d8be87a033448b1319a3e7f4c22b8e8b42aee72210148588e5b85"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/device-models.md"
@@ -13,19 +13,17 @@ duplicate_index: 1
 # Device model database
 Source: https://docs.openclaw.ai/reference/device-models
 
-
-
 The macOS companion app shows friendly Apple device model names in the **Instances** UI by mapping Apple model identifiers (e.g. `iPad16,6`, `Mac16,6`) to human-readable names.
 
 The mapping is vendored as JSON under:
 
-* `apps/macos/Sources/OpenClaw/Resources/DeviceModels/`
+- `apps/macos/Sources/OpenClaw/Resources/DeviceModels/`
 
 ## Data source
 
 We currently vendor the mapping from the MIT-licensed repository:
 
-* `kyle-seongwoo-jun/apple-device-identifiers`
+- `kyle-seongwoo-jun/apple-device-identifiers`
 
 To keep builds deterministic, the JSON files are pinned to specific upstream commits (recorded in `apps/macos/Sources/OpenClaw/Resources/DeviceModels/NOTICE.md`).
 
@@ -35,7 +33,7 @@ To keep builds deterministic, the JSON files are pinned to specific upstream com
 2. Update the commit hashes in `apps/macos/Sources/OpenClaw/Resources/DeviceModels/NOTICE.md`.
 3. Re-download the JSON files, pinned to those commits:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 IOS_COMMIT="<commit sha for ios-device-identifiers.json>"
 MAC_COMMIT="<commit sha for mac-device-identifiers.json>"
 
@@ -49,11 +47,13 @@ curl -fsSL "https://raw.githubusercontent.com/kyle-seongwoo-jun/apple-device-ide
 4. Ensure `apps/macos/Sources/OpenClaw/Resources/DeviceModels/LICENSE.apple-device-identifiers.txt` still matches upstream (replace it if the upstream license changes).
 5. Verify the macOS app builds cleanly (no warnings):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 swift build --package-path apps/macos
 ```
 
 ## Related
 
-* [Nodes](/nodes)
-* [Node troubleshooting](/nodes/troubleshooting)
+- [Nodes](/nodes)
+- [Node troubleshooting](/nodes/troubleshooting)
+
+---

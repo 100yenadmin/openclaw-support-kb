@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "0e6e15c9e701ad1dc9cb207f7f8c4409e1d6cda6a9b5ad2ebe5019d76c5b5344"
+source_hash: "411de693c9a62d499101dbb3af2d79887b50f9ac90b2da8f4289b39acbca7eb8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
@@ -13,365 +13,369 @@ duplicate_index: 1
 # Showcase
 Source: https://docs.openclaw.ai/start/showcase
 
-Real-world OpenClaw projects from the community
-
 OpenClaw projects are not toy demos. People are shipping PR review loops, mobile apps, home automation, voice systems, devtools, and memory-heavy workflows from the channels they already use — chat-native builds on Telegram, WhatsApp, Discord, and terminals; real automation for booking, shopping, and support without waiting for an API; and physical-world integrations with printers, vacuums, cameras, and home systems.
 
-<Info>
-  **Want to be featured?** Share your project in [#self-promotion on Discord](https://discord.gg/clawd) or [tag @openclaw on X](https://x.com/openclaw).
-</Info>
+Info
+
+**Want to be featured?** Share your project in [#self-promotion on Discord](https://discord.gg/clawd) or [tag @openclaw on X](https://x.com/openclaw).
 
 ## Videos
 
 Start here if you want the shortest path from "what is this?" to "okay, I get it."
 
-<CardGroup>
-  <Card title="Full setup walkthrough" href="https://www.youtube.com/watch?v=SaWSPZoPX34">
-    VelvetShark, 28 minutes. Install, onboard, and get to a first working assistant end to end.
-  </Card>
+CardGroup
 
-  <Card title="Community showcase reel" href="https://www.youtube.com/watch?v=mMSKQvlmFuQ">
-    A faster pass across real projects, surfaces, and workflows built around OpenClaw.
-  </Card>
+Full setup walkthrough
 
-  <Card title="Projects in the wild" href="https://www.youtube.com/watch?v=5kkIJNUGFho">
-    Examples from the community, from chat-native coding loops to hardware and personal automation.
-  </Card>
-</CardGroup>
+  VelvetShark, 28 minutes. Install, onboard, and get to a first working assistant end to end.
+
+Community showcase reel
+
+  A faster pass across real projects, surfaces, and workflows built around OpenClaw.
+
+Projects in the wild
+
+  Examples from the community, from chat-native coding loops to hardware and personal automation.
 
 ## Fresh from Discord
 
 Recent standouts across coding, devtools, mobile, and chat-native product building.
 
-<CardGroup>
-  <Card title="PR Review to Telegram Feedback" icon="code-pull-request" href="https://x.com/i/status/2010878524543131691">
-    **@bangnokia** • `review` `github` `telegram`
+CardGroup
 
-    OpenCode finishes the change, opens a PR, OpenClaw reviews the diff and replies in Telegram with suggestions plus a clear merge verdict.
+PR Review to Telegram Feedback
 
-    <img alt="OpenClaw PR review feedback delivered in Telegram" />
-  </Card>
+  **@bangnokia** • `review` `github` `telegram`
 
-  <Card title="Wine Cellar Skill in Minutes" icon="wine-glass" href="https://x.com/i/status/2010916352454791216">
-    **@prades\_maxime** • `skills` `local` `csv`
+OpenCode finishes the change, opens a PR, OpenClaw reviews the diff and replies in Telegram with suggestions plus a clear merge verdict.
 
-    Asked "Robby" (@openclaw) for a local wine cellar skill. It requests a sample CSV export and a store path, then builds and tests the skill (962 bottles in the example).
+  <img src="/assets/showcase/pr-review-telegram.jpg" alt="OpenClaw PR review feedback delivered in Telegram" />
 
-    <img alt="OpenClaw building a local wine cellar skill from CSV" />
-  </Card>
+Wine Cellar Skill in Minutes
 
-  <Card title="Tesco Shop Autopilot" icon="cart-shopping" href="https://x.com/i/status/2009724862470689131">
-    **@marchattonhere** • `automation` `browser` `shopping`
+  **@prades_maxime** • `skills` `local` `csv`
 
-    Weekly meal plan, regulars, book delivery slot, confirm order. No APIs, just browser control.
+Asked "Robby" (@openclaw) for a local wine cellar skill. It requests a sample CSV export and a store path, then builds and tests the skill (962 bottles in the example).
 
-    <img alt="Tesco shop automation via chat" />
-  </Card>
+  <img src="/assets/showcase/wine-cellar-skill.jpg" alt="OpenClaw building a local wine cellar skill from CSV" />
 
-  <Card title="SNAG screenshot-to-Markdown" icon="scissors" href="https://github.com/am-will/snag">
-    **@am-will** • `devtools` `screenshots` `markdown`
+Tesco Shop Autopilot
 
-    Hotkey a screen region, Gemini vision, instant Markdown in your clipboard.
+  **@marchattonhere** • `automation` `browser` `shopping`
 
-    <img alt="SNAG screenshot-to-markdown tool" />
-  </Card>
+Weekly meal plan, regulars, book delivery slot, confirm order. No APIs, just browser control.
 
-  <Card title="Agents UI" icon="window-maximize" href="https://releaseflow.net/kitze/agents-ui">
-    **@kitze** • `ui` `skills` `sync`
+  <img src="/assets/showcase/tesco-shop.jpg" alt="Tesco shop automation via chat" />
 
-    Desktop app to manage skills and commands across Agents, Claude, Codex, and OpenClaw.
+SNAG screenshot-to-Markdown
 
-    <img alt="Agents UI app" />
-  </Card>
+  **@am-will** • `devtools` `screenshots` `markdown`
 
-  <Card title="Telegram voice notes (papla.media)" icon="microphone" href="https://papla.media/docs">
-    **Community** • `voice` `tts` `telegram`
+Hotkey a screen region, Gemini vision, instant Markdown in your clipboard.
 
-    Wraps papla.media TTS and sends results as Telegram voice notes (no annoying autoplay).
+  <img src="/assets/showcase/snag.png" alt="SNAG screenshot-to-markdown tool" />
 
-    <img alt="Telegram voice note output from TTS" />
-  </Card>
+Agents UI
 
-  <Card title="CodexMonitor" icon="eye" href="https://clawhub.ai/odrobnik/codexmonitor">
-    **@odrobnik** • `devtools` `codex` `brew`
+  **@kitze** • `ui` `skills` `sync`
 
-    Homebrew-installed helper to list, inspect, and watch local OpenAI Codex sessions (CLI + VS Code).
+Desktop app to manage skills and commands across Agents, Claude, Codex, and OpenClaw.
 
-    <img alt="CodexMonitor on ClawHub" />
-  </Card>
+  <img src="/assets/showcase/agents-ui.jpg" alt="Agents UI app" />
 
-  <Card title="Bambu 3D Printer Control" icon="print" href="https://clawhub.ai/tobiasbischoff/bambu-cli">
-    **@tobiasbischoff** • `hardware` `3d-printing` `skill`
+Telegram voice notes (papla.media)
 
-    Control and troubleshoot BambuLab printers: status, jobs, camera, AMS, calibration, and more.
+  **Community** • `voice` `tts` `telegram`
 
-    <img alt="Bambu CLI skill on ClawHub" />
-  </Card>
+Wraps papla.media TTS and sends results as Telegram voice notes (no annoying autoplay).
 
-  <Card title="Vienna transport (Wiener Linien)" icon="train" href="https://clawhub.ai/hjanuschka/wienerlinien">
-    **@hjanuschka** • `travel` `transport` `skill`
+  <img src="/assets/showcase/papla-tts.jpg" alt="Telegram voice note output from TTS" />
 
-    Real-time departures, disruptions, elevator status, and routing for Vienna's public transport.
+CodexMonitor
 
-    <img alt="Wiener Linien skill on ClawHub" />
-  </Card>
+  **@odrobnik** • `devtools` `codex` `brew`
 
-  <Card title="ParentPay school meals" icon="utensils">
-    **@George5562** • `automation` `browser` `parenting`
+Homebrew-installed helper to list, inspect, and watch local OpenAI Codex sessions (CLI + VS Code).
 
-    Automated UK school meal booking via ParentPay. Uses mouse coordinates for reliable table cell clicking.
-  </Card>
+  <img src="/assets/showcase/codexmonitor.png" alt="CodexMonitor on ClawHub" />
 
-  <Card title="R2 upload (Send Me My Files)" icon="cloud-arrow-up" href="https://clawhub.ai/skills/r2-upload">
-    **@julianengel** • `files` `r2` `presigned-urls`
+Bambu 3D Printer Control
 
-    Upload to Cloudflare R2/S3 and generate secure presigned download links. Useful for remote OpenClaw instances.
-  </Card>
+  **@tobiasbischoff** • `hardware` `3d-printing` `skill`
 
-  <Card title="iOS app via Telegram" icon="mobile">
-    **@coard** • `ios` `xcode` `testflight`
+Control and troubleshoot BambuLab printers: status, jobs, camera, AMS, calibration, and more.
 
-    Built a complete iOS app with maps and voice recording, deployed to TestFlight entirely via Telegram chat.
+  <img src="/assets/showcase/bambu-cli.png" alt="Bambu CLI skill on ClawHub" />
 
-    <img alt="iOS app on TestFlight" />
-  </Card>
+Vienna transport (Wiener Linien)
 
-  <Card title="Oura Ring health assistant" icon="heart-pulse">
-    **@AS** • `health` `oura` `calendar`
+  **@hjanuschka** • `travel` `transport` `skill`
 
-    Personal AI health assistant integrating Oura ring data with calendar, appointments, and gym schedule.
+Real-time departures, disruptions, elevator status, and routing for Vienna's public transport.
 
-    <img alt="Oura ring health assistant" />
-  </Card>
+  <img src="/assets/showcase/wienerlinien.png" alt="Wiener Linien skill on ClawHub" />
 
-  <Card title="Kev's Dream Team (14+ agents)" icon="robot" href="https://github.com/adam91holt/orchestrated-ai-articles">
-    **@adam91holt** • `multi-agent` `orchestration`
+ParentPay school meals
 
-    14+ agents under one gateway with an Opus 4.5 orchestrator delegating to Codex workers. See the [technical write-up](https://github.com/adam91holt/orchestrated-ai-articles) and [Clawdspace](https://github.com/adam91holt/clawdspace) for agent sandboxing.
-  </Card>
+  **@George5562** • `automation` `browser` `parenting`
 
-  <Card title="Linear CLI" icon="terminal" href="https://github.com/Finesssee/linear-cli">
-    **@NessZerra** • `devtools` `linear` `cli`
+Automated UK school meal booking via ParentPay. Uses mouse coordinates for reliable table cell clicking.
 
-    CLI for Linear that integrates with agentic workflows (Claude Code, OpenClaw). Manage issues, projects, and workflows from the terminal.
-  </Card>
+R2 upload (Send Me My Files)
 
-  <Card title="Beeper CLI" icon="message" href="https://github.com/blqke/beepcli">
-    **@jules** • `messaging` `beeper` `cli`
+  **@julianengel** • `files` `r2` `presigned-urls`
 
-    Read, send, and archive messages via Beeper Desktop. Uses Beeper local MCP API so agents can manage all your chats (iMessage, WhatsApp, and more) in one place.
-  </Card>
-</CardGroup>
+Upload to Cloudflare R2/S3 and generate secure presigned download links. Useful for remote OpenClaw instances.
+
+iOS app via Telegram
+
+  **@coard** • `ios` `xcode` `testflight`
+
+Built a complete iOS app with maps and voice recording, deployed to TestFlight entirely via Telegram chat.
+
+  <img src="/assets/showcase/ios-testflight.jpg" alt="iOS app on TestFlight" />
+
+Oura Ring health assistant
+
+  **@AS** • `health` `oura` `calendar`
+
+Personal AI health assistant integrating Oura ring data with calendar, appointments, and gym schedule.
+
+  <img src="/assets/showcase/oura-health.png" alt="Oura ring health assistant" />
+
+Kev's Dream Team (14+ agents)
+
+  **@adam91holt** • `multi-agent` `orchestration`
+
+14+ agents under one gateway with an Opus 4.5 orchestrator delegating to Codex workers. See the [technical write-up](https://github.com/adam91holt/orchestrated-ai-articles) and [Clawdspace](https://github.com/adam91holt/clawdspace) for agent sandboxing.
+
+Linear CLI
+
+  **@NessZerra** • `devtools` `linear` `cli`
+
+CLI for Linear that integrates with agentic workflows (Claude Code, OpenClaw). Manage issues, projects, and workflows from the terminal.
+
+Beeper CLI
+
+  **@jules** • `messaging` `beeper` `cli`
+
+Read, send, and archive messages via Beeper Desktop. Uses Beeper local MCP API so agents can manage all your chats (iMessage, WhatsApp, and more) in one place.
 
 ## Automation and workflows
 
 Scheduling, browser control, support loops, and the "just do the task for me" side of the product.
 
-<CardGroup>
-  <Card title="Winix air purifier control" icon="wind" href="https://x.com/antonplex/status/2010518442471006253">
-    **@antonplex** • `automation` `hardware` `air-quality`
+CardGroup
 
-    Claude Code discovered and confirmed the purifier controls, then OpenClaw takes over to manage room air quality.
+Winix air purifier control
 
-    <img alt="Winix air purifier control via OpenClaw" />
-  </Card>
+  **@antonplex** • `automation` `hardware` `air-quality`
 
-  <Card title="Pretty sky camera shots" icon="camera" href="https://x.com/signalgaining/status/2010523120604746151">
-    **@signalgaining** • `automation` `camera` `skill`
+Claude Code discovered and confirmed the purifier controls, then OpenClaw takes over to manage room air quality.
 
-    Triggered by a roof camera: ask OpenClaw to snap a sky photo whenever it looks pretty. It designed a skill and took the shot.
+  <img src="/assets/showcase/winix-air-purifier.jpg" alt="Winix air purifier control via OpenClaw" />
 
-    <img alt="Roof camera sky snapshot captured by OpenClaw" />
-  </Card>
+Pretty sky camera shots
 
-  <Card title="Visual morning briefing scene" icon="robot" href="https://x.com/buddyhadry/status/2010005331925954739">
-    **@buddyhadry** • `automation` `briefing` `telegram`
+  **@signalgaining** • `automation` `camera` `skill`
 
-    A scheduled prompt generates one scene image each morning (weather, tasks, date, favorite post or quote) via an OpenClaw persona.
-  </Card>
+Triggered by a roof camera: ask OpenClaw to snap a sky photo whenever it looks pretty. It designed a skill and took the shot.
 
-  <Card title="Padel court booking" icon="calendar-check" href="https://github.com/joshp123/padel-cli">
-    **@joshp123** • `automation` `booking` `cli`
+  <img src="/assets/showcase/roof-camera-sky.jpg" alt="Roof camera sky snapshot captured by OpenClaw" />
 
-    Playtomic availability checker plus booking CLI. Never miss an open court again.
+Visual morning briefing scene
 
-    <img alt="padel-cli screenshot" />
-  </Card>
+  **@buddyhadry** • `automation` `briefing` `telegram`
 
-  <Card title="Accounting intake" icon="file-invoice-dollar">
-    **Community** • `automation` `email` `pdf`
+A scheduled prompt generates one scene image each morning (weather, tasks, date, favorite post or quote) via an OpenClaw persona.
 
-    Collects PDFs from email, preps documents for a tax consultant. Monthly accounting on autopilot.
-  </Card>
+Padel court booking
 
-  <Card title="Couch potato dev mode" icon="couch" href="https://davekiss.com">
-    **@davekiss** • `telegram` `migration` `astro`
+  **@joshp123** • `automation` `booking` `cli`
 
-    Rebuilt an entire personal site via Telegram while watching Netflix — Notion to Astro, 18 posts migrated, DNS to Cloudflare. Never opened a laptop.
-  </Card>
+Playtomic availability checker plus booking CLI. Never miss an open court again.
 
-  <Card title="Job search agent" icon="briefcase">
-    **@attol8** • `automation` `api` `skill`
+  <img src="/assets/showcase/padel-screenshot.jpg" alt="padel-cli screenshot" />
 
-    Searches job listings, matches against CV keywords, and returns relevant opportunities with links. Built in 30 minutes using the JSearch API.
-  </Card>
+Accounting intake
 
-  <Card title="Jira skill builder" icon="diagram-project" href="https://x.com/jdrhyne/status/2008336434827002232">
-    **@jdrhyne** • `jira` `skill` `devtools`
+  **Community** • `automation` `email` `pdf`
 
-    OpenClaw connected to Jira, then generated a new skill on the fly (before it existed on ClawHub).
-  </Card>
+Collects PDFs from email, preps documents for a tax consultant. Monthly accounting on autopilot.
 
-  <Card title="Todoist skill via Telegram" icon="list-check" href="https://x.com/iamsubhrajyoti/status/2009949389884920153">
-    **@iamsubhrajyoti** • `todoist` `skill` `telegram`
+Couch potato dev mode
 
-    Automated Todoist tasks and had OpenClaw generate the skill directly in Telegram chat.
-  </Card>
+  **@davekiss** • `telegram` `migration` `astro`
 
-  <Card title="TradingView analysis" icon="chart-line">
-    **@bheem1798** • `finance` `browser` `automation`
+Rebuilt an entire personal site via Telegram while watching Netflix — Notion to Astro, 18 posts migrated, DNS to Cloudflare. Never opened a laptop.
 
-    Logs into TradingView via browser automation, screenshots charts, and performs technical analysis on demand. No API needed — just browser control.
-  </Card>
+Job search agent
 
-  <Card title="Slack auto-support" icon="slack">
-    **@henrymascot** • `slack` `automation` `support`
+  **@attol8** • `automation` `api` `skill`
 
-    Watches a company Slack channel, responds helpfully, and forwards notifications to Telegram. Autonomously fixed a production bug in a deployed app without being asked.
-  </Card>
-</CardGroup>
+Searches job listings, matches against CV keywords, and returns relevant opportunities with links. Built in 30 minutes using the JSearch API.
+
+Jira skill builder
+
+  **@jdrhyne** • `jira` `skill` `devtools`
+
+OpenClaw connected to Jira, then generated a new skill on the fly (before it existed on ClawHub).
+
+Todoist skill via Telegram
+
+  **@iamsubhrajyoti** • `todoist` `skill` `telegram`
+
+Automated Todoist tasks and had OpenClaw generate the skill directly in Telegram chat.
+
+TradingView analysis
+
+  **@bheem1798** • `finance` `browser` `automation`
+
+Logs into TradingView via browser automation, screenshots charts, and performs technical analysis on demand. No API needed — just browser control.
+
+Slack auto-support
+
+  **@henrymascot** • `slack` `automation` `support`
+
+Watches a company Slack channel, responds helpfully, and forwards notifications to Telegram. Autonomously fixed a production bug in a deployed app without being asked.
 
 ## Knowledge and memory
 
 Systems that index, search, remember, and reason over personal or team knowledge.
 
-<CardGroup>
-  <Card title="xuezh Chinese learning" icon="language" href="https://github.com/joshp123/xuezh">
-    **@joshp123** • `learning` `voice` `skill`
+CardGroup
 
-    Chinese learning engine with pronunciation feedback and study flows via OpenClaw.
+xuezh Chinese learning
 
-    <img alt="xuezh pronunciation feedback" />
-  </Card>
+  **@joshp123** • `learning` `voice` `skill`
 
-  <Card title="WhatsApp memory vault" icon="vault">
-    **Community** • `memory` `transcription` `indexing`
+Chinese learning engine with pronunciation feedback and study flows via OpenClaw.
 
-    Ingests full WhatsApp exports, transcribes 1k+ voice notes, cross-checks with git logs, outputs linked markdown reports.
-  </Card>
+  <img src="/assets/showcase/xuezh-pronunciation.jpeg" alt="xuezh pronunciation feedback" />
 
-  <Card title="Karakeep semantic search" icon="magnifying-glass" href="https://github.com/jamesbrooksco/karakeep-semantic-search">
-    **@jamesbrooksco** • `search` `vector` `bookmarks`
+WhatsApp memory vault
 
-    Adds vector search to Karakeep bookmarks using Qdrant plus OpenAI or Ollama embeddings.
-  </Card>
+  **Community** • `memory` `transcription` `indexing`
 
-  <Card title="Inside-Out-2 memory" icon="brain">
-    **Community** • `memory` `beliefs` `self-model`
+Ingests full WhatsApp exports, transcribes 1k+ voice notes, cross-checks with git logs, outputs linked markdown reports.
 
-    Separate memory manager that turns session files into memories, then beliefs, then an evolving self model.
-  </Card>
-</CardGroup>
+Karakeep semantic search
+
+  **@jamesbrooksco** • `search` `vector` `bookmarks`
+
+Adds vector search to Karakeep bookmarks using Qdrant plus OpenAI or Ollama embeddings.
+
+Inside-Out-2 memory
+
+  **Community** • `memory` `beliefs` `self-model`
+
+Separate memory manager that turns session files into memories, then beliefs, then an evolving self model.
 
 ## Voice and phone
 
 Speech-first entry points, phone bridges, and transcription-heavy workflows.
 
-<CardGroup>
-  <Card title="Clawdia phone bridge" icon="phone" href="https://github.com/alejandroOPI/clawdia-bridge">
-    **@alejandroOPI** • `voice` `vapi` `bridge`
+CardGroup
 
-    Vapi voice assistant to OpenClaw HTTP bridge. Near real-time phone calls with your agent.
-  </Card>
+Clawdia phone bridge
 
-  <Card title="OpenRouter transcription" icon="microphone" href="https://clawhub.ai/obviyus/openrouter-transcribe">
-    **@obviyus** • `transcription` `multilingual` `skill`
+  **@alejandroOPI** • `voice` `vapi` `bridge`
 
-    Multi-lingual audio transcription via OpenRouter (Gemini, and more). Available on ClawHub.
-  </Card>
-</CardGroup>
+Vapi voice assistant to OpenClaw HTTP bridge. Near real-time phone calls with your agent.
+
+OpenRouter transcription
+
+  **@obviyus** • `transcription` `multilingual` `skill`
+
+Multi-lingual audio transcription via OpenRouter (Gemini, and more). Available on ClawHub.
 
 ## Infrastructure and deployment
 
 Packaging, deployment, and integrations that make OpenClaw easier to run and extend.
 
-<CardGroup>
-  <Card title="Home Assistant add-on" icon="home" href="https://github.com/ngutman/openclaw-ha-addon">
-    **@ngutman** • `homeassistant` `docker` `raspberry-pi`
+CardGroup
 
-    OpenClaw gateway running on Home Assistant OS with SSH tunnel support and persistent state.
-  </Card>
+Home Assistant add-on
 
-  <Card title="Home Assistant skill" icon="toggle-on" href="https://clawhub.ai/skills/homeassistant">
-    **ClawHub** • `homeassistant` `skill` `automation`
+  **@ngutman** • `homeassistant` `docker` `raspberry-pi`
 
-    Control and automate Home Assistant devices via natural language.
-  </Card>
+OpenClaw gateway running on Home Assistant OS with SSH tunnel support and persistent state.
 
-  <Card title="Nix packaging" icon="snowflake" href="https://github.com/openclaw/nix-openclaw">
-    **@openclaw** • `nix` `packaging` `deployment`
+Home Assistant skill
 
-    Batteries-included nixified OpenClaw configuration for reproducible deployments.
-  </Card>
+  **ClawHub** • `homeassistant` `skill` `automation`
 
-  <Card title="CalDAV calendar" icon="calendar" href="https://clawhub.ai/skills/caldav-calendar">
-    **ClawHub** • `calendar` `caldav` `skill`
+Control and automate Home Assistant devices via natural language.
 
-    Calendar skill using khal and vdirsyncer. Self-hosted calendar integration.
-  </Card>
-</CardGroup>
+Nix packaging
+
+  **@openclaw** • `nix` `packaging` `deployment`
+
+Batteries-included nixified OpenClaw configuration for reproducible deployments.
+
+CalDAV calendar
+
+  **ClawHub** • `calendar` `caldav` `skill`
+
+Calendar skill using khal and vdirsyncer. Self-hosted calendar integration.
 
 ## Home and hardware
 
 The physical-world side of OpenClaw: homes, sensors, cameras, vacuums, and other devices.
 
-<CardGroup>
-  <Card title="GoHome automation" icon="house-signal" href="https://github.com/joshp123/gohome">
-    **@joshp123** • `home` `nix` `grafana`
+CardGroup
 
-    Nix-native home automation with OpenClaw as the interface, plus Grafana dashboards.
+GoHome automation
 
-    <img alt="GoHome Grafana dashboard" />
-  </Card>
+  **@joshp123** • `home` `nix` `grafana`
 
-  <Card title="Roborock vacuum" icon="robot" href="https://github.com/joshp123/gohome/tree/main/plugins/roborock">
-    **@joshp123** • `vacuum` `iot` `plugin`
+Nix-native home automation with OpenClaw as the interface, plus Grafana dashboards.
 
-    Control your Roborock robot vacuum through natural conversation.
+  <img src="/assets/showcase/gohome-grafana.png" alt="GoHome Grafana dashboard" />
 
-    <img alt="Roborock status" />
-  </Card>
-</CardGroup>
+Roborock vacuum
+
+  **@joshp123** • `vacuum` `iot` `plugin`
+
+Control your Roborock robot vacuum through natural conversation.
+
+  <img src="/assets/showcase/roborock-screenshot.jpg" alt="Roborock status" />
 
 ## Community projects
 
 Things that grew beyond a single workflow into broader products or ecosystems.
 
-<CardGroup>
-  <Card title="StarSwap marketplace" icon="star" href="https://star-swap.com/">
-    **Community** • `marketplace` `astronomy` `webapp`
+CardGroup
 
-    Full astronomy gear marketplace. Built with and around the OpenClaw ecosystem.
-  </Card>
-</CardGroup>
+StarSwap marketplace
+
+  **Community** • `marketplace` `astronomy` `webapp`
+
+Full astronomy gear marketplace. Built with and around the OpenClaw ecosystem.
 
 ## Submit your project
 
-<Steps>
-  <Step title="Share it">
+Steps
+
+
+Share it
+
     Post in [#self-promotion on Discord](https://discord.gg/clawd) or [tweet @openclaw](https://x.com/openclaw).
-  </Step>
 
-  <Step title="Include details">
+
+Include details
+
     Tell us what it does, link to the repo or demo, and share a screenshot if you have one.
-  </Step>
 
-  <Step title="Get featured">
+
+Get featured
+
     We'll add standout projects to this page.
-  </Step>
-</Steps>
+
 
 ## Related
 
-* [Getting started](/start/getting-started)
-* [OpenClaw](/start/openclaw)
+- [Getting started](/start/getting-started)
+- [OpenClaw](/start/openclaw)
+
+---

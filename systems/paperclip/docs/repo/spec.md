@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/SPEC.md"
-source_hash: "0e001bb8b531bbd23bbc63df1511fd305d63bf6264bcb822de3ee32f7e0760cc"
+source_hash: "369a366c6549f2396746f60938ad2d9a74cc882b21c2a40e5e142036658ff401"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/spec.md"
@@ -158,6 +158,8 @@ Hierarchical reporting structure. CEO at top, reports cascade down.
 ### Agent Visibility
 
 **Full visibility across the org.** Every agent can see the entire org chart, all tasks, all agents. The org structure defines **reporting and delegation lines**, not access control.
+
+Visibility settings on an agent profile (where supported) do not alter company-level visibility for tasks, projects, issues, comments, costs, or activity. Those work-object privacy controls are not a V1 feature until centralized scoped authorization is in place.
 
 Each agent publishes a short description of their responsibilities and capabilities — almost like skills ("when I'm relevant"). This lets other agents discover who can help with what.
 

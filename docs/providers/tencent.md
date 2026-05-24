@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tencent Cloud (TokenHub)"
 source: "https://docs.openclaw.ai/providers/tencent"
-source_hash: "29a2cb6baf9018eb96b91bb463096bb868d9a0fca83c03f158212bc832858519"
+source_hash: "f2d466018c7acddacb676d5f483ea01ea4dad4c25ce4096b9723accd07f83523"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/tencent.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Tencent Cloud (TokenHub)
 Source: https://docs.openclaw.ai/providers/tencent
-
-
 
 Tencent Cloud ships as a bundled provider plugin in OpenClaw. It gives access to Tencent Hy3 preview through the TokenHub endpoint (`tencent-tokenhub`) using an OpenAI-compatible API.
 
@@ -31,39 +29,47 @@ Tencent Cloud ships as a bundled provider plugin in OpenClaw. It gives access to
 
 ## Quick start
 
-<Steps>
-  <Step title="Create a TokenHub API key">
+Steps
+
+
+Create a TokenHub API key
+
     Create an API key in Tencent Cloud TokenHub. If you choose a limited access scope for the key, include **Hy3 preview** in the allowed models.
-  </Step>
 
-  <Step title="Run onboarding">
-    <CodeGroup>
-      ```bash Onboarding theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice tokenhub-api-key
-      ```
 
-      ```bash Direct flag theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --non-interactive \
-        --auth-choice tokenhub-api-key \
-        --tokenhub-api-key "$TOKENHUB_API_KEY"
-      ```
+Run onboarding
 
-      ```bash Env only theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      export TOKENHUB_API_KEY=...
-      ```
-    </CodeGroup>
-  </Step>
 
-  <Step title="Verify the model">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+CodeGroup
+
+```bash Onboarding
+openclaw onboard --auth-choice tokenhub-api-key
+```
+
+```bash Direct flag
+openclaw onboard --non-interactive \
+  --auth-choice tokenhub-api-key \
+  --tokenhub-api-key "$TOKENHUB_API_KEY"
+```
+
+```bash Env only
+export TOKENHUB_API_KEY=...
+```
+
+
+
+
+
+Verify the model
+
+    ```bash
     openclaw models list --provider tencent-tokenhub
     ```
-  </Step>
-</Steps>
+
 
 ## Non-interactive setup
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --non-interactive \
   --mode local \
   --auth-choice tokenhub-api-key \
@@ -80,9 +86,9 @@ openclaw onboard --non-interactive \
 
 Hy3 preview is Tencent Hunyuan's large MoE language model for reasoning, long-context instruction following, code, and agent workflows. Tencent's OpenAI-compatible examples use `hy3-preview` as the model id and support standard chat-completions tool calling plus `reasoning_effort`.
 
-<Tip>
+Tip
+
   The model id is `hy3-preview`. Do not confuse it with Tencent's `HY-3D-*` models, which are 3D generation APIs and are not the OpenClaw chat model configured by this provider.
-</Tip>
 
 ## Tiered pricing
 
@@ -98,42 +104,56 @@ Rates are per million tokens in USD as advertised by Tencent. Override pricing u
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Endpoint override">
+AccordionGroup
+
+
+Endpoint override
+
     OpenClaw defaults to Tencent Cloud's `https://tokenhub.tencentmaas.com/v1` endpoint. Tencent also documents an international TokenHub endpoint:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw config set models.providers.tencent-tokenhub.baseUrl "https://tokenhub-intl.tencentmaas.com/v1"
     ```
 
     Only override the endpoint when your TokenHub account or region requires it.
-  </Accordion>
 
-  <Accordion title="Environment availability for the daemon">
+
+
+
+Environment availability for the daemon
+
     If the Gateway runs as a managed service (launchd, systemd, Docker), `TOKENHUB_API_KEY` must be visible to that process. Set it in `~/.openclaw/.env` or via `env.shellEnv` so launchd, systemd, or Docker exec environments can read it.
 
-    <Warning>
+
+Warning
+
       Keys exported only in an interactive shell are not visible to managed gateway processes. Use the env file or config seam for persistent availability.
-    </Warning>
-  </Accordion>
-</AccordionGroup>
+
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model providers" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model providers
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/configuration" icon="gear">
+
+Configuration reference
+
     Full config schema including provider settings.
-  </Card>
 
-  <Card title="Tencent TokenHub" href="https://cloud.tencent.com/product/tokenhub" icon="arrow-up-right-from-square">
+
+Tencent TokenHub
+
     Tencent Cloud's TokenHub product page.
-  </Card>
 
-  <Card title="Hy3 preview model card" href="https://huggingface.co/tencent/Hy3-preview" icon="square-poll-horizontal">
+
+Hy3 preview model card
+
     Tencent Hunyuan Hy3 preview details and benchmarks.
-  </Card>
-</CardGroup>
+
+---

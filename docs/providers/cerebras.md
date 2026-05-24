@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cerebras"
 source: "https://docs.openclaw.ai/providers/cerebras"
-source_hash: "762955f87d21e875241a211a5d4786aa455ee85130b9a41e022abf80d696fdea"
+source_hash: "3f509e37e1df4db10b1fc239a275001eaa90b90144d35c63ed64cee0e16e1bc6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cerebras.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Cerebras
 Source: https://docs.openclaw.ai/providers/cerebras
-
-
 
 [Cerebras](https://www.cerebras.ai) provides high-speed OpenAI-compatible inference on custom inference hardware. OpenClaw includes a bundled Cerebras provider plugin with a static four-model catalog.
 
@@ -30,41 +28,50 @@ Source: https://docs.openclaw.ai/providers/cerebras
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
+Steps
+
+
+Get an API key
+
     Create an API key in the [Cerebras Cloud Console](https://cloud.cerebras.ai).
-  </Step>
 
-  <Step title="Run onboarding">
-    <CodeGroup>
-      ```bash Onboarding theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice cerebras-api-key
-      ```
 
-      ```bash Direct flag theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --non-interactive \
-        --auth-choice cerebras-api-key \
-        --cerebras-api-key "$CEREBRAS_API_KEY"
-      ```
+Run onboarding
 
-      ```bash Env only theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      export CEREBRAS_API_KEY=csk-...
-      ```
-    </CodeGroup>
-  </Step>
 
-  <Step title="Verify models are available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+CodeGroup
+
+```bash Onboarding
+openclaw onboard --auth-choice cerebras-api-key
+```
+
+```bash Direct flag
+openclaw onboard --non-interactive \
+  --auth-choice cerebras-api-key \
+  --cerebras-api-key "$CEREBRAS_API_KEY"
+```
+
+```bash Env only
+export CEREBRAS_API_KEY=csk-...
+```
+
+
+
+
+
+Verify models are available
+
+    ```bash
     openclaw models list --provider cerebras
     ```
 
     The list should include all four bundled models. If `CEREBRAS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
-  </Step>
-</Steps>
+
+
 
 ## Non-interactive setup
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --non-interactive \
   --mode local \
   --auth-choice cerebras-api-key \
@@ -82,15 +89,15 @@ OpenClaw ships a static Cerebras catalog that mirrors the public OpenAI-compatib
 | `cerebras/qwen-3-235b-a22b-instruct-2507` | Qwen 3 235B Instruct | no        | Preview non-reasoning model            |
 | `cerebras/llama3.1-8b`                    | Llama 3.1 8B         | no        | Production speed-focused model         |
 
-<Warning>
+Warning
+
   Cerebras marks `zai-glm-4.7` and `qwen-3-235b-a22b-instruct-2507` as preview models, and `llama3.1-8b` plus `qwen-3-235b-a22b-instruct-2507` are documented for deprecation on May 27, 2026. Check Cerebras' supported-models page before relying on them for production workloads.
-</Warning>
 
 ## Manual config
 
 The bundled plugin usually means you only need the API key. Use explicit `models.providers.cerebras` config when you want to override model metadata or run in `mode: "merge"` against the static catalog:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { CEREBRAS_API_KEY: "csk-..." },
   agents: {
@@ -115,26 +122,32 @@ The bundled plugin usually means you only need the API key. Use explicit `models
 }
 ```
 
-<Note>
+Note
+
   If the Gateway runs as a daemon (launchd, systemd, Docker), make sure `CEREBRAS_API_KEY` is available to that process — for example in `~/.openclaw/.env` or through `env.shellEnv`. A key exported only in an interactive shell will not help a managed service unless the env is imported separately.
-</Note>
 
 ## Related
 
-<CardGroup>
-  <Card title="Model providers" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model providers
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Thinking modes" href="/tools/thinking" icon="brain">
+
+Thinking modes
+
     Reasoning effort levels for the two reasoning-capable Cerebras models.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/config-agents#agent-defaults" icon="gear">
+
+Configuration reference
+
     Agent defaults and model configuration.
-  </Card>
 
-  <Card title="Models FAQ" href="/help/faq-models" icon="circle-question">
+
+Models FAQ
+
     Auth profiles, switching models, and resolving "no profile" errors.
-  </Card>
-</CardGroup>
+
+---

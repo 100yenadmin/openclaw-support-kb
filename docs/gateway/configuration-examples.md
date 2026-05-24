@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "d66576578a25de906992b83b47c86a9c7d7a68a298aaaa98514af80166e8c1c0"
+source_hash: "791012d387d17b5672f92d00b9efa364de0b1e6d1ba0f1995a7d16e6cbcc700c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # Configuration examples
 Source: https://docs.openclaw.ai/gateway/configuration-examples
 
-
-
 Examples below are aligned with the current config schema. For the exhaustive reference and per-field notes, see [Configuration](/gateway/configuration).
 
 ## Quick start
 
 ### Absolute minimum
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: { defaults: { workspace: "~/.openclaw/workspace" } },
   channels: { whatsapp: { allowFrom: ["+15555550123"] } },
@@ -32,7 +30,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 
 ### Recommended starter
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -70,7 +68,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 
 > JSON5 lets you use comments and trailing commas. Regular JSON works too.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   // Environment + shell
   env: {
@@ -488,7 +486,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 Use this when a built-in skill root contains a symlink into a sibling repo, for
 example `~/.agents/skills/manager -> ~/Projects/manager/skills`.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   skills: {
     load: {
@@ -499,15 +497,15 @@ example `~/.agents/skills/manager -> ~/Projects/manager/skills`.
 }
 ```
 
-* `extraDirs` scans the sibling repo as an explicit skill root.
-* `allowSymlinkTargets` lets symlinked skill folders resolve into that trusted
+- `extraDirs` scans the sibling repo as an explicit skill root.
+- `allowSymlinkTargets` lets symlinked skill folders resolve into that trusted
   real target root without allowing arbitrary symlink escapes.
 
 ## Common patterns
 
 ### Shared skill baseline with one override
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -522,13 +520,13 @@ example `~/.agents/skills/manager -> ~/Projects/manager/skills`.
 }
 ```
 
-* `agents.defaults.skills` is the shared baseline.
-* `agents.list[].skills` replaces that baseline for one agent.
-* Use `skills: []` when an agent should see no skills.
+- `agents.defaults.skills` is the shared baseline.
+- `agents.list[].skills` replaces that baseline for one agent.
+- Use `skills: []` when an agent should see no skills.
 
 ### Multi-platform setup
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: { defaults: { workspace: "~/.openclaw/workspace" } },
   channels: {
@@ -553,7 +551,7 @@ Keep device pairing manual unless you control the network path. For a dedicated
 lab or tailnet subnet, you can opt in to first-time node device auto-approval
 with exact CIDRs or IPs:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     nodes: {
@@ -573,7 +571,7 @@ public-key upgrades still require manual approval.
 
 If more than one person can DM your bot (multiple entries in `allowFrom`, pairing approvals for multiple people, or `dmPolicy: "open"`), enable **secure DM mode** so DMs from different senders don't share one context by default:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   // Secure DM mode (recommended for multi-user or sensitive DM agents)
   session: { dmScope: "per-channel-peer" },
@@ -600,7 +598,7 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ### Anthropic API key + MiniMax fallback
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   auth: {
     profiles: {
@@ -636,7 +634,7 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ### Work bot (restricted access)
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -668,7 +666,7 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ### Local models only
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -702,12 +700,14 @@ Only enable direct mutable name/email/nick matching with each channel's `dangero
 
 ## Tips
 
-* If you set `dmPolicy: "open"`, the matching `allowFrom` list must include `"*"`.
-* Provider IDs differ (phone numbers, user IDs, channel IDs). Use the provider docs to confirm the format.
-* Optional sections to add later: `web`, `browser`, `ui`, `discovery`, `plugins`, `talk`, `signal`, `imessage`.
-* See [Providers](/providers) and [Troubleshooting](/gateway/troubleshooting) for deeper setup notes.
+- If you set `dmPolicy: "open"`, the matching `allowFrom` list must include `"*"`.
+- Provider IDs differ (phone numbers, user IDs, channel IDs). Use the provider docs to confirm the format.
+- Optional sections to add later: `web`, `browser`, `ui`, `discovery`, `plugins`, `talk`, `signal`, `imessage`.
+- See [Providers](/providers) and [Troubleshooting](/gateway/troubleshooting) for deeper setup notes.
 
 ## Related
 
-* [Configuration reference](/gateway/configuration-reference)
-* [Configuration](/gateway/configuration)
+- [Configuration reference](/gateway/configuration-reference)
+- [Configuration](/gateway/configuration)
+
+---

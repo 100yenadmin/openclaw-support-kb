@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "b89774ef2a2a3bb7fc26b98143788e7d5648c34c40948c25811ac0d9ca5c7608"
+source_hash: "7cbe7192d1edf0a0db5c38fe81b01f30f77aaf270e73e2f5ad7aa75d6b92993b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -25,6 +25,10 @@ Hermes uses two kinds of model slots:
 - **Auxiliary models** — smaller side-jobs the agent offloads. Context compression, vision (image analysis), web-page summarization, approval scoring, MCP tool routing, session-title generation, and skill search. Each has its own slot and can be overridden independently.
 
 This page covers configuring both from the dashboard. If you prefer config files or the CLI, jump to [Alternative methods](#alternative-methods) at the bottom.
+
+:::tip Fastest path: Nous Portal
+[Nous Portal](/docs/user-guide/features/tool-gateway) provides 300+ models under one subscription. On a fresh install, run `hermes setup --portal` to log in and set Nous as your provider in one command. Inspect what's wired up with `hermes portal status`.
+:::
 
 ## The Models page
 

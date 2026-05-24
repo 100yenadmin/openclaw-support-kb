@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "53c6822dad163fd3ab7d7bded60875ed89f2333029679cd8500a5dae817afbe5"
+source_hash: "8d26dc8f17b6c9e946690b2be2bb696339e86e4c48d7600fb81730ce67940b89"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Codex Computer Use
 Source: https://docs.openclaw.ai/plugins/codex-computer-use
-
-
 
 Computer Use is a Codex-native MCP plugin for local desktop control. OpenClaw
 does not vendor the desktop app, execute desktop actions itself, or bypass
@@ -25,15 +23,15 @@ then lets Codex own the native MCP tool calls during Codex-mode turns.
 Use this page when OpenClaw is already using the native Codex harness. For the
 runtime setup itself, see [Codex harness](/plugins/codex-harness).
 
-## OpenClaw\.app and Peekaboo
+## OpenClaw.app and Peekaboo
 
-OpenClaw\.app's Peekaboo integration is separate from Codex Computer Use. The
+OpenClaw.app's Peekaboo integration is separate from Codex Computer Use. The
 macOS app can host a PeekabooBridge socket so the `peekaboo` CLI can reuse the
 app's local Accessibility and Screen Recording grants for Peekaboo's own
 automation tools. That bridge does not install or proxy Codex Computer Use, and
 Codex Computer Use does not call through the PeekabooBridge socket.
 
-Use [Peekaboo bridge](/platforms/mac/peekaboo) when you want OpenClaw\.app to be
+Use [Peekaboo bridge](/platforms/mac/peekaboo) when you want OpenClaw.app to be
 a permission-aware host for Peekaboo CLI automation. Use this page when a
 Codex-mode OpenClaw agent should have Codex's native `computer-use` MCP plugin
 available before the turn starts.
@@ -59,13 +57,13 @@ Codex-specific marketplace flow.
 
 After installing `cua-driver`, either ask it for the OpenClaw command:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 cua-driver mcp-config --client openclaw
 ```
 
 or register the stdio server yourself:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw mcp set cua-driver '{"command":"cua-driver","args":["mcp"]}'
 ```
 
@@ -85,7 +83,7 @@ driver's safety model.
 Set `plugins.entries.codex.config.computerUse` when Codex-mode turns must have
 Computer Use available before a thread starts:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -126,7 +124,7 @@ Use the `/codex computer-use` commands from any chat surface where the `codex`
 plugin command surface is available. These are OpenClaw chat/runtime commands,
 not `openclaw codex ...` CLI subcommands:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /codex computer-use status
 /codex computer-use install
 /codex computer-use install --source <marketplace-source>
@@ -165,7 +163,7 @@ fail closed and ask you to set `marketplaceName` or `marketplacePath`.
 
 Recent Codex desktop builds bundle Computer Use here:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /Applications/Codex.app/Contents/Resources/plugins/openai-bundled/plugins/computer-use
 ```
 
@@ -173,18 +171,19 @@ When `computerUse.autoInstall` is true and no marketplace containing
 `computer-use` is registered, OpenClaw tries to add the standard bundled
 marketplace root automatically:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /Applications/Codex.app/Contents/Resources/plugins/openai-bundled
 ```
 
 You can also register it explicitly from a shell with Codex:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 codex plugin marketplace add /Applications/Codex.app/Contents/Resources/plugins/openai-bundled
 ```
 
 If you use a nonstandard Codex app path, set `computerUse.marketplacePath` to a
-local marketplace file path or run `/codex computer-use install --source <marketplace-source>` once.
+local marketplace file path or run `/codex computer-use install --source
+<marketplace-source>` once.
 
 ## Remote catalog limit
 
@@ -196,7 +195,7 @@ still need a local marketplace via `marketplaceSource` or `marketplacePath`.
 If status says the plugin is available in a remote Codex marketplace but remote
 install is unsupported, run install with a local source or path:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /codex computer-use install --source <marketplace-source>
 /codex computer-use install --marketplace-path <path>
 ```
@@ -248,12 +247,12 @@ permissions before it can inspect or control apps. If OpenClaw says Computer Use
 is installed but the MCP server is unavailable, verify the Codex-side Computer
 Use setup first:
 
-* Codex app-server is running on the same host where desktop control should
+- Codex app-server is running on the same host where desktop control should
   happen.
-* The Computer Use plugin is enabled in Codex config.
-* The `computer-use` MCP server appears in Codex app-server MCP status.
-* macOS has granted the required permissions for the desktop-control app.
-* The current host session can access the desktop being controlled.
+- The Computer Use plugin is enabled in Codex config.
+- The `computer-use` MCP server appears in Codex app-server MCP status.
+- macOS has granted the required permissions for the desktop-control app.
+- The current host session can access the desktop being controlled.
 
 OpenClaw intentionally fails closed when `computerUse.enabled` is true. A
 Codex-mode turn should not silently proceed without the native desktop tools
@@ -293,6 +292,8 @@ marketplace.
 
 ## Related
 
-* [Codex harness](/plugins/codex-harness)
-* [Peekaboo bridge](/platforms/mac/peekaboo)
-* [iOS app](/platforms/ios)
+- [Codex harness](/plugins/codex-harness)
+- [Peekaboo bridge](/platforms/mac/peekaboo)
+- [iOS app](/platforms/ios)
+
+---

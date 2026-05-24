@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "79b37c2ef6271e9b4860b7c1417faebb1e763e0957ccce91b6a82b59bd15b620"
+source_hash: "1ea7d7ff21438129314d72d1cb76f46caa1d02419997cce41b5b624b91049c7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -13,20 +13,18 @@ duplicate_index: 1
 # System prompt
 Source: https://docs.openclaw.ai/concepts/system-prompt
 
-
-
 OpenClaw builds a custom system prompt for every agent run. The prompt is **OpenClaw-owned** and does not use the pi-coding-agent default prompt.
 
 The prompt is assembled by OpenClaw and injected into each agent run.
 
 Prompt assembly has three layers:
 
-* `buildAgentSystemPrompt` renders the prompt from explicit inputs. It should
+- `buildAgentSystemPrompt` renders the prompt from explicit inputs. It should
   stay a pure renderer and should not read global config directly.
-* `resolveAgentSystemPromptConfig` resolves config-backed prompt knobs such as
+- `resolveAgentSystemPromptConfig` resolves config-backed prompt knobs such as
   owner display, TTS hints, model aliases, memory citation mode, and sub-agent
   delegation mode for a specific agent.
-* Runtime adapters (embedded, CLI, command/export previews, compaction) gather
+- Runtime adapters (embedded, CLI, command/export previews, compaction) gather
   live facts such as tools, sandbox state, channel capabilities, context files,
   and provider prompt contributions, then call the configured prompt facade.
 
@@ -36,10 +34,10 @@ turning every runtime-specific detail into one monolithic builder.
 Provider plugins can contribute cache-aware prompt guidance without replacing
 the full OpenClaw-owned prompt. The provider runtime can:
 
-* replace a small set of named core sections (`interaction_style`,
+- replace a small set of named core sections (`interaction_style`,
   `tool_call_style`, `execution_bias`)
-* inject a **stable prefix** above the prompt cache boundary
-* inject a **dynamic suffix** below the prompt cache boundary
+- inject a **stable prefix** above the prompt cache boundary
+- inject a **dynamic suffix** below the prompt cache boundary
 
 Use provider-owned contributions for model-family-specific tuning. Keep legacy
 `before_prompt_build` prompt mutation for compatibility or truly global prompt
@@ -54,29 +52,29 @@ terminal-tool hygiene.
 
 The prompt is intentionally compact and uses fixed sections:
 
-* **Tooling**: structured-tool source-of-truth reminder plus runtime tool-use guidance.
-* **Execution Bias**: compact follow-through guidance: act in-turn on
+- **Tooling**: structured-tool source-of-truth reminder plus runtime tool-use guidance.
+- **Execution Bias**: compact follow-through guidance: act in-turn on
   actionable requests, continue until done or blocked, recover from weak tool
   results, check mutable state live, and verify before finalizing.
-* **Safety**: short guardrail reminder to avoid power-seeking behavior or bypassing oversight.
-* **Skills** (when available): tells the model how to load skill instructions on demand.
-* **OpenClaw Control**: tells the model to prefer the `gateway` tool for
+- **Safety**: short guardrail reminder to avoid power-seeking behavior or bypassing oversight.
+- **Skills** (when available): tells the model how to load skill instructions on demand.
+- **OpenClaw Control**: tells the model to prefer the `gateway` tool for
   config/restart work and to avoid inventing CLI commands.
-* **OpenClaw Self-Update**: how to inspect config safely with
+- **OpenClaw Self-Update**: how to inspect config safely with
   `config.schema.lookup`, patch config with `config.patch`, replace the full
   config with `config.apply`, and run `update.run` only on explicit user
   request. The agent-facing `gateway` tool also refuses to rewrite
   `tools.exec.ask` / `tools.exec.security`, including legacy `tools.bash.*`
   aliases that normalize to those protected exec paths.
-* **Workspace**: working directory (`agents.defaults.workspace`).
-* **Documentation**: local path to OpenClaw docs/source and when to read them.
-* **Workspace Files (injected)**: indicates bootstrap files are included below.
-* **Sandbox** (when enabled): indicates sandboxed runtime, sandbox paths, and whether elevated exec is available.
-* **Current Date & Time**: time zone only (cache-stable; the live clock comes from `session_status`).
-* **Assistant Output Directives**: compact attachment, voice-note, and reply tag syntax.
-* **Heartbeats**: heartbeat prompt and ack behavior, when heartbeats are enabled for the default agent.
-* **Runtime**: host, OS, node, model, repo root (when detected), thinking level (one line).
-* **Reasoning**: current visibility level + /reasoning toggle hint.
+- **Workspace**: working directory (`agents.defaults.workspace`).
+- **Documentation**: local path to OpenClaw docs/source and when to read them.
+- **Workspace Files (injected)**: indicates bootstrap files are included below.
+- **Sandbox** (when enabled): indicates sandboxed runtime, sandbox paths, and whether elevated exec is available.
+- **Current Date & Time**: time zone only (cache-stable; the live clock comes from `session_status`).
+- **Assistant Output Directives**: compact attachment, voice-note, and reply tag syntax.
+- **Heartbeats**: heartbeat prompt and ack behavior, when heartbeats are enabled for the default agent.
+- **Runtime**: host, OS, node, model, repo root (when detected), thinking level (one line).
+- **Reasoning**: current visibility level + /reasoning toggle hint.
 
 OpenClaw keeps large stable content, including **Project Context**, above the
 internal prompt cache boundary. Volatile channel/session sections such as
@@ -88,18 +86,18 @@ channel names when the accepted schema already carries that runtime detail.
 
 The Tooling section also includes runtime guidance for long-running work:
 
-* use cron for future follow-up (`check back later`, reminders, recurring work)
+- use cron for future follow-up (`check back later`, reminders, recurring work)
   instead of `exec` sleep loops, `yieldMs` delay tricks, or repeated `process`
   polling
-* use `exec` / `process` only for commands that start now and continue running
+- use `exec` / `process` only for commands that start now and continue running
   in the background
-* when automatic completion wake is enabled, start the command once and rely on
+- when automatic completion wake is enabled, start the command once and rely on
   the push-based wake path when it emits output or fails
-* use `process` for logs, status, input, or intervention when you need to
+- use `process` for logs, status, input, or intervention when you need to
   inspect a running command
-* if the task is larger, prefer `sessions_spawn`; sub-agent completion is
+- if the task is larger, prefer `sessions_spawn`; sub-agent completion is
   push-based and auto-announces back to the requester
-* do not poll `subagents list` / `sessions_list` in a loop just to wait for
+- do not poll `subagents list` / `sessions_list` in a loop just to wait for
   completion
 
 `agents.defaults.subagents.delegationMode` can strengthen this guidance. The
@@ -125,13 +123,13 @@ manual approval is the only path.
 OpenClaw can render smaller system prompts for sub-agents. The runtime sets a
 `promptMode` for each run (not a user-facing config):
 
-* `full` (default): includes all sections above.
-* `minimal`: used for sub-agents; omits **Memory Recall**, **OpenClaw
+- `full` (default): includes all sections above.
+- `minimal`: used for sub-agents; omits **Memory Recall**, **OpenClaw
   Self-Update**, **Model Aliases**, **User Identity**, **Assistant Output Directives**,
   **Messaging**, **Silent Replies**, and **Heartbeats**. Tooling, **Safety**,
   **Skills** when supplied, Workspace, Sandbox, Current Date & Time (when
   known), Runtime, and injected context stay available.
-* `none`: returns only the base identity line.
+- `none`: returns only the base identity line.
 
 When `promptMode=minimal`, extra injected prompts are labeled **Subagent
 Context** instead of **Group Chat Context**.
@@ -178,14 +176,14 @@ PR.
 Bootstrap files are resolved from the active workspace, then routed to the
 prompt surface that matches their lifetime:
 
-* `AGENTS.md`
-* `SOUL.md`
-* `TOOLS.md`
-* `IDENTITY.md`
-* `USER.md`
-* `HEARTBEAT.md`
-* `BOOTSTRAP.md` (only on brand-new workspaces)
-* `MEMORY.md` when present
+- `AGENTS.md`
+- `SOUL.md`
+- `TOOLS.md`
+- `IDENTITY.md`
+- `USER.md`
+- `HEARTBEAT.md`
+- `BOOTSTRAP.md` (only on brand-new workspaces)
+- `MEMORY.md` when present
 
 On the native Codex harness, OpenClaw avoids repeating stable workspace files
 in every user turn. Codex loads `AGENTS.md` through its own project-doc
@@ -205,9 +203,9 @@ long-term summary; detailed daily notes belong in `memory/*.md` where
 `MEMORY.md` files increase prompt usage and can be partially injected because of
 the bootstrap file limits below.
 
-<Note>
-  `memory/*.md` daily files are **not** part of the normal bootstrap Project Context. On ordinary turns they are accessed on demand via the `memory_search` and `memory_get` tools, so they do not count against the context window unless the model explicitly reads them. Bare `/new` and `/reset` turns are the exception: the runtime can prepend recent daily memory as a one-shot startup-context block for that first turn.
-</Note>
+Note
+
+`memory/*.md` daily files are **not** part of the normal bootstrap Project Context. On ordinary turns they are accessed on demand via the `memory_search` and `memory_get` tools, so they do not count against the context window unless the model explicitly reads them. Bare `/new` and `/reset` turns are the exception: the runtime can prepend recent daily memory as a one-shot startup-context block for that first turn.
 
 Large files are truncated with a marker. The max per-file size is controlled by
 `agents.defaults.bootstrapMaxChars` (default: 12000). Total injected bootstrap
@@ -247,8 +245,8 @@ override (`model=default` clears it).
 
 Configure with:
 
-* `agents.defaults.userTimezone`
-* `agents.defaults.timeFormat` (`auto` | `12` | `24`)
+- `agents.defaults.userTimezone`
+- `agents.defaults.timeFormat` (`auto` | `12` | `24`)
 
 See [Date & Time](/date-time) for full behavior details.
 
@@ -282,13 +280,13 @@ This keeps the base prompt small while still enabling targeted skill usage.
 
 The skills list budget is owned by the skills subsystem:
 
-* Global default: `skills.limits.maxSkillsPromptChars`
-* Per-agent override: `agents.list[].skillsLimits.maxSkillsPromptChars`
+- Global default: `skills.limits.maxSkillsPromptChars`
+- Per-agent override: `agents.list[].skillsLimits.maxSkillsPromptChars`
 
 Generic bounded runtime excerpts use a different surface:
 
-* `agents.defaults.contextLimits.*`
-* `agents.list[].contextLimits.*`
+- `agents.defaults.contextLimits.*`
+- `agents.list[].contextLimits.*`
 
 That split keeps skills sizing separate from runtime read/injection sizing such
 as `memory_get`, live tool results, and post-compaction AGENTS.md refreshes.
@@ -314,6 +312,8 @@ for broader guidance.
 
 ## Related
 
-* [Agent runtime](/concepts/agent)
-* [Agent workspace](/concepts/agent-workspace)
-* [Context engine](/concepts/context-engine)
+- [Agent runtime](/concepts/agent)
+- [Agent workspace](/concepts/agent-workspace)
+- [Context engine](/concepts/context-engine)
+
+---

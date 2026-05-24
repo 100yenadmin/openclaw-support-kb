@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics export"
 source: "https://docs.openclaw.ai/gateway/diagnostics"
-source_hash: "e64c77a281a09976ae3b96623094fbb764b89ab723fff18ebc2db91118d87965"
+source_hash: "85731681a041f7f57f851efada0781a9f470413d3609e8265c17b89466985f67"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/diagnostics.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Diagnostics export
 Source: https://docs.openclaw.ai/gateway/diagnostics
-
-
 
 OpenClaw can create a local diagnostics zip for bug reports. It combines
 sanitized Gateway status, health, logs, config shape, and recent payload-free
@@ -25,19 +23,19 @@ local Gateway logs and host-level runtime state.
 
 ## Quick start
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway diagnostics export
 ```
 
 The command prints the written zip path. To choose a path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway diagnostics export --output openclaw-diagnostics.zip
 ```
 
 For automation:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway diagnostics export --json
 ```
 
@@ -84,14 +82,14 @@ that inspection workflow.
 
 The zip includes:
 
-* `summary.md`: human-readable overview for support.
-* `diagnostics.json`: machine-readable summary of config, logs, status, health,
+- `summary.md`: human-readable overview for support.
+- `diagnostics.json`: machine-readable summary of config, logs, status, health,
   and stability data.
-* `manifest.json`: export metadata and file list.
-* Sanitized config shape and non-secret config details.
-* Sanitized log summaries and recent redacted log lines.
-* Best-effort Gateway status and health snapshots.
-* `stability/latest.json`: newest persisted stability bundle, when available.
+- `manifest.json`: export metadata and file list.
+- Sanitized config shape and non-secret config details.
+- Sanitized log summaries and recent redacted log lines.
+- Best-effort Gateway status and health snapshots.
+- `stability/latest.json`: newest persisted stability bundle, when available.
 
 The export is useful even when the Gateway is unhealthy. If the Gateway cannot
 answer status or health requests, the local logs, config shape, and latest
@@ -102,17 +100,17 @@ stability bundle are still collected when available.
 Diagnostics are designed to be shareable. The export keeps operational data
 that helps debugging, such as:
 
-* subsystem names, plugin ids, provider ids, channel ids, and configured modes
-* status codes, durations, byte counts, queue state, and memory readings
-* sanitized log metadata and redacted operational messages
-* config shape and non-secret feature settings
+- subsystem names, plugin ids, provider ids, channel ids, and configured modes
+- status codes, durations, byte counts, queue state, and memory readings
+- sanitized log metadata and redacted operational messages
+- config shape and non-secret feature settings
 
 The export omits or redacts:
 
-* chat text, prompts, instructions, webhook bodies, and tool outputs
-* credentials, API keys, tokens, cookies, and secret values
-* raw request or response bodies
-* account ids, message ids, raw session ids, hostnames, and local usernames
+- chat text, prompts, instructions, webhook bodies, and tool outputs
+- credentials, API keys, tokens, cookies, and secret values
+- raw request or response bodies
+- account ids, message ids, raw session ids, hostnames, and local usernames
 
 When a log message looks like user, chat, prompt, or tool payload text, the
 export keeps only that a message was omitted and the byte count.
@@ -141,7 +139,7 @@ active.
 
 Inspect the live recorder:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway stability
 openclaw gateway stability --type payload.large
 openclaw gateway stability --json
@@ -150,13 +148,13 @@ openclaw gateway stability --json
 Inspect the newest persisted stability bundle after a fatal exit, shutdown
 timeout, or restart startup failure:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway stability --bundle latest
 ```
 
 Create a diagnostics zip from the newest persisted bundle:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway stability --bundle latest --export
 ```
 
@@ -164,29 +162,29 @@ Persisted bundles live under `~/.openclaw/logs/stability/` when events exist.
 
 ## Useful options
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway diagnostics export \
   --output openclaw-diagnostics.zip \
   --log-lines 5000 \
   --log-bytes 1000000
 ```
 
-* `--output <path>`: write to a specific zip path.
-* `--log-lines <count>`: maximum sanitized log lines to include.
-* `--log-bytes <bytes>`: maximum log bytes to inspect.
-* `--url <url>`: Gateway WebSocket URL for status and health snapshots.
-* `--token <token>`: Gateway token for status and health snapshots.
-* `--password <password>`: Gateway password for status and health snapshots.
-* `--timeout <ms>`: status and health snapshot timeout.
-* `--no-stability-bundle`: skip persisted stability bundle lookup.
-* `--json`: print machine-readable export metadata.
+- `--output <path>`: write to a specific zip path.
+- `--log-lines <count>`: maximum sanitized log lines to include.
+- `--log-bytes <bytes>`: maximum log bytes to inspect.
+- `--url <url>`: Gateway WebSocket URL for status and health snapshots.
+- `--token <token>`: Gateway token for status and health snapshots.
+- `--password <password>`: Gateway password for status and health snapshots.
+- `--timeout <ms>`: status and health snapshot timeout.
+- `--no-stability-bundle`: skip persisted stability bundle lookup.
+- `--json`: print machine-readable export metadata.
 
 ## Disable diagnostics
 
 Diagnostics are enabled by default. To disable the stability recorder and
 diagnostic event collection:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: {
     enabled: false,
@@ -200,7 +198,7 @@ Gateway logging.
 Critical memory pressure snapshots are off by default. To keep diagnostics
 events and also capture the pre-OOM stability snapshot:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: {
     memoryPressureSnapshot: true,
@@ -214,8 +212,10 @@ record RSS, heap, threshold, and growth facts when the snapshot is off.
 
 ## Related
 
-* [Health checks](/gateway/health)
-* [Gateway CLI](/cli/gateway#gateway-diagnostics-export)
-* [Gateway protocol](/gateway/protocol#system-and-identity)
-* [Logging](/logging)
-* [OpenTelemetry export](/gateway/opentelemetry) — separate flow for streaming diagnostics to a collector
+- [Health checks](/gateway/health)
+- [Gateway CLI](/cli/gateway#gateway-diagnostics-export)
+- [Gateway protocol](/gateway/protocol#system-and-identity)
+- [Logging](/logging)
+- [OpenTelemetry export](/gateway/opentelemetry) — separate flow for streaming diagnostics to a collector
+
+---

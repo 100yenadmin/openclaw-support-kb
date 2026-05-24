@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "e0e1ae9827c54c9efc6c6187cbfbb7c71c8177ff3ee707e716d70198b3c8ccf6"
+source_hash: "34f899f3e96e386ecf60f19995c956f952a22ac4c6e25a87a142147230b31a2a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Plugins
 Source: https://docs.openclaw.ai/tools/plugin
-
-
 
 Plugins extend OpenClaw with channels, model providers, agent harnesses, tools,
 skills, speech, realtime transcription, voice, media understanding, generation,
@@ -29,29 +27,35 @@ inventory of bundled, official external, and source-only plugins, see
 
 Before installing a plugin, make sure you have:
 
-* an OpenClaw checkout or installation with the `openclaw` CLI available
-* network access to the selected source, such as ClawHub, npm, or a git host
-* any plugin-specific credentials, config keys, or operating-system tools named
+- an OpenClaw checkout or installation with the `openclaw` CLI available
+- network access to the selected source, such as ClawHub, npm, or a git host
+- any plugin-specific credentials, config keys, or operating-system tools named
   by that plugin's setup docs
-* permission for the Gateway that serves your channels to reload or restart
+- permission for the Gateway that serves your channels to reload or restart
 
 ## Quick start
 
-<Steps>
-  <Step title="Find the plugin">
+Steps
+
+
+Find the plugin
+
     Search [ClawHub](/clawhub) for public plugin packages:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw plugins search "calendar"
     ```
 
     ClawHub is the primary discovery surface for community plugins. During the
     launch cutover, ordinary bare package specs still install from npm. Use an
     explicit prefix when you need one source.
-  </Step>
 
-  <Step title="Install the plugin">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Install the plugin
+
+    ```bash
     # From ClawHub.
     openclaw plugins install clawhub:<package>
 
@@ -68,13 +72,16 @@ Before installing a plugin, make sure you have:
 
     Treat plugin installs like running code. Prefer pinned versions when you
     need reproducible production installs.
-  </Step>
 
-  <Step title="Configure and enable it">
+
+
+
+Configure and enable it
+
     Configure plugin-specific settings under `plugins.entries.<id>.config`.
     Enable the plugin when it is not already enabled:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw plugins enable <plugin-id>
     ```
 
@@ -83,34 +90,40 @@ Before installing a plugin, make sure you have:
     `openclaw plugins install` adds the installed id to an existing
     `plugins.allow` list and removes the same id from `plugins.deny` so the
     explicit install can load after restart.
-  </Step>
 
-  <Step title="Let the Gateway reload">
+
+
+
+Let the Gateway reload
+
     Installing, updating, or uninstalling plugin code requires a Gateway
     restart. When a managed Gateway is already running with config reload
     enabled, OpenClaw detects the changed plugin install record and restarts the
     Gateway automatically. If the Gateway is not managed or reload is disabled,
     restart it yourself:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw gateway restart
     ```
 
     Enable and disable operations update config and refresh the cold registry.
     A runtime inspect is still the clearest verification path for live runtime
     surfaces.
-  </Step>
 
-  <Step title="Verify runtime registration">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Verify runtime registration
+
+    ```bash
     openclaw plugins inspect <plugin-id> --runtime --json
     ```
 
     Use `--runtime` when you need to prove registered tools, hooks, services,
     Gateway methods, or plugin-owned CLI commands. Plain `inspect` is a cold
     manifest and registry check.
-  </Step>
-</Steps>
+
+
 
 ## Configuration
 
@@ -136,7 +149,7 @@ contract.
 
 The common plugin config shape is:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     enabled: true,
@@ -153,28 +166,28 @@ The common plugin config shape is:
 
 Key policy rules:
 
-* `plugins.enabled: false` disables all plugins and skips plugin discovery/load
+- `plugins.enabled: false` disables all plugins and skips plugin discovery/load
   work. Stale plugin references are inert while this is active; re-enable
   plugins before running doctor cleanup when you want stale ids removed.
-* `plugins.deny` wins over allow and per-plugin enablement.
-* `plugins.allow` is an exclusive allowlist. Plugin-owned tools outside the
+- `plugins.deny` wins over allow and per-plugin enablement.
+- `plugins.allow` is an exclusive allowlist. Plugin-owned tools outside the
   allowlist stay unavailable, even when `tools.allow` includes `"*"`.
-* `plugins.entries.<id>.enabled: false` disables one plugin while preserving its
+- `plugins.entries.<id>.enabled: false` disables one plugin while preserving its
   config.
-* `plugins.load.paths` adds explicit local plugin files or directories.
-* Workspace-origin plugins are disabled by default; explicitly enable or
+- `plugins.load.paths` adds explicit local plugin files or directories.
+- Workspace-origin plugins are disabled by default; explicitly enable or
   allowlist them before using local workspace code.
-* Bundled plugins follow their built-in default-on/default-off metadata unless
+- Bundled plugins follow their built-in default-on/default-off metadata unless
   config explicitly overrides them.
-* `plugins.slots.<slot>` chooses one plugin for exclusive categories such as
+- `plugins.slots.<slot>` chooses one plugin for exclusive categories such as
   memory and context engines. Slot selection force-enables the selected plugin
   for that slot by counting as explicit activation; it can load even when it
   would otherwise be opt-in. `plugins.deny` and
   `plugins.entries.<id>.enabled: false` still block it.
-* Bundled opt-in plugins can auto-activate when config names one of their owned
+- Bundled opt-in plugins can auto-activate when config names one of their owned
   surfaces, such as a provider/model ref, channel config, CLI backend, or agent
   harness runtime.
-* OpenAI-family Codex routing keeps provider and runtime plugin boundaries
+- OpenAI-family Codex routing keeps provider and runtime plugin boundaries
   separate: `openai-codex/*` is legacy OpenAI-provider config, while the bundled
   `codex` plugin owns Codex app-server runtime for canonical `openai/*` agent
   refs, explicit `agentRuntime.id: "codex"`, and legacy `codex/*` refs.
@@ -204,7 +217,7 @@ has imported the same plugin code.
 
 When a plugin appears installed but live chat traffic does not use it:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway status --deep --require-rpc
 openclaw plugins inspect <plugin-id> --runtime --json
 openclaw gateway restart
@@ -257,14 +270,14 @@ For Docker installs, the official image runs as `node` (uid `1000`), so the
 host bind-mounted OpenClaw config and workspace directories should normally be
 owned by uid `1000`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 sudo chown -R 1000:1000 /path/to/openclaw-config /path/to/openclaw-workspace
 ```
 
 If you intentionally run OpenClaw as root, repair the managed plugin root to
 root ownership instead:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 sudo chown -R root:root /path/to/openclaw-config/npm
 ```
 
@@ -277,14 +290,14 @@ the repaired files.
 If agent turns appear to stall while preparing tools, enable trace logging and
 check for plugin tool factory timing lines:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set logging.level trace
 openclaw logs --follow
 ```
 
 Look for:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 [trace:plugin-tools] factory timings ...
 ```
 
@@ -303,7 +316,7 @@ definitions.
 
 If one plugin dominates the timing, inspect its runtime registrations:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins inspect <plugin-id> --runtime --json
 ```
 
@@ -317,12 +330,14 @@ reload behavior, and legacy cleanup, see
 
 ## Related
 
-* [Manage plugins](/plugins/manage-plugins) - command examples for list, install, update, uninstall, and publish
-* [`openclaw plugins`](/cli/plugins) - full CLI reference
-* [Plugin inventory](/plugins/plugin-inventory) - generated bundled and external plugin list
-* [Plugin reference](/plugins/reference) - generated per-plugin reference pages
-* [Community plugins](/plugins/community) - ClawHub discovery and docs PR policy
-* [Plugin dependency resolution](/plugins/dependency-resolution) - install roots, registry records, and runtime boundaries
-* [Building plugins](/plugins/building-plugins) - native plugin authoring guide
-* [Plugin SDK overview](/plugins/sdk-overview) - runtime registration, hooks, and API fields
-* [Plugin manifest](/plugins/manifest) - manifest and package metadata
+- [Manage plugins](/plugins/manage-plugins) - command examples for list, install, update, uninstall, and publish
+- [`openclaw plugins`](/cli/plugins) - full CLI reference
+- [Plugin inventory](/plugins/plugin-inventory) - generated bundled and external plugin list
+- [Plugin reference](/plugins/reference) - generated per-plugin reference pages
+- [Community plugins](/plugins/community) - ClawHub discovery and docs PR policy
+- [Plugin dependency resolution](/plugins/dependency-resolution) - install roots, registry records, and runtime boundaries
+- [Building plugins](/plugins/building-plugins) - native plugin authoring guide
+- [Plugin SDK overview](/plugins/sdk-overview) - runtime registration, hooks, and API fields
+- [Plugin manifest](/plugins/manifest) - manifest and package metadata
+
+---

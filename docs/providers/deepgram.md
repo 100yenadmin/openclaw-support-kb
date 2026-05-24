@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "d1853a5b6324ac0298ab9122d2217e31f1bfbf5b1ca7d878aa113da57416d05b"
+source_hash: "09f06b899a2aaa1cacb78f754e5bcb484c2549467396363120a32bb760bca29c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Deepgram
 Source: https://docs.openclaw.ai/providers/deepgram
-
-
 
 Deepgram is a speech-to-text API. In OpenClaw it is used for inbound
 audio/voice-note transcription through `tools.media.audio` and for Voice Call
@@ -34,17 +32,22 @@ final transcripts as Deepgram returns them.
 
 ## Getting started
 
-<Steps>
-  <Step title="Set your API key">
+Steps
+
+
+Set your API key
+
     Add your Deepgram API key to the environment:
 
     ```
     DEEPGRAM_API_KEY=dg_...
     ```
-  </Step>
 
-  <Step title="Enable the audio provider">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Enable the audio provider
+
+    ```json5
     {
       tools: {
         media: {
@@ -56,13 +59,13 @@ final transcripts as Deepgram returns them.
       },
     }
     ```
-  </Step>
 
-  <Step title="Send a voice note">
+
+Send a voice note
+
     Send an audio message through any connected channel. OpenClaw transcribes it
     via Deepgram and injects the transcript into the reply pipeline.
-  </Step>
-</Steps>
+
 
 ## Configuration options
 
@@ -74,9 +77,12 @@ final transcripts as Deepgram returns them.
 | `punctuate`       | `tools.media.audio.providerOptions.deepgram.punctuate`       | Enable punctuation (optional)         |
 | `smart_format`    | `tools.media.audio.providerOptions.deepgram.smart_format`    | Enable smart formatting (optional)    |
 
-<Tabs>
-  <Tab title="With language hint">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+With language hint
+
+    ```json5
     {
       tools: {
         media: {
@@ -88,10 +94,11 @@ final transcripts as Deepgram returns them.
       },
     }
     ```
-  </Tab>
 
-  <Tab title="With Deepgram options">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+With Deepgram options
+
+    ```json5
     {
       tools: {
         media: {
@@ -110,8 +117,7 @@ final transcripts as Deepgram returns them.
       },
     }
     ```
-  </Tab>
-</Tabs>
+
 
 ## Voice Call streaming STT
 
@@ -128,7 +134,7 @@ for the Voice Call plugin.
 | Endpointing     | `...deepgram.endpointingMs`                                             | `800`                            |
 | Interim results | `...deepgram.interimResults`                                            | `true`                           |
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -153,47 +159,57 @@ for the Voice Call plugin.
 }
 ```
 
-<Note>
-  Voice Call receives telephony audio as 8 kHz G.711 u-law. The Deepgram
-  streaming provider defaults to `encoding: "mulaw"` and `sampleRate: 8000`, so
-  Twilio media frames can be forwarded directly.
-</Note>
+Note
+
+Voice Call receives telephony audio as 8 kHz G.711 u-law. The Deepgram
+streaming provider defaults to `encoding: "mulaw"` and `sampleRate: 8000`, so
+Twilio media frames can be forwarded directly.
 
 ## Notes
 
-<AccordionGroup>
-  <Accordion title="Authentication">
+AccordionGroup
+
+
+Authentication
+
     Authentication follows the standard provider auth order. `DEEPGRAM_API_KEY` is
     the simplest path.
-  </Accordion>
 
-  <Accordion title="Proxy and custom endpoints">
+
+Proxy and custom endpoints
+
     Override endpoints or headers with `tools.media.audio.baseUrl` and
     `tools.media.audio.headers` when using a proxy.
-  </Accordion>
 
-  <Accordion title="Output behavior">
+
+Output behavior
+
     Output follows the same audio rules as other providers (size caps, timeouts,
     transcript injection).
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Media tools" href="/tools/media-overview" icon="photo-film">
+CardGroup
+
+
+Media tools
+
     Audio, image, and video processing pipeline overview.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config reference including media tool settings.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Common issues and debugging steps.
-  </Card>
 
-  <Card title="FAQ" href="/help/faq" icon="circle-question">
+
+FAQ
+
     Frequently asked questions about OpenClaw setup.
-  </Card>
-</CardGroup>
+
+---

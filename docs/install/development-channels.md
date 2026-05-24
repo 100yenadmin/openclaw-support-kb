@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release channels"
 source: "https://docs.openclaw.ai/install/development-channels"
-source_hash: "b972f238d51ffbb5079c4be22f9b55f4995c2e228549fc02b1bffb11a88ff87d"
+source_hash: "58d448d1e937a6c48417aaeb5676d9c2dfd1867f339d2ebb518bdaa1fbaebd21"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/development-channels.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # Release channels
 Source: https://docs.openclaw.ai/install/development-channels
 
-
-
 OpenClaw ships three update channels:
 
-* **stable**: npm dist-tag `latest`. Recommended for most users.
-* **beta**: npm dist-tag `beta` when it is current; if beta is missing or older than
+- **stable**: npm dist-tag `latest`. Recommended for most users.
+- **beta**: npm dist-tag `beta` when it is current; if beta is missing or older than
   the latest stable release, the update flow falls back to `latest`.
-* **dev**: moving head of `main` (git). npm dist-tag: `dev` (when published).
+- **dev**: moving head of `main` (git). npm dist-tag: `dev` (when published).
   The `main` branch is for experimentation and active development. It may contain
   incomplete features or breaking changes. Do not use it for production gateways.
 
@@ -32,7 +30,7 @@ installs.
 
 ## Switching channels
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update --channel stable
 openclaw update --channel beta
 openclaw update --channel dev
@@ -41,26 +39,26 @@ openclaw update --channel dev
 `--channel` persists your choice in config (`update.channel`) and aligns the
 install method:
 
-* **`stable`** (package installs): updates via npm dist-tag `latest`.
-* **`beta`** (package installs): prefers npm dist-tag `beta`, but falls back to
+- **`stable`** (package installs): updates via npm dist-tag `latest`.
+- **`beta`** (package installs): prefers npm dist-tag `beta`, but falls back to
   `latest` when `beta` is missing or older than the current stable tag.
-* **`stable`** (git installs): checks out the latest stable git tag.
-* **`beta`** (git installs): prefers the latest beta git tag, but falls back to
+- **`stable`** (git installs): checks out the latest stable git tag.
+- **`beta`** (git installs): prefers the latest beta git tag, but falls back to
   the latest stable git tag when beta is missing or older.
-* **`dev`**: ensures a git checkout (default `~/openclaw`, override with
+- **`dev`**: ensures a git checkout (default `~/openclaw`, override with
   `OPENCLAW_GIT_DIR`), switches to `main`, rebases on upstream, builds, and
   installs the global CLI from that checkout.
 
-<Tip>
-  If you want stable and dev in parallel, keep two clones and point your gateway at the stable one.
-</Tip>
+Tip
+
+If you want stable and dev in parallel, keep two clones and point your gateway at the stable one.
 
 ## One-off version or tag targeting
 
 Use `--tag` to target a specific dist-tag, version, or package spec for a single
 update **without** changing your persisted channel:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Install a specific version
 openclaw update --tag 2026.4.1-beta.1
 
@@ -76,15 +74,15 @@ openclaw update --tag openclaw@2026.4.1-beta.1
 
 Notes:
 
-* `--tag` applies to **package (npm) installs only**. Git installs ignore it.
-* The tag is not persisted. Your next `openclaw update` uses your configured
+- `--tag` applies to **package (npm) installs only**. Git installs ignore it.
+- The tag is not persisted. Your next `openclaw update` uses your configured
   channel as usual.
-* OpenClaw does not support npm GitHub source installs for `openclaw/openclaw`.
+- OpenClaw does not support npm GitHub source installs for `openclaw/openclaw`.
   Use `--channel dev` or `--install-method git --version main` for the moving
   `main` checkout.
-* Downgrade protection: if the target version is older than your current version,
+- Downgrade protection: if the target version is older than your current version,
   OpenClaw prompts for confirmation (skip with `--yes`).
-* `--channel beta` is different from `--tag beta`: the channel flow can fall back
+- `--channel beta` is different from `--tag beta`: the channel flow can fall back
   to stable/latest when beta is missing or older, while `--tag beta` targets the
   raw `beta` dist-tag for that one run.
 
@@ -92,7 +90,7 @@ Notes:
 
 Preview what `openclaw update` would do without making changes:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update --dry-run
 openclaw update --channel beta --dry-run
 openclaw update --tag 2026.4.1-beta.1 --dry-run
@@ -107,13 +105,13 @@ whether a downgrade confirmation would be required.
 When you switch channels with `openclaw update`, OpenClaw also syncs plugin
 sources:
 
-* `dev` prefers bundled plugins from the git checkout.
-* `stable` and `beta` restore npm-installed plugin packages.
-* npm-installed plugins are updated after the core update completes.
+- `dev` prefers bundled plugins from the git checkout.
+- `stable` and `beta` restore npm-installed plugin packages.
+- npm-installed plugins are updated after the core update completes.
 
 ## Checking current status
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update status
 ```
 
@@ -122,24 +120,26 @@ source (config, git tag, git branch, or default).
 
 ## Tagging best practices
 
-* Tag releases you want git checkouts to land on (`vYYYY.M.D` for stable,
+- Tag releases you want git checkouts to land on (`vYYYY.M.D` for stable,
   `vYYYY.M.D-beta.N` for beta).
-* `vYYYY.M.D.beta.N` is also recognized for compatibility, but prefer `-beta.N`.
-* Legacy `vYYYY.M.D-<patch>` tags are still recognized as stable (non-beta).
-* Keep tags immutable: never move or reuse a tag.
-* npm dist-tags remain the source of truth for npm installs:
-  * `latest` -> stable
-  * `beta` -> candidate build or beta-first stable build
-  * `dev` -> main snapshot (optional)
+- `vYYYY.M.D.beta.N` is also recognized for compatibility, but prefer `-beta.N`.
+- Legacy `vYYYY.M.D-<patch>` tags are still recognized as stable (non-beta).
+- Keep tags immutable: never move or reuse a tag.
+- npm dist-tags remain the source of truth for npm installs:
+  - `latest` -> stable
+  - `beta` -> candidate build or beta-first stable build
+  - `dev` -> main snapshot (optional)
 
 ## macOS app availability
 
 Beta and dev builds may **not** include a macOS app release. That is OK:
 
-* The git tag and npm dist-tag can still be published.
-* Call out "no macOS build for this beta" in release notes or changelog.
+- The git tag and npm dist-tag can still be published.
+- Call out "no macOS build for this beta" in release notes or changelog.
 
 ## Related
 
-* [Updating](/install/updating)
-* [Installer internals](/install/installer)
+- [Updating](/install/updating)
+- [Installer internals](/install/installer)
+
+---

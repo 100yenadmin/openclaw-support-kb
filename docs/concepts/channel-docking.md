@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel docking"
 source: "https://docs.openclaw.ai/concepts/channel-docking"
-source_hash: "a727dcfc45b316551d9ed1b59c769ab24759074fcc51c4a0bc3ae073a024e6d3"
+source_hash: "bf798a88d559a015f372b399ab418dbf3c8abe1d9f48e28311b02cb0836e5e43"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/channel-docking.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Channel docking
 Source: https://docs.openclaw.ai/concepts/channel-docking
 
-
-
 Channel docking is call forwarding for one OpenClaw session.
 
 It keeps the same conversation context, but changes where future replies for
@@ -24,7 +22,7 @@ that session are delivered.
 
 Alice can message OpenClaw on Telegram and Discord:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   session: {
     identityLinks: {
@@ -36,7 +34,7 @@ Alice can message OpenClaw on Telegram and Discord:
 
 If Alice sends this from Telegram:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /dock_discord
 ```
 
@@ -66,7 +64,7 @@ Common flow:
 Docking requires `session.identityLinks`. The source sender and target peer
 must be in the same identity group:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   session: {
     identityLinks: {
@@ -119,12 +117,12 @@ delivery for that session.
 
 Docking does not:
 
-* create channel accounts
-* connect a new Discord, Telegram, Slack, or Mattermost bot
-* grant access to a user
-* bypass channel allowlists or DM policies
-* move transcript history to another session
-* make unrelated users share a session
+- create channel accounts
+- connect a new Discord, Telegram, Slack, or Mattermost bot
+- grant access to a user
+- bypass channel allowlists or DM policies
+- move transcript history to another session
+- make unrelated users share a session
 
 It only changes the delivery route for the current session.
 
@@ -151,3 +149,5 @@ session route; another session may still route elsewhere.
 
 Send the matching command for the original channel, such as `/dock_telegram` or
 `/dock-telegram`, from a linked sender.
+
+---

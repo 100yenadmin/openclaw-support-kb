@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
-source_hash: "856362e1b42a62c7a48d539743ddec6c0f15c33649d153ad68ce14d184e20edf"
+source_hash: "8696af857a95d8f7d415ff82dd7afe9917cba8351a1cc2cf319532dceb641dde"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding.md"
@@ -13,94 +13,96 @@ duplicate_index: 1
 # Onboarding (macOS app)
 Source: https://docs.openclaw.ai/start/onboarding
 
-
-
 This doc describes the **current** first-run setup flow. The goal is a
 smooth "day 0" experience: pick where the Gateway runs, connect auth, run the
 wizard, and let the agent bootstrap itself.
 For a general overview of onboarding paths, see [Onboarding Overview](/start/onboarding-overview).
 
-<Steps>
-  <Step title="Approve macOS warning">
-    <Frame>
-      <img alt="" />
-    </Frame>
-  </Step>
+Steps
 
-  <Step title="Approve find local networks">
-    <Frame>
-      <img alt="" />
-    </Frame>
-  </Step>
+Approve macOS warning
 
-  <Step title="Welcome and security notice">
-    <Frame>
-      <img alt="" />
-    </Frame>
+Frame
 
-    Security trust model:
+<img src="/assets/macos-onboarding/01-macos-warning.jpeg" alt="" />
 
-    * By default, OpenClaw is a personal agent: one trusted operator boundary.
-    * Shared/multi-user setups require lock-down (split trust boundaries, keep tool access minimal, and follow [Security](/gateway/security)).
-    * Local onboarding now defaults new configs to `tools.profile: "coding"` so fresh local setups keep filesystem/runtime tools without forcing the unrestricted `full` profile.
-    * If hooks/webhooks or other untrusted content feeds are enabled, use a strong modern model tier and keep strict tool policy/sandboxing.
-  </Step>
+Approve find local networks
 
-  <Step title="Local vs Remote">
-    <Frame>
-      <img alt="" />
-    </Frame>
+Frame
 
-    Where does the **Gateway** run?
+<img src="/assets/macos-onboarding/02-local-networks.jpeg" alt="" />
 
-    * **This Mac (Local only):** onboarding can configure auth and write credentials
-      locally.
-    * **Remote (over SSH/Tailnet):** onboarding does **not** configure local auth;
-      credentials must exist on the gateway host.
-    * **Configure later:** skip setup and leave the app unconfigured.
+Welcome and security notice
 
-    <Tip>
-      **Gateway auth tip:**
+Frame
 
-      * The wizard now generates a **token** even for loopback, so local WS clients must authenticate.
-      * If you disable auth, any local process can connect; use that only on fully trusted machines.
-      * Use a **token** for multi-machine access or non-loopback binds.
-    </Tip>
-  </Step>
+<img src="/assets/macos-onboarding/03-security-notice.png" alt="" />
 
-  <Step title="Permissions">
-    <Frame>
-      <img alt="" />
-    </Frame>
+Security trust model:
 
-    Onboarding requests TCC permissions needed for:
+- By default, OpenClaw is a personal agent: one trusted operator boundary.
+- Shared/multi-user setups require lock-down (split trust boundaries, keep tool access minimal, and follow [Security](/gateway/security)).
+- Local onboarding now defaults new configs to `tools.profile: "coding"` so fresh local setups keep filesystem/runtime tools without forcing the unrestricted `full` profile.
+- If hooks/webhooks or other untrusted content feeds are enabled, use a strong modern model tier and keep strict tool policy/sandboxing.
 
-    * Automation (AppleScript)
-    * Notifications
-    * Accessibility
-    * Screen Recording
-    * Microphone
-    * Speech Recognition
-    * Camera
-    * Location
-  </Step>
+Local vs Remote
 
-  <Step title="CLI">
-    <Info>This step is optional</Info>
-    The app can install the global `openclaw` CLI via npm, pnpm, or bun.
-    It prefers npm first, then pnpm, then bun if that is the only detected
-    package manager. For the Gateway runtime, Node remains the recommended path.
-  </Step>
+Frame
 
-  <Step title="Onboarding Chat (dedicated session)">
-    After setup, the app opens a dedicated onboarding chat session so the agent can
-    introduce itself and guide next steps. This keeps first-run guidance separate
-    from your normal conversation. See [Bootstrapping](/start/bootstrapping) for
-    what happens on the gateway host during the first agent run.
-  </Step>
-</Steps>
+<img src="/assets/macos-onboarding/04-choose-gateway.png" alt="" />
+
+Where does the **Gateway** run?
+
+- **This Mac (Local only):** onboarding can configure auth and write credentials
+  locally.
+- **Remote (over SSH/Tailnet):** onboarding does **not** configure local auth;
+  credentials must exist on the gateway host.
+- **Configure later:** skip setup and leave the app unconfigured.
+
+Tip
+
+**Gateway auth tip:**
+
+- The wizard now generates a **token** even for loopback, so local WS clients must authenticate.
+- If you disable auth, any local process can connect; use that only on fully trusted machines.
+- Use a **token** for multi-machine access or non-loopback binds.
+
+Permissions
+
+Frame
+
+<img src="/assets/macos-onboarding/05-permissions.png" alt="" />
+
+Onboarding requests TCC permissions needed for:
+
+- Automation (AppleScript)
+- Notifications
+- Accessibility
+- Screen Recording
+- Microphone
+- Speech Recognition
+- Camera
+- Location
+
+CLI
+
+
+Info
+This step is optional
+  The app can install the global `openclaw` CLI via npm, pnpm, or bun.
+  It prefers npm first, then pnpm, then bun if that is the only detected
+  package manager. For the Gateway runtime, Node remains the recommended path.
+
+Onboarding Chat (dedicated session)
+
+  After setup, the app opens a dedicated onboarding chat session so the agent can
+  introduce itself and guide next steps. This keeps first-run guidance separate
+  from your normal conversation. See [Bootstrapping](/start/bootstrapping) for
+  what happens on the gateway host during the first agent run.
 
 ## Related
 
-* [Onboarding overview](/start/onboarding-overview)
-* [Getting started](/start/getting-started)
+- [Onboarding overview](/start/onboarding-overview)
+- [Getting started](/start/getting-started)
+
+---

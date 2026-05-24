@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin bundles"
 source: "https://docs.openclaw.ai/plugins/bundles"
-source_hash: "ae166ba71cde0a47e29ca0a8615de113c71c6c1a4862e7bba9cc8cac582e782a"
+source_hash: "d70b19f95ebfd7efcdd79f41c27f28c381a2099bb9afc4e4594a9529d1eee675"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/bundles.md"
@@ -13,19 +13,17 @@ duplicate_index: 1
 # Plugin bundles
 Source: https://docs.openclaw.ai/plugins/bundles
 
-
-
 Plugin bundles let OpenClaw reuse compatible Codex, Claude, and Cursor plugin
 layouts without loading them as native OpenClaw runtime modules. Use this page
 when you have an existing bundle and need to install it, verify how OpenClaw
 classified it, and understand which parts become OpenClaw skills, hooks, MCP
 tools, settings, or diagnostics.
 
-<Info>
+Info
+
   Bundles are not native OpenClaw plugins. Native plugins run in process and can
   register OpenClaw capabilities directly. Bundles are content and metadata
   packs that OpenClaw maps selectively into supported surfaces.
-</Info>
 
 ## Choose the right plugin format
 
@@ -48,11 +46,14 @@ and [Plugins](/tools/plugin) for the main install workflow.
 
 ## Install and verify a bundle
 
-<Steps>
-  <Step title="Install the bundle">
+Steps
+
+
+Install the bundle
+
     Install from a local directory, archive, or supported marketplace source:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     # Local directory
     openclaw plugins install ./my-bundle
 
@@ -63,26 +64,32 @@ and [Plugins](/tools/plugin) for the main install workflow.
     openclaw plugins marketplace list <marketplace-name>
     openclaw plugins install <plugin-name>@<marketplace-name>
     ```
-  </Step>
 
-  <Step title="Check detection">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Check detection
+
+    ```bash
     openclaw plugins list
     openclaw plugins inspect <id>
     ```
 
     A compatible bundle appears with `Format: bundle` and a `codex`, `claude`,
     or `cursor` subtype.
-  </Step>
 
-  <Step title="Restart the Gateway">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Restart the Gateway
+
+    ```bash
     openclaw gateway restart
     ```
 
     Installing or updating plugin code requires restarting the Gateway.
-  </Step>
-</Steps>
+
+
 
 ## What OpenClaw maps from bundles
 
@@ -132,9 +139,9 @@ defaults. Supported stdio-backed LSP servers can run.
 
 OpenClaw reports these in diagnostics but does not run them:
 
-* Claude `agents`, `hooks/hooks.json`, `outputStyles`
-* Cursor `.cursor/agents`, `.cursor/hooks.json`, `.cursor/rules`
-* Codex app or inline metadata
+- Claude `agents`, `hooks/hooks.json`, `outputStyles`
+- Cursor `.cursor/agents`, `.cursor/hooks.json`, `.cursor/rules`
+- Codex app or inline metadata
 
 ## Bundle formats and detection
 
@@ -145,8 +152,11 @@ dual-format packages from being partially loaded through the bundle path.
 
 After native detection, OpenClaw recognizes these bundle layouts:
 
-<AccordionGroup>
-  <Accordion title="Codex bundles">
+AccordionGroup
+
+
+Codex bundles
+
     Marker: `.codex-plugin/plugin.json`
 
     Supported mapped content: `skills/`, `hooks/`, `.mcp.json`, and `.app.json`
@@ -154,13 +164,16 @@ After native detection, OpenClaw recognizes these bundle layouts:
 
     Codex bundles fit OpenClaw best when they use skill roots and OpenClaw-style
     hook-pack directories.
-  </Accordion>
 
-  <Accordion title="Claude bundles">
+
+
+
+Claude bundles
+
     Detection modes:
 
-    * **Manifest-based:** `.claude-plugin/plugin.json`
-    * **Manifestless:** default Claude layout with `skills/`, `commands/`,
+    - **Manifest-based:** `.claude-plugin/plugin.json`
+    - **Manifestless:** default Claude layout with `skills/`, `commands/`,
       `agents/`, `hooks/hooks.json`, `.mcp.json`, `.lsp.json`, or
       `settings.json`
 
@@ -169,17 +182,20 @@ After native detection, OpenClaw recognizes these bundle layouts:
     manifest-declared `lspServers`.
 
     Detect-only content: `agents`, `hooks/hooks.json`, and `outputStyles`.
-  </Accordion>
 
-  <Accordion title="Cursor bundles">
+
+
+
+Cursor bundles
+
     Marker: `.cursor-plugin/plugin.json`
 
     Supported mapped content: `skills/`, `.cursor/commands/`, and `.mcp.json`.
 
     Detect-only content: `.cursor/agents`, `.cursor/hooks.json`, and
     `.cursor/rules`.
-  </Accordion>
-</AccordionGroup>
+
+
 
 Claude manifest component paths are additive. Declaring custom paths extends
 the default paths that exist in the bundle instead of replacing them.
@@ -189,7 +205,7 @@ the default paths that exist in the bundle instead of replacing them.
 Bundle MCP tools use the synthetic plugin key `bundle-mcp` for profile filtering.
 To opt out for an agent or Gateway, deny that key:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     deny: ["bundle-mcp"],
@@ -205,7 +221,7 @@ workspace settings can override bundle MCP entries when needed.
 Bundle MCP files can use either `mcpServers`, `servers`, or a top-level server
 map. Stdio servers launch a child process:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "mcpServers": {
     "my-server": {
@@ -219,7 +235,7 @@ map. Stdio servers launch a child process:
 
 HTTP servers connect over `sse` by default, or `streamable-http` when requested:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "mcpServers": {
     "my-server": {
@@ -236,18 +252,18 @@ HTTP servers connect over `sse` by default, or `streamable-http` when requested:
 
 Rules:
 
-* `transport` may be `"sse"` or `"streamable-http"`. When omitted, OpenClaw
+- `transport` may be `"sse"` or `"streamable-http"`. When omitted, OpenClaw
   uses `sse`.
-* `type: "http"` is a CLI-native downstream alias. Prefer
+- `type: "http"` is a CLI-native downstream alias. Prefer
   `transport: "streamable-http"` in bundle config; `openclaw mcp set` and
   `openclaw doctor --fix` normalize the alias.
-* Only `http:` and `https:` URLs are supported.
-* `headers` must be a JSON object with string-compatible values.
-* A server entry with `command` is treated as stdio. A server entry with `url`
+- Only `http:` and `https:` URLs are supported.
+- `headers` must be a JSON object with string-compatible values.
+- A server entry with `command` is treated as stdio. A server entry with `url`
   and no command is treated as HTTP.
-* URL credentials, including userinfo and query params, are redacted from tool
+- URL credentials, including userinfo and query params, are redacted from tool
   descriptions and logs.
-* `connectionTimeoutMs` overrides the default 30-second connection timeout for
+- `connectionTimeoutMs` overrides the default 30-second connection timeout for
   stdio and HTTP transports.
 
 For stdio startup safety, unsupported environment-variable entries are ignored
@@ -262,22 +278,22 @@ are expanded against that file's directory. Claude bundle config can also use
 
 OpenClaw registers bundle MCP tools with provider-safe names:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 serverName__toolName
 ```
 
 Naming rules:
 
-* Characters outside `A-Za-z0-9_-` become `-`.
-* Server prefixes must start with a letter; numeric server keys get an `mcp-`
+- Characters outside `A-Za-z0-9_-` become `-`.
+- Server prefixes must start with a letter; numeric server keys get an `mcp-`
   prefix.
-* Empty server names fall back to `mcp`.
-* Server prefixes are capped at 30 characters.
-* Full tool names are capped at 64 characters.
-* Colliding sanitized names get numeric suffixes.
-* Exposed tools are sorted deterministically by safe name so repeated Pi turns
+- Empty server names fall back to `mcp`.
+- Server prefixes are capped at 30 characters.
+- Full tool names are capped at 64 characters.
+- Colliding sanitized names get numeric suffixes.
+- Exposed tools are sorted deterministically by safe name so repeated Pi turns
   keep stable tool blocks.
-* Profile allowlists and denylists can name either individual exposed tools or
+- Profile allowlists and denylists can name either individual exposed tools or
   the `bundle-mcp` plugin key.
 
 ## Embedded Pi settings and LSP defaults
@@ -289,8 +305,8 @@ shell execution behavior.
 
 Sanitized keys:
 
-* `shellPath`
-* `shellCommandPrefix`
+- `shellPath`
+- `shellCommandPrefix`
 
 Enabled Claude bundles can also contribute LSP server config through `.lsp.json`
 or manifest-declared `lspServers`. OpenClaw merges those entries into embedded
@@ -313,11 +329,11 @@ but the local plugin index is missing.
 
 Bundles have a narrower runtime boundary than native plugins:
 
-* OpenClaw does not load arbitrary bundle runtime modules in process.
-* Skill roots, hook-pack paths, settings files, MCP files, and LSP files are
+- OpenClaw does not load arbitrary bundle runtime modules in process.
+- Skill roots, hook-pack paths, settings files, MCP files, and LSP files are
   read with plugin-root boundary checks.
-* OpenClaw-style hook packs must stay inside the plugin root.
-* Supported stdio MCP servers can still launch subprocesses.
+- OpenClaw-style hook packs must stay inside the plugin root.
+- Supported stdio MCP servers can still launch subprocesses.
 
 Treat third-party bundles as trusted content for the mapped features they
 expose, especially MCP servers and hook packs.
@@ -333,8 +349,10 @@ expose, especially MCP servers and hook packs.
 
 ## Related
 
-* [Plugins](/tools/plugin) - install, configure, and troubleshoot plugins
-* [Manage plugins](/plugins/manage-plugins) - common plugin CLI examples
-* [Plugin inventory](/plugins/plugin-inventory) - generated bundled and external plugin list
-* [Plugin manifest](/plugins/manifest) - native plugin manifest schema
-* [Building plugins](/plugins/building-plugins) - create a native plugin
+- [Plugins](/tools/plugin) - install, configure, and troubleshoot plugins
+- [Manage plugins](/plugins/manage-plugins) - common plugin CLI examples
+- [Plugin inventory](/plugins/plugin-inventory) - generated bundled and external plugin list
+- [Plugin manifest](/plugins/manifest) - native plugin manifest schema
+- [Building plugins](/plugins/building-plugins) - create a native plugin
+
+---

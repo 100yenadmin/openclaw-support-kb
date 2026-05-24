@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "d46cd02fc3ef81c18579142ea0aa8d12294bffc59d0f613923e523a26c6d6b00"
+source_hash: "ae8d44cb108482380d5384beb1153297f410c740f1512fb7d3c902d59b81ec61"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -13,37 +13,38 @@ duplicate_index: 1
 # Feishu
 Source: https://docs.openclaw.ai/channels/feishu
 
-
-
 Feishu/Lark is an all-in-one collaboration platform where teams chat, share documents, manage calendars, and get work done together.
 
 **Status:** production-ready for bot DMs + group chats. WebSocket is the default mode; webhook mode is optional.
 
-***
+---
 
 ## Quick start
 
-<Note>
-  Requires OpenClaw 2026.4.25 or above. Run `openclaw --version` to check. Upgrade with `openclaw update`.
-</Note>
+Note
 
-<Steps>
-  <Step title="Run the channel setup wizard">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    openclaw channels login --channel feishu
-    ```
+Requires OpenClaw 2026.4.25 or above. Run `openclaw --version` to check. Upgrade with `openclaw update`.
 
-    Choose manual setup to paste an App ID and App Secret from Feishu Open Platform, or choose QR setup to create a bot automatically. If the domestic Feishu mobile app does not react to the QR code, rerun setup and choose manual setup.
-  </Step>
+Steps
 
-  <Step title="After setup completes, restart the gateway to apply the changes">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    openclaw gateway restart
-    ```
-  </Step>
-</Steps>
 
-***
+Run the channel setup wizard
+
+  ```bash
+  openclaw channels login --channel feishu
+  ```
+  Choose manual setup to paste an App ID and App Secret from Feishu Open Platform, or choose QR setup to create a bot automatically. If the domestic Feishu mobile app does not react to the QR code, rerun setup and choose manual setup.
+
+
+
+After setup completes, restart the gateway to apply the changes
+
+  ```bash
+  openclaw gateway restart
+  ```
+
+
+---
 
 ## Access control
 
@@ -51,16 +52,18 @@ Feishu/Lark is an all-in-one collaboration platform where teams chat, share docu
 
 Configure `dmPolicy` to control who can DM the bot:
 
-* `"pairing"` - unknown users receive a pairing code; approve via CLI
-* `"allowlist"` - only users listed in `allowFrom` can chat (default: bot owner only)
-* `"open"` - allow public DMs only when `allowFrom` includes `"*"`; with restrictive entries, only matching users can chat
-* `"disabled"` - disable all DMs
+- `"pairing"` - unknown users receive a pairing code; approve via CLI
+- `"allowlist"` - only users listed in `allowFrom` can chat (default: bot owner only)
+- `"open"` - allow public DMs only when `allowFrom` includes `"*"`; with restrictive entries, only matching users can chat
+- `"disabled"` - disable all DMs
 
 **Approve a pairing request:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw pairing list feishu
-openclaw pairing approve feishu <CODE>
+openclaw pairing approve feishu
+CODE
+
 ```
 
 ### Group chats
@@ -77,18 +80,18 @@ Default: `allowlist`
 
 **Mention requirement** (`channels.feishu.requireMention`):
 
-* `true` - require @mention (default)
-* `false` - respond without @mention
-* Per-group override: `channels.feishu.groups.<chat_id>.requireMention`
-* Broadcast-only `@all` and `@_all` are not treated as bot mentions. A message that mentions both `@all` and the bot directly still counts as a bot mention.
+- `true` - require @mention (default)
+- `false` - respond without @mention
+- Per-group override: `channels.feishu.groups.<chat_id>.requireMention`
+- Broadcast-only `@all` and `@_all` are not treated as bot mentions. A message that mentions both `@all` and the bot directly still counts as a bot mention.
 
-***
+---
 
 ## Group configuration examples
 
 ### Allow all groups, no @mention required
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -100,7 +103,7 @@ Default: `allowlist`
 
 ### Allow all groups, still require @mention
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -113,7 +116,7 @@ Default: `allowlist`
 
 ### Allow specific groups only
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -127,7 +130,7 @@ Default: `allowlist`
 
 In `allowlist` mode, you can also admit a group by adding an explicit `groups.<chat_id>` entry. Explicit entries do not override `groupPolicy: "disabled"`. Wildcard defaults under `groups.*` configure matching groups, but they do not admit groups by themselves.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -144,7 +147,7 @@ In `allowlist` mode, you can also admit a group by adding an explicit `groups.<c
 
 ### Restrict senders within a group
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -161,9 +164,9 @@ In `allowlist` mode, you can also admit a group by adding an explicit `groups.<c
 }
 ```
 
-***
+---
 
-<a />
+<a id="get-groupuser-ids"></a>
 
 ## Get group/user IDs
 
@@ -171,23 +174,23 @@ In `allowlist` mode, you can also admit a group by adding an explicit `groups.<c
 
 Open the group in Feishu/Lark, click the menu icon in the top-right corner, and go to **Settings**. The group ID (`chat_id`) is listed on the settings page.
 
-<img alt="Get Group ID" />
+![Get Group ID](/images/feishu-get-group-id.png)
 
 ### User IDs (`open_id`, format: `ou_xxx`)
 
 Start the gateway, send a DM to the bot, then check the logs:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw logs --follow
 ```
 
 Look for `open_id` in the log output. You can also check pending pairing requests:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw pairing list feishu
 ```
 
-***
+---
 
 ## Common commands
 
@@ -197,11 +200,11 @@ openclaw pairing list feishu
 | `/reset`  | Reset the current session   |
 | `/model`  | Show or switch the AI model |
 
-<Note>
-  Feishu/Lark does not support native slash-command menus, so send these as plain text messages.
-</Note>
+Note
 
-***
+Feishu/Lark does not support native slash-command menus, so send these as plain text messages.
+
+---
 
 ## Troubleshooting
 
@@ -234,13 +237,13 @@ openclaw pairing list feishu
 2. Update the value in your config
 3. Restart the gateway: `openclaw gateway restart`
 
-***
+---
 
 ## Advanced configuration
 
 ### Multiple accounts
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -276,14 +279,14 @@ per account.
 
 ### Message limits
 
-* `textChunkLimit` - outbound text chunk size (default: `2000` chars)
-* `mediaMaxMb` - media upload/download limit (default: `30` MB)
+- `textChunkLimit` - outbound text chunk size (default: `2000` chars)
+- `mediaMaxMb` - media upload/download limit (default: `30` MB)
 
 ### Streaming
 
 Feishu/Lark supports streaming replies via interactive cards. When enabled, the bot updates the card in real time as it generates text.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -300,10 +303,10 @@ Set `streaming: false` to send the complete reply in one message. `blockStreamin
 
 Reduce the number of Feishu/Lark API calls with two optional flags:
 
-* `typingIndicator` (default `true`): set `false` to skip typing reaction calls
-* `resolveSenderNames` (default `true`): set `false` to skip sender profile lookups
+- `typingIndicator` (default `true`): set `false` to skip typing reaction calls
+- `resolveSenderNames` (default `true`): set `false` to skip sender profile lookups
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     feishu: {
@@ -320,7 +323,7 @@ Feishu/Lark supports ACP for DMs and group thread messages. Feishu/Lark ACP is t
 
 #### Persistent ACP binding
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     list: [
@@ -366,7 +369,7 @@ Feishu/Lark supports ACP for DMs and group thread messages. Feishu/Lark ACP is t
 
 In a Feishu/Lark DM or thread:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /acp spawn codex --thread here
 ```
 
@@ -376,7 +379,7 @@ In a Feishu/Lark DM or thread:
 
 Use `bindings` to route Feishu/Lark DMs or groups to different agents.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     list: [
@@ -406,13 +409,13 @@ Use `bindings` to route Feishu/Lark DMs or groups to different agents.
 
 Routing fields:
 
-* `match.channel`: `"feishu"`
-* `match.peer.kind`: `"direct"` (DM) or `"group"` (group chat)
-* `match.peer.id`: user Open ID (`ou_xxx`) or group ID (`oc_xxx`)
+- `match.channel`: `"feishu"`
+- `match.peer.kind`: `"direct"` (DM) or `"group"` (group chat)
+- `match.peer.id`: user Open ID (`ou_xxx`) or group ID (`oc_xxx`)
 
 See [Get group/user IDs](#get-groupuser-ids) for lookup tips.
 
-***
+---
 
 ## Configuration reference
 
@@ -434,7 +437,7 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.accounts.<id>.domain`            | Per-account domain override                                                      | `feishu`         |
 | `channels.feishu.accounts.<id>.tts`               | Per-account TTS override                                                         | `messages.tts`   |
 | `channels.feishu.dmPolicy`                        | DM policy                                                                        | `allowlist`      |
-| `channels.feishu.allowFrom`                       | DM allowlist (open\_id list)                                                     | \[BotOwnerId]    |
+| `channels.feishu.allowFrom`                       | DM allowlist (open_id list)                                                      | [BotOwnerId]     |
 | `channels.feishu.groupPolicy`                     | Group policy                                                                     | `allowlist`      |
 | `channels.feishu.groupAllowFrom`                  | Group allowlist                                                                  | -                |
 | `channels.feishu.requireMention`                  | Require @mention in groups                                                       | `true`           |
@@ -447,19 +450,19 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.typingIndicator`                 | Send typing reactions                                                            | `true`           |
 | `channels.feishu.resolveSenderNames`              | Resolve sender display names                                                     | `true`           |
 
-***
+---
 
 ## Supported message types
 
 ### Receive
 
-* ✅ Text
-* ✅ Rich text (post)
-* ✅ Images
-* ✅ Files
-* ✅ Audio
-* ✅ Video/media
-* ✅ Stickers
+- ✅ Text
+- ✅ Rich text (post)
+- ✅ Images
+- ✅ Files
+- ✅ Audio
+- ✅ Video/media
+- ✅ Stickers
 
 Inbound Feishu/Lark audio messages are normalized as media placeholders instead
 of raw `file_key` JSON. When `tools.media.audio` is configured, OpenClaw
@@ -472,13 +475,13 @@ resource payload.
 
 ### Send
 
-* ✅ Text
-* ✅ Images
-* ✅ Files
-* ✅ Audio
-* ✅ Video/media
-* ✅ Interactive cards (including streaming updates)
-* ⚠️ Rich text (post-style formatting; doesn't support full Feishu/Lark authoring capabilities)
+- ✅ Text
+- ✅ Images
+- ✅ Files
+- ✅ Audio
+- ✅ Video/media
+- ✅ Interactive cards (including streaming updates)
+- ⚠️ Rich text (post-style formatting; doesn't support full Feishu/Lark authoring capabilities)
 
 Native Feishu/Lark audio bubbles use the Feishu `audio` message type and require
 Ogg/Opus upload media (`file_type: "opus"`). Existing `.opus` and `.ogg` media
@@ -490,9 +493,9 @@ conversion fails, OpenClaw falls back to a file attachment and logs the reason.
 
 ### Threads and replies
 
-* ✅ Inline replies
-* ✅ Thread replies
-* ✅ Media replies stay thread-aware when replying to a thread message
+- ✅ Inline replies
+- ✅ Thread replies
+- ✅ Media replies stay thread-aware when replying to a thread message
 
 For `groupSessionScope: "group_topic"` and `"group_topic_sender"`, native
 Feishu/Lark topic groups use the event `thread_id` (`omt_*`) as the canonical
@@ -501,12 +504,14 @@ hydrates it from Feishu before routing the turn. Normal group replies that
 OpenClaw turns into threads keep using the reply root message ID (`om_*`) so the
 first turn and follow-up turn stay in the same session.
 
-***
+---
 
 ## Related
 
-* [Channels Overview](/channels) - all supported channels
-* [Pairing](/channels/pairing) - DM authentication and pairing flow
-* [Groups](/channels/groups) - group chat behavior and mention gating
-* [Channel Routing](/channels/channel-routing) - session routing for messages
-* [Security](/gateway/security) - access model and hardening
+- [Channels Overview](/channels) - all supported channels
+- [Pairing](/channels/pairing) - DM authentication and pairing flow
+- [Groups](/channels/groups) - group chat behavior and mention gating
+- [Channel Routing](/channels/channel-routing) - session routing for messages
+- [Security](/gateway/security) - access model and hardening
+
+---

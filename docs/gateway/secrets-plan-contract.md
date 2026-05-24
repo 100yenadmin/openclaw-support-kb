@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets apply plan contract"
 source: "https://docs.openclaw.ai/gateway/secrets-plan-contract"
-source_hash: "893788a5ca699f0255d81ffe0d1113b17c55d16be9b30803d82caaeea1476187"
+source_hash: "37f1fce88d941296b197565108970e0cda519bca20147adcf5cb042bfaf1e99d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets-plan-contract.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Secrets apply plan contract
 Source: https://docs.openclaw.ai/gateway/secrets-plan-contract
 
-
-
 This page defines the strict contract enforced by `openclaw secrets apply`.
 
 If a target does not match these rules, apply fails before mutating configuration.
@@ -23,7 +21,7 @@ If a target does not match these rules, apply fails before mutating configuratio
 
 `openclaw secrets apply --from <plan.json>` expects a `targets` array of plan targets:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   version: 1,
   protocolVersion: 1,
@@ -50,38 +48,38 @@ If a target does not match these rules, apply fails before mutating configuratio
 
 Plan targets are accepted for supported credential paths in:
 
-* [SecretRef Credential Surface](/reference/secretref-credential-surface)
+- [SecretRef Credential Surface](/reference/secretref-credential-surface)
 
 ## Target type behavior
 
 General rule:
 
-* `target.type` must be recognized and must match the normalized `target.path` shape.
+- `target.type` must be recognized and must match the normalized `target.path` shape.
 
 Compatibility aliases remain accepted for existing plans:
 
-* `models.providers.apiKey`
-* `skills.entries.apiKey`
-* `channels.googlechat.serviceAccount`
+- `models.providers.apiKey`
+- `skills.entries.apiKey`
+- `channels.googlechat.serviceAccount`
 
 ## Path validation rules
 
 Each target is validated with all of the following:
 
-* `type` must be a recognized target type.
-* `path` must be a non-empty dot path.
-* `pathSegments` can be omitted. If provided, it must normalize to exactly the same path as `path`.
-* Forbidden segments are rejected: `__proto__`, `prototype`, `constructor`.
-* The normalized path must match the registered path shape for the target type.
-* If `providerId` or `accountId` is set, it must match the id encoded in the path.
-* `auth-profiles.json` targets require `agentId`.
-* When creating a new `auth-profiles.json` mapping, include `authProfileProvider`.
+- `type` must be a recognized target type.
+- `path` must be a non-empty dot path.
+- `pathSegments` can be omitted. If provided, it must normalize to exactly the same path as `path`.
+- Forbidden segments are rejected: `__proto__`, `prototype`, `constructor`.
+- The normalized path must match the registered path shape for the target type.
+- If `providerId` or `accountId` is set, it must match the id encoded in the path.
+- `auth-profiles.json` targets require `agentId`.
+- When creating a new `auth-profiles.json` mapping, include `authProfileProvider`.
 
 ## Failure behavior
 
 If a target fails validation, apply exits with an error like:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Invalid plan target path for models.providers.apiKey: models.providers.openai.baseUrl
 ```
 
@@ -89,18 +87,18 @@ No writes are committed for an invalid plan.
 
 ## Exec provider consent behavior
 
-* `--dry-run` skips exec SecretRef checks by default.
-* Plans containing exec SecretRefs/providers are rejected in write mode unless `--allow-exec` is set.
-* When validating/applying exec-containing plans, pass `--allow-exec` in both dry-run and write commands.
+- `--dry-run` skips exec SecretRef checks by default.
+- Plans containing exec SecretRefs/providers are rejected in write mode unless `--allow-exec` is set.
+- When validating/applying exec-containing plans, pass `--allow-exec` in both dry-run and write commands.
 
 ## Runtime and audit scope notes
 
-* Ref-only `auth-profiles.json` entries (`keyRef`/`tokenRef`) are included in runtime resolution and audit coverage.
-* `secrets apply` writes supported `openclaw.json` targets, supported `auth-profiles.json` targets, and optional scrub targets.
+- Ref-only `auth-profiles.json` entries (`keyRef`/`tokenRef`) are included in runtime resolution and audit coverage.
+- `secrets apply` writes supported `openclaw.json` targets, supported `auth-profiles.json` targets, and optional scrub targets.
 
 ## Operator checks
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Validate plan without writes
 openclaw secrets apply --from /tmp/openclaw-secrets-plan.json --dry-run
 
@@ -116,7 +114,9 @@ If apply fails with an invalid target path message, regenerate the plan with `op
 
 ## Related docs
 
-* [Secrets Management](/gateway/secrets)
-* [CLI `secrets`](/cli/secrets)
-* [SecretRef Credential Surface](/reference/secretref-credential-surface)
-* [Configuration Reference](/gateway/configuration-reference)
+- [Secrets Management](/gateway/secrets)
+- [CLI `secrets`](/cli/secrets)
+- [SecretRef Credential Surface](/reference/secretref-credential-surface)
+- [Configuration Reference](/gateway/configuration-reference)
+
+---

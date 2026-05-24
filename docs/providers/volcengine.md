@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
-source_hash: "fa8a6e8cea48b646185a1f6ebf77dcee34a1d92641fafe1244f8a6f0b9a0beae"
+source_hash: "a0c2ddd793cef53f6a89974db65708cfc458e1f295b4eadebf6024ba2dff1138"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/volcengine.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Volcengine (Doubao)
 Source: https://docs.openclaw.ai/providers/volcengine
-
-
 
 The Volcengine provider gives access to Doubao models and third-party models
 hosted on Volcano Engine, with separate endpoints for general and coding
@@ -29,19 +27,24 @@ provider.
 
 ## Getting started
 
-<Steps>
-  <Step title="Set the API key">
+Steps
+
+
+Set the API key
+
     Run interactive onboarding:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --auth-choice volcengine-api-key
     ```
 
     This registers both the general (`volcengine`) and coding (`volcengine-plan`) providers from a single API key.
-  </Step>
 
-  <Step title="Set a default model">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Set a default model
+
+    ```json5
     {
       agents: {
         defaults: {
@@ -50,26 +53,26 @@ provider.
       },
     }
     ```
-  </Step>
 
-  <Step title="Verify the model is available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the model is available
+
+    ```bash
     openclaw models list --provider volcengine
     openclaw models list --provider volcengine-plan
     ```
-  </Step>
-</Steps>
 
-<Tip>
-  For non-interactive setup (CI, scripting), pass the key directly:
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  openclaw onboard --non-interactive \
-    --mode local \
-    --auth-choice volcengine-api-key \
-    --volcengine-api-key "$VOLCANO_ENGINE_API_KEY"
-  ```
-</Tip>
+Tip
+
+For non-interactive setup (CI, scripting), pass the key directly:
+
+```bash
+openclaw onboard --non-interactive \
+  --mode local \
+  --auth-choice volcengine-api-key \
+  --volcengine-api-key "$VOLCANO_ENGINE_API_KEY"
+```
 
 ## Providers and endpoints
 
@@ -78,14 +81,17 @@ provider.
 | `volcengine`      | `ark.cn-beijing.volces.com/api/v3`        | General models |
 | `volcengine-plan` | `ark.cn-beijing.volces.com/api/coding/v3` | Coding models  |
 
-<Note>
-  Both providers are configured from a single API key. Setup registers both automatically.
-</Note>
+Note
+
+Both providers are configured from a single API key. Setup registers both automatically.
 
 ## Built-in catalog
 
-<Tabs>
-  <Tab title="General (volcengine)">
+Tabs
+
+
+General (volcengine)
+
     | Model ref                                    | Name                            | Input       | Context |
     | -------------------------------------------- | ------------------------------- | ----------- | ------- |
     | `volcengine/doubao-seed-1-8-251228`          | Doubao Seed 1.8                 | text, image | 256,000 |
@@ -93,9 +99,10 @@ provider.
     | `volcengine/kimi-k2-5-260127`                | Kimi K2.5                       | text, image | 256,000 |
     | `volcengine/glm-4-7-251222`                  | GLM 4.7                         | text, image | 200,000 |
     | `volcengine/deepseek-v3-2-251201`            | DeepSeek V3.2                   | text, image | 128,000 |
-  </Tab>
 
-  <Tab title="Coding (volcengine-plan)">
+
+Coding (volcengine-plan)
+
     | Model ref                                         | Name                     | Input | Context |
     | ------------------------------------------------- | ------------------------ | ----- | ------- |
     | `volcengine-plan/ark-code-latest`                 | Ark Coding Plan          | text  | 256,000 |
@@ -104,8 +111,7 @@ provider.
     | `volcengine-plan/kimi-k2-thinking`                | Kimi K2 Thinking         | text  | 256,000 |
     | `volcengine-plan/kimi-k2.5`                       | Kimi K2.5 Coding         | text  | 256,000 |
     | `volcengine-plan/doubao-seed-code-preview-251028` | Doubao Seed Code Preview | text  | 256,000 |
-  </Tab>
-</Tabs>
+
 
 ## Text-to-speech
 
@@ -113,14 +119,14 @@ Volcengine TTS uses the BytePlus Seed Speech HTTP API and is configured
 separately from the OpenAI-compatible Doubao model API key. In the BytePlus
 console, open Seed Speech > Settings > API Keys and copy the API key, then set:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export VOLCENGINE_TTS_API_KEY="byteplus_seed_speech_api_key"
 export VOLCENGINE_TTS_RESOURCE_ID="seed-tts-1.0"
 ```
 
 Then enable it in `openclaw.json`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   messages: {
     tts: {
@@ -146,15 +152,15 @@ The default resource id is `seed-tts-1.0` because that is what BytePlus grants
 to newly created Seed Speech API keys in the default project. If your project
 has TTS 2.0 entitlement, set `VOLCENGINE_TTS_RESOURCE_ID=seed-tts-2.0`.
 
-<Warning>
-  `VOLCANO_ENGINE_API_KEY` is for the ModelArk/Doubao model endpoints and is not a
-  Seed Speech API key. TTS needs a Seed Speech API key from the BytePlus Speech
-  Console, or a legacy Speech Console AppID/token pair.
-</Warning>
+Warning
+
+`VOLCANO_ENGINE_API_KEY` is for the ModelArk/Doubao model endpoints and is not a
+Seed Speech API key. TTS needs a Seed Speech API key from the BytePlus Speech
+Console, or a legacy Speech Console AppID/token pair.
 
 Legacy AppID/token auth remains supported for older Speech Console applications:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export VOLCENGINE_TTS_APPID="speech_app_id"
 export VOLCENGINE_TTS_TOKEN="speech_access_token"
 export VOLCENGINE_TTS_CLUSTER="volcano_tts"
@@ -162,50 +168,62 @@ export VOLCENGINE_TTS_CLUSTER="volcano_tts"
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Default model after onboarding">
+AccordionGroup
+
+
+Default model after onboarding
+
     `openclaw onboard --auth-choice volcengine-api-key` currently sets
     `volcengine-plan/ark-code-latest` as the default model while also registering
     the general `volcengine` catalog.
-  </Accordion>
 
-  <Accordion title="Model picker fallback behavior">
+
+
+Model picker fallback behavior
+
     During onboarding/configure model selection, the Volcengine auth choice prefers
     both `volcengine/*` and `volcengine-plan/*` rows. If those models are not
     loaded yet, OpenClaw falls back to the unfiltered catalog instead of showing an
     empty provider-scoped picker.
-  </Accordion>
 
-  <Accordion title="Environment variables for daemon processes">
+
+
+Environment variables for daemon processes
+
     If the Gateway runs as a daemon (launchd/systemd), make sure model and TTS
     env vars such as `VOLCANO_ENGINE_API_KEY`, `VOLCENGINE_TTS_API_KEY`,
     `BYTEPLUS_SEED_SPEECH_API_KEY`, `VOLCENGINE_TTS_APPID`, and
     `VOLCENGINE_TTS_TOKEN` are available to that process (for example, in
     `~/.openclaw/.env` or via `env.shellEnv`).
-  </Accordion>
-</AccordionGroup>
 
-<Warning>
-  When running OpenClaw as a background service, environment variables set in your
-  interactive shell are not automatically inherited. See the daemon note above.
-</Warning>
+
+Warning
+
+When running OpenClaw as a background service, environment variables set in your
+interactive shell are not automatically inherited. See the daemon note above.
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config reference for agents, models, and providers.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Common issues and debugging steps.
-  </Card>
 
-  <Card title="FAQ" href="/help/faq" icon="circle-question">
+
+FAQ
+
     Frequently asked questions about OpenClaw setup.
-  </Card>
-</CardGroup>
+
+---

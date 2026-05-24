@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "bb50d067fc6a34255d46254ce33743ad9c78570a4f3e5c8649527549c18012d8"
+source_hash: "15a201d23f6dc9a3824494160aa6fb382f865276e875cc1505b91096c6f4e07d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # QQ bot
 Source: https://docs.openclaw.ai/channels/qqbot
-
-
 
 QQ Bot connects to OpenClaw via the official QQ Bot API (WebSocket gateway). The
 plugin supports C2C private chat, group @messages, and guild channel messages with
@@ -26,7 +24,7 @@ media are supported. Reactions and threads are not supported.
 
 Install QQ Bot before setup:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/qqbot
 ```
 
@@ -42,7 +40,7 @@ openclaw plugins install @openclaw/qqbot
 
 4. Add the channel:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels add --channel qqbot --token "AppID:AppSecret"
 ```
 
@@ -50,7 +48,7 @@ openclaw channels add --channel qqbot --token "AppID:AppSecret"
 
 Interactive setup paths:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels add
 openclaw configure --section channels
 ```
@@ -59,7 +57,7 @@ openclaw configure --section channels
 
 Minimal config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -73,12 +71,12 @@ Minimal config:
 
 Default-account env vars:
 
-* `QQBOT_APP_ID`
-* `QQBOT_CLIENT_SECRET`
+- `QQBOT_APP_ID`
+- `QQBOT_CLIENT_SECRET`
 
 File-backed AppSecret:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -92,7 +90,7 @@ File-backed AppSecret:
 
 Env SecretRef AppSecret:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -106,18 +104,18 @@ Env SecretRef AppSecret:
 
 Notes:
 
-* Env fallback applies to the default QQ Bot account only.
-* `openclaw channels add --channel qqbot --token-file ...` provides the
+- Env fallback applies to the default QQ Bot account only.
+- `openclaw channels add --channel qqbot --token-file ...` provides the
   AppSecret only; the AppID must already be set in config or `QQBOT_APP_ID`.
-* `clientSecret` also accepts SecretRef input, not just a plaintext string.
-* Legacy `secretref:/...` marker strings are not valid `clientSecret` values;
+- `clientSecret` also accepts SecretRef input, not just a plaintext string.
+- Legacy `secretref:/...` marker strings are not valid `clientSecret` values;
   use structured SecretRef objects like the example above.
 
 ### Multi-account setup
 
 Run multiple QQ bots under a single OpenClaw instance:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -141,7 +139,7 @@ token cache (isolated by `appId`).
 
 Add a second bot via CLI:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels add --channel qqbot --account bot2 --token "222222222:secret-of-bot-2"
 ```
 
@@ -150,7 +148,7 @@ openclaw channels add --channel qqbot --account bot2 --token "222222222:secret-o
 QQ Bot group chat support uses QQ group OpenIDs, not display names. Add the bot
 to a group, then mention it or configure the group to run without a mention.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -179,12 +177,12 @@ to a group, then mention it or configure the group to run without a mention.
 `groups.GROUP_OPENID` entry overrides those defaults for one group. Group
 settings include:
 
-* `requireMention`: require an @mention before the bot replies. Default: `true`.
-* `ignoreOtherMentions`: drop messages that mention someone else but not the bot.
-* `historyLimit`: keep recent non-mention group messages as context for the next mentioned turn. Set `0` to disable.
-* `toolPolicy`: `full`, `restricted`, or `none` for group-scoped tools.
-* `name`: friendly label used in logs and group context.
-* `prompt`: per-group behavior prompt appended to the agent context.
+- `requireMention`: require an @mention before the bot replies. Default: `true`.
+- `ignoreOtherMentions`: drop messages that mention someone else but not the bot.
+- `historyLimit`: keep recent non-mention group messages as context for the next mentioned turn. Set `0` to disable.
+- `toolPolicy`: `full`, `restricted`, or `none` for group-scoped tools.
+- `name`: friendly label used in logs and group context.
+- `prompt`: per-group behavior prompt appended to the agent context.
 
 Activation modes are `mention` and `always`. `requireMention: true` maps to
 `mention`; `requireMention: false` maps to `always`. A session-level activation
@@ -203,7 +201,7 @@ STT and TTS support two-level configuration with priority fallback:
 | STT     | `channels.qqbot.stt`                                     | `tools.media.audio.models[0]` |
 | TTS     | `channels.qqbot.tts`, `channels.qqbot.accounts.<id>.tts` | `messages.tts`                |
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     qqbot: {
@@ -242,9 +240,9 @@ configured.
 Outbound audio upload/transcode behavior can also be tuned with
 `channels.qqbot.audioFormatPolicy`:
 
-* `sttDirectFormats`
-* `uploadDirectFormats`
-* `transcodeEnabled`
+- `sttDirectFormats`
+- `uploadDirectFormats`
+- `transcodeEnabled`
 
 ## Target formats
 
@@ -279,11 +277,11 @@ Admin commands (`/bot-me`, `/bot-upgrade`, `/bot-logs`, `/bot-clear-storage`, `/
 
 QQ Bot ships as a self-contained engine inside the plugin:
 
-* Each account owns an isolated resource stack (WebSocket connection, API client, token cache, media storage root) keyed by `appId`. Accounts never share inbound/outbound state.
-* The multi-account logger tags log lines with the owning account so diagnostics stay separable when you run several bots under one gateway.
-* Inbound, outbound, and gateway bridge paths share a single media payload root under `~/.openclaw/media`, so uploads, downloads, and transcode caches land under one guarded directory instead of a per-subsystem tree.
-* Rich media delivery goes through one `sendMedia` path for C2C and group targets. Local files and buffers above the large-file threshold use QQ's chunked upload endpoints, while smaller payloads use the one-shot media API.
-* Credentials can be backed up and restored as part of standard OpenClaw credential snapshots; the engine re-attaches each account's resource stack on restore without requiring a fresh QR-code pair.
+- Each account owns an isolated resource stack (WebSocket connection, API client, token cache, media storage root) keyed by `appId`. Accounts never share inbound/outbound state.
+- The multi-account logger tags log lines with the owning account so diagnostics stay separable when you run several bots under one gateway.
+- Inbound, outbound, and gateway bridge paths share a single media payload root under `~/.openclaw/media`, so uploads, downloads, and transcode caches land under one guarded directory instead of a per-subsystem tree.
+- Rich media delivery goes through one `sendMedia` path for C2C and group targets. Local files and buffers above the large-file threshold use QQ's chunked upload endpoints, while smaller payloads use the one-shot media API.
+- Credentials can be backed up and restored as part of standard OpenClaw credential snapshots; the engine re-attaches each account's resource stack on restore without requiring a fresh QR-code pair.
 
 ## QR-code onboarding
 
@@ -297,21 +295,23 @@ Approval prompts generated by the bot itself (for example, "allow this action?" 
 
 ## Troubleshooting
 
-* **Bot replies "gone to Mars":** credentials not configured or Gateway not started.
-* **No inbound messages:** verify `appId` and `clientSecret` are correct, and the
+- **Bot replies "gone to Mars":** credentials not configured or Gateway not started.
+- **No inbound messages:** verify `appId` and `clientSecret` are correct, and the
   bot is enabled on the QQ Open Platform.
-* **Repeated self-replies:** OpenClaw records QQ outbound ref indexes as
+- **Repeated self-replies:** OpenClaw records QQ outbound ref indexes as
   bot-authored and ignores inbound events whose current `msgIdx` matches that
   same bot account. This prevents platform echo loops while still allowing users
   to quote or reply to previous bot messages.
-* **Setup with `--token-file` still shows unconfigured:** `--token-file` only sets
+- **Setup with `--token-file` still shows unconfigured:** `--token-file` only sets
   the AppSecret. You still need `appId` in config or `QQBOT_APP_ID`.
-* **Proactive messages not arriving:** QQ may intercept bot-initiated messages if
+- **Proactive messages not arriving:** QQ may intercept bot-initiated messages if
   the user hasn't interacted recently.
-* **Voice not transcribed:** ensure STT is configured and the provider is reachable.
+- **Voice not transcribed:** ensure STT is configured and the provider is reachable.
 
 ## Related
 
-* [Pairing](/channels/pairing)
-* [Groups](/channels/groups)
-* [Channel troubleshooting](/channels/troubleshooting)
+- [Pairing](/channels/pairing)
+- [Groups](/channels/groups)
+- [Channel troubleshooting](/channels/troubleshooting)
+
+---

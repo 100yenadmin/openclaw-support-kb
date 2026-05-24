@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Firecrawl"
 source: "https://docs.openclaw.ai/tools/firecrawl"
-source_hash: "444c6372cdd197d478b39084d694296883c3b21233c3a20ccc6b659c3c0bcddb"
+source_hash: "269f06ab3c59509772287df0d0d941f19f33f004a033f240764f7655b5acde98"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/firecrawl.md"
@@ -13,13 +13,11 @@ duplicate_index: 1
 # Firecrawl
 Source: https://docs.openclaw.ai/tools/firecrawl
 
-
-
 OpenClaw can use **Firecrawl** in three ways:
 
-* as the `web_search` provider
-* as explicit plugin tools: `firecrawl_search` and `firecrawl_scrape`
-* as a fallback extractor for `web_fetch`
+- as the `web_search` provider
+- as explicit plugin tools: `firecrawl_search` and `firecrawl_scrape`
+- as a fallback extractor for `web_fetch`
 
 It is a hosted extraction/search service that supports bot circumvention and caching,
 which helps with JS-heavy sites or pages that block plain HTTP fetches.
@@ -31,7 +29,7 @@ which helps with JS-heavy sites or pages that block plain HTTP fetches.
 
 ## Configure Firecrawl search
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     web: {
@@ -58,15 +56,15 @@ which helps with JS-heavy sites or pages that block plain HTTP fetches.
 
 Notes:
 
-* Choosing Firecrawl in onboarding or `openclaw configure --section web` enables the bundled Firecrawl plugin automatically.
-* `web_search` with Firecrawl supports `query` and `count`.
-* For Firecrawl-specific controls like `sources`, `categories`, or result scraping, use `firecrawl_search`.
-* `baseUrl` defaults to hosted Firecrawl at `https://api.firecrawl.dev`. Self-hosted overrides are allowed only for private/internal endpoints; HTTP is accepted only for those private targets.
-* `FIRECRAWL_BASE_URL` is the shared env fallback for Firecrawl search and scrape base URLs.
+- Choosing Firecrawl in onboarding or `openclaw configure --section web` enables the bundled Firecrawl plugin automatically.
+- `web_search` with Firecrawl supports `query` and `count`.
+- For Firecrawl-specific controls like `sources`, `categories`, or result scraping, use `firecrawl_search`.
+- `baseUrl` defaults to hosted Firecrawl at `https://api.firecrawl.dev`. Self-hosted overrides are allowed only for private/internal endpoints; HTTP is accepted only for those private targets.
+- `FIRECRAWL_BASE_URL` is the shared env fallback for Firecrawl search and scrape base URLs.
 
-## Configure Firecrawl scrape + web\_fetch fallback
+## Configure Firecrawl scrape + web_fetch fallback
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -89,11 +87,11 @@ Notes:
 
 Notes:
 
-* Firecrawl fallback attempts run only when an API key is available (`plugins.entries.firecrawl.config.webFetch.apiKey` or `FIRECRAWL_API_KEY`).
-* `maxAgeMs` controls how old cached results can be (ms). Default is 2 days.
-* Legacy `tools.web.fetch.firecrawl.*` config is auto-migrated by `openclaw doctor --fix`.
-* Firecrawl scrape/base URL overrides follow the same hosted/private rule as search: public hosted traffic uses `https://api.firecrawl.dev`; self-hosted overrides must resolve to private/internal endpoints.
-* `firecrawl_scrape` rejects obvious private, loopback, metadata, and non-HTTP(S) target URLs before forwarding them to Firecrawl, matching the `web_fetch` target-safety contract for explicit Firecrawl scrape calls.
+- Firecrawl fallback attempts run only when an API key is available (`plugins.entries.firecrawl.config.webFetch.apiKey` or `FIRECRAWL_API_KEY`).
+- `maxAgeMs` controls how old cached results can be (ms). Default is 2 days.
+- Legacy `tools.web.fetch.firecrawl.*` config is auto-migrated by `openclaw doctor --fix`.
+- Firecrawl scrape/base URL overrides follow the same hosted/private rule as search: public hosted traffic uses `https://api.firecrawl.dev`; self-hosted overrides must resolve to private/internal endpoints.
+- `firecrawl_scrape` rejects obvious private, loopback, metadata, and non-HTTP(S) target URLs before forwarding them to Firecrawl, matching the `web_fetch` target-safety contract for explicit Firecrawl scrape calls.
 
 `firecrawl_scrape` reuses the same `plugins.entries.firecrawl.config.webFetch.*` settings and env vars.
 
@@ -114,12 +112,12 @@ Use this when you want Firecrawl-specific search controls instead of generic `we
 
 Core parameters:
 
-* `query`
-* `count`
-* `sources`
-* `categories`
-* `scrapeResults`
-* `timeoutSeconds`
+- `query`
+- `count`
+- `sources`
+- `categories`
+- `scrapeResults`
+- `timeoutSeconds`
 
 ### `firecrawl_scrape`
 
@@ -127,14 +125,14 @@ Use this for JS-heavy or bot-protected pages where plain `web_fetch` is weak.
 
 Core parameters:
 
-* `url`
-* `extractMode`
-* `maxChars`
-* `onlyMainContent`
-* `maxAgeMs`
-* `proxy`
-* `storeInCache`
-* `timeoutSeconds`
+- `url`
+- `extractMode`
+- `maxChars`
+- `onlyMainContent`
+- `maxAgeMs`
+- `proxy`
+- `storeInCache`
+- `timeoutSeconds`
 
 ## Stealth / bot circumvention
 
@@ -157,6 +155,8 @@ Today the bundled provider is Firecrawl.
 
 ## Related
 
-* [Web Search overview](/tools/web) -- all providers and auto-detection
-* [Web Fetch](/tools/web-fetch) -- web\_fetch tool with Firecrawl fallback
-* [Tavily](/tools/tavily) -- search + extract tools
+- [Web Search overview](/tools/web) -- all providers and auto-detection
+- [Web Fetch](/tools/web-fetch) -- web_fetch tool with Firecrawl fallback
+- [Tavily](/tools/tavily) -- search + extract tools
+
+---

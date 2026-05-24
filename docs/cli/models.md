@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "60d2104cda67093fa76e8e8d2aaec942c5cbf1e5415536105c0ec1a7b1dd5f56"
+source_hash: "e9debe9c89c4eac142f38527bd3764e060b6fc4011d15cadbac4a29715dedf28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/models.md"
@@ -13,21 +13,19 @@ duplicate_index: 1
 # Models
 Source: https://docs.openclaw.ai/cli/models
 
-
-
 # `openclaw models`
 
 Model discovery, scanning, and configuration (default model, fallbacks, auth profiles).
 
 Related:
 
-* Providers + models: [Models](/providers/models)
-* Model selection concepts + `/models` slash command: [Models concept](/concepts/models)
-* Provider auth setup: [Getting started](/start/getting-started)
+- Providers + models: [Models](/providers/models)
+- Model selection concepts + `/models` slash command: [Models concept](/concepts/models)
+- Provider auth setup: [Getting started](/start/getting-started)
 
 ## Common commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models status
 openclaw models list
 openclaw models set <model-or-alias>
@@ -57,44 +55,44 @@ confirm whether an agent has a usable `openai-codex` auth profile for
 
 Notes:
 
-* `models set <model-or-alias>` accepts `provider/model` or an alias.
-* `models list` is read-only: it reads config, auth profiles, existing catalog
+- `models set <model-or-alias>` accepts `provider/model` or an alias.
+- `models list` is read-only: it reads config, auth profiles, existing catalog
   state, and provider-owned catalog rows, but it does not rewrite
   `models.json`.
-* The `Auth` column is provider-level and read-only. It is computed from local
+- The `Auth` column is provider-level and read-only. It is computed from local
   auth profile metadata, env markers, configured provider keys, local-provider
   markers, AWS Bedrock env/profile markers, and plugin synthetic-auth metadata;
   it does not load provider runtime, read keychain secrets, call provider
   APIs, or prove exact per-model execution readiness.
-* `models list --all --provider <id>` can include provider-owned static catalog
+- `models list --all --provider <id>` can include provider-owned static catalog
   rows from plugin manifests or bundled provider catalog metadata even when you
   have not authenticated with that provider yet. Those rows still show as
   unavailable until matching auth is configured.
-* `models list` keeps the control plane responsive while provider catalog
+- `models list` keeps the control plane responsive while provider catalog
   discovery is slow. The default and configured views fall back to configured or
   synthetic model rows after a short wait and let discovery finish in the
   background. Use `--all` when you need the exact full discovered catalog and
   are willing to wait for provider discovery.
-* Broad `models list --all` merges manifest catalog rows over registry rows
+- Broad `models list --all` merges manifest catalog rows over registry rows
   without loading provider runtime supplement hooks. Provider-filtered manifest
   fast paths use only providers marked `static`; providers marked `refreshable`
   stay registry/cache-backed and append manifest rows as supplements, while
   providers marked `runtime` stay on registry/runtime discovery.
-* `models list` keeps native model metadata and runtime caps distinct. In table
+- `models list` keeps native model metadata and runtime caps distinct. In table
   output, `Ctx` shows `contextTokens/contextWindow` when an effective runtime
   cap differs from the native context window; JSON rows include `contextTokens`
   when a provider exposes that cap.
-* `models list --provider <id>` filters by provider id, such as `moonshot` or
+- `models list --provider <id>` filters by provider id, such as `moonshot` or
   `openai-codex`. It does not accept display labels from interactive provider
   pickers, such as `Moonshot AI`.
-* Model refs are parsed by splitting on the **first** `/`. If the model ID includes `/` (OpenRouter-style), include the provider prefix (example: `openrouter/moonshotai/kimi-k2`).
-* If you omit the provider, OpenClaw resolves the input as an alias first, then
+- Model refs are parsed by splitting on the **first** `/`. If the model ID includes `/` (OpenRouter-style), include the provider prefix (example: `openrouter/moonshotai/kimi-k2`).
+- If you omit the provider, OpenClaw resolves the input as an alias first, then
   as a unique configured-provider match for that exact model id, and only then
   falls back to the configured default provider with a deprecation warning.
   If that provider no longer exposes the configured default model, OpenClaw
   falls back to the first configured provider/model instead of surfacing a
   stale removed-provider default.
-* `models status` may show `marker(<value>)` in auth output for non-secret placeholders (for example `OPENAI_API_KEY`, `secretref-managed`, `minimax-oauth`, `oauth:chutes`, `ollama-local`) instead of masking them as secrets.
+- `models status` may show `marker(<value>)` in auth output for non-secret placeholders (for example `OPENAI_API_KEY`, `secretref-managed`, `minimax-oauth`, `oauth:chutes`, `ollama-local`) instead of masking them as secrets.
 
 ### Models scan
 
@@ -109,18 +107,18 @@ probes and inference.
 
 Options:
 
-* `--no-probe` (metadata only; no config/secrets lookup)
-* `--min-params <b>`
-* `--max-age-days <days>`
-* `--provider <name>`
-* `--max-candidates <n>`
-* `--timeout <ms>` (catalog request and per-probe timeout)
-* `--concurrency <n>`
-* `--yes`
-* `--no-input`
-* `--set-default`
-* `--set-image`
-* `--json`
+- `--no-probe` (metadata only; no config/secrets lookup)
+- `--min-params <b>`
+- `--max-age-days <days>`
+- `--provider <name>`
+- `--max-candidates <n>`
+- `--timeout <ms>` (catalog request and per-probe timeout)
+- `--concurrency <n>`
+- `--yes`
+- `--no-input`
+- `--set-default`
+- `--set-image`
+- `--json`
 
 `--set-default` and `--set-image` require live probes; metadata-only scan
 results are informational and are not applied to config.
@@ -129,16 +127,16 @@ results are informational and are not applied to config.
 
 Options:
 
-* `--json`
-* `--plain`
-* `--check` (exit 1=expired/missing, 2=expiring)
-* `--probe` (live probe of configured auth profiles)
-* `--probe-provider <name>` (probe one provider)
-* `--probe-profile <id>` (repeat or comma-separated profile ids)
-* `--probe-timeout <ms>`
-* `--probe-concurrency <n>`
-* `--probe-max-tokens <n>`
-* `--agent <id>` (configured agent id; overrides `OPENCLAW_AGENT_DIR`/`PI_CODING_AGENT_DIR`)
+- `--json`
+- `--plain`
+- `--check` (exit 1=expired/missing, 2=expiring)
+- `--probe` (live probe of configured auth profiles)
+- `--probe-provider <name>` (probe one provider)
+- `--probe-profile <id>` (repeat or comma-separated profile ids)
+- `--probe-timeout <ms>`
+- `--probe-concurrency <n>`
+- `--probe-max-tokens <n>`
+- `--agent <id>` (configured agent id; overrides `OPENCLAW_AGENT_DIR`/`PI_CODING_AGENT_DIR`)
 
 `--json` keeps stdout reserved for the JSON payload. Auth-profile, provider,
 and startup diagnostics are routed to stderr so scripts can pipe stdout directly
@@ -146,35 +144,35 @@ into tools such as `jq`.
 
 Probe status buckets:
 
-* `ok`
-* `auth`
-* `rate_limit`
-* `billing`
-* `timeout`
-* `format`
-* `unknown`
-* `no_model`
+- `ok`
+- `auth`
+- `rate_limit`
+- `billing`
+- `timeout`
+- `format`
+- `unknown`
+- `no_model`
 
 Probe detail/reason-code cases to expect:
 
-* `excluded_by_auth_order`: a stored profile exists, but explicit
+- `excluded_by_auth_order`: a stored profile exists, but explicit
   `auth.order.<provider>` omitted it, so probe reports the exclusion instead of
   trying it.
-* `missing_credential`, `invalid_expires`, `expired`, `unresolved_ref`:
+- `missing_credential`, `invalid_expires`, `expired`, `unresolved_ref`:
   profile is present but not eligible/resolvable.
-* `no_model`: provider auth exists, but OpenClaw could not resolve a probeable
+- `no_model`: provider auth exists, but OpenClaw could not resolve a probeable
   model candidate for that provider.
 
 ## Aliases + fallbacks
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models aliases list
 openclaw models fallbacks list
 ```
 
 ## Auth profiles
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models auth add
 openclaw models auth list [--provider <id>] [--json]
 openclaw models auth login --provider <id>
@@ -204,7 +202,7 @@ usually as a backup for Codex subscription limits. The legacy
 
 Examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models auth login --provider openai --set-default
 openclaw models auth login --provider openai --method api-key
 openclaw models auth list --provider openai
@@ -212,22 +210,24 @@ openclaw models auth list --provider openai
 
 Notes:
 
-* `setup-token` and `paste-token` remain generic token commands for providers
+- `setup-token` and `paste-token` remain generic token commands for providers
   that expose token auth methods.
-* `setup-token` requires an interactive TTY and runs the provider's token-auth
+- `setup-token` requires an interactive TTY and runs the provider's token-auth
   method (defaulting to that provider's `setup-token` method when it exposes
   one).
-* `paste-token` accepts a token string generated elsewhere or from automation.
-* `paste-token` requires `--provider`, prompts for the token value, and writes
+- `paste-token` accepts a token string generated elsewhere or from automation.
+- `paste-token` requires `--provider`, prompts for the token value, and writes
   it to the default profile id `<provider>:manual` unless you pass
   `--profile-id`.
-* `paste-token --expires-in <duration>` stores an absolute token expiry from a
+- `paste-token --expires-in <duration>` stores an absolute token expiry from a
   relative duration such as `365d` or `12h`.
-* Anthropic note: Anthropic staff told us OpenClaw-style Claude CLI usage is allowed again, so OpenClaw treats Claude CLI reuse and `claude -p` usage as sanctioned for this integration unless Anthropic publishes a new policy.
-* Anthropic `setup-token` / `paste-token` remain available as a supported OpenClaw token path, but OpenClaw now prefers Claude CLI reuse and `claude -p` when available.
+- Anthropic note: Anthropic staff told us OpenClaw-style Claude CLI usage is allowed again, so OpenClaw treats Claude CLI reuse and `claude -p` usage as sanctioned for this integration unless Anthropic publishes a new policy.
+- Anthropic `setup-token` / `paste-token` remain available as a supported OpenClaw token path, but OpenClaw now prefers Claude CLI reuse and `claude -p` when available.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Model selection](/concepts/model-providers)
-* [Model failover](/concepts/model-failover)
+- [CLI reference](/cli)
+- [Model selection](/concepts/model-providers)
+- [Model failover](/concepts/model-failover)
+
+---

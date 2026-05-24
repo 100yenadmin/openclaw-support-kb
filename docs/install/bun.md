@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bun (experimental)"
 source: "https://docs.openclaw.ai/install/bun"
-source_hash: "25b41800664d732d5e53e13e6910b286931edf072ab3561a10592bb99dd7b995"
+source_hash: "57821134e4900bccdf51ff8a2ce316e57a84338002f01dd2ccda8078588cd85c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/bun.md"
@@ -13,47 +13,49 @@ duplicate_index: 1
 # Bun (experimental)
 Source: https://docs.openclaw.ai/install/bun
 
+Warning
 
-
-<Warning>
-  Bun is **not recommended for gateway runtime** (known issues with WhatsApp and Telegram). Use Node for production.
-</Warning>
+Bun is **not recommended for gateway runtime** (known issues with WhatsApp and Telegram). Use Node for production.
 
 Bun is an optional local runtime for running TypeScript directly (`bun run ...`, `bun --watch ...`). The default package manager remains `pnpm`, which is fully supported and used by docs tooling. Bun cannot use `pnpm-lock.yaml` and will ignore it.
 
 ## Install
 
-<Steps>
-  <Step title="Install dependencies">
-    ```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Install dependencies
+
+    ```sh
     bun install
     ```
 
     `bun.lock` / `bun.lockb` are gitignored, so there is no repo churn. To skip lockfile writes entirely:
 
-    ```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```sh
     bun install --no-save
     ```
-  </Step>
 
-  <Step title="Build and test">
-    ```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Build and test
+
+    ```sh
     bun run build
     bun run vitest run
     ```
-  </Step>
-</Steps>
+
 
 ## Lifecycle scripts
 
 Bun blocks dependency lifecycle scripts unless explicitly trusted. For this repo, the commonly blocked scripts are not required:
 
-* `baileys` `preinstall` -- checks Node major >= 20 (OpenClaw defaults to Node 24 and still supports Node 22 LTS, currently `22.19+`)
-* `protobufjs` `postinstall` -- emits warnings about incompatible version schemes (no build artifacts)
+- `baileys` `preinstall` -- checks Node major >= 20 (OpenClaw defaults to Node 24 and still supports Node 22 LTS, currently `22.19+`)
+- `protobufjs` `postinstall` -- emits warnings about incompatible version schemes (no build artifacts)
 
 If you hit a runtime issue that requires these scripts, trust them explicitly:
 
-```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```sh
 bun pm trust baileys protobufjs
 ```
 
@@ -63,6 +65,8 @@ Some scripts still hardcode pnpm (for example `docs:build`, `ui:*`, `protocol:ch
 
 ## Related
 
-* [Install overview](/install)
-* [Node.js](/install/node)
-* [Updating](/install/updating)
+- [Install overview](/install)
+- [Node.js](/install/node)
+- [Updating](/install/updating)
+
+---

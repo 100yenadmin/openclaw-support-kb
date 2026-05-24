@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skill workshop plugin"
 source: "https://docs.openclaw.ai/plugins/skill-workshop"
-source_hash: "2d2e62d9915348dd70691a635257c3f89e5726755188836f71f57801d10f22dd"
+source_hash: "f651a773de2c4b310671724f59be60463eae63c52e7ffab5345a84d90f8ca02c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/skill-workshop.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Skill workshop plugin
 Source: https://docs.openclaw.ai/plugins/skill-workshop
 
-
-
 Skill Workshop is **experimental**. It is disabled by default, its capture
 heuristics and reviewer prompts may change between releases, and automatic
 writes should be used only in trusted workspaces after reviewing pending-mode
@@ -24,32 +22,32 @@ Skill Workshop is procedural memory for workspace skills. It lets an agent turn
 reusable workflows, user corrections, hard-won fixes, and recurring pitfalls
 into `SKILL.md` files under:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 <workspace>/skills/<skill-name>/SKILL.md
 ```
 
 This is different from long-term memory:
 
-* **Memory** stores facts, preferences, entities, and past context.
-* **Skills** store reusable procedures the agent should follow on future tasks.
-* **Skill Workshop** is the bridge from a useful turn to a durable workspace
+- **Memory** stores facts, preferences, entities, and past context.
+- **Skills** store reusable procedures the agent should follow on future tasks.
+- **Skill Workshop** is the bridge from a useful turn to a durable workspace
   skill, with safety checks and optional approval.
 
 Skill Workshop is useful when the agent learns a procedure such as:
 
-* how to validate externally sourced animated GIF assets
-* how to replace screenshot assets and verify dimensions
-* how to run a repo-specific QA scenario
-* how to debug a recurring provider failure
-* how to repair a stale local workflow note
+- how to validate externally sourced animated GIF assets
+- how to replace screenshot assets and verify dimensions
+- how to run a repo-specific QA scenario
+- how to debug a recurring provider failure
+- how to repair a stale local workflow note
 
 It is not intended for:
 
-* facts like "the user likes blue"
-* broad autobiographical memory
-* raw transcript archiving
-* secrets, credentials, or hidden prompt text
-* one-off instructions that will not repeat
+- facts like "the user likes blue"
+- broad autobiographical memory
+- raw transcript archiving
+- secrets, credentials, or hidden prompt text
+- one-off instructions that will not repeat
 
 ## Default state
 
@@ -62,17 +60,17 @@ already been selected and loaded.
 
 Experimental means:
 
-* the plugin is supported enough for opt-in testing and dogfooding
-* proposal storage, reviewer thresholds, and capture heuristics can evolve
-* pending approval is the recommended starting mode
-* auto apply is for trusted personal/workspace setups, not shared or hostile
+- the plugin is supported enough for opt-in testing and dogfooding
+- proposal storage, reviewer thresholds, and capture heuristics can evolve
+- pending approval is the recommended starting mode
+- auto apply is for trusted personal/workspace setups, not shared or hostile
   input-heavy environments
 
 ## Enable
 
 Minimal safe config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -91,14 +89,14 @@ Minimal safe config:
 
 With this config:
 
-* the `skill_workshop` tool is available
-* explicit reusable corrections are queued as pending proposals
-* threshold-based reviewer passes can propose skill updates
-* no skill file is written until a pending proposal is applied
+- the `skill_workshop` tool is available
+- explicit reusable corrections are queued as pending proposals
+- threshold-based reviewer passes can propose skill updates
+- no skill file is written until a pending proposal is applied
 
 Use automatic writes only in trusted workspaces:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -134,7 +132,7 @@ does not apply proposals with critical findings.
 
 Recommended profiles:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // Conservative: explicit tool use only, no automatic capture.
 {
   autoCapture: false,
@@ -143,7 +141,7 @@ Recommended profiles:
 }
 ```
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // Review-first: capture automatically, but require approval.
 {
   autoCapture: true,
@@ -152,7 +150,7 @@ Recommended profiles:
 }
 ```
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // Trusted automation: write safe proposals immediately.
 {
   autoCapture: true,
@@ -161,7 +159,7 @@ Recommended profiles:
 }
 ```
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // Low-cost: no reviewer LLM call, only explicit correction phrases.
 {
   autoCapture: true,
@@ -186,22 +184,22 @@ This is the most explicit path and works even with `autoCapture: false`.
 When `autoCapture` is enabled and `reviewMode` is `heuristic` or `hybrid`, the
 plugin scans successful turns for explicit user correction phrases:
 
-* `next time`
-* `from now on`
-* `remember to`
-* `make sure to`
-* `always ... use/check/verify/record/save/prefer`
-* `prefer ... when/for/instead/use`
-* `when asked`
+- `next time`
+- `from now on`
+- `remember to`
+- `make sure to`
+- `always ... use/check/verify/record/save/prefer`
+- `prefer ... when/for/instead/use`
+- `when asked`
 
 The heuristic creates a proposal from the latest matching user instruction. It
 uses topic hints to choose skill names for common workflows:
 
-* animated GIF tasks -> `animated-gif-workflow`
-* screenshot or asset tasks -> `screenshot-asset-workflow`
-* QA or scenario tasks -> `qa-scenario-workflow`
-* GitHub PR tasks -> `github-pr-workflow`
-* fallback -> `learned-workflows`
+- animated GIF tasks -> `animated-gif-workflow`
+- screenshot or asset tasks -> `screenshot-asset-workflow`
+- QA or scenario tasks -> `qa-scenario-workflow`
+- GitHub PR tasks -> `github-pr-workflow`
+- fallback -> `learned-workflows`
 
 Heuristic capture is intentionally narrow. It is for clear corrections and
 repeatable process notes, not for general transcript summarization.
@@ -213,22 +211,22 @@ runs a compact embedded reviewer after thresholds are reached.
 
 The reviewer receives:
 
-* the recent transcript text, capped to the last 12,000 characters
-* up to 12 existing workspace skills
-* up to 2,000 characters from each existing skill
-* JSON-only instructions
+- the recent transcript text, capped to the last 12,000 characters
+- up to 12 existing workspace skills
+- up to 2,000 characters from each existing skill
+- JSON-only instructions
 
 The reviewer has no tools:
 
-* `disableTools: true`
-* `toolsAllow: []`
-* `disableMessageTool: true`
+- `disableTools: true`
+- `toolsAllow: []`
+- `disableMessageTool: true`
 
 The reviewer returns either `{ "action": "none" }` or one proposal. The `action` field is `create`, `append`, or `replace` - prefer `append`/`replace` when a relevant skill already exists; use `create` only when no existing skill fits.
 
 Example `create`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "create",
   "skillName": "media-asset-qa",
@@ -245,31 +243,31 @@ Example `create`:
 
 Every generated update becomes a proposal with:
 
-* `id`
-* `createdAt`
-* `updatedAt`
-* `workspaceDir`
-* optional `agentId`
-* optional `sessionId`
-* `skillName`
-* `title`
-* `reason`
-* `source`: `tool`, `agent_end`, or `reviewer`
-* `status`
-* `change`
-* optional `scanFindings`
-* optional `quarantineReason`
+- `id`
+- `createdAt`
+- `updatedAt`
+- `workspaceDir`
+- optional `agentId`
+- optional `sessionId`
+- `skillName`
+- `title`
+- `reason`
+- `source`: `tool`, `agent_end`, or `reviewer`
+- `status`
+- `change`
+- optional `scanFindings`
+- optional `quarantineReason`
 
 Proposal statuses:
 
-* `pending` - waiting for approval
-* `applied` - written to `<workspace>/skills`
-* `rejected` - rejected by operator/model
-* `quarantined` - blocked by critical scanner findings
+- `pending` - waiting for approval
+- `applied` - written to `<workspace>/skills`
+- `rejected` - rejected by operator/model
+- `quarantined` - blocked by critical scanner findings
 
 State is stored per workspace under the Gateway state directory:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 <stateDir>/skill-workshop/<workspace-hash>.json
 ```
 
@@ -281,7 +279,7 @@ payload. The store keeps the newest pending/quarantined proposals up to
 
 The plugin registers one agent tool:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 skill_workshop
 ```
 
@@ -289,13 +287,13 @@ skill_workshop
 
 Count proposals by state for the active workspace.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "status" }
 ```
 
 Result shape:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "workspaceDir": "/path/to/workspace",
   "pending": 1,
@@ -309,28 +307,28 @@ Result shape:
 
 List pending proposals.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "list_pending" }
 ```
 
 To list another status:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "list_pending", "status": "applied" }
 ```
 
 Valid `status` values:
 
-* `pending`
-* `applied`
-* `rejected`
-* `quarantined`
+- `pending`
+- `applied`
+- `rejected`
+- `quarantined`
 
 ### `list_quarantine`
 
 List quarantined proposals.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "list_quarantine" }
 ```
 
@@ -341,7 +339,7 @@ Use this when automatic capture appears to do nothing and the logs mention
 
 Fetch a proposal by id.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "inspect",
   "id": "proposal-id"
@@ -352,7 +350,7 @@ Fetch a proposal by id.
 
 Create a proposal. With `approvalPolicy: "pending"` (default), this queues instead of writing.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "suggest",
   "skillName": "animated-gif-workflow",
@@ -363,57 +361,69 @@ Create a proposal. With `approvalPolicy: "pending"` (default), this queues inste
 }
 ```
 
-<AccordionGroup>
-  <Accordion title="Request immediate write in auto mode (apply: true)">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      "action": "suggest",
-      "apply": true,
-      "skillName": "animated-gif-workflow",
-      "description": "Validate animated GIF assets before using them.",
-      "body": "## Workflow\n\n- Verify true animation.\n- Record attribution."
-    }
-    ```
+AccordionGroup
 
-    With `approvalPolicy: "pending"`, `apply: true` still queues the proposal. Review it, then use
-    the `apply` action after approval.
-  </Accordion>
 
-  <Accordion title="Force pending under auto policy (apply: false)">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      "action": "suggest",
-      "apply": false,
-      "skillName": "screenshot-asset-workflow",
-      "description": "Screenshot replacement workflow.",
-      "body": "## Workflow\n\n- Verify dimensions.\n- Optimize the PNG.\n- Run the relevant gate."
-    }
-    ```
-  </Accordion>
+Request immediate write in auto mode (apply: true)
 
-  <Accordion title="Append to a named section">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      "action": "suggest",
-      "skillName": "qa-scenario-workflow",
-      "section": "Workflow",
-      "description": "QA scenario workflow.",
-      "body": "- For media QA, verify generated assets render and pass final assertions."
-    }
-    ```
-  </Accordion>
+```json
+{
+  "action": "suggest",
+  "apply": true,
+  "skillName": "animated-gif-workflow",
+  "description": "Validate animated GIF assets before using them.",
+  "body": "## Workflow\n\n- Verify true animation.\n- Record attribution."
+}
+```
 
-  <Accordion title="Replace exact text">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      "action": "suggest",
-      "skillName": "github-pr-workflow",
-      "oldText": "- Check the PR.",
-      "newText": "- Check unresolved review threads, CI status, linked issues, and changed files before deciding."
-    }
-    ```
-  </Accordion>
-</AccordionGroup>
+With `approvalPolicy: "pending"`, `apply: true` still queues the proposal. Review it, then use
+the `apply` action after approval.
+
+
+
+
+Force pending under auto policy (apply: false)
+
+```json
+{
+  "action": "suggest",
+  "apply": false,
+  "skillName": "screenshot-asset-workflow",
+  "description": "Screenshot replacement workflow.",
+  "body": "## Workflow\n\n- Verify dimensions.\n- Optimize the PNG.\n- Run the relevant gate."
+}
+```
+
+
+
+
+Append to a named section
+
+```json
+{
+  "action": "suggest",
+  "skillName": "qa-scenario-workflow",
+  "section": "Workflow",
+  "description": "QA scenario workflow.",
+  "body": "- For media QA, verify generated assets render and pass final assertions."
+}
+```
+
+
+
+
+Replace exact text
+
+```json
+{
+  "action": "suggest",
+  "skillName": "github-pr-workflow",
+  "oldText": "- Check the PR.",
+  "newText": "- Check unresolved review threads, CI status, linked issues, and changed files before deciding."
+}
+```
+
+
 
 ### `apply`
 
@@ -422,7 +432,7 @@ Apply a pending proposal.
 With `approvalPolicy: "pending"`, this action asks for operator approval before writing the
 workspace skill.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "apply",
   "id": "proposal-id"
@@ -431,7 +441,7 @@ workspace skill.
 
 `apply` refuses quarantined proposals:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 quarantined proposal cannot be applied
 ```
 
@@ -439,7 +449,7 @@ quarantined proposal cannot be applied
 
 Mark a proposal rejected.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "reject",
   "id": "proposal-id"
@@ -452,14 +462,14 @@ Write a supporting file inside an existing or proposed skill directory.
 
 Allowed top-level support directories:
 
-* `references/`
-* `templates/`
-* `scripts/`
-* `assets/`
+- `references/`
+- `templates/`
+- `scripts/`
+- `assets/`
 
 Example:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "write_support_file",
   "skillName": "release-workflow",
@@ -475,33 +485,33 @@ Support files are workspace-scoped, path-checked, byte-limited by
 
 Skill Workshop writes only under:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 <workspace>/skills/<normalized-skill-name>/
 ```
 
 Skill names are normalized:
 
-* lowercased
-* non `[a-z0-9_-]` runs become `-`
-* leading/trailing non-alphanumerics are removed
-* max length is 80 characters
-* final name must match `[a-z0-9][a-z0-9_-]{1,79}`
+- lowercased
+- non `[a-z0-9_-]` runs become `-`
+- leading/trailing non-alphanumerics are removed
+- max length is 80 characters
+- final name must match `[a-z0-9][a-z0-9_-]{1,79}`
 
 For `create`:
 
-* if the skill does not exist, Skill Workshop writes a new `SKILL.md`
-* if it already exists, Skill Workshop appends the body to `## Workflow`
+- if the skill does not exist, Skill Workshop writes a new `SKILL.md`
+- if it already exists, Skill Workshop appends the body to `## Workflow`
 
 For `append`:
 
-* if the skill exists, Skill Workshop appends to the requested section
-* if it does not exist, Skill Workshop creates a minimal skill then appends
+- if the skill exists, Skill Workshop appends to the requested section
+- if it does not exist, Skill Workshop creates a minimal skill then appends
 
 For `replace`:
 
-* the skill must already exist
-* `oldText` must be present exactly
-* only the first exact match is replaced
+- the skill must already exist
+- `oldText` must be present exactly
+- only the first exact match is replaced
 
 All writes are atomic and refresh the in-memory skills snapshot immediately, so
 the new or updated skill can become visible without a Gateway restart.
@@ -530,10 +540,10 @@ Warn findings are retained but do not block by themselves:
 
 Quarantined proposals:
 
-* keep `scanFindings`
-* keep `quarantineReason`
-* appear in `list_quarantine`
-* cannot be applied through `apply`
+- keep `scanFindings`
+- keep `quarantineReason`
+- appear in `list_quarantine`
+- cannot be applied through `apply`
 
 To recover from a quarantined proposal, create a new safe proposal with the
 unsafe content removed. Do not edit the store JSON by hand.
@@ -545,19 +555,19 @@ to use `skill_workshop` for durable procedural memory.
 
 The guidance emphasizes:
 
-* procedures, not facts/preferences
-* user corrections
-* non-obvious successful procedures
-* recurring pitfalls
-* stale/thin/wrong skill repair through append/replace
-* saving reusable procedure after long tool loops or hard fixes
-* short imperative skill text
-* no transcript dumps
+- procedures, not facts/preferences
+- user corrections
+- non-obvious successful procedures
+- recurring pitfalls
+- stale/thin/wrong skill repair through append/replace
+- saving reusable procedure after long tool loops or hard fixes
+- short imperative skill text
+- no transcript dumps
 
 The write mode text changes with `approvalPolicy`:
 
-* pending mode: queue suggestions; use `apply` after explicit approval
-* auto mode: apply safe workspace-skill updates unless `apply: false` queues instead
+- pending mode: queue suggestions; use `apply` after explicit approval
+- auto mode: apply safe workspace-skill updates unless `apply: false` queues instead
 
 ## Costs and runtime behavior
 
@@ -568,13 +578,13 @@ threshold-based so it does not run on every turn by default.
 
 The reviewer:
 
-* uses the same configured provider/model context when available
-* falls back to runtime agent defaults
-* has `reviewTimeoutMs`
-* uses lightweight bootstrap context
-* has no tools
-* writes nothing directly
-* can only emit a proposal that goes through the normal scanner and
+- uses the same configured provider/model context when available
+- falls back to runtime agent defaults
+- has `reviewTimeoutMs`
+- uses lightweight bootstrap context
+- has no tools
+- writes nothing directly
+- can only emit a proposal that goes through the normal scanner and
   approval/quarantine path
 
 If the reviewer fails, times out, or returns invalid JSON, the plugin logs a
@@ -584,16 +594,16 @@ warning/debug message and skips that review pass.
 
 Use Skill Workshop when the user says:
 
-* "next time, do X"
-* "from now on, prefer Y"
-* "make sure to verify Z"
-* "save this as a workflow"
-* "this took a while; remember the process"
-* "update the local skill for this"
+- "next time, do X"
+- "from now on, prefer Y"
+- "make sure to verify Z"
+- "save this as a workflow"
+- "this took a while; remember the process"
+- "update the local skill for this"
 
 Good skill text:
 
-```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```markdown
 ## Workflow
 
 - Verify the GIF URL resolves to `image/gif`.
@@ -605,41 +615,41 @@ Good skill text:
 
 Poor skill text:
 
-```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```markdown
 The user asked about a GIF and I searched two websites. Then one was blocked by
 Cloudflare. The final answer said to check attribution.
 ```
 
 Reasons the poor version should not be saved:
 
-* transcript-shaped
-* not imperative
-* includes noisy one-off details
-* does not tell the next agent what to do
+- transcript-shaped
+- not imperative
+- includes noisy one-off details
+- does not tell the next agent what to do
 
 ## Debugging
 
 Check whether the plugin is loaded:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins list --enabled
 ```
 
 Check proposal counts from an agent/tool context:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "status" }
 ```
 
 Inspect pending proposals:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "list_pending" }
 ```
 
 Inspect quarantined proposals:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "action": "list_quarantine" }
 ```
 
@@ -657,24 +667,24 @@ Common symptoms:
 
 Relevant logs:
 
-* `skill-workshop: queued <skill>`
-* `skill-workshop: applied <skill>`
-* `skill-workshop: quarantined <skill>`
-* `skill-workshop: heuristic capture skipped: ...`
-* `skill-workshop: reviewer skipped: ...`
-* `skill-workshop: reviewer found no update`
+- `skill-workshop: queued <skill>`
+- `skill-workshop: applied <skill>`
+- `skill-workshop: quarantined <skill>`
+- `skill-workshop: heuristic capture skipped: ...`
+- `skill-workshop: reviewer skipped: ...`
+- `skill-workshop: reviewer found no update`
 
 ## QA scenarios
 
 Repo-backed QA scenarios:
 
-* `qa/scenarios/plugins/skill-workshop-animated-gif-autocreate.md`
-* `qa/scenarios/plugins/skill-workshop-pending-approval.md`
-* `qa/scenarios/plugins/skill-workshop-reviewer-autonomous.md`
+- `qa/scenarios/plugins/skill-workshop-animated-gif-autocreate.md`
+- `qa/scenarios/plugins/skill-workshop-pending-approval.md`
+- `qa/scenarios/plugins/skill-workshop-reviewer-autonomous.md`
 
 Run the deterministic coverage:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa suite \
   --scenario skill-workshop-animated-gif-autocreate \
   --scenario skill-workshop-pending-approval \
@@ -683,7 +693,7 @@ pnpm openclaw qa suite \
 
 Run reviewer coverage:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa suite \
   --scenario skill-workshop-reviewer-autonomous \
   --concurrency 1
@@ -696,17 +706,19 @@ The reviewer scenario is intentionally separate because it enables
 
 Avoid `approvalPolicy: "auto"` when:
 
-* the workspace contains sensitive procedures
-* the agent is working on untrusted input
-* skills are shared across a broad team
-* you are still tuning prompts or scanner rules
-* the model frequently handles hostile web/email content
+- the workspace contains sensitive procedures
+- the agent is working on untrusted input
+- skills are shared across a broad team
+- you are still tuning prompts or scanner rules
+- the model frequently handles hostile web/email content
 
 Use pending mode first. Switch to auto mode only after reviewing the kind of
 skills the agent proposes in that workspace.
 
 ## Related docs
 
-* [Skills](/tools/skills)
-* [Plugins](/tools/plugin)
-* [Testing](/reference/test)
+- [Skills](/tools/skills)
+- [Plugins](/tools/plugin)
+- [Testing](/reference/test)
+
+---

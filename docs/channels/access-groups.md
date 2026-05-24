@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Access groups"
 source: "https://docs.openclaw.ai/channels/access-groups"
-source_hash: "b6f3019924541abe7f9b090c66772a7f46ebd4df1292af5d9ec1b11a1e87a195"
+source_hash: "3fc74a4c6a2eedef0ff7f3369f2ca52e8c455e8b5dcc9f1bf40f8b527b5c5d40"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/access-groups.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Access groups
 Source: https://docs.openclaw.ai/channels/access-groups
-
-
 
 Access groups are named sender lists you define once and reference from channel allowlists with `accessGroup:<name>`.
 
@@ -25,7 +23,7 @@ Access groups do not grant access by themselves. A group only matters when an al
 
 Static sender groups use `type: "message.senders"`.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   accessGroups: {
     operators: {
@@ -58,7 +56,7 @@ Reference a group with `accessGroup:<name>` anywhere the message channel path su
 
 DM allowlist example:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   accessGroups: {
     operators: {
@@ -84,7 +82,7 @@ DM allowlist example:
 
 Group sender allowlist example:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   accessGroups: {
     oncall: {
@@ -113,7 +111,7 @@ Group sender allowlist example:
 
 You can mix groups and direct entries:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -128,10 +126,10 @@ You can mix groups and direct entries:
 
 Access groups are available in shared message-channel authorization paths, including:
 
-* DM sender allowlists such as `channels.<channel>.allowFrom`
-* group sender allowlists such as `channels.<channel>.groupAllowFrom`
-* channel-specific per-room sender allowlists that use the same sender matching rules
-* command authorization paths that reuse message-channel sender allowlists
+- DM sender allowlists such as `channels.<channel>.allowFrom`
+- group sender allowlists such as `channels.<channel>.groupAllowFrom`
+- channel-specific per-room sender allowlists that use the same sender matching rules
+- command authorization paths that reuse message-channel sender allowlists
 
 Channel support depends on whether that channel is wired through the shared OpenClaw sender-authorization helpers. Current bundled support includes Discord, Feishu, Google Chat, iMessage, LINE, Mattermost, Microsoft Teams, Nextcloud Talk, Nostr, QQBot, Signal, WhatsApp, Zalo, and Zalo Personal. Static `message.senders` groups are designed to be channel-agnostic, so new message channels should support them by using the shared plugin SDK helpers instead of custom allowlist expansion.
 
@@ -139,8 +137,7 @@ Channel support depends on whether that channel is wired through the shared Open
 
 Plugin authors can inspect structured access-group state without expanding it back into a flat allowlist:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { resolveAccessGroupAllowFromState } from "openclaw/plugin-sdk/security-runtime";
+```typescript
 
 const state = await resolveAccessGroupAllowFromState({
   accessGroups: cfg.accessGroups,
@@ -158,7 +155,7 @@ The result reports referenced, matched, missing, unsupported, and failed groups.
 
 Discord also supports a dynamic access group type:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   accessGroups: {
     maintainers: {
@@ -183,18 +180,18 @@ Use this when a Discord channel is already the source of truth for a team, such 
 
 Requirements and failure behavior:
 
-* The bot needs access to the guild and channel.
-* The bot needs the Discord Developer Portal **Server Members Intent**.
-* The access group fails closed when Discord returns `Missing Access`, the sender cannot be resolved as a guild member, or the channel belongs to another guild.
+- The bot needs access to the guild and channel.
+- The bot needs the Discord Developer Portal **Server Members Intent**.
+- The access group fails closed when Discord returns `Missing Access`, the sender cannot be resolved as a guild member, or the channel belongs to another guild.
 
 More Discord-specific examples: [Discord access control](/channels/discord#access-control-and-routing)
 
 ## Security notes
 
-* Access groups are allowlist aliases, not roles. They do not create owners, approve pairing requests, or grant tool permissions by themselves.
-* `dmPolicy: "open"` still requires `"*"` in the effective DM allowlist. Referencing an access group is not the same as public access.
-* Missing group names fail closed. If `allowFrom` contains `accessGroup:operators` and `accessGroups.operators` is absent, that entry authorizes nobody.
-* Keep channel ids stable. Prefer numeric/user ids over display names when the channel supports both.
+- Access groups are allowlist aliases, not roles. They do not create owners, approve pairing requests, or grant tool permissions by themselves.
+- `dmPolicy: "open"` still requires `"*"` in the effective DM allowlist. Referencing an access group is not the same as public access.
+- Missing group names fail closed. If `allowFrom` contains `accessGroup:operators` and `accessGroups.operators` is absent, that entry authorizes nobody.
+- Keep channel ids stable. Prefer numeric/user ids over display names when the channel supports both.
 
 ## Troubleshooting
 
@@ -207,3 +204,5 @@ If a sender should match but is blocked:
 5. For Discord channel audiences, confirm the bot can see the guild channel and has Server Members Intent enabled.
 
 Run `openclaw doctor` after editing access-control config. It catches many invalid allowlist and policy combinations before runtime.
+
+---

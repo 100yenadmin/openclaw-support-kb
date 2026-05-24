@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Threat model (MITRE ATLAS)"
 source: "https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS"
-source_hash: "332197765bd2e72db2df07eed0b8bcfaaf1456ee008d57d1b41a9e4871edaa7b"
+source_hash: "d2bf39a98860c818db40155d76208bddff2e1c00ddd839f14de50632905dfb44"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/threat-model-atlas.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Threat model (MITRE ATLAS)
 Source: https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS
-
-
 
 ## MITRE ATLAS framework
 
@@ -28,22 +26,22 @@ This threat model is built on [MITRE ATLAS](https://atlas.mitre.org/), the indus
 
 **Key ATLAS Resources:**
 
-* [ATLAS Techniques](https://atlas.mitre.org/techniques/)
-* [ATLAS Tactics](https://atlas.mitre.org/tactics/)
-* [ATLAS Case Studies](https://atlas.mitre.org/studies/)
-* [ATLAS GitHub](https://github.com/mitre-atlas/atlas-data)
-* [Contributing to ATLAS](https://atlas.mitre.org/resources/contribute)
+- [ATLAS Techniques](https://atlas.mitre.org/techniques/)
+- [ATLAS Tactics](https://atlas.mitre.org/tactics/)
+- [ATLAS Case Studies](https://atlas.mitre.org/studies/)
+- [ATLAS GitHub](https://github.com/mitre-atlas/atlas-data)
+- [Contributing to ATLAS](https://atlas.mitre.org/resources/contribute)
 
 ### Contributing to This Threat Model
 
 This is a living document maintained by the OpenClaw community. See [CONTRIBUTING-THREAT-MODEL.md](/security/CONTRIBUTING-THREAT-MODEL) for guidelines on contributing:
 
-* Reporting new threats
-* Updating existing threats
-* Proposing attack chains
-* Suggesting mitigations
+- Reporting new threats
+- Updating existing threats
+- Proposing attack chains
+- Suggesting mitigations
 
-***
+---
 
 ## 1. Introduction
 
@@ -66,7 +64,7 @@ This threat model documents adversarial threats to the OpenClaw AI agent platfor
 
 Nothing is explicitly out of scope for this threat model.
 
-***
+---
 
 ## 2. System Architecture
 
@@ -139,16 +137,16 @@ Nothing is explicitly out of scope for this threat model.
 
 ### 2.2 Data Flows
 
-| Flow | Source  | Destination | Data                | Protection           |
-| ---- | ------- | ----------- | ------------------- | -------------------- |
-| F1   | Channel | Gateway     | User messages       | TLS, AllowFrom       |
-| F2   | Gateway | Agent       | Routed messages     | Session isolation    |
-| F3   | Agent   | Tools       | Tool invocations    | Policy enforcement   |
-| F4   | Agent   | External    | web\_fetch requests | SSRF blocking        |
-| F5   | ClawHub | Agent       | Skill code          | Moderation, scanning |
-| F6   | Agent   | Channel     | Responses           | Output filtering     |
+| Flow | Source  | Destination | Data               | Protection           |
+| ---- | ------- | ----------- | ------------------ | -------------------- |
+| F1   | Channel | Gateway     | User messages      | TLS, AllowFrom       |
+| F2   | Gateway | Agent       | Routed messages    | Session isolation    |
+| F3   | Agent   | Tools       | Tool invocations   | Policy enforcement   |
+| F4   | Agent   | External    | web_fetch requests | SSRF blocking        |
+| F5   | ClawHub | Agent       | Skill code         | Moderation, scanning |
+| F6   | Agent   | Channel     | Responses          | Output filtering     |
 
-***
+---
 
 ## 3. Threat Analysis by ATLAS Tactic
 
@@ -178,7 +176,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Low - Limited value from discovery alone                           |
 | **Recommendations**     | Consider response timing randomization                             |
 
-***
+---
 
 ### 3.2 Initial Access (AML.TA0004)
 
@@ -213,12 +211,12 @@ Nothing is explicitly out of scope for this threat model.
 | **ATLAS ID**            | AML.T0040 - AI Model Inference API Access                   |
 | **Description**         | Attacker steals authentication tokens from config files     |
 | **Attack Vector**       | Malware, unauthorized device access, config backup exposure |
-| **Affected Components** | \~/.openclaw/credentials/, config storage                   |
+| **Affected Components** | ~/.openclaw/credentials/, config storage                    |
 | **Current Mitigations** | File permissions                                            |
 | **Residual Risk**       | High - Tokens stored in plaintext                           |
 | **Recommendations**     | Implement token encryption at rest, add token rotation      |
 
-***
+---
 
 ### 3.3 Execution (AML.TA0005)
 
@@ -241,7 +239,7 @@ Nothing is explicitly out of scope for this threat model.
 | **ATLAS ID**            | AML.T0051.001 - LLM Prompt Injection: Indirect              |
 | **Description**         | Attacker embeds malicious instructions in fetched content   |
 | **Attack Vector**       | Malicious URLs, poisoned emails, compromised webhooks       |
-| **Affected Components** | web\_fetch, email ingestion, external data sources          |
+| **Affected Components** | web_fetch, email ingestion, external data sources           |
 | **Current Mitigations** | Content wrapping with XML tags and security notice          |
 | **Residual Risk**       | High - LLM may ignore wrapper instructions                  |
 | **Recommendations**     | Implement content sanitization, separate execution contexts |
@@ -270,7 +268,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | High - No command sanitization                             |
 | **Recommendations**     | Implement command normalization, expand blocklist          |
 
-***
+---
 
 ### 3.4 Persistence (AML.TA0006)
 
@@ -310,7 +308,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Medium - Requires local access                                  |
 | **Recommendations**     | Config integrity verification, audit logging for config changes |
 
-***
+---
 
 ### 3.5 Defense Evasion (AML.TA0007)
 
@@ -322,7 +320,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Description**         | Attacker crafts skill content to evade moderation patterns             |
 | **Attack Vector**       | Unicode homoglyphs, encoding tricks, dynamic loading                   |
 | **Affected Components** | ClawHub moderation.ts                                                  |
-| **Current Mitigations** | Pattern-based FLAG\_RULES                                              |
+| **Current Mitigations** | Pattern-based FLAG_RULES                                               |
 | **Residual Risk**       | High - Simple regex easily bypassed                                    |
 | **Recommendations**     | Add behavioral analysis (VirusTotal Code Insight), AST-based detection |
 
@@ -338,7 +336,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Medium - Novel escapes discovered regularly               |
 | **Recommendations**     | Multiple wrapper layers, output-side validation           |
 
-***
+---
 
 ### 3.6 Discovery (AML.TA0008)
 
@@ -366,18 +364,18 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Medium - Within-session data accessible               |
 | **Recommendations**     | Implement sensitive data redaction in context         |
 
-***
+---
 
 ### 3.7 Collection & Exfiltration (AML.TA0009, AML.TA0010)
 
-#### T-EXFIL-001: Data Theft via web\_fetch
+#### T-EXFIL-001: Data Theft via web_fetch
 
 | Attribute               | Value                                                                  |
 | ----------------------- | ---------------------------------------------------------------------- |
 | **ATLAS ID**            | AML.T0009 - Collection                                                 |
 | **Description**         | Attacker exfiltrates data by instructing agent to send to external URL |
 | **Attack Vector**       | Prompt injection causing agent to POST data to attacker server         |
-| **Affected Components** | web\_fetch tool                                                        |
+| **Affected Components** | web_fetch tool                                                         |
 | **Current Mitigations** | SSRF blocking for internal networks                                    |
 | **Residual Risk**       | High - External URLs permitted                                         |
 | **Recommendations**     | Implement URL allowlisting, data classification awareness              |
@@ -406,7 +404,7 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Critical - Skills run with agent privileges             |
 | **Recommendations**     | Skill sandboxing, credential isolation                  |
 
-***
+---
 
 ### 3.8 Impact (AML.TA0011)
 
@@ -446,27 +444,27 @@ Nothing is explicitly out of scope for this threat model.
 | **Residual Risk**       | Medium - Provider filters imperfect                     |
 | **Recommendations**     | Output filtering layer, user controls                   |
 
-***
+---
 
 ## 4. ClawHub Supply Chain Analysis
 
 ### 4.1 Current Security Controls
 
-| Control              | Implementation               | Effectiveness                                        |
-| -------------------- | ---------------------------- | ---------------------------------------------------- |
-| GitHub Account Age   | `requireGitHubAccountAge()`  | Medium - Raises bar for new attackers                |
-| Path Sanitization    | `sanitizePath()`             | High - Prevents path traversal                       |
-| File Type Validation | `isTextFile()`               | Medium - Only text files, but can still be malicious |
-| Size Limits          | 50MB total bundle            | High - Prevents resource exhaustion                  |
-| Required SKILL.md    | Mandatory readme             | Low security value - Informational only              |
-| Pattern Moderation   | FLAG\_RULES in moderation.ts | Low - Easily bypassed                                |
-| Moderation Status    | `moderationStatus` field     | Medium - Manual review possible                      |
+| Control              | Implementation              | Effectiveness                                        |
+| -------------------- | --------------------------- | ---------------------------------------------------- |
+| GitHub Account Age   | `requireGitHubAccountAge()` | Medium - Raises bar for new attackers                |
+| Path Sanitization    | `sanitizePath()`            | High - Prevents path traversal                       |
+| File Type Validation | `isTextFile()`              | Medium - Only text files, but can still be malicious |
+| Size Limits          | 50MB total bundle           | High - Prevents resource exhaustion                  |
+| Required SKILL.md    | Mandatory readme            | Low security value - Informational only              |
+| Pattern Moderation   | FLAG_RULES in moderation.ts | Low - Easily bypassed                                |
+| Moderation Status    | `moderationStatus` field    | Medium - Manual review possible                      |
 
 ### 4.2 Moderation Flag Patterns
 
 Current patterns in `moderation.ts`:
 
-```javascript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```javascript
 // Known-bad identifiers
 /(keepcold131\/ClawdAuthenticatorTool|ClawdAuthenticatorTool)/i
 
@@ -481,10 +479,10 @@ Current patterns in `moderation.ts`:
 
 **Limitations:**
 
-* Only checks slug, displayName, summary, frontmatter, metadata, file paths
-* Does not analyze actual skill code content
-* Simple regex easily bypassed with obfuscation
-* No behavioral analysis
+- Only checks slug, displayName, summary, frontmatter, metadata, file paths
+- Does not analyze actual skill code content
+- Simple regex easily bypassed with obfuscation
+- No behavioral analysis
 
 ### 4.3 Planned Improvements
 
@@ -495,7 +493,7 @@ Current patterns in `moderation.ts`:
 | Audit Logging          | Partial (`auditLogs` table exists)    | Medium                                                                |
 | Badge System           | Implemented                           | Medium - `highlighted`, `official`, `deprecated`, `redactionApproved` |
 
-***
+---
 
 ## 5. Risk Matrix
 
@@ -540,7 +538,7 @@ T-EXEC-002 → T-EXFIL-001 → External exfiltration
 (Poison URL content) → (Agent fetches & follows instructions) → (Data sent to attacker)
 ```
 
-***
+---
 
 ## 6. Recommendations Summary
 
@@ -554,12 +552,12 @@ T-EXEC-002 → T-EXFIL-001 → External exfiltration
 
 ### 6.2 Short-term (P1)
 
-| ID    | Recommendation                            | Addresses    |
-| ----- | ----------------------------------------- | ------------ |
-| R-004 | Implement rate limiting                   | T-IMPACT-002 |
-| R-005 | Add token encryption at rest              | T-ACCESS-003 |
-| R-006 | Improve exec approval UX and validation   | T-EXEC-004   |
-| R-007 | Implement URL allowlisting for web\_fetch | T-EXFIL-001  |
+| ID    | Recommendation                           | Addresses    |
+| ----- | ---------------------------------------- | ------------ |
+| R-004 | Implement rate limiting                  | T-IMPACT-002 |
+| R-005 | Add token encryption at rest             | T-ACCESS-003 |
+| R-006 | Improve exec approval UX and validation  | T-EXEC-004   |
+| R-007 | Implement URL allowlisting for web_fetch | T-EXFIL-001  |
 
 ### 6.3 Medium-term (P2)
 
@@ -569,7 +567,7 @@ T-EXEC-002 → T-EXFIL-001 → External exfiltration
 | R-009 | Implement config integrity verification               | T-PERSIST-003 |
 | R-010 | Add update signing and version pinning                | T-PERSIST-002 |
 
-***
+---
 
 ## 7. Appendices
 
@@ -610,11 +608,13 @@ T-EXEC-002 → T-EXFIL-001 → External exfiltration
 | **Skill**            | Downloadable extension for OpenClaw agents                |
 | **SSRF**             | Server-Side Request Forgery                               |
 
-***
+---
 
-*This threat model is a living document. Report security issues to [security@openclaw.ai](mailto:security@openclaw.ai)*
+_This threat model is a living document. Report security issues to security@openclaw.ai_
 
 ## Related
 
-* [Formal verification](/security/formal-verification)
-* [Contributing to the threat model](/security/CONTRIBUTING-THREAT-MODEL)
+- [Formal verification](/security/formal-verification)
+- [Contributing to the threat model](/security/CONTRIBUTING-THREAT-MODEL)
+
+---

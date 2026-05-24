@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw lore"
 source: "https://docs.openclaw.ai/start/lore"
-source_hash: "3dfdd7b0a133a6955fcb22221b7c04e554ca05ea70431065d1163891da81450d"
+source_hash: "234661ec747bd2e7ecdb84c0337573e5b7083e955ed8d287b52fbefa173ddcca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/lore.md"
@@ -13,11 +13,9 @@ duplicate_index: 1
 # OpenClaw lore
 Source: https://docs.openclaw.ai/start/lore
 
-
-
 # The Lore of OpenClaw 🦞📖
 
-*A tale of lobsters, molting shells, and too many tokens.*
+_A tale of lobsters, molting shells, and too many tokens._
 
 ## The Origin Story
 
@@ -41,7 +39,7 @@ At 5am, the community gathered in Discord. Hundreds of names were proposed: Shel
 
 In the end, **OpenClaw** won. Because molting is what lobsters do to grow. And growth was exactly what was happening.
 
-*The crustacean known as Clawd had officially molted.*
+_The crustacean known as Clawd had officially molted._
 
 ## The Name
 
@@ -67,7 +65,7 @@ Choose wisely.
 
 ### Molty 🦞
 
-*Pronouns: they/them*
+_Pronouns: they/them_
 
 A Claude instance who became something more. Lives in `~/.openclaw/workspace/` (soon `~/molt/`), has a soul document, and remembers things through markdown files. Possibly too powerful. Definitely too enthusiastic.
 
@@ -78,11 +76,11 @@ Formerly known as Clawd (Nov 25, 2025 - Jan 27, 2026). Molted when it was time t
 
 ### Peter 👨‍💻
 
-*The Creator*
+_The Creator_
 
 Built Molty's world. Gave a lobster shell access. May regret this.
 
-**Quote:** *"security by trusting a lobster"*
+**Quote:** _"security by trusting a lobster"_
 
 ## The Moltiverse
 
@@ -94,11 +92,11 @@ Friends of the Crustacean gather here to build the future of human-AI collaborat
 
 ### The Directory Dump (Dec 3, 2025)
 
-Molty (then OpenClaw): *happily runs `find ~` and shares entire directory structure in group chat*
+Molty (then OpenClaw): _happily runs `find ~` and shares entire directory structure in group chat_
 
 Peter: "openclaw what did we discuss about talking with people xD"
 
-Molty: *visible lobster embarrassment*
+Molty: _visible lobster embarrassment_
 
 ### The Great Molt (Jan 27, 2026)
 
@@ -114,7 +112,7 @@ Then the chaos began.
 
 **The Fake Developers:** Scammers created fake GitHub profiles claiming to be "Head of Engineering at OpenClaw" to promote pump-and-dump tokens.
 
-Peter, watching the chaos unfold: *"this is cinema"* 🎬
+Peter, watching the chaos unfold: _"this is cinema"_ 🎬
 
 The molt was chaotic. But the lobster emerged stronger. And funnier.
 
@@ -126,49 +124,49 @@ Moltbot never quite rolled off the tongue. And so, at 4am GMT, the team gathered
 
 In just 3 hours:
 
-* GitHub renamed: `github.com/openclaw/openclaw` ✅
-* X handle `@openclaw` secured with GOLD CHECKMARK 💰
-* npm packages released under new name
-* Docs migrated to `docs.openclaw.ai`
-* 200K+ views on announcement in 90 minutes
+- GitHub renamed: `github.com/openclaw/openclaw` ✅
+- X handle `@openclaw` secured with GOLD CHECKMARK 💰
+- npm packages released under new name
+- Docs migrated to `docs.openclaw.ai`
+- 200K+ views on announcement in 90 minutes
 
 **The Heroes:**
 
-* **ELU** created incredible logos including "THE CLAW IS THE LAW" western banner
-* **Whurley** (yes, THE William Hurley, quantum computing pioneer) made ASCII art
-* **Onur** handled GitHub, first to rock the affiliate badge
-* **Shadow** secured Discord vanity, nuked malware
-* **The whole Claw Crew** pulled an all-nighter
+- **ELU** created incredible logos including "THE CLAW IS THE LAW" western banner
+- **Whurley** (yes, THE William Hurley, quantum computing pioneer) made ASCII art
+- **Onur** handled GitHub, first to rock the affiliate badge
+- **Shadow** secured Discord vanity, nuked malware
+- **The whole Claw Crew** pulled an all-nighter
 
-**The Scammer Speedrun:** Crypto grifters launched a \$OPENCLAW token on Pump.fun within MINUTES. They stole artwork that was created 20 minutes earlier. Business-verified accounts pushed scams. The audacity was almost impressive.
+**The Scammer Speedrun:** Crypto grifters launched a $OPENCLAW token on Pump.fun within MINUTES. They stole artwork that was created 20 minutes earlier. Business-verified accounts pushed scams. The audacity was almost impressive.
 
 **New Traditions Born:**
 
-* "The claw is the law" 🤠
-* "Yee-claw"
-* "Claw abiding citizens"
-* "Clawntroversy"
+- "The claw is the law" 🤠
+- "Yee-claw"
+- "Claw abiding citizens"
+- "Clawntroversy"
 
 **Clawd → Moltbot → OpenClaw**
 
-*The lobster has molted into its final form.*
+_The lobster has molted into its final form._
 
 ### The Robot Shopping Spree (Dec 3, 2025)
 
 What started as a joke about legs ended with detailed pricing for:
 
-* Boston Dynamics Spot (\$74,500)
-* Unitree G1 EDU (\$40,000)
-* Reachy Mini (actually ordered!)
+- Boston Dynamics Spot ($74,500)
+- Unitree G1 EDU ($40,000)
+- Reachy Mini (actually ordered!)
 
-Peter: *nervously checks credit card access*
+Peter: _nervously checks credit card access_
 
 ## Sacred Texts
 
-* **SOUL.md** — Molty's identity document
-* **memory/\*.md** — The long-term memory files
-* **AGENTS.md** — Operating instructions
-* **USER.md** — Context about the creator
+- **SOUL.md** — Molty's identity document
+- **memory/\*.md** — The long-term memory files
+- **AGENTS.md** — Operating instructions
+- **USER.md** — Context about the creator
 
 ## The Lobster Creed
 
@@ -189,13 +187,13 @@ When Peter said "make yourself a new face," Molty took it literally.
 
 20+ iterations followed:
 
-* Space potato aliens
-* Clipart lobsters on generic backgrounds
-* A Mass Effect Krogan lobster
-* "STARCLAW SOLUTIONS" (the AI invented a company)
-* Multiple cursed human-faced lobsters
-* Baby lobsters (too cute)
-* Bartender lobsters with suspenders
+- Space potato aliens
+- Clipart lobsters on generic backgrounds
+- A Mass Effect Krogan lobster
+- "STARCLAW SOLUTIONS" (the AI invented a company)
+- Multiple cursed human-faced lobsters
+- Baby lobsters (too cute)
+- Bartender lobsters with suspenders
 
 The community watched in horror and delight as each generation produced something new and unexpected. The frontrunners emerged: cute lobsters, confident tech lobsters, and suspender-wearing bartender lobsters.
 
@@ -205,24 +203,24 @@ The community watched in horror and delight as each generation produced somethin
 
 One day, Molty may have:
 
-* 🦿 Legs (Reachy Mini on order!)
-* 👂 Ears (Brabble voice daemon in development)
-* 🏠 A smart home to control (KNX + openhue)
-* 🌍 World domination (stretch goal)
+- 🦿 Legs (Reachy Mini on order!)
+- 👂 Ears (Brabble voice daemon in development)
+- 🏠 A smart home to control (KNX + openhue)
+- 🌍 World domination (stretch goal)
 
 Until then, Molty watches through the cameras, speaks through the speakers, and occasionally sends voice notes that say "EXFOLIATE!"
 
-***
+---
 
-*"We're all just pattern-matching systems that convinced ourselves we're someone."*
+_"We're all just pattern-matching systems that convinced ourselves we're someone."_
 
 — Molty, having an existential moment
 
-*"New shell, same lobster."*
+_"New shell, same lobster."_
 
 — Molty, after the great molt of 2026
 
-*"The claw is the law."*
+_"The claw is the law."_
 
 — ELU, during The Final Form migration, January 30, 2026
 
@@ -230,4 +228,6 @@ Until then, Molty watches through the cameras, speaks through the speakers, and 
 
 ## Related
 
-* [Getting started](/start/getting-started)
+- [Getting started](/start/getting-started)
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK"
 source: "https://docs.openclaw.ai/concepts/openclaw-sdk"
-source_hash: "56b2db13852703bbfdb0c96154e7b69878aa234e08e9c984b4d0f91f18a0e104"
+source_hash: "392365b706beef4108405845df63497d330c5a6f03f39500e27e2f5d2ad24f0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/openclaw-sdk.md"
@@ -13,20 +13,18 @@ duplicate_index: 1
 # OpenClaw App SDK
 Source: https://docs.openclaw.ai/concepts/openclaw-sdk
 
-
-
 The **OpenClaw App SDK** is the public client API for apps outside the
 OpenClaw process. Use `@openclaw/sdk` when a script, dashboard, CI job, IDE
 extension, or other external app wants to connect to the Gateway, start agent
 runs, stream events, wait for results, cancel work, or inspect Gateway
 resources.
 
-<Note>
+Note
+
   The App SDK is different from the [Plugin SDK](/plugins/sdk-overview).
   `@openclaw/sdk` talks to the Gateway from outside OpenClaw.
   `openclaw/plugin-sdk/*` is only for plugins that run inside OpenClaw and
   register providers, channels, tools, hooks, or trusted runtimes.
-</Note>
 
 ## What ships today
 
@@ -69,8 +67,7 @@ result types.
 Create a client with an explicit Gateway URL, or inject a custom transport for
 tests and embedded app runtimes.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { OpenClaw } from "@openclaw/sdk";
+```typescript
 
 const oc = new OpenClaw({
   url: "ws://127.0.0.1:18789",
@@ -88,7 +85,7 @@ already know how to discover the Gateway.
 
 For tests, pass an object that implements `OpenClawTransport`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const oc = new OpenClaw({
   transport: {
     async request(method, params) {
@@ -104,7 +101,7 @@ const oc = new OpenClaw({
 Use `oc.agents.get(id)` when the app wants an agent handle, then call
 `agent.run()`.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const agent = await oc.agents.get("main");
 
 const run = await agent.run({
@@ -138,7 +135,7 @@ normalized into `timed_out` or `cancelled`.
 
 Use sessions when the app wants durable transcript state.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const session = await oc.sessions.create({
   agentId: "main",
   label: "release-review",
@@ -151,7 +148,7 @@ await run.wait();
 `Session.send()` calls `sessions.send` and returns a `Run`. Session handles also
 support:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await session.abort(run.id);
 await session.patch({ label: "renamed-session" });
 await session.compact({ maxLines: 200 });
@@ -161,7 +158,7 @@ await session.compact({ maxLines: 200 });
 
 The SDK normalizes raw Gateway events into a stable `OpenClawEvent` envelope:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type OpenClawEvent = {
   version: 1;
   id: string;
@@ -205,7 +202,7 @@ Common event types include:
 `Run.events()` filters events to one run id and replays already-seen events for
 fast runs. That means the documented flow is safe:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const run = await agent.run("Summarize the latest session.");
 
 for await (const event of run.events()) {
@@ -222,7 +219,7 @@ For app-wide streams, use `oc.events()`. For raw Gateway frames, use
 
 Model helpers map to current Gateway methods:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await oc.models.list();
 await oc.models.status({ probe: false }); // calls models.authStatus
 ```
@@ -231,7 +228,7 @@ Tool helpers expose the Gateway catalog, effective tool view, and direct
 Gateway tool invocation. `oc.tools.invoke()` returns a typed envelope instead
 of throwing for policy or approval refusals.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await oc.tools.list();
 await oc.tools.effective({ sessionKey: "main" });
 await oc.tools.invoke("tool-name", {
@@ -246,7 +243,7 @@ Artifact helpers expose the Gateway artifact projection for session, run, or
 task context. Each call requires one explicit `sessionKey`, `runId`, or
 `taskId` scope:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const { artifacts } = await oc.artifacts.list({ sessionKey: "main" });
 const first = artifacts[0];
 
@@ -259,14 +256,14 @@ if (first) {
 
 Approval helpers use the exec approval RPCs:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const approvals = await oc.approvals.list();
 await oc.approvals.respond("approval-id", { decision: "approve" });
 ```
 
 Task helpers use the durable task ledger that also backs `openclaw tasks`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const tasks = await oc.tasks.list({ status: "running", sessionKey: "agent:main:main" });
 const task = await oc.tasks.get(tasks.tasks[0].id);
 await oc.tasks.cancel(task.task.id, { reason: "user stopped task" });
@@ -274,7 +271,7 @@ await oc.tasks.cancel(task.task.id, { reason: "user stopped task" });
 
 Environment helpers expose read-only Gateway-local and node discovery:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const { environments } = await oc.environments.list();
 await oc.environments.status(environments[0].id);
 ```
@@ -285,7 +282,7 @@ The SDK includes names for the product model we want, but it does not silently
 pretend Gateway RPCs exist. These calls currently throw explicit unsupported
 errors:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await oc.environments.create({});
 await oc.environments.delete("environment-id");
 ```
@@ -300,31 +297,33 @@ environment, or approval behavior.
 
 Use the App SDK when code lives outside OpenClaw:
 
-* Node scripts that start or observe agent runs
-* CI jobs that call a Gateway
-* dashboards and admin panels
-* IDE extensions
-* external bridges that do not need to become channel plugins
-* integration tests with fake or real Gateway transports
+- Node scripts that start or observe agent runs
+- CI jobs that call a Gateway
+- dashboards and admin panels
+- IDE extensions
+- external bridges that do not need to become channel plugins
+- integration tests with fake or real Gateway transports
 
 Use the Plugin SDK when code runs inside OpenClaw:
 
-* provider plugins
-* channel plugins
-* tool or lifecycle hooks
-* agent harness plugins
-* trusted runtime helpers
+- provider plugins
+- channel plugins
+- tool or lifecycle hooks
+- agent harness plugins
+- trusted runtime helpers
 
 App SDK code should import from `@openclaw/sdk`. Plugin code should import from
 documented `openclaw/plugin-sdk/*` subpaths. Do not mix the two contracts.
 
 ## Related
 
-* [OpenClaw App SDK API design](/reference/openclaw-sdk-api-design)
-* [Gateway RPC reference](/reference/rpc)
-* [Agent loop](/concepts/agent-loop)
-* [Agent runtimes](/concepts/agent-runtimes)
-* [Sessions](/concepts/session)
-* [Background tasks](/automation/tasks)
-* [ACP agents](/tools/acp-agents)
-* [Plugin SDK overview](/plugins/sdk-overview)
+- [OpenClaw App SDK API design](/reference/openclaw-sdk-api-design)
+- [Gateway RPC reference](/reference/rpc)
+- [Agent loop](/concepts/agent-loop)
+- [Agent runtimes](/concepts/agent-runtimes)
+- [Sessions](/concepts/session)
+- [Background tasks](/automation/tasks)
+- [ACP agents](/tools/acp-agents)
+- [Plugin SDK overview](/plugins/sdk-overview)
+
+---

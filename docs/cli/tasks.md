@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw tasks`"
 source: "https://docs.openclaw.ai/cli/tasks"
-source_hash: "0d3578c2f653688d85c2c41733b3a002b3bd2e61c7198b2ff49a2e412d289209"
+source_hash: "a1740b84e3b04d16821b7c274ef766397bb50395f97bcabd84a026ac588e4935"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tasks.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # `openclaw tasks`
 Source: https://docs.openclaw.ai/cli/tasks
 
-
-
 Inspect durable background tasks and Task Flow state. With no subcommand,
 `openclaw tasks` is equivalent to `openclaw tasks list`.
 
@@ -22,7 +20,7 @@ See [Background Tasks](/automation/tasks) for the lifecycle and delivery model.
 
 ## Usage
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks
 openclaw tasks list
 openclaw tasks list --runtime acp
@@ -40,15 +38,15 @@ openclaw tasks flow cancel <lookup>
 
 ## Root Options
 
-* `--json`: output JSON.
-* `--runtime <name>`: filter by kind: `subagent`, `acp`, `cron`, or `cli`.
-* `--status <name>`: filter by status: `queued`, `running`, `succeeded`, `failed`, `timed_out`, `cancelled`, or `lost`.
+- `--json`: output JSON.
+- `--runtime <name>`: filter by kind: `subagent`, `acp`, `cron`, or `cli`.
+- `--status <name>`: filter by status: `queued`, `running`, `succeeded`, `failed`, `timed_out`, `cancelled`, or `lost`.
 
 ## Subcommands
 
 ### `list`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks list [--runtime <name>] [--status <name>] [--json]
 ```
 
@@ -56,7 +54,7 @@ Lists tracked background tasks newest first.
 
 ### `show`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks show <lookup> [--json]
 ```
 
@@ -64,7 +62,7 @@ Shows one task by task ID, run ID, or session key.
 
 ### `notify`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks notify <lookup> <done_only|state_changes|silent>
 ```
 
@@ -72,7 +70,7 @@ Changes the notification policy for a running task.
 
 ### `cancel`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks cancel <lookup>
 ```
 
@@ -80,7 +78,7 @@ Cancels a running background task.
 
 ### `audit`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks audit [--severity <warn|error>] [--code <name>] [--limit <n>] [--json]
 ```
 
@@ -88,7 +86,7 @@ Surfaces stale, lost, delivery-failed, or otherwise inconsistent task and Task F
 
 ### `maintenance`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks maintenance [--apply] [--json]
 ```
 
@@ -106,7 +104,7 @@ non-cron session rows untouched.
 
 ### `flow`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks flow list [--status <name>] [--json]
 openclaw tasks flow show <lookup> [--json]
 openclaw tasks flow cancel <lookup>
@@ -116,5 +114,7 @@ Inspects or cancels durable Task Flow state under the task ledger.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Background tasks](/automation/tasks)
+- [CLI reference](/cli)
+- [Background tasks](/automation/tasks)
+
+---

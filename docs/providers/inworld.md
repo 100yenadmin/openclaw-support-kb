@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld"
 source: "https://docs.openclaw.ai/providers/inworld"
-source_hash: "d02b4a2e0b1439ad0760abdab3e36fde635445ac8833e55322542d77180a2ea8"
+source_hash: "ee2751e0a356147206a2bb2257fc63f5cf9da905f6e18009bed73c43a9679979"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/inworld.md"
@@ -13,33 +13,34 @@ duplicate_index: 1
 # Inworld
 Source: https://docs.openclaw.ai/providers/inworld
 
-
-
 Inworld is a streaming text-to-speech (TTS) provider. In OpenClaw it
-synthesizes outbound reply audio (MP3 by default, OGG\_OPUS for voice notes)
+synthesizes outbound reply audio (MP3 by default, OGG_OPUS for voice notes)
 and PCM audio for telephony channels such as Voice Call.
 
 OpenClaw posts to Inworld's streaming TTS endpoint, concatenates the
 returned base64 audio chunks into a single buffer, and hands the result to
 the standard reply-audio pipeline.
 
-| Property      | Value                                                            |
-| ------------- | ---------------------------------------------------------------- |
-| Provider id   | `inworld`                                                        |
-| Plugin        | bundled, `enabledByDefault: true`                                |
-| Contract      | `speechProviders` (TTS only)                                     |
-| Auth env var  | `INWORLD_API_KEY` (HTTP Basic, Base64 dashboard credential)      |
-| Base URL      | `https://api.inworld.ai`                                         |
-| Default voice | `Sarah`                                                          |
-| Default model | `inworld-tts-1.5-max`                                            |
-| Output        | MP3 (default), OGG\_OPUS (voice notes), PCM 22050 Hz (telephony) |
-| Website       | [inworld.ai](https://inworld.ai)                                 |
-| Docs          | [docs.inworld.ai/tts/tts](https://docs.inworld.ai/tts/tts)       |
+| Property      | Value                                                           |
+| ------------- | --------------------------------------------------------------- |
+| Provider id   | `inworld`                                                       |
+| Plugin        | bundled, `enabledByDefault: true`                               |
+| Contract      | `speechProviders` (TTS only)                                    |
+| Auth env var  | `INWORLD_API_KEY` (HTTP Basic, Base64 dashboard credential)     |
+| Base URL      | `https://api.inworld.ai`                                        |
+| Default voice | `Sarah`                                                         |
+| Default model | `inworld-tts-1.5-max`                                           |
+| Output        | MP3 (default), OGG_OPUS (voice notes), PCM 22050 Hz (telephony) |
+| Website       | [inworld.ai](https://inworld.ai)                                |
+| Docs          | [docs.inworld.ai/tts/tts](https://docs.inworld.ai/tts/tts)      |
 
 ## Getting started
 
-<Steps>
-  <Step title="Set your API key">
+Steps
+
+
+Set your API key
+
     Copy the credential from your Inworld dashboard (Workspace > API Keys)
     and set it as an env var. The value is sent verbatim as the HTTP Basic
     credential, so do not Base64-encode it again or convert it to a bearer
@@ -48,10 +49,12 @@ the standard reply-audio pipeline.
     ```
     INWORLD_API_KEY=<base64-credential-from-dashboard>
     ```
-  </Step>
 
-  <Step title="Select Inworld in messages.tts">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Select Inworld in messages.tts
+
+    ```json5
     {
       messages: {
         tts: {
@@ -67,14 +70,14 @@ the standard reply-audio pipeline.
       },
     }
     ```
-  </Step>
 
-  <Step title="Send a message">
+
+Send a message
+
     Send a reply through any connected channel. OpenClaw synthesizes the
-    audio with Inworld and delivers it as MP3 (or OGG\_OPUS when the channel
+    audio with Inworld and delivers it as MP3 (or OGG_OPUS when the channel
     expects a voice note).
-  </Step>
-</Steps>
+
 
 ## Configuration options
 
@@ -88,49 +91,60 @@ the standard reply-audio pipeline.
 
 ## Notes
 
-<AccordionGroup>
-  <Accordion title="Authentication">
+AccordionGroup
+
+
+Authentication
+
     Inworld uses HTTP Basic auth with a single Base64-encoded credential
     string. Copy it verbatim from the Inworld dashboard. The provider sends
     it as `Authorization: Basic <apiKey>` without any further encoding, so
     do not Base64-encode it yourself and do not pass a bearer-style token.
     See [TTS auth notes](/tools/tts#inworld-primary) for the same callout.
-  </Accordion>
 
-  <Accordion title="Models">
+
+Models
+
     Supported model ids: `inworld-tts-1.5-max` (default),
     `inworld-tts-1.5-mini`, `inworld-tts-1-max`, `inworld-tts-1`.
-  </Accordion>
 
-  <Accordion title="Audio outputs">
+
+Audio outputs
+
     Replies use MP3 by default. When the channel target is `voice-note`
     OpenClaw asks Inworld for `OGG_OPUS` so the audio plays as a native
     voice bubble. Telephony synthesis uses raw `PCM` at 22050 Hz to feed
     the telephony bridge.
-  </Accordion>
 
-  <Accordion title="Custom endpoints">
+
+Custom endpoints
+
     Override the API host with `messages.tts.providers.inworld.baseUrl`.
     Trailing slashes are stripped before requests are sent.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Text-to-speech" href="/tools/tts" icon="waveform-lines">
+CardGroup
+
+
+Text-to-speech
+
     TTS overview, providers, and `messages.tts` config.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config reference including `messages.tts` settings.
-  </Card>
 
-  <Card title="Providers" href="/providers" icon="grid">
+
+Providers
+
     All bundled OpenClaw providers.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Common issues and debugging steps.
-  </Card>
-</CardGroup>
+
+---

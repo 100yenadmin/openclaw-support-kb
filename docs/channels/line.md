@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LINE"
 source: "https://docs.openclaw.ai/channels/line"
-source_hash: "0a1d337d0430259ef1c1b076ce276d970b5c9ee7233b5cc7f10dc3c746028e13"
+source_hash: "1362a69fec83a1c093445d2a0f68ff79bbe21a652cb219e6f9e84cf0dd4a20ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/line.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # LINE
 Source: https://docs.openclaw.ai/channels/line
-
-
 
 LINE connects to OpenClaw via the LINE Messaging API. The plugin runs as a webhook
 receiver on the gateway and uses your channel access token + channel secret for
@@ -27,13 +25,13 @@ are not supported.
 
 Install LINE before configuring the channel:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/line
 ```
 
 Local checkout (when running from a git repo):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install ./path/to/local/line-plugin
 ```
 
@@ -58,14 +56,14 @@ If you need a custom path, set `channels.line.webhookPath` or
 
 Security note:
 
-* LINE signature verification is body-dependent (HMAC over the raw body), so OpenClaw applies strict pre-auth body limits and timeout before verification.
-* OpenClaw processes webhook events from the verified raw request bytes. Upstream middleware-transformed `req.body` values are ignored for signature-integrity safety.
+- LINE signature verification is body-dependent (HMAC over the raw body), so OpenClaw applies strict pre-auth body limits and timeout before verification.
+- OpenClaw processes webhook events from the verified raw request bytes. Upstream middleware-transformed `req.body` values are ignored for signature-integrity safety.
 
 ## Configure
 
 Minimal config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     line: {
@@ -80,7 +78,7 @@ Minimal config:
 
 Public DM config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     line: {
@@ -96,12 +94,12 @@ Public DM config:
 
 Env vars (default account only):
 
-* `LINE_CHANNEL_ACCESS_TOKEN`
-* `LINE_CHANNEL_SECRET`
+- `LINE_CHANNEL_ACCESS_TOKEN`
+- `LINE_CHANNEL_SECRET`
 
 Token/secret files:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     line: {
@@ -116,7 +114,7 @@ Token/secret files:
 
 Multiple accounts:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     line: {
@@ -137,36 +135,38 @@ Multiple accounts:
 Direct messages default to pairing. Unknown senders get a pairing code and their
 messages are ignored until approved.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw pairing list line
-openclaw pairing approve line <CODE>
+openclaw pairing approve line
+CODE
+
 ```
 
 Allowlists and policies:
 
-* `channels.line.dmPolicy`: `pairing | allowlist | open | disabled`
-* `channels.line.allowFrom`: allowlisted LINE user IDs for DMs; `dmPolicy: "open"` requires `["*"]`
-* `channels.line.groupPolicy`: `allowlist | open | disabled`
-* `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups
-* Per-group overrides: `channels.line.groups.<groupId>.allowFrom`
-* Static sender access groups can be referenced from `allowFrom`, `groupAllowFrom`, and per-group `allowFrom` with `accessGroup:<name>`.
-* Runtime note: if `channels.line` is completely missing, runtime falls back to `groupPolicy="allowlist"` for group checks (even if `channels.defaults.groupPolicy` is set).
+- `channels.line.dmPolicy`: `pairing | allowlist | open | disabled`
+- `channels.line.allowFrom`: allowlisted LINE user IDs for DMs; `dmPolicy: "open"` requires `["*"]`
+- `channels.line.groupPolicy`: `allowlist | open | disabled`
+- `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups
+- Per-group overrides: `channels.line.groups.<groupId>.allowFrom`
+- Static sender access groups can be referenced from `allowFrom`, `groupAllowFrom`, and per-group `allowFrom` with `accessGroup:<name>`.
+- Runtime note: if `channels.line` is completely missing, runtime falls back to `groupPolicy="allowlist"` for group checks (even if `channels.defaults.groupPolicy` is set).
 
 LINE IDs are case-sensitive. Valid IDs look like:
 
-* User: `U` + 32 hex chars
-* Group: `C` + 32 hex chars
-* Room: `R` + 32 hex chars
+- User: `U` + 32 hex chars
+- Group: `C` + 32 hex chars
+- Room: `R` + 32 hex chars
 
 ## Message behavior
 
-* Text is chunked at 5000 characters.
-* Markdown formatting is stripped; code blocks and tables are converted into Flex
+- Text is chunked at 5000 characters.
+- Markdown formatting is stripped; code blocks and tables are converted into Flex
   cards when possible.
-* Streaming responses are buffered; LINE receives full chunks with a loading
+- Streaming responses are buffered; LINE receives full chunks with a loading
   animation while the agent works.
-* Media downloads are capped by `channels.line.mediaMaxMb` (default 10).
-* Inbound media is saved under `~/.openclaw/media/inbound/` before it is passed
+- Media downloads are capped by `channels.line.mediaMaxMb` (default 10).
+- Inbound media is saved under `~/.openclaw/media/inbound/` before it is passed
   to the agent, matching the shared media store used by other bundled channel
   plugins.
 
@@ -175,7 +175,7 @@ LINE IDs are case-sensitive. Valid IDs look like:
 Use `channelData.line` to send quick replies, locations, Flex cards, or template
 messages.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   text: "Here you go",
   channelData: {
@@ -216,8 +216,8 @@ The LINE plugin also ships a `/card` command for Flex message presets:
 
 LINE supports ACP (Agent Communication Protocol) conversation bindings:
 
-* `/acp spawn <agent> --bind here` binds the current LINE chat to an ACP session without creating a child thread.
-* Configured ACP bindings and active conversation-bound ACP sessions work on LINE like other conversation channels.
+- `/acp spawn <agent> --bind here` binds the current LINE chat to an ACP session without creating a child thread.
+- Configured ACP bindings and active conversation-bound ACP sessions work on LINE like other conversation channels.
 
 See [ACP agents](/tools/acp-agents) for details.
 
@@ -225,9 +225,9 @@ See [ACP agents](/tools/acp-agents) for details.
 
 The LINE plugin supports sending images, videos, and audio files through the agent message tool. Media is sent via the LINE-specific delivery path with appropriate preview and tracking handling:
 
-* **Images**: sent as LINE image messages with automatic preview generation.
-* **Videos**: sent with explicit preview and content-type handling.
-* **Audio**: sent as LINE audio messages.
+- **Images**: sent as LINE image messages with automatic preview generation.
+- **Videos**: sent with explicit preview and content-type handling.
+- **Audio**: sent as LINE audio messages.
 
 Outbound media URLs must be public HTTPS URLs. OpenClaw validates the target hostname before handing the URL to LINE and rejects loopback, link-local, and private-network targets.
 
@@ -235,17 +235,19 @@ Generic media sends fall back to the existing image-only route when a LINE-speci
 
 ## Troubleshooting
 
-* **Webhook verification fails:** ensure the webhook URL is HTTPS and the
+- **Webhook verification fails:** ensure the webhook URL is HTTPS and the
   `channelSecret` matches the LINE console.
-* **No inbound events:** confirm the webhook path matches `channels.line.webhookPath`
+- **No inbound events:** confirm the webhook path matches `channels.line.webhookPath`
   and that the gateway is reachable from LINE.
-* **Media download errors:** raise `channels.line.mediaMaxMb` if media exceeds the
+- **Media download errors:** raise `channels.line.mediaMaxMb` if media exceeds the
   default limit.
 
 ## Related
 
-* [Channels Overview](/channels) — all supported channels
-* [Pairing](/channels/pairing) — DM authentication and pairing flow
-* [Groups](/channels/groups) — group chat behavior and mention gating
-* [Channel Routing](/channels/channel-routing) — session routing for messages
-* [Security](/gateway/security) — access model and hardening
+- [Channels Overview](/channels) — all supported channels
+- [Pairing](/channels/pairing) — DM authentication and pairing flow
+- [Groups](/channels/groups) — group chat behavior and mention gating
+- [Channel Routing](/channels/channel-routing) — session routing for messages
+- [Security](/gateway/security) — access model and hardening
+
+---

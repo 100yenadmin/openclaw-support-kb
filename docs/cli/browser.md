@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "4690936b19af5cfe7d3753892b737d5b5f19803477b4c6d015aa1d51d627b4ae"
+source_hash: "97c0ed8275c2c7d759260ae2dd5424c47f986b2a273a5de9fc2575609d6763c9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -13,28 +13,26 @@ duplicate_index: 1
 # Browser
 Source: https://docs.openclaw.ai/cli/browser
 
-
-
 # `openclaw browser`
 
 Manage OpenClaw's browser control surface and run browser actions (lifecycle, profiles, tabs, snapshots, screenshots, navigation, input, state emulation, and debugging).
 
 Related:
 
-* Browser tool + API: [Browser tool](/tools/browser)
+- Browser tool + API: [Browser tool](/tools/browser)
 
 ## Common flags
 
-* `--url <gatewayWsUrl>`: Gateway WebSocket URL (defaults to config).
-* `--token <token>`: Gateway token (if required).
-* `--timeout <ms>`: request timeout (ms).
-* `--expect-final`: wait for a final Gateway response.
-* `--browser-profile <name>`: choose a browser profile (default from config).
-* `--json`: machine-readable output (where supported).
+- `--url <gatewayWsUrl>`: Gateway WebSocket URL (defaults to config).
+- `--token <token>`: Gateway token (if required).
+- `--timeout <ms>`: request timeout (ms).
+- `--expect-final`: wait for a final Gateway response.
+- `--browser-profile <name>`: choose a browser profile (default from config).
+- `--json`: machine-readable output (where supported).
 
 ## Quick start (local)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser profiles
 openclaw browser --browser-profile openclaw start
 openclaw browser --browser-profile openclaw open https://example.com
@@ -49,7 +47,7 @@ If `start` fails with `not reachable after start`, troubleshoot CDP readiness fi
 
 Minimal sequence:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser --browser-profile openclaw doctor
 openclaw browser --browser-profile openclaw start
 openclaw browser --browser-profile openclaw tabs
@@ -60,7 +58,7 @@ Detailed guidance: [Browser troubleshooting](/tools/browser#cdp-startup-failure-
 
 ## Lifecycle
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser status
 openclaw browser doctor
 openclaw browser doctor --deep
@@ -72,18 +70,18 @@ openclaw browser --browser-profile openclaw reset-profile
 
 Notes:
 
-* `doctor --deep` adds a live snapshot probe. It is useful when basic CDP
+- `doctor --deep` adds a live snapshot probe. It is useful when basic CDP
   readiness is green but you want proof that the current tab can be inspected.
-* For `attachOnly` and remote CDP profiles, `openclaw browser stop` closes the
+- For `attachOnly` and remote CDP profiles, `openclaw browser stop` closes the
   active control session and clears temporary emulation overrides even when
   OpenClaw did not launch the browser process itself.
-* For local managed profiles, `openclaw browser stop` stops the spawned browser
+- For local managed profiles, `openclaw browser stop` stops the spawned browser
   process.
-* `openclaw browser start --headless` applies only to that start request and
+- `openclaw browser start --headless` applies only to that start request and
   only when OpenClaw launches a local managed browser. It does not rewrite
   `browser.headless` or profile config, and it is a no-op for an already-running
   browser.
-* On Linux hosts without `DISPLAY` or `WAYLAND_DISPLAY`, local managed profiles
+- On Linux hosts without `DISPLAY` or `WAYLAND_DISPLAY`, local managed profiles
   run headless automatically unless `OPENCLAW_BROWSER_HEADLESS=0`,
   `browser.headless=false`, or `browser.profiles.<name>.headless=false`
   explicitly requests a visible browser.
@@ -96,7 +94,7 @@ If `openclaw browser` is an unknown command, check `plugins.allow` in
 When `plugins.allow` is present, list the bundled browser plugin explicitly
 unless the config already has a root `browser` block:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     allow: ["telegram", "browser"],
@@ -114,11 +112,11 @@ Related: [Browser tool](/tools/browser#missing-browser-command-or-tool)
 
 Profiles are named browser routing configs. In practice:
 
-* `openclaw`: launches or attaches to a dedicated OpenClaw-managed Chrome instance (isolated user data dir).
-* `user`: controls your existing signed-in Chrome session via Chrome DevTools MCP.
-* custom CDP profiles: point at a local or remote CDP endpoint.
+- `openclaw`: launches or attaches to a dedicated OpenClaw-managed Chrome instance (isolated user data dir).
+- `user`: controls your existing signed-in Chrome session via Chrome DevTools MCP.
+- custom CDP profiles: point at a local or remote CDP endpoint.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser profiles
 openclaw browser create-profile --name work --color "#FF5A36"
 openclaw browser create-profile --name chrome-live --driver existing-session
@@ -128,13 +126,13 @@ openclaw browser delete-profile --name work
 
 Use a specific profile:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser --browser-profile work tabs
 ```
 
 ## Tabs
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser tabs
 openclaw browser tab new --label docs
 openclaw browser tab label t1 docs
@@ -159,14 +157,14 @@ when it can prove the match. Raw target ids remain volatile; prefer
 
 Snapshot:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser snapshot
 openclaw browser snapshot --urls
 ```
 
 Screenshot:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser screenshot
 openclaw browser screenshot --full-page
 openclaw browser screenshot --ref e12
@@ -175,18 +173,18 @@ openclaw browser screenshot --labels
 
 Notes:
 
-* `--full-page` is for page captures only; it cannot be combined with `--ref`
+- `--full-page` is for page captures only; it cannot be combined with `--ref`
   or `--element`.
-* `existing-session` / `user` profiles support page screenshots and `--ref`
+- `existing-session` / `user` profiles support page screenshots and `--ref`
   screenshots from snapshot output, but not CSS `--element` screenshots.
-* `--labels` overlays current snapshot refs on the screenshot.
-* `snapshot --urls` appends discovered link destinations to AI snapshots so
+- `--labels` overlays current snapshot refs on the screenshot.
+- `snapshot --urls` appends discovered link destinations to AI snapshots so
   agents can choose direct navigation targets instead of guessing from link
   text alone.
 
 Navigate/click/type (ref-based UI automation):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser navigate https://example.com
 openclaw browser click <ref>
 openclaw browser click-coords 120 340
@@ -211,7 +209,7 @@ store and pass `suggestedTargetId`/labels for long-lived workflows.
 
 File + dialog helpers:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser upload /tmp/openclaw/uploads/file.pdf --ref <ref>
 openclaw browser waitfordownload
 openclaw browser download <ref> report.pdf
@@ -232,7 +230,7 @@ answer it directly. Dialogs handled outside OpenClaw appear under
 
 Viewport + emulation:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser resize 1280 720
 openclaw browser set viewport 1280 720
 openclaw browser set offline on
@@ -247,7 +245,7 @@ openclaw browser set credentials myuser mypass
 
 Cookies + storage:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser cookies
 openclaw browser cookies set session abc123 --url https://example.com
 openclaw browser cookies clear
@@ -258,7 +256,7 @@ openclaw browser storage session clear
 
 ## Debugging
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser console --level error
 openclaw browser pdf
 openclaw browser responsebody "**/api"
@@ -273,7 +271,7 @@ openclaw browser trace stop --out trace.zip
 
 Use the built-in `user` profile, or create your own `existing-session` profile:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw browser --browser-profile user tabs
 openclaw browser create-profile --name chrome-live --driver existing-session
 openclaw browser create-profile --name brave-live --driver existing-session --user-data-dir "~/Library/Application Support/BraveSoftware/Brave-Browser"
@@ -284,21 +282,21 @@ This path is host-only. For Docker, headless servers, Browserless, or other remo
 
 Current existing-session limits:
 
-* snapshot-driven actions use refs, not CSS selectors
-* `browser.actionTimeoutMs` defaults supported `act` requests to 60000 ms when
+- snapshot-driven actions use refs, not CSS selectors
+- `browser.actionTimeoutMs` defaults supported `act` requests to 60000 ms when
   callers omit `timeoutMs`; per-call `timeoutMs` still wins.
-* `click` is left-click only
-* `type` does not support `slowly=true`
-* `press` does not support `delayMs`
-* `hover`, `scrollintoview`, `drag`, `select`, `fill`, and `evaluate` reject
+- `click` is left-click only
+- `type` does not support `slowly=true`
+- `press` does not support `delayMs`
+- `hover`, `scrollintoview`, `drag`, `select`, `fill`, and `evaluate` reject
   per-call timeout overrides
-* `select` supports one value only
-* `wait --load networkidle` is not supported
-* file uploads require `--ref` / `--input-ref`, do not support CSS
+- `select` supports one value only
+- `wait --load networkidle` is not supported
+- file uploads require `--ref` / `--input-ref`, do not support CSS
   `--element`, and currently support one file at a time
-* dialog hooks do not support `--timeout`
-* screenshots support page captures and `--ref`, but not CSS `--element`
-* `responsebody`, download interception, PDF export, and batch actions still
+- dialog hooks do not support `--timeout`
+- screenshots support page captures and `--ref`, but not CSS `--element`
+- `responsebody`, download interception, PDF export, and batch actions still
   require a managed browser or raw CDP profile
 
 ## Remote browser control (node host proxy)
@@ -311,5 +309,7 @@ Security + remote setup: [Browser tool](/tools/browser), [Remote access](/gatewa
 
 ## Related
 
-* [CLI reference](/cli)
-* [Browser](/tools/browser)
+- [CLI reference](/cli)
+- [Browser](/tools/browser)
+
+---

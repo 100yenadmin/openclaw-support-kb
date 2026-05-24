@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "b1392cdd969c1288f0a599c1f66e79dc3a40de854b448fb50340090cc698d644"
+source_hash: "f86223a5dc562e617c83133b9c4b8ac573aa5efafe371cda40072309eef1ae71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Manage plugins
 Source: https://docs.openclaw.ai/plugins/manage-plugins
-
-
 
 Use this page for common plugin management commands. For the exhaustive command
 contract, flags, source-selection rules, and edge cases, see
@@ -28,7 +26,7 @@ Most install workflows are:
 
 ## List and search plugins
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins list
 openclaw plugins list --enabled
 openclaw plugins list --verbose
@@ -38,7 +36,7 @@ openclaw plugins search "calendar"
 
 Use `--json` for scripts:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins list --json \
   | jq '.plugins[] | {id, enabled, format, source, dependencyStatus}'
 ```
@@ -54,7 +52,7 @@ install hints such as `openclaw plugins install clawhub:<package>`.
 
 ## Install plugins
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Search ClawHub for plugin packages.
 openclaw plugins search "calendar"
 
@@ -93,7 +91,7 @@ Gateway with config reload enabled restarts automatically. If the Gateway is not
 managed or reload is disabled, restart it yourself before checking live runtime
 surfaces:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway restart
 openclaw plugins inspect <plugin-id> --runtime --json
 ```
@@ -105,7 +103,7 @@ config, and registry checks.
 
 ## Update plugins
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins update <plugin-id>
 openclaw plugins update <npm-package-or-spec>
 openclaw plugins update --all
@@ -119,7 +117,7 @@ later `update <plugin-id>` runs.
 For npm installs, you can pass an explicit package spec to switch the tracked
 record:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins update @scope/openclaw-plugin@beta
 openclaw plugins update @scope/openclaw-plugin
 ```
@@ -133,7 +131,7 @@ matching `@beta` releases. For the exact fallback and pinning rules, see
 
 ## Uninstall plugins
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins uninstall <plugin-id> --dry-run
 openclaw plugins uninstall <plugin-id>
 openclaw plugins uninstall <plugin-id> --keep-files
@@ -165,7 +163,7 @@ ClawHub is the primary public discovery surface for OpenClaw plugins. Publish
 there when you want users to find plugin metadata, version history, registry
 scan results, and install hints before they install.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm i -g clawhub
 clawhub login
 clawhub package publish your-org/your-plugin --dry-run
@@ -176,7 +174,7 @@ clawhub package publish your-org/your-plugin@v1.0.0
 Native npm plugins must include a plugin manifest and package metadata before
 publishing:
 
-```json package.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json package.json
 {
   "name": "@acme/openclaw-plugin",
   "version": "1.0.0",
@@ -187,7 +185,7 @@ publishing:
 }
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm publish --access public
 openclaw plugins install npm:@acme/openclaw-plugin
 openclaw plugins install npm:@acme/openclaw-plugin@beta
@@ -197,20 +195,22 @@ openclaw plugins install npm:@acme/openclaw-plugin@1.0.0
 Use these pages for the full publishing contract instead of treating this page
 as the publishing reference:
 
-* [ClawHub publishing](/clawhub/publishing) explains owners, scopes, releases,
+- [ClawHub publishing](/clawhub/publishing) explains owners, scopes, releases,
   review, package validation, and package transfer.
-* [Building plugins](/plugins/building-plugins) shows the plugin package shape
+- [Building plugins](/plugins/building-plugins) shows the plugin package shape
   and first publish workflow.
-* [Plugin manifest](/plugins/manifest) defines native plugin manifest fields.
+- [Plugin manifest](/plugins/manifest) defines native plugin manifest fields.
 
 If the same package is available on both ClawHub and npm, use the explicit
 `clawhub:` or `npm:` prefix when you need to force one source.
 
 ## Related
 
-* [Plugins](/tools/plugin) - install, configure, restart, and troubleshoot
-* [`openclaw plugins`](/cli/plugins) - full CLI reference
-* [Community plugins](/plugins/community) - public discovery and ClawHub publishing
-* [ClawHub](/clawhub/cli) - registry CLI operations
-* [Building plugins](/plugins/building-plugins) - create a plugin package
-* [Plugin manifest](/plugins/manifest) - manifest and package metadata
+- [Plugins](/tools/plugin) - install, configure, restart, and troubleshoot
+- [`openclaw plugins`](/cli/plugins) - full CLI reference
+- [Community plugins](/plugins/community) - public discovery and ClawHub publishing
+- [ClawHub](/clawhub/cli) - registry CLI operations
+- [Building plugins](/plugins/building-plugins) - create a plugin package
+- [Plugin manifest](/plugins/manifest) - manifest and package metadata
+
+---

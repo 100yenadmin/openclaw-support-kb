@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "1f067a5a270757c540d72d466a37256c7fa695420f2ec02cb78adc4819c65f04"
+source_hash: "bacab62b67029e9391bca92cb251dd55e98f21797802668d1e8b056a6478c574"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Creating skills
 Source: https://docs.openclaw.ai/tools/creating-skills
 
-
-
 Skills teach the agent how and when to use tools. Each skill is a directory
 containing a `SKILL.md` file with YAML frontmatter and markdown instructions.
 
@@ -22,20 +20,26 @@ For how skills are loaded and prioritized, see [Skills](/tools/skills).
 
 ## Create your first skill
 
-<Steps>
-  <Step title="Create the skill directory">
+Steps
+
+
+Create the skill directory
+
     Skills live in your workspace. Create a new folder:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     mkdir -p ~/.openclaw/workspace/skills/hello-world
     ```
-  </Step>
 
-  <Step title="Write SKILL.md">
+
+
+
+Write SKILL.md
+
     Create `SKILL.md` inside that directory. The frontmatter defines metadata,
     and the markdown body contains instructions for the agent.
 
-    ```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```markdown
     ---
     name: hello-world
     description: A simple skill that says hello.
@@ -49,18 +53,24 @@ For how skills are loaded and prioritized, see [Skills](/tools/skills).
 
     Use hyphen-case with lowercase letters, digits, and hyphens for the skill
     `name`. Keep the folder name and frontmatter `name` aligned.
-  </Step>
 
-  <Step title="Add tools (optional)">
+
+
+
+Add tools (optional)
+
     You can define custom tool schemas in the frontmatter or instruct the agent
     to use existing system tools (like `exec` or `browser`). Skills can also
     ship inside plugins alongside the tools they document.
-  </Step>
 
-  <Step title="Load the skill">
+
+
+
+Load the skill
+
     Start a new session so OpenClaw picks up the skill:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     # From chat
     /new
 
@@ -70,21 +80,24 @@ For how skills are loaded and prioritized, see [Skills](/tools/skills).
 
     Verify the skill loaded:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw skills list
     ```
-  </Step>
 
-  <Step title="Test it">
+
+
+
+Test it
+
     Send a message that should trigger the skill:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw agent --message "give me a greeting"
     ```
 
     Or just chat with the agent and ask for a greeting.
-  </Step>
-</Steps>
+
+
 
 ## Skill metadata reference
 
@@ -100,10 +113,10 @@ The YAML frontmatter supports these fields:
 
 ## Best practices
 
-* **Be concise** — instruct the model on *what* to do, not how to be an AI
-* **Safety first** — if your skill uses `exec`, ensure prompts don't allow arbitrary command injection from untrusted input
-* **Test locally** — use `openclaw agent --message "..."` to test before sharing
-* **Use ClawHub** — browse and contribute skills at [ClawHub](https://clawhub.ai)
+- **Be concise** — instruct the model on _what_ to do, not how to be an AI
+- **Safety first** — if your skill uses `exec`, ensure prompts don't allow arbitrary command injection from untrusted input
+- **Test locally** — use `openclaw agent --message "..."` to test before sharing
+- **Use ClawHub** — browse and contribute skills at [ClawHub](https://clawhub.ai)
 
 ## Where skills live
 
@@ -118,7 +131,9 @@ The YAML frontmatter supports these fields:
 
 ## Related
 
-* [Skills reference](/tools/skills) — loading, precedence, and gating rules
-* [Skills config](/tools/skills-config) — `skills.*` config schema
-* [ClawHub](/clawhub) — public skill registry
-* [Building Plugins](/plugins/building-plugins) — plugins can ship skills
+- [Skills reference](/tools/skills) — loading, precedence, and gating rules
+- [Skills config](/tools/skills-config) — `skills.*` config schema
+- [ClawHub](/clawhub) — public skill registry
+- [Building Plugins](/plugins/building-plugins) — plugins can ship skills
+
+---

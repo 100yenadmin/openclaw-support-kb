@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenShell"
 source: "https://docs.openclaw.ai/gateway/openshell"
-source_hash: "1082849adc641170507904b78b2c99cd71b9bc3084763d8afb173f1e97f575b5"
+source_hash: "e94b29777b1f8c596b3cde6882c8387b5d9db4e13940209d2909d50b7d1ccb38"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openshell.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # OpenShell
 Source: https://docs.openclaw.ai/gateway/openshell
-
-
 
 OpenShell is a managed sandbox backend for OpenClaw. Instead of running Docker
 containers locally, OpenClaw delegates sandbox lifecycle to the `openshell` CLI,
@@ -26,21 +24,21 @@ and an optional `mirror` workspace mode.
 
 ## Prerequisites
 
-* OpenShell plugin installed (`openclaw plugins install @openclaw/openshell-sandbox`)
-* The `openshell` CLI installed and on `PATH` (or set a custom path via
+- OpenShell plugin installed (`openclaw plugins install @openclaw/openshell-sandbox`)
+- The `openshell` CLI installed and on `PATH` (or set a custom path via
   `plugins.entries.openshell.config.command`)
-* An OpenShell account with sandbox access
-* OpenClaw Gateway running on the host
+- An OpenShell account with sandbox access
+- OpenClaw Gateway running on the host
 
 ## Quick start
 
 1. Install and enable the plugin, then set the sandbox backend:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/openshell-sandbox
 ```
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -71,7 +69,7 @@ openclaw plugins install @openclaw/openshell-sandbox
 
 3. Verify:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw sandbox list
 openclaw sandbox explain
 ```
@@ -87,18 +85,18 @@ workspace to stay canonical**.
 
 Behavior:
 
-* Before `exec`, OpenClaw syncs the local workspace into the OpenShell sandbox.
-* After `exec`, OpenClaw syncs the remote workspace back to the local workspace.
-* File tools still operate through the sandbox bridge, but the local workspace
+- Before `exec`, OpenClaw syncs the local workspace into the OpenShell sandbox.
+- After `exec`, OpenClaw syncs the remote workspace back to the local workspace.
+- File tools still operate through the sandbox bridge, but the local workspace
   remains the source of truth between turns.
 
 Best for:
 
-* You edit files locally outside OpenClaw and want those changes visible in the
+- You edit files locally outside OpenClaw and want those changes visible in the
   sandbox automatically.
-* You want the OpenShell sandbox to behave as much like the Docker backend as
+- You want the OpenShell sandbox to behave as much like the Docker backend as
   possible.
-* You want the host workspace to reflect sandbox writes after each exec turn.
+- You want the host workspace to reflect sandbox writes after each exec turn.
 
 Tradeoff: extra sync cost before and after each exec.
 
@@ -109,23 +107,23 @@ Use `plugins.entries.openshell.config.mode: "remote"` when you want the
 
 Behavior:
 
-* When the sandbox is first created, OpenClaw seeds the remote workspace from
+- When the sandbox is first created, OpenClaw seeds the remote workspace from
   the local workspace once.
-* After that, `exec`, `read`, `write`, `edit`, and `apply_patch` operate
+- After that, `exec`, `read`, `write`, `edit`, and `apply_patch` operate
   directly against the remote OpenShell workspace.
-* OpenClaw does **not** sync remote changes back into the local workspace.
-* Prompt-time media reads still work because file and media tools read through
+- OpenClaw does **not** sync remote changes back into the local workspace.
+- Prompt-time media reads still work because file and media tools read through
   the sandbox bridge.
 
 Best for:
 
-* The sandbox should live primarily on the remote side.
-* You want lower per-turn sync overhead.
-* You do not want host-local edits to silently overwrite remote sandbox state.
+- The sandbox should live primarily on the remote side.
+- You want lower per-turn sync overhead.
+- You do not want host-local edits to silently overwrite remote sandbox state.
 
-<Warning>
-  If you edit files on the host outside OpenClaw after the initial seed, the remote sandbox does **not** see those changes. Use `openclaw sandbox recreate` to re-seed.
-</Warning>
+Warning
+
+If you edit files on the host outside OpenClaw after the initial seed, the remote sandbox does **not** see those changes. Use `openclaw sandbox recreate` to re-seed.
 
 ### Choosing a mode
 
@@ -164,7 +162,7 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) are configured under
 
 ### Minimal remote setup
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -190,7 +188,7 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) are configured under
 
 ### Mirror mode with GPU
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -221,7 +219,7 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) are configured under
 
 ### Per-agent OpenShell with custom gateway
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -260,7 +258,7 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) are configured under
 
 OpenShell sandboxes are managed through the normal sandbox CLI:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # List all sandbox runtimes (Docker + OpenShell)
 openclaw sandbox list
 
@@ -282,12 +280,12 @@ the local workspace remains canonical.
 
 Recreate after changing any of these:
 
-* `agents.defaults.sandbox.backend`
-* `plugins.entries.openshell.config.from`
-* `plugins.entries.openshell.config.mode`
-* `plugins.entries.openshell.config.policy`
+- `agents.defaults.sandbox.backend`
+- `plugins.entries.openshell.config.from`
+- `plugins.entries.openshell.config.mode`
+- `plugins.entries.openshell.config.policy`
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw sandbox recreate --all
 ```
 
@@ -299,9 +297,9 @@ the intended remote workspace.
 
 ## Current limitations
 
-* Sandbox browser is not supported on the OpenShell backend.
-* `sandbox.docker.binds` does not apply to OpenShell.
-* Docker-specific runtime knobs under `sandbox.docker.*` apply only to the Docker
+- Sandbox browser is not supported on the OpenShell backend.
+- `sandbox.docker.binds` does not apply to OpenShell.
+- Docker-specific runtime knobs under `sandbox.docker.*` apply only to the Docker
   backend.
 
 ## How it works
@@ -318,7 +316,9 @@ the intended remote workspace.
 
 ## Related
 
-* [Sandboxing](/gateway/sandboxing) -- modes, scopes, and backend comparison
-* [Sandbox vs Tool Policy vs Elevated](/gateway/sandbox-vs-tool-policy-vs-elevated) -- debugging blocked tools
-* [Multi-Agent Sandbox and Tools](/tools/multi-agent-sandbox-tools) -- per-agent overrides
-* [Sandbox CLI](/cli/sandbox) -- `openclaw sandbox` commands
+- [Sandboxing](/gateway/sandboxing) -- modes, scopes, and backend comparison
+- [Sandbox vs Tool Policy vs Elevated](/gateway/sandbox-vs-tool-policy-vs-elevated) -- debugging blocked tools
+- [Multi-Agent Sandbox and Tools](/tools/multi-agent-sandbox-tools) -- per-agent overrides
+- [Sandbox CLI](/cli/sandbox) -- `openclaw sandbox` commands
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "bbecf2791c98aa789ff912e2548cab80aff8f484435b39f7acd63e8b4ac7bc70"
+source_hash: "53d0ac1427bd40050aa4aafda3fdd277dab70bea5bf41222b73d7b6a4b337fe8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Building plugins
 Source: https://docs.openclaw.ai/plugins/building-plugins
 
-
-
 Plugins extend OpenClaw without changing core. A plugin can add a messaging
 channel, model provider, local CLI backend, agent tool, hook, media provider,
 or another plugin-owned capability.
@@ -22,7 +20,7 @@ or another plugin-owned capability.
 You do not need to add an external plugin to the OpenClaw repository. Publish
 the package to [ClawHub](/clawhub) and users install it with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install clawhub:<package-name>
 ```
 
@@ -31,31 +29,36 @@ Bare package specs still install from npm during the launch cutover. Use the
 
 ## Requirements
 
-* Use Node 22.19 or newer and a package manager such as `npm` or `pnpm`.
-* Be familiar with TypeScript ESM modules.
-* For in-repo bundled plugin work, clone the repository and run `pnpm install`.
+- Use Node 22.19 or newer and a package manager such as `npm` or `pnpm`.
+- Be familiar with TypeScript ESM modules.
+- For in-repo bundled plugin work, clone the repository and run `pnpm install`.
   Source-checkout plugin development is pnpm-only because OpenClaw loads bundled
   plugins from `extensions/*` workspace packages.
 
 ## Choose the plugin shape
 
-<CardGroup>
-  <Card title="Channel plugin" icon="messages-square" href="/plugins/sdk-channel-plugins">
+CardGroup
+
+
+Channel plugin
+
     Connect OpenClaw to a messaging platform.
-  </Card>
 
-  <Card title="Provider plugin" icon="cpu" href="/plugins/sdk-provider-plugins">
+
+Provider plugin
+
     Add a model, media, search, fetch, speech, or realtime provider.
-  </Card>
 
-  <Card title="CLI backend plugin" icon="terminal" href="/plugins/cli-backend-plugins">
+
+CLI backend plugin
+
     Run a local AI CLI through OpenClaw model fallback.
-  </Card>
 
-  <Card title="Tool plugin" icon="wrench" href="/plugins/tool-plugins">
+
+Tool plugin
+
     Register agent tools.
-  </Card>
-</CardGroup>
+
 
 ## Quickstart
 
@@ -63,46 +66,52 @@ Build a minimal tool plugin by registering one required agent tool. This is the
 shortest useful plugin shape and shows the package, manifest, entry point, and
 local proof.
 
-<Steps>
-  <Step title="Create package metadata">
-    <CodeGroup>
-      ```json package.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      {
-        "name": "@myorg/openclaw-my-plugin",
-        "version": "1.0.0",
-        "type": "module",
-        "openclaw": {
-          "extensions": ["./index.ts"],
-          "compat": {
-            "pluginApi": ">=2026.3.24-beta.2",
-            "minGatewayVersion": "2026.3.24-beta.2"
-          },
-          "build": {
-            "openclawVersion": "2026.3.24-beta.2",
-            "pluginSdkVersion": "2026.3.24-beta.2"
-          }
-        }
-      }
-      ```
+Steps
 
-      ```json openclaw.plugin.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      {
-        "id": "my-plugin",
-        "name": "My Plugin",
-        "description": "Adds a custom tool to OpenClaw",
-        "contracts": {
-          "tools": ["my_tool"]
-        },
-        "activation": {
-          "onStartup": true
-        },
-        "configSchema": {
-          "type": "object",
-          "additionalProperties": false
-        }
-      }
-      ```
-    </CodeGroup>
+
+Create package metadata
+
+
+CodeGroup
+
+```json package.json
+{
+  "name": "@myorg/openclaw-my-plugin",
+  "version": "1.0.0",
+  "type": "module",
+  "openclaw": {
+    "extensions": ["./index.ts"],
+    "compat": {
+      "pluginApi": ">=2026.3.24-beta.2",
+      "minGatewayVersion": "2026.3.24-beta.2"
+    },
+    "build": {
+      "openclawVersion": "2026.3.24-beta.2",
+      "pluginSdkVersion": "2026.3.24-beta.2"
+    }
+  }
+}
+```
+
+```json openclaw.plugin.json
+{
+  "id": "my-plugin",
+  "name": "My Plugin",
+  "description": "Adds a custom tool to OpenClaw",
+  "contracts": {
+    "tools": ["my_tool"]
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false
+  }
+}
+```
+
+
 
     Published external plugins should point runtime entries at built JavaScript
     files. See [SDK entry points](/plugins/sdk-entrypoints) for the full entry
@@ -114,10 +123,13 @@ local proof.
     intentionally. This example starts on Gateway startup.
 
     For every manifest field, see [Plugin manifest](/plugins/manifest).
-  </Step>
 
-  <Step title="Register the tool">
-    ```typescript index.ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Register the tool
+
+    ```typescript index.ts
     import { Type } from "typebox";
     import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
 
@@ -142,12 +154,15 @@ local proof.
 
     Use `definePluginEntry` for non-channel plugins. Channel plugins use
     `defineChannelPluginEntry`.
-  </Step>
 
-  <Step title="Test the runtime">
+
+
+
+Test the runtime
+
     For an installed or external plugin, inspect the loaded runtime:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw plugins inspect my-plugin --runtime --json
     ```
 
@@ -159,40 +174,46 @@ local proof.
     plugin packages from the `extensions/*` workspace. Run the closest targeted
     test:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     pnpm test -- extensions/my-plugin/
     pnpm check
     ```
-  </Step>
 
-  <Step title="Publish">
+
+
+
+Publish
+
     Validate the package before publishing:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     clawhub package publish your-org/your-plugin --dry-run
     clawhub package publish your-org/your-plugin
     ```
 
     The canonical ClawHub snippets live in `docs/snippets/plugin-publish/`.
-  </Step>
 
-  <Step title="Install">
+
+
+
+Install
+
     Install the published package through ClawHub:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw plugins install clawhub:your-org/your-plugin
     ```
-  </Step>
-</Steps>
 
-<a />
+
+
+<a id="registering-agent-tools"></a>
 
 ## Registering tools
 
 Tools can be required or optional. Required tools are always available when the
 plugin is enabled. Optional tools require user opt-in.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 register(api) {
   api.registerTool(
     {
@@ -211,7 +232,7 @@ register(api) {
 Every tool registered with `api.registerTool(...)` must also be declared in the
 plugin manifest:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "contracts": {
     "tools": ["workflow_tool"]
@@ -226,7 +247,7 @@ plugin manifest:
 
 Users opt in with `tools.allow`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: { allow: ["workflow_tool"] }, // or ["my-plugin"] for all tools from one plugin
 }
@@ -256,15 +277,14 @@ loading that plugin runtime until the tool is explicitly allowlisted.
 
 Import from focused SDK subpaths:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
-import { createPluginRuntimeStore } from "openclaw/plugin-sdk/runtime-store";
+```typescript
+
 ```
 
 Do not import from the deprecated root barrel:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { definePluginEntry } from "openclaw/plugin-sdk";
+```typescript
+
 ```
 
 Within your plugin package, use local barrel files such as `api.ts` and
@@ -283,13 +303,26 @@ For the full import map, see [Plugin SDK overview](/plugins/sdk-overview).
 
 ## Pre-submission checklist
 
-<Check>**package.json** has correct `openclaw` metadata</Check>
-<Check>**openclaw\.plugin.json** manifest is present and valid</Check>
-<Check>Entry point uses `defineChannelPluginEntry` or `definePluginEntry`</Check>
-<Check>All imports use focused `plugin-sdk/<subpath>` paths</Check>
-<Check>Internal imports use local modules, not SDK self-imports</Check>
-<Check>Tests pass (`pnpm test -- <bundled-plugin-root>/my-plugin/`)</Check>
-<Check>`pnpm check` passes (in-repo plugins)</Check>
+Check
+**package.json** has correct `openclaw` metadata
+
+Check
+**openclaw.plugin.json** manifest is present and valid
+
+Check
+Entry point uses `defineChannelPluginEntry` or `definePluginEntry`
+
+Check
+All imports use focused `plugin-sdk/<subpath>` paths
+
+Check
+Internal imports use local modules, not SDK self-imports
+
+Check
+Tests pass (`pnpm test -- <bundled-plugin-root>/my-plugin/`)
+
+Check
+`pnpm check` passes (in-repo plugins)
 
 ## Test against beta releases
 
@@ -302,37 +335,47 @@ For the full import map, see [Plugin SDK overview](/plugins/sdk-overview).
 
 ## Next steps
 
-<CardGroup>
-  <Card title="Channel Plugins" icon="messages-square" href="/plugins/sdk-channel-plugins">
+CardGroup
+
+
+Channel Plugins
+
     Build a messaging channel plugin
-  </Card>
 
-  <Card title="Provider Plugins" icon="cpu" href="/plugins/sdk-provider-plugins">
+
+Provider Plugins
+
     Build a model provider plugin
-  </Card>
 
-  <Card title="CLI Backend Plugins" icon="terminal" href="/plugins/cli-backend-plugins">
+
+CLI Backend Plugins
+
     Register a local AI CLI backend
-  </Card>
 
-  <Card title="SDK Overview" icon="book-open" href="/plugins/sdk-overview">
+
+SDK Overview
+
     Import map and registration API reference
-  </Card>
 
-  <Card title="Runtime Helpers" icon="settings" href="/plugins/sdk-runtime">
+
+Runtime Helpers
+
     TTS, search, subagent via api.runtime
-  </Card>
 
-  <Card title="Testing" icon="test-tubes" href="/plugins/sdk-testing">
+
+Testing
+
     Test utilities and patterns
-  </Card>
 
-  <Card title="Plugin Manifest" icon="file-json" href="/plugins/manifest">
+
+Plugin Manifest
+
     Full manifest schema reference
-  </Card>
-</CardGroup>
+
 
 ## Related
 
-* [Plugin hooks](/plugins/hooks)
-* [Plugin architecture](/plugins/architecture)
+- [Plugin hooks](/plugins/hooks)
+- [Plugin architecture](/plugins/architecture)
+
+---

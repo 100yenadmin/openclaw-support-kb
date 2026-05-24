@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
-source_hash: "1ab9359d2a0ef67786a8bf55b657718fc8df19bb84f9f11c1c75744ce12cbb72"
+source_hash: "38a96d548f12df6be3928e193bb4b22db9c175dd72565221ca230f904024552a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents-setup.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # ACP agents — setup
 Source: https://docs.openclaw.ai/tools/acp-agents-setup
-
-
 
 For the overview, operator runbook, and concepts, see [ACP agents](/tools/acp-agents).
 
@@ -37,20 +35,20 @@ Prefer the native route unless you explicitly need ACP/acpx behavior.
 
 Current acpx built-in harness aliases:
 
-* `claude`
-* `codex`
-* `copilot`
-* `cursor` (Cursor CLI: `cursor-agent acp`)
-* `droid`
-* `gemini`
-* `iflow`
-* `kilocode`
-* `kimi`
-* `kiro`
-* `openclaw`
-* `opencode`
-* `pi`
-* `qwen`
+- `claude`
+- `codex`
+- `copilot`
+- `cursor` (Cursor CLI: `cursor-agent acp`)
+- `droid`
+- `gemini`
+- `iflow`
+- `kilocode`
+- `kimi`
+- `kiro`
+- `openclaw`
+- `opencode`
+- `pi`
+- `qwen`
 
 When OpenClaw uses the acpx backend, prefer these values for `agentId` unless your acpx config defines custom agent aliases.
 If your local Cursor install still exposes ACP as `agent acp`, override the `cursor` agent command in your acpx config instead of changing the built-in default.
@@ -66,7 +64,7 @@ nor its own startup model flag, OpenClaw/acpx cannot force a model selection.
 
 Core ACP baseline:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   acp: {
     enabled: true,
@@ -104,7 +102,7 @@ Core ACP baseline:
 
 Thread binding config is channel-adapter specific. Example for Discord:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   session: {
     threadBindings: {
@@ -126,7 +124,7 @@ Thread binding config is channel-adapter specific. Example for Discord:
 
 If thread-bound ACP spawn does not work, verify the adapter feature flag first:
 
-* Discord: `channels.discord.threadBindings.spawnSessions=true`
+- Discord: `channels.discord.threadBindings.spawnSessions=true`
 
 Current-conversation binds do not require child-thread creation. They require an active conversation context and a channel adapter that exposes ACP conversation bindings.
 
@@ -137,7 +135,7 @@ See [Configuration Reference](/gateway/configuration-reference).
 Packaged installs use the official `@openclaw/acpx` runtime plugin for ACP.
 Install and enable it before using ACP harness sessions:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/acpx
 openclaw config set plugins.entries.acpx.enabled true
 ```
@@ -146,27 +144,27 @@ Source checkouts can also use the local workspace plugin after `pnpm install`.
 
 Start with:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /acp doctor
 ```
 
 If you disabled `acpx`, denied it via `plugins.allow` / `plugins.deny`, or want
 to switch back to the packaged plugin, use the explicit package path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/acpx
 openclaw config set plugins.entries.acpx.enabled true
 ```
 
 Local workspace install during development:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install ./path/to/local/acpx-plugin
 ```
 
 Then verify backend health:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /acp doctor
 ```
 
@@ -181,7 +179,7 @@ on-demand probe.
 
 Override the command or version in plugin config:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -197,14 +195,14 @@ Override the command or version in plugin config:
 }
 ```
 
-* `command` accepts an absolute path, relative path (resolved from the OpenClaw workspace), or command name.
-* `expectedVersion: "any"` disables strict version matching.
-* Custom `command` paths disable plugin-local auto-install.
+- `command` accepts an absolute path, relative path (resolved from the OpenClaw workspace), or command name.
+- `expectedVersion: "any"` disables strict version matching.
+- Custom `command` paths disable plugin-local auto-install.
 
 Override an individual ACP agent command with structured arguments when a path
 or flag value should remain one argv token:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -224,8 +222,8 @@ or flag value should remain one argv token:
 }
 ```
 
-* `agents.<id>.command` is the executable or existing command string for that ACP agent.
-* `agents.<id>.args` is optional. Each array item is shell-quoted before OpenClaw passes it through the current acpx command-string registry.
+- `agents.<id>.command` is the executable or existing command string for that ACP agent.
+- `agents.<id>.args` is optional. Each array item is shell-quoted before OpenClaw passes it through the current acpx command-string registry.
 
 See [Plugins](/tools/plugin).
 
@@ -244,25 +242,25 @@ the ACP harness.
 If you want ACP agents such as Codex or Claude Code to call installed
 OpenClaw plugin tools such as memory recall/store, enable the dedicated bridge:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.acpx.config.pluginToolsMcpBridge true
 ```
 
 What this does:
 
-* Injects a built-in MCP server named `openclaw-plugin-tools` into ACPX session
+- Injects a built-in MCP server named `openclaw-plugin-tools` into ACPX session
   bootstrap.
-* Exposes plugin tools already registered by installed and enabled OpenClaw
+- Exposes plugin tools already registered by installed and enabled OpenClaw
   plugins.
-* Keeps the feature explicit and default-off.
+- Keeps the feature explicit and default-off.
 
 Security and trust notes:
 
-* This expands the ACP harness tool surface.
-* ACP agents get access only to plugin tools already active in the gateway.
-* Treat this as the same trust boundary as letting those plugins execute in
+- This expands the ACP harness tool surface.
+- ACP agents get access only to plugin tools already active in the gateway.
+- Treat this as the same trust boundary as letting those plugins execute in
   OpenClaw itself.
-* Review installed plugins before enabling it.
+- Review installed plugins before enabling it.
 
 Custom `mcpServers` still work as before. The built-in plugin-tools bridge is an
 additional opt-in convenience, not a replacement for generic MCP server config.
@@ -273,16 +271,16 @@ By default, ACPX sessions also do **not** expose built-in OpenClaw tools through
 MCP. Enable the separate core-tools bridge when an ACP agent needs selected
 built-in tools such as `cron`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.acpx.config.openClawToolsMcpBridge true
 ```
 
 What this does:
 
-* Injects a built-in MCP server named `openclaw-tools` into ACPX session
+- Injects a built-in MCP server named `openclaw-tools` into ACPX session
   bootstrap.
-* Exposes selected built-in OpenClaw tools. The initial server exposes `cron`.
-* Keeps core-tool exposure explicit and default-off.
+- Exposes selected built-in OpenClaw tools. The initial server exposes `cron`.
+- Keeps core-tool exposure explicit and default-off.
 
 ### Runtime operation timeout configuration
 
@@ -291,7 +289,7 @@ seconds by default. This gives slower harnesses such as Gemini CLI enough time
 to complete ACP startup and initialization. Override it if your host needs a
 different operation limit:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.acpx.config.timeoutSeconds 180
 ```
 
@@ -305,7 +303,7 @@ plugin probes one harness agent. If `acp.allowedAgents` is set, it defaults to
 the first allowed agent; otherwise it defaults to `codex`. If your deployment
 needs a different ACP agent for health checks, set the probe agent explicitly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.acpx.config.probeAgent claude
 ```
 
@@ -340,21 +338,23 @@ Controls what happens when a permission prompt would be shown but no interactive
 
 Set via plugin config:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.acpx.config.permissionMode approve-all
 openclaw config set plugins.entries.acpx.config.nonInteractivePermissions fail
 ```
 
 Restart the gateway after changing these values.
 
-<Warning>
-  OpenClaw defaults to `permissionMode=approve-reads` and `nonInteractivePermissions=fail`. In non-interactive ACP sessions, any write or exec that triggers a permission prompt can fail with `AcpRuntimeError: Permission prompt unavailable in non-interactive mode`.
+Warning
 
-  If you need to restrict permissions, set `nonInteractivePermissions` to `deny` so sessions degrade gracefully instead of crashing.
-</Warning>
+OpenClaw defaults to `permissionMode=approve-reads` and `nonInteractivePermissions=fail`. In non-interactive ACP sessions, any write or exec that triggers a permission prompt can fail with `AcpRuntimeError: Permission prompt unavailable in non-interactive mode`.
+
+If you need to restrict permissions, set `nonInteractivePermissions` to `deny` so sessions degrade gracefully instead of crashing.
 
 ## Related
 
-* [ACP agents](/tools/acp-agents) — overview, operator runbook, concepts
-* [Sub-agents](/tools/subagents)
-* [Multi-agent routing](/concepts/multi-agent)
+- [ACP agents](/tools/acp-agents) — overview, operator runbook, concepts
+- [Sub-agents](/tools/subagents)
+- [Multi-agent routing](/concepts/multi-agent)
+
+---

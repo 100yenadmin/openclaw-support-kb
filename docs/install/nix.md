@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nix"
 source: "https://docs.openclaw.ai/install/nix"
-source_hash: "5c81e3e6e1dc307f036351ed85b9bc884f37a04854ba69c9ba392e849a3c07d9"
+source_hash: "52f7558113751a142e8fc8cf2d8c7af12df357e769a1fa8c7c4c7a1ef4e522d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/nix.md"
@@ -13,51 +13,54 @@ duplicate_index: 1
 # Nix
 Source: https://docs.openclaw.ai/install/nix
 
-
-
 Install OpenClaw declaratively with **[nix-openclaw](https://github.com/openclaw/nix-openclaw)** - the first-party, batteries-included Home Manager module.
 
-<Info>
-  The [nix-openclaw](https://github.com/openclaw/nix-openclaw) repo is the source of truth for Nix installation. This page is a quick overview.
-</Info>
+Info
+
+The [nix-openclaw](https://github.com/openclaw/nix-openclaw) repo is the source of truth for Nix installation. This page is a quick overview.
 
 ## What you get
 
-* Gateway + macOS app + tools (whisper, spotify, cameras) -- all pinned
-* Launchd service that survives reboots
-* Plugin system with declarative config
-* Instant rollback: `home-manager switch --rollback`
+- Gateway + macOS app + tools (whisper, spotify, cameras) -- all pinned
+- Launchd service that survives reboots
+- Plugin system with declarative config
+- Instant rollback: `home-manager switch --rollback`
 
 ## Quick start
 
-<Steps>
-  <Step title="Install Determinate Nix">
+Steps
+
+
+Install Determinate Nix
+
     If Nix is not already installed, follow the [Determinate Nix installer](https://github.com/DeterminateSystems/nix-installer) instructions.
-  </Step>
 
-  <Step title="Create a local flake">
+
+Create a local flake
+
     Use the agent-first template from the nix-openclaw repo:
-
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     mkdir -p ~/code/openclaw-local
     # Copy templates/agent-first/flake.nix from the nix-openclaw repo
     ```
-  </Step>
 
-  <Step title="Configure secrets">
+
+Configure secrets
+
     Set up your messaging bot token and model provider API key. Plain files at `~/.secrets/` work fine.
-  </Step>
 
-  <Step title="Fill in template placeholders and switch">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Fill in template placeholders and switch
+
+    ```bash
     home-manager switch
     ```
-  </Step>
 
-  <Step title="Verify">
+
+Verify
+
     Confirm the launchd service is running and your bot responds to messages.
-  </Step>
-</Steps>
+
 
 See the [nix-openclaw README](https://github.com/openclaw/nix-openclaw) for full module options and examples.
 
@@ -67,23 +70,23 @@ When `OPENCLAW_NIX_MODE=1` is set (automatic with nix-openclaw), OpenClaw enters
 
 You can also set it manually:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export OPENCLAW_NIX_MODE=1
 ```
 
 On macOS, the GUI app does not automatically inherit shell environment variables. Enable Nix mode via defaults instead:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 defaults write ai.openclaw.mac openclaw.nixMode -bool true
 ```
 
 ### What changes in Nix mode
 
-* Auto-install and self-mutation flows are disabled
-* `openclaw.json` is treated as immutable. Startup-derived defaults stay runtime-only, and config writers such as setup, onboarding, mutating `openclaw update`, plugin install/update/uninstall/enable, `doctor --fix`, `doctor --generate-gateway-token`, and `openclaw config set` refuse to edit the file.
-* Agents should edit the Nix source instead. For nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) and set config under `programs.openclaw.config` or `instances.<name>.config`.
-* Missing dependencies surface Nix-specific remediation messages
-* UI surfaces a read-only Nix mode banner
+- Auto-install and self-mutation flows are disabled
+- `openclaw.json` is treated as immutable. Startup-derived defaults stay runtime-only, and config writers such as setup, onboarding, mutating `openclaw update`, plugin install/update/uninstall/enable, `doctor --fix`, `doctor --generate-gateway-token`, and `openclaw config set` refuse to edit the file.
+- Agents should edit the Nix source instead. For nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) and set config under `programs.openclaw.config` or `instances.<name>.config`.
+- Missing dependencies surface Nix-specific remediation messages
+- UI surfaces a read-only Nix mode banner
 
 ### Config and state paths
 
@@ -101,28 +104,34 @@ The launchd/systemd gateway service auto-discovers Nix-profile binaries so
 plugins and tools that shell out to `nix`-installed executables work without
 manual PATH setup:
 
-* When `NIX_PROFILES` is set, every entry is added to the service PATH in
+- When `NIX_PROFILES` is set, every entry is added to the service PATH in
   right-to-left precedence (matches Nix shell precedence - rightmost wins).
-* When `NIX_PROFILES` is unset, `~/.nix-profile/bin` is added as a fallback.
+- When `NIX_PROFILES` is unset, `~/.nix-profile/bin` is added as a fallback.
 
 This applies to both macOS launchd and Linux systemd service environments.
 
 ## Related
 
-<CardGroup>
-  <Card title="nix-openclaw" href="https://github.com/openclaw/nix-openclaw" icon="arrow-up-right-from-square">
+CardGroup
+
+
+nix-openclaw
+
     Source-of-truth Home Manager module and full setup guide.
-  </Card>
 
-  <Card title="Setup wizard" href="/start/wizard" icon="wand-magic-sparkles">
+
+Setup wizard
+
     Non-Nix CLI setup walkthrough.
-  </Card>
 
-  <Card title="Docker" href="/install/docker" icon="docker">
+
+Docker
+
     Containerized setup as a non-Nix alternative.
-  </Card>
 
-  <Card title="Updating" href="/install/updating" icon="arrow-up-right-from-square">
+
+Updating
+
     Updating Home Manager-managed installs alongside the package.
-  </Card>
-</CardGroup>
+
+---

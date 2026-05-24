@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hostinger"
 source: "https://docs.openclaw.ai/install/hostinger"
-source_hash: "995e309654ebae8f4a5af9f5f2e1b4429a113c1feb58b3c3f854523fc5e1d75f"
+source_hash: "1bac93bd4f2653c98327d696f195bf1360cb22d7bf4f10c6e7499dca69b0dc19"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/hostinger.md"
@@ -13,66 +13,84 @@ duplicate_index: 1
 # Hostinger
 Source: https://docs.openclaw.ai/install/hostinger
 
-
-
 Run a persistent OpenClaw Gateway on [Hostinger](https://www.hostinger.com/openclaw) via a **1-Click** managed deployment or a **VPS** install.
 
 ## Prerequisites
 
-* Hostinger account ([signup](https://www.hostinger.com/openclaw))
-* About 5-10 minutes
+- Hostinger account ([signup](https://www.hostinger.com/openclaw))
+- About 5-10 minutes
 
 ## Option A: 1-Click OpenClaw
 
 The fastest way to get started. Hostinger handles infrastructure, Docker, and automatic updates.
 
-<Steps>
-  <Step title="Purchase and launch">
+Steps
+
+
+Purchase and launch
+
     1. From the [Hostinger OpenClaw page](https://www.hostinger.com/openclaw), choose a Managed OpenClaw plan and complete checkout.
 
-    <Note>
-      During checkout you can select **Ready-to-Use AI** credits that are pre-purchased and integrated instantly inside OpenClaw -- no external accounts or API keys from other providers needed. You can start chatting right away. Alternatively, provide your own key from Anthropic, OpenAI, Google Gemini, or xAI during setup.
-    </Note>
-  </Step>
 
-  <Step title="Select a messaging channel">
+Note
+
+    During checkout you can select **Ready-to-Use AI** credits that are pre-purchased and integrated instantly inside OpenClaw -- no external accounts or API keys from other providers needed. You can start chatting right away. Alternatively, provide your own key from Anthropic, OpenAI, Google Gemini, or xAI during setup.
+
+
+
+
+
+Select a messaging channel
+
     Choose one or more channels to connect:
 
-    * **WhatsApp** -- scan the QR code shown in the setup wizard.
-    * **Telegram** -- paste the bot token from [BotFather](https://t.me/BotFather).
-  </Step>
+    - **WhatsApp** -- scan the QR code shown in the setup wizard.
+    - **Telegram** -- paste the bot token from [BotFather](https://t.me/BotFather).
 
-  <Step title="Complete installation">
+
+
+
+Complete installation
+
     Click **Finish** to deploy the instance. Once ready, access the OpenClaw dashboard from **OpenClaw Overview** in hPanel.
-  </Step>
-</Steps>
+
 
 ## Option B: OpenClaw on VPS
 
 More control over your server. Hostinger deploys OpenClaw via Docker on your VPS and you manage it through the **Docker Manager** in hPanel.
 
-<Steps>
-  <Step title="Purchase a VPS">
+Steps
+
+
+Purchase a VPS
+
     1. From the [Hostinger OpenClaw page](https://www.hostinger.com/openclaw), choose an OpenClaw on VPS plan and complete checkout.
 
-    <Note>
-      You can select **Ready-to-Use AI** credits during checkout -- these are pre-purchased and integrated instantly inside OpenClaw, so you can start chatting without any external accounts or API keys from other providers.
-    </Note>
-  </Step>
 
-  <Step title="Configure OpenClaw">
+Note
+
+    You can select **Ready-to-Use AI** credits during checkout -- these are pre-purchased and integrated instantly inside OpenClaw, so you can start chatting without any external accounts or API keys from other providers.
+
+
+
+
+
+Configure OpenClaw
+
     Once the VPS is provisioned, fill in the configuration fields:
 
-    * **Gateway token** -- auto-generated; save it for later use.
-    * **WhatsApp number** -- your number with country code (optional).
-    * **Telegram bot token** -- from [BotFather](https://t.me/BotFather) (optional).
-    * **API keys** -- only needed if you did not select Ready-to-Use AI credits during checkout.
-  </Step>
+    - **Gateway token** -- auto-generated; save it for later use.
+    - **WhatsApp number** -- your number with country code (optional).
+    - **Telegram bot token** -- from [BotFather](https://t.me/BotFather) (optional).
+    - **API keys** -- only needed if you did not select Ready-to-Use AI credits during checkout.
 
-  <Step title="Start OpenClaw">
+
+
+
+Start OpenClaw
+
     Click **Deploy**. Once running, open the OpenClaw dashboard from the hPanel by clicking on **Open**.
-  </Step>
-</Steps>
+
 
 Logs, restarts, and updates are managed directly from the Docker Manager interface in hPanel. To update, press on **Update** in Docker Manager and that will pull the latest image.
 
@@ -90,11 +108,13 @@ Send "Hi" to your assistant on the channel you connected. OpenClaw will reply an
 
 ## Next steps
 
-* [Channels](/channels) -- connect Telegram, WhatsApp, Discord, and more
-* [Gateway configuration](/gateway/configuration) -- all config options
+- [Channels](/channels) -- connect Telegram, WhatsApp, Discord, and more
+- [Gateway configuration](/gateway/configuration) -- all config options
 
 ## Related
 
-* [Install overview](/install)
-* [VPS hosting](/vps)
-* [DigitalOcean](/install/digitalocean)
+- [Install overview](/install)
+- [VPS hosting](/vps)
+- [DigitalOcean](/install/digitalocean)
+
+---

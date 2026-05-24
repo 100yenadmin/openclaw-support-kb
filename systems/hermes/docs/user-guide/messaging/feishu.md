@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Feishu / Lark"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/feishu"
-source_hash: "791b036845e6e024ac8226fcb4259f2ada2bbe0fbd424eba1dccbfd51efc14ce"
+source_hash: "19d658c42faee46440221ac8357ce00ac06f90ee396be0e68bfa446b49fbef7a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/feishu.md"
@@ -106,7 +106,7 @@ FEISHU_WEBHOOK_PORT=8765         # default: 8765
 FEISHU_WEBHOOK_PATH=/feishu/webhook  # default: /feishu/webhook
 ```
 
-When Feishu sends a URL verification challenge (`type: url_verification`), the webhook responds automatically so you can complete the subscription setup in the Feishu developer console.
+When Feishu sends a URL verification challenge (`type: url_verification`), the webhook responds automatically so you can complete the subscription setup in the Feishu developer console. The challenge response is gated on `FEISHU_VERIFICATION_TOKEN` when set — challenge requests with a missing or mismatched token are rejected so an unauthenticated remote cannot prove endpoint control by echoing attacker-controlled challenge data.
 
 ## Step 3: Configure Hermes
 

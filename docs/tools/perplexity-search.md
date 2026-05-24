@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity search"
 source: "https://docs.openclaw.ai/tools/perplexity-search"
-source_hash: "8dc95abf18204c56bd10bfd194f6693b9b3dd6849f107e1b2b3099d7a66877e6"
+source_hash: "f2ccf224904dce541439706c9e5a627b5130bed846c8c041340dfac8214ae9b1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/perplexity-search.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Perplexity search
 Source: https://docs.openclaw.ai/tools/perplexity-search
-
-
 
 OpenClaw supports Perplexity Search API as a `web_search` provider.
 It returns structured results with `title`, `url`, and `snippet` fields.
@@ -33,14 +31,14 @@ If you were already using OpenRouter for Perplexity Sonar, keep `provider: "perp
 
 Optional compatibility controls:
 
-* `plugins.entries.perplexity.config.webSearch.baseUrl`
-* `plugins.entries.perplexity.config.webSearch.model`
+- `plugins.entries.perplexity.config.webSearch.baseUrl`
+- `plugins.entries.perplexity.config.webSearch.model`
 
 ## Config examples
 
 ### Native Perplexity Search API
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -65,7 +63,7 @@ Optional compatibility controls:
 
 ### OpenRouter / Sonar compatibility
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -106,58 +104,58 @@ If `provider: "perplexity"` is configured and the Perplexity key SecretRef is un
 
 These parameters apply to the native Perplexity Search API path.
 
-<ParamField type="string">
-  Search query.
-</ParamField>
+ParamField
 
-<ParamField type="number">
-  Number of results to return (1-10).
-</ParamField>
+Search query.
 
-<ParamField type="string">
-  2-letter ISO country code (e.g. `US`, `DE`).
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  ISO 639-1 language code (e.g. `en`, `de`, `fr`).
-</ParamField>
+Number of results to return (1-10).
 
-<ParamField type="'day' | 'week' | 'month' | 'year'">
-  Time filter - `day` is 24 hours.
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  Only results published after this date (`YYYY-MM-DD`).
-</ParamField>
+2-letter ISO country code (e.g. `US`, `DE`).
 
-<ParamField type="string">
-  Only results published before this date (`YYYY-MM-DD`).
-</ParamField>
+ParamField
 
-<ParamField type="string[]">
-  Domain allowlist/denylist array (max 20).
-</ParamField>
+ISO 639-1 language code (e.g. `en`, `de`, `fr`).
 
-<ParamField type="number">
-  Total content budget (max 1000000).
-</ParamField>
+ParamField
 
-<ParamField type="number">
-  Per-page token limit.
-</ParamField>
+Time filter - `day` is 24 hours.
+
+ParamField
+
+Only results published after this date (`YYYY-MM-DD`).
+
+ParamField
+
+Only results published before this date (`YYYY-MM-DD`).
+
+ParamField
+
+Domain allowlist/denylist array (max 20).
+
+ParamField
+
+Total content budget (max 1000000).
+
+ParamField
+
+Per-page token limit.
 
 For the legacy Sonar/OpenRouter compatibility path:
 
-* `query`, `count`, and `freshness` are accepted
-* `count` is compatibility-only there; the response is still one synthesized
+- `query`, `count`, and `freshness` are accepted
+- `count` is compatibility-only there; the response is still one synthesized
   answer with citations rather than an N-result list
-* Search API-only filters such as `country`, `language`, `date_after`,
+- Search API-only filters such as `country`, `language`, `date_after`,
   `date_before`, `domain_filter`, `max_tokens`, and `max_tokens_per_page`
   return explicit errors
 
 **Examples:**
 
-```javascript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```javascript
 // Country and language-specific search
 await web_search({
   query: "renewable energy",
@@ -200,33 +198,39 @@ await web_search({
 
 ### Domain filter rules
 
-* Maximum 20 domains per filter
-* Cannot mix allowlist and denylist in the same request
-* Use `-` prefix for denylist entries (e.g., `["-reddit.com"]`)
+- Maximum 20 domains per filter
+- Cannot mix allowlist and denylist in the same request
+- Use `-` prefix for denylist entries (e.g., `["-reddit.com"]`)
 
 ## Notes
 
-* Perplexity Search API returns structured web search results (`title`, `url`, `snippet`)
-* OpenRouter or explicit `plugins.entries.perplexity.config.webSearch.baseUrl` / `model` switches Perplexity back to Sonar chat completions for compatibility
-* Sonar/OpenRouter compatibility returns one synthesized answer with citations, not structured result rows
-* Results are cached for 15 minutes by default (configurable via `cacheTtlMinutes`)
+- Perplexity Search API returns structured web search results (`title`, `url`, `snippet`)
+- OpenRouter or explicit `plugins.entries.perplexity.config.webSearch.baseUrl` / `model` switches Perplexity back to Sonar chat completions for compatibility
+- Sonar/OpenRouter compatibility returns one synthesized answer with citations, not structured result rows
+- Results are cached for 15 minutes by default (configurable via `cacheTtlMinutes`)
 
 ## Related
 
-<CardGroup>
-  <Card title="Web search overview" href="/tools/web" icon="globe">
+CardGroup
+
+
+Web search overview
+
     All providers and auto-detection rules.
-  </Card>
 
-  <Card title="Brave search" href="/tools/brave-search" icon="shield">
+
+Brave search
+
     Structured results with country and language filters.
-  </Card>
 
-  <Card title="Exa search" href="/tools/exa-search" icon="magnifying-glass">
+
+Exa search
+
     Neural search with content extraction.
-  </Card>
 
-  <Card title="Perplexity Search API docs" href="https://docs.perplexity.ai/docs/search/quickstart" icon="arrow-up-right-from-square">
+
+Perplexity Search API docs
+
     Official Perplexity Search API quickstart and reference.
-  </Card>
-</CardGroup>
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together AI"
 source: "https://docs.openclaw.ai/providers/together"
-source_hash: "82901239fcd830b7953d8c4d66082f17e8ec51e4e7081453e8015643398f2a37"
+source_hash: "9991728cb188a1683fa144be60f3a85fb5083d9085b58a1ab044361d69bbb65a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/together.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Together AI
 Source: https://docs.openclaw.ai/providers/together
-
-
 
 [Together AI](https://together.ai) provides access to leading open-source
 models including Llama, DeepSeek, Kimi, and more through a unified API.
@@ -27,20 +25,25 @@ models including Llama, DeepSeek, Kimi, and more through a unified API.
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
+Steps
+
+
+Get an API key
+
     Create an API key at
     [api.together.ai/settings/api-keys](https://api.together.ai/settings/api-keys).
-  </Step>
 
-  <Step title="Run onboarding">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Run onboarding
+
+    ```bash
     openclaw onboard --auth-choice together-api-key
     ```
-  </Step>
 
-  <Step title="Set a default model">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a default model
+
+    ```json5
     {
       agents: {
         defaults: {
@@ -49,22 +52,21 @@ models including Llama, DeepSeek, Kimi, and more through a unified API.
       },
     }
     ```
-  </Step>
-</Steps>
+
 
 ### Non-interactive example
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --non-interactive \
   --mode local \
   --auth-choice together-api-key \
   --together-api-key "$TOGETHER_API_KEY"
 ```
 
-<Note>
-  The onboarding preset sets `together/moonshotai/Kimi-K2.5` as the default
-  model.
-</Note>
+Note
+
+The onboarding preset sets `together/moonshotai/Kimi-K2.5` as the default
+model.
 
 ## Built-in catalog
 
@@ -94,7 +96,7 @@ shared `video_generate` tool.
 
 To use Together as the default video provider:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -106,48 +108,62 @@ To use Together as the default video provider:
 }
 ```
 
-<Tip>
-  See [Video Generation](/tools/video-generation) for the shared tool parameters,
-  provider selection, and failover behavior.
-</Tip>
+Tip
 
-<AccordionGroup>
-  <Accordion title="Environment note">
+See [Video Generation](/tools/video-generation) for the shared tool parameters,
+provider selection, and failover behavior.
+
+AccordionGroup
+
+
+Environment note
+
     If the Gateway runs as a daemon (launchd/systemd), make sure
     `TOGETHER_API_KEY` is available to that process (for example, in
     `~/.openclaw/.env` or via `env.shellEnv`).
 
-    <Warning>
-      Keys set only in your interactive shell are not visible to daemon-managed
-      gateway processes. Use `~/.openclaw/.env` or `env.shellEnv` config for
-      persistent availability.
-    </Warning>
-  </Accordion>
 
-  <Accordion title="Troubleshooting">
-    * Verify your key works: `openclaw models list --provider together`
-    * If models are not appearing, confirm the API key is set in the correct
+Warning
+
+    Keys set only in your interactive shell are not visible to daemon-managed
+    gateway processes. Use `~/.openclaw/.env` or `env.shellEnv` config for
+    persistent availability.
+
+
+
+
+
+Troubleshooting
+
+    - Verify your key works: `openclaw models list --provider together`
+    - If models are not appearing, confirm the API key is set in the correct
       environment for your Gateway process.
-    * Model refs use the form `together/<model-id>`.
-  </Accordion>
-</AccordionGroup>
+    - Model refs use the form `together/<model-id>`.
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model selection
+
     Provider rules, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Video generation" href="/tools/video-generation" icon="video">
+
+Video generation
+
     Shared video generation tool parameters and provider selection.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Configuration reference
+
     Full config schema including provider settings.
-  </Card>
 
-  <Card title="Together AI" href="https://together.ai" icon="arrow-up-right-from-square">
+
+Together AI
+
     Together AI dashboard, API docs, and pricing.
-  </Card>
-</CardGroup>
+
+---

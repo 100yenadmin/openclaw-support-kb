@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/browser"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser"
-source_hash: "bba6497b4135937f17009931d796d3c63d362f11f0f9e4732d867a570b0f1d11"
+source_hash: "a49968f2091d5371b2d456c08bc2cd84235ddc08ececa40b46248adf50a8c458"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/browser.md"
@@ -46,7 +46,7 @@ Key capabilities:
 ## Setup
 
 :::tip Nous Subscribers
-If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, you can use browser automation through the **[Tool Gateway](tool-gateway.md)** without any separate API keys. Run `hermes model` or `hermes tools` to enable it.
+If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, you can use browser automation through the **[Tool Gateway](tool-gateway.md)** without any separate API keys. New installs can run `hermes setup --portal` to log in and turn on every gateway tool at once; existing installs can pick **Nous Subscription** as the browser provider via `hermes model` or `hermes tools`.
 :::
 
 ### Browserbase cloud mode

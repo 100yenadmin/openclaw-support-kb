@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "f4341a125126b75e1d7bde070a157e1731ddc4f898400513b24a1f9a2d3ae960"
+source_hash: "4be4adca4ceed024f4f334eebcfffe5c294bc645cd6119cab8eaf996ab283a0d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Session management
 Source: https://docs.openclaw.ai/concepts/session
-
-
 
 OpenClaw organizes conversations into **sessions**. Each message is routed to a
 session based on where it came from -- DMs, group chats, cron jobs, etc.
@@ -33,15 +31,15 @@ session based on where it came from -- DMs, group chats, cron jobs, etc.
 By default, all DMs share one session for continuity. This is fine for
 single-user setups.
 
-<Warning>
-  If multiple people can message your agent, enable DM isolation. Without it, all
-  users share the same conversation context -- Alice's private messages would be
-  visible to Bob.
-</Warning>
+Warning
+
+If multiple people can message your agent, enable DM isolation. Without it, all
+users share the same conversation context -- Alice's private messages would be
+visible to Bob.
 
 **The fix:**
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   session: {
     dmScope: "per-channel-peer", // isolate by channel + sender
@@ -51,15 +49,15 @@ single-user setups.
 
 Other options:
 
-* `main` (default) -- all DMs share one session.
-* `per-peer` -- isolate by sender (across channels).
-* `per-channel-peer` -- isolate by channel + sender (recommended).
-* `per-account-channel-peer` -- isolate by account + channel + sender.
+- `main` (default) -- all DMs share one session.
+- `per-peer` -- isolate by sender (across channels).
+- `per-channel-peer` -- isolate by channel + sender (recommended).
+- `per-account-channel-peer` -- isolate by account + channel + sender.
 
-<Tip>
-  If the same person contacts you from multiple channels, use
-  `session.identityLinks` to link their identities so they share one session.
-</Tip>
+Tip
+
+If the same person contacts you from multiple channels, use
+`session.identityLinks` to link their identities so they share one session.
 
 ### Dock linked channels
 
@@ -74,14 +72,14 @@ Verify your setup with `openclaw security audit`.
 
 Sessions are reused until they expire:
 
-* **Daily reset** (default) -- new session at 4:00 AM local time on the gateway
+- **Daily reset** (default) -- new session at 4:00 AM local time on the gateway
   host. Daily freshness is based on when the current `sessionId` started, not
   on later metadata writes.
-* **Idle reset** (optional) -- new session after a period of inactivity. Set
+- **Idle reset** (optional) -- new session after a period of inactivity. Set
   `session.reset.idleMinutes`. Idle freshness is based on the last real
   user/channel interaction, so heartbeat, cron, and exec system events do not
   keep the session alive.
-* **Manual reset** -- type `/new` or `/reset` in chat. `/new <model>` also
+- **Manual reset** -- type `/new` or `/reset` in chat. `/new <model>` also
   switches the model.
 
 When both daily and idle resets are configured, whichever expires first wins.
@@ -100,14 +98,14 @@ sessions should expire on a timer.
 All session state is owned by the **gateway**. UI clients query the gateway for
 session data.
 
-* **Store:** `~/.openclaw/agents/<agentId>/sessions/sessions.json`
-* **Transcripts:** `~/.openclaw/agents/<agentId>/sessions/<sessionId>.jsonl`
+- **Store:** `~/.openclaw/agents/<agentId>/sessions/sessions.json`
+- **Transcripts:** `~/.openclaw/agents/<agentId>/sessions/<sessionId>.jsonl`
 
 `sessions.json` keeps separate lifecycle timestamps:
 
-* `sessionStartedAt`: when the current `sessionId` began; daily reset uses this.
-* `lastInteractionAt`: last user/channel interaction that extends idle lifetime.
-* `updatedAt`: last store-row mutation; useful for listing and pruning, but not
+- `sessionStartedAt`: when the current `sessionId` began; daily reset uses this.
+- `lastInteractionAt`: last user/channel interaction that extends idle lifetime.
+- `updatedAt`: last store-row mutation; useful for listing and pruning, but not
   authoritative for daily/idle reset freshness.
 
 Older rows without `sessionStartedAt` are resolved from the transcript JSONL
@@ -121,7 +119,7 @@ OpenClaw automatically bounds session storage over time. By default, it runs
 in `warn` mode (reports what would be cleaned). Set `session.maintenance.mode`
 to `"enforce"` for automatic cleanup:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   session: {
     maintenance: {
@@ -149,24 +147,26 @@ Preview with `openclaw sessions cleanup --dry-run`.
 
 ## Inspecting sessions
 
-* `openclaw status` -- session store path and recent activity.
-* `openclaw sessions --json` -- all sessions (filter with `--active <minutes>`).
-* `/status` in chat -- context usage, model, and toggles.
-* `/context list` -- what is in the system prompt.
+- `openclaw status` -- session store path and recent activity.
+- `openclaw sessions --json` -- all sessions (filter with `--active <minutes>`).
+- `/status` in chat -- context usage, model, and toggles.
+- `/context list` -- what is in the system prompt.
 
 ## Further reading
 
-* [Session Pruning](/concepts/session-pruning) -- trimming tool results
-* [Compaction](/concepts/compaction) -- summarizing long conversations
-* [Session Tools](/concepts/session-tool) -- agent tools for cross-session work
-* [Session Management Deep Dive](/reference/session-management-compaction) --
+- [Session Pruning](/concepts/session-pruning) -- trimming tool results
+- [Compaction](/concepts/compaction) -- summarizing long conversations
+- [Session Tools](/concepts/session-tool) -- agent tools for cross-session work
+- [Session Management Deep Dive](/reference/session-management-compaction) --
   store schema, transcripts, send policy, origin metadata, and advanced config
-* [Multi-Agent](/concepts/multi-agent) — routing and session isolation across agents
-* [Background Tasks](/automation/tasks) — how detached work creates task records with session references
-* [Channel Routing](/channels/channel-routing) — how inbound messages are routed to sessions
+- [Multi-Agent](/concepts/multi-agent) — routing and session isolation across agents
+- [Background Tasks](/automation/tasks) — how detached work creates task records with session references
+- [Channel Routing](/channels/channel-routing) — how inbound messages are routed to sessions
 
 ## Related
 
-* [Session pruning](/concepts/session-pruning)
-* [Session tools](/concepts/session-tool)
-* [Command queue](/concepts/queue)
+- [Session pruning](/concepts/session-pruning)
+- [Session tools](/concepts/session-tool)
+- [Command queue](/concepts/queue)
+
+---

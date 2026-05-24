@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "cff5a861281ba008e60b07cf36570e5279a64242a5b8f8b1f5a88b2b049cacb3"
+source_hash: "6396463ea9b043ec759c2de24d446b3e4a7f8fa2acc29796b23ca636bc7a395b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Memory search
 Source: https://docs.openclaw.ai/concepts/memory-search
-
-
 
 `memory_search` finds relevant notes from your memory files, even when the
 wording differs from the original text. It works by indexing memory into small
@@ -25,7 +23,7 @@ If you have a GitHub Copilot subscription, OpenAI, Gemini, Voyage, or Mistral
 API key configured, memory search works automatically. To set a provider
 explicitly:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -57,7 +55,7 @@ for indexed chunks. Configure those with `memorySearch.queryInputType` and
 | Bedrock        | `bedrock`        | No            | Auto-detected when the AWS credential chain resolves |
 | Gemini         | `gemini`         | Yes           | Supports image/audio indexing                        |
 | GitHub Copilot | `github-copilot` | No            | Auto-detected, uses Copilot subscription             |
-| Local          | `local`          | No            | GGUF model, \~0.6 GB download                        |
+| Local          | `local`          | No            | GGUF model, ~0.6 GB download                         |
 | Mistral        | `mistral`        | Yes           | Auto-detected                                        |
 | Ollama         | `ollama`         | No            | Local, must set explicitly                           |
 | OpenAI         | `openai`         | Yes           | Auto-detected, fast                                  |
@@ -67,7 +65,7 @@ for indexed chunks. Configure those with `memorySearch.queryInputType` and
 
 OpenClaw runs two retrieval paths in parallel and merges the results:
 
-```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```mermaid
 flowchart LR
     Q["Query"] --> E["Embedding"]
     Q --> T["Tokenize"]
@@ -78,9 +76,9 @@ flowchart LR
     M --> R["Top Results"]
 ```
 
-* **Vector search** finds notes with similar meaning ("gateway host" matches
+- **Vector search** finds notes with similar meaning ("gateway host" matches
   "the machine running OpenClaw").
-* **BM25 keyword search** finds exact matches (IDs, error strings, config
+- **BM25 keyword search** finds exact matches (IDs, error strings, config
   keys).
 
 If only one path is available (no embeddings or no FTS), the other runs alone.
@@ -97,24 +95,24 @@ Old notes gradually lose ranking weight so recent information surfaces first.
 With the default half-life of 30 days, a note from last month scores at 50% of
 its original weight. Evergreen files like `MEMORY.md` are never decayed.
 
-<Tip>
-  Enable temporal decay if your agent has months of daily notes and stale
-  information keeps outranking recent context.
-</Tip>
+Tip
+
+Enable temporal decay if your agent has months of daily notes and stale
+information keeps outranking recent context.
 
 ### MMR (diversity)
 
 Reduces redundant results. If five notes all mention the same router config, MMR
 ensures the top results cover different topics instead of repeating.
 
-<Tip>
-  Enable MMR if `memory_search` keeps returning near-duplicate snippets from
-  different daily notes.
-</Tip>
+Tip
+
+Enable MMR if `memory_search` keeps returning near-duplicate snippets from
+different daily notes.
 
 ### Enable both
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -163,12 +161,14 @@ inline batch timeout by default. If the host is simply slow, set
 
 ## Further reading
 
-* [Active Memory](/concepts/active-memory) -- sub-agent memory for interactive chat sessions
-* [Memory](/concepts/memory) -- file layout, backends, tools
-* [Memory configuration reference](/reference/memory-config) -- all config knobs
+- [Active Memory](/concepts/active-memory) -- sub-agent memory for interactive chat sessions
+- [Memory](/concepts/memory) -- file layout, backends, tools
+- [Memory configuration reference](/reference/memory-config) -- all config knobs
 
 ## Related
 
-* [Memory overview](/concepts/memory)
-* [Active memory](/concepts/active-memory)
-* [Builtin memory engine](/concepts/memory-builtin)
+- [Memory overview](/concepts/memory)
+- [Active memory](/concepts/active-memory)
+- [Builtin memory engine](/concepts/memory-builtin)
+
+---

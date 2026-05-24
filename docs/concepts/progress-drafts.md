@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "3356a5b6a6a94f1fd391c145e343d3fdc05840a1a2d713a0256e97c6ae107c6a"
+source_hash: "bc0a7a5fdc86ce40d431299a02676cf436496129b7c107ddc0ee25079d46e1e1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Progress drafts
 Source: https://docs.openclaw.ai/concepts/progress-drafts
 
-
-
 Progress drafts make long-running agent turns feel alive in chat without turning
 the conversation into a stack of temporary status replies.
 
@@ -23,7 +21,7 @@ message only after the turn proves it is doing real work, updates it while the
 agent reads, plans, calls tools, or waits for approval, and then turns that draft
 into the final answer when the channel can do that safely.
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Shelling...
 📖 from docs/concepts/progress-drafts.md
 🔎 Web Search: for "discord edit message"
@@ -37,7 +35,7 @@ and the final answer when the turn is done.
 
 Enable progress drafts per channel with `streaming.mode: "progress"`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -104,7 +102,7 @@ Progress labels live under `channels.<channel>.streaming.progress`.
 The default label is `auto`, which chooses from OpenClaw's built-in
 single-word label pool:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Working
 Shelling
 Scuttling
@@ -129,7 +127,7 @@ Surfacing
 
 Use a fixed label:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -146,7 +144,7 @@ Use a fixed label:
 
 Use your own automatic label pool:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -164,7 +162,7 @@ Use your own automatic label pool:
 
 Hide the label and show only progress lines:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -187,7 +185,7 @@ summaries, and similar agent activity.
 
 OpenClaw uses the same formatter for progress drafts and `/verbose`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -204,14 +202,14 @@ chat.
 
 For example, the same command appears differently depending on the detail mode:
 
-| Mode      | Progress line                                                   |
-| --------- | --------------------------------------------------------------- |
+| Mode      | Progress line                                                  |
+| --------- | -------------------------------------------------------------- |
 | `explain` | `🛠️ check JS syntax for /tmp/app.js`                           |
 | `raw`     | `🛠️ check JS syntax for /tmp/app.js, node --check /tmp/app.js` |
 
 Limit how many lines stay visible:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -235,7 +233,7 @@ are shortened with a middle ellipsis so the suffix remains visible.
 
 Tune the per-line budget:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -253,7 +251,7 @@ Tune the per-line budget:
 Slack can render progress lines as structured Block Kit fields instead of a
 single text body:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     slack: {
@@ -273,7 +271,7 @@ do not support the richer shape can still show the compact progress text.
 
 Keep the single progress draft but hide tool and task lines:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     discord: {
@@ -312,10 +310,10 @@ final-only delivery.
 
 When the final answer is ready, OpenClaw tries to keep the chat clean:
 
-* If the draft can safely become the final answer, OpenClaw edits it in place.
-* If the channel uses native progress streaming, OpenClaw finalizes that stream
+- If the draft can safely become the final answer, OpenClaw edits it in place.
+- If the channel uses native progress streaming, OpenClaw finalizes that stream
   when the native transport accepts the final text.
-* If the final answer has media, an approval prompt, an explicit reply target,
+- If the final answer has media, an approval prompt, an explicit reply target,
   too many chunks, or a failed edit/send, OpenClaw sends the final answer through
   the normal channel delivery path.
 
@@ -359,11 +357,13 @@ used by Discord and Telegram.
 
 ## Related
 
-* [Streaming and chunking](/concepts/streaming)
-* [Messages](/concepts/messages)
-* [Channel configuration](/gateway/config-channels)
-* [Discord](/channels/discord)
-* [Matrix](/channels/matrix)
-* [Microsoft Teams](/channels/msteams)
-* [Slack](/channels/slack)
-* [Telegram](/channels/telegram)
+- [Streaming and chunking](/concepts/streaming)
+- [Messages](/concepts/messages)
+- [Channel configuration](/gateway/config-channels)
+- [Discord](/channels/discord)
+- [Matrix](/channels/matrix)
+- [Microsoft Teams](/channels/msteams)
+- [Slack](/channels/slack)
+- [Telegram](/channels/telegram)
+
+---

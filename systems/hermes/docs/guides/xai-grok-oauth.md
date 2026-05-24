@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "xAI Grok OAuth (SuperGrok / X Premium+)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/xai-grok-oauth"
-source_hash: "5c26637a5a24fab897139b672ff9202e0f53d728f23b5dc60ee0f22e8d52ba03"
+source_hash: "257c9e1c5449e9b4f684a19d36a4712efa92a70f560996415748f022c4e2472c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/xai-grok-oauth.md"
@@ -203,7 +203,8 @@ The chat catalog is derived live from the on-disk `models.dev` cache; new xAI re
 | Variable | Effect |
 |----------|--------|
 | `XAI_BASE_URL` | Override the default `https://api.x.ai/v1` endpoint (rarely needed). |
-| `HERMES_INFERENCE_PROVIDER` | Force the active provider at runtime, e.g. `HERMES_INFERENCE_PROVIDER=xai-oauth hermes`. |
+
+To select xAI as the active provider, set `model.provider: xai-oauth` in `config.yaml` (use `hermes setup` for the guided flow) or pass `--provider xai-oauth` for a single invocation.
 
 ## Troubleshooting
 

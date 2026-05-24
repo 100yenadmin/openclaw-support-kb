@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
-source_hash: "5f02a3a7ecb8fb7559ec306ace30722e578fb4ed8540ffe77cbdc8228befb994"
+source_hash: "284d048b6df2161e0c75bd8d528f50c693948e61a17b94bf6ab789420cc5793e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/reactions.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # Reactions
 Source: https://docs.openclaw.ai/tools/reactions
 
-
-
 The agent can add and remove emoji reactions on messages using the `message`
 tool with the `react` action. Reaction behavior varies by channel and transport.
 
 ## How it works
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "action": "react",
   "messageId": "msg-123",
@@ -28,73 +26,102 @@ tool with the `react` action. Reaction behavior varies by channel and transport.
 }
 ```
 
-* `emoji` is required when adding a reaction.
-* Set `emoji` to an empty string (`""`) to remove the bot's reaction(s).
-* Set `remove: true` to remove a specific emoji (requires non-empty `emoji`).
-* On channels that support status reactions, `trackToolCalls: true` on a
+- `emoji` is required when adding a reaction.
+- Set `emoji` to an empty string (`""`) to remove the bot's reaction(s).
+- Set `remove: true` to remove a specific emoji (requires non-empty `emoji`).
+- On channels that support status reactions, `trackToolCalls: true` on a
   reaction lets the runtime use that reacted message for subsequent tool
   progress reactions during the same turn.
 
 ## Channel behavior
 
-<AccordionGroup>
-  <Accordion title="Discord and Slack">
-    * Empty `emoji` removes all of the bot's reactions on the message.
-    * `remove: true` removes just the specified emoji.
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="Google Chat">
-    * Empty `emoji` removes the app's reactions on the message.
-    * `remove: true` removes just the specified emoji.
-  </Accordion>
 
-  <Accordion title="Nextcloud Talk">
-    * Adding reactions only: `emoji` is required and must be non-empty.
-    * Reaction removal is not supported yet; calls with `remove: true` (or empty `emoji`) are rejected with a clear error rather than silently no-oping.
-    * Requires the Talk bot to be registered with the `reaction` feature (see [Nextcloud Talk channel docs](/channels/nextcloud-talk)).
-  </Accordion>
+Discord and Slack
 
-  <Accordion title="Telegram">
-    * Empty `emoji` removes the bot's reactions.
-    * `remove: true` also removes reactions but still requires a non-empty `emoji` for tool validation.
-  </Accordion>
+    - Empty `emoji` removes all of the bot's reactions on the message.
+    - `remove: true` removes just the specified emoji.
 
-  <Accordion title="WhatsApp">
-    * Empty `emoji` removes the bot reaction.
-    * `remove: true` maps to empty emoji internally (still requires `emoji` in the tool call).
-    * WhatsApp has one bot reaction slot per message; status reaction updates replace that slot rather than stacking multiple emoji.
-  </Accordion>
 
-  <Accordion title="Zalo Personal (zalouser)">
-    * Requires non-empty `emoji`.
-    * `remove: true` removes that specific emoji reaction.
-  </Accordion>
 
-  <Accordion title="Feishu/Lark">
-    * Use the `feishu_reaction` tool with actions `add`, `remove`, and `list`.
-    * Add/remove requires `emoji_type`; remove also requires `reaction_id`.
-  </Accordion>
 
-  <Accordion title="Signal">
-    * Inbound reaction notifications are controlled by `channels.signal.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot messages, and `"all"` emits events for all reactions.
-  </Accordion>
+Google Chat
 
-  <Accordion title="iMessage">
-    * Outbound reactions are iMessage tapbacks (`love`, `like`, `dislike`, `laugh`, `emphasize`, and `question`).
-    * Inbound tapback notifications are controlled by `channels.imessage.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot-authored messages, and `"all"` emits events for all tapbacks from authorized senders.
-  </Accordion>
-</AccordionGroup>
+    - Empty `emoji` removes the app's reactions on the message.
+    - `remove: true` removes just the specified emoji.
+
+
+
+
+Nextcloud Talk
+
+    - Adding reactions only: `emoji` is required and must be non-empty.
+    - Reaction removal is not supported yet; calls with `remove: true` (or empty `emoji`) are rejected with a clear error rather than silently no-oping.
+    - Requires the Talk bot to be registered with the `reaction` feature (see [Nextcloud Talk channel docs](/channels/nextcloud-talk)).
+
+
+
+
+Telegram
+
+    - Empty `emoji` removes the bot's reactions.
+    - `remove: true` also removes reactions but still requires a non-empty `emoji` for tool validation.
+
+
+
+
+WhatsApp
+
+    - Empty `emoji` removes the bot reaction.
+    - `remove: true` maps to empty emoji internally (still requires `emoji` in the tool call).
+    - WhatsApp has one bot reaction slot per message; status reaction updates replace that slot rather than stacking multiple emoji.
+
+
+
+
+Zalo Personal (zalouser)
+
+    - Requires non-empty `emoji`.
+    - `remove: true` removes that specific emoji reaction.
+
+
+
+
+Feishu/Lark
+
+    - Use the `feishu_reaction` tool with actions `add`, `remove`, and `list`.
+    - Add/remove requires `emoji_type`; remove also requires `reaction_id`.
+
+
+
+
+Signal
+
+    - Inbound reaction notifications are controlled by `channels.signal.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot messages, and `"all"` emits events for all reactions.
+
+
+
+
+iMessage
+
+    - Outbound reactions are iMessage tapbacks (`love`, `like`, `dislike`, `laugh`, `emphasize`, and `question`).
+    - Inbound tapback notifications are controlled by `channels.imessage.reactionNotifications`: `"off"` disables them, `"own"` (default) emits events when users react to bot-authored messages, and `"all"` emits events for all tapbacks from authorized senders.
+
+
 
 ## Reaction level
 
 Per-channel `reactionLevel` config controls how broadly the agent uses reactions. Values are typically `off`, `ack`, `minimal`, or `extensive`.
 
-* [Telegram reactionLevel](/channels/telegram#reaction-notifications) — `channels.telegram.reactionLevel`
-* [WhatsApp reactionLevel](/channels/whatsapp#reaction-level) — `channels.whatsapp.reactionLevel`
+- [Telegram reactionLevel](/channels/telegram#reaction-notifications) — `channels.telegram.reactionLevel`
+- [WhatsApp reactionLevel](/channels/whatsapp#reaction-level) — `channels.whatsapp.reactionLevel`
 
 Set `reactionLevel` on individual channels to tune how actively the agent reacts to messages on each platform.
 
 ## Related
 
-* [Agent Send](/tools/agent-send) — the `message` tool that includes `react`
-* [Channels](/channels) — channel-specific configuration
+- [Agent Send](/tools/agent-send) — the `message` tool that includes `react`
+- [Channels](/channels) — channel-specific configuration
+
+---

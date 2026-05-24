@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go"
 source: "https://docs.openclaw.ai/providers/opencode-go"
-source_hash: "d30cc3545f27eaf553c3a4a16bb9c0413d9a235d9bbf096dbc461d48097521ad"
+source_hash: "ec98823e7121d52e6f7833f9a3f7217834f2081c527f88243b055d1c1c52ec9e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode-go.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # OpenCode Go
 Source: https://docs.openclaw.ai/providers/opencode-go
-
-
 
 OpenCode Go is the Go catalog within [OpenCode](/providers/opencode).
 It uses the same `OPENCODE_API_KEY` as the Zen catalog, but keeps the runtime
@@ -50,49 +48,64 @@ The provider includes:
 
 ## Getting started
 
-<Tabs>
-  <Tab title="Interactive">
-    <Steps>
-      <Step title="Run onboarding">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Interactive
+
+
+Steps
+
+
+Run onboarding
+
+        ```bash
         openclaw onboard --auth-choice opencode-go
         ```
-      </Step>
 
-      <Step title="Set a Go model as default">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a Go model as default
+
+        ```bash
         openclaw config set agents.defaults.model.primary "opencode-go/kimi-k2.6"
         ```
-      </Step>
 
-      <Step title="Verify models are available">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify models are available
+
+        ```bash
         openclaw models list --provider opencode-go
         ```
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="Non-interactive">
-    <Steps>
-      <Step title="Pass the key directly">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+
+Non-interactive
+
+
+Steps
+
+
+Pass the key directly
+
+        ```bash
         openclaw onboard --opencode-go-api-key "$OPENCODE_API_KEY"
         ```
-      </Step>
 
-      <Step title="Verify models are available">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify models are available
+
+        ```bash
         openclaw models list --provider opencode-go
         ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+
+
+
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { OPENCODE_API_KEY: "YOUR_API_KEY_HERE" }, // pragma: allowlist secret
   agents: { defaults: { model: { primary: "opencode-go/kimi-k2.6" } } },
@@ -101,36 +114,46 @@ The provider includes:
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Routing behavior">
+AccordionGroup
+
+
+Routing behavior
+
     OpenClaw handles per-model routing automatically when the model ref uses
     `opencode-go/...`. No additional provider config is required.
-  </Accordion>
 
-  <Accordion title="Runtime ref convention">
+
+
+Runtime ref convention
+
     Runtime refs stay explicit: `opencode/...` for Zen, `opencode-go/...` for Go.
     This keeps upstream per-model routing correct across both catalogs.
-  </Accordion>
 
-  <Accordion title="Shared credentials">
+
+
+Shared credentials
+
     The same `OPENCODE_API_KEY` is used by both the Zen and Go catalogs. Entering
     the key during setup stores credentials for both runtime providers.
-  </Accordion>
-</AccordionGroup>
 
-<Tip>
-  See [OpenCode](/providers/opencode) for the shared onboarding overview and the full
-  Zen + Go catalog reference.
-</Tip>
+
+Tip
+
+See [OpenCode](/providers/opencode) for the shared onboarding overview and the full
+Zen + Go catalog reference.
 
 ## Related
 
-<CardGroup>
-  <Card title="OpenCode (parent)" href="/providers/opencode" icon="server">
-    Shared onboarding, catalog overview, and advanced notes.
-  </Card>
+CardGroup
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+OpenCode (parent)
+
+    Shared onboarding, catalog overview, and advanced notes.
+
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
-</CardGroup>
+
+---

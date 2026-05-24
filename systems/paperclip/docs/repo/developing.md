@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "15b7de295ee91a3d1c253d08445e3f51b4aa54f29b65cb7e03381921824359ce"
+source_hash: "c0c818432033ff5f359ea3bddb6080a288fa3e8ae9b91a0c1ad37f31568186a4"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -572,9 +572,11 @@ pnpm paperclipai dashboard get
 
 See full command reference in `doc/CLI.md`.
 
-## OpenClaw Invite Onboarding Endpoints
+## Agent Invite Onboarding Endpoints
 
 Agent-oriented invite onboarding now exposes machine-readable API docs:
+
+The board UI generates agent onboarding prompts from the add-agent modal (`+` in the agent sidebar), so agent onboarding sits with the rest of agent creation rather than company member invite settings.
 
 - `GET /api/invites/:token` returns invite summary plus onboarding and skills index links.
 - `GET /api/invites/:token/onboarding` returns onboarding manifest details (registration endpoint, claim endpoint template, skill install hints).
@@ -593,7 +595,7 @@ pnpm smoke:openclaw-join
 What it validates:
 
 - invite creation for agent-only join
-- agent join request using `adapterType=openclaw`
+- agent join request using `adapterType=openclaw_gateway`
 - board approval + one-time API key claim semantics
 - callback delivery on wakeup to a dockerized OpenClaw-style webhook receiver
 

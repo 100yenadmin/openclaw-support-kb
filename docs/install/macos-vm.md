@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS VMs"
 source: "https://docs.openclaw.ai/install/macos-vm"
-source_hash: "308f1e86f30c73615c0eb5f40202c73ef84e8aed6303cd3b22dfd23138be9ba5"
+source_hash: "4299291dd5e9d24bf1ab62abe9b71893d3620323a5b8b244a96d9a8c888eea8f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/macos-vm.md"
@@ -13,13 +13,11 @@ duplicate_index: 1
 # macOS VMs
 Source: https://docs.openclaw.ai/install/macos-vm
 
-
-
 ## Recommended default (most users)
 
-* **Small Linux VPS** for an always-on Gateway and low cost. See [VPS hosting](/vps).
-* **Dedicated hardware** (Mac mini or Linux box) if you want full control and a **residential IP** for browser automation. Many sites block data center IPs, so local browsing often works better.
-* **Hybrid:** keep the Gateway on a cheap VPS, and connect your Mac as a **node** when you need browser/UI automation. See [Nodes](/nodes) and [Gateway remote](/gateway/remote).
+- **Small Linux VPS** for an always-on Gateway and low cost. See [VPS hosting](/vps).
+- **Dedicated hardware** (Mac mini or Linux box) if you want full control and a **residential IP** for browser automation. Many sites block data center IPs, so local browsing often works better.
+- **Hybrid:** keep the Gateway on a cheap VPS, and connect your Mac as a **node** when you need browser/UI automation. See [Nodes](/nodes) and [Gateway remote](/gateway/remote).
 
 Use a macOS VM when you specifically need macOS-only capabilities such as iMessage or want strict isolation from your daily Mac.
 
@@ -31,21 +29,21 @@ Run OpenClaw in a sandboxed macOS VM on your existing Apple Silicon Mac using [L
 
 This gives you:
 
-* Full macOS environment in isolation (your host stays clean)
-* iMessage support via `imsg` (the default local path is impossible on Linux/Windows)
-* Instant reset by cloning VMs
-* No extra hardware or cloud costs
+- Full macOS environment in isolation (your host stays clean)
+- iMessage support via `imsg` (the default local path is impossible on Linux/Windows)
+- Instant reset by cloning VMs
+- No extra hardware or cloud costs
 
 ### Hosted Mac providers (cloud)
 
 If you want macOS in the cloud, hosted Mac providers work too:
 
-* [MacStadium](https://www.macstadium.com/) (hosted Macs)
-* Other hosted Mac vendors also work; follow their VM + SSH docs
+- [MacStadium](https://www.macstadium.com/) (hosted Macs)
+- Other hosted Mac vendors also work; follow their VM + SSH docs
 
 Once you have SSH access to a macOS VM, continue at step 6 below.
 
-***
+---
 
 ## Quick path (Lume, experienced users)
 
@@ -56,52 +54,52 @@ Once you have SSH access to a macOS VM, continue at step 6 below.
 5. SSH in, install OpenClaw, configure channels
 6. Done
 
-***
+---
 
 ## What you need (Lume)
 
-* Apple Silicon Mac (M1/M2/M3/M4)
-* macOS Sequoia or later on the host
-* \~60 GB free disk space per VM
-* \~20 minutes
+- Apple Silicon Mac (M1/M2/M3/M4)
+- macOS Sequoia or later on the host
+- ~60 GB free disk space per VM
+- ~20 minutes
 
-***
+---
 
 ## 1) Install Lume
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/trycua/cua/main/libs/lume/scripts/install.sh)"
 ```
 
 If `~/.local/bin` isn't in your PATH:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 echo 'export PATH="$PATH:$HOME/.local/bin"' >> ~/.zshrc && source ~/.zshrc
 ```
 
 Verify:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume --version
 ```
 
 Docs: [Lume Installation](https://cua.ai/docs/lume/guide/getting-started/installation)
 
-***
+---
 
 ## 2) Create the macOS VM
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume create openclaw --os macos --ipsw latest
 ```
 
 This downloads macOS and creates the VM. A VNC window opens automatically.
 
-<Note>
-  The download can take a while depending on your connection.
-</Note>
+Note
 
-***
+The download can take a while depending on your connection.
+
+---
 
 ## 3) Complete Setup Assistant
 
@@ -117,52 +115,52 @@ After setup completes, enable SSH:
 1. Open System Settings → General → Sharing
 2. Enable "Remote Login"
 
-***
+---
 
 ## 4) Get the VM IP address
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume get openclaw
 ```
 
 Look for the IP address (usually `192.168.64.x`).
 
-***
+---
 
 ## 5) SSH into the VM
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh youruser@192.168.64.X
 ```
 
 Replace `youruser` with the account you created, and the IP with your VM's IP.
 
-***
+---
 
 ## 6) Install OpenClaw
 
 Inside the VM:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm install -g openclaw@latest
 openclaw onboard --install-daemon
 ```
 
 Follow the onboarding prompts to set up your model provider (Anthropic, OpenAI, etc.).
 
-***
+---
 
 ## 7) Configure channels
 
 Edit the config file:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 nano ~/.openclaw/openclaw.json
 ```
 
 Add your channels:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     whatsapp: {
@@ -178,17 +176,17 @@ Add your channels:
 
 Then login to WhatsApp (scan QR):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels login
 ```
 
-***
+---
 
 ## 8) Run the VM headlessly
 
 Stop the VM and restart without display:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume stop openclaw
 lume run openclaw --no-display
 ```
@@ -197,11 +195,11 @@ The VM runs in the background. OpenClaw's daemon keeps the gateway running.
 
 To check status:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh youruser@192.168.64.X "openclaw status"
 ```
 
-***
+---
 
 ## Bonus: iMessage integration
 
@@ -216,7 +214,7 @@ Inside the VM:
 
 Add to your OpenClaw config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     imessage: {
@@ -232,38 +230,38 @@ Restart the gateway. Now your agent can send and receive iMessages.
 
 Full setup details: [iMessage channel](/channels/imessage)
 
-***
+---
 
 ## Save a golden image
 
 Before customizing further, snapshot your clean state:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume stop openclaw
 lume clone openclaw openclaw-golden
 ```
 
 Reset anytime:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lume stop openclaw && lume delete openclaw
 lume clone openclaw-golden openclaw
 lume run openclaw --no-display
 ```
 
-***
+---
 
 ## Running 24/7
 
 Keep the VM running by:
 
-* Keeping your Mac plugged in
-* Disabling sleep in System Settings → Energy Saver
-* Using `caffeinate` if needed
+- Keeping your Mac plugged in
+- Disabling sleep in System Settings → Energy Saver
+- Using `caffeinate` if needed
 
 For true always-on, consider a dedicated Mac mini or a small VPS. See [VPS hosting](/vps).
 
-***
+---
 
 ## Troubleshooting
 
@@ -274,15 +272,17 @@ For true always-on, consider a dedicated Mac mini or a small VPS. See [VPS hosti
 | Lume command not found   | Add `~/.local/bin` to your PATH                                                    |
 | WhatsApp QR not scanning | Ensure you're logged into the VM (not host) when running `openclaw channels login` |
 
-***
+---
 
 ## Related docs
 
-* [VPS hosting](/vps)
-* [Nodes](/nodes)
-* [Gateway remote](/gateway/remote)
-* [iMessage channel](/channels/imessage)
-* [Lume Quickstart](https://cua.ai/docs/lume/guide/getting-started/quickstart)
-* [Lume CLI Reference](https://cua.ai/docs/lume/reference/cli-reference)
-* [Unattended VM Setup](https://cua.ai/docs/lume/guide/fundamentals/unattended-setup) (advanced)
-* [Docker Sandboxing](/install/docker) (alternative isolation approach)
+- [VPS hosting](/vps)
+- [Nodes](/nodes)
+- [Gateway remote](/gateway/remote)
+- [iMessage channel](/channels/imessage)
+- [Lume Quickstart](https://cua.ai/docs/lume/guide/getting-started/quickstart)
+- [Lume CLI Reference](https://cua.ai/docs/lume/reference/cli-reference)
+- [Unattended VM Setup](https://cua.ai/docs/lume/guide/fundamentals/unattended-setup) (advanced)
+- [Docker Sandboxing](/install/docker) (alternative isolation approach)
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "exe.dev"
 source: "https://docs.openclaw.ai/install/exe-dev"
-source_hash: "b87817172b26f9e9bd510d0a804396ffac1b0d2854160c2fc03c3e5f7fc49a4b"
+source_hash: "b23caff42f98079a45076c425802152affbb1a8631a37e9b01429213ef9ed790"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/exe-dev.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # exe.dev
 Source: https://docs.openclaw.ai/install/exe-dev
-
-
 
 Goal: OpenClaw Gateway running on an exe.dev VM, reachable from your laptop via: `https://<vm-name>.exe.xyz`
 
@@ -29,8 +27,8 @@ This page assumes exe.dev's default **exeuntu** image. If you picked a different
 
 ## What you need
 
-* exe.dev account
-* `ssh exe.dev` access to [exe.dev](https://exe.dev) virtual machines (optional)
+- exe.dev account
+- `ssh exe.dev` access to [exe.dev](https://exe.dev) virtual machines (optional)
 
 ## Automated install with Shelley
 
@@ -47,23 +45,23 @@ Set up OpenClaw (https://docs.openclaw.ai/install) on this VM. Use the non-inter
 
 From your device:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh exe.dev new
 ```
 
 Then connect:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh <vm-name>.exe.xyz
 ```
 
-<Tip>
-  Keep this VM **stateful**. OpenClaw stores `openclaw.json`, per-agent `auth-profiles.json`, sessions, and channel/provider state under `~/.openclaw/`, plus the workspace under `~/.openclaw/workspace/`.
-</Tip>
+Tip
+
+Keep this VM **stateful**. OpenClaw stores `openclaw.json`, per-agent `auth-profiles.json`, sessions, and channel/provider state under `~/.openclaw/`, plus the workspace under `~/.openclaw/workspace/`.
 
 ## 2) Install prerequisites (on the VM)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 sudo apt-get update
 sudo apt-get install -y git curl jq ca-certificates openssl
 ```
@@ -72,7 +70,7 @@ sudo apt-get install -y git curl jq ca-certificates openssl
 
 Run the OpenClaw install script:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
@@ -128,7 +126,7 @@ For remote hosts, prefer one `config patch` call over many SSH calls to `config 
 
 On the VM, make the service environment contain the secrets it needs:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 cat >> ~/.openclaw/.env <<'EOF'
 SLACK_BOT_TOKEN=xoxb-...
 SLACK_APP_TOKEN=xapp-...
@@ -139,7 +137,7 @@ EOF
 
 From your local machine, create a patch file and pipe it to the VM:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // openclaw.remote.patch.json5
 {
   secrets: {
@@ -175,7 +173,7 @@ From your local machine, create a patch file and pipe it to the VM:
 }
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh <vm-name>.exe.xyz 'openclaw config patch --stdin --dry-run' < ./openclaw.remote.patch.json5
 ssh <vm-name>.exe.xyz 'openclaw config patch --stdin' < ./openclaw.remote.patch.json5
 ssh <vm-name>.exe.xyz 'openclaw gateway restart && openclaw health'
@@ -183,7 +181,7 @@ ssh <vm-name>.exe.xyz 'openclaw gateway restart && openclaw health'
 
 Use `--replace-path` when a nested allowlist should become exactly the patch value, for example when replacing a Discord channel allowlist:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh <vm-name>.exe.xyz 'openclaw config patch --stdin --replace-path "channels.discord.guilds[\"123\"].channels"' < ./discord.patch.json5
 ```
 
@@ -195,7 +193,7 @@ with email auth.
 
 ## Updating
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm i -g openclaw@latest
 openclaw doctor
 openclaw gateway restart
@@ -206,5 +204,7 @@ Guide: [Updating](/install/updating)
 
 ## Related
 
-* [Remote gateway](/gateway/remote)
-* [Install overview](/install)
+- [Remote gateway](/gateway/remote)
+- [Install overview](/install)
+
+---

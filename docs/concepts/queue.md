@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "2438154ea8b73610b29bb5fcefcfa33cf02811f8259e59c29a446f426b3cfbc3"
+source_hash: "8257b71d0021519b1d06245536d104ccda3b6bc4391b8e5edd2ba6c1863cb4ba"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue.md"
@@ -13,31 +13,29 @@ duplicate_index: 1
 # Command queue
 Source: https://docs.openclaw.ai/concepts/queue
 
-
-
 We serialize inbound auto-reply runs (all channels) through a tiny in-process queue to prevent multiple agent runs from colliding, while still allowing safe parallelism across sessions.
 
 ## Why
 
-* Auto-reply runs can be expensive (LLM calls) and can collide when multiple inbound messages arrive close together.
-* Serializing avoids competing for shared resources (session files, logs, CLI stdin) and reduces the chance of upstream rate limits.
+- Auto-reply runs can be expensive (LLM calls) and can collide when multiple inbound messages arrive close together.
+- Serializing avoids competing for shared resources (session files, logs, CLI stdin) and reduces the chance of upstream rate limits.
 
 ## How it works
 
-* A lane-aware FIFO queue drains each lane with a configurable concurrency cap (default 1 for unconfigured lanes; main defaults to 4, subagent to 8).
-* `runEmbeddedPiAgent` enqueues by **session key** (lane `session:<key>`) to guarantee only one active run per session.
-* Each session run is then queued into a **global lane** (`main` by default) so overall parallelism is capped by `agents.defaults.maxConcurrent`.
-* When verbose logging is enabled, queued runs emit a short notice if they waited more than \~2s before starting.
-* Typing indicators still fire immediately on enqueue (when supported by the channel) so user experience is unchanged while we wait our turn.
+- A lane-aware FIFO queue drains each lane with a configurable concurrency cap (default 1 for unconfigured lanes; main defaults to 4, subagent to 8).
+- `runEmbeddedPiAgent` enqueues by **session key** (lane `session:<key>`) to guarantee only one active run per session.
+- Each session run is then queued into a **global lane** (`main` by default) so overall parallelism is capped by `agents.defaults.maxConcurrent`.
+- When verbose logging is enabled, queued runs emit a short notice if they waited more than ~2s before starting.
+- Typing indicators still fire immediately on enqueue (when supported by the channel) so user experience is unchanged while we wait our turn.
 
 ## Defaults
 
 When unset, all inbound channel surfaces use:
 
-* `mode: "steer"`
-* `debounceMs: 500`
-* `cap: 20`
-* `drop: "summarize"`
+- `mode: "steer"`
+- `debounceMs: 500`
+- `cap: 20`
+- `drop: "summarize"`
 
 Same-turn steering is the default. A prompt that arrives mid-run is injected
 into the active runtime when the run can accept steering, so no second session
@@ -49,10 +47,10 @@ active run to finish before starting the prompt.
 `/queue` controls what normal inbound messages do while a session already has
 an active run:
 
-* `steer`: inject messages into the active runtime. Pi delivers all pending steering messages **after the current assistant turn finishes executing its tool calls**, before the next LLM call; Codex app-server receives one batched `turn/steer`. If the run is not actively streaming or steering is unavailable, OpenClaw waits until the active run ends before starting the prompt.
-* `followup`: do not steer. Enqueue each message for a later agent turn after the current run ends.
-* `collect`: do not steer. Coalesce queued messages into a **single** followup turn after the quiet window. If messages target different channels/threads, they drain individually to preserve routing.
-* `interrupt`: abort the active run for that session, then run the newest message.
+- `steer`: inject messages into the active runtime. Pi delivers all pending steering messages **after the current assistant turn finishes executing its tool calls**, before the next LLM call; Codex app-server receives one batched `turn/steer`. If the run is not actively streaming or steering is unavailable, OpenClaw waits until the active run ends before starting the prompt.
+- `followup`: do not steer. Enqueue each message for a later agent turn after the current run ends.
+- `collect`: do not steer. Coalesce queued messages into a **single** followup turn after the quiet window. If messages target different channels/threads, they drain individually to preserve routing.
+- `interrupt`: abort the active run for that session, then run the newest message.
 
 For runtime-specific timing and dependency behavior, see
 [Steering queue](/concepts/queue-steering). For the explicit `/steer <message>`
@@ -60,7 +58,7 @@ command, see [Steer](/tools/steer).
 
 Configure globally or per channel via `messages.queue`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   messages: {
     queue: {
@@ -79,11 +77,11 @@ Configure globally or per channel via `messages.queue`:
 Options apply to queued delivery. `debounceMs` also sets the Codex steering
 quiet window in `steer` mode:
 
-* `debounceMs`: quiet window before draining queued followups or collect batches; in Codex `steer` mode, quiet window before sending batched `turn/steer`. Bare numbers are milliseconds; units `ms`, `s`, `m`, `h`, and `d` are accepted by `/queue` options.
-* `cap`: max queued messages per session. Values below `1` are ignored.
-* `drop: "summarize"`: default. Drop the oldest queued entries as needed, keep compact summaries, and inject them as a synthetic followup prompt.
-* `drop: "old"`: drop the oldest queued entries as needed, without preserving summaries.
-* `drop: "new"`: reject the newest message when the queue is already full.
+- `debounceMs`: quiet window before draining queued followups or collect batches; in Codex `steer` mode, quiet window before sending batched `turn/steer`. Bare numbers are milliseconds; units `ms`, `s`, `m`, `h`, and `d` are accepted by `/queue` options.
+- `cap`: max queued messages per session. Values below `1` are ignored.
+- `drop: "summarize"`: default. Drop the oldest queued entries as needed, keep compact summaries, and inject them as a synthetic followup prompt.
+- `drop: "old"`: drop the oldest queued entries as needed, without preserving summaries.
+- `drop: "new"`: reject the newest message when the queue is already full.
 
 Defaults: `debounceMs: 500`, `cap: 20`, `drop: summarize`.
 
@@ -104,28 +102,30 @@ keys.
 
 ## Per-session overrides
 
-* Send `/queue <steer|followup|collect|interrupt>` as a standalone command to store the queue mode for the current session.
-* Options can be combined: `/queue collect debounce:0.5s cap:25 drop:summarize`
-* `/queue default` or `/queue reset` clears the session override.
+- Send `/queue <steer|followup|collect|interrupt>` as a standalone command to store the queue mode for the current session.
+- Options can be combined: `/queue collect debounce:0.5s cap:25 drop:summarize`
+- `/queue default` or `/queue reset` clears the session override.
 
 ## Scope and guarantees
 
-* Applies to auto-reply agent runs across all inbound channels that use the gateway reply pipeline (WhatsApp web, Telegram, Slack, Discord, Signal, iMessage, webchat, etc.).
-* Default lane (`main`) is process-wide for inbound + main heartbeats; set `agents.defaults.maxConcurrent` to allow multiple sessions in parallel.
-* Additional lanes may exist (e.g. `cron`, `cron-nested`, `nested`, `subagent`) so background jobs can run in parallel without blocking inbound replies. Isolated cron agent turns hold a `cron` slot while their inner agent execution uses `cron-nested`; both use `cron.maxConcurrentRuns`. Shared non-cron `nested` flows keep their own lane behavior. These detached runs are tracked as [background tasks](/automation/tasks).
-* Per-session lanes guarantee that only one agent run touches a given session at a time.
-* No external dependencies or background worker threads; pure TypeScript + promises.
+- Applies to auto-reply agent runs across all inbound channels that use the gateway reply pipeline (WhatsApp web, Telegram, Slack, Discord, Signal, iMessage, webchat, etc.).
+- Default lane (`main`) is process-wide for inbound + main heartbeats; set `agents.defaults.maxConcurrent` to allow multiple sessions in parallel.
+- Additional lanes may exist (e.g. `cron`, `cron-nested`, `nested`, `subagent`) so background jobs can run in parallel without blocking inbound replies. Isolated cron agent turns hold a `cron` slot while their inner agent execution uses `cron-nested`; both use `cron.maxConcurrentRuns`. Shared non-cron `nested` flows keep their own lane behavior. These detached runs are tracked as [background tasks](/automation/tasks).
+- Per-session lanes guarantee that only one agent run touches a given session at a time.
+- No external dependencies or background worker threads; pure TypeScript + promises.
 
 ## Troubleshooting
 
-* If commands seem stuck, enable verbose logs and look for "queued for ...ms" lines to confirm the queue is draining.
-* If you need queue depth, enable verbose logs and watch for queue timing lines.
-* Codex app-server runs that accept a turn and then stop emitting progress are interrupted by the Codex adapter so the active session lane can release instead of waiting for the outer run timeout.
-* When diagnostics are enabled, sessions that remain in `processing` past `diagnostics.stuckSessionWarnMs` with no observed reply, tool, status, block, or ACP progress are classified by current activity. Active work logs as `session.long_running`; active work with no recent progress logs as `session.stalled`; `session.stuck` is reserved for stale session bookkeeping with no active work, and only that path can release the affected session lane so queued work drains. Repeated `session.stuck` diagnostics back off while the session remains unchanged.
+- If commands seem stuck, enable verbose logs and look for "queued for ...ms" lines to confirm the queue is draining.
+- If you need queue depth, enable verbose logs and watch for queue timing lines.
+- Codex app-server runs that accept a turn and then stop emitting progress are interrupted by the Codex adapter so the active session lane can release instead of waiting for the outer run timeout.
+- When diagnostics are enabled, sessions that remain in `processing` past `diagnostics.stuckSessionWarnMs` with no observed reply, tool, status, block, or ACP progress are classified by current activity. Active work logs as `session.long_running`; active work with no recent progress logs as `session.stalled`; `session.stuck` is reserved for stale session bookkeeping with no active work, and only that path can release the affected session lane so queued work drains. Repeated `session.stuck` diagnostics back off while the session remains unchanged.
 
 ## Related
 
-* [Session management](/concepts/session)
-* [Steering queue](/concepts/queue-steering)
-* [Steer](/tools/steer)
-* [Retry policy](/concepts/retry)
+- [Session management](/concepts/session)
+- [Steering queue](/concepts/queue-steering)
+- [Steer](/tools/steer)
+- [Retry policy](/concepts/retry)
+
+---

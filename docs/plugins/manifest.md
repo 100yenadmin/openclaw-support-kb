@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "5b4695db33731ca02f761b24a13b9d9f71bf879c2c4248eab723694a413a1675"
+source_hash: "8ceb9c77afcdeae73f2cebdc31cd2025dc6251a3a77e88602ccfe304b4c10bfc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manifest.md"
@@ -13,18 +13,16 @@ duplicate_index: 1
 # Plugin manifest
 Source: https://docs.openclaw.ai/plugins/manifest
 
-
-
 This page is for the **native OpenClaw plugin manifest** only.
 
 For compatible bundle layouts, see [Plugin bundles](/plugins/bundles).
 
 Compatible bundle formats use different manifest files:
 
-* Codex bundle: `.codex-plugin/plugin.json`
-* Claude bundle: `.claude-plugin/plugin.json` or the default Claude component
+- Codex bundle: `.codex-plugin/plugin.json`
+- Claude bundle: `.claude-plugin/plugin.json` or the default Claude component
   layout without a manifest
-* Cursor bundle: `.cursor-plugin/plugin.json`
+- Cursor bundle: `.cursor-plugin/plugin.json`
 
 OpenClaw auto-detects those bundle layouts too, but they are not validated
 against the `openclaw.plugin.json` schema described here.
@@ -51,20 +49,20 @@ plugin runtime.
 
 **Use it for:**
 
-* plugin identity, config validation, and config UI hints
-* auth, onboarding, and setup metadata (alias, auto-enable, provider env vars, auth choices)
-* activation hints for control-plane surfaces
-* shorthand model-family ownership
-* static capability-ownership snapshots (`contracts`)
-* QA runner metadata the shared `openclaw qa` host can inspect
-* channel-specific config metadata merged into catalog and validation surfaces
+- plugin identity, config validation, and config UI hints
+- auth, onboarding, and setup metadata (alias, auto-enable, provider env vars, auth choices)
+- activation hints for control-plane surfaces
+- shorthand model-family ownership
+- static capability-ownership snapshots (`contracts`)
+- QA runner metadata the shared `openclaw qa` host can inspect
+- channel-specific config metadata merged into catalog and validation surfaces
 
 **Do not use it for:** registering runtime behavior, declaring code entrypoints,
 or npm install metadata. Those belong in your plugin code and `package.json`.
 
 ## Minimal example
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "voice-call",
   "configSchema": {
@@ -77,7 +75,7 @@ or npm install metadata. Those belong in your plugin code and `package.json`.
 
 ## Rich example
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "openrouter",
   "name": "OpenRouter",
@@ -208,7 +206,7 @@ Use these fields only for cheap, declarative facts. Transport, request
 transforms, token refresh, credential validation, and actual generation behavior
 stay in the plugin runtime.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "contracts": {
     "imageGenerationProviders": ["example-image"]
@@ -299,7 +297,7 @@ generation provider metadata, keyed by tool name. `contracts.tools` declares
 ownership. `toolMetadata` declares cheap availability evidence so OpenClaw can
 avoid importing a plugin runtime just to have its tool factory return `null`.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "providerAuthEnvVars": {
     "example": ["EXAMPLE_API_KEY"]
@@ -363,7 +361,7 @@ Use `commandAliases` when a plugin owns a runtime command name that users may
 mistakenly put in `plugins.allow` or try to run as a root CLI command. OpenClaw
 uses this metadata for diagnostics without importing plugin runtime code.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "commandAliases": [
     {
@@ -414,7 +412,7 @@ Omitting `onStartup` no longer startup-loads the plugin implicitly; use explicit
 activation metadata for startup, channel, config, agent-harness, memory, or
 other narrower activation triggers.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "activation": {
     "onStartup": false,
@@ -441,17 +439,17 @@ other narrower activation triggers.
 
 Current live consumers:
 
-* Gateway startup planning uses `activation.onStartup` for explicit startup
+- Gateway startup planning uses `activation.onStartup` for explicit startup
   import
-* command-triggered CLI planning falls back to legacy
+- command-triggered CLI planning falls back to legacy
   `commandAliases[].cliCommand` or `commandAliases[].name`
-* agent-runtime startup planning uses `activation.onAgentHarnesses` for
+- agent-runtime startup planning uses `activation.onAgentHarnesses` for
   embedded harnesses and top-level `cliBackends[]` for CLI runtime aliases
-* channel-triggered setup/channel planning falls back to legacy `channels[]`
+- channel-triggered setup/channel planning falls back to legacy `channels[]`
   ownership when explicit channel activation metadata is missing
-* startup plugin planning uses `activation.onConfigPaths` for non-channel root
+- startup plugin planning uses `activation.onConfigPaths` for non-channel root
   config surfaces such as the bundled browser plugin's `browser` block
-* provider-triggered setup/runtime planning falls back to legacy
+- provider-triggered setup/runtime planning falls back to legacy
   `providers[]` and top-level `cliBackends[]` ownership when explicit provider
   activation metadata is missing
 
@@ -469,7 +467,7 @@ the shared `openclaw qa` root. Keep this metadata cheap and static; the plugin
 runtime still owns actual CLI registration through a lightweight
 `runtime-api.ts` surface that exports `qaRunnerCliRegistrations`.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "qaRunners": [
     {
@@ -490,7 +488,7 @@ runtime still owns actual CLI registration through a lightweight
 Use `setup` when setup and onboarding surfaces need cheap plugin-owned metadata
 before runtime loads.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "setup": {
     "providers": [
@@ -594,7 +592,7 @@ Supported evidence entries:
 
 `uiHints` is a map from config field names to small rendering hints.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "uiHints": {
     "apiKey": {
@@ -623,7 +621,7 @@ Each field hint can include:
 Use `contracts` only for static capability ownership metadata that OpenClaw can
 read without importing the plugin runtime.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "contracts": {
     "agentToolResultMiddleware": ["pi", "codex"],
@@ -707,7 +705,7 @@ default models, auto-auth fallback priority, or native document support that
 generic core helpers need before runtime loads. Keys must also be declared in
 `contracts.mediaUnderstandingProviders`.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "contracts": {
     "mediaUnderstandingProviders": ["example"]
@@ -752,8 +750,8 @@ channel before plugin runtime code executes.
 For a channel plugin, `configSchema` and `channelConfigs` describe different
 paths:
 
-* `configSchema` validates `plugins.entries.<plugin-id>.config`
-* `channelConfigs.<channel-id>.schema` validates `channels.<channel-id>`
+- `configSchema` validates `plugins.entries.<plugin-id>.config`
+- `channelConfigs.<channel-id>.schema` validates `channels.<channel-id>`
 
 Non-bundled plugins that declare `channels[]` should also declare matching
 `channelConfigs` entries. Without them, OpenClaw can still load the plugin, but
@@ -766,7 +764,7 @@ checks that run before channel runtime loads. Bundled channels can also publish
 the same defaults through `package.json#openclaw.channel.commands` alongside
 their other package-owned channel catalog metadata.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "channelConfigs": {
     "matrix": {
@@ -813,7 +811,7 @@ another plugin can also provide. Common cases are a renamed plugin id, a
 standalone plugin that supersedes a bundled plugin, or a maintained fork that
 keeps the same channel id for config compatibility.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "acme-chat",
   "channels": ["chat"],
@@ -849,7 +847,7 @@ Use `modelSupport` when OpenClaw should infer your provider plugin from
 shorthand model ids like `gpt-5.5` or `claude-sonnet-4.6` before plugin runtime
 loads.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "modelSupport": {
     "modelPrefixes": ["gpt-", "o1", "o3", "o4"],
@@ -860,11 +858,11 @@ loads.
 
 OpenClaw applies this precedence:
 
-* explicit `provider/model` refs use the owning `providers` manifest metadata
-* `modelPatterns` beat `modelPrefixes`
-* if one non-bundled plugin and one bundled plugin both match, the non-bundled
+- explicit `provider/model` refs use the owning `providers` manifest metadata
+- `modelPatterns` beat `modelPrefixes`
+- if one non-bundled plugin and one bundled plugin both match, the non-bundled
   plugin wins
-* remaining ambiguity is ignored until the user or config specifies a provider
+- remaining ambiguity is ignored until the user or config specifies a provider
 
 Fields:
 
@@ -881,7 +879,7 @@ rows, provider aliases, suppression rules, and discovery mode. Runtime refresh
 still belongs in provider runtime code, but the manifest tells core when runtime
 is required.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "providers": ["openai"],
   "modelCatalog": {
@@ -1004,7 +1002,7 @@ happen before provider runtime loads. This keeps aliases such as short model
 names, provider-local legacy ids, and proxy prefix rules in the owning plugin
 manifest instead of in core model-selection tables.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "providers": ["anthropic", "openrouter"],
   "modelIdNormalization": {
@@ -1054,7 +1052,7 @@ Use `providerRequest` for cheap request-compatibility metadata that generic
 request policy needs without loading provider runtime. Keep behavior-specific
 payload rewriting in provider runtime hooks or shared provider-family helpers.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "providers": ["vllm"],
   "providerRequest": {
@@ -1084,7 +1082,7 @@ Use `modelPricing` when a provider needs control-plane pricing behavior before
 runtime loads. The Gateway pricing cache reads this metadata without importing
 provider runtime code.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "providers": ["ollama", "openrouter"],
   "modelPricing": {
@@ -1169,8 +1167,8 @@ The two files serve different jobs:
 
 If you are unsure where a piece of metadata belongs, use this rule:
 
-* if OpenClaw must know it before loading plugin code, put it in `openclaw.plugin.json`
-* if it is about packaging, entry files, or npm install behavior, put it in `package.json`
+- if OpenClaw must know it before loading plugin code, put it in `openclaw.plugin.json`
+- if it is about packaging, entry files, or npm install behavior, put it in `package.json`
 
 ### package.json fields that affect discovery
 
@@ -1247,7 +1245,7 @@ to `openclaw doctor --fix`.
 `openclaw.channel.persistedAuthState` is package metadata for a tiny checker
 module:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "openclaw": {
     "channel": {
@@ -1271,7 +1269,7 @@ not route it through the full channel runtime barrel.
 `openclaw.channel.configuredState` follows the same shape for cheap env-only
 configured checks:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "openclaw": {
     "channel": {
@@ -1307,21 +1305,21 @@ Precedence, highest to lowest:
 
 Implications:
 
-* A forked or stale copy of a bundled plugin sitting in the workspace will not shadow the bundled build.
-* To actually override a bundled plugin with a local one, pin it via `plugins.entries.<id>` so it wins by precedence rather than relying on workspace discovery.
-* Duplicate drops are logged so Doctor and startup diagnostics can point at the discarded copy.
-* Config-selected duplicate overrides are worded as explicit overrides in diagnostics, but still warn so stale forks and accidental shadows stay visible.
+- A forked or stale copy of a bundled plugin sitting in the workspace will not shadow the bundled build.
+- To actually override a bundled plugin with a local one, pin it via `plugins.entries.<id>` so it wins by precedence rather than relying on workspace discovery.
+- Duplicate drops are logged so Doctor and startup diagnostics can point at the discarded copy.
+- Config-selected duplicate overrides are worded as explicit overrides in diagnostics, but still warn so stale forks and accidental shadows stay visible.
 
 ## JSON Schema requirements
 
-* **Every plugin must ship a JSON Schema**, even if it accepts no config.
-* An empty schema is acceptable (for example, `{ "type": "object", "additionalProperties": false }`).
-* Schemas are validated at config read/write time, not at runtime.
-* When extending or forking a bundled plugin with new config keys, update that plugin's `openclaw.plugin.json` `configSchema` at the same time. Bundled plugin schemas are strict, so adding `plugins.entries.<id>.config.myNewKey` in user config without adding `myNewKey` to `configSchema.properties` will be rejected before the plugin runtime loads.
+- **Every plugin must ship a JSON Schema**, even if it accepts no config.
+- An empty schema is acceptable (for example, `{ "type": "object", "additionalProperties": false }`).
+- Schemas are validated at config read/write time, not at runtime.
+- When extending or forking a bundled plugin with new config keys, update that plugin's `openclaw.plugin.json` `configSchema` at the same time. Bundled plugin schemas are strict, so adding `plugins.entries.<id>.config.myNewKey` in user config without adding `myNewKey` to `configSchema.properties` will be rejected before the plugin runtime loads.
 
 Example schema extension:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "configSchema": {
     "type": "object",
@@ -1337,42 +1335,47 @@ Example schema extension:
 
 ## Validation behavior
 
-* Unknown `channels.*` keys are **errors**, unless the channel id is declared by
+- Unknown `channels.*` keys are **errors**, unless the channel id is declared by
   a plugin manifest.
-* `plugins.entries.<id>`, `plugins.allow`, `plugins.deny`, and `plugins.slots.*`
+- `plugins.entries.<id>`, `plugins.allow`, `plugins.deny`, and `plugins.slots.*`
   must reference **discoverable** plugin ids. Unknown ids are **errors**.
-* If a plugin is installed but has a broken or missing manifest or schema,
+- If a plugin is installed but has a broken or missing manifest or schema,
   validation fails and Doctor reports the plugin error.
-* If plugin config exists but the plugin is **disabled**, the config is kept and
+- If plugin config exists but the plugin is **disabled**, the config is kept and
   a **warning** is surfaced in Doctor + logs.
 
 See [Configuration reference](/gateway/configuration) for the full `plugins.*` schema.
 
 ## Notes
 
-* The manifest is **required for native OpenClaw plugins**, including local filesystem loads. Runtime still loads the plugin module separately; the manifest is only for discovery + validation.
-* Native manifests are parsed with JSON5, so comments, trailing commas, and unquoted keys are accepted as long as the final value is still an object.
-* Only documented manifest fields are read by the manifest loader. Avoid custom top-level keys.
-* `channels`, `providers`, `cliBackends`, and `skills` can all be omitted when a plugin does not need them.
-* `providerCatalogEntry` must stay lightweight and should not import broad runtime code; use it for static provider catalog metadata or narrow discovery descriptors, not request-time execution. `providerDiscoveryEntry` is the legacy spelling and still works for existing plugins.
-* Exclusive plugin kinds are selected through `plugins.slots.*`: `kind: "memory"` via `plugins.slots.memory`, `kind: "context-engine"` via `plugins.slots.contextEngine` (default `legacy`).
-* Declare exclusive plugin kind in this manifest. Runtime-entry `OpenClawPluginDefinition.kind` is deprecated and remains only as a compatibility fallback for older plugins.
-* Env-var metadata (`setup.providers[].envVars`, deprecated `providerAuthEnvVars`, and `channelEnvVars`) is declarative only. Status, audit, cron delivery validation, and other read-only surfaces still apply plugin trust and effective activation policy before treating an env var as configured.
-* For runtime wizard metadata that requires provider code, see [Provider runtime hooks](/plugins/architecture-internals#provider-runtime-hooks).
-* If your plugin depends on native modules, document the build steps and any package-manager allowlist requirements (for example, pnpm `allow-build-scripts` + `pnpm rebuild <package>`).
+- The manifest is **required for native OpenClaw plugins**, including local filesystem loads. Runtime still loads the plugin module separately; the manifest is only for discovery + validation.
+- Native manifests are parsed with JSON5, so comments, trailing commas, and unquoted keys are accepted as long as the final value is still an object.
+- Only documented manifest fields are read by the manifest loader. Avoid custom top-level keys.
+- `channels`, `providers`, `cliBackends`, and `skills` can all be omitted when a plugin does not need them.
+- `providerCatalogEntry` must stay lightweight and should not import broad runtime code; use it for static provider catalog metadata or narrow discovery descriptors, not request-time execution. `providerDiscoveryEntry` is the legacy spelling and still works for existing plugins.
+- Exclusive plugin kinds are selected through `plugins.slots.*`: `kind: "memory"` via `plugins.slots.memory`, `kind: "context-engine"` via `plugins.slots.contextEngine` (default `legacy`).
+- Declare exclusive plugin kind in this manifest. Runtime-entry `OpenClawPluginDefinition.kind` is deprecated and remains only as a compatibility fallback for older plugins.
+- Env-var metadata (`setup.providers[].envVars`, deprecated `providerAuthEnvVars`, and `channelEnvVars`) is declarative only. Status, audit, cron delivery validation, and other read-only surfaces still apply plugin trust and effective activation policy before treating an env var as configured.
+- For runtime wizard metadata that requires provider code, see [Provider runtime hooks](/plugins/architecture-internals#provider-runtime-hooks).
+- If your plugin depends on native modules, document the build steps and any package-manager allowlist requirements (for example, pnpm `allow-build-scripts` + `pnpm rebuild <package>`).
 
 ## Related
 
-<CardGroup>
-  <Card title="Building plugins" href="/plugins/building-plugins" icon="rocket">
+CardGroup
+
+
+Building plugins
+
     Getting started with plugins.
-  </Card>
 
-  <Card title="Plugin architecture" href="/plugins/architecture" icon="diagram-project">
+
+Plugin architecture
+
     Internal architecture and capability model.
-  </Card>
 
-  <Card title="SDK overview" href="/plugins/sdk-overview" icon="book">
+
+SDK overview
+
     Plugin SDK reference and subpath imports.
-  </Card>
-</CardGroup>
+
+---

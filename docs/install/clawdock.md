@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawDock"
 source: "https://docs.openclaw.ai/install/clawdock"
-source_hash: "92033af6f11e3cd8fcb6dbe904e996289bac8fe0267331149c4e64b25abf4e3f"
+source_hash: "4e87611db8edb09d44729eca7bd23b406489a4826333e06d9046bb659db6d936"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/clawdock.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # ClawDock
 Source: https://docs.openclaw.ai/install/clawdock
-
-
 
 ClawDock is a small shell-helper layer for Docker-based OpenClaw installs.
 
@@ -25,7 +23,7 @@ If you have not set up Docker yet, start with [Docker](/install/docker).
 
 Use the canonical helper path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 mkdir -p ~/.clawdock && curl -sL https://raw.githubusercontent.com/openclaw/openclaw/main/scripts/clawdock/clawdock-helpers.sh -o ~/.clawdock/clawdock-helpers.sh
 echo 'source ~/.clawdock/clawdock-helpers.sh' >> ~/.zshrc && source ~/.zshrc
 ```
@@ -82,7 +80,7 @@ If you previously installed ClawDock from `scripts/shell-helpers/clawdock-helper
 
 ## First-time flow
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 clawdock-start
 clawdock-fix-token
 clawdock-dashboard
@@ -90,7 +88,7 @@ clawdock-dashboard
 
 If the browser says pairing is required:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 clawdock-devices
 clawdock-approve <request-id>
 ```
@@ -99,25 +97,30 @@ clawdock-approve <request-id>
 
 ClawDock works with the same Docker config split described in [Docker](/install/docker):
 
-* `<project>/.env` for Docker-specific values like image name, ports, and the gateway token
-* `~/.openclaw/.env` for env-backed provider keys and bot tokens
-* `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` for stored provider OAuth/API-key auth
-* `~/.openclaw/openclaw.json` for behavior config
+- `<project>/.env` for Docker-specific values like image name, ports, and the gateway token
+- `~/.openclaw/.env` for env-backed provider keys and bot tokens
+- `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` for stored provider OAuth/API-key auth
+- `~/.openclaw/openclaw.json` for behavior config
 
 Use `clawdock-show-config` when you want to inspect the `.env` files and `openclaw.json` quickly. It redacts `.env` values in its printed output.
 
 ## Related
 
-<CardGroup>
-  <Card title="Docker" href="/install/docker" icon="docker">
+CardGroup
+
+
+Docker
+
     Canonical Docker install for OpenClaw.
-  </Card>
 
-  <Card title="Docker VM runtime" href="/install/docker-vm-runtime" icon="cube">
+
+Docker VM runtime
+
     Docker-managed VM runtime for hardened isolation.
-  </Card>
 
-  <Card title="Updating" href="/install/updating" icon="arrow-up-right-from-square">
+
+Updating
+
     Updating the OpenClaw package and managed services.
-  </Card>
-</CardGroup>
+
+---

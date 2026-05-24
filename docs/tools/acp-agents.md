@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "223d27bef49cc074ddc5e32998a0957c0e9c4080c595428f9812359ed2d033bf"
+source_hash: "de8434f787b56b4b1a2ca1ba7d2c983b2eba1d551977c914811072e03a6612e0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # ACP agents
 Source: https://docs.openclaw.ai/tools/acp-agents
 
-
-
 [Agent Client Protocol (ACP)](https://agentclientprotocol.com/) sessions
 let OpenClaw run external coding harnesses (for example Pi, Claude Code,
 Cursor, Copilot, Droid, OpenClaw ACP, OpenCode, Gemini CLI, and other
@@ -22,31 +20,31 @@ supported ACPX harnesses) through an ACP backend plugin.
 
 Each ACP session spawn is tracked as a [background task](/automation/tasks).
 
-<Note>
-  **ACP is the external-harness path, not the default Codex path.** The
-  native Codex app-server plugin owns `/codex ...` controls and the default
-  `openai/gpt-*` embedded runtime for agent turns; ACP owns
-  `/acp ...` controls and `sessions_spawn({ runtime: "acp" })` sessions.
+Note
 
-  If you want Codex or Claude Code to connect as an external MCP client
-  directly to existing OpenClaw channel conversations, use
-  [`openclaw mcp serve`](/cli/mcp) instead of ACP.
-</Note>
+**ACP is the external-harness path, not the default Codex path.** The
+native Codex app-server plugin owns `/codex ...` controls and the default
+`openai/gpt-*` embedded runtime for agent turns; ACP owns
+`/acp ...` controls and `sessions_spawn({ runtime: "acp" })` sessions.
+
+If you want Codex or Claude Code to connect as an external MCP client
+directly to existing OpenClaw channel conversations, use
+[`openclaw mcp serve`](/cli/mcp) instead of ACP.
 
 ## Which page do I want?
 
 | You want to…                                                                                    | Use this                              | Notes                                                                                                                                                                                         |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bind or control Codex in the current conversation                                               | `/codex bind`, `/codex threads`       | Native Codex app-server path when the `codex` plugin is enabled; includes bound chat replies, image forwarding, model/fast/permissions, stop, and steer controls. ACP is an explicit fallback |
-| Run Claude Code, Gemini CLI, explicit Codex ACP, or another external harness *through* OpenClaw | This page                             | Chat-bound sessions, `/acp spawn`, `sessions_spawn({ runtime: "acp" })`, background tasks, runtime controls                                                                                   |
-| Expose an OpenClaw Gateway session *as* an ACP server for an editor or client                   | [`openclaw acp`](/cli/acp)            | Bridge mode. IDE/client talks ACP to OpenClaw over stdio/WebSocket                                                                                                                            |
+| Run Claude Code, Gemini CLI, explicit Codex ACP, or another external harness _through_ OpenClaw | This page                             | Chat-bound sessions, `/acp spawn`, `sessions_spawn({ runtime: "acp" })`, background tasks, runtime controls                                                                                   |
+| Expose an OpenClaw Gateway session _as_ an ACP server for an editor or client                   | [`openclaw acp`](/cli/acp)            | Bridge mode. IDE/client talks ACP to OpenClaw over stdio/WebSocket                                                                                                                            |
 | Reuse a local AI CLI as a text-only fallback model                                              | [CLI Backends](/gateway/cli-backends) | Not ACP. No OpenClaw tools, no ACP controls, no harness runtime                                                                                                                               |
 
 ## Does this work out of the box?
 
 Yes, after installing the official ACP runtime plugin:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/acpx
 openclaw config set plugins.entries.acpx.enabled true
 ```
@@ -61,17 +59,22 @@ loaded. If those conditions are not met, ACP plugin skills and
 `sessions_spawn` ACP guidance stay hidden so the agent does not suggest
 an unavailable backend.
 
-<AccordionGroup>
-  <Accordion title="First-run gotchas">
-    * If `plugins.allow` is set, it is a restrictive plugin inventory and **must** include `acpx`; otherwise the installed ACP backend is intentionally blocked and `/acp doctor` reports the missing allowlist entry.
-    * The Codex ACP adapter is staged with the `acpx` plugin and launched locally when possible.
-    * Codex ACP runs with an isolated `CODEX_HOME`; OpenClaw copies trusted project entries plus safe model/provider routing config from the host Codex config, while auth, notifications, and hooks stay on the host config.
-    * Other target harness adapters may still be fetched on demand with `npx` the first time you use them.
-    * Vendor auth still has to exist on the host for that harness.
-    * If the host has no npm or network access, first-run adapter fetches fail until caches are pre-warmed or the adapter is installed another way.
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="Runtime prerequisites">
+
+First-run gotchas
+
+    - If `plugins.allow` is set, it is a restrictive plugin inventory and **must** include `acpx`; otherwise the installed ACP backend is intentionally blocked and `/acp doctor` reports the missing allowlist entry.
+    - The Codex ACP adapter is staged with the `acpx` plugin and launched locally when possible.
+    - Codex ACP runs with an isolated `CODEX_HOME`; OpenClaw copies trusted project entries plus safe model/provider routing config from the host Codex config, while auth, notifications, and hooks stay on the host config.
+    - Other target harness adapters may still be fetched on demand with `npx` the first time you use them.
+    - Vendor auth still has to exist on the host for that harness.
+    - If the host has no npm or network access, first-run adapter fetches fail until caches are pre-warmed or the adapter is installed another way.
+
+
+
+Runtime prerequisites
+
     ACP launches a real external harness process. OpenClaw owns routing,
     background-task state, delivery, bindings, and policy; the harness
     owns its provider login, model catalog, filesystem behavior, and
@@ -79,15 +82,15 @@ an unavailable backend.
 
     Before blaming OpenClaw, verify:
 
-    * `/acp doctor` reports an enabled, healthy backend.
-    * The target id is allowed by `acp.allowedAgents` when that allowlist is set.
-    * The harness command can start on the Gateway host.
-    * Provider auth is present for that harness (`claude`, `codex`, `gemini`, `opencode`, `droid`, etc.).
-    * The selected model exists for that harness - model ids are not portable across harnesses.
-    * The requested `cwd` exists and is accessible, or omit `cwd` and let the backend use its default.
-    * Permission mode matches the work. Non-interactive sessions cannot click native permission prompts, so write/exec-heavy coding runs usually need an ACPX permission profile that can proceed headlessly.
-  </Accordion>
-</AccordionGroup>
+    - `/acp doctor` reports an enabled, healthy backend.
+    - The target id is allowed by `acp.allowedAgents` when that allowlist is set.
+    - The harness command can start on the Gateway host.
+    - Provider auth is present for that harness (`claude`, `codex`, `gemini`, `opencode`, `droid`, etc.).
+    - The selected model exists for that harness - model ids are not portable across harnesses.
+    - The requested `cwd` exists and is accessible, or omit `cwd` and let the backend use its default.
+    - Permission mode matches the work. Non-interactive sessions cannot click native permission prompts, so write/exec-heavy coding runs usually need an ACPX permission profile that can proceed headlessly.
+
+
 
 OpenClaw plugin tools and built-in OpenClaw tools are **not** exposed to
 ACP harnesses by default. Enable the explicit MCP bridges in
@@ -124,57 +127,69 @@ policy still checks `acp.allowedAgents` and any
 
 Quick `/acp` flow from chat:
 
-<Steps>
-  <Step title="Spawn">
+Steps
+
+
+Spawn
+
     `/acp spawn claude --bind here`,
     `/acp spawn gemini --mode persistent --thread auto`, or explicit
     `/acp spawn codex --bind here`.
-  </Step>
 
-  <Step title="Work">
+
+Work
+
     Continue in the bound conversation or thread (or target the session
     key explicitly).
-  </Step>
 
-  <Step title="Check state">
+
+Check state
+
     `/acp status`
-  </Step>
 
-  <Step title="Tune">
+
+Tune
+
     `/acp model <provider/model>`,
     `/acp permissions <profile>`,
     `/acp timeout <seconds>`.
-  </Step>
 
-  <Step title="Steer">
+
+Steer
+
     Without replacing context: `/acp steer tighten logging and continue`.
-  </Step>
 
-  <Step title="Stop">
+
+Stop
+
     `/acp cancel` (current turn) or `/acp close` (session + bindings).
-  </Step>
-</Steps>
 
-<AccordionGroup>
-  <Accordion title="Lifecycle details">
-    * Spawn creates or resumes an ACP runtime session, records ACP metadata in the OpenClaw session store, and may create a background task when the run is parent-owned.
-    * Parent-owned ACP sessions are treated as background work even when the runtime session is persistent; completion and cross-surface delivery go through the parent task notifier rather than acting like a normal user-facing chat session.
-    * Task maintenance closes terminal or orphaned parent-owned one-shot ACP sessions. Persistent ACP sessions are preserved while an active conversation binding remains; stale persistent sessions without an active binding are closed so they cannot be silently resumed after the owning task is done or its task record is gone.
-    * Bound follow-up messages go directly to the ACP session until the binding is closed, unfocused, reset, or expired.
-    * Gateway commands stay local. `/acp ...`, `/status`, and `/unfocus` are never sent as normal prompt text to a bound ACP harness.
-    * `cancel` aborts the active turn when the backend supports cancellation; it does not delete the binding or session metadata.
-    * `close` ends the ACP session from OpenClaw's point of view and removes the binding. A harness may still keep its own upstream history if it supports resume.
-    * The acpx plugin cleans up OpenClaw-owned wrapper and adapter process trees after `close`, and reaps stale OpenClaw-owned ACPX orphans during Gateway startup.
-    * Idle runtime workers are eligible for cleanup after `acp.runtime.ttlMinutes`; stored session metadata remains available for `/acp sessions`.
-  </Accordion>
 
-  <Accordion title="Native Codex routing rules">
+AccordionGroup
+
+
+Lifecycle details
+
+    - Spawn creates or resumes an ACP runtime session, records ACP metadata in the OpenClaw session store, and may create a background task when the run is parent-owned.
+    - Parent-owned ACP sessions are treated as background work even when the runtime session is persistent; completion and cross-surface delivery go through the parent task notifier rather than acting like a normal user-facing chat session.
+    - Task maintenance closes terminal or orphaned parent-owned one-shot ACP sessions. Persistent ACP sessions are preserved while an active conversation binding remains; stale persistent sessions without an active binding are closed so they cannot be silently resumed after the owning task is done or its task record is gone.
+    - Bound follow-up messages go directly to the ACP session until the binding is closed, unfocused, reset, or expired.
+    - Gateway commands stay local. `/acp ...`, `/status`, and `/unfocus` are never sent as normal prompt text to a bound ACP harness.
+    - `cancel` aborts the active turn when the backend supports cancellation; it does not delete the binding or session metadata.
+    - `close` ends the ACP session from OpenClaw's point of view and removes the binding. A harness may still keep its own upstream history if it supports resume.
+    - The acpx plugin cleans up OpenClaw-owned wrapper and adapter process trees after `close`, and reaps stale OpenClaw-owned ACPX orphans during Gateway startup.
+    - Idle runtime workers are eligible for cleanup after `acp.runtime.ttlMinutes`; stored session metadata remains available for `/acp sessions`.
+
+
+
+Native Codex routing rules
+
     Natural-language triggers that should route to the **native Codex
     plugin** when it is enabled:
 
-    * "Bind this Discord channel to Codex."
-    * "Attach this chat to Codex thread `<id>`."
-    * "Show Codex threads, then bind this one."
+    - "Bind this Discord channel to Codex."
+    - "Attach this chat to Codex thread `<id>`."
+    - "Show Codex threads, then bind this one."
 
     Native Codex conversation binding is the default chat-control path.
     OpenClaw dynamic tools still execute through OpenClaw, while
@@ -190,21 +205,25 @@ Quick `/acp` flow from chat:
     when you want the ACP runtime/session model. The embedded Codex
     support boundary is documented in the
     [Codex harness v1 support contract](/plugins/codex-harness-runtime#v1-support-contract).
-  </Accordion>
 
-  <Accordion title="Model / provider / runtime selection cheat sheet">
-    * `openai-codex/*` - legacy Codex OAuth/subscription model route repaired by doctor.
-    * `openai/*` - native Codex app-server embedded runtime for OpenAI agent turns.
-    * `/codex ...` - native Codex conversation control.
-    * `/acp ...` or `runtime: "acp"` - explicit ACP/acpx control.
-  </Accordion>
 
-  <Accordion title="ACP-routing natural-language triggers">
+
+Model / provider / runtime selection cheat sheet
+
+    - `openai-codex/*` - legacy Codex OAuth/subscription model route repaired by doctor.
+    - `openai/*` - native Codex app-server embedded runtime for OpenAI agent turns.
+    - `/codex ...` - native Codex conversation control.
+    - `/acp ...` or `runtime: "acp"` - explicit ACP/acpx control.
+
+
+
+ACP-routing natural-language triggers
+
     Triggers that should route to the ACP runtime:
 
-    * "Run this as a one-shot Claude Code ACP session and summarize the result."
-    * "Use Gemini CLI for this task in a thread, then keep follow-ups in that same thread."
-    * "Run Codex through ACP in a background thread."
+    - "Run this as a one-shot Claude Code ACP session and summarize the result."
+    - "Use Gemini CLI for this task in a thread, then keep follow-ups in that same thread."
+    - "Run Codex through ACP in a background thread."
 
     OpenClaw picks `runtime: "acp"`, resolves the harness `agentId`,
     binds to the current conversation or thread when supported, and
@@ -223,8 +242,8 @@ Quick `/acp` flow from chat:
     otherwise use the default sub-agent runtime. When an OpenClaw agent
     is configured with `runtime.type="acp"`, OpenClaw uses
     `runtime.acp.agent` as the underlying harness id.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## ACP versus sub-agents
 
@@ -259,17 +278,17 @@ CLI backends are separate text-only local fallback runtimes - see
 
 For operators, the practical rule is:
 
-* **Want `/acp spawn`, bindable sessions, runtime controls, or persistent harness work?** Use ACP.
-* **Want simple local text fallback through the raw CLI?** Use CLI backends.
+- **Want `/acp spawn`, bindable sessions, runtime controls, or persistent harness work?** Use ACP.
+- **Want simple local text fallback through the raw CLI?** Use CLI backends.
 
 ## Bound sessions
 
 ### Mental model
 
-* **Chat surface** - where people keep talking (Discord channel, Telegram topic, iMessage chat).
-* **ACP session** - the durable Codex/Claude/Gemini runtime state OpenClaw routes to.
-* **Child thread/topic** - an optional extra messaging surface created only by `--thread ...`.
-* **Runtime workspace** - the filesystem location (`cwd`, repo checkout, backend workspace) where the harness runs. Independent of the chat surface.
+- **Chat surface** - where people keep talking (Discord channel, Telegram topic, iMessage chat).
+- **ACP session** - the durable Codex/Claude/Gemini runtime state OpenClaw routes to.
+- **Child thread/topic** - an optional extra messaging surface created only by `--thread ...`.
+- **Runtime workspace** - the filesystem location (`cwd`, repo checkout, backend workspace) where the harness runs. Independent of the chat surface.
 
 ### Current-conversation binds
 
@@ -281,7 +300,7 @@ session in place; `/acp close` removes the binding.
 
 Examples:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /codex bind                                              # native Codex bind, route future messages here
 /codex model gpt-5.4                                     # tune the bound native Codex thread
 /codex stop                                              # control the active native Codex turn
@@ -290,43 +309,50 @@ Examples:
 /acp spawn codex --bind here --cwd /workspace/repo       # same chat binding, Codex runs in /workspace/repo
 ```
 
-<AccordionGroup>
-  <Accordion title="Binding rules and exclusivity">
-    * `--bind here` and `--thread ...` are mutually exclusive.
-    * `--bind here` only works on channels that advertise current-conversation binding; OpenClaw returns a clear unsupported message otherwise. Bindings persist across gateway restarts.
-    * On Discord, `spawnSessions` gates child thread creation for `--thread auto|here` - not `--bind here`.
-    * If you spawn to a different ACP agent without `--cwd`, OpenClaw inherits the **target agent's** workspace by default. Missing inherited paths (`ENOENT`/`ENOTDIR`) fall back to the backend default; other access errors (e.g. `EACCES`) surface as spawn errors.
-    * Gateway management commands stay local in bound conversations - `/acp ...` commands are handled by OpenClaw even when normal follow-up text routes to the bound ACP session; `/status` and `/unfocus` also stay local whenever command handling is enabled for that surface.
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="Thread-bound sessions">
+
+Binding rules and exclusivity
+
+    - `--bind here` and `--thread ...` are mutually exclusive.
+    - `--bind here` only works on channels that advertise current-conversation binding; OpenClaw returns a clear unsupported message otherwise. Bindings persist across gateway restarts.
+    - On Discord, `spawnSessions` gates child thread creation for `--thread auto|here` - not `--bind here`.
+    - If you spawn to a different ACP agent without `--cwd`, OpenClaw inherits the **target agent's** workspace by default. Missing inherited paths (`ENOENT`/`ENOTDIR`) fall back to the backend default; other access errors (e.g. `EACCES`) surface as spawn errors.
+    - Gateway management commands stay local in bound conversations - `/acp ...` commands are handled by OpenClaw even when normal follow-up text routes to the bound ACP session; `/status` and `/unfocus` also stay local whenever command handling is enabled for that surface.
+
+
+
+Thread-bound sessions
+
     When thread bindings are enabled for a channel adapter:
 
-    * OpenClaw binds a thread to a target ACP session.
-    * Follow-up messages in that thread route to the bound ACP session.
-    * ACP output is delivered back to the same thread.
-    * Unfocus/close/archive/idle-timeout or max-age expiry removes the binding.
-    * `/acp close`, `/acp cancel`, `/acp status`, `/status`, and `/unfocus` are Gateway commands, not prompts to the ACP harness.
+    - OpenClaw binds a thread to a target ACP session.
+    - Follow-up messages in that thread route to the bound ACP session.
+    - ACP output is delivered back to the same thread.
+    - Unfocus/close/archive/idle-timeout or max-age expiry removes the binding.
+    - `/acp close`, `/acp cancel`, `/acp status`, `/status`, and `/unfocus` are Gateway commands, not prompts to the ACP harness.
 
     Required feature flags for thread-bound ACP:
 
-    * `acp.enabled=true`
-    * `acp.dispatch.enabled` is on by default (set `false` to pause automatic ACP thread dispatch; explicit `sessions_spawn({ runtime: "acp" })` calls still work).
-    * Channel-adapter thread session spawns enabled (default: `true`):
-      * Discord: `channels.discord.threadBindings.spawnSessions=true`
-      * Telegram: `channels.telegram.threadBindings.spawnSessions=true`
+    - `acp.enabled=true`
+    - `acp.dispatch.enabled` is on by default (set `false` to pause automatic ACP thread dispatch; explicit `sessions_spawn({ runtime: "acp" })` calls still work).
+    - Channel-adapter thread session spawns enabled (default: `true`):
+      - Discord: `channels.discord.threadBindings.spawnSessions=true`
+      - Telegram: `channels.telegram.threadBindings.spawnSessions=true`
 
     Thread binding support is adapter-specific. If the active channel
     adapter does not support thread bindings, OpenClaw returns a clear
     unsupported/unavailable message.
-  </Accordion>
 
-  <Accordion title="Thread-supporting channels">
-    * Any channel adapter that exposes session/thread binding capability.
-    * Current built-in support: **Discord** threads/channels, **Telegram** topics (forum topics in groups/supergroups and DM topics).
-    * Plugin channels can add support through the same binding interface.
-  </Accordion>
-</AccordionGroup>
+
+
+Thread-supporting channels
+
+    - Any channel adapter that exposes session/thread binding capability.
+    - Current built-in support: **Discord** threads/channels, **Telegram** topics (forum topics in groups/supergroups and DM topics).
+    - Plugin channels can add support through the same binding interface.
+
+
 
 ## Persistent channel bindings
 
@@ -335,48 +361,48 @@ top-level `bindings[]` entries.
 
 ### Binding model
 
-<ParamField type="&#x22;acp&#x22;">
-  Marks a persistent ACP conversation binding.
-</ParamField>
+ParamField
 
-<ParamField type="object">
+  Marks a persistent ACP conversation binding.
+
+ParamField
+
   Identifies the target conversation. Per-channel shapes:
 
-  * **Discord channel/thread:** `match.channel="discord"` + `match.peer.id="<channelOrThreadId>"`
-  * **Slack channel/DM:** `match.channel="slack"` + `match.peer.id="<channelId|channel:<channelId>|#<channelId>|userId|user:<userId>|slack:<userId>|<@userId>>"`. Prefer stable Slack ids; channel bindings also match replies inside that channel's threads.
-  * **Telegram forum topic:** `match.channel="telegram"` + `match.peer.id="<chatId>:topic:<topicId>"`
-  * **iMessage DM/group:** `match.channel="imessage"` + `match.peer.id="<handle|chat_id:*|chat_guid:*|chat_identifier:*>"`. Prefer `chat_id:*` for stable group bindings.
-</ParamField>
+- **Discord channel/thread:** `match.channel="discord"` + `match.peer.id="<channelOrThreadId>"`
+- **Slack channel/DM:** `match.channel="slack"` + `match.peer.id="<channelId|channel:<channelId>|#<channelId>|userId|user:<userId>|slack:<userId>|<@userId>>"`. Prefer stable Slack ids; channel bindings also match replies inside that channel's threads.
+- **Telegram forum topic:** `match.channel="telegram"` + `match.peer.id="<chatId>:topic:<topicId>"`
+- **iMessage DM/group:** `match.channel="imessage"` + `match.peer.id="<handle|chat_id:*|chat_guid:*|chat_identifier:*>"`. Prefer `chat_id:*` for stable group bindings.
 
-<ParamField type="string">
+ParamField
+
   The owning OpenClaw agent id.
-</ParamField>
 
-<ParamField type="&#x22;persistent&#x22; | &#x22;oneshot&#x22;">
+ParamField
+
   Optional ACP override.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Optional operator-facing label.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Optional runtime working directory.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Optional backend override.
-</ParamField>
 
 ### Runtime defaults per agent
 
 Use `agents.list[].runtime` to define ACP defaults once per agent:
 
-* `agents.list[].runtime.type="acp"`
-* `agents.list[].runtime.acp.agent` (harness id, e.g. `codex` or `claude`)
-* `agents.list[].runtime.acp.backend`
-* `agents.list[].runtime.acp.mode`
-* `agents.list[].runtime.acp.cwd`
+- `agents.list[].runtime.type="acp"`
+- `agents.list[].runtime.acp.agent` (harness id, e.g. `codex` or `claude`)
+- `agents.list[].runtime.acp.backend`
+- `agents.list[].runtime.acp.mode`
+- `agents.list[].runtime.acp.cwd`
 
 **Override precedence for ACP bound sessions:**
 
@@ -386,7 +412,7 @@ Use `agents.list[].runtime` to define ACP defaults once per agent:
 
 ### Example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     list: [
@@ -466,23 +492,26 @@ Use `agents.list[].runtime` to define ACP defaults once per agent:
 
 ### Behavior
 
-* OpenClaw ensures the configured ACP session exists before use.
-* Messages in that channel or topic route to the configured ACP session.
-* In bound conversations, `/new` and `/reset` reset the same ACP session key in place.
-* Temporary runtime bindings (for example created by thread-focus flows) still apply where present.
-* For cross-agent ACP spawns without an explicit `cwd`, OpenClaw inherits the target agent workspace from agent config.
-* Missing inherited workspace paths fall back to the backend default cwd; non-missing access failures surface as spawn errors.
+- OpenClaw ensures the configured ACP session exists before use.
+- Messages in that channel or topic route to the configured ACP session.
+- In bound conversations, `/new` and `/reset` reset the same ACP session key in place.
+- Temporary runtime bindings (for example created by thread-focus flows) still apply where present.
+- For cross-agent ACP spawns without an explicit `cwd`, OpenClaw inherits the target agent workspace from agent config.
+- Missing inherited workspace paths fall back to the backend default cwd; non-missing access failures surface as spawn errors.
 
 ## Start ACP sessions
 
 Two ways to start an ACP session:
 
-<Tabs>
-  <Tab title="From sessions_spawn">
+Tabs
+
+
+From sessions_spawn
+
     Use `runtime: "acp"` to start an ACP session from an agent turn or
     tool call.
 
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json
     {
       "task": "Open the repo and summarize failing tests",
       "runtime": "acp",
@@ -492,18 +521,22 @@ Two ways to start an ACP session:
     }
     ```
 
-    <Note>
-      `runtime` defaults to `subagent`, so set `runtime: "acp"` explicitly
-      for ACP sessions. If `agentId` is omitted, OpenClaw uses
-      `acp.defaultAgent` when configured. `mode: "session"` requires
-      `thread: true` to keep a persistent bound conversation.
-    </Note>
-  </Tab>
 
-  <Tab title="From /acp command">
+Note
+
+    `runtime` defaults to `subagent`, so set `runtime: "acp"` explicitly
+    for ACP sessions. If `agentId` is omitted, OpenClaw uses
+    `acp.defaultAgent` when configured. `mode: "session"` requires
+    `thread: true` to keep a persistent bound conversation.
+
+
+
+
+From /acp command
+
     Use `/acp spawn` for explicit operator control from chat.
 
-    ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```text
     /acp spawn codex --mode persistent --thread auto
     /acp spawn codex --mode oneshot --thread off
     /acp spawn codex --bind here
@@ -512,72 +545,73 @@ Two ways to start an ACP session:
 
     Key flags:
 
-    * `--mode persistent|oneshot`
-    * `--bind here|off`
-    * `--thread auto|here|off`
-    * `--cwd <absolute-path>`
-    * `--label <name>`
+    - `--mode persistent|oneshot`
+    - `--bind here|off`
+    - `--thread auto|here|off`
+    - `--cwd <absolute-path>`
+    - `--label <name>`
 
     See [Slash commands](/tools/slash-commands).
-  </Tab>
-</Tabs>
+
+
 
 ### `sessions_spawn` parameters
 
-<ParamField type="string">
+ParamField
+
   Initial prompt sent to the ACP session.
-</ParamField>
 
-<ParamField type="&#x22;acp&#x22;">
+ParamField
+
   Must be `"acp"` for ACP sessions.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   ACP target harness id. Falls back to `acp.defaultAgent` if set.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Request thread binding flow where supported.
-</ParamField>
 
-<ParamField type="&#x22;run&#x22; | &#x22;session&#x22;">
+ParamField
+
   `"run"` is one-shot; `"session"` is persistent. If `thread: true` and
   `mode` is omitted, OpenClaw may default to persistent behaviour per
   runtime path. `mode: "session"` requires `thread: true`.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Requested runtime working directory (validated by backend/runtime
   policy). If omitted, ACP spawn inherits the target agent workspace
   when configured; missing inherited paths fall back to backend
   defaults, while real access errors are returned.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Operator-facing label used in session/banner text.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Resume an existing ACP session instead of creating a new one. The
   agent replays its conversation history via `session/load`. Requires
   `runtime: "acp"`.
-</ParamField>
 
-<ParamField type="&#x22;parent&#x22;">
+ParamField
+
   `"parent"` streams initial ACP run progress summaries back to the
   requester session as system events. Accepted responses include
   `streamLogPath` pointing to a session-scoped JSONL log
   (`<sessionId>.acp-stream.jsonl`) you can tail for full relay history.
-</ParamField>
 
-<ParamField type="number">
+ParamField
+
   Aborts the ACP child turn after N seconds. `0` keeps the turn on the
   gateway's no-timeout path. The same value is applied to the Gateway
   run and ACP runtime so stalled/quota-exhausted harnesses do not
   occupy the parent agent lane indefinitely.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Explicit model override for the ACP child session. Codex ACP spawns
   normalize OpenClaw Codex refs such as `openai-codex/gpt-5.4` to Codex
   ACP startup config before `session/new`; slash forms such as
@@ -585,18 +619,20 @@ Two ways to start an ACP session:
   Other harnesses must advertise ACP `models` and support
   `session/set_model`; otherwise OpenClaw/acpx fails clearly instead of
   silently falling back to the target agent default.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Explicit thinking/reasoning effort. For Codex ACP, `minimal` maps to
   low effort, `low`/`medium`/`high`/`xhigh` map directly, and `off`
   omits the reasoning-effort startup override.
-</ParamField>
 
 ## Spawn bind and thread modes
 
-<Tabs>
-  <Tab title="--bind here|off">
+Tabs
+
+
+--bind here|off
+
     | Mode   | Behavior                                                               |
     | ------ | ---------------------------------------------------------------------- |
     | `here` | Bind the current active conversation in place; fail if none is active. |
@@ -604,13 +640,15 @@ Two ways to start an ACP session:
 
     Notes:
 
-    * `--bind here` is the simplest operator path for "make this channel or chat Codex-backed."
-    * `--bind here` does not create a child thread.
-    * `--bind here` is only available on channels that expose current-conversation binding support.
-    * `--bind` and `--thread` cannot be combined in the same `/acp spawn` call.
-  </Tab>
+    - `--bind here` is the simplest operator path for "make this channel or chat Codex-backed."
+    - `--bind here` does not create a child thread.
+    - `--bind here` is only available on channels that expose current-conversation binding support.
+    - `--bind` and `--thread` cannot be combined in the same `/acp spawn` call.
 
-  <Tab title="--thread auto|here|off">
+
+
+--thread auto|here|off
+
     | Mode   | Behavior                                                                                            |
     | ------ | --------------------------------------------------------------------------------------------------- |
     | `auto` | In an active thread: bind that thread. Outside a thread: create/bind a child thread when supported. |
@@ -619,27 +657,30 @@ Two ways to start an ACP session:
 
     Notes:
 
-    * On non-thread binding surfaces, default behavior is effectively `off`.
-    * Thread-bound spawn requires channel policy support:
-      * Discord: `channels.discord.threadBindings.spawnSessions=true`
-      * Telegram: `channels.telegram.threadBindings.spawnSessions=true`
-    * Use `--bind here` when you want to pin the current conversation without creating a child thread.
-  </Tab>
-</Tabs>
+    - On non-thread binding surfaces, default behavior is effectively `off`.
+    - Thread-bound spawn requires channel policy support:
+      - Discord: `channels.discord.threadBindings.spawnSessions=true`
+      - Telegram: `channels.telegram.threadBindings.spawnSessions=true`
+    - Use `--bind here` when you want to pin the current conversation without creating a child thread.
+
+
 
 ## Delivery model
 
 ACP sessions can be either interactive workspaces or parent-owned
 background work. The delivery path depends on that shape.
 
-<AccordionGroup>
-  <Accordion title="Interactive ACP sessions">
+AccordionGroup
+
+
+Interactive ACP sessions
+
     Interactive sessions are meant to keep talking on a visible chat
     surface:
 
-    * `/acp spawn ... --bind here` binds the current conversation to the ACP session.
-    * `/acp spawn ... --thread ...` binds a channel thread/topic to the ACP session.
-    * Persistent configured `bindings[].type="acp"` route matching conversations to the same ACP session.
+    - `/acp spawn ... --bind here` binds the current conversation to the ACP session.
+    - `/acp spawn ... --thread ...` binds a channel thread/topic to the ACP session.
+    - Persistent configured `bindings[].type="acp"` route matching conversations to the same ACP session.
 
     Follow-up messages in the bound conversation route directly to the
     ACP session, and ACP output is delivered back to that same
@@ -647,36 +688,42 @@ background work. The delivery path depends on that shape.
 
     What OpenClaw sends to the harness:
 
-    * Normal bound follow-ups are sent as prompt text, plus attachments only when the harness/backend supports them.
-    * `/acp` management commands and local Gateway commands are intercepted before ACP dispatch.
-    * Runtime-generated completion events are materialized per target. OpenClaw agents get OpenClaw's internal runtime-context envelope; external ACP harnesses get a plain prompt with the child result and instruction. The raw `<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>` envelope should never be sent to external harnesses or persisted as ACP user transcript text.
-    * ACP transcript entries use the user-visible trigger text or the plain completion prompt. Internal event metadata stays structured in OpenClaw where possible and is not treated as user-authored chat content.
-  </Accordion>
+    - Normal bound follow-ups are sent as prompt text, plus attachments only when the harness/backend supports them.
+    - `/acp` management commands and local Gateway commands are intercepted before ACP dispatch.
+    - Runtime-generated completion events are materialized per target. OpenClaw agents get OpenClaw's internal runtime-context envelope; external ACP harnesses get a plain prompt with the child result and instruction. The raw `<<
+BEGIN_OPENCLAW_INTERNAL_CONTEXT
+>>` envelope should never be sent to external harnesses or persisted as ACP user transcript text.
+    - ACP transcript entries use the user-visible trigger text or the plain completion prompt. Internal event metadata stays structured in OpenClaw where possible and is not treated as user-authored chat content.
 
-  <Accordion title="Parent-owned one-shot ACP sessions">
+
+
+Parent-owned one-shot ACP sessions
+
     One-shot ACP sessions spawned by another agent run are background
     children, similar to sub-agents:
 
-    * The parent asks for work with `sessions_spawn({ runtime: "acp", mode: "run" })`.
-    * The child runs in its own ACP harness session.
-    * Child turns run on the same background lane used by native sub-agent spawns, so a slow ACP harness does not block unrelated main-session work.
-    * Completion reports back through the task-completion announce path. OpenClaw converts internal completion metadata into a plain ACP prompt before sending it to an external harness, so harnesses do not see OpenClaw-only runtime context markers.
-    * The parent rewrites the child result in normal assistant voice when a user-facing reply is useful.
+    - The parent asks for work with `sessions_spawn({ runtime: "acp", mode: "run" })`.
+    - The child runs in its own ACP harness session.
+    - Child turns run on the same background lane used by native sub-agent spawns, so a slow ACP harness does not block unrelated main-session work.
+    - Completion reports back through the task-completion announce path. OpenClaw converts internal completion metadata into a plain ACP prompt before sending it to an external harness, so harnesses do not see OpenClaw-only runtime context markers.
+    - The parent rewrites the child result in normal assistant voice when a user-facing reply is useful.
 
     Do **not** treat this path as a peer-to-peer chat between parent
     and child. The child already has a completion channel back to the
     parent.
-  </Accordion>
 
-  <Accordion title="sessions_send and A2A delivery">
+
+
+sessions_send and A2A delivery
+
     `sessions_send` can target another session after spawn. For normal
     peer sessions, OpenClaw uses an agent-to-agent (A2A) follow-up path
     after injecting the message:
 
-    * Wait for the target session's reply.
-    * Optionally let requester and target exchange a bounded number of follow-up turns.
-    * Ask the target to produce an announce message.
-    * Deliver that announce to the visible channel or thread.
+    - Wait for the target session's reply.
+    - Optionally let requester and target exchange a bounded number of follow-up turns.
+    - Ask the target to produce an announce message.
+    - Deliver that announce to the visible channel or thread.
 
     That A2A path is a fallback for peer sends where the sender needs a
     visible follow-up. It stays enabled when an unrelated session can
@@ -690,14 +737,16 @@ background work. The delivery path depends on that shape.
     create a parent/child echo loop. The `sessions_send` result reports
     `delivery.status="skipped"` for that owned-child case because the
     completion path is already responsible for the result.
-  </Accordion>
 
-  <Accordion title="Resume an existing session">
+
+
+Resume an existing session
+
     Use `resumeSessionId` to continue a previous ACP session instead of
     starting fresh. The agent replays its conversation history via
     `session/load`, so it picks up with full context of what came before.
 
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json
     {
       "task": "Continue where we left off - fix the remaining test failures",
       "runtime": "acp",
@@ -708,21 +757,23 @@ background work. The delivery path depends on that shape.
 
     Common use cases:
 
-    * Hand off a Codex session from your laptop to your phone - tell your agent to pick up where you left off.
-    * Continue a coding session you started interactively in the CLI, now headlessly through your agent.
-    * Pick up work that was interrupted by a gateway restart or idle timeout.
+    - Hand off a Codex session from your laptop to your phone - tell your agent to pick up where you left off.
+    - Continue a coding session you started interactively in the CLI, now headlessly through your agent.
+    - Pick up work that was interrupted by a gateway restart or idle timeout.
 
     Notes:
 
-    * `resumeSessionId` only applies when `runtime: "acp"`; the default sub-agent runtime ignores this ACP-only field.
-    * `streamTo` only applies when `runtime: "acp"`; the default sub-agent runtime ignores this ACP-only field.
-    * `resumeSessionId` is a host-local ACP/harness resume id, not an OpenClaw channel session key; OpenClaw still checks ACP spawn policy and target agent policy before dispatch, while the ACP backend or harness owns authorization for loading that upstream id.
-    * `resumeSessionId` restores the upstream ACP conversation history; `thread` and `mode` still apply normally to the new OpenClaw session you are creating, so `mode: "session"` still requires `thread: true`.
-    * The target agent must support `session/load` (Codex and Claude Code do).
-    * If the session id is not found, the spawn fails with a clear error - no silent fallback to a new session.
-  </Accordion>
+    - `resumeSessionId` only applies when `runtime: "acp"`; the default sub-agent runtime ignores this ACP-only field.
+    - `streamTo` only applies when `runtime: "acp"`; the default sub-agent runtime ignores this ACP-only field.
+    - `resumeSessionId` is a host-local ACP/harness resume id, not an OpenClaw channel session key; OpenClaw still checks ACP spawn policy and target agent policy before dispatch, while the ACP backend or harness owns authorization for loading that upstream id.
+    - `resumeSessionId` restores the upstream ACP conversation history; `thread` and `mode` still apply normally to the new OpenClaw session you are creating, so `mode: "session"` still requires `thread: true`.
+    - The target agent must support `session/load` (Codex and Claude Code do).
+    - If the session id is not found, the spawn fails with a clear error - no silent fallback to a new session.
 
-  <Accordion title="Post-deploy smoke test">
+
+
+Post-deploy smoke test
+
     After a gateway deploy, run a live end-to-end check rather than
     trusting unit tests:
 
@@ -735,27 +786,27 @@ background work. The delivery path depends on that shape.
     Keep the gate on `mode: "run"` and skip `streamTo: "parent"` -
     thread-bound `mode: "session"` and stream-relay paths are separate
     richer integration passes.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Sandbox compatibility
 
 ACP sessions currently run on the host runtime, **not** inside the
 OpenClaw sandbox.
 
-<Warning>
-  **Security boundary:**
+Warning
 
-  * The external harness can read/write according to its own CLI permissions and the selected `cwd`.
-  * OpenClaw's sandbox policy does **not** wrap ACP harness execution.
-  * OpenClaw still enforces ACP feature gates, allowed agents, session ownership, channel bindings, and Gateway delivery policy.
-  * Use `runtime: "subagent"` for sandbox-enforced OpenClaw-native work.
-</Warning>
+**Security boundary:**
+
+- The external harness can read/write according to its own CLI permissions and the selected `cwd`.
+- OpenClaw's sandbox policy does **not** wrap ACP harness execution.
+- OpenClaw still enforces ACP feature gates, allowed agents, session ownership, channel bindings, and Gateway delivery policy.
+- Use `runtime: "subagent"` for sandbox-enforced OpenClaw-native work.
 
 Current limitations:
 
-* If the requester session is sandboxed, ACP spawns are blocked for both `sessions_spawn({ runtime: "acp" })` and `/acp spawn`.
-* `sessions_spawn` with `runtime: "acp"` does not support `sandbox: "require"`.
+- If the requester session is sandboxed, ACP spawns are blocked for both `sessions_spawn({ runtime: "acp" })` and `/acp spawn`.
+- `sessions_spawn` with `runtime: "acp"` does not support `sandbox: "require"`.
 
 ## Session target resolution
 
@@ -765,9 +816,9 @@ Most `/acp` actions accept an optional session target (`session-key`,
 **Resolution order:**
 
 1. Explicit target argument (or `--session` for `/acp steer`)
-   * tries key
-   * then UUID-shaped session id
-   * then label
+   - tries key
+   - then UUID-shaped session id
+   - then label
 2. Current thread binding (if this conversation/thread is bound to an ACP session).
 3. Current requester session fallback.
 
@@ -852,15 +903,19 @@ permission modes, see
 | `AcpRuntimeError: Permission prompt unavailable in non-interactive mode`    | `permissionMode` blocks writes/exec in non-interactive ACP session.                                                    | Set `plugins.entries.acpx.config.permissionMode` to `approve-all` and restart gateway. See [Permission configuration](/tools/acp-agents-setup#permission-configuration). |
 | ACP session fails early with little output                                  | Permission prompts are blocked by `permissionMode`/`nonInteractivePermissions`.                                        | Check gateway logs for `AcpRuntimeError`. For full permissions, set `permissionMode=approve-all`; for graceful degradation, set `nonInteractivePermissions=deny`.        |
 | ACP session stalls indefinitely after completing work                       | Harness process finished but ACP session did not report completion.                                                    | Update OpenClaw; current acpx cleanup reaps OpenClaw-owned stale wrapper and adapter processes on close and Gateway startup.                                             |
-| Harness sees `<<<BEGIN_OPENCLAW_INTERNAL_CONTEXT>>>`                        | Internal event envelope leaked across the ACP boundary.                                                                | Update OpenClaw and rerun the completion flow; external harnesses should receive plain completion prompts only.                                                          |
+| Harness sees `<<
+BEGIN_OPENCLAW_INTERNAL_CONTEXT
+>>`                        | Internal event envelope leaked across the ACP boundary.                                                                | Update OpenClaw and rerun the completion flow; external harnesses should receive plain completion prompts only.                                                          |
 
 ## Related
 
-* [ACP agents - setup](/tools/acp-agents-setup)
-* [Agent send](/tools/agent-send)
-* [CLI Backends](/gateway/cli-backends)
-* [Codex harness](/plugins/codex-harness)
-* [Codex harness runtime](/plugins/codex-harness-runtime)
-* [Multi-agent sandbox tools](/tools/multi-agent-sandbox-tools)
-* [`openclaw acp` (bridge mode)](/cli/acp)
-* [Sub-agents](/tools/subagents)
+- [ACP agents - setup](/tools/acp-agents-setup)
+- [Agent send](/tools/agent-send)
+- [CLI Backends](/gateway/cli-backends)
+- [Codex harness](/plugins/codex-harness)
+- [Codex harness runtime](/plugins/codex-harness-runtime)
+- [Multi-agent sandbox tools](/tools/multi-agent-sandbox-tools)
+- [`openclaw acp` (bridge mode)](/cli/acp)
+- [Sub-agents](/tools/subagents)
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OC Path plugin"
 source: "https://docs.openclaw.ai/plugins/oc-path"
-source_hash: "3db77388457e81ca13c9b3b7c9f1dfaf1bbb1e2962360d28a65706a269c26e7c"
+source_hash: "27ca93844d5ba176f16e2a6a074d9d54f94fcef8bf2f09d1abe40fb1ab38940a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/oc-path.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # OC Path plugin
 Source: https://docs.openclaw.ai/plugins/oc-path
 
-
-
 The bundled `oc-path` plugin adds the [`openclaw path`](/cli/path) CLI for the
 `oc://` workspace-file addressing scheme. It ships in the OpenClaw repo under
 `extensions/oc-path/` but is opt-in — install/build leaves it dormant until you
@@ -23,10 +21,10 @@ enable it.
 `oc://` addresses point at a single leaf (or a wildcard set of leaves) inside
 a workspace file. The plugin understands four kinds of files today:
 
-* **markdown** (`.md`, `.mdx`): frontmatter, sections, items, fields
-* **jsonc** (`.jsonc`, `.json5`, `.json`): comments and formatting preserved
-* **jsonl** (`.jsonl`, `.ndjson`): line-oriented records
-* **yaml** (`.yaml`, `.yml`, `.lobster`): map/sequence/scalar nodes through the
+- **markdown** (`.md`, `.mdx`): frontmatter, sections, items, fields
+- **jsonc** (`.jsonc`, `.json5`, `.json`): comments and formatting preserved
+- **jsonl** (`.jsonl`, `.ndjson`): line-oriented records
+- **yaml** (`.yaml`, `.yml`, `.lobster`): map/sequence/scalar nodes through the
   YAML document API
 
 Self-hosters and editor extensions use the CLI to read or write a single leaf
@@ -50,20 +48,20 @@ core for installs that never need it.
 
 Common reasons to enable it:
 
-* **Local automation**: shell scripts can resolve or update one workspace value
+- **Local automation**: shell scripts can resolve or update one workspace value
   with `openclaw path … --json` instead of carrying separate markdown, JSONC,
   JSONL, and YAML parsing code.
-* **Agent-visible edits**: an agent can show a dry-run diff for one addressed
+- **Agent-visible edits**: an agent can show a dry-run diff for one addressed
   leaf before writing, which is easier to review than a free-form file rewrite.
-* **Editor integrations**: an editor can map `oc://AGENTS.md/tools/gh` to the
+- **Editor integrations**: an editor can map `oc://AGENTS.md/tools/gh` to the
   exact markdown node and line number without guessing from heading text.
-* **Diagnostics**: `emit` round-trips a file through the parser and emitter, so
+- **Diagnostics**: `emit` round-trips a file through the parser and emitter, so
   you can check whether a file kind is byte-stable before relying on automated
   edits.
 
 Concrete examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Is the GitHub plugin enabled in this config?
 openclaw path resolve 'oc://config.jsonc/plugins/github/enabled' --json
 
@@ -88,7 +86,7 @@ network sockets — every verb is a pure transform over a file you point it at.
 
 The plugin metadata lives in `extensions/oc-path/openclaw.plugin.json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "oc-path",
   "name": "OC Path",
@@ -100,12 +98,13 @@ The plugin metadata lives in `extensions/oc-path/openclaw.plugin.json`:
 }
 ```
 
-`onStartup: false` keeps the plugin out of the Gateway hot path. `onCommands: ["path"]` tells the CLI to load the plugin lazily the first time you run
+`onStartup: false` keeps the plugin out of the Gateway hot path. `onCommands:
+["path"]` tells the CLI to load the plugin lazily the first time you run
 `openclaw path …`, so installs that never use the verb pay no cost.
 
 ## Enable
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins enable oc-path
 ```
 
@@ -115,7 +114,7 @@ the CLI loads the plugin on demand.
 
 Disable with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins disable oc-path
 ```
 
@@ -149,10 +148,10 @@ the plugin; consumers use the CLI (or build their own plugin against the SDK).
 
 ## Relationship to other plugins
 
-* **`memory-*`**: memory writes go through the memory plugins, not `oc-path`.
+- **`memory-*`**: memory writes go through the memory plugins, not `oc-path`.
   `oc-path` is a generic file substrate; memory plugins layer their own
   semantics on top.
-* **LKG**: `path` does not know about Last-Known-Good config restore. If a
+- **LKG**: `path` does not know about Last-Known-Good config restore. If a
   file is LKG-tracked, the next `observe` call decides whether to promote or
   recover; `set --batch` for atomic multi-set through the LKG promote/recover
   lifecycle is planned alongside the LKG-recovery substrate.
@@ -168,6 +167,8 @@ captures and pipelines never leak the marker.
 
 ## Related
 
-* [`openclaw path` CLI reference](/cli/path)
-* [Manage plugins](/plugins/manage-plugins)
-* [Building plugins](/plugins/building-plugins)
+- [`openclaw path` CLI reference](/cli/path)
+- [Manage plugins](/plugins/manage-plugins)
+- [Building plugins](/plugins/building-plugins)
+
+---

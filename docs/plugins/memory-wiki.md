@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "d7c66f11282fd61455914b84c597c04e01e214b21be0a27e3dcf5140e1dc219a"
+source_hash: "91ceb859c622f469a0173788998050014a81a540040c60e335648b50ac8e741f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-wiki.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Memory wiki
 Source: https://docs.openclaw.ai/plugins/memory-wiki
-
-
 
 `memory-wiki` is a bundled plugin that turns durable memory into a compiled
 knowledge vault.
@@ -28,13 +26,13 @@ less like a pile of Markdown files.
 
 ## What it adds
 
-* A dedicated wiki vault with deterministic page layout
-* Structured claim and evidence metadata, not just prose
-* Page-level provenance, confidence, contradictions, and open questions
-* Compiled digests for agent/runtime consumers
-* Wiki-native search/get/apply/lint tools
-* Optional bridge mode that imports public artifacts from the active memory plugin
-* Optional Obsidian-friendly render mode and CLI integration
+- A dedicated wiki vault with deterministic page layout
+- Structured claim and evidence metadata, not just prose
+- Page-level provenance, confidence, contradictions, and open questions
+- Compiled digests for agent/runtime consumers
+- Wiki-native search/get/apply/lint tools
+- Optional bridge mode that imports public artifacts from the active memory plugin
+- Optional Obsidian-friendly render mode and CLI integration
 
 ## How it fits with memory
 
@@ -55,19 +53,19 @@ wiki-native tools instead.
 
 A strong default for local-first setups is:
 
-* QMD as the active memory backend for recall and broad semantic search
-* `memory-wiki` in `bridge` mode for durable synthesized knowledge pages
+- QMD as the active memory backend for recall and broad semantic search
+- `memory-wiki` in `bridge` mode for durable synthesized knowledge pages
 
 That split works well because each layer stays focused:
 
-* QMD keeps raw notes, session exports, and extra collections searchable
-* `memory-wiki` compiles stable entities, claims, dashboards, and source pages
+- QMD keeps raw notes, session exports, and extra collections searchable
+- `memory-wiki` compiles stable entities, claims, dashboards, and source pages
 
 Practical rule:
 
-* use `memory_search` when you want one broad recall pass across memory
-* use `wiki_search` and `wiki_get` when you want provenance-aware wiki results
-* use `memory_search corpus=all` when you want shared search to span both layers
+- use `memory_search` when you want one broad recall pass across memory
+- use `wiki_search` and `wiki_get` when you want provenance-aware wiki results
+- use `memory_search corpus=all` when you want shared search to span both layers
 
 If bridge mode reports zero exported artifacts, the active memory plugin is not
 currently exposing public bridge inputs yet. Run `openclaw wiki doctor` first,
@@ -99,11 +97,11 @@ exported artifacts without reaching into private plugin internals.
 
 Bridge mode can index:
 
-* exported memory artifacts
-* dream reports
-* daily notes
-* memory root files
-* memory event logs
+- exported memory artifacts
+- dream reports
+- daily notes
+- memory root files
+- memory event logs
 
 ### `unsafe-local`
 
@@ -117,7 +115,7 @@ bridge mode cannot provide.
 
 The plugin initializes a vault like this:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 <vault>/
   AGENTS.md
   WIKI.md
@@ -137,11 +135,11 @@ Managed content stays inside generated blocks. Human note blocks are preserved.
 
 The main page groups are:
 
-* `sources/` for imported raw material and bridge-backed pages
-* `entities/` for durable things, people, systems, projects, and objects
-* `concepts/` for ideas, abstractions, patterns, and policies
-* `syntheses/` for compiled summaries and maintained rollups
-* `reports/` for generated dashboards
+- `sources/` for imported raw material and bridge-backed pages
+- `entities/` for durable things, people, systems, projects, and objects
+- `concepts/` for ideas, abstractions, patterns, and policies
+- `syntheses/` for compiled summaries and maintained rollups
+- `reports/` for generated dashboards
 
 ## Structured claims and evidence
 
@@ -149,24 +147,24 @@ Pages can carry structured `claims` frontmatter, not just freeform text.
 
 Each claim can include:
 
-* `id`
-* `text`
-* `status`
-* `confidence`
-* `evidence[]`
-* `updatedAt`
+- `id`
+- `text`
+- `status`
+- `confidence`
+- `evidence[]`
+- `updatedAt`
 
 Evidence entries can include:
 
-* `kind`
-* `sourceId`
-* `path`
-* `lines`
-* `weight`
-* `confidence`
-* `privacyTier`
-* `note`
-* `updatedAt`
+- `kind`
+- `sourceId`
+- `path`
+- `lines`
+- `weight`
+- `confidence`
+- `privacyTier`
+- `note`
+- `updatedAt`
 
 This is what makes the wiki act more like a belief layer than a passive note
 dump. Claims can be tracked, scored, contested, and resolved back to sources.
@@ -179,15 +177,15 @@ entity type.
 
 Common fields include:
 
-* `entityType`: for example `person`, `team`, `system`, or `project`
-* `canonicalId`: stable identity key used across aliases and imports
-* `aliases`: names, handles, or labels that should resolve to the same page
-* `privacyTier`: `public`, `local-private`, `sensitive`, or `confirm-before-use`
-* `bestUsedFor` / `notEnoughFor`: compact routing hints
-* `lastRefreshedAt`: source-refresh timestamp separate from page edit time
-* `personCard`: optional person-specific routing card with handles, socials,
+- `entityType`: for example `person`, `team`, `system`, or `project`
+- `canonicalId`: stable identity key used across aliases and imports
+- `aliases`: names, handles, or labels that should resolve to the same page
+- `privacyTier`: `public`, `local-private`, `sensitive`, or `confirm-before-use`
+- `bestUsedFor` / `notEnoughFor`: compact routing hints
+- `lastRefreshedAt`: source-refresh timestamp separate from page edit time
+- `personCard`: optional person-specific routing card with handles, socials,
   emails, timezone, lane, ask-for, avoid-asking-for, confidence, and privacy
-* `relationships`: typed edges to related pages with target, kind, weight,
+- `relationships`: typed edges to related pages with target, kind, weight,
   confidence, evidence kind, privacy tier, and note
 
 For a people wiki, the agent should usually start with
@@ -196,7 +194,7 @@ before using contact details or inferred facts.
 
 Example:
 
-```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```yaml
 pageType: entity
 entityType: person
 id: entity.brad-groux
@@ -247,18 +245,18 @@ claims:
 The compile step reads wiki pages, normalizes summaries, and emits stable
 machine-facing artifacts under:
 
-* `.openclaw-wiki/cache/agent-digest.json`
-* `.openclaw-wiki/cache/claims.jsonl`
+- `.openclaw-wiki/cache/agent-digest.json`
+- `.openclaw-wiki/cache/claims.jsonl`
 
 These digests exist so agents and runtime code do not have to scrape Markdown
 pages.
 
 Compiled output also powers:
 
-* first-pass wiki indexing for search/get flows
-* claim-id lookup back to owning pages
-* compact prompt supplements
-* report/dashboard generation
+- first-pass wiki indexing for search/get flows
+- claim-id lookup back to owning pages
+- compact prompt supplements
+- report/dashboard generation
 
 ## Dashboards and health reports
 
@@ -267,66 +265,66 @@ When `render.createDashboards` is enabled, compile maintains dashboards under
 
 Built-in reports include:
 
-* `reports/open-questions.md`
-* `reports/contradictions.md`
-* `reports/low-confidence.md`
-* `reports/claim-health.md`
-* `reports/stale-pages.md`
-* `reports/person-agent-directory.md`
-* `reports/relationship-graph.md`
-* `reports/provenance-coverage.md`
-* `reports/privacy-review.md`
+- `reports/open-questions.md`
+- `reports/contradictions.md`
+- `reports/low-confidence.md`
+- `reports/claim-health.md`
+- `reports/stale-pages.md`
+- `reports/person-agent-directory.md`
+- `reports/relationship-graph.md`
+- `reports/provenance-coverage.md`
+- `reports/privacy-review.md`
 
 These reports track things like:
 
-* contradiction note clusters
-* competing claim clusters
-* claims missing structured evidence
-* low-confidence pages and claims
-* stale or unknown freshness
-* pages with unresolved questions
-* person/entity routing cards
-* structured relationship edges
-* evidence class coverage
-* non-public privacy tiers that need review before use
+- contradiction note clusters
+- competing claim clusters
+- claims missing structured evidence
+- low-confidence pages and claims
+- stale or unknown freshness
+- pages with unresolved questions
+- person/entity routing cards
+- structured relationship edges
+- evidence class coverage
+- non-public privacy tiers that need review before use
 
 ## Search and retrieval
 
 `memory-wiki` supports two search backends:
 
-* `shared`: use the shared memory search flow when available
-* `local`: search the wiki locally
+- `shared`: use the shared memory search flow when available
+- `local`: search the wiki locally
 
 It also supports three corpora:
 
-* `wiki`
-* `memory`
-* `all`
+- `wiki`
+- `memory`
+- `all`
 
 Important behavior:
 
-* `wiki_search` and `wiki_get` use compiled digests as a first pass when possible
-* claim ids can resolve back to the owning page
-* contested/stale/fresh claims influence ranking
-* provenance labels can survive into results
-* search mode can bias ranking for person lookup, question routing, source
+- `wiki_search` and `wiki_get` use compiled digests as a first pass when possible
+- claim ids can resolve back to the owning page
+- contested/stale/fresh claims influence ranking
+- provenance labels can survive into results
+- search mode can bias ranking for person lookup, question routing, source
   evidence, or raw claims
 
 Practical rule:
 
-* use `memory_search corpus=all` for one broad recall pass
-* use `wiki_search` + `wiki_get` when you care about wiki-specific ranking,
+- use `memory_search corpus=all` for one broad recall pass
+- use `wiki_search` + `wiki_get` when you care about wiki-specific ranking,
   provenance, or page-level belief structure
 
 Search modes:
 
-* `auto`: balanced default
-* `find-person`: boost person-like entities, aliases, handles, socials, and
+- `auto`: balanced default
+- `find-person`: boost person-like entities, aliases, handles, socials, and
   canonical IDs
-* `route-question`: boost agent cards, ask-for hints, best-used-for hints, and
+- `route-question`: boost agent cards, ask-for hints, best-used-for hints, and
   relationship context
-* `source-evidence`: boost source pages and structured evidence metadata
-* `raw-claim`: boost matching structured claims and return claim/evidence
+- `source-evidence`: boost source pages and structured evidence metadata
+- `raw-claim`: boost matching structured claims and return claim/evidence
   metadata in results
 
 When a result matches a structured claim, `wiki_search` can return
@@ -338,21 +336,21 @@ also includes compact `Claim:` and `Evidence:` lines when available.
 
 The plugin registers these tools:
 
-* `wiki_status`
-* `wiki_search`
-* `wiki_get`
-* `wiki_apply`
-* `wiki_lint`
+- `wiki_status`
+- `wiki_search`
+- `wiki_get`
+- `wiki_apply`
+- `wiki_lint`
 
 What they do:
 
-* `wiki_status`: current vault mode, health, Obsidian CLI availability
-* `wiki_search`: search wiki pages and, when configured, shared memory corpora;
+- `wiki_status`: current vault mode, health, Obsidian CLI availability
+- `wiki_search`: search wiki pages and, when configured, shared memory corpora;
   accepts `mode` for person lookup, question routing, source evidence, or raw
   claim drilldown
-* `wiki_get`: read a wiki page by id/path or fall back to shared memory corpus
-* `wiki_apply`: narrow synthesis/metadata mutations without freeform page surgery
-* `wiki_lint`: structural checks, provenance gaps, contradictions, open questions
+- `wiki_get`: read a wiki page by id/path or fall back to shared memory corpus
+- `wiki_apply`: narrow synthesis/metadata mutations without freeform page surgery
+- `wiki_lint`: structural checks, provenance gaps, contradictions, open questions
 
 The plugin also registers a non-exclusive memory corpus supplement, so shared
 `memory_search` and `memory_get` can reach the wiki when the active memory
@@ -365,11 +363,11 @@ append a compact compiled snapshot from `agent-digest.json`.
 
 That snapshot is intentionally small and high-signal:
 
-* top pages only
-* top claims only
-* contradiction count
-* question count
-* confidence/freshness qualifiers
+- top pages only
+- top claims only
+- contradiction count
+- question count
+- confidence/freshness qualifiers
 
 This is opt-in because it changes prompt shape and is mainly useful for context
 engines or legacy prompt assembly that explicitly consume memory supplements.
@@ -378,7 +376,7 @@ engines or legacy prompt assembly that explicitly consume memory supplements.
 
 Put config under `plugins.entries.memory-wiki.config`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -430,22 +428,22 @@ Put config under `plugins.entries.memory-wiki.config`:
 
 Key toggles:
 
-* `vaultMode`: `isolated`, `bridge`, `unsafe-local`
-* `vault.renderMode`: `native` or `obsidian`
-* `bridge.readMemoryArtifacts`: import active memory plugin public artifacts
-* `bridge.followMemoryEvents`: include event logs in bridge mode
-* `search.backend`: `shared` or `local`
-* `search.corpus`: `wiki`, `memory`, or `all`
-* `context.includeCompiledDigestPrompt`: append compact digest snapshot to memory prompt sections
-* `render.createBacklinks`: generate deterministic related blocks
-* `render.createDashboards`: generate dashboard pages
+- `vaultMode`: `isolated`, `bridge`, `unsafe-local`
+- `vault.renderMode`: `native` or `obsidian`
+- `bridge.readMemoryArtifacts`: import active memory plugin public artifacts
+- `bridge.followMemoryEvents`: include event logs in bridge mode
+- `search.backend`: `shared` or `local`
+- `search.corpus`: `wiki`, `memory`, or `all`
+- `context.includeCompiledDigestPrompt`: append compact digest snapshot to memory prompt sections
+- `render.createBacklinks`: generate deterministic related blocks
+- `render.createDashboards`: generate dashboard pages
 
 ### Example: QMD + bridge mode
 
 Use this when you want QMD for recall and `memory-wiki` for a maintained
 knowledge layer:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   memory: {
     backend: "qmd",
@@ -480,15 +478,15 @@ knowledge layer:
 
 This keeps:
 
-* QMD in charge of active memory recall
-* `memory-wiki` focused on compiled pages and dashboards
-* prompt shape unchanged until you intentionally enable compiled digest prompts
+- QMD in charge of active memory recall
+- `memory-wiki` focused on compiled pages and dashboards
+- prompt shape unchanged until you intentionally enable compiled digest prompts
 
 ## CLI
 
 `memory-wiki` also exposes a top-level CLI surface:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw wiki status
 openclaw wiki doctor
 openclaw wiki init
@@ -511,11 +509,11 @@ Markdown and can optionally use the official `obsidian` CLI.
 
 Supported workflows include:
 
-* status probing
-* vault search
-* opening a page
-* invoking an Obsidian command
-* jumping to the daily note
+- status probing
+- vault search
+- opening a page
+- invoking an Obsidian command
+- jumping to the daily note
 
 This is optional. The wiki still works in native mode without Obsidian.
 
@@ -531,7 +529,9 @@ This is optional. The wiki still works in native mode without Obsidian.
 
 ## Related docs
 
-* [Memory Overview](/concepts/memory)
-* [CLI: memory](/cli/memory)
-* [CLI: wiki](/cli/wiki)
-* [Plugin SDK overview](/plugins/sdk-overview)
+- [Memory Overview](/concepts/memory)
+- [CLI: memory](/cli/memory)
+- [CLI: wiki](/cli/wiki)
+- [Plugin SDK overview](/plugins/sdk-overview)
+
+---

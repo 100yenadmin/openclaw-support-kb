@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex parity maintainer notes"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity-maintainers"
-source_hash: "6f81e0cf737c3392987f4cfc970da8ebd687d22caa0f5d38c9cd47daa4c142ad"
+source_hash: "4a0db8d856f9a8424138c69f982b6da73742495d9f733039ff23e71ab9c954e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/gpt55-codex-agentic-parity-maintainers.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # GPT-5.5 / Codex parity maintainer notes
 Source: https://docs.openclaw.ai/help/gpt55-codex-agentic-parity-maintainers
 
-
-
 This note explains how to review the GPT-5.5 / Codex parity program as four merge units without losing the original six-contract architecture.
 
 ## Merge units
@@ -23,59 +21,59 @@ This note explains how to review the GPT-5.5 / Codex parity program as four merg
 
 Owns:
 
-* `executionContract`
-* GPT-5-first same-turn follow-through
-* `update_plan` as non-terminal progress tracking
-* explicit blocked states instead of plan-only silent stops
+- `executionContract`
+- GPT-5-first same-turn follow-through
+- `update_plan` as non-terminal progress tracking
+- explicit blocked states instead of plan-only silent stops
 
 Does not own:
 
-* auth/runtime failure classification
-* permission truthfulness
-* replay/continuation redesign
-* parity benchmarking
+- auth/runtime failure classification
+- permission truthfulness
+- replay/continuation redesign
+- parity benchmarking
 
 ### PR B: runtime truthfulness
 
 Owns:
 
-* Codex OAuth scope correctness
-* typed provider/runtime failure classification
-* truthful `/elevated full` availability and blocked reasons
+- Codex OAuth scope correctness
+- typed provider/runtime failure classification
+- truthful `/elevated full` availability and blocked reasons
 
 Does not own:
 
-* tool schema normalization
-* replay/liveness state
-* benchmark gating
+- tool schema normalization
+- replay/liveness state
+- benchmark gating
 
 ### PR C: execution correctness
 
 Owns:
 
-* provider-owned OpenAI/Codex tool compatibility
-* parameter-free strict schema handling
-* replay-invalid surfacing
-* paused, blocked, and abandoned long-task state visibility
+- provider-owned OpenAI/Codex tool compatibility
+- parameter-free strict schema handling
+- replay-invalid surfacing
+- paused, blocked, and abandoned long-task state visibility
 
 Does not own:
 
-* self-elected continuation
-* generic Codex dialect behavior outside provider hooks
-* benchmark gating
+- self-elected continuation
+- generic Codex dialect behavior outside provider hooks
+- benchmark gating
 
 ### PR D: parity harness
 
 Owns:
 
-* first-wave GPT-5.5 vs Opus 4.7 scenario pack
-* parity documentation
-* parity report and release-gate mechanics
+- first-wave GPT-5.5 vs Opus 4.7 scenario pack
+- parity documentation
+- parity report and release-gate mechanics
 
 Does not own:
 
-* runtime behavior changes outside QA-lab
-* auth/proxy/DNS simulation inside the harness
+- runtime behavior changes outside QA-lab
+- auth/proxy/DNS simulation inside the harness
 
 ## Mapping back to the original six contracts
 
@@ -101,45 +99,45 @@ PR D is the proof layer. It should not be the reason runtime-correctness PRs are
 
 ### PR A
 
-* GPT-5 runs act or fail closed instead of stopping at commentary
-* `update_plan` no longer looks like progress by itself
-* behavior stays GPT-5-first and embedded-Pi scoped
+- GPT-5 runs act or fail closed instead of stopping at commentary
+- `update_plan` no longer looks like progress by itself
+- behavior stays GPT-5-first and embedded-Pi scoped
 
 ### PR B
 
-* auth/proxy/runtime failures stop collapsing into generic "model failed" handling
-* `/elevated full` is only described as available when it is actually available
-* blocked reasons are visible to both the model and the user-facing runtime
+- auth/proxy/runtime failures stop collapsing into generic "model failed" handling
+- `/elevated full` is only described as available when it is actually available
+- blocked reasons are visible to both the model and the user-facing runtime
 
 ### PR C
 
-* strict OpenAI/Codex tool registration behaves predictably
-* parameter-free tools do not fail strict schema checks
-* replay and compaction outcomes preserve truthful liveness state
+- strict OpenAI/Codex tool registration behaves predictably
+- parameter-free tools do not fail strict schema checks
+- replay and compaction outcomes preserve truthful liveness state
 
 ### PR D
 
-* the scenario pack is understandable and reproducible
-* the pack includes a mutating replay-safety lane, not only read-only flows
-* reports are readable by humans and automation
-* parity claims are evidence-backed, not anecdotal
+- the scenario pack is understandable and reproducible
+- the pack includes a mutating replay-safety lane, not only read-only flows
+- reports are readable by humans and automation
+- parity claims are evidence-backed, not anecdotal
 
 Expected artifacts from PR D:
 
-* `qa-suite-report.md` / `qa-suite-summary.json` for each model run
-* `qa-agentic-parity-report.md` with aggregate and scenario-level comparison
-* `qa-agentic-parity-summary.json` with a machine-readable verdict
+- `qa-suite-report.md` / `qa-suite-summary.json` for each model run
+- `qa-agentic-parity-report.md` with aggregate and scenario-level comparison
+- `qa-agentic-parity-summary.json` with a machine-readable verdict
 
 ## Release gate
 
 Do not claim GPT-5.5 parity or superiority over Opus 4.7 until:
 
-* PR A, PR B, and PR C are merged
-* PR D runs the first-wave parity pack cleanly
-* runtime-truthfulness regression suites remain green
-* the parity report shows no fake-success cases and no regression in stop behavior
+- PR A, PR B, and PR C are merged
+- PR D runs the first-wave parity pack cleanly
+- runtime-truthfulness regression suites remain green
+- the parity report shows no fake-success cases and no regression in stop behavior
 
-```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```mermaid
 flowchart LR
     A["PR A-C merged"] --> B["Run GPT-5.5 parity pack"]
     A --> C["Run Opus 4.7 parity pack"]
@@ -155,27 +153,27 @@ flowchart LR
 
 The parity harness is not the only evidence source. Keep this split explicit in review:
 
-* PR D owns the scenario-based GPT-5.5 vs Opus 4.7 comparison
-* PR B deterministic suites still own auth/proxy/DNS and full-access truthfulness evidence
+- PR D owns the scenario-based GPT-5.5 vs Opus 4.7 comparison
+- PR B deterministic suites still own auth/proxy/DNS and full-access truthfulness evidence
 
 ## Quick maintainer merge workflow
 
 Use this when you are ready to land a parity PR and want a repeatable, low-risk sequence.
 
 1. Confirm evidence bar is met before merge:
-   * reproducible symptom or failing test
-   * verified root cause in touched code
-   * fix in the implicated path
-   * regression test or explicit manual verification note
+   - reproducible symptom or failing test
+   - verified root cause in touched code
+   - fix in the implicated path
+   - regression test or explicit manual verification note
 2. Triage/label before merge:
-   * apply any `r:*` auto-close labels when the PR should not land
-   * keep merge candidates free of unresolved blocker threads
+   - apply any `r:*` auto-close labels when the PR should not land
+   - keep merge candidates free of unresolved blocker threads
 3. Validate locally on the touched surface:
-   * `pnpm check:changed`
-   * `pnpm test:changed` when tests changed or bug-fix confidence depends on test coverage
+   - `pnpm check:changed`
+   - `pnpm test:changed` when tests changed or bug-fix confidence depends on test coverage
 4. Land with the standard maintainer flow (`/landpr` process), then verify:
-   * linked issues auto-close behavior
-   * CI and post-merge status on `main`
+   - linked issues auto-close behavior
+   - CI and post-merge status on `main`
 5. After landing, run duplicate search for related open PRs/issues and close only with a canonical reference.
 
 If any one of the evidence bar items is missing, request changes instead of merging.
@@ -202,4 +200,6 @@ If any one of the evidence bar items is missing, request changes instead of merg
 
 ## Related
 
-* [GPT-5.5 / Codex agentic parity](/help/gpt55-codex-agentic-parity)
+- [GPT-5.5 / Codex agentic parity](/help/gpt55-codex-agentic-parity)
+
+---

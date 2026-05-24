@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Application modernization plan"
 source: "https://docs.openclaw.ai/reference/application-modernization-plan"
-source_hash: "8dca0f0ee0bd6c7addf5ce57661c4bddf55d7689948706f998e006d60b3e804a"
+source_hash: "0b4a756b9967a2df299ef690165f88f3db8a663033e97a1bf14b911d46468c62"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/application-modernization-plan.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Application modernization plan
 Source: https://docs.openclaw.ai/reference/application-modernization-plan
 
-
-
 ## Goal
 
 Move the application toward a cleaner, faster, more maintainable product without
@@ -23,134 +21,134 @@ land as small, reviewable slices with proof for each touched surface.
 
 ## Principles
 
-* Preserve current architecture unless a boundary is demonstrably causing churn,
+- Preserve current architecture unless a boundary is demonstrably causing churn,
   performance cost, or user-visible bugs.
-* Prefer the smallest correct patch for each issue, then repeat.
-* Separate required fixes from optional polish so maintainers can land high
+- Prefer the smallest correct patch for each issue, then repeat.
+- Separate required fixes from optional polish so maintainers can land high
   value work without waiting on subjective decisions.
-* Keep plugin-facing behavior documented and backwards compatible.
-* Verify shipped behavior, dependency contracts, and tests before claiming a
+- Keep plugin-facing behavior documented and backwards compatible.
+- Verify shipped behavior, dependency contracts, and tests before claiming a
   regression is fixed.
-* Make the main user path better first: onboarding, auth, chat, provider setup,
+- Make the main user path better first: onboarding, auth, chat, provider setup,
   plugin management, and diagnostics.
 
 ## Phase 1: Baseline audit
 
 Inventory the current application before changing it.
 
-* Identify the top user workflows and the code surfaces that own them.
-* List dead affordances, duplicate settings, unclear error states, and expensive
+- Identify the top user workflows and the code surfaces that own them.
+- List dead affordances, duplicate settings, unclear error states, and expensive
   render paths.
-* Capture current validation commands for each surface.
-* Mark issues as required, recommended, or optional.
-* Document known blockers that need owner review, especially API, security,
+- Capture current validation commands for each surface.
+- Mark issues as required, recommended, or optional.
+- Document known blockers that need owner review, especially API, security,
   release, and plugin contract changes.
 
 Definition of done:
 
-* One issue list with repo-root file references.
-* Each issue has severity, owner surface, expected user impact, and a proposed
+- One issue list with repo-root file references.
+- Each issue has severity, owner surface, expected user impact, and a proposed
   validation path.
-* No speculative cleanup items are mixed into required fixes.
+- No speculative cleanup items are mixed into required fixes.
 
 ## Phase 2: Product and UX cleanup
 
 Prioritize visible workflows and remove confusion.
 
-* Tighten onboarding copy and empty states around model auth, gateway status,
+- Tighten onboarding copy and empty states around model auth, gateway status,
   and plugin setup.
-* Remove or disable dead affordances where no action is possible.
-* Keep important actions visible across responsive widths instead of hiding them
+- Remove or disable dead affordances where no action is possible.
+- Keep important actions visible across responsive widths instead of hiding them
   behind fragile layout assumptions.
-* Consolidate repeated status language so errors have one source of truth.
-* Add progressive disclosure for advanced settings while keeping core setup fast.
+- Consolidate repeated status language so errors have one source of truth.
+- Add progressive disclosure for advanced settings while keeping core setup fast.
 
 Recommended validation:
 
-* Manual happy path for first-run setup and existing user startup.
-* Focused tests for any routing, config persistence, or status derivation logic.
-* Browser screenshots for changed responsive surfaces.
+- Manual happy path for first-run setup and existing user startup.
+- Focused tests for any routing, config persistence, or status derivation logic.
+- Browser screenshots for changed responsive surfaces.
 
 ## Phase 3: Frontend architecture tightening
 
 Improve maintainability without a broad rewrite.
 
-* Move repeated UI state transformations into narrow typed helpers.
-* Keep data fetching, persistence, and presentation responsibilities separate.
-* Prefer existing hooks, stores, and component patterns over new abstractions.
-* Split oversized components only when it reduces coupling or clarifies tests.
-* Avoid introducing broad global state for local panel interactions.
+- Move repeated UI state transformations into narrow typed helpers.
+- Keep data fetching, persistence, and presentation responsibilities separate.
+- Prefer existing hooks, stores, and component patterns over new abstractions.
+- Split oversized components only when it reduces coupling or clarifies tests.
+- Avoid introducing broad global state for local panel interactions.
 
 Required guardrails:
 
-* Do not change public behavior as a side effect of file splitting.
-* Keep accessibility behavior intact for menus, dialogs, tabs, and keyboard
+- Do not change public behavior as a side effect of file splitting.
+- Keep accessibility behavior intact for menus, dialogs, tabs, and keyboard
   navigation.
-* Verify that loading, empty, error, and optimistic states still render.
+- Verify that loading, empty, error, and optimistic states still render.
 
 ## Phase 4: Performance and reliability
 
 Target measured pain rather than broad theoretical optimization.
 
-* Measure startup, route transition, large list, and chat transcript costs.
-* Replace repeated expensive derived data with memoized selectors or cached
+- Measure startup, route transition, large list, and chat transcript costs.
+- Replace repeated expensive derived data with memoized selectors or cached
   helpers where profiling proves value.
-* Reduce avoidable network or filesystem scans on hot paths.
-* Keep deterministic ordering for prompt, registry, file, plugin, and network
+- Reduce avoidable network or filesystem scans on hot paths.
+- Keep deterministic ordering for prompt, registry, file, plugin, and network
   inputs before model payload construction.
-* Add lightweight regression tests for hot helpers and contract boundaries.
+- Add lightweight regression tests for hot helpers and contract boundaries.
 
 Definition of done:
 
-* Each performance change records baseline, expected impact, actual impact, and
+- Each performance change records baseline, expected impact, actual impact, and
   remaining gap.
-* No perf patch lands solely on intuition when cheap measurement is available.
+- No perf patch lands solely on intuition when cheap measurement is available.
 
 ## Phase 5: Type, contract, and test hardening
 
 Raise correctness at the boundary points users and plugin authors depend on.
 
-* Replace loose runtime strings with discriminated unions or closed code lists.
-* Validate external inputs with existing schema helpers or zod.
-* Add contract tests around plugin manifests, provider catalogs, gateway protocol
+- Replace loose runtime strings with discriminated unions or closed code lists.
+- Validate external inputs with existing schema helpers or zod.
+- Add contract tests around plugin manifests, provider catalogs, gateway protocol
   messages, and config migration behavior.
-* Keep compatibility paths in doctor or repair flows instead of startup-time
+- Keep compatibility paths in doctor or repair flows instead of startup-time
   hidden migrations.
-* Avoid test-only coupling to plugin internals; use SDK facades and documented
+- Avoid test-only coupling to plugin internals; use SDK facades and documented
   barrels.
 
 Recommended validation:
 
-* `pnpm check:changed`
-* Targeted tests for every changed boundary.
-* `pnpm build` when lazy boundaries, packaging, or published surfaces change.
+- `pnpm check:changed`
+- Targeted tests for every changed boundary.
+- `pnpm build` when lazy boundaries, packaging, or published surfaces change.
 
 ## Phase 6: Documentation and release readiness
 
 Keep user-facing docs aligned with behavior.
 
-* Update docs with behavior, API, config, onboarding, or plugin changes.
-* Add changelog entries only for user-visible changes.
-* Keep plugin terminology user-facing; use internal package names only where
+- Update docs with behavior, API, config, onboarding, or plugin changes.
+- Add changelog entries only for user-visible changes.
+- Keep plugin terminology user-facing; use internal package names only where
   needed for contributors.
-* Confirm release and install instructions still match the current command
+- Confirm release and install instructions still match the current command
   surface.
 
 Definition of done:
 
-* Relevant docs are updated in the same branch as behavior changes.
-* Generated docs or API drift checks pass when touched.
-* The handoff names any skipped validation and why it was skipped.
+- Relevant docs are updated in the same branch as behavior changes.
+- Generated docs or API drift checks pass when touched.
+- The handoff names any skipped validation and why it was skipped.
 
 ## Recommended first slice
 
 Start with a scoped Control UI and onboarding pass:
 
-* Audit first-run setup, provider auth readiness, gateway status, and plugin
+- Audit first-run setup, provider auth readiness, gateway status, and plugin
   setup surfaces.
-* Remove dead actions and clarify failure states.
-* Add or update focused tests for status derivation and config persistence.
-* Run `pnpm check:changed`.
+- Remove dead actions and clarify failure states.
+- Add or update focused tests for status derivation and config persistence.
+- Run `pnpm check:changed`.
 
 This gives high user value with limited architecture risk.
 
@@ -162,7 +160,7 @@ create `.agents/skills/openclaw-frontend/SKILL.md` first, keep the frontmatter
 that belongs in that target skill, then add or replace the body guidance with
 the following content.
 
-```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```markdown
 # Frontend Delivery Standards
 
 Use this skill when implementing or reviewing user-facing React, Next.js,
@@ -214,3 +212,5 @@ Report:
 - Any validation skipped and the concrete reason.
 - Optional follow-up work, clearly separated from required fixes.
 ```
+
+---

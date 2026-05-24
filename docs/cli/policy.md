@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy"
 source: "https://docs.openclaw.ai/cli/policy"
-source_hash: "57ddbb1f83978110e295b13124d7942c86aeda2bc1a4bcad6d9b47746e5063d1"
+source_hash: "ef74f0da37ed161316c260180e4beb925e2ed59010b9278354efccc0e539d43f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/policy.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Policy
 Source: https://docs.openclaw.ai/cli/policy
-
-
 
 # `openclaw policy`
 
@@ -43,7 +41,7 @@ do not need policy findings or attestation output.
 
 Enable the bundled Policy plugin before first use:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins enable policy
 ```
 
@@ -55,7 +53,7 @@ Policy is authored, not generated from the user's current settings. A minimal
 policy for channels, MCP servers, model providers, network posture, and tool
 metadata looks like this:
 
-```jsonc theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```jsonc
 {
   "channels": {
     "denyRules": [
@@ -97,7 +95,7 @@ that does not conform.
 
 Run policy-only checks during authoring:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw policy check
 openclaw policy check --json
 openclaw policy check --severity-min error
@@ -110,7 +108,7 @@ when the Policy plugin is enabled.
 Example clean JSON output includes stable hashes that can be recorded by an
 operator or supervisor:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "ok": true,
   "attestation": {
@@ -135,7 +133,7 @@ operator or supervisor:
 
 Policy config lives under `plugins.entries.policy.config`.
 
-```jsonc theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```jsonc
 {
   "plugins": {
     "entries": {
@@ -172,7 +170,7 @@ Tool metadata requirements are authored in `policy.jsonc` with
 
 Example JSON output:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "ok": true,
   "attestation": {
@@ -273,7 +271,7 @@ only `expectedAttestationHash` usually changes.
 `openclaw policy watch` runs the same check repeatedly and reports when the
 current evidence no longer matches `expectedAttestationHash`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw policy watch --json
 ```
 
@@ -311,7 +309,7 @@ address format.
 
 Example JSON finding:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "checkId": "policy/channels-denied-provider",
   "severity": "error",
@@ -327,7 +325,7 @@ Example JSON finding:
 
 Example tool finding:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "checkId": "policy/tools-missing-risk-level",
   "severity": "error",
@@ -343,7 +341,7 @@ Example tool finding:
 
 Example MCP finding:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "checkId": "policy/mcp-unapproved-server",
   "severity": "error",
@@ -358,7 +356,7 @@ Example MCP finding:
 
 Example model-provider finding:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "checkId": "policy/models-unapproved-provider",
   "severity": "error",
@@ -373,7 +371,7 @@ Example model-provider finding:
 
 Example network finding:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "checkId": "policy/network-private-access-enabled",
   "severity": "error",
@@ -399,7 +397,7 @@ but denied by `channels.denyRules`. Enable `workspaceRepairs` only after the
 policy file has been reviewed, because a valid deny rule can turn off a
 configured channel:
 
-```jsonc theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```jsonc
 {
   "plugins": {
     "entries": {
@@ -422,5 +420,7 @@ configured channel:
 
 ## Related
 
-* [Doctor lint mode](/cli/doctor#lint-mode)
-* [Path CLI](/cli/path)
+- [Doctor lint mode](/cli/doctor#lint-mode)
+- [Path CLI](/cli/path)
+
+---

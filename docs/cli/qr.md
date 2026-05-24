@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QR"
 source: "https://docs.openclaw.ai/cli/qr"
-source_hash: "2b6d6fd9b3cf757f6701c2fb14bb0db84005adb83213063d9ec177768d82ed84"
+source_hash: "b625d3697f29772919b499489f1f38d41b8ab951404c396c852c82f151c16106"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/qr.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # QR
 Source: https://docs.openclaw.ai/cli/qr
 
-
-
 # `openclaw qr`
 
 Generate a mobile pairing QR and setup code from your current Gateway configuration.
 
 ## Usage
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw qr
 openclaw qr --setup-code-only
 openclaw qr --json
@@ -31,35 +29,37 @@ openclaw qr --url wss://gateway.example/ws
 
 ## Options
 
-* `--remote`: prefer `gateway.remote.url`; if it is unset, `gateway.tailscale.mode=serve|funnel` can still provide the remote public URL
-* `--url <url>`: override gateway URL used in payload
-* `--public-url <url>`: override public URL used in payload
-* `--token <token>`: override which gateway token the bootstrap flow authenticates against
-* `--password <password>`: override which gateway password the bootstrap flow authenticates against
-* `--setup-code-only`: print only setup code
-* `--no-ascii`: skip ASCII QR rendering
-* `--json`: emit JSON (`setupCode`, `gatewayUrl`, `auth`, `urlSource`)
+- `--remote`: prefer `gateway.remote.url`; if it is unset, `gateway.tailscale.mode=serve|funnel` can still provide the remote public URL
+- `--url <url>`: override gateway URL used in payload
+- `--public-url <url>`: override public URL used in payload
+- `--token <token>`: override which gateway token the bootstrap flow authenticates against
+- `--password <password>`: override which gateway password the bootstrap flow authenticates against
+- `--setup-code-only`: print only setup code
+- `--no-ascii`: skip ASCII QR rendering
+- `--json`: emit JSON (`setupCode`, `gatewayUrl`, `auth`, `urlSource`)
 
 ## Notes
 
-* `--token` and `--password` are mutually exclusive.
-* The setup code itself now carries an opaque short-lived `bootstrapToken`, not the shared gateway token/password.
-* Built-in setup-code bootstrap returns a primary `node` token with `scopes: []` plus a bounded `operator` handoff token for trusted mobile onboarding.
-* The handed-off operator token is limited to `operator.approvals`, `operator.read`, and `operator.write`; `operator.admin`, `operator.pairing`, and `operator.talk.secrets` require a separate approved operator pairing or token flow.
-* Mobile pairing fails closed for Tailscale/public `ws://` gateway URLs. Private LAN addresses and `.local` Bonjour hosts remain supported over `ws://`, but Tailscale/public mobile routes should use Tailscale Serve/Funnel or a `wss://` gateway URL.
-* With `--remote`, OpenClaw requires either `gateway.remote.url` or
+- `--token` and `--password` are mutually exclusive.
+- The setup code itself now carries an opaque short-lived `bootstrapToken`, not the shared gateway token/password.
+- Built-in setup-code bootstrap returns a primary `node` token with `scopes: []` plus a bounded `operator` handoff token for trusted mobile onboarding.
+- The handed-off operator token is limited to `operator.approvals`, `operator.read`, and `operator.write`; `operator.admin`, `operator.pairing`, and `operator.talk.secrets` require a separate approved operator pairing or token flow.
+- Mobile pairing fails closed for Tailscale/public `ws://` gateway URLs. Private LAN addresses and `.local` Bonjour hosts remain supported over `ws://`, but Tailscale/public mobile routes should use Tailscale Serve/Funnel or a `wss://` gateway URL.
+- With `--remote`, OpenClaw requires either `gateway.remote.url` or
   `gateway.tailscale.mode=serve|funnel`.
-* With `--remote`, if effectively active remote credentials are configured as SecretRefs and you do not pass `--token` or `--password`, the command resolves them from the active gateway snapshot. If gateway is unavailable, the command fails fast.
-* Without `--remote`, local gateway auth SecretRefs are resolved when no CLI auth override is passed:
-  * `gateway.auth.token` resolves when token auth can win (explicit `gateway.auth.mode="token"` or inferred mode where no password source wins).
-  * `gateway.auth.password` resolves when password auth can win (explicit `gateway.auth.mode="password"` or inferred mode with no winning token from auth/env).
-* If both `gateway.auth.token` and `gateway.auth.password` are configured (including SecretRefs) and `gateway.auth.mode` is unset, setup-code resolution fails until mode is set explicitly.
-* Gateway version skew note: this command path requires a gateway that supports `secrets.resolve`; older gateways return an unknown-method error.
-* After scanning, approve device pairing with:
-  * `openclaw devices list`
-  * `openclaw devices approve <requestId>`
+- With `--remote`, if effectively active remote credentials are configured as SecretRefs and you do not pass `--token` or `--password`, the command resolves them from the active gateway snapshot. If gateway is unavailable, the command fails fast.
+- Without `--remote`, local gateway auth SecretRefs are resolved when no CLI auth override is passed:
+  - `gateway.auth.token` resolves when token auth can win (explicit `gateway.auth.mode="token"` or inferred mode where no password source wins).
+  - `gateway.auth.password` resolves when password auth can win (explicit `gateway.auth.mode="password"` or inferred mode with no winning token from auth/env).
+- If both `gateway.auth.token` and `gateway.auth.password` are configured (including SecretRefs) and `gateway.auth.mode` is unset, setup-code resolution fails until mode is set explicitly.
+- Gateway version skew note: this command path requires a gateway that supports `secrets.resolve`; older gateways return an unknown-method error.
+- After scanning, approve device pairing with:
+  - `openclaw devices list`
+  - `openclaw devices approve <requestId>`
 
 ## Related
 
-* [CLI reference](/cli)
-* [Pairing](/cli/pairing)
+- [CLI reference](/cli)
+- [Pairing](/cli/pairing)
+
+---

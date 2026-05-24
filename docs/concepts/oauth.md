@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "40d23fd62b01dc9630291696a2b09bfb510fba0b554c07a57f35b6e0bf2f72ba"
+source_hash: "a938e4694bdcf5e29ad1734abb9bfb81c4f717df2cebf4bedfba17a806a1cf4e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # OAuth
 Source: https://docs.openclaw.ai/concepts/oauth
 
-
-
 OpenClaw supports "subscription auth" via OAuth for providers that offer it
 (notably **OpenAI Codex (ChatGPT OAuth)**). For Anthropic, the practical split
 is now:
 
-* **Anthropic API key**: normal Anthropic API billing
-* **Anthropic Claude CLI / subscription auth inside OpenClaw**: Anthropic staff
+- **Anthropic API key**: normal Anthropic API billing
+- **Anthropic Claude CLI / subscription auth inside OpenClaw**: Anthropic staff
   told us this usage is allowed again
 
 OpenAI Codex OAuth is explicitly supported for use in external tools like
@@ -28,14 +26,14 @@ OpenClaw. This page explains:
 
 For Anthropic in production, API key auth is the safer recommended path.
 
-* how the OAuth **token exchange** works (PKCE)
-* where tokens are **stored** (and why)
-* how to handle **multiple accounts** (profiles + per-session overrides)
+- how the OAuth **token exchange** works (PKCE)
+- where tokens are **stored** (and why)
+- how to handle **multiple accounts** (profiles + per-session overrides)
 
 OpenClaw also supports **provider plugins** that ship their own OAuth or API-key
 flows. Run them via:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models auth login --provider <id>
 ```
 
@@ -45,19 +43,19 @@ OAuth providers commonly mint a **new refresh token** during login/refresh flows
 
 Practical symptom:
 
-* you log in via OpenClaw *and* via Claude Code / Codex CLI → one of them randomly gets "logged out" later
+- you log in via OpenClaw _and_ via Claude Code / Codex CLI → one of them randomly gets "logged out" later
 
 To reduce that, OpenClaw treats `auth-profiles.json` as a **token sink**:
 
-* the runtime reads credentials from **one place**
-* we can keep multiple profiles and route them deterministically
-* external CLI reuse is provider-specific: Codex CLI can bootstrap an empty
+- the runtime reads credentials from **one place**
+- we can keep multiple profiles and route them deterministically
+- external CLI reuse is provider-specific: Codex CLI can bootstrap an empty
   `openai-codex:default` profile, but once OpenClaw has a local OAuth profile,
   the local refresh token is canonical. If that local refresh token is rejected,
   OpenClaw can use a usable same-account Codex CLI token as a runtime-only
   fallback; other integrations can remain externally managed and re-read their
   CLI auth store
-* status and startup paths that already know the configured provider set scope
+- status and startup paths that already know the configured provider set scope
   external CLI discovery to that set, so an unrelated CLI login store is not
   probed for a single-provider setup
 
@@ -65,13 +63,13 @@ To reduce that, OpenClaw treats `auth-profiles.json` as a **token sink**:
 
 Secrets are stored in agent auth stores:
 
-* Auth profiles (OAuth + API keys + optional value-level refs): `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-* Legacy compatibility file: `~/.openclaw/agents/<agentId>/agent/auth.json`
+- Auth profiles (OAuth + API keys + optional value-level refs): `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+- Legacy compatibility file: `~/.openclaw/agents/<agentId>/agent/auth.json`
   (static `api_key` entries are scrubbed when discovered)
 
 Legacy import-only file (still supported, but not the main store):
 
-* `~/.openclaw/credentials/oauth.json` (imported into `auth-profiles.json` on first use)
+- `~/.openclaw/credentials/oauth.json` (imported into `auth-profiles.json` on first use)
 
 All of the above also respect `$OPENCLAW_STATE_DIR` (state dir override). Full reference: [/gateway/configuration](/gateway/configuration-reference#auth-storage)
 
@@ -86,24 +84,24 @@ agent when it needs an independent account.
 
 ## Anthropic legacy token compatibility
 
-<Warning>
-  Anthropic's public Claude Code docs say direct Claude Code use stays within
-  Claude subscription limits, and Anthropic staff told us OpenClaw-style Claude
-  CLI usage is allowed again. OpenClaw therefore treats Claude CLI reuse and
-  `claude -p` usage as sanctioned for this integration unless Anthropic
-  publishes a new policy.
+Warning
 
-  For Anthropic's current direct-Claude-Code plan docs, see [Using Claude Code
-  with your Pro or Max
-  plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)
-  and [Using Claude Code with your Team or Enterprise
-  plan](https://support.anthropic.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan/).
+Anthropic's public Claude Code docs say direct Claude Code use stays within
+Claude subscription limits, and Anthropic staff told us OpenClaw-style Claude
+CLI usage is allowed again. OpenClaw therefore treats Claude CLI reuse and
+`claude -p` usage as sanctioned for this integration unless Anthropic
+publishes a new policy.
 
-  If you want other subscription-style options in OpenClaw, see [OpenAI
-  Codex](/providers/openai), [Qwen Cloud Coding
-  Plan](/providers/qwen), [MiniMax Coding Plan](/providers/minimax),
-  and [Z.AI / GLM Coding Plan](/providers/glm).
-</Warning>
+For Anthropic's current direct-Claude-Code plan docs, see [Using Claude Code
+with your Pro or Max
+plan](https://support.claude.com/en/articles/11145838-using-claude-code-with-your-pro-or-max-plan)
+and [Using Claude Code with your Team or Enterprise
+plan](https://support.anthropic.com/en/articles/11845131-using-claude-code-with-your-team-or-enterprise-plan/).
+
+If you want other subscription-style options in OpenClaw, see [OpenAI
+Codex](/providers/openai), [Qwen Cloud Coding
+Plan](/providers/qwen), [MiniMax Coding Plan](/providers/minimax),
+and [Z.AI / GLM Coding Plan](/providers/glm).
 
 OpenClaw also exposes Anthropic setup-token as a supported token-auth path, but it now prefers Claude CLI reuse and `claude -p` when available.
 
@@ -146,12 +144,12 @@ Profiles store an `expires` timestamp.
 
 At runtime:
 
-* if `expires` is in the future → use the stored access token
-* if expired → refresh (under a file lock) and overwrite the stored credentials
-* if a secondary agent reads an inherited main-agent OAuth profile, refresh
+- if `expires` is in the future → use the stored access token
+- if expired → refresh (under a file lock) and overwrite the stored credentials
+- if a secondary agent reads an inherited main-agent OAuth profile, refresh
   writes back to the main agent store instead of copying the refresh token into
   the secondary agent store
-* exception: some external CLI credentials stay externally managed; OpenClaw
+- exception: some external CLI credentials stay externally managed; OpenClaw
   re-reads those CLI auth stores instead of spending copied refresh tokens.
   Codex CLI bootstrap is intentionally narrower: it seeds an empty
   `openai-codex:default` profile, then OpenClaw-owned refreshes keep the local
@@ -169,7 +167,7 @@ Two patterns:
 
 If you want "personal" and "work" to never interact, use isolated agents (separate sessions + credentials + workspace):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents add work
 openclaw agents add personal
 ```
@@ -182,24 +180,26 @@ Then configure auth per-agent (wizard) and route chats to the right agent.
 
 Pick which profile is used:
 
-* globally via config ordering (`auth.order`)
-* per-session via `/model ...@<profileId>`
+- globally via config ordering (`auth.order`)
+- per-session via `/model ...@<profileId>`
 
 Example (session override):
 
-* `/model Opus@anthropic:work`
+- `/model Opus@anthropic:work`
 
 How to see what profile IDs exist:
 
-* `openclaw channels list --json` (shows `auth[]`)
+- `openclaw channels list --json` (shows `auth[]`)
 
 Related docs:
 
-* [Model failover](/concepts/model-failover) (rotation + cooldown rules)
-* [Slash commands](/tools/slash-commands) (command surface)
+- [Model failover](/concepts/model-failover) (rotation + cooldown rules)
+- [Slash commands](/tools/slash-commands) (command surface)
 
 ## Related
 
-* [Authentication](/gateway/authentication) - model provider auth overview
-* [Secrets](/gateway/secrets) - credential storage and SecretRef
-* [Configuration Reference](/gateway/configuration-reference#auth-storage) - auth config keys
+- [Authentication](/gateway/authentication) - model provider auth overview
+- [Secrets](/gateway/secrets) - credential storage and SecretRef
+- [Configuration Reference](/gateway/configuration-reference#auth-storage) - auth config keys
+
+---

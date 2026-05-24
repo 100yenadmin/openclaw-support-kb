@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kubernetes"
 source: "https://docs.openclaw.ai/install/kubernetes"
-source_hash: "ae4c12d550b7befe414f094dfdb0ed01fff4e2d107f02a60cf2de62bf6aa2094"
+source_hash: "6034bf5f1f625b43719f861f29621c047c1c851d777744be31526acafaeb2ddb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/kubernetes.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Kubernetes
 Source: https://docs.openclaw.ai/install/kubernetes
 
-
-
 A minimal starting point for running OpenClaw on Kubernetes — not a production-ready deployment. It covers the core resources and is meant to be adapted to your environment.
 
 ## Why not Helm?
@@ -23,15 +21,17 @@ OpenClaw is a single container with some config files. The interesting customiza
 
 ## What you need
 
-* A running Kubernetes cluster (AKS, EKS, GKE, k3s, kind, OpenShift, etc.)
-* `kubectl` connected to your cluster
-* An API key for at least one model provider
+- A running Kubernetes cluster (AKS, EKS, GKE, k3s, kind, OpenShift, etc.)
+- `kubectl` connected to your cluster
+- An API key for at least one model provider
 
 ## Quick start
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Replace with your provider: ANTHROPIC, GEMINI, OPENAI, or OPENROUTER
-export <PROVIDER>_API_KEY="..."
+export
+PROVIDER
+_API_KEY="..."
 ./scripts/k8s/deploy.sh
 
 kubectl port-forward svc/openclaw 18789:18789 -n openclaw
@@ -41,7 +41,7 @@ open http://localhost:18789
 Retrieve the configured shared secret for the Control UI. This deploy script
 creates token auth by default:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 kubectl get secret openclaw-secrets -n openclaw -o jsonpath='{.data.OPENCLAW_GATEWAY_TOKEN}' | base64 -d
 ```
 
@@ -51,7 +51,7 @@ For local debugging, `./scripts/k8s/deploy.sh --show-token` prints the token aft
 
 If you don't have a cluster, create one locally with [Kind](https://kind.sigs.k8s.io/):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ./scripts/k8s/create-kind.sh           # auto-detects docker or podman
 ./scripts/k8s/create-kind.sh --delete  # tear down
 ```
@@ -64,9 +64,11 @@ Then deploy as usual with `./scripts/k8s/deploy.sh`.
 
 **Option A** — API key in environment (one step):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Replace with your provider: ANTHROPIC, GEMINI, OPENAI, or OPENROUTER
-export <PROVIDER>_API_KEY="..."
+export
+PROVIDER
+_API_KEY="..."
 ./scripts/k8s/deploy.sh
 ```
 
@@ -74,8 +76,10 @@ The script creates a Kubernetes Secret with the API key and an auto-generated ga
 
 **Option B** — create the secret separately:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-export <PROVIDER>_API_KEY="..."
+```bash
+export
+PROVIDER
+_API_KEY="..."
 ./scripts/k8s/deploy.sh --create-secret
 ./scripts/k8s/deploy.sh
 ```
@@ -84,7 +88,7 @@ Use `--show-token` with either command if you want the token printed to stdout f
 
 ### 2) Access the gateway
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 kubectl port-forward svc/openclaw 18789:18789 -n openclaw
 open http://localhost:18789
 ```
@@ -106,7 +110,7 @@ Namespace: openclaw (configurable via OPENCLAW_NAMESPACE)
 
 Edit the `AGENTS.md` in `scripts/k8s/manifests/configmap.yaml` and redeploy:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ./scripts/k8s/deploy.sh
 ```
 
@@ -118,7 +122,7 @@ Edit `openclaw.json` in `scripts/k8s/manifests/configmap.yaml`. See [Gateway con
 
 Re-run with additional keys exported:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export ANTHROPIC_API_KEY="..."
 export OPENAI_API_KEY="..."
 ./scripts/k8s/deploy.sh --create-secret
@@ -129,15 +133,17 @@ Existing provider keys stay in the Secret unless you overwrite them.
 
 Or patch the Secret directly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 kubectl patch secret openclaw-secrets -n openclaw \
-  -p '{"stringData":{"<PROVIDER>_API_KEY":"..."}}'
+  -p '{"stringData":{"
+PROVIDER
+_API_KEY":"..."}}'
 kubectl rollout restart deployment/openclaw -n openclaw
 ```
 
 ### Custom namespace
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_NAMESPACE=my-namespace ./scripts/k8s/deploy.sh
 ```
 
@@ -145,7 +151,7 @@ OPENCLAW_NAMESPACE=my-namespace ./scripts/k8s/deploy.sh
 
 Edit the `image` field in `scripts/k8s/manifests/deployment.yaml`:
 
-```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```yaml
 image: ghcr.io/openclaw/openclaw:latest # or pin to a specific version from https://github.com/openclaw/openclaw/releases
 ```
 
@@ -155,13 +161,13 @@ The default manifests bind the gateway to loopback inside the pod. That works wi
 
 If you want to expose the gateway through an Ingress or load balancer:
 
-* Change the gateway bind in `scripts/k8s/manifests/configmap.yaml` from `loopback` to a non-loopback bind that matches your deployment model
-* Keep gateway auth enabled and use a proper TLS-terminated entrypoint
-* Configure the Control UI for remote access using the supported web security model (for example HTTPS/Tailscale Serve and explicit allowed origins when needed)
+- Change the gateway bind in `scripts/k8s/manifests/configmap.yaml` from `loopback` to a non-loopback bind that matches your deployment model
+- Keep gateway auth enabled and use a proper TLS-terminated entrypoint
+- Configure the Control UI for remote access using the supported web security model (for example HTTPS/Tailscale Serve and explicit allowed origins when needed)
 
 ## Re-deploy
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ./scripts/k8s/deploy.sh
 ```
 
@@ -169,7 +175,7 @@ This applies all manifests and restarts the pod to pick up any config or secret 
 
 ## Teardown
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ./scripts/k8s/deploy.sh --delete
 ```
 
@@ -177,12 +183,12 @@ This deletes the namespace and all resources in it, including the PVC.
 
 ## Architecture notes
 
-* The gateway binds to loopback inside the pod by default, so the included setup is for `kubectl port-forward`
-* No cluster-scoped resources — everything lives in a single namespace
-* Security: `readOnlyRootFilesystem`, `drop: ALL` capabilities, non-root user (UID 1000)
-* The default config keeps the Control UI on the safer local-access path: loopback bind plus `kubectl port-forward` to `http://127.0.0.1:18789`
-* If you move beyond localhost access, use the supported remote model: HTTPS/Tailscale plus the appropriate gateway bind and Control UI origin settings
-* Secrets are generated in a temp directory and applied directly to the cluster — no secret material is written to the repo checkout
+- The gateway binds to loopback inside the pod by default, so the included setup is for `kubectl port-forward`
+- No cluster-scoped resources — everything lives in a single namespace
+- Security: `readOnlyRootFilesystem`, `drop: ALL` capabilities, non-root user (UID 1000)
+- The default config keeps the Control UI on the safer local-access path: loopback bind plus `kubectl port-forward` to `http://127.0.0.1:18789`
+- If you move beyond localhost access, use the supported remote model: HTTPS/Tailscale plus the appropriate gateway bind and Control UI origin settings
+- Secrets are generated in a temp directory and applied directly to the cluster — no secret material is written to the repo checkout
 
 ## File structure
 
@@ -200,6 +206,8 @@ scripts/k8s/
 
 ## Related
 
-* [Docker](/install/docker)
-* [Docker VM runtime](/install/docker-vm-runtime)
-* [Install overview](/install)
+- [Docker](/install/docker)
+- [Docker VM runtime](/install/docker-vm-runtime)
+- [Install overview](/install)
+
+---

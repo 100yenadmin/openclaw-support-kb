@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Admin HTTP RPC plugin"
 source: "https://docs.openclaw.ai/plugins/admin-http-rpc"
-source_hash: "1fa3cbea9b480160d72804afa9998a543577f08c88239e97b771bef1ce0b91fb"
+source_hash: "037afa55502a04973872235bf8c89b3fc1b430719bda86c42689e202f4b4c9db"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/admin-http-rpc.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # Admin HTTP RPC plugin
 Source: https://docs.openclaw.ai/plugins/admin-http-rpc
 
-
-
 The bundled `admin-http-rpc` plugin exposes selected Gateway control-plane methods over HTTP for trusted host automation that cannot use the normal Gateway WebSocket RPC client.
 
 The plugin is included with OpenClaw, but it is off by default. When disabled, the route is not registered. When enabled, it adds:
 
-* `POST /api/v1/admin/rpc`
-* same listener as the Gateway: `http://<gateway-host>:<port>/api/v1/admin/rpc`
+- `POST /api/v1/admin/rpc`
+- same listener as the Gateway: `http://<gateway-host>:<port>/api/v1/admin/rpc`
 
 Enable it only for private host tooling, tailnet automation, or a trusted internal ingress. Do not expose this route directly to the public internet.
 
@@ -30,10 +28,10 @@ Admin HTTP RPC is a full operator control-plane surface. Any caller that passes 
 
 Use it when all of these are true:
 
-* The caller is trusted to operate the Gateway.
-* The caller cannot use the WebSocket RPC client.
-* The route is reachable only on loopback, a tailnet, or a private authenticated ingress.
-* You have reviewed the allowed methods and they match the automation you plan to run.
+- The caller is trusted to operate the Gateway.
+- The caller cannot use the WebSocket RPC client.
+- The route is reachable only on loopback, a tailnet, or a private authenticated ingress.
+- You have reviewed the allowed methods and they match the automation you plan to run.
 
 Use the WebSocket RPC path for OpenClaw clients and interactive tools that can keep a Gateway WebSocket connection open.
 
@@ -41,16 +39,20 @@ Use the WebSocket RPC path for OpenClaw clients and interactive tools that can k
 
 Enable the bundled plugin:
 
-<Tabs>
-  <Tab title="CLI">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+CLI
+
+    ```bash
     openclaw plugins enable admin-http-rpc
     openclaw gateway restart
     ```
-  </Tab>
 
-  <Tab title="Config">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Config
+
+    ```json5
     {
       plugins: {
         entries: {
@@ -59,14 +61,13 @@ Enable the bundled plugin:
       },
     }
     ```
-  </Tab>
-</Tabs>
+
 
 The route is registered during plugin startup. Restart the Gateway after changing plugin config.
 
 Disable it when you no longer need the HTTP surface:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins disable admin-http-rpc
 openclaw gateway restart
 ```
@@ -75,7 +76,7 @@ openclaw gateway restart
 
 Use `health` as the smallest safe request:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -sS http://<gateway-host>:<port>/api/v1/admin/rpc \
   -H 'Authorization: Bearer <gateway-token>' \
   -H 'Content-Type: application/json' \
@@ -84,7 +85,7 @@ curl -sS http://<gateway-host>:<port>/api/v1/admin/rpc \
 
 A successful response has `ok: true`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "generated-request-id",
   "ok": true,
@@ -102,35 +103,35 @@ The plugin route uses Gateway HTTP auth.
 
 Common authentication paths:
 
-* shared-secret auth (`gateway.auth.mode="token"` or `"password"`): `Authorization: Bearer <token-or-password>`
-* trusted identity-bearing HTTP auth (`gateway.auth.mode="trusted-proxy"`): route through the configured identity-aware proxy and let it inject the required identity headers
-* private-ingress open auth (`gateway.auth.mode="none"`): no auth header required
+- shared-secret auth (`gateway.auth.mode="token"` or `"password"`): `Authorization: Bearer <token-or-password>`
+- trusted identity-bearing HTTP auth (`gateway.auth.mode="trusted-proxy"`): route through the configured identity-aware proxy and let it inject the required identity headers
+- private-ingress open auth (`gateway.auth.mode="none"`): no auth header required
 
 ## Security model
 
 Treat this plugin as a full Gateway operator surface.
 
-* Enabling the plugin intentionally offers access to the allowlisted admin RPC methods at `/api/v1/admin/rpc`.
-* The plugin declares the reserved `contracts.gatewayMethodDispatch: ["authenticated-request"]` manifest contract so its Gateway-authenticated HTTP route can dispatch control-plane methods in process.
-* Shared-secret bearer auth proves possession of the gateway operator secret.
-* For `token` and `password` auth, narrower `x-openclaw-scopes` headers are ignored and the normal full operator defaults are restored.
-* Trusted identity-bearing HTTP modes honor `x-openclaw-scopes` when present.
-* `gateway.auth.mode="none"` means this route is unauthenticated if the plugin is enabled. Use that only behind a private ingress you fully trust.
-* Requests dispatch through the same Gateway method handlers and scope checks as WebSocket RPC after the plugin route auth passes.
-* Keep this route on loopback, tailnet, or a private trusted ingress. Do not expose it directly to the public internet.
-* Plugin manifest contracts are not a sandbox. They prevent accidental use of reserved SDK helpers; trusted plugins still run in the Gateway process.
+- Enabling the plugin intentionally offers access to the allowlisted admin RPC methods at `/api/v1/admin/rpc`.
+- The plugin declares the reserved `contracts.gatewayMethodDispatch: ["authenticated-request"]` manifest contract so its Gateway-authenticated HTTP route can dispatch control-plane methods in process.
+- Shared-secret bearer auth proves possession of the gateway operator secret.
+- For `token` and `password` auth, narrower `x-openclaw-scopes` headers are ignored and the normal full operator defaults are restored.
+- Trusted identity-bearing HTTP modes honor `x-openclaw-scopes` when present.
+- `gateway.auth.mode="none"` means this route is unauthenticated if the plugin is enabled. Use that only behind a private ingress you fully trust.
+- Requests dispatch through the same Gateway method handlers and scope checks as WebSocket RPC after the plugin route auth passes.
+- Keep this route on loopback, tailnet, or a private trusted ingress. Do not expose it directly to the public internet.
+- Plugin manifest contracts are not a sandbox. They prevent accidental use of reserved SDK helpers; trusted plugins still run in the Gateway process.
 
 Use separate gateways when callers cross trust boundaries.
 
 ## Request
 
-```http theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```http
 POST /api/v1/admin/rpc
 Authorization: Bearer <gateway-token>
 Content-Type: application/json
 ```
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "optional-request-id",
   "method": "health",
@@ -140,9 +141,9 @@ Content-Type: application/json
 
 Fields:
 
-* `id` (string, optional): copied into the response. A UUID is generated when omitted.
-* `method` (string, required): allowed Gateway method name.
-* `params` (any, optional): method-specific params.
+- `id` (string, optional): copied into the response. A UUID is generated when omitted.
+- `method` (string, required): allowed Gateway method name.
+- `params` (any, optional): method-specific params.
 
 The default max request body size is 1 MB.
 
@@ -150,7 +151,7 @@ The default max request body size is 1 MB.
 
 Success responses use the Gateway RPC shape:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "optional-request-id",
   "ok": true,
@@ -160,7 +161,7 @@ Success responses use the Gateway RPC shape:
 
 Gateway method errors use:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "optional-request-id",
   "ok": false,
@@ -175,20 +176,20 @@ HTTP status follows the Gateway error when possible. For example, `INVALID_REQUE
 
 ## Allowed methods
 
-* discovery: `commands.list`
+- discovery: `commands.list`
   Returns the HTTP RPC method names allowed by this plugin.
-* gateway: `health`, `status`, `logs.tail`, `usage.status`, `usage.cost`, `gateway.restart.request`
-* config: `config.get`, `config.schema`, `config.schema.lookup`, `config.set`, `config.patch`, `config.apply`
-* channels: `channels.status`, `channels.start`, `channels.stop`, `channels.logout`
-* web: `web.login.start`, `web.login.wait`
-* models: `models.list`, `models.authStatus`
-* agents: `agents.list`, `agents.create`, `agents.update`, `agents.delete`
-* approvals: `exec.approvals.get`, `exec.approvals.set`, `exec.approvals.node.get`, `exec.approvals.node.set`
-* cron: `cron.status`, `cron.list`, `cron.get`, `cron.runs`, `cron.add`, `cron.update`, `cron.remove`, `cron.run`
-* devices: `device.pair.list`, `device.pair.approve`, `device.pair.reject`, `device.pair.remove`
-* nodes: `node.list`, `node.describe`, `node.pair.list`, `node.pair.approve`, `node.pair.reject`, `node.pair.remove`, `node.rename`
-* tasks: `tasks.list`, `tasks.get`, `tasks.cancel`
-* diagnostics: `doctor.memory.status`, `update.status`
+- gateway: `health`, `status`, `logs.tail`, `usage.status`, `usage.cost`, `gateway.restart.request`
+- config: `config.get`, `config.schema`, `config.schema.lookup`, `config.set`, `config.patch`, `config.apply`
+- channels: `channels.status`, `channels.start`, `channels.stop`, `channels.logout`
+- web: `web.login.start`, `web.login.wait`
+- models: `models.list`, `models.authStatus`
+- agents: `agents.list`, `agents.create`, `agents.update`, `agents.delete`
+- approvals: `exec.approvals.get`, `exec.approvals.set`, `exec.approvals.node.get`, `exec.approvals.node.set`
+- cron: `cron.status`, `cron.list`, `cron.get`, `cron.runs`, `cron.add`, `cron.update`, `cron.remove`, `cron.run`
+- devices: `device.pair.list`, `device.pair.approve`, `device.pair.reject`, `device.pair.remove`
+- nodes: `node.list`, `node.describe`, `node.pair.list`, `node.pair.approve`, `node.pair.reject`, `node.pair.remove`, `node.rename`
+- tasks: `tasks.list`, `tasks.get`, `tasks.cancel`
+- diagnostics: `doctor.memory.status`, `update.status`
 
 Other Gateway methods are blocked until they are intentionally added.
 
@@ -218,8 +219,10 @@ Shared-token WebSocket clients without a trusted device identity cannot self-dec
 
 ## Related
 
-* [Operator scopes](/gateway/operator-scopes)
-* [Gateway security](/gateway/security)
-* [Remote access](/gateway/remote)
-* [Plugin manifest](/plugins/manifest#contracts)
-* [SDK subpaths](/plugins/sdk-subpaths)
+- [Operator scopes](/gateway/operator-scopes)
+- [Gateway security](/gateway/security)
+- [Remote access](/gateway/remote)
+- [Plugin manifest](/plugins/manifest#contracts)
+- [SDK subpaths](/plugins/sdk-subpaths)
+
+---

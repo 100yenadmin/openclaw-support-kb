@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
-source_hash: "d55080213cf0d6547f147f13e6e162637d3827c910672654d087eec8f01ba4de"
+source_hash: "8f9940648dd18194d334de29cb20bce625555a85ece4c4f5cf4ac1e71ba62d68"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openresponses-http-api.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # OpenResponses API
 Source: https://docs.openclaw.ai/gateway/openresponses-http-api
 
-
-
 OpenClaw's Gateway can serve an OpenResponses-compatible `POST /v1/responses` endpoint.
 
 This endpoint is **disabled by default**. Enable it in config first.
 
-* `POST /v1/responses`
-* Same port as the Gateway (WS + HTTP multiplex): `http://<gateway-host>:<port>/v1/responses`
+- `POST /v1/responses`
+- Same port as the Gateway (WS + HTTP multiplex): `http://<gateway-host>:<port>/v1/responses`
 
 Under the hood, requests are executed as a normal Gateway agent run (same codepath as
 `openclaw agent`), so routing/permissions/config match your Gateway.
@@ -29,41 +27,41 @@ Under the hood, requests are executed as a normal Gateway agent run (same codepa
 
 Operational behavior matches [OpenAI Chat Completions](/gateway/openai-http-api):
 
-* use the matching Gateway HTTP auth path:
-  * shared-secret auth (`gateway.auth.mode="token"` or `"password"`): `Authorization: Bearer <token-or-password>`
-  * trusted-proxy auth (`gateway.auth.mode="trusted-proxy"`): identity-aware proxy headers from a configured trusted proxy source; same-host loopback proxies require explicit `gateway.auth.trustedProxy.allowLoopback = true`
-  * trusted-proxy local direct fallback: same-host callers with no `Forwarded`, `X-Forwarded-*`, or `X-Real-IP` headers can use `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD`
-  * private-ingress open auth (`gateway.auth.mode="none"`): no auth header
-* treat the endpoint as full operator access for the gateway instance
-* for shared-secret auth modes (`token` and `password`), ignore narrower bearer-declared `x-openclaw-scopes` values and restore the normal full operator defaults
-* for trusted identity-bearing HTTP modes (for example trusted proxy auth or `gateway.auth.mode="none"`), honor `x-openclaw-scopes` when present and otherwise fall back to the normal operator default scope set
-* select agents with `model: "openclaw"`, `model: "openclaw/default"`, `model: "openclaw/<agentId>"`, or `x-openclaw-agent-id`
-* use `x-openclaw-model` when you want to override the selected agent's backend model
-* use `x-openclaw-session-key` for explicit session routing
-* use `x-openclaw-message-channel` when you want a non-default synthetic ingress channel context
+- use the matching Gateway HTTP auth path:
+  - shared-secret auth (`gateway.auth.mode="token"` or `"password"`): `Authorization: Bearer <token-or-password>`
+  - trusted-proxy auth (`gateway.auth.mode="trusted-proxy"`): identity-aware proxy headers from a configured trusted proxy source; same-host loopback proxies require explicit `gateway.auth.trustedProxy.allowLoopback = true`
+  - trusted-proxy local direct fallback: same-host callers with no `Forwarded`, `X-Forwarded-*`, or `X-Real-IP` headers can use `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD`
+  - private-ingress open auth (`gateway.auth.mode="none"`): no auth header
+- treat the endpoint as full operator access for the gateway instance
+- for shared-secret auth modes (`token` and `password`), ignore narrower bearer-declared `x-openclaw-scopes` values and restore the normal full operator defaults
+- for trusted identity-bearing HTTP modes (for example trusted proxy auth or `gateway.auth.mode="none"`), honor `x-openclaw-scopes` when present and otherwise fall back to the normal operator default scope set
+- select agents with `model: "openclaw"`, `model: "openclaw/default"`, `model: "openclaw/<agentId>"`, or `x-openclaw-agent-id`
+- use `x-openclaw-model` when you want to override the selected agent's backend model
+- use `x-openclaw-session-key` for explicit session routing
+- use `x-openclaw-message-channel` when you want a non-default synthetic ingress channel context
 
 Auth matrix:
 
-* `gateway.auth.mode="token"` or `"password"` + `Authorization: Bearer ...`
-  * proves possession of the shared gateway operator secret
-  * ignores narrower `x-openclaw-scopes`
-  * restores the full default operator scope set:
+- `gateway.auth.mode="token"` or `"password"` + `Authorization: Bearer ...`
+  - proves possession of the shared gateway operator secret
+  - ignores narrower `x-openclaw-scopes`
+  - restores the full default operator scope set:
     `operator.admin`, `operator.approvals`, `operator.pairing`,
     `operator.read`, `operator.talk.secrets`, `operator.write`
-  * treats chat turns on this endpoint as owner-sender turns
-* trusted identity-bearing HTTP modes (for example trusted proxy auth, or `gateway.auth.mode="none"` on private ingress)
-  * honor `x-openclaw-scopes` when the header is present
-  * fall back to the normal operator default scope set when the header is absent
-  * only lose owner semantics when the caller explicitly narrows scopes and omits `operator.admin`
+  - treats chat turns on this endpoint as owner-sender turns
+- trusted identity-bearing HTTP modes (for example trusted proxy auth, or `gateway.auth.mode="none"` on private ingress)
+  - honor `x-openclaw-scopes` when the header is present
+  - fall back to the normal operator default scope set when the header is absent
+  - only lose owner semantics when the caller explicitly narrows scopes and omits `operator.admin`
 
 Enable or disable this endpoint with `gateway.http.endpoints.responses.enabled`.
 
 The same compatibility surface also includes:
 
-* `GET /v1/models`
-* `GET /v1/models/{id}`
-* `POST /v1/embeddings`
-* `POST /v1/chat/completions`
+- `GET /v1/models`
+- `GET /v1/models/{id}`
+- `POST /v1/embeddings`
+- `POST /v1/chat/completions`
 
 For the canonical explanation of how agent-target models, `openclaw/default`, embeddings pass-through, and backend model overrides fit together, see [OpenAI Chat Completions](/gateway/openai-http-api#agent-first-model-contract) and [Model list and agent routing](/gateway/openai-http-api#model-list-and-agent-routing).
 
@@ -78,27 +76,27 @@ from it, so repeated calls can share an agent session.
 
 The request follows the OpenResponses API with item-based input. Current support:
 
-* `input`: string or array of item objects.
-* `instructions`: merged into the system prompt.
-* `tools`: client tool definitions (function tools).
-* `tool_choice`: filter or require client tools.
-* `stream`: enables SSE streaming.
-* `max_output_tokens`: best-effort output limit (provider dependent).
-* `temperature`: best-effort sampling temperature forwarded to the provider. Ignored by the ChatGPT-based Codex Responses backend, which uses fixed server-side sampling.
-* `top_p`: best-effort nucleus sampling forwarded to the provider. Same Codex Responses caveat as `temperature`.
-* `user`: stable session routing.
+- `input`: string or array of item objects.
+- `instructions`: merged into the system prompt.
+- `tools`: client tool definitions (function tools).
+- `tool_choice`: filter or require client tools.
+- `stream`: enables SSE streaming.
+- `max_output_tokens`: best-effort output limit (provider dependent).
+- `temperature`: best-effort sampling temperature forwarded to the provider. Ignored by the ChatGPT-based Codex Responses backend, which uses fixed server-side sampling.
+- `top_p`: best-effort nucleus sampling forwarded to the provider. Same Codex Responses caveat as `temperature`.
+- `user`: stable session routing.
 
 Accepted but **currently ignored**:
 
-* `max_tool_calls`
-* `reasoning`
-* `metadata`
-* `store`
-* `truncation`
+- `max_tool_calls`
+- `reasoning`
+- `metadata`
+- `store`
+- `truncation`
 
 Supported:
 
-* `previous_response_id`: OpenClaw reuses the earlier response session when the request stays within the same agent/user/requested-session scope.
+- `previous_response_id`: OpenClaw reuses the earlier response session when the request stays within the same agent/user/requested-session scope.
 
 ## Items (input)
 
@@ -106,15 +104,15 @@ Supported:
 
 Roles: `system`, `developer`, `user`, `assistant`.
 
-* `system` and `developer` are appended to the system prompt.
-* The most recent `user` or `function_call_output` item becomes the "current message."
-* Earlier user/assistant messages are included as history for context.
+- `system` and `developer` are appended to the system prompt.
+- The most recent `user` or `function_call_output` item becomes the "current message."
+- Earlier user/assistant messages are included as history for context.
 
 ### `function_call_output` (turn-based tools)
 
 Send tool results back to the model:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "function_call_output",
   "call_id": "call_123",
@@ -137,7 +135,7 @@ You then send a follow-up request with `function_call_output` to continue the tu
 
 Supports base64 or URL sources:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "input_image",
   "source": { "type": "url", "url": "https://example.com/image.png" }
@@ -151,7 +149,7 @@ Max size (current): 10MB.
 
 Supports base64 or URL sources:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "input_file",
   "source": {
@@ -170,17 +168,21 @@ Max size (current): 5MB.
 
 Current behavior:
 
-* File content is decoded and added to the **system prompt**, not the user message,
+- File content is decoded and added to the **system prompt**, not the user message,
   so it stays ephemeral (not persisted in session history).
-* Decoded file text is wrapped as **untrusted external content** before it is added,
+- Decoded file text is wrapped as **untrusted external content** before it is added,
   so file bytes are treated as data, not trusted instructions.
-* The injected block uses explicit boundary markers like
-  `<<<EXTERNAL_UNTRUSTED_CONTENT id="...">>>` /
-  `<<<END_EXTERNAL_UNTRUSTED_CONTENT id="...">>>` and includes a
+- The injected block uses explicit boundary markers like
+  `<<
+EXTERNAL_UNTRUSTED_CONTENT
+>>` /
+  `<<
+END_EXTERNAL_UNTRUSTED_CONTENT
+>>` and includes a
   `Source: External` metadata line.
-* This file-input path intentionally omits the long `SECURITY NOTICE:` banner to
+- This file-input path intentionally omits the long `SECURITY NOTICE:` banner to
   preserve prompt budget; the boundary markers and metadata still stay in place.
-* PDFs are parsed for text first. If little text is found, the first pages are
+- PDFs are parsed for text first. If little text is found, the first pages are
   rasterized into images and passed to the model, and the injected file block uses
   the placeholder `[PDF content rendered to images]`.
 
@@ -190,21 +192,21 @@ expects browser workers/DOM globals, so it is not used in the Gateway.
 
 URL fetch defaults:
 
-* `files.allowUrl`: `true`
-* `images.allowUrl`: `true`
-* `maxUrlParts`: `8` (total URL-based `input_file` + `input_image` parts per request)
-* Requests are guarded (DNS resolution, private IP blocking, redirect caps, timeouts).
-* Optional hostname allowlists are supported per input type (`files.urlAllowlist`, `images.urlAllowlist`).
-  * Exact host: `"cdn.example.com"`
-  * Wildcard subdomains: `"*.assets.example.com"` (does not match apex)
-  * Empty or omitted allowlists mean no hostname allowlist restriction.
-* To disable URL-based fetches entirely, set `files.allowUrl: false` and/or `images.allowUrl: false`.
+- `files.allowUrl`: `true`
+- `images.allowUrl`: `true`
+- `maxUrlParts`: `8` (total URL-based `input_file` + `input_image` parts per request)
+- Requests are guarded (DNS resolution, private IP blocking, redirect caps, timeouts).
+- Optional hostname allowlists are supported per input type (`files.urlAllowlist`, `images.urlAllowlist`).
+  - Exact host: `"cdn.example.com"`
+  - Wildcard subdomains: `"*.assets.example.com"` (does not match apex)
+  - Empty or omitted allowlists mean no hostname allowlist restriction.
+- To disable URL-based fetches entirely, set `files.allowUrl: false` and/or `images.allowUrl: false`.
 
 ## File + image limits (config)
 
 Defaults can be tuned under `gateway.http.endpoints.responses`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     http: {
@@ -258,47 +260,47 @@ Defaults can be tuned under `gateway.http.endpoints.responses`:
 
 Defaults when omitted:
 
-* `maxBodyBytes`: 20MB
-* `maxUrlParts`: 8
-* `files.maxBytes`: 5MB
-* `files.maxChars`: 200k
-* `files.maxRedirects`: 3
-* `files.timeoutMs`: 10s
-* `files.pdf.maxPages`: 4
-* `files.pdf.maxPixels`: 4,000,000
-* `files.pdf.minTextChars`: 200
-* `images.maxBytes`: 10MB
-* `images.maxRedirects`: 3
-* `images.timeoutMs`: 10s
-* HEIC/HEIF `input_image` sources are accepted and normalized to JPEG before provider delivery.
+- `maxBodyBytes`: 20MB
+- `maxUrlParts`: 8
+- `files.maxBytes`: 5MB
+- `files.maxChars`: 200k
+- `files.maxRedirects`: 3
+- `files.timeoutMs`: 10s
+- `files.pdf.maxPages`: 4
+- `files.pdf.maxPixels`: 4,000,000
+- `files.pdf.minTextChars`: 200
+- `images.maxBytes`: 10MB
+- `images.maxRedirects`: 3
+- `images.timeoutMs`: 10s
+- HEIC/HEIF `input_image` sources are accepted and normalized to JPEG before provider delivery.
 
 Security note:
 
-* URL allowlists are enforced before fetch and on redirect hops.
-* Allowlisting a hostname does not bypass private/internal IP blocking.
-* For internet-exposed gateways, apply network egress controls in addition to app-level guards.
+- URL allowlists are enforced before fetch and on redirect hops.
+- Allowlisting a hostname does not bypass private/internal IP blocking.
+- For internet-exposed gateways, apply network egress controls in addition to app-level guards.
   See [Security](/gateway/security).
 
 ## Streaming (SSE)
 
 Set `stream: true` to receive Server-Sent Events (SSE):
 
-* `Content-Type: text/event-stream`
-* Each event line is `event: <type>` and `data: <json>`
-* Stream ends with `data: [DONE]`
+- `Content-Type: text/event-stream`
+- Each event line is `event: <type>` and `data: <json>`
+- Stream ends with `data: [DONE]`
 
 Event types currently emitted:
 
-* `response.created`
-* `response.in_progress`
-* `response.output_item.added`
-* `response.content_part.added`
-* `response.output_text.delta`
-* `response.output_text.done`
-* `response.content_part.done`
-* `response.output_item.done`
-* `response.completed`
-* `response.failed` (on error)
+- `response.created`
+- `response.in_progress`
+- `response.output_item.added`
+- `response.content_part.added`
+- `response.output_text.delta`
+- `response.output_text.done`
+- `response.content_part.done`
+- `response.output_item.done`
+- `response.completed`
+- `response.failed` (on error)
 
 ## Usage
 
@@ -311,21 +313,21 @@ and `prompt_tokens` / `completion_tokens`.
 
 Errors use a JSON object like:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "error": { "message": "...", "type": "invalid_request_error" } }
 ```
 
 Common cases:
 
-* `401` missing/invalid auth
-* `400` invalid request body
-* `405` wrong method
+- `401` missing/invalid auth
+- `400` invalid request body
+- `405` wrong method
 
 ## Examples
 
 Non-streaming:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -sS http://127.0.0.1:18789/v1/responses \
   -H 'Authorization: Bearer YOUR_TOKEN' \
   -H 'Content-Type: application/json' \
@@ -338,7 +340,7 @@ curl -sS http://127.0.0.1:18789/v1/responses \
 
 Streaming:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -N http://127.0.0.1:18789/v1/responses \
   -H 'Authorization: Bearer YOUR_TOKEN' \
   -H 'Content-Type: application/json' \
@@ -352,5 +354,7 @@ curl -N http://127.0.0.1:18789/v1/responses \
 
 ## Related
 
-* [OpenAI chat completions](/gateway/openai-http-api)
-* [OpenAI](/providers/openai)
+- [OpenAI chat completions](/gateway/openai-http-api)
+- [OpenAI](/providers/openai)
+
+---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "7da36c41a5e6853699c0227c282bbb7221316cdbcd0e82d68569b9c07f2f60f2"
+source_hash: "8e426b2056a71a2e80d875252e99ad457dd3ee2688e3f1a0e624a78ad909b33f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -121,6 +121,16 @@ hermes gateway setup  # Set up messaging platforms
 hermes config set     # Set individual config values
 hermes setup          # Or run the full setup wizard to configure everything at once
 ```
+
+:::tip Fastest path: Nous Portal
+One subscription covers 300+ models plus the [Tool Gateway](/docs/user-guide/features/tool-gateway) (web search, image generation, TTS, cloud browser). Skip the per-tool key juggling:
+
+```bash
+hermes setup --portal
+```
+
+That logs you in, sets Nous as your provider, and turns on the Tool Gateway in one command.
+:::
 
 ---
 

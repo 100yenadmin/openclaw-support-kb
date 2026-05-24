@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS permissions"
 source: "https://docs.openclaw.ai/platforms/mac/permissions"
-source_hash: "5e75dbd5a207d433980d424295f7f425d2900c8cd341ba2c3c88ff0c60040bb5"
+source_hash: "06c88101f6e7df3a8832daf3de0cd8091a7ef0d95b9e117e6e3abe46ea2d8390"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/permissions.md"
@@ -13,18 +13,16 @@ duplicate_index: 1
 # macOS permissions
 Source: https://docs.openclaw.ai/platforms/mac/permissions
 
-
-
 macOS permission grants are fragile. TCC associates a permission grant with the
 app's code signature, bundle identifier, and on-disk path. If any of those change,
 macOS treats the app as new and may drop or hide prompts.
 
 ## Requirements for stable permissions
 
-* Same path: run the app from a fixed location (for OpenClaw, `dist/OpenClaw.app`).
-* Same bundle identifier: changing the bundle ID creates a new permission identity.
-* Signed app: unsigned or ad-hoc signed builds do not persist permissions.
-* Consistent signature: use a real Apple Development or Developer ID certificate
+- Same path: run the app from a fixed location (for OpenClaw, `dist/OpenClaw.app`).
+- Same bundle identifier: changing the bundle ID creates a new permission identity.
+- Signed app: unsigned or ad-hoc signed builds do not persist permissions.
+- Consistent signature: use a real Apple Development or Developer ID certificate
   so the signature stays stable across rebuilds.
 
 Ad-hoc signatures generate a new identity every build. macOS will forget previous
@@ -40,7 +38,7 @@ grants, and prompts can disappear entirely until the stale entries are cleared.
 
 Example resets (replace bundle ID as needed):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 sudo tccutil reset Accessibility ai.openclaw.mac
 sudo tccutil reset ScreenCapture ai.openclaw.mac
 sudo tccutil reset AppleEvents
@@ -57,5 +55,7 @@ builds are only acceptable for quick local runs where permissions do not matter.
 
 ## Related
 
-* [macOS app](/platforms/macos)
-* [macOS signing](/platforms/mac/signing)
+- [macOS app](/platforms/macos)
+- [macOS signing](/platforms/mac/signing)
+
+---

@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
 title: "OpenClaw"
-source: "https://docs.openclaw.ai/index"
-source_hash: "d6e47066e35f5cb2b06524891aaf6f27952a878f907cfea2fadd287a9e0dcf3c"
+source: "https://docs.openclaw.ai/"
+source_hash: "4f181f70ec0828fe82cb962c2309303ad858ac1296dea2c601a764851c84f641"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -11,38 +11,49 @@ duplicate_index: 1
 ---
 
 # OpenClaw
-Source: https://docs.openclaw.ai/index
-
-
+Source: https://docs.openclaw.ai/
 
 # OpenClaw 🦞
 
-<p>
-  <img alt="OpenClaw" />
-
-  <img alt="OpenClaw" />
+<p align="center">
+    <img
+        src="/assets/openclaw-logo-text-dark.png"
+        alt="OpenClaw"
+        width="500"
+        class="dark:hidden"
+    />
+    <img
+        src="/assets/openclaw-logo-text.png"
+        alt="OpenClaw"
+        width="500"
+        class="hidden dark:block"
+    />
 </p>
 
-> *"EXFOLIATE! EXFOLIATE!"* — A space lobster, probably
+> _"EXFOLIATE! EXFOLIATE!"_ — A space lobster, probably
 
-<p>
+<p align="center">
   <strong>Any OS gateway for AI agents across Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more.</strong><br />
   Send a message, get an agent response from your pocket. Run one Gateway across built-in channels, bundled channel plugins, WebChat, and mobile nodes.
 </p>
 
-<Columns>
-  <Card title="Get Started" href="/start/getting-started" icon="rocket">
+Columns
+
+
+Get Started
+
     Install OpenClaw and bring up the Gateway in minutes.
-  </Card>
 
-  <Card title="Run Onboarding" href="/start/wizard" icon="sparkles">
+
+Run Onboarding
+
     Guided setup with `openclaw onboard` and pairing flows.
-  </Card>
 
-  <Card title="Open the Control UI" href="/web/control-ui" icon="layout-dashboard">
+
+Open the Control UI
+
     Launch the browser dashboard for chat, config, and sessions.
-  </Card>
-</Columns>
+
 
 ## What is OpenClaw?
 
@@ -52,16 +63,16 @@ OpenClaw is a **self-hosted gateway** that connects your favorite chat apps and 
 
 **What makes it different?**
 
-* **Self-hosted**: runs on your hardware, your rules
-* **Multi-channel**: one Gateway serves built-in channels plus bundled or external channel plugins simultaneously
-* **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
-* **Open source**: MIT licensed, community-driven
+- **Self-hosted**: runs on your hardware, your rules
+- **Multi-channel**: one Gateway serves built-in channels plus bundled or external channel plugins simultaneously
+- **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
+- **Open source**: MIT licensed, community-driven
 
 **What do you need?** Node 24 (recommended), or Node 22 LTS (`22.19+`) for compatibility, an API key from your chosen provider, and 5 minutes. For best quality and security, use the strongest latest-generation model available.
 
 ## How it works
 
-```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```mermaid
 flowchart LR
   A["Chat apps + plugins"] --> B["Gateway"]
   B --> C["Pi agent"]
@@ -75,57 +86,69 @@ The Gateway is the single source of truth for sessions, routing, and channel con
 
 ## Key capabilities
 
-<Columns>
-  <Card title="Multi-channel gateway" icon="network" href="/channels">
+Columns
+
+
+Multi-channel gateway
+
     Discord, iMessage, Signal, Slack, Telegram, WhatsApp, WebChat, and more with a single Gateway process.
-  </Card>
 
-  <Card title="Plugin channels" icon="plug" href="/tools/plugin">
+
+Plugin channels
+
     Bundled plugins add Matrix, Nostr, Twitch, Zalo, and more in normal current releases.
-  </Card>
 
-  <Card title="Multi-agent routing" icon="route" href="/concepts/multi-agent">
+
+Multi-agent routing
+
     Isolated sessions per agent, workspace, or sender.
-  </Card>
 
-  <Card title="Media support" icon="image" href="/nodes/images">
+
+Media support
+
     Send and receive images, audio, and documents.
-  </Card>
 
-  <Card title="Web Control UI" icon="monitor" href="/web/control-ui">
+
+Web Control UI
+
     Browser dashboard for chat, config, sessions, and nodes.
-  </Card>
 
-  <Card title="Mobile nodes" icon="smartphone" href="/nodes">
+
+Mobile nodes
+
     Pair iOS and Android nodes for Canvas, camera, and voice-enabled workflows.
-  </Card>
-</Columns>
+
 
 ## Quick start
 
-<Steps>
-  <Step title="Install OpenClaw">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Install OpenClaw
+
+    ```bash
     npm install -g openclaw@latest
     ```
-  </Step>
 
-  <Step title="Onboard and install the service">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Onboard and install the service
+
+    ```bash
     openclaw onboard --install-daemon
     ```
-  </Step>
 
-  <Step title="Chat">
+
+Chat
+
     Open the Control UI in your browser and send a message:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw dashboard
     ```
 
     Or connect a channel ([Telegram](/channels/telegram) is fastest) and chat from your phone.
-  </Step>
-</Steps>
+
+
 
 Need the full install and dev setup? See [Getting Started](/start/getting-started).
 
@@ -133,23 +156,23 @@ Need the full install and dev setup? See [Getting Started](/start/getting-starte
 
 Open the browser Control UI after the Gateway starts.
 
-* Local default: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
-* Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
+- Local default: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
+- Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
 
-<p>
-  <img alt="OpenClaw" />
+<p align="center">
+  <img src="/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
 </p>
 
 ## Configuration (optional)
 
 Config lives at `~/.openclaw/openclaw.json`.
 
-* If you **do nothing**, OpenClaw uses the bundled Pi binary in RPC mode with per-sender sessions.
-* If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.
+- If you **do nothing**, OpenClaw uses the bundled Pi binary in RPC mode with per-sender sessions.
+- If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.
 
 Example:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     whatsapp: {
@@ -163,52 +186,66 @@ Example:
 
 ## Start here
 
-<Columns>
-  <Card title="Docs hubs" href="/start/hubs" icon="book-open">
+Columns
+
+
+Docs hubs
+
     All docs and guides, organized by use case.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="settings">
+
+Configuration
+
     Core Gateway settings, tokens, and provider config.
-  </Card>
 
-  <Card title="Remote access" href="/gateway/remote" icon="globe">
+
+Remote access
+
     SSH and tailnet access patterns.
-  </Card>
 
-  <Card title="Channels" href="/channels/telegram" icon="message-square">
+
+Channels
+
     Channel-specific setup for Feishu, Microsoft Teams, WhatsApp, Telegram, Discord, and more.
-  </Card>
 
-  <Card title="Nodes" href="/nodes" icon="smartphone">
+
+Nodes
+
     iOS and Android nodes with pairing, Canvas, camera, and device actions.
-  </Card>
 
-  <Card title="Help" href="/help" icon="life-buoy">
+
+Help
+
     Common fixes and troubleshooting entry point.
-  </Card>
-</Columns>
+
 
 ## Learn more
 
-<Columns>
-  <Card title="Full feature list" href="/concepts/features" icon="list">
+Columns
+
+
+Full feature list
+
     Complete channel, routing, and media capabilities.
-  </Card>
 
-  <Card title="Multi-agent routing" href="/concepts/multi-agent" icon="route">
+
+Multi-agent routing
+
     Workspace isolation and per-agent sessions.
-  </Card>
 
-  <Card title="Security" href="/gateway/security" icon="shield">
+
+Security
+
     Tokens, allowlists, and safety controls.
-  </Card>
 
-  <Card title="Troubleshooting" href="/gateway/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Gateway diagnostics and common errors.
-  </Card>
 
-  <Card title="About and credits" href="/reference/credits" icon="info">
+
+About and credits
+
     Project origins, contributors, and license.
-  </Card>
-</Columns>
+
+---

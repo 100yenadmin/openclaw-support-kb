@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tlon"
 source: "https://docs.openclaw.ai/channels/tlon"
-source_hash: "2645b7fe8826b126b1ca4b0f360eda1525bdd59b8984c2dfae1bd3bc26c9a252"
+source_hash: "7931fe4c6631b85e02e1749e5c44c894e761dba8965f2abc246447bcc76d3424"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/tlon.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Tlon
 Source: https://docs.openclaw.ai/channels/tlon
-
-
 
 Tlon is a decentralized messenger built on Urbit. OpenClaw connects to your Urbit ship and can
 respond to DMs and group chat messages. Group replies require an @ mention by default and can
@@ -32,7 +30,7 @@ current npm package:
 
 Install via CLI (npm registry):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/tlon
 ```
 
@@ -41,7 +39,7 @@ version only when you need a reproducible install.
 
 Local checkout (when running from a git repo):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install ./path/to/local/tlon-plugin
 ```
 
@@ -50,8 +48,8 @@ Details: [Plugins](/tools/plugin)
 ## Setup
 
 1. Ensure the Tlon plugin is available.
-   * Current packaged OpenClaw releases already bundle it.
-   * Older/custom installs can add it manually with the commands above.
+   - Current packaged OpenClaw releases already bundle it.
+   - Older/custom installs can add it manually with the commands above.
 2. Gather your ship URL and login code.
 3. Configure `channels.tlon`.
 4. Restart the gateway.
@@ -59,7 +57,7 @@ Details: [Plugins](/tools/plugin)
 
 Minimal config (single account):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -79,7 +77,7 @@ By default, OpenClaw blocks private/internal hostnames and IP ranges for SSRF pr
 If your ship is running on a private network (localhost, LAN IP, or internal hostname),
 you must explicitly opt in:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -92,9 +90,9 @@ you must explicitly opt in:
 
 This applies to URLs like:
 
-* `http://localhost:8080`
-* `http://192.168.x.x:8080`
-* `http://my-ship.local:8080`
+- `http://localhost:8080`
+- `http://192.168.x.x:8080`
+- `http://my-ship.local:8080`
 
 ⚠️ Only enable this if you trust your local network. This setting disables SSRF protections
 for requests to your ship URL.
@@ -103,7 +101,7 @@ for requests to your ship URL.
 
 Auto-discovery is enabled by default. You can also pin channels manually:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -115,7 +113,7 @@ Auto-discovery is enabled by default. You can also pin channels manually:
 
 Disable auto-discovery:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -129,7 +127,7 @@ Disable auto-discovery:
 
 DM allowlist (empty = no DMs allowed, use `ownerShip` for approval flow):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -141,7 +139,7 @@ DM allowlist (empty = no DMs allowed, use `ownerShip` for approval flow):
 
 Group authorization (restricted by default):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -166,7 +164,7 @@ Group authorization (restricted by default):
 
 Set an owner ship to receive approval requests when unauthorized users try to interact:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -182,15 +180,15 @@ channel messages are always allowed. You don't need to add the owner to `dmAllow
 
 When set, the owner receives DM notifications for:
 
-* DM requests from ships not in the allowlist
-* Mentions in channels without authorization
-* Group invite requests
+- DM requests from ships not in the allowlist
+- Mentions in channels without authorization
+- Group invite requests
 
 ## Auto-accept settings
 
 Auto-accept DM invites (for ships in dmAllowlist):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -202,7 +200,7 @@ Auto-accept DM invites (for ships in dmAllowlist):
 
 Auto-accept group invites from trusted ships:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     tlon: {
@@ -220,27 +218,27 @@ allowlist to the ships whose group invites should be accepted automatically.
 
 Use these with `openclaw message send` or cron delivery:
 
-* DM: `~sampel-palnet` or `dm/~sampel-palnet`
-* Group: `chat/~host-ship/channel` or `group:~host-ship/channel`
+- DM: `~sampel-palnet` or `dm/~sampel-palnet`
+- Group: `chat/~host-ship/channel` or `group:~host-ship/channel`
 
 ## Bundled skill
 
 The Tlon plugin includes a bundled skill ([`@tloncorp/tlon-skill`](https://github.com/tloncorp/tlon-skill))
 that provides CLI access to Tlon operations:
 
-* **Contacts**: get/update profiles, list contacts
-* **Channels**: list, create, post messages, fetch history
-* **Groups**: list, create, manage members
-* **DMs**: send messages, react to messages
-* **Reactions**: add/remove emoji reactions to posts and DMs
-* **Settings**: manage plugin permissions via slash commands
+- **Contacts**: get/update profiles, list contacts
+- **Channels**: list, create, post messages, fetch history
+- **Groups**: list, create, manage members
+- **DMs**: send messages, react to messages
+- **Reactions**: add/remove emoji reactions to posts and DMs
+- **Settings**: manage plugin permissions via slash commands
 
 The skill is automatically available when the plugin is installed.
 
 ## Capabilities
 
-| Feature         | Status                                 |
-| --------------- | -------------------------------------- |
+| Feature         | Status                                  |
+| --------------- | --------------------------------------- |
 | Direct messages | ✅ Supported                            |
 | Groups/channels | ✅ Supported (mention-gated by default) |
 | Threads         | ✅ Supported (auto-replies in thread)   |
@@ -254,7 +252,7 @@ The skill is automatically available when the plugin is installed.
 
 Run this ladder first:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw status
 openclaw gateway status
 openclaw logs --follow
@@ -263,10 +261,10 @@ openclaw doctor
 
 Common failures:
 
-* **DMs ignored**: sender not in `dmAllowlist` and no `ownerShip` configured for approval flow.
-* **Group messages ignored**: channel not discovered or sender not authorized.
-* **Connection errors**: check ship URL is reachable; enable `allowPrivateNetwork` for local ships.
-* **Auth errors**: verify login code is current (codes rotate).
+- **DMs ignored**: sender not in `dmAllowlist` and no `ownerShip` configured for approval flow.
+- **Group messages ignored**: channel not discovered or sender not authorized.
+- **Connection errors**: check ship URL is reachable; enable `allowPrivateNetwork` for local ships.
+- **Auth errors**: verify login code is current (codes rotate).
 
 ## Configuration reference
 
@@ -274,33 +272,35 @@ Full configuration: [Configuration](/gateway/configuration)
 
 Provider options:
 
-* `channels.tlon.enabled`: enable/disable channel startup.
-* `channels.tlon.ship`: bot's Urbit ship name (e.g. `~sampel-palnet`).
-* `channels.tlon.url`: ship URL (e.g. `https://sampel-palnet.tlon.network`).
-* `channels.tlon.code`: ship login code.
-* `channels.tlon.allowPrivateNetwork`: allow localhost/LAN URLs (SSRF bypass).
-* `channels.tlon.ownerShip`: owner ship for approval system (always authorized).
-* `channels.tlon.dmAllowlist`: ships allowed to DM (empty = none).
-* `channels.tlon.autoAcceptDmInvites`: auto-accept DMs from allowlisted ships.
-* `channels.tlon.autoAcceptGroupInvites`: auto-accept group invites from allowlisted ships.
-* `channels.tlon.groupInviteAllowlist`: ships whose group invites may be auto-accepted.
-* `channels.tlon.autoDiscoverChannels`: auto-discover group channels (default: true).
-* `channels.tlon.groupChannels`: manually pinned channel nests.
-* `channels.tlon.defaultAuthorizedShips`: ships authorized for all channels.
-* `channels.tlon.authorization.channelRules`: per-channel auth rules.
-* `channels.tlon.showModelSignature`: append model name to messages.
+- `channels.tlon.enabled`: enable/disable channel startup.
+- `channels.tlon.ship`: bot's Urbit ship name (e.g. `~sampel-palnet`).
+- `channels.tlon.url`: ship URL (e.g. `https://sampel-palnet.tlon.network`).
+- `channels.tlon.code`: ship login code.
+- `channels.tlon.allowPrivateNetwork`: allow localhost/LAN URLs (SSRF bypass).
+- `channels.tlon.ownerShip`: owner ship for approval system (always authorized).
+- `channels.tlon.dmAllowlist`: ships allowed to DM (empty = none).
+- `channels.tlon.autoAcceptDmInvites`: auto-accept DMs from allowlisted ships.
+- `channels.tlon.autoAcceptGroupInvites`: auto-accept group invites from allowlisted ships.
+- `channels.tlon.groupInviteAllowlist`: ships whose group invites may be auto-accepted.
+- `channels.tlon.autoDiscoverChannels`: auto-discover group channels (default: true).
+- `channels.tlon.groupChannels`: manually pinned channel nests.
+- `channels.tlon.defaultAuthorizedShips`: ships authorized for all channels.
+- `channels.tlon.authorization.channelRules`: per-channel auth rules.
+- `channels.tlon.showModelSignature`: append model name to messages.
 
 ## Notes
 
-* Group replies require a mention (e.g. `~your-bot-ship`) to respond.
-* Thread replies: if the inbound message is in a thread, OpenClaw replies in-thread.
-* Rich text: Markdown formatting (bold, italic, code, headers, lists) is converted to Tlon's native format.
-* Images: URLs are uploaded to Tlon storage and embedded as image blocks.
+- Group replies require a mention (e.g. `~your-bot-ship`) to respond.
+- Thread replies: if the inbound message is in a thread, OpenClaw replies in-thread.
+- Rich text: Markdown formatting (bold, italic, code, headers, lists) is converted to Tlon's native format.
+- Images: URLs are uploaded to Tlon storage and embedded as image blocks.
 
 ## Related
 
-* [Channels Overview](/channels) — all supported channels
-* [Pairing](/channels/pairing) — DM authentication and pairing flow
-* [Groups](/channels/groups) — group chat behavior and mention gating
-* [Channel Routing](/channels/channel-routing) — session routing for messages
-* [Security](/gateway/security) — access model and hardening
+- [Channels Overview](/channels) — all supported channels
+- [Pairing](/channels/pairing) — DM authentication and pairing flow
+- [Groups](/channels/groups) — group chat behavior and mention gating
+- [Channel Routing](/channels/channel-routing) — session routing for messages
+- [Security](/gateway/security) — access model and hardening
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Path"
 source: "https://docs.openclaw.ai/cli/path"
-source_hash: "8c4c2a5c187f888ba5a87ace88d3a608beee556a06de9fee09c069ad88f80890"
+source_hash: "713a9b1306be288d3082d3987a6acfea829c316591163b84fb15715d71b95033"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/path.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Path
 Source: https://docs.openclaw.ai/cli/path
-
-
 
 # `openclaw path`
 
@@ -25,16 +23,16 @@ location without hand-rolling per-file parsers.
 
 The CLI mirrors the substrate's public verbs:
 
-* `resolve` is concrete and single-match.
-* `find` is the multi-match verb for wildcards, unions, predicates, and
+- `resolve` is concrete and single-match.
+- `find` is the multi-match verb for wildcards, unions, predicates, and
   positional expansion.
-* `set` only accepts concrete paths or insertion markers; wildcard patterns are
+- `set` only accepts concrete paths or insertion markers; wildcard patterns are
   rejected before writing.
 
 `path` is provided by the bundled optional `oc-path` plugin. Enable it before
 first use:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins enable oc-path
 ```
 
@@ -56,13 +54,13 @@ line endings, and surrounding formatting.
 Use it when the thing you want has a logical address, but the physical file
 shape varies:
 
-* A hook wants to read one setting from commented JSONC without losing comments
+- A hook wants to read one setting from commented JSONC without losing comments
   when it writes the value back.
-* A maintenance script wants to find every matching event field in a JSONL log
+- A maintenance script wants to find every matching event field in a JSONL log
   without loading the whole log into a custom parser.
-* An editor extension wants to jump to a markdown section or bullet item by
+- An editor extension wants to jump to a markdown section or bullet item by
   slug, then render the exact line it resolved to.
-* An agent wants to dry-run a tiny workspace edit before applying it, with the
+- An agent wants to dry-run a tiny workspace edit before applying it, with the
   changed bytes visible in review.
 
 You probably do not need `openclaw path` for ordinary whole-file edits, rich
@@ -74,32 +72,32 @@ repeatable terminal command is clearer than another bespoke parser.
 
 Read one value from a human-edited config file:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path resolve 'oc://config.jsonc/plugins/github/enabled'
 ```
 
 Preview a write without touching disk:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path set 'oc://config.jsonc/plugins/github/enabled' 'true' --dry-run
 ```
 
 Find matching records in an append-only JSONL log:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path find 'oc://session.jsonl/[event=tool_call]/name'
 ```
 
 Address an instruction in markdown by section and item instead of by line
 number:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path resolve 'oc://AGENTS.md/runtime-safety/openclaw-gateway'
 ```
 
 Validate a path in CI or a preflight script before the script reads or writes:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path validate 'oc://AGENTS.md/tools/$last/risk'
 ```
 
@@ -156,22 +154,22 @@ oc://FILE/SECTION/ITEM/FIELD?session=SCOPE
 Slot rules: `field` requires `item`, and `item` requires `section`. Across all
 four slots:
 
-* **Quoted segments** — `"a/b.c"` survives `/` and `.` separators.
+- **Quoted segments** — `"a/b.c"` survives `/` and `.` separators.
   Content is byte-literal; `"` and `\` are not allowed inside quotes.
   The file slot is also quote-aware: `oc://"skills/email-drafter"/Tools/$last`
   treats `skills/email-drafter` as a single file path.
-* **Predicates** — `[k=v]`, `[k!=v]`, `[k<v]`, `[k<=v]`, `[k>v]`,
+- **Predicates** — `[k=v]`, `[k!=v]`, `[k<v]`, `[k<=v]`, `[k>v]`,
   `[k>=v]`. Numeric ops require both sides to coerce to finite numbers.
-* **Unions** — `{a,b,c}` matches any of the alternatives.
-* **Wildcards** — `*` (single sub-segment) and `**` (zero-or-more,
+- **Unions** — `{a,b,c}` matches any of the alternatives.
+- **Wildcards** — `*` (single sub-segment) and `**` (zero-or-more,
   recursive). `find` accepts these; `resolve` and `set` reject them as
   ambiguous.
-* **Positional** — `$first` / `$last` resolve to the first / last index or
+- **Positional** — `$first` / `$last` resolve to the first / last index or
   declared key.
-* **Ordinal** — `#N` for Nth match by document order.
-* **Insertion markers** — `+`, `+key`, `+nnn` for keyed / indexed
+- **Ordinal** — `#N` for Nth match by document order.
+- **Insertion markers** — `+`, `+key`, `+nnn` for keyed / indexed
   insertion (use with `set`).
-* **Session scope** — `?session=cron-daily` etc. Orthogonal to slot
+- **Session scope** — `?session=cron-daily` etc. Orthogonal to slot
   nesting. Session values are raw, not percent-decoded; they may not contain
   control characters or reserved query delimiters (`?`, `&`, `%`).
 
@@ -201,17 +199,17 @@ the per-kind AST shape.
 
 `set` writes one concrete target:
 
-* Markdown frontmatter values and `- key: value` item fields are string leaves.
+- Markdown frontmatter values and `- key: value` item fields are string leaves.
   Markdown insertions append sections, frontmatter keys, or section items and
   render a canonical markdown shape for the changed file.
-* JSONC leaf writes coerce the string value to the existing leaf type
+- JSONC leaf writes coerce the string value to the existing leaf type
   (`string`, finite `number`, `true`/`false`, or `null`). JSONC object and array
   insertions parse `<value>` as JSON and use the `jsonc-parser` edit path for
   ordinary leaf writes, preserving comments and nearby formatting.
-* JSONL leaf writes coerce like JSONC inside a line. Whole-line replacement and
+- JSONL leaf writes coerce like JSONC inside a line. Whole-line replacement and
   append parse `<value>` as JSON. Rendered JSONL preserves the file's dominant
   LF/CRLF line-ending convention.
-* YAML leaf writes coerce to the existing scalar type (`string`, finite
+- YAML leaf writes coerce to the existing scalar type (`string`, finite
   `number`, `true`/`false`, or `null`). YAML insertions use the bundled
   `yaml` package's document API for map/sequence updates. Malformed YAML
   documents with parser errors are refused before mutation with `parse-error`.
@@ -224,7 +222,7 @@ of the full rendered file.
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Validate a path (no filesystem access)
 openclaw path validate 'oc://AGENTS.md/Tools/$last/risk'
 
@@ -249,7 +247,7 @@ openclaw path emit ./AGENTS.md
 
 More grammar examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Quote keys containing / or .
 openclaw path resolve 'oc://config.jsonc/agents.defaults.models/"anthropic/claude-opus-4-7"/alias'
 
@@ -294,7 +292,7 @@ file extension. The examples below use the fixtures from the PR description.
 
 ### Markdown
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 <!-- frontmatter.md -->
 ---
 name: drafter
@@ -307,7 +305,7 @@ tier: core
 - send_email: enabled
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 $ openclaw path resolve 'oc://x.md/[frontmatter]/tier' --file frontmatter.md --human
 leaf @ L4: "core" (string)
 
@@ -327,7 +325,7 @@ even when the source uses underscores (`send_email` → `send-email`).
 
 ### JSONC
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 // config.jsonc
 {
   "plugins": {
@@ -337,7 +335,7 @@ even when the source uses underscores (`send_email` → `send-email`).
 }
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 $ openclaw path resolve 'oc://config.jsonc/plugins/github/enabled' --file config.jsonc --human
 leaf @ L4: "true" (boolean)
 
@@ -356,13 +354,13 @@ JSONC edits go through `jsonc-parser`, so comments and whitespace survive a
 
 ### JSONL
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 {"event":"start","userId":"u1","ts":1}
 {"event":"action","userId":"u1","ts":2}
 {"event":"end","userId":"u1","ts":3}
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 $ openclaw path find 'oc://session.jsonl/[event=action]/userId' --file session.jsonl --human
 1 match for oc://session.jsonl/[event=action]/userId:
   oc://session.jsonl/L2/userId  →  leaf @ L2: "u1" (string)
@@ -376,7 +374,7 @@ know the line number, or by the canonical `LN` segment when you do.
 
 ### YAML
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 # workflow.yaml
 name: inbox-triage
 steps:
@@ -386,7 +384,7 @@ steps:
     command: openclaw.invoke
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 $ openclaw path resolve 'oc://workflow.yaml/steps/0/id' --file workflow.yaml --human
 leaf @ L3: "fetch" (string)
 
@@ -413,7 +411,7 @@ Read a single leaf or node. Wildcards are rejected — use `find` for those.
 Exits `0` on a match, `1` on a clean miss, `2` on a parse error or refused
 pattern.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path resolve 'oc://AGENTS.md/tools/gh/risk' --human
 openclaw path resolve 'oc://gateway.jsonc/server/port' --json
 ```
@@ -425,7 +423,7 @@ on at least one match, `1` on zero. File-slot wildcards are rejected with
 `OC_PATH_FILE_WILDCARD_UNSUPPORTED` — pass a concrete file (multi-file
 globbing is a follow-up feature).
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path find 'oc://AGENTS.md/tools/**/risk'
 openclaw path find 'oc://session.jsonl/[event=action]/userId'
 openclaw path find 'oc://config.jsonc/plugins/{github,slack}/enabled'
@@ -438,7 +436,7 @@ written without touching the file. Add `--diff` for a unified diff preview.
 Exits `0` on a successful write, `1` if the substrate refuses (for example, a
 sentinel guard hit), `2` on parse errors.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path set 'oc://gateway.jsonc/version' '2.0' --dry-run
 openclaw path set 'oc://gateway.jsonc/version' '2.0' --dry-run --diff
 openclaw path set 'oc://gateway.jsonc/version' '2.0'
@@ -454,7 +452,7 @@ Parse-only check. No filesystem access. Useful when you want to confirm a
 template path is well-formed before substituting variables, or when you want
 the structural breakdown for debugging:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 $ openclaw path validate 'oc://AGENTS.md/tools/gh' --human
 valid: oc://AGENTS.md/tools/gh
   file:    AGENTS.md
@@ -472,7 +470,7 @@ be byte-identical to the input on a sound file — divergence indicates a
 parser bug or a sentinel hit. Useful for debugging substrate behavior on
 real-world inputs.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw path emit ./AGENTS.md
 openclaw path emit ./gateway.jsonc --json
 ```
@@ -493,18 +491,20 @@ auto-detection.
 
 ## Notes
 
-* `set` writes bytes through the substrate's emit path, which applies the
+- `set` writes bytes through the substrate's emit path, which applies the
   redaction-sentinel guard automatically. A leaf carrying
   `__OPENCLAW_REDACTED__` (verbatim or as a substring) is refused at write
   time.
-* JSONC parsing and leaf edits use the plugin-local `jsonc-parser`
+- JSONC parsing and leaf edits use the plugin-local `jsonc-parser`
   dependency, so comments and formatting are preserved on ordinary leaf
   writes instead of going through a hand-rolled parser/re-render path.
-* `path` does not know about LKG. If the file is LKG-tracked, the next
+- `path` does not know about LKG. If the file is LKG-tracked, the next
   observe call decides whether to promote / recover. `set --batch` for
   atomic multi-set through the LKG promote/recover lifecycle is planned
   alongside the LKG-recovery substrate.
 
 ## Related
 
-* [CLI reference](/cli)
+- [CLI reference](/cli)
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Oracle Cloud"
 source: "https://docs.openclaw.ai/install/oracle"
-source_hash: "52b9eca1c987e517e6d9f397511690d866b7ef66e306ef7b0ffb0a91a9b6cd0f"
+source_hash: "03d6feb7f3ecdb9c9a3a182f94e92bbf6ece836e8a7a28af5e3adf67ac1525aa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/oracle.md"
@@ -13,40 +13,46 @@ duplicate_index: 1
 # Oracle Cloud
 Source: https://docs.openclaw.ai/install/oracle
 
-
-
 Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up to 4 OCPU, 24 GB RAM, 200 GB storage) at no cost.
 
 ## Prerequisites
 
-* Oracle Cloud account ([signup](https://www.oracle.com/cloud/free/)) -- see [community signup guide](https://gist.github.com/rssnyder/51e3cfedd730e7dd5f4a816143b25dbd) if you hit issues
-* Tailscale account (free at [tailscale.com](https://tailscale.com))
-* An SSH key pair
-* About 30 minutes
+- Oracle Cloud account ([signup](https://www.oracle.com/cloud/free/)) -- see [community signup guide](https://gist.github.com/rssnyder/51e3cfedd730e7dd5f4a816143b25dbd) if you hit issues
+- Tailscale account (free at [tailscale.com](https://tailscale.com))
+- An SSH key pair
+- About 30 minutes
 
 ## Setup
 
-<Steps>
-  <Step title="Create an OCI instance">
+Steps
+
+
+Create an OCI instance
+
     1. Log into [Oracle Cloud Console](https://cloud.oracle.com/).
     2. Navigate to **Compute > Instances > Create Instance**.
     3. Configure:
-       * **Name:** `openclaw`
-       * **Image:** Ubuntu 24.04 (aarch64)
-       * **Shape:** `VM.Standard.A1.Flex` (Ampere ARM)
-       * **OCPUs:** 2 (or up to 4)
-       * **Memory:** 12 GB (or up to 24 GB)
-       * **Boot volume:** 50 GB (up to 200 GB free)
-       * **SSH key:** Add your public key
+       - **Name:** `openclaw`
+       - **Image:** Ubuntu 24.04 (aarch64)
+       - **Shape:** `VM.Standard.A1.Flex` (Ampere ARM)
+       - **OCPUs:** 2 (or up to 4)
+       - **Memory:** 12 GB (or up to 24 GB)
+       - **Boot volume:** 50 GB (up to 200 GB free)
+       - **SSH key:** Add your public key
     4. Click **Create** and note the public IP address.
 
-    <Tip>
-      If instance creation fails with "Out of capacity", try a different availability domain or retry later. Free tier capacity is limited.
-    </Tip>
-  </Step>
 
-  <Step title="Connect and update the system">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tip
+
+    If instance creation fails with "Out of capacity", try a different availability domain or retry later. Free tier capacity is limited.
+
+
+
+
+
+Connect and update the system
+
+    ```bash
     ssh ubuntu@YOUR_PUBLIC_IP
 
     sudo apt update && sudo apt upgrade -y
@@ -54,40 +60,52 @@ Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up
     ```
 
     `build-essential` is required for ARM compilation of some dependencies.
-  </Step>
 
-  <Step title="Configure user and hostname">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Configure user and hostname
+
+    ```bash
     sudo hostnamectl set-hostname openclaw
     sudo passwd ubuntu
     sudo loginctl enable-linger ubuntu
     ```
 
     Enabling linger keeps user services running after logout.
-  </Step>
 
-  <Step title="Install Tailscale">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Install Tailscale
+
+    ```bash
     curl -fsSL https://tailscale.com/install.sh | sh
     sudo tailscale up --ssh --hostname=openclaw
     ```
 
     From now on, connect via Tailscale: `ssh ubuntu@openclaw`.
-  </Step>
 
-  <Step title="Install OpenClaw">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Install OpenClaw
+
+    ```bash
     curl -fsSL https://openclaw.ai/install.sh | bash
     source ~/.bashrc
     ```
 
     When prompted "How do you want to hatch your bot?", select **Do this later**.
-  </Step>
 
-  <Step title="Configure the gateway">
+
+
+
+Configure the gateway
+
     Use token auth with Tailscale Serve for secure remote access.
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw config set gateway.bind loopback
     openclaw config set gateway.auth.mode token
     openclaw doctor --generate-gateway-token
@@ -98,9 +116,12 @@ Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up
     ```
 
     `gateway.trustedProxies=["127.0.0.1"]` here is only for the local Tailscale Serve proxy's forwarded-IP/local-client handling. It is **not** `gateway.auth.mode: "trusted-proxy"`. Diff viewer routes keep fail-closed behavior in this setup: raw `127.0.0.1` viewer requests without forwarded proxy headers can return `Diff not found`. Use `mode=file` / `mode=both` for attachments, or intentionally enable remote viewers and set `plugins.entries.diffs.config.viewerBaseUrl` (or pass a proxy `baseUrl`) if you need shareable viewer links.
-  </Step>
 
-  <Step title="Lock down VCN security">
+
+
+
+Lock down VCN security
+
     Block all traffic except Tailscale at the network edge:
 
     1. Go to **Networking > Virtual Cloud Networks** in the OCI Console.
@@ -109,10 +130,13 @@ Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up
     4. Keep default egress rules (allow all outbound).
 
     This blocks SSH on port 22, HTTP, HTTPS, and everything else at the network edge. You can only connect via Tailscale from this point on.
-  </Step>
 
-  <Step title="Verify">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Verify
+
+    ```bash
     openclaw --version
     systemctl --user status openclaw-gateway.service
     tailscale serve status
@@ -126,8 +150,8 @@ Run a persistent OpenClaw Gateway on Oracle Cloud's **Always Free** ARM tier (up
     ```
 
     Replace `<tailnet-name>` with your tailnet name (visible in `tailscale status`).
-  </Step>
-</Steps>
+
+
 
 ## Verify the security posture
 
@@ -144,14 +168,14 @@ With the VCN locked down (only UDP 41641 open) and the Gateway bound to loopback
 
 Still recommended:
 
-* `chmod 700 ~/.openclaw` to restrict credential file permissions.
-* `openclaw security audit` for an OpenClaw-specific posture check.
-* Regular `sudo apt update && sudo apt upgrade` for OS patches.
-* Review devices in the [Tailscale admin console](https://login.tailscale.com/admin) periodically.
+- `chmod 700 ~/.openclaw` to restrict credential file permissions.
+- `openclaw security audit` for an OpenClaw-specific posture check.
+- Regular `sudo apt update && sudo apt upgrade` for OS patches.
+- Review devices in the [Tailscale admin console](https://login.tailscale.com/admin) periodically.
 
 Quick verification commands:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Confirm no public ports are listening
 sudo ss -tlnp | grep -v '127.0.0.1\|::1'
 
@@ -166,9 +190,9 @@ sudo systemctl disable --now ssh
 
 The Always Free tier is ARM (`aarch64`). Most OpenClaw features work fine; a small number of native binaries need ARM builds:
 
-* Node.js, Telegram, WhatsApp (Baileys): pure JavaScript, no issues.
-* Most npm packages with native code: pre-built `linux-arm64` artifacts available.
-* Optional CLI helpers (e.g. Go/Rust binaries shipped by skills): check for an `aarch64` / `linux-arm64` release before installing.
+- Node.js, Telegram, WhatsApp (Baileys): pure JavaScript, no issues.
+- Most npm packages with native code: pre-built `linux-arm64` artifacts available.
+- Optional CLI helpers (e.g. Go/Rust binaries shipped by skills): check for an `aarch64` / `linux-arm64` release before installing.
 
 Verify the architecture with `uname -m` (should print `aarch64`). For binaries without an ARM build, install from source or skip them.
 
@@ -176,12 +200,12 @@ Verify the architecture with `uname -m` (should print `aarch64`). For binaries w
 
 OpenClaw state lives under:
 
-* `~/.openclaw/` — `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
-* `~/.openclaw/workspace/` — the agent workspace (SOUL.md, memory, artifacts).
+- `~/.openclaw/` — `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
+- `~/.openclaw/workspace/` — the agent workspace (SOUL.md, memory, artifacts).
 
 These survive reboots. To take a portable snapshot:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw backup create
 ```
 
@@ -189,7 +213,7 @@ openclaw backup create
 
 If Tailscale Serve is not working, use an SSH tunnel from your local machine:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 ssh -L 18789:127.0.0.1:18789 ubuntu@openclaw
 ```
 
@@ -207,12 +231,14 @@ Then open `http://localhost:18789`.
 
 ## Next steps
 
-* [Channels](/channels) -- connect Telegram, WhatsApp, Discord, and more
-* [Gateway configuration](/gateway/configuration) -- all config options
-* [Updating](/install/updating) -- keep OpenClaw up to date
+- [Channels](/channels) -- connect Telegram, WhatsApp, Discord, and more
+- [Gateway configuration](/gateway/configuration) -- all config options
+- [Updating](/install/updating) -- keep OpenClaw up to date
 
 ## Related
 
-* [Install overview](/install)
-* [GCP](/install/gcp)
-* [VPS hosting](/vps)
+- [Install overview](/install)
+- [GCP](/install/gcp)
+- [VPS hosting](/vps)
+
+---

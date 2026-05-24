@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
-source_hash: "219029075bc5e8bc2ab5a665b1532d8397faabe5be202a9aec2b25202411ee52"
+source_hash: "65b39fb3e24e4664eb811f2179ab133220e08367f3294666b838120500959019"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-models.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Local models
 Source: https://docs.openclaw.ai/gateway/local-models
 
-
-
 Local models are doable. They also raise the bar on hardware, context size, and prompt-injection defense — small or aggressively quantized cards truncate context and leak safety. This page is the opinionated guide for higher-end local stacks and custom OpenAI-compatible local servers. For lowest-friction onboarding, start with [LM Studio](/providers/lmstudio) or [Ollama](/providers/ollama) and `openclaw onboard`.
 
 For local servers that should start only when a selected model needs them, see
@@ -22,7 +20,7 @@ For local servers that should start only when a selected model needs them, see
 
 ## Hardware floor
 
-Aim high: **≥2 maxed-out Mac Studios or an equivalent GPU rig (\~\$30k+)** for a comfortable agent loop. A single **24 GB** GPU works only for lighter prompts at higher latency. Always run the **largest / full-size variant you can host**; small or heavily quantized checkpoints raise prompt-injection risk (see [Security](/gateway/security)).
+Aim high: **≥2 maxed-out Mac Studios or an equivalent GPU rig (~$30k+)** for a comfortable agent loop. A single **24 GB** GPU works only for lighter prompts at higher latency. Always run the **largest / full-size variant you can host**; small or heavily quantized checkpoints raise prompt-injection risk (see [Security](/gateway/security)).
 
 ## Pick a backend
 
@@ -36,15 +34,15 @@ Aim high: **≥2 maxed-out Mac Studios or an equivalent GPU rig (\~\$30k+)** for
 
 Use Responses API (`api: "openai-responses"`) when the backend supports it (LM Studio does). Otherwise stick to Chat Completions (`api: "openai-completions"`).
 
-<Warning>
-  **WSL2 + Ollama + NVIDIA/CUDA users:** The official Ollama Linux installer enables a systemd service with `Restart=always`. On WSL2 GPU setups, autostart can reload the last model during boot and pin host memory. If your WSL2 VM repeatedly restarts after enabling Ollama, see [WSL2 crash loop](/providers/ollama#wsl2-crash-loop-repeated-reboots).
-</Warning>
+Warning
+
+**WSL2 + Ollama + NVIDIA/CUDA users:** The official Ollama Linux installer enables a systemd service with `Restart=always`. On WSL2 GPU setups, autostart can reload the last model during boot and pin host memory. If your WSL2 VM repeatedly restarts after enabling Ollama, see [WSL2 crash loop](/providers/ollama#wsl2-crash-loop-repeated-reboots).
 
 ## Recommended: LM Studio + large local model (Responses API)
 
 Best current local stack. Load a large model in LM Studio (for example, a full-size Qwen, DeepSeek, or Llama build), enable the local server (default `http://127.0.0.1:1234`), and use Responses API to keep reasoning separate from final text.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -81,18 +79,18 @@ Best current local stack. Load a large model in LM Studio (for example, a full-s
 
 **Setup checklist**
 
-* Install LM Studio: [https://lmstudio.ai](https://lmstudio.ai)
-* In LM Studio, download the **largest model build available** (avoid "small"/heavily quantized variants), start the server, confirm `http://127.0.0.1:1234/v1/models` lists it.
-* Replace `my-local-model` with the actual model ID shown in LM Studio.
-* Keep the model loaded; cold-load adds startup latency.
-* Adjust `contextWindow`/`maxTokens` if your LM Studio build differs.
-* For WhatsApp, stick to Responses API so only final text is sent.
+- Install LM Studio: [https://lmstudio.ai](https://lmstudio.ai)
+- In LM Studio, download the **largest model build available** (avoid "small"/heavily quantized variants), start the server, confirm `http://127.0.0.1:1234/v1/models` lists it.
+- Replace `my-local-model` with the actual model ID shown in LM Studio.
+- Keep the model loaded; cold-load adds startup latency.
+- Adjust `contextWindow`/`maxTokens` if your LM Studio build differs.
+- For WhatsApp, stick to Responses API so only final text is sent.
 
 Keep hosted models configured even when running local; use `models.mode: "merge"` so fallbacks stay available.
 
 ### Hybrid config: hosted primary, local fallback
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -137,8 +135,8 @@ Swap the primary and fallback order; keep the same providers block and `models.m
 
 ### Regional hosting / data routing
 
-* Hosted MiniMax/Kimi/GLM variants also exist on OpenRouter with region-pinned endpoints (e.g., US-hosted). Pick the regional variant there to keep traffic in your chosen jurisdiction while still using `models.mode: "merge"` for Anthropic/OpenAI fallbacks.
-* Local-only remains the strongest privacy path; hosted regional routing is the middle ground when you need provider features but want control over data flow.
+- Hosted MiniMax/Kimi/GLM variants also exist on OpenRouter with region-pinned endpoints (e.g., US-hosted). Pick the regional variant there to keep traffic in your chosen jurisdiction while still using `models.mode: "merge"` for Anthropic/OpenAI fallbacks.
+- Local-only remains the strongest privacy path; hosted regional routing is the middle ground when you need provider features but want control over data flow.
 
 ## Other OpenAI-compatible local proxies
 
@@ -148,7 +146,7 @@ endpoint. Use the Chat Completions adapter unless the backend explicitly
 documents `/v1/responses` support. Replace the provider block above with your
 endpoint and model ID:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -192,8 +190,8 @@ include the provider prefix there. For example, an MLX server started with
 `mlx_lm.server --model mlx-community/Qwen3-30B-A3B-6bit` should use this
 catalog id and model ref:
 
-* `models.providers.mlx.models[].id: "mlx-community/Qwen3-30B-A3B-6bit"`
-* `agents.defaults.model.primary: "mlx/mlx-community/Qwen3-30B-A3B-6bit"`
+- `models.providers.mlx.models[].id: "mlx-community/Qwen3-30B-A3B-6bit"`
+- `agents.defaults.model.primary: "mlx/mlx-community/Qwen3-30B-A3B-6bit"`
 
 Set `input: ["text", "image"]` on local or proxied vision models so image
 attachments are injected into agent turns. Interactive custom-provider
@@ -209,47 +207,44 @@ applies only to model HTTP requests, including connect, headers, body streaming,
 and the total guarded-fetch abort. If the agent or run timeout is lower, raise
 that ceiling too because provider timeouts cannot extend the whole agent run.
 
-<Note>
-  For custom OpenAI-compatible providers, persisting a non-secret local marker such as `apiKey: "ollama-local"` is accepted when `baseUrl` resolves to loopback, a private LAN, `.local`, or a bare hostname. OpenClaw treats it as a valid local credential instead of reporting a missing key. Use a real value for any provider that accepts a public hostname.
-</Note>
+Note
+
+For custom OpenAI-compatible providers, persisting a non-secret local marker such as `apiKey: "ollama-local"` is accepted when `baseUrl` resolves to loopback, a private LAN, `.local`, or a bare hostname. OpenClaw treats it as a valid local credential instead of reporting a missing key. Use a real value for any provider that accepts a public hostname.
 
 Behavior note for local/proxied `/v1` backends:
 
-* OpenClaw treats these as proxy-style OpenAI-compatible routes, not native
+- OpenClaw treats these as proxy-style OpenAI-compatible routes, not native
   OpenAI endpoints
-* native OpenAI-only request shaping does not apply here: no
+- native OpenAI-only request shaping does not apply here: no
   `service_tier`, no Responses `store`, no OpenAI reasoning-compat payload
   shaping, and no prompt-cache hints
-* hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
+- hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
   are not injected on these custom proxy URLs
 
 Compatibility notes for stricter OpenAI-compatible backends:
 
-* Some servers accept only string `messages[].content` on Chat Completions, not
+- Some servers accept only string `messages[].content` on Chat Completions, not
   structured content-part arrays. Set
   `models.providers.<provider>.models[].compat.requiresStringContent: true` for
   those endpoints.
-
-* Some local models emit standalone bracketed tool requests as text, such as
+- Some local models emit standalone bracketed tool requests as text, such as
   `[tool_name]` followed by JSON and `[END_TOOL_REQUEST]`. OpenClaw promotes
   those into real tool calls only when the name exactly matches a registered
   tool for the turn; otherwise the block is treated as unsupported text and is
   hidden from user-visible replies.
-
-* If a model emits JSON, XML, or ReAct-style text that looks like a tool call
+- If a model emits JSON, XML, or ReAct-style text that looks like a tool call
   but the provider did not emit a structured invocation, OpenClaw leaves it as
   text and logs a warning with the run id, provider/model, detected pattern, and
   tool name when available. Treat that as provider/model tool-call
   incompatibility, not a completed tool run.
-
-* If tools appear as assistant text instead of running, for example raw JSON,
+- If tools appear as assistant text instead of running, for example raw JSON,
   XML, ReAct syntax, or an empty `tool_calls` array in the provider response,
   first verify the server is using a tool-call-capable chat template/parser. For
   OpenAI-compatible Chat Completions backends whose parser works only when tool
   use is forced, set a per-model request override instead of relying on text
   parsing:
 
-  ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+  ```json5
   {
     agents: {
       defaults: {
@@ -272,16 +267,16 @@ Compatibility notes for stricter OpenAI-compatible backends:
   Replace `local/my-local-model` with the exact provider/model ref shown by
   `openclaw models list`.
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+  ```bash
   openclaw config set agents.defaults.models '{"local/my-local-model":{"params":{"extra_body":{"tool_choice":"required"}}}}' --strict-json --merge
   ```
 
-* If a custom OpenAI-compatible model accepts OpenAI reasoning efforts beyond
+- If a custom OpenAI-compatible model accepts OpenAI reasoning efforts beyond
   the built-in profile, declare them on the model compat block. Adding `"xhigh"`
   here makes `/think xhigh`, session pickers, Gateway validation, and `llm-task`
   validation expose the level for that configured provider/model ref:
 
-  ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+  ```json5
   {
     models: {
       providers: {
@@ -316,13 +311,13 @@ If the model loads cleanly but full agent turns misbehave, work top-down — con
 
 1. **Confirm the local model itself responds.** No tools, no agent context:
 
-   ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+   ```bash
    openclaw infer model run --local --model <provider/model> --prompt "Reply with exactly: pong" --json
    ```
 
 2. **Confirm Gateway routing.** Sends only the supplied prompt — skips transcript, AGENTS bootstrap, context-engine assembly, tools, and bundled MCP servers, but still exercises Gateway routing, auth, and provider selection:
 
-   ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+   ```bash
    openclaw infer model run --gateway --model <provider/model> --prompt "Reply with exactly: pong" --json
    ```
 
@@ -334,33 +329,35 @@ If the model loads cleanly but full agent turns misbehave, work top-down — con
 
 ## Troubleshooting
 
-* Gateway can reach the proxy? `curl http://127.0.0.1:1234/v1/models`.
-* LM Studio model unloaded? Reload; cold start is a common "hanging" cause.
-* Local server says `terminated`, `ECONNRESET`, or closes the stream mid-turn?
+- Gateway can reach the proxy? `curl http://127.0.0.1:1234/v1/models`.
+- LM Studio model unloaded? Reload; cold start is a common "hanging" cause.
+- Local server says `terminated`, `ECONNRESET`, or closes the stream mid-turn?
   OpenClaw records a low-cardinality `model.call.error.failureKind` plus the
   OpenClaw process RSS/heap snapshot in diagnostics. For LM Studio/Ollama
   memory pressure, match that timestamp against the server log or macOS crash /
   jetsam log to confirm whether the model server was killed.
-* OpenClaw derives context-window preflight thresholds from the detected model window, or from the uncapped model window when `agents.defaults.contextTokens` lowers the effective window. It warns below 20% with an **8k** floor. Hard blocks use the 10% threshold with a **4k** floor, capped to the effective context window so oversized model metadata cannot reject an otherwise valid user cap. If you hit that preflight, raise the server/model context limit or choose a larger model.
-* Context errors? Lower `contextWindow` or raise your server limit.
-* OpenAI-compatible server returns `messages[].content ... expected a string`?
+- OpenClaw derives context-window preflight thresholds from the detected model window, or from the uncapped model window when `agents.defaults.contextTokens` lowers the effective window. It warns below 20% with an **8k** floor. Hard blocks use the 10% threshold with a **4k** floor, capped to the effective context window so oversized model metadata cannot reject an otherwise valid user cap. If you hit that preflight, raise the server/model context limit or choose a larger model.
+- Context errors? Lower `contextWindow` or raise your server limit.
+- OpenAI-compatible server returns `messages[].content ... expected a string`?
   Add `compat.requiresStringContent: true` on that model entry.
-* OpenAI-compatible server returns `validation.keys` or says message entries only allow `role` and `content`?
+- OpenAI-compatible server returns `validation.keys` or says message entries only allow `role` and `content`?
   Add `compat.strictMessageKeys: true` on that model entry.
-* Direct tiny `/v1/chat/completions` calls work, but `openclaw infer model run --local`
+- Direct tiny `/v1/chat/completions` calls work, but `openclaw infer model run --local`
   fails on Gemma or another local model? Check the provider URL, model ref, auth
   marker, and server logs first; local `model run` does not include agent tools.
   If local `model run` succeeds but larger agent turns fail, reduce the agent
   tool surface with `localModelLean` or `compat.supportsTools: false`.
-* Tool calls show up as raw JSON/XML/ReAct text, or the provider returns an
+- Tool calls show up as raw JSON/XML/ReAct text, or the provider returns an
   empty `tool_calls` array? Do not add a proxy that blindly converts assistant
   text into tool execution. Fix the server chat template/parser first. If the
   model only works when tool use is forced, add the per-model
   `params.extra_body.tool_choice: "required"` override above and use that model
   entry only for sessions where a tool call is expected on every turn.
-* Safety: local models skip provider-side filters; keep agents narrow and compaction on to limit prompt injection blast radius.
+- Safety: local models skip provider-side filters; keep agents narrow and compaction on to limit prompt injection blast radius.
 
 ## Related
 
-* [Configuration reference](/gateway/configuration-reference)
-* [Model failover](/concepts/model-failover)
+- [Configuration reference](/gateway/configuration-reference)
+- [Model failover](/concepts/model-failover)
+
+---

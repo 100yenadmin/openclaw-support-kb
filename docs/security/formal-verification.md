@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Formal verification (security models)"
 source: "https://docs.openclaw.ai/security/formal-verification"
-source_hash: "aa61e3010be3778847bbb785e699aa3891e5f668ad836f1227a86b8cb6fde987"
+source_hash: "4566a240d828963036796d770e03c7c12134d8de86bfdd71be1d9d5f0318da6b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/formal-verification.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Formal verification (security models)
 Source: https://docs.openclaw.ai/security/formal-verification
-
-
 
 This page tracks OpenClaw's **formal security models** (TLA+/TLC today; more as needed).
 
@@ -25,8 +23,8 @@ misconfiguration safety), under explicit assumptions.
 
 **What this is (today):** an executable, attacker-driven **security regression suite**:
 
-* Each claim has a runnable model-check over a finite state space.
-* Many claims have a paired **negative model** that produces a counterexample trace for a realistic bug class.
+- Each claim has a runnable model-check over a finite state space.
+- Many claims have a paired **negative model** that produces a counterexample trace for a realistic bug class.
 
 **What this is not (yet):** a proof that "OpenClaw is secure in all respects" or that the full TypeScript implementation is correct.
 
@@ -36,20 +34,20 @@ Models are maintained in a separate repo: [vignesh07/openclaw-formal-models](htt
 
 ## Important caveats
 
-* These are **models**, not the full TypeScript implementation. Drift between model and code is possible.
-* Results are bounded by the state space explored by TLC; "green" does not imply security beyond the modeled assumptions and bounds.
-* Some claims rely on explicit environmental assumptions (e.g., correct deployment, correct configuration inputs).
+- These are **models**, not the full TypeScript implementation. Drift between model and code is possible.
+- Results are bounded by the state space explored by TLC; "green" does not imply security beyond the modeled assumptions and bounds.
+- Some claims rely on explicit environmental assumptions (e.g., correct deployment, correct configuration inputs).
 
 ## Reproducing results
 
 Today, results are reproduced by cloning the models repo locally and running TLC (see below). A future iteration could offer:
 
-* CI-run models with public artifacts (counterexample traces, run logs)
-* a hosted "run this model" workflow for small, bounded checks
+- CI-run models with public artifacts (counterexample traces, run logs)
+- a hosted "run this model" workflow for small, bounded checks
 
 Getting started:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 git clone https://github.com/vignesh07/openclaw-formal-models
 cd openclaw-formal-models
 
@@ -63,11 +61,11 @@ make <target>
 
 **Claim:** binding beyond loopback without auth can make remote compromise possible / increases exposure; token/password blocks unauth attackers (per the model assumptions).
 
-* Green runs:
-  * `make gateway-exposure-v2`
-  * `make gateway-exposure-v2-protected`
-* Red (expected):
-  * `make gateway-exposure-v2-negative`
+- Green runs:
+  - `make gateway-exposure-v2`
+  - `make gateway-exposure-v2-protected`
+- Red (expected):
+  - `make gateway-exposure-v2-negative`
 
 See also: `docs/gateway-exposure-matrix.md` in the models repo.
 
@@ -75,41 +73,41 @@ See also: `docs/gateway-exposure-matrix.md` in the models repo.
 
 **Claim:** `exec host=node` requires (a) node command allowlist plus declared commands and (b) live approval when configured; approvals are tokenized to prevent replay (in the model).
 
-* Green runs:
-  * `make nodes-pipeline`
-  * `make approvals-token`
-* Red (expected):
-  * `make nodes-pipeline-negative`
-  * `make approvals-token-negative`
+- Green runs:
+  - `make nodes-pipeline`
+  - `make approvals-token`
+- Red (expected):
+  - `make nodes-pipeline-negative`
+  - `make approvals-token-negative`
 
 ### Pairing store (DM gating)
 
 **Claim:** pairing requests respect TTL and pending-request caps.
 
-* Green runs:
-  * `make pairing`
-  * `make pairing-cap`
-* Red (expected):
-  * `make pairing-negative`
-  * `make pairing-cap-negative`
+- Green runs:
+  - `make pairing`
+  - `make pairing-cap`
+- Red (expected):
+  - `make pairing-negative`
+  - `make pairing-cap-negative`
 
 ### Ingress gating (mentions + control-command bypass)
 
 **Claim:** in group contexts requiring mention, an unauthorized "control command" cannot bypass mention gating.
 
-* Green:
-  * `make ingress-gating`
-* Red (expected):
-  * `make ingress-gating-negative`
+- Green:
+  - `make ingress-gating`
+- Red (expected):
+  - `make ingress-gating-negative`
 
 ### Routing/session-key isolation
 
 **Claim:** DMs from distinct peers do not collapse into the same session unless explicitly linked/configured.
 
-* Green:
-  * `make routing-isolation`
-* Red (expected):
-  * `make routing-isolation-negative`
+- Green:
+  - `make routing-isolation`
+- Red (expected):
+  - `make routing-isolation-negative`
 
 ## v1++: additional bounded models (concurrency, retries, trace correctness)
 
@@ -121,21 +119,19 @@ These are follow-on models that tighten fidelity around real-world failure modes
 
 What it means:
 
-* Under concurrent requests, you can't exceed `MaxPending` for a channel.
+- Under concurrent requests, you can't exceed `MaxPending` for a channel.
+- Repeated requests/refreshes for the same `(channel, sender)` should not create duplicate live pending rows.
 
-* Repeated requests/refreshes for the same `(channel, sender)` should not create duplicate live pending rows.
-
-* Green runs:
-  * `make pairing-race` (atomic/locked cap check)
-  * `make pairing-idempotency`
-  * `make pairing-refresh`
-  * `make pairing-refresh-race`
-
-* Red (expected):
-  * `make pairing-race-negative` (non-atomic begin/commit cap race)
-  * `make pairing-idempotency-negative`
-  * `make pairing-refresh-negative`
-  * `make pairing-refresh-race-negative`
+- Green runs:
+  - `make pairing-race` (atomic/locked cap check)
+  - `make pairing-idempotency`
+  - `make pairing-refresh`
+  - `make pairing-refresh-race`
+- Red (expected):
+  - `make pairing-race-negative` (non-atomic begin/commit cap race)
+  - `make pairing-idempotency-negative`
+  - `make pairing-refresh-negative`
+  - `make pairing-refresh-race-negative`
 
 ### Ingress trace correlation / idempotency
 
@@ -143,23 +139,20 @@ What it means:
 
 What it means:
 
-* When one external event becomes multiple internal messages, every part keeps the same trace/event identity.
+- When one external event becomes multiple internal messages, every part keeps the same trace/event identity.
+- Retries do not result in double-processing.
+- If provider event IDs are missing, dedupe falls back to a safe key (e.g., trace ID) to avoid dropping distinct events.
 
-* Retries do not result in double-processing.
-
-* If provider event IDs are missing, dedupe falls back to a safe key (e.g., trace ID) to avoid dropping distinct events.
-
-* Green:
-  * `make ingress-trace`
-  * `make ingress-trace2`
-  * `make ingress-idempotency`
-  * `make ingress-dedupe-fallback`
-
-* Red (expected):
-  * `make ingress-trace-negative`
-  * `make ingress-trace2-negative`
-  * `make ingress-idempotency-negative`
-  * `make ingress-dedupe-fallback-negative`
+- Green:
+  - `make ingress-trace`
+  - `make ingress-trace2`
+  - `make ingress-idempotency`
+  - `make ingress-dedupe-fallback`
+- Red (expected):
+  - `make ingress-trace-negative`
+  - `make ingress-trace2-negative`
+  - `make ingress-idempotency-negative`
+  - `make ingress-dedupe-fallback-negative`
 
 ### Routing dmScope precedence + identityLinks
 
@@ -167,19 +160,19 @@ What it means:
 
 What it means:
 
-* Channel-specific dmScope overrides must win over global defaults.
+- Channel-specific dmScope overrides must win over global defaults.
+- identityLinks should collapse only within explicit linked groups, not across unrelated peers.
 
-* identityLinks should collapse only within explicit linked groups, not across unrelated peers.
-
-* Green:
-  * `make routing-precedence`
-  * `make routing-identitylinks`
-
-* Red (expected):
-  * `make routing-precedence-negative`
-  * `make routing-identitylinks-negative`
+- Green:
+  - `make routing-precedence`
+  - `make routing-identitylinks`
+- Red (expected):
+  - `make routing-precedence-negative`
+  - `make routing-identitylinks-negative`
 
 ## Related
 
-* [Threat model](/security/THREAT-MODEL-ATLAS)
-* [Contributing to the threat model](/security/CONTRIBUTING-THREAT-MODEL)
+- [Threat model](/security/THREAT-MODEL-ATLAS)
+- [Contributing to the threat model](/security/CONTRIBUTING-THREAT-MODEL)
+
+---

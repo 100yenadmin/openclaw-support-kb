@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "6271a4f77032c84aded59e7df39fa95aa4d282b21767c436f4c0063f595a1492"
+source_hash: "660e45fbd1e5a4ebecc8ee9d4f2e218043a0d0ebcb4d6526f16b15a3097b990c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/arcee.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Arcee AI
 Source: https://docs.openclaw.ai/providers/arcee
-
-
 
 [Arcee AI](https://arcee.ai) provides access to the Trinity family of mixture-of-experts models through an OpenAI-compatible API. All Trinity models are Apache 2.0 licensed.
 
@@ -28,21 +26,30 @@ Arcee AI models can be accessed directly via the Arcee platform or through [Open
 
 ## Getting started
 
-<Tabs>
-  <Tab title="Direct (Arcee platform)">
-    <Steps>
-      <Step title="Get an API key">
-        Create an API key at [Arcee AI](https://chat.arcee.ai/).
-      </Step>
+Tabs
 
-      <Step title="Run onboarding">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Direct (Arcee platform)
+
+
+Steps
+
+
+Get an API key
+
+        Create an API key at [Arcee AI](https://chat.arcee.ai/).
+
+
+Run onboarding
+
+        ```bash
         openclaw onboard --auth-choice arceeai-api-key
         ```
-      </Step>
 
-      <Step title="Set a default model">
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a default model
+
+        ```json5
         {
           agents: {
             defaults: {
@@ -51,24 +58,32 @@ Arcee AI models can be accessed directly via the Arcee platform or through [Open
           },
         }
         ```
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="Via OpenRouter">
-    <Steps>
-      <Step title="Get an API key">
+
+
+
+
+Via OpenRouter
+
+
+Steps
+
+
+Get an API key
+
         Create an API key at [OpenRouter](https://openrouter.ai/keys).
-      </Step>
 
-      <Step title="Run onboarding">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Run onboarding
+
+        ```bash
         openclaw onboard --auth-choice arceeai-openrouter
         ```
-      </Step>
 
-      <Step title="Set a default model">
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a default model
+
+        ```json5
         {
           agents: {
             defaults: {
@@ -79,32 +94,36 @@ Arcee AI models can be accessed directly via the Arcee platform or through [Open
         ```
 
         The same model refs work for both direct and OpenRouter setups (for example `arcee/trinity-large-thinking`).
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+
+
+
+
 
 ## Non-interactive setup
 
-<Tabs>
-  <Tab title="Direct (Arcee platform)">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Direct (Arcee platform)
+
+    ```bash
     openclaw onboard --non-interactive \
       --mode local \
       --auth-choice arceeai-api-key \
       --arceeai-api-key "$ARCEEAI_API_KEY"
     ```
-  </Tab>
 
-  <Tab title="Via OpenRouter">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Via OpenRouter
+
+    ```bash
     openclaw onboard --non-interactive \
       --mode local \
       --auth-choice arceeai-openrouter \
       --openrouter-api-key "$OPENROUTER_API_KEY"
     ```
-  </Tab>
-</Tabs>
+
 
 ## Built-in catalog
 
@@ -116,9 +135,9 @@ OpenClaw currently ships this bundled Arcee catalog:
 | `arcee/trinity-large-preview`  | Trinity Large Preview  | text  | 128K    | $0.25 / $1.00        | General-purpose; 400B params, 13B active  |
 | `arcee/trinity-mini`           | Trinity Mini 26B       | text  | 128K    | $0.045 / $0.15       | Fast and cost-efficient; function calling |
 
-<Tip>
-  The onboarding preset sets `arcee/trinity-large-thinking` as the default model.
-</Tip>
+Tip
+
+The onboarding preset sets `arcee/trinity-large-thinking` as the default model.
 
 ## Supported features
 
@@ -129,29 +148,37 @@ OpenClaw currently ships this bundled Arcee catalog:
 | Structured output (JSON mode and JSON schema) | Yes                                          |
 | Extended thinking                             | Yes (Trinity Large Thinking; tools disabled) |
 
-<AccordionGroup>
-  <Accordion title="Environment note">
+AccordionGroup
+
+
+Environment note
+
     If the Gateway runs as a daemon (launchd/systemd), make sure `ARCEEAI_API_KEY`
     (or `OPENROUTER_API_KEY`) is available to that process (for example, in
     `~/.openclaw/.env` or via `env.shellEnv`).
-  </Accordion>
 
-  <Accordion title="OpenRouter routing">
+
+
+OpenRouter routing
+
     When using Arcee models via OpenRouter, the same `arcee/*` model refs apply.
     OpenClaw handles routing transparently based on your auth choice. See the
     [OpenRouter provider docs](/providers/openrouter) for OpenRouter-specific
     configuration details.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="OpenRouter" href="/providers/openrouter" icon="shuffle">
-    Access Arcee models and many others through a single API key.
-  </Card>
+CardGroup
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+OpenRouter
+
+    Access Arcee models and many others through a single API key.
+
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
-</CardGroup>
+
+---

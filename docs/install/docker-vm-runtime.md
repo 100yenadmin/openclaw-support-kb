@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
-source_hash: "6124f905184731e06cc1cd45ace88aa5bb26df015eb346a875eae0f4017bea53"
+source_hash: "1374708fb51d59426bd733ccd17a57e84b9103660ee4299bfc6e8c573613a91c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker-vm-runtime.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Docker VM runtime
 Source: https://docs.openclaw.ai/install/docker-vm-runtime
-
-
 
 Shared runtime steps for VM-based Docker installs such as GCP, Hetzner, and similar VPS providers.
 
@@ -26,9 +24,9 @@ All external binaries required by skills must be installed at image build time.
 
 The examples below show three common binaries only:
 
-* `gog` (from `gogcli`) for Gmail access
-* `goplaces` for Google Places
-* `wacli` for WhatsApp
+- `gog` (from `gogcli`) for Gmail access
+- `goplaces` for Google Places
+- `wacli` for WhatsApp
 
 These are examples, not a complete list.
 You may install as many binaries as needed using the same pattern.
@@ -41,7 +39,7 @@ If you add new skills later that depend on additional binaries, you must:
 
 **Example Dockerfile**
 
-```dockerfile theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```dockerfile
 FROM node:24-bookworm
 
 RUN apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*
@@ -84,13 +82,13 @@ ENV NODE_ENV=production
 CMD ["node","dist/index.js"]
 ```
 
-<Note>
-  The URLs above are examples. For ARM-based VMs, choose the `arm64` assets. For reproducible builds, pin versioned release URLs.
-</Note>
+Note
+
+The URLs above are examples. For ARM-based VMs, choose the `arm64` assets. For reproducible builds, pin versioned release URLs.
 
 ## Build and launch
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 docker compose build
 docker compose up -d openclaw-gateway
 ```
@@ -100,7 +98,7 @@ Use a larger machine class before retrying.
 
 Verify binaries:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 docker compose exec openclaw-gateway which gog
 docker compose exec openclaw-gateway which goplaces
 docker compose exec openclaw-gateway which wacli
@@ -116,7 +114,7 @@ Expected output:
 
 Verify Gateway:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 docker compose logs -f openclaw-gateway
 ```
 
@@ -150,7 +148,7 @@ All long-lived state must survive restarts, rebuilds, and reboots.
 
 To update OpenClaw on the VM:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 git pull
 docker compose build
 docker compose up -d
@@ -158,6 +156,8 @@ docker compose up -d
 
 ## Related
 
-* [Docker](/install/docker)
-* [Podman](/install/podman)
-* [ClawDock](/install/clawdock)
+- [Docker](/install/docker)
+- [Podman](/install/podman)
+- [ClawDock](/install/clawdock)
+
+---

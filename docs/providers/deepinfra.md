@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra"
 source: "https://docs.openclaw.ai/providers/deepinfra"
-source_hash: "71f86918b7fd22855bf789dbfb295bbcd60557c880734157603ec35bd6da955a"
+source_hash: "d78ba45d069a1c2c95ea2229059711bc3eec723c52e6b81292d640596a23b715"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepinfra.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # DeepInfra
 Source: https://docs.openclaw.ai/providers/deepinfra
-
-
 
 DeepInfra provides a **unified API** that routes requests to the most popular open source and frontier models behind a single
 endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switching the base URL.
@@ -26,19 +24,19 @@ endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switc
 
 ## CLI setup
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --deepinfra-api-key <key>
 ```
 
 Or set the environment variable:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export DEEPINFRA_API_KEY="<your-deepinfra-api-key>" # pragma: allowlist secret
 ```
 
 ## Config snippet
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { DEEPINFRA_API_KEY: "<your-deepinfra-api-key>" }, // pragma: allowlist secret
   agents: {
@@ -85,12 +83,14 @@ deepinfra/zai-org/GLM-5.1
 
 ## Notes
 
-* Model refs are `deepinfra/<provider>/<model>` (e.g., `deepinfra/Qwen/Qwen3-Max`).
-* Default model: `deepinfra/deepseek-ai/DeepSeek-V3.2`
-* Base URL: `https://api.deepinfra.com/v1/openai`
-* Native video generation uses `https://api.deepinfra.com/v1/inference/<model>`.
+- Model refs are `deepinfra/<provider>/<model>` (e.g., `deepinfra/Qwen/Qwen3-Max`).
+- Default model: `deepinfra/deepseek-ai/DeepSeek-V3.2`
+- Base URL: `https://api.deepinfra.com/v1/openai`
+- Native video generation uses `https://api.deepinfra.com/v1/inference/<model>`.
 
 ## Related
 
-* [Model providers](/concepts/model-providers)
-* [All providers](/providers/index)
+- [Model providers](/concepts/model-providers)
+- [All providers](/providers/index)
+
+---

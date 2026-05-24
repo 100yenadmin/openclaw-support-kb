@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin reference"
 source: "https://docs.openclaw.ai/plugins/reference"
-source_hash: "d81abbc372a31b14a5b8fd2e79ff71e334d6dfd8728add5fc7ff579aa30acdbf"
+source_hash: "c93b6df89aef915109a689fa7340694cad23243048ecc88d7f0d044661c148f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # Plugin reference
 Source: https://docs.openclaw.ai/plugins/reference
 
-
-
 # Plugin reference
 
 This page is generated from `extensions/*/package.json` and
 `openclaw.plugin.json`. Regenerate it with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm plugins:inventory:gen
 ```
 
@@ -71,7 +69,7 @@ pnpm plugins:inventory:gen
 | [groq](/plugins/reference/groq)                                     | Adds Groq model provider support to OpenClaw.                                                                                                                        | `@openclaw/groq-provider`<br />included in OpenClaw                                              | providers: groq; contracts: mediaUnderstandingProviders                                                                                                                                                                                                          |
 | [huggingface](/plugins/reference/huggingface)                       | Adds Hugging Face model provider support to OpenClaw.                                                                                                                | `@openclaw/huggingface-provider`<br />included in OpenClaw                                       | providers: huggingface                                                                                                                                                                                                                                           |
 | [imessage](/plugins/reference/imessage)                             | Adds the iMessage channel surface for sending and receiving OpenClaw messages.                                                                                       | `@openclaw/imessage`<br />included in OpenClaw                                                   | channels: imessage                                                                                                                                                                                                                                               |
-| [inworld](/plugins/reference/inworld)                               | Inworld streaming text-to-speech (MP3, OGG\_OPUS, PCM telephony).                                                                                                    | `@openclaw/inworld-speech`<br />included in OpenClaw                                             | contracts: speechProviders                                                                                                                                                                                                                                       |
+| [inworld](/plugins/reference/inworld)                               | Inworld streaming text-to-speech (MP3, OGG_OPUS, PCM telephony).                                                                                                     | `@openclaw/inworld-speech`<br />included in OpenClaw                                             | contracts: speechProviders                                                                                                                                                                                                                                       |
 | [irc](/plugins/reference/irc)                                       | Adds the IRC channel surface for sending and receiving OpenClaw messages.                                                                                            | `@openclaw/irc`<br />included in OpenClaw                                                        | channels: irc                                                                                                                                                                                                                                                    |
 | [kilocode](/plugins/reference/kilocode)                             | Adds Kilocode model provider support to OpenClaw.                                                                                                                    | `@openclaw/kilocode-provider`<br />included in OpenClaw                                          | providers: kilocode                                                                                                                                                                                                                                              |
 | [kimi](/plugins/reference/kimi)                                     | Adds Kimi, Kimi Coding model provider support to OpenClaw.                                                                                                           | `@openclaw/kimi-provider`<br />included in OpenClaw                                              | providers: kimi, kimi-coding                                                                                                                                                                                                                                     |
@@ -145,3 +143,5 @@ pnpm plugins:inventory:gen
 | [zai](/plugins/reference/zai)                                       | Adds Z.AI model provider support to OpenClaw.                                                                                                                        | `@openclaw/zai-provider`<br />included in OpenClaw                                               | providers: zai; contracts: mediaUnderstandingProviders                                                                                                                                                                                                           |
 | [zalo](/plugins/reference/zalo)                                     | Adds the Zalo channel surface for sending and receiving OpenClaw messages.                                                                                           | `@openclaw/zalo`<br />npm; ClawHub                                                               | channels: zalo                                                                                                                                                                                                                                                   |
 | [zalouser](/plugins/reference/zalouser)                             | Adds the Zalo Personal channel surface for sending and receiving OpenClaw messages.                                                                                  | `@openclaw/zalouser`<br />npm; ClawHub                                                           | channels: zalouser; contracts: tools                                                                                                                                                                                                                             |
+
+---

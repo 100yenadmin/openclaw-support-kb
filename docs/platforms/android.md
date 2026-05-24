@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "f80ca8216c54c3b732f67cd3706f0485f6f399c29bb0731fbe60b6e7cd43c5f3"
+source_hash: "160b15d94eecf6ac8a0b79c5309f2b47fddc11460e3f4fe74b696cd9cf2cf76e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/android.md"
@@ -13,19 +13,17 @@ duplicate_index: 1
 # Android app
 Source: https://docs.openclaw.ai/platforms/android
 
+Note
 
-
-<Note>
-  The official Android app is available on [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app\&hl=en_IN). It is a companion node and requires a running OpenClaw Gateway. The source code is also available in the [OpenClaw repository](https://github.com/openclaw/openclaw) under `apps/android`; see [apps/android/README.md](https://github.com/openclaw/openclaw/blob/main/apps/android/README.md) for build instructions.
-</Note>
+The official Android app is available on [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app&hl=en_IN). It is a companion node and requires a running OpenClaw Gateway. The source code is also available in the [OpenClaw repository](https://github.com/openclaw/openclaw) under `apps/android`; see [apps/android/README.md](https://github.com/openclaw/openclaw/blob/main/apps/android/README.md) for build instructions.
 
 ## Support snapshot
 
-* Role: companion node app (Android does not host the Gateway).
-* Gateway required: yes (run it on macOS, Linux, or Windows via WSL2).
-* Install: [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app\&hl=en_IN) for the app, [Getting Started](/start/getting-started) for the Gateway, then [Pairing](/channels/pairing).
-* Gateway: [Runbook](/gateway) + [Configuration](/gateway/configuration).
-  * Protocols: [Gateway protocol](/gateway/protocol) (nodes + control plane).
+- Role: companion node app (Android does not host the Gateway).
+- Gateway required: yes (run it on macOS, Linux, or Windows via WSL2).
+- Install: [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app&hl=en_IN) for the app, [Getting Started](/start/getting-started) for the Gateway, then [Pairing](/channels/pairing).
+- Gateway: [Runbook](/gateway) + [Configuration](/gateway/configuration).
+  - Protocols: [Gateway protocol](/gateway/protocol) (nodes + control plane).
 
 ## System control
 
@@ -39,33 +37,33 @@ Android connects directly to the Gateway WebSocket and uses device pairing (`rol
 
 For Tailscale or public hosts, Android requires a secure endpoint:
 
-* Preferred: Tailscale Serve / Funnel with `https://<magicdns>` / `wss://<magicdns>`
-* Also supported: any other `wss://` Gateway URL with a real TLS endpoint
-* Cleartext `ws://` remains supported on private LAN addresses / `.local` hosts, plus `localhost`, `127.0.0.1`, and the Android emulator bridge (`10.0.2.2`)
+- Preferred: Tailscale Serve / Funnel with `https://<magicdns>` / `wss://<magicdns>`
+- Also supported: any other `wss://` Gateway URL with a real TLS endpoint
+- Cleartext `ws://` remains supported on private LAN addresses / `.local` hosts, plus `localhost`, `127.0.0.1`, and the Android emulator bridge (`10.0.2.2`)
 
 ### Prerequisites
 
-* You can run the Gateway on the "master" machine.
-* Android device/emulator can reach the gateway WebSocket:
-  * Same LAN with mDNS/NSD, **or**
-  * Same Tailscale tailnet using Wide-Area Bonjour / unicast DNS-SD (see below), **or**
-  * Manual gateway host/port (fallback)
-* Tailnet/public mobile pairing does **not** use raw tailnet IP `ws://` endpoints. Use Tailscale Serve or another `wss://` URL instead.
-* You can run the CLI (`openclaw`) on the gateway machine (or via SSH).
+- You can run the Gateway on the "master" machine.
+- Android device/emulator can reach the gateway WebSocket:
+  - Same LAN with mDNS/NSD, **or**
+  - Same Tailscale tailnet using Wide-Area Bonjour / unicast DNS-SD (see below), **or**
+  - Manual gateway host/port (fallback)
+- Tailnet/public mobile pairing does **not** use raw tailnet IP `ws://` endpoints. Use Tailscale Serve or another `wss://` URL instead.
+- You can run the CLI (`openclaw`) on the gateway machine (or via SSH).
 
 ### 1) Start the Gateway
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway --port 18789 --verbose
 ```
 
 Confirm in logs you see something like:
 
-* `listening on ws://0.0.0.0:18789`
+- `listening on ws://0.0.0.0:18789`
 
 For remote Android access over Tailscale, prefer Serve/Funnel instead of a raw tailnet bind:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway --tailscale serve
 ```
 
@@ -75,7 +73,7 @@ This gives Android a secure `wss://` / `https://` endpoint. A plain `gateway.bin
 
 From the gateway machine:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 dns-sd -B _openclaw-gw._tcp local.
 ```
 
@@ -83,7 +81,7 @@ More debugging notes: [Bonjour](/gateway/bonjour).
 
 If you also configured a wide-area discovery domain, compare against:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway discover --json
 ```
 
@@ -105,15 +103,15 @@ Details and example CoreDNS config: [Bonjour](/gateway/bonjour).
 
 In the Android app:
 
-* The app keeps its gateway connection alive via a **foreground service** (persistent notification).
-* Open the **Connect** tab.
-* Use **Setup Code** or **Manual** mode.
-* If discovery is blocked, use manual host/port in **Advanced controls**. For private LAN hosts, `ws://` still works. For Tailscale/public hosts, turn on TLS and use a `wss://` / Tailscale Serve endpoint.
+- The app keeps its gateway connection alive via a **foreground service** (persistent notification).
+- Open the **Connect** tab.
+- Use **Setup Code** or **Manual** mode.
+- If discovery is blocked, use manual host/port in **Advanced controls**. For private LAN hosts, `ws://` still works. For Tailscale/public hosts, turn on TLS and use a `wss://` / Tailscale Serve endpoint.
 
 After the first successful pairing, Android auto-reconnects on launch:
 
-* Manual endpoint (if enabled), otherwise
-* The last discovered gateway (best-effort).
+- Manual endpoint (if enabled), otherwise
+- The last discovered gateway (best-effort).
 
 ### Presence alive beacons
 
@@ -130,7 +128,7 @@ compatible but does not count as a durable last-seen update.
 
 On the gateway machine:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw devices list
 openclaw devices approve <requestId>
 openclaw devices reject <requestId>
@@ -141,7 +139,7 @@ Pairing details: [Pairing](/channels/pairing).
 Optional: if the Android node always connects from a tightly controlled subnet,
 you can opt in to first-time node auto-approval with explicit CIDRs or exact IPs:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     nodes: {
@@ -159,15 +157,15 @@ public-key change still require manual approval.
 
 ### 5) Verify the node is connected
 
-* Via nodes status:
+- Via nodes status:
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+  ```bash
   openclaw nodes status
   ```
 
-* Via Gateway:
+- Via Gateway:
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+  ```bash
   openclaw gateway call node.list --params "{}"
   ```
 
@@ -175,15 +173,15 @@ public-key change still require manual approval.
 
 The Android Chat tab supports session selection (default `main`, plus other existing sessions):
 
-* History: `chat.history` (display-normalized; inline directive tags are
+- History: `chat.history` (display-normalized; inline directive tags are
   stripped from visible text, plain-text tool-call XML payloads (including
   `<tool_call>...</tool_call>`, `<function_call>...</function_call>`,
   `<tool_calls>...</tool_calls>`, `<function_calls>...</function_calls>`, and
   truncated tool-call blocks) and leaked ASCII/full-width model control tokens
   are stripped, pure silent-token assistant rows such as exact `NO_REPLY` /
   `no_reply` are omitted, and oversized rows can be replaced with placeholders)
-* Send: `chat.send`
-* Push updates (best-effort): `chat.subscribe` → `event:"chat"`
+- Send: `chat.send`
+- Push updates (best-effort): `chat.subscribe` → `event:"chat"`
 
 ### 7) Canvas + camera
 
@@ -191,16 +189,18 @@ The Android Chat tab supports session selection (default `main`, plus other exis
 
 If you want the node to show real HTML/CSS/JS that the agent can edit on disk, point the node at the Gateway canvas host.
 
-<Note>
-  Nodes load canvas from the Gateway HTTP server (same port as `gateway.port`, default `18789`).
-</Note>
+Note
+
+Nodes load canvas from the Gateway HTTP server (same port as `gateway.port`, default `18789`).
 
 1. Create `~/.openclaw/workspace/canvas/index.html` on the gateway host.
 
 2. Navigate the node to it (LAN):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-openclaw nodes invoke --node "<Android Node>" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18789/__openclaw__/canvas/"}'
+```bash
+openclaw nodes invoke --node "
+Android
+" --command canvas.navigate --params '{"url":"http://<gateway-hostname>.local:18789/__openclaw__/canvas/"}'
 ```
 
 Tailnet (optional): if both devices are on Tailscale, use a MagicDNS name or tailnet IP instead of `.local`, e.g. `http://<gateway-magicdns>:18789/__openclaw__/canvas/`.
@@ -210,47 +210,47 @@ The A2UI host lives at `http://<gateway-host>:18789/__openclaw__/a2ui/`.
 
 Canvas commands (foreground only):
 
-* `canvas.eval`, `canvas.snapshot`, `canvas.navigate` (use `{"url":""}` or `{"url":"/"}` to return to the default scaffold). `canvas.snapshot` returns `{ format, base64 }` (default `format="jpeg"`).
-* A2UI: `canvas.a2ui.push`, `canvas.a2ui.reset` (`canvas.a2ui.pushJSONL` legacy alias)
+- `canvas.eval`, `canvas.snapshot`, `canvas.navigate` (use `{"url":""}` or `{"url":"/"}` to return to the default scaffold). `canvas.snapshot` returns `{ format, base64 }` (default `format="jpeg"`).
+- A2UI: `canvas.a2ui.push`, `canvas.a2ui.reset` (`canvas.a2ui.pushJSONL` legacy alias)
 
 Camera commands (foreground only; permission-gated):
 
-* `camera.snap` (jpg)
-* `camera.clip` (mp4)
+- `camera.snap` (jpg)
+- `camera.clip` (mp4)
 
 See [Camera node](/nodes/camera) for parameters and CLI helpers.
 
 ### 8) Voice + expanded Android command surface
 
-* Voice tab: Android has two explicit capture modes. **Mic** is a manual Voice-tab session that sends each pause as a chat turn and stops when the app leaves the foreground or the user leaves the Voice tab. **Talk** is continuous Talk Mode and keeps listening until toggled off or the node disconnects.
-* Talk Mode promotes the existing foreground service from `dataSync` to `dataSync|microphone` before capture starts, then demotes it when Talk Mode stops. Android 14+ requires the `FOREGROUND_SERVICE_MICROPHONE` declaration, the `RECORD_AUDIO` runtime grant, and the microphone service type at runtime.
-* By default, Android Talk uses native speech recognition, Gateway chat, and `talk.speak` through the configured gateway Talk provider. Local system TTS is used only when `talk.speak` is unavailable.
-* Android Talk uses realtime Gateway relay only when `talk.realtime.mode` is `realtime` and `talk.realtime.transport` is `gateway-relay`.
-* Voice wake remains disabled in the Android UX/runtime.
-* Additional Android command families (availability depends on device + permissions):
-  * `device.status`, `device.info`, `device.permissions`, `device.health`
-  * `notifications.list`, `notifications.actions` (see [Notification forwarding](#notification-forwarding) below)
-  * `photos.latest`
-  * `contacts.search`, `contacts.add`
-  * `calendar.events`, `calendar.add`
-  * `callLog.search`
-  * `sms.search`
-  * `motion.activity`, `motion.pedometer`
+- Voice tab: Android has two explicit capture modes. **Mic** is a manual Voice-tab session that sends each pause as a chat turn and stops when the app leaves the foreground or the user leaves the Voice tab. **Talk** is continuous Talk Mode and keeps listening until toggled off or the node disconnects.
+- Talk Mode promotes the existing foreground service from `dataSync` to `dataSync|microphone` before capture starts, then demotes it when Talk Mode stops. Android 14+ requires the `FOREGROUND_SERVICE_MICROPHONE` declaration, the `RECORD_AUDIO` runtime grant, and the microphone service type at runtime.
+- By default, Android Talk uses native speech recognition, Gateway chat, and `talk.speak` through the configured gateway Talk provider. Local system TTS is used only when `talk.speak` is unavailable.
+- Android Talk uses realtime Gateway relay only when `talk.realtime.mode` is `realtime` and `talk.realtime.transport` is `gateway-relay`.
+- Voice wake remains disabled in the Android UX/runtime.
+- Additional Android command families (availability depends on device + permissions):
+  - `device.status`, `device.info`, `device.permissions`, `device.health`
+  - `notifications.list`, `notifications.actions` (see [Notification forwarding](#notification-forwarding) below)
+  - `photos.latest`
+  - `contacts.search`, `contacts.add`
+  - `calendar.events`, `calendar.add`
+  - `callLog.search`
+  - `sms.search`
+  - `motion.activity`, `motion.pedometer`
 
 ## Assistant entrypoints
 
 Android supports launching OpenClaw from the system assistant trigger (Google
 Assistant). When configured, holding the home button or saying "Hey Google, ask
-OpenClaw\..." opens the app and hands the prompt into the chat composer.
+OpenClaw..." opens the app and hands the prompt into the chat composer.
 
 This uses Android **App Actions** metadata declared in the app manifest. No
 extra configuration is needed on the gateway side -- the assistant intent is
 handled entirely by the Android app and forwarded as a normal chat message.
 
-<Note>
-  App Actions availability depends on the device, Google Play Services version,
-  and whether the user has set OpenClaw as the default assistant app.
-</Note>
+Note
+
+App Actions availability depends on the device, Google Play Services version,
+and whether the user has set OpenClaw as the default assistant app.
 
 ## Notification forwarding
 
@@ -258,8 +258,8 @@ Android can forward device notifications to the gateway as events. Several contr
 
 | Key                              | Type           | Description                                                                                       |
 | -------------------------------- | -------------- | ------------------------------------------------------------------------------------------------- |
-| `notifications.allowPackages`    | string\[]      | Only forward notifications from these package names. If set, all other packages are ignored.      |
-| `notifications.denyPackages`     | string\[]      | Never forward notifications from these package names. Applied after `allowPackages`.              |
+| `notifications.allowPackages`    | string[]       | Only forward notifications from these package names. If set, all other packages are ignored.      |
+| `notifications.denyPackages`     | string[]       | Never forward notifications from these package names. Applied after `allowPackages`.              |
 | `notifications.quietHours.start` | string (HH:mm) | Start of quiet hours window (local device time). Notifications are suppressed during this window. |
 | `notifications.quietHours.end`   | string (HH:mm) | End of quiet hours window.                                                                        |
 | `notifications.rateLimit`        | number         | Maximum forwarded notifications per package per minute. Excess notifications are dropped.         |
@@ -268,7 +268,7 @@ The notification picker also uses safer behavior for forwarded notification even
 
 Example configuration:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   notifications: {
     allowPackages: ["com.slack", "com.whatsapp"],
@@ -282,12 +282,14 @@ Example configuration:
 }
 ```
 
-<Note>
-  Notification forwarding requires the Android Notification Listener permission. The app prompts for this during setup.
-</Note>
+Note
+
+Notification forwarding requires the Android Notification Listener permission. The app prompts for this during setup.
 
 ## Related
 
-* [iOS app](/platforms/ios)
-* [Nodes](/nodes)
-* [Android node troubleshooting](/nodes/troubleshooting)
+- [iOS app](/platforms/ios)
+- [Nodes](/nodes)
+- [Android node troubleshooting](/nodes/troubleshooting)
+
+---

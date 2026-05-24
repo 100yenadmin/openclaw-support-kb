@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
-source_hash: "4d9885ba25ed3f28c8dd9cb094cf86a3e3b986fa25df1b5b5c64670e69db34f2"
+source_hash: "71bc9b5949b7ac3e2b5255e354ec0e09ebe0b2d7f4baf7f8e3cfadfe20e8fe1c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/gradium.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Gradium
 Source: https://docs.openclaw.ai/providers/gradium
-
-
 
 [Gradium](https://gradium.ai) is a bundled text-to-speech provider for OpenClaw. The plugin can render normal audio replies (WAV), voice-note-compatible Opus output, and 8 kHz u-law audio for telephony surfaces.
 
@@ -28,15 +26,20 @@ Source: https://docs.openclaw.ai/providers/gradium
 
 Create a Gradium API key, then expose it to OpenClaw with either an env var or the config key.
 
-<Tabs>
-  <Tab title="Env var">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Env var
+
+    ```bash
     export GRADIUM_API_KEY="gsk_..."
     ```
-  </Tab>
 
-  <Tab title="Config key">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Config key
+
+    ```json5
     {
       messages: {
         tts: {
@@ -51,14 +54,13 @@ Create a Gradium API key, then expose it to OpenClaw with either an env var or t
       },
     }
     ```
-  </Tab>
-</Tabs>
+
 
 The plugin checks the resolved `apiKey` first and falls back to the `GRADIUM_API_KEY` environment variable.
 
 ## Config
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   messages: {
     tts: {
@@ -102,7 +104,7 @@ Default voice: Emma.
 
 When the active speech policy allows voice overrides, you can switch voices inline using a directive token. All of these resolve to the same `voiceId` override:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /voice:LFZvm12tW_z0xfGo
 /voice_id:LFZvm12tW_z0xfGo
 /voiceid:LFZvm12tW_z0xfGo
@@ -128,5 +130,7 @@ Among configured TTS providers, Gradium's auto-select order is `30`. See [Text-t
 
 ## Related
 
-* [Text-to-Speech](/tools/tts)
-* [Media Overview](/tools/media-overview)
+- [Text-to-Speech](/tools/tts)
+- [Media Overview](/tools/media-overview)
+
+---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/fallback-providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "7ad62dd5cde0a358cd6c4b4c4bab2ffdfb44bfcff2bfaded98c8bfa2a0508318"
+source_hash: "d2dbc972c156b7aa65b086115801cecc97f24800dff0532925078cabc6a0e31d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -61,7 +61,7 @@ Both `provider` and `model` are **required**. If either is missing, the fallback
 |----------|-------|-------------|
 | AI Gateway | `ai-gateway` | `AI_GATEWAY_API_KEY` |
 | OpenRouter | `openrouter` | `OPENROUTER_API_KEY` |
-| Nous Portal | `nous` | `hermes auth` (OAuth) |
+| Nous Portal | `nous` | `hermes setup --portal` (fresh) or `hermes auth add nous` (OAuth) |
 | OpenAI Codex | `openai-codex` | `hermes model` (ChatGPT OAuth) |
 | GitHub Copilot | `copilot` | `COPILOT_GITHUB_TOKEN`, `GH_TOKEN`, or `GITHUB_TOKEN` |
 | GitHub Copilot ACP | `copilot-acp` | External process (editor integration) |

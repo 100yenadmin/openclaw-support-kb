@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Plugin System Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_SPEC.md"
-source_hash: "c80bf25b33b2052d52970af10576214c06c1e84d1caca75a8e7efa92fbbe9d15"
+source_hash: "6320326d576c2d7855495956c887aa0495cbaa5050acaef8eec6cb2c8a2f85a2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_spec.md"
@@ -382,13 +382,16 @@ export interface PaperclipPluginManifestV1 {
         | "contextMenuItem"
         | "commentAnnotation"
         | "commentContextMenuItem"
-        | "settingsPage";
+        | "settingsPage"
+        | "companySettingsPage";
       id: string;
       displayName: string;
       /** Which export name in the UI bundle provides this component */
       exportName: string;
       /** For detailTab: which entity types this tab appears on */
       entityTypes?: Array<"project" | "issue" | "agent" | "goal" | "run">;
+      /** For page and companySettingsPage: single route segment */
+      routePath?: string;
     }>;
   };
 }
@@ -1224,6 +1227,8 @@ For plugins that need richer settings UX beyond what JSON Schema can express, th
 
 Both approaches coexist: a plugin can use the auto-generated form for simple config and add a custom settings page slot for advanced configuration or operational dashboards.
 
+For plugins that need a company-scoped settings surface, declare a `companySettingsPage` slot with a `routePath`. The host renders a sidebar item under Company Settings and mounts the component at `/:companyPrefix/company/settings/:routePath`. The page receives `companyId` and `companyPrefix` in its host context. Core settings routes such as `access`, `invites`, `environments`, and `secrets` are reserved and cannot be shadowed by plugin declarations.
+
 ## 20. Local Tooling
 
 Plugins that need filesystem, git, terminal, or process operations implement those directly. The host does not wrap or proxy these operations.
@@ -1472,6 +1477,14 @@ Each plugin may expose a company-context main page:
 - `/:companyPrefix/plugins/:pluginId`
 
 This page is where board users do most day-to-day work.
+
+## 24.4 Company Settings Plugin Page
+
+Each ready plugin may expose a company settings page:
+
+- `/:companyPrefix/company/settings/:routePath`
+
+The host adds a matching Company Settings sidebar item using the slot `displayName`. Plugin settings route segments are single-segment slugs and must not collide with core company settings pages.
 
 ## 25. Uninstall And Data Lifecycle
 

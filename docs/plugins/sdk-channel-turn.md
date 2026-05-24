@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel turn kernel"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-turn"
-source_hash: "2623618e1938e7dce0820fd2e718094cce2ce7833f815a74a01394cef6409d55"
+source_hash: "93356382e06c9c7c802c052d4a4341cf060e4fcd98bb09a92e73a56026464ed0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-turn.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # Channel turn kernel
 Source: https://docs.openclaw.ai/plugins/sdk-channel-turn
 
-
-
 The channel turn kernel is the shared inbound state machine that turns a normalized platform event into an agent turn. Channel plugins provide the platform facts and the delivery callback. Core owns the orchestration: ingest, classify, preflight, resolve, authorize, assemble, record, dispatch, and finalize.
 
 Use this when your plugin is on the inbound message hot path. For non-message events (slash commands, modals, button interactions, lifecycle events, reactions, voice state), keep them plugin-local. The kernel only owns events that may become an agent text turn.
 
-<Info>
+Info
+
   The kernel is reached through the injected plugin runtime as `runtime.channel.turn.*`. The plugin runtime type is exported from `openclaw/plugin-sdk/core`, so third-party native plugins can use these entry points the same way bundled channel plugins do.
-</Info>
 
 ## Why a shared kernel
 
@@ -29,10 +27,10 @@ Channel plugins repeat the same inbound flow: normalize, route, gate, build a co
 
 The kernel keeps four concepts deliberately separate:
 
-* `ConversationFacts`: where the message came from
-* `RouteFacts`: which agent and session should process it
-* `ReplyPlanFacts`: where visible replies should go
-* `MessageFacts`: what body and supplemental context the agent should see
+- `ConversationFacts`: where the message came from
+- `RouteFacts`: which agent and session should process it
+- `ReplyPlanFacts`: where visible replies should go
+- `MessageFacts`: what body and supplemental context the agent should see
 
 Slack DMs, Telegram topics, Matrix threads, and Feishu topic sessions all distinguish these in practice. Treating them as one identifier causes drift over time.
 
@@ -69,7 +67,7 @@ Admission can come from `classify` (event class said it cannot start a turn), fr
 
 The runtime exposes three preferred entry points so adapters can opt in at the level that matches the channel.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 runtime.channel.turn.run(...)             // adapter-driven full pipeline
 runtime.channel.turn.runAssembled(...)    // already-built context + delivery adapter
 runtime.channel.turn.runPrepared(...)     // channel owns dispatch; kernel runs record + finalize
@@ -78,16 +76,18 @@ runtime.channel.turn.buildContext(...)    // pure facts to FinalizedMsgContext m
 
 Two older runtime helpers remain available for Plugin SDK compatibility:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 runtime.channel.turn.runResolved(...)      // deprecated compatibility alias; prefer run
 runtime.channel.turn.dispatchAssembled(...) // deprecated compatibility alias; prefer runAssembled
 ```
 
 ### run
 
-Use when your channel can express its inbound flow as a `ChannelTurnAdapter<TRaw>`. The adapter has callbacks for `ingest`, optional `classify`, optional `preflight`, mandatory `resolveTurn`, and optional `onFinalize`.
+Use when your channel can express its inbound flow as a `ChannelTurnAdapter
+TRaw
+`. The adapter has callbacks for `ingest`, optional `classify`, optional `preflight`, mandatory `resolveTurn`, and optional `onFinalize`.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await runtime.channel.turn.run({
   channel: "tlon",
   accountId,
@@ -130,7 +130,7 @@ ordering. This is the preferred shape for simple bundled inbound paths that
 would otherwise repeat `createChannelMessageReplyPipeline(...)` and
 `runPrepared(...)` boilerplate.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await runtime.channel.turn.runAssembled({
   cfg,
   channel: "irc",
@@ -161,7 +161,7 @@ delivery, or error logging.
 
 Use when the channel has a complex local dispatcher with previews, retries, edits, or thread bootstrap that must stay channel-owned. The kernel still records the inbound session before dispatch and surfaces a uniform `DispatchedChannelTurnResult`.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const { dispatchResult } = await runtime.channel.turn.runPrepared({
   channel: "matrix",
   accountId,
@@ -188,7 +188,7 @@ Rich channels (Matrix, Mattermost, Microsoft Teams, Feishu, QQ Bot) use `runPrep
 
 A pure function that maps fact bundles into `FinalizedMsgContext`. Use it when your channel hand-rolls part of the pipeline but wants consistent context shape.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const ctxPayload = runtime.channel.turn.buildContext({
   channel: "googlechat",
   accountId,
@@ -208,9 +208,9 @@ const ctxPayload = runtime.channel.turn.buildContext({
 
 `buildContext` is also useful inside `resolveTurn` callbacks when assembling a turn for `run`.
 
-<Note>
+Note
+
   Deprecated SDK helpers such as `dispatchInboundReplyWithBase` still bridge through an assembled-turn helper. New plugin code should use `run` or `runPrepared`.
-</Note>
 
 ## Fact types
 
@@ -325,7 +325,7 @@ Media is fact-shaped. Platform download, auth, SSRF policy, CDN rules, and decry
 Use `toInboundMediaFacts(...)` from `openclaw/plugin-sdk/channel-inbound` when
 your channel has a resolved media list and only needs to attach generic facts:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 media: toInboundMediaFacts(resolvedMedia, {
   kind: "image",
   messageId: input.id,
@@ -341,7 +341,7 @@ For skipped group messages that should be available to a later mention, pass
 media facts through the turn `preflight.media` field. The kernel converts those
 facts into bounded history media entries before recording:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 preflight(input) {
   return {
     admission: { kind: "drop", reason: "missing_mention", recordHistory: true },
@@ -374,7 +374,7 @@ code should not call them. The window facade keeps text context, structured
 core-owned API while still letting the channel choose how a history line is
 rendered.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const history = createChannelHistoryWindow({ historyMap: groupHistories });
 
 await history.recordWithMedia({
@@ -406,7 +406,7 @@ kernel record/finalize options.
 
 Text-only group with mention required:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 preflight(input) {
   const decision = resolveInboundMentionDecision({ facts, policy });
   if (decision.shouldSkip) {
@@ -421,7 +421,7 @@ preflight(input) {
 
 Image-only message followed by a later mention:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 preflight(input) {
   if (!wasMentioned && resolvedImages.length > 0) {
     return {
@@ -439,7 +439,7 @@ preflight(input) {
 
 Explicit reply-to-image:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 resolveTurn(input, _eventClass, preflight) {
   return {
     ...assembled,
@@ -453,7 +453,7 @@ resolveTurn(input, _eventClass, preflight) {
 
 Direct message with history:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 resolveTurn(input) {
   return {
     ...assembled,
@@ -470,19 +470,29 @@ resolveTurn(input) {
 
 For full `run`, the adapter shape is:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-type ChannelTurnAdapter<TRaw> = {
-  ingest(raw: TRaw): Promise<NormalizedTurnInput | null> | NormalizedTurnInput | null;
-  classify?(input: NormalizedTurnInput): Promise<ChannelEventClass> | ChannelEventClass;
+```typescript
+type ChannelTurnAdapter
+TRaw
+ = {
+  ingest(raw: TRaw): Promise
+NormalizedTurnInput
+ | NormalizedTurnInput | null;
+  classify?(input: NormalizedTurnInput): Promise
+ChannelEventClass
+ | ChannelEventClass;
   preflight?(
     input: NormalizedTurnInput,
     eventClass: ChannelEventClass,
-  ): Promise<PreflightFacts | ChannelTurnAdmission | null | undefined>;
+  ): Promise
+PreflightFacts
+;
   resolveTurn(
     input: NormalizedTurnInput,
     eventClass: ChannelEventClass,
     preflight: PreflightFacts,
-  ): Promise<ChannelTurnResolved> | ChannelTurnResolved;
+  ): Promise
+ChannelTurnResolved
+ | ChannelTurnResolved;
   onFinalize?(result: ChannelTurnResult): Promise<void> | void;
 };
 ```
@@ -495,9 +505,11 @@ type ChannelTurnAdapter<TRaw> = {
 
 The kernel does not call the platform directly. The channel hands the kernel a `ChannelEventDeliveryAdapter`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type ChannelEventDeliveryAdapter = {
-  deliver(payload: ReplyPayload, info: ChannelDeliveryInfo): Promise<ChannelDeliveryResult | void>;
+  deliver(payload: ReplyPayload, info: ChannelDeliveryInfo): Promise
+ChannelDeliveryResult
+;
   onError?(err: unknown, info: { kind: string }): void;
   durable?: false | DurableInboundReplyDeliveryOptions;
 };
@@ -521,7 +533,7 @@ Public compatibility helpers such as `recordInboundSessionAndDispatchReply`, `di
 
 The record stage wraps `recordInboundSession`. Most channels can use the defaults. Override via `record`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 record: {
   groupResolution,
   createIfMissing: true,
@@ -537,7 +549,7 @@ The dispatcher waits for the record stage. If record throws, the kernel runs `on
 
 Each stage emits a structured event when a `log` callback is supplied:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await runtime.channel.turn.run({
   channel: "twitch",
   accountId,
@@ -562,14 +574,14 @@ Logged stages: `ingest`, `classify`, `preflight`, `resolve`, `authorize`, `assem
 
 The kernel owns orchestration. The channel still owns:
 
-* Platform transports (gateway, REST, websocket, polling, webhooks)
-* Identity resolution and display-name matching
-* Native commands, slash commands, autocomplete, modals, buttons, voice state
-* Card, modal, and adaptive-card rendering
-* Media auth, CDN rules, encrypted media, transcription
-* Edit, reaction, redaction, and presence APIs
-* Backfill and platform-side history fetch
-* Pairing flows that require platform-specific verification
+- Platform transports (gateway, REST, websocket, polling, webhooks)
+- Identity resolution and display-name matching
+- Native commands, slash commands, autocomplete, modals, buttons, voice state
+- Card, modal, and adaptive-card rendering
+- Media auth, CDN rules, encrypted media, transcription
+- Edit, reaction, redaction, and presence APIs
+- Backfill and platform-side history fetch
+- Pairing flows that require platform-specific verification
 
 If two channels start needing the same helper for one of these, extract a shared SDK helper instead of pushing it into the kernel.
 
@@ -581,7 +593,9 @@ Backward compatibility rules apply: new fact fields are additive, admission kind
 
 ## Related
 
-* [Message lifecycle refactor](/concepts/message-lifecycle-refactor) for the planned send/receive/live lifecycle that will wrap this kernel
-* [Building channel plugins](/plugins/sdk-channel-plugins) for the broader channel plugin contract
-* [Plugin runtime helpers](/plugins/sdk-runtime) for other `runtime.*` surfaces
-* [Plugin internals](/plugins/architecture-internals) for load pipeline and registry mechanics
+- [Message lifecycle refactor](/concepts/message-lifecycle-refactor) for the planned send/receive/live lifecycle that will wrap this kernel
+- [Building channel plugins](/plugins/sdk-channel-plugins) for the broader channel plugin contract
+- [Plugin runtime helpers](/plugins/sdk-runtime) for other `runtime.*` surfaces
+- [Plugin internals](/plugins/architecture-internals) for load pipeline and registry mechanics
+
+---

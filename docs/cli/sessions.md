@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "ff91afc360d74ca32760abff6d7f76b0c53fdea812da1861e6bdbdca999980aa"
+source_hash: "467ebef5d4e312fe7f8657f420a0243ca12fa42427ba17528dd61dcbd2e35097"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sessions.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Sessions
 Source: https://docs.openclaw.ai/cli/sessions
-
-
 
 # `openclaw sessions`
 
@@ -38,7 +36,7 @@ discovery source but return only rows for agents currently present in config.
 Control UI uses that mode by default so deleted or disk-only agent stores do
 not reappear in the Sessions view.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw sessions
 openclaw sessions --agent work
 openclaw sessions --all-agents
@@ -50,16 +48,16 @@ openclaw sessions --json
 
 Scope selection:
 
-* default: configured default agent store
-* `--verbose`: verbose logging
-* `--agent <id>`: one configured agent store
-* `--all-agents`: aggregate all configured agent stores
-* `--store <path>`: explicit store path (cannot be combined with `--agent` or `--all-agents`)
-* `--limit <n|all>`: max rows to output (default `100`; `all` restores full output)
+- default: configured default agent store
+- `--verbose`: verbose logging
+- `--agent <id>`: one configured agent store
+- `--all-agents`: aggregate all configured agent stores
+- `--store <path>`: explicit store path (cannot be combined with `--agent` or `--all-agents`)
+- `--limit <n|all>`: max rows to output (default `100`; `all` restores full output)
 
 Export a trajectory bundle for a stored session:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw sessions export-trajectory --session-key "agent:main:telegram:direct:123" --workspace .
 openclaw sessions export-trajectory --session-key "agent:main:telegram:direct:123" --output bug-123 --json
 ```
@@ -78,7 +76,7 @@ JSON examples:
 
 `openclaw sessions --all-agents --json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "path": null,
   "stores": [
@@ -102,7 +100,7 @@ JSON examples:
 
 Run maintenance now (instead of waiting for the next write cycle):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw sessions cleanup --dry-run
 openclaw sessions cleanup --agent work --dry-run
 openclaw sessions cleanup --all-agents --dry-run
@@ -114,28 +112,19 @@ openclaw sessions cleanup --json
 
 `openclaw sessions cleanup` uses `session.maintenance` settings from config:
 
-* Scope note: `openclaw sessions cleanup` maintains session stores, transcripts, and trajectory sidecars. It does not prune cron run logs (`cron/runs/<jobId>.jsonl`), which are managed by `cron.runLog.maxBytes` and `cron.runLog.keepLines` in [Cron configuration](/automation/cron-jobs#configuration) and explained in [Cron maintenance](/automation/cron-jobs#maintenance).
+- Scope note: `openclaw sessions cleanup` maintains session stores, transcripts, and trajectory sidecars. It does not prune cron run logs (`cron/runs/<jobId>.jsonl`), which are managed by `cron.runLog.maxBytes` and `cron.runLog.keepLines` in [Cron configuration](/automation/cron-jobs#configuration) and explained in [Cron maintenance](/automation/cron-jobs#maintenance).
+- Cleanup also prunes unreferenced primary transcripts, compaction checkpoints, and trajectory sidecars older than `session.maintenance.pruneAfter`; files still referenced by `sessions.json` are preserved.
 
-* Cleanup also prunes unreferenced primary transcripts, compaction checkpoints, and trajectory sidecars older than `session.maintenance.pruneAfter`; files still referenced by `sessions.json` are preserved.
-
-* `--dry-run`: preview how many entries would be pruned/capped without writing.
-  * In text mode, dry-run prints a per-session action table (`Action`, `Key`, `Age`, `Model`, `Flags`) so you can see what would be kept vs removed.
-
-* `--enforce`: apply maintenance even when `session.maintenance.mode` is `warn`.
-
-* `--fix-missing`: remove entries whose transcript files are missing, even if they would not normally age/count out yet.
-
-* `--fix-dm-scope`: when `session.dmScope` is `main`, retire stale peer-keyed direct-DM rows left behind by earlier `per-peer`, `per-channel-peer`, or `per-account-channel-peer` routing. Use `--dry-run` first; applying the cleanup removes those rows from `sessions.json` and preserves their transcripts as deleted archives.
-
-* `--active-key <key>`: protect a specific active key from disk-budget eviction. Durable external conversation pointers, such as group sessions and thread-scoped chat sessions, are also kept by age/count/disk-budget maintenance.
-
-* `--agent <id>`: run cleanup for one configured agent store.
-
-* `--all-agents`: run cleanup for all configured agent stores.
-
-* `--store <path>`: run against a specific `sessions.json` file.
-
-* `--json`: print a JSON summary. With `--all-agents`, output includes one summary per store.
+- `--dry-run`: preview how many entries would be pruned/capped without writing.
+  - In text mode, dry-run prints a per-session action table (`Action`, `Key`, `Age`, `Model`, `Flags`) so you can see what would be kept vs removed.
+- `--enforce`: apply maintenance even when `session.maintenance.mode` is `warn`.
+- `--fix-missing`: remove entries whose transcript files are missing, even if they would not normally age/count out yet.
+- `--fix-dm-scope`: when `session.dmScope` is `main`, retire stale peer-keyed direct-DM rows left behind by earlier `per-peer`, `per-channel-peer`, or `per-account-channel-peer` routing. Use `--dry-run` first; applying the cleanup removes those rows from `sessions.json` and preserves their transcripts as deleted archives.
+- `--active-key <key>`: protect a specific active key from disk-budget eviction. Durable external conversation pointers, such as group sessions and thread-scoped chat sessions, are also kept by age/count/disk-budget maintenance.
+- `--agent <id>`: run cleanup for one configured agent store.
+- `--all-agents`: run cleanup for all configured agent stores.
+- `--store <path>`: run against a specific `sessions.json` file.
+- `--json`: print a JSON summary. With `--all-agents`, output includes one summary per store.
 
 When a Gateway is reachable, non-dry-run cleanup for configured agent stores is
 sent through the Gateway so it shares the same session-store writer as runtime
@@ -143,7 +132,7 @@ traffic. Use `--store <path>` for explicit offline repair of a store file.
 
 `openclaw sessions cleanup --all-agents --dry-run --json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "allAgents": true,
   "mode": "warn",
@@ -175,9 +164,11 @@ traffic. Use `--store <path>` for explicit offline repair of a store file.
 
 Related:
 
-* Session config: [Configuration reference](/gateway/config-agents#session)
+- Session config: [Configuration reference](/gateway/config-agents#session)
 
 ## Related
 
-* [CLI reference](/cli)
-* [Session management](/concepts/session)
+- [CLI reference](/cli)
+- [Session management](/concepts/session)
+
+---

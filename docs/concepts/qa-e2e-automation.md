@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "3cebd7b3babb866c3e4f548811ebc59456355b3253e27915b539a68e3bbbab59"
+source_hash: "109b00f5b7362a3c5693da3aa065064c570793246ef3282e7d3b7f98cec2af65"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/qa-e2e-automation.md"
@@ -13,22 +13,20 @@ duplicate_index: 1
 # QA overview
 Source: https://docs.openclaw.ai/concepts/qa-e2e-automation
 
-
-
 The private QA stack is meant to exercise OpenClaw in a more realistic,
 channel-shaped way than a single unit test can.
 
 Current pieces:
 
-* `extensions/qa-channel`: synthetic message channel with DM, channel, thread,
+- `extensions/qa-channel`: synthetic message channel with DM, channel, thread,
   reaction, edit, and delete surfaces.
-* `extensions/qa-lab`: debugger UI and QA bus for observing the transcript,
+- `extensions/qa-lab`: debugger UI and QA bus for observing the transcript,
   injecting inbound messages, and exporting a Markdown report.
-* `extensions/qa-matrix`, future runner plugins: live-transport adapters that
+- `extensions/qa-matrix`, future runner plugins: live-transport adapters that
   drive a real channel inside a child QA gateway.
-* `qa/`: repo-backed seed assets for the kickoff task and baseline QA
+- `qa/`: repo-backed seed assets for the kickoff task and baseline QA
   scenarios.
-* [Mantis](/concepts/mantis): before and after live verification for bugs that
+- [Mantis](/concepts/mantis): before and after live verification for bugs that
   need real transports, browser screenshots, VM state, and PR evidence.
 
 ## Command surface
@@ -61,12 +59,12 @@ script aliases; both forms are supported.
 
 The current QA operator flow is a two-pane QA site:
 
-* Left: Gateway dashboard (Control UI) with the agent.
-* Right: QA Lab, showing the Slack-ish transcript and scenario plan.
+- Left: Gateway dashboard (Control UI) with the agent.
+- Right: QA Lab, showing the Slack-ish transcript and scenario plan.
 
 Run it with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm qa:lab:up
 ```
 
@@ -78,7 +76,7 @@ stayed blocked.
 For faster QA Lab UI iteration without rebuilding the Docker image each time,
 start the stack with a bind-mounted QA Lab bundle:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa docker-build-image
 pnpm qa:lab:build
 pnpm qa:lab:up:fast
@@ -92,7 +90,7 @@ asset hash changes.
 
 For a local OpenTelemetry trace smoke, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm qa:otel:smoke
 ```
 
@@ -112,7 +110,7 @@ instrumentation.
 
 For a transport-real Matrix smoke lane, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa matrix --profile fast --fail-fast
 ```
 
@@ -136,7 +134,7 @@ CI uses the same command surface in `.github/workflows/qa-live-transports-convex
 
 For transport-real Telegram, Discord, and Slack smoke lanes:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa telegram
 pnpm openclaw qa discord
 pnpm openclaw qa slack
@@ -146,7 +144,7 @@ They target a pre-existing real channel with two bots (driver + SUT). Required e
 
 For a full Slack desktop VM run with VNC rescue, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa mantis slack-desktop-smoke \
   --gateway-setup \
   --scenario slack-canary \
@@ -178,7 +176,7 @@ handling steps live in [Mantis Slack Desktop Runbook](/concepts/mantis-slack-des
 
 For an agent/CV style desktop task, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa mantis visual-task \
   --browser-url https://example.net \
   --expect-text "Example Domain" \
@@ -203,7 +201,7 @@ passed and `--keep-lease` was not set.
 
 Before using pooled live credentials, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa credentials doctor
 ```
 
@@ -226,7 +224,7 @@ checklist.
 
 For a disposable Linux VM lane without bringing Docker into the QA path, run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa suite --runner multipass --scenario channel-chat-baseline
 ```
 
@@ -272,7 +270,7 @@ Each lane exits non-zero on any failed scenario. `--allow-failures` writes artif
 
 ### Telegram QA
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa telegram
 ```
 
@@ -280,45 +278,45 @@ Targets one real private Telegram group with two distinct bots (driver + SUT). T
 
 Required env when `--credential-source env`:
 
-* `OPENCLAW_QA_TELEGRAM_GROUP_ID` - numeric chat id (string).
-* `OPENCLAW_QA_TELEGRAM_DRIVER_BOT_TOKEN`
-* `OPENCLAW_QA_TELEGRAM_SUT_BOT_TOKEN`
+- `OPENCLAW_QA_TELEGRAM_GROUP_ID` - numeric chat id (string).
+- `OPENCLAW_QA_TELEGRAM_DRIVER_BOT_TOKEN`
+- `OPENCLAW_QA_TELEGRAM_SUT_BOT_TOKEN`
 
 Optional:
 
-* `OPENCLAW_QA_TELEGRAM_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts (default redacts).
+- `OPENCLAW_QA_TELEGRAM_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts (default redacts).
 
 Scenarios (`extensions/qa-lab/src/live-transports/telegram/telegram-live.runtime.ts`):
 
-* `telegram-canary`
-* `telegram-mention-gating`
-* `telegram-mentioned-message-reply`
-* `telegram-help-command`
-* `telegram-commands-command`
-* `telegram-tools-compact-command`
-* `telegram-whoami-command`
-* `telegram-status-command`
-* `telegram-repeated-command-authorization`
-* `telegram-other-bot-command-gating`
-* `telegram-context-command`
-* `telegram-current-session-status-tool`
-* `telegram-reply-chain-exact-marker`
-* `telegram-stream-final-single-message`
-* `telegram-long-final-reuses-preview`
-* `telegram-long-final-three-chunks`
+- `telegram-canary`
+- `telegram-mention-gating`
+- `telegram-mentioned-message-reply`
+- `telegram-help-command`
+- `telegram-commands-command`
+- `telegram-tools-compact-command`
+- `telegram-whoami-command`
+- `telegram-status-command`
+- `telegram-repeated-command-authorization`
+- `telegram-other-bot-command-gating`
+- `telegram-context-command`
+- `telegram-current-session-status-tool`
+- `telegram-reply-chain-exact-marker`
+- `telegram-stream-final-single-message`
+- `telegram-long-final-reuses-preview`
+- `telegram-long-final-three-chunks`
 
 The implicit default set always covers canary, mention gating, native command replies, command addressing, and bot-to-bot group replies. `mock-openai` defaults also include deterministic reply-chain and final-message streaming checks. `telegram-current-session-status-tool` remains opt-in because it is only stable when threaded directly after canary, not after arbitrary native command replies. Use `pnpm openclaw qa telegram --list-scenarios --provider-mode mock-openai` to print the current default/optional split with regression refs.
 
 Output artifacts:
 
-* `telegram-qa-report.md`
-* `telegram-qa-summary.json` - includes per-reply RTT (driver send → observed SUT reply) starting with the canary.
-* `telegram-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_TELEGRAM_CAPTURE_CONTENT=1`.
+- `telegram-qa-report.md`
+- `telegram-qa-summary.json` - includes per-reply RTT (driver send → observed SUT reply) starting with the canary.
+- `telegram-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_TELEGRAM_CAPTURE_CONTENT=1`.
 
 Package RTT comparison uses the same Telegram credential contract while keeping
 its RTT sample controls on the RTT harness path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm rtt openclaw@beta \
   --credential-source convex \
   --credential-role maintainer \
@@ -336,7 +334,7 @@ across env-backed and Convex-backed RTT runs.
 
 ### Discord QA
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa discord
 ```
 
@@ -344,28 +342,28 @@ Targets one real private Discord guild channel with two bots: a driver bot contr
 
 Required env when `--credential-source env`:
 
-* `OPENCLAW_QA_DISCORD_GUILD_ID`
-* `OPENCLAW_QA_DISCORD_CHANNEL_ID`
-* `OPENCLAW_QA_DISCORD_DRIVER_BOT_TOKEN`
-* `OPENCLAW_QA_DISCORD_SUT_BOT_TOKEN`
-* `OPENCLAW_QA_DISCORD_SUT_APPLICATION_ID` - must match the SUT bot user id returned by Discord (the lane fails fast otherwise).
+- `OPENCLAW_QA_DISCORD_GUILD_ID`
+- `OPENCLAW_QA_DISCORD_CHANNEL_ID`
+- `OPENCLAW_QA_DISCORD_DRIVER_BOT_TOKEN`
+- `OPENCLAW_QA_DISCORD_SUT_BOT_TOKEN`
+- `OPENCLAW_QA_DISCORD_SUT_APPLICATION_ID` - must match the SUT bot user id returned by Discord (the lane fails fast otherwise).
 
 Optional:
 
-* `OPENCLAW_QA_DISCORD_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts.
-* `OPENCLAW_QA_DISCORD_VOICE_CHANNEL_ID` selects the voice/stage channel for `discord-voice-autojoin`; without it, the scenario picks the first visible voice/stage channel for the SUT bot.
+- `OPENCLAW_QA_DISCORD_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts.
+- `OPENCLAW_QA_DISCORD_VOICE_CHANNEL_ID` selects the voice/stage channel for `discord-voice-autojoin`; without it, the scenario picks the first visible voice/stage channel for the SUT bot.
 
 Scenarios (`extensions/qa-lab/src/live-transports/discord/discord-live.runtime.ts:36`):
 
-* `discord-canary`
-* `discord-mention-gating`
-* `discord-native-help-command-registration`
-* `discord-voice-autojoin` - opt-in voice scenario. Runs by itself, enables `channels.discord.voice.autoJoin`, and verifies the SUT bot's current Discord voice state is the target voice/stage channel. Convex Discord credentials may include optional `voiceChannelId`; otherwise the runner discovers the first visible voice/stage channel in the guild.
-* `discord-status-reactions-tool-only` - opt-in Mantis scenario. Runs by itself because it switches the SUT to always-on, tool-only guild replies with `messages.statusReactions.enabled=true`, then captures a REST reaction timeline plus HTML/PNG visual artifacts. Mantis before/after reports also preserve scenario-provided MP4 artifacts as `baseline.mp4` and `candidate.mp4`.
+- `discord-canary`
+- `discord-mention-gating`
+- `discord-native-help-command-registration`
+- `discord-voice-autojoin` - opt-in voice scenario. Runs by itself, enables `channels.discord.voice.autoJoin`, and verifies the SUT bot's current Discord voice state is the target voice/stage channel. Convex Discord credentials may include optional `voiceChannelId`; otherwise the runner discovers the first visible voice/stage channel in the guild.
+- `discord-status-reactions-tool-only` - opt-in Mantis scenario. Runs by itself because it switches the SUT to always-on, tool-only guild replies with `messages.statusReactions.enabled=true`, then captures a REST reaction timeline plus HTML/PNG visual artifacts. Mantis before/after reports also preserve scenario-provided MP4 artifacts as `baseline.mp4` and `candidate.mp4`.
 
 Run the Discord voice auto-join scenario explicitly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa discord \
   --scenario discord-voice-autojoin \
   --provider-mode mock-openai
@@ -373,7 +371,7 @@ pnpm openclaw qa discord \
 
 Run the Mantis status-reaction scenario explicitly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa discord \
   --scenario discord-status-reactions-tool-only \
   --provider-mode live-frontier \
@@ -384,14 +382,14 @@ pnpm openclaw qa discord \
 
 Output artifacts:
 
-* `discord-qa-report.md`
-* `discord-qa-summary.json`
-* `discord-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_DISCORD_CAPTURE_CONTENT=1`.
-* `discord-qa-reaction-timelines.json` and `discord-status-reactions-tool-only-timeline.png` when the status-reaction scenario runs.
+- `discord-qa-report.md`
+- `discord-qa-summary.json`
+- `discord-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_DISCORD_CAPTURE_CONTENT=1`.
+- `discord-qa-reaction-timelines.json` and `discord-status-reactions-tool-only-timeline.png` when the status-reaction scenario runs.
 
 ### Slack QA
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa slack
 ```
 
@@ -399,39 +397,39 @@ Targets one real private Slack channel with two distinct bots: a driver bot cont
 
 Required env when `--credential-source env`:
 
-* `OPENCLAW_QA_SLACK_CHANNEL_ID`
-* `OPENCLAW_QA_SLACK_DRIVER_BOT_TOKEN`
-* `OPENCLAW_QA_SLACK_SUT_BOT_TOKEN`
-* `OPENCLAW_QA_SLACK_SUT_APP_TOKEN`
+- `OPENCLAW_QA_SLACK_CHANNEL_ID`
+- `OPENCLAW_QA_SLACK_DRIVER_BOT_TOKEN`
+- `OPENCLAW_QA_SLACK_SUT_BOT_TOKEN`
+- `OPENCLAW_QA_SLACK_SUT_APP_TOKEN`
 
 Optional:
 
-* `OPENCLAW_QA_SLACK_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts.
+- `OPENCLAW_QA_SLACK_CAPTURE_CONTENT=1` keeps message bodies in observed-message artifacts.
 
 Scenarios (`extensions/qa-lab/src/live-transports/slack/slack-live.runtime.ts:39`):
 
-* `slack-canary`
-* `slack-mention-gating`
-* `slack-allowlist-block`
-* `slack-top-level-reply-shape`
-* `slack-restart-resume`
-* `slack-thread-follow-up`
-* `slack-thread-isolation`
+- `slack-canary`
+- `slack-mention-gating`
+- `slack-allowlist-block`
+- `slack-top-level-reply-shape`
+- `slack-restart-resume`
+- `slack-thread-follow-up`
+- `slack-thread-isolation`
 
 Output artifacts:
 
-* `slack-qa-report.md`
-* `slack-qa-summary.json`
-* `slack-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_SLACK_CAPTURE_CONTENT=1`.
+- `slack-qa-report.md`
+- `slack-qa-summary.json`
+- `slack-qa-observed-messages.json` - bodies redacted unless `OPENCLAW_QA_SLACK_CAPTURE_CONTENT=1`.
 
 #### Setting up the Slack workspace
 
 The lane needs two distinct Slack apps in one workspace, plus a channel both bots are members of:
 
-* `channelId` - the `Cxxxxxxxxxx` id of a channel both bots have been invited to. Use a dedicated channel; the lane posts on every run.
-* `driverBotToken` - bot token (`xoxb-...`) of the **Driver** app.
-* `sutBotToken` - bot token (`xoxb-...`) of the **SUT** app, which must be a separate Slack app from the driver so its bot user id is distinct.
-* `sutAppToken` - app-level token (`xapp-...`) of the SUT app with `connections:write`, used by Socket Mode so the SUT app can receive events.
+- `channelId` - the `Cxxxxxxxxxx` id of a channel both bots have been invited to. Use a dedicated channel; the lane posts on every run.
+- `driverBotToken` - bot token (`xoxb-...`) of the **Driver** app.
+- `sutBotToken` - bot token (`xoxb-...`) of the **SUT** app, which must be a separate Slack app from the driver so its bot user id is distinct.
+- `sutAppToken` - app-level token (`xapp-...`) of the SUT app with `connections:write`, used by Socket Mode so the SUT app can receive events.
 
 Prefer a Slack workspace dedicated to QA over reusing a production workspace.
 
@@ -439,9 +437,9 @@ The SUT manifest below intentionally narrows the bundled Slack plugin's producti
 
 **1. Create the Driver app**
 
-Go to [api.slack.com/apps](https://api.slack.com/apps) → *Create New App* → *From a manifest* → pick the QA workspace, paste the following manifest, then *Install to Workspace*:
+Go to [api.slack.com/apps](https://api.slack.com/apps) → _Create New App_ → _From a manifest_ → pick the QA workspace, paste the following manifest, then _Install to Workspace_:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "display_information": {
     "name": "OpenClaw QA Driver",
@@ -464,13 +462,13 @@ Go to [api.slack.com/apps](https://api.slack.com/apps) → *Create New App* → 
 }
 ```
 
-Copy the *Bot User OAuth Token* (`xoxb-...`) - that becomes `driverBotToken`. The driver only needs to post messages and identify itself; no events, no Socket Mode.
+Copy the _Bot User OAuth Token_ (`xoxb-...`) - that becomes `driverBotToken`. The driver only needs to post messages and identify itself; no events, no Socket Mode.
 
 **2. Create the SUT app**
 
-Repeat *Create New App → From a manifest* in the same workspace. This QA app intentionally uses a narrower version of the bundled Slack plugin's production manifest (`extensions/slack/src/setup-shared.ts:10`): reaction scopes and events are omitted because the live Slack QA suite does not cover reaction handling yet.
+Repeat _Create New App → From a manifest_ in the same workspace. This QA app intentionally uses a narrower version of the bundled Slack plugin's production manifest (`extensions/slack/src/setup-shared.ts:10`): reaction scopes and events are omitted because the live Slack QA suite does not cover reaction handling yet.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "display_information": {
     "name": "OpenClaw QA SUT",
@@ -537,8 +535,8 @@ Repeat *Create New App → From a manifest* in the same workspace. This QA app i
 
 After Slack creates the app, do two things on its settings page:
 
-* *Install to Workspace* → copy the *Bot User OAuth Token* → that becomes `sutBotToken`.
-* *Basic Information → App-Level Tokens → Generate Token and Scopes* → add scope `connections:write` → save → copy the `xapp-...` value → that becomes `sutAppToken`.
+- _Install to Workspace_ → copy the _Bot User OAuth Token_ → that becomes `sutBotToken`.
+- _Basic Information → App-Level Tokens → Generate Token and Scopes_ → add scope `connections:write` → save → copy the `xapp-...` value → that becomes `sutAppToken`.
 
 Verify the two bots have distinct user ids by calling `auth.test` on each token. The runtime distinguishes driver and SUT by user id; reusing one app for both will fail mention-gating immediately.
 
@@ -551,7 +549,7 @@ In the QA workspace, create a channel (e.g. `#openclaw-qa`) and invite both bots
 /invite @OpenClaw QA SUT
 ```
 
-Copy the `Cxxxxxxxxxx` id from *channel info → About → Channel ID* - that becomes `channelId`. A public channel works; if you use a private channel both apps already have `groups:history` so the harness's history reads will still succeed.
+Copy the `Cxxxxxxxxxx` id from _channel info → About → Channel ID_ - that becomes `channelId`. A public channel works; if you use a private channel both apps already have `groups:history` so the harness's history reads will still succeed.
 
 **4. Register the credentials**
 
@@ -559,7 +557,7 @@ Two options. Use env vars for single-machine debugging (set the four `OPENCLAW_Q
 
 For the Convex pool, write the four fields to a JSON file:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "channelId": "Cxxxxxxxxxx",
   "driverBotToken": "xoxb-...",
@@ -570,7 +568,7 @@ For the Convex pool, write the four fields to a JSON file:
 
 With `OPENCLAW_QA_CONVEX_SITE_URL` and `OPENCLAW_QA_CONVEX_SECRET_MAINTAINER` exported in your shell, register and verify:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa credentials add \
   --kind slack \
   --payload-file slack-creds.json \
@@ -585,14 +583,14 @@ Expect `count: 1`, `status: "active"`, no `lease` field.
 
 Run the lane locally to confirm both bots can talk to each other through the broker:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa slack \
   --credential-source convex \
   --credential-role maintainer \
   --output-dir .artifacts/qa-e2e/slack-local
 ```
 
-A green run completes in well under 30 seconds and `slack-qa-report.md` shows both `slack-canary` and `slack-mention-gating` at status `pass`. If the lane hangs for \~90 seconds and exits with `Convex credential pool exhausted for kind "slack"`, either the pool is empty or every row is leased - `qa credentials list --kind slack --status all --json` will tell you which.
+A green run completes in well under 30 seconds and `slack-qa-report.md` shows both `slack-canary` and `slack-mention-gating` at status `pass`. If the lane hangs for ~90 seconds and exits with `Convex credential pool exhausted for kind "slack"`, either the pool is empty or every row is leased - `qa credentials list --kind slack --status all --json` will tell you which.
 
 ### Convex credential pool
 
@@ -600,10 +598,10 @@ Telegram, Discord, Slack, and WhatsApp lanes can lease credentials from a shared
 
 Payload shapes the broker validates on `admin/add`:
 
-* Telegram (`kind: "telegram"`): `{ groupId: string, driverToken: string, sutToken: string }` - `groupId` must be a numeric chat-id string.
-* Telegram real user (`kind: "telegram-user"`): `{ groupId: string, sutToken: string, testerUserId: string, testerUsername: string, telegramApiId: string, telegramApiHash: string, tdlibDatabaseEncryptionKey: string, tdlibArchiveBase64: string, tdlibArchiveSha256: string, desktopTdataArchiveBase64: string, desktopTdataArchiveSha256: string }` - Mantis Telegram Desktop proof only. Generic QA Lab lanes must not acquire this kind.
-* Discord (`kind: "discord"`): `{ guildId: string, channelId: string, driverBotToken: string, sutBotToken: string, sutApplicationId: string }`.
-* WhatsApp (`kind: "whatsapp"`): `{ driverPhoneE164: string, sutPhoneE164: string, driverAuthArchiveBase64: string, sutAuthArchiveBase64: string, groupJid?: string }` - phone numbers must be distinct E.164 strings.
+- Telegram (`kind: "telegram"`): `{ groupId: string, driverToken: string, sutToken: string }` - `groupId` must be a numeric chat-id string.
+- Telegram real user (`kind: "telegram-user"`): `{ groupId: string, sutToken: string, testerUserId: string, testerUsername: string, telegramApiId: string, telegramApiHash: string, tdlibDatabaseEncryptionKey: string, tdlibArchiveBase64: string, tdlibArchiveSha256: string, desktopTdataArchiveBase64: string, desktopTdataArchiveSha256: string }` - Mantis Telegram Desktop proof only. Generic QA Lab lanes must not acquire this kind.
+- Discord (`kind: "discord"`): `{ guildId: string, channelId: string, driverBotToken: string, sutBotToken: string, sutApplicationId: string }`.
+- WhatsApp (`kind: "whatsapp"`): `{ driverPhoneE164: string, sutPhoneE164: string, driverAuthArchiveBase64: string, sutAuthArchiveBase64: string, groupJid?: string }` - phone numbers must be distinct E.164 strings.
 
 The Mantis Telegram Desktop proof workflow holds one exclusive Convex
 `telegram-user` lease for both the TDLib CLI driver and Telegram Desktop
@@ -624,8 +622,8 @@ Operational env vars and the Convex broker endpoint contract live in [Testing �
 
 Seed assets live in `qa/`:
 
-* `qa/scenarios/index.md`
-* `qa/scenarios/<theme>/*.md`
+- `qa/scenarios/index.md`
+- `qa/scenarios/<theme>/*.md`
 
 These are intentionally in git so the QA plan is visible to both humans and the
 agent.
@@ -633,12 +631,12 @@ agent.
 `qa-lab` should stay a generic markdown runner. Each scenario markdown file is
 the source of truth for one test run and should define:
 
-* scenario metadata
-* optional category, capability, lane, and risk metadata
-* docs and code refs
-* optional plugin requirements
-* optional gateway config patch
-* the executable `qa-flow`
+- scenario metadata
+- optional category, capability, lane, and risk metadata
+- docs and code refs
+- optional plugin requirements
+- optional gateway config patch
+- the executable `qa-flow`
 
 The reusable runtime surface that backs `qa-flow` is allowed to stay generic
 and cross-cutting. For example, markdown scenarios can combine transport-side
@@ -651,23 +649,23 @@ for implementation traceability.
 
 The baseline list should stay broad enough to cover:
 
-* DM and channel chat
-* thread behavior
-* message action lifecycle
-* cron callbacks
-* memory recall
-* model switching
-* subagent handoff
-* repo-reading and docs-reading
-* one small build task such as Lobster Invaders
+- DM and channel chat
+- thread behavior
+- message action lifecycle
+- cron callbacks
+- memory recall
+- model switching
+- subagent handoff
+- repo-reading and docs-reading
+- one small build task such as Lobster Invaders
 
 ## Provider mock lanes
 
 `qa suite` has two local provider mock lanes:
 
-* `mock-openai` is the scenario-aware OpenClaw mock. It remains the default
+- `mock-openai` is the scenario-aware OpenClaw mock. It remains the default
   deterministic mock lane for repo-backed QA and parity gates.
-* `aimock` starts an AIMock-backed provider server for experimental protocol,
+- `aimock` starts an AIMock-backed provider server for experimental protocol,
   fixture, record/replay, and chaos coverage. It is additive and does not
   replace the `mock-openai` scenario dispatcher.
 
@@ -683,9 +681,9 @@ provider names.
 
 At the architecture level, the split is:
 
-* `qa-lab` owns generic scenario execution, worker concurrency, artifact writing, and reporting.
-* The transport adapter owns gateway config, readiness, inbound and outbound observation, transport actions, and normalized transport state.
-* Markdown scenario files under `qa/scenarios/` define the test run; `qa-lab` provides the reusable runtime surface that executes them.
+- `qa-lab` owns generic scenario execution, worker concurrency, artifact writing, and reporting.
+- The transport adapter owns gateway config, readiness, inbound and outbound observation, transport actions, and normalized transport state.
+- Markdown scenario files under `qa/scenarios/` define the test run; `qa-lab` provides the reusable runtime surface that executes them.
 
 ### Adding a channel
 
@@ -698,24 +696,24 @@ Do not add a new top-level QA command root when the shared `qa-lab` host can own
 
 `qa-lab` owns the shared host mechanics:
 
-* the `openclaw qa` command root
-* suite startup and teardown
-* worker concurrency
-* artifact writing
-* report generation
-* scenario execution
-* compatibility aliases for older `qa-channel` scenarios
+- the `openclaw qa` command root
+- suite startup and teardown
+- worker concurrency
+- artifact writing
+- report generation
+- scenario execution
+- compatibility aliases for older `qa-channel` scenarios
 
 Runner plugins own the transport contract:
 
-* how `openclaw qa <runner>` is mounted beneath the shared `qa` root
-* how the gateway is configured for that transport
-* how readiness is checked
-* how inbound events are injected
-* how outbound messages are observed
-* how transcripts and normalized transport state are exposed
-* how transport-backed actions are executed
-* how transport-specific reset or cleanup is handled
+- how `openclaw qa <runner>` is mounted beneath the shared `qa` root
+- how the gateway is configured for that transport
+- how readiness is checked
+- how inbound events are injected
+- how outbound messages are observed
+- how transcripts and normalized transport state are exposed
+- how transport-backed actions are executed
+- how transport-specific reset or cleanup is handled
 
 The minimum adoption bar for a new channel:
 
@@ -729,27 +727,27 @@ The minimum adoption bar for a new channel:
 
 The decision rule is strict:
 
-* If behavior can be expressed once in `qa-lab`, put it in `qa-lab`.
-* If behavior depends on one channel transport, keep it in that runner plugin or plugin harness.
-* If a scenario needs a new capability that more than one channel can use, add a generic helper instead of a channel-specific branch in `suite.ts`.
-* If a behavior is only meaningful for one transport, keep the scenario transport-specific and make that explicit in the scenario contract.
+- If behavior can be expressed once in `qa-lab`, put it in `qa-lab`.
+- If behavior depends on one channel transport, keep it in that runner plugin or plugin harness.
+- If a scenario needs a new capability that more than one channel can use, add a generic helper instead of a channel-specific branch in `suite.ts`.
+- If a behavior is only meaningful for one transport, keep the scenario transport-specific and make that explicit in the scenario contract.
 
 ### Scenario helper names
 
 Preferred generic helpers for new scenarios:
 
-* `waitForTransportReady`
-* `waitForChannelReady`
-* `injectInboundMessage`
-* `injectOutboundMessage`
-* `waitForTransportOutboundMessage`
-* `waitForChannelOutboundMessage`
-* `waitForNoTransportOutbound`
-* `getTransportSnapshot`
-* `readTransportMessage`
-* `readTransportTranscript`
-* `formatTransportTranscript`
-* `resetTransport`
+- `waitForTransportReady`
+- `waitForChannelReady`
+- `injectInboundMessage`
+- `injectOutboundMessage`
+- `waitForTransportOutboundMessage`
+- `waitForChannelOutboundMessage`
+- `waitForNoTransportOutbound`
+- `getTransportSnapshot`
+- `readTransportMessage`
+- `readTransportTranscript`
+- `formatTransportTranscript`
+- `resetTransport`
 
 Compatibility aliases remain available for existing scenarios - `waitForQaChannelReady`, `waitForOutboundMessage`, `waitForNoOutbound`, `formatConversationTranscript`, `resetBus` - but new scenario authoring should use the generic names. The aliases exist to avoid a flag-day migration, not as the model going forward.
 
@@ -758,17 +756,17 @@ Compatibility aliases remain available for existing scenarios - `waitForQaChanne
 `qa-lab` exports a Markdown protocol report from the observed bus timeline.
 The report should answer:
 
-* What worked
-* What failed
-* What stayed blocked
-* What follow-up scenarios are worth adding
+- What worked
+- What failed
+- What stayed blocked
+- What follow-up scenarios are worth adding
 
 For the inventory of available scenarios - useful when sizing follow-up work or wiring a new transport - run `pnpm openclaw qa coverage` (add `--json` for machine-readable output).
 
 For character and style checks, run the same scenario across multiple live model
 refs and write a judged Markdown report:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa character-eval \
   --model openai/gpt-5.5,thinking=medium,fast \
   --model openai/gpt-5.2,thinking=xhigh \
@@ -820,8 +818,10 @@ When no `--judge-model` is passed, the judges default to
 
 ## Related docs
 
-* [Matrix QA](/concepts/qa-matrix)
-* [Personal agent benchmark pack](/concepts/personal-agent-benchmark-pack)
-* [QA Channel](/channels/qa-channel)
-* [Testing](/help/testing)
-* [Dashboard](/web/dashboard)
+- [Matrix QA](/concepts/qa-matrix)
+- [Personal agent benchmark pack](/concepts/personal-agent-benchmark-pack)
+- [QA Channel](/channels/qa-channel)
+- [Testing](/help/testing)
+- [Dashboard](/web/dashboard)
+
+---

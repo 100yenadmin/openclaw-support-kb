@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser troubleshooting"
 source: "https://docs.openclaw.ai/tools/browser-linux-troubleshooting"
-source_hash: "b0c6b00335a0af1161d8b622ac1d38b09e50c73026529ee4dceb5fb8cb130736"
+source_hash: "d6c296776d786f5c9a680c5e0ca76100920e881f5b9d4c8c46034aae4fb11fec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-linux-troubleshooting.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Browser troubleshooting
 Source: https://docs.openclaw.ai/tools/browser-linux-troubleshooting
-
-
 
 ## Problem: "Failed to start Chrome CDP on port 18800"
 
@@ -38,11 +36,11 @@ This is NOT a real browser - it's just a wrapper.
 
 Other common Linux launch failures:
 
-* `The profile appears to be in use by another Chromium process` means Chrome
+- `The profile appears to be in use by another Chromium process` means Chrome
   found stale `Singleton*` lock files in the managed profile directory. OpenClaw
   removes those locks and retries once when the lock points at a dead or
   different-host process.
-* `Missing X server or $DISPLAY` means a visible browser was explicitly
+- `Missing X server or $DISPLAY` means a visible browser was explicitly
   requested on a host without a desktop session. By default, local managed
   profiles now fall back to headless mode on Linux when `DISPLAY` and
   `WAYLAND_DISPLAY` are both unset. If you set `OPENCLAW_BROWSER_HEADLESS=0`,
@@ -55,7 +53,7 @@ Other common Linux launch failures:
 
 Install the official Google Chrome `.deb` package, which is not sandboxed by snap:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt --fix-broken install -y  # if there are dependency errors
@@ -63,7 +61,7 @@ sudo apt --fix-broken install -y  # if there are dependency errors
 
 Then update your OpenClaw config (`~/.openclaw/openclaw.json`):
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "browser": {
     "enabled": true,
@@ -80,7 +78,7 @@ If you must use snap Chromium, configure OpenClaw to attach to a manually-starte
 
 1. Update config:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "browser": {
     "enabled": true,
@@ -93,7 +91,7 @@ If you must use snap Chromium, configure OpenClaw to attach to a manually-starte
 
 2. Start Chromium manually:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 chromium-browser --headless --no-sandbox --disable-gpu \
   --remote-debugging-port=18800 \
   --user-data-dir=$HOME/.openclaw/browser/openclaw/user-data \
@@ -102,7 +100,7 @@ chromium-browser --headless --no-sandbox --disable-gpu \
 
 3. Optionally create a systemd user service to auto-start Chrome:
 
-```ini theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ini
 # ~/.config/systemd/user/openclaw-browser.service
 [Unit]
 Description=OpenClaw Browser (Chrome CDP)
@@ -123,13 +121,13 @@ Enable with: `systemctl --user enable --now openclaw-browser.service`
 
 Check status:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -s http://127.0.0.1:18791/ | jq '{running, pid, chosenBrowser}'
 ```
 
 Test browsing:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -s -X POST http://127.0.0.1:18791/start
 curl -s http://127.0.0.1:18791/tabs
 ```
@@ -154,7 +152,7 @@ endpoint. Raise `browser.localCdpReadyTimeoutMs` when launch succeeds but
 `openclaw browser start` still reports `not reachable after start`. Values must
 be positive integers up to `120000` ms; invalid config values are rejected.
 
-### Problem: "No Chrome tabs found for profile="user""
+### Problem: "No Chrome tabs found for profile=\"user\""
 
 You're using an `existing-session` / Chrome MCP profile. OpenClaw can see local Chrome,
 but there are no open tabs available to attach to.
@@ -167,18 +165,20 @@ Fix options:
 
 Notes:
 
-* `user` is host-only. For Linux servers, containers, or remote hosts, prefer CDP profiles.
-* `user` / other `existing-session` profiles keep the current Chrome MCP limits:
+- `user` is host-only. For Linux servers, containers, or remote hosts, prefer CDP profiles.
+- `user` / other `existing-session` profiles keep the current Chrome MCP limits:
   ref-driven actions, one-file upload hooks, no dialog timeout overrides, no
   `wait --load networkidle`, and no `responsebody`, PDF export, download
   interception, or batch actions.
-* Local `openclaw` profiles auto-assign `cdpPort`/`cdpUrl`; only set those for remote CDP.
-* Remote CDP profiles accept `http://`, `https://`, `ws://`, and `wss://`.
+- Local `openclaw` profiles auto-assign `cdpPort`/`cdpUrl`; only set those for remote CDP.
+- Remote CDP profiles accept `http://`, `https://`, `ws://`, and `wss://`.
   Use HTTP(S) for `/json/version` discovery, or WS(S) when your browser
   service gives you a direct DevTools socket URL.
 
 ## Related
 
-* [Browser](/tools/browser)
-* [Browser login](/tools/browser-login)
-* [Browser WSL2 troubleshooting](/tools/browser-wsl2-windows-remote-cdp-troubleshooting)
+- [Browser](/tools/browser)
+- [Browser login](/tools/browser-login)
+- [Browser WSL2 troubleshooting](/tools/browser-wsl2-windows-remote-cdp-troubleshooting)
+
+---

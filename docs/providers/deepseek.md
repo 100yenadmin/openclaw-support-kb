@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepSeek"
 source: "https://docs.openclaw.ai/providers/deepseek"
-source_hash: "c44946130b9c696a4a0a82b6cc277e2a0f9572885900bdc439cdc7d67b43ce89"
+source_hash: "5f4d7717bb964f65f9e7aee9334882583e5b65da8e307965211a69596b67a631"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepseek.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # DeepSeek
 Source: https://docs.openclaw.ai/providers/deepseek
-
-
 
 [DeepSeek](https://www.deepseek.com) provides powerful AI models with an OpenAI-compatible API.
 
@@ -26,38 +24,47 @@ Source: https://docs.openclaw.ai/providers/deepseek
 
 ## Getting started
 
-<Steps>
-  <Step title="Get your API key">
-    Create an API key at [platform.deepseek.com](https://platform.deepseek.com/api_keys).
-  </Step>
+Steps
 
-  <Step title="Run onboarding">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Get your API key
+
+    Create an API key at [platform.deepseek.com](https://platform.deepseek.com/api_keys).
+
+
+Run onboarding
+
+    ```bash
     openclaw onboard --auth-choice deepseek-api-key
     ```
 
     This will prompt for your API key and set `deepseek/deepseek-v4-flash` as the default model.
-  </Step>
 
-  <Step title="Verify models are available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Verify models are available
+
+    ```bash
     openclaw models list --provider deepseek
     ```
 
     To inspect the bundled static catalog without requiring a running Gateway,
     use:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw models list --all --provider deepseek
     ```
-  </Step>
-</Steps>
 
-<AccordionGroup>
-  <Accordion title="Non-interactive setup">
+
+
+AccordionGroup
+
+
+Non-interactive setup
+
     For scripted or headless installations, pass all flags directly:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --non-interactive \
       --mode local \
       --auth-choice deepseek-api-key \
@@ -65,14 +72,14 @@ Source: https://docs.openclaw.ai/providers/deepseek
       --skip-health \
       --accept-risk
     ```
-  </Accordion>
-</AccordionGroup>
 
-<Warning>
-  If the Gateway runs as a daemon (launchd/systemd), make sure `DEEPSEEK_API_KEY`
-  is available to that process (for example, in `~/.openclaw/.env` or via
-  `env.shellEnv`).
-</Warning>
+
+
+Warning
+
+If the Gateway runs as a daemon (launchd/systemd), make sure `DEEPSEEK_API_KEY`
+is available to that process (for example, in `~/.openclaw/.env` or via
+`env.shellEnv`).
 
 ## Built-in catalog
 
@@ -83,13 +90,13 @@ Source: https://docs.openclaw.ai/providers/deepseek
 | `deepseek/deepseek-chat`     | DeepSeek Chat     | text  | 131,072   | 8,192      | DeepSeek V3.2 non-thinking surface         |
 | `deepseek/deepseek-reasoner` | DeepSeek Reasoner | text  | 131,072   | 65,536     | Reasoning-enabled V3.2 surface             |
 
-<Tip>
-  V4 models support DeepSeek's `thinking` control. OpenClaw also replays
-  DeepSeek `reasoning_content` on follow-up turns so thinking sessions with tool
-  calls can continue.
-  Use `/think xhigh` or `/think max` with DeepSeek V4 models to request DeepSeek's
-  maximum `reasoning_effort`.
-</Tip>
+Tip
+
+V4 models support DeepSeek's `thinking` control. OpenClaw also replays
+DeepSeek `reasoning_content` on follow-up turns so thinking sessions with tool
+calls can continue.
+Use `/think xhigh` or `/think max` with DeepSeek V4 models to request DeepSeek's
+maximum `reasoning_effort`.
 
 ## Thinking and tools
 
@@ -120,7 +127,7 @@ higher cost or latency.
 The direct live model suite includes DeepSeek V4 in the modern model set. To
 run only the DeepSeek V4 direct-model checks:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_LIVE_PROVIDERS=deepseek \
 OPENCLAW_LIVE_MODELS="deepseek/deepseek-v4-flash,deepseek/deepseek-v4-pro" \
 pnpm test:live src/agents/models.profiles.live.test.ts
@@ -131,7 +138,7 @@ follow-up turns preserve the replay payload DeepSeek requires.
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { DEEPSEEK_API_KEY: "sk-..." },
   agents: {
@@ -144,12 +151,16 @@ follow-up turns preserve the replay payload DeepSeek requires.
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
-    Choosing providers, model refs, and failover behavior.
-  </Card>
+CardGroup
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Model selection
+
+    Choosing providers, model refs, and failover behavior.
+
+
+Configuration reference
+
     Full config reference for agents, models, and providers.
-  </Card>
-</CardGroup>
+
+---

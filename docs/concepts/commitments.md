@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inferred commitments"
 source: "https://docs.openclaw.ai/concepts/commitments"
-source_hash: "133cd50c17b472b22aeea8b9059be8e91d09a15e9fc8a3443e85bbb22adaec17"
+source_hash: "13244c20ad3e454b18086598513fb174741c203da0c8b937b6a27703726a289f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/commitments.md"
@@ -13,17 +13,15 @@ duplicate_index: 1
 # Inferred commitments
 Source: https://docs.openclaw.ai/concepts/commitments
 
-
-
 Commitments are short-lived follow-up memories. When enabled, OpenClaw can
 notice that a conversation created a future check-in opportunity and remember
 to bring it back later.
 
 Examples:
 
-* You mention an interview tomorrow. OpenClaw may check in afterward.
-* You say you are exhausted. OpenClaw may ask later whether you slept.
-* The agent says it will follow up after something changes. OpenClaw may track
+- You mention an interview tomorrow. OpenClaw may check in afterward.
+- You say you are exhausted. OpenClaw may ask later whether you slept.
+- The agent says it will follow up after something changes. OpenClaw may track
   that open loop.
 
 Commitments are not durable facts like `MEMORY.md`, and they are not exact
@@ -34,14 +32,14 @@ conversation-bound obligation, then heartbeat delivers it when it is due.
 
 Commitments are off by default. Enable them in config:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set commitments.enabled true
 openclaw config set commitments.maxPerDay 3
 ```
 
 Equivalent `openclaw.json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "commitments": {
     "enabled": true,
@@ -62,12 +60,12 @@ to reason about the extraction.
 
 When it finds a high-confidence candidate, OpenClaw stores a commitment with:
 
-* the agent id
-* the session key
-* the original channel and delivery target
-* a due window
-* a short suggested check-in
-* non-instructional metadata for heartbeat to decide whether to send it
+- the agent id
+- the session key
+- the original channel and delivery target
+- a due window
+- a short suggested check-in
+- non-instructional metadata for heartbeat to decide whether to send it
 
 Delivery happens through heartbeat. When a commitment becomes due, heartbeat
 adds the commitment to the heartbeat turn for the same agent and channel scope.
@@ -110,7 +108,7 @@ but the conversation clearly created a useful future check-in.
 
 Use the CLI to inspect and clear stored commitments:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments
 openclaw commitments --all
 openclaw commitments --agent main
@@ -130,7 +128,7 @@ follow-up exists.
 Stored commitments are local OpenClaw state. They are operational memory, not
 long-term memory. Disable the feature with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set commitments.enabled false
 ```
 
@@ -138,20 +136,22 @@ openclaw config set commitments.enabled false
 
 If expected follow-ups are not appearing:
 
-* Confirm `commitments.enabled` is `true`.
-* Check `openclaw commitments --all` for pending, dismissed, snoozed, or expired
+- Confirm `commitments.enabled` is `true`.
+- Check `openclaw commitments --all` for pending, dismissed, snoozed, or expired
   records.
-* Make sure heartbeat is running for the agent.
-* Check whether `commitments.maxPerDay` has already been reached for that
+- Make sure heartbeat is running for the agent.
+- Check whether `commitments.maxPerDay` has already been reached for that
   agent session.
-* Remember that exact reminders are skipped by commitment extraction and should
+- Remember that exact reminders are skipped by commitment extraction and should
   appear under [scheduled tasks](/automation/cron-jobs) instead.
 
 ## Related
 
-* [Memory overview](/concepts/memory)
-* [Active memory](/concepts/active-memory)
-* [Heartbeat](/gateway/heartbeat)
-* [Scheduled tasks](/automation/cron-jobs)
-* [`openclaw commitments`](/cli/commitments)
-* [Configuration reference](/gateway/configuration-reference#commitments)
+- [Memory overview](/concepts/memory)
+- [Active memory](/concepts/active-memory)
+- [Heartbeat](/gateway/heartbeat)
+- [Scheduled tasks](/automation/cron-jobs)
+- [`openclaw commitments`](/cli/commitments)
+- [Configuration reference](/gateway/configuration-reference#commitments)
+
+---

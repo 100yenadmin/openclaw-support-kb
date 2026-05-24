@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "c1c20a4f689dd25487f2dc798f2c837260ae023ca2842323da8d1c592ab62ea3"
+source_hash: "4dcb758be1dcc30e6731719b08315d46a9c4297fb35871c59d95f03395767b4f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Media overview
 Source: https://docs.openclaw.ai/tools/media-overview
-
-
 
 OpenClaw generates images, videos, and music, understands inbound media
 (images, audio, video), and speaks replies aloud with text-to-speech. All
@@ -29,38 +27,45 @@ telephony, meetings, browser realtime, and native push-to-talk clients.
 
 ## Capabilities
 
-<CardGroup>
-  <Card title="Image generation" href="/tools/image-generation" icon="image">
+CardGroup
+
+
+Image generation
+
     Create and edit images from text prompts or reference images via
     `image_generate`. Async in chat sessions — runs in the background and
     posts the result when ready.
-  </Card>
 
-  <Card title="Video generation" href="/tools/video-generation" icon="video">
+
+Video generation
+
     Text-to-video, image-to-video, and video-to-video via `video_generate`.
     Async — runs in the background and posts the result when ready.
-  </Card>
 
-  <Card title="Music generation" href="/tools/music-generation" icon="music">
+
+Music generation
+
     Generate music or audio tracks via `music_generate`. Async in chat
     sessions on the shared media-generation task lifecycle.
-  </Card>
 
-  <Card title="Text-to-speech" href="/tools/tts" icon="microphone">
+
+Text-to-speech
+
     Convert outbound replies to spoken audio via the `tts` tool plus
     `messages.tts` config. Synchronous.
-  </Card>
 
-  <Card title="Media understanding" href="/nodes/media-understanding" icon="eye">
+
+Media understanding
+
     Summarize inbound images, audio, and video using vision-capable model
     providers and dedicated media-understanding plugins.
-  </Card>
 
-  <Card title="Speech-to-text" href="/nodes/audio" icon="ear-listen">
+
+Speech-to-text
+
     Transcribe inbound voice messages through batch STT or Voice Call
     streaming STT providers.
-  </Card>
-</CardGroup>
+
 
 ## Provider capability matrix
 
@@ -70,16 +75,16 @@ telephony, meetings, browser realtime, and native push-to-talk clients.
 | BytePlus    |       |   ✓   |       |     |     |                |                     |
 | ComfyUI     |   ✓   |   ✓   |   ✓   |     |     |                |                     |
 | DeepInfra   |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
-| Deepgram    |       |       |       |     |  ✓  |        ✓       |                     |
+| Deepgram    |       |       |       |     |  ✓  |       ✓        |                     |
 | ElevenLabs  |       |       |       |  ✓  |  ✓  |                |                     |
 | fal         |   ✓   |   ✓   |   ✓   |     |     |                |                     |
-| Google      |   ✓   |   ✓   |   ✓   |  ✓  |     |        ✓       |          ✓          |
+| Google      |   ✓   |   ✓   |   ✓   |  ✓  |     |       ✓        |          ✓          |
 | Gradium     |       |       |       |  ✓  |     |                |                     |
 | Local CLI   |       |       |       |  ✓  |     |                |                     |
 | Microsoft   |       |       |       |  ✓  |     |                |                     |
 | MiniMax     |   ✓   |   ✓   |   ✓   |  ✓  |     |                |                     |
 | Mistral     |       |       |       |     |  ✓  |                |                     |
-| OpenAI      |   ✓   |   ✓   |       |  ✓  |  ✓  |        ✓       |          ✓          |
+| OpenAI      |   ✓   |   ✓   |       |  ✓  |  ✓  |       ✓        |          ✓          |
 | OpenRouter  |   ✓   |   ✓   |   ✓   |  ✓  |  ✓  |                |          ✓          |
 | Qwen        |       |   ✓   |       |     |     |                |                     |
 | Runway      |       |   ✓   |       |     |     |                |                     |
@@ -89,13 +94,13 @@ telephony, meetings, browser realtime, and native push-to-talk clients.
 | xAI         |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
 | Xiaomi MiMo |   ✓   |       |       |  ✓  |     |                |          ✓          |
 
-<Note>
-  Media understanding uses any vision-capable or audio-capable model registered
-  in your provider config. The matrix above lists providers with dedicated
-  media-understanding support; most multimodal LLM providers (Anthropic, Google,
-  OpenAI, etc.) can also understand inbound media when configured as the active
-  reply model.
-</Note>
+Note
+
+Media understanding uses any vision-capable or audio-capable model registered
+in your provider config. The matrix above lists providers with dedicated
+media-understanding support; most multimodal LLM providers (Anthropic, Google,
+OpenAI, etc.) can also understand inbound media when configured as the active
+reply model.
 
 ## Async vs synchronous
 
@@ -135,39 +140,46 @@ catalogs returned by the Gateway.
 
 ## Provider mappings (how vendors split across surfaces)
 
-<AccordionGroup>
-  <Accordion title="Google">
+AccordionGroup
+
+
+Google
+
     Image, video, music, batch TTS, backend realtime voice, and
     media-understanding surfaces.
-  </Accordion>
 
-  <Accordion title="OpenAI">
+
+OpenAI
+
     Image, video, batch TTS, batch STT, Voice Call streaming STT, backend
     realtime voice, and memory-embedding surfaces.
-  </Accordion>
 
-  <Accordion title="DeepInfra">
+
+DeepInfra
+
     Chat/model routing, image generation/editing, text-to-video, batch TTS,
     batch STT, image media understanding, and memory-embedding surfaces.
     DeepInfra-native rerank/classification/object-detection models are not
     registered until OpenClaw has dedicated provider contracts for those
     categories.
-  </Accordion>
 
-  <Accordion title="xAI">
+
+xAI
+
     Image, video, search, code-execution, batch TTS, batch STT, and Voice
     Call streaming STT. xAI Realtime voice is an upstream capability but is
     not registered in OpenClaw until the shared realtime-voice contract can
     represent it.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-* [Image generation](/tools/image-generation)
-* [Video generation](/tools/video-generation)
-* [Music generation](/tools/music-generation)
-* [Text-to-speech](/tools/tts)
-* [Media understanding](/nodes/media-understanding)
-* [Audio nodes](/nodes/audio)
-* [Talk mode](/nodes/talk)
+- [Image generation](/tools/image-generation)
+- [Video generation](/tools/video-generation)
+- [Music generation](/tools/music-generation)
+- [Text-to-speech](/tools/tts)
+- [Media understanding](/nodes/media-understanding)
+- [Audio nodes](/nodes/audio)
+- [Talk mode](/nodes/talk)
+
+---

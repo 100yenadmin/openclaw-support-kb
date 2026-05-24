@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/web-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search"
-source_hash: "8cd354f19db94badff70579274d7e926f9125a9f183e23e53d5947ce07dfa325"
+source_hash: "ac4af7107d28fb6b0e9395430cb86ad0006ad8f0817a3d1ddb71d29e42ec97ea"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-search.md"
@@ -44,7 +44,7 @@ Brave Search, DDGS, and xAI are **search-only** — pair any of them with Firecr
 **Per-capability split:** you can use different providers for search and extract independently — for example SearXNG (free) for search and Firecrawl for extract. See [Per-capability configuration](#per-capability-configuration) below.
 
 :::tip Nous Subscribers
-If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, web search and extract are available through the **[Tool Gateway](tool-gateway.md)** via managed Firecrawl — no API key needed. Run `hermes tools` to enable it.
+If you have a paid [Nous Portal](https://portal.nousresearch.com) subscription, web search and extract are available through the **[Tool Gateway](tool-gateway.md)** via managed Firecrawl — no API key needed. New installs can run `hermes setup --portal` to log in and turn on all gateway tools at once; existing installs can flip just web via `hermes tools`.
 :::
 
 ---

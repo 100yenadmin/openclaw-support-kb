@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "ba8037d5475d923f3a89948362e9dade981057ddaddb35f0f506ab16f5108d60"
+source_hash: "ef5179256fbf842db045e2b37a4d69dc73432b22947f2ce2cdf2e845e15a11a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Fireworks
 Source: https://docs.openclaw.ai/providers/fireworks
-
-
 
 [Fireworks](https://fireworks.ai) exposes open-weight and routed models through an OpenAI-compatible API. OpenClaw includes a bundled Fireworks provider plugin that ships with two pre-cataloged Kimi models and accepts any Fireworks model or router id at runtime.
 
@@ -31,41 +29,49 @@ Source: https://docs.openclaw.ai/providers/fireworks
 
 ## Getting started
 
-<Steps>
-  <Step title="Set the Fireworks API key">
-    <CodeGroup>
-      ```bash Onboarding theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice fireworks-api-key
-      ```
+Steps
 
-      ```bash Direct flag theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --non-interactive \
-        --auth-choice fireworks-api-key \
-        --fireworks-api-key "$FIREWORKS_API_KEY"
-      ```
 
-      ```bash Env only theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      export FIREWORKS_API_KEY=fw-...
-      ```
-    </CodeGroup>
+Set the Fireworks API key
+
+
+CodeGroup
+
+```bash Onboarding
+openclaw onboard --auth-choice fireworks-api-key
+```
+
+```bash Direct flag
+openclaw onboard --non-interactive \
+  --auth-choice fireworks-api-key \
+  --fireworks-api-key "$FIREWORKS_API_KEY"
+```
+
+```bash Env only
+export FIREWORKS_API_KEY=fw-...
+```
+
+
 
     Onboarding stores the key against the `fireworks` provider in your auth profiles and sets the **Fire Pass** Kimi K2.5 Turbo router as the default model.
-  </Step>
 
-  <Step title="Verify the model is available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Verify the model is available
+
+    ```bash
     openclaw models list --provider fireworks
     ```
 
     The list should include `Kimi K2.6` and `Kimi K2.5 Turbo (Fire Pass)`. If `FIREWORKS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
-  </Step>
-</Steps>
+
+
 
 ## Non-interactive setup
 
 For scripted or CI installs, pass everything on the command line:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --non-interactive \
   --mode local \
   --auth-choice fireworks-api-key \
@@ -81,15 +87,15 @@ openclaw onboard --non-interactive \
 | `fireworks/accounts/fireworks/models/kimi-k2p6`        | Kimi K2.6                   | text + image | 262,144 | 262,144    | Forced off           |
 | `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo` | Kimi K2.5 Turbo (Fire Pass) | text + image | 256,000 | 256,000    | Forced off (default) |
 
-<Note>
+Note
+
   OpenClaw pins all Fireworks Kimi models to `thinking: off` because Fireworks rejects Kimi thinking parameters in production. Routing the same model through [Moonshot](/providers/moonshot) directly preserves Kimi reasoning output. See [thinking modes](/tools/thinking) for switching between providers.
-</Note>
 
 ## Custom Fireworks model ids
 
 OpenClaw accepts any Fireworks model or router id at runtime. Use the exact id shown by Fireworks and prefix it with `fireworks/`. Dynamic resolution clones the Fire Pass template (text + image input, OpenAI-compatible API, default cost zero) and disables thinking automatically when the id matches the Kimi pattern.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -101,49 +107,66 @@ OpenClaw accepts any Fireworks model or router id at runtime. Use the exact id s
 }
 ```
 
-<AccordionGroup>
-  <Accordion title="How model id prefixing works">
+AccordionGroup
+
+
+How model id prefixing works
+
     Every Fireworks model ref in OpenClaw starts with `fireworks/` followed by the exact id or router path from the Fireworks platform. For example:
 
-    * Router model: `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo`
-    * Direct model: `fireworks/accounts/fireworks/models/<model-name>`
+    - Router model: `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo`
+    - Direct model: `fireworks/accounts/fireworks/models/<model-name>`
 
     OpenClaw strips the `fireworks/` prefix when constructing the API request and sends the remaining path to the Fireworks endpoint as the OpenAI-compatible `model` field.
-  </Accordion>
 
-  <Accordion title="Why thinking is forced off for Kimi">
+
+
+
+Why thinking is forced off for Kimi
+
     Fireworks K2.6 returns a 400 if the request carries `reasoning_*` parameters even though Kimi supports thinking through Moonshot's own API. The bundled policy (`extensions/fireworks/thinking-policy.ts`) advertises only the `off` thinking level for Kimi model ids, so manual `/think` switches and provider-policy surfaces stay aligned with the runtime contract.
 
     To use Kimi reasoning end-to-end, configure the [Moonshot provider](/providers/moonshot) and route the same model through it.
-  </Accordion>
 
-  <Accordion title="Environment availability for the daemon">
+
+
+
+Environment availability for the daemon
+
     If the Gateway runs as a managed service (launchd, systemd, Docker), the Fireworks key must be visible to that process — not just to your interactive shell.
 
-    <Warning>
+
+Warning
+
       A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
-    </Warning>
+
 
     On macOS, `openclaw gateway install` already wires `~/.openclaw/.env` into the LaunchAgent environment file. Re-run install (or `openclaw doctor --fix`) after rotating the key.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model providers" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model providers
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Thinking modes" href="/tools/thinking" icon="brain">
+
+Thinking modes
+
     `/think` levels, provider policies, and routing reasoning-capable models.
-  </Card>
 
-  <Card title="Moonshot" href="/providers/moonshot" icon="moon">
+
+Moonshot
+
     Run Kimi with native thinking output through Moonshot's own API.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     General troubleshooting and FAQ.
-  </Card>
-</CardGroup>
+
+---

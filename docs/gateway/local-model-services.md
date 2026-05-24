@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local model services"
 source: "https://docs.openclaw.ai/gateway/local-model-services"
-source_hash: "eb08cbe2dac98fd06d3216e02f7374841d8cc9d7de37dc2ae30124837b0f4013"
+source_hash: "d833d634b840c8bd48a1817e61cfb67cf91262bba333224c4d71601e63a05c52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-model-services.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Local model services
 Source: https://docs.openclaw.ai/gateway/local-model-services
-
-
 
 `models.providers.<id>.localService` lets OpenClaw start a provider-owned local
 model server on demand. It is provider-level config: when the selected model
@@ -39,7 +37,7 @@ server is a child process of the OpenClaw process that first needed it.
 
 ## Config shape
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -76,17 +74,17 @@ server is a child process of the OpenClaw process that first needed it.
 
 ## Fields
 
-* `command`: absolute executable path. Shell lookup is not used.
-* `args`: process arguments. No shell expansion, pipes, globbing, or quoting
+- `command`: absolute executable path. Shell lookup is not used.
+- `args`: process arguments. No shell expansion, pipes, globbing, or quoting
   rules are applied.
-* `cwd`: optional working directory for the process.
-* `env`: optional environment variables merged over the OpenClaw process
+- `cwd`: optional working directory for the process.
+- `env`: optional environment variables merged over the OpenClaw process
   environment.
-* `healthUrl`: readiness URL. If omitted, OpenClaw appends `/models` to
+- `healthUrl`: readiness URL. If omitted, OpenClaw appends `/models` to
   `baseUrl`, so `http://127.0.0.1:8000/v1` becomes
   `http://127.0.0.1:8000/v1/models`.
-* `readyTimeoutMs`: startup readiness deadline. Default: `120000`.
-* `idleStopMs`: idle shutdown delay for OpenClaw-started processes. `0` or
+- `readyTimeoutMs`: startup readiness deadline. Default: `120000`.
+- `idleStopMs`: idle shutdown delay for OpenClaw-started processes. `0` or
   omitted keeps the process alive until OpenClaw exits.
 
 ## Inferrs example
@@ -94,7 +92,7 @@ server is a child process of the OpenClaw process that first needed it.
 Inferrs is a custom OpenAI-compatible `/v1` backend, so the same local service
 API works with the `inferrs` provider entry.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -153,7 +151,7 @@ OpenClaw.
 For the full setup, context sizing guidance, and verification commands, see
 [ds4](/providers/ds4).
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -163,10 +161,14 @@ For the full setup, context sizing guidance, and verification commands, see
         api: "openai-completions",
         timeoutSeconds: 300,
         localService: {
-          command: "<DS4_DIR>/ds4-server",
+          command: "
+DS4_DIR
+/ds4-server",
           args: [
             "--model",
-            "<DS4_DIR>/ds4flash.gguf",
+            "
+DS4_DIR
+/ds4flash.gguf",
             "--host",
             "127.0.0.1",
             "--port",
@@ -176,7 +178,9 @@ For the full setup, context sizing guidance, and verification commands, see
             "--tokens",
             "128",
           ],
-          cwd: "<DS4_DIR>",
+          cwd: "
+DS4_DIR
+",
           healthUrl: "http://127.0.0.1:18000/v1/models",
           readyTimeoutMs: 300000,
           idleStopMs: 0,
@@ -190,25 +194,29 @@ For the full setup, context sizing guidance, and verification commands, see
 
 ## Operational notes
 
-* One OpenClaw process manages the child it started. Another OpenClaw process
+- One OpenClaw process manages the child it started. Another OpenClaw process
   that sees the same health URL already live will reuse it without adopting it.
-* Startup is serialized per provider command and argument set, so concurrent
+- Startup is serialized per provider command and argument set, so concurrent
   requests do not spawn duplicate servers for the same config.
-* Active streaming responses hold a lease; idle shutdown waits until response
+- Active streaming responses hold a lease; idle shutdown waits until response
   body handling is complete.
-* Use `timeoutSeconds` on slow local providers so cold starts and long generations
+- Use `timeoutSeconds` on slow local providers so cold starts and long generations
   do not hit the default model request timeout.
-* Use an explicit `healthUrl` if your server exposes readiness somewhere other
+- Use an explicit `healthUrl` if your server exposes readiness somewhere other
   than `/v1/models`.
 
 ## Related
 
-<CardGroup>
-  <Card title="Local models" href="/gateway/local-models" icon="server">
-    Local model setup, provider choices, and safety guidance.
-  </Card>
+CardGroup
 
-  <Card title="Inferrs" href="/providers/inferrs" icon="cpu">
+
+Local models
+
+    Local model setup, provider choices, and safety guidance.
+
+
+Inferrs
+
     Run OpenClaw through the inferrs OpenAI-compatible local server.
-  </Card>
-</CardGroup>
+
+---

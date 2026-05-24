@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GCP"
 source: "https://docs.openclaw.ai/install/gcp"
-source_hash: "f1c767eb79256bc67a4ccdfe4236c224c2a722aa14df6252a5d0b89db8644fd4"
+source_hash: "263b42b9bc899de797c82a3c18443dd56643e4aa40ae661288256f5a071167c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/gcp.md"
@@ -13,35 +13,33 @@ duplicate_index: 1
 # GCP
 Source: https://docs.openclaw.ai/install/gcp
 
-
-
 Run a persistent OpenClaw Gateway on a GCP Compute Engine VM using Docker, with durable state, baked-in binaries, and safe restart behavior.
 
-If you want "OpenClaw 24/7 for \~\$5-12/mo", this is a reliable setup on Google Cloud.
+If you want "OpenClaw 24/7 for ~$5-12/mo", this is a reliable setup on Google Cloud.
 Pricing varies by machine type and region; pick the smallest VM that fits your workload and scale up if you hit OOMs.
 
 ## What are we doing (simple terms)?
 
-* Create a GCP project and enable billing
-* Create a Compute Engine VM
-* Install Docker (isolated app runtime)
-* Start the OpenClaw Gateway in Docker
-* Persist `~/.openclaw` + `~/.openclaw/workspace` on the host (survives restarts/rebuilds)
-* Access the Control UI from your laptop via an SSH tunnel
+- Create a GCP project and enable billing
+- Create a Compute Engine VM
+- Install Docker (isolated app runtime)
+- Start the OpenClaw Gateway in Docker
+- Persist `~/.openclaw` + `~/.openclaw/workspace` on the host (survives restarts/rebuilds)
+- Access the Control UI from your laptop via an SSH tunnel
 
 That mounted `~/.openclaw` state includes `openclaw.json`, per-agent
 `agents/<agentId>/agent/auth-profiles.json`, and `.env`.
 
 The Gateway can be accessed via:
 
-* SSH port forwarding from your laptop
-* Direct port exposure if you manage firewalling and tokens yourself
+- SSH port forwarding from your laptop
+- Direct port exposure if you manage firewalling and tokens yourself
 
 This guide uses Debian on GCP Compute Engine.
 Ubuntu also works; map packages accordingly.
 For the generic Docker flow, see [Docker](/install/docker).
 
-***
+---
 
 ## Quick path (experienced operators)
 
@@ -54,33 +52,36 @@ For the generic Docker flow, see [Docker](/install/docker).
 7. Configure `.env` and `docker-compose.yml`
 8. Bake required binaries, build, and launch
 
-***
+---
 
 ## What you need
 
-* GCP account (free tier eligible for e2-micro)
-* gcloud CLI installed (or use Cloud Console)
-* SSH access from your laptop
-* Basic comfort with SSH + copy/paste
-* \~20-30 minutes
-* Docker and Docker Compose
-* Model auth credentials
-* Optional provider credentials
-  * WhatsApp QR
-  * Telegram bot token
-  * Gmail OAuth
+- GCP account (free tier eligible for e2-micro)
+- gcloud CLI installed (or use Cloud Console)
+- SSH access from your laptop
+- Basic comfort with SSH + copy/paste
+- ~20-30 minutes
+- Docker and Docker Compose
+- Model auth credentials
+- Optional provider credentials
+  - WhatsApp QR
+  - Telegram bot token
+  - Gmail OAuth
 
-***
+---
 
-<Steps>
-  <Step title="Install gcloud CLI (or use Console)">
+Steps
+
+
+Install gcloud CLI (or use Console)
+
     **Option A: gcloud CLI** (recommended for automation)
 
     Install from [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
 
     Initialize and authenticate:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud init
     gcloud auth login
     ```
@@ -88,12 +89,15 @@ For the generic Docker flow, see [Docker](/install/docker).
     **Option B: Cloud Console**
 
     All steps can be done via the web UI at [https://console.cloud.google.com](https://console.cloud.google.com)
-  </Step>
 
-  <Step title="Create a GCP project">
+
+
+
+Create a GCP project
+
     **CLI:**
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud projects create my-openclaw-project --name="OpenClaw Gateway"
     gcloud config set project my-openclaw-project
     ```
@@ -102,7 +106,7 @@ For the generic Docker flow, see [Docker](/install/docker).
 
     Enable the Compute Engine API:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud services enable compute.googleapis.com
     ```
 
@@ -112,20 +116,23 @@ For the generic Docker flow, see [Docker](/install/docker).
     2. Name it and create
     3. Enable billing for the project
     4. Navigate to APIs & Services > Enable APIs > search "Compute Engine API" > Enable
-  </Step>
 
-  <Step title="Create the VM">
+
+
+
+Create the VM
+
     **Machine types:**
 
     | Type      | Specs                    | Cost               | Notes                                        |
     | --------- | ------------------------ | ------------------ | -------------------------------------------- |
-    | e2-medium | 2 vCPU, 4GB RAM          | \~\$25/mo          | Most reliable for local Docker builds        |
-    | e2-small  | 2 vCPU, 2GB RAM          | \~\$12/mo          | Minimum recommended for Docker build         |
+    | e2-medium | 2 vCPU, 4GB RAM          | ~$25/mo            | Most reliable for local Docker builds        |
+    | e2-small  | 2 vCPU, 2GB RAM          | ~$12/mo            | Minimum recommended for Docker build         |
     | e2-micro  | 2 vCPU (shared), 1GB RAM | Free tier eligible | Often fails with Docker build OOM (exit 137) |
 
     **CLI:**
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud compute instances create openclaw-gateway \
       --zone=us-central1-a \
       --machine-type=e2-small \
@@ -142,12 +149,15 @@ For the generic Docker flow, see [Docker](/install/docker).
     4. Machine type: `e2-small`
     5. Boot disk: Debian 12, 20GB
     6. Create
-  </Step>
 
-  <Step title="SSH into the VM">
+
+
+
+SSH into the VM
+
     **CLI:**
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud compute ssh openclaw-gateway --zone=us-central1-a
     ```
 
@@ -156,10 +166,13 @@ For the generic Docker flow, see [Docker](/install/docker).
     Click the "SSH" button next to your VM in the Compute Engine dashboard.
 
     Note: SSH key propagation can take 1-2 minutes after VM creation. If connection is refused, wait and retry.
-  </Step>
 
-  <Step title="Install Docker (on the VM)">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Install Docker (on the VM)
+
+    ```bash
     sudo apt-get update
     sudo apt-get install -y git curl ca-certificates
     curl -fsSL https://get.docker.com | sudo sh
@@ -168,47 +181,56 @@ For the generic Docker flow, see [Docker](/install/docker).
 
     Log out and back in for the group change to take effect:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     exit
     ```
 
     Then SSH back in:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud compute ssh openclaw-gateway --zone=us-central1-a
     ```
 
     Verify:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker --version
     docker compose version
     ```
-  </Step>
 
-  <Step title="Clone the OpenClaw repository">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Clone the OpenClaw repository
+
+    ```bash
     git clone https://github.com/openclaw/openclaw.git
     cd openclaw
     ```
 
     This guide assumes you will build a custom image to guarantee binary persistence.
-  </Step>
 
-  <Step title="Create persistent host directories">
+
+
+
+Create persistent host directories
+
     Docker containers are ephemeral.
     All long-lived state must live on the host.
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     mkdir -p ~/.openclaw
     mkdir -p ~/.openclaw/workspace
     ```
-  </Step>
 
-  <Step title="Configure environment variables">
+
+
+
+Configure environment variables
+
     Create `.env` in the repository root.
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     OPENCLAW_IMAGE=openclaw:latest
     OPENCLAW_GATEWAY_TOKEN=
     OPENCLAW_GATEWAY_BIND=lan
@@ -227,7 +249,7 @@ For the generic Docker flow, see [Docker](/install/docker).
     a runtime-only token for that startup. Generate a keyring password and paste
     it into `GOG_KEYRING_PASSWORD`:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openssl rand -hex 32
     ```
 
@@ -236,12 +258,15 @@ For the generic Docker flow, see [Docker](/install/docker).
     This `.env` file is for container/runtime env such as `OPENCLAW_GATEWAY_TOKEN`.
     Stored provider OAuth/API-key auth lives in the mounted
     `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`.
-  </Step>
 
-  <Step title="Docker Compose configuration">
+
+
+
+Docker Compose configuration
+
     Create or update `docker-compose.yml`.
 
-    ```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```yaml
     services:
       openclaw-gateway:
         image: ${OPENCLAW_IMAGE}
@@ -280,33 +305,42 @@ For the generic Docker flow, see [Docker](/install/docker).
     ```
 
     `--allow-unconfigured` is only for bootstrap convenience, it is not a replacement for a proper gateway configuration. Still set auth (`gateway.auth.token` or password) and use safe bind settings for your deployment.
-  </Step>
 
-  <Step title="Shared Docker VM runtime steps">
+
+
+
+Shared Docker VM runtime steps
+
     Use the shared runtime guide for the common Docker host flow:
 
-    * [Bake required binaries into the image](/install/docker-vm-runtime#bake-required-binaries-into-the-image)
-    * [Build and launch](/install/docker-vm-runtime#build-and-launch)
-    * [What persists where](/install/docker-vm-runtime#what-persists-where)
-    * [Updates](/install/docker-vm-runtime#updates)
-  </Step>
+    - [Bake required binaries into the image](/install/docker-vm-runtime#bake-required-binaries-into-the-image)
+    - [Build and launch](/install/docker-vm-runtime#build-and-launch)
+    - [What persists where](/install/docker-vm-runtime#what-persists-where)
+    - [Updates](/install/docker-vm-runtime#updates)
 
-  <Step title="GCP-specific launch notes">
+
+
+
+GCP-specific launch notes
+
     On GCP, if build fails with `Killed` or `exit code 137` during `pnpm install --frozen-lockfile`, the VM is out of memory. Use `e2-small` minimum, or `e2-medium` for more reliable first builds.
 
     When binding to LAN (`OPENCLAW_GATEWAY_BIND=lan`), configure a trusted browser origin before continuing:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli config set gateway.controlUi.allowedOrigins '["http://127.0.0.1:18789"]' --strict-json
     ```
 
     If you changed the gateway port, replace `18789` with your configured port.
-  </Step>
 
-  <Step title="Access from your laptop">
+
+
+
+Access from your laptop
+
     Create an SSH tunnel to forward the Gateway port:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     gcloud compute ssh openclaw-gateway --zone=us-central1-a -- -L 18789:127.0.0.1:18789
     ```
 
@@ -316,7 +350,7 @@ For the generic Docker flow, see [Docker](/install/docker).
 
     Reprint a clean dashboard link:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli dashboard --no-open
     ```
 
@@ -327,17 +361,17 @@ For the generic Docker flow, see [Docker](/install/docker).
 
     If Control UI shows `unauthorized` or `disconnected (1008): pairing required`, approve the browser device:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli devices list
     docker compose run --rm openclaw-cli devices approve <requestId>
     ```
 
     Need the shared persistence and update reference again?
     See [Docker VM Runtime](/install/docker-vm-runtime#what-persists-where) and [Docker VM Runtime updates](/install/docker-vm-runtime#updates).
-  </Step>
-</Steps>
 
-***
+
+
+---
 
 ## Troubleshooting
 
@@ -349,7 +383,7 @@ SSH key propagation can take 1-2 minutes after VM creation. Wait and retry.
 
 Check your OS Login profile:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 gcloud compute os-login describe-profile
 ```
 
@@ -359,7 +393,7 @@ Ensure your account has the required IAM permissions (Compute OS Login or Comput
 
 If Docker build fails with `Killed` and `exit code 137`, the VM was OOM-killed. Upgrade to e2-small (minimum) or e2-medium (recommended for reliable local builds):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Stop the VM first
 gcloud compute instances stop openclaw-gateway --zone=us-central1-a
 
@@ -372,7 +406,7 @@ gcloud compute instances set-machine-type openclaw-gateway \
 gcloud compute instances start openclaw-gateway --zone=us-central1-a
 ```
 
-***
+---
 
 ## Service accounts (security best practice)
 
@@ -382,14 +416,14 @@ For automation or CI/CD pipelines, create a dedicated service account with minim
 
 1. Create a service account:
 
-   ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+   ```bash
    gcloud iam service-accounts create openclaw-deploy \
      --display-name="OpenClaw Deployment"
    ```
 
 2. Grant Compute Instance Admin role (or narrower custom role):
 
-   ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+   ```bash
    gcloud projects add-iam-policy-binding my-openclaw-project \
      --member="serviceAccount:openclaw-deploy@my-openclaw-project.iam.gserviceaccount.com" \
      --role="roles/compute.instanceAdmin.v1"
@@ -399,16 +433,18 @@ Avoid using the Owner role for automation. Use the principle of least privilege.
 
 See [https://cloud.google.com/iam/docs/understanding-roles](https://cloud.google.com/iam/docs/understanding-roles) for IAM role details.
 
-***
+---
 
 ## Next steps
 
-* Set up messaging channels: [Channels](/channels)
-* Pair local devices as nodes: [Nodes](/nodes)
-* Configure the Gateway: [Gateway configuration](/gateway/configuration)
+- Set up messaging channels: [Channels](/channels)
+- Pair local devices as nodes: [Nodes](/nodes)
+- Configure the Gateway: [Gateway configuration](/gateway/configuration)
 
 ## Related
 
-* [Install overview](/install)
-* [Azure](/install/azure)
-* [VPS hosting](/vps)
+- [Install overview](/install)
+- [Azure](/install/azure)
+- [VPS hosting](/vps)
+
+---

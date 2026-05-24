@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "0a647f02d138f012bf7b78ffe5525ef1c40b2c50432fe2635d17ae5d0e7762f3"
+source_hash: "97bde4424c09df39be1f6a9ad6ab00e123c262dd77c403396d02ddd702212604"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/bootstrapping.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Agent bootstrapping
 Source: https://docs.openclaw.ai/start/bootstrapping
 
-
-
 Bootstrapping is the **first-run** ritual that prepares an agent workspace and
 collects identity details. It happens after onboarding, when the agent starts
 for the first time.
@@ -24,10 +22,10 @@ for the first time.
 On the first agent run, OpenClaw bootstraps the workspace (default
 `~/.openclaw/workspace`):
 
-* Seeds `AGENTS.md`, `BOOTSTRAP.md`, `IDENTITY.md`, `USER.md`.
-* Runs a short Q\&A ritual (one question at a time).
-* Writes identity + preferences to `IDENTITY.md`, `USER.md`, `SOUL.md`.
-* Removes `BOOTSTRAP.md` when finished so it only runs once.
+- Seeds `AGENTS.md`, `BOOTSTRAP.md`, `IDENTITY.md`, `USER.md`.
+- Runs a short Q&A ritual (one question at a time).
+- Writes identity + preferences to `IDENTITY.md`, `USER.md`, `SOUL.md`.
+- Removes `BOOTSTRAP.md` when finished so it only runs once.
 
 For embedded/local model runs, OpenClaw keeps `BOOTSTRAP.md` out of the
 privileged system context. On the primary interactive first run, it still passes
@@ -45,12 +43,14 @@ Bootstrapping always runs on the **gateway host**. If the macOS app connects to
 a remote Gateway, the workspace and bootstrapping files live on that remote
 machine.
 
-<Note>
-  When the Gateway runs on another machine, edit workspace files on the gateway
-  host (for example, `user@gateway-host:~/.openclaw/workspace`).
-</Note>
+Note
+
+When the Gateway runs on another machine, edit workspace files on the gateway
+host (for example, `user@gateway-host:~/.openclaw/workspace`).
 
 ## Related docs
 
-* macOS app onboarding: [Onboarding](/start/onboarding)
-* Workspace layout: [Agent workspace](/concepts/agent-workspace)
+- macOS app onboarding: [Onboarding](/start/onboarding)
+- Workspace layout: [Agent workspace](/concepts/agent-workspace)
+
+---

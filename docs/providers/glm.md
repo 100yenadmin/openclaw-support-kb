@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GLM (Zhipu)"
 source: "https://docs.openclaw.ai/providers/glm"
-source_hash: "dd5b66cb6c40fd7e8400e67bc526b6b5de6370b337064c9bbf26689ac4ff006f"
+source_hash: "65cd116cf7b225068929ead0a9da0bdcf141bc1cf9d79b524ca2dd59c772c276"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/glm.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # GLM (Zhipu)
 Source: https://docs.openclaw.ai/providers/glm
-
-
 
 GLM is a model family (not a company) available through the [Z.AI](https://z.ai) platform. In OpenClaw, GLM models are accessed through the bundled `zai` provider with refs like `zai/glm-5.1`.
 
@@ -30,66 +28,74 @@ GLM is a model family (not a company) available through the [Z.AI](https://z.ai)
 
 ## Getting started
 
-<Steps>
-  <Step title="Choose an auth route and run onboarding">
+Steps
+
+
+Choose an auth route and run onboarding
+
     Pick the onboarding choice that matches your Z.AI plan and region. The generic `zai-api-key` choice auto-detects the matching endpoint from the key shape; use the explicit regional choices when you want to force a specific Coding Plan or general API surface.
 
-    | Auth choice         | Best for                                     |
-    | ------------------- | -------------------------------------------- |
-    | `zai-api-key`       | Generic API key with endpoint auto-detection |
-    | `zai-coding-global` | Coding Plan users (global)                   |
-    | `zai-coding-cn`     | Coding Plan users (China region)             |
-    | `zai-global`        | General API (global)                         |
-    | `zai-cn`            | General API (China region)                   |
+    | Auth choice         | Best for                                            |
+    | ------------------- | --------------------------------------------------- |
+    | `zai-api-key`       | Generic API key with endpoint auto-detection        |
+    | `zai-coding-global` | Coding Plan users (global)                          |
+    | `zai-coding-cn`     | Coding Plan users (China region)                    |
+    | `zai-global`        | General API (global)                                |
+    | `zai-cn`            | General API (China region)                          |
 
-    <CodeGroup>
-      ```bash Auto-detect theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice zai-api-key
-      ```
 
-      ```bash Coding Plan (global) theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice zai-coding-global
-      ```
+CodeGroup
 
-      ```bash Coding Plan (China) theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice zai-coding-cn
-      ```
+```bash Auto-detect
+openclaw onboard --auth-choice zai-api-key
+```
 
-      ```bash General API (global) theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice zai-global
-      ```
+```bash Coding Plan (global)
+openclaw onboard --auth-choice zai-coding-global
+```
 
-      ```bash General API (China) theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice zai-cn
-      ```
-    </CodeGroup>
-  </Step>
+```bash Coding Plan (China)
+openclaw onboard --auth-choice zai-coding-cn
+```
 
-  <Step title="Set GLM as the default model">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash General API (global)
+openclaw onboard --auth-choice zai-global
+```
+
+```bash General API (China)
+openclaw onboard --auth-choice zai-cn
+```
+
+
+
+
+
+Set GLM as the default model
+
+    ```bash
     openclaw config set agents.defaults.model.primary "zai/glm-5.1"
     ```
-  </Step>
 
-  <Step title="Verify models are available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify models are available
+
+    ```bash
     openclaw models list --provider zai
     ```
-  </Step>
-</Steps>
+
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { ZAI_API_KEY: "sk-..." },
   agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
 }
 ```
 
-<Tip>
+Tip
+
   `zai-api-key` lets OpenClaw detect the matching Z.AI endpoint from the key shape and apply the correct base URL automatically. Use the explicit regional choices when you want to pin a specific Coding Plan or general API surface.
-</Tip>
 
 ## Built-in catalog
 
@@ -111,38 +117,48 @@ The bundled `zai` provider seeds 13 GLM model refs. All entries support reasonin
 | `zai/glm-4.5-flash`  | Reasoning, text only.                              |
 | `zai/glm-4.5v`       | Reasoning, text + image.                           |
 
-<Note>
+Note
+
   GLM versions and availability can change. Run `openclaw models list --provider zai` to see the catalog rows known to your installed version, and check Z.AI's docs for newly added or deprecated models.
-</Note>
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Endpoint auto-detection">
-    When you use the `zai-api-key` auth choice, OpenClaw inspects the key shape to determine the correct Z.AI base URL. Explicit regional choices (`zai-coding-global`, `zai-coding-cn`, `zai-global`, `zai-cn`) override auto-detection and pin the endpoint directly.
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="Provider details">
+
+Endpoint auto-detection
+
+    When you use the `zai-api-key` auth choice, OpenClaw inspects the key shape to determine the correct Z.AI base URL. Explicit regional choices (`zai-coding-global`, `zai-coding-cn`, `zai-global`, `zai-cn`) override auto-detection and pin the endpoint directly.
+
+
+
+Provider details
+
     GLM models are served by the `zai` runtime provider. For full provider configuration, regional endpoints, and additional capabilities, see the [Z.AI provider page](/providers/zai).
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Z.AI provider" href="/providers/zai" icon="server">
+CardGroup
+
+
+Z.AI provider
+
     Full Z.AI provider configuration and regional endpoints.
-  </Card>
 
-  <Card title="Model providers" href="/concepts/model-providers" icon="layers">
+
+Model providers
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Thinking modes" href="/tools/thinking" icon="brain">
+
+Thinking modes
+
     `/think` levels for the reasoning-capable GLM family.
-  </Card>
 
-  <Card title="Models FAQ" href="/help/faq-models" icon="circle-question">
+
+Models FAQ
+
     Auth profiles, switching models, and resolving "no profile" errors.
-  </Card>
-</CardGroup>
+
+---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "a584c2b48f2821aa8a804168c0e0780cc5ad6fa20f6263bebc59f058e39800d3"
+source_hash: "ef2ce49c0558617eb85fb00147e451bd1bd4989d055e1fec85135f3d076230a1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -100,6 +100,16 @@ The single most important setup step. Use `hermes model` to walk through the cho
 ```bash
 hermes model
 ```
+
+:::tip Easiest path: Nous Portal
+One subscription covers 300+ models plus the [Tool Gateway](../user-guide/features/tool-gateway.md) (web search, image generation, TTS, cloud browser). On a fresh install:
+
+```bash
+hermes setup --portal
+```
+
+That logs you in, sets Nous as your provider, and turns on the Tool Gateway in one command.
+:::
 
 Good defaults:
 

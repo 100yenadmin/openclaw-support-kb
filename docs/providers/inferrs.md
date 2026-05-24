@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inferrs"
 source: "https://docs.openclaw.ai/providers/inferrs"
-source_hash: "dcb1fa2e8df14ed808b824577db0712c7f2dfe4416dbb9a26ed2463676a6624b"
+source_hash: "d06888ac31de3754bfb9ec57ba2ea14582823e7e0320fc0f096322f6ac34c452"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/inferrs.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Inferrs
 Source: https://docs.openclaw.ai/providers/inferrs
-
-
 
 [inferrs](https://github.com/ericcurtin/inferrs) can serve local models behind an OpenAI-compatible `/v1` API. OpenClaw works with `inferrs` through the generic `openai-completions` path.
 
@@ -25,39 +23,43 @@ Source: https://docs.openclaw.ai/providers/inferrs
 | API                | OpenAI-compatible (`openai-completions`)                           |
 | Suggested base URL | `http://127.0.0.1:8080/v1` (or wherever your inferrs server lives) |
 
-<Note>
+Note
+
   `inferrs` is currently best treated as a custom self-hosted OpenAI-compatible backend, not a dedicated OpenClaw provider plugin. You configure it through `models.providers.inferrs` rather than an onboarding choice flag. If you need a true bundled plugin with auto-discovery, see [SGLang](/providers/sglang) or [vLLM](/providers/vllm).
-</Note>
 
 ## Getting started
 
-<Steps>
-  <Step title="Start inferrs with a model">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Start inferrs with a model
+
+    ```bash
     inferrs serve google/gemma-4-E2B-it \
       --host 127.0.0.1 \
       --port 8080 \
       --device metal
     ```
-  </Step>
 
-  <Step title="Verify the server is reachable">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the server is reachable
+
+    ```bash
     curl http://127.0.0.1:8080/health
     curl http://127.0.0.1:8080/v1/models
     ```
-  </Step>
 
-  <Step title="Add an OpenClaw provider entry">
+
+Add an OpenClaw provider entry
+
     Add an explicit provider entry and point your default model at it. See the full config example below.
-  </Step>
-</Steps>
+
 
 ## Full config example
 
 This example uses Gemma 4 on a local `inferrs` server.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -101,7 +103,7 @@ This example uses Gemma 4 on a local `inferrs` server.
 Inferrs can also be started by OpenClaw only when an `inferrs/...` model is
 selected. Add `localService` to the same provider entry:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -152,22 +154,27 @@ path in config. For the full field reference, see
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Why requiresStringContent matters">
+AccordionGroup
+
+
+Why requiresStringContent matters
+
     Some `inferrs` Chat Completions routes accept only string
     `messages[].content`, not structured content-part arrays.
 
-    <Warning>
-      If OpenClaw runs fail with an error like:
 
-      ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      messages[1].content: invalid type: sequence, expected a string
-      ```
+Warning
 
-      set `compat.requiresStringContent: true` in your model entry.
-    </Warning>
+    If OpenClaw runs fail with an error like:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```text
+    messages[1].content: invalid type: sequence, expected a string
+    ```
+
+    set `compat.requiresStringContent: true` in your model entry.
+
+
+    ```json5
     compat: {
       requiresStringContent: true
     }
@@ -175,16 +182,19 @@ path in config. For the full field reference, see
 
     OpenClaw will flatten pure text content parts into plain strings before sending
     the request.
-  </Accordion>
 
-  <Accordion title="Gemma and tool-schema caveat">
+
+
+
+Gemma and tool-schema caveat
+
     Some current `inferrs` + Gemma combinations accept small direct
     `/v1/chat/completions` requests but still fail on full OpenClaw agent-runtime
     turns.
 
     If that happens, try this first:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     compat: {
       requiresStringContent: true,
       supportsTools: false
@@ -197,18 +207,21 @@ path in config. For the full field reference, see
     If tiny direct requests still work but normal OpenClaw agent turns continue to
     crash inside `inferrs`, the remaining issue is usually upstream model/server
     behavior rather than OpenClaw's transport layer.
-  </Accordion>
 
-  <Accordion title="Manual smoke test">
+
+
+
+Manual smoke test
+
     Once configured, test both layers:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     curl http://127.0.0.1:8080/v1/chat/completions \
       -H 'content-type: application/json' \
       -d '{"model":"google/gemma-4-E2B-it","messages":[{"role":"user","content":"What is 2 + 2?"}],"stream":false}'
     ```
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw infer model run \
       --model inferrs/google/gemma-4-E2B-it \
       --prompt "What is 2 + 2? Reply with one short sentence." \
@@ -216,66 +229,83 @@ path in config. For the full field reference, see
     ```
 
     If the first command works but the second fails, check the troubleshooting section below.
-  </Accordion>
 
-  <Accordion title="Proxy-style behavior">
+
+
+
+Proxy-style behavior
+
     `inferrs` is treated as a proxy-style OpenAI-compatible `/v1` backend, not a
     native OpenAI endpoint.
 
-    * Native OpenAI-only request shaping does not apply here
-    * No `service_tier`, no Responses `store`, no prompt-cache hints, and no
+    - Native OpenAI-only request shaping does not apply here
+    - No `service_tier`, no Responses `store`, no prompt-cache hints, and no
       OpenAI reasoning-compat payload shaping
-    * Hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
+    - Hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
       are not injected on custom `inferrs` base URLs
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Troubleshooting
 
-<AccordionGroup>
-  <Accordion title="curl /v1/models fails">
+AccordionGroup
+
+
+curl /v1/models fails
+
     `inferrs` is not running, not reachable, or not bound to the expected
     host/port. Make sure the server is started and listening on the address you
     configured.
-  </Accordion>
 
-  <Accordion title="messages[].content expected a string">
+
+
+messages[].content expected a string
+
     Set `compat.requiresStringContent: true` in the model entry. See the
     `requiresStringContent` section above for details.
-  </Accordion>
 
-  <Accordion title="Direct /v1/chat/completions calls pass but openclaw infer model run fails">
+
+
+Direct /v1/chat/completions calls pass but openclaw infer model run fails
+
     Try setting `compat.supportsTools: false` to disable the tool schema surface.
     See the Gemma tool-schema caveat above.
-  </Accordion>
 
-  <Accordion title="inferrs still crashes on larger agent turns">
+
+
+inferrs still crashes on larger agent turns
+
     If OpenClaw no longer gets schema errors but `inferrs` still crashes on larger
     agent turns, treat it as an upstream `inferrs` or model limitation. Reduce
     prompt pressure or switch to a different local backend or model.
-  </Accordion>
-</AccordionGroup>
 
-<Tip>
-  For general help, see [Troubleshooting](/help/troubleshooting) and [FAQ](/help/faq).
-</Tip>
+
+Tip
+
+For general help, see [Troubleshooting](/help/troubleshooting) and [FAQ](/help/faq).
 
 ## Related
 
-<CardGroup>
-  <Card title="Local models" href="/gateway/local-models" icon="server">
+CardGroup
+
+
+Local models
+
     Running OpenClaw against local model servers.
-  </Card>
 
-  <Card title="Local model services" href="/gateway/local-model-services" icon="play">
+
+Local model services
+
     Starting local model servers on demand for configured providers.
-  </Card>
 
-  <Card title="Gateway troubleshooting" href="/gateway/troubleshooting#local-openai-compatible-backend-passes-direct-probes-but-agent-runs-fail" icon="wrench">
+
+Gateway troubleshooting
+
     Debugging local OpenAI-compatible backends that pass probes but fail agent runs.
-  </Card>
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+Model selection
+
     Overview of all providers, model refs, and failover behavior.
-  </Card>
-</CardGroup>
+
+---

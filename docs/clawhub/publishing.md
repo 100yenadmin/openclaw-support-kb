@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
-title: "Publishing"
+title: "Publishing on ClawHub"
 source: "https://docs.openclaw.ai/clawhub/publishing"
-source_hash: "0cb14b6bf4a092a3f0e1bc63f41781ae7bafb84e3728db6630fc94b8b7b4f39d"
+source_hash: "e1b92be6cfe7ba55ef0e356a8f283c35451d15c691dbee5095d7dacf0bb04eea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/publishing.md"
@@ -10,12 +10,10 @@ original_doc_path: "clawhub/publishing.md"
 duplicate_index: 1
 ---
 
-# Publishing
+# Publishing on ClawHub
 Source: https://docs.openclaw.ai/clawhub/publishing
 
-
-
-# Publishing
+# Publishing on ClawHub
 
 ClawHub publishing is owner-scoped: every publish targets a publisher, and the
 server decides whether the signed-in user is allowed to publish there.
@@ -32,13 +30,13 @@ where you have publisher access.
 
 Skills are published from a skill folder. The public page is:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 https://clawhub.ai/<owner>/<slug>
 ```
 
 Example:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 https://clawhub.ai/alice/review-helper
 ```
 
@@ -46,25 +44,12 @@ The publish request includes the selected owner, slug, version, changelog, and
 files. The server verifies that the actor can publish as that owner before it
 creates the release.
 
-To move an existing skill to another owner while publishing a new version, choose
-the new owner and explicitly confirm the ownership move. In the CLI/API, pass the
-target owner plus the migration opt-in:
-
-```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
-clawhub skill publish ./review-helper --owner openclaw --migrate-owner --version 1.2.0
-```
-
-Skill owner migration requires admin or owner access on both the current owner
-and the destination owner. It preserves the skill, version history, stats,
-comments, forks, aliases, and audit trail; old owner URLs continue through the
-alias/redirect path.
-
 ## Plugins
 
 Plugins use npm-style package names. Scoped package names include the owner in
 the first part of the name:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 @owner/package-name
 ```
 
@@ -94,7 +79,7 @@ If validation fails, the release is not created.
 If the package scope and selected owner do not match, ClawHub rejects the
 publish:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Package scope "@openclaw" must match selected owner "@vintageayu".
 Publish as "@openclaw" or rename this package to "@vintageayu/dronzer".
 ```
@@ -105,14 +90,16 @@ package so the scope matches the owner you can publish as.
 If the package name already has the right scope but the package is owned by the
 wrong publisher, transfer ownership instead:
 
-```sh theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```sh
 clawhub package transfer @opik/opik-openclaw --to opik
 ```
 
-Use package or skill transfer only when you have admin access to both the
-current owner and the destination publisher. Package transfer does not let you
-publish into a scope you cannot manage.
+Use package transfer only when you have admin access to both the current package
+owner and the destination publisher. It does not let you publish into a scope you
+cannot manage.
 
 This protects org namespaces. A package named `@openclaw/dronzer` claims the
 `@openclaw` namespace, so only publishers with access to the `@openclaw` owner
 can publish it.
+
+---

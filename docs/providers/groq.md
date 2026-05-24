@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
-source_hash: "76a2f04ccf24e72ff85eb38dea722ab1f1df50deb5c4800eacb6e3f39e1c176d"
+source_hash: "e792d7323edc53b4ab934adb1f2b765ba08709724ccf5d8fc0f3c344254c682f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/groq.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Groq
 Source: https://docs.openclaw.ai/providers/groq
-
-
 
 [Groq](https://groq.com) provides ultra-fast inference on open-weight models (Llama, Gemma, Kimi, Qwen, GPT OSS, and more) using custom LPU hardware. OpenClaw includes a bundled Groq plugin that registers both an OpenAI-compatible chat provider and an audio media-understanding provider.
 
@@ -30,25 +28,34 @@ Source: https://docs.openclaw.ai/providers/groq
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
+Steps
+
+
+Get an API key
+
     Create an API key at [console.groq.com/keys](https://console.groq.com/keys).
-  </Step>
 
-  <Step title="Set the API key">
-    <CodeGroup>
-      ```bash Onboarding theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      openclaw onboard --auth-choice groq-api-key
-      ```
 
-      ```bash Env only theme={"theme":{"light":"min-light","dark":"min-dark"}}
-      export GROQ_API_KEY=gsk_...
-      ```
-    </CodeGroup>
-  </Step>
+Set the API key
 
-  <Step title="Set a default model">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+CodeGroup
+
+```bash Onboarding
+openclaw onboard --auth-choice groq-api-key
+```
+
+```bash Env only
+export GROQ_API_KEY=gsk_...
+```
+
+
+
+
+
+Set a default model
+
+    ```json5
     {
       agents: {
         defaults: {
@@ -57,18 +64,18 @@ Source: https://docs.openclaw.ai/providers/groq
       },
     }
     ```
-  </Step>
 
-  <Step title="Verify the catalog is reachable">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the catalog is reachable
+
+    ```bash
     openclaw models list --provider groq
     ```
-  </Step>
-</Steps>
+
 
 ### Config file example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { GROQ_API_KEY: "gsk_..." },
   agents: {
@@ -104,17 +111,17 @@ OpenClaw ships a manifest-backed Groq catalog with both reasoning and non-reason
 | `groq/groq/compound`                                 | Compound                      | yes       | text         | 131,072 |
 | `groq/groq/compound-mini`                            | Compound Mini                 | yes       | text         | 131,072 |
 
-<Tip>
+Tip
+
   The catalog evolves with each OpenClaw release. `openclaw models list --provider groq` shows the rows known to your installed version; cross-check with [console.groq.com/docs/models](https://console.groq.com/docs/models) for newly-added or deprecated models.
-</Tip>
 
 ## Reasoning models
 
 OpenClaw maps its shared `/think` levels to Groq's model-specific `reasoning_effort` values:
 
-* For `qwen/qwen3-32b`, disabled thinking sends `none` and enabled thinking sends `default`.
-* For Groq GPT OSS reasoning models (`openai/gpt-oss-*`), OpenClaw sends `low`, `medium`, or `high` based on `/think` level. Disabled thinking omits `reasoning_effort` because those models do not support a disabled value.
-* DeepSeek R1 Distill, Qwen QwQ, and Compound use Groq's native reasoning surface; `/think` controls visibility but the model always reasons.
+- For `qwen/qwen3-32b`, disabled thinking sends `none` and enabled thinking sends `default`.
+- For Groq GPT OSS reasoning models (`openai/gpt-oss-*`), OpenClaw sends `low`, `medium`, or `high` based on `/think` level. Disabled thinking omits `reasoning_effort` because those models do not support a disabled value.
+- DeepSeek R1 Distill, Qwen QwQ, and Compound use Groq's native reasoning surface; `/think` controls visibility but the model always reasons.
 
 See [Thinking modes](/tools/thinking) for the shared `/think` levels and how OpenClaw translates them per provider.
 
@@ -132,7 +139,7 @@ Groq's bundled plugin also registers an **audio media-understanding provider** s
 
 To make Groq the default audio backend:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     media: {
@@ -144,19 +151,27 @@ To make Groq the default audio backend:
 }
 ```
 
-<AccordionGroup>
-  <Accordion title="Environment availability for the daemon">
+AccordionGroup
+
+
+Environment availability for the daemon
+
     If the Gateway runs as a managed service (launchd, systemd, Docker), `GROQ_API_KEY` must be visible to that process — not just to your interactive shell.
 
-    <Warning>
-      A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
-    </Warning>
-  </Accordion>
 
-  <Accordion title="Custom Groq model ids">
+Warning
+
+      A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
+
+
+
+
+
+Custom Groq model ids
+
     OpenClaw accepts any Groq model id at runtime. Use the exact id shown by Groq and prefix it with `groq/`. The bundled catalog covers the common cases; uncatalogued ids fall through to the default OpenAI-compatible template.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -165,25 +180,31 @@ To make Groq the default audio backend:
       },
     }
     ```
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model providers" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model providers
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Thinking modes" href="/tools/thinking" icon="brain">
+
+Thinking modes
+
     Reasoning effort levels and provider-policy interaction.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Configuration reference
+
     Full config schema including provider and audio settings.
-  </Card>
 
-  <Card title="Groq Console" href="https://console.groq.com" icon="arrow-up-right-from-square">
+
+Groq Console
+
     Groq dashboard, API docs, and pricing.
-  </Card>
-</CardGroup>
+
+---

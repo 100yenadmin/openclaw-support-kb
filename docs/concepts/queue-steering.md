@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steering queue"
 source: "https://docs.openclaw.ai/concepts/queue-steering"
-source_hash: "4cae32c48783b4383fc9da089042d1f6c90787a6719297859398b13003ed4a0d"
+source_hash: "ad874d52de2c9d393e7100ed18ad7cf81afb12e9a8735f4e27e0cda3ddbde33b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue-steering.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Steering queue
 Source: https://docs.openclaw.ai/concepts/queue-steering
-
-
 
 When a normal prompt arrives while a session run is already streaming, OpenClaw
 tries to send that prompt into the active runtime by default when the queue mode
@@ -62,13 +60,13 @@ this steering path; they wait until the active run finishes. For the explicit
 
 If four users send messages while the agent is executing a tool call:
 
-* With default behavior, the active runtime receives all four messages in
+- With default behavior, the active runtime receives all four messages in
   arrival order before its next model decision. Pi drains them at the next model
   boundary; Codex receives them as one batched `turn/steer`.
-* With `/queue collect`, OpenClaw does not steer. It waits until the active run
+- With `/queue collect`, OpenClaw does not steer. It waits until the active run
   ends, then creates a followup turn with compatible queued messages after the
   debounce window.
-* With `/queue interrupt`, OpenClaw aborts the active run and starts the newest
+- With `/queue interrupt`, OpenClaw aborts the active run and starts the newest
   message instead of steering.
 
 ## Scope
@@ -92,7 +90,9 @@ boundary.
 
 ## Related
 
-* [Command queue](/concepts/queue)
-* [Steer](/tools/steer)
-* [Messages](/concepts/messages)
-* [Agent loop](/concepts/agent-loop)
+- [Command queue](/concepts/queue)
+- [Steer](/tools/steer)
+- [Messages](/concepts/messages)
+- [Agent loop](/concepts/agent-loop)
+
+---

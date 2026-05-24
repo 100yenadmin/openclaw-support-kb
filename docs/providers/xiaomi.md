@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "bea8a5fe68b1080068ee76d539d6a230b767af7def1818b76b841f4fb87f4370"
+source_hash: "6ae00a55832971a6d07ae10f98ec6b55019cfbfa46d15eb10f332eb54c7b161c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Xiaomi MiMo
 Source: https://docs.openclaw.ai/providers/xiaomi
-
-
 
 Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw includes a bundled `xiaomi` plugin that registers both an OpenAI-compatible chat provider and a speech (TTS) provider against the same `XIAOMI_API_KEY`.
 
@@ -32,29 +30,34 @@ Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw includes a bundled
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
-    Create an API key in the [Xiaomi MiMo console](https://platform.xiaomimimo.com/#/console/api-keys).
-  </Step>
+Steps
 
-  <Step title="Run onboarding">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Get an API key
+
+    Create an API key in the [Xiaomi MiMo console](https://platform.xiaomimimo.com/#/console/api-keys).
+
+
+Run onboarding
+
+    ```bash
     openclaw onboard --auth-choice xiaomi-api-key
     ```
 
     Or pass the key directly:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --auth-choice xiaomi-api-key --xiaomi-api-key "$XIAOMI_API_KEY"
     ```
-  </Step>
 
-  <Step title="Verify the model is available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Verify the model is available
+
+    ```bash
     openclaw models list --provider xiaomi
     ```
-  </Step>
-</Steps>
+
 
 ## Built-in catalog
 
@@ -64,9 +67,9 @@ Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw includes a bundled
 | `xiaomi/mimo-v2-pro`   | text        | 1,048,576 | 32,000     | Yes       | Large context |
 | `xiaomi/mimo-v2-omni`  | text, image | 262,144   | 32,000     | Yes       | Multimodal    |
 
-<Tip>
-  The default model ref is `xiaomi/mimo-v2-flash`. The provider is injected automatically when `XIAOMI_API_KEY` is set or an auth profile exists.
-</Tip>
+Tip
+
+The default model ref is `xiaomi/mimo-v2-flash`. The provider is injected automatically when `XIAOMI_API_KEY` is set or an auth profile exists.
 
 ## Text-to-speech
 
@@ -82,7 +85,7 @@ an `assistant` message and optional style guidance as a `user` message.
 | Default  | `mimo-v2.5-tts`, voice `mimo_default`    |
 | Output   | MP3 by default; WAV when configured      |
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   messages: {
     tts: {
@@ -110,7 +113,7 @@ Opus with `ffmpeg` before delivery.
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { XIAOMI_API_KEY: "your-key" },
   agents: { defaults: { model: { primary: "xiaomi/mimo-v2-flash" } } },
@@ -156,43 +159,60 @@ Opus with `ffmpeg` before delivery.
 }
 ```
 
-<AccordionGroup>
-  <Accordion title="Auto-injection behavior">
+AccordionGroup
+
+
+Auto-injection behavior
+
     The `xiaomi` provider is injected automatically when `XIAOMI_API_KEY` is set in your environment or an auth profile exists. You do not need to manually configure the provider unless you want to override model metadata or the base URL.
-  </Accordion>
 
-  <Accordion title="Model details">
-    * **mimo-v2-flash** — lightweight and fast, ideal for general-purpose text tasks. No reasoning support.
-    * **mimo-v2-pro** — supports reasoning with a 1M token context window for long-document workloads.
-    * **mimo-v2-omni** — reasoning-enabled multimodal model that accepts both text and image inputs.
 
-    <Note>
-      All models use the `xiaomi/` prefix (for example `xiaomi/mimo-v2-pro`).
-    </Note>
-  </Accordion>
 
-  <Accordion title="Troubleshooting">
-    * If models do not appear, confirm `XIAOMI_API_KEY` is set and valid.
-    * When the Gateway runs as a daemon, ensure the key is available to that process (for example in `~/.openclaw/.env` or via `env.shellEnv`).
+Model details
 
-    <Warning>
-      Keys set only in your interactive shell are not visible to daemon-managed gateway processes. Use `~/.openclaw/.env` or `env.shellEnv` config for persistent availability.
-    </Warning>
-  </Accordion>
-</AccordionGroup>
+    - **mimo-v2-flash** — lightweight and fast, ideal for general-purpose text tasks. No reasoning support.
+    - **mimo-v2-pro** — supports reasoning with a 1M token context window for long-document workloads.
+    - **mimo-v2-omni** — reasoning-enabled multimodal model that accepts both text and image inputs.
+
+
+Note
+
+    All models use the `xiaomi/` prefix (for example `xiaomi/mimo-v2-pro`).
+
+
+
+
+
+Troubleshooting
+
+    - If models do not appear, confirm `XIAOMI_API_KEY` is set and valid.
+    - When the Gateway runs as a daemon, ensure the key is available to that process (for example in `~/.openclaw/.env` or via `env.shellEnv`).
+
+
+Warning
+
+    Keys set only in your interactive shell are not visible to daemon-managed gateway processes. Use `~/.openclaw/.env` or `env.shellEnv` config for persistent availability.
+
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Configuration reference
+
     Full OpenClaw configuration reference.
-  </Card>
 
-  <Card title="Xiaomi MiMo console" href="https://platform.xiaomimimo.com" icon="arrow-up-right-from-square">
+
+Xiaomi MiMo console
+
     Xiaomi MiMo dashboard and API key management.
-  </Card>
-</CardGroup>
+
+---

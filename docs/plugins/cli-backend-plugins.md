@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building CLI backend plugins"
 source: "https://docs.openclaw.ai/plugins/cli-backend-plugins"
-source_hash: "f1c6e7c01a80f33ff856dc68e7f02d5c619afc87ed76eb3cd8a110cb998b13b9"
+source_hash: "f1d90bab2737a95fcb657aa3fc267c715f532a525f2f30f871faba4e085b2799"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/cli-backend-plugins.md"
@@ -13,12 +13,10 @@ duplicate_index: 1
 # Building CLI backend plugins
 Source: https://docs.openclaw.ai/plugins/cli-backend-plugins
 
-
-
 CLI backend plugins let OpenClaw call a local AI CLI as a text inference
 backend. The backend appears as a provider prefix in model refs:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 acme-cli/acme-large
 ```
 
@@ -26,12 +24,12 @@ Use a CLI backend when the upstream integration is already exposed as a local
 command, when the CLI owns local login state, or when the CLI is a useful
 fallback if API providers are unavailable.
 
-<Info>
+Info
+
   If the upstream service exposes a normal HTTP model API, write a
   [provider plugin](/plugins/sdk-provider-plugins) instead. If the upstream
   runtime owns complete agent sessions, tool events, compaction, or background
   task state, use an [agent harness](/plugins/sdk-agent-harness).
-</Info>
 
 ## What the plugin owns
 
@@ -49,9 +47,12 @@ register runtime behavior. Runtime behavior starts when the plugin entry calls
 
 ## Minimal backend plugin
 
-<Steps>
-  <Step title="Create package metadata">
-    ```json package.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Create package metadata
+
+    ```json package.json
     {
       "name": "@acme/openclaw-acme-cli",
       "version": "1.0.0",
@@ -79,10 +80,13 @@ register runtime behavior. Runtime behavior starts when the plugin entry calls
     Published packages must ship built JavaScript runtime files. If your source
     entry is `./src/index.ts`, add `openclaw.runtimeExtensions` that points at
     the built JavaScript peer. See [Entry points](/plugins/sdk-entrypoints).
-  </Step>
 
-  <Step title="Declare backend ownership">
-    ```json openclaw.plugin.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Declare backend ownership
+
+    ```json openclaw.plugin.json
     {
       "id": "acme-cli",
       "name": "Acme CLI",
@@ -109,10 +113,13 @@ register runtime behavior. Runtime behavior starts when the plugin entry calls
     model discovery, onboarding, or status should recognize the backend without
     loading plugin runtime. Use `requiresRuntime: false` only when those static
     descriptors are enough for setup.
-  </Step>
 
-  <Step title="Register the backend">
-    ```typescript index.ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Register the backend
+
+    ```typescript index.ts
     import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
     import {
       CLI_FRESH_WATCHDOG_DEFAULTS,
@@ -169,8 +176,8 @@ register runtime behavior. Runtime behavior starts when the plugin entry calls
     The backend id must match the manifest `cliBackends` entry. The registered
     `config` is only the default; user config under
     `agents.defaults.cliBackends.acme-cli` is merged over it at runtime.
-  </Step>
-</Steps>
+
+
 
 ## Config shape
 
@@ -221,7 +228,7 @@ backend hook can express the behavior.
 CLI backends do not receive OpenClaw tools by default. If the CLI can consume an
 MCP configuration, opt in explicitly:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 return {
   id: "acme-cli",
   bundleMcp: true,
@@ -250,7 +257,7 @@ own built-in tool layer that cannot be disabled, set `nativeToolMode:
 
 Users can override any backend default:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -280,13 +287,13 @@ Document the minimum override users are likely to need. Usually that is only
 For bundled plugins, add a focused test around the builder and setup
 registration, then run the plugin's targeted test lane:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test extensions/acme-cli
 ```
 
 For local or installed plugins, verify discovery and one real model run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins inspect acme-cli --runtime --json
 openclaw agent --message "reply exactly: backend ok" --model acme-cli/acme-large
 ```
@@ -297,18 +304,33 @@ session-resume behavior.
 
 ## Checklist
 
-<Check>`package.json` has `openclaw.extensions` and built runtime entries for published packages</Check>
-<Check>`openclaw.plugin.json` declares `cliBackends` and intentional `activation.onStartup`</Check>
-<Check>`setup.cliBackends` is present when setup/model discovery should see the backend cold</Check>
-<Check>`api.registerCliBackend(...)` uses the same backend id as the manifest</Check>
-<Check>User overrides under `agents.defaults.cliBackends.<id>` still win</Check>
-<Check>Session, system prompt, image, and output parser settings match the real CLI contract</Check>
-<Check>Targeted tests and at least one live CLI smoke prove the backend path</Check>
+Check
+`package.json` has `openclaw.extensions` and built runtime entries for published packages
+
+Check
+`openclaw.plugin.json` declares `cliBackends` and intentional `activation.onStartup`
+
+Check
+`setup.cliBackends` is present when setup/model discovery should see the backend cold
+
+Check
+`api.registerCliBackend(...)` uses the same backend id as the manifest
+
+Check
+User overrides under `agents.defaults.cliBackends.<id>` still win
+
+Check
+Session, system prompt, image, and output parser settings match the real CLI contract
+
+Check
+Targeted tests and at least one live CLI smoke prove the backend path
 
 ## Related
 
-* [CLI backends](/gateway/cli-backends) - user configuration and runtime behavior
-* [Building plugins](/plugins/building-plugins) - package and manifest basics
-* [Plugin SDK overview](/plugins/sdk-overview) - registration API reference
-* [Plugin manifest](/plugins/manifest) - `cliBackends` and setup descriptors
-* [Agent harness](/plugins/sdk-agent-harness) - full external agent runtimes
+- [CLI backends](/gateway/cli-backends) - user configuration and runtime behavior
+- [Building plugins](/plugins/building-plugins) - package and manifest basics
+- [Plugin SDK overview](/plugins/sdk-overview) - registration API reference
+- [Plugin manifest](/plugins/manifest) - `cliBackends` and setup descriptors
+- [Agent harness](/plugins/sdk-agent-harness) - full external agent runtimes
+
+---

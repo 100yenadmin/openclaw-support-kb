@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voicecall"
 source: "https://docs.openclaw.ai/cli/voicecall"
-source_hash: "9157caaa870d86b5ea29d323e7f23ca678eaa0a1d3b0d160e93a638309a055dc"
+source_hash: "9b82cc4af49fdee7080f12fb1d83a8f2a4cde704d3604dddb2ac327e7b32b42c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/voicecall.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Voicecall
 Source: https://docs.openclaw.ai/cli/voicecall
 
-
-
 # `openclaw voicecall`
 
 `voicecall` is a plugin-provided command. It only appears when the voice-call plugin is installed and enabled.
@@ -23,7 +21,7 @@ When the Gateway is running, operational commands (`call`, `start`, `continue`, 
 
 ## Subcommands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall setup    [--json]
 openclaw voicecall smoke    [-t <phone>] [--message <text>] [--mode <m>] [--yes] [--json]
 openclaw voicecall call     -m <text> [-t <phone>] [--mode <m>]
@@ -59,7 +57,7 @@ openclaw voicecall expose   [--mode <m>] [--path <p>] [--port <port>] [--serve-p
 
 Prints human-readable readiness checks by default. Pass `--json` for scripts.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall setup
 openclaw voicecall setup --json
 ```
@@ -76,15 +74,15 @@ Runs the same readiness checks. It will not place a real phone call unless both 
 | `--yes`            | `false`                           | Actually place the live outbound call.  |
 | `--json`           | `false`                           | Print machine-readable JSON.            |
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall smoke
 openclaw voicecall smoke --to "+15555550123"        # dry run
 openclaw voicecall smoke --to "+15555550123" --yes  # live notify call
 ```
 
-<Note>
-  For external providers (`twilio`, `telnyx`, `plivo`), `setup` and `smoke` require a public webhook URL from `publicUrl`, a tunnel, or Tailscale exposure. A loopback or private serve fallback is rejected because carriers cannot reach it.
-</Note>
+Note
+
+For external providers (`twilio`, `telnyx`, `plivo`), `setup` and `smoke` require a public webhook URL from `publicUrl`, a tunnel, or Tailscale exposure. A loopback or private serve fallback is rejected because carriers cannot reach it.
 
 ## Call lifecycle
 
@@ -98,7 +96,7 @@ Initiate an outbound voice call.
 | `-t, --to <phone>`     | no       | config `toNumber` | E.164 phone number to call.                                                |
 | `--mode <mode>`        | no       | `conversation`    | Call mode: `notify` (hang up after message) or `conversation` (stay open). |
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall call --to "+15555550123" --message "Hello"
 openclaw voicecall call -m "Heads up" --mode notify
 ```
@@ -157,7 +155,7 @@ Inspect active calls.
 | `--call-id <id>` | (none)  | Restrict output to one call. |
 | `--json`         | `false` | Print machine-readable JSON. |
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall status
 openclaw voicecall status --json
 openclaw voicecall status --call-id <id>
@@ -197,17 +195,19 @@ Enable, disable, or change the Tailscale serve/funnel configuration for the voic
 | `--port <port>`       | config `serve.port` or `3334`             | Local webhook port.                             |
 | `--serve-path <path>` | config `serve.path` or `/voice/webhook`   | Local webhook path.                             |
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall expose --mode serve
 openclaw voicecall expose --mode funnel
 openclaw voicecall expose --mode off
 ```
 
-<Warning>
-  Only expose the webhook endpoint to networks you trust. Prefer Tailscale Serve over Funnel when possible.
-</Warning>
+Warning
+
+Only expose the webhook endpoint to networks you trust. Prefer Tailscale Serve over Funnel when possible.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Voice call plugin](/plugins/voice-call)
+- [CLI reference](/cli)
+- [Voice call plugin](/plugins/voice-call)
+
+---

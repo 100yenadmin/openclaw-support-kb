@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave search"
 source: "https://docs.openclaw.ai/tools/brave-search"
-source_hash: "641f234a56008844f852d28103269e1c1b01c2f3fadb47ae0f4c678fb2e62981"
+source_hash: "a33d6798affd607b344510d0357f64dc36cae41944b29a0f4fe96a1e0a8026b3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/brave-search.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Brave search
 Source: https://docs.openclaw.ai/tools/brave-search
-
-
 
 OpenClaw supports Brave Search API as a `web_search` provider.
 
@@ -25,7 +23,7 @@ OpenClaw supports Brave Search API as a `web_search` provider.
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -57,8 +55,8 @@ Legacy `tools.web.search.apiKey` still loads through the compatibility shim, but
 
 `webSearch.mode` controls the Brave transport:
 
-* `web` (default): normal Brave web search with titles, URLs, and snippets
-* `llm-context`: Brave LLM Context API with pre-extracted text chunks and sources for grounding
+- `web` (default): normal Brave web search with titles, URLs, and snippets
+- `llm-context`: Brave LLM Context API with pre-extracted text chunks and sources for grounding
 
 `webSearch.baseUrl` can point Brave requests at a trusted Brave-compatible proxy
 or gateway. OpenClaw appends `/res/v1/web/search` or `/res/v1/llm/context` to
@@ -68,45 +66,45 @@ or private-network proxy hosts.
 
 ## Tool parameters
 
-<ParamField type="string">
-  Search query.
-</ParamField>
+ParamField
 
-<ParamField type="number">
-  Number of results to return (1–10).
-</ParamField>
+Search query.
 
-<ParamField type="string">
-  2-letter ISO country code (e.g. `US`, `DE`).
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  ISO 639-1 language code for search results (e.g. `en`, `de`, `fr`).
-</ParamField>
+Number of results to return (1–10).
 
-<ParamField type="string">
-  Brave search-language code (e.g. `en`, `en-gb`, `zh-hans`).
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  ISO language code for UI elements.
-</ParamField>
+2-letter ISO country code (e.g. `US`, `DE`).
 
-<ParamField type="'day' | 'week' | 'month' | 'year'">
-  Time filter — `day` is 24 hours.
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  Only results published after this date (`YYYY-MM-DD`).
-</ParamField>
+ISO 639-1 language code for search results (e.g. `en`, `de`, `fr`).
 
-<ParamField type="string">
-  Only results published before this date (`YYYY-MM-DD`).
-</ParamField>
+ParamField
+
+Brave search-language code (e.g. `en`, `en-gb`, `zh-hans`).
+
+ParamField
+
+ISO language code for UI elements.
+
+ParamField
+
+Time filter — `day` is 24 hours.
+
+ParamField
+
+Only results published after this date (`YYYY-MM-DD`).
+
+ParamField
+
+Only results published before this date (`YYYY-MM-DD`).
 
 **Examples:**
 
-```javascript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```javascript
 // Country and language-specific search
 await web_search({
   query: "renewable energy",
@@ -130,19 +128,21 @@ await web_search({
 
 ## Notes
 
-* OpenClaw uses the Brave **Search** plan. If you have a legacy subscription (e.g. the original Free plan with 2,000 queries/month), it remains valid but does not include newer features like LLM Context or higher rate limits.
-* Each Brave plan includes **\$5/month in free credit** (renewing). The Search plan costs \$5 per 1,000 requests, so the credit covers 1,000 queries/month. Set your usage limit in the Brave dashboard to avoid unexpected charges. See the [Brave API portal](https://brave.com/search/api/) for current plans.
-* The Search plan includes the LLM Context endpoint and AI inference rights. Storing results to train or tune models requires a plan with explicit storage rights. See the Brave [Terms of Service](https://api-dashboard.search.brave.com/terms-of-service).
-* `llm-context` mode returns grounded source entries instead of the normal web-search snippet shape.
-* `llm-context` mode supports `freshness` and bounded `date_after` + `date_before` ranges. It does not support `ui_lang`; `date_before` without `date_after` is rejected because Brave requires custom freshness ranges to include both start and end dates.
-* `ui_lang` must include a region subtag like `en-US`.
-* Results are cached for 15 minutes by default (configurable via `cacheTtlMinutes`).
-* Custom `webSearch.baseUrl` values are included in Brave cache identity, so
+- OpenClaw uses the Brave **Search** plan. If you have a legacy subscription (e.g. the original Free plan with 2,000 queries/month), it remains valid but does not include newer features like LLM Context or higher rate limits.
+- Each Brave plan includes **\$5/month in free credit** (renewing). The Search plan costs \$5 per 1,000 requests, so the credit covers 1,000 queries/month. Set your usage limit in the Brave dashboard to avoid unexpected charges. See the [Brave API portal](https://brave.com/search/api/) for current plans.
+- The Search plan includes the LLM Context endpoint and AI inference rights. Storing results to train or tune models requires a plan with explicit storage rights. See the Brave [Terms of Service](https://api-dashboard.search.brave.com/terms-of-service).
+- `llm-context` mode returns grounded source entries instead of the normal web-search snippet shape.
+- `llm-context` mode supports `freshness` and bounded `date_after` + `date_before` ranges. It does not support `ui_lang`; `date_before` without `date_after` is rejected because Brave requires custom freshness ranges to include both start and end dates.
+- `ui_lang` must include a region subtag like `en-US`.
+- Results are cached for 15 minutes by default (configurable via `cacheTtlMinutes`).
+- Custom `webSearch.baseUrl` values are included in Brave cache identity, so
   proxy-specific responses do not collide.
-* Enable the `brave.http` diagnostics flag to log Brave request URLs/query params, response status/timing, and search-cache hit/miss/write events while troubleshooting. The flag never logs the API key or response bodies, but search queries can be sensitive.
+- Enable the `brave.http` diagnostics flag to log Brave request URLs/query params, response status/timing, and search-cache hit/miss/write events while troubleshooting. The flag never logs the API key or response bodies, but search queries can be sensitive.
 
 ## Related
 
-* [Web Search overview](/tools/web) -- all providers and auto-detection
-* [Perplexity Search](/tools/perplexity-search) -- structured results with domain filtering
-* [Exa Search](/tools/exa-search) -- neural search with content extraction
+- [Web Search overview](/tools/web) -- all providers and auto-detection
+- [Perplexity Search](/tools/perplexity-search) -- structured results with domain filtering
+- [Exa Search](/tools/exa-search) -- neural search with content extraction
+
+---

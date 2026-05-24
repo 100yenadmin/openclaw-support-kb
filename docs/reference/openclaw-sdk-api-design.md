@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw App SDK API design"
 source: "https://docs.openclaw.ai/reference/openclaw-sdk-api-design"
-source_hash: "2a64efe3cc151bdd8bc79c5f103fa710bd02a898f14765da148135470d2f2cb4"
+source_hash: "9dee746f1defa854665b9d59be3e69ab42ff64523f37afd4c4feff1921c7eb8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/openclaw-sdk-api-design.md"
@@ -13,17 +13,15 @@ duplicate_index: 1
 # OpenClaw App SDK API design
 Source: https://docs.openclaw.ai/reference/openclaw-sdk-api-design
 
-
-
 This page is the detailed API reference design for the public
 [OpenClaw App SDK](/concepts/openclaw-sdk). It is intentionally separate from
 the [Plugin SDK](/plugins/sdk-overview).
 
-<Note>
+Note
+
   `@openclaw/sdk` is the external app/client package for talking to the
   Gateway. `openclaw/plugin-sdk/*` is the in-process plugin authoring contract.
   Do not import Plugin SDK subpaths from apps that only need to run agents.
-</Note>
 
 The public app SDK should be built in two layers:
 
@@ -35,7 +33,7 @@ The public app SDK should be built in two layers:
 
 The low-level namespaces should closely follow Gateway resources:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 oc.agents.list();
 oc.agents.get("main");
 oc.agents.create(...);
@@ -82,7 +80,7 @@ oc.environments.delete(environmentId); // future API: current SDK throws unsuppo
 
 High-level wrappers should return objects that make common flows pleasant:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const run = await agent.run(inputOrParams);
 await run.cancel();
 await run.wait();
@@ -99,7 +97,7 @@ const session = await run.session();
 
 The public SDK should expose versioned, replayable, normalized events.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type OpenClawEvent = {
   version: 1;
   id: string;
@@ -157,7 +155,7 @@ have to parse `raw` for normal UI.
 
 `Run.wait()` should return a stable result envelope:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type RunResult = {
   runId: string;
   status: "accepted" | "completed" | "failed" | "cancelled" | "timed_out";
@@ -196,7 +194,7 @@ timeout.
 Approvals must be first-class because coding agents constantly cross safety
 boundaries.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 run.onApproval(async (request) => {
   if (request.kind === "tool" && request.toolName === "exec") {
     return request.approveOnce({ reason: "CI command allowed by policy" });
@@ -208,15 +206,15 @@ run.onApproval(async (request) => {
 
 Approval events should carry:
 
-* approval id
-* run id and session id
-* request kind
-* requested action summary
-* tool name or environment action
-* risk level
-* available decisions
-* expiration
-* whether the decision can be reused
+- approval id
+- run id and session id
+- request kind
+- requested action summary
+- tool name or environment action
+- risk level
+- available decisions
+- expiration
+- whether the decision can be reused
 
 Questions are separate from approvals. A question asks the user or host app for
 information. An approval asks for permission to perform an action.
@@ -225,7 +223,7 @@ information. An approval asks for permission to perform an action.
 
 Apps need to understand the tool surface without importing plugin internals.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const tools = await run.toolSpace();
 
 for (const tool of tools.list()) {
@@ -235,12 +233,12 @@ for (const tool of tools.list()) {
 
 The SDK should expose:
 
-* normalized tool metadata
-* source: OpenClaw, MCP, plugin, channel, runtime, or app
-* schema summary
-* approval policy
-* runtime compatibility
-* whether a tool is hidden, readonly, write capable, or host capable
+- normalized tool metadata
+- source: OpenClaw, MCP, plugin, channel, runtime, or app
+- schema summary
+- approval policy
+- runtime compatibility
+- whether a tool is hidden, readonly, write capable, or host capable
 
 Tool invocation through the SDK should be explicit and scoped. Most apps should
 run agents, not call arbitrary tools directly.
@@ -249,7 +247,7 @@ run agents, not call arbitrary tools directly.
 
 Artifacts should cover more than files.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type ArtifactSummary = {
   id: string;
   runId?: string;
@@ -274,14 +272,14 @@ type ArtifactSummary = {
 
 Common examples:
 
-* file edits and generated files
-* patch bundles
-* VCS diffs
-* screenshots and media outputs
-* logs and trace bundles
-* pull request links
-* runtime trajectories
-* managed environment workspace snapshots
+- file edits and generated files
+- patch bundles
+- VCS diffs
+- screenshots and media outputs
+- logs and trace bundles
+- pull request links
+- runtime trajectories
+- managed environment workspace snapshots
 
 Artifact access should support redaction, retention, and download URLs without
 assuming every artifact is a normal local file.
@@ -308,20 +306,20 @@ Recommended token scopes:
 
 Defaults:
 
-* no secret forwarding by default
-* no unrestricted environment variable pass-through
-* secret references instead of secret values
-* explicit sandbox and network policy
-* explicit remote environment retention
-* approvals for host execution unless policy proves otherwise
-* raw runtime events redacted before they leave Gateway unless the caller has a
+- no secret forwarding by default
+- no unrestricted environment variable pass-through
+- secret references instead of secret values
+- explicit sandbox and network policy
+- explicit remote environment retention
+- approvals for host execution unless policy proves otherwise
+- raw runtime events redacted before they leave Gateway unless the caller has a
   stronger diagnostic scope
 
 ## Managed environment provider
 
 Managed agents should be implemented as environment providers.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type EnvironmentProvider = {
   id: string;
   capabilities: {
@@ -380,18 +378,20 @@ Layering:
 
 Benefits:
 
-* protocol drift is visible
-* tests can compare generated methods with Gateway exports
-* App SDK stays independent from Plugin SDK internals
-* low-level consumers still have full protocol access
-* high-level consumers get the small product API
+- protocol drift is visible
+- tests can compare generated methods with Gateway exports
+- App SDK stays independent from Plugin SDK internals
+- low-level consumers still have full protocol access
+- high-level consumers get the small product API
 
 ## Related
 
-* [OpenClaw App SDK](/concepts/openclaw-sdk)
-* [Gateway RPC reference](/reference/rpc)
-* [Agent loop](/concepts/agent-loop)
-* [Agent runtimes](/concepts/agent-runtimes)
-* [Background tasks](/automation/tasks)
-* [ACP agents](/tools/acp-agents)
-* [Plugin SDK overview](/plugins/sdk-overview)
+- [OpenClaw App SDK](/concepts/openclaw-sdk)
+- [Gateway RPC reference](/reference/rpc)
+- [Agent loop](/concepts/agent-loop)
+- [Agent runtimes](/concepts/agent-runtimes)
+- [Background tasks](/automation/tasks)
+- [ACP agents](/tools/acp-agents)
+- [Plugin SDK overview](/plugins/sdk-overview)
+
+---

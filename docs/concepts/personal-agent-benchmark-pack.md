@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal agent benchmark pack"
 source: "https://docs.openclaw.ai/concepts/personal-agent-benchmark-pack"
-source_hash: "c7060b4b88f70e6d342f0369d729c9a00705d1d56f659b77350e55987e4a4abe"
+source_hash: "5ac8eeb30a715b0aafec596e66dbd0e72acd0e2cba65fc404184a373d6ccad09"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/personal-agent-benchmark-pack.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Personal agent benchmark pack
 Source: https://docs.openclaw.ai/concepts/personal-agent-benchmark-pack
 
-
-
 The Personal Agent Benchmark Pack is a small repo-backed QA scenario pack for
 local personal assistant workflows. It is not a generic model benchmark and it
 does not require a new runner. The pack reuses the private QA stack described in
@@ -24,16 +22,16 @@ catalog.
 
 The first pack is intentionally narrow:
 
-* fake personal reminders through local cron delivery
-* fake DM and thread reply routing through `qa-channel`
-* fake preference recall from the temporary QA workspace memory files
-* fake secret no-echo checks
-* safe read-backed tool followthrough after a short approval-style turn
-* approval denial stop behavior for a sensitive local read request
-* proof-backed task status reporting that keeps pending, blocked, and done separate
-* share-safe diagnostics artifacts that keep useful status while omitting raw personal content
-* proof-backed completion claims that avoid fake progress before local evidence exists
-* failure recovery that reports partial status and keeps retry boundaries clear
+- fake personal reminders through local cron delivery
+- fake DM and thread reply routing through `qa-channel`
+- fake preference recall from the temporary QA workspace memory files
+- fake secret no-echo checks
+- safe read-backed tool followthrough after a short approval-style turn
+- approval denial stop behavior for a sensitive local read request
+- proof-backed task status reporting that keeps pending, blocked, and done separate
+- share-safe diagnostics artifacts that keep useful status while omitting raw personal content
+- proof-backed completion claims that avoid fake progress before local evidence exists
+- failure recovery that reports partial status and keeps retry boundaries clear
 
 ## Scenarios
 
@@ -41,7 +39,7 @@ The machine-readable pack metadata lives in
 `extensions/qa-lab/src/scenario-packs.ts`. Run the pack with
 `--pack personal-agent`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_ENABLE_PRIVATE_QA_CLI=1 pnpm openclaw qa suite \
   --provider-mode mock-openai \
   --pack personal-agent \
@@ -75,8 +73,10 @@ Add new cases under `qa/scenarios/personal/`, then add the scenario id to
 
 Good follow-up candidates:
 
-* redacted trajectory export checks
-* local-only plugin workflow checks
+- redacted trajectory export checks
+- local-only plugin workflow checks
 
 Avoid adding a new runner, plugin, dependency, live transport, or model judge
 until the scenario catalog has enough stable cases to justify that surface.
+
+---

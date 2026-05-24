@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "a59a5bd931588c9a9a70723174a1147b80222e84890e22f52515b704acd77cf9"
+source_hash: "ecbb2796bca9533004ff006b85549203d5b96f8f1238e4c13e6d1430c1ee35fa"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -102,7 +102,7 @@ Full definition in `providers/base.py`. The most useful ones:
 
 | Field | Type | Purpose |
 |---|---|---|
-| `name` | str | Canonical id — matches `--provider` choices and `HERMES_INFERENCE_PROVIDER` |
+| `name` | str | Canonical id — matches `model.provider` in `config.yaml` and the `--provider` flag |
 | `aliases` | `tuple[str, ...]` | Alternative names resolved by `get_provider_profile()` (e.g. `grok` → `xai`) |
 | `api_mode` | str | `chat_completions` \| `codex_responses` \| `anthropic_messages` \| `bedrock_converse` |
 | `display_name` | str | Human label shown in `hermes model` picker |

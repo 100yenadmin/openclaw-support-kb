@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "f9a389cf8ceca7475502ae4d42877d9f8cefacf37c47627c3d6fdb5f7270ded2"
+source_hash: "8a4b33ee25686c0341b4b432697eb2fbae9e9eff856bbe903666e929c840dc86"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/troubleshooting.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # Channel troubleshooting
 Source: https://docs.openclaw.ai/channels/troubleshooting
 
-
-
 Use this page when a channel connects but behavior is wrong.
 
 ## Command ladder
 
 Run these in order first:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw status
 openclaw gateway status
 openclaw logs --follow
@@ -31,24 +29,25 @@ openclaw channels status --probe
 
 Healthy baseline:
 
-* `Runtime: running`
-* `Connectivity probe: ok`
-* `Capability: read-only`, `write-capable`, or `admin-capable`
-* Channel probe shows transport connected and, where supported, `works` or `audit ok`
+- `Runtime: running`
+- `Connectivity probe: ok`
+- `Capability: read-only`, `write-capable`, or `admin-capable`
+- Channel probe shows transport connected and, where supported, `works` or `audit ok`
 
 ## After an update
 
 Use this when Telegram, iMessage, BlueBubbles-era configs, or another plugin
 channel disappears after updating.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw status --all
 openclaw doctor --fix
 openclaw gateway restart
 openclaw status --all
 ```
 
-Look for `plugin load failed: dependency tree corrupted; run openclaw doctor --fix` in `openclaw status --all`. That means the channel is configured, but
+Look for `plugin load failed: dependency tree corrupted; run openclaw doctor
+--fix` in `openclaw status --all`. That means the channel is configured, but
 the plugin setup/load path hit a corrupt dependency tree instead of registering
 the channel. `openclaw doctor --fix` removes stale plugin dependency staging
 directories and stale auth shadows, then `openclaw gateway restart` reloads the
@@ -121,7 +120,7 @@ Full troubleshooting: [Slack troubleshooting](/channels/slack#troubleshooting)
 
 Full troubleshooting:
 
-* [iMessage troubleshooting](/channels/imessage#troubleshooting)
+- [iMessage troubleshooting](/channels/imessage#troubleshooting)
 
 ## Signal
 
@@ -164,6 +163,8 @@ Full setup and config: [Matrix](/channels/matrix)
 
 ## Related
 
-* [Pairing](/channels/pairing)
-* [Channel routing](/channels/channel-routing)
-* [Gateway troubleshooting](/gateway/troubleshooting)
+- [Pairing](/channels/pairing)
+- [Channel routing](/channels/channel-routing)
+- [Gateway troubleshooting](/gateway/troubleshooting)
+
+---

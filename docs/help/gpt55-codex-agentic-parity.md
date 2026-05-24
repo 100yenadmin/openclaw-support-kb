@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GPT-5.5 / Codex agentic parity"
 source: "https://docs.openclaw.ai/help/gpt55-codex-agentic-parity"
-source_hash: "225218fdd8d32a6dc5f5428a4980bd7c410111ce348b5a3452e323da136052c6"
+source_hash: "94412bd2698310e8f859848953fa218f8b5e1bd4bd077dc8261a7c0967a9ad4b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/gpt55-codex-agentic-parity.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # GPT-5.5 / Codex agentic parity
 Source: https://docs.openclaw.ai/help/gpt55-codex-agentic-parity
 
-
-
 OpenClaw already worked well with tool-using frontier models, but GPT-5.5 and Codex-style models were still underperforming in a few practical ways:
 
-* they could stop after planning instead of doing the work
-* they could use strict OpenAI/Codex tool schemas incorrectly
-* they could ask for `/elevated full` even when full access was impossible
-* they could lose long-running task state during replay or compaction
-* parity claims against Claude Opus 4.7 were based on anecdotes instead of repeatable scenarios
+- they could stop after planning instead of doing the work
+- they could use strict OpenAI/Codex tool schemas incorrectly
+- they could ask for `/elevated full` even when full access was impossible
+- they could lose long-running task state during replay or compaction
+- parity claims against Claude Opus 4.7 were based on anecdotes instead of repeatable scenarios
 
 This parity program fixes those gaps in four reviewable slices.
 
@@ -35,16 +33,16 @@ When enabled, OpenClaw stops accepting plan-only turns as "good enough" completi
 
 This improves the GPT-5.5 experience most on:
 
-* short "ok do it" follow-ups
-* code tasks where the first step is obvious
-* flows where `update_plan` should be progress tracking rather than filler text
+- short "ok do it" follow-ups
+- code tasks where the first step is obvious
+- flows where `update_plan` should be progress tracking rather than filler text
 
 ### PR B: runtime truthfulness
 
 This slice makes OpenClaw tell the truth about two things:
 
-* why the provider/runtime call failed
-* whether `/elevated full` is actually available
+- why the provider/runtime call failed
+- whether `/elevated full` is actually available
 
 That means GPT-5.5 gets better runtime signals for missing scope, auth refresh failures, HTML 403 auth failures, proxy issues, DNS or timeout failures, and blocked full-access modes. The model is less likely to hallucinate the wrong remediation or keep asking for a permission mode the runtime cannot provide.
 
@@ -52,8 +50,8 @@ That means GPT-5.5 gets better runtime signals for missing scope, auth refresh f
 
 This slice improves two kinds of correctness:
 
-* provider-owned OpenAI/Codex tool-schema compatibility
-* replay and long-task liveness surfacing
+- provider-owned OpenAI/Codex tool-schema compatibility
+- replay and long-task liveness surfacing
 
 The tool-compat work reduces schema friction for strict OpenAI/Codex tool registration, especially around parameter-free tools and strict object-root expectations. The replay/liveness work makes long-running tasks more observable, so paused, blocked, and abandoned states are visible instead of disappearing into generic failure text.
 
@@ -65,7 +63,7 @@ The parity pack is the proof layer. It does not change runtime behavior by itsel
 
 After you have two `qa-suite-summary.json` artifacts, generate the release-gate comparison with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm openclaw qa parity-report \
   --repo-root . \
   --candidate-summary .artifacts/qa-e2e/openai-candidate/qa-suite-summary.json \
@@ -75,28 +73,28 @@ pnpm openclaw qa parity-report \
 
 That command writes:
 
-* a human-readable Markdown report
-* a machine-readable JSON verdict
-* an explicit `pass` / `fail` gate result
+- a human-readable Markdown report
+- a machine-readable JSON verdict
+- an explicit `pass` / `fail` gate result
 
 ## Why this improves GPT-5.5 in practice
 
 Before this work, GPT-5.5 on OpenClaw could feel less agentic than Opus in real coding sessions because the runtime tolerated behaviors that are especially harmful for GPT-5-style models:
 
-* commentary-only turns
-* schema friction around tools
-* vague permission feedback
-* silent replay or compaction breakage
+- commentary-only turns
+- schema friction around tools
+- vague permission feedback
+- silent replay or compaction breakage
 
 The goal is not to make GPT-5.5 imitate Opus. The goal is to give GPT-5.5 a runtime contract that rewards real progress, supplies cleaner tool and permission semantics, and turns failure modes into explicit machine- and human-readable states.
 
 That changes the user experience from:
 
-* "the model had a good plan but stopped"
+- "the model had a good plan but stopped"
 
 to:
 
-* "the model either acted, or OpenClaw surfaced the exact reason it could not"
+- "the model either acted, or OpenClaw surfaced the exact reason it could not"
 
 ## Before vs after for GPT-5.5 users
 
@@ -110,7 +108,7 @@ to:
 
 ## Architecture
 
-```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```mermaid
 flowchart TD
     A["User request"] --> B["Embedded Pi runtime"]
     B --> C["Strict-agentic execution contract"]
@@ -127,7 +125,7 @@ flowchart TD
 
 ## Release flow
 
-```mermaid theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```mermaid
 flowchart LR
     A["Merged runtime slices (PR A-C)"] --> B["Run GPT-5.5 parity pack"]
     A --> C["Run Opus 4.7 parity pack"]
@@ -182,23 +180,23 @@ GPT-5.5 can only be considered at parity or better when the merged runtime passe
 
 Required outcomes:
 
-* no plan-only stall when the next tool action is clear
-* no fake completion without real execution
-* no incorrect `/elevated full` guidance
-* no silent replay or compaction abandonment
-* parity-pack metrics that are at least as strong as the agreed Opus 4.7 baseline
+- no plan-only stall when the next tool action is clear
+- no fake completion without real execution
+- no incorrect `/elevated full` guidance
+- no silent replay or compaction abandonment
+- parity-pack metrics that are at least as strong as the agreed Opus 4.7 baseline
 
 For the first-wave harness, the gate compares:
 
-* completion rate
-* unintended-stop rate
-* valid-tool-call rate
-* fake-success count
+- completion rate
+- unintended-stop rate
+- valid-tool-call rate
+- fake-success count
 
 Parity evidence is intentionally split across two layers:
 
-* PR D proves same-scenario GPT-5.5 vs Opus 4.7 behavior with QA-lab
-* PR B deterministic suites prove auth, proxy, DNS, and `/elevated full` truthfulness outside the harness
+- PR D proves same-scenario GPT-5.5 vs Opus 4.7 behavior with QA-lab
+- PR B deterministic suites prove auth, proxy, DNS, and `/elevated full` truthfulness outside the harness
 
 ## Goal-to-evidence matrix
 
@@ -214,25 +212,27 @@ Parity evidence is intentionally split across two layers:
 
 Use the verdict in `qa-agentic-parity-summary.json` as the final machine-readable decision for the first-wave parity pack.
 
-* `pass` means GPT-5.5 covered the same scenarios as Opus 4.7 and did not regress on the agreed aggregate metrics.
-* `fail` means at least one hard gate tripped: weaker completion, worse unintended stops, weaker valid tool use, any fake-success case, or mismatched scenario coverage.
-* "shared/base CI issue" is not itself a parity result. If CI noise outside PR D blocks a run, the verdict should wait for a clean merged-runtime execution instead of being inferred from branch-era logs.
-* Auth, proxy, DNS, and `/elevated full` truthfulness still come from PR B's deterministic suites, so the final release claim needs both: a passing PR D parity verdict and green PR B truthfulness coverage.
+- `pass` means GPT-5.5 covered the same scenarios as Opus 4.7 and did not regress on the agreed aggregate metrics.
+- `fail` means at least one hard gate tripped: weaker completion, worse unintended stops, weaker valid tool use, any fake-success case, or mismatched scenario coverage.
+- "shared/base CI issue" is not itself a parity result. If CI noise outside PR D blocks a run, the verdict should wait for a clean merged-runtime execution instead of being inferred from branch-era logs.
+- Auth, proxy, DNS, and `/elevated full` truthfulness still come from PR B's deterministic suites, so the final release claim needs both: a passing PR D parity verdict and green PR B truthfulness coverage.
 
 ## Who should enable `strict-agentic`
 
 Use `strict-agentic` when:
 
-* the agent is expected to act immediately when a next step is obvious
-* GPT-5.5 or Codex-family models are the primary runtime
-* you prefer explicit blocked states over "helpful" recap-only replies
+- the agent is expected to act immediately when a next step is obvious
+- GPT-5.5 or Codex-family models are the primary runtime
+- you prefer explicit blocked states over "helpful" recap-only replies
 
 Keep the default contract when:
 
-* you want the existing looser behavior
-* you are not using GPT-5-family models
-* you are testing prompts rather than runtime enforcement
+- you want the existing looser behavior
+- you are not using GPT-5-family models
+- you are testing prompts rather than runtime enforcement
 
 ## Related
 
-* [GPT-5.5 / Codex parity maintainer notes](/help/gpt55-codex-agentic-parity-maintainers)
+- [GPT-5.5 / Codex parity maintainer notes](/help/gpt55-codex-agentic-parity-maintainers)
+
+---

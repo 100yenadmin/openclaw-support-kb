@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/secrets/bitwarden.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets/bitwarden"
-source_hash: "4c2ee7f583f200d8caf6d3ac619227a13f93ccfca29c55d33224a3a996d55864"
+source_hash: "b7499b6b5e912b9bd1989f7c773719217add04940508e3e4db0d754c5dc0522e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/bitwarden.md"
@@ -40,7 +40,7 @@ You set up the machine account *in the web app*, where your normal 2FA applies. 
 
 ### 1. Create a machine account and access token
 
-In the [Bitwarden web app](https://vault.bitwarden.com):
+In the [Bitwarden web app](https://vault.bitwarden.com) (or [vault.bitwarden.eu](https://vault.bitwarden.eu) for EU accounts):
 
 1. Switch to **Secrets Manager** from the product switcher.
 2. Create or pick a **Project** (e.g. "Hermes keys").
@@ -60,9 +60,19 @@ It will:
 
 1. Download and verify `bws v2.0.0` into `~/.hermes/bin/bws`.
 2. Prompt you for the access token (input is hidden). Stored in `~/.hermes/.env` as `BWS_ACCESS_TOKEN`.
-3. List the projects the machine account can see; pick one. Stored in `config.yaml` as `secrets.bitwarden.project_id`.
-4. Test-fetch the project's secrets and show you which env vars will resolve.
-5. Flip `secrets.bitwarden.enabled: true`.
+3. Ask which Bitwarden region your machine account belongs to — **US Cloud**, **EU Cloud**, or **self-hosted / custom URL**. Stored in `config.yaml` as `secrets.bitwarden.server_url` and passed to `bws` as `BWS_SERVER_URL`.
+4. List the projects the machine account can see; pick one. Stored in `config.yaml` as `secrets.bitwarden.project_id`.
+5. Test-fetch the project's secrets and show you which env vars will resolve.
+6. Flip `secrets.bitwarden.enabled: true`.
+
+Non-interactive setup is also supported via flags:
+
+```bash
+hermes secrets bitwarden setup \
+  --access-token "$BWS_ACCESS_TOKEN" \
+  --server-url https://vault.bitwarden.eu \
+  --project-id <project-uuid>
+```
 
 ### 3. Confirm
 
@@ -93,6 +103,7 @@ secrets:
     enabled: false
     access_token_env: BWS_ACCESS_TOKEN
     project_id: ""
+    server_url: ""
     cache_ttl_seconds: 300
     override_existing: true
     auto_install: true
@@ -103,6 +114,7 @@ secrets:
 | `enabled` | `false` | Master switch. When false, Bitwarden is never contacted. |
 | `access_token_env` | `BWS_ACCESS_TOKEN` | Env var name that holds the bootstrap token. Change this if you already use `BWS_ACCESS_TOKEN` for something else. |
 | `project_id` | `""` | UUID of the project to sync from. |
+| `server_url` | `""` | Bitwarden region or self-hosted endpoint. Empty = `bws` default (US Cloud, `https://vault.bitwarden.com`). Set to `https://vault.bitwarden.eu` for EU Cloud, or your own URL for self-hosted. Plumbed into the `bws` subprocess as `BWS_SERVER_URL`. |
 | `cache_ttl_seconds` | `300` | How long an in-process fetch result is reused. Set to `0` to disable caching. Cache is per-process; new `hermes` invocations start fresh. |
 | `override_existing` | `true` | When true, Bitwarden values overwrite anything already in env (so rotation in the web app actually takes effect). Flip to `false` if you want `.env` / shell exports to win locally. |
 | `auto_install` | `true` | When true, `bws` is auto-downloaded into `~/.hermes/bin/` on first use. |
@@ -115,7 +127,8 @@ Bitwarden never blocks Hermes startup. If anything goes wrong, you'll see a one-
 |---|---|---|
 | `BWS_ACCESS_TOKEN is not set` | Enabled in config but token cleared from `.env` | Re-run `hermes secrets bitwarden setup` |
 | `bws exited 1: invalid access token` | Token revoked or wrong | Generate a new token, re-run setup |
-| `bws timed out` | Network blocked or Bitwarden API slow | Check connectivity to `api.bitwarden.com` |
+| `[400 Bad Request] {"error":"invalid_client"}` | Token is for a Bitwarden region other than the one `bws` is calling (e.g. EU token hitting the US identity endpoint) | Re-run setup and pick the right region, or set `secrets.bitwarden.server_url` to `https://vault.bitwarden.eu` (or your self-hosted URL) |
+| `bws timed out` | Network blocked or Bitwarden API slow | Check connectivity to `api.bitwarden.com` (or your `server_url`) |
 | `bws binary not available` | `auto_install: false` and `bws` not on PATH | Install manually from [github.com/bitwarden/sdk-sm/releases](https://github.com/bitwarden/sdk-sm/releases) or flip `auto_install` back on |
 | `Checksum mismatch` | Download corrupted or tampered | Re-run, will retry; if it persists, file an issue |
 

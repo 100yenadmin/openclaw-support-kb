@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare AI gateway"
 source: "https://docs.openclaw.ai/providers/cloudflare-ai-gateway"
-source_hash: "731314fbc5ea58e83053a7bb220d94bfb6c768bee824f0318df80af43b84db42"
+source_hash: "4788b8d0924a6e8541df43685527629853fe49d0c685e95db301cdbe0963f9d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cloudflare-ai-gateway.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Cloudflare AI gateway
 Source: https://docs.openclaw.ai/providers/cloudflare-ai-gateway
 
-
-
 Cloudflare AI Gateway sits in front of provider APIs and lets you add analytics, caching, and controls. For Anthropic, OpenClaw uses the Anthropic Messages API through your Gateway endpoint.
 
 | Property      | Value                                                                                    |
@@ -24,9 +22,9 @@ Cloudflare AI Gateway sits in front of provider APIs and lets you add analytics,
 | Default model | `cloudflare-ai-gateway/claude-sonnet-4-6`                                                |
 | API key       | `CLOUDFLARE_AI_GATEWAY_API_KEY` (your provider API key for requests through the Gateway) |
 
-<Note>
-  For Anthropic models routed through Cloudflare AI Gateway, use your **Anthropic API key** as the provider key.
-</Note>
+Note
+
+For Anthropic models routed through Cloudflare AI Gateway, use your **Anthropic API key** as the provider key.
 
 When thinking is enabled for Anthropic Messages models, OpenClaw strips trailing
 assistant prefill turns before sending the payload through Cloudflare AI Gateway.
@@ -35,21 +33,26 @@ non-thinking prefill remains available.
 
 ## Getting started
 
-<Steps>
-  <Step title="Set the provider API key and Gateway details">
+Steps
+
+
+Set the provider API key and Gateway details
+
     Run onboarding and choose the Cloudflare AI Gateway auth option:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --auth-choice cloudflare-ai-gateway-api-key
     ```
 
     This prompts for your account ID, gateway ID, and API key.
-  </Step>
 
-  <Step title="Set a default model">
+
+
+Set a default model
+
     Add the model to your OpenClaw config:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -58,20 +61,21 @@ non-thinking prefill remains available.
       },
     }
     ```
-  </Step>
 
-  <Step title="Verify the model is available">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Verify the model is available
+
+    ```bash
     openclaw models list --provider cloudflare-ai-gateway
     ```
-  </Step>
-</Steps>
+
 
 ## Non-interactive example
 
 For scripted or CI setups, pass all values on the command line:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --non-interactive \
   --mode local \
   --auth-choice cloudflare-ai-gateway-api-key \
@@ -82,11 +86,14 @@ openclaw onboard --non-interactive \
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Authenticated gateways">
+AccordionGroup
+
+
+Authenticated gateways
+
     If you enabled Gateway authentication in Cloudflare, add the `cf-aig-authorization` header. This is **in addition to** your provider API key.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       models: {
         providers: {
@@ -100,28 +107,39 @@ openclaw onboard --non-interactive \
     }
     ```
 
-    <Tip>
-      The `cf-aig-authorization` header authenticates with the Cloudflare Gateway itself, while the provider API key (for example, your Anthropic key) authenticates with the upstream provider.
-    </Tip>
-  </Accordion>
 
-  <Accordion title="Environment note">
+Tip
+
+    The `cf-aig-authorization` header authenticates with the Cloudflare Gateway itself, while the provider API key (for example, your Anthropic key) authenticates with the upstream provider.
+
+
+
+
+
+Environment note
+
     If the Gateway runs as a daemon (launchd/systemd), make sure `CLOUDFLARE_AI_GATEWAY_API_KEY` is available to that process.
 
-    <Warning>
-      A key exported only in an interactive shell will not help a launchd/systemd daemon unless that environment is imported there as well. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway process can read it.
-    </Warning>
-  </Accordion>
-</AccordionGroup>
+
+Warning
+
+    A key exported only in an interactive shell will not help a launchd/systemd daemon unless that environment is imported there as well. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to ensure the gateway process can read it.
+
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
-    Choosing providers, model refs, and failover behavior.
-  </Card>
+CardGroup
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Model selection
+
+    Choosing providers, model refs, and failover behavior.
+
+
+Troubleshooting
+
     General troubleshooting and FAQ.
-  </Card>
-</CardGroup>
+
+---

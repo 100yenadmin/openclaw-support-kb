@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "b4068cbd8deefc5ffaa182b120ab0e63673e4790394c9020398d75b0bfb7451d"
+source_hash: "983915a77a5786fea235f326c26e4a41140d62c41a08ce2a9e79cdca69126e8c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/token-use.md"
@@ -13,25 +13,23 @@ duplicate_index: 1
 # Token use and costs
 Source: https://docs.openclaw.ai/reference/token-use
 
-
-
 OpenClaw tracks **tokens**, not characters. Tokens are model-specific, but most
-OpenAI-style models average \~4 characters per token for English text.
+OpenAI-style models average ~4 characters per token for English text.
 
 ## How the system prompt is built
 
 OpenClaw assembles its own system prompt on every run. It includes:
 
-* Tool list + short descriptions
-* Skills list (only metadata; instructions are loaded on demand with `read`).
+- Tool list + short descriptions
+- Skills list (only metadata; instructions are loaded on demand with `read`).
   The compact skills block is bounded by `skills.limits.maxSkillsPromptChars`,
   with optional per-agent override at
   `agents.list[].skillsLimits.maxSkillsPromptChars`.
-* Self-update instructions
-* Workspace + bootstrap files (`AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `BOOTSTRAP.md` when new, plus `MEMORY.md` when present). Lowercase root `memory.md` is not injected; it is legacy repair input for `openclaw doctor --fix` when paired with `MEMORY.md`. Large files are truncated by `agents.defaults.bootstrapMaxChars` (default: 12000), and total bootstrap injection is capped by `agents.defaults.bootstrapTotalMaxChars` (default: 60000). `memory/*.md` daily files are not part of the normal bootstrap prompt; they remain on-demand via memory tools on ordinary turns, but reset/startup model runs can prepend a one-shot startup-context block with recent daily memory for that first turn. Bare chat `/new` and `/reset` commands are acknowledged without invoking the model. The startup prelude is controlled by `agents.defaults.startupContext`.
-* Time (UTC + user timezone)
-* Reply tags + heartbeat behavior
-* Runtime metadata (host/OS/model/thinking)
+- Self-update instructions
+- Workspace + bootstrap files (`AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `BOOTSTRAP.md` when new, plus `MEMORY.md` when present). Lowercase root `memory.md` is not injected; it is legacy repair input for `openclaw doctor --fix` when paired with `MEMORY.md`. Large files are truncated by `agents.defaults.bootstrapMaxChars` (default: 12000), and total bootstrap injection is capped by `agents.defaults.bootstrapTotalMaxChars` (default: 60000). `memory/*.md` daily files are not part of the normal bootstrap prompt; they remain on-demand via memory tools on ordinary turns, but reset/startup model runs can prepend a one-shot startup-context block with recent daily memory for that first turn. Bare chat `/new` and `/reset` commands are acknowledged without invoking the model. The startup prelude is controlled by `agents.defaults.startupContext`.
+- Time (UTC + user timezone)
+- Reply tags + heartbeat behavior
+- Runtime metadata (host/OS/model/thinking)
 
 See the full breakdown in [System Prompt](/concepts/system-prompt).
 
@@ -39,19 +37,19 @@ See the full breakdown in [System Prompt](/concepts/system-prompt).
 
 Everything the model receives counts toward the context limit:
 
-* System prompt (all sections listed above)
-* Conversation history (user + assistant messages)
-* Tool calls and tool results
-* Attachments/transcripts (images, audio, files)
-* Compaction summaries and pruning artifacts
-* Provider wrappers or safety headers (not visible, but still counted)
+- System prompt (all sections listed above)
+- Conversation history (user + assistant messages)
+- Tool calls and tool results
+- Attachments/transcripts (images, audio, files)
+- Compaction summaries and pruning artifacts
+- Provider wrappers or safety headers (not visible, but still counted)
 
 Some runtime-heavy surfaces have their own explicit caps:
 
-* `agents.defaults.contextLimits.memoryGetMaxChars`
-* `agents.defaults.contextLimits.memoryGetDefaultLines`
-* `agents.defaults.contextLimits.toolResultMaxChars`
-* `agents.defaults.contextLimits.postCompactionMaxChars`
+- `agents.defaults.contextLimits.memoryGetMaxChars`
+- `agents.defaults.contextLimits.memoryGetDefaultLines`
+- `agents.defaults.contextLimits.toolResultMaxChars`
+- `agents.defaults.contextLimits.postCompactionMaxChars`
 
 Per-agent overrides live under `agents.list[].contextLimits`. These knobs are
 for bounded runtime excerpts and injected runtime-owned blocks. They are
@@ -61,8 +59,8 @@ limits.
 For images, OpenClaw downscales transcript/tool image payloads before provider calls.
 Use `agents.defaults.imageMaxDimensionPx` (default: `1200`) to tune this:
 
-* Lower values usually reduce vision-token usage and payload size.
-* Higher values preserve more visual detail for OCR/UI-heavy screenshots.
+- Lower values usually reduce vision-token usage and payload size.
+- Higher values preserve more visual detail for OCR/UI-heavy screenshots.
 
 For a practical breakdown (per injected file, tools, skills, and system prompt size), use `/context list` or `/context detail`. See [Context](/concepts/context).
 
@@ -70,17 +68,17 @@ For a practical breakdown (per injected file, tools, skills, and system prompt s
 
 Use these in chat:
 
-* `/status` → **emoji-rich status card** with the session model, context usage,
+- `/status` → **emoji-rich status card** with the session model, context usage,
   last response input/output tokens, and **estimated cost** (API key only).
-* `/usage off|tokens|full` → appends a **per-response usage footer** to every reply.
-  * Persists per session (stored as `responseUsage`).
-  * OAuth auth **hides cost** (tokens only).
-* `/usage cost` → shows a local cost summary from OpenClaw session logs.
+- `/usage off|tokens|full` → appends a **per-response usage footer** to every reply.
+  - Persists per session (stored as `responseUsage`).
+  - OAuth auth **hides cost** (tokens only).
+- `/usage cost` → shows a local cost summary from OpenClaw session logs.
 
 Other surfaces:
 
-* **TUI/Web TUI:** `/status` + `/usage` are supported.
-* **CLI:** `openclaw status --usage` and `openclaw channels list` show
+- **TUI/Web TUI:** `/status` + `/usage` are supported.
+- **CLI:** `openclaw status --usage` and `openclaw channels list` show
   normalized provider quota windows (`X% left`, not per-response costs).
   Current usage-window providers: Anthropic, GitHub Copilot, Gemini CLI,
   OpenAI Codex, MiniMax, Xiaomi, and z.ai.
@@ -162,7 +160,7 @@ prompt caching pricing for the latest rates and TTL multipliers:
 
 ### Example: keep 1h cache warm with heartbeat
 
-```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```yaml
 agents:
   defaults:
     model:
@@ -177,7 +175,7 @@ agents:
 
 ### Example: mixed traffic with per-agent cache strategy
 
-```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```yaml
 agents:
   defaults:
     model:
@@ -205,7 +203,7 @@ Anthropic's 1M context window is currently beta-gated. OpenClaw can inject the
 required `anthropic-beta` value when you enable `context1m` on supported Opus
 or Sonnet models.
 
-```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```yaml
 agents:
   defaults:
     models:
@@ -227,16 +225,18 @@ rejects that combination with HTTP 401.
 
 ## Tips for reducing token pressure
 
-* Use `/compact` to summarize long sessions.
-* Trim large tool outputs in your workflows.
-* Lower `agents.defaults.imageMaxDimensionPx` for screenshot-heavy sessions.
-* Keep skill descriptions short (skill list is injected into the prompt).
-* Prefer smaller models for verbose, exploratory work.
+- Use `/compact` to summarize long sessions.
+- Trim large tool outputs in your workflows.
+- Lower `agents.defaults.imageMaxDimensionPx` for screenshot-heavy sessions.
+- Keep skill descriptions short (skill list is injected into the prompt).
+- Prefer smaller models for verbose, exploratory work.
 
 See [Skills](/tools/skills) for the exact skill list overhead formula.
 
 ## Related
 
-* [API usage and costs](/reference/api-usage-costs)
-* [Prompt caching](/reference/prompt-caching)
-* [Usage tracking](/concepts/usage-tracking)
+- [API usage and costs](/reference/api-usage-costs)
+- [Prompt caching](/reference/prompt-caching)
+- [Usage tracking](/concepts/usage-tracking)
+
+---

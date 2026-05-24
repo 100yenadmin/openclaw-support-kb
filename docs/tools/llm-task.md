@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
-source_hash: "5d50a1b1738bb0cab98d304d2a99567905a1968ddcbac1f533f914a8e7c78406"
+source_hash: "965465761ee4fba988b05f7798ff3372d4a5ab7e8974a443bec8871a29cc7dfe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/llm-task.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # LLM task
 Source: https://docs.openclaw.ai/tools/llm-task
-
-
 
 `llm-task` is an **optional plugin tool** that runs a JSON-only LLM task and
 returns structured output (optionally validated against JSON Schema).
@@ -25,7 +23,7 @@ without writing custom OpenClaw code for each workflow.
 
 1. Enable the plugin:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -37,7 +35,7 @@ without writing custom OpenClaw code for each workflow.
 
 2. Allow the optional tool:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "tools": {
     "alsoAllow": ["llm-task"]
@@ -49,7 +47,7 @@ Use `tools.allow` only when you want restrictive allowlist mode.
 
 ## Config (optional)
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -74,16 +72,16 @@ outside the list is rejected.
 
 ## Tool parameters
 
-* `prompt` (string, required)
-* `input` (any, optional)
-* `schema` (object, optional JSON Schema)
-* `provider` (string, optional)
-* `model` (string, optional)
-* `thinking` (string, optional)
-* `authProfileId` (string, optional)
-* `temperature` (number, optional)
-* `maxTokens` (number, optional)
-* `timeoutMs` (number, optional)
+- `prompt` (string, required)
+- `input` (any, optional)
+- `schema` (object, optional JSON Schema)
+- `provider` (string, optional)
+- `model` (string, optional)
+- `thinking` (string, optional)
+- `authProfileId` (string, optional)
+- `temperature` (number, optional)
+- `maxTokens` (number, optional)
+- `timeoutMs` (number, optional)
 
 `thinking` accepts the standard OpenClaw reasoning presets, such as `low` or `medium`.
 
@@ -100,18 +98,18 @@ The example below assumes the **standalone Lobster CLI** is running in an enviro
 
 For the bundled **embedded** Lobster runner inside OpenClaw, this nested CLI pattern is **not currently reliable**:
 
-```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```lobster
 openclaw.invoke --tool llm-task --action json --args-json '{ ... }'
 ```
 
 Until embedded Lobster has a supported bridge for this flow, prefer either:
 
-* direct `llm-task` tool calls outside Lobster, or
-* Lobster steps that do not rely on nested `openclaw.invoke` calls.
+- direct `llm-task` tool calls outside Lobster, or
+- Lobster steps that do not rely on nested `openclaw.invoke` calls.
 
 Standalone Lobster CLI example:
 
-```lobster theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```lobster
 openclaw.invoke --tool llm-task --action json --args-json '{
   "prompt": "Given the input email, return intent and draft.",
   "thinking": "low",
@@ -133,14 +131,16 @@ openclaw.invoke --tool llm-task --action json --args-json '{
 
 ## Safety notes
 
-* The tool is **JSON-only** and instructs the model to output only JSON (no
+- The tool is **JSON-only** and instructs the model to output only JSON (no
   code fences, no commentary).
-* No tools are exposed to the model for this run.
-* Treat output as untrusted unless you validate with `schema`.
-* Put approvals before any side-effecting step (send, post, exec).
+- No tools are exposed to the model for this run.
+- Treat output as untrusted unless you validate with `schema`.
+- Put approvals before any side-effecting step (send, post, exec).
 
 ## Related
 
-* [Thinking levels](/tools/thinking)
-* [Sub-agents](/tools/subagents)
-* [Slash commands](/tools/slash-commands)
+- [Thinking levels](/tools/thinking)
+- [Sub-agents](/tools/subagents)
+- [Slash commands](/tools/slash-commands)
+
+---

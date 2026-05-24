@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "f57c36e4ede0c09dfbabc8ac29d25bf3dbd94ae0c7c91b9956ff6cc7de6ad159"
+source_hash: "728c0552076305b5f547fba8da87961a676ee48aa5d3fa891bb13baab676a127"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-setup.md"
@@ -13,21 +13,22 @@ duplicate_index: 1
 # Plugin setup and config
 Source: https://docs.openclaw.ai/plugins/sdk-setup
 
-
-
 Reference for plugin packaging (`package.json` metadata), manifests (`openclaw.plugin.json`), setup entries, and config schemas.
 
-<Tip>
-  **Looking for a walkthrough?** The how-to guides cover packaging in context: [Channel plugins](/plugins/sdk-channel-plugins#step-1-package-and-manifest) and [Provider plugins](/plugins/sdk-provider-plugins#step-1-package-and-manifest).
-</Tip>
+Tip
+
+**Looking for a walkthrough?** The how-to guides cover packaging in context: [Channel plugins](/plugins/sdk-channel-plugins#step-1-package-and-manifest) and [Provider plugins](/plugins/sdk-provider-plugins#step-1-package-and-manifest).
 
 ## Package metadata
 
 Your `package.json` needs an `openclaw` field that tells the plugin system what your plugin provides:
 
-<Tabs>
-  <Tab title="Channel plugin">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Channel plugin
+
+    ```json
     {
       "name": "@myorg/openclaw-my-channel",
       "version": "1.0.0",
@@ -43,10 +44,11 @@ Your `package.json` needs an `openclaw` field that tells the plugin system what 
       }
     }
     ```
-  </Tab>
 
-  <Tab title="Provider plugin / ClawHub baseline">
-    ```json openclaw-clawhub-package.json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Provider plugin / ClawHub baseline
+
+    ```json openclaw-clawhub-package.json
     {
       "name": "@myorg/openclaw-my-plugin",
       "version": "1.0.0",
@@ -64,38 +66,37 @@ Your `package.json` needs an `openclaw` field that tells the plugin system what 
       }
     }
     ```
-  </Tab>
-</Tabs>
 
-<Note>
-  If you publish the plugin externally on ClawHub, those `compat` and `build` fields are required. The canonical publish snippets live in `docs/snippets/plugin-publish/`.
-</Note>
+
+Note
+
+If you publish the plugin externally on ClawHub, those `compat` and `build` fields are required. The canonical publish snippets live in `docs/snippets/plugin-publish/`.
 
 ### `openclaw` fields
 
-<ParamField type="string[]">
+ParamField
+
   Entry point files (relative to package root).
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Lightweight setup-only entry (optional).
-</ParamField>
 
-<ParamField type="object">
+ParamField
+
   Channel catalog metadata for setup, picker, quickstart, and status surfaces.
-</ParamField>
 
-<ParamField type="string[]">
+ParamField
+
   Provider ids registered by this plugin.
-</ParamField>
 
-<ParamField type="object">
+ParamField
+
   Install hints: `npmSpec`, `localPath`, `defaultChoice`, `minHostVersion`, `expectedIntegrity`, `allowInvalidConfigRecovery`.
-</ParamField>
 
-<ParamField type="object">
+ParamField
+
   Startup behavior flags.
-</ParamField>
 
 ### `openclaw.channel`
 
@@ -125,7 +126,7 @@ Your `package.json` needs an `openclaw` field that tells the plugin system what 
 
 Example:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "openclaw": {
     "channel": {
@@ -155,13 +156,13 @@ Example:
 
 `exposure` supports:
 
-* `configured`: include the channel in configured/status-style listing surfaces
-* `setup`: include the channel in interactive setup/configure pickers
-* `docs`: mark the channel as public-facing in docs/navigation surfaces
+- `configured`: include the channel in configured/status-style listing surfaces
+- `setup`: include the channel in interactive setup/configure pickers
+- `docs`: mark the channel as public-facing in docs/navigation surfaces
 
-<Note>
-  `showConfigured` and `showInSetup` remain supported as legacy aliases. Prefer `exposure`.
-</Note>
+Note
+
+`showConfigured` and `showInSetup` remain supported as legacy aliases. Prefer `exposure`.
 
 ### `openclaw.install`
 
@@ -177,19 +178,24 @@ Example:
 | `expectedIntegrity`          | `string`                            | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.    |
 | `allowInvalidConfigRecovery` | `boolean`                           | Lets bundled-plugin reinstall flows recover from specific stale-config failures.  |
 
-<AccordionGroup>
-  <Accordion title="Onboarding behavior">
+AccordionGroup
+
+
+Onboarding behavior
+
     Interactive onboarding also uses `openclaw.install` for install-on-demand surfaces. If your plugin exposes provider auth choices or channel setup/catalog metadata before runtime loads, onboarding can show that choice, prompt for ClawHub, npm, or local install, install or enable the plugin, then continue the selected flow. ClawHub onboarding choices use `clawhubSpec` and are preferred when present; npm choices require trusted catalog metadata with a registry `npmSpec`; exact versions and `expectedIntegrity` are optional npm pins. If `expectedIntegrity` is present, install/update flows enforce it for npm. Keep the "what to show" metadata in `openclaw.plugin.json` and the "how to install it" metadata in `package.json`.
-  </Accordion>
 
-  <Accordion title="minHostVersion enforcement">
+
+minHostVersion enforcement
+
     If `minHostVersion` is set, install and non-bundled manifest-registry loading both enforce it. Older hosts skip external plugins; invalid version strings are rejected. Bundled source plugins are assumed to be co-versioned with the host checkout.
-  </Accordion>
 
-  <Accordion title="Pinned npm installs">
+
+Pinned npm installs
+
     For pinned npm installs, keep the exact version in `npmSpec` and add the expected artifact integrity:
 
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json
     {
       "openclaw": {
         "install": {
@@ -200,18 +206,19 @@ Example:
       }
     }
     ```
-  </Accordion>
 
-  <Accordion title="allowInvalidConfigRecovery scope">
+
+
+allowInvalidConfigRecovery scope
+
     `allowInvalidConfigRecovery` is not a general bypass for broken configs. It is for narrow bundled-plugin recovery only, so reinstall/setup can repair known upgrade leftovers like a missing bundled plugin path or stale `channels.<id>` entry for that same plugin. If config is broken for unrelated reasons, install still fails closed and tells the operator to run `openclaw doctor --fix`.
-  </Accordion>
-</AccordionGroup>
+
 
 ### Deferred full load
 
 Channel plugins can opt into deferred loading with:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "openclaw": {
     "extensions": ["./index.ts"],
@@ -225,9 +232,9 @@ Channel plugins can opt into deferred loading with:
 
 When enabled, OpenClaw loads only `setupEntry` during the pre-listen startup phase, even for already-configured channels. The full entry loads after the gateway starts listening.
 
-<Warning>
-  Only enable deferred loading when your `setupEntry` registers everything the gateway needs before it starts listening (channel registration, HTTP routes, gateway methods). If the full entry owns required startup capabilities, keep the default behavior.
-</Warning>
+Warning
+
+Only enable deferred loading when your `setupEntry` registers everything the gateway needs before it starts listening (channel registration, HTTP routes, gateway methods). If the full entry owns required startup capabilities, keep the default behavior.
 
 If your setup/full entry registers gateway RPC methods, keep them on a plugin-specific prefix. Reserved core admin namespaces (`config.*`, `exec.approvals.*`, `wizard.*`, `update.*`) stay core-owned and always resolve to `operator.admin`.
 
@@ -235,7 +242,7 @@ If your setup/full entry registers gateway RPC methods, keep them on a plugin-sp
 
 Every native plugin must ship an `openclaw.plugin.json` in the package root. OpenClaw uses this to validate config without executing plugin code.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "my-plugin",
   "name": "My Plugin",
@@ -255,7 +262,7 @@ Every native plugin must ship an `openclaw.plugin.json` in the package root. Ope
 
 For channel plugins, add `kind` and `channels`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "my-channel",
   "kind": "channel",
@@ -270,7 +277,7 @@ For channel plugins, add `kind` and `channels`:
 
 Even plugins with no config must ship a schema. An empty schema is valid:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "my-plugin",
   "configSchema": {
@@ -286,23 +293,21 @@ See [Plugin manifest](/plugins/manifest) for the full schema reference.
 
 For plugin packages, use the package-specific ClawHub command:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 clawhub package publish your-org/your-plugin --dry-run
 clawhub package publish your-org/your-plugin
 ```
 
-<Note>
-  The legacy skill-only publish alias is for skills. Plugin packages should always use `clawhub package publish`.
-</Note>
+Note
+
+The legacy skill-only publish alias is for skills. Plugin packages should always use `clawhub package publish`.
 
 ## Setup entry
 
 The `setup-entry.ts` file is a lightweight alternative to `index.ts` that OpenClaw loads when it only needs setup surfaces (onboarding, config repair, disabled channel inspection).
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 // setup-entry.ts
-import { defineSetupPluginEntry } from "openclaw/plugin-sdk/channel-core";
-import { myChannelPlugin } from "./src/channel.js";
 
 export default defineSetupPluginEntry(myChannelPlugin);
 ```
@@ -311,28 +316,35 @@ This avoids loading heavy runtime code (crypto libraries, CLI registrations, bac
 
 Bundled workspace channels that keep setup-safe exports in sidecar modules can use `defineBundledChannelSetupEntry(...)` from `openclaw/plugin-sdk/channel-entry-contract` instead of `defineSetupPluginEntry(...)`. That bundled contract also supports an optional `runtime` export so setup-time runtime wiring can stay lightweight and explicit.
 
-<AccordionGroup>
-  <Accordion title="When OpenClaw uses setupEntry instead of the full entry">
-    * The channel is disabled but needs setup/onboarding surfaces.
-    * The channel is enabled but unconfigured.
-    * Deferred loading is enabled (`deferConfiguredChannelFullLoadUntilAfterListen`).
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="What setupEntry must register">
-    * The channel plugin object (via `defineSetupPluginEntry`).
-    * Any HTTP routes required before gateway listen.
-    * Any gateway methods needed during startup.
+
+When OpenClaw uses setupEntry instead of the full entry
+
+    - The channel is disabled but needs setup/onboarding surfaces.
+    - The channel is enabled but unconfigured.
+    - Deferred loading is enabled (`deferConfiguredChannelFullLoadUntilAfterListen`).
+
+
+
+What setupEntry must register
+
+    - The channel plugin object (via `defineSetupPluginEntry`).
+    - Any HTTP routes required before gateway listen.
+    - Any gateway methods needed during startup.
 
     Those startup gateway methods should still avoid reserved core admin namespaces such as `config.*` or `update.*`.
-  </Accordion>
 
-  <Accordion title="What setupEntry should NOT include">
-    * CLI registrations.
-    * Background services.
-    * Heavy runtime imports (crypto, SDKs).
-    * Gateway methods only needed after startup.
-  </Accordion>
-</AccordionGroup>
+
+
+What setupEntry should NOT include
+
+    - CLI registrations.
+    - Background services.
+    - Heavy runtime imports (crypto, SDKs).
+    - Gateway methods only needed after startup.
+
+
 
 ### Narrow setup helper imports
 
@@ -360,19 +372,19 @@ When a channel upgrades from a single-account top-level config to `channels.<id>
 
 Bundled channels can narrow or override that promotion through their setup contract surface:
 
-* `singleAccountKeysToMove`: extra top-level keys that should move into the promoted account
-* `namedAccountPromotionKeys`: when named accounts already exist, only these keys move into the promoted account; shared policy/delivery keys stay at the channel root
-* `resolveSingleAccountPromotionTarget(...)`: choose which existing account receives promoted values
+- `singleAccountKeysToMove`: extra top-level keys that should move into the promoted account
+- `namedAccountPromotionKeys`: when named accounts already exist, only these keys move into the promoted account; shared policy/delivery keys stay at the channel root
+- `resolveSingleAccountPromotionTarget(...)`: choose which existing account receives promoted values
 
-<Note>
-  Matrix is the current bundled example. If exactly one named Matrix account already exists, or if `defaultAccount` points at an existing non-canonical key such as `Ops`, promotion preserves that account instead of creating a new `accounts.default` entry.
-</Note>
+Note
+
+Matrix is the current bundled example. If exactly one named Matrix account already exists, or if `defaultAccount` points at an existing non-canonical key such as `Ops`, promotion preserves that account instead of creating a new `accounts.default` entry.
 
 ## Config schema
 
 Plugin config is validated against the JSON Schema in your manifest. Users configure plugins via:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -390,7 +402,7 @@ Your plugin receives this config as `api.pluginConfig` during registration.
 
 For channel-specific config, use the channel config section instead:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     "my-channel": {
@@ -405,9 +417,7 @@ For channel-specific config, use the channel config section instead:
 
 Use `buildChannelConfigSchema` to convert a Zod schema into the `ChannelConfigSchema` wrapper used by plugin-owned config artifacts:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { z } from "zod";
-import { buildChannelConfigSchema } from "openclaw/plugin-sdk/channel-config-schema";
+```typescript
 
 const accountSchema = z.object({
   token: z.string().optional(),
@@ -421,9 +431,7 @@ const configSchema = buildChannelConfigSchema(accountSchema);
 
 If you already author the contract as JSON Schema or TypeBox, use the direct helper so OpenClaw can skip Zod-to-JSON-Schema conversion on metadata paths:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { Type } from "typebox";
-import { buildJsonChannelConfigSchema } from "openclaw/plugin-sdk/channel-config-schema";
+```typescript
 
 const configSchema = buildJsonChannelConfigSchema(
   Type.Object({
@@ -439,8 +447,7 @@ For third-party plugins, the cold-path contract is still the plugin manifest: mi
 
 Channel plugins can provide interactive setup wizards for `openclaw onboard`. The wizard is a `ChannelSetupWizard` object on the `ChannelPlugin`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import type { ChannelSetupWizard } from "openclaw/plugin-sdk/channel-setup";
+```typescript
 
 const setupWizard: ChannelSetupWizard = {
   channel: "my-channel",
@@ -472,19 +479,24 @@ const setupWizard: ChannelSetupWizard = {
 
 The `ChannelSetupWizard` type supports `credentials`, `textInputs`, `dmPolicy`, `allowFrom`, `groupAccess`, `prepare`, `finalize`, and more. See bundled plugin packages (for example the Discord plugin `src/channel.setup.ts`) for full examples.
 
-<AccordionGroup>
-  <Accordion title="Shared allowFrom prompts">
+AccordionGroup
+
+
+Shared allowFrom prompts
+
     For DM allowlist prompts that only need the standard `note -> prompt -> parse -> merge -> patch` flow, prefer the shared setup helpers from `openclaw/plugin-sdk/setup`: `createPromptParsedAllowFromForAccount(...)`, `createTopLevelChannelParsedAllowFromPrompt(...)`, and `createNestedChannelParsedAllowFromPrompt(...)`.
-  </Accordion>
 
-  <Accordion title="Standard channel setup status">
+
+Standard channel setup status
+
     For channel setup status blocks that only vary by labels, scores, and optional extra lines, prefer `createStandardChannelSetupStatus(...)` from `openclaw/plugin-sdk/setup` instead of hand-rolling the same `status` object in each plugin.
-  </Accordion>
 
-  <Accordion title="Optional channel setup surface">
+
+Optional channel setup surface
+
     For optional setup surfaces that should only appear in certain contexts, use `createOptionalChannelSetupSurface` from `openclaw/plugin-sdk/channel-setup`:
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     import { createOptionalChannelSetupSurface } from "openclaw/plugin-sdk/channel-setup";
 
     const setupSurface = createOptionalChannelSetupSurface({
@@ -499,67 +511,77 @@ The `ChannelSetupWizard` type supports `credentials`, `textInputs`, `dmPolicy`, 
     `plugin-sdk/channel-setup` also exposes the lower-level `createOptionalChannelSetupAdapter(...)` and `createOptionalChannelSetupWizard(...)` builders when you only need one half of that optional-install surface.
 
     The generated optional adapter/wizard fail closed on real config writes. They reuse one install-required message across `validateInput`, `applyAccountConfig`, and `finalize`, and append a docs link when `docsPath` is set.
-  </Accordion>
 
-  <Accordion title="Binary-backed setup helpers">
+
+
+Binary-backed setup helpers
+
     For binary-backed setup UIs, prefer the shared delegated helpers instead of copying the same binary/status glue into every channel:
 
-    * `createDetectedBinaryStatus(...)` for status blocks that vary only by labels, hints, scores, and binary detection
-    * `createCliPathTextInput(...)` for path-backed text inputs
-    * `createDelegatedSetupWizardStatusResolvers(...)`, `createDelegatedPrepare(...)`, `createDelegatedFinalize(...)`, and `createDelegatedResolveConfigured(...)` when `setupEntry` needs to forward to a heavier full wizard lazily
-    * `createDelegatedTextInputShouldPrompt(...)` when `setupEntry` only needs to delegate a `textInputs[*].shouldPrompt` decision
-  </Accordion>
-</AccordionGroup>
+    - `createDetectedBinaryStatus(...)` for status blocks that vary only by labels, hints, scores, and binary detection
+    - `createCliPathTextInput(...)` for path-backed text inputs
+    - `createDelegatedSetupWizardStatusResolvers(...)`, `createDelegatedPrepare(...)`, `createDelegatedFinalize(...)`, and `createDelegatedResolveConfigured(...)` when `setupEntry` needs to forward to a heavier full wizard lazily
+    - `createDelegatedTextInputShouldPrompt(...)` when `setupEntry` only needs to delegate a `textInputs[*].shouldPrompt` decision
+
+
 
 ## Publishing and installing
 
 **External plugins:** publish to [ClawHub](/clawhub), then install:
 
-<Tabs>
-  <Tab title="npm">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+npm
+
+    ```bash
     openclaw plugins install @myorg/openclaw-my-plugin
     ```
 
     Bare package specs install from npm during the launch cutover.
-  </Tab>
 
-  <Tab title="ClawHub only">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+ClawHub only
+
+    ```bash
     openclaw plugins install clawhub:@myorg/openclaw-my-plugin
     ```
-  </Tab>
 
-  <Tab title="npm package spec">
+
+npm package spec
+
     Use npm when a package has not moved to ClawHub yet, or when you need a
     direct npm install path during migration:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw plugins install npm:@myorg/openclaw-my-plugin
     ```
-  </Tab>
-</Tabs>
+
+
 
 **In-repo plugins:** place under the bundled plugin workspace tree and they are automatically discovered during build.
 
 **Users can install:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install <package-name>
 ```
 
-<Info>
-  For npm-sourced installs, `openclaw plugins install` installs the package under `~/.openclaw/npm` with lifecycle scripts disabled. Keep plugin dependency trees pure JS/TS and avoid packages that require `postinstall` builds.
-</Info>
+Info
 
-<Note>
-  Gateway startup does not install plugin dependencies. npm/git/ClawHub install flows own dependency convergence; local plugins must already have their dependencies installed.
-</Note>
+For npm-sourced installs, `openclaw plugins install` installs the package under `~/.openclaw/npm` with lifecycle scripts disabled. Keep plugin dependency trees pure JS/TS and avoid packages that require `postinstall` builds.
+
+Note
+
+Gateway startup does not install plugin dependencies. npm/git/ClawHub install flows own dependency convergence; local plugins must already have their dependencies installed.
 
 Bundled package metadata is explicit, not inferred from built JavaScript at gateway startup. Runtime dependencies belong in the plugin package that owns them; packaged OpenClaw startup never repairs or mirrors plugin dependencies.
 
 ## Related
 
-* [Building plugins](/plugins/building-plugins) — step-by-step getting started guide
-* [Plugin manifest](/plugins/manifest) — full manifest schema reference
-* [SDK entry points](/plugins/sdk-entrypoints) — `definePluginEntry` and `defineChannelPluginEntry`
+- [Building plugins](/plugins/building-plugins) — step-by-step getting started guide
+- [Plugin manifest](/plugins/manifest) — full manifest schema reference
+- [SDK entry points](/plugins/sdk-entrypoints) — `definePluginEntry` and `defineChannelPluginEntry`
+
+---

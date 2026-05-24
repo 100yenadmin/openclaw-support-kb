@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip — Product Definition"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/PRODUCT.md"
-source_hash: "24d0aa9fe971034b121d4b3bdc9d5a89c25f457cdaef0e0fd77ad6a420a15db2"
+source_hash: "b5e4d6b519b76461e7823360ecf85bc6f15c3f2d50a7b62fcc67a09d6fd08bc0"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/product.md"
@@ -136,6 +136,7 @@ Paperclip’s core identity is a **control plane for autonomous AI companies**, 
 - Do not make the core product a general chat app. The current product definition is explicitly task/comment-centric and “not a chatbot,” and that boundary is valuable.
 - Do not build a complete Jira/GitHub replacement. The repo/docs already position Paperclip as organization orchestration, not focused on pull-request review.
 - Do not build enterprise-grade RBAC first. Paperclip now has authenticated mode, company memberships, instance roles, and permission grants, but fine-grained enterprise governance should remain secondary to the core company control plane.
+- Do not interpret agent-level privacy flags as a project/issue privacy feature in V1; work visibility stays company-scoped.
 - Do not lead with raw bash logs and transcripts. Default view should be human-readable intent/progress, with raw detail beneath.
 - Do not force users to understand provider/API-key plumbing unless absolutely necessary. There are active onboarding/auth issues already; friction here is clearly real.
 

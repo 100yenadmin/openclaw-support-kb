@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "7390d166f9517e0db6e7a42d33bab69076f252d907de07af6c8a95b1e207ec0c"
+source_hash: "060f68eb2b561bc8d00568746d2afc846fd8d3aa4ffc37a4ec9b31da06b34d7e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Canvas
 Source: https://docs.openclaw.ai/platforms/mac/canvas
 
-
-
 The macOS app embeds an agent-controlled **Canvas panel** using `WKWebView`. It
 is a lightweight visual workspace for HTML/CSS/JS, A2UI, and small interactive
 UI surfaces.
@@ -23,26 +21,26 @@ UI surfaces.
 
 Canvas state is stored under Application Support:
 
-* `~/Library/Application Support/OpenClaw/canvas/<session>/...`
+- `~/Library/Application Support/OpenClaw/canvas/<session>/...`
 
 The Canvas panel serves those files via a **custom URL scheme**:
 
-* `openclaw-canvas://<session>/<path>`
+- `openclaw-canvas://<session>/<path>`
 
 Examples:
 
-* `openclaw-canvas://main/` → `<canvasRoot>/main/index.html`
-* `openclaw-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
-* `openclaw-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
+- `openclaw-canvas://main/` → `<canvasRoot>/main/index.html`
+- `openclaw-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
+- `openclaw-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
 
 If no `index.html` exists at the root, the app shows a **built-in scaffold page**.
 
 ## Panel behavior
 
-* Borderless, resizable panel anchored near the menu bar (or mouse cursor).
-* Remembers size/position per session.
-* Auto-reloads when local canvas files change.
-* Only one Canvas panel is visible at a time (session is switched as needed).
+- Borderless, resizable panel anchored near the menu bar (or mouse cursor).
+- Remembers size/position per session.
+- Auto-reloads when local canvas files change.
+- Only one Canvas panel is visible at a time (session is switched as needed).
 
 Canvas can be disabled from Settings → **Allow Canvas**. When disabled, canvas
 node commands return `CANVAS_DISABLED`.
@@ -51,14 +49,14 @@ node commands return `CANVAS_DISABLED`.
 
 Canvas is exposed via the **Gateway WebSocket**, so the agent can:
 
-* show/hide the panel
-* navigate to a path or URL
-* evaluate JavaScript
-* capture a snapshot image
+- show/hide the panel
+- navigate to a path or URL
+- evaluate JavaScript
+- capture a snapshot image
 
 CLI examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw nodes canvas present --node <id>
 openclaw nodes canvas navigate --node <id> --url "/"
 openclaw nodes canvas eval --node <id> --js "document.title"
@@ -67,8 +65,8 @@ openclaw nodes canvas snapshot --node <id>
 
 Notes:
 
-* `canvas.navigate` accepts **local canvas paths**, `http(s)` URLs, and `file://` URLs.
-* If you pass `"/"`, the Canvas shows the local scaffold or `index.html`.
+- `canvas.navigate` accepts **local canvas paths**, `http(s)` URLs, and `file://` URLs.
+- If you pass `"/"`, the Canvas shows the local scaffold or `index.html`.
 
 ## A2UI in Canvas
 
@@ -86,16 +84,16 @@ http://<gateway-host>:18789/__openclaw__/a2ui/
 
 Canvas currently accepts **A2UI v0.8** server→client messages:
 
-* `beginRendering`
-* `surfaceUpdate`
-* `dataModelUpdate`
-* `deleteSurface`
+- `beginRendering`
+- `surfaceUpdate`
+- `dataModelUpdate`
+- `deleteSurface`
 
 `createSurface` (v0.9) is not supported.
 
 CLI example:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 cat > /tmp/a2ui-v0.8.jsonl <<'EOFA2'
 {"surfaceUpdate":{"surfaceId":"main","components":[{"id":"root","component":{"Column":{"children":{"explicitList":["title","content"]}}}},{"id":"title","component":{"Text":{"text":{"literalString":"Canvas (A2UI v0.8)"},"usageHint":"h1"}}},{"id":"content","component":{"Text":{"text":{"literalString":"If you can read this, A2UI push works."},"usageHint":"body"}}}]}}
 {"beginRendering":{"surfaceId":"main","root":"root"}}
@@ -106,7 +104,7 @@ openclaw nodes canvas a2ui push --jsonl /tmp/a2ui-v0.8.jsonl --node <id>
 
 Quick smoke:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw nodes canvas a2ui push --node <id> --text "Hello from A2UI"
 ```
 
@@ -114,11 +112,11 @@ openclaw nodes canvas a2ui push --node <id> --text "Hello from A2UI"
 
 Canvas can trigger new agent runs via deep links:
 
-* `openclaw://agent?...`
+- `openclaw://agent?...`
 
 Example (in JS):
 
-```js theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```js
 window.location.href = "openclaw://agent?message=Review%20this%20design";
 ```
 
@@ -126,11 +124,13 @@ The app prompts for confirmation unless a valid key is provided.
 
 ## Security notes
 
-* Canvas scheme blocks directory traversal; files must live under the session root.
-* Local Canvas content uses a custom scheme (no loopback server required).
-* External `http(s)` URLs are allowed only when explicitly navigated.
+- Canvas scheme blocks directory traversal; files must live under the session root.
+- Local Canvas content uses a custom scheme (no loopback server required).
+- External `http(s)` URLs are allowed only when explicitly navigated.
 
 ## Related
 
-* [macOS app](/platforms/macos)
-* [WebChat](/web/webchat)
+- [macOS app](/platforms/macos)
+- [WebChat](/web/webchat)
+
+---

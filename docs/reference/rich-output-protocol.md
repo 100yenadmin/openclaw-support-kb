@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Rich output protocol"
 source: "https://docs.openclaw.ai/reference/rich-output-protocol"
-source_hash: "72dc320d28fd5072958b7f979bf9a6f832ba6d521ab320fa3d77777342ebf349"
+source_hash: "988ca5ea0b1a81be824fc51cb7b18a897c1aa883b96711b3a594c79be1e6c11e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/rich-output-protocol.md"
@@ -13,14 +13,12 @@ duplicate_index: 1
 # Rich output protocol
 Source: https://docs.openclaw.ai/reference/rich-output-protocol
 
-
-
 Assistant output can carry a small set of delivery/render directives:
 
-* `MEDIA:` for attachment delivery
-* `[[audio_as_voice]]` for audio presentation hints
-* `[[reply_to_current]]` / `[[reply_to:<id>]]` for reply metadata
-* `[embed ...]` for Control UI rich rendering
+- `MEDIA:` for attachment delivery
+- `[[audio_as_voice]]` for audio presentation hints
+- `[[reply_to_current]]` / `[[reply_to:<id>]]` for reply metadata
+- `[embed ...]` for Control UI rich rendering
 
 Remote `MEDIA:` attachments must be public `https:` URLs. Plain `http:`,
 loopback, link-local, private, and internal hostnames are ignored as attachment
@@ -48,24 +46,24 @@ from the final payload.
 
 Self-closing example:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 [embed ref="cv_123" title="Status" /]
 ```
 
 Rules:
 
-* `[view ...]` is no longer valid for new output.
-* Embed shortcodes render in the assistant message surface only.
-* Only URL-backed embeds are rendered. Use `ref="..."` or `url="..."`.
-* Block-form inline HTML embed shortcodes are not rendered.
-* The web UI strips the shortcode from visible text and renders the embed inline.
-* `MEDIA:` is not an embed alias and should not be used for rich embed rendering.
+- `[view ...]` is no longer valid for new output.
+- Embed shortcodes render in the assistant message surface only.
+- Only URL-backed embeds are rendered. Use `ref="..."` or `url="..."`.
+- Block-form inline HTML embed shortcodes are not rendered.
+- The web UI strips the shortcode from visible text and renders the embed inline.
+- `MEDIA:` is not an embed alias and should not be used for rich embed rendering.
 
 ## Stored rendering shape
 
 The normalized/stored assistant content block is a structured `canvas` item:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "canvas",
   "preview": {
@@ -84,5 +82,7 @@ Stored/rendered rich blocks use this `canvas` shape directly. `present_view` is 
 
 ## Related
 
-* [RPC adapters](/reference/rpc)
-* [Typebox](/concepts/typebox)
+- [RPC adapters](/reference/rpc)
+- [Typebox](/concepts/typebox)
+
+---

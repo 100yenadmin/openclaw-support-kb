@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenProse"
 source: "https://docs.openclaw.ai/prose"
-source_hash: "a2d1fc04de9da7b5e0535e2d26c813a00e128e6be054da09c04f3c0060970aa5"
+source_hash: "e500328993f2849a148e5ecf3d8bcc1f9b017797926234b801073328da94eb99"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "prose.md"
@@ -13,23 +13,21 @@ duplicate_index: 1
 # OpenProse
 Source: https://docs.openclaw.ai/prose
 
-
-
 OpenProse is a portable, markdown-first workflow format for orchestrating AI sessions. In OpenClaw it ships as a plugin that installs an OpenProse skill pack plus a `/prose` slash command. Programs live in `.prose` files and can spawn multiple sub-agents with explicit control flow.
 
 Official site: [https://www.prose.md](https://www.prose.md)
 
 ## What it can do
 
-* Multi-agent research + synthesis with explicit parallelism.
-* Repeatable approval-safe workflows (code review, incident triage, content pipelines).
-* Reusable `.prose` programs you can run across supported agent runtimes.
+- Multi-agent research + synthesis with explicit parallelism.
+- Repeatable approval-safe workflows (code review, incident triage, content pipelines).
+- Reusable `.prose` programs you can run across supported agent runtimes.
 
 ## Install + enable
 
 Bundled plugins are disabled by default. Enable OpenProse:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins enable open-prose
 ```
 
@@ -57,7 +55,7 @@ Common commands:
 
 ## Example: a simple `.prose` file
 
-```prose theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```prose
 # Research + synthesis with two agents running in parallel.
 
 input topic: "What should we research?"
@@ -106,15 +104,15 @@ User-level persistent agents live at:
 
 OpenProse supports multiple state backends:
 
-* **filesystem** (default): `.prose/runs/...`
-* **in-context**: transient, for small programs
-* **sqlite** (experimental): requires `sqlite3` binary
-* **postgres** (experimental): requires `psql` and a connection string
+- **filesystem** (default): `.prose/runs/...`
+- **in-context**: transient, for small programs
+- **sqlite** (experimental): requires `sqlite3` binary
+- **postgres** (experimental): requires `psql` and a connection string
 
 Notes:
 
-* sqlite/postgres are opt-in and experimental.
-* postgres credentials flow into subagent logs; use a dedicated, least-privileged DB.
+- sqlite/postgres are opt-in and experimental.
+- postgres credentials flow into subagent logs; use a dedicated, least-privileged DB.
 
 ## Remote programs
 
@@ -141,5 +139,7 @@ For deterministic, approval-gated workflows, compare with [Lobster](/tools/lobst
 
 ## Related
 
-* [Text-to-speech](/tools/tts)
-* [Markdown formatting](/concepts/markdown-formatting)
+- [Text-to-speech](/tools/tts)
+- [Markdown formatting](/concepts/markdown-formatting)
+
+---

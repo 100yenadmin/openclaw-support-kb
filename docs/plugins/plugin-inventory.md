@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "2bdbdb115c02d56399e76840beca25db047b229f7d1a80a269e71ac8f120b494"
+source_hash: "1287266b52fe50fba89f86a48b11dedc90eb300f184b31719c2a87336561611e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-inventory.md"
@@ -13,22 +13,20 @@ duplicate_index: 1
 # Plugin inventory
 Source: https://docs.openclaw.ai/plugins/plugin-inventory
 
-
-
 # Plugin inventory
 
 This page is generated from `extensions/*/package.json`, `openclaw.plugin.json`,
 and the root npm package `files` exclusions. Regenerate it with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm plugins:inventory:gen
 ```
 
 ## Definitions
 
-* **Core npm package:** built into the `openclaw` npm package and available without a separate plugin install.
-* **Official external package:** OpenClaw-maintained plugin omitted from the core npm package, kept in this official inventory, and installed on demand through ClawHub and/or npm.
-* **Source checkout only:** repo-local plugin omitted from published npm artifacts and not advertised as an installable package.
+- **Core npm package:** built into the `openclaw` npm package and available without a separate plugin install.
+- **Official external package:** OpenClaw-maintained plugin omitted from the core npm package, kept in this official inventory, and installed on demand through ClawHub and/or npm.
+- **Source checkout only:** repo-local plugin omitted from published npm artifacts and not advertised as an installable package.
 
 Source checkouts are different from npm installs: after `pnpm install`, bundled
 plugins load from `extensions/<id>` so local edits and package-local workspace
@@ -42,7 +40,7 @@ external packages need one install, then a Gateway restart.
 
 For example, Discord is an official external package:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/discord
 openclaw gateway restart
 openclaw plugins inspect discord --runtime --json
@@ -91,7 +89,7 @@ commands.
 | [groq](/plugins/reference/groq)                                   | Adds Groq model provider support to OpenClaw.                                                                                                                        | `@openclaw/groq-provider`<br />included in OpenClaw                  | providers: groq; contracts: mediaUnderstandingProviders                                                                                                                                                                                                          |
 | [huggingface](/plugins/reference/huggingface)                     | Adds Hugging Face model provider support to OpenClaw.                                                                                                                | `@openclaw/huggingface-provider`<br />included in OpenClaw           | providers: huggingface                                                                                                                                                                                                                                           |
 | [imessage](/plugins/reference/imessage)                           | Adds the iMessage channel surface for sending and receiving OpenClaw messages.                                                                                       | `@openclaw/imessage`<br />included in OpenClaw                       | channels: imessage                                                                                                                                                                                                                                               |
-| [inworld](/plugins/reference/inworld)                             | Inworld streaming text-to-speech (MP3, OGG\_OPUS, PCM telephony).                                                                                                    | `@openclaw/inworld-speech`<br />included in OpenClaw                 | contracts: speechProviders                                                                                                                                                                                                                                       |
+| [inworld](/plugins/reference/inworld)                             | Inworld streaming text-to-speech (MP3, OGG_OPUS, PCM telephony).                                                                                                     | `@openclaw/inworld-speech`<br />included in OpenClaw                 | contracts: speechProviders                                                                                                                                                                                                                                       |
 | [irc](/plugins/reference/irc)                                     | Adds the IRC channel surface for sending and receiving OpenClaw messages.                                                                                            | `@openclaw/irc`<br />included in OpenClaw                            | channels: irc                                                                                                                                                                                                                                                    |
 | [kilocode](/plugins/reference/kilocode)                           | Adds Kilocode model provider support to OpenClaw.                                                                                                                    | `@openclaw/kilocode-provider`<br />included in OpenClaw              | providers: kilocode                                                                                                                                                                                                                                              |
 | [kimi](/plugins/reference/kimi)                                   | Adds Kimi, Kimi Coding model provider support to OpenClaw.                                                                                                           | `@openclaw/kimi-provider`<br />included in OpenClaw                  | providers: kimi, kimi-coding                                                                                                                                                                                                                                     |
@@ -188,3 +186,5 @@ commands.
 | [qa-channel](/plugins/reference/qa-channel) | Adds the QA Channel surface for sending and receiving OpenClaw messages. | `@openclaw/qa-channel`<br />source checkout only | channels: qa-channel |
 | [qa-lab](/plugins/reference/qa-lab)         | OpenClaw QA lab plugin with private debugger UI and scenario runner.     | `@openclaw/qa-lab`<br />source checkout only     | plugin               |
 | [qa-matrix](/plugins/reference/qa-matrix)   | Matrix QA transport runner and substrate.                                | `@openclaw/qa-matrix`<br />source checkout only  | plugin               |
+
+---

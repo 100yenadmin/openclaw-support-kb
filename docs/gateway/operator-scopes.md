@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "7001fe4f3465a59c1b685585fb55fd0cd9ada2b6c5ee38337e586e8d4b55b46a"
+source_hash: "c2886eb68da416aba2b1e911433fb4de68499a71db16bc5e6dc3691be19e1fc5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Operator scopes
 Source: https://docs.openclaw.ai/gateway/operator-scopes
-
-
 
 Operator scopes define what a Gateway client may do after it authenticates.
 They are a control-plane guardrail inside one trusted Gateway operator domain,
@@ -28,9 +26,9 @@ Related: [Security](/gateway/security), [Gateway protocol](/gateway/protocol),
 
 Gateway WebSocket clients connect with one role:
 
-* `operator`: control-plane clients such as CLI, Control UI, automation, and
+- `operator`: control-plane clients such as CLI, Control UI, automation, and
   trusted helper processes.
-* `node`: capability hosts such as macOS, iOS, Android, or headless nodes that
+- `node`: capability hosts such as macOS, iOS, Android, or headless nodes that
   expose commands through `node.invoke`.
 
 Operator RPC methods require the `operator` role. Node-originated methods
@@ -58,11 +56,11 @@ approval-time checks based on the concrete thing being approved or mutated.
 
 Examples:
 
-* `device.pair.approve` is reachable with `operator.pairing`, but approving an
+- `device.pair.approve` is reachable with `operator.pairing`, but approving an
   operator device can only mint or preserve scopes the caller already holds.
-* `node.pair.approve` is reachable with `operator.pairing`, then derives extra
+- `node.pair.approve` is reachable with `operator.pairing`, then derives extra
   approval scopes from the pending node command list.
-* `chat.send` is normally a write-scoped method, but persistent `/config set`
+- `chat.send` is normally a write-scoped method, but persistent `/config set`
   and `/config unset` require `operator.admin` at command level.
 
 This lets lower-scope operators perform low-risk pairing actions without making
@@ -76,12 +74,12 @@ for a broader role or broader scopes create a new pending upgrade request.
 
 When approving a device request:
 
-* A request with no operator role does not need operator token scope approval.
-* A request for `operator.read`, `operator.write`, `operator.approvals`,
+- A request with no operator role does not need operator token scope approval.
+- A request for `operator.read`, `operator.write`, `operator.approvals`,
   `operator.pairing`, or `operator.talk.secrets` requires the caller to hold
   those scopes, or `operator.admin`.
-* A request for `operator.admin` requires `operator.admin`.
-* A repair request with no explicit scopes can inherit the existing operator
+- A request for `operator.admin` requires `operator.admin`.
+- A repair request with no explicit scopes can inherit the existing operator
   token scopes. If that existing token is admin-scoped, approval still requires
   `operator.admin`.
 
@@ -99,9 +97,9 @@ applies.
 `node.pair.approve` uses the pending request command list to derive additional
 required scopes:
 
-* Commandless request: `operator.pairing`
-* Non-exec node commands: `operator.pairing` + `operator.write`
-* `system.run`, `system.run.prepare`, or `system.which`:
+- Commandless request: `operator.pairing`
+- Non-exec node commands: `operator.pairing` + `operator.write`
+- `system.run`, `system.run.prepare`, or `system.which`:
   `operator.pairing` + `operator.admin`
 
 Node pairing establishes identity and trust. It does not replace the node's
@@ -117,3 +115,5 @@ shared-secret bearer auth, even if a caller sends narrower declared scopes.
 Identity-bearing modes, such as trusted proxy auth or private-ingress `none`,
 can still honor explicit declared scopes. Use separate Gateways for real trust
 boundary separation.
+
+---

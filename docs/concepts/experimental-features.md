@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "d5e5cf9834bb42eece53f3983147bcc8c47257b1ca87a59a48ba0d80136c7e76"
+source_hash: "81215bf107fe77b1c4fdf444bdf25c3230fd74c12ae32e224a497d6169a2123f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/experimental-features.md"
@@ -13,18 +13,16 @@ duplicate_index: 1
 # Experimental features
 Source: https://docs.openclaw.ai/concepts/experimental-features
 
-
-
 Experimental features in OpenClaw are **opt-in preview surfaces**. They are
 behind explicit flags because they still need real-world mileage before they
 deserve a stable default or a long-lived public contract.
 
 Treat them differently from normal config:
 
-* Keep them **off by default** unless the related doc tells you to try one.
-* Expect **shape and behavior to change** faster than stable config.
-* Prefer the stable path first when one already exists.
-* If you are rolling OpenClaw out broadly, test experimental flags in a smaller
+- Keep them **off by default** unless the related doc tells you to try one.
+- Expect **shape and behavior to change** faster than stable config.
+- Prefer the stable path first when one already exists.
+- If you are rolling OpenClaw out broadly, test experimental flags in a smaller
   environment before baking them into a shared baseline.
 
 ## Currently documented flags
@@ -44,9 +42,9 @@ Treat them differently from normal config:
 
 These three tools have the largest descriptions and the most parameter shapes in the default OpenClaw runtime. On a small-context or stricter OpenAI-compatible backend that is the difference between:
 
-* Tool schemas fitting cleanly in the prompt vs. crowding out conversation history.
-* The model picking the right tool vs. emitting malformed tool calls because there are too many similar-looking schemas.
-* The Chat Completions adapter staying inside the server's structured-output limits vs. tripping a 400 on tool-call payload size.
+- Tool schemas fitting cleanly in the prompt vs. crowding out conversation history.
+- The model picking the right tool vs. emitting malformed tool calls because there are too many similar-looking schemas.
+- The Chat Completions adapter staying inside the server's structured-output limits vs. tripping a 400 on tool-call payload size.
 
 Removing them does not silently rewire OpenClaw — it just makes the tool list shorter. The model still has `read`, `write`, `edit`, `exec`, `apply_patch`, web search/fetch (when configured), memory, and session/agent tools available.
 
@@ -66,7 +64,7 @@ Lean mode also does not replace `tools.profile`, `tools.allow`/`tools.deny`, or 
 
 ### Enable
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -80,7 +78,7 @@ Lean mode also does not replace `tools.profile`, `tools.allow`/`tools.deny`, or 
 
 For one agent only:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     list: [
@@ -98,7 +96,7 @@ For one agent only:
 
 Restart the Gateway after changing the flag, then confirm the trimmed tool list with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw status --deep
 ```
 
@@ -113,5 +111,7 @@ surfaces get messy.
 
 ## Related
 
-* [Features](/concepts/features)
-* [Release channels](/install/development-channels)
+- [Features](/concepts/features)
+- [Release channels](/install/development-channels)
+
+---

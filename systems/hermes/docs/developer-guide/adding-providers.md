@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "db98c2dd52e3c9939d5f73c86d0ecf7ddc30f1c62343ed9361365ba0f6e99618"
+source_hash: "ae8c3c19bd3edf909b0896e5691e8a4a16a4e849d5bb7180b18e1794220971fe"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -129,7 +129,7 @@ When you add a plugin and it calls `register_provider()`, the following wire up 
 8. `hermes setup` wizard delegates to `main.py` automatically
 9. `provider:model` alias syntax works
 10. Runtime resolver returns the correct `base_url` and `api_key`
-11. `HERMES_INFERENCE_PROVIDER` env-var override accepts the provider id
+11. `--provider <name>` CLI flag accepts the provider id
 12. Fallback model activation can switch into the provider cleanly
 
 User plugins at `$HERMES_HOME/plugins/model-providers/<name>/` override bundled plugins of the same name (last-writer-wins in `register_provider()`) — so third parties can monkey-patch or replace any built-in profile without editing the repo.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel ingress API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-ingress"
-source_hash: "2129ebdee2f0510c7fa4154551a8c03fdcf34a6d3d74659e2d805d8fbd2e8f55"
+source_hash: "b2d4d6ef39fd3fa5182b6220722e9476efad011b983b6f63c81d27cd518f4420"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-ingress.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Channel ingress API
 Source: https://docs.openclaw.ai/plugins/sdk-channel-ingress
-
-
 
 # Channel ingress API
 
@@ -28,8 +26,8 @@ mention activation, redacted diagnostics, and admission.
 
 ## Runtime Resolver
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```ts
+
   defineStableChannelIngressIdentity,
   resolveChannelMessageIngress,
 } from "openclaw/plugin-sdk/channel-ingress-runtime";
@@ -69,11 +67,11 @@ access groups, policy, and conversation kind.
 
 Bundled plugins should consume modern projections directly:
 
-* `ingress`: ordered gate decision and admission
-* `senderAccess`: sender/conversation authorization only
-* `routeAccess`: route and route-sender projection
-* `commandAccess`: command authorization; false when no command gate ran
-* `activationAccess`: mention/activation result
+- `ingress`: ordered gate decision and admission
+- `senderAccess`: sender/conversation authorization only
+- `routeAccess`: route and route-sender projection
+- `commandAccess`: command authorization; false when no command gate ran
+- `activationAccess`: mention/activation result
 
 Event authorization remains available on the ordered `ingress.graph` and the
 decisive `ingress.reasonCode`; no separate event projection is emitted.
@@ -104,7 +102,7 @@ Use `mayPair: false` for reactions, buttons, callbacks, and native commands.
 
 Use route descriptors for room, topic, guild, thread, or nested route policy:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 route: {
   id: "room",
   allowed: roomAllowed,
@@ -138,7 +136,9 @@ diagnostic ids.
 
 ## Verification
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test src/channels/message-access/message-access.test.ts src/plugin-sdk/channel-ingress-runtime.test.ts
 pnpm plugin-sdk:api:check
 ```
+
+---

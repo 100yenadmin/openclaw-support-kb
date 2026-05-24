@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "a2fb69042090d6241dd7a3c3a55ca26e52bb97a4ca3a2e61c8ebdd1cfb35533d"
+source_hash: "e383d2805143bcecfd2835c4ef09b193ab9c5aa9179adb3a1dbc81b049a0faa2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/pairing.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Pairing
 Source: https://docs.openclaw.ai/channels/pairing
-
-
 
 "Pairing" is OpenClaw's explicit access approval step.
 It is used in two places:
@@ -36,15 +34,17 @@ only those senders, and pairing-store approvals do not widen `open` access.
 
 Pairing codes:
 
-* 8 characters, uppercase, no ambiguous chars (`0O1I`).
-* **Expire after 1 hour**. The bot only sends the pairing message when a new request is created (roughly once per hour per sender).
-* Pending DM pairing requests are capped at **3 per channel** by default; additional requests are ignored until one expires or is approved.
+- 8 characters, uppercase, no ambiguous chars (`0O1I`).
+- **Expire after 1 hour**. The bot only sends the pairing message when a new request is created (roughly once per hour per sender).
+- Pending DM pairing requests are capped at **3 per channel** by default; additional requests are ignored until one expires or is approved.
 
 ### Approve a sender
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw pairing list telegram
-openclaw pairing approve telegram <CODE>
+openclaw pairing approve telegram
+CODE
+
 ```
 
 If no command owner is configured yet, approving a DM pairing code also bootstraps
@@ -63,7 +63,7 @@ multiple message channels or to both DM and group allowlists.
 Static groups use `type: "message.senders"` and are referenced with
 `accessGroup:<name>` from channel allowlists:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   accessGroups: {
     operators: {
@@ -88,26 +88,26 @@ Access groups are documented in detail here: [Access groups](/channels/access-gr
 
 Stored under `~/.openclaw/credentials/`:
 
-* Pending requests: `<channel>-pairing.json`
-* Approved allowlist store:
-  * Default account: `<channel>-allowFrom.json`
-  * Non-default account: `<channel>-<accountId>-allowFrom.json`
+- Pending requests: `<channel>-pairing.json`
+- Approved allowlist store:
+  - Default account: `<channel>-allowFrom.json`
+  - Non-default account: `<channel>-<accountId>-allowFrom.json`
 
 Account scoping behavior:
 
-* Non-default accounts read/write only their scoped allowlist file.
-* Default account uses the channel-scoped unscoped allowlist file.
+- Non-default accounts read/write only their scoped allowlist file.
+- Default account uses the channel-scoped unscoped allowlist file.
 
 Treat these as sensitive (they gate access to your assistant).
 
-<Note>
-  The pairing allowlist store is for DM access. Group authorization is separate.
-  Approving a DM pairing code does not automatically allow that sender to run group
-  commands or control the bot in groups. First-owner bootstrap is separate config
-  state in `commands.ownerAllowFrom`, and group chat delivery still follows the
-  channel's group allowlists (for example `groupAllowFrom`, `groups`, or per-group
-  or per-topic overrides depending on the channel).
-</Note>
+Note
+
+The pairing allowlist store is for DM access. Group authorization is separate.
+Approving a DM pairing code does not automatically allow that sender to run group
+commands or control the bot in groups. First-owner bootstrap is separate config
+state in `commands.ownerAllowFrom`, and group chat delivery still follows the
+channel's group allowlists (for example `groupAllowFrom`, `groups`, or per-group
+or per-topic overrides depending on the channel).
 
 ## 2) Node device pairing (iOS/Android/macOS/headless nodes)
 
@@ -126,19 +126,19 @@ If you use the `device-pair` plugin, you can do first-time device pairing entire
 
 The setup code is a base64-encoded JSON payload that contains:
 
-* `url`: the Gateway WebSocket URL (`ws://...` or `wss://...`)
-* `bootstrapToken`: a short-lived single-device bootstrap token used for the initial pairing handshake
+- `url`: the Gateway WebSocket URL (`ws://...` or `wss://...`)
+- `bootstrapToken`: a short-lived single-device bootstrap token used for the initial pairing handshake
 
 That bootstrap token carries the built-in pairing bootstrap profile:
 
-* the built-in setup profile allows the fresh QR/setup-code baseline only:
+- the built-in setup profile allows the fresh QR/setup-code baseline only:
   `node` plus a bounded `operator` handoff
-* the handed-off `node` token stays `scopes: []`
-* the handed-off `operator` token is limited to `operator.approvals`,
+- the handed-off `node` token stays `scopes: []`
+- the handed-off `operator` token is limited to `operator.approvals`,
   `operator.read`, and `operator.write`
-* `operator.admin` and `operator.pairing` are not granted by QR/setup-code
+- `operator.admin` and `operator.pairing` are not granted by QR/setup-code
   bootstrap; they require a separate approved operator pairing or token flow
-* later token rotation/revocation remains bounded by both the device's approved
+- later token rotation/revocation remains bounded by both the device's approved
   role contract and the caller session's operator scopes
 
 Treat the setup code like a password while it is valid.
@@ -151,7 +151,7 @@ fail closed before QR/setup-code issuance.
 
 ### Approve a node device
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw devices list
 openclaw devices approve <requestId>
 openclaw devices reject <requestId>
@@ -168,16 +168,16 @@ If the same device retries with different auth details (for example different
 role/scopes/public key), the previous pending request is superseded and a new
 `requestId` is created.
 
-<Note>
-  An already paired device does not get broader access silently. If it reconnects asking for more scopes or a broader role, OpenClaw keeps the existing approval as-is and creates a fresh pending upgrade request. Use `openclaw devices list` to compare the currently approved access with the newly requested access before you approve.
-</Note>
+Note
+
+An already paired device does not get broader access silently. If it reconnects asking for more scopes or a broader role, OpenClaw keeps the existing approval as-is and creates a fresh pending upgrade request. Use `openclaw devices list` to compare the currently approved access with the newly requested access before you approve.
 
 ### Optional trusted-CIDR node auto-approve
 
 Device pairing remains manual by default. For tightly controlled node networks,
 you can opt in to first-time node auto-approval with explicit CIDRs or exact IPs:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     nodes: {
@@ -198,25 +198,27 @@ approval.
 
 Stored under `~/.openclaw/devices/`:
 
-* `pending.json` (short-lived; pending requests expire)
-* `paired.json` (paired devices + tokens)
+- `pending.json` (short-lived; pending requests expire)
+- `paired.json` (paired devices + tokens)
 
 ### Notes
 
-* The legacy `node.pair.*` API (CLI: `openclaw nodes pending|approve|reject|remove|rename`) is a
+- The legacy `node.pair.*` API (CLI: `openclaw nodes pending|approve|reject|remove|rename`) is a
   separate gateway-owned pairing store. WS nodes still require device pairing.
-* The pairing record is the durable source of truth for approved roles. Active
+- The pairing record is the durable source of truth for approved roles. Active
   device tokens stay bounded to that approved role set; a stray token entry
   outside the approved roles does not create new access.
 
 ## Related docs
 
-* Security model + prompt injection: [Security](/gateway/security)
-* Updating safely (run doctor): [Updating](/install/updating)
-* Channel configs:
-  * Telegram: [Telegram](/channels/telegram)
-  * WhatsApp: [WhatsApp](/channels/whatsapp)
-  * Signal: [Signal](/channels/signal)
-  * iMessage: [iMessage](/channels/imessage)
-  * Discord: [Discord](/channels/discord)
-  * Slack: [Slack](/channels/slack)
+- Security model + prompt injection: [Security](/gateway/security)
+- Updating safely (run doctor): [Updating](/install/updating)
+- Channel configs:
+  - Telegram: [Telegram](/channels/telegram)
+  - WhatsApp: [WhatsApp](/channels/whatsapp)
+  - Signal: [Signal](/channels/signal)
+  - iMessage: [iMessage](/channels/imessage)
+  - Discord: [Discord](/channels/discord)
+  - Slack: [Slack](/channels/slack)
+
+---

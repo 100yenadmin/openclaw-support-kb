@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs"
 source: "https://docs.openclaw.ai/cli/docs"
-source_hash: "1828a7aee995d37a3a8dd592b8efc3f0f52a260ef6cd2dd038ad027cc569dc6f"
+source_hash: "c66071ff47c787558fbcbc05d327c6252313fdf25b30b9da4c8b0130eb50c3be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/docs.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # Docs
 Source: https://docs.openclaw.ai/cli/docs
 
-
-
 # `openclaw docs`
 
 Search the live OpenClaw docs index from the terminal. The command shells out to the public Mintlify-hosted docs MCP search endpoint at `https://docs.openclaw.ai/mcp.search_open_claw` and renders the results in your terminal.
 
 ## Usage
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw docs                       # print docs entrypoint and example search
 openclaw docs <query...>            # search the live docs index
 ```
@@ -34,7 +32,7 @@ Arguments:
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw docs browser existing-session
 openclaw docs sandbox allowHostControl
 openclaw docs gateway token secretref
@@ -54,7 +52,7 @@ To resolve `mcporter`, OpenClaw checks in order:
 
 If none are available, the command fails with a hint to install `pnpm` (`npm install -g pnpm`).
 
-The search call uses a fixed 30 second timeout. Result snippets are truncated to \~220 characters per entry.
+The search call uses a fixed 30 second timeout. Result snippets are truncated to ~220 characters per entry.
 
 ## Output
 
@@ -62,7 +60,7 @@ In a rich (TTY) terminal, results render as a heading followed by a bullet list.
 
 In non-rich output (piped, `--no-color`, scripts), the same data renders as Markdown:
 
-```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```markdown
 # Docs search: <query>
 
 - [Title](https://docs.openclaw.ai/...) - snippet
@@ -78,5 +76,7 @@ In non-rich output (piped, `--no-color`, scripts), the same data renders as Mark
 
 ## Related
 
-* [CLI reference](/cli)
-* [Live docs](https://docs.openclaw.ai)
+- [CLI reference](/cli)
+- [Live docs](https://docs.openclaw.ai)
+
+---

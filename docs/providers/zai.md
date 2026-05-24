@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "4ef5c074af0e6d8fae71b54e386582b171a2080ab309a8ec00ab24932e218de2"
+source_hash: "612db35078a6c962530a4005baf9aba315eb6bc3efbc57145fcb8bb39f879d07"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/zai.md"
@@ -13,52 +13,66 @@ duplicate_index: 1
 # Z.AI
 Source: https://docs.openclaw.ai/providers/zai
 
-
-
 Z.AI is the API platform for **GLM** models. It provides REST APIs for GLM and uses API keys
 for authentication. Create your API key in the Z.AI console. OpenClaw uses the `zai` provider
 with a Z.AI API key.
 
-* Provider: `zai`
-* Auth: `ZAI_API_KEY`
-* API: Z.AI Chat Completions (Bearer auth)
+- Provider: `zai`
+- Auth: `ZAI_API_KEY`
+- API: Z.AI Chat Completions (Bearer auth)
 
 ## Getting started
 
-<Tabs>
-  <Tab title="Auto-detect endpoint">
+Tabs
+
+
+Auto-detect endpoint
+
     **Best for:** most users. OpenClaw detects the matching Z.AI endpoint from the key and applies the correct base URL automatically.
 
-    <Steps>
-      <Step title="Run onboarding">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Steps
+
+
+Run onboarding
+
+        ```bash
         openclaw onboard --auth-choice zai-api-key
         ```
-      </Step>
 
-      <Step title="Set a default model">
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a default model
+
+        ```json5
         {
           env: { ZAI_API_KEY: "sk-..." },
           agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
         }
         ```
-      </Step>
 
-      <Step title="Verify the model is listed">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the model is listed
+
+        ```bash
         openclaw models list --all --provider zai
         ```
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="Explicit regional endpoint">
+
+
+
+
+
+Explicit regional endpoint
+
     **Best for:** users who want to force a specific Coding Plan or general API surface.
 
-    <Steps>
-      <Step title="Pick the right onboarding choice">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Steps
+
+
+Pick the right onboarding choice
+
+        ```bash
         # Coding Plan Global (recommended for Coding Plan users)
         openclaw onboard --auth-choice zai-coding-global
 
@@ -71,32 +85,34 @@ with a Z.AI API key.
         # General API CN (China region)
         openclaw onboard --auth-choice zai-cn
         ```
-      </Step>
 
-      <Step title="Set a default model">
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set a default model
+
+        ```json5
         {
           env: { ZAI_API_KEY: "sk-..." },
           agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
         }
         ```
-      </Step>
 
-      <Step title="Verify the model is listed">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the model is listed
+
+        ```bash
         openclaw models list --all --provider zai
         ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+
+
+
+
 
 ## Built-in catalog
 
 OpenClaw ships the bundled `zai` provider catalog in the plugin manifest, so read-only
 listing can show known GLM rows without loading provider runtime:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw models list --all --provider zai
 ```
 
@@ -118,23 +134,28 @@ The manifest-backed catalog currently includes:
 | `zai/glm-4.5-flash`  |               |
 | `zai/glm-4.5v`       |               |
 
-<Tip>
-  GLM models are available as `zai/<model>` (example: `zai/glm-5`). The default bundled model ref is `zai/glm-5.1`.
-</Tip>
+Tip
+
+GLM models are available as `zai/<model>` (example: `zai/glm-5`). The default bundled model ref is `zai/glm-5.1`.
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Forward-resolving unknown GLM-5 models">
+AccordionGroup
+
+
+Forward-resolving unknown GLM-5 models
+
     Unknown `glm-5*` ids still forward-resolve on the bundled provider path by
     synthesizing provider-owned metadata from the `glm-4.7` template when the id
     matches the current GLM-5 family shape.
-  </Accordion>
 
-  <Accordion title="Tool-call streaming">
+
+
+Tool-call streaming
+
     `tool_stream` is enabled by default for Z.AI tool-call streaming. To disable it:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -147,9 +168,12 @@ The manifest-backed catalog currently includes:
       },
     }
     ```
-  </Accordion>
 
-  <Accordion title="Thinking and preserved thinking">
+
+
+
+Thinking and preserved thinking
+
     Z.AI thinking follows OpenClaw's `/think` controls. With thinking off,
     OpenClaw sends `thinking: { type: "disabled" }` to avoid responses that
     spend the output budget on `reasoning_content` before visible text.
@@ -158,7 +182,7 @@ The manifest-backed catalog currently includes:
     `reasoning_content` to be replayed, which increases prompt tokens. Enable it
     per model:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -178,34 +202,44 @@ The manifest-backed catalog currently includes:
 
     Advanced users can still override the exact provider payload with
     `params.extra_body.thinking`.
-  </Accordion>
 
-  <Accordion title="Image understanding">
+
+
+
+Image understanding
+
     The bundled Z.AI plugin registers image understanding.
 
-    | Property | Value      |
-    | -------- | ---------- |
-    | Model    | `glm-4.6v` |
+    | Property      | Value       |
+    | ------------- | ----------- |
+    | Model         | `glm-4.6v`  |
 
     Image understanding is auto-resolved from the configured Z.AI auth — no
     additional config is needed.
-  </Accordion>
 
-  <Accordion title="Auth details">
-    * Z.AI uses Bearer auth with your API key.
-    * The `zai-api-key` onboarding choice auto-detects the matching Z.AI endpoint from the key prefix.
-    * Use the explicit regional choices (`zai-coding-global`, `zai-coding-cn`, `zai-global`, `zai-cn`) when you want to force a specific API surface.
-  </Accordion>
-</AccordionGroup>
+
+
+
+Auth details
+
+    - Z.AI uses Bearer auth with your API key.
+    - The `zai-api-key` onboarding choice auto-detects the matching Z.AI endpoint from the key prefix.
+    - Use the explicit regional choices (`zai-coding-global`, `zai-coding-cn`, `zai-global`, `zai-cn`) when you want to force a specific API surface.
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="GLM model family" href="/providers/glm" icon="microchip">
-    Model family overview for GLM.
-  </Card>
+CardGroup
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+GLM model family
+
+    Model family overview for GLM.
+
+
+Model selection
+
     Choosing providers, model refs, and failover behavior.
-  </Card>
-</CardGroup>
+
+---

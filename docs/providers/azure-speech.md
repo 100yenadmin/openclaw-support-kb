@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
-source_hash: "1127fd3d034d086e68b288abd727c693dac2fbf52baca5244bba53c1d7de0bc8"
+source_hash: "842f0f088320e0a3a4fef922fe9062b2405a85f09e229158c9d07b9936518733"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/azure-speech.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Azure Speech
 Source: https://docs.openclaw.ai/providers/azure-speech
-
-
 
 Azure Speech is an Azure AI Speech text-to-speech provider. In OpenClaw it
 synthesizes outbound reply audio as MP3 by default, native Ogg/Opus for voice
@@ -33,8 +31,11 @@ provider-owned output format through `X-Microsoft-OutputFormat`.
 
 ## Getting started
 
-<Steps>
-  <Step title="Create an Azure Speech resource">
+Steps
+
+
+Create an Azure Speech resource
+
     In the Azure portal, create a Speech resource. Copy **KEY 1** from
     Resource Management > Keys and Endpoint, and copy the resource location
     such as `eastus`.
@@ -43,10 +44,12 @@ provider-owned output format through `X-Microsoft-OutputFormat`.
     AZURE_SPEECH_KEY=<speech-resource-key>
     AZURE_SPEECH_REGION=eastus
     ```
-  </Step>
 
-  <Step title="Select Azure Speech in messages.tts">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Select Azure Speech in messages.tts
+
+    ```json5
     {
       messages: {
         tts: {
@@ -62,14 +65,14 @@ provider-owned output format through `X-Microsoft-OutputFormat`.
       },
     }
     ```
-  </Step>
 
-  <Step title="Send a message">
+
+Send a message
+
     Send a reply through any connected channel. OpenClaw synthesizes the audio
     with Azure Speech and delivers MP3 for standard audio, or Ogg/Opus when
     the channel expects a voice note.
-  </Step>
-</Steps>
+
 
 ## Configuration options
 
@@ -86,50 +89,61 @@ provider-owned output format through `X-Microsoft-OutputFormat`.
 
 ## Notes
 
-<AccordionGroup>
-  <Accordion title="Authentication">
+AccordionGroup
+
+
+Authentication
+
     Azure Speech uses a Speech resource key, not an Azure OpenAI key. The key
     is sent as `Ocp-Apim-Subscription-Key`; OpenClaw derives
     `https://<region>.tts.speech.microsoft.com` from `region` unless you
     provide `endpoint` or `baseUrl`.
-  </Accordion>
 
-  <Accordion title="Voice names">
+
+Voice names
+
     Use the Azure Speech voice `ShortName` value, for example
     `en-US-JennyNeural`. The bundled provider can list voices through the
     same Speech resource and filters voices marked deprecated or retired.
-  </Accordion>
 
-  <Accordion title="Audio outputs">
+
+Audio outputs
+
     Azure accepts output formats such as `audio-24khz-48kbitrate-mono-mp3`,
     `ogg-24khz-16bit-mono-opus`, and `riff-24khz-16bit-mono-pcm`. OpenClaw
     requests Ogg/Opus for `voice-note` targets so channels can send native
     voice bubbles without an extra MP3 conversion.
-  </Accordion>
 
-  <Accordion title="Alias">
+
+Alias
+
     `azure` is accepted as a provider alias for existing PRs and user config,
     but new config should use `azure-speech` to avoid confusion with Azure
     OpenAI model providers.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Text-to-speech" href="/tools/tts" icon="waveform-lines">
+CardGroup
+
+
+Text-to-speech
+
     TTS overview, providers, and `messages.tts` config.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config reference including `messages.tts` settings.
-  </Card>
 
-  <Card title="Providers" href="/providers" icon="grid">
+
+Providers
+
     All bundled OpenClaw providers.
-  </Card>
 
-  <Card title="Troubleshooting" href="/help/troubleshooting" icon="wrench">
+
+Troubleshooting
+
     Common issues and debugging steps.
-  </Card>
-</CardGroup>
+
+---

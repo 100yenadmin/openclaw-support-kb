@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tavily"
 source: "https://docs.openclaw.ai/tools/tavily"
-source_hash: "dad3f207fa18a8734e1b7b5cf38bc225bc8cda8ad4e0c73289e31372d3e83752"
+source_hash: "4b370fe31401fcceecddaf7850faefde4912807e83929b972c1b79d009206e11"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tavily.md"
@@ -13,12 +13,10 @@ duplicate_index: 1
 # Tavily
 Source: https://docs.openclaw.ai/tools/tavily
 
-
-
 [Tavily](https://tavily.com) is a search API designed for AI applications. OpenClaw exposes it in two ways:
 
-* as the `web_search` provider for the generic search tool
-* as explicit plugin tools: `tavily_search` and `tavily_extract`
+- as the `web_search` provider for the generic search tool
+- as explicit plugin tools: `tavily_search` and `tavily_extract`
 
 Tavily returns structured results optimized for LLM consumption with configurable search depth, topic filtering, domain filters, AI-generated answer summaries, and content extraction from URLs (including JavaScript-rendered pages).
 
@@ -31,13 +29,17 @@ Tavily returns structured results optimized for LLM consumption with configurabl
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
-    Create a Tavily account at [tavily.com](https://tavily.com), then generate an API key in the dashboard.
-  </Step>
+Steps
 
-  <Step title="Configure the plugin and provider">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Get an API key
+
+    Create a Tavily account at [tavily.com](https://tavily.com), then generate an API key in the dashboard.
+
+
+Configure the plugin and provider
+
+    ```json5
     {
       plugins: {
         entries: {
@@ -61,16 +63,16 @@ Tavily returns structured results optimized for LLM consumption with configurabl
       },
     }
     ```
-  </Step>
 
-  <Step title="Verify search runs">
+
+Verify search runs
+
     Trigger a `web_search` from any agent, or call `tavily_search` directly.
-  </Step>
-</Steps>
 
-<Tip>
-  Choosing Tavily in onboarding or `openclaw configure --section web` enables the bundled Tavily plugin automatically.
-</Tip>
+
+Tip
+
+Choosing Tavily in onboarding or `openclaw configure --section web` enables the bundled Tavily plugin automatically.
 
 ## Tool reference
 
@@ -115,9 +117,9 @@ Extract depth tradeoff:
 | `basic`    | Simple pages. Try this first.              |
 | `advanced` | JS-rendered SPAs, dynamic content, tables. |
 
-<Tip>
-  Batch larger URL lists into multiple `tavily_extract` calls (max 20 per request). Use `query` plus `chunks_per_source` to get only relevant content instead of full pages.
-</Tip>
+Tip
+
+Batch larger URL lists into multiple `tavily_extract` calls (max 20 per request). Use `query` plus `chunks_per_source` to get only relevant content instead of full pages.
 
 ## Choosing the right tool
 
@@ -127,47 +129,60 @@ Extract depth tradeoff:
 | Search with depth, topic, AI answers | `tavily_search`  |
 | Extract content from specific URLs   | `tavily_extract` |
 
-<Note>
-  The generic `web_search` tool with Tavily as provider supports `query` and `count` (up to 20 results). For Tavily-specific controls (`search_depth`, `topic`, `include_answer`, domain filters, time range), use `tavily_search` instead.
-</Note>
+Note
+
+The generic `web_search` tool with Tavily as provider supports `query` and `count` (up to 20 results). For Tavily-specific controls (`search_depth`, `topic`, `include_answer`, domain filters, time range), use `tavily_search` instead.
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="API key resolution order">
+AccordionGroup
+
+
+API key resolution order
+
     The Tavily client looks up its API key in this order:
 
     1. `plugins.entries.tavily.config.webSearch.apiKey` (resolved through SecretRefs).
     2. `TAVILY_API_KEY` from the gateway environment.
 
     `tavily_extract` raises a setup error if neither is present.
-  </Accordion>
 
-  <Accordion title="Custom base URL">
+
+
+
+Custom base URL
+
     Override `plugins.entries.tavily.config.webSearch.baseUrl` if you front Tavily through a proxy. The default is `https://api.tavily.com`.
-  </Accordion>
 
-  <Accordion title="`chunks_per_source` requires `query`">
+
+
+`chunks_per_source` requires `query`
+
     `tavily_extract` rejects calls that pass `chunks_per_source` without a `query`. Tavily ranks chunks by query relevance, so the parameter is meaningless without one.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Web Search overview" href="/tools/web" icon="magnifying-glass">
+CardGroup
+
+
+Web Search overview
+
     All providers and auto-detection rules.
-  </Card>
 
-  <Card title="Firecrawl" href="/tools/firecrawl" icon="fire">
+
+Firecrawl
+
     Search plus scraping with content extraction.
-  </Card>
 
-  <Card title="Exa Search" href="/tools/exa-search" icon="binoculars">
+
+Exa Search
+
     Neural search with content extraction.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config schema for plugin entries and tool routing.
-  </Card>
-</CardGroup>
+
+---

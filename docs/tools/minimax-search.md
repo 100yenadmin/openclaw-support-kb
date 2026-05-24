@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
-source_hash: "e22d83d1b406181edb80bbf2edd28f6a88464cae8c22f8964cfddf7c6f5b2e55"
+source_hash: "5387d843ff38d2b04d943f90340d614b2350aa2a4c2eb092b207819c5fb45af3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/minimax-search.md"
@@ -13,29 +13,31 @@ duplicate_index: 1
 # MiniMax search
 Source: https://docs.openclaw.ai/tools/minimax-search
 
-
-
 OpenClaw supports MiniMax as a `web_search` provider through the MiniMax
 Token Plan search API. It returns structured search results with titles, URLs,
 snippets, and related queries.
 
 ## Get a Token Plan credential
 
-<Steps>
-  <Step title="Create a key">
+Steps
+
+
+Create a key
+
     Create or copy a MiniMax Token Plan key from
     [MiniMax Platform](https://platform.minimax.io/user-center/basic-information/interface-key).
     OAuth setups can reuse `MINIMAX_OAUTH_TOKEN` instead.
-  </Step>
 
-  <Step title="Store the key">
+
+Store the key
+
     Set `MINIMAX_CODE_PLAN_KEY` in the Gateway environment, or configure via:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw configure --section web
     ```
-  </Step>
-</Steps>
+
+
 
 OpenClaw also accepts `MINIMAX_CODING_API_KEY`, `MINIMAX_OAUTH_TOKEN`, and
 `MINIMAX_API_KEY` as env aliases. `MINIMAX_API_KEY` should point at a
@@ -44,7 +46,7 @@ be accepted by the Token Plan search endpoint.
 
 ## Config
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -76,8 +78,8 @@ For a gateway install, put it in `~/.openclaw/.env`.
 
 MiniMax Search uses these endpoints:
 
-* Global: `https://api.minimax.io/v1/coding_plan/search`
-* CN: `https://api.minimaxi.com/v1/coding_plan/search`
+- Global: `https://api.minimax.io/v1/coding_plan/search`
+- CN: `https://api.minimaxi.com/v1/coding_plan/search`
 
 If `plugins.entries.minimax.config.webSearch.region` is unset, OpenClaw resolves
 the region in this order:
@@ -106,5 +108,7 @@ Provider-specific filters are not currently supported.
 
 ## Related
 
-* [Web Search overview](/tools/web) -- all providers and auto-detection
-* [MiniMax](/providers/minimax) -- model, image, speech, and auth setup
+- [Web Search overview](/tools/web) -- all providers and auto-detection
+- [MiniMax](/providers/minimax) -- model, image, speech, and auth setup
+
+---

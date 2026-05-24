@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix push rules for quiet previews"
 source: "https://docs.openclaw.ai/channels/matrix-push-rules"
-source_hash: "cbf8c6a108f5b872ac429542c3d3bb311b27f9eb76a1ba1b211f63a62caa68aa"
+source_hash: "f23e0e38e5daa20ad48b5c353f35adf2f3f3b96cfd2de4995b9e3187069e28d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-push-rules.md"
@@ -13,109 +13,122 @@ duplicate_index: 1
 # Matrix push rules for quiet previews
 Source: https://docs.openclaw.ai/channels/matrix-push-rules
 
-
-
 When `channels.matrix.streaming` is `"quiet"`, OpenClaw edits a single preview event in place and marks the finalized edit with a custom content flag. Matrix clients notify on the final edit only if a per-user push rule matches that flag. This page is for operators who self-host Matrix and want to install that rule for each recipient account.
 
 If you only want stock Matrix notification behavior, use `streaming: "partial"` or leave streaming off. See [Matrix channel setup](/channels/matrix#streaming-previews).
 
 ## Prerequisites
 
-* recipient user = the person who should receive the notification
-* bot user = the OpenClaw Matrix account that sends the reply
-* use the recipient user's access token for the API calls below
-* match `sender` in the push rule against the bot user's full MXID
-* the recipient account must already have working pushers — quiet preview rules only work when normal Matrix push delivery is healthy
+- recipient user = the person who should receive the notification
+- bot user = the OpenClaw Matrix account that sends the reply
+- use the recipient user's access token for the API calls below
+- match `sender` in the push rule against the bot user's full MXID
+- the recipient account must already have working pushers — quiet preview rules only work when normal Matrix push delivery is healthy
 
 ## Steps
 
-<Steps>
-  <Step title="Configure quiet previews">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      channels: {
-        matrix: {
-          streaming: "quiet",
-        },
-      },
-    }
-    ```
-  </Step>
+Steps
 
-  <Step title="Get the recipient's access token">
+
+Configure quiet previews
+
+```json5
+{
+  channels: {
+    matrix: {
+      streaming: "quiet",
+    },
+  },
+}
+```
+
+
+
+
+Get the recipient's access token
+
     Reuse an existing client session token where possible. To mint a fresh one:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    curl -sS -X POST \
-      "https://matrix.example.org/_matrix/client/v3/login" \
-      -H "Content-Type: application/json" \
-      --data '{
-        "type": "m.login.password",
-        "identifier": { "type": "m.id.user", "user": "@alice:example.org" },
-        "password": "REDACTED"
-      }'
-    ```
-  </Step>
+```bash
+curl -sS -X POST \
+  "https://matrix.example.org/_matrix/client/v3/login" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "type": "m.login.password",
+    "identifier": { "type": "m.id.user", "user": "@alice:example.org" },
+    "password": "REDACTED"
+  }'
+```
 
-  <Step title="Verify pushers exist">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    curl -sS \
-      -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
-      "https://matrix.example.org/_matrix/client/v3/pushers"
-    ```
 
-    If no pushers come back, fix normal Matrix push delivery for this account before continuing.
-  </Step>
 
-  <Step title="Install the override push rule">
+
+Verify pushers exist
+
+```bash
+curl -sS \
+  -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
+  "https://matrix.example.org/_matrix/client/v3/pushers"
+```
+
+If no pushers come back, fix normal Matrix push delivery for this account before continuing.
+
+
+
+
+Install the override push rule
+
     OpenClaw marks finalized text-only preview edits with `content["com.openclaw.finalized_preview"] = true`. Install a rule that matches that marker plus the bot MXID as sender:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    curl -sS -X PUT \
-      "https://matrix.example.org/_matrix/client/v3/pushrules/global/override/openclaw-finalized-preview-botname" \
-      -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
-      -H "Content-Type: application/json" \
-      --data '{
-        "conditions": [
-          { "kind": "event_match", "key": "type", "pattern": "m.room.message" },
-          {
-            "kind": "event_property_is",
-            "key": "content.m\\.relates_to.rel_type",
-            "value": "m.replace"
-          },
-          {
-            "kind": "event_property_is",
-            "key": "content.com\\.openclaw\\.finalized_preview",
-            "value": true
-          },
-          { "kind": "event_match", "key": "sender", "pattern": "@bot:example.org" }
-        ],
-        "actions": [
-          "notify",
-          { "set_tweak": "sound", "value": "default" },
-          { "set_tweak": "highlight", "value": false }
-        ]
-      }'
-    ```
+```bash
+curl -sS -X PUT \
+  "https://matrix.example.org/_matrix/client/v3/pushrules/global/override/openclaw-finalized-preview-botname" \
+  -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "conditions": [
+      { "kind": "event_match", "key": "type", "pattern": "m.room.message" },
+      {
+        "kind": "event_property_is",
+        "key": "content.m\\.relates_to.rel_type",
+        "value": "m.replace"
+      },
+      {
+        "kind": "event_property_is",
+        "key": "content.com\\.openclaw\\.finalized_preview",
+        "value": true
+      },
+      { "kind": "event_match", "key": "sender", "pattern": "@bot:example.org" }
+    ],
+    "actions": [
+      "notify",
+      { "set_tweak": "sound", "value": "default" },
+      { "set_tweak": "highlight", "value": false }
+    ]
+  }'
+```
 
     Replace before running:
 
-    * `https://matrix.example.org`: your homeserver base URL
-    * `$USER_ACCESS_TOKEN`: the recipient user's access token
-    * `openclaw-finalized-preview-botname`: a rule ID unique per bot per recipient (pattern: `openclaw-finalized-preview-<botname>`)
-    * `@bot:example.org`: your OpenClaw bot MXID, not the recipient's
-  </Step>
+    - `https://matrix.example.org`: your homeserver base URL
+    - `$USER_ACCESS_TOKEN`: the recipient user's access token
+    - `openclaw-finalized-preview-botname`: a rule ID unique per bot per recipient (pattern: `openclaw-finalized-preview-<botname>`)
+    - `@bot:example.org`: your OpenClaw bot MXID, not the recipient's
 
-  <Step title="Verify">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    curl -sS \
-      -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
-      "https://matrix.example.org/_matrix/client/v3/pushrules/global/override/openclaw-finalized-preview-botname"
-    ```
 
-    Then test a streamed reply. In quiet mode the room shows a quiet draft preview and notifies once the block or turn finishes.
-  </Step>
-</Steps>
+
+
+Verify
+
+```bash
+curl -sS \
+  -H "Authorization: Bearer $USER_ACCESS_TOKEN" \
+  "https://matrix.example.org/_matrix/client/v3/pushrules/global/override/openclaw-finalized-preview-botname"
+```
+
+Then test a streamed reply. In quiet mode the room shows a quiet draft preview and notifies once the block or turn finishes.
+
+
 
 To remove the rule later, `DELETE` the same rule URL with the recipient's token.
 
@@ -127,23 +140,31 @@ New user-defined `override` rules are inserted ahead of default suppress rules, 
 
 ## Homeserver notes
 
-<AccordionGroup>
-  <Accordion title="Synapse">
+AccordionGroup
+
+
+Synapse
+
     No special `homeserver.yaml` change is required. If normal Matrix notifications already reach this user, the recipient token + `pushrules` call above is the main setup step.
 
     If you run Synapse behind a reverse proxy or workers, make sure `/_matrix/client/.../pushrules/` reaches Synapse correctly. Push delivery is handled by the main process or `synapse.app.pusher` / configured pusher workers — ensure those are healthy.
 
     The rule uses the `event_property_is` push-rule condition (MSC3758, push rule v1.10), which was added to Synapse in 2023. Older Synapse releases accept the `PUT pushrules/...` call but silently never match the condition — upgrade Synapse if no notification arrives on a finalized preview edit.
-  </Accordion>
 
-  <Accordion title="Tuwunel">
+
+
+
+Tuwunel
+
     Same flow as Synapse; no Tuwunel-specific config is needed for the finalized preview marker.
 
     If notifications disappear while the user is active on another device, check whether `suppress_push_when_active` is enabled. Tuwunel added this option in 1.4.2 (September 2025) and it can intentionally suppress pushes to other devices while one device is active.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-* [Matrix channel setup](/channels/matrix)
-* [Streaming concepts](/concepts/streaming)
+- [Matrix channel setup](/channels/matrix)
+- [Streaming concepts](/concepts/streaming)
+
+---

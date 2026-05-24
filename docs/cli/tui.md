@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "a5b205b69c1567165f39e138d2be1cac10367be4ff9bb052053f4dcfad7e4abb"
+source_hash: "8196124f03eb9213b3ff1c479df787c3b128bfb9077973608984019d430ddf49"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # TUI
 Source: https://docs.openclaw.ai/cli/tui
 
-
-
 # `openclaw tui`
 
 Open the terminal UI connected to the Gateway, or run it in local embedded
@@ -22,7 +20,7 @@ mode.
 
 Related:
 
-* TUI guide: [TUI](/web/tui)
+- TUI guide: [TUI](/web/tui)
 
 ## Options
 
@@ -43,17 +41,17 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke the same command with `-
 
 Notes:
 
-* `chat` and `terminal` are aliases for `openclaw tui --local`.
-* `--local` cannot be combined with `--url`, `--token`, or `--password`.
-* `tui` resolves configured gateway auth SecretRefs for token/password auth when possible (`env`/`file`/`exec` providers).
-* When launched from inside a configured agent workspace directory, TUI auto-selects that agent for the session key default (unless `--session` is explicitly `agent:<id>:...`).
-* Local mode uses the embedded agent runtime directly. Most local tools work, but Gateway-only features are unavailable.
-* Local mode adds `/auth [provider]` inside the TUI command surface.
-* Plugin approval gates still apply in local mode. Tools that require approval prompt for a decision in the terminal; nothing is silently auto-approved because the Gateway is not involved.
+- `chat` and `terminal` are aliases for `openclaw tui --local`.
+- `--local` cannot be combined with `--url`, `--token`, or `--password`.
+- `tui` resolves configured gateway auth SecretRefs for token/password auth when possible (`env`/`file`/`exec` providers).
+- When launched from inside a configured agent workspace directory, TUI auto-selects that agent for the session key default (unless `--session` is explicitly `agent:<id>:...`).
+- Local mode uses the embedded agent runtime directly. Most local tools work, but Gateway-only features are unavailable.
+- Local mode adds `/auth [provider]` inside the TUI command surface.
+- Plugin approval gates still apply in local mode. Tools that require approval prompt for a decision in the terminal; nothing is silently auto-approved because the Gateway is not involved.
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw chat
 openclaw tui --local
 openclaw tui
@@ -74,13 +72,13 @@ If `openclaw config validate` is already failing, use `openclaw configure` or
 `openclaw doctor --fix` first. `openclaw chat` does not bypass the invalid-
 config guard.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw chat
 ```
 
 Then inside the TUI:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 !openclaw config file
 !openclaw docs gateway auth token secretref
 !openclaw config validate
@@ -92,5 +90,7 @@ rerun `openclaw config validate`. See [TUI](/web/tui) and [Config](/cli/config).
 
 ## Related
 
-* [CLI reference](/cli)
-* [TUI](/web/tui)
+- [CLI reference](/cli)
+- [TUI](/web/tui)
+
+---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MiniMax OAuth"
 source: "https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth"
-source_hash: "48e8e2476501953b9f44e5915ba6a385a0f4cfe34ed61bf019428891b47162d9"
+source_hash: "03b07828e02319a4106e20ca3554b96204361351bb189867e1c9ceb983ab451b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/minimax-oauth.md"
@@ -170,10 +170,10 @@ The `minimax-oauth` provider does **not** use `MINIMAX_API_KEY` or `MINIMAX_BASE
 | `MINIMAX_API_KEY` | Used by `minimax` provider only — ignored for `minimax-oauth` |
 | `MINIMAX_CN_API_KEY` | Used by `minimax-cn` provider only — ignored for `minimax-oauth` |
 
-To force the `minimax-oauth` provider at runtime:
+To use `minimax-oauth` as the active provider, set `model.provider: minimax-oauth` in `config.yaml` (use `hermes setup` for the guided flow), or pass `--provider minimax-oauth` for a single invocation:
 
 ```bash
-HERMES_INFERENCE_PROVIDER=minimax-oauth hermes
+hermes --provider minimax-oauth
 ```
 
 ## Models

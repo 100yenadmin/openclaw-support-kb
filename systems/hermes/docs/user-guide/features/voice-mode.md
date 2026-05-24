@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode"
-source_hash: "082aed9ae520db25bcdc9a3afec9503a286f76e6c782d51acbcea0df3b5eac3c"
+source_hash: "19fa5ca14e949e403adacfd8beec158944d9401511f6113c22e93dc7b70e400b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/voice-mode.md"
@@ -33,6 +33,10 @@ Before using voice features, make sure you have:
 
 :::tip
 The `~/.hermes/` directory and default `config.yaml` are created automatically the first time you run `hermes`. You only need to create `~/.hermes/.env` manually for API keys.
+:::
+
+:::tip Nous Portal covers both
+A paid [Nous Portal](/docs/user-guide/features/tool-gateway) subscription supplies the LLM (step 2) **and** OpenAI TTS via the Tool Gateway — no separate OpenAI key needed. On a fresh install, `hermes setup --portal` wires both up at once.
 :::
 
 ## Overview

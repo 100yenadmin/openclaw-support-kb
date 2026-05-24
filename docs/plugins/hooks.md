@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "8e1eec63291b038e7a24c3273f4031a05588a4f2442b1f80c9427e6adc558b87"
+source_hash: "dcce680f14cdf851f090d0cb8d04030cb1b7685d3879611c4d75c12472c923fd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Plugin hooks
 Source: https://docs.openclaw.ai/plugins/hooks
-
-
 
 Plugin hooks are in-process extension points for OpenClaw plugins. Use them
 when a plugin needs to inspect or change agent runs, tool calls, message flow,
@@ -27,8 +25,7 @@ operator-installed `HOOK.md` script for command and Gateway events such as
 
 Register typed plugin hooks with `api.on(...)` from your plugin entry:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
+```typescript
 
 export default definePluginEntry({
   id: "tool-preflight",
@@ -62,8 +59,8 @@ keep registration order.
 
 `api.on(name, handler, opts?)` accepts:
 
-* `priority` - handler ordering (higher runs first).
-* `timeoutMs` - optional per-hook budget. When set, the hook runner aborts that
+- `priority` - handler ordering (higher runs first).
+- `timeoutMs` - optional per-hook budget. When set, the hook runner aborts that
   handler after the budget elapses and continues with the next one, instead of
   letting slow setup or recall work consume the caller's configured model
   timeout. Omit it to use the default observation/decision timeout that the
@@ -71,7 +68,7 @@ keep registration order.
 
 Operators can also set hook budgets without patching plugin code:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -108,54 +105,54 @@ observation-only.
 
 **Agent turn**
 
-* `before_model_resolve` - override provider or model before session messages load
-* `agent_turn_prepare` - consume queued plugin turn injections and add same-turn context before prompt hooks
-* `before_prompt_build` - add dynamic context or system-prompt text before the model call
-* `before_agent_start` - compatibility-only combined phase; prefer the two hooks above
-* **`before_agent_run`** - inspect the final prompt and session messages before model submission and optionally block the run
-* **`before_agent_reply`** - short-circuit the model turn with a synthetic reply or silence
-* **`before_agent_finalize`** - inspect the natural final answer and request one more model pass
-* `agent_end` - observe final messages, success state, and run duration
-* `heartbeat_prompt_contribution` - add heartbeat-only context for background monitor and lifecycle plugins
+- `before_model_resolve` - override provider or model before session messages load
+- `agent_turn_prepare` - consume queued plugin turn injections and add same-turn context before prompt hooks
+- `before_prompt_build` - add dynamic context or system-prompt text before the model call
+- `before_agent_start` - compatibility-only combined phase; prefer the two hooks above
+- **`before_agent_run`** - inspect the final prompt and session messages before model submission and optionally block the run
+- **`before_agent_reply`** - short-circuit the model turn with a synthetic reply or silence
+- **`before_agent_finalize`** - inspect the natural final answer and request one more model pass
+- `agent_end` - observe final messages, success state, and run duration
+- `heartbeat_prompt_contribution` - add heartbeat-only context for background monitor and lifecycle plugins
 
 **Conversation observation**
 
-* `model_call_started` / `model_call_ended` - observe sanitized provider/model call metadata, timing, outcome, and bounded request-id hashes without prompt or response content
-* `llm_input` - observe provider input (system prompt, prompt, history)
-* `llm_output` - observe provider output, usage, and the resolved `contextTokenBudget` when available
+- `model_call_started` / `model_call_ended` - observe sanitized provider/model call metadata, timing, outcome, and bounded request-id hashes without prompt or response content
+- `llm_input` - observe provider input (system prompt, prompt, history)
+- `llm_output` - observe provider output, usage, and the resolved `contextTokenBudget` when available
 
 **Tools**
 
-* **`before_tool_call`** - rewrite tool params, block execution, or require approval
-* `after_tool_call` - observe tool results, errors, and duration
-* **`tool_result_persist`** - rewrite the assistant message produced from a tool result
-* **`before_message_write`** - inspect or block an in-progress message write (rare)
+- **`before_tool_call`** - rewrite tool params, block execution, or require approval
+- `after_tool_call` - observe tool results, errors, and duration
+- **`tool_result_persist`** - rewrite the assistant message produced from a tool result
+- **`before_message_write`** - inspect or block an in-progress message write (rare)
 
 **Messages and delivery**
 
-* **`inbound_claim`** - claim an inbound message before agent routing (synthetic replies)
-* `message_received` - observe inbound content, sender, thread, and metadata
-* **`message_sending`** - rewrite outbound content or cancel delivery
-* `message_sent` - observe outbound delivery success or failure
-* **`before_dispatch`** - inspect or rewrite an outbound dispatch before channel handoff
-* **`reply_dispatch`** - participate in the final reply-dispatch pipeline
+- **`inbound_claim`** - claim an inbound message before agent routing (synthetic replies)
+- `message_received` - observe inbound content, sender, thread, and metadata
+- **`message_sending`** - rewrite outbound content or cancel delivery
+- `message_sent` - observe outbound delivery success or failure
+- **`before_dispatch`** - inspect or rewrite an outbound dispatch before channel handoff
+- **`reply_dispatch`** - participate in the final reply-dispatch pipeline
 
 **Sessions and compaction**
 
-* `session_start` / `session_end` - track session lifecycle boundaries. The event's `reason` is one of `new`, `reset`, `idle`, `daily`, `compaction`, `deleted`, `shutdown`, `restart`, or `unknown`. The `shutdown` and `restart` values fire from the gateway shutdown finalizer when the process is stopped or restarted while sessions are still active, so downstream plugins (such as memory or transcript stores) can finalize ghost rows that would otherwise be left in an open state across restarts. The finalizer is bounded so a slow plugin cannot block SIGTERM/SIGINT.
-* `before_compaction` / `after_compaction` - observe or annotate compaction cycles
-* `before_reset` - observe session-reset events (`/reset`, programmatic resets)
+- `session_start` / `session_end` - track session lifecycle boundaries. The event's `reason` is one of `new`, `reset`, `idle`, `daily`, `compaction`, `deleted`, `shutdown`, `restart`, or `unknown`. The `shutdown` and `restart` values fire from the gateway shutdown finalizer when the process is stopped or restarted while sessions are still active, so downstream plugins (such as memory or transcript stores) can finalize ghost rows that would otherwise be left in an open state across restarts. The finalizer is bounded so a slow plugin cannot block SIGTERM/SIGINT.
+- `before_compaction` / `after_compaction` - observe or annotate compaction cycles
+- `before_reset` - observe session-reset events (`/reset`, programmatic resets)
 
 **Subagents**
 
-* `subagent_spawning` / `subagent_delivery_target` / `subagent_spawned` / `subagent_ended` - coordinate subagent routing and completion delivery
+- `subagent_spawning` / `subagent_delivery_target` / `subagent_spawned` / `subagent_ended` - coordinate subagent routing and completion delivery
 
 **Lifecycle**
 
-* `gateway_start` / `gateway_stop` - start or stop plugin-owned services with the Gateway
-* `deactivate` - deprecated compatibility alias for `gateway_stop`; use `gateway_stop` in new plugins
-* `cron_changed` - observe gateway-owned cron lifecycle changes (added, updated, removed, started, finished, scheduled)
-* **`before_install`** - inspect skill or plugin install scans and optionally block
+- `gateway_start` / `gateway_stop` - start or stop plugin-owned services with the Gateway
+- `deactivate` - deprecated compatibility alias for `gateway_stop`; use `gateway_stop` in new plugins
+- `cron_changed` - observe gateway-owned cron lifecycle changes (added, updated, removed, started, finished, scheduled)
+- **`before_install`** - inspect skill or plugin install scans and optionally block
 
 ## Debug runtime hooks
 
@@ -173,26 +170,26 @@ file.
 
 `before_tool_call` receives:
 
-* `event.toolName`
-* `event.params`
-* optional `event.toolKind` and `event.toolInputKind`, host-authoritative
+- `event.toolName`
+- `event.params`
+- optional `event.toolKind` and `event.toolInputKind`, host-authoritative
   discriminators for tools that intentionally share names; for example, outer
   code-mode `exec` calls use `toolKind: "code_mode_exec"` and
   include `toolInputKind: "javascript" | "typescript"` when the input language
   is known
-* optional `event.derivedPaths`, containing best-effort host-derived target path
+- optional `event.derivedPaths`, containing best-effort host-derived target path
   hints for well-known tool envelopes such as `apply_patch`; when present,
   these paths may be incomplete or may over-approximate what the tool will
   actually touch (for example, with malformed or partial inputs)
-* optional `event.runId`
-* optional `event.toolCallId`
-* context fields such as `ctx.agentId`, `ctx.sessionKey`, `ctx.sessionId`,
+- optional `event.runId`
+- optional `event.toolCallId`
+- context fields such as `ctx.agentId`, `ctx.sessionKey`, `ctx.sessionId`,
   `ctx.runId`, `ctx.jobId` (set on cron-driven runs), `ctx.toolKind`,
   `ctx.toolInputKind`, and diagnostic `ctx.trace`
 
 It can return:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type BeforeToolCallResult = {
   params?: Record<string, unknown>;
   block?: boolean;
@@ -213,14 +210,14 @@ type BeforeToolCallResult = {
 
 Hook guard behavior for typed lifecycle hooks:
 
-* `block: true` is terminal and skips lower-priority handlers.
-* `block: false` is treated as no decision.
-* `params` rewrites the tool parameters for execution.
-* `requireApproval` pauses the agent run and asks the user through plugin
+- `block: true` is terminal and skips lower-priority handlers.
+- `block: false` is treated as no decision.
+- `params` rewrites the tool parameters for execution.
+- `requireApproval` pauses the agent run and asks the user through plugin
   approvals. The `/approve` command can approve both exec and plugin approvals.
-* A lower-priority `block: true` can still block after a higher-priority hook
+- A lower-priority `block: true` can still block after a higher-priority hook
   requested approval.
-* `onResolution` receives the resolved approval decision - `allow-once`,
+- `onResolution` receives the resolved approval decision - `allow-once`,
   `allow-always`, `deny`, `timeout`, or `cancelled`.
 
 Bundled plugins that need host-level policy can register trusted tool policies
@@ -236,11 +233,11 @@ Tool results can include structured `details` for UI rendering, diagnostics,
 media routing, or plugin-owned metadata. Treat `details` as runtime metadata,
 not prompt content:
 
-* OpenClaw strips `toolResult.details` before provider replay and compaction
+- OpenClaw strips `toolResult.details` before provider replay and compaction
   input so metadata does not become model context.
-* Persisted session entries keep only bounded `details`. Oversized details are
+- Persisted session entries keep only bounded `details`. Oversized details are
   replaced with a compact summary and `persistedDetailsTruncated: true`.
-* `tool_result_persist` and `before_message_write` run before the final
+- `tool_result_persist` and `before_message_write` run before the final
   persistence cap. Hooks should still keep returned `details` small and avoid
   placing prompt-relevant text only in `details`; put model-visible tool output
   in `content`.
@@ -249,15 +246,15 @@ not prompt content:
 
 Use the phase-specific hooks for new plugins:
 
-* `before_model_resolve`: receives only the current prompt and attachment
+- `before_model_resolve`: receives only the current prompt and attachment
   metadata. Return `providerOverride` or `modelOverride`.
-* `agent_turn_prepare`: receives the current prompt, prepared session messages,
+- `agent_turn_prepare`: receives the current prompt, prepared session messages,
   and any exactly-once queued injections drained for this session. Return
   `prependContext` or `appendContext`.
-* `before_prompt_build`: receives the current prompt and session messages.
+- `before_prompt_build`: receives the current prompt and session messages.
   Return `prependContext`, `appendContext`, `systemPrompt`,
   `prependSystemContext`, or `appendSystemContext`.
-* `heartbeat_prompt_contribution`: runs only for heartbeat turns and returns
+- `heartbeat_prompt_contribution`: runs only for heartbeat turns and returns
   `prependContext` or `appendContext`. It is intended for background monitors
   that need to summarize current state without changing user-initiated turns.
 
@@ -321,7 +318,7 @@ Codex native `Stop` hooks are relayed into this hook as OpenClaw
 When returning `action: "revise"`, plugins can include `retry` metadata to make
 the extra model pass bounded and replay-safe:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type BeforeAgentFinalizeRetry = {
   instruction: string;
   idempotencyKey?: string;
@@ -338,7 +335,7 @@ Non-bundled plugins that need raw conversation hooks (`before_model_resolve`,
 `before_agent_reply`, `llm_input`, `llm_output`, `before_agent_finalize`,
 `agent_end`, or `before_agent_run`) must set:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "plugins": {
     "entries": {
@@ -382,10 +379,10 @@ generation.
 
 Use message hooks for channel-level routing and delivery policy:
 
-* `message_received`: observe inbound content, sender, `threadId`, `messageId`,
+- `message_received`: observe inbound content, sender, `threadId`, `messageId`,
   `senderId`, optional run/session correlation, and metadata.
-* `message_sending`: rewrite `content` or return `{ cancel: true }`.
-* `message_sent`: observe final success or failure.
+- `message_sending`: rewrite `content` or return `{ cancel: true }`.
+- `message_sent`: observe final success or failure.
 
 For audio-only TTS replies, `content` may contain the hidden spoken transcript
 even when the channel payload has no visible text/caption. Rewriting that
@@ -402,15 +399,15 @@ metadata.
 
 Decision rules:
 
-* `message_sending` with `cancel: true` is terminal.
-* `message_sending` with `cancel: false` is treated as no decision.
-* Rewritten `content` continues to lower-priority hooks unless a later hook
+- `message_sending` with `cancel: true` is terminal.
+- `message_sending` with `cancel: false` is treated as no decision.
+- Rewritten `content` continues to lower-priority hooks unless a later hook
   cancels delivery.
-* `message_sending` can return `cancelReason` and bounded `metadata` with a
+- `message_sending` can return `cancelReason` and bounded `metadata` with a
   cancellation. New message lifecycle APIs expose this as a suppressed delivery
   outcome with reason `cancelled_by_message_sending_hook`; legacy direct
   delivery keeps returning an empty result array for compatibility.
-* `message_sent` is observation-only. Handler failures are logged and do not
+- `message_sent` is observation-only. Handler failures are logged and do not
   change the delivery result.
 
 ## Install hooks
@@ -447,16 +444,16 @@ source of truth for due checks and execution.
 A few hook-adjacent surfaces are deprecated but still supported. Migrate
 before the next major release:
 
-* **Plaintext channel envelopes** in `inbound_claim` and `message_received`
+- **Plaintext channel envelopes** in `inbound_claim` and `message_received`
   handlers. Read `BodyForAgent` and the structured user-context blocks
   instead of parsing flat envelope text. See
   [Plaintext channel envelopes → BodyForAgent](/plugins/sdk-migration#active-deprecations).
-* **`before_agent_start`** remains for compatibility. New plugins should use
+- **`before_agent_start`** remains for compatibility. New plugins should use
   `before_model_resolve` and `before_prompt_build` instead of the combined
   phase.
-* **`deactivate`** remains as a deprecated cleanup compatibility alias until
+- **`deactivate`** remains as a deprecated cleanup compatibility alias until
   after 2026-08-16. New plugins should use `gateway_stop`.
-* **`onResolution` in `before_tool_call`** now uses the typed
+- **`onResolution` in `before_tool_call`** now uses the typed
   `PluginApprovalResolution` union (`allow-once` / `allow-always` / `deny` /
   `timeout` / `cancelled`) instead of a free-form `string`.
 
@@ -467,9 +464,11 @@ accessors, and the `command-auth` → `command-status` rename - see
 
 ## Related
 
-* [Plugin SDK migration](/plugins/sdk-migration) - active deprecations and removal timeline
-* [Building plugins](/plugins/building-plugins)
-* [Plugin SDK overview](/plugins/sdk-overview)
-* [Plugin entry points](/plugins/sdk-entrypoints)
-* [Internal hooks](/automation/hooks)
-* [Plugin architecture internals](/plugins/architecture-internals)
+- [Plugin SDK migration](/plugins/sdk-migration) - active deprecations and removal timeline
+- [Building plugins](/plugins/building-plugins)
+- [Plugin SDK overview](/plugins/sdk-overview)
+- [Plugin entry points](/plugins/sdk-entrypoints)
+- [Internal hooks](/automation/hooks)
+- [Plugin architecture internals](/plugins/architecture-internals)
+
+---

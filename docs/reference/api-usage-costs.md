@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "358c5b3e6558248baed981fd06df080429eb4a74197f7a3cb07b85d5de13a107"
+source_hash: "a900d496131fdc83b803a96d771d9859088aced6fe0fc5cbc6176ff11fb3dd94"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/api-usage-costs.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # API usage and costs
 Source: https://docs.openclaw.ai/reference/api-usage-costs
 
-
-
 This doc lists **features that can invoke API keys** and where their costs show up. It focuses on
 OpenClaw features that can generate provider usage or paid API calls.
 
@@ -22,18 +20,18 @@ OpenClaw features that can generate provider usage or paid API calls.
 
 **Per-session cost snapshot**
 
-* `/status` shows the current session model, context usage, and last response tokens.
-* If the model uses **API-key auth**, `/status` also shows **estimated cost** for the last reply.
-* If live session metadata is sparse, `/status` can recover token/cache
+- `/status` shows the current session model, context usage, and last response tokens.
+- If the model uses **API-key auth**, `/status` also shows **estimated cost** for the last reply.
+- If live session metadata is sparse, `/status` can recover token/cache
   counters and the active runtime model label from the latest transcript usage
   entry. Existing nonzero live values still take precedence, and prompt-sized
   transcript totals can win when stored totals are missing or smaller.
 
 **Per-message cost footer**
 
-* `/usage full` appends a usage footer to every reply, including **estimated cost** (API-key only).
-* `/usage tokens` shows tokens only; subscription-style OAuth/token and CLI flows hide dollar cost.
-* Gemini CLI note: when the CLI returns JSON output, OpenClaw reads usage from
+- `/usage full` appends a usage footer to every reply, including **estimated cost** (API-key only).
+- `/usage tokens` shows tokens only; subscription-style OAuth/token and CLI flows hide dollar cost.
+- Gemini CLI note: when the CLI returns JSON output, OpenClaw reads usage from
   `stats`, normalizes `stats.cached` into `cacheRead`, and derives input tokens
   from `stats.input_tokens - stats.cached` when needed.
 
@@ -45,17 +43,17 @@ show in `/usage full`.
 
 **CLI usage windows (provider quotas)**
 
-* `openclaw status --usage` and `openclaw channels list` show provider **usage windows**
+- `openclaw status --usage` and `openclaw channels list` show provider **usage windows**
   (quota snapshots, not per-message costs).
-* Human output is normalized to `X% left` across providers.
-* Current usage-window providers: Anthropic, GitHub Copilot, Gemini CLI,
+- Human output is normalized to `X% left` across providers.
+- Current usage-window providers: Anthropic, GitHub Copilot, Gemini CLI,
   OpenAI Codex, MiniMax, Xiaomi, and z.ai.
-* MiniMax note: its raw `usage_percent` / `usagePercent` fields mean remaining
+- MiniMax note: its raw `usage_percent` / `usagePercent` fields mean remaining
   quota, so OpenClaw inverts them before display. Count-based fields still win
   when present. If the provider returns `model_remains`, OpenClaw prefers the
   chat-model entry, derives the window label from timestamps when needed, and
   includes the model name in the plan label.
-* Usage auth for those quota windows comes from provider-specific hooks when
+- Usage auth for those quota windows comes from provider-specific hooks when
   available; otherwise OpenClaw falls back to matching OAuth/API-key
   credentials from auth profiles, env, or config.
 
@@ -65,12 +63,12 @@ See [Token use & costs](/reference/token-use) for details and examples.
 
 OpenClaw can pick up credentials from:
 
-* **Auth profiles** (per-agent, stored in `auth-profiles.json`).
-* **Environment variables** (e.g. `OPENAI_API_KEY`, `BRAVE_API_KEY`, `FIRECRAWL_API_KEY`).
-* **Config** (`models.providers.*.apiKey`, `plugins.entries.*.config.webSearch.apiKey`,
+- **Auth profiles** (per-agent, stored in `auth-profiles.json`).
+- **Environment variables** (e.g. `OPENAI_API_KEY`, `BRAVE_API_KEY`, `FIRECRAWL_API_KEY`).
+- **Config** (`models.providers.*.apiKey`, `plugins.entries.*.config.webSearch.apiKey`,
   `plugins.entries.firecrawl.config.webFetch.apiKey`, `memorySearch.*`,
   `talk.providers.*.apiKey`).
-* **Skills** (`skills.entries.<name>.apiKey`) which may export keys to the skill process env.
+- **Skills** (`skills.entries.<name>.apiKey`) which may export keys to the skill process env.
 
 ## Features that can spend keys
 
@@ -90,9 +88,9 @@ See [Models](/providers/models) for pricing config and [Token use & costs](/refe
 
 Inbound media can be summarized/transcribed before the reply runs. This uses model/provider APIs.
 
-* Audio: OpenAI / Groq / Deepgram / DeepInfra / Google / Mistral.
-* Image: OpenAI / OpenRouter / Anthropic / DeepInfra / Google / MiniMax / Moonshot / Qwen / Z.AI.
-* Video: Google / Qwen / Moonshot.
+- Audio: OpenAI / Groq / Deepgram / DeepInfra / Google / Mistral.
+- Image: OpenAI / OpenRouter / Anthropic / DeepInfra / Google / MiniMax / Moonshot / Qwen / Z.AI.
+- Video: Google / Qwen / Moonshot.
 
 See [Media understanding](/nodes/media-understanding).
 
@@ -100,8 +98,8 @@ See [Media understanding](/nodes/media-understanding).
 
 Shared generation capabilities can also spend provider keys:
 
-* Image generation: OpenAI / Google / DeepInfra / fal / MiniMax
-* Video generation: DeepInfra / Qwen
+- Image generation: OpenAI / Google / DeepInfra / fal / MiniMax
+- Video generation: DeepInfra / Qwen
 
 Image generation can infer an auth-backed provider default when
 `agents.defaults.imageGenerationModel` is unset. Video generation currently
@@ -115,14 +113,14 @@ and [Models](/concepts/models).
 
 Semantic memory search uses **embedding APIs** when configured for remote providers:
 
-* `memorySearch.provider = "openai"` → OpenAI embeddings
-* `memorySearch.provider = "gemini"` → Gemini embeddings
-* `memorySearch.provider = "voyage"` → Voyage embeddings
-* `memorySearch.provider = "mistral"` → Mistral embeddings
-* `memorySearch.provider = "deepinfra"` → DeepInfra embeddings
-* `memorySearch.provider = "lmstudio"` → LM Studio embeddings (local/self-hosted)
-* `memorySearch.provider = "ollama"` → Ollama embeddings (local/self-hosted; typically no hosted API billing)
-* Optional fallback to a remote provider if local embeddings fail
+- `memorySearch.provider = "openai"` → OpenAI embeddings
+- `memorySearch.provider = "gemini"` → Gemini embeddings
+- `memorySearch.provider = "voyage"` → Voyage embeddings
+- `memorySearch.provider = "mistral"` → Mistral embeddings
+- `memorySearch.provider = "deepinfra"` → DeepInfra embeddings
+- `memorySearch.provider = "lmstudio"` → LM Studio embeddings (local/self-hosted)
+- `memorySearch.provider = "ollama"` → Ollama embeddings (local/self-hosted; typically no hosted API billing)
+- Optional fallback to a remote provider if local embeddings fail
 
 You can keep it local with `memorySearch.provider = "local"` (no API usage).
 
@@ -132,18 +130,18 @@ See [Memory](/concepts/memory).
 
 `web_search` may incur usage charges depending on your provider:
 
-* **Brave Search API**: `BRAVE_API_KEY` or `plugins.entries.brave.config.webSearch.apiKey`
-* **Exa**: `EXA_API_KEY` or `plugins.entries.exa.config.webSearch.apiKey`
-* **Firecrawl**: `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webSearch.apiKey`
-* **Gemini (Google Search)**: `GEMINI_API_KEY` or `plugins.entries.google.config.webSearch.apiKey`
-* **Grok (xAI)**: xAI OAuth profile, `XAI_API_KEY`, or `plugins.entries.xai.config.webSearch.apiKey`
-* **Kimi (Moonshot)**: `KIMI_API_KEY`, `MOONSHOT_API_KEY`, or `plugins.entries.moonshot.config.webSearch.apiKey`
-* **MiniMax Search**: `MINIMAX_CODE_PLAN_KEY`, `MINIMAX_CODING_API_KEY`, `MINIMAX_API_KEY`, or `plugins.entries.minimax.config.webSearch.apiKey`
-* **Ollama Web Search**: key-free for a reachable signed-in local Ollama host; direct `https://ollama.com` search uses `OLLAMA_API_KEY`, and auth-protected hosts can reuse normal Ollama provider bearer auth
-* **Perplexity Search API**: `PERPLEXITY_API_KEY`, `OPENROUTER_API_KEY`, or `plugins.entries.perplexity.config.webSearch.apiKey`
-* **Tavily**: `TAVILY_API_KEY` or `plugins.entries.tavily.config.webSearch.apiKey`
-* **DuckDuckGo**: key-free fallback (no API billing, but unofficial and HTML-based)
-* **SearXNG**: `SEARXNG_BASE_URL` or `plugins.entries.searxng.config.webSearch.baseUrl` (key-free/self-hosted; no hosted API billing)
+- **Brave Search API**: `BRAVE_API_KEY` or `plugins.entries.brave.config.webSearch.apiKey`
+- **Exa**: `EXA_API_KEY` or `plugins.entries.exa.config.webSearch.apiKey`
+- **Firecrawl**: `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webSearch.apiKey`
+- **Gemini (Google Search)**: `GEMINI_API_KEY` or `plugins.entries.google.config.webSearch.apiKey`
+- **Grok (xAI)**: xAI OAuth profile, `XAI_API_KEY`, or `plugins.entries.xai.config.webSearch.apiKey`
+- **Kimi (Moonshot)**: `KIMI_API_KEY`, `MOONSHOT_API_KEY`, or `plugins.entries.moonshot.config.webSearch.apiKey`
+- **MiniMax Search**: `MINIMAX_CODE_PLAN_KEY`, `MINIMAX_CODING_API_KEY`, `MINIMAX_API_KEY`, or `plugins.entries.minimax.config.webSearch.apiKey`
+- **Ollama Web Search**: key-free for a reachable signed-in local Ollama host; direct `https://ollama.com` search uses `OLLAMA_API_KEY`, and auth-protected hosts can reuse normal Ollama provider bearer auth
+- **Perplexity Search API**: `PERPLEXITY_API_KEY`, `OPENROUTER_API_KEY`, or `plugins.entries.perplexity.config.webSearch.apiKey`
+- **Tavily**: `TAVILY_API_KEY` or `plugins.entries.tavily.config.webSearch.apiKey`
+- **DuckDuckGo**: key-free fallback (no API billing, but unofficial and HTML-based)
+- **SearXNG**: `SEARXNG_BASE_URL` or `plugins.entries.searxng.config.webSearch.baseUrl` (key-free/self-hosted; no hosted API billing)
 
 Legacy `tools.web.search.*` provider paths still load through the temporary compatibility shim, but they are no longer the recommended config surface.
 
@@ -158,7 +156,7 @@ See [Web tools](/tools/web).
 
 `web_fetch` can call **Firecrawl** when an API key is present:
 
-* `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webFetch.apiKey`
+- `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webFetch.apiKey`
 
 If Firecrawl isn't configured, the tool falls back to direct fetch plus the bundled `web-readability` plugin (no paid API). Disable `plugins.entries.web-readability.enabled` to skip local Readability extraction.
 
@@ -169,8 +167,8 @@ See [Web tools](/tools/web).
 Some status commands call **provider usage endpoints** to display quota windows or auth health.
 These are typically low-volume calls but still hit provider APIs:
 
-* `openclaw status --usage`
-* `openclaw models status --json`
+- `openclaw status --usage`
+- `openclaw models status --json`
 
 See [Models CLI](/cli/models).
 
@@ -192,7 +190,7 @@ See [Models CLI](/cli/models).
 
 Talk mode can invoke **ElevenLabs** when configured:
 
-* `ELEVENLABS_API_KEY` or `talk.providers.elevenlabs.apiKey`
+- `ELEVENLABS_API_KEY` or `talk.providers.elevenlabs.apiKey`
 
 See [Talk mode](/nodes/talk).
 
@@ -205,6 +203,8 @@ See [Skills](/tools/skills).
 
 ## Related
 
-* [Token use and costs](/reference/token-use)
-* [Prompt caching](/reference/prompt-caching)
-* [Usage tracking](/concepts/usage-tracking)
+- [Token use and costs](/reference/token-use)
+- [Prompt caching](/reference/prompt-caching)
+- [Usage tracking](/concepts/usage-tracking)
+
+---

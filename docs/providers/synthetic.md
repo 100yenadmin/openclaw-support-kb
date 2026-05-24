@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synthetic"
 source: "https://docs.openclaw.ai/providers/synthetic"
-source_hash: "bb3e6bd67aa5fa2e29868d548d551dc854fc8439e5aae9c6818cfd113b8b5b38"
+source_hash: "35e68e45da590ce26887b540b593f765e4ac65d3fd2c63e762d5873bc34806dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/synthetic.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Synthetic
 Source: https://docs.openclaw.ai/providers/synthetic
-
-
 
 [Synthetic](https://synthetic.new) exposes Anthropic-compatible endpoints.
 OpenClaw registers it as the `synthetic` provider and uses the Anthropic
@@ -28,36 +26,39 @@ Messages API.
 
 ## Getting started
 
-<Steps>
-  <Step title="Get an API key">
+Steps
+
+
+Get an API key
+
     Obtain a `SYNTHETIC_API_KEY` from your Synthetic account, or let the
     onboarding wizard prompt you for one.
-  </Step>
 
-  <Step title="Run onboarding">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Run onboarding
+
+    ```bash
     openclaw onboard --auth-choice synthetic-api-key
     ```
-  </Step>
 
-  <Step title="Verify the default model">
+
+Verify the default model
+
     After onboarding the default model is set to:
-
     ```
     synthetic/hf:MiniMaxAI/MiniMax-M2.5
     ```
-  </Step>
-</Steps>
 
-<Warning>
-  OpenClaw's Anthropic client appends `/v1` to the base URL automatically, so use
-  `https://api.synthetic.new/anthropic` (not `/anthropic/v1`). If Synthetic
-  changes its base URL, override `models.providers.synthetic.baseUrl`.
-</Warning>
+
+Warning
+
+OpenClaw's Anthropic client appends `/v1` to the base URL automatically, so use
+`https://api.synthetic.new/anthropic` (not `/anthropic/v1`). If Synthetic
+changes its base URL, override `models.providers.synthetic.baseUrl`.
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { SYNTHETIC_API_KEY: "sk-..." },
   agents: {
@@ -118,23 +119,28 @@ All Synthetic models use cost `0` (input/output/cache).
 | `hf:deepseek-ai/DeepSeek-V3`                           | 128,000        | 8,192      | no        | text         |
 | `hf:Qwen/Qwen3-235B-A22B-Thinking-2507`                | 256,000        | 8,192      | yes       | text         |
 
-<Tip>
-  Model refs use the form `synthetic/<modelId>`. Use
-  `openclaw models list --provider synthetic` to see all models available on your
-  account.
-</Tip>
+Tip
 
-<AccordionGroup>
-  <Accordion title="Model allowlist">
+Model refs use the form `synthetic/<modelId>`. Use
+`openclaw models list --provider synthetic` to see all models available on your
+account.
+
+AccordionGroup
+
+
+Model allowlist
+
     If you enable a model allowlist (`agents.defaults.models`), add every
     Synthetic model you plan to use. Models not in the allowlist will be hidden
     from the agent.
-  </Accordion>
 
-  <Accordion title="Base URL override">
+
+
+Base URL override
+
     If Synthetic changes its API endpoint, override the base URL in your config:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       models: {
         providers: {
@@ -147,21 +153,26 @@ All Synthetic models use cost `0` (input/output/cache).
     ```
 
     Remember that OpenClaw appends `/v1` automatically.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+CardGroup
+
+
+Model selection
+
     Provider rules, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Configuration reference
+
     Full config schema including provider settings.
-  </Card>
 
-  <Card title="Synthetic" href="https://synthetic.new" icon="arrow-up-right-from-square">
+
+Synthetic
+
     Synthetic dashboard and API docs.
-  </Card>
-</CardGroup>
+
+---

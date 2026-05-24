@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scripts"
 source: "https://docs.openclaw.ai/help/scripts"
-source_hash: "316883b065bd59f392688adeec5fffbf3694fe9d91e06580e8c912496319442f"
+source_hash: "8c60a3f2a83f6e067928c9142c8094a0f33df52fd0198f62e749221cad733b5d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/scripts.md"
@@ -13,16 +13,14 @@ duplicate_index: 1
 # Scripts
 Source: https://docs.openclaw.ai/help/scripts
 
-
-
 The `scripts/` directory contains helper scripts for local workflows and ops tasks.
 Use these when a task is clearly tied to a script; otherwise prefer the CLI.
 
 ## Conventions
 
-* Scripts are **optional** unless referenced in docs or release checklists.
-* Prefer CLI surfaces when they exist (example: auth monitoring uses `openclaw models status --check`).
-* Assume scripts are host-specific; read them before running on a new machine.
+- Scripts are **optional** unless referenced in docs or release checklists.
+- Prefer CLI surfaces when they exist (example: auth monitoring uses `openclaw models status --check`).
+- Assume scripts are host-specific; read them before running on a new machine.
 
 ## Auth monitoring scripts
 
@@ -34,32 +32,34 @@ Use `scripts/gh-read` when you want `gh` to use a GitHub App installation token 
 
 Required env:
 
-* `OPENCLAW_GH_READ_APP_ID`
-* `OPENCLAW_GH_READ_PRIVATE_KEY_FILE`
+- `OPENCLAW_GH_READ_APP_ID`
+- `OPENCLAW_GH_READ_PRIVATE_KEY_FILE`
 
 Optional env:
 
-* `OPENCLAW_GH_READ_INSTALLATION_ID` when you want to skip repo-based installation lookup
-* `OPENCLAW_GH_READ_PERMISSIONS` as a comma-separated override for the read permission subset to request
+- `OPENCLAW_GH_READ_INSTALLATION_ID` when you want to skip repo-based installation lookup
+- `OPENCLAW_GH_READ_PERMISSIONS` as a comma-separated override for the read permission subset to request
 
 Repo resolution order:
 
-* `gh ... -R owner/repo`
-* `GH_REPO`
-* `git remote origin`
+- `gh ... -R owner/repo`
+- `GH_REPO`
+- `git remote origin`
 
 Examples:
 
-* `scripts/gh-read pr view 123`
-* `scripts/gh-read run list -R openclaw/openclaw`
-* `scripts/gh-read api repos/openclaw/openclaw/pulls/123`
+- `scripts/gh-read pr view 123`
+- `scripts/gh-read run list -R openclaw/openclaw`
+- `scripts/gh-read api repos/openclaw/openclaw/pulls/123`
 
 ## When adding scripts
 
-* Keep scripts focused and documented.
-* Add a short entry in the relevant doc (or create one if missing).
+- Keep scripts focused and documented.
+- Add a short entry in the relevant doc (or create one if missing).
 
 ## Related
 
-* [Testing](/help/testing)
-* [Testing live](/help/testing-live)
+- [Testing](/help/testing)
+- [Testing live](/help/testing-live)
+
+---

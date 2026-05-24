@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "952f28d9a8485746edb9a38194caf305c056691503816dee4ac3b23f78b2625a"
+source_hash: "30ee9bce905e97d355c5d7426238bd1de64ab6900757dad047d22da77415e32a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -13,38 +13,39 @@ duplicate_index: 1
 # Docker
 Source: https://docs.openclaw.ai/install/docker
 
-
-
 Docker is **optional**. Use it only if you want a containerized gateway or to validate the Docker flow.
 
 ## Is Docker right for me?
 
-* **Yes**: you want an isolated, throwaway gateway environment or to run OpenClaw on a host without local installs.
-* **No**: you are running on your own machine and just want the fastest dev loop. Use the normal install flow instead.
-* **Sandboxing note**: the default sandbox backend uses Docker when sandboxing is enabled, but sandboxing is off by default and does **not** require the full gateway to run in Docker. SSH and OpenShell sandbox backends are also available. See [Sandboxing](/gateway/sandboxing).
+- **Yes**: you want an isolated, throwaway gateway environment or to run OpenClaw on a host without local installs.
+- **No**: you are running on your own machine and just want the fastest dev loop. Use the normal install flow instead.
+- **Sandboxing note**: the default sandbox backend uses Docker when sandboxing is enabled, but sandboxing is off by default and does **not** require the full gateway to run in Docker. SSH and OpenShell sandbox backends are also available. See [Sandboxing](/gateway/sandboxing).
 
 ## Prerequisites
 
-* Docker Desktop (or Docker Engine) + Docker Compose v2
-* At least 2 GB RAM for image build (`pnpm install` may be OOM-killed on 1 GB hosts with exit 137)
-* Enough disk for images and logs
-* If running on a VPS/public host, review
+- Docker Desktop (or Docker Engine) + Docker Compose v2
+- At least 2 GB RAM for image build (`pnpm install` may be OOM-killed on 1 GB hosts with exit 137)
+- Enough disk for images and logs
+- If running on a VPS/public host, review
   [Security hardening for network exposure](/gateway/security),
   especially Docker `DOCKER-USER` firewall policy.
 
 ## Containerized gateway
 
-<Steps>
-  <Step title="Build the image">
+Steps
+
+
+Build the image
+
     From the repo root, run the setup script:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     ./scripts/docker/setup.sh
     ```
 
     This builds the gateway image locally. To use a pre-built image instead:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:latest"
     ./scripts/docker/setup.sh
     ```
@@ -52,22 +53,28 @@ Docker is **optional**. Use it only if you want a containerized gateway or to va
     Pre-built images are published at the
     [GitHub Container Registry](https://github.com/openclaw/openclaw/pkgs/container/openclaw).
     Common tags: `main`, `latest`, `<version>` (e.g. `2026.2.26`).
-  </Step>
 
-  <Step title="Complete onboarding">
+
+
+
+Complete onboarding
+
     The setup script runs onboarding automatically. It will:
 
-    * prompt for provider API keys
-    * generate a gateway token and write it to `.env`
-    * create the auth-profile secret key directory
-    * start the gateway via Docker Compose
+    - prompt for provider API keys
+    - generate a gateway token and write it to `.env`
+    - create the auth-profile secret key directory
+    - start the gateway via Docker Compose
 
     During setup, pre-start onboarding and config writes run through
     `openclaw-gateway` directly. `openclaw-cli` is for commands you run after
     the gateway container already exists.
-  </Step>
 
-  <Step title="Open the Control UI">
+
+
+
+Open the Control UI
+
     Open `http://127.0.0.1:18789/` in your browser and paste the configured
     shared secret into Settings. The setup script writes a token to `.env` by
     default; if you switch the container config to password auth, use that
@@ -75,15 +82,18 @@ Docker is **optional**. Use it only if you want a containerized gateway or to va
 
     Need the URL again?
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli dashboard --no-open
     ```
-  </Step>
 
-  <Step title="Configure channels (optional)">
+
+
+
+Configure channels (optional)
+
     Use the CLI container to add messaging channels:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     # WhatsApp (QR)
     docker compose run --rm openclaw-cli channels login
 
@@ -95,14 +105,14 @@ Docker is **optional**. Use it only if you want a containerized gateway or to va
     ```
 
     Docs: [WhatsApp](/channels/whatsapp), [Telegram](/channels/telegram), [Discord](/channels/discord)
-  </Step>
-</Steps>
+
+
 
 ### Manual flow
 
 If you prefer to run each step yourself instead of using the setup script:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 docker build -t openclaw:local -f Dockerfile .
 docker compose run --rm --no-deps --entrypoint node openclaw-gateway \
   dist/index.js onboard --mode local --no-install-daemon
@@ -111,18 +121,18 @@ docker compose run --rm --no-deps --entrypoint node openclaw-gateway \
 docker compose up -d openclaw-gateway
 ```
 
-<Note>
-  Run `docker compose` from the repo root. If you enabled `OPENCLAW_EXTRA_MOUNTS`
-  or `OPENCLAW_HOME_VOLUME`, the setup script writes `docker-compose.extra.yml`;
-  include it with `-f docker-compose.yml -f docker-compose.extra.yml`.
-</Note>
+Note
 
-<Note>
-  Because `openclaw-cli` shares `openclaw-gateway`'s network namespace, it is a
-  post-start tool. Before `docker compose up -d openclaw-gateway`, run onboarding
-  and setup-time config writes through `openclaw-gateway` with
-  `--no-deps --entrypoint node`.
-</Note>
+Run `docker compose` from the repo root. If you enabled `OPENCLAW_EXTRA_MOUNTS`
+or `OPENCLAW_HOME_VOLUME`, the setup script writes `docker-compose.extra.yml`;
+include it with `-f docker-compose.yml -f docker-compose.extra.yml`.
+
+Note
+
+Because `openclaw-cli` shares `openclaw-gateway`'s network namespace, it is a
+post-start tool. Before `docker compose up -d openclaw-gateway`, run onboarding
+and setup-time config writes through `openclaw-gateway` with
+`--no-deps --entrypoint node`.
 
 ### Environment variables
 
@@ -171,7 +181,7 @@ collector. It does not require a published Docker port. If you build the image
 locally and want the bundled OpenTelemetry exporter available inside the image,
 include its runtime dependencies:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export OPENCLAW_EXTENSIONS="diagnostics-otel"
 export OTEL_EXPORTER_OTLP_ENDPOINT="http://otel-collector:4318"
 export OTEL_SERVICE_NAME="openclaw-gateway"
@@ -191,7 +201,7 @@ Prometheus metrics use the already-published Gateway port. Install
 `clawhub:@openclaw/diagnostics-prometheus`, enable the
 `diagnostics-prometheus` plugin, then scrape:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 http://<gateway-host>:18789/api/diagnostics/prometheus
 ```
 
@@ -203,7 +213,7 @@ public `/metrics` port or unauthenticated reverse-proxy path. See
 
 Container probe endpoints (no auth required):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -fsS http://127.0.0.1:18789/healthz   # liveness
 curl -fsS http://127.0.0.1:18789/readyz     # readiness
 ```
@@ -214,7 +224,7 @@ orchestration systems can restart or replace it.
 
 Authenticated deep health snapshot:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 docker compose exec openclaw-gateway node dist/index.js health --token "$OPENCLAW_GATEWAY_TOKEN"
 ```
 
@@ -223,14 +233,14 @@ docker compose exec openclaw-gateway node dist/index.js health --token "$OPENCLA
 `scripts/docker/setup.sh` defaults `OPENCLAW_GATEWAY_BIND=lan` so host access to
 `http://127.0.0.1:18789` works with Docker port publishing.
 
-* `lan` (default): host browser and host CLI can reach the published gateway port.
-* `loopback`: only processes inside the container network namespace can reach
+- `lan` (default): host browser and host CLI can reach the published gateway port.
+- `loopback`: only processes inside the container network namespace can reach
   the gateway directly.
 
-<Note>
-  Use bind mode values in `gateway.bind` (`lan` / `loopback` / `custom` /
-  `tailnet` / `auto`), not host aliases like `0.0.0.0` or `127.0.0.1`.
-</Note>
+Note
+
+Use bind mode values in `gateway.bind` (`lan` / `loopback` / `custom` /
+`tailnet` / `auto`), not host aliases like `0.0.0.0` or `127.0.0.1`.
 
 ### Host Local Providers
 
@@ -250,7 +260,7 @@ the same hostname on macOS and Windows.
 
 Host services must also listen on an address reachable from Docker:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 lms server start --port 1234 --bind 0.0.0.0
 OLLAMA_HOST=0.0.0.0:11434 ollama serve
 ```
@@ -284,9 +294,9 @@ volume spec on bare environments.
 
 That mounted config directory is where OpenClaw keeps:
 
-* `openclaw.json` for behavior config
-* `agents/<agentId>/agent/auth-profiles.json` for stored provider OAuth/API-key auth
-* `.env` for env-backed runtime secrets such as `OPENCLAW_GATEWAY_TOKEN`
+- `openclaw.json` for behavior config
+- `agents/<agentId>/agent/auth-profiles.json` for stored provider OAuth/API-key auth
+- `.env` for env-backed runtime secrets such as `OPENCLAW_GATEWAY_TOKEN`
 
 The auth-profile secret key directory stores the local encryption key used for
 OAuth-backed auth profile token material. Keep it with your Docker host state,
@@ -307,7 +317,7 @@ under `/tmp/openclaw/`.
 
 For easier day-to-day Docker management, install `ClawDock`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 mkdir -p ~/.clawdock && curl -sL https://raw.githubusercontent.com/openclaw/openclaw/main/scripts/clawdock/clawdock-helpers.sh -o ~/.clawdock/clawdock-helpers.sh
 echo 'source ~/.clawdock/clawdock-helpers.sh' >> ~/.zshrc && source ~/.zshrc
 ```
@@ -318,16 +328,19 @@ Then use `clawdock-start`, `clawdock-stop`, `clawdock-dashboard`, etc. Run
 `clawdock-help` for all commands.
 See [ClawDock](/install/clawdock) for the full helper guide.
 
-<AccordionGroup>
-  <Accordion title="Enable agent sandbox for Docker gateway">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+AccordionGroup
+
+
+Enable agent sandbox for Docker gateway
+
+    ```bash
     export OPENCLAW_SANDBOX=1
     ./scripts/docker/setup.sh
     ```
 
     Custom socket path (e.g. rootless Docker):
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     export OPENCLAW_SANDBOX=1
     export OPENCLAW_DOCKER_SOCKET=/run/user/1000/docker.sock
     ./scripts/docker/setup.sh
@@ -338,25 +351,33 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     to `off`. Codex code-mode turns are still constrained to Codex
     `workspace-write` while the OpenClaw sandbox is active; do not mount the
     host Docker socket into agent sandbox containers.
-  </Accordion>
 
-  <Accordion title="Automation / CI (non-interactive)">
+
+
+
+Automation / CI (non-interactive)
+
     Disable Compose pseudo-TTY allocation with `-T`:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run -T --rm openclaw-cli gateway probe
     docker compose run -T --rm openclaw-cli devices list --json
     ```
-  </Accordion>
 
-  <Accordion title="Shared-network security note">
+
+
+
+Shared-network security note
+
     `openclaw-cli` uses `network_mode: "service:openclaw-gateway"` so CLI
     commands can reach the gateway over `127.0.0.1`. Treat this as a shared
     trust boundary. The compose config drops `NET_RAW`/`NET_ADMIN` and enables
     `no-new-privileges` on both `openclaw-gateway` and `openclaw-cli`.
-  </Accordion>
 
-  <Accordion title="Docker Desktop DNS failures in openclaw-cli">
+
+
+Docker Desktop DNS failures in openclaw-cli
+
     Some Docker Desktop setups fail DNS lookups from the shared-network
     `openclaw-cli` sidecar after `NET_RAW` is dropped, which shows up as
     `EAI_AGAIN` during npm-backed commands such as `openclaw plugins install`.
@@ -366,7 +387,7 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     command that needs package registry access, not as your default Compose
     invocation:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     printf '%s\n' \
       'services:' \
       '  openclaw-cli:' \
@@ -379,13 +400,16 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     If you already created a long-running `openclaw-cli` container, recreate it
     with the same override. `docker compose exec` and `docker exec` cannot
     change Linux capabilities on an already-created container.
-  </Accordion>
 
-  <Accordion title="Permissions and EACCES">
+
+
+
+Permissions and EACCES
+
     The image runs as `node` (uid 1000). If you see permission errors on
     `/home/node/.openclaw`, make sure your host bind mounts are owned by uid 1000:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     sudo chown -R 1000:1000 /path/to/openclaw-config /path/to/openclaw-workspace
     ```
 
@@ -396,13 +420,16 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     default uid 1000 and fixing the bind mount ownership. Only chown
     `/path/to/openclaw-config/npm` to `root:root` if you intentionally run
     OpenClaw as root long term.
-  </Accordion>
 
-  <Accordion title="Faster rebuilds">
+
+
+
+Faster rebuilds
+
     Order your Dockerfile so dependency layers are cached. This avoids re-running
     `pnpm install` unless lockfiles change:
 
-    ```dockerfile theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```dockerfile
     FROM node:24-bookworm
     RUN curl -fsSL https://bun.sh/install | bash
     ENV PATH="/root/.bun/bin:${PATH}"
@@ -419,9 +446,12 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     ENV NODE_ENV=production
     CMD ["node","dist/index.js"]
     ```
-  </Accordion>
 
-  <Accordion title="Power-user container options">
+
+
+
+Power-user container options
+
     The default image is security-first and runs as non-root `node`. For a more
     full-featured container:
 
@@ -430,29 +460,33 @@ See [ClawDock](/install/clawdock) for the full helper guide.
     3. **Bake Python deps**: `export OPENCLAW_IMAGE_PIP_PACKAGES="requests==2.32.5 humanize==4.14.0"`
     4. **Bake Playwright Chromium**: `export OPENCLAW_INSTALL_BROWSER=1`
     5. **Or install Playwright browsers into a persisted volume**:
-       ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+       ```bash
        docker compose run --rm openclaw-cli \
          node /app/node_modules/playwright-core/cli.js install chromium
        ```
     6. **Persist browser downloads**: use `OPENCLAW_HOME_VOLUME` or
        `OPENCLAW_EXTRA_MOUNTS`. OpenClaw auto-detects the Docker image's
        Playwright-managed Chromium on Linux.
-  </Accordion>
 
-  <Accordion title="OpenAI Codex OAuth (headless Docker)">
+
+
+
+OpenAI Codex OAuth (headless Docker)
+
     If you pick OpenAI Codex OAuth in the wizard, it opens a browser URL. In
     Docker or headless setups, copy the full redirect URL you land on and paste
     it back into the wizard to finish auth.
-  </Accordion>
 
-  <Accordion title="Base image metadata">
+
+
+Base image metadata
+
     The main Docker runtime image uses `node:24-bookworm-slim` and includes `tini` as the entrypoint init process (PID 1) to ensure zombie processes are reaped and signals are handled correctly in long-running containers. It publishes OCI base-image annotations including `org.opencontainers.image.base.name`,
     `org.opencontainers.image.source`, and others. The Node base digest is
     refreshed through Dependabot Docker base-image PRs; release builds do not run
     a distro upgrade layer. See
     [OCI image annotations](https://github.com/opencontainers/image-spec/blob/main/annotations.md).
-  </Accordion>
-</AccordionGroup>
+
 
 ### Running on a VPS?
 
@@ -475,13 +509,13 @@ containers.
 
 For full configuration, images, security notes, and multi-agent profiles, see:
 
-* [Sandboxing](/gateway/sandboxing) -- complete sandbox reference
-* [OpenShell](/gateway/openshell) -- interactive shell access to sandbox containers
-* [Multi-Agent Sandbox and Tools](/tools/multi-agent-sandbox-tools) -- per-agent overrides
+- [Sandboxing](/gateway/sandboxing) -- complete sandbox reference
+- [OpenShell](/gateway/openshell) -- interactive shell access to sandbox containers
+- [Multi-Agent Sandbox and Tools](/tools/multi-agent-sandbox-tools) -- per-agent overrides
 
 ### Quick enable
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -496,7 +530,7 @@ For full configuration, images, security notes, and multi-agent profiles, see:
 
 Build the default sandbox image (from a source checkout):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 scripts/sandbox-setup.sh
 ```
 
@@ -504,56 +538,72 @@ For npm installs without a source checkout, see [Sandboxing § Images and setup]
 
 ## Troubleshooting
 
-<AccordionGroup>
-  <Accordion title="Image missing or sandbox container not starting">
+AccordionGroup
+
+
+Image missing or sandbox container not starting
+
     Build the sandbox image with
     [`scripts/sandbox-setup.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/sandbox-setup.sh)
     (source checkout) or the inline `docker build` command from [Sandboxing § Images and setup](/gateway/sandboxing#images-and-setup) (npm install),
     or set `agents.defaults.sandbox.docker.image` to your custom image.
     Containers are auto-created per session on demand.
-  </Accordion>
 
-  <Accordion title="Permission errors in sandbox">
+
+
+Permission errors in sandbox
+
     Set `docker.user` to a UID:GID that matches your mounted workspace ownership,
     or chown the workspace folder.
-  </Accordion>
 
-  <Accordion title="Custom tools not found in sandbox">
+
+
+Custom tools not found in sandbox
+
     OpenClaw runs commands with `sh -lc` (login shell), which sources
     `/etc/profile` and may reset PATH. Set `docker.env.PATH` to prepend your
     custom tool paths, or add a script under `/etc/profile.d/` in your Dockerfile.
-  </Accordion>
 
-  <Accordion title="OOM-killed during image build (exit 137)">
+
+
+OOM-killed during image build (exit 137)
+
     The VM needs at least 2 GB RAM. Use a larger machine class and retry.
-  </Accordion>
 
-  <Accordion title="Unauthorized or pairing required in Control UI">
+
+
+Unauthorized or pairing required in Control UI
+
     Fetch a fresh dashboard link and approve the browser device:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli dashboard --no-open
     docker compose run --rm openclaw-cli devices list
     docker compose run --rm openclaw-cli devices approve <requestId>
     ```
 
     More detail: [Dashboard](/web/dashboard), [Devices](/cli/devices).
-  </Accordion>
 
-  <Accordion title="Gateway target shows ws://172.x.x.x or pairing errors from Docker CLI">
+
+
+
+Gateway target shows ws://172.x.x.x or pairing errors from Docker CLI
+
     Reset gateway mode and bind:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     docker compose run --rm openclaw-cli config set --batch-json '[{"path":"gateway.mode","value":"local"},{"path":"gateway.bind","value":"lan"}]'
     docker compose run --rm openclaw-cli devices list --url ws://127.0.0.1:18789
     ```
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-* [Install Overview](/install) — all installation methods
-* [Podman](/install/podman) — Podman alternative to Docker
-* [ClawDock](/install/clawdock) — Docker Compose community setup
-* [Updating](/install/updating) — keeping OpenClaw up to date
-* [Configuration](/gateway/configuration) — gateway configuration after install
+- [Install Overview](/install) — all installation methods
+- [Podman](/install/podman) — Podman alternative to Docker
+- [ClawDock](/install/clawdock) — Docker Compose community setup
+- [Updating](/install/updating) — keeping OpenClaw up to date
+- [Configuration](/gateway/configuration) — gateway configuration after install
+
+---

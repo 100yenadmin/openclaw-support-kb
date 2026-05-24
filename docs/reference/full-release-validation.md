@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Full release validation"
 source: "https://docs.openclaw.ai/reference/full-release-validation"
-source_hash: "7807b0cdb808433ba7076ee15ffc1c2d99fe9b0047f1d02f8593b0b0cc5a7fac"
+source_hash: "ddfcb8108389b653263b24a83588d5e1029d2d26e1ba2b3d9c56cd5dc3123edb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/full-release-validation.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Full release validation
 Source: https://docs.openclaw.ai/reference/full-release-validation
 
-
-
 `Full Release Validation` is the release umbrella. It is the single manual
 entrypoint for pre-release proof, but most work happens in child workflows so a
 failed box can be rerun without restarting the whole release.
@@ -22,7 +20,7 @@ failed box can be rerun without restarting the whole release.
 Run it from a trusted workflow ref, normally `main`, and pass the release branch,
 tag, or full commit SHA as `ref`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 gh workflow run full-release-validation.yml \
   --ref main \
   -f ref=release/YYYY.M.D \
@@ -193,18 +191,20 @@ workflow first, then rerun the smallest matching handle above.
 
 Useful artifacts:
 
-* `release-package-under-test` from the Full Release Validation parent and `OpenClaw Release Checks`
-* Docker release-path artifacts under `.artifacts/docker-tests/`
-* Package Acceptance `package-under-test` and Docker acceptance artifacts
-* Cross-OS release-check artifacts for each OS and suite
-* QA parity, Matrix, and Telegram artifacts
+- `release-package-under-test` from the Full Release Validation parent and `OpenClaw Release Checks`
+- Docker release-path artifacts under `.artifacts/docker-tests/`
+- Package Acceptance `package-under-test` and Docker acceptance artifacts
+- Cross-OS release-check artifacts for each OS and suite
+- QA parity, Matrix, and Telegram artifacts
 
 ## Workflow files
 
-* `.github/workflows/full-release-validation.yml`
-* `.github/workflows/openclaw-release-checks.yml`
-* `.github/workflows/openclaw-live-and-e2e-checks-reusable.yml`
-* `.github/workflows/plugin-prerelease.yml`
-* `.github/workflows/install-smoke.yml`
-* `.github/workflows/openclaw-cross-os-release-checks-reusable.yml`
-* `.github/workflows/package-acceptance.yml`
+- `.github/workflows/full-release-validation.yml`
+- `.github/workflows/openclaw-release-checks.yml`
+- `.github/workflows/openclaw-live-and-e2e-checks-reusable.yml`
+- `.github/workflows/plugin-prerelease.yml`
+- `.github/workflows/install-smoke.yml`
+- `.github/workflows/openclaw-cross-os-release-checks-reusable.yml`
+- `.github/workflows/package-acceptance.yml`
+
+---

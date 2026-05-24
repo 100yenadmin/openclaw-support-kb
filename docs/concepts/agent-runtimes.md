@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "4e5abbeff0259aa85e9187b2ce6cfa97d691d8c37783cd4b9f70d208ce935664"
+source_hash: "1e0e65fbb56aec06f30d29c2a9b9df4fa23d18cbe402ef9b8277203c9a909807"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-runtimes.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Agent runtimes
 Source: https://docs.openclaw.ai/concepts/agent-runtimes
-
-
 
 An **agent runtime** is the component that owns one prepared model loop: it
 receives the prompt, drives model output, handles native tool calls, and returns
@@ -39,10 +37,10 @@ runtime policy where needed.
 
 There are two runtime families:
 
-* **Embedded harnesses** run inside OpenClaw's prepared agent loop. Today this
+- **Embedded harnesses** run inside OpenClaw's prepared agent loop. Today this
   is the built-in `pi` runtime plus registered plugin harnesses such as
   `codex`.
-* **CLI backends** run a local CLI process while keeping the model ref
+- **CLI backends** run a local CLI process while keeping the model ref
   canonical. For example, `anthropic/claude-opus-4-7` with
   a model-scoped `agentRuntime.id: "claude-cli"` means "select the Anthropic
   model, execute through Claude CLI." `claude-cli` is not an embedded harness id
@@ -69,7 +67,7 @@ non-agent OpenAI API surface is being used.
 The common ChatGPT/Codex subscription setup uses Codex OAuth for auth, but keeps
 the model ref as `openai/*` and selects the `codex` runtime:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -139,9 +137,9 @@ Different runtimes own different amounts of the loop.
 
 This ownership split is the main design rule:
 
-* If OpenClaw owns the surface, OpenClaw can provide normal plugin hook behavior.
-* If the native runtime owns the surface, OpenClaw needs runtime events or native hooks.
-* If the native runtime owns canonical thread state, OpenClaw should mirror and project context, not rewrite unsupported internals.
+- If OpenClaw owns the surface, OpenClaw can provide normal plugin hook behavior.
+- If the native runtime owns the surface, OpenClaw needs runtime events or native hooks.
+- If the native runtime owns canonical thread state, OpenClaw should mirror and project context, not rewrite unsupported internals.
 
 ## Runtime selection
 
@@ -174,7 +172,7 @@ selection/runtime error; it is never silently routed back to PI.
 CLI backend aliases are different from embedded harness ids. The preferred
 Claude CLI form is:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -233,19 +231,21 @@ The Codex runtime support contract is documented in
 Status output may show both `Execution` and `Runtime` labels. Read them as
 diagnostics, not as provider names.
 
-* A model ref such as `openai/gpt-5.5` tells you the selected provider/model.
-* A runtime id such as `codex` tells you which loop is executing the turn.
-* A channel label such as Telegram or Discord tells you where the conversation is happening.
+- A model ref such as `openai/gpt-5.5` tells you the selected provider/model.
+- A runtime id such as `codex` tells you which loop is executing the turn.
+- A channel label such as Telegram or Discord tells you where the conversation is happening.
 
 If a run still shows an unexpected runtime, inspect the selected provider/model
 runtime policy first. Legacy session runtime pins no longer decide routing.
 
 ## Related
 
-* [Codex harness](/plugins/codex-harness)
-* [Codex harness runtime](/plugins/codex-harness-runtime)
-* [OpenAI](/providers/openai)
-* [Agent harness plugins](/plugins/sdk-agent-harness)
-* [Agent loop](/concepts/agent-loop)
-* [Models](/concepts/models)
-* [Status](/cli/status)
+- [Codex harness](/plugins/codex-harness)
+- [Codex harness runtime](/plugins/codex-harness-runtime)
+- [OpenAI](/providers/openai)
+- [Agent harness plugins](/plugins/sdk-agent-harness)
+- [Agent loop](/concepts/agent-loop)
+- [Models](/concepts/models)
+- [Status](/cli/status)
+
+---

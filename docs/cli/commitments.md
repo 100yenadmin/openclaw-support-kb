@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw commitments`"
 source: "https://docs.openclaw.ai/cli/commitments"
-source_hash: "b4d5aeaa67a57f701f17a778e9e897e2e62d8ba9c351af8577f69038f59bc760"
+source_hash: "8ba9a300374d10def54dd32e716a522d121267a099666d4e8553d49a82ad7754"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/commitments.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # `openclaw commitments`
 Source: https://docs.openclaw.ai/cli/commitments
-
-
 
 List and manage inferred follow-up commitments.
 
@@ -25,7 +23,7 @@ With no subcommand, `openclaw commitments` lists pending commitments.
 
 ## Usage
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments [--all] [--agent <id>] [--status <status>] [--json]
 openclaw commitments list [--all] [--agent <id>] [--status <status>] [--json]
 openclaw commitments dismiss <id...> [--json]
@@ -33,47 +31,47 @@ openclaw commitments dismiss <id...> [--json]
 
 ## Options
 
-* `--all`: show all statuses instead of only pending commitments.
-* `--agent <id>`: filter to one agent id.
-* `--status <status>`: filter by status. Values: `pending`, `sent`,
+- `--all`: show all statuses instead of only pending commitments.
+- `--agent <id>`: filter to one agent id.
+- `--status <status>`: filter by status. Values: `pending`, `sent`,
   `dismissed`, `snoozed`, or `expired`.
-* `--json`: output machine-readable JSON.
+- `--json`: output machine-readable JSON.
 
 ## Examples
 
 List pending commitments:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments
 ```
 
 List every stored commitment:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments --all
 ```
 
 Filter to one agent:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments --agent main
 ```
 
 Find snoozed commitments:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments --status snoozed
 ```
 
 Dismiss one or more commitments:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments dismiss cm_abc123 cm_def456
 ```
 
 Export as JSON:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw commitments --all --json
 ```
 
@@ -81,18 +79,20 @@ openclaw commitments --all --json
 
 Text output includes:
 
-* commitment id
-* status
-* kind
-* earliest due time
-* scope
-* suggested check-in text
+- commitment id
+- status
+- kind
+- earliest due time
+- scope
+- suggested check-in text
 
 JSON output also includes the commitment store path and full stored records.
 
 ## Related
 
-* [Inferred commitments](/concepts/commitments)
-* [Memory overview](/concepts/memory)
-* [Heartbeat](/gateway/heartbeat)
-* [Scheduled tasks](/automation/cron-jobs)
+- [Inferred commitments](/concepts/commitments)
+- [Memory overview](/concepts/memory)
+- [Heartbeat](/gateway/heartbeat)
+- [Scheduled tasks](/automation/cron-jobs)
+
+---

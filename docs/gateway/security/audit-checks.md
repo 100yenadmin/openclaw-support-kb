@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "eb123f4db2ba150f2a899d412a075f7a412d9bd3d1a7dd581d177a626269a4c1"
+source_hash: "860954f8d2ff3d248040b83a86ca56eed3886c1a69443b6f9356588996477c5f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Security audit checks
 Source: https://docs.openclaw.ai/gateway/security/audit-checks
-
-
 
 `openclaw security audit` emits structured findings keyed by `checkId`. This
 page is the reference catalog for those IDs. For the high-level threat model
@@ -120,7 +118,7 @@ exhaustive):
 | `security.exposure.open_channels_with_exec`                   | warn/critical | Shared/public rooms can reach exec-enabled agents                                    | `channels.*.dmPolicy`, `channels.*.groupPolicy`, `tools.exec.*`, `agents.list[].tools.exec.*`        | no       |
 | `security.exposure.open_groups_with_elevated`                 | critical      | Open groups + elevated tools create high-impact prompt-injection paths               | `channels.*.groupPolicy`, `tools.elevated.*`                                                         | no       |
 | `security.exposure.open_groups_with_runtime_or_fs`            | critical/warn | Open groups can reach command/file tools without sandbox/workspace guards            | `channels.*.groupPolicy`, `tools.profile/deny`, `tools.fs.workspaceOnly`, `agents.*.sandbox.mode`    | no       |
-| `security.trust_model.multi_user_heuristic`                   | warn          | Config looks multi-user while gateway trust model is personal-assistant              | split trust boundaries, or shared-user hardening (`sandbox.mode`, tool deny/workspace scoping\`)     | no       |
+| `security.trust_model.multi_user_heuristic`                   | warn          | Config looks multi-user while gateway trust model is personal-assistant              | split trust boundaries, or shared-user hardening (`sandbox.mode`, tool deny/workspace scoping`)      | no       |
 | `tools.profile_minimal_overridden`                            | warn          | Agent overrides bypass global minimal profile                                        | `agents.list[].tools.profile`                                                                        | no       |
 | `plugins.tools_reachable_permissive_policy`                   | warn          | Extension tools reachable in permissive contexts                                     | `tools.profile` + tool allow/deny                                                                    | no       |
 | `models.legacy`                                               | warn          | Legacy model families are still configured                                           | model selection                                                                                      | no       |
@@ -130,6 +128,8 @@ exhaustive):
 
 ## Related
 
-* [Security](/gateway/security)
-* [Configuration](/gateway/configuration)
-* [Trusted proxy auth](/gateway/trusted-proxy-auth)
+- [Security](/gateway/security)
+- [Configuration](/gateway/configuration)
+- [Trusted proxy auth](/gateway/trusted-proxy-auth)
+
+---

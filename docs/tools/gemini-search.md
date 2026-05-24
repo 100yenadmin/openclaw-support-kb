@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gemini search"
 source: "https://docs.openclaw.ai/tools/gemini-search"
-source_hash: "a8a7f1ca17b87c39f08503fa0dd41e17d97f7dad0e77671a78ce77488a19cb19"
+source_hash: "9bdbc18fa0dbf46fca7c36a547794c74a83c87cd9386afee8c0b15fa6bf99892"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/gemini-search.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Gemini search
 Source: https://docs.openclaw.ai/tools/gemini-search
 
-
-
 OpenClaw supports Gemini models with built-in
 [Google Search grounding](https://ai.google.dev/gemini-api/docs/grounding),
 which returns AI-synthesized answers backed by live Google Search results with
@@ -22,25 +20,29 @@ citations.
 
 ## Get an API key
 
-<Steps>
-  <Step title="Create a key">
+Steps
+
+
+Create a key
+
     Go to [Google AI Studio](https://aistudio.google.com/apikey) and create an
     API key.
-  </Step>
 
-  <Step title="Store the key">
+
+Store the key
+
     Set `GEMINI_API_KEY` in the Gateway environment, reuse
     `models.providers.google.apiKey`, or configure a dedicated web-search key via:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw configure --section web
     ```
-  </Step>
-</Steps>
+
+
 
 ## Config
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -80,11 +82,11 @@ Gemini uses Google Search grounding to produce AI-synthesized answers with
 inline citations. The results include both the synthesized answer and the source
 URLs.
 
-* Citation URLs from Gemini grounding are automatically resolved from Google
+- Citation URLs from Gemini grounding are automatically resolved from Google
   redirect URLs to direct URLs.
-* Redirect resolution uses the SSRF guard path (HEAD + redirect checks +
+- Redirect resolution uses the SSRF guard path (HEAD + redirect checks +
   http/https validation) before returning the final citation URL.
-* Redirect resolution uses strict SSRF defaults, so redirects to
+- Redirect resolution uses strict SSRF defaults, so redirects to
   private/internal targets are blocked.
 
 ## Supported parameters
@@ -117,6 +119,8 @@ as provided after trimming trailing slashes.
 
 ## Related
 
-* [Web Search overview](/tools/web) -- all providers and auto-detection
-* [Brave Search](/tools/brave-search) -- structured results with snippets
-* [Perplexity Search](/tools/perplexity-search) -- structured results + content extraction
+- [Web Search overview](/tools/web) -- all providers and auto-detection
+- [Brave Search](/tools/brave-search) -- structured results with snippets
+- [Perplexity Search](/tools/perplexity-search) -- structured results + content extraction
+
+---

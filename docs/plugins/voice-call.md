@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "9d5c5353a3955e8489835c9328021369e4aa4fbbdea89ea02ee3c0eebd7b4037"
+source_hash: "349756ef3d06f1c23cd71d6072c51a367547b8430f31a6a9e71aa6dd9fb097cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Voice call plugin
 Source: https://docs.openclaw.ai/plugins/voice-call
 
-
-
 Voice calls for OpenClaw via a plugin. Supports outbound notifications,
 multi-turn conversations, full-duplex realtime voice, streaming
 transcription, and inbound calls with allowlist policies.
@@ -23,47 +21,58 @@ transcription, and inbound calls with allowlist policies.
 `telnyx` (Call Control v2), `plivo` (Voice API + XML transfer + GetInput
 speech), `mock` (dev/no network).
 
-<Note>
-  The Voice Call plugin runs **inside the Gateway process**. If you use a
-  remote Gateway, install and configure the plugin on the machine running
-  the Gateway, then restart the Gateway to load it.
-</Note>
+Note
+
+The Voice Call plugin runs **inside the Gateway process**. If you use a
+remote Gateway, install and configure the plugin on the machine running
+the Gateway, then restart the Gateway to load it.
 
 ## Quick start
 
-<Steps>
-  <Step title="Install the plugin">
-    <Tabs>
-      <Tab title="From npm">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Install the plugin
+
+
+Tabs
+
+
+From npm
+
+        ```bash
         openclaw plugins install @openclaw/voice-call
         ```
-      </Tab>
 
-      <Tab title="From a local folder (dev)">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+From a local folder (dev)
+
+        ```bash
         PLUGIN_SRC=./path/to/local/voice-call-plugin
         openclaw plugins install "$PLUGIN_SRC"
         cd "$PLUGIN_SRC" && pnpm install
         ```
-      </Tab>
-    </Tabs>
+
+
 
     Use the bare package to follow the current official release tag. Pin an
     exact version only when you need a reproducible install.
 
     Restart the Gateway afterwards so the plugin loads.
-  </Step>
 
-  <Step title="Configure provider and webhook">
+
+
+Configure provider and webhook
+
     Set config under `plugins.entries.voice-call.config` (see
     [Configuration](#configuration) below for the full shape). At minimum:
     `provider`, provider credentials, `fromNumber`, and a publicly
     reachable webhook URL.
-  </Step>
 
-  <Step title="Verify setup">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify setup
+
+    ```bash
     openclaw voicecall setup
     ```
 
@@ -71,10 +80,12 @@ speech), `mock` (dev/no network).
     plugin enablement, provider credentials, webhook exposure, and that
     only one audio mode (`streaming` or `realtime`) is active. Use
     `--json` for scripts.
-  </Step>
 
-  <Step title="Smoke test">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Smoke test
+
+    ```bash
     openclaw voicecall smoke
     openclaw voicecall smoke --to "+15555550123"
     ```
@@ -82,18 +93,18 @@ speech), `mock` (dev/no network).
     Both are dry runs by default. Add `--yes` to actually place a short
     outbound notify call:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw voicecall smoke --to "+15555550123" --yes
     ```
-  </Step>
-</Steps>
 
-<Warning>
-  For Twilio, Telnyx, and Plivo, setup must resolve to a **public webhook URL**.
-  If `publicUrl`, the tunnel URL, the Tailscale URL, or the serve fallback
-  resolves to loopback or private network space, setup fails instead of
-  starting a provider that cannot receive carrier webhooks.
-</Warning>
+
+
+Warning
+
+For Twilio, Telnyx, and Plivo, setup must resolve to a **public webhook URL**.
+If `publicUrl`, the tunnel URL, the Tailscale URL, or the serve fallback
+resolves to loopback or private network space, setup fails instead of
+starting a provider that cannot receive carrier webhooks.
 
 ## Configuration
 
@@ -102,11 +113,11 @@ Gateway startup logs a setup-incomplete warning with the missing keys and
 skips starting the runtime. Commands, RPC calls, and agent tools still
 return the exact missing provider configuration when used.
 
-<Note>
-  Voice-call credentials accept SecretRefs. `plugins.entries.voice-call.config.twilio.authToken`, `plugins.entries.voice-call.config.realtime.providers.*.apiKey`, `plugins.entries.voice-call.config.streaming.providers.*.apiKey`, and `plugins.entries.voice-call.config.tts.providers.*.apiKey` resolve through the standard SecretRef surface; see [SecretRef credential surface](/reference/secretref-credential-surface).
-</Note>
+Note
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Voice-call credentials accept SecretRefs. `plugins.entries.voice-call.config.twilio.authToken`, `plugins.entries.voice-call.config.realtime.providers.*.apiKey`, `plugins.entries.voice-call.config.streaming.providers.*.apiKey`, and `plugins.entries.voice-call.config.tts.providers.*.apiKey` resolve through the standard SecretRef surface; see [SecretRef credential surface](/reference/secretref-credential-surface).
+
+```json5
 {
   plugins: {
     entries: {
@@ -175,25 +186,32 @@ return the exact missing provider configuration when used.
 }
 ```
 
-<AccordionGroup>
-  <Accordion title="Provider exposure and security notes">
-    * Twilio, Telnyx, and Plivo all require a **publicly reachable** webhook URL.
-    * `mock` is a local dev provider (no network calls).
-    * Telnyx requires `telnyx.publicKey` (or `TELNYX_PUBLIC_KEY`) unless `skipSignatureVerification` is true.
-    * `skipSignatureVerification` is for local testing only.
-    * On ngrok free tier, set `publicUrl` to the exact ngrok URL; signature verification is always enforced.
-    * `tunnel.allowNgrokFreeTierLoopbackBypass: true` allows Twilio webhooks with invalid signatures **only** when `tunnel.provider="ngrok"` and `serve.bind` is loopback (ngrok local agent). Local dev only.
-    * Ngrok free-tier URLs can change or add interstitial behaviour; if `publicUrl` drifts, Twilio signatures fail. Production: prefer a stable domain or a Tailscale funnel.
-  </Accordion>
+AccordionGroup
 
-  <Accordion title="Streaming connection caps">
-    * `streaming.preStartTimeoutMs` closes sockets that never send a valid `start` frame.
-    * `streaming.maxPendingConnections` caps total unauthenticated pre-start sockets.
-    * `streaming.maxPendingConnectionsPerIp` caps unauthenticated pre-start sockets per source IP.
-    * `streaming.maxConnections` caps total open media stream sockets (pending + active).
-  </Accordion>
 
-  <Accordion title="Legacy config migrations">
+Provider exposure and security notes
+
+    - Twilio, Telnyx, and Plivo all require a **publicly reachable** webhook URL.
+    - `mock` is a local dev provider (no network calls).
+    - Telnyx requires `telnyx.publicKey` (or `TELNYX_PUBLIC_KEY`) unless `skipSignatureVerification` is true.
+    - `skipSignatureVerification` is for local testing only.
+    - On ngrok free tier, set `publicUrl` to the exact ngrok URL; signature verification is always enforced.
+    - `tunnel.allowNgrokFreeTierLoopbackBypass: true` allows Twilio webhooks with invalid signatures **only** when `tunnel.provider="ngrok"` and `serve.bind` is loopback (ngrok local agent). Local dev only.
+    - Ngrok free-tier URLs can change or add interstitial behaviour; if `publicUrl` drifts, Twilio signatures fail. Production: prefer a stable domain or a Tailscale funnel.
+
+
+
+Streaming connection caps
+
+    - `streaming.preStartTimeoutMs` closes sockets that never send a valid `start` frame.
+    - `streaming.maxPendingConnections` caps total unauthenticated pre-start sockets.
+    - `streaming.maxPendingConnectionsPerIp` caps unauthenticated pre-start sockets per source IP.
+    - `streaming.maxConnections` caps total open media stream sockets (pending + active).
+
+
+
+Legacy config migrations
+
     Older configs using `provider: "log"`, `twilio.from`, or legacy
     `streaming.*` OpenAI keys are rewritten by `openclaw doctor --fix`.
     Runtime fallback still accepts the old voice-call keys for now, but
@@ -202,13 +220,13 @@ return the exact missing provider configuration when used.
 
     Auto-migrated streaming keys:
 
-    * `streaming.sttProvider` → `streaming.provider`
-    * `streaming.openaiApiKey` → `streaming.providers.openai.apiKey`
-    * `streaming.sttModel` → `streaming.providers.openai.model`
-    * `streaming.silenceDurationMs` → `streaming.providers.openai.silenceDurationMs`
-    * `streaming.vadThreshold` → `streaming.providers.openai.vadThreshold`
-  </Accordion>
-</AccordionGroup>
+    - `streaming.sttProvider` → `streaming.provider`
+    - `streaming.openaiApiKey` → `streaming.providers.openai.apiKey`
+    - `streaming.sttModel` → `streaming.providers.openai.model`
+    - `streaming.silenceDurationMs` → `streaming.providers.openai.silenceDurationMs`
+    - `streaming.vadThreshold` → `streaming.providers.openai.vadThreshold`
+
+
 
 ## Session scope
 
@@ -224,23 +242,23 @@ represent different meetings.
 audio. It is separate from `streaming`, which only forwards audio to
 realtime transcription providers.
 
-<Warning>
-  `realtime.enabled` cannot be combined with `streaming.enabled`. Pick one
-  audio mode per call.
-</Warning>
+Warning
+
+`realtime.enabled` cannot be combined with `streaming.enabled`. Pick one
+audio mode per call.
 
 Current runtime behaviour:
 
-* `realtime.enabled` is supported for Twilio Media Streams.
-* `realtime.provider` is optional. If unset, Voice Call uses the first registered realtime voice provider.
-* Bundled realtime voice providers: Google Gemini Live (`google`) and OpenAI (`openai`), registered by their provider plugins.
-* Provider-owned raw config lives under `realtime.providers.<providerId>`.
-* Voice Call exposes the shared `openclaw_agent_consult` realtime tool by default. The realtime model can call it when the caller asks for deeper reasoning, current information, or normal OpenClaw tools.
-* `realtime.consultPolicy` optionally adds guidance for when the realtime model should call `openclaw_agent_consult`.
-* `realtime.agentContext.enabled` is default-off. When enabled, Voice Call injects a bounded agent identity, system prompt override, and selected workspace-file capsule into the realtime provider instructions at session setup.
-* `realtime.fastContext.enabled` is default-off. When enabled, Voice Call first searches indexed memory/session context for the consult question and returns those snippets to the realtime model within `realtime.fastContext.timeoutMs` before falling back to the full consult agent only if `realtime.fastContext.fallbackToConsult` is true.
-* If `realtime.provider` points at an unregistered provider, or no realtime voice provider is registered at all, Voice Call logs a warning and skips realtime media instead of failing the whole plugin.
-* Consult session keys reuse the stored call session when available, then fall back to the configured `sessionScope` (`per-phone` by default, or `per-call` for isolated calls).
+- `realtime.enabled` is supported for Twilio Media Streams.
+- `realtime.provider` is optional. If unset, Voice Call uses the first registered realtime voice provider.
+- Bundled realtime voice providers: Google Gemini Live (`google`) and OpenAI (`openai`), registered by their provider plugins.
+- Provider-owned raw config lives under `realtime.providers.<providerId>`.
+- Voice Call exposes the shared `openclaw_agent_consult` realtime tool by default. The realtime model can call it when the caller asks for deeper reasoning, current information, or normal OpenClaw tools.
+- `realtime.consultPolicy` optionally adds guidance for when the realtime model should call `openclaw_agent_consult`.
+- `realtime.agentContext.enabled` is default-off. When enabled, Voice Call injects a bounded agent identity, system prompt override, and selected workspace-file capsule into the realtime provider instructions at session setup.
+- `realtime.fastContext.enabled` is default-off. When enabled, Voice Call first searches indexed memory/session context for the consult question and returns those snippets to the realtime model within `realtime.fastContext.timeoutMs` before falling back to the full consult agent only if `realtime.fastContext.fallbackToConsult` is true.
+- If `realtime.provider` points at an unregistered provider, or no realtime voice provider is registered at all, Voice Call logs a warning and skips realtime media instead of failing the whole plugin.
+- Consult session keys reuse the stored call session when available, then fall back to the configured `sessionScope` (`per-phone` by default, or `per-call` for isolated calls).
 
 ### Tool policy
 
@@ -269,7 +287,7 @@ created, so it does not add per-turn latency. Calls to
 `openclaw_agent_consult` still run the full OpenClaw agent and should be used
 for tool work, current information, memory lookups, or workspace state.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -299,8 +317,11 @@ for tool work, current information, memory lookups, or workspace state.
 
 ### Realtime provider examples
 
-<Tabs>
-  <Tab title="Google Gemini Live">
+Tabs
+
+
+Google Gemini Live
+
     Defaults: API key from `realtime.providers.google.apiKey`,
     `GEMINI_API_KEY`, or `GOOGLE_GENERATIVE_AI_API_KEY`; model
     `gemini-2.5-flash-native-audio-preview-12-2025`; voice `Kore`.
@@ -308,7 +329,7 @@ for tool work, current information, memory lookups, or workspace state.
     reconnectable calls. Use `silenceDurationMs`, `startSensitivity`, and
     `endSensitivity` to tune faster turn-taking on telephony audio.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -342,10 +363,12 @@ for tool work, current information, memory lookups, or workspace state.
       },
     }
     ```
-  </Tab>
 
-  <Tab title="OpenAI">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+OpenAI
+
+    ```json5
     {
       plugins: {
         entries: {
@@ -364,8 +387,7 @@ for tool work, current information, memory lookups, or workspace state.
       },
     }
     ```
-  </Tab>
-</Tabs>
+
 
 See [Google provider](/providers/google) and
 [OpenAI provider](/providers/openai) for provider-specific realtime voice
@@ -377,21 +399,24 @@ options.
 
 Current runtime behavior:
 
-* `streaming.provider` is optional. If unset, Voice Call uses the first registered realtime transcription provider.
-* Bundled realtime transcription providers: Deepgram (`deepgram`), ElevenLabs (`elevenlabs`), Mistral (`mistral`), OpenAI (`openai`), and xAI (`xai`), registered by their provider plugins.
-* Provider-owned raw config lives under `streaming.providers.<providerId>`.
-* After Twilio sends an accepted stream `start` message, Voice Call registers the stream immediately, queues inbound media through the transcription provider while the provider connects, and starts the initial greeting only after realtime transcription is ready.
-* If `streaming.provider` points at an unregistered provider, or none is registered, Voice Call logs a warning and skips media streaming instead of failing the whole plugin.
+- `streaming.provider` is optional. If unset, Voice Call uses the first registered realtime transcription provider.
+- Bundled realtime transcription providers: Deepgram (`deepgram`), ElevenLabs (`elevenlabs`), Mistral (`mistral`), OpenAI (`openai`), and xAI (`xai`), registered by their provider plugins.
+- Provider-owned raw config lives under `streaming.providers.<providerId>`.
+- After Twilio sends an accepted stream `start` message, Voice Call registers the stream immediately, queues inbound media through the transcription provider while the provider connects, and starts the initial greeting only after realtime transcription is ready.
+- If `streaming.provider` points at an unregistered provider, or none is registered, Voice Call logs a warning and skips media streaming instead of failing the whole plugin.
 
 ### Streaming provider examples
 
-<Tabs>
-  <Tab title="OpenAI">
+Tabs
+
+
+OpenAI
+
     Defaults: API key `streaming.providers.openai.apiKey` or
     `OPENAI_API_KEY`; model `gpt-4o-transcribe`; `silenceDurationMs: 800`;
     `vadThreshold: 0.5`.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -416,14 +441,16 @@ Current runtime behavior:
       },
     }
     ```
-  </Tab>
 
-  <Tab title="xAI">
+
+
+xAI
+
     Defaults: API key `streaming.providers.xai.apiKey` or `XAI_API_KEY`;
     endpoint `wss://api.x.ai/v1/stt`; encoding `mulaw`; sample rate `8000`;
     `endpointingMs: 800`; `interimResults: true`.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -447,8 +474,8 @@ Current runtime behavior:
       },
     }
     ```
-  </Tab>
-</Tabs>
+
+
 
 ## TTS for calls
 
@@ -456,7 +483,7 @@ Voice Call uses the core `messages.tts` configuration for streaming
 speech on calls. You can override it under the plugin config with the
 **same shape** — it deep-merges with `messages.tts`.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tts: {
     provider: "elevenlabs",
@@ -470,91 +497,97 @@ speech on calls. You can override it under the plugin config with the
 }
 ```
 
-<Warning>
-  **Microsoft speech is ignored for voice calls.** Telephony audio needs PCM;
-  the current Microsoft transport does not expose telephony PCM output.
-</Warning>
+Warning
+
+**Microsoft speech is ignored for voice calls.** Telephony audio needs PCM;
+the current Microsoft transport does not expose telephony PCM output.
 
 Behavior notes:
 
-* Legacy `tts.<provider>` keys inside plugin config (`openai`, `elevenlabs`, `microsoft`, `edge`) are repaired by `openclaw doctor --fix`; committed config should use `tts.providers.<provider>`.
-* Core TTS is used when Twilio media streaming is enabled; otherwise calls fall back to provider-native voices.
-* If a Twilio media stream is already active, Voice Call does not fall back to TwiML `<Say>`. If telephony TTS is unavailable in that state, the playback request fails instead of mixing two playback paths.
-* When telephony TTS falls back to a secondary provider, Voice Call logs a warning with the provider chain (`from`, `to`, `attempts`) for debugging.
-* When Twilio barge-in or stream teardown clears the pending TTS queue, queued playback requests settle instead of hanging callers awaiting playback completion.
+- Legacy `tts.<provider>` keys inside plugin config (`openai`, `elevenlabs`, `microsoft`, `edge`) are repaired by `openclaw doctor --fix`; committed config should use `tts.providers.<provider>`.
+- Core TTS is used when Twilio media streaming is enabled; otherwise calls fall back to provider-native voices.
+- If a Twilio media stream is already active, Voice Call does not fall back to TwiML `
+Say
+`. If telephony TTS is unavailable in that state, the playback request fails instead of mixing two playback paths.
+- When telephony TTS falls back to a secondary provider, Voice Call logs a warning with the provider chain (`from`, `to`, `attempts`) for debugging.
+- When Twilio barge-in or stream teardown clears the pending TTS queue, queued playback requests settle instead of hanging callers awaiting playback completion.
 
 ### TTS examples
 
-<Tabs>
-  <Tab title="Core TTS only">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      messages: {
-        tts: {
-          provider: "openai",
-          providers: {
-            openai: { voice: "alloy" },
-          },
-        },
-      },
-    }
-    ```
-  </Tab>
+Tabs
 
-  <Tab title="Override to ElevenLabs (calls only)">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      plugins: {
-        entries: {
-          "voice-call": {
-            config: {
-              tts: {
-                provider: "elevenlabs",
-                providers: {
-                  elevenlabs: {
-                    apiKey: "elevenlabs_key",
-                    voiceId: "pMsXgVXv3BLzUgSXRplE",
-                    modelId: "eleven_multilingual_v2",
-                  },
-                },
+
+Core TTS only
+
+```json5
+{
+  messages: {
+    tts: {
+      provider: "openai",
+      providers: {
+        openai: { voice: "alloy" },
+      },
+    },
+  },
+}
+```
+
+
+Override to ElevenLabs (calls only)
+
+```json5
+{
+  plugins: {
+    entries: {
+      "voice-call": {
+        config: {
+          tts: {
+            provider: "elevenlabs",
+            providers: {
+              elevenlabs: {
+                apiKey: "elevenlabs_key",
+                voiceId: "pMsXgVXv3BLzUgSXRplE",
+                modelId: "eleven_multilingual_v2",
               },
             },
           },
         },
       },
-    }
-    ```
-  </Tab>
+    },
+  },
+}
+```
 
-  <Tab title="OpenAI model override (deep-merge)">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-    {
-      plugins: {
-        entries: {
-          "voice-call": {
-            config: {
-              tts: {
-                providers: {
-                  openai: {
-                    model: "gpt-4o-mini-tts",
-                    voice: "marin",
-                  },
-                },
+
+OpenAI model override (deep-merge)
+
+```json5
+{
+  plugins: {
+    entries: {
+      "voice-call": {
+        config: {
+          tts: {
+            providers: {
+              openai: {
+                model: "gpt-4o-mini-tts",
+                voice: "marin",
               },
             },
           },
         },
       },
-    }
-    ```
-  </Tab>
-</Tabs>
+    },
+  },
+}
+```
+
 
 ## Inbound calls
 
 Inbound policy defaults to `disabled`. To enable inbound calls, set:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   inboundPolicy: "allowlist",
   allowFrom: ["+15550001234"],
@@ -562,14 +595,14 @@ Inbound policy defaults to `disabled`. To enable inbound calls, set:
 }
 ```
 
-<Warning>
-  `inboundPolicy: "allowlist"` is a low-assurance caller-ID screen. The
-  plugin normalizes the provider-supplied `From` value and compares it to
-  `allowFrom`. Webhook verification authenticates provider delivery and
-  payload integrity, but it does **not** prove PSTN/VoIP caller-number
-  ownership. Treat `allowFrom` as caller-ID filtering, not strong caller
-  identity.
-</Warning>
+Warning
+
+`inboundPolicy: "allowlist"` is a low-assurance caller-ID screen. The
+plugin normalizes the provider-supplied `From` value and compares it to
+`allowFrom`. Webhook verification authenticates provider delivery and
+payload integrity, but it does **not** prove PSTN/VoIP caller-number
+ownership. Treat `allowFrom` as caller-ID filtering, not strong caller
+identity.
 
 Auto-responses use the agent system. Tune with `responseModel`,
 `responseSystemPrompt`, and `responseTimeoutMs`.
@@ -591,17 +624,17 @@ session explicitly when initiating the call.
 
 Route overrides currently support:
 
-* `inboundGreeting`
-* `tts`
-* `agentId`
-* `responseModel`
-* `responseSystemPrompt`
-* `responseTimeoutMs`
+- `inboundGreeting`
+- `tts`
+- `agentId`
+- `responseModel`
+- `responseSystemPrompt`
+- `responseTimeoutMs`
 
 The `tts` route value deep-merges over the global Voice Call `tts` config, so
 you can usually override only the provider voice:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   inboundGreeting: "Hello from the main line.",
   responseSystemPrompt: "You are the default voice assistant.",
@@ -630,15 +663,15 @@ you can usually override only the provider voice:
 For auto-responses, Voice Call appends a strict spoken-output contract to
 the system prompt:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 {"spoken":"..."}
 ```
 
 Voice Call extracts speech text defensively:
 
-* Ignores payloads marked as reasoning/error content.
-* Parses direct JSON, fenced JSON, or inline `"spoken"` keys.
-* Falls back to plain text and removes likely planning/meta lead-in paragraphs.
+- Ignores payloads marked as reasoning/error content.
+- Parses direct JSON, fenced JSON, or inline `"spoken"` keys.
+- Falls back to plain text and removes likely planning/meta lead-in paragraphs.
 
 This keeps spoken playback focused on caller-facing text and avoids
 leaking planning text into audio.
@@ -648,19 +681,25 @@ leaking planning text into audio.
 For outbound `conversation` calls, first-message handling is tied to live
 playback state:
 
-* Barge-in queue clear and auto-response are suppressed only while the initial greeting is actively speaking.
-* If initial playback fails, the call returns to `listening` and the initial message remains queued for retry.
-* Initial playback for Twilio streaming starts on stream connect without extra delay.
-* Barge-in aborts active playback and clears queued-but-not-yet-playing Twilio TTS entries. Cleared entries resolve as skipped, so follow-up response logic can continue without waiting on audio that will never play.
-* Realtime voice conversations use the realtime stream's own opening turn. Voice Call does **not** post a legacy `<Say>` TwiML update for that initial message, so outbound `<Connect><Stream>` sessions stay attached.
+- Barge-in queue clear and auto-response are suppressed only while the initial greeting is actively speaking.
+- If initial playback fails, the call returns to `listening` and the initial message remains queued for retry.
+- Initial playback for Twilio streaming starts on stream connect without extra delay.
+- Barge-in aborts active playback and clears queued-but-not-yet-playing Twilio TTS entries. Cleared entries resolve as skipped, so follow-up response logic can continue without waiting on audio that will never play.
+- Realtime voice conversations use the realtime stream's own opening turn. Voice Call does **not** post a legacy `
+Say
+` TwiML update for that initial message, so outbound `
+Connect
+
+Stream
+` sessions stay attached.
 
 ### Twilio stream disconnect grace
 
 When a Twilio media stream disconnects, Voice Call waits **2000 ms** before
 auto-ending the call:
 
-* If the stream reconnects during that window, auto-end is canceled.
-* If no stream re-registers after the grace period, the call is ended to prevent stuck active calls.
+- If the stream reconnects during that window, auto-end is canceled.
+- If no stream re-registers after the grace period, the call is ended to prevent stuck active calls.
 
 ## Stale call reaper
 
@@ -670,10 +709,10 @@ is `0` (disabled).
 
 Recommended ranges:
 
-* **Production:** `120`–`300` seconds for notify-style flows.
-* Keep this value **higher than `maxDurationSeconds`** so normal calls can finish. A good starting point is `maxDurationSeconds + 30–60` seconds.
+- **Production:** `120`–`300` seconds for notify-style flows.
+- Keep this value **higher than `maxDurationSeconds`** so normal calls can finish. A good starting point is `maxDurationSeconds + 30–60` seconds.
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -694,28 +733,30 @@ When a proxy or tunnel sits in front of the Gateway, the plugin
 reconstructs the public URL for signature verification. These options
 control which forwarded headers are trusted:
 
-<ParamField type="string[]">
+ParamField
+
   Allowlist hosts from forwarding headers.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Trust forwarded headers without an allowlist.
-</ParamField>
 
-<ParamField type="string[]">
+ParamField
+
   Only trust forwarded headers when the request remote IP matches the list.
-</ParamField>
 
 Additional protections:
 
-* Webhook **replay protection** is enabled for Twilio and Plivo. Replayed valid webhook requests are acknowledged but skipped for side effects.
-* Twilio conversation turns include a per-turn token in `<Gather>` callbacks, so stale/replayed speech callbacks cannot satisfy a newer pending transcript turn.
-* Unauthenticated webhook requests are rejected before body reads when the provider's required signature headers are missing.
-* The voice-call webhook uses the shared pre-auth body profile (64 KB / 5 seconds) plus a per-IP in-flight cap before signature verification.
+- Webhook **replay protection** is enabled for Twilio and Plivo. Replayed valid webhook requests are acknowledged but skipped for side effects.
+- Twilio conversation turns include a per-turn token in `
+Gather
+` callbacks, so stale/replayed speech callbacks cannot satisfy a newer pending transcript turn.
+- Unauthenticated webhook requests are rejected before body reads when the provider's required signature headers are missing.
+- The voice-call webhook uses the shared pre-auth body profile (64 KB / 5 seconds) plus a per-IP in-flight cap before signature verification.
 
 Example with a stable public host:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -734,7 +775,7 @@ Example with a stable public host:
 
 ## CLI
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall call --to "+15555550123" --message "Hello from OpenClaw"
 openclaw voicecall start --to "+15555550123"   # alias for call
 openclaw voicecall continue --call-id <id> --message "Any questions?"
@@ -793,7 +834,7 @@ digits.
 
 Run setup from the same environment that runs the Gateway:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall setup
 openclaw voicecall setup --json
 ```
@@ -804,7 +845,9 @@ space, because the carrier cannot call back into those addresses. Do not use
 `localhost`, `127.0.0.1`, `0.0.0.0`, `10.x`, `172.16.x`-`172.31.x`,
 `192.168.x`, `169.254.x`, `fc00::/7`, or `fd00::/8` as `publicUrl`.
 
-Twilio notify-mode outbound calls send their initial `<Say>` TwiML directly in
+Twilio notify-mode outbound calls send their initial `
+Say
+` TwiML directly in
 the create-call request, so the first spoken message does not depend on Twilio
 fetching webhook TwiML. A public webhook is still required for status callbacks,
 conversation calls, pre-connect DTMF, realtime streams, and post-connect call
@@ -812,7 +855,7 @@ control.
 
 Use one public exposure path:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -832,7 +875,7 @@ Use one public exposure path:
 
 After changing config, restart or reload the Gateway, then run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall setup
 openclaw voicecall smoke
 ```
@@ -843,11 +886,11 @@ openclaw voicecall smoke
 
 Check the selected provider and the required credential fields:
 
-* Twilio: `twilio.accountSid`, `twilio.authToken`, and `fromNumber`, or
+- Twilio: `twilio.accountSid`, `twilio.authToken`, and `fromNumber`, or
   `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_FROM_NUMBER`.
-* Telnyx: `telnyx.apiKey`, `telnyx.connectionId`, `telnyx.publicKey`, and
+- Telnyx: `telnyx.apiKey`, `telnyx.connectionId`, `telnyx.publicKey`, and
   `fromNumber`.
-* Plivo: `plivo.authId`, `plivo.authToken`, and `fromNumber`.
+- Plivo: `plivo.authId`, `plivo.authToken`, and `fromNumber`.
 
 Credentials must exist on the Gateway host. Editing a local shell profile does
 not affect an already running Gateway until it restarts or reloads its
@@ -857,13 +900,13 @@ environment.
 
 Confirm the provider console points at the exact public webhook URL:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 https://voice.example.com/voice/webhook
 ```
 
 Then inspect runtime state:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall status --call-id <id>
 openclaw voicecall tail
 openclaw logs --follow
@@ -871,11 +914,11 @@ openclaw logs --follow
 
 Common causes:
 
-* `publicUrl` points at a different path than `serve.path`.
-* The tunnel URL changed after the Gateway started.
-* A proxy forwards the request but strips or rewrites host/proto headers.
-* Firewall or DNS routes the public hostname somewhere other than the Gateway.
-* The Gateway was restarted without the Voice Call plugin enabled.
+- `publicUrl` points at a different path than `serve.path`.
+- The tunnel URL changed after the Gateway started.
+- A proxy forwards the request but strips or rewrites host/proto headers.
+- Firewall or DNS routes the public hostname somewhere other than the Gateway.
+- The Gateway was restarted without the Voice Call plugin enabled.
 
 When a reverse proxy or tunnel is in front of the Gateway, set
 `webhookSecurity.allowedHosts` to the public hostname, or use
@@ -888,25 +931,25 @@ your control.
 Provider signatures are checked against the public URL OpenClaw reconstructs
 from the incoming request. If signatures fail:
 
-* Confirm the provider webhook URL exactly matches `publicUrl`, including
+- Confirm the provider webhook URL exactly matches `publicUrl`, including
   scheme, host, and path.
-* For ngrok free-tier URLs, update `publicUrl` when the tunnel hostname changes.
-* Ensure the proxy preserves the original host and proto headers, or configure
+- For ngrok free-tier URLs, update `publicUrl` when the tunnel hostname changes.
+- Ensure the proxy preserves the original host and proto headers, or configure
   `webhookSecurity.allowedHosts`.
-* Do not enable `skipSignatureVerification` outside local testing.
+- Do not enable `skipSignatureVerification` outside local testing.
 
 ### Google Meet Twilio joins fail
 
 Google Meet uses this plugin for Twilio dial-in joins. First verify Voice Call:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw voicecall setup
 openclaw voicecall smoke --to "+15555550123"
 ```
 
 Then verify the Google Meet transport explicitly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw googlemeet setup --transport twilio
 ```
 
@@ -923,11 +966,11 @@ realtime handling before the intro greeting is requested.
 Use `openclaw logs --follow` for the live phase trace. A healthy Twilio Meet
 join logs this order:
 
-* Google Meet delegates the Twilio join to Voice Call.
-* Voice Call stores pre-connect DTMF TwiML.
-* Twilio initial TwiML is consumed and served before realtime handling.
-* Voice Call serves realtime TwiML for the Twilio call.
-* Google Meet requests intro speech with `voicecall.speak` after the post-DTMF delay.
+- Google Meet delegates the Twilio join to Voice Call.
+- Voice Call stores pre-connect DTMF TwiML.
+- Twilio initial TwiML is consumed and served before realtime handling.
+- Voice Call serves realtime TwiML for the Twilio call.
+- Google Meet requests intro speech with `voicecall.speak` after the post-DTMF delay.
 
 `openclaw voicecall tail` still shows persisted call records; it is useful for
 call state and transcripts, but not every webhook/realtime transition appears
@@ -940,14 +983,16 @@ Confirm only one audio mode is enabled. `realtime.enabled` and
 
 For realtime Twilio calls, also verify:
 
-* A realtime provider plugin is loaded and registered.
-* `realtime.provider` is unset or names a registered provider.
-* The provider API key is available to the Gateway process.
-* `openclaw logs --follow` shows realtime TwiML served, the realtime bridge
+- A realtime provider plugin is loaded and registered.
+- `realtime.provider` is unset or names a registered provider.
+- The provider API key is available to the Gateway process.
+- `openclaw logs --follow` shows realtime TwiML served, the realtime bridge
   started, and the initial greeting queued.
 
 ## Related
 
-* [Talk mode](/nodes/talk)
-* [Text-to-speech](/tools/tts)
-* [Voice wake](/nodes/voicewake)
+- [Talk mode](/nodes/talk)
+- [Text-to-speech](/tools/tts)
+- [Voice wake](/nodes/voicewake)
+
+---

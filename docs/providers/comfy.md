@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ComfyUI"
 source: "https://docs.openclaw.ai/providers/comfy"
-source_hash: "317f70991048f41a8e623ea66bd69d7977b8e9bd0d74d3b5cd77b08d247bf50b"
+source_hash: "53107b814e664c303f782db6bcaefbb6bf1ade3b5b8479d5676cfcd0b4fd4e9d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/comfy.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # ComfyUI
 Source: https://docs.openclaw.ai/providers/comfy
-
-
 
 OpenClaw ships a bundled `comfy` plugin for workflow-driven ComfyUI runs. The plugin is entirely workflow-driven, so OpenClaw does not try to map generic `size`, `aspectRatio`, `resolution`, `durationSeconds`, or TTS-style controls onto your graph.
 
@@ -27,34 +25,43 @@ OpenClaw ships a bundled `comfy` plugin for workflow-driven ComfyUI runs. The pl
 
 ## What it supports
 
-* Image generation from a workflow JSON
-* Image editing with 1 uploaded reference image
-* Video generation from a workflow JSON
-* Video generation with 1 uploaded reference image
-* Music or audio generation through the shared `music_generate` tool
-* Output download from a configured node or all matching output nodes
+- Image generation from a workflow JSON
+- Image editing with 1 uploaded reference image
+- Video generation from a workflow JSON
+- Video generation with 1 uploaded reference image
+- Music or audio generation through the shared `music_generate` tool
+- Output download from a configured node or all matching output nodes
 
 ## Getting started
 
 Choose between running ComfyUI on your own machine or using Comfy Cloud.
 
-<Tabs>
-  <Tab title="Local">
+Tabs
+
+
+Local
+
     **Best for:** running your own ComfyUI instance on your machine or LAN.
 
-    <Steps>
-      <Step title="Start ComfyUI locally">
+
+Steps
+
+
+Start ComfyUI locally
+
         Make sure your local ComfyUI instance is running (defaults to `http://127.0.0.1:8188`).
-      </Step>
 
-      <Step title="Prepare your workflow JSON">
+
+Prepare your workflow JSON
+
         Export or create a ComfyUI workflow JSON file. Note the node IDs for the prompt input node and the output node you want OpenClaw to read from.
-      </Step>
 
-      <Step title="Configure the provider">
+
+Configure the provider
+
         Set `mode: "local"` and point at your workflow file. Here is a minimal image example:
 
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```json5
         {
           plugins: {
             entries: {
@@ -73,12 +80,13 @@ Choose between running ComfyUI on your own machine or using Comfy Cloud.
           },
         }
         ```
-      </Step>
 
-      <Step title="Set the default model">
+
+Set the default model
+
         Point OpenClaw at the `comfy/workflow` model for the capability you configured:
 
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```json5
         {
           agents: {
             defaults: {
@@ -89,28 +97,37 @@ Choose between running ComfyUI on your own machine or using Comfy Cloud.
           },
         }
         ```
-      </Step>
 
-      <Step title="Verify">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify
+
+        ```bash
         openclaw models list --provider comfy
         ```
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="Comfy Cloud">
+
+
+
+
+
+Comfy Cloud
+
     **Best for:** running workflows on Comfy Cloud without managing local GPU resources.
 
-    <Steps>
-      <Step title="Get an API key">
-        Sign up at [comfy.org](https://comfy.org) and generate an API key from your account dashboard.
-      </Step>
 
-      <Step title="Set the API key">
+Steps
+
+
+Get an API key
+
+        Sign up at [comfy.org](https://comfy.org) and generate an API key from your account dashboard.
+
+
+Set the API key
+
         Provide your key through one of these methods:
 
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```bash
         # Environment variable (preferred)
         export COMFY_API_KEY="your-key"
 
@@ -120,16 +137,18 @@ Choose between running ComfyUI on your own machine or using Comfy Cloud.
         # Or inline in config
         openclaw config set plugins.entries.comfy.config.apiKey "your-key"
         ```
-      </Step>
 
-      <Step title="Prepare your workflow JSON">
+
+Prepare your workflow JSON
+
         Export or create a ComfyUI workflow JSON file. Note the node IDs for the prompt input node and the output node.
-      </Step>
 
-      <Step title="Configure the provider">
+
+Configure the provider
+
         Set `mode: "cloud"` and point at your workflow file:
 
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```json5
         {
           plugins: {
             entries: {
@@ -148,13 +167,16 @@ Choose between running ComfyUI on your own machine or using Comfy Cloud.
         }
         ```
 
-        <Tip>
-          Cloud mode defaults `baseUrl` to `https://cloud.comfy.org`. You only need to set `baseUrl` if you use a custom cloud endpoint.
-        </Tip>
-      </Step>
 
-      <Step title="Set the default model">
-        ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tip
+
+        Cloud mode defaults `baseUrl` to `https://cloud.comfy.org`. You only need to set `baseUrl` if you use a custom cloud endpoint.
+
+
+
+Set the default model
+
+        ```json5
         {
           agents: {
             defaults: {
@@ -165,22 +187,23 @@ Choose between running ComfyUI on your own machine or using Comfy Cloud.
           },
         }
         ```
-      </Step>
 
-      <Step title="Verify">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify
+
+        ```bash
         openclaw models list --provider comfy
         ```
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+
+
+
+
 
 ## Configuration
 
 Comfy supports shared top-level connection settings plus per-capability workflow sections (`image`, `video`, `music`):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     entries: {
@@ -241,11 +264,14 @@ The `image` and `video` sections also support:
 
 ## Workflow details
 
-<AccordionGroup>
-  <Accordion title="Image workflows">
+AccordionGroup
+
+
+Image workflows
+
     Set the default image model to `comfy/workflow`:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -261,7 +287,7 @@ The `image` and `video` sections also support:
 
     To enable image editing with an uploaded reference image, add `inputImageNodeId` to your image config:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -280,12 +306,15 @@ The `image` and `video` sections also support:
       },
     }
     ```
-  </Accordion>
 
-  <Accordion title="Video workflows">
+
+
+
+Video workflows
+
     Set the default video model to `comfy/workflow`:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -299,25 +328,33 @@ The `image` and `video` sections also support:
 
     Comfy video workflows support text-to-video and image-to-video through the configured graph.
 
-    <Note>
-      OpenClaw does not pass input videos into Comfy workflows. Only text prompts and single reference images are supported as inputs.
-    </Note>
-  </Accordion>
 
-  <Accordion title="Music workflows">
+Note
+
+    OpenClaw does not pass input videos into Comfy workflows. Only text prompts and single reference images are supported as inputs.
+
+
+
+
+
+Music workflows
+
     The bundled plugin registers a music-generation provider for workflow-defined audio or music outputs, surfaced through the shared `music_generate` tool:
 
-    ```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```text
     /tool music_generate prompt="Warm ambient synth loop with soft tape texture"
     ```
 
     Use the `music` config section to point at your audio workflow JSON and output node.
-  </Accordion>
 
-  <Accordion title="Backward compatibility">
+
+
+
+Backward compatibility
+
     Existing top-level image config (without the nested `image` section) still works:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -335,42 +372,54 @@ The `image` and `video` sections also support:
 
     OpenClaw treats that legacy shape as the image workflow config. You do not need to migrate immediately, but the nested `image` / `video` / `music` sections are recommended for new setups.
 
-    <Tip>
-      If you only use image generation, the legacy flat config and the new nested `image` section are functionally equivalent.
-    </Tip>
-  </Accordion>
 
-  <Accordion title="Live tests">
+Tip
+
+    If you only use image generation, the legacy flat config and the new nested `image` section are functionally equivalent.
+
+
+
+
+
+Live tests
+
     Opt-in live coverage exists for the bundled plugin:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     OPENCLAW_LIVE_TEST=1 COMFY_LIVE_TEST=1 pnpm test:live -- extensions/comfy/comfy.live.test.ts
     ```
 
     The live test skips individual image, video, or music cases unless the matching Comfy workflow section is configured.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Image Generation" href="/tools/image-generation" icon="image">
+CardGroup
+
+
+Image Generation
+
     Image generation tool configuration and usage.
-  </Card>
 
-  <Card title="Video Generation" href="/tools/video-generation" icon="video">
+
+Video Generation
+
     Video generation tool configuration and usage.
-  </Card>
 
-  <Card title="Music Generation" href="/tools/music-generation" icon="music">
+
+Music Generation
+
     Music and audio generation tool setup.
-  </Card>
 
-  <Card title="Provider Directory" href="/providers/index" icon="layers">
+
+Provider Directory
+
     Overview of all providers and model refs.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/config-agents#agent-defaults" icon="gear">
+
+Configuration reference
+
     Full config reference including agent defaults.
-  </Card>
-</CardGroup>
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "72c26cf952f0211d3ce68e4251e612d806854a1824615195c89388abd0a6dbb1"
+source_hash: "4b055eca06424519fef6be05e227e62f5a29ab6ed2c27f702cbbbd1d2d3050a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Linux app
 Source: https://docs.openclaw.ai/platforms/linux
-
-
 
 The Gateway is fully supported on Linux. **Node is the recommended runtime**.
 Bun is not recommended for the Gateway (WhatsApp/Telegram bugs).
@@ -32,14 +30,14 @@ Full Linux server guide: [Linux Server](/vps). Step-by-step VPS example: [exe.de
 
 ## Install
 
-* [Getting Started](/start/getting-started)
-* [Install & updates](/install/updating)
-* Optional flows: [Bun (experimental)](/install/bun), [Nix](/install/nix), [Docker](/install/docker)
+- [Getting Started](/start/getting-started)
+- [Install & updates](/install/updating)
+- Optional flows: [Bun (experimental)](/install/bun), [Nix](/install/nix), [Docker](/install/docker)
 
 ## Gateway
 
-* [Gateway runbook](/gateway)
-* [Configuration](/gateway/configuration)
+- [Gateway runbook](/gateway)
+- [Configuration](/gateway/configuration)
 
 ## Gateway service install (CLI)
 
@@ -120,10 +118,10 @@ only increasing its own OOM kill likelihood.
 
 Covered child process surfaces include:
 
-* supervisor-managed command children,
-* PTY shell children,
-* MCP stdio server children,
-* OpenClaw-launched browser/Chrome processes.
+- supervisor-managed command children,
+- PTY shell children,
+- MCP stdio server children,
+- OpenClaw-launched browser/Chrome processes.
 
 The wrapper is Linux-only and is skipped when `/bin/sh` is unavailable. It is
 also skipped if the child env sets `OPENCLAW_CHILD_OOM_SCORE_ADJ=0`, `false`,
@@ -131,7 +129,7 @@ also skipped if the child env sets `OPENCLAW_CHILD_OOM_SCORE_ADJ=0`, `false`,
 
 To verify a child process:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 cat /proc/<child-pid>/oom_score_adj
 ```
 
@@ -144,6 +142,8 @@ resource controls such as systemd `MemoryMax=` or container-level memory limits.
 
 ## Related
 
-* [Install overview](/install)
-* [Linux server](/vps)
-* [Raspberry Pi](/platforms/raspberry-pi)
+- [Install overview](/install)
+- [Linux server](/vps)
+- [Raspberry Pi](/platforms/raspberry-pi)
+
+---

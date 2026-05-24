@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "699b97fdd81c96849e8c1a5526eee8560fc641ac5fcc23d97f1e9856b388815d"
+source_hash: "859d25b0ac7923b885b9c8b31f5f2ebad7eeb3a63c6a61f7d3d3f9c3cad80f35"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-testing.md"
@@ -13,16 +13,14 @@ duplicate_index: 1
 # Plugin testing
 Source: https://docs.openclaw.ai/plugins/sdk-testing
 
-
-
 Reference for test utilities, patterns, and lint enforcement for OpenClaw
 plugins.
 
-<Tip>
+Tip
+
   **Looking for test examples?** The how-to guides include worked test examples:
   [Channel plugin tests](/plugins/sdk-channel-plugins#step-6-test) and
   [Provider plugin tests](/plugins/sdk-provider-plugins#step-6-test).
-</Tip>
 
 ## Test utilities
 
@@ -59,27 +57,17 @@ Repo guardrails reject new real imports from `plugin-sdk/testing` and
 `plugin-sdk/test-utils`; those names remain only as deprecated compatibility
 surfaces for compatibility-record tests.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```typescript
+
   shouldAckReaction,
   removeAckReactionAfterReply,
 } from "openclaw/plugin-sdk/channel-feedback";
-import { installCommonResolveTargetErrorCases } from "openclaw/plugin-sdk/channel-target-testing";
-import { AUTH_PROFILE_RUNTIME_CONTRACT } from "openclaw/plugin-sdk/agent-runtime-test-contracts";
-import { createTestPluginApi } from "openclaw/plugin-sdk/plugin-test-api";
-import { expectChannelInboundContextContract } from "openclaw/plugin-sdk/channel-contract-testing";
-import { createStartAccountContext } from "openclaw/plugin-sdk/channel-test-helpers";
-import { describePluginRegistrationContract } from "openclaw/plugin-sdk/plugin-test-contracts";
-import { registerSingleProviderPlugin } from "openclaw/plugin-sdk/plugin-test-runtime";
-import { describeOpenAIProviderRuntimeContract } from "openclaw/plugin-sdk/provider-test-contracts";
-import { getProviderHttpMocks } from "openclaw/plugin-sdk/provider-http-test-mocks";
-import { withEnv, withFetchPreconnect, withServer } from "openclaw/plugin-sdk/test-env";
-import {
+
   bundledPluginRoot,
   createCliRuntimeCapture,
   typedCases,
 } from "openclaw/plugin-sdk/test-fixtures";
-import { mockNodeBuiltinModule } from "openclaw/plugin-sdk/test-node-mocks";
+
 ```
 
 ### Available exports
@@ -167,13 +155,12 @@ broad `plugin-sdk/testing` compatibility barrel, repo `src/**` files, or repo
 
 Focused testing subpaths also re-export types useful in test files:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import type {
+```typescript
+
   ChannelAccountSnapshot,
   ChannelGatewayContext,
 } from "openclaw/plugin-sdk/channel-contract";
-import type { OpenClawConfig } from "openclaw/plugin-sdk/config-contracts";
-import type { MockFn, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/plugin-test-runtime";
+
 ```
 
 ## Testing target resolution
@@ -181,9 +168,7 @@ import type { MockFn, PluginRuntime, RuntimeEnv } from "openclaw/plugin-sdk/plug
 Use `installCommonResolveTargetErrorCases` to add standard error cases for
 channel target resolution:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { describe } from "vitest";
-import { installCommonResolveTargetErrorCases } from "openclaw/plugin-sdk/channel-target-testing";
+```typescript
 
 describe("my-channel target resolution", () => {
   installCommonResolveTargetErrorCases({
@@ -226,8 +211,7 @@ explicitly covering legacy compatibility behavior.
 
 ### Unit testing a channel plugin
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { describe, it, expect, vi } from "vitest";
+```typescript
 
 describe("my-channel plugin", () => {
   it("should resolve account from config", () => {
@@ -262,8 +246,7 @@ describe("my-channel plugin", () => {
 
 ### Unit testing a provider plugin
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { describe, it, expect } from "vitest";
+```typescript
 
 describe("my-provider plugin", () => {
   it("should resolve dynamic models", () => {
@@ -292,11 +275,11 @@ describe("my-provider plugin", () => {
 
 For code that uses `createPluginRuntimeStore`, mock the runtime in tests:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { createPluginRuntimeStore } from "openclaw/plugin-sdk/runtime-store";
-import type { PluginRuntime } from "openclaw/plugin-sdk/runtime-store";
+```typescript
 
-const store = createPluginRuntimeStore<PluginRuntime>({
+const store = createPluginRuntimeStore
+PluginRuntime
+({
   pluginId: "test-plugin",
   errorMessage: "test runtime not set",
 });
@@ -325,7 +308,7 @@ store.clearRuntime();
 
 Prefer per-instance stubs over prototype mutation:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 // Preferred: per-instance stub
 const client = new MyChannelClient();
 client.sendMessage = vi.fn().mockResolvedValue({ id: "msg-1" });
@@ -338,28 +321,28 @@ client.sendMessage = vi.fn().mockResolvedValue({ id: "msg-1" });
 
 Bundled plugins have contract tests that verify registration ownership:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test -- src/plugins/contracts/
 ```
 
 These tests assert:
 
-* Which plugins register which providers
-* Which plugins register which speech providers
-* Registration shape correctness
-* Runtime contract compliance
+- Which plugins register which providers
+- Which plugins register which speech providers
+- Registration shape correctness
+- Runtime contract compliance
 
 ### Running scoped tests
 
 For a specific plugin:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test -- <bundled-plugin-root>/my-channel/
 ```
 
 For contract tests only:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test -- src/plugins/contracts/shape.contract.test.ts
 pnpm test -- src/plugins/contracts/auth-choice.contract.test.ts
 pnpm test -- src/plugins/contracts/runtime-seams.contract.test.ts
@@ -380,7 +363,7 @@ patterns is recommended.
 
 OpenClaw uses Vitest with V8 coverage thresholds. For plugin tests:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Run all tests
 pnpm test
 
@@ -396,13 +379,15 @@ pnpm test:coverage
 
 If local runs cause memory pressure:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_VITEST_MAX_WORKERS=1 pnpm test
 ```
 
 ## Related
 
-* [SDK Overview](/plugins/sdk-overview) -- import conventions
-* [SDK Channel Plugins](/plugins/sdk-channel-plugins) -- channel plugin interface
-* [SDK Provider Plugins](/plugins/sdk-provider-plugins) -- provider plugin hooks
-* [Building Plugins](/plugins/building-plugins) -- getting started guide
+- [SDK Overview](/plugins/sdk-overview) -- import conventions
+- [SDK Channel Plugins](/plugins/sdk-channel-plugins) -- channel plugin interface
+- [SDK Provider Plugins](/plugins/sdk-provider-plugins) -- provider plugin hooks
+- [Building Plugins](/plugins/building-plugins) -- getting started guide
+
+---

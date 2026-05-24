@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "cd972570dd240ff09bd403f96b105bd5f18ceb68afda9b57cccc9b54462fe0f4"
+source_hash: "928d442228c3a6502330838d19136d3f7d578a3216cb6f8d994e481ddf60692f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -13,12 +13,10 @@ duplicate_index: 1
 # Logging
 Source: https://docs.openclaw.ai/logging
 
-
-
 OpenClaw has two main log surfaces:
 
-* **File logs** (JSON lines) written by the Gateway.
-* **Console output** shown in terminals and the Gateway Debug UI.
+- **File logs** (JSON lines) written by the Gateway.
+- **Console output** shown in terminals and the Gateway Debug UI.
 
 The Control UI **Logs** tab tails the gateway file log. This page explains where
 logs live, how to read them, and how to configure log levels and formats.
@@ -38,7 +36,7 @@ suppressing diagnostics.
 
 You can override this in `~/.openclaw/openclaw.json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "logging": {
     "file": "/path/to/openclaw.log"
@@ -52,23 +50,23 @@ You can override this in `~/.openclaw/openclaw.json`:
 
 Use the CLI to tail the gateway log file via RPC:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw logs --follow
 ```
 
 Useful current options:
 
-* `--local-time`: render timestamps in your local timezone
-* `--url <url>` / `--token <token>` / `--timeout <ms>`: standard Gateway RPC flags
-* `--expect-final`: agent-backed RPC final-response wait flag (accepted here via the shared client layer)
+- `--local-time`: render timestamps in your local timezone
+- `--url <url>` / `--token <token>` / `--timeout <ms>`: standard Gateway RPC flags
+- `--expect-final`: agent-backed RPC final-response wait flag (accepted here via the shared client layer)
 
 Output modes:
 
-* **TTY sessions**: pretty, colorized, structured log lines.
-* **Non-TTY sessions**: plain text.
-* `--json`: line-delimited JSON (one log event per line).
-* `--plain`: force plain text in TTY sessions.
-* `--no-color`: disable ANSI colors.
+- **TTY sessions**: pretty, colorized, structured log lines.
+- **Non-TTY sessions**: plain text.
+- `--json`: line-delimited JSON (one log event per line).
+- `--plain`: force plain text in TTY sessions.
+- `--no-color`: disable ANSI colors.
 
 When you pass an explicit `--url`, the CLI does not auto-apply config or
 environment credentials; include `--token` yourself if the target Gateway
@@ -76,10 +74,10 @@ requires auth.
 
 In JSON mode, the CLI emits `type`-tagged objects:
 
-* `meta`: stream metadata (file, cursor, size)
-* `log`: parsed log entry
-* `notice`: truncation / rotation hints
-* `raw`: unparsed log line
+- `meta`: stream metadata (file, cursor, size)
+- `log`: parsed log entry
+- `notice`: truncation / rotation hints
+- `raw`: unparsed log line
 
 If the implicit local loopback Gateway asks for pairing, closes during connect,
 or times out before `logs.tail` answers, `openclaw logs` falls back to the
@@ -88,7 +86,7 @@ this fallback.
 
 If the Gateway is unreachable, the CLI prints a short hint to run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw doctor
 ```
 
@@ -101,7 +99,7 @@ See [Control UI](/web/control-ui) for how to open it.
 
 To filter channel activity (WhatsApp/Telegram/etc), use:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels logs --channel whatsapp
 ```
 
@@ -115,11 +113,11 @@ entries to render structured output (time, level, subsystem, message).
 File-log JSONL records also include machine-filterable top-level fields when
 available:
 
-* `hostname`: gateway host name.
-* `message`: flattened log message text for full-text search.
-* `agent_id`: active agent id when the log call carries agent context.
-* `session_id`: active session id/key when the log call carries session context.
-* `channel`: active channel when the log call carries channel context.
+- `hostname`: gateway host name.
+- `message`: flattened log message text for full-text search.
+- `agent_id`: active agent id when the log call carries agent context.
+- `session_id`: active session id/key when the log call carries session context.
+- `channel`: active channel when the log call carries channel context.
 
 OpenClaw preserves the original structured log arguments alongside these fields
 so existing parsers that read numbered tslog argument keys keep working.
@@ -133,9 +131,9 @@ transcript text, audio payloads, turn ids, call ids, and provider item ids.
 
 Console logs are **TTY-aware** and formatted for readability:
 
-* Subsystem prefixes (e.g. `gateway/channels/whatsapp`)
-* Level coloring (info/warn/error)
-* Optional compact or JSON mode
+- Subsystem prefixes (e.g. `gateway/channels/whatsapp`)
+- Level coloring (info/warn/error)
+- Optional compact or JSON mode
 
 Console formatting is controlled by `logging.consoleStyle`.
 
@@ -143,14 +141,14 @@ Console formatting is controlled by `logging.consoleStyle`.
 
 `openclaw gateway` also has WebSocket protocol logging for RPC traffic:
 
-* normal mode: only interesting results (errors, parse errors, slow calls)
-* `--verbose`: all request/response traffic
-* `--ws-log auto|compact|full`: pick the verbose rendering style
-* `--compact`: alias for `--ws-log compact`
+- normal mode: only interesting results (errors, parse errors, slow calls)
+- `--verbose`: all request/response traffic
+- `--ws-log auto|compact|full`: pick the verbose rendering style
+- `--compact`: alias for `--ws-log compact`
 
 Examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway
 openclaw gateway --verbose --ws-log compact
 openclaw gateway --verbose --ws-log full
@@ -160,7 +158,7 @@ openclaw gateway --verbose --ws-log full
 
 All logging configuration lives under `logging` in `~/.openclaw/openclaw.json`.
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "logging": {
     "level": "info",
@@ -175,8 +173,8 @@ All logging configuration lives under `logging` in `~/.openclaw/openclaw.json`.
 
 ### Log levels
 
-* `logging.level`: **file logs** (JSONL) level.
-* `logging.consoleLevel`: **console** verbosity level.
+- `logging.level`: **file logs** (JSONL) level.
+- `logging.consoleLevel`: **console** verbosity level.
 
 You can override both via the **`OPENCLAW_LOG_LEVEL`** environment variable (e.g. `OPENCLAW_LOG_LEVEL=debug`). The env var takes precedence over the config file, so you can raise verbosity for a single run without editing `openclaw.json`. You can also pass the global CLI option **`--log-level <level>`** (for example, `openclaw --log-level debug gateway run`), which overrides the environment variable for that command.
 
@@ -188,27 +186,27 @@ file log levels.
 When debugging provider calls, use targeted environment flags instead of raising
 all logs to `debug`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_DEBUG_MODEL_TRANSPORT=1 openclaw gateway
 OPENCLAW_DEBUG_MODEL_PAYLOAD=tools OPENCLAW_DEBUG_SSE=events openclaw gateway
 ```
 
 Available flags:
 
-* `OPENCLAW_DEBUG_MODEL_TRANSPORT=1`: emit request start, fetch response, SDK
+- `OPENCLAW_DEBUG_MODEL_TRANSPORT=1`: emit request start, fetch response, SDK
   headers, first streaming event, stream completion, and transport errors at
   `info` level.
-* `OPENCLAW_DEBUG_MODEL_PAYLOAD=summary`: include a bounded request payload
+- `OPENCLAW_DEBUG_MODEL_PAYLOAD=summary`: include a bounded request payload
   summary in model request logs.
-* `OPENCLAW_DEBUG_MODEL_PAYLOAD=tools`: include all model-facing tool names in
+- `OPENCLAW_DEBUG_MODEL_PAYLOAD=tools`: include all model-facing tool names in
   the payload summary.
-* `OPENCLAW_DEBUG_MODEL_PAYLOAD=full-redacted`: include a redacted, capped JSON
+- `OPENCLAW_DEBUG_MODEL_PAYLOAD=full-redacted`: include a redacted, capped JSON
   payload snapshot. Use only while debugging; secrets are redacted but prompts
   and message text may still be present.
-* `OPENCLAW_DEBUG_SSE=events`: emit first-event and stream-completion timing.
-* `OPENCLAW_DEBUG_SSE=peek`: also emit the first five redacted SSE event
+- `OPENCLAW_DEBUG_SSE=events`: emit first-event and stream-completion timing.
+- `OPENCLAW_DEBUG_SSE=peek`: also emit the first five redacted SSE event
   payloads, capped per event.
-* `OPENCLAW_DEBUG_CODE_MODE=1`: emit code-mode model-surface diagnostics,
+- `OPENCLAW_DEBUG_CODE_MODE=1`: emit code-mode model-surface diagnostics,
   including when native provider tools are hidden because code mode owns the
   tool surface.
 
@@ -238,10 +236,10 @@ is enabled, using the same bounded attributes as file logs.
 Model-call diagnostics record bounded request/response measurements without
 capturing raw prompt or response content:
 
-* `requestPayloadBytes`: UTF-8 byte size of the final model request payload
-* `responseStreamBytes`: UTF-8 byte size of streamed model response events
-* `timeToFirstByteMs`: elapsed time before the first streamed response event
-* `durationMs`: total model-call duration
+- `requestPayloadBytes`: UTF-8 byte size of the final model request payload
+- `responseStreamBytes`: UTF-8 byte size of streamed model response events
+- `timeToFirstByteMs`: elapsed time before the first streamed response event
+- `durationMs`: total model-call duration
 
 These fields are available to diagnostic snapshots, model-call plugin hooks, and
 OTEL model-call spans/metrics when diagnostics export is enabled.
@@ -250,9 +248,9 @@ OTEL model-call spans/metrics when diagnostics export is enabled.
 
 `logging.consoleStyle`:
 
-* `pretty`: human-friendly, colored, with timestamps.
-* `compact`: tighter output (best for long sessions).
-* `json`: JSON per line (for log processors).
+- `pretty`: human-friendly, colored, with timestamps.
+- `compact`: tighter output (best for long sessions).
+- `json`: JSON per line (for log processors).
 
 ### Redaction
 
@@ -261,8 +259,8 @@ OTLP log records, persisted session transcript text, or Control UI tool
 event payloads (tool start args, partial/final result payloads, derived
 exec output, and patch summaries):
 
-* `logging.redactSensitive`: `off` | `tools` (default: `tools`)
-* `logging.redactPatterns`: list of regex strings to override the default set. Custom patterns apply on top of the built-in defaults for Control UI tool payloads, so adding a pattern never weakens redaction of values already caught by the defaults.
+- `logging.redactSensitive`: `off` | `tools` (default: `tools`)
+- `logging.redactPatterns`: list of regex strings to override the default set. Custom patterns apply on top of the built-in defaults for Control UI tool payloads, so adding a pattern never weakens redaction of values already caught by the defaults.
 
 File logs and session transcripts stay JSONL, but matching secret values are
 masked before the line or message is written to disk. Redaction is best-effort:
@@ -290,12 +288,12 @@ in-process whether or not you export them.
 
 Two adjacent surfaces:
 
-* **OpenTelemetry export** — send metrics, traces, and logs over OTLP/HTTP to
+- **OpenTelemetry export** — send metrics, traces, and logs over OTLP/HTTP to
   any OpenTelemetry-compatible collector or backend (Grafana, Datadog,
   Honeycomb, New Relic, Tempo, etc.). Full configuration, signal catalog,
   metric/span names, env vars, and privacy model live on a dedicated page:
   [OpenTelemetry export](/gateway/opentelemetry).
-* **Diagnostics flags** — targeted debug-log flags that route extra logs to
+- **Diagnostics flags** — targeted debug-log flags that route extra logs to
   `logging.file` without raising `logging.level`. Flags are case-insensitive
   and support wildcards (`telegram.*`, `*`). Configure under `diagnostics.flags`
   or via the `OPENCLAW_DIAGNOSTICS=...` env override. Full guide:
@@ -303,7 +301,7 @@ Two adjacent surfaces:
 
 To enable diagnostics events for plugins or custom sinks without OTLP export:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: { enabled: true },
 }
@@ -313,14 +311,16 @@ For OTLP export to a collector, see [OpenTelemetry export](/gateway/opentelemetr
 
 ## Troubleshooting tips
 
-* **Gateway not reachable?** Run `openclaw doctor` first.
-* **Logs empty?** Check that the Gateway is running and writing to the file path
+- **Gateway not reachable?** Run `openclaw doctor` first.
+- **Logs empty?** Check that the Gateway is running and writing to the file path
   in `logging.file`.
-* **Need more detail?** Set `logging.level` to `debug` or `trace` and retry.
+- **Need more detail?** Set `logging.level` to `debug` or `trace` and retry.
 
 ## Related
 
-* [OpenTelemetry export](/gateway/opentelemetry) — OTLP/HTTP export, metric/span catalog, privacy model
-* [Diagnostics flags](/diagnostics/flags) — targeted debug-log flags
-* [Gateway logging internals](/gateway/logging) — WS log styles, subsystem prefixes, and console capture
-* [Configuration reference](/gateway/configuration-reference#diagnostics) — full `diagnostics.*` field reference
+- [OpenTelemetry export](/gateway/opentelemetry) — OTLP/HTTP export, metric/span catalog, privacy model
+- [Diagnostics flags](/diagnostics/flags) — targeted debug-log flags
+- [Gateway logging internals](/gateway/logging) — WS log styles, subsystem prefixes, and console capture
+- [Configuration reference](/gateway/configuration-reference#diagnostics) — full `diagnostics.*` field reference
+
+---

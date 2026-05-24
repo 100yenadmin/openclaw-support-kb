@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "ff0b50a5e56382fd8e3c6fd67550813e4e17602ff715627f847f82e6563001ca"
+source_hash: "0571864579c3220e340592cfb73c97c94ad377c9c38ba14c76a66298976cf446"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/dreaming.md"
@@ -13,20 +13,18 @@ duplicate_index: 1
 # Dreaming
 Source: https://docs.openclaw.ai/concepts/dreaming
 
-
-
 Dreaming is the background memory consolidation system in `memory-core`. It helps OpenClaw move strong short-term signals into durable memory while keeping the process explainable and reviewable.
 
-<Note>
-  Dreaming is **opt-in** and disabled by default.
-</Note>
+Note
+
+Dreaming is **opt-in** and disabled by default.
 
 ## What dreaming writes
 
 Dreaming keeps two kinds of output:
 
-* **Machine state** in `memory/.dreams/` (recall store, phase signals, ingestion checkpoints, locks).
-* **Human-readable output** in `DREAMS.md` (or existing `dreams.md`) and optional phase report files under `memory/dreaming/<phase>/YYYY-MM-DD.md`.
+- **Machine state** in `memory/.dreams/` (recall store, phase signals, ingestion checkpoints, locks).
+- **Human-readable output** in `DREAMS.md` (or existing `dreams.md`) and optional phase report files under `memory/dreaming/<phase>/YYYY-MM-DD.md`.
 
 Long-term promotion still writes only to `MEMORY.md`.
 
@@ -42,35 +40,42 @@ Dreaming uses three cooperative phases:
 
 These phases are internal implementation details, not separate user-configured "modes."
 
-<AccordionGroup>
-  <Accordion title="Light phase">
+AccordionGroup
+
+
+Light phase
+
     Light phase ingests recent daily memory signals and recall traces, dedupes them, and stages candidate lines.
 
-    * Reads from short-term recall state, recent daily memory files, and redacted session transcripts when available.
-    * Writes a managed `## Light Sleep` block when storage includes inline output.
-    * Records reinforcement signals for later deep ranking.
-    * Never writes to `MEMORY.md`.
-  </Accordion>
+    - Reads from short-term recall state, recent daily memory files, and redacted session transcripts when available.
+    - Writes a managed `## Light Sleep` block when storage includes inline output.
+    - Records reinforcement signals for later deep ranking.
+    - Never writes to `MEMORY.md`.
 
-  <Accordion title="Deep phase">
+
+
+Deep phase
+
     Deep phase decides what becomes long-term memory.
 
-    * Ranks candidates using weighted scoring and threshold gates.
-    * Requires `minScore`, `minRecallCount`, and `minUniqueQueries` to pass.
-    * Rehydrates snippets from live daily files before writing, so stale/deleted snippets are skipped.
-    * Appends promoted entries to `MEMORY.md`.
-    * Writes a `## Deep Sleep` summary into `DREAMS.md` and optionally writes `memory/dreaming/deep/YYYY-MM-DD.md`.
-  </Accordion>
+    - Ranks candidates using weighted scoring and threshold gates.
+    - Requires `minScore`, `minRecallCount`, and `minUniqueQueries` to pass.
+    - Rehydrates snippets from live daily files before writing, so stale/deleted snippets are skipped.
+    - Appends promoted entries to `MEMORY.md`.
+    - Writes a `## Deep Sleep` summary into `DREAMS.md` and optionally writes `memory/dreaming/deep/YYYY-MM-DD.md`.
 
-  <Accordion title="REM phase">
+
+
+REM phase
+
     REM phase extracts patterns and reflective signals.
 
-    * Builds theme and reflection summaries from recent short-term traces.
-    * Writes a managed `## REM Sleep` block when storage includes inline output.
-    * Records REM reinforcement signals used by deep ranking.
-    * Never writes to `MEMORY.md`.
-  </Accordion>
-</AccordionGroup>
+    - Builds theme and reflection summaries from recent short-term traces.
+    - Writes a managed `## REM Sleep` block when storage includes inline output.
+    - Records REM reinforcement signals used by deep ranking.
+    - Never writes to `MEMORY.md`.
+
+
 
 ## Session transcript ingestion
 
@@ -80,20 +85,23 @@ Dreaming can ingest redacted session transcripts into the dreaming corpus. When 
 
 Dreaming also keeps a narrative **Dream Diary** in `DREAMS.md`. After each phase has enough material, `memory-core` runs a best-effort background subagent turn and appends a short diary entry. It uses the default runtime model unless `dreaming.model` is configured. If the configured model is unavailable, Dream Diary retries once with the session default model.
 
-<Note>
-  This diary is for human reading in the Dreams UI, not a promotion source. Dreaming-generated diary/report artifacts are excluded from short-term promotion. Only grounded memory snippets are eligible to promote into `MEMORY.md`.
-</Note>
+Note
+
+This diary is for human reading in the Dreams UI, not a promotion source. Dreaming-generated diary/report artifacts are excluded from short-term promotion. Only grounded memory snippets are eligible to promote into `MEMORY.md`.
 
 There is also a grounded historical backfill lane for review and recovery work:
 
-<AccordionGroup>
-  <Accordion title="Backfill commands">
-    * `memory rem-harness --path ... --grounded` previews grounded diary output from historical `YYYY-MM-DD.md` notes.
-    * `memory rem-backfill --path ...` writes reversible grounded diary entries into `DREAMS.md`.
-    * `memory rem-backfill --path ... --stage-short-term` stages grounded durable candidates into the same short-term evidence store the normal deep phase already uses.
-    * `memory rem-backfill --rollback` and `--rollback-short-term` remove those staged backfill artifacts without touching ordinary diary entries or live short-term recall.
-  </Accordion>
-</AccordionGroup>
+AccordionGroup
+
+
+Backfill commands
+
+    - `memory rem-harness --path ... --grounded` previews grounded diary output from historical `YYYY-MM-DD.md` notes.
+    - `memory rem-backfill --path ...` writes reversible grounded diary entries into `DREAMS.md`.
+    - `memory rem-backfill --path ... --stage-short-term` stages grounded durable candidates into the same short-term evidence store the normal deep phase already uses.
+    - `memory rem-backfill --rollback` and `--rollback-short-term` remove those staged backfill artifacts without touching ordinary diary entries or live short-term recall.
+
+
 
 The Control UI exposes the same diary backfill/reset flow so you can inspect results in the Dreams scene before deciding whether the grounded candidates deserve promotion. The Scene also shows a distinct grounded lane so you can see which staged short-term entries came from historical replay, which promoted items were grounded-led, and clear only grounded-only staged entries without touching ordinary live short-term state.
 
@@ -139,9 +147,12 @@ Default cadence behavior:
 
 ## Quick start
 
-<Tabs>
-  <Tab title="Enable dreaming">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Enable dreaming
+
+    ```json
     {
       "plugins": {
         "entries": {
@@ -156,10 +167,11 @@ Default cadence behavior:
       }
     }
     ```
-  </Tab>
 
-  <Tab title="Custom sweep cadence">
-    ```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Custom sweep cadence
+
+    ```json
     {
       "plugins": {
         "entries": {
@@ -176,8 +188,7 @@ Default cadence behavior:
       }
     }
     ```
-  </Tab>
-</Tabs>
+
 
 ## Slash command
 
@@ -190,9 +201,12 @@ Default cadence behavior:
 
 ## CLI workflow
 
-<Tabs>
-  <Tab title="Promotion preview / apply">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Promotion preview / apply
+
+    ```bash
     openclaw memory promote
     openclaw memory promote --apply
     openclaw memory promote --limit 5
@@ -200,61 +214,65 @@ Default cadence behavior:
     ```
 
     Manual `memory promote` uses deep-phase thresholds by default unless overridden with CLI flags.
-  </Tab>
 
-  <Tab title="Explain promotion">
+
+
+Explain promotion
+
     Explain why a specific candidate would or would not promote:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw memory promote-explain "router vlan"
     openclaw memory promote-explain "router vlan" --json
     ```
-  </Tab>
 
-  <Tab title="REM harness preview">
+
+
+REM harness preview
+
     Preview REM reflections, candidate truths, and deep promotion output without writing anything:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw memory rem-harness
     openclaw memory rem-harness --json
     ```
-  </Tab>
-</Tabs>
+
+
 
 ## Key defaults
 
 All settings live under `plugins.entries.memory-core.config.dreaming`.
 
-<ParamField type="boolean">
+ParamField
+
   Enable or disable the dreaming sweep.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Cron cadence for the full dreaming sweep.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Optional Dream Diary subagent model override. Use a canonical `provider/model` value when also setting a subagent `allowedModels` allowlist.
-</ParamField>
 
-<Warning>
-  `dreaming.model` requires `plugins.entries.memory-core.subagent.allowModelOverride: true`. To restrict it, also set `plugins.entries.memory-core.subagent.allowedModels`. Trust or allowlist failures stay visible instead of falling back silently; the retry only covers model-unavailable errors.
-</Warning>
+Warning
 
-<Note>
-  Phase policy, thresholds, and storage behavior are internal implementation details (not user-facing config). See [Memory configuration reference](/reference/memory-config#dreaming) for the full key list.
-</Note>
+`dreaming.model` requires `plugins.entries.memory-core.subagent.allowModelOverride: true`. To restrict it, also set `plugins.entries.memory-core.subagent.allowedModels`. Trust or allowlist failures stay visible instead of falling back silently; the retry only covers model-unavailable errors.
+
+Note
+
+Phase policy, thresholds, and storage behavior are internal implementation details (not user-facing config). See [Memory configuration reference](/reference/memory-config#dreaming) for the full key list.
 
 ## Dreams UI
 
 When enabled, the Gateway **Dreams** tab shows:
 
-* current dreaming enabled state
-* phase-level status and managed-sweep presence
-* short-term, grounded, signal, and promoted-today counts
-* next scheduled run timing
-* a distinct grounded Scene lane for staged historical replay entries
-* an expandable Dream Diary reader backed by `doctor.memory.dreamDiary`
+- current dreaming enabled state
+- phase-level status and managed-sweep presence
+- short-term, grounded, signal, and promoted-today counts
+- next scheduled run timing
+- a distinct grounded Scene lane for staged historical replay entries
+- an expandable Dream Diary reader backed by `doctor.memory.dreamDiary`
 
 ## Dreaming never runs: status shows blocked
 
@@ -262,7 +280,9 @@ If `openclaw memory status` reports `Dreaming status: blocked`, the managed cron
 
 ## Related
 
-* [Memory](/concepts/memory)
-* [Memory CLI](/cli/memory)
-* [Memory configuration reference](/reference/memory-config)
-* [Memory search](/concepts/memory-search)
+- [Memory](/concepts/memory)
+- [Memory CLI](/cli/memory)
+- [Memory configuration reference](/reference/memory-config)
+- [Memory search](/concepts/memory-search)
+
+---

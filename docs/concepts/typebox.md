@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "373167546ffc498357f7eb84a4a72bbcdb3377bbf7fcd80bd9d1d1fd34df0111"
+source_hash: "f10fbf6f5f5c271e64eb4ad59f3154613548e360404c9317244a27b300678b28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typebox.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # TypeBox
 Source: https://docs.openclaw.ai/concepts/typebox
-
-
 
 TypeBox is a TypeScript-first schema library. We use it to define the **Gateway
 WebSocket protocol** (handshake, request/response, server events). Those schemas
@@ -27,9 +25,9 @@ If you want the higher-level protocol context, start with
 
 Every Gateway WS message is one of three frames:
 
-* **Request**: `{ type: "req", id, method, params }`
-* **Response**: `{ type: "res", id, ok, payload | error }`
-* **Event**: `{ type: "event", event, payload, seq?, stateVersion? }`
+- **Request**: `{ type: "req", id, method, params }`
+- **Response**: `{ type: "res", id, ok, payload | error }`
+- **Event**: `{ type: "event", event, payload, seq?, stateVersion? }`
 
 The first frame **must** be a `connect` request. After that, clients can call
 methods (e.g. `health`, `send`, `chat.send`) and subscribe to events (e.g.
@@ -63,33 +61,33 @@ Authoritative advertised **discovery** inventory lives in
 
 ## Where the schemas live
 
-* Source: `src/gateway/protocol/schema.ts`
-* Runtime validators (AJV): `src/gateway/protocol/index.ts`
-* Advertised feature/discovery registry: `src/gateway/server-methods-list.ts`
-* Server handshake + method dispatch: `src/gateway/server.impl.ts`
-* Node client: `src/gateway/client.ts`
-* Generated JSON Schema: `dist/protocol.schema.json`
-* Generated Swift models: `apps/macos/Sources/OpenClawProtocol/GatewayModels.swift`
+- Source: `src/gateway/protocol/schema.ts`
+- Runtime validators (AJV): `src/gateway/protocol/index.ts`
+- Advertised feature/discovery registry: `src/gateway/server-methods-list.ts`
+- Server handshake + method dispatch: `src/gateway/server.impl.ts`
+- Node client: `src/gateway/client.ts`
+- Generated JSON Schema: `dist/protocol.schema.json`
+- Generated Swift models: `apps/macos/Sources/OpenClawProtocol/GatewayModels.swift`
 
 ## Current pipeline
 
-* `pnpm protocol:gen`
-  * writes JSON Schema (draft-07) to `dist/protocol.schema.json`
-* `pnpm protocol:gen:swift`
-  * generates Swift gateway models
-* `pnpm protocol:check`
-  * runs both generators and verifies the output is committed
+- `pnpm protocol:gen`
+  - writes JSON Schema (draft-07) to `dist/protocol.schema.json`
+- `pnpm protocol:gen:swift`
+  - generates Swift gateway models
+- `pnpm protocol:check`
+  - runs both generators and verifies the output is committed
 
 ## How the schemas are used at runtime
 
-* **Server side**: every inbound frame is validated with AJV. The handshake only
+- **Server side**: every inbound frame is validated with AJV. The handshake only
   accepts a `connect` request whose params match `ConnectParams`.
-* **Client side**: the JS client validates event and response frames before
+- **Client side**: the JS client validates event and response frames before
   using them.
-* **Feature discovery**: the Gateway sends a conservative `features.methods`
+- **Feature discovery**: the Gateway sends a conservative `features.methods`
   and `features.events` list in `hello-ok` from `listGatewayMethods()` and
   `GATEWAY_EVENTS`.
-* That discovery list is not a generated dump of every callable helper in
+- That discovery list is not a generated dump of every callable helper in
   `coreGatewayHandlers`; some helper RPCs are implemented in
   `src/gateway/server-methods/*.ts` without being enumerated in the advertised
   feature list.
@@ -98,7 +96,7 @@ Authoritative advertised **discovery** inventory lives in
 
 Connect (first message):
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "req",
   "id": "c1",
@@ -120,7 +118,7 @@ Connect (first message):
 
 Hello-ok response:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "res",
   "id": "c1",
@@ -143,17 +141,17 @@ Hello-ok response:
 
 Request + response:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "type": "req", "id": "r1", "method": "health" }
 ```
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "type": "res", "id": "r1", "ok": true, "payload": { "ok": true } }
 ```
 
 Event:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "type": "event", "event": "tick", "payload": { "ts": 1730000000 }, "seq": 12 }
 ```
 
@@ -161,8 +159,7 @@ Event:
 
 Smallest useful flow: connect + health.
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { WebSocket } from "ws";
+```ts
 
 const ws = new WebSocket("ws://127.0.0.1:18789");
 
@@ -207,7 +204,7 @@ Example: add a new `system.echo` request that returns `{ ok: true, text }`.
 
 Add to `src/gateway/protocol/schema.ts`:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 export const SystemEchoParamsSchema = Type.Object(
   { text: NonEmptyString },
   { additionalProperties: false },
@@ -221,12 +218,12 @@ export const SystemEchoResultSchema = Type.Object(
 
 Add both to `ProtocolSchemas` and export types:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
   SystemEchoParams: SystemEchoParamsSchema,
   SystemEchoResult: SystemEchoResultSchema,
 ```
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 export type SystemEchoParams = Static<typeof SystemEchoParamsSchema>;
 export type SystemEchoResult = Static<typeof SystemEchoResultSchema>;
 ```
@@ -235,15 +232,17 @@ export type SystemEchoResult = Static<typeof SystemEchoResultSchema>;
 
 In `src/gateway/protocol/index.ts`, export an AJV validator:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
-export const validateSystemEchoParams = ajv.compile<SystemEchoParams>(SystemEchoParamsSchema);
+```ts
+export const validateSystemEchoParams = ajv.compile
+SystemEchoParams
+(SystemEchoParamsSchema);
 ```
 
 3. **Server behavior**
 
 Add a handler in `src/gateway/server-methods/system.ts`:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 export const systemHandlers: GatewayRequestHandlers = {
   "system.echo": ({ params, respond }) => {
     const text = String(params.text ?? "");
@@ -262,7 +261,7 @@ advertising stay aligned.
 
 4. **Regenerate**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm protocol:check
 ```
 
@@ -274,27 +273,27 @@ Add a server test in `src/gateway/server.*.test.ts` and note the method in docs.
 
 The Swift generator emits:
 
-* `GatewayFrame` enum with `req`, `res`, `event`, and `unknown` cases
-* Strongly typed payload structs/enums
-* `ErrorCode` values, `GATEWAY_PROTOCOL_VERSION`, and `GATEWAY_MIN_PROTOCOL_VERSION`
+- `GatewayFrame` enum with `req`, `res`, `event`, and `unknown` cases
+- Strongly typed payload structs/enums
+- `ErrorCode` values, `GATEWAY_PROTOCOL_VERSION`, and `GATEWAY_MIN_PROTOCOL_VERSION`
 
 Unknown frame types are preserved as raw payloads for forward compatibility.
 
 ## Versioning + compatibility
 
-* `PROTOCOL_VERSION` lives in `src/gateway/protocol/version.ts`.
-* Clients send `minProtocol` + `maxProtocol`; the server rejects ranges that
+- `PROTOCOL_VERSION` lives in `src/gateway/protocol/version.ts`.
+- Clients send `minProtocol` + `maxProtocol`; the server rejects ranges that
   do not include its current protocol.
-* The Swift models keep unknown frame types to avoid breaking older clients.
+- The Swift models keep unknown frame types to avoid breaking older clients.
 
 ## Schema patterns and conventions
 
-* Most objects use `additionalProperties: false` for strict payloads.
-* `NonEmptyString` is the default for IDs and method/event names.
-* The top-level `GatewayFrame` uses a **discriminator** on `type`.
-* Methods with side effects usually require an `idempotencyKey` in params
+- Most objects use `additionalProperties: false` for strict payloads.
+- `NonEmptyString` is the default for IDs and method/event names.
+- The top-level `GatewayFrame` uses a **discriminator** on `type`.
+- Methods with side effects usually require an `idempotencyKey` in params
   (example: `send`, `poll`, `agent`, `chat.send`).
-* `agent` accepts optional `internalEvents` for runtime-generated orchestration context
+- `agent` accepts optional `internalEvents` for runtime-generated orchestration context
   (for example subagent/cron task completion handoff); treat this as internal API surface.
 
 ## Live schema JSON
@@ -302,7 +301,7 @@ Unknown frame types are preserved as raw payloads for forward compatibility.
 Generated JSON Schema is in the repo at `dist/protocol.schema.json`. The
 published raw file is typically available at:
 
-* [https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json](https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json)
+- [https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json](https://raw.githubusercontent.com/openclaw/openclaw/main/dist/protocol.schema.json)
 
 ## When you change schemas
 
@@ -315,5 +314,7 @@ published raw file is typically available at:
 
 ## Related
 
-* [Rich output protocol](/reference/rich-output-protocol)
-* [RPC adapters](/reference/rpc)
+- [Rich output protocol](/reference/rich-output-protocol)
+- [RPC adapters](/reference/rpc)
+
+---

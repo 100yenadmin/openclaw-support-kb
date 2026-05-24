@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Alibaba Model Studio"
 source: "https://docs.openclaw.ai/providers/alibaba"
-source_hash: "0e5c6a8dba4aebbf83cb6ac019f072f2cdcd536ee9da88a23fd245c8ce6f1441"
+source_hash: "dba80ed881d41ef281a19b6b3350522f88a2698b0b6844088a1ab206b709fdf2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/alibaba.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Alibaba Model Studio
 Source: https://docs.openclaw.ai/providers/alibaba
-
-
 
 OpenClaw ships a bundled `alibaba` plugin that registers a video-generation provider for Wan models on Alibaba Model Studio (the international name for DashScope). The plugin is enabled by default; you only need to set an API key.
 
@@ -29,31 +27,36 @@ OpenClaw ships a bundled `alibaba` plugin that registers a video-generation prov
 
 ## Getting started
 
-<Steps>
-  <Step title="Set an API key">
+Steps
+
+
+Set an API key
+
     Use onboarding to store the key against the `alibaba` provider:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --auth-choice alibaba-model-studio-api-key
     ```
 
     Or pass the key directly during install/onboarding:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --alibaba-model-studio-api-key <your-key>
     ```
 
     Or export any of the accepted env vars before starting the Gateway:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     export MODELSTUDIO_API_KEY=sk-...
     # or DASHSCOPE_API_KEY=...
     # or QWEN_API_KEY=...
     ```
-  </Step>
 
-  <Step title="Set a default video model">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Set a default video model
+
+    ```json5
     {
       agents: {
         defaults: {
@@ -64,20 +67,21 @@ OpenClaw ships a bundled `alibaba` plugin that registers a video-generation prov
       },
     }
     ```
-  </Step>
 
-  <Step title="Verify the provider is configured">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Verify the provider is configured
+
+    ```bash
     openclaw models list --provider alibaba
     ```
 
     The list should include all five bundled Wan models. If `MODELSTUDIO_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
-  </Step>
-</Steps>
 
-<Note>
+
+
+Note
+
   The Alibaba plugin and the [Qwen plugin](/providers/qwen) both authenticate against DashScope and accept overlapping env vars. Use `alibaba/...` model ids to drive the dedicated Wan video surface; use `qwen/...` ids when you want Qwen's chat, embedding, or media-understanding surface.
-</Note>
 
 ## Built-in Wan models
 
@@ -101,17 +105,20 @@ The bundled provider mirrors DashScope's Wan video API caps. All three modes sha
 
 When a request omits `durationSeconds`, the provider sends DashScope's accepted default of **5 seconds**. Set `durationSeconds` explicitly on the [video generation tool](/tools/video-generation) to extend up to 10 s.
 
-<Warning>
+Warning
+
   Reference image and video inputs must be remote `http(s)` URLs. Local file paths are not accepted by DashScope's reference modes; upload to object storage first or use the [media tool](/tools/media-overview) flow that already produces a public URL.
-</Warning>
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Override the DashScope base URL">
+AccordionGroup
+
+
+Override the DashScope base URL
+
     The provider defaults to the international DashScope endpoint. To target the China-region endpoint, set:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       models: {
         providers: {
@@ -124,9 +131,12 @@ When a request omits `durationSeconds`, the provider sends DashScope's accepted 
     ```
 
     The provider strips trailing slashes before constructing AIGC task URLs.
-  </Accordion>
 
-  <Accordion title="Auth env priority">
+
+
+
+Auth env priority
+
     OpenClaw resolves the Alibaba API key from environment variables in this order, taking the first non-empty value:
 
     1. `MODELSTUDIO_API_KEY`
@@ -134,34 +144,43 @@ When a request omits `durationSeconds`, the provider sends DashScope's accepted 
     3. `QWEN_API_KEY`
 
     Configured `auth.profiles` entries (set via `openclaw models auth login`) override env-var resolution. See [Auth profiles in the models FAQ](/help/faq-models#what-is-an-auth-profile) for profile rotation, cooldown, and override mechanics.
-  </Accordion>
 
-  <Accordion title="Relationship to the Qwen plugin">
+
+
+
+Relationship to the Qwen plugin
+
     Both bundled plugins talk to DashScope and accept overlapping API keys. Use:
 
-    * `alibaba/wan*.*` ids to drive the dedicated Wan video provider documented on this page.
-    * `qwen/*` ids for Qwen chat, embedding, and media understanding (see [Qwen](/providers/qwen)).
+    - `alibaba/wan*.*` ids to drive the dedicated Wan video provider documented on this page.
+    - `qwen/*` ids for Qwen chat, embedding, and media understanding (see [Qwen](/providers/qwen)).
 
     Setting `MODELSTUDIO_API_KEY` once authenticates both plugins because the auth env var list intentionally overlaps; you do not need to onboard each plugin separately.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Video generation" href="/tools/video-generation" icon="video">
+CardGroup
+
+
+Video generation
+
     Shared video tool parameters and provider selection.
-  </Card>
 
-  <Card title="Qwen" href="/providers/qwen" icon="microchip">
+
+Qwen
+
     Qwen chat, embedding, and media-understanding setup on the same DashScope auth.
-  </Card>
 
-  <Card title="Configuration reference" href="/gateway/config-agents#agent-defaults" icon="gear">
+
+Configuration reference
+
     Agent defaults and model configuration.
-  </Card>
 
-  <Card title="Models FAQ" href="/help/faq-models" icon="circle-question">
+
+Models FAQ
+
     Auth profiles, switching models, and resolving "no profile" errors.
-  </Card>
-</CardGroup>
+
+---

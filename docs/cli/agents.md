@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
-source_hash: "8958b8dfdbd6f8b618b2201bdebe8535842b7fce46a34ddb068a2c8528215cd6"
+source_hash: "8b7c827f8dc2300e36e72aae5a7035300c507c7a9cb48e4c8e5d716e6a2f97fc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/agents.md"
@@ -13,21 +13,19 @@ duplicate_index: 1
 # Agents
 Source: https://docs.openclaw.ai/cli/agents
 
-
-
 # `openclaw agents`
 
 Manage isolated agents (workspaces + auth + routing).
 
 Related:
 
-* [Multi-agent routing](/concepts/multi-agent)
-* [Agent workspace](/concepts/agent-workspace)
-* [Skills config](/tools/skills-config): skill visibility configuration.
+- [Multi-agent routing](/concepts/multi-agent)
+- [Agent workspace](/concepts/agent-workspace)
+- [Skills config](/tools/skills-config): skill visibility configuration.
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents list
 openclaw agents list --bindings
 openclaw agents add work --workspace ~/.openclaw/workspace-work
@@ -48,7 +46,7 @@ If you also want different visible skills per agent, configure `agents.defaults.
 
 List bindings:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents bindings
 openclaw agents bindings --agent work
 openclaw agents bindings --json
@@ -56,7 +54,7 @@ openclaw agents bindings --json
 
 Add bindings:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents bind --agent work --bind telegram:ops --bind discord:guild-a
 ```
 
@@ -66,13 +64,13 @@ If you omit `--agent` for `bind` or `unbind`, OpenClaw targets the current defau
 
 ### Binding scope behavior
 
-* A binding without `accountId` matches the channel default account only.
-* `accountId: "*"` is the channel-wide fallback (all accounts) and is less specific than an explicit account binding.
-* If the same agent already has a matching channel binding without `accountId`, and you later bind with an explicit or resolved `accountId`, OpenClaw upgrades that existing binding in place instead of adding a duplicate.
+- A binding without `accountId` matches the channel default account only.
+- `accountId: "*"` is the channel-wide fallback (all accounts) and is less specific than an explicit account binding.
+- If the same agent already has a matching channel binding without `accountId`, and you later bind with an explicit or resolved `accountId`, OpenClaw upgrades that existing binding in place instead of adding a duplicate.
 
 Example:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # initial channel-only binding
 openclaw agents bind --agent work --bind telegram
 
@@ -84,7 +82,7 @@ After the upgrade, routing for that binding is scoped to `telegram:ops`. If you 
 
 Remove bindings:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents unbind --agent work --bind telegram:ops
 openclaw agents unbind --agent work --all
 ```
@@ -101,26 +99,26 @@ Running `openclaw agents` with no subcommand is equivalent to `openclaw agents l
 
 Options:
 
-* `--json`
-* `--bindings`: include full routing rules, not only per-agent counts/summaries
+- `--json`
+- `--bindings`: include full routing rules, not only per-agent counts/summaries
 
 ### `agents add [name]`
 
 Options:
 
-* `--workspace <dir>`
-* `--model <id>`
-* `--agent-dir <dir>`
-* `--bind <channel[:accountId]>` (repeatable)
-* `--non-interactive`
-* `--json`
+- `--workspace <dir>`
+- `--model <id>`
+- `--agent-dir <dir>`
+- `--bind <channel[:accountId]>` (repeatable)
+- `--non-interactive`
+- `--json`
 
 Notes:
 
-* Passing any explicit add flags switches the command into the non-interactive path.
-* Non-interactive mode requires both an agent name and `--workspace`.
-* `main` is reserved and cannot be used as the new agent id.
-* In interactive mode, auth seeding copies only portable static profiles
+- Passing any explicit add flags switches the command into the non-interactive path.
+- Non-interactive mode requires both an agent name and `--workspace`.
+- `main` is reserved and cannot be used as the new agent id.
+- In interactive mode, auth seeding copies only portable static profiles
   (`api_key` and static `token` by default). OAuth refresh-token profiles remain
   available only by read-through inheritance from the real `main` agent store.
   If the configured default agent is not `main`, sign in separately for OAuth
@@ -130,40 +128,40 @@ Notes:
 
 Options:
 
-* `--agent <id>`
-* `--json`
+- `--agent <id>`
+- `--json`
 
 ### `agents bind`
 
 Options:
 
-* `--agent <id>` (defaults to the current default agent)
-* `--bind <channel[:accountId]>` (repeatable)
-* `--json`
+- `--agent <id>` (defaults to the current default agent)
+- `--bind <channel[:accountId]>` (repeatable)
+- `--json`
 
 ### `agents unbind`
 
 Options:
 
-* `--agent <id>` (defaults to the current default agent)
-* `--bind <channel[:accountId]>` (repeatable)
-* `--all`
-* `--json`
+- `--agent <id>` (defaults to the current default agent)
+- `--bind <channel[:accountId]>` (repeatable)
+- `--all`
+- `--json`
 
 ### `agents delete <id>`
 
 Options:
 
-* `--force`
-* `--json`
+- `--force`
+- `--json`
 
 Notes:
 
-* `main` cannot be deleted.
-* Without `--force`, interactive confirmation is required.
-* Workspace, agent state, and session transcript directories are moved to Trash, not hard-deleted.
-* When the Gateway is reachable, deletion is sent through the Gateway so config and session-store cleanup share the same writer as runtime traffic. If the Gateway cannot be reached, the CLI falls back to the offline local path.
-* If another agent's workspace is the same path, inside this workspace, or contains this workspace,
+- `main` cannot be deleted.
+- Without `--force`, interactive confirmation is required.
+- Workspace, agent state, and session transcript directories are moved to Trash, not hard-deleted.
+- When the Gateway is reachable, deletion is sent through the Gateway so config and session-store cleanup share the same writer as runtime traffic. If the Gateway cannot be reached, the CLI falls back to the offline local path.
+- If another agent's workspace is the same path, inside this workspace, or contains this workspace,
   the workspace is retained and `--json` reports `workspaceRetained`,
   `workspaceRetainedReason`, and `workspaceSharedWith`.
 
@@ -171,8 +169,8 @@ Notes:
 
 Each agent workspace can include an `IDENTITY.md` at the workspace root:
 
-* Example path: `~/.openclaw/workspace/IDENTITY.md`
-* `set-identity --from-identity` reads from the workspace root (or an explicit `--identity-file`)
+- Example path: `~/.openclaw/workspace/IDENTITY.md`
+- `set-identity --from-identity` reads from the workspace root (or an explicit `--identity-file`)
 
 Avatar paths resolve relative to the workspace root.
 
@@ -180,44 +178,44 @@ Avatar paths resolve relative to the workspace root.
 
 `set-identity` writes fields into `agents.list[].identity`:
 
-* `name`
-* `theme`
-* `emoji`
-* `avatar` (workspace-relative path, http(s) URL, or data URI)
+- `name`
+- `theme`
+- `emoji`
+- `avatar` (workspace-relative path, http(s) URL, or data URI)
 
 Options:
 
-* `--agent <id>`
-* `--workspace <dir>`
-* `--identity-file <path>`
-* `--from-identity`
-* `--name <name>`
-* `--theme <theme>`
-* `--emoji <emoji>`
-* `--avatar <value>`
-* `--json`
+- `--agent <id>`
+- `--workspace <dir>`
+- `--identity-file <path>`
+- `--from-identity`
+- `--name <name>`
+- `--theme <theme>`
+- `--emoji <emoji>`
+- `--avatar <value>`
+- `--json`
 
 Notes:
 
-* `--agent` or `--workspace` can be used to select the target agent.
-* If you rely on `--workspace` and multiple agents share that workspace, the command fails and asks you to pass `--agent`.
-* When no explicit identity fields are provided, the command reads identity data from `IDENTITY.md`.
+- `--agent` or `--workspace` can be used to select the target agent.
+- If you rely on `--workspace` and multiple agents share that workspace, the command fails and asks you to pass `--agent`.
+- When no explicit identity fields are provided, the command reads identity data from `IDENTITY.md`.
 
 Load from `IDENTITY.md`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents set-identity --workspace ~/.openclaw/workspace --from-identity
 ```
 
 Override fields explicitly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw agents set-identity --agent main --name "OpenClaw" --emoji "🦞" --avatar avatars/openclaw.png
 ```
 
 Config sample:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     list: [
@@ -237,6 +235,8 @@ Config sample:
 
 ## Related
 
-* [CLI reference](/cli)
-* [Multi-agent routing](/concepts/multi-agent)
-* [Agent workspace](/concepts/agent-workspace)
+- [CLI reference](/cli)
+- [Multi-agent routing](/concepts/multi-agent)
+- [Agent workspace](/concepts/agent-workspace)
+
+---

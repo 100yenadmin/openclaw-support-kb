@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logs"
 source: "https://docs.openclaw.ai/cli/logs"
-source_hash: "768532fc5b8a102e64ff73ef3edcf9656fceaa22ad42ea1242708402738fbb5d"
+source_hash: "80204eeeaedfeee6034616095b2f22fcc3db67926eb23cf2a2ca2d860bb6558f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/logs.md"
@@ -13,42 +13,40 @@ duplicate_index: 1
 # Logs
 Source: https://docs.openclaw.ai/cli/logs
 
-
-
 # `openclaw logs`
 
 Tail Gateway file logs over RPC (works in remote mode).
 
 Related:
 
-* Logging overview: [Logging](/logging)
-* Gateway CLI: [gateway](/cli/gateway)
+- Logging overview: [Logging](/logging)
+- Gateway CLI: [gateway](/cli/gateway)
 
 ## Options
 
-* `--limit <n>`: maximum number of log lines to return (default `200`)
-* `--max-bytes <n>`: maximum bytes to read from the log file (default `250000`)
-* `--follow`: follow the log stream
-* `--interval <ms>`: polling interval while following (default `1000`)
-* `--json`: emit line-delimited JSON events
-* `--plain`: plain text output without styled formatting
-* `--no-color`: disable ANSI colors
-* `--local-time`: render timestamps in your local timezone
+- `--limit <n>`: maximum number of log lines to return (default `200`)
+- `--max-bytes <n>`: maximum bytes to read from the log file (default `250000`)
+- `--follow`: follow the log stream
+- `--interval <ms>`: polling interval while following (default `1000`)
+- `--json`: emit line-delimited JSON events
+- `--plain`: plain text output without styled formatting
+- `--no-color`: disable ANSI colors
+- `--local-time`: render timestamps in your local timezone
 
 ## Shared Gateway RPC options
 
 `openclaw logs` also accepts the standard Gateway client flags:
 
-* `--url <url>`: Gateway WebSocket URL
-* `--token <token>`: Gateway token
-* `--timeout <ms>`: timeout in ms (default `30000`)
-* `--expect-final`: wait for a final response when the Gateway call is agent-backed
+- `--url <url>`: Gateway WebSocket URL
+- `--token <token>`: Gateway token
+- `--timeout <ms>`: timeout in ms (default `30000`)
+- `--expect-final`: wait for a final response when the Gateway call is agent-backed
 
 When you pass `--url`, the CLI does not auto-apply config or environment credentials. Include `--token` explicitly if the target Gateway requires auth.
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw logs
 openclaw logs --follow
 openclaw logs --follow --interval 2000
@@ -64,11 +62,13 @@ openclaw logs --url ws://127.0.0.1:18789 --token "$OPENCLAW_GATEWAY_TOKEN"
 
 ## Notes
 
-* Use `--local-time` to render timestamps in your local timezone.
-* If the implicit local loopback Gateway asks for pairing, closes during connect, or times out before `logs.tail` answers, `openclaw logs` falls back to the configured Gateway file log automatically. Explicit `--url` targets do not use this fallback.
-* When using `--follow`, transient gateway disconnects (WebSocket close, timeout, connection drop) trigger automatic reconnection with exponential backoff (up to 8 retries, capped at 30 s between attempts). A warning is printed to stderr on each retry, and a `[logs] gateway reconnected` notice is printed once a poll succeeds. In `--json` mode both the retry warning and the reconnect transition are emitted as `{"type":"notice"}` records on stderr. Non-recoverable errors (auth failure, bad configuration) still exit immediately.
+- Use `--local-time` to render timestamps in your local timezone.
+- If the implicit local loopback Gateway asks for pairing, closes during connect, or times out before `logs.tail` answers, `openclaw logs` falls back to the configured Gateway file log automatically. Explicit `--url` targets do not use this fallback.
+- When using `--follow`, transient gateway disconnects (WebSocket close, timeout, connection drop) trigger automatic reconnection with exponential backoff (up to 8 retries, capped at 30 s between attempts). A warning is printed to stderr on each retry, and a `[logs] gateway reconnected` notice is printed once a poll succeeds. In `--json` mode both the retry warning and the reconnect transition are emitted as `{"type":"notice"}` records on stderr. Non-recoverable errors (auth failure, bad configuration) still exit immediately.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Gateway logging](/gateway/logging)
+- [CLI reference](/cli)
+- [Gateway logging](/gateway/logging)
+
+---

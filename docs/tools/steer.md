@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steer"
 source: "https://docs.openclaw.ai/tools/steer"
-source_hash: "325a3ba02ace2ad96340ebe9a6623ea4ef4e7c608883a1fa700bb58ea8cddd0e"
+source_hash: "24a198bc5c7606ccd6d3b177d7aa98e59b2ab5fded488228d015c6de11a23e0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/steer.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Steer
 Source: https://docs.openclaw.ai/tools/steer
 
-
-
 `/steer` first tries to send guidance to an already-active run. It is for
 "adjust this run while it is still working" moments. If the current runtime
 cannot accept steering, OpenClaw sends the message as a normal prompt instead
@@ -24,18 +22,18 @@ of dropping it.
 
 Use top-level `/steer` to target the active run for the current session:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /steer prefer the smaller patch and keep the tests focused
 /tell summarize before making the next tool call
 ```
 
 Behavior:
 
-* Targets only the current session's active run.
-* Works independently of the session's `/queue` mode.
-* Starts a normal turn with the same message when the session is idle or the
+- Targets only the current session's active run.
+- Works independently of the session's `/queue` mode.
+- Starts a normal turn with the same message when the session is idle or the
   active run cannot accept steering.
-* Uses the active runtime's steering path, so the model sees the guidance at
+- Uses the active runtime's steering path, so the model sees the guidance at
   the next supported runtime boundary.
 
 ## Steer vs queue
@@ -49,12 +47,12 @@ continues as a normal prompt.
 
 Use:
 
-* `/steer <message>` when you want to guide the active run right now.
-* `/queue steer` when you want future normal messages to steer active runs by
+- `/steer <message>` when you want to guide the active run right now.
+- `/queue steer` when you want future normal messages to steer active runs by
   default.
-* `/queue collect` or `/queue followup` when future normal messages should wait
+- `/queue collect` or `/queue followup` when future normal messages should wait
   for a later turn instead of steering the active run.
-* `/queue interrupt` when the newest message should replace the active run
+- `/queue interrupt` when the newest message should replace the active run
   instead of steering it.
 
 For queue modes and steering boundaries, see [Command queue](/concepts/queue) and
@@ -64,7 +62,7 @@ For queue modes and steering boundaries, see [Command queue](/concepts/queue) an
 
 Use `/subagents steer` when the target is a child run:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /subagents steer 2 focus only on the API surface
 ```
 
@@ -76,7 +74,7 @@ sub-agent ids, labels, and control commands.
 
 Use `/acp steer` when the target is an ACP harness session:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 /acp steer --session agent:main:acp:codex tighten the repro
 ```
 
@@ -85,7 +83,9 @@ behavior.
 
 ## Related
 
-* [Slash commands](/tools/slash-commands)
-* [Command queue](/concepts/queue)
-* [Steering queue](/concepts/queue-steering)
-* [Sub-agents](/tools/subagents)
+- [Slash commands](/tools/slash-commands)
+- [Command queue](/concepts/queue)
+- [Steering queue](/concepts/queue-steering)
+- [Sub-agents](/tools/subagents)
+
+---

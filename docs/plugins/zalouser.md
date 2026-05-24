@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal plugin"
 source: "https://docs.openclaw.ai/plugins/zalouser"
-source_hash: "4b2868533fd01490cce9b0c3ffac977496d1661e03109e16047d583c443cfbd4"
+source_hash: "87056efbb807d4cfdaab7e3018304f8d86f3e398a53d983a6a47423ee43a25d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/zalouser.md"
@@ -13,13 +13,11 @@ duplicate_index: 1
 # Zalo personal plugin
 Source: https://docs.openclaw.ai/plugins/zalouser
 
-
-
 Zalo Personal support for OpenClaw via a plugin, using native `zca-js` to automate a normal Zalo user account.
 
-<Warning>
-  Unofficial automation may lead to account suspension or ban. Use at your own risk.
-</Warning>
+Warning
+
+Unofficial automation may lead to account suspension or ban. Use at your own risk.
 
 ## Naming
 
@@ -37,7 +35,7 @@ No external `zca`/`openzca` CLI binary is required.
 
 ### Option A: install from npm
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @openclaw/zalouser
 ```
 
@@ -48,7 +46,7 @@ Restart the Gateway afterwards.
 
 ### Option B: install from a local folder (dev)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 PLUGIN_SRC=./path/to/local/zalouser-plugin
 openclaw plugins install "$PLUGIN_SRC"
 cd "$PLUGIN_SRC" && pnpm install
@@ -60,7 +58,7 @@ Restart the Gateway afterwards.
 
 Channel config lives under `channels.zalouser` (not `plugins.entries.*`):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   channels: {
     zalouser: {
@@ -73,7 +71,7 @@ Channel config lives under `channels.zalouser` (not `plugins.entries.*`):
 
 ## CLI
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels login --channel zalouser
 openclaw channels logout --channel zalouser
 openclaw channels status --probe
@@ -91,5 +89,7 @@ Channel message actions also support `react` for message reactions.
 
 ## Related
 
-* [Building plugins](/plugins/building-plugins)
-* [ClawHub](/clawhub)
+- [Building plugins](/plugins/building-plugins)
+- [ClawHub](/clawhub)
+
+---

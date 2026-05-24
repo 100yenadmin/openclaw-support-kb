@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health"
 source: "https://docs.openclaw.ai/cli/health"
-source_hash: "b7e1c91e719423d589b6a1cb001b27ff09da105b515ad27cbff0ccf74ef7e802"
+source_hash: "4c1f90d54f0a8872461cfb08cef918ec7242fc9c255798d0b3e5c7e65efe8b47"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/health.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Health
 Source: https://docs.openclaw.ai/cli/health
-
-
 
 # `openclaw health`
 
@@ -30,7 +28,7 @@ Fetch health from the running Gateway.
 
 Examples:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw health
 openclaw health --json
 openclaw health --timeout 2500
@@ -40,14 +38,16 @@ openclaw health --debug
 
 Notes:
 
-* Default `openclaw health` asks the running gateway for its health snapshot. When the
+- Default `openclaw health` asks the running gateway for its health snapshot. When the
   gateway already has a fresh cached snapshot, it can return that cached payload and
   refresh in the background.
-* `--verbose` forces a live probe, prints gateway connection details, and expands the
+- `--verbose` forces a live probe, prints gateway connection details, and expands the
   human-readable output across all configured accounts and agents.
-* Output includes per-agent session stores when multiple agents are configured.
+- Output includes per-agent session stores when multiple agents are configured.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Gateway health](/gateway/health)
+- [CLI reference](/cli)
+- [Gateway health](/gateway/health)
+
+---

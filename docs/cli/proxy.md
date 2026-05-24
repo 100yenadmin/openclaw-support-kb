@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Proxy"
 source: "https://docs.openclaw.ai/cli/proxy"
-source_hash: "844bac51ac6d32bc4ec7885ab33ddd013c83dceb14ff6fd9f85deb6140e9a147"
+source_hash: "1b598c461eb466c0bbe124ec511a07797d46de2d79c556bc5dc500e0a65371ff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/proxy.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Proxy
 Source: https://docs.openclaw.ai/cli/proxy
-
-
 
 # `openclaw proxy`
 
@@ -28,7 +26,7 @@ captured blobs, and purge local capture data.
 
 ## Commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw proxy start [--host <host>] [--port <port>]
 openclaw proxy run [--host <host>] [--port <port>] -- <cmd...>
 openclaw proxy validate [--json] [--proxy-url <url>] [--proxy-ca-file <path>] [--allowed-url <url>] [--denied-url <url>] [--apns-reachable] [--apns-authority <url>] [--timeout-ms <ms>]
@@ -59,14 +57,14 @@ reachability signal.
 
 Options:
 
-* `--json`: print machine-readable JSON.
-* `--proxy-url <url>`: validate this `http://` or `https://` proxy URL instead of config or env.
-* `--proxy-ca-file <path>`: trust this PEM CA file for TLS verification of an HTTPS proxy endpoint.
-* `--allowed-url <url>`: add a destination expected to succeed through the proxy. Repeat to check multiple destinations.
-* `--denied-url <url>`: add a destination expected to be blocked by the proxy. Repeat to check multiple destinations.
-* `--apns-reachable`: also verify sandbox APNs HTTP/2 is reachable through the proxy.
-* `--apns-authority <url>`: APNs authority to probe with `--apns-reachable` (`https://api.sandbox.push.apple.com` by default; production is `https://api.push.apple.com`).
-* `--timeout-ms <ms>`: per-request timeout in milliseconds.
+- `--json`: print machine-readable JSON.
+- `--proxy-url <url>`: validate this `http://` or `https://` proxy URL instead of config or env.
+- `--proxy-ca-file <path>`: trust this PEM CA file for TLS verification of an HTTPS proxy endpoint.
+- `--allowed-url <url>`: add a destination expected to succeed through the proxy. Repeat to check multiple destinations.
+- `--denied-url <url>`: add a destination expected to be blocked by the proxy. Repeat to check multiple destinations.
+- `--apns-reachable`: also verify sandbox APNs HTTP/2 is reachable through the proxy.
+- `--apns-authority <url>`: APNs authority to probe with `--apns-reachable` (`https://api.sandbox.push.apple.com` by default; production is `https://api.push.apple.com`).
+- `--timeout-ms <ms>`: per-request timeout in milliseconds.
 
 See [Network Proxy](/security/network-proxy) for deployment guidance and denial
 semantics.
@@ -75,23 +73,25 @@ semantics.
 
 `openclaw proxy query --preset <name>` accepts:
 
-* `double-sends`
-* `retry-storms`
-* `cache-busting`
-* `ws-duplicate-frames`
-* `missing-ack`
-* `error-bursts`
+- `double-sends`
+- `retry-storms`
+- `cache-busting`
+- `ws-duplicate-frames`
+- `missing-ack`
+- `error-bursts`
 
 ## Notes
 
-* `start` defaults to `127.0.0.1` unless `--host` is set.
-* `run` starts a local debug proxy and then runs the command after `--`.
-* The debug proxy's direct upstream forwarding opens upstream sockets for diagnostics. When OpenClaw managed proxy mode is active, direct forwarding for proxy requests and CONNECT tunnels is disabled by default; set `OPENCLAW_DEBUG_PROXY_ALLOW_DIRECT_CONNECT_WITH_MANAGED_PROXY=1` only for approved local diagnostics.
-* `validate` exits with code 1 when proxy config or destination checks fail.
-* Captures are local debugging data; use `openclaw proxy purge` when finished.
+- `start` defaults to `127.0.0.1` unless `--host` is set.
+- `run` starts a local debug proxy and then runs the command after `--`.
+- The debug proxy's direct upstream forwarding opens upstream sockets for diagnostics. When OpenClaw managed proxy mode is active, direct forwarding for proxy requests and CONNECT tunnels is disabled by default; set `OPENCLAW_DEBUG_PROXY_ALLOW_DIRECT_CONNECT_WITH_MANAGED_PROXY=1` only for approved local diagnostics.
+- `validate` exits with code 1 when proxy config or destination checks fail.
+- Captures are local debugging data; use `openclaw proxy purge` when finished.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Network Proxy](/security/network-proxy)
-* [Trusted proxy auth](/gateway/trusted-proxy-auth)
+- [CLI reference](/cli)
+- [Network Proxy](/security/network-proxy)
+- [Trusted proxy auth](/gateway/trusted-proxy-auth)
+
+---

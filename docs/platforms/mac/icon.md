@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Menu bar icon"
 source: "https://docs.openclaw.ai/platforms/mac/icon"
-source_hash: "e28218600ed6b37c82e9f3a0e3dab9903c6bff36f4051e896458dc04d6672740"
+source_hash: "eaf0b27b52e465b4428397c4370c5ef436ed716fb662389b91ffac9494f4af2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/icon.md"
@@ -13,34 +13,34 @@ duplicate_index: 1
 # Menu bar icon
 Source: https://docs.openclaw.ai/platforms/mac/icon
 
-
-
 # Menu Bar Icon States
 
 Author: steipete · Updated: 2025-12-06 · Scope: macOS app (`apps/macos`)
 
-* **Idle:** Normal icon animation (blink, occasional wiggle).
-* **Paused:** Status item uses `appearsDisabled`; no motion.
-* **Voice trigger (big ears):** Voice wake detector calls `AppState.triggerVoiceEars(ttl: nil)` when the wake word is heard, keeping `earBoostActive=true` while the utterance is captured. Ears scale up (1.9x), get circular ear holes for readability, then drop via `stopVoiceEars()` after 1s of silence. Only fired from the in-app voice pipeline.
-* **Working (agent running):** `AppState.isWorking=true` drives a "tail/leg scurry" micro-motion: faster leg wiggle and slight offset while work is in-flight. Currently toggled around WebChat agent runs; add the same toggle around other long tasks when you wire them.
+- **Idle:** Normal icon animation (blink, occasional wiggle).
+- **Paused:** Status item uses `appearsDisabled`; no motion.
+- **Voice trigger (big ears):** Voice wake detector calls `AppState.triggerVoiceEars(ttl: nil)` when the wake word is heard, keeping `earBoostActive=true` while the utterance is captured. Ears scale up (1.9x), get circular ear holes for readability, then drop via `stopVoiceEars()` after 1s of silence. Only fired from the in-app voice pipeline.
+- **Working (agent running):** `AppState.isWorking=true` drives a "tail/leg scurry" micro-motion: faster leg wiggle and slight offset while work is in-flight. Currently toggled around WebChat agent runs; add the same toggle around other long tasks when you wire them.
 
 Wiring points
 
-* Voice wake: runtime/tester call `AppState.triggerVoiceEars(ttl: nil)` on trigger and `stopVoiceEars()` after 1s of silence to match the capture window.
-* Agent activity: set `AppStateStore.shared.setWorking(true/false)` around work spans (already done in WebChat agent call). Keep spans short and reset in `defer` blocks to avoid stuck animations.
+- Voice wake: runtime/tester call `AppState.triggerVoiceEars(ttl: nil)` on trigger and `stopVoiceEars()` after 1s of silence to match the capture window.
+- Agent activity: set `AppStateStore.shared.setWorking(true/false)` around work spans (already done in WebChat agent call). Keep spans short and reset in `defer` blocks to avoid stuck animations.
 
 Shapes & sizes
 
-* Base icon drawn in `CritterIconRenderer.makeIcon(blink:legWiggle:earWiggle:earScale:earHoles:)`.
-* Ear scale defaults to `1.0`; voice boost sets `earScale=1.9` and toggles `earHoles=true` without changing overall frame (18×18 pt template image rendered into a 36×36 px Retina backing store).
-* Scurry uses leg wiggle up to \~1.0 with a small horizontal jiggle; it's additive to any existing idle wiggle.
+- Base icon drawn in `CritterIconRenderer.makeIcon(blink:legWiggle:earWiggle:earScale:earHoles:)`.
+- Ear scale defaults to `1.0`; voice boost sets `earScale=1.9` and toggles `earHoles=true` without changing overall frame (18×18 pt template image rendered into a 36×36 px Retina backing store).
+- Scurry uses leg wiggle up to ~1.0 with a small horizontal jiggle; it's additive to any existing idle wiggle.
 
 Behavioral notes
 
-* No external CLI/broker toggle for ears/working; keep it internal to the app's own signals to avoid accidental flapping.
-* Keep TTLs short (\<10s) so the icon returns to baseline quickly if a job hangs.
+- No external CLI/broker toggle for ears/working; keep it internal to the app's own signals to avoid accidental flapping.
+- Keep TTLs short (&lt;10s) so the icon returns to baseline quickly if a job hangs.
 
 ## Related
 
-* [Menu bar](/platforms/mac/menu-bar)
-* [macOS app](/platforms/macos)
+- [Menu bar](/platforms/mac/menu-bar)
+- [macOS app](/platforms/macos)
+
+---

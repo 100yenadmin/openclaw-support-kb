@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin install overrides"
 source: "https://docs.openclaw.ai/plugins/install-overrides"
-source_hash: "81d09aa3bdff3dfdc4a1c30313edeb79c8d2d02eee427f8c7c57f8900cb99bb3"
+source_hash: "58ff0d840b2dbb4ac1554c60757df901905b2ab6e2c83cdfb3d3a52c0333f6cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/install-overrides.md"
@@ -13,23 +13,21 @@ duplicate_index: 1
 # Plugin install overrides
 Source: https://docs.openclaw.ai/plugins/install-overrides
 
-
-
 Plugin install overrides let maintainers test setup-time plugin installs against
 a specific npm package or local npm-pack tarball. They are for E2E and package
 validation only. Normal users should install plugins with
 [`openclaw plugins install`](/cli/plugins).
 
-<Warning>
-  Overrides execute plugin code from the source you provide. Use them only in an
-  isolated state directory or disposable test machine.
-</Warning>
+Warning
+
+Overrides execute plugin code from the source you provide. Use them only in an
+isolated state directory or disposable test machine.
 
 ## Environment
 
 Overrides are disabled unless both variables are set:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export OPENCLAW_ALLOW_PLUGIN_INSTALL_OVERRIDES=1
 export OPENCLAW_PLUGIN_INSTALL_OVERRIDES='{
   "codex": "npm-pack:/tmp/openclaw-codex-2026.5.8.tgz",
@@ -39,8 +37,8 @@ export OPENCLAW_PLUGIN_INSTALL_OVERRIDES='{
 
 The override map is JSON keyed by plugin id. Values support:
 
-* `npm:<registry-spec>` for registry packages and exact versions or tags
-* `npm-pack:<path.tgz>` for local tarballs produced by `npm pack`
+- `npm:<registry-spec>` for registry packages and exact versions or tags
+- `npm-pack:<path.tgz>` for local tarballs produced by `npm pack`
 
 Relative `npm-pack:` paths resolve from the current working directory.
 
@@ -66,7 +64,7 @@ the trusted shell, CI job, or remote test command that launches OpenClaw.
 Use an isolated state directory so package installs and install records do not
 touch your normal OpenClaw state:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm pack extensions/codex --pack-destination /tmp
 
 OPENCLAW_STATE_DIR="$(mktemp -d)" \
@@ -77,7 +75,7 @@ pnpm openclaw onboard --mode local
 
 Verify the installed package under the state directory:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 find "$OPENCLAW_STATE_DIR/npm/node_modules" -maxdepth 3 -name package.json -print
 grep -R '"@openclaw/codex"' "$OPENCLAW_STATE_DIR/npm/package-lock.json"
 ```
@@ -85,3 +83,5 @@ grep -R '"@openclaw/codex"' "$OPENCLAW_STATE_DIR/npm/package-lock.json"
 For live provider E2E, source the real API key from a trusted shell or CI secret
 before launching the test command. Do not print keys; report only the source and
 whether the key was present.
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "d35f413ccde04af76879d1bde8a0ac7a66bf7e82e7fa33b45013aea793f5c760"
+source_hash: "42b93f40f8c321b6c422de5c2918fbb7b615c32fa9528c78b6e24ddc5c655dc8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Agent harness plugins
 Source: https://docs.openclaw.ai/plugins/sdk-agent-harness
-
-
 
 An **agent harness** is the low level executor for one prepared OpenClaw agent
 turn. It is not a model provider, not a channel, and not a tool registry.
@@ -30,9 +28,9 @@ runtime and the normal OpenClaw provider transport is the wrong abstraction.
 
 Examples:
 
-* a native coding-agent server that owns threads and compaction
-* a local CLI or daemon that must stream native plan/reasoning/tool events
-* a model runtime that needs its own resume id in addition to the OpenClaw
+- a native coding-agent server that owns threads and compaction
+- a local CLI or daemon that must stream native plan/reasoning/tool events
+- a model runtime that needs its own resume id in addition to the OpenClaw
   session transcript
 
 Do **not** register a harness just to add a new LLM API. For normal HTTP or
@@ -42,13 +40,13 @@ WebSocket model APIs, build a [provider plugin](/plugins/sdk-provider-plugins).
 
 Before a harness is selected, OpenClaw has already resolved:
 
-* provider and model
-* runtime auth state
-* thinking level and context budget
-* the OpenClaw transcript/session file
-* workspace, sandbox, and tool policy
-* channel reply callbacks and streaming callbacks
-* model fallback and live model switching policy
+- provider and model
+- runtime auth state
+- thinking level and context budget
+- the OpenClaw transcript/session file
+- workspace, sandbox, and tool policy
+- channel reply callbacks and streaming callbacks
+- model fallback and live model switching policy
 
 That split is intentional. A harness runs a prepared attempt; it does not pick
 providers, replace channel delivery, or silently switch models.
@@ -57,14 +55,14 @@ The prepared attempt also includes `params.runtimePlan`, an OpenClaw-owned
 policy bundle for runtime decisions that must stay shared across PI and native
 harnesses:
 
-* `runtimePlan.tools.normalize(...)` and
+- `runtimePlan.tools.normalize(...)` and
   `runtimePlan.tools.logDiagnostics(...)` for provider-aware tool schema policy
-* `runtimePlan.transcript.resolvePolicy(...)` for transcript sanitization and
+- `runtimePlan.transcript.resolvePolicy(...)` for transcript sanitization and
   tool-call repair policy
-* `runtimePlan.delivery.isSilentPayload(...)` for shared `NO_REPLY` and media
+- `runtimePlan.delivery.isSilentPayload(...)` for shared `NO_REPLY` and media
   delivery suppression
-* `runtimePlan.outcome.classifyRunResult(...)` for model fallback classification
-* `runtimePlan.observability` for resolved provider/model/harness metadata
+- `runtimePlan.outcome.classifyRunResult(...)` for model fallback classification
+- `runtimePlan.observability` for resolved provider/model/harness metadata
 
 Harnesses may use the plan for decisions that need to match PI behavior, but
 should still treat it as host-owned attempt state. Do not mutate it or use it to
@@ -74,9 +72,7 @@ switch providers/models inside a turn.
 
 **Import:** `openclaw/plugin-sdk/agent-harness`
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import type { AgentHarness } from "openclaw/plugin-sdk/agent-harness";
-import { definePluginEntry } from "openclaw/plugin-sdk/plugin-entry";
+```typescript
 
 const myHarness: AgentHarness = {
   id: "my-harness",
@@ -144,13 +140,13 @@ OpenClaw. The harness then claims that provider in `supports(...)`.
 
 The bundled Codex plugin follows this pattern:
 
-* preferred user model refs: `openai/gpt-5.5`
-* compatibility refs: legacy `codex/gpt-*` refs remain accepted, but new
+- preferred user model refs: `openai/gpt-5.5`
+- compatibility refs: legacy `codex/gpt-*` refs remain accepted, but new
   configs should not use them as normal provider/model refs
-* harness id: `codex`
-* auth: synthetic provider availability, because the Codex harness owns the
+- harness id: `codex`
+- auth: synthetic provider availability, because the Codex harness owns the
   native Codex login/session
-* app-server request: OpenClaw sends the bare model id to Codex and lets the
+- app-server request: OpenClaw sends the bare model id to Codex and lets the
   harness talk to the native app-server protocol
 
 The Codex plugin is additive. Plain `openai/gpt-*` agent refs on the official
@@ -220,7 +216,7 @@ does not block an explicit provider/model `agentRuntime.id: "pi"`.
 
 For Codex-only embedded runs:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "models": {
     "providers": {
@@ -242,7 +238,7 @@ For Codex-only embedded runs:
 If you want a CLI backend for one canonical model, put the runtime on that
 model entry:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "agents": {
     "defaults": {
@@ -261,7 +257,7 @@ model entry:
 
 Per-agent overrides use the same model-scoped shape:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "agents": {
     "list": [
@@ -281,7 +277,7 @@ Per-agent overrides use the same model-scoped shape:
 
 Legacy whole-agent runtime examples like this are ignored:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "agents": {
     "defaults": {
@@ -310,10 +306,10 @@ mirroring user-visible assistant/tool output into the OpenClaw transcript.
 
 The OpenClaw transcript remains the compatibility layer for:
 
-* channel-visible session history
-* transcript search and indexing
-* switching back to the built-in PI harness on a later turn
-* generic `/new`, `/reset`, and session deletion behavior
+- channel-visible session history
+- transcript search and indexing
+- switching back to the built-in PI harness on a later turn
+- generic `/new`, `/reset`, and session deletion behavior
 
 If your harness stores a sidecar binding, implement `reset(...)` so OpenClaw can
 clear it when the owning OpenClaw session is reset.
@@ -329,18 +325,20 @@ on the same delivery path as PI-backed runs.
 
 ## Current limitations
 
-* The public import path is generic, but some attempt/result type aliases still
+- The public import path is generic, but some attempt/result type aliases still
   carry `Pi` names for compatibility.
-* Third-party harness installation is experimental. Prefer provider plugins
+- Third-party harness installation is experimental. Prefer provider plugins
   until you need a native session runtime.
-* Harness switching is supported across turns. Do not switch harnesses in the
+- Harness switching is supported across turns. Do not switch harnesses in the
   middle of a turn after native tools, approvals, assistant text, or message
   sends have started.
 
 ## Related
 
-* [SDK Overview](/plugins/sdk-overview)
-* [Runtime Helpers](/plugins/sdk-runtime)
-* [Provider Plugins](/plugins/sdk-provider-plugins)
-* [Codex Harness](/plugins/codex-harness)
-* [Model Providers](/concepts/model-providers)
+- [SDK Overview](/plugins/sdk-overview)
+- [Runtime Helpers](/plugins/sdk-runtime)
+- [Provider Plugins](/plugins/sdk-provider-plugins)
+- [Codex Harness](/plugins/codex-harness)
+- [Model Providers](/concepts/model-providers)
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness runtime"
 source: "https://docs.openclaw.ai/plugins/codex-harness-runtime"
-source_hash: "6aeecec6373c2392289a75eacb585be049567c627eb43886e3a36f35388fae31"
+source_hash: "f345f3ee2bc9375051166e86e7774790872c0cc096425f8a49120347d9aa862a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-runtime.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Codex harness runtime
 Source: https://docs.openclaw.ai/plugins/codex-harness-runtime
-
-
 
 This page documents the runtime contract for Codex harness turns. For setup and
 routing, start with [Codex harness](/plugins/codex-harness). For config fields,
@@ -246,10 +244,12 @@ turn has no assistant text.
 
 ## Related
 
-* [Codex harness](/plugins/codex-harness)
-* [Codex harness reference](/plugins/codex-harness-reference)
-* [Native Codex plugins](/plugins/codex-native-plugins)
-* [Plugin hooks](/plugins/hooks)
-* [Agent harness plugins](/plugins/sdk-agent-harness)
-* [Diagnostics export](/gateway/diagnostics)
-* [Trajectory export](/tools/trajectory)
+- [Codex harness](/plugins/codex-harness)
+- [Codex harness reference](/plugins/codex-harness-reference)
+- [Native Codex plugins](/plugins/codex-native-plugins)
+- [Plugin hooks](/plugins/hooks)
+- [Agent harness plugins](/plugins/sdk-agent-harness)
+- [Diagnostics export](/gateway/diagnostics)
+- [Trajectory export](/tools/trajectory)
+
+---

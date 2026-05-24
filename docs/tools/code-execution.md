@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code execution"
 source: "https://docs.openclaw.ai/tools/code-execution"
-source_hash: "205bde7e4648b13de404f2d3718332aa0b4835faaf7e65500702028c41c27569"
+source_hash: "c78b0369b06405ade110558f205f009d872a8087d46daf09c427ab0c30018e74"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-execution.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Code execution
 Source: https://docs.openclaw.ai/tools/code-execution
-
-
 
 `code_execution` runs sandboxed remote Python analysis on xAI's Responses API. It is registered by the bundled `xai` plugin (under the `tools` contract) and dispatches to the same `https://api.x.ai/v1/responses` endpoint used by `x_search`.
 
@@ -28,29 +26,32 @@ Source: https://docs.openclaw.ai/tools/code-execution
 
 This is different from local [`exec`](/tools/exec):
 
-* `exec` runs shell commands on your machine or paired node.
-* `code_execution` runs Python in xAI's remote sandbox.
+- `exec` runs shell commands on your machine or paired node.
+- `code_execution` runs Python in xAI's remote sandbox.
 
 Use `code_execution` for:
 
-* Calculations.
-* Tabulation.
-* Quick statistics.
-* Chart-style analysis.
-* Analyzing data returned by `x_search` or `web_search`.
+- Calculations.
+- Tabulation.
+- Quick statistics.
+- Chart-style analysis.
+- Analyzing data returned by `x_search` or `web_search`.
 
 Do **not** use it when you need local files, your shell, your repo, or paired devices. Use [`exec`](/tools/exec) for that.
 
 ## Setup
 
-<Steps>
-  <Step title="Provide xAI credentials">
+Steps
+
+
+Provide xAI credentials
+
     Sign in with Grok OAuth using an eligible SuperGrok or X Premium subscription,
     use the remote-friendly device-code flow, or store an API key. OAuth works
     for `code_execution` and `x_search`; `XAI_API_KEY` or plugin web-search
     config can also power Grok `web_search`.
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw models auth login --provider xai --method oauth
     openclaw models auth login --provider xai --device-code
     ```
@@ -58,21 +59,21 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
     During a fresh install, the same auth choices are available inside
     onboarding:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw onboard --install-daemon
     openclaw onboard --install-daemon --auth-choice xai-device-code
     ```
 
     Or use an API key:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw models auth login --provider xai --method api-key
     export XAI_API_KEY=xai-...
     ```
 
     Or via config:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -87,14 +88,17 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
       },
     }
     ```
-  </Step>
 
-  <Step title="Enable and tune code_execution">
+
+
+
+Enable and tune code_execution
+
     `code_execution` is available when xAI credentials are available. Set
     `plugins.entries.xai.config.codeExecution.enabled` to `false` to disable it,
     or use the same block to tune the model and timeout.
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       plugins: {
         entries: {
@@ -112,30 +116,33 @@ Do **not** use it when you need local files, your shell, your repo, or paired de
       },
     }
     ```
-  </Step>
 
-  <Step title="Restart the Gateway">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Restart the Gateway
+
+    ```bash
     openclaw gateway restart
     ```
 
     `code_execution` shows up in the agent's tool list once the xAI plugin re-registers with `enabled: true`.
-  </Step>
-</Steps>
+
+
 
 ## How to use it
 
 Ask naturally and make the analysis intent explicit:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Use code_execution to calculate the 7-day moving average for these numbers: ...
 ```
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Use x_search to find posts mentioning OpenClaw this week, then use code_execution to count them by day.
 ```
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Use web_search to gather the latest AI benchmark numbers, then use code_execution to compare percent changes.
 ```
 
@@ -145,7 +152,7 @@ The tool takes a single `task` parameter internally, so the agent should send th
 
 When the tool runs without auth, it returns a structured `missing_xai_api_key` error pointing at the auth-profile, env var, and config options. The error is JSON, not a thrown exception, so the agent can self-correct:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "error": "missing_xai_api_key",
   "message": "code_execution needs xAI credentials. Run `openclaw onboard --auth-choice xai-oauth` to sign in with Grok, run `openclaw onboard --auth-choice xai-api-key`, set `XAI_API_KEY` in the Gateway environment, or configure `plugins.entries.xai.config.webSearch.apiKey`.",
@@ -155,27 +162,33 @@ When the tool runs without auth, it returns a structured `missing_xai_api_key` e
 
 ## Limits
 
-* This is remote xAI execution, not local process execution.
-* Treat results as ephemeral analysis, not a persistent notebook session.
-* Do not assume access to local files or your workspace.
-* For fresh X data, use [`x_search`](/tools/web#x_search) first and pipe the result into `code_execution`.
+- This is remote xAI execution, not local process execution.
+- Treat results as ephemeral analysis, not a persistent notebook session.
+- Do not assume access to local files or your workspace.
+- For fresh X data, use [`x_search`](/tools/web#x_search) first and pipe the result into `code_execution`.
 
 ## Related
 
-<CardGroup>
-  <Card title="Exec tool" href="/tools/exec" icon="terminal">
+CardGroup
+
+
+Exec tool
+
     Local shell execution on your machine or paired node.
-  </Card>
 
-  <Card title="Exec approvals" href="/tools/exec-approvals" icon="shield">
+
+Exec approvals
+
     Allow/deny policy for shell execution.
-  </Card>
 
-  <Card title="Web tools" href="/tools/web" icon="globe">
+
+Web tools
+
     `web_search`, `x_search`, and `web_fetch`.
-  </Card>
 
-  <Card title="xAI provider" href="/providers/xai" icon="microchip">
+
+xAI provider
+
     Grok models, web/x search, and code execution config.
-  </Card>
-</CardGroup>
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bridge protocol"
 source: "https://docs.openclaw.ai/gateway/bridge-protocol"
-source_hash: "38030efd7889d535e0a91bb04ce269ea84b76e767be77913acddcc1f183e0fd1"
+source_hash: "2b25ea40a7e93d2fafb643fa16eb299b605b0ea43308b75ccf53a473c7e21dd6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/bridge-protocol.md"
@@ -13,27 +13,25 @@ duplicate_index: 1
 # Bridge protocol
 Source: https://docs.openclaw.ai/gateway/bridge-protocol
 
+Warning
 
-
-<Warning>
-  The TCP bridge has been **removed**. Current OpenClaw builds do not ship the bridge listener and `bridge.*` config keys are no longer in the schema. This page is kept for historical reference only. Use the [Gateway Protocol](/gateway/protocol) for all node/operator clients.
-</Warning>
+The TCP bridge has been **removed**. Current OpenClaw builds do not ship the bridge listener and `bridge.*` config keys are no longer in the schema. This page is kept for historical reference only. Use the [Gateway Protocol](/gateway/protocol) for all node/operator clients.
 
 ## Why it existed
 
-* **Security boundary**: the bridge exposes a small allowlist instead of the
+- **Security boundary**: the bridge exposes a small allowlist instead of the
   full gateway API surface.
-* **Pairing + node identity**: node admission is owned by the gateway and tied
+- **Pairing + node identity**: node admission is owned by the gateway and tied
   to a per-node token.
-* **Discovery UX**: nodes can discover gateways via Bonjour on LAN, or connect
+- **Discovery UX**: nodes can discover gateways via Bonjour on LAN, or connect
   directly over a tailnet.
-* **Loopback WS**: the full WS control plane stays local unless tunneled via SSH.
+- **Loopback WS**: the full WS control plane stays local unless tunneled via SSH.
 
 ## Transport
 
-* TCP, one JSON object per line (JSONL).
-* Optional TLS (when `bridge.tls.enabled` is true).
-* Historical default listener port was `18790` (current builds do not start a
+- TCP, one JSON object per line (JSONL).
+- Optional TLS (when `bridge.tls.enabled` is true).
+- Historical default listener port was `18790` (current builds do not start a
   TCP bridge).
 
 When TLS is enabled, discovery TXT records include `bridgeTls=1` plus
@@ -57,15 +55,15 @@ the refactored protocol.
 
 Client → Gateway:
 
-* `req` / `res`: scoped gateway RPC (chat, sessions, config, health, voicewake, skills.bins)
-* `event`: node signals (voice transcript, agent request, chat subscribe, exec lifecycle)
+- `req` / `res`: scoped gateway RPC (chat, sessions, config, health, voicewake, skills.bins)
+- `event`: node signals (voice transcript, agent request, chat subscribe, exec lifecycle)
 
 Gateway → Client:
 
-* `invoke` / `invoke-res`: node commands (`canvas.*`, `camera.*`, `screen.record`,
+- `invoke` / `invoke-res`: node commands (`canvas.*`, `camera.*`, `screen.record`,
   `location.get`, `sms.send`)
-* `event`: chat updates for subscribed sessions
-* `ping` / `pong`: keepalive
+- `event`: chat updates for subscribed sessions
+- `ping` / `pong`: keepalive
 
 Legacy allowlist enforcement lived in `src/gateway/server-bridge.ts` (removed).
 
@@ -78,19 +76,19 @@ the event as a terminal denial and does not enqueue a system event or wake agent
 
 Payload fields (all optional unless noted):
 
-* `sessionKey` (required): agent session for event correlation and, for
+- `sessionKey` (required): agent session for event correlation and, for
   `exec.finished`, system event delivery.
-* `runId`: unique exec id for grouping.
-* `command`: raw or formatted command string.
-* `exitCode`, `timedOut`, `success`, `output`: completion details (finished only).
-* `reason`: denial reason (denied only).
+- `runId`: unique exec id for grouping.
+- `command`: raw or formatted command string.
+- `exitCode`, `timedOut`, `success`, `output`: completion details (finished only).
+- `reason`: denial reason (denied only).
 
 ## Historical tailnet usage
 
-* Bind the bridge to a tailnet IP: `bridge.bind: "tailnet"` in
+- Bind the bridge to a tailnet IP: `bridge.bind: "tailnet"` in
   `~/.openclaw/openclaw.json` (historical only; `bridge.*` is no longer valid).
-* Clients connect via MagicDNS name or tailnet IP.
-* Bonjour does **not** cross networks; use manual host/port or wide-area DNS-SD
+- Clients connect via MagicDNS name or tailnet IP.
+- Bonjour does **not** cross networks; use manual host/port or wide-area DNS-SD
   when needed.
 
 ## Versioning
@@ -101,5 +99,7 @@ historical reference only; current node/operator clients use the WebSocket
 
 ## Related
 
-* [Gateway protocol](/gateway/protocol)
-* [Nodes](/nodes)
+- [Gateway protocol](/gateway/protocol)
+- [Nodes](/nodes)
+
+---

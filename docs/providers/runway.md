@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "5af08fc8cb9c894e8d7cf6063b70f240743aef497245e8e878335c92f393be7a"
+source_hash: "a5c82a4e553d2a6eca8fafe563a9d18674d887a0b1a70917dedd9c34ea2d50de"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Runway
 Source: https://docs.openclaw.ai/providers/runway
-
-
 
 OpenClaw ships a bundled `runway` provider for hosted video generation. The plugin is enabled by default and registers the `runway` provider against the `videoGenerationProviders` contract.
 
@@ -29,23 +27,27 @@ OpenClaw ships a bundled `runway` provider for hosted video generation. The plug
 
 ## Getting started
 
-<Steps>
-  <Step title="Set the API key">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Set the API key
+
+    ```bash
     openclaw onboard --auth-choice runway-api-key
     ```
-  </Step>
 
-  <Step title="Set Runway as the default video provider">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set Runway as the default video provider
+
+    ```bash
     openclaw config set agents.defaults.videoGenerationModel.primary "runway/gen4.5"
     ```
-  </Step>
 
-  <Step title="Generate a video">
+
+Generate a video
+
     Ask the agent to generate a video. Runway will be used automatically.
-  </Step>
-</Steps>
+
 
 ## Supported modes and models
 
@@ -64,17 +66,17 @@ Local image and video references are supported via data URIs.
 | Text-to-video         | `16:9`, `9:16`                              |
 | Image and video edits | `1:1`, `16:9`, `9:16`, `3:4`, `4:3`, `21:9` |
 
-<Warning>
-  Video-to-video currently requires `runway/gen4_aleph`. Other Runway model ids reject video reference inputs.
-</Warning>
+Warning
 
-<Note>
+  Video-to-video currently requires `runway/gen4_aleph`. Other Runway model ids reject video reference inputs.
+
+Note
+
   Picking a Runway model id from the wrong column produces an explicit error before the API request leaves OpenClaw. The provider validates `model` against the mode's allowlist (`TEXT_ONLY_MODELS`, `IMAGE_MODELS`, `VIDEO_MODELS`) in `extensions/runway/video-generation-provider.ts`.
-</Note>
 
 ## Configuration
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   agents: {
     defaults: {
@@ -88,27 +90,35 @@ Local image and video references are supported via data URIs.
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Environment variable aliases">
+AccordionGroup
+
+
+Environment variable aliases
+
     OpenClaw recognizes both `RUNWAYML_API_SECRET` (canonical) and `RUNWAY_API_KEY`.
     Either variable will authenticate the Runway provider.
-  </Accordion>
 
-  <Accordion title="Task polling">
+
+
+Task polling
+
     Runway uses a task-based API. After submitting a generation request, OpenClaw
     polls `GET /v1/tasks/{id}` until the video is ready. No additional
     configuration is needed for the polling behavior.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Related
 
-<CardGroup>
-  <Card title="Video generation" href="/tools/video-generation" icon="video">
-    Shared tool parameters, provider selection, and async behavior.
-  </Card>
+CardGroup
 
-  <Card title="Configuration reference" href="/gateway/config-agents#agent-defaults" icon="gear">
+
+Video generation
+
+    Shared tool parameters, provider selection, and async behavior.
+
+
+Configuration reference
+
     Agent default settings including video generation model.
-  </Card>
-</CardGroup>
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway-owned pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "eb7d2d47186198af23dca7fca3e5562dd2c187c2bb9cdac1b3c18a430c470f9c"
+source_hash: "c41f286c42cea1409551c002cf7d992adeb7a0b60cc513f492661a7787a65a2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/pairing.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Gateway-owned pairing
 Source: https://docs.openclaw.ai/gateway/pairing
-
-
 
 In Gateway-owned pairing, the **Gateway** is the source of truth for which nodes
 are allowed to join. UIs (macOS app, future clients) are just frontends that
@@ -25,9 +23,9 @@ Only clients that explicitly call `node.pair.*` use this flow.
 
 ## Concepts
 
-* **Pending request**: a node asked to join; requires approval.
-* **Paired node**: approved node with an issued auth token.
-* **Transport**: the Gateway WS endpoint forwards requests but does not decide
+- **Pending request**: a node asked to join; requires approval.
+- **Paired node**: approved node with an issued auth token.
+- **Transport**: the Gateway WS endpoint forwards requests but does not decide
   membership. (Legacy TCP bridge support has been removed.)
 
 ## How pairing works
@@ -42,7 +40,7 @@ Pending requests expire automatically after **5 minutes**.
 
 ## CLI workflow (headless friendly)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw nodes pending
 openclaw nodes approve <requestId>
 openclaw nodes reject <requestId>
@@ -57,61 +55,61 @@ openclaw nodes rename --node <id|name|ip> --name "Living Room iPad"
 
 Events:
 
-* `node.pair.requested` - emitted when a new pending request is created.
-* `node.pair.resolved` - emitted when a request is approved/rejected/expired.
+- `node.pair.requested` - emitted when a new pending request is created.
+- `node.pair.resolved` - emitted when a request is approved/rejected/expired.
 
 Methods:
 
-* `node.pair.request` - create or reuse a pending request.
-* `node.pair.list` - list pending + paired nodes (`operator.pairing`).
-* `node.pair.approve` - approve a pending request (issues token).
-* `node.pair.reject` - reject a pending request.
-* `node.pair.remove` - remove a stale paired node entry.
-* `node.pair.verify` - verify `{ nodeId, token }`.
+- `node.pair.request` - create or reuse a pending request.
+- `node.pair.list` - list pending + paired nodes (`operator.pairing`).
+- `node.pair.approve` - approve a pending request (issues token).
+- `node.pair.reject` - reject a pending request.
+- `node.pair.remove` - remove a stale paired node entry.
+- `node.pair.verify` - verify `{ nodeId, token }`.
 
 Notes:
 
-* `node.pair.request` is idempotent per node: repeated calls return the same
+- `node.pair.request` is idempotent per node: repeated calls return the same
   pending request.
-* Repeated requests for the same pending node also refresh the stored node
+- Repeated requests for the same pending node also refresh the stored node
   metadata and the latest allowlisted declared command snapshot for operator visibility.
-* Approval **always** generates a fresh token; no token is ever returned from
+- Approval **always** generates a fresh token; no token is ever returned from
   `node.pair.request`.
-* Operator scope levels and approval-time checks are summarized in
+- Operator scope levels and approval-time checks are summarized in
   [Operator scopes](/gateway/operator-scopes).
-* Requests may include `silent: true` as a hint for auto-approval flows.
-* `node.pair.approve` uses the pending request's declared commands to enforce
+- Requests may include `silent: true` as a hint for auto-approval flows.
+- `node.pair.approve` uses the pending request's declared commands to enforce
   extra approval scopes:
-  * commandless request: `operator.pairing`
-  * non-exec command request: `operator.pairing` + `operator.write`
-  * `system.run` / `system.run.prepare` / `system.which` request:
+  - commandless request: `operator.pairing`
+  - non-exec command request: `operator.pairing` + `operator.write`
+  - `system.run` / `system.run.prepare` / `system.which` request:
     `operator.pairing` + `operator.admin`
 
-<Warning>
-  Node pairing is a trust and identity flow plus token issuance. It does **not** pin the live node command surface per node.
+Warning
 
-  * Live node commands come from what the node declares on connect after the gateway's global node command policy (`gateway.nodes.allowCommands` and `denyCommands`) is applied.
-  * Per-node `system.run` allow and ask policy lives on the node in `exec.approvals.node.*`, not in the pairing record.
-</Warning>
+Node pairing is a trust and identity flow plus token issuance. It does **not** pin the live node command surface per node.
+
+- Live node commands come from what the node declares on connect after the gateway's global node command policy (`gateway.nodes.allowCommands` and `denyCommands`) is applied.
+- Per-node `system.run` allow and ask policy lives on the node in `exec.approvals.node.*`, not in the pairing record.
 
 ## Node command gating (2026.3.31+)
 
-<Warning>
-  **Breaking change:** Starting with `2026.3.31`, node commands are disabled until node pairing is approved. Device pairing alone is no longer enough to expose declared node commands.
-</Warning>
+Warning
+
+**Breaking change:** Starting with `2026.3.31`, node commands are disabled until node pairing is approved. Device pairing alone is no longer enough to expose declared node commands.
 
 When a node connects for the first time, pairing is requested automatically. Until the pairing request is approved, all pending node commands from that node are filtered and will not execute. Once trust is established through pairing approval, the node's declared commands become available subject to the normal command policy.
 
 This means:
 
-* Nodes that were previously relying on device pairing alone to expose commands must now complete node pairing.
-* Commands queued before pairing approval are dropped, not deferred.
+- Nodes that were previously relying on device pairing alone to expose commands must now complete node pairing.
+- Commands queued before pairing approval are dropped, not deferred.
 
 ## Node event trust boundaries (2026.3.31+)
 
-<Warning>
-  **Breaking change:** Node-originated runs now stay on a reduced trusted surface.
-</Warning>
+Warning
+
+**Breaking change:** Node-originated runs now stay on a reduced trusted surface.
 
 Node-originated summaries and related session events are restricted to the intended trusted surface. Notification-driven or node-triggered flows that previously relied on broader host or session tool access may need adjustment. This hardening ensures that node events cannot escalate into host-level tool access beyond what the node's trust boundary permits.
 
@@ -124,8 +122,8 @@ last-seen state.
 
 The macOS app can optionally attempt a **silent approval** when:
 
-* the request is marked `silent`, and
-* the app can verify an SSH connection to the gateway host using the same user.
+- the request is marked `silent`, and
+- the app can verify an SSH connection to the gateway host using the same user.
 
 If silent approval fails, it falls back to the normal "Approve/Reject" prompt.
 
@@ -135,7 +133,7 @@ WS device pairing for `role: node` remains manual by default. For private
 node networks where the Gateway already trusts the network path, operators can
 opt in with explicit CIDRs or exact IPs:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     nodes: {
@@ -149,12 +147,12 @@ opt in with explicit CIDRs or exact IPs:
 
 Security boundary:
 
-* Disabled when `gateway.nodes.pairing.autoApproveCidrs` is unset.
-* No blanket LAN or private-network auto-approve mode exists.
-* Only fresh `role: node` device pairing with no requested scopes is eligible.
-* Operator, browser, Control UI, and WebChat clients stay manual.
-* Role, scope, metadata, and public-key upgrades stay manual.
-* Same-host loopback trusted-proxy header paths are not eligible because that
+- Disabled when `gateway.nodes.pairing.autoApproveCidrs` is unset.
+- No blanket LAN or private-network auto-approve mode exists.
+- Only fresh `role: node` device pairing with no requested scopes is eligible.
+- Operator, browser, Control UI, and WebChat clients stay manual.
+- Role, scope, metadata, and public-key upgrades stay manual.
+- Same-host loopback trusted-proxy header paths are not eligible because that
   path can be spoofed by local callers.
 
 ## Metadata-upgrade auto-approval
@@ -191,24 +189,26 @@ the equivalent rule on operator auth.
 
 Pairing state is stored under the Gateway state directory (default `~/.openclaw`):
 
-* `~/.openclaw/nodes/paired.json`
-* `~/.openclaw/nodes/pending.json`
+- `~/.openclaw/nodes/paired.json`
+- `~/.openclaw/nodes/pending.json`
 
 If you override `OPENCLAW_STATE_DIR`, the `nodes/` folder moves with it.
 
 Security notes:
 
-* Tokens are secrets; treat `paired.json` as sensitive.
-* Rotating a token requires re-approval (or deleting the node entry).
+- Tokens are secrets; treat `paired.json` as sensitive.
+- Rotating a token requires re-approval (or deleting the node entry).
 
 ## Transport behavior
 
-* The transport is **stateless**; it does not store membership.
-* If the Gateway is offline or pairing is disabled, nodes cannot pair.
-* If the Gateway is in remote mode, pairing still happens against the remote Gateway's store.
+- The transport is **stateless**; it does not store membership.
+- If the Gateway is offline or pairing is disabled, nodes cannot pair.
+- If the Gateway is in remote mode, pairing still happens against the remote Gateway's store.
 
 ## Related
 
-* [Channel pairing](/channels/pairing)
-* [Nodes](/nodes)
-* [Devices CLI](/cli/devices)
+- [Channel pairing](/channels/pairing)
+- [Nodes](/nodes)
+- [Devices CLI](/cli/devices)
+
+---

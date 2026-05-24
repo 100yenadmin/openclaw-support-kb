@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "954669bbd4ce64d248abd0bad070a032ed74566f51308004a61282185b542e8e"
+source_hash: "8e82cebe9fd7a08b468c87eae0921d376b079f4552701325896119f5172629ac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -13,9 +13,9 @@ duplicate_index: 1
 # Configuration
 Source: https://docs.openclaw.ai/gateway/configuration
 
-
-
-OpenClaw reads an optional <Tooltip>**JSON5**</Tooltip> config from `~/.openclaw/openclaw.json`.
+OpenClaw reads an optional
+Tooltip
+**JSON5** config from `~/.openclaw/openclaw.json`.
 The active config path must be a regular file. Symlinked `openclaw.json`
 layouts are unsupported for OpenClaw-owned writes; an atomic write may replace
 the path instead of preserving the symlink. If you keep config outside the
@@ -23,9 +23,9 @@ default state directory, point `OPENCLAW_CONFIG_PATH` directly at the real file.
 
 If the file is missing, OpenClaw uses safe defaults. Common reasons to add a config:
 
-* Connect channels and control who can message the bot
-* Set models, tools, sandboxing, or automation (cron, hooks)
-* Tune sessions, media, networking, or UI
+- Connect channels and control who can message the bot
+- Set models, tools, sandboxing, or automation (cron, hooks)
+- Tune sessions, media, networking, or UI
 
 See the [full reference](/gateway/configuration-reference) for every available field.
 
@@ -34,13 +34,13 @@ docs before editing config. Use this page for task-oriented guidance and
 [Configuration reference](/gateway/configuration-reference) for the broader
 field map and defaults.
 
-<Tip>
-  **New to configuration?** Start with `openclaw onboard` for interactive setup, or check out the [Configuration Examples](/gateway/configuration-examples) guide for complete copy-paste configs.
-</Tip>
+Tip
+
+**New to configuration?** Start with `openclaw onboard` for interactive setup, or check out the [Configuration Examples](/gateway/configuration-examples) guide for complete copy-paste configs.
 
 ## Minimal config
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 // ~/.openclaw/openclaw.json
 {
   agents: { defaults: { workspace: "~/.openclaw/workspace" } },
@@ -50,41 +50,46 @@ field map and defaults.
 
 ## Editing config
 
-<Tabs>
-  <Tab title="Interactive wizard">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Interactive wizard
+
+    ```bash
     openclaw onboard       # full onboarding flow
     openclaw configure     # config wizard
     ```
-  </Tab>
 
-  <Tab title="CLI (one-liners)">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+CLI (one-liners)
+
+    ```bash
     openclaw config get agents.defaults.workspace
     openclaw config set agents.defaults.heartbeat.every "2h"
     openclaw config unset plugins.entries.brave.config.webSearch.apiKey
     ```
-  </Tab>
 
-  <Tab title="Control UI">
+
+Control UI
+
     Open [http://127.0.0.1:18789](http://127.0.0.1:18789) and use the **Config** tab.
     The Control UI renders a form from the live config schema, including field
     `title` / `description` docs metadata plus plugin and channel schemas when
     available, with a **Raw JSON** editor as an escape hatch. For drill-down
     UIs and other tooling, the gateway also exposes `config.schema.lookup` to
     fetch one path-scoped schema node plus immediate child summaries.
-  </Tab>
 
-  <Tab title="Direct edit">
+
+Direct edit
+
     Edit `~/.openclaw/openclaw.json` directly. The Gateway watches the file and applies changes automatically (see [hot reload](#config-hot-reload)).
-  </Tab>
-</Tabs>
+
 
 ## Strict validation
 
-<Warning>
-  OpenClaw only accepts configurations that fully match the schema. Unknown keys, malformed types, or invalid values cause the Gateway to **refuse to start**. The only root-level exception is `$schema` (string), so editors can attach JSON Schema metadata.
-</Warning>
+Warning
+
+OpenClaw only accepts configurations that fully match the schema. Unknown keys, malformed types, or invalid values cause the Gateway to **refuse to start**. The only root-level exception is `$schema` (string), so editors can attach JSON Schema metadata.
 
 `openclaw config schema` prints the canonical JSON Schema used by Control UI
 and validation. `config.schema.lookup` fetches a single path-scoped node plus
@@ -95,10 +100,10 @@ manifest registry is loaded.
 
 When validation fails:
 
-* The Gateway does not boot
-* Only diagnostic commands work (`openclaw doctor`, `openclaw logs`, `openclaw health`, `openclaw status`)
-* Run `openclaw doctor` to see exact issues
-* Run `openclaw doctor --fix` (or `--yes`) to apply repairs
+- The Gateway does not boot
+- Only diagnostic commands work (`openclaw doctor`, `openclaw logs`, `openclaw health`, `openclaw status`)
+- Run `openclaw doctor` to see exact issues
+- Run `openclaw doctor --fix` (or `--yes`) to apply repairs
 
 The Gateway keeps a trusted last-known-good copy after each successful startup,
 but startup and hot reload do not restore it automatically. If `openclaw.json`
@@ -110,24 +115,27 @@ candidate contains redacted secret placeholders such as `***`.
 
 ## Common tasks
 
-<AccordionGroup>
-  <Accordion title="Set up a channel (WhatsApp, Telegram, Discord, etc.)">
+AccordionGroup
+
+
+Set up a channel (WhatsApp, Telegram, Discord, etc.)
+
     Each channel has its own config section under `channels.<provider>`. See the dedicated channel page for setup steps:
 
-    * [WhatsApp](/channels/whatsapp) - `channels.whatsapp`
-    * [Telegram](/channels/telegram) - `channels.telegram`
-    * [Discord](/channels/discord) - `channels.discord`
-    * [Feishu](/channels/feishu) - `channels.feishu`
-    * [Google Chat](/channels/googlechat) - `channels.googlechat`
-    * [Microsoft Teams](/channels/msteams) - `channels.msteams`
-    * [Slack](/channels/slack) - `channels.slack`
-    * [Signal](/channels/signal) - `channels.signal`
-    * [iMessage](/channels/imessage) - `channels.imessage`
-    * [Mattermost](/channels/mattermost) - `channels.mattermost`
+    - [WhatsApp](/channels/whatsapp) - `channels.whatsapp`
+    - [Telegram](/channels/telegram) - `channels.telegram`
+    - [Discord](/channels/discord) - `channels.discord`
+    - [Feishu](/channels/feishu) - `channels.feishu`
+    - [Google Chat](/channels/googlechat) - `channels.googlechat`
+    - [Microsoft Teams](/channels/msteams) - `channels.msteams`
+    - [Slack](/channels/slack) - `channels.slack`
+    - [Signal](/channels/signal) - `channels.signal`
+    - [iMessage](/channels/imessage) - `channels.imessage`
+    - [Mattermost](/channels/mattermost) - `channels.mattermost`
 
     All channels share the same DM policy pattern:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       channels: {
         telegram: {
@@ -139,12 +147,15 @@ candidate contains redacted secret placeholders such as `***`.
       },
     }
     ```
-  </Accordion>
 
-  <Accordion title="Choose and configure models">
+
+
+
+Choose and configure models
+
     Set the primary model and optional fallbacks:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -161,31 +172,37 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * `agents.defaults.models` defines the model catalog and acts as the allowlist for `/model`; `provider/*` entries filter `/model`, `/models`, and model pickers to selected providers while still using dynamic model discovery.
-    * Use `openclaw config set agents.defaults.models '<json>' --strict-json --merge` to add allowlist entries without removing existing models. Plain replacements that would remove entries are rejected unless you pass `--replace`.
-    * Model refs use `provider/model` format (e.g. `anthropic/claude-opus-4-6`).
-    * `agents.defaults.imageMaxDimensionPx` controls transcript/tool image downscaling (default `1200`); lower values usually reduce vision-token usage on screenshot-heavy runs.
-    * See [Models CLI](/concepts/models) for switching models in chat and [Model Failover](/concepts/model-failover) for auth rotation and fallback behavior.
-    * For custom/self-hosted providers, see [Custom providers](/gateway/config-tools#custom-providers-and-base-urls) in the reference.
-  </Accordion>
+    - `agents.defaults.models` defines the model catalog and acts as the allowlist for `/model`; `provider/*` entries filter `/model`, `/models`, and model pickers to selected providers while still using dynamic model discovery.
+    - Use `openclaw config set agents.defaults.models '<json>' --strict-json --merge` to add allowlist entries without removing existing models. Plain replacements that would remove entries are rejected unless you pass `--replace`.
+    - Model refs use `provider/model` format (e.g. `anthropic/claude-opus-4-6`).
+    - `agents.defaults.imageMaxDimensionPx` controls transcript/tool image downscaling (default `1200`); lower values usually reduce vision-token usage on screenshot-heavy runs.
+    - See [Models CLI](/concepts/models) for switching models in chat and [Model Failover](/concepts/model-failover) for auth rotation and fallback behavior.
+    - For custom/self-hosted providers, see [Custom providers](/gateway/config-tools#custom-providers-and-base-urls) in the reference.
 
-  <Accordion title="Control who can message the bot">
+
+
+
+Control who can message the bot
+
     DM access is controlled per channel via `dmPolicy`:
 
-    * `"pairing"` (default): unknown senders get a one-time pairing code to approve
-    * `"allowlist"`: only senders in `allowFrom` (or the paired allow store)
-    * `"open"`: allow all inbound DMs (requires `allowFrom: ["*"]`)
-    * `"disabled"`: ignore all DMs
+    - `"pairing"` (default): unknown senders get a one-time pairing code to approve
+    - `"allowlist"`: only senders in `allowFrom` (or the paired allow store)
+    - `"open"`: allow all inbound DMs (requires `allowFrom: ["*"]`)
+    - `"disabled"`: ignore all DMs
 
     For groups, use `groupPolicy` + `groupAllowFrom` or channel-specific allowlists.
 
     See the [full reference](/gateway/config-channels#dm-and-group-access) for per-channel details.
-  </Accordion>
 
-  <Accordion title="Set up group chat mention gating">
+
+
+
+Set up group chat mention gating
+
     Group messages default to **require mention**. Configure trigger patterns per agent. Normal group/channel replies post automatically; opt into the message-tool path for shared rooms where the agent should decide when to speak:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       messages: {
         visibleReplies: "automatic", // set "message_tool" to require message-tool sends everywhere
@@ -212,17 +229,20 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * **Metadata mentions**: native @-mentions (WhatsApp tap-to-mention, Telegram @bot, etc.)
-    * **Text patterns**: safe regex patterns in `mentionPatterns`
-    * **Visible replies**: `messages.visibleReplies` can require message-tool sends globally; `messages.groupChat.visibleReplies` overrides that for groups/channels.
-    * See [full reference](/gateway/config-channels#group-chat-mention-gating) for visible reply modes, per-channel overrides, and self-chat mode.
-  </Accordion>
+    - **Metadata mentions**: native @-mentions (WhatsApp tap-to-mention, Telegram @bot, etc.)
+    - **Text patterns**: safe regex patterns in `mentionPatterns`
+    - **Visible replies**: `messages.visibleReplies` can require message-tool sends globally; `messages.groupChat.visibleReplies` overrides that for groups/channels.
+    - See [full reference](/gateway/config-channels#group-chat-mention-gating) for visible reply modes, per-channel overrides, and self-chat mode.
 
-  <Accordion title="Restrict skills per agent">
+
+
+
+Restrict skills per agent
+
     Use `agents.defaults.skills` for a shared baseline, then override specific
     agents with `agents.list[].skills`:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -237,17 +257,20 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * Omit `agents.defaults.skills` for unrestricted skills by default.
-    * Omit `agents.list[].skills` to inherit the defaults.
-    * Set `agents.list[].skills: []` for no skills.
-    * See [Skills](/tools/skills), [Skills config](/tools/skills-config), and
+    - Omit `agents.defaults.skills` for unrestricted skills by default.
+    - Omit `agents.list[].skills` to inherit the defaults.
+    - Set `agents.list[].skills: []` for no skills.
+    - See [Skills](/tools/skills), [Skills config](/tools/skills-config), and
       the [Configuration Reference](/gateway/config-agents#agents-defaults-skills).
-  </Accordion>
 
-  <Accordion title="Tune gateway channel health monitoring">
+
+
+
+Tune gateway channel health monitoring
+
     Control how aggressively the gateway restarts channels that look stale:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       gateway: {
         channelHealthCheckMinutes: 5,
@@ -267,17 +290,20 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * Set `gateway.channelHealthCheckMinutes: 0` to disable health-monitor restarts globally.
-    * `channelStaleEventThresholdMinutes` should be greater than or equal to the check interval.
-    * Use `channels.<provider>.healthMonitor.enabled` or `channels.<provider>.accounts.<id>.healthMonitor.enabled` to disable auto-restarts for one channel or account without disabling the global monitor.
-    * See [Health Checks](/gateway/health) for operational debugging and the [full reference](/gateway/configuration-reference#gateway) for all fields.
-  </Accordion>
+    - Set `gateway.channelHealthCheckMinutes: 0` to disable health-monitor restarts globally.
+    - `channelStaleEventThresholdMinutes` should be greater than or equal to the check interval.
+    - Use `channels.<provider>.healthMonitor.enabled` or `channels.<provider>.accounts.<id>.healthMonitor.enabled` to disable auto-restarts for one channel or account without disabling the global monitor.
+    - See [Health Checks](/gateway/health) for operational debugging and the [full reference](/gateway/configuration-reference#gateway) for all fields.
 
-  <Accordion title="Tune gateway WebSocket handshake timeout">
+
+
+
+Tune gateway WebSocket handshake timeout
+
     Give local clients more time to complete the pre-auth WebSocket handshake on
     loaded or low-powered hosts:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       gateway: {
         handshakeTimeoutMs: 30000,
@@ -285,15 +311,18 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * Default is `15000` milliseconds.
-    * `OPENCLAW_HANDSHAKE_TIMEOUT_MS` still takes precedence for one-off service or shell overrides.
-    * Prefer fixing startup/event-loop stalls first; this knob is for hosts that are healthy but slow during warmup.
-  </Accordion>
+    - Default is `15000` milliseconds.
+    - `OPENCLAW_HANDSHAKE_TIMEOUT_MS` still takes precedence for one-off service or shell overrides.
+    - Prefer fixing startup/event-loop stalls first; this knob is for hosts that are healthy but slow during warmup.
 
-  <Accordion title="Configure sessions and resets">
+
+
+
+Configure sessions and resets
+
     Sessions control conversation continuity and isolation:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       session: {
         dmScope: "per-channel-peer",  // recommended for multi-user
@@ -311,16 +340,19 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * `dmScope`: `main` (shared) | `per-peer` | `per-channel-peer` | `per-account-channel-peer`
-    * `threadBindings`: global defaults for thread-bound session routing (Discord supports `/focus`, `/unfocus`, `/agents`, `/session idle`, and `/session max-age`).
-    * See [Session Management](/concepts/session) for scoping, identity links, and send policy.
-    * See [full reference](/gateway/config-agents#session) for all fields.
-  </Accordion>
+    - `dmScope`: `main` (shared) | `per-peer` | `per-channel-peer` | `per-account-channel-peer`
+    - `threadBindings`: global defaults for thread-bound session routing (Discord supports `/focus`, `/unfocus`, `/agents`, `/session idle`, and `/session max-age`).
+    - See [Session Management](/concepts/session) for scoping, identity links, and send policy.
+    - See [full reference](/gateway/config-agents#session) for all fields.
 
-  <Accordion title="Enable sandboxing">
+
+
+
+Enable sandboxing
+
     Run agent sessions in isolated sandbox runtimes:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -336,14 +368,17 @@ candidate contains redacted secret placeholders such as `***`.
     Build the image first - from a source checkout run `scripts/sandbox-setup.sh`, or from an npm install see the inline `docker build` command in [Sandboxing § Images and setup](/gateway/sandboxing#images-and-setup).
 
     See [Sandboxing](/gateway/sandboxing) for the full guide and [full reference](/gateway/config-agents#agentsdefaultssandbox) for all options.
-  </Accordion>
 
-  <Accordion title="Enable relay-backed push for official iOS builds">
+
+
+
+Enable relay-backed push for official iOS builds
+
     Relay-backed push is configured in `openclaw.json`.
 
     Set this in gateway config:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       gateway: {
         push: {
@@ -361,17 +396,17 @@ candidate contains redacted secret placeholders such as `***`.
 
     CLI equivalent:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw config set gateway.push.apns.relay.baseUrl https://relay.example.com
     ```
 
     What this does:
 
-    * Lets the gateway send `push.test`, wake nudges, and reconnect wakes through the external relay.
-    * Uses a registration-scoped send grant forwarded by the paired iOS app. The gateway does not need a deployment-wide relay token.
-    * Binds each relay-backed registration to the gateway identity that the iOS app paired with, so another gateway cannot reuse the stored registration.
-    * Keeps local/manual iOS builds on direct APNs. Relay-backed sends apply only to official distributed builds that registered through the relay.
-    * Must match the relay base URL baked into the official/TestFlight iOS build, so registration and send traffic reach the same relay deployment.
+    - Lets the gateway send `push.test`, wake nudges, and reconnect wakes through the external relay.
+    - Uses a registration-scoped send grant forwarded by the paired iOS app. The gateway does not need a deployment-wide relay token.
+    - Binds each relay-backed registration to the gateway identity that the iOS app paired with, so another gateway cannot reuse the stored registration.
+    - Keeps local/manual iOS builds on direct APNs. Relay-backed sends apply only to official distributed builds that registered through the relay.
+    - Must match the relay base URL baked into the official/TestFlight iOS build, so registration and send traffic reach the same relay deployment.
 
     End-to-end flow:
 
@@ -383,19 +418,22 @@ candidate contains redacted secret placeholders such as `***`.
 
     Operational notes:
 
-    * If you switch the iOS app to a different gateway, reconnect the app so it can publish a new relay registration bound to that gateway.
-    * If you ship a new iOS build that points at a different relay deployment, the app refreshes its cached relay registration instead of reusing the old relay origin.
+    - If you switch the iOS app to a different gateway, reconnect the app so it can publish a new relay registration bound to that gateway.
+    - If you ship a new iOS build that points at a different relay deployment, the app refreshes its cached relay registration instead of reusing the old relay origin.
 
     Compatibility note:
 
-    * `OPENCLAW_APNS_RELAY_BASE_URL` and `OPENCLAW_APNS_RELAY_TIMEOUT_MS` still work as temporary env overrides.
-    * `OPENCLAW_APNS_RELAY_ALLOW_HTTP=true` remains a loopback-only development escape hatch; do not persist HTTP relay URLs in config.
+    - `OPENCLAW_APNS_RELAY_BASE_URL` and `OPENCLAW_APNS_RELAY_TIMEOUT_MS` still work as temporary env overrides.
+    - `OPENCLAW_APNS_RELAY_ALLOW_HTTP=true` remains a loopback-only development escape hatch; do not persist HTTP relay URLs in config.
 
     See [iOS App](/platforms/ios#relay-backed-push-for-official-builds) for the end-to-end flow and [Authentication and trust flow](/platforms/ios#authentication-and-trust-flow) for the relay security model.
-  </Accordion>
 
-  <Accordion title="Set up heartbeat (periodic check-ins)">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Set up heartbeat (periodic check-ins)
+
+    ```json5
     {
       agents: {
         defaults: {
@@ -408,14 +446,17 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * `every`: duration string (`30m`, `2h`). Set `0m` to disable.
-    * `target`: `last` | `none` | `<channel-id>` (for example `discord`, `matrix`, `telegram`, or `whatsapp`)
-    * `directPolicy`: `allow` (default) or `block` for DM-style heartbeat targets
-    * See [Heartbeat](/gateway/heartbeat) for the full guide.
-  </Accordion>
+    - `every`: duration string (`30m`, `2h`). Set `0m` to disable.
+    - `target`: `last` | `none` | `<channel-id>` (for example `discord`, `matrix`, `telegram`, or `whatsapp`)
+    - `directPolicy`: `allow` (default) or `block` for DM-style heartbeat targets
+    - See [Heartbeat](/gateway/heartbeat) for the full guide.
 
-  <Accordion title="Configure cron jobs">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+
+Configure cron jobs
+
+    ```json5
     {
       cron: {
         enabled: true,
@@ -429,15 +470,18 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * `sessionRetention`: prune completed isolated run sessions from `sessions.json` (default `24h`; set `false` to disable).
-    * `runLog`: prune `cron/runs/<jobId>.jsonl` by size and retained lines.
-    * See [Cron jobs](/automation/cron-jobs) for feature overview and CLI examples.
-  </Accordion>
+    - `sessionRetention`: prune completed isolated run sessions from `sessions.json` (default `24h`; set `false` to disable).
+    - `runLog`: prune `cron/runs/<jobId>.jsonl` by size and retained lines.
+    - See [Cron jobs](/automation/cron-jobs) for feature overview and CLI examples.
 
-  <Accordion title="Set up webhooks (hooks)">
+
+
+
+Set up webhooks (hooks)
+
     Enable HTTP webhook endpoints on the Gateway:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       hooks: {
         enabled: true,
@@ -459,22 +503,24 @@ candidate contains redacted secret placeholders such as `***`.
     ```
 
     Security note:
-
-    * Treat all hook/webhook payload content as untrusted input.
-    * Use a dedicated `hooks.token`; do not reuse the shared Gateway token.
-    * Hook auth is header-only (`Authorization: Bearer ...` or `x-openclaw-token`); query-string tokens are rejected.
-    * `hooks.path` cannot be `/`; keep webhook ingress on a dedicated subpath such as `/hooks`.
-    * Keep unsafe-content bypass flags disabled (`hooks.gmail.allowUnsafeExternalContent`, `hooks.mappings[].allowUnsafeExternalContent`) unless doing tightly scoped debugging.
-    * If you enable `hooks.allowRequestSessionKey`, also set `hooks.allowedSessionKeyPrefixes` to bound caller-selected session keys.
-    * For hook-driven agents, prefer strong modern model tiers and strict tool policy (for example messaging-only plus sandboxing where possible).
+    - Treat all hook/webhook payload content as untrusted input.
+    - Use a dedicated `hooks.token`; do not reuse the shared Gateway token.
+    - Hook auth is header-only (`Authorization: Bearer ...` or `x-openclaw-token`); query-string tokens are rejected.
+    - `hooks.path` cannot be `/`; keep webhook ingress on a dedicated subpath such as `/hooks`.
+    - Keep unsafe-content bypass flags disabled (`hooks.gmail.allowUnsafeExternalContent`, `hooks.mappings[].allowUnsafeExternalContent`) unless doing tightly scoped debugging.
+    - If you enable `hooks.allowRequestSessionKey`, also set `hooks.allowedSessionKeyPrefixes` to bound caller-selected session keys.
+    - For hook-driven agents, prefer strong modern model tiers and strict tool policy (for example messaging-only plus sandboxing where possible).
 
     See [full reference](/gateway/configuration-reference#hooks) for all mapping options and Gmail integration.
-  </Accordion>
 
-  <Accordion title="Configure multi-agent routing">
+
+
+
+Configure multi-agent routing
+
     Run multiple isolated agents with separate workspaces and sessions:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         list: [
@@ -490,12 +536,15 @@ candidate contains redacted secret placeholders such as `***`.
     ```
 
     See [Multi-Agent](/concepts/multi-agent) and [full reference](/gateway/config-agents#multi-agent-routing) for binding rules and per-agent access profiles.
-  </Accordion>
 
-  <Accordion title="Split config into multiple files ($include)">
+
+
+
+Split config into multiple files ($include)
+
     Use `$include` to organize large configs:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     // ~/.openclaw/openclaw.json
     {
       gateway: { port: 18789 },
@@ -506,26 +555,26 @@ candidate contains redacted secret placeholders such as `***`.
     }
     ```
 
-    * **Single file**: replaces the containing object
-    * **Array of files**: deep-merged in order (later wins)
-    * **Sibling keys**: merged after includes (override included values)
-    * **Nested includes**: supported up to 10 levels deep
-    * **Relative paths**: resolved relative to the including file
-    * **OpenClaw-owned writes**: when a write changes only one top-level section
+    - **Single file**: replaces the containing object
+    - **Array of files**: deep-merged in order (later wins)
+    - **Sibling keys**: merged after includes (override included values)
+    - **Nested includes**: supported up to 10 levels deep
+    - **Relative paths**: resolved relative to the including file
+    - **OpenClaw-owned writes**: when a write changes only one top-level section
       backed by a single-file include such as `plugins: { $include: "./plugins.json5" }`,
       OpenClaw updates that included file and leaves `openclaw.json` intact
-    * **Unsupported write-through**: root includes, include arrays, and includes
+    - **Unsupported write-through**: root includes, include arrays, and includes
       with sibling overrides fail closed for OpenClaw-owned writes instead of
       flattening the config
-    * **Confinement**: `$include` paths must resolve under the directory holding
+    - **Confinement**: `$include` paths must resolve under the directory holding
       `openclaw.json`. To share a tree across machines or users, set
       `OPENCLAW_INCLUDE_ROOTS` to a path-list (`:` on POSIX, `;` on Windows) of
       additional directories that includes may reference. Symlinks are resolved
       and re-checked, so a path that lexically lives in a config dir but whose
       real target escapes every allowed root is still rejected.
-    * **Error handling**: clear errors for missing files, parse errors, and circular includes
-  </Accordion>
-</AccordionGroup>
+    - **Error handling**: clear errors for missing files, parse errors, and circular includes
+
+
 
 ## Config hot reload
 
@@ -552,7 +601,7 @@ for the checklist.
 | **`restart`**          | Restarts the Gateway on any config change, safe or not.                                 |
 | **`off`**              | Disables file watching. Changes take effect on the next manual restart.                 |
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   gateway: {
     reload: { mode: "hybrid", debounceMs: 300 },
@@ -575,9 +624,9 @@ Most fields hot-apply without downtime. In `hybrid` mode, restart-required chang
 | Gateway server      | `gateway.*` (port, bind, auth, tailscale, TLS, HTTP)              | **Yes**         |
 | Infrastructure      | `discovery`, `plugins`                                            | **Yes**         |
 
-<Note>
-  `gateway.reload` and `gateway.remote` are exceptions - changing them does **not** trigger a restart.
-</Note>
+Note
+
+`gateway.reload` and `gateway.remote` are exceptions - changing them does **not** trigger a restart.
 
 ### Reload planning
 
@@ -592,31 +641,31 @@ source layout is ambiguous.
 
 For tooling that writes config over the gateway API, prefer this flow:
 
-* `config.schema.lookup` to inspect one subtree (shallow schema node + child
+- `config.schema.lookup` to inspect one subtree (shallow schema node + child
   summaries)
-* `config.get` to fetch the current snapshot plus `hash`
-* `config.patch` for partial updates (JSON merge patch: objects merge, `null`
+- `config.get` to fetch the current snapshot plus `hash`
+- `config.patch` for partial updates (JSON merge patch: objects merge, `null`
   deletes, arrays replace)
-* `config.apply` only when you intend to replace the entire config
-* `update.run` for explicit self-update plus restart; include `continuationMessage` when the post-restart session should run one follow-up turn
-* `update.status` to inspect the latest update restart sentinel and verify the running version after a restart
+- `config.apply` only when you intend to replace the entire config
+- `update.run` for explicit self-update plus restart; include `continuationMessage` when the post-restart session should run one follow-up turn
+- `update.status` to inspect the latest update restart sentinel and verify the running version after a restart
 
 Agents should treat `config.schema.lookup` as the first stop for exact
 field-level docs and constraints. Use [Configuration reference](/gateway/configuration-reference)
 when they need the broader config map, defaults, or links to dedicated
 subsystem references.
 
-<Note>
-  Control-plane writes (`config.apply`, `config.patch`, `update.run`) are
-  rate-limited to 3 requests per 60 seconds per `deviceId+clientIp`. Restart
-  requests coalesce and then enforce a 30-second cooldown between restart cycles.
-  `update.status` is read-only but admin-scoped because the restart sentinel can
-  include update step summaries and command output tails.
-</Note>
+Note
+
+Control-plane writes (`config.apply`, `config.patch`, `update.run`) are
+rate-limited to 3 requests per 60 seconds per `deviceId+clientIp`. Restart
+requests coalesce and then enforce a 30-second cooldown between restart cycles.
+`update.status` is read-only but admin-scoped because the restart sentinel can
+include update step summaries and command output tails.
 
 Example partial patch:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway call config.get --params '{}'  # capture payload.hash
 openclaw gateway call config.patch --params '{
   "raw": "{ channels: { telegram: { groups: { \"*\": { requireMention: false } } } } }",
@@ -632,12 +681,12 @@ config already exists.
 
 OpenClaw reads env vars from the parent process plus:
 
-* `.env` from the current working directory (if present)
-* `~/.openclaw/.env` (global fallback)
+- `.env` from the current working directory (if present)
+- `~/.openclaw/.env` (global fallback)
 
 Neither file overrides existing env vars. You can also set inline env vars in config:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: {
     OPENROUTER_API_KEY: "sk-or-...",
@@ -646,75 +695,75 @@ Neither file overrides existing env vars. You can also set inline env vars in co
 }
 ```
 
-<Accordion title="Shell env import (optional)">
+Shell env import (optional)
+
   If enabled and expected keys aren't set, OpenClaw runs your login shell and imports only the missing keys:
 
-  ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  {
-    env: {
-      shellEnv: { enabled: true, timeoutMs: 15000 },
-    },
-  }
-  ```
+```json5
+{
+  env: {
+    shellEnv: { enabled: true, timeoutMs: 15000 },
+  },
+}
+```
 
-  Env var equivalent: `OPENCLAW_LOAD_SHELL_ENV=1`
-</Accordion>
+Env var equivalent: `OPENCLAW_LOAD_SHELL_ENV=1`
 
-<Accordion title="Env var substitution in config values">
+Env var substitution in config values
+
   Reference env vars in any config string value with `${VAR_NAME}`:
 
-  ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  {
-    gateway: { auth: { token: "${OPENCLAW_GATEWAY_TOKEN}" } },
-    models: { providers: { custom: { apiKey: "${CUSTOM_API_KEY}" } } },
-  }
-  ```
+```json5
+{
+  gateway: { auth: { token: "${OPENCLAW_GATEWAY_TOKEN}" } },
+  models: { providers: { custom: { apiKey: "${CUSTOM_API_KEY}" } } },
+}
+```
 
-  Rules:
+Rules:
 
-  * Only uppercase names matched: `[A-Z_][A-Z0-9_]*`
-  * Missing/empty vars throw an error at load time
-  * Escape with `$${VAR}` for literal output
-  * Works inside `$include` files
-  * Inline substitution: `"${BASE}/v1"` → `"https://api.example.com/v1"`
-</Accordion>
+- Only uppercase names matched: `[A-Z_][A-Z0-9_]*`
+- Missing/empty vars throw an error at load time
+- Escape with `$${VAR}` for literal output
+- Works inside `$include` files
+- Inline substitution: `"${BASE}/v1"` → `"https://api.example.com/v1"`
 
-<Accordion title="Secret refs (env, file, exec)">
+Secret refs (env, file, exec)
+
   For fields that support SecretRef objects, you can use:
 
-  ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  {
-    models: {
-      providers: {
-        openai: { apiKey: { source: "env", provider: "default", id: "OPENAI_API_KEY" } },
-      },
+```json5
+{
+  models: {
+    providers: {
+      openai: { apiKey: { source: "env", provider: "default", id: "OPENAI_API_KEY" } },
     },
-    skills: {
-      entries: {
-        "image-lab": {
-          apiKey: {
-            source: "file",
-            provider: "filemain",
-            id: "/skills/entries/image-lab/apiKey",
-          },
+  },
+  skills: {
+    entries: {
+      "image-lab": {
+        apiKey: {
+          source: "file",
+          provider: "filemain",
+          id: "/skills/entries/image-lab/apiKey",
         },
       },
     },
-    channels: {
-      googlechat: {
-        serviceAccountRef: {
-          source: "exec",
-          provider: "vault",
-          id: "channels/googlechat/serviceAccount",
-        },
+  },
+  channels: {
+    googlechat: {
+      serviceAccountRef: {
+        source: "exec",
+        provider: "vault",
+        id: "channels/googlechat/serviceAccount",
       },
     },
-  }
-  ```
+  },
+}
+```
 
-  SecretRef details (including `secrets.providers` for `env`/`file`/`exec`) are in [Secrets Management](/gateway/secrets).
-  Supported credential paths are listed in [SecretRef Credential Surface](/reference/secretref-credential-surface).
-</Accordion>
+SecretRef details (including `secrets.providers` for `env`/`file`/`exec`) are in [Secrets Management](/gateway/secrets).
+Supported credential paths are listed in [SecretRef Credential Surface](/reference/secretref-credential-surface).
 
 See [Environment](/help/environment) for full precedence and sources.
 
@@ -722,12 +771,14 @@ See [Environment](/help/environment) for full precedence and sources.
 
 For the complete field-by-field reference, see **[Configuration Reference](/gateway/configuration-reference)**.
 
-***
+---
 
-*Related: [Configuration Examples](/gateway/configuration-examples) · [Configuration Reference](/gateway/configuration-reference) · [Doctor](/gateway/doctor)*
+_Related: [Configuration Examples](/gateway/configuration-examples) · [Configuration Reference](/gateway/configuration-reference) · [Doctor](/gateway/doctor)_
 
 ## Related
 
-* [Configuration reference](/gateway/configuration-reference)
-* [Configuration examples](/gateway/configuration-examples)
-* [Gateway runbook](/gateway)
+- [Configuration reference](/gateway/configuration-reference)
+- [Configuration examples](/gateway/configuration-examples)
+- [Gateway runbook](/gateway)
+
+---

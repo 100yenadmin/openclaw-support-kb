@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool plugins"
 source: "https://docs.openclaw.ai/plugins/tool-plugins"
-source_hash: "16652a86db692af490ea8cdde149f6cd69e02fba6bcd834b0c70cf42a8c3deb6"
+source_hash: "155491995822c9bc863042e9f26bbbee57976b20b6a4fd0ddf515e951a077987"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/tool-plugins.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Tool plugins
 Source: https://docs.openclaw.ai/plugins/tool-plugins
-
-
 
 Tool plugins add agent-callable tools to OpenClaw without adding a channel,
 model provider, hook, service, or setup backend. Use `defineToolPlugin` when the
@@ -35,12 +33,12 @@ or [Provider Plugins](/plugins/sdk-provider-plugins) instead.
 
 ## Requirements
 
-* Node >= 22.
-* TypeScript ESM package output.
-* `typebox` for config and tool parameter schemas.
-* `openclaw >=2026.5.17`, the first OpenClaw version that exports
+- Node >= 22.
+- TypeScript ESM package output.
+- `typebox` for config and tool parameter schemas.
+- `openclaw >=2026.5.17`, the first OpenClaw version that exports
   `openclaw/plugin-sdk/tool-plugin`.
-* A package root that can ship `dist/`, `openclaw.plugin.json`, and
+- A package root that can ship `dist/`, `openclaw.plugin.json`, and
   `package.json`.
 
 The generated plugin imports `typebox` at runtime, so keep `typebox` in
@@ -50,7 +48,7 @@ The generated plugin imports `typebox` at runtime, so keep `typebox` in
 
 Create a new plugin package:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins init stock-quotes --name "Stock Quotes"
 cd stock-quotes
 npm install
@@ -61,16 +59,16 @@ npm test
 
 The scaffold creates:
 
-* `src/index.ts`: a `defineToolPlugin` entry with an `echo` tool.
-* `src/index.test.ts`: a small metadata test.
-* `tsconfig.json`: NodeNext TypeScript output to `dist/`.
-* `package.json`: scripts, runtime dependencies, and
+- `src/index.ts`: a `defineToolPlugin` entry with an `echo` tool.
+- `src/index.test.ts`: a small metadata test.
+- `tsconfig.json`: NodeNext TypeScript output to `dist/`.
+- `package.json`: scripts, runtime dependencies, and
   `openclaw.extensions: ["./dist/index.js"]`.
-* `openclaw.plugin.json`: generated manifest metadata for the initial tool.
+- `openclaw.plugin.json`: generated manifest metadata for the initial tool.
 
 Expected validation output:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 Plugin stock-quotes is valid.
 ```
 
@@ -80,9 +78,7 @@ Plugin stock-quotes is valid.
 static list of tools. Parameter and config types are inferred from TypeBox
 schemas.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { Type } from "typebox";
-import { defineToolPlugin } from "openclaw/plugin-sdk/tool-plugin";
+```typescript
 
 export default defineToolPlugin({
   id: "stock-quotes",
@@ -121,7 +117,7 @@ specific enough to avoid collisions with core tools or other plugins.
 Set `optional: true` when users should explicitly allowlist the tool before it
 is sent to a model:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 tool({
   name: "workflow_run",
   description: "Run an external workflow.",
@@ -139,7 +135,7 @@ Use `factory` when a tool needs the runtime tool context before it can be
 created. The factory keeps metadata static while letting the tool opt out for a
 specific run, inspect sandbox state, or bind runtime helpers.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 tool({
   name: "local_workflow",
   description: "Run a local workflow outside sandboxed sessions.",
@@ -163,11 +159,11 @@ services, providers, commands, or other runtime surfaces.
 `defineToolPlugin` wraps plain return values into the OpenClaw tool-result
 format:
 
-* Return a string when the model should see that exact text.
-* Return a JSON-compatible value when you want the model to see formatted JSON
+- Return a string when the model should see that exact text.
+- Return a JSON-compatible value when you want the model to see formatted JSON
   and OpenClaw to keep the original value in `details`.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 tool({
   name: "echo_text",
   description: "Echo input text.",
@@ -178,7 +174,7 @@ tool({
 });
 ```
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 tool({
   name: "echo_json",
   description: "Echo input as structured JSON.",
@@ -199,7 +195,7 @@ capabilities.
 `configSchema` is optional. If you omit it, OpenClaw uses a strict empty object
 schema and the generated manifest still includes `configSchema`.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 export default defineToolPlugin({
   id: "no-config-tools",
   name: "No Config Tools",
@@ -211,7 +207,7 @@ export default defineToolPlugin({
 When you include `configSchema`, the second `execute` argument is typed from the
 schema:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const configSchema = Type.Object({
   apiKey: Type.String(),
 });
@@ -246,14 +242,14 @@ metadata into the package.
 Run the generator after changing plugin id, name, description, config schema,
 activation, or tool names:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm run build
 openclaw plugins build --entry ./dist/index.js
 ```
 
 For a one-tool plugin, the generated manifest looks like this:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "id": "stock-quotes",
   "name": "Stock Quotes",
@@ -283,7 +279,7 @@ may be blamed for a registration error.
 For the simple tool-plugin workflow, `openclaw plugins build` aligns
 `package.json` to the selected single runtime entry:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "type": "module",
   "files": ["dist", "openclaw.plugin.json", "README.md"],
@@ -308,7 +304,7 @@ depend on TypeScript runtime loading.
 Use `plugins build --check` to fail CI when generated metadata is stale without
 rewriting files:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm run build
 openclaw plugins build --entry ./dist/index.js --check
 openclaw plugins validate --entry ./dist/index.js
@@ -317,24 +313,24 @@ npm test
 
 `plugins validate` checks that:
 
-* `openclaw.plugin.json` exists and passes the normal manifest loader.
-* The current entry exports `defineToolPlugin` metadata.
-* Generated manifest fields match the entry metadata.
-* `contracts.tools` matches the declared tool names.
-* `package.json` points `openclaw.extensions` at the selected runtime entry.
+- `openclaw.plugin.json` exists and passes the normal manifest loader.
+- The current entry exports `defineToolPlugin` metadata.
+- Generated manifest fields match the entry metadata.
+- `contracts.tools` matches the declared tool names.
+- `package.json` points `openclaw.extensions` at the selected runtime entry.
 
 ## Install and inspect locally
 
 From a separate OpenClaw checkout or installed CLI, install the package path:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install ./stock-quotes
 openclaw plugins inspect stock-quotes --runtime
 ```
 
 For a packaged smoke, pack first and install the tarball:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm pack
 openclaw plugins install npm-pack:./openclaw-plugin-stock-quotes-0.1.0.tgz
 openclaw plugins inspect stock-quotes --runtime --json
@@ -348,14 +344,14 @@ effective tool catalog before changing the code.
 
 Publish through ClawHub when the package is ready:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 clawhub package publish your-org/stock-quotes --dry-run
 clawhub package publish your-org/stock-quotes
 ```
 
 Install with an explicit ClawHub locator:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install clawhub:your-org/stock-quotes
 ```
 
@@ -380,7 +376,7 @@ entry with `--entry`.
 
 The manifest no longer matches the entry metadata. Run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm run build
 openclaw plugins build --entry ./dist/index.js
 ```
@@ -410,9 +406,11 @@ Check these in order:
 
 ## See also
 
-* [Building plugins](/plugins/building-plugins)
-* [Plugin entry points](/plugins/sdk-entrypoints)
-* [Plugin SDK subpaths](/plugins/sdk-subpaths)
-* [Plugin manifest](/plugins/manifest)
-* [Plugins CLI](/cli/plugins)
-* [ClawHub publishing](/clawhub/publishing)
+- [Building plugins](/plugins/building-plugins)
+- [Plugin entry points](/plugins/sdk-entrypoints)
+- [Plugin SDK subpaths](/plugins/sdk-subpaths)
+- [Plugin manifest](/plugins/manifest)
+- [Plugins CLI](/cli/plugins)
+- [ClawHub publishing](/clawhub/publishing)
+
+---

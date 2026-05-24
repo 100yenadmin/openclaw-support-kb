@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "6456b20901b6f4c4380535bd64b826850cc85875483f998ff2afd4b546eca005"
+source_hash: "d21d42af8b487fa090aa402fc3f345e48c3cbd1f503230acad46cded11317e6d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -13,21 +13,22 @@ duplicate_index: 1
 # Plugin runtime helpers
 Source: https://docs.openclaw.ai/plugins/sdk-runtime
 
-
-
 Reference for the `api.runtime` object injected into every plugin during registration. Use these helpers instead of importing host internals directly.
 
-<CardGroup>
-  <Card title="Channel plugins" href="/plugins/sdk-channel-plugins">
+CardGroup
+
+
+Channel plugins
+
     Step-by-step guide that uses these helpers in context for channel plugins.
-  </Card>
 
-  <Card title="Provider plugins" href="/plugins/sdk-provider-plugins">
+
+Provider plugins
+
     Step-by-step guide that uses these helpers in context for provider plugins.
-  </Card>
-</CardGroup>
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+```typescript
 register(api) {
   const runtime = api.runtime;
 }
@@ -43,9 +44,9 @@ Tool factories receive `ctx.runtimeConfig` plus `ctx.getRuntimeConfig()`. Use th
 
 Persist changes with `api.runtime.config.mutateConfigFile(...)` or `api.runtime.config.replaceConfigFile(...)`. Each write must choose an explicit `afterWrite` policy:
 
-* `afterWrite: { mode: "auto" }` lets the gateway reload planner decide.
-* `afterWrite: { mode: "restart", reason: "..." }` forces a clean restart when the writer knows hot reload is unsafe.
-* `afterWrite: { mode: "none", reason: "..." }` suppresses automatic reload/restart only when the caller owns the follow-up.
+- `afterWrite: { mode: "auto" }` lets the gateway reload planner decide.
+- `afterWrite: { mode: "restart", reason: "..." }` forces a clean restart when the writer knows hot reload is unsafe.
+- `afterWrite: { mode: "none", reason: "..." }` suppresses automatic reload/restart only when the caller owns the follow-up.
 
 The mutation helpers return `afterWrite` plus a typed `followUp` summary so callers can log or test whether they requested a restart. The gateway still owns when that restart actually happens.
 
@@ -68,7 +69,7 @@ Use the channel-turn `botLoopProtection` facts for bot-authored inbound messages
 
 Channel plugins that expose this behavior to operators should prefer the shared `channels.defaults.botLoopProtection` shape for baseline budgets, then layer channel/provider-specific overrides on top. The shared config uses seconds because it is user-facing:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type ChannelBotLoopProtectionConfig = {
   enabled?: boolean;
   maxEventsPerWindow?: number;
@@ -79,7 +80,7 @@ type ChannelBotLoopProtectionConfig = {
 
 Pass normalized bot-pair facts with the resolved turn. Core resolves defaults, unit conversion, and `enabled` semantics:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 return {
   channel: "example",
   routeSessionKey,
@@ -104,11 +105,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
 ## Runtime namespaces
 
-<AccordionGroup>
-  <Accordion title="api.runtime.agent">
+AccordionGroup
+
+
+api.runtime.agent
+
     Agent identity, directories, and session management.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     // Resolve the agent's working directory
     const agentDir = api.runtime.agent.resolveAgentDir(cfg);
 
@@ -160,7 +164,7 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     **Session store helpers** are under `api.runtime.agent.session`:
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const entry = api.runtime.agent.session.getSessionEntry({ agentId, sessionKey });
     for (const { sessionKey, entry } of api.runtime.agent.session.listSessionEntries({ agentId })) {
       // Iterate session rows without depending on the legacy sessions.json shape.
@@ -173,22 +177,27 @@ two-party event loops that do not go through the shared channel-turn kernel.
     ```
 
     Prefer `getSessionEntry(...)`, `listSessionEntries(...)`, `patchSessionEntry(...)`, or `upsertSessionEntry(...)` for session workflows. These helpers address sessions by agent/session identity so plugins do not depend on the legacy `sessions.json` storage shape. Use `preserveActivity: true` for metadata-only patches that should not refresh session activity, and `replaceEntry: true` only when the callback returns a complete entry and deleted fields must stay deleted. `loadSessionStore(...)` remains as a deprecated compatibility escape hatch for callers that intentionally need a mutable whole-store clone.
-  </Accordion>
 
-  <Accordion title="api.runtime.agent.defaults">
+
+
+api.runtime.agent.defaults
+
     Default model and provider constants:
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const model = api.runtime.agent.defaults.model; // e.g. "anthropic/claude-sonnet-4-6"
     const provider = api.runtime.agent.defaults.provider; // e.g. "anthropic"
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.llm">
+
+
+
+api.runtime.llm
+
     Run a host-owned text completion without importing provider internals or
     duplicating OpenClaw model/auth/base URL preparation.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const result = await api.runtime.llm.complete({
       messages: [{ role: "user", content: "Summarize this transcript." }],
       purpose: "my-plugin.summary",
@@ -204,15 +213,19 @@ two-party event loops that do not go through the shared channel-turn kernel.
     result includes provider/model/agent attribution plus normalized token,
     cache, and estimated cost usage when available.
 
-    <Warning>
-      Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. Use `plugins.entries.<id>.llm.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
-    </Warning>
-  </Accordion>
 
-  <Accordion title="api.runtime.subagent">
+Warning
+
+    Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. Use `plugins.entries.<id>.llm.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
+
+
+
+
+api.runtime.subagent
+
     Launch and manage background subagent runs.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     // Start a subagent run
     const { runId } = await api.runtime.subagent.run({
       sessionKey: "agent:main:subagent:search-helper",
@@ -237,17 +250,21 @@ two-party event loops that do not go through the shared channel-turn kernel.
     });
     ```
 
-    <Warning>
-      Model overrides (`provider`/`model`) require operator opt-in via `plugins.entries.<id>.subagent.allowModelOverride: true` in config. Untrusted plugins can still run subagents, but override requests are rejected.
-    </Warning>
+
+Warning
+
+    Model overrides (`provider`/`model`) require operator opt-in via `plugins.entries.<id>.subagent.allowModelOverride: true` in config. Untrusted plugins can still run subagents, but override requests are rejected.
+
 
     `deleteSession(...)` can delete sessions created by the same plugin through `api.runtime.subagent.run(...)`. Deleting arbitrary user or operator sessions still requires an admin-scoped Gateway request.
-  </Accordion>
 
-  <Accordion title="api.runtime.nodes">
+
+
+api.runtime.nodes
+
     List connected nodes and invoke a node-host command from Gateway-loaded plugin code or from plugin CLI commands. Use this when a plugin owns local work on a paired device, for example a browser or audio bridge on another Mac.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const { nodes } = await api.runtime.nodes.list({ connected: true });
 
     const result = await api.runtime.nodes.invoke({
@@ -261,9 +278,11 @@ two-party event loops that do not go through the shared channel-turn kernel.
     Inside the Gateway this runtime is in-process. In plugin CLI commands it calls the configured Gateway over RPC, so commands such as `openclaw googlemeet recover-tab` can inspect paired nodes from the terminal. Node commands still go through normal Gateway node pairing, command allowlists, plugin node-invoke policies, and node-local command handling.
 
     Plugins that expose dangerous node-host commands should register a node-invoke policy with `api.registerNodeInvokePolicy(...)`. The policy runs in the Gateway after command allowlist checks and before the command is forwarded to the node, so direct `node.invoke` calls and higher-level plugin tools share the same enforcement path.
-  </Accordion>
 
-  <Accordion title="api.runtime.tasks.managedFlows">
+
+
+api.runtime.tasks.managedFlows
+
     Bind a Task Flow runtime to an existing OpenClaw session key or trusted tool context, then create and manage Task Flows without passing an owner on every call.
 
     Task Flow tracks durable multi-step workflow state. It is not a scheduler:
@@ -271,7 +290,7 @@ two-party event loops that do not go through the shared channel-turn kernel.
     wakeups, then use `managedFlows` from the scheduled turn when that work
     needs flow state, child tasks, waits, or cancellation.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const taskFlow = api.runtime.tasks.managedFlows.fromToolContext(ctx);
 
     const created = taskFlow.createManaged({
@@ -297,12 +316,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
     ```
 
     Use `bindSession({ sessionKey, requesterOrigin })` when you already have a trusted OpenClaw session key from your own binding layer. Do not bind from raw user input.
-  </Accordion>
 
-  <Accordion title="api.runtime.tts">
+
+
+api.runtime.tts
+
     Text-to-speech synthesis.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     // Standard TTS
     const clip = await api.runtime.tts.textToSpeech({
       text: "Hello from OpenClaw",
@@ -323,12 +344,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
     ```
 
     Uses core `messages.tts` configuration and provider selection. Returns PCM audio buffer + sample rate.
-  </Accordion>
 
-  <Accordion title="api.runtime.mediaUnderstanding">
+
+
+api.runtime.mediaUnderstanding
+
     Image, audio, and video analysis.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     // Describe an image
     const image = await api.runtime.mediaUnderstanding.describeImageFile({
       filePath: "/tmp/inbound-photo.jpg",
@@ -386,15 +409,19 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     Returns `{ text: undefined }` when no output is produced (e.g. skipped input).
 
-    <Info>
-      `api.runtime.stt.transcribeAudioFile(...)` remains as a compatibility alias for `api.runtime.mediaUnderstanding.transcribeAudioFile(...)`.
-    </Info>
-  </Accordion>
 
-  <Accordion title="api.runtime.imageGeneration">
+Info
+
+    `api.runtime.stt.transcribeAudioFile(...)` remains as a compatibility alias for `api.runtime.mediaUnderstanding.transcribeAudioFile(...)`.
+
+
+
+
+api.runtime.imageGeneration
+
     Image generation.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const result = await api.runtime.imageGeneration.generate({
       prompt: "A robot painting a sunset",
       cfg: api.config,
@@ -402,12 +429,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     const providers = api.runtime.imageGeneration.listProviders({ cfg: api.config });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.webSearch">
+
+
+api.runtime.webSearch
+
     Web search.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const providers = api.runtime.webSearch.listProviders({ config: api.config });
 
     const result = await api.runtime.webSearch.search({
@@ -415,12 +444,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
       args: { query: "OpenClaw plugin SDK", count: 5 },
     });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.media">
+
+
+api.runtime.media
+
     Low-level media utilities.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const webMedia = await api.runtime.media.loadWebMedia(url);
     const mime = await api.runtime.media.detectMime(buffer);
     const kind = api.runtime.media.mediaKindFromMime("image/jpeg"); // "image"
@@ -440,14 +471,16 @@ two-party event loops that do not go through the shared channel-turn kernel.
       fileName: "qr.png",
     });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.config">
+
+
+api.runtime.config
+
     Current runtime config snapshot and transactional config writes. Prefer
     config that was already passed into the active call path; use
     `current()` only when the handler needs the process snapshot directly.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const cfg = api.runtime.config.current();
     await api.runtime.config.mutateConfigFile({
       afterWrite: { mode: "auto" },
@@ -461,12 +494,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
     value, for example `{ mode: "restart", requiresRestart: true, reason }`,
     which records the writer intent without taking restart control away from the
     gateway.
-  </Accordion>
 
-  <Accordion title="api.runtime.system">
+
+
+api.runtime.system
+
     System-level utilities.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     await api.runtime.system.enqueueSystemEvent(event);
     api.runtime.system.requestHeartbeat({
       source: "other",
@@ -477,12 +512,14 @@ two-party event loops that do not go through the shared channel-turn kernel.
     const output = await api.runtime.system.runCommandWithTimeout(cmd, args, opts);
     const hint = api.runtime.system.formatNativeDependencyHint(pkg);
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.events">
+
+
+api.runtime.events
+
     Event subscriptions.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     api.runtime.events.onAgentEvent((event) => {
       /* ... */
     });
@@ -490,35 +527,43 @@ two-party event loops that do not go through the shared channel-turn kernel.
       /* ... */
     });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.logging">
+
+
+api.runtime.logging
+
     Logging.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const verbose = api.runtime.logging.shouldLogVerbose();
     const childLogger = api.runtime.logging.getChildLogger({ plugin: "my-plugin" }, { level: "debug" });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.modelAuth">
+
+
+api.runtime.modelAuth
+
     Model and provider auth resolution.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const auth = await api.runtime.modelAuth.getApiKeyForModel({ model, cfg });
     const providerAuth = await api.runtime.modelAuth.resolveApiKeyForProvider({
       provider: "openai",
       cfg,
     });
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.state">
+
+
+api.runtime.state
+
     State directory resolution and SQLite-backed keyed storage.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const stateDir = api.runtime.state.resolveStateDir(process.env);
-    const store = api.runtime.state.openKeyedStore<MyRecord>({
+    const store = api.runtime.state.openKeyedStore
+MyRecord
+({
       namespace: "my-feature",
       maxEntries: 200,
       defaultTtlMs: 15 * 60_000,
@@ -533,27 +578,33 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     Keyed stores survive restarts and are isolated by the runtime-bound plugin id. Use `registerIfAbsent(...)` for atomic dedupe claims: it returns `true` when the key was missing or expired and registered, or `false` when a live value already exists without overwriting its value, creation time, or TTL. Limits: `maxEntries` per namespace, 1,000 live rows per plugin, JSON values under 64KB, and optional TTL expiry.
 
-    <Warning>
-      Bundled plugins only in this release.
-    </Warning>
-  </Accordion>
 
-  <Accordion title="api.runtime.tools">
+Warning
+
+    Bundled plugins only in this release.
+
+
+
+
+api.runtime.tools
+
     Memory tool factories and CLI.
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const getTool = api.runtime.tools.createMemoryGetTool(/* ... */);
     const searchTool = api.runtime.tools.createMemorySearchTool(/* ... */);
     api.runtime.tools.registerMemoryCli(/* ... */);
     ```
-  </Accordion>
 
-  <Accordion title="api.runtime.channel">
+
+
+api.runtime.channel
+
     Channel-specific runtime helpers (available when a channel plugin is loaded).
 
     `api.runtime.channel.media` is the preferred surface for channel media downloads and storage:
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const saved = await api.runtime.channel.media.saveRemoteMedia({
       url,
       subdir: "inbound",
@@ -566,7 +617,7 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     `api.runtime.channel.mentions` is the shared inbound mention-policy surface for bundled channel plugins that use runtime injection:
 
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```typescript
     const mentionMatch = api.runtime.channel.mentions.matchesMentionWithExplicit(text, {
       mentionRegexes,
       mentionPatterns,
@@ -593,35 +644,42 @@ two-party event loops that do not go through the shared channel-turn kernel.
 
     Available mention helpers:
 
-    * `buildMentionRegexes`
-    * `matchesMentionPatterns`
-    * `matchesMentionWithExplicit`
-    * `implicitMentionKindWhen`
-    * `resolveInboundMentionDecision`
+    - `buildMentionRegexes`
+    - `matchesMentionPatterns`
+    - `matchesMentionWithExplicit`
+    - `implicitMentionKindWhen`
+    - `resolveInboundMentionDecision`
 
     `api.runtime.channel.mentions` intentionally does not expose the older `resolveMentionGating*` compatibility helpers. Prefer the normalized `{ facts, policy }` path.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Storing runtime references
 
 Use `createPluginRuntimeStore` to store the runtime reference for use outside the `register` callback:
 
-<Steps>
-  <Step title="Create the store">
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Steps
+
+
+Create the store
+
+    ```typescript
     import { createPluginRuntimeStore } from "openclaw/plugin-sdk/runtime-store";
     import type { PluginRuntime } from "openclaw/plugin-sdk/runtime-store";
 
-    const store = createPluginRuntimeStore<PluginRuntime>({
+    const store = createPluginRuntimeStore
+PluginRuntime
+({
       pluginId: "my-plugin",
       errorMessage: "my-plugin runtime not initialized",
     });
     ```
-  </Step>
 
-  <Step title="Wire into the entry point">
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+
+Wire into the entry point
+
+    ```typescript
     export default defineChannelPluginEntry({
       id: "my-plugin",
       name: "My Plugin",
@@ -630,10 +688,11 @@ Use `createPluginRuntimeStore` to store the runtime reference for use outside th
       setRuntime: store.setRuntime,
     });
     ```
-  </Step>
 
-  <Step title="Access from other files">
-    ```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Access from other files
+
+    ```typescript
     export function getRuntime() {
       return store.getRuntime(); // throws if not initialized
     }
@@ -642,47 +701,49 @@ Use `createPluginRuntimeStore` to store the runtime reference for use outside th
       return store.tryGetRuntime(); // returns null if not initialized
     }
     ```
-  </Step>
-</Steps>
 
-<Note>
-  Prefer `pluginId` for the runtime-store identity. The lower-level `key` form is for uncommon cases where one plugin intentionally needs more than one runtime slot.
-</Note>
+
+
+Note
+
+Prefer `pluginId` for the runtime-store identity. The lower-level `key` form is for uncommon cases where one plugin intentionally needs more than one runtime slot.
 
 ## Other top-level `api` fields
 
 Beyond `api.runtime`, the API object also provides:
 
-<ParamField type="string">
+ParamField
+
   Plugin id.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+
   Plugin display name.
-</ParamField>
 
-<ParamField type="OpenClawConfig">
+ParamField
+
   Current config snapshot (active in-memory runtime snapshot when available).
-</ParamField>
 
-<ParamField type="Record<string, unknown>">
+ParamField
+">
   Plugin-specific config from `plugins.entries.<id>.config`.
-</ParamField>
 
-<ParamField type="PluginLogger">
+ParamField
+
   Scoped logger (`debug`, `info`, `warn`, `error`).
-</ParamField>
 
-<ParamField type="PluginRegistrationMode">
+ParamField
+
   Current load mode; `"setup-runtime"` is the lightweight pre-full-entry startup/setup window.
-</ParamField>
 
-<ParamField type="(string) => string">
+ParamField
+ string">
   Resolve a path relative to the plugin root.
-</ParamField>
 
 ## Related
 
-* [Plugin internals](/plugins/architecture) — capability model and registry
-* [SDK entry points](/plugins/sdk-entrypoints) — `definePluginEntry` options
-* [SDK overview](/plugins/sdk-overview) — subpath reference
+- [Plugin internals](/plugins/architecture) — capability model and registry
+- [SDK entry points](/plugins/sdk-entrypoints) — `definePluginEntry` options
+- [SDK overview](/plugins/sdk-overview) — subpath reference
+
+---

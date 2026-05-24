@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "2695cb5d7c867c173dec914bc51f3b2b50c3c7ece683faacf358c23f1a51bc7c"
+source_hash: "fb9f17e37216dd569e4ce3b40c39876488902330557eb78678feefe75178fde6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Skills
 Source: https://docs.openclaw.ai/cli/skills
 
-
-
 # `openclaw skills`
 
 Inspect local skills, search ClawHub, install skills from ClawHub/Git/local directories, and update
@@ -22,13 +20,13 @@ ClawHub-tracked installs.
 
 Related:
 
-* Skills system: [Skills](/tools/skills)
-* Skills config: [Skills config](/tools/skills-config)
-* ClawHub installs: [ClawHub](/clawhub/cli)
+- Skills system: [Skills](/tools/skills)
+- Skills config: [Skills config](/tools/skills-config)
+- ClawHub installs: [ClawHub](/clawhub/cli)
 
 ## Commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw skills search "calendar"
 openclaw skills search --limit 20 --json
 openclaw skills install <slug>
@@ -77,34 +75,36 @@ settings use the separate `skills.install` request path instead.
 
 Notes:
 
-* `search [query...]` accepts an optional query; omit it to browse the default
+- `search [query...]` accepts an optional query; omit it to browse the default
   ClawHub search feed.
-* `search --limit <n>` caps returned results.
-* `install git:owner/repo[@ref]` installs a Git skill. Branch refs may contain
+- `search --limit <n>` caps returned results.
+- `install git:owner/repo[@ref]` installs a Git skill. Branch refs may contain
   slashes, such as `git:owner/repo@feature/foo`.
-* `install ./path/to/skill` installs a local directory whose root contains
+- `install ./path/to/skill` installs a local directory whose root contains
   `SKILL.md`.
-* `install --as <slug>` overrides the inferred slug for Git and local directory
+- `install --as <slug>` overrides the inferred slug for Git and local directory
   installs.
-* `install --version <version>` applies only to ClawHub skill slugs.
-* `install --force` overwrites an existing workspace skill folder for the same
+- `install --version <version>` applies only to ClawHub skill slugs.
+- `install --force` overwrites an existing workspace skill folder for the same
   slug.
-* `--global` targets the shared managed skills directory and cannot be combined
+- `--global` targets the shared managed skills directory and cannot be combined
   with `--agent <id>`.
-* `--agent <id>` targets one configured agent workspace and overrides current
+- `--agent <id>` targets one configured agent workspace and overrides current
   working directory inference.
-* `update <slug>` updates a single tracked skill. Add `--global` to target the
+- `update <slug>` updates a single tracked skill. Add `--global` to target the
   shared managed skills directory instead of the workspace.
-* `update --all` updates tracked ClawHub installs in the selected workspace, or
+- `update --all` updates tracked ClawHub installs in the selected workspace, or
   in the shared managed skills directory when combined with `--global`.
-* `check --agent <id>` checks the selected agent's workspace and reports which
+- `check --agent <id>` checks the selected agent's workspace and reports which
   ready skills are actually visible to that agent's prompt or command surface.
-* `list` is the default action when no subcommand is provided.
-* `list`, `info`, and `check` write their rendered output to stdout. With
+- `list` is the default action when no subcommand is provided.
+- `list`, `info`, and `check` write their rendered output to stdout. With
   `--json`, that means the machine-readable payload stays on stdout for pipes
   and scripts.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Skills](/tools/skills)
+- [CLI reference](/cli)
+- [Skills](/tools/skills)
+
+---

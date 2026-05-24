@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "d109b9960962185d843e746bd04934a56de11d3de66fad9dbded9efc53584e33"
+source_hash: "31b179ea4e3c28b2299cfdb7e35ea6f15775ca9ec02c5c35e10aca76c52c4864"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/hooks.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Hooks
 Source: https://docs.openclaw.ai/cli/hooks
 
-
-
 # `openclaw hooks`
 
 Manage agent hooks (event-driven automations for commands like `/new`, `/reset`, and gateway startup).
@@ -23,12 +21,12 @@ Running `openclaw hooks` with no subcommand is equivalent to `openclaw hooks lis
 
 Related:
 
-* Hooks: [Hooks](/automation/hooks)
-* Plugin hooks: [Plugin hooks](/plugins/hooks)
+- Hooks: [Hooks](/automation/hooks)
+- Plugin hooks: [Plugin hooks](/plugins/hooks)
 
 ## List all hooks
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks list
 ```
 
@@ -37,9 +35,9 @@ Gateway startup does not load internal hook handlers until at least one internal
 
 **Options:**
 
-* `--eligible`: Show only eligible hooks (requirements met)
-* `--json`: Output as JSON
-* `-v, --verbose`: Show detailed information including missing requirements
+- `--eligible`: Show only eligible hooks (requirements met)
+- `--json`: Output as JSON
+- `-v, --verbose`: Show detailed information including missing requirements
 
 **Example output:**
 
@@ -55,7 +53,7 @@ Ready:
 
 **Example (verbose):**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks list --verbose
 ```
 
@@ -63,7 +61,7 @@ Shows missing requirements for ineligible hooks.
 
 **Example (JSON):**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks list --json
 ```
 
@@ -71,7 +69,7 @@ Returns structured JSON for programmatic use.
 
 ## Get hook information
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks info <name>
 ```
 
@@ -79,15 +77,15 @@ Show detailed information about a specific hook.
 
 **Arguments:**
 
-* `<name>`: Hook name or hook key (e.g., `session-memory`)
+- `<name>`: Hook name or hook key (e.g., `session-memory`)
 
 **Options:**
 
-* `--json`: Output as JSON
+- `--json`: Output as JSON
 
 **Example:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks info session-memory
 ```
 
@@ -111,7 +109,7 @@ Requirements:
 
 ## Check hooks eligibility
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks check
 ```
 
@@ -119,7 +117,7 @@ Show summary of hook eligibility status (how many are ready vs. not ready).
 
 **Options:**
 
-* `--json`: Output as JSON
+- `--json`: Output as JSON
 
 **Example output:**
 
@@ -133,7 +131,7 @@ Not ready: 0
 
 ## Enable a Hook
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable <name>
 ```
 
@@ -143,11 +141,11 @@ Enable a specific hook by adding it to your config (`~/.openclaw/openclaw.json` 
 
 **Arguments:**
 
-* `<name>`: Hook name (e.g., `session-memory`)
+- `<name>`: Hook name (e.g., `session-memory`)
 
 **Example:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable session-memory
 ```
 
@@ -159,20 +157,20 @@ openclaw hooks enable session-memory
 
 **What it does:**
 
-* Checks if hook exists and is eligible
-* Updates `hooks.internal.entries.<name>.enabled = true` in your config
-* Saves config to disk
+- Checks if hook exists and is eligible
+- Updates `hooks.internal.entries.<name>.enabled = true` in your config
+- Saves config to disk
 
 If the hook came from `<workspace>/hooks/`, this opt-in step is required before
 the Gateway will load it.
 
 **After enabling:**
 
-* Restart the gateway so hooks reload (menu bar app restart on macOS, or restart your gateway process in dev).
+- Restart the gateway so hooks reload (menu bar app restart on macOS, or restart your gateway process in dev).
 
 ## Disable a Hook
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks disable <name>
 ```
 
@@ -180,11 +178,11 @@ Disable a specific hook by updating your config.
 
 **Arguments:**
 
-* `<name>`: Hook name (e.g., `command-logger`)
+- `<name>`: Hook name (e.g., `command-logger`)
 
 **Example:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks disable command-logger
 ```
 
@@ -196,16 +194,16 @@ openclaw hooks disable command-logger
 
 **After disabling:**
 
-* Restart the gateway so hooks reload
+- Restart the gateway so hooks reload
 
 ## Notes
 
-* `openclaw hooks list --json`, `info --json`, and `check --json` write structured JSON directly to stdout.
-* Plugin-managed hooks cannot be enabled or disabled here; enable or disable the owning plugin instead.
+- `openclaw hooks list --json`, `info --json`, and `check --json` write structured JSON directly to stdout.
+- Plugin-managed hooks cannot be enabled or disabled here; enable or disable the owning plugin instead.
 
 ## Install hook packs
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install <package>        # npm by default
 openclaw plugins install npm:<package>    # npm only
 openclaw plugins install <package> --pin  # pin version
@@ -228,20 +226,20 @@ prerelease tag such as `@beta`/`@rc` or an exact prerelease version.
 
 **What it does:**
 
-* Copies the hook pack into `~/.openclaw/hooks/<id>`
-* Enables the installed hooks in `hooks.internal.entries.*`
-* Records the install under `hooks.internal.installs`
+- Copies the hook pack into `~/.openclaw/hooks/<id>`
+- Enables the installed hooks in `hooks.internal.entries.*`
+- Records the install under `hooks.internal.installs`
 
 **Options:**
 
-* `-l, --link`: Link a local directory instead of copying (adds it to `hooks.internal.load.extraDirs`)
-* `--pin`: Record npm installs as exact resolved `name@version` in `hooks.internal.installs`
+- `-l, --link`: Link a local directory instead of copying (adds it to `hooks.internal.load.extraDirs`)
+- `--pin`: Record npm installs as exact resolved `name@version` in `hooks.internal.installs`
 
 **Supported archives:** `.zip`, `.tgz`, `.tar.gz`, `.tar`
 
 **Examples:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Local directory
 openclaw plugins install ./my-hook-pack
 
@@ -260,7 +258,7 @@ directory, not as workspace hooks.
 
 ## Update hook packs
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins update <id>
 openclaw plugins update --all
 ```
@@ -272,8 +270,8 @@ deprecation warning and forwards to `openclaw plugins update`.
 
 **Options:**
 
-* `--all`: Update all tracked hook packs
-* `--dry-run`: Show what would change without writing
+- `--all`: Update all tracked hook packs
+- `--dry-run`: Show what would change without writing
 
 When a stored integrity hash exists and the fetched artifact hash changes,
 OpenClaw prints a warning and asks for confirmation before proceeding. Use
@@ -287,7 +285,7 @@ Saves session context to memory when you issue `/new` or `/reset`.
 
 **Enable:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable session-memory
 ```
 
@@ -301,7 +299,7 @@ Injects additional bootstrap files (for example monorepo-local `AGENTS.md` / `TO
 
 **Enable:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable bootstrap-extra-files
 ```
 
@@ -313,7 +311,7 @@ Logs all command events to a centralized audit file.
 
 **Enable:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable command-logger
 ```
 
@@ -321,7 +319,7 @@ openclaw hooks enable command-logger
 
 **View logs:**
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # Recent commands
 tail -n 20 ~/.openclaw/logs/commands.log
 
@@ -342,7 +340,7 @@ Runs `BOOT.md` when the gateway starts (after channels start).
 
 **Enable**:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw hooks enable boot-md
 ```
 
@@ -350,5 +348,7 @@ openclaw hooks enable boot-md
 
 ## Related
 
-* [CLI reference](/cli)
-* [Automation hooks](/automation/hooks)
+- [CLI reference](/cli)
+- [Automation hooks](/automation/hooks)
+
+---

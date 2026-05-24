@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "303abb2efcc89be0d854ea49e0e1676e86dc2680e05c74817f2a94f7c011ac8a"
+source_hash: "e9a2af1d416d8ff088bcde54057907b7e69f0691392be7e3f0b3cabdb7f46f04"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -13,20 +13,18 @@ duplicate_index: 1
 # Message presentation
 Source: https://docs.openclaw.ai/plugins/message-presentation
 
-
-
 Message presentation is OpenClaw's shared contract for rich outbound chat UI.
 It lets agents, CLI commands, approval flows, and plugins describe the message
 intent once, while each channel plugin renders the best native shape it can.
 
 Use presentation for portable message UI:
 
-* text sections
-* small context/footer text
-* dividers
-* buttons
-* select menus
-* card title and tone
+- text sections
+- small context/footer text
+- dividers
+- buttons
+- select menus
+- card title and tone
 
 Do not add new provider-native fields such as Discord `components`, Slack
 `blocks`, Telegram `buttons`, Teams `card`, or Feishu `card` to the shared
@@ -36,8 +34,8 @@ message tool. Those are renderer outputs owned by the channel plugin.
 
 Plugin authors import the public contract from:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import type {
+```ts
+
   MessagePresentation,
   ReplyPayloadDelivery,
 } from "openclaw/plugin-sdk/interactive-runtime";
@@ -45,7 +43,7 @@ import type {
 
 Shape:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 type MessagePresentation = {
   title?: string;
   tone?: "neutral" | "info" | "success" | "warning" | "danger";
@@ -90,39 +88,39 @@ type ReplyPayloadDelivery = {
 
 Button semantics:
 
-* `value` is an application action value routed back through the channel's
+- `value` is an application action value routed back through the channel's
   existing interaction path when the channel supports clickable controls.
-* `url` is a link button. It can exist without `value`.
-* `webApp` describes a channel-native web app button. Telegram renders this
+- `url` is a link button. It can exist without `value`.
+- `webApp` describes a channel-native web app button. Telegram renders this
   as `web_app` and only supports it in private chats. `web_app` is still
   accepted in loose JSON payloads for compatibility, but TypeScript producers
   should use `webApp`.
-* `label` is required and is also used in text fallback.
-* `style` is advisory. Renderers should map unsupported styles to a safe
+- `label` is required and is also used in text fallback.
+- `style` is advisory. Renderers should map unsupported styles to a safe
   default, not fail the send.
-* `priority` is optional. When a channel advertises action limits and controls
+- `priority` is optional. When a channel advertises action limits and controls
   must be dropped, core keeps higher-priority buttons first and preserves
   original order among equal priority buttons. When all controls fit, authored
   order is preserved.
-* `disabled` is optional. Channels must opt in with `supportsDisabled`; otherwise
+- `disabled` is optional. Channels must opt in with `supportsDisabled`; otherwise
   core degrades the disabled control to non-interactive fallback text.
-* `reusable` is optional. Channels that support reusable native callbacks may
+- `reusable` is optional. Channels that support reusable native callbacks may
   keep the action available after a successful interaction. Use it for
   repeatable or idempotent actions such as refresh, inspect, or more details;
   leave it unset for normal one-shot approvals and destructive actions.
 
 Select semantics:
 
-* `options[].value` is the selected application value.
-* `placeholder` is advisory and may be ignored by channels without native
+- `options[].value` is the selected application value.
+- `placeholder` is advisory and may be ignored by channels without native
   select support.
-* If a channel does not support selects, fallback text lists the labels.
+- If a channel does not support selects, fallback text lists the labels.
 
 ## Producer examples
 
 Simple card:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "title": "Deploy approval",
   "tone": "warning",
@@ -142,7 +140,7 @@ Simple card:
 
 URL-only link button:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "blocks": [
     { "type": "text", "text": "Release notes are ready." },
@@ -156,7 +154,7 @@ URL-only link button:
 
 Telegram Mini App button:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "blocks": [
     {
@@ -169,7 +167,7 @@ Telegram Mini App button:
 
 Select menu:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "title": "Choose environment",
   "blocks": [
@@ -187,7 +185,7 @@ Select menu:
 
 CLI send:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw message send --channel slack \
   --target channel:C123 \
   --message "Deploy approval" \
@@ -196,7 +194,7 @@ openclaw message send --channel slack \
 
 Pinned delivery:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw message send --channel telegram \
   --target -1001234567890 \
   --message "Topic opened" \
@@ -205,7 +203,7 @@ openclaw message send --channel telegram \
 
 Pinned delivery with explicit JSON:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "pin": {
     "enabled": true,
@@ -219,7 +217,7 @@ Pinned delivery with explicit JSON:
 
 Channel plugins declare render support on their outbound adapter:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 const adapter: ChannelOutboundAdapter = {
   deliveryMode: "direct",
   presentationCapabilities: {
@@ -266,7 +264,7 @@ Capability booleans describe what the renderer can make interactive. Optional
 `limits` describe the generic envelope core can adapt before calling the
 renderer:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```ts
 type ChannelPresentationCapabilities = {
   supported?: boolean;
   buttons?: boolean;
@@ -330,20 +328,20 @@ Presentation must be safe to send on limited channels.
 
 Fallback text includes:
 
-* `title` as the first line
-* `text` blocks as normal paragraphs
-* `context` blocks as compact context lines
-* `divider` blocks as a visual separator
-* button labels, including URLs for link buttons
-* select option labels
+- `title` as the first line
+- `text` blocks as normal paragraphs
+- `context` blocks as compact context lines
+- `divider` blocks as a visual separator
+- button labels, including URLs for link buttons
+- select option labels
 
 Unsupported native controls should degrade rather than fail the whole send.
 Examples:
 
-* Telegram with inline buttons disabled sends text fallback.
-* A channel without select support lists select options as text.
-* A URL-only button becomes either a native link button or a fallback URL line.
-* Optional pin failures do not fail the delivered message.
+- Telegram with inline buttons disabled sends text fallback.
+- A channel without select support lists select options as text.
+- A URL-only button becomes either a native link button or a fallback URL line.
+- Optional pin failures do not fail the delivered message.
 
 The main exception is `delivery.pin.required: true`; if pinning is requested as
 required and the channel cannot pin the sent message, delivery reports failure.
@@ -370,24 +368,24 @@ reply producers. It is not a reason to add new shared native fields.
 `InteractiveReply` is the older internal subset used by approval and interaction
 helpers. It supports:
 
-* text
-* buttons
-* selects
+- text
+- buttons
+- selects
 
 `MessagePresentation` is the canonical shared send contract. It adds:
 
-* title
-* tone
-* context
-* divider
-* URL-only buttons
-* generic delivery metadata through `ReplyPayload.delivery`
+- title
+- tone
+- context
+- divider
+- URL-only buttons
+- generic delivery metadata through `ReplyPayload.delivery`
 
 Use helpers from `openclaw/plugin-sdk/interactive-runtime` when bridging older
 code:
 
-```ts theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```ts
+
   adaptMessagePresentationForChannel,
   applyPresentationActionLimits,
   interactiveReplyToPresentation,
@@ -406,16 +404,16 @@ support remains for older producers.
 The legacy `InteractiveReply*` types and conversion helpers are marked
 `@deprecated` in the SDK:
 
-* `InteractiveReply`, `InteractiveReplyBlock`, `InteractiveReplyButton`,
+- `InteractiveReply`, `InteractiveReplyBlock`, `InteractiveReplyButton`,
   `InteractiveReplyOption`, `InteractiveReplySelectBlock`, and
   `InteractiveReplyTextBlock`
-* `normalizeInteractiveReply(...)`
-* `hasInteractiveReplyBlocks(...)`
-* `interactiveReplyToPresentation(...)`
-* `presentationToInteractiveReply(...)`
-* `presentationToInteractiveControlsReply(...)`
-* `resolveInteractiveTextFallback(...)`
-* `reduceInteractiveReply(...)`
+- `normalizeInteractiveReply(...)`
+- `hasInteractiveReplyBlocks(...)`
+- `interactiveReplyToPresentation(...)`
+- `presentationToInteractiveReply(...)`
+- `presentationToInteractiveControlsReply(...)`
+- `resolveInteractiveTextFallback(...)`
+- `reduceInteractiveReply(...)`
 
 `presentationToInteractiveReply(...)` and
 `presentationToInteractiveControlsReply(...)` remain available as renderer
@@ -424,11 +422,11 @@ them; send `presentation` and let core/channel adaptation handle rendering.
 
 Approval helpers also have presentation-first replacements:
 
-* use `buildApprovalPresentationFromActionDescriptors(...)` instead of
+- use `buildApprovalPresentationFromActionDescriptors(...)` instead of
   `buildApprovalInteractiveReplyFromActionDescriptors(...)`
-* use `buildApprovalPresentation(...)` instead of
+- use `buildApprovalPresentation(...)` instead of
   `buildApprovalInteractiveReply(...)`
-* use `buildExecApprovalPresentation(...)` instead of
+- use `buildExecApprovalPresentation(...)` instead of
   `buildExecApprovalInteractiveReply(...)`
 
 `renderMessagePresentationFallbackText(...)` returns an empty string for
@@ -444,37 +442,39 @@ provider-native fields such as `channelData.telegram.pin`.
 
 Semantics:
 
-* `pin: true` pins the first successfully delivered message.
-* `pin.notify` defaults to `false`.
-* `pin.required` defaults to `false`.
-* Optional pin failures degrade and leave the sent message intact.
-* Required pin failures fail delivery.
-* Chunked messages pin the first delivered chunk, not the tail chunk.
+- `pin: true` pins the first successfully delivered message.
+- `pin.notify` defaults to `false`.
+- `pin.required` defaults to `false`.
+- Optional pin failures degrade and leave the sent message intact.
+- Required pin failures fail delivery.
+- Chunked messages pin the first delivered chunk, not the tail chunk.
 
 Manual `pin`, `unpin`, and `pins` message actions still exist for existing
 messages where the provider supports those operations.
 
 ## Plugin author checklist
 
-* Declare `presentation` from `describeMessageTool(...)` when the channel can
+- Declare `presentation` from `describeMessageTool(...)` when the channel can
   render or safely degrade semantic presentation.
-* Add `presentationCapabilities` to the runtime outbound adapter.
-* Implement `renderPresentation` in runtime code, not control-plane plugin
+- Add `presentationCapabilities` to the runtime outbound adapter.
+- Implement `renderPresentation` in runtime code, not control-plane plugin
   setup code.
-* Keep native UI libraries out of hot setup/catalog paths.
-* Declare generic capability limits on `presentationCapabilities.limits` when
+- Keep native UI libraries out of hot setup/catalog paths.
+- Declare generic capability limits on `presentationCapabilities.limits` when
   they are known.
-* Preserve final platform limits in the renderer and tests.
-* Add fallback tests for unsupported buttons, selects, URL buttons, title/text
+- Preserve final platform limits in the renderer and tests.
+- Add fallback tests for unsupported buttons, selects, URL buttons, title/text
   duplication, and mixed `message` plus `presentation` sends.
-* Add delivery pin support through `deliveryCapabilities.pin` and
+- Add delivery pin support through `deliveryCapabilities.pin` and
   `pinDeliveredMessage` only when the provider can pin the sent message id.
-* Do not expose new provider-native card/block/component/button fields through
+- Do not expose new provider-native card/block/component/button fields through
   the shared message action schema.
 
 ## Related docs
 
-* [Message CLI](/cli/message)
-* [Plugin SDK Overview](/plugins/sdk-overview)
-* [Plugin Architecture](/plugins/architecture-internals#message-tool-schemas)
-* [Channel Presentation Refactor Plan](/plan/ui-channels)
+- [Message CLI](/cli/message)
+- [Plugin SDK Overview](/plugins/sdk-overview)
+- [Plugin Architecture](/plugins/architecture-internals#message-tool-schemas)
+- [Channel Presentation Refactor Plan](/plan/ui-channels)
+
+---

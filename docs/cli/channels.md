@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "9164a8a37fb0bef3d603353a3b0b3ab0a7eada66f1f7b6cc9136fb0bd4ce592b"
+source_hash: "812d4a671fd351cc11cb2191233d9b494ce86220cb66ce6357c914344378ac2b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/channels.md"
@@ -13,20 +13,18 @@ duplicate_index: 1
 # Channels
 Source: https://docs.openclaw.ai/cli/channels
 
-
-
 # `openclaw channels`
 
 Manage chat channel accounts and their runtime status on the Gateway.
 
 Related docs:
 
-* Channel guides: [Channels](/channels)
-* Gateway configuration: [Configuration](/gateway/configuration)
+- Channel guides: [Channels](/channels)
+- Gateway configuration: [Configuration](/gateway/configuration)
 
 ## Common commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels list
 openclaw channels list --all
 openclaw channels status
@@ -41,10 +39,10 @@ openclaw channels logs --channel all
 
 ## Status / capabilities / resolve / logs
 
-* `channels status`: `--channel <name>`, `--probe`, `--timeout <ms>`, `--json`
-* `channels capabilities`: `--channel <name>`, `--account <id>` (only with `--channel`), `--target <dest>`, `--timeout <ms>`, `--json`
-* `channels resolve`: `<entries...>`, `--channel <name>`, `--account <id>`, `--kind <auto|user|group>`, `--json`
-* `channels logs`: `--channel <name|all>`, `--lines <n>`, `--json`
+- `channels status`: `--channel <name>`, `--probe`, `--timeout <ms>`, `--json`
+- `channels capabilities`: `--channel <name>`, `--account <id>` (only with `--channel`), `--target <dest>`, `--timeout <ms>`, `--json`
+- `channels resolve`: `<entries...>`, `--channel <name>`, `--account <id>`, `--kind <auto|user|group>`, `--json`
+- `channels logs`: `--channel <name|all>`, `--lines <n>`, `--json`
 
 `channels status --probe` is the live path: on a reachable gateway it runs per-account
 `probeAccount` and optional `auditAccount` checks, so output can include transport
@@ -60,36 +58,36 @@ row appears until the next inbound or outbound conversation event.
 
 ## Add / remove accounts
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels add --channel telegram --token <bot-token>
 openclaw channels add --channel nostr --private-key "$NOSTR_PRIVATE_KEY"
 openclaw channels remove --channel telegram --delete
 ```
 
-<Tip>
-  `openclaw channels add --help` shows per-channel flags (token, private key, app token, signal-cli paths, etc).
-</Tip>
+Tip
+
+`openclaw channels add --help` shows per-channel flags (token, private key, app token, signal-cli paths, etc).
 
 `channels remove` only operates on installed/configured channel plugins. Use `channels add` first for installable catalog channels.
 For runtime-backed channel plugins, `channels remove` also asks the running Gateway to stop the selected account before it updates config, so disabling or deleting an account does not leave the old listener active until restart.
 
 Common non-interactive add surfaces include:
 
-* bot-token channels: `--token`, `--bot-token`, `--app-token`, `--token-file`
-* Signal/iMessage transport fields: `--signal-number`, `--cli-path`, `--http-url`, `--http-host`, `--http-port`, `--db-path`, `--service`, `--region`
-* Google Chat fields: `--webhook-path`, `--webhook-url`, `--audience-type`, `--audience`
-* Matrix fields: `--homeserver`, `--user-id`, `--access-token`, `--password`, `--device-name`, `--initial-sync-limit`
-* Nostr fields: `--private-key`, `--relay-urls`
-* Tlon fields: `--ship`, `--url`, `--code`, `--group-channels`, `--dm-allowlist`, `--auto-discover-channels`
-* `--use-env` for default-account env-backed auth where supported
+- bot-token channels: `--token`, `--bot-token`, `--app-token`, `--token-file`
+- Signal/iMessage transport fields: `--signal-number`, `--cli-path`, `--http-url`, `--http-host`, `--http-port`, `--db-path`, `--service`, `--region`
+- Google Chat fields: `--webhook-path`, `--webhook-url`, `--audience-type`, `--audience`
+- Matrix fields: `--homeserver`, `--user-id`, `--access-token`, `--password`, `--device-name`, `--initial-sync-limit`
+- Nostr fields: `--private-key`, `--relay-urls`
+- Tlon fields: `--ship`, `--url`, `--code`, `--group-channels`, `--dm-allowlist`, `--auto-discover-channels`
+- `--use-env` for default-account env-backed auth where supported
 
 If a channel plugin needs to be installed during a flag-driven add command, OpenClaw uses the channel's default install source without opening the interactive plugin install prompt.
 
 When you run `openclaw channels add` without flags, the interactive wizard can prompt:
 
-* account ids per selected channel
-* optional display names for those accounts
-* `Route these channel accounts to agents now?`
+- account ids per selected channel
+- optional display names for those accounts
+- `Route these channel accounts to agents now?`
 
 If you confirm bind now, the wizard asks which agent should own each configured channel account and writes account-scoped routing bindings.
 
@@ -99,52 +97,52 @@ When you add a non-default account to a channel that is still using single-accou
 
 Routing behavior stays consistent:
 
-* Existing channel-only bindings (no `accountId`) continue to match the default account.
-* `channels add` does not auto-create or rewrite bindings in non-interactive mode.
-* Interactive setup can optionally add account-scoped bindings.
+- Existing channel-only bindings (no `accountId`) continue to match the default account.
+- `channels add` does not auto-create or rewrite bindings in non-interactive mode.
+- Interactive setup can optionally add account-scoped bindings.
 
 If your config was already in a mixed state (named accounts present and top-level single-account values still set), run `openclaw doctor --fix` to move account-scoped values into the promoted account chosen for that channel. Most channels promote into `accounts.default`; Matrix can preserve an existing named/default target instead.
 
 ## Login and logout (interactive)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels login --channel whatsapp
 openclaw channels logout --channel whatsapp
 ```
 
-* `channels login` supports `--verbose`.
-* `channels login` and `logout` can infer the channel when only one supported login target is configured.
-* `channels logout` prefers the live Gateway path when reachable, so logout stops any active listener before clearing channel auth state. If a local Gateway is not reachable, it falls back to local auth cleanup.
-* Run `channels login` from a terminal on the gateway host. Agent `exec` blocks this interactive login flow; channel-native agent login tools, such as `whatsapp_login`, should be used from chat when available.
+- `channels login` supports `--verbose`.
+- `channels login` and `logout` can infer the channel when only one supported login target is configured.
+- `channels logout` prefers the live Gateway path when reachable, so logout stops any active listener before clearing channel auth state. If a local Gateway is not reachable, it falls back to local auth cleanup.
+- Run `channels login` from a terminal on the gateway host. Agent `exec` blocks this interactive login flow; channel-native agent login tools, such as `whatsapp_login`, should be used from chat when available.
 
 ## Troubleshooting
 
-* Run `openclaw status --deep` for a broad probe.
-* Use `openclaw doctor` for guided fixes.
-* `openclaw channels list` no longer prints model provider usage/quota snapshots. For those, use `openclaw status` (overview) or `openclaw models list` (per-provider).
-* `openclaw channels status` falls back to config-only summaries when the gateway is unreachable. If a supported channel credential is configured via SecretRef but unavailable in the current command path, it reports that account as configured with degraded notes instead of showing it as not configured.
+- Run `openclaw status --deep` for a broad probe.
+- Use `openclaw doctor` for guided fixes.
+- `openclaw channels list` no longer prints model provider usage/quota snapshots. For those, use `openclaw status` (overview) or `openclaw models list` (per-provider).
+- `openclaw channels status` falls back to config-only summaries when the gateway is unreachable. If a supported channel credential is configured via SecretRef but unavailable in the current command path, it reports that account as configured with degraded notes instead of showing it as not configured.
 
 ## Capabilities probe
 
 Fetch provider capability hints (intents/scopes where available) plus static feature support:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels capabilities
 openclaw channels capabilities --channel discord --target channel:123
 ```
 
 Notes:
 
-* `--channel` is optional; omit it to list every channel (including extensions).
-* `--account` is only valid with `--channel`.
-* `--target` accepts `channel:<id>` or a raw numeric channel id and only applies to Discord. For Discord voice channels, the permission check flags missing `ViewChannel`, `Connect`, `Speak`, `SendMessages`, and `ReadMessageHistory`.
-* Probes are provider-specific: Discord intents + optional channel permissions; Slack bot + user scopes; Telegram bot flags + webhook; Signal daemon version; Microsoft Teams app token + Graph roles/scopes (annotated where known). Channels without probes report `Probe: unavailable`.
+- `--channel` is optional; omit it to list every channel (including extensions).
+- `--account` is only valid with `--channel`.
+- `--target` accepts `channel:<id>` or a raw numeric channel id and only applies to Discord. For Discord voice channels, the permission check flags missing `ViewChannel`, `Connect`, `Speak`, `SendMessages`, and `ReadMessageHistory`.
+- Probes are provider-specific: Discord intents + optional channel permissions; Slack bot + user scopes; Telegram bot flags + webhook; Signal daemon version; Microsoft Teams app token + Graph roles/scopes (annotated where known). Channels without probes report `Probe: unavailable`.
 
 ## Resolve names to IDs
 
 Resolve channel/user names to IDs using the provider directory:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels resolve --channel slack "#general" "@jane"
 openclaw channels resolve --channel discord "My Server/#support" "@someone"
 openclaw channels resolve --channel matrix "Project Room"
@@ -152,12 +150,14 @@ openclaw channels resolve --channel matrix "Project Room"
 
 Notes:
 
-* Use `--kind user|group|auto` to force the target type.
-* Resolution prefers active matches when multiple entries share the same name.
-* `channels resolve` is read-only. If a selected account is configured via SecretRef but that credential is unavailable in the current command path, the command returns degraded unresolved results with notes instead of aborting the entire run.
-* `channels resolve` does not install channel plugins. Use `channels add --channel <name>` before resolving names for an installable catalog channel.
+- Use `--kind user|group|auto` to force the target type.
+- Resolution prefers active matches when multiple entries share the same name.
+- `channels resolve` is read-only. If a selected account is configured via SecretRef but that credential is unavailable in the current command path, the command returns degraded unresolved results with notes instead of aborting the entire run.
+- `channels resolve` does not install channel plugins. Use `channels add --channel <name>` before resolving names for an installable catalog channel.
 
 ## Related
 
-* [CLI reference](/cli)
-* [Channels overview](/channels)
+- [CLI reference](/cli)
+- [Channels overview](/channels)
+
+---

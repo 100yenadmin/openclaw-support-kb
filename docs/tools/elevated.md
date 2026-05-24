@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Elevated mode"
 source: "https://docs.openclaw.ai/tools/elevated"
-source_hash: "5b227455a82ad5ec6a5b42cd6296f1fbf77e3474c1e051b4c276ffc54754fb46"
+source_hash: "12746620d7fdcae0c0df186939a1d21e3e8367c97a4084ad2b2ff9a7abb65cfc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/elevated.md"
@@ -13,16 +13,14 @@ duplicate_index: 1
 # Elevated mode
 Source: https://docs.openclaw.ai/tools/elevated
 
-
-
 When an agent runs inside a sandbox, its `exec` commands are confined to the
 sandbox environment. **Elevated mode** lets the agent break out and run commands
 outside the sandbox instead, with configurable approval gates.
 
-<Info>
+Info
+
   Elevated mode only changes behavior when the agent is **sandboxed**. For
   unsandboxed agents, exec already runs on the host.
-</Info>
 
 ## Directives
 
@@ -41,11 +39,14 @@ Send `/elevated` with no argument to see the current level.
 
 ## How it works
 
-<Steps>
-  <Step title="Check availability">
+Steps
+
+
+Check availability
+
     Elevated must be enabled in config and the sender must be on the allowlist:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       tools: {
         elevated: {
@@ -58,9 +59,12 @@ Send `/elevated` with no argument to see the current level.
       },
     }
     ```
-  </Step>
 
-  <Step title="Set the level">
+
+
+
+Set the level
+
     Send a directive-only message to set the session default:
 
     ```
@@ -72,15 +76,17 @@ Send `/elevated` with no argument to see the current level.
     ```
     /elevated on run the deployment script
     ```
-  </Step>
 
-  <Step title="Commands run outside the sandbox">
+
+
+
+Commands run outside the sandbox
+
     With elevated active, `exec` calls leave the sandbox. The effective host is
     `gateway` by default, or `node` when the configured/session exec target is
     `node`. In `full` mode, exec approvals are skipped. In `on`/`ask` mode,
     configured approval rules still apply.
-  </Step>
-</Steps>
+
 
 ## Resolution order
 
@@ -90,12 +96,12 @@ Send `/elevated` with no argument to see the current level.
 
 ## Availability and allowlists
 
-* **Global gate**: `tools.elevated.enabled` (must be `true`)
-* **Sender allowlist**: `tools.elevated.allowFrom` with per-channel lists
-* **Per-agent gate**: `agents.list[].tools.elevated.enabled` (can only further restrict)
-* **Per-agent allowlist**: `agents.list[].tools.elevated.allowFrom` (sender must match both global + per-agent)
-* **Discord fallback**: if `tools.elevated.allowFrom.discord` is omitted, `channels.discord.allowFrom` is used as fallback
-* **All gates must pass**; otherwise elevated is treated as unavailable
+- **Global gate**: `tools.elevated.enabled` (must be `true`)
+- **Sender allowlist**: `tools.elevated.allowFrom` with per-channel lists
+- **Per-agent gate**: `agents.list[].tools.elevated.enabled` (can only further restrict)
+- **Per-agent allowlist**: `agents.list[].tools.elevated.allowFrom` (sender must match both global + per-agent)
+- **Discord fallback**: if `tools.elevated.allowFrom.discord` is omitted, `channels.discord.allowFrom` is used as fallback
+- **All gates must pass**; otherwise elevated is treated as unavailable
 
 Allowlist entry formats:
 
@@ -109,30 +115,36 @@ Allowlist entry formats:
 
 ## What elevated does not control
 
-* **Tool policy**: if `exec` is denied by tool policy, elevated cannot override it.
-* **Host selection policy**: elevated does not turn `auto` into a free cross-host override. It uses the configured/session exec target rules, choosing `node` only when the target is already `node`.
-* **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults for authorized senders and does not require elevated mode.
+- **Tool policy**: if `exec` is denied by tool policy, elevated cannot override it.
+- **Host selection policy**: elevated does not turn `auto` into a free cross-host override. It uses the configured/session exec target rules, choosing `node` only when the target is already `node`.
+- **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults for authorized senders and does not require elevated mode.
 
-<Note>
+Note
+
   The bash chat command (`!` prefix; `/bash` alias) is a separate gate that requires `tools.elevated` to be enabled in addition to its own `tools.bash.enabled` flag. Disabling elevated locks `!` shell commands out as well.
-</Note>
 
 ## Related
 
-<CardGroup>
-  <Card title="Exec tool" href="/tools/exec" icon="terminal">
+CardGroup
+
+
+Exec tool
+
     Shell command execution from the agent.
-  </Card>
 
-  <Card title="Exec approvals" href="/tools/exec-approvals" icon="shield">
+
+Exec approvals
+
     Approval and allowlist system for `exec`.
-  </Card>
 
-  <Card title="Sandboxing" href="/gateway/sandboxing" icon="box">
+
+Sandboxing
+
     Gateway-level sandbox configuration.
-  </Card>
 
-  <Card title="Sandbox vs Tool Policy vs Elevated" href="/gateway/sandbox-vs-tool-policy-vs-elevated" icon="scale-balanced">
+
+Sandbox vs Tool Policy vs Elevated
+
     How the three gates compose during a tool call.
-  </Card>
-</CardGroup>
+
+---

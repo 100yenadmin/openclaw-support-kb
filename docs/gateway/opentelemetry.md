@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "2da32e817bd2c112d03a7f6a45812cbf86971bca5d339516cc331ef97c3de037"
+source_hash: "4a93d869e003f311a7bcd983eb3702708855fec95beb34ec7ae428acc4c00dce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # OpenTelemetry export
 Source: https://docs.openclaw.ai/gateway/opentelemetry
 
-
-
 OpenClaw exports diagnostics through the official `diagnostics-otel` plugin
 using **OTLP/HTTP (protobuf)**. Any collector or backend that accepts OTLP/HTTP
 works without code changes. For local file logs and how to read them, see
@@ -22,26 +20,26 @@ works without code changes. For local file logs and how to read them, see
 
 ## How it fits together
 
-* **Diagnostics events** are structured, in-process records emitted by the
+- **Diagnostics events** are structured, in-process records emitted by the
   Gateway and bundled plugins for model runs, message flow, sessions, queues,
   and exec.
-* **`diagnostics-otel` plugin** subscribes to those events and exports them as
+- **`diagnostics-otel` plugin** subscribes to those events and exports them as
   OpenTelemetry **metrics**, **traces**, and **logs** over OTLP/HTTP.
-* **Provider calls** receive a W3C `traceparent` header from OpenClaw's
+- **Provider calls** receive a W3C `traceparent` header from OpenClaw's
   trusted model-call span context when the provider transport accepts custom
   headers. Plugin-emitted trace context is not propagated.
-* Exporters only attach when both the diagnostics surface and the plugin are
+- Exporters only attach when both the diagnostics surface and the plugin are
   enabled, so the in-process cost stays near zero by default.
 
 ## Quick start
 
 For packaged installs, install the plugin first:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install clawhub:@openclaw/diagnostics-otel
 ```
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   plugins: {
     allow: ["diagnostics-otel"],
@@ -68,13 +66,13 @@ openclaw plugins install clawhub:@openclaw/diagnostics-otel
 
 You can also enable the plugin from the CLI:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins enable diagnostics-otel
 ```
 
-<Note>
-  `protocol` currently supports `http/protobuf` only. `grpc` is ignored.
-</Note>
+Note
+
+`protocol` currently supports `http/protobuf` only. `grpc` is ignored.
 
 ## Signals exported
 
@@ -89,7 +87,7 @@ when `diagnostics.otel.enabled` is true.
 
 ## Configuration reference
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: {
     enabled: true,
@@ -150,28 +148,28 @@ Set `diagnostics.otel.captureContent.*` to `true` only when your collector and
 retention policy are approved for prompt, response, tool, or system-prompt
 text. Each subkey is opt-in independently:
 
-* `inputMessages` - user prompt content.
-* `outputMessages` - model response content.
-* `toolInputs` - tool argument payloads.
-* `toolOutputs` - tool result payloads.
-* `systemPrompt` - assembled system/developer prompt.
+- `inputMessages` - user prompt content.
+- `outputMessages` - model response content.
+- `toolInputs` - tool argument payloads.
+- `toolOutputs` - tool result payloads.
+- `systemPrompt` - assembled system/developer prompt.
 
 When any subkey is enabled, model and tool spans get bounded, redacted
 `openclaw.content.*` attributes for that class only.
 
 ## Sampling and flushing
 
-* **Traces:** `diagnostics.otel.sampleRate` (root-span only, `0.0` drops all,
+- **Traces:** `diagnostics.otel.sampleRate` (root-span only, `0.0` drops all,
   `1.0` keeps all).
-* **Metrics:** `diagnostics.otel.flushIntervalMs` (minimum `1000`).
-* **Logs:** OTLP logs respect `logging.level` (file log level). They use the
+- **Metrics:** `diagnostics.otel.flushIntervalMs` (minimum `1000`).
+- **Logs:** OTLP logs respect `logging.level` (file log level). They use the
   diagnostic log-record redaction path, not console formatting. High-volume
   installs should prefer OTLP collector sampling/filtering over local sampling.
-* **File-log correlation:** JSONL file logs include top-level `traceId`,
+- **File-log correlation:** JSONL file logs include top-level `traceId`,
   `spanId`, `parentSpanId`, and `traceFlags` when the log call carries a valid
   diagnostic trace context, which lets log processors join local log lines with
   exported spans.
-* **Request correlation:** Gateway HTTP requests and WebSocket frames create an
+- **Request correlation:** Gateway HTTP requests and WebSocket frames create an
   internal request trace scope. Logs and diagnostic events inside that scope
   inherit the request trace by default, while agent run and model-call spans are
   created as children so provider `traceparent` headers stay on the same trace.
@@ -180,52 +178,52 @@ When any subkey is enabled, model and tool spans get bounded, redacted
 
 ### Model usage
 
-* `openclaw.tokens` (counter, attrs: `openclaw.token`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`, `openclaw.agent`)
-* `openclaw.cost.usd` (counter, attrs: `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
-* `openclaw.run.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
-* `openclaw.context.tokens` (histogram, attrs: `openclaw.context`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
-* `gen_ai.client.token.usage` (histogram, GenAI semantic-conventions metric, attrs: `gen_ai.token.type` = `input`/`output`, `gen_ai.provider.name`, `gen_ai.operation.name`, `gen_ai.request.model`)
-* `gen_ai.client.operation.duration` (histogram, seconds, GenAI semantic-conventions metric, attrs: `gen_ai.provider.name`, `gen_ai.operation.name`, `gen_ai.request.model`, optional `error.type`)
-* `openclaw.model_call.duration_ms` (histogram, attrs: `openclaw.provider`, `openclaw.model`, `openclaw.api`, `openclaw.transport`, plus `openclaw.errorCategory` and `openclaw.failureKind` on classified errors)
-* `openclaw.model_call.request_bytes` (histogram, UTF-8 byte size of the final model request payload; no raw payload content)
-* `openclaw.model_call.response_bytes` (histogram, UTF-8 byte size of streamed model response events; no raw response content)
-* `openclaw.model_call.time_to_first_byte_ms` (histogram, elapsed time before the first streamed response event)
+- `openclaw.tokens` (counter, attrs: `openclaw.token`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`, `openclaw.agent`)
+- `openclaw.cost.usd` (counter, attrs: `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
+- `openclaw.run.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
+- `openclaw.context.tokens` (histogram, attrs: `openclaw.context`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`)
+- `gen_ai.client.token.usage` (histogram, GenAI semantic-conventions metric, attrs: `gen_ai.token.type` = `input`/`output`, `gen_ai.provider.name`, `gen_ai.operation.name`, `gen_ai.request.model`)
+- `gen_ai.client.operation.duration` (histogram, seconds, GenAI semantic-conventions metric, attrs: `gen_ai.provider.name`, `gen_ai.operation.name`, `gen_ai.request.model`, optional `error.type`)
+- `openclaw.model_call.duration_ms` (histogram, attrs: `openclaw.provider`, `openclaw.model`, `openclaw.api`, `openclaw.transport`, plus `openclaw.errorCategory` and `openclaw.failureKind` on classified errors)
+- `openclaw.model_call.request_bytes` (histogram, UTF-8 byte size of the final model request payload; no raw payload content)
+- `openclaw.model_call.response_bytes` (histogram, UTF-8 byte size of streamed model response events; no raw response content)
+- `openclaw.model_call.time_to_first_byte_ms` (histogram, elapsed time before the first streamed response event)
 
 ### Message flow
 
-* `openclaw.webhook.received` (counter, attrs: `openclaw.channel`, `openclaw.webhook`)
-* `openclaw.webhook.error` (counter, attrs: `openclaw.channel`, `openclaw.webhook`)
-* `openclaw.webhook.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.webhook`)
-* `openclaw.message.queued` (counter, attrs: `openclaw.channel`, `openclaw.source`)
-* `openclaw.message.received` (counter, attrs: `openclaw.channel`, `openclaw.source`)
-* `openclaw.message.dispatch.started` (counter, attrs: `openclaw.channel`, `openclaw.source`)
-* `openclaw.message.dispatch.completed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
-* `openclaw.message.dispatch.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
-* `openclaw.message.processed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`)
-* `openclaw.message.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`)
-* `openclaw.message.delivery.started` (counter, attrs: `openclaw.channel`, `openclaw.delivery.kind`)
-* `openclaw.message.delivery.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.delivery.kind`, `openclaw.outcome`, `openclaw.errorCategory`)
+- `openclaw.webhook.received` (counter, attrs: `openclaw.channel`, `openclaw.webhook`)
+- `openclaw.webhook.error` (counter, attrs: `openclaw.channel`, `openclaw.webhook`)
+- `openclaw.webhook.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.webhook`)
+- `openclaw.message.queued` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+- `openclaw.message.received` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+- `openclaw.message.dispatch.started` (counter, attrs: `openclaw.channel`, `openclaw.source`)
+- `openclaw.message.dispatch.completed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
+- `openclaw.message.dispatch.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`, `openclaw.source`)
+- `openclaw.message.processed` (counter, attrs: `openclaw.channel`, `openclaw.outcome`)
+- `openclaw.message.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.outcome`)
+- `openclaw.message.delivery.started` (counter, attrs: `openclaw.channel`, `openclaw.delivery.kind`)
+- `openclaw.message.delivery.duration_ms` (histogram, attrs: `openclaw.channel`, `openclaw.delivery.kind`, `openclaw.outcome`, `openclaw.errorCategory`)
 
 ### Talk
 
-* `openclaw.talk.event` (counter, attrs: `openclaw.talk.event_type`, `openclaw.talk.mode`, `openclaw.talk.transport`, `openclaw.talk.brain`, `openclaw.talk.provider`)
-* `openclaw.talk.event.duration_ms` (histogram, attrs: same as `openclaw.talk.event`; emitted when a Talk event reports duration)
-* `openclaw.talk.audio.bytes` (histogram, attrs: same as `openclaw.talk.event`; emitted for Talk audio frame events that report byte length)
+- `openclaw.talk.event` (counter, attrs: `openclaw.talk.event_type`, `openclaw.talk.mode`, `openclaw.talk.transport`, `openclaw.talk.brain`, `openclaw.talk.provider`)
+- `openclaw.talk.event.duration_ms` (histogram, attrs: same as `openclaw.talk.event`; emitted when a Talk event reports duration)
+- `openclaw.talk.audio.bytes` (histogram, attrs: same as `openclaw.talk.event`; emitted for Talk audio frame events that report byte length)
 
 ### Queues and sessions
 
-* `openclaw.queue.lane.enqueue` (counter, attrs: `openclaw.lane`)
-* `openclaw.queue.lane.dequeue` (counter, attrs: `openclaw.lane`)
-* `openclaw.queue.depth` (histogram, attrs: `openclaw.lane` or `openclaw.channel=heartbeat`)
-* `openclaw.queue.wait_ms` (histogram, attrs: `openclaw.lane`)
-* `openclaw.session.state` (counter, attrs: `openclaw.state`, `openclaw.reason`)
-* `openclaw.session.stuck` (counter, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
-* `openclaw.session.stuck_age_ms` (histogram, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
-* `openclaw.session.turn.created` (counter, attrs: `openclaw.agent`, `openclaw.channel`, `openclaw.trigger`)
-* `openclaw.session.recovery.requested` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.active_work_kind`, `openclaw.reason`)
-* `openclaw.session.recovery.completed` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.status`, `openclaw.active_work_kind`, `openclaw.reason`)
-* `openclaw.session.recovery.age_ms` (histogram, attrs: same as the matching recovery counter)
-* `openclaw.run.attempt` (counter, attrs: `openclaw.attempt`)
+- `openclaw.queue.lane.enqueue` (counter, attrs: `openclaw.lane`)
+- `openclaw.queue.lane.dequeue` (counter, attrs: `openclaw.lane`)
+- `openclaw.queue.depth` (histogram, attrs: `openclaw.lane` or `openclaw.channel=heartbeat`)
+- `openclaw.queue.wait_ms` (histogram, attrs: `openclaw.lane`)
+- `openclaw.session.state` (counter, attrs: `openclaw.state`, `openclaw.reason`)
+- `openclaw.session.stuck` (counter, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
+- `openclaw.session.stuck_age_ms` (histogram, attrs: `openclaw.state`; emitted only for stale session bookkeeping with no active work)
+- `openclaw.session.turn.created` (counter, attrs: `openclaw.agent`, `openclaw.channel`, `openclaw.trigger`)
+- `openclaw.session.recovery.requested` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.active_work_kind`, `openclaw.reason`)
+- `openclaw.session.recovery.completed` (counter, attrs: `openclaw.state`, `openclaw.action`, `openclaw.status`, `openclaw.active_work_kind`, `openclaw.reason`)
+- `openclaw.session.recovery.age_ms` (histogram, attrs: same as the matching recovery counter)
+- `openclaw.run.attempt` (counter, attrs: `openclaw.attempt`)
 
 ### Session liveness telemetry
 
@@ -237,15 +235,15 @@ still be detected.
 
 OpenClaw classifies sessions by the work it can still observe:
 
-* `session.long_running`: active embedded work, model calls, or tool calls are
+- `session.long_running`: active embedded work, model calls, or tool calls are
   still making progress.
-* `session.stalled`: active work exists, but the active run has not reported
+- `session.stalled`: active work exists, but the active run has not reported
   recent progress. Stalled embedded runs stay observe-only at first, then
   abort-drain after `diagnostics.stuckSessionAbortMs` with no progress so queued
   turns behind the lane can resume. When unset, the abort threshold defaults to
   the safer extended window of at least 5 minutes and 3x
   `diagnostics.stuckSessionWarnMs`.
-* `session.stuck`: stale session bookkeeping with no active work. This releases
+- `session.stuck`: stale session bookkeeping with no active work. This releases
   the affected session lane immediately.
 
 Recovery emits structured `session.recovery.requested` and
@@ -262,59 +260,59 @@ heartbeat tick. For the config knob and defaults, see
 
 ### Harness lifecycle
 
-* `openclaw.harness.duration_ms` (histogram, attrs: `openclaw.harness.id`, `openclaw.harness.plugin`, `openclaw.outcome`, `openclaw.harness.phase` on errors)
+- `openclaw.harness.duration_ms` (histogram, attrs: `openclaw.harness.id`, `openclaw.harness.plugin`, `openclaw.outcome`, `openclaw.harness.phase` on errors)
 
 ### Exec
 
-* `openclaw.exec.duration_ms` (histogram, attrs: `openclaw.exec.target`, `openclaw.exec.mode`, `openclaw.outcome`, `openclaw.failureKind`)
+- `openclaw.exec.duration_ms` (histogram, attrs: `openclaw.exec.target`, `openclaw.exec.mode`, `openclaw.outcome`, `openclaw.failureKind`)
 
 ### Diagnostics internals (memory and tool loop)
 
-* `openclaw.memory.heap_used_bytes` (histogram, attrs: `openclaw.memory.kind`)
-* `openclaw.memory.rss_bytes` (histogram)
-* `openclaw.memory.pressure` (counter, attrs: `openclaw.memory.level`)
-* `openclaw.tool.loop.iterations` (counter, attrs: `openclaw.toolName`, `openclaw.outcome`)
-* `openclaw.tool.loop.duration_ms` (histogram, attrs: `openclaw.toolName`, `openclaw.outcome`)
+- `openclaw.memory.heap_used_bytes` (histogram, attrs: `openclaw.memory.kind`)
+- `openclaw.memory.rss_bytes` (histogram)
+- `openclaw.memory.pressure` (counter, attrs: `openclaw.memory.level`)
+- `openclaw.tool.loop.iterations` (counter, attrs: `openclaw.toolName`, `openclaw.outcome`)
+- `openclaw.tool.loop.duration_ms` (histogram, attrs: `openclaw.toolName`, `openclaw.outcome`)
 
 ## Exported spans
 
-* `openclaw.model.usage`
-  * `openclaw.channel`, `openclaw.provider`, `openclaw.model`
-  * `openclaw.tokens.*` (input/output/cache\_read/cache\_write/total)
-  * `gen_ai.system` by default, or `gen_ai.provider.name` when the latest GenAI semantic conventions are opted in
-  * `gen_ai.request.model`, `gen_ai.operation.name`, `gen_ai.usage.*`
-* `openclaw.run`
-  * `openclaw.outcome`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`, `openclaw.errorCategory`
-* `openclaw.model.call`
-  * `gen_ai.system` by default, or `gen_ai.provider.name` when the latest GenAI semantic conventions are opted in
-  * `gen_ai.request.model`, `gen_ai.operation.name`, `openclaw.provider`, `openclaw.model`, `openclaw.api`, `openclaw.transport`
-  * `openclaw.errorCategory` and optional `openclaw.failureKind` on errors
-  * `openclaw.model_call.request_bytes`, `openclaw.model_call.response_bytes`, `openclaw.model_call.time_to_first_byte_ms`
-  * `openclaw.provider.request_id_hash` (bounded SHA-based hash of the upstream provider request id; raw ids are not exported)
-* `openclaw.harness.run`
-  * `openclaw.harness.id`, `openclaw.harness.plugin`, `openclaw.outcome`, `openclaw.provider`, `openclaw.model`, `openclaw.channel`
-  * On completion: `openclaw.harness.result_classification`, `openclaw.harness.yield_detected`, `openclaw.harness.items.started`, `openclaw.harness.items.completed`, `openclaw.harness.items.active`
-  * On error: `openclaw.harness.phase`, `openclaw.errorCategory`, optional `openclaw.harness.cleanup_failed`
-* `openclaw.tool.execution`
-  * `gen_ai.tool.name`, `openclaw.toolName`, `openclaw.errorCategory`, `openclaw.tool.params.*`
-* `openclaw.exec`
-  * `openclaw.exec.target`, `openclaw.exec.mode`, `openclaw.outcome`, `openclaw.failureKind`, `openclaw.exec.command_length`, `openclaw.exec.exit_code`, `openclaw.exec.timed_out`
-* `openclaw.webhook.processed`
-  * `openclaw.channel`, `openclaw.webhook`
-* `openclaw.webhook.error`
-  * `openclaw.channel`, `openclaw.webhook`, `openclaw.error`
-* `openclaw.message.processed`
-  * `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`
-* `openclaw.message.delivery`
-  * `openclaw.channel`, `openclaw.delivery.kind`, `openclaw.outcome`, `openclaw.errorCategory`, `openclaw.delivery.result_count`
-* `openclaw.session.stuck`
-  * `openclaw.state`, `openclaw.ageMs`, `openclaw.queueDepth`
-* `openclaw.context.assembled`
-  * `openclaw.prompt.size`, `openclaw.history.size`, `openclaw.context.tokens`, `openclaw.errorCategory` (no prompt, history, response, or session-key content)
-* `openclaw.tool.loop`
-  * `openclaw.toolName`, `openclaw.outcome`, `openclaw.iterations`, `openclaw.errorCategory` (no loop messages, params, or tool output)
-* `openclaw.memory.pressure`
-  * `openclaw.memory.level`, `openclaw.memory.heap_used_bytes`, `openclaw.memory.rss_bytes`
+- `openclaw.model.usage`
+  - `openclaw.channel`, `openclaw.provider`, `openclaw.model`
+  - `openclaw.tokens.*` (input/output/cache_read/cache_write/total)
+  - `gen_ai.system` by default, or `gen_ai.provider.name` when the latest GenAI semantic conventions are opted in
+  - `gen_ai.request.model`, `gen_ai.operation.name`, `gen_ai.usage.*`
+- `openclaw.run`
+  - `openclaw.outcome`, `openclaw.channel`, `openclaw.provider`, `openclaw.model`, `openclaw.errorCategory`
+- `openclaw.model.call`
+  - `gen_ai.system` by default, or `gen_ai.provider.name` when the latest GenAI semantic conventions are opted in
+  - `gen_ai.request.model`, `gen_ai.operation.name`, `openclaw.provider`, `openclaw.model`, `openclaw.api`, `openclaw.transport`
+  - `openclaw.errorCategory` and optional `openclaw.failureKind` on errors
+  - `openclaw.model_call.request_bytes`, `openclaw.model_call.response_bytes`, `openclaw.model_call.time_to_first_byte_ms`
+  - `openclaw.provider.request_id_hash` (bounded SHA-based hash of the upstream provider request id; raw ids are not exported)
+- `openclaw.harness.run`
+  - `openclaw.harness.id`, `openclaw.harness.plugin`, `openclaw.outcome`, `openclaw.provider`, `openclaw.model`, `openclaw.channel`
+  - On completion: `openclaw.harness.result_classification`, `openclaw.harness.yield_detected`, `openclaw.harness.items.started`, `openclaw.harness.items.completed`, `openclaw.harness.items.active`
+  - On error: `openclaw.harness.phase`, `openclaw.errorCategory`, optional `openclaw.harness.cleanup_failed`
+- `openclaw.tool.execution`
+  - `gen_ai.tool.name`, `openclaw.toolName`, `openclaw.errorCategory`, `openclaw.tool.params.*`
+- `openclaw.exec`
+  - `openclaw.exec.target`, `openclaw.exec.mode`, `openclaw.outcome`, `openclaw.failureKind`, `openclaw.exec.command_length`, `openclaw.exec.exit_code`, `openclaw.exec.timed_out`
+- `openclaw.webhook.processed`
+  - `openclaw.channel`, `openclaw.webhook`
+- `openclaw.webhook.error`
+  - `openclaw.channel`, `openclaw.webhook`, `openclaw.error`
+- `openclaw.message.processed`
+  - `openclaw.channel`, `openclaw.outcome`, `openclaw.reason`
+- `openclaw.message.delivery`
+  - `openclaw.channel`, `openclaw.delivery.kind`, `openclaw.outcome`, `openclaw.errorCategory`, `openclaw.delivery.result_count`
+- `openclaw.session.stuck`
+  - `openclaw.state`, `openclaw.ageMs`, `openclaw.queueDepth`
+- `openclaw.context.assembled`
+  - `openclaw.prompt.size`, `openclaw.history.size`, `openclaw.context.tokens`, `openclaw.errorCategory` (no prompt, history, response, or session-key content)
+- `openclaw.tool.loop`
+  - `openclaw.toolName`, `openclaw.outcome`, `openclaw.iterations`, `openclaw.errorCategory` (no loop messages, params, or tool output)
+- `openclaw.memory.pressure`
+  - `openclaw.memory.level`, `openclaw.memory.heap_used_bytes`, `openclaw.memory.rss_bytes`
 
 When content capture is explicitly enabled, model and tool spans can also
 include bounded, redacted `openclaw.content.*` attributes for the specific
@@ -327,27 +325,27 @@ to them directly without OTLP export.
 
 **Model usage**
 
-* `model.usage` - tokens, cost, duration, context, provider/model/channel,
+- `model.usage` - tokens, cost, duration, context, provider/model/channel,
   session ids. `usage` is provider/turn accounting for cost and telemetry;
   `context.used` is the current prompt/context snapshot and can be lower than
   provider `usage.total` when cached input or tool-loop calls are involved.
 
 **Message flow**
 
-* `webhook.received` / `webhook.processed` / `webhook.error`
-* `message.queued` / `message.processed`
-* `message.delivery.started` / `message.delivery.completed` / `message.delivery.error`
+- `webhook.received` / `webhook.processed` / `webhook.error`
+- `message.queued` / `message.processed`
+- `message.delivery.started` / `message.delivery.completed` / `message.delivery.error`
 
 **Queue and session**
 
-* `queue.lane.enqueue` / `queue.lane.dequeue`
-* `session.state` / `session.long_running` / `session.stalled` / `session.stuck`
-* `run.attempt` / `run.progress`
-* `diagnostic.heartbeat` (aggregate counters: webhooks/queue/session)
+- `queue.lane.enqueue` / `queue.lane.dequeue`
+- `session.state` / `session.long_running` / `session.stalled` / `session.stuck`
+- `run.attempt` / `run.progress`
+- `diagnostic.heartbeat` (aggregate counters: webhooks/queue/session)
 
 **Harness lifecycle**
 
-* `harness.run.started` / `harness.run.completed` / `harness.run.error` -
+- `harness.run.started` / `harness.run.completed` / `harness.run.error` -
   per-run lifecycle for the agent harness. Includes `harnessId`, optional
   `pluginId`, provider/model/channel, and run id. Completion adds
   `durationMs`, `outcome`, optional `resultClassification`, `yieldDetected`,
@@ -357,7 +355,7 @@ to them directly without OTLP export.
 
 **Exec**
 
-* `exec.process.completed` - terminal outcome, duration, target, mode, exit
+- `exec.process.completed` - terminal outcome, duration, target, mode, exit
   code, and failure kind. Command text and working directories are not
   included.
 
@@ -366,7 +364,7 @@ to them directly without OTLP export.
 You can keep diagnostics events available to plugins or custom sinks without
 running `diagnostics-otel`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: { enabled: true },
 }
@@ -376,7 +374,7 @@ For targeted debug output without raising `logging.level`, use diagnostics
 flags. Flags are case-insensitive and support wildcards (e.g. `telegram.*` or
 `*`):
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: { flags: ["telegram.http"] },
 }
@@ -384,7 +382,7 @@ flags. Flags are case-insensitive and support wildcards (e.g. `telegram.*` or
 
 Or as a one-off env override:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_DIAGNOSTICS=telegram.http,telegram.payload openclaw gateway
 ```
 
@@ -394,7 +392,7 @@ redacted by `logging.redactSensitive`. Full guide:
 
 ## Disable
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   diagnostics: { otel: { enabled: false } },
 }
@@ -405,8 +403,10 @@ You can also leave `diagnostics-otel` out of `plugins.allow`, or run
 
 ## Related
 
-* [Logging](/logging) - file logs, console output, CLI tailing, and the Control UI Logs tab
-* [Gateway logging internals](/gateway/logging) - WS log styles, subsystem prefixes, and console capture
-* [Diagnostics flags](/diagnostics/flags) - targeted debug-log flags
-* [Diagnostics export](/gateway/diagnostics) - operator support-bundle tool (separate from OTEL export)
-* [Configuration reference](/gateway/configuration-reference#diagnostics) - full `diagnostics.*` field reference
+- [Logging](/logging) - file logs, console output, CLI tailing, and the Control UI Logs tab
+- [Gateway logging internals](/gateway/logging) - WS log styles, subsystem prefixes, and console capture
+- [Diagnostics flags](/diagnostics/flags) - targeted debug-log flags
+- [Diagnostics export](/gateway/diagnostics) - operator support-bundle tool (separate from OTEL export)
+- [Configuration reference](/gateway/configuration-reference#diagnostics) - full `diagnostics.*` field reference
+
+---

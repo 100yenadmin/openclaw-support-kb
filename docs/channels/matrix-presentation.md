@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix presentation metadata"
 source: "https://docs.openclaw.ai/channels/matrix-presentation"
-source_hash: "6ae7208e902cf72e648139c816e6ca993b348bd96b52e4dae7c8732f604f0c8f"
+source_hash: "30985fca0a910dd63e7858d0dc99be0e835cd0a8381e56d7b55e260d5aa0ea5b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-presentation.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Matrix presentation metadata
 Source: https://docs.openclaw.ai/channels/matrix-presentation
 
-
-
 OpenClaw can attach normalized `MessagePresentation` metadata to outbound Matrix `m.room.message` events under `com.openclaw.presentation`.
 
 Stock Matrix clients continue to render the plain text `body`. OpenClaw-aware clients can read the structured metadata and render native UI such as buttons, selects, context rows, and dividers.
@@ -23,7 +21,7 @@ Stock Matrix clients continue to render the plain text `body`. OpenClaw-aware cl
 
 The metadata is stored in Matrix event content:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "msgtype": "m.text",
   "body": "Select model\n\n- DeepSeek: /model deepseek/deepseek-chat",
@@ -60,10 +58,10 @@ Unsupported clients should continue to show the fallback text. OpenClaw-aware cl
 
 The Matrix outbound adapter advertises support for:
 
-* `buttons`
-* `select`
-* `context`
-* `divider`
+- `buttons`
+- `select`
+- `context`
+- `divider`
 
 Clients should treat these blocks as best-effort presentation hints. Unknown fields and unknown block types should be ignored rather than causing the full message to fail rendering.
 
@@ -84,3 +82,5 @@ Approval prompts use the dedicated `com.openclaw.approval` metadata because appr
 When a reply contains multiple media URLs, OpenClaw sends one Matrix event per media URL. Presentation metadata is attached only to the first media event so clients have one stable structured payload and duplicate renderers are avoided.
 
 Keep presentation metadata compact. Large user-visible text should stay in `body` and use the normal Matrix text chunking path.
+
+---

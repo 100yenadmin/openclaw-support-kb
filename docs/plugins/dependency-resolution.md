@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "e2a21249347ad6f578917aa50b6f6cd96680dc82554c5e9642525cf94379b92c"
+source_hash: "c47c2beb8d946d9ce260fc17612a583d11b5fb415bb5d1eca32b5fc5f2777aac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/dependency-resolution.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Plugin dependency resolution
 Source: https://docs.openclaw.ai/plugins/dependency-resolution
 
-
-
 OpenClaw keeps plugin dependency work at install/update time. Runtime loading
 does not run package managers, repair dependency trees, or mutate the OpenClaw
 package directory.
@@ -23,31 +21,31 @@ package directory.
 
 Plugin packages own their dependency graph:
 
-* runtime dependencies live in the plugin package `dependencies` or
+- runtime dependencies live in the plugin package `dependencies` or
   `optionalDependencies`
-* SDK/core imports are peer or supplied OpenClaw imports
-* local development plugins bring their own already-installed dependencies
-* npm and git plugins are installed into OpenClaw-owned package roots
+- SDK/core imports are peer or supplied OpenClaw imports
+- local development plugins bring their own already-installed dependencies
+- npm and git plugins are installed into OpenClaw-owned package roots
 
 OpenClaw owns only the plugin lifecycle:
 
-* discover the plugin source
-* install or update the package when explicitly requested
-* record the install metadata
-* load the plugin entrypoint
-* fail with an actionable error when dependencies are missing
+- discover the plugin source
+- install or update the package when explicitly requested
+- record the install metadata
+- load the plugin entrypoint
+- fail with an actionable error when dependencies are missing
 
 ## Install roots
 
 OpenClaw uses stable per-source roots:
 
-* npm packages install under `~/.openclaw/npm`
-* git packages clone under `~/.openclaw/git`
-* local/path/archive installs are copied or referenced without dependency repair
+- npm packages install under `~/.openclaw/npm`
+- git packages clone under `~/.openclaw/git`
+- local/path/archive installs are copied or referenced without dependency repair
 
 npm installs run in the npm root with:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 cd ~/.openclaw/npm
 npm install --omit=dev --omit=peer --legacy-peer-deps --ignore-scripts --no-audit --no-fund
 ```
@@ -74,7 +72,7 @@ the host peer after install, update, or uninstall.
 
 git installs clone or refresh the repository, then run:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm install --omit=dev --ignore-scripts --no-audit --no-fund
 ```
 
@@ -100,7 +98,7 @@ the plugin install records, compute the entrypoint, and load it.
 If a dependency is missing at runtime, the plugin fails to load and the error
 should point the operator to an explicit fix:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins update <id>
 openclaw plugins install <source>
 openclaw doctor --fix
@@ -148,3 +146,5 @@ removes those global symlinks before pruning the legacy target roots so upgrades
 do not leave dangling ESM package imports.
 
 These paths are legacy debris only. New installs should not create them.
+
+---

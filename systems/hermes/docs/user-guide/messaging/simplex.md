@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/simplex.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "9f71347734a6846d7f7547ba6d27012a90496641e4de91154dc35ab549a2f563"
+source_hash: "3efe6b2a002f0d331c17d3d694465f5f4b8e4853a1d1e63fc1fdc08f28198e01"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -28,16 +28,15 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex
 
 ## Install simplex-chat
 
-Download the latest release from the [simplex-chat GitHub releases](https://github.com/simplex-chat/simplex-chat/releases) page, or via Docker:
+Download the latest release from the [simplex-chat GitHub releases](https://github.com/simplex-chat/simplex-chat/releases) page:
 
 ```bash
 # Linux / macOS binary
 curl -L https://github.com/simplex-chat/simplex-chat/releases/latest/download/simplex-chat-ubuntu-22_04-x86-64 -o simplex-chat
 chmod +x simplex-chat
-
-# Or Docker
-docker run -p 5225:5225 simplexchat/simplex-chat -p 5225
 ```
+
+The SimpleX Chat project does not publish a prebuilt Docker image for the chat client; to run it under Docker, build from source from the [simplex-chat repository](https://github.com/simplex-chat/simplex-chat).
 
 ## Start the daemon
 

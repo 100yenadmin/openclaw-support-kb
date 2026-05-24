@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Batch Processing"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/batch-processing"
-source_hash: "e971842b211567310264dc3e530ce99423e3dc927bc0eb9dc8fe4fc9dc3b8d9a"
+source_hash: "514363831cf0315826fa31a32dea845d8d0ec141fc224c2ef5a89f0c50072659"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/batch-processing.md"
@@ -46,6 +46,10 @@ python batch_runner.py \
 # List available toolset distributions
 python batch_runner.py --list_distributions
 ```
+
+:::tip Predictable cost at scale
+Batch runs spin up many concurrent agent sessions, each making model calls and tool calls. A [Nous Portal](/docs/user-guide/features/tool-gateway) subscription bundles model access plus web search, image gen, TTS, and cloud browsers under one bill — useful when you want stable cost-per-trajectory without juggling rate limits across five vendor accounts. Set up with `hermes setup --portal`, then point `--model` at a Nous model.
+:::
 
 ## Dataset Format
 

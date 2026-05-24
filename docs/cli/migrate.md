@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "5e238ee47911b38d2cabb661f3ab71a87ba294bc0c5806429f6ef3db15293b39"
+source_hash: "3be8ea0a6d9da16acdc24e2179c3f67412159834dc86a67bfb7cf1a33ee6d3a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -13,19 +13,17 @@ duplicate_index: 1
 # Migrate
 Source: https://docs.openclaw.ai/cli/migrate
 
-
-
 # `openclaw migrate`
 
 Import state from another agent system through a plugin-owned migration provider. Bundled providers cover Codex CLI state, [Claude](/install/migrating-claude), and [Hermes](/install/migrating-hermes); third-party plugins can register additional providers.
 
-<Tip>
-  For user-facing walkthroughs, see [Migrating from Claude](/install/migrating-claude) and [Migrating from Hermes](/install/migrating-hermes). The [migration hub](/install/migrating) lists all paths.
-</Tip>
+Tip
+
+For user-facing walkthroughs, see [Migrating from Claude](/install/migrating-claude) and [Migrating from Hermes](/install/migrating-hermes). The [migration hub](/install/migrating) lists all paths.
 
 ## Commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw migrate list
 openclaw migrate claude --dry-run
 openclaw migrate codex --dry-run
@@ -45,93 +43,99 @@ openclaw onboard --import-from claude --import-source ~/.claude
 openclaw onboard --import-from hermes --import-source ~/.hermes
 ```
 
-<ParamField type="string">
+ParamField
+" type="string">
   Name of a registered migration provider, for example `hermes`. Run `openclaw migrate list` to see installed providers.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Build the plan and exit without changing state.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+" type="string">
   Override the source state directory. Hermes defaults to `~/.hermes`.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Import supported credentials. Off by default.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Allow apply to replace existing targets when the plan reports conflicts.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Skip the confirmation prompt. Required in non-interactive mode.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+" type="string">
   Select one skill copy item by skill name or item id. Repeat the flag to migrate multiple skills. When omitted, interactive Codex migrations show a checkbox selector and non-interactive migrations keep all planned skills.
-</ParamField>
 
-<ParamField type="string">
+ParamField
+" type="string">
   Select one Codex plugin install item by plugin name or item id. Repeat the flag to migrate multiple Codex plugins. When omitted, interactive Codex migrations show a native Codex plugin checkbox selector and non-interactive migrations keep all planned plugins. This only applies to source-installed `openai-curated` Codex plugins discovered by the Codex app-server inventory.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Codex only. Force a fresh source Codex app-server `app/list` traversal before planning native plugin activation. Off by default to keep migration planning fast.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Skip the pre-apply backup. Requires `--force` when local OpenClaw state exists.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Required alongside `--no-backup` when apply would otherwise refuse to skip backup.
-</ParamField>
 
-<ParamField type="boolean">
+ParamField
+
   Print the plan or apply result as JSON. With `--json` and no `--yes`, apply prints the plan and does not mutate state.
-</ParamField>
 
 ## Safety model
 
 `openclaw migrate` is preview-first.
 
-<AccordionGroup>
-  <Accordion title="Preview before apply">
+AccordionGroup
+
+
+Preview before apply
+
     The provider returns an itemized plan before anything changes, including conflicts, skipped items, and sensitive items. JSON plans, apply output, and migration reports redact nested secret-looking keys such as API keys, tokens, authorization headers, cookies, and passwords.
 
     `openclaw migrate apply <provider>` previews the plan and prompts before changing state unless `--yes` is set. In non-interactive mode, apply requires `--yes`.
-  </Accordion>
 
-  <Accordion title="Backups">
+
+
+Backups
+
     Apply creates and verifies an OpenClaw backup before applying the migration. If no local OpenClaw state exists yet, the backup step is skipped and the migration can continue. To skip a backup when state exists, pass both `--no-backup` and `--force`.
-  </Accordion>
 
-  <Accordion title="Conflicts">
+
+Conflicts
+
     Apply refuses to continue when the plan has conflicts. Review the plan, then rerun with `--overwrite` if replacing existing targets is intentional. Providers may still write item-level backups for overwritten files in the migration report directory.
-  </Accordion>
 
-  <Accordion title="Secrets">
+
+Secrets
+
     Secrets are never imported by default. Use `--include-secrets` to import supported credentials.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Claude provider
 
 The bundled Claude provider detects Claude Code state at `~/.claude` by default. Use `--from <path>` to import a specific Claude Code home or project root.
 
-<Tip>
-  For a user-facing walkthrough, see [Migrating from Claude](/install/migrating-claude).
-</Tip>
+Tip
+
+For a user-facing walkthrough, see [Migrating from Claude](/install/migrating-claude).
 
 ### What Claude imports
 
-* Project `CLAUDE.md` and `.claude/CLAUDE.md` into the OpenClaw agent workspace.
-* User `~/.claude/CLAUDE.md` appended to workspace `USER.md`.
-* MCP server definitions from project `.mcp.json`, Claude Code `~/.claude.json`, and Claude Desktop `claude_desktop_config.json`.
-* Claude skill directories that include `SKILL.md`.
-* Claude command Markdown files converted into OpenClaw skills with manual invocation only.
+- Project `CLAUDE.md` and `.claude/CLAUDE.md` into the OpenClaw agent workspace.
+- User `~/.claude/CLAUDE.md` appended to workspace `USER.md`.
+- MCP server definitions from project `.mcp.json`, Claude Code `~/.claude.json`, and Claude Desktop `claude_desktop_config.json`.
+- Claude skill directories that include `SKILL.md`.
+- Claude command Markdown files converted into OpenClaw skills with manual invocation only.
 
 ### Archive and manual-review state
 
@@ -165,7 +169,7 @@ plugin. Existing target plugins start unchecked and show a conflict hint such as
 plugins in that run, or `Skip for now` to stop before applying. For scripted or
 exact runs, pass `--skill <name>` once per skill, for example:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw migrate codex --dry-run --skill gog-vault77-google-workspace
 openclaw migrate apply codex --yes --skill gog-vault77-google-workspace
 ```
@@ -173,18 +177,18 @@ openclaw migrate apply codex --yes --skill gog-vault77-google-workspace
 Use `--plugin <name>` to limit native Codex plugin migration non-interactively
 to one or more source-installed curated plugins:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw migrate codex --dry-run --plugin google-calendar
 openclaw migrate apply codex --yes --plugin google-calendar
 ```
 
 ### What Codex imports
 
-* Codex CLI skill directories under `$CODEX_HOME/skills`, excluding Codex's
+- Codex CLI skill directories under `$CODEX_HOME/skills`, excluding Codex's
   `.system` cache.
-* Personal AgentSkills under `$HOME/.agents/skills`, copied into the current
+- Personal AgentSkills under `$HOME/.agents/skills`, copied into the current
   OpenClaw agent workspace when you want per-agent ownership.
-* Source-installed `openai-curated` Codex plugins discovered through Codex
+- Source-installed `openai-curated` Codex plugins discovered through Codex
   app-server `plugin/list`. Planning reads `plugin/read` for each enabled
   installed plugin. App-backed plugins require the source Codex app-server
   account response to be a ChatGPT subscription account; non-ChatGPT or missing
@@ -219,10 +223,10 @@ manual review.
 
 For migrated source-installed curated plugins, apply writes:
 
-* `plugins.entries.codex.enabled: true`
-* `plugins.entries.codex.config.codexPlugins.enabled: true`
-* `plugins.entries.codex.config.codexPlugins.allow_destructive_actions: true`
-* one explicit plugin entry with `marketplaceName: "openai-curated"` and
+- `plugins.entries.codex.enabled: true`
+- `plugins.entries.codex.config.codexPlugins.enabled: true`
+- `plugins.entries.codex.config.codexPlugins.allow_destructive_actions: true`
+- one explicit plugin entry with `marketplaceName: "openai-curated"` and
   `pluginName` for each selected plugin
 
 Migration never writes `plugins["*"]` and never stores local marketplace cache
@@ -247,15 +251,15 @@ The bundled Hermes provider detects state at `~/.hermes` by default. Use `--from
 
 ### What Hermes imports
 
-* Default model configuration from `config.yaml`.
-* Configured model providers and custom OpenAI-compatible endpoints from `providers` and `custom_providers`.
-* MCP server definitions from `mcp_servers` or `mcp.servers`.
-* `SOUL.md` and `AGENTS.md` into the OpenClaw agent workspace.
-* `memories/MEMORY.md` and `memories/USER.md` appended to workspace memory files.
-* Memory config defaults for OpenClaw file memory, plus archive or manual-review items for external memory providers such as Honcho.
-* Skills that include a `SKILL.md` file under `skills/<name>/`.
-* Per-skill config values from `skills.config`.
-* Supported API keys from `.env`, only with `--include-secrets`.
+- Default model configuration from `config.yaml`.
+- Configured model providers and custom OpenAI-compatible endpoints from `providers` and `custom_providers`.
+- MCP server definitions from `mcp_servers` or `mcp.servers`.
+- `SOUL.md` and `AGENTS.md` into the OpenClaw agent workspace.
+- `memories/MEMORY.md` and `memories/USER.md` appended to workspace memory files.
+- Memory config defaults for OpenClaw file memory, plus archive or manual-review items for external memory providers such as Honcho.
+- Skills that include a `SKILL.md` file under `skills/<name>/`.
+- Per-skill config values from `skills.config`.
+- Supported API keys from `.env`, only with `--include-secrets`.
 
 ### Supported `.env` keys
 
@@ -265,17 +269,17 @@ The bundled Hermes provider detects state at `~/.hermes` by default. Use `--from
 
 Hermes state that OpenClaw cannot safely interpret is copied into the migration report for manual review, but it is not loaded into live OpenClaw config or credentials. This preserves opaque or unsafe state without pretending OpenClaw can execute or trust it automatically:
 
-* `plugins/`
-* `sessions/`
-* `logs/`
-* `cron/`
-* `mcp-tokens/`
-* `auth.json`
-* `state.db`
+- `plugins/`
+- `sessions/`
+- `logs/`
+- `cron/`
+- `mcp-tokens/`
+- `auth.json`
+- `state.db`
 
 ### After applying
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw doctor
 ```
 
@@ -283,7 +287,7 @@ openclaw doctor
 
 Migration sources are plugins. A plugin declares its provider ids in `openclaw.plugin.json`:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "contracts": {
     "migrationProviders": ["hermes"]
@@ -299,14 +303,16 @@ Provider plugins can use `openclaw/plugin-sdk/migration` for item construction a
 
 Onboarding can offer migration when a provider detects a known source. Both `openclaw onboard --flow import` and `openclaw setup --wizard --import-from hermes` use the same plugin migration provider and still show a preview before applying.
 
-<Note>
-  Onboarding imports require a fresh OpenClaw setup. Reset config, credentials, sessions, and the workspace first if you already have local state. Backup-plus-overwrite or merge imports are feature-gated for existing setups.
-</Note>
+Note
+
+Onboarding imports require a fresh OpenClaw setup. Reset config, credentials, sessions, and the workspace first if you already have local state. Backup-plus-overwrite or merge imports are feature-gated for existing setups.
 
 ## Related
 
-* [Migrating from Hermes](/install/migrating-hermes): user-facing walkthrough.
-* [Migrating from Claude](/install/migrating-claude): user-facing walkthrough.
-* [Migrating](/install/migrating): move OpenClaw to a new machine.
-* [Doctor](/gateway/doctor): health check after applying a migration.
-* [Plugins](/tools/plugin): plugin install and registration.
+- [Migrating from Hermes](/install/migrating-hermes): user-facing walkthrough.
+- [Migrating from Claude](/install/migrating-claude): user-facing walkthrough.
+- [Migrating](/install/migrating): move OpenClaw to a new machine.
+- [Doctor](/gateway/doctor): health check after applying a migration.
+- [Plugins](/tools/plugin): plugin install and registration.
+
+---

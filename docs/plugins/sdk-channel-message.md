@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel message API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-message"
-source_hash: "fe66a847a2c43bb9244466d51ab910c7d32305ff2520272c9e2c0b1a7b9bb913"
+source_hash: "20be061bb8000c7369856a37fc607a1781629f50527098272f33515c2e9c7fd3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-message.md"
@@ -13,13 +13,11 @@ duplicate_index: 1
 # Channel message API
 Source: https://docs.openclaw.ai/plugins/sdk-channel-message
 
-
-
 Channel plugins should expose one `message` adapter from
 `openclaw/plugin-sdk/channel-message`. The adapter describes the native message
 lifecycle that the platform supports:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 receive -> route and record -> agent turn -> durable final send
 send -> render batch -> platform I/O -> receipt -> lifecycle side effects
 live preview -> final edit or fallback -> receipt
@@ -49,15 +47,15 @@ and legacy adapters. Do not use it for new channel or plugin send paths.
 
 `sendDurableMessageBatch(...)` returns an explicit lifecycle outcome:
 
-* `sent` - at least one visible platform message was delivered.
-* `suppressed` - no platform message should be treated as missing. Stable
+- `sent` - at least one visible platform message was delivered.
+- `suppressed` - no platform message should be treated as missing. Stable
   reasons include `cancelled_by_message_sending_hook`,
   `empty_after_message_sending_hook`, `no_visible_payload`,
   `adapter_returned_no_identity`, and legacy `no_visible_result`.
-* `partial_failed` - at least one platform message was delivered before a later
+- `partial_failed` - at least one platform message was delivered before a later
   payload or side effect failed. The result includes the delivered receipt prefix
   plus the failure.
-* `failed` - no platform receipt was produced.
+- `failed` - no platform receipt was produced.
 
 Use `payloadOutcomes` when a batch mixes sent, suppressed, and failed payloads.
 Do not infer hook cancellation by checking whether the old direct-delivery array
@@ -73,8 +71,8 @@ ordering on the shared turn lifecycle without adding another public turn wrapper
 
 Most new channel plugins can start with a small adapter:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```typescript
+
   defineChannelMessageAdapter,
   createMessageReceiptFromOutboundResults,
 } from "openclaw/plugin-sdk/channel-message";
@@ -116,7 +114,7 @@ export const demoMessageAdapter = defineChannelMessageAdapter({
 
 Then attach it to the channel plugin:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 export const demoPlugin = createChatChannelPlugin({
   base: {
     id: "demo",
@@ -134,8 +132,7 @@ capability should have a contract test.
 If the channel already has a compatible `outbound` adapter, prefer deriving the
 message adapter instead of duplicating send code:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { createChannelMessageAdapterFromOutbound } from "openclaw/plugin-sdk/channel-message";
+```typescript
 
 const demoMessageAdapter = createChannelMessageAdapterFromOutbound({
   id: "demo",
@@ -172,7 +169,7 @@ example because it contains a non-serializable component factory. Core will keep
 the legacy plugin action fallback for compatibility, but new channel send
 features should be expressible as durable payload data.
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 export const demoActions: ChannelMessageActionAdapter = {
   describeMessageTool: () => ({ actions: ["send"], capabilities: ["presentation"] }),
   prepareSendPayload: ({ ctx, payload }) => {
@@ -237,8 +234,7 @@ before queueing.
 When a caller needs durable delivery, derive requirements instead of building
 maps by hand:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { deriveDurableFinalDeliveryRequirements } from "openclaw/plugin-sdk/channel-message";
+```typescript
 
 const requiredCapabilities = deriveDurableFinalDeliveryRequirements({
   payload,
@@ -259,22 +255,22 @@ only for a path that intentionally cannot run global message-sending hooks.
 
 A durable final send has stricter semantics than legacy channel-owned delivery:
 
-* Create the durable intent before platform I/O.
-* If durable delivery returns a handled result, do not fall back to legacy send.
-* Treat hook cancellation and no-send results as terminal.
-* Treat `unsupported` as a pre-intent result only.
-* For required durability, fail before platform I/O if the queue cannot record
+- Create the durable intent before platform I/O.
+- If durable delivery returns a handled result, do not fall back to legacy send.
+- Treat hook cancellation and no-send results as terminal.
+- Treat `unsupported` as a pre-intent result only.
+- For required durability, fail before platform I/O if the queue cannot record
   that platform send has started.
-* For required final delivery and required prepared message-tool sends,
+- For required final delivery and required prepared message-tool sends,
   preflight `reconcileUnknownSend`; recovery must be able to ack an
   already-sent message or replay only after the adapter proves the original send
   did not happen.
-* For `best_effort`, queue write failures may fall back to direct platform I/O.
-* Forward abort signals to media loading and platform sends.
-* Run after-commit hooks after queue ack; direct best-effort fallback runs them
+- For `best_effort`, queue write failures may fall back to direct platform I/O.
+- Forward abort signals to media loading and platform sends.
+- Run after-commit hooks after queue ack; direct best-effort fallback runs them
   after successful platform I/O because there is no durable queue commit.
-* Return receipts for every visible platform message id.
-* Use `reconcileUnknownSend` when a platform can check whether an uncertain send
+- Return receipts for every visible platform message id.
+- Use `reconcileUnknownSend` when a platform can check whether an uncertain send
   already reached the user.
 
 This contract avoids duplicate sends after crashes and avoids bypassing
@@ -284,7 +280,7 @@ message-sending cancellation hooks.
 
 `MessageReceipt` is the new internal record of what the platform accepted:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 type MessageReceipt = {
   primaryPlatformMessageId?: string;
   platformMessageIds: string[];
@@ -309,7 +305,7 @@ edges.
 Channels that stream draft previews or progress updates should declare live
 capabilities:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const demoMessageAdapter = defineChannelMessageAdapter({
   id: "demo",
   live: {
@@ -343,7 +339,7 @@ without duplicating the message, and returns the final receipt.
 Inbound receivers that control platform acknowledgement timing should declare
 receive policy:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const demoMessageAdapter = defineChannelMessageAdapter({
   id: "demo",
   receive: {
@@ -355,7 +351,7 @@ const demoMessageAdapter = defineChannelMessageAdapter({
 
 Adapters that do not declare receive policy default to:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 {
   receive: {
     defaultAckPolicy: "manual",
@@ -386,8 +382,8 @@ stage has satisfied the configured policy.
 
 Capability declarations are part of the plugin contract. Back them with tests:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```typescript
+
   verifyChannelMessageAdapterCapabilityProofs,
   verifyChannelMessageLiveCapabilityAdapterProofs,
   verifyChannelMessageLiveFinalizerProofs,
@@ -464,3 +460,5 @@ message facade. New lifecycle code should avoid the old
 6. Declare receive ack policy only when the receiver can really defer platform
    acknowledgement.
 7. Keep legacy reply dispatch helpers only at compatibility edges.
+
+---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "21aca953155216ecc20a6f0bec13c105ac3b9315b7a80563b7dbcaf3f4f4dd36"
+source_hash: "1db543428ba82ffa7ff40b6f3cdb471c880785e6af3de19edbebb9384da6c7e4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -13,46 +13,51 @@ duplicate_index: 1
 # Media understanding
 Source: https://docs.openclaw.ai/nodes/media-understanding
 
-
-
 OpenClaw can **summarize inbound media** (image/audio/video) before the reply pipeline runs. It auto-detects when local tools or provider keys are available, and can be disabled or customized. If understanding is off, models still receive the original files/URLs as usual.
 
 Vendor-specific media behavior is registered by vendor plugins, while OpenClaw core owns the shared `tools.media` config, fallback order, and reply-pipeline integration.
 
 ## Goals
 
-* Optional: pre-digest inbound media into short text for faster routing + better command parsing.
-* Preserve original media delivery to the model (always).
-* Support **provider APIs** and **CLI fallbacks**.
-* Allow multiple models with ordered fallback (error/size/timeout).
+- Optional: pre-digest inbound media into short text for faster routing + better command parsing.
+- Preserve original media delivery to the model (always).
+- Support **provider APIs** and **CLI fallbacks**.
+- Allow multiple models with ordered fallback (error/size/timeout).
 
 ## High-level behavior
 
-<Steps>
-  <Step title="Collect attachments">
+Steps
+
+
+Collect attachments
+
     Collect inbound attachments (`MediaPaths`, `MediaUrls`, `MediaTypes`).
-  </Step>
 
-  <Step title="Select per-capability">
+
+Select per-capability
+
     For each enabled capability (image/audio/video), select attachments per policy (default: **first**).
-  </Step>
 
-  <Step title="Choose model">
+
+Choose model
+
     Choose the first eligible model entry (size + capability + auth).
-  </Step>
 
-  <Step title="Fallback on failure">
+
+Fallback on failure
+
     If a model fails or the media is too large, **fall back to the next entry**.
-  </Step>
 
-  <Step title="Apply success block">
+
+Apply success block
+
     On success:
 
-    * `Body` becomes `[Image]`, `[Audio]`, or `[Video]` block.
-    * Audio sets `{{Transcript}}`; command parsing uses caption text when present, otherwise the transcript.
-    * Captions are preserved as `User text:` inside the block.
-  </Step>
-</Steps>
+    - `Body` becomes `[Image]`, `[Audio]`, or `[Video]` block.
+    - Audio sets `{{Transcript}}`; command parsing uses caption text when present, otherwise the transcript.
+    - Captions are preserved as `User text:` inside the block.
+
+
 
 If understanding fails or is disabled, **the reply flow continues** with the original body + attachments.
 
@@ -60,22 +65,25 @@ If understanding fails or is disabled, **the reply flow continues** with the ori
 
 `tools.media` supports **shared models** plus per-capability overrides:
 
-<AccordionGroup>
-  <Accordion title="Top-level keys">
-    * `tools.media.models`: shared model list (use `capabilities` to gate).
-    * `tools.media.image` / `tools.media.audio` / `tools.media.video`:
-      * defaults (`prompt`, `maxChars`, `maxBytes`, `timeoutSeconds`, `language`)
-      * provider overrides (`baseUrl`, `headers`, `providerOptions`)
-      * Deepgram audio options via `tools.media.audio.providerOptions.deepgram`
-      * audio transcript echo controls (`echoTranscript`, default `false`; `echoFormat`)
-      * optional **per-capability `models` list** (preferred before shared models)
-      * `attachments` policy (`mode`, `maxAttachments`, `prefer`)
-      * `scope` (optional gating by channel/chatType/session key)
-    * `tools.media.concurrency`: max concurrent capability runs (default **2**).
-  </Accordion>
-</AccordionGroup>
+AccordionGroup
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Top-level keys
+
+    - `tools.media.models`: shared model list (use `capabilities` to gate).
+    - `tools.media.image` / `tools.media.audio` / `tools.media.video`:
+      - defaults (`prompt`, `maxChars`, `maxBytes`, `timeoutSeconds`, `language`)
+      - provider overrides (`baseUrl`, `headers`, `providerOptions`)
+      - Deepgram audio options via `tools.media.audio.providerOptions.deepgram`
+      - audio transcript echo controls (`echoTranscript`, default `false`; `echoFormat`)
+      - optional **per-capability `models` list** (preferred before shared models)
+      - `attachments` policy (`mode`, `maxAttachments`, `prefer`)
+      - `scope` (optional gating by channel/chatType/session key)
+    - `tools.media.concurrency`: max concurrent capability runs (default **2**).
+
+
+
+```json5
 {
   tools: {
     media: {
@@ -102,9 +110,12 @@ If understanding fails or is disabled, **the reply flow continues** with the ori
 
 Each `models[]` entry can be **provider** or **CLI**:
 
-<Tabs>
-  <Tab title="Provider entry">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Provider entry
+
+    ```json5
     {
       type: "provider", // default if omitted
       provider: "openai",
@@ -118,10 +129,11 @@ Each `models[]` entry can be **provider** or **CLI**:
       preferredProfile: "vision-fallback",
     }
     ```
-  </Tab>
 
-  <Tab title="CLI entry">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+CLI entry
+
+    ```json5
     {
       type: "cli",
       command: "gemini",
@@ -141,78 +153,89 @@ Each `models[]` entry can be **provider** or **CLI**:
 
     CLI templates can also use:
 
-    * `{{MediaDir}}` (directory containing the media file)
-    * `{{OutputDir}}` (scratch dir created for this run)
-    * `{{OutputBase}}` (scratch file base path, no extension)
-  </Tab>
-</Tabs>
+    - `{{MediaDir}}` (directory containing the media file)
+    - `{{OutputDir}}` (scratch dir created for this run)
+    - `{{OutputBase}}` (scratch file base path, no extension)
+
+
 
 ## Defaults and limits
 
 Recommended defaults:
 
-* `maxChars`: **500** for image/video (short, command-friendly)
-* `maxChars`: **unset** for audio (full transcript unless you set a limit)
-* `maxBytes`:
-  * image: **10MB**
-  * audio: **20MB**
-  * video: **50MB**
+- `maxChars`: **500** for image/video (short, command-friendly)
+- `maxChars`: **unset** for audio (full transcript unless you set a limit)
+- `maxBytes`:
+  - image: **10MB**
+  - audio: **20MB**
+  - video: **50MB**
 
-<AccordionGroup>
-  <Accordion title="Rules">
+AccordionGroup
+
+
+Rules
+
     - If media exceeds `maxBytes`, that model is skipped and the **next model is tried**.
     - Audio files smaller than **1024 bytes** are treated as empty/corrupt and skipped before provider/CLI transcription; inbound reply context receives a deterministic placeholder transcript so the agent knows the note was too small.
     - If the model returns more than `maxChars`, output is trimmed.
-    - `prompt` defaults to simple "Describe the ." plus the `maxChars` guidance (image/video only).
+    - `prompt` defaults to simple "Describe the {media}." plus the `maxChars` guidance (image/video only).
     - If the active primary image model already supports vision natively, OpenClaw skips the `[Image]` summary block and passes the original image into the model instead.
     - If a Gateway/WebChat primary model is text-only, image attachments are preserved as offloaded `media://inbound/*` refs so the image/PDF tools or configured image model can still inspect them instead of losing the attachment.
     - Explicit `openclaw infer image describe --model <provider/model>` requests are different: they run that image-capable provider/model directly, including Ollama refs such as `ollama/qwen2.5vl:7b`.
     - If `<capability>.enabled: true` but no models are configured, OpenClaw tries the **active reply model** when its provider supports the capability.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ### Auto-detect media understanding (default)
 
 If `tools.media.<capability>.enabled` is **not** set to `false` and you haven't configured models, OpenClaw auto-detects in this order and **stops at the first working option**:
 
-<Steps>
-  <Step title="Active reply model">
-    Active reply model when its provider supports the capability.
-  </Step>
+Steps
 
-  <Step title="agents.defaults.imageModel">
+
+Active reply model
+
+    Active reply model when its provider supports the capability.
+
+
+agents.defaults.imageModel
+
     `agents.defaults.imageModel` primary/fallback refs (image only).
     Prefer `provider/model` refs. Bare refs are qualified from configured image-capable provider model entries only when the match is unique.
-  </Step>
 
-  <Step title="Local CLIs (audio only)">
+
+Local CLIs (audio only)
+
     Local CLIs (if installed):
 
-    * `sherpa-onnx-offline` (requires `SHERPA_ONNX_MODEL_DIR` with encoder/decoder/joiner/tokens)
-    * `whisper-cli` (`whisper-cpp`; uses `WHISPER_CPP_MODEL` or the bundled tiny model)
-    * `whisper` (Python CLI; downloads models automatically)
-  </Step>
+    - `sherpa-onnx-offline` (requires `SHERPA_ONNX_MODEL_DIR` with encoder/decoder/joiner/tokens)
+    - `whisper-cli` (`whisper-cpp`; uses `WHISPER_CPP_MODEL` or the bundled tiny model)
+    - `whisper` (Python CLI; downloads models automatically)
 
-  <Step title="Gemini CLI">
+
+
+Gemini CLI
+
     `gemini` using `read_many_files`.
-  </Step>
 
-  <Step title="Provider auth">
-    * Configured `models.providers.*` entries that support the capability are tried before the bundled fallback order.
-    * Image-only config providers with an image-capable model auto-register for media understanding even when they are not a bundled vendor plugin.
-    * Ollama image understanding is available when selected explicitly, for example through `agents.defaults.imageModel` or `openclaw infer image describe --model ollama/<vision-model>`.
+
+Provider auth
+
+    - Configured `models.providers.*` entries that support the capability are tried before the bundled fallback order.
+    - Image-only config providers with an image-capable model auto-register for media understanding even when they are not a bundled vendor plugin.
+    - Ollama image understanding is available when selected explicitly, for example through `agents.defaults.imageModel` or `openclaw infer image describe --model ollama/<vision-model>`.
 
     Bundled fallback order:
 
-    * Audio: OpenAI → Groq → xAI → Deepgram → OpenRouter → Google → SenseAudio → ElevenLabs → Mistral
-    * Image: OpenAI → Anthropic → Google → MiniMax → MiniMax Portal → Z.AI
-    * Video: Google → Qwen → Moonshot
-  </Step>
-</Steps>
+    - Audio: OpenAI → Groq → xAI → Deepgram → OpenRouter → Google → SenseAudio → ElevenLabs → Mistral
+    - Image: OpenAI → Anthropic → Google → MiniMax → MiniMax Portal → Z.AI
+    - Video: Google → Qwen → Moonshot
+
+
 
 To disable auto-detection, set:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     media: {
@@ -224,20 +247,20 @@ To disable auto-detection, set:
 }
 ```
 
-<Note>
-  Binary detection is best-effort across macOS/Linux/Windows; ensure the CLI is on `PATH` (we expand `~`), or set an explicit CLI model with a full command path.
-</Note>
+Note
+
+Binary detection is best-effort across macOS/Linux/Windows; ensure the CLI is on `PATH` (we expand `~`), or set an explicit CLI model with a full command path.
 
 ### Proxy environment support (provider models)
 
 When provider-based **audio** and **video** media understanding is enabled, OpenClaw honors standard outbound proxy environment variables for provider HTTP calls:
 
-* `HTTPS_PROXY`
-* `HTTP_PROXY`
-* `ALL_PROXY`
-* `https_proxy`
-* `http_proxy`
-* `all_proxy`
+- `HTTPS_PROXY`
+- `HTTP_PROXY`
+- `ALL_PROXY`
+- `https_proxy`
+- `http_proxy`
+- `all_proxy`
 
 If no proxy env vars are set, media understanding uses direct egress. If the proxy value is malformed, OpenClaw logs a warning and falls back to direct fetch.
 
@@ -245,18 +268,18 @@ If no proxy env vars are set, media understanding uses direct egress. If the pro
 
 If you set `capabilities`, the entry only runs for those media types. For shared lists, OpenClaw can infer defaults:
 
-* `openai`, `anthropic`, `minimax`: **image**
-* `minimax-portal`: **image**
-* `moonshot`: **image + video**
-* `openrouter`: **image + audio**
-* `google` (Gemini API): **image + audio + video**
-* `qwen`: **image + video**
-* `mistral`: **audio**
-* `zai`: **image**
-* `groq`: **audio**
-* `xai`: **audio**
-* `deepgram`: **audio**
-* Any `models.providers.<id>.models[]` catalog with an image-capable model: **image**
+- `openai`, `anthropic`, `minimax`: **image**
+- `minimax-portal`: **image**
+- `moonshot`: **image + video**
+- `openrouter`: **image + audio**
+- `google` (Gemini API): **image + audio + video**
+- `qwen`: **image + video**
+- `mistral`: **audio**
+- `zai`: **image**
+- `groq`: **audio**
+- `xai`: **audio**
+- `deepgram`: **audio**
+- Any `models.providers.<id>.models[]` catalog with an image-capable model: **image**
 
 For CLI entries, **set `capabilities` explicitly** to avoid surprising matches. If you omit `capabilities`, the entry is eligible for the list it appears in.
 
@@ -268,54 +291,64 @@ For CLI entries, **set `capabilities` explicitly** to avoid surprising matches. 
 | Audio      | OpenAI, Groq, xAI, Deepgram, OpenRouter, Google, SenseAudio, ElevenLabs, Mistral                                             | Provider transcription (Whisper/Groq/xAI/Deepgram/OpenRouter STT/Gemini/SenseAudio/Scribe/Voxtral).                                                                                                                                     |
 | Video      | Google, Qwen, Moonshot                                                                                                       | Provider video understanding via vendor plugins; Qwen video understanding uses the Standard DashScope endpoints.                                                                                                                        |
 
-<Note>
-  **MiniMax note**
+Note
 
-  * `minimax`, `minimax-cn`, `minimax-portal`, and `minimax-portal-cn` image understanding comes from the plugin-owned `MiniMax-VL-01` media provider.
-  * Automatic image routing keeps using `MiniMax-VL-01` even if legacy MiniMax M2.x chat metadata claims image input.
-</Note>
+**MiniMax note**
+
+- `minimax`, `minimax-cn`, `minimax-portal`, and `minimax-portal-cn` image understanding comes from the plugin-owned `MiniMax-VL-01` media provider.
+- Automatic image routing keeps using `MiniMax-VL-01` even if legacy MiniMax M2.x chat metadata claims image input.
 
 ## Model selection guidance
 
-* Prefer the strongest latest-generation model available for each media capability when quality and safety matter.
-* For tool-enabled agents handling untrusted inputs, avoid older/weaker media models.
-* Keep at least one fallback per capability for availability (quality model + faster/cheaper model).
-* CLI fallbacks (`whisper-cli`, `whisper`, `gemini`) are useful when provider APIs are unavailable.
-* `parakeet-mlx` note: with `--output-dir`, OpenClaw reads `<output-dir>/<media-basename>.txt` when output format is `txt` (or unspecified); non-`txt` formats fall back to stdout.
+- Prefer the strongest latest-generation model available for each media capability when quality and safety matter.
+- For tool-enabled agents handling untrusted inputs, avoid older/weaker media models.
+- Keep at least one fallback per capability for availability (quality model + faster/cheaper model).
+- CLI fallbacks (`whisper-cli`, `whisper`, `gemini`) are useful when provider APIs are unavailable.
+- `parakeet-mlx` note: with `--output-dir`, OpenClaw reads `<output-dir>/<media-basename>.txt` when output format is `txt` (or unspecified); non-`txt` formats fall back to stdout.
 
 ## Attachment policy
 
 Per-capability `attachments` controls which attachments are processed:
 
-<ParamField type="&#x22;first&#x22; | &#x22;all&#x22;">
+ParamField
+
   Whether to process the first selected attachment or all of them.
-</ParamField>
 
-<ParamField type="number">
+ParamField
+
   Cap the number processed.
-</ParamField>
 
-<ParamField type="&#x22;first&#x22; | &#x22;last&#x22; | &#x22;path&#x22; | &#x22;url&#x22;">
+ParamField
+
   Selection preference among candidate attachments.
-</ParamField>
 
 When `mode: "all"`, outputs are labeled `[Image 1/2]`, `[Audio 2/2]`, etc.
 
-<AccordionGroup>
-  <Accordion title="File-attachment extraction behavior">
-    * Extracted file text is wrapped as **untrusted external content** before it is appended to the media prompt.
-    * The injected block uses explicit boundary markers like `<<<EXTERNAL_UNTRUSTED_CONTENT id="...">>>` / `<<<END_EXTERNAL_UNTRUSTED_CONTENT id="...">>>` and includes a `Source: External` metadata line.
-    * This attachment-extraction path intentionally omits the long `SECURITY NOTICE:` banner to avoid bloating the media prompt; the boundary markers and metadata still remain.
-    * If a file has no extractable text, OpenClaw injects `[No extractable text]`.
-    * If a PDF falls back to rendered page images in this path, the media prompt keeps the placeholder `[PDF content rendered to images; images not forwarded to model]` because this attachment-extraction step forwards text blocks, not the rendered PDF images.
-  </Accordion>
-</AccordionGroup>
+AccordionGroup
+
+
+File-attachment extraction behavior
+
+    - Extracted file text is wrapped as **untrusted external content** before it is appended to the media prompt.
+    - The injected block uses explicit boundary markers like `<<
+EXTERNAL_UNTRUSTED_CONTENT
+>>` / `<<
+END_EXTERNAL_UNTRUSTED_CONTENT
+>>` and includes a `Source: External` metadata line.
+    - This attachment-extraction path intentionally omits the long `SECURITY NOTICE:` banner to avoid bloating the media prompt; the boundary markers and metadata still remain.
+    - If a file has no extractable text, OpenClaw injects `[No extractable text]`.
+    - If a PDF falls back to rendered page images in this path, the media prompt keeps the placeholder `[PDF content rendered to images; images not forwarded to model]` because this attachment-extraction step forwards text blocks, not the rendered PDF images.
+
+
 
 ## Config examples
 
-<Tabs>
-  <Tab title="Shared models + overrides">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+Tabs
+
+
+Shared models + overrides
+
+    ```json5
     {
       tools: {
         media: {
@@ -349,10 +382,11 @@ When `mode: "all"`, outputs are labeled `[Image 1/2]`, `[Audio 2/2]`, etc.
       },
     }
     ```
-  </Tab>
 
-  <Tab title="Audio + video only">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Audio + video only
+
+    ```json5
     {
       tools: {
         media: {
@@ -389,10 +423,11 @@ When `mode: "all"`, outputs are labeled `[Image 1/2]`, `[Audio 2/2]`, etc.
       },
     }
     ```
-  </Tab>
 
-  <Tab title="Image-only">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Image-only
+
+    ```json5
     {
       tools: {
         media: {
@@ -420,10 +455,11 @@ When `mode: "all"`, outputs are labeled `[Image 1/2]`, `[Audio 2/2]`, etc.
       },
     }
     ```
-  </Tab>
 
-  <Tab title="Multi-modal single entry">
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Multi-modal single entry
+
+    ```json5
     {
       tools: {
         media: {
@@ -458,8 +494,7 @@ When `mode: "all"`, outputs are labeled `[Image 1/2]`, `[Audio 2/2]`, etc.
       },
     }
     ```
-  </Tab>
-</Tabs>
+
 
 ## Status output
 
@@ -473,11 +508,13 @@ This shows per-capability outcomes and the chosen provider/model when applicable
 
 ## Notes
 
-* Understanding is **best-effort**. Errors do not block replies.
-* Attachments are still passed to models even when understanding is disabled.
-* Use `scope` to limit where understanding runs (e.g. only DMs).
+- Understanding is **best-effort**. Errors do not block replies.
+- Attachments are still passed to models even when understanding is disabled.
+- Use `scope` to limit where understanding runs (e.g. only DMs).
 
 ## Related
 
-* [Configuration](/gateway/configuration)
-* [Image & media support](/nodes/images)
+- [Configuration](/gateway/configuration)
+- [Image & media support](/nodes/images)
+
+---

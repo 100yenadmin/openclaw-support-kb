@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (Native) Guide — Early Beta"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-native"
-source_hash: "8eeef44cd63097d82c60059ccec6bd1121733a3bab64f35a3b8951dff55ac95c"
+source_hash: "9263543cfaf2349e214dbba18cbc7ba9c1b056c7235e2cc320e67eb89649c255"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-native.md"
@@ -93,6 +93,10 @@ Top-to-bottom, in order:
 8. **Sets `HERMES_GIT_BASH_PATH`** to the resolved `bash.exe` so Hermes finds it deterministically in fresh shells.
 9. **Adds `%LOCALAPPDATA%\hermes\bin` to User PATH** — exposes the `hermes` command after you open a new terminal.
 10. **Runs `hermes setup`** — the normal first-run wizard (model, provider, toolsets). Skip with `-SkipSetup`.
+
+:::tip Skip provider hunting on Windows
+Native Windows is still early beta, and per-tool API key setup (Firecrawl, FAL, Browser Use, OpenAI TTS) is the highest-friction part of getting a useful agent. A [Nous Portal](/docs/user-guide/features/tool-gateway) subscription covers the model **and** all of those tools through one OAuth login. After the installer finishes, run `hermes setup --portal` to wire everything up.
+:::
 
 ## Feature matrix
 

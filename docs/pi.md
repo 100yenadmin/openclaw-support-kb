@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pi integration architecture"
 source: "https://docs.openclaw.ai/pi"
-source_hash: "d7b036d2cda8f2cf47ef74e9fa29707e4280dee05b1ec673b7da6999a9961ff0"
+source_hash: "8502a888acbc916dbc77f82c56de006de3df02511ee1a7d1bd1f25a62b4dfbfa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "pi.md"
@@ -13,24 +13,22 @@ duplicate_index: 1
 # Pi integration architecture
 Source: https://docs.openclaw.ai/pi
 
-
-
 OpenClaw integrates with [pi-coding-agent](https://github.com/badlogic/pi-mono/tree/main/packages/coding-agent) and its sibling packages (`pi-ai`, `pi-agent-core`, `pi-tui`) to power its AI agent capabilities.
 
 ## Overview
 
 OpenClaw uses the pi SDK to embed an AI coding agent into its messaging gateway architecture. Instead of spawning pi as a subprocess or using RPC mode, OpenClaw directly imports and instantiates pi's `AgentSession` via `createAgentSession()`. This embedded approach provides:
 
-* Full control over session lifecycle and event handling
-* Custom tool injection (messaging, sandbox, channel-specific actions)
-* System prompt customization per channel/context
-* Session persistence with branching/compaction support
-* Multi-account auth profile rotation with failover
-* Provider-agnostic model switching
+- Full control over session lifecycle and event handling
+- Custom tool injection (messaging, sandbox, channel-specific actions)
+- System prompt customization per channel/context
+- Session persistence with branching/compaction support
+- Multi-account auth profile rotation with failover
+- Provider-agnostic model switching
 
 ## Package dependencies
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "@earendil-works/pi-agent-core": "0.75.1",
   "@earendil-works/pi-ai": "0.75.1",
@@ -139,10 +137,10 @@ src/agents/
 Channel-specific message action runtimes now live in the plugin-owned extension
 directories instead of under `src/agents/tools`, for example:
 
-* the Discord plugin action runtime files
-* the Slack plugin action runtime file
-* the Telegram plugin action runtime file
-* the WhatsApp plugin action runtime file
+- the Discord plugin action runtime files
+- the Slack plugin action runtime file
+- the Telegram plugin action runtime file
+- the WhatsApp plugin action runtime file
 
 ## Core integration flow
 
@@ -150,8 +148,7 @@ directories instead of under `src/agents/tools`, for example:
 
 The main entry point is `runEmbeddedPiAgent()` in `pi-embedded-runner/run.ts`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { runEmbeddedPiAgent } from "./agents/pi-embedded-runner.js";
+```typescript
 
 const result = await runEmbeddedPiAgent({
   sessionId: "user-123",
@@ -174,8 +171,8 @@ const result = await runEmbeddedPiAgent({
 
 Inside `runEmbeddedAttempt()` (called by `runEmbeddedPiAgent()`), the pi SDK is used:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import {
+```typescript
+
   createAgentSession,
   DefaultResourceLoader,
   SessionManager,
@@ -211,7 +208,7 @@ applySystemPromptOverrideToSession(session, systemPromptOverride);
 
 `subscribeEmbeddedPiSession()` subscribes to pi's `AgentSession` events:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const subscription = subscribeEmbeddedPiSession({
   session: activeSession,
   runId: params.runId,
@@ -228,17 +225,17 @@ const subscription = subscribeEmbeddedPiSession({
 
 Events handled include:
 
-* `message_start` / `message_end` / `message_update` (streaming text/thinking)
-* `tool_execution_start` / `tool_execution_update` / `tool_execution_end`
-* `turn_start` / `turn_end`
-* `agent_start` / `agent_end`
-* `compaction_start` / `compaction_end`
+- `message_start` / `message_end` / `message_update` (streaming text/thinking)
+- `tool_execution_start` / `tool_execution_update` / `tool_execution_end`
+- `turn_start` / `turn_end`
+- `agent_start` / `agent_end`
+- `compaction_start` / `compaction_end`
 
 ### 4. Prompting
 
 After setup, the session is prompted:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await session.prompt(effectivePrompt, { images: imageResult.images });
 ```
 
@@ -264,7 +261,7 @@ to re-inject image payloads.
 
 pi-agent-core's `AgentTool` has a different `execute` signature than pi-coding-agent's `ToolDefinition`. The adapter in `pi-tool-definition-adapter.ts` bridges this:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 export function toToolDefinitions(tools: AnyAgentTool[]): ToolDefinition[] {
   return tools.map((tool) => ({
     name: tool.name,
@@ -283,7 +280,7 @@ export function toToolDefinitions(tools: AnyAgentTool[]): ToolDefinition[] {
 
 `splitSdkTools()` passes all tools via `customTools`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 export function splitSdkTools(options: { tools: AnyAgentTool[]; sandboxEnabled: boolean }) {
   return {
     builtInTools: [], // Empty. We override everything
@@ -300,7 +297,7 @@ The system prompt is built in `buildAgentSystemPrompt()` (`system-prompt.ts`). I
 
 The prompt is applied after session creation via `applySystemPromptOverrideToSession()`:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const systemPromptOverride = createSystemPromptOverride(appendPrompt);
 applySystemPromptOverrideToSession(session, systemPromptOverride);
 ```
@@ -311,7 +308,7 @@ applySystemPromptOverrideToSession(session, systemPromptOverride);
 
 Sessions are JSONL files with tree structure (id/parentId linking). Pi's `SessionManager` handles persistence:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const sessionManager = SessionManager.open(params.sessionFile);
 ```
 
@@ -321,7 +318,7 @@ OpenClaw wraps this with `guardSessionManager()` for tool result safety.
 
 `session-manager-cache.ts` caches SessionManager instances to avoid repeated file parsing:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await prewarmSessionFile(params.sessionFile);
 sessionManager = SessionManager.open(params.sessionFile);
 trackSessionManagerAccess(params.sessionFile);
@@ -340,7 +337,7 @@ input tokens`, `input is too long for the model`, and `ollama error: context
 length exceeded`. `compactEmbeddedPiSessionDirect()` handles manual
 compaction:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const compactResult = await compactEmbeddedPiSessionDirect({
   sessionId, sessionFile, provider, model, ...
 });
@@ -352,22 +349,21 @@ const compactResult = await compactEmbeddedPiSessionDirect({
 
 OpenClaw maintains an auth profile store with multiple API keys per provider:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const authStore = ensureAuthProfileStore(agentDir, { allowKeychainPrompt: false });
 const profileOrder = resolveAuthProfileOrder({ cfg, store: authStore, provider, preferredProfile });
 ```
 
 Profiles rotate on failures with cooldown tracking:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 await markAuthProfileFailure({ store, profileId, reason, cfg, agentDir });
 const rotated = await advanceAuthProfile();
 ```
 
 ### Model resolution
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
-import { resolveModel } from "./pi-embedded-runner/model.js";
+```typescript
 
 const { model, error, authStorage, modelRegistry } = resolveModel(
   provider,
@@ -384,7 +380,7 @@ authStorage.setRuntimeApiKey(model.provider, apiKeyInfo.apiKey);
 
 `FailoverError` triggers model fallback when configured:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 if (fallbackConfigured && isFailoverErrorMessage(errorText)) {
   throw new FailoverError(errorText, {
     reason: promptFailoverReason ?? "unknown",
@@ -404,7 +400,7 @@ OpenClaw loads custom pi extensions for specialized behavior:
 
 `src/agents/pi-hooks/compaction-safeguard.ts` adds guardrails to compaction, including adaptive token budgeting plus tool failure and file operation summaries:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 if (resolveCompactionMode(params.cfg) === "safeguard") {
   setCompactionSafeguardRuntime(params.sessionManager, { maxHistoryShare });
   paths.push(resolvePiExtensionPath("compaction-safeguard"));
@@ -415,7 +411,7 @@ if (resolveCompactionMode(params.cfg) === "safeguard") {
 
 `src/agents/pi-hooks/context-pruning.ts` implements cache-TTL based context pruning:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 if (cfg?.agents?.defaults?.contextPruning?.mode === "cache-ttl") {
   setContextPruningRuntime(params.sessionManager, {
     settings,
@@ -433,7 +429,7 @@ if (cfg?.agents?.defaults?.contextPruning?.mode === "cache-ttl") {
 
 `EmbeddedBlockChunker` manages streaming text into discrete reply blocks:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const blockChunker = blockChunking ? new EmbeddedBlockChunker(blockChunking) : null;
 ```
 
@@ -441,7 +437,7 @@ const blockChunker = blockChunking ? new EmbeddedBlockChunker(blockChunking) : n
 
 Streaming output is processed to strip `<think>`/`<thinking>` blocks and extract `<final>` content:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const stripBlockTags = (text: string, state: { thinking: boolean; final: boolean }) => {
   // Strip <think>...</think> content
   // If enforceFinalTag, only return <final>...</final> content
@@ -452,7 +448,7 @@ const stripBlockTags = (text: string, state: { thinking: boolean; final: boolean
 
 Reply directives like `[[media:url]]`, `[[voice]]`, `[[reply:id]]` are parsed and extracted:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const { text: cleanedText, mediaUrls, audioAsVoice, replyToId } = consumeReplyDirectives(chunk);
 ```
 
@@ -462,7 +458,7 @@ const { text: cleanedText, mediaUrls, audioAsVoice, replyToId } = consumeReplyDi
 
 `pi-embedded-helpers.ts` classifies errors for appropriate handling:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 isContextOverflowError(errorText)     // Context too large
 isCompactionFailureError(errorText)   // Compaction failed
 isAuthAssistantError(lastAssistant)   // Auth failure
@@ -475,7 +471,7 @@ classifyFailoverReason(errorText)     // "auth" | "rate_limit" | "quota" | "time
 
 If a thinking level is unsupported, it falls back:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const fallbackThinking = pickFallbackThinkingLevel({
   message: errorText,
   attempted: attemptedThinking,
@@ -490,7 +486,7 @@ if (fallbackThinking) {
 
 When sandbox mode is enabled, tools and paths are constrained:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 const sandbox = await resolveSandboxContext({
   config: params.config,
   sessionKey: sandboxSessionKey,
@@ -508,26 +504,26 @@ if (sandboxRoot) {
 
 ### Anthropic
 
-* Refusal magic string scrubbing
-* Turn validation for consecutive roles
-* Strict upstream Pi tool parameter validation
+- Refusal magic string scrubbing
+- Turn validation for consecutive roles
+- Strict upstream Pi tool parameter validation
 
 ### Google/Gemini
 
-* Plugin-owned tool schema sanitization
+- Plugin-owned tool schema sanitization
 
 ### OpenAI
 
-* `apply_patch` tool for Codex models
-* Thinking level downgrade handling
+- `apply_patch` tool for Codex models
+- Thinking level downgrade handling
 
 ## TUI Integration
 
 OpenClaw also has a local TUI mode that uses pi-tui components directly:
 
-```typescript theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```typescript
 // src/tui/tui.ts
-import { ... } from "@earendil-works/pi-tui";
+
 ```
 
 This provides the interactive terminal experience similar to pi's native mode.
@@ -558,25 +554,27 @@ Areas for potential rework:
 
 Pi integration coverage spans these suites:
 
-* `src/agents/pi-*.test.ts`
-* `src/agents/pi-auth-json.test.ts`
-* `src/agents/pi-embedded-*.test.ts`
-* `src/agents/pi-embedded-helpers*.test.ts`
-* `src/agents/pi-embedded-runner*.test.ts`
-* `src/agents/pi-embedded-runner/**/*.test.ts`
-* `src/agents/pi-embedded-subscribe*.test.ts`
-* `src/agents/pi-tools*.test.ts`
-* `src/agents/pi-tool-definition-adapter*.test.ts`
-* `src/agents/pi-settings.test.ts`
-* `src/agents/pi-hooks/**/*.test.ts`
+- `src/agents/pi-*.test.ts`
+- `src/agents/pi-auth-json.test.ts`
+- `src/agents/pi-embedded-*.test.ts`
+- `src/agents/pi-embedded-helpers*.test.ts`
+- `src/agents/pi-embedded-runner*.test.ts`
+- `src/agents/pi-embedded-runner/**/*.test.ts`
+- `src/agents/pi-embedded-subscribe*.test.ts`
+- `src/agents/pi-tools*.test.ts`
+- `src/agents/pi-tool-definition-adapter*.test.ts`
+- `src/agents/pi-settings.test.ts`
+- `src/agents/pi-hooks/**/*.test.ts`
 
 Live/opt-in:
 
-* `src/agents/pi-embedded-runner-extraparams.live.test.ts` (enable `OPENCLAW_LIVE_TEST=1`)
+- `src/agents/pi-embedded-runner-extraparams.live.test.ts` (enable `OPENCLAW_LIVE_TEST=1`)
 
 For current run commands, see [Pi Development Workflow](/pi-dev).
 
 ## Related
 
-* [Pi development workflow](/pi-dev)
-* [Install overview](/install)
+- [Pi development workflow](/pi-dev)
+- [Install overview](/install)
+
+---

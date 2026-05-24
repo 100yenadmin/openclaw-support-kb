@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
-source_hash: "f1283f3ede0b5a5a3090b4c7768163538bc4728bc6e8beb0310818a06e366c7d"
+source_hash: "83e3d3637b0d878d39363f3970d3eb35ceb1d26128e70bc4a78c89b81c5eb6f7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session-tool.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Session tools
 Source: https://docs.openclaw.ai/concepts/session-tool
-
-
 
 OpenClaw gives agents tools to work across sessions, inspect status, and
 orchestrate sub-agents.
@@ -38,7 +36,7 @@ set, including `sessions_spawn`, `sessions_yield`, and `subagents`.
 does not include sub-agent spawning. To keep a messaging profile and still
 allow native delegation, add:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     profile: "messaging",
@@ -66,24 +64,24 @@ visibility policy, so unrelated sessions stay hidden.
 By default, tool results are excluded -- pass `includeTools: true` to see them.
 The returned view is intentionally bounded and safety-filtered:
 
-* assistant text is normalized before recall:
-  * thinking tags are stripped
-  * `<relevant-memories>` / `<relevant_memories>` scaffolding blocks are stripped
-  * plain-text tool-call XML payload blocks such as `<tool_call>...</tool_call>`,
+- assistant text is normalized before recall:
+  - thinking tags are stripped
+  - `<relevant-memories>` / `<relevant_memories>` scaffolding blocks are stripped
+  - plain-text tool-call XML payload blocks such as `<tool_call>...</tool_call>`,
     `<function_call>...</function_call>`, `<tool_calls>...</tool_calls>`, and
     `<function_calls>...</function_calls>` are stripped, including truncated
     payloads that never close cleanly
-  * downgraded tool-call/result scaffolding such as `[Tool Call: ...]`,
+  - downgraded tool-call/result scaffolding such as `[Tool Call: ...]`,
     `[Tool Result ...]`, and `[Historical context ...]` is stripped
-  * leaked model control tokens such as `<|assistant|>`, other ASCII
+  - leaked model control tokens such as `<|assistant|>`, other ASCII
     `<|...|>` tokens, and full-width `<｜...｜>` variants are stripped
-  * malformed MiniMax tool-call XML such as `<invoke ...>` /
+  - malformed MiniMax tool-call XML such as `<invoke ...>` /
     `</minimax:tool_call>` is stripped
-* credential/token-like text is redacted before it is returned
-* long text blocks are truncated
-* very large histories can drop older rows or replace an oversized row with
+- credential/token-like text is redacted before it is returned
+- long text blocks are truncated
+- very large histories can drop older rows or replace an oversized row with
   `[sessions_history omitted: message too large]`
-* the tool reports summary flags such as `truncated`, `droppedMessages`,
+- the tool reports summary flags such as `truncated`, `droppedMessages`,
   `contentTruncated`, `contentRedacted`, and `bytes`
 
 Both tools accept either a **session key** (like `"main"`) or a **session ID**
@@ -97,9 +95,9 @@ disk instead of treating `sessions_history` as a raw dump.
 `sessions_send` delivers a message to another session and optionally waits for
 the response:
 
-* **Fire-and-forget:** set `timeoutSeconds: 0` to enqueue and return
+- **Fire-and-forget:** set `timeoutSeconds: 0` to enqueue and return
   immediately.
-* **Wait for reply:** set a timeout and get the response inline.
+- **Wait for reply:** set a timeout and get the response inline.
 
 Thread-scoped chat sessions, such as Slack or Discord keys ending in
 `:thread:<id>`, are not valid `sessions_send` targets. Use the parent channel
@@ -134,9 +132,9 @@ poll loops.
 `subagents` is the control-plane helper for already spawned OpenClaw
 sub-agents. It supports:
 
-* `action: "list"` to inspect active/recent runs
-* `action: "steer"` to send follow-up guidance to a running child
-* `action: "kill"` to stop one child or `all`
+- `action: "list"` to inspect active/recent runs
+- `action: "steer"` to send follow-up guidance to a running child
+- `action: "kill"` to stop one child or `all`
 
 ## Spawning sub-agents
 
@@ -148,11 +146,11 @@ prompt carries only sub-agent runtime rules and routing context.
 
 Key options:
 
-* `runtime: "subagent"` (default) or `"acp"` for external harness agents.
-* `model` and `thinking` overrides for the child session.
-* `thread: true` to bind the spawn to a chat thread (Discord, Slack, etc.).
-* `sandbox: "require"` to enforce sandboxing on the child.
-* `context: "fork"` for native sub-agents when the child needs the current
+- `runtime: "subagent"` (default) or `"acp"` for external harness agents.
+- `model` and `thinking` overrides for the child session.
+- `thread: true` to bind the spawn to a chat thread (Discord, Slack, etc.).
+- `sandbox: "require"` to enforce sandboxing on the child.
+- `context: "fork"` for native sub-agents when the child needs the current
   requester transcript; omit it or use `context: "isolated"` for a clean child.
   Thread-bound native sub-agents default to `context: "fork"` unless
   `threadBindings.defaultSpawnContext` says otherwise.
@@ -187,12 +185,14 @@ config.
 
 ## Further reading
 
-* [Session Management](/concepts/session) -- routing, lifecycle, maintenance
-* [ACP Agents](/tools/acp-agents) -- external harness spawning
-* [Multi-agent](/concepts/multi-agent) -- multi-agent architecture
-* [Gateway Configuration](/gateway/configuration) -- session tool config knobs
+- [Session Management](/concepts/session) -- routing, lifecycle, maintenance
+- [ACP Agents](/tools/acp-agents) -- external harness spawning
+- [Multi-agent](/concepts/multi-agent) -- multi-agent architecture
+- [Gateway Configuration](/gateway/configuration) -- session tool config knobs
 
 ## Related
 
-* [Session management](/concepts/session)
-* [Session pruning](/concepts/session-pruning)
+- [Session management](/concepts/session)
+- [Session pruning](/concepts/session-pruning)
+
+---

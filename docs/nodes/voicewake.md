@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice wake"
 source: "https://docs.openclaw.ai/nodes/voicewake"
-source_hash: "c80ee4966ba8136400ba6f58a1b332438c947a40fd9c73b8f499074c4bf5af5a"
+source_hash: "56c73a1b5666ba62421e850d8421ec09de690dc1ecd31d555efdffa7c805d5f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/voicewake.md"
@@ -13,24 +13,22 @@ duplicate_index: 1
 # Voice wake
 Source: https://docs.openclaw.ai/nodes/voicewake
 
-
-
 OpenClaw treats **wake words as a single global list** owned by the **Gateway**.
 
-* There are **no per-node custom wake words**.
-* **Any node/app UI may edit** the list; changes are persisted by the Gateway and broadcast to everyone.
-* macOS and iOS keep local **Voice Wake enabled/disabled** toggles (local UX + permissions differ).
-* Android currently keeps Voice Wake off and uses a manual mic flow in the Voice tab.
+- There are **no per-node custom wake words**.
+- **Any node/app UI may edit** the list; changes are persisted by the Gateway and broadcast to everyone.
+- macOS and iOS keep local **Voice Wake enabled/disabled** toggles (local UX + permissions differ).
+- Android currently keeps Voice Wake off and uses a manual mic flow in the Voice tab.
 
 ## Storage (Gateway host)
 
 Wake words are stored on the gateway machine at:
 
-* `~/.openclaw/settings/voicewake.json`
+- `~/.openclaw/settings/voicewake.json`
 
 Shape:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "triggers": ["openclaw", "claude", "computer"], "updatedAtMs": 1730000000000 }
 ```
 
@@ -38,22 +36,22 @@ Shape:
 
 ### Methods
 
-* `voicewake.get` → `{ triggers: string[] }`
-* `voicewake.set` with params `{ triggers: string[] }` → `{ triggers: string[] }`
+- `voicewake.get` → `{ triggers: string[] }`
+- `voicewake.set` with params `{ triggers: string[] }` → `{ triggers: string[] }`
 
 Notes:
 
-* Triggers are normalized (trimmed, empties dropped). Empty lists fall back to defaults.
-* Limits are enforced for safety (count/length caps).
+- Triggers are normalized (trimmed, empties dropped). Empty lists fall back to defaults.
+- Limits are enforced for safety (count/length caps).
 
 ### Routing methods (trigger → target)
 
-* `voicewake.routing.get` → `{ config: VoiceWakeRoutingConfig }`
-* `voicewake.routing.set` with params `{ config: VoiceWakeRoutingConfig }` → `{ config: VoiceWakeRoutingConfig }`
+- `voicewake.routing.get` → `{ config: VoiceWakeRoutingConfig }`
+- `voicewake.routing.set` with params `{ config: VoiceWakeRoutingConfig }` → `{ config: VoiceWakeRoutingConfig }`
 
 `VoiceWakeRoutingConfig` shape:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {
   "version": 1,
   "defaultTarget": { "mode": "current" },
@@ -64,39 +62,41 @@ Notes:
 
 Route targets support exactly one of:
 
-* `{ "mode": "current" }`
-* `{ "agentId": "main" }`
-* `{ "sessionKey": "agent:main:main" }`
+- `{ "mode": "current" }`
+- `{ "agentId": "main" }`
+- `{ "sessionKey": "agent:main:main" }`
 
 ### Events
 
-* `voicewake.changed` payload `{ triggers: string[] }`
-* `voicewake.routing.changed` payload `{ config: VoiceWakeRoutingConfig }`
+- `voicewake.changed` payload `{ triggers: string[] }`
+- `voicewake.routing.changed` payload `{ config: VoiceWakeRoutingConfig }`
 
 Who receives it:
 
-* All WebSocket clients (macOS app, WebChat, etc.)
-* All connected nodes (iOS/Android), and also on node connect as an initial "current state" push.
+- All WebSocket clients (macOS app, WebChat, etc.)
+- All connected nodes (iOS/Android), and also on node connect as an initial "current state" push.
 
 ## Client behavior
 
 ### macOS app
 
-* Uses the global list to gate `VoiceWakeRuntime` triggers.
-* Editing "Trigger words" in Voice Wake settings calls `voicewake.set` and then relies on the broadcast to keep other clients in sync.
+- Uses the global list to gate `VoiceWakeRuntime` triggers.
+- Editing "Trigger words" in Voice Wake settings calls `voicewake.set` and then relies on the broadcast to keep other clients in sync.
 
 ### iOS node
 
-* Uses the global list for `VoiceWakeManager` trigger detection.
-* Editing Wake Words in Settings calls `voicewake.set` (over the Gateway WS) and also keeps local wake-word detection responsive.
+- Uses the global list for `VoiceWakeManager` trigger detection.
+- Editing Wake Words in Settings calls `voicewake.set` (over the Gateway WS) and also keeps local wake-word detection responsive.
 
 ### Android node
 
-* Voice Wake is currently disabled in Android runtime/Settings.
-* Android voice uses manual mic capture in the Voice tab instead of wake-word triggers.
+- Voice Wake is currently disabled in Android runtime/Settings.
+- Android voice uses manual mic capture in the Voice tab instead of wake-word triggers.
 
 ## Related
 
-* [Talk mode](/nodes/talk)
-* [Audio and voice notes](/nodes/audio)
-* [Media understanding](/nodes/media-understanding)
+- [Talk mode](/nodes/talk)
+- [Audio and voice notes](/nodes/audio)
+- [Media understanding](/nodes/media-understanding)
+
+---

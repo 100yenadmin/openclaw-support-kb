@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "7c2d80655799c3463fd3082a1e0a6cbe0d979f152ce4fab8c4eea8954e3cf1df"
+source_hash: "7d715403a3bf98118b8aafa81afc42b48814b0c2880ba17f599b507582c9b154"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
@@ -13,12 +13,10 @@ duplicate_index: 1
 # Presence
 Source: https://docs.openclaw.ai/concepts/presence
 
-
-
 OpenClaw "presence" is a lightweight, best-effort view of:
 
-* the **Gateway** itself, and
-* **clients connected to the Gateway** (mac app, WebChat, CLI, etc.)
+- the **Gateway** itself, and
+- **clients connected to the Gateway** (mac app, WebChat, CLI, etc.)
 
 Presence is used primarily to render the macOS app's **Instances** tab and to
 provide quick operator visibility.
@@ -27,15 +25,15 @@ provide quick operator visibility.
 
 Presence entries are structured objects with fields like:
 
-* `instanceId` (optional but strongly recommended): stable client identity (usually `connect.client.instanceId`)
-* `host`: human-friendly host name
-* `ip`: best-effort IP address
-* `version`: client version string
-* `deviceFamily` / `modelIdentifier`: hardware hints
-* `mode`: `ui`, `webchat`, `cli`, `backend`, `probe`, `test`, `node`, ...
-* `lastInputSeconds`: "seconds since last user input" (if known)
-* `reason`: `self`, `connect`, `node-connected`, `periodic`, ...
-* `ts`: last update timestamp (ms since epoch)
+- `instanceId` (optional but strongly recommended): stable client identity (usually `connect.client.instanceId`)
+- `host`: human-friendly host name
+- `ip`: best-effort IP address
+- `version`: client version string
+- `deviceFamily` / `modelIdentifier`: hardware hints
+- `mode`: `ui`, `webchat`, `cli`, `backend`, `probe`, `test`, `node`, ...
+- `lastInputSeconds`: "seconds since last user input" (if known)
+- `reason`: `self`, `connect`, `node-connected`, `periodic`, ...
+- `ts`: last update timestamp (ms since epoch)
 
 ## Producers (where presence comes from)
 
@@ -70,9 +68,9 @@ upserts a presence entry for that node (same flow as other WS clients).
 
 Presence entries are stored in a single in-memory map:
 
-* Entries are keyed by a **presence key**.
-* The best key is a stable `instanceId` (from `connect.client.instanceId`) that survives restarts.
-* Keys are case-insensitive.
+- Entries are keyed by a **presence key**.
+- The best key is a stable `instanceId` (from `connect.client.instanceId`) that survives restarts.
+- Keys are case-insensitive.
 
 If a client reconnects without a stable `instanceId`, it may show up as a
 **duplicate** row.
@@ -81,8 +79,8 @@ If a client reconnects without a stable `instanceId`, it may show up as a
 
 Presence is intentionally ephemeral:
 
-* **TTL:** entries older than 5 minutes are pruned
-* **Max entries:** 200 (oldest dropped first)
+- **TTL:** entries older than 5 minutes are pruned
+- **Max entries:** 200 (oldest dropped first)
 
 This keeps the list fresh and avoids unbounded memory growth.
 
@@ -101,28 +99,34 @@ indicator (Active/Idle/Stale) based on the age of the last update.
 
 ## Debugging tips
 
-* To see the raw list, call `system-presence` against the Gateway.
-* If you see duplicates:
-  * confirm clients send a stable `client.instanceId` in the handshake
-  * confirm periodic beacons use the same `instanceId`
-  * check whether the connection-derived entry is missing `instanceId` (duplicates are expected)
+- To see the raw list, call `system-presence` against the Gateway.
+- If you see duplicates:
+  - confirm clients send a stable `client.instanceId` in the handshake
+  - confirm periodic beacons use the same `instanceId`
+  - check whether the connection-derived entry is missing `instanceId` (duplicates are expected)
 
 ## Related
 
-<CardGroup>
-  <Card title="Typing indicators" href="/concepts/typing-indicators" icon="ellipsis">
+CardGroup
+
+
+Typing indicators
+
     When typing indicators are sent and how to tune them.
-  </Card>
 
-  <Card title="Streaming and chunking" href="/concepts/streaming" icon="bars-staggered">
+
+Streaming and chunking
+
     Outbound streaming, chunking, and per-channel formatting.
-  </Card>
 
-  <Card title="Gateway architecture" href="/concepts/architecture" icon="diagram-project">
+
+Gateway architecture
+
     Gateway components and the WebSocket protocol that drives presence updates.
-  </Card>
 
-  <Card title="Gateway protocol" href="/gateway/protocol" icon="plug">
+
+Gateway protocol
+
     The wire protocol for `connect`, `system-event`, and `system-presence`.
-  </Card>
-</CardGroup>
+
+---

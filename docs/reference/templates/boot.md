@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BOOT.md template"
 source: "https://docs.openclaw.ai/reference/templates/BOOT"
-source_hash: "30a4464fd85af76d8ce6ed06c6bb0e82be37d58c660c8f16eca942b920b05d0d"
+source_hash: "675a2e926751a60a9a54b70ea8e0e94f339bc012c8b45aafcd9beaab0d764e13"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/boot.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # BOOT.md template
 Source: https://docs.openclaw.ai/reference/templates/BOOT
 
-
-
 # BOOT.md
 
 Add short, explicit instructions for what OpenClaw should do on startup (enable `hooks.internal.enabled`).
@@ -23,4 +21,6 @@ silent token `NO_REPLY` / `no_reply`.
 
 ## Related
 
-* [Agent workspace](/concepts/agent-workspace)
+- [Agent workspace](/concepts/agent-workspace)
+
+---

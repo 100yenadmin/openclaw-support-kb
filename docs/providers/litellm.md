@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LiteLLM"
 source: "https://docs.openclaw.ai/providers/litellm"
-source_hash: "866430ee8d2f8a3c4a82655026cdbcafb7d9bd170042bca8e0b3d25236b60906"
+source_hash: "00f3f4b3033320c3eccedd55700dc64f51bb23fc9889d0b323e131ced4bd76ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/litellm.md"
@@ -13,76 +13,89 @@ duplicate_index: 1
 # LiteLLM
 Source: https://docs.openclaw.ai/providers/litellm
 
-
-
 [LiteLLM](https://litellm.ai) is an open-source LLM gateway that provides a unified API to 100+ model providers. Route OpenClaw through LiteLLM to get centralized cost tracking, logging, and the flexibility to switch backends without changing your OpenClaw config.
 
-<Tip>
-  **Why use LiteLLM with OpenClaw?**
+Tip
 
-  * **Cost tracking** — See exactly what OpenClaw spends across all models
-  * **Model routing** — Switch between Claude, GPT-4, Gemini, Bedrock without config changes
-  * **Virtual keys** — Create keys with spend limits for OpenClaw
-  * **Logging** — Full request/response logs for debugging
-  * **Fallbacks** — Automatic failover if your primary provider is down
-</Tip>
+**Why use LiteLLM with OpenClaw?**
+
+- **Cost tracking** — See exactly what OpenClaw spends across all models
+- **Model routing** — Switch between Claude, GPT-4, Gemini, Bedrock without config changes
+- **Virtual keys** — Create keys with spend limits for OpenClaw
+- **Logging** — Full request/response logs for debugging
+- **Fallbacks** — Automatic failover if your primary provider is down
 
 ## Quick start
 
-<Tabs>
-  <Tab title="Onboarding (recommended)">
+Tabs
+
+
+Onboarding (recommended)
+
     **Best for:** fastest path to a working LiteLLM setup.
 
-    <Steps>
-      <Step title="Run onboarding">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Steps
+
+
+Run onboarding
+
+        ```bash
         openclaw onboard --auth-choice litellm-api-key
         ```
 
         For non-interactive setup against a remote proxy, pass the proxy URL explicitly:
 
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```bash
         openclaw onboard --non-interactive --auth-choice litellm-api-key --litellm-api-key "$LITELLM_API_KEY" --custom-base-url "https://litellm.example/v1"
         ```
-      </Step>
-    </Steps>
-  </Tab>
 
-  <Tab title="Manual setup">
+
+
+
+
+
+Manual setup
+
     **Best for:** full control over installation and config.
 
-    <Steps>
-      <Step title="Start LiteLLM Proxy">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Steps
+
+
+Start LiteLLM Proxy
+
+        ```bash
         pip install 'litellm[proxy]'
         litellm --model claude-opus-4-6
         ```
-      </Step>
 
-      <Step title="Point OpenClaw to LiteLLM">
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Point OpenClaw to LiteLLM
+
+        ```bash
         export LITELLM_API_KEY="your-litellm-key"
 
         openclaw
         ```
 
         That's it. OpenClaw now routes through LiteLLM.
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+
+
+
+
 
 ## Configuration
 
 ### Environment variables
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 export LITELLM_API_KEY="sk-litellm-key"
 ```
 
 ### Config file
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -127,7 +140,7 @@ LiteLLM can also back the `image_generate` tool through OpenAI-compatible
 `/images/generations` and `/images/edits` routes. Configure a LiteLLM image
 model under `agents.defaults.imageGenerationModel`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   models: {
     providers: {
@@ -153,11 +166,14 @@ private-network override. For a LAN-hosted proxy, set
 `models.providers.litellm.request.allowPrivateNetwork: true` because the API key
 will be sent to the configured proxy host.
 
-<AccordionGroup>
-  <Accordion title="Virtual keys">
+AccordionGroup
+
+
+Virtual keys
+
     Create a dedicated key for OpenClaw with spend limits:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     curl -X POST "http://localhost:4000/key/generate" \
       -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
       -H "Content-Type: application/json" \
@@ -169,12 +185,15 @@ will be sent to the configured proxy host.
     ```
 
     Use the generated key as `LITELLM_API_KEY`.
-  </Accordion>
 
-  <Accordion title="Model routing">
+
+
+
+Model routing
+
     LiteLLM can route model requests to different backends. Configure in your LiteLLM `config.yaml`:
 
-    ```yaml theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```yaml
     model_list:
       - model_name: claude-opus-4-6
         litellm_params:
@@ -188,12 +207,15 @@ will be sent to the configured proxy host.
     ```
 
     OpenClaw keeps requesting `claude-opus-4-6` — LiteLLM handles the routing.
-  </Accordion>
 
-  <Accordion title="Viewing usage">
+
+
+
+Viewing usage
+
     Check LiteLLM's dashboard or API:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     # Key info
     curl "http://localhost:4000/key/info" \
       -H "Authorization: Bearer sk-litellm-key"
@@ -202,40 +224,48 @@ will be sent to the configured proxy host.
     curl "http://localhost:4000/spend/logs" \
       -H "Authorization: Bearer $LITELLM_MASTER_KEY"
     ```
-  </Accordion>
 
-  <Accordion title="Proxy behavior notes">
-    * LiteLLM runs on `http://localhost:4000` by default
-    * OpenClaw connects through LiteLLM's proxy-style OpenAI-compatible `/v1`
+
+
+
+Proxy behavior notes
+
+    - LiteLLM runs on `http://localhost:4000` by default
+    - OpenClaw connects through LiteLLM's proxy-style OpenAI-compatible `/v1`
       endpoint
-    * Native OpenAI-only request shaping does not apply through LiteLLM:
+    - Native OpenAI-only request shaping does not apply through LiteLLM:
       no `service_tier`, no Responses `store`, no prompt-cache hints, and no
       OpenAI reasoning-compat payload shaping
-    * Hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
+    - Hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`)
       are not injected on custom LiteLLM base URLs
-  </Accordion>
-</AccordionGroup>
 
-<Note>
-  For general provider configuration and failover behavior, see [Model Providers](/concepts/model-providers).
-</Note>
+
+Note
+
+For general provider configuration and failover behavior, see [Model Providers](/concepts/model-providers).
 
 ## Related
 
-<CardGroup>
-  <Card title="LiteLLM Docs" href="https://docs.litellm.ai" icon="book">
+CardGroup
+
+
+LiteLLM Docs
+
     Official LiteLLM documentation and API reference.
-  </Card>
 
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
+
+Model selection
+
     Overview of all providers, model refs, and failover behavior.
-  </Card>
 
-  <Card title="Configuration" href="/gateway/configuration" icon="gear">
+
+Configuration
+
     Full config reference.
-  </Card>
 
-  <Card title="Model selection" href="/concepts/models" icon="brain">
+
+Model selection
+
     How to choose and configure models.
-  </Card>
-</CardGroup>
+
+---

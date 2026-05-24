@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "1856b53c01cd85dffc9a5db49214d1256df9caf11e36ce32ae18c1f7cc2cc053"
+source_hash: "c59a7f2c466555b1affba468bc0966fe7e46a833f2840ca566da47654d7ab651"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/nvidia.md"
@@ -13,48 +13,50 @@ duplicate_index: 1
 # NVIDIA
 Source: https://docs.openclaw.ai/providers/nvidia
 
-
-
 NVIDIA provides an OpenAI-compatible API at `https://integrate.api.nvidia.com/v1` for
 open models for free. Authenticate with an API key from
 [build.nvidia.com](https://build.nvidia.com/settings/api-keys).
 
 ## Getting started
 
-<Steps>
-  <Step title="Get your API key">
-    Create an API key at [build.nvidia.com](https://build.nvidia.com/settings/api-keys).
-  </Step>
+Steps
 
-  <Step title="Export the key and run onboarding">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Get your API key
+
+    Create an API key at [build.nvidia.com](https://build.nvidia.com/settings/api-keys).
+
+
+Export the key and run onboarding
+
+    ```bash
     export NVIDIA_API_KEY="nvapi-..."
     openclaw onboard --auth-choice nvidia-api-key
     ```
-  </Step>
 
-  <Step title="Set an NVIDIA model">
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+
+Set an NVIDIA model
+
+    ```bash
     openclaw models set nvidia/nvidia/nemotron-3-super-120b-a12b
     ```
-  </Step>
-</Steps>
 
-<Warning>
-  If you pass `--nvidia-api-key` instead of the env var, the value lands in shell
-  history and `ps` output. Prefer the `NVIDIA_API_KEY` environment variable when
-  possible.
-</Warning>
+
+Warning
+
+If you pass `--nvidia-api-key` instead of the env var, the value lands in shell
+history and `ps` output. Prefer the `NVIDIA_API_KEY` environment variable when
+possible.
 
 For non-interactive setup, you can also pass the key directly:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw onboard --auth-choice nvidia-api-key --nvidia-api-key "nvapi-..."
 ```
 
 ## Config example
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   env: { NVIDIA_API_KEY: "nvapi-..." },
   models: {
@@ -84,29 +86,38 @@ openclaw onboard --auth-choice nvidia-api-key --nvidia-api-key "nvapi-..."
 
 ## Advanced configuration
 
-<AccordionGroup>
-  <Accordion title="Auto-enable behavior">
+AccordionGroup
+
+
+Auto-enable behavior
+
     The provider auto-enables when the `NVIDIA_API_KEY` environment variable is set.
     No explicit provider config is required beyond the key.
-  </Accordion>
 
-  <Accordion title="Catalog and pricing">
+
+
+Catalog and pricing
+
     The bundled catalog is static. Costs default to `0` in source since NVIDIA
     currently offers free API access for the listed models.
-  </Accordion>
 
-  <Accordion title="OpenAI-compatible endpoint">
+
+
+OpenAI-compatible endpoint
+
     NVIDIA uses the standard `/v1` completions endpoint. Any OpenAI-compatible
     tooling should work out of the box with the NVIDIA base URL.
-  </Accordion>
 
-  <Accordion title="Slow custom provider responses">
+
+
+Slow custom provider responses
+
     Some NVIDIA-hosted custom models can take longer than the default model idle
     watchdog before they emit a first response chunk. For custom NVIDIA provider
     entries, raise the provider timeout instead of raising the whole agent
     runtime timeout:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       models: {
         providers: {
@@ -129,23 +140,27 @@ openclaw onboard --auth-choice nvidia-api-key --nvidia-api-key "nvapi-..."
       },
     }
     ```
-  </Accordion>
-</AccordionGroup>
 
-<Tip>
-  NVIDIA models are currently free to use. Check
-  [build.nvidia.com](https://build.nvidia.com/) for the latest availability and
-  rate-limit details.
-</Tip>
+
+
+Tip
+
+NVIDIA models are currently free to use. Check
+[build.nvidia.com](https://build.nvidia.com/) for the latest availability and
+rate-limit details.
 
 ## Related
 
-<CardGroup>
-  <Card title="Model selection" href="/concepts/model-providers" icon="layers">
-    Choosing providers, model refs, and failover behavior.
-  </Card>
+CardGroup
 
-  <Card title="Configuration reference" href="/gateway/configuration-reference" icon="gear">
+
+Model selection
+
+    Choosing providers, model refs, and failover behavior.
+
+
+Configuration reference
+
     Full config reference for agents, models, and providers.
-  </Card>
-</CardGroup>
+
+---

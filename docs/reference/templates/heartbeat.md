@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "HEARTBEAT.md template"
 source: "https://docs.openclaw.ai/reference/templates/HEARTBEAT"
-source_hash: "a2ce6549264066459dc8f49c7aa10ae185e994bfc665a34b45b7db2050adbad0"
+source_hash: "be0f371865fa58283a85a4c144c63f88152fc9905870065845a6a371c0cd266e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/heartbeat.md"
@@ -13,9 +13,7 @@ duplicate_index: 1
 # HEARTBEAT.md template
 Source: https://docs.openclaw.ai/reference/templates/HEARTBEAT
 
-
-
-```markdown theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```markdown
 # Keep this file empty (or with only comments) to skip heartbeat API calls.
 
 # Add tasks below when you want the agent to check something periodically.
@@ -23,4 +21,6 @@ Source: https://docs.openclaw.ai/reference/templates/HEARTBEAT
 
 ## Related
 
-* [Heartbeat config](/gateway/config-agents)
+- [Heartbeat config](/gateway/config-agents)
+
+---

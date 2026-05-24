@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/cli/nodes"
-source_hash: "6667e22886110ae2740ab4c3e82ada48859204a8a60eb14c28e77fbbd90a59fc"
+source_hash: "db8ac5395cee5e0e26f0b1d575d00f6dab089bde6639078656f95e1e7eafdf42"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/nodes.md"
@@ -13,25 +13,23 @@ duplicate_index: 1
 # Nodes
 Source: https://docs.openclaw.ai/cli/nodes
 
-
-
 # `openclaw nodes`
 
 Manage paired nodes (devices) and invoke node capabilities.
 
 Related:
 
-* Nodes overview: [Nodes](/nodes)
-* Camera: [Camera nodes](/nodes/camera)
-* Images: [Image nodes](/nodes/images)
+- Nodes overview: [Nodes](/nodes)
+- Camera: [Camera nodes](/nodes/camera)
+- Images: [Image nodes](/nodes/images)
 
 Common options:
 
-* `--url`, `--token`, `--timeout`, `--json`
+- `--url`, `--token`, `--timeout`, `--json`
 
 ## Common commands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw nodes list
 openclaw nodes list --connected
 openclaw nodes list --last-connected 24h
@@ -52,28 +50,28 @@ Use `nodes remove --node <id|name|ip>` to delete a stale gateway-owned node pair
 
 Approval note:
 
-* `openclaw nodes pending` only needs pairing scope.
-* `gateway.nodes.pairing.autoApproveCidrs` can skip the pending step only for
+- `openclaw nodes pending` only needs pairing scope.
+- `gateway.nodes.pairing.autoApproveCidrs` can skip the pending step only for
   explicitly trusted, first-time `role: node` device pairing. It is off by
   default and does not approve upgrades.
-* `openclaw nodes approve <requestId>` inherits extra scope requirements from the
+- `openclaw nodes approve <requestId>` inherits extra scope requirements from the
   pending request:
-  * commandless request: pairing only
-  * non-exec node commands: pairing + write
-  * `system.run` / `system.run.prepare` / `system.which`: pairing + admin
+  - commandless request: pairing only
+  - non-exec node commands: pairing + write
+  - `system.run` / `system.run.prepare` / `system.which`: pairing + admin
 
 ## Invoke
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw nodes invoke --node <id|name|ip> --command <command> --params <json>
 ```
 
 Invoke flags:
 
-* `--params <json>`: JSON object string (default `{}`).
-* `--invoke-timeout <ms>`: node invoke timeout (default `15000`).
-* `--idempotency-key <key>`: optional idempotency key.
-* `system.run` and `system.run.prepare` are blocked here; use the `exec` tool with `host=node` for shell execution.
+- `--params <json>`: JSON object string (default `{}`).
+- `--invoke-timeout <ms>`: node invoke timeout (default `15000`).
+- `--idempotency-key <key>`: optional idempotency key.
+- `system.run` and `system.run.prepare` are blocked here; use the `exec` tool with `host=node` for shell execution.
 
 For shell execution on a node, use the `exec` tool with `host=node` instead of `openclaw nodes run`.
 The `nodes` CLI is now capability-focused: direct RPC via `nodes invoke`, plus pairing, camera,
@@ -81,5 +79,7 @@ screen, location, Canvas, and notifications. Canvas commands are implemented by 
 
 ## Related
 
-* [CLI reference](/cli)
-* [Nodes](/nodes)
+- [CLI reference](/cli)
+- [Nodes](/nodes)
+
+---

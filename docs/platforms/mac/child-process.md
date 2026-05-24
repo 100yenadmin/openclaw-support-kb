@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway lifecycle on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/child-process"
-source_hash: "5364cfd2c43206d7e6d1cb669b7b43b55fd5deaafc2d58f295c34fb4e86f3634"
+source_hash: "87ad0c4324770f2c86a87708363b916eb77872ff4f60e99ac783b17ed496761e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/child-process.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Gateway lifecycle on macOS
 Source: https://docs.openclaw.ai/platforms/mac/child-process
-
-
 
 The macOS app **manages the Gateway via launchd** by default and does not spawn
 the Gateway as a child process. It first tries to attach to an already-running
@@ -26,15 +24,15 @@ If you need tighter coupling to the UI, run the Gateway manually in a terminal.
 
 ## Default behavior (launchd)
 
-* The app installs a per-user LaunchAgent labeled `ai.openclaw.gateway`
+- The app installs a per-user LaunchAgent labeled `ai.openclaw.gateway`
   (or `ai.openclaw.<profile>` when using `--profile`/`OPENCLAW_PROFILE`; legacy `com.openclaw.*` is supported).
-* When Local mode is enabled, the app ensures the LaunchAgent is loaded and
+- When Local mode is enabled, the app ensures the LaunchAgent is loaded and
   starts the Gateway if needed.
-* Logs are written to the launchd gateway log path (visible in Debug Settings).
+- Logs are written to the launchd gateway log path (visible in Debug Settings).
 
 Common commands:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 launchctl kickstart -k gui/$UID/ai.openclaw.gateway
 launchctl bootout gui/$UID/ai.openclaw.gateway
 ```
@@ -46,12 +44,12 @@ Replace the label with `ai.openclaw.<profile>` when running a named profile.
 `scripts/restart-mac.sh --no-sign` is for fast local builds when you don't have
 signing keys. To prevent launchd from pointing at an unsigned relay binary, it:
 
-* Writes `~/.openclaw/disable-launchagent`.
+- Writes `~/.openclaw/disable-launchagent`.
 
 Signed runs of `scripts/restart-mac.sh` clear this override if the marker is
 present. To reset manually:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 rm ~/.openclaw/disable-launchagent
 ```
 
@@ -69,14 +67,16 @@ remote host and connects over that tunnel.
 
 ## Why we prefer launchd
 
-* Auto-start at login.
-* Built-in restart/KeepAlive semantics.
-* Predictable logs and supervision.
+- Auto-start at login.
+- Built-in restart/KeepAlive semantics.
+- Predictable logs and supervision.
 
 If a true child-process mode is ever needed again, it should be documented as a
 separate, explicit dev-only mode.
 
 ## Related
 
-* [macOS app](/platforms/macos)
-* [Gateway runbook](/gateway)
+- [macOS app](/platforms/macos)
+- [Gateway runbook](/gateway)
+
+---

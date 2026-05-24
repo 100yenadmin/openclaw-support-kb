@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "496f9da9897148f1b88e55abad8a5642e2fb1e417b4164592bb17689b7fe65f8"
+source_hash: "cec99fab725d48993dbbfd12b6039edc001aeb5b022efdf1a3d59032afa53cc7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
@@ -12,8 +12,6 @@ duplicate_index: 1
 
 # Testing: updates and plugins
 Source: https://docs.openclaw.ai/help/testing-updates-plugins
-
-
 
 This is the dedicated checklist for update and plugin validation. The goal is
 simple: prove the installable package can update real user state, repair stale
@@ -27,27 +25,27 @@ keys and network-touching suites, see [Testing live](/help/testing-live).
 
 Update and plugin tests protect these contracts:
 
-* A package tarball is complete, has a valid `dist/postinstall-inventory.json`,
+- A package tarball is complete, has a valid `dist/postinstall-inventory.json`,
   and does not depend on unpacked repo files.
-* A user can move from an older published package to the candidate package
+- A user can move from an older published package to the candidate package
   without losing config, agents, sessions, workspaces, plugin allowlists, or
   channel config.
-* `openclaw doctor --fix --non-interactive` owns legacy cleanup and repair
+- `openclaw doctor --fix --non-interactive` owns legacy cleanup and repair
   paths. Startup should not grow hidden compatibility migrations for stale
   plugin state.
-* Plugin installs work from local directories, git repos, npm packages, and the
+- Plugin installs work from local directories, git repos, npm packages, and the
   ClawHub registry path.
-* Plugin npm dependencies are installed in the managed npm root, scanned before
+- Plugin npm dependencies are installed in the managed npm root, scanned before
   trust, and removed through npm during uninstall so hoisted dependencies do not
   linger.
-* Plugin update is stable when nothing changed: install records, resolved
+- Plugin update is stable when nothing changed: install records, resolved
   source, installed dependency layout, and enabled state stay intact.
 
 ## Local proof during development
 
 Start narrow:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm changed:lanes --json
 pnpm check:changed
 pnpm test:changed
@@ -56,13 +54,13 @@ pnpm test:changed
 For plugin install, uninstall, dependency, or package-inventory changes, also
 run the focused tests that cover the edited seam:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test src/plugins/uninstall.test.ts src/infra/package-dist-inventory.test.ts test/scripts/package-acceptance-workflow.test.ts
 ```
 
 Before any package Docker lane consumes a tarball, prove the package artifact:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm release:check
 ```
 
@@ -79,7 +77,7 @@ Gateway startup, HTTP probes, RPC status, and filesystem state.
 
 Use focused lanes while iterating:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm test:docker:plugins
 pnpm test:docker:plugin-lifecycle-matrix
 pnpm test:docker:plugin-update
@@ -91,7 +89,7 @@ pnpm test:docker:update-migration
 
 Important lanes:
 
-* `test:docker:plugins` validates plugin install smoke, local folder installs,
+- `test:docker:plugins` validates plugin install smoke, local folder installs,
   local folder update skip behavior, local folders with preinstalled
   dependencies, `file:` package installs, git installs with CLI execution, git
   moving-ref updates, npm registry installs with hoisted transitive
@@ -99,24 +97,24 @@ Important lanes:
   local ClawHub fixture installs and update no-ops, marketplace update behavior,
   and Claude-bundle enable/inspect. Set `OPENCLAW_PLUGINS_E2E_CLAWHUB=0` to
   keep the ClawHub block hermetic/offline.
-* `test:docker:plugin-lifecycle-matrix` installs the candidate package in a bare
+- `test:docker:plugin-lifecycle-matrix` installs the candidate package in a bare
   container, runs an npm plugin through install, inspect, disable, enable,
   explicit upgrade, explicit downgrade, and uninstall after deleting the plugin
   code. It logs RSS and CPU metrics for each phase.
-* `test:docker:plugin-update` validates that an unchanged installed plugin does
+- `test:docker:plugin-update` validates that an unchanged installed plugin does
   not reinstall or lose install metadata during `openclaw plugins update`.
-* `test:docker:upgrade-survivor` installs the candidate tarball over a dirty
+- `test:docker:upgrade-survivor` installs the candidate tarball over a dirty
   old-user fixture, runs package update plus non-interactive doctor, then starts
   a loopback Gateway and checks state preservation.
-* `test:docker:published-upgrade-survivor` first installs a published baseline,
+- `test:docker:published-upgrade-survivor` first installs a published baseline,
   configures it through a baked `openclaw config set` recipe, updates it to the
   candidate tarball, runs doctor, checks legacy cleanup, starts the Gateway, and
   probes `/healthz`, `/readyz`, and RPC status.
-* `test:docker:update-restart-auth` installs the candidate package, starts a
+- `test:docker:update-restart-auth` installs the candidate package, starts a
   managed token-auth Gateway, unsets caller gateway auth env for
   `openclaw update --yes --json`, and requires the candidate update command to
   restart the Gateway before the normal probes.
-* `test:docker:update-migration` is the cleanup-heavy published-update lane. It
+- `test:docker:update-migration` is the cleanup-heavy published-update lane. It
   starts from a configured Discord/Telegram-style user state, runs baseline
   doctor so configured plugin dependencies have a chance to materialize, seeds
   legacy plugin dependency debris for a configured packaged plugin, updates to
@@ -125,7 +123,7 @@ Important lanes:
 
 Useful published-upgrade survivor variants:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC=openclaw@2026.4.23 \
 OPENCLAW_UPGRADE_SURVIVOR_SCENARIO=versioned-runtime-deps \
 pnpm test:docker:published-upgrade-survivor
@@ -146,7 +144,7 @@ manual `Update Migration` workflow when the release question is "can every
 published stable release from 2026.4.23 onward update to this candidate and
 clean up plugin dependency debris?":
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 gh workflow run update-migration.yml \
   --ref main \
   -f workflow_ref=main \
@@ -165,12 +163,12 @@ older trusted releases.
 
 Candidate sources:
 
-* `source=npm`: validate `openclaw@beta`, `openclaw@latest`, or an exact
+- `source=npm`: validate `openclaw@beta`, `openclaw@latest`, or an exact
   published version.
-* `source=ref`: pack a trusted branch, tag, or commit with the selected current
+- `source=ref`: pack a trusted branch, tag, or commit with the selected current
   harness.
-* `source=url`: validate an HTTPS tarball with required `package_sha256`.
-* `source=artifact`: reuse a tarball uploaded by another Actions run.
+- `source=url`: validate an HTTPS tarball with required `package_sha256`.
+- `source=artifact`: reuse a tarball uploaded by another Actions run.
 
 Full Release Validation uses `source=artifact` by default, built from the
 resolved release SHA. For post-publish proof, pass
@@ -179,13 +177,13 @@ targets the shipped npm package instead.
 
 Release checks call Package Acceptance with the package/update/restart/plugin set:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 doctor-switch update-channel-switch update-corrupt-plugin upgrade-survivor published-upgrade-survivor update-restart-auth plugins-offline plugin-update
 ```
 
 When release soak is enabled, they also pass:
 
-```text theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```text
 published_upgrade_survivor_baselines=last-stable-4 2026.4.23 2026.5.2 2026.4.15
 published_upgrade_survivor_scenarios=reported-issues
 telegram_mode=mock-openai
@@ -214,7 +212,7 @@ serial job.
 
 Run a package profile manually when validating a candidate before release:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 gh workflow run package-acceptance.yml \
   --ref main \
   -f workflow_ref=main \
@@ -250,11 +248,11 @@ in Testbox unless explicitly doing local proof.
 
 Compatibility leniency is narrow and time boxed:
 
-* Packages through `2026.4.25`, including `2026.4.25-beta.*`, may tolerate
+- Packages through `2026.4.25`, including `2026.4.25-beta.*`, may tolerate
   already-shipped package metadata gaps in Package Acceptance.
-* The published `2026.4.26` package may warn for local build metadata stamp
+- The published `2026.4.26` package may warn for local build metadata stamp
   files already shipped.
-* Later packages must satisfy modern contracts. The same gaps fail instead of
+- Later packages must satisfy modern contracts. The same gaps fail instead of
   warning or skipping.
 
 Do not add new startup migrations for these old shapes. Add or extend a doctor
@@ -266,15 +264,15 @@ repair, then prove it with `upgrade-survivor`, `published-upgrade-survivor`, or
 When changing update or plugin behavior, add coverage at the lowest layer that
 can fail for the right reason:
 
-* Pure path or metadata logic: unit test beside the source.
-* Package inventory or packed-file behavior: `package-dist-inventory` or tarball
+- Pure path or metadata logic: unit test beside the source.
+- Package inventory or packed-file behavior: `package-dist-inventory` or tarball
   checker test.
-* CLI install/update behavior: Docker lane assertion or fixture.
-* Published-release migration behavior: `published-upgrade-survivor` scenario.
-* Update-owned restart behavior: `update-restart-auth`.
-* Registry/package source behavior: `test:docker:plugins` fixture or ClawHub
+- CLI install/update behavior: Docker lane assertion or fixture.
+- Published-release migration behavior: `published-upgrade-survivor` scenario.
+- Update-owned restart behavior: `update-restart-auth`.
+- Registry/package source behavior: `test:docker:plugins` fixture or ClawHub
   fixture server.
-* Dependency layout or cleanup behavior: assert both runtime execution and the
+- Dependency layout or cleanup behavior: assert both runtime execution and the
   filesystem boundary. npm dependencies may be hoisted under the managed npm
   root, so tests should prove the root is scanned/cleaned instead of assuming a
   package-local `node_modules` tree.
@@ -286,13 +284,15 @@ fake packages unless the point of the test is live registry behavior.
 
 Start with the artifact identity:
 
-* Package Acceptance `resolve_package` summary: source, version, SHA-256, and
+- Package Acceptance `resolve_package` summary: source, version, SHA-256, and
   artifact name.
-* Docker artifacts: `.artifacts/docker-tests/**/summary.json`,
+- Docker artifacts: `.artifacts/docker-tests/**/summary.json`,
   `failures.json`, lane logs, and rerun commands.
-* Upgrade survivor summary: `.artifacts/upgrade-survivor/summary.json`,
+- Upgrade survivor summary: `.artifacts/upgrade-survivor/summary.json`,
   including baseline version, candidate version, scenario, phase timings, and
   recipe steps.
 
 Prefer rerunning the failed exact lane with the same package artifact over
 rerunning the whole release umbrella.
+
+---

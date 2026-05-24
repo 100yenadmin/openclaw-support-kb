@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Adding capabilities (contributor guide)"
 source: "https://docs.openclaw.ai/plugins/adding-capabilities"
-source_hash: "84738fda04e13b61b45fb444a1afe214d10cf27390a5ff60d275e852cdce6703"
+source_hash: "819f81fda3c2a08719a6d3a67d216065b6d46c824380b832bb0237235344ca14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/adding-capabilities.md"
@@ -13,22 +13,20 @@ duplicate_index: 1
 # Adding capabilities (contributor guide)
 Source: https://docs.openclaw.ai/plugins/adding-capabilities
 
+Info
 
-
-<Info>
   This is a **contributor guide** for OpenClaw core developers. If you are
   building an external plugin, see [Building plugins](/plugins/building-plugins)
   instead. For the deep architecture reference (capability model, ownership,
   load pipeline, runtime helpers), see [Plugin internals](/plugins/architecture).
-</Info>
 
 Use this when OpenClaw needs a new shared domain such as embeddings, image
 generation, video generation, or some future vendor-backed feature area.
 
 The rule:
 
-* **plugin** = ownership boundary
-* **capability** = shared core contract
+- **plugin** = ownership boundary
+- **capability** = shared core contract
 
 Do not start by wiring a vendor directly into a channel or a tool. Start by defining the capability.
 
@@ -56,23 +54,23 @@ If the work is vendor-only and no shared contract exists yet, stop and define th
 
 **Core:**
 
-* Request/response types.
-* Provider registry + resolution.
-* Fallback behavior.
-* Config schema with propagated `title` / `description` docs metadata on nested object, wildcard, array-item, and composition nodes.
-* Runtime helper surface.
+- Request/response types.
+- Provider registry + resolution.
+- Fallback behavior.
+- Config schema with propagated `title` / `description` docs metadata on nested object, wildcard, array-item, and composition nodes.
+- Runtime helper surface.
 
 **Vendor plugin:**
 
-* Vendor API calls.
-* Vendor auth handling.
-* Vendor-specific request normalization.
-* Registration of the capability implementation.
+- Vendor API calls.
+- Vendor auth handling.
+- Vendor-specific request normalization.
+- Registration of the capability implementation.
 
 **Feature/channel plugin:**
 
-* Calls `api.runtime.*` or the matching `plugin-sdk/*-runtime` helper.
-* Never calls a vendor implementation directly.
+- Calls `api.runtime.*` or the matching `plugin-sdk/*-runtime` helper.
+- Never calls a vendor implementation directly.
 
 ## Provider and harness seams
 
@@ -82,27 +80,27 @@ Use **agent harness hooks** when the behavior belongs to the runtime that is exe
 
 Keep both seams narrow:
 
-* Core owns the retry/fallback policy.
-* Provider plugins own provider-specific request/auth/routing hints.
-* Harness plugins own runtime-specific attempt classification.
-* Third-party plugins return hints, not direct mutations of core state.
+- Core owns the retry/fallback policy.
+- Provider plugins own provider-specific request/auth/routing hints.
+- Harness plugins own runtime-specific attempt classification.
+- Third-party plugins return hints, not direct mutations of core state.
 
 ## File checklist
 
 For a new capability, expect to touch these areas:
 
-* `src/<capability>/types.ts`
-* `src/<capability>/...registry/runtime.ts`
-* `src/plugins/types.ts`
-* `src/plugins/registry.ts`
-* `src/plugins/captured-registration.ts`
-* `src/plugins/contracts/registry.ts`
-* `src/plugins/runtime/types-core.ts`
-* `src/plugins/runtime/index.ts`
-* `src/plugin-sdk/<capability>.ts`
-* `src/plugin-sdk/<capability>-runtime.ts`
-* One or more bundled plugin packages.
-* Config, docs, tests.
+- `src/<capability>/types.ts`
+- `src/<capability>/...registry/runtime.ts`
+- `src/plugins/types.ts`
+- `src/plugins/registry.ts`
+- `src/plugins/captured-registration.ts`
+- `src/plugins/contracts/registry.ts`
+- `src/plugins/runtime/types-core.ts`
+- `src/plugins/runtime/index.ts`
+- `src/plugin-sdk/<capability>.ts`
+- `src/plugin-sdk/<capability>-runtime.ts`
+- One or more bundled plugin packages.
+- Config, docs, tests.
 
 ## Worked example: image generation
 
@@ -116,8 +114,8 @@ Image generation follows the standard shape:
 
 The config key is intentionally separate from vision-analysis routing:
 
-* `agents.defaults.imageModel` analyzes images.
-* `agents.defaults.imageGenerationModel` generates images.
+- `agents.defaults.imageModel` analyzes images.
+- `agents.defaults.imageGenerationModel` generates images.
 
 Keep those separate so fallback and policy remain explicit.
 
@@ -138,17 +136,19 @@ usable by memory.
 
 Before shipping a new capability, verify:
 
-* No channel/tool imports vendor code directly.
-* The runtime helper is the shared path.
-* At least one contract test asserts bundled ownership.
-* Config docs name the new model/config key.
-* Plugin docs explain the ownership boundary.
+- No channel/tool imports vendor code directly.
+- The runtime helper is the shared path.
+- At least one contract test asserts bundled ownership.
+- Config docs name the new model/config key.
+- Plugin docs explain the ownership boundary.
 
 If a PR skips the capability layer and hardcodes vendor behavior into a channel/tool, send it back and define the contract first.
 
 ## Related
 
-* [Plugin internals](/plugins/architecture) — capability model, ownership, load pipeline, runtime helpers.
-* [Building plugins](/plugins/building-plugins) — first-plugin tutorial.
-* [SDK overview](/plugins/sdk-overview) — import map and registration API reference.
-* [Creating skills](/tools/creating-skills) — companion contributor surface.
+- [Plugin internals](/plugins/architecture) — capability model, ownership, load pipeline, runtime helpers.
+- [Building plugins](/plugins/building-plugins) — first-plugin tutorial.
+- [SDK overview](/plugins/sdk-overview) — import map and registration API reference.
+- [Creating skills](/tools/creating-skills) — companion contributor surface.
+
+---

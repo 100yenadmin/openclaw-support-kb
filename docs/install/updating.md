@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "61e936be2727aafbe64cdd6bd4683d9922e60f51506ba17c091c40aa664b1869"
+source_hash: "cfab36106e37bd89b8447b4ced0a2069e34c8b50817c7d9452593aa26a8d5537"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -13,21 +13,19 @@ duplicate_index: 1
 # Updating
 Source: https://docs.openclaw.ai/install/updating
 
-
-
 Keep OpenClaw up to date.
 
 ## Recommended: `openclaw update`
 
 The fastest way to update. It detects your install type (npm or git), fetches the latest version, runs `openclaw doctor`, and restarts the gateway.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update
 ```
 
 To switch channels or target a specific version:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update --channel beta
 openclaw update --channel dev
 openclaw update --dry-run   # preview without applying
@@ -59,7 +57,7 @@ Use channels when you want to change the install type. The updater keeps your
 state, config, credentials, and workspace in `~/.openclaw`; it only changes
 which OpenClaw code install the CLI and gateway use.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 # npm package install -> editable git checkout
 openclaw update --channel dev
 
@@ -69,7 +67,7 @@ openclaw update --channel stable
 
 Run with `--dry-run` first to preview the exact install-mode switch:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw update --channel dev --dry-run
 openclaw update --channel stable --dry-run
 ```
@@ -88,7 +86,7 @@ before replacing the package.
 
 ## Alternative: re-run the installer
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -fsSL https://openclaw.ai/install.sh | bash
 ```
 
@@ -100,19 +98,19 @@ If `openclaw update` fails after the npm package install phase, re-run the
 installer. The installer does not call the old updater; it runs the global
 package install directly and can recover a partially updated npm install.
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method npm
 ```
 
 To pin the recovery to a specific version or dist-tag, add `--version`:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method npm --version <version-or-dist-tag>
 ```
 
 ## Alternative: manual npm, pnpm, or bun
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm i -g openclaw@latest
 ```
 
@@ -130,7 +128,7 @@ manual package replacement. Use the same `openclaw` profile flags or environment
 you normally use for that Gateway. Replace `/usr/bin/npm` with the system npm
 that owns the root-owned global prefix on your host:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway stop
 sudo /usr/bin/npm i -g openclaw@latest
 openclaw gateway install --force
@@ -139,7 +137,7 @@ openclaw gateway restart
 
 Then verify the service:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw --version
 curl -fsS http://127.0.0.1:18789/readyz
 openclaw plugins list --json
@@ -161,41 +159,47 @@ policy as a derived `before` cutoff; both are useful for general supply-chain
 quarantine policies, but an explicit OpenClaw update means "install the selected
 OpenClaw release now."
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 pnpm add -g openclaw@latest
 ```
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 bun add -g openclaw@latest
 ```
 
 ### Advanced npm install topics
 
-<AccordionGroup>
-  <Accordion title="Read-only package tree">
+AccordionGroup
+
+
+Read-only package tree
+
     OpenClaw treats packaged global installs as read-only at runtime, even when the global package directory is writable by the current user. Plugin package installs live in OpenClaw-owned npm/git roots under the user config directory, and Gateway startup does not mutate the OpenClaw package tree.
 
     Some Linux npm setups install global packages under root-owned directories such as `/usr/lib/node_modules/openclaw`. OpenClaw supports that layout because plugin install/update commands write outside that global package directory.
-  </Accordion>
 
-  <Accordion title="Hardened systemd units">
+
+
+Hardened systemd units
+
     Give OpenClaw write access to its config/state roots so explicit plugin installs, plugin updates, and doctor cleanup can persist their changes:
 
-    ```ini theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```ini
     ReadWritePaths=/var/lib/openclaw /home/openclaw/.openclaw /tmp
     ```
-  </Accordion>
 
-  <Accordion title="Disk-space preflight">
+
+
+Disk-space preflight
+
     Before package updates and explicit plugin installs, OpenClaw tries a best-effort disk-space check for the target volume. Low space produces a warning with the checked path, but does not block the update because filesystem quotas, snapshots, and network volumes can change after the check. The actual package-manager install and post-install verification remain authoritative.
-  </Accordion>
-</AccordionGroup>
+
 
 ## Auto-updater
 
 The auto-updater is off by default. Enable it in `~/.openclaw/openclaw.json`:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   update: {
     channel: "stable",
@@ -229,45 +233,45 @@ safe shell command instead of running the package manager in-process.
 
 ## After updating
 
-<Steps>
-  ### Run doctor
+Steps
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  openclaw doctor
-  ```
+### Run doctor
 
-  Migrates config, audits DM policies, and checks gateway health. Details: [Doctor](/gateway/doctor)
+```bash
+openclaw doctor
+```
 
-  ### Restart the gateway
+Migrates config, audits DM policies, and checks gateway health. Details: [Doctor](/gateway/doctor)
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  openclaw gateway restart
-  ```
+### Restart the gateway
 
-  ### Verify
+```bash
+openclaw gateway restart
+```
 
-  ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
-  openclaw health
-  ```
-</Steps>
+### Verify
+
+```bash
+openclaw health
+```
 
 ## Rollback
 
 ### Pin a version (npm)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm i -g openclaw@<version>
 openclaw doctor
 openclaw gateway restart
 ```
 
-<Tip>
-  `npm view openclaw version` shows the current published version.
-</Tip>
+Tip
+
+`npm view openclaw version` shows the current published version.
 
 ### Pin a commit (source)
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 git fetch origin
 git checkout "$(git rev-list -n 1 --before=\"2026-01-01\" origin/main)"
 pnpm install && pnpm build
@@ -278,13 +282,15 @@ To return to latest: `git checkout main && git pull`.
 
 ## If you are stuck
 
-* Run `openclaw doctor` again and read the output carefully.
-* For `openclaw update --channel dev` on source checkouts, the updater auto-bootstraps `pnpm` when needed. If you see a pnpm/corepack bootstrap error, install `pnpm` manually (or re-enable `corepack`) and rerun the update.
-* Check: [Troubleshooting](/gateway/troubleshooting)
-* Ask in Discord: [https://discord.gg/clawd](https://discord.gg/clawd)
+- Run `openclaw doctor` again and read the output carefully.
+- For `openclaw update --channel dev` on source checkouts, the updater auto-bootstraps `pnpm` when needed. If you see a pnpm/corepack bootstrap error, install `pnpm` manually (or re-enable `corepack`) and rerun the update.
+- Check: [Troubleshooting](/gateway/troubleshooting)
+- Ask in Discord: [https://discord.gg/clawd](https://discord.gg/clawd)
 
 ## Related
 
-* [Install overview](/install): all installation methods.
-* [Doctor](/gateway/doctor): health checks after updates.
-* [Migrating](/install/migrating): major version migration guides.
+- [Install overview](/install): all installation methods.
+- [Doctor](/gateway/doctor): health checks after updates.
+- [Migrating](/install/migrating): major version migration guides.
+
+---

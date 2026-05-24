@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Flows (redirect)"
 source: "https://docs.openclaw.ai/cli/flows"
-source_hash: "debc50735d871b269797e6d2bd813038167b75e8b30f81797854c8f29796dd71"
+source_hash: "714447d02cf8c7c0e88bec0ad7aa15947102903c89da7679ef5f1e294a2f48ad"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/flows.md"
@@ -13,15 +13,13 @@ duplicate_index: 1
 # Flows (redirect)
 Source: https://docs.openclaw.ai/cli/flows
 
-
-
 # `openclaw tasks flow`
 
 There is no top-level `openclaw flows` command. Durable TaskFlow inspection lives under `openclaw tasks flow`.
 
 ## Subcommands
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks flow list   [--json] [--status <name>]
 openclaw tasks flow show   <lookup> [--json]
 openclaw tasks flow cancel <lookup>
@@ -43,7 +41,7 @@ openclaw tasks flow cancel <lookup>
 
 ## Examples
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw tasks flow list
 openclaw tasks flow list --status running
 openclaw tasks flow list --json
@@ -56,6 +54,8 @@ For full TaskFlow concepts and authoring see [TaskFlow](/automation/taskflow). F
 
 ## Related
 
-* [CLI reference](/cli)
-* [Automation](/automation)
-* [TaskFlow](/automation/taskflow)
+- [CLI reference](/cli)
+- [Automation](/automation)
+- [TaskFlow](/automation/taskflow)
+
+---

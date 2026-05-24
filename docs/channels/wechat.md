@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WeChat"
 source: "https://docs.openclaw.ai/channels/wechat"
-source_hash: "a967009f86c845e70d679be03af7fe18c3800e184fca772ccb68588b5d6c3d55"
+source_hash: "28bfe0d9c6a09f0d0389f7c26d4c3ae66ca165617c74a9fa22703dc6db4e1645"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/wechat.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # WeChat
 Source: https://docs.openclaw.ai/channels/wechat
 
-
-
 OpenClaw connects to WeChat through Tencent's external
 `@tencent-weixin/openclaw-weixin` channel plugin.
 
@@ -23,10 +21,10 @@ advertised by the current plugin capability metadata.
 
 ## Naming
 
-* **WeChat** is the user-facing name in these docs.
-* **Weixin** is the name used by Tencent's package and by the plugin id.
-* `openclaw-weixin` is the OpenClaw channel id.
-* `@tencent-weixin/openclaw-weixin` is the npm package.
+- **WeChat** is the user-facing name in these docs.
+- **Weixin** is the name used by Tencent's package and by the plugin id.
+- `openclaw-weixin` is the OpenClaw channel id.
+- `@tencent-weixin/openclaw-weixin` is the npm package.
 
 Use `openclaw-weixin` in CLI commands and config paths.
 
@@ -54,20 +52,20 @@ monitoring are owned by the external plugin.
 
 Quick install:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npx -y @tencent-weixin/openclaw-weixin-cli install
 ```
 
 Manual install:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install "@tencent-weixin/openclaw-weixin"
 openclaw config set plugins.entries.openclaw-weixin.enabled true
 ```
 
 Restart the Gateway after install:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw gateway restart
 ```
 
@@ -75,7 +73,7 @@ openclaw gateway restart
 
 Run QR login on the same machine that runs the Gateway:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw channels login --channel openclaw-weixin
 ```
 
@@ -85,7 +83,7 @@ the account token locally after a successful scan.
 To add another WeChat account, run the same login command again. For multiple
 accounts, isolate direct-message sessions by account, channel, and sender:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set session.dmScope per-account-channel-peer
 ```
 
@@ -96,9 +94,11 @@ plugins.
 
 Approve new senders:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw pairing list openclaw-weixin
-openclaw pairing approve openclaw-weixin <CODE>
+openclaw pairing approve openclaw-weixin
+CODE
+
 ```
 
 For the full access-control model, see [Pairing](/channels/pairing).
@@ -115,7 +115,7 @@ The plugin checks the host OpenClaw version at startup.
 If the plugin reports that your OpenClaw version is too old, either update
 OpenClaw or install the legacy plugin line:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins install @tencent-weixin/openclaw-weixin@legacy
 ```
 
@@ -134,7 +134,7 @@ generic; it is not a WeChat-specific path in core.
 
 Check install and status:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw plugins list
 openclaw channels status --probe
 openclaw --version
@@ -143,7 +143,7 @@ openclaw --version
 If the channel shows as installed but does not connect, confirm that the plugin is
 enabled and restart:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.openclaw-weixin.enabled true
 openclaw gateway restart
 ```
@@ -151,7 +151,7 @@ openclaw gateway restart
 If the Gateway restarts repeatedly after enabling WeChat, update both OpenClaw and
 the plugin:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 npm view @tencent-weixin/openclaw-weixin version
 openclaw plugins install "@tencent-weixin/openclaw-weixin" --force
 openclaw gateway restart
@@ -164,16 +164,18 @@ publisher ships a fixed package, or temporarily disable/uninstall the plugin.
 
 Temporary disable:
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config set plugins.entries.openclaw-weixin.enabled false
 openclaw gateway restart
 ```
 
 ## Related docs
 
-* Channel overview: [Chat Channels](/channels)
-* Pairing: [Pairing](/channels/pairing)
-* Channel routing: [Channel Routing](/channels/channel-routing)
-* Plugin architecture: [Plugin Architecture](/plugins/architecture)
-* Channel plugin SDK: [Channel Plugin SDK](/plugins/sdk-channel-plugins)
-* External package: [@tencent-weixin/openclaw-weixin](https://www.npmjs.com/package/@tencent-weixin/openclaw-weixin)
+- Channel overview: [Chat Channels](/channels)
+- Pairing: [Pairing](/channels/pairing)
+- Channel routing: [Channel Routing](/channels/channel-routing)
+- Plugin architecture: [Plugin Architecture](/plugins/architecture)
+- Channel plugin SDK: [Channel Plugin SDK](/plugins/sdk-channel-plugins)
+- External package: [@tencent-weixin/openclaw-weixin](https://www.npmjs.com/package/@tencent-weixin/openclaw-weixin)
+
+---

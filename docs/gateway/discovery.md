@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discovery and transports"
 source: "https://docs.openclaw.ai/gateway/discovery"
-source_hash: "9592f9f01a39b482987a1a00c6f621c4d5eec3815233a4383bddd84e6745cb8e"
+source_hash: "ee3df22cde452419cb5ed39e82f75494d5314fdd9b7039ff711d7a151ed2f91d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/discovery.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Discovery and transports
 Source: https://docs.openclaw.ai/gateway/discovery
 
-
-
 OpenClaw has two distinct problems that look similar on the surface:
 
 1. **Operator remote control**: the macOS menu bar app controlling a gateway running elsewhere.
@@ -24,29 +22,29 @@ The design goal is to keep all network discovery/advertising in the **Node Gatew
 
 ## Terms
 
-* **Gateway**: a single long-running gateway process that owns state (sessions, pairing, node registry) and runs channels. Most setups use one per host; isolated multi-gateway setups are possible.
-* **Gateway WS (control plane)**: the WebSocket endpoint on `127.0.0.1:18789` by default; can be bound to LAN/tailnet via `gateway.bind`.
-* **Direct WS transport**: a LAN/tailnet-facing Gateway WS endpoint (no SSH).
-* **SSH transport (fallback)**: remote control by forwarding `127.0.0.1:18789` over SSH.
-* **Legacy TCP bridge (removed)**: older node transport (see
+- **Gateway**: a single long-running gateway process that owns state (sessions, pairing, node registry) and runs channels. Most setups use one per host; isolated multi-gateway setups are possible.
+- **Gateway WS (control plane)**: the WebSocket endpoint on `127.0.0.1:18789` by default; can be bound to LAN/tailnet via `gateway.bind`.
+- **Direct WS transport**: a LAN/tailnet-facing Gateway WS endpoint (no SSH).
+- **SSH transport (fallback)**: remote control by forwarding `127.0.0.1:18789` over SSH.
+- **Legacy TCP bridge (removed)**: older node transport (see
   [Bridge protocol](/gateway/bridge-protocol)); no longer advertised for
   discovery and no longer part of current builds.
 
 Protocol details:
 
-* [Gateway protocol](/gateway/protocol)
-* [Bridge protocol (legacy)](/gateway/bridge-protocol)
+- [Gateway protocol](/gateway/protocol)
+- [Bridge protocol (legacy)](/gateway/bridge-protocol)
 
 ## Why we keep both direct and SSH
 
-* **Direct WS** is the best UX on the same network and within a tailnet:
-  * auto-discovery on LAN via Bonjour
-  * pairing tokens + ACLs owned by the gateway
-  * no shell access required; protocol surface can stay tight and auditable
-* **SSH** remains the universal fallback:
-  * works anywhere you have SSH access (even across unrelated networks)
-  * survives multicast/mDNS issues
-  * requires no new inbound ports besides SSH
+- **Direct WS** is the best UX on the same network and within a tailnet:
+  - auto-discovery on LAN via Bonjour
+  - pairing tokens + ACLs owned by the gateway
+  - no shell access required; protocol surface can stay tight and auditable
+- **SSH** remains the universal fallback:
+  - works anywhere you have SSH access (even across unrelated networks)
+  - survives multicast/mDNS issues
+  - requires no new inbound ports besides SSH
 
 ## Discovery inputs (how clients learn where the gateway is)
 
@@ -55,62 +53,62 @@ Protocol details:
 Multicast Bonjour is best-effort and does not cross networks. OpenClaw can also browse the
 same gateway beacon via a configured wide-area DNS-SD domain, so discovery can cover:
 
-* `local.` on the same LAN
-* a configured unicast DNS-SD domain for cross-network discovery
+- `local.` on the same LAN
+- a configured unicast DNS-SD domain for cross-network discovery
 
 Target direction:
 
-* The **gateway** advertises its WS endpoint via Bonjour when the bundled
+- The **gateway** advertises its WS endpoint via Bonjour when the bundled
   `bonjour` plugin is enabled. The plugin auto-starts on macOS hosts and is
   opt-in elsewhere.
-* Clients browse and show a "pick a gateway" list, then store the chosen endpoint.
+- Clients browse and show a "pick a gateway" list, then store the chosen endpoint.
 
 Troubleshooting and beacon details: [Bonjour](/gateway/bonjour).
 
 #### Service beacon details
 
-* Service types:
-  * `_openclaw-gw._tcp` (gateway transport beacon)
-* TXT keys (non-secret):
-  * `role=gateway`
-  * `transport=gateway`
-  * `displayName=<friendly name>` (operator-configured display name)
-  * `lanHost=<hostname>.local`
-  * `gatewayPort=18789` (Gateway WS + HTTP)
-  * `gatewayTls=1` (only when TLS is enabled)
-  * `gatewayTlsSha256=<sha256>` (only when TLS is enabled and fingerprint is available)
-  * `canvasPort=<port>` (canvas host port; currently the same as `gatewayPort` when the canvas host is enabled)
-  * `tailnetDns=<magicdns>` (optional hint; auto-detected when Tailscale is available)
-  * `sshPort=<port>` (mDNS full mode only; wide-area DNS-SD may omit it, in which case SSH defaults stay at `22`)
-  * `cliPath=<path>` (mDNS full mode only; wide-area DNS-SD still writes it as a remote-install hint)
+- Service types:
+  - `_openclaw-gw._tcp` (gateway transport beacon)
+- TXT keys (non-secret):
+  - `role=gateway`
+  - `transport=gateway`
+  - `displayName=<friendly name>` (operator-configured display name)
+  - `lanHost=<hostname>.local`
+  - `gatewayPort=18789` (Gateway WS + HTTP)
+  - `gatewayTls=1` (only when TLS is enabled)
+  - `gatewayTlsSha256=<sha256>` (only when TLS is enabled and fingerprint is available)
+  - `canvasPort=<port>` (canvas host port; currently the same as `gatewayPort` when the canvas host is enabled)
+  - `tailnetDns=<magicdns>` (optional hint; auto-detected when Tailscale is available)
+  - `sshPort=<port>` (mDNS full mode only; wide-area DNS-SD may omit it, in which case SSH defaults stay at `22`)
+  - `cliPath=<path>` (mDNS full mode only; wide-area DNS-SD still writes it as a remote-install hint)
 
 Security notes:
 
-* Bonjour/mDNS TXT records are **unauthenticated**. Clients must treat TXT values as UX hints only.
-* Routing (host/port) should prefer the **resolved service endpoint** (SRV + A/AAAA) over TXT-provided `lanHost`, `tailnetDns`, or `gatewayPort`.
-* TLS pinning must never allow an advertised `gatewayTlsSha256` to override a previously stored pin.
-* iOS/Android nodes should require an explicit "trust this fingerprint" confirmation before storing a first-time pin (out-of-band verification) whenever the chosen route is secure/TLS-based.
+- Bonjour/mDNS TXT records are **unauthenticated**. Clients must treat TXT values as UX hints only.
+- Routing (host/port) should prefer the **resolved service endpoint** (SRV + A/AAAA) over TXT-provided `lanHost`, `tailnetDns`, or `gatewayPort`.
+- TLS pinning must never allow an advertised `gatewayTlsSha256` to override a previously stored pin.
+- iOS/Android nodes should require an explicit "trust this fingerprint" confirmation before storing a first-time pin (out-of-band verification) whenever the chosen route is secure/TLS-based.
 
 Enable/disable/override:
 
-* `openclaw plugins enable bonjour` enables LAN multicast advertising.
-* `OPENCLAW_DISABLE_BONJOUR=1` disables advertising.
-* When the Bonjour plugin is enabled and `OPENCLAW_DISABLE_BONJOUR` is unset,
+- `openclaw plugins enable bonjour` enables LAN multicast advertising.
+- `OPENCLAW_DISABLE_BONJOUR=1` disables advertising.
+- When the Bonjour plugin is enabled and `OPENCLAW_DISABLE_BONJOUR` is unset,
   Bonjour advertises on normal hosts and auto-disables inside detected containers.
   Empty-config macOS Gateway startup enables the plugin automatically; Linux,
   Windows, and containerized deployments need explicit enablement.
   Use `0` only on host, macvlan, or another mDNS-capable network; use `1` to
   force-disable.
-* `gateway.bind` in `~/.openclaw/openclaw.json` controls the Gateway bind mode.
-* `OPENCLAW_SSH_PORT` overrides the SSH port advertised when `sshPort` is emitted.
-* `OPENCLAW_TAILNET_DNS` publishes a `tailnetDns` hint (MagicDNS).
-* `OPENCLAW_CLI_PATH` overrides the advertised CLI path.
+- `gateway.bind` in `~/.openclaw/openclaw.json` controls the Gateway bind mode.
+- `OPENCLAW_SSH_PORT` overrides the SSH port advertised when `sshPort` is emitted.
+- `OPENCLAW_TAILNET_DNS` publishes a `tailnetDns` hint (MagicDNS).
+- `OPENCLAW_CLI_PATH` overrides the advertised CLI path.
 
 ### 2) Tailnet (cross-network)
 
 For London/Vienna style setups, Bonjour won't help. The recommended "direct" target is:
 
-* Tailscale MagicDNS name (preferred) or a stable tailnet IP.
+- Tailscale MagicDNS name (preferred) or a stable tailnet IP.
 
 If the gateway can detect it is running under Tailscale, it publishes `tailnetDns` as an optional hint for clients (including wide-area beacons).
 
@@ -118,10 +116,10 @@ The macOS app now prefers MagicDNS names over raw Tailscale IPs for gateway disc
 
 For mobile node pairing, discovery hints do not relax transport security on tailnet/public routes:
 
-* iOS/Android still require a secure first-time tailnet/public connect path (`wss://` or Tailscale Serve/Funnel).
-* A discovered raw tailnet IP is a routing hint, not permission to use plaintext remote `ws://`.
-* Private LAN direct-connect `ws://` remains supported.
-* If you want the simplest Tailscale path for mobile nodes, use Tailscale Serve so discovery and the setup code both resolve to the same secure MagicDNS endpoint.
+- iOS/Android still require a secure first-time tailnet/public connect path (`wss://` or Tailscale Serve/Funnel).
+- A discovered raw tailnet IP is a routing hint, not permission to use plaintext remote `ws://`.
+- Private LAN direct-connect `ws://` remains supported.
+- If you want the simplest Tailscale path for mobile nodes, use Tailscale Serve so discovery and the setup code both resolve to the same secure MagicDNS endpoint.
 
 ### 3) Manual / SSH target
 
@@ -143,20 +141,22 @@ Recommended client behavior:
 
 The gateway is the source of truth for node/client admission.
 
-* Pairing requests are created/approved/rejected in the gateway (see [Gateway pairing](/gateway/pairing)).
-* The gateway enforces:
-  * auth (token / keypair)
-  * scopes/ACLs (the gateway is not a raw proxy to every method)
-  * rate limits
+- Pairing requests are created/approved/rejected in the gateway (see [Gateway pairing](/gateway/pairing)).
+- The gateway enforces:
+  - auth (token / keypair)
+  - scopes/ACLs (the gateway is not a raw proxy to every method)
+  - rate limits
 
 ## Responsibilities by component
 
-* **Gateway**: advertises discovery beacons, owns pairing decisions, and hosts the WS endpoint.
-* **macOS app**: helps you pick a gateway, shows pairing prompts, and uses SSH only as a fallback.
-* **iOS/Android nodes**: browse Bonjour as a convenience and connect to the paired Gateway WS.
+- **Gateway**: advertises discovery beacons, owns pairing decisions, and hosts the WS endpoint.
+- **macOS app**: helps you pick a gateway, shows pairing prompts, and uses SSH only as a fallback.
+- **iOS/Android nodes**: browse Bonjour as a convenience and connect to the paired Gateway WS.
 
 ## Related
 
-* [Remote access](/gateway/remote)
-* [Tailscale](/gateway/tailscale)
-* [Bonjour discovery](/gateway/bonjour)
+- [Remote access](/gateway/remote)
+- [Tailscale](/gateway/tailscale)
+- [Bonjour discovery](/gateway/bonjour)
+
+---

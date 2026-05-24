@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "77b8c81859823244abdf8f7826aea554a78933da3c13f60fe0f072bfaa686ca0"
+source_hash: "932a64d16ea469f81c5e3b0562977043ffbcea69d7a076c8ab71ba941fa4495f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -13,8 +13,6 @@ duplicate_index: 1
 # Exec tool
 Source: https://docs.openclaw.ai/tools/exec
 
-
-
 Run shell commands in the workspace. `exec` is a mutating shell surface: commands can create, edit, or delete files wherever the selected host or sandbox filesystem permits. Disabling OpenClaw filesystem tools such as `write`, `edit`, or `apply_patch` does not make `exec` read-only.
 
 Supports foreground + background execution via `process`. If `process` is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.
@@ -22,111 +20,111 @@ Background sessions are scoped per agent; `process` only sees sessions from the 
 
 ## Parameters
 
-<ParamField type="string">
-  Shell command to run.
-</ParamField>
+ParamField
 
-<ParamField type="string">
-  Working directory for the command.
-</ParamField>
+Shell command to run.
 
-<ParamField type="object">
-  Key/value environment overrides merged on top of the inherited environment.
-</ParamField>
+ParamField
 
-<ParamField type="number">
-  Auto-background the command after this delay (ms).
-</ParamField>
+Working directory for the command.
 
-<ParamField type="boolean">
-  Background the command immediately instead of waiting for `yieldMs`.
-</ParamField>
+ParamField
 
-<ParamField type="number">
-  Override the configured exec timeout for this call. Set `timeout: 0` only when the command should run without the exec process timeout.
-</ParamField>
+Key/value environment overrides merged on top of the inherited environment.
 
-<ParamField type="boolean">
-  Run in a pseudo-terminal when available. Use for TTY-only CLIs, coding agents, and terminal UIs.
-</ParamField>
+ParamField
 
-<ParamField type="'auto' | 'sandbox' | 'gateway' | 'node'">
-  Where to execute. `auto` resolves to `sandbox` when a sandbox runtime is active and `gateway` otherwise.
-</ParamField>
+Auto-background the command after this delay (ms).
 
-<ParamField type="'deny' | 'allowlist' | 'full'">
-  Ignored for normal tool calls. `gateway` / `node` security is controlled by
-  `tools.exec.security` and `~/.openclaw/exec-approvals.json`; elevated mode can
-  force `security=full` only when the operator explicitly grants elevated access.
-</ParamField>
+ParamField
 
-<ParamField type="'off' | 'on-miss' | 'always'">
-  Approval prompt behavior for `gateway` / `node` execution.
-</ParamField>
+Background the command immediately instead of waiting for `yieldMs`.
 
-<ParamField type="string">
-  Node id/name when `host=node`.
-</ParamField>
+ParamField
 
-<ParamField type="boolean">
-  Request elevated mode — escape the sandbox onto the configured host path. `security=full` is forced only when elevated resolves to `full`.
-</ParamField>
+Override the configured exec timeout for this call. Set `timeout: 0` only when the command should run without the exec process timeout.
+
+ParamField
+
+Run in a pseudo-terminal when available. Use for TTY-only CLIs, coding agents, and terminal UIs.
+
+ParamField
+
+Where to execute. `auto` resolves to `sandbox` when a sandbox runtime is active and `gateway` otherwise.
+
+ParamField
+
+Ignored for normal tool calls. `gateway` / `node` security is controlled by
+`tools.exec.security` and `~/.openclaw/exec-approvals.json`; elevated mode can
+force `security=full` only when the operator explicitly grants elevated access.
+
+ParamField
+
+Approval prompt behavior for `gateway` / `node` execution.
+
+ParamField
+
+Node id/name when `host=node`.
+
+ParamField
+
+Request elevated mode — escape the sandbox onto the configured host path. `security=full` is forced only when elevated resolves to `full`.
 
 Notes:
 
-* `host` defaults to `auto`: sandbox when sandbox runtime is active for the session, otherwise gateway.
-* `host` only accepts `auto`, `sandbox`, `gateway`, or `node`. It is not a hostname selector; hostname-like values are rejected before the command runs.
-* `auto` is the default routing strategy, not a wildcard. Per-call `host=node` is allowed from `auto`; per-call `host=gateway` is only allowed when no sandbox runtime is active.
-* With no extra config, `host=auto` still "just works": no sandbox means it resolves to `gateway`; a live sandbox means it stays in the sandbox.
-* `elevated` escapes the sandbox onto the configured host path: `gateway` by default, or `node` when `tools.exec.host=node` (or the session default is `host=node`). It is only available when elevated access is enabled for the current session/provider.
-* `gateway`/`node` approvals are controlled by `~/.openclaw/exec-approvals.json`.
-* `node` requires a paired node (companion app or headless node host).
-* If multiple nodes are available, set `exec.node` or `tools.exec.node` to select one.
-* `exec host=node` is the only shell-execution path for nodes; the legacy `nodes.run` wrapper has been removed.
-* `timeout` applies to foreground, background, `yieldMs`, gateway, sandbox, and node `system.run` execution. If omitted, OpenClaw uses `tools.exec.timeoutSec`; explicit `timeout: 0` disables the exec process timeout for that call.
-* On non-Windows hosts, exec uses `SHELL` when set; if `SHELL` is `fish`, it prefers `bash` (or `sh`)
+- `host` defaults to `auto`: sandbox when sandbox runtime is active for the session, otherwise gateway.
+- `host` only accepts `auto`, `sandbox`, `gateway`, or `node`. It is not a hostname selector; hostname-like values are rejected before the command runs.
+- `auto` is the default routing strategy, not a wildcard. Per-call `host=node` is allowed from `auto`; per-call `host=gateway` is only allowed when no sandbox runtime is active.
+- With no extra config, `host=auto` still "just works": no sandbox means it resolves to `gateway`; a live sandbox means it stays in the sandbox.
+- `elevated` escapes the sandbox onto the configured host path: `gateway` by default, or `node` when `tools.exec.host=node` (or the session default is `host=node`). It is only available when elevated access is enabled for the current session/provider.
+- `gateway`/`node` approvals are controlled by `~/.openclaw/exec-approvals.json`.
+- `node` requires a paired node (companion app or headless node host).
+- If multiple nodes are available, set `exec.node` or `tools.exec.node` to select one.
+- `exec host=node` is the only shell-execution path for nodes; the legacy `nodes.run` wrapper has been removed.
+- `timeout` applies to foreground, background, `yieldMs`, gateway, sandbox, and node `system.run` execution. If omitted, OpenClaw uses `tools.exec.timeoutSec`; explicit `timeout: 0` disables the exec process timeout for that call.
+- On non-Windows hosts, exec uses `SHELL` when set; if `SHELL` is `fish`, it prefers `bash` (or `sh`)
   from `PATH` to avoid fish-incompatible scripts, then falls back to `SHELL` if neither exists.
-* On Windows hosts, exec prefers PowerShell 7 (`pwsh`) discovery (Program Files, ProgramW6432, then PATH),
+- On Windows hosts, exec prefers PowerShell 7 (`pwsh`) discovery (Program Files, ProgramW6432, then PATH),
   then falls back to Windows PowerShell 5.1.
-* Host execution (`gateway`/`node`) rejects `env.PATH` and loader overrides (`LD_*`/`DYLD_*`) to
+- Host execution (`gateway`/`node`) rejects `env.PATH` and loader overrides (`LD_*`/`DYLD_*`) to
   prevent binary hijacking or injected code.
-* OpenClaw sets `OPENCLAW_SHELL=exec` in the spawned command environment (including PTY and sandbox execution) so shell/profile rules can detect exec-tool context.
-* `openclaw channels login` is blocked from `exec` because it is an interactive channel-auth flow; run it in a terminal on the gateway host, or use the channel-native login tool from chat when one exists.
-* Important: sandboxing is **off by default**. If sandboxing is off, implicit `host=auto`
+- OpenClaw sets `OPENCLAW_SHELL=exec` in the spawned command environment (including PTY and sandbox execution) so shell/profile rules can detect exec-tool context.
+- `openclaw channels login` is blocked from `exec` because it is an interactive channel-auth flow; run it in a terminal on the gateway host, or use the channel-native login tool from chat when one exists.
+- Important: sandboxing is **off by default**. If sandboxing is off, implicit `host=auto`
   resolves to `gateway`. Explicit `host=sandbox` still fails closed instead of silently
   running on the gateway host. Enable sandboxing or use `host=gateway` with approvals.
-* Script preflight checks (for common Python/Node shell-syntax mistakes) only inspect files inside the
+- Script preflight checks (for common Python/Node shell-syntax mistakes) only inspect files inside the
   effective `workdir` boundary. If a script path resolves outside `workdir`, preflight is skipped for
   that file.
-* For long-running work that starts now, start it once and rely on automatic
+- For long-running work that starts now, start it once and rely on automatic
   completion wake when it is enabled and the command emits output or fails.
   Use `process` for logs, status, input, or intervention; do not emulate
   scheduling with sleep loops, timeout loops, or repeated polling.
-* For work that should happen later or on a schedule, use cron instead of
+- For work that should happen later or on a schedule, use cron instead of
   `exec` sleep/delay patterns.
 
 ## Config
 
-* `tools.exec.notifyOnExit` (default: true): when true, backgrounded exec sessions enqueue a system event and request a heartbeat on exit.
-* `tools.exec.approvalRunningNoticeMs` (default: 10000): emit a single "running" notice when an approval-gated exec runs longer than this (0 disables).
-* `tools.exec.timeoutSec` (default: 1800): default per-command exec timeout in seconds. Per-call `timeout` overrides it; per-call `timeout: 0` disables the exec process timeout.
-* `tools.exec.host` (default: `auto`; resolves to `sandbox` when sandbox runtime is active, `gateway` otherwise)
-* `tools.exec.security` (default: `deny` for sandbox, `full` for gateway + node when unset)
-* `tools.exec.ask` (default: `off`)
-* No-approval host exec is the default for gateway + node. If you want approvals/allowlist behavior, tighten both `tools.exec.*` and the host `~/.openclaw/exec-approvals.json`; see [Exec approvals](/tools/exec-approvals#yolo-mode-no-approval).
-* YOLO comes from the host-policy defaults (`security=full`, `ask=off`), not from `host=auto`. If you want to force gateway or node routing, set `tools.exec.host` or use `/exec host=...`.
-* In `security=full` plus `ask=off` mode, host exec follows the configured policy directly; there is no extra heuristic command-obfuscation prefilter or script-preflight rejection layer.
-* `tools.exec.node` (default: unset)
-* `tools.exec.strictInlineEval` (default: false): when true, inline interpreter eval forms such as `python -c`, `node -e`, `ruby -e`, `perl -e`, `php -r`, `lua -e`, and `osascript -e` always require explicit approval. `allow-always` can still persist benign interpreter/script invocations, but inline-eval forms still prompt each time.
-* `tools.exec.commandHighlighting` (default: false): when true, approval prompts can highlight parser-derived command spans in the command text. Set to `true` globally or per agent to enable command text highlighting without changing exec approval policy.
-* `tools.exec.pathPrepend`: list of directories to prepend to `PATH` for exec runs (gateway + sandbox only).
-* `tools.exec.safeBins`: stdin-only safe binaries that can run without explicit allowlist entries. For behavior details, see [Safe bins](/tools/exec-approvals-advanced#safe-bins-stdin-only).
-* `tools.exec.safeBinTrustedDirs`: additional explicit directories trusted for `safeBins` path checks. `PATH` entries are never auto-trusted. Built-in defaults are `/bin` and `/usr/bin`.
-* `tools.exec.safeBinProfiles`: optional custom argv policy per safe bin (`minPositional`, `maxPositional`, `allowedValueFlags`, `deniedFlags`).
+- `tools.exec.notifyOnExit` (default: true): when true, backgrounded exec sessions enqueue a system event and request a heartbeat on exit.
+- `tools.exec.approvalRunningNoticeMs` (default: 10000): emit a single "running" notice when an approval-gated exec runs longer than this (0 disables).
+- `tools.exec.timeoutSec` (default: 1800): default per-command exec timeout in seconds. Per-call `timeout` overrides it; per-call `timeout: 0` disables the exec process timeout.
+- `tools.exec.host` (default: `auto`; resolves to `sandbox` when sandbox runtime is active, `gateway` otherwise)
+- `tools.exec.security` (default: `deny` for sandbox, `full` for gateway + node when unset)
+- `tools.exec.ask` (default: `off`)
+- No-approval host exec is the default for gateway + node. If you want approvals/allowlist behavior, tighten both `tools.exec.*` and the host `~/.openclaw/exec-approvals.json`; see [Exec approvals](/tools/exec-approvals#yolo-mode-no-approval).
+- YOLO comes from the host-policy defaults (`security=full`, `ask=off`), not from `host=auto`. If you want to force gateway or node routing, set `tools.exec.host` or use `/exec host=...`.
+- In `security=full` plus `ask=off` mode, host exec follows the configured policy directly; there is no extra heuristic command-obfuscation prefilter or script-preflight rejection layer.
+- `tools.exec.node` (default: unset)
+- `tools.exec.strictInlineEval` (default: false): when true, inline interpreter eval forms such as `python -c`, `node -e`, `ruby -e`, `perl -e`, `php -r`, `lua -e`, and `osascript -e` always require explicit approval. `allow-always` can still persist benign interpreter/script invocations, but inline-eval forms still prompt each time.
+- `tools.exec.commandHighlighting` (default: false): when true, approval prompts can highlight parser-derived command spans in the command text. Set to `true` globally or per agent to enable command text highlighting without changing exec approval policy.
+- `tools.exec.pathPrepend`: list of directories to prepend to `PATH` for exec runs (gateway + sandbox only).
+- `tools.exec.safeBins`: stdin-only safe binaries that can run without explicit allowlist entries. For behavior details, see [Safe bins](/tools/exec-approvals-advanced#safe-bins-stdin-only).
+- `tools.exec.safeBinTrustedDirs`: additional explicit directories trusted for `safeBins` path checks. `PATH` entries are never auto-trusted. Built-in defaults are `/bin` and `/usr/bin`.
+- `tools.exec.safeBinProfiles`: optional custom argv policy per safe bin (`minPositional`, `maxPositional`, `allowedValueFlags`, `deniedFlags`).
 
 Example:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     exec: {
@@ -138,21 +136,21 @@ Example:
 
 ### PATH handling
 
-* `host=gateway`: merges your login-shell `PATH` into the exec environment. `env.PATH` overrides are
+- `host=gateway`: merges your login-shell `PATH` into the exec environment. `env.PATH` overrides are
   rejected for host execution. The daemon itself still runs with a minimal `PATH`:
-  * macOS: `/opt/homebrew/bin`, `/usr/local/bin`, `/usr/bin`, `/bin`
-  * Linux: `/usr/local/bin`, `/usr/bin`, `/bin`
-    * To prevent user shell configuration (like `~/.zshenv` or `/etc/zshenv`) from overriding priority paths during startup, `tools.exec.pathPrepend` entries are securely prepended to the final `PATH` inside the shell command right before execution.
-* `host=sandbox`: runs `sh -lc` (login shell) inside the container, so `/etc/profile` may reset `PATH`.
+  - macOS: `/opt/homebrew/bin`, `/usr/local/bin`, `/usr/bin`, `/bin`
+  - Linux: `/usr/local/bin`, `/usr/bin`, `/bin`
+    - To prevent user shell configuration (like `~/.zshenv` or `/etc/zshenv`) from overriding priority paths during startup, `tools.exec.pathPrepend` entries are securely prepended to the final `PATH` inside the shell command right before execution.
+- `host=sandbox`: runs `sh -lc` (login shell) inside the container, so `/etc/profile` may reset `PATH`.
   OpenClaw prepends `env.PATH` after profile sourcing via an internal env var (no shell interpolation);
   `tools.exec.pathPrepend` applies here too.
-* `host=node`: only non-blocked env overrides you pass are sent to the node. `env.PATH` overrides are
+- `host=node`: only non-blocked env overrides you pass are sent to the node. `env.PATH` overrides are
   rejected for host execution and ignored by node hosts. If you need additional PATH entries on a node,
   configure the node host service environment (systemd/launchd) or install tools in standard locations.
 
 Per-agent node binding (use the agent list index in config):
 
-```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```bash
 openclaw config get agents.list
 openclaw config set agents.list[0].tools.exec.node "node-id-or-name"
 ```
@@ -209,10 +207,10 @@ manual path allowlist entries. For strict explicit trust, keep `autoAllowSkills`
 
 Use the two controls for different jobs:
 
-* `tools.exec.safeBins`: small, stdin-only stream filters.
-* `tools.exec.safeBinTrustedDirs`: explicit extra trusted directories for safe-bin executable paths.
-* `tools.exec.safeBinProfiles`: explicit argv policy for custom safe bins.
-* allowlist: explicit trust for executable paths.
+- `tools.exec.safeBins`: small, stdin-only stream filters.
+- `tools.exec.safeBinTrustedDirs`: explicit extra trusted directories for safe-bin executable paths.
+- `tools.exec.safeBinProfiles`: explicit argv policy for custom safe bins.
+- allowlist: explicit trust for executable paths.
 
 Do not treat `safeBins` as a generic allowlist, and do not add interpreter/runtime binaries (for example `python3`, `node`, `ruby`, `bash`). If you need those, use explicit allowlist entries and keep approval prompts enabled.
 `openclaw security audit` warns when interpreter/runtime `safeBins` entries are missing explicit profiles, and `openclaw doctor --fix` can scaffold missing custom `safeBinProfiles` entries.
@@ -225,13 +223,13 @@ For full policy details and examples, see [Exec approvals](/tools/exec-approvals
 
 Foreground:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "tool": "exec", "command": "ls -la" }
 ```
 
 Background + poll:
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {"tool":"exec","command":"npm run build","yieldMs":1000}
 {"tool":"process","action":"poll","sessionId":"<id>"}
 ```
@@ -241,7 +239,7 @@ is enabled, the command can wake the session when it emits output or fails.
 
 Send keys (tmux-style):
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 {"tool":"process","action":"send-keys","sessionId":"<id>","keys":["Enter"]}
 {"tool":"process","action":"send-keys","sessionId":"<id>","keys":["C-c"]}
 {"tool":"process","action":"send-keys","sessionId":"<id>","keys":["Up","Up","Enter"]}
@@ -249,23 +247,23 @@ Send keys (tmux-style):
 
 Submit (send CR only):
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "tool": "process", "action": "submit", "sessionId": "<id>" }
 ```
 
 Paste (bracketed by default):
 
-```json theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json
 { "tool": "process", "action": "paste", "sessionId": "<id>", "text": "line1\nline2\n" }
 ```
 
-## apply\_patch
+## apply_patch
 
 `apply_patch` is a subtool of `exec` for structured multi-file edits.
 It is enabled by default for OpenAI and OpenAI Codex models. Use config only
 when you want to disable it or restrict it to specific models:
 
-```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+```json5
 {
   tools: {
     exec: {
@@ -277,16 +275,18 @@ when you want to disable it or restrict it to specific models:
 
 Notes:
 
-* Only available for OpenAI/OpenAI Codex models.
-* Tool policy still applies; `allow: ["write"]` implicitly allows `apply_patch`.
-* `deny: ["write"]` does not deny `apply_patch`; deny `apply_patch` explicitly or use `deny: ["group:fs"]` when patch writes should also be blocked.
-* Config lives under `tools.exec.applyPatch`.
-* `tools.exec.applyPatch.enabled` defaults to `true`; set it to `false` to disable the tool for OpenAI models.
-* `tools.exec.applyPatch.workspaceOnly` defaults to `true` (workspace-contained). Set it to `false` only if you intentionally want `apply_patch` to write/delete outside the workspace directory.
+- Only available for OpenAI/OpenAI Codex models.
+- Tool policy still applies; `allow: ["write"]` implicitly allows `apply_patch`.
+- `deny: ["write"]` does not deny `apply_patch`; deny `apply_patch` explicitly or use `deny: ["group:fs"]` when patch writes should also be blocked.
+- Config lives under `tools.exec.applyPatch`.
+- `tools.exec.applyPatch.enabled` defaults to `true`; set it to `false` to disable the tool for OpenAI models.
+- `tools.exec.applyPatch.workspaceOnly` defaults to `true` (workspace-contained). Set it to `false` only if you intentionally want `apply_patch` to write/delete outside the workspace directory.
 
 ## Related
 
-* [Exec Approvals](/tools/exec-approvals) — approval gates for shell commands
-* [Sandboxing](/gateway/sandboxing) — running commands in sandboxed environments
-* [Background Process](/gateway/background-process) — long-running exec and process tool
-* [Security](/gateway/security) — tool policy and elevated access
+- [Exec Approvals](/tools/exec-approvals) — approval gates for shell commands
+- [Sandboxing](/gateway/sandboxing) — running commands in sandboxed environments
+- [Background Process](/gateway/background-process) — long-running exec and process tool
+- [Security](/gateway/security) — tool policy and elevated access
+
+---

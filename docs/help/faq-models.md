@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "751cc2ae7151c97f6897501aeddb8387e665226eac1f8c2a08697b0b8dc5d930"
+source_hash: "6bf693afcacef09aaa4b2be074c73ff6cad9351c47523990c815d5e0244e3aa8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -13,15 +13,16 @@ duplicate_index: 1
 # FAQ: models and auth
 Source: https://docs.openclaw.ai/help/faq-models
 
-
-
-Model- and auth-profile Q\&A. For setup, sessions, gateway, channels, and
+Model- and auth-profile Q&A. For setup, sessions, gateway, channels, and
 troubleshooting, see the main [FAQ](/help/faq).
 
 ## Models: defaults, selection, aliases, switching
 
-<AccordionGroup>
-  <Accordion title="What is the &#x22;default model&#x22;?">
+AccordionGroup
+
+
+What is the "default model"?
+
     OpenClaw's default model is whatever you set as:
 
     ```
@@ -29,9 +30,12 @@ troubleshooting, see the main [FAQ](/help/faq).
     ```
 
     Models are referenced as `provider/model` (example: `openai/gpt-5.5` or `anthropic/claude-sonnet-4-6`). If you omit the provider, OpenClaw first tries an alias, then a unique configured-provider match for that exact model id, and only then falls back to the configured default provider as a deprecated compatibility path. If that provider no longer exposes the configured default model, OpenClaw falls back to the first configured provider/model instead of surfacing a stale removed-provider default. You should still **explicitly** set `provider/model`.
-  </Accordion>
 
-  <Accordion title="What model do you recommend?">
+
+
+
+What model do you recommend?
+
     **Recommended default:** use the strongest latest-generation model available in your provider stack.
     **For tool-enabled or untrusted-input agents:** prioritize model strength over cost.
     **For routine/low-stakes chat:** use cheaper fallback models and route by agent role.
@@ -48,17 +52,20 @@ troubleshooting, see the main [FAQ](/help/faq).
     injection and unsafe behavior. See [Security](/gateway/security).
 
     More context: [Models](/concepts/models).
-  </Accordion>
 
-  <Accordion title="How do I switch models without wiping my config?">
+
+
+
+How do I switch models without wiping my config?
+
     Use **model commands** or edit only the **model** fields. Avoid full config replaces.
 
     Safe options:
 
-    * `/model` in chat (quick, per-session)
-    * `openclaw models set ...` (updates just model config)
-    * `openclaw configure --section model` (interactive)
-    * edit `agents.defaults.model` in `~/.openclaw/openclaw.json`
+    - `/model` in chat (quick, per-session)
+    - `openclaw models set ...` (updates just model config)
+    - `openclaw configure --section model` (interactive)
+    - edit `agents.defaults.model` in `~/.openclaw/openclaw.json`
 
     Avoid `config.apply` with a partial object unless you intend to replace the whole config.
     For RPC edits, inspect with `config.schema.lookup` first and prefer `config.patch`. The lookup payload gives you the normalized path, shallow schema docs/constraints, and immediate child summaries.
@@ -66,9 +73,12 @@ troubleshooting, see the main [FAQ](/help/faq).
     If you did overwrite config, restore from backup or re-run `openclaw doctor` to repair.
 
     Docs: [Models](/concepts/models), [Configure](/cli/configure), [Config](/cli/config), [Doctor](/gateway/doctor).
-  </Accordion>
 
-  <Accordion title="Can I use self-hosted models (llama.cpp, vLLM, Ollama)?">
+
+
+
+Can I use self-hosted models (llama.cpp, vLLM, Ollama)?
+
     Yes. Ollama is the easiest path for local models.
 
     Quickest setup:
@@ -81,9 +91,9 @@ troubleshooting, see the main [FAQ](/help/faq).
 
     Notes:
 
-    * `Cloud + Local` gives you cloud models plus your local Ollama models
-    * cloud models such as `kimi-k2.5:cloud` do not need a local pull
-    * for manual switching, use `openclaw models list` and `openclaw models set ollama/<model>`
+    - `Cloud + Local` gives you cloud models plus your local Ollama models
+    - cloud models such as `kimi-k2.5:cloud` do not need a local pull
+    - for manual switching, use `openclaw models list` and `openclaw models set ollama/<model>`
 
     Security note: smaller or heavily quantized models are more vulnerable to prompt
     injection. We strongly recommend **large models** for any bot that can use tools.
@@ -92,15 +102,21 @@ troubleshooting, see the main [FAQ](/help/faq).
     Docs: [Ollama](/providers/ollama), [Local models](/gateway/local-models),
     [Model providers](/concepts/model-providers), [Security](/gateway/security),
     [Sandboxing](/gateway/sandboxing).
-  </Accordion>
 
-  <Accordion title="What do OpenClaw, Flawd, and Krill use for models?">
-    * These deployments can differ and may change over time; there is no fixed provider recommendation.
-    * Check the current runtime setting on each gateway with `openclaw models status`.
-    * For security-sensitive/tool-enabled agents, use the strongest latest-generation model available.
-  </Accordion>
 
-  <Accordion title="How do I switch models on the fly (without restarting)?">
+
+
+What do OpenClaw, Flawd, and Krill use for models?
+
+    - These deployments can differ and may change over time; there is no fixed provider recommendation.
+    - Check the current runtime setting on each gateway with `openclaw models status`.
+    - For security-sensitive/tool-enabled agents, use the strongest latest-generation model available.
+
+
+
+
+How do I switch models on the fly (without restarting)?
+
     Use the `/model` command as a standalone message:
 
     ```
@@ -143,9 +159,12 @@ troubleshooting, see the main [FAQ](/help/faq).
 
     If you want to return to the default, pick it from `/model` (or send `/model <default provider/model>`).
     Use `/model status` to confirm which auth profile is active.
-  </Accordion>
 
-  <Accordion title="If two providers expose the same model id, which one does /model use?">
+
+
+
+If two providers expose the same model id, which one does /model use?
+
     `/model provider/model` selects that exact provider route for the session.
 
     For example, `qianfan/deepseek-v4-flash` and `deepseek/deepseek-v4-flash` are different model refs even though both contain `deepseek-v4-flash`. OpenClaw should not silently switch from one provider to the other just because the bare model id matches.
@@ -155,28 +174,34 @@ troubleshooting, see the main [FAQ](/help/faq).
     If a run that started from a non-session override is allowed to use fallback, OpenClaw tries the requested provider/model first, then configured fallbacks, and only then the configured primary. That prevents duplicate bare model ids from jumping directly back to the default provider.
 
     See [Models](/concepts/models) and [Model failover](/concepts/model-failover).
-  </Accordion>
 
-  <Accordion title="Can I use GPT 5.5 for daily tasks and Codex 5.5 for coding?">
+
+
+
+Can I use GPT 5.5 for daily tasks and Codex 5.5 for coding?
+
     Yes. Treat model choice and runtime choice separately:
 
-    * **Native Codex coding agent:** set `agents.defaults.model.primary` to `openai/gpt-5.5`. Sign in with `openclaw models auth login --provider openai-codex` when you want ChatGPT/Codex subscription auth.
-    * **Direct OpenAI API tasks outside the agent loop:** configure `OPENAI_API_KEY` for images, embeddings, speech, realtime, and other non-agent OpenAI API surfaces.
-    * **OpenAI agent API-key auth:** use `/model openai/gpt-5.5` with an ordered `openai-codex` API-key profile.
-    * **Sub-agents:** route coding tasks to a Codex-focused agent with its own `openai/gpt-5.5` model.
+    - **Native Codex coding agent:** set `agents.defaults.model.primary` to `openai/gpt-5.5`. Sign in with `openclaw models auth login --provider openai-codex` when you want ChatGPT/Codex subscription auth.
+    - **Direct OpenAI API tasks outside the agent loop:** configure `OPENAI_API_KEY` for images, embeddings, speech, realtime, and other non-agent OpenAI API surfaces.
+    - **OpenAI agent API-key auth:** use `/model openai/gpt-5.5` with an ordered `openai-codex` API-key profile.
+    - **Sub-agents:** route coding tasks to a Codex-focused agent with its own `openai/gpt-5.5` model.
 
     See [Models](/concepts/models) and [Slash commands](/tools/slash-commands).
-  </Accordion>
 
-  <Accordion title="How do I configure fast mode for GPT 5.5?">
+
+
+
+How do I configure fast mode for GPT 5.5?
+
     Use either a session toggle or a config default:
 
-    * **Per session:** send `/fast on` while the session is using `openai/gpt-5.5`.
-    * **Per model default:** set `agents.defaults.models["openai/gpt-5.5"].params.fastMode` to `true`.
+    - **Per session:** send `/fast on` while the session is using `openai/gpt-5.5`.
+    - **Per model default:** set `agents.defaults.models["openai/gpt-5.5"].params.fastMode` to `true`.
 
     Example:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -195,9 +220,12 @@ troubleshooting, see the main [FAQ](/help/faq).
     For OpenAI, fast mode maps to `service_tier = "priority"` on supported native Responses requests. Session `/fast` overrides beat config defaults.
 
     See [Thinking and fast mode](/tools/thinking) and [OpenAI fast mode](/providers/openai#fast-mode).
-  </Accordion>
 
-  <Accordion title="Why do I see &#x22;Model ... is not allowed&#x22; and then no reply?">
+
+
+
+Why do I see "Model ... is not allowed" and then no reply?
+
     If `agents.defaults.models` is set, it becomes the **allowlist** for `/model` and any
     session overrides. Choosing a model that isn't in that list returns:
 
@@ -210,9 +238,12 @@ troubleshooting, see the main [FAQ](/help/faq).
     `agents.defaults.models`, add a provider wildcard such as `"provider/*": {}` for dynamic provider catalogs, remove the allowlist, or pick a model from `/model list`.
     If the command also included `--runtime codex`, update the allowlist first and then retry
     the same `/model provider/model --runtime codex` command.
-  </Accordion>
 
-  <Accordion title="Why do I see &#x22;Unknown model: minimax/MiniMax-M2.7&#x22;?">
+
+
+
+Why do I see "Unknown model: minimax/MiniMax-M2.7"?
+
     This means the **provider isn't configured** (no MiniMax provider config or auth
     profile was found), so the model can't be resolved.
 
@@ -229,22 +260,25 @@ troubleshooting, see the main [FAQ](/help/faq).
        `minimax-portal/MiniMax-M2.7-highspeed` for OAuth setup.
     4. Run:
 
-       ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+       ```bash
        openclaw models list
        ```
 
        and pick from the list (or `/model list` in chat).
 
     See [MiniMax](/providers/minimax) and [Models](/concepts/models).
-  </Accordion>
 
-  <Accordion title="Can I use MiniMax as my default and OpenAI for complex tasks?">
+
+
+
+Can I use MiniMax as my default and OpenAI for complex tasks?
+
     Yes. Use **MiniMax as the default** and switch models **per session** when needed.
     Fallbacks are for **errors**, not "hard tasks," so use `/model` or a separate agent.
 
     **Option A: switch per session**
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       env: { MINIMAX_API_KEY: "sk-...", OPENAI_API_KEY: "sk-..." },
       agents: {
@@ -267,32 +301,38 @@ troubleshooting, see the main [FAQ](/help/faq).
 
     **Option B: separate agents**
 
-    * Agent A default: MiniMax
-    * Agent B default: OpenAI
-    * Route by agent or use `/agent` to switch
+    - Agent A default: MiniMax
+    - Agent B default: OpenAI
+    - Route by agent or use `/agent` to switch
 
     Docs: [Models](/concepts/models), [Multi-Agent Routing](/concepts/multi-agent), [MiniMax](/providers/minimax), [OpenAI](/providers/openai).
-  </Accordion>
 
-  <Accordion title="Are opus / sonnet / gpt built-in shortcuts?">
+
+
+
+Are opus / sonnet / gpt built-in shortcuts?
+
     Yes. OpenClaw ships a few default shorthands (only applied when the model exists in `agents.defaults.models`):
 
-    * `opus` → `anthropic/claude-opus-4-7`
-    * `sonnet` → `anthropic/claude-sonnet-4-6`
-    * `gpt` → `openai/gpt-5.4`
-    * `gpt-mini` → `openai/gpt-5.4-mini`
-    * `gpt-nano` → `openai/gpt-5.4-nano`
-    * `gemini` → `google/gemini-3.1-pro-preview`
-    * `gemini-flash` → `google/gemini-3-flash-preview`
-    * `gemini-flash-lite` → `google/gemini-3.1-flash-lite-preview`
+    - `opus` → `anthropic/claude-opus-4-7`
+    - `sonnet` → `anthropic/claude-sonnet-4-6`
+    - `gpt` → `openai/gpt-5.4`
+    - `gpt-mini` → `openai/gpt-5.4-mini`
+    - `gpt-nano` → `openai/gpt-5.4-nano`
+    - `gemini` → `google/gemini-3.1-pro-preview`
+    - `gemini-flash` → `google/gemini-3-flash-preview`
+    - `gemini-flash-lite` → `google/gemini-3.1-flash-lite-preview`
 
     If you set your own alias with the same name, your value wins.
-  </Accordion>
 
-  <Accordion title="How do I define/override model shortcuts (aliases)?">
+
+
+
+How do I define/override model shortcuts (aliases)?
+
     Aliases come from `agents.defaults.models.<modelId>.alias`. Example:
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -308,12 +348,15 @@ troubleshooting, see the main [FAQ](/help/faq).
     ```
 
     Then `/model sonnet` (or `/<alias>` when supported) resolves to that model ID.
-  </Accordion>
 
-  <Accordion title="How do I add models from other providers like OpenRouter or Z.AI?">
+
+
+
+How do I add models from other providers like OpenRouter or Z.AI?
+
     OpenRouter (pay-per-token; many models):
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -327,7 +370,7 @@ troubleshooting, see the main [FAQ](/help/faq).
 
     Z.AI (GLM models):
 
-    ```json5 theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```json5
     {
       agents: {
         defaults: {
@@ -352,18 +395,21 @@ troubleshooting, see the main [FAQ](/help/faq).
 
     Fix options:
 
-    * Run `openclaw agents add <id>` and configure auth during the wizard.
-    * Or copy only portable static `api_key` / `token` profiles from the main agent's auth store into the new agent's auth store.
-    * For OAuth profiles, sign in from the new agent when it needs its own account; otherwise OpenClaw can read through to the default/main agent without cloning refresh tokens.
+    - Run `openclaw agents add <id>` and configure auth during the wizard.
+    - Or copy only portable static `api_key` / `token` profiles from the main agent's auth store into the new agent's auth store.
+    - For OAuth profiles, sign in from the new agent when it needs its own account; otherwise OpenClaw can read through to the default/main agent without cloning refresh tokens.
 
     Do **not** reuse `agentDir` across agents; it causes auth/session collisions.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Model failover and "All models failed"
 
-<AccordionGroup>
-  <Accordion title="How does failover work?">
+AccordionGroup
+
+
+How does failover work?
+
     Failover happens in two stages:
 
     1. **Auth profile rotation** within the same provider.
@@ -392,58 +438,63 @@ troubleshooting, see the main [FAQ](/help/faq).
     `request_too_large`, `input exceeds the maximum number of tokens`,
     `input token count exceeds the maximum number of input tokens`,
     `input is too long for the model`, or `ollama error: context length
-            exceeded` stay on the compaction/retry path instead of advancing model
+    exceeded` stay on the compaction/retry path instead of advancing model
     fallback.
 
     Generic server-error text is intentionally narrower than "anything with
     unknown/error in it". OpenClaw does treat provider-scoped transient shapes
     such as Anthropic bare `An unknown error occurred`, OpenRouter bare
     `Provider returned error`, stop-reason errors like `Unhandled stop reason:
-            error`, JSON `api_error` payloads with transient server text
+    error`, JSON `api_error` payloads with transient server text
     (`internal server error`, `unknown error, 520`, `upstream error`, `backend
-            error`), and provider-busy errors such as `ModelNotReadyException` as
+    error`), and provider-busy errors such as `ModelNotReadyException` as
     failover-worthy timeout/overloaded signals when the provider context
     matches.
     Generic internal fallback text like `LLM request failed with an unknown
-            error.` stays conservative and does not trigger model fallback by itself.
-  </Accordion>
+    error.` stays conservative and does not trigger model fallback by itself.
 
-  <Accordion title="What does &#x22;No credentials found for profile anthropic:default&#x22; mean?">
+
+
+
+What does "No credentials found for profile anthropic:default" mean?
+
     It means the system attempted to use the auth profile ID `anthropic:default`, but could not find credentials for it in the expected auth store.
 
     **Fix checklist:**
 
-    * **Confirm where auth profiles live** (new vs legacy paths)
-      * Current: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-      * Legacy: `~/.openclaw/agent/*` (migrated by `openclaw doctor`)
-    * **Confirm your env var is loaded by the Gateway**
-      * If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.openclaw/.env` or enable `env.shellEnv`.
-    * **Make sure you're editing the correct agent**
-      * Multi-agent setups mean there can be multiple `auth-profiles.json` files.
-    * **Sanity-check model/auth status**
-      * Use `openclaw models status` to see configured models and whether providers are authenticated.
+    - **Confirm where auth profiles live** (new vs legacy paths)
+      - Current: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
+      - Legacy: `~/.openclaw/agent/*` (migrated by `openclaw doctor`)
+    - **Confirm your env var is loaded by the Gateway**
+      - If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.openclaw/.env` or enable `env.shellEnv`.
+    - **Make sure you're editing the correct agent**
+      - Multi-agent setups mean there can be multiple `auth-profiles.json` files.
+    - **Sanity-check model/auth status**
+      - Use `openclaw models status` to see configured models and whether providers are authenticated.
 
     **Fix checklist for "No credentials found for profile anthropic"**
 
     This means the run is pinned to an Anthropic auth profile, but the Gateway
     can't find it in its auth store.
 
-    * **Use Claude CLI**
-      * Run `openclaw models auth login --provider anthropic --method cli --set-default` on the gateway host.
+    - **Use Claude CLI**
+      - Run `openclaw models auth login --provider anthropic --method cli --set-default` on the gateway host.
+    - **If you want to use an API key instead**
+      - Put `ANTHROPIC_API_KEY` in `~/.openclaw/.env` on the **gateway host**.
+      - Clear any pinned order that forces a missing profile:
 
-    * **If you want to use an API key instead**
-      * Put `ANTHROPIC_API_KEY` in `~/.openclaw/.env` on the **gateway host**.
-      * Clear any pinned order that forces a missing profile:
-
-        ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+        ```bash
         openclaw models auth order clear --provider anthropic
         ```
 
-    * **Confirm you're running commands on the gateway host**
-      * In remote mode, auth profiles live on the gateway machine, not your laptop.
-  </Accordion>
+    - **Confirm you're running commands on the gateway host**
+      - In remote mode, auth profiles live on the gateway machine, not your laptop.
 
-  <Accordion title="Why did it also try Google Gemini and fail?">
+
+
+
+Why did it also try Google Gemini and fail?
+
     If your model config includes Google Gemini as a fallback (or you switched to a Gemini shorthand), OpenClaw will try it during model fallback. If you haven't configured Google credentials, you'll see `No API key found for provider "google"`.
 
     Fix: either provide Google auth, or remove/avoid Google models in `agents.defaults.model.fallbacks` / aliases so fallback doesn't route there.
@@ -454,15 +505,18 @@ troubleshooting, see the main [FAQ](/help/faq).
     an aborted/partial stream). Google Antigravity requires signatures for thinking blocks.
 
     Fix: OpenClaw now strips unsigned thinking blocks for Google Antigravity Claude. If it still appears, start a **new session** or set `/thinking off` for that agent.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Auth profiles: what they are and how to manage them
 
 Related: [/concepts/oauth](/concepts/oauth) (OAuth flows, token storage, multi-account patterns)
 
-<AccordionGroup>
-  <Accordion title="What is an auth profile?">
+AccordionGroup
+
+
+What is an auth profile?
+
     An auth profile is a named credential record (OAuth or API key) tied to a provider. Profiles live in:
 
     ```
@@ -470,17 +524,23 @@ Related: [/concepts/oauth](/concepts/oauth) (OAuth flows, token storage, multi-a
     ```
 
     To inspect saved profiles without dumping secrets, run `openclaw models auth list` (optionally `--provider <id>` or `--json`). See [Models CLI](/cli/models#auth-profiles) for details.
-  </Accordion>
 
-  <Accordion title="What are typical profile IDs?">
+
+
+
+What are typical profile IDs?
+
     OpenClaw uses provider-prefixed IDs like:
 
-    * `anthropic:default` (common when no email identity exists)
-    * `anthropic:<email>` for OAuth identities
-    * custom IDs you choose (e.g. `anthropic:work`)
-  </Accordion>
+    - `anthropic:default` (common when no email identity exists)
+    - `anthropic:<email>` for OAuth identities
+    - custom IDs you choose (e.g. `anthropic:work`)
 
-  <Accordion title="Can I control which auth profile is tried first?">
+
+
+
+Can I control which auth profile is tried first?
+
     Yes. Config supports optional metadata for profiles and an ordering per provider (`auth.order.<provider>`). This does **not** store secrets; it maps IDs to provider/mode and sets rotation order.
 
     OpenClaw may temporarily skip a profile if it's in a short **cooldown** (rate limits/timeouts/auth failures) or a longer **disabled** state (billing/insufficient credits). To inspect this, run `openclaw models status --json` and check `auth.unusableProfiles`. Tuning: `auth.cooldowns.billingBackoffHours*`.
@@ -491,7 +551,7 @@ Related: [/concepts/oauth](/concepts/oauth) (OAuth flows, token storage, multi-a
 
     You can also set a **per-agent** order override (stored in that agent's `auth-state.json`) via the CLI:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     # Defaults to the configured default agent (omit --agent)
     openclaw models auth order get --provider anthropic
 
@@ -507,33 +567,38 @@ Related: [/concepts/oauth](/concepts/oauth) (OAuth flows, token storage, multi-a
 
     To target a specific agent:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw models auth order set --provider anthropic --agent main anthropic:default
     ```
 
     To verify what will actually be tried, use:
 
-    ```bash theme={"theme":{"light":"min-light","dark":"min-dark"}}
+    ```bash
     openclaw models status --probe
     ```
 
     If a stored profile is omitted from the explicit order, probe reports
     `excluded_by_auth_order` for that profile instead of trying it silently.
-  </Accordion>
 
-  <Accordion title="OAuth vs API key - what is the difference?">
+
+
+
+OAuth vs API key - what is the difference?
+
     OpenClaw supports both:
 
-    * **OAuth** often leverages subscription access (where applicable).
-    * **API keys** use pay-per-token billing.
+    - **OAuth** often leverages subscription access (where applicable).
+    - **API keys** use pay-per-token billing.
 
     The wizard explicitly supports Anthropic Claude CLI, OpenAI Codex OAuth, and API keys.
-  </Accordion>
-</AccordionGroup>
+
+
 
 ## Related
 
-* [FAQ](/help/faq) — the main FAQ
-* [FAQ — quick start and first-run setup](/help/faq-first-run)
-* [Model selection](/concepts/model-providers)
-* [Model failover](/concepts/model-failover)
+- [FAQ](/help/faq) — the main FAQ
+- [FAQ — quick start and first-run setup](/help/faq-first-run)
+- [Model selection](/concepts/model-providers)
+- [Model failover](/concepts/model-failover)
+
+---
