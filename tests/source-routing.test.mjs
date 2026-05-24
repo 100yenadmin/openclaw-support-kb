@@ -97,6 +97,7 @@ test("router and recovery skills require target-first source use", async () => {
   assert.match(companyOs, /Agent Flow/);
   assert.match(companyOs, /Do not create duplicate GitHub and Linear issues/);
   assert.match(companyOs, /one logical issue/);
+  assert.match(companyOs, /Linear project appears empty/);
   assert.match(companyOs, /authenticated `gh` CLI/);
   assert.match(companyOs, /Autonomous Triage Gate/);
   assert.match(companyOs, /VISION\.md/);
@@ -130,6 +131,7 @@ test("EVAOS Company OS scenario exercises the real routing sequence", async () =
     "Required closeout",
     "Linear write tools are unavailable",
     "one logical issue",
+    "Linear project appears empty",
     "authenticated `gh` CLI",
     "Autonomous Triage Gate",
     "VISION.md",

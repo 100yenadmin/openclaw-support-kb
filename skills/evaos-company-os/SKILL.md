@@ -68,6 +68,9 @@ issue, PR, and CI state before changing files.
   replacing it. If Linear/GitHub sync already created both sides, treat them as
   one logical issue.
 - If Linear/GitHub sync is enabled, treat the synced pair as one logical issue.
+- If a Linear project appears empty, search Linear and GitHub by repo,
+  milestone, label, and key nouns before assuming no issue exists. Attach the
+  existing synced issue to the project when it is clearly the same work.
 - GitHub owns implementation detail, repo labels, pull requests, CI, and review
   threads.
 - Linear owns roadmap priority, project grouping, assignee, planning status, and
