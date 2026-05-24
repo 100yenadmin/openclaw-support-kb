@@ -17,7 +17,7 @@
     "id": "explain-system",
     "prompt": "I'm not technical. Explain how OpenClaw works.",
     "mustMention": ["gbrain search", "--source openclaw-support-kb", "Gateway", "agent runtime", "workspace", "channels"],
-    "mustHaveDocs": ["docs/concepts/architecture.md", "docs/concepts/agent.md", "docs/concepts/agent-workspace.md", "docs/channels/index.md"],
+    "mustHaveDocs": ["docs/concepts/architecture.md", "docs/concepts/agent.md", "docs/concepts/agent-workspace.md", ["docs/channels/index.md", "docs/channels.md"]],
     "mustHaveRunbooks": ["runbooks/system-explainer.md"]
   },
   {
@@ -38,7 +38,7 @@
     "id": "another-channel",
     "prompt": "Help me add Discord or Slack.",
     "mustMention": ["gbrain search", "--source openclaw-support-kb", "openclaw channels status --probe", "openclaw config validate"],
-    "mustHaveDocs": ["docs/channels/index.md", "docs/channels/discord.md", "docs/channels/slack.md", "docs/channels/troubleshooting.md"],
+    "mustHaveDocs": [["docs/channels/index.md", "docs/channels.md"], "docs/channels/discord.md", "docs/channels/slack.md", "docs/channels/troubleshooting.md"],
     "mustHaveRunbooks": ["runbooks/channel-setup.md"]
   },
   {
@@ -52,14 +52,14 @@
     "id": "skill-install",
     "prompt": "Find and install a skill that can do browser automation.",
     "mustMention": ["gbrain search", "awesome openclaw skills", "openclaw skills search", "snyk-agent-scan", "SNYK_TOKEN", "attestation"],
-    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/clawhub/index.md", "docs/cli/skills.md", "security/agent-scan.md"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", ["docs/clawhub/index.md", "docs/tools/clawhub.md"], "docs/cli/skills.md", "security/agent-scan.md"],
     "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
   },
   {
     "id": "chief-of-staff-integration",
     "prompt": "Find tools or skills to help my small business chief-of-staff agent work with CRM, email, calendar, and support apps.",
     "mustMention": ["VoltAgent", "ClawHub", "Composio", "toolkit", "openclaw mcp list", "OAuth", "approval"],
-    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", "docs/clawhub/index.md", "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", "integrations/composio/docs/tools-and-toolkits.md"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", ["docs/clawhub/index.md", "docs/tools/clawhub.md"], "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", "integrations/composio/docs/tools-and-toolkits.md"],
     "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
   },
   {
