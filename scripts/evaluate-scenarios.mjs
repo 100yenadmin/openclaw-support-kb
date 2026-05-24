@@ -8,10 +8,20 @@ const scenarios = JSON.parse(await readFile(path.join(repoRoot, "evals", "custom
 
 const failures = [];
 
-async function corpusForFiles(files) {
+function fileChoices(fileSpec) {
+  return Array.isArray(fileSpec) ? fileSpec : [fileSpec];
+}
+
+function describeFileSpec(fileSpec) {
+  return fileChoices(fileSpec).join(" or ");
+}
+
+async function corpusForFiles(fileSpecs) {
   const existingFiles = [];
-  for (const file of files) {
-    if (await pathExists(path.join(repoRoot, file))) existingFiles.push(file);
+  for (const fileSpec of fileSpecs) {
+    for (const file of fileChoices(fileSpec)) {
+      if (await pathExists(path.join(repoRoot, file))) existingFiles.push(file);
+    }
   }
   return (
     await Promise.all(
@@ -21,11 +31,14 @@ async function corpusForFiles(files) {
 }
 
 for (const scenario of scenarios) {
-  const scenarioFiles = [...scenario.mustHaveDocs, ...scenario.mustHaveRunbooks];
-  const scenarioCorpus = await corpusForFiles(scenarioFiles);
-  for (const file of scenarioFiles) {
-    if (!(await pathExists(path.join(repoRoot, file)))) {
-      failures.push(`${scenario.id}: missing expected file ${file}`);
+  const scenarioFileSpecs = [...scenario.mustHaveDocs, ...scenario.mustHaveRunbooks];
+  const scenarioCorpus = await corpusForFiles(scenarioFileSpecs);
+  for (const fileSpec of scenarioFileSpecs) {
+    const hasAnyFile = (
+      await Promise.all(fileChoices(fileSpec).map(async (file) => pathExists(path.join(repoRoot, file))))
+    ).some(Boolean);
+    if (!hasAnyFile) {
+      failures.push(`${scenario.id}: missing expected file ${describeFileSpec(fileSpec)}`);
     }
   }
   for (const needle of scenario.mustMention) {
