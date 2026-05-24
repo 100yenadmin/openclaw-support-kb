@@ -94,7 +94,12 @@ test("router and recovery skills require target-first source use", async () => {
   assert.match(companyOs, /GitHub owns implementation work/);
   assert.match(companyOs, /Paperclip owns live execution\/orchestration/);
   assert.match(companyOs, /Treat search results as cache, not\s+source of truth/);
+  assert.match(companyOs, /Agent Flow/);
   assert.match(companyOs, /Do not create duplicate GitHub and Linear issues/);
+  assert.match(companyOs, /one logical issue/);
+  assert.match(companyOs, /authenticated `gh` CLI/);
+  assert.match(companyOs, /Autonomous Triage Gate/);
+  assert.match(companyOs, /VISION\.md/);
   assert.match(companyOs, /Mutation boundary: read-only, PR-only, support VM, or production rollout/);
   assert.match(companyOs, /Required closeout: evidence, blocker, and next action/);
   assert.match(companyOs, /If Linear write tools are unavailable/);
@@ -124,6 +129,10 @@ test("EVAOS Company OS scenario exercises the real routing sequence", async () =
     "not a second canonical issue tracker",
     "Required closeout",
     "Linear write tools are unavailable",
+    "one logical issue",
+    "authenticated `gh` CLI",
+    "Autonomous Triage Gate",
+    "VISION.md",
   ]) {
     assert.ok(
       scenario.mustMention.includes(phrase),

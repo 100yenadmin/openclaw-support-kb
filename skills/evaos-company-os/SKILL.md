@@ -44,14 +44,57 @@ a second roadmap or a replacement for Linear/GitHub.
 7. When state changes, update Linear once and add or update a concise Notion
    evidence, decision, or open-question link.
 
+## Agent Flow
+
+```text
+User request
+  -> Notion EVAOS Company OS: architecture, systems, evidence, decisions
+  -> Linear: initiative/project priority, owner, status, next-agent handoff
+  -> GitHub: implementation issue, PR, CI, review state
+  -> Runtime/Paperclip/support-control only when mutation is allowed
+  -> Closeout: GitHub proof, Linear status/handoff, Notion evidence/decision
+```
+
+Use the smallest live surface that answers the question. For roadmap questions,
+start with Linear after Company OS orientation. For architecture or ownership
+questions, start with Notion Systems. For code work, resolve the GitHub repo,
+issue, PR, and CI state before changing files.
+
 ## Issue And Status Policy
 
+- Search Linear and GitHub before creating or assigning work.
 - Do not create duplicate GitHub and Linear issues for the same work.
 - If a GitHub issue already exists, link or mirror it from Linear instead of
-  replacing it.
+  replacing it. If Linear/GitHub sync already created both sides, treat them as
+  one logical issue.
 - If Linear/GitHub sync is enabled, treat the synced pair as one logical issue.
+- GitHub owns implementation detail, repo labels, pull requests, CI, and review
+  threads.
+- Linear owns roadmap priority, project grouping, assignee, planning status, and
+  next-agent handoff.
 - Notion is not a second canonical issue tracker or status machine; synced
   GitHub or Linear views are read models only.
+- If Linear project status updates are unavailable, update the Linear initiative
+  status or project handoff document and record that fallback in Notion
+  Evidence.
+- If a GitHub connector cannot read a private repo or synced issue, try the
+  authenticated `gh` CLI before declaring the issue missing.
+
+## Autonomous Triage Gate
+
+Agents may work an issue autonomously only when all gates pass:
+
+- Vision fit is clear from the repo `VISION.md` when present, or from the
+  Company OS Systems row plus Linear project direction when `VISION.md` is not
+  present yet.
+- The fix is inferable from code and evidence with high confidence.
+- The change has a bounded implementation path and no ambiguous product call.
+- The agent can live-test or otherwise verify the behavior.
+- The work does not expand permissions, change budgets, mutate production,
+  approve plans, hire agents, or touch secrets without explicit confirmation.
+
+Triage output should be exactly one of: `autonomous PR`, `needs human decision`,
+`not aligned`, or `needs better repro`.
 
 ## Assignment Packet
 
