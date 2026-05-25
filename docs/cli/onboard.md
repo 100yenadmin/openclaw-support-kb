@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "2991c16e749dbde9c7713d179708509e0d3cb218cf3f732fc697b410a09eca25"
+source_hash: "652d73802c321f48118d012d6a368a41d3d38d9d8736100002aeae6279635570"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/onboard.md"
@@ -64,6 +64,11 @@ openclaw onboard --mode remote --remote-url wss://gateway-host:18789
 
 `--modern` starts the Crestodian conversational onboarding preview. Without
 `--modern`, `openclaw onboard` keeps the classic onboarding flow.
+
+On a fresh install where the active config file is missing or has no authored
+settings (empty or metadata-only), bare `openclaw` also starts the classic
+onboarding flow. Once a config file has authored settings, bare `openclaw`
+opens Crestodian instead.
 
 Plaintext `ws://` is accepted for loopback, private IP literals, `.local`, and
 Tailnet `*.ts.net` gateway URLs. For other trusted private-DNS names, set

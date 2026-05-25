@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "e17f81e74a51662156fe4aa5304709cdf91ae9e04a861bd26143631e0c74a050"
+source_hash: "295b2d335438b95d8dd577fc41955e43038356acecfbcfe3dc6e11d54662e081"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -594,7 +594,7 @@ Do I need a Claude or OpenAI subscription to run this?
 
     Docs: [Anthropic](/providers/anthropic), [OpenAI](/providers/openai),
     [Qwen Cloud](/providers/qwen),
-    [MiniMax](/providers/minimax), [GLM Models](/providers/glm),
+    [MiniMax](/providers/minimax), [Z.AI (GLM)](/providers/zai),
     [Local models](/gateway/local-models), [Models](/concepts/models).
 
 
@@ -625,7 +625,7 @@ Do you support Claude subscription auth (Claude Pro or Max)?
     safer, more predictable choice. If you want other subscription-style hosted
     options in OpenClaw, see [OpenAI](/providers/openai), [Qwen / Model
     Cloud](/providers/qwen), [MiniMax](/providers/minimax), and [GLM
-    Models](/providers/glm).
+    Models](/providers/zai).
 
 
 
@@ -643,9 +643,10 @@ Why am I seeing HTTP 429 rate_limit_error from Anthropic?
 
     If the message is specifically:
     `Extra usage is required for long context requests`, the request is trying to use
-    Anthropic's 1M context beta (`context1m: true`). That only works when your
-    credential is eligible for long-context billing (API key billing or the
-    OpenClaw Claude-login path with Extra Usage enabled).
+    Anthropic's 1M context window (a GA-capable 1M Claude 4.x model or legacy
+    `context1m: true` config). That only works when your credential is eligible
+    for long-context billing (API key billing or the OpenClaw Claude-login path
+    with Extra Usage enabled).
 
     Tip: set a **fallback model** so OpenClaw can keep replying while a provider is rate-limited.
     See [Models](/cli/models), [OAuth](/concepts/oauth), and

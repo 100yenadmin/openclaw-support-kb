@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tlon plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tlon"
-source_hash: "282327bbfd09478e3c4cf8e47309e9fa436db8e53ed773efbe48ab5968b6d764"
+source_hash: "c328f80d00ab9d9696d784d99d6cddaf9ec2d734bca57e2875c0d6151ad3252a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tlon.md"
@@ -24,7 +24,7 @@ Adds the Tlon channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: tlon; contracts: tools; skills
+channels: tlon; skills
 
 ## Related docs
 

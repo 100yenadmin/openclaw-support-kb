@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "cfab36106e37bd89b8447b4ced0a2069e34c8b50817c7d9452593aa26a8d5537"
+source_hash: "8ad148da1654e06749b7b7c82269a0a1618e460652d32541d7bfe0ac4db23047"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -41,9 +41,10 @@ installer has its own `--verbose` flag, but that flag is not part of
 the beta tag is missing or older than the latest stable release. Use `--tag beta`
 if you want the raw npm beta dist-tag for a one-off package update.
 
-Use `--channel dev` for the moving GitHub `main` checkout. Package updates do
-not support npm GitHub source installs for `openclaw/openclaw`; target a
-published dist-tag, exact version, or built tarball instead.
+Use `--channel dev` for a persistent moving GitHub `main` checkout. For package
+updates, `--tag main` maps to `github:openclaw/openclaw#main` for one run, and
+GitHub/git source specs are packed into a temporary tarball before the staged
+npm install.
 
 For managed plugins, beta-channel fallback is a warning: the core update can
 still succeed while a plugin uses its recorded default/latest release because no

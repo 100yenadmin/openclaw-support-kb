@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/built-in-plugins"
-source_hash: "4bff619c870a585c34dc2ffa3a8e04b4d09198d155e898ca099f8370dc3ee7bc"
+source_hash: "d951cd8721bf735663cb892b307c8accb678b443daa379a67ea0327dd58e6fff"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/built-in-plugins.md"
@@ -21,7 +21,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/built-in-
 
 Hermes ships a small set of plugins bundled with the repository. They live under `<repo>/plugins/<name>/` and load automatically alongside user-installed plugins in `~/.hermes/plugins/`. They use the same plugin surface as third-party plugins — hooks, tools, slash commands — just maintained in-tree.
 
-See the [Plugins](/docs/user-guide/features/plugins) page for the general plugin system, and [Build a Hermes Plugin](/docs/guides/build-a-hermes-plugin) to write your own.
+See the [Plugins](/user-guide/features/plugins) page for the general plugin system, and [Build a Hermes Plugin](/guides/build-a-hermes-plugin) to write your own.
 
 ## How discovery works
 
@@ -265,7 +265,7 @@ Adds a **Steam-style achievements tab to the dashboard** — 60+ collectible, ti
 
 ## Adding a bundled plugin
 
-Bundled plugins are written exactly like any other Hermes plugin — see [Build a Hermes Plugin](/docs/guides/build-a-hermes-plugin). The only differences are:
+Bundled plugins are written exactly like any other Hermes plugin — see [Build a Hermes Plugin](/guides/build-a-hermes-plugin). The only differences are:
 
 - Directory lives at `<repo>/plugins/<name>/` instead of `~/.hermes/plugins/<name>/`
 - Manifest source is reported as `bundled` in `hermes plugins list`

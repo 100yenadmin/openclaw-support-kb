@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "f74cc249ccb7ec4da35bf8fb72e2d5a3dede144727ef2989c7dc3797ce2444d7"
+source_hash: "063311a966430601e65c7edc610f17f5d003a9cd922bf216c42b94e10a004064"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -550,7 +550,7 @@ echo 'SUPERMEMORY_API_KEY=***' >> ~/.hermes/.env
 
 ## Profile Isolation
 
-Each provider's data is isolated per [profile](/docs/user-guide/profiles):
+Each provider's data is isolated per [profile](/user-guide/profiles):
 
 - **Local storage providers** (Holographic, ByteRover) use `$HERMES_HOME/` paths which differ per profile
 - **Config file providers** (Honcho, Mem0, Hindsight, Supermemory) store config in `$HERMES_HOME/` so each profile has its own credentials
@@ -559,6 +559,6 @@ Each provider's data is isolated per [profile](/docs/user-guide/profiles):
 
 ## Building a Memory Provider
 
-See the [Developer Guide: Memory Provider Plugins](/docs/developer-guide/memory-provider-plugin) for how to create your own.
+See the [Developer Guide: Memory Provider Plugins](/developer-guide/memory-provider-plugin) for how to create your own.
 
 ---

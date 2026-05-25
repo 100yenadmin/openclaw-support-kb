@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "582bc4789eddd6af52f0e2f74cd4a7d83073d5ebf13fdb0e5da1088e64cf7fba"
+source_hash: "80cf3c83df1beffd36d99b96c22b1260576e79fde3cf51a36374333ac9f14a49"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -281,8 +281,9 @@ Tie-breaking and AND semantics
 
 Account-scope detail
 
-    - A binding that omits `accountId` matches the default account only.
+    - A binding that omits `accountId` matches the default account only. It does not match all accounts.
     - Use `accountId: "*"` for a channel-wide fallback across all accounts.
+    - Use `accountId: "<name>"` to match one account.
     - If you later add the same binding for the same agent with an explicit account id, OpenClaw upgrades the existing channel-only binding to account-scoped instead of duplicating it.
 
 
@@ -396,6 +397,11 @@ Telegram bots per agent
 
     - Create one bot per agent with BotFather and copy each token.
     - Tokens live in `channels.telegram.accounts.<id>.botToken` (default account can use `TELEGRAM_BOT_TOKEN`).
+    - For multiple bots in the same Telegram group, invite each bot and mention the bot that should answer.
+    - Disable BotFather Privacy Mode for each group bot, then re-add the bot so Telegram applies the setting.
+    - Allow groups with `channels.telegram.groups`, or use `groupPolicy: "open"` only for trusted group deployments.
+    - Put sender user IDs in `groupAllowFrom`. Group and supergroup IDs belong in `channels.telegram.groups`, not `groupAllowFrom`.
+    - Bind by `accountId` so each bot routes to its own agent.
 
 
 
@@ -501,15 +507,15 @@ WhatsApp daily + Telegram deep work
         ],
       },
       bindings: [
-        { agentId: "chat", match: { channel: "whatsapp" } },
-        { agentId: "opus", match: { channel: "telegram" } },
+        { agentId: "chat", match: { channel: "whatsapp", accountId: "*" } },
+        { agentId: "opus", match: { channel: "telegram", accountId: "*" } },
       ],
     }
     ```
 
     Notes:
 
-    - If you have multiple accounts for a channel, add `accountId` to the binding (for example `{ channel: "whatsapp", accountId: "personal" }`).
+    - These examples use `accountId: "*"` so the bindings keep working if you add accounts later.
     - To route a single DM/group to Opus while keeping the rest on chat, add a `match.peer` binding for that peer; peer matches always win over channel-wide rules.
 
 
@@ -539,9 +545,9 @@ Same channel, one peer to Opus
       bindings: [
         {
           agentId: "opus",
-          match: { channel: "whatsapp", peer: { kind: "direct", id: "+15551234567" } },
+          match: { channel: "whatsapp", accountId: "*", peer: { kind: "direct", id: "+15551234567" } },
         },
-        { agentId: "chat", match: { channel: "whatsapp" } },
+        { agentId: "chat", match: { channel: "whatsapp", accountId: "*" } },
       ],
     }
     ```

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Open WebUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/open-webui"
-source_hash: "efb0690e52d482376e154752a84f4548ab65bec23884ee647030c8c6d9feac9d"
+source_hash: "44b92846069a5e2dd56bfb06e2e19e97b54c732b6246ccc99d913d6ce5468824"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/open-webui.md"
@@ -284,7 +284,7 @@ Open WebUI persists OpenAI-compatible connection settings in its own database af
 
 ## Multi-User Setup with Profiles
 
-To run separate Hermes instances per user — each with their own config, memory, and skills — use [profiles](/docs/user-guide/profiles). Each profile runs its own API server on a different port and automatically advertises the profile name as the model in Open WebUI.
+To run separate Hermes instances per user — each with their own config, memory, and skills — use [profiles](/user-guide/profiles). Each profile runs its own API server on a different port and automatically advertises the profile name as the model in Open WebUI.
 
 ### 1. Create profiles and configure API servers
 

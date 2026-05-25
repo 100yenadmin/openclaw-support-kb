@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "8a4b33ee25686c0341b4b432697eb2fbae9e9eff856bbe903666e929c840dc86"
+source_hash: "01c1ff61f4004c239a3cb499d025c2155da4139ae91cff41ec19f61a0fe9e742"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/troubleshooting.md"
@@ -63,6 +63,7 @@ clean state.
 | Group messages ignored              | Check `requireMention` + mention patterns in config | Mention the bot or relax mention policy for that group.                                                                          |
 | QR login times out with 408         | Check gateway `HTTPS_PROXY` / `HTTP_PROXY` env      | Set a reachable proxy; use `NO_PROXY` only for bypasses.                                                                         |
 | Random disconnect/relogin loops     | `openclaw channels status --probe` + logs           | Recent reconnects are flagged even when currently connected; watch logs, restart the gateway, then relink if flapping continues. |
+| `status=408 Request Time-out` loop  | Probe, logs, doctor, then gateway status            | Fix host connectivity/timing first; back up auth and re-link the account if the loop persists.                                   |
 | Replies arrive seconds/minutes late | `openclaw doctor --fix`                             | Doctor stops verified stale local TUI clients when they are degrading the Gateway event loop.                                    |
 
 Full troubleshooting: [WhatsApp troubleshooting](/channels/whatsapp#troubleshooting)

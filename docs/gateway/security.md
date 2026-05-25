@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security"
-source_hash: "09f454f930ae65582fa34698f3d8c26387a22466472a82a26b23ac3f225a0ea6"
+source_hash: "dcf251aad3d16350eeb89a0789b25c32c4b8ca9397929505f51a2cf7974f0fc3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security.md"
@@ -33,6 +33,10 @@ OpenClaw security guidance assumes a **personal assistant** deployment: one trus
 
 This page explains hardening **within that model**. It does not claim hostile multi-tenant isolation on one shared gateway.
 
+Before changing remote access, DM policy, reverse proxy, or public exposure,
+use the [Gateway exposure runbook](/gateway/security/exposure-runbook) as a
+pre-flight and rollback checklist.
+
 ## Quick check: `openclaw security audit`
 
 See also: [Formal Verification (Security Models)](/security/formal-verification)
@@ -60,6 +64,74 @@ OpenClaw is both a product and an experiment: you're wiring frontier-model behav
 - what the bot can touch
 
 Start with the smallest access that still works, then widen it as you gain confidence.
+
+### Published package dependency lock
+
+OpenClaw source checkouts use `pnpm-lock.yaml`. The published `openclaw` npm
+package and OpenClaw-owned npm plugin packages include `npm-shrinkwrap.json`,
+npm's publishable dependency lockfile, so package installs use the reviewed
+transitive dependency graph from the release instead of resolving a fresh graph
+at install time. Suitable OpenClaw-owned npm plugin packages can also publish
+with explicit `bundledDependencies`, so their runtime dependency files are
+carried in the plugin tarball instead of depending only on install-time
+resolution.
+
+This is a supply-chain hardening measure:
+
+- release installs are more reproducible;
+- transitive dependency updates become visible review surfaces;
+- the package tarball contains the dependency graph that release validators
+  checked;
+- suitable OpenClaw-owned plugin tarballs contain the dependency files from
+  that graph;
+- `package-lock.json` stays out of the published package, because npm does not
+  treat it as the publishable lock contract.
+
+Shrinkwrap is not a sandbox and does not make every dependency trustworthy. It
+does not replace `openclaw security audit`, host isolation, npm provenance,
+signature/audit checks, or `--ignore-scripts` install smoke tests when those are
+appropriate. Treat it as a release reproducibility and review-control boundary.
+
+Maintainers should update and verify shrinkwrap whenever the root package or an
+OpenClaw-owned published plugin package changes its published dependency graph:
+
+```bash
+pnpm deps:shrinkwrap:generate
+pnpm deps:shrinkwrap:check
+```
+
+The generator resolves npm's publishable lock format but rejects generated
+package versions that are not already present in `pnpm-lock.yaml`, preserving
+the pnpm dependency age, override, and patch review boundary.
+
+Use `pnpm deps:shrinkwrap:root:generate` and
+`pnpm deps:shrinkwrap:root:check` only when you intentionally want to refresh
+the root `openclaw` package without touching plugin packages.
+
+Review `pnpm-lock.yaml`, `npm-shrinkwrap.json`, bundled plugin dependency
+payloads, and any `package-lock.json` diff as security-sensitive. The package
+validators require shrinkwrap in new root package tarballs and the plugin npm
+publish path checks plugin-local shrinkwrap, installs package-local bundled
+dependencies, and then packs or publishes. Package validators reject
+`package-lock.json`.
+
+To inspect a published package:
+
+```bash
+npm pack openclaw@<version> --json --pack-destination /tmp/openclaw-pack
+tar -tf /tmp/openclaw-pack/openclaw-<version>.tgz | grep '^package/npm-shrinkwrap.json$'
+```
+
+To inspect an OpenClaw-owned plugin package, replace the package spec and check
+the same tar entry:
+
+```bash
+npm pack @openclaw/discord@<version> --json --pack-destination /tmp/openclaw-plugin-pack
+tar -tf /tmp/openclaw-plugin-pack/openclaw-discord-<version>.tgz | grep '^package/npm-shrinkwrap.json$'
+tar -tf /tmp/openclaw-plugin-pack/openclaw-discord-<version>.tgz | grep '^package/node_modules/'
+```
+
+Background: [npm-shrinkwrap.json](https://docs.npmjs.com/cli/v11/configuring-npm/npm-shrinkwrap-json).
 
 ### Deployment and host trust
 

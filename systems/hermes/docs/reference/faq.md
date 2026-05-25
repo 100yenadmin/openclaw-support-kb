@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "FAQ & Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/reference/faq"
-source_hash: "3c9549a712768cdda051d0404ac1b2c6cce59031f4e8cf894b4fe26f39b6f906"
+source_hash: "fe0b646580dae7c6dae7c70144d82ab7d8c9d05763f6c9f542eceb3b616ac873"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/faq.md"
@@ -95,7 +95,7 @@ hermes model
 # API base URL: http://localhost:11434/v1
 # API key: ollama
 # Model name: qwen3.5:27b
-# Context length: 32768   ← set this to match your server's actual context window
+# Context length: 64000   ← Hermes minimum; set this to match your server's actual context window
 ```
 
 Or configure it directly in `config.yaml`:
@@ -112,7 +112,7 @@ Hermes persists the endpoint, provider, and base URL in `config.yaml` so it surv
 This works with Ollama, vLLM, llama.cpp server, SGLang, LocalAI, and others. See the [Configuration guide](../user-guide/configuration.md) for details.
 
 :::tip Ollama users
-If you set a custom `num_ctx` in Ollama (e.g., `ollama run --num_ctx 16384`), make sure to set the matching context length in Hermes — Ollama's `/api/show` reports the model's *maximum* context, not the effective `num_ctx` you configured.
+If you set a custom `num_ctx` in Ollama (e.g., `ollama run --num_ctx 64000`), make sure to set the matching context length in Hermes — Ollama's `/api/show` reports the model's *maximum* context, not the effective `num_ctx` you configured.
 :::
 
 :::tip Timeouts with local models
@@ -353,7 +353,7 @@ custom_providers:
     base_url: "http://localhost:11434/v1"
     models:
       qwen3.5:27b:
-        context_length: 32768
+        context_length: 64000
 ```
 
 See [Context Length Detection](../integrations/providers.md#context-length-detection) for how auto-detection works and all override options.
@@ -608,9 +608,9 @@ hermes chat
 ```
 
 See also:
-- [MCP (Model Context Protocol)](/docs/user-guide/features/mcp)
-- [Use MCP with Hermes](/docs/guides/use-mcp-with-hermes)
-- [MCP Config Reference](/docs/reference/mcp-config-reference)
+- [MCP (Model Context Protocol)](/user-guide/features/mcp)
+- [Use MCP with Hermes](/guides/use-mcp-with-hermes)
+- [MCP Config Reference](/reference/mcp-config-reference)
 
 #### MCP timeout errors
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Migrate from OpenClaw"
 source: "https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw"
-source_hash: "e642ec4741c887b3138290ed7a72dab05296e5d27cecc80983d786539de80a09"
+source_hash: "165aac24aea3286091e4d88f6e58581ac305ccee318a86c8e86dcf23ea7b15c3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/migrate-from-openclaw.md"
@@ -182,7 +182,7 @@ These are saved to `~/.hermes/migration/openclaw/<timestamp>/archive/` for manua
 | `HEARTBEAT.md` | `archive/workspace/HEARTBEAT.md` | Use cron jobs for periodic tasks |
 | `BOOTSTRAP.md` | `archive/workspace/BOOTSTRAP.md` | Use context files or skills |
 | Cron jobs | `archive/cron-config.json` | Recreate with `hermes cron create` |
-| Plugins | `archive/plugins-config.json` | See [plugins guide](/docs/user-guide/features/hooks) |
+| Plugins | `archive/plugins-config.json` | See [plugins guide](/user-guide/features/hooks) |
 | Hooks/webhooks | `archive/hooks-config.json` | Use `hermes webhook` or gateway hooks |
 | Memory backend | `archive/memory-backend-config.json` | Configure via `hermes honcho` |
 | Skills registry | `archive/skills-registry-config.json` | Use `hermes skills config` |

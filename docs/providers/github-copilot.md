@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GitHub Copilot"
 source: "https://docs.openclaw.ai/providers/github-copilot"
-source_hash: "9c91de1c1f137c232f777989d1223055c00693ae79e5b401f9c9401b2d09301d"
+source_hash: "38aec1f93548fb51b43fdb387df7c4b2fb88420ba96b8ec2e2c93dff912c57b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/github-copilot.md"
@@ -123,7 +123,9 @@ Interactive TTY required
 Model availability depends on your plan
 
     Copilot model availability depends on your GitHub plan. If a model is
-    rejected, try another ID (for example `github-copilot/gpt-4.1`).
+    rejected, try another ID (for example `github-copilot/gpt-5.5`). See
+    GitHub's [supported models per Copilot plan](https://docs.github.com/en/copilot/reference/ai-models/supported-models#supported-ai-models-per-copilot-plan)
+    for the current model list.
 
 
 

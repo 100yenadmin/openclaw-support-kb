@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "70ef0c2ced714712fb634efd39dc0000136afaf684e0d3030ce0cbe2e0c8dd94"
+source_hash: "ede16593020c459262e142f0b619c614cf9ef3575efaf4a068f4816d54d6630b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -198,7 +198,7 @@ Beyond MEMORY.md and USER.md, the agent can search its past conversations using 
 hermes sessions list    # Browse past sessions
 ```
 
-See [Session Search Tool](/docs/user-guide/sessions#session-search-tool) for the three calling shapes (discovery / scroll / browse) and the response format.
+See [Session Search Tool](/user-guide/sessions#session-search-tool) for the three calling shapes (discovery / scroll / browse) and the response format.
 
 ### session_search vs memory
 

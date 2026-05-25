@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "5c23b0ccf42499d224e078ebc7faf3451e4a0125ff26d59faa3937a74fde27af"
+source_hash: "4f44af2de40272e3d5df15c40c63060c33b99e42815351115e1ef658cc7d7720"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -693,8 +693,8 @@ Hermes Agent supports Discord voice messages:
 - **Discord voice channels**: Hermes can also join a voice channel, listen to users speaking, and talk back in the channel.
 
 For the full setup and operational guide, see:
-- [Voice Mode](/docs/user-guide/features/voice-mode)
-- [Use Voice Mode with Hermes](/docs/guides/use-voice-mode-with-hermes)
+- [Voice Mode](/user-guide/features/voice-mode)
+- [Use Voice Mode with Hermes](/guides/use-voice-mode-with-hermes)
 
 ## Forum Channels
 

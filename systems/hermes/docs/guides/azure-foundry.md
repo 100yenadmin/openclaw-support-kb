@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Foundry"
 source: "https://hermes-agent.nousresearch.com/docs/guides/azure-foundry"
-source_hash: "b318896b918588fa5e52e34e8763d5973947cc607bda77d3637e57d801176a76"
+source_hash: "418612d9e0650c79e3d5e2a1565eaba494e3a8f4f2d3b389aec86ef58b8f5996"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/azure-foundry.md"
@@ -341,9 +341,9 @@ Verify the same `Azure AI User` (or `Foundry User`) role is assigned on the Foun
 
 ## Related
 
-- [Environment variables](/docs/reference/environment-variables)
-- [Configuration](/docs/user-guide/configuration)
-- [AWS Bedrock](/docs/guides/aws-bedrock) — the other major cloud provider integration
+- [Environment variables](/reference/environment-variables)
+- [Configuration](/user-guide/configuration)
+- [AWS Bedrock](/guides/aws-bedrock) — the other major cloud provider integration
 - [Microsoft: Configure Entra ID for Foundry](https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/configure-entra-id) — upstream documentation for the keyless path
 
 ---

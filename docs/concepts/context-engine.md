@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "0d3829d2f5757168012b76fe5f64b15e94c18dafab880139a5239b68186c4541"
+source_hash: "03b118f6660cb2b60a04271d29970aa6a3ac1bf89ec9854e4f5ee8e7213979c7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -253,6 +253,33 @@ Optional members:
 | `prepareSubagentSpawn(params)` | Method | Set up shared state for a child session before it starts.                                                       |
 | `onSubagentEnded(params)`      | Method | Clean up after a subagent ends.                                                                                 |
 | `dispose()`                    | Method | Release resources. Called during gateway shutdown or plugin reload - not per-session.                           |
+
+### Host requirements
+
+Context engines can declare host capability requirements on `info.hostRequirements`.
+OpenClaw checks these requirements before starting the operation and fails closed
+with a descriptive error when the selected runtime cannot satisfy them.
+
+For agent runs, declare `assemble-before-prompt` when the engine must control the
+actual model prompt through `assemble()`:
+
+```ts
+info: {
+  id: "my-context-engine",
+  name: "My Context Engine",
+  hostRequirements: {
+    "agent-run": {
+      requiredCapabilities: ["assemble-before-prompt"],
+      unsupportedMessage:
+        "Use the native Codex or Pi embedded runtime, or select the legacy context engine.",
+    },
+  },
+}
+```
+
+Native Codex and Pi embedded agent runs satisfy `assemble-before-prompt`.
+Generic CLI backends do not, so engines that require it are rejected before the
+CLI process starts.
 
 ### ownsCompaction
 

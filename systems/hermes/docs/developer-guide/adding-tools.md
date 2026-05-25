@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Tools"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-tools"
-source_hash: "ea4f3058930071133ed82c93ff1395dd3212f90e8e961be8b61d30c71c2161d5"
+source_hash: "d33e631c513e57e70732d781b5940e0ed046db9e7ba2727fa98c3159a6f2bd8b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-tools.md"
@@ -26,8 +26,8 @@ This page is for adding a **built-in Hermes tool** to the repository itself.
 If you want a personal, project-local, or otherwise custom tool without
 modifying Hermes core, use the plugin route instead:
 
-- [Plugins](/docs/user-guide/features/plugins)
-- [Build a Hermes Plugin](/docs/guides/build-a-hermes-plugin)
+- [Plugins](/user-guide/features/plugins)
+- [Build a Hermes Plugin](/guides/build-a-hermes-plugin)
 
 Default to plugins for most custom tool creation. Only follow this page when
 you explicitly want to ship a new built-in tool in `tools/` and `toolsets.py`.

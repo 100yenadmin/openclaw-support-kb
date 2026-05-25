@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Operate the Teams Meeting Pipeline"
 source: "https://hermes-agent.nousresearch.com/docs/guides/operate-teams-meeting-pipeline"
-source_hash: "2760b1a6b34b38769be9332187533293894c4ae7c237a3152b9a5486d159fa86"
+source_hash: "86f04a7937aadffeab281ad45955fcbde7b4499e988661db4ee7429c9cbad699"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/operate-teams-meeting-pipeline.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/operate-teams-meeting-
 
 # Operate the Teams Meeting Pipeline
 
-Use this guide after you have already enabled the feature from [Teams Meetings](/docs/user-guide/messaging/teams-meetings).
+Use this guide after you have already enabled the feature from [Teams Meetings](/user-guide/messaging/teams-meetings).
 
 This page covers:
 - operator CLI flows
@@ -298,7 +298,7 @@ Use this before changing the deployment:
 
 ## Related Docs
 
-- [Teams Meetings setup](/docs/user-guide/messaging/teams-meetings)
-- [Microsoft Teams bot setup](/docs/user-guide/messaging/teams)
+- [Teams Meetings setup](/user-guide/messaging/teams-meetings)
+- [Microsoft Teams bot setup](/user-guide/messaging/teams)
 
 ---

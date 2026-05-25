@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "1db543428ba82ffa7ff40b6f3cdb471c880785e6af3de19edbebb9384da6c7e4"
+source_hash: "16fce041d446caf3d36304aae4d745bfdfcf7b7b90582eb11422b523d17b3552"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -158,6 +158,36 @@ CLI entry
     - `{{OutputBase}}` (scratch file base path, no extension)
 
 
+
+### Provider credentials (`apiKey`)
+
+Provider media understanding uses the same provider auth resolution as normal
+model calls: auth profiles, environment variables, then
+`models.providers.<providerId>.apiKey`.
+
+`tools.media.*.models[]` entries do not accept an inline `apiKey` field. The
+`provider` value in a media model entry, such as `openai` or `moonshot`, must
+have credentials available through one of the standard provider auth sources.
+
+Minimal example:
+
+```json5
+{
+  models: {
+    providers: {
+      openai: { apiKey: "
+OPENAI_API_KEY
+" },
+      moonshot: { apiKey: "
+MOONSHOT_API_KEY
+" },
+    },
+  },
+}
+```
+
+For the full provider auth reference, including profiles, environment
+variables, and custom base URLs, see [Tools and custom providers](/gateway/config-tools).
 
 ## Defaults and limits
 

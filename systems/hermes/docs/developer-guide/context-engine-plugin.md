@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Engine Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-engine-plugin"
-source_hash: "04ec346927d15b466062615362bfd7230244ec56ef1f13dc317c71b1107fcef5"
+source_hash: "420ca6feb6e79e94301a1614373e233940626100c09ad4e717d267b13ce7b1b6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-engine-plugin.md"
@@ -202,8 +202,8 @@ See `tests/agent/test_context_engine.py` for the full ABC contract test suite.
 
 ## See also
 
-- [Context Compression and Caching](/docs/developer-guide/context-compression-and-caching) — how the built-in compressor works
-- [Memory Provider Plugins](/docs/developer-guide/memory-provider-plugin) — analogous single-select plugin system for memory
-- [Plugins](/docs/user-guide/features/plugins) — general plugin system overview
+- [Context Compression and Caching](/developer-guide/context-compression-and-caching) — how the built-in compressor works
+- [Memory Provider Plugins](/developer-guide/memory-provider-plugin) — analogous single-select plugin system for memory
+- [Plugins](/user-guide/features/plugins) — general plugin system overview
 
 ---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/vision"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/vision"
-source_hash: "8fed548967c4872662ecd378d205726ff0ae2ba73dca0b7a69128e7538966416"
+source_hash: "deaf0c5b6adb71cf0ba3f633033f9426bb2080aedd2409cad113c19da62a14f8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/vision.md"
@@ -213,7 +213,7 @@ When a user attaches an image — from the CLI clipboard, the gateway (Telegram/
 
 You don't configure this — Hermes looks up your current model's capability in the provider metadata and picks the right path automatically. The practical effect: you can switch between vision and non-vision models mid-session and image handling "just works" without changing your workflow. Text-only models get coherent context about the image rather than a broken multimodal payload they'd have to reject.
 
-Which auxiliary model handles the text-description path is configurable under `auxiliary.vision` — see [Auxiliary Models](/docs/user-guide/configuration#auxiliary-models).
+Which auxiliary model handles the text-description path is configurable under `auxiliary.vision` — see [Auxiliary Models](/user-guide/configuration#auxiliary-models).
 
 ### `vision_analyze` has the same dual behavior
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model provider quickstart"
 source: "https://docs.openclaw.ai/providers/models"
-source_hash: "6178d797ae55fee164cc36ff5fbb14de3353f53fcae73ea8a5c5ead1cd8335fb"
+source_hash: "1ca162e14fdebcf75d367a10a30434666e0414e0ecae009ae67456eb71dc1eeb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/models.md"
@@ -39,7 +39,6 @@ model as `provider/model`.
 - [DeepInfra](/providers/deepinfra)
 - [fal](/providers/fal)
 - [Fireworks](/providers/fireworks)
-- [GLM models](/providers/glm)
 - [MiniMax](/providers/minimax)
 - [Mistral](/providers/mistral)
 - [Moonshot AI (Kimi + Kimi Coding)](/providers/moonshot)
@@ -54,7 +53,7 @@ model as `provider/model`.
 - [Vercel AI Gateway](/providers/vercel-ai-gateway)
 - [Venice (Venice AI)](/providers/venice)
 - [xAI](/providers/xai)
-- [Z.AI](/providers/zai)
+- [Z.AI (GLM)](/providers/zai)
 
 ## Additional provider variants
 

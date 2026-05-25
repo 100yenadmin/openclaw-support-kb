@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
-source_hash: "8696af857a95d8f7d415ff82dd7afe9917cba8351a1cc2cf319532dceb641dde"
+source_hash: "bff3c138cbe76311f4c6e640e2f22328c449dce21af3ff21bcd12bb7759e53f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding.md"
@@ -56,7 +56,10 @@ Where does the **Gateway** run?
 - **This Mac (Local only):** onboarding can configure auth and write credentials
   locally.
 - **Remote (over SSH/Tailnet):** onboarding does **not** configure local auth;
-  credentials must exist on the gateway host.
+  credentials must exist on the gateway host. The remote gateway token field
+  stores the token used by the macOS app to connect to that Gateway; existing
+  non-plaintext `gateway.remote.token` values are preserved until you replace
+  them.
 - **Configure later:** skip setup and leave the app unconfigured.
 
 Tip

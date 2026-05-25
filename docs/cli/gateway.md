@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "770ce6a1d79e08e9118ecf342cf376b4142be5ad270598300d986083a7f13a7f"
+source_hash: "c6c627326d892e67c99f44d45af22b532cb17af931c4afd872b7692eea4ea150"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -56,6 +56,8 @@ Startup behavior
     - `openclaw onboard --mode local` and `openclaw setup` are expected to write `gateway.mode=local`. If the file exists but `gateway.mode` is missing, treat that as a broken or clobbered config and repair it instead of assuming local mode implicitly.
     - If the file exists and `gateway.mode` is missing, the Gateway treats that as suspicious config damage and refuses to "guess local" for you.
     - Binding beyond loopback without auth is blocked (safety guardrail).
+    - `lan`, `tailnet`, and `custom` currently resolve over IPv4-only BYOH paths.
+    - IPv6-only BYOH is not natively supported on this path today. Use an IPv4 sidecar or proxy if the host itself is IPv6-only.
     - `SIGUSR1` triggers an in-process restart when authorized (`commands.restart` is enabled by default; set `commands.restart: false` to block manual restart, while gateway tool/config apply/update remain allowed).
     - `SIGINT`/`SIGTERM` handlers stop the gateway process, but they don't restore any custom terminal state. If you wrap the CLI with a TUI or raw-mode input, restore the terminal before exit.
 
@@ -69,7 +71,7 @@ ParamField
 
 ParamField
 " type="string">
-  Listener bind mode.
+  Listener bind mode. `lan`, `tailnet`, and `custom` currently resolve over IPv4-only paths.
 
 ParamField
 " type="string">
@@ -94,6 +96,10 @@ ParamField
 ParamField
 
   Reset Tailscale serve/funnel config on shutdown.
+
+ParamField
+
+  Expects an IPv4 address today. For IPv6-only BYOH, place an IPv4 sidecar or proxy in front of the Gateway and point OpenClaw at that IPv4 endpoint.
 
 ParamField
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "cec99fab725d48993dbbfd12b6039edc001aeb5b022efdf1a3d59032afa53cc7"
+source_hash: "df935f71ae505033c20728f266ae3b4c941e5fd6fbce150b9538f4580ad4cc6b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
@@ -167,7 +167,15 @@ Candidate sources:
   published version.
 - `source=ref`: pack a trusted branch, tag, or commit with the selected current
   harness.
-- `source=url`: validate an HTTPS tarball with required `package_sha256`.
+- `source=url`: validate a public HTTPS tarball with required `package_sha256`.
+  This path rejects URL credentials, non-default HTTPS ports, private/internal
+  hostnames or DNS/IP results, special-use IP space, and unsafe redirects.
+- `source=trusted-url`: validate an HTTPS tarball with required
+  `package_sha256` and `trusted_source_id` against the maintainer-owned policy
+  in `.github/package-trusted-sources.json`. Use this for enterprise/private
+  mirrors instead of weakening `source=url` with an input-level allow-private
+  switch. Bearer auth, when configured by policy, uses the fixed
+  `OPENCLAW_TRUSTED_PACKAGE_TOKEN` secret.
 - `source=artifact`: reuse a tarball uploaded by another Actions run.
 
 Full Release Validation uses `source=artifact` by default, built from the

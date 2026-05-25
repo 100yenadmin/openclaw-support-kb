@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/provider-routing"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing"
-source_hash: "e6aca87cc00c31a4beca5c758bdc31e13954dd65e2bbfd37fec7ad062603e38b"
+source_hash: "dd5b72695983fe176d233f4ab8fdf0f0fa03497e41ec6964b04a686281235e03"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/provider-routing.md"
@@ -208,7 +208,7 @@ provider_routing:
 When no `provider_routing` section is configured (the default), OpenRouter uses its own default routing logic, which generally balances cost and availability automatically.
 
 :::tip Provider Routing vs. Fallback Models
-Provider routing controls which **sub-providers within OpenRouter** handle your requests. For automatic failover to an entirely different provider when your primary model fails, see [Fallback Providers](/docs/user-guide/features/fallback-providers).
+Provider routing controls which **sub-providers within OpenRouter** handle your requests. For automatic failover to an entirely different provider when your primary model fails, see [Fallback Providers](/user-guide/features/fallback-providers).
 :::
 
 ---

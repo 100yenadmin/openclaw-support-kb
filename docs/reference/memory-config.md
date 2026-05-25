@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "e9d18755a9fd882f6ed7fd1ca24cec62d0dae13e4c0559da6bda0591ede2af22"
+source_hash: "e51b8b0ffc5a57770aeaaf6a22c9d40cf28d2c1acd236b373af25c08d7f6c5d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -454,7 +454,7 @@ Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.heic`, `.heif` (i
 
 | Key                | Type      | Default | Description                      |
 | ------------------ | --------- | ------- | -------------------------------- |
-| `cache.enabled`    | `boolean` | `false` | Cache chunk embeddings in SQLite |
+| `cache.enabled`    | `boolean` | `true`  | Cache chunk embeddings in SQLite |
 | `cache.maxEntries` | `number`  | `50000` | Max cached embeddings            |
 
 Prevents re-embedding unchanged text during reindex or transcript updates.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mantis Slack desktop runbook"
 source: "https://docs.openclaw.ai/concepts/mantis-slack-desktop-runbook"
-source_hash: "4cdf4ed081d6d19c8a26aad70b16a702b41e4a2c09690608a71e3a078a969e23"
+source_hash: "b688f32951f4b29fb88a0acd4e68c30ccb10fe5e07b929e42ae0e86053335d26"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/mantis-slack-desktop-runbook.md"
@@ -121,6 +121,34 @@ Use `--hydrate-mode prehydrated` only when the reused remote workspace already
 has `node_modules` and a built `dist/`. Mantis fails closed if those are
 missing.
 
+Prove native Slack approval UI:
+
+```bash
+pnpm openclaw qa mantis slack-desktop-smoke \
+  --provider aws \
+  --class standard \
+  --approval-checkpoints \
+  --credential-source convex \
+  --credential-role maintainer \
+  --hydrate-mode source
+```
+
+Approval checkpoint mode is mutually exclusive with `--gateway-setup`. It runs
+the opt-in `slack-approval-exec-native` and `slack-approval-plugin-native`
+scenarios unless you pass explicit approval checkpoint `--scenario` flags; other
+Slack scenarios are rejected before the VM starts. The Slack QA runner writes
+each checkpoint JSON file from the real Slack API message it observed, then the
+remote watcher renders that message snapshot into
+`approval-checkpoints/<scenario>-pending.png` and
+`approval-checkpoints/<scenario>-resolved.png`. The run fails if any checkpoint
+JSON, message evidence, ack JSON, or rendered screenshot is missing or empty.
+
+Cold GitHub Actions leases do not have Slack Web cookies, so their browser
+capture can land on Slack sign-in. For approval checkpoint proof, trust the
+rendered checkpoint images and Slack QA artifacts rather than
+`slack-desktop-smoke.png`. Use a kept warm lease with a manually logged-in Slack
+Web profile only when the browser screenshot itself must show Slack Web.
+
 ## Hydrate modes
 
 | Mode          | Use when                                  | Remote behavior                                                                       | Tradeoff                                                 |
@@ -144,9 +172,9 @@ uses `/var/cache/crabbox/pnpm` when present.
 - `artifacts.copy`: rsync back from the VM.
 
 `crabbox.remote_run` can be marked `accepted` when Crabbox returns a non-zero
-remote status after Mantis has copied metadata proving that the OpenClaw gateway
-is alive and the setup completed. Treat `accepted` as pass-with-explanation,
-not a failed scenario.
+remote status after Mantis has copied metadata proving that either the OpenClaw
+gateway setup completed or the Slack QA command itself exited successfully.
+Treat `accepted` as pass-with-explanation, not a failed scenario.
 
 If the run is slow:
 
@@ -164,7 +192,8 @@ A good PR comment should show:
 - scenario id and candidate SHA;
 - GitHub Actions run URL;
 - artifact URL;
-- inline screenshot;
+- inline approval checkpoint screenshot, or a Slack Web screenshot from a
+  logged-in warm lease;
 - inline animated preview when available;
 - full MP4 and trimmed MP4 links;
 - pass/fail status;

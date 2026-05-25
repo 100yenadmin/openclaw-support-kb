@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steer"
 source: "https://docs.openclaw.ai/tools/steer"
-source_hash: "24a198bc5c7606ccd6d3b177d7aa98e59b2ab5fded488228d015c6de11a23e0a"
+source_hash: "5c10649ad80d86066c3461cec1fc6e79177b585c45f8e6a1bcd2aad2d54368a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/steer.md"
@@ -60,15 +60,8 @@ For queue modes and steering boundaries, see [Command queue](/concepts/queue) an
 
 ## Sub-agents
 
-Use `/subagents steer` when the target is a child run:
-
-```text
-/subagents steer 2 focus only on the API surface
-```
-
-Top-level `/steer` does not select a sub-agent by id or list index. It always
-targets the current session's active run. See [Sub-agents](/tools/subagents) for
-sub-agent ids, labels, and control commands.
+Top-level `/steer` targets the current session's active run. Sub-agents report
+back to their parent/requester session; `/subagents` is for visibility only.
 
 ## ACP sessions
 

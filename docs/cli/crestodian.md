@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Crestodian"
 source: "https://docs.openclaw.ai/cli/crestodian"
-source_hash: "a1c562310ef352e582c1a34f28ec489625c5d8570bfd26178ebb53c93527fa9a"
+source_hash: "c019e7c24e425fe1b42c79e44e728d6b9b4ecaed22e9413658e5c53741d3895b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/crestodian.md"
@@ -18,8 +18,11 @@ Source: https://docs.openclaw.ai/cli/crestodian
 Crestodian is OpenClaw's local setup, repair, and configuration helper. It is
 designed to stay reachable when the normal agent path is broken.
 
-Running `openclaw` with no command starts Crestodian in an interactive terminal.
-Running `openclaw crestodian` starts the same helper explicitly.
+Running `openclaw` with no command starts classic onboarding first when the
+active config file is missing or has no authored settings (empty or
+metadata-only). After a config file has authored settings, running `openclaw`
+with no command starts Crestodian in an interactive terminal. Running
+`openclaw crestodian` starts the same helper explicitly.
 
 ## What Crestodian shows
 
@@ -98,8 +101,9 @@ Crestodian's startup path is deliberately small. It can run when:
 - no agent has been configured yet
 
 `openclaw --help` and `openclaw --version` still use the normal fast paths.
-Noninteractive `openclaw` exits with a short message instead of printing root
-help, because the no-command product is Crestodian.
+Noninteractive bare `openclaw` exits with a short message instead of printing
+root help. On a fresh install, the message points to non-interactive onboarding;
+after setup, it points to one-shot Crestodian commands.
 
 ## Operations and approval
 
@@ -314,16 +318,17 @@ persistent approval roundtrip through the rescue handler:
 pnpm test:live:crestodian-rescue-channel
 ```
 
-Fresh configless setup through Crestodian is covered by:
+Configless setup through explicit Crestodian commands is covered by:
 
 ```bash
 pnpm test:docker:crestodian-first-run
 ```
 
-That lane starts with an empty state dir, routes bare `openclaw` to Crestodian,
-sets the default model, creates an additional agent, configures Discord through
-a plugin enablement plus token SecretRef, validates config, and checks the audit
-log. QA Lab also has a repo-backed scenario for the same Ring 0 flow:
+That lane starts with an empty state dir, verifies the modern onboard Crestodian
+entrypoint, sets the default model, creates an additional agent, configures
+Discord through a plugin enablement plus token SecretRef, validates config, and
+checks the audit log. QA Lab also has a repo-backed scenario for the same Ring 0
+flow:
 
 ```bash
 pnpm openclaw qa suite --scenario crestodian-ring-zero-setup

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Personality & SOUL.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/personality"
-source_hash: "a20cc565c4c4275e012b1a4c2862032b40e16575170c9bb01afe706c8cf53a9f"
+source_hash: "416c1dedf75c9a24defc760fa6e5a17f4b7715905bdadc10cad7f7f1a2d3cc08"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/personality.md"
@@ -269,10 +269,10 @@ At a high level, the prompt stack includes:
 
 ## Related docs
 
-- [Context Files](/docs/user-guide/features/context-files)
-- [Configuration](/docs/user-guide/configuration)
-- [Tips & Best Practices](/docs/guides/tips)
-- [SOUL.md Guide](/docs/guides/use-soul-with-hermes)
+- [Context Files](/user-guide/features/context-files)
+- [Configuration](/user-guide/configuration)
+- [Tips & Best Practices](/guides/tips)
+- [SOUL.md Guide](/guides/use-soul-with-hermes)
 
 ## CLI appearance vs conversational personality
 

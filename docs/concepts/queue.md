@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "8257b71d0021519b1d06245536d104ccda3b6bc4391b8e5edd2ba6c1863cb4ba"
+source_hash: "d95bdb55ef88c2068380f9804abff54caa7580b69b0534e1662230f3933d4b2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue.md"
@@ -84,6 +84,20 @@ quiet window in `steer` mode:
 - `drop: "new"`: reject the newest message when the queue is already full.
 
 Defaults: `debounceMs: 500`, `cap: 20`, `drop: summarize`.
+
+## Steer and streaming
+
+When channel streaming is `partial` or `block`, steering can look like several
+short visible replies while the active run reaches runtime boundaries:
+
+- `partial`: the preview may finalize early, then a new preview starts after
+  steering is accepted.
+- `block`: draft-sized blocks can create the same sequential appearance.
+- Without streaming, steering falls back to a followup after the active run when
+  the runtime cannot accept same-turn steering.
+
+`steer` does not abort in-flight tools. Use `/queue interrupt` when the newest
+message should abort the current run.
 
 ## Precedence
 

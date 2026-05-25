@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/profiles"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "5df794e4a46b7f47820b93ae1182ac70495f74131568400b74d94ba0868c34be"
+source_hash: "a873b84a1bce1fb625348f69c16052740e510afe0d7cb2df7440cc3f7aa26068"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -186,6 +186,10 @@ assistant gateway install     # creates hermes-gateway-assistant service
 ```
 
 Each profile gets its own service name. They run independently.
+
+:::note Inside the official Docker image
+Per-profile gateways are supervised by [s6-overlay](https://github.com/just-containers/s6-overlay) (PID 1 in the container), so `hermes profile create <name>` automatically registers an s6 service slot at `/run/service/gateway-<name>/`. `hermes -p <name> gateway start/stop/restart` dispatches to `s6-svc` instead of spawning a bare process — crashes are auto-restarted and `docker restart` preserves the previously-running set of gateways. See [Per-profile gateway supervision](/user-guide/docker#per-profile-gateway-supervision) for details.
+:::
 
 ## Configuring profiles
 

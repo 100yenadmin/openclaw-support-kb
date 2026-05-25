@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Files"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files"
-source_hash: "1935d0e39d64b0370ebd337225f33e0e7fd0e966f63d5bf78bec6cdc1ff758ea"
+source_hash: "58dbc591ba3bb891c57995a39fe8030bbfcb8a4d58b3bcd7599ce222f06acf7f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/context-files.md"
@@ -92,7 +92,7 @@ This is a Next.js 14 web application with a Python FastAPI backend.
 
 ## SOUL.md
 
-`SOUL.md` controls the agent's personality, tone, and communication style. See the [Personality](/docs/user-guide/features/personality) page for full details.
+`SOUL.md` controls the agent's personality, tone, and communication style. See the [Personality](/user-guide/features/personality) page for full details.
 
 **Location:**
 

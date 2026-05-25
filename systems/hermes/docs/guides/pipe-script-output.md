@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Pipe Script Output to Messaging Platforms"
 source: "https://hermes-agent.nousresearch.com/docs/guides/pipe-script-output"
-source_hash: "1f69cddc1680e99e3d5f61ab3329e6516861e3db18bf2ce3a0023bb34be60e03"
+source_hash: "5edbc8e5a36b92d901b0886b9459772f8cead819a429b15f5913b0848ee21a68"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/pipe-script-output.md"
@@ -254,11 +254,11 @@ If you just need to pipe a raw string, reach for `hermes send`.
 
 ## Related
 
-- [Automate Anything with Cron](/docs/guides/automate-with-cron) —
+- [Automate Anything with Cron](/guides/automate-with-cron) —
   scheduled jobs whose output auto-delivers to any platform.
-- [Gateway Internals](/docs/developer-guide/gateway-internals) —
+- [Gateway Internals](/developer-guide/gateway-internals) —
   the delivery router that `hermes send` shares with cron delivery.
-- [Messaging Platform Setup](/docs/user-guide/messaging/) —
+- [Messaging Platform Setup](/user-guide/messaging/) —
   one-time configuration for each platform.
 
 ---

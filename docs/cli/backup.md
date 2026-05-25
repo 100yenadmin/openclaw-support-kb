@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Backup"
 source: "https://docs.openclaw.ai/cli/backup"
-source_hash: "8c34db42dc9cc81364073a58d3f4d33d4b41aa8a7f0512272f5c6b2e56244794"
+source_hash: "2b180eb0148196d6377b1e6757c8ce1b1adf2c4e3f0f05e3872070eea0b9cbe2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/backup.md"
@@ -24,13 +24,14 @@ openclaw backup create --dry-run --json
 openclaw backup create --verify
 openclaw backup create --no-include-workspace
 openclaw backup create --only-config
-openclaw backup verify ./2026-03-09T00-00-00.000Z-openclaw-backup.tar.gz
+openclaw backup verify ./2026-03-09T08-00-00.000+08-00-openclaw-backup.tar.gz
 ```
 
 ## Notes
 
 - The archive includes a `manifest.json` file with the resolved source paths and archive layout.
 - Default output is a timestamped `.tar.gz` archive in the current working directory.
+- Timestamped backup filenames use your machine's local timezone and include the UTC offset.
 - If the current working directory is inside a backed-up source tree, OpenClaw falls back to your home directory for the default archive location.
 - Existing archive files are never overwritten.
 - Output paths inside the source state/workspace trees are rejected to avoid self-inclusion.

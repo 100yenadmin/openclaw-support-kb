@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Goals"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/goals"
-source_hash: "f9b61f4cc806df6c6822a43d1fc56baba67c09dafcfa24ef65bc5bd4478b4768"
+source_hash: "94f2054667f398ce8710a4a19d97329dc2184cd61e6d2af11b79f437e98bc1ad"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/goals.md"
@@ -131,7 +131,7 @@ goals:
 
 ### Choosing the judge model
 
-The judge uses the `goal_judge` auxiliary task. By default it resolves to your main model (see [Auxiliary Models](/docs/user-guide/configuration#auxiliary-models)). If you want to route the judge to a cheap fast model to keep costs down, add an override:
+The judge uses the `goal_judge` auxiliary task. By default it resolves to your main model (see [Auxiliary Models](/user-guide/configuration#auxiliary-models)). If you want to route the judge to a cheap fast model to keep costs down, add an override:
 
 ```yaml
 auxiliary:

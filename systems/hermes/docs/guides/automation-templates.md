@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automation Templates"
 source: "https://hermes-agent.nousresearch.com/docs/guides/automation-templates"
-source_hash: "8be77cf6319521a78e3b5fbe2ff8154da19890af3b255e3283ce73558dcf5bc4"
+source_hash: "325c5436979f6aaccb63e5fc023b061e6ccf623491029aefbcd0eb524c5093af"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/automation-templates.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/automation-templates
 
 # Automation Templates
 
-Copy-paste recipes for common automation patterns. Each template uses Hermes's built-in [cron scheduler](/docs/user-guide/features/cron) for time-based triggers and [webhook platform](/docs/user-guide/messaging/webhooks) for event-driven triggers.
+Copy-paste recipes for common automation patterns. Each template uses Hermes's built-in [cron scheduler](/user-guide/features/cron) for time-based triggers and [webhook platform](/user-guide/messaging/webhooks) for event-driven triggers.
 
 Every template works with **any model** — not locked to a single provider.
 

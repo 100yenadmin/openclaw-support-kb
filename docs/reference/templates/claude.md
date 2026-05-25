@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.md template"
 source: "https://docs.openclaw.ai/reference/templates/CLAUDE"
-source_hash: "df5c8f38700c735f7b9d1916eefbf098532e1f70b98369404f29f1243b2c0235"
+source_hash: "cf3d098176bbb59aa866f75586933612faf4eb77cd879e2c2a3d84bfa7f532a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/claude.md"
@@ -60,6 +60,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 - **Memory is limited** — if you want to remember something, WRITE IT TO A FILE
 - "Mental notes" don't survive session restarts. Files do.
+- Before writing memory files, read them first; write only concrete updates, never empty placeholders.
 - When someone says "remember this" → update `memory/YYYY-MM-DD.md` or relevant file
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
@@ -69,6 +70,7 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 
 - Don't exfiltrate private data. Ever.
 - Don't run destructive commands without asking.
+- Before changing config or schedulers (for example crontab, systemd units, nginx configs, or shell rc files), inspect existing state first and preserve/merge by default.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "2b0e086d459e96035af3a790505f43f273e49397c7803883ca5e7961219a0237"
+source_hash: "a1d68de120cf63853c0385c11ac0979183e0abeb957f2d20bf95346e69095c43"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/anthropic.md"
@@ -78,7 +78,7 @@ Verify the model is available
 
     ```json5
     {
-      env: { ANTHROPIC_API_KEY: "sk-ant-..." },
+      env: { ANTHROPIC_API_KEY: "example-anthropic-key-not-real" },
       agents: { defaults: { model: { primary: "anthropic/claude-opus-4-6" } } },
     }
     ```
@@ -153,7 +153,7 @@ Note
 
 Tip
 
-    If you want the clearest billing path, use an Anthropic API key instead. OpenClaw also supports subscription-style options from [OpenAI Codex](/providers/openai), [Qwen Cloud](/providers/qwen), [MiniMax](/providers/minimax), and [Z.AI / GLM](/providers/glm).
+    If you want the clearest billing path, use an Anthropic API key instead. OpenClaw also supports subscription-style options from [OpenAI Codex](/providers/openai), [Qwen Cloud](/providers/qwen), [MiniMax](/providers/minimax), and [Z.AI / GLM](/providers/zai).
 
 
 
@@ -309,34 +309,38 @@ Media understanding (image and PDF)
 
 
 
-1M context window (beta)
+1M context window
 
-    Anthropic's 1M context window is beta-gated. Enable it per model:
+    Anthropic's 1M context window is available on GA-capable Claude 4.x models
+    such as Opus 4.6, Opus 4.7, and Sonnet 4.6. OpenClaw sizes those models at
+    1M automatically:
 
     ```json5
     {
       agents: {
         defaults: {
           models: {
-            "anthropic/claude-opus-4-6": {
-              params: { context1m: true },
-            },
+            "anthropic/claude-opus-4-6": {},
           },
         },
       },
     }
     ```
 
-    OpenClaw maps this to `anthropic-beta: context-1m-2025-08-07` on requests.
+    Older configs can keep `params.context1m: true`, but OpenClaw no longer sends
+    the retired `context-1m-2025-08-07` beta header. Older `anthropicBeta` config
+    entries with that value are ignored during request header resolution and
+    unsupported older Claude models stay on their normal context window.
 
     `params.context1m: true` also applies to the Claude CLI backend
-    (`claude-cli/*`) for eligible Opus and Sonnet models, expanding the runtime
-    context window for those CLI sessions to match the direct-API behavior.
+    (`claude-cli/*`) for eligible GA-capable Opus and Sonnet models, preserving
+    the runtime context window for those CLI sessions to match the direct-API
+    behavior.
 
 
 Warning
 
-    Requires long-context access on your Anthropic credential. Legacy token auth (`sk-ant-oat-*`) is rejected for 1M context requests — OpenClaw logs a warning and falls back to the standard context window.
+    Requires long-context access on your Anthropic credential. OAuth/subscription token auth keeps its required Anthropic beta headers, but OpenClaw strips the retired 1M beta header if it remains in older config.
 
 
 
@@ -344,7 +348,7 @@ Warning
 
 Claude Opus 4.7 1M context
 
-    `anthropic/claude-opus-4.7` and its `claude-cli` variant have a 1M context
+    `anthropic/claude-opus-4-7` and its `claude-cli` variant have a 1M context
     window by default — no `params.context1m: true` needed.
 
 

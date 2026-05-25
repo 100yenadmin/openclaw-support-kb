@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Trusted proxy auth"
 source: "https://docs.openclaw.ai/gateway/trusted-proxy-auth"
-source_hash: "611be1d6eb8b6b9bad93f399cc7c0dac8ce2055eeef878948aa237cb1d6ad8c9"
+source_hash: "a05cd2c5fb9fbab330a84cfe82b8a797d17d7468bb582c33d6ef28f4d6aed668"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/trusted-proxy-auth.md"
@@ -72,6 +72,19 @@ Implications:
 - Pairing is no longer the primary gate for Control UI access in this mode.
 - Your reverse proxy auth policy and `allowUsers` become the effective access control.
 - Keep gateway ingress locked to trusted proxy IPs only (`gateway.trustedProxies` + firewall).
+
+**Scope clearing without device identity:** Because the browser over plain HTTP
+cannot create the device identity that OpenClaw uses to bind operator scopes,
+trusted-proxy WebSocket connections that lack device identity have their
+self-declared scopes cleared to an empty set. The connection is allowed, but
+scope-gated methods (`operator.read`, `operator.write`, etc.) fail with
+`missing scope`.
+
+To preserve operator scopes on trusted-proxy WebSocket connections without
+device identity, set `gateway.controlUi.dangerouslyDisableDeviceAuth: true`.
+This is a break-glass flag (`openclaw security audit` reports it as critical).
+Use it only when the reverse proxy is the sole path to the Gateway and device
+identity cannot be established.
 
 ## Configuration
 
@@ -341,6 +354,11 @@ Loopback trusted-proxy identity headers still fail closed: same-host callers are
 
 Trusted-proxy auth is an **identity-bearing** HTTP mode, so callers may optionally declare operator scopes with `x-openclaw-scopes`.
 
+Note: `x-openclaw-scopes` applies to HTTP endpoints only. WebSocket scopes are
+determined by the Gateway protocol handshake and device identity binding. For
+WebSocket scope behavior with trusted-proxy, see
+[Control UI pairing behavior](#control-ui-pairing-behavior).
+
 Examples:
 
 - `x-openclaw-scopes: operator.read`
@@ -449,6 +467,22 @@ trusted_proxy_origin_not_allowed
     - `gateway.controlUi.allowedOrigins` includes the exact browser origin.
     - You are not relying on wildcard origins unless you intentionally want allow-all behavior.
     - If you intentionally use Host-header fallback mode, `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true` is set deliberately.
+
+
+
+Connection succeeds but methods report missing scope
+
+    The WebSocket connects, but `chat.history` or `sessions.list` fails with
+    `missing scope: operator.read`.
+
+    This is expected for trusted-proxy WebSocket connections without device
+    identity. Connections lacking device identity have their scopes cleared. The
+    browser cannot generate device identity over plain HTTP.
+
+    Fix:
+
+    - Set `gateway.controlUi.dangerouslyDisableDeviceAuth: true` to preserve operator scopes on trusted-proxy WebSocket connections, or
+    - Use device identity pairing so scopes are bound to the device token.
 
 
 

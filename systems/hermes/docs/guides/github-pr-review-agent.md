@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tutorial: GitHub PR Review Agent"
 source: "https://hermes-agent.nousresearch.com/docs/guides/github-pr-review-agent"
-source_hash: "955c80cafe64f4b94c0a3a0bae62adfeae6d24eb2bbf26363fdd3ef52a5fa116"
+source_hash: "cb8c3316ae62e051711129319ade516677485bde785c580b0beb658eabfe425b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/github-pr-review-agent.md"
@@ -47,7 +47,7 @@ If you have a public endpoint available, check out [Automated GitHub PR Comments
 
 ## Prerequisites
 
-- **Hermes Agent installed** — see the [Installation guide](/docs/getting-started/installation)
+- **Hermes Agent installed** — see the [Installation guide](/getting-started/installation)
 - **Gateway running** for cron jobs:
   ```bash
   hermes gateway install   # Install as a service
@@ -63,7 +63,7 @@ If you have a public endpoint available, check out [Automated GitHub PR Comments
   # Authenticate
   gh auth login
   ```
-- **Messaging configured** (optional) — [Telegram](/docs/user-guide/messaging/telegram) or [Discord](/docs/user-guide/messaging/discord)
+- **Messaging configured** (optional) — [Telegram](/user-guide/messaging/telegram) or [Discord](/user-guide/messaging/discord)
 
 :::tip No messaging? No problem
 Use `deliver: "local"` to save reviews to `~/.hermes/cron/output/`. Great for testing before wiring up notifications.
@@ -310,9 +310,9 @@ GitHub allows 5,000 API requests/hour for authenticated users. Each PR review us
 ## What's Next?
 
 - **[Webhook-Based PR Reviews](./webhook-github-pr-review.md)** — get instant reviews when PRs are opened (requires a public endpoint)
-- **[Daily Briefing Bot](/docs/guides/daily-briefing-bot)** — combine PR reviews with your morning news digest
-- **[Build a Plugin](/docs/guides/build-a-hermes-plugin)** — wrap the review logic into a shareable plugin
-- **[Profiles](/docs/user-guide/profiles)** — run a dedicated reviewer profile with its own memory and config
-- **[Fallback Providers](/docs/user-guide/features/fallback-providers)** — ensure reviews run even when one provider is down
+- **[Daily Briefing Bot](/guides/daily-briefing-bot)** — combine PR reviews with your morning news digest
+- **[Build a Plugin](/guides/build-a-hermes-plugin)** — wrap the review logic into a shareable plugin
+- **[Profiles](/user-guide/profiles)** — run a dedicated reviewer profile with its own memory and config
+- **[Fallback Providers](/user-guide/features/fallback-providers)** — ensure reviews run even when one provider is down
 
 ---

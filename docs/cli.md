@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "c41381dcafb7e68c8c4a4d55ad0a2a13bdd38dde9504efad301715cd0d2a16df"
+source_hash: "3410c0288fc147a53b3d2b6e2cc718eeff24d8cc3ad313c99f2233cd0d23fcdb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -42,7 +42,7 @@ Use the setup commands by intent:
 | Pairing and channels | [`pairing`](/cli/pairing) · [`qr`](/cli/qr) · [`channels`](/cli/channels)                                                                                                                                                                 |
 | Security and plugins | [`security`](/cli/security) · [`secrets`](/cli/secrets) · [`skills`](/cli/skills) · [`plugins`](/cli/plugins) · [`proxy`](/cli/proxy)                                                                                                     |
 | Legacy aliases       | [`daemon`](/cli/daemon) (gateway service) · [`clawbot`](/cli/clawbot) (namespace)                                                                                                                                                         |
-| Plugins (optional)   | [`path`](/cli/path) · [`policy`](/cli/policy) · [`voicecall`](/cli/voicecall) (if installed)                                                                                                                                              |
+| Plugins (optional)   | [`meeting-notes`](/cli/meeting-notes) · [`path`](/cli/path) · [`policy`](/cli/policy) · [`voicecall`](/cli/voicecall) (if installed)                                                                                                      |
 
 ## Global flags
 
@@ -135,6 +135,10 @@ openclaw [--dev] [--profile <name>] <command>
     status
     index
     search
+  meeting-notes
+    list
+    show
+    path
   path
     resolve
     find

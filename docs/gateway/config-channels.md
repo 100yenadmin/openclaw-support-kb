@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "e9423ec8b649a58b0da4bf22bbcad455f4dc3b2af2500a8eee8ed52218cdc755"
+source_hash: "9c445931d809b2ccd9cc5e0166d63ebfba907216e03696080271e2a588eb675a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-channels.md"
@@ -59,10 +59,10 @@ Use `channels.modelByChannel` to pin specific channel IDs to a model. Values acc
         "123456789012345678": "anthropic/claude-opus-4-6",
       },
       slack: {
-        C1234567890: "openai/gpt-4.1",
+        C1234567890: "openai/gpt-5.5",
       },
       telegram: {
-        "-1001234567890": "openai/gpt-4.1-mini",
+        "-1001234567890": "openai/gpt-5.4-mini",
         "-1001234567890:topic:99": "anthropic/claude-sonnet-4-6",
       },
     },

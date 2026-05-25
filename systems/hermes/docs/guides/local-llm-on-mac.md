@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Local LLMs on Mac"
 source: "https://hermes-agent.nousresearch.com/docs/guides/local-llm-on-mac"
-source_hash: "67aa12d62af029ced4de9af97b1c53108b757e47783b484c18330a50d940fe0e"
+source_hash: "39e6ba73230db3bf4d432fff958b02a25207dc84f2364330559393d654b2ecd1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/local-llm-on-mac.md"
@@ -123,9 +123,9 @@ The `--cache-type-k q4_0 --cache-type-v q4_0` flags are the most important optim
 | q8_0 | ~8 GB |
 | **q4_0** | **~4 GB** |
 
-On an 8 GB Mac, use `q4_0` KV cache and reduce context to `-c 32768` (32K). On 16 GB, you can comfortably do 128K context. On 32 GB+, you can run larger models or multiple parallel slots.
+On an 8 GB Mac, use `q4_0` KV cache and choose a smaller model that can still fit Hermes' 64K minimum context. On 16 GB, you can comfortably do 128K context. On 32 GB+, you can run larger models or multiple parallel slots.
 
-If you're still running out of memory, reduce context size first (`-c`), then try a smaller quantization (Q3_K_M instead of Q4_K_M).
+If you're still running out of memory, reduce context only while staying at or above Hermes' 64K minimum; otherwise switch to a smaller model or smaller quantization (Q3_K_M instead of Q4_K_M).
 
 ### Test it
 

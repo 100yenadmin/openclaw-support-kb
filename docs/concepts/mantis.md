@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mantis"
 source: "https://docs.openclaw.ai/concepts/mantis"
-source_hash: "9b861d5948fc6dfc4e062217494ff8de94ffb42340e411299e0cb29139682f11"
+source_hash: "2b3cf1a7d71792fe28b34a85606f44e2210a7deff2dc48a17130fe179ff410d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/mantis.md"
@@ -206,6 +206,10 @@ Useful Slack desktop flags:
 - `OPENCLAW_MANTIS_SLACK_BROWSER_PROFILE_DIR` controls the persistent Chrome profile inside the VM. The default is `$HOME/.config/openclaw-mantis/slack-chrome-profile`, so a manual Slack Web login survives reruns on the same lease.
 - `--credential-source convex --credential-role ci` uses the shared credential pool instead of direct Slack env tokens.
 - `--provider-mode`, `--model`, `--alt-model`, and `--fast` pass through to the Slack live lane.
+
+Approval checkpoint runs render Slack API message snapshots into checkpoint PNGs
+for CI-safe visual proof. `slack-desktop-smoke.png` is only proof of Slack Web
+when the lease uses a warm browser profile that is already logged in.
 
 The GitHub smoke workflow is `Mantis Discord Smoke`. The before and after GitHub
 workflow for the first real scenario is `Mantis Discord Status Reactions`. It

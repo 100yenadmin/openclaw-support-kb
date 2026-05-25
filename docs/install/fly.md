@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "79e87798f93ee75099d4112286e50d7981a74fb8016c3d357712149de484ea11"
+source_hash: "1e96163e23173d54e12216f899eee74854730e5fd85db08816e96d93322e0ac0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -112,14 +112,14 @@ Set secrets
     fly secrets set OPENCLAW_GATEWAY_TOKEN=$(openssl rand -hex 32)
 
     # Model provider API keys
-    fly secrets set ANTHROPIC_API_KEY=sk-ant-...
+    fly secrets set ANTHROPIC_API_KEY=example-anthropic-key-not-real
 
     # Optional: Other providers
-    fly secrets set OPENAI_API_KEY=sk-...
+    fly secrets set OPENAI_API_KEY=example-openai-key-not-real
     fly secrets set GOOGLE_API_KEY=...
 
     # Channel tokens
-    fly secrets set DISCORD_BOT_TOKEN=MTQ...
+    fly secrets set DISCORD_BOT_TOKEN=example-discord-bot-token
     ```
 
     **Notes:**

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/credential-pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "d9028f6c26cbba15e7ee3a31fa91169798e06f5dc98f46a7e25c566dc3330a7e"
+source_hash: "1b346193479d8e43fa8ac2fa9c203454d88e2ba023f4f4841a1367254a957bac"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -191,6 +191,8 @@ Hermes automatically discovers credentials from multiple sources and seeds the p
 
 Auto-seeded entries are updated on each pool load — if you remove an env var, its pool entry is automatically pruned. Manual entries (added via `hermes auth add`) are never auto-pruned.
 
+Borrowed runtime secrets (for example env vars, Bitwarden/Vault/keyring/systemd references, and custom config values) are reference-only at the `auth.json` boundary. Hermes can use the resolved value in memory for the current run, but it persists only metadata such as the source ref, label, status, request counters, and a non-reversible fingerprint. Manual entries and Hermes-owned OAuth/device-code state keep the durable tokens they need to refresh.
+
 ## Delegation & Subagent Sharing
 
 When the agent spawns subagents via `delegate_task`, the parent's credential pool is automatically shared with children:
@@ -231,14 +233,27 @@ Pool state is stored in `~/.hermes/auth.json` under the `credential_pool` key:
         "auth_type": "api_key",
         "priority": 0,
         "source": "env:OPENROUTER_API_KEY",
-        "access_token": "sk-or-v1-...",
+        "secret_source": "bitwarden",
+        "secret_fingerprint": "sha256:12ab34cd56ef7890",
         "last_status": "ok",
         "request_count": 142
       }
+    ],
+    "anthropic": [
+      {
+        "id": "manual1",
+        "label": "personal-api-key",
+        "auth_type": "api_key",
+        "priority": 0,
+        "source": "manual",
+        "access_token": "sk-ant-api03-..."
+      }
     ]
-  },
+  }
 }
 ```
+
+The OpenRouter entry above was borrowed from an external source, so the raw key is not stored in `auth.json`. The manual Anthropic entry was intentionally added to Hermes' credential store, so its token remains persistable.
 
 Strategies are stored in `config.yaml` (not `auth.json`):
 

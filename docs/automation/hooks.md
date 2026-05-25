@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "119cd4352a6dbaaaba674022aed8cae26564c75b37205225d6c088ce9c614c4f"
+source_hash: "3bf029da89a8c255ded566f497d5c4c5502a8ccb93e97b65fcf8fef7d2e4752c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/hooks.md"
@@ -21,6 +21,18 @@ There are two kinds of hooks in OpenClaw:
 - **Webhooks**: external HTTP endpoints that let other systems trigger work in OpenClaw. See [Webhooks](/automation/cron-jobs#webhooks).
 
 Hooks can also be bundled inside plugins. `openclaw hooks list` shows both standalone hooks and plugin-managed hooks.
+
+## Choose the right surface
+
+OpenClaw has several extension surfaces that look similar but solve different problems:
+
+| If you want to...                                                                                                     | Use...                                | Why                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Save a snapshot on `/new`, log `/reset`, call an external API after `message:sent`, or add coarse operator automation | Internal hooks (`HOOK.md`, this page) | File-based hooks are meant for operator-managed side effects and command/lifecycle automation |
+| Rewrite prompts, block tools, cancel outbound messages, or add ordered middleware/policy                              | Typed plugin hooks via `api.on(...)`  | Typed hooks have explicit contracts, priorities, merge rules, and block/cancel semantics      |
+| Add telemetry-only export or observability                                                                            | Diagnostic events                     | Observability is a separate event bus, not a policy hook surface                              |
+
+Use internal hooks when you want automation that behaves like a small installed integration. Use typed plugin hooks when you need runtime lifecycle control.
 
 ## Quick start
 
@@ -108,14 +120,19 @@ const handler = async (event) => {
   console.log(`[my-hook] New command triggered`);
   // Your logic here
 
-  // Optionally send message to user
+  // Optionally send a reply on replyable surfaces
   event.messages.push("Hook executed!");
 };
 
 export default handler;
 ```
 
-Each event includes: `type`, `action`, `sessionKey`, `timestamp`, `messages` (push to send to user), and `context` (event-specific data). Agent and tool plugin hook contexts can also include `trace`, a read-only W3C-compatible diagnostic trace context that plugins may pass into structured logs for OTEL correlation.
+Each event includes: `type`, `action`, `sessionKey`, `timestamp`, `messages` (push replies here on replyable surfaces only), and `context` (event-specific data). Agent and tool plugin hook contexts can also include `trace`, a read-only W3C-compatible diagnostic trace context that plugins may pass into structured logs for OTEL correlation.
+
+`event.messages` is only delivered automatically on replyable surfaces such as
+`command:*` and `message:received`. Lifecycle-only events such as
+`agent:bootstrap`, `session:*`, `gateway:*`, or `message:sent` do not have a
+reply channel and ignore pushed messages.
 
 ### Event context highlights
 
@@ -257,6 +274,11 @@ Plugins can register typed hooks through the Plugin SDK for deeper integration:
 intercepting tool calls, modifying prompts, controlling message flow, and more.
 Use plugin hooks when you need `before_tool_call`, `before_agent_reply`,
 `before_install`, or other in-process lifecycle hooks.
+
+Plugin-managed internal hooks are different: they participate in this page's
+coarse command/lifecycle event system and show up in `openclaw hooks list` as
+`plugin:<id>`. Use those for side effects and compatibility with hook packs, not
+for ordered middleware or policy gates.
 
 For the complete plugin hook reference, see [Plugin hooks](/plugins/hooks).
 

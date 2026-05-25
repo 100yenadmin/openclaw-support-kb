@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bun (experimental)"
 source: "https://docs.openclaw.ai/install/bun"
-source_hash: "57821134e4900bccdf51ff8a2ce316e57a84338002f01dd2ccda8078588cd85c"
+source_hash: "2a729cc0447f86046dc52fdadb12229507958082bca1039988a0361c759cf374"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/bun.md"
@@ -61,7 +61,7 @@ bun pm trust baileys protobufjs
 
 ## Caveats
 
-Some scripts still hardcode pnpm (for example `docs:build`, `ui:*`, `protocol:check`). Run those via pnpm for now.
+Some scripts still hardcode pnpm (for example `check:docs`, `ui:*`, `protocol:check`). Run those via pnpm for now.
 
 ## Related
 

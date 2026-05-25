@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "e3a516dd6044d04d0e0de1698f1a3a48d94b35f6dc88bad345db75b79c798689"
+source_hash: "756ae52096cd09673d96403b55db22866332bca134669af6530b1e468324aed7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -183,18 +183,19 @@ openclaw config get agents.defaults.models
 
 Look for:
 
-- Selected Anthropic Opus/Sonnet model has `params.context1m: true`.
+- Selected Anthropic model is a GA-capable 1M Claude 4.x model, or the model has legacy `params.context1m: true`.
 - Current Anthropic credential is not eligible for long-context usage.
-- Requests fail only on long sessions/model runs that need the 1M beta path.
+- Requests fail only on long sessions/model runs that need the 1M context path.
 
 Fix options:
 
 Steps
 
 
-Disable context1m
+Use a standard context window
 
-    Disable `context1m` for that model to fall back to the normal context window.
+    Switch to a standard-window model, or remove legacy `context1m` from older
+    model config that is not GA-capable for 1M context.
 
 
 Use an eligible credential
@@ -212,6 +213,43 @@ Related:
 - [Anthropic](/providers/anthropic)
 - [Token use and costs](/reference/token-use)
 - [Why am I seeing HTTP 429 from Anthropic?](/help/faq-first-run#why-am-i-seeing-http-429-ratelimiterror-from-anthropic)
+
+## Upstream 403 blocked responses
+
+Use this when an upstream LLM provider returns a generic `403` such as
+`Your request was blocked`.
+
+Do not assume this is always an OpenClaw configuration issue. The response can
+come from an upstream security layer such as a CDN, WAF, bot-management rule, or
+reverse proxy in front of an OpenAI-compatible endpoint.
+
+```bash
+openclaw status
+openclaw gateway status
+openclaw logs --follow
+```
+
+Look for:
+
+- multiple models under the same provider failing in the same way
+- HTML or generic security text instead of a normal provider API error
+- provider-side security events for the same request time
+- a tiny direct `curl` probe succeeding while normal SDK-shaped requests fail
+
+Fix the provider-side filtering first when the evidence points to a WAF/CDN
+block. Prefer a narrowly scoped allow or skip rule for the API path OpenClaw
+uses, and avoid disabling protection for the whole site.
+
+Warning
+
+A successful minimal `curl` does not guarantee that real SDK-style requests will
+pass through the same upstream security layer.
+
+Related:
+
+- [OpenAI-compatible endpoints](/gateway/configuration-reference#openai-compatible-endpoints)
+- [Provider configuration](/providers)
+- [Logs](/logging)
 
 ## Local OpenAI-compatible backend passes direct probes but agent runs fail
 
@@ -315,6 +353,21 @@ Look for:
 - Correct probe URL and dashboard URL.
 - Auth mode/token mismatch between client and gateway.
 - HTTP usage where device identity is required.
+
+If a local browser cannot connect to `127.0.0.1:18789` after an update, first
+recover the local Gateway service and confirm it is serving the dashboard:
+
+```bash
+openclaw gateway restart
+lsof -i :18789
+curl http://127.0.0.1:18789
+```
+
+If `curl` returns OpenClaw HTML, the Gateway is working and the remaining issue
+is likely browser cache, an old deep link, or stale tab state. Open
+`http://127.0.0.1:18789` directly and navigate from the dashboard. If restart
+does not leave the service running, run `openclaw gateway start` and recheck
+`openclaw gateway status`.
 
 AccordionGroup
 

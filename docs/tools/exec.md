@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "932a64d16ea469f81c5e3b0562977043ffbcea69d7a076c8ab71ba941fa4495f"
+source_hash: "a54320853a27558002f422f51bf91ddfbb2263de6f672d01a3b2f63160d092b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -152,7 +152,7 @@ Per-agent node binding (use the agent list index in config):
 
 ```bash
 openclaw config get agents.list
-openclaw config set agents.list[0].tools.exec.node "node-id-or-name"
+openclaw config set 'agents.list[0].tools.exec.node' "node-id-or-name"
 ```
 
 Control UI: the Nodes tab includes a small "Exec node binding" panel for the same settings.

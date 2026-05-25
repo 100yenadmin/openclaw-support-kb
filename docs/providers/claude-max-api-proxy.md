@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claude Max API proxy"
 source: "https://docs.openclaw.ai/providers/claude-max-api-proxy"
-source_hash: "b79f29da95eee931845672b418ddaee7f547bac4663c2012cf1030c2a341c953"
+source_hash: "7890e7d002f41f96a114a4fa531412b092180d3b0b7e6b792c4116013d23f9c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/claude-max-api-proxy.md"
@@ -170,12 +170,6 @@ Auto-start on macOS with LaunchAgent
     ```
 
 
-
-## Links
-
-- **npm:** [https://www.npmjs.com/package/claude-max-api-proxy](https://www.npmjs.com/package/claude-max-api-proxy)
-- **GitHub:** [https://github.com/atalovesyou/claude-max-api-proxy](https://github.com/atalovesyou/claude-max-api-proxy)
-- **Issues:** [https://github.com/atalovesyou/claude-max-api-proxy/issues](https://github.com/atalovesyou/claude-max-api-proxy/issues)
 
 ## Notes
 

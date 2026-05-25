@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Path"
 source: "https://docs.openclaw.ai/cli/path"
-source_hash: "713a9b1306be288d3082d3987a6acfea829c316591163b84fb15715d71b95033"
+source_hash: "3e216b0e7ba583733abdb70d3b71e8f6e107057c33b54a8681cc3d24e98b8ec4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/path.md"
@@ -203,9 +203,12 @@ the per-kind AST shape.
   Markdown insertions append sections, frontmatter keys, or section items and
   render a canonical markdown shape for the changed file.
 - JSONC leaf writes coerce the string value to the existing leaf type
-  (`string`, finite `number`, `true`/`false`, or `null`). JSONC object and array
-  insertions parse `<value>` as JSON and use the `jsonc-parser` edit path for
-  ordinary leaf writes, preserving comments and nearby formatting.
+  (`string`, finite `number`, `true`/`false`, or `null`). Use `--value-json`
+  when a JSONC/JSON/JSONL leaf replacement should parse `<value>` as JSON and
+  may change shape, such as replacing a string SecretRef shorthand with an
+  object. JSONC object and array insertions parse `<value>` as JSON and use the
+  `jsonc-parser` edit path for ordinary leaf writes, preserving comments and
+  nearby formatting.
 - JSONL leaf writes coerce like JSONC inside a line. Whole-line replacement and
   append parse `<value>` as JSON. Rendered JSONL preserves the file's dominant
   LF/CRLF line-ending convention.
@@ -250,6 +253,12 @@ More grammar examples:
 ```bash
 # Quote keys containing / or .
 openclaw path resolve 'oc://config.jsonc/agents.defaults.models/"anthropic/claude-opus-4-7"/alias'
+
+# Deep JSON/JSONC paths can use slash segments; they normalize to dotted subsegments
+openclaw path set 'oc://openclaw.json/agents/list/0/tools/exec/security' 'allowlist' --dry-run
+
+# Replace a JSONC leaf with a parsed object
+openclaw path set 'oc://openclaw.json/gateway/auth/token' '{"source":"file","provider":"secrets","id":"/test"}' --value-json --dry-run
 
 # Predicate search over JSONC children
 openclaw path find 'oc://config.jsonc/plugins/[enabled=true]/id'

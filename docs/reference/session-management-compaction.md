@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "90393e9dee74b761807f11231482eba8cab0e49b2f19873025953c5be9a5e704"
+source_hash: "5c0084b69558d07a6fc20e432212d46ce37817f922ba86aa5885fc0aada4dacc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -253,6 +253,10 @@ After compaction, future turns see:
 
 - The compaction summary
 - Messages after `firstKeptEntryId`
+
+AGENTS.md section reinjection after compaction is opt-in via
+`agents.defaults.compaction.postCompactionSections`; when unset or `[]`,
+OpenClaw does not append AGENTS.md excerpts on top of the compaction summary.
 
 Compaction is **persistent** (unlike session pruning). See [/concepts/session-pruning](/concepts/session-pruning).
 

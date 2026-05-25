@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Sessions"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/sessions"
-source_hash: "1286a5d262ce3e015c6388387f6b2f817db7a7dcc66372abae7682a0ce101042"
+source_hash: "8edc090d724852ca1a2fa904088b80a09cefc256e506f523990c5f66cb539e8e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/sessions.md"
@@ -377,7 +377,7 @@ Total messages: 3847
 Database size: 12.4 MB
 ```
 
-For deeper analytics — token usage, cost estimates, tool breakdown, and activity patterns — use [`hermes insights`](/docs/reference/cli-commands#hermes-insights).
+For deeper analytics — token usage, cost estimates, tool breakdown, and activity patterns — use [`hermes insights`](/reference/cli-commands#hermes-insights).
 
 ## Session Search Tool
 

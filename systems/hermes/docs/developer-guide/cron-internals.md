@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Cron Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/cron-internals"
-source_hash: "2178090af0b53e8ebc918487580a67be5a9a0627547e3f80383b4130f01a607a"
+source_hash: "760590ac2535112e09c6fcf83e4b45951a4e0a1936fbf0e132c5620cd4b58566"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/cron-internals.md"
@@ -236,7 +236,7 @@ hermes cron remove <job_id>         # Delete a job
 
 ## Related Docs
 
-- [Cron Feature Guide](/docs/user-guide/features/cron)
+- [Cron Feature Guide](/user-guide/features/cron)
 - [Gateway Internals](./gateway-internals.md)
 - [Agent Loop Internals](./agent-loop.md)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "4bab6f68eb4ec7903ac796d56949c19f77afe6100a2707f0784a9a6e5966c94c"
+source_hash: "1c89887e5db4f3bd59b3c9d2d29b0d58af61e49d18f54c3aa99065f28a513d1f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -37,6 +37,7 @@ Native companion apps for Windows are also planned; the Gateway is recommended v
 - GCP (Compute Engine): [GCP](/install/gcp)
 - Azure (Linux VM): [Azure](/install/azure)
 - exe.dev (VM + HTTPS proxy): [exe.dev](/install/exe-dev)
+- EasyRunner (Podman + Caddy): [EasyRunner](/platforms/easyrunner)
 
 ## Common links
 

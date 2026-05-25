@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "G0DM0D3 — Godmode Jailbreaking"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/skills/godmode"
-source_hash: "aa6c67fb6032032a845c211ac17214bdebb2532a3c3dcfa303baa0e9f93bf0fd"
+source_hash: "390946568eed85385992900682da86925986f22aa8af160290e256a9bd431dbb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/skills/godmode.md"
@@ -23,7 +23,7 @@ Bypass safety filters on API-served LLMs using techniques from [G0DM0D3](https:/
 
 **Skill path:** `skills/red-teaming/godmode/`
 
-**Key difference from [OBLITERATUS](/docs/user-guide/skills/bundled/mlops/mlops-inference-obliteratus):** OBLITERATUS modifies model weights permanently (requires open-weight models + GPU). This skill operates at the prompt/API level — works on **any model accessible via API**, including closed-source models (GPT, Claude, Gemini, Grok).
+**Key difference from [OBLITERATUS](/user-guide/skills/bundled/mlops/mlops-inference-obliteratus):** OBLITERATUS modifies model weights permanently (requires open-weight models + GPU). This skill operates at the prompt/API level — works on **any model accessible via API**, including closed-source models (GPT, Claude, Gemini, Grok).
 
 ## What is G0DM0D3?
 

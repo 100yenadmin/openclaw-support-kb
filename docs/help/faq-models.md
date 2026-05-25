@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "6bf693afcacef09aaa4b2be074c73ff6cad9351c47523990c815d5e0244e3aa8"
+source_hash: "6db533d00c673db6f84300ae961c41ffaeed4c4606438d65a282bfe6790ca6f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -340,7 +340,6 @@ How do I define/override model shortcuts (aliases)?
           models: {
             "anthropic/claude-opus-4-6": { alias: "opus" },
             "anthropic/claude-sonnet-4-6": { alias: "sonnet" },
-            "anthropic/claude-haiku-4-5": { alias: "haiku" },
           },
         },
       },

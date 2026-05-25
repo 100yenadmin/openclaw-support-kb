@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Delegation & Parallel Work"
 source: "https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns"
-source_hash: "5837539da749ab91f59f116fa5d5d79c123987ce1b75760af6705c0715da0e4f"
+source_hash: "2afd757215e839d55c9349a4cd53e8f451f0df4d53b9d7375bbb2c0adc383640"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/delegation-patterns.md"
@@ -21,7 +21,7 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns
 
 Hermes can spawn isolated child agents to work on tasks in parallel. Each subagent gets its own conversation, terminal session, and toolset. Only the final summary comes back — intermediate tool calls never enter your context window.
 
-For the full feature reference, see [Subagent Delegation](/docs/user-guide/features/delegation).
+For the full feature reference, see [Subagent Delegation](/user-guide/features/delegation).
 
 ---
 
@@ -267,6 +267,6 @@ delegation:
 
 ---
 
-*For the complete delegation reference — all parameters, ACP integration, and advanced configuration — see [Subagent Delegation](/docs/user-guide/features/delegation).*
+*For the complete delegation reference — all parameters, ACP integration, and advanced configuration — see [Subagent Delegation](/user-guide/features/delegation).*
 
 ---

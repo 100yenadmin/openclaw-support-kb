@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "SMS (Twilio)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/sms"
-source_hash: "62691fe0d00ca922bd60952a4b5cf70ce349d3228a679119551dcfea629b4421"
+source_hash: "5238a67da42b9f36a337c36c20aa9327064c0925a5a1f33e39603762dd29f141"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/sms.md"
@@ -22,7 +22,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/sms
 Hermes connects to SMS through the [Twilio](https://www.twilio.com/) API. People text your Twilio phone number and get AI responses back — same conversational experience as Telegram or Discord, but over standard text messages.
 
 :::info Shared Credentials
-The SMS gateway shares credentials with the optional [telephony skill](/docs/reference/skills-catalog). If you've already set up Twilio for voice calls or one-off SMS, the gateway works with the same `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_PHONE_NUMBER`.
+The SMS gateway shares credentials with the optional [telephony skill](/reference/skills-catalog). If you've already set up Twilio for voice calls or one-off SMS, the gateway works with the same `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_PHONE_NUMBER`.
 :::
 
 ---

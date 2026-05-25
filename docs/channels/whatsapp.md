@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "97a7f92d1d656163181b261b3a805a1ed5498996c532e1f6d7843b4ffbbf06c0"
+source_hash: "35dea9fb2ce3aa97f63e9cbfad74a7f1a6ea8ed51b5a27362063a84dedae3137"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -83,6 +83,10 @@ Link WhatsApp (QR)
 openclaw channels login --channel whatsapp
 ```
 
+    Current login is QR-based. In remote or headless environments, make sure you
+    have a reliable path to deliver the live QR code to the phone that will scan
+    it before starting login.
+
     For a specific account:
 
 ```bash
@@ -124,6 +128,13 @@ CODE
 Note
 
 OpenClaw recommends running WhatsApp on a separate number when possible. (The channel metadata and setup flow are optimized for that setup, but personal-number setups are also supported.)
+
+Warning
+
+The current WhatsApp setup flow is QR-only. Terminal-rendered QRs, screenshots,
+PDFs, or chat attachments can expire or become unreadable while being relayed
+from a remote machine. For remote/headless hosts, prefer a direct QR image
+handoff path over manual terminal capture.
 
 ## Deployment patterns
 
@@ -189,6 +200,38 @@ WhatsApp Web-only channel scope
 - WhatsApp Channels/Newsletters can be explicit outbound targets with their native `@newsletter` JID. Outbound newsletter sends use channel session metadata (`agent:<agentId>:whatsapp:channel:<jid>`) rather than DM session semantics.
 - WhatsApp Web transport honors standard proxy environment variables on the gateway host (`HTTPS_PROXY`, `HTTP_PROXY`, `NO_PROXY` / lowercase variants). Prefer host-level proxy config over channel-specific WhatsApp proxy settings.
 - When `messages.removeAckAfterReply` is enabled, OpenClaw clears the WhatsApp ack reaction after a visible reply is delivered.
+
+## Approval prompts
+
+WhatsApp can render exec and plugin approval prompts with `👍` / `👎` reactions. Delivery is
+controlled by the top-level approval forwarding config:
+
+```json5
+{
+  approvals: {
+    exec: {
+      enabled: true,
+      mode: "session",
+    },
+    plugin: {
+      enabled: true,
+      mode: "targets",
+      targets: [{ channel: "whatsapp", to: "+15551234567" }],
+    },
+  },
+}
+```
+
+`approvals.exec` and `approvals.plugin` are independent. Enabling WhatsApp as a channel only links
+the transport; it does not send approval prompts unless the matching approval family is enabled
+and routes to WhatsApp. Session mode delivers native emoji approvals only for approvals that
+originate from WhatsApp. Target mode uses the shared forwarding pipeline for explicit WhatsApp
+targets and does not create separate approver-DM fanout.
+
+WhatsApp approval reactions require explicit WhatsApp approvers from `allowFrom` or `"*"`.
+`defaultTo` controls ordinary default message targets; it is not an approval approver. Manual
+`/approve` commands still pass through the normal WhatsApp sender authorization path before
+approval resolution.
 
 ## Plugin hooks and privacy
 
@@ -643,8 +686,20 @@ Linked but disconnected / reconnect loop
     Fix:
 
     ```bash
+    openclaw channels status --probe
     openclaw doctor
     openclaw logs --follow
+    openclaw gateway status
+    ```
+
+    If the loop persists after host connectivity and timing are fixed, back up
+    the account auth directory and re-link that account:
+
+    ```bash
+    cp -a ~/.openclaw/credentials/whatsapp/<accountId> \
+      ~/.openclaw/credentials/whatsapp/<accountId>.bak
+    openclaw channels logout --channel whatsapp --account <accountId>
+    openclaw channels login --channel whatsapp --account <accountId>
     ```
 
     If `~/.openclaw/logs/whatsapp-health.log` says `Gateway inactive` but

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS permissions"
 source: "https://docs.openclaw.ai/platforms/mac/permissions"
-source_hash: "06c88101f6e7df3a8832daf3de0cd8091a7ef0d95b9e117e6e3abe46ea2d8390"
+source_hash: "ede147e77c209a46ac2e5318aff6c9883928079b8491767594d4210fac335d42"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/permissions.md"
@@ -27,6 +27,25 @@ macOS treats the app as new and may drop or hide prompts.
 
 Ad-hoc signatures generate a new identity every build. macOS will forget previous
 grants, and prompts can disappear entirely until the stale entries are cleared.
+
+## Accessibility grants for Node and CLI runtimes
+
+Prefer granting Accessibility to OpenClaw.app, Peekaboo.app, or another signed
+helper with its own bundle identifier instead of a generic `node` binary.
+
+macOS TCC grants Accessibility to the code identity of the process it sees. If a
+Homebrew, nvm, pnpm, or npm workflow causes a shared `node` executable to
+receive Accessibility, any JavaScript package launched through that same
+executable may inherit GUI automation privileges.
+
+Treat a `node` entry in System Settings as broad permission for that Node
+runtime, not as permission for one npm package. Avoid granting Accessibility to
+`node` unless you trust every script and package launched through that exact
+Node install.
+
+If you accidentally granted Accessibility to `node`, remove that entry from
+System Settings -> Privacy & Security -> Accessibility. Then grant the signed
+app or helper that should own UI automation.
 
 ## Recovery checklist when prompts disappear
 

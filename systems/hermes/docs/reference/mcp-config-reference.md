@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP Config Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference"
-source_hash: "8e012eb1f5b6f594ef227a6e43c0d634617a3172ad5321e3a6a05a4e2017881b"
+source_hash: "1da41fb280dcba7c852120ae6640c8c3b405c5d42aa4ab54bd6a188bc3e45a02"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/mcp-config-reference.md"
@@ -22,8 +22,8 @@ Source: https://hermes-agent.nousresearch.com/docs/reference/mcp-config-referenc
 This page is the compact reference companion to the main MCP docs.
 
 For conceptual guidance, see:
-- [MCP (Model Context Protocol)](/docs/user-guide/features/mcp)
-- [Use MCP with Hermes](/docs/guides/use-mcp-with-hermes)
+- [MCP (Model Context Protocol)](/user-guide/features/mcp)
+- [Use MCP with Hermes](/guides/use-mcp-with-hermes)
 
 ## Root config shape
 

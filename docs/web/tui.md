@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "2a543730631d0ee0cf04df0809562c63e037a78c374d651612bcfc4aaa34cb38"
+source_hash: "560d2d2b0cd39dbac089086c99613ab7b33afdf299542bc7b8baf810245d9ead"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/tui.md"
@@ -54,7 +54,7 @@ Notes:
 - `openclaw chat` and `openclaw terminal` are aliases for `openclaw tui --local`.
 - `--local` cannot be combined with `--url`, `--token`, or `--password`.
 - Local mode uses the embedded agent runtime directly. Most local tools work, but Gateway-only features are unavailable.
-- `openclaw` and `openclaw crestodian` also use this TUI shell, with Crestodian as the local setup and repair chat backend.
+- After a config file has authored settings, `openclaw` and `openclaw crestodian` also use this TUI shell, with Crestodian as the local setup and repair chat backend.
 
 ## What you see
 

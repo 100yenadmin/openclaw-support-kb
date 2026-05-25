@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugin LLM Access"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugin-llm-access"
-source_hash: "8a58c44c58eac351a588d6ccf274bf3bb26c5f76a9291cc75af22049e84d4ae3"
+source_hash: "9fa794871e137279ec1709c043c765376e2880d8e737375ce6371e9b9c1bc067"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugin-llm-access.md"
@@ -475,6 +475,6 @@ own model call — for any reason, structured or not — `ctx.llm`.
   * [`plugin-llm-example`](https://github.com/NousResearch/hermes-example-plugins/tree/main/plugin-llm-example) — sync structured extraction with image input
   * [`plugin-llm-async-example`](https://github.com/NousResearch/hermes-example-plugins/tree/main/plugin-llm-async-example) — async with `asyncio.gather()`
 * Auxiliary client (the engine under the hood): see
-  [Provider Runtime](/docs/developer-guide/provider-runtime).
+  [Provider Runtime](/developer-guide/provider-runtime).
 
 ---

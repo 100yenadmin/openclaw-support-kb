@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Locally with Ollama — Zero API Cost"
 source: "https://hermes-agent.nousresearch.com/docs/guides/local-ollama-setup"
-source_hash: "6e4fe539ab5dd1c47fc0694a07fa1aceee74ac3ffef7aac646b334a5861978fc"
+source_hash: "844f85ab6cedf58fecd0637d5b737945e26a72a95424667bb67cb4c6856ef82d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/local-ollama-setup.md"
@@ -169,19 +169,19 @@ Switch models on the fly inside a session:
 
 ### Increase Ollama's Context Window
 
-By default, Ollama uses a 2048-token context. For agentic work (tool calls, long conversations), you need more:
+By default, Ollama uses a 2048-token context. Hermes requires at least 64,000 tokens for agentic work with tools:
 
 ```bash
 # Create a Modelfile that extends context
 cat > /tmp/Modelfile << 'EOF'
 FROM gemma4:31b
-PARAMETER num_ctx 16384
+PARAMETER num_ctx 64000
 EOF
 
-ollama create gemma4-16k -f /tmp/Modelfile
+ollama create gemma4-64k -f /tmp/Modelfile
 ```
 
-Then update your Hermes config to use `gemma4-16k` as the model name.
+Then update your Hermes config to use `gemma4-64k` as the model name.
 
 ### Keep the Model Loaded
 
@@ -324,7 +324,7 @@ Your only cost is electricity — roughly $0.01–0.05 per session depending on 
 ## What's Better with Cloud Models
 
 - **Very complex multi-step reasoning** — 70B+ or cloud models like Claude Opus are noticeably better
-- **Long context windows** — cloud models offer 100K–1M tokens; local models are typically 8K–32K
+- **Long context windows** — cloud models offer 100K–1M tokens; local runtimes often default below Hermes' 64K minimum unless you configure them
 - **Speed on large responses** — cloud inference is faster than CPU-only local for long generations
 
 The sweet spot: use local for everyday tasks, set up a cloud fallback for the hard stuff.

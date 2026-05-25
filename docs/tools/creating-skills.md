@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "bacab62b67029e9391bca92cb251dd55e98f21797802668d1e8b056a6478c574"
+source_hash: "92b42fdfb6263e11900495296672333611d37eb9f3e859e7b19fc0393de90a70"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -110,6 +110,28 @@ The YAML frontmatter supports these fields:
 | `metadata.openclaw.os`              | No       | OS filter (`["darwin"]`, `["linux"]`, etc.)                    |
 | `metadata.openclaw.requires.bins`   | No       | Required binaries on PATH                                      |
 | `metadata.openclaw.requires.config` | No       | Required config keys                                           |
+
+## Advanced features
+
+Once a basic skill works, these fields help make it reliable and portable:
+
+- **Conditional activation** — use `requires.bins`, `requires.env`, or
+  `requires.config` to load the skill only when required dependencies are
+  available. See [Skills reference: gating](/tools/skills#gating).
+- **Environment and API-key wiring** — use `skills.entries.<name>.env` and
+  `skills.entries.<name>.apiKey` to inject host-side environment for a skill
+  turn. See [Skills reference: config wiring](/tools/skills#config-wiring).
+- **Invocation control** — set `user-invocable: false` to hide a slash command,
+  or `disable-model-invocation: true` to keep a command-style skill out of the
+  model prompt. See [Skills reference: frontmatter](/tools/skills#frontmatter).
+- **Direct command dispatch** — use `command-dispatch: tool` with
+  `command-tool` when a slash command should call a tool directly instead of
+  routing through the model.
+- **Portable paths** — use `{baseDir}` in `SKILL.md` when referencing scripts
+  or assets inside the skill directory.
+- **Publishing** — use the ClawHub skill when preparing a skill for publication.
+  It documents the current `clawhub publish` command shape and required
+  metadata.
 
 ## Best practices
 

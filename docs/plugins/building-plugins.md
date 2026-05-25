@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "53d0ac1427bd40050aa4aafda3fdd277dab70bea5bf41222b73d7b6a4b337fe8"
+source_hash: "c375057f1afe2351359ef00bbc30f6b5eccf12a6e127c113070807e84208e6c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -252,6 +252,11 @@ Users opt in with `tools.allow`:
   tools: { allow: ["workflow_tool"] }, // or ["my-plugin"] for all tools from one plugin
 }
 ```
+
+Optional tools control whether a tool is exposed to the model. Use
+[plugin permission requests](/plugins/plugin-permission-requests) when a tool
+or hook should ask for approval after the model selects it and before the
+action runs.
 
 Use optional tools for side effects, unusual binaries, or capabilities that
 should not be exposed by default. Tool names must not conflict with core tools;

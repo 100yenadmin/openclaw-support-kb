@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Cron Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/guides/cron-troubleshooting"
-source_hash: "b0aec2d7990f2df19e850f6cb87cbb12c9bbdeb879bb47ec047f22ab492679fd"
+source_hash: "dcf3a9e416b29e8cf6322fccd3ce08c5b29538f3783dc7edc021f4c482bdb64c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/cron-troubleshooting.md"
@@ -235,6 +235,6 @@ If you've worked through this guide and the issue persists:
 
 ---
 
-*For the complete cron reference, see [Automate Anything with Cron](/docs/guides/automate-with-cron) and [Scheduled Tasks (Cron)](/docs/user-guide/features/cron).*
+*For the complete cron reference, see [Automate Anything with Cron](/guides/automate-with-cron) and [Scheduled Tasks (Cron)](/user-guide/features/cron).*
 
 ---

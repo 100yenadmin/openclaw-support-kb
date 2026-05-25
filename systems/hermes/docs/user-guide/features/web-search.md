@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/web-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search"
-source_hash: "ac4af7107d28fb6b0e9395430cb86ad0006ad8f0817a3d1ddb71d29e42ec97ea"
+source_hash: "5a4cd4e610ba7acf681855e80b9b0f4c7721c6dfe9069ace51a171942f2f19f6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-search.md"
@@ -79,7 +79,7 @@ auxiliary:
 
 Or pick interactively: `hermes model` → **Configure auxiliary models** → `web_extract`.
 
-See [Auxiliary Models](/docs/user-guide/configuration#auxiliary-models) for the full reference and per-task override patterns.
+See [Auxiliary Models](/user-guide/configuration#auxiliary-models) for the full reference and per-task override patterns.
 
 ### When summarization gets in the way
 

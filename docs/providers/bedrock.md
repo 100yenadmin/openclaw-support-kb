@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "00d294e84f152bfccb2f723f25840491fcf07a1982eb0c3762658967555b941e"
+source_hash: "60808fa30d13e079d63749bda5c0482a4784bdee62c631468de24ae49f807f5b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -42,7 +42,7 @@ Steps
 Set AWS credentials on the gateway host
 
         ```bash
-        export AWS_ACCESS_KEY_ID="AKIA..."
+        export AWS_ACCESS_KEY_ID="EXAMPLE_AWS_ACCESS_KEY_ID"
         export AWS_SECRET_ACCESS_KEY="..."
         export AWS_REGION="us-east-1"
         # Optional:

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
-source_hash: "0a7be9e48e627a5be9eadc61f5042061c0fd6a29f6de283cc228a17430d9b0e1"
+source_hash: "9a1fab9260fd5563c91deefe1cc6a81e29e69e0485b91505a10fa9353d064561"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/zalouser.md"
@@ -172,6 +172,24 @@ Accounts map to `zalouser` profiles in OpenClaw state. Example:
   },
 }
 ```
+
+## Environment variables
+
+The Zalo Personal plugin can also read profile selection from environment variables:
+
+- `ZALOUSER_PROFILE`: profile name to use when no `profile` is set in channel or account config.
+- `ZCA_PROFILE`: legacy fallback profile name, used only when `ZALOUSER_PROFILE` is not set.
+
+Profile names select the saved Zalo login credentials in OpenClaw state. Resolution order is:
+
+1. Explicit `profile` in config.
+2. `ZALOUSER_PROFILE`.
+3. `ZCA_PROFILE`.
+4. The account id for non-default accounts, or `default` for the default account.
+
+For multi-account setups, prefer setting `profile` on each account in config so
+one environment variable does not make multiple accounts share the same login
+session.
 
 ## Typing, reactions, and delivery acknowledgements
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Yuanbao"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/yuanbao"
-source_hash: "6563924e2de75db54c2c5d2597859c758d4cf68167403a6a3eec706f4b9ef5af"
+source_hash: "80a03ce4513af3ebf089f5ba7ea65899b84dfa78d75f672f6d0e56b9985387ba"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/yuanbao.md"
@@ -349,8 +349,8 @@ hermes chat -q "Send 'Hello from CLI' to yuanbao:group:group_code"
 ## Related Documentation
 
 - [Messaging Gateway Overview](./index.md)
-- [Slash Commands Reference](/docs/reference/slash-commands.md)
-- [Cron Jobs](/docs/user-guide/features/cron.md)
-- [Background Sessions](/docs/user-guide/cli#background-sessions)
+- [Slash Commands Reference](/reference/slash-commands)
+- [Cron Jobs](/user-guide/features/cron)
+- [Background Sessions](/user-guide/cli#background-sessions)
 
 ---

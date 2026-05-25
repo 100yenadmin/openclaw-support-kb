@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/x-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "a003005eac386dff39aef4b2aeec265d52c7353137d546ddacd2f7d76ffb19f8"
+source_hash: "fb7bbcb8221b025deebe6a599b0d7cb8553f0a701dcecfc31c4618dcc1301c24"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -47,7 +47,7 @@ hermes tools
 
 The picker offers two credential choices:
 
-1. **xAI Grok OAuth (SuperGrok Subscription)** — opens the browser to `accounts.x.ai` if you're not already logged in
+1. **xAI Grok OAuth (SuperGrok / Premium+)** — opens the browser to `accounts.x.ai` if you're not already logged in
 2. **xAI API key** — prompts for `XAI_API_KEY`
 
 Either choice satisfies the gating. You can pick whichever credentials you already have; the tool works identically with both. If both end up configured, OAuth is preferred at call time.
@@ -147,7 +147,7 @@ Causes worth checking:
 
 ## See Also
 
-- [xAI Grok OAuth (SuperGrok Subscription)](../../guides/xai-grok-oauth.md) — the OAuth setup guide
+- [xAI Grok OAuth (SuperGrok / Premium+)](../../guides/xai-grok-oauth.md) — the OAuth setup guide
 - [Web Search & Extract](web-search.md) — for general (non-X) web search
 - [Tools Reference](../../reference/tools-reference.md) — full tool catalog
 

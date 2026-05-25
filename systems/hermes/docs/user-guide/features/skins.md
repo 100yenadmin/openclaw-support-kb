@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skins & Themes"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skins"
-source_hash: "8fbd20e3bffa2ec9835901fdc3105d5709bc8c84828de9efa1b010e2ca543d61"
+source_hash: "e827b4e7fea2a112e3c3922ed05a89b68c1e1a5a2c740f64046a6a3ff8f604bd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skins.md"
@@ -272,7 +272,7 @@ npm start
 6. Click **Save** to write the skin YAML to `~/.hermes/skins/`.
 7. Click **Activate** to set it as the current skin (updates `display.skin` in `config.yaml`).
 
-Hermes Mod respects the `HERMES_HOME` environment variable, so it works with [profiles](/docs/user-guide/profiles) too.
+Hermes Mod respects the `HERMES_HOME` environment variable, so it works with [profiles](/user-guide/profiles) too.
 
 ## Operational notes
 

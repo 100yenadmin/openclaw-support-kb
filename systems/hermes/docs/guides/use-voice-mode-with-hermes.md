@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use Voice Mode with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes"
-source_hash: "543036a4f8b055687736c1de3df70f7f7409b9fc9b7a2feda928b2e594bd1317"
+source_hash: "587248a896d4f65f861262c616a9ac541fc691223958eff2fec81029abd53804"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-voice-mode-with-hermes.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-he
 
 # Use Voice Mode with Hermes
 
-This guide is the practical companion to the [Voice Mode feature reference](/docs/user-guide/features/voice-mode).
+This guide is the practical companion to the [Voice Mode feature reference](/user-guide/features/voice-mode).
 
 If the feature page explains what voice mode can do, this guide shows how to actually use it well.
 
@@ -462,10 +462,10 @@ That progression keeps the debugging surface small.
 
 ## Where to read next
 
-- [Voice Mode feature reference](/docs/user-guide/features/voice-mode)
-- [Messaging Gateway](/docs/user-guide/messaging)
-- [Discord setup](/docs/user-guide/messaging/discord)
-- [Telegram setup](/docs/user-guide/messaging/telegram)
-- [Configuration](/docs/user-guide/configuration)
+- [Voice Mode feature reference](/user-guide/features/voice-mode)
+- [Messaging Gateway](/user-guide/messaging)
+- [Discord setup](/user-guide/messaging/discord)
+- [Telegram setup](/user-guide/messaging/telegram)
+- [Configuration](/user-guide/configuration)
 
 ---

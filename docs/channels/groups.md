@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "1bb6f3fc9ac84947cccf12917e2452a0afea19cb50cf37aa8f306bc67657db94"
+source_hash: "21eeabb07d925ae786ec55f5c94a2b8a3b7082c800b156b1514d83a7d9dd4a6e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -62,6 +62,11 @@ For direct chats and any other source event, use `messages.visibleReplies: "mess
 This replaces the old pattern of forcing the model to answer `NO_REPLY` for most lurk-mode turns. In tool-only mode, doing nothing visible simply means not calling the message tool.
 
 Typing indicators are still sent for direct group requests. Ambient always-on room events, when enabled, stay strict and quiet unless the agent calls the message tool.
+
+Sessions suppress verbose tool/progress summaries by default. Use `/verbose on`
+to show those summaries for the current session while debugging, and
+`/verbose off` to return to final-reply-only behavior. The same verbose state
+applies across direct chats, groups, channels, and forum topics.
 
 To submit unmentioned always-on group chatter as quiet room context instead of user requests, use [Ambient room events](/channels/ambient-room-events):
 

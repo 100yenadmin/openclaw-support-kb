@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tips & Best Practices"
 source: "https://hermes-agent.nousresearch.com/docs/guides/tips"
-source_hash: "65a461520a4d21d545d987bba618bdfdb0639f09b484a8c6561f9fe1882383ec"
+source_hash: "0f5dcbc498649b63b0b3e544007a98acf2d08eb8d7c3d67398f92cc40fcd0059"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/tips.md"
@@ -93,7 +93,7 @@ Create an `AGENTS.md` in your project root with architecture decisions, coding c
 
 Want Hermes to have a stable default voice? Edit `~/.hermes/SOUL.md` (or `$HERMES_HOME/SOUL.md` if you use a custom Hermes home). Hermes now seeds a starter SOUL automatically and uses that global file as the instance-wide personality source.
 
-For a full walkthrough, see [Use SOUL.md with Hermes](/docs/guides/use-soul-with-hermes).
+For a full walkthrough, see [Use SOUL.md with Hermes](/guides/use-soul-with-hermes).
 
 ```markdown
 # Soul

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use SOUL.md with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-soul-with-hermes"
-source_hash: "fb83092aef9b3f39427d1a326dc944f1050b97690c833f31b7c72a0f87f71903"
+source_hash: "7975273396505697f298e59cf87da6485eada8eb4ad45ff41d1e051365cab8b5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-soul-with-hermes.md"
@@ -271,9 +271,9 @@ Move project instructions into `AGENTS.md` and keep `SOUL.md` focused on identit
 
 ## Related docs
 
-- [Personality & SOUL.md](/docs/user-guide/features/personality)
-- [Context Files](/docs/user-guide/features/context-files)
-- [Configuration](/docs/user-guide/configuration)
-- [Tips & Best Practices](/docs/guides/tips)
+- [Personality & SOUL.md](/user-guide/features/personality)
+- [Context Files](/user-guide/features/context-files)
+- [Configuration](/user-guide/configuration)
+- [Tips & Best Practices](/guides/tips)
 
 ---

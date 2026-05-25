@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "a325ee482327ba31a01a954facf522e2502fac6eeb3d9e60abbbfe7b79c04017"
+source_hash: "05915d34a9ea2f0c394dd922e18912284f019644e109540a77d8dae203eb199a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -291,7 +291,7 @@ tasks maintenance
     - Subagent completion best-effort closes tracked browser tabs/processes for the child session before announce cleanup continues.
     - Isolated cron completion best-effort closes tracked browser tabs/processes for the cron session before the run fully tears down.
     - Isolated cron delivery waits out descendant subagent follow-up when needed and suppresses stale parent acknowledgement text instead of announcing it.
-    - Subagent completion delivery prefers the latest visible assistant text; if that is empty it falls back to sanitized latest tool/toolResult text, and timeout-only tool-call runs can collapse to a short partial-progress summary. Terminal failed runs announce failure status without replaying captured reply text.
+    - Subagent completion delivery uses the child's latest visible assistant text only. Tool/toolResult output is not promoted into child result text. Terminal failed runs announce failure status without replaying captured reply text.
     - Cleanup failures do not mask the real task outcome.
 
     When applying maintenance, OpenClaw also removes stale `cron:<jobId>:run:<uuid>` session registry rows older than 7 days, while preserving rows for currently running cron jobs and leaving non-cron session rows untouched.

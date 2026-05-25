@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (Native) Guide — Early Beta"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-native"
-source_hash: "9263543cfaf2349e214dbba18cbc7ba9c1b056c7235e2cc320e67eb89649c255"
+source_hash: "cad0e077e3e4dd2b4bcfbef9b209f446e6c24c5cba3718a67f737aeb95779e74"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-native.md"
@@ -95,7 +95,7 @@ Top-to-bottom, in order:
 10. **Runs `hermes setup`** — the normal first-run wizard (model, provider, toolsets). Skip with `-SkipSetup`.
 
 :::tip Skip provider hunting on Windows
-Native Windows is still early beta, and per-tool API key setup (Firecrawl, FAL, Browser Use, OpenAI TTS) is the highest-friction part of getting a useful agent. A [Nous Portal](/docs/user-guide/features/tool-gateway) subscription covers the model **and** all of those tools through one OAuth login. After the installer finishes, run `hermes setup --portal` to wire everything up.
+Native Windows is still early beta, and per-tool API key setup (Firecrawl, FAL, Browser Use, OpenAI TTS) is the highest-friction part of getting a useful agent. A [Nous Portal](/user-guide/features/tool-gateway) subscription covers the model **and** all of those tools through one OAuth login. After the installer finishes, run `hermes setup --portal` to wire everything up.
 :::
 
 ## Feature matrix

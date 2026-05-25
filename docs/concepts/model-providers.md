@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "8e75b4838b78a42c16e7c7d8f05cafeb3313045b9c8912cbbffff41fdf704333"
+source_hash: "fe5bb45c12f2a5b976b3a8829046174b7a53d2e695866b5de6b8ab77d4dfb861"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -207,7 +207,7 @@ Anthropic staff told us OpenClaw-style Claude CLI usage is allowed again, so Ope
 CardGroup
 
 
-GLM models
+Z.AI (GLM)
 
     Z.AI Coding Plan or general API endpoints.
 

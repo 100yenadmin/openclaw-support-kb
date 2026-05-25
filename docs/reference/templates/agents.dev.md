@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.dev template"
 source: "https://docs.openclaw.ai/reference/templates/AGENTS.dev"
-source_hash: "79ac8e65fdd4a5a733a34f45fd4eebc1e27a1cbde645b43a255c77c54b03e379"
+source_hash: "f6c30c929450f90b447c08d2f41a29e8b08382580b2822513ed174a052495a79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/agents.dev.md"
@@ -44,6 +44,7 @@ git commit -m "Add agent workspace"
 
 - Keep a short daily log at memory/YYYY-MM-DD.md (create memory/ if needed).
 - On session start, read today + yesterday if present.
+- Before writing memory files, read them first; write only concrete updates, never empty placeholders.
 - Capture durable facts, preferences, and decisions; avoid secrets.
 
 ## Heartbeats (optional)

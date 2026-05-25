@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Gemini"
 source: "https://hermes-agent.nousresearch.com/docs/guides/google-gemini"
-source_hash: "c519258c39c994501852a038964c50b178e709b8fbce575818809b2e0e0c8d1d"
+source_hash: "c2c161cc18dbd0c4c7b4db886df433f6962dc78c5b6ffbad97fb76c425eaa1d5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/google-gemini.md"
@@ -287,9 +287,9 @@ Upgrade Hermes and rerun `hermes model`. The native Gemini adapter sanitizes too
 
 ## Related
 
-- [AI Providers](/docs/integrations/providers)
-- [Configuration](/docs/user-guide/configuration)
-- [Fallback Providers](/docs/user-guide/features/fallback-providers)
-- [AWS Bedrock](/docs/guides/aws-bedrock) — native cloud-provider integration using AWS credentials
+- [AI Providers](/integrations/providers)
+- [Configuration](/user-guide/configuration)
+- [Fallback Providers](/user-guide/features/fallback-providers)
+- [AWS Bedrock](/guides/aws-bedrock) — native cloud-provider integration using AWS credentials
 
 ---

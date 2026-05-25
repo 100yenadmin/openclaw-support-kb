@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
-source_hash: "8e740924b557ec8ba983b4e4edc0da32bf7b432c4317f5d083496555cca83dfb"
+source_hash: "5b148577c21aac05dbfd3743368d5faaff752f77112abd00a2ef858c13b50bc2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture.md"
@@ -56,6 +56,7 @@ Capabilities are the public **native plugin** model inside OpenClaw. Every nativ
 | Realtime transcription | `api.registerRealtimeTranscriptionProvider(...)` | `openai`                             |
 | Realtime voice         | `api.registerRealtimeVoiceProvider(...)`         | `openai`                             |
 | Media understanding    | `api.registerMediaUnderstandingProvider(...)`    | `openai`, `google`                   |
+| Meeting notes source   | `api.registerMeetingNotesSourceProvider(...)`    | `discord`, `meeting-notes`           |
 | Image generation       | `api.registerImageGenerationProvider(...)`       | `openai`, `google`, `fal`, `minimax` |
 | Music generation       | `api.registerMusicGenerationProvider(...)`       | `google`, `minimax`                  |
 | Video generation       | `api.registerVideoGenerationProvider(...)`       | `qwen`                               |

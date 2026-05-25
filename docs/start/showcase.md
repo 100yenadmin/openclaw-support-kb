@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "411de693c9a62d499101dbb3af2d79887b50f9ac90b2da8f4289b39acbca7eb8"
+source_hash: "902bc86c047d4a6ab3c6f8dcb04e21aac06130e64c6c027588ea5f848bfd1950"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
@@ -18,24 +18,6 @@ OpenClaw projects are not toy demos. People are shipping PR review loops, mobile
 Info
 
 **Want to be featured?** Share your project in [#self-promotion on Discord](https://discord.gg/clawd) or [tag @openclaw on X](https://x.com/openclaw).
-
-## Videos
-
-Start here if you want the shortest path from "what is this?" to "okay, I get it."
-
-CardGroup
-
-Full setup walkthrough
-
-  VelvetShark, 28 minutes. Install, onboard, and get to a first working assistant end to end.
-
-Community showcase reel
-
-  A faster pass across real projects, surfaces, and workflows built around OpenClaw.
-
-Projects in the wild
-
-  Examples from the community, from chat-native coding loops to hardware and personal automation.
 
 ## Fresh from Discord
 

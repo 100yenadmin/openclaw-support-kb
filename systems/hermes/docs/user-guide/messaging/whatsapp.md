@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp"
-source_hash: "483ca1d3d0ec72d5a5965c3a9243dc77add75f9e39976ada551dd483b8910cf7"
+source_hash: "e40819c331160d7918d329a42a9499a1b4d44d5663b1effc732281927e2800b8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp.md"
@@ -116,9 +116,9 @@ WHATSAPP_ALLOWED_USERS=15551234567         # Comma-separated phone numbers (with
 
 :::tip Allow-all shorthand
 Setting `WHATSAPP_ALLOWED_USERS=*` allows **all** senders (equivalent to `WHATSAPP_ALLOW_ALL_USERS=true`).
-This is consistent with [Signal group allowlists](/docs/reference/environment-variables).
+This is consistent with [Signal group allowlists](/reference/environment-variables).
 To use the pairing flow instead, remove both variables and rely on the
-[DM pairing system](/docs/user-guide/security#dm-pairing-system).
+[DM pairing system](/user-guide/security#dm-pairing-system).
 :::
 
 Optional behavior settings in `~/.hermes/config.yaml`:

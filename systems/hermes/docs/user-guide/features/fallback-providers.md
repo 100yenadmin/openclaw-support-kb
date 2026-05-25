@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/fallback-providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "d2dbc972c156b7aa65b086115801cecc97f24800dff0532925078cabc6a0e31d"
+source_hash: "72f4bcb5fead41160e44dde9c0271f363942917fa23d932b26c530b5b50d84d3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -278,7 +278,7 @@ All three — auxiliary, compression, fallback — work the same way: set `provi
 
 ### Provider Options for Auxiliary Tasks
 
-These options apply to `auxiliary:`, `compression:`, and `fallback_model:` configs only — `"main"` is **not** a valid value for your top-level `model.provider`. For custom endpoints, use `provider: custom` in your `model:` section (see [AI Providers](/docs/integrations/providers)).
+These options apply to `auxiliary:`, `compression:`, and `fallback_model:` configs only — `"main"` is **not** a valid value for your top-level `model.provider`. For custom endpoints, use `provider: custom` in your `model:` section (see [AI Providers](/integrations/providers)).
 
 | Provider | Description | Requirements |
 |----------|-------------|-------------|
@@ -385,7 +385,7 @@ delegation:
   # api_key: "local-key"
 ```
 
-See [Subagent Delegation](/docs/user-guide/features/delegation) for full configuration details.
+See [Subagent Delegation](/user-guide/features/delegation) for full configuration details.
 
 ---
 
@@ -403,7 +403,7 @@ cronjob(
 )
 ```
 
-See [Scheduled Tasks (Cron)](/docs/user-guide/features/cron) for full configuration details.
+See [Scheduled Tasks (Cron)](/user-guide/features/cron) for full configuration details.
 
 ---
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "4a93d869e003f311a7bcd983eb3702708855fec95beb34ec7ae428acc4c00dce"
+source_hash: "b24f3106ea747cb9b93931cd2ad2a9ef5e2b955c60687d8ca6cdb8621e8a0601"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -76,11 +76,11 @@ Note
 
 ## Signals exported
 
-| Signal      | What goes in it                                                                                                                                         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Metrics** | Counters and histograms for token usage, cost, run duration, message flow, Talk events, queue lanes, session state/recovery, exec, and memory pressure. |
-| **Traces**  | Spans for model usage, model calls, harness lifecycle, tool execution, exec, webhook/message processing, context assembly, and tool loops.              |
-| **Logs**    | Structured `logging.file` records exported over OTLP when `diagnostics.otel.logs` is enabled.                                                           |
+| Signal      | What goes in it                                                                                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Metrics** | Counters and histograms for token usage, cost, run duration, skill usage, message flow, Talk events, queue lanes, session state/recovery, tool execution, exec, and memory pressure. |
+| **Traces**  | Spans for model usage, model calls, harness lifecycle, skill usage, tool execution, exec, webhook/message processing, context assembly, and tool loops.                              |
+| **Logs**    | Structured `logging.file` records exported over OTLP when `diagnostics.otel.logs` is enabled; log bodies are withheld unless content capture is explicitly enabled.                  |
 
 Toggle `traces`, `metrics`, and `logs` independently. All three default to on
 when `diagnostics.otel.enabled` is true.
@@ -132,9 +132,14 @@ when `diagnostics.otel.enabled` is true.
 ## Privacy and content capture
 
 Raw model/tool content is **not** exported by default. Spans carry bounded
-identifiers (channel, provider, model, error category, hash-only request ids)
-and never include prompt text, response text, tool inputs, tool outputs, or
-session keys.
+identifiers (channel, provider, model, error category, hash-only request ids,
+tool source, tool owner, and skill name/source) and never include prompt text,
+response text, tool inputs, tool outputs, skill file paths, or session keys.
+OTLP log records keep severity, logger, code location, trusted trace context,
+and sanitized attributes by default, but the raw log message body is exported
+only when `diagnostics.otel.captureContent` is set to boolean `true`. Granular
+`captureContent.*` subkeys do not enable log bodies. Labels that look like
+scoped agent session keys are replaced with `unknown`.
 Talk metrics export only bounded event metadata such as mode, transport,
 provider, and event type. They do not include transcripts, audio payloads,
 session ids, turn ids, call ids, room ids, or handoff tokens.
@@ -155,7 +160,9 @@ text. Each subkey is opt-in independently:
 - `systemPrompt` - assembled system/developer prompt.
 
 When any subkey is enabled, model and tool spans get bounded, redacted
-`openclaw.content.*` attributes for that class only.
+`openclaw.content.*` attributes for that class only. Use boolean
+`captureContent: true` only for broad diagnostics captures where OTLP log
+message bodies are also approved for export.
 
 ## Sampling and flushing
 
@@ -188,6 +195,7 @@ When any subkey is enabled, model and tool spans get bounded, redacted
 - `openclaw.model_call.request_bytes` (histogram, UTF-8 byte size of the final model request payload; no raw payload content)
 - `openclaw.model_call.response_bytes` (histogram, UTF-8 byte size of streamed model response events; no raw response content)
 - `openclaw.model_call.time_to_first_byte_ms` (histogram, elapsed time before the first streamed response event)
+- `openclaw.skill.used` (counter, attrs: `openclaw.skill.name`, `openclaw.skill.source`, `openclaw.skill.activation`, optional `openclaw.agent`, optional `openclaw.toolName`)
 
 ### Message flow
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord plugin"
 source: "https://docs.openclaw.ai/plugins/reference/discord"
-source_hash: "caf67e5e7411dfd76fea36778e1e0705f4fbcd021772afbd0197ecdd2229cece"
+source_hash: "ef32719405c09adfbd9aeeade10407fa72009df3307ccc00ccb3287b54e3cc07"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/discord.md"
@@ -24,7 +24,7 @@ Adds the Discord channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: discord
+channels: discord; contracts: meetingNotesSourceProviders
 
 ## Related docs
 

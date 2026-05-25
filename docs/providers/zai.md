@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "612db35078a6c962530a4005baf9aba315eb6bc3efbc57145fcb8bb39f879d07"
+source_hash: "21ef77e0303cae1382d094ea8e1dcd742b0520dd2c627359c8e041a811eab331"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/zai.md"
@@ -13,13 +13,20 @@ duplicate_index: 1
 # Z.AI
 Source: https://docs.openclaw.ai/providers/zai
 
-Z.AI is the API platform for **GLM** models. It provides REST APIs for GLM and uses API keys
-for authentication. Create your API key in the Z.AI console. OpenClaw uses the `zai` provider
-with a Z.AI API key.
+Z.AI is the API platform for **GLM** models. It provides REST APIs for GLM and
+uses API keys for authentication. Create your API key in the Z.AI console.
+OpenClaw uses the `zai` provider with a Z.AI API key.
 
-- Provider: `zai`
-- Auth: `ZAI_API_KEY`
-- API: Z.AI Chat Completions (Bearer auth)
+| Property | Value                                        |
+| -------- | -------------------------------------------- |
+| Provider | `zai`                                        |
+| Auth     | `ZAI_API_KEY` (legacy alias: `Z_AI_API_KEY`) |
+| API      | Z.AI Chat Completions (Bearer auth)          |
+
+## GLM models
+
+GLM is a model family, not a separate provider. In OpenClaw, GLM models use
+refs such as `zai/glm-5.1`: provider `zai`, model id `glm-5.1`.
 
 ## Getting started
 
@@ -28,7 +35,7 @@ Tabs
 
 Auto-detect endpoint
 
-    **Best for:** most users. OpenClaw detects the matching Z.AI endpoint from the key and applies the correct base URL automatically.
+    **Best for:** most users. OpenClaw probes supported Z.AI endpoints with your API key and applies the correct base URL automatically.
 
 
 Steps
@@ -38,16 +45,6 @@ Run onboarding
 
         ```bash
         openclaw onboard --auth-choice zai-api-key
-        ```
-
-
-Set a default model
-
-        ```json5
-        {
-          env: { ZAI_API_KEY: "sk-..." },
-          agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
-        }
         ```
 
 
@@ -87,16 +84,6 @@ Pick the right onboarding choice
         ```
 
 
-Set a default model
-
-        ```json5
-        {
-          env: { ZAI_API_KEY: "sk-..." },
-          agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
-        }
-        ```
-
-
 Verify the model is listed
 
         ```bash
@@ -106,6 +93,29 @@ Verify the model is listed
 
 
 
+
+## Config example
+
+Tip
+
+`zai-api-key` lets OpenClaw detect the matching Z.AI endpoint from the key and
+apply the correct base URL automatically. Use the explicit regional choices when
+you want to force a specific Coding Plan or general API surface.
+
+```json5
+{
+  env: { ZAI_API_KEY: "sk-..." },
+  models: {
+    providers: {
+      zai: {
+        // Example value. Onboarding writes the matching baseUrl for your endpoint.
+        baseUrl: "https://api.z.ai/api/paas/v4",
+      },
+    },
+  },
+  agents: { defaults: { model: { primary: "zai/glm-5.1" } } },
+}
+```
 
 ## Built-in catalog
 
@@ -136,7 +146,13 @@ The manifest-backed catalog currently includes:
 
 Tip
 
-GLM models are available as `zai/<model>` (example: `zai/glm-5`). The default bundled model ref is `zai/glm-5.1`.
+GLM models are available as `zai/<model>` (example: `zai/glm-5`).
+
+Note
+
+The default bundled model ref is `zai/glm-5.1`. GLM versions and availability
+can change; run `openclaw models list --all --provider zai` to see the catalog
+known to your installed version.
 
 ## Advanced configuration
 
@@ -223,8 +239,9 @@ Image understanding
 Auth details
 
     - Z.AI uses Bearer auth with your API key.
-    - The `zai-api-key` onboarding choice auto-detects the matching Z.AI endpoint from the key prefix.
+    - The `zai-api-key` onboarding choice auto-detects the matching Z.AI endpoint by probing supported endpoints with your key.
     - Use the explicit regional choices (`zai-coding-global`, `zai-coding-cn`, `zai-global`, `zai-cn`) when you want to force a specific API surface.
+    - The legacy env var `Z_AI_API_KEY` is still accepted; OpenClaw copies it to `ZAI_API_KEY` at startup if `ZAI_API_KEY` is unset.
 
 
 
@@ -233,13 +250,13 @@ Auth details
 CardGroup
 
 
-GLM model family
-
-    Model family overview for GLM.
-
-
 Model selection
 
     Choosing providers, model refs, and failover behavior.
+
+
+Configuration reference
+
+    Full OpenClaw config schema, including provider and model settings.
 
 ---

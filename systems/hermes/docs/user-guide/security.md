@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Security"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/security"
-source_hash: "646bc072079d56313e322c988f083629484263c2f3a3516b44b0e5443aba7f94"
+source_hash: "1a9b457cc2f6dee8c029e7148cdbba8e5a08bfdb2140de03ff3c7732655a8aea"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/security.md"
@@ -508,7 +508,7 @@ security:
 
 When a blocked URL is requested, the tool returns an error explaining the domain is blocked by policy. The blocklist is enforced across `web_search`, `web_extract`, `browser_navigate`, and all URL-capable tools.
 
-See [Website Blocklist](/docs/user-guide/configuration#website-blocklist) in the configuration guide for full details.
+See [Website Blocklist](/user-guide/configuration#website-blocklist) in the configuration guide for full details.
 
 ### SSRF Protection
 

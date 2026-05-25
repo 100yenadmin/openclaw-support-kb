@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "8e426b2056a71a2e80d875252e99ad457dd3ee2688e3f1a0e624a78ad909b33f"
+source_hash: "07fdd17fbe464373a86b4be73a05e0cf59bbd89e0c02135674d5d98171277fe7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -123,7 +123,7 @@ hermes setup          # Or run the full setup wizard to configure everything at 
 ```
 
 :::tip Fastest path: Nous Portal
-One subscription covers 300+ models plus the [Tool Gateway](/docs/user-guide/features/tool-gateway) (web search, image generation, TTS, cloud browser). Skip the per-tool key juggling:
+One subscription covers 300+ models plus the [Tool Gateway](/user-guide/features/tool-gateway) (web search, image generation, TTS, cloud browser). Skip the per-tool key juggling:
 
 ```bash
 hermes setup --portal

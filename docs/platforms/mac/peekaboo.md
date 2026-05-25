@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Peekaboo bridge"
 source: "https://docs.openclaw.ai/platforms/mac/peekaboo"
-source_hash: "8876f0bc110959a320c856c6efa8e33857573d4d2eb086fb11a871675146ca8d"
+source_hash: "d317d78a055888f646086284a73f25ee673ef9eab352486960814a3ac7e9806f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/peekaboo.md"
@@ -74,6 +74,10 @@ export PEEKABOO_BRIDGE_SOCKET=/path/to/bridge.sock
 
 - The bridge validates **caller code signatures**; an allowlist of TeamIDs is
   enforced (Peekaboo host TeamID + OpenClaw app TeamID).
+- Prefer the signed bridge/app identity over a generic `node` runtime for
+  Accessibility. Granting Accessibility to `node` lets any package launched by
+  that Node executable inherit GUI automation access; see
+  [macOS permissions](/platforms/mac/permissions#accessibility-grants-for-node-and-cli-runtimes).
 - Requests time out after ~10 seconds.
 - If required permissions are missing, the bridge returns a clear error message
   rather than launching System Settings.

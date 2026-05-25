@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS VMs"
 source: "https://docs.openclaw.ai/install/macos-vm"
-source_hash: "4299291dd5e9d24bf1ab62abe9b71893d3620323a5b8b244a96d9a8c888eea8f"
+source_hash: "7d7e6b5b0878e292223e2e31d4459f52dd5e3963fc6b83547c3d68940507cc95"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/macos-vm.md"
@@ -110,10 +110,10 @@ In the VNC window:
 3. Create a user account (remember the username and password)
 4. Skip all optional features
 
-After setup completes, enable SSH:
+After setup completes:
 
-1. Open System Settings → General → Sharing
-2. Enable "Remote Login"
+1. Enable SSH: Open System Settings -> General -> Sharing and enable "Remote Login".
+2. For headless VM use, enable auto-login: Open System Settings -> Users & Groups, select "Automatically log in as:", and choose the VM user.
 
 ---
 

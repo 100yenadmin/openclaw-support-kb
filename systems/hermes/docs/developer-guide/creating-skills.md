@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Creating Skills"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills"
-source_hash: "138369bd528bb31616fd6d8325582e977cb4cdc012754ef3b9fe2048f065ca35"
+source_hash: "6f41404dcd89e39ecac10e7a411b8c477843f5617fe2afe2c1c3e8cd4cd4066d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/creating-skills.md"
@@ -186,7 +186,7 @@ required_environment_variables:
 The user can skip setup and keep loading the skill. Hermes never exposes the raw secret value to the model. Gateway and messaging sessions show local setup guidance instead of collecting secrets in-band.
 
 :::tip Sandbox Passthrough
-When your skill is loaded, any declared `required_environment_variables` that are set are **automatically passed through** to `execute_code` and `terminal` sandboxes — including remote backends like Docker and Modal. Your skill's scripts can access `$TENOR_API_KEY` (or `os.environ["TENOR_API_KEY"]` in Python) without the user needing to configure anything extra. See [Environment Variable Passthrough](/docs/user-guide/security#environment-variable-passthrough) for details.
+When your skill is loaded, any declared `required_environment_variables` that are set are **automatically passed through** to `execute_code` and `terminal` sandboxes — including remote backends like Docker and Modal. Your skill's scripts can access `$TENOR_API_KEY` (or `os.environ["TENOR_API_KEY"]` in Python) without the user needing to configure anything extra. See [Environment Variable Passthrough](/user-guide/security#environment-variable-passthrough) for details.
 :::
 
 Legacy `prerequisites.env_vars` remains supported as a backward-compatible alias.

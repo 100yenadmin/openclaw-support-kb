@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "0361228952ef1763663d4113b82b38b25e483591f9f2d1ecae52589638e4e53a"
+source_hash: "6a30ae20a1786ad28bc24e81917ddc59885c357e847d98678a19f5d321fd5eee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -349,7 +349,8 @@ OpenAI gpt-image-2 (and gpt-image-1.5)
     transparent outputs require `outputFormat` `png` or `webp` and a
     transparency-capable OpenAI image model. OpenClaw routes default
     `gpt-image-2` transparent-background requests to `gpt-image-1.5`.
-    `openai.outputCompression` applies to JPEG/WebP outputs.
+    `openai.outputCompression` applies to JPEG/WebP outputs and is ignored
+    for PNG outputs.
 
     The top-level `background` hint is provider-neutral and currently maps
     to the same OpenAI `background` request field when the OpenAI provider

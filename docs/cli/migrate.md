@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "3be8ea0a6d9da16acdc24e2179c3f67412159834dc86a67bfb7cf1a33ee6d3a5"
+source_hash: "87ce6a5caa14247f11d3473b7ca8087af7f8a0f457fbc3fcce98ce64f8a0fa8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -57,7 +57,11 @@ ParamField
 
 ParamField
 
-  Import supported credentials. Off by default.
+  Import supported credentials without prompting. Interactive apply asks before importing detected auth credentials, with yes selected by default; non-interactive `--yes` requires `--include-secrets` to import them.
+
+ParamField
+
+  Skip auth credential import, including the interactive prompt.
 
 ParamField
 
@@ -118,7 +122,7 @@ Conflicts
 
 Secrets
 
-    Secrets are never imported by default. Use `--include-secrets` to import supported credentials.
+    Interactive apply asks whether to import detected auth credentials, with yes selected by default. Use `--no-auth-credentials` to skip them, or use `--include-secrets` for unattended credential import with `--yes`.
 
 
 ## Claude provider
@@ -259,11 +263,53 @@ The bundled Hermes provider detects state at `~/.hermes` by default. Use `--from
 - Memory config defaults for OpenClaw file memory, plus archive or manual-review items for external memory providers such as Honcho.
 - Skills that include a `SKILL.md` file under `skills/<name>/`.
 - Per-skill config values from `skills.config`.
-- Supported API keys from `.env`, only with `--include-secrets`.
+- Supported OAuth credentials from Hermes `auth.json` and OpenCode OpenAI OAuth credentials from OpenCode `auth.json` when interactive credential migration is accepted, or when `--include-secrets` is set.
+- Supported API keys and tokens from Hermes `.env` and OpenCode `auth.json` when interactive credential migration is accepted, or when `--include-secrets` is set.
 
 ### Supported `.env` keys
 
-`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`, `GOOGLE_API_KEY`, `GEMINI_API_KEY`, `GROQ_API_KEY`, `XAI_API_KEY`, `MISTRAL_API_KEY`, `DEEPSEEK_API_KEY`.
+- `AI_GATEWAY_API_KEY`
+- `ALIBABA_API_KEY`
+- `ANTHROPIC_API_KEY`
+- `ARCEEAI_API_KEY`
+- `CEREBRAS_API_KEY`
+- `CHUTES_API_KEY`
+- `CLOUDFLARE_AI_GATEWAY_API_KEY`
+- `COPILOT_GITHUB_TOKEN`
+- `DASHSCOPE_API_KEY`
+- `DEEPINFRA_API_KEY`
+- `DEEPSEEK_API_KEY`
+- `FIREWORKS_API_KEY`
+- `GEMINI_API_KEY`
+- `GH_TOKEN`
+- `GITHUB_TOKEN`
+- `GLM_API_KEY`
+- `GOOGLE_API_KEY`
+- `GROQ_API_KEY`
+- `HF_TOKEN`
+- `HUGGINGFACE_HUB_TOKEN`
+- `KILOCODE_API_KEY`
+- `KIMICODE_API_KEY`
+- `KIMI_API_KEY`
+- `MINIMAX_API_KEY`
+- `MINIMAX_CODING_API_KEY`
+- `MISTRAL_API_KEY`
+- `MODELSTUDIO_API_KEY`
+- `MOONSHOT_API_KEY`
+- `NVIDIA_API_KEY`
+- `OPENAI_API_KEY`
+- `OPENCODE_API_KEY`
+- `OPENCODE_GO_API_KEY`
+- `OPENCODE_ZEN_API_KEY`
+- `OPENROUTER_API_KEY`
+- `QIANFAN_API_KEY`
+- `QWEN_API_KEY`
+- `TOGETHER_API_KEY`
+- `VENICE_API_KEY`
+- `XAI_API_KEY`
+- `XIAOMI_API_KEY`
+- `ZAI_API_KEY`
+- `Z_AI_API_KEY`
 
 ### Archive-only state
 
@@ -274,7 +320,6 @@ Hermes state that OpenClaw cannot safely interpret is copied into the migration 
 - `logs/`
 - `cron/`
 - `mcp-tokens/`
-- `auth.json`
 - `state.db`
 
 ### After applying

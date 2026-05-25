@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "effec4f80bb4e863ccd7216c335c3d17c781b9019e21273fb864daf8a5e2d32a"
+source_hash: "79ee9cabd90b7b8f23fda6526cd8f5b3288e679d38d3f8fbb2f8be5f6e9b156c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-live.md"
@@ -558,7 +558,7 @@ request. Plugin dependencies are expected to be present before runtime load.
   - Current declared-but-skipped `videoToVideo` providers in the shared sweep:
     - `alibaba`, `qwen`, `xai` because those paths currently require remote `http(s)` / MP4 reference URLs
     - `google` because the current shared Gemini/Veo lane uses local buffer-backed input and that path is not accepted in the shared sweep
-    - `openai` because the current shared lane lacks org-specific video inpaint/remix access guarantees
+    - `openai` because the current shared lane lacks org-specific video edit access guarantees
 - Optional narrowing:
   - `OPENCLAW_LIVE_VIDEO_GENERATION_PROVIDERS="deepinfra,google,openai,runway"`
   - `OPENCLAW_LIVE_VIDEO_GENERATION_MODELS="google/veo-3.1-fast-generate-preview,openai/sora-2,runway/gen4_aleph"`

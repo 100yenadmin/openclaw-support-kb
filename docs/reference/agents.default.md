@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
-source_hash: "6ea3b0cf15c798b45cabd7905eb259f3723970553c9d299e504d14956ad8b57c"
+source_hash: "0a4767b4e12170430285125d3faac822936946c35f7256f37b451d39c9f8f3a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/agents.default.md"
@@ -49,6 +49,7 @@ cp docs/reference/AGENTS.default.md ~/.openclaw/workspace/AGENTS.md
 
 - Don't dump directories or secrets into chat.
 - Don't run destructive commands unless explicitly asked.
+- Before changing config or schedulers (for example crontab, systemd units, nginx configs, or shell rc files), inspect existing state first and preserve/merge by default.
 - Don't send partial/streaming replies to external messaging surfaces (only final replies).
 
 ## Session start (required)
@@ -74,6 +75,7 @@ cp docs/reference/AGENTS.default.md ~/.openclaw/workspace/AGENTS.md
 - Long-term memory: `MEMORY.md` for durable facts, preferences, and decisions.
 - Lowercase `memory.md` is legacy repair input only; do not keep both root files on purpose.
 - On session start, read today + yesterday + `MEMORY.md` when present.
+- Before writing memory files, read them first; write only concrete updates, never empty placeholders.
 - Capture: decisions, preferences, constraints, open loops.
 - Avoid secrets unless explicitly requested.
 

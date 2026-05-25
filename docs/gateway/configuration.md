@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "8e82cebe9fd7a08b468c87eae0921d376b079f4552701325896119f5172629ac"
+source_hash: "e3a9d88dd149820fcef0e232794a638e454c5dc55b7494dd5eed863e566ef934"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -560,6 +560,7 @@ Split config into multiple files ($include)
     - **Sibling keys**: merged after includes (override included values)
     - **Nested includes**: supported up to 10 levels deep
     - **Relative paths**: resolved relative to the including file
+    - **Path format**: include paths must not contain null bytes and must be strictly shorter than 4096 characters before and after resolution
     - **OpenClaw-owned writes**: when a write changes only one top-level section
       backed by a single-file include such as `plugins: { $include: "./plugins.json5" }`,
       OpenClaw updates that included file and leaves `openclaw.json` intact
@@ -572,7 +573,7 @@ Split config into multiple files ($include)
       additional directories that includes may reference. Symlinks are resolved
       and re-checked, so a path that lexically lives in a config dir but whose
       real target escapes every allowed root is still rejected.
-    - **Error handling**: clear errors for missing files, parse errors, and circular includes
+    - **Error handling**: clear errors for missing files, parse errors, circular includes, invalid path format, and excessive length
 
 
 

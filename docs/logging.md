@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "928d442228c3a6502330838d19136d3f7d578a3216cb6f8d994e481ddf60692f"
+source_hash: "0908fd3e5a0b7df7121fb7a48382bc18bc9fbe4f7c1adb909daa9ba480645aca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -82,7 +82,9 @@ In JSON mode, the CLI emits `type`-tagged objects:
 If the implicit local loopback Gateway asks for pairing, closes during connect,
 or times out before `logs.tail` answers, `openclaw logs` falls back to the
 configured Gateway file log automatically. Explicit `--url` targets do not use
-this fallback.
+this fallback. `openclaw logs --follow` is stricter: on Linux it uses the active
+user-systemd Gateway journal by PID when available, and otherwise keeps retrying
+the live Gateway instead of following a potentially stale side-by-side file.
 
 If the Gateway is unreachable, the CLI prints a short hint to run:
 

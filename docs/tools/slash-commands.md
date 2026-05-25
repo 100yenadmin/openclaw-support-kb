@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "9f9ad3de284152ab72f01983c547d1db68b5f755d2a8cd013e6b14c2d318b425"
+source_hash: "5920ca1df0adf0e120c160e0e491d0b5a62767c08f312d98db3d09fdc62304e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -208,13 +208,11 @@ Skills, allowlists, approvals
 
 Subagents and ACP
 
-    - `/subagents list|kill|log|info|send|steer|spawn` manages sub-agent runs for the current session.
+    - `/subagents list|log|info` inspects sub-agent runs for the current session.
     - `/acp spawn|cancel|steer|close|sessions|status|set-mode|set|cwd|permissions|timeout|model|reset-options|doctor|install|help` manages ACP sessions and runtime options.
     - `/focus <target>` binds the current Discord thread or Telegram topic/conversation to a session target.
     - `/unfocus` removes the current binding.
     - `/agents` lists thread-bound agents for the current session.
-    - `/kill <id|#|all>` aborts one or all running sub-agents.
-    - `/subagents steer <id|#> <message>` sends steering to a running sub-agent. See [Steer](/tools/steer).
 
 
 

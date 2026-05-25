@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Curator"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/curator"
-source_hash: "33c987da9454808097a0487554a6f47d9c7ea890b25849844f812c74805a92f3"
+source_hash: "47c44e36f764d0bf14b5b34c46ecf67328566669c0f216e764a1e6d397b3533b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/curator.md"
@@ -21,7 +21,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/curator
 
 The curator is a background maintenance pass for **agent-created skills**. It tracks how often each skill is viewed, used, and patched, moves long-unused skills through `active → stale → archived` states, and periodically spawns a short auxiliary-model review that proposes consolidations or patches drift.
 
-It exists so that skills created via the [self-improvement loop](/docs/user-guide/features/skills#agent-managed-skills-skill_manage-tool) don't pile up forever. Every time the agent solves a novel problem and saves a skill, that skill lands in `~/.hermes/skills/`. Without maintenance, you end up with dozens of narrow near-duplicates that pollute the catalog and waste tokens.
+It exists so that skills created via the [self-improvement loop](/user-guide/features/skills#agent-managed-skills-skill_manage-tool) don't pile up forever. Every time the agent solves a novel problem and saves a skill, that skill lands in `~/.hermes/skills/`. Without maintenance, you end up with dozens of narrow near-duplicates that pollute the catalog and waste tokens.
 
 The curator **never touches** bundled skills (shipped with the repo) or hub-installed skills (from [agentskills.io](https://agentskills.io)). It only reviews skills the agent itself authored. It also **never auto-deletes** — the worst outcome is archival into `~/.hermes/skills/.archive/`, which is recoverable.
 
@@ -255,9 +255,9 @@ The curator also refuses to run if `min_idle_hours` hasn't elapsed, so on an act
 
 ## See also
 
-- [Skills System](/docs/user-guide/features/skills) — how skills work in general and the self-improvement loop that creates them
-- [Memory](/docs/user-guide/features/memory) — a parallel background review that maintains long-term memory
-- [Bundled Skills Catalog](/docs/reference/skills-catalog)
+- [Skills System](/user-guide/features/skills) — how skills work in general and the self-improvement loop that creates them
+- [Memory](/user-guide/features/memory) — a parallel background review that maintains long-term memory
+- [Bundled Skills Catalog](/reference/skills-catalog)
 - [Issue #7816](https://github.com/NousResearch/hermes-agent/issues/7816) — original proposal and design discussion
 
 ---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Script-Only Cron Jobs (No LLM)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/cron-script-only"
-source_hash: "27dc561904e116b4737f1435bd0a23b7577068fd8fa24b95f85308341d040a85"
+source_hash: "36ae6437a332edd9cada3f1ca0881134ba05b1506f682f4e6f27d5e5c6b25eb1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/cron-script-only.md"
@@ -186,7 +186,7 @@ hermes cron create "0 9 * * *"       # standard cron: 9am daily
 hermes cron create "30m"             # one-shot: run once in 30 minutes
 ```
 
-See the [cron feature reference](/docs/user-guide/features/cron) for the full syntax.
+See the [cron feature reference](/user-guide/features/cron) for the full syntax.
 
 ## Delivery Targets
 
@@ -248,15 +248,15 @@ Silent when both filesystems are under 90%; fires exactly one line per over-thre
 |----------|-----------|-------------|
 | `cronjob --no-agent` (this page) | Your script on Hermes' schedule | Recurring watchdogs / alerts / metrics that don't need reasoning |
 | `cronjob` (default, LLM) | Agent with optional pre-check script | When the message content requires reasoning over data |
-| OS cron + `curl` to a [webhook subscription](/docs/user-guide/messaging/webhooks) | Your script on the OS schedule | When Hermes might be unhealthy (the thing you're monitoring) |
+| OS cron + `curl` to a [webhook subscription](/user-guide/messaging/webhooks) | Your script on the OS schedule | When Hermes might be unhealthy (the thing you're monitoring) |
 
 For critical system-health watchdogs that must fire *even when the gateway is down*, use OS-level cron with a plain `curl` to a Hermes webhook subscription (or any external alerting endpoint) — those run as independent OS processes and don't depend on Hermes being up. The in-gateway scheduler is the right choice when the thing being monitored is external.
 
 ## Related
 
-- [Automate Anything with Cron](/docs/guides/automate-with-cron) — LLM-driven cron patterns.
-- [Scheduled Tasks (Cron) reference](/docs/user-guide/features/cron) — full schedule syntax, lifecycle, delivery routing.
-- [Webhook Subscriptions](/docs/user-guide/messaging/webhooks) — fire-and-forget HTTP entry points for external schedulers.
-- [Gateway Internals](/docs/developer-guide/gateway-internals) — delivery-router internals.
+- [Automate Anything with Cron](/guides/automate-with-cron) — LLM-driven cron patterns.
+- [Scheduled Tasks (Cron) reference](/user-guide/features/cron) — full schedule syntax, lifecycle, delivery routing.
+- [Webhook Subscriptions](/user-guide/messaging/webhooks) — fire-and-forget HTTP entry points for external schedulers.
+- [Gateway Internals](/developer-guide/gateway-internals) — delivery-router internals.
 
 ---

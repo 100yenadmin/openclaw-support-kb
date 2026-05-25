@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Image Generation Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/image-gen-provider-plugin"
-source_hash: "bade025b92c28d21aded33f30fba18f157fbe7a86d71701e999f2ccb80c18ebd"
+source_hash: "1fd4231f714b68690a2e1d934cecbe8e9931644682dcab313385b5092f37141e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/image-gen-provider-plugin.md"
@@ -22,7 +22,7 @@ Source: https://hermes-agent.nousresearch.com/docs/developer-guide/image-gen-pro
 Image-gen provider plugins register a backend that services every `image_generate` tool call — DALL·E, gpt-image, Grok, Flux, Imagen, Stable Diffusion, fal, Replicate, a local ComfyUI rig, anything. Built-in providers (OpenAI, OpenAI-Codex, xAI) all ship as plugins. You can add a new one, or override a bundled one, by dropping a directory into `plugins/image_gen/<name>/`.
 
 :::tip
-Image-gen is one of several **backend plugins** Hermes supports. The others (with more specialized ABCs) are [Memory Provider Plugins](/docs/developer-guide/memory-provider-plugin), [Context Engine Plugins](/docs/developer-guide/context-engine-plugin), and [Model Provider Plugins](/docs/developer-guide/model-provider-plugin). General tool/hook/CLI plugins live in [Build a Hermes Plugin](/docs/guides/build-a-hermes-plugin).
+Image-gen is one of several **backend plugins** Hermes supports. The others (with more specialized ABCs) are [Memory Provider Plugins](/developer-guide/memory-provider-plugin), [Context Engine Plugins](/developer-guide/context-engine-plugin), and [Model Provider Plugins](/developer-guide/model-provider-plugin). General tool/hook/CLI plugins live in [Build a Hermes Plugin](/guides/build-a-hermes-plugin).
 :::
 
 ## How discovery works
@@ -292,12 +292,12 @@ Or interactively: `hermes tools` → "Image Generation" → select `my-backend` 
 my-backend-imggen = "my_backend_imggen_package"
 ```
 
-`my_backend_imggen_package` must expose a top-level `register` function. See [Distribute via pip](/docs/guides/build-a-hermes-plugin#distribute-via-pip) in the general plugin guide for the full setup.
+`my_backend_imggen_package` must expose a top-level `register` function. See [Distribute via pip](/guides/build-a-hermes-plugin#distribute-via-pip) in the general plugin guide for the full setup.
 
 ## Related pages
 
-- [Image Generation](/docs/user-guide/features/image-generation) — user-facing feature documentation
-- [Plugins overview](/docs/user-guide/features/plugins) — all plugin types at a glance
-- [Build a Hermes Plugin](/docs/guides/build-a-hermes-plugin) — general tools/hooks/slash commands guide
+- [Image Generation](/user-guide/features/image-generation) — user-facing feature documentation
+- [Plugins overview](/user-guide/features/plugins) — all plugin types at a glance
+- [Build a Hermes Plugin](/guides/build-a-hermes-plugin) — general tools/hooks/slash commands guide
 
 ---

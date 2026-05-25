@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes"
-source_hash: "5344fbf968e274d98ea49c1715b9dd3aa40e092e615f0cc3577bba21b87d5039"
+source_hash: "fe85b25b9502f757cc76955fa6c474b8f9bb92d496029e8115498335828699f8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes.md"
@@ -402,14 +402,14 @@ Per-agent override:
 
 ```bash
 openclaw config get agents.list
-openclaw config set agents.list[0].tools.exec.node "node-id-or-name"
+openclaw config set 'agents.list[0].tools.exec.node' "node-id-or-name"
 ```
 
 Unset to allow any node:
 
 ```bash
 openclaw config unset tools.exec.node
-openclaw config unset agents.list[0].tools.exec.node
+openclaw config unset 'agents.list[0].tools.exec.node'
 ```
 
 ## Permissions map

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use MCP with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes"
-source_hash: "79fc9e15cb26e76aa4d5acdd97a5ddfa9bb21f61a4e49e787b16399295a94bb0"
+source_hash: "ae3fa2ad4318c8cfba18a2b0a93e1c0145e7ada9013ed18e1b3084f3dae4b23e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-mcp-with-hermes.md"
@@ -498,8 +498,8 @@ Not-great first servers:
 
 ## Related docs
 
-- [MCP (Model Context Protocol)](/docs/user-guide/features/mcp)
-- [FAQ](/docs/reference/faq)
-- [Slash Commands](/docs/reference/slash-commands)
+- [MCP (Model Context Protocol)](/user-guide/features/mcp)
+- [FAQ](/reference/faq)
+- [Slash Commands](/reference/slash-commands)
 
 ---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Working with Skills"
 source: "https://hermes-agent.nousresearch.com/docs/guides/work-with-skills"
-source_hash: "e96df407df75ea6dcd3e603927391c816eb57fc0039ec7effdd97bdbec0305c4"
+source_hash: "a8401ce12671aad90cbb59c8916bb6dd1512a02adada711674b4c24f8fa134c7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/work-with-skills.md"
@@ -21,7 +21,7 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/work-with-skills
 
 Skills are on-demand knowledge documents that teach Hermes how to handle specific tasks — from generating ASCII art to managing GitHub PRs. This guide walks you through using them day to day.
 
-For the full technical reference, see [Skills System](/docs/user-guide/features/skills).
+For the full technical reference, see [Skills System](/user-guide/features/skills).
 
 ---
 
@@ -148,7 +148,7 @@ skill_view("writing-plans")
 
 Plugin skills are **not** listed in the system prompt and don't appear in `skills_list`. They're opt-in — load them explicitly when you know a plugin provides one. When loaded, the agent sees a banner listing sibling skills from the same plugin.
 
-For how to ship skills in your own plugin, see [Build a Hermes Plugin → Bundle skills](/docs/guides/build-a-hermes-plugin#bundle-skills).
+For how to ship skills in your own plugin, see [Build a Hermes Plugin → Bundle skills](/guides/build-a-hermes-plugin#bundle-skills).
 
 ---
 
@@ -300,6 +300,6 @@ Both are persistent across sessions, but they serve different purposes:
 
 ---
 
-*For the complete skills reference — frontmatter fields, conditional activation, external directories, and more — see [Skills System](/docs/user-guide/features/skills).*
+*For the complete skills reference — frontmatter fields, conditional activation, external directories, and more — see [Skills System](/user-guide/features/skills).*
 
 ---

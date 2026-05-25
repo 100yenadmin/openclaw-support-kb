@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "ad8feddf83f286af32cea19bb3caede9f47d3db154db887425da556e4f6f598d"
+source_hash: "e35cb51dd8b43fb01bac4ceb41c9d5b2aae70caa0dcc5d541e620545a77b02db"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness.md"
@@ -33,6 +33,10 @@ That keeps Codex native workspace and code capabilities available while
 OpenClaw dynamic tools continue through the app-server `item/tool/call` bridge.
 Active OpenClaw sandboxing and restricted tool policies disable native code mode
 entirely unless you opt into the experimental sandbox exec-server path.
+
+This Codex-native feature is separate from
+[OpenClaw code mode](/reference/code-mode), which is an opt-in QuickJS-WASI
+runtime for generic OpenClaw runs with a different `exec` input shape.
 
 For the broader model/provider/runtime split, start with
 [Agent runtimes](/concepts/agent-runtimes). The short version is:
@@ -127,24 +131,29 @@ Use `openai/gpt-*` model refs for Codex-backed OpenAI agent turns. Prefer
 `openai-codex:*` auth profiles and `auth.order.openai-codex` remain valid, but
 do not write new `openai-codex/gpt-*` model refs.
 
-Do not set `compaction.model` or `compaction.provider` on Codex-backed agents
-unless a selected context engine owns compaction. Without an owning context
-engine, Codex compacts through its native app-server thread state, so OpenClaw
-ignores those local summarizer overrides at runtime and `openclaw doctor --fix`
-removes them when the agent uses Codex.
+Do not set `compaction.model` or `compaction.provider` on Codex-backed agents.
+Codex compacts through its native app-server thread state, so OpenClaw ignores
+those local summarizer overrides at runtime and `openclaw doctor --fix` removes
+them when the agent uses Codex.
 
-Lossless remains supported as a context engine. Configure it through
+Lossless remains supported as a context engine for assembly, ingestion, and
+maintenance around Codex turns. Configure it through
 `plugins.slots.contextEngine: "lossless-claw"` and
 `plugins.entries.lossless-claw.config.summaryModel`, not through
 `agents.defaults.compaction.provider`. `openclaw doctor --fix` migrates the old
 `compaction.provider: "lossless-claw"` shape to the Lossless context-engine slot
-when Codex is the active runtime.
+when Codex is the active runtime, but native Codex still owns compaction.
 
-When the active context engine reports `ownsCompaction: true`, `/compact` runs
-that engine's compaction lifecycle and invalidates the bound Codex app-server
-thread. The next Codex turn starts a fresh backend thread and rehydrates it from
-the context engine instead of layering Codex native compaction on top of the
-engine-owned semantic summary.
+The native Codex app-server harness supports context engines that require
+pre-prompt assembly. Generic CLI backends, including `codex-cli`, do not provide
+that host capability.
+
+For Codex-backed agents, `/compact` starts native Codex app-server compaction on
+the bound thread. OpenClaw does not wait for completion, impose an OpenClaw
+timeout, restart the shared app-server, or fall back to a context-engine or
+public OpenAI summarizer. If the native Codex thread binding is missing or
+stale, the command fails closed so the operator sees the real runtime boundary
+instead of silently switching compaction backends.
 
 ```json5
 {
@@ -654,10 +663,10 @@ The Codex harness changes the low-level embedded agent executor only.
 - Codex-native shell, patch, MCP, and native app tools are owned by Codex.
   OpenClaw can observe or block selected native events through the supported
   relay, but it does not rewrite native tool arguments.
-- Codex owns native compaction unless the active OpenClaw context engine
-  declares `ownsCompaction: true`. OpenClaw keeps a transcript mirror for
-  channel history, search, `/new`, `/reset`, and future model or harness
-  switching.
+- Codex owns native compaction. OpenClaw keeps a transcript mirror for channel
+  history, search, `/new`, `/reset`, and future model or harness switching, but
+  it does not replace Codex compaction with an OpenClaw or context-engine
+  summarizer.
 - Media generation, media understanding, TTS, approvals, and messaging-tool
   output continue through the matching OpenClaw provider/model settings.
 - `tool_result_persist` applies to OpenClaw-owned transcript tool results, not

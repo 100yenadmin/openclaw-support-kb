@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "a7e76afeb6d62b2178f84a5134ec7db24f0e850782eaf81f72dae9b59baad81b"
+source_hash: "88a94024250241ba4f097874a575dae531125b7507aaadb2ac1816225fd3d28c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/signal.md"
@@ -54,12 +54,13 @@ Minimal config:
 
 Field reference:
 
-| Field       | Description                                       |
-| ----------- | ------------------------------------------------- |
-| `account`   | Bot phone number in E.164 format (`+15551234567`) |
-| `cliPath`   | Path to `signal-cli` (`signal-cli` if on `PATH`)  |
-| `dmPolicy`  | DM access policy (`pairing` recommended)          |
-| `allowFrom` | Phone numbers or `uuid:<id>` values allowed to DM |
+| Field        | Description                                       |
+| ------------ | ------------------------------------------------- |
+| `account`    | Bot phone number in E.164 format (`+15551234567`) |
+| `cliPath`    | Path to `signal-cli` (`signal-cli` if on `PATH`)  |
+| `configPath` | signal-cli config dir passed as `--config`        |
+| `dmPolicy`   | DM access policy (`pairing` recommended)          |
+| `allowFrom`  | Phone numbers or `uuid:<id>` values allowed to DM |
 
 ## What it is
 
@@ -388,6 +389,7 @@ Provider options:
 - `channels.signal.apiMode`: `auto | native | container` (default: auto). See [Container mode](#container-mode-bbernhardsignal-cli-rest-api).
 - `channels.signal.account`: E.164 for the bot account.
 - `channels.signal.cliPath`: path to `signal-cli`.
+- `channels.signal.configPath`: optional `signal-cli --config` directory.
 - `channels.signal.httpUrl`: full daemon URL (overrides host/port).
 - `channels.signal.httpHost`, `channels.signal.httpPort`: daemon bind (default 127.0.0.1:8080).
 - `channels.signal.autoStart`: auto-spawn daemon (default true if `httpUrl` unset).

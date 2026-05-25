@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Devices"
 source: "https://docs.openclaw.ai/cli/devices"
-source_hash: "9797fd10d1f524b32df303214796a143773414e11bed231037bbcd81acc41733"
+source_hash: "c6ed44de4135c678c6afccbf8f7abd1fa4d9a0fe41f5054a5850d4f1b8d7fa06"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/devices.md"
@@ -83,6 +83,36 @@ openclaw devices approve
 openclaw devices approve <requestId>
 openclaw devices approve --latest
 ```
+
+## Paperclip / `openclaw_gateway` first-run approval
+
+When a new Paperclip agent connects through the `openclaw_gateway` adapter for the first time, the Gateway may require a one-time device pairing approval before runs can succeed. If Paperclip reports `openclaw_gateway_pairing_required`, approve the pending device and retry.
+
+For local gateways, preview the latest pending request:
+
+```bash
+openclaw devices approve --latest
+```
+
+The preview prints the exact `openclaw devices approve <requestId>` command. Verify the request details, then rerun that command with the request ID to approve it.
+
+For remote gateways or explicit credentials, pass the same options while previewing and approving:
+
+```bash
+openclaw devices approve --latest --url <gateway-ws-url> --token <gateway-token>
+```
+
+To avoid re-approving after restarts, keep a persistent device key in the Paperclip adapter config instead of generating a new ephemeral identity each run:
+
+```json
+{
+  "adapterConfig": {
+    "devicePrivateKeyPem": "<ed25519-private-key-pkcs8-pem>"
+  }
+}
+```
+
+If approval keeps failing, run `openclaw devices list` first to confirm a pending request exists.
 
 ### `openclaw devices reject <requestId>`
 

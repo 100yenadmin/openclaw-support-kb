@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Venice AI"
 source: "https://docs.openclaw.ai/providers/venice"
-source_hash: "23d79ed026d5d9524a570fab7723b55057a25fa1fad23450fdd442d98e525282"
+source_hash: "5e5675e5bb11a88ba971b487a843ffb8b06d874e6988d26c367c3ecfb73580a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/venice.md"
@@ -190,14 +190,12 @@ Private models (26) — fully private, no logging
 
 
 
-Anonymized models (15) — via Venice proxy
+Anonymized models (12) — via Venice proxy
 
     | Model ID                        | Name                           | Context | Features                  |
     | ------------------------------- | ------------------------------ | ------- | ------------------------- |
     | `claude-opus-4-6`               | Claude Opus 4.6 (via Venice)   | 1M      | Reasoning, vision         |
-    | `claude-opus-4-5`               | Claude Opus 4.5 (via Venice)   | 198k    | Reasoning, vision         |
     | `claude-sonnet-4-6`             | Claude Sonnet 4.6 (via Venice) | 1M      | Reasoning, vision         |
-    | `claude-sonnet-4-5`             | Claude Sonnet 4.5 (via Venice) | 198k    | Reasoning, vision         |
     | `openai-gpt-54`                 | GPT-5.4 (via Venice)           | 1M      | Reasoning, vision         |
     | `openai-gpt-53-codex`           | GPT-5.3 Codex (via Venice)     | 400k    | Reasoning, vision, coding |
     | `openai-gpt-52`                 | GPT-5.2 (via Venice)           | 256k    | Reasoning                 |
@@ -208,7 +206,6 @@ Anonymized models (15) — via Venice proxy
     | `gemini-3-pro-preview`          | Gemini 3 Pro (via Venice)      | 198k    | Reasoning, vision         |
     | `gemini-3-flash-preview`        | Gemini 3 Flash (via Venice)    | 256k    | Reasoning, vision         |
     | `grok-41-fast`                  | Grok 4.1 Fast (via Venice)     | 1M      | Reasoning, vision         |
-    | `grok-code-fast-1`              | Grok Code Fast 1 (via Venice)  | 256k    | Reasoning, coding         |
 
 
 ## Model discovery

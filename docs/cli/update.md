@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "accec2bfb2b9fef9ec8a59b3c0673f6a52ba84dd470d50c44d1d924a8606801c"
+source_hash: "78adba51206596003026023ea77e64525e3184f40a7645a3af0e1349b43d2e26"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/update.md"
@@ -29,6 +29,7 @@ openclaw update wizard
 openclaw update --channel beta
 openclaw update --channel dev
 openclaw update --tag beta
+openclaw update --tag main
 openclaw update --dry-run
 openclaw update --no-restart
 openclaw update --yes
@@ -40,7 +41,7 @@ openclaw --update
 
 - `--no-restart`: skip restarting the Gateway service after a successful update. Package-manager updates that do restart the Gateway verify the restarted service reports the expected updated version before the command succeeds.
 - `--channel <stable|beta|dev>`: set the update channel (git + npm; persisted in config).
-- `--tag <dist-tag|version|spec>`: override the package target for this update only. Use `--channel dev`, not `--tag main`, for the moving GitHub `main` checkout.
+- `--tag <dist-tag|version|spec>`: override the package target for this update only. For package installs, `main` maps to `github:openclaw/openclaw#main`; GitHub/git source specs are packed into a temporary tarball before the staged global npm install.
 - `--dry-run`: preview planned update actions (channel/tag/target/restart flow) without writing config, installing, syncing plugins, or restarting.
 - `--json`: print machine-readable `UpdateRunResult` JSON, including
   `postUpdate.plugins.warnings` when corrupt or unloadable managed plugins need
@@ -96,7 +97,8 @@ Options:
 When you switch channels explicitly (`--channel ...`), OpenClaw also keeps the
 install method aligned:
 
-- `dev` → ensures a git checkout (default: `~/openclaw`, override with `OPENCLAW_GIT_DIR`),
+- `dev` → ensures a git checkout (default: `~/openclaw`, or `$OPENCLAW_HOME/openclaw` when
+  `OPENCLAW_HOME` is set; override with `OPENCLAW_GIT_DIR`),
   updates it, and installs the global CLI from that checkout.
 - `stable` → installs from npm using `latest`.
 - `beta` → prefers npm dist-tag `beta`, but falls back to `latest` when beta is

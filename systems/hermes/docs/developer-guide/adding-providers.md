@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "ae8c3c19bd3edf909b0896e5691e8a4a16a4e849d5bb7180b18e1794220971fe"
+source_hash: "726d40e234498bb0f999ceb2690e300ea31230697de949e222332a6354cc59fb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -134,7 +134,7 @@ When you add a plugin and it calls `register_provider()`, the following wire up 
 
 User plugins at `$HERMES_HOME/plugins/model-providers/<name>/` override bundled plugins of the same name (last-writer-wins in `register_provider()`) — so third parties can monkey-patch or replace any built-in profile without editing the repo.
 
-See `plugins/model-providers/nvidia/` or `plugins/model-providers/gmi/` as a template, and the full [Model Provider Plugin guide](/docs/developer-guide/model-provider-plugin) for field reference, hook idioms, and end-to-end examples.
+See `plugins/model-providers/nvidia/` or `plugins/model-providers/gmi/` as a template, and the full [Model Provider Plugin guide](/developer-guide/model-provider-plugin) for field reference, hook idioms, and end-to-end examples.
 
 ## Full path: OAuth and complex providers
 

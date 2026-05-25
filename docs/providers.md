@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "09ac79c76dda53fb8d08167496814fbe7f6db8d23a50e8bae90477f20f2e547f"
+source_hash: "468298a5e6482e49cc16f1c1e7adc1b0d571d66046b03251dee4dcc3b94875a1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -48,7 +48,6 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [fal](/providers/fal)
 - [Fireworks](/providers/fireworks)
 - [GitHub Copilot](/providers/github-copilot)
-- [GLM models](/providers/glm)
 - [Google (Gemini)](/providers/google)
 - [Gradium](/providers/gradium)
 - [Groq (LPU inference)](/providers/groq)
@@ -83,7 +82,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [Vydra](/providers/vydra)
 - [xAI](/providers/xai)
 - [Xiaomi](/providers/xiaomi)
-- [Z.AI](/providers/zai)
+- [Z.AI (GLM)](/providers/zai)
 
 ## Shared overview pages
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "d80d63c9a4ac9cb0a466a49e4c716f99243bebdfd2af4d0fa44ad0046bd0a2c0"
+source_hash: "1b479b3f9082704a8d6adbc0e1d48512c60337595c7858e70011153a16cb1d48"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -222,6 +222,7 @@ SSRF policy
 - Browser navigation and open-tab are SSRF-guarded before navigation and best-effort re-checked on the final `http(s)` URL afterwards.
 - In strict SSRF mode, remote CDP endpoint discovery and `/json/version` probes (`cdpUrl`) are checked too.
 - Gateway/provider `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables do not automatically proxy the OpenClaw-managed browser. Managed Chrome launches direct by default so provider proxy settings do not weaken browser SSRF checks.
+- OpenClaw-managed local CDP readiness probes and DevTools WebSocket connections bypass the managed network proxy for the exact launched loopback endpoint, so `openclaw browser start` still works when an operator proxy blocks loopback egress.
 - To proxy the managed browser itself, pass explicit Chrome proxy flags through `browser.extraArgs`, such as `--proxy-server=...` or `--proxy-pac-url=...`. Strict SSRF mode blocks explicit browser proxy routing unless private-network browser access is intentionally enabled.
 - `browser.ssrfPolicy.dangerouslyAllowPrivateNetwork` is off by default; enable only when private-network browser access is intentionally trusted.
 - `browser.ssrfPolicy.allowPrivateNetwork` remains supported as a legacy alias.
@@ -449,6 +450,10 @@ CDP URL shapes and picks the right connection strategy automatically:
   upgrades on the specific per-target path from `/json/version`, while hosted
   providers can still use their root WebSocket endpoint when their discovery
   endpoint advertises a short-lived URL that is not suitable for Playwright CDP.
+
+`openclaw browser doctor` uses the same discovery-first, WebSocket-fallback
+logic as runtime attach, so a bare-root URL that connects successfully is not
+reported as unreachable by diagnostics.
 
 ### Browserbase
 

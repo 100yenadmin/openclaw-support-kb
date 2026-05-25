@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Rich output protocol"
 source: "https://docs.openclaw.ai/reference/rich-output-protocol"
-source_hash: "988ca5ea0b1a81be824fc51cb7b18a897c1aa883b96711b3a594c79be1e6c11e"
+source_hash: "7a8711723230a09da223ccbe753d9c38bc8ef3e061d3da192377db28f55f8e38"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/rich-output-protocol.md"
@@ -27,6 +27,28 @@ directives; server-side media fetchers still enforce their own network guards.
 Local `MEDIA:` attachments can use absolute paths, workspace-relative paths, or
 home-relative `~/` paths. They still pass through the agent file-read policy and
 media type checks before delivery.
+
+Warning
+
+`MEDIA:` is parsed only as plain text. Wrapping the directive in Markdown
+formatting (bold, inline code, fenced code) prevents the parser from
+recognizing it, and the attachment is silently dropped from delivery.
+
+Valid:
+
+```text
+MEDIA:/workspace/image.png
+```
+
+Invalid (parsed as prose, no attachment delivered):
+
+```text
+**MEDIA:/workspace/image.png**
+`MEDIA:/workspace/image.png`
+Here is your image: MEDIA:/workspace/image.png
+```
+
+Keep `MEDIA:` on its own line, in plain text, with no surrounding formatting.
 
 Plain Markdown image syntax stays text by default. Channels that intentionally
 map Markdown image replies to media attachments opt in at their outbound

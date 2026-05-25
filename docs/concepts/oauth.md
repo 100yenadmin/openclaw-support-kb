@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "a938e4694bdcf5e29ad1734abb9bfb81c4f717df2cebf4bedfba17a806a1cf4e"
+source_hash: "b3040d38513a5f1517f516727c81dd2479666680c647cdbdef239795b28fb8ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -101,7 +101,7 @@ plan](https://support.anthropic.com/en/articles/11845131-using-claude-code-with-
 If you want other subscription-style options in OpenClaw, see [OpenAI
 Codex](/providers/openai), [Qwen Cloud Coding
 Plan](/providers/qwen), [MiniMax Coding Plan](/providers/minimax),
-and [Z.AI / GLM Coding Plan](/providers/glm).
+and [Z.AI / GLM Coding Plan](/providers/zai).
 
 OpenClaw also exposes Anthropic setup-token as a supported token-auth path, but it now prefers Claude CLI reuse and `claude -p` when available.
 
