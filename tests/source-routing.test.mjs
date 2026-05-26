@@ -86,9 +86,12 @@ test("router and recovery skills require target-first source use", async () => {
   assert.match(companyOs, /not through a separate AgentMD mirror/);
   assert.match(companyOs, /Notion `EVAOS Company OS` is the agent operating manual/);
   assert.match(companyOs, /EVAOS Agent Handoff\s+Queue/);
+  assert.match(companyOs, /EVAOS Agent Operating Protocol/);
   assert.match(companyOs, /Open or search Notion for `EVAOS Company OS`/);
   assert.match(companyOs, /Resolve the relevant Linear initiative\/project/);
   assert.match(companyOs, /Resolve the affected system in `EVAOS Systems`/);
+  assert.match(companyOs, /Paperclip Support VM External Operator Evidence/);
+  assert.match(companyOs, /evaBrain System Row/);
   assert.match(companyOs, /Read current evidence before recommending release, rollout, or roadmap state/);
   assert.match(companyOs, /Linear owns the product roadmap/);
   assert.match(companyOs, /GitHub owns implementation work/);
@@ -119,10 +122,13 @@ test("EVAOS Company OS scenario exercises the real routing sequence", async () =
   for (const phrase of [
     "open or search Notion",
     "EVAOS Agent Handoff Queue",
+    "EVAOS Agent Operating Protocol",
     "Resolve the relevant Linear initiative/project",
     "Resolve the affected system",
     "EVAOS Systems",
     "canonical GitHub repo",
+    "Paperclip Support VM External Operator Evidence",
+    "evaBrain System Row",
     "Read current evidence before recommending",
     "Linear owns the product roadmap",
     "GitHub owns implementation work",
