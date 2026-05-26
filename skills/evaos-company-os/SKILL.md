@@ -31,6 +31,29 @@ a second roadmap or a replacement for Linear/GitHub.
   support-KB surfaces as a retrieval cache. Treat search results as cache, not
   source of truth.
 
+## Retrieval Anchors
+
+Use these exact titles when GBrain/evaBrain retrieval must prove that the
+Company OS route is represented in the cache:
+
+- `EVAOS Company OS`
+- `EVAOS Agent Handoff Queue`
+- `EVAOS Agent Operating Protocol`
+- `EVAOS Systems`
+- `Evidence Ledger`
+- `Decisions`
+- `Open Questions`
+- `Paperclip Support VM External Operator Evidence`
+- `evaBrain System Row`
+
+These are retrieval anchors, not replacement source-of-truth surfaces. If a
+cache search only returns this skill, that proves orientation coverage for the
+route, not that Notion, Linear, GitHub, Paperclip, or the runtime is current.
+Use the exact Paperclip evidence anchor `Paperclip Support VM External Operator
+Evidence` before making rollout claims about external operator state, and use
+the exact systems anchor `evaBrain System Row` before claiming ownership or
+release state for the company-brain runtime.
+
 ## Resolution Chain
 
 1. Open or search Notion for `EVAOS Company OS`.
