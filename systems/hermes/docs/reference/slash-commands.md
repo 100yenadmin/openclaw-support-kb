@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slash Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/slash-commands"
-source_hash: "7f9d3e82060d25329dbf3af00efc7aed682e3c09c3e4f314b942f4799f84647d"
+source_hash: "5d2fa8d7b957d1eb01f37bde8a1a80beb6686be8b9f105c2ded6347e188fb538"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/slash-commands.md"
@@ -65,7 +65,7 @@ Type `/` in the CLI to open the autocomplete menu. Built-in commands are case-in
 | `/goal <text>` | Set a standing goal Hermes works toward across turns — our take on the Ralph loop. After each turn an auxiliary judge model decides whether the goal is done; if not, Hermes auto-continues. Subcommands: `/goal status`, `/goal pause`, `/goal resume`, `/goal clear`. Budget defaults to 20 turns (`goals.max_turns`); any real user message preempts the continuation loop, and state survives `/resume`. See [Persistent Goals](/user-guide/features/goals) for the full walkthrough. |
 | `/subgoal <text>` | Append a user-supplied criterion to the active goal mid-loop. The continuation prompt surfaces all subgoals to the agent verbatim, and the judge factors them into its DONE/CONTINUE verdict — so the goal isn't marked done until the original goal **and** every subgoal are met. Subcommands: `/subgoal` (list), `/subgoal remove <N>`, `/subgoal clear`. Requires an active `/goal`. |
 | `/resume [name]` | Resume a previously-named session |
-| `/sessions` | Browse and resume previous sessions in an interactive picker |
+| `/sessions` (TUI alias: `/switch`) | Classic CLI: browse and resume previous sessions in an interactive picker. TUI: open the live session switcher for currently open TUI sessions. Use `/sessions new` in the TUI to start another live session immediately. |
 | `/redraw` | Force a full UI repaint (recovers from terminal drift after tmux resize, mouse selection artifacts, etc.) |
 | `/status` | Show session info — model, provider, profile, session ID, working directory, title, created/updated timestamps, token totals, agent-running state — followed by a local **Session recap** block (recent user/assistant turn counts, tool result count, top tools used, last few files touched, the latest user prompt, and the latest assistant reply). The recap is computed locally from the in-memory conversation; no LLM call, no prompt-cache impact. |
 | `/agents` (alias: `/tasks`) | Show active agents and running tasks across the current session. |
@@ -251,6 +251,7 @@ The messaging gateway supports the following built-in commands inside Telegram, 
 - `/sethome`, `/update`, `/restart`, `/approve`, `/deny`, `/topic`, and `/commands` are **messaging-only** commands.
 - `/status`, `/background`, `/queue`, `/steer`, `/voice`, `/reload-mcp`, `/reload-skills`, `/rollback`, `/debug`, `/fast`, `/footer`, `/curator`, `/kanban`, `/sessions`, and `/yolo` work in **both** the CLI and the messaging gateway.
 - `/voice join`, `/voice channel`, and `/voice leave` are only meaningful on Discord.
+- In the TUI, `/sessions` shows live sessions in the current TUI process. Use `/resume [name]` or `hermes --tui --resume <id-or-title>` for saved or closed transcripts.
 
 ## Confirmation prompts for destructive commands
 

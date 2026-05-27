@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Security"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/security"
-source_hash: "1a9b457cc2f6dee8c029e7148cdbba8e5a08bfdb2140de03ff3c7732655a8aea"
+source_hash: "2cf5de4740e16b833a4b6826f0d8a27ae55b0119b5c112ec0c41c8b49771df6b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/security.md"
@@ -157,7 +157,7 @@ The following patterns trigger approval prompts (defined in `tools/approval.py`)
 | `gateway run` with `&`/`disown`/`nohup`/`setsid` | Prevents starting gateway outside service manager |
 
 :::info
-**Container bypass**: When running in `docker`, `singularity`, `modal`, `daytona`, or `vercel_sandbox` backends, dangerous command checks are **skipped** because the container itself is the security boundary. Destructive commands inside a container can't harm the host.
+**Container bypass**: When running in `docker`, `singularity`, `modal`, or `daytona` backends, dangerous command checks are **skipped** because the container itself is the security boundary. Destructive commands inside a container can't harm the host.
 :::
 
 ### Approval Flow (CLI)
@@ -353,7 +353,7 @@ terminal:
 - **Ephemeral mode** (`container_persistent: false`): Uses tmpfs for workspace — everything is lost on cleanup
 
 :::tip
-For production gateway deployments, use `docker`, `modal`, `daytona`, or `vercel_sandbox` backend to isolate agent commands from your host system. This eliminates the need for dangerous command approval entirely.
+For production gateway deployments, use `docker`, `modal`, or `daytona` backend to isolate agent commands from your host system. This eliminates the need for dangerous command approval entirely.
 :::
 
 :::warning
@@ -370,7 +370,6 @@ If you add names to `terminal.docker_forward_env`, those variables are intention
 | **singularity** | Container | ❌ Skipped | HPC environments |
 | **modal** | Cloud sandbox | ❌ Skipped | Scalable cloud isolation |
 | **daytona** | Cloud sandbox | ❌ Skipped | Persistent cloud workspaces |
-| **vercel_sandbox** | Cloud microVM | ❌ Skipped | Cloud execution with snapshot persistence |
 
 ## Environment Variable Passthrough {#environment-variable-passthrough}
 

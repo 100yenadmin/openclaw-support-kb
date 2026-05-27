@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Architecture"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/architecture"
-source_hash: "b9d4053395edf99792c324857dc95c4d39c4b2121f38b52030fb789e9a911301"
+source_hash: "f9a39495e50c1c654eb2f4ec101a407e8f6c121fcb729db60a4e497ec92eb129"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/architecture.md"
@@ -224,7 +224,7 @@ A shared runtime resolver used by CLI, gateway, cron, ACP, and auxiliary calls. 
 
 ### Tool System
 
-Central tool registry (`tools/registry.py`) with 70+ registered tools across ~28 toolsets. Each tool file self-registers at import time. The registry handles schema collection, dispatch, availability checking, and error wrapping. Terminal tools support 7 backends (local, Docker, SSH, Daytona, Modal, Singularity, Vercel Sandbox).
+Central tool registry (`tools/registry.py`) with 70+ registered tools across ~28 toolsets. Each tool file self-registers at import time. The registry handles schema collection, dispatch, availability checking, and error wrapping. Terminal tools support 6 backends (local, Docker, SSH, Daytona, Modal, Singularity).
 
 → [Tools Runtime](./tools-runtime.md)
 

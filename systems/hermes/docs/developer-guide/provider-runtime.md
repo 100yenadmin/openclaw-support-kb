@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Provider Runtime Resolution"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/provider-runtime"
-source_hash: "572cf6a20c2d459f885cd80e74754e2d31e9fad6873ac10e4750e0f608b757a2"
+source_hash: "064f944acb78c36578867ef1e99d3968a3e0e17760a931dce9184d00ec69e45d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/provider-runtime.md"
@@ -55,7 +55,6 @@ That ordering matters because Hermes treats the saved model/provider choice as t
 
 Current provider families include (see `plugins/model-providers/` for the complete bundled set):
 
-- AI Gateway (Vercel)
 - OpenRouter
 - Nous Portal
 - OpenAI Codex
@@ -106,18 +105,13 @@ This resolver is the main reason Hermes can share auth/runtime logic between:
 - ACP editor sessions
 - auxiliary model tasks
 
-## AI Gateway
+## OpenRouter and custom OpenAI-compatible base URLs
 
-Set `AI_GATEWAY_API_KEY` in `~/.hermes/.env` and run with `--provider ai-gateway`. Hermes fetches available models from the gateway's `/models` endpoint, filtering to language models with tool-use support.
-
-## OpenRouter, AI Gateway, and custom OpenAI-compatible base URLs
-
-Hermes contains logic to avoid leaking the wrong API key to a custom endpoint when multiple provider keys exist (e.g. `OPENROUTER_API_KEY`, `AI_GATEWAY_API_KEY`, and `OPENAI_API_KEY`).
+Hermes contains logic to avoid leaking the wrong API key to a custom endpoint when multiple provider keys exist (e.g. `OPENROUTER_API_KEY` and `OPENAI_API_KEY`).
 
 Each provider's API key is scoped to its own base URL:
 
 - `OPENROUTER_API_KEY` is only sent to `openrouter.ai` endpoints
-- `AI_GATEWAY_API_KEY` is only sent to `ai-gateway.vercel.sh` endpoints
 - `OPENAI_API_KEY` is used for custom endpoints and as a fallback
 
 Hermes also distinguishes between:
@@ -128,7 +122,7 @@ Hermes also distinguishes between:
 That distinction is especially important for:
 
 - local model servers
-- non-OpenRouter/non-AI Gateway OpenAI-compatible APIs
+- non-OpenRouter OpenAI-compatible APIs
 - switching providers without re-running setup
 - config-saved custom endpoints that should keep working even when `OPENAI_BASE_URL` is not exported in the current shell
 

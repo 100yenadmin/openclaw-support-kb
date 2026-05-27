@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tools Runtime"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/tools-runtime"
-source_hash: "72a5a59971b2e86722840177d750dd43c2de6b81ef28b833ae60b98257544262"
+source_hash: "2d66f08ff2a1a04ae6ccaa4a3b00c6a8e59ff0625aeb626ac7cd185a6ebc6e0a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/tools-runtime.md"
@@ -226,7 +226,6 @@ The terminal system supports multiple backends:
 - singularity
 - modal
 - daytona
-- vercel_sandbox
 
 It also supports:
 

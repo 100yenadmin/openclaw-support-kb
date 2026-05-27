@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skills System"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
-source_hash: "108c90cde9789bd8bbe37bbab7f6be5158c82056671d73ec089aeebfc7ae9a13"
+source_hash: "79a76159a6389a2c54716856933c1eecddb5d959ffd151231ebdf422d200b94a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skills.md"
@@ -480,7 +480,6 @@ Default taps (browsable without any setup):
 - [openai/skills](https://github.com/openai/skills)
 - [anthropics/skills](https://github.com/anthropics/skills)
 - [huggingface/skills](https://github.com/huggingface/skills)
-- [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills)
 - [garrytan/gstack](https://github.com/garrytan/gstack)
 
 - Example:

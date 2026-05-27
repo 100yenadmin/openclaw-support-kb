@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode"
-source_hash: "0cc15a664b9cbf53b30363eaaaf8f896473b91d64f33654585efc8333e06162a"
+source_hash: "48b56be446d3f570fb5dc8c3f63a16578ecdbb6153fa4bba47ecd6036b07473d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/voice-mode.md"
@@ -497,6 +497,8 @@ PortAudio is not installed:
 brew install portaudio    # macOS
 sudo apt install portaudio19-dev  # Ubuntu
 ```
+
+If you are running Hermes inside Docker on a Linux desktop, the container also needs access to your host audio socket. See the [Docker audio bridge](/user-guide/docker#optional-linux-desktop-audio-bridge) notes for a PulseAudio/PipeWire-compatible setup.
 
 ### Bot doesn't respond in Discord server channels
 

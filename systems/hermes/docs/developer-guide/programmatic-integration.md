@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "fd1459ddb1adb9039bdbbc79ed7b349ebd6732d841994486375684f061f9393e"
+source_hash: "676a93e7978fddc0586069cf631b0403b525c6e2bb4844d469669ecd5866736e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -54,7 +54,8 @@ hermes acp --bootstrap      # print install snippet for an ACP-capable IDE
 
 ```
 prompt.submit           prompt.background       session.steer
-session.create          session.list            session.interrupt
+session.create          session.list            session.active_list
+session.activate        session.close           session.interrupt
 session.history         session.compress        session.branch
 session.title           session.usage           session.status
 clarify.respond         sudo.respond            secret.respond
@@ -64,6 +65,8 @@ reload.mcp              reload.env              process.stop
 delegation.status       subagent.interrupt      spawn_tree.save / list / load
 terminal.resize         clipboard.paste         image.attach
 ```
+
+`session.active_list`, `session.activate`, and `session.close` are the process-local live-session controls used by the TUI session switcher. Use `session.list` / `/resume` for saved transcript discovery; use the active-session methods only for sessions that are currently open in the TUI gateway process.
 
 ### Events streamed back
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "FAQ & Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/reference/faq"
-source_hash: "fe0b646580dae7c6dae7c70144d82ab7d8c9d05763f6c9f542eceb3b616ac873"
+source_hash: "86c1d2be704ac0563e99f9773c53c2609b78f17ee37926ff2bab19b89a115e95"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/faq.md"
@@ -32,7 +32,7 @@ Hermes Agent works with any OpenAI-compatible API. Supported providers include:
 - **[OpenRouter](https://openrouter.ai/)** — access hundreds of models through one API key (recommended for flexibility)
 - **Nous Portal** — Nous Research's own inference endpoint
 - **OpenAI** — GPT-5.4, GPT-5-codex, GPT-4.1, GPT-4o, etc.
-- **Anthropic** — Claude models (direct API, OAuth via `hermes login anthropic`, OpenRouter, or any compatible proxy)
+- **Anthropic** — Claude models (direct API, OAuth via `hermes auth add anthropic`, OpenRouter, or any compatible proxy)
 - **Google** — Gemini models (direct API via `gemini` provider, the `google-gemini-cli` OAuth provider, OpenRouter, or compatible proxy)
 - **z.ai / ZhipuAI** — GLM models
 - **Kimi / Moonshot AI** — Kimi models
