@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACPx plugin"
 source: "https://docs.openclaw.ai/plugins/reference/acpx"
-source_hash: "339d3e087f480b77d01c2735b2f6b2e38dab14f5341e71886326a49c62e16af5"
+source_hash: "5196024d5e9242940ef2686a0e6624b18447c4b8820690e3064ff2716b3362ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/acpx.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/acpx
 
 # ACPx plugin
 
-Embedded ACP runtime backend with plugin-owned session and transport management.
+OpenClaw ACP runtime backend with plugin-owned session and transport management.
 
 ## Distribution
 

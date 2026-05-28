@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "35dea9fb2ce3aa97f63e9cbfad74a7f1a6ea8ed51b5a27362063a84dedae3137"
+source_hash: "0abc4f0fd9dc808670fb03fc5c98004225caf7eb4ecff3eeeae81ff3b46904f2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -568,6 +568,7 @@ Ack reactions are gated by `reactionLevel` — they are suppressed when `reactio
 Behavior notes:
 
 - sent immediately after inbound is accepted (pre-reply)
+- if `ackReaction` is present without `emoji`, WhatsApp uses the routed agent's identity emoji, falling back to "👀"; omit `ackReaction` or set `emoji: ""` to send no ack reaction
 - failures are logged but do not block normal reply delivery
 - group mode `mentions` reacts on mention-triggered turns; group activation `always` acts as bypass for this check
 - WhatsApp uses `channels.whatsapp.ackReaction` (legacy `messages.ackReaction` is not used here)
@@ -594,6 +595,7 @@ Set `messages.statusReactions.enabled: true` to let WhatsApp replace the ack rea
 Behavior notes:
 
 - `channels.whatsapp.ackReaction` still controls whether status reactions are eligible for direct messages and groups.
+- The queued status reaction uses the same effective ack emoji as plain ack reactions.
 - WhatsApp has one bot reaction slot per message, so lifecycle updates replace the current reaction in place.
 - `messages.removeAckAfterReply: true` clears the final status reaction after the configured done/error hold.
 - Tool emoji categories include `tool`, `coding`, `web`, `deploy`, `build`, and `concierge`.

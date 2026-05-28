@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "eedc098640d7bcbd86dc5d47a47dad4a6ea853a1b65cc31dfada9fa73ca4d483"
+source_hash: "b92d434b25201ee280936d2cf4e4c55ddf1afcfa1a317e77becc58b5369b3353"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/plugins.md"
@@ -118,7 +118,7 @@ rewriting files.
 
 ```bash
 openclaw plugins search "calendar"                   # search ClawHub plugins
-openclaw plugins install <package>                      # npm by default
+openclaw plugins install <package>                      # source auto-detection
 openclaw plugins install clawhub:<package>              # ClawHub only
 openclaw plugins install npm:<package>                  # npm only
 openclaw plugins install npm-pack:<path.tgz>            # local npm pack through npm install semantics
@@ -139,7 +139,7 @@ sources with guarded environment variables. See
 
 Warning
 
-Bare package names install from npm by default during the launch cutover. Use `clawhub:<package>` for ClawHub. Treat plugin installs like running code. Prefer pinned versions.
+Bare package names install from npm by default during the launch cutover, unless they match an official plugin id. Raw `@openclaw/*` package specs that match bundled plugins use the bundled copy that shipped with the current OpenClaw build. Use `npm:<package>` when you deliberately want an external npm package instead. Use `clawhub:<package>` for ClawHub. Treat plugin installs like running code. Prefer pinned versions.
 
 `plugins search` queries ClawHub for installable plugin packages and prints
 install-ready package names. It searches code-plugin and bundle-plugin packages,
@@ -197,7 +197,9 @@ Hook packs and npm specs
 
     Npm specs are **registry-only** (package name + optional **exact version** or **dist-tag**). Git/URL/file specs and semver ranges are rejected. Dependency installs run project-local with `--ignore-scripts` for safety, even when your shell has global npm install settings. Managed plugin npm roots inherit OpenClaw's package-level npm `overrides`, so host security pins apply to hoisted plugin dependencies too.
 
-    Use `npm:<package>` when you want to make npm resolution explicit. Bare package specs also install directly from npm during the launch cutover.
+    Use `npm:<package>` when you want to make npm resolution explicit. Bare package specs also install directly from npm during the launch cutover unless they match an official plugin id.
+
+    Raw `@openclaw/*` package specs that match bundled plugins resolve to the image-owned bundled copy before npm fallback. For example, `openclaw plugins install @openclaw/discord@2026.5.20 --pin` uses the bundled Discord plugin from the current OpenClaw build instead of creating a managed npm override. To force the external npm package, use `openclaw plugins install npm:@openclaw/discord@2026.5.20 --pin`.
 
     Bare specs and `@latest` stay on the stable track. OpenClaw date-stamped correction versions such as `2026.5.3-1` are stable releases for this check. If npm resolves either of those to a prerelease, OpenClaw stops and asks you to opt in explicitly with a prerelease tag such as `@beta`/`@rc` or an exact prerelease version such as `@1.2.3-beta.4`.
 
@@ -236,7 +238,7 @@ openclaw plugins install clawhub:openclaw-codex-app-server
 openclaw plugins install clawhub:openclaw-codex-app-server@1.2.3
 ```
 
-Bare npm-safe plugin specs install from npm by default during the launch cutover:
+Bare npm-safe plugin specs install from npm by default during the launch cutover unless they match an official plugin id:
 
 ```bash
 openclaw plugins install openclaw-codex-app-server
@@ -246,6 +248,7 @@ Use `npm:` to make npm-only resolution explicit:
 
 ```bash
 openclaw plugins install npm:openclaw-codex-app-server
+openclaw plugins install npm:@openclaw/discord@2026.5.20
 openclaw plugins install npm:@scope/plugin-name@1.0.1
 ```
 

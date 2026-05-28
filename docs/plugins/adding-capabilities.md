@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Adding capabilities (contributor guide)"
 source: "https://docs.openclaw.ai/plugins/adding-capabilities"
-source_hash: "819f81fda3c2a08719a6d3a67d216065b6d46c824380b832bb0237235344ca14"
+source_hash: "a45cfd3688d8f608397d03e646121d5168459b3c2455f1014d1fd06473ae3165"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/adding-capabilities.md"
@@ -126,11 +126,10 @@ is intentionally broader than memory: tools, search, retrieval, importers, or
 future feature plugins can consume embeddings without depending on the memory
 engine.
 
-For memory-engine-specific adapters, keep using `memoryEmbeddingProviders`.
-Those adapters own memory indexing details such as query/document split,
-runtime metadata, and local memory engine setup. Do not make a generic
-embedding provider depend on memory-owned modules unless the provider is only
-usable by memory.
+Memory search can consume generic `embeddingProviders`. The older
+`memoryEmbeddingProviders` contract is deprecated compatibility while existing
+memory-specific providers migrate; new reusable embedding providers should use
+`embeddingProviders`.
 
 ## Review checklist
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/reference/google-meet"
-source_hash: "f5c70228970ca35c837d28665864482058a690cfa73f0d129d29c1491a882010"
+source_hash: "fd5fe2b3f4baab28f8b85d4a44acf56df52d325a54c2c3d83c65a47acd6311b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/google-meet.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/google-meet
 
 # Google Meet plugin
 
-Join Google Meet calls through Chrome or Twilio transports.
+OpenClaw Google Meet participant plugin for joining calls through Chrome or Twilio transports.
 
 ## Distribution
 

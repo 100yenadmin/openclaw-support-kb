@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tutorial: Daily Briefing Bot"
 source: "https://hermes-agent.nousresearch.com/docs/guides/daily-briefing-bot"
-source_hash: "93c5b04d579e231ac230ea5f582047b6c7bcd18fbf39598c261f1ab44e2d6888"
+source_hash: "fa3fb65c67a820cd8cbda4e96b2238752afe44b8c03c5928e6a3fab3f1a1c2cb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/daily-briefing-bot.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/daily-briefing-bot
 In this tutorial, you'll build a personal briefing bot that wakes up every morning, researches topics you care about, summarizes the findings, and delivers a concise briefing straight to your Telegram or Discord.
 
 By the end, you'll have a fully automated workflow combining **web search**, **cron scheduling**, **delegation**, and **messaging delivery** — no code required.
+
+:::tip
+This recipe hits web search, summarization, and optional TTS — all bundled in a Portal subscription. The fastest setup is `hermes setup --portal`. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## What We're Building
 

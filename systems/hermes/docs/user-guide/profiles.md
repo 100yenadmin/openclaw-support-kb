@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/profiles"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "a873b84a1bce1fb625348f69c16052740e510afe0d7cb2df7440cc3f7aa26068"
+source_hash: "ae23ec9aa8b57c7b375a2e1d65c39d2fb31933d2e5de1c15c835017150143dd8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -38,6 +38,10 @@ coder chat                        # start chatting
 That's it. `coder` is now its own Hermes profile with its own config, memory, and state.
 
 ## Creating a profile
+
+:::tip
+Quickest setup: run `hermes setup --portal` inside the new profile to wire up models + tools at once. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ### Blank profile
 

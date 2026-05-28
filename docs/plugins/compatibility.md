@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "d3fd1d48b6277cd5530844df0c866fa560597aa9e446d37b75310b60684e4159"
+source_hash: "688a7f5bedcd6e0b3da77a216096f8a3509e212df6ec8058f6f0f9389b1fd8b8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
@@ -136,6 +136,9 @@ Current compatibility records include:
   `api.runtime.config.loadConfig()` / `api.runtime.config.writeConfigFile(...)`
 - legacy memory-plugin split registration while memory plugins move to
   `registerMemoryCapability`
+- legacy memory-specific embedding provider registration while embedding
+  providers move to `api.registerEmbeddingProvider(...)` and
+  `contracts.embeddingProviders`
 - legacy channel SDK helpers for native message schemas, mention gating,
   inbound envelope formatting, and approval capability nesting
 - legacy channel route key and comparable-target helper aliases while plugins

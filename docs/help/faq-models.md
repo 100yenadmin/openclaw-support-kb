@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "6db533d00c673db6f84300ae961c41ffaeed4c4606438d65a282bfe6790ca6f1"
+source_hash: "08264b07893b929b0e542db92897f5de5f0aac7a0f1655f4c0f7ff3a7643412a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -321,7 +321,7 @@ Are opus / sonnet / gpt built-in shortcuts?
     - `gpt-nano` → `openai/gpt-5.4-nano`
     - `gemini` → `google/gemini-3.1-pro-preview`
     - `gemini-flash` → `google/gemini-3-flash-preview`
-    - `gemini-flash-lite` → `google/gemini-3.1-flash-lite-preview`
+    - `gemini-flash-lite` → `google/gemini-3.1-flash-lite`
 
     If you set your own alias with the same name, your value wins.
 

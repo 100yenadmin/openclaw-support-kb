@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/vision"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/vision"
-source_hash: "deaf0c5b6adb71cf0ba3f633033f9426bb2080aedd2409cad113c19da62a14f8"
+source_hash: "e0ee66a4b4391d7715543adb80e0aea1d2036717d4da4d1d68a996b32761fd87"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/vision.md"
@@ -20,6 +20,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/vision
 # Vision & Image Paste
 
 Hermes Agent supports **multimodal vision** — you can paste images from your clipboard directly into the CLI and ask the agent to analyze, describe, or work with them. Images are sent to the model as base64-encoded content blocks, so any vision-capable model can process them.
+
+:::tip
+Portal subscribers get vision-capable models (Claude, GPT-5, Gemini) in the same catalog — no extra credentials needed. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## How It Works
 

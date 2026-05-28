@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Openshell plugin"
 source: "https://docs.openclaw.ai/plugins/reference/openshell"
-source_hash: "69a8c2dab5d1437efa126445337993f3b03d9bafdbef07074443e06c28851628"
+source_hash: "458500604ae57cf8f33b26d15ccaf061450ee51d3e1b38d117c1bb053b421a88"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/openshell.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/openshell
 
 # Openshell plugin
 
-Sandbox backend powered by the NVIDIA OpenShell CLI with mirrored local workspaces and SSH-based command execution.
+OpenClaw sandbox backend for the NVIDIA OpenShell CLI with mirrored local workspaces and SSH command execution.
 
 ## Distribution
 

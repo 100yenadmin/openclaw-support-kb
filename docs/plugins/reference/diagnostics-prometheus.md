@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics Prometheus plugin"
 source: "https://docs.openclaw.ai/plugins/reference/diagnostics-prometheus"
-source_hash: "f0e85e7e6c6a6b4025f561534cedff19c033f4d5b16cb3cefd4fa99beda11e80"
+source_hash: "96919b5385d8850f3685ef879aa89c5c631bd327f5b91fd1a498b181f7132119"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/diagnostics-prometheus.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/diagnostics-prometheus
 
 # Diagnostics Prometheus plugin
 
-OpenClaw diagnostics Prometheus exporter.
+OpenClaw diagnostics Prometheus exporter for runtime metrics.
 
 ## Distribution
 

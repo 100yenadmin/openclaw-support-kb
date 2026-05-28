@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/adding-platform-adapters"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "6f1b5b7751ffcc966b4d23b87aebf1550b5be6ebf9fee12951725ed7da5dbf2a"
+source_hash: "06ca736357c62c5f4a3d2eb6ab32253e351cef9eb15e7d73ec4628ac0cd9ab53"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -24,7 +24,7 @@ This guide covers adding a new messaging platform to the Hermes gateway. A platf
 :::tip
 There are two ways to add a platform:
 - **Plugin** (recommended for community/third-party): Drop a plugin directory into `~/.hermes/plugins/` — zero core code changes needed. See [Plugin Path](#plugin-path-recommended) below.
-- **Built-in**: Modify 20+ files across code, config, and docs. Use the [Built-in Checklist](#step-by-step-checklist) below.
+- **Built-in**: Modify 20+ files across code, config, and docs. Use the [Built-in Checklist](#step-by-step-checklist-built-in-path) below.
 :::
 
 ## Architecture Overview

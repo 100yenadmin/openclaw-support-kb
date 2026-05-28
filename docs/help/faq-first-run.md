@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "295b2d335438b95d8dd577fc41955e43038356acecfbcfe3dc6e11d54662e081"
+source_hash: "8caddbdf5e014b13962aeb0cd1f72e40fa009049e3e75f889fa2b4bc6753f0f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -184,7 +184,7 @@ Does it run on Raspberry Pi?
     If you want extra headroom (logs, media, other services), **2GB is recommended**, but it's
     not a hard minimum.
 
-    Tip: a small Pi/VPS can host the Gateway, and you can pair **nodes** on your laptop/phone for
+    Tip: a small Raspberry Pi/VPS can host the Gateway, and you can pair **nodes** on your laptop/phone for
     local screen/camera/canvas or command execution. See [Nodes](/nodes).
 
 
@@ -928,7 +928,7 @@ How important is it to run OpenClaw on a dedicated machine?
 
     Not required, but **recommended for reliability and isolation**.
 
-    - **Dedicated host (VPS/Mac mini/Pi):** always-on, fewer sleep/reboot interruptions, cleaner permissions, easier to keep running.
+    - **Dedicated host (VPS/Mac mini/Raspberry Pi):** always-on, fewer sleep/reboot interruptions, cleaner permissions, easier to keep running.
     - **Shared laptop/desktop:** totally fine for testing and active use, but expect pauses when the machine sleeps or updates.
 
     If you want the best of both worlds, keep the Gateway on a dedicated host and pair your laptop as a **node** for local screen/camera/exec tools. See [Nodes](/nodes).

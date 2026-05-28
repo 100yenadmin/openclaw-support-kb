@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "9cd314f70715496f623ecbb0b2940784c0923216fe6429269cd122382a082f0d"
+source_hash: "f69f59fe0e614fdd0141043698041fb965de94b0b60b84da9ef92454f02298db"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -134,14 +134,6 @@ Note
 
 
 
-Troubleshooting: sharp build errors (npm)
-
-  If `sharp` fails due to a globally installed libvips:
-
-```bash
-SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest
-```
-
 ### From source
 
 For contributors or anyone who wants to run from a local checkout:
@@ -214,34 +206,54 @@ CardGroup
 
 
 VPS
-Any Linux VPS
+
+    Any Linux VPS.
+
 
 Docker VM
-Shared Docker steps
+
+    Shared Docker steps.
+
 
 Kubernetes
-K8s
+
+    K8s deployment.
+
 
 Fly.io
-Fly.io
+
+    Deploy on Fly.io.
+
 
 Hetzner
-Hetzner
+
+    Hetzner deployment.
+
 
 GCP
-Google Cloud
+
+    Google Cloud deployment.
+
 
 Azure
-Azure
+
+    Azure deployment.
+
 
 Railway
-Railway
+
+    Railway deployment.
+
 
 Render
-Render
+
+    Render deployment.
+
 
 Northflank
-Northflank
+
+    Northflank deployment.
+
 
 ## Update, migrate, or uninstall
 

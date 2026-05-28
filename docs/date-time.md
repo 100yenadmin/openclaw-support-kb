@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Date and time"
 source: "https://docs.openclaw.ai/date-time"
-source_hash: "7631a1317144698be1189a7e8e385ed414f4c00d826bbd46765595f872277f81"
+source_hash: "f00e0d84f5a0e4dca069efdbeab01f5fabaa4c82833b68ad026f96d4ef7d45aa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "date-time.md"
@@ -18,10 +18,10 @@ Provider timestamps are preserved so tools keep their native semantics (current 
 
 ## Message envelopes (local by default)
 
-Inbound messages are wrapped with a timestamp (minute precision):
+Inbound messages are wrapped with a timestamp (second precision):
 
 ```
-[Provider ... 2026-01-05 16:26 PST] message text
+[Provider ... Mon 2026-01-05 16:26:34 PST] message text
 ```
 
 This envelope timestamp is **host-local by default**, regardless of the provider timezone.
@@ -52,19 +52,19 @@ You can override this behavior:
 **Local (default):**
 
 ```
-[WhatsApp +1555 2026-01-18 00:19 PST] hello
+[WhatsApp +1555 Sun 2026-01-18 00:19:42 PST] hello
 ```
 
 **User timezone:**
 
 ```
-[WhatsApp +1555 2026-01-18 00:19 CST] hello
+[WhatsApp +1555 Sun 2026-01-18 00:19:42 CST] hello
 ```
 
 **Elapsed time enabled:**
 
 ```
-[WhatsApp +1555 +30s 2026-01-18T05:19Z] follow-up
+[WhatsApp +1555 +30s Sun 2026-01-18T05:19:00Z] follow-up
 ```
 
 ## System prompt: current date and time

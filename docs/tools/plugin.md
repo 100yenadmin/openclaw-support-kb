@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "78474474f337bc72f6a3a00e3a6991dfc697e9a4567766c12f085a902acfa258"
+source_hash: "9ffc2c7cd521bbd06e520314de21a2bba9d6eafddefa1032824747bc30a1c654"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -47,7 +47,9 @@ Find the plugin
     ```
 
     ClawHub is the primary discovery surface for community plugins. During the
-    launch cutover, ordinary bare package specs still install from npm. Use an
+    launch cutover, ordinary bare package specs still install from npm unless
+    they match an official plugin id. Raw `@openclaw/*` package specs that match
+    bundled plugins use the bundled copy from the current OpenClaw build. Use an
     explicit prefix when you need one source.
 
 
@@ -140,10 +142,13 @@ Verify runtime registration
 Bare package specs have special compatibility behavior. If the bare name matches
 a bundled plugin id, OpenClaw uses that bundled source. If it matches an
 official external plugin id, OpenClaw uses the official package catalog. Other
-ordinary bare package specs install through npm during the launch cutover. Use
-`clawhub:`, `npm:`, `git:`, or `npm-pack:` when you need deterministic source
-selection. See [`openclaw plugins`](/cli/plugins#install) for the full command
-contract.
+ordinary bare package specs install through npm during the launch cutover. Raw
+`@openclaw/*` package specs that match bundled plugins also resolve to the
+bundled copy before npm fallback. Use `npm:@openclaw/<plugin>@<version>` when
+you deliberately want the external npm package instead of the image-owned
+bundled copy. Use `clawhub:`, `npm:`, `git:`, or `npm-pack:` when you need
+deterministic source selection. See [`openclaw plugins`](/cli/plugins#install)
+for the full command contract.
 
 ### Configure plugin policy
 

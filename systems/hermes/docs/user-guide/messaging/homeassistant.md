@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/homeassistant"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/homeassistant"
-source_hash: "801620324295804594c93fca98d337a119dd54ced4c447ff7900a65eebac0363"
+source_hash: "1193928610b078e2344cc2483c70cfece688437331613bc7795c2bb168c0b92d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/homeassistant.md"
@@ -262,5 +262,28 @@ Agent automatically:
      entity_id="light.hallway")
 3. Sends notification: "Front door opened. Hallway lights turned on."
 ```
+
+## Troubleshooting
+
+**Environment variables not picked up.**
+The adapter reads credentials from `~/.hermes/.env` (auto-merged at startup) or
+from `config.yaml`. Double-check the file lives under the active Hermes profile
+home and that there's no stray quoting around the URL/token. Restart the gateway
+after editing — env changes are only applied on process start.
+
+**`conversation entity not found` / agent never replies.**
+Home Assistant's conversation API requires a configured *Assist* conversation
+agent. In HA, open **Settings → Voice assistants → Add assistant** and note the
+resulting entity id (looks like `conversation.home_assistant` or
+`conversation.openai_<name>`). Set that entity id in the adapter's
+`conversation_entity` setting; the default may not exist on your instance.
+
+**REST auth failing (`401 Unauthorized`).**
+The token must be a *Long-Lived Access Token* created from your HA user profile
+page (**Profile → Security → Long-lived access tokens**). Short-lived UI
+session tokens won't work. Also verify the base URL includes the scheme and
+port (e.g. `http://homeassistant.local:8123`) and is reachable from the host
+running Hermes — `curl -H "Authorization: Bearer <token>" <url>/api/` should
+return `{"message": "API running."}`.
 
 ---

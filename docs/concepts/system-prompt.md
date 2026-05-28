@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "1ea7d7ff21438129314d72d1cb76f46caa1d02419997cce41b5b624b91049c7b"
+source_hash: "7db3bc1d9472c90c0e440aeb3bb3fd8e5928be90b6cb1ac39e2f44067eb2e51b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # System prompt
 Source: https://docs.openclaw.ai/concepts/system-prompt
 
-OpenClaw builds a custom system prompt for every agent run. The prompt is **OpenClaw-owned** and does not use the pi-coding-agent default prompt.
+OpenClaw builds a custom system prompt for every agent run. The prompt is **OpenClaw-owned** and does not use a runtime default prompt.
 
 The prompt is assembled by OpenClaw and injected into each agent run.
 
@@ -190,18 +190,23 @@ in every user turn. Codex loads `AGENTS.md` through its own project-doc
 discovery. `SOUL.md`, `IDENTITY.md`, `TOOLS.md`, and `USER.md` are forwarded as
 Codex developer instructions. `HEARTBEAT.md` content is not injected; heartbeat
 turns get a collaboration-mode note pointing to the file when it exists and is
-non-empty. `MEMORY.md` and active `BOOTSTRAP.md` content keep the normal
-turn-context role for now.
+non-empty. `MEMORY.md` content from the configured agent workspace is not pasted
+into every native Codex turn; when memory tools are available for that workspace,
+Codex turns get a small workspace-memory note and should use `memory_search` or
+`memory_get` when durable memory is relevant. If tools are disabled, memory
+search is unavailable, or the active workspace differs from the agent memory
+workspace, `MEMORY.md` falls back to the normal bounded turn-context path. Active
+`BOOTSTRAP.md` content keeps the normal turn-context role for now.
 
 On non-Codex harnesses, bootstrap files continue to be composed into the
 OpenClaw prompt according to their existing gates. `HEARTBEAT.md` is omitted on
 normal runs when heartbeats are disabled for the default agent or
 `agents.defaults.heartbeat.includeSystemPromptSection` is false. Keep injected
-files concise, especially `MEMORY.md`. `MEMORY.md` is intended to stay a curated
-long-term summary; detailed daily notes belong in `memory/*.md` where
+files concise, especially non-Codex `MEMORY.md`. `MEMORY.md` is intended to stay
+a curated long-term summary; detailed daily notes belong in `memory/*.md` where
 `memory_search` and `memory_get` can retrieve them on demand. Oversized
-`MEMORY.md` files increase prompt usage and can be partially injected because of
-the bootstrap file limits below.
+non-Codex `MEMORY.md` files increase prompt usage and can be partially injected
+because of the bootstrap file limits below.
 
 Note
 
@@ -216,11 +221,13 @@ occurs, OpenClaw can inject a concise system-prompt warning notice; control this
 default: `always`). Detailed raw/injected counts stay in diagnostics such as
 `/context`, `/status`, doctor, and logs.
 
-For memory files, truncation is not data loss: the file remains intact on disk,
-but the model only sees the shortened injected copy until it reads or searches
-memory directly. If `MEMORY.md` is repeatedly truncated, distill it into a
-shorter durable summary and move detailed history into `memory/*.md`, or
-intentionally raise the bootstrap limits.
+For memory files, truncation is not data loss: the file remains intact on disk.
+On native Codex, `MEMORY.md` is read on demand through memory tools when
+available, with bounded prompt fallback when tools cannot run. On other
+harnesses, the model only sees the shortened injected copy until it reads or
+searches memory directly. If `MEMORY.md` is repeatedly truncated there, distill
+it into a shorter durable summary and move detailed history into `memory/*.md`,
+or intentionally raise the bootstrap limits.
 
 Sub-agent sessions only inject `AGENTS.md` and `TOOLS.md` (other bootstrap files
 are filtered out to keep the sub-agent context small).

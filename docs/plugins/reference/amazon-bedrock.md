@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock plugin"
 source: "https://docs.openclaw.ai/plugins/reference/amazon-bedrock"
-source_hash: "eae00894344410b170b5dcd9231d082add16bf9586dcbd8a3aaeeeaf68a773f8"
+source_hash: "99d5cfdc4260bf0f7d75004a70502b9d6ff50b2d016da35815b8bfb6fe52fc89"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/amazon-bedrock.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/amazon-bedrock
 
 # Amazon Bedrock plugin
 
-Adds Amazon Bedrock model provider support to OpenClaw.
+OpenClaw Amazon Bedrock provider plugin with model discovery, embeddings, and guardrail support.
 
 ## Distribution
 

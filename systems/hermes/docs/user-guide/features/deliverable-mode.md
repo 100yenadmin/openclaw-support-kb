@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/deliverable-mode.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/deliverable-mode"
-source_hash: "1e639e497f7812342585911e194127fcd03f2581d77a943f5322e1828594d923"
+source_hash: "52dbfb5070b73a6be932ca2ded01c539b9f9a32d47fce95f8de7c4f4599f3992"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/deliverable-mode.md"
@@ -76,8 +76,10 @@ personality entry that biases toward artifact-style replies on
 messaging platforms.
 
 **Project-level:** add the bias to `AGENTS.md` / `CLAUDE.md` /
-`.cursorrules` in a project the agent works from, or to your global
-custom instructions in `~/.hermes/config.yaml` under `agent.custom_instructions`.
+`.cursorrules` in a project the agent works from, to your global
+persona in `~/.hermes/SOUL.md`, or as a named preset under
+`agent.personalities` in `~/.hermes/config.yaml` (switchable per session
+via `/personality`).
 
 The mechanic the agent has to use is simple: render the file to an
 absolute path (e.g. `/tmp/q3-revenue.png`) and mention that path as

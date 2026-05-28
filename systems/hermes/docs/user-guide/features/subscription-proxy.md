@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subscription Proxy"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/subscription-proxy"
-source_hash: "75ccc04fc32ea92663d6f3f99d5df081d04506f3fd2f434238fd7dc0cc705abb"
+source_hash: "14b09af3eee6ca943a6aa13769fbd34bed386812b2a65942b979dc0e604fa918"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/subscription-proxy.md"
@@ -85,9 +85,9 @@ automatically when the bearer approaches expiry.
 hermes proxy providers
 ```
 
-Currently shipped: `nous` (Nous Portal). More OAuth providers can be
-added by implementing the `UpstreamAdapter` interface in
-`hermes_cli/proxy/adapters/`.
+Currently shipped: `nous` (Nous Portal) and `xai` (xAI / Grok). More
+OAuth providers can be added by implementing the `UpstreamAdapter`
+interface in `hermes_cli/proxy/adapters/`.
 
 ## Check status
 

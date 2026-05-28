@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory overview"
 source: "https://docs.openclaw.ai/concepts/memory"
-source_hash: "7c6c84647709afb149594bc64bc601bbd681ca129c9e1c524bd42e6aca392612"
+source_hash: "d302a8a5deb5f78b3933d3e0aacd5478726dc1f57578e1817aa2d4f6bdeaf7b4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory.md"
@@ -152,9 +152,10 @@ an API key for any supported provider.
 
 Info
 
-OpenClaw auto-detects your embedding provider from available API keys. If you
-have an OpenAI, Gemini, Voyage, or Mistral key configured, memory search is
-enabled automatically.
+OpenClaw uses OpenAI embeddings by default. Set
+`agents.defaults.memorySearch.provider` explicitly to use Gemini, Voyage,
+Mistral, local, Ollama, Bedrock, GitHub Copilot, or OpenAI-compatible
+embeddings.
 
 For details on how search works, tuning options, and provider setup, see
 [Memory Search](/concepts/memory-search).

@@ -1,54 +1,54 @@
 ---
 type: openclaw_doc
-title: "Pi development workflow"
-source: "https://docs.openclaw.ai/pi-dev"
-source_hash: "fa269305bba4a8a5768031e1f6e364fbed3aaf6c42a1b635c3001928c8f19a4b"
+title: "OpenClaw agent runtime workflow"
+source: "https://docs.openclaw.ai/openclaw-agent-runtime"
+source_hash: "b3c9a41d01d030d0fee40e0371b80a59757c753f6232654e9ed65103fed40a5a"
 system: "openclaw"
 kb_namespace: "openclaw"
-doc_path: "pi-dev.md"
-original_doc_path: "pi-dev.md"
+doc_path: "openclaw-agent-runtime.md"
+original_doc_path: "openclaw-agent-runtime.md"
 duplicate_index: 1
 ---
 
-# Pi development workflow
-Source: https://docs.openclaw.ai/pi-dev
+# OpenClaw agent runtime workflow
+Source: https://docs.openclaw.ai/openclaw-agent-runtime
 
-A sane workflow for working on the Pi integration in OpenClaw.
+A sane workflow for working on the OpenClaw agent runtime in OpenClaw.
 
 ## Type checking and linting
 
 - Default local gate: `pnpm check`
 - Build gate: `pnpm build` when the change can affect build output, packaging, or lazy-loading/module boundaries
-- Full landing gate for Pi-heavy changes: `pnpm check && pnpm test`
+- Full landing gate for agent-runtime changes: `pnpm check && pnpm test`
 
-## Running Pi tests
+## Running Agent Runtime Tests
 
-Run the Pi-focused test set directly with Vitest:
+Run the agent-runtime test set directly with Vitest:
 
 ```bash
 pnpm test \
-  "src/agents/pi-*.test.ts" \
-  "src/agents/pi-embedded-*.test.ts" \
-  "src/agents/pi-tools*.test.ts" \
-  "src/agents/pi-settings.test.ts" \
-  "src/agents/pi-tool-definition-adapter*.test.ts" \
-  "src/agents/pi-hooks/**/*.test.ts"
+  "src/agents/agent-*.test.ts" \
+  "src/agents/embedded-agent-*.test.ts" \
+  "src/agents/agent-tools*.test.ts" \
+  "src/agents/agent-settings.test.ts" \
+  "src/agents/agent-tool-definition-adapter*.test.ts" \
+  "src/agents/agent-hooks/**/*.test.ts"
 ```
 
 To include the live provider exercise:
 
 ```bash
-OPENCLAW_LIVE_TEST=1 pnpm test src/agents/pi-embedded-runner-extraparams.live.test.ts
+OPENCLAW_LIVE_TEST=1 pnpm test src/agents/embedded-agent-runner-extraparams.live.test.ts
 ```
 
-This covers the main Pi unit suites:
+This covers the main agent runtime unit suites:
 
-- `src/agents/pi-*.test.ts`
-- `src/agents/pi-embedded-*.test.ts`
-- `src/agents/pi-tools*.test.ts`
-- `src/agents/pi-settings.test.ts`
-- `src/agents/pi-tool-definition-adapter.test.ts`
-- `src/agents/pi-hooks/*.test.ts`
+- `src/agents/agent-*.test.ts`
+- `src/agents/embedded-agent-*.test.ts`
+- `src/agents/agent-tools*.test.ts`
+- `src/agents/agent-settings.test.ts`
+- `src/agents/agent-tool-definition-adapter.test.ts`
+- `src/agents/agent-hooks/*.test.ts`
 
 ## Manual testing
 
@@ -86,6 +86,6 @@ If you only want to reset sessions, delete `agents/<agentId>/sessions/` for that
 
 ## Related
 
-- [Pi integration architecture](/pi)
+- [OpenClaw agent runtime architecture](/agent-runtime-architecture)
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "0c3c660cfac2d03b4f7cd9926fbe084b0c9845525173abccfe4f52783113ad71"
+source_hash: "c587068b102476bbfb897cfff66c5c3ecbff969b85b9de21b9c39ed3f0038d8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -49,10 +49,10 @@ When spawning long-running child processes outside the exec/process tools (for e
 
 Environment overrides:
 
-- `PI_BASH_YIELD_MS`: default yield (ms)
-- `PI_BASH_MAX_OUTPUT_CHARS`: in-memory output cap (chars)
+- `OPENCLAW_BASH_YIELD_MS`: default yield (ms)
+- `OPENCLAW_BASH_MAX_OUTPUT_CHARS`: in-memory output cap (chars)
 - `OPENCLAW_BASH_PENDING_MAX_OUTPUT_CHARS`: pending stdout/stderr cap per stream (chars)
-- `PI_BASH_JOB_TTL_MS`: TTL for finished sessions (ms, bounded to 1m–3h)
+- `OPENCLAW_BASH_JOB_TTL_MS`: TTL for finished sessions (ms, bounded to 1m–3h)
 - `OPENCLAW_PROCESS_INPUT_WAIT_IDLE_MS`: idle-output threshold before writable background sessions are marked as likely waiting for input (default 15000 ms)
 
 Config (preferred):

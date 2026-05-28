@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code mode"
 source: "https://docs.openclaw.ai/reference/code-mode"
-source_hash: "a3031a031b43f90d50aa7ddd3e57c907d0420f6b51cd4145d9b807e92af9418b"
+source_hash: "0aed05302b1045cfaa55a947b02efd9ab503f589a72ff255b070bfe5e78f1b90"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/code-mode.md"
@@ -507,7 +507,7 @@ This prevents recursion and keeps the model-facing contract narrow.
 
 ## Tool Search interaction
 
-Code mode supersedes the PI Tool Search model surface for runs where it is
+Code mode supersedes the OpenClaw Tool Search model surface for runs where it is
 active.
 
 When `tools.codeMode.enabled` is true and code mode activates:
@@ -520,7 +520,7 @@ When `tools.codeMode.enabled` is true and code mode activates:
 - Nested calls dispatch through the same OpenClaw executor path that Tool Search
   uses.
 
-The existing [Tool Search](/tools/tool-search) page describes the PI compact
+The existing [Tool Search](/tools/tool-search) page describes the OpenClaw compact
 catalog bridge. Code mode is the generic OpenClaw alternative for runs that can
 use `exec` and `wait`.
 

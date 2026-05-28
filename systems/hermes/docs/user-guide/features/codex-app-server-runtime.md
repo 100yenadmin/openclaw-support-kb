@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/codex-app-server-runtime.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "b8de840ad05e3b7a5c11870c16c6a61bd93ba3a9414f600c78ad5765df91d906"
+source_hash: "914dbe620910a9f35b9682daa59cbc4c5afab01fa20fa03b947090986051a45a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app
 Hermes can optionally hand `openai/*` and `openai-codex/*` turns to the [Codex CLI app-server](https://github.com/openai/codex) instead of running its own tool loop. When enabled, terminal commands, file edits, sandboxing, and MCP tool calls all execute inside Codex's runtime — Hermes becomes the shell around it (sessions DB, slash commands, gateway, memory and skill review).
 
 This is **opt-in only**. Default Hermes behavior is unchanged unless you flip the flag. Hermes never auto-routes you onto this runtime.
+
+:::tip
+Not using OpenAI Codex? `hermes setup --portal` configures a non-Codex backend with Claude/Gemini/etc. in one step. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## Why
 

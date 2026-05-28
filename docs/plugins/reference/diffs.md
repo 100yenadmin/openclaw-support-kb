@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs plugin"
 source: "https://docs.openclaw.ai/plugins/reference/diffs"
-source_hash: "15731250414cc06c9b03d6f8e11c181b82c6f2cc5e5d287c7c816e5c8b7c748f"
+source_hash: "c3ad17e4eb62350267cfd6d12bfd1ae284700db231bd02749427436c2a1d73d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/diffs.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/diffs
 
 # Diffs plugin
 
-Read-only diff viewer and file renderer for agents.
+OpenClaw read-only diff viewer plugin and file renderer for agents.
 
 ## Distribution
 

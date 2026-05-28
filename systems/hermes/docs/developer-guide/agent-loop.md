@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Agent Loop Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/agent-loop"
-source_hash: "6b1b1007748904f43ffaacc05fca5fd50530cba732d28ee23e1cd778ad971bb9"
+source_hash: "9c59cb02be1a0e87d64360f9f9fb582200c03f3a7a2611b96e41206a30d9eb42"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/agent-loop.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/developer-guide/agent-loop
 
 # Agent Loop Internals
 
-The core orchestration engine is `run_agent.py`'s `AIAgent` class — a large file (15k+ lines) that handles everything from prompt assembly to tool dispatch to provider failover.
+The core orchestration engine is `run_agent.py`'s `AIAgent` class — a large file (~4,400 lines) that handles everything from prompt assembly to tool dispatch to provider failover.
 
 ## Core Responsibilities
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nostr plugin"
 source: "https://docs.openclaw.ai/plugins/reference/nostr"
-source_hash: "2bbfa8456c6350db64dd6c2192fb2c79aa44d8638cc8daa1f802b613121c274f"
+source_hash: "9529ef14cb76ce311f782acd8e0963bc25191961862d5c14469cc1c750fdab79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/nostr.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/nostr
 
 # Nostr plugin
 
-Adds the Nostr channel surface for sending and receiving OpenClaw messages.
+OpenClaw Nostr channel plugin for NIP-04 encrypted direct messages.
 
 ## Distribution
 

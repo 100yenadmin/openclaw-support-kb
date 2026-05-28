@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "7c0eddcbcb570c6f84f2ab99d7d16044b337d62168c80f190a81d7ba5ad29520"
+source_hash: "fb18e8489c6f27c510be6f619026739c357950504aead36390498ab8b57144d3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -112,9 +112,11 @@ methods:
 
 Embedding providers registered with `api.registerEmbeddingProvider(...)` must
 also be listed in `contracts.embeddingProviders` in the plugin manifest. This
-is the generic embedding surface for reusable vector generation. Memory-only
-adapters still use `api.registerMemoryEmbeddingProvider(...)` and
-`contracts.memoryEmbeddingProviders`.
+is the generic embedding surface for reusable vector generation. Memory search
+can consume this generic provider surface. The older
+`api.registerMemoryEmbeddingProvider(...)` and
+`contracts.memoryEmbeddingProviders` seam is deprecated compatibility while
+existing memory-specific providers migrate.
 
 ### Tools and commands
 
@@ -137,14 +139,15 @@ structured entries:
 ```ts
 agentPromptGuidance: [
   "Global command hint.",
-  { text: "Only show this in the main PI prompt.", surfaces: ["pi_main"] },
+  { text: "Only show this in the main OpenClaw prompt.", surfaces: ["openclaw_main"] },
 ];
 ```
 
-Structured `surfaces` may include `pi_main`, `codex_app_server`, `cli_backend`,
-`acp_backend`, or `subagent`. Omit `surfaces` for intentional all-surface
-guidance. Do not pass an empty `surfaces` array; it is rejected so accidental
-scope loss does not become global prompt text.
+Structured `surfaces` may include `openclaw_main`, `codex_app_server`,
+`cli_backend`, `acp_backend`, or `subagent`. `pi_main` remains a deprecated alias
+for `openclaw_main`. Omit `surfaces` for intentional all-surface guidance. Do
+not pass an empty `surfaces` array; it is rejected so accidental scope loss does
+not become global prompt text.
 
 Native Codex app-server developer instructions are stricter than other prompt
 surfaces: only guidance explicitly scoped to `codex_app_server` is promoted into
@@ -259,9 +262,9 @@ When to use tool-result middleware
   seam for async output reducers such as tokenjuice.
 
 Bundled plugins must declare `contracts.agentToolResultMiddleware` for each
-targeted runtime, for example `["pi", "codex"]`. External plugins
+targeted runtime, for example `["openclaw", "codex"]`. External plugins
 cannot register this middleware; keep normal OpenClaw plugin hooks for work
-that does not need pre-model tool-result timing. The old Pi-only embedded
+that does not need pre-model tool-result timing. The old embedded-runner-only
 extension factory registration path has been removed.
 
 ### Gateway discovery registration
@@ -380,7 +383,7 @@ For an end-to-end authoring guide, see
 | `api.registerMemoryFlushPlan(resolver)`    | Memory flush plan resolver                                                                                                                                |
 | `api.registerMemoryRuntime(runtime)`       | Memory runtime adapter                                                                                                                                    |
 
-### Memory embedding adapters
+### Deprecated memory embedding adapters
 
 | Method                                         | What it registers                              |
 | ---------------------------------------------- | ---------------------------------------------- |
@@ -396,12 +399,12 @@ For an end-to-end authoring guide, see
 - `MemoryFlushPlan.model` can pin the flush turn to an exact `provider/model`
   reference, such as `ollama/qwen3:8b`, without inheriting the active fallback
   chain.
-- `registerMemoryEmbeddingProvider` lets the active memory plugin register one
-  or more embedding adapter ids (for example `openai`, `gemini`, or a custom
-  plugin-defined id).
-- User config such as `agents.defaults.memorySearch.provider` and
-  `agents.defaults.memorySearch.fallback` resolves against those registered
-  adapter ids.
+- `registerMemoryEmbeddingProvider` is deprecated. New embedding providers
+  should use `api.registerEmbeddingProvider(...)` and
+  `contracts.embeddingProviders`.
+- Existing memory-specific providers continue to work during the migration
+  window, but plugin inspection reports this as compatibility debt for
+  non-bundled plugins.
 
 ### Events and lifecycle
 

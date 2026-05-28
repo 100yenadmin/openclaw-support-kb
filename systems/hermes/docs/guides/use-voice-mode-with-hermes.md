@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use Voice Mode with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes"
-source_hash: "587248a896d4f65f861262c616a9ac541fc691223958eff2fec81029abd53804"
+source_hash: "8196d899c04da2675efc12dc0def0aae6b648567f85ffdee46829225219863d9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-voice-mode-with-hermes.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-he
 This guide is the practical companion to the [Voice Mode feature reference](/user-guide/features/voice-mode).
 
 If the feature page explains what voice mode can do, this guide shows how to actually use it well.
+
+:::tip
+[Nous Portal](/integrations/nous-portal) bundles both the LLM and TTS through one OAuth — voice mode works end-to-end with no extra credentials.
+:::
 
 ## What voice mode is good for
 

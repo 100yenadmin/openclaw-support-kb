@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "15a201d23f6dc9a3824494160aa6fb382f865276e875cc1505b91096c6f4e07d"
+source_hash: "c0d54053a1199a17da3c1fc01b3f655c3f7cae03ffe5cf2ef4a3f10a2093fcaa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -272,6 +272,11 @@ Built-in commands intercepted before the AI queue:
 Append `?` to any command for usage help (for example `/bot-upgrade ?`).
 
 Admin commands (`/bot-me`, `/bot-upgrade`, `/bot-logs`, `/bot-clear-storage`, `/bot-streaming`, `/bot-approve`) are direct-message-only and require the sender's openid in an explicit non-wildcard `allowFrom` list. A wildcard `allowFrom: ["*"]` permits chat but does not grant admin command access. Group messages match against `groupAllowFrom` first and fall back to `allowFrom`. Running an admin command in a group returns a hint rather than silently dropping.
+
+When QQ Bot exec approvals use the default same-chat fallback, native approval
+button clicks follow the same explicit non-wildcard command allowlist. To grant
+approval-only access without broader command access, configure
+`channels.qqbot.execApprovals.approvers`.
 
 ## Engine architecture
 

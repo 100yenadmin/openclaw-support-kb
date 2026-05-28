@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics OpenTelemetry plugin"
 source: "https://docs.openclaw.ai/plugins/reference/diagnostics-otel"
-source_hash: "9818836d3699f3b0a062b35e41364e7f3f7cc6d4f0f691c0c31d7104f1dc3c6c"
+source_hash: "7662730b5226dc5dba847c6f2e5297d4957da31489b1bd908f3fa2c7840d1567"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/diagnostics-otel.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/diagnostics-otel
 
 # Diagnostics OpenTelemetry plugin
 
-OpenClaw diagnostics OpenTelemetry exporter.
+OpenClaw diagnostics OpenTelemetry exporter for metrics and traces.
 
 ## Distribution
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy"
 source: "https://docs.openclaw.ai/cli/policy"
-source_hash: "dac33159a6d17b021d87e4733138b28c66fd9b3811bcd3e3a577bc91a059ff02"
+source_hash: "d64d76bf49774421f6cec801c73cd134abb93b4efb3cfd058aebb7b145fb24ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/policy.md"
@@ -178,6 +178,22 @@ present in `policy.jsonc`. The observed state is existing OpenClaw config or
 workspace metadata; policy reports drift but does not rewrite runtime behavior
 unless a repair path is explicitly available and enabled.
 
+Agent-specific policy overlays keep broad `tools.*` and `agents.workspace`
+posture global, then let named scope blocks add stricter normal policy sections
+for explicit `agentIds` under `scopes.<scopeName>`. The initial scoped
+sections are `tools` and `agents.workspace`; sandbox and ingress can use the
+same container once their evidence is attributable to an agent. Scoped fields
+carry strictness metadata such as allowlist subset, denylist superset, required
+boolean, and exact-list semantics so future policy-file conformance can reuse
+the same rule inventory instead of guessing. The overlay is additive: global
+claims still run, and a scoped claim can emit its own finding against the same
+observed config. See [Agent-scoped policy overlays](/plan/policy-agent-scoped-overlays).
+Every scope present in `policy.jsonc` must be valid and enforceable. Scopes
+currently require `agentIds`, and that selector supports only `tools.*` and
+`agents.workspace.*`. If an `agentIds` entry is not present in `agents.list[]`,
+the scoped rule is evaluated against the inherited global/default posture for
+that runtime agent id instead of being skipped.
+
 #### Channels
 
 | Policy field                         | Observed state                          | Use when                                                     |
@@ -256,6 +272,7 @@ unless a repair path is explicitly available and enabled.
 | `tools.exec.requireAsk`         | `tools.exec.ask` and per-agent exec ask mode                | Require approval posture such as `always`.                                                               |
 | `tools.exec.allowHosts`         | `tools.exec.host` and per-agent exec host routing           | Allow only exec host routing modes such as `sandbox`.                                                    |
 | `tools.elevated.allow`          | `tools.elevated.enabled` and per-agent elevated posture     | Set to `false` to require elevated tool mode to stay disabled.                                           |
+| `tools.alsoAllow.expected`      | `tools.alsoAllow` and per-agent `tools.alsoAllow`           | Require exact `alsoAllow` entries and report missing or unexpected additive tool grants.                 |
 | `tools.denyTools`               | `tools.deny` and `agents.list[].tools.deny`                 | Require configured tool deny lists to include tool ids or groups such as `group:runtime` and `group:fs`. |
 
 Run policy-only checks during authoring:
@@ -539,6 +556,8 @@ Policy currently verifies:
 | `policy/tools-exec-ask-unapproved`           | Exec ask mode is outside the policy allowlist.                                   |
 | `policy/tools-exec-host-unapproved`          | Exec host routing is outside the policy allowlist.                               |
 | `policy/tools-elevated-enabled`              | Elevated tool mode is enabled when policy denies it.                             |
+| `policy/tools-also-allow-missing`            | A configured `alsoAllow` list is missing an entry required by policy.            |
+| `policy/tools-also-allow-unexpected`         | A configured `alsoAllow` list includes an entry not expected by policy.          |
 | `policy/tools-required-deny-missing`         | A global or per-agent tool deny list does not include a required denied tool.    |
 | `policy/secrets-unmanaged-provider`          | A config SecretRef references a provider not declared under `secrets.providers`. |
 | `policy/secrets-denied-provider-source`      | A config secret provider or SecretRef uses a source denied by policy.            |

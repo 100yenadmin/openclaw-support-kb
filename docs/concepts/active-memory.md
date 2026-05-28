@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Active memory"
 source: "https://docs.openclaw.ai/concepts/active-memory"
-source_hash: "bd4d97ab8bd6bc5b177bc7bb34225b5a2155689d72ed2d44010a2f4f4312c329"
+source_hash: "a4e1b94943f0bbce2de88ceddffe6eb0ea3ffad051d245d5f1ff27748a6cb593"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/active-memory.md"
@@ -825,16 +825,16 @@ AccordionGroup
 
 Embedding provider switched or stopped working
 
-    If `memorySearch.provider` is unset, OpenClaw auto-detects the first
-    available embedding provider. A new API key, quota exhaustion, or a
-    rate-limited hosted provider can change which provider resolves between
-    runs. If no provider resolves, `memory_search` may degrade to lexical-only
-    retrieval; runtime failures after a provider is already selected do not
-    fall back automatically.
+    If `memorySearch.provider` is unset, OpenClaw uses OpenAI embeddings. Set
+    `memorySearch.provider` explicitly for local, Ollama, Gemini, Voyage,
+    Mistral, DeepInfra, Bedrock, GitHub Copilot, or OpenAI-compatible
+    embeddings. If the configured provider cannot run, `memory_search` may
+    degrade to lexical-only retrieval; runtime failures after a provider is
+    already selected do not fall back automatically.
 
-    Pin the provider (and an optional fallback) explicitly to make selection
-    deterministic. See [Memory Search](/concepts/memory-search) for the full
-    list of providers and pinning examples.
+    Set an optional `memorySearch.fallback` only when you want a deliberate
+    single fallback. See [Memory Search](/concepts/memory-search) for the full
+    list of providers and examples.
 
 
 

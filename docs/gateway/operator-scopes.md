@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "c2886eb68da416aba2b1e911433fb4de68499a71db16bc5e6dc3691be19e1fc5"
+source_hash: "2cd6b38cdbae6052bd43153384a6d853f5ad0129131ff2768560ab250de9bdda"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -75,6 +75,9 @@ for a broader role or broader scopes create a new pending upgrade request.
 When approving a device request:
 
 - A request with no operator role does not need operator token scope approval.
+- A request for a non-operator device role, such as `node`, requires
+  `operator.admin`, even when `device.pair.approve` is reachable with
+  `operator.pairing`.
 - A request for `operator.read`, `operator.write`, `operator.approvals`,
   `operator.pairing`, or `operator.talk.secrets` requires the caller to hold
   those scopes, or `operator.admin`.
@@ -83,10 +86,15 @@ When approving a device request:
   token scopes. If that existing token is admin-scoped, approval still requires
   `operator.admin`.
 
-For paired-device token sessions, management is self-scoped unless the caller
-also has `operator.admin`: non-admin callers see only their own pairing entries,
-can approve or reject only their own pending request, and can rotate, revoke, or
-remove only their own device entry.
+Non-admin shared-secret and trusted-proxy sessions can approve operator-device
+requests only inside their own declared operator scopes. Approving non-operator
+roles is admin-only even when those sessions can otherwise use
+`operator.pairing`.
+
+For paired-device token sessions, management is also self-scoped unless the
+caller has `operator.admin`: non-admin callers see only their own pairing
+entries, can approve or reject only their own pending request, and can rotate,
+revoke, or remove only their own device entry.
 
 ## Node pairing approvals
 

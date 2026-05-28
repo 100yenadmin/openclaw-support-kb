@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo Personal plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zalouser"
-source_hash: "5b809ce6ee0127afbd6c8e1b514de2cd82a27371ffc84c836778174e792dc853"
+source_hash: "7e6fbc2f4b80b2d64a796a9fd56aea0516f3c89ccd92e5a8b859ff0ef5f879c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zalouser.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/zalouser
 
 # Zalo Personal plugin
 
-Adds the Zalo Personal channel surface for sending and receiving OpenClaw messages.
+OpenClaw Zalo Personal Account plugin via native zca-js integration.
 
 ## Distribution
 

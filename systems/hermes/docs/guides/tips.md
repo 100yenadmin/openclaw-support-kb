@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tips & Best Practices"
 source: "https://hermes-agent.nousresearch.com/docs/guides/tips"
-source_hash: "0f5dcbc498649b63b0b3e544007a98acf2d08eb8d7c3d67398f92cc40fcd0059"
+source_hash: "2d4c7e01205ce09edadde67274e6e4295c53245f5a4791b0f21488fef6bb9885"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/tips.md"
@@ -20,6 +20,10 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/tips
 # Tips & Best Practices
 
 A quick-wins collection of practical tips that make you immediately more effective with Hermes Agent. Each section targets a different aspect — scan the headers and jump to what's relevant.
+
+:::tip Confused which model to pick?
+Run `hermes setup --portal` — you get 300+ models including Claude, GPT-5, and Gemini under one subscription. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ---
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Features Overview"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/overview"
-source_hash: "ddc346c2d227ea8757d7b42955455bc9ff0923cd6a008b7187007550bdcdecaa"
+source_hash: "a655524fa6c428bc7bda585b32ba74ccb86258d62bfc00c13a915d2eadab2247"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/overview.md"
@@ -20,6 +20,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/overview
 # Features Overview
 
 Hermes Agent includes a rich set of capabilities that extend far beyond basic chat. From persistent memory and file-aware context to browser automation and voice conversations, these features work together to make Hermes a powerful autonomous assistant.
+
+:::tip Don't know where to start?
+`hermes setup --portal` covers a model provider plus all four Tool Gateway tools (web search, image generation, TTS, browser) in one command. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## Core
 
@@ -56,7 +60,7 @@ Hermes Agent includes a rich set of capabilities that extend far beyond basic ch
 - **[Memory Providers](memory-providers.md)** — Plug in external memory backends (Honcho, OpenViking, Mem0, Hindsight, Holographic, RetainDB, ByteRover, Supermemory) for cross-session user modeling and personalization beyond the built-in memory system.
 - **[API Server](api-server.md)** — Expose Hermes as an OpenAI-compatible HTTP endpoint. Connect any frontend that speaks the OpenAI format — Open WebUI, LobeChat, LibreChat, and more.
 - **[IDE Integration (ACP)](acp.md)** — Use Hermes inside ACP-compatible editors such as VS Code, Zed, and JetBrains. Chat, tool activity, file diffs, and terminal commands render inside your editor.
-- **[RL Training](rl-training.md)** — Generate trajectory data from agent sessions for reinforcement learning and model fine-tuning.
+- **[Batch Processing](batch-processing.md)** — Run the agent over many prompts or tasks in parallel from the CLI, with structured outputs and trajectory capture suitable for evals or downstream training pipelines.
 
 ## Customization
 

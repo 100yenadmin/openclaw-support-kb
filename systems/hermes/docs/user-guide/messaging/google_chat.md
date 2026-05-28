@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Chat"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/google_chat"
-source_hash: "e3092ea51e3c7ee11f053f6740af16ff1d8dae1b38112eb8f5a0059774a8043d"
+source_hash: "17b212d3e011d6ab4c0a5464c790b25a5794c72e7419c265f7685ec80c873ef9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/google_chat.md"
@@ -25,6 +25,8 @@ Equivalent ergonomics to Slack Socket Mode or Telegram long-polling: your Hermes
 process does not need a public URL, a tunnel, or a TLS certificate. It connects,
 authenticates, and listens on a subscription — the same way a Telegram bot listens
 on a token.
+
+> Run `hermes gateway setup` and pick **Google Chat** for a guided walk-through.
 
 :::note Workspace edition
 Google Chat is part of Google Workspace. You can use this integration with a
@@ -250,7 +252,7 @@ specifically, as the user who asked for the file.
 4. On the host, register the client with Hermes:
 
 ```bash
-python -m gateway.platforms.google_chat_user_oauth \
+python -m plugins.platforms.google_chat.oauth \
     --client-secret /path/to/client_secret.json
 ```
 
@@ -343,7 +345,7 @@ The one-time host setup wasn't done. From a terminal on the host that runs
 Hermes:
 
 ```bash
-python -m gateway.platforms.google_chat_user_oauth \
+python -m plugins.platforms.google_chat.oauth \
     --client-secret /path/to/client_secret.json
 ```
 

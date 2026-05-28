@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Architecture"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/architecture"
-source_hash: "f9a39495e50c1c654eb2f4ec101a407e8f6c121fcb729db60a4e497ec92eb129"
+source_hash: "be61b8e83abb6f2770e7b66235044ca989567e7b0209978e442c395659841515"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/architecture.md"
@@ -53,7 +53,7 @@ This page is the top-level map of Hermes Agent internals. Use it to orient yours
            ▼                                    ▼
 ┌───────────────────┐              ┌──────────────────────┐
 │ Session Storage   │              │ Tool Backends         │
-│ (SQLite + FTS5)   │              │ Terminal (7 backends) │
+│ (SQLite + FTS5)   │              │ Terminal (6 backends) │
 │ hermes_state.py   │              │ Browser (5 backends)  │
 │ gateway/session.py│              │ Web (4 backends)      │
 └───────────────────┘              │ MCP (dynamic)         │
@@ -143,7 +143,7 @@ hermes-agent/
 ├── skills/                   # Bundled skills (always available)
 ├── optional-skills/          # Official optional skills (install explicitly)
 ├── website/                  # Docusaurus documentation site
-└── tests/                    # Pytest suite (~3,000+ tests)
+└── tests/                    # Pytest suite (~25,000 tests across ~1,250 files)
 ```
 
 ## Data Flow

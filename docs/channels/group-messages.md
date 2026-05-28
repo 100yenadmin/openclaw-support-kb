@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp group messages"
 source: "https://docs.openclaw.ai/channels/group-messages"
-source_hash: "d8ba60d9f266c1f00182a6f323fbdff96306ab2f6527042bfa16055c3145ae7a"
+source_hash: "727ce871253859c4bd6f31b6f2d721fcf1e2c5c9d9a7b995744dc7ca38a8119e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/group-messages.md"
@@ -27,7 +27,7 @@ Note
 - Group policy: `channels.whatsapp.groupPolicy` controls whether group messages are accepted (`open|disabled|allowlist`). `allowlist` uses `channels.whatsapp.groupAllowFrom` (fallback: explicit `channels.whatsapp.allowFrom`). Default is `allowlist` (blocked until you add senders).
 - Per-group sessions: session keys look like `agent:<agentId>:whatsapp:group:<jid>` so commands such as `/verbose on`, `/trace on`, or `/think high` (sent as standalone messages) are scoped to that group; personal DM state is untouched. Heartbeats are skipped for group threads.
 - Context injection: **pending-only** group messages (default 50) that _did not_ trigger a run are prefixed under `[Chat messages since your last reply - for context]`, with the triggering line under `[Current message - respond to this]`. Messages already in the session are not re-injected.
-- Sender surfacing: every group batch now ends with `[from: Sender Name (+E164)]` so Pi knows who is speaking.
+- Sender surfacing: every group batch now ends with `[from: Sender Name (+E164)]` so OpenClaw knows who is speaking.
 - Ephemeral/view-once: we unwrap those before extracting text/mentions, so pings inside them still trigger.
 - Group system prompt: on the first turn of a group session (and whenever `/activation` changes the mode) we inject a short blurb into the system prompt like `You are replying inside the WhatsApp group "<subject>". Group members: Alice (+44...), Bob (+43...), ... Activation: trigger-only ... Address the specific sender noted in the message context.` If metadata isn't available we still tell the agent it's a group chat.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs"
 source: "https://docs.openclaw.ai/cli/docs"
-source_hash: "c66071ff47c787558fbcbc05d327c6252313fdf25b30b9da4c8b0130eb50c3be"
+source_hash: "cc8aed641c01bb236495b81c202bd8a129d9f318900ecd19c63070f3ac7fe3a9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/docs.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/cli/docs
 
 # `openclaw docs`
 
-Search the live OpenClaw docs index from the terminal. The command shells out to the public Mintlify-hosted docs MCP search endpoint at `https://docs.openclaw.ai/mcp.search_open_claw` and renders the results in your terminal.
+Search the live OpenClaw docs index from the terminal. The command calls OpenClaw's Cloudflare-hosted docs search API and renders the results in your terminal.
 
 ## Usage
 
@@ -42,17 +42,7 @@ With no query, `openclaw docs` prints the docs entrypoint URL plus a sample sear
 
 ## How it works
 
-`openclaw docs` invokes the `mcporter` CLI to call the docs search MCP tool, then parses the `Title: / Link: / Content:` blocks from the tool output into a list of results.
-
-To resolve `mcporter`, OpenClaw checks in order:
-
-1. `mcporter` on `PATH` (used directly if present).
-2. `pnpm dlx mcporter ...` if `pnpm` is installed.
-3. `npx -y mcporter ...` if `npx` is installed.
-
-If none are available, the command fails with a hint to install `pnpm` (`npm install -g pnpm`).
-
-The search call uses a fixed 30 second timeout. Result snippets are truncated to ~220 characters per entry.
+`openclaw docs` calls `https://docs.openclaw.ai/api/search` and renders the JSON results. The search call uses a fixed 30 second timeout.
 
 ## Output
 
@@ -69,10 +59,10 @@ In non-rich output (piped, `--no-color`, scripts), the same data renders as Mark
 
 ## Exit codes
 
-| Code | Meaning                                             |
-| ---- | --------------------------------------------------- |
-| `0`  | Search succeeded (including zero-result responses). |
-| `1`  | The MCP tool call failed; stderr is printed inline. |
+| Code | Meaning                                                           |
+| ---- | ----------------------------------------------------------------- |
+| `0`  | Search succeeded (including zero-result responses).               |
+| `1`  | The hosted docs search API call failed; stderr is printed inline. |
 
 ## Related
 

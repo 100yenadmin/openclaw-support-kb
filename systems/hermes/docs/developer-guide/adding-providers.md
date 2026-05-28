@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "726d40e234498bb0f999ceb2690e300ea31230697de949e222332a6354cc59fb"
+source_hash: "7b17cec6d0e2091b6cf828bed12396cf3d13f672ed7216a1d0a36870166caf28"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -334,12 +334,12 @@ At minimum, touch the tests that guard provider wiring.
 
 Common places:
 
-- `tests/test_runtime_provider_resolution.py`
-- `tests/test_cli_provider_resolution.py`
-- `tests/test_cli_model_command.py`
-- `tests/test_setup_model_selection.py`
-- `tests/test_provider_parity.py`
-- `tests/test_run_agent.py`
+- `tests/hermes_cli/test_runtime_provider_resolution.py`
+- `tests/cli/test_cli_provider_resolution.py`
+- `tests/hermes_cli/test_model_switch_custom_providers.py` (and adjacent `tests/hermes_cli/test_model_switch_*.py`)
+- `tests/hermes_cli/test_setup_model_provider.py`
+- `tests/run_agent/test_provider_parity.py`
+- `tests/run_agent/test_run_agent.py`
 - `tests/test_<provider>_adapter.py` for a native provider
 
 For docs-only examples, the exact file set may differ. The point is to cover:
@@ -355,7 +355,7 @@ Run tests with xdist disabled:
 
 ```bash
 source venv/bin/activate
-python -m pytest tests/test_runtime_provider_resolution.py tests/test_cli_provider_resolution.py tests/test_cli_model_command.py tests/test_setup_model_selection.py -n0 -q
+python -m pytest tests/hermes_cli/test_runtime_provider_resolution.py tests/cli/test_cli_provider_resolution.py tests/hermes_cli/test_setup_model_provider.py tests/run_agent/test_provider_parity.py -n0 -q
 ```
 
 For deeper changes, run the full suite before pushing:

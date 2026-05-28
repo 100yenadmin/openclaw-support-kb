@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "a497cb73a670e22fb09337b6ba591aff4236508a817e07ff98654677e7ce8c36"
+source_hash: "7f57af2ee212278a36dd20f8fe90bf6221849a69bc06858148248c881499b964"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -305,6 +305,25 @@ local Ollama with:
 OPENCLAW_LIVE_TEST=1 OPENCLAW_LIVE_OLLAMA=1 OPENCLAW_LIVE_OLLAMA_WEB_SEARCH=0 \
   pnpm test:live -- extensions/ollama/ollama.live.test.ts
 ```
+
+For Ollama Cloud API-key smoke tests, point the live test at `https://ollama.com`
+and choose a hosted model from the current catalog:
+
+```bash
+export OLLAMA_API_KEY='<your-ollama-cloud-api-key>'
+
+OPENCLAW_LIVE_TEST=1 \
+OPENCLAW_LIVE_OLLAMA=1 \
+OPENCLAW_LIVE_OLLAMA_BASE_URL=https://ollama.com \
+OPENCLAW_LIVE_OLLAMA_MODEL=glm-5.1:cloud \
+OPENCLAW_LIVE_OLLAMA_WEB_SEARCH=1 \
+pnpm test:live -- extensions/ollama/ollama.live.test.ts
+```
+
+The cloud smoke runs text, native stream, and web search. It skips embeddings by
+default for `https://ollama.com` because Ollama Cloud API keys may not authorize
+`/api/embed`. Set `OPENCLAW_LIVE_OLLAMA_EMBEDDINGS=1` when you explicitly want
+the live test to fail if the configured cloud key cannot use the embed endpoint.
 
 To add a new model, simply pull it with Ollama:
 

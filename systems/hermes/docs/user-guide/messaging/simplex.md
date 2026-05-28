@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/simplex.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "3efe6b2a002f0d331c17d3d694465f5f4b8e4853a1d1e63fc1fdc08f28198e01"
+source_hash: "7bda6636e02c2412c5ea9c9dcc58486d377a49c0300c7bae40f3a801f3919cd9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -20,6 +20,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex
 # SimpleX Chat
 
 [SimpleX Chat](https://simplex.chat/) is a private, decentralised messaging platform where users own their contacts and groups. Unlike other platforms, SimpleX assigns no persistent user IDs — every contact is identified by an opaque internal ID generated at connection time, which makes it one of the most private messengers available.
+
+> Run `hermes gateway setup` and pick **SimpleX** for a guided walk-through.
 
 ## Prerequisites
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Auth credential semantics"
 source: "https://docs.openclaw.ai/auth-credential-semantics"
-source_hash: "bad0cb6262e9c5eaf5a2df957b62227e41a8bee8b4c72d472a664cd19053409b"
+source_hash: "c9bcffd77792af726dfbbe4e764834cb4e370584309945e54cddc707d3a2b0c8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "auth-credential-semantics.md"
@@ -73,7 +73,7 @@ the target agent signs in separately and creates its own local profile.
 
 `auth.profiles` entries with `mode: "aws-sdk"` are routing metadata, not stored
 credentials. They are valid when the target provider uses
-`models.providers.<id>.auth: "aws-sdk"` or the built-in Amazon Bedrock default
+`models.providers.<id>.auth: "aws-sdk"` or plugin-owned Amazon Bedrock setup
 AWS SDK route. These profile ids may appear in `auth.order` and session
 overrides even when no matching entry exists in `auth-profiles.json`.
 

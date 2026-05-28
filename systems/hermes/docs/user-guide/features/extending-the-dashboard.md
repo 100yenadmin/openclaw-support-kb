@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Extending the Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/extending-the-dashboard"
-source_hash: "eb357afb1a148d32f58138de375ddfcf379e89f821b5d245aa5fcf9823f691a2"
+source_hash: "463dbd8b57ce12c6fa3cf2265be709886e546db5112c6269e7b50e93caa8b15c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/extending-the-dashboard.md"
@@ -30,7 +30,7 @@ All three are **drop-in at runtime**: no repo clone, no `npm run build`, no patc
 If you just want to use the dashboard, see [Web Dashboard](./web-dashboard). If you want to reskin the terminal CLI (not the web dashboard), see [Skins & Themes](./skins) — the CLI skin system is unrelated to dashboard themes.
 
 :::note How the pieces compose
-Themes and plugins are independent but synergistic. A theme can stand alone (just a YAML file). A plugin can stand alone (just a tab). Together they let you build a complete visual reskin with custom HUDs — the bundled `strike-freedom-cockpit` demo does exactly that. See [Combined theme + plugin demo](#combined-theme--plugin-demo).
+Themes and plugins are independent but synergistic. A theme can stand alone (just a YAML file). A plugin can stand alone (just a tab). Together they let you build a complete visual reskin with custom HUDs — the example `strike-freedom-cockpit` demo (lives in the `hermes-example-plugins` companion repo — see [Combined theme + plugin demo](#combined-theme--plugin-demo) for install steps) does exactly that.
 :::
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack plugin"
 source: "https://docs.openclaw.ai/plugins/reference/slack"
-source_hash: "cc770ff8ea9c60dd7554b415f6be914b4521b1d086462f35fef759fe145a0fac"
+source_hash: "5be31dae08285786ea5c94d8c02894196d6b66098e7d7eda0d39904f0e6fd348"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/slack.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/slack
 
 # Slack plugin
 
-Adds the Slack channel surface for sending and receiving OpenClaw messages.
+OpenClaw Slack channel plugin for channels, DMs, commands, and app events.
 
 ## Distribution
 

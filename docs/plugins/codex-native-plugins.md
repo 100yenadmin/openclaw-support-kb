@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Native Codex plugins"
 source: "https://docs.openclaw.ai/plugins/codex-native-plugins"
-source_hash: "1a2e205e87be0fb649e11a385d2bd32b68487b802bd1b852659e159f17b62bbc"
+source_hash: "d768b2b8da456094fd982bb5457453d1381c2ab28e83321c1d4207cd374543d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-native-plugins.md"
@@ -33,7 +33,7 @@ Use this page after the base [Codex harness](/plugins/codex-harness) is working.
 - The target Codex app-server must be able to see the expected marketplace,
   plugin, and app inventory.
 
-`codexPlugins` has no effect on PI runs, normal OpenAI provider runs, ACP
+`codexPlugins` has no effect on OpenClaw runs, normal OpenAI provider runs, ACP
 conversation bindings, or other harnesses because those paths do not create
 Codex app-server threads with native `apps` config.
 

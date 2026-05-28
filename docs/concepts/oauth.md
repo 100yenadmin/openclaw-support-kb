@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "b3040d38513a5f1517f516727c81dd2479666680c647cdbdef239795b28fb8ce"
+source_hash: "95b955ff8c38d7b9960a069ca4e11a06ca0b1044095e5a6195fa6235ebc675b5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -112,7 +112,7 @@ Claude login on the host, onboarding/configure can reuse it directly.
 
 ## OAuth exchange (how login works)
 
-OpenClaw's interactive login flows are implemented in `@earendil-works/pi-ai` and wired into the wizards/commands.
+OpenClaw's interactive login flows are implemented in `openclaw/plugin-sdk/llm` and wired into the wizards/commands.
 
 ### Anthropic setup-token
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tokenjuice"
 source: "https://docs.openclaw.ai/tools/tokenjuice"
-source_hash: "ec0b12998859d360fa07f2960595f39c008fdb022f94e1a28824ab2fd9efe937"
+source_hash: "fc881876ad81eba36ee3f2574092dbd1a91211d36e0d970283a33f78fd80cb79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tokenjuice.md"
@@ -19,7 +19,7 @@ tool results after the command has already run.
 It changes the returned `tool_result`, not the command itself. Tokenjuice does
 not rewrite shell input, rerun commands, or change exit codes.
 
-Today this applies to PI embedded runs and OpenClaw dynamic tools in the Codex
+Today this applies to OpenClaw embedded runs and OpenClaw dynamic tools in the Codex
 app-server harness. Tokenjuice hooks OpenClaw's tool-result middleware and
 trims the output before it goes back into the active harness session.
 

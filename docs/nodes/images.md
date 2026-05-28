@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image and media support"
 source: "https://docs.openclaw.ai/nodes/images"
-source_hash: "10e063b76cebcb89e8b5bc23947e25b516e3a6595e962f6f1a013cbfb37bbd37"
+source_hash: "586026f5962b2c1a58cb47024a8327c21956e8d42beb9258335d2a1a069d4e1d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/images.md"
@@ -45,7 +45,7 @@ The WhatsApp channel runs via **Baileys Web**. This document captures the curren
 - When media is present, the web sender resolves local paths or URLs using the same pipeline as `openclaw message send`.
 - Multiple media entries are sent sequentially if provided.
 
-## Inbound media to commands (Pi)
+## Inbound Media To Commands
 
 - When inbound web messages include media, OpenClaw downloads to a temp file and exposes templating variables:
   - `{{MediaUrl}}` pseudo-URL for the inbound media.

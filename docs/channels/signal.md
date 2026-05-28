@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "88a94024250241ba4f097874a575dae531125b7507aaadb2ac1816225fd3d28c"
+source_hash: "0c5d9eb0bc4c11241478833f346044806dedf99eb52989984c93d7e92d272fee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/signal.md"
@@ -328,6 +328,21 @@ Config:
   - `off`/`ack` disables agent reactions (message tool `react` will error).
   - `minimal`/`extensive` enables agent reactions and sets the guidance level.
 - Per-account overrides: `channels.signal.accounts.<id>.actions.reactions`, `channels.signal.accounts.<id>.reactionLevel`.
+
+## Approval reactions
+
+Signal exec and plugin approval prompts use the top-level `approvals.exec` and
+`approvals.plugin` routing blocks. Signal does not have a
+`channels.signal.execApprovals` block.
+
+- `👍` approves once.
+- `👎` denies.
+- Use `/approve <id> allow-always` when a request offers persistent approval.
+
+Approval reaction resolution requires explicit Signal approvers from
+`channels.signal.allowFrom`, `channels.signal.defaultTo`, or the matching account-level fields.
+Direct same-chat exec approval prompts can still suppress the duplicate local `/approve` fallback
+without explicit approvers; no-approver group approvals keep the local fallback visible.
 
 ## Delivery targets (CLI/cron)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
-source_hash: "fffd806c9b5a68b709737c6eb73be9632266904876d498951d0931334543182a"
+source_hash: "ca3e6e34608ec887c63fc685ee1d56ffded64472ea15438e9ebc7d754d107b91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session-tool.md"
@@ -55,10 +55,12 @@ effective tool list.
 token counts, and timestamps. Filter by kind (`main`, `group`, `cron`, `hook`,
 `node`), exact `label`, exact `agentId`, search text, or recency
 (`activeMinutes`). When you need mailbox-style triage, it can also ask for a
-visibility-scoped derived title, a last-message preview snippet, or bounded
-recent messages on each row. Derived titles and previews are produced only for
-sessions the caller can already see under the configured session tool
-visibility policy, so unrelated sessions stay hidden.
+visibility-scoped derived title, a last-message preview snippet, or bounded recent
+messages on each row. Derived titles and previews are produced only for sessions
+the caller can already see under the configured session tool visibility policy, so
+unrelated sessions stay hidden. When visibility is restricted, `sessions_list`
+returns optional `visibility` metadata showing the effective mode and a warning that
+results may be scope-limited.
 
 `sessions_history` fetches the conversation transcript for a specific session.
 By default, tool results are excluded -- pass `includeTools: true` to see them.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bot loop protection"
 source: "https://docs.openclaw.ai/channels/bot-loop-protection"
-source_hash: "a307b2f21b27d1d3470e53050b76ce50c19ab5f42dcd974107783fd9668a6989"
+source_hash: "6bdec4cd0f3e4692bef84324a5c279d804a7144e140b7e49cb7beb2d6e687b69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/bot-loop-protection.md"
@@ -19,7 +19,7 @@ OpenClaw can accept messages written by other bots on channels that support `all
 When that path is enabled, pair loop protection prevents two bot identities from
 replying to each other indefinitely.
 
-The guard is enforced by the core channel-turn kernel. Each supporting channel
+The guard is enforced by the core inbound reply runner. Each supporting channel
 maps its own inbound event into generic facts: account or scope, conversation id,
 sender bot id, and receiver bot id. Core then tracks the participant pair in both
 directions, applies a sliding-window budget, and suppresses the pair during a

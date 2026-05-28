@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "d6810ce350587c4b091a9d6f0a9d1f4dc3788fe76b7af738adcafebdc7323097"
+source_hash: "4fe7b7380b547e66af3fd505e44c469b23cefc91687c9f26806a015849b6fe46"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -481,6 +481,15 @@ Multi-account pattern
     iMessage supports per-account config under `channels.imessage.accounts`.
 
     Each account can override fields such as `cliPath`, `dbPath`, `allowFrom`, `groupPolicy`, `mediaMaxMb`, history settings, and attachment root allowlists.
+
+
+
+
+Direct-message history
+
+    Set `channels.imessage.dmHistoryLimit` to seed new direct-message sessions with recent decoded `imsg` history for that conversation. Use `channels.imessage.dms["<sender>"].historyLimit` for per-sender overrides, including `0` to disable history for a sender.
+
+    iMessage DM history is fetched on demand from `imsg`. Leaving `dmHistoryLimit` unset disables global DM history seeding, but a positive per-sender `channels.imessage.dms["<sender>"].historyLimit` still enables seeding for that sender.
 
 
 

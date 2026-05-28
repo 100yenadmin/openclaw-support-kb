@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "LINE"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/line"
-source_hash: "dbe467028e7215df3338729e2f351bdbf6be4b546d3f0ae578dceac740d03f0d"
+source_hash: "daa484d2c6f9899aa485482779aab398a9f089dbe907312f567f3cd2557e21e8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/line.md"
@@ -22,6 +22,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/line
 Run Hermes Agent as a [LINE](https://line.me/) bot via the official LINE Messaging API. The adapter lives as a bundled platform plugin under `plugins/platforms/line/` — no core edits, just enable it like any other platform.
 
 LINE is the dominant messaging app in Japan, Taiwan, and Thailand. If your users live there, this is how they reach you.
+
+> Run `hermes gateway setup` and pick **LINE** for a guided walk-through.
 
 ## How the bot responds
 

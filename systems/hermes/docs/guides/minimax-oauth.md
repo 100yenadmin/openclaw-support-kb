@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MiniMax OAuth"
 source: "https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth"
-source_hash: "03b07828e02319a4106e20ca3554b96204361351bb189867e1c9ceb983ab451b"
+source_hash: "4d9849aedd762dfb75ba1b3c5ea117dcfabda9746325112cb516ed05590a1073"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/minimax-oauth.md"
@@ -29,7 +29,7 @@ The transport reuses the `anthropic_messages` adapter (MiniMax exposes an Anthro
 |------|-------|
 | Provider ID | `minimax-oauth` |
 | Display name | MiniMax (OAuth) |
-| Auth type | Browser OAuth (PKCE device-code flow) |
+| Auth type | Browser OAuth (PKCE redirect flow) |
 | Transport | Anthropic Messages-compatible (`anthropic_messages`) |
 | Models | `MiniMax-M2.7`, `MiniMax-M2.7-highspeed` |
 | Global endpoint | `https://api.minimax.io/anthropic` |
@@ -69,11 +69,9 @@ hermes auth add minimax-oauth
 
 ### China region
 
-If your account is on the China platform (`minimaxi.com`), use the China-region OAuth provider id `minimax-cn` instead, or skip OAuth and configure `MINIMAX_CN_API_KEY` / `MINIMAX_CN_BASE_URL` directly. The `--region cn` flag described in older docs is **not** wired through the CLI's argument parser; use the `minimax-cn` provider instead:
+If your account is on the China platform (`minimaxi.com`), use the API-key-based `minimax-cn` provider instead — `minimax-cn` is registered with `auth_type="api_key"` only (no OAuth flow). Configure `MINIMAX_CN_API_KEY` (and optionally `MINIMAX_CN_BASE_URL`) directly:
 
 ```bash
-hermes auth add minimax-cn --type oauth   # if OAuth is supported on your CN account
-# or simpler:
 echo 'MINIMAX_CN_API_KEY=your-key' >> ~/.hermes/.env
 ```
 
@@ -89,7 +87,7 @@ Hermes will print the verification URL and user code — open the URL on any dev
 
 ## The OAuth Flow
 
-Hermes implements a PKCE device-code flow against the MiniMax OAuth endpoints:
+Hermes implements a PKCE browser OAuth flow against the MiniMax OAuth endpoints:
 
 1. Hermes generates a PKCE verifier / challenge pair and a random state value.
 2. It POSTs to `{base_url}/oauth/code` with the challenge and receives a `user_code` and `verification_uri`.
@@ -128,8 +126,8 @@ hermes model
 Or set the model directly:
 
 ```bash
-hermes config set model MiniMax-M2.7
-hermes config set provider minimax-oauth
+hermes config set model.default MiniMax-M2.7
+hermes config set model.provider minimax-oauth
 ```
 
 ## Configuration Reference

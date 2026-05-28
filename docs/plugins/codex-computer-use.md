@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "8d26dc8f17b6c9e946690b2be2bb696339e86e4c48d7600fb81730ce67940b89"
+source_hash: "ce35b375e2524c7f69269223a27027d70e44d92259a3d6aaa566c8b86b871d60"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
@@ -81,7 +81,8 @@ driver's safety model.
 ## Quick setup
 
 Set `plugins.entries.codex.config.computerUse` when Codex-mode turns must have
-Computer Use available before a thread starts:
+Computer Use available before a thread starts. `autoInstall: true` opts
+Computer Use in and lets OpenClaw install or re-enable it before the turn:
 
 ```json5
 {
@@ -133,7 +134,8 @@ not `openclaw codex ...` CLI subcommands:
 ```
 
 `status` is read-only. It does not add marketplace sources, install plugins, or
-enable Codex plugin support.
+enable Codex plugin support. If no config opts Computer Use in, `status` can
+report disabled even after a one-off install command.
 
 `install` enables Codex app-server plugin support, optionally adds a configured
 marketplace source, installs or re-enables the configured plugin through Codex
@@ -181,9 +183,10 @@ You can also register it explicitly from a shell with Codex:
 codex plugin marketplace add /Applications/Codex.app/Contents/Resources/plugins/openai-bundled
 ```
 
-If you use a nonstandard Codex app path, set `computerUse.marketplacePath` to a
-local marketplace file path or run `/codex computer-use install --source
-<marketplace-source>` once.
+If you use a nonstandard Codex app path, run `/codex computer-use install
+--source <marketplace-root>` once or set `computerUse.marketplacePath` to a
+local marketplace file path. Use `--marketplace-path` only when you have the
+marketplace JSON file path, not the bundled marketplace root.
 
 ## Remote catalog limit
 

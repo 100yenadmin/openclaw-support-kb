@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
-source_hash: "38a96d548f12df6be3928e193bb4b22db9c175dd72565221ca230f904024552a"
+source_hash: "266d23d9c371022e07b8f47dc03f57eb6587060b35ee327e8f0f03567518d816"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents-setup.md"
@@ -47,7 +47,6 @@ Current acpx built-in harness aliases:
 - `kiro`
 - `openclaw`
 - `opencode`
-- `pi`
 - `qwen`
 
 When OpenClaw uses the acpx backend, prefer these values for `agentId` unless your acpx config defines custom agent aliases.
@@ -85,7 +84,7 @@ Core ACP baseline:
       "kiro",
       "openclaw",
       "opencode",
-      "pi",
+      "openclaw",
       "qwen",
     ],
     maxConcurrentSessions: 8,

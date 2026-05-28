@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic Vertex plugin"
 source: "https://docs.openclaw.ai/plugins/reference/anthropic-vertex"
-source_hash: "9faebcff7c7fa382d0a022c305e6ae5fb829f757bcc8d31108301c9d229eb1b7"
+source_hash: "51c25ec7819c3f483064e3c54026e000aaf610ab7f712ba2aee3e4de891a30ea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/anthropic-vertex.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/anthropic-vertex
 
 # Anthropic Vertex plugin
 
-Adds Anthropic Vertex model provider support to OpenClaw.
+OpenClaw Anthropic Vertex provider plugin for Claude models on Google Vertex AI.
 
 ## Distribution
 

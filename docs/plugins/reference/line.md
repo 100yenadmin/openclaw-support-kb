@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LINE plugin"
 source: "https://docs.openclaw.ai/plugins/reference/line"
-source_hash: "d047a51d876927c125eced6eb0882fcad2bd21c3c177374483e8691bdb5efc7c"
+source_hash: "7003d702f2e0b59e15a767179a9f34817b67a01eb702e567afa1512586a04705"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/line.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/line
 
 # LINE plugin
 
-Adds the LINE channel surface for sending and receiving OpenClaw messages.
+OpenClaw LINE channel plugin for LINE Bot API chats.
 
 ## Distribution
 

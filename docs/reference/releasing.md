@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "fcb35faedb89013875a9b1afe022cb2ffb524b68735669d4519115215da9fc2a"
+source_hash: "f8ce2431fb6901be4ee0fdbb4be65ea95fef7a4e99ee3702d2de582044a2d1ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/releasing.md"
@@ -55,9 +55,10 @@ the maintainer-only release runbook.
 
 1. Start from current `main`: pull latest, confirm the target commit is pushed,
    and confirm current `main` CI is green enough to branch from it.
-2. Rewrite the top `CHANGELOG.md` section from real commit history with
-   `/changelog`, keep entries user-facing, commit it, push it, and rebase/pull
-   once more before branching.
+2. Generate the top `CHANGELOG.md` section from merged PRs and all direct
+   commits since the last reachable release tag. Keep entries user-facing,
+   dedupe overlapping PR/direct-commit entries, commit the rewrite, push it,
+   and rebase/pull once more before branching.
 3. Review release compatibility records in
    `src/plugins/compat/registry.ts` and
    `src/commands/doctor/shared/deprecation-compat.ts`. Remove expired
@@ -202,6 +203,9 @@ vYYYY.M.D-beta.N` from the matching `release/YYYY.M.D` branch. The helper runs
   QA-lab through a local OTLP/HTTP receiver and verifies trace, metric, and log
   export plus bounded trace attributes and content/identifier redaction without
   requiring Opik, Langfuse, or another external collector.
+- Run `pnpm qa:otel:collector-smoke` when validating collector compatibility.
+  It routes the same QA-lab OTLP export through a real OpenTelemetry Collector
+  Docker container before the local receiver assertions.
 - Run `pnpm qa:prometheus:smoke` when validating protected Prometheus scraping.
   It exercises QA-lab, rejects unauthenticated scrapes, and verifies
   release-critical metric families stay free of prompt content, raw identifiers,
@@ -534,7 +538,8 @@ Release QA Lab coverage includes:
   baseline using the agentic parity pack
 - fast live Matrix QA profile using the `qa-live-shared` environment
 - live Telegram QA lane using Convex CI credential leases
-- `pnpm qa:otel:smoke`, `pnpm qa:prometheus:smoke`, or
+- `pnpm qa:otel:smoke`, `pnpm qa:otel:collector-smoke`,
+  `pnpm qa:prometheus:smoke`, or
   `pnpm qa:observability:smoke` when release telemetry needs explicit local
   proof
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "6a30ae20a1786ad28bc24e81917ddc59885c357e847d98678a19f5d321fd5eee"
+source_hash: "3f4d60494eea11e960ba6ee6849a33c2ee97b2067adebc5b44c8e7e17d34fd2d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -17,9 +17,10 @@ The `image_generate` tool lets the agent create and edit images using your
 configured providers. In chat sessions, image generation runs asynchronously:
 OpenClaw records a background task, returns the task id immediately, and wakes
 the agent when the provider finishes. The completion agent must send generated
-images through the `message` tool. If the requester session is inactive and
-some generated images are still missing from message-tool delivery, OpenClaw
-sends an idempotent direct fallback with only the missing images.
+images through the `message` tool. If the requester session is inactive or
+its active wake fails, and some generated images are still missing from
+message-tool delivery, OpenClaw sends an idempotent direct fallback with only
+the missing images.
 
 Note
 

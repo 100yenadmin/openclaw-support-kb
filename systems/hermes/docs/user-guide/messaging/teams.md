@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Teams"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams"
-source_hash: "67e6bca69c291b7d770ac8b0ee4c39f9f0753b591219408d12b1169bda273cc8"
+source_hash: "a5cbd31e1f8bb244a312de2ab7bbd9621a192ffbceb82ecb439380be7abfe58f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/teams.md"
@@ -22,6 +22,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams
 Connect Hermes Agent to Microsoft Teams as a bot. Unlike Slack's Socket Mode, Teams delivers messages by calling a **public HTTPS webhook**, so your instance needs a publicly reachable endpoint — either a dev tunnel (local dev) or a real domain (production).
 
 Need meeting summaries from Microsoft Graph events rather than normal bot conversations? Use the dedicated setup page: [Teams Meetings](/user-guide/messaging/teams-meetings).
+
+> Run `hermes gateway setup` and pick **Microsoft Teams** for a guided walk-through.
 
 ## How the Bot Responds
 

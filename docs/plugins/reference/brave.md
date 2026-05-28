@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave plugin"
 source: "https://docs.openclaw.ai/plugins/reference/brave"
-source_hash: "20b97fb55601042322601982f2df30643ae27c996ceee76170c71819e46d59de"
+source_hash: "b5f13ae1a7861f1af2ae36188972330e9d1e3fe63ce41317abc782e7ff442f83"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/brave.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/brave
 
 # Brave plugin
 
-Adds web search provider support.
+OpenClaw Brave Search provider plugin for web search.
 
 ## Distribution
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
-source_hash: "0a4767b4e12170430285125d3faac822936946c35f7256f37b451d39c9f8f3a7"
+source_hash: "4eb84cc1cb91ac731e610300fedc94e3f3f8695716bc6a5ce691464be9e8eef3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/agents.default.md"
@@ -98,7 +98,7 @@ git commit -m "Add Clawd workspace"
 
 ## What OpenClaw does
 
-- Runs WhatsApp gateway + Pi coding agent so the assistant can read/write chats, fetch context, and run skills via the host Mac.
+- Runs WhatsApp gateway + embedded OpenClaw agent so the assistant can read/write chats, fetch context, and run skills via the host Mac.
 - macOS app manages permissions (screen recording, notifications, microphone) and exposes the `openclaw` CLI via its bundled binary.
 - Direct chats collapse into the agent's `main` session by default; groups stay isolated as `agent:<agentId>:<channel>:group:<id>` (rooms/channels: `agent:<agentId>:<channel>:channel:<id>`); heartbeats keep background tasks alive.
 

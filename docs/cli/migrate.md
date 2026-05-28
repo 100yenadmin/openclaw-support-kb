@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "87ce6a5caa14247f11d3473b7ca8087af7f8a0f457fbc3fcce98ce64f8a0fa8a"
+source_hash: "bd61fd738b72f2c577a95d732d9598235a41e273fc4641d071c8e17c91763c79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -213,7 +213,7 @@ openclaw migrate apply codex --yes --plugin google-calendar
   Apply calls app-server `plugin/install` for each selected eligible plugin,
   even if the target app-server already reports that plugin as installed and
   enabled. Migrated Codex plugins are usable only in sessions that select the
-  native Codex harness; they are not exposed to Pi, normal OpenAI provider runs,
+  native Codex harness; they are not exposed to OpenClaw provider runs,
   ACP conversation bindings, or other harnesses.
 
 ### Manual-review Codex state

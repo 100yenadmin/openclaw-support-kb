@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GitHub Copilot"
 source: "https://docs.openclaw.ai/providers/github-copilot"
-source_hash: "38aec1f93548fb51b43fdb387df7c4b2fb88420ba96b8ec2e2c93dff912c57b6"
+source_hash: "bc9186004679ded94b73d52d4749fa3de419a88b9e4728a42a2f8331aa8c15c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/github-copilot.md"
@@ -214,14 +214,11 @@ GitHub Copilot can also serve as an embedding provider for
 [memory search](/concepts/memory-search). If you have a Copilot subscription and
 have logged in, OpenClaw can use it for embeddings without a separate API key.
 
-### Auto-detection
+### Config
 
-When `memorySearch.provider` is `"auto"` (the default), GitHub Copilot is tried
-at priority 15 -- after local embeddings but before OpenAI and other paid
-providers. If a GitHub token is available, OpenClaw discovers available
-embedding models from the Copilot API and picks the best one automatically.
-
-### Explicit config
+Set `memorySearch.provider` explicitly to use GitHub Copilot embeddings. If a
+GitHub token is available, OpenClaw discovers available embedding models from
+the Copilot API and picks the best one automatically.
 
 ```json5
 {

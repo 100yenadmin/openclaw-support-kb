@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Trajectory bundles"
 source: "https://docs.openclaw.ai/tools/trajectory"
-source_hash: "2085444979210303d5aa1bcce199c389a6d75a107810e25678264cbcc8686197"
+source_hash: "1953921524bc61b857f19a30dab81aa3ef0419342d93bc1681fec40002c2ace9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/trajectory.md"
@@ -183,7 +183,7 @@ cleanup timeout is 10,000 ms. On slow disks or large stores, set
 export OPENCLAW_TRAJECTORY_FLUSH_TIMEOUT_MS=30000
 ```
 
-This controls when OpenClaw logs a `pi-trajectory-flush` timeout and continues.
+This controls when OpenClaw logs an `openclaw-trajectory-flush` timeout and continues.
 It does not change the trajectory size caps. To tune all agent cleanup steps
 that do not pass an explicit timeout, set `OPENCLAW_AGENT_CLEANUP_TIMEOUT_MS`.
 

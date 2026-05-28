@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "d18da694832b86ab604533f32c1a7e676f222b42e89eb9a323ae588d37245c70"
+source_hash: "c57694f82aeaf0608b8682488da914cf08b6fa3d8847fba4f6b34831409d89b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/models.md"
@@ -44,7 +44,7 @@ overview, while `auth.oauth` is auth-store profile health only.
 Add `--probe` to run live auth probes against each configured provider profile.
 Probes are real requests (may consume tokens and trigger rate limits).
 Use `--agent <id>` to inspect a configured agent's model/auth state. When omitted,
-the command uses `OPENCLAW_AGENT_DIR`/`PI_CODING_AGENT_DIR` if set, otherwise the
+the command uses `OPENCLAW_AGENT_DIR` if set, otherwise the
 configured default agent.
 Probe rows can come from auth profiles, env credentials, or `models.json`.
 For Codex OAuth troubleshooting, `openclaw models status`,
@@ -136,7 +136,7 @@ Options:
 - `--probe-timeout <ms>`
 - `--probe-concurrency <n>`
 - `--probe-max-tokens <n>`
-- `--agent <id>` (configured agent id; overrides `OPENCLAW_AGENT_DIR`/`PI_CODING_AGENT_DIR`)
+- `--agent <id>` (configured agent id; overrides `OPENCLAW_AGENT_DIR`)
 
 `--json` keeps stdout reserved for the JSON payload. Auth-profile, provider,
 and startup diagnostics are routed to stderr so scripts can pipe stdout directly
@@ -226,9 +226,11 @@ Notes:
   method (defaulting to that provider's `setup-token` method when it exposes
   one).
 - `paste-token` accepts a token string generated elsewhere or from automation.
-- `paste-token` requires `--provider`, prompts for the token value, and writes
-  it to the default profile id `<provider>:manual` unless you pass
+- `paste-token` requires `--provider`, prompts for the token value by default,
+  and writes it to the default profile id `<provider>:manual` unless you pass
   `--profile-id`.
+- In automation, pipe the token on stdin instead of passing it as an argument so
+  provider credentials do not appear in shell history or process lists.
 - `paste-token --expires-in <duration>` stores an absolute token expiry from a
   relative duration such as `365d` or `12h`.
 - For `openai-codex`, OpenAI API keys and ChatGPT/OAuth token material are

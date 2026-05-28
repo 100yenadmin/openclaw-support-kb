@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams plugin"
 source: "https://docs.openclaw.ai/plugins/reference/msteams"
-source_hash: "48b90aa94b0d4685f28bbf227deef7e1984e3c7901f3ce127312423a65037554"
+source_hash: "a8c64bb5794b959401ef8999f6843ea533027d80332db45ca5f622a9fdc36308"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/msteams.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/msteams
 
 # Microsoft Teams plugin
 
-Adds the Microsoft Teams channel surface for sending and receiving OpenClaw messages.
+OpenClaw Microsoft Teams channel plugin for bot conversations.
 
 ## Distribution
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WeCom (Enterprise WeChat)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom"
-source_hash: "8c4c4769d8e1115b8060295740de40cb003282c7308bf8b29f477cb2cf8fa55d"
+source_hash: "226307c93f6451aebf1fc32ffbdbb96814e9246aa7294cd03c852d7419d87815"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/wecom.md"
@@ -20,6 +20,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom
 # WeCom (Enterprise WeChat)
 
 Connect Hermes to [WeCom](https://work.weixin.qq.com/) (企业微信), Tencent's enterprise messaging platform. The adapter uses WeCom's AI Bot WebSocket gateway for real-time bidirectional communication — no public endpoint or webhook needed.
+
+See also: [WeCom Callback](./wecom-callback.md) for inbound webhook setup.
 
 ## Prerequisites
 

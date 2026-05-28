@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
-source_hash: "8f9940648dd18194d334de29cb20bce625555a85ece4c4f5cf4ac1e71ba62d68"
+source_hash: "9359ddc0b059675b4868ae106a4f37fae33eeb2317d7373ef338c0f329f19276"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openresponses-http-api.md"
@@ -272,7 +272,7 @@ Defaults when omitted:
 - `images.maxBytes`: 10MB
 - `images.maxRedirects`: 3
 - `images.timeoutMs`: 10s
-- HEIC/HEIF `input_image` sources are accepted and normalized to JPEG before provider delivery.
+- HEIC/HEIF `input_image` sources are accepted when a system converter is available and are normalized to JPEG before provider delivery. Supported converters are macOS `sips`, ImageMagick, GraphicsMagick, or ffmpeg.
 
 Security note:
 

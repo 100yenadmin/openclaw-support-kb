@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu plugin"
 source: "https://docs.openclaw.ai/plugins/reference/feishu"
-source_hash: "10e7e2cb0921cccecdf0a999a438ed1e6d96283ed236af5d4a0e43fae3789e4b"
+source_hash: "cbbd5e7c296f3cd33bbdc7c1dbc47d69645f6ee7b9bec17c953adc5d9928fa2c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/feishu.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/feishu
 
 # Feishu plugin
 
-Adds the Feishu channel surface for sending and receiving OpenClaw messages.
+OpenClaw Feishu/Lark channel plugin for chats and workplace tools (community maintained by @m1heng).
 
 ## Distribution
 

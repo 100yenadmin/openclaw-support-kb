@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp plugin"
 source: "https://docs.openclaw.ai/plugins/reference/whatsapp"
-source_hash: "27ae466dbb4f956ffe1ec3458c97db569442e6e616d387d16e74b3271706eb85"
+source_hash: "5b8e570443ff0e13fc944ba722747f8f940139be44ecdac4da460e8266b15978"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/whatsapp.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/whatsapp
 
 # WhatsApp plugin
 
-Adds the WhatsApp channel surface for sending and receiving OpenClaw messages.
+OpenClaw WhatsApp channel plugin for WhatsApp Web chats.
 
 ## Distribution
 

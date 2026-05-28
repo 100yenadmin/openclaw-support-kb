@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Docker Quickstart"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DOCKER.md"
-source_hash: "b6b4a01e079abcf8d675f8b76eb1a76b908237b64de988f9462a6c106b96fb14"
+source_hash: "0e0aa0bf9182e8784f3ac7f36b77b80d57782d26d4b5d749d024a2ac85685a14"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/docker.md"
@@ -134,6 +134,16 @@ services:
 - Better Auth base URL defaults
 - bootstrap invite URL defaults
 - hostname allowlist defaults (hostname extracted from URL)
+
+For fresh `authenticated/private` Docker or appliance-style installs, the first
+admin can now be claimed entirely from the browser after sign-in. Open the
+Paperclip URL, sign in or create an account, then choose `Claim this instance`
+on the setup screen. This browser claim is disabled for `authenticated/public`;
+public deployments should run the high-entropy CLI invite fallback instead:
+
+```sh
+pnpm paperclipai auth bootstrap-ceo
+```
 
 Granular overrides remain available if needed (`PAPERCLIP_AUTH_PUBLIC_BASE_URL`, `BETTER_AUTH_URL`, `BETTER_AUTH_TRUSTED_ORIGINS`, `PAPERCLIP_ALLOWED_HOSTNAMES`).
 

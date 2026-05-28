@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "de8434f787b56b4b1a2ca1ba7d2c983b2eba1d551977c914811072e03a6612e0"
+source_hash: "0aa784e1e6693a208071a0719875319b2e604eb8ec73bcdb7923d697a38d270a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -14,7 +14,7 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/tools/acp-agents
 
 [Agent Client Protocol (ACP)](https://agentclientprotocol.com/) sessions
-let OpenClaw run external coding harnesses (for example Pi, Claude Code,
+let OpenClaw run external coding harnesses (for example Claude Code,
 Cursor, Copilot, Droid, OpenClaw ACP, OpenCode, Gemini CLI, and other
 supported ACPX harnesses) through an ACP backend plugin.
 
@@ -116,7 +116,6 @@ or `sessions_spawn({ runtime: "acp", agentId: "<id>" })` targets:
 | `kiro`     | Kiro CLI                                       | Adapter availability and model control depend on the installed CLI.                 |
 | `opencode` | OpenCode ACP adapter                           | Requires OpenCode CLI/provider auth.                                                |
 | `openclaw` | OpenClaw Gateway bridge through `openclaw acp` | Lets an ACP-aware harness talk back to an OpenClaw Gateway session.                 |
-| `pi`       | Pi/embedded OpenClaw runtime                   | Used for OpenClaw-native harness experiments.                                       |
 | `qwen`     | Qwen Code / Qwen CLI                           | Requires Qwen-compatible auth on the host.                                          |
 
 Custom acpx agent aliases can be configured in acpx itself, but OpenClaw
@@ -906,6 +905,13 @@ permission modes, see
 | Harness sees `<<
 BEGIN_OPENCLAW_INTERNAL_CONTEXT
 >>`                        | Internal event envelope leaked across the ACP boundary.                                                                | Update OpenClaw and rerun the completion flow; external harnesses should receive plain completion prompts only.                                                          |
+
+Note
+
+`Command blocked by PreToolUse hook: Native hook relay unavailable` belongs to
+the native Codex hook relay, not ACP/acpx. In a bound Codex chat, start a fresh
+session with `/new` or `/reset`; if it persists, restart the Codex app-server or
+OpenClaw Gateway. See [Codex harness troubleshooting](/plugins/codex-harness#troubleshooting).
 
 ## Related
 

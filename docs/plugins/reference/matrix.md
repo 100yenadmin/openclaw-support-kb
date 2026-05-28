@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix plugin"
 source: "https://docs.openclaw.ai/plugins/reference/matrix"
-source_hash: "ed7e55b2afe68943e024ce45ae1599499f830355754ec4a0ef09a5c4d7b1fba4"
+source_hash: "e111d0c5a6b4efc1c37c2869e164155d09e79204fa3c76201ef86b42baeb68df"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/matrix.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/matrix
 
 # Matrix plugin
 
-Adds the Matrix channel surface for sending and receiving OpenClaw messages.
+OpenClaw Matrix channel plugin for rooms and direct messages.
 
 ## Distribution
 

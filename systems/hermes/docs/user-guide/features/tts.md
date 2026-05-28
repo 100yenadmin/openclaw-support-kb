@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice & TTS"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tts"
-source_hash: "4b8ecd3d81090b1abe844f444ed33aa5649a952dbcf2a5ba33464fd556be2817"
+source_hash: "096e2ec20e26b457f07e410b20d668a3e263af33213eb8214faa0a92afa7d526"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tts.md"
@@ -126,6 +126,7 @@ Each provider has a documented per-request input-character cap. Hermes truncates
 | ElevenLabs | Model-aware (see below) |
 | NeuTTS | 2000 |
 | KittenTTS | 2000 |
+| Piper | 5000 |
 
 **ElevenLabs** picks a cap from the configured `model_id`:
 

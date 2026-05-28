@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Lancedb plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-lancedb"
-source_hash: "ac11992e0aafb829c44230a2de31675c20cb7f8720593a3e55bab9d2a963a4b3"
+source_hash: "292542fb7c3d6355ec9a89f7fddaf03a85d9b4809ca1109792759dd4d2a32c90"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-lancedb.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/memory-lancedb
 
 # Memory Lancedb plugin
 
-Adds agent-callable tools.
+OpenClaw LanceDB-backed long-term memory plugin with auto-recall, auto-capture, and vector search.
 
 ## Distribution
 

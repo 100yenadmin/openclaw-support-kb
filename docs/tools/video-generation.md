@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "ff029937bcee0f75e510bef8f0604fb7ea1de1c8c355b6dd14a5da50f4799b31"
+source_hash: "508c9b06228a84257913e09a07c7ae2a966c787c0d5195949b3be354887864d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -74,9 +74,9 @@ session:
 2. The provider processes the job in the background (typically 30 seconds to several minutes depending on the provider and resolution; slow queue-backed providers can run up to the configured timeout).
 3. When the video is ready, OpenClaw wakes the same session with an internal completion event.
 4. The agent tells the user and attaches the finished video through the
-   message tool. If the requester session is inactive and some generated
-   video is still missing from message-tool delivery, OpenClaw sends an
-   idempotent direct fallback with only the missing video.
+   message tool. If the requester session is inactive or its active wake
+   fails, and some generated video is still missing from message-tool delivery,
+   OpenClaw sends an idempotent direct fallback with only the missing video.
 
 While a job is in flight, duplicate `video_generate` calls in the same
 session return the current task status instead of starting another

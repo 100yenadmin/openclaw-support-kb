@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models CLI"
 source: "https://docs.openclaw.ai/concepts/models"
-source_hash: "3f5d688f87ee29a870404eedb85c1763eac19feb20a4561fff40f56a27cf8935"
+source_hash: "a35cea414abcef834bd87cf1ee6bb31dc2d56e3e370b2a33a5f35eaf5acbabc8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/models.md"
@@ -28,7 +28,7 @@ Model providers
 
 Agent runtimes
 
-    PI, Codex, and other agent loop runtimes.
+    OpenClaw, Codex, and other agent loop runtimes.
 
 
 Configuration reference
@@ -115,7 +115,8 @@ It can set up model + auth for common providers, including **OpenAI Code (Codex)
 
 Note
 
-Model refs are normalized to lowercase. Provider aliases like `z.ai/*` normalize to `zai/*`.
+Model refs are normalized to lowercase. Provider IDs are otherwise exact; use the
+provider ID advertised by the plugin.
 
 Provider configuration examples (including OpenCode) live in [OpenCode](/providers/opencode).
 
@@ -403,7 +404,7 @@ Marker persistence is source-authoritative: OpenClaw writes markers from the act
 
 ## Related
 
-- [Agent runtimes](/concepts/agent-runtimes) — PI, Codex, and other agent loop runtimes
+- [Agent runtimes](/concepts/agent-runtimes) — OpenClaw, Codex, and other agent loop runtimes
 - [Configuration reference](/gateway/config-agents#agent-defaults) — model config keys
 - [Image generation](/tools/image-generation) — image model configuration
 - [Model failover](/concepts/model-failover) — fallback chains

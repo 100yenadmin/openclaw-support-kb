@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message lifecycle refactor"
 source: "https://docs.openclaw.ai/concepts/message-lifecycle-refactor"
-source_hash: "ac17809e8b40cbe2c3379e9a8733b9c2783a6551e343a7d4c53586e752eec73f"
+source_hash: "16b599abce5df35efa0b7b58662c48b9f2d6339d39e6b052c310a19ca645493d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/message-lifecycle-refactor.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Message lifecycle refactor
 Source: https://docs.openclaw.ai/concepts/message-lifecycle-refactor
 
-This page is the target design for replacing scattered channel turn, reply
+This page is the target design for replacing scattered channel inbound, reply
 dispatch, preview streaming, and outbound delivery helpers with one durable
 message lifecycle.
 
@@ -26,14 +26,14 @@ The short version:
   commit, fail.
 - Receiving must be context based too: normalize, dedupe, route, record,
   dispatch, platform ack, fail.
-- The public plugin SDK should collapse to one small channel-message surface.
+- The public plugin SDK should collapse to one small channel-outbound surface.
 
 ## Problems
 
 The current channel stack grew from several valid local needs:
 
-- Simple inbound adapters use `runtime.channel.turn.run`.
-- Rich adapters use `runtime.channel.turn.runPrepared`.
+- Simple inbound adapters use `runtime.channel.inbound.run`.
+- Rich adapters use `runtime.channel.inbound.runPreparedReply`.
 - Legacy helpers use `dispatchInboundReplyWithBase`,
   `recordInboundSessionAndDispatchReply`, reply payload helpers, reply chunking,
   reply references, and outbound runtime helpers.
@@ -73,7 +73,7 @@ non-durable policy.
 - Shared preview, edit, stream, finalization, retry, recovery, and receipt
   semantics.
 - A small plugin SDK surface that third-party plugins can learn and maintain.
-- Compatibility for existing `channel.turn` callers during migration.
+- Compatibility for existing inbound reply compatibility callers during migration.
 - Clear extension points for new channel capabilities.
 - No platform-specific branches in core.
 - No token-delta channel messages. Channel streaming remains message preview,
@@ -83,7 +83,7 @@ non-durable policy.
 
 ## Non goals
 
-- Do not remove `runtime.channel.turn.*` in the first phase.
+- Do not force every existing channel onto durable message delivery in the first phase.
 - Do not force every channel into the same native transport behavior.
 - Do not teach core Telegram topics, Slack native streams, Matrix redactions,
   Feishu cards, QQ voice, or Teams activities.
@@ -714,22 +714,22 @@ should not need them.
 
 Bundled plugins may keep internal helper imports through reserved runtime
 subpaths while migrating. Public docs should steer plugin authors to
-`plugin-sdk/channel-message` once it exists.
+`plugin-sdk/channel-outbound` once it exists.
 
-## Relationship to channel turn
+## Relationship to channel inbound
 
-`runtime.channel.turn.*` should stay during migration.
+`runtime.channel.inbound.*` is the runtime bridge during migration.
 
 It should become a compatibility adapter:
 
 ```text
-channel.turn.run
+channel.inbound.run
   -> messages.receive context
   -> session dispatch
   -> messages.send context for visible output
 ```
 
-`channel.turn.runPrepared` should also remain initially:
+`channel.inbound.runPreparedReply` should also remain initially:
 
 ```text
 channel-owned dispatcher
@@ -738,10 +738,8 @@ channel-owned dispatcher
   -> messages.send for final delivery
 ```
 
-After all bundled plugins and known third-party compatibility paths are bridged,
-`channel.turn` can be deprecated. It should not be removed until there is a
-published SDK migration path and contract tests proving old plugins still work
-or fail with a clear version error.
+The old `channel.turn` runtime surface was removed. Runtime callers use
+`channel.inbound.*`; channel docs and SDK subpaths use inbound/message nouns.
 
 ## Compatibility guardrails
 
@@ -750,10 +748,10 @@ existing delivery callback has side effects beyond "send this payload".
 
 Legacy entry points are non-durable by default:
 
-- `channel.turn.run` and `dispatchAssembledChannelTurn` use the channel's
+- `channel.inbound.run` and `dispatchChannelInboundReply` use the channel's
   delivery callback unless that channel explicitly supplies an audited durable
   policy/options object.
-- `channel.turn.runPrepared` stays channel-owned until the prepared dispatcher
+- `channel.inbound.runPreparedReply` stays channel-owned until the prepared dispatcher
   explicitly calls the send context.
 - Public compatibility helpers such as `recordInboundSessionAndDispatchReply`,
   `dispatchInboundReplyWithBase`, and direct-DM helpers never inject generic
@@ -946,7 +944,7 @@ Core policy:
 - Make `deliverOutboundPayloads` call `messages.send`.
 - Make final-send durability the default and fail closed when the durable intent
   cannot be written in the new message lifecycle, after the adapter declares
-  replay safety. Existing channel-turn and SDK compatibility paths remain
+  replay safety. Existing inbound runner and SDK compatibility paths remain
   direct-send by default during this phase.
 - Record receipts consistently.
 - Return receipts and delivery results to the original dispatcher caller instead
@@ -954,9 +952,9 @@ Core policy:
 - Persist message origin through durable send intents so recovery, replay, and
   chunked sends preserve OpenClaw operational provenance.
 
-### Phase 3: Channel Turn Bridge
+### Phase 3: Channel Inbound Bridge
 
-- Reimplement `channel.turn.run` and `dispatchAssembledChannelTurn` on top of
+- Reimplement `channel.inbound.run` and `dispatchChannelInboundReply` on top of
   `messages.receive` and `messages.send`.
 - Keep current fact types stable.
 - Keep legacy behavior by default. An assembled-turn channel becomes durable
@@ -994,12 +992,12 @@ Core policy:
 
 ### Phase 6: Public SDK
 
-- Add `openclaw/plugin-sdk/channel-message`.
+- Add `openclaw/plugin-sdk/channel-outbound`.
 - Document it as the preferred channel plugin API.
 - Update package exports, entrypoint inventory, generated API baselines, and
   plugin SDK docs.
 - Include `MessageOrigin`, origin encode/decode hooks, and the shared
-  `shouldDropOpenClawEcho` predicate in the channel-message SDK surface.
+  `shouldDropOpenClawEcho` predicate in the channel-outbound SDK surface.
 - Keep compatibility wrappers for old subpaths.
 - Mark reply-named SDK helpers as deprecated in docs after bundled plugins are
   migrated.
@@ -1020,9 +1018,9 @@ Move all non-reply outbound producers onto `messages.send`:
 This is where the model stops being "agent replies" and becomes "OpenClaw sends
 messages".
 
-### Phase 8: Deprecate Turn
+### Phase 8: Remove Turn-Named Compatibility
 
-- Keep `channel.turn` as a wrapper for at least one compatibility window.
+- Keep inbound/message-named wrappers as the compatibility window.
 - Publish migration notes.
 - Run plugin SDK compatibility tests against old imports.
 - Remove or hide old internal helpers only after no bundled plugin needs them
@@ -1046,10 +1044,10 @@ Unit tests:
 
 Integration tests:
 
-- `channel.turn.run` simple adapter still records and sends.
+- `channel.inbound.run` simple adapter still records and sends.
 - Legacy assembled-event delivery does not become durable unless the channel
   explicitly opts in.
-- `channel.turn.runPrepared` bridge still records and finalizes.
+- `channel.inbound.runPreparedReply` bridge still records and finalizes.
 - Public compatibility helpers call caller-owned delivery callbacks by default
   and do not generic-send before those callbacks.
 - Durable fallback delivery replays the whole projected payload array after
@@ -1119,7 +1117,7 @@ Validation:
 - Whether durable live preview state should be stored in the same queue record
   as the final send intent or in a sibling live-state store.
 - How long compatibility wrappers stay documented after
-  `plugin-sdk/channel-message` ships.
+  `plugin-sdk/channel-outbound` ships.
 - Whether third-party plugins should implement receive adapters directly or only
   provide normalize/send/live hooks through `defineChannelMessageAdapter`.
 - Which receipt fields are safe to expose in public SDK versus internal runtime
@@ -1138,7 +1136,7 @@ Validation:
   documented compatibility wrapper.
 - Every preview/edit/stream channel uses `messages.live` for draft state and
   finalization.
-- `channel.turn` is only a wrapper.
+- `channel.inbound` is only a wrapper.
 - Reply-named SDK helpers are compatibility exports, not the recommended path.
 - Durable recovery can replay pending final sends after restart without losing
   the final response or duplicating already committed sends; sends whose
@@ -1146,7 +1144,7 @@ Validation:
   at-least-once for that adapter.
 - Durable final sends fail closed when the durable intent cannot be written,
   unless a caller explicitly selected a documented non-durable mode.
-- Legacy channel-turn and SDK compatibility helpers default to direct
+- Legacy SDK compatibility helpers default to direct
   channel-owned delivery; generic durable send is explicit opt-in only.
 - Receipts preserve all platform message ids for multi-part deliveries and a
   primary id for threading/edit convenience.
@@ -1169,6 +1167,6 @@ Validation:
 - [Streaming and chunking](/concepts/streaming)
 - [Progress drafts](/concepts/progress-drafts)
 - [Retry policy](/concepts/retry)
-- [Channel turn kernel](/plugins/sdk-channel-turn)
+- [Channel inbound API](/plugins/sdk-channel-inbound)
 
 ---

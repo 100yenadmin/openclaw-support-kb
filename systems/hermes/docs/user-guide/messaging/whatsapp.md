@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp"
-source_hash: "e40819c331160d7918d329a42a9499a1b4d44d5663b1effc732281927e2800b8"
+source_hash: "c07097528b70ed0634cc7fe573eb4c9bab1c0c65b10a4cadf1cb1565d78dd902"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp.md"
@@ -20,6 +20,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp
 # WhatsApp Setup
 
 Hermes connects to WhatsApp through a built-in bridge based on **Baileys**. This works by emulating a WhatsApp Web session — **not** through the official WhatsApp Business API. No Meta developer account or Business verification is required.
+
+> Run `hermes gateway setup` and pick **WhatsApp** for a guided walk-through.
 
 :::warning Unofficial API — Ban Risk
 WhatsApp does **not** officially support third-party bots outside the Business API. Using a third-party bridge carries a small risk of account restrictions. To minimize risk:

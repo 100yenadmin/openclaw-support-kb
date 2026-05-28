@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "a54320853a27558002f422f51bf91ddfbb2263de6f672d01a3b2f63160d092b2"
+source_hash: "27b717921b77ffc1cdc61d4d06d9f0cac8918d904f4988f11b1ffd685d8730c5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -171,9 +171,10 @@ Example:
 ## Authorization model
 
 `/exec` is only honored for **authorized senders** (channel allowlists/pairing plus `commands.useAccessGroups`).
-It updates **session state only** and does not write config. To hard-disable exec, deny it via tool
-policy (`tools.deny: ["exec"]` or per-agent). Host approvals still apply unless you explicitly set
-`security=full` and `ask=off`.
+It updates **session state only** and does not write config. Authorized external channel senders may
+set these session defaults. Internal gateway/webchat clients need `operator.admin` to persist them.
+To hard-disable exec, deny it via tool policy (`tools.deny: ["exec"]` or per-agent). Host approvals
+still apply unless you explicitly set `security=full` and `ask=off`.
 
 ## Exec approvals (companion app / node host)
 

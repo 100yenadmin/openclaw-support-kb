@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "b5bc81b8841d92b9d7e5505b51cdf084a2791d6a6fb0efce9591d3b7ae32fee6"
+source_hash: "c5687437432d33c965b67c57ded73ed460d033a4f7421be41b67a89c4ca17d9f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -20,6 +20,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashb
 # Web Dashboard
 
 The web dashboard is a browser-based UI for managing your Hermes Agent installation. Instead of editing YAML files or running CLI commands, you can configure settings, manage API keys, and monitor sessions from a clean web interface.
+
+:::tip
+Hosted-mode auth uses Nous Portal OAuth; if you also want the dashboard to talk to a real backend, `hermes setup --portal` wires up the model and tool gateway too. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## Quick Start
 

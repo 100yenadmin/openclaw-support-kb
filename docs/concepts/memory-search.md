@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "6396463ea9b043ec759c2de24d446b3e4a7f8fa2acc29796b23ca636bc7a395b"
+source_hash: "a89e6c41fb0b43457e15c7bb6a3be9a48be175b5d78e465c57db24897752f656"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -19,25 +19,24 @@ chunks and searching them using embeddings, keywords, or both.
 
 ## Quick start
 
-If you have a GitHub Copilot subscription, OpenAI, Gemini, Voyage, or Mistral
-API key configured, memory search works automatically. To set a provider
-explicitly:
+Memory search uses OpenAI embeddings by default. To use another embedding
+backend, set a provider explicitly:
 
 ```json5
 {
   agents: {
     defaults: {
       memorySearch: {
-        provider: "openai", // or "gemini", "local", "ollama", etc.
+        provider: "openai", // or "gemini", "local", "ollama", "openai-compatible", etc.
       },
     },
   },
 }
 ```
 
-For multi-endpoint setups, `provider` can also be a custom
-`models.providers.<id>` entry, such as `ollama-5080`, when that provider sets
-`api: "ollama"` or another embedding adapter owner.
+For multi-endpoint setups with memory-specific providers, `provider` can also
+be a custom `models.providers.<id>` entry, such as `ollama-5080`, when that
+provider sets `api: "ollama"` or another memory embedding adapter owner.
 
 For local embeddings with no API key, set `provider: "local"`. Source checkouts
 may still require native build approval: `pnpm approve-builds` then
@@ -50,16 +49,18 @@ for indexed chunks. Configure those with `memorySearch.queryInputType` and
 
 ## Supported providers
 
-| Provider       | ID               | Needs API key | Notes                                                |
-| -------------- | ---------------- | ------------- | ---------------------------------------------------- |
-| Bedrock        | `bedrock`        | No            | Auto-detected when the AWS credential chain resolves |
-| Gemini         | `gemini`         | Yes           | Supports image/audio indexing                        |
-| GitHub Copilot | `github-copilot` | No            | Auto-detected, uses Copilot subscription             |
-| Local          | `local`          | No            | GGUF model, ~0.6 GB download                         |
-| Mistral        | `mistral`        | Yes           | Auto-detected                                        |
-| Ollama         | `ollama`         | No            | Local, must set explicitly                           |
-| OpenAI         | `openai`         | Yes           | Auto-detected, fast                                  |
-| Voyage         | `voyage`         | Yes           | Auto-detected                                        |
+| Provider          | ID                  | Needs API key | Notes                         |
+| ----------------- | ------------------- | ------------- | ----------------------------- |
+| Bedrock           | `bedrock`           | No            | Uses AWS credential chain     |
+| DeepInfra         | `deepinfra`         | Yes           | Default: `BAAI/bge-m3`        |
+| Gemini            | `gemini`            | Yes           | Supports image/audio indexing |
+| GitHub Copilot    | `github-copilot`    | No            | Uses Copilot subscription     |
+| Local             | `local`             | No            | GGUF model, ~0.6 GB download  |
+| Mistral           | `mistral`           | Yes           |                               |
+| Ollama            | `ollama`            | No            | Local/self-hosted             |
+| OpenAI            | `openai`            | Yes           | Default                       |
+| OpenAI-compatible | `openai-compatible` | Usually       | Generic `/v1/embeddings`      |
+| Voyage            | `voyage`            | Yes           |                               |
 
 ## How search works
 

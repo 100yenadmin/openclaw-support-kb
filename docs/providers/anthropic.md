@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "a1d68de120cf63853c0385c11ac0979183e0abeb957f2d20bf95346e69095c43"
+source_hash: "b5600b27a67bc140602c332fe3df65b53254b0cc666f0db7f51d829b57711976"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/anthropic.md"
@@ -125,6 +125,16 @@ Verify the model is available
 Note
 
     Setup and runtime details for the Claude CLI backend are in [CLI Backends](/gateway/cli-backends).
+
+
+
+Warning
+
+    Claude CLI reuse expects the OpenClaw process to run on the same host as the
+    Claude CLI login. Container installs such as [Podman](/install/podman) do
+    not mount host `~/.claude` into setup or runtime; use an Anthropic API key
+    there, or choose a provider with OpenClaw-managed OAuth such as
+    [OpenAI Codex](/providers/openai).
 
 
     ### Config example

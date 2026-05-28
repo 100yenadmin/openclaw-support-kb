@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "860954f8d2ff3d248040b83a86ca56eed3886c1a69443b6f9356588996477c5f"
+source_hash: "873e628ae93b9e2d0059a7e42bcb7fef6cd1b9455a38c7de71ad586154d9876e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -70,7 +70,7 @@ exhaustive):
 | `security.audit.suppressions.active`                          | info          | Audit output has configured suppressions and may be filtered                         | `security.audit.suppressions`                                                                        | no       |
 | `config.secrets.gateway_password_in_config`                   | warn          | Gateway password is stored directly in config                                        | `gateway.auth.password`                                                                              | no       |
 | `config.secrets.hooks_token_in_config`                        | warn          | Hook bearer token is stored directly in config                                       | `hooks.token`                                                                                        | no       |
-| `hooks.token_reuse_gateway_token`                             | critical      | Hook ingress token also unlocks Gateway auth                                         | `hooks.token`, `gateway.auth.token`                                                                  | no       |
+| `hooks.token_reuse_gateway_token`                             | critical      | Hook ingress token also unlocks Gateway auth                                         | `hooks.token`, `gateway.auth.token`, `gateway.auth.password`                                         | no       |
 | `hooks.token_too_short`                                       | warn          | Easier brute force on hook ingress                                                   | `hooks.token`                                                                                        | no       |
 | `hooks.default_session_key_unset`                             | warn          | Hook agent runs fan out into generated per-request sessions                          | `hooks.defaultSessionKey`                                                                            | no       |
 | `hooks.allowed_agent_ids_unrestricted`                        | warn/critical | Authenticated hook callers may route to any configured agent                         | `hooks.allowedAgentIds`                                                                              | no       |

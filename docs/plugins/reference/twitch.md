@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Twitch plugin"
 source: "https://docs.openclaw.ai/plugins/reference/twitch"
-source_hash: "39f23dba41dd4a2071e0284b560495cbd7bd0c3ed8782539cc83fe73f229b58f"
+source_hash: "61d40c657461a386a18a67dfe451029dd101ceb8905ae9c0398a85a6376c5130"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/twitch.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/twitch
 
 # Twitch plugin
 
-Adds the Twitch channel surface for sending and receiving OpenClaw messages.
+OpenClaw Twitch channel plugin for chat and moderation workflows.
 
 ## Distribution
 

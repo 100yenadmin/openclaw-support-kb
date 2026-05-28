@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/ntfy.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy"
-source_hash: "d190e41df5bf42f624fca7d7da3abf49ead9555c52de891413b33be72635cf48"
+source_hash: "8ec499f2d121a506e7f52889ec0d36bbf2cb9e783b4f96e9df6e45741756f1bf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/ntfy.md"
@@ -22,6 +22,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy
 [ntfy](https://ntfy.sh/) is a simple HTTP-based pub-sub notification service. It works with the free public server at `ntfy.sh` or any self-hosted instance, and supports any client that can make HTTP requests — phones, browsers, scripts, watches.
 
 ntfy makes a great lightweight push channel for Hermes: subscribe to a topic from the [ntfy mobile app](https://ntfy.sh/docs/subscribe/phone/), send messages to the topic to talk to the agent, get the response back on your phone.
+
+> Run `hermes gateway setup` and pick **ntfy** for a guided walk-through.
 
 ## Prerequisites
 

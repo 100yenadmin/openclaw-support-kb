@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "db4985a459316f719801e2d88d17f16acc39cb26973e3f8c02b2f749c9c1f89a"
+source_hash: "948f18667dfb144a13b8c83a78911fb533ccc9d5e825e706b5623c13498b6c2c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -316,7 +316,7 @@ available timeout in this order:
   image-generation default.
 - For the media-understanding `image` tool, `tools.media.image.timeoutSeconds`
   converted to milliseconds, or the 60 second media default.
-- The 30 second dynamic-tool default.
+- The 90 second dynamic-tool default.
 
 Dynamic tool budgets are capped at 600000 ms. On timeout, OpenClaw aborts the
 tool signal where supported and returns a failed dynamic-tool response to Codex
@@ -359,17 +359,17 @@ If discovery fails or times out, OpenClaw uses a bundled fallback catalog for:
 - GPT-5.4 mini
 - GPT-5.2
 
-The current bundled harness is `@openai/codex` `0.132.0`. A `model/list` probe
+The current bundled harness is `@openai/codex` `0.134.0`. A `model/list` probe
 against that bundled app-server returned:
 
-| Model id            | Default | Hidden | Input modalities | Reasoning efforts        |
-| ------------------- | ------- | ------ | ---------------- | ------------------------ |
-| `gpt-5.5`           | Yes     | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.4`           | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.4-mini`      | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.3-codex`     | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.2`           | No      | No     | text, image      | low, medium, high, xhigh |
-| `codex-auto-review` | No      | Yes    | text, image      | low, medium, high, xhigh |
+| Model id              | Default | Hidden | Input modalities | Reasoning efforts        |
+| --------------------- | ------- | ------ | ---------------- | ------------------------ |
+| `gpt-5.5`             | Yes     | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.4`             | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.4-mini`        | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.3-codex`       | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.3-codex-spark` | No      | No     | text             | low, medium, high, xhigh |
+| `gpt-5.2`             | No      | No     | text, image      | low, medium, high, xhigh |
 
 Hidden models can be returned by the app-server catalog for internal or
 specialized flows, but they are not normal model-picker choices.
@@ -426,8 +426,15 @@ files. `SOUL.md`, `IDENTITY.md`, `TOOLS.md`, and `USER.md` are forwarded as
 OpenClaw Codex developer instructions because they define the active agent,
 available workspace guidance, and user profile. `HEARTBEAT.md` content is not
 injected; heartbeat turns get a collaboration-mode pointer to read the file when
-it exists and is non-empty. `BOOTSTRAP.md` and `MEMORY.md` when present are
-forwarded as OpenClaw turn input reference context.
+it exists and is non-empty. `MEMORY.md` content from the configured agent
+workspace is not pasted into native Codex turn input when memory tools are
+available for that workspace; when it exists, the harness adds a small
+workspace-memory pointer and Codex should use `memory_search` or `memory_get`
+when durable memory is relevant. If tools are disabled, memory search is
+unavailable, or the active workspace differs from the agent memory workspace,
+`MEMORY.md` uses the normal bounded turn-context path.
+`BOOTSTRAP.md` when present is forwarded as OpenClaw turn input reference
+context.
 
 ## Environment overrides
 

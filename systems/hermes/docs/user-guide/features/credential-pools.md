@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/credential-pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "1b346193479d8e43fa8ac2fa9c203454d88e2ba023f4f4841a1367254a957bac"
+source_hash: "a2bd3c225b3aa1d9756a707902d0f6289ee5f9b87a9cd843266dabf5f878e22d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/credentia
 Credential pools let you register multiple API keys or OAuth tokens for the same provider. When one key hits a rate limit or billing quota, Hermes automatically rotates to the next healthy key — keeping your session alive without switching providers.
 
 This is different from [fallback providers](./fallback-providers.md), which switch to a *different* provider entirely. Credential pools are same-provider rotation; fallback providers are cross-provider failover. Pools are tried first — if all pool keys are exhausted, *then* the fallback provider activates.
+
+:::tip
+Credential pools are mainly for API-key providers (OpenRouter, Anthropic). A single [Nous Portal](/integrations/nous-portal) OAuth covers 300+ models, so most users don't need a pool when on Portal.
+:::
 
 ## How It Works
 

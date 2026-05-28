@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "c0c818432033ff5f359ea3bddb6080a288fa3e8ae9b91a0c1ad37f31568186a4"
+source_hash: "8edb3f824bf1ea527fddad63d856c8252901d3353ab800b4939c10f16051a4ac"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -90,6 +90,13 @@ pnpm dev --bind lan
 ```
 
 This runs dev as `authenticated/private` with a private-network bind preset.
+On a fresh authenticated/private instance, open the app, sign in or create an
+account, and use the setup screen to claim the first instance admin from the
+browser. The CLI fallback remains:
+
+```sh
+pnpm paperclipai auth bootstrap-ceo
+```
 
 For Tailscale-only reachability on a detected tailnet address:
 

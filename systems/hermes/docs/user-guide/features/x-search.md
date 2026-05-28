@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/x-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "fb7bbcb8221b025deebe6a599b0d7cb8553f0a701dcecfc31c4618dcc1301c24"
+source_hash: "5cc05dbfccb581344b7f98fa3768e6b69c1adcc3412a05cb766b0c3978bf2dda"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search
 The `x_search` tool lets the agent search X (Twitter) posts, profiles, and threads directly. It's backed by xAI's built-in `x_search` tool on the Responses API at `https://api.x.ai/v1/responses` — Grok itself runs the search server-side and returns synthesized results with citations to the originating posts.
 
 **Use this instead of `web_search`** when you specifically want current discussion, reactions, or claims **on X**. For general web pages, keep using `web_search` / `web_extract`.
+
+:::tip
+If you're paying Portal for an xAI model anyway, Live Search calls bill against the same xAI key configured for chat. See [Nous Portal](/integrations/nous-portal).
+:::
 
 ## Authentication
 
