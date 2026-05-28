@@ -40,7 +40,7 @@ export const GBRAIN_VERIFY_QUERIES = [
   {
     label: "Hermes configuration docs",
     query: "Hermes Agent configuration config.yaml gateway",
-    strictPatterns: [/\bHermes Agent\b/i, /\bconfig\.yaml\b/i],
+    strictPatterns: [/\bHermes Agent\b/i, /(\bconfig\.yaml\b|systems\/hermes\/docs\/user-guide\/configuration)/i],
   },
   {
     label: "Paperclip Mission Control docs",

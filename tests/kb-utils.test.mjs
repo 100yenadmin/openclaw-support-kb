@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  GBRAIN_VERIFY_QUERIES,
   buildSupportDraft,
   docsPathFromSource,
   composioToolkitCatalogPage,
@@ -292,6 +293,19 @@ channels.telegram.allowFrom accepts numeric user IDs; groupAllowFrom gates group
   const stalePath = validateGbrainSearchOutput("[0.9] /Users/test/.gbrain/sources/openclaw-support-kb.pre-git-123/docs/index.md");
   assert.equal(stalePath.ok, false);
   assert.match(stalePath.reason, /pre-git backup/);
+});
+
+test("Hermes search verification accepts canonical configuration doc path snippets", () => {
+  const hermesCheck = GBRAIN_VERIFY_QUERIES.find((item) => item.label === "Hermes configuration docs");
+  assert.ok(hermesCheck);
+
+  const result = validateGbrainSearchOutput(`[1.0000] systems/hermes/docs/user-guide/configuration -- # Configuration
+
+Source System: Hermes Agent
+Local KB namespace: hermes-agent`, {
+    strictPatterns: hermesCheck.strictPatterns,
+  });
+  assert.equal(result.ok, true);
 });
 
 test("validateAgentScanSpec requires pinned snyk-agent-scan semver", () => {
