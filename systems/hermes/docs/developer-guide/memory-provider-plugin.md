@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/memory-provider-plugin"
-source_hash: "559687da026f527df20c5b30b403c7f2d8598944138fdbba37fea059b4dfceb9"
+source_hash: "9176f45815ab5fe99e338983bd22658fc6d19ff644a1f0da091b3c6cdc581926"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/memory-provider-plugin.md"
@@ -167,10 +167,10 @@ hooks:
 **`sync_turn()` MUST be non-blocking.** If your backend has latency (API calls, LLM processing), run the work in a daemon thread:
 
 ```python
-def sync_turn(self, user_content, assistant_content):
+def sync_turn(self, user_content, assistant_content, *, session_id="", messages=None):
     def _sync():
         try:
-            self._api.ingest(user_content, assistant_content)
+            self._api.ingest(user_content, assistant_content, session_id=session_id, messages=messages)
         except Exception as e:
             logger.warning("Sync failed: %s", e)
 
@@ -179,6 +179,16 @@ def sync_turn(self, user_content, assistant_content):
     self._sync_thread = threading.Thread(target=_sync, daemon=True)
     self._sync_thread.start()
 ```
+
+`messages` is optional OpenAI-style conversation context as of the completed
+turn. When present, it includes user/assistant messages, assistant tool calls,
+and tool result messages. Providers that do not need raw turn context can omit
+the `messages` parameter; Hermes will continue calling them with the legacy
+signature.
+
+Cloud providers should document what parts of `messages` are sent off-device.
+Tool calls and tool results may contain file paths, command output, or other
+workspace data.
 
 ## Profile Isolation
 

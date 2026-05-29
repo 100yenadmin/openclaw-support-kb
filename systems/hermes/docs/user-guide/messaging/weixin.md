@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Weixin (WeChat)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/weixin"
-source_hash: "6bebc1b0eaf177362ba30dc7b562eb7ccfcb3b258194f1343e01bb0334e2ac67"
+source_hash: "fc9dc1ff10f22bfb6daddb9c5e55400bbf7dfd0f9c22b33c3f303cf3379e2aad"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/weixin.md"
@@ -154,6 +154,25 @@ Controls who can send direct messages to the bot:
 WEIXIN_DM_POLICY=allowlist
 WEIXIN_ALLOWED_USERS=user_id_1,user_id_2
 ```
+
+`WEIXIN_ALLOWED_USERS` is an **inbound filter**, not an invitation system. QR
+login connects one iLink bot identity to Hermes. Other people do not scan the
+Hermes QR code with their own accounts; they must message the connected iLink
+bot/contact through WeChat, and Hermes will process the DM only if the sender's
+Weixin user ID is present in `WEIXIN_ALLOWED_USERS`.
+
+A practical setup flow is:
+
+1. Pair Hermes once with `hermes gateway setup` and note the connected iLink bot
+   account.
+2. Have each allowed user send a direct message to that bot/contact.
+3. Read the sender/user ID from the gateway logs or the inbound event payload.
+4. Add those IDs to `WEIXIN_ALLOWED_USERS`, then restart the gateway.
+
+If only the account that scanned the QR code can talk to Hermes, verify that the
+other users are messaging the iLink bot identity itself, not the personal WeChat
+account that performed the QR login. The iLink bot is a separate identity, and
+ordinary WeChat contact/group routing can be limited by Tencent's iLink behavior.
 
 ### Group Policy
 

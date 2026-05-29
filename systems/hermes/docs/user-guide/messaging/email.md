@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Email"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/email"
-source_hash: "f1480c888534ef6a58eaf7f212112cbcc632c7194706dcb4110748a70174c30a"
+source_hash: "ea3d184327bdbd36b78dd21b666124835f9ef840547c482d72b325156634b2bd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/email.md"
@@ -21,9 +21,16 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/messaging/email
 
 Hermes can receive and reply to emails using standard IMAP and SMTP protocols. Send an email to the agent's address and it replies in-thread — no special client or bot API needed. Works with Gmail, Outlook, Yahoo, Fastmail, or any provider that supports IMAP/SMTP.
 
-:::info No External Dependencies
-The Email adapter uses Python's built-in `imaplib`, `smtplib`, and `email` modules. No additional packages or external services are required.
+:::info Gateway adapter only: no external dependencies
+This page covers the Email gateway adapter, which uses Python's built-in `imaplib`, `smtplib`, and `email` modules. No additional packages or external services are required for this gateway path.
 :::
+
+This is separate from the bundled [Himalaya email skill](/docs/user-guide/skills/bundled/email/email-himalaya), which lets the agent manage email through terminal commands and requires the external `himalaya` CLI plus a Himalaya config file.
+
+| Use case | What to configure | External dependency |
+|---|---|---|
+| Let people email the Hermes agent and receive replies | Email gateway adapter on this page | None beyond an IMAP/SMTP email account |
+| Let the agent inspect, compose, move, and manage mailbox messages from terminal tools | Himalaya email skill | `himalaya` CLI and `~/.config/himalaya/config.toml` |
 
 ---
 

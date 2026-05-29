@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (WSL2) Guide"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-wsl-quickstart"
-source_hash: "6e92c46eeb1738df8917403a0beb342667413f16654e3a6561a49de13f528559"
+source_hash: "928b9de402d5e83c986b6dbd9c41c4dd500b5748572fff2f1eb7975962dd1df7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-wsl-quickstart.md"
@@ -271,6 +271,32 @@ For webhooks from cloud messaging providers (Telegram `setWebhook`, Slack events
 ## Running Hermes services long-term on Windows
 
 The Hermes [Tool Gateway](/user-guide/features/tool-gateway) and the API server are long-lived processes. In WSL2 you have a few options for keeping them up.
+
+### Desktop shortcut for opening Hermes quickly
+
+If you just want a double-click launcher for an interactive Hermes shell, create
+it on the Windows side and have it jump into WSL for you:
+
+1. Right-click the Windows desktop and choose **New -> Shortcut**.
+2. For the target, use your distro name (replace `Ubuntu` if needed):
+
+   ```text
+   wt.exe -w 0 -p "Ubuntu" wsl.exe -d Ubuntu --cd ~ -- bash -ic "hermes"
+   ```
+
+3. Name it something obvious like `Hermes`.
+
+That opens Windows Terminal, starts your WSL distro, drops you in your Linux
+home directory, and launches Hermes. If `hermes` is not on PATH yet, open WSL
+once manually and run `source ~/.bashrc`, or replace the command with
+`uv run hermes` inside your project checkout.
+
+Optional polish:
+
+- **Custom icon:** open **Properties -> Change Icon** and point it at an `.ico`
+  file, such as the Hermes favicon from the repo.
+- **Pinned launcher:** once the shortcut works, pin it to Start or Taskbar so
+  you do not have to browse for it again.
 
 ### Inside WSL with systemd (recommended)
 

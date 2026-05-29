@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "List issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/control-plane-commands.md"
-source_hash: "fce63c7e93ef01c9f49ecf3ae19b66732a0b9f7efdee3962eb16ffd630678cc1"
+source_hash: "cf2aaa6fa4cd9d11a620f611f6d484b7faa197ed657b47ac6d9910b0fcb2385b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/control-plane-commands.md"
@@ -79,6 +79,29 @@ pnpm paperclipai company import \
 ```sh
 pnpm paperclipai agent list
 pnpm paperclipai agent get <agent-id>
+```
+
+## Skills Commands
+
+```sh
+# Browse app-shipped catalog skills without changing company state
+pnpm paperclipai skills browse [--kind bundled|optional] [--category software-development] [--query github]
+pnpm paperclipai skills search "pull request" [--json]
+
+# Inspect catalog metadata and file inventory before install
+pnpm paperclipai skills inspect github-pr-workflow
+
+# Install a catalog skill into the company skill library
+# This does not attach the skill to any agent.
+pnpm paperclipai skills install github-pr-workflow --company-id <company-id>
+pnpm paperclipai skills install github-pr-workflow --as pr-flow --force --company-id <company-id>
+
+# External sources still use import instead of catalog install
+pnpm paperclipai skills import ./skills/my-skill --company-id <company-id>
+pnpm paperclipai skills import owner/repo/path/to/skill --company-id <company-id>
+
+# Attach desired company skills to an agent after install/import
+pnpm paperclipai skills agent sync <agent-id> --skill github-pr-workflow --company-id <company-id>
 ```
 
 ## Approval Commands

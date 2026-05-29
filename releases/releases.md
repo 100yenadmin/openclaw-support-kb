@@ -3,7 +3,7 @@ type: openclaw_release_index
 channel: stable
 selected_release: v2026.5.27
 stable_release: v2026.5.27
-beta_release: v2026.5.27
+beta_release: v2026.5.28-beta.2
 ---
 
 # OpenClaw Releases
@@ -12,10 +12,12 @@ Selected stable release: v2026.5.27
 
 Latest stable release: v2026.5.27
 
-Latest beta/prerelease: v2026.5.27
+Latest beta/prerelease: v2026.5.28-beta.2
 
 Source: https://github.com/openclaw/openclaw/releases
 
+- v2026.5.28-beta.2 (beta, 2026-05-29T12:19:13Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.28-beta.2
+- v2026.5.28-beta.1 (beta, 2026-05-29T04:46:20Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.28-beta.1
 - v2026.5.27 (stable, 2026-05-28T11:41:42Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.27
 - v2026.5.27-beta.1 (beta, 2026-05-28T05:54:37Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.27-beta.1
 - v2026.5.26 (stable, 2026-05-27T11:27:24Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.26
@@ -64,5 +66,3 @@ Source: https://github.com/openclaw/openclaw/releases
 - v2026.5.5 (stable, 2026-05-06T09:00:55Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.5
 - v2026.5.4 (stable, 2026-05-05T08:24:01Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4
 - v2026.5.4-beta.3 (beta, 2026-05-05T06:14:48Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.3
-- v2026.5.4-beta.2 (beta, 2026-05-05T01:43:03Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.2
-- v2026.5.4-beta.1 (beta, 2026-05-04T18:22:09Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.5.4-beta.1

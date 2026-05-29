@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "OAuth over SSH / Remote Hosts"
 source: "https://hermes-agent.nousresearch.com/docs/guides/oauth-over-ssh"
-source_hash: "f023d72ed4bb8a3664e6f28381daff6a9d0034982021838705267c17cb6af496"
+source_hash: "0baddad0c88466a4ae63502f2c0f6bc602f7eb6d8242b5956cbc75a644e955c1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/oauth-over-ssh.md"
@@ -53,7 +53,7 @@ hermes auth add xai-oauth --manual-paste
 # → Paste it back into the terminal at the "Callback URL:" prompt.
 ```
 
-The same flag works on `hermes model --manual-paste` for the integrated model picker. A bare `?code=...&state=...` query fragment is accepted too if you don't want to paste the whole URL.
+The same flag works on `hermes model --manual-paste` for the integrated model picker. Hermes accepts three callback paste forms interchangeably: the full URL, a bare `?code=...&state=...` query fragment, or — when the upstream consent page renders the authorization code in-page instead of redirecting (xAI's current behavior on browser-based consoles) — just the bare code value on its own.
 
 Hermes uses the **same PKCE verifier, state and nonce** for both paths, so the upstream OAuth flow is byte-identical — `--manual-paste` is purely a transport change for the callback hop and is not a security downgrade.
 

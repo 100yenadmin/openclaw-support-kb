@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "063311a966430601e65c7edc610f17f5d003a9cd922bf216c42b94e10a004064"
+source_hash: "12ce612a370762f1addc933b3b9644be2c19a6414e7b01bc55e5e14d34a31434"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -533,6 +533,27 @@ echo 'SUPERMEMORY_API_KEY=***' >> ~/.hermes/.env
 
 **Support:** [Discord](https://supermemory.link/discord) · [support@supermemory.com](mailto:support@supermemory.com)
 
+### Memori
+
+Structured long-term memory using Memori Cloud, with background completed-turn capture, tool-aware turn context, and explicit recall tools for facts, summaries, quota, signup, and feedback.
+
+| | |
+|---|---|
+| **Best for** | Agent-controlled recall with structured project and session attribution |
+| **Requires** | `pip install hermes-memori` + `hermes-memori install` + [Memori API key](https://app.memorilabs.ai/signup) |
+| **Data storage** | Memori Cloud |
+| **Cost** | Memori pricing |
+
+**Tools:** `memori_recall` (search long-term memory), `memori_recall_summary` (summarized context), `memori_quota` (usage/quota), `memori_signup` (request signup email), `memori_feedback` (send integration feedback)
+
+**Setup:**
+```bash
+pip install hermes-memori
+hermes-memori install
+hermes config set memory.provider memori
+hermes memory setup
+```
+
 ---
 
 ## Provider Comparison
@@ -547,6 +568,7 @@ echo 'SUPERMEMORY_API_KEY=***' >> ~/.hermes/.env
 | **RetainDB** | Cloud | $20/mo | 5 | `requests` | Delta compression |
 | **ByteRover** | Local/Cloud | Free/Paid | 3 | `brv` CLI | Pre-compression extraction |
 | **Supermemory** | Cloud | Paid | 4 | `supermemory` | Context fencing + session graph ingest + multi-container |
+| **Memori** | Cloud | Free/Paid | 5 | `hermes-memori` | Tool-aware memory + structured recall |
 
 ## Profile Isolation
 
