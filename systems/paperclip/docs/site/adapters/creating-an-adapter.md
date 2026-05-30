@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "creating-an-adapter"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/creating-an-adapter.md"
-source_hash: "d3ff3d8ba600fb82cce7c864ec9d564b05bc1508f34d0fb25780f3ab2d027848"
+source_hash: "43cd139e65f08570edeceb115c5198098ec184f2822f879480f54244dc9e307f"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/creating-an-adapter.md"
@@ -266,6 +266,23 @@ Make Paperclip skills discoverable to your agent runtime without writing to the 
 2. **Acceptable: global config dir** — symlink to the runtime's global plugins directory
 3. **Acceptable: env var** — point a skills path env var at the repo's `skills/` directory
 4. **Last resort: prompt injection** — include skill content in the prompt template
+
+## Cross-run workspace persistence (no-remote-git contract)
+
+The local execution-workspace cwd is the **only** persistence boundary across runs. No adapter may depend on a git remote for cross-run state.
+
+The supported round-trip:
+
+- **Per-run, on the remote side.** `prepareWorkspaceForSshExecution` (in `packages/adapter-utils/src/ssh.ts`) git-bundles the local worktree and ships it to the run's remote dir. No `git remote` is set anywhere; the bundle is the transport.
+- **End-of-run, in the adapter's `finally` block.** The adapter invokes `restoreRemoteWorkspace` (e.g. claude-local's `execute.ts`), which calls `restoreWorkspaceFromSshExecution` → `exportGitWorkspaceFromSsh` → `integrateImportedGitHead`. Remote commits made during the run land back in the local Mac worktree with no `git push` and no remote configured.
+
+The invariant adapters must preserve:
+
+- **Never `git push`** from adapter or runtime code. Operator-supplied configuration may opt in, but the default contract is no remote operations.
+- **Never assume a remote exists.** The local cwd is the source of truth between runs.
+- **Surface restore failures.** A failed sync-back must propagate as a run-level error, not a silent warning. The heartbeat records a `workspace_finalize` row (`succeeded`/`failed`) around `adapter.execute` so dependent issues do not wake on a stale worktree.
+
+The invariant is pinned by the "no-remote-git contract" case in `packages/adapter-utils/src/ssh-fixture.test.ts`: it asserts `git remote` is empty before and after the round-trip and that a remote-only commit still lands locally via restore alone.
 
 ## Security
 

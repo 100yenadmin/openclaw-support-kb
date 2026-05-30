@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Security"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/security"
-source_hash: "2ad733238ba818618205f22923c01a8f70ce28c6169599c6b2964b46b49ae688"
+source_hash: "e197f2b3316408f28805ba3b249fdde6649b8411a84d854a740263a550be68ba"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/security.md"
@@ -599,7 +599,7 @@ Blocked files show a warning:
 4. **Store secrets securely** — keep API keys in `~/.hermes/.env` with proper file permissions
 5. **Enable DM pairing** — use pairing codes instead of hardcoding user IDs when possible
 6. **Review command allowlist** — periodically audit `command_allowlist` in config.yaml
-7. **Set `MESSAGING_CWD`** — don't let the agent operate from sensitive directories
+7. **Set `terminal.cwd`** — don't let the agent operate from sensitive directories
 8. **Run as non-root** — never run the gateway as root
 9. **Monitor logs** — check `~/.hermes/logs/` for unauthorized access attempts
 10. **Keep updated** — run `hermes update` regularly for security patches

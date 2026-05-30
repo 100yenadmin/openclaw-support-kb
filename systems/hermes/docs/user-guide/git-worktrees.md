@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Git Worktrees"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/git-worktrees"
-source_hash: "452ecc407b913f46872f4dacdaa89a9eabfb925b1e747eb395c7020b8c26dae8"
+source_hash: "54d36b4f5d46594c9f2b2c1677ca836f73c19ddedff1f2948a3961c54aa11354"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/git-worktrees.md"
@@ -33,7 +33,7 @@ This page shows how to combine worktrees with Hermes so each session has a clean
 Hermes treats the **current working directory** as the project root:
 
 - CLI: the directory where you run `hermes` or `hermes chat`
-- Messaging gateways: the directory set by `MESSAGING_CWD`
+- Messaging gateways: the directory set by `terminal.cwd` in `~/.hermes/config.yaml`
 
 If you run multiple agents in the **same checkout**, their changes can interfere with each other:
 

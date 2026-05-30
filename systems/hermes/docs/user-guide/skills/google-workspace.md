@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Workspace — Gmail, Calendar, Drive, Sheets & Docs"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/skills/google-workspace"
-source_hash: "b125b7a58275c66619fab98224d857be1bad2c7b8a80c6509adeda409d9846d0"
+source_hash: "5f8858abc0b5c06cb1a94b7762e0fe5a372e5ce138d3978be146bf8e09b4c8b9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/skills/google-workspace.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/skills/google-work
 
 # Google Workspace Skill
 
-Gmail, Calendar, Drive, Contacts, Sheets, and Docs integration for Hermes. Uses OAuth2 with automatic token refresh. Prefers the [Google Workspace CLI (`gws`)](https://github.com/nicholasgasior/gws) when available for broader coverage, and falls back to Google's Python client libraries otherwise.
+Gmail, Calendar, Drive, Contacts, Sheets, and Docs integration for Hermes. Uses OAuth2 with automatic token refresh. Prefers the [Google Workspace CLI (`gws`)](https://github.com/googleworkspace/cli) when available for broader coverage, and falls back to Google's Python client libraries otherwise.
 
 **Skill path:** `skills/productivity/google-workspace/`
 

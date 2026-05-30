@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/context-compression-and-caching"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-compression-and-caching"
-source_hash: "158adc2afd0f0807d17e1a3e600022ce5e165d82004ceb94c2ceda8383c34a9c"
+source_hash: "564dc6a358cbb709f232ca77f9d270faa0b4eccead46b0e78a1859d87e2fc494"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-compression-and-caching.md"
@@ -129,6 +129,17 @@ threshold_tokens     = 200,000 × 0.50 = 100,000
 tail_token_budget    = 100,000 × 0.20 = 20,000
 max_summary_tokens   = min(200,000 × 0.05, 12,000) = 10,000
 ```
+
+:::note Threshold is derived from the MAIN model's context window
+`threshold_tokens` is always `threshold × context_length`, where `context_length`
+is the **main agent model's** context window — never the auxiliary/summary
+model's. On a 262,144-token model at the default `0.50`, the threshold is
+`262,144 × 0.50 = 131,072`. That number being close to a common "128K context"
+is a coincidence of the percentage, not a sign that the auxiliary model's window
+is the trigger. The auxiliary model's context window is a separate concern — see
+the "Summary model context length" warning below for how it affects whether a
+summary can be produced, not when compression fires.
+:::
 
 
 ## Compression Algorithm

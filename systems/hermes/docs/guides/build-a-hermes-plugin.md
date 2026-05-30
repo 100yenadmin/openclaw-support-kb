@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin"
-source_hash: "6a92ca6b82e514d543c81506bda89d81c770339acbcb92cafcfcdb94d7379d47"
+source_hash: "9dcff1e6a15e039dabc4fbb46d88cf17f4b8fce77bd76626e0386d7e5e21a7c8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/build-a-hermes-plugin.md"
@@ -782,7 +782,7 @@ def register(ctx):
 **Runtime behavior:**
 
 - **CLI mode:** `parent_agent` is resolved from the active CLI agent so workspace hints, spinner, and model selection inherit as expected.
-- **Gateway mode:** There is no CLI agent, so tools degrade gracefully — workspace is read from `TERMINAL_CWD` and no spinner is shown.
+- **Gateway mode:** There is no CLI agent, so tools degrade gracefully — workspace is read from the configured terminal working directory and no spinner is shown.
 - **Explicit override:** If the caller passes `parent_agent=` explicitly, it is respected and not overwritten.
 
 This is the public, stable interface for tool dispatch from plugin commands. Plugins should not reach into `ctx._cli_ref.agent` or similar private state.

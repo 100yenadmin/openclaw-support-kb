@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/simplex.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "7bda6636e02c2412c5ea9c9dcc58486d377a49c0300c7bae40f3a801f3919cd9"
+source_hash: "8042a89536e1b060bf9fa23944cab06e8d6c3348a92b6f4ccd12a5a60ba6756e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -34,7 +34,7 @@ Download the latest release from the [simplex-chat GitHub releases](https://gith
 
 ```bash
 # Linux / macOS binary
-curl -L https://github.com/simplex-chat/simplex-chat/releases/latest/download/simplex-chat-ubuntu-22_04-x86-64 -o simplex-chat
+curl -L https://github.com/simplex-chat/simplex-chat/releases/latest/download/simplex-chat-ubuntu-22_04-x86_64 -o simplex-chat
 chmod +x simplex-chat
 ```
 

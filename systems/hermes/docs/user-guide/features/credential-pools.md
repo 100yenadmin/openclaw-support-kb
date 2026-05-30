@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/credential-pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "a2bd3c225b3aa1d9756a707902d0f6289ee5f9b87a9cd843266dabf5f878e22d"
+source_hash: "d892bb8419f950921b126d11624c77ae8d0551673ee94f7adc1d39285ecb2351"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -34,8 +34,11 @@ Your request
   → Pick key from pool (round_robin / least_used / fill_first / random)
   → Send to provider
   → 429 rate limit?
-      → Retry same key once (transient blip)
-      → Second 429 → rotate to next pool key
+      → Plan/usage limit reached (e.g. ChatGPT/Codex "usage limit reached")?
+          → Rotate to next pool key immediately (no retry — the cap won't clear on retry)
+      → Generic / transient 429?
+          → Retry same key once (transient blip)
+          → Second 429 → rotate to next pool key
       → All keys exhausted → fallback_model (different provider)
   → 402 billing error?
       → Immediately rotate to next pool key (24h cooldown)

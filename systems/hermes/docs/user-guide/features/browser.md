@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/browser"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser"
-source_hash: "b6c8156b50b287cca68b4b05d0ed5794cfa95828ee309874fca029ac42794822"
+source_hash: "2a43c897915942455e532990191ffd1c432644a49e358f856cc4fcddd14e4a35"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/browser.md"
@@ -407,9 +407,9 @@ BROWSERBASE_ADVANCED_STEALTH=false
 # Session reconnection after disconnects — requires paid plan (default: "true")
 BROWSERBASE_KEEP_ALIVE=true
 
-# Custom session timeout in milliseconds (default: project default)
-# Examples: 600000 (10min), 1800000 (30min)
-BROWSERBASE_SESSION_TIMEOUT=600000
+# Custom session timeout in seconds (max 21600 = 6 hours) (default: project default)
+# Examples: 600 (10min), 1800 (30min), 21600 (6h max)
+BROWSERBASE_SESSION_TIMEOUT=1800
 
 # Inactivity timeout before auto-cleanup in seconds (default: 120)
 BROWSER_INACTIVITY_TIMEOUT=120

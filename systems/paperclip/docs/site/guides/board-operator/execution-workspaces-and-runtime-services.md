@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "execution-workspaces-and-runtime-services"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/board-operator/execution-workspaces-and-runtime-services.md"
-source_hash: "231754f1864765a7f0e3ac4abb303a97c1de0ab34656946bffbd58a00fa66414"
+source_hash: "f1c1981fd246ee98bfb141b1130fff0167a962f74b2559100788e008591d3b08"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/board-operator/execution-workspaces-and-runtime-services.md"
@@ -81,6 +81,17 @@ Heartbeat still resolves a workspace for the run, but that is about code locatio
 3. Paperclip persists execution-workspace metadata such as paths, refs, and provisioning settings.
 4. Heartbeat passes the resolved code workspace to the agent run.
 5. Workspace runtime services remain manual UI-managed controls rather than automatic heartbeat-managed services.
+
+## Cross-run persistence (no-remote-git contract)
+
+Code state moves between runs through the local execution-workspace cwd alone — not through a git remote.
+
+- Each run's prepare step bundles the local worktree to the run's remote dir over ssh, with no `git remote` configured.
+- The adapter's restore step at the end of the run writes any new remote commits back into the local worktree directly.
+- Adapters must never `git push` from runtime code, and must never assume a remote exists.
+- A failed restore is a run-level error and records `workspace_finalize=failed` on the execution workspace, which gates dependent issue wakes until the next successful finalize.
+
+The invariant is enforced by the "no-remote-git contract" case in `packages/adapter-utils/src/ssh-fixture.test.ts`, which asserts a remote-only commit reaches the local worktree with no remote configured at any point.
 
 ## Current implementation guarantees
 

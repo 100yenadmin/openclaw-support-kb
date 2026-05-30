@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Creating Skills"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills"
-source_hash: "6f41404dcd89e39ecac10e7a411b8c477843f5617fe2afe2c1c3e8cd4cd4066d"
+source_hash: "5548692458b2057bf04e28a00f8a7557d49f01f6810d0eeb8490755dfd4bd88d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/creating-skills.md"
@@ -343,7 +343,7 @@ Bundled skills (in `skills/`) ship with every Hermes install. They should be **b
 - Document handling, web research, common dev workflows, system administration
 - Used regularly by a wide range of people
 
-If your skill is official and useful but not universally needed (e.g., a paid service integration, a heavyweight dependency), put it in **`optional-skills/`** — it ships with the repo, is discoverable via `hermes skills browse` (labeled "official"), and installs with builtin trust.
+If your skill is official and useful but not universally needed (e.g., a paid service integration, a heavyweight dependency), put it in **`optional-skills/`** — it ships with the repo, is discoverable via `hermes skills browse` (labeled "official"), and installs with built-in trust.
 
 If your skill is specialized, community-contributed, or niche, it's better suited for a **Skills Hub** — upload it to a registry and share it via `hermes skills install`.
 
@@ -376,7 +376,7 @@ All hub-installed skills go through a security scanner that checks for:
 
 Trust levels:
 - `builtin` — ships with Hermes (always trusted)
-- `official` — from `optional-skills/` in the repo (builtin trust, no third-party warning)
+- `official` — from `optional-skills/` in the repo (built-in trust, no third-party warning)
 - `trusted` — from openai/skills, anthropics/skills, huggingface/skills
 - `community` — non-dangerous findings can be overridden with `--force`; `dangerous` verdicts remain blocked
 

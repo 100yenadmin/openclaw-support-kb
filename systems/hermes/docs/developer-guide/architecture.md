@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Architecture"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/architecture"
-source_hash: "be61b8e83abb6f2770e7b66235044ca989567e7b0209978e442c395659841515"
+source_hash: "d6985af05693b35fb4561367e528b2eda92976288dcc49de58ac3ae31cf2afea"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/architecture.md"
@@ -210,7 +210,7 @@ The synchronous orchestration engine (`AIAgent` in `run_agent.py`). Handles prov
 
 Prompt construction and maintenance across the conversation lifecycle:
 
-- **`prompt_builder.py`** — Assembles the system prompt from: personality (SOUL.md), memory (MEMORY.md, USER.md), skills, context files (AGENTS.md, .hermes.md), tool-use guidance, and model-specific instructions
+- **`system_prompt.py` + `prompt_builder.py`** — assembles the ordered system-prompt tiers (`stable` → `context` → `volatile`): identity/tool guidance/skills, context files, then memory/profile/timestamp blocks
 - **`prompt_caching.py`** — Applies Anthropic cache breakpoints for prefix caching
 - **`context_compressor.py`** — Summarizes middle conversation turns when context exceeds thresholds
 

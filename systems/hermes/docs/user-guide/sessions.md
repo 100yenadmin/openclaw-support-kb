@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Sessions"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/sessions"
-source_hash: "8edc090d724852ca1a2fa904088b80a09cefc256e506f523990c5f66cb539e8e"
+source_hash: "6039b7c24d122752fa61079f0460fe3b3a6e07f13ff9442abd68b0bb90173f1c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/sessions.md"
@@ -16,6 +16,8 @@ Source System: Hermes Agent
 Local KB namespace: hermes-agent
 Source: https://hermes-agent.nousresearch.com/docs/user-guide/sessions
 
+
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 # Sessions
 
@@ -157,7 +159,7 @@ Session IDs are shown when you exit a CLI session, and can be found with `hermes
 
 When you resume a session, Hermes displays a compact recap of the previous conversation in a styled panel before the input prompt:
 
-<img className="docs-terminal-figure" src="/img/docs/session-recap.svg" alt="Stylized preview of the Previous Conversation recap panel shown when resuming a Hermes session." />
+<img className="docs-terminal-figure" src={useBaseUrl('/img/docs/session-recap.svg')} alt="Stylized preview of the Previous Conversation recap panel shown when resuming a Hermes session." />
 <p className="docs-figure-caption">Resume mode shows a compact recap panel with recent user and assistant turns before returning you to the live prompt.</p>
 
 The recap:

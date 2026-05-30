@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nix & NixOS Setup"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/nix-setup"
-source_hash: "c630f1b0c7a2144300b03f0e51b4f97dfdafb5a0a1f3b1e847c7e66068350329"
+source_hash: "8500fa73514a5b4981302b7fcec2fc5840c41a1ce9f1d16386bde14bf7d7196f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/nix-setup.md"
@@ -596,7 +596,7 @@ Host                                    Container
   │   ├── state.db, sessions/, memories/   (runtime state)
   │   └── mcp-tokens/                      (OAuth tokens for MCP servers)
   ├── home/                                ──►  /home/hermes    (rw)
-  └── workspace/                           (MESSAGING_CWD)
+  └── workspace/                           (agent working directory)
       ├── SOUL.md                          (from documents option)
       └── (agent-created files)
 
@@ -844,7 +844,7 @@ nix build .#checks.x86_64-linux.config-roundtrip    # merge script preserves use
 | `group` | `str` | `"hermes"` | System group |
 | `createUser` | `bool` | `true` | Auto-create user/group |
 | `stateDir` | `str` | `"/var/lib/hermes"` | State directory (`HERMES_HOME` parent) |
-| `workingDirectory` | `str` | `"${stateDir}/workspace"` | Agent working directory (`MESSAGING_CWD`) |
+| `workingDirectory` | `str` | `"${stateDir}/workspace"` | Agent working directory |
 | `addToSystemPackages` | `bool` | `false` | Add `hermes` CLI to system PATH and set `HERMES_HOME` system-wide |
 
 ### Configuration
@@ -931,7 +931,7 @@ nix build .#checks.x86_64-linux.config-roundtrip    # merge script preserves use
 │   ├── cron/
 │   └── logs/
 ├── home/                            # Agent HOME
-└── workspace/                       # MESSAGING_CWD
+└── workspace/                       # Agent working directory
     ├── SOUL.md                      # From documents option
     └── (agent-created files)
 ```

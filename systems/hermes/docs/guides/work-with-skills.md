@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Working with Skills"
 source: "https://hermes-agent.nousresearch.com/docs/guides/work-with-skills"
-source_hash: "a8401ce12671aad90cbb59c8916bb6dd1512a02adada711674b4c24f8fa134c7"
+source_hash: "717f5073a0124e725b1cee4dcdc7e070b556e9d8bbc8ce6edd7dfeb63735d0c8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/work-with-skills.md"
@@ -175,7 +175,7 @@ Manage skill config from the CLI:
 hermes skills config gif-search
 
 # View all skill config
-hermes config get skills.config
+hermes config show | grep '^skills\.config'
 ```
 
 ---
