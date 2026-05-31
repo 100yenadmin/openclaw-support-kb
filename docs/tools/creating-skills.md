@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "92b42fdfb6263e11900495296672333611d37eb9f3e859e7b19fc0393de90a70"
+source_hash: "2cb8e9e935d39296c846989ab4deadb711289cdc870565160d3ef99f93955b21"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -16,7 +16,9 @@ Source: https://docs.openclaw.ai/tools/creating-skills
 Skills teach the agent how and when to use tools. Each skill is a directory
 containing a `SKILL.md` file with YAML frontmatter and markdown instructions.
 
-For how skills are loaded and prioritized, see [Skills](/tools/skills).
+For how skills are loaded and prioritized, see [Skills](/tools/skills). For
+agent-generated or reviewed skill changes, see
+[Skill Workshop](/tools/skill-workshop).
 
 ## Create your first skill
 
@@ -30,6 +32,16 @@ Create the skill directory
     ```bash
     mkdir -p ~/.openclaw/workspace/skills/hello-world
     ```
+
+    You can group skills in subfolders when your library grows:
+
+    ```bash
+    mkdir -p ~/.openclaw/workspace/skills/personal/hello-world
+    ```
+
+    Group folders are only organizational. The skill is still named by
+    `SKILL.md` frontmatter, so `name: hello-world` is invoked as
+    `/hello-world`.
 
 
 
@@ -52,7 +64,7 @@ Write SKILL.md
     ```
 
     Use hyphen-case with lowercase letters, digits, and hyphens for the skill
-    `name`. Keep the folder name and frontmatter `name` aligned.
+    `name`. Keep the leaf folder name and frontmatter `name` aligned.
 
 
 
@@ -68,7 +80,15 @@ Add tools (optional)
 
 Load the skill
 
-    Start a new session so OpenClaw picks up the skill:
+    Verify the skill loaded:
+
+    ```bash
+    openclaw skills list
+    ```
+
+    OpenClaw watches nested `SKILL.md` files under skills roots. If the watcher
+    is disabled or you are continuing an existing session, start a new session
+    so the model receives the refreshed skills list:
 
     ```bash
     # From chat
@@ -76,12 +96,6 @@ Load the skill
 
     # Or restart the gateway
     openclaw gateway restart
-    ```
-
-    Verify the skill loaded:
-
-    ```bash
-    openclaw skills list
     ```
 
 
@@ -98,6 +112,46 @@ Test it
     Or just chat with the agent and ask for a greeting.
 
 
+
+## Use Skill Workshop for generated skills
+
+For agent-generated procedures, use Skill Workshop instead of writing `SKILL.md`
+directly. Skill Workshop creates a pending proposal first; it becomes an active
+skill only after review and apply:
+
+```bash
+openclaw skills workshop propose-create \
+  --name "hello-world" \
+  --description "A simple skill that says hello." \
+  --proposal ./PROPOSAL.md
+```
+
+Use `--proposal-dir` when the proposal also has support files:
+
+```bash
+openclaw skills workshop propose-create \
+  --name "hello-world" \
+  --description "A simple skill that says hello." \
+  --proposal-dir ./hello-world-proposal
+```
+
+The proposal stays inactive until an operator reviews and applies it.
+Proposal directories must contain `PROPOSAL.md`. Support files can be included
+under `assets/`, `examples/`, `references/`, `scripts/`, or `templates/`:
+
+```bash
+openclaw skills workshop inspect <proposal-id>
+openclaw skills workshop revise <proposal-id> --proposal ./PROPOSAL.md
+openclaw skills workshop apply <proposal-id>
+```
+
+When applied, OpenClaw writes the final `SKILL.md` into the workspace `skills/`
+root, writes approved support files beside it, and removes proposal-only
+frontmatter such as `status: proposal`, proposal `version`, and proposal
+`date`.
+
+Full proposal storage, review, Gateway, and approval-policy details are in
+[Skill Workshop](/tools/skill-workshop).
 
 ## Skill metadata reference
 
@@ -151,9 +205,14 @@ Once a basic skill works, these fields help make it reliable and portable:
 | Bundled (shipped with OpenClaw) | Low        | Global                |
 | `skills.load.extraDirs`         | Lowest     | Custom shared folders |
 
+Each skills root can contain direct skill folders such as
+`skills/hello-world/SKILL.md` or grouped folders such as
+`skills/personal/hello-world/SKILL.md`.
+
 ## Related
 
 - [Skills reference](/tools/skills) — loading, precedence, and gating rules
+- [Skill Workshop](/tools/skill-workshop) — governed creation for generated or reviewed skill changes
 - [Skills config](/tools/skills-config) — `skills.*` config schema
 - [ClawHub](/clawhub) — public skill registry
 - [Building Plugins](/plugins/building-plugins) — plugins can ship skills

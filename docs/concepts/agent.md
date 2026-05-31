@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "bbd96c3dc6ffabefa7cf384ef5d4cbfdd1d778c1ce27b8c759fe3f0071cb3fe0"
+source_hash: "6d51733dbcde2db9cc9400aee033153e0978b24ec24bd7f70552259827f7862c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent.md"
@@ -72,6 +72,10 @@ OpenClaw loads skills from these locations (highest precedence first):
 - Managed/local: `~/.openclaw/skills`
 - Bundled (shipped with the install)
 - Extra skill folders: `skills.load.extraDirs`
+
+Skill roots can contain grouped folders such as
+`<workspace>/skills/personal/foo/SKILL.md`; the skill is still exposed by its
+flat frontmatter name, for example `foo`.
 
 Skills can be gated by config/env (see `skills` in [Gateway configuration](/gateway/configuration)).
 

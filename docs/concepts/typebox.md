@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "f10fbf6f5f5c271e64eb4ad59f3154613548e360404c9317244a27b300678b28"
+source_hash: "786a210bcf5dfdaf4a57736255639877c45aba22e23d33d16d2c7d506ac4eca6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typebox.md"
@@ -61,8 +61,8 @@ Authoritative advertised **discovery** inventory lives in
 
 ## Where the schemas live
 
-- Source: `src/gateway/protocol/schema.ts`
-- Runtime validators (AJV): `src/gateway/protocol/index.ts`
+- Source: `packages/gateway-protocol/src/schema.ts`
+- Runtime validators (AJV): `packages/gateway-protocol/src/index.ts`
 - Advertised feature/discovery registry: `src/gateway/server-methods-list.ts`
 - Server handshake + method dispatch: `src/gateway/server.impl.ts`
 - Node client: `src/gateway/client.ts`
@@ -202,7 +202,7 @@ Example: add a new `system.echo` request that returns `{ ok: true, text }`.
 
 1. **Schema (source of truth)**
 
-Add to `src/gateway/protocol/schema.ts`:
+Add to `packages/gateway-protocol/src/schema.ts`:
 
 ```ts
 export const SystemEchoParamsSchema = Type.Object(
@@ -230,7 +230,7 @@ export type SystemEchoResult = Static<typeof SystemEchoResultSchema>;
 
 2. **Validation**
 
-In `src/gateway/protocol/index.ts`, export an AJV validator:
+In `packages/gateway-protocol/src/index.ts`, export an AJV validator:
 
 ```ts
 export const validateSystemEchoParams = ajv.compile
@@ -281,7 +281,7 @@ Unknown frame types are preserved as raw payloads for forward compatibility.
 
 ## Versioning + compatibility
 
-- `PROTOCOL_VERSION` lives in `src/gateway/protocol/version.ts`.
+- `PROTOCOL_VERSION` lives in `packages/gateway-protocol/src/version.ts`.
 - Clients send `minProtocol` + `maxProtocol`; the server rejects ranges that
   do not include its current protocol.
 - The Swift models keep unknown frame types to avoid breaking older clients.

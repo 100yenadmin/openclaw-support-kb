@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Crestodian"
 source: "https://docs.openclaw.ai/cli/crestodian"
-source_hash: "c019e7c24e425fe1b42c79e44e728d6b9b4ecaed22e9413658e5c53741d3895b"
+source_hash: "7db03dbbee08f0172536304d4f7462f5d09065e25bca26178f2ef4a0d7abf890"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/crestodian.md"
@@ -163,8 +163,8 @@ order and tells you what it chose:
 
 - existing explicit model, if already configured
 - `OPENAI_API_KEY` -> `openai/gpt-5.5`
-- `ANTHROPIC_API_KEY` -> `anthropic/claude-opus-4-7`
-- Claude Code CLI -> `claude-cli/claude-opus-4-7`
+- `ANTHROPIC_API_KEY` -> `anthropic/claude-opus-4-8`
+- Claude Code CLI -> `claude-cli/claude-opus-4-8`
 - Codex -> `openai/gpt-5.5` through the Codex app-server harness
 
 If none are available, setup still writes the default workspace and leaves the
@@ -179,7 +179,7 @@ planner turn through OpenClaw's normal runtime paths. It first uses the
 configured OpenClaw model. If no configured model is usable yet, it can fall
 back to local runtimes already present on the machine:
 
-- Claude Code CLI: `claude-cli/claude-opus-4-7`
+- Claude Code CLI: `claude-cli/claude-opus-4-8`
 - Codex app-server harness: `openai/gpt-5.5`
 
 The model-assisted planner cannot mutate config directly. It must translate the

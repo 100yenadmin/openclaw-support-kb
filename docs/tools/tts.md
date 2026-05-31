@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "8200484467962d77a271e329fd4a95bf276f006d13791e83a7cc0a07f6bca4e4"
+source_hash: "28868c63d2369782283df383c68c6416f7854ba06a6abc2949a8ae0a60b6dca8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -124,7 +124,7 @@ Azure Speech
         "azure-speech": {
           apiKey: "${AZURE_SPEECH_KEY}",
           region: "eastus",
-          voice: "en-US-JennyNeural",
+          speakerVoice: "en-US-JennyNeural",
           lang: "en-US",
           outputFormat: "audio-24khz-48kbitrate-mono-mp3",
           voiceNoteOutputFormat: "ogg-24khz-16bit-mono-opus",
@@ -148,7 +148,7 @@ ElevenLabs
         elevenlabs: {
           apiKey: "${ELEVENLABS_API_KEY}",
           model: "eleven_multilingual_v2",
-          voiceId: "EXAVITQu4vr4xnSDxMaL",
+          speakerVoiceId: "EXAVITQu4vr4xnSDxMaL",
         },
       },
     },
@@ -169,7 +169,7 @@ Google Gemini
         google: {
           apiKey: "${GEMINI_API_KEY}",
           model: "gemini-3.1-flash-tts-preview",
-          voiceName: "Kore",
+          speakerVoice: "Kore",
           // Optional natural-language style prompts:
           // audioProfile: "Speak in a calm, podcast-host tone.",
           // speakerName: "Alex",
@@ -192,7 +192,7 @@ Gradium
       providers: {
         gradium: {
           apiKey: "${GRADIUM_API_KEY}",
-          voiceId: "YTpq7expH9539ERJ",
+          speakerVoiceId: "YTpq7expH9539ERJ",
         },
       },
     },
@@ -213,7 +213,7 @@ Inworld
         inworld: {
           apiKey: "${INWORLD_API_KEY}",
           modelId: "inworld-tts-1.5-max",
-          voiceId: "Sarah",
+          speakerVoiceId: "Sarah",
           temperature: 0.7,
         },
       },
@@ -256,7 +256,7 @@ Microsoft (no key)
       providers: {
         microsoft: {
           enabled: true,
-          voice: "en-US-MichelleNeural",
+          speakerVoice: "en-US-MichelleNeural",
           lang: "en-US",
           outputFormat: "audio-24khz-48kbitrate-mono-mp3",
           rate: "+0%",
@@ -281,7 +281,7 @@ MiniMax
         minimax: {
           apiKey: "${MINIMAX_API_KEY}",
           model: "speech-2.8-hd",
-          voiceId: "English_expressive_narrator",
+          speakerVoiceId: "English_expressive_narrator",
           speed: 1.0,
           vol: 1.0,
           pitch: 0,
@@ -307,12 +307,12 @@ OpenAI + ElevenLabs
         openai: {
           apiKey: "${OPENAI_API_KEY}",
           model: "gpt-4o-mini-tts",
-          voice: "alloy",
+          speakerVoice: "alloy",
         },
         elevenlabs: {
           apiKey: "${ELEVENLABS_API_KEY}",
           model: "eleven_multilingual_v2",
-          voiceId: "EXAVITQu4vr4xnSDxMaL",
+          speakerVoiceId: "EXAVITQu4vr4xnSDxMaL",
           voiceSettings: { stability: 0.5, similarityBoost: 0.75, style: 0.0, useSpeakerBoost: true, speed: 1.0 },
           applyTextNormalization: "auto",
           languageCode: "en",
@@ -336,7 +336,7 @@ OpenRouter
         openrouter: {
           apiKey: "${OPENROUTER_API_KEY}",
           model: "hexgrad/kokoro-82m",
-          voice: "af_alloy",
+          speakerVoice: "af_alloy",
           responseFormat: "mp3",
         },
       },
@@ -358,7 +358,7 @@ Volcengine
         volcengine: {
           apiKey: "${VOLCENGINE_TTS_API_KEY}",
           resourceId: "seed-tts-1.0",
-          voice: "en_female_anna_mars_bigtts",
+          speakerVoice: "en_female_anna_mars_bigtts",
         },
       },
     },
@@ -378,7 +378,7 @@ xAI
       providers: {
         xai: {
           apiKey: "${XAI_API_KEY}",
-          voiceId: "eve",
+          speakerVoiceId: "eve",
           language: "en",
           responseFormat: "mp3",
         },
@@ -401,7 +401,7 @@ Xiaomi MiMo
         xiaomi: {
           apiKey: "${XIAOMI_API_KEY}",
           model: "mimo-v2.5-tts",
-          voice: "mimo_default",
+          speakerVoice: "mimo_default",
           format: "mp3",
         },
       },
@@ -410,6 +410,10 @@ Xiaomi MiMo
 }
 ```
 
+
+For Xiaomi `mimo-v2.5-tts-voicedesign`, omit `speakerVoice` and set `style` to
+the voice-design prompt. OpenClaw sends that prompt as the TTS `user` message
+and does not send `audio.voice` for the voicedesign model.
 
 ### Per-agent voice overrides
 
@@ -434,7 +438,7 @@ voice, model, persona, or auto-TTS mode. The agent block deep-merges over
         id: "reader",
         tts: {
           providers: {
-            elevenlabs: { voiceId: "EXAVITQu4vr4xnSDxMaL" },
+            elevenlabs: { speakerVoiceId: "EXAVITQu4vr4xnSDxMaL" },
           },
         },
       },
@@ -458,7 +462,7 @@ Precedence order for automatic replies, `/tts audio`, `/tts status`, and the
 
 Channel and account overrides use the same shape as `messages.tts` and
 deep-merge over the earlier layers, so shared provider credentials can stay in
-`messages.tts` while a channel or bot account changes only voice, model, persona,
+`messages.tts` while a channel or bot account changes only speaker voice, model, persona,
 or auto mode:
 
 ```json5
@@ -477,7 +481,7 @@ or auto mode:
         english: {
           tts: {
             providers: {
-              openai: { voice: "shimmer" },
+              openai: { speakerVoice: "shimmer" },
             },
           },
         },
@@ -507,7 +511,10 @@ templates, seeds, and voice settings.
           label: "Narrator",
           provider: "elevenlabs",
           providers: {
-            elevenlabs: { voiceId: "EXAVITQu4vr4xnSDxMaL", modelId: "eleven_multilingual_v2" },
+            elevenlabs: {
+              speakerVoiceId: "EXAVITQu4vr4xnSDxMaL",
+              modelId: "eleven_multilingual_v2",
+            },
           },
         },
       },
@@ -542,12 +549,12 @@ templates, seeds, and voice settings.
           providers: {
             google: {
               model: "gemini-3.1-flash-tts-preview",
-              voiceName: "Algieba",
+              speakerVoice: "Algieba",
               promptTemplate: "audio-profile-v1",
             },
-            openai: { model: "gpt-4o-mini-tts", voice: "cedar" },
+            openai: { model: "gpt-4o-mini-tts", speakerVoice: "cedar" },
             elevenlabs: {
-              voiceId: "voice_id",
+              speakerVoiceId: "voice_id",
               modelId: "eleven_multilingual_v2",
               seed: 42,
               voiceSettings: {
@@ -651,7 +658,7 @@ audio only:
 ```text
 Here you go.
 
-[[tts:voiceId=pMsXgVXv3BLzUgSXRplE model=eleven_v3 speed=1.1]]
+[[tts:speakerVoiceId=pMsXgVXv3BLzUgSXRplE model=eleven_v3 speed=1.1]]
 [[tts:text]](laughs) Read the song once more.[[/tts:text]]
 ```
 
@@ -667,7 +674,7 @@ directive warnings.
 **Available directive keys:**
 
 - `provider` (registered provider id; requires `allowProvider: true`)
-- `voice` / `voiceName` / `voice_name` / `google_voice` / `voiceId`
+- `speakerVoice` / `speakerVoiceId` (legacy aliases: `voice`, `voiceName`, `voice_name`, `google_voice`, `voiceId`)
 - `model` / `google_model`
 - `stability`, `similarityBoost`, `style`, `speed`, `useSpeakerBoost`
 - `vol` / `volume` (MiniMax volume, 0–10)
@@ -778,7 +785,7 @@ OpenAI/ElevenLabs output formats are fixed per channel (see above).
 
 When `messages.tts.auto` is enabled, OpenClaw:
 
-- Skips TTS if the reply already contains media or a `MEDIA:` directive.
+- Skips TTS if the reply already contains structured media.
 - Skips very short replies (under 10 chars).
 - Summarizes long replies when summaries are enabled, using
   `summaryModel` (or `agents.defaults.model.primary`).
@@ -793,7 +800,7 @@ summary model), audio is skipped and the normal text reply is sent.
 ```text
 Reply -> TTS enabled?
   no  -> send text
-  yes -> has media / MEDIA: / short?
+  yes -> has media / short?
           yes -> send text
           no  -> length > limit?
                    no  -> TTS -> attach audio
@@ -905,7 +912,7 @@ ParamField
 Optional Azure Speech endpoint override (alias `baseUrl`).
 
 ParamField
-Azure voice ShortName. Default `en-US-JennyNeural`.
+Azure voice ShortName. Default `en-US-JennyNeural`. Legacy alias: `voice`.
 
 ParamField
 SSML language code. Default `en-US`.
@@ -928,7 +935,7 @@ ParamField
 Model id (e.g. `eleven_multilingual_v2`, `eleven_v3`).
 
 ParamField
-ElevenLabs voice id.
+ElevenLabs voice id. Legacy alias: `voiceId`.
 
 ParamField
 
@@ -959,7 +966,7 @@ ParamField
 Gemini TTS model. Default `gemini-3.1-flash-tts-preview`.
 
 ParamField
-Gemini prebuilt voice name. Default `Kore`. Alias: `voice`.
+Gemini prebuilt voice name. Default `Kore`. Legacy aliases: `voiceName`, `voice`.
 
 ParamField
 Natural-language style prompt prepended before spoken text.
@@ -988,7 +995,7 @@ ParamField
 Default `https://api.gradium.ai`.
 
 ParamField
-Default Emma (`YTpq7expH9539ERJ`).
+Default Emma (`YTpq7expH9539ERJ`). Legacy alias: `voiceId`.
 
 
 
@@ -1007,7 +1014,7 @@ ParamField
 Default `inworld-tts-1.5-max`. Also: `inworld-tts-1.5-mini`, `inworld-tts-1-max`, `inworld-tts-1`.
 
 ParamField
-Default `Sarah`.
+Default `Sarah`. Legacy alias: `voiceId`.
 
 ParamField
 Sampling temperature `0..2`.
@@ -1045,7 +1052,7 @@ ParamField
 Allow Microsoft speech usage.
 
 ParamField
-Microsoft neural voice name (e.g. `en-US-MichelleNeural`).
+Microsoft neural voice name (e.g. `en-US-MichelleNeural`). Legacy alias: `voice`.
 
 ParamField
 Language code (e.g. `en-US`).
@@ -1083,7 +1090,7 @@ ParamField
 Default `speech-2.8-hd`. Env: `MINIMAX_TTS_MODEL`.
 
 ParamField
-Default `English_expressive_narrator`. Env: `MINIMAX_TTS_VOICE_ID`.
+Default `English_expressive_narrator`. Env: `MINIMAX_TTS_VOICE_ID`. Legacy alias: `voiceId`.
 
 ParamField
 `0.5..2.0`. Default `1.0`.
@@ -1106,7 +1113,7 @@ ParamField
 OpenAI TTS model id (e.g. `gpt-4o-mini-tts`).
 
 ParamField
-Voice name (e.g. `alloy`, `cedar`).
+Voice name (e.g. `alloy`, `cedar`). Legacy alias: `voice`.
 
 ParamField
 Explicit OpenAI `instructions` field. When set, persona prompt fields are **not** auto-mapped.
@@ -1134,7 +1141,7 @@ ParamField
 Default `hexgrad/kokoro-82m`. Alias: `modelId`.
 
 ParamField
-Default `af_alloy`. Alias: `voiceId`.
+Default `af_alloy`. Legacy aliases: `voice`, `voiceId`.
 
 ParamField
 Default `mp3`.
@@ -1160,7 +1167,7 @@ ParamField
 Override the Seed Speech TTS HTTP endpoint. Env: `VOLCENGINE_TTS_BASE_URL`.
 
 ParamField
-Voice type. Default `en_female_anna_mars_bigtts`. Env: `VOLCENGINE_TTS_VOICE`.
+Voice type. Default `en_female_anna_mars_bigtts`. Env: `VOLCENGINE_TTS_VOICE`. Legacy alias: `voice`.
 
 ParamField
 Provider-native speed ratio.
@@ -1183,7 +1190,7 @@ ParamField
 Default `https://api.x.ai/v1`. Env: `XAI_BASE_URL`.
 
 ParamField
-Default `eve`. Live voices: `ara`, `eve`, `leo`, `rex`, `sal`, `una`.
+Default `eve`. Live voices: `ara`, `eve`, `leo`, `rex`, `sal`, `una`. Legacy alias: `voiceId`.
 
 ParamField
 BCP-47 language code or `auto`. Default `en`.
@@ -1206,16 +1213,16 @@ ParamField
 Default `https://api.xiaomimimo.com/v1`. Env: `XIAOMI_BASE_URL`.
 
 ParamField
-Default `mimo-v2.5-tts`. Env: `XIAOMI_TTS_MODEL`. Also supports `mimo-v2-tts`.
+Default `mimo-v2.5-tts`. Env: `XIAOMI_TTS_MODEL`. Also supports `mimo-v2-tts` and `mimo-v2.5-tts-voicedesign`.
 
 ParamField
-Default `mimo_default`. Env: `XIAOMI_TTS_VOICE`.
+Default `mimo_default` for preset-voice models. Env: `XIAOMI_TTS_VOICE`. Legacy alias: `voice`. Not sent for `mimo-v2.5-tts-voicedesign`.
 
 ParamField
 Default `mp3`. Env: `XIAOMI_TTS_FORMAT`.
 
 ParamField
-Optional natural-language style instruction sent as the user message; not spoken.
+Optional natural-language style instruction sent as the user message; not spoken. For `mimo-v2.5-tts-voicedesign`, this is the voice-design prompt; OpenClaw supplies a default when omitted.
 
 
 ## Agent tool

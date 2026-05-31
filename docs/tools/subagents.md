@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "eae0fa9a0008e0d33b01e28680d8c0054d5333d9a5d743bd118c9592bbfcb5a2"
+source_hash: "c24493012257af39df67d1d4ac63a19baa80fc846b39516f3701dd1ae6a27063"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -157,6 +157,10 @@ session to confirm the effective tool list.
 - **Run timeout:** if `sessions_spawn.runTimeoutSeconds` is omitted, OpenClaw uses `agents.defaults.subagents.runTimeoutSeconds` when set; otherwise it falls back to `0` (no timeout).
 - **Task delivery:** native sub-agents receive the delegated task in their first visible `[Subagent Task]` message. The sub-agent system prompt carries runtime rules and routing context, not a hidden duplicate of the task.
 
+Accepted native sub-agent spawns include the resolved child model metadata in
+the tool result: `resolvedModel` contains the applied model ref and
+`resolvedProvider` contains the provider prefix when the ref has one.
+
 ### Delegation prompt mode
 
 `agents.defaults.subagents.delegationMode` controls prompt guidance only; it does not change tool policy or enforce delegation.
@@ -193,7 +197,7 @@ ParamField
 
 ParamField
 
-  Optional stable handle for identifying a specific child in later status output. Must match `[a-z][a-z0-9_]{0,63}` and cannot be reserved targets such as `last` or `all`.
+  Optional stable handle for identifying a specific child in later status output. Must match `[a-z][a-z0-9_-]{0,63}` and cannot be reserved targets such as `last` or `all`.
 
 ParamField
 
@@ -315,14 +319,12 @@ same sub-agent session.
 
 ### Thread supporting channels
 
-**Discord** is currently the only supported channel. It supports
-persistent thread-bound subagent sessions (`sessions_spawn` with
-`thread: true`), manual thread controls (`/focus`, `/unfocus`, `/agents`,
-`/session idle`, `/session max-age`), and adapter keys
-`channels.discord.threadBindings.enabled`,
-`channels.discord.threadBindings.idleHours`,
-`channels.discord.threadBindings.maxAgeHours`, and
-`channels.discord.threadBindings.spawnSessions`.
+Any channel with a session-binding adapter can support persistent
+thread-bound subagent sessions (`sessions_spawn` with `thread: true`).
+Bundled adapters currently include Discord threads, Matrix threads,
+Telegram forum topics, and current-conversation bindings for Feishu.
+Use the per-channel `threadBindings` config keys for enablement,
+timeouts, and `spawnSessions`.
 
 ### Quick flow
 

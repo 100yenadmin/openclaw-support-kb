@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
-source_hash: "965465761ee4fba988b05f7798ff3372d4a5ab7e8974a443bec8871a29cc7dfe"
+source_hash: "9610a99e1611d428ecb579d7d80d50717f37d0a7e56c9864fac9f5009bcaca34"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/llm-task.md"
@@ -54,10 +54,10 @@ Use `tools.allow` only when you want restrictive allowlist mode.
       "llm-task": {
         "enabled": true,
         "config": {
-          "defaultProvider": "openai-codex",
+          "defaultProvider": "openai",
           "defaultModel": "gpt-5.5",
           "defaultAuthProfileId": "main",
-          "allowedModels": ["openai/gpt-5.4"],
+          "allowedModels": ["openai/gpt-5.5"],
           "maxTokens": 800,
           "timeoutMs": 30000
         }

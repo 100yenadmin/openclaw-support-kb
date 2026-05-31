@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "3be480f116d8ed55559b18b918729b6b56e2f9e23f5785d03193881bc9aabc42"
+source_hash: "7827ab9c182d7cc5f7e44c9daeec460b9f211bf452d6ca2f86ed1ca7441166f6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
@@ -26,7 +26,7 @@ At startup, the Gateway logs the resolved default agent model together with the
 mode defaults that affect new sessions, for example:
 
 ```text
-agent model: openai-codex/gpt-5.5 (thinking=medium, fast=on)
+agent model: openai/gpt-5.5 (thinking=medium, fast=on)
 ```
 
 `thinking` comes from the default agent, model params, or global agent default;

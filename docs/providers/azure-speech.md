@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
-source_hash: "842f0f088320e0a3a4fef922fe9062b2405a85f09e229158c9d07b9936518733"
+source_hash: "991253f636a0eb6324a641d559da4c41a866de6173df04c725f2f85c1f48c3d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/azure-speech.md"
@@ -57,7 +57,7 @@ Select Azure Speech in messages.tts
           provider: "azure-speech",
           providers: {
             "azure-speech": {
-              voice: "en-US-JennyNeural",
+              speakerVoice: "en-US-JennyNeural",
               lang: "en-US",
             },
           },
@@ -82,7 +82,7 @@ Send a message
 | `region`                | `messages.tts.providers.azure-speech.region`                | Azure Speech resource region. Falls back to `AZURE_SPEECH_REGION` or `SPEECH_REGION`.                 |
 | `endpoint`              | `messages.tts.providers.azure-speech.endpoint`              | Optional Azure Speech endpoint/base URL override.                                                     |
 | `baseUrl`               | `messages.tts.providers.azure-speech.baseUrl`               | Optional Azure Speech base URL override.                                                              |
-| `voice`                 | `messages.tts.providers.azure-speech.voice`                 | Azure voice ShortName (default `en-US-JennyNeural`).                                                  |
+| `speakerVoice`          | `messages.tts.providers.azure-speech.speakerVoice`          | Azure voice ShortName (default `en-US-JennyNeural`). Legacy alias: `voice`.                           |
 | `lang`                  | `messages.tts.providers.azure-speech.lang`                  | SSML language code (default `en-US`).                                                                 |
 | `outputFormat`          | `messages.tts.providers.azure-speech.outputFormat`          | Audio-file output format (default `audio-24khz-48kbitrate-mono-mp3`).                                 |
 | `voiceNoteOutputFormat` | `messages.tts.providers.azure-speech.voiceNoteOutputFormat` | Voice-note output format (default `ogg-24khz-16bit-mono-opus`).                                       |

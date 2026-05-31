@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory LanceDB"
 source: "https://docs.openclaw.ai/plugins/memory-lancedb"
-source_hash: "ff226ebd2a78826f8f60b92512a33bda42a2d46ffd9c130d0d4e276460242301"
+source_hash: "19d5a8096119e45d518fcbd12ef5d815c37f10cd0f670b979f32f961504008ea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-lancedb.md"
@@ -130,8 +130,8 @@ embeddings:
 }
 ```
 
-OpenAI Codex / ChatGPT OAuth (`openai-codex`) is not an OpenAI Platform
-embeddings credential. For OpenAI embeddings, use an OpenAI API key auth profile,
+OpenAI Codex / ChatGPT OAuth is not an OpenAI Platform embeddings credential.
+For OpenAI embeddings, use an OpenAI API key auth profile,
 `OPENAI_API_KEY`, or `models.providers.openai.apiKey`. OAuth-only users can use
 another embedding-capable provider such as GitHub Copilot or Ollama.
 

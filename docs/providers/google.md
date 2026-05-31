@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "3f7ff2d3c4c342268711ba460f95db05efeec5ae2f049808245c9c10ae00f853"
+source_hash: "73a357c7e4a4d3dd3d3d39ac33b34c2ae49751b10f006d64ca07b511a85d5d71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -338,7 +338,7 @@ To use Google as the default TTS provider:
       providers: {
         google: {
           model: "gemini-3.1-flash-tts-preview",
-          voiceName: "Kore",
+          speakerVoice: "Kore",
           audioProfile: "Speak professionally with a calm tone.",
         },
       },
@@ -402,7 +402,7 @@ Example Voice Call realtime config:
             providers: {
               google: {
                 model: "gemini-2.5-flash-native-audio-preview-12-2025",
-                voice: "Kore",
+                speakerVoice: "Kore",
                 activityHandling: "start-of-activity-interrupts",
                 turnCoverage: "only-activity",
               },

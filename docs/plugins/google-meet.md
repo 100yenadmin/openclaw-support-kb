@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "c0fd75f3d4cc20bbfb49a6ff59b99a9cdde010c87f5068fd52f4f382077c0417"
+source_hash: "124e1aa395df00124792eae093dc199718984d4c25ea8491be75ade4a5dde830"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/google-meet.md"
@@ -1130,7 +1130,7 @@ Optional overrides:
     introMessage: "Say exactly: I'm here.",
     providers: {
       google: {
-        voice: "Kore",
+        speakerVoice: "Kore",
       },
     },
   },
@@ -1147,7 +1147,7 @@ ElevenLabs for both agent-mode listening and speaking:
       providers: {
         elevenlabs: {
           modelId: "eleven_v3",
-          voiceId: "pMsXgVXv3BLzUgSXRplE",
+          speakerVoiceId: "pMsXgVXv3BLzUgSXRplE",
         },
       },
     },
@@ -1175,11 +1175,11 @@ ElevenLabs for both agent-mode listening and speaking:
 ```
 
 The persistent Meet voice comes from
-`messages.tts.providers.elevenlabs.voiceId`. Agent replies can also use
-per-reply `[[tts:voiceId=... model=eleven_v3]]` directives when TTS model
+`messages.tts.providers.elevenlabs.speakerVoiceId`. Agent replies can also use
+per-reply `[[tts:speakerVoiceId=... model=eleven_v3]]` directives when TTS model
 overrides are enabled, but config is the deterministic default for meetings.
 On join, the logs should show `transcriptionProvider=elevenlabs` and each
-spoken reply should log `provider=elevenlabs model=eleven_v3 voice=<voiceId>`.
+spoken reply should log `provider=elevenlabs model=eleven_v3 speakerVoiceId=<voiceId>`.
 
 Twilio-only config:
 

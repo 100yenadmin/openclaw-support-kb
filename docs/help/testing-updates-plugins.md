@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "df935f71ae505033c20728f266ae3b4c941e5fd6fbce150b9538f4580ad4cc6b"
+source_hash: "299d0945e11945ba2cf495f9e140e8dc117cdb45067760cbbfe940163dccbada"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
@@ -35,9 +35,9 @@ Update and plugin tests protect these contracts:
   plugin state.
 - Plugin installs work from local directories, git repos, npm packages, and the
   ClawHub registry path.
-- Plugin npm dependencies are installed in the managed npm root, scanned before
-  trust, and removed through npm during uninstall so hoisted dependencies do not
-  linger.
+- Plugin npm dependencies are installed in one managed npm project per plugin,
+  scanned before trust, and removed through npm during uninstall so hoisted
+  dependencies do not linger.
 - Plugin update is stable when nothing changed: install records, resolved
   source, installed dependency layout, and enabled state stay intact.
 
@@ -281,9 +281,9 @@ can fail for the right reason:
 - Registry/package source behavior: `test:docker:plugins` fixture or ClawHub
   fixture server.
 - Dependency layout or cleanup behavior: assert both runtime execution and the
-  filesystem boundary. npm dependencies may be hoisted under the managed npm
-  root, so tests should prove the root is scanned/cleaned instead of assuming a
-  package-local `node_modules` tree.
+  filesystem boundary. npm dependencies may be hoisted inside the plugin's
+  managed npm project, so tests should prove that project is scanned/cleaned
+  instead of assuming only the plugin package-local `node_modules` tree.
 
 Keep new Docker fixtures hermetic by default. Use local fixture registries and
 fake packages unless the point of the test is live registry behavior.

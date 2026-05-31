@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tokenjuice plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tokenjuice"
-source_hash: "f66b1b6b56fd930656a81070c1ad5f8d829cef8ed59aa3865c2541b96d85a685"
+source_hash: "86cd9a6dcf8fee80c9f698a4a2c8b10dfd3ae0d5223090b1ff223f30f29f0666"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tokenjuice.md"
@@ -20,7 +20,7 @@ Compacts exec and bash tool results with tokenjuice reducers.
 ## Distribution
 
 - Package: `@openclaw/tokenjuice`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/tokenjuice`
 
 ## Surface
 

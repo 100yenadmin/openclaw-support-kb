@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Network proxy"
 source: "https://docs.openclaw.ai/security/network-proxy"
-source_hash: "fdcd8d7d3b764d702b06606ca015e343a84620c47f4902c2221fd877db64b20d"
+source_hash: "da89ef29eccacf59c8ce5317e1207891c90de651b076eb02a4222b7b26d2bc82"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/network-proxy.md"
@@ -141,7 +141,7 @@ Configure the proxy to:
 
 Use this denylist as the starting point for any forward proxy, firewall, or egress policy.
 
-OpenClaw application-level classifier logic lives in `src/infra/net/ssrf.ts` and `src/shared/net/ip.ts`. The relevant parity hooks are `BLOCKED_HOSTNAMES`, `BLOCKED_IPV4_SPECIAL_USE_RANGES`, `BLOCKED_IPV6_SPECIAL_USE_RANGES`, `RFC2544_BENCHMARK_PREFIX`, and the embedded IPv4 sentinel handling for NAT64, 6to4, Teredo, ISATAP, and IPv4-mapped forms. Those files are useful references when maintaining an external proxy policy, but OpenClaw does not automatically export or enforce those rules in your proxy.
+OpenClaw application-level classifier logic lives in `src/infra/net/ssrf.ts` and `packages/net-policy/src/ip.ts`. The relevant parity hooks are `BLOCKED_HOSTNAMES`, `BLOCKED_IPV4_SPECIAL_USE_RANGES`, `BLOCKED_IPV6_SPECIAL_USE_RANGES`, `RFC2544_BENCHMARK_PREFIX`, and the embedded IPv4 sentinel handling for NAT64, 6to4, Teredo, ISATAP, and IPv4-mapped forms. Those files are useful references when maintaining an external proxy policy, but OpenClaw does not automatically export or enforce those rules in your proxy.
 
 | Range or host                                                                        | Why to block                                         |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------- |

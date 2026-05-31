@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "08be1f1e9ab0d6fd9ae1115f1c3e890637b202ff5e1b1ac1647b4808b0d63cb2"
+source_hash: "2d06117c4c7fc3a82a86752d22b9c7ab7916d3efb722138d9b0501256a0ae2e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
@@ -160,7 +160,7 @@ OpenRouter can also be used as a TTS provider through its OpenAI-compatible
       providers: {
         openrouter: {
           model: "hexgrad/kokoro-82m",
-          voice: "af_alloy",
+          speakerVoice: "af_alloy",
           responseFormat: "mp3",
         },
       },

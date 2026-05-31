@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "7a7114f3a4a26f65a5559874d8db8681fbf25c8b9922b02121cd464507645f5c"
+source_hash: "080f4dbe61ad7390cb6e1f0696167bda3da48e8e02758f4bf56bf30ad441f933"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web-fetch.md"
@@ -69,6 +69,21 @@ Cache
     Results are cached for 15 minutes (configurable) to reduce repeated
     fetches of the same URL.
 
+
+## Progress updates
+
+`web_fetch` emits a public progress line only when the fetch is still pending
+after five seconds:
+
+```text
+Fetching page content...
+```
+
+Fast cache hits and quick network responses finish before the timer fires, so
+they do not show a progress line. If the call is canceled, the timer is cleared.
+When the fetch eventually completes, the agent receives the normal tool result;
+the progress line is only channel UI state and never contains fetched page
+content.
 
 ## Config
 

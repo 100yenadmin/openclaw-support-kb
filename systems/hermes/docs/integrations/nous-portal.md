@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "b9963259600d4e9ca8716c4c8bf43b872a6b8e333c085fb9e8a07131c4c4b8db"
+source_hash: "cfaf2da223d7d6757963f8eaeb55f7c4e7378568c5f8edf296e9bbad4a9cfb5e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -201,7 +201,7 @@ hermes tools
 # → TTS              → "Nous Subscription"
 ```
 
-The Tool Gateway is opt-in per tool, not all-or-nothing. See the [Tool Gateway docs](/user-guide/features/tool-gateway) for the full per-tool configuration matrix.
+The Tool Gateway is opt-in per tool, not all-or-nothing. The managed backends show up in `hermes tools` whether or not you're logged into Nous Portal — if you pick "Nous Subscription" before authenticating, Hermes runs the Portal login inline (it won't change your inference provider or touch your other tools). See the [Tool Gateway docs](/user-guide/features/tool-gateway) for the full per-tool configuration matrix.
 
 ### Subscription management
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse plugin"
 source: "https://docs.openclaw.ai/plugins/reference/pixverse"
-source_hash: "7a6f0a8dac0f5911cafe2685ca98588f8aa4de0bebe7c3e34e4f43223faf95cf"
+source_hash: "8c45264021784b72d8cf39c8d4558f0e62ab655d5aa6a8d0ac9b792611f62bc2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/pixverse.md"
@@ -20,7 +20,7 @@ OpenClaw PixVerse video generation provider plugin.
 ## Distribution
 
 - Package: `@openclaw/pixverse-provider`
-- Install route: npm; ClawHub
+- Install route: npm; ClawHub: `clawhub:@openclaw/pixverse-provider`
 
 ## Surface
 

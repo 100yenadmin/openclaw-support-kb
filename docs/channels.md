@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels"
-source_hash: "08b7c90e360ad5cc43aa89dd69f7b09fa2929f44da5e9376b7585ffd775b24ba"
+source_hash: "61bdbce190a4662cd242c2ad8985cac7c5a7d54be1b8195a182c1437ae7d93ff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels.md"
@@ -48,6 +48,7 @@ Text is supported everywhere; media and reactions vary by channel.
 - [QQ Bot](/channels/qqbot) - QQ Bot API; private chat, group chat, and rich media (bundled plugin).
 - [Signal](/channels/signal) - signal-cli; privacy-focused.
 - [Slack](/channels/slack) - Bolt SDK; workspace apps.
+- [SMS](/channels/sms) - Twilio-backed SMS through the Gateway webhook (bundled plugin).
 - [Synology Chat](/channels/synology-chat) - Synology NAS Chat via outgoing+incoming webhooks (bundled plugin).
 - [Telegram](/channels/telegram) - Bot API via grammY; supports groups.
 - [Tlon](/channels/tlon) - Urbit-based messenger (bundled plugin).

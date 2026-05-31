@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi plugin"
 source: "https://docs.openclaw.ai/plugins/reference/xiaomi"
-source_hash: "75c5bb0893da134af39079c11e71a0609153d9769d9c7e8926545e5a90d77fa4"
+source_hash: "c6368edb5ff8f04e017a934417f89bed23f0a9cee308bdb9c78722364afb031f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/xiaomi.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/xiaomi
 
 # Xiaomi plugin
 
-Adds Xiaomi model provider support to OpenClaw.
+Adds Xiaomi, Xiaomi Token Plan model provider support to OpenClaw.
 
 ## Distribution
 
@@ -24,7 +24,7 @@ Adds Xiaomi model provider support to OpenClaw.
 
 ## Surface
 
-providers: xiaomi; contracts: speechProviders
+providers: xiaomi, xiaomi-token-plan; contracts: speechProviders
 
 ## Related docs
 

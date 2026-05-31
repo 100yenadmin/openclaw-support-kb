@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ElevenLabs"
 source: "https://docs.openclaw.ai/providers/elevenlabs"
-source_hash: "73c6d4a0703270b02211bfcc7f7ca1a6eeeee6c1f0bbc5829400fe926de5b38a"
+source_hash: "253850df3ebb54245e67a44968fa52a9fdafc1815f364c4703b4c160fb7ffdf0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/elevenlabs.md"
@@ -40,7 +40,7 @@ export ELEVENLABS_API_KEY="..."
       providers: {
         elevenlabs: {
           apiKey: "${ELEVENLABS_API_KEY}",
-          voiceId: "pMsXgVXv3BLzUgSXRplE",
+          speakerVoiceId: "pMsXgVXv3BLzUgSXRplE",
           modelId: "eleven_multilingual_v2",
         },
       },

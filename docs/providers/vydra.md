@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vydra"
 source: "https://docs.openclaw.ai/providers/vydra"
-source_hash: "bc95a65348bbcb79e80ca635ebdfa121a1ef89014112762b2c73817841377bb0"
+source_hash: "597b26bb2863c4f959bc9a735035588ccac6417ddbcfa7450e6234a963b33de3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/vydra.md"
@@ -168,7 +168,7 @@ Speech synthesis
           providers: {
             vydra: {
               apiKey: "${VYDRA_API_KEY}",
-              voiceId: "21m00Tcm4TlvDq8ikWAM",
+              speakerVoiceId: "21m00Tcm4TlvDq8ikWAM",
             },
           },
         },

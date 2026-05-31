@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "4bc73519532ad984de2c04636301120630175c923fa01953d1c2999d1c8fa46a"
+source_hash: "54bbf149e5dfb31baa261b9f8691517104f4ebd8908128db419a4291aba53de6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
@@ -21,6 +21,7 @@ directories, verify ClawHub skills, and update ClawHub-tracked installs.
 Related:
 
 - Skills system: [Skills](/tools/skills)
+- Skill Workshop: [Skill Workshop](/tools/skill-workshop)
 - Skills config: [Skills config](/tools/skills-config)
 - ClawHub installs: [ClawHub](/clawhub/cli)
 
@@ -58,6 +59,14 @@ openclaw skills info <name> --agent <id>
 openclaw skills check
 openclaw skills check --agent <id>
 openclaw skills check --json
+openclaw skills workshop propose-create --name "qa-check" --description "QA checklist" --proposal ./PROPOSAL.md
+openclaw skills workshop propose-update qa-check --proposal ./PROPOSAL.md
+openclaw skills workshop list
+openclaw skills workshop inspect <proposal-id>
+openclaw skills workshop revise <proposal-id> --proposal ./PROPOSAL.md
+openclaw skills workshop apply <proposal-id>
+openclaw skills workshop reject <proposal-id> --reason "Not reusable"
+openclaw skills workshop quarantine <proposal-id> --reason "Needs security review"
 ```
 
 `search`, `update`, and `verify` use ClawHub directly. `install <slug>` installs
@@ -120,6 +129,31 @@ Notes:
 - `list`, `info`, and `check` write their rendered output to stdout. With
   `--json`, that means the machine-readable payload stays on stdout for pipes
   and scripts.
+
+## Skill Workshop
+
+`openclaw skills workshop` manages pending skill proposals in the selected
+workspace. Proposals are not active skills until applied. For proposal storage,
+support-file safeguards, Gateway methods, and approval policy, see
+[Skill Workshop](/tools/skill-workshop).
+
+```bash
+openclaw skills workshop propose-create \
+  --name "qa-check" \
+  --description "Repeatable QA checklist" \
+  --proposal ./PROPOSAL.md
+openclaw skills workshop propose-create \
+  --name "qa-check" \
+  --description "Repeatable QA checklist" \
+  --proposal-dir ./qa-check-proposal
+openclaw skills workshop propose-update qa-check --proposal ./PROPOSAL.md
+openclaw skills workshop list
+openclaw skills workshop inspect <proposal-id>
+openclaw skills workshop revise <proposal-id> --proposal ./PROPOSAL.md
+openclaw skills workshop apply <proposal-id>
+openclaw skills workshop reject <proposal-id> --reason "Duplicate"
+openclaw skills workshop quarantine <proposal-id> --reason "Needs security review"
+```
 
 ## Related
 

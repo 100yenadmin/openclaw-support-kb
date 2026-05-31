@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "e1e5d654645c30aefa68aa3e0e25c7427b62003d3d2dbe4ab2fea83726372936"
+source_hash: "c5b51ea2a2f6f20d859a60ae34c10e3d2af694efd98da04bb6fe7bed997fa32a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -23,7 +23,7 @@ Feishu/Lark is an all-in-one collaboration platform where teams chat, share docu
 
 Note
 
-Requires OpenClaw 2026.4.25 or above. Run `openclaw --version` to check. Upgrade with `openclaw update`.
+Requires OpenClaw 2026.5.29 or above. Run `openclaw --version` to check. Upgrade with `openclaw update`.
 
 Steps
 

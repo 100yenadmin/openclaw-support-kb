@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "121a6d495920002db034b5de3b77fe3d5a119a0da11347d2c4dc86f5e302c280"
+source_hash: "7d9f3831687fcd4a9b000d02daf3006d4ddc829b213b12f579c50f0a1f30a6da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
@@ -245,11 +245,22 @@ export default defineBundledChannelSetupEntry({
     specifier: "./runtime-api.js",
     exportName: "setMyChannelRuntime",
   },
+  registerSetupRuntime(api) {
+    api.registerHttpRoute({
+      path: "/my-channel/events",
+      auth: "plugin",
+      handler: async (req, res) => {
+        /* setup-safe route */
+      },
+    });
+  },
 });
 ```
 
 Use that bundled contract only when setup flows truly need a lightweight runtime
-setter before the full channel entry loads.
+setter or setup-safe gateway surface before the full channel entry loads.
+`registerSetupRuntime` runs only for `"setup-runtime"` loads; keep it limited to
+config-only routes or methods that must exist before deferred full activation.
 
 ## Registration mode
 

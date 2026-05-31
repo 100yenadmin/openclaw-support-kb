@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "468298a5e6482e49cc16f1c1e7adc1b0d571d66046b03251dee4dcc3b94875a1"
+source_hash: "c9472ac27707985252fc01a424bd75089477a80b38b84ac776e16612f5f21c3c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -48,6 +48,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [fal](/providers/fal)
 - [Fireworks](/providers/fireworks)
 - [GitHub Copilot](/providers/github-copilot)
+- [GMI Cloud](/providers/gmi)
 - [Google (Gemini)](/providers/google)
 - [Gradium](/providers/gradium)
 - [Groq (LPU inference)](/providers/groq)
@@ -60,7 +61,9 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [Mistral](/providers/mistral)
 - [Moonshot AI (Kimi + Kimi Coding)](/providers/moonshot)
 - [NVIDIA](/providers/nvidia)
+- [NovitaAI](/providers/novita)
 - [Ollama (cloud + local models)](/providers/ollama)
+- [Ollama Cloud](/providers/ollama-cloud)
 - [OpenAI (API + Codex)](/providers/openai)
 - [OpenCode](/providers/opencode)
 - [OpenCode Go](/providers/opencode-go)
@@ -68,6 +71,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [Perplexity (web search)](/providers/perplexity-provider)
 - [Qianfan](/providers/qianfan)
 - [Qwen Cloud](/providers/qwen)
+- [Qwen OAuth / Portal](/providers/qwen-oauth)
 - [Runway](/providers/runway)
 - [SenseAudio](/providers/senseaudio)
 - [SGLang (local models)](/providers/sglang)

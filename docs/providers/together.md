@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together AI"
 source: "https://docs.openclaw.ai/providers/together"
-source_hash: "9991728cb188a1683fa144be60f3a85fb5083d9085b58a1ab044361d69bbb65a"
+source_hash: "374ae8e6eddab7a7cc72fbef909a07058dd04dd78ccac5b6cce6538fcb1fa6e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/together.md"
@@ -47,7 +47,9 @@ Set a default model
     {
       agents: {
         defaults: {
-          model: { primary: "together/moonshotai/Kimi-K2.5" },
+          model: {
+            primary: "together/meta-llama/Llama-3.3-70B-Instruct-Turbo",
+          },
         },
       },
     }
@@ -65,34 +67,31 @@ openclaw onboard --non-interactive \
 
 Note
 
-The onboarding preset sets `together/moonshotai/Kimi-K2.5` as the default
-model.
+The onboarding preset sets
+`together/meta-llama/Llama-3.3-70B-Instruct-Turbo` as the default model.
 
 ## Built-in catalog
 
 OpenClaw ships this bundled Together catalog:
 
-| Model ref                                                    | Name                                   | Input       | Context    | Notes                            |
-| ------------------------------------------------------------ | -------------------------------------- | ----------- | ---------- | -------------------------------- |
-| `together/moonshotai/Kimi-K2.5`                              | Kimi K2.5                              | text, image | 262,144    | Default model; reasoning enabled |
-| `together/zai-org/GLM-4.7`                                   | GLM 4.7 Fp8                            | text        | 202,752    | General-purpose text model       |
-| `together/meta-llama/Llama-3.3-70B-Instruct-Turbo`           | Llama 3.3 70B Instruct Turbo           | text        | 131,072    | Fast instruction model           |
-| `together/meta-llama/Llama-4-Scout-17B-16E-Instruct`         | Llama 4 Scout 17B 16E Instruct         | text, image | 10,000,000 | Multimodal                       |
-| `together/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8` | Llama 4 Maverick 17B 128E Instruct FP8 | text, image | 20,000,000 | Multimodal                       |
-| `together/deepseek-ai/DeepSeek-V3.1`                         | DeepSeek V3.1                          | text        | 131,072    | General text model               |
-| `together/deepseek-ai/DeepSeek-R1`                           | DeepSeek R1                            | text        | 131,072    | Reasoning model                  |
-| `together/moonshotai/Kimi-K2-Instruct-0905`                  | Kimi K2-Instruct 0905                  | text        | 262,144    | Secondary Kimi text model        |
+| Model ref                                          | Name                         | Input       | Context | Notes                |
+| -------------------------------------------------- | ---------------------------- | ----------- | ------- | -------------------- |
+| `together/meta-llama/Llama-3.3-70B-Instruct-Turbo` | Llama 3.3 70B Instruct Turbo | text        | 131,072 | Default model        |
+| `together/moonshotai/Kimi-K2.6`                    | Kimi K2.6 FP4                | text, image | 262,144 | Kimi reasoning model |
+| `together/deepseek-ai/DeepSeek-V4-Pro`             | DeepSeek V4 Pro              | text        | 512,000 | Reasoning text model |
+| `together/Qwen/Qwen2.5-7B-Instruct-Turbo`          | Qwen2.5 7B Instruct Turbo    | text        | 32,768  | Fast text model      |
+| `together/zai-org/GLM-5.1`                         | GLM 5.1 FP4                  | text        | 202,752 | Reasoning text model |
 
 ## Video generation
 
 The bundled `together` plugin also registers video generation through the
 shared `video_generate` tool.
 
-| Property             | Value                                 |
-| -------------------- | ------------------------------------- |
-| Default video model  | `together/Wan-AI/Wan2.2-T2V-A14B`     |
-| Modes                | text-to-video, single-image reference |
-| Supported parameters | `aspectRatio`, `resolution`           |
+| Property             | Value                                                                    |
+| -------------------- | ------------------------------------------------------------------------ |
+| Default video model  | `together/Wan-AI/Wan2.2-T2V-A14B`                                        |
+| Modes                | text-to-video; single-image reference only with `Wan-AI/Wan2.2-I2V-A14B` |
+| Supported parameters | `aspectRatio`, `resolution`                                              |
 
 To use Together as the default video provider:
 

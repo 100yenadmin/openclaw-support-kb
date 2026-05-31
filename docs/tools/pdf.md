@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
-source_hash: "7af0fbaa7074e6454c43dc37077286a2a5720c6c39ce8ca8d548cd8177a93b37"
+source_hash: "b67490cd05dd9258dc62fb5273981ee7d6a3430054a9c2d18d3c86b5cb117fe0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/pdf.md"
@@ -61,6 +61,10 @@ Page filter like `1-5` or `1,3,7-9`.
 
 ParamField
 
+Password for encrypted PDFs in extraction fallback mode.
+
+ParamField
+
 Optional model override in `provider/model` form.
 
 ParamField
@@ -72,6 +76,7 @@ Input notes:
 - `pdf` and `pdfs` are merged and deduplicated before loading.
 - If no PDF input is provided, the tool errors.
 - `pages` is parsed as 1-based page numbers, deduped, sorted, and clamped to the configured max pages.
+- `password` applies to every PDF in the request and is only used by extraction fallback mode.
 - `maxBytesMb` defaults to `agents.defaults.pdfMaxBytesMb` or `10`.
 
 ## Supported PDF references
@@ -98,6 +103,7 @@ The tool sends raw PDF bytes directly to provider APIs.
 Native mode limits:
 
 - `pages` is not supported. If set, the tool returns an error.
+- `password` is not supported. Use a non-native model to analyze encrypted PDFs.
 - Multi-PDF input is supported; each PDF is sent as a native document block /
   inline PDF part before the prompt.
 
@@ -114,13 +120,14 @@ Flow:
 Fallback details:
 
 - Page image extraction uses a pixel budget of `4,000,000`.
+- Encrypted PDFs can be opened with the top-level `password` parameter.
 - If the target model does not support image input and there is no extractable text, the tool errors.
 - If text extraction succeeds but image extraction would require vision on a
   text-only model, OpenClaw drops the rendered images and continues with the
   extracted text.
 - Extraction fallback uses the bundled `document-extract` plugin. The plugin owns
-  `pdfjs-dist`; `@napi-rs/canvas` is used only when image rendering fallback is
-  available.
+  `clawpdf`, which provides text extraction and image rendering through PDFium
+  WebAssembly.
 
 ## Config
 
@@ -192,6 +199,17 @@ Page-filtered fallback model:
   "pages": "1-3,7",
   "model": "openai/gpt-5.4-mini",
   "prompt": "Extract only customer-impacting incidents"
+}
+```
+
+Encrypted PDF with extraction fallback:
+
+```json
+{
+  "pdf": "/tmp/locked.pdf",
+  "password": "example-password",
+  "model": "openai/gpt-5.4-mini",
+  "prompt": "Summarize this contract"
 }
 ```
 

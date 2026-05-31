@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "95b955ff8c38d7b9960a069ca4e11a06ca0b1044095e5a6195fa6235ebc675b5"
+source_hash: "da568c57e1ec46fe70fbe1a9c70a16152718736566800e7454c640337c70ff72"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -50,7 +50,7 @@ To reduce that, OpenClaw treats `auth-profiles.json` as a **token sink**:
 - the runtime reads credentials from **one place**
 - we can keep multiple profiles and route them deterministically
 - external CLI reuse is provider-specific: Codex CLI can bootstrap an empty
-  `openai-codex:default` profile, but once OpenClaw has a local OAuth profile,
+  `openai:default` profile, but once OpenClaw has a local OAuth profile,
   the local refresh token is canonical. If that local refresh token is rejected,
   OpenClaw can use a usable same-account Codex CLI token as a runtime-only
   fallback; other integrations can remain externally managed and re-read their
@@ -136,7 +136,7 @@ Flow shape (PKCE):
 5. exchange at `https://auth.openai.com/oauth/token`
 6. extract `accountId` from the access token and store `{ access, refresh, expires, accountId }`
 
-Wizard path is `openclaw onboard` → auth choice `openai-codex`.
+Wizard path is `openclaw onboard` → auth choice `openai`.
 
 ## Refresh + expiry
 
@@ -152,7 +152,7 @@ At runtime:
 - exception: some external CLI credentials stay externally managed; OpenClaw
   re-reads those CLI auth stores instead of spending copied refresh tokens.
   Codex CLI bootstrap is intentionally narrower: it seeds an empty
-  `openai-codex:default` profile, then OpenClaw-owned refreshes keep the local
+  `openai:default` profile, then OpenClaw-owned refreshes keep the local
   profile canonical. If the local Codex refresh fails and Codex CLI has a
   usable token for the same account, OpenClaw may use that token for the current
   runtime request without writing it back to `auth-profiles.json`.

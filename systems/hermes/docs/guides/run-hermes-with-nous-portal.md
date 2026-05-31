@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Agent with Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal"
-source_hash: "bea53d986819f1e6aad71f5a037ec6ebad4a5e40cc0440e5e082b4c9698338bb"
+source_hash: "ae92cc5f81f7cf6ccdb270f794553642414f6e5346223f14f8c17312af989865"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-hermes-with-nous-portal.md"
@@ -148,6 +148,8 @@ hermes tools
 # → Browser          → "Browserbase"           (your existing key)
 # → TTS              → "Nous Subscription"     (recommended)
 ```
+
+These rows appear in `hermes tools` even before you've logged into Nous Portal — if you pick "Nous Subscription" without an active session, Hermes runs the Portal login inline (without changing your inference provider or your other tools).
 
 Verify your mix with:
 

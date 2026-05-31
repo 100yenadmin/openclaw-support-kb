@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin install overrides"
 source: "https://docs.openclaw.ai/plugins/install-overrides"
-source_hash: "58ff0d840b2dbb4ac1554c60757df901905b2ab6e2c83cdfb3d3a52c0333f6cf"
+source_hash: "a3e6e33169b3615e4e97afeeccdac1133a0ae46f5191f9ce19b4409c17419ff6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/install-overrides.md"
@@ -76,8 +76,8 @@ pnpm openclaw onboard --mode local
 Verify the installed package under the state directory:
 
 ```bash
-find "$OPENCLAW_STATE_DIR/npm/node_modules" -maxdepth 3 -name package.json -print
-grep -R '"@openclaw/codex"' "$OPENCLAW_STATE_DIR/npm/package-lock.json"
+find "$OPENCLAW_STATE_DIR/npm/projects" -path '*/node_modules/@openclaw/codex/package.json' -print
+grep -R '"@openclaw/codex"' "$OPENCLAW_STATE_DIR/npm/projects"/*/package-lock.json
 ```
 
 For live provider E2E, source the real API key from a trusted shell or CI secret

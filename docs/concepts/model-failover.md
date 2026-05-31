@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "fe61445841a7a8a6c4537c064e74945a5f136ed8912856698442758bcc0316aa"
+source_hash: "fd1f45f320f06a4f0036d232fabf854f90fd3d758ca0325dd2b7d801d69885de"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-failover.md"
@@ -181,15 +181,14 @@ Use `auth.order.openai` for the user-facing order:
 {
   auth: {
     order: {
-      openai: ["openai-codex:user@example.com", "openai:api-key-backup"],
+      openai: ["openai:user@example.com", "openai:api-key-backup"],
     },
   },
 }
 ```
 
-Existing Codex subscription profiles may still use the legacy
-`openai-codex:*` profile id. The ordered API-key backup can be a normal
-`openai:*` API-key profile. When the subscription hits a Codex usage limit,
+Use `openai:*` for both ChatGPT/Codex OAuth profiles and OpenAI API-key
+profiles. When the subscription hits a Codex usage limit,
 OpenClaw records the exact reset time when Codex provides one, tries the next
 ordered auth profile, and keeps the run inside the Codex harness. Once the reset
 time passes, the subscription profile is eligible again and the next automatic

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "683af3ef5cac37a8d0f9a83e89416673aa967bd13df79134492945f063b669cc"
+source_hash: "454e4fa10c71e81f474d68b4eae3f783cfc80f2f6513ca254eec95af456c02f8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -33,6 +33,19 @@ OpenClaw loads skills from these sources, **highest precedence first**:
 | 6   | Extra skill folders   | `skills.load.extraDirs` (config) |
 
 If a skill name conflicts, the highest source wins.
+
+Skill roots can be organized with folders. A skill is discovered when a
+`SKILL.md` appears under a configured skills root, so these are both valid:
+
+```text
+<workspace>/skills/research/SKILL.md
+<workspace>/skills/personal/research/SKILL.md
+```
+
+The folder path is only for organization. The skill's visible name, slash
+command, and allowlist key come from `SKILL.md` frontmatter `name` (or the skill
+directory name when `name` is missing), so a nested skill with `name: research`
+is still invoked as `/research`, not `/personal/research`.
 
 Codex CLI's native `$CODEX_HOME/skills` directory is not one of these OpenClaw
 skill roots. In Codex harness mode, local app-server launches use isolated
@@ -114,20 +127,13 @@ the tool surface those skills teach.
 
 ## Skill Workshop
 
-The optional, experimental **Skill Workshop** plugin can create or update
-workspace skills from reusable procedures observed during agent work. It
-is disabled by default and must be explicitly enabled via
-`plugins.entries.skill-workshop`.
+[Skill Workshop](/tools/skill-workshop) is the governed path for
+agent-generated or reviewed skill creation and improvement. It turns reusable
+work into a pending proposal, scans and hashes the proposal bundle, supports
+review and revision, and writes the final `SKILL.md` only after apply.
 
-Skill Workshop writes only to `<workspace>/skills`, scans generated
-content, supports pending approval or automatic safe writes, quarantines
-unsafe proposals, and refreshes the skill snapshot after successful
-writes so new skills become available without a Gateway restart.
-
-Use it for corrections such as _"next time, verify GIF attribution"_ or
-hard-won workflows such as media QA checklists. Start with pending
-approval; use automatic writes only in trusted workspaces after reviewing
-its proposals. Full guide: [Skill Workshop plugin](/plugins/skill-workshop).
+Use it when an agent or operator wants to capture reusable work without
+silently mutating active workspace skills.
 
 ## ClawHub (install and sync)
 
@@ -156,9 +162,11 @@ all local agents unless agent skill allowlists narrow visibility. The separate
 `clawhub` CLI also installs into `./skills` under your current working
 directory (or falls back to the configured OpenClaw workspace). OpenClaw picks
 that up as `<workspace>/skills` on the next session.
-Configured skill roots also support one grouping level, such as
-`skills/<group>/<skill>/SKILL.md`, so related third-party skills can be
-kept under a shared folder without broad recursive scanning.
+Configured skill roots also support grouped layouts, such as
+`skills/<group>/<skill>/SKILL.md`, so related third-party skills can be kept
+under shared folders without broad recursive scanning. Use flat frontmatter
+names when grouping, for example `skills/imported/research/SKILL.md` with
+`name: research`.
 
 Git and local directory installs expect a `SKILL.md` at the source root. The
 install slug comes from `SKILL.md` frontmatter `name` when it is a valid slug,
@@ -203,6 +211,11 @@ Prefer sandboxed runs for untrusted inputs and risky tools. See
 [Sandboxing](/gateway/sandboxing) for the agent-side controls.
 
 - Workspace, project-agent, and extra-dir skill discovery only accepts skill roots whose resolved realpath stays inside the configured root unless `skills.load.allowSymlinkTargets` explicitly trusts a target root. Bundled skills always stay contained. Managed `~/.openclaw/skills` and personal `~/.agents/skills` roots may contain symlinked skill folders installed by ClawHub or another local skill manager, but every `SKILL.md` realpath must still stay inside its resolved skill directory.
+- Nested discovery is bounded. OpenClaw scans grouped skill folders under
+  skills roots such as `<workspace>/skills`, `<workspace>/.agents/skills`,
+  `~/.agents/skills`, and `~/.openclaw/skills`, but skips hidden directories,
+  `node_modules`, oversized `SKILL.md` files, escaped symlinks, and suspiciously
+  large directory trees.
 - Gateway private archive installs are off by default. When explicitly enabled,
   they require a committed zip upload containing `SKILL.md` and reuse the same
   archive extraction, path traversal, symlink, force, and rollback protections as
@@ -517,6 +530,10 @@ layouts where a skill root contains a symlink, for example
 symlinks from local skill managers by default, but the target list is still
 matched after realpath resolution and should stay narrow when configured.
 
+The watcher covers nested `SKILL.md` files under grouped skill roots. Adding or
+editing `skills/personal/foo/SKILL.md` refreshes the snapshot the same way as
+editing `skills/foo/SKILL.md`.
+
 ### Remote macOS nodes (Linux gateway)
 
 If the Gateway runs on Linux but a **macOS node** is connected with
@@ -569,7 +586,6 @@ schema: [Skills config](/tools/skills-config).
 - [ClawHub](/clawhub) - public skills registry
 - [Creating skills](/tools/creating-skills) - building custom skills
 - [Plugins](/tools/plugin) - plugin system overview
-- [Skill Workshop plugin](/plugins/skill-workshop) - generate skills from agent work
 - [Skills config](/tools/skills-config) - skill configuration reference
 - [Slash commands](/tools/slash-commands) - all available slash commands
 

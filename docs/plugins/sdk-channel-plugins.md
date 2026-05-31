@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "b56fa3b144203e439e6e603b9c3b6de466cd71875e350b0f568773190e3d27d9"
+source_hash: "f800b1f1c381202e6f65fe0e5d9768aef45e8ac6b9e11053cdec89bf2b5dbded"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -160,6 +160,7 @@ Most channel plugins do not need approval-specific code.
 - If custom approval auth intentionally allows only same-chat fallback, return `markImplicitSameChatApprovalAuthorization({ authorized: true })` from `openclaw/plugin-sdk/approval-auth-runtime`; otherwise core treats the result as explicit approver authorization.
 - If a channel-owned native callback resolves approvals directly, use `isImplicitSameChatApprovalAuthorization(...)` before resolving so implicit fallback still goes through the channel's normal actor authorization.
 - If a channel needs native approval delivery, keep channel code focused on target normalization plus transport/presentation facts. Use `createChannelExecApprovalProfile`, `createChannelNativeOriginTargetResolver`, `createChannelApproverDmTargetResolver`, and `createApproverRestrictedNativeApprovalCapability` from `openclaw/plugin-sdk/approval-runtime`. Put the channel-specific facts behind `approvalCapability.nativeRuntime`, ideally via `createChannelApprovalNativeRuntimeAdapter(...)` or `createLazyChannelApprovalNativeRuntimeAdapter(...)`, so core can assemble the handler and own request filtering, routing, dedupe, expiry, gateway subscription, and routed-elsewhere notices. `nativeRuntime` is split into a few smaller seams:
+- Use `createNativeApprovalChannelRouteGates` from `openclaw/plugin-sdk/approval-native-runtime` when a channel supports both session-origin native delivery and explicit approval forwarding targets. The helper centralizes approval config selection, `mode` handling, agent/session filters, account binding, session-target matching, and target-list matching while callers still own the channel id, default forwarding mode, account lookup, transport-enabled check, target normalization, and turn-source target resolution. Do not use it to create core-owned channel policy defaults; pass the channel's documented default mode explicitly.
 - `createChannelNativeOriginTargetResolver` uses the shared channel-route matcher by default for `{ to, accountId, threadId }` targets. Pass `targetsMatch` only when a channel has provider-specific equivalence rules, such as Slack timestamp prefix matching.
 - Pass `normalizeTargetForMatch` to `createChannelNativeOriginTargetResolver` when the channel needs to canonicalize provider ids before the default route matcher or a custom `targetsMatch` callback runs, while preserving the original target for delivery. Use `normalizeTarget` only when the resolved delivery target itself should be canonicalized.
 - `availability` - whether the account is configured and whether a request should be handled

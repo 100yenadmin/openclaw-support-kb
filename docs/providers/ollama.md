@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "7f57af2ee212278a36dd20f8fe90bf6221849a69bc06858148248c881499b964"
+source_hash: "f6d6ea15921b878896675b4722412096afe3b981f4b3856a8248c3f33bd94a69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -14,6 +14,12 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/ollama
 
 OpenClaw integrates with Ollama's native API (`/api/chat`) for hosted cloud models and local/self-hosted Ollama servers. You can use Ollama in three modes: `Cloud + Local` through a reachable Ollama host, `Cloud only` against `https://ollama.com`, or `Local only` against a reachable Ollama host.
+
+OpenClaw also registers `ollama-cloud` as a first-class hosted provider id for
+direct Ollama Cloud use. Use refs like `ollama-cloud/kimi-k2.5:cloud` when you
+want cloud-only routing without sharing the local `ollama` provider id.
+
+For the dedicated cloud-only setup page, see [Ollama Cloud](/providers/ollama-cloud).
 
 Warning
 
@@ -33,7 +39,7 @@ Local and LAN hosts
 
 Remote and Ollama Cloud hosts
 
-    Remote public hosts and Ollama Cloud (`https://ollama.com`) require a real credential through `OLLAMA_API_KEY`, an auth profile, or the provider's `apiKey`.
+    Remote public hosts and Ollama Cloud (`https://ollama.com`) require a real credential through `OLLAMA_API_KEY`, an auth profile, or the provider's `apiKey`. For direct hosted use, prefer provider `ollama-cloud`.
 
 
 Custom provider ids
@@ -211,6 +217,13 @@ Cloud only
     Use **Cloud only** during setup. OpenClaw prompts for `OLLAMA_API_KEY`, sets `baseUrl: "https://ollama.com"`, and seeds the hosted cloud model list. This path does **not** require a local Ollama server or `ollama signin`.
 
     The cloud model list shown during `openclaw onboard` is populated live from `https://ollama.com/api/tags`, capped at 500 entries, so the picker reflects the current hosted catalog rather than a static seed. If `ollama.com` is unreachable or returns no models at setup time, OpenClaw falls back to the previous hardcoded suggestions so onboarding still completes.
+
+    You can also configure the first-class cloud provider directly:
+
+    ```bash
+    openclaw onboard --auth-choice ollama-cloud
+    openclaw models set ollama-cloud/kimi-k2.5:cloud
+    ```
 
 
 

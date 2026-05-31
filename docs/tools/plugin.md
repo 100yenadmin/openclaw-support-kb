@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "9ffc2c7cd521bbd06e520314de21a2bba9d6eafddefa1032824747bc30a1c654"
+source_hash: "bd724652889307143c47887e99eb2b8e8c7dc0292417db95e8088ad1239fce14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -150,6 +150,13 @@ bundled copy. Use `clawhub:`, `npm:`, `git:`, or `npm-pack:` when you need
 deterministic source selection. See [`openclaw plugins`](/cli/plugins#install)
 for the full command contract.
 
+For npm installs, unpinned package specs and `@latest` choose the newest stable
+package that advertises compatibility with this OpenClaw build. If npm's
+current latest release declares a newer `openclaw.compat.pluginApi` or
+`openclaw.install.minHostVersion`, OpenClaw scans older stable package versions
+and installs the newest one that fits. Exact versions and explicit channel tags
+such as `@beta` stay pinned to the selected package and fail when incompatible.
+
 ### Configure plugin policy
 
 The common plugin config shape is:
@@ -193,7 +200,7 @@ Key policy rules:
   surfaces, such as a provider/model ref, channel config, CLI backend, or agent
   harness runtime.
 - OpenAI-family Codex routing keeps provider and runtime plugin boundaries
-  separate: `openai-codex/*` is legacy OpenAI-provider config, while the bundled
+  separate: legacy Codex model refs are legacy config repaired by doctor, while the bundled
   `codex` plugin owns Codex app-server runtime for canonical `openai/*` agent
   refs, explicit `agentRuntime.id: "codex"`, and legacy `codex/*` refs.
 

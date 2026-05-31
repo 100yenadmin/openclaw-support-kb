@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "c59a7f2c466555b1affba468bc0966fe7e46a833f2840ca566da47654d7ab651"
+source_hash: "cee36b99bc37f7c30ff0fbb5946d277e2bef64f20ba9d576bf6c4c442e3ff110"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/nvidia.md"
@@ -75,14 +75,29 @@ openclaw onboard --auth-choice nvidia-api-key --nvidia-api-key "nvapi-..."
 }
 ```
 
-## Built-in catalog
+## Featured catalog
 
-| Model ref                                  | Name                         | Context | Max output |
-| ------------------------------------------ | ---------------------------- | ------- | ---------- |
-| `nvidia/nvidia/nemotron-3-super-120b-a12b` | NVIDIA Nemotron 3 Super 120B | 262,144 | 8,192      |
-| `nvidia/moonshotai/kimi-k2.5`              | Kimi K2.5                    | 262,144 | 8,192      |
-| `nvidia/minimaxai/minimax-m2.5`            | Minimax M2.5                 | 196,608 | 8,192      |
-| `nvidia/z-ai/glm5`                         | GLM 5                        | 202,752 | 8,192      |
+When an NVIDIA API key is configured, OpenClaw setup and model-selection paths
+try NVIDIA's public featured-model catalog from
+`https://assets.ngc.nvidia.com/products/api-catalog/featured-models.json` and
+caches the ranked result for 24 hours. New featured models from build.nvidia.com
+therefore appear in setup and model-selection surfaces without waiting for an
+OpenClaw release.
+
+The fetch uses a fixed HTTPS host policy for `assets.ngc.nvidia.com`. If no
+NVIDIA API key is configured, or if that public catalog is unavailable or
+malformed, OpenClaw falls back to the bundled catalog below.
+
+## Bundled fallback catalog
+
+| Model ref                                  | Name                         | Context | Max output | Notes                             |
+| ------------------------------------------ | ---------------------------- | ------- | ---------- | --------------------------------- |
+| `nvidia/nvidia/nemotron-3-super-120b-a12b` | NVIDIA Nemotron 3 Super 120B | 262,144 | 8,192      | Featured fallback                 |
+| `nvidia/moonshotai/kimi-k2.5`              | Kimi K2.5                    | 262,144 | 8,192      | Featured fallback                 |
+| `nvidia/minimaxai/minimax-m2.7`            | Minimax M2.7                 | 196,608 | 8,192      | Featured fallback                 |
+| `nvidia/z-ai/glm-5.1`                      | GLM 5.1                      | 202,752 | 8,192      | Featured fallback                 |
+| `nvidia/minimaxai/minimax-m2.5`            | MiniMax M2.5                 | 196,608 | 8,192      | Deprecated, upgrade compatibility |
+| `nvidia/z-ai/glm5`                         | GLM-5                        | 202,752 | 8,192      | Deprecated, upgrade compatibility |
 
 ## Advanced configuration
 
@@ -98,8 +113,11 @@ Auto-enable behavior
 
 Catalog and pricing
 
-    The bundled catalog is static. Costs default to `0` in source since NVIDIA
-    currently offers free API access for the listed models.
+    OpenClaw prefers NVIDIA's public featured-model catalog when NVIDIA auth is
+    configured and caches it for 24 hours. The bundled fallback catalog is static
+    and keeps deprecated shipped refs for upgrade compatibility. Costs default to
+    `0` in source since NVIDIA currently offers free API access for the listed
+    models.
 
 
 

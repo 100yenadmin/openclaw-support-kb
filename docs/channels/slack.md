@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "79be3171593a8fa31d5c33139d7fe72f3a40d0bafbf29a04a5da5801885b94e1"
+source_hash: "bcf145610d7064d6be57fbc7b3c19285d057d03f265b436b9c412dfe1808c00b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/slack.md"
@@ -1178,6 +1178,8 @@ Hide raw command/exec text while keeping compact progress lines:
 
 `channels.slack.streaming.nativeTransport` controls Slack native text streaming when `channels.slack.streaming.mode` is `partial` (default: `true`).
 
+Slack native progress task cards are opt-in for progress mode. Set `channels.slack.streaming.progress.nativeTaskCards` to `true` with `channels.slack.streaming.mode="progress"` to send a Slack-native plan/task card while work is running, then update the same task card at completion. Without this flag, progress mode keeps the portable draft-preview behavior.
+
 - A reply thread must be available for native text streaming and Slack assistant thread status to appear. Thread selection still follows `replyToMode`.
 - Channel, group-chat, and top-level DM roots can still use the normal draft preview when native streaming is unavailable or no reply thread exists.
 - Top-level Slack DMs stay off-thread by default, so they do not show Slack's thread-style native stream/status preview; OpenClaw posts and edits a draft preview in the DM instead.
@@ -1194,6 +1196,24 @@ Use draft preview instead of Slack native text streaming:
       streaming: {
         mode: "partial",
         nativeTransport: false,
+      },
+    },
+  },
+}
+```
+
+Opt in to Slack native progress task cards:
+
+```json5
+{
+  channels: {
+    slack: {
+      streaming: {
+        mode: "progress",
+        progress: {
+          nativeTaskCards: true,
+          render: "rich",
+        },
       },
     },
   },

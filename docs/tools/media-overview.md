@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "1e742f8502dcfe3315581a6ebf088b4a2941ee0156e8ccfadc18c730768b024e"
+source_hash: "8da4459ab347f68e390d63cadacefff46e8c2a3b70aa41405979aeb2399c16e6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -115,11 +115,12 @@ For async tools, OpenClaw submits the request to the provider, returns a task
 id immediately, and tracks the job in the task ledger. The agent continues
 responding to other messages while the job runs. When the provider finishes,
 OpenClaw wakes the agent with the generated media paths so it can tell the
-user and relay the result through the message tool. If the requester session
-is inactive or its active wake fails, and some generated media is still
-missing from message-tool delivery, OpenClaw sends an idempotent direct
-fallback with only the missing media. Media already delivered through the
-message tool is not posted again.
+user through the session's normal visible-reply mode: automatic final reply
+delivery when configured, or `message(action="send")` when the session requires
+the message tool. If the requester session is inactive or its active wake
+fails, and some generated media is still missing from the completion reply,
+OpenClaw sends an idempotent direct fallback with only the missing media. Media
+already delivered by the completion reply is not posted again.
 
 ## Speech-to-text and Voice Call
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes"
-source_hash: "d7430af590ba7951eb933d7786fe0b65838de2af0dfbfd5c41b29389cb4ae8cd"
+source_hash: "8ef5c01becf087f9228ed24223a23595e33efadac3ad60680fd454becddd42cd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes.md"
@@ -224,7 +224,7 @@ and approve the new request so the gateway stores the updated command snapshot.
 
 If the node is showing the Canvas (WebView), `canvas.snapshot` returns `{ format, base64 }`.
 
-CLI helper (writes to a temp file and prints `MEDIA:<path>`):
+CLI helper (writes to a temp file and prints the saved path):
 
 ```bash
 openclaw nodes canvas snapshot --node <idOrNameOrIp> --format png

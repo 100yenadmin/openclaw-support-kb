@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GitHub Copilot"
 source: "https://docs.openclaw.ai/providers/github-copilot"
-source_hash: "bc9186004679ded94b73d52d4749fa3de419a88b9e4728a42a2f8331aa8c15c2"
+source_hash: "ad2e3fa29bc4ab7b88dea2cfa98631a1cf5252f87ec39844c8cfbf8cc6d7cdcf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/github-copilot.md"
@@ -15,9 +15,9 @@ Source: https://docs.openclaw.ai/providers/github-copilot
 
 GitHub Copilot is GitHub's AI coding assistant. It provides access to Copilot
 models for your GitHub account and plan. OpenClaw can use Copilot as a model
-provider in two different ways.
+provider or agent runtime in three different ways.
 
-## Two ways to use Copilot in OpenClaw
+## Three ways to use Copilot in OpenClaw
 
 Tabs
 
@@ -59,6 +59,40 @@ Set a default model
         ```
 
 
+
+
+
+
+Copilot SDK harness plugin (copilot)
+
+    Install the external `@openclaw/copilot` plugin when you want GitHub's
+    Copilot CLI and SDK to own the low-level agent loop for selected
+    `github-copilot/*` models.
+
+    ```bash
+    openclaw plugins install clawhub:@openclaw/copilot
+    ```
+
+    Then opt a model or provider into the runtime:
+
+    ```json5
+    {
+      agents: {
+        defaults: {
+          model: "github-copilot/gpt-5.5",
+          models: {
+            "github-copilot/gpt-5.5": {
+              agentRuntime: { id: "copilot" },
+            },
+          },
+        },
+      },
+    }
+    ```
+
+    Choose this when you want native Copilot CLI sessions, SDK-managed thread
+    state, and Copilot-owned compaction for those agent turns. See
+    [Copilot SDK harness](/plugins/copilot) for the full runtime contract.
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "3f4d60494eea11e960ba6ee6849a33c2ee97b2067adebc5b44c8e7e17d34fd2d"
+source_hash: "d8158588d56282f77df0d34b98a2e6d0dde04a1f148451595dfa95f9bf79ff3e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -16,18 +16,19 @@ Source: https://docs.openclaw.ai/tools/image-generation
 The `image_generate` tool lets the agent create and edit images using your
 configured providers. In chat sessions, image generation runs asynchronously:
 OpenClaw records a background task, returns the task id immediately, and wakes
-the agent when the provider finishes. The completion agent must send generated
-images through the `message` tool. If the requester session is inactive or
-its active wake fails, and some generated images are still missing from
-message-tool delivery, OpenClaw sends an idempotent direct fallback with only
-the missing images.
+the agent when the provider finishes. The completion agent follows the
+session's normal visible-reply mode: automatic final reply delivery when
+configured, or `message(action="send")` when the session requires the message
+tool. If the requester session is inactive or its active wake fails, and some
+generated images are still missing from the completion reply, OpenClaw sends an
+idempotent direct fallback with only the missing images.
 
 Note
 
 The tool only appears when at least one image-generation provider is
 available. If you do not see `image_generate` in your agent's tools,
 configure `agents.defaults.imageGenerationModel`, set up a provider API key,
-or sign in with OpenAI Codex OAuth.
+or sign in with OpenAI ChatGPT/Codex OAuth.
 
 ## Quick start
 
@@ -55,9 +56,9 @@ Pick a default model (optional)
     }
     ```
 
-    Codex OAuth uses the same `openai/gpt-image-2` model ref. When an
-    `openai-codex` OAuth profile is configured, OpenClaw routes image
-    requests through that OAuth profile instead of first trying
+    ChatGPT/Codex OAuth uses the same `openai/gpt-image-2` model ref. When an
+    `openai` OAuth profile is configured, OpenClaw routes image requests
+    through that OAuth profile instead of first trying
     `OPENAI_API_KEY`. Explicit `models.providers.openai` config (API key,
     custom/Azure base URL) opts back into the direct OpenAI Images API
     route.
@@ -87,15 +88,18 @@ internal image endpoints remain blocked by default.
 | Goal                                                 | Model ref                                          | Auth                                   |
 | ---------------------------------------------------- | -------------------------------------------------- | -------------------------------------- |
 | OpenAI image generation with API billing             | `openai/gpt-image-2`                               | `OPENAI_API_KEY`                       |
-| OpenAI image generation with Codex subscription auth | `openai/gpt-image-2`                               | OpenAI Codex OAuth                     |
+| OpenAI image generation with Codex subscription auth | `openai/gpt-image-2`                               | OpenAI ChatGPT/Codex OAuth             |
 | OpenAI transparent-background PNG/WebP               | `openai/gpt-image-1.5`                             | `OPENAI_API_KEY` or OpenAI Codex OAuth |
 | DeepInfra image generation                           | `deepinfra/black-forest-labs/FLUX-1-schnell`       | `DEEPINFRA_API_KEY`                    |
+| fal Krea 2 expressive/style-directed generation      | `fal/krea/v2/medium/text-to-image`                 | `FAL_KEY`                              |
 | OpenRouter image generation                          | `openrouter/google/gemini-3.1-flash-image-preview` | `OPENROUTER_API_KEY`                   |
 | LiteLLM image generation                             | `litellm/gpt-image-2`                              | `LITELLM_API_KEY`                      |
 | Google Gemini image generation                       | `google/gemini-3.1-flash-image-preview`            | `GEMINI_API_KEY` or `GOOGLE_API_KEY`   |
 
 The same `image_generate` tool handles text-to-image and reference-image
 editing. Use `image` for one reference or `images` for multiple references.
+For Krea 2 models on fal, those references are sent as style references
+instead of edit inputs.
 Provider-supported output hints such as `quality`, `outputFormat`, and
 `background` are forwarded when available and reported as ignored when a
 provider does not support them. Bundled transparent-background support is
@@ -112,7 +116,7 @@ backend emits it.
 | Google     | `gemini-3.1-flash-image-preview`        | Yes                                | `GEMINI_API_KEY` or `GOOGLE_API_KEY`                  |
 | LiteLLM    | `gpt-image-2`                           | Yes (up to 5 input images)         | `LITELLM_API_KEY`                                     |
 | MiniMax    | `image-01`                              | Yes (subject reference)            | `MINIMAX_API_KEY` or MiniMax OAuth (`minimax-portal`) |
-| OpenAI     | `gpt-image-2`                           | Yes (up to 4 images)               | `OPENAI_API_KEY` or OpenAI Codex OAuth                |
+| OpenAI     | `gpt-image-2`                           | Yes (up to 4 images)               | `OPENAI_API_KEY` or OpenAI ChatGPT/Codex OAuth        |
 | OpenRouter | `google/gemini-3.1-flash-image-preview` | Yes (up to 5 input images)         | `OPENROUTER_API_KEY`                                  |
 | Vydra      | `grok-imagine`                          | No                                 | `VYDRA_API_KEY`                                       |
 | xAI        | `grok-imagine-image`                    | Yes (up to 5 images)               | `XAI_API_KEY`                                         |
@@ -132,13 +136,13 @@ current session:
 
 ## Provider capabilities
 
-| Capability            | ComfyUI            | DeepInfra | fal                       | Google         | MiniMax               | OpenAI         | Vydra | xAI            |
-| --------------------- | ------------------ | --------- | ------------------------- | -------------- | --------------------- | -------------- | ----- | -------------- |
-| Generate (max count)  | Workflow-defined   | 4         | 4                         | 4              | 9                     | 4              | 1     | 4              |
-| Edit / reference      | 1 image (workflow) | 1 image   | Flux: 1; GPT: 10; NB2: 14 | Up to 5 images | 1 image (subject ref) | Up to 5 images | -     | Up to 5 images |
-| Size control          | -                  | ✓         | ✓                         | ✓              | -                     | Up to 4K       | -     | -              |
-| Aspect ratio          | -                  | -         | ✓                         | ✓              | ✓                     | -              | -     | ✓              |
-| Resolution (1K/2K/4K) | -                  | -         | ✓                         | ✓              | -                     | -              | -     | 1K, 2K         |
+| Capability            | ComfyUI            | DeepInfra | fal                                            | Google         | MiniMax               | OpenAI         | Vydra | xAI            |
+| --------------------- | ------------------ | --------- | ---------------------------------------------- | -------------- | --------------------- | -------------- | ----- | -------------- |
+| Generate (max count)  | Workflow-defined   | 4         | 4                                              | 4              | 9                     | 4              | 1     | 4              |
+| Edit / reference      | 1 image (workflow) | 1 image   | Flux: 1; GPT: 10; Krea style refs: 10; NB2: 14 | Up to 5 images | 1 image (subject ref) | Up to 5 images | -     | Up to 5 images |
+| Size control          | -                  | ✓         | ✓                                              | ✓              | -                     | Up to 4K       | -     | -              |
+| Aspect ratio          | -                  | -         | ✓                                              | ✓              | ✓                     | -              | -     | ✓              |
+| Resolution (1K/2K/4K) | -                  | -         | ✓                                              | ✓              | -                     | -              | -     | 1K, 2K         |
 
 ## Tool parameters
 
@@ -162,7 +166,8 @@ ParamField
 
 ParamField
 
-  Multiple reference images for edit mode (up to 5 on supporting providers).
+  Multiple reference images for edit mode or style-reference models (up to 10
+  through the shared tool; provider-specific limits still apply).
 
 ParamField
 
@@ -170,7 +175,9 @@ ParamField
 
 ParamField
 
-  Aspect ratio: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`.
+  Aspect ratio: `1:1`, `2:3`, `3:2`, `2.35:1`, `3:4`, `4:3`, `4:5`,
+  `5:4`, `9:16`, `16:9`, `21:9`, `4:1`, `1:4`, `8:1`, `1:8`. Providers
+  validate their model-specific subset.
 
 ParamField
 Resolution hint.
@@ -203,6 +210,10 @@ Output filename hint.
 ParamField
 
   OpenAI-only hints: `background`, `moderation`, `outputCompression`, and `user`.
+
+ParamField
+
+  fal Krea 2 creativity control. Defaults to `medium`.
 
 Note
 
@@ -289,7 +300,8 @@ Inspect at runtime
 ### Image editing
 
 OpenAI, OpenRouter, Google, DeepInfra, fal, MiniMax, ComfyUI, and xAI support editing
-reference images. Pass a reference image path or URL:
+reference images. Krea 2 models on fal use the same `image` / `images` fields
+as style references instead of edit inputs. Pass a reference image path or URL:
 
 ```text
 "Generate a watercolor version of this photo" + image: "/path/to/photo.jpg"
@@ -297,8 +309,8 @@ reference images. Pass a reference image path or URL:
 
 OpenAI, OpenRouter, Google, and xAI support up to 5 reference images via the
 `images` parameter. fal supports 1 reference image for Flux image-to-image, up
-to 10 for GPT Image 2 edits, and up to 14 for Nano Banana 2 edits. MiniMax and
-ComfyUI support 1.
+to 10 for GPT Image 2 edits, up to 10 style references for Krea 2, and up to
+14 for Nano Banana 2 edits. MiniMax and ComfyUI support 1.
 
 ## Provider deep dives
 
@@ -308,7 +320,7 @@ AccordionGroup
 OpenAI gpt-image-2 (and gpt-image-1.5)
 
     OpenAI image generation defaults to `openai/gpt-image-2`. If an
-    `openai-codex` OAuth profile is configured, OpenClaw reuses the same
+    `openai` OAuth profile is configured, OpenClaw reuses the same
     OAuth profile used by Codex subscription chat models and sends the
     image request through the Codex Responses backend. Legacy Codex base
     URLs such as `https://chatgpt.com/backend-api` are canonicalized to
@@ -391,6 +403,48 @@ OpenRouter image models
 
 
 
+fal Krea 2
+
+    Krea 2 models on fal use fal's native Krea schema instead of the generic
+    `image_size` schema used by Flux. OpenClaw sends:
+
+    - `aspect_ratio` for aspect-ratio hints
+    - `creativity`, defaulting to `medium`
+    - `image_style_references` when `image` or `images` are supplied
+
+    Select Krea 2 Medium for faster expressive illustration and Krea 2 Large
+    for slower, more detailed photoreal and textured looks:
+
+    ```json5
+    {
+      agents: {
+        defaults: {
+          imageGenerationModel: {
+            primary: "fal/krea/v2/medium/text-to-image",
+          },
+        },
+      },
+    }
+    ```
+
+    Krea 2 currently returns one image per request. Prefer `aspectRatio` for
+    Krea; OpenClaw maps `size` to the closest supported Krea aspect ratio and
+    rejects `resolution` for Krea rather than dropping it. Use `fal.creativity`
+    when you want a native Krea creativity level:
+
+    ```json
+    {
+      "model": "fal/krea/v2/medium/text-to-image",
+      "prompt": "A cyber zine portrait with risograph texture",
+      "aspectRatio": "9:16",
+      "fal": {
+        "creativity": "high"
+      }
+    }
+    ```
+
+
+
 MiniMax dual-auth
 
     MiniMax image generation is available through both bundled MiniMax
@@ -468,6 +522,13 @@ Edit (multiple references)
 
 ```text
 /tool image_generate action=generate model=openai/gpt-image-2 prompt="Combine the character identity from the first image with the color palette from the second" images='["/path/to/character.png","/path/to/palette.jpg"]' size=1536x1024
+```
+
+
+Krea style references
+
+```text
+/tool image_generate action=generate model=fal/krea/v2/medium/text-to-image prompt="An expressive editorial portrait using this color palette and print texture" images='["/path/to/palette.png","/path/to/texture.jpg"]' aspectRatio=9:16 fal='{"creativity":"high"}'
 ```
 
 

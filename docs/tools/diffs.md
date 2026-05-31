@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "6597199d21bba3baf076cd478e2a9326a05ac3fd309d49f8e6bdc5438dd7f37f"
+source_hash: "2c99d025f6b06c5c7003b519c2c5bdaaba82c5f33a63a8ec677d5b9d498dc65c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
@@ -260,7 +260,7 @@ Common aliases such as `js`, `ts`, `bash`, `md`, `yml`, `c++`, `dockerfile`, `rb
 Install the Diff Viewer Language Pack plugin to highlight other languages:
 
 ```bash
-openclaw plugins install diffs-language-pack
+openclaw plugins install clawhub:@openclaw/diffs-language-pack
 ```
 
 With the language pack available, OpenClaw automatically uses it for languages outside the default list. Without it, those files stay readable as plain text.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenResponses API"
 source: "https://docs.openclaw.ai/gateway/openresponses-http-api"
-source_hash: "9359ddc0b059675b4868ae106a4f37fae33eeb2317d7373ef338c0f329f19276"
+source_hash: "5ff59e43e43c99e3b2d9d98ad945e6663228f22ed4c679d09d85a2dfa0e28275"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openresponses-http-api.md"
@@ -186,9 +186,9 @@ END_EXTERNAL_UNTRUSTED_CONTENT
   rasterized into images and passed to the model, and the injected file block uses
   the placeholder `[PDF content rendered to images]`.
 
-PDF parsing is provided by the bundled `document-extract` plugin, which uses the
-Node-friendly `pdfjs-dist` legacy build (no worker). The modern PDF.js build
-expects browser workers/DOM globals, so it is not used in the Gateway.
+PDF parsing is provided by the bundled `document-extract` plugin, which uses
+`clawpdf` and its packaged PDFium WebAssembly runtime for text extraction and
+page rendering.
 
 URL fetch defaults:
 

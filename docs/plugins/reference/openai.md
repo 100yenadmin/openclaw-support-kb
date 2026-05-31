@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/openai"
-source_hash: "eeb4502f67f157bbfb752f3004c0ca3982618f1b6c1fd0b059d4e63da21acd42"
+source_hash: "1466c24a0a3454b68c64d8dcad8e0a3b2c90acfca6244d4c8bcba5c69b0f6432"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/openai.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/openai
 
 # OpenAI plugin
 
-Adds OpenAI, OpenAI Codex model provider support to OpenClaw.
+Adds OpenAI model provider support to OpenClaw, including ChatGPT/Codex OAuth.
 
 ## Distribution
 
@@ -24,7 +24,7 @@ Adds OpenAI, OpenAI Codex model provider support to OpenClaw.
 
 ## Surface
 
-providers: openai, openai-codex; contracts: imageGenerationProviders, mediaUnderstandingProviders, memoryEmbeddingProviders, realtimeTranscriptionProviders, realtimeVoiceProviders, speechProviders, videoGenerationProviders
+providers: openai; contracts: imageGenerationProviders, mediaUnderstandingProviders, memoryEmbeddingProviders, realtimeTranscriptionProviders, realtimeVoiceProviders, speechProviders, videoGenerationProviders
 
 ## Related docs
 

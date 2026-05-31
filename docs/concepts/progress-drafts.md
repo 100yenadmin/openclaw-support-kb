@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "bc0a7a5fdc86ce40d431299a02676cf436496129b7c107ddc0ee25079d46e1e1"
+source_hash: "76d06a82fbab1e847a7ea0cd76b32efa7daf52c15bfffb92f56ff9c855ea1099"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -182,6 +182,50 @@ Hide the label and show only progress lines:
 Progress lines are enabled by default in progress mode. They come from real run
 events: tool starts, item updates, task plans, approvals, command output, patch
 summaries, and similar agent activity.
+
+Tools can also emit typed progress while a single tool call is still running.
+That is how a slow fetch or search can update the visible draft before the tool
+returns its final result. The progress update is a partial tool result with
+empty model content and explicit public channel metadata:
+
+```json
+{
+  "content": [],
+  "progress": {
+    "text": "Fetching page content...",
+    "visibility": "channel",
+    "privacy": "public",
+    "id": "web_fetch:fetching"
+  }
+}
+```
+
+OpenClaw renders only the `progress.text` in the channel progress UI. The
+normal tool result still arrives later as `content` and `details`, and is the
+only part returned to the model.
+
+When adding progress to a tool, use a short, generic message and delay it until
+the operation has been pending long enough to be useful:
+
+```typescript
+const clearProgressTimer = scheduleToolProgress(
+  onUpdate,
+  { text: "Fetching page content...", id: "web_fetch:fetching" },
+  5_000,
+  { signal },
+);
+
+try {
+  return await runToolWork();
+} finally {
+  clearProgressTimer();
+}
+```
+
+This pattern means fast calls do not show a progress line, long calls show one
+while they are still pending, and canceled calls clear the timer before stale
+progress can appear. Progress text is a public UI side channel, so it must not
+include secrets, raw arguments, fetched content, command output, or page text.
 
 OpenClaw uses the same formatter for progress drafts and `/verbose`:
 

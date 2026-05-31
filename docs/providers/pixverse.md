@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse"
 source: "https://docs.openclaw.ai/providers/pixverse"
-source_hash: "8616a3d56a0539ef3d9c01442f1d17ba91e70f4398ac2769a5e5dae77a30f8eb"
+source_hash: "7e3841c8bce15319d3057943026d327d30eacb1840fefcaabc50d8b5da0c1ebe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/pixverse.md"
@@ -34,7 +34,7 @@ Steps
 Install the plugin
 
     ```bash
-    openclaw plugins install @openclaw/pixverse-provider
+    openclaw plugins install clawhub:@openclaw/pixverse-provider
     openclaw gateway restart
     ```
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "2f93e24e2ef38a71d00aa2c75b1eef0620f85f68621dceb855923f40d2f9e611"
+source_hash: "54db6592e124cebdf327f16da81fb10cc72dcdc6477fffbedc33aaff168efcb8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
@@ -168,11 +168,16 @@ Approval-backed interpreter/runtime runs are intentionally conservative:
 When approvals are required, the exec tool returns immediately with an approval id. Use that id to
 correlate later approved-run system events (`Exec finished`, and `Exec running` when configured).
 If no decision arrives before the timeout, the request is treated as an approval timeout and
-surfaced as a terminal denial rather than an agent-waking system event.
+surfaced as a terminal host-command denial. For main-agent async approvals with an originating
+session, OpenClaw also resumes that session with an internal followup so the agent observes that
+the command did not run instead of later repairing a missing result.
 
 ### Followup delivery behavior
 
 After an approved async exec finishes, OpenClaw sends a followup `agent` turn to the same session.
+Denied async approvals use the same main-session followup path for the denial status, but they do
+not register elevated runtime handoffs and they do not run the command. Denials without a resumable
+main session are either suppressed or reported through a safe direct route when one exists.
 
 - If a valid external delivery target exists (deliverable channel plus target `to`), followup delivery uses that channel.
 - In webchat-only or internal-session flows with no external target, followup delivery stays session-only (`deliver: false`).

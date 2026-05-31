@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "e1d9b720576c1d1b4b6cc5b37635b9bae745d15da8d7ff6534e44eea99ef6276"
+source_hash: "ee9f1d02bc5aaba0b0615dd1ef7fae09af12e8d5828f34033820fd731b44ea43"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -191,7 +191,7 @@ The bundled `codex` harness is the native Codex mode for embedded OpenClaw
 agent turns. Enable the bundled `codex` plugin first, and include `codex` in
 `plugins.allow` if your config uses a restrictive allowlist. Native app-server
 configs should use `openai/gpt-*`; OpenAI agent turns select the Codex harness
-by default. Legacy `openai-codex/*` routes should be repaired with
+by default. Legacy Codex model refs routes should be repaired with
 `openclaw doctor --fix`, and legacy `codex/*` model refs remain compatibility
 aliases for the native harness.
 
@@ -241,9 +241,9 @@ model entry:
 {
   "agents": {
     "defaults": {
-      "model": "anthropic/claude-opus-4-7",
+      "model": "anthropic/claude-opus-4-8",
       "models": {
-        "anthropic/claude-opus-4-7": {
+        "anthropic/claude-opus-4-8": {
           "agentRuntime": {
             "id": "claude-cli"
           }

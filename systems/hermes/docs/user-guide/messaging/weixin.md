@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Weixin (WeChat)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/weixin"
-source_hash: "fc9dc1ff10f22bfb6daddb9c5e55400bbf7dfd0f9c22b33c3f303cf3379e2aad"
+source_hash: "0b7b198147af5c1a49b546c56d05c294000258b51d64d46ec1a7d0007d303ba6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/weixin.md"
@@ -136,6 +136,8 @@ Set these in `config.yaml` under `platforms.weixin.extra`:
 | `allow_from` | `[]` | User IDs allowed for DMs (when dm_policy=allowlist) |
 | `group_allow_from` | `[]` | Group IDs allowed (when group_policy=allowlist) |
 | `split_multiline_messages` | `false` | When `true`, split multi-line replies into multiple chat messages (legacy behavior). When `false`, keep multi-line replies as one message unless they exceed the length limit. |
+| `text_batch_delay_seconds` | `3.0` | Quiet period (seconds) before a buffered burst of rapid text messages is flushed as one combined request. iLink delivers messages individually, so this debounce avoids one agent invocation per fragment. Set `0` to dispatch each message immediately. |
+| `text_batch_split_delay_seconds` | `5.0` | Extended flush delay used when the latest fragment is near the split threshold (long messages iLink may have chunked). |
 
 ## Access Policies
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Delegate architecture"
 source: "https://docs.openclaw.ai/concepts/delegate-architecture"
-source_hash: "4fdf71d156082c57832ccec07f43c708ed711d72cebdd60b8229a27f025d1975"
+source_hash: "e43e4df1a4fbd60df879352b1ac5d283d1133cedee7b3473297c5d5bb8e74613"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/delegate-architecture.md"
@@ -135,7 +135,7 @@ See [Sandboxing](/gateway/sandboxing) and [Multi-Agent Sandbox & Tools](/tools/m
 
 Configure logging before the delegate handles any real data:
 
-- Cron run history: `~/.openclaw/cron/runs/<jobId>.jsonl`
+- Cron run history: OpenClaw shared SQLite state database
 - Session transcripts: `~/.openclaw/agents/delegate/sessions`
 - Identity provider audit logs (Exchange, Google Workspace)
 

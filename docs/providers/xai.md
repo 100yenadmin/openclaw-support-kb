@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "876f8d8df1c3682371061d8543d3b5bfa8c5cbe1cdae464844406f20954f6c00"
+source_hash: "888f6b010c1c32e84be1342c80e048f0c02ba42fb96ebcbdadd00bc69bdc6aa5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -349,7 +349,7 @@ Text-to-speech
           provider: "xai",
           providers: {
             xai: {
-              voiceId: "eve",
+              speakerVoiceId: "eve",
             },
           },
         },
