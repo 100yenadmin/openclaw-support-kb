@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
-source_hash: "ca3e6e34608ec887c63fc685ee1d56ffded64472ea15438e9ebc7d754d107b91"
+source_hash: "08a408b84f625a6f5997d566d38c73923546073e8273cbdad3ea160a0900a9dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session-tool.md"
@@ -125,6 +125,19 @@ sparse token/cache counters from the latest transcript usage entry, and
 `model=default` clears a per-session override. Use `sessionKey="current"` for
 the caller's current session; visible client labels such as `openclaw-tui` are
 not session keys.
+
+When route metadata is available, `session_status` also includes a visible
+`Route context` JSON block and matching structured `details` fields. These
+fields disambiguate the session key from the route that is currently handling
+the live run:
+
+- `origin` is where the session was created, or the provider inferred from a
+  deliverable session-key prefix when older state lacks stored origin metadata.
+- `active` is the current live-run route. It is only reported for the live or
+  current session being handled now.
+- `deliveryContext` is the persisted delivery route stored on the session,
+  which OpenClaw can reuse for later delivery even when the active surface
+  differs.
 
 `sessions_yield` intentionally ends the current turn so the next message can be
 the follow-up event you are waiting for. Use it after spawning sub-agents when

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "7343fcff68abd6111cf32bbe73fd7e9d76e56b1dee856ab38cd56469db5dede2"
+source_hash: "eff2abcbd9b5971bf760154b168e5274d566cfca62039c7253cc7db59eef29f7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-control.md"
@@ -39,6 +39,11 @@ All endpoints accept `?profile=<name>`. `POST /start?headless=true` requests a
 one-shot headless launch for local managed profiles without changing persisted
 browser config; attach-only, remote CDP, and existing-session profiles reject
 that override because OpenClaw does not launch those browser processes.
+
+For tab endpoints, `targetId` is the compatibility field name. Prefer passing
+`suggestedTargetId` from `GET /tabs` or `POST /tabs/open`; labels and `tabId`
+handles such as `t1` are also accepted. Raw CDP target ids and unique raw
+target-id prefixes still work, but they are volatile diagnostic handles.
 
 If shared-secret gateway auth is configured, browser HTTP routes require auth too:
 

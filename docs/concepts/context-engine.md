@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "96fd38ca63e526603053331cb4698b88682d4b0650f916314184bbe1aadea8b9"
+source_hash: "37289e77e834a8d86952d5c7a50e4cfae0581120e6a98c01d13d71d21f3d9d9b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -119,7 +119,7 @@ OpenClaw calls two optional subagent lifecycle hooks:
 
 ParamField
 
-  Prepare shared context state before a child run starts. The hook receives parent/child session keys, `contextMode` (`isolated` or `fork`), available transcript ids/files, and optional TTL. If it returns a rollback handle, OpenClaw calls it when spawn fails after preparation succeeds.
+  Prepare shared context state before a child run starts. The hook receives parent/child session keys, `contextMode` (`isolated` or `fork`), available transcript ids/files, and optional TTL. If it returns a rollback handle, OpenClaw calls it when spawn fails after preparation succeeds. Native subagent spawns that request `lightContext` and resolve to `contextMode="isolated"` intentionally skip this hook so the child starts from the lightweight bootstrap context without context-engine-managed pre-spawn state.
 
 ParamField
 

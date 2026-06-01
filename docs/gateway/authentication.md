@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Authentication"
 source: "https://docs.openclaw.ai/gateway/authentication"
-source_hash: "834dd8aed2e9d725c95e35ae31a0c0dedd98c60113315ff80c23261b1a1f511f"
+source_hash: "fb48395420800678bddd6f0cf610666945ea1f033c22ef6d6b4c769bd8ca0b2a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/authentication.md"
@@ -224,6 +224,17 @@ openclaw models auth login --provider openai --profile-id openai:lain
 
 This is the easiest way to keep multiple OAuth logins for the same provider
 separate inside one agent.
+
+Use `--force` when a saved provider profile is stuck, expired, or tied to the
+wrong account and the normal login command keeps reusing it. `--force` deletes
+the saved auth profiles for that provider in the selected agent directory, then
+runs the same provider auth flow again. It does not revoke credentials at the
+provider; rotate or revoke them in the provider dashboard when you need
+provider-side invalidation.
+
+```bash
+openclaw models auth login --provider anthropic --force
+```
 
 ### Per-session (chat command)
 

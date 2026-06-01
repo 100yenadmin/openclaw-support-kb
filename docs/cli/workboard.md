@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard CLI"
 source: "https://docs.openclaw.ai/cli/workboard"
-source_hash: "11b46dc2840b4c4adfd40d1918b7092f9faf2ebecf16d3e0a2702d5e6f9d237e"
+source_hash: "7ad17ee38d575db889f77f79ffb3eda50bf35a708dd02e2cd3396eeebe5141c7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/workboard.md"
@@ -105,7 +105,10 @@ openclaw workboard dispatch --url http://127.0.0.1:18789 --token "$OPENCLAW_GATE
 
 `dispatch` first calls the running Gateway RPC method
 `workboard.cards.dispatch`. That path uses the same subagent runtime as the
-dashboard dispatch action, so ready cards can become real worker sessions.
+dashboard dispatch action, so ready cards become task-tracked worker runs with
+linked session keys. Cards with an assigned agent use agent-scoped subagent
+session keys; unassigned cards keep an unscoped subagent key so the Gateway's
+configured default agent is preserved.
 
 The dispatch loop:
 
@@ -116,8 +119,8 @@ The dispatch loop:
 5. Claims each selected card for the dispatcher or assigned agent.
 6. Starts a subagent worker run with bounded card context and the card claim
    token.
-7. Stores the worker run id, session key, execution status, and worker log on
-   the card.
+7. Stores the worker run id, session key, task linkage when the Gateway task
+   ledger reports it, execution status, and worker log on the card.
 
 Selection is intentionally conservative. One dispatch starts at most three
 workers by default, skips archived or already-claimed cards, and starts only one
@@ -151,6 +154,10 @@ gateway unavailable; data dispatch only: promoted=1 blocked=0
 JSON output includes the dispatch result. Gateway-backed dispatch can include
 `started` and `startFailures`; data-only fallback includes
 `gatewayUnavailable: true`. Claim tokens are redacted from card JSON output.
+
+In the dashboard, the same dispatch result is shown as a short summary so an
+operator can see how many cards started, promoted, blocked, reclaimed, or
+failed without opening card details.
 
 ## Slash Command Parity
 

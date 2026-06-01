@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "f407e31c505f96ad86a648ff849c65521f7a8944248aaf583c61a1494d6dce4e"
+source_hash: "ed6139ae98b1ecd7d251258efb92370720a6f0454546f7ec656d91a770f0f1a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -198,11 +198,10 @@ plugins, channels, and core code only see the standard
 
 When `harness.compact` runs, the Copilot SDK harness:
 
-1. Enables `infiniteSessions` on the SDK session.
-2. Lets the SDK perform its native compaction.
-3. Writes an OpenClaw-shaped marker at
-   `workspacePath/files/openclaw-compaction-<ts>.json` so existing OpenClaw
-   transcript readers still see a familiar artifact.
+1. Resumes the tracked SDK session without continuing pending work.
+2. Calls the SDK's session-scoped history compaction RPC.
+3. Returns the SDK compaction outcome without writing compatibility marker
+   files under the workspace.
 
 The OpenClaw side transcript mirror (see below) continues to receive the
 post-compaction messages, so user-facing chat history stays consistent.

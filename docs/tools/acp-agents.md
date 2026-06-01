@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "2e29c5025ccf41c4616cc1bb3e0f89f3a8a2b3888ba949727d1970bab2cace8e"
+source_hash: "5b4aa0c3d8916e92f40b79f33f51d7f1cf98d0320f6dbf2c14b08922baceac94"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -615,6 +615,10 @@ ParamField
   normalize OpenAI refs such as `openai/gpt-5.4` to Codex ACP startup
   config before `session/new`; slash forms such as `openai/gpt-5.4/high`
   also set Codex ACP reasoning effort.
+  When omitted, `sessions_spawn({ runtime: "acp" })` uses existing
+  subagent model defaults (`agents.defaults.subagents.model` or
+  `agents.list[].subagents.model`) when configured; otherwise it lets the
+  ACP harness use its own default model.
   Other harnesses must advertise ACP `models` and support
   `session/set_model`; otherwise OpenClaw/acpx fails clearly instead of
   silently falling back to the target agent default.
@@ -624,6 +628,9 @@ ParamField
   Explicit thinking/reasoning effort. For Codex ACP, `minimal` maps to
   low effort, `low`/`medium`/`high`/`xhigh` map directly, and `off`
   omits the reasoning-effort startup override.
+  When omitted, ACP spawns use existing subagent thinking defaults and
+  per-model `agents.defaults.models["provider/model"].params.thinking`
+  for the selected model.
 
 ## Spawn bind and thread modes
 

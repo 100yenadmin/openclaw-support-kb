@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "49de337eefe48aadd089c525be47cc37b7f0dda9e4806d186ddff44764c15090"
+source_hash: "1c039182f50465ceb7344af145e7e134a5d625aa9e0fbf01a38773f528bdee76"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -251,7 +251,7 @@ Notes:
 
 The iOS app is a mobile node surface, not a Codex Computer Use backend. Codex
 Computer Use and `cua-driver mcp` control a local macOS desktop through MCP
-tools; the iOS app exposes iPhone capabilities through OpenClaw node commands
+tools; the iOS app exposes iPhone and iPad capabilities through OpenClaw node commands
 such as `canvas.*`, `camera.*`, `screen.*`, `location.*`, and `talk.*`.
 
 Agents can still operate the iOS app through OpenClaw by invoking node

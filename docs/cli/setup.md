@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
-source_hash: "64838054e2f360c1a4f238eed446d1e9984464a6f7c797c228ab3c8ec6ddc2b5"
+source_hash: "816b00d9ba8aee8532a4bef3443c91c05028c2814b7310680bd24dcd1f3f7f13"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/setup.md"
@@ -28,6 +28,7 @@ Note
 | `--workspace <dir>`        | Agent workspace directory (default `~/.openclaw/workspace`; stored as `agents.defaults.workspace`). |
 | `--wizard`                 | Run interactive onboarding.                                                                         |
 | `--non-interactive`        | Run onboarding without prompts.                                                                     |
+| `--accept-risk`            | Acknowledge full-system agent access risk; required with `--non-interactive`.                       |
 | `--mode <mode>`            | Onboarding mode: `local` or `remote`.                                                               |
 | `--import-from <provider>` | Migration provider to run during onboarding.                                                        |
 | `--import-source <path>`   | Source agent home for `--import-from`.                                                              |
@@ -39,7 +40,7 @@ Note
 
 `openclaw setup` runs the wizard when any of these flags are explicitly present, even without `--wizard`:
 
-`--wizard`, `--non-interactive`, `--mode`, `--import-from`, `--import-source`, `--import-secrets`, `--remote-url`, `--remote-token`.
+`--wizard`, `--non-interactive`, `--accept-risk`, `--mode`, `--import-from`, `--import-source`, `--import-secrets`, `--remote-url`, `--remote-token`.
 
 ## Examples
 
@@ -48,7 +49,7 @@ openclaw setup
 openclaw setup --workspace ~/.openclaw/workspace
 openclaw setup --wizard
 openclaw setup --wizard --import-from hermes --import-source ~/.hermes
-openclaw setup --non-interactive --mode remote --remote-url wss://gateway-host:18789 --remote-token <token>
+openclaw setup --non-interactive --accept-risk --mode remote --remote-url wss://gateway-host:18789 --remote-token <token>
 ```
 
 ## Notes

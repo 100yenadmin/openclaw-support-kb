@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context"
 source: "https://docs.openclaw.ai/concepts/context"
-source_hash: "b671c9d2c0574988888fc1ccd0dbf6f547da7427f57d86a8d296d1095e487e15"
+source_hash: "fe7b76519638783fdfdb57d33ffe07437642dbbe5d1580a3882c9d533a4b7f8d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context.md"
@@ -128,7 +128,7 @@ By default, OpenClaw injects a fixed set of workspace files (if present):
 - `HEARTBEAT.md`
 - `BOOTSTRAP.md` (first-run only)
 
-Large files are truncated per-file using `agents.defaults.bootstrapMaxChars` (default `12000` chars). OpenClaw also enforces a total bootstrap injection cap across files with `agents.defaults.bootstrapTotalMaxChars` (default `60000` chars). `/context` shows **raw vs injected** sizes and whether truncation happened.
+Large files are truncated per-file using `agents.defaults.bootstrapMaxChars` (default `20000` chars). OpenClaw also enforces a total bootstrap injection cap across files with `agents.defaults.bootstrapTotalMaxChars` (default `60000` chars). `/context` shows **raw vs injected** sizes and whether truncation happened.
 
 When truncation occurs, the runtime can inject an in-prompt warning block under Project Context. Configure this with `agents.defaults.bootstrapPromptTruncationWarning` (`off`, `once`, `always`; default `always`).
 

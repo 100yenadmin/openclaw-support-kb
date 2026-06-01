@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "33e8c34bf6d7765bd41f7168daff5a69002e584e02b572ae63efd10ba5936698"
+source_hash: "aed5ac2ad859e9ceb1de51ea6bac69c8d4692bd188e963c7c4ad0a8ec5275539"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -232,7 +232,7 @@ Cloudflare AI Gateway
 
 MiniMax
 
-    Config is auto-written. Hosted default is `MiniMax-M2.7`; API-key setup uses
+    Config is auto-written. Hosted default is `MiniMax-M3`; API-key setup uses
     `minimax/...`, and OAuth setup uses `minimax-portal/...`.
     More detail: [MiniMax](/providers/minimax).
 

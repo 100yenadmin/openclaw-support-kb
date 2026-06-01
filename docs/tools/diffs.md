@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "2c99d025f6b06c5c7003b519c2c5bdaaba82c5f33a63a8ec677d5b9d498dc65c"
+source_hash: "0cec7280567836bc99ae3f826b8aa8bc4f7bcc5b3a6188e73a077efa9697ad74"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
@@ -263,7 +263,9 @@ Install the Diff Viewer Language Pack plugin to highlight other languages:
 openclaw plugins install clawhub:@openclaw/diffs-language-pack
 ```
 
-With the language pack available, OpenClaw automatically uses it for languages outside the default list. Without it, those files stay readable as plain text.
+With the language pack available, OpenClaw can highlight many more languages. If the pack is not installed, files outside the default list still render as readable plain text. Examples include Astro, Vue, Svelte, MDX, GraphQL, Terraform/HCL, Nix, Clojure, Elixir, Haskell, OCaml, Scala, Zig, Solidity, Verilog/VHDL, Fortran, MATLAB, LaTeX, Mermaid, Sass/Less/SCSS, Nginx, Apache, CSV, dotenv, INI, and diff files.
+
+See [Diffs Language Pack plugin](/plugins/reference/diffs-language-pack) for details and [Shiki languages](https://shiki.style/languages) for Shiki's upstream language and alias catalog.
 
 ## Output details contract
 

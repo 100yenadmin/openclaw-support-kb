@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding reference"
 source: "https://docs.openclaw.ai/reference/wizard"
-source_hash: "d5726ab63ae56fc15a875ccb1db91ddce41471d4cae499aad692c026e2935b0e"
+source_hash: "dc69af1c727c28098b010c1001c3b8c562124b38d2672281bb413c3a37c3f5d6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/wizard.md"
@@ -57,7 +57,7 @@ Model/Auth
     - More detail: [Vercel AI Gateway](/providers/vercel-ai-gateway)
     - **Cloudflare AI Gateway**: prompts for Account ID, Gateway ID, and `CLOUDFLARE_AI_GATEWAY_API_KEY`.
     - More detail: [Cloudflare AI Gateway](/providers/cloudflare-ai-gateway)
-    - **MiniMax**: config is auto-written; hosted default is `MiniMax-M2.7`.
+    - **MiniMax**: config is auto-written; hosted default is `MiniMax-M3`.
       API-key setup uses `minimax/...`, and OAuth setup uses
       `minimax-portal/...`.
     - More detail: [MiniMax](/providers/minimax)

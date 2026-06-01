@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "6a82e232e23a41875a26b56c395d393d4672d2b9ac3b0c772fb7e9a6b893af49"
+source_hash: "5e7e2da4d1b9a1c27d0b26bc1be5fb793380b59dd23788d5083ceb2cc7ffa871"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -13,42 +13,36 @@ duplicate_index: 1
 # Skills config
 Source: https://docs.openclaw.ai/tools/skills-config
 
-Most skills loader/install configuration lives under `skills` in
-`~/.openclaw/openclaw.json`. Agent-specific skill visibility lives under
-`agents.defaults.skills` and `agents.list[].skills`. Skill Workshop behavior is
-configured under `skills.workshop`; see
-[Skill Workshop](/tools/skill-workshop) for the full creation and review flow.
+Most skills configuration lives under `skills` in
+`~/.openclaw/openclaw.json`. Agent-specific visibility lives under
+`agents.defaults.skills` and `agents.list[].skills`.
 
 ```json5
 {
   skills: {
     allowBundled: ["gemini", "peekaboo"],
     load: {
-      extraDirs: ["~/Projects/agent-scripts/skills", "~/Projects/oss/some-skill-pack/skills"],
+      extraDirs: ["~/Projects/agent-scripts/skills"],
       allowSymlinkTargets: ["~/Projects/manager/skills"],
       watch: true,
       watchDebounceMs: 250,
     },
     install: {
       preferBrew: true,
-      nodeManager: "npm", // npm | pnpm | yarn | bun (Gateway runtime still Node; bun not recommended)
+      nodeManager: "npm",
       allowUploadedArchives: false,
     },
     workshop: {
-      autonomous: {
-        enabled: false,
-      },
-      approvalPolicy: "pending", // pending | auto
+      autonomous: { enabled: false },
+      approvalPolicy: "pending",
       maxPending: 50,
       maxSkillBytes: 40000,
     },
     entries: {
       "image-lab": {
         enabled: true,
-        apiKey: { source: "env", provider: "default", id: "GEMINI_API_KEY" }, // or plaintext string
-        env: {
-          GEMINI_API_KEY: "GEMINI_KEY_HERE",
-        },
+        apiKey: { source: "env", provider: "default", id: "GEMINI_API_KEY" },
+        env: { GEMINI_API_KEY: "GEMINI_KEY_HERE" },
       },
       peekaboo: { enabled: true },
       sag: { enabled: false },
@@ -57,102 +51,148 @@ configured under `skills.workshop`; see
 }
 ```
 
-For built-in image generation/editing, prefer `agents.defaults.imageGenerationModel`
-plus the core `image_generate` tool. `skills.entries.*` is only for custom or
-third-party skill workflows.
+Note
 
-If you select a specific image provider/model, also configure that provider's
-auth/API key. Typical examples: `GEMINI_API_KEY` or `GOOGLE_API_KEY` for
-`google/*`, `OPENAI_API_KEY` for `openai/*`, and `FAL_KEY` for `fal/*`.
+  For built-in image generation, use `agents.defaults.imageGenerationModel`
+  plus the core `image_generate` tool instead of `skills.entries`. Skill
+  entries are for custom or third-party skill workflows only.
 
-Examples:
+## Loading (`skills.load`)
 
-- Native Nano Banana Pro-style setup: `agents.defaults.imageGenerationModel.primary: "google/gemini-3-pro-image-preview"`
-- Native fal setup: `agents.defaults.imageGenerationModel.primary: "fal/fal-ai/flux/dev"`
+ParamField
 
-## Agent skill allowlists
+  Additional skill directories to scan, at the lowest precedence (after bundled
+  and plugin skills). Paths are expanded with `~` support.
 
-Use agent config when you want the same machine/workspace skill roots, but a
+ParamField
+
+  Trusted real target directories that symlinked skill folders may resolve into,
+  even when the symlink lives outside the configured root. Use this for
+  intentional sibling-repo layouts such as
+  `<workspace>/skills/manager -> ~/Projects/manager/skills`. Keep this list
+  narrow — do not point at broad roots like `~` or `~/Projects`.
+
+ParamField
+
+  Watch skill folders and refresh the skills snapshot when `SKILL.md` files
+  change. Covers nested files under grouped skill roots.
+
+ParamField
+
+  Debounce window for skill watcher events in milliseconds.
+
+## Install (`skills.install`)
+
+ParamField
+
+  Prefer Homebrew installers when `brew` is available.
+
+ParamField
+
+  Node package manager preference for skill installs. This only affects skill
+  installs — the Gateway runtime should still use Node (Bun is not recommended
+  for WhatsApp/Telegram). Use `openclaw setup --node-manager` for npm, pnpm,
+  or bun; set `"yarn"` manually for Yarn-backed skill installs.
+
+ParamField
+
+  Allow trusted `operator.admin` Gateway clients to install private zip
+  archives staged through `skills.upload.*`. Normal ClawHub installs do not
+  need this setting.
+
+## Bundled skill allowlist
+
+ParamField
+
+  Optional allowlist for **bundled** skills only. When set, only bundled skills
+  in the list are eligible. Managed, agent-level, and workspace skills are
+  unaffected.
+
+## Per-skill entries (`skills.entries`)
+
+Keys under `entries` match the skill `name` by default. If a skill defines
+`metadata.openclaw.skillKey`, use that key instead. Quote hyphenated names
+(JSON5 allows quoted keys).
+
+ParamField
+.enabled" type="boolean">
+  `false` disables the skill even when bundled or installed. The `coding-agent`
+  bundled skill is opt-in — set it to `true` and ensure one of `claude`,
+  `codex`, `opencode`, or another supported CLI is installed and authenticated.
+
+ParamField
+.apiKey" type='string | { source, provider, id }'>
+  Convenience field for skills that declare `metadata.openclaw.primaryEnv`.
+  Supports a plaintext string or a SecretRef: `{ source: "env", provider: "default", id: "VAR_NAME" }`.
+
+ParamField
+.env" type="Record<string, string>">
+  Environment variables injected for the agent run. Only injected when the
+  variable is not already set in the process.
+
+ParamField
+.config" type="object">
+  Optional bag for custom per-skill configuration fields.
+
+## Agent allowlists (`agents`)
+
+Use agent config when you want the same machine/workspace skill roots but a
 different visible skill set per agent.
 
 ```json5
 {
   agents: {
     defaults: {
-      skills: ["github", "weather"],
+      skills: ["github", "weather"], // shared baseline
     },
     list: [
-      { id: "writer" }, // inherits defaults -> github, weather
-      { id: "docs", skills: ["docs-search"] }, // replaces defaults
+      { id: "writer" }, // inherits github, weather
+      { id: "docs", skills: ["docs-search"] }, // replaces defaults entirely
       { id: "locked-down", skills: [] }, // no skills
     ],
   },
 }
 ```
 
-Rules:
+ParamField
 
-- `agents.defaults.skills`: shared baseline allowlist for agents that omit
-  `agents.list[].skills`.
-- Omit `agents.defaults.skills` to leave skills unrestricted by default.
-- `agents.list[].skills`: explicit final skill set for that agent; it does not
-  merge with defaults.
-- `agents.list[].skills: []`: expose no skills for that agent.
+  Shared baseline allowlist inherited by agents that omit `agents.list[].skills`.
+  Omit entirely to leave skills unrestricted by default.
 
-## Fields
+ParamField
 
-- Built-in skill roots always include `~/.openclaw/skills`, `~/.agents/skills`,
-  `<workspace>/.agents/skills`, and `<workspace>/skills`.
-- `allowBundled`: optional allowlist for **bundled** skills only. When set, only
-  bundled skills in the list are eligible (managed, agent, and workspace skills unaffected).
-- `load.extraDirs`: additional skill directories to scan (lowest precedence).
-- `load.allowSymlinkTargets`: trusted real target directories that symlinked
-  workspace, project-agent, or extra-dir skill folders may resolve into even
-  when the symlink lives outside that target root. Use this for intentional
-  sibling-repo layouts such as
-  `<workspace>/skills/manager -> ~/Projects/manager/skills`. Managed
-  `~/.openclaw/skills` and personal `~/.agents/skills` roots may follow
-  skill-directory symlinks from local skill managers by default, but every
-  `SKILL.md` still has to resolve inside its own skill directory.
-- `load.watch`: watch skill folders and refresh the skills snapshot (default: true).
-- `load.watchDebounceMs`: debounce for skill watcher events in milliseconds (default: 250).
-- `install.preferBrew`: prefer brew installers when available (default: true).
-- `install.nodeManager`: node installer preference (`npm` | `pnpm` | `yarn` | `bun`, default: npm).
-  This only affects **skill installs**; the Gateway runtime should still be Node
-  (Bun not recommended for WhatsApp/Telegram).
-  - `openclaw setup --node-manager` is narrower and currently accepts `npm`,
-    `pnpm`, or `bun`. Set `skills.install.nodeManager: "yarn"` manually if you
-    want Yarn-backed skill installs.
-- `install.allowUploadedArchives`: allow trusted `operator.admin` Gateway
-  clients to install private zip archives staged through `skills.upload.*`
-  (default: false). This only enables the uploaded-archive path; normal ClawHub
-  installs do not require it.
-- `workshop.autonomous.enabled`: allow agents to create pending proposals from
-  durable conversation signals after successful turns (default: false).
-  User-prompted skill creation still goes through Skill Workshop.
-- `workshop.approvalPolicy`: Skill Workshop review policy. `pending` requires
-  approval before agent-initiated apply/reject/quarantine actions; `auto`
-  allows those actions without approval.
-- `workshop.maxPending`: maximum pending/quarantined proposals retained per
-  workspace (default: 50).
-- `workshop.maxSkillBytes`: maximum generated proposal body size in bytes
-  (default: 40000).
-  Proposal descriptions are also hard-capped at 160 bytes because they can be
-  shown in skill discovery and proposal listings.
-- `entries.<skillKey>`: per-skill overrides.
-- `agents.defaults.skills`: optional default skill allowlist inherited by agents
-  that omit `agents.list[].skills`.
-- `agents.list[].skills`: optional per-agent final skill allowlist; explicit
-  lists replace inherited defaults instead of merging.
+  Explicit final skill set for that agent. Explicit lists **replace** inherited
+  defaults — they do not merge. Set to `[]` to expose no skills for that agent.
 
-## Symlinked sibling repos
+## Workshop (`skills.workshop`)
+
+ParamField
+
+  When `true`, agents can create pending proposals from durable conversation
+  signals after successful turns. User-prompted skill creation always goes
+  through Skill Workshop regardless of this setting.
+
+ParamField
+
+  `pending` requires operator approval before agent-initiated apply, reject, or
+  quarantine. `auto` allows those actions without approval.
+
+ParamField
+
+  Maximum pending and quarantined proposals retained per workspace.
+
+ParamField
+
+  Maximum proposal body size in bytes. Proposal descriptions are hard-capped at
+  160 bytes because they appear in discovery and listing output.
+
+## Symlinked skill roots
 
 By default, workspace, project-agent, extra-dir, and bundled skill roots are
-containment boundaries. If a skill folder under `<workspace>/skills` is a
-symlink that resolves outside `<workspace>/skills`, OpenClaw skips it and logs
-`Skipping escaped skill path outside its configured root`.
+containment boundaries. A symlinked skill folder under `<workspace>/skills`
+that resolves outside the root is skipped with a log message.
 
-Keep the symlink layout and allow only the trusted target root:
+To allow an intentional symlink layout, declare the trusted target:
 
 ```json5
 {
@@ -165,69 +205,81 @@ Keep the symlink layout and allow only the trusted target root:
 }
 ```
 
-With this config, a symlink such as
-`<workspace>/skills/manager -> ~/Projects/manager/skills` is accepted after
-realpath resolution. `extraDirs` also scans the sibling repo directly, while
-`allowSymlinkTargets` preserves the symlinked path for existing workspace-skill
-layouts. Managed `~/.openclaw/skills` and personal `~/.agents/skills`
-directories already accept skill-directory symlinks because those roots are
-user-owned local skill-manager surfaces; per-skill `SKILL.md` containment still
-applies. Keep target entries narrow; do not point at broad roots such as `~` or
-`~/Projects` unless every skill tree under that root is trusted.
+With this config, `<workspace>/skills/manager -> ~/Projects/manager/skills` is
+accepted after realpath resolution. `extraDirs` scans the sibling repo directly;
+`allowSymlinkTargets` preserves the symlinked path for existing layouts.
 
-Per-skill fields:
+Managed `~/.openclaw/skills` and personal `~/.agents/skills` directories
+already accept skill-directory symlinks (per-skill `SKILL.md` containment still
+applies).
 
-- `enabled`: set `false` to disable a skill even if it's bundled/installed.
-- `env`: environment variables injected for the agent run (only if not already set).
-- `apiKey`: optional convenience for skills that declare a primary env var.
-  Supports plaintext string or SecretRef object (`{ source, provider, id }`).
-
-## Notes
-
-- Keys under `entries` map to the skill name by default. If a skill defines
-  `metadata.openclaw.skillKey`, use that key instead.
-- Load precedence is `<workspace>/skills` → `<workspace>/.agents/skills` →
-  `~/.agents/skills` → `~/.openclaw/skills` → bundled skills →
-  `skills.load.extraDirs`.
-- Changes to skills are picked up on the next agent turn when the watcher is enabled.
-
-### Sandboxed skills and env vars
-
-When a session is **sandboxed**, skill processes run inside the configured sandbox backend. The sandbox does **not** inherit the host `process.env`.
+## Sandboxed skills and env vars
 
 Warning
 
-  Global `env` and `skills.entries.<skill>.env`/`apiKey` apply to **host** runs only. Inside a sandbox they have no effect, so a skill that depends on `GEMINI_API_KEY` will fail with `apiKey not configured` unless the sandbox is given the variable separately.
+  `skills.entries.<skill>.env` and `apiKey` apply to **host** runs only. Inside
+  a sandbox they have no effect — a skill that depends on `GEMINI_API_KEY` will
+  fail with `apiKey not configured` unless the sandbox is given the variable
+  separately.
 
-Use one of:
+Pass secrets into a Docker sandbox with:
 
-- `agents.defaults.sandbox.docker.env` for the Docker backend (or per-agent `agents.list[].sandbox.docker.env`).
-- Bake the env into your custom sandbox image or remote sandbox environment.
+```json5
+{
+  agents: {
+    defaults: {
+      sandbox: {
+        docker: {
+          env: { GEMINI_API_KEY: "your-key-here" },
+        },
+      },
+    },
+  },
+}
+```
 
-For Docker sandboxes, configured `sandbox.docker.env` values become explicit container environment variables. Users with Docker daemon access can inspect them through Docker metadata, so use a mounted secret file, custom image, or another delivery path when that exposure is not acceptable.
+Note
+
+  Users with Docker daemon access can inspect `sandbox.docker.env` values
+  through Docker metadata. Use a mounted secret file, a custom image, or
+  another delivery path when that exposure is not acceptable.
+
+## Loading order reminder
+
+```text
+workspace/skills      (highest)
+workspace/.agents/skills
+~/.agents/skills
+~/.openclaw/skills
+bundled skills
+skills.load.extraDirs (lowest)
+```
+
+Changes to skills and config take effect on the next new session when the
+watcher is enabled, or on the next agent turn when the watcher detects a change.
 
 ## Related
 
 CardGroup
 
 
-Skills
+Skills reference
 
-    What skills are and how they load.
+    What skills are, loading order, gating, and SKILL.md format.
 
 
 Creating skills
 
-    Authoring custom skill packs.
+    Authoring custom workspace skills.
+
+
+Skill Workshop
+
+    Proposal queue for agent-drafted skills.
 
 
 Slash commands
 
-    Native command catalog and chat directives.
-
-
-Configuration reference
-
-    Full `skills` and `agents.skills` schema.
+    Native slash-command catalog and chat directives.
 
 ---

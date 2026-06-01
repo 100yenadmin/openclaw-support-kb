@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "38d70222b552f99c33bffcbc62593cd8f76ef72781ac132c3e29d4884fc70319"
+source_hash: "b6c809b2d8aa9599b3cbbab443fcd1ff947002da8782909f3713e23016d6cb30"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -229,6 +229,32 @@ Configure storage provider/settings:
 ```sh
 pnpm paperclipai configure --section storage
 ```
+
+## Agent Artifact Uploads
+
+When an agent generates a file that a board user or reviewer should inspect,
+attach it to the issue before marking the task complete. Do not rely on a local
+workspace path as the only access path.
+
+Use the helper bundled with the Paperclip skill from the repo root:
+
+```sh
+skills/paperclip/scripts/paperclip-upload-artifact.sh dist/demo.mp4 \
+  --title "Demo video render" \
+  --summary "MP4 render for board review"
+```
+
+For WebM output:
+
+```sh
+skills/paperclip/scripts/paperclip-upload-artifact.sh out/walkthrough.webm \
+  --title "Walkthrough video" \
+  --summary "WebM walkthrough render"
+```
+
+The helper uploads the file as an issue attachment, creates an artifact work
+product by default, and prints markdown links for the final issue comment. See
+`doc/AGENT-ARTIFACTS.md` for the full completion pattern and direct API shape.
 
 ## Default Agent Workspaces
 

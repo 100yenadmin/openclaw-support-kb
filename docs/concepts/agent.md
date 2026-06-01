@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "6d51733dbcde2db9cc9400aee033153e0978b24ec24bd7f70552259827f7862c"
+source_hash: "1a167abfa752f3de97801b47f6dadd45a696bfd95a488b1bd09532fc1906beeb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent.md"
@@ -48,6 +48,8 @@ Blank files are skipped. Large files are trimmed and truncated with a marker so 
 If a file is missing, OpenClaw injects a single "missing file" marker line (and `openclaw setup` will create a safe default template).
 
 `BOOTSTRAP.md` is only created for a **brand new workspace** (no other bootstrap files present). While it is pending, OpenClaw keeps it in Project Context and adds system-prompt bootstrap guidance for the initial ritual instead of copying it into the user message. If you delete it after completing the ritual, it should not be recreated on later restarts.
+
+After a workspace has been observed, OpenClaw also keeps a state-dir attestation marker for the workspace path. If a recently attested workspace disappears or is wiped, startup refuses to silently re-seed `BOOTSTRAP.md`; restore the workspace or use a full onboard reset so the workspace and marker are cleared together.
 
 To disable bootstrap file creation entirely (for pre-seeded workspaces), set:
 

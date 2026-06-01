@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "c5b51ea2a2f6f20d859a60ae34c10e3d2af694efd98da04bb6fe7bed997fa32a"
+source_hash: "997ac8e4f1b512c1e4cb1a448eb30e0b3cfa5261692e3558efcbbd1c788750a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -597,6 +597,10 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.blockStreaming`                         | Completed-block reply streaming                                                  | `false`                              |
 | `channels.feishu.typingIndicator`                        | Send typing reactions                                                            | `true`                               |
 | `channels.feishu.resolveSenderNames`                     | Resolve sender display names                                                     | `true`                               |
+| `channels.feishu.tools.bitable`                          | Enable Bitable/Base tools                                                        | `true`                               |
+| `channels.feishu.tools.base`                             | Alias for `channels.feishu.tools.bitable`; explicit `bitable` wins when both set | `true`                               |
+| `channels.feishu.accounts.<id>.tools.bitable`            | Per-account Bitable/Base tool gate                                               | inherited                            |
+| `channels.feishu.accounts.<id>.tools.base`               | Per-account alias for `tools.bitable`                                            | inherited                            |
 
 ---
 

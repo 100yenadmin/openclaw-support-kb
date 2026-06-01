@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "1c9847db04dea2f12fa9b699dfcaadcd29d0986d988d0585edbbf4bfe1439ef8"
+source_hash: "5c27a81ac10b24fd2d978b17fa3044b82e2ef1242e64f155695c49da73464804"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
@@ -219,9 +219,9 @@ Local-path behavior follows the same file-read trust model as the agent:
 - If `tools.fs.workspaceOnly` is `true`, outbound local media paths stay restricted to the OpenClaw temp root, the media cache, agent workspace paths, and sandbox-generated files.
 - If `tools.fs.workspaceOnly` is `false`, outbound local media can use host-local files the agent is already allowed to read.
 - Local paths can be absolute, workspace-relative, or home-relative with `~/`.
-- Host-local sends still only allow media and safe document types (images, audio, video, PDF, and Office documents). Plain text and secret-like files are not treated as sendable media.
+- Host-local sends still only allow media and safe document types (images, audio, video, PDF, Office documents, and validated text documents such as Markdown/MD, TXT, JSON, YAML, and YML). This is an extension of the existing host-read trust boundary, not a secret scanner: if the agent can read a host-local `secret.txt` or `config.json`, it can attach that file when the extension and content validation match.
 
-That means generated images/files outside the workspace can now send when your fs policy already allows those reads, without reopening arbitrary host-text attachment exfiltration.
+That means generated images/files outside the workspace can now send when your fs policy already allows those reads, while arbitrary host-local text extensions remain blocked. Keep sensitive files outside the agent-readable filesystem, or keep `tools.fs.workspaceOnly=true` for stricter local-path sends.
 
 ## Operations checklist
 

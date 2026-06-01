@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "cfaf2da223d7d6757963f8eaeb55f7c4e7378568c5f8edf296e9bbad4a9cfb5e"
+source_hash: "8a131cdfddf302c350bbc33a3370b7ed74bb4f61a52d8f37a4cd98afd02abc05"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -83,7 +83,7 @@ Because everything routes through one OAuth-authenticated Portal session, you do
 
 ### Cross-platform parity
 
-[Native Windows](/user-guide/windows-native) is still early beta, and per-tool API key setup is its rough edge — installing a Firecrawl account, a FAL account, a Browser Use account, an OpenAI key from Windows is the highest-friction part of getting a useful agent. A Portal subscription smooths that out: one OAuth covers the model and every gateway tool, so Windows users get the same experience as macOS/Linux without manually configuring four backends.
+[Native Windows](/user-guide/windows-native) makes per-tool API key setup its rough edge — installing a Firecrawl account, a FAL account, a Browser Use account, an OpenAI key from Windows is the highest-friction part of getting a useful agent. A Portal subscription smooths that out: one OAuth covers the model and every gateway tool, so Windows users get the same experience as macOS/Linux without manually configuring four backends.
 
 ## A note on Hermes 4
 

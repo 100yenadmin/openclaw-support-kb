@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
-source_hash: "b329ec804a980c25b52430e5d30fda3c0efecbd371aa70d6324ace8e33bef39d"
+source_hash: "589c61c0b3c522c09e381806f33407a78fed562e3ea78bee04d61d851f0a475a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/uninstall.md"
@@ -25,6 +25,8 @@ Recommended: use the built-in uninstaller:
 ```bash
 openclaw uninstall
 ```
+
+When using the CLI, state removal preserves configured workspace directories unless you also select `--workspace`.
 
 Non-interactive (automation / npx):
 
@@ -54,6 +56,7 @@ rm -rf "${OPENCLAW_STATE_DIR:-$HOME/.openclaw}"
 ```
 
 If you set `OPENCLAW_CONFIG_PATH` to a custom location outside the state dir, delete that file too.
+If you want to keep a workspace inside the state dir, such as `~/.openclaw/workspace`, move it aside before running `rm -rf` or delete state contents selectively.
 
 4. Delete your workspace (optional, removes agent files):
 

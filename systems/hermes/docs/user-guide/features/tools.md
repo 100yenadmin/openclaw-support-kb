@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tools & Toolsets"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tools"
-source_hash: "5d7e343764c6a5fe5a2e97545fe08aa643f08013a97174265a4aa9a7bc15687f"
+source_hash: "6fc669631bd5e520b214e319f9a1242dbff4d243ec5aa382fdd70651909f01cd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tools.md"
@@ -37,7 +37,7 @@ High-level categories:
 | **X Search** | `x_search` | Search X (Twitter) posts and threads via xAI's built-in `x_search` Responses tool — gated on xAI credentials (SuperGrok OAuth or `XAI_API_KEY`); off by default, opt in via `hermes tools` → 🐦 X (Twitter) Search. |
 | **Terminal & Files** | `terminal`, `process`, `read_file`, `patch` | Execute commands and manipulate files. |
 | **Browser** | `browser_navigate`, `browser_snapshot`, `browser_vision` | Interactive browser automation with text and vision support. |
-| **Media** | `vision_analyze`, `image_generate`, `video_generate`, `video_analyze`, `text_to_speech` | Multimodal analysis and generation. `video_generate` and `video_analyze` are opt-in (add `video_gen` / `video` toolsets via `hermes tools` or `--toolsets`). |
+| **Media** | `vision_analyze`, `image_generate`, `text_to_speech` | Multimodal analysis and generation. |
 | **Agent orchestration** | `todo`, `clarify`, `execute_code`, `delegate_task` | Planning, clarification, code execution, and subagent delegation. |
 | **Memory & recall** | `memory`, `session_search` | Persistent memory and session search. |
 | **Automation & delivery** | `cronjob`, `send_message` | Scheduled tasks with create/list/update/pause/resume/run/remove actions, plus outbound messaging delivery. |

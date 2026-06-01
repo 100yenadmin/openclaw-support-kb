@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "7341809e52d8ad840eea23458fba88faf35920b369522bf7667a9cfe3676f462"
+source_hash: "f6e520e472b57fd7330d033a25c6f37b2e1fc8df4abcb25db483a311708df171"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -76,6 +76,10 @@ PyPI releases track tagged versions (major/minor releases), not every commit on 
 # Linux / macOS / WSL2 / Android (Termux)
 curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
 ```
+
+Prefer native installers for desktop use?
+
+- **Desktop downloads:** [GitHub Releases](https://github.com/NousResearch/hermes-agent/releases/latest)
 
 :::tip Android / Termux
 If you're installing on a phone, see the dedicated [Termux guide](./termux.md) for the tested manual path, supported extras, and current Android-specific limitations.

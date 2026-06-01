@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slash Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/slash-commands"
-source_hash: "9bbc6e43742819d9ffbb42d7ff40b083ba98066e7b8aa68c7bf31553d34a220f"
+source_hash: "b80feb7ec7924bd9c77d09d044347e6ce67e81864db69fa852aba1b04f1c9e1f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/slash-commands.md"
@@ -129,7 +129,7 @@ Type `/` in the CLI to open the autocomplete menu. Built-in commands are case-in
 
 | Command | Description |
 |---------|-------------|
-| `/quit` | Exit the CLI (also: `/exit`). See note on `/q` under `/queue` above. Pass `--delete` (or `-d`) — e.g. `/exit --delete` — to also permanently remove the current session's SQLite history and on-disk transcripts before exiting. Useful for privacy-sensitive or one-off tasks. |
+| `/quit` | Exit the CLI (also: `/exit`). |
 
 ### Dynamic CLI slash commands
 

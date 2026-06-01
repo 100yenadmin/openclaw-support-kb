@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/cli/uninstall"
-source_hash: "4a6a3a20e02b3fe9450034f7886ee9ec02f5111f9edb7a104ec3f1f058c7006f"
+source_hash: "31f3f10e4daa37520655793982f3ea2e491ad72ce38c8b98f2e49d2e21604d62"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/uninstall.md"
@@ -42,6 +42,7 @@ openclaw uninstall --dry-run
 Notes:
 
 - Run `openclaw backup create` first if you want a restorable snapshot before removing state or workspaces.
+- `--state` preserves configured workspace directories unless `--workspace` is also selected.
 - `--all` is shorthand for removing service, state, workspace, and app together.
 - `--non-interactive` requires `--yes`.
 

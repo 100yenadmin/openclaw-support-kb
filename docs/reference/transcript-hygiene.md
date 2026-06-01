@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "d8e4dc34d642f07f9c3a5f1286bebbb40d68d8f97f59ba77c97995861eb4df42"
+source_hash: "d24b271c45690ad6c868430edf1fbbd2adfc52fdccec76c6403f122b163e346b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -137,6 +137,8 @@ inter-session user turns that only have provenance metadata.
   reasoning fields such as `reasoning` or `reasoning_content`.
 - Current same-turn tool-call continuations keep the assistant reasoning block
   attached to the tool call until the tool result has been replayed.
+- Custom/self-hosted model entries with `reasoning: true` preserve replayed
+  reasoning metadata.
 - Provider-owned exceptions can opt out when their wire protocol requires
   replayed reasoning metadata.
 

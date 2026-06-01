@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "da0aae48ae3d05de49a700c0f97bbfc60ffbe42d84a995028dfb7f1c7b03dbff"
+source_hash: "4f6324a8b91c20b250cc687e4b8397e33c093c26e81d09e5f36e2ff1b7061880"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture-internals.md"
@@ -317,6 +317,13 @@ that compatibility cleanup.
 If the provider needs a fully custom wire protocol or custom request executor,
 that is a different class of extension. These hooks are for provider behavior
 that still runs on OpenClaw's normal inference loop.
+
+`resolveUsageAuth` decides whether OpenClaw should call `fetchUsageSnapshot` or
+fall back to generic credential resolution for usage/status surfaces. Return
+`{ token, accountId? }` when the provider has a usage credential, return
+`{ handled: true }` when provider-owned usage auth has handled the request and
+must suppress generic API-key/OAuth fallback, and return `null` or `undefined`
+when the provider did not handle usage auth.
 
 ### Provider example
 
@@ -1030,10 +1037,10 @@ plugin index entry with `source: "path"` and a workspace-relative
 `plugins.load.paths`; the install record avoids duplicating local workstation
 paths into long-lived config. This keeps local development installs visible to
 source-plane diagnostics without adding a second raw filesystem-path disclosure
-surface. The persisted `plugins/installs.json` plugin index is the install
+surface. The persisted `installed_plugin_index` SQLite row is the install
 source of truth and can be refreshed without loading plugin runtime modules.
 Its `installRecords` map is durable even when a plugin manifest is missing or
-invalid; its `plugins` array is a rebuildable manifest view.
+invalid; its `plugins` payload is a rebuildable manifest view.
 
 ## Context engine plugins
 

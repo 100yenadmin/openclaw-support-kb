@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "8074aeadeb7ab879075a5570c5b521a67490ac3208bbcfa709180c5c28a825c1"
+source_hash: "5406523b31322a455b565a908a554fa48175f561a2313bc4d6c46fdd98b59972"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -242,7 +242,7 @@ Why do I see "Model ... is not allowed" and then no reply?
 
 
 
-Why do I see "Unknown model: minimax/MiniMax-M2.7"?
+Why do I see "Unknown model: minimax/MiniMax-M3"?
 
     This means the **provider isn't configured** (no MiniMax provider config or auth
     profile was found), so the model can't be resolved.
@@ -255,8 +255,9 @@ Why do I see "Unknown model: minimax/MiniMax-M2.7"?
        (`MINIMAX_API_KEY` for `minimax`, `MINIMAX_OAUTH_TOKEN` or stored MiniMax
        OAuth for `minimax-portal`).
     3. Use the exact model id (case-sensitive) for your auth path:
-       `minimax/MiniMax-M2.7` or `minimax/MiniMax-M2.7-highspeed` for API-key
-       setup, or `minimax-portal/MiniMax-M2.7` /
+       `minimax/MiniMax-M3`, `minimax/MiniMax-M2.7`, or
+       `minimax/MiniMax-M2.7-highspeed` for API-key setup, or
+       `minimax-portal/MiniMax-M3`, `minimax-portal/MiniMax-M2.7`, or
        `minimax-portal/MiniMax-M2.7-highspeed` for OAuth setup.
     4. Run:
 
@@ -283,9 +284,9 @@ Can I use MiniMax as my default and OpenAI for complex tasks?
       env: { MINIMAX_API_KEY: "sk-...", OPENAI_API_KEY: "sk-..." },
       agents: {
         defaults: {
-          model: { primary: "minimax/MiniMax-M2.7" },
+          model: { primary: "minimax/MiniMax-M3" },
           models: {
-            "minimax/MiniMax-M2.7": { alias: "minimax" },
+            "minimax/MiniMax-M3": { alias: "minimax" },
             "openai/gpt-5.5": { alias: "gpt" },
           },
         },

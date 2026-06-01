@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins"
-source_hash: "f9263f14b5f56ff3bfe0fe4b9829743c41429384fcb0ef5c3b8d328f0665b633"
+source_hash: "eb227a1d2c566ba881efd1a0715959328037d14706751fbcf0220bdad8b3372e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/plugins.md"
@@ -154,8 +154,6 @@ Within each source, Hermes also recognizes sub-category directories that route p
 
 User plugins at `~/.hermes/plugins/model-providers/<name>/` and `~/.hermes/plugins/memory/<name>/` override bundled plugins of the same name — last-writer-wins in `register_provider()` / `register_memory_provider()`. Drop a directory in, and it replaces the built-in without any repo edits.
 
-Sub-category plugins surface in `hermes plugins list` and the interactive `hermes plugins` UI under their **path-derived key** — e.g. `observability/langfuse`, `image_gen/openai`, `platforms/teams`. That key (not the bare manifest `name:`) is the value you pass to `hermes plugins enable …` / `disable …` and the string to add under `plugins.enabled` in `config.yaml`.
-
 ## Plugins are opt-in (with a few exceptions)
 
 **General plugins and user-installed backends are disabled by default** — discovery finds them (so they show up in `hermes plugins` and `/plugins`), but nothing with hooks or tools loads until you add the plugin's name to `plugins.enabled` in `~/.hermes/config.yaml`. This stops third-party code from running without your explicit consent.
@@ -277,19 +275,16 @@ Declarative plugins are symlinked with a `nix-managed-` prefix — they coexist 
 ## Managing plugins
 
 ```bash
-hermes plugins                                       # unified interactive UI
-hermes plugins list                                  # table: enabled / disabled / not enabled
-hermes plugins install user/repo                     # install from Git, then prompt Enable? [y/N]
-hermes plugins install user/repo --enable            # install AND enable (no prompt)
-hermes plugins install user/repo --no-enable         # install but leave disabled (no prompt)
-hermes plugins update my-plugin                      # pull latest
-hermes plugins remove my-plugin                      # uninstall
-hermes plugins enable my-plugin                      # add to allow-list (flat plugin)
-hermes plugins enable observability/langfuse         # add to allow-list (sub-category plugin)
-hermes plugins disable my-plugin                     # remove from allow-list + add to disabled
+hermes plugins                               # unified interactive UI
+hermes plugins list                          # table: enabled / disabled / not enabled
+hermes plugins install user/repo             # install from Git, then prompt Enable? [y/N]
+hermes plugins install user/repo --enable    # install AND enable (no prompt)
+hermes plugins install user/repo --no-enable # install but leave disabled (no prompt)
+hermes plugins update my-plugin              # pull latest
+hermes plugins remove my-plugin              # uninstall
+hermes plugins enable my-plugin              # add to allow-list
+hermes plugins disable my-plugin             # remove from allow-list + add to disabled
 ```
-
-For plugins under a sub-category directory (e.g. `plugins/observability/langfuse/`, `plugins/image_gen/openai/`), use the full `<category>/<plugin>` key — that's exactly what `hermes plugins list` shows in the **Name** column.
 
 ### Interactive UI
 
@@ -303,7 +298,6 @@ Plugins
  → [✓] my-tool-plugin — Custom search tool
    [ ] webhook-notifier — Event hooks
    [ ] disk-cleanup — Auto-cleanup of ephemeral files [bundled]
-   [ ] observability/langfuse — Trace turns / LLM calls / tools to Langfuse [bundled]
 
   Provider Plugins
      Memory Provider          ▸ honcho

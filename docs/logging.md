@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "0908fd3e5a0b7df7121fb7a48382bc18bc9fbe4f7c1adb909daa9ba480645aca"
+source_hash: "478e158ead089d6ca8c9269aa1a80f7a5726cedb7001ac051f089da2a1c961dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -239,7 +239,7 @@ Model-call diagnostics record bounded request/response measurements without
 capturing raw prompt or response content:
 
 - `requestPayloadBytes`: UTF-8 byte size of the final model request payload
-- `responseStreamBytes`: UTF-8 byte size of streamed model response events
+- `responseStreamBytes`: UTF-8 byte size of streamed model response events, excluding accumulated `partial` snapshots on delta events
 - `timeToFirstByteMs`: elapsed time before the first streamed response event
 - `durationMs`: total model-call duration
 

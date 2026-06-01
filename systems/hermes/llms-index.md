@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "473627193af62516d1625f4f92fbba36a9e601ffe7a902643f1ce44aeeb9c1da"
+source_hash: "a687ef6d7f5eb99d8f57de220243b458c4ddb45b9daa54cf590e887e1dce9356"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -23,7 +23,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 
 ## Getting Started
 
-- [Installation](https://hermes-agent.nousresearch.com/docs/getting-started/installation): Install Hermes Agent on Linux, macOS, WSL2, native Windows (early beta), or Android via Termux
+- [Installation](https://hermes-agent.nousresearch.com/docs/getting-started/installation): Install Hermes Agent on Linux, macOS, WSL2, native Windows, or Android via Termux
 - [Quickstart](https://hermes-agent.nousresearch.com/docs/getting-started/quickstart): Your first conversation with Hermes Agent — from install to chatting in under 5 minutes
 - [Learning Path](https://hermes-agent.nousresearch.com/docs/getting-started/learning-path): Choose your learning path through the Hermes Agent documentation based on your experience level and goals.
 - [Updating](https://hermes-agent.nousresearch.com/docs/getting-started/updating): How to update Hermes Agent to the latest version or uninstall it

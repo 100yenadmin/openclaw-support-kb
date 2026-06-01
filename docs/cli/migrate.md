@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "d425cffc1bdfc3982953a567e632e6ec990b033d7d75974c3329b1172c8184b6"
+source_hash: "7b4347b35e5befed804f4300ec3aec7e3d4a44a2e633103d13adde6d369f339e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -244,6 +244,17 @@ Target-side auth-required installs are reported on the affected plugin item with
 `status: "skipped"`, `reason: "auth_required"`, and sanitized app identifiers.
 Their explicit config entries are written disabled until you reauthorize and
 enable them. Other install failures are item-scoped `error` results.
+
+The native Codex plugin config also accepts first-party `openai-bundled` and
+`openai-primary-runtime` marketplace identities, but migration does not
+auto-discover or install them from source state.
+
+OpenAI-side app/plugin availability still comes from the signed-in Codex
+account and workspace app controls. See
+[Using Codex with your ChatGPT plan](https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan)
+for OpenAI's account and workspace-control overview, then use
+[Native Codex plugins](/plugins/codex-native-plugins#manual-first-party-marketplace-entries)
+for manual first-party marketplace entries.
 
 If Codex app-server plugin inventory is unavailable during planning, migration
 falls back to cached bundle advisory items instead of failing the whole
