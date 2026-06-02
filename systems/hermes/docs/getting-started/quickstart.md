@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "f6e520e472b57fd7330d033a25c6f37b2e1fc8df4abcb25db483a311708df171"
+source_hash: "e0f2a8dbc33645183dcb485864e6ff2beea306407422fc013b92d489d9ed7a10"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -298,12 +298,30 @@ Then in the CLI: `/voice on`. Press `Ctrl+B` to record. See [Voice Mode](../user
 
 ### Skills
 
+Skills are on-demand instruction documents that teach Hermes how to do a specific task — deploy to Kubernetes, open a GitHub PR, fine-tune a model, search for GIFs. Each is a `SKILL.md` file with a name, a description, and a step-by-step procedure. The agent reads the short descriptions for free and only loads a skill's full content when a task actually calls for it, so adding skills doesn't bloat every request.
+
+Hermes ships with a catalog of bundled skills already installed in `~/.hermes/skills/`. You can add more from the Skills Hub, or write your own.
+
+**Browse and install from the hub:**
+
 ```bash
-hermes skills search kubernetes
-hermes skills install openai/skills/k8s
+hermes skills browse                      # list everything available
+hermes skills search kubernetes           # find skills by keyword
+hermes skills install openai/skills/k8s   # install one (runs a security scan first)
 ```
 
-Or use `/skills` inside a chat session.
+The install argument is a `source/path` slug from the hub — `openai/skills/k8s` means the `k8s` skill from OpenAI's catalog. `hermes skills browse` shows the exact slugs to use.
+
+**Use a skill** — every installed skill becomes a slash command automatically:
+
+```bash
+/k8s deploy the staging manifest          # run the skill with a request
+/k8s                                       # load it and let Hermes ask what you need
+```
+
+This works in the CLI and in any connected messaging platform. You don't have to install everything up front — the agent picks the right bundled skill on its own during normal conversation when a task matches one.
+
+See [Skills System](../user-guide/features/skills.md) for writing your own, external skill directories, and the full hub source list.
 
 ### MCP servers
 

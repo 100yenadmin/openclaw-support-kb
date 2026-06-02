@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "xAI Grok OAuth (SuperGrok / X Premium+)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/xai-grok-oauth"
-source_hash: "aff19746d154b8f39689c3ac56c5f7105ce6a11ecb9118f4e322dddea499894e"
+source_hash: "cd3319965d3a8bcad52645a8412231d67cffeaa09751aef20753abbea81b89f7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/xai-grok-oauth.md"
@@ -195,7 +195,8 @@ The `x_search` toolset auto-enables whenever xAI credentials (a SuperGrok / X Pr
 | Chat | `grok-4.20-multi-agent-0309` | Multi-agent variant |
 | Image | `grok-imagine-image` | Default; ~5–10 s |
 | Image | `grok-imagine-image-quality` | Higher fidelity; ~10–20 s |
-| Video | `grok-imagine-video` | Text-to-video and image-to-video; up to 7 reference images |
+| Video | `grok-imagine-video` | Text-to-video |
+| Video | `grok-imagine-video-1.5-preview` | Image-to-video; dated alias `grok-imagine-video-1.5-2026-05-30` |
 | TTS | (default voice) | xAI `/v1/tts` endpoint |
 
 The chat catalog is derived live from the on-disk `models.dev` cache; new xAI releases appear automatically once that cache refreshes. `grok-4.3` is always pinned to the top of the list.
