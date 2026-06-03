@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "TUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/tui"
-source_hash: "96836bcc76042088d4b050924c3b1b345519a637b7a1dcb1298a726d3fb7730a"
+source_hash: "353965571d8c107a3fb698fc81fb399865307799af45b09980799114993fe5ee"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/tui.md"
@@ -49,7 +49,16 @@ hermes          # now uses the TUI
 hermes chat     # same
 ```
 
-The classic CLI remains available as the default. Anything documented in [CLI Interface](cli.md) — slash commands, quick commands, skill preloading, personalities, multi-line input, interrupts — works in the TUI identically.
+Or make it the persistent default in `~/.hermes/config.yaml`:
+
+```yaml
+display:
+  interface: tui   # "cli" (default) or "tui"
+```
+
+With `display.interface: tui`, a bare `hermes` (and `hermes chat`) launches the TUI. Explicit flags always win — run `hermes --cli` to drop back to the classic REPL for a single invocation, or `hermes --tui` / `HERMES_TUI=1` to force the TUI when the config default is `cli`.
+
+The classic CLI remains the shipped default. Anything documented in [CLI Interface](cli.md) — slash commands, quick commands, skill preloading, personalities, multi-line input, interrupts — works in the TUI identically.
 
 ## Why the TUI
 
@@ -296,7 +305,7 @@ This is the same channel the web dashboard's embedded TUI uses (see [Web Dashboa
 
 ## Reverting to the classic CLI
 
-Launching `hermes` (without `--tui`) stays on the classic CLI. To make a machine prefer the TUI, set `HERMES_TUI=1` in your shell profile. To go back, unset it.
+Launching `hermes` (without `--tui`) stays on the classic CLI by default. To make a machine prefer the TUI, set `display.interface: tui` in `~/.hermes/config.yaml` (persistent) or `HERMES_TUI=1` in your shell profile (per-shell). To go back, set `interface: cli` / unset the env var, or pass `hermes --cli` for a one-off.
 
 If the TUI fails to launch (no Node, missing bundle, TTY issue), Hermes prints a diagnostic and falls back — rather than leaving you stuck.
 

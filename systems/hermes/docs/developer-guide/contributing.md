@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "85edc945a830c537d67b5238adf3c0eceedcbd010f912cd2900b98a38c3bce70"
+source_hash: "d20d7ca8e97a88c189d78d95b9c5b65ca112d5c32f3c0db4107f2375d97b65a5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -46,7 +46,7 @@ We value contributions in this order:
 
 | Requirement | Notes |
 |-------------|-------|
-| **Git** | With `--recurse-submodules` support, and the `git-lfs` extension installed |
+| **Git** | With the `git-lfs` extension installed |
 | **Python 3.11+** | uv will install it if missing |
 | **uv** | Fast Python package manager ([install](https://docs.astral.sh/uv/)) |
 | **Node.js 20+** | Optional — needed for browser tools and WhatsApp bridge (matches root `package.json` engines) |
@@ -54,7 +54,7 @@ We value contributions in this order:
 ### Clone and Install
 
 ```bash
-git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git
+git clone https://github.com/NousResearch/hermes-agent.git
 cd hermes-agent
 
 # Create venv with Python 3.11

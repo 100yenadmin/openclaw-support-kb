@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Updating & Uninstalling"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/updating"
-source_hash: "4f0dc93e172e6a42d07dcde469f2c40b9959dcf0d928209d156c9878ef09c641"
+source_hash: "92cf96235294b526725f1cfb9bfc51c4b06e6502807596a473c45c412cfc0742"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/updating.md"
@@ -208,7 +208,6 @@ git log --oneline -10
 
 # Roll back to a specific commit
 git checkout <commit-hash>
-git submodule update --init --recursive
 uv pip install -e ".[all]"
 
 # Restart the gateway if running
@@ -219,7 +218,6 @@ To roll back to a specific release tag (substitute your previous tag — e.g. a 
 
 ```bash
 git checkout vX.Y.Z
-git submodule update --init --recursive
 uv pip install -e ".[all]"
 ```
 

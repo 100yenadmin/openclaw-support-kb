@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Android / Termux"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/termux"
-source_hash: "0309ee4b85877e99835d645dd56a1091e36ad61eb7da8fb6e2fa641c7f9bc6c1"
+source_hash: "8090f8f48e715f9b9607578c9e9ee8d0d465aa313cfb7fac360f1adf675acde1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/termux.md"
@@ -93,14 +93,8 @@ Why these packages?
 ### 2. Clone Hermes
 
 ```bash
-git clone --recurse-submodules https://github.com/NousResearch/hermes-agent.git
+git clone https://github.com/NousResearch/hermes-agent.git
 cd hermes-agent
-```
-
-If you already cloned without submodules:
-
-```bash
-git submodule update --init --recursive
 ```
 
 ### 3. Create a virtual environment
