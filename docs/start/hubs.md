@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "c29926b5a92874543129ecf7ffa199593e75068531519b07d5b859d517d37f9e"
+source_hash: "e642cae60574607bf880752f22c87b493b86c5e94ab506475b5eb85759b86b90"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
@@ -143,7 +143,7 @@ Use these hubs to discover every page, including deep dives and reference docs t
 - [macOS](/platforms/macos)
 - [iOS](/platforms/ios)
 - [Android](/platforms/android)
-- [Windows (WSL2)](/platforms/windows)
+- [Windows Hub](/platforms/windows)
 - [Linux](/platforms/linux)
 - [Web surfaces](/web)
 

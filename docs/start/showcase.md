@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "902bc86c047d4a6ab3c6f8dcb04e21aac06130e64c6c027588ea5f848bfd1950"
+source_hash: "4ef63d291057be8591dd543408e960e341f5bb3b71a6d5afa2e97c855c3ec461"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
@@ -108,6 +108,8 @@ R2 upload (Send Me My Files)
   **@julianengel** • `files` `r2` `presigned-urls`
 
 Upload to Cloudflare R2/S3 and generate secure presigned download links. Useful for remote OpenClaw instances.
+
+  <img src="/assets/showcase/r2-upload.png" alt="R2 upload skill on ClawHub" />
 
 iOS app via Telegram
 
@@ -271,6 +273,8 @@ OpenRouter transcription
 
 Multi-lingual audio transcription via OpenRouter (Gemini, and more). Available on ClawHub.
 
+  <img src="/assets/showcase/openrouter-transcribe.png" alt="OpenRouter transcription skill on ClawHub" />
+
 ## Infrastructure and deployment
 
 Packaging, deployment, and integrations that make OpenClaw easier to run and extend.
@@ -289,6 +293,8 @@ Home Assistant skill
 
 Control and automate Home Assistant devices via natural language.
 
+  <img src="/assets/showcase/homeassistant.png" alt="Home Assistant skill on ClawHub" />
+
 Nix packaging
 
   **@openclaw** • `nix` `packaging` `deployment`
@@ -300,6 +306,8 @@ CalDAV calendar
   **ClawHub** • `calendar` `caldav` `skill`
 
 Calendar skill using khal and vdirsyncer. Self-hosted calendar integration.
+
+  <img src="/assets/showcase/caldav-calendar.png" alt="CalDAV calendar skill on ClawHub" />
 
 ## Home and hardware
 

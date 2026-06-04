@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "a439a69c064574eab3a5326f239dec25e3aea0078da1c9537775f3d7e4fc47b3"
+source_hash: "bb384ee821f3081a6d9b1cd582578afe25d3fb89d5d635009d3152068fcf7d8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -125,6 +125,7 @@ observation-only.
 
 - **`before_tool_call`** - rewrite tool params, block execution, or require approval
 - `after_tool_call` - observe tool results, errors, and duration
+- `resolve_exec_env` - contribute plugin-owned environment variables to `exec`
 - **`tool_result_persist`** - rewrite the assistant message produced from a tool result
 - **`before_message_write`** - inspect or block an in-progress message write (rare)
 
@@ -156,7 +157,7 @@ observation-only.
 - `gateway_start` / `gateway_stop` - start or stop plugin-owned services with the Gateway
 - `deactivate` - deprecated compatibility alias for `gateway_stop`; use `gateway_stop` in new plugins
 - `cron_changed` - observe gateway-owned cron lifecycle changes (added, updated, removed, started, finished, scheduled)
-- **`before_install`** - inspect skill or plugin install scans and optionally block
+- **`before_install`** - inspect skill or plugin install context and optionally block
 
 ## Debug runtime hooks
 
@@ -237,6 +238,28 @@ with `api.registerTrustedToolPolicy(...)`. These run before ordinary
 for host-trusted gates such as workspace policy, budget enforcement, or
 reserved workflow safety. External plugins should use normal `before_tool_call`
 hooks.
+
+### Exec environment hook
+
+`resolve_exec_env` lets plugins contribute environment variables to `exec`
+tool invocations after the base exec environment is built and before the
+command runs. It receives:
+
+- `event.sessionKey`
+- `event.toolName`, currently always `"exec"`
+- `event.host`, one of `"gateway"`, `"sandbox"`, or `"node"`
+- context fields such as `ctx.agentId`, `ctx.sessionKey`,
+  `ctx.messageProvider`, and `ctx.channelId`
+
+Return a `Record<string, string>` to merge into the exec environment. Handlers
+run in priority order, and later hook results override earlier hook results for
+the same key.
+
+Hook output is filtered through the host exec environment key policy before it
+is merged. Invalid keys, `PATH`, and dangerous host override keys such as
+`LD_*`, `DYLD_*`, `NODE_OPTIONS`, proxy variables, and TLS override variables
+are dropped. The filtered plugin env is included in gateway approval/audit
+metadata and forwarded to node-host execution requests.
 
 ### Tool result persistence
 
@@ -434,11 +457,14 @@ Decision rules:
 
 ## Install hooks
 
-`before_install` runs after the built-in scan for skill and plugin installs.
-Return additional findings or `{ block: true, blockReason }` to stop the
-install.
+`before_install` runs after the operator-owned `security.installPolicy` check
+when one is configured. The `builtinScan` field remains in the event payload for
+compatibility, but OpenClaw no longer runs built-in install-time dangerous-code
+blocking, so it is an empty `ok` result. Return additional findings or
+`{ block: true, blockReason }` to stop the install.
 
 `block: true` is terminal. `block: false` is treated as no decision.
+Handler failures block the install fail-closed.
 
 ## Gateway lifecycle
 

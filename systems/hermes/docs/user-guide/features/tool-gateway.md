@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Tool Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway"
-source_hash: "196f6e979f20876daa33e64771c84d6dbac0a61f759285f1e6574e13c1806969"
+source_hash: "13012415adf13ad69e10016a79dc890edaaf0b397b94bde97924011f64780d21"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-gateway.md"
@@ -72,12 +72,12 @@ hermes tools              # Enable the gateway per-tool — pick "Nous Subscript
 Check what's active at any time:
 
 ```bash
-hermes portal status      # Portal auth + Tool Gateway routing summary
+hermes portal info        # Portal auth + Tool Gateway routing summary
 hermes portal tools       # Gateway catalog with current routing per tool
 hermes status             # Full system status (Tool Gateway is one section)
 ```
 
-`hermes portal status` shows a section like:
+`hermes portal info` shows a section like:
 
 ```
 ◆ Nous Tool Gateway

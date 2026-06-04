@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
-source_hash: "b5b495a46c7b42c22810bb1a4d44b289460f3aeef83da29cd756163ff0fa7c61"
+source_hash: "974a5ee95019a97ed41a3a9ea100fa19f89ab94faaad9c858e5b913c3db99d83"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents-setup.md"
@@ -292,8 +292,9 @@ different operation limit:
 openclaw config set plugins.entries.acpx.config.timeoutSeconds 180
 ```
 
-Runtime turns use OpenClaw agent/run timeouts, including `/acp timeout` and
-`sessions_spawn.timeoutSeconds`. Restart the gateway after changing this value.
+Runtime turns use OpenClaw agent/run timeouts, including `/acp timeout`.
+`sessions_spawn` does not accept per-call timeout overrides. Restart the
+gateway after changing this value.
 
 ### Health probe agent configuration
 

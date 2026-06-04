@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "5c27a81ac10b24fd2d978b17fa3044b82e2ef1242e64f155695c49da73464804"
+source_hash: "d7880773f5bd8f73a9fc9b8a12394041ef53ceaac1a4cdaf4a54a8f671445e16"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
@@ -242,7 +242,7 @@ Logs live under `/tmp/openclaw/` (default: `openclaw-YYYY-MM-DD.log`).
 - macOS menu bar companion: [OpenClaw macOS app](/platforms/macos)
 - iOS node app: [iOS app](/platforms/ios)
 - Android node app: [Android app](/platforms/android)
-- Windows status: [Windows (WSL2)](/platforms/windows)
+- Windows Hub: [Windows](/platforms/windows)
 - Linux status: [Linux app](/platforms/linux)
 - Security: [Security](/gateway/security)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "652d73802c321f48118d012d6a368a41d3d38d9d8736100002aeae6279635570"
+source_hash: "c704c1a341d62df18816a5b9c61e75ac512b9f0f8354e792b453ad57044d0c30"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/onboard.md"
@@ -111,6 +111,7 @@ openclaw onboard --non-interactive \
 
 `--custom-api-key` is optional in non-interactive mode. If omitted, onboarding checks `CUSTOM_API_KEY`.
 OpenClaw marks common vision model IDs as image-capable automatically. Pass `--custom-image-input` for unknown custom vision IDs, or `--custom-text-input` to force text-only metadata.
+Use `--custom-compatibility openai-responses` for OpenAI-compatible endpoints that support `/v1/responses` but not `/v1/chat/completions`.
 
 LM Studio also supports a provider-specific key flag in non-interactive mode:
 

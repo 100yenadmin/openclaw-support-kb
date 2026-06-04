@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "3abe92881b528728354c6ae3fa5bac2776ab5c1dc31c2ad7c2daa3a99d8e9caa"
+source_hash: "d6eee7de8025d63b9f3dd089fe375b46d90bb4a06c0e5c5eeab2e62363e0b0ba"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/messages.md"
@@ -200,10 +200,12 @@ OpenClaw resolves that behavior by conversation type:
   `message(action=send)`.
 - Internal orchestration allows silence by default.
 
-OpenClaw also uses silent replies for internal runner failures that happen
-before any assistant reply in non-direct chats, so groups/channels do not see
-gateway error boilerplate. Direct chats show compact failure copy by default;
-raw runner details are shown only when `/verbose full` is enabled.
+OpenClaw also uses silent replies for generic internal runner failures in
+non-direct chats, so groups/channels do not see gateway error boilerplate.
+Classified failures with user-facing recovery copy, such as missing auth,
+rate-limit, or overload notices, can still be delivered. Direct chats show
+compact failure copy by default; raw runner details are shown only when
+`/verbose full` is enabled.
 
 Defaults live under `agents.defaults.silentReply`; `surfaces.<id>.silentReply`
 can override group/internal policy per surface.

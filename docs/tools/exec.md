@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "4197c11e10d81f4ef83739eaa5270dd135aefe648530cef5ac4db3b105368c98"
+source_hash: "5fb4bc3d49e42d57d7dffec59595049dc0fefaa367103c588000f68796564126"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -60,7 +60,11 @@ force `security=full` only when the operator explicitly grants elevated access.
 
 ParamField
 
-Approval prompt behavior for `gateway` / `node` execution.
+The baseline ask mode comes from `tools.exec.ask` and host approvals.
+For channel-origin model calls, per-call `ask` is ignored when the
+effective host ask is `off`; otherwise it can only harden to a stricter
+mode. Trusted internal/API callers that construct exec tools with an
+explicit `ask` value are unchanged.
 
 ParamField
 

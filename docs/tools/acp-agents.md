@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "5b4aa0c3d8916e92f40b79f33f51d7f1cf98d0320f6dbf2c14b08922baceac94"
+source_hash: "3893b8d7671c7513708fafb6eca39e0516c54337aae3293107625b506f918ff9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -602,12 +602,9 @@ ParamField
   `streamLogPath` pointing to a session-scoped JSONL log
   (`<sessionId>.acp-stream.jsonl`) you can tail for full relay history.
 
-ParamField
-
-  Aborts the ACP child turn after N seconds. `0` keeps the turn on the
-  gateway's no-timeout path. The same value is applied to the Gateway
-  run and ACP runtime so stalled/quota-exhausted harnesses do not
-  occupy the parent agent lane indefinitely.
+ACP `sessions_spawn` runs use `agents.defaults.subagents.runTimeoutSeconds` for
+their default child turn limit. The tool does not accept per-call timeout
+overrides.
 
 ParamField
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "160b15d94eecf6ac8a0b79c5309f2b47fddc11460e3f4fe74b696cd9cf2cf76e"
+source_hash: "11b693d40c6345b2c314ea4a186038a08090ca181d3ef5fde0b00802065853c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/android.md"
@@ -206,12 +206,12 @@ Android
 Tailnet (optional): if both devices are on Tailscale, use a MagicDNS name or tailnet IP instead of `.local`, e.g. `http://<gateway-magicdns>:18789/__openclaw__/canvas/`.
 
 This server injects a live-reload client into HTML and reloads on file changes.
-The A2UI host lives at `http://<gateway-host>:18789/__openclaw__/a2ui/`.
+The Gateway also serves `/__openclaw__/a2ui/`, but the Android app treats remote A2UI pages as render-only. Action-capable A2UI commands use the bundled app-owned A2UI page before applying messages.
 
 Canvas commands (foreground only):
 
 - `canvas.eval`, `canvas.snapshot`, `canvas.navigate` (use `{"url":""}` or `{"url":"/"}` to return to the default scaffold). `canvas.snapshot` returns `{ format, base64 }` (default `format="jpeg"`).
-- A2UI: `canvas.a2ui.push`, `canvas.a2ui.reset` (`canvas.a2ui.pushJSONL` legacy alias)
+- A2UI: `canvas.a2ui.push`, `canvas.a2ui.reset` (`canvas.a2ui.pushJSONL` legacy alias). These commands use the bundled app-owned A2UI page for action-capable rendering.
 
 Camera commands (foreground only; permission-gated):
 
@@ -227,8 +227,9 @@ See [Camera node](/nodes/camera) for parameters and CLI helpers.
 - By default, Android Talk uses native speech recognition, Gateway chat, and `talk.speak` through the configured gateway Talk provider. Local system TTS is used only when `talk.speak` is unavailable.
 - Android Talk uses realtime Gateway relay only when `talk.realtime.mode` is `realtime` and `talk.realtime.transport` is `gateway-relay`.
 - Voice wake remains disabled in the Android UX/runtime.
-- Additional Android command families (availability depends on device + permissions):
+- Additional Android command families (availability depends on device, permissions, and user settings):
   - `device.status`, `device.info`, `device.permissions`, `device.health`
+  - `device.apps` only when **Settings > Phone Capabilities > Installed Apps** is enabled; it lists launcher-visible apps by default.
   - `notifications.list`, `notifications.actions` (see [Notification forwarding](#notification-forwarding) below)
   - `photos.latest`
   - `contacts.search`, `contacts.add`

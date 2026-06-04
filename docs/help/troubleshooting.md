@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "f612521c8b30d0203c0b7c29a6964d0fcfb2f99221ee971c69f86c18aad65976"
+source_hash: "b0db67741d6181be4be408c57055a0271890c79268a733083676d4b8ed616b4b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
@@ -111,6 +111,57 @@ Example:
 ```
 
 Reference: [Plugin architecture](/plugins/architecture)
+
+## Install policy blocks plugin installs or updates
+
+If an update finishes but plugins are stale, disabled, or show messages such as
+`blocked by install policy`, `install policy failed closed`, or
+`Disabled "<plugin>" after plugin update failure`, check
+`security.installPolicy`.
+
+Install policy runs on plugin installs and updates. OpenClaw-owned plugin
+versions normally move with the OpenClaw release, so an OpenClaw update can
+also need matching `@openclaw/*` plugin updates during post-update sync.
+
+Avoid these broad policy shapes unless you also maintain the matching upgrade
+rule:
+
+- Freezing OpenClaw-owned plugins to one exact old version, such as allowing
+  only `@openclaw/*@2026.5.3`.
+- Blocking by source kind alone, such as every npm, network, or
+  `request.mode: "update"` plugin request.
+- Treating the policy command as optional. When `security.installPolicy` is
+  enabled, a missing, slow, unreadable, or permission-blocked policy executable
+  fails closed.
+- Approving plugin versions without considering the policy request's
+  `openclawVersion` and the plugin candidate metadata.
+
+Safer policy rules allow trusted OpenClaw-owned plugin updates when the
+candidate is compatible with the current OpenClaw host, instead of pinning a
+single release forever. If you block npm by default, make a narrow exception
+for the trusted `@openclaw/*` plugin packages or plugin ids you use. If you
+differentiate install and update requests, apply the same trust rule to
+`request.mode: "update"`.
+
+Recovery:
+
+```bash
+openclaw doctor --deep
+openclaw plugins update --all
+openclaw status --all
+```
+
+If the policy is intentionally strict, relax it for the trusted OpenClaw upgrade
+window, rerun `openclaw plugins update --all`, then restore the stricter rule.
+If a plugin was disabled after update failure, inspect it and re-enable it only
+after the update succeeds:
+
+```bash
+openclaw plugins inspect <plugin-id> --runtime --json
+openclaw plugins enable <plugin-id>
+```
+
+Reference: [Operator install policy](/tools/skills-config#operator-install-policy-securityinstallpolicy)
 
 ## Plugin present but blocked by suspicious ownership
 

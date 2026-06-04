@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "bd724652889307143c47887e99eb2b8e8c7dc0292417db95e8088ad1239fce14"
+source_hash: "95ff14a526b474e9aa5eec6b56a44a0048ae7124302ee59eca91c18fcbedf2e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -157,6 +157,19 @@ current latest release declares a newer `openclaw.compat.pluginApi` or
 and installs the newest one that fits. Exact versions and explicit channel tags
 such as `@beta` stay pinned to the selected package and fail when incompatible.
 
+### Operator install policy
+
+Configure `security.installPolicy` to run a trusted local policy command before
+plugin install or update proceeds. The policy receives metadata plus the staged
+source path and can allow or block the install. It runs before plugin
+`before_install` hooks. The deprecated `--dangerously-force-unsafe-install`
+flag is accepted for compatibility but does not bypass install policy, hooks, or
+OpenClaw's built-in plugin dependency denylist.
+
+See [Skills config](/tools/skills-config#operator-install-policy-securityinstallpolicy)
+for the shared `security.installPolicy` exec schema used by both skills and
+plugins.
+
 ### Configure plugin policy
 
 The common plugin config shape is:
@@ -186,7 +199,9 @@ Key policy rules:
   allowlist stay unavailable, even when `tools.allow` includes `"*"`.
 - `plugins.entries.<id>.enabled: false` disables one plugin while preserving its
   config.
-- `plugins.load.paths` adds explicit local plugin files or directories.
+- `plugins.load.paths` adds explicit local plugin files or directories. Managed
+  `plugins install` local paths must be plugin directories or archives; use
+  `plugins.load.paths` for standalone plugin files.
 - Workspace-origin plugins are disabled by default; explicitly enable or
   allowlist them before using local workspace code.
 - Bundled plugins follow their built-in default-on/default-off metadata unless

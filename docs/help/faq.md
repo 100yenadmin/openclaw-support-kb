@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "d7fcc4d18dea94da28ef1e17199d55082f8fe3b4da0b9efe61377ad7691a6ae6"
+source_hash: "537fe8134494c60b35e995e50e5b1a640ffd7a507b014aa0bd14e3c2213bf2b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -1834,9 +1834,14 @@ How do I start/stop/restart the Gateway service?
 
 I closed my terminal on Windows - how do I restart OpenClaw?
 
-    There are **two Windows install modes**:
+    There are **three Windows install modes**:
 
-    **1) WSL2 (recommended):** the Gateway runs inside Linux.
+    **1) Windows Hub local setup:** the native app manages a local app-owned WSL Gateway.
+
+    Open **OpenClaw Companion** from the Start menu or tray, then use
+    **Gateway Setup** or the Connections tab.
+
+    **2) Manual WSL2 Gateway:** the Gateway runs inside Linux.
 
     Open PowerShell, enter WSL, then restart:
 
@@ -1852,7 +1857,7 @@ I closed my terminal on Windows - how do I restart OpenClaw?
     openclaw gateway run
     ```
 
-    **2) Native Windows (not recommended):** the Gateway runs directly in Windows.
+    **3) Native Windows CLI/Gateway:** the Gateway runs directly in Windows.
 
     Open PowerShell and run:
 
@@ -1867,7 +1872,7 @@ I closed my terminal on Windows - how do I restart OpenClaw?
     openclaw gateway run
     ```
 
-    Docs: [Windows (WSL2)](/platforms/windows), [Gateway service runbook](/gateway).
+    Docs: [Windows](/platforms/windows), [Gateway service runbook](/gateway).
 
 
 
@@ -2116,9 +2121,10 @@ I saw reports about exposed OpenClaw instances. What should I check?
 Are ClawHub skills and third-party plugins safe to install?
 
     Treat third-party skills and plugins as code you are choosing to trust.
-    ClawHub skill pages expose scan state before install, and OpenClaw plugin
-    install/update flows run built-in dangerous-code checks, but scans are not a
-    complete security boundary.
+    ClawHub skill pages expose scan state before install, but scans are not a
+    complete security boundary. OpenClaw does not run built-in local
+    dangerous-code blocking during plugin or skill install/update flows; use
+    operator-owned `security.installPolicy` for local allow/block decisions.
 
     Safer pattern:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "e269ea8b663b4698ac7d9cb3b473e7efc70fad3ff9fae1c2b80cadbc49635912"
+source_hash: "7ce2bfcaf1f031558d2703a33b2ba2d7e7ed1acaf146b3d63552b90c694e57f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/protocol.md"
@@ -642,8 +642,11 @@ terminal summary, and sanitized error text.
     `skills.upload.begin` request. This mode is rejected unless
     `skills.install.allowUploadedArchives` is enabled. The setting does not
     affect ClawHub installs.
-  - Gateway installer mode: `{ name, installId, dangerouslyForceUnsafeInstall?, timeoutMs? }`
+  - Gateway installer mode: `{ name, installId, timeoutMs? }`
     runs a declared `metadata.openclaw.install` action on the gateway host.
+    Older clients may still send `dangerouslyForceUnsafeInstall`; this field is
+    deprecated, accepted only for protocol compatibility, and ignored. Use
+    `security.installPolicy` for operator-owned install decisions.
 - Operators may call `skills.update` (`operator.admin`) in two modes:
   - ClawHub mode updates one tracked slug or all tracked ClawHub installs in
     the default agent workspace.

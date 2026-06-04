@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs directory"
 source: "https://docs.openclaw.ai/start/docs-directory"
-source_hash: "4b2ef33456da2950f0728396339d961e511d73d6936c06c79eb22d2af58388dc"
+source_hash: "fb376390d90b67e6d2051ff6cea163520b5d0992daf09d5116ae9064d78f0256"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/docs-directory.md"
@@ -59,7 +59,7 @@ For a complete map of the docs, see [Docs hubs](/start/hubs).
 - [macOS app](/platforms/macos)
 - [iOS app](/platforms/ios)
 - [Android app](/platforms/android)
-- [Windows (WSL2)](/platforms/windows)
+- [Windows Hub](/platforms/windows)
 - [Linux app](/platforms/linux)
 
 ## Operations and safety

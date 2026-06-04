@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "f9ef6ce7ff396289cbf6b7a30f92a9ed1a3f1a5bd54e72ab9e052e9c21b43ba5"
+source_hash: "4f7abaf4d61b68a86b89b84371ca613f24c46f6687bdbb68ebb4cddae264f69b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness.md"
@@ -532,7 +532,7 @@ Supported top-level Codex plugin fields:
 | -------------------------- | -------------- | ---------------------------------------------------------------------------------------- |
 | `codexDynamicToolsLoading` | `"searchable"` | Use `"direct"` to put OpenClaw dynamic tools directly in the initial Codex tool context. |
 | `codexDynamicToolsExclude` | `[]`           | Additional OpenClaw dynamic tool names to omit from Codex app-server turns.              |
-| `codexPlugins`             | disabled       | Native Codex plugin/app support for configured first-party Codex plugins.                |
+| `codexPlugins`             | disabled       | Native Codex plugin/app support for migrated source-installed curated plugins.           |
 
 Supported `appServer` fields:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "437e4919a544a8ef08868d42de5a66f442ec22b643d5126d1ad81fc9bf65d80a"
+source_hash: "5dfdfa16fa8b439d75d5d5b9066dbed6d3b0f7e582157f7cc593c21b7d9281d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-failover.md"
@@ -127,10 +127,10 @@ These notices are operational messages, not assistant content. They are delivere
 
 OpenClaw uses **auth profiles** for both API keys and OAuth tokens.
 
-- Secrets live in `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` (legacy: `~/.openclaw/agent/auth-profiles.json`).
-- Runtime auth-routing state lives in `~/.openclaw/agents/<agentId>/agent/auth-state.json`.
+- Secrets and runtime auth-routing state live in `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`.
 - Config `auth.profiles` / `auth.order` are **metadata + routing only** (no secrets).
-- Legacy import-only OAuth file: `~/.openclaw/credentials/oauth.json` (imported into `auth-profiles.json` on first use).
+- Legacy import-only OAuth file: `~/.openclaw/credentials/oauth.json` (imported into the per-agent auth store on first use).
+- Legacy `auth-profiles.json`, `auth-state.json`, and per-agent `auth.json` files are imported by `openclaw doctor --fix`.
 
 More detail: [OAuth](/concepts/oauth)
 
@@ -146,7 +146,7 @@ OAuth logins create distinct profiles so multiple accounts can coexist.
 - Default: `provider:default` when no email is available.
 - OAuth with email: `provider:<email>` (for example `google-antigravity:user@gmail.com`).
 
-Profiles live in `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` under `profiles`.
+Profiles live in the per-agent `openclaw-agent.sqlite` auth profile store.
 
 ## Rotation order
 
@@ -167,7 +167,7 @@ Configured profiles
 
 Stored profiles
 
-    Entries in `auth-profiles.json` for the provider.
+    Per-agent SQLite auth profile entries for the provider.
 
 
 If no explicit order is configured, OpenClaw uses a round-robin order:
@@ -260,7 +260,7 @@ Cooldowns use exponential backoff:
 - 25 minutes
 - 1 hour (cap)
 
-State is stored in `auth-state.json` under `usageStats`:
+State is stored in the per-agent SQLite auth state under `usageStats`:
 
 ```json
 {
@@ -284,7 +284,7 @@ Not every billing-shaped response is `402`, and not every HTTP `402` lands here.
 
 Meanwhile temporary `402` usage-window and organization/workspace spend-limit errors are classified as `rate_limit` when the message looks retryable (for example `weekly usage limit exhausted`, `daily limit reached, resets tomorrow`, or `organization spending limit exceeded`). Those stay on the short cooldown/failover path instead of the long billing-disable path.
 
-State is stored in `auth-state.json`:
+State is stored in the per-agent SQLite auth state:
 
 ```json
 {

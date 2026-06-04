@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "aed5ac2ad859e9ceb1de51ea6bac69c8d4692bd188e963c7c4ad0a8ec5275539"
+source_hash: "36a3f76afa5d79db30a9989bb659d37a2f550c03d7d6d6fdd749f9915d0b55b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -279,7 +279,7 @@ Custom provider
     - `--custom-model-id`
     - `--custom-api-key` (optional; falls back to `CUSTOM_API_KEY`)
     - `--custom-provider-id` (optional)
-    - `--custom-compatibility <openai|anthropic>` (optional; default `openai`)
+    - `--custom-compatibility <openai|openai-responses|anthropic>` (optional; default `openai`)
     - `--custom-image-input` / `--custom-text-input` (optional; override inferred model input capability)
 
 

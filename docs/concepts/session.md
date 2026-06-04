@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "4be4adca4ceed024f4f334eebcfffe5c294bc645cd6119cab8eaf996ab283a0d"
+source_hash: "74fe8cb3aaa35618fb9fd33267c5d2db6b309da254db9f77aa3259465ded4ac4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session.md"
@@ -116,8 +116,8 @@ writes.
 ## Session maintenance
 
 OpenClaw automatically bounds session storage over time. By default, it runs
-in `warn` mode (reports what would be cleaned). Set `session.maintenance.mode`
-to `"enforce"` for automatic cleanup:
+in `enforce` mode and applies cleanup during maintenance. Set
+`session.maintenance.mode` to `"warn"` to report what would be cleaned without mutating the store/files:
 
 ```json5
 {

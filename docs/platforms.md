@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "1c89887e5db4f3bd59b3c9d2d29b0d58af61e49d18f54c3aa99065f28a513d1f"
+source_hash: "7629ec900d0c674794d8ee2d0a6278718955f1283683832e2294a12080be9f6d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -17,9 +17,11 @@ OpenClaw core is written in TypeScript. **Node is the recommended runtime**.
 Bun is not recommended for the Gateway — known issues with WhatsApp and
 Telegram channels; see [Bun (experimental)](/install/bun) for details.
 
-Companion apps exist for macOS (menu bar app) and mobile nodes (iOS/Android). Windows and
-Linux companion apps are planned, but the Gateway is fully supported today.
-Native companion apps for Windows are also planned; the Gateway is recommended via WSL2.
+Companion apps exist for Windows Hub, macOS (menu bar app), and mobile nodes
+(iOS/Android). Linux companion apps are planned, but the Gateway is fully
+supported today. On Windows, choose Windows Hub for the desktop app, native
+PowerShell install for terminal-first use, or WSL2 for the most
+Linux-compatible Gateway runtime.
 
 ## Choose your OS
 
@@ -42,6 +44,7 @@ Native companion apps for Windows are also planned; the Gateway is recommended v
 ## Common links
 
 - Install guide: [Getting Started](/start/getting-started)
+- Windows Hub: [Windows](/platforms/windows)
 - Gateway runbook: [Gateway](/gateway)
 - Gateway configuration: [Configuration](/gateway/configuration)
 - Service status: `openclaw gateway status`
@@ -64,6 +67,7 @@ The service target depends on OS:
 ## Related
 
 - [Install overview](/install)
+- [Windows Hub](/platforms/windows)
 - [macOS app](/platforms/macos)
 - [iOS app](/platforms/ios)
 

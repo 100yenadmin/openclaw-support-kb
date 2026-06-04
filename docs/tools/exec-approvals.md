@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "ac2f9e8303917937c93691a817cc54a40a2930f72f36d1ace0a85b8bf4677667"
+source_hash: "48bd70b338ea6cb439d7c0b16968aab613e97285e56dc1bef49e544644e330a9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -149,9 +149,15 @@ ParamField
 
 ParamField
 
-  - `off` - never prompt.
-  - `on-miss` - prompt only when the allowlist does not match.
-  - `always` - prompt on every command. `allow-always` durable trust does **not** suppress prompts when effective ask mode is `always`.
+  Configured ask policy for host exec. Controls the baseline approval
+  prompt behavior from `tools.exec.ask` and host approvals defaults. The
+  per-call `ask` tool parameter (see [Exec tool](/tools/exec#parameters))
+  can only harden that baseline, and channel-origin model calls ignore it
+  when the effective host ask is `off`.
+
+- `off` - never prompt.
+- `on-miss` - prompt only when the allowlist does not match.
+- `always` - prompt on every command. `allow-always` durable trust does **not** suppress prompts when effective ask mode is `always`.
 
 ### `askFallback`
 

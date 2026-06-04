@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "7c3108a2ba6644b33aab88d39caef3c634609e3530ee83c74473628e099caa3b"
+source_hash: "917c4d3a28a2c9ddb7babb55f20f22cd9fa58ffb6ef93e3361927526b9e54f44"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -71,6 +71,15 @@ When `provider` is not set, OpenClaw uses OpenAI embeddings. Set `provider`
 explicitly to use Gemini, Voyage, Mistral, DeepInfra, Bedrock, GitHub Copilot,
 Ollama, a local GGUF model, or an OpenAI-compatible `/v1/embeddings` endpoint.
 Legacy configs that still say `provider: "auto"` resolve to `openai`.
+
+Warning
+
+Changing the embedding provider, model, provider settings, sources, scope,
+chunking, or tokenizer can make the existing SQLite vector index incompatible.
+OpenClaw pauses vector search and reports an index identity warning instead of
+automatically re-embedding everything. Rebuild when you are ready with
+`openclaw memory status --index --agent <id>` or
+`openclaw memory index --force --agent <id>`.
 
 If OpenAI embeddings are unreachable from your network, memory recall fails open
 instead of blocking the turn. Set the existing `memorySearch.provider` field to a
@@ -176,7 +185,8 @@ Gemini
 
 Warning
 
-    Changing model or `outputDimensionality` triggers an automatic full reindex.
+    Changing model or `outputDimensionality` changes the index identity. OpenClaw
+    pauses vector search until you explicitly rebuild the memory index.
 
 
 

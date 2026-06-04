@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "ffba32384e2a9aab80593df40121b90e0d760eff371e59da05cb481f83e54b13"
+source_hash: "19fb2e4eec005fe71acb105ed68fcff7409488129a50a276ace72cb5ffd35d2a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -40,7 +40,7 @@ Media
 
 Apps and UI
 
-    Web Control UI and macOS companion app.
+    Windows Hub, Web Control UI, macOS app, and mobile nodes.
 
 
 Mobile nodes

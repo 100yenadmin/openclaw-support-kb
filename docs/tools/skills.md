@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "7a2bf006ed011e37f494d34d39f55cf8fac2e5c51a966ba2298bae8f8fdec21b"
+source_hash: "f5e261f552328919a277730b38c003021ea6fea2d3289f03de17692221c4f2d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -233,13 +233,13 @@ Path containment
     inside its resolved skill directory.
 
 
-Scan and scan overrides
+Operator install policy
 
-    Gateway-backed skill installs (onboarding, Skills settings UI) run the
-    built-in dangerous-code scanner before executing installer metadata.
-    `critical` findings block by default; `suspicious` findings warn only.
-    `openclaw skills install <slug>` downloads a ClawHub skill folder directly
-    and does not use the installer-metadata scanner.
+    Configure `security.installPolicy` to run a trusted local policy command
+    before skill installs continue. The policy receives metadata and the staged
+    source path, applies to ClawHub, uploaded, Git, local, update, and
+    dependency-installer paths, and fails closed when the command cannot return
+    a valid decision.
 
 
 Secret injection scope

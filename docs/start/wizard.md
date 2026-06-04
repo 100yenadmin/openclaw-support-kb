@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "e795990d8a4a480ddf0e88c3b8eb80d9049f2ff00a5a81d85808c430271abf44"
+source_hash: "54785a7fb3ab51d9442a2432148229d941e433368b5d6938dda3fc9c0cd3b7ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -13,8 +13,9 @@ duplicate_index: 1
 # Onboarding (CLI)
 Source: https://docs.openclaw.ai/start/wizard
 
-CLI onboarding is the **recommended** way to set up OpenClaw on macOS,
-Linux, or Windows (via WSL2; strongly recommended).
+CLI onboarding is the **recommended** terminal setup path for OpenClaw on
+macOS, Linux, or Windows. Windows desktop users can also start with
+[Windows Hub](/platforms/windows).
 It configures a local Gateway or a remote Gateway connection, plus channels, skills,
 and workspace defaults in one guided flow.
 

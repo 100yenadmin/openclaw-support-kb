@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "91064bc0bf325bb108a0f1912cb081d6f17fb504e4ea8a357a992776912543f5"
+source_hash: "f1f3f2f86964e66fff28ad2ecdab7465b0d7dd209ad2784aaaa9ffb0d14db129"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -79,7 +79,7 @@ AI-native cross-session user modeling with dialectic reasoning, session-scoped c
 hermes memory setup        # select "honcho" — runs the Honcho-specific post-setup
 ```
 
-On a fresh install, configure Honcho directly with `hermes memory setup honcho`. The legacy `hermes honcho setup` command still works (it now redirects to `hermes memory setup`), but is only registered after Honcho is selected as the active memory provider.
+The legacy `hermes honcho setup` command still works (it now redirects to `hermes memory setup`), but is only registered after Honcho is selected as the active memory provider.
 
 **Config:** `$HERMES_HOME/honcho.json` (profile-local) or `~/.honcho/config.json` (global). Resolution order: `$HERMES_HOME/honcho.json` > `~/.hermes/honcho.json` > `~/.honcho/config.json`. See the [config reference](https://github.com/NousResearch/hermes-agent/blob/main/plugins/memory/honcho/README.md) and the [Honcho integration guide](https://docs.honcho.dev/v3/guides/integrations/hermes).
 
@@ -511,11 +511,11 @@ echo 'SUPERMEMORY_API_KEY=***' >> ~/.hermes/.env
 
 **Key features:**
 - Automatic context fencing — strips recalled memories from captured turns to prevent recursive memory pollution
-- Session-end conversation ingest for richer graph-level knowledge building
+- Full-session ingest — the entire conversation is sent once at session boundaries
+- Session-end conversation ingest (to `/v4/conversations`) for richer profile + graph building in Supermemory
 - Profile facts injected on first turn and at configurable intervals
-- Trivial message filtering (skips "ok", "thanks", etc.)
 - **Profile-scoped containers** — use `{identity}` in `container_tag` (e.g. `hermes-{identity}` → `hermes-coder`) to isolate memories per Hermes profile
-- **Multi-container mode** — enable `enable_custom_container_tags` with a `custom_containers` list to let the agent read/write across named containers. Automatic operations (sync, prefetch) stay on the primary container.
+- **Multi-container mode** — enable `enable_custom_container_tags` with a `custom_containers` list to let the agent read/write across named containers. Automatic operations stay on the primary container.
 
 <details>
 <summary>Multi-container example</summary>

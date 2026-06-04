@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
-source_hash: "b961d46740298eee434d902d66237aaf875c495c9a75c91e11e6962fdb0d6ac9"
+source_hash: "484a03669bee406d6f1692b9b3ad1d25fae50084c0ccc0b8b3b42291361ad197"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/control-ui.md"
@@ -204,7 +204,7 @@ AccordionGroup
 
 Send and history semantics
 
-    - `chat.send` is **non-blocking**: it acks immediately with `{ runId, status: "started" }` and the response streams via `chat` events.
+    - `chat.send` is **non-blocking**: it acks immediately with `{ runId, status: "started" }` and the response streams via `chat` events. Trusted Control UI clients may also receive optional ACK timing metadata for local diagnostics.
     - Chat uploads accept images plus non-video files. Images keep the native image path; other files are stored as managed media and shown in history as attachment links.
     - Re-sending with the same `idempotencyKey` returns `{ status: "in_flight" }` while running, and `{ status: "ok" }` after completion.
     - `chat.history` responses are size-bounded for UI safety. When transcript entries are too large, Gateway may truncate long text fields, omit heavy metadata blocks, and replace oversized messages with a placeholder (`[chat.history omitted: message too large]`).

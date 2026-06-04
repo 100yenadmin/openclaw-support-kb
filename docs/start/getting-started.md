@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "62d1c21d658ea5c4e3e56003b419cfa6e8cb2714b7e6ee78bbc687c36502507f"
+source_hash: "a13c39b869e6ea1b59f1a1e2ec784c8416d6341b6d47631fff149e9b9d747557"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -25,8 +25,8 @@ and a working chat session.
 Tip
 
 Check your Node version with `node --version`.
-**Windows users:** both native Windows and WSL2 are supported. WSL2 is more
-stable and recommended for the full experience. See [Windows](/platforms/windows).
+**Windows users:** the native Windows Hub app is the easiest desktop path. The
+PowerShell installer and WSL2 Gateway paths are also supported. See [Windows](/platforms/windows).
 Need to install Node? See [Node setup](/install/node).
 
 ## Quick setup

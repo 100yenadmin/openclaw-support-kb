@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "8a131cdfddf302c350bbc33a3370b7ed74bb4f61a52d8f37a4cd98afd02abc05"
+source_hash: "f350e5b05de292454d715273a719683db7096797e31386dc008125f41e734650"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -27,7 +27,7 @@ If you only have time to set up one thing, set up this. The fastest path:
 hermes setup --portal
 ```
 
-That single command runs the Portal OAuth, sets Nous as your inference provider in `config.yaml`, and turns on the Tool Gateway. You're ready to `hermes chat` immediately after.
+That single command runs the Portal OAuth, lets you pick a Nous model, sets Nous as your inference provider in `config.yaml`, and turns on the Tool Gateway. You're ready to `hermes chat` immediately after.
 
 Don't have a subscription yet? [portal.nousresearch.com/manage-subscription](https://portal.nousresearch.com/manage-subscription) — sign up, then come back and run the command above.
 
@@ -112,9 +112,10 @@ This runs the full setup in one shot:
 
 1. Opens your browser to portal.nousresearch.com for OAuth login
 2. Stores the refresh token at `~/.hermes/auth.json`
-3. Sets Nous as your inference provider in `~/.hermes/config.yaml`
-4. Turns on the Tool Gateway (web, image, TTS, browser routing)
-5. Returns you to your terminal ready to `hermes chat`
+3. Lets you pick a Nous model from the curated list (or skip to keep your current one)
+4. Sets Nous as your inference provider in `~/.hermes/config.yaml` (when you pick a model)
+5. Turns on the Tool Gateway (web, image, TTS, browser routing)
+6. Returns you to your terminal ready to `hermes chat`
 
 If you don't have a subscription yet, sign up at [portal.nousresearch.com/manage-subscription](https://portal.nousresearch.com/manage-subscription) first.
 
@@ -143,12 +144,15 @@ If you use [Hermes profiles](/user-guide/profiles), the Portal refresh token is 
 ### Inspecting what's wired up
 
 ```bash
-hermes portal status     # login status, subscription info, model + gateway routing
+hermes portal            # log in to Nous Portal + set it up (one-shot onboarding)
+hermes portal info       # login status, subscription info, model + gateway routing
 hermes portal tools      # detailed Tool Gateway catalog with per-tool routing
 hermes portal open       # open the subscription management page in your browser
 ```
 
-`hermes portal status` (or just `hermes portal`) gives you the high-level overview:
+`hermes portal` (with no subcommand) is the human-readable alias for `hermes auth add nous --type oauth` — it logs you in, lets you pick a Nous model, sets Nous as your inference provider, and offers the Tool Gateway opt-in (identical to `hermes setup --portal`, and the same Nous flow as the first-time quick setup).
+
+`hermes portal info` gives you the high-level overview:
 
 ```
   Nous Portal
@@ -247,12 +251,12 @@ If the Portal invalidates the refresh token (password change, manual revoke, ses
 
 ## Troubleshooting
 
-### `hermes portal status` shows "not logged in"
+### `hermes portal info` shows "not logged in"
 
 You haven't completed the OAuth flow, or your refresh token was wiped. Run:
 
 ```bash
-hermes auth add nous --type oauth
+hermes portal
 ```
 
 or use `hermes model` and re-select Nous Portal.
@@ -273,7 +277,7 @@ If a model is genuinely missing, [open an issue](https://github.com/NousResearch
 
 ### Bills not appearing on my Portal account
 
-Check `hermes portal status` first — if it shows you're using a different provider (`Model: currently openrouter` instead of `using Nous as inference provider`), your local config has drifted. Run `hermes model`, pick Nous Portal, and the next request will route through your subscription.
+Check `hermes portal info` first — if it shows you're using a different provider (`Model: currently openrouter` instead of `using Nous as inference provider`), your local config has drifted. Run `hermes model`, pick Nous Portal, and the next request will route through your subscription.
 
 ## See also
 

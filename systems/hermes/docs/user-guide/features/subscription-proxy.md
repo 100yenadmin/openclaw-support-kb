@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subscription Proxy"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/subscription-proxy"
-source_hash: "14b09af3eee6ca943a6aa13769fbd34bed386812b2a65942b979dc0e604fa918"
+source_hash: "a42790f24a6059945943b43e3b1a0ef3ce7683126c416ff788e437d9d97b436a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/subscription-proxy.md"
@@ -42,7 +42,7 @@ proxy when you just want **the model** through your subscription.
 ### 1. Log into your provider (one-time)
 
 ```bash
-hermes auth add nous
+hermes portal
 ```
 
 This opens your browser for the Nous Portal OAuth flow. Hermes stores
@@ -101,10 +101,10 @@ Hermes proxy upstream adapters
   [nous    ] Nous Portal — ready (bearer expires 2026-05-15T06:43:21Z)
 ```
 
-If you see `not logged in`, run `hermes auth add nous`. If you see
+If you see `not logged in`, run `hermes portal`. If you see
 `credentials need attention`, your refresh token was revoked (rare —
 happens if you signed out from the Portal web UI) — just re-run
-`hermes auth add nous`.
+`hermes portal`.
 
 ## Allowed paths
 

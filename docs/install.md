@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "f69f59fe0e614fdd0141043698041fb965de94b0b60b84da9ef92454f02298db"
+source_hash: "ae85b38c35692d9628abc362253aaf55e0b1d34415286b719c2e96b20f9fc05b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -16,12 +16,16 @@ Source: https://docs.openclaw.ai/install
 ## System requirements
 
 - **Node 24** (recommended) or Node 22.19+ - the installer script handles this automatically
-- **macOS, Linux, or Windows** - both native Windows and WSL2 are supported; WSL2 is more stable. See [Windows](/platforms/windows).
+- **macOS, Linux, or Windows** - Windows users can start with the native Windows Hub app, the PowerShell CLI installer, or a WSL2 Gateway. See [Windows](/platforms/windows).
 - `pnpm` is only needed if you build from source
 
 ## Recommended: installer script
 
 The fastest way to install. It detects your OS, installs Node if needed, installs OpenClaw, and launches onboarding.
+
+Note
+
+Windows desktop users can also install the native [Windows Hub](/platforms/windows#recommended-windows-hub) companion app, which includes setup, tray status, chat, node mode, and local MCP mode.
 
 Tabs
 

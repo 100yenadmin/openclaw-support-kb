@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "b31889ec7f58ca82558c3d629fdd5a160edefc372386578a5836b923b8c8172b"
+source_hash: "389259ae52f8441d6eaf63a1c50ae69d103a7062244323324e3130b1e677cfd4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -431,7 +431,8 @@ Windows install says git not found or openclaw not recognized
     - Add that directory to your user PATH (no `\bin` suffix needed on Windows; on most systems it is `%AppData%\npm`).
     - Close and reopen PowerShell after updating PATH.
 
-    If you want the smoothest Windows setup, use **WSL2** instead of native Windows.
+    For desktop setup, use the native **Windows Hub** app. For terminal-only
+    setup, the PowerShell installer and WSL2 Gateway paths are both supported.
     Docs: [Windows](/platforms/windows).
 
 
@@ -964,7 +965,8 @@ Can I run OpenClaw in a VM and what are the requirements?
     - **Recommended:** 2GB RAM or more if you run multiple channels, browser automation, or media tools.
     - **OS:** Ubuntu LTS or another modern Debian/Ubuntu.
 
-    If you are on Windows, **WSL2 is the easiest VM style setup** and has the best tooling
+    If you are on Windows, use **Windows Hub** for desktop setup, or WSL2 when
+    you specifically want a Linux-style Gateway VM with broad tooling
     compatibility. See [Windows](/platforms/windows), [VPS hosting](/vps).
     If you are running macOS in a VM, see [macOS VM](/install/macos-vm).
 

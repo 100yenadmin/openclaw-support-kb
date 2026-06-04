@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes"
-source_hash: "8ef5c01becf087f9228ed24223a23595e33efadac3ad60680fd454becddd42cd"
+source_hash: "9cab676af21668250b6349e6d72a8c1171f3ef1358b15158b1b6ef59e40f477f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes.md"
@@ -255,7 +255,9 @@ openclaw nodes canvas a2ui reset --node <idOrNameOrIp>
 
 Notes:
 
+- Mobile nodes use a bundled app-owned A2UI page for action-capable rendering.
 - Only A2UI v0.8 JSONL is supported (v0.9/createSurface is rejected).
+- iOS and Android render remote Gateway Canvas pages, but A2UI button actions are dispatched only from the bundled app-owned A2UI page. Gateway-hosted HTTP/HTTPS A2UI pages are render-only on those mobile clients.
 
 ## Photos + videos (node camera)
 
@@ -335,6 +337,7 @@ Android nodes can advertise additional command families when the corresponding c
 Available families:
 
 - `device.status`, `device.info`, `device.permissions`, `device.health`
+- `device.apps` when Installed Apps sharing is enabled in Android Settings
 - `notifications.list`, `notifications.actions`
 - `photos.latest`
 - `contacts.search`, `contacts.add`
@@ -347,12 +350,14 @@ Example invokes:
 
 ```bash
 openclaw nodes invoke --node <idOrNameOrIp> --command device.status --params '{}'
+openclaw nodes invoke --node <idOrNameOrIp> --command device.apps --params '{"limit":10}'
 openclaw nodes invoke --node <idOrNameOrIp> --command notifications.list --params '{}'
 openclaw nodes invoke --node <idOrNameOrIp> --command photos.latest --params '{"limit":1}'
 ```
 
 Notes:
 
+- `device.apps` is opt-in and returns launcher-visible apps by default.
 - Motion commands are capability-gated by available sensors.
 
 ## System commands (node host / mac node)

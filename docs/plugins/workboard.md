@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard plugin"
 source: "https://docs.openclaw.ai/plugins/workboard"
-source_hash: "7861feab61d392315653e3ccb511a91dd086d12c99755f8b2d9d0ca90f50d4f1"
+source_hash: "26766cff60bf2c6daf9aa32b66481940d9f9de779b98fd743814a55fe385ea56"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/workboard.md"
@@ -298,7 +298,8 @@ Workboard stops auto-moving that card until you move it back to `todo` or
 2. Create a card with a title, notes, priority, labels, optional agent, and
    optional linked session.
 3. Or open Sessions and choose Add to Workboard for an existing session.
-4. Drag the card between columns or use the column controls.
+4. Drag the card between columns or focus the compact status control on the card
+   and use its menu or ArrowLeft/ArrowRight.
 5. Start work from the card to create or reuse a dashboard session.
 6. Open the linked session from the card while the agent works.
 7. Let lifecycle sync move running work into review or blocked, then manually
