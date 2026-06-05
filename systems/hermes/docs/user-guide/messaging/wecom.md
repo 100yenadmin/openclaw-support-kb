@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WeCom (Enterprise WeChat)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom"
-source_hash: "226307c93f6451aebf1fc32ffbdbb96814e9246aa7294cd03c852d7419d87815"
+source_hash: "e3fe6599e48c1cafbdd023711727ab7ef9ab0da700b96bed3b1a1182597f5617"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/wecom.md"
@@ -105,8 +105,15 @@ hermes gateway
 - **AES-encrypted media** — automatic decryption for inbound attachments
 - **Quote context** — preserves reply threading
 - **Markdown rendering** — rich text responses
-- **Reply-mode streaming** — correlates responses to inbound message context
+- **Reply correlation** — responses are correlated to the inbound message context
 - **Auto-reconnect** — exponential backoff on connection drops
+
+:::note Streaming and typing indicators
+The WeCom adapter delivers each response as a single complete message — it does
+**not** stream responses token-by-token, and it does **not** show a typing
+indicator. "Reply correlation" (below) only threads a response to its inbound
+request; it is not live streaming.
+:::
 
 ## Configuration Options
 
@@ -239,11 +246,11 @@ No configuration is needed — decryption happens transparently when encrypted m
 
 Files exceeding the absolute 20 MB limit are rejected with an informational message sent to the chat.
 
-## Reply-Mode Stream Responses
+## Reply-Mode Responses
 
-When the bot receives a message via the WeCom callback, the adapter remembers the inbound request ID. If a response is sent while the request context is still active, the adapter uses WeCom's reply-mode (`aibot_respond_msg`) with streaming to correlate the response directly to the inbound message. This provides a more natural conversation experience in the WeCom client.
+When the bot receives a message via the WeCom callback, the adapter remembers the inbound request ID. If a response is sent while the request context is still active, the adapter uses WeCom's reply-mode (`aibot_respond_msg`) to correlate the response directly to the inbound message. This provides a more natural conversation experience in the WeCom client.
 
-If the inbound request context has expired or is unavailable, the adapter falls back to proactive message sending via `aibot_send_msg`.
+The full response is delivered as a single message — the adapter does not stream tokens incrementally. If the inbound request context has expired or is unavailable, the adapter falls back to proactive message sending via `aibot_send_msg`.
 
 Reply-mode also works for media: uploaded media can be sent as a reply to the originating message.
 

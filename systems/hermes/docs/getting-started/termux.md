@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Android / Termux"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/termux"
-source_hash: "8090f8f48e715f9b9607578c9e9ee8d0d465aa313cfb7fac360f1adf675acde1"
+source_hash: "27f17ad6606125633a1ac5d5c8949520173e5958d725f7a5dd74058644f3197c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/termux.md"
@@ -59,7 +59,7 @@ That does not stop Hermes from working well as a phone-native CLI agent — it j
 Hermes now ships a Termux-aware installer path:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 ```
 
 On Termux, the installer automatically:

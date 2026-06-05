@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "e0f2a8dbc33645183dcb485864e6ff2beea306407422fc013b92d489d9ed7a10"
+source_hash: "cdeaad4dc33c903dc310ec280f5b181e95f0d56c1f73b86974cc7dc21a5d9046"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -60,33 +60,30 @@ Pick the row that matches your goal:
 ---
 
 ## 1. Install Hermes Agent
+### With the Hermes Desktop installer on macOS or Windows (recommended)
+To easily install the command-line and desktop applications, [download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/desktop) from our website and run it.
 
-**Option A — pip (simplest):**
-
+### With the Hermes Desktop installer on Linux:
 ```bash
-pip install hermes-agent
-hermes postinstall     # optional: installs Node.js, browser, ripgrep, ffmpeg + runs setup
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh --include-desktop | bash
+```
+### Without Hermes Desktop:
+For a command-line only install without Hermes Desktop, run:
+
+#### Linux / macOS / WSL2 / Android (Termux)
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 ```
 
-PyPI releases track tagged versions (major/minor releases), not every commit on `main`. For bleeding-edge, use Option B.
+#### Windows (native)
 
-**Option B — git installer (tracks main branch):**
-
-```bash
-# Linux / macOS / WSL2 / Android (Termux)
-curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+Run in powershell:
+```powershell
+iex (irm https://hermes-agent.nousresearch.com/install.ps1)
 ```
-
-Prefer native installers for desktop use?
-
-- **Desktop downloads:** [GitHub Releases](https://github.com/NousResearch/hermes-agent/releases/latest)
 
 :::tip Android / Termux
 If you're installing on a phone, see the dedicated [Termux guide](./termux.md) for the tested manual path, supported extras, and current Android-specific limitations.
-:::
-
-:::tip Windows Users
-Install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) first, then run the command above inside your WSL2 terminal.
 :::
 
 After it finishes, reload your shell:

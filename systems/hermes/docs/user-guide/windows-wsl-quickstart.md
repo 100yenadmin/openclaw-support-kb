@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (WSL2) Guide"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-wsl-quickstart"
-source_hash: "928b9de402d5e83c986b6dbd9c41c4dd500b5748572fff2f1eb7975962dd1df7"
+source_hash: "bd3dceaecc9cbfb79c7adc854f6b436378bda3235ed253c6c3bdadc7ab696560"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-wsl-quickstart.md"
@@ -112,7 +112,7 @@ The `metadata` mount option above is important — without it, files on `/mnt/c/
 Once you have a WSL2 shell open:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 source ~/.bashrc
 hermes
 ```

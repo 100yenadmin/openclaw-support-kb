@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Chat"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/google_chat"
-source_hash: "17b212d3e011d6ab4c0a5464c790b25a5794c72e7419c265f7685ec80c873ef9"
+source_hash: "82acce7ca2cdb5bcfa41f39d2aa9c5b2f7a38e40b37175283b58290ff487fea9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/google_chat.md"
@@ -244,21 +244,29 @@ There's no IAM role or scope that fixes this. The endpoint only accepts user
 credentials. So the bot has to act *as a user* whenever it uploads a file —
 specifically, as the user who asked for the file.
 
-### One-time host setup
+### One-time setup (per profile)
 
 1. Go to **APIs & Services → Credentials** in the same GCP project.
 2. **Create credentials → OAuth client ID → Desktop app**.
 3. Download the JSON. Move it onto the host that runs Hermes.
-4. On the host, register the client with Hermes:
+4. Register the client with Hermes (run under the profile you want it scoped to):
 
 ```bash
+# Default profile:
 python -m plugins.platforms.google_chat.oauth \
+    --client-secret /path/to/client_secret.json
+
+# A named profile gets its own separate registration:
+hermes -p <profile> python -m plugins.platforms.google_chat.oauth \
     --client-secret /path/to/client_secret.json
 ```
 
-That writes `~/.hermes/google_chat_user_client_secret.json`. This is shared
-infrastructure — it identifies the OAuth *app*, not any individual user. One
-file per host is enough no matter how many users authorize later.
+That writes the client secret into the active profile's Hermes home (e.g.
+`~/.hermes/google_chat_user_client_secret.json` for the default profile). The
+client secret is **profile-scoped, not shared across profiles** — each profile
+registers its own. This is deliberate: profiles are isolated auth boundaries, so
+two profiles can point at different Google OAuth apps / accounts. Register it
+once per profile that needs Google Chat attachment delivery.
 
 ### Per-user authorization (in chat)
 
@@ -339,13 +347,19 @@ The asker has no per-user OAuth token and there's no legacy fallback. Run
 `/setup-files` in their DM and follow Step 10. After the exchange completes
 the next file request uploads natively without a gateway restart.
 
-**`/setup-files start` says "No client credentials stored on the host."**
+**`/setup-files start` says "No client credentials stored."**
 
-The one-time host setup wasn't done. From a terminal on the host that runs
-Hermes:
+The one-time setup wasn't done *for this profile* (the client secret is
+profile-scoped, so a registration under one profile won't be seen by another).
+From a terminal, run it under the profile the gateway uses:
 
 ```bash
+# Default profile:
 python -m plugins.platforms.google_chat.oauth \
+    --client-secret /path/to/client_secret.json
+
+# Named profile:
+hermes -p <profile> python -m plugins.platforms.google_chat.oauth \
     --client-secret /path/to/client_secret.json
 ```
 
