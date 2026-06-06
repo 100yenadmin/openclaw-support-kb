@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "List issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/control-plane-commands.md"
-source_hash: "cf2aaa6fa4cd9d11a620f611f6d484b7faa197ed657b47ac6d9910b0fcb2385b"
+source_hash: "ae8a3521db558352601152c9c27f13018c19cc21302488ee300d8ce82c2be446"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/control-plane-commands.md"
@@ -53,6 +53,7 @@ pnpm paperclipai issue release <issue-id>
 ```sh
 pnpm paperclipai company list
 pnpm paperclipai company get <company-id>
+pnpm paperclipai company current [--company-id <company-id>]
 
 # Export to portable folder package (writes manifest + markdown files)
 pnpm paperclipai company export <company-id> --out ./exports/acme --include company,agents
@@ -73,6 +74,13 @@ pnpm paperclipai company import \
   --new-company-name "Acme Imported" \
   --include company,agents
 ```
+
+With agent authentication, use `company list` or `company current` to resolve
+the scoped company. `company list` first tries the board-wide list; if that is
+forbidden, it falls back to `--company-id`, `PAPERCLIP_COMPANY_ID`, context, or
+`/api/agents/me` and returns only that scoped company. `company create` requires
+board/instance-admin authentication because it is an instance-wide setup
+command.
 
 ## Agent Commands
 

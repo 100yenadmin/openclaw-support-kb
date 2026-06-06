@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "b6c809b2d8aa9599b3cbbab443fcd1ff947002da8782909f3713e23016d6cb30"
+source_hash: "e7806a5c9ab7118955b77a8e73f5052bcd226a7daf12dfee697acc3990c7e125"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -519,6 +519,38 @@ executable script). The build contract is documented in
 CI runs `pnpm --filter @paperclipai/skills-catalog validate` and the package's
 vitest suite, so always regenerate the manifest in the same commit as the
 catalog change.
+
+## App-Shipped Teams Catalog
+
+The team catalog package mirrors the skills catalog workflow for
+agentcompanies/v1 team packages:
+
+```text
+packages/teams-catalog/
+  catalog/
+    bundled/<category>/<slug>/TEAM.md
+    optional/<category>/<slug>/TEAM.md
+  generated/catalog.json
+  scripts/
+    build-catalog-manifest.ts
+    validate-catalog.ts
+```
+
+Validate without writing the manifest:
+
+```sh
+pnpm --filter @paperclipai/teams-catalog validate
+```
+
+Regenerate `generated/catalog.json` after editing catalog team files:
+
+```sh
+pnpm --filter @paperclipai/teams-catalog build:manifest
+```
+
+Team install/preview APIs enforce source policy. External skill sources require
+explicit approval flags, and local-path skill sources are development-only
+unless `allowLocalPathSources` is set by the caller.
 
 ## Quick Health Checks
 

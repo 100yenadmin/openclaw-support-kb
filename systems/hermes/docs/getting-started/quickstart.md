@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "cdeaad4dc33c903dc310ec280f5b181e95f0d56c1f73b86974cc7dc21a5d9046"
+source_hash: "ef77abadfd2a2e486e490ef7f67c6c73cc28c642d4a8eaeea276b26a7ab1eb34"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -63,10 +63,6 @@ Pick the row that matches your goal:
 ### With the Hermes Desktop installer on macOS or Windows (recommended)
 To easily install the command-line and desktop applications, [download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/desktop) from our website and run it.
 
-### With the Hermes Desktop installer on Linux:
-```bash
-curl -fsSL https://hermes-agent.nousresearch.com/install.sh --include-desktop | bash
-```
 ### Without Hermes Desktop:
 For a command-line only install without Hermes Desktop, run:
 
