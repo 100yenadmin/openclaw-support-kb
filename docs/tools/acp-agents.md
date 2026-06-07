@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "3893b8d7671c7513708fafb6eca39e0516c54337aae3293107625b506f918ff9"
+source_hash: "ebf0348b2309852f3013ea4a4f97930df671a3c83c55daecc8c8fe4f7fff299c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -601,6 +601,11 @@ ParamField
   requester session as system events. Accepted responses include
   `streamLogPath` pointing to a session-scoped JSONL log
   (`<sessionId>.acp-stream.jsonl`) you can tail for full relay history.
+  Parent progress streams show assistant commentary and ACP status progress by
+  default unless `streaming.progress.commentary=false`. Discord also defaults
+  parent previews to progress mode when no stream mode is configured. Status
+  progress still honors `acp.stream.tagVisibility`, so tags such as `plan`
+  remain hidden unless explicitly enabled.
 
 ACP `sessions_spawn` runs use `agents.defaults.subagents.runTimeoutSeconds` for
 their default child turn limit. The tool does not accept per-call timeout

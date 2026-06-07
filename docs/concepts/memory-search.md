@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "a89e6c41fb0b43457e15c7bb6a3be9a48be175b5d78e465c57db24897752f656"
+source_hash: "fadc66695a6b2b4167db3a98d963e73f61768990af5c41090d506fffd6a8aea1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -82,9 +82,16 @@ flowchart LR
 - **BM25 keyword search** finds exact matches (IDs, error strings, config
   keys).
 
-If only one path is available (no embeddings or no FTS), the other runs alone.
+If only one path is available, the other runs alone. Intentional FTS-only mode
+(`provider: "none"`) and automatic/default provider selection can still use
+lexical ranking when embeddings are unavailable.
 
-When embeddings are unavailable, OpenClaw still uses lexical ranking over FTS results instead of falling back to raw exact-match ordering only. That degraded mode boosts chunks with stronger query-term coverage and relevant file paths, which keeps recall useful even without `sqlite-vec` or an embedding provider.
+Explicit non-local embedding providers are different. If you set
+`memorySearch.provider` to a concrete remote-backed provider and that provider
+is unavailable at runtime, `memory_search` reports memory as unavailable instead
+of silently using FTS-only results. This keeps a broken configured semantic
+provider visible. Set `provider: "none"` for deliberate FTS-only recall, or fix
+the provider/auth configuration to restore semantic ranking.
 
 ## Improving search quality
 

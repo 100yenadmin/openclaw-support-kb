@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/profile-commands"
 source: "https://hermes-agent.nousresearch.com/docs/reference/profile-commands"
-source_hash: "981e0ebd5277768f3c80fe36642f9228d54bb50a5266b82cbb775604dcdfadcc"
+source_hash: "8b90e30593b937695f3d84db55463ee6a613fd2f3a00aab7941c858346bb1fa4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/profile-commands.md"
@@ -34,6 +34,7 @@ Top-level command for managing profiles. Running `hermes profile` without a subc
 | `list` | List all profiles. |
 | `use` | Set the active (default) profile. |
 | `create` | Create a new profile. |
+| `describe` | Read or set a profile's description (used by the kanban orchestrator for routing). |
 | `delete` | Delete a profile. |
 | `show` | Show details about a profile. |
 | `alias` | Regenerate the shell alias for a profile. |

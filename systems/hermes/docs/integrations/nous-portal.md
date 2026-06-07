@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "f350e5b05de292454d715273a719683db7096797e31386dc008125f41e734650"
+source_hash: "4736ecd9b569d3889f023dfc254f435fa9cfad9f2800bbf667eda7a94b6ef7e1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -146,6 +146,7 @@ If you use [Hermes profiles](/user-guide/profiles), the Portal refresh token is 
 ```bash
 hermes portal            # log in to Nous Portal + set it up (one-shot onboarding)
 hermes portal info       # login status, subscription info, model + gateway routing
+hermes portal status     # alias for `portal info`
 hermes portal tools      # detailed Tool Gateway catalog with per-tool routing
 hermes portal open       # open the subscription management page in your browser
 ```

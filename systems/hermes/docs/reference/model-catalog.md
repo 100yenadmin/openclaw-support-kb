@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/model-catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/model-catalog"
-source_hash: "444084026346a69562ed3157e37a8efbbdc0c35d591fbd61d5ce785f85d0fbd8"
+source_hash: "c03a8ad3beb8f623073432cf5f27e4c60f4798b4cd476def4180eda38ab7296d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/model-catalog.md"
@@ -82,7 +82,7 @@ Cache location: `~/.hermes/cache/model_catalog.json`.
 model_catalog:
   enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
-  ttl_hours: 24
+  ttl_hours: 1
   providers: {}
 ```
 

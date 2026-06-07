@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "SMS (Twilio)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/sms"
-source_hash: "5238a67da42b9f36a337c36c20aa9327064c0925a5a1f33e39603762dd29f141"
+source_hash: "af5f43d252d0ab7b39633bb0d224fd7095430a3364f445acf6007a22124f8dee"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/sms.md"
@@ -138,7 +138,7 @@ Text your Twilio number — Hermes will respond via SMS.
 | `TWILIO_PHONE_NUMBER` | Yes | Your Twilio phone number (E.164 format) |
 | `SMS_WEBHOOK_URL` | Yes | Public URL for Twilio signature validation — must match the webhook URL in your Twilio Console |
 | `SMS_WEBHOOK_PORT` | No | Webhook listener port (default: `8080`) |
-| `SMS_WEBHOOK_HOST` | No | Webhook bind address (default: `0.0.0.0`) |
+| `SMS_WEBHOOK_HOST` | No | Webhook bind address (default: `127.0.0.1`) |
 | `SMS_INSECURE_NO_SIGNATURE` | No | Set to `true` to disable signature validation (local dev only — **not for production**) |
 | `SMS_ALLOWED_USERS` | No | Comma-separated E.164 phone numbers allowed to chat |
 | `SMS_ALLOW_ALL_USERS` | No | Set to `true` to allow anyone (not recommended) |

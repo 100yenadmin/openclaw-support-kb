@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/ntfy.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy"
-source_hash: "8ec499f2d121a506e7f52889ec0d36bbf2cb9e783b4f96e9df6e45741756f1bf"
+source_hash: "e2e11042e22652368d18dc8db167b81c6f56b0985487359884fca2d7ef35038c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/ntfy.md"
@@ -38,7 +38,7 @@ That's it. No SDK, no daemon, no Node.js. The adapter uses `httpx` which is alre
 ### Via setup wizard
 
 ```bash
-hermes setup gateway
+hermes gateway setup
 ```
 
 Select **ntfy** and follow the prompts.

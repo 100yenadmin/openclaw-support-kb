@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/simplex.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "8042a89536e1b060bf9fa23944cab06e8d6c3348a92b6f4ccd12a5a60ba6756e"
+source_hash: "2404495ca8866d1470a02ac9d257d8de627a91c5e30c1d26c742be4ce22c4e22"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -53,7 +53,7 @@ The daemon listens on WebSocket at `ws://127.0.0.1:5225` by default.
 ### Via setup wizard
 
 ```bash
-hermes setup gateway
+hermes gateway setup
 ```
 
 Select **SimpleX Chat** and follow the prompts.
@@ -85,7 +85,7 @@ After starting the daemon, open a conversation with your agent contact. The cont
 By default **all contacts are denied**. You must either:
 
 1. Set `SIMPLEX_ALLOWED_USERS` to a comma-separated list of contact IDs, or
-2. Use **DM pairing** — send any message to the bot and it will reply with a pairing code. Enter that code via `hermes gateway pair`.
+2. Use **DM pairing** — send any message to the bot and it will reply with a pairing code. Enter that code via `hermes pairing approve simplex <CODE>`.
 
 ## Using SimpleX with cron jobs
 

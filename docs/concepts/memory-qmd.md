@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QMD memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-qmd"
-source_hash: "38e018f372a069b32c101e709ece68b7f1360de256e68d373e91b378adf2a542"
+source_hash: "fede63b0ea46a3ea0578f428c0d99ceffb924145e24236a71ccd59af706c4a0e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-qmd.md"
@@ -77,6 +77,10 @@ present.
   `vsearch` and `query`). `search` is BM25-only, so OpenClaw skips semantic
   vector readiness probes and embedding maintenance in that mode. If a mode
   fails, OpenClaw retries with `qmd query`.
+- When `searchMode` is `query`, set `memory.qmd.rerank` to `false` to use QMD's
+  hybrid query path without the reranker. OpenClaw passes `--no-rerank` to the
+  direct QMD CLI path and `rerank: false` to QMD's MCP query tool. This option
+  requires QMD 2.1 or newer.
 - With QMD releases that advertise multi-collection filters, OpenClaw groups
   same-source collections into one QMD search invocation. Older QMD releases
   keep the compatible per-collection fallback.

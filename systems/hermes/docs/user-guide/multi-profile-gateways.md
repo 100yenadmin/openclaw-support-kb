@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/multi-profile-gateways.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways"
-source_hash: "26dfffd4ce2f22ee11a95ed86970cd61474b08a5b61abd42048d3b9904060ee3"
+source_hash: "def6336b1dd625570655486eba7c5d1c3360b46dfdd349f7dadce29d3c2f91f3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-profile-gateways.md"
@@ -185,8 +185,8 @@ tail -f ~/.hermes/logs/gateway.log ~/.hermes/profiles/*/logs/gateway.log
 The CLI also has a structured log viewer:
 
 ```bash
-hermes logs --tail              # follow default profile
-hermes -p coder logs --tail     # follow one profile
+hermes logs -f                  # follow default profile
+hermes -p coder logs -f         # follow one profile
 hermes logs --help              # filters, levels, JSON output
 ```
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
-source_hash: "c99f7baac3c57e49452e311b1dde44bf196b4a4f14f80f48137b93a3a69f4c54"
+source_hash: "4d99380dfeebf318973dc05d29eccc1f5afe5c8aa0350c77016370a6f70ff3a6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/msteams.md"
@@ -962,7 +962,7 @@ OpenClaw sends Teams polls as Adaptive Cards (there is no native Teams poll API)
 
 - CLI: `openclaw message poll --channel msteams --target conversation:<id> ...`
 - Votes are recorded by the gateway in OpenClaw plugin-state SQLite under `state/openclaw.sqlite`.
-- Existing `msteams-polls.json` files are imported once when the MSTeams plugin starts.
+- Existing `msteams-polls.json` files are imported by `openclaw doctor --fix`, not by the running plugin.
 - The gateway must stay online to record votes.
 - Polls do not auto-post result summaries yet, and there is no supported poll-results CLI yet.
 

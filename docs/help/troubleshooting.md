@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "b0db67741d6181be4be408c57055a0271890c79268a733083676d4b8ed616b4b"
+source_hash: "6b77fc133ad67869d855b9680edab56aaebaf7c40bf22ff6c231abf7247391d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
@@ -382,7 +382,7 @@ Cron or heartbeat did not fire or did not deliver
 
     - `cron: scheduler disabled; jobs will not run automatically` → cron is disabled.
     - `heartbeat skipped` with `reason=quiet-hours` → outside configured active hours.
-    - `heartbeat skipped` with `reason=empty-heartbeat-file` → `HEARTBEAT.md` exists but only contains blank/header-only scaffolding.
+    - `heartbeat skipped` with `reason=empty-heartbeat-file` → `HEARTBEAT.md` exists but only contains blank, comment, header, fence, or empty-checklist scaffolding.
     - `heartbeat skipped` with `reason=no-tasks-due` → `HEARTBEAT.md` task mode is active but none of the task intervals are due yet.
     - `heartbeat skipped` with `reason=alerts-disabled` → all heartbeat visibility is disabled (`showOk`, `showAlerts`, and `useIndicator` are all off).
     - `requests-in-flight` → main lane busy; heartbeat wake was deferred.

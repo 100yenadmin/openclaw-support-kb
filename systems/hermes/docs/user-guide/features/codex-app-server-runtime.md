@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/codex-app-server-runtime.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "914dbe620910a9f35b9682daa59cbc4c5afab01fa20fa03b947090986051a45a"
+source_hash: "6e6bb96b80a24bb255d91ed096caaf26615fe6269ff4ae7f087bf9d7de929007"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -271,10 +271,10 @@ auxiliary:
   title_generation:
     provider: openrouter
     model: google/gemini-3-flash-preview
-  context_compression:
+  compression:
     provider: openrouter
     model: google/gemini-3-flash-preview
-  vision_detect:
+  vision:
     provider: openrouter
     model: google/gemini-3-flash-preview
   goal_judge:

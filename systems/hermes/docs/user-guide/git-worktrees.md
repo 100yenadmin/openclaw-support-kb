@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Git Worktrees"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/git-worktrees"
-source_hash: "54d36b4f5d46594c9f2b2c1677ca836f73c19ddedff1f2948a3961c54aa11354"
+source_hash: "a56ad65ce3b3d301bccf55ed06f214601e845f501d7076627050bdb5163a1a74"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/git-worktrees.md"
@@ -167,7 +167,7 @@ Hermes will:
 This is the easiest way to get worktree isolation. You can also combine it with a single query:
 
 ```bash
-hermes -w -q "Fix issue #123"
+hermes -w -z "Fix issue #123"
 ```
 
 For parallel agents, open multiple terminals and run `hermes -w` in each — every invocation gets its own worktree and branch automatically.

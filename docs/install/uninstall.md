@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
-source_hash: "589c61c0b3c522c09e381806f33407a78fed562e3ea78bee04d61d851f0a475a"
+source_hash: "50194219e461c48577db4fcc6a83993321db062426580fa618e842a315a30950"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/uninstall.md"
@@ -28,7 +28,13 @@ openclaw uninstall
 
 When using the CLI, state removal preserves configured workspace directories unless you also select `--workspace`.
 
-Non-interactive (automation / npx):
+Preview what will be removed (safe):
+
+```bash
+openclaw uninstall --dry-run --all
+```
+
+Non-interactive (automation / npx). Use with caution and only after confirming scopes:
 
 ```bash
 openclaw uninstall --all --yes --non-interactive

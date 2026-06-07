@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "LINE"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/line"
-source_hash: "daa484d2c6f9899aa485482779aab398a9f089dbe907312f567f3cd2557e21e8"
+source_hash: "44a9540ee1a1393c1e281d1ab0f7fd2ed46889caa7e133f6967176f21a677aab"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/line.md"
@@ -207,7 +207,7 @@ Cron jobs with `deliver: line` route to `LINE_HOME_CHANNEL`. The adapter ships a
 
 ## Limitations
 
-* **Single bubble per chunk.** Each LINE text bubble is capped at 5000 characters, and at most 5 bubbles are sent per Reply/Push call. Longer responses are truncated with an ellipsis.
+* **Bubble and length caps.** Each LINE text bubble is capped at 5000 characters. Longer responses are smart-chunked at ~4500 characters across up to 5 bubbles per Reply/Push call, splitting on natural boundaries where possible.
 * **No native message editing.** LINE has no edit-message API — streaming responses always send fresh bubbles, never edit prior ones.
 * **No Markdown rendering.** Bold (`**`), italics (`*`), code fences, and headings render as literal characters. The adapter strips them before sending; URLs are preserved (`[label](url)` becomes `label (url)`).
 * **Loading indicator is DM-only.** LINE rejects the chat/loading API for groups and rooms, so the typing indicator only shows in 1:1 chats.

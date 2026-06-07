@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release channels"
 source: "https://docs.openclaw.ai/install/development-channels"
-source_hash: "b734b09e4efeea9e02995f94324d4b185d785b7c32207776cb355a880e8c87d5"
+source_hash: "db45d24f7a25dae58dc89aa16827efc97cfde1c44aa39584bdce0c8b32eca032"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/development-channels.md"
@@ -128,12 +128,12 @@ source (config, git tag, git branch, or default).
 
 ## Tagging best practices
 
-- Tag releases you want git checkouts to land on (`vYYYY.M.D` for stable,
-  `vYYYY.M.D-beta.N` for beta; named semver prerelease suffixes such as
+- Tag releases you want git checkouts to land on (`vYYYY.M.PATCH` for stable,
+  `vYYYY.M.PATCH-beta.N` for beta; named semver prerelease suffixes such as
   `-alpha.N`, `-rc.N`, and `-next.N` are not stable targets).
-- Legacy numeric stable tags such as `vYYYY.M.D-1` and `v1.0.1-1` are still
+- Legacy numeric stable tags such as `vYYYY.M.PATCH-1` and `v1.0.1-1` are still
   recognized as stable git tags for compatibility.
-- `vYYYY.M.D.beta.N` is also recognized for compatibility, but prefer `-beta.N`.
+- `vYYYY.M.PATCH.beta.N` is also recognized for compatibility, but prefer `-beta.N`.
 - Keep tags immutable: never move or reuse a tag.
 - npm dist-tags remain the source of truth for npm installs:
   - `latest` -> stable

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/adding-platform-adapters"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "06ca736357c62c5f4a3d2eb6ab32253e351cef9eb15e7d73ec4628ac0cd9ab53"
+source_hash: "c55c09e07ce65349db1918dff8ef71756439f47df5c66d17933704e292f9825a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -49,11 +49,11 @@ The plugin system lets you add a platform adapter without modifying any core Her
 
 ```
 ~/.hermes/plugins/my-platform/
-  PLUGIN.yaml      # Plugin metadata
+  plugin.yaml      # Plugin metadata
   adapter.py       # Adapter class + register() entry point
 ```
 
-### PLUGIN.yaml
+### plugin.yaml
 
 Plugin metadata. The `requires_env` and `optional_env` blocks auto-populate `hermes config` UI entries (see [Surfacing Env Vars](#surfacing-env-vars-in-hermes-config) below).
 

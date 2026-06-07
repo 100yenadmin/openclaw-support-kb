@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
-source_hash: "59d67ccb963ee64be89818617a96de48e1de45f83dafb4bfe97154cc24e0f03c"
+source_hash: "7723072c7e6438b405f4dd66f88dc3f50bb2e22266a596b4491c56037c5ae1cd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sandbox.md"
@@ -174,12 +174,12 @@ Prefer `openclaw sandbox recreate` over manual backend-specific cleanup. It uses
 
 ## Registry migration
 
-OpenClaw stores sandbox runtime metadata as one JSON shard per container/browser entry under the sandbox state directory. Older installs may still have monolithic legacy files:
+OpenClaw stores sandbox runtime metadata in the shared SQLite state database. Older installs may still have legacy sandbox registry files:
 
 - `~/.openclaw/sandbox/containers.json`
 - `~/.openclaw/sandbox/browsers.json`
 
-Regular sandbox runtime reads do not rewrite those files. Run `openclaw doctor --fix` to migrate valid legacy entries into the sharded registry directories. Invalid legacy files are quarantined so one bad old registry cannot hide current runtime entries.
+Some upgrades may also have one JSON shard per container/browser under `~/.openclaw/sandbox/containers/` or `~/.openclaw/sandbox/browsers/`. Regular sandbox runtime reads do not rewrite those legacy sources. Run `openclaw doctor --fix` to migrate valid legacy entries into SQLite. Invalid legacy files are quarantined so one bad old registry cannot hide current runtime entries.
 
 ## Configuration
 

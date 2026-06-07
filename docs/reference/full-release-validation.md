@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Full release validation"
 source: "https://docs.openclaw.ai/reference/full-release-validation"
-source_hash: "ddfcb8108389b653263b24a83588d5e1029d2d26e1ba2b3d9c56cd5dc3123edb"
+source_hash: "aa517210fb26183eed3dd9277edefd519608bdd5a1689afba5eb41904aff4646"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/full-release-validation.md"
@@ -23,7 +23,7 @@ tag, or full commit SHA as `ref`:
 ```bash
 gh workflow run full-release-validation.yml \
   --ref main \
-  -f ref=release/YYYY.M.D \
+  -f ref=release/YYYY.M.PATCH \
   -f provider=openai \
   -f mode=both \
   -f release_profile=stable
@@ -40,7 +40,7 @@ the broad advisory profile never drops coverage silently.
 
 Package Acceptance normally builds the candidate tarball from the resolved
 `ref`, including full-SHA runs dispatched with `pnpm ci:full-release`. After a
-beta publish, pass `release_package_spec=openclaw@YYYY.M.D-beta.N` to reuse the
+beta publish, pass `release_package_spec=openclaw@YYYY.M.PATCH-beta.N` to reuse the
 shipped npm package across release checks, Package Acceptance, cross-OS,
 release-path Docker, and package Telegram. Use `package_acceptance_package_spec`
 only when Package Acceptance should intentionally prove a different package.
@@ -157,7 +157,7 @@ Use `rerun_group` to avoid repeating unrelated release boxes:
 | `package`           | Package Acceptance.                                                                             |
 | `qa`                | QA parity plus QA live lanes.                                                                   |
 | `qa-parity`         | QA parity lanes and report only.                                                                |
-| `qa-live`           | QA live Matrix and Telegram only.                                                               |
+| `qa-live`           | QA live Matrix/Telegram plus gated Discord, WhatsApp, and Slack lanes when enabled.             |
 | `npm-telegram`      | Published-package Telegram E2E; requires `release_package_spec` or `npm_telegram_package_spec`. |
 
 Use `live_suite_filter` with `rerun_group=live-e2e` when one live suite failed.
@@ -178,10 +178,14 @@ summaries include per-phase timings for packaged upgrade lanes, and long-running
 commands print heartbeat lines so a stuck Windows update is visible before the
 job timeout.
 
-QA release-check lanes are advisory except the standard runtime tool coverage
-gate. Required OpenClaw dynamic tool drift in the standard tier blocks the
-release-check verifier; other QA-only failures are reported as warnings. Rerun
-`rerun_group=qa`, `qa-parity`, or `qa-live` when you need fresh QA evidence.
+QA release-check failures block normal release validation. Required OpenClaw
+dynamic tool drift in the standard tier also blocks the release-check verifier.
+Tideclaw alpha runs may still treat non-package-safety release-check lanes as
+advisory. When `live_suite_filter` explicitly requests a gated QA live lane such
+as Discord, WhatsApp, or Slack, the matching
+`OPENCLAW_RELEASE_QA_*_LIVE_CI_ENABLED` repo variable must be enabled; otherwise
+input capture fails instead of silently skipping the lane. Rerun `rerun_group=qa`,
+`qa-parity`, or `qa-live` when you need fresh QA evidence.
 
 ## Evidence to keep
 

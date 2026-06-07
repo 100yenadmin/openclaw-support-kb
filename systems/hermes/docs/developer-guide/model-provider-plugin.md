@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "4bb62d2f52fd6b278251e8e15055e70d609726f4f4b052a11963e0c2d4637779"
+source_hash: "4c2cf211ea2dc0fa844e8bfda865146183d8bb93129215f79a2a80a943d61b53"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -263,7 +263,7 @@ The general `PluginManager` (the thing `hermes plugins` operates on) **sees** mo
 Like any Hermes plugin, model providers can ship as a pip package. Add an entry point to your `pyproject.toml`:
 
 ```toml
-[project.entry-points."hermes.plugins"]
+[project.entry-points."hermes_agent.plugins"]
 acme-inference = "acme_hermes_plugin:register"
 ```
 

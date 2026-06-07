@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "09470ca4ac84c81402077efe53283274e674f8ac564ea72a10cad69cc6bfee1f"
+source_hash: "a22fe72bc7cca76fe4dcda10ab0ffb0200c02c4775d71471155c7df1ffc9b9f5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -61,7 +61,7 @@ hermes chat --verbose
 
 # Isolated git worktree (for running multiple agents in parallel)
 hermes -w                         # Interactive mode in worktree
-hermes -w -q "Fix issue #123"     # Single query in worktree
+hermes -w -z "Fix issue #123"     # Single query in worktree
 ```
 
 ## Interface Layout

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "7c70cf027424f05b08ca3b6177bf370963e4be90c67c80aae004e7830ae89b2b"
+source_hash: "53ac2a4d9d43c14ff0a9557f2a1d99e4002cf6d2fb21e1d45c4c43140b890f00"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -1007,10 +1007,10 @@ sessionId})`; create, branch, continue, list, and fork flows live in their
 - The generic plugin SDK persistent-dedupe helper no longer exposes file-shaped
   options. Callers provide SQLite scope keys and durable dedupe rows live in
   shared plugin state.
-- Microsoft Teams SSO and delegated OAuth tokens moved from locked JSON files
-  to SQLite plugin state. Doctor imports `msteams-sso-tokens.json` and
-  `msteams-delegated.json`, rebuilds canonical SSO token keys from payloads,
-  and removes the source files.
+- Microsoft Teams SSO tokens moved from locked JSON files to SQLite plugin
+  state. Doctor imports `msteams-sso-tokens.json`, rebuilds canonical SSO token
+  keys from payloads, and removes the source file. Delegated OAuth tokens stay
+  on their existing private credential-file boundary.
 - Matrix sync cache state moved from `bot-storage.json` to SQLite plugin
   state. Doctor imports legacy raw or wrapped sync payloads and removes the
   source file. Active Matrix and QA Matrix clients pass a SQLite sync-store root
@@ -1618,13 +1618,13 @@ Move these into the global database:
   `reply-cache`, `sent-echoes`) instead of `imessage/catchup/*.json`,
   `imessage/reply-cache.jsonl`, and `imessage/sent-echoes.jsonl`; the iMessage
   doctor/setup migration imports and removes the legacy files.
-- Microsoft Teams conversations, polls, delegated tokens, pending uploads, and
-  feedback learnings now use SQLite plugin state/blob namespaces
-  (`conversations`, `polls`, `delegated-tokens`, `pending-uploads`,
+- Microsoft Teams conversations, polls, SSO tokens, and feedback learnings now
+  use SQLite plugin state namespaces (`conversations`, `polls`, `sso-tokens`,
   `feedback-learnings`) instead of `msteams-conversations.json`,
-  `msteams-polls.json`, `msteams-delegated.json`,
-  `msteams-pending-uploads.json`, and `*.learnings.json`; the Microsoft Teams
-  doctor/setup migration imports and removes the legacy files.
+  `msteams-polls.json`, `msteams-sso-tokens.json`, and `*.learnings.json`; the
+  Microsoft Teams doctor/setup migration imports and archives the legacy files.
+  Pending uploads are a short-lived SQLite cache and old JSON cache files are
+  not migrated.
 - Matrix sync cache, storage metadata, thread bindings, inbound dedupe markers,
   startup verification cooldown state, credentials, recovery keys, and SDK
   IndexedDB crypto snapshots now use SQLite plugin state/blob namespaces under
@@ -2196,8 +2196,6 @@ Add a repo check that fails new runtime writes to legacy state paths:
 - Microsoft Teams `msteams-conversations.json`
 - Microsoft Teams `msteams-polls.json`
 - Microsoft Teams `msteams-sso-tokens.json`
-- Microsoft Teams `msteams-delegated.json`
-- Microsoft Teams `msteams-pending-uploads.json`
 - Microsoft Teams `*.learnings.json`
 - Matrix `bot-storage.json`
 - Matrix `sync-store.json`

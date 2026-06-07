@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "API Server"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server"
-source_hash: "6e763f64b257be80b3350fc2f8c6942caf44bd8f8c15a3e5652453aa7c11ea0b"
+source_hash: "1d7cfbf47ed74672e08ba6fc23dbd905c966e955ccd1f031d6e0beca466af890"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/api-server.md"
@@ -284,6 +284,10 @@ Server-Sent Events stream of the run's tool-call progress, token deltas, and lif
 ### POST /v1/runs/\{run_id\}/stop
 
 Interrupt a running agent turn. The endpoint returns immediately with `{"status": "stopping"}` while Hermes asks the active agent to stop at the next safe interruption point.
+
+### POST /v1/runs/\{run_id\}/approval
+
+Resolve a pending approval for a run that is waiting on a human decision (for example, a tool call gated behind an approval policy). The body carries the approval decision; the run resumes once the decision is recorded. This endpoint is advertised in `/v1/capabilities` as the `run_approval` feature so external UIs can detect support before surfacing an approval prompt.
 
 ## Jobs API (background scheduled work)
 

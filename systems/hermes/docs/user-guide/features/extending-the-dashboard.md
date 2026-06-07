@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Extending the Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/extending-the-dashboard"
-source_hash: "463dbd8b57ce12c6fa3cf2265be709886e546db5112c6269e7b50e93caa8b15c"
+source_hash: "b8e266e808b1e90bed2f297d81355b40d4e975c1d1c4c71233ee351175722d7f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/extending-the-dashboard.md"
@@ -143,6 +143,22 @@ typography:
   lineHeight: "1.5"
   letterSpacing: "0.04em"
 ```
+
+##### Changing the font from the UI (no YAML)
+
+The theme picker in the dashboard header has a **Font** section below the
+theme list. Pick any font there and it overrides the body font of whatever
+theme is active — the choice is independent of the theme and persists across
+theme switches (stored in `config.yaml` under `dashboard.font`). Choose
+**Theme default** to clear the override and fall back to the active theme's
+own `fontSans`.
+
+The picker offers a curated catalog (system stacks plus a set of Google-Fonts
+families across sans / serif / mono). It deliberately does **not** accept a
+free-text font URL — the font's stylesheet is injected as a `<link>`, so the
+catalog keeps the injected origins fixed. For a fully custom face, set
+`fontSans` + `fontUrl` in a theme YAML as shown above. The theme's `fontMono`
+(code blocks, terminal) is always left untouched by the UI override.
 
 #### Layout
 

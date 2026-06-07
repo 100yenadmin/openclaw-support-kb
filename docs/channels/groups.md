@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "459791107d7ff80b51ddefddb11f84c31a43934c8bf02c661e7f8c09830f508f"
+source_hash: "096d85a8c7e37c56154ce72ad159e7305d0ddf376401ebe4fc92033f45a90cc6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Groups
 Source: https://docs.openclaw.ai/channels/groups
 
-OpenClaw treats group chats consistently across surfaces: Discord, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo.
+OpenClaw treats group chats consistently across surfaces: Discord, iMessage, Matrix, Microsoft Teams, QQBot, Signal, Slack, Telegram, WhatsApp, Zalo.
 
 For always-on rooms that should provide quiet context unless the agent explicitly sends a visible message, see [Ambient room events](/channels/ambient-room-events).
 

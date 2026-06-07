@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "d24b271c45690ad6c868430edf1fbbd2adfc52fdccec76c6403f122b163e346b"
+source_hash: "3a1acd93a099c2cd7f620aaf4b0002dbfe3fb83005799d4706ab562bc494e442"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -156,6 +156,13 @@ inter-session user turns that only have provenance metadata.
 - Turn validation (merge consecutive user turns to satisfy strict alternation).
 - Trailing assistant prefill turns are stripped from outgoing Anthropic Messages
   payloads when thinking is enabled, including Cloudflare AI Gateway routes.
+- Pre-compaction assistant thinking signatures are stripped before provider
+  replay when a session has been compacted. Thinking signatures are
+  cryptographically bound to the conversation prefix at generation time; after
+  compaction the prefix changes (summarized content is replaced by a compaction
+  summary), so replaying the original signatures causes Anthropic to reject the
+  request with "Invalid signature in thinking block". The thinking text is
+  preserved as an unsigned block and is then handled by the rule below.
 - Thinking blocks with missing, empty, or blank replay signatures are stripped
   before provider conversion. If that empties an assistant turn, OpenClaw keeps
   turn shape with non-empty omitted-reasoning text.
@@ -171,6 +178,9 @@ inter-session user turns that only have provenance metadata.
   repaired on disk before load.
 - Assistant stream-error turns that contain only blank text blocks are dropped
   from the in-memory replay copy instead of replaying an invalid blank block.
+- Pre-compaction assistant thinking signatures are stripped before Converse
+  replay when a session has been compacted, for the same reason as Anthropic
+  above.
 - Claude thinking blocks with missing, empty, or blank replay signatures are
   stripped before Converse replay. If that empties an assistant turn, OpenClaw
   keeps turn shape with non-empty omitted-reasoning text.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "c0d54053a1199a17da3c1fc01b3f655c3f7cae03ffe5cf2ef4a3f10a2093fcaa"
+source_hash: "504a693ea0db32f3bf1b1be814351e0e46940f6a986f3e0b40f48dd609c19792"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -158,7 +158,7 @@ to a group, then mention it or configure the group to run without a mention.
         "*": {
           requireMention: true,
           historyLimit: 50,
-          toolPolicy: "restricted",
+          tools: { deny: ["exec", "read", "write"] },
         },
         GROUP_OPENID: {
           name: "Release room",
@@ -180,9 +180,12 @@ settings include:
 - `requireMention`: require an @mention before the bot replies. Default: `true`.
 - `ignoreOtherMentions`: drop messages that mention someone else but not the bot.
 - `historyLimit`: keep recent non-mention group messages as context for the next mentioned turn. Set `0` to disable.
-- `toolPolicy`: `full`, `restricted`, or `none` for group-scoped tools.
+- `tools`: allow/deny tools for the whole group.
+- `toolsBySender`: per-sender group tool overrides; see [Groups](/channels/groups#groupchannel-tool-restrictions-optional).
 - `name`: friendly label used in logs and group context.
 - `prompt`: per-group behavior prompt appended to the agent context.
+
+Old QQBot `toolPolicy` entries are retired. Run `openclaw doctor --fix` to migrate them to `tools`.
 
 Activation modes are `mention` and `always`. `requireMention: true` maps to
 `mention`; `requireMention: false` maps to `always`. A session-level activation

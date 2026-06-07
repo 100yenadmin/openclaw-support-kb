@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "e178a58995d503ed5c0eaea45e8e028011705147d2c6ebf5cb6c3b864814f14f"
+source_hash: "99b37f8b781b3842127a79e15353a0aa1db68a93708736670120995f8ee8de3d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -157,6 +157,9 @@ If `/api/status` shows the gate is on with the `"basic"` provider and Desktop *s
 ### Config
 
 A form-based editor for `config.yaml`. All 150+ configuration fields are auto-discovered from `DEFAULT_CONFIG` and organized into tabbed categories:
+
+![Config admin page — section filters on the left, auto-discovered fields on the right](/img/dashboard/admin-config.png)
+
 
 - **model** — default model, provider, base URL, reasoning settings
 - **terminal** — backend (local/docker/ssh/modal), timeout, shell preferences
@@ -1032,6 +1035,8 @@ When you run `hermes update`, the web frontend is automatically rebuilt if `npm`
 The dashboard ships with six built-in themes and can be extended with user-defined themes, plugin tabs, and backend API routes — all drop-in, no repo clone needed.
 
 **Switch themes live** from the header bar — click the palette icon next to the language switcher. Selection persists to `config.yaml` under `dashboard.theme` and is restored on page load.
+
+**Change the font independently** from the same picker — the **Font** section below the theme list overrides the UI font of whatever theme is active. The choice persists across theme switches (`config.yaml` → `dashboard.font`); pick **Theme default** to clear it and return to the active theme's own font.
 
 Built-in themes:
 

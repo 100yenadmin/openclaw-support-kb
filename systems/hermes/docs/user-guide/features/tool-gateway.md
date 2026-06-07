@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Tool Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway"
-source_hash: "13012415adf13ad69e10016a79dc890edaaf0b397b94bde97924011f64780d21"
+source_hash: "8ad6d171f87e0c243f2d9c008349282a3c9fa16fe71326df2e61d94e81ec30dc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-gateway.md"
@@ -94,6 +94,8 @@ Tools marked "active via Nous subscription" are going through the gateway. Anyth
 
 The Tool Gateway is a **paid-subscription** feature. Free-tier Nous accounts can use Portal for inference but don't include managed tools — [upgrade your plan](https://portal.nousresearch.com/manage-subscription) to unlock the gateway.
 
+Some accounts are also entitled to a **free tool pool** — a small managed-tool allowance that covers gateway tool calls without a paid subscription. When a free pool is available, the gateway surfaces it and shows a setup prompt on first use, so you can opt in and start using managed tools right away.
+
 ## Mix and match
 
 The gateway is per-tool. Turn it on for just what you want:
@@ -117,13 +119,13 @@ Image generation defaults to FLUX 2 Klein 9B for speed. Override per-call by pas
 | Model | ID | Best for |
 |---|---|---|
 | FLUX 2 Klein 9B | `fal-ai/flux-2/klein/9b` | Fast, good default |
-| FLUX 2 Pro | `fal-ai/flux-2/pro` | Higher fidelity FLUX |
+| FLUX 2 Pro | `fal-ai/flux-2-pro` | Higher fidelity FLUX |
 | Z-Image Turbo | `fal-ai/z-image/turbo` | Stylized, fast |
-| Nano Banana Pro | `fal-ai/gemini-3-pro-image` | Google Gemini 3 Pro Image |
-| GPT Image 1.5 | `fal-ai/gpt-image-1/5` | OpenAI image gen, text+image |
+| Nano Banana Pro | `fal-ai/nano-banana-pro` | Google Gemini 3 Pro Image |
+| GPT Image 1.5 | `fal-ai/gpt-image-1.5` | OpenAI image gen, text+image |
 | GPT Image 2 | `fal-ai/gpt-image-2` | OpenAI latest |
 | Ideogram V3 | `fal-ai/ideogram/v3` | Strong prompt adherence + typography |
-| Recraft V4 Pro | `fal-ai/recraft/v4/pro` | Vector-style, graphic design |
+| Recraft V4 Pro | `fal-ai/recraft/v4/pro/text-to-image` | Vector-style, graphic design |
 | Qwen Image | `fal-ai/qwen-image` | Alibaba multimodal |
 
 The set evolves — `hermes tools` → Image Generation shows the current live list.

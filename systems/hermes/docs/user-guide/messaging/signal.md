@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Signal"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/signal"
-source_hash: "f2b156c2736c0e52ac08c0c1003ed26a10a0a54bae563b1a09613e029166ee5a"
+source_hash: "9ef5e61e94665b7ab9bfe4ce7f7aac211b7de8afea742a987d97495ef9427bcf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/signal.md"
@@ -197,6 +197,12 @@ None of this requires additional config — it ships on by default in recent sig
 ### Typing Indicators
 
 The bot sends typing indicators while processing messages, refreshing every 8 seconds.
+
+### Tool Progress Display
+
+Signal does not support editing already-sent messages. Hermes therefore suppresses gateway tool-progress bubbles on Signal, even when `/verbose` is enabled and saves a non-`off` mode for the platform.
+
+You can still see tool activity in the CLI, and final Signal replies can include normal assistant output. If you need live per-tool progress in chat, use a messaging platform with message editing support.
 
 ### Phone Number Redaction
 

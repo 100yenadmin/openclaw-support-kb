@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Graph Webhook Listener"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/msgraph-webhook"
-source_hash: "758c9054fde08c247832f10a1dc1a3022033eed58fc43178c8e335a150bef8c1"
+source_hash: "065adcd34fe4d11eb79a20c338fea7dc44fb7c7632d89180973303b6e82102bf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/msgraph-webhook.md"
@@ -83,7 +83,7 @@ All settings go under `platforms.msgraph_webhook.extra`:
 | `max_seen_receipts` | `5000` | Dedupe cache size for notification IDs. Oldest entries evicted when the cap is hit. |
 | `allowed_source_cidrs` | `[]` | Required for non-loopback binds. Leave empty only when the listener is bound to loopback and fronted by a local tunnel / reverse proxy. |
 
-Each setting also has an equivalent env var (`MSGRAPH_WEBHOOK_*`) that merges into the config at gateway startup — see the [environment variables reference](/reference/environment-variables#microsoft-graph-teams-meetings).
+Most settings also have an equivalent env var (`MSGRAPH_WEBHOOK_*`) that merges into the config at gateway startup (the exception is `host`, which is config-only — see the note above) — see the [environment variables reference](/reference/environment-variables#microsoft-graph-teams-meetings).
 
 ## Security Hardening
 
