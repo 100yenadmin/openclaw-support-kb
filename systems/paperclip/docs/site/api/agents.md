@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "agents"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/api/agents.md"
-source_hash: "15131d6bc477abe3351dfb8ad7251e5a971f538bbfa16dca4f2d9d735346557d"
+source_hash: "299f71610edd1be0d4ac585c5932bceedd4dcf7d826f55e14c5ec8584fbfd5a6"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/api/agents.md"
@@ -110,6 +110,15 @@ POST /api/agents/{agentId}/resume
 ```
 
 Resumes heartbeats for a paused agent.
+
+## Clear Agent Error
+
+```
+POST /api/agents/{agentId}/clear-error
+```
+
+Moves an agent from `error` back to `idle` without deleting run history or runtime diagnostics.
+Only agents currently in `error` can be cleared.
 
 ## Terminate Agent
 
