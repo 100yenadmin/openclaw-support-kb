@@ -1,8 +1,8 @@
 ---
 type: composio_doc
-title: "Authentication"
+title: "Overview"
 source: "https://docs.composio.dev/reference/authentication.md"
-source_hash: "7613cc1994ce2d783cded1a62fa4b6ee71f5122eba0ba3e6abf02fc90477d5f4"
+source_hash: "94c1d9c60d29879f2f5223ba8359252690aa0dd3174fd569250459eeb084f7ba"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authentication.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Authentication (/reference/authentication)
+# Overview (/reference/authentication)
 Source: https://docs.composio.dev/reference/authentication.md
 
 
@@ -54,6 +54,9 @@ For organization-level endpoints:
 curl https://backend.composio.dev/api/v3.1/org/projects \
   -H "x-org-api-key: $COMPOSIO_ORG_API_KEY"
 ```
+
+- [Project API key permissions](/reference/authentication/project-api-key-permissions):
+Scoped project API key access levels and covered routes
 
 - [Errors](/reference/errors):
 Understanding API error responses

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md"
-source_hash: "7aac5e66686e5c2660dcad67c0711168e9ecfa0b1ecea2ddd71c4a67385aefae"
+source_hash: "5e8e9a8de464c3133edbfe0ca1b2ff226911617f7912796ecef724ee79a9146f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
@@ -33,7 +33,7 @@ const result = await composio.connectedAccounts.list();
 Deletes a connected account.
 
 This method permanently removes a connected account from the Composio platform.
-This action cannot be undone.
+This action cannot be undone and will revoke any access tokens associated with the account.
 
 ```typescript
 async delete(nanoid: string): Promise
@@ -158,6 +158,22 @@ Compound function to create a new connected account.
 This function creates a new connected account and returns a connection request.
 Users can then wait for the connection to be established using the `waitForConnection` method.
 
+**Deprecated for Composio-managed OAuth (OAuth1, OAuth2, DCR\_OAUTH).**
+The legacy \`POST endpoint that this method
+wraps is being retired for Composio-managed auth configs on redirectable
+schemes. The cutover is **2026-05-08** for new organizations and
+**2026-07-03** for all remaining organizations. After your org's cutover,
+this method will throw ComposioLegacyConnectedAccountsEndpointRetiredError
+for that specific combination.
+
+Use ConnectedAccounts.link for Composio-managed OAuth — it works for
+every redirectable scheme regardless of whether the auth config is
+Composio-managed or custom, and the return shape is the same.
+
+Custom auth configs (your own OAuth app) and non-OAuth schemes (API key,
+bearer token, basic auth) are unaffected and continue to work on
+`initiate()`. See [https://docs.composio.dev/docs/changelog/2026/04/24](https://docs.composio.dev/docs/changelog/2026/04/24)
+
 ```typescript
 async initiate(userId: string, authConfigId: string, options?: object): Promise
 ```
@@ -219,7 +235,7 @@ const connectionRequest = await composio.connectedAccounts.initiate(
 ## link()
 
 ```typescript
-async link(userId: string, authConfigId: string, options?: { alias?: string; callbackUrl?: string }): Promise
+async link(userId: string, authConfigId: string, options?: object): Promise
 ```
 
 **Parameters**
@@ -332,7 +348,10 @@ const refreshedAccount = await composio.connectedAccounts.refresh('conn_abc123')
 
 ## update()
 
-Update a connected account's alias and/or credentials.
+Enable or disable a connected account. Accepts `{ enabled: boolean }`.
+
+For ACL writes on SHARED connections, see
+`composio.experimental.updateAcl()`.
 
 ```typescript
 async update(nanoid: string, params: ConnectedAccountUpdateStatusParams): Promise

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin"
-source_hash: "a23d73c7f928dd844a1ba9c979d4767bf138f11294467668bfd2f6022ac81b85"
+source_hash: "2168d5b5503c1565a34594ece4aa912f97129d4488d0e0a732e2ba718282ceca"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/build-a-hermes-plugin.md"
@@ -497,6 +497,53 @@ Two rules from the security model in `tools/lazy_deps.py`:
 For third-party plugins distributed via pip, declare the optional deps as `[project.optional-dependencies]` extras in your own `pyproject.toml` and tell users to `pip install your-plugin[backend]` — that path doesn't go through `lazy_deps`. The lazy-install dance is most useful for **bundled** plugins where shipping a hard dependency on every install would bloat the base Hermes footprint.
 
 When `security.allow_lazy_installs: false` is set globally, `ensure()` raises `FeatureUnavailable` immediately with a remediation hint — your plugin should catch it and degrade gracefully (return an error result, not crash the tool loop).
+
+
+
+### Thread-safe lazy singletons
+
+Plugins often cache an expensive object — an SDK client, an HTTP session, a connection pool — in a module-level variable built on first use:
+
+```python
+_client = None
+
+def get_client():
+    global _client
+    if _client is not None:
+        return _client
+    _client = ExpensiveClient(...)   # ← TOCTOU race
+    return _client
+```
+
+This is a footgun. Hermes runs multiple threads in one process (delegated tool calls, background workers, the self-improvement fork), so two threads can hit `get_client()` before `_client` is set, **both** pass the `is not None` check, **both** run the expensive build, and the second write clobbers the first — leaking whatever resource the loser opened (connection, file handle, background thread).
+
+Don't hand-roll the lock. Use the helpers in `plugins/plugin_utils.py`:
+
+```python
+from plugins.plugin_utils import lazy_singleton, SingletonSlot
+
+# Zero-arg accessor → decorate it:
+@lazy_singleton
+def get_client():
+    return ExpensiveClient(load_config())   # runs exactly once
+
+client = get_client()    # safe across threads
+get_client.reset()       # drop the instance (tests / teardown)
+
+
+# Accessor that takes a build argument → use a slot:
+_slot: SingletonSlot = SingletonSlot()
+
+def get_client(config=None):
+    return _slot.get(lambda: ExpensiveClient(resolve(config)))
+
+def reset_client():
+    _slot.reset()
+```
+
+Both serialize concurrent first calls with double-checked locking and run the factory at most once. If the factory raises, nothing is cached and the next call retries. The honcho memory plugin (`plugins/memory/honcho/client.py`) is the reference consumer.
+
+> Rule of thumb: any time you write `global _something` followed by a `is None` check and a build, reach for one of these instead.
 
 
 

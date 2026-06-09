@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tools.md"
-source_hash: "d6a8194d2661cf5809649d42ba799898e0d1bd721bea0af390d0f9b2e084250d"
+source_hash: "7571a07a0e1f7b73d113ec796d7171052bd44ccb00693c717b8beb00a68b6808"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tools.md"
@@ -28,72 +28,11 @@ const result = await composio.tools.list();
 
 # Methods
 
-## createCustomTool()
-
-Creates a custom tool that can be used within the Composio SDK.
-
-Custom tools allow you to extend the functionality of Composio with your own implementations
-while keeping a consistent interface for both built-in and custom tools.
-
-```typescript
-async createCustomTool(body: CustomToolOptions): Promise<...>
-```
-
-**Parameters**
-
-| Name   | Type                   | Description                           |
-| ------ | ---------------------- | ------------------------------------- |
-| `body` | `CustomToolOptions` | The configuration for the custom tool |
-
-**Returns**
-
-`Promise<...>` — The created custom tool
-
-**Example**
-
-```typescript
-// creating a custom tool with a toolkit
-await composio.tools.createCustomTool({
-  name: 'My Custom Tool',
-  description: 'A custom tool that does something specific',
-  slug: 'MY_CUSTOM_TOOL',
-  userId: 'default',
-  connectedAccountId: '123',
-  toolkitSlug: 'github',
-  inputParameters: z.object({
-    param1: z.string().describe('First parameter'),
-  }),
-  execute: async (input, connectionConfig, executeToolRequest) => {
-    // Custom logic here
-    return { data: { result: 'Success!' } };
-  }
-});
-```
-
-```typescript
-// creating a custom tool without a toolkit
-await composio.tools.createCustomTool({
-  name: 'My Custom Tool',
-  description: 'A custom tool that does something specific',
-  slug: 'MY_CUSTOM_TOOL',
-  inputParameters: z.object({
-    param1: z.string().describe('First parameter'),
-  }),
-  execute: async (input) => {
-    // Custom logic here
-    return { data: { result: 'Success!' } };
-  }
-});
-```
-
-***
-
 ## execute()
 
 Executes a given tool with the provided parameters.
 
-This method calls the Composio API or a custom tool handler to execute the tool and returns the response.
-It automatically determines whether to use a custom tool or a Composio API tool based on the slug.
+This method calls the Composio API to execute the tool and returns the response.
 
 **Version Control:**
 By default, manual tool execution requires a specific toolkit version. If the version resolves to "latest",
@@ -162,21 +101,23 @@ const result = await composio.tools.execute('GITHUB_GET_ISSUES', {
 
 ***
 
-## executeMetaTool()
+## executeSessionTool()
 
-Executes a composio meta tool based on tool router session
+Executes a tool based on a tool router session.
 
 ```typescript
-async executeMetaTool(toolSlug: string, body: { arguments?: Record<string, unknown>; sessionId: string }, modifiers?: SessionExecuteMetaModifiers): Promise<...>
+async executeSessionTool(toolSlug: string, body: { arguments?: Record<string, unknown>; sessionId: string }, modifiers?: SessionExecuteMetaModifiers, tool?: object, options?: ToolRouterSessionExecuteOptions): Promise<...>
 ```
 
 **Parameters**
 
-| Name         | Type                          | Description                        |
-| ------------ | ----------------------------- | ---------------------------------- |
-| `toolSlug`   | `string`                      | The slug of the tool to execute    |
-| `body`       | `object`                      | The execution parameters           |
-| `modifiers?` | `SessionExecuteMetaModifiers` | The modifiers to apply to the tool |
+| Name         | Type                              | Description                                                         |
+| ------------ | --------------------------------- | ------------------------------------------------------------------- |
+| `toolSlug`   | `string`                          | The slug of the tool to execute                                     |
+| `body`       | `object`                          | The execution parameters                                            |
+| `modifiers?` | `SessionExecuteMetaModifiers`     | The modifiers to apply to the tool                                  |
+| `tool?`      | `object`                          | Optional tool schema used to resolve toolkit metadata for modifiers |
+| `options?`   | `ToolRouterSessionExecuteOptions` |                                                                     |
 
 **Returns**
 
@@ -294,6 +235,9 @@ Retrieves a specific tool by its slug from the Composio API.
 This method fetches a single tool in raw format without provider-specific wrapping,
 providing direct access to the tool's schema and metadata. Tool versions are controlled
 at the Composio SDK initialization level through the `toolkitVersions` configuration.
+Local experimental custom tools are session-scoped; attach them when creating or reusing a
+Tool Router session, then use `session.tools()`, `session.customTools()`, or
+`session.execute()`.
 
 ```typescript
 async getRawComposioToolBySlug(slug: string, options?: ToolRetrievalOptions): Promise<...>
@@ -334,9 +278,6 @@ const customizedTool = await composio.tools.getRawComposioToolBySlug(
   }
 );
 
-// Get a custom tool (will check custom tools first)
-const customTool = await composio.tools.getRawComposioToolBySlug('MY_CUSTOM_TOOL');
-
 // Access tool properties
 const githubTool = await composio.tools.getRawComposioToolBySlug('GITHUB_CREATE_ISSUE');
 console.log({
@@ -353,10 +294,12 @@ console.log({
 
 ## getRawComposioTools()
 
-Lists all tools available in the Composio SDK including custom tools.
+Lists Composio API tools available to the SDK.
 
-This method fetches tools from the Composio API in raw format and combines them with
-any registered custom tools. The response can be filtered and modified as needed.
+This method fetches remote Composio tools from the API in raw format. The response can be
+filtered and modified as needed. Local experimental custom tools are session-scoped; attach
+them when creating or reusing a Tool Router session, then use `session.tools()`,
+`session.customTools()`, or `session.execute()`.
 It provides access to the underlying tool data without provider-specific wrapping.
 
 ```typescript
@@ -422,32 +365,32 @@ const authSpecificTools = await composio.tools.getRawComposioTools({
 
 ***
 
-## getRawToolRouterMetaTools()
+## getRawToolRouterSessionTools()
 
-Fetches the meta tools for a tool router session.
-This method fetches the meta tools from the Composio API and transforms them to the expected format.
-It provides access to the underlying meta tool data without provider-specific wrapping.
+Fetches tools exposed by a tool router session.
+This includes helper/meta tools plus any tools preloaded into the session.
+It provides access to the underlying tool data without provider-specific wrapping.
 
 ```typescript
-async getRawToolRouterMetaTools(sessionId: string, options?: SchemaModifierOptions): Promise
+async getRawToolRouterSessionTools(sessionId: string, options?: SchemaModifierOptions): Promise
 ```
 
 **Parameters**
 
 | Name        | Type                    | Description                                                        |
 | ----------- | ----------------------- | ------------------------------------------------------------------ |
-| `sessionId` | `string`                | \{string} The session id to get the meta tools for                 |
+| `sessionId` | `string`                | \{string} The session id to get tools for                          |
 | `options?`  | `SchemaModifierOptions` | \{SchemaModifierOptions} Optional configuration for tool retrieval |
 
 **Returns**
 
-`Promise` — The list of meta tools
+`Promise` — The list of session tools
 
 **Example**
 
 ```typescript
-const metaTools = await composio.tools.getRawToolRouterMetaTools('session_123');
-console.log(metaTools);
+const sessionTools = await composio.tools.getRawToolRouterSessionTools('session_123');
+console.log(sessionTools);
 ```
 
 ***

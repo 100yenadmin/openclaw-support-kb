@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Glossary"
 source: "https://docs.composio.dev/docs/glossary.md"
-source_hash: "4e1329e446135f3275016910d4672f7d631b5095a0884ca8b3339cc71fa0318f"
+source_hash: "bb15a23b79cfe906842543501646bb5630b82b13279c58d3ca753320b8853463"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "glossary.md"
@@ -51,7 +51,7 @@ The object returned when you initiate authentication. Contains the Connect Link 
 
 ### Custom Tool
 
-A user-defined tool used alongside Composio's built-in tools. For sessions, use local experimental custom tools and custom toolkits via [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits). For direct execution, see [Creating custom tools](/docs/tools-direct/custom-tools).
+A user-defined tool used alongside Composio's built-in tools. Use local experimental custom tools and custom toolkits via [Custom tools and toolkits](/docs/toolkits/custom-tools-and-toolkits).
 
 ### In-Chat Authentication
 

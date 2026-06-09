@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "d76e9e6ed8947762f23b3424ea55737e79b2bf066cb816ef5534bb3f4575887d"
+source_hash: "c848fa472832a90000c7e0d62874be03cc3503b3bc7e675a1c747b54f98685c0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -546,148 +546,64 @@ const result_2 = await composio.tools.execute(
 ```
 ## Custom Tools
 
-The SDK continues to support custom tools. [Creating tools from your methods](/docs/tools-direct/custom-tools#creating-a-custom-tool) remains possible. We recommend reviewing the [detailed custom tools documentation](/docs/tools-direct/custom-tools#creating-a-custom-tool) for more information.
+Custom tools are now session-scoped. Define local tools with the experimental custom-tools API and attach them when creating or reusing a session.
 
-Due to changes in the SDK architecture, creating custom tools that use Composio's managed authentication has been modified. In the previous SDK, you could create a custom tool as follows:
-
-**Python (previous):**
+**Python:**
 
 ```python
-# Python Example using execute_request
-from composio import action, ComposioToolSet
-import typing as t
-
-toolset = ComposioToolSet()
-
-@action(toolname="github") # Associate with GitHub app for auth
-def get_github_repo_topics(
-    owner: t.Annotated[str, "Repository owner username"],
-    repo: t.Annotated[str, "Repository name"],
-    execute_request: t.Callable # Injected by Composio
-) -> dict:
-    """Gets the topics associated with a specific GitHub repository."""
-    response_data = execute_request(
-        endpoint=f"/repos/{owner}/{repo}/topics", # API path relative to base URL
-        method="GET"
-    )
-    if isinstance(response_data, dict):
-        return {"topics": response_data.get("names", [])}
-```
-**TypeScript (previous):**
-
-```typescript
-// @noErrors
-import { OpenAIToolSet, type ActionExecutionResDto } from "composio-core";
-import { z } from "zod";
-
-const toolset = new OpenAIToolSet();
-
-await toolset.createAction({
-    actionName: "get_github_repo_topics",
-    toolName: "github",
-    description: "Gets the topics associated with a specific GitHub repository.",
-    inputParams: z.object({
-        owner: z.string().describe("Repository owner username"),
-        repo: z.string().describe("Repository name"),
-    }),
-    callback: async (inputParams, _authCredentials, executeRequest): Promise => {
-         const { owner, repo } = inputParams as { owner: string, repo: string };
-         const response = await executeRequest({
-             endpoint: `/repos/${owner}/${repo}/topics`,
-             method: "GET",
-             parameters: [],
-         });
-
-         const topics = (response as any)?.names ?? [];
-         return { successful: true, data: { topics: topics } };
-    }
-});
-```
-The *execute tool request* method handles injection of the appropriate base URL and authentication credentials for the tool:
-
-**Python (current):**
-
-```python
-from pydantic import BaseModel, Field
 from composio import Composio
-from composio.core.models.custom_tools import ExecuteRequestFn
+from pydantic import BaseModel, Field
 
 composio = Composio()
 
 class GetIssueInfoInput(BaseModel):
-    issue_number: int = Field(
-        ...,
-        description="The number of the issue to get information about",
-    )
+    issue_number: int = Field(..., description="The issue number")
 
-# function name will be used as slug
-@composio.tools.custom_tool(toolkit="github")
-def get_issue_info(
-    request: GetIssueInfoInput,
-    execute_request: ExecuteRequestFn,
-    auth_credentials: dict,
-) -> dict:
+@composio.experimental.tool(extends_toolkit="github")
+def get_issue_info(input: GetIssueInfoInput, ctx) -> dict:
     """Get information about a GitHub issue."""
-    response = execute_request(
-        endpoint=f"/repos/composiohq/composio/issues/{request.issue_number}",
+    result = ctx.proxy_execute(
+        toolkit="github",
+        endpoint=f"/repos/composiohq/composio/issues/{input.issue_number}",
         method="GET",
-        parameters=[
-            {
-                "name": "Accept",
-                "value": "application/vnd.github.v3+json",
-                "type": "header",
-            },
-            {
-                "name": "Authorization",
-                "value": f"Bearer {auth_credentials['access_token']}",
-                "type": "header",
-            },
-        ],
     )
-    return {"data": response.data}
+    return {"data": result.data}
+
+session = composio.create(
+    user_id="default",
+    experimental={"custom_tools": [get_issue_info]},
+)
 ```
-**TypeScript (current):**
+**TypeScript:**
 
 ```typescript
-// @noErrors
-import { Composio } from "@composio/core";
-import z from "zod";
+import { Composio, experimental_createTool } from "@composio/core";
+import { z } from "zod/v3";
 
 const composio = new Composio();
 
-const tool = await composio.tools.createCustomTool({
-    slug: 'GITHUB_STAR_COMPOSIOHQ_REPOSITORY',
-    name: 'Github star composio repositories',
-    toolkitSlug: 'github',
-    description: 'Star any specificied repo of `composiohq` user',
-    inputParams: z.object({
-      repository: z.string().describe('The repository to star'),
-      page: z.number().optional().describe('Pagination page number'),
-      customHeader: z.string().optional().describe('Custom header'),
-    }),
-    execute: async (input, connectionConfig, executeToolRequest) => {
-      const result = await executeToolRequest({
-        endpoint: `/user/starred/composiohq/${input.repository}`,
-        method: 'PUT',
-        body: {},
-        parameters: [
-          {
-            name: 'page',
-            value: input.page?.toString() || '1',
-            in: 'query',
-          },
-          {
-            name: 'x-custom-header',
-            value: input.customHeader || 'default-value',
-            in: 'header',
-          },
-        ],
-      });
-      return result;
-    },
-  });
+const getIssueInfo = experimental_createTool("GET_ISSUE_INFO", {
+  name: "Get issue info",
+  description: "Get information about a GitHub issue.",
+  extendsToolkit: "github",
+  inputParams: z.object({
+    issueNumber: z.number().describe("The issue number"),
+  }),
+  execute: async (input, ctx) => {
+    const result = await ctx.proxyExecute({
+      toolkit: "github",
+      endpoint: `/repos/composiohq/composio/issues/${input.issueNumber}`,
+      method: "GET",
+    });
+    return { data: result.data };
+  },
+});
+
+const session = await composio.create("default", {
+  experimental: { customTools: [getIssueInfo] },
+});
 ```
-For more information, including executing custom tools and defining custom headers and query parameters, refer to the [Custom Tools](/docs/tools-direct/custom-tools) documentation.
+For more information, see [Custom Tools and Toolkits](/docs/toolkits/custom-tools-and-toolkits).
 
 ## Auth configs (formerly integrations)
 

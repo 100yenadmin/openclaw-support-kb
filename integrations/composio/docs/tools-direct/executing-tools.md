@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Executing Tools"
 source: "https://docs.composio.dev/docs/tools-direct/executing-tools.md"
-source_hash: "7678fc89af3f6c13d10f09e86d397def7ad97339a1a453cea8d7760c445e780b"
+source_hash: "1d1ae04de3076f9bb0b6186185048a09c7722831193683c7ffe5a41ecd314a53"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "tools-direct/executing-tools.md"
@@ -301,7 +301,7 @@ const { data } = await composio.tools.proxyExecute({
 console.log(data);
 ```
 
-> Need an API that isn't supported by any Composio toolkit, or want to extend an existing one? Learn how to [create custom tools](/docs/tools-direct/custom-tools).
+> Need an API that isn't supported by any Composio toolkit, or want to extend an existing one? Learn how to [create session custom tools](/docs/toolkits/custom-tools-and-toolkits).
 
 # Automatic File Handling
 
@@ -576,6 +576,6 @@ await composio.tools.execute('GOOGLEDRIVE_UPLOAD_FILE', {
 
 - [Authenticating tools](/docs/tools-direct/authenticating-tools): Create auth configs and connect user accounts
 
-- [Custom tools](/docs/tools-direct/custom-tools): Create your own standalone or toolkit-based tools
+- [Custom tools](/docs/toolkits/custom-tools-and-toolkits): Create local tools that run inside sessions
 
 ---

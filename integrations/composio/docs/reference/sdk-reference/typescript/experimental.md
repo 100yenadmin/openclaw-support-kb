@@ -1,0 +1,107 @@
+---
+type: composio_doc
+title: "Experimental"
+source: "https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md"
+source_hash: "2fc77fbb659ba13ebf12b9e7713012cbdfeda70edea55e814cf09757b5ca700b"
+system: "composio"
+kb_namespace: "composio"
+doc_path: "reference/sdk-reference/typescript/experimental.md"
+original_doc_path: "reference/sdk-reference/typescript/experimental.md"
+duplicate_index: 1
+---
+
+Source System: Composio Integration
+Local KB namespace: composio
+
+# Experimental (/reference/sdk-reference/typescript/experimental)
+Source: https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md
+
+
+# Usage
+
+Access this class through the `composio.experimental` property:
+
+```typescript
+const composio = new Composio({ apiKey: 'your-api-key' });
+const result = await composio.experimental.list();
+```
+
+# Methods
+
+## updateAcl()
+
+Update the per-user ACL on a SHARED connected account.
+**Experimental — shape may change in future releases.**
+
+Only meaningful for SHARED connections — calling this on a PRIVATE
+connection raises `ComposioAclOnlyForSharedError` (400). ACL writes
+require the connection's creator or an API key.
+
+PATCH semantics: omit a field to leave it unchanged; pass an empty
+array to clear an allow/deny list. At least one field must be
+provided.
+
+Resolution rule (deny wins):
+
+1. requesting `userId` in `notAllowedUserIds` → DENY
+2. `allowAllUsers === true` → ALLOW
+3. requesting `userId` in `allowedUserIds` → ALLOW
+4. otherwise → DENY
+
+```typescript
+async updateAcl(nanoid: string, params: { allowAllUsers?: boolean; allowedUserIds?: string[]; notAllowedUserIds?: string[] }): Promise
+```
+
+**Parameters**
+
+| Name     | Type     |
+| -------- | -------- |
+| `nanoid` | `string` |
+| `params` | `object` |
+
+**Returns**
+
+`Promise` — The PATCH response (`\{ id, status, success \}`). To read
+the updated ACL block, call
+`composio.connectedAccounts.get(nanoid)` after the promise
+resolves and inspect `account.experimental?.aclConfigForShared`.
+
+**Example**
+
+```typescript
+import { Composio } from '@composio/core';
+
+const composio = new Composio({ apiKey: '...' });
+
+// Allow every userId to use this connection
+await composio.experimental.updateAcl('ca_abc', { allowAllUsers: true });
+
+// Everyone except a specific user
+await composio.experimental.updateAcl('ca_abc', {
+  allowAllUsers: true,
+  notAllowedUserIds: ['user_bob'],
+});
+
+// Targeted allow
+await composio.experimental.updateAcl('ca_abc', {
+  allowedUserIds: ['user_alice', 'user_bob'],
+});
+
+// Revoke a previously-granted allow list (back to deny-by-default)
+await composio.experimental.updateAcl('ca_abc', { allowedUserIds: [] });
+```
+
+**Empty-array semantics — read carefully.** Passing `[]` for either
+list **replaces** the list, it does not extend it:
+
+* `allowedUserIds: []` → revoke all previously-granted user IDs (state
+reverts to deny-by-default unless `allowAllUsers` is true).
+* `notAllowedUserIds: []` → **clears the deny list**, which silently
+re-grants access to users you previously blocked. Always pair an
+empty deny list with a deliberate audit of the allow side.
+
+```
+---
+```
+
+---

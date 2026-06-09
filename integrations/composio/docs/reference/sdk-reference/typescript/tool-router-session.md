@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ToolRouterSession"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tool-router-session.md"
-source_hash: "e68f72ce028d007a3fbe120d96c35b10c7ffe0a2bd1a3a218d341e5e1b2fcb5a"
+source_hash: "9ff1f95930627c307e6c9d62216915d5d05c113398e9674ca52108f4ddb0f683"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tool-router-session.md"
@@ -28,11 +28,14 @@ const result = await composio.toolRouterSession.list();
 
 # Properties
 
-| Name           | Type                  |
-| -------------- | --------------------- |
-| `experimental` | `SessionExperimental` |
-| `mcp`          | `object`              |
-| `sessionId`    | `string`              |
+| Name            | Type                  |
+| --------------- | --------------------- |
+| `configVersion` | `number`              |
+| `experimental`  | `SessionExperimental` |
+| `mcp`           | `object`              |
+| `preload`       | `Preload`             |
+| `sessionId`     | `string`              |
+| `warnings`      | `Warning[]`           |
 
 # Methods
 
@@ -41,8 +44,19 @@ const result = await composio.toolRouterSession.list();
 Initiate an authorization flow for a toolkit.
 Returns a ConnectionRequest with a redirect URL for the user.
 
+Pass `experimental: { accountType: 'SHARED', aclConfigForShared }` to
+create a SHARED connection with a per-user ACL in one flow. Default
+behaviour (omit the block) creates a PRIVATE connection.
+
+Experimental — shape may change in future releases.
+
+`aclConfigForShared` is validated against the same caps as
+`composio.connectedAccounts.link()` (≤1000 entries per list, each
+`userId` 1..256 characters). Invalid input throws `ValidationError`
+at the SDK boundary.
+
 ```typescript
-async authorize(toolkit: string, options?: { alias?: string; callbackUrl?: string }): Promise
+async authorize(toolkit: string, options?: object): Promise
 ```
 
 **Parameters**
@@ -103,15 +117,16 @@ full slug (e.g. "LOCAL\_GREP"). Custom tools are executed in-process;
 remote tools are sent to the Composio backend.
 
 ```typescript
-async execute(toolSlug: string, arguments_?: Record<string, unknown>): Promise<{ data: Record<string, unknown>; error: string | null; logId: string }>
+async execute(toolSlug: string, arguments_?: Record<string, unknown>, options?: ToolRouterSessionExecuteOptions): Promise<{ data: Record<string, unknown>; error: string | null; logId: string }>
 ```
 
 **Parameters**
 
-| Name          | Type                      | Description              |
-| ------------- | ------------------------- | ------------------------ |
-| `toolSlug`    | `string`                  | The tool slug to execute |
-| `arguments_?` | `Record<string, unknown>` | Optional tool arguments  |
+| Name          | Type                              | Description                |
+| ------------- | --------------------------------- | -------------------------- |
+| `toolSlug`    | `string`                          | The tool slug to execute   |
+| `arguments_?` | `Record<string, unknown>`         | Optional tool arguments    |
+| `options?`    | `ToolRouterSessionExecuteOptions` | Optional execution options |
 
 **Returns**
 
@@ -203,6 +218,28 @@ async tools(modifiers?: SessionMetaToolOptions): Promise
 **Returns**
 
 `Promise`
+
+***
+
+## update()
+
+Partially update the session configuration.
+Only the fields provided will be changed; omitted fields are preserved.
+Mutates this session's `configVersion`, `preload`, and `warnings` in-place.
+
+```typescript
+async update(config: object): Promise<void>
+```
+
+**Parameters**
+
+| Name     | Type     |
+| -------- | -------- |
+| `config` | `object` |
+
+**Returns**
+
+`Promise<void>`
 
 ***
 

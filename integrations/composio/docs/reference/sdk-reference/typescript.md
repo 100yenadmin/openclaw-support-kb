@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript.md"
-source_hash: "c752a8dd2f22c85268649c89a7e993b761d0231c366d6a24f6b06afd900d04b4"
+source_hash: "996c5d6c53525822eab4b0b81565217ab5f52cc786bcfe453d1f54381e07bbbb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript.md"
@@ -50,6 +50,7 @@ bun add @composio/core
 | [`Composio`](/reference/sdk-reference/typescript/composio)                                           | This is the core class for Composio.                            |
 | [`AuthConfigs`](/reference/sdk-reference/typescript/auth-configs)                                    | AuthConfigs class                                               |
 | [`ConnectedAccounts`](/reference/sdk-reference/typescript/connected-accounts)                        | ConnectedAccounts class                                         |
+| [`Experimental`](/reference/sdk-reference/typescript/experimental)                                   | `composio.experimental` namespace. Mirrors the Python SDK's     |
 | [`MCP`](/reference/sdk-reference/typescript/mcp)                                                     | MCP (Model Control Protocol) class                              |
 | [`RemoteFile`](/reference/sdk-reference/typescript/remote-file)                                      | Represents a file stored in a tool router session's file mount. |
 | [`SessionContextImpl`](/reference/sdk-reference/typescript/session-context-impl)                     | Concrete implementation of SessionContext.                      |
