@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "81215bf107fe77b1c4fdf444bdf25c3230fd74c12ae32e224a497d6169a2123f"
+source_hash: "5d3f2112247003868543eeb3f82e11f43f109fa9705cacfd05f3d76b53fc6b10"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/experimental-features.md"
@@ -36,7 +36,7 @@ Treat them differently from normal config:
 
 ## Local model lean mode
 
-`agents.defaults.experimental.localModelLean: true` is a pressure-release valve for weaker local-model setups. When it is on, OpenClaw drops three default tools — `browser`, `cron`, and `message` — from the agent's tool surface for every turn. Nothing else changes. Use `agents.list[].experimental.localModelLean` to enable or disable the same behavior for one configured agent.
+`agents.defaults.experimental.localModelLean: true` is a pressure-release valve for weaker local-model setups. When it is on, OpenClaw drops three default tools — `browser`, `cron`, and `message` — from the agent's tool surface for every turn. It also defaults that run to structured Tool Search controls when `tools.toolSearch` is not explicitly configured, so larger plugin, MCP, or client tool catalogs stay behind `tool_search`, `tool_describe`, and `tool_call` instead of being dumped into the prompt. Runs that require direct `message` delivery keep that tool direct instead of enabling the lean-mode Tool Search default. Use `agents.list[].experimental.localModelLean` to enable or disable the same behavior for one configured agent.
 
 ### Why these three tools
 
@@ -46,7 +46,7 @@ These three tools have the largest descriptions and the most parameter shapes in
 - The model picking the right tool vs. emitting malformed tool calls because there are too many similar-looking schemas.
 - The Chat Completions adapter staying inside the server's structured-output limits vs. tripping a 400 on tool-call payload size.
 
-Removing them does not silently rewire OpenClaw — it just makes the tool list shorter. The model still has `read`, `write`, `edit`, `exec`, `apply_patch`, web search/fetch (when configured), memory, and session/agent tools available.
+Removing them does not silently rewire OpenClaw — it just makes the direct tool list shorter. The model still has `read`, `write`, `edit`, `exec`, `apply_patch`, web search/fetch (when configured), memory, and session/agent tools available. Extra catalogs remain callable through Tool Search unless you explicitly set `tools.toolSearch: false`.
 
 ### When to turn it on
 
@@ -61,6 +61,8 @@ Enable lean mode when you have already proved the model can talk to the Gateway 
 If your backend handles the full default runtime cleanly, leave this off. Lean mode is a workaround, not a default. It exists because some local stacks need a smaller tool surface to behave; hosted models and well-resourced local rigs do not.
 
 Lean mode also does not replace `tools.profile`, `tools.allow`/`tools.deny`, or the model `compat.supportsTools: false` escape hatch. If you need a permanent narrower tool surface for a specific agent, prefer those stable knobs over the experimental flag.
+
+If you already tune Tool Search globally, OpenClaw leaves that operator config alone. Set `tools.toolSearch: false` to opt out of the lean-mode Tool Search default.
 
 ### Enable
 
@@ -100,7 +102,7 @@ Restart the Gateway after changing the flag, then confirm the trimmed tool list 
 openclaw status --deep
 ```
 
-The deep status output lists the active agent tools; `browser`, `cron`, and `message` should be absent when lean mode is on.
+The deep status output lists the active agent tools; `browser`, `cron`, and `message` should be absent when lean mode is on unless the current delivery mode forces direct `message` replies.
 
 ## Experimental does not mean hidden
 

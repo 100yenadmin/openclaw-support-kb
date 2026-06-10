@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "fd0e1ed13a147ddc76c5048a620ede8c004cbfca2342c22fe99d694bf4d61b5a"
+source_hash: "01b239f7811d841f15edb672beb7cde6e62a190dcacbc1da12cde76a4bfc3b0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-reference.md"
@@ -549,7 +549,7 @@ See [Inferred commitments](/concepts/commitments).
     tools: {
       // Additional /tools/invoke HTTP denies
       deny: ["browser"],
-      // Remove tools from the default HTTP deny list
+      // Remove tools from the default HTTP deny list for owner/admin callers
       allow: ["gateway"],
     },
     push: {
@@ -617,7 +617,10 @@ Gateway field details
 - `gateway.nodes.pairing.autoApproveCidrs`: optional CIDR/IP allowlist for auto-approving first-time node device pairing with no requested scopes. It is disabled when unset. This does not auto-approve operator/browser/Control UI/WebChat pairing, and it does not auto-approve role, scope, metadata, or public-key upgrades.
 - `gateway.nodes.allowCommands` / `gateway.nodes.denyCommands`: global allow/deny shaping for declared node commands after pairing and platform allowlist evaluation. Use `allowCommands` to opt into dangerous node commands such as `camera.snap`, `camera.clip`, and `screen.record`; `denyCommands` removes a command even if a platform default or explicit allow would otherwise include it. After a node changes its declared command list, reject and re-approve that device pairing so the gateway stores the updated command snapshot.
 - `gateway.tools.deny`: extra tool names blocked for HTTP `POST /tools/invoke` (extends default deny list).
-- `gateway.tools.allow`: remove tool names from the default HTTP deny list.
+- `gateway.tools.allow`: remove tool names from the default HTTP deny list for
+  owner/admin callers. This does not upgrade identity-bearing `operator.write`
+  callers into owner/admin access; `cron`, `gateway`, and `nodes` remain
+  unavailable to non-owner callers even when allowlisted.
 
 ### OpenAI-compatible endpoints
 

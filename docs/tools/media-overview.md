@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "8da4459ab347f68e390d63cadacefff46e8c2a3b70aa41405979aeb2399c16e6"
+source_hash: "f00e0224b71ad22bd4290bf283eaeea1b726f3fab087122bb5b5c8fba352056a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -69,30 +69,31 @@ Speech-to-text
 
 ## Provider capability matrix
 
-| Provider    | Image | Video | Music | TTS | STT | Realtime voice | Media understanding |
-| ----------- | :---: | :---: | :---: | :-: | :-: | :------------: | :-----------------: |
-| Alibaba     |       |   ✓   |       |     |     |                |                     |
-| BytePlus    |       |   ✓   |       |     |     |                |                     |
-| ComfyUI     |   ✓   |   ✓   |   ✓   |     |     |                |                     |
-| DeepInfra   |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
-| Deepgram    |       |       |       |     |  ✓  |       ✓        |                     |
-| ElevenLabs  |       |       |       |  ✓  |  ✓  |                |                     |
-| fal         |   ✓   |   ✓   |   ✓   |     |     |                |                     |
-| Google      |   ✓   |   ✓   |   ✓   |  ✓  |     |       ✓        |          ✓          |
-| Gradium     |       |       |       |  ✓  |     |                |                     |
-| Local CLI   |       |       |       |  ✓  |     |                |                     |
-| Microsoft   |       |       |       |  ✓  |     |                |                     |
-| MiniMax     |   ✓   |   ✓   |   ✓   |  ✓  |     |                |                     |
-| Mistral     |       |       |       |     |  ✓  |                |                     |
-| OpenAI      |   ✓   |   ✓   |       |  ✓  |  ✓  |       ✓        |          ✓          |
-| OpenRouter  |   ✓   |   ✓   |   ✓   |  ✓  |  ✓  |                |          ✓          |
-| Qwen        |       |   ✓   |       |     |     |                |                     |
-| Runway      |       |   ✓   |       |     |     |                |                     |
-| SenseAudio  |       |       |       |     |  ✓  |                |                     |
-| Together    |       |   ✓   |       |     |     |                |                     |
-| Vydra       |   ✓   |   ✓   |       |  ✓  |     |                |                     |
-| xAI         |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
-| Xiaomi MiMo |   ✓   |       |       |  ✓  |     |                |          ✓          |
+| Provider          | Image | Video | Music | TTS | STT | Realtime voice | Media understanding |
+| ----------------- | :---: | :---: | :---: | :-: | :-: | :------------: | :-----------------: |
+| Alibaba           |       |   ✓   |       |     |     |                |                     |
+| BytePlus          |       |   ✓   |       |     |     |                |                     |
+| ComfyUI           |   ✓   |   ✓   |   ✓   |     |     |                |                     |
+| DeepInfra         |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
+| Deepgram          |       |       |       |     |  ✓  |       ✓        |                     |
+| ElevenLabs        |       |       |       |  ✓  |  ✓  |                |                     |
+| fal               |   ✓   |   ✓   |   ✓   |     |     |                |                     |
+| Google            |   ✓   |   ✓   |   ✓   |  ✓  |     |       ✓        |          ✓          |
+| Gradium           |       |       |       |  ✓  |     |                |                     |
+| Local CLI         |       |       |       |  ✓  |     |                |                     |
+| Microsoft         |       |       |       |  ✓  |     |                |                     |
+| Microsoft Foundry |   ✓   |       |       |     |     |                |                     |
+| MiniMax           |   ✓   |   ✓   |   ✓   |  ✓  |     |                |                     |
+| Mistral           |       |       |       |     |  ✓  |                |                     |
+| OpenAI            |   ✓   |   ✓   |       |  ✓  |  ✓  |       ✓        |          ✓          |
+| OpenRouter        |   ✓   |   ✓   |   ✓   |  ✓  |  ✓  |                |          ✓          |
+| Qwen              |       |   ✓   |       |     |     |                |                     |
+| Runway            |       |   ✓   |       |     |     |                |                     |
+| SenseAudio        |       |       |       |     |  ✓  |                |                     |
+| Together          |       |   ✓   |       |     |     |                |                     |
+| Vydra             |   ✓   |   ✓   |       |  ✓  |     |                |                     |
+| xAI               |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
+| Xiaomi MiMo       |   ✓   |       |       |  ✓  |     |                |          ✓          |
 
 Note
 

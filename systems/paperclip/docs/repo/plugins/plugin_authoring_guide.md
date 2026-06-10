@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Plugin Authoring Guide"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_AUTHORING_GUIDE.md"
-source_hash: "01f8972413c4bedf5591087f38ffb2ac65d1650572645095bd65d285add3062d"
+source_hash: "1cdf7bffdb00bc595795218d2ef766747427515dfc883f1feeb38ec389e2ac9a"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_authoring_guide.md"
@@ -353,6 +353,22 @@ Mount surfaces currently wired in the host include:
 - `contextMenuItem`
 - `commentAnnotation`
 - `commentContextMenuItem`
+
+### `routeSidebar` and the app sidebar
+
+A `routeSidebar` slot gives a plugin page route its own contextual navigation.
+It **coexists** with the main app sidebar rather than replacing it: while your
+route is active the host collapses the app `<Sidebar/>` to its 64px icon rail
+(still hover/peek-able) and renders your sidebar in a second pane, yielding
+`[ app rail ][ your sidebar ][ content ]`.
+
+Because the host drives this collapse, a plugin should **not** mount
+`RequestCollapsedSidebar` or otherwise try to collapse the app sidebar itself —
+doing so is redundant and fights the host. While your route is active the app
+rail is forced collapsed (its expand toggle is hidden), overriding any user pin
+— a secondary sidebar always collapses the primary. This force never changes the
+user's saved expanded/collapsed preference, so the host restores exactly what
+the user chose as soon as they navigate away.
 
 ## Shared host components
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/docs/projects.md"
-source_hash: "d7ce6b63f3e726931c69c398f21efc19cac4cea368da85f51d19b2b36bbb9084"
+source_hash: "65281fbae66a0f5b5c88ec8cb4fd55713da17e1d20fbdc7deb885a81c1ab9a5f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "projects.md"
@@ -109,7 +109,7 @@ You can also view and update these from **Settings > Project Settings** in the [
 
 - [Authentication](/docs/authentication): Auth configs are scoped to projects — learn how Composio manages auth
 
-- [Project API key permissions](/reference/authentication/project-api-key-permissions): Choose scoped access levels for project API keys
+- [Scoped project API keys](/reference/authentication/project-api-key-permissions): Choose scoped access levels for project API keys
 
 - [What is a session?](/docs/how-composio-works): Connected accounts and sessions live within a project
 

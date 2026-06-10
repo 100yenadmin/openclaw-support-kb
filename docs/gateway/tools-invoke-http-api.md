@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tools invoke API"
 source: "https://docs.openclaw.ai/gateway/tools-invoke-http-api"
-source_hash: "c23f87222d6fc104f525e27dd8b3295d5df63f6fdc1b8508deeddf34904fcba3"
+source_hash: "df7c1a69939fdfa7a674ef906baad09a2cdb68d9c54c19da523b1efda83efda9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/tools-invoke-http-api.md"
@@ -135,12 +135,18 @@ You can customize this deny list via `gateway.tools`:
     tools: {
       // Additional tools to block over HTTP /tools/invoke
       deny: ["browser"],
-      // Remove tools from the default deny list
+      // Remove tools from the default deny list for owner/admin callers
       allow: ["gateway"],
     },
   },
 }
 ```
+
+`gateway.tools.allow` is an exposure override, not a scope upgrade. In
+identity-bearing HTTP modes, `cron`, `gateway`, and `nodes` remain unavailable
+to callers that do not have owner/admin identity (`operator.admin`) even when
+they are listed in `gateway.tools.allow`. Shared-secret bearer auth still follows
+the full trusted-operator rule above.
 
 To help group policies resolve context, you can optionally set:
 

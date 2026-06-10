@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "1fa40a0525d8216ed43ffc4dcdc9232b2a0b5593eb854b261b86637eec29a3fe"
+source_hash: "97f19fe0c5bb2da01db62de9b025fc6e94241470bc2d17a604a4319dde025e5b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -354,7 +354,7 @@ Inbound media is copied into the active sandbox workspace (`media/inbound/*`).
 
 Note
 
-**Skills note:** the `read` tool is sandbox-rooted. With `workspaceAccess: "none"`, OpenClaw mirrors eligible skills into the sandbox workspace (`.../skills`) so they can be read. With `"rw"`, workspace skills are readable from `/workspace/skills`.
+**Skills note:** the `read` tool is sandbox-rooted. With `workspaceAccess: "none"`, OpenClaw mirrors eligible skills into the sandbox workspace (`.../skills`) so they can be read. With `"rw"`, workspace skills are readable from `/workspace/skills`, and eligible managed, bundled, or plugin skills are materialized into the generated read-only path `/workspace/.openclaw/sandbox-skills/skills`.
 
 ## Custom bind mounts
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QMD memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-qmd"
-source_hash: "fede63b0ea46a3ea0578f428c0d99ceffb924145e24236a71ccd59af706c4a0e"
+source_hash: "8fbda62ba8594ee7662b8bed5a2e0d4703f7f9fd15579a3749069405fa1b7dae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-qmd.md"
@@ -22,7 +22,7 @@ binary, and can index content beyond your workspace memory files.
 - **Reranking and query expansion** for better recall.
 - **Index extra directories** -- project docs, team notes, anything on disk.
 - **Index session transcripts** -- recall earlier conversations.
-- **Fully local** -- runs with the optional node-llama-cpp runtime package and
+- **Fully local** -- runs with the official llama.cpp provider plugin and
   auto-downloads GGUF models.
 - **Automatic fallback** -- if QMD is unavailable, OpenClaw falls back to the
   builtin engine seamlessly.

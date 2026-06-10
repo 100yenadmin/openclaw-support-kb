@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "a6ecacd9ea4f280fa031d76c4f494e35479ff759d229747f3529808232497fb9"
+source_hash: "cb959280c67176d113424a77a5957b24630e1e886ff230643a42338a8ce01e16"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -379,17 +379,16 @@ If discovery fails or times out, OpenClaw uses a bundled fallback catalog for:
 - GPT-5.4 mini
 - GPT-5.2
 
-The current bundled harness is `@openai/codex` `0.135.0`. A `model/list` probe
+The current bundled harness is `@openai/codex` `0.139.0`. A `model/list` probe
 against that bundled app-server returned:
 
-| Model id              | Default | Hidden | Input modalities | Reasoning efforts        |
-| --------------------- | ------- | ------ | ---------------- | ------------------------ |
-| `gpt-5.5`             | Yes     | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.4`             | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.4-mini`        | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.3-codex`       | No      | No     | text, image      | low, medium, high, xhigh |
-| `gpt-5.3-codex-spark` | No      | No     | text             | low, medium, high, xhigh |
-| `gpt-5.2`             | No      | No     | text, image      | low, medium, high, xhigh |
+| Model id        | Default | Hidden | Input modalities | Reasoning efforts        |
+| --------------- | ------- | ------ | ---------------- | ------------------------ |
+| `gpt-5.5`       | Yes     | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.4`       | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.4-mini`  | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.3-codex` | No      | No     | text, image      | low, medium, high, xhigh |
+| `gpt-5.2`       | No      | No     | text, image      | low, medium, high, xhigh |
 
 Hidden models can be returned by the app-server catalog for internal or
 specialized flows, but they are not normal model-picker choices.

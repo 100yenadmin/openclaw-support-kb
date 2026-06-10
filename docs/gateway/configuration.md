@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "5c06e1ad9adb14d4560c59e206bc094aa76d7381d654069e37f0dc4bc8ec06d1"
+source_hash: "53bb94f9b1fe8a19a78e2b796df30fcbe8c40f3b01c2b90ec699f7c4229cebfa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -647,7 +647,8 @@ For tooling that writes config over the gateway API, prefer this flow:
   summaries)
 - `config.get` to fetch the current snapshot plus `hash`
 - `config.patch` for partial updates (JSON merge patch: objects merge, `null`
-  deletes, arrays replace)
+  deletes, arrays replace when explicitly confirmed with `replacePaths` if
+  entries would be removed)
 - `config.apply` only when you intend to replace the entire config
 - `update.run` for explicit self-update plus restart; include `continuationMessage` when the post-restart session should run one follow-up turn
 - `update.status` to inspect the latest update restart sentinel and verify the running version after a restart
@@ -678,6 +679,14 @@ openclaw gateway call config.patch --params '{
 Both `config.apply` and `config.patch` accept `raw`, `baseHash`, `sessionKey`,
 `note`, and `restartDelayMs`. `baseHash` is required for both methods when a
 config already exists.
+
+`config.patch` also accepts `replacePaths`, an array of config paths whose array
+replacement is intentional. If a patch would replace or delete an existing array
+with fewer entries, the Gateway rejects the write unless that exact path appears
+in `replacePaths`; nested arrays under array entries use `[]`, such as
+`agents.list[].skills`. This prevents truncated `config.get` snapshots from
+silently clobbering routing or allowlist arrays. Use `config.apply` when you
+intend to replace the full config.
 
 ## Environment variables
 

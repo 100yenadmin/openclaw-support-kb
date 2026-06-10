@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "6a0ae11ad0182aa97dc170a7540ef74c2c45daf77a21a20fa70f62b4c50aaf86"
+source_hash: "8050dff51c2c86a6780be4bae67e6c79c8c3c061323e91c2915f1ad8b7438e9b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -326,8 +326,10 @@ Migrate embedded tool-result extensions to middleware
     }
     ```
 
-    External plugins cannot register tool-result middleware because it can
-    rewrite high-trust tool output before the model sees it.
+    Installed plugins can also register tool-result middleware when they are
+    explicitly enabled and declare every targeted runtime in
+    `contracts.agentToolResultMiddleware`. Undeclared installed middleware
+    registrations are rejected.
 
 
 

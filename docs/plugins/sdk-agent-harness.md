@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "ee9f1d02bc5aaba0b0615dd1ef7fae09af12e8d5828f34033820fd731b44ea43"
+source_hash: "b5e77b1a6d8f528304b773bb8de99cb615dc920f4b3411e19dcfc74b1bb53882"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -163,11 +163,12 @@ Codex `0.124.0`, while pinning OpenClaw to the newer tested stable line.
 
 ### Tool-result middleware
 
-Bundled plugins can attach runtime-neutral tool-result middleware through
+Bundled plugins and explicitly enabled installed plugins with matching manifest
+contracts can attach runtime-neutral tool-result middleware through
 `api.registerAgentToolResultMiddleware(...)` when their manifest declares the
 targeted runtime ids in `contracts.agentToolResultMiddleware`. This trusted
-seam is for async tool-result transforms that must run before OpenClaw or Codex feeds
-tool output back into the model.
+seam is for async tool-result transforms that must run before OpenClaw or Codex
+feeds tool output back into the model.
 
 Legacy bundled plugins can still use
 `api.registerCodexAppServerExtensionFactory(...)` for Codex app-server-only

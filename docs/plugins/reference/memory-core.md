@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Core plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-core"
-source_hash: "a4cb512b59e1e94c4ad0386e6f2c89df069c27185276a9c19e85f3eaa1ea4b8f"
+source_hash: "146dd861efb3d296a68a8db4b8be310e6ea44f9893640305d62d5ca7356b49e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-core.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/memory-core
 
 # Memory Core plugin
 
-Adds memory embedding provider support. Adds agent-callable tools.
+Adds file-backed memory search tools.
 
 ## Distribution
 
@@ -24,6 +24,6 @@ Adds memory embedding provider support. Adds agent-callable tools.
 
 ## Surface
 
-contracts: memoryEmbeddingProviders, tools
+contracts: tools
 
 ---

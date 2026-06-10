@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "873e628ae93b9e2d0059a7e42bcb7fef6cd1b9455a38c7de71ad586154d9876e"
+source_hash: "072e58e1070015de7eae5074c24fb98ca9d132b0bf41d8609ea2f45c803441a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -45,7 +45,7 @@ exhaustive):
 | `gateway.trusted_proxies_missing`                             | warn          | Reverse-proxy headers are present but not trusted                                    | `gateway.trustedProxies`                                                                             | no       |
 | `gateway.http.no_auth`                                        | warn/critical | Gateway HTTP APIs reachable with `auth.mode="none"`                                  | `gateway.auth.mode`, `gateway.http.endpoints.*`, `plugins.entries.admin-http-rpc`                    | no       |
 | `gateway.http.session_key_override_enabled`                   | info          | HTTP API callers can override `sessionKey`                                           | `gateway.http.allowSessionKeyOverride`                                                               | no       |
-| `gateway.tools_invoke_http.dangerous_allow`                   | warn/critical | Re-enables dangerous tools over HTTP API                                             | `gateway.tools.allow`                                                                                | no       |
+| `gateway.tools_invoke_http.dangerous_allow`                   | warn/critical | Re-enables dangerous tools over HTTP API for owner/admin callers                     | `gateway.tools.allow`                                                                                | no       |
 | `gateway.nodes.allow_commands_dangerous`                      | warn/critical | Enables high-impact node commands (camera/screen/contacts/calendar/SMS)              | `gateway.nodes.allowCommands`                                                                        | no       |
 | `gateway.nodes.deny_commands_ineffective`                     | warn          | Pattern-like deny entries do not match shell text or groups                          | `gateway.nodes.denyCommands`                                                                         | no       |
 | `gateway.tailscale_funnel`                                    | critical      | Public internet exposure                                                             | `gateway.tailscale.mode`                                                                             | no       |

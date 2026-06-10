@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bundled Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/skills-catalog"
-source_hash: "a4875e58cb05faac03b216655698f0b72f38e2c2256ef10c43f278ce2d23bac0"
+source_hash: "3feedce76ac42496782c9eb01c63e9182f241567b649f66ffbd160024a64ea32"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/skills-catalog.md"
@@ -118,7 +118,6 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 | [`huggingface-hub`](/docs/user-guide/skills/bundled/mlops/mlops-huggingface-hub) | HuggingFace hf CLI: search/download/upload models, datasets. | `mlops/huggingface-hub` |
 | [`llama-cpp`](/docs/user-guide/skills/bundled/mlops/mlops-inference-llama-cpp) | llama.cpp local GGUF inference + HF Hub model discovery. | `mlops/inference/llama-cpp` |
 | [`evaluating-llms-harness`](/docs/user-guide/skills/bundled/mlops/mlops-evaluation-lm-evaluation-harness) | lm-eval-harness: benchmark LLMs (MMLU, GSM8K, etc.). | `mlops/evaluation/lm-evaluation-harness` |
-| [`obliteratus`](/docs/user-guide/skills/bundled/mlops/mlops-inference-obliteratus) | OBLITERATUS: abliterate LLM refusals (diff-in-means). | `mlops/inference/obliteratus` |
 | [`segment-anything-model`](/docs/user-guide/skills/bundled/mlops/mlops-models-segment-anything) | SAM: zero-shot image segmentation via points, boxes, masks. | `mlops/models/segment-anything` |
 | [`serving-llms-vllm`](/docs/user-guide/skills/bundled/mlops/mlops-inference-vllm) | vLLM: high-throughput LLM serving, OpenAI API, quantization. | `mlops/inference/vllm` |
 | [`weights-and-biases`](/docs/user-guide/skills/bundled/mlops/mlops-evaluation-weights-and-biases) | W&B: log ML experiments, sweeps, model registry, dashboards. | `mlops/evaluation/weights-and-biases` |
@@ -141,12 +140,6 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 | [`ocr-and-documents`](/docs/user-guide/skills/bundled/productivity/productivity-ocr-and-documents) | Extract text from PDFs/scans (pymupdf, marker-pdf). | `productivity/ocr-and-documents` |
 | [`powerpoint`](/docs/user-guide/skills/bundled/productivity/productivity-powerpoint) | Create, read, edit .pptx decks, slides, notes, templates. | `productivity/powerpoint` |
 | [`teams-meeting-pipeline`](/docs/user-guide/skills/bundled/productivity/productivity-teams-meeting-pipeline) | Operate the Teams meeting summary pipeline via Hermes CLI — summarize meetings, inspect pipeline status, replay jobs, manage Microsoft Graph subscriptions. | `productivity/teams-meeting-pipeline` |
-
-## red-teaming
-
-| Skill | Description | Path |
-|-------|-------------|------|
-| [`godmode`](/docs/user-guide/skills/bundled/red-teaming/red-teaming-godmode) | Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN. | `red-teaming/godmode` |
 
 ## research
 

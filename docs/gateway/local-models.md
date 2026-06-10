@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
-source_hash: "65b39fb3e24e4664eb811f2179ab133220e08367f3294666b838120500959019"
+source_hash: "626ea5336b345b3cb04f0abd588b33e20cf3f5756800dd9720287eee1ee0e4be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-models.md"
@@ -321,7 +321,7 @@ If the model loads cleanly but full agent turns misbehave, work top-down — con
    openclaw infer model run --gateway --model <provider/model> --prompt "Reply with exactly: pong" --json
    ```
 
-3. **Try lean mode.** If both probes pass but real agent turns fail with malformed tool calls or oversized prompts, enable `agents.defaults.experimental.localModelLean: true`. It drops the three heaviest default tools (`browser`, `cron`, `message`) so the prompt shape is smaller and less brittle. See [Experimental Features → Local model lean mode](/concepts/experimental-features#local-model-lean-mode) for the full explanation, when to use it, and how to confirm it is on.
+3. **Try lean mode.** If both probes pass but real agent turns fail with malformed tool calls or oversized prompts, enable `agents.defaults.experimental.localModelLean: true`. It drops the three heaviest default tools (`browser`, `cron`, `message`) and defaults larger tool catalogs behind structured Tool Search controls, except for runs that must keep direct `message` delivery semantics. See [Experimental Features → Local model lean mode](/concepts/experimental-features#local-model-lean-mode) for the full explanation, when to use it, and how to confirm it is on.
 
 4. **Disable tools entirely as a last resort.** If lean mode is not enough, set `models.providers.<provider>.models[].compat.supportsTools: false` for that model entry. The agent will then operate without tool calls on that model.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "56ccbbde691719c239a766346ab9c5a4c54b3f392cbb3be9ebc3e7d478121e53"
+source_hash: "2089ce9e943ebf91ab325434a9f929973ac9bf41c374bfd66d5550f1ba8a3db4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/releasing.md"
@@ -215,13 +215,15 @@ vYYYY.M.PATCH-beta.N` from the matching `release/YYYY.M.PATCH` branch. The helpe
     OpenAI web search, and OpenWebUI
   - `full`: Docker release-path chunks with OpenWebUI
   - `custom`: exact `docker_lanes` selection for a focused rerun
-- Run the manual `CI` workflow directly when you only need full normal CI
-  coverage for the release candidate. Manual CI dispatches bypass changed
+- Run the manual `CI` workflow directly when you only need deterministic normal
+  CI coverage for the release candidate. Manual CI dispatches bypass changed
   scoping and force the Linux Node shards, bundled-plugin shards, plugin and
   channel contract shards, Node 22 compatibility, `check-*`, `check-additional-*`,
-  built-artifact smoke checks, docs checks, Python skills, Windows, macOS,
-  Android, and Control UI i18n lanes.
-  Example: `gh workflow run ci.yml --ref release/YYYY.M.PATCH`
+  built-artifact smoke checks, docs checks, Python skills, Windows, macOS, and
+  Control UI i18n lanes. Standalone manual CI runs Android only when dispatched
+  with `include_android=true`; `Full Release Validation` passes that input for
+  its CI child.
+  Example with Android: `gh workflow run ci.yml --ref release/YYYY.M.PATCH -f include_android=true`
 - Run `pnpm qa:otel:smoke` when validating release telemetry. It exercises
   QA-lab through a local OTLP/HTTP receiver and verifies trace, metric, and log
   export plus bounded trace attributes and content/identifier redaction without
@@ -398,9 +400,10 @@ dispatches standalone package Telegram E2E when `release_profile=full` with
 `npm_telegram_package_spec` is set. `OpenClaw Release
 Checks` then fans out install smoke, cross-OS release checks, live/E2E Docker
 release-path coverage when soak is enabled, Package Acceptance with Telegram
-package QA, QA Lab parity, live Matrix, and live Telegram. A full run is only acceptable when the
-`Full Release Validation`
-summary shows `normal_ci` and `release_checks` as successful. In full/all mode,
+package QA, QA Lab parity, live Matrix, and live Telegram. A full/all run is
+only acceptable when the `Full Release Validation` summary shows `normal_ci`,
+`plugin_prerelease`, and `release_checks` as successful, unless a focused rerun
+intentionally skipped the separate `Plugin Prerelease` child. In full/all mode,
 the `npm_telegram` child must also be successful; outside full/all it is skipped
 unless a published `release_package_spec` or `npm_telegram_package_spec` was
 provided. The final
@@ -507,7 +510,9 @@ bypasses changed scoping and forces the normal test graph for the release
 candidate: Linux Node shards, bundled-plugin shards, plugin and channel contract
 shards, Node 22 compatibility, `check-*`, `check-additional-*`,
 built-artifact smoke checks, docs checks, Python skills, Windows, macOS,
-Android, and Control UI i18n.
+and Control UI i18n. Android is included when `Full Release Validation` runs the
+box because the umbrella passes `include_android=true`; standalone manual CI
+requires `include_android=true` for Android coverage.
 
 Use this box to answer "did the source tree pass the full normal test suite?"
 It is not the same as release-path product validation. Evidence to keep:
@@ -519,10 +524,13 @@ It is not the same as release-path product validation. Evidence to keep:
   a run needs performance analysis
 
 Run manual CI directly only when the release needs deterministic normal CI but
-not the Docker, QA Lab, live, cross-OS, or package boxes:
+not the Docker, QA Lab, live, cross-OS, or package boxes. Use the first command
+for non-Android direct CI. Add `include_android=true` when direct
+release-candidate CI must cover Android:
 
 ```bash
 gh workflow run ci.yml --ref main -f target_ref=release/YYYY.M.PATCH
+gh workflow run ci.yml --ref main -f target_ref=release/YYYY.M.PATCH -f include_android=true
 ```
 
 ### Docker

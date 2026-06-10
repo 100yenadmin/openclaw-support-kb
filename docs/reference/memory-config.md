@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "5737ade123453086f52aefdf629b3662d4a177115f10219d6939fa3d1daf9654"
+source_hash: "3bb9cdde0488808baf0bbb653e6a68fddab689c2283bb460df87f1dad1763c51"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -300,7 +300,7 @@ Bedrock
 
 
 
-Local (GGUF + node-llama-cpp)
+Local (GGUF + llama.cpp)
 
     | Key                   | Type               | Default                | Description                                                                                                                                                                                                                                                                                                          |
     | --------------------- | ------------------ | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -308,6 +308,7 @@ Local (GGUF + node-llama-cpp)
     | `local.modelCacheDir` | `string`           | node-llama-cpp default | Cache dir for downloaded models                                                                                                                                                                                                                                                                                      |
     | `local.contextSize`   | `number \| "auto"` | `4096`                 | Context window size for the embedding context. 4096 covers typical chunks (128–512 tokens) while bounding non-weight VRAM. Lower to 1024–2048 on constrained hosts. `"auto"` uses the model's trained maximum — not recommended for 8B+ models (Qwen3-Embedding-8B: 40 960 tokens → ~32 GB VRAM vs ~8.8 GB at 4096). |
 
+    Install the official llama.cpp provider first: `openclaw plugins install @openclaw/llama-cpp-provider`.
     Default model: `embeddinggemma-300m-qat-Q8_0.gguf` (~0.6 GB, auto-downloaded). Source checkouts still require native build approval: `pnpm approve-builds` then `pnpm rebuild node-llama-cpp`.
 
     Use the standalone CLI to verify the same provider path the Gateway uses:

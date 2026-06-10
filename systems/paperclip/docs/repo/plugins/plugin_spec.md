@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Plugin System Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_SPEC.md"
-source_hash: "6320326d576c2d7855495956c887aa0495cbaa5050acaef8eec6cb2c8a2f85a2"
+source_hash: "675247c52332515e3e3608a5af479ed9afaa0270d68219c1a3e80b0abb821450"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_spec.md"
@@ -1148,6 +1148,27 @@ Plugins may add sidebar links to:
 
 - global plugin settings
 - company-context plugin pages
+
+### 19.5.1 Route Sidebars (`routeSidebar`)
+
+A `routeSidebar` slot supplies a contextual sidebar for a plugin page route
+(matched by `routePath`). It **coexists** with the main app sidebar rather than
+replacing it: while the route is active the host collapses the app `<Sidebar/>`
+to its 64px icon rail (still hover/peek-able) and renders the plugin's
+`routeSidebar` in a secondary pane, producing the layout
+`[ app rail ][ route sidebar ][ content ]`. The same model applies to the
+host's own company-settings sidebar.
+
+The host owns the collapse. Plugins must not mount `RequestCollapsedSidebar` or
+otherwise attempt to collapse the app sidebar from a `routeSidebar` — the host
+applies the collapse while the route is mounted and restores the previous state
+on navigation away. The collapse is a **hard invariant**: while a secondary
+sidebar is shown the app rail is forced collapsed and its expand/toggle
+affordance is hidden, *overriding* any user pin. Crucially, this force is
+ephemeral — it never mutates the user's persisted expanded/collapsed preference,
+so navigating back to a normal route restores exactly what the user chose.
+Precedence is therefore: secondary-sidebar force > explicit user pin >
+route-requested collapse (`RequestCollapsedSidebar`) > default expanded.
 
 ## 19.6 Shared Components In `@paperclipai/plugin-sdk/ui`
 

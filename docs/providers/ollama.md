@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "f6d6ea15921b878896675b4722412096afe3b981f4b3856a8248c3f33bd94a69"
+source_hash: "f98ef6d80cb3152289a7c6d829d191a5dfba9540674a6aec99aaf9d6ab538350"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -761,7 +761,7 @@ Lean local model profile
     ```
 
     Use `compat.supportsTools: false` only when the model or server reliably fails on tool schemas. It trades agent capability for stability.
-    `localModelLean` removes the browser, cron, and message tools from the agent surface, but it does not change Ollama's runtime context or thinking mode. Pair it with explicit `params.num_ctx` and `params.thinking: false` for small Qwen-style thinking models that loop or spend their response budget on hidden reasoning.
+    `localModelLean` removes the browser, cron, and message tools from the direct agent surface and defaults larger catalogs behind structured Tool Search controls except when a run must keep direct message delivery semantics, but it does not change Ollama's runtime context or thinking mode. Pair it with explicit `params.num_ctx` and `params.thinking: false` for small Qwen-style thinking models that loop or spend their response budget on hidden reasoning.
 
 
 

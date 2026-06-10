@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "5bf16b1af2f0adb1d932edb6b1f308ae706d0c6d7abc5473625387c28cb6fc90"
+source_hash: "460653a02dda48223e3a1d73f6f5567433740bcef8ff9d717b9a64b9203c3425"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-inventory.md"
@@ -143,7 +143,7 @@ Each entry lists the package, distribution route, and description.
 
 - **[mattermost](/plugins/reference/mattermost)** (`@openclaw/mattermost`) - included in OpenClaw. Adds the Mattermost channel surface for sending and receiving OpenClaw messages.
 
-- **[memory-core](/plugins/reference/memory-core)** (`@openclaw/memory-core`) - included in OpenClaw. Adds memory embedding provider support. Adds agent-callable tools.
+- **[memory-core](/plugins/reference/memory-core)** (`@openclaw/memory-core`) - included in OpenClaw. Adds file-backed memory search tools.
 
 - **[memory-wiki](/plugins/reference/memory-wiki)** (`@openclaw/memory-wiki`) - included in OpenClaw. Persistent wiki compiler and Obsidian-friendly knowledge vault for OpenClaw.
 
@@ -241,7 +241,7 @@ Each entry lists the package, distribution route, and description.
 
 ## Official external packages
 
-34 plugins
+35 plugins
 
 - **[acpx](/plugins/reference/acpx)** (`@openclaw/acpx`) - npm; ClawHub. OpenClaw ACP runtime backend with plugin-owned session and transport management.
 
@@ -272,6 +272,8 @@ Each entry lists the package, distribution route, and description.
 - **[google-meet](/plugins/reference/google-meet)** (`@openclaw/google-meet`) - npm; ClawHub. OpenClaw Google Meet participant plugin for joining calls through Chrome or Twilio transports.
 
 - **[googlechat](/plugins/reference/googlechat)** (`@openclaw/googlechat`) - npm; ClawHub. OpenClaw Google Chat channel plugin for spaces and direct messages.
+
+- **[llama-cpp](/plugins/reference/llama-cpp)** (`@openclaw/llama-cpp-provider`) - npm; ClawHub. OpenClaw llama.cpp embedding provider plugin.
 
 - **[line](/plugins/reference/line)** (`@openclaw/line`) - npm; ClawHub. OpenClaw LINE channel plugin for LINE Bot API chats.
 

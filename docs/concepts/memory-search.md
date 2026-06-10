@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "fadc66695a6b2b4167db3a98d963e73f61768990af5c41090d506fffd6a8aea1"
+source_hash: "2e03165b747708711ff36aed938bec682c16613f407d4b73ffeb9c46417912ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -38,7 +38,8 @@ For multi-endpoint setups with memory-specific providers, `provider` can also
 be a custom `models.providers.<id>` entry, such as `ollama-5080`, when that
 provider sets `api: "ollama"` or another memory embedding adapter owner.
 
-For local embeddings with no API key, set `provider: "local"`. Source checkouts
+For local embeddings with no API key, install
+`@openclaw/llama-cpp-provider` and set `provider: "local"`. Source checkouts
 may still require native build approval: `pnpm approve-builds` then
 `pnpm rebuild node-llama-cpp`.
 

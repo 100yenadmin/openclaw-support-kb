@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "ce6c22c6fdb3c77c5c53fb05ded9772970d32273d06b2cba687142f85a2723c5"
+source_hash: "56dcc983a22600958d9e9f0b1c9c2bb0ab4ddf2067c92d4a5d50edef8576846b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -40,6 +40,27 @@ openclaw cron create "0 18 * * 1-5" \
   --name "Deploy digest" \
   --webhook "https://example.invalid/openclaw/cron"
 ```
+
+Use `--command` for deterministic shell-style jobs that should run inside OpenClaw cron without starting an isolated agent/model run:
+
+Note
+
+Command cron jobs are admin-authored Gateway automation. Creating, editing,
+removing, or manually running them requires `operator.admin`; the scheduled run
+later executes in the Gateway process, not as an agent `tools.exec` tool call.
+`tools.exec.*` and exec approvals still govern model-visible exec tools.
+
+```bash
+openclaw cron create "*/15 * * * *" \
+  --name "Queue depth probe" \
+  --command "scripts/check-queue.sh" \
+  --command-cwd "/srv/app" \
+  --announce \
+  --channel telegram \
+  --to "-1001234567890"
+```
+
+`--command <shell>` stores `argv: ["sh", "-lc", <shell>]`. Use `--command-argv '["node","scripts/report.mjs"]'` for exact argv execution. Command jobs capture stdout/stderr, record normal cron history, and route output through the same `announce`, `webhook`, or `none` delivery modes as isolated jobs. A command that prints only `NO_REPLY` is suppressed.
 
 ## Sessions
 
@@ -102,6 +123,10 @@ Main-session jobs may only use `delivery.failureDestination` when primary delive
 Note: isolated cron runs treat run-level agent failures as job errors even when
 no reply payload is produced, so model/provider failures still increment error
 counters and trigger failure notifications.
+
+Command cron jobs do not start an isolated agent turn. A zero exit code records
+`ok`; non-zero exit, signal, timeout, or no-output timeout records `error` and
+can trigger the same failure notification path.
 
 If an isolated run times out before the first model request, `openclaw cron show`
 and `openclaw cron runs` include a phase-specific error such as
@@ -262,6 +287,21 @@ openclaw cron create "0 7 * * *" \
 ```
 
 `--light-context` applies to isolated agent-turn jobs only. For cron runs, lightweight mode keeps bootstrap context empty instead of injecting the full workspace bootstrap set.
+
+Create a command job with exact argv, cwd, env, stdin, and output limits:
+
+```bash
+openclaw cron create "*/30 * * * *" \
+  --name "Position export" \
+  --command-argv '["node","scripts/export-position.mjs"]' \
+  --command-cwd "/srv/app" \
+  --command-env "NODE_ENV=production" \
+  --command-input '{"mode":"summary"}' \
+  --timeout-seconds 120 \
+  --no-output-timeout-seconds 30 \
+  --output-max-bytes 65536 \
+  --webhook "https://example.invalid/openclaw/cron"
+```
 
 ## Common admin commands
 

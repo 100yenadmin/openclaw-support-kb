@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference/authentication.md"
-source_hash: "94c1d9c60d29879f2f5223ba8359252690aa0dd3174fd569250459eeb084f7ba"
+source_hash: "f4c67c3fe6d13160f5c7a2a9f52cc61660c211b7769ea3ce037b14f4ba2de6fb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authentication.md"
@@ -55,7 +55,7 @@ curl https://backend.composio.dev/api/v3.1/org/projects \
   -H "x-org-api-key: $COMPOSIO_ORG_API_KEY"
 ```
 
-- [Project API key permissions](/reference/authentication/project-api-key-permissions):
+- [Scoped project API keys](/reference/authentication/project-api-key-permissions):
 Scoped project API key access levels and covered routes
 
 - [Errors](/reference/errors):

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "888da42170c6cc82e3cbfed419bd790de54313c8fbd0bccc83993c7d51f1b9b8"
+source_hash: "9354661de480316b865632ff123a8b8cded8a66f8cedb10e5a6656d010f080d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -46,9 +46,12 @@ To set a provider explicitly:
 
 Without an embedding provider, only keyword search is available.
 
-To force the built-in local embedding provider, install the optional
-`node-llama-cpp` runtime package next to OpenClaw, then point `local.modelPath`
-at a GGUF file:
+To force local GGUF embeddings, install the official llama.cpp provider plugin,
+then point `local.modelPath` at a GGUF file:
+
+```bash
+openclaw plugins install @openclaw/llama-cpp-provider
+```
 
 ```json5
 {
@@ -74,7 +77,7 @@ at a GGUF file:
 | DeepInfra         | `deepinfra`         | Default: `BAAI/bge-m3`              |
 | Gemini            | `gemini`            | Supports multimodal (image + audio) |
 | GitHub Copilot    | `github-copilot`    | Uses Copilot subscription           |
-| Local             | `local`             | Optional `node-llama-cpp` runtime   |
+| Local             | `local`             | `@openclaw/llama-cpp-provider`      |
 | Mistral           | `mistral`           |                                     |
 | Ollama            | `ollama`            | Local/self-hosted                   |
 | OpenAI            | `openai`            | Default: `text-embedding-3-small`   |

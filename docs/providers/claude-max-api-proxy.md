@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claude Max API proxy"
 source: "https://docs.openclaw.ai/providers/claude-max-api-proxy"
-source_hash: "f8775f3a77e171bd0e40da883798dd9a351acbb48c84170dfb6a48e6b9cbdaf9"
+source_hash: "dd95743bdcca7b41c1d57c106c6fe25c1c14e66680658044d5fbe6f487a634b7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/claude-max-api-proxy.md"
@@ -58,7 +58,7 @@ Steps
 
 Install the proxy
 
-    Requires Node.js 20+ and Claude Code CLI.
+    Requires Node.js 22+ and Claude Code CLI.
 
     ```bash
     npm install -g claude-max-api-proxy

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "bd5a3e6799a26932deab82ac303b9b892a4ed08da0b52abc89123802401eb6c2"
+source_hash: "962259c79e3d578cad06aacf3cea6b648774a0944f9732f1fca6bfaca7cc46cd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -200,11 +200,14 @@ openclaw browser select <ref> OptionA OptionB
 openclaw browser fill --fields '[{"ref":"1","value":"Ada"}]'
 openclaw browser wait --text "Done"
 openclaw browser evaluate --fn '(el) => el.textContent' --ref <ref>
+openclaw browser evaluate --fn 'const title = document.title; return title;'
 openclaw browser evaluate --timeout-ms 30000 --fn 'async () => { await window.ready; return true; }'
 ```
 
-Use `evaluate --timeout-ms <ms>` when the page-side function may need longer
-than the default evaluate timeout.
+`evaluate --fn` accepts a function source, an expression, or a statement body.
+Statement bodies are wrapped as async functions, so use `return` for the value
+you want back. Use `evaluate --timeout-ms <ms>` when the page-side function may
+need longer than the default evaluate timeout.
 
 Action responses return the current raw `targetId` after action-triggered page
 replacement when OpenClaw can prove the replacement tab. Scripts should still

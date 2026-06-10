@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "ae6099339373387d6315d51e98016c124af8f2187ce78aa900030c59626a0391"
+source_hash: "51ab26e99e11eb283d348fa77408dd6d9a15350137875ec51063d3fc44553daf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -45,6 +45,7 @@ Notes:
 - `--local` cannot be combined with `--url`, `--token`, or `--password`.
 - `tui` resolves configured gateway auth SecretRefs for token/password auth when possible (`env`/`file`/`exec` providers).
 - When launched from inside a configured agent workspace directory, TUI auto-selects that agent for the session key default (unless `--session` is explicitly `agent:<id>:...`).
+- To show the Gateway hostname in the footer for non-local URL-backed connections, run `openclaw config set tui.footer.showRemoteHost true`. The host label is off by default and never appears for loopback or embedded local connections.
 - Local mode uses the embedded agent runtime directly. Most local tools work, but Gateway-only features are unavailable.
 - Local mode adds `/auth [provider]` inside the TUI command surface.
 - Plugin approval gates still apply in local mode. Tools that require approval prompt for a decision in the terminal; nothing is silently auto-approved because the Gateway is not involved.

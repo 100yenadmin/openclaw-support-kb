@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "c375057f1afe2351359ef00bbc30f6b5eccf12a6e127c113070807e84208e6c1"
+source_hash: "659002537e6f3731c53ce2d573f428511659eb32ccec9fff02864296b27bedab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -121,6 +121,14 @@ CodeGroup
     must appear in `contracts.tools` so OpenClaw can discover ownership without
     eagerly loading every plugin runtime. Set `activation.onStartup`
     intentionally. This example starts on Gateway startup.
+
+    Host-trusted plugin surfaces are also manifest-gated and require explicit
+    enablement for installed plugins. If an installed plugin registers
+    `api.registerAgentToolResultMiddleware(...)`, declare each target runtime in
+    `contracts.agentToolResultMiddleware`. If it registers
+    `api.registerTrustedToolPolicy(...)`, declare each policy id in
+    `contracts.trustedToolPolicies`. These declarations keep install-time
+    inspection and runtime registration aligned.
 
     For every manifest field, see [Plugin manifest](/plugins/manifest).
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
-source_hash: "484a03669bee406d6f1692b9b3ad1d25fae50084c0ccc0b8b3b42291361ad197"
+source_hash: "d59a6b710697e7e58dd2f92b095e5f5f01fed4da44e674feccc9e5def2a345a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/control-ui.md"
@@ -227,7 +227,7 @@ Send and history semantics
 
 Talk mode (browser realtime)
 
-    Talk mode uses a registered realtime voice provider. Configure OpenAI with `talk.realtime.provider: "openai"` plus either `talk.realtime.providers.openai.apiKey`, `OPENAI_API_KEY`, or an `openai` OAuth profile; configure Google with `talk.realtime.provider: "google"` plus `talk.realtime.providers.google.apiKey`. For hosted GPT realtime models, OpenClaw prefers the `openai` OAuth profile before `OPENAI_API_KEY`; an explicit OpenAI realtime `apiKey` remains the advanced override. The browser never receives a standard provider API key. OpenAI receives an ephemeral Realtime client secret for WebRTC. Google Live receives a one-use constrained Live API auth token for a browser WebSocket session, with instructions and tool declarations locked into the token by the Gateway. Providers that only expose a backend realtime bridge run through the Gateway relay transport, so credentials and vendor sockets stay server-side while browser audio moves through authenticated Gateway RPCs. The Realtime session prompt is assembled by the Gateway; `talk.client.create` does not accept caller-provided instruction overrides.
+    Talk mode uses a registered realtime voice provider. Configure OpenAI with `talk.realtime.provider: "openai"` plus an `openai` API-key auth profile, `talk.realtime.providers.openai.apiKey`, or `OPENAI_API_KEY`; OpenAI OAuth profiles do not configure Realtime voice. Configure Google with `talk.realtime.provider: "google"` plus `talk.realtime.providers.google.apiKey`. The browser never receives a standard provider API key. OpenAI receives an ephemeral Realtime client secret for WebRTC. Google Live receives a one-use constrained Live API auth token for a browser WebSocket session, with instructions and tool declarations locked into the token by the Gateway. Providers that only expose a backend realtime bridge run through the Gateway relay transport, so credentials and vendor sockets stay server-side while browser audio moves through authenticated Gateway RPCs. The Realtime session prompt is assembled by the Gateway; `talk.client.create` does not accept caller-provided instruction overrides.
 
     The Chat composer includes a Talk options button next to the Talk start/stop button. The options apply to the next Talk session and can override provider, transport, model, voice, reasoning effort, VAD threshold, silence duration, and prefix padding. When an option is blank, the Gateway uses configured defaults where available or the provider default. Selecting Gateway relay forces the backend relay path; selecting WebRTC keeps the session client-owned and fails instead of silently falling back to relay if the provider cannot create a browser session.
 

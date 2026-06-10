@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix migration"
 source: "https://docs.openclaw.ai/channels/matrix-migration"
-source_hash: "718ca7e816e7e43bed12f13d77b5fc605990b40dbd1d215f155267a2391c1c3f"
+source_hash: "80fbcdade65fc316ca91a81e207640d2155b7d15f44a208e1efe063e362b6057"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-migration.md"
@@ -24,6 +24,11 @@ For most users, the upgrade is in place:
 - runtime state stays under `~/.openclaw/matrix/`
 
 You do not need to rename config keys or reinstall the plugin under a new name.
+The root `openclaw` package no longer bundles Matrix runtime code or Matrix SDK
+dependencies. If `openclaw channels status` shows Matrix is configured but the
+plugin is missing after an update, run `openclaw doctor --fix` or
+`openclaw plugins install @openclaw/matrix`; do not install Matrix SDK packages
+into the root OpenClaw package.
 
 ## What the migration does automatically
 

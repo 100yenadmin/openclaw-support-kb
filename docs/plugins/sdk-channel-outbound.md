@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel outbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-outbound"
-source_hash: "1f8a95267a87353d2bf95e14009cbe60a6723bd96f1b8f0345173944f0c5a39e"
+source_hash: "2cd3f8bd902175b456c4f5895533403588f17fc9eccaab40fb3c555e963f3698"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-outbound.md"
@@ -97,7 +97,7 @@ Runtime send helpers also live on `channel-outbound`:
 - `sendDurableMessageBatch(...)`
 - `withDurableMessageSendContext(...)`
 - `deliverInboundReplyWithMessageSendContext(...)`
-- draft streaming/progress helpers such as `resolveChannelStreamingPreviewChunk(...)`
+- draft streaming/progress helpers such as `resolveChannelDraftStreamingChunking(...)`
 
 `sendDurableMessageBatch(...)` returns one explicit outcome:
 

@@ -1,8 +1,8 @@
 ---
 type: composio_doc
-title: "Project API key permissions"
+title: "Scoped project API keys"
 source: "https://docs.composio.dev/reference/authentication/project-api-key-permissions.md"
-source_hash: "a492e090cd42bd77e46214b8f1022b37f22afd47c355f5c9979f5c5d02d7636d"
+source_hash: "b702816a5cce3581d361b151bf7e354f099c5d2ca14ca61533afe1209ce607ca"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authentication/project-api-key-permissions.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Project API key permissions (/reference/authentication/project-api-key-permissions)
+# Scoped project API keys (/reference/authentication/project-api-key-permissions)
 Source: https://docs.composio.dev/reference/authentication/project-api-key-permissions.md
 
 

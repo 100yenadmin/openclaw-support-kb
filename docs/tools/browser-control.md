@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "eff2abcbd9b5971bf760154b168e5274d566cfca62039c7253cc7db59eef29f7"
+source_hash: "4ffb72818b4e5dcfa1224251120de086eacbac22f72f57349825872db9030595"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-control.md"
@@ -205,6 +205,7 @@ openclaw browser dialog --dismiss --dialog-id d1
 openclaw browser wait --text "Done"
 openclaw browser wait "#main" --url "**/dash" --load networkidle --fn "window.ready===true"
 openclaw browser evaluate --fn '(el) => el.textContent' --ref 7
+openclaw browser evaluate --fn 'const title = document.title; return title;'
 openclaw browser evaluate --timeout-ms 30000 --fn 'async () => { await window.ready; return true; }'
 openclaw browser highlight e12
 openclaw browser trace start
@@ -370,8 +371,10 @@ These are useful for "make the site behave like X" workflows:
 - `browser act kind=evaluate` / `openclaw browser evaluate` and `wait --fn`
   execute arbitrary JavaScript in the page context. Prompt injection can steer
   this. Disable it with `browser.evaluateEnabled=false` if you do not need it.
-- Use `openclaw browser evaluate --timeout-ms <ms>` when the page-side function
-  may need longer than the default evaluate timeout.
+- `openclaw browser evaluate --fn` accepts a function source, an expression, or
+  a statement body. Statement bodies are wrapped as async functions, so use
+  `return` for the value you want back. Use `--timeout-ms <ms>` when the
+  page-side function may need longer than the default evaluate timeout.
 - For logins and anti-bot notes (X/Twitter, etc.), see [Browser login + X/Twitter posting](/tools/browser-login).
 - Keep the Gateway/node host private (loopback or tailnet-only).
 - Remote CDP endpoints are powerful; tunnel and protect them.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "1ac9e57e6085499d2c84845cd7d88dc7308fe548d17132fbb74f388ede043a2b"
+source_hash: "8c0435238c4827a9f4396805aaad6c9c16571e079c7c80ee62e83c0ff9a0bee1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -25,12 +25,12 @@ Note
 
 Local onboarding defaults new local configs to `tools.profile: "coding"` when unset (existing explicit profiles are preserved).
 
-| Profile     | Includes                                                                                                                        |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `minimal`   | `session_status` only                                                                                                           |
-| `coding`    | `group:fs`, `group:runtime`, `group:web`, `group:sessions`, `group:memory`, `cron`, `image`, `image_generate`, `video_generate` |
-| `messaging` | `group:messaging`, `sessions_list`, `sessions_history`, `sessions_send`, `session_status`                                       |
-| `full`      | No restriction (same as unset)                                                                                                  |
+| Profile     | Includes                                                                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `minimal`   | `session_status` only                                                                                                                             |
+| `coding`    | `group:fs`, `group:runtime`, `group:web`, `group:sessions`, `group:memory`, `cron`, `image`, `image_generate`, `skill_workshop`, `video_generate` |
+| `messaging` | `group:messaging`, `sessions_list`, `sessions_history`, `sessions_send`, `session_status`                                                         |
+| `full`      | No restriction (same as unset)                                                                                                                    |
 
 ### Tool groups
 

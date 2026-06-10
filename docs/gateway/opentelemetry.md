@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "8968d2f4c8a7082e6a3ad7384a3dac891064bea921baedf24373f621db78fd85"
+source_hash: "d19b98e67fedd900617bfbfdd109e0299f9f8a87b117fb61e03f997d5da98236"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -166,6 +166,13 @@ When any subkey is enabled, model and tool spans get bounded, redacted
 `openclaw.content.*` attributes for that class only. Use boolean
 `captureContent: true` only for broad diagnostics captures where OTLP log
 message bodies are also approved for export.
+
+`toolInputs`/`toolOutputs` content is captured for the built-in agent runtime's
+tool executions (`openclaw.content.tool_input` on completed/error spans,
+`openclaw.content.tool_output` on completed spans). External harness tool calls
+(Codex, Claude CLI) emit `tool.execution.*` spans without content payloads.
+Captured content travels on a trusted, listener-only channel and is never placed
+on the public diagnostic event bus.
 
 ## Sampling and flushing
 
