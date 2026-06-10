@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-06-09T12:19:07.539Z",
+  "generatedAt": "2026-06-10T10:52:24.184Z",
   "openclawReleaseTag": "v2026.6.1",
   "docsSha256": "ad2ec95548638fe0f5b13c0219484e09c48c9a32e8fe3ec0ec15c997b0826c06",
   "composioDocsSha256": "fa1be75e655129821eaf832822843e085654c6c1a74c56afa4ce5d5c8d67741c",
@@ -11,7 +11,7 @@
   "hermesDocsIndexSha256": "4db9ca1af4fec399357fcb0a3c65e4551adb2b260e76c07f435c99f066c59e31",
   "paperclipDocsIndexSha256": "dea15772e7b77a3492af0f81d98a66999ff22cccaf812e6ed00a6bc24b5e756e",
   "paperclipDocsSha256": "ca8a5023fb7407278728cdfa0ae6831d65f86497766dce662631d721004de04c",
-  "artifactSha256": "7ae2e9a8df1b97a2528fe723272b73b1112e4a212cbbc631f171749af967a443",
+  "artifactSha256": "5cce4e829f69e355c4a35b9815918589728bc1163676b93eaf82e6093a6fdfa3",
   "sourceCount": 1100,
   "logicalSources": {
     "openclaw": 679,
