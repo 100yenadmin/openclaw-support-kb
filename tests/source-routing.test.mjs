@@ -72,7 +72,6 @@ test("router and recovery skills require target-first source use", async () => {
   const hermes = await read("skills/hermes-support-kb/SKILL.md");
   const openclaw = await read("skills/openclaw-support-kb/SKILL.md");
   const resolver = await read("skills/RESOLVER.md");
-  const companyOs = await read("skills/evaos-company-os/SKILL.md");
 
   assert.match(router, /Identify the target system before giving commands/);
   assert.match(router, /OpenClaw[\s\S]*Hermes Agent[\s\S]*Paperclip Mission Control/);
@@ -82,70 +81,24 @@ test("router and recovery skills require target-first source use", async () => {
   assert.doesNotMatch(recoveryRunbook, /<target system> Local KB namespace/);
   assert.match(hermes, /Do not edit `openclaw\.json` for a Hermes-only issue/);
   assert.match(openclaw, /Do not apply OpenClaw config guidance to Hermes/);
-  assert.match(resolver, /EVAOS roadmap[\s\S]*skills\/evaos-company-os\/SKILL\.md/);
-  assert.match(companyOs, /not through a separate AgentMD mirror/);
-  assert.match(companyOs, /Notion `EVAOS Company OS` is the agent operating manual/);
-  assert.match(companyOs, /EVAOS Agent Handoff\s+Queue/);
-  assert.match(companyOs, /EVAOS Agent Operating Protocol/);
-  assert.match(companyOs, /Open or search Notion for `EVAOS Company OS`/);
-  assert.match(companyOs, /Resolve the relevant Linear initiative\/project/);
-  assert.match(companyOs, /Resolve the affected system in `EVAOS Systems`/);
-  assert.match(companyOs, /Paperclip Support VM External Operator Evidence/);
-  assert.match(companyOs, /evaBrain System Row/);
-  assert.match(companyOs, /Read current evidence before recommending release, rollout, or roadmap state/);
-  assert.match(companyOs, /Linear owns the product roadmap/);
-  assert.match(companyOs, /GitHub owns implementation work/);
-  assert.match(companyOs, /Paperclip owns live execution\/orchestration/);
-  assert.match(companyOs, /Treat search results as cache, not\s+source of truth/);
-  assert.match(companyOs, /Agent Flow/);
-  assert.match(companyOs, /Do not create duplicate GitHub and Linear issues/);
-  assert.match(companyOs, /one logical issue/);
-  assert.match(companyOs, /Linear project appears empty/);
-  assert.match(companyOs, /authenticated `gh` CLI/);
-  assert.match(companyOs, /Autonomous Triage Gate/);
-  assert.match(companyOs, /VISION\.md/);
-  assert.match(companyOs, /Mutation boundary: read-only, PR-only, support VM, or production rollout/);
-  assert.match(companyOs, /Required closeout: evidence, blocker, and next action/);
-  assert.match(companyOs, /If Linear write tools are unavailable/);
+  assert.doesNotMatch(resolver, /skills\/evaos-company-os\/SKILL\.md/);
 });
 
-test("EVAOS Company OS scenario exercises the real routing sequence", async () => {
+test("public support KB does not route internal Company OS prompts", async () => {
   const scenarios = JSON.parse(await read("evals/customer-scenarios.json"));
-  const scenario = scenarios.find(({ id }) => id === "evaos-company-os-router");
-  const companyOs = await read("skills/evaos-company-os/SKILL.md");
   const resolver = await read("skills/RESOLVER.md");
+  const markdown = await markdownFiles("skills");
 
-  assert.ok(scenario, "missing evaos-company-os-router scenario");
-  assert.deepEqual(scenario.mustHaveDocs, ["skills/evaos-company-os/SKILL.md", "skills/RESOLVER.md"]);
-  assert.match(resolver, /Company OS[\s\S]*skills\/evaos-company-os\/SKILL\.md/);
+  assert.equal(scenarios.some(({ id }) => id === "evaos-company-os-router"), false);
+  assert.equal(markdown.some((file) => /evaos-company-os/i.test(file)), false);
+  assert.doesNotMatch(resolver, /Company OS/);
+  assert.doesNotMatch(resolver, /what agents should work on next/i);
 
-  for (const phrase of [
-    "open or search Notion",
-    "EVAOS Agent Handoff Queue",
-    "EVAOS Agent Operating Protocol",
-    "Resolve the relevant Linear initiative/project",
-    "Resolve the affected system",
-    "EVAOS Systems",
-    "canonical GitHub repo",
-    "Paperclip Support VM External Operator Evidence",
-    "evaBrain System Row",
-    "Read current evidence before recommending",
-    "Linear owns the product roadmap",
-    "GitHub owns implementation work",
-    "separate AgentMD",
-    "not a second canonical issue tracker",
-    "Required closeout",
-    "Linear write tools are unavailable",
-    "one logical issue",
-    "Linear project appears empty",
-    "authenticated `gh` CLI",
-    "Autonomous Triage Gate",
-    "VISION.md",
-  ]) {
-    assert.ok(
-      scenario.mustMention.includes(phrase),
-      `scenario should require behavior phrase: ${phrase}`,
+  for (const phrase of ["EVAOS Company OS", "Operating Lanes", "WorldOS"]) {
+    assert.equal(
+      scenarios.some(({ prompt = "" }) => prompt.includes(phrase)),
+      false,
+      `public support KB should not keep internal routing prompt: ${phrase}`,
     );
-    assert.match(companyOs, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"));
   }
 });
