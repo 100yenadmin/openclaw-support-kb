@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "f780eb078ca6deef2f2a314865d2c43277fbde3290ca7e5caa4193e62e625bc0"
+source_hash: "94fdf6c6198a1d0e0da9333d23eb9bfcb5eb4688a48d0727b74edd0e1aee0968"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -129,6 +129,7 @@ Source: https://docs.composio.dev/llms.txt
 
 - https://docs.composio.dev/docs/migration-guide.md
 - https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md
+- https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md
 - https://docs.composio.dev/docs/migration-guide/tool-router-beta.md
 - https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md
 - https://docs.composio.dev/docs/migration-guide/new-sdk.md
@@ -224,8 +225,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/organization.md
 - https://docs.composio.dev/reference/v3/api-reference/migration.md
+- https://docs.composio.dev/reference/v3/api-reference/organization.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md

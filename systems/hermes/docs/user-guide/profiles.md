@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/profiles"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "ae23ec9aa8b57c7b375a2e1d65c39d2fb31933d2e5de1c15c835017150143dd8"
+source_hash: "3fd17ccc20ed17f6fa75e4f13b935c3918db2405dc3a3d45e44bf10972930c21"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -213,6 +213,20 @@ If you want this profile to work in a specific project by default, also set its 
 ```bash
 coder config set terminal.cwd /absolute/path/to/project
 ```
+
+### From the dashboard
+
+The [web dashboard](features/web-dashboard.md#managing-multiple-profiles)
+is a machine-level surface that can manage **any** profile's config, API
+keys, skills, MCPs, and model via the profile switcher in its sidebar — no
+per-profile dashboard needed. `coder dashboard` routes to the machine
+dashboard with the `coder` profile preselected. The dashboard's Chat tab
+also follows the switcher, spawning a conversation under the selected
+profile's home.
+
+Note: "Set as active" on the dashboard's Profiles page is the sticky
+default for **future CLI/gateway runs** (same as `hermes profile use`) —
+to edit a profile from the dashboard, use the switcher instead.
 
 ## Updating
 

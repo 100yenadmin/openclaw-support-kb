@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "4c2cf211ea2dc0fa844e8bfda865146183d8bb93129215f79a2a80a943d61b53"
+source_hash: "2c420512f829a56e27612c2cc6dcbb82143c407845e92a50042090c2d43ff6e2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -144,8 +144,9 @@ class AcmeProfile(ProviderProfile):
 
     def build_api_kwargs_extras(self, *, reasoning_config=None, **context):
         """Returns (extra_body_additions, top_level_kwargs). Needed when some
-        fields go top-level (Kimi's reasoning_effort) and some go in extra_body
-        (OpenRouter's reasoning dict). Default: ({}, {})."""
+        fields go top-level (Kimi's reasoning_effort, OpenRouter's verbosity for
+        adaptive Anthropic models) and some go in extra_body (OpenRouter's
+        reasoning dict). Default: ({}, {})."""
         return {}, {}
 
     def fetch_models(self, *, api_key=None, timeout=8.0) -> list[str] | None:

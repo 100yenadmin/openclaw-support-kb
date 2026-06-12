@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slack"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack"
-source_hash: "cd223904260f2433fe90c39e0c83994f2d92126eb2e178d6e03fb6b2a4894dd2"
+source_hash: "70f1f661e1f53ab77e7fc014f5e738e5c6154fa2428ea61a1a2bcf9ca66c97e9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/slack.md"
@@ -292,6 +292,11 @@ thread.
 
 Only the first token is checked against the known command list, so
 casual messages like `!nice work` pass through to the agent unchanged.
+
+Approval prompts (dangerous command / `execute_code` approval) normally
+render as interactive buttons. When buttons can't be delivered and
+Hermes falls back to a text prompt, the prompt instructs you to reply
+with `!approve` / `!deny` — the form that works inside threads.
 
 ### Advanced: emit only the slash-commands array
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin"
-source_hash: "2168d5b5503c1565a34594ece4aa912f97129d4488d0e0a732e2ba718282ceca"
+source_hash: "9f280e79d4a3619209a77810416b6a1b98ef099ecc648fbbcf41a2fd6910f218"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/build-a-hermes-plugin.md"
@@ -838,6 +838,39 @@ def register(ctx):
 - **Explicit override:** If the caller passes `parent_agent=` explicitly, it is respected and not overwritten.
 
 This is the public, stable interface for tool dispatch from plugin commands. Plugins should not reach into `ctx._cli_ref.agent` or similar private state.
+
+### Handle Slack Block Kit button clicks
+
+Plugins that post Block Kit messages with interactive elements (buttons, overflow menus, datepickers, etc.) can register the click handlers directly with the Slack adapter — no monkey-patching of `slack_bolt.AsyncApp` required.
+
+```python
+def register(ctx):
+    async def _on_approve(ack, body, action):
+        # ack within 3 seconds — slack_bolt requirement.
+        await ack()
+        # body["channel"]["id"], body["user"]["id"], body["message"]["ts"]
+        # action["action_id"], action["value"]
+        sweep_id = (action.get("value") or "").split("|", 1)[-1]
+        # ...do the deterministic work, then post a follow-up.
+
+    ctx.register_slack_action_handler("inbox_sweep_approve", _on_approve)
+```
+
+**Signature:** `ctx.register_slack_action_handler(action_id, callback) -> None`
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `action_id` | `str \| re.Pattern \| dict` | Whatever `slack_bolt.App.action()` accepts: a literal `action_id`, a compiled regex matching multiple ids, or a constraint dict like `{"action_id": "...", "block_id": "..."}` |
+| `callback` | async callable | Receives `(ack, body, action)` per the slack_bolt convention |
+
+**Runtime behavior:**
+
+- The handler is queued at plugin-load time and wired into the adapter's `slack_bolt.AsyncApp` when the Slack platform connects.
+- Each callback is wrapped defensively: if your handler raises, the gateway logs the error and best-effort-acks the click so Slack stops retrying.
+- Standard slack_bolt rules apply — `await ack()` within 3 seconds, then do longer work.
+- For multi-workspace deployments the handler fires for clicks from any connected workspace; use `body["team"]["id"]` if you need to scope behaviour.
+
+This is the public way for plugins to participate in Slack interactivity. Older plugins may patch `SlackAdapter.connect`; prefer this API instead.
 
 :::tip
 This guide covers **general plugins** (tools, hooks, slash commands, CLI commands). The sections below sketch the authoring pattern for each specialized plugin type; each links to its full guide for field reference and examples.

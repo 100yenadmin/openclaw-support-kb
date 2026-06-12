@@ -1,27 +1,29 @@
 ---
 type: hermes_doc
-title: "Automation Templates"
-source: "https://hermes-agent.nousresearch.com/docs/guides/automation-templates"
-source_hash: "325c5436979f6aaccb63e5fc023b061e6ccf623491029aefbcd0eb524c5093af"
+title: "Automation Blueprints"
+source: "https://hermes-agent.nousresearch.com/docs/guides/automation-blueprints"
+source_hash: "442d44865b9e7e68fb1d27d026116a1925d863f365e152fc9c8acd62b7102c09"
 system: "hermes"
 kb_namespace: "hermes-agent"
-doc_path: "guides/automation-templates.md"
-original_doc_path: "guides/automation-templates.md"
+doc_path: "guides/automation-blueprints.md"
+original_doc_path: "guides/automation-blueprints.md"
 duplicate_index: 1
 ---
 
-# Automation Templates
+# Automation Blueprints
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
-Source: https://hermes-agent.nousresearch.com/docs/guides/automation-templates
+Source: https://hermes-agent.nousresearch.com/docs/guides/automation-blueprints
 
 
-# Automation Templates
+# Automation Blueprints
 
-Copy-paste recipes for common automation patterns. Each template uses Hermes's built-in [cron scheduler](/user-guide/features/cron) for time-based triggers and [webhook platform](/user-guide/messaging/webhooks) for event-driven triggers.
+Copy-paste blueprints for common automation patterns. Each blueprint uses Hermes's built-in [cron scheduler](/user-guide/features/cron) for time-based triggers and [webhook platform](/user-guide/messaging/webhooks) for event-driven triggers.
 
-Every template works with **any model** — not locked to a single provider.
+Every blueprint works with **any model** — not locked to a single provider.
+
+For parameterized blueprints with forms instead of cron syntax, see the [Automation Blueprints Catalog](/reference/automation-blueprints-catalog).
 
 :::tip Three Trigger Types
 | Trigger | How | Tool |

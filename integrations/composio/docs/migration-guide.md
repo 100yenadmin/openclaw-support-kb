@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migration guides"
 source: "https://docs.composio.dev/docs/migration-guide.md"
-source_hash: "b7b2649e78f0cba018c91b818462331a1c670ba01c2596cf73579be69605ae3c"
+source_hash: "1ec16cdfc5b8edd142ff51e331906301000ddd452157ffb193b7819cd0b0f6b1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide.md"
@@ -24,6 +24,12 @@ Source: https://docs.composio.dev/docs/migration-guide.md
 Move from manual tool fetching and execution to the sessions paradigm. Your existing auth configs and connected accounts carry over.
 
 [View Direct Tools migration guide →](/docs/migration-guide/direct-to-sessions)
+
+**Migrating from MCP servers to Sessions**
+
+Move from per-toolkit MCP server configs (`composio.mcp.create` / `composio.mcp.generate`) to sessions. Your tools, auth configs, and connected accounts carry over — no re-auth.
+
+[View MCP servers migration guide →](/docs/migration-guide/mcp-servers-to-sessions)
 
 **Migrating from Experimental Tool Router**
 
