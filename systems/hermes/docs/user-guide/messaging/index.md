@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "8800a0c60dc65ac8d7b282a0f0fcecd5762e8f6cc9e3e5d113bb4e11ceac334c"
+source_hash: "555ec323eec209a1cdd880a08285af1b52d39a7a634f8416bcbb04f6cf9320b4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -400,6 +400,23 @@ journalctl -u hermes-gateway -f
 ```
 
 Use the user service on laptops and dev boxes. Use the system service on VPS or headless hosts that should come back at boot without relying on systemd linger.
+
+:::tip Headless VMs: user service + linger avoids root prompts
+A system service needs root for every restart — including the automatic gateway restart at the end of `hermes update`. When `hermes update` runs as a non-root user, it tries passwordless `sudo systemctl`; if that's unavailable, it skips the restart and prints the manual `sudo systemctl restart hermes-gateway` command (it never blocks on an interactive password prompt).
+
+For a headless VM you never log into, a **user** service with lingering enabled gives you the same start-at-boot behavior with zero root involvement:
+
+```bash
+hermes gateway install          # user service
+sudo loginctl enable-linger $USER   # one-time: start at boot, survive logout
+```
+
+After that, `hermes update` can restart the gateway without any privileges. If you prefer to keep the system service, either run updates with `sudo hermes update`, or grant the service account passwordless sudo for systemctl, e.g. in `sudo visudo -f /etc/sudoers.d/hermes-gateway`:
+
+```
+hermes ALL=(root) NOPASSWD: /usr/bin/systemctl --no-ask-password reset-failed hermes-gateway*, /usr/bin/systemctl --no-ask-password start hermes-gateway*, /usr/bin/systemctl --no-ask-password restart hermes-gateway*
+```
+:::
 
 Avoid keeping both the user and system gateway units installed at once unless you really mean to. Hermes will warn if it detects both because start/stop/status behavior gets ambiguous.
 

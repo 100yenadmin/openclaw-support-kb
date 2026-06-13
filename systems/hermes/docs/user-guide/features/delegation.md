@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "61371609bb6fe5755dbfab6ff86f45db3e8da417c38f40fac612f4d6184da237"
+source_hash: "a2a8c62307e98e9ff6e5c023a84fb2f59dd144beefe5c214440458cab7e936c6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -188,17 +188,22 @@ delegate_task(
 
 ## Child Timeout
 
-Subagents are killed as stuck if they go quiet for more than `delegation.child_timeout_seconds` wall-clock seconds. The default is **600** (10 minutes) — bumped up from 300s in earlier releases because high-reasoning models on non-trivial research tasks were getting killed mid-think. Tune it per-install:
+By default there is **no wall-clock timeout** on subagents. Children fail only from what they're actually doing — API errors, tool errors, or hitting their iteration budget — never from a delegation-level stopwatch. Earlier releases shipped a hard cap (300s, later 600s), which kept killing legitimately busy children mid-task: deep code reviews, large research fan-outs, and slow reasoning models routinely need more than 10 minutes while making steady progress the whole time.
+
+Genuinely stuck children are still detected: the heartbeat staleness monitor stops refreshing the parent's activity when a child makes no progress (no API calls, no tool starts), letting the gateway inactivity timeout fire on a truly wedged worker.
+
+If you want a hard cap anyway (e.g. cost control on unattended cron-driven delegation), opt in per-install:
 
 ```yaml
 delegation:
-  child_timeout_seconds: 600   # default
+  child_timeout_seconds: 0     # default: 0 = no timeout
+  # child_timeout_seconds: 1800  # opt-in hard cap (floor 30s)
 ```
 
-Lower it for fast local models; raise it for slow reasoning models on hard problems. The timer resets every time the child makes an API call or tool call — only genuinely idle workers trigger the kill.
+A positive value enforces a hard wall-clock limit on each child; `0` or a negative value disables it.
 
 :::tip Diagnostic dump on zero-call timeout
-If a subagent times out having made **zero** API calls (usually: provider unreachable, auth failure, or tool-schema rejection), `delegate_task` writes a structured diagnostic to `~/.hermes/logs/subagent-timeout-<session>-<timestamp>.log` containing the subagent's config snapshot, credential-resolution trace, and any early error messages. Much easier to root-cause than the previous silent-timeout behavior.
+With a hard cap configured, if a subagent times out having made **zero** API calls (usually: provider unreachable, auth failure, or tool-schema rejection), `delegate_task` writes a structured diagnostic to `~/.hermes/logs/subagent-timeout-<session>-<timestamp>.log` containing the subagent's config snapshot, credential-resolution trace, and any early error messages. Much easier to root-cause than the previous silent-timeout behavior.
 :::
 
 ## Monitoring Running Subagents (`/agents`)
