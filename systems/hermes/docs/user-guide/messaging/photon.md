@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/photon.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/photon"
-source_hash: "73752b922f54e07be9058a69a6576bd614f3842f54002a23b842be4eb3c65473"
+source_hash: "0c5347c434738bd17df21ddf2fda289882df089c168e47969812d207901ef0b9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/photon.md"
@@ -160,7 +160,7 @@ BlueBubbles iMessage channel uses.
 ## Start the gateway
 
 ```bash
-hermes gateway start --platform photon
+hermes gateway start
 ```
 
 You'll see something like:

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "FAQ & Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/reference/faq"
-source_hash: "69791daba86ad9f03392986c526f47d4f2bbdf17db6c9a3b095738fbdd1ce85a"
+source_hash: "feb95c705db715537835a22a98335a2750b987e798eb969f04705d6ab45e4a1e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/faq.md"
@@ -647,7 +647,7 @@ No. Each messaging platform (Telegram, Discord, etc.) requires exclusive access 
 
 ### Do profiles share memory or sessions?
 
-No. Each profile has its own memory store, session database, and skills directory. They are completely isolated. If you want to start a new profile with existing memories and sessions, use `hermes profile create newname --clone-all` to copy everything from the current profile.
+No. Each profile has its own memory store, session database, and skills directory. They are completely isolated. If you want to start a new profile with existing memories and sessions, use `hermes profile create newname --clone-all` to copy everything from the current profile, or add `--clone-from <profile>` to copy from a specific source profile.
 
 ### What happens when I run `hermes update`?
 
