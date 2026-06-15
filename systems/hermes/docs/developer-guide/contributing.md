@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "d20d7ca8e97a88c189d78d95b9c5b65ca112d5c32f3c0db4107f2375d97b65a5"
+source_hash: "758d07a07c7cb92dac4e625a369dcf2998b50fa615cdbc05627b0c05410fdfb5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -51,7 +51,41 @@ We value contributions in this order:
 | **uv** | Fast Python package manager ([install](https://docs.astral.sh/uv/)) |
 | **Node.js 20+** | Optional — needed for browser tools and WhatsApp bridge (matches root `package.json` engines) |
 
-### Clone and Install
+### Install with the standard installer
+
+For most contributors, the best development bootstrap is the same path users
+take: run the standard installer, then work inside the repository it cloned.
+The installer creates the Hermes venv, wires the `hermes` command, stamps the
+install method for `hermes update`, and clones the full git project into
+`$HERMES_HOME/hermes-agent` (usually `~/.hermes/hermes-agent`). That keeps your
+development environment on the same layout the CLI, updater, lazy dependency
+installer, gateway, and docs assume.
+
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+cd "${HERMES_HOME:-$HOME/.hermes}/hermes-agent"
+
+# Add dev/test extras on top of the standard install.
+uv pip install -e ".[all,dev]"
+
+# Optional: browser tools / docs site dependencies.
+npm install
+```
+
+After that, create branches and run tests from that checkout:
+
+```bash
+git checkout -b fix/description
+scripts/run_tests.sh
+```
+
+### Manual clone fallback
+
+Use this only if you intentionally do not want Hermes' managed install layout
+(for example, a throwaway clone inside a container or CI job). If you install
+this way, make sure you run the `hermes` entrypoint from this venv; running the
+system `python3 -m hermes_cli.main` can pick up unrelated system Python
+packages.
 
 ```bash
 git clone https://github.com/NousResearch/hermes-agent.git
@@ -82,19 +116,23 @@ echo 'OPENROUTER_API_KEY=sk-or-v1-your-key' >> ~/.hermes/.env
 ### Run
 
 ```bash
-# Symlink for global access
-mkdir -p ~/.local/bin
-ln -sf "$(pwd)/venv/bin/hermes" ~/.local/bin/hermes
-
-# Verify
+# The standard installer already put `hermes` on PATH.
 hermes doctor
 hermes chat -q "Hello"
+```
+
+If you used the manual clone fallback, run `./hermes` from the checkout or
+symlink this clone's venv explicitly:
+
+```bash
+mkdir -p ~/.local/bin
+ln -sf "$(pwd)/venv/bin/hermes" ~/.local/bin/hermes
 ```
 
 ### Run Tests
 
 ```bash
-pytest tests/ -v
+scripts/run_tests.sh
 ```
 
 ## Code Style

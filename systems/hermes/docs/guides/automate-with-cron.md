@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automate Anything with Cron"
 source: "https://hermes-agent.nousresearch.com/docs/guides/automate-with-cron"
-source_hash: "265288648f32b1db1725cfa7ee3d1d90bde2f23dd06fc5e1b1542f975e862364"
+source_hash: "2904537c8ffe450977440eb53ff91070eb23de3349a48f26c31ac566f0f4510e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/automate-with-cron.md"
@@ -84,7 +84,7 @@ Set up the cron job:
 ```
 
 :::tip The [SILENT] Trick
-When the agent's final response contains `[SILENT]`, delivery is suppressed. This means you only get notified when something actually happens — no spam on quiet hours.
+For cron monitoring jobs, instruct the agent to respond with only `[SILENT]` when nothing changed. Cron delivery treats `[SILENT]` as the quiet marker, so you only get notified when something actually happens — no spam on quiet hours.
 :::
 
 ---
@@ -266,7 +266,7 @@ The `--deliver` flag controls where results go:
 
 **Make prompts self-contained.** The agent in a cron job has no memory of your conversations. Include URLs, repo names, format preferences, and delivery instructions directly in the prompt.
 
-**Use `[SILENT]` liberally.** For monitoring jobs, always include instructions like "if nothing changed, respond with `[SILENT]`." This prevents notification noise.
+**Use `[SILENT]` deliberately.** For monitoring jobs, include instructions like "if nothing changed, respond with only `[SILENT]`." Do not ask the agent to explain the token in quiet cases — cron treats `[SILENT]` as the delivery-suppression marker.
 
 **Use scripts for data collection.** The `script` parameter lets a Python script handle the boring parts (HTTP requests, file I/O, state tracking). The agent only sees the script's stdout and applies reasoning to it. This is cheaper and more reliable than having the agent do the fetching itself.
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Event Hooks"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks"
-source_hash: "5f293374914a0332fd15a3fd60ad84cfa4de034f177c5ba48bcbe73bdd9fea2e"
+source_hash: "c385f7812f3fad9ccebd063aacfcc5de8809bb7034fae3bc547be251738bc793"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/hooks.md"
@@ -287,8 +287,8 @@ def _run_boot_agent(content: str) -> None:
             max_iterations=20,
         )
         result = agent.run_conversation(_build_prompt(content))
-        response = result.get("final_response", "")
-        if response and "[SILENT]" not in response:
+        response = (result.get("final_response", "") or "").strip()
+        if response.upper() not in {"[SILENT]", "SILENT", "NO_REPLY", "NO REPLY"}:
             logger.info("boot-md completed: %s", response[:200])
         else:
             logger.info("boot-md completed (nothing to report)")
@@ -336,7 +336,7 @@ Watch the logs:
 hermes logs --follow --level INFO | grep boot-md
 ```
 
-You should see `Running BOOT.md (N chars)` followed by either `boot-md completed: ...` (summary of what the agent did) or `boot-md completed (nothing to report)` when the agent replied `[SILENT]`.
+You should see `Running BOOT.md (N chars)` followed by either `boot-md completed: ...` (summary of what the agent did) or `boot-md completed (nothing to report)` when the agent replied with an exact silence token such as `[SILENT]`.
 
 Delete `~/.hermes/BOOT.md` to disable the checklist — the hook stays loaded but silently skips when the file isn't there.
 

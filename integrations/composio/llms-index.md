@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "94fdf6c6198a1d0e0da9333d23eb9bfcb5eb4688a48d0727b74edd0e1aee0968"
+source_hash: "0426a2fa3db55c2586f0a9a57d98d0ba57668f05ae4426bd20cdd2aa042dfa99"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -150,6 +150,7 @@ Source: https://docs.composio.dev/llms.txt
 
 - https://docs.composio.dev/cookbooks/app-connections-dashboard.md
 - https://docs.composio.dev/cookbooks/background-agent.md
+- https://docs.composio.dev/cookbooks/box-integration.md
 - https://docs.composio.dev/cookbooks/chat-app.md
 - https://docs.composio.dev/cookbooks/fast-api.md
 - https://docs.composio.dev/cookbooks/gmail-labeler.md

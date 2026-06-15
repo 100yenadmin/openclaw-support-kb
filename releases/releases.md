@@ -16,7 +16,7 @@ Latest beta/prerelease: v2026.6.8-beta.1
 
 Source: https://github.com/openclaw/openclaw/releases
 
-- v2026.6.8-beta.1 (beta, 2026-06-13T21:49:06Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.6.8-beta.1
+- v2026.6.8-beta.1 (beta, 2026-06-14T22:45:33Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.6.8-beta.1
 - v2026.6.7-beta.1 (beta, 2026-06-13T09:42:35Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.6.7-beta.1
 - v2026.6.6 (stable, 2026-06-12T11:04:42Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.6.6
 - v2026.6.6-beta.2 (beta, 2026-06-12T03:32:42Z) - https://github.com/openclaw/openclaw/releases/tag/v2026.6.6-beta.2
