@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "8e8526cd6890438a6756b2757c9d86857eb5c1460d760cd55957c60083d652c5"
+source_hash: "ab67e0cbd3c232a7ed156f1ec2b86d72564ee7b9c251ecc244d866edd8ff508b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -350,6 +350,27 @@ Claude Opus 4.7 temperature
     optional region prefixes (`us.`, `eu.`, `ap.`, `apac.`, `au.`, `jp.`,
     `global.`). No config knob is required, and the omission applies to both
     the request options object and the `inferenceConfig` payload field.
+
+
+
+Claude Fable 5
+
+    Use `amazon-bedrock/anthropic.claude-fable-5` in `us-east-1`, or the
+    regional inference ids such as `us.anthropic.claude-fable-5`.
+    OpenClaw applies Fable's 1M context window, 128K output limit, always-on
+    adaptive thinking, and supported effort mapping. `/think off` and
+    `/think minimal` map to `low`; unsupported temperature and forced tool
+    choice controls are omitted. Streaming output is held until Bedrock
+    returns a terminal status so mid-stream refusals do not expose partial text.
+    Fable supports only the standard service tier; OpenClaw ignores configured
+    `flex`, `priority`, and `reserved` tiers for this model.
+
+    AWS requires an explicit `provider_data_share` data-retention opt-in before
+    Fable is available. Prompts and completions are shared with Anthropic and
+    retained for up to 30 days for trust and safety. Review and configure
+    [Bedrock data retention](https://docs.aws.amazon.com/bedrock/latest/userguide/data-retention.html)
+    before enabling the model.
+
 
 
 

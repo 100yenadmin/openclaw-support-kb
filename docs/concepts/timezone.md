@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Timezones"
 source: "https://docs.openclaw.ai/concepts/timezone"
-source_hash: "07f9c816164aef7cd78630583c5997eaa78bee073ac184952cf89d19ff9cb6d4"
+source_hash: "dbd9c64e67174fe41affca4bdd8576ca055a1dc43ea4fd8cc8ab4f70ee326223"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/timezone.md"
@@ -43,7 +43,7 @@ If `userTimezone` is unset, OpenClaw resolves the host timezone at runtime (no c
 
 - **Use UTC envelopes** (`envelopeTimezone: "utc"`) when you want stable timestamps across hosts in different regions, or when you want UTC-aligned logs to match diagnostics output.
 - **Use a fixed IANA zone** (e.g. `"Europe/Vienna"`) when the gateway host is in one zone but the user is in another and you want envelopes to read in the user's zone regardless of host migration.
-- **Set `envelopeTimestamp: "off"`** for low-token envelopes when timestamp context is not useful for the conversation.
+- **Set `envelopeTimestamp: "off"`** when timestamp context is not useful for the conversation. This removes absolute timestamps from envelopes, direct agent prompt prefixes, and embedded model-input prefixes.
 
 For the full behavior reference, examples per provider, and elapsed-time formatting, see [Date & Time](/date-time).
 

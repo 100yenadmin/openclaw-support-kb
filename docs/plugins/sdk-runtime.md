@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "08cfcf67fde5ff9b9d12ef9366f170e78151481ce9fe5a8b2a47d4f00cececfb"
+source_hash: "95c769ff13ee027f3c4e8a821b34ccbc63a7589f8ca6edc6d780fc3c0899e434"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -512,6 +512,13 @@ api.runtime.system
     const output = await api.runtime.system.runCommandWithTimeout(cmd, args, opts);
     const hint = api.runtime.system.formatNativeDependencyHint(pkg);
     ```
+
+    `runCommandWithTimeout(...)` returns captured `stdout` and `stderr`, optional
+    truncation counts, `code`, `signal`, `killed`, `termination`, and
+    `noOutputTimedOut`. Timeout and no-output-timeout results report `code: 124`
+    when the child process does not provide a non-zero exit code. Non-timeout
+    signal exits can still return `code: null`, so use `termination` and
+    `noOutputTimedOut` to distinguish timeout reasons.
 
 
 

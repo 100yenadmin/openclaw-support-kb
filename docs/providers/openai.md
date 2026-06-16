@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "c03913f161ad6449470af34b3cead520936e93387c2e608cf5b946252ca0400f"
+source_hash: "4cf84c715a62f8a78cbdd63647d0e936b01d5f94739b9fc76ea0889ca5b83a91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -1125,10 +1125,11 @@ Strict-agentic GPT mode
     ```
 
     With `strict-agentic`, OpenClaw:
-    - No longer treats a plan-only turn as successful progress when a tool action is available
-    - Retries the turn with an act-now steer
     - Auto-enables `update_plan` for substantial work
-    - Surfaces an explicit blocked state if the model keeps planning without acting
+    - Retries structurally empty or reasoning-only turns with a visible-answer continuation
+    - Uses explicit harness plan events when the selected harness provides them
+
+    OpenClaw does not classify assistant prose to decide whether a turn is a plan, progress update, or final answer.
 
 
 Note

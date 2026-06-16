@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "c704c1a341d62df18816a5b9c61e75ac512b9f0f8354e792b453ad57044d0c30"
+source_hash: "9e13309e54f45c9e097d841fa252b71f7545191a85a24bdac7b8ead778e879b8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/onboard.md"
@@ -201,7 +201,10 @@ Interactive onboarding behavior with reference mode:
 
 Note
 
-`--auth-choice zai-api-key` auto-detects the best Z.AI endpoint for your key (prefers the general API with `zai/glm-5.1`). If you specifically want the GLM Coding Plan endpoints, pick `zai-coding-global` or `zai-coding-cn`.
+`--auth-choice zai-api-key` auto-detects the best Z.AI endpoint and model for
+your key. Coding Plan endpoints prefer `zai/glm-5.2`; general API endpoints use
+`zai/glm-5.1`. To force a Coding Plan endpoint, pick `zai-coding-global` or
+`zai-coding-cn`.
 
 ```bash
 # Promptless endpoint selection

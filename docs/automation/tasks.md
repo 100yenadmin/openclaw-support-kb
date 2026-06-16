@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "f8a29f79231e038f7b2feb5f6c827771726339a323a6ed9a50b653b110de1455"
+source_hash: "7516303226981946be49a6d97b82fbf0bc9d194aeac27da67d049f3d6ceab812"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -346,7 +346,9 @@ $OPENCLAW_STATE_DIR/tasks/runs.sqlite
 
 The registry loads into memory at gateway start and syncs writes to SQLite for durability across restarts.
 The Gateway keeps the SQLite write-ahead log bounded by using SQLite's default
-autocheckpoint threshold plus periodic and shutdown `TRUNCATE` checkpoints.
+autocheckpoint threshold plus periodic `PASSIVE` checkpoints. Shutdown and
+explicit maintenance checkpoints still use `TRUNCATE` so normal closes can
+reclaim WAL space without making the background sweeper wait on active readers.
 
 ### Automatic maintenance
 
@@ -410,7 +412,7 @@ Tasks and heartbeat
 
 Tasks and sessions
 
-    A task may reference a `childSessionKey` (where work runs) and a `requesterSessionKey` (who started it). Sessions are conversation context; tasks are activity tracking on top of that.
+    A task may reference a `childSessionKey` (where work runs) and a `requesterSessionKey` (who started it). Its `agentId` identifies the agent executing the work, while the requester and owner fields preserve launch and control context. Sessions are conversation context; tasks are activity tracking on top of that.
 
 
 Tasks and agent runs

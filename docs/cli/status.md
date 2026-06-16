@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "6651d46935d8e63317361709c6a39833e02664b6f505986871982707347fbbca"
+source_hash: "e7c069b0a624ea1528f4ffea78af21245739de7b151eed6ec6afca6db3a9380a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -33,7 +33,7 @@ Notes:
 - When the current session snapshot is sparse, `/status` can backfill token and cache counters from the most recent transcript usage log. Existing nonzero live values still win over transcript fallback values.
 - `/status` includes compact Gateway process uptime and host system uptime.
 - Transcript fallback can also recover the active runtime model label when the live session entry is missing it. If that transcript model differs from the selected model, status resolves the context window against the recovered runtime model instead of the selected one.
-- When a session is pinned to a model that differs from the configured primary, status prints both values, the reason (`session override`), and the clear hint (`/model <configured-default>` or `/reset`). The configured primary applies to new or unpinned sessions; existing pinned sessions keep their session selection until cleared.
+- When a session is pinned to a model that differs from the configured primary, status prints both values, the reason (`session override`), and the clear hint (`/model default`). The configured primary applies to new or unpinned sessions; existing pinned sessions keep their session selection until cleared.
 - For prompt-size accounting, transcript fallback prefers the larger prompt-oriented total when session metadata is missing or smaller, so custom-provider sessions do not collapse to `0` token displays.
 - Output includes per-agent session stores when multiple agents are configured.
 - Overview includes Gateway + node host service install/runtime status when available.

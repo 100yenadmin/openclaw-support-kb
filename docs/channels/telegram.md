@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "9c8fdbe789fda38ebbb81a6c8b5a49235e702bb770eaba21aee8ebca1022c149"
+source_hash: "caf96289c979c2c376b708c01d362702da089ddb092bc2530d3888c9f5fe77ec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -137,6 +137,10 @@ Helpful BotFather toggles
 
 
 ## Access control and activation
+
+### Group bot identity
+
+In Telegram groups and forum topics, an explicit mention of the configured bot handle (for example `@my_bot`) is treated as addressing the selected OpenClaw agent, even when the agent persona name differs from the Telegram username. The group silence policy still applies to unrelated group traffic, but the bot handle itself is not considered "someone else."
 
 Tabs
 
@@ -316,6 +320,23 @@ Mention behavior
 }
 ```
 
+    Group history context defaults to `mention-only`: prior group messages are
+    included only when they were addressed to the bot, are replies to the bot,
+    or are the bot's own messages. Set `includeGroupHistoryContext: "recent"` to
+    include recent room history for trusted groups. Set
+    `includeGroupHistoryContext: "none"` to send no prior Telegram group history
+    with the next turn.
+
+```json5
+{
+  channels: {
+    telegram: {
+      includeGroupHistoryContext: "recent",
+    },
+  },
+}
+```
+
     Getting the group chat ID:
 
     - forward a group message to `@userinfobot` / `@getidsbot`
@@ -353,7 +374,6 @@ Live stream preview (message edits)
 
     - direct chats: preview message + `editMessageText`
     - groups/topics: preview message + `editMessageText`
-    - direct-chat tool progress: optional native `sendMessageDraft` status preview when enabled and supported
 
     Requirement:
 
@@ -362,28 +382,9 @@ Live stream preview (message edits)
     - `streaming.preview.toolProgress` controls whether tool/progress updates reuse the same edited preview message (default: `true` when preview streaming is active)
     - `streaming.preview.commandText` controls command/exec detail inside those tool-progress lines: `raw` (default, preserves released behavior) or `status` (tool label only)
     - `streaming.progress.commentary` (default: `false`) opts into assistant commentary/preamble text in the temporary progress draft
-    - legacy `channels.telegram.streamMode` and boolean `streaming` values are detected; run `openclaw doctor --fix` to migrate them to `channels.telegram.streaming.mode`
+    - legacy `channels.telegram.streamMode`, boolean `streaming` values, and retired native draft preview keys are detected; run `openclaw doctor --fix` to migrate them to current streaming config
 
     Tool-progress preview updates are the short status lines shown while tools run, for example command execution, file reads, planning updates, patch summaries, or Codex preamble/commentary text in Codex app-server mode. Telegram keeps these enabled by default to match released OpenClaw behavior from `v2026.4.22` and later.
-
-    Direct chats can use native Telegram drafts for these tool-progress lines without persisting tool chatter into chat history. Native drafts stop before answer text starts; final answers stay on the normal persistent delivery path. This lane is off by default and should be gated to trusted DM IDs first:
-
-    ```json
-    {
-      "channels": {
-        "telegram": {
-          "streaming": {
-            "mode": "partial",
-            "preview": {
-              "toolProgress": true,
-              "nativeToolProgress": true,
-              "nativeToolProgressAllowFrom": ["123456789"]
-            }
-          }
-        }
-      }
-    }
-    ```
 
     To keep the edited preview for answer text but hide tool-progress lines, set:
 
@@ -465,15 +466,31 @@ Note
 
 
 
-Formatting and HTML fallback
+Rich message formatting
 
-    Outbound text uses Telegram `parse_mode: "HTML"`.
+    Outbound text uses standard Telegram HTML messages by default so replies remain readable across current Telegram clients.
 
-    - Markdown-ish text is rendered to Telegram-safe HTML.
-    - Supported Telegram HTML tags are preserved; unsupported HTML is escaped.
-    - If Telegram rejects parsed HTML, OpenClaw retries as plain text.
+    Set `channels.telegram.richMessages: true` to opt into Bot API 10.1 rich messages:
 
-    Link previews are enabled by default and can be disabled with `channels.telegram.linkPreview: false`.
+```json5
+{
+  channels: {
+    telegram: {
+      richMessages: true,
+    },
+  },
+}
+```
+
+    - Markdown text is rendered through OpenClaw's Markdown IR and sent as Telegram rich HTML.
+    - Explicit rich HTML payloads preserve supported Bot API 10.1 tags such as headings, tables, details, rich media, and formulas.
+    - Media captions still use Telegram HTML captions because rich messages do not replace captions.
+
+    This keeps model text away from Telegram Rich Markdown sigils, so currency like `$400-600K` is not parsed as math. Long rich text is split automatically across Telegram's rich text and rich block limits. Tables over Telegram's column limit are sent as code blocks.
+
+    Rich messages require compatible Telegram clients. Some current Desktop, Web, Android, and third-party clients display accepted rich messages as unsupported, so keep this option disabled unless every client used with the bot can render them.
+
+    Link previews are enabled by default. `channels.telegram.linkPreview: false` skips automatic entity detection for rich text.
 
 
 
@@ -1164,7 +1181,7 @@ High-signal Telegram fields
 - command/menu: `commands.native`, `commands.nativeSkills`, `customCommands`
 - threading/replies: `replyToMode`
 - streaming: `streaming` (preview), `streaming.preview.toolProgress`, `blockStreaming`
-- formatting/delivery: `textChunkLimit`, `chunkMode`, `linkPreview`, `responsePrefix`
+- formatting/delivery: `textChunkLimit`, `chunkMode`, `richMessages`, `linkPreview`, `responsePrefix`
 - media/network: `mediaMaxMb`, `mediaGroupFlushMs`, `timeoutSeconds`, `pollingStallThresholdMs`, `retry`, `network.autoSelectFamily`, `network.dangerouslyAllowPrivateNetwork`, `proxy`
 - custom API root: `apiRoot` (Bot API root only; do not include `/bot
 TOKEN

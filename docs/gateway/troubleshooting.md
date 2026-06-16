@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "5b48784bdc3308c22b1b0b027afec7f4c9cfcd4470c4b5063373ae38298d839e"
+source_hash: "0b9a2f414874e6b831112420f0fe0870bf30ae180da9fa985f6c90ba1cab35f9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -165,6 +165,10 @@ gateway if the running process predates the config change.
 Do not use broad targets such as `~`, `/`, or a whole synced project folder.
 Keep `allowSymlinkTargets` scoped to the real skill root that contains trusted
 `SKILL.md` directories.
+
+If Skill Workshop apply should also write through those trusted symlinked
+workspace skill paths, enable `skills.workshop.allowSymlinkTargetWrites`. Keep
+it disabled for read-only shared skill roots.
 
 Related:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building CLI backend plugins"
 source: "https://docs.openclaw.ai/plugins/cli-backend-plugins"
-source_hash: "6cac163b255eda9bdd2f1e2abeff6be3d602bed1a56f3015d4f9662c8dbb81eb"
+source_hash: "fd26d4ccf0f1391858dceaa6a98fdb9103903ddf736c711ac8ded048bca1eafb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/cli-backend-plugins.md"
@@ -208,21 +208,29 @@ only for behavior that really belongs to the backend.
 
 `CliBackendPlugin` can also define:
 
-| Hook                               | Use                                                    |
-| ---------------------------------- | ------------------------------------------------------ |
-| `normalizeConfig(config, context)` | Rewrite legacy user config after merge                 |
-| `resolveExecutionArgs(ctx)`        | Add request-scoped flags such as thinking effort       |
-| `prepareExecution(ctx)`            | Create temporary auth or config bridges before launch  |
-| `transformSystemPrompt(ctx)`       | Apply a final CLI-specific system prompt transform     |
-| `textTransforms`                   | Bidirectional prompt/output replacements               |
-| `defaultAuthProfileId`             | Prefer a specific OpenClaw auth profile                |
-| `authEpochMode`                    | Decide how auth changes invalidate stored CLI sessions |
-| `nativeToolMode`                   | Declare whether the CLI has always-on native tools     |
-| `bundleMcp` / `bundleMcpMode`      | Opt into OpenClaw's loopback MCP tool bridge           |
-| `ownsNativeCompaction`             | Backend owns its own compaction - OpenClaw defers      |
+| Hook                               | Use                                                                         |
+| ---------------------------------- | --------------------------------------------------------------------------- |
+| `normalizeConfig(config, context)` | Rewrite legacy user config after merge                                      |
+| `resolveExecutionArgs(ctx)`        | Add request-scoped flags such as thinking effort or side-question isolation |
+| `prepareExecution(ctx)`            | Create temporary auth or config bridges before launch                       |
+| `transformSystemPrompt(ctx)`       | Apply a final CLI-specific system prompt transform                          |
+| `textTransforms`                   | Bidirectional prompt/output replacements                                    |
+| `defaultAuthProfileId`             | Prefer a specific OpenClaw auth profile                                     |
+| `authEpochMode`                    | Decide how auth changes invalidate stored CLI sessions                      |
+| `nativeToolMode`                   | Declare whether the CLI has always-on native tools                          |
+| `sideQuestionToolMode`             | Declare disabled native tools for `/btw` side questions                     |
+| `bundleMcp` / `bundleMcpMode`      | Opt into OpenClaw's loopback MCP tool bridge                                |
+| `ownsNativeCompaction`             | Backend owns its own compaction - OpenClaw defers                           |
 
 Keep these hooks provider-owned. Do not add CLI-specific branches to core when a
 backend hook can express the behavior.
+
+`ctx.executionMode` is `"agent"` for normal turns and `"side-question"` for
+ephemeral `/btw` calls. Use it when the CLI needs different one-shot flags, such
+as disabling native tools, session persistence, or resume behavior for BTW. If a
+backend normally has `nativeToolMode: "always-on"` but its side-question argv
+reliably disables those tools, also set `sideQuestionToolMode: "disabled"`;
+otherwise OpenClaw fails closed when BTW requires a no-tools CLI run.
 
 ### `ownsNativeCompaction`: opting out of OpenClaw compaction
 

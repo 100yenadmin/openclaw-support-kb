@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS app"
 source: "https://docs.openclaw.ai/platforms/macos"
-source_hash: "d12daf4960f4b5482fa2e53182d9cd6095b48dde63345f27aaf42832cbafc396"
+source_hash: "4101b7d6d84198cb99526893ef56dddd9ee0bca9057b16d42d71076820de1c51"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/macos.md"
@@ -116,7 +116,7 @@ Notes:
 - Choosing "Always Allow" in the prompt adds that command to the allowlist.
 - `system.run` environment overrides are filtered (drops `PATH`, `DYLD_*`, `LD_*`, `BASHOPTS`, `FPATH`, `KSH_ENV`, `NODE_OPTIONS`, `NODE_REDIRECT_WARNINGS`, `NODE_REPL_EXTERNAL_MODULE`, `NODE_REPL_HISTORY`, `NODE_V8_COVERAGE`, `PYTHON*`, `PERL*`, `RUBYOPT`, `SHELLOPTS`, `PS4`, `TCLLIBPATH`) and then merged with the app's environment.
 - For shell wrappers (`bash|sh|zsh ... -c/-lc`), request-scoped environment overrides are reduced to a small explicit allowlist (`TERM`, `LANG`, `LC_*`, `COLORTERM`, `NO_COLOR`, `FORCE_COLOR`).
-- For allow-always decisions in allowlist mode, known dispatch wrappers (`env`, `nice`, `nohup`, `stdbuf`, `timeout`) persist inner executable paths instead of wrapper paths. If unwrapping is not safe, no allowlist entry is persisted automatically.
+- For allow-always decisions in allowlist mode, known dispatch wrappers (`env`, `flock`, `nice`, `nohup`, `stdbuf`, `timeout`) persist inner executable paths instead of wrapper paths. If unwrapping is not safe, no allowlist entry is persisted automatically.
 
 ## Deep links
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "7c2c20895aa3545631d5485e775bdb13cc516bf3cd4605dec94db1273b00cde4"
+source_hash: "f154b14e38c393598296bc25b05fcaabd01be543e95c20a17782d653e5701333"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-channels.md"
@@ -135,6 +135,8 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
   },
 }
 ```
+
+- Top-level `bindings[]` entries with `type: "acp"` configure persistent ACP bindings for WhatsApp DMs and groups. Use an E.164 direct number or WhatsApp group JID in `match.peer.id`. Field semantics are shared in [ACP Agents](/tools/acp-agents#persistent-channel-bindings).
 
 Multi-account WhatsApp
 

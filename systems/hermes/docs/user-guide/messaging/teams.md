@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Teams"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams"
-source_hash: "a5cbd31e1f8bb244a312de2ab7bbd9621a192ffbceb82ecb439380be7abfe58f"
+source_hash: "c7888670c8a49c76a6954f7250b708f5970e30754e0c1deba63bedbfdd9a9328"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/teams.md"
@@ -36,6 +36,15 @@ Need meeting summaries from Microsoft Graph events rather than normal bot conver
 Teams delivers @mentions as regular messages with `<at>BotName</at>` tags, which Hermes strips automatically before processing.
 
 ---
+
+For source or local installs, include the Teams extra so the bundled adapter can
+import the Microsoft Teams SDK:
+
+```bash
+uv sync --extra teams
+# or, for editable installs:
+uv pip install -e ".[teams]"
+```
 
 ## Step 1: Install the Teams CLI
 

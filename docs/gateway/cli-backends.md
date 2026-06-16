@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "8caf9e47bd8a85ab727b0f79291d7c5eedd105e3af07ac7ded7eb8f461ba2fc2"
+source_hash: "438bab229b5007fb03ee9d178ba0585ed42ea84183b427294606516c84d75578"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/cli-backends.md"
@@ -41,8 +41,11 @@ You can use Claude Code CLI **without any config** (the bundled Anthropic plugin
 registers a default backend):
 
 ```bash
-openclaw agent --message "hi" --model claude-cli/claude-sonnet-4-6
+openclaw agent --agent main --message "hi" --model claude-cli/claude-sonnet-4-6
 ```
+
+`main` is the default agent id when no explicit agent list is configured. If
+you use multiple agents, replace it with the agent id you want to run.
 
 If your gateway runs under launchd/systemd and PATH is minimal, add just the
 command path:

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Date and time"
 source: "https://docs.openclaw.ai/date-time"
-source_hash: "f00e0d84f5a0e4dca069efdbeab01f5fabaa4c82833b68ad026f96d4ef7d45aa"
+source_hash: "677806ad7d579ebbea87c7af06130459a2c57edc4383d982e274703704711f52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "date-time.md"
@@ -44,7 +44,7 @@ You can override this behavior:
 - `envelopeTimezone: "local"` uses the host timezone.
 - `envelopeTimezone: "user"` uses `agents.defaults.userTimezone` (falls back to host timezone).
 - Use an explicit IANA timezone (e.g., `"America/Chicago"`) for a fixed zone.
-- `envelopeTimestamp: "off"` removes absolute timestamps from envelope headers.
+- `envelopeTimestamp: "off"` removes absolute timestamps from envelope headers, direct agent prompt prefixes, and embedded model-input prefixes.
 - `envelopeElapsed: "off"` removes elapsed time suffixes (the `+2m` style).
 
 ### Examples

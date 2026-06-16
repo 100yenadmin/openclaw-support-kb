@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BTW side questions"
 source: "https://docs.openclaw.ai/tools/btw"
-source_hash: "b17503eb3cfbf9003e500ffcb23ac63724db4c907c8c52ccbd0d471a2809f031"
+source_hash: "d8c582277803c85ec901e5284732e6de1ac03fc165bddcee64df2128f8b5cf86"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/btw.md"
@@ -49,8 +49,14 @@ app-server thread as an ephemeral side thread. That keeps Codex OAuth and native
 thread behavior intact while still isolating the side answer from the parent
 transcript. Like Codex `/side`, the side thread keeps the current Codex
 permissions and native tool surface, with guardrails that tell the model not to
-treat inherited parent-thread work as active instructions. Non-Codex runtimes
-keep the older direct one-shot path.
+treat inherited parent-thread work as active instructions.
+
+For CLI runtime aliases, BTW uses the owning CLI backend in side-question mode
+instead of falling back to a direct provider call. OpenClaw seeds sanitized
+conversation context into a fresh one-shot CLI invocation, disables OpenClaw MCP
+tool bundling and reusable CLI session state for that invocation, and lets the
+backend add any CLI-native no-resume or no-tools flags it supports. Direct
+non-CLI runtimes keep the direct one-shot path.
 
 ## What it does not do
 

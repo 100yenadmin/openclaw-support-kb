@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "92db7b9d897db665395ad622298aa517ece91d6478cc9bae6399bb84ba785385"
+source_hash: "c182d2419de03c3a806f00501556bb8301dc9c0ce41029be46ada008588e40a1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -23,7 +23,7 @@ Get Hermes Agent up and running in under two minutes!
 
 ## Quick Install
 ### With the Hermes Desktop installer on macOS or Windows (recommended)
-To easily install the command-line and desktop applications, [download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/desktop) from our website and run it.
+To easily install the command-line and desktop applications, [download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/) from our website and run it.
 
 ### Without Hermes Desktop:
 For a command-line only install without Hermes Desktop, run:

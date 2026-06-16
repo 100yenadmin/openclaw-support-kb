@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QMD memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-qmd"
-source_hash: "8fbda62ba8594ee7662b8bed5a2e0d4703f7f9fd15579a3749069405fa1b7dae"
+source_hash: "7bd7baa1dd260032abfb30b0547eb344b398de1da01689e07c85d37fa95e9a3c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-qmd.md"
@@ -69,10 +69,12 @@ present.
   `build`. Gateway startup does not initialize QMD by default, so cold boot
   avoids importing the memory runtime or creating the long-lived watcher before
   memory is first used.
-- If you want a gateway-start refresh anyway, set
-  `memory.qmd.update.startup` to `idle` or `immediate`. The opt-in startup
-  refresh uses a one-shot QMD subprocess path instead of creating the full
-  long-lived in-process watcher.
+- If you want QMD initialized at gateway start anyway, set
+  `memory.qmd.update.startup` to `idle` or `immediate`. With
+  `memory.qmd.update.onBoot: true`, startup runs the initial refresh. With
+  `onBoot: false`, startup skips that immediate refresh but still opens the
+  long-lived manager when update or embed intervals are configured, so QMD can
+  own its regular watcher and timers.
 - Searches use the configured `searchMode` (default: `search`; also supports
   `vsearch` and `query`). `search` is BM25-only, so OpenClaw skips semantic
   vector readiness probes and embedding maintenance in that mode. If a mode

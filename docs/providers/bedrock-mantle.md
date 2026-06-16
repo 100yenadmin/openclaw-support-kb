@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock Mantle"
 source: "https://docs.openclaw.ai/providers/bedrock-mantle"
-source_hash: "8ebbef29d7f3edc23191a1cc3ba30792e32025db7219b1983bf3431d9c460698"
+source_hash: "6f71e7d7793d7bff81b26a02842a2a1fd669e58a2757a89de78c7bdaf05639e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock-mantle.md"
@@ -51,6 +51,21 @@ Set the bearer token on the gateway host
         ```bash
         export AWS_REGION="us-west-2"
         ```
+
+
+Opt in to provider data sharing for Claude Fable 5
+
+        Claude Fable 5 and Claude Mythos-class Bedrock models require the Mantle Data Retention API mode `provider_data_share` before invocation. This opt-in allows Bedrock to share prompts and completions with Anthropic and retain them for up to 30 days for trust and safety review.
+
+        ```bash
+        AWS_REGION="${AWS_REGION:-us-east-1}"
+        curl -X PUT "https://bedrock-mantle.${AWS_REGION}.api.aws/v1/data_retention" \
+          -H "Authorization: Bearer $AWS_BEARER_TOKEN_BEDROCK" \
+          -H "Content-Type: application/json" \
+          -d '{ "mode": "provider_data_share" }'
+        ```
+
+        Use another Bedrock model in the config if you cannot accept that retention mode.
 
 
 Verify models are discovered

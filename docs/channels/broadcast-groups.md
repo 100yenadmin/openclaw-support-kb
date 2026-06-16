@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Broadcast groups"
 source: "https://docs.openclaw.ai/channels/broadcast-groups"
-source_hash: "a371f6ef64394a34d960a5d856f22c341c16f7406b0826562c5b3a18d2364aa6"
+source_hash: "169e4aac762fc14d185a5ff2b6f5d3d14391a17227aefc9af99e593a3ed627a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/broadcast-groups.md"
@@ -182,12 +182,17 @@ Incoming message arrives
     A WhatsApp group or DM message arrives.
 
 
+Route and admission
+
+    OpenClaw applies channel allowlists, group activation rules, and configured ACP binding ownership.
+
+
 Broadcast check
 
-    System checks if peer ID is in `broadcast`.
+    If no configured ACP binding owns the route, OpenClaw checks whether the peer ID is in `broadcast`.
 
 
-If in broadcast list
+If broadcast applies
 
     - All listed agents process the message.
     - Each agent has its own session key and isolated context.
@@ -195,9 +200,9 @@ If in broadcast list
 
 
 
-If not in broadcast list
+If broadcast does not apply
 
-    Normal routing applies (first matching binding).
+    OpenClaw dispatches the ordinary route or the configured ACP session route selected during routing.
 
 
 Note
@@ -362,7 +367,7 @@ Broadcast groups work alongside existing routing:
 
 Note
 
-**Precedence:** `broadcast` takes priority over `bindings`.
+**Precedence:** `broadcast` takes priority over ordinary route bindings. Configured ACP bindings (`bindings[].type="acp"`) are exclusive: when one matches, OpenClaw dispatches to the configured ACP session instead of fan-out broadcast.
 
 ## Troubleshooting
 
@@ -387,9 +392,9 @@ Agents not responding
 
 Only one agent responding
 
-    **Cause:** Peer ID might be in `bindings` but not `broadcast`.
+    **Cause:** Peer ID might be in ordinary route bindings but not `broadcast`, or it might match an exclusive configured ACP binding.
 
-    **Fix:** Add to broadcast config or remove from bindings.
+    **Fix:** Add ordinary route-bound peers to broadcast config, or remove/change the configured ACP binding if fan-out broadcast is desired.
 
 
 

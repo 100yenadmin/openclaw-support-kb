@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "2eb11a735268648806fa00f28107bf65fa0a1ffbb211dc36c5ed8cc702f6703b"
+source_hash: "d9c0485b8858f31acefd8fede3b3da13c28f7af3e8cc1ece9ec1db708e08dae3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/node.md"
@@ -169,7 +169,8 @@ The node host stores its node id, token, display name, and gateway connection in
 
 `system.run` is gated by local exec approvals:
 
-- `~/.openclaw/exec-approvals.json`
+- `$OPENCLAW_STATE_DIR/exec-approvals.json`, or
+  `~/.openclaw/exec-approvals.json` when the variable is unset
 - [Exec approvals](/tools/exec-approvals)
 - `openclaw approvals --node <id|name|ip>` (edit from the Gateway)
 

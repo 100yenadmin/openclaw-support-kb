@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "2a3b1255d30e9a6076caaa2bee07ec1fde33c9e90ef397f632b68f1b74dad2e2"
+source_hash: "dfcd0932af5394c2eba50fb33db8d177f2098e94e6b43b5b6dfe91115145ecb6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -430,7 +430,9 @@ This is essential for public bots where you want each user to have their own pri
 
 Note
 
-**Account limitation**: `dynamicAgentCreation` currently works with the **default Feishu account only**. Named/multi-account setups are not yet fully supported — dynamic bindings are created without `accountId`, so messages to named accounts may still route to `agent:main`. Track progress in [Issue #42837](https://github.com/openclaw/openclaw/issues/42837).
+Dynamic bindings include the normalized Feishu `accountId`, so default and named accounts route each sender to the correct dynamic agent.
+
+If a named account created an unscoped dynamic agent on an older release, that legacy agent still counts toward `maxAgents`. Confirm that it is not used by the default account before removing it, or temporarily increase `maxAgents`; OpenClaw cannot safely infer which account owns ambiguous legacy state.
 
 ### Quick setup
 
@@ -460,7 +462,7 @@ Note
 
 When a new user sends their first DM:
 
-1. The channel generates a unique `agentId` = `feishu-{user_open_id}`
+1. The channel generates a unique `agentId`: `feishu-{user_open_id}` for the default account, or a bounded account-prefixed identity digest for a named account
 2. Creates a new workspace at `workspaceTemplate` path
 3. Registers the agent and creates a binding for this user
 4. The workspace helper ensures bootstrap files (`AGENTS.md`, `SOUL.md`, `USER.md`, etc.) on first access
@@ -477,23 +479,24 @@ When a new user sends their first DM:
 
 Template variables:
 
-- `{agentId}` - the generated agent ID (e.g., `feishu-ou_xxxxxx`)
+- `{agentId}` - the generated agent ID (e.g., `feishu-ou_xxxxxx` or `feishu-support-<identity_digest>`)
 - `{userId}` - the sender's Feishu open_id (e.g., `ou_xxxxxx`)
 
 ### Session scope
 
 `session.dmScope` controls how direct messages are mapped to agent sessions. This is a **global setting** that affects all channels.
 
-| Value                | Behavior                                                  | Best for                                                           |
-| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
-| `"main"`             | Each user's DM maps to their agent's main session         | Single-user bots where you want `USER.md` / `SOUL.md` to auto-load |
-| `"per-channel-peer"` | Each (channel + user) combination gets a separate session | Public multi-user bots needing stronger isolation                  |
+| Value                        | Behavior                                                            | Best for                                                           |
+| ---------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `"main"`                     | Each user's DM maps to their agent's main session                   | Single-user bots where you want `USER.md` / `SOUL.md` to auto-load |
+| `"per-channel-peer"`         | Each (channel + user) combination gets a separate session           | Public multi-user bots needing stronger isolation                  |
+| `"per-account-channel-peer"` | Each (account + channel + user) combination gets a separate session | Multi-account bots needing account-level session isolation         |
 
 **Tradeoff**: Using `"main"` enables automatic bootstrap file loading (`USER.md`, `SOUL.md`, `MEMORY.md`), but means all DMs across all channels share the same session key pattern. For public multi-user bots where isolation matters more than bootstrap auto-loading, consider `"per-channel-peer"` and manage bootstrap files manually.
 
 Note
 
-`"per-account-channel-peer"` is not recommended with `dynamicAgentCreation` because dynamic bindings are created without `accountId`. Use it only with manual bindings.
+Use `"per-account-channel-peer"` when named Feishu accounts should keep separate sessions for the same sender. Dynamic bindings preserve the account scope.
 
 ```json5
 {

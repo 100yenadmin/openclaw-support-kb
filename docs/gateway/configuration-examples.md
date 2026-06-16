@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "31d2680dc74f05fdd5c4b250c460d8786e36417f9c733b2825c283fdd3893ed9"
+source_hash: "16be64fc24d6f0795f51a947ccc62d734f82f4f509c5950748648375a1714fe0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -499,6 +499,8 @@ example `~/.agents/skills/manager -> ~/Projects/manager/skills`.
 - `extraDirs` scans the sibling repo as an explicit skill root.
 - `allowSymlinkTargets` lets symlinked skill folders resolve into that trusted
   real target root without allowing arbitrary symlink escapes.
+- To let Skill Workshop apply write through the same trusted symlink target,
+  set `skills.workshop.allowSymlinkTargetWrites: true`.
 
 ## Common patterns
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice wake (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/voicewake"
-source_hash: "5f66774af2befc816e9902ce434bb139dd36f8d070ead66d54a133489aa83c1e"
+source_hash: "8d0d325f5237cda657596d23fe94cc706110e8cb3808ca75a7fe9892e95ac258"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/voicewake.md"
@@ -14,6 +14,12 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/platforms/mac/voicewake
 
 # Voice Wake & Push-to-Talk
+
+## Requirements
+
+Voice Wake and push-to-talk require macOS 26 or newer. On older macOS versions,
+the controls are hidden from the Voice settings page, which shows the macOS 26
+requirement.
 
 ## Modes
 
@@ -55,7 +61,7 @@ Hardening:
 ## User-facing settings
 
 - **Voice Wake** toggle: enables wake-word runtime.
-- **Hold Cmd+Fn to talk**: enables the push-to-talk monitor. Disabled on macOS < 26.
+- **Hold Right Option to talk**: enables the push-to-talk monitor.
 - Language & mic pickers, live level meter, trigger-word table, tester (local-only; does not forward).
 - Mic picker preserves the last selection if a device disconnects, shows a disconnected hint, and temporarily falls back to the system default until it returns.
 - **Sounds**: chimes on trigger detect and on send; defaults to the macOS "Glass" system sound. You can pick any `NSSound`-loadable file (e.g. MP3/WAV/AIFF) for each event or choose **No Sound**.
@@ -71,7 +77,7 @@ Hardening:
 
 ## Quick verification
 
-- Toggle push-to-talk on, hold Cmd+Fn, speak, release: overlay should show partials then send.
+- Toggle push-to-talk on, hold Right Option, speak, release: overlay should show partials then send.
 - While holding, menu-bar ears should stay enlarged (uses `triggerVoiceEars(ttl:nil)`); they drop after release.
 
 ## Related

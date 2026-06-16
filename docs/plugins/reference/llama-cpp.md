@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
-title: "llama-cpp plugin"
+title: "Llama Cpp plugin"
 source: "https://docs.openclaw.ai/plugins/reference/llama-cpp"
-source_hash: "ab148667774ec6687a299c4a5ef0cd069be45b49fc2e5331777874ad17018dd5"
+source_hash: "f1355d05ff5d316ad0a802e7b9390d7562fdf2b605d1adf6114735e4646670a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/llama-cpp.md"
@@ -10,12 +10,12 @@ original_doc_path: "plugins/reference/llama-cpp.md"
 duplicate_index: 1
 ---
 
-# llama-cpp plugin
+# Llama Cpp plugin
 Source: https://docs.openclaw.ai/plugins/reference/llama-cpp
 
-# llama-cpp plugin
+# Llama Cpp plugin
 
-OpenClaw llama.cpp embedding provider plugin.
+Local GGUF embeddings through node-llama-cpp.
 
 ## Distribution
 
@@ -28,6 +28,6 @@ contracts: embeddingProviders
 
 ## Related docs
 
-- [llama.cpp Provider](/plugins/llama-cpp)
+- [llama-cpp](/plugins/llama-cpp)
 
 ---

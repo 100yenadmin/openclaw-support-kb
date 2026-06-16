@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "b5e77b1a6d8f528304b773bb8de99cb615dc920f4b3411e19dcfc74b1bb53882"
+source_hash: "7727a95ebcf8b658bf34291b489896d85c9802a40f96b004bebc81d04be5fb05"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -183,8 +183,10 @@ Native harnesses that own their own protocol projection can use
 `openclaw/plugin-sdk/agent-harness-runtime` when a completed turn produced no
 visible assistant text. The helper returns `empty`, `reasoning-only`, or
 `planning-only` so OpenClaw's fallback policy can decide whether to retry on a
-different model. It intentionally leaves prompt errors, in-flight turns, and
-intentional silent replies such as `NO_REPLY` unclassified.
+different model. `planning-only` requires the harness's explicit `planText`
+field; OpenClaw does not infer it from assistant prose. The helper intentionally
+leaves prompt errors, in-flight turns, and intentional silent replies such as
+`NO_REPLY` unclassified.
 
 ### Native Codex harness mode
 

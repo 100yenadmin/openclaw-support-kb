@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "fcd4858b41cafa0db554c6bb63d1fe79ce91bb390bbd0b0977c0c3faead23b95"
+source_hash: "508dd6aab16976cb1e0924c5ed494da5aba7f7dfa6cba5dab2862dcc96f9fe90"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -257,6 +257,27 @@ Review staged writes from the CLI or any messaging platform:
 This is the answer to "the agent saved a wrong assumption about me": set
 `write_approval: true`, and every save — especially the unprompted background
 ones — waits for your yes/no before it ever enters your profile.
+
+## Background review notifications (`display.memory_notifications`)
+
+After a turn, the background self-improvement review may quietly save a memory
+or update a skill. By default it surfaces a short `💾 Memory updated` line in
+chat so you know it happened. Control how chatty that is:
+
+```yaml
+display:
+  memory_notifications: on    # off | on (default) | verbose
+```
+
+| Value | Behaviour |
+|-------|-----------|
+| `off` | No chat notification. The review still runs and still writes — you just don't see a line for it. |
+| `on` (default) | Generic line, e.g. `💾 Memory updated`, `💾 Skill 'foo' patched`. |
+| `verbose` | Includes a compact preview of what changed, e.g. `💾 Memory ➕ User prefers terse replies` or a `"old" → "new"` skill diff snippet. |
+
+> This only governs the **gateway** chat notification. The review itself, and
+> writes to your memory/skill stores, are unaffected by this setting. Set it
+> per-platform via `display.platforms.<platform>.memory_notifications`.
 
 ## Controlling skill writes (`skills.write_approval`)
 

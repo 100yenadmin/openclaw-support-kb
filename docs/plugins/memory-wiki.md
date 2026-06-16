@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "91ceb859c622f469a0173788998050014a81a540040c60e335648b50ac8e741f"
+source_hash: "73f5ac53474402065792948dd32297851dd438e0253702da3b121211ee08d8c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-wiki.md"
@@ -31,6 +31,7 @@ less like a pile of Markdown files.
 - Page-level provenance, confidence, contradictions, and open questions
 - Compiled digests for agent/runtime consumers
 - Wiki-native search/get/apply/lint tools
+- Open Knowledge Format imports into compiled wiki concepts
 - Optional bridge mode that imports public artifacts from the active memory plugin
 - Optional Obsidian-friendly render mode and CLI integration
 
@@ -140,6 +141,34 @@ The main page groups are:
 - `concepts/` for ideas, abstractions, patterns, and policies
 - `syntheses/` for compiled summaries and maintained rollups
 - `reports/` for generated dashboards
+
+## Open Knowledge Format imports
+
+`memory-wiki` can import unpacked Open Knowledge Format bundles with:
+
+```bash
+openclaw wiki okf import ./bundles/ga4
+```
+
+This is the cleanest fit when a data catalog, documentation crawler, or
+enrichment agent already produces OKF: keep OKF as the portable exchange
+artifact, then let `memory-wiki` turn it into OpenClaw-native concept pages and
+compiled digests.
+
+The importer follows the OKF v0.1 shape:
+
+- non-reserved `.md` files are concept documents
+- each imported concept needs a non-empty `type` frontmatter field
+- unknown OKF `type` values are accepted
+- reserved `index.md` and `log.md` files are not imported as concepts
+- broken or external markdown links are preserved
+
+Imported concept pages are flattened under `concepts/` so the existing compile,
+search, get, dashboard, and prompt-digest paths see them without adding a second
+wiki tree. Each page keeps the original OKF concept ID, source path, `type`,
+`resource`, `tags`, timestamp, and full producer frontmatter. Internal OKF links
+are rewritten to the generated wiki concept pages and also emitted as structured
+`relationships` entries with `kind: okf-link`.
 
 ## Structured claims and evidence
 

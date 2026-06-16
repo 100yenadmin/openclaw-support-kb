@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health checks"
 source: "https://docs.openclaw.ai/gateway/health"
-source_hash: "cc3dfa8ae4fb76a902666bfb6098534b77562ffc035b9637a69fa16d89f2e692"
+source_hash: "74b3d7fd9fbe30b64c4c3ba40f506b89a86d7a7b74415cab944a89959919523e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/health.md"
@@ -48,6 +48,21 @@ health commands above for live connectivity checks.
 - `channels.<provider>.healthMonitor.enabled`: disable health-monitor restarts for a specific channel while leaving global monitoring enabled.
 - `channels.<provider>.accounts.<accountId>.healthMonitor.enabled`: multi-account override that wins over the channel-level setting.
 - These per-channel overrides apply to the built-in channel monitors that expose them today: Discord, Google Chat, iMessage, Microsoft Teams, Signal, Slack, Telegram, and WhatsApp.
+
+## Uptime monitoring
+
+External uptime monitoring services should use the dedicated `/health` endpoint, not `/v1/chat/completions`.
+
+- **DO use:** `GET /health` — instant response, no session created, no LLM call, returns `{"ok":true,"status":"live"}`
+- **DON'T use:** `/v1/chat/completions` for health checks — each request creates a full agent session with skill snapshot, context assembly, and LLM calls
+
+When no `x-openclaw-session-key` header or `user` field is provided, `/v1/chat/completions` generates a new random session for each request. Monitoring services that ping every 15 minutes create ~96 sessions/day, each consuming 4–22KB. Over time this causes session store bloat and can lead to context window overflow.
+
+### Monitoring service setup examples
+
+- **BetterStack:** Set health check URL to `https://<your-gateway-host>:<port>/health`
+- **UptimeRobot:** Add a new HTTP monitor with URL `https://<your-gateway-host>:<port>/health`
+- **Generic:** Any HTTP GET to `/health` returns 200 with `{"ok":true}` when the gateway is healthy
 
 ## When something fails
 

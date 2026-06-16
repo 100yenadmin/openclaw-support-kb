@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Foundry plugin"
 source: "https://docs.openclaw.ai/plugins/reference/microsoft-foundry"
-source_hash: "f3766e417ca63ceee95f47d80b2b54eb9510a38537d2d76ef29e9bfd835fb7b2"
+source_hash: "82be4cf62b5749f6b6a2c1a1518b4de7bb4db3cc60315b047f752e48fcfa932d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/microsoft-foundry.md"
@@ -15,9 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/microsoft-foundry
 
 # Microsoft Foundry plugin
 
-Use Microsoft Foundry deployments from OpenClaw with API-key auth or Microsoft
-Entra ID through the Azure CLI. The plugin owns Microsoft Foundry model
-discovery, runtime token refresh, and MAI image generation.
+Adds Microsoft Foundry model provider support to OpenClaw.
 
 ## Distribution
 
@@ -26,7 +24,10 @@ discovery, runtime token refresh, and MAI image generation.
 
 ## Surface
 
-- Model provider: `microsoft-foundry`
+providers: microsoft-foundry; contracts: imageGenerationProviders
+
+<!-- openclaw-plugin-reference:manual-start -->
+
 - Image-generation provider: `microsoft-foundry`
 
 ## Requirements
@@ -58,7 +59,10 @@ chat APIs:
 Anthropic Claude deployments in Microsoft Foundry use the Anthropic Messages
 API shape, not the OpenAI-compatible `/openai/v1` shape. Configure those as a
 custom `anthropic-messages` provider until the Microsoft Foundry plugin grows a
-native Anthropic runtime.
+native Anthropic runtime. When the Foundry deployment name differs from the
+Claude model ID, set `params.canonicalModelId` on the model entry so OpenClaw
+can apply model-specific wire contracts, map `/think off` correctly, and
+preserve signed thinking safely.
 
 ## MAI image generation
 
@@ -113,5 +117,7 @@ MAI image constraints:
   Foundry deployment through onboarding or add `models.providers.microsoft-foundry.baseUrl`.
 - `supports MAI image deployments only`: the selected image model points at a
   non-MAI deployment. Use a deployed MAI image model for `image_generate`.
+
+<!-- openclaw-plugin-reference:manual-end -->
 
 ---

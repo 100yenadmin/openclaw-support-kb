@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "0abc4f0fd9dc808670fb03fc5c98004225caf7eb4ecff3eeeae81ff3b46904f2"
+source_hash: "087476b9e0efb087702dd425091778a6e9940aa5e4dcbf5ecb6c9002010cd181"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -190,7 +190,7 @@ WhatsApp Web-only channel scope
 
 - Gateway owns the WhatsApp socket and reconnect loop.
 - The reconnect watchdog uses WhatsApp Web transport activity, not only inbound app-message volume, so a quiet linked-device session is not restarted solely because nobody has sent a message recently. A longer application-silence cap still forces a reconnect if transport frames keep arriving but no application messages are handled for the watchdog window; after a transient reconnect for a recently active session, that application-silence check uses the normal message timeout for the first recovery window.
-- Baileys socket timings are explicit under `web.whatsapp.*`: `keepAliveIntervalMs` controls WhatsApp Web application pings, `connectTimeoutMs` controls the opening handshake timeout, and `defaultQueryTimeoutMs` controls Baileys query timeouts.
+- Baileys socket timings are explicit under `web.whatsapp.*`: `keepAliveIntervalMs` controls WhatsApp Web application pings, `connectTimeoutMs` controls the opening handshake timeout, and `defaultQueryTimeoutMs` controls Baileys query waits plus OpenClaw's local outbound send/presence operation bound.
 - Outbound sends require an active WhatsApp listener for the target account.
 - Group sends attach native mention metadata for `@+<digits>` and `@<digits>` tokens in text and media captions when the token matches current WhatsApp participant metadata, including LID-backed groups.
 - Status and broadcast chats are ignored (`@status`, `@broadcast`).
@@ -350,6 +350,40 @@ Mentions + /activation
     `activation` updates session state (not global config). It is owner-gated.
 
 
+
+## Configured ACP bindings
+
+WhatsApp supports persistent ACP bindings with top-level `bindings[]` entries:
+
+```json5
+{
+  bindings: [
+    {
+      type: "acp",
+      agentId: "codex",
+      match: {
+        channel: "whatsapp",
+        accountId: "work",
+        peer: { kind: "direct", id: "+15555550123" },
+      },
+    },
+    {
+      type: "acp",
+      agentId: "codex",
+      match: {
+        channel: "whatsapp",
+        accountId: "work",
+        peer: { kind: "group", id: "120363424282127706@g.us" },
+      },
+    },
+  ],
+}
+```
+
+- Direct chats match E.164 numbers such as `+15555550123`.
+- Groups match WhatsApp group JIDs such as `120363424282127706@g.us`.
+- Group allowlists, sender policy, and mention or activation gating run before OpenClaw ensures the configured ACP session exists.
+- A matched configured ACP binding owns the route. WhatsApp broadcast groups do not fan out that turn to ordinary WhatsApp sessions.
 
 ## Personal-number and self-chat behavior
 

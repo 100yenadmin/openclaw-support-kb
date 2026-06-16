@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "5f41be9efae58de57c2602149dcfbc7a9e6df43fdc98ea2f3ae2b52b48c79e59"
+source_hash: "2b32e517145d585e63580c6f16559e45a06d0cd0ac6f1075f970012c1d4a0798"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -203,7 +203,8 @@ Note
       dashboard session, except when `session.dmScope: "main"` is configured
       and the current parent is the agent's main session — in that case `/new`
       resets the main session in place. Typed `/reset` still runs the Gateway's
-      in-place reset.
+      in-place reset. Use `/model default` when you want to clear a pinned
+      session model selection.
 
 
 
@@ -258,7 +259,8 @@ Discovery and status
     | `/help` | Show the short help summary |
     | `/commands` | Show the generated command catalog |
     | `/tools [compact\|verbose]` | Show what the current agent can use right now |
-    | `/status` | Show execution/runtime status, Gateway and system uptime, plus provider usage/quota |
+    | `/status` | Show execution/runtime status, Gateway and system uptime, plugin health, plus provider usage/quota |
+    | `/status plugins` | Show detailed plugin health: load errors, quarantines, channel failures, dependency issues, compatibility notices |
     | `/goal [status\|start\|pause\|resume\|complete\|block\|clear] ...` | Manage the current session's durable [goal](/tools/goal) |
     | `/diagnostics [note]` | Owner-only support-report flow. Asks for exec approval every time |
     | `/crestodian <request>` | Run the Crestodian setup and repair helper from an owner DM |
@@ -397,6 +399,7 @@ use the Control UI Tools panel or config surfaces.
 /model 3           # select by number from picker
 /model openai/gpt-5.4
 /model opus@anthropic:default
+/model default     # clear the session model selection
 /model status      # detailed view with endpoint and API mode
 ```
 

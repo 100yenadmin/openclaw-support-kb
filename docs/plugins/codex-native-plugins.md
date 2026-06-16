@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Native Codex plugins"
 source: "https://docs.openclaw.ai/plugins/codex-native-plugins"
-source_hash: "4ee39f2610481457f03fe531ea69014504c3b8919d207b927692a34e192ff617"
+source_hash: "05a32b2103ede59406e070f72b08111c19a0b66f975384880a5e18a040d5b962"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-native-plugins.md"
@@ -206,11 +206,12 @@ enabled.
 
 OpenClaw sets app-level `destructive_enabled` from the effective global or
 per-plugin `allow_destructive_actions` policy and lets Codex enforce
-destructive tool metadata from its native app tool annotations. The `_default`
-app config is disabled with `open_world_enabled: false`. Enabled plugin apps
-are emitted with `open_world_enabled: true`; OpenClaw does not expose a separate
-plugin open-world policy knob and does not maintain per-plugin destructive
-tool-name deny lists.
+destructive tool metadata from its native app tool annotations. `true` and
+`"auto"` both set `destructive_enabled: true`; `false` sets it false. The
+`_default` app config is disabled with `open_world_enabled: false`. Enabled
+plugin apps are emitted with `open_world_enabled: true`; OpenClaw does not
+expose a separate plugin open-world policy knob and does not maintain
+per-plugin destructive tool-name deny lists.
 
 Tool approval mode is automatic by default for plugin apps so non-destructive
 read tools can run without a same-thread approval UI. Destructive tools remain
@@ -227,6 +228,9 @@ plugins, while unsafe schemas and ambiguous ownership still fail closed:
 - When policy is `false`, OpenClaw returns a deterministic decline.
 - When policy is `true`, OpenClaw auto-accepts only safe schemas it can map to
   an approval response, such as a boolean approve field.
+- When policy is `"auto"`, OpenClaw exposes destructive plugin actions to
+  Codex but turns ownership-proven MCP approval elicitations into OpenClaw
+  plugin approvals before returning the Codex approval response.
 - Missing plugin identity, ambiguous ownership, a missing turn id, a wrong turn
   id, or an unsafe elicitation schema declines instead of prompting.
 
@@ -274,8 +278,8 @@ Codex thread bindings keep the app config they started with until OpenClaw
 establishes a new harness session or replaces a stale binding.
 
 **Destructive action is declined:** check the global and per-plugin
-`allow_destructive_actions` values. Even when policy is true, unsafe elicitation
-schemas and ambiguous plugin identity still fail closed.
+`allow_destructive_actions` values. Even when policy is true or `"auto"`,
+unsafe elicitation schemas and ambiguous plugin identity still fail closed.
 
 ## Related
 

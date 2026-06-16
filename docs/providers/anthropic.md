@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "f94178f1133b04a2a053ff8e98ea3d247ad3661d32b4faad55f313a6c9dac11d"
+source_hash: "f2c67a24a68733e7d340047120187dbf07c14c9babfd9f1bfe3e06c410b63ecc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/anthropic.md"
@@ -193,7 +193,12 @@ Tip
 
 
 
-## Thinking defaults (Claude 4.8 and 4.6)
+## Thinking defaults (Claude Fable 5, 4.8, and 4.6)
+
+`anthropic/claude-fable-5` always uses adaptive thinking and defaults to `high`
+effort. Because Anthropic does not allow thinking to be disabled for this model,
+`/think off` and `/think minimal` use `low` effort. OpenClaw also omits custom
+temperature values for Fable 5 requests.
 
 Claude Opus 4.8 keeps thinking off by default in OpenClaw. When you explicitly enable adaptive thinking with `/think high|xhigh|max`, OpenClaw sends Anthropic's Opus 4.8 effort values; Claude 4.6 models default to `adaptive`.
 

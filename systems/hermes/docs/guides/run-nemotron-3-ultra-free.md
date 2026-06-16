@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Nemotron 3 Ultra free in Hermes Agent"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-nemotron-3-ultra-free"
-source_hash: "3ec79c232e437c4aacb8abaf9c1e8951d5dab1baa856855c3e1b04b29381a394"
+source_hash: "665d405727a93ce80fa1ae8d29ea06aa8069866417dc240c6fe9fd42709ec75a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-nemotron-3-ultra-free.md"
@@ -33,7 +33,7 @@ The simplest path: a one-click installer with a guided, point-and-click setup. N
 
 ### 1. Download and install
 
-[Download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/desktop) for macOS or Windows, then open it. On first launch it finishes setting itself up (usually under a minute).
+[Download the Hermes Desktop installer](https://hermes-agent.nousresearch.com/) for macOS or Windows, then open it. On first launch it finishes setting itself up (usually under a minute).
 
 ### 2. Connect Nous Portal
 

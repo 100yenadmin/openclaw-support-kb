@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "f5e261f552328919a277730b38c003021ea6fea2d3289f03de17692221c4f2d4"
+source_hash: "ef543824e0460bc017abe143dba2367bfa28d09cf739646731a34a074aae6850"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -228,6 +228,8 @@ Path containment
     Workspace, project-agent, and extra-dir skill discovery only accepts skill
     roots whose resolved realpath stays inside the configured root, unless
     `skills.load.allowSymlinkTargets` explicitly trusts a target root.
+    Skill Workshop writes through those trusted targets only when
+    `skills.workshop.allowSymlinkTargetWrites` is enabled.
     Managed `~/.openclaw/skills` and personal `~/.agents/skills` may contain
     symlinked skill folders, but every `SKILL.md` realpath must still stay
     inside its resolved skill directory.
@@ -577,6 +579,8 @@ Skills watcher
     Use `allowSymlinkTargets` for intentional symlinked layouts where a skill
     root symlink points outside the configured root, for example
     `<workspace>/skills/manager -> ~/Projects/manager/skills`.
+    Enable `skills.workshop.allowSymlinkTargetWrites` only when Skill Workshop
+    should also apply proposals through those trusted symlinked paths.
 
 
 

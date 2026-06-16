@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "3537f94102f478e38878a6f3faec51513336e5a1f274258bfdc8063d03e84548"
+source_hash: "13d55088105260d78538f16e7ed3868f0ead0dfd13e2d341f32670939998ab65"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -167,6 +167,7 @@ Telegram:
 
 - Uses `sendMessage` + `editMessageText` preview updates across DMs and group/topics.
 - Final text edits the active preview in place; long finals reuse that message for the first chunk and send only the remaining chunks.
+- `block` mode rotates the preview into a new message at `streaming.preview.chunk.maxChars` (default 800, capped at Telegram's 4096 edit limit); other modes grow one preview up to 4096 characters.
 - `progress` mode keeps tool progress in an editable status draft, clears that draft at completion, and sends the final answer through normal delivery.
 - If the final edit fails before the completed text is confirmed, OpenClaw uses normal final delivery and cleans up the stale preview.
 - Preview streaming is skipped when Telegram block streaming is explicitly enabled (to avoid double-streaming).

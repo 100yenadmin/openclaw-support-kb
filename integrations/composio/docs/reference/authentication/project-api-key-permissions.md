@@ -1,8 +1,8 @@
 ---
 type: composio_doc
-title: "Scoped project API keys"
+title: "Scoped Project API Key"
 source: "https://docs.composio.dev/reference/authentication/project-api-key-permissions.md"
-source_hash: "b702816a5cce3581d361b151bf7e354f099c5d2ca14ca61533afe1209ce607ca"
+source_hash: "20fff691f0d3368f9ff8f79ae3c9260465d8099a9c9165a527260d53b753fe13"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authentication/project-api-key-permissions.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Scoped project API keys (/reference/authentication/project-api-key-permissions)
+# Scoped Project API Key (/reference/authentication/project-api-key-permissions)
 Source: https://docs.composio.dev/reference/authentication/project-api-key-permissions.md
 
 
@@ -109,6 +109,8 @@ Execute predefined Composio tools.
 | Write  | `POST` | `/api/v3/tools/execute/{tool_slug}`   |
 | Write  | `POST` | `/api/v3.1/tools/execute/{tool_slug}` |
 | Write  | `POST` | `/api/v3/files/upload/request`        |
+| Write  | `POST` | `/api/v3/files/upload/response`       |
+| Write  | `GET`  | `/api/v3/files/list`                  |
 
 # Proxy execute
 
@@ -135,7 +137,7 @@ View and install toolkits.
 
 # Triggers
 
-View trigger types and manage trigger instances.
+View trigger types, manage trigger instances, and subscribe to trigger events. The realtime routes are called by the SDK (`triggers.subscribe()`) and the CLI to receive trigger events.
 
 | Access | Method   | Endpoint                                       |
 | ------ | -------- | ---------------------------------------------- |
@@ -143,6 +145,10 @@ View trigger types and manage trigger instances.
 | Read   | `GET`    | `/api/v3/triggers_types/{slug}`                |
 | Read   | `GET`    | `/api/v3/triggers_types/list/enum`             |
 | Read   | `GET`    | `/api/v3/trigger_instances/active`             |
+| Read   | `GET`    | `/api/v3/cli/realtime/credentials`             |
+| Read   | `POST`   | `/api/v3/cli/realtime/auth`                    |
+| Read   | `GET`    | `/api/v3/internal/sdk/realtime/credentials`    |
+| Read   | `POST`   | `/api/v3/internal/sdk/realtime/auth`           |
 | Write  | `POST`   | `/api/v3/trigger_instances/{slug}/upsert`      |
 | Write  | `PATCH`  | `/api/v3/trigger_instances/manage/{triggerId}` |
 | Write  | `DELETE` | `/api/v3/trigger_instances/manage/{triggerId}` |
@@ -181,32 +187,48 @@ View execution logs and project usage summaries.
 
 # Sessions
 
-Create and operate sessions.
+Create and operate sessions and MCP servers. This permission area covers MCP server management, the MCP runtime transport, and the tool router MCP transport.
 
-| Access | Method  | Endpoint                                                                  |
-| ------ | ------- | ------------------------------------------------------------------------- |
-| Read   | `GET`   | `/api/v3/tool_router/session/{session_id}`                                |
-| Read   | `GET`   | `/api/v3/tool_router/session/{session_id}/toolkits`                       |
-| Read   | `GET`   | `/api/v3/tool_router/session/{session_id}/tools`                          |
-| Read   | `GET`   | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/items`        |
-| Read   | `GET`   | `/api/v3.1/tool_router/session/{session_id}`                              |
-| Read   | `GET`   | `/api/v3.1/tool_router/session/{session_id}/config_history`               |
-| Read   | `GET`   | `/api/v3.1/tool_router/session/{session_id}/tools`                        |
-| Write  | `POST`  | `/api/v3/tool_router/session`                                             |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/execute`                        |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/execute_meta`                   |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/link`                           |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/search`                         |
-| Write  | `PATCH` | `/api/v3/tool_router/session/{session_id}`                                |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/upload_url`   |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/download_url` |
-| Write  | `POST`  | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/delete`       |
-| Write  | `POST`  | `/api/v3.1/tool_router/session`                                           |
-| Write  | `POST`  | `/api/v3.1/tool_router/session/{session_id}/attach`                       |
-| Write  | `POST`  | `/api/v3.1/tool_router/session/{session_id}/execute`                      |
-| Write  | `POST`  | `/api/v3.1/tool_router/session/{session_id}/execute_meta`                 |
-| Write  | `POST`  | `/api/v3.1/tool_router/session/{session_id}/search`                       |
-| Write  | `PATCH` | `/api/v3.1/tool_router/session/{session_id}`                              |
+| Access | Method   | Endpoint                                                                  |
+| ------ | -------- | ------------------------------------------------------------------------- |
+| Read   | `GET`    | `/api/v3/mcp/servers`                                                     |
+| Read   | `GET`    | `/api/v3/mcp/{id}`                                                        |
+| Read   | `GET`    | `/api/v3/mcp/app/{app_key}`                                               |
+| Read   | `GET`    | `/api/v3/mcp/servers/{server_id}/instances`                               |
+| Read   | `GET`    | `/tool_router/{session_id}/mcp`                                           |
+| Read   | `GET`    | `/api/v3/tool_router/session/{session_id}`                                |
+| Read   | `GET`    | `/api/v3/tool_router/session/{session_id}/toolkits`                       |
+| Read   | `GET`    | `/api/v3/tool_router/session/{session_id}/tools`                          |
+| Read   | `GET`    | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/items`        |
+| Read   | `GET`    | `/api/v3.1/tool_router/session/{session_id}`                              |
+| Read   | `GET`    | `/api/v3.1/tool_router/session/{session_id}/config_history`               |
+| Read   | `GET`    | `/api/v3.1/tool_router/session/{session_id}/tools`                        |
+| Write  | `POST`   | `/api/v3/mcp/servers`                                                     |
+| Write  | `POST`   | `/api/v3/mcp/servers/generate`                                            |
+| Write  | `POST`   | `/api/v3/mcp/servers/custom`                                              |
+| Write  | `PATCH`  | `/api/v3/mcp/{id}`                                                        |
+| Write  | `DELETE` | `/api/v3/mcp/{id}`                                                        |
+| Write  | `POST`   | `/api/v3/mcp/servers/{server_id}/instances`                               |
+| Write  | `DELETE` | `/api/v3/mcp/servers/{server_id}/instances/{instance_id}`                 |
+| Write  | `POST`   | `/api/v3/mcp/{server_id}/{transport}`                                     |
+| Write  | `DELETE` | `/api/v3/mcp/{server_id}/{transport}`                                     |
+| Write  | `POST`   | `/tool_router/{session_id}/mcp`                                           |
+| Write  | `DELETE` | `/tool_router/{session_id}/mcp`                                           |
+| Write  | `POST`   | `/api/v3/tool_router/session`                                             |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/execute`                        |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/execute_meta`                   |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/link`                           |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/search`                         |
+| Write  | `PATCH`  | `/api/v3/tool_router/session/{session_id}`                                |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/upload_url`   |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/download_url` |
+| Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/delete`       |
+| Write  | `POST`   | `/api/v3.1/tool_router/session`                                           |
+| Write  | `POST`   | `/api/v3.1/tool_router/session/{session_id}/attach`                       |
+| Write  | `POST`   | `/api/v3.1/tool_router/session/{session_id}/execute`                      |
+| Write  | `POST`   | `/api/v3.1/tool_router/session/{session_id}/execute_meta`                 |
+| Write  | `POST`   | `/api/v3.1/tool_router/session/{session_id}/search`                       |
+| Write  | `PATCH`  | `/api/v3.1/tool_router/session/{session_id}`                              |
 
 # What to read next
 
