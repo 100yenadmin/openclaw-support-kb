@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "ecf4c3eb2956c05c2ba185a783460b03e6cf49825d72677325744aa97f8b5fe8"
+source_hash: "e43d161e2cf6038ee1805200034993d6faa26f9555c2ebf3c1ae2595e0f079ee"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -339,6 +339,24 @@ display:
   # Only applies where tool_progress is already enabled.
   tool_progress_grouping: accumulate   # accumulate | separate
 ```
+
+### Message timestamps in model context
+
+Off by default. When enabled, Hermes prepends a human-readable timestamp
+(e.g. `[Tue 2026-04-28 13:40:53 CEST]`) onto each **user** message *in the
+model's context* so the agent knows when messages were sent — useful for
+temporal reasoning ("you asked this morning…", noticing a long gap). It is
+**not** added to assistant messages or the system prompt.
+
+```yaml
+gateway:
+  message_timestamps:
+    enabled: false   # set true to show send-times to the model
+```
+
+Persisted transcripts always stay clean — the timestamp is stored as message
+metadata regardless of this toggle, so enabling it later also surfaces
+send-times for past messages, and replay never accumulates duplicate prefixes.
 
 When enabled, the bot sends status messages as it works:
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/web-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search"
-source_hash: "f3533f3b0c68d267af1e504104a5e5051dcb4d3a661ce7e0e7d736da978b05cc"
+source_hash: "60de5a5ecba0f879c1faf705178af4cc0015567ca86afadb5e5c3e068aee7ed6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-search.md"
@@ -317,7 +317,7 @@ web:
 web:
   backend: "xai"
   xai:
-    model: grok-4.3              # reasoning model required by web_search (default)
+    model: grok-build-0.1        # reasoning model required by web_search (default)
     allowed_domains:             # optional, max 5 — mutex with excluded_domains
       - arxiv.org
     excluded_domains:            # optional, max 5

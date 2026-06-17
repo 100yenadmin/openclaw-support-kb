@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "da8ffbad375bd19cc7a1f102b9bc8a229693fe072068d4d01df70ad8551a9d82"
+source_hash: "e3b101656425e5857fbc89f1262d7cd71bbe0f999572be6c1cf7a026c9cf1be7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -618,6 +618,20 @@ memory:
 ```
 
 With `memory.write_approval: true`, memory writes need your approval before they land: interactive CLI turns prompt inline; messaging sessions and the background self-improvement review stage the write for `/memory pending` → `/memory approve <id>` / `/memory reject <id>` review. Toggle at runtime with `/memory approval on|off`. See [Controlling memory writes](/user-guide/features/memory#controlling-memory-writes-write_approval).
+
+## Context File Truncation
+
+Controls how much content Hermes loads from each automatic context file before applying head/tail truncation. This applies to files injected into the system prompt such as `SOUL.md`, `.hermes.md`, `AGENTS.md`, `CLAUDE.md`, and `.cursorrules`. It does **not** affect the `read_file` tool.
+
+```yaml
+context_file_max_chars: 20000  # default
+```
+
+Raise it when you intentionally keep larger identity or project-context files and run models with enough context window to carry them:
+
+```yaml
+context_file_max_chars: 25000
+```
 
 ## File Read Safety
 
@@ -1852,7 +1866,7 @@ Hermes uses two different context scopes:
 - **Project context files use a priority system** — only ONE type is loaded (first match wins): `.hermes.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`. SOUL.md is always loaded independently.
 - **AGENTS.md** is hierarchical: if subdirectories also have AGENTS.md, all are combined.
 - Hermes automatically seeds a default `SOUL.md` if one does not already exist.
-- All loaded context files are capped at 20,000 characters with smart truncation.
+- All loaded context files are capped at `context_file_max_chars` characters (default 20,000) with smart truncation.
 
 See also:
 - [Personality & SOUL.md](/user-guide/features/personality)

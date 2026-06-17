@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Prompt Assembly"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/prompt-assembly"
-source_hash: "2c93896263b1edf1b8f7fbb636707b5131e141a80e85e06f727bda7fbbf80cba"
+source_hash: "74f02203aff0d1cffa4cca1c30fccfc5c22036d472da2c3fb68dc724b341ba1b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/prompt-assembly.md"
@@ -141,7 +141,7 @@ def load_soul_md() -> Optional[str]:
         return None
     content = soul_path.read_text(encoding="utf-8").strip()
     content = _scan_context_content(content, "SOUL.md")  # Security scan
-    content = _truncate_content(content, "SOUL.md")       # Cap at 20k chars
+    content = _truncate_content(content, "SOUL.md")       # Cap defaults to 20k chars, configurable
     return content
 ```
 
@@ -208,7 +208,7 @@ def build_context_files_prompt(cwd=None, skip_soul=False):
 
 All context files are:
 - **Security scanned** — checked for prompt injection patterns (invisible unicode, "ignore previous instructions", credential exfiltration attempts)
-- **Truncated** — capped at 20,000 characters using 70/20 head/tail ratio with a truncation marker
+- **Truncated** — capped at `context_file_max_chars` characters (default 20,000) using 70/20 head/tail ratio with a truncation marker
 - **YAML frontmatter stripped** — `.hermes.md` frontmatter is removed (reserved for future config overrides)
 
 ## API-call-time-only layers
