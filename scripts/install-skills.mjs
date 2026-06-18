@@ -175,10 +175,15 @@ For OpenClaw, Hermes Agent, Paperclip Mission Control, Composio, update, channel
    - manifest: \`${path.join(kbDir, "kb-manifest.json")}\`
    - source catalog: \`${path.join(kbDir, "kb-sources.json")}\`
 2. Identify the target system before giving setup/config commands. Do not apply OpenClaw config docs to Hermes, Hermes config docs to OpenClaw, or Paperclip control-plane docs to either runtime.
-3. Search local GBrain with the named source before answering or editing config:
+3. Search customer/workspace docs first for customer-specific operating context:
+   - durable customer docs live in \`/root/.openclaw/workspace/docs\`
+   - customer runbooks live in \`/root/.openclaw/workspace/docs/runbooks\`
+   - GBrain source id: \`workspace-docs\`
+   \`gbrain search "<customer, workspace, or runbook question>" --source workspace-docs\`
+4. Search the reusable Support KB source before answering product support or editing config:
    \`gbrain search "<target system> <question>" --source ${GBRAIN_SOURCE_ID}\`
    \`gbrain search "<target system> <exact error, command, config key, or Source URL>" --source ${GBRAIN_SOURCE_ID}\`
-4. Use the installed customer KB skills for routing:
+5. Use the installed customer KB skills for routing:
    - customer-kb-router
    - openclaw-support-kb
    - openclaw-config-repair
@@ -187,10 +192,10 @@ For OpenClaw, Hermes Agent, Paperclip Mission Control, Composio, update, channel
    - hermes-support-kb
    - paperclip-mission-control
    - cross-system-recovery
-5. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
-6. If search or citations mention \`.pre-git-\` or backup/archive paths, run \`node ${path.join(kbDir, "scripts", "status.mjs")}\` and do not cite that stale copy.
-7. Do not invent config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\` for OpenClaw; prefer Hermes/Paperclip docs and read-only diagnostics for those systems.
-8. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
+6. If a runbook appears in search, treat it as workflow only. Run its Search Contract and cite current docs/source pages for facts.
+7. If search or citations mention \`.pre-git-\` or backup/archive paths, run \`node ${path.join(kbDir, "scripts", "status.mjs")}\` and do not cite that stale copy.
+8. Do not invent config keys. Prefer \`openclaw config schema\`, \`openclaw config patch --dry-run\`, and \`openclaw config validate\` for OpenClaw; prefer Hermes/Paperclip docs and read-only diagnostics for those systems.
+9. Ask before sending support escalations. Use \`openclaw-support-escalation\` and its helper so GOG email or Telegram fallback only sends after hash-bound approval.
 `,
     );
     console.log(`Updated agent hint block in ${agentsFile}`);

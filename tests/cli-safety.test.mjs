@@ -51,6 +51,32 @@ test("install-skills still installs when openclaw config is malformed", () => {
   assert.match(result.stdout, /Installed \d+ customer KB skills/);
 });
 
+test("install-skills tells agents where customer docs live and which GBrain sources to search", () => {
+  const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-agents-"));
+  const agentsFile = path.join(tmp, "AGENTS.md");
+  const skillsDir = path.join(tmp, "skills");
+
+  const result = spawnSync(process.execPath, ["scripts/install-skills.mjs"], {
+    cwd: repoRoot,
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      HOME: tmp,
+      OPENCLAW_AGENTS_FILE: agentsFile,
+      OPENCLAW_SKILLS_DIR: skillsDir,
+      OPENCLAW_SUPPORT_KB_DIR: "/root/.gbrain/sources/openclaw-support-kb",
+    },
+  });
+
+  assert.equal(result.status, 0, result.stderr);
+  const text = readFileSync(agentsFile, "utf8");
+  assert.match(text, /\/root\/\.openclaw\/workspace\/docs/);
+  assert.match(text, /\/root\/\.openclaw\/workspace\/docs\/runbooks/);
+  assert.match(text, /GBrain source id: `workspace-docs`/);
+  assert.match(text, /gbrain search "<customer, workspace, or runbook question>" --source workspace-docs/);
+  assert.match(text, /gbrain search "<target system> <question>" --source openclaw-support-kb/);
+});
+
 test("support email send refuses omitted subject before invoking transport", () => {
   const tmp = mkdtempSync(path.join(os.tmpdir(), "openclaw-kb-support-"));
   const draft = path.join(tmp, "draft.md");
