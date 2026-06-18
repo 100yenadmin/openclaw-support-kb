@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Local Plugin Development"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/LOCAL_PLUGIN_DEVELOPMENT.md"
-source_hash: "1e5fcf52deee307ae446abcf7405f9b91d688666ad3d69a16ddcc6d7e879f7e2"
+source_hash: "a375ea4615811e7944ac2cc3768800efa0465a5a0dfa265fa4f0319ea26e28da"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/local_plugin_development.md"
@@ -134,7 +134,7 @@ What that means in practice:
 - **Without `pnpm dev`:** the watcher only fires on `dist/*` changes. If you stop the watch build, source edits do not reach Paperclip. Restart `pnpm dev` (or run `pnpm build` once) before expecting changes.
 - **`node_modules`, `.git`, `.paperclip-sdk`, and other dotfolders are ignored.** Adding a dependency requires the new code to actually be imported and rebuilt before the worker sees it.
 
-The server never compiles plugin source for you. The package's own build scripts own that step.
+The package's own build scripts still own compilation. Paperclip does not compile arbitrary local-path plugins for you. The exceptions are bundled plugins inside the Paperclip repo under `packages/plugins/`: workspace packages auto-build once with `pnpm --filter <package> build`, and standalone sandbox-provider packages under `packages/plugins/sandbox-providers/` first bootstrap package-local dependencies with `pnpm install --ignore-workspace ...` and then run `pnpm build` in place. Set `PAPERCLIP_DISABLE_PLUGIN_AUTOBUILD=1` in the server environment to disable those fallbacks.
 
 ## Local path plugins vs npm packages
 
@@ -154,7 +154,7 @@ When you are done iterating locally, publish the package and reinstall the npm-p
 
 ## Troubleshooting
 
-- **`Plugin install returned no plugin record` or `error` status.** Run `paperclipai plugin inspect <key>` for the last error. The most common causes are (1) the plugin has not built yet — run `pnpm dev` or `pnpm build` first, (2) the `paperclipPlugin` entries in `package.json` point at files that do not exist on disk, or (3) the manifest failed validation. The Paperclip server log has the full validation error.
+- **`Plugin install returned no plugin record` or `error` status.** Run `paperclipai plugin inspect <key>` for the last error. The most common causes are (1) the plugin has not built yet — run `pnpm dev` or `pnpm build` first, (2) the `paperclipPlugin` entries in `package.json` point at files that do not exist on disk, or (3) the manifest failed validation. Bundled repo plugins may auto-build once during install, but external local-path plugins still require you to build them yourself. The Paperclip server log has the full validation error.
 - **Edits do not seem to reload.** Confirm `pnpm dev` is still running and writing to `dist/`. If you renamed entry files, update the `paperclipPlugin.manifest` / `paperclipPlugin.worker` / `paperclipPlugin.ui` fields in `package.json` so the watcher targets them.
 - **Worker restarts but UI is stale.** Hard-reload the page. If you want HMR, run `pnpm dev:ui` and set `devUiUrl` in your manifest to `http://127.0.0.1:4177` during development.
 - **Path arguments fail on Windows.** Quote paths that contain spaces, and prefer absolute paths over `~`-prefixed paths in non-bash shells.

@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "2b84c3671ace3f8514ce631167c37cee7e5360abedb4f060ad5f10e9601fc436"
+source_hash: "f5c450a2ebac6c44ecc39382c0693f3f8bb3a42812762bdba6555df75d0e8f3c"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -184,8 +184,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/api-reference/authentication.md
-- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/consumer.md
+- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/invite-codes.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
@@ -226,8 +226,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/organization.md
 - https://docs.composio.dev/reference/v3/api-reference/migration.md
+- https://docs.composio.dev/reference/v3/api-reference/organization.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md

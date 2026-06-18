@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP Config Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference"
-source_hash: "0a6a2a7c4502197cc084b532b113e70b230ebbcf15ccacff9a6f4841d41d14e8"
+source_hash: "74da71726199482f4af05095c90f8cba31f55d0156de327aa1f646603d9e8665"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/mcp-config-reference.md"
@@ -67,8 +67,8 @@ mcp_servers:
 | `client_cert` | string or list | HTTP | mTLS client certificate. String = path to a PEM file containing cert + key. List `[cert, key]` = separate files. List `[cert, key, password]` = encrypted key |
 | `client_key` | string | HTTP | Path to the client private key, when `client_cert` is a string and the key is in a separate file |
 | `enabled` | bool | both | Skip the server entirely when false |
-| `timeout` | number | both | Tool call timeout |
-| `connect_timeout` | number | both | Initial connection timeout |
+| `timeout` | number | both | Tool call timeout in seconds (default: `300`) |
+| `connect_timeout` | number | both | Initial connection timeout in seconds (default: `60`) |
 | `supports_parallel_tool_calls` | bool | both | Allow tools from this server to run concurrently |
 | `tools` | mapping | both | Filtering and utility-tool policy |
 | `auth` | string | HTTP | Authentication method. Set to `oauth` to enable OAuth 2.1 with PKCE |
