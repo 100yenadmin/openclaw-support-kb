@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exa plugin"
 source: "https://docs.openclaw.ai/plugins/reference/exa"
-source_hash: "4223ca22e9a31661c82a23e9561641d632b15c0787e9287def77c11cbb14c69a"
+source_hash: "119d2e5989a0270999c234b35dc49ca05fa13722563a07fb7218a2742fa07bc7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/exa.md"
@@ -20,7 +20,7 @@ Adds web search provider support.
 ## Distribution
 
 - Package: `@openclaw/exa-plugin`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/exa-plugin`
 
 ## Surface
 

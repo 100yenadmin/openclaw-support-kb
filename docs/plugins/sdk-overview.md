@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "b0b0bc462ed86898f689962746d184930a38e964ee0acbf2ffe7c8daab54086c"
+source_hash: "f68673013a9b02866f210156c46502dcb53825f29274b544446443a73f1c1a8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -392,13 +392,13 @@ For an end-to-end authoring guide, see
 
 ### Exclusive slots
 
-| Method                                     | What it registers                                                                                                                                         |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api.registerContextEngine(id, factory)`   | Context engine (one active at a time). The `assemble()` callback receives `availableTools` and `citationsMode` so the engine can tailor prompt additions. |
-| `api.registerMemoryCapability(capability)` | Unified memory capability                                                                                                                                 |
-| `api.registerMemoryPromptSection(builder)` | Memory prompt section builder                                                                                                                             |
-| `api.registerMemoryFlushPlan(resolver)`    | Memory flush plan resolver                                                                                                                                |
-| `api.registerMemoryRuntime(runtime)`       | Memory runtime adapter                                                                                                                                    |
+| Method                                     | What it registers                                                                                                                                                                                  |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api.registerContextEngine(id, factory)`   | Context engine (one active at a time). Lifecycle callbacks receive `runtimeSettings` when the host can provide model/provider/mode diagnostics; older strict engines are retried without that key. |
+| `api.registerMemoryCapability(capability)` | Unified memory capability                                                                                                                                                                          |
+| `api.registerMemoryPromptSection(builder)` | Memory prompt section builder                                                                                                                                                                      |
+| `api.registerMemoryFlushPlan(resolver)`    | Memory flush plan resolver                                                                                                                                                                         |
+| `api.registerMemoryRuntime(runtime)`       | Memory runtime adapter                                                                                                                                                                             |
 
 ### Deprecated memory embedding adapters
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare AI gateway"
 source: "https://docs.openclaw.ai/providers/cloudflare-ai-gateway"
-source_hash: "4788b8d0924a6e8541df43685527629853fe49d0c685e95db301cdbe0963f9d1"
+source_hash: "c844cbc332e9dadb3afd5d53dd89df55ea891e1cb038f4fde21c97542b3bd0e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cloudflare-ai-gateway.md"
@@ -30,6 +30,15 @@ When thinking is enabled for Anthropic Messages models, OpenClaw strips trailing
 assistant prefill turns before sending the payload through Cloudflare AI Gateway.
 Anthropic rejects response prefilling with extended thinking, while ordinary
 non-thinking prefill remains available.
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/cloudflare-ai-gateway-provider
+openclaw gateway restart
+```
 
 ## Getting started
 

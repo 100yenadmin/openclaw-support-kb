@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "087476b9e0efb087702dd425091778a6e9940aa5e4dcbf5ecb6c9002010cd181"
+source_hash: "bc15aa0ffa236d513c71b8b131154d4c36f5aeee7e62c615c6b5a9ddbb7c5239"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -190,7 +190,7 @@ WhatsApp Web-only channel scope
 
 - Gateway owns the WhatsApp socket and reconnect loop.
 - The reconnect watchdog uses WhatsApp Web transport activity, not only inbound app-message volume, so a quiet linked-device session is not restarted solely because nobody has sent a message recently. A longer application-silence cap still forces a reconnect if transport frames keep arriving but no application messages are handled for the watchdog window; after a transient reconnect for a recently active session, that application-silence check uses the normal message timeout for the first recovery window.
-- Baileys socket timings are explicit under `web.whatsapp.*`: `keepAliveIntervalMs` controls WhatsApp Web application pings, `connectTimeoutMs` controls the opening handshake timeout, and `defaultQueryTimeoutMs` controls Baileys query waits plus OpenClaw's local outbound send/presence operation bound.
+- Baileys socket timings are explicit under `web.whatsapp.*`: `keepAliveIntervalMs` controls WhatsApp Web application pings, `connectTimeoutMs` controls the opening handshake timeout, and `defaultQueryTimeoutMs` controls Baileys query waits plus OpenClaw's local outbound send/presence and inbound read-receipt operation bounds.
 - Outbound sends require an active WhatsApp listener for the target account.
 - Group sends attach native mention metadata for `@+<digits>` and `@<digits>` tokens in text and media captions when the token matches current WhatsApp participant metadata, including LID-backed groups.
 - Status and broadcast chats are ignored (`@status`, `@broadcast`).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exa search"
 source: "https://docs.openclaw.ai/tools/exa-search"
-source_hash: "6f97805ba763845191d62a65ab28fc97299601f8e02192d335dd2d3c5b660f6c"
+source_hash: "714fbeaf471910cc8d1cbae37e59d0c0329d082c9475b1b467f108b219391276"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exa-search.md"
@@ -16,6 +16,15 @@ Source: https://docs.openclaw.ai/tools/exa-search
 OpenClaw supports [Exa AI](https://exa.ai/) as a `web_search` provider. Exa
 offers neural, keyword, and hybrid search modes with built-in content
 extraction (highlights, text, summaries).
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/exa-plugin
+openclaw gateway restart
+```
 
 ## Get an API key
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audio and voice notes"
 source: "https://docs.openclaw.ai/nodes/audio"
-source_hash: "55eae6b96b578b11b8ed1c20d02c25528bb5a7bcc18678d2c792238ea0cda570"
+source_hash: "c9750ccc3c01cf3c538b2b260dee18614fb6b3c29429943cf93ef3a90e1333f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/audio.md"
@@ -36,7 +36,7 @@ OpenClaw auto-detects in this order and stops at the first working option:
    - `whisper` (Python CLI; downloads models automatically)
 3. **Provider auth**
    - Configured `models.providers.*` entries that support audio are tried first
-   - Bundled fallback order: OpenAI → Groq → xAI → Deepgram → Google → SenseAudio → ElevenLabs → Mistral
+   - Provider fallback order: OpenAI → Groq → xAI → Deepgram → Google → SenseAudio → ElevenLabs → Mistral
 
 As of 2026-05-22, Gemini CLI auto-detect is no longer supported for media understanding. Google is transitioning Gemini CLI users to Antigravity CLI; audio should use local or provider transcription, while image/video CLI fallback should move to Antigravity CLI (`agy`).
 

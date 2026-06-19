@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "a786f42ffc1b2b8b73e9b0887b6c0d37e5df4d02d7a907822f0f62bbc36ed8dc"
+source_hash: "ea238011021699197b183bb97516df964aff06930cd49d6a621d1ff522ac8ff6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/api-usage-costs.md"
@@ -37,9 +37,9 @@ OpenClaw features that can generate provider usage or paid API calls.
 - `/usage tokens` shows tokens only; subscription-style OAuth/token and CLI flows
   still show tokens only unless that runtime supplies compatible usage metadata
   and an explicit local price is configured.
-- Gemini CLI note: when the CLI returns JSON output, OpenClaw reads usage from
-  `stats`, normalizes `stats.cached` into `cacheRead`, and derives input tokens
-  from `stats.input_tokens - stats.cached` when needed.
+- Gemini CLI note: the default `stream-json` output and legacy JSON overrides
+  both read usage from `stats`, normalize `stats.cached` into `cacheRead`, and
+  derive input tokens from `stats.input_tokens - stats.cached` when needed.
 
 Anthropic note: Anthropic staff told us OpenClaw-style Claude CLI usage is
 allowed again, so OpenClaw treats Claude CLI reuse and `claude -p` usage as
@@ -146,7 +146,7 @@ See [Memory](/concepts/memory).
 - **Ollama Web Search**: key-free for a reachable signed-in local Ollama host; direct `https://ollama.com` search uses `OLLAMA_API_KEY`, and auth-protected hosts can reuse normal Ollama provider bearer auth
 - **Perplexity Search API**: `PERPLEXITY_API_KEY`, `OPENROUTER_API_KEY`, or `plugins.entries.perplexity.config.webSearch.apiKey`
 - **Tavily**: `TAVILY_API_KEY` or `plugins.entries.tavily.config.webSearch.apiKey`
-- **DuckDuckGo**: key-free fallback (no API billing, but unofficial and HTML-based)
+- **DuckDuckGo**: key-free provider when explicitly selected (no API billing, but unofficial and HTML-based)
 - **SearXNG**: `SEARXNG_BASE_URL` or `plugins.entries.searxng.config.webSearch.baseUrl` (key-free/self-hosted; no hosted API billing)
 
 Legacy `tools.web.search.*` provider paths still load through the temporary compatibility shim, but they are no longer the recommended config surface.
@@ -160,7 +160,8 @@ See [Web tools](/tools/web).
 
 ### 5) Web fetch tool (Firecrawl)
 
-`web_fetch` can call **Firecrawl** when an API key is present:
+`web_fetch` can call **Firecrawl** with keyless starter access. Add an API key
+for higher limits:
 
 - `FIRECRAWL_API_KEY` or `plugins.entries.firecrawl.config.webFetch.apiKey`
 

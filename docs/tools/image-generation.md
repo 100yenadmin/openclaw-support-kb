@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "5141a425c1d909dc2faf0c192b9b253db40b7ce3237ae0798692d1264cd02777"
+source_hash: "9c1499615ae312d52663a917cbdb852c71469199d158ff29c2e57bfda7f1510a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -550,6 +550,25 @@ openclaw infer image generate \
 
 
 
+Generate (OpenAI low quality)
+
+```text
+/tool image_generate action=generate model=openai/gpt-image-2 prompt="Low-cost draft poster for a quiet productivity app" quality=low openai='{"moderation":"low"}'
+```
+
+Equivalent CLI:
+
+```bash
+openclaw infer image generate \
+  --model openai/gpt-image-2 \
+  --quality low \
+  --openai-moderation low \
+  --prompt "Low-cost draft poster for a quiet productivity app" \
+  --json
+```
+
+
+
 Generate (two square)
 
 ```text
@@ -578,11 +597,11 @@ Krea style references
 ```
 
 
-The same `--output-format` and `--background` flags are available on
-`openclaw infer image edit`; `--openai-background` remains as an
-OpenAI-specific alias. Bundled providers other than OpenAI do not declare
-explicit background control today, so `background: "transparent"` is reported
-as ignored for them.
+The same `--output-format`, `--background`, `--quality`, and
+`--openai-moderation` flags are available on `openclaw infer image edit`;
+`--openai-background` remains as an OpenAI-specific alias. Bundled providers
+other than OpenAI do not declare explicit background control today, so
+`background: "transparent"` is reported as ignored for them.
 
 ## Related
 

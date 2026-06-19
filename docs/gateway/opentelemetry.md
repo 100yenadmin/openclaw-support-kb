@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "cae3d8700fb602e52c5769241e375059d0d75ad234241d611616bdde6cc96871"
+source_hash: "846e881bf9305f493fa2167edfc49e1a027c3adc761c9d23b5c80c98d90f626c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -14,9 +14,10 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/gateway/opentelemetry
 
 OpenClaw exports diagnostics through the official `diagnostics-otel` plugin
-using **OTLP/HTTP (protobuf)**. Any collector or backend that accepts OTLP/HTTP
-works without code changes. For local file logs and how to read them, see
-[Logging](/logging).
+using **OTLP/HTTP (protobuf)**. Logs can also be written as stdout JSONL for
+container and sandbox log pipelines. Any collector or backend that accepts
+OTLP/HTTP works without code changes. For local file logs and how to read them,
+see [Logging](/logging).
 
 ## How it fits together
 
@@ -24,7 +25,8 @@ works without code changes. For local file logs and how to read them, see
   Gateway and bundled plugins for model runs, message flow, sessions, queues,
   and exec.
 - **`diagnostics-otel` plugin** subscribes to those events and exports them as
-  OpenTelemetry **metrics**, **traces**, and **logs** over OTLP/HTTP.
+  OpenTelemetry **metrics**, **traces**, and **logs** over OTLP/HTTP. It can
+  also mirror diagnostic log records to stdout JSONL.
 - **Provider calls** receive a W3C `traceparent` header from OpenClaw's
   trusted model-call span context when the provider transport accepts custom
   headers. Plugin-emitted trace context is not propagated.
@@ -80,11 +82,13 @@ Note
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Metrics** | Counters and histograms for token usage, cost, run duration, failover, skill usage, message flow, Talk events, queue lanes, session state/recovery, tool execution, oversized payloads, exec, and memory pressure. |
 | **Traces**  | Spans for model usage, model calls, harness lifecycle, skill usage, tool execution, exec, webhook/message processing, context assembly, and tool loops.                                                            |
-| **Logs**    | Structured `logging.file` records exported over OTLP when `diagnostics.otel.logs` is enabled; log bodies are withheld unless content capture is explicitly enabled.                                                |
+| **Logs**    | Structured `logging.file` records exported over OTLP or stdout JSONL when `diagnostics.otel.logs` is enabled; log bodies are withheld unless content capture is explicitly enabled.                                |
 
 Toggle `traces`, `metrics`, and `logs` independently. Traces and metrics
 default to on when `diagnostics.otel.enabled` is true. Logs default to off and
-are exported only when `diagnostics.otel.logs` is explicitly `true`.
+are exported only when `diagnostics.otel.logs` is explicitly `true`. Log export
+defaults to OTLP; set `diagnostics.otel.logsExporter` to `stdout` for JSONL on
+stdout, or `both` to send each diagnostic log record to OTLP and stdout.
 
 ## Configuration reference
 
@@ -104,6 +108,7 @@ are exported only when `diagnostics.otel.logs` is explicitly `true`.
       traces: true,
       metrics: true,
       logs: true,
+      logsExporter: "otlp", // otlp | stdout | both
       sampleRate: 0.2, // root-span sampler, 0.0..1.0
       flushIntervalMs: 60000, // metric export interval (min 1000ms)
       captureContent: {
@@ -182,6 +187,11 @@ on the public diagnostic event bus.
 - **Logs:** OTLP logs respect `logging.level` (file log level). They use the
   diagnostic log-record redaction path, not console formatting. High-volume
   installs should prefer OTLP collector sampling/filtering over local sampling.
+  Set `diagnostics.otel.logsExporter: "stdout"` when your platform already
+  ships stdout/stderr to a log processor and you do not have an OTLP logs
+  collector. Stdout records are one JSON object per line with `ts`, `signal`,
+  `service.name`, severity, body, redacted attributes, and trusted trace fields
+  when available.
 - **File-log correlation:** JSONL file logs include top-level `traceId`,
   `spanId`, `parentSpanId`, and `traceFlags` when the log call carries a valid
   diagnostic trace context, which lets log processors join local log lines with

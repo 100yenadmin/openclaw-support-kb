@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GMI Cloud"
 source: "https://docs.openclaw.ai/providers/gmi"
-source_hash: "e53c783e60d349c38fec10ccf0bbe7b17fb381393b2bd41f83701ad87f3175b8"
+source_hash: "8f9176b875f709a7b9f40a44a1b14d228ceebb4dd53b5520dc18a16b99a3c1a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/gmi.md"
@@ -14,9 +14,9 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/gmi
 
 GMI Cloud is a hosted inference platform for frontier and open-weight models
-behind an OpenAI-compatible API. In OpenClaw it is a bundled model provider,
-which means you can select it with the provider id `gmi`, store credentials
-through normal model auth, and use model refs like
+behind an OpenAI-compatible API. In OpenClaw it is an official external provider
+plugin, which means you install it once, select it with the provider id `gmi`,
+store credentials through normal model auth, and use model refs like
 `gmi/google/gemini-3.1-flash-lite`.
 
 Use GMI when you want one API key for several hosted model families, including
@@ -31,7 +31,14 @@ model availability, billing, rate limits, and any provider-side routing policy.
 
 ## Setup
 
-Create an API key in GMI Cloud, then run:
+Install the plugin, restart the gateway, then create an API key in GMI Cloud:
+
+```bash
+openclaw plugins install @openclaw/gmi-provider
+openclaw gateway restart
+```
+
+Then run:
 
 ```bash
 openclaw onboard --auth-choice gmi-api-key
@@ -67,7 +74,7 @@ GPU control matters more than hosted convenience.
 
 ## Models
 
-The bundled catalog seeds commonly available GMI Cloud route ids, including:
+The plugin catalog seeds commonly available GMI Cloud route ids, including:
 
 - `gmi/zai-org/GLM-5.1-FP8`
 - `gmi/deepseek-ai/DeepSeek-V3.2`

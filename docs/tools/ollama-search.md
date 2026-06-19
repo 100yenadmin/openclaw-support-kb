@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama web search"
 source: "https://docs.openclaw.ai/tools/ollama-search"
-source_hash: "2e9d7649c63e4304c4d6f491dabdb46845a8a2011b75381e1d6f7ad04714504e"
+source_hash: "7d9fe8a7642da03bce50f6b38bcbf4a450d65701f9a6ce0c2f9a3fc0f344c30c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/ollama-search.md"
@@ -151,8 +151,9 @@ Direct hosted Ollama Web Search:
   that env key to the local host.
 - OpenClaw warns during setup if Ollama is unreachable or not signed in, but
   it does not block selection.
-- Runtime auto-detect can fall back to Ollama Web Search when no higher-priority
-  credentialed provider is configured.
+- OpenClaw does not auto-select Ollama Web Search when no higher-priority
+  credentialed provider is configured; choose it explicitly with
+  `tools.web.search.provider: "ollama"`.
 - Local Ollama daemon hosts use the local proxy endpoint
   `/api/experimental/web_search`, which signs and forwards to Ollama Cloud.
 - `https://ollama.com` hosts use the public hosted endpoint

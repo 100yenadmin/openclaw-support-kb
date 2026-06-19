@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inference CLI"
 source: "https://docs.openclaw.ai/cli/infer"
-source_hash: "ae6a90f9f79b90f5e54df6376824360bb25b7720dae6be49285f6945ba74d6f7"
+source_hash: "14dbdf9ea0f443e00d3663033a9df1caf2266918bacef8716594c844b7cd9168"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/infer.md"
@@ -196,6 +196,7 @@ Use `image` for generation, edit, and description.
 openclaw infer image generate --prompt "friendly lobster illustration" --json
 openclaw infer image generate --prompt "cinematic product photo of headphones" --json
 openclaw infer image generate --model openai/gpt-image-1.5 --output-format png --background transparent --prompt "simple red circle sticker on a transparent background" --json
+openclaw infer image generate --model openai/gpt-image-2 --quality low --openai-moderation low --prompt "low-cost draft poster" --json
 openclaw infer image generate --prompt "slow image backend" --timeout-ms 180000 --json
 openclaw infer image edit --file ./logo.png --model openai/gpt-image-1.5 --output-format png --background transparent --prompt "keep the logo, remove the background" --json
 openclaw infer image edit --file ./poster.png --prompt "make this a vertical story ad" --size 2160x3840 --aspect-ratio 9:16 --resolution 4K --json
@@ -216,6 +217,9 @@ Notes:
   `--model openai/gpt-image-1.5` for transparent-background OpenAI PNG output;
   `--openai-background` remains available as an OpenAI-specific alias. Providers
   that do not declare background support report the hint as an ignored override.
+- Use `--quality low|medium|high|auto` for providers that support image quality
+  hints, including OpenAI. OpenAI also accepts `--openai-moderation low|auto` for
+  the provider-specific moderation hint.
 - Use `image providers --json` to verify which bundled image providers are
   discoverable, configured, selected, and which generation/edit capabilities
   each provider exposes.

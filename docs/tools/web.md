@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "0f935e3bfdd1eb5cceecc8ce5e0db3d5978ca2aa24bd576ef6417efd07ededf1"
+source_hash: "f4ed02c441b8a4aeacf0858571523fe78f2b5b79005f5120b99e78f38b15289a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web.md"
@@ -81,7 +81,7 @@ Codex Hosted Search
 
 DuckDuckGo
 
-    Key-free fallback. No API key needed. Unofficial HTML-based integration.
+    Key-free provider. No API key needed. Unofficial HTML-based integration.
 
 
 Exa
@@ -126,7 +126,7 @@ Parallel
 
 Parallel Search (Free)
 
-    Zero-config default. Parallel's free Search MCP, with LLM-optimized dense excerpts and no API key.
+    Key-free opt-in. Parallel's free Search MCP, with LLM-optimized dense excerpts and no API key.
 
 
 Perplexity
@@ -281,16 +281,16 @@ API-backed providers first:
 9. **Tavily** -- `TAVILY_API_KEY` or `plugins.entries.tavily.config.webSearch.apiKey` (order 70)
 10. **Parallel** -- paid Parallel Search API via `PARALLEL_API_KEY` or `plugins.entries.parallel.config.webSearch.apiKey`; optional `plugins.entries.parallel.config.webSearch.baseUrl` overrides the endpoint (order 75)
 
-Key-free fallbacks after that:
+Configured endpoint providers after that:
 
-11. **Parallel Search (Free)** -- the zero-config default: works with no account or API key via Parallel's free hosted [Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp) (order 76)
-12. **DuckDuckGo** -- key-free HTML fallback with no account or API key (order 100)
-13. **Ollama Web Search** -- key-free fallback via your configured local Ollama host when it is reachable and signed in with `ollama signin`; can reuse Ollama provider bearer auth when the host needs it, and can call direct `https://ollama.com` search when configured with `OLLAMA_API_KEY` (order 110)
-14. **SearXNG** -- `SEARXNG_BASE_URL` or `plugins.entries.searxng.config.webSearch.baseUrl` (order 200)
-15. **Codex Hosted Search** -- key-free provider contract that uses the active Codex/OpenAI sign-in (order 900)
+11. **SearXNG** -- `SEARXNG_BASE_URL` or `plugins.entries.searxng.config.webSearch.baseUrl` (order 200)
 
-When no API-backed provider is configured, OpenClaw defaults to **Parallel
-Search (Free)**, so `web_search` works without an API key.
+Key-free providers such as **Parallel Search (Free)**, **DuckDuckGo**,
+**Ollama Web Search**, and **Codex Hosted Search** are available only when you
+select them explicitly with `tools.web.search.provider` or through
+`openclaw configure --section web`. OpenClaw does not send managed
+`web_search` queries to a key-free provider just because no API-backed provider
+is configured.
 
 OpenAI Responses models are an exception: while `tools.web.search.provider` is
 unset, they use OpenAI's native web search instead of the managed providers
@@ -301,7 +301,7 @@ Note
 
   All provider key fields support SecretRef objects. Plugin-scoped SecretRefs
   under `plugins.entries.<plugin>.config.webSearch.apiKey` are resolved for the
-  bundled API-backed web search providers, including Brave, Exa, Firecrawl,
+  installed API-backed web search providers, including Brave, Exa, Firecrawl,
   Gemini, Grok, Kimi, MiniMax, Parallel, Perplexity, and Tavily,
   whether the provider is picked explicitly via `tools.web.search.provider` or
   selected through auto-detect. In auto-detect mode, OpenClaw resolves only the
@@ -347,10 +347,11 @@ plugin or run `openclaw doctor --fix` to clean up the stale config.
 
 - choose it with `tools.web.fetch.provider`
 - or omit that field and let OpenClaw auto-detect the first ready web-fetch
-  provider from available credentials
+  provider from configured credentials
 - non-sandboxed `web_fetch` can use installed plugin providers that declare
-  `contracts.webFetchProviders`; sandboxed fetches stay bundled-only
-- today the bundled web-fetch provider is Firecrawl, configured under
+  `contracts.webFetchProviders`; sandboxed fetches allow bundled providers and
+  verified official plugin installs, but exclude third-party external plugins
+- the official Firecrawl plugin provides web-fetch fallback, configured under
   `plugins.entries.firecrawl.config.webFetch.*`
 
 When you choose **Kimi** during `openclaw onboard` or

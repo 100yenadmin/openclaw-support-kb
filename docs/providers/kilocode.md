@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kilo Gateway"
 source: "https://docs.openclaw.ai/providers/kilocode"
-source_hash: "f09f4ad3d6eba4ea3a9591c7ec69dc750b3dff1a20d88b16f15edca9dfdac4a4"
+source_hash: "bc0d51e5a9e0456af3cf4643e165626f28f15c831e3156142955573b3cf25f6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/kilocode.md"
@@ -22,6 +22,15 @@ endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switc
 | Auth     | `KILOCODE_API_KEY`                 |
 | API      | OpenAI-compatible                  |
 | Base URL | `https://api.kilo.ai/api/gateway/` |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/kilocode-provider
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -84,7 +93,7 @@ Any model available on the gateway can be used with the `kilocode/` prefix:
 Tip
 
 At startup, OpenClaw queries `GET https://api.kilo.ai/api/gateway/models` and merges
-discovered models ahead of the static fallback catalog. The bundled fallback always
+discovered models ahead of the static fallback catalog. The static fallback always
 includes `kilocode/kilo/auto` (`Kilo Auto`) with `input: ["text", "image"]`,
 `reasoning: true`, `contextWindow: 1000000`, and `maxTokens: 128000`.
 
@@ -135,7 +144,7 @@ Warning
 
 Troubleshooting
 
-    - If model discovery fails at startup, OpenClaw falls back to the bundled static catalog containing `kilocode/kilo/auto`.
+    - If model discovery fails at startup, OpenClaw falls back to the static catalog containing `kilocode/kilo/auto`.
     - Confirm your API key is valid and that your Kilo account has the desired models enabled.
     - When the Gateway runs as a daemon, ensure `KILOCODE_API_KEY` is available to that process (for example in `~/.openclaw/.env` or via `env.shellEnv`).
 

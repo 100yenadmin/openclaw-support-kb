@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "660e45fbd1e5a4ebecc8ee9d4f2e218043a0d0ebcb4d6526f16b15a3097b990c"
+source_hash: "ef872c960a671381d0478c936fe0553677ab7d8c2554a2a6132fae553bbf7435"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/arcee.md"
@@ -23,6 +23,15 @@ Arcee AI models can be accessed directly via the Arcee platform or through [Open
 | Auth     | `ARCEEAI_API_KEY` (direct) or `OPENROUTER_API_KEY` (via OpenRouter)                   |
 | API      | OpenAI-compatible                                                                     |
 | Base URL | `https://api.arcee.ai/api/v1` (direct) or `https://openrouter.ai/api/v1` (OpenRouter) |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/arcee-provider
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -127,7 +136,7 @@ Via OpenRouter
 
 ## Built-in catalog
 
-OpenClaw currently ships this bundled Arcee catalog:
+OpenClaw currently ships this Arcee static catalog:
 
 | Model ref                      | Name                   | Input | Context | Cost (in/out per 1M) | Notes                                     |
 | ------------------------------ | ---------------------- | ----- | ------- | -------------------- | ----------------------------------------- |

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Prompt Assembly"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/prompt-assembly"
-source_hash: "74f02203aff0d1cffa4cca1c30fccfc5c22036d472da2c3fb68dc724b341ba1b"
+source_hash: "fe24a2ba2fb912f8a8dcbc9b13a2d2f4163041de86472002bc65799356d12a0d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/prompt-assembly.md"
@@ -128,6 +128,43 @@ Session: abc123
 You are a CLI AI Agent. Try not to use markdown but simple text
 renderable inside a terminal.
 ```
+
+## Customizing platform hints
+
+The platform hint (Layer 10 above) is the per-surface guidance Hermes
+injects for Telegram, WhatsApp, Slack, CLI, and other platforms — for
+example "you are on a terminal, avoid Markdown." The built-in defaults
+live in `PLATFORM_HINTS` (`agent/system_prompt.py`); plugin-provided
+platforms supply theirs through the platform registry.
+
+An administrator can append to or replace a single platform's hint from
+`config.yaml` via the top-level `platform_hints` key, without touching
+any other platform:
+
+```yaml
+platform_hints:
+  whatsapp:
+    append: >
+      When tabular output would be useful, invoke the table_formatting
+      skill instead of emitting a Markdown table.
+  slack:
+    replace: "You are on Slack. Keep responses tight and avoid wide tables."
+  telegram: "Prefer short messages; split long answers."   # shorthand = append
+```
+
+- `append` — keep the built-in hint and add the extra text after it.
+- `replace` — substitute the built-in hint entirely.
+- A bare string — shorthand for `append`.
+- `replace` wins over `append` when both are present.
+- A malformed entry is ignored defensively and falls back to the
+  unmodified default, so a bad config value can never break prompt
+  assembly or leak across platforms.
+
+The override is resolved when the system prompt is built (session start,
+and again on compaction since that rebuilds the prompt). It produces a
+byte-stable hint for a fixed config, so it lives in the **stable** tier
+alongside the built-in hint and does not break prompt caching — it is
+not a live mid-session mutation of a frozen prompt.
 
 ## How SOUL.md appears in the prompt
 

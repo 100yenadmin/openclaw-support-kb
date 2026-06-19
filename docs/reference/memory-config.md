@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "2a1382cf29ee988815356fa141db28dc756e7285b1a4579e9d17dc58dd1a1113"
+source_hash: "6db7f342dc8f3b1e371e51845bc1361a912f56d10edc53060199c7301995c40a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -490,10 +490,12 @@ When sqlite-vec is unavailable, OpenClaw falls back to in-process cosine similar
 
 ## Index storage
 
-| Key                   | Type     | Default                               | Description                                 |
-| --------------------- | -------- | ------------------------------------- | ------------------------------------------- |
-| `store.path`          | `string` | `~/.openclaw/memory/{agentId}.sqlite` | Index location (supports `{agentId}` token) |
-| `store.fts.tokenizer` | `string` | `unicode61`                           | FTS5 tokenizer (`unicode61` or `trigram`)   |
+Built-in memory indexes live in each agent's OpenClaw SQLite database at
+`agents/<agentId>/agent/openclaw-agent.sqlite`.
+
+| Key                   | Type     | Default     | Description                               |
+| --------------------- | -------- | ----------- | ----------------------------------------- |
+| `store.fts.tokenizer` | `string` | `unicode61` | FTS5 tokenizer (`unicode61` or `trigram`) |
 
 ---
 

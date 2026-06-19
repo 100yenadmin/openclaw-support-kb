@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Moonshot AI"
 source: "https://docs.openclaw.ai/providers/moonshot"
-source_hash: "9f288bc345aae35b37843513900599423439011ef1a00993b73fa267474f41a9"
+source_hash: "c5774e5b6d32c0f22228a111f403629b1885c7cff6d961d846a98ea2e70e773c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/moonshot.md"
@@ -223,6 +223,12 @@ Run a live smoke test
 
 Kimi Coding
 
+    Install the official plugin, then restart Gateway:
+
+    ```bash
+    openclaw plugins install @openclaw/kimi-provider
+    openclaw gateway restart
+    ```
     **Best for:** code-focused tasks via the Kimi Coding endpoint.
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "b03c2317c686f49533877671c0988529398eb2dab46881ec8c87b847ec5e6c04"
+source_hash: "36809ca9b449342118202d7c0410211671647dacf5daba037cc00c860f7c74f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
@@ -49,7 +49,10 @@ Scope intent:
 - `tools.web.fetch.firecrawl.apiKey`
 - `plugins.entries.acpx.config.mcpServers.*.env.*`
 - `plugins.entries.brave.config.webSearch.apiKey`
+- `plugins.entries.codex.config.appServer.authToken`
+- `plugins.entries.codex.config.appServer.headers.*`
 - `plugins.entries.exa.config.webSearch.apiKey`
+- `plugins.entries.google-meet.config.realtime.providers.*.apiKey`
 - `plugins.entries.google.config.webSearch.apiKey`
 - `plugins.entries.xai.config.webSearch.apiKey`
 - `plugins.entries.moonshot.config.webSearch.apiKey`

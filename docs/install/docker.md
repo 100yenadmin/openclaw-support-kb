@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "ff5ac24a8a48d73eb5a06b058434a4dc3ba33470a36e28d95eefe5661b7fde6f"
+source_hash: "70f7227eb684a295a0c2821b6223a72eca7fde14b0b68ad4de56afbcc54ec04d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -53,6 +53,31 @@ Build the image
     Pre-built images are published at the
     [GitHub Container Registry](https://github.com/openclaw/openclaw/pkgs/container/openclaw).
     Common tags: `main`, `latest`, `<version>` (e.g. `2026.2.26`).
+
+
+
+
+Airgapped rerun
+
+    On offline hosts, transfer and load the image first:
+
+    ```bash
+    docker load -i openclaw-image.tar
+    export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:latest"
+    ./scripts/docker/setup.sh --offline
+    ```
+
+    `--offline` verifies that `OPENCLAW_IMAGE` already exists locally, disables
+    implicit Compose pulls and builds, then runs the normal setup flow such as
+    `.env` synchronization, permission fixes, onboarding, gateway config sync,
+    and Compose startup.
+
+    If `OPENCLAW_SANDBOX=1`, offline setup also checks the configured default
+    and active per-agent sandbox images on the daemon behind
+    `OPENCLAW_DOCKER_SOCKET`. Docker-backed browser images must also carry the
+    current OpenClaw browser contract label. When a required image is missing or
+    incompatible, setup exits without changing sandbox configuration instead of
+    reporting success with an unusable sandbox.
 
 
 

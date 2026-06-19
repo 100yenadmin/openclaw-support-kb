@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "2b32e517145d585e63580c6f16559e45a06d0cd0ac6f1075f970012c1d4a0798"
+source_hash: "3b1c62eec660e0a3d46308a71da490019ecec9a0bf677da7e7bbcb46f4936e41"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -189,6 +189,7 @@ Sessions and runs
     | --- | --- |
     | `/new [model]` | Archive the current session and start a fresh one |
     | `/reset [soft [message]]` | Reset the current session in place. `soft` keeps the transcript, drops reused CLI backend session ids, and reruns startup |
+    | `/name <title>` | Name or rename the current session. Omit the title to see the current name and a suggestion |
     | `/compact [instructions]` | Compact the session context. See [Compaction](/concepts/compaction) |
     | `/stop` | Abort the current run |
     | `/session idle <duration\|off>` | Manage thread-binding idle expiry |

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "12c037f0fb09440b85349d3cbd296562d14032bc9cadcaccebf9ff680dc2f2cc"
+source_hash: "f059d3f8d627c7538da67408ab08f6c5d4068b5f557205e320377754fb2b3620"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -33,12 +33,7 @@ If you have ever wanted Hermes to use a tool that already exists somewhere else,
 
 ## Quick start
 
-1. Install MCP support (already included if you used the standard install script):
-
-```bash
-cd ~/.hermes/hermes-agent
-uv pip install -e ".[mcp]"
-```
+1. MCP support ships with the standard install — no extra step needed.
 
 2. Add an MCP server to `~/.hermes/config.yaml`:
 
@@ -145,7 +140,12 @@ the hermes-agent repo, so Nous has reviewed each entry before it shipped —
 Manifests live at
 [`optional-mcps/<name>/manifest.yaml`](https://github.com/NousResearch/hermes-agent/tree/main/optional-mcps)
 on GitHub. The picker also prints the manifest's `source:` URL at install
-time so you can quickly verify the upstream repo.
+time so you can quickly verify the upstream repo. The web dashboard's MCP
+page surfaces the same detail per catalog entry — transport, auth type, the
+endpoint URL (HTTP) or command + args (stdio), the git install source/ref and
+bootstrap commands, and setup notes — with the `source:` rendered as a
+clickable link, so you can inspect exactly what an entry connects to or runs
+before clicking Install.
 
 ### Manifest version compatibility
 

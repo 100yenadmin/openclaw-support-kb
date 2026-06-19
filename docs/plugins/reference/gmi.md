@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gmi plugin"
 source: "https://docs.openclaw.ai/plugins/reference/gmi"
-source_hash: "01dd81e1d09e4cf8baa57f2507a444679078a642e01e40998f1bc5a25bd51f58"
+source_hash: "23395e469bf09bcf27d20857b32f8e74918a5733401363ea4dc5ea313d097e3c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/gmi.md"
@@ -15,12 +15,12 @@ Source: https://docs.openclaw.ai/plugins/reference/gmi
 
 # Gmi plugin
 
-Adds Gmi, Gmi Cloud, Gmicloud model provider support to OpenClaw.
+OpenClaw GMI Cloud provider plugin.
 
 ## Distribution
 
 - Package: `@openclaw/gmi-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/gmi-provider`
 
 ## Surface
 

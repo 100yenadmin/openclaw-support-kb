@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kilocode plugin"
 source: "https://docs.openclaw.ai/plugins/reference/kilocode"
-source_hash: "d5d80cd4e0ee172e47bdb99b33d155591cf0309ea60d19f5b254e58c4c732fa6"
+source_hash: "8974400cb5126f5e97c83b38102b319822d62213ac83bf9c70b9a7f8d36f5e36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/kilocode.md"
@@ -20,7 +20,7 @@ Adds Kilocode model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/kilocode-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/kilocode-provider`
 
 ## Surface
 

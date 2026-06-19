@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model provider quickstart"
 source: "https://docs.openclaw.ai/providers/models"
-source_hash: "1ca162e14fdebcf75d367a10a30434666e0414e0ecae009ae67456eb71dc1eeb"
+source_hash: "d3e4f40815ff6b45452464d75979ad5e0a9f2669e398b7a3d3db3493073f177d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/models.md"
@@ -34,6 +34,7 @@ model as `provider/model`.
 - [Anthropic (API + Claude CLI)](/providers/anthropic)
 - [BytePlus (International)](/concepts/model-providers#byteplus-international)
 - [Chutes](/providers/chutes)
+- [Cohere](/providers/cohere)
 - [ComfyUI](/providers/comfy)
 - [Cloudflare AI Gateway](/providers/cloudflare-ai-gateway)
 - [DeepInfra](/providers/deepinfra)

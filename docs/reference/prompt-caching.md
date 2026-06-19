@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Prompt caching"
 source: "https://docs.openclaw.ai/reference/prompt-caching"
-source_hash: "71d05421ea406765a6224e2560a5d7e96dd932ea2ccec986ec2d8374c2f8fbc4"
+source_hash: "78079c41b4e53f93970a65ee3c4621524eac33004f81175d40017a45df1cd723"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/prompt-caching.md"
@@ -169,10 +169,11 @@ If the provider does not support this cache mode, `cacheRetention` has no effect
   OpenClaw manages a provider-native `cachedContents` resource rather than
   injecting cache markers into the request.
 
-### Gemini CLI JSON usage
+### Gemini CLI usage
 
-- Gemini CLI JSON output can also surface cache hits through `stats.cached`;
-  OpenClaw maps that to `cacheRead`.
+- Gemini CLI `stream-json` output can surface cache hits through `stats.cached`;
+  OpenClaw maps that to `cacheRead`. Legacy `--output-format json` overrides use
+  the same usage normalization.
 - If the CLI omits a direct `stats.input` value, OpenClaw derives input tokens
   from `stats.input_tokens - stats.cached`.
 - This is usage normalization only. It does not mean OpenClaw is creating

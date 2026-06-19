@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Kanban (Multi-Agent Board)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban"
-source_hash: "47f8f94305942118fe2839dc150286b581f1cd10798fe98f7ddac52f78c8de20"
+source_hash: "4379bf9f062f2be6ddc297dff6f4d7c53ef1ca76272420c8d5c2df0ff4e593f5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban.md"
@@ -548,6 +548,7 @@ Config knobs (all under `kanban:` in `~/.hermes/config.yaml`):
 | `auto_decompose_per_tick` | `3` | Cap on decompositions per dispatcher tick. Excess defers to the next tick. |
 | `orchestrator_profile` | `""` | Profile assigned to the root/orchestration task after decomposition. Empty = fall back to active default profile. |
 | `default_assignee` | `""` | Where a child task lands when the LLM picks an unknown profile. Empty = fall back to active default. |
+| `auto_subscribe_on_create` | `true` | When a worker calls `kanban_create` from inside a session with a persistent delivery channel (messaging gateway or TUI), the originating session is auto-subscribed to the new task's completion/block events. The dispatcher still drives the delivery — this only changes whether the caller's chat/key shows up in the notify-sub table. Set to `false` to require explicit `kanban_notify-subscribe` calls per task. |
 
 And the two auxiliary LLM slots:
 

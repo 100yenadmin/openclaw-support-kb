@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld"
 source: "https://docs.openclaw.ai/providers/inworld"
-source_hash: "6c7a0852aaccc97f2d03342da6474043d8e286e48e689e45eb0912805b41d1a1"
+source_hash: "3f7c417f40357f7cd2838b7855a2abde08648071857735c2c6baed48564a8005"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/inworld.md"
@@ -24,7 +24,7 @@ the standard reply-audio pipeline.
 | Property      | Value                                                           |
 | ------------- | --------------------------------------------------------------- |
 | Provider id   | `inworld`                                                       |
-| Plugin        | bundled, `enabledByDefault: true`                               |
+| Plugin        | official external package                                       |
 | Contract      | `speechProviders` (TTS only)                                    |
 | Auth env var  | `INWORLD_API_KEY` (HTTP Basic, Base64 dashboard credential)     |
 | Base URL      | `https://api.inworld.ai`                                        |
@@ -33,6 +33,15 @@ the standard reply-audio pipeline.
 | Output        | MP3 (default), OGG_OPUS (voice notes), PCM 22050 Hz (telephony) |
 | Website       | [inworld.ai](https://inworld.ai)                                |
 | Docs          | [docs.inworld.ai/tts/tts](https://docs.inworld.ai/tts/tts)      |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/inworld-speech
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -140,7 +149,7 @@ Configuration
 
 Providers
 
-    All bundled OpenClaw providers.
+    All supported OpenClaw providers.
 
 
 Troubleshooting

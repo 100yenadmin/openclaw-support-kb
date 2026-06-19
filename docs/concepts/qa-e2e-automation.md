@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "1e913b0f16356e9ad0e26df2d0cb25f851bf96cc8b1918d158ef719d380877fd"
+source_hash: "80b395e4537e9743b0a37ded77089352b4ac47fcd0e86f07edefed4bd175154e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/qa-e2e-automation.md"
@@ -62,6 +62,11 @@ the resolved scenarios through `qa suite`. `--surface` and
 The resulting `qa-evidence.json` includes a profile scorecard summary with
 selected-category counts and missing coverage IDs; the individual evidence
 entries remain the source of truth for the tests, coverage roles, and results.
+Taxonomy feature coverage IDs are exact proof targets, not aliases. Primary
+scenario coverage fulfills matching IDs; secondary coverage stays advisory.
+Coverage IDs use dotted `namespace.behavior` form with lowercase
+alphanumeric/dash segments; profile, surface, and category IDs may still use
+the existing dashed or dotted taxonomy IDs.
 Slim evidence omits per-entry `execution` and sets `evidenceMode: "slim"`;
 `smoke-ci` defaults to slim, and `--evidence-mode full` restores full entries:
 
@@ -947,7 +952,12 @@ Every `qa suite` run writes top-level `qa-evidence.json`,
 `qa-suite-summary.json`, and `qa-suite-report.md` artifacts for the selected
 scenario set. Scenarios that declare `execution.kind: vitest` or
 `execution.kind: playwright` run the matching test path and also write
-per-scenario logs. When `qa suite` is reached through
+per-scenario logs. Scenarios that declare `execution.kind: script` run the
+evidence producer at `execution.path` through `node --import tsx` (with
+`${outputDir}` and `${scenarioId}` expanded in `execution.args`); the producer
+writes its own `qa-evidence.json`, whose entries are imported into the suite
+output and whose artifact paths are resolved relative to that producer
+`qa-evidence.json`. When `qa suite` is reached through
 `qa run --qa-profile`, the same `qa-evidence.json` also includes the profile
 scorecard summary for the selected taxonomy categories.
 Treat it as a discovery aid, not a gate replacement; the selected scenario still needs the right provider mode, live transport, Multipass, Testbox, or release lane for the behavior under test.

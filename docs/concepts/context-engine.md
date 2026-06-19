@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "37289e77e834a8d86952d5c7a50e4cfae0581120e6a98c01d13d71d21f3d9d9b"
+source_hash: "719c3122c71ea455c6667fd6508fbb45b798c5fc1ba6f0f77a9f0bd74bbec712"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -253,6 +253,29 @@ Optional members:
 | `prepareSubagentSpawn(params)` | Method | Set up shared state for a child session before it starts.                                                       |
 | `onSubagentEnded(params)`      | Method | Clean up after a subagent ends.                                                                                 |
 | `dispose()`                    | Method | Release resources. Called during gateway shutdown or plugin reload - not per-session.                           |
+
+### Runtime settings
+
+Lifecycle hooks that run inside OpenClaw receive an optional
+`runtimeSettings` object. It is a versioned, read-only internal
+producer/consumer API surface: OpenClaw produces it for the selected context
+engine, and the context engine consumes it inside lifecycle hooks. It is not
+rendered directly to users and does not create a dedicated reporting surface.
+
+- `schemaVersion`: currently `1`
+- `runtime`: OpenClaw host, runtime mode (`normal`, `fallback`, or
+  `degraded`), and optional harness/runtime ids
+- `contextEngineSelection`: selected context engine id and selection source
+- `executionHost`: host id and label for the surface invoking the hook
+- `model`: requested model, resolved model, provider, and optional model family
+- `limits`: prompt token budget and max output tokens when known
+- `diagnostics`: closed fallback and degraded reason codes when known
+
+Fields that can be unknown are represented as `null`; discriminator fields such
+as runtime mode and selection source remain non-nullable. Older engines remain
+compatible: if a strict legacy engine rejects `runtimeSettings` as an unknown
+property, OpenClaw retries the lifecycle call without it instead of quarantining
+the engine.
 
 ### Host requirements
 

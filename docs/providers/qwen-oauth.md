@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen OAuth / Portal"
 source: "https://docs.openclaw.ai/providers/qwen-oauth"
-source_hash: "753cecd6c232aa1b236208df7ae4a7c9a82631b8da06e014995775e5f0f0e674"
+source_hash: "0b56f08971e189d0db71974935524eeb8470217b587ca5686b7d47b1e9c558e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qwen-oauth.md"
@@ -70,11 +70,11 @@ provider instead.
 - You need to test compatibility with the Qwen Portal endpoint specifically.
 
 Choose [Qwen](/providers/qwen) for new setup, broader endpoint choices, Standard
-ModelStudio, Coding Plan, and the full bundled Qwen catalog.
+ModelStudio, Coding Plan, and the full Qwen plugin catalog.
 
 ## Models
 
-The bundled catalog seeds the Qwen Portal default:
+The Qwen plugin catalog seeds the Qwen Portal default:
 
 - `qwen-oauth/qwen3.5-plus`
 

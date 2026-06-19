@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "4cf84c715a62f8a78cbdd63647d0e936b01d5f94739b9fc76ea0889ca5b83a91"
+source_hash: "ca190f30726b11c8d5067cbb76d65c5491d5729d36d70e4417f3a75c03662944"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -544,6 +544,9 @@ openclaw infer image generate \
 Use the same `--output-format` and `--background` flags with
 `openclaw infer image edit` when starting from an input file.
 `--openai-background` remains available as an OpenAI-specific alias.
+Use `--quality low|medium|high|auto` when you need to control OpenAI Images
+quality and cost. Use `--openai-moderation low|auto` to pass OpenAI's
+provider-specific moderation hint from either `image generate` or `image edit`.
 
 For ChatGPT/Codex OAuth installs, keep the same `openai/gpt-image-2` ref. When an
 `openai` OAuth profile is configured, OpenClaw resolves that stored OAuth

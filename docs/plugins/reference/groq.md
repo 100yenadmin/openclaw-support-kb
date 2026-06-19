@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq plugin"
 source: "https://docs.openclaw.ai/plugins/reference/groq"
-source_hash: "b5897bca54ec8be62f5361872bfa16cfd4fb1bc2af70475c1d7749e073518455"
+source_hash: "c591105b563740a4a9ad026abc0c610b51de264099348df6724bd03b9ad9be19"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/groq.md"
@@ -20,7 +20,7 @@ Adds Groq model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/groq-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/groq-provider`
 
 ## Surface
 

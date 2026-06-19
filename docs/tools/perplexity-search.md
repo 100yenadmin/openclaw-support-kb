@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity search"
 source: "https://docs.openclaw.ai/tools/perplexity-search"
-source_hash: "f2ccf224904dce541439706c9e5a627b5130bed846c8c041340dfac8214ae9b1"
+source_hash: "2e1b48a6c19d9a6446f6b9ef1c81d74511cf35034a56a5096ce44e77518004c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/perplexity-search.md"
@@ -18,6 +18,15 @@ It returns structured results with `title`, `url`, and `snippet` fields.
 
 For compatibility, OpenClaw also supports legacy Perplexity Sonar/OpenRouter setups.
 If you use `OPENROUTER_API_KEY`, an `sk-or-...` key in `plugins.entries.perplexity.config.webSearch.apiKey`, or set `plugins.entries.perplexity.config.webSearch.baseUrl` / `model`, the provider switches to the chat-completions path and returns AI-synthesized answers with citations instead of structured Search API results.
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/perplexity-plugin
+openclaw gateway restart
+```
 
 ## Getting a Perplexity API key
 

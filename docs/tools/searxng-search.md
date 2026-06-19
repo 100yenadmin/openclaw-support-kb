@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SearXNG search"
 source: "https://docs.openclaw.ai/tools/searxng-search"
-source_hash: "1a23b55c6affa8fc37b607ff8b0f56fff9651bd1e22106c01a9a748bc1b81d00"
+source_hash: "a9c3eeb7ca465f40d15802a62b9f6466ffe5861a9ced9f21633b4049c346ac87"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/searxng-search.md"
@@ -130,9 +130,9 @@ key wins first).
 - **Network guard** -- private/internal SearXNG endpoints opt in to
   private-network access; public `https://` SearXNG endpoints keep strict SSRF
   protection
-- **Auto-detection order** -- SearXNG is checked last (order 200) in
-  auto-detection. API-backed providers with configured keys run first, then
-  DuckDuckGo (order 100), then Ollama Web Search (order 110)
+- **Auto-detection order** -- SearXNG is checked after API-backed providers
+  with configured keys (order 200). Key-free providers such as DuckDuckGo or
+  Ollama Web Search are not auto-selected without an explicit provider choice
 - **Self-hosted** -- you control the instance, queries, and upstream search engines
 - **Categories** default to `general` when not configured
 - **Category fallback** -- if a non-`general` category request succeeds but
@@ -147,7 +147,7 @@ Tip
 ## Related
 
 - [Web Search overview](/tools/web) -- all providers and auto-detection
-- [DuckDuckGo Search](/tools/duckduckgo-search) -- another key-free fallback
+- [DuckDuckGo Search](/tools/duckduckgo-search) -- another key-free provider
 - [Brave Search](/tools/brave-search) -- structured results with free tier
 
 ---

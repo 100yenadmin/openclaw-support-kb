@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "62382eb952eeaa7fac71aef7acac7e1a715dc533606d991538ef5d246ad5aee4"
+source_hash: "84e1d2e3e5e92f6b2d0b5983617ceed9417ce809c0a1ee25db25c0e7aed7ab19"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -230,8 +230,10 @@ model-call traces become children of the active request trace, so local logs,
 diagnostic snapshots, OTEL spans, and trusted provider `traceparent` headers can
 be joined by `traceId` without logging raw request or model content.
 
-Talk lifecycle log records also flow to OTLP logs when OpenTelemetry log export
-is enabled, using the same bounded attributes as file logs.
+Talk lifecycle log records also flow to diagnostics-otel log export when
+OpenTelemetry log export is enabled, using the same bounded attributes as file
+logs. Configure `diagnostics.otel.logsExporter` to choose OTLP, stdout JSONL, or
+both sinks.
 
 ### Model call size and timing
 

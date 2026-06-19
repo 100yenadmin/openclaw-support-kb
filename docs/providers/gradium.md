@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
-source_hash: "1d7526e14c7a395d0a9c08463d95d72acc361f460a78de6c8d67e81c3146967f"
+source_hash: "6021a04f40418df69877d1bf19f32a512a746ad188477eacba6cc093701b7184"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/gradium.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Gradium
 Source: https://docs.openclaw.ai/providers/gradium
 
-[Gradium](https://gradium.ai) is a bundled text-to-speech provider for OpenClaw. The plugin can render normal audio replies (WAV), voice-note-compatible Opus output, and 8 kHz u-law audio for telephony surfaces.
+[Gradium](https://gradium.ai) is a text-to-speech provider for OpenClaw. The plugin can render normal audio replies (WAV), voice-note-compatible Opus output, and 8 kHz u-law audio for telephony surfaces.
 
 | Property      | Value                                |
 | ------------- | ------------------------------------ |
@@ -21,6 +21,15 @@ Source: https://docs.openclaw.ai/providers/gradium
 | Auth          | `GRADIUM_API_KEY` or config `apiKey` |
 | Base URL      | `https://api.gradium.ai` (default)   |
 | Default voice | `Emma` (`YTpq7expH9539ERJ`)          |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/gradium-speech
+openclaw gateway restart
+```
 
 ## Setup
 

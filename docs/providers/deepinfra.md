@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra"
 source: "https://docs.openclaw.ai/providers/deepinfra"
-source_hash: "864bb04e1f7285ad4afc6719a7bfae6529b0808ae1ae551759f3aa7c02c5c249"
+source_hash: "39f6cacd1ffb4249cafdea717e26345dbceb64f2eeaac362564aee1796304a3c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepinfra.md"
@@ -15,6 +15,15 @@ Source: https://docs.openclaw.ai/providers/deepinfra
 
 DeepInfra provides a **unified API** that routes requests to the most popular open source and frontier models behind a single
 endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switching the base URL.
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/deepinfra-provider
+openclaw gateway restart
+```
 
 ## Getting an API key
 
@@ -49,7 +58,7 @@ export DEEPINFRA_API_KEY="<your-deepinfra-api-key>" # pragma: allowlist secret
 
 ## Supported OpenClaw surfaces
 
-The bundled plugin registers all DeepInfra surfaces that match current
+The plugin registers all DeepInfra surfaces that match current
 OpenClaw provider contracts. Chat, image generation, and video generation
 refresh their model catalogues live from `/v1/openai/models?sort_by=openclaw&filter=with_meta`
 when `DEEPINFRA_API_KEY` is configured; the other surfaces use the curated

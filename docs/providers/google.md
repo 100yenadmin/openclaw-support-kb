@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "73a357c7e4a4d3dd3d3d39ac33b34c2ae49751b10f006d64ca07b511a85d5d71"
+source_hash: "7f91e47a4cca35b0e7c59583ee02e773911fd7dadce0a072fa76c981aa5cb591"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -474,12 +474,15 @@ Direct Gemini cache reuse
 
 
 
-Gemini CLI JSON usage notes
+Gemini CLI usage notes
 
-    When using the `google-gemini-cli` OAuth provider, OpenClaw normalizes
-    the CLI JSON output as follows:
+    When using the `google-gemini-cli` OAuth provider, OpenClaw uses Gemini
+    CLI `stream-json` output by default and normalizes usage from the final
+    `stats` payload. Legacy `--output-format json` overrides still use the
+    JSON parser.
 
-    - Reply text comes from the CLI JSON `response` field.
+    - Streamed reply text comes from assistant `message` events.
+    - For legacy JSON output, reply text comes from the CLI JSON `response` field.
     - Usage falls back to `stats` when the CLI leaves `usage` empty.
     - `stats.cached` is normalized into OpenClaw `cacheRead`.
     - If `stats.input` is missing, OpenClaw derives input tokens from

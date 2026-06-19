@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chutes"
 source: "https://docs.openclaw.ai/providers/chutes"
-source_hash: "75840772eceb80b80b3b000a5e033d2b5401d8f5f86266314ba47e96fefcff10"
+source_hash: "540e5d965c4c21e41966851d632c3c7130c11af84aabb3fdab339e6da834d498"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/chutes.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/providers/chutes
 
 [Chutes](https://chutes.ai) exposes open-source model catalogs through an
 OpenAI-compatible API. OpenClaw supports both browser OAuth and direct API-key
-auth for the bundled `chutes` provider.
+auth for the `chutes` provider.
 
 | Property | Value                        |
 | -------- | ---------------------------- |
@@ -23,6 +23,15 @@ auth for the bundled `chutes` provider.
 | API      | OpenAI-compatible            |
 | Base URL | `https://llm.chutes.ai/v1`   |
 | Auth     | OAuth or API key (see below) |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/chutes-provider
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -48,7 +57,7 @@ Run the OAuth onboarding flow
 Verify the default model
 
         After onboarding, the default model is set to
-        `chutes/zai-org/GLM-4.7-TEE` and the bundled Chutes catalog is
+        `chutes/zai-org/GLM-4.7-TEE` and the Chutes static catalog is
         registered.
 
 
@@ -76,7 +85,7 @@ Run the API key onboarding flow
 Verify the default model
 
         After onboarding, the default model is set to
-        `chutes/zai-org/GLM-4.7-TEE` and the bundled Chutes catalog is
+        `chutes/zai-org/GLM-4.7-TEE` and the Chutes static catalog is
         registered.
 
 
@@ -84,7 +93,7 @@ Verify the default model
 
 Note
 
-Both auth paths register the bundled Chutes catalog and set the default model to
+Both auth paths register the Chutes static catalog and set the default model to
 `chutes/zai-org/GLM-4.7-TEE`. Runtime environment variables: `CHUTES_API_KEY`,
 `CHUTES_OAUTH_TOKEN`.
 
@@ -92,11 +101,11 @@ Both auth paths register the bundled Chutes catalog and set the default model to
 
 When Chutes auth is available, OpenClaw queries the Chutes catalog with that
 credential and uses the discovered models. If discovery fails, OpenClaw falls
-back to a bundled static catalog so onboarding and startup still work.
+back to a static catalog so onboarding and startup still work.
 
 ## Default aliases
 
-OpenClaw registers three convenience aliases for the bundled Chutes catalog:
+OpenClaw registers three convenience aliases for the Chutes static catalog:
 
 | Alias           | Target model                                          |
 | --------------- | ----------------------------------------------------- |
@@ -106,7 +115,7 @@ OpenClaw registers three convenience aliases for the bundled Chutes catalog:
 
 ## Built-in starter catalog
 
-The bundled fallback catalog includes current Chutes refs:
+The static fallback catalog includes current Chutes refs:
 
 | Model ref                                             |
 | ----------------------------------------------------- |
@@ -159,7 +168,7 @@ Notes
 
     - API-key and OAuth discovery both use the same `chutes` provider id.
     - Chutes models are registered as `chutes/<model-id>`.
-    - If discovery fails at startup, the bundled static catalog is used automatically.
+    - If discovery fails at startup, the static catalog is used automatically.
 
 
 

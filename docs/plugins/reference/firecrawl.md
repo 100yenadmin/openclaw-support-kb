@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Firecrawl plugin"
 source: "https://docs.openclaw.ai/plugins/reference/firecrawl"
-source_hash: "c311644e96e7a441a131c4e6cb8914e444fe1926164a9b1b66c5b7a4a4c0c905"
+source_hash: "ab190479f2a39776b0460954c3235a401d59e2359c2315fce12c309ba4eff56c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/firecrawl.md"
@@ -20,7 +20,7 @@ Adds agent-callable tools. Adds web fetch provider support. Adds web search prov
 ## Distribution
 
 - Package: `@openclaw/firecrawl-plugin`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/firecrawl-plugin`
 
 ## Surface
 

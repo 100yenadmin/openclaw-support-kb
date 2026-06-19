@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/cli/skills"
-source_hash: "54bbf149e5dfb31baa261b9f8691517104f4ebd8908128db419a4291aba53de6"
+source_hash: "6459b74811abaf2fdcc44e6fd8ba1adc730f5db1cd840695d3ece100db0eba28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/skills.md"
@@ -112,6 +112,10 @@ Notes:
   in the shared managed skills directory when combined with `--global`.
 - `verify <slug>` prints ClawHub's `clawhub.skill.verify.v1` JSON envelope by
   default. There is no `--json` flag because JSON is already the default.
+- When ClawHub returns server-resolved source provenance, verify JSON also
+  includes a commit-pinned `openclaw.verifiedSourceUrl`. Unavailable or
+  self-declared source URLs stay only in the raw provenance envelope and are not
+  promoted.
 - `verify` uses `.clawhub/origin.json` for installed ClawHub skills, so it
   verifies the installed version against the registry it came from. `--version`
   and `--tag` override the version selector but keep that installed registry

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qwen"
-source_hash: "6096abbb8b18dabb19250624a666dc121abb7013622a958e708a3ba9c6de7dde"
+source_hash: "5255f785c80628531d4f398e31fc549364e3f25354c05f6ab222a72a3e7665df"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qwen.md"
@@ -20,7 +20,7 @@ Adds Qwen, Qwen Cloud, Model Studio, DashScope, Qwen Oauth, Qwen Portal, Qwen CL
 ## Distribution
 
 - Package: `@openclaw/qwen-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/qwen-provider`
 
 ## Surface
 

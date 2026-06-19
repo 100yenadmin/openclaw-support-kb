@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "f2eea3824e41f5e4d6510e8aa7352e4b548c1d7e5e91d5c82e6de796e97e91f9"
+source_hash: "a845726823fe03b90eb3fd785c2b49080e894eb8e0481a0d72718ebabff3a79c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -359,6 +359,8 @@ Bitwarden Secrets Manager (`bws`)
     - `BWS_ACCESS_TOKEN` available to the Gateway service.
     - `PATH` passed to the resolver, or `BWS_BIN` set to the absolute `bws`
       binary path.
+    - `BWS_SERVER_URL` must be set in the environment when using a self-hosted
+      Bitwarden instance.
 
     ```json5
     {
@@ -367,7 +369,7 @@ Bitwarden Secrets Manager (`bws`)
           bws: {
             source: "exec",
             command: "/usr/local/bin/openclaw-bws-resolver.mjs",
-            passEnv: ["BWS_ACCESS_TOKEN", "PATH", "BWS_BIN"],
+            passEnv: ["BWS_ACCESS_TOKEN", "BWS_SERVER_URL", "PATH", "BWS_BIN"],
             jsonOnly: true,
           },
         },

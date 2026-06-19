@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "fdd7d4a74442e0fb0bdea4032c954a598c21b91ec762e5e2f394b8690aca035c"
+source_hash: "8e47f16ded9f6d45b3c2297681b685646f7ef5bf6e443a8e09cee878d8785fe1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -949,7 +949,7 @@ How do I enable web search (and web fetch)?
 
     - If you use allowlists, add `web_search`/`web_fetch`/`x_search` or `group:web`.
     - `web_fetch` is enabled by default (unless explicitly disabled).
-    - If `tools.web.fetch.provider` is omitted, OpenClaw auto-detects the first ready fetch fallback provider from available credentials. Today the bundled provider is Firecrawl.
+    - If `tools.web.fetch.provider` is omitted, OpenClaw auto-detects the first ready fetch fallback provider from available credentials. The official Firecrawl plugin provides that fallback.
     - Daemons read env vars from `~/.openclaw/.env` (or the service environment).
 
     Docs: [Web tools](/tools/web).

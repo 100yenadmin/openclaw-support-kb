@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium plugin"
 source: "https://docs.openclaw.ai/plugins/reference/gradium"
-source_hash: "eff27f7561eacceaee53e0174ef2185b07e0b540ca7e8f03faab61ca88613d9b"
+source_hash: "772c38c3cf2a5d9e8df7ac601e983321d79f168cfca60b12d9b6aadb18140843"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/gradium.md"
@@ -20,7 +20,7 @@ Adds text-to-speech provider support.
 ## Distribution
 
 - Package: `@openclaw/gradium-speech`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/gradium-speech`
 
 ## Surface
 

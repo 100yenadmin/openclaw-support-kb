@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code mode"
 source: "https://docs.openclaw.ai/reference/code-mode"
-source_hash: "5cefc8aa2399cb592ac726e941421607697efa0490e6df233f8332866efda232"
+source_hash: "a32b84fd8c0b416c45ed536a2bbbc919aad1e44b4fe0664ec86a6bb4b20d24bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/code-mode.md"
@@ -687,9 +687,10 @@ is disabled, uninstalled, or rolled back:
 clearCodeModeNamespacesForPlugin(pluginId);
 ```
 
-Use `unregisterCodeModeNamespace(namespaceId)` only when removing one known
-namespace. Tests can call `clearCodeModeNamespacesForTest()` to avoid leaking
-registrations across cases.
+Code-mode cleanup is plugin-owned; clear the plugin's namespace registrations
+when its lifecycle ends instead of keeping per-namespace teardown handles. Tests
+can call `clearCodeModeNamespacesForTest()` to avoid leaking registrations
+across cases.
 
 ### Test checklist
 

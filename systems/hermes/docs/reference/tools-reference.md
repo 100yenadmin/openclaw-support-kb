@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Tools Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/tools-reference"
-source_hash: "a479b84ffc344bb34cb8bbb64788f90b6385bab1ec66df58afbb0e4a6e88cbbf"
+source_hash: "3d3e72c26c810de4531989b9dfcf54f34244c9ceada6d6df8f0ca2101f47f51c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/tools-reference.md"
@@ -127,7 +127,7 @@ Scoped to the Feishu document-comment handler. Drives comment read/write operati
 
 | Tool | Description | Requires environment |
 |------|-------------|----------------------|
-| `image_generate` | Generate high-quality images from text prompts using FAL.ai. The underlying model is user-configured (default: FLUX 2 Klein 9B, sub-1s generation) and is not selectable by the agent. Returns a single image URL. Display it using… | FAL_KEY |
+| `image_generate` | Generate images from text prompts (text-to-image) or edit/transform an existing image (image-to-image) via the user-configured backend (FAL.ai, OpenAI, xAI, Krea). Pass `image_url` to edit an image and `reference_image_urls` for style references; omit both for text-to-image. The model is user-configured and not selectable by the agent. Returns a single image URL or local path. | FAL_KEY / OPENAI_API_KEY / xAI OAuth / KREA_API_KEY |
 
 ## `kanban` toolset
 

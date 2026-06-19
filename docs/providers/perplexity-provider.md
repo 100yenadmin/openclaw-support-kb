@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity"
 source: "https://docs.openclaw.ai/providers/perplexity-provider"
-source_hash: "0463ded3207cbc99065f4da4d8a5d17ce66a2f05511f8fcfc9aa4ba5811a6bb4"
+source_hash: "e5687769283c3dbbe3facde7557d97ba86e74fbd0fad997a084da694358d7bb4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/perplexity-provider.md"
@@ -25,6 +25,15 @@ This page is the Perplexity **provider** setup. For the Perplexity **tool** (how
 | Type        | Web search provider (not a model provider)                             |
 | Auth        | `PERPLEXITY_API_KEY` (direct) or `OPENROUTER_API_KEY` (via OpenRouter) |
 | Config path | `plugins.entries.perplexity.config.webSearch.apiKey`                   |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/perplexity-plugin
+openclaw gateway restart
+```
 
 ## Getting started
 

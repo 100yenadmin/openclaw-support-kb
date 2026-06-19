@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cerebras plugin"
 source: "https://docs.openclaw.ai/plugins/reference/cerebras"
-source_hash: "1fc7a8f6f91976abf1cefeb4cc9411829c87f5db9a73e9a52a355a7866db389d"
+source_hash: "9018fe9d077d68ee08a84b5d553f7252564f4c0c034e5c43999d54a29c9368ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/cerebras.md"
@@ -20,7 +20,7 @@ Adds Cerebras model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/cerebras-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/cerebras-provider`
 
 ## Surface
 

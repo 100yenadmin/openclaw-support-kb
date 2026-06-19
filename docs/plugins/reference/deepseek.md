@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepSeek plugin"
 source: "https://docs.openclaw.ai/plugins/reference/deepseek"
-source_hash: "4c8ba1954c2e88daf1c4eab093fa16c6edcb4257cfb5cb2ffcd16a82b94652da"
+source_hash: "916ea0004a1b01d315b267587653b41ef0ed420678f57c6a40ba6307299ffe2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/deepseek.md"
@@ -20,7 +20,7 @@ Adds DeepSeek model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/deepseek-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/deepseek-provider`
 
 ## Surface
 

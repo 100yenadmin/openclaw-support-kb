@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "b6d1bf6b61ba6a0bb4f3df4fd972c83741efb3b8971d7d0ee2bb79f442d3d4f5"
+source_hash: "41b2ee20cd6fff588dceb5c134e7a1bb43d49f58eb71fb93d9b0a91a6ad7d535"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -155,7 +155,7 @@ the shared live sweep:
 | Alibaba    |     ✓      |       ✓        |       ✓        | `generate`, `imageToVideo`; `videoToVideo` skipped because this provider needs remote `http(s)` video URLs                              |
 | BytePlus   |     ✓      |       ✓        |       -        | `generate`, `imageToVideo`                                                                                                              |
 | ComfyUI    |     ✓      |       ✓        |       -        | Not in the shared sweep; workflow-specific coverage lives with Comfy tests                                                              |
-| DeepInfra  |     ✓      |       -        |       -        | `generate`; native DeepInfra video schemas are text-to-video in the bundled contract                                                    |
+| DeepInfra  |     ✓      |       -        |       -        | `generate`; native DeepInfra video schemas are text-to-video in the plugin contract                                                     |
 | fal        |     ✓      |       ✓        |       ✓        | `generate`, `imageToVideo`; `videoToVideo` only when using Seedance reference-to-video                                                  |
 | Google     |     ✓      |       ✓        |       ✓        | `generate`, `imageToVideo`; shared `videoToVideo` skipped because the current buffer-backed Gemini/Veo sweep does not accept that input |
 | MiniMax    |     ✓      |       ✓        |       -        | `generate`, `imageToVideo`                                                                                                              |

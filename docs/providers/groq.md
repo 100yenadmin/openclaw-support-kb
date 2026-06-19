@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
-source_hash: "5cc73d3d030162329b82cc082045459342b08d44aeeaa3223019749c2b623cdb"
+source_hash: "9aa6d5e084b06d5b405c1000894f69553d7bedbfc2e9f1a80212437979a0efa0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/groq.md"
@@ -13,18 +13,26 @@ duplicate_index: 1
 # Groq
 Source: https://docs.openclaw.ai/providers/groq
 
-[Groq](https://groq.com) provides ultra-fast inference on open-weight models (Llama, Gemma, Kimi, Qwen, GPT OSS, and more) using custom LPU hardware. OpenClaw includes a bundled Groq plugin that registers both an OpenAI-compatible chat provider and an audio media-understanding provider.
+[Groq](https://groq.com) provides ultra-fast inference on open-weight models (Llama, Gemma, Kimi, Qwen, GPT OSS, and more) using custom LPU hardware. The Groq plugin registers both an OpenAI-compatible chat provider and an audio media-understanding provider.
 
 | Property               | Value                                    |
 | ---------------------- | ---------------------------------------- |
 | Provider id            | `groq`                                   |
-| Plugin                 | bundled, `enabledByDefault: true`        |
+| Plugin                 | official external package                |
 | Auth env var           | `GROQ_API_KEY`                           |
-| Onboarding flag        | `--auth-choice groq-api-key`             |
 | API                    | OpenAI-compatible (`openai-completions`) |
 | Base URL               | `https://api.groq.com/openai/v1`         |
 | Audio transcription    | `whisper-large-v3-turbo` (default)       |
 | Suggested chat default | `groq/llama-3.3-70b-versatile`           |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/groq-provider
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -38,19 +46,9 @@ Get an API key
 
 Set the API key
 
-
-CodeGroup
-
-```bash Onboarding
-openclaw onboard --auth-choice groq-api-key
-```
-
-```bash Env only
+    ```bash
 export GROQ_API_KEY=gsk_...
 ```
-
-
-
 
 
 Set a default model
@@ -88,7 +86,7 @@ Verify the catalog is reachable
 
 ## Built-in catalog
 
-OpenClaw ships a manifest-backed Groq catalog with both reasoning and non-reasoning entries. Run `openclaw models list --provider groq` to see the bundled rows for your installed version, or check [console.groq.com/docs/models](https://console.groq.com/docs/models) for Groq's authoritative list.
+OpenClaw ships a manifest-backed Groq catalog with both reasoning and non-reasoning entries. Run `openclaw models list --provider groq` to see the static rows for your installed version, or check [console.groq.com/docs/models](https://console.groq.com/docs/models) for Groq's authoritative list.
 
 | Model ref                                        | Name                    | Reasoning | Input        | Context |
 | ------------------------------------------------ | ----------------------- | --------- | ------------ | ------- |
@@ -118,7 +116,7 @@ See [Thinking modes](/tools/thinking) for the shared `/think` levels and how Ope
 
 ## Audio transcription
 
-Groq's bundled plugin also registers an **audio media-understanding provider** so voice messages can be transcribed through the shared `tools.media.audio` surface.
+Groq's plugin also registers an **audio media-understanding provider** so voice messages can be transcribed through the shared `tools.media.audio` surface.
 
 | Property           | Value                                     |
 | ------------------ | ----------------------------------------- |
@@ -160,7 +158,7 @@ Warning
 
 Custom Groq model ids
 
-    OpenClaw accepts any Groq model id at runtime. Use the exact id shown by Groq and prefix it with `groq/`. The bundled catalog covers the common cases; uncatalogued ids fall through to the default OpenAI-compatible template.
+    OpenClaw accepts any Groq model id at runtime. Use the exact id shown by Groq and prefix it with `groq/`. The static catalog covers the common cases; uncatalogued ids fall through to the default OpenAI-compatible template.
 
     ```json5
     {

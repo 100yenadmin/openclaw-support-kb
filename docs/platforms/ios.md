@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "a156c94767fc0d1b5051fac8a868b27e0e26ffe03db411d1fa74cf19c75e643d"
+source_hash: "bc230401d1ec3b68572b5928599271ef0b57acdffe3054e8346d094b271b7a85"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -199,8 +199,8 @@ export OPENCLAW_APNS_PRIVATE_KEY_P8="$(cat /path/to/AuthKey_KEYID.p8)"
 ```
 
 These are gateway-host runtime env vars, not Fastlane settings. `apps/ios/fastlane/.env` only stores
-App Store Connect / TestFlight auth such as `ASC_KEY_ID` and `ASC_ISSUER_ID`; it does not configure
-direct APNs delivery for local iOS builds.
+App Store Connect / TestFlight auth such as `APP_STORE_CONNECT_KEY_ID` and
+`APP_STORE_CONNECT_ISSUER_ID`; it does not configure direct APNs delivery for local iOS builds.
 
 Recommended gateway-host storage:
 

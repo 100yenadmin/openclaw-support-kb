@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "080f4dbe61ad7390cb6e1f0696167bda3da48e8e02758f4bf56bf30ad441f933"
+source_hash: "bc7458586880848fcd85033dd2dc8129d61c6cc45eef55703685e917a259c145"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web-fetch.md"
@@ -60,7 +60,7 @@ Extract
 
 Fallback (optional)
 
-    If Readability fails and Firecrawl is configured, retries through the
+    If Readability fails and Firecrawl is selected, retries through the
     Firecrawl API with bot-circumvention mode.
 
 
@@ -133,7 +133,7 @@ If Readability extraction fails, `web_fetch` can fall back to
         enabled: true,
         config: {
           webFetch: {
-            apiKey: "fc-...", // optional if FIRECRAWL_API_KEY is set
+            // apiKey: "fc-...", // optional; omit for keyless starter access
             baseUrl: "https://api.firecrawl.dev",
             onlyMainContent: true,
             maxAgeMs: 86400000, // cache duration (1 day)
@@ -146,12 +146,12 @@ If Readability extraction fails, `web_fetch` can fall back to
 }
 ```
 
-`plugins.entries.firecrawl.config.webFetch.apiKey` supports SecretRef objects.
+`plugins.entries.firecrawl.config.webFetch.apiKey` is optional and supports SecretRef objects.
 Legacy `tools.web.fetch.firecrawl.*` config is auto-migrated by `openclaw doctor --fix`.
 
 Note
 
-  If Firecrawl is enabled and its SecretRef is unresolved with no
+  If you configure a Firecrawl API-key SecretRef and it is unresolved with no
   `FIRECRAWL_API_KEY` env fallback, gateway startup fails fast.
 
 Note
@@ -164,10 +164,13 @@ Current runtime behavior:
 
 - `tools.web.fetch.provider` selects the fetch fallback provider explicitly.
 - If `provider` is omitted, OpenClaw auto-detects the first ready web-fetch
-  provider from available credentials. Non-sandboxed `web_fetch` can use
+  provider from configured credentials. Non-sandboxed `web_fetch` can use
   installed plugins that declare `contracts.webFetchProviders` and register a
-  matching provider at runtime. Today the bundled provider is Firecrawl.
-- Sandboxed `web_fetch` calls stay limited to bundled providers.
+  matching provider at runtime. The official Firecrawl plugin provides this
+  fallback.
+- Sandboxed `web_fetch` calls allow bundled providers plus installed providers
+  whose official npm or ClawHub provenance is verified. Today that permits the
+  official Firecrawl plugin; third-party external fetch plugins stay excluded.
 - If Readability is disabled, `web_fetch` skips straight to the selected
   provider fallback. If no provider is available, it fails closed.
 

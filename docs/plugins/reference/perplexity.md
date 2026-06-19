@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity plugin"
 source: "https://docs.openclaw.ai/plugins/reference/perplexity"
-source_hash: "f8522a63ea0da6b622b9c7f1b2db9f44431b51f833271c5ebde766dcec1c2f4d"
+source_hash: "7c32f2affe2a39adc6e9c33c1e50b6707ce667a315e742fd15097f876054246e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/perplexity.md"
@@ -20,7 +20,7 @@ Adds web search provider support.
 ## Distribution
 
 - Package: `@openclaw/perplexity-plugin`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/perplexity-plugin`
 
 ## Surface
 

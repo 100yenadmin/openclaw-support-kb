@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra plugin"
 source: "https://docs.openclaw.ai/plugins/reference/deepinfra"
-source_hash: "571e2285fef6a9157abb53329d75136f6f24214a117993effc56e91c9bf5abd7"
+source_hash: "a2f6673fd0bdaab5b40205c1e003decce23f811fae40893bfc2140d8e61d9754"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/deepinfra.md"
@@ -20,7 +20,7 @@ Adds DeepInfra model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/deepinfra-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/deepinfra-provider`
 
 ## Surface
 

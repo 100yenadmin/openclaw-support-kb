@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "918dcfb141ff60252431d3f95bdf663e17168448c337872d925577bbe180648f"
+source_hash: "2722e323b8d0f8e94fd6c1c6ab616070a49134537512e08d2bdb368c6c827ecf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -312,12 +312,17 @@ hermes memory setup    # select "openviking"
 # Or manually:
 hermes config set memory.provider openviking
 echo "OPENVIKING_ENDPOINT=http://localhost:1933" >> ~/.hermes/.env
+# Authenticated servers should use a user/admin API key:
+echo "OPENVIKING_API_KEY=..." >> ~/.hermes/.env
 ```
 
 **Key features:**
 - Tiered context loading: L0 (~100 tokens) → L1 (~2k) → L2 (full)
 - Automatic memory extraction on session commit (profile, preferences, entities, events, cases, patterns)
 - `viking://` URI scheme for hierarchical knowledge browsing
+
+`OPENVIKING_ACCOUNT` and `OPENVIKING_USER` are used for local/trusted mode.
+`OPENVIKING_AGENT` is Hermes' peer ID in OpenViking for peer-scoped memories.
 
 ---
 

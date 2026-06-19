@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "83d979f79112bc79f0ee438830cd48678f9c22e5a7a06816c7ccc33e2beb61da"
+source_hash: "ef61586036ba5ecad93198f119a5ae1fb16c41edc7a0ed884df6dd3452a5b4da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -622,7 +622,7 @@ AccordionGroup
 
 Cerebras (GLM 4.7 / GPT OSS)
 
-    The bundled `cerebras` provider plugin can configure this via `openclaw onboard --auth-choice cerebras-api-key`. Use explicit provider config only when overriding defaults.
+    The official external `cerebras` provider plugin can configure this via `openclaw onboard --auth-choice cerebras-api-key`. Use explicit provider config only when overriding defaults.
 
     ```json5
     {

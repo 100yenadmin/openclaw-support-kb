@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "5721244fae65ecc47ccbcd885898645ac6c2a701994c67d743d7cb37048b686e"
+source_hash: "d90af438238c3c0fcdbe323838f6a10ae93752c1ae012e86c62ce0b0b8434c0e"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -214,7 +214,8 @@ Every local install keeps runtime state directly under the selected instance roo
   secrets/master.key                             # local_encrypted master key
   workspaces/<agent-id>/                         # default agent workspaces
   projects/                                      # project execution workspaces
-  companies/<company-id>/codex-home/             # per-company codex_local home
+  companies/<company-id>/agents/<agent-id>/codex-home/
+                                                   # per-agent codex_local home
 ```
 
 `PAPERCLIP_HOME` and `PAPERCLIP_INSTANCE_ID` override the home root and instance id respectively. `paperclipai onboard` echoes the resolved values in its banner (`Local home: <home> | instance: <id> | config: <path>`) so you can confirm where state will land before continuing.
@@ -284,9 +285,11 @@ When a local agent run has no resolved project/session workspace, Paperclip fall
 
 This path honors `PAPERCLIP_HOME` and `PAPERCLIP_INSTANCE_ID` in non-default setups.
 
-For `codex_local`, Paperclip also manages a per-company Codex home under the instance root and seeds it from the shared Codex login/config home (`$CODEX_HOME` or `~/.codex`):
+For `codex_local`, Paperclip assigns new and updated agents an isolated Codex home under the instance root and blocks shared host/company Codex homes:
 
-- `~/.paperclip/instances/default/companies/<company-id>/codex-home`
+- `~/.paperclip/instances/default/companies/<company-id>/agents/<agent-id>/codex-home`
+
+Paperclip also persists an empty `OPENAI_API_KEY` override for those agents so a host-level `OPENAI_API_KEY` cannot leak into Codex runs through process inheritance. If an operator explicitly configures `adapterConfig.env.CODEX_HOME`, it must not point at the shared company `codex-home`, `$CODEX_HOME`, or `~/.codex`.
 
 If the `codex` CLI is not installed or not on `PATH`, `codex_local` agent runs fail at execution time with a clear adapter error. Quota polling uses a short-lived `codex app-server` subprocess: when `codex` cannot be spawned, that provider reports `ok: false` in aggregated quota results and the API server keeps running (it must not exit on a missing binary).
 

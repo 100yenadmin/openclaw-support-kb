@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "13a862d25d120940140ab19f50cbab01d9314a1d0990b84704b94869bc08ea39"
+source_hash: "9e06539a203a006243da58b85548246f7a811f81fade2d0a3fb854b1df539d6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -368,8 +368,8 @@ OpenClaw also enforces a safety floor for embedded runs:
 
 Why: leave enough headroom for multi-turn "housekeeping" (like memory writes) before compaction becomes unavoidable.
 
-Implementation: `ensureAgentCompactionReserveTokens()` in `src/agents/agent-settings.ts`
-(called from `src/agents/embedded-agent-runner.ts`).
+Implementation: `applyAgentCompactionSettingsFromConfig()` in `src/agents/agent-settings.ts`
+(called from embedded-runner turn and compaction setup paths).
 
 ---
 

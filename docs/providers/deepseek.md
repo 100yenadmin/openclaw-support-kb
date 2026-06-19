@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepSeek"
 source: "https://docs.openclaw.ai/providers/deepseek"
-source_hash: "5f4d7717bb964f65f9e7aee9334882583e5b65da8e307965211a69596b67a631"
+source_hash: "465da775ac499c809cec69020386a9b808e3683831759539c8659a42f4fd56db"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepseek.md"
@@ -21,6 +21,15 @@ Source: https://docs.openclaw.ai/providers/deepseek
 | Auth     | `DEEPSEEK_API_KEY`         |
 | API      | OpenAI-compatible          |
 | Base URL | `https://api.deepseek.com` |
+
+## Install plugin
+
+Install the official plugin, then restart Gateway:
+
+```bash
+openclaw plugins install @openclaw/deepseek-provider
+openclaw gateway restart
+```
 
 ## Getting started
 
@@ -48,7 +57,7 @@ Verify models are available
     openclaw models list --provider deepseek
     ```
 
-    To inspect the bundled static catalog without requiring a running Gateway,
+    To inspect the plugin's static catalog without requiring a running Gateway,
     use:
 
     ```bash

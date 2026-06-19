@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld plugin"
 source: "https://docs.openclaw.ai/plugins/reference/inworld"
-source_hash: "d75814dfe386785ad07146318b3fb4705ad35e5ef6a2b9a25aa2ee16ae1430eb"
+source_hash: "1a81b22d3824b04ee12bc5971bcfad64cb6a5b784a69800daa9f80826ce4af7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/inworld.md"
@@ -20,7 +20,7 @@ Inworld streaming text-to-speech (MP3, OGG_OPUS, PCM telephony).
 ## Distribution
 
 - Package: `@openclaw/inworld-speech`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/inworld-speech`
 
 ## Surface
 

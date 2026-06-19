@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "9354661de480316b865632ff123a8b8cded8a66f8cedb10e5a6656d010f080d0"
+source_hash: "c5246d2a22d49c042b40b671a5aa9074a3e7deaf11e1f97229c1bc10547452e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -91,7 +91,8 @@ Set `memorySearch.provider` to switch away from OpenAI.
 OpenClaw indexes `MEMORY.md` and `memory/*.md` into chunks (~400 tokens with
 80-token overlap) and stores them in a per-agent SQLite database.
 
-- **Index location:** `~/.openclaw/memory/<agentId>.sqlite`
+- **Index location:** the owning agent database at
+  `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
 - **Storage maintenance:** SQLite WAL sidecars are bounded with periodic and
   shutdown checkpoints.
 - **File watching:** changes to memory files trigger a debounced reindex (1.5s).
