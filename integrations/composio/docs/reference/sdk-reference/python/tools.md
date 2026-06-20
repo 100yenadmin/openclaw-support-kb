@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
-source_hash: "d76421d4e06bf78e14757f9a97e4216ea3dd2f21a02948aee1cb5c362c5b5f55"
+source_hash: "b6ca8b3c9c5bdf9c70373ff5933d7719568356b4253c73e99636c342b2ce726e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tools.md"
@@ -65,7 +65,7 @@ def get_raw_composio_tools(tools: list[str | None] = ..., search: str | None = .
 
 ## get\_raw\_tool\_router\_meta\_tools()
 
-Fetches the meta tools for a tool router session.  This method fetches the meta tools from the Composio API and transforms them to the expected format. It provides access to the underlying meta tool data without provider-specific wrapping.
+Fetches the tools exposed by a tool router session.  This method fetches helper/meta tools and any preloaded app tools from the Composio API and transforms them to the expected format. It provides access to the underlying tool data without provider-specific wrapping.
 
 ```python
 def get_raw_tool_router_meta_tools(session_id: str, modifiers: 'Modifiers' | None = ...) -> list[Tool]
@@ -129,7 +129,7 @@ modifiers=[modify_schema]
 
 ## execute()
 
-Execute a tool with the provided parameters.  This method calls the Composio API or a custom tool handler to execute the tool and returns the response. It automatically determines whether to use a custom tool or a Composio API tool based on the slug.
+Execute a tool with the provided parameters.  This method calls the Composio API to execute the tool and returns the response.
 
 ```python
 def execute(slug: str, arguments: Dict, connected_account_id: str | None = ..., custom_auth_params: tool_execute_params.CustomAuthParams | None = ..., custom_connection_data: tool_execute_params.CustomConnectionData | None = ..., user_id: str | None = ..., text: str | None = ..., version: str | None = ..., dangerously_skip_version_check: bool | None = ..., modifiers: Modifiers | None = ...) -> ToolExecutionResponse
@@ -181,6 +181,6 @@ def proxy(endpoint: str, method: Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH'
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tools.py#L80)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tools.py#L89)
 
 ---

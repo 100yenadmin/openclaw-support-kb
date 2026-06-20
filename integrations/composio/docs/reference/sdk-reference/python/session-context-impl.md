@@ -2,7 +2,7 @@
 type: composio_doc
 title: "SessionContextImpl"
 source: "https://docs.composio.dev/reference/sdk-reference/python/session-context-impl.md"
-source_hash: "87694fea928146079d0630c244b8bb9c029e088a4882f15791a74e8b1d1cb161"
+source_hash: "eff471674a16694b32a6a24ffcf2513674b2c3717fe3f4a85474246ab2c9b3af"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/session-context-impl.md"
@@ -70,6 +70,6 @@ def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'P
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/session_context.py#L87)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/session_context.py#L92)
 
 ---

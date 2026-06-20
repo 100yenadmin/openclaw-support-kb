@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "e43d161e2cf6038ee1805200034993d6faa26f9555c2ebf3c1ae2595e0f079ee"
+source_hash: "b9d8aa45c6d21f1948a5b38d1e1a6cc8896a63e800b46cfeb15a5a97ff85c123"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -53,6 +53,7 @@ Bots need both a model provider and tool providers (TTS, web). A [Nous Portal](/
 | Microsoft Teams | — | ✅ | — | ✅ | — | ✅ | — |
 | LINE | — | ✅ | ✅ | — | — | ✅ | — |
 | ntfy | — | — | — | — | — | — | — |
+| Raft | — | — | — | — | — | — | — |
 
 **Voice** = TTS audio replies and/or voice message transcription. **Images** = send/receive images. **Files** = send/receive file attachments. **Threads** = threaded conversations. **Reactions** = emoji reactions on messages. **Typing** = typing indicator while processing. **Streaming** = progressive message updates via editing.
 
@@ -524,6 +525,7 @@ Each platform has its own toolset:
 | Microsoft Teams | `hermes-teams` | Full tools including terminal |
 | API Server | `hermes-api-server` | Full tools (drops `clarify`, `send_message`, `text_to_speech` — programmatic access doesn't have an interactive user) |
 | Webhooks | `hermes-webhook` | Full tools including terminal |
+| Raft | `hermes-raft` | Wake-only channel; agent uses Raft CLI for message I/O |
 
 ## Operating a multi-platform gateway
 
@@ -652,6 +654,7 @@ Defaults to `false`. Only platforms whose adapter implements `delete_message` ho
 - [Microsoft Teams Setup](teams.md)
 - [Teams Meetings Pipeline](teams-meetings.md)
 - [Open WebUI + API Server](open-webui.md)
+- [Raft Setup](raft.md)
 - [Webhooks](webhooks.md)
 
 ---

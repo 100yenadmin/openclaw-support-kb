@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "a687ef6d7f5eb99d8f57de220243b458c4ddb45b9daa54cf590e887e1dce9356"
+source_hash: "6a56dd4691ce9d4506e091ec764d5a70d5a4b4ca2a6b2263fcdaff79fb913153"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -78,7 +78,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 
 ## Messaging Platforms
 
-- [Overview](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/index): Chat with Hermes from Telegram, Discord, Slack, WhatsApp, Signal, SMS, Email, Home Assistant, Mattermost, Matrix, DingTalk, Yuanbao, Microsoft Teams, LINE, Webhooks, or any OpenAI-compatible frontend via the API server — architecture and setup overview
+- [Overview](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/index): Chat with Hermes from Telegram, Discord, Slack, WhatsApp, Signal, SMS, Email, Home Assistant, Mattermost, Matrix, DingTalk, Yuanbao, Microsoft Teams, LINE, Raft, Webhooks, or any OpenAI-compatible frontend via the API server — architecture and setup overview
 - [Telegram](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram): Set up Hermes Agent as a Telegram bot
 - [Discord](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord): Set up Hermes Agent as a Discord bot
 - [Slack](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack): Set up Hermes Agent as a Slack bot using Socket Mode

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ToolRouterSession"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tool-router-session.md"
-source_hash: "c67a1e18652039a5b84c569592dac9ab6eebaca39cfa033009c690f39d4cccf0"
+source_hash: "906388ec65e11a9476e373105a2496944a8e87288fe849e3db413a3519d53823"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tool-router-session.md"
@@ -24,6 +24,7 @@ Source: https://docs.composio.dev/reference/sdk-reference/python/tool-router-ses
 | `session_id`   | `str`                             |
 | `mcp`          | `Any`                             |
 | `experimental` | `'ToolRouterSessionExperimental'` |
+| `preload`      | `Any`                             |
 
 # Methods
 
@@ -52,16 +53,17 @@ def tools(modifiers: 'Modifiers' | None = ...) -> TToolCollection
 Authorize a toolkit for the user and get a connection request.  Initiates the OAuth flow and returns a ConnectionRequest with redirect URL.
 
 ```python
-def authorize(toolkit: str, callback_url: str | None = ..., alias: str | None = ...) -> ConnectionRequest
+def authorize(toolkit: str, callback_url: str | None = ..., alias: str | None = ..., experimental: session_link_params.Experimental | None = ...) -> ConnectionRequest
 ```
 
 **Parameters**
 
-| Name            | Type          |
-| --------------- | ------------- |
-| `toolkit`       | `str`         |
-| `callback_url?` | `str \| None` |
-| `alias?`        | `str \| None` |
+| Name            | Type                                       |
+| --------------- | ------------------------------------------ |
+| `toolkit`       | `str`                                      |
+| `callback_url?` | `str \| None`                              |
+| `alias?`        | `str \| None`                              |
+| `experimental?` | `session_link_params.Experimental \| None` |
 
 **Returns**
 
@@ -116,10 +118,10 @@ def search(query: str, model: str | None = ...) -> SessionSearchResponse
 
 ## execute()
 
-Execute a tool within the session.  For custom tools, accepts the original slug (e.g. "GREP") or the full slug (e.g. "LOCAL\_GREP"). Custom tools are executed in-process; remote tools are sent to the Composio backend.  Both paths return a `SessionExecuteResponse` with `data`, `error`, and `log_id` attributes.
+Execute a tool within the session.  For custom tools, accepts the original slug (e.g. "GREP") or the full slug (e.g. "LOCAL\_GREP"). Custom tools are executed in-process; remote tools are sent to the Composio backend.
 
 ```python
-def execute(tool_slug: str, arguments: Dict[str, Any | None] = ...) -> SessionExecuteResponse
+def execute(tool_slug: str, arguments: Dict[str, Any | None] = ..., account: str | None = ...) -> SessionExecuteResponse
 ```
 
 **Parameters**
@@ -128,6 +130,7 @@ def execute(tool_slug: str, arguments: Dict[str, Any | None] = ...) -> SessionEx
 | ------------ | ------------------------ |
 | `tool_slug`  | `str`                    |
 | `arguments?` | `Dict[str, Any \| None]` |
+| `account?`   | `str \| None`            |
 
 **Returns**
 
@@ -193,6 +196,30 @@ def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'P
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tool_router_session.py#L53)
+## update()
+
+Partially update the session configuration.  Only the fields provided will be changed; omitted fields are preserved. Mutates this session's `preload` in-place.  Pass `None` for `manage_connections`, `workbench`, or `multi_account` to clear the stored value.  All parameters use the same types as the Stainless-generated `client.tool_router.session.patch()` method.
+
+```python
+def update(toolkits: Union[session_patch_params.Toolkits, 'Omit'] = ..., tools: Union[Dict[str, session_patch_params.Tools], 'Omit'] = ..., tags: Union[session_patch_params.Tags, 'Omit'] = ..., auth_configs: Union[Dict[str, str], 'Omit'] = ..., connected_accounts: Union[Dict[str, SequenceNotStr[str | None]], 'Omit'] = ..., manage_connections: Union[session_patch_params.ManageConnections | None, 'Omit'] = ..., workbench: Union[session_patch_params.Workbench | None, 'Omit'] = ..., multi_account: Union[session_patch_params.MultiAccount | None, 'Omit'] = ..., preload: Union[session_patch_params.Preload, 'Omit'] = ...) -> None
+```
+
+**Parameters**
+
+| Name                  | Type                                                            |
+| --------------------- | --------------------------------------------------------------- |
+| `toolkits?`           | `Union[session_patch_params.Toolkits, 'Omit']`                  |
+| `tools?`              | `Union[Dict[str, session_patch_params.Tools], 'Omit']`          |
+| `tags?`               | `Union[session_patch_params.Tags, 'Omit']`                      |
+| `auth_configs?`       | `Union[Dict[str, str], 'Omit']`                                 |
+| `connected_accounts?` | `Union[Dict[str, SequenceNotStr[str \| None]], 'Omit']`         |
+| `manage_connections?` | `Union[session_patch_params.ManageConnections \| None, 'Omit']` |
+| `workbench?`          | `Union[session_patch_params.Workbench \| None, 'Omit']`         |
+| `multi_account?`      | `Union[session_patch_params.MultiAccount \| None, 'Omit']`      |
+| `preload?`            | `Union[session_patch_params.Preload, 'Omit']`                   |
+
+***
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tool_router_session.py#L80)
 
 ---

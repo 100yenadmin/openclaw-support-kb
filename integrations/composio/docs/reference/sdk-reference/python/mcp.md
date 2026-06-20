@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/python/mcp.md"
-source_hash: "deab23598b3fc582bf9e7485bb9127783f2e30f9b674e5fff50ce83cad42d7fe"
+source_hash: "07edfe3cc62832165e086f83b7fce83063175f07113c4bb804730b37c3aa9099"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/mcp.md"
@@ -261,6 +261,6 @@ def generate(user_id: str, mcp_config_id: str, manually_manage_connections: bool
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/mcp.py#L88)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/mcp.py#L104)
 
 ---

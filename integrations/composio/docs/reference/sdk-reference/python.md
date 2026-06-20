@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Python SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/python.md"
-source_hash: "c8aea2fdc1997f1ca0ab114b2f9922ba6a22f7cd3c52c3ada62c291bc47ac1ab"
+source_hash: "74cbe8250ef00a76f65a0c1054d9da9a99d139eefb01c16875fe82a8bf4e192b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python.md"
@@ -69,7 +69,7 @@ result = composio.tools.execute(
 
 ## before\_execute
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L183)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L280)
 
 ```python
 @before_execute(modifier: BeforeExecute | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
@@ -79,7 +79,7 @@ def my_modifier(...):
 
 ## after\_execute
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L144)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L241)
 
 ```python
 @after_execute(modifier: AfterExecute | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
@@ -89,19 +89,19 @@ def my_modifier(...):
 
 ## before\_file\_upload
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L236)
+Build a `Modifier` for the file-upload hook (same scoping pattern as :func:`before_execute`).  Your callable may take **either**:  - a single `context` argument (:class:`BeforeFileUploadContext`) — the preferred form, exposes `context["source"]` (`"path"` or `"url"`), or - three positional arguments `(path, tool, toolkit)` — legacy form, kept for back-compat.  Return a new path/URL string to substitute, or `False` to abort the upload (raises :class:`~composio.exceptions.FileUploadAbortedError`).  Pass the returned `Modifier` in `modifiers=[...]` on :meth:`composio.core.models.tools.Tools.execute` or `tools.get`. Multiple such modifiers are composed in list order.
+
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L319)
 
 ```python
-@before_file_upload(modifier: BeforeFileUploadCallable | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
-def my_modifier(path: str, tool: str, toolkit: str) -> str | bool:
+@before_file_upload(modifier: BeforeFileUploadLike | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)
+def my_modifier(...):
     ...
 ```
 
-Builds a [Modifier](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py) for the file-upload hook. See [Before file upload (Python)](/docs/tools-direct/modify-tool-behavior/before-execution-modifiers#before-file-upload-python) for usage and examples.
-
 ## schema\_modifier
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L222)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L377)
 
 ```python
 @schema_modifier(modifier: SchemaModifier | None = ..., tools: List[str | None] = ..., toolkits: List[str | None] = ...)

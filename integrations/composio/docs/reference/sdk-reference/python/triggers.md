@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/python/triggers.md"
-source_hash: "4120d2619a51cc0163f0a2c4e1bfa36c6255bf27165cab78f14fd6d84692dce9"
+source_hash: "34bdff3e3acd6e5b69f08d27f82d4de0d72a8f973e448d7cc8faa20188463103"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/triggers.md"
@@ -170,6 +170,6 @@ def verify_webhook(id: str, payload: str, secret: str, signature: str, timestamp
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/triggers.py#L701)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/triggers.py#L865)
 
 ---

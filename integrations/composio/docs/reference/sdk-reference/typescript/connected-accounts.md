@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md"
-source_hash: "5e8e9a8de464c3133edbfe0ca1b2ff226911617f7912796ecef724ee79a9146f"
+source_hash: "a96f2b8617f4023a54d0d5cf59fce03de327ad61060e44ff42e2ca458b1afa75"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
@@ -159,7 +159,7 @@ This function creates a new connected account and returns a connection request.
 Users can then wait for the connection to be established using the `waitForConnection` method.
 
 **Deprecated for Composio-managed OAuth (OAuth1, OAuth2, DCR\_OAUTH).**
-The legacy \`POST endpoint that this method
+The legacy `POST /api/v3/connected_accounts` endpoint that this method
 wraps is being retired for Composio-managed auth configs on redirectable
 schemes. The cutover is **2026-05-08** for new organizations and
 **2026-07-03** for all remaining organizations. After your org's cutover,

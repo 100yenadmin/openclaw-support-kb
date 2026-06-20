@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md"
-source_hash: "5fa0d5f21002d3870e4568f4d4f23d96f6775acfaa00cf0646bb6143dc64d8c7"
+source_hash: "95c36d68c5a648ac1258f4044918ed3ffc9bc301baa19b6d112c2e94503eb40a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/connected-accounts.md"
@@ -53,7 +53,7 @@ def update(nanoid: str, alias: str | None = ..., connection: connected_account_p
 
 ## initiate()
 
-Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.
+Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.  .. deprecated:: For Composio-managed (default) auth configs on redirectable OAuth schemes (OAuth1, OAuth2, DCR\_OAUTH), the legacy endpoint this method wraps is being retired: **2026-05-08** for new organizations and **2026-07-03** for all remaining organizations. After your org's cutover, this method will raise :class:`composio.exceptions.ComposioLegacyConnectedAccountsEndpointRetiredError` for that specific combination.  Use :meth:`ConnectedAccounts.link` for Composio-managed OAuth — it works for every redirectable scheme regardless of whether the auth config is Composio-managed or custom, and the return shape is the same.  Custom auth configs (your own OAuth app) and non-OAuth schemes (API key, bearer token, basic auth) are unaffected and continue to work on `initiate()`. See [https://docs.composio.dev/docs/changelog/2026/04/24](https://docs.composio.dev/docs/changelog/2026/04/24)
 
 ```python
 def initiate(user_id: str, auth_config_id: str, callback_url: str | None = ..., allow_multiple: bool = ..., config: connected_account_create_params.ConnectionState | None = ..., alias: str | None = ...) -> ConnectionRequest
@@ -81,17 +81,19 @@ def initiate(user_id: str, auth_config_id: str, callback_url: str | None = ..., 
 Create a Composio Connect Link for a user to connect their account to a given auth config.  This method will return an external link which you can use for the user to connect their account.
 
 ```python
-def link(user_id: str, auth_config_id: str, callback_url: str | None = ..., alias: str | None = ...) -> ConnectionRequest
+def link(user_id: str, auth_config_id: str, callback_url: str | None = ..., alias: str | None = ..., allow_multiple: bool = ..., experimental: link_create_params.Experimental | None = ...) -> ConnectionRequest
 ```
 
 **Parameters**
 
-| Name             | Type          |
-| ---------------- | ------------- |
-| `user_id`        | `str`         |
-| `auth_config_id` | `str`         |
-| `callback_url?`  | `str \| None` |
-| `alias?`         | `str \| None` |
+| Name              | Type                                      |
+| ----------------- | ----------------------------------------- |
+| `user_id`         | `str`                                     |
+| `auth_config_id`  | `str`                                     |
+| `callback_url?`   | `str \| None`                             |
+| `alias?`          | `str \| None`                             |
+| `allow_multiple?` | `bool`                                    |
+| `experimental?`   | `link_create_params.Experimental \| None` |
 
 **Returns**
 
@@ -119,6 +121,18 @@ def link(user_id: str, auth_config_id: str, callback_url: str | None = ..., alia
 
     # Wait for the connection to be established
     connected_account = composio.connected_accounts.wait_for_connection(connection_request.id)
+
+    connection_request = composio.connected_accounts.link(
+        'user_creator',
+        'auth_config_123',
+        experimental={
+            'account_type': 'SHARED',
+            'acl_config_for_shared': {
+                'allow_all_users': True,
+                'not_allowed_user_ids': ['user_bob'],
+            },
+        },
+    )
 ```
 
 ***
@@ -144,6 +158,6 @@ def wait_for_connection(id: str, timeout: float | None = ...) -> connected_accou
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/connected_accounts.py#L321)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/connected_accounts.py#L340)
 
 ---

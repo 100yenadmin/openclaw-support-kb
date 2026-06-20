@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Telegram"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
-source_hash: "88a2728975c522953a6c2404f6374a51a8ac7cc39ded1dcf3c96b6507c268055"
+source_hash: "df328fc2980cc1e43c2ffd38f5defdb1d25e19abb65afd90502c0fa078513b06"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/telegram.md"
@@ -60,6 +60,37 @@ new - Start a new conversation
 sethome - Set this chat as the home channel
 ```
 :::
+
+### Online/Offline status indicator (Optional)
+
+Telegram bots have no real online/offline presence dot — that green dot is a
+*user-account* feature, not something the Bot API exposes for bots. The closest
+surface is the bot's **short description** (the line shown under its name in the
+bot's profile).
+
+Enable `status_indicator` and Hermes sets that short description to **Online**
+when the gateway connects and **Offline** on a clean shutdown:
+
+```yaml
+gateway:
+  platforms:
+    telegram:
+      extra:
+        status_indicator: true
+        # Optional custom strings (defaults: "Online" / "Offline"):
+        status_online: "🟢 Online"
+        status_offline: "🔴 Offline"
+```
+
+Notes:
+
+- The short description is **global** to the bot (visible to all users), not
+  per-chat. Users see it on the bot's profile page, not as a live badge inside
+  an open chat.
+- Only a **clean** gateway shutdown (`/stop`, `disconnect`) writes "Offline".
+  A hard crash leaves the last-known status — the inherent limitation of a
+  profile-text indicator.
+- Off by default, since it mutates the bot's global profile.
 
 ## Step 3: Privacy Mode (Critical for Groups)
 
