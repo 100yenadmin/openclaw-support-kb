@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-20T11:27:28.300Z",
+  "generatedAt": "2026-06-21T11:58:00.403Z",
   "physicalGbrainSourceId": "openclaw-support-kb",
   "note": "This v1 repo installs as one GBrain source for backwards compatibility. Agents must use logical namespaces and source/path filters to avoid mixing OpenClaw, Hermes, Paperclip, and Composio facts.",
   "logicalSources": [
@@ -55,7 +55,7 @@
         "Paperclip Mission Control",
         "Local KB namespace: paperclip-mission-control"
       ],
-      "count": 87
+      "count": 88
     },
     {
       "id": "composio",

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "508dd6aab16976cb1e0924c5ed494da5aba7f7dfa6cba5dab2862dcc96f9fe90"
+source_hash: "b2f39f5e7296c6367468acf287d63092c268db4e87c40a1fcbeac75a97ed8464"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -261,8 +261,12 @@ ones — waits for your yes/no before it ever enters your profile.
 ## Background review notifications (`display.memory_notifications`)
 
 After a turn, the background self-improvement review may quietly save a memory
-or update a skill. By default it surfaces a short `💾 Memory updated` line in
-chat so you know it happened. Control how chatty that is:
+or update a skill. This is Hermes' consent-aware learning loop: repeated
+corrections and durable workflow lessons become compact memory entries or
+procedural skills, while `write_approval` can stage those writes for review
+before they affect future sessions. By default it surfaces a short
+`💾 Memory updated` line in chat so you know it happened. Control how chatty
+that is:
 
 ```yaml
 display:

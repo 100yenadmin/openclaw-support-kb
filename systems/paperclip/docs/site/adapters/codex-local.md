@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "codex-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/codex-local.md"
-source_hash: "8393f9ac5b05143647661f1f2f8e9d3cb1d5f56be29700442b48f272dd09e0c5"
+source_hash: "18ff6544c53f6636c7030444a921bb00b713666df351e55a3f43b48e221cb00b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/codex-local.md"
@@ -62,6 +62,16 @@ Paperclip currently applies that only when the selected model is `gpt-5.4`. On o
 ## Managed `CODEX_HOME`
 
 When Paperclip is running inside a managed worktree instance (`PAPERCLIP_IN_WORKTREE=true`), the adapter instead uses a worktree-isolated `CODEX_HOME` under the Paperclip instance so Codex skills, sessions, logs, and other runtime state do not leak across checkouts. It seeds that isolated home from the user's main Codex home for shared auth/config continuity.
+
+### Per-agent isolation and auth seeding
+
+For `codex_local` agents the server isolation guard pins each agent to a per-agent home (`<instance>/companies/<companyId>/agents/<agentId>/codex-home`) and sets `OPENAI_API_KEY=""` so an agent can never spend against the host API key or share another agent's Codex state.
+
+A managed home is created empty, so the adapter must provision auth into it before launching Codex — otherwise the agent runs with zero credentials and the provider returns `401 Missing bearer`. The seeding contract:
+
+- **Managed homes** (the default home and any configured `CODEX_HOME` under the company tree) are always seeded: the ChatGPT-subscription `auth.json` is symlinked from the host Codex home, or, when a per-agent `OPENAI_API_KEY` is configured, an API-key `auth.json` is written instead.
+- **Genuine external overrides** (a `CODEX_HOME` outside the Paperclip-managed company tree) are treated as self-managed and are never seeded or overwritten.
+- **Fail-fast guard:** if a managed home ends up with no usable `auth.json` and no configured API key, the run fails with an explicit `adapter_failed` ("no Codex credentials provisioned for managed home …") rather than emitting an unauthenticated request.
 
 ## Manual Local CLI
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MiniMax OAuth"
 source: "https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth"
-source_hash: "4d9849aedd762dfb75ba1b3c5ea117dcfabda9746325112cb516ed05590a1073"
+source_hash: "98a79dd0c1d6ae0b5bef4b1a7820862f2797ac0c5cfe61a2dc754e186b7dbd4f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/minimax-oauth.md"
@@ -228,7 +228,7 @@ The auth store has no credentials for `minimax-oauth`. You have not logged in ye
 To remove stored MiniMax OAuth credentials:
 
 ```bash
-hermes auth remove minimax-oauth
+hermes auth logout minimax-oauth
 ```
 
 ## See Also

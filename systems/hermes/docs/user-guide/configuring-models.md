@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "86ba82d41b66679b419a789cb80b84f2a2417a8b53135335d4fa684e36753bc4"
+source_hash: "5fcace17c115ae259d2eea6da7f2817e4ecea4efb3fbab9065d45c42edcb889f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -61,6 +61,10 @@ The picker has two columns:
 Type in the filter box to narrow by provider name, slug, or model ID.
 
 Pick a model, hit **Switch**, and Hermes writes it to `~/.hermes/config.yaml` under the `model` section. **This applies to new sessions only** — any chat tab you already have open keeps running whatever model it started with. To hot-swap the current chat, use the `/model` slash command inside it.
+
+### Mid-session switches and context warnings
+
+When you switch models **inside an active session** (Herm TUI model picker, `hermes` CLI, or `/model` on Telegram/Discord), Hermes estimates whether your **next message** will run **preflight context compression** against the new model's window. If the session is already near or above that model's compression threshold (see [Context Compression](./configuration.md#context-compression)), the switch reply includes a warning — the same `warning_message` path used for expensive-model notices. The switch still applies immediately; compression runs on the **first user message after the switch**, before the model answers.
 
 ## Setting auxiliary models
 

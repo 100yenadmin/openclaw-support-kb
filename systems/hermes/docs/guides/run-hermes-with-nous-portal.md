@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Agent with Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal"
-source_hash: "420a4458ed44c856f857a67d92c512a9e869e14f4fdd1fb8547339a15dd7ed6a"
+source_hash: "ba684d66339d6f0236b6eef3719fe7eef26bf4b0da6f34a52adc9aed6770e1cf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-hermes-with-nous-portal.md"
@@ -256,12 +256,12 @@ If a model is genuinely unavailable, [open an issue](https://github.com/NousRese
 
 - `model.provider` set to `openrouter`/`anthropic`/etc. instead of `nous`
 - An OAuth refresh failure that fell back to a different configured provider
-- Multiple Hermes profiles where you're using the wrong one (check `hermes profile current`)
+- Multiple Hermes profiles where you're using the wrong one (check `hermes profile list`)
 
 ### Want to revoke and start clean
 
 ```bash
-hermes auth remove nous       # wipes the local refresh token
+hermes auth logout nous       # wipes the local refresh token
 # Then re-run setup or remove the subscription from the Portal web UI
 ```
 

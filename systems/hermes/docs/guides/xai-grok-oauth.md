@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "xAI Grok OAuth (SuperGrok / X Premium+)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/xai-grok-oauth"
-source_hash: "7f33e36a8cb48425384e3f651cd6f29b790ad3f13453a8f1e633469611e9871f"
+source_hash: "be627625cd448ce6027be762a74510cc33796e7e8be0b606a41b01b1a44836e9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/xai-grok-oauth.md"
@@ -114,7 +114,7 @@ If the consent page renders the authorization code directly on the page (xAI's c
 1. Hermes opens your browser to `accounts.x.ai`.
 2. You sign in (or confirm your existing session) and approve access.
 3. xAI redirects back to Hermes and the tokens are saved to `~/.hermes/auth.json`.
-4. From then on, Hermes refreshes the access token in the background — you stay signed in until you `hermes auth remove xai-oauth` or revoke access from your xAI account settings.
+4. From then on, Hermes refreshes the access token in the background — you stay signed in until you `hermes auth logout xai-oauth` or revoke access from your xAI account settings.
 
 ## Checking Login Status
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "List issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/control-plane-commands.md"
-source_hash: "ae8a3521db558352601152c9c27f13018c19cc21302488ee300d8ce82c2be446"
+source_hash: "729e55fb1d191bbc516343fcc4e7756ff3ff30e40ad748cdaa61ad7c73bece62"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/control-plane-commands.md"
@@ -151,6 +151,17 @@ pnpm paperclipai activity list [--agent-id <id>] [--entity-type issue] [--entity
 ```sh
 pnpm paperclipai dashboard get
 ```
+
+## Instance Settings
+
+```sh
+pnpm paperclipai instance settings:general
+pnpm paperclipai instance settings:general:update --payload-json '{...}'
+pnpm paperclipai instance settings:experimental
+pnpm paperclipai instance settings:experimental:update --payload-json '{...}'
+```
+
+Experimental features are opt-in and are provided without compatibility guarantees. They may break, change, or be removed at any time. Use them at your own risk.
 
 ## Heartbeat
 

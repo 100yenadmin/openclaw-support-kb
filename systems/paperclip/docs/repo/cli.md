@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "9044f65f48862db4d9aee76e613c18dada8f193477485cb2f03ffeda67d5fdd8"
+source_hash: "7f82381a913e43df3808197cadea067014b13e4dfa877430eacbde75d40c5ba2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -669,6 +669,8 @@ pnpm paperclipai auth revoke-current
 
 `--token <challenge-secret>` is still supported for compatibility, but `--token-env` avoids putting challenge secrets in shell history or process arguments.
 
+## Instance Settings Commands
+
 ```sh
 pnpm paperclipai instance scheduler-heartbeats
 pnpm paperclipai instance settings:general
@@ -676,6 +678,11 @@ pnpm paperclipai instance settings:general:update --payload-json '{...}'
 pnpm paperclipai instance settings:experimental
 pnpm paperclipai instance settings:experimental:update --payload-json '{...}'
 pnpm paperclipai instance database-backup
+```
+
+Experimental features are opt-in and are provided without compatibility guarantees. They may break, change, or be removed at any time. Use them at your own risk.
+
+```sh
 pnpm paperclipai sidebar preferences
 pnpm paperclipai sidebar preferences:update --payload-json '{...}'
 pnpm paperclipai sidebar project-preferences --company-id <company-id>

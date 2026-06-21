@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "758d07a07c7cb92dac4e625a369dcf2998b50fa615cdbc05627b0c05410fdfb5"
+source_hash: "e55c13e46bab871593e615475cb7c59b5125f55d2b0937b6d12684bcdf9e10c4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -236,9 +236,9 @@ refactor/description   # Code restructuring
 
 ### Before Submitting
 
-1. **Run tests**: `pytest tests/ -v`
+1. **Run tests**: `scripts/run_tests.sh` for CI-parity. Use direct `python -m pytest ...` only when the wrapper is unavailable or you are intentionally debugging outside the wrapper.
 2. **Test manually**: Run `hermes` and exercise the code path you changed
-3. **Check cross-platform impact**: Consider macOS and different Linux distros
+3. **Check cross-platform impact**: Consider macOS, Linux, WSL2, and native Windows. If you touch file I/O, process management, terminal handling, subprocesses, or signals, run `scripts/check-windows-footguns.py`.
 4. **Keep PRs focused**: One logical change per PR
 
 ### PR Description

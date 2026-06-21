@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Gateway Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/gateway-internals"
-source_hash: "9c014fbf6a0f9c52dc1dbc694ff425bc497866770984b191c41f05626e9cb554"
+source_hash: "3c2963c072242c14c3389a6dcb38e10970afadc1815ee4f4f0c487abb5508eeb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/gateway-internals.md"
@@ -183,6 +183,8 @@ gateway/platforms/
 ├── api_server.py        # REST API server adapter
 └── homeassistant.py     # Home Assistant conversation integration
 ```
+
+Experimental connector-backed platforms use the generic relay adapter in `gateway/relay/` instead of a direct platform module. When `GATEWAY_RELAY_URL` or `gateway.relay_url` is configured, the gateway registers the `relay` platform, dials the connector over an outbound WebSocket, and receives `descriptor`, `inbound`, and `interrupt_inbound` frames on that same socket. The connector advertises a `CapabilityDescriptor`; Hermes can send normal outbound replies, token-less `follow_up` operations, and interrupt frames back through the relay. The source-grounded wire contract lives in [`docs/relay-connector-contract.md`](https://github.com/NousResearch/hermes-agent/blob/main/docs/relay-connector-contract.md).
 
 Adapters implement a common interface:
 - `connect()` / `disconnect()` — lifecycle management

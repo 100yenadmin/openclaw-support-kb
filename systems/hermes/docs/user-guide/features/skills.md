@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skills System"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
-source_hash: "1eff4483a501b81ee0bc052bd1e76a7896b07227d9c5bb4f67ec40cb86329166"
+source_hash: "dc9e3441fbb7bf09f8942228cb0e9210032520c6d99ad640e7ea3ef0459852e6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skills.md"
@@ -391,6 +391,12 @@ A bundle is just a YAML alias — it doesn't install skills for you. The skills 
 ## Agent-Managed Skills (skill_manage tool)
 
 The agent can create, update, and delete its own skills via the `skill_manage` tool. This is the agent's **procedural memory** — when it figures out a non-trivial workflow, it saves the approach as a skill for future reuse.
+
+Skills and memory work together in the self-improvement loop: memory stores
+small durable facts that should always be in context, while skills store longer
+procedures that should load only when relevant. The background review can
+suggest or stage skill changes after a session, but the write-approval gate
+below lets you require human review before those changes land.
 
 ### When the Agent Creates Skills
 

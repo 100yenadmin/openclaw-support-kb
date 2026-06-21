@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "cf1617720f950aeb7e959999d5dc8dfd763d21d53753002b863af18cd2226aa6"
+source_hash: "a4703bfe35f15c1161ea81685ef3446b0fdac38e995a0b131909150b7b51dd92"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -106,6 +106,16 @@ hermes setup --portal
 ```
 
 That logs you in, sets Nous as your provider, and turns on the Tool Gateway in one command.
+:::
+
+:::info Setup modes
+On a fresh install, `hermes setup` offers three modes:
+
+- **Quick Setup (Nous Portal)** — free OAuth login, no API keys; sets up a model plus the Tool Gateway tools. The recommended fast path.
+- **Full Setup** — walk through every provider, tool, and option yourself (bring your own keys).
+- **Blank Slate** — everything starts **off** except the bare minimum needed to run an agent: **provider & model, the File Operations toolset, and the Terminal toolset**. No web, browser, code execution, vision, memory, delegation, cron, skills, plugins, or MCP servers — and compression, checkpoints, smart routing, and memory capture are all disabled. After the minimal baseline is applied, you choose one of two paths: **start with everything disabled** (finish now with the minimal agent), or **walk through all configurations** (opt in to tools, skills, plugins, MCP, and messaging). Pick this when you want a minimal, fully-controlled agent and intend to enable only exactly what you need.
+
+Blank Slate writes an explicit `platform_toolsets.cli` list plus `agent.disabled_toolsets`, so nothing you didn't choose ever loads — not even after `hermes update`. Re-enable anything later with `hermes tools`, seed skills with `hermes skills opt-in --sync`, or tune settings with `hermes setup agent`.
 :::
 
 Good defaults:

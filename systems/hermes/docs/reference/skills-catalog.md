@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bundled Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/skills-catalog"
-source_hash: "3feedce76ac42496782c9eb01c63e9182f241567b649f66ffbd160024a64ea32"
+source_hash: "579486983e2f4ba79abf9732bde93a0207b32058116553aa4773f2cd0a52cbd1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/skills-catalog.md"
@@ -167,7 +167,7 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 
 | Skill | Description | Path |
 |-------|-------------|------|
-| [`hermes-agent-skill-authoring`](/docs/user-guide/skills/bundled/software-development/software-development-hermes-agent-skill-authoring) | Author in-repo SKILL.md: frontmatter, validator, structure. | `software-development/hermes-agent-skill-authoring` |
+| [`hermes-agent-skill-authoring`](/docs/user-guide/skills/bundled/software-development/software-development-hermes-agent-skill-authoring) | Author in-repo SKILL.md: frontmatter, validator, structure, and writing-quality principles. | `software-development/hermes-agent-skill-authoring` |
 | [`node-inspect-debugger`](/docs/user-guide/skills/bundled/software-development/software-development-node-inspect-debugger) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. | `software-development/node-inspect-debugger` |
 | [`plan`](/docs/user-guide/skills/bundled/software-development/software-development-plan) | Plan mode: write an actionable markdown plan to .hermes/plans/, no execution. Bite-sized tasks, exact paths, complete code. | `software-development/plan` |
 | [`python-debugpy`](/docs/user-guide/skills/bundled/software-development/software-development-python-debugpy) | Debug Python: pdb REPL + debugpy remote (DAP). | `software-development/python-debugpy` |
