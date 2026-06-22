@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "797978bdef9eb8d19242baef9db8eb624b6b5c199aafcfda66937091e1014e14"
+source_hash: "503b863085bb3e36c4658c519a7578c6fdeac7c6fb26804b3da480924e831f8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-runtimes.md"
@@ -236,8 +236,8 @@ canonical subscription `github-copilot` provider and is **never** selected by
 The harness claims its provider, runtime, CLI session key, and auth profile
 prefix in `extensions/copilot/doctor-contract-api.ts`, which
 `openclaw doctor` auto-loads. For configuration, auth, transcript mirroring,
-compaction, the doctor probe surface, and the broader PI vs Codex vs Copilot
-SDK decision, see [GitHub Copilot agent runtime](/plugins/copilot).
+compaction, the declarative doctor contract, and the broader PI vs Codex vs
+Copilot SDK decision, see [GitHub Copilot agent runtime](/plugins/copilot).
 
 ## Compatibility contract
 

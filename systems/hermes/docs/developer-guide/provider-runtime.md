@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Provider Runtime Resolution"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/provider-runtime"
-source_hash: "e441511b83a0bbd5f58bd16bec4392dc44c42b7e264de76e30a5ccec1c4116de"
+source_hash: "f1c0b56224f7e7297d126f431ca3bfc59617bf76e4bddafda3eba4c6980315af"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/provider-runtime.md"
@@ -60,7 +60,7 @@ Current provider families include (see `plugins/model-providers/` for the comple
 - OpenAI Codex
 - Copilot / Copilot ACP
 - Anthropic (native)
-- Google / Gemini (`gemini`, `google-gemini-cli`)
+- Google / Gemini (`gemini`)
 - Alibaba / DashScope (`alibaba`, `alibaba-coding-plan`)
 - DeepSeek
 - Z.AI

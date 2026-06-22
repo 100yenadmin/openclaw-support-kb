@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "888f6b010c1c32e84be1342c80e048f0c02ba42fb96ebcbdadd00bc69bdc6aa5"
+source_hash: "38ffe147644a59917a1f295e96168edc5fe4c9ffec67f1f5ab0f90f3ec7d5cf1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -550,9 +550,10 @@ Known limits
       sign-in URL. xAI decides which accounts can receive OAuth API tokens, and
       the consent page may show Grok Build even though OpenClaw does not require
       the Grok Build app.
-    - `grok-4.20-multi-agent-experimental-beta-0304` is not supported on the
-      normal xAI provider path because it requires a different upstream API
-      surface than the standard OpenClaw xAI transport.
+    - OpenClaw does not currently expose the xAI multi-agent model family. xAI
+      serves these models through the Responses API, but they do not accept the
+      client-side or custom tools used by OpenClaw's shared agent loop. See the
+      [xAI multi-agent limitations](https://docs.x.ai/developers/model-capabilities/text/multi-agent#limitations).
     - xAI Realtime voice is not registered as an OpenClaw provider yet. It
       needs a different bidirectional voice session contract than batch STT or
       streaming transcription.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Clickclack plugin"
 source: "https://docs.openclaw.ai/plugins/reference/clickclack"
-source_hash: "15db7b6f41b82b510d08b2fe22c034212b64d6b433b1d42d8b497a0d529e457b"
+source_hash: "00767df34bd9304b36d9e36e3d4477d1e70eac637f8c297d6ad994fbec112153"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/clickclack.md"
@@ -20,7 +20,7 @@ Adds the Clickclack channel surface for sending and receiving OpenClaw messages.
 ## Distribution
 
 - Package: `@openclaw/clickclack`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/clickclack`
 
 ## Surface
 

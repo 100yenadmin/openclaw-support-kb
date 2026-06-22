@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "da3e845f44c3b75c3364e37af2179232d25f98d917de850472d3c0273e07d5e0"
+source_hash: "a2018648dc8c695349f6345605b6608919aababe3fd18dfce40e02ebc215c3d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/token-use.md"
@@ -61,7 +61,7 @@ for bounded runtime excerpts and injected runtime-owned blocks. They are
 separate from bootstrap limits, startup-context limits, and skills prompt
 limits.
 
-`toolResultMaxChars` is an advanced ceiling. When it is unset, OpenClaw chooses
+`toolResultMaxChars` is an advanced ceiling (up to `1000000` characters). When it is unset, OpenClaw chooses
 the live tool-result cap from the effective model context window: `16000` chars
 below 100K tokens, `32000` chars at 100K+ tokens, and `64000` chars at 200K+
 tokens, still bounded by the runtime context-share guard.

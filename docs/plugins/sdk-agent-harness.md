@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "7727a95ebcf8b658bf34291b489896d85c9802a40f96b004bebc81d04be5fb05"
+source_hash: "fda53ece292a7fd28a7be100d7dca99b5d5ec42d6342178e9878c1b1cdada053"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -187,6 +187,17 @@ different model. `planning-only` requires the harness's explicit `planText`
 field; OpenClaw does not infer it from assistant prose. The helper intentionally
 leaves prompt errors, in-flight turns, and intentional silent replies such as
 `NO_REPLY` unclassified.
+
+### Agent-end side effects
+
+Native harnesses must call `runAgentEndSideEffects(...)` from
+`openclaw/plugin-sdk/agent-harness-runtime` after they finalize an attempt. It
+dispatches the portable `agent_end` hook and OpenClaw's research capture without
+delaying interactive replies. Use `awaitAgentEndSideEffects(...)` for local,
+non-interactive runs where the attempt must not resolve until those side effects
+finish. Both helpers accept the same `{ event, ctx }` payload as
+`runAgentHarnessAgentEndHook(...)`; their failures do not alter the completed
+attempt result.
 
 ### Native Codex harness mode
 

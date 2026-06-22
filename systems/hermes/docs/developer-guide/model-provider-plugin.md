@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "2c420512f829a56e27612c2cc6dcbb82143c407845e92a50042090c2d43ff6e2"
+source_hash: "d05f33034b4b23df3fe8fc97c3d9c13e7ec226c5421e90316187adf6ffd5f942"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -208,7 +208,7 @@ Set `profile.api_mode` to match the default your provider ships — it acts as a
 |---|---|---|
 | `api_key` | Single env var carries a static API key | Most providers |
 | `oauth_device_code` | Device-code OAuth flow | — |
-| `oauth_external` | User signs in elsewhere, tokens land in `auth.json` | Anthropic OAuth, MiniMax OAuth, Gemini Cloud Code, Qwen Portal, Nous Portal |
+| `oauth_external` | User signs in elsewhere, tokens land in `auth.json` | Anthropic OAuth, MiniMax OAuth, Qwen Portal, Nous Portal |
 | `copilot` | GitHub Copilot token refresh cycle | `copilot` plugin only |
 | `aws_sdk` | AWS SDK credential chain (IAM role, profile, env) | `bedrock` plugin only |
 | `external_process` | Auth handled by a subprocess the agent spawns | `copilot-acp` plugin only |

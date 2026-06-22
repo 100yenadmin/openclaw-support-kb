@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost plugin"
 source: "https://docs.openclaw.ai/plugins/reference/mattermost"
-source_hash: "9b02184e63c3536ad1640f0fb5e8a2f2ec395037544a255da4254cd7607000bd"
+source_hash: "7286d9c42ddee21cf9871da07e23fcd5a4991cc4fc8e08fc7f6221e73b4d018a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/mattermost.md"
@@ -20,7 +20,7 @@ Adds the Mattermost channel surface for sending and receiving OpenClaw messages.
 ## Distribution
 
 - Package: `@openclaw/mattermost`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/mattermost`
 
 ## Surface
 

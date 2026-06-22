@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "b9d8aa45c6d21f1948a5b38d1e1a6cc8896a63e800b46cfeb15a5a97ff85c123"
+source_hash: "5615d197cfee223fb70afea604fd1cef29ed4256eadf106b8bbfd4d237bb1169"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -250,7 +250,7 @@ GATEWAY_ALLOW_ALL_USERS=true
 
 ### DM Pairing (Alternative to Allowlists)
 
-Instead of manually configuring user IDs, unknown users receive a one-time pairing code when they DM the bot:
+Instead of manually configuring user IDs, unknown users receive a one-time pairing code when they DM the bot. Email is the exception: unknown email senders are ignored unless email pairing is explicitly enabled.
 
 ```bash
 # The user sees: "Pairing code: XKGH5N7P"

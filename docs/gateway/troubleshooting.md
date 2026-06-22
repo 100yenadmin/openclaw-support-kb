@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "0b9a2f414874e6b831112420f0fe0870bf30ae180da9fa985f6c90ba1cab35f9"
+source_hash: "f087d4fa71a60149339b2e5ce9650f295620cae2507cf6863e340ba10a0340da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -172,7 +172,7 @@ it disabled for read-only shared skill roots.
 
 Related:
 
-- [Skills config](/tools/skills-config#symlinked-sibling-repos)
+- [Skills config](/tools/skills-config#symlinked-skill-roots)
 - [Configuration examples](/gateway/configuration-examples#symlinked-sibling-skill-repo)
 
 ## Anthropic 429 extra usage required for long context

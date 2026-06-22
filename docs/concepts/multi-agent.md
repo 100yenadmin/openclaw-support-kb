@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "80cf3c83df1beffd36d99b96c22b1260576e79fde3cf51a36374333ac9f14a49"
+source_hash: "e9c6c58620d5be36d4e03e49b3285c4b37aa88de40b50ee1f06e05e13b440622"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -44,7 +44,7 @@ secondary agent store. If you want an independent OAuth account, sign in from
 that agent; if you copy credentials manually, copy only portable static
 `api_key` or `token` profiles.
 
-Skills are loaded from each agent workspace plus shared roots such as `~/.openclaw/skills`, then filtered by the effective agent skill allowlist when configured. Use `agents.defaults.skills` for a shared baseline and `agents.list[].skills` for per-agent replacement. See [Skills: per-agent vs shared](/tools/skills#per-agent-vs-shared-skills) and [Skills: agent skill allowlists](/tools/skills#agent-skill-allowlists).
+Skills are loaded from each agent workspace plus shared roots such as `~/.openclaw/skills`, then filtered by the effective agent skill allowlist when configured. Use `agents.defaults.skills` for a shared baseline and `agents.list[].skills` for per-agent replacement. See [Skills: per-agent vs shared](/tools/skills#per-agent-vs-shared-skills) and [Skills: agent skill allowlists](/tools/skills#agent-allowlists).
 
 The Gateway can host **one agent** (default) or **many agents** side-by-side.
 

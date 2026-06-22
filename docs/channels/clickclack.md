@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClickClack"
 source: "https://docs.openclaw.ai/channels/clickclack"
-source_hash: "dda1a4ce9e19acf2f3b151a462a7f1cb39b26b9313d929f32d1ceb6cb1787ccc"
+source_hash: "ad2e438d991212726658a09c61e8d31a64cea7349b75947b09b8f3994a61d97f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/clickclack.md"
@@ -70,9 +70,9 @@ If `plugins.allow` is a non-empty restrictive list, explicitly selecting
 ClickClack in channel setup or running `openclaw plugins enable clickclack`
 appends `clickclack` to that list. Onboarding installation uses the same
 explicit-selection behavior. These paths do not override `plugins.deny` or a
-global `plugins.enabled: false` setting. Direct `openclaw plugins install
-clickclack` follows the normal plugin-install policy and also records ClickClack
-in an existing allowlist.
+global `plugins.enabled: false` setting. Direct
+`openclaw plugins install @openclaw/clickclack` follows the normal
+plugin-install policy and also records ClickClack in an existing allowlist.
 
 ## Multiple bots
 

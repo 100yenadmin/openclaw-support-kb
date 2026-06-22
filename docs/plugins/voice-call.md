@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "88935a91609f2425b9c1dbe5bd8eeba73dc472ac21f8756862f463970b26fc26"
+source_hash: "396e8c283a4e6cb8dcf9e84677d62270e0ee2a8a1a5095a7c8df086d8ba94383"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -810,7 +810,7 @@ Tool name: `voice_call`.
 | `end_call`      | `callId`                                   |
 | `get_status`    | `callId`                                   |
 
-This repo ships a matching skill doc at `skills/voice-call/SKILL.md`.
+The voice-call plugin ships a matching agent skill.
 
 ## Gateway RPC
 

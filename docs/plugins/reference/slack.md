@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack plugin"
 source: "https://docs.openclaw.ai/plugins/reference/slack"
-source_hash: "5be31dae08285786ea5c94d8c02894196d6b66098e7d7eda0d39904f0e6fd348"
+source_hash: "4b6547e2c18e95c186edea685190f86a31ff2144526c67ae76e88916f6b86863"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/slack.md"
@@ -24,7 +24,7 @@ OpenClaw Slack channel plugin for channels, DMs, commands, and app events.
 
 ## Surface
 
-channels: slack
+channels: slack; skills
 
 ## Related docs
 

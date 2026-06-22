@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/cli/nodes"
-source_hash: "db8ac5395cee5e0e26f0b1d575d00f6dab089bde6639078656f95e1e7eafdf42"
+source_hash: "207b0c1167f7fa2dad44f2d301fc674704e3fadefc25b7fa65b8769ddb3f86f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/nodes.md"
@@ -46,7 +46,13 @@ openclaw nodes status --last-connected 24h
 `nodes list` prints pending/paired tables. Paired rows include the most recent connect age (Last Connect).
 Use `--connected` to only show currently-connected nodes. Use `--last-connected <duration>` to
 filter to nodes that connected within a duration (e.g. `24h`, `7d`).
-Use `nodes remove --node <id|name|ip>` to delete a stale gateway-owned node pairing record.
+Use `nodes remove --node <id|name|ip>` to remove a node pairing. For a
+device-backed node this revokes the device's `node` role in `devices/paired.json`
+and disconnects its node-role sessions (a mixed-role device keeps its row and
+only loses the `node` role; a node-only device is deleted); it also clears any
+matching legacy gateway-owned node pairing record. `operator.pairing` can remove
+non-operator node rows; a device-token caller revoking its own node role on a
+mixed-role device additionally needs `operator.admin`.
 
 Approval note:
 

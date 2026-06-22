@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from initiate() to link()"
 source: "https://docs.composio.dev/docs/auth-configuration/migrating-initiate-to-link.md"
-source_hash: "50ce9012a3c5f81c0139f480cdf4d3f401c97a5c89d5df09ba6fef66e66ee984"
+source_hash: "69f927ce3c8595c70f305ca52ddd6482499a8d42e44a32d9e02b4ec0ce3ae1b1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "auth-configuration/migrating-initiate-to-link.md"
@@ -86,7 +86,7 @@ console.log(connectionRequest.redirectUrl);
 const connectedAccount = await connectionRequest.waitForConnection();
 ```
 
-`callback_url` / `callbackUrl` and `alias` work the same way on both methods.
+`callback_url` / `callbackUrl` works the same way on both methods.
 
 # What changes between the two methods
 
@@ -95,7 +95,6 @@ const connectedAccount = await connectionRequest.waitForConnection();
 | Underlying endpoint                                                         | `POST /api/v3/connected_accounts`                                      | `POST /api/v3/connected_accounts/link`                                                      |
 | Return shape                                                                | `ConnectionRequest` with `id`, `redirect_url`, `wait_for_connection()` | Same                                                                                        |
 | `callback_url` / `callbackUrl`                                              | ✓                                                                      | ✓                                                                                           |
-| `alias`                                                                     | ✓                                                                      | ✓                                                                                           |
 | Pre-filled connection state (`config`)                                      | ✓ — for non-OAuth schemes                                              | Not needed — OAuth uses redirect; non-OAuth users keep `initiate()`                         |
 | `allow_multiple` / `allowMultiple`                                          | ✓ — guards against duplicates                                          | ✓ — same default (`False`), same exception ([since 2026-04-28](/docs/changelog/2026/04/28)) |
 | Affected by the 2026-05-08 / 2026-07-03 retirement (Composio-managed OAuth) | Yes                                                                    | No                                                                                          |

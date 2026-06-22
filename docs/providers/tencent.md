@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tencent Cloud (TokenHub)"
 source: "https://docs.openclaw.ai/providers/tencent"
-source_hash: "f2d466018c7acddacb676d5f483ea01ea4dad4c25ce4096b9723accd07f83523"
+source_hash: "54abb1e1e3fd92db0c6fc8a077f2b952151391804cfa96afaec5640de9ab4974"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/tencent.md"
@@ -13,12 +13,12 @@ duplicate_index: 1
 # Tencent Cloud (TokenHub)
 Source: https://docs.openclaw.ai/providers/tencent
 
-Tencent Cloud ships as a bundled provider plugin in OpenClaw. It gives access to Tencent Hy3 preview through the TokenHub endpoint (`tencent-tokenhub`) using an OpenAI-compatible API.
+Install the official Tencent Cloud provider plugin to access Tencent Hy3 preview through the TokenHub endpoint (`tencent-tokenhub`) using an OpenAI-compatible API.
 
 | Property         | Value                                                 |
 | ---------------- | ----------------------------------------------------- |
 | Provider id      | `tencent-tokenhub`                                    |
-| Plugin           | bundled, `enabledByDefault: true`                     |
+| Package          | `@openclaw/tencent-provider`                          |
 | Auth env var     | `TOKENHUB_API_KEY`                                    |
 | Onboarding flag  | `--auth-choice tokenhub-api-key`                      |
 | Direct CLI flag  | `--tokenhub-api-key <key>`                            |
@@ -30,6 +30,13 @@ Tencent Cloud ships as a bundled provider plugin in OpenClaw. It gives access to
 ## Quick start
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/tencent-provider
+    ```
 
 
 Create a TokenHub API key
@@ -92,7 +99,7 @@ Tip
 
 ## Tiered pricing
 
-The bundled catalog ships tiered cost metadata that scales with input window length, so cost estimates are populated without manual overrides.
+The provider catalog ships tiered cost metadata that scales with input window length, so cost estimates are populated without manual overrides.
 
 | Input tokens range | Input rate | Output rate | Cache read |
 | ------------------ | ---------- | ----------- | ---------- |

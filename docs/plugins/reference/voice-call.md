@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice Call plugin"
 source: "https://docs.openclaw.ai/plugins/reference/voice-call"
-source_hash: "53f3953c92b6ba64cb193253b088f5d1a8b5b66df16c0799431e8341af35bb05"
+source_hash: "16c585caf2f429a65ab7dc079edbb315649c97f89b9147c1852c4340bb640fba"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/voice-call.md"
@@ -24,7 +24,7 @@ OpenClaw voice-call plugin for Twilio, Telnyx, and Plivo phone calls.
 
 ## Surface
 
-contracts: tools
+contracts: tools; skills
 
 ## Related docs
 

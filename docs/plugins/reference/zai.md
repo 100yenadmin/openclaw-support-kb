@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zai"
-source_hash: "b0e804630a75bbae0ef545e67ebcb959ca31ca9b611d0c58577ed6d77aea53fc"
+source_hash: "888f5893046da6e39b40b2425c783e8f1a8431703bb599f68f9666773707f2f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zai.md"
@@ -20,7 +20,7 @@ Adds Z.AI model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/zai-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/zai-provider`
 
 ## Surface
 

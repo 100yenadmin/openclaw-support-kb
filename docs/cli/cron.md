@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "77a67ea9cd8e7f8f64d7023129588d376b826048c49fc382167bbb39d3a69c48"
+source_hash: "1f975e18e58d1bf400ce9c4b0253a2cdbe8f488dbe0a3b3ebcf15c09d409ea04"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -208,7 +208,7 @@ Isolated cron resolves the active model in this order:
 
 ### Fast mode
 
-Isolated cron fast mode follows the resolved live model selection. Model config `params.fastMode` applies by default, but a stored session `fastMode` override still wins over config.
+Isolated cron fast mode follows the resolved live model selection. Model config `params.fastMode` applies by default, but a stored session `fastMode` override still wins over config. When the resolved mode is `auto`, the cutoff uses the selected model's `params.fastAutoOnSeconds` value, defaulting to 60 seconds.
 
 ### Live model switch retries
 

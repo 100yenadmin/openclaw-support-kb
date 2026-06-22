@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "222f4c3df75b59e1b85beeafce5a6764c6b3cc20f8fda4fa34c255d0fe55b86e"
+source_hash: "55e10f69b581dc4905fb93b1fb85bb2d2d82c9b1cb61a02c066edd001f7f4c5e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -185,7 +185,6 @@ State and integrity
     - State integrity and permissions checks (sessions, transcripts, state dir).
     - Config file permission checks (chmod 600) when running locally.
     - Model auth health: checks OAuth expiry, can refresh expiring tokens, and reports auth-profile cooldown/disabled states.
-    - Extra workspace dir detection (`~/openclaw`).
 
 
 
@@ -549,15 +548,15 @@ AccordionGroup
     If running as a systemd user service, doctor ensures lingering is enabled so the gateway stays alive after logout.
 
 
-11. Workspace status (skills, plugins, and legacy dirs)
+11. Workspace status (skills, plugins, and TaskFlows)
 
     Doctor prints a summary of the workspace state for the default agent:
 
     - **Skills status**: counts eligible, missing-requirements, and allowlist-blocked skills.
-    - **Legacy workspace dirs**: warns when `~/openclaw` or other legacy workspace directories exist alongside the current workspace.
     - **Plugin status**: counts enabled/disabled/errored plugins; lists plugin IDs for any errors; reports bundle plugin capabilities.
     - **Plugin compatibility warnings**: flags plugins that have compatibility issues with the current runtime.
     - **Plugin diagnostics**: surfaces any load-time warnings or errors emitted by the plugin registry.
+    - **TaskFlow recovery**: surfaces suspicious managed TaskFlows that need manual inspection or cancellation.
 
 
 

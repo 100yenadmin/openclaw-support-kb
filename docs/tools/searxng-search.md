@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SearXNG search"
 source: "https://docs.openclaw.ai/tools/searxng-search"
-source_hash: "a9c3eeb7ca465f40d15802a62b9f6466ffe5861a9ced9f21633b4049c346ac87"
+source_hash: "7016b9f47ef4d6a8b9b7c3ea09bcdd70a7acf7cb792ba0177cf250d1a6f2c4af"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/searxng-search.md"
@@ -26,6 +26,13 @@ Advantages:
 ## Setup
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/searxng-plugin
+    ```
 
 
 Run a SearXNG instance

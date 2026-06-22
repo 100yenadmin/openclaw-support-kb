@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord plugin"
 source: "https://docs.openclaw.ai/plugins/reference/discord"
-source_hash: "d2035519e3b5e153aff9c39d8a21ff0f720402d56c9113f0ef3ebb9c3c983a59"
+source_hash: "cb797515b5d14676b5ef3c4ac022c99422a9ed795a4c9984b0caefdb3e18f123"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/discord.md"
@@ -24,7 +24,7 @@ OpenClaw Discord channel plugin for channels, DMs, commands, and app events.
 
 ## Surface
 
-channels: discord; contracts: transcriptSourceProviders
+channels: discord; contracts: transcriptSourceProviders; skills
 
 ## Related docs
 

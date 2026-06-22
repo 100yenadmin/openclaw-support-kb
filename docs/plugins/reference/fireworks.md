@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks plugin"
 source: "https://docs.openclaw.ai/plugins/reference/fireworks"
-source_hash: "98142fe25014f1d83435cd60bac8f86acef9c0a9188158da34bc69b189ae775a"
+source_hash: "b7be21167ff8d2c60bd2e64aaa18b6863cc544dbe919d4647e47d393f25b87ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/fireworks.md"
@@ -20,7 +20,7 @@ Adds Fireworks model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/fireworks-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/fireworks-provider`
 
 ## Surface
 

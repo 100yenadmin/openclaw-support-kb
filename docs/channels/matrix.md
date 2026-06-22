@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix"
 source: "https://docs.openclaw.ai/channels/matrix"
-source_hash: "c61af829ecbb5dd3b69e7bd725abe0cb8508e3ca53e4bc32c4b0287129608fa5"
+source_hash: "a327f92a79f2b696b6cb60bbc05cd5b79ca2d282522fdebe5623abdff288bc3f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix.md"
@@ -414,7 +414,7 @@ If the homeserver requires UIA to upload cross-signing keys, OpenClaw tries no-a
 Useful flags:
 
 - `--recovery-key-stdin` (pair with `printf '%s\n' "$MATRIX_RECOVERY_KEY" | …`) or `--recovery-key <key>`
-- `--force-reset-cross-signing` to discard the current cross-signing identity (intentional only)
+- `--force-reset-cross-signing` to discard the current cross-signing identity (intentional only; requires the active recovery key to be stored or supplied with `--recovery-key-stdin`)
 
 ### Room-key backup
 

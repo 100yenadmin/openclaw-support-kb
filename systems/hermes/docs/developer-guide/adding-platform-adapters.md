@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/adding-platform-adapters"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "c55c09e07ce65349db1918dff8ef71756439f47df5c66d17933704e292f9825a"
+source_hash: "07ab2279122635fd124b0861adfc94fbde6b8b1b33d4a4e5383d297eb8154539"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -491,7 +491,7 @@ class Platform(str, Enum):
 
 ### 2. Adapter File
 
-Create `gateway/platforms/newplat.py`:
+Create `plugins/platforms/newplat/adapter.py`:
 
 ```python
 from gateway.config import Platform, PlatformConfig
@@ -704,6 +704,6 @@ async def disconnect(self):
 | `bluebubbles.py` | REST + webhook | Medium | Simple REST API integration |
 | `weixin.py` | Long-poll + CDN | High | Media handling, encryption |
 | `wecom_callback.py` | Callback/webhook | Medium | HTTP server, AES crypto, multi-app |
-| `telegram.py` | Long-poll + Bot API | High | Full-featured adapter with groups, threads |
+| `plugins/platforms/irc/adapter.py` | Long-poll + IRC protocol | High | Full-featured plugin adapter with scoped token lock |
 
 ---

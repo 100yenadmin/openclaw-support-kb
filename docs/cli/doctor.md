@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "52aa078ec3ae9165fdeafb35118c58092c113d6dc884c12eaa6fefe28a367038"
+source_hash: "976246f6a66c02125399448c122c5fe35be9f5f125d4768222cd0ecf55e9f513"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -179,10 +179,12 @@ A finding includes:
 | `ocPath`          | Precise `oc://` address when a check can point to one. |
 | `fixHint`         | Suggested operator action or repair summary.           |
 
-This release registers the modernized core doctor checks on the structured
-health path. The `openclaw/plugin-sdk/health` subpath exposes the same
-contract for bundled follow-up consumers, but plugin-backed checks only run
-after their owning package registers them in the active command path.
+Modernized core doctor checks stay attached to the ordered doctor contribution
+that owns their human `doctor` / `doctor --fix` behavior. The shared structured
+health registry is the extension point: bundled and plugin-backed checks run
+after core doctor checks once their owning package registers them in the active
+command path. The `openclaw/plugin-sdk/health` subpath exposes the same
+contract for those extension consumers.
 
 ## Check Selection
 

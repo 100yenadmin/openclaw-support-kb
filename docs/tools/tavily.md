@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tavily"
 source: "https://docs.openclaw.ai/tools/tavily"
-source_hash: "4b370fe31401fcceecddaf7850faefde4912807e83929b972c1b79d009206e11"
+source_hash: "532a614a6654dfa4ada6aec33086501c1ad52877ec3626933a1996917a006883"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tavily.md"
@@ -20,16 +20,24 @@ Source: https://docs.openclaw.ai/tools/tavily
 
 Tavily returns structured results optimized for LLM consumption with configurable search depth, topic filtering, domain filters, AI-generated answer summaries, and content extraction from URLs (including JavaScript-rendered pages).
 
-| Property      | Value                               |
-| ------------- | ----------------------------------- |
-| Plugin id     | `tavily`                            |
-| Auth          | `TAVILY_API_KEY` or config `apiKey` |
-| Base URL      | `https://api.tavily.com` (default)  |
-| Bundled tools | `tavily_search`, `tavily_extract`   |
+| Property  | Value                               |
+| --------- | ----------------------------------- |
+| Plugin id | `tavily`                            |
+| Package   | `@openclaw/tavily-plugin`           |
+| Auth      | `TAVILY_API_KEY` or config `apiKey` |
+| Base URL  | `https://api.tavily.com` (default)  |
+| Tools     | `tavily_search`, `tavily_extract`   |
 
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/tavily-plugin
+    ```
 
 
 Get an API key
@@ -72,7 +80,7 @@ Verify search runs
 
 Tip
 
-Choosing Tavily in onboarding or `openclaw configure --section web` enables the bundled Tavily plugin automatically.
+Choosing Tavily in onboarding or `openclaw configure --section web` installs and enables the official Tavily plugin when needed.
 
 ## Tool reference
 

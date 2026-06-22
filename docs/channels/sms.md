@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SMS"
 source: "https://docs.openclaw.ai/channels/sms"
-source_hash: "06a82301d34bf1bf0bc81b5badfa0c0e6d4ccc3ca04e9115a91093ec6d0b9364"
+source_hash: "8ecc0bb77134b8268d684b5848db33878ee8c262211e8eb00abf82bdeb7c5982"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/sms.md"
@@ -37,6 +37,7 @@ Channel troubleshooting
 
 You need:
 
+- The official SMS plugin installed with `openclaw plugins install @openclaw/sms`.
 - A Twilio account with an SMS-capable phone number, or a Twilio Messaging Service.
 - The Twilio Account SID and Auth Token.
 - A public HTTPS URL that reaches your OpenClaw Gateway.
@@ -47,6 +48,13 @@ Use one Twilio number for both SMS and Voice Call if the number has both capabil
 ## Quick Setup
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/sms
+    ```
 
 
 Create or choose a Twilio sender

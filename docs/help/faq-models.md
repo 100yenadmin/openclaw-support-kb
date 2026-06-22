@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "5406523b31322a455b565a908a554fa48175f561a2313bc4d6c46fdd98b59972"
+source_hash: "e5c20d113e21b885d804b4709f75d80417b68b1487473ebc4ef7d412838efcab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -198,6 +198,7 @@ How do I configure fast mode for GPT 5.5?
 
     - **Per session:** send `/fast on` while the session is using `openai/gpt-5.5`.
     - **Per model default:** set `agents.defaults.models["openai/gpt-5.5"].params.fastMode` to `true`.
+    - **Automatic cutoff:** use `/fast auto` or `params.fastMode: "auto"` to start new model calls fast until the auto cutoff, then start later retry, fallback, tool-result, or continuation calls without fast mode. The cutoff defaults to 60 seconds; set `params.fastAutoOnSeconds` on the active model to change it.
 
     Example:
 
@@ -208,7 +209,8 @@ How do I configure fast mode for GPT 5.5?
           models: {
             "openai/gpt-5.5": {
               params: {
-                fastMode: true,
+                fastMode: "auto",
+                fastAutoOnSeconds: 30,
               },
             },
           },
@@ -217,7 +219,7 @@ How do I configure fast mode for GPT 5.5?
     }
     ```
 
-    For OpenAI, fast mode maps to `service_tier = "priority"` on supported native Responses requests. Session `/fast` overrides beat config defaults.
+    For OpenAI, fast mode maps to `service_tier = "priority"` on supported native Responses requests. Session `/fast` overrides beat config defaults. Codex app-server turns can only receive the tier at turn start, so `auto` applies on the next OpenClaw-started model turn rather than inside one already-running app-server turn.
 
     See [Thinking and fast mode](/tools/thinking) and [OpenAI fast mode](/providers/openai#fast-mode).
 

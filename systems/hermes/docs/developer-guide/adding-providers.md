@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "7b17cec6d0e2091b6cf828bed12396cf3d13f672ed7216a1d0a36870166caf28"
+source_hash: "2c3972ccfaf87e6804c1803f2b8cdd2447a46edaf84aac35bf8a9107fd4074ba"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -140,7 +140,7 @@ See `plugins/model-providers/nvidia/` or `plugins/model-providers/gmi/` as a tem
 
 Use the full checklist below when your provider needs any of the following:
 
-- OAuth or token refresh (Nous Portal, Codex, Google Gemini, Qwen Portal, Copilot)
+- OAuth or token refresh (Nous Portal, Codex, Qwen Portal, Copilot)
 - A non-OpenAI API shape that requires a new adapter (Anthropic Messages, Codex Responses)
 - Custom endpoint detection or multi-region probing (z.ai, Kimi)
 - A curated static model catalog or live `/models` fetch

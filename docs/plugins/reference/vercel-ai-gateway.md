@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vercel AI Gateway plugin"
 source: "https://docs.openclaw.ai/plugins/reference/vercel-ai-gateway"
-source_hash: "e412c051918b4986b0052c39735e3655b8ee1a5da5c83259afab9f48948ccae2"
+source_hash: "47f60ebdd5bacffc35c549f63ad6ea408ebe74f7109813a267160fdf5be80bc8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/vercel-ai-gateway.md"
@@ -20,7 +20,7 @@ Adds Vercel AI Gateway model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/vercel-ai-gateway-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/vercel-ai-gateway-provider`
 
 ## Surface
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Venice AI"
 source: "https://docs.openclaw.ai/providers/venice"
-source_hash: "5e5675e5bb11a88ba971b487a843ffb8b06d874e6988d26c367c3ecfb73580a5"
+source_hash: "8b3f8c050b0c0f7d67f10f6519a2222f268a98858ff249b5e91b54c5e2a0c08b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/venice.md"
@@ -49,6 +49,13 @@ Anonymized models are **not** fully private. Venice strips metadata before forwa
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/venice-provider
+    ```
 
 
 Get your API key

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "bc9348549a075a01f5d5bcbb8e27e96d2207adee446114b1594aa35c224fca1c"
+source_hash: "c9216ecb652d1f36c210c24acd98ffef8166f4cd0c07c8c5efb0f7b81600259c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
@@ -45,7 +45,7 @@ Steps
 
 Ensure plugin is available
 
-    Current packaged OpenClaw releases already bundle it. Older/custom installs can add it manually with the commands above.
+    Install `@openclaw/mattermost` with the command above, then restart the Gateway if it is already running.
 
 
 Create a Mattermost bot
