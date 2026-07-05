@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Updating & Uninstalling"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/updating"
-source_hash: "3b9f11968ac3991c3cbb2a2dadb933b578b0b2cb3ae74d587afa58c0092913c5"
+source_hash: "e84f596721631a8f3c9a50d4c6ec23f029419eb7db728dc4a1711107a72ca8fb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/updating.md"
@@ -21,8 +21,6 @@ Source: https://hermes-agent.nousresearch.com/docs/getting-started/updating
 
 ## Updating
 
-### Git installs
-
 Update to the latest version with a single command:
 
 ```bash
@@ -31,26 +29,11 @@ hermes update
 
 This pulls the latest code from `main`, updates dependencies, and prompts you to configure any new options that were added since your last update.
 
-### pip installs
-
-PyPI releases track **tagged versions** (major and minor releases), not every commit on `main`. Check for updates and upgrade with:
-
-```bash
-hermes update --check    # see if a newer release is on PyPI
-hermes update            # runs pip install --upgrade hermes-agent
-```
-
-Or manually:
-
-```bash
-pip install --upgrade hermes-agent    # or: uv pip install --upgrade hermes-agent
-```
-
 :::tip
 `hermes update` automatically detects new configuration options and prompts you to add them. If you skipped that prompt, you can manually run `hermes config check` to see missing options, then `hermes config migrate` to interactively add them.
 :::
 
-### What happens during an update (git installs)
+### What happens during an update
 
 When you run `hermes update`, the following steps occur:
 
@@ -92,7 +75,7 @@ In the desktop app this is **Settings → Advanced → In-App Update Local Chang
 
 ### Preview-only: `hermes update --check`
 
-Want to know if an update is available before pulling? Run `hermes update --check` — for git installs it fetches and compares commits against `origin/main`; for pip installs it queries PyPI for the latest release. No files are modified, no gateway is restarted. Useful in scripts and cron jobs that gate on "is there an update".
+Want to know if an update is available before pulling? Run `hermes update --check` — it fetches and compares commits against `origin/main`. No files are modified, no gateway is restarted. Useful in scripts and cron jobs that gate on "is there an update".
 
 ### Full pre-update backup: `--backup`
 
@@ -131,6 +114,8 @@ $ hermes update
 ```
 
 Close the listed processes and re-run. If you're sure the concurrent process won't interfere (rare — usually only useful when an antivirus shim is mis-attributed), pass `--force` to skip the check. In that case the updater will still retry the `.exe` rename with exponential backoff and, on stubborn locks, schedule the replacement for next reboot via `MoveFileEx(MOVEFILE_DELAY_UNTIL_REBOOT)` so the update can complete.
+
+A second, separate guard refuses to touch the venv while any process is running from its Python interpreter (the Desktop app's backend, a gateway, a Python REPL). Those processes keep native extension files (`.pyd`) locked, and a dependency sync that dies partway on an access-denied error strands the install between versions. This guard is **not** bypassed by `--force`; if you're certain the detected holders are false positives, use the explicit `hermes update --force-venv`.
 
 Expected output looks like:
 
@@ -201,7 +186,9 @@ If you installed manually (not via the quick installer):
 
 ```bash
 cd /path/to/hermes-agent
-export VIRTUAL_ENV="$(pwd)/venv"
+# Activate the venv you created during install (outside the source tree)
+export VIRTUAL_ENV="$HOME/.hermes/venvs/hermes-dev"
+export PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Pull latest code
 git pull origin main
@@ -245,7 +232,7 @@ Rolling back may cause config incompatibilities if new options were added. Run `
 
 ### Note for Nix users
 
-If you installed via Nix flake, updates are managed through the Nix package manager:
+Nix is no longer an explicitly supported install path (best-effort only) — see [Nix Setup](./nix-setup.md). If you installed via Nix flake, updates are managed through the Nix package manager:
 
 ```bash
 # Update the flake input
@@ -267,20 +254,11 @@ See [Nix Setup](./nix-setup.md) for more details.
 
 ## Uninstalling
 
-### Git installs
-
 ```bash
 hermes uninstall
 ```
 
 The uninstaller gives you the option to keep your configuration files (`~/.hermes/`) for a future reinstall.
-
-### pip installs
-
-```bash
-pip uninstall hermes-agent
-rm -rf ~/.hermes            # Optional — keep if you plan to reinstall
-```
 
 ### Manual Uninstall
 

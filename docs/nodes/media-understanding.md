@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "74e24bada7e4cc38e08da649682da4cce8f0d48686f66e422957c4cbe578b48f"
+source_hash: "024f901b85908d95067633d8e72dc67ee1ba139fc696311aa7521822bcfa38f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -367,7 +367,7 @@ END_EXTERNAL_UNTRUSTED_CONTENT
 >>` and includes a `Source: External` metadata line.
     - This attachment-extraction path intentionally omits the long `SECURITY NOTICE:` banner to avoid bloating the media prompt; the boundary markers and metadata still remain.
     - If a file has no extractable text, OpenClaw injects `[No extractable text]`.
-    - If a PDF falls back to rendered page images in this path, the media prompt keeps the placeholder `[PDF content rendered to images; images not forwarded to model]` because this attachment-extraction step forwards text blocks, not the rendered PDF images.
+    - If a PDF falls back to rendered page images in this path, OpenClaw forwards those page images to vision-capable reply models and keeps the placeholder `[PDF content rendered to images]` in the file block.
 
 
 

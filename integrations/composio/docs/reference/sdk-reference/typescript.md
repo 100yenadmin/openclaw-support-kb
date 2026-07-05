@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript.md"
-source_hash: "996c5d6c53525822eab4b0b81565217ab5f52cc786bcfe453d1f54381e07bbbb"
+source_hash: "37d2b9e74866aa4f6edd7ab47cd03c59102630ebd07c218d5097170075231b19"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript.md"
@@ -45,20 +45,20 @@ bun add @composio/core
 
 # Classes
 
-| Class                                                                                                | Description                                                     |
-| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [`Composio`](/reference/sdk-reference/typescript/composio)                                           | This is the core class for Composio.                            |
-| [`AuthConfigs`](/reference/sdk-reference/typescript/auth-configs)                                    | AuthConfigs class                                               |
-| [`ConnectedAccounts`](/reference/sdk-reference/typescript/connected-accounts)                        | ConnectedAccounts class                                         |
-| [`Experimental`](/reference/sdk-reference/typescript/experimental)                                   | `composio.experimental` namespace. Mirrors the Python SDK's     |
-| [`MCP`](/reference/sdk-reference/typescript/mcp)                                                     | MCP (Model Control Protocol) class                              |
-| [`RemoteFile`](/reference/sdk-reference/typescript/remote-file)                                      | Represents a file stored in a tool router session's file mount. |
-| [`SessionContextImpl`](/reference/sdk-reference/typescript/session-context-impl)                     | Concrete implementation of SessionContext.                      |
-| [`Toolkits`](/reference/sdk-reference/typescript/toolkits)                                           | Toolkits class                                                  |
-| [`ToolRouterSession`](/reference/sdk-reference/typescript/tool-router-session)                       | ToolRouterSession API                                           |
-| [`ToolRouterSessionFilesMount`](/reference/sdk-reference/typescript/tool-router-session-files-mount) | ToolRouterSessionFilesMount API                                 |
-| [`Tools`](/reference/sdk-reference/typescript/tools)                                                 | This class is used to manage tools in the Composio SDK.         |
-| [`Triggers`](/reference/sdk-reference/typescript/triggers)                                           | Trigger (Instance) class                                        |
+| Class                                                                         | Description                                                                 |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [`Composio`](/reference/sdk-reference/typescript/composio)                    | This is the core class for Composio.                                        |
+| [`AuthConfigs`](/reference/sdk-reference/typescript/auth-configs)             | AuthConfigs class                                                           |
+| [`ConnectedAccounts`](/reference/sdk-reference/typescript/connected-accounts) | ConnectedAccounts class                                                     |
+| [`Experimental`](/reference/sdk-reference/typescript/experimental)            | Experimental API                                                            |
+| [`MCP`](/reference/sdk-reference/typescript/mcp)                              | MCP (Model Control Protocol) class                                          |
+| [`RemoteFile`](/reference/sdk-reference/typescript/remote-file)               | Represents a file stored in a tool router session's file mount.             |
+| [`Sessions`](/reference/sdk-reference/typescript/sessions)                    | First-class API for creating and reusing Composio sessions.                 |
+| [`Toolkits`](/reference/sdk-reference/typescript/toolkits)                    | Toolkits class                                                              |
+| [`Session`](/reference/sdk-reference/typescript/session)                      | A Composio session — the object returned by `composio.sessions.create(...)` |
+| [`Session files`](/reference/sdk-reference/typescript/session-files)          | File mount for a Composio session, reached via `session.experimental.files` |
+| [`Tools`](/reference/sdk-reference/typescript/tools)                          | This class is used to manage tools in the Composio SDK.                     |
+| [`Triggers`](/reference/sdk-reference/typescript/triggers)                    | Trigger (Instance) class                                                    |
 
 # Quick Start
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Broadcast groups"
 source: "https://docs.openclaw.ai/channels/broadcast-groups"
-source_hash: "169e4aac762fc14d185a5ff2b6f5d3d14391a17227aefc9af99e593a3ed627a8"
+source_hash: "458e7ac3fbea021c8c494e52dc8f3591c31a533282f7654c742279acfd1f4da7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/broadcast-groups.md"
@@ -24,6 +24,8 @@ Broadcast Groups enable multiple agents to process and respond to the same messa
 Current scope: **WhatsApp only** (web channel).
 
 Broadcast groups are evaluated after channel allowlists and group activation rules. In WhatsApp groups, this means broadcasts happen when OpenClaw would normally reply (for example: on mention, depending on your group settings).
+
+The live WhatsApp QA lane includes `whatsapp-broadcast-group-fanout`, which verifies that one mentioned group message can produce distinct visible replies from two configured agents.
 
 ## Use cases
 

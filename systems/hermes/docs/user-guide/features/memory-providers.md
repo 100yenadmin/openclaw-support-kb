@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "e447b08c38f82437757f5ecbb3f818bbd865fc5309687416bb551a7d7afa1cfc"
+source_hash: "daf8f1ffbcea1fd60d6f8823681d98125207c1d2042ce88fa35831f595c02d58"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -73,6 +73,8 @@ AI-native cross-session user modeling with dialectic reasoning, session-scoped c
 - `contextCadence` — how often the base layer refreshes (API call frequency)
 - `dialecticCadence` — how often the dialectic LLM fires (LLM call frequency)
 - `dialecticDepth` — how many `.chat()` passes per dialectic invocation (1–3, depth of reasoning)
+
+The auto-injected dialectic also scales its reasoning level by query length (longer query → deeper reasoning, capped at `reasoningLevelCap`); see [Query-Adaptive Reasoning Level](./honcho.md#query-adaptive-reasoning-level).
 
 **Setup Wizard:**
 ```bash
@@ -524,7 +526,7 @@ Semantic long-term memory with profile recall, semantic search, explicit memory 
 | | |
 |---|---|
 | **Best for** | Semantic recall with user profiling and session-level graph building |
-| **Requires** | `pip install supermemory` + [API key](https://supermemory.ai) |
+| **Requires** | `pip install supermemory` + [API key](http://app.supermemory.ai/integrations?connect=hermes) |
 | **Data storage** | Supermemory Cloud |
 | **Cost** | Supermemory pricing |
 

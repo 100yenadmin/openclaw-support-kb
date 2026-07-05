@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "396e8c283a4e6cb8dcf9e84677d62270e0ee2a8a1a5095a7c8df086d8ba94383"
+source_hash: "d034fa5d559072779a5dbc1736bb8a4399492b464307d064ad8b3830e1ad1294"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -235,6 +235,18 @@ the same caller keep conversation memory. Set `sessionScope: "per-call"` when
 each carrier call should start with fresh context, for example reception,
 booking, IVR, or Google Meet bridge flows where the same phone number may
 represent different meetings.
+
+Voice Call stores generated session keys under the configured agent namespace
+(`agent:<agentId>:voice:*`) so call memory survives Gateway session-key
+canonicalization after restarts. Raw explicit integration keys use the same
+agent namespace. A canonical `agent:<configuredAgentId>:*` key keeps that owner,
+and its main aliases honor core `session.mainKey` and global scope. Foreign or
+malformed `agent:*` input is scoped as an opaque key under the configured agent;
+`global` and `unknown` remain global sentinels. Gateway startup promotes older
+raw keys in default or `{agentId}`-templated stores where the path proves one
+owner. In fixed custom stores, ambiguous legacy rows remain untouched because
+they do not contain enough information to choose an owner; new calls use
+canonical agent-scoped history.
 
 ## Realtime voice conversations
 

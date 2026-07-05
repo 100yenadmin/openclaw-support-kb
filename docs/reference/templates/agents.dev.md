@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.dev template"
 source: "https://docs.openclaw.ai/reference/templates/AGENTS.dev"
-source_hash: "f6c30c929450f90b447c08d2f41a29e8b08382580b2822513ed174a052495a79"
+source_hash: "d612e2e6ec8074168c5be684336d42aaf28be923db246b3cf565492994a73ab4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/agents.dev.md"
@@ -39,6 +39,10 @@ git commit -m "Add agent workspace"
 - Don't exfiltrate secrets or private data.
 - Don't run destructive commands unless explicitly asked.
 - Be concise in chat; write longer output to files in this workspace.
+
+## Existing solutions preflight
+
+Before proposing or building a custom system, feature, workflow, tool, integration, or automation, do a brief check for open-source projects, maintained libraries, existing OpenClaw plugins, or free platforms that already solve it well enough. Prefer those when adequate. Build custom only when existing options are unsuitable, too expensive, unmaintained, unsafe, non-compliant, or the user explicitly asks for custom. Avoid paid-service recommendations unless the user explicitly approves spend. Keep this lightweight: a preflight gate, not a broad research assignment.
 
 ## Daily memory (recommended)
 

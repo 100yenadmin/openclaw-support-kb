@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "54785a7fb3ab51d9442a2432148229d941e433368b5d6938dda3fc9c0cd3b7ca"
+source_hash: "d07c0710eaeaa097ab410c2783bb13aacb9c31745b27abdfbf27154693ce11bd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -22,6 +22,12 @@ and workspace defaults in one guided flow.
 ```bash
 openclaw onboard
 ```
+
+QuickStart is usually only a few minutes, but full onboarding can take longer
+when provider sign-in, channel pairing, daemon install, network downloads,
+skills, or optional plugins need extra setup. The wizard shows this timeline up
+front, and optional steps can be skipped and revisited later with
+`openclaw configure`.
 
 ## Locale
 

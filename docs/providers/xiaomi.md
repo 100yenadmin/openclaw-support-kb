@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "d4d5712183d737473a1de5e3e019d3c154d196491bd50d96fc20f39ea1e64298"
+source_hash: "29a47d5fb321c02486dd650dbb4c446636fc6120f747bd31b36e23fa506f1c72"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -97,8 +97,8 @@ Choose the Token Plan auth choice that matches the regional base URL shown in Xi
 
 | Model ref                         | Input       | Context   | Max output | Reasoning | Notes         |
 | --------------------------------- | ----------- | --------- | ---------- | --------- | ------------- |
-| `xiaomi-token-plan/mimo-v2.5-pro` | text        | 1,048,576 | 32,000     | Yes       | Default model |
-| `xiaomi-token-plan/mimo-v2.5`     | text, image | 1,048,576 | 32,000     | Yes       | Multimodal    |
+| `xiaomi-token-plan/mimo-v2.5-pro` | text        | 1,048,576 | 131,072    | Yes       | Default model |
+| `xiaomi-token-plan/mimo-v2.5`     | text, image | 1,048,576 | 131,072    | Yes       | Multimodal    |
 
 Tip
 
@@ -235,7 +235,7 @@ Token Plan:
             reasoning: true,
             input: ["text"],
             contextWindow: 1048576,
-            maxTokens: 32000,
+            maxTokens: 131072,
           },
           {
             id: "mimo-v2.5",
@@ -243,7 +243,7 @@ Token Plan:
             reasoning: true,
             input: ["text", "image"],
             contextWindow: 1048576,
-            maxTokens: 32000,
+            maxTokens: 131072,
           },
         ],
       },

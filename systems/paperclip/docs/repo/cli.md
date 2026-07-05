@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "7f82381a913e43df3808197cadea067014b13e4dfa877430eacbde75d40c5ba2"
+source_hash: "27b45afdd2623be3e71ca2adcde56e276ab86bd736b11621be3ccb04afae9447"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -300,7 +300,7 @@ pnpm paperclipai agent local-cli <agent-id-or-shortname> --company-id <company-i
 Agent configuration and runtime endpoints:
 
 ```sh
-pnpm paperclipai agent permissions:update <agent-id> --payload-json '{"canCreateAgents":true,"canAssignTasks":true}'
+pnpm paperclipai agent permissions:update <agent-id> --payload-json '{"canCreateAgents":true,"canCreateSkills":true,"canAssignTasks":true}'
 pnpm paperclipai agent configuration <agent-id>
 pnpm paperclipai agent config-revisions <agent-id>
 pnpm paperclipai agent config-revision:get <agent-id> <revision-id>
@@ -317,6 +317,8 @@ pnpm paperclipai agent instructions-file:get <agent-id> --path AGENTS.md
 pnpm paperclipai agent instructions-file:put <agent-id> --path AGENTS.md --content-file ./AGENTS.md
 pnpm paperclipai agent instructions-file:delete <agent-id> --path AGENTS.md
 ```
+
+Agent config, instructions, skills, project env, environment, secret, and workspace edits affect the next run. Active runs finish with the config they started with. When a saved session, reused workspace, or sandbox lease no longer matches the effective next-run config, Paperclip may start fresh execution and records non-sensitive freshness categories in run result JSON and workspace operation logs.
 
 `agent local-cli` is the quickest way to run local Claude/Codex manually as a Paperclip agent:
 
@@ -416,6 +418,11 @@ By default the command creates a `todo` issue assigned to the target agent and w
 
 Required Paperclip runtime skills (heartbeat, etc.) remain server-enforced and
 are added on top of whatever the desired set names.
+
+Company skill mutations (`skills install`, `skills import`, `skills create`, and
+`skills scan-projects`) require board authentication, an explicit `skills:create`
+grant, or an agent whose permissions keep `canCreateSkills` enabled. They do not
+require `agents:create` unless the command also creates agents.
 
 ### Catalog (app-shipped skills)
 
@@ -700,6 +707,13 @@ pnpm paperclipai llm agent-configuration
 pnpm paperclipai llm agent-configuration:adapter <adapter-type>
 pnpm paperclipai llm agent-icons
 ```
+
+Hermes gateway uses the generic invite/join commands above rather than
+`openclaw invite-prompt`. Create an agent invite, read
+`invite onboarding:text`, submit a join request with
+`adapterType: "hermes_gateway"` and `agentDefaultsPayload.apiBaseUrl` /
+`agentDefaultsPayload.apiKey`, then approve and claim the key with the `join`
+commands. See [HERMES_GATEWAY_ONBOARDING.md](./HERMES_GATEWAY_ONBOARDING.md).
 
 ## Adapter, Asset, And Skill Commands
 

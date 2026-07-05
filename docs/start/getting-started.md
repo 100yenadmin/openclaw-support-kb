@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "a13c39b869e6ea1b59f1a1e2ec784c8416d6341b6d47631fff149e9b9d747557"
+source_hash: "ee1df1cb6f4687973f013800d5544379c1f4f6c9c65f86dbdbfd3680c72efbec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -75,7 +75,10 @@ Run onboarding
     ```
 
     The wizard walks you through choosing a model provider, setting an API key,
-    and configuring the Gateway. It takes about 2 minutes.
+    and configuring the Gateway. QuickStart is usually only a few minutes, but
+    provider sign-in, channel pairing, daemon install, network downloads, skills,
+    or optional plugins can make full onboarding take longer. You can skip optional
+    steps and return later with `openclaw configure`.
 
     See [Onboarding (CLI)](/start/wizard) for the full reference.
 

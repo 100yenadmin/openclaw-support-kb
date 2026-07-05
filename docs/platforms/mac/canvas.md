@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "060f68eb2b561bc8d00568746d2afc846fd8d3aa4ffc37a4ec9b31da06b34d7e"
+source_hash: "f6f28878de912234ab2e6ba671b7a669ecb6980b096d8441c13ec5a64d087a69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
@@ -120,7 +120,18 @@ Example (in JS):
 window.location.href = "openclaw://agent?message=Review%20this%20design";
 ```
 
-The app prompts for confirmation unless a valid key is provided.
+Supported query parameters:
+
+- `message`: prefilled agent prompt.
+- `sessionKey`: stable session identifier.
+- `thinking`: optional thinking profile.
+- `deliver`, `to`, or `channel`: delivery target.
+- `timeoutSeconds`: optional run timeout.
+- `key`: app-generated safety token for trusted local callers.
+
+The app prompts for confirmation unless a valid key is provided. Unkeyed links
+show the message and URL before approval, and ignore delivery routing fields;
+keyed links use the normal Gateway run path.
 
 ## Security notes
 

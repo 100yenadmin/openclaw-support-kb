@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "511e39af7c2485e3a5d839ed69fc0c5b9f99c5204b8532b40298daee77968609"
+source_hash: "56b3e6e9a26ddef47249b45f994f21f47bb806832d85a2dca5db79976bb56117"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
@@ -413,8 +413,8 @@ DeepSeek V4 reasoning replay
     `openrouter/deepseek/deepseek-v4-pro` fill missing `reasoning_content` on
     replayed assistant turns so thinking/tool conversations keep DeepSeek V4's
     required follow-up shape. OpenClaw sends OpenRouter-supported
-    `reasoning_effort` values for these routes; `xhigh` is the highest advertised
-    level, and stale `max` overrides are mapped to `xhigh`.
+    `reasoning.effort` values for these routes; lower non-off levels map to
+    `high`, and stale `max` overrides are mapped to `xhigh`.
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenProse"
 source: "https://docs.openclaw.ai/prose"
-source_hash: "d014a6a9dba4c1e3601833310bbd4d0169600d0b5aa398c1139f700d68ef49b5"
+source_hash: "d2a01a4fb25c2aa7b76a8e4046cab349f5655fee2004d96a34ff10a530330915"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "prose.md"
@@ -87,6 +87,11 @@ OpenProse registers `/prose` as a user-invocable skill command:
 
 `/prose run <handle/slug>` resolves to `https://p.prose.md/<handle>/<slug>`.
 Direct URLs are fetched as-is using the `web_fetch` tool.
+
+Top-level remote runs are explicit. Remote imports inside a `.prose` program are
+transitive code dependencies: before OpenProse fetches any remote `use` target,
+it shows the resolved import list and requires the operator to reply exactly
+`approve remote prose imports` for that run.
 
 ## What it can do
 
@@ -194,9 +199,12 @@ Warning
 
 ## Security
 
-Treat `.prose` files like code. Review them before running. Use OpenClaw tool
-allowlists and approval gates to control side effects. For deterministic,
-approval-gated workflows, compare with [Lobster](/tools/lobster).
+Treat `.prose` files like code. Review them before running, including remote
+`use` imports. Top-level `/prose run https://...` requests are explicit, but
+transitive remote imports require per-run approval before they are fetched or
+executed. Use OpenClaw tool allowlists and approval gates to control side
+effects. For deterministic, approval-gated workflows, compare with
+[Lobster](/tools/lobster).
 
 ## Related
 

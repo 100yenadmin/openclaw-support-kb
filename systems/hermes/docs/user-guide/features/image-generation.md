@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/image-generation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/image-generation"
-source_hash: "9789063d7af125c45131ca690f08c70dfa990db6a6fcca2ac52949e0980c80ec"
+source_hash: "aad77974861e38b01ea45d465daf8c779a36ac0b16cee6c068f1e279e852c857"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/image-generation.md"
@@ -126,7 +126,7 @@ Two inputs drive the edit:
 | **OpenAI** (`gpt-image-2`) | ✓ | up to 16 | `images.edit()` |
 | **xAI** (Grok Imagine) | ✓ | 1 | `/v1/images/edits` (`grok-imagine-image-quality`) |
 | **Krea** (`Krea 2`) | ✓ | up to 10 | reference-guided generation (`image_style_references`) |
-| **OpenAI (Codex auth)** | ✗ | — | text-to-image only |
+| **OpenAI (Codex auth)** | ✓ | up to 16 | Codex Responses `image_generation` tool with `input_image` content parts |
 
 FAL models with an editing endpoint: `flux-2/klein/9b`, `flux-2-pro`,
 `nano-banana-pro`, `gpt-image-1.5`, `gpt-image-2`, `ideogram/v3`, and

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "2e3cbf5d8cdbcfec6f110b029e8034eae7399b918a9defb6f957c6da4f90a60f"
+source_hash: "4be395fbdbc58c28fdcf5d03eb98313b7dfe8db91564255a029756aa21ef7144"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
@@ -17,9 +17,23 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/api-reference/toolkits.md
 
 
-{/* Auto-generated from OpenAPI spec. Do not edit directly. */}
+{/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/toolkits.mdx, not this file. */}
 
-Toolkit and tool management
+A toolkit is a collection of related tools for a single app, like `gmail`, `github`, or `slack`. Each toolkit groups the actions for that service, its authentication requirements, and the trigger types it exposes.
+
+Reach for these endpoints when you want to:
+
+* List the toolkits in the catalog, sorted by popularity, to browse what is available before configuring a session.
+* Fetch a single toolkit by `slug` for its name, logo, categories, and metadata.
+* Fetch several toolkits at once with the multi endpoint.
+* List the available toolkit categories to filter the catalog by use case.
+* Read the toolkits changelog to track when tools or schemas change.
+
+These endpoints authenticate with your project API key in the `x-api-key` header.
+
+> Tools within a toolkit are versioned. When you execute a tool, resolve to a known version with `toolkit_versions=latest` or a pinned dated version. See the [toolkit versioning migration guide](/docs/migration-guide/toolkit-versioning).
+
+To browse toolkits visually, see the [toolkits catalog](/toolkits). For the concepts and SDK usage, see [Tools and toolkits](/docs/how-composio-works) and [Configuring sessions](/docs/configuring-sessions).
 
 # Endpoints
 

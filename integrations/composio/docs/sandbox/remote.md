@@ -1,0 +1,127 @@
+---
+type: composio_doc
+title: "Remote sandbox"
+source: "https://docs.composio.dev/docs/sandbox/remote.md"
+source_hash: "a600ca4bc48f8ea15ae6068e66de3b7bc3a5d4feb87150b5f7266884d19989cc"
+system: "composio"
+kb_namespace: "composio"
+doc_path: "sandbox/remote.md"
+original_doc_path: "sandbox/remote.md"
+duplicate_index: 1
+---
+
+Source System: Composio Integration
+Local KB namespace: composio
+
+# Remote sandbox (/docs/sandbox/remote)
+Source: https://docs.composio.dev/docs/sandbox/remote.md
+
+
+The **sandbox** is a persistent Python environment where your agent writes and executes code. It has programmatic access to all Composio tools, plus helper functions for calling LLMs, uploading files, and making API requests. State persists across calls within a [session](/docs/how-composio-works). Your agent runs code in it through the `COMPOSIO_REMOTE_WORKBENCH` meta tool, and shell commands through `COMPOSIO_REMOTE_BASH_TOOL`.
+
+> **Renamed from workbench**: This feature used to be called the **workbench**. The preferred session config key is now `sandbox`, but `workbench` still works as a fully supported alias, in both SDKs and on the wire. It isn't deprecated, so existing code keeps running unchanged. The `COMPOSIO_REMOTE_WORKBENCH` and `COMPOSIO_REMOTE_BASH_TOOL` meta tools keep their names.
+
+# Where it fits
+
+Use the sandbox when a task is too complex for individual tool calls. Your agent starts with [`SEARCH_TOOLS` to find the right tools, then uses `MULTI_EXECUTE`](/docs/how-composio-works#meta-tools) for straightforward calls. When the task involves bulk operations, data transformations, or multi-step logic, the agent reaches for `COMPOSIO_REMOTE_WORKBENCH` instead.
+
+# What the sandbox provides
+
+## Built-in helpers
+
+These functions are pre-initialized in every sandbox, so your agent can call them without any setup:
+
+| Helper               | What it does                                                                                          |
+| -------------------- | ----------------------------------------------------------------------------------------------------- |
+| `run_composio_tool`  | Execute any Composio tool (e.g., `GMAIL_SEND_EMAIL`, `SLACK_SEND_MESSAGE`) and get structured results |
+| `invoke_llm`         | Call an LLM for classification, summarization, content generation, or data extraction                 |
+| `upload_local_file`  | Upload generated files (reports, CSVs, images) to cloud storage and get a download URL                |
+| `proxy_execute`      | Make direct API calls to connected services when no pre-built tool exists                             |
+| `web_search`         | Search the web and return results for research or data enrichment                                     |
+| `smart_file_extract` | Extract text from PDFs, images, and other file formats in the sandbox                                 |
+
+## Libraries
+
+The sandbox ships with common packages pre-installed: `pandas`, `numpy`, `matplotlib`, `Pillow`, `PyTorch`, and `reportlab`. Beyond these, the sandbox maintains a list of supported packages and their dependencies. If the agent uses a package that isn't already installed, the sandbox installs it automatically.
+
+## Error correction
+
+The sandbox corrects common mistakes in the code your agent generates. For example, if a script accesses `result["apiKey"]` but the actual field name is `api_key`, the sandbox resolves the mismatch instead of failing.
+
+## Persistent state
+
+The sandbox runs as a persistent Jupyter notebook. Variables, imports, files, and in-memory state from one call are available in the next.
+
+## Compute tier
+
+Sandboxes default to `standard` (1 vCPU, 1 GB RAM). For heavier workloads (large dataframes, ML preprocessing, or big bulk operations), pick a larger tier when creating the session via `sandbox.sandboxSize` (TypeScript) or `sandbox.sandbox_size` (Python).
+
+Available tiers:
+
+* `standard` (1 vCPU, 1 GB RAM)
+* `medium` (2 vCPU, 2 GB)
+* `large` (4 vCPU, 4 GB)
+* `xlarge` (8 vCPU, 8 GB)
+
+Larger tiers require `@composio/core` ≥ `0.8.1` or `composio` ≥ `0.12.1`. See [Configuring sessions → Sandbox compute tier](/docs/configuring-sessions#sandbox-compute-tier) for examples.
+
+> **Pricing:** Sandboxes are not billed today. Composio plans to begin billing for sandbox usage soon (metered by tier and runtime).
+
+# Files and mounts
+
+The sandbox has a persistent file mount at `/mnt/files/`. Code running in the sandbox reads and writes files there, and the mount survives sandbox restarts: changing the [compute tier](#compute-tier) recreates the sandbox and clears in-memory state, but `/mnt/files/` persists.
+
+Move files between your app and the mount with `session.experimental.files`. Upload an input file and the agent reads it at `/mnt/files/<path>`. When the agent writes a result, download it from your app.
+
+> The files API ships under `session.experimental`, so the surface may change in a future release.
+
+**Python:**
+
+```python
+session = composio.create("user_123")
+
+# Upload a local file; the sandbox sees it at /mnt/files/sales.csv
+uploaded = session.experimental.files.upload("./sales.csv")
+print(uploaded.sandbox_mount_prefix, uploaded.mount_relative_path)
+# /mnt/files sales.csv
+
+# After the agent writes a result in the sandbox, download it
+report = session.experimental.files.download("/report.pdf")
+report.save("./report.pdf")
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+
+// Upload a local file; the sandbox sees it at /mnt/files/sales.csv
+const uploaded = await session.experimental.files.upload("./sales.csv");
+console.log(uploaded.sandboxMountPrefix, uploaded.mountRelativePath);
+// /mnt/files sales.csv
+
+// After the agent writes a result in the sandbox, download it
+const report = await session.experimental.files.download("/report.pdf");
+await report.save("./report.pdf");
+```
+
+The mount exposes four methods:
+
+| Method                     | What it does                                                                |
+| -------------------------- | --------------------------------------------------------------------------- |
+| `upload(input, options?)`  | Upload from a local path, URL, `File`, or buffer. Returns a `RemoteFile`.   |
+| `list(options?)`           | List files under `path` on the mount, with `cursor` and `limit` pagination. |
+| `download(path, options?)` | Fetch a file from the mount as a `RemoteFile`.                              |
+| `delete(path, options?)`   | Remove a file or directory from the mount.                                  |
+
+A `RemoteFile` carries the file's bytes and a presigned `downloadUrl`. Read it with `text()` or `buffer()`, or write it to disk with `save(path)`. Its `expiresAt` is when that download link expires, not a TTL on the file: the mount itself has no expiry you set.
+
+Every file lives on the session's default `files` mount, surfaced at `/mnt/files/`. Each method takes a `mountId` to address a mount by ID, but there's no SDK call to create custom mounts today, so you'll normally work with `files`.
+
+# Next
+
+- [Local sandbox](/docs/sandbox/local): Run the same tool calls in a sandbox you own, while Composio keeps managed auth and discovery.
+
+---

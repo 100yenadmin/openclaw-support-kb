@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "5fcace17c115ae259d2eea6da7f2817e4ecea4efb3fbab9065d45c42edcb889f"
+source_hash: "2c5c877f9f5611ebe88485d05fccd747a4aca121312f1f54d6ac7fe38e4de4f4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -65,6 +65,10 @@ Pick a model, hit **Switch**, and Hermes writes it to `~/.hermes/config.yaml` un
 ### Mid-session switches and context warnings
 
 When you switch models **inside an active session** (Herm TUI model picker, `hermes` CLI, or `/model` on Telegram/Discord), Hermes estimates whether your **next message** will run **preflight context compression** against the new model's window. If the session is already near or above that model's compression threshold (see [Context Compression](./configuration.md#context-compression)), the switch reply includes a warning — the same `warning_message` path used for expensive-model notices. The switch still applies immediately; compression runs on the **first user message after the switch**, before the model answers.
+
+:::warning Mid-session switches reset the prompt cache
+Prompt caches are keyed to the model serving the request, so any mid-conversation model change — an explicit `/model` switch, an [automatic fallback](./features/fallback-providers.md), or a [credential-pool](./features/credential-pools.md) rotation onto a different account — means the next message re-reads the entire conversation at full input-token price instead of the cached (~75–90% discounted) rate. On a long session this one-time re-read can dwarf the per-token difference between the two models. Switch when you need to, but prefer doing it early in a conversation or right after starting a fresh session.
+:::
 
 ## Setting auxiliary models
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/ntfy.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy"
-source_hash: "e2e11042e22652368d18dc8db167b81c6f56b0985487359884fca2d7ef35038c"
+source_hash: "3b5e30b862ffb496b05e2a354e96f6110c38a37019bac39209a64c7cbc8c9a81"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/ntfy.md"
@@ -104,10 +104,10 @@ cronjob(
 )
 ```
 
-Or target a specific topic explicitly:
+Or target a specific topic explicitly via the cron job's `deliver:` field, or from a shell script with the [`hermes send` CLI](/guides/pipe-script-output):
 
-```python
-send_message(target="ntfy:alerts-channel", message="Done!")
+```bash
+hermes send ntfy:alerts-channel "Done!"
 ```
 
 This works even when the cron runs out-of-process from the gateway — the plugin registers a `standalone_sender_fn` that opens its own HTTP connection.

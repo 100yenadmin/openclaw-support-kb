@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Telegram"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
-source_hash: "6db828c1806e3bceea74e144eb99c782280d6a4c51402389bb11bd07e7ed669d"
+source_hash: "de1a1796dda60e36696d6c6edcdf0731e14b065a62ef294761de165cd151a810"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/telegram.md"
@@ -91,6 +91,31 @@ Notes:
   A hard crash leaves the last-known status — the inherent limitation of a
   profile-text indicator.
 - Off by default, since it mutates the bot's global profile.
+
+### Command menu priority and cap (Optional)
+
+Hermes registers its command menu automatically when the Telegram gateway starts. The menu is built from the central slash-command registry plus eligible plugin/skill commands, then capped so Telegram accepts the payload reliably. The default cap is 60 commands — enough to keep all built-in commands plus common skill commands visible.
+
+If you have local or plugin commands that should stay visible in Telegram's `/` picker, prioritize them in `~/.hermes/config.yaml`:
+
+```yaml
+platforms:
+  telegram:
+    extra:
+      command_menu:
+        max_commands: 60
+        priority_mode: prepend  # prepend | append | replace
+        priority:
+          - my_plugin_command
+```
+
+`priority_mode` controls how your list combines with Hermes' built-in priority list:
+
+- `prepend`: put your commands first, then Hermes defaults
+- `append`: keep Hermes defaults first, then your commands
+- `replace`: use only your list for priority ordering
+
+Telegram allows up to 100 BotCommands, but large command payloads can fail. Hermes defaults to 60 for reliability and clamps configured values to `1..100`; use `/commands` for the full command list.
 
 ## Step 3: Privacy Mode (Critical for Groups)
 
@@ -961,9 +986,10 @@ gateway:
     telegram:
       extra:
         rich_messages: true
+        rich_drafts: false
 ```
 
-This setting is for client-rendering/copy compatibility; Hermes already falls back automatically when Telegram rejects the rich API call. If you only want the legacy "always code-block" table behavior while keeping rich messages enabled, disable table normalization by setting `telegram.pretty_tables: false` in `config.yaml` (default: `true`).
+This setting is for client-rendering/copy compatibility; Hermes already falls back automatically when Telegram rejects the rich API call. `rich_drafts` controls the experimental rich draft preview path during Telegram DM streaming and stays off by default because Telegram Desktop/macOS can visually overlay rich draft frames until the chat redraws. If you only want the legacy "always code-block" table behavior while keeping rich messages enabled, disable table normalization by setting `telegram.pretty_tables: false` in `config.yaml` (default: `true`).
 
 **Link previews.** Telegram auto-generates link previews for URLs in bot messages. If you'd rather suppress those (long `/tools` output, agent reply that mentions ten links, etc.):
 

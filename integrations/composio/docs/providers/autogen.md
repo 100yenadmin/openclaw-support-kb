@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "5ec31390e85e246f9cf3338c21480e179db1e5a26da9af928a32eecf591135d6"
+source_hash: "8d21a71d09f9d59f15b0e10b3232d67b164d7013d5d8ed4a0a7ff6285c8ce31e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/autogen.md
 
 
-The AutoGen provider transforms Composio tools into AutoGen's [FunctionTool](https://microsoft.github.io/autogen/) format for use with AutoGen agents.
+The AutoGen provider turns Composio tools into AutoGen [`FunctionTool`](https://microsoft.github.io/autogen/) objects and registers them with your agents. You connect an account, fetch the tools, register them with a caller and executor agent, and AutoGen handles the conversation and tool calls.
 
 **Install**
 
@@ -69,5 +69,17 @@ response = user_proxy.initiate_chat(
 
 print(response.chat_history)
 ```
+
+# Provider specifics
+
+AutoGen needs tools registered with two agents, not passed once. Call `composio.provider.register_tools(caller=..., executor=..., tools=tools)`: the `caller` decides which tool to invoke, and the `executor` runs it.
+
+Each tool comes back as an AutoGen `FunctionTool` with a generated `name`. AutoGen caps function names at 64 characters, so the provider hashes and truncates long tool slugs to stay under the limit. The registered name will not always match the original Composio slug.
+
+> `register_tools` is unique to the AutoGen provider. Other providers pass tools straight into the agent constructor, so don't expect this method elsewhere.
+
+# Next
+
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

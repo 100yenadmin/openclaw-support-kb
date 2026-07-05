@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "0b2baf9c237a32729ff3205c2da5d274a7b3bf35a35d887ac5b5997706f8465b"
+source_hash: "181c55f8bb7db58754a3187a831d6e844f00914c94b6e316c40efded4a4e2597"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/remote.md"
@@ -114,6 +114,10 @@ In the macOS app's SSH tunnel transport, discovered gateway hostnames belong in
 `gateway.remote.sshTarget`; `gateway.remote.url` remains the local tunnel URL.
 If those ports differ, set `gateway.remote.remotePort` to the gateway port on
 the SSH host.
+Host-key verification is strict by default. Managed aliases can explicitly use
+their effective OpenSSH trust policy with
+`gateway.remote.sshHostKeyPolicy: "openssh"`; review matching user and system
+SSH settings before enabling it.
 
 For a gateway already reachable on a trusted LAN or Tailnet, use direct mode:
 

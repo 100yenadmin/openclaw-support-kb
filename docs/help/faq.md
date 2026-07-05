@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "8e47f16ded9f6d45b3c2297681b685646f7ef5bf6e443a8e09cee878d8785fe1"
+source_hash: "059dfb62be81d8a9ff91acb6d49a3ccb1ab30444b0d212f235adb10c4666133b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -386,10 +386,10 @@ How do I install skills on Linux?
     ```bash
     openclaw skills search "calendar"
     openclaw skills search --limit 20
-    openclaw skills install <skill-slug>
-    openclaw skills install <skill-slug> --version <version>
-    openclaw skills install <skill-slug> --force
-    openclaw skills install <skill-slug> --global
+    openclaw skills install @owner/<skill-slug>
+    openclaw skills install @owner/<skill-slug> --version <version>
+    openclaw skills install @owner/<skill-slug> --force
+    openclaw skills install @owner/<skill-slug> --global
     openclaw skills update --all
     openclaw skills update --all --global
     openclaw skills list --eligible
@@ -479,11 +479,11 @@ Do you have a Notion or HeyGen integration?
     Install skills:
 
     ```bash
-    openclaw skills install <skill-slug>
+    openclaw skills install @owner/<skill-slug>
     openclaw skills update --all
     ```
 
-    Native installs land in the active workspace `skills/` directory. For shared skills across all local agents, use `openclaw skills install <slug> --global` (or place them manually in `~/.openclaw/skills/<name>/SKILL.md`). If only some agents should see a shared install, configure `agents.defaults.skills` or `agents.list[].skills`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills), [Skills config](/tools/skills-config), and [ClawHub](/tools/clawhub).
+    Native installs land in the active workspace `skills/` directory. For shared skills across all local agents, use `openclaw skills install @owner/<skill-slug> --global` (or place them manually in `~/.openclaw/skills/<name>/SKILL.md`). If only some agents should see a shared install, configure `agents.defaults.skills` or `agents.list[].skills`. Some skills expect binaries installed via Homebrew; on Linux that means Linuxbrew (see the Homebrew Linux FAQ entry above). See [Skills](/tools/skills), [Skills config](/tools/skills-config), and [ClawHub](/tools/clawhub).
 
 
 
@@ -1701,7 +1701,7 @@ The Control UI says "unauthorized" (or keeps reconnecting). What now?
     - On `AUTH_TOKEN_MISMATCH`, trusted clients can attempt one bounded retry with a cached device token when the gateway returns retry hints (`canRetryWithDeviceToken=true`, `recommendedNextStep=retry_with_device_token`).
     - That cached-token retry now reuses the cached approved scopes stored with the device token. Explicit `deviceToken` / explicit `scopes` callers still keep their requested scope set instead of inheriting cached scopes.
     - Outside that retry path, connect auth precedence is explicit shared token/password first, then explicit `deviceToken`, then stored device token, then bootstrap token.
-    - Built-in setup-code bootstrap is node-only. After approval, it returns a node device token with `scopes: []` and does not return a handed-off operator token.
+    - Built-in setup-code bootstrap returns a node device token with `scopes: []` plus a bounded operator handoff token for trusted mobile onboarding. The operator handoff can read setup-time native configuration but does not grant pairing mutation scopes or `operator.admin`.
 
     Fix:
 

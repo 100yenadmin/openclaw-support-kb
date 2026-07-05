@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
-source_hash: "b6ca8b3c9c5bdf9c70373ff5933d7719568356b4253c73e99636c342b2ce726e"
+source_hash: "3170b92dcd57fd57cfd75d492c2dec303ebfff8544ea7687cbd53157f073e4d0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tools.md"
@@ -84,7 +84,6 @@ def get_raw_tool_router_meta_tools(session_id: str, modifiers: 'Modifiers' | Non
 
 **Example**
 
-````python
 ```python
 from composio import Composio
 
@@ -100,18 +99,30 @@ from composio.core.models import schema_modifier
 
 @schema_modifier
 def modify_schema(tool: str, toolkit: str, schema):
-# Customize the schema
-schema.description = f"Modified: {schema.description}"
-return schema
+    # Customize the schema
+    schema.description = f"Modified: {schema.description}"
+    return schema
 
 meta_tools = tools_model.get_raw_tool_router_meta_tools(
-"session_123",
-modifiers=[modify_schema]
+    "session_123",
+    modifiers=[modify_schema]
 )
-````
-````
+```
 
---------- | ------------------- |
+***
+
+## get()
+
+Get a tool or list of tools based on the provided arguments.  The return type is automatically inferred based on the provider's generic parameters. For example: - OpenAIProvider -> list\[ChatCompletionToolParam] - AnthropicProvider -> list\[ToolParam] - CustomProvider\[MyTool, list\[MyTool]] -> list\[MyTool]
+
+```python
+def get(user_id: str, slug: str | None = ..., tools: list[str | None] = ..., search: str | None = ..., toolkits: list[str | None] = ..., scopes: List[str | None] = ..., modifiers: Modifiers | None = ..., limit: int | None = ...) -> TToolCollection
+```
+
+**Parameters**
+
+| Name         | Type                |
+| ------------ | ------------------- |
 | `user_id`    | `str`               |
 | `slug?`      | `str \| None`       |
 | `tools?`     | `list[str \| None]` |

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md"
-source_hash: "35754a6e02a6f3c4b719ba13e5d254e756f63da9e8fb259aa0b42e4d421db73f"
+source_hash: "1daff77e833f60d42c75cd48abe728c62bad4c43d546f4dcb66b642fe0fe8d39"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/triggers.md"
@@ -34,20 +34,21 @@ Create a new trigger instance for a user
 If the connected account id is not provided, the first connected account for the user and toolkit will be used
 
 ```typescript
-async create(userId: string, slug: string, body?: { connectedAccountId?: string; triggerConfig?: Record<string, unknown> }): Promise<{ triggerId: string }>
+async create(userId: string, slug: string, body?: TriggerInstanceUpsertParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name     | Type     | Description                                   |
-| -------- | -------- | --------------------------------------------- |
-| `userId` | `string` | The user id of the trigger instance           |
-| `slug`   | `string` | The slug of the trigger instance              |
-| `body?`  | `object` | The parameters to create the trigger instance |
+| Name              | Type                          | Description                                   |
+| ----------------- | ----------------------------- | --------------------------------------------- |
+| `userId`          | `string`                      | The user id of the trigger instance           |
+| `slug`            | `string`                      | The slug of the trigger instance              |
+| `body?`           | `TriggerInstanceUpsertParams` | The parameters to create the trigger instance |
+| `requestOptions?` | `ComposioRequestOptions`      |                                               |
 
 **Returns**
 
-`Promise<...>` — The created trigger instance
+`Promise` — The created trigger instance
 
 ***
 
@@ -56,18 +57,19 @@ async create(userId: string, slug: string, body?: { connectedAccountId?: string;
 Delete a trigger instance
 
 ```typescript
-async delete(triggerId: string): Promise<{ triggerId: string }>
+async delete(triggerId: string, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type     | Description                      |
-| ----------- | -------- | -------------------------------- |
-| `triggerId` | `string` | The slug of the trigger instance |
+| Name              | Type                     | Description                      |
+| ----------------- | ------------------------ | -------------------------------- |
+| `triggerId`       | `string`                 | The slug of the trigger instance |
+| `requestOptions?` | `ComposioRequestOptions` |                                  |
 
 **Returns**
 
-`Promise<...>`
+`Promise`
 
 ***
 
@@ -76,14 +78,15 @@ async delete(triggerId: string): Promise<{ triggerId: string }>
 Disable a trigger instance
 
 ```typescript
-async disable(triggerId: string): Promise
+async disable(triggerId: string, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type     | Description                    |
-| ----------- | -------- | ------------------------------ |
-| `triggerId` | `string` | The id of the trigger instance |
+| Name              | Type                     | Description                    |
+| ----------------- | ------------------------ | ------------------------------ |
+| `triggerId`       | `string`                 | The id of the trigger instance |
+| `requestOptions?` | `ComposioRequestOptions` |                                |
 
 **Returns**
 
@@ -96,14 +99,15 @@ async disable(triggerId: string): Promise
 Enable a trigger instance
 
 ```typescript
-async enable(triggerId: string): Promise
+async enable(triggerId: string, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type     | Description                    |
-| ----------- | -------- | ------------------------------ |
-| `triggerId` | `string` | The id of the trigger instance |
+| Name              | Type                     | Description                    |
+| ----------------- | ------------------------ | ------------------------------ |
+| `triggerId`       | `string`                 | The id of the trigger instance |
+| `requestOptions?` | `ComposioRequestOptions` |                                |
 
 **Returns**
 
@@ -117,18 +121,19 @@ Retrieve a trigger type by its slug for the provided version of the app
 Use the global toolkit versions param when initializing composio to pass a toolkitversion
 
 ```typescript
-async getType(slug: string): Promise<...>
+async getType(slug: string, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name   | Type     | Description                  |
-| ------ | -------- | ---------------------------- |
-| `slug` | `string` | The slug of the trigger type |
+| Name              | Type                     | Description                  |
+| ----------------- | ------------------------ | ---------------------------- |
+| `slug`            | `string`                 | The slug of the trigger type |
+| `requestOptions?` | `ComposioRequestOptions` |                              |
 
 **Returns**
 
-`Promise<...>` — The trigger type object
+`Promise` — The trigger type object
 
 ***
 
@@ -137,18 +142,19 @@ async getType(slug: string): Promise<...>
 Fetch list of all the active triggers
 
 ```typescript
-async listActive(query?: object): Promise<...>
+async listActive(query?: TriggerInstanceListActiveParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name     | Type     | Description                                          |
-| -------- | -------- | ---------------------------------------------------- |
-| `query?` | `object` | The query parameters to filter the trigger instances |
+| Name              | Type                              | Description                                          |
+| ----------------- | --------------------------------- | ---------------------------------------------------- |
+| `query?`          | `TriggerInstanceListActiveParams` | The query parameters to filter the trigger instances |
+| `requestOptions?` | `ComposioRequestOptions`          |                                                      |
 
 **Returns**
 
-`Promise<...>` — List of trigger instances
+`Promise` — List of trigger instances
 
 **Example**
 
@@ -168,8 +174,14 @@ Fetches the list of all the available trigger enums
 This method is used by the CLI where filters are not required.
 
 ```typescript
-async listEnum(): Promise
+async listEnum(requestOptions?: ComposioRequestOptions): Promise
 ```
+
+**Parameters**
+
+| Name              | Type                     |
+| ----------------- | ------------------------ |
+| `requestOptions?` | `ComposioRequestOptions` |
 
 **Returns**
 
@@ -182,18 +194,129 @@ async listEnum(): Promise
 List all the trigger types
 
 ```typescript
-async listTypes(query?: { cursor?: string; limit?: number | null; toolkits?: string[] | null }): Promise<...>
+async listTypes(query?: TriggersTypeListParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name     | Type     | Description                                      |
-| -------- | -------- | ------------------------------------------------ |
-| `query?` | `object` | The query parameters to filter the trigger types |
+| Name              | Type                     | Description                                      |
+| ----------------- | ------------------------ | ------------------------------------------------ |
+| `query?`          | `TriggersTypeListParams` | The query parameters to filter the trigger types |
+| `requestOptions?` | `ComposioRequestOptions` |                                                  |
 
 **Returns**
 
-`Promise<...>` — The list of trigger types
+`Promise` — The list of trigger types
+
+***
+
+## parse()
+
+Parse an incoming webhook HTTP request into a typed, normalized trigger payload.
+
+Dump the incoming request in and get back the parsed Composio trigger event.
+When `verifySecret` is provided, the request signature is verified before the
+payload is returned (delegating to verifyWebhook); without it, the body
+is parsed without verification.
+
+The `request` may be either a Fetch API `Request` (Next.js App Router, Hono,
+Remix) or a plain `{ body, headers }` object (Express with `express.raw`,
+Next.js Pages Router `req`). The signature headers (`webhook-id`,
+`webhook-timestamp`, `webhook-signature`) are read case-insensitively.
+
+```typescript
+async parse(request: WebhookRequestLike, options?: ParseWebhookOptions): Promise
+```
+
+**Parameters**
+
+| Name       | Type                  | Description                       |
+| ---------- | --------------------- | --------------------------------- |
+| `request`  | `WebhookRequestLike`  | The incoming webhook HTTP request |
+| `options?` | `ParseWebhookOptions` | Parse options                     |
+
+**Returns**
+
+`Promise` — The parsed (and optionally verified) webhook payload
+
+**Example**
+
+```typescript
+// Express with express.raw (verify the signature)
+app.post('/webhooks/composio', express.raw({ type: 'application/json' }), async (req, res) => {
+  try {
+    const result = await composio.triggers.parse(req, {
+      verifySecret: process.env.COMPOSIO_WEBHOOK_SECRET,
+    });
+    console.log('Trigger:', result.payload.triggerSlug);
+    console.log('Event data:', result.payload.payload);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(401);
+  }
+});
+
+// Express without verifying (parse only)
+app.post('/webhooks/composio', express.raw({ type: 'application/json' }), async (req, res) => {
+  const result = await composio.triggers.parse(req);
+  console.log('Trigger:', result.payload.triggerSlug);
+  res.sendStatus(200);
+});
+```
+
+```typescript
+// Next.js App Router (Request) — verify the signature
+export async function POST(request: Request) {
+  try {
+    const result = await composio.triggers.parse(request, {
+      verifySecret: process.env.COMPOSIO_WEBHOOK_SECRET,
+    });
+    console.log('Trigger:', result.payload.triggerSlug);
+    console.log('Event data:', result.payload.payload);
+    return new Response('OK', { status: 200 });
+  } catch (error) {
+    return new Response('Unauthorized', { status: 401 });
+  }
+}
+
+// Next.js App Router — parse only (no verification)
+export async function POST(request: Request) {
+  const result = await composio.triggers.parse(request);
+  console.log('Trigger:', result.payload.triggerSlug);
+  return new Response('OK', { status: 200 });
+}
+```
+
+***
+
+## setWebhookSubscription()
+
+Create or update the project webhook subscription used for webhook delivery.
+
+If a subscription already exists, the first subscription is updated. Otherwise a new
+subscription is created. By default this subscribes to V3 trigger message events.
+
+```typescript
+async setWebhookSubscription(params: SetWebhookSubscriptionParams): Promise
+```
+
+**Parameters**
+
+| Name     | Type                           |
+| -------- | ------------------------------ |
+| `params` | `SetWebhookSubscriptionParams` |
+
+**Returns**
+
+`Promise`
+
+**Example**
+
+```typescript
+await composio.triggers.setWebhookSubscription({
+  webhookUrl: `${APP_URL}/webhooks/composio`,
+});
+```
 
 ***
 
@@ -202,15 +325,15 @@ async listTypes(query?: { cursor?: string; limit?: number | null; toolkits?: str
 Subscribe to all the triggers
 
 ```typescript
-async subscribe(fn: object, filters: object): Promise<void>
+async subscribe(fn: (_data: IncomingTriggerPayload) => void, filters: TriggerSubscribeParams): Promise<void>
 ```
 
 **Parameters**
 
-| Name      | Type     | Description                                     |
-| --------- | -------- | ----------------------------------------------- |
-| `fn`      | `object` | The function to call when a trigger is received |
-| `filters` | `object` | The filters to apply to the triggers            |
+| Name      | Type                                      | Description                                     |
+| --------- | ----------------------------------------- | ----------------------------------------------- |
+| `fn`      | `(_data: IncomingTriggerPayload) => void` | The function to call when a trigger is received |
+| `filters` | `TriggerSubscribeParams`                  | The filters to apply to the triggers            |
 
 **Returns**
 
@@ -255,19 +378,20 @@ await triggers.unsubscribe();
 Update an existing trigger instance
 
 ```typescript
-async update(triggerId: string, body: { status: 'enable' | 'disable' }): Promise<{ status: 'success' }>
+async update(triggerId: string, body: TriggerInstanceManageUpdateParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type     | Description                                   |
-| ----------- | -------- | --------------------------------------------- |
-| `triggerId` | `string` | The Id of the trigger instance                |
-| `body`      | `object` | The parameters to update the trigger instance |
+| Name              | Type                                | Description                                   |
+| ----------------- | ----------------------------------- | --------------------------------------------- |
+| `triggerId`       | `string`                            | The Id of the trigger instance                |
+| `body`            | `TriggerInstanceManageUpdateParams` | The parameters to update the trigger instance |
+| `requestOptions?` | `ComposioRequestOptions`            |                                               |
 
 **Returns**
 
-`Promise<...>` — The updated trigger instance response
+`Promise` — The updated trigger instance response
 
 ***
 
@@ -284,14 +408,14 @@ The signature is computed as: `HMAC-SHA256(${webhookId}.${webhookTimestamp}.${pa
 and is expected in the format: `v1,base64EncodedSignature`
 
 ```typescript
-async verifyWebhook(params: object): Promise
+async verifyWebhook(params: VerifyWebhookParams): Promise
 ```
 
 **Parameters**
 
-| Name     | Type     | Description                 |
-| -------- | -------- | --------------------------- |
-| `params` | `object` | The verification parameters |
+| Name     | Type                  | Description                 |
+| -------- | --------------------- | --------------------------- |
+| `params` | `VerifyWebhookParams` | The verification parameters |
 
 **Returns**
 

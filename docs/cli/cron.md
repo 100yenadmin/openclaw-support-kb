@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "1f975e18e58d1bf400ce9c4b0253a2cdbe8f488dbe0a3b3ebcf15c09d409ea04"
+source_hash: "abaf20450f515973ba98b0a1585eb7a1ece270d7bc406b9292447f876cb91d77"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -181,7 +181,7 @@ Use `--due` when you want the manual command to run only if the job is currently
 
 ## Models
 
-`cron add|edit --model <ref>` selects an allowed model for the job. `cron edit <job-id> --clear-model` removes the per-job model override so the job follows normal cron model-selection precedence (a stored cron-session override if present, otherwise the agent/default model); it cannot be combined with `--model`.
+`cron add|edit --model <ref>` selects an allowed model for the job. `cron add|edit --fallbacks <list>` sets per-job fallback models, for example `--fallbacks openrouter/gpt-4.1-mini,openai/gpt-5`; pass `--fallbacks ""` for a strict run with no fallbacks. `cron edit <job-id> --clear-fallbacks` removes the per-job fallback override. `cron edit <job-id> --clear-model` removes the per-job model override so the job follows normal cron model-selection precedence (a stored cron-session override if present, otherwise the agent/default model); it cannot be combined with `--model`. `cron add|edit --thinking <level>` sets a per-job thinking override; `cron edit <job-id> --clear-thinking` removes it so the job follows normal cron thinking precedence, and it cannot be combined with `--thinking`.
 
 Warning
 
@@ -191,7 +191,7 @@ Cron `--model` is a **job primary**, not a chat-session `/model` override. That 
 
 - Configured model fallbacks still apply when the selected job model fails.
 - Per-job payload `fallbacks` replaces the configured fallback list when present.
-- An empty per-job fallback list (`fallbacks: []` in the job payload/API) makes the cron run strict.
+- An empty per-job fallback list (`--fallbacks ""` or `fallbacks: []` in the job payload/API) makes the cron run strict.
 - When a job has `--model` but no fallback list is configured, OpenClaw passes an explicit empty fallback override so the agent primary is not appended as a hidden retry target.
 - Local-provider preflight checks walk configured fallbacks before marking a cron run `skipped`.
 

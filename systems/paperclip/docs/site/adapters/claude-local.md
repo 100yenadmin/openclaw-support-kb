@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "claude-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/claude-local.md"
-source_hash: "4254d083f6c6b7d8922b4b7fb754fa8f365d647f6fa1d86eef7b94e19f372008"
+source_hash: "46d4032df5acc5f85e8c70af7bd93dd579c626fd3fff3b219f19e45896c5684b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/claude-local.md"
@@ -17,7 +17,7 @@ Source: https://github.com/paperclipai/paperclip/blob/master/docs/adapters/claud
 Raw source: https://raw.githubusercontent.com/paperclipai/paperclip/master/docs/adapters/claude-local.md
 
 ---
-title: Claude Local
+title: Claude Code
 summary: Claude Code local adapter setup and configuration
 ---
 

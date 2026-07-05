@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Experimental"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md"
-source_hash: "2fc77fbb659ba13ebf12b9e7713012cbdfeda70edea55e814cf09757b5ca700b"
+source_hash: "562d0de57362808fd3f61c21acbc159eb5a94e1a4a0e8a2098561a2efe71a404"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/experimental.md"
@@ -28,8 +28,11 @@ const result = await composio.experimental.list();
 
 # Methods
 
-## updateAcl()
+## updateAcl() (deprecated)
 
+> **Deprecated**: Use `composio.connectedAccounts.updateAcl(...)` instead — ACL updates graduated onto the `connectedAccounts` mount. This experimental alias is kept only for backwards compatibility and will be removed once the API graduates. Prefer the `connectedAccounts` mount; do not generate new code against this alias.
+
+Compatibility alias for `composio.connectedAccounts.updateAcl(...)`.
 Update the per-user ACL on a SHARED connected account.
 **Experimental — shape may change in future releases.**
 
@@ -49,15 +52,15 @@ Resolution rule (deny wins):
 4. otherwise → DENY
 
 ```typescript
-async updateAcl(nanoid: string, params: { allowAllUsers?: boolean; allowedUserIds?: string[]; notAllowedUserIds?: string[] }): Promise
+async updateAcl(nanoid: string, params: UpdateConnectedAccountAclParams): Promise
 ```
 
 **Parameters**
 
-| Name     | Type     |
-| -------- | -------- |
-| `nanoid` | `string` |
-| `params` | `object` |
+| Name     | Type                              |
+| -------- | --------------------------------- |
+| `nanoid` | `string`                          |
+| `params` | `UpdateConnectedAccountAclParams` |
 
 **Returns**
 
@@ -74,21 +77,21 @@ import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: '...' });
 
 // Allow every userId to use this connection
-await composio.experimental.updateAcl('ca_abc', { allowAllUsers: true });
+await composio.connectedAccounts.updateAcl('ca_abc', { allowAllUsers: true });
 
 // Everyone except a specific user
-await composio.experimental.updateAcl('ca_abc', {
+await composio.connectedAccounts.updateAcl('ca_abc', {
   allowAllUsers: true,
   notAllowedUserIds: ['user_bob'],
 });
 
 // Targeted allow
-await composio.experimental.updateAcl('ca_abc', {
+await composio.connectedAccounts.updateAcl('ca_abc', {
   allowedUserIds: ['user_alice', 'user_bob'],
 });
 
 // Revoke a previously-granted allow list (back to deny-by-default)
-await composio.experimental.updateAcl('ca_abc', { allowedUserIds: [] });
+await composio.connectedAccounts.updateAcl('ca_abc', { allowedUserIds: [] });
 ```
 
 **Empty-array semantics — read carefully.** Passing `[]` for either

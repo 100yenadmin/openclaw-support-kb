@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Delegation & Parallel Work"
 source: "https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns"
-source_hash: "ec64e69fdc1f15fe0ebbeeab1175f49f12474eba26b3b5b2e7a6261ab6e80c18"
+source_hash: "90039c3ece381c634070fb19f7baad7a6feab8c7b8708811ea58622aac0d81e3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/delegation-patterns.md"
@@ -231,7 +231,7 @@ Restricting toolsets keeps the subagent focused and prevents accidental side eff
 ## Constraints
 
 - **Default 3 parallel tasks**: batches default to 3 concurrent subagents (configurable via `delegation.max_concurrent_children` in config.yaml, no hard ceiling, only a floor of 1)
-- **Nested delegation is opt-in**: leaf subagents (default) cannot call `delegate_task`, `clarify`, `memory`, `send_message`, or `execute_code`. Orchestrator subagents (`role="orchestrator"`) retain `delegate_task` for further delegation, but only when `delegation.max_spawn_depth` is raised above the default of 1 (floor 1, no ceiling); the other four remain blocked. Disable globally via `delegation.orchestrator_enabled: false`.
+- **Nested delegation is opt-in**: leaf subagents (default) cannot call `delegate_task`, `clarify`, `memory`, or `execute_code`. Orchestrator subagents (`role="orchestrator"`) retain `delegate_task` for further delegation, but only when `delegation.max_spawn_depth` is raised above the default of 1 (floor 1, no ceiling); the other three remain blocked. Disable globally via `delegation.orchestrator_enabled: false`.
 
 ### Tuning Concurrency and Depth
 

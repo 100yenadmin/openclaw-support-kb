@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/credential-pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "d892bb8419f950921b126d11624c77ae8d0551673ee94f7adc1d39285ecb2351"
+source_hash: "8fd193fb49bfd4c18d4cb8f24a20e9f29df8450e82ddab90200d7a9578cca1dc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/credentia
 Credential pools let you register multiple API keys or OAuth tokens for the same provider. When one key hits a rate limit or billing quota, Hermes automatically rotates to the next healthy key — keeping your session alive without switching providers.
 
 This is different from [fallback providers](./fallback-providers.md), which switch to a *different* provider entirely. Credential pools are same-provider rotation; fallback providers are cross-provider failover. Pools are tried first — if all pool keys are exhausted, *then* the fallback provider activates.
+
+:::warning Key rotation resets the prompt cache
+Provider-side prompt caches (Anthropic, OpenAI, OpenRouter) are scoped to the account/API key that made the request. When the pool rotates to a different key mid-session, the new key has no cached prefix for your conversation — the next request re-reads the full history at undiscounted input price, and rotating back later is another full re-read unless the earlier key's cache TTL is still alive. Rotation keeps your session running, which is the point, but on long conversations each rotation costs one full-price pass over the context.
+:::
 
 :::tip
 Credential pools are mainly for API-key providers (OpenRouter, Anthropic). A single [Nous Portal](/integrations/nous-portal) OAuth covers 300+ models, so most users don't need a pool when on Portal.

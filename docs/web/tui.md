@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "0ac27f3533d785645dd2706d935f51b458dcf2bc201d492c7a69a0aa3300bedf"
+source_hash: "c9a059d207b795987bc082d18af8b1fc9cf744fe90a831219544cc7ad6016bdc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/tui.md"
@@ -133,7 +133,7 @@ Session controls:
 - `/verbose <on|full|off>`
 - `/trace <on|off>`
 - `/reasoning <on|off|stream>`
-- `/usage <off|tokens|full>`
+- `/usage <off|tokens|full|reset>` (`reset`/`inherit`/`clear`/`default` clears the session override)
 - `/goal [status] | /goal start <objective> | /goal pause|resume|complete|block|clear`
 - `/elevated <on|off|ask|full>` (alias: `/elev`)
 - `/activation <mention|always>`

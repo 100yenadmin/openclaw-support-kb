@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "bc4d49da413b1a4161efc21b7e5fd84a3f4de84a6ac7e5b73a9eccbc13a56ea7"
+source_hash: "95de3afa168c7babc41a90a97443cd1509fb78a8f087c56c39decedbc8c5c400"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/crewai.md
 
 
-The CrewAI provider transforms Composio tools into CrewAI's [BaseTool](https://docs.crewai.com/concepts/tools) format with built-in execution.
+The CrewAI provider turns Composio tools into CrewAI [`BaseTool`](https://docs.crewai.com/concepts/tools) objects that execute themselves. You connect an account, fetch the tools, pass them to an `Agent`, and CrewAI runs the task end to end.
 
 **Install**
 
@@ -64,5 +64,20 @@ crew = Crew(agents=[agent], tasks=[task])
 result = crew.kickoff()
 print(result)
 ```
+# Provider specifics
+
+Each Composio tool becomes a CrewAI `BaseTool` whose `args_schema` is built from the tool's input schema, so CrewAI validates arguments before running anything.
+
+When validation fails, the tool does not raise. It returns a structured result instead:
+
+```python
+{"successful": False, "error": "<validation message>", "data": None}
+```
+
+Check `successful` in your task output rather than wrapping calls in `try`/`except`.
+
+# Next
+
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

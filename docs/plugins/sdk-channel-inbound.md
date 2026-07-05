@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel inbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-inbound"
-source_hash: "3fcd50d6e4c233f6bf90d03c3b2b758150df92d0233378414272df214d2f4715"
+source_hash: "dda20f970457f119ff99d78482d43b124790d5c88a2f43723222143fff948a85"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-inbound.md"
@@ -35,7 +35,10 @@ send, receipt, durable delivery, and live preview behavior.
 ```
 
 - `buildChannelInboundEventContext(...)`: project normalized channel facts into
-  the prompt/session context.
+  the prompt/session context. Use `channelContext` to pass channel-owned
+  sender/chat metadata through to plugin hook `ctx.channelContext`; augment
+  `PluginHookChannelSenderContext` or `PluginHookChannelChatContext` from this
+  subpath for channel-specific fields.
 - `runChannelInboundEvent(...)`: run ingest, classify, preflight, resolve,
   record, dispatch, and finalize for one inbound platform event.
 - `dispatchChannelInboundReply(...)`: record and dispatch an already assembled

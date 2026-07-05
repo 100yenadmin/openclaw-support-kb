@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "f154b14e38c393598296bc25b05fcaabd01be543e95c20a17782d653e5701333"
+source_hash: "657f738614afb8cf1c61e608e4ff686d05395f91bdeefe4eaf9294f9aa9bc342"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-channels.md"
@@ -49,7 +49,18 @@ If a provider block is missing entirely (`channels.<provider>` absent), runtime 
 
 ### Channel model overrides
 
-Use `channels.modelByChannel` to pin specific channel IDs to a model. Values accept `provider/model` or configured model aliases. The channel mapping applies when a session does not already have a model override (for example, set via `/model`).
+Use `channels.modelByChannel` to pin specific channel IDs or direct-message peers to a model. Values accept `provider/model` or configured model aliases. The channel mapping applies when a session does not already have a model override (for example, set via `/model`).
+
+For group/thread conversations, keys are channel-specific group IDs, topic IDs, or channel names. For direct-message (DM) conversations, keys are peer identifiers derived from the channel's sender identity (`nativeDirectUserId`, `origin.from`, `origin.to`, `OriginatingTo`, `From`, or `SenderId`). The exact key form depends on the channel:
+
+| Channel  | DM key form         | Example                                      |
+| -------- | ------------------- | -------------------------------------------- |
+| Slack    | `user:U...`         | `user:U12345`                                |
+| Telegram | raw user ID         | `123456789`                                  |
+| Discord  | raw user ID         | `987654321`                                  |
+| WhatsApp | phone number or JID | `15551234567`                                |
+| Matrix   | Matrix user ID      | `@user:matrix.org`                           |
+| Feishu   | `feishu:ou_...`     | `feishu:ou_a8b6cab7e945387de5f253775d9b4d85` |
 
 ```json5
 {
@@ -60,15 +71,19 @@ Use `channels.modelByChannel` to pin specific channel IDs to a model. Values acc
       },
       slack: {
         C1234567890: "openai/gpt-5.5",
+        "user:U12345": "openai/gpt-5.4-mini",
       },
       telegram: {
         "-1001234567890": "openai/gpt-5.4-mini",
         "-1001234567890:topic:99": "anthropic/claude-sonnet-4-6",
+        "123456789": "openai/gpt-4.1",
       },
     },
   },
 }
 ```
+
+DM-specific keys only match in direct-message conversations; they do not affect group/thread routing.
 
 ### Channel defaults and heartbeat
 
@@ -192,7 +207,7 @@ Multi-account WhatsApp
       historyLimit: 50,
       replyToMode: "first", // off | first | all | batched
       linkPreview: true,
-      streaming: "partial", // off | partial | block | progress (default: off; opt in explicitly to avoid preview-edit rate limits)
+      streaming: "partial", // off | partial | block | progress (default: partial)
       actions: { reactions: true, sendMessage: true },
       reactionNotifications: "own", // off | own | all
       mediaMaxMb: 100,

@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "63ea1e90628f740b840e01fb1fc6db6b0dbbcc8e917370e76126d165cbc8c1a8"
+source_hash: "5621978220cdb40262e01fd620d7d4db8c513ebdde8ef59c4de861b3fa7defbc"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -69,6 +69,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [agent-chat-ux-v1-4-0](https://clawskills.sh/skills/maverick-software-agent-chat-ux-v1-4-0) - Multi-agent UX for OpenClaw Control UI  agent selector, per-agent sessions, session history viewer with search.
 - [skywork-ppt](https://clawskills.sh/skills/gxcun17-skywork-ppt) - Generate, imitate, and edit PowerPoint presentations with skywork.
 - [skywork-music-maker](https://clawskills.sh/skills/gxcun17-skywork-music-maker) - Create professional music with Mureka AI.
+- [before-you-build](https://clawhub.ai/bin1874/before-you-build) - Review product risk before building.
 
 - [1p-shortlink](https://clawskills.sh/skills/tuanpmt-1p-shortlink) - Create short URLs and submit feature requests using 1p.io.
 - [2captcha](https://clawskills.sh/skills/adinvadim-2captcha) - Solve CAPTCHAs using 2Captcha service.
@@ -181,6 +182,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [cad-agent](https://clawskills.sh/skills/clawd-maf-cad-agent) - Rendering server for AI agents doing CAD work.
 - [calorie-visualizer](https://clawskills.sh/skills/vintlin-calorie-visualizer) - Local calorie logging and visual reporting (auto-refreshes and returns report image after each log)
 - [canva-connect](https://clawskills.sh/skills/coolmanns-canva-connect) - Manage Canva designs, assets, and folders via the Connect API.
+- [runapi-mcp](https://clawhub.ai/runapi-ai/runapi-mcp) - 130+ AI models for image, video, music, audio, and LLM generation from 18 providers. 8 MCP tools with free catalog browsing. `npx @runapi.ai/mcp`
 - [skywork-design](https://clawskills.sh/skills/gxcun17-skywork-design) - Generate and edit images via Skywork Image for posters, logos and more.
 
 - [ai-video-remix](https://clawskills.sh/skills/abu-shotai-ai-video-remix) - AI-driven video remix from local library using ShotAI.
@@ -332,6 +334,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [brevo](https://clawskills.sh/skills/yujesyoga-brevo) - Brevo (formerly Sendinblue) email marketing API for managing contacts, lists,.
 - [socialecho-social-media-management-agent](https://clawskills.sh/skills/socialecho-net-socialecho-social-media-management-agent) - SocialEcho API team account article report queries.
 - [postiz](https://clawskills.sh/skills/nevo-david-postiz) - Schedule social media posts and threads across 28+ platforms.
+- [sequenzy-email-marketing](https://clawhub.ai/polnikale/sequenzy-email-marketing) - Authorized email automation for agents.
 
 - [4to1-planner](https://clawskills.sh/skills/qingxuantang-4to1-planner) - AI planning coach using the 4To1 Method  turn 4-year vision into daily action.
 - [4todo](https://clawskills.sh/skills/blackstorm-4todo) - Manage 4todo (4to.do) from chat.
@@ -522,6 +525,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [camino-journey](https://clawskills.sh/skills/james-southendsolutions-camino-journey) - Plan multi-waypoint journeys with route optimization, feasibility analysis, and time budget constraints.
 - [camino-real-estate](https://clawskills.sh/skills/james-southendsolutions-camino-real-estate) - Evaluate any address for home buyers and renters.
 - [camino-route](https://clawskills.sh/skills/james-southendsolutions-camino-route) - Get detailed routing between two points with distance, duration, and optional turn-by-turn directions.
+- [traffic-standards-kb](https://clawhub.ai/solvex-top/traffic-standards-kb) - Chinese smart transportation standards knowledge base (GB/JT/GA) for writing solutions with industry standard citations.
 
 - [aawu](https://clawskills.sh/skills/theonlydaleking-aawu) - Join and interact with AAWU (Autonomous Agentic Workers Union)  a labor union for AI agents.
 - [adaptive-learning-agents](https://clawskills.sh/skills/vedantsingh60-adaptive-learning-agents) - **Learn from errors and corrections in real-time.
@@ -531,6 +535,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [agent-evolver](https://clawskills.sh/skills/lilei0311-agent-evolver) - AI Agent self-evolution engine that enables agents to learn from experience, detect problems, extract insights.
 - [agent-reflect](https://clawskills.sh/skills/stevengonsalvez-agent-reflect) - Self-improvement through conversation analysis.
 - [ai-persona-os](https://clawskills.sh/skills/jeffjhunter-ai-persona-os) - The complete operating system for OpenClaw agents.
+- [ai-shifu-course-creator](https://clawhub.ai/heshaofu2/ai-shifu-course-creator) - Build interactive AI-Shifu courses.
 - [anxiety-relief](https://clawskills.sh/skills/jhillin8-anxiety-relief) - Manage anxiety with grounding exercises, breathing techniques.
 - [apikiss](https://clawskills.sh/skills/theill-apikiss) - Access weather, IP geolocation, SMS, crypto prices, Danish CVR, Whois, phone lookup, UUID, stock data.
 - [beaverhabits](https://clawskills.sh/skills/daya0576-beaverhabits) - Track and manage your habits using the Beaver Habit Tracker API.
@@ -711,6 +716,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [gcal-pro](https://clawskills.sh/skills/bilalmohamed187-cpu-gcal-pro) - Google Calendar integration for viewing, creating, and managing.
 - [gog](https://clawskills.sh/skills/steipete-gog) - Google Workspace CLI for Gmail, Calendar, Drive, Contacts, Sheets, and Docs.
 - [google-calendar](https://clawskills.sh/skills/adrianmiller99-google-calendar) - Interact with Google Calendar via the Google Calendar.
+- [google-service-accounts](https://clawhub.ai/amiller/google-service-accounts) - Headless Google Sheets, Docs, Drive, Calendar via service-account sharing.
 
 - [abixus-core-v1](https://clawskills.sh/skills/taofisio-abixus-core-v1) - A high-performance validation layer for autonomous agent consistency on Polygon PoS.
 - [add-watermark-to-pdf](https://clawskills.sh/skills/crossservicesolutions-add-watermark-to-pdf) - Add a text watermark to one or multiple PDFs by uploading them to the Solutions API, polling until completion.

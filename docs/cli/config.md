@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "94900df53b5d6b8449177de4ec70303a4194fca97295b3d84f38c84ddb0c9085"
+source_hash: "70a9a35d45e2a10865dbec5a73a762a5470ade77c6c43d85660a8e098c687b58"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -100,13 +100,15 @@ openclaw config set 'agents.list[1].tools.exec.node' "node-id-or-name"
 
 ## Values
 
-Values are parsed as JSON5 when possible; otherwise they are treated as strings. Use `--strict-json` to require JSON5 parsing. `--json` remains supported as a legacy alias.
+Values are parsed as JSON5 when possible; otherwise they are treated as strings. Use `--strict-json` to require standard JSON parsing with no string fallback. `--json` remains supported as a legacy alias for `--strict-json`.
 
 ```bash
 openclaw config set agents.defaults.heartbeat.every "0m"
 openclaw config set gateway.port 19001 --strict-json
 openclaw config set channels.whatsapp.groups '["*"]' --strict-json
 ```
+
+When `--strict-json` is enabled, JSON5-only syntax such as comments, trailing commas, or unquoted object keys is rejected. Omit `--strict-json` for JSON5 value parsing with raw-string fallback.
 
 `config get <path> --json` prints the raw value as JSON instead of terminal-formatted text.
 

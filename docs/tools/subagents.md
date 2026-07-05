@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "2141e1a41dfd7d33a25c369707b38d294e8fbdb1b0d2319f1ff899b442a04d20"
+source_hash: "0f4e28a38c63192bb2b2d3482b3a12245a208457cbf81908ccbed5ec12f6a072"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -563,6 +563,7 @@ should be rewritten in normal assistant voice.
 - Credential/token-like text is redacted.
 - Long blocks can be truncated.
 - Very large histories can drop older rows or replace an oversized row with `[sessions_history omitted: message too large]`.
+- Use `nextOffset` when present to page backward through older transcript windows.
 - Raw on-disk transcript inspection is the fallback when you need the full byte-for-byte transcript.
 
 ## Tool policy

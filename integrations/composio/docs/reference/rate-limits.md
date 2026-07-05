@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Rate Limits"
 source: "https://docs.composio.dev/reference/rate-limits.md"
-source_hash: "d88be566290f11f705ad38b3cbfd020a3443527346268cc72b1632fd5db0f874"
+source_hash: "70ab81d7f646564db8c95ad05d2241e9d7de99b45ae52574bd831cc4879c39fd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/rate-limits.md"
@@ -17,28 +17,26 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/rate-limits.md
 
 
-Rate limits are enforced **per organization** and reset on a rolling 10-minute window.
+Composio enforces rate limits **per organization** over a fixed one-minute window. Every authenticated endpoint draws from the same budget — tool execution, connected accounts, triggers, and the rest — so the limit below is your organization's total across all API calls.
 
 # Rate limits by plan
 
-| Plan       | Rate Limit       | Window     |
-| ---------- | ---------------- | ---------- |
-| Starter    | 20,000 requests  | 10 minutes |
-| Hobby      | 20,000 requests  | 10 minutes |
-| Growth     | 100,000 requests | 10 minutes |
-| Enterprise | Unlimited        | -          |
-
-> All authenticated API endpoints share your organization's rate limit. This includes tool execution, connected accounts, triggers, and all other API operations.
+| Plan       | Rate limit      | Window   |
+| ---------- | --------------- | -------- |
+| Starter    | 2,000 requests  | 1 minute |
+| Hobby      | 2,000 requests  | 1 minute |
+| Growth     | 10,000 requests | 1 minute |
+| Enterprise | Custom          | -        |
 
 # Rate limit headers
 
-API responses include headers to help you track your usage:
+Every response includes headers so you can track usage without guessing:
 
 | Header                    | Description                                             |
 | ------------------------- | ------------------------------------------------------- |
 | `X-RateLimit`             | Total requests allowed in the current window            |
 | `X-RateLimit-Remaining`   | Requests remaining in the current window                |
-| `X-RateLimit-Window-Size` | Window size (e.g., `600s` for 600 seconds)              |
+| `X-RateLimit-Window-Size` | Window size (e.g., `60s` for 60 seconds)                |
 | `Retry-After`             | Seconds until the window resets (only on 429 responses) |
 
 # Rate limit response
@@ -47,21 +45,21 @@ When you exceed the rate limit, you'll receive a `429 Too Many Requests` respons
 
 ```json
 {
-  "message": "Rate limit exceeded. Limit: 100000 requests per 10 minutes"
+  "message": "Rate limit exceeded. Limit: 10000 requests per 1 minutes"
 }
 ```
 
 # Best practices
 
-1. **Monitor your usage** - Check the `X-RateLimit-Remaining` header to track how close you are to the limit.
+1. **Watch `X-RateLimit-Remaining`** — read it on each response to know how much headroom you have left in the window.
 
-2. **Implement backoff** - When you receive a `429`, wait for the duration specified in `Retry-After` before retrying.
+2. **Honor `Retry-After`** — on a `429`, wait the number of seconds it gives you before retrying instead of hammering the endpoint.
 
-3. **Cache responses** - Cache tool definitions and other static data to reduce unnecessary API calls.
+3. **Cache what doesn't change** — keep tool definitions and other static data client-side so you don't spend requests re-fetching them.
 
 # Need higher limits?
 
-If you're hitting rate limits regularly, consider upgrading your plan or [talk to us](https://calendly.com/composiohq/enterprise) to discuss custom limits for your use case.
+If you hit these limits regularly, upgrade your plan or [talk to us](https://calendly.com/composiohq/enterprise) about custom limits for your use case.
 
 - [Errors](/reference/errors):
 Understanding API error responses

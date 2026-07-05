@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tools.md"
-source_hash: "7571a07a0e1f7b73d113ec796d7171052bd44ccb00693c717b8beb00a68b6808"
+source_hash: "bdcd679840acbaa8232ff7accb587f7adef086fe3032a97bfc439c97091340fd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tools.md"
@@ -40,20 +40,20 @@ the execution will throw a `ComposioToolVersionRequiredError` unless `dangerousl
 This helps prevent unexpected behavior when new toolkit versions are released.
 
 ```typescript
-async execute(slug: string, body: object, modifiers?: ExecuteToolModifiers): Promise<...>
+async execute(slug: string, body: ToolExecuteParams, options?: ExecuteToolModifiers & ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name         | Type                   | Description                                             |
-| ------------ | ---------------------- | ------------------------------------------------------- |
-| `slug`       | `string`               | The slug/ID of the tool to be executed                  |
-| `body`       | `object`               | The parameters to be passed to the tool                 |
-| `modifiers?` | `ExecuteToolModifiers` | Optional modifiers to transform the request or response |
+| Name       | Type                                            | Description                             |
+| ---------- | ----------------------------------------------- | --------------------------------------- |
+| `slug`     | `string`                                        | The slug/ID of the tool to be executed  |
+| `body`     | `ToolExecuteParams`                             | The parameters to be passed to the tool |
+| `options?` | `ExecuteToolModifiers & ComposioRequestOptions` | Optional modifiers and request options  |
 
 **Returns**
 
-`Promise<...>` — - The response from the tool execution
+`Promise` — The response from the tool execution
 
 **Example**
 
@@ -99,6 +99,14 @@ const result = await composio.tools.execute('GITHUB_GET_ISSUES', {
 });
 ```
 
+```typescript
+const result = await composio.tools.execute('HACKERNEWS_GET_FRONTPAGE', {
+  userId: 'default',
+  arguments: {},
+  dangerouslySkipVersionCheck: true,
+}, { signal: AbortSignal.timeout(5_000) });
+```
+
 ***
 
 ## executeSessionTool()
@@ -106,22 +114,23 @@ const result = await composio.tools.execute('GITHUB_GET_ISSUES', {
 Executes a tool based on a tool router session.
 
 ```typescript
-async executeSessionTool(toolSlug: string, body: { arguments?: Record<string, unknown>; sessionId: string }, modifiers?: SessionExecuteMetaModifiers, tool?: object, options?: ToolRouterSessionExecuteOptions): Promise<...>
+async executeSessionTool(toolSlug: string, body: ToolExecuteMetaParams, modifiers?: SessionExecuteMetaModifiers, tool?: Tool, options?: ToolRouterSessionExecuteOptions, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name         | Type                              | Description                                                         |
-| ------------ | --------------------------------- | ------------------------------------------------------------------- |
-| `toolSlug`   | `string`                          | The slug of the tool to execute                                     |
-| `body`       | `object`                          | The execution parameters                                            |
-| `modifiers?` | `SessionExecuteMetaModifiers`     | The modifiers to apply to the tool                                  |
-| `tool?`      | `object`                          | Optional tool schema used to resolve toolkit metadata for modifiers |
-| `options?`   | `ToolRouterSessionExecuteOptions` |                                                                     |
+| Name              | Type                              | Description                                                         |
+| ----------------- | --------------------------------- | ------------------------------------------------------------------- |
+| `toolSlug`        | `string`                          | The slug of the tool to execute                                     |
+| `body`            | `ToolExecuteMetaParams`           | The execution parameters                                            |
+| `modifiers?`      | `SessionExecuteMetaModifiers`     | The modifiers to apply to the tool                                  |
+| `tool?`           | `Tool`                            | Optional tool schema used to resolve toolkit metadata for modifiers |
+| `options?`        | `ToolRouterSessionExecuteOptions` |                                                                     |
+| `requestOptions?` | `ComposioRequestOptions`          |                                                                     |
 
 **Returns**
 
-`Promise<...>` — The response from the tool execution
+`Promise` — The response from the tool execution
 
 ***
 
@@ -133,38 +142,38 @@ This method fetches the tools from the Composio API and wraps them using the pro
 **Overload 1**
 
 ```typescript
-async get(userId: string, filters: ToolListParams, options?: ProviderOptions): Promise
+async get(userId: string, filters: ToolListParams, options?: ProviderOptions & ComposioRequestOptions): Promise>
 ```
 
 **Parameters**
 
-| Name       | Type              | Description                                   |
-| ---------- | ----------------- | --------------------------------------------- |
-| `userId`   | `string`          | The user id to get the tools for              |
-| `filters`  | `ToolListParams`  | The filters to apply when fetching tools      |
-| `options?` | `ProviderOptions` | Optional provider options including modifiers |
+| Name       | Type                                       | Description                                     |
+| ---------- | ------------------------------------------ | ----------------------------------------------- |
+| `userId`   | `string`                                   | The user id to get the tools for                |
+| `filters`  | `ToolListParams`                           | The filters to apply when fetching tools        |
+| `options?` | `ProviderOptions & ComposioRequestOptions` | Provider options, modifiers, and/or AbortSignal |
 
 **Returns**
 
-`Promise` — The wrapped tools collection
+`Promise>` — The wrapped tools collection
 
 **Overload 2**
 
 ```typescript
-async get(userId: string, slug: string, options?: ProviderOptions): Promise
+async get(userId: string, slug: string, options?: ProviderOptions & ComposioRequestOptions): Promise>
 ```
 
 **Parameters**
 
-| Name       | Type              | Description                                   |
-| ---------- | ----------------- | --------------------------------------------- |
-| `userId`   | `string`          | The user id to get the tool for               |
-| `slug`     | `string`          | The slug of the tool to fetch                 |
-| `options?` | `ProviderOptions` | Optional provider options including modifiers |
+| Name       | Type                                       | Description                                              |
+| ---------- | ------------------------------------------ | -------------------------------------------------------- |
+| `userId`   | `string`                                   | The user id to get the tool for                          |
+| `slug`     | `string`                                   | The slug of the tool to fetch                            |
+| `options?` | `ProviderOptions & ComposioRequestOptions` | Optional provider options including modifiers and signal |
 
 **Returns**
 
-`Promise` — The wrapped tool
+`Promise>` — The wrapped tool
 
 **Example**
 
@@ -175,22 +184,10 @@ const tools = await composio.tools.get('default', {
   limit: 10
 });
 
-// Get tools with search
-const searchTools = await composio.tools.get('default', {
-  search: 'user',
-  limit: 10
-});
-
-// Get a specific tool by slug
-const hackerNewsUserTool = await composio.tools.get('default', 'HACKERNEWS_GET_USER');
-
-// Get a tool with schema modifications
-const tool = await composio.tools.get('default', 'GITHUB_GET_REPOS', {
-  modifySchema: (toolSlug, toolkitSlug, schema) => {
-    // Customize the tool schema
-    return {...schema, description: 'Custom description'};
-  }
-});
+// Timeout a slow search after 5s
+const emailTools = await composio.tools.get('default', {
+  search: 'send email',
+}, { signal: AbortSignal.timeout(5_000) });
 ```
 
 ***
@@ -202,15 +199,16 @@ Fetches the input parameters for a given tool.
 This method is used to get the input parameters for a tool before executing it.
 
 ```typescript
-async getInput(slug: string, body: ToolGetInputParams): Promise
+async getInput(slug: string, body: ToolGetInputParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name   | Type                 | Description                             |
-| ------ | -------------------- | --------------------------------------- |
-| `slug` | `string`             | The ID of the tool to find input for    |
-| `body` | `ToolGetInputParams` | The parameters to be passed to the tool |
+| Name              | Type                     | Description                             |
+| ----------------- | ------------------------ | --------------------------------------- |
+| `slug`            | `string`                 | The ID of the tool to find input for    |
+| `body`            | `ToolGetInputParams`     | The parameters to be passed to the tool |
+| `requestOptions?` | `ComposioRequestOptions` |                                         |
 
 **Returns**
 
@@ -240,19 +238,20 @@ Tool Router session, then use `session.tools()`, `session.customTools()`, or
 `session.execute()`.
 
 ```typescript
-async getRawComposioToolBySlug(slug: string, options?: ToolRetrievalOptions): Promise<...>
+async getRawComposioToolBySlug(slug: string, options?: ToolRetrievalOptions, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name       | Type                   | Description                                                    |
-| ---------- | ---------------------- | -------------------------------------------------------------- |
-| `slug`     | `string`               | The unique identifier of the tool (e.g., 'GITHUB\_GET\_REPOS') |
-| `options?` | `ToolRetrievalOptions` | Optional configuration for tool retrieval                      |
+| Name              | Type                     | Description                                                    |
+| ----------------- | ------------------------ | -------------------------------------------------------------- |
+| `slug`            | `string`                 | The unique identifier of the tool (e.g., 'GITHUB\_GET\_REPOS') |
+| `options?`        | `ToolRetrievalOptions`   | Optional configuration for tool retrieval                      |
+| `requestOptions?` | `ComposioRequestOptions` |                                                                |
 
 **Returns**
 
-`Promise<...>` — The requested tool with its complete schema and metadata
+`Promise` — The requested tool with its complete schema and metadata
 
 **Example**
 
@@ -303,15 +302,16 @@ them when creating or reusing a Tool Router session, then use `session.tools()`,
 It provides access to the underlying tool data without provider-specific wrapping.
 
 ```typescript
-async getRawComposioTools(query: ToolListParams, options?: SchemaModifierOptions): Promise
+async getRawComposioTools(query: ToolListParams, options?: SchemaModifierOptions, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name       | Type                    | Description                                     |
-| ---------- | ----------------------- | ----------------------------------------------- |
-| `query`    | `ToolListParams`        | Query parameters to filter the tools (required) |
-| `options?` | `SchemaModifierOptions` | Optional configuration for tool retrieval       |
+| Name              | Type                     | Description                                     |
+| ----------------- | ------------------------ | ----------------------------------------------- |
+| `query`           | `ToolListParams`         | Query parameters to filter the tools (required) |
+| `options?`        | `SchemaModifierOptions`  | Optional configuration for tool retrieval       |
+| `requestOptions?` | `ComposioRequestOptions` |                                                 |
 
 **Returns**
 
@@ -372,15 +372,16 @@ This includes helper/meta tools plus any tools preloaded into the session.
 It provides access to the underlying tool data without provider-specific wrapping.
 
 ```typescript
-async getRawToolRouterSessionTools(sessionId: string, options?: SchemaModifierOptions): Promise
+async getRawToolRouterSessionTools(sessionId: string, options?: SchemaModifierOptions, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type                    | Description                                                        |
-| ----------- | ----------------------- | ------------------------------------------------------------------ |
-| `sessionId` | `string`                | \{string} The session id to get tools for                          |
-| `options?`  | `SchemaModifierOptions` | \{SchemaModifierOptions} Optional configuration for tool retrieval |
+| Name              | Type                     | Description                                                        |
+| ----------------- | ------------------------ | ------------------------------------------------------------------ |
+| `sessionId`       | `string`                 | \{string} The session id to get tools for                          |
+| `options?`        | `SchemaModifierOptions`  | \{SchemaModifierOptions} Optional configuration for tool retrieval |
+| `requestOptions?` | `ComposioRequestOptions` |                                                                    |
 
 **Returns**
 
@@ -403,8 +404,14 @@ This method is mostly used by the CLI to get the list of tools.
 No filtering is done on the tools, the list is cached in the backend, no further optimization is required.
 
 ```typescript
-async getToolsEnum(): Promise
+async getToolsEnum(requestOptions?: ComposioRequestOptions): Promise
 ```
+
+**Parameters**
+
+| Name              | Type                     |
+| ----------------- | ------------------------ |
+| `requestOptions?` | `ComposioRequestOptions` |
 
 **Returns**
 
@@ -428,14 +435,15 @@ This method allows sending custom requests to a specific toolkit or integration
 when you need more flexibility than the standard tool execution methods provide.
 
 ```typescript
-async proxyExecute(body: object): Promise
+async proxyExecute(body: ToolProxyParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name   | Type     | Description                                                                 |
-| ------ | -------- | --------------------------------------------------------------------------- |
-| `body` | `object` | The parameters for the proxy request including toolkit slug and custom data |
+| Name              | Type                     | Description                                                                 |
+| ----------------- | ------------------------ | --------------------------------------------------------------------------- |
+| `body`            | `ToolProxyParams`        | The parameters for the proxy request including toolkit slug and custom data |
+| `requestOptions?` | `ComposioRequestOptions` |                                                                             |
 
 **Returns**
 

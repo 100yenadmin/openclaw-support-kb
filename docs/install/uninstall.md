@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
-source_hash: "50194219e461c48577db4fcc6a83993321db062426580fa618e842a315a30950"
+source_hash: "5db5f67d1e3fa23fc242f3ec615acba9370da0e044e13d5d9bb11d737085be76"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/uninstall.md"
@@ -117,14 +117,18 @@ systemctl --user daemon-reload
 ### Windows (Scheduled Task)
 
 Default task name is `OpenClaw Gateway` (or `OpenClaw Gateway (<profile>)`).
-The task script lives under your state dir.
+The task script lives under your state dir as `gateway.cmd`; current installs may
+also create a windowless `gateway.vbs` launcher that Task Scheduler runs instead
+of opening `gateway.cmd` directly.
 
 ```powershell
 schtasks /Delete /F /TN "OpenClaw Gateway"
-Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
+Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd" -ErrorAction SilentlyContinue
+Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.vbs" -ErrorAction SilentlyContinue
 ```
 
-If you used a profile, delete the matching task name and `~\.openclaw-<profile>\gateway.cmd`.
+If you used a profile, delete the matching task name and the `gateway.cmd` /
+`gateway.vbs` files under `~\.openclaw-<profile>`.
 
 ## Normal install vs source checkout
 

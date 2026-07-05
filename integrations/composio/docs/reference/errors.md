@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/errors.md"
-source_hash: "76751868677c8b62ed0778d4799871c54a9dc5cead35fec068a8aa8016f4df01"
+source_hash: "d65537c8aaee18523f7af9b9756b34535cc1b52114e5edd6a850fd9bc4ce5dbf"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/errors.md"
@@ -71,7 +71,7 @@ Composio uses two types of API keys:
 | Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                  |
 | Insufficient permissions   | The API key doesn't have access to this resource.                                                   |
 
-> See [Authentication Troubleshooting](/docs/troubleshooting/authentication) for more help.
+> See [Authenticating users](/docs/authentication) for more help.
 
 ## Tool errors
 
@@ -83,7 +83,7 @@ Errors that occur when fetching or executing tools.
 | No connected account  | The user hasn't connected to this toolkit yet.                                             |
 | Tool execution failed | The external service returned an error. Check tool parameters and user permissions.        |
 
-> See [Tools Troubleshooting](/docs/troubleshooting/tools) for more help.
+> See [Tools and toolkits](/docs/how-composio-works) for more help.
 
 ## Connection errors
 
@@ -104,7 +104,7 @@ Errors related to trigger subscriptions.
 | Trigger not found        | The trigger slug doesn't exist for this toolkit.               |
 | Trigger instance deleted | The trigger subscription or its connected account was removed. |
 
-> See [Triggers Troubleshooting](/docs/troubleshooting/triggers) for more help.
+> See [Triggers](/docs/triggers) for more help.
 
 # Rate limiting
 
@@ -113,9 +113,6 @@ When you hit rate limits, you'll receive a `429` status code. See [Rate Limits](
 # Getting help
 
 When contacting support, include the `request_id` from the error response.
-
-- [Troubleshooting](/docs/troubleshooting):
-Common issues and solutions
 
 - [Discord](https://discord.com/channels/1170785031560646836/1268871288156323901):
 Community support

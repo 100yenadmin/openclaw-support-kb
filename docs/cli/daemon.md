@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "ac695f0dad5259d622c7f6ca9a8df2449cc0847394e1c032e753305284d95369"
+source_hash: "b2466ae8b5ad26a32c7451a1925ba4e4e738eb13e9429fbe3d9a7926ccdd2c1f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/daemon.md"
@@ -61,7 +61,7 @@ Notes:
 - If both `gateway.auth.token` and `gateway.auth.password` are configured and `gateway.auth.mode` is unset, install is blocked until mode is set explicitly.
 - On macOS, `install` keeps LaunchAgent plists owner-only and loads managed service environment values through an owner-only file and wrapper instead of serializing API keys or auth-profile env refs into `EnvironmentVariables`.
 - If you intentionally run multiple gateways on one host, isolate ports, config/state, and workspaces; see [/gateway#multiple-gateways-same-host](/gateway#multiple-gateways-same-host).
-- `restart --safe` asks the running Gateway to preflight active work and schedule one coalesced restart after active work drains. Plain `restart` keeps the existing service-manager behavior; `--force` remains the immediate override path.
+- `restart --safe` asks the running Gateway to preflight active work and schedule one coalesced restart after active work drains. The default safe restart waits for active work up to the configured `gateway.reload.deferralTimeoutMs` (default 5 minutes); when that budget expires the restart is forced. Set `gateway.reload.deferralTimeoutMs` to `0` for an indefinite safe wait that never forces. Plain `restart` keeps the existing service-manager behavior; `--force` remains the immediate override path.
 - `restart --safe --skip-deferral` runs the OpenClaw-aware safe restart but bypasses the active-work deferral gate so the Gateway emits the restart immediately even when blockers are reported. Operator escape hatch when a stuck task run pins the safe restart; requires `--safe`.
 
 ## Prefer

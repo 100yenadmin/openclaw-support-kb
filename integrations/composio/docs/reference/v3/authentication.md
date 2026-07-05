@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/reference/v3/authentication.md"
-source_hash: "fc423adde132075f5674bb70ba1975f0c7a120fc7f367c78ea090621ada02654"
+source_hash: "2aef05c8701a649993d5988adcb15beee339c44f1c4bdb7767b51e2c9ae42677"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/authentication.md"
@@ -17,29 +17,21 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/v3/authentication.md
 
 
-All Composio API endpoints require authentication via API key.
+Every Composio API request authenticates with an API key. Send the key in a request header and Composio resolves it to your project or organization.
 
-# API Key Authentication
+# Project API key
 
-Include your API key in the `x-api-key` header.
+A project API key authenticates to one project with full access. Send it in the `x-api-key` header.
 
-## Getting Your API Key
+Get it from the dashboard: sign in to [composio.dev](https://composio.dev), open **Settings → Project Settings**, and copy the key from the **API Keys** section.
 
-1. Sign in to [composio.dev](https://composio.dev)
-2. Navigate to **Settings**
-3. In **Project Settings**, copy the key from the **API Keys** section
+# Organization API key
 
-# Organization API Key
+An organization API key authenticates across every project in your organization. Send it in the `x-org-api-key` header.
 
-For organization-level access across multiple projects, use the `x-org-api-key` header instead.
+Get it from the dashboard: open **Organization Settings → General Settings** and copy a token under **Organization Access Tokens**.
 
-## Getting Your Organization API Key
-
-1. Sign in to [composio.dev](https://composio.dev)
-2. Navigate to **Organization Settings** → **General Settings**
-3. Copy the token under **Organization Access Tokens**
-
-# Using the API Key
+# Using the API key
 
 Include your API key in the request header:
 

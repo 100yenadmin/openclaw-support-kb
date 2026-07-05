@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md"
-source_hash: "81b6bfb819629dfc272bbdb3879de935efc14830cc4e2833703570a2c4c2afc5"
+source_hash: "261c0976a3488dcaf34285e50a40d449b51951f7ccb1cf4a339dcbee89ba9407"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/mcp.md"
@@ -16,6 +16,12 @@ Local KB namespace: composio
 # MCP (/reference/sdk-reference/typescript/mcp)
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md
 
+
+> **Deprecated**: Use a session's MCP endpoint instead: `composio.create(userId, \{ mcp: true \})`
+returns a session that exposes `session.mcp.url` / `session.mcp.headers`. MCP is now
+opt-in per session; the standalone `composio.mcp` server-management API is kept only for
+backwards compatibility. Prefer the session MCP endpoint; do not generate new code against
+`composio.mcp`. See [https://docs.composio.dev/docs/sessions-via-mcp](https://docs.composio.dev/docs/sessions-via-mcp)
 
 # Usage
 
@@ -39,15 +45,16 @@ const result = await composio.mcp.list();
 Create a new MCP configuration.
 
 ```typescript
-async create(name: string, mcpConfig: object): Promise
+async create(name: string, mcpConfig: MCPConfigCreationParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name        | Type     |
-| ----------- | -------- |
-| `name`      | `string` |
-| `mcpConfig` | `object` |
+| Name              | Type                      |
+| ----------------- | ------------------------- |
+| `name`            | `string`                  |
+| `mcpConfig`       | `MCPConfigCreationParams` |
+| `requestOptions?` | `ComposioRequestOptions`  |
 
 **Returns**
 
@@ -78,18 +85,19 @@ const server = await composio.mcpConfig.create("personal-mcp-server", {
 Delete an MCP server configuration permanently
 
 ```typescript
-async delete(serverId: string): Promise<{ deleted: boolean; id: string }>
+async delete(serverId: string, requestOptions?: ComposioRequestOptions): Promise<{ id: string; deleted: boolean }>
 ```
 
 **Parameters**
 
-| Name       | Type     | Description                                       |
-| ---------- | -------- | ------------------------------------------------- |
-| `serverId` | `string` | The unique identifier of the MCP server to delete |
+| Name              | Type                     | Description                                       |
+| ----------------- | ------------------------ | ------------------------------------------------- |
+| `serverId`        | `string`                 | The unique identifier of the MCP server to delete |
+| `requestOptions?` | `ComposioRequestOptions` |                                                   |
 
 **Returns**
 
-`Promise<...>` — Confirmation object with server ID and deletion status
+`Promise<\{ id: string; deleted: boolean \}>` — Confirmation object with server ID and deletion status
 
 **Example**
 
@@ -126,20 +134,21 @@ Get server URLs for an existing MCP server.
 The response is wrapped according to the provider's specifications.
 
 ```typescript
-async generate(userId: string, mcpConfigId: string, options?: { manuallyManageConnections?: boolean }): Promise<...>
+async generate(userId: string, mcpConfigId: string, options?: MCPGetInstanceParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name          | Type     | Description                                                                    |
-| ------------- | -------- | ------------------------------------------------------------------------------ |
-| `userId`      | `string` | \{string} external user id from your database for whom you want the server for |
-| `mcpConfigId` | `string` | \{string} config id of the MCPConfig for which you want to create a server for |
-| `options?`    | `object` | \{object} additional options                                                   |
+| Name              | Type                     | Description                                                                    |
+| ----------------- | ------------------------ | ------------------------------------------------------------------------------ |
+| `userId`          | `string`                 | \{string} external user id from your database for whom you want the server for |
+| `mcpConfigId`     | `string`                 | \{string} config id of the MCPConfig for which you want to create a server for |
+| `options?`        | `MCPGetInstanceParams`   | \{object} additional options                                                   |
+| `requestOptions?` | `ComposioRequestOptions` |                                                                                |
 
 **Returns**
 
-`Promise<...>`
+`Promise`
 
 **Example**
 
@@ -157,18 +166,19 @@ const mcp = await composio.experimental.mcp.generate("default", "<mcp_config_id>
 Retrieve detailed information about a specific MCP server by its ID
 
 ```typescript
-async get(serverId: string): Promise<...>
+async get(serverId: string, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name       | Type     | Description                                         |
-| ---------- | -------- | --------------------------------------------------- |
-| `serverId` | `string` | The unique identifier of the MCP server to retrieve |
+| Name              | Type                     | Description                                         |
+| ----------------- | ------------------------ | --------------------------------------------------- |
+| `serverId`        | `string`                 | The unique identifier of the MCP server to retrieve |
+| `requestOptions?` | `ComposioRequestOptions` |                                                     |
 
 **Returns**
 
-`Promise<...>` — Complete MCP server details including configuration, tools, and metadata
+`Promise` — Complete MCP server details including configuration, tools, and metadata
 
 **Example**
 
@@ -197,18 +207,19 @@ const mcpUrl = server.MCPUrl;
 List the MCP servers with optional filtering and pagination
 
 ```typescript
-async list(options: { authConfigs: string[]; limit: number; name?: string; page: number; toolkits: string[] }): Promise<...>
+async list(options: MCPListParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name      | Type     | Description                      |
-| --------- | -------- | -------------------------------- |
-| `options` | `object` | Filtering and pagination options |
+| Name              | Type                     | Description                      |
+| ----------------- | ------------------------ | -------------------------------- |
+| `options`         | `MCPListParams`          | Filtering and pagination options |
+| `requestOptions?` | `ComposioRequestOptions` |                                  |
 
 **Returns**
 
-`Promise<...>` — Paginated list of MCP servers with metadata
+`Promise` — Paginated list of MCP servers with metadata
 
 **Example**
 
@@ -240,19 +251,20 @@ const namedServers = await composio.experimental.mcp.list({
 Update an existing MCP server configuration with new settings
 
 ```typescript
-async update(serverId: string, config: object): Promise<...>
+async update(serverId: string, config: MCPUpdateParams, requestOptions?: ComposioRequestOptions): Promise
 ```
 
 **Parameters**
 
-| Name       | Type     | Description                                       |
-| ---------- | -------- | ------------------------------------------------- |
-| `serverId` | `string` | The unique identifier of the MCP server to update |
-| `config`   | `object` | Update configuration parameters                   |
+| Name              | Type                     | Description                                       |
+| ----------------- | ------------------------ | ------------------------------------------------- |
+| `serverId`        | `string`                 | The unique identifier of the MCP server to update |
+| `config`          | `MCPUpdateParams`        | Update configuration parameters                   |
+| `requestOptions?` | `ComposioRequestOptions` |                                                   |
 
 **Returns**
 
-`Promise<...>` — Updated MCP server configuration with all details
+`Promise` — Updated MCP server configuration with all details
 
 **Example**
 

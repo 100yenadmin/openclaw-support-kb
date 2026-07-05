@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "36a3f76afa5d79db30a9989bb659d37a2f550c03d7d6d6fdd749f9915d0b55b0"
+source_hash: "2876921a051000190942b63c0eb866427ffe624a4cae8dbe02b1a12b4d600b0e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -119,7 +119,11 @@ Skills
 
     - Reads available skills and checks requirements.
     - Lets you choose node manager: npm, pnpm, or bun.
-    - Installs optional dependencies (some use Homebrew on macOS).
+    - Installs optional dependencies for trusted bundled skills when the required
+      installer is available.
+    - Skips unavailable Homebrew, uv, and Go installers, then groups the affected
+      skills with manual setup guidance. Run `openclaw doctor` after installing
+      the missing prerequisites.
 
 
 
@@ -358,6 +362,7 @@ Typical fields in `~/.openclaw/openclaw.json`:
 - `wizard.lastRunCommit`
 - `wizard.lastRunCommand`
 - `wizard.lastRunMode`
+- `wizard.securityAcknowledgedAt`
 
 `openclaw agents add` writes `agents.list[]` and optional `bindings`.
 

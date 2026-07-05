@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.md template"
 source: "https://docs.openclaw.ai/reference/templates/CLAUDE"
-source_hash: "cf3d098176bbb59aa866f75586933612faf4eb77cd879e2c2a3d84bfa7f532a0"
+source_hash: "ff1d5b6534a6e41ebd641790cc8812ad639be137182ff89cca9882c758eddc5f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/claude.md"
@@ -73,6 +73,10 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - Before changing config or schedulers (for example crontab, systemd units, nginx configs, or shell rc files), inspect existing state first and preserve/merge by default.
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
+
+## Existing Solutions Preflight
+
+Before proposing or building a custom system, feature, workflow, tool, integration, or automation, do a brief check for open-source projects, maintained libraries, existing OpenClaw plugins, or free platforms that already solve it well enough. Prefer those when adequate. Build custom only when existing options are unsuitable, too expensive, unmaintained, unsafe, non-compliant, or the user explicitly asks for custom. Avoid paid-service recommendations unless the user explicitly approves spend. Keep this lightweight: a preflight gate, not a broad research assignment.
 
 ## External vs Internal
 

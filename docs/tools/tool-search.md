@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool Search"
 source: "https://docs.openclaw.ai/tools/tool-search"
-source_hash: "6cbc2a8458d53ce409ca5f9bae79d9c748d1dfb4f0853e1ca2766a8b7ed5426f"
+source_hash: "446aba4fd431cb1dcc747fe87ab6547c5f6d99ad068d312f65fd858a11d3253b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tool-search.md"
@@ -273,10 +273,10 @@ Session logs should make it possible to answer:
 
 ## E2E validation
 
-The gateway E2E runner proves both paths with the OpenClaw runtime:
+The QA Lab gateway scenario proves both paths with the OpenClaw runtime:
 
 ```bash
-node --import tsx scripts/tool-search-gateway-e2e.ts
+pnpm openclaw qa suite --provider-mode mock-openai --scenario tool-search-gateway-e2e
 ```
 
 It creates a temporary fake plugin with a large tool catalog, starts the mock

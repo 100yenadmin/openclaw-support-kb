@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "b7bf8783f644ebf2326a3c3b9f483c17faa60c886ad588ad087b31295f3ea45e"
+source_hash: "78a4a8fcd75ef4d1162f2a4d9790b842c6d18ab7c8ad4db50639ef75e4ea4b0c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -348,6 +348,26 @@ Fallback text includes:
 - `divider` blocks as a visual separator
 - button labels, including URLs for link buttons
 - select option labels
+
+### Button value fallback visibility
+
+When a channel cannot render interactive controls, button and select values
+fall back to plain text. The fallback behavior preserves usability while
+keeping opaque callback data private:
+
+- **`command`-typed actions** render as `label: \`command\`` so users can
+  copy the command and run it manually in the channel input.
+- **`callback`-typed actions** and legacy **`value`** fields render as
+  label-only. The opaque callback value is not exposed in fallback text.
+- **`url` / `webApp`** buttons render the URL text alongside the button
+  label, since the URL is user-facing.
+- **Select options** render as label-only. The underlying option value is not
+  exposed in fallback text.
+
+Channel adapters that add manual-command guidance in their fallback UI (e.g.
+Feishu document-comment instructions) must derive the command-present check
+from the same presentation blocks that the fallback renderer uses, so the
+guidance text only appears when a manual command is actually shown.
 
 Unsupported native controls should degrade rather than fail the whole send.
 Examples:

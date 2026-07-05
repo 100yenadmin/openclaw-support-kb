@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "a87f339f9fa980382f36ba1846877be3a67ab23b9e9e406bad538128126f8d96"
+source_hash: "dff5a495a5876db58c4d8069207b2294d690c791971da2ecaee335d1218fc3d7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/vercel.md
 
 
-The Vercel AI SDK provider transforms Composio tools into Vercel's [tool format](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling) with built-in execution — no manual agentic loop needed.
+The Vercel AI SDK provider transforms Composio tools into Vercel's [tool format](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling) with built-in execution, so you don't write a manual agentic loop. Each wrapped tool carries its own `execute` function, and the AI SDK calls it for you.
 
 **Install**
 
@@ -35,7 +35,7 @@ ANTHROPIC_API_KEY=xxxxxxxxx
 ```
 **Create session and run**
 
-The Vercel provider is **agentic** — tools include an `execute` function, so the AI SDK handles tool calls automatically via [`stopWhen`](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling).
+The Vercel provider is **agentic**: tools include an `execute` function, so the AI SDK handles tool calls automatically. Set [`stopWhen`](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling) to cap how many tool-calling steps a run can take.
 
 ```typescript
 import { anthropic } from "@ai-sdk/anthropic";
@@ -58,34 +58,22 @@ const { text } = await generateText({
 
 console.log(text);
 ```
-# Multi-turn chat
+# Provider specifics
 
-For multi-turn apps, create the session once and reuse it across requests with `composio.use()`:
+**Strict mode.** Some models reject tool schemas that contain optional parameters. Pass `strict: true` to the provider to drop every non-required property from each tool's input schema before it reaches the AI SDK:
 
 ```typescript
 // @noErrors
-import { anthropic } from "@ai-sdk/anthropic";
 import { Composio } from "@composio/core";
 import { VercelProvider } from "@composio/vercel";
-import { generateText, stepCountIs } from "ai";
 
-const composio = new Composio({ provider: new VercelProvider() });
-
-// First request — create and store the session ID
-const session = await composio.create("user_123");
-const sessionId = session.sessionId;
-// store sessionId in your database or chat state
-
-// Subsequent requests — reuse the session
-const session = await composio.use(sessionId);
-const tools = await session.tools();
-
-const { text } = await generateText({
-  model: anthropic("claude-opus-4-6"),
-  tools,
-  prompt: "What emails did I get today?",
-  stopWhen: stepCountIs(10),
-});
+const composio = new Composio({ provider: new VercelProvider({ strict: true }) });
 ```
+
+> The provider converts each Composio tool's JSON Schema to a Zod schema for the AI SDK and normalizes tool arguments, so it still works when a model emits tool input as a JSON string rather than an object.
+
+# Next
+
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

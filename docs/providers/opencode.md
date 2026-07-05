@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "41361fdd5d1b28ce24a29608deea41db36c5e9eb3ac6b79ddf9d2c30e7b38e0a"
+source_hash: "7bc678acd45530f7dbfe750a885bed3510556e1966def5293d97778661d70791"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
@@ -31,7 +31,7 @@ Tabs
 
 Zen catalog
 
-    **Best for:** the curated OpenCode multi-model proxy (Claude, GPT, Gemini).
+    **Best for:** the curated OpenCode multi-model proxy (Claude, GPT, Gemini, GLM).
 
 
 Steps
@@ -119,10 +119,10 @@ Verify models are available
 
 ### Zen
 
-| Property         | Value                                                                   |
-| ---------------- | ----------------------------------------------------------------------- |
-| Runtime provider | `opencode`                                                              |
-| Example models   | `opencode/claude-opus-4-6`, `opencode/gpt-5.5`, `opencode/gemini-3-pro` |
+| Property         | Value                                                                                         |
+| ---------------- | --------------------------------------------------------------------------------------------- |
+| Runtime provider | `opencode`                                                                                    |
+| Example models   | `opencode/claude-opus-4-6`, `opencode/gpt-5.5`, `opencode/gemini-3.1-pro`, `opencode/glm-5.2` |
 
 ### Go
 

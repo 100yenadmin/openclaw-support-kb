@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "4db795936e75d3a71368f73877067ea328fab2e34932aac912956d0b6c3732ec"
+source_hash: "74e630d93adc0732fb2f4ff6b46c20e31cdf7e9efe47d02295e93cc9da8608d5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -113,6 +113,13 @@ openclaw plugins update <plugin-id> --dry-run
 When you pass a plugin id, OpenClaw reuses the tracked install spec. Stored
 dist-tags such as `@beta` and exact pinned versions continue to be used on
 later `update <plugin-id>` runs.
+
+`openclaw plugins update --all` is the bulk maintenance path. It still respects
+ordinary tracked install specs, but trusted official OpenClaw plugin records can
+sync to the current official catalog target instead of staying on a stale exact
+official package. If `update.channel` is set to `beta`, that bulk official sync
+uses the beta-channel context. Use a targeted `update <plugin-id>` when you
+intentionally want to keep an exact or tagged official spec untouched.
 
 For npm installs, you can pass an explicit package spec to switch the tracked
 record:

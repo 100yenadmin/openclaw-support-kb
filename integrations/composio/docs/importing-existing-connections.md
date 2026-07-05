@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Importing existing connections"
 source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "db4249c245ae0c5a4a26f7697b2979177de0769af82506d3c6278adf934925ea"
+source_hash: "3ccf63e4a6c1ff3fdbb19ed5391779880f28f4dbaede908f4d09e1baea31475c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "importing-existing-connections.md"
@@ -27,18 +27,11 @@ This is useful when:
 
 # How it works
 
-```mermaid
-graph LR
-    A[Create auth config] --> B[Create connection with credentials]
-    B --> C[Use in Tool Router / Execute tools]
-    C --> D[Update credentials when needed]
-```
-
 # Prerequisites
 
-1. **An [auth config](/docs/auth-configuration/programmatic-auth-configs)** for the toolkit you're importing into
+1. **An [auth config](/docs/programmatic-auth-configs)** for the toolkit you're importing into
 2. **The existing credentials** for each user (API keys, bearer tokens, username/password, etc.)
-3. **A user ID** for each user — any string that uniquely identifies them in your system
+3. **A userID** for each user. Any string that uniquely identifies them in your system.
 
 # API keys
 
@@ -87,11 +80,11 @@ console.log('Connected:', connection.id);
 
 # Bearer tokens
 
-If you manage your own OAuth flow and already have an access token for a service, you can import it into Composio as a bearer token. This lets you bring existing OAuth connections into Composio without re-authenticating your users. It works with **all toolkits that support OAuth2 or S2S auth** — Gmail, GitHub, Slack, Google Docs, and more. Any additional parameters the toolkit supports (e.g., `subdomain`, `base_url`) work the same way.
+If you manage your own OAuth flow and already have an access token for a service, you can import it into Composio as a bearer token. This lets you bring existing OAuth connections into Composio without re-authenticating your users. It works with **all toolkits that support OAuth2 or S2S auth** (Gmail, GitHub, Slack, Google Docs, and more). Any additional parameters the toolkit supports (e.g., `subdomain`, `base_url`) work the same way.
 
-Since you're providing your own token, Composio won't handle OAuth refresh — you're responsible for refreshing the token on your end and pushing the updated value to Composio via the [PATCH method](#updating-credentials) whenever it changes.
+Since you're providing your own token, Composio won't handle OAuth refresh. You're responsible for refreshing the token on your end and pushing the updated value to Composio via the [PATCH method](#updating-credentials) whenever it changes.
 
-After [creating an auth config](/docs/auth-configuration/programmatic-auth-configs) with `authScheme: "BEARER_TOKEN"`, use the snippet below to create a connected account:
+After [creating an auth config](/docs/programmatic-auth-configs) with `authScheme: "BEARER_TOKEN"`, use the snippet below to create a connected account:
 
 **Python:**
 
@@ -322,12 +315,8 @@ const session = await composio.create('user_123', {
 });
 ```
 
-# What to read next
+# Next
 
 - [Managing multiple accounts](/docs/managing-multiple-connected-accounts): Pin and select connected accounts for a user
-
-- [White-labeling](/docs/white-labeling-authentication): Use your own branding on OAuth consent screens
-
-- [Connection expiry events](/docs/subscribing-to-connection-expiry-events): Detect expired OAuth connections and prompt re-authentication
 
 ---

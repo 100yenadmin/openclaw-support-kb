@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "e5c20d113e21b885d804b4709f75d80417b68b1487473ebc4ef7d412838efcab"
+source_hash: "d5d57c6df9b7a3372e1ba9fe910d609e957b53033d9e1149c80fd8909fda8106"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -592,8 +592,11 @@ OAuth vs API key - what is the difference?
     - **OAuth / CLI login** often leverages subscription access where the
       provider supports it. For Anthropic, OpenClaw's Claude CLI backend uses
       Claude Code `claude -p`; Anthropic currently treats that as Agent
-      SDK/programmatic usage, with a separate monthly Agent SDK credit starting
-      June 15, 2026.
+      SDK/programmatic usage. Anthropic paused the June 15, 2026 separate Agent
+      SDK credit change, so for now this still draws from subscription usage
+      limits. See Anthropic's [Agent SDK plan
+      article](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
+      for the current pause notice.
     - **API keys** use pay-per-token billing.
 
     The wizard explicitly supports Anthropic Claude CLI, OpenAI Codex OAuth, and API keys.

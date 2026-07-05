@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Python SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/python.md"
-source_hash: "74cbe8250ef00a76f65a0c1054d9da9a99d139eefb01c16875fe82a8bf4e192b"
+source_hash: "f5aaf207d8c989eac3909af07880c8f8ef7af104b1bdd10a960fdbe30dddfc04"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python.md"
@@ -35,17 +35,16 @@ uv add composio
 
 # Classes
 
-| Class                                                                        | Description                                                                         |
-| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| [`Composio`](/reference/sdk-reference/python/composio)                       | Composio SDK for Python.  Generic parameters: TTool: The individual tool type re... |
-| [`Tools`](/reference/sdk-reference/python/tools)                             | Tools class definition  This class is used to manage tools in the Composio SDK. ... |
-| [`Toolkits`](/reference/sdk-reference/python/toolkits)                       | Toolkits are a collectiono of tools that can be used to perform various tasks. T... |
-| [`Triggers`](/reference/sdk-reference/python/triggers)                       | Triggers (instance) class                                                           |
-| [`ConnectedAccounts`](/reference/sdk-reference/python/connected-accounts)    | Manage connected accounts.  This class is used to manage connected accounts in t... |
-| [`AuthConfigs`](/reference/sdk-reference/python/auth-configs)                | Manage authentication configurations.                                               |
-| [`MCP`](/reference/sdk-reference/python/mcp)                                 | MCP (Model Control Protocol) class. Provides enhanced MCP server operations  Thi... |
-| [`ToolRouterSession`](/reference/sdk-reference/python/tool-router-session)   | Tool router session containing session information and methods.  Generic Paramet... |
-| [`SessionContextImpl`](/reference/sdk-reference/python/session-context-impl) | Concrete implementation of SessionContext.  One instance is created per session ... |
+| Class                                                                     | Description                                                                         |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`Composio`](/reference/sdk-reference/python/composio)                    | Composio SDK for Python.  Generic parameters: TTool: The individual tool type re... |
+| [`Tools`](/reference/sdk-reference/python/tools)                          | Tools class definition  This class is used to manage tools in the Composio SDK. ... |
+| [`Toolkits`](/reference/sdk-reference/python/toolkits)                    | Toolkits are a collectiono of tools that can be used to perform various tasks. T... |
+| [`Triggers`](/reference/sdk-reference/python/triggers)                    | Triggers (instance) class                                                           |
+| [`ConnectedAccounts`](/reference/sdk-reference/python/connected-accounts) | Manage connected accounts.  This class is used to manage connected accounts in t... |
+| [`AuthConfigs`](/reference/sdk-reference/python/auth-configs)             | Manage authentication configurations.                                               |
+| [`MCP`](/reference/sdk-reference/python/mcp)                              | MCP (Model Control Protocol) class. Provides enhanced MCP server operations  Thi... |
+| [`Session`](/reference/sdk-reference/python/session)                      | A Composio session — the object returned by `composio.create(...)` / \`\`composi... |
 
 # Quick Start
 

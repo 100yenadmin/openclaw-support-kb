@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "4f6324a8b91c20b250cc687e4b8397e33c093c26e81d09e5f36e2ff1b7061880"
+source_hash: "1712515ebb820eb45369f09749d7fbed5c2b04f6539aa6759771796017e82184"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture-internals.md"
@@ -753,6 +753,10 @@ outbound host generic and use the messaging adapter surface for provider rules:
   should be treated as `direct`, `group`, or `channel` before directory lookup.
 - `messaging.targetResolver.looksLikeId(raw, normalized)` tells core whether an
   input should skip straight to id-like resolution instead of directory search.
+- `messaging.targetResolver.reservedLiterals` lists bare words that are
+  channel/session references for that provider. Resolution preserves configured
+  directory entries before rejecting reserved literals, then fails closed on a
+  directory miss.
 - `messaging.targetResolver.resolveTarget(...)` is the plugin fallback when
   core needs a final provider-owned resolution after normalization or after a
   directory miss.

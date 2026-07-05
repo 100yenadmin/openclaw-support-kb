@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference.md"
-source_hash: "47c553991a6ad0fcbab6374fb936bfc5bc1691a569f4d9a45972bfab0b569785"
+source_hash: "6cc7f87a300d5e5f1c7a4019d6d9accbb8bb0d305148e30a3d23e12dacfd8a00"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference.md"
@@ -22,8 +22,8 @@ Composio powers tool discovery, execution, authentication, and context managemen
 # Quick Reference
 
 * **Base URL**:
-* **[Authentication](/reference/authentication)**: `x-api-key` (project) or `x-org-api-key` (organization) header
-* **[Rate Limits](/reference/rate-limits)**: 20K-100K requests per 10 minutes (plan-dependent)
+* **[Authenticating to Composio](/reference/authenticating-to-composio)**: `x-api-key` (project) or `x-org-api-key` (organization) header
+* **[Rate Limits](/reference/rate-limits)**: 2K-10K requests per minute (plan-dependent)
 
 # REST API
 

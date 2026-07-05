@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "4ef63d291057be8591dd543408e960e341f5bb3b71a6d5afa2e97c855c3ec461"
+source_hash: "76dfd5cc1b8967743111196cd601d80dd2832f09d6f612311001fd37ed5b1fa1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
@@ -113,11 +113,9 @@ Upload to Cloudflare R2/S3 and generate secure presigned download links. Useful 
 
 iOS app via Telegram
 
-  **@coard** • `ios` `xcode` `testflight`
+  **@coard** • `ios` `xcode` `app-store`
 
-Built a complete iOS app with maps and voice recording, deployed to TestFlight entirely via Telegram chat.
-
-  <img src="/assets/showcase/ios-testflight.jpg" alt="iOS app on TestFlight" />
+Built a complete iOS app with maps and voice recording, prepared for App Store distribution entirely via Telegram chat.
 
 Oura Ring health assistant
 
@@ -289,7 +287,7 @@ OpenClaw gateway running on Home Assistant OS with SSH tunnel support and persis
 
 Home Assistant skill
 
-  **ClawHub** • `homeassistant` `skill` `automation`
+  **@homeofe** • `homeassistant` `skill` `automation`
 
 Control and automate Home Assistant devices via natural language.
 
@@ -303,7 +301,7 @@ Batteries-included nixified OpenClaw configuration for reproducible deployments.
 
 CalDAV calendar
 
-  **ClawHub** • `calendar` `caldav` `skill`
+  **@asleep123** • `calendar` `caldav` `skill`
 
 Calendar skill using khal and vdirsyncer. Self-hosted calendar integration.
 

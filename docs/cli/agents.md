@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
-source_hash: "e8fca0a7b0f806c47173a2994e1e68f42a4bcf4da2ec58ebba7ab0a14de8982c"
+source_hash: "5c1ca009a796583612e4885b2c07de9f5553bd7f99a84e135d5b21f61a017007"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/agents.md"
@@ -220,6 +220,7 @@ Notes:
 
 - `--agent` or `--workspace` can be used to select the target agent.
 - If you rely on `--workspace` and multiple agents share that workspace, the command fails and asks you to pass `--agent`.
+- Local workspace-relative avatar image files are limited to 2 MB. HTTP(S) URLs and `data:` URIs are not checked with the local file-size limit.
 - When no explicit identity fields are provided, the command reads identity data from `IDENTITY.md`.
 
 Load from `IDENTITY.md`:

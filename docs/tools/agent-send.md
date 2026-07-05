@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
-source_hash: "37e99ba8d59db43d6c198d86e22443678141de4138aa07a4160a17c9cba98419"
+source_hash: "86959f16b4e418f538630d424a15ed61eea1c5435326312e481473a5eb4fa75f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/agent-send.md"
@@ -29,6 +29,17 @@ Run a simple agent turn
     ```
 
     This sends the message through the Gateway and prints the reply.
+
+
+
+
+Send a multiline prompt from a file
+
+    ```bash
+    openclaw agent --agent ops --message-file ./task.md
+    ```
+
+    This reads a valid UTF-8 file as the agent message body.
 
 
 
@@ -69,7 +80,8 @@ Deliver the reply to a channel
 
 | Flag                          | Description                                                 |
 | ----------------------------- | ----------------------------------------------------------- |
-| `--message \<text\>`          | Message to send (required)                                  |
+| `--message \<text\>`          | Inline message to send                                      |
+| `--message-file \<path\>`     | Read the message from a valid UTF-8 file                    |
 | `--to \<dest\>`               | Derive session key from a target (phone, chat id)           |
 | `--session-key \<key\>`       | Use an explicit session key                                 |
 | `--agent \<id\>`              | Target a configured agent (uses its `main` session)         |
@@ -89,6 +101,8 @@ Deliver the reply to a channel
 
 - By default, the CLI goes **through the Gateway**. Add `--local` to force the
   embedded runtime on the current machine.
+- Pass exactly one of `--message` or `--message-file`. File messages preserve
+  multiline content after removing an optional UTF-8 BOM.
 - If the Gateway is unreachable, the CLI **falls back** to the local embedded run.
 - Session selection: `--to` derives the session key (group/channel targets
   preserve isolation; direct chats collapse to `main`).
@@ -114,6 +128,9 @@ openclaw agent --to +15555550123 --message "Trace logs" --verbose on --json
 
 # Turn with thinking level
 openclaw agent --session-id 1234 --message "Summarize inbox" --thinking medium
+
+# Multiline prompt from a file
+openclaw agent --agent ops --message-file ./task.md
 
 # Exact session key
 openclaw agent --session-key agent:ops:incident-42 --message "Summarize status"

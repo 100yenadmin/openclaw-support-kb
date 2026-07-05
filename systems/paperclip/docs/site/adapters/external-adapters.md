@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Via the Paperclip UI"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/external-adapters.md"
-source_hash: "d3d84573bae0ec10946f5158705a201153bb1c6e10d3065a9ccb57b0833bdbfb"
+source_hash: "d4049098dd67c451e74a1e51aac80351b4a4803d168e2d405cf32351aa2a8b27"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/external-adapters.md"
@@ -32,6 +32,22 @@ Paperclip supports external adapter plugins that can be installed from npm packa
 | UI parser | Static import at build time | Dynamically loaded from API (see [UI Parser](/adapters/adapter-ui-parser)) |
 | Distribution | Ships with Paperclip | Published to npm or linked via `file:` |
 | Updates | Requires Paperclip release | Independent versioning |
+
+### Built-in Hermes compatibility note
+
+Hermes is built in with two stable adapter type keys:
+
+- `hermes_local` starts the local Hermes CLI from
+  `@paperclipai/hermes-paperclip-adapter`.
+- `hermes_gateway` calls an already-running Hermes API server through
+  `@paperclipai/hermes-paperclip-adapter/gateway`.
+
+The legacy `@paperclipai/adapter-hermes-gateway` package is a deprecated
+compatibility shim for one release. It preserves the old gateway exports while
+forwarding to the unified Hermes package. New external override packages should
+depend on or link `@paperclipai/hermes-paperclip-adapter` and declare the type
+they override (`hermes_local` or `hermes_gateway`); the type keys did not
+change.
 
 ## Quick Start
 
@@ -118,7 +134,7 @@ The plugin loader calls `createServerAdapter()` from your package root. This fun
 
 ```ts
 export const type = "my_adapter";     // snake_case, globally unique
-export const label = "My Agent (local)";
+export const label = "My Agent";
 
 export const models = [
   { id: "model-a", label: "Model A" },

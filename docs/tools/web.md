@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "f4ed02c441b8a4aeacf0858571523fe78f2b5b79005f5120b99e78f38b15289a"
+source_hash: "b07d44e8ebd380b346bde95f3d5436745fee0abee18c9fcf274c12286ac66bf8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web.md"
@@ -434,8 +434,8 @@ Warning
   freshness ranges require both start and end dates.
   Gemini, Grok, and Kimi return one synthesized answer with citations. They
   accept `count` for shared-tool compatibility, but it does not change the
-  grounded answer shape. Gemini supports `freshness`, `date_after`, and
-  `date_before` by converting them to Google Search grounding time ranges.
+  grounded answer shape. Gemini treats `day` freshness as a recency hint; wider
+  freshness values and explicit dates set Google Search grounding time ranges.
   Perplexity behaves the same way when you use the Sonar/OpenRouter
   compatibility path (`plugins.entries.perplexity.config.webSearch.baseUrl` /
   `model` or `OPENROUTER_API_KEY`).

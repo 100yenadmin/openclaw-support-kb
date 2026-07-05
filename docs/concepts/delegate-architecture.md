@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Delegate architecture"
 source: "https://docs.openclaw.ai/concepts/delegate-architecture"
-source_hash: "e43e4df1a4fbd60df879352b1ac5d283d1133cedee7b3473297c5d5bb8e74613"
+source_hash: "3786dee2157ca3e06c43e088dab9ffdd3ff7e09cea61efa7adca9619b5e8c2a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/delegate-architecture.md"
@@ -305,7 +305,8 @@ tool-call XML payloads (including `<tool_call>...</tool_call>`,
 downgraded tool-call scaffolding / leaked ASCII/full-width model control
 tokens / malformed MiniMax tool-call XML from assistant recall, and can
 replace oversized rows with `[sessions_history omitted: message too large]`
-instead of returning a raw transcript dump.
+instead of returning a raw transcript dump. Use `nextOffset` when present to
+page backward through older transcript windows.
 
 ## Scaling pattern
 

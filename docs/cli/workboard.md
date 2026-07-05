@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard CLI"
 source: "https://docs.openclaw.ai/cli/workboard"
-source_hash: "7ad17ee38d575db889f77f79ffb3eda50bf35a708dd02e2cd3396eeebe5141c7"
+source_hash: "b1ad1b9ca668e716b8c8b1f671908b539ff69d46e79f7ad67661a4479fdca29a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/workboard.md"
@@ -28,7 +28,7 @@ openclaw gateway restart
 ## Usage
 
 ```bash
-openclaw workboard list [--board <id>] [--status <status>] [--json]
+openclaw workboard list [--board <id>] [--status <status>] [--include-archived] [--json]
 openclaw workboard create <title...> [--notes <text>] [--status <status>] [--priority <priority>] [--agent <id>] [--board <id>] [--labels <items>] [--json]
 openclaw workboard show <id> [--json]
 openclaw workboard dispatch [--url <url>] [--token <token>] [--timeout <ms>] [--json]
@@ -56,11 +56,16 @@ Columns are id prefix, status, priority, board id, optional agent id, and title.
 
 Flags:
 
-| Flag                | Purpose                                  |
-| ------------------- | ---------------------------------------- |
-| `--board <id>`      | Limit results to one board namespace     |
-| `--status <status>` | Limit results to one Workboard status    |
-| `--json`            | Print the full card list as machine JSON |
+| Flag                 | Purpose                                       |
+| -------------------- | --------------------------------------------- |
+| `--board <id>`       | Limit results to one board namespace          |
+| `--status <status>`  | Limit results to one Workboard status         |
+| `--include-archived` | Include archived cards in compact text output |
+| `--json`             | Print the full card list as machine JSON      |
+
+Compact text output hides archived cards by default so the CLI matches the
+`/workboard list` command. Pass `--include-archived` to show them. JSON output
+keeps the full card list, including archived cards, for existing automation.
 
 ## `create`
 

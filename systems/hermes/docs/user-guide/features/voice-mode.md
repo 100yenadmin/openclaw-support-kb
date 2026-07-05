@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode"
-source_hash: "11a96cb8c7f66ff24f821620b430e944e558117081837c33bc534e623c78ca73"
+source_hash: "6474279ac661a1f1af31913630cf838264f0cb5028755b28c584e115c9a91806"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/voice-mode.md"
@@ -27,7 +27,7 @@ If you want a practical setup walkthrough with recommended configurations and re
 
 Before using voice features, make sure you have:
 
-1. **Hermes Agent installed** — `pip install hermes-agent` (see [Installation](/getting-started/installation))
+1. **Hermes Agent installed** — via the install script (see [Installation](/getting-started/installation))
 2. **An LLM provider configured** — run `hermes model` or set your preferred provider credentials in `~/.hermes/.env`
 3. **A working base setup** — run `hermes` to verify the agent responds to text before enabling voice
 
@@ -53,19 +53,19 @@ A paid [Nous Portal](/user-guide/features/tool-gateway) subscription supplies th
 
 ```bash
 # CLI voice mode (microphone + audio playback)
-pip install "hermes-agent[voice]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[voice]"
 
 # Discord + Telegram messaging (includes discord.py[voice] for VC support)
-pip install "hermes-agent[messaging]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[messaging]"
 
 # Premium TTS (ElevenLabs)
-pip install "hermes-agent[tts-premium]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[tts-premium]"
 
 # Local TTS (NeuTTS, optional)
 python -m pip install -U neutts[all]
 
 # Everything at once
-pip install "hermes-agent[all]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[all]"
 ```
 
 | Extra | Packages | Required For |

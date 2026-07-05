@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "7abb1d24815c9bf385bddeb203c338ce9f0dcdcd8ec82224e8e757e006cd3515"
+source_hash: "9680d320587f3edcf3bd012a6944b10dd1d0b40e4712167a311451251c100404"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -40,6 +40,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [BytePlus (International)](/concepts/model-providers#byteplus-international)
 - [Cerebras](/providers/cerebras)
 - [Chutes](/providers/chutes)
+- [ClawRouter (managed multi-provider routing)](/providers/clawrouter)
 - [Cohere](/providers/cohere)
 - [Cloudflare AI Gateway](/providers/cloudflare-ai-gateway)
 - [ComfyUI](/providers/comfy)

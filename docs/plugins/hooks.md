@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "812fed1c543c7dcd4fa9d6858d0ae34dddc83c5fed6349e096c8a885ef4ae186"
+source_hash: "6a8b01e4eda30c53ac59e9a4cab33ffdfa4ccb04fa8d1502421f2cb15ebbf251"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -324,10 +324,56 @@ Cron-driven runs also expose `ctx.jobId` (the originating cron job id) so
 plugin hooks can scope metrics, side effects, or state to a specific scheduled
 job.
 
-For channel-originated runs, `ctx.messageProvider` is the provider surface such
-as `discord` or `telegram`, while `ctx.channelId` is the conversation target
-identifier when OpenClaw can derive one from the session key or delivery
-metadata.
+For channel-originated runs, `ctx.channel` and `ctx.messageProvider` identify
+the provider surface such as `discord` or `telegram`, while `ctx.channelId` is
+the conversation target identifier when OpenClaw can derive one from the session
+key or delivery metadata.
+
+When sender identity is available, agent hook contexts also include:
+
+- `ctx.senderId` — channel-scoped sender ID (e.g. Feishu `open_id`, Discord
+  user ID). Populated when the run originates from a user message with known
+  sender metadata.
+- `ctx.chatId` — transport-native conversation identifier (e.g. Feishu
+  `chat_id`, Telegram `chat_id`). Populated when the originating channel
+  provides a native conversation ID.
+- `ctx.channelContext.sender.id` — the same sender ID as `ctx.senderId`, under a
+  channel-owned object that plugins can extend with channel-specific fields.
+- `ctx.channelContext.chat.id` — the same conversation ID as `ctx.chatId`, under a
+  channel-owned object that plugins can extend with channel-specific fields.
+
+Core only defines the nested `id` fields. Channel plugins that pass richer
+sender or chat metadata through the inbound helper can augment
+`PluginHookChannelSenderContext` or `PluginHookChannelChatContext` from
+`openclaw/plugin-sdk/channel-inbound`:
+
+```ts
+declare module "openclaw/plugin-sdk/channel-inbound" {
+  interface PluginHookChannelSenderContext {
+    unionId?: string;
+    userId?: string;
+  }
+}
+```
+
+Channel plugins pass those fields through the inbound SDK helper:
+
+```ts
+buildChannelInboundEventContext({
+  // ...
+  channelContext: {
+    sender: { id: senderOpenId, unionId, userId },
+    chat: { id: chatId },
+  },
+});
+```
+
+These fields are optional and absent for system-originated runs (heartbeat,
+cron, exec-event).
+
+`ctx.senderExternalId` remains as a deprecated source-compatibility field for
+older plugins. Core does not populate it; new channel-specific sender identities
+should live under `ctx.channelContext.sender` through module augmentation.
 
 `agent_end` is an observation hook. Gateway and persistent harness paths run it
 fire-and-forget after the turn, while short-lived one-shot CLI paths wait for the

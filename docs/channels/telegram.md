@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "8747edf7ba3038e9500fc68c98e057e6c12506a7db7286d768e52cff8049fec7"
+source_hash: "aa90ff48865bbe1ea85982fc23d644631d3ef19fc48827520e7a06e49f46a2c7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -320,22 +320,10 @@ Mention behavior
 }
 ```
 
-    Group history context defaults to `mention-only`: prior group messages are
-    included only when they were addressed to the bot, are replies to the bot,
-    or are the bot's own messages. Set `includeGroupHistoryContext: "recent"` to
-    include recent room history for trusted groups. Set
-    `includeGroupHistoryContext: "none"` to send no prior Telegram group history
-    with the next turn.
-
-```json5
-{
-  channels: {
-    telegram: {
-      includeGroupHistoryContext: "recent",
-    },
-  },
-}
-```
+    Group history context is always on for groups and bounded by
+    `historyLimit`. Set `channels.telegram.historyLimit: 0` to disable the
+    Telegram group history window. The retired `includeGroupHistoryContext`
+    key is removed by `openclaw doctor --fix`.
 
     Getting the group chat ID:
 
@@ -559,7 +547,7 @@ TOKEN
        - `/pair approve` when there is only one pending request
        - `/pair approve latest` for most recent
 
-    The setup code carries a short-lived bootstrap token. Built-in setup-code bootstrap is node-only: the first connect creates a pending node request, and after approval the Gateway returns a durable node token with `scopes: []`. It does not return a handed-off operator token; operator access requires a separate approved operator pairing or token flow.
+    The setup code carries a short-lived bootstrap token. Built-in setup-code bootstrap returns a durable node token with `scopes: []` plus a bounded operator handoff token for trusted mobile onboarding. That operator token can read setup-time native configuration, but it does not grant pairing mutation scopes or `operator.admin`.
 
     If a device retries with changed auth details (for example role/scopes/public key), the previous pending request is superseded and the new request uses a different `requestId`. Re-run `/pair pending` before approving.
 
@@ -652,7 +640,8 @@ Inline buttons
     Telegram `web_app` buttons work only in private chats between a user and the
     bot.
 
-    Callback clicks are passed to the agent as text:
+    Callback clicks that are not claimed by a registered plugin interactive
+    handler are passed to the agent as text:
     `callback_data: <value>`
 
 
@@ -1027,12 +1016,12 @@ Exec approvals in Telegram
 
 ## Error reply controls
 
-When the agent encounters a delivery or provider error, Telegram can either reply with the error text or suppress it. Two config keys control this behavior:
+When the agent encounters a delivery or provider error, the error policy controls whether error messages are sent to the Telegram chat:
 
-| Key                                 | Values            | Default | Description                                                                                     |
-| ----------------------------------- | ----------------- | ------- | ----------------------------------------------------------------------------------------------- |
-| `channels.telegram.errorPolicy`     | `reply`, `silent` | `reply` | `reply` sends a friendly error message to the chat. `silent` suppresses error replies entirely. |
-| `channels.telegram.errorCooldownMs` | number (ms)       | `60000` | Minimum time between error replies to the same chat. Prevents error spam during outages.        |
+| Key                                 | Values                     | Default         | Description                                                                                                                                                                                               |
+| ----------------------------------- | -------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `channels.telegram.errorPolicy`     | `always`, `once`, `silent` | `always`        | `always` — send every error message to the chat. `once` — send each unique error message once per cooldown window (suppress repeated identical errors). `silent` — never send error messages to the chat. |
+| `channels.telegram.errorCooldownMs` | number (ms)                | `14400000` (4h) | Cooldown window for the `once` policy. After an error is sent, the same error message is suppressed until this interval elapses. Prevents error spam during outages.                                      |
 
 Per-account, per-group, and per-topic overrides are supported (same inheritance as other Telegram config keys).
 
@@ -1040,7 +1029,7 @@ Per-account, per-group, and per-topic overrides are supported (same inheritance 
 {
   channels: {
     telegram: {
-      errorPolicy: "reply",
+      errorPolicy: "always",
       errorCooldownMs: 120000,
       groups: {
         "-1001234567890": {

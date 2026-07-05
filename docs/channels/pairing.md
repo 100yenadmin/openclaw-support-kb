@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "e383d2805143bcecfd2835c4ef09b193ab9c5aa9179adb3a1dbc81b049a0faa2"
+source_hash: "5d5289f68101dd6130fb9ef9f299f0c707a32ee5d56f6ca05818020c99d66096"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/pairing.md"
@@ -135,9 +135,9 @@ That bootstrap token carries the built-in pairing bootstrap profile:
   `node` plus a bounded `operator` handoff
 - the handed-off `node` token stays `scopes: []`
 - the handed-off `operator` token is limited to `operator.approvals`,
-  `operator.read`, and `operator.write`
-- `operator.admin` and `operator.pairing` are not granted by QR/setup-code
-  bootstrap; they require a separate approved operator pairing or token flow
+  `operator.read`, `operator.talk.secrets`, and `operator.write`
+- `operator.admin` is not granted by QR/setup-code bootstrap; it requires a
+  separate approved operator pairing or token flow
 - later token rotation/revocation remains bounded by both the device's approved
   role contract and the caller session's operator scopes
 

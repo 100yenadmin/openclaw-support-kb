@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/docs/triggers.md"
-source_hash: "f4207dfe8ff3e31ee1505fa58119bf80336aba1462d18a8fc6828d4680e526d8"
+source_hash: "b9f7c44b38c4fec6ea93f4b8f0c90068c84564f041355ff889700e64cdf4b124"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "triggers.md"
@@ -17,48 +17,40 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/triggers.md
 
 
-When events occur in apps — a new Slack message, a GitHub commit, an incoming email — triggers send event data to your application as structured payloads.
+When something happens in a connected app (a new Slack message, a GitHub commit, an incoming email), a **trigger** sends that event to your app as a structured payload. You write the handler. Composio handles the connection to the provider, delivery, retries, and signing.
 
-![Triggers flow: connected apps send events to Composio, which delivers them to your webhook subscription URL via HTTP POST](/images/triggers-flow.svg)
-*How triggers deliver events from apps to your application*
+# Where events arrive
 
-# Two trigger types
+Composio delivers every event to one destination you control: your webhook URL. You register it once per project, and Composio `POST`s every trigger event there, signed so you can verify it.
 
-| Type        | What happens                                                                                                                                                                                       | Examples                      |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| **Webhook** | The provider pushes events to a Composio-issued ingress URL in real time. Composio verifies the provider's signature, processes the payload, and fans the event out to matching trigger instances. | Slack, Asana, Notion, Outlook |
-| **Polling** | Composio polls the provider on a schedule. Composio managed auth has a 15-minute minimum interval; expect that as the worst-case delay between source event and delivery.                          | Gmail, Google Calendar        |
+# Realtime vs polling
 
-Composio handles ingress setup on most webhook triggers. For some webhook triggers — typically when you bring your own OAuth app — providers only deliver webhooks to URLs you've registered on the OAuth app, so you'll need to register the Composio-issued ingress URL there once for events to start flowing into Composio. See [Configuring the webhook endpoint](/docs/setting-up-triggers/creating-triggers#configuring-the-webhook-endpoint).
+Under the hood, Composio learns about events in one of two ways. You don't configure this. It's a property of the trigger type, and it only affects how quickly an event reaches you.
+
+| Kind         | How Composio learns about the event                              | Latency                                 | Examples                      |
+| ------------ | ---------------------------------------------------------------- | --------------------------------------- | ----------------------------- |
+| **Realtime** | The provider pushes the event to Composio the moment it happens. | Near-instant                            | Slack, Asana, Notion, Outlook |
+| **Polling**  | Composio checks the provider on a schedule.                      | Up to \~15 min on Composio-managed auth | Gmail, Google Calendar        |
+
+Either way, the event lands in the same place: your subscription or webhook URL, in the same payload shape.
+
+> If you **bring your own OAuth app**, some providers only deliver to URLs registered on that app, so you register Composio's ingress URL there once. See [Custom OAuth webhooks](/docs/setting-up-triggers/custom-oauth-webhooks).
+
+# Trigger types and instances
+
+A **trigger type** is a kind of event you can listen for, like `GITHUB_COMMIT_EVENT` or a new Slack message. Each toolkit has its own set.
+
+A **trigger instance** is a trigger type you've activated for one [user's connected account](/docs/how-composio-works). It has its own `ti_*` ID that you can enable, disable, or delete independently.
 
 # Working with triggers
 
-1. **Subscribe** to events so Composio knows which URL to deliver to. One-time per project.
-2. **Discover** available trigger types for a toolkit (e.g., `GITHUB_COMMIT_EVENT`).
-3. **Create** an active trigger scoped to a user's connected account — see [Creating triggers](/docs/setting-up-triggers/creating-triggers), which also covers [Configuring the webhook endpoint](/docs/setting-up-triggers/creating-triggers#configuring-the-webhook-endpoint) for triggers that need it.
-4. **Receive events** at your subscription URL and route on `metadata.trigger_slug`.
-5. **Manage** triggers — enable, disable, or delete as needed.
+0. **Authenticate** the user for the toolkit: an [auth config](/docs/authentication#behind-the-scenes) and a [connected account](/docs/authentication). See [Authentication](/docs/authentication).
+1. **Create** a trigger for the user's connected account. See [Creating triggers](/docs/setting-up-triggers/creating-triggers).
+2. **Receive** its events: locally with `subscribe()`, or in production at your webhook URL. See [Receiving events](/docs/setting-up-triggers/subscribing-to-events).
+3. **Manage** triggers: enable, disable, or delete. See [Managing triggers](/docs/setting-up-triggers/managing-triggers).
 
-**What is a trigger type?**
+# Next
 
-A trigger type is a template that defines what event to listen for and what configuration is required. For example, `GITHUB_COMMIT_EVENT` requires an `owner` and `repo`. Each toolkit exposes its own set of trigger types.
-
-**What is a trigger instance?**
-
-When you create a trigger from a type, it's scoped to a specific [user and connected account](/docs/how-composio-works). For example, creating a `GITHUB_COMMIT_EVENT` trigger for user `alice` on the `composio` repo produces a trigger instance with its own `ti_*` ID that you can enable, disable, or delete independently.
-
-> Triggers are scoped to a connected account. If you haven't set up authentication yet, see [Authentication](/docs/authentication).
-
-# Next steps
-
-- [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events): One-time per project: tell Composio which URL to deliver events to
-
-- [Creating triggers](/docs/setting-up-triggers/creating-triggers): Inspect a trigger type and create trigger instances via the SDK or dashboard
-
-- [Verifying webhooks](/docs/webhook-verification): Verify webhook signatures and understand payload versions
-
-- [Managing triggers](/docs/setting-up-triggers/managing-triggers): Discover, list, enable, disable, and delete triggers
-
-- [Example: Gmail labeler](/cookbooks/gmail-labeler): Build an automated email labeling agent using triggers
+- [Creating triggers](/docs/setting-up-triggers/creating-triggers): Activate a trigger for a user so events start flowing
 
 ---

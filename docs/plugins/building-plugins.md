@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "659002537e6f3731c53ce2d573f428511659eb32ccec9fff02864296b27bedab"
+source_hash: "d01146791ce3a951a98a74f7a2039b4b76d5fd59a880a2664e949dafa58499e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -29,7 +29,7 @@ Bare package specs still install from npm during the launch cutover. Use the
 
 ## Requirements
 
-- Use Node 22.19 or newer and a package manager such as `npm` or `pnpm`.
+- Use Node 22.19+, Node 23.11+, or Node 24+ and a package manager such as `npm` or `pnpm`.
 - Be familiar with TypeScript ESM modules.
 - For in-repo bundled plugin work, clone the repository and run `pnpm install`.
   Source-checkout plugin development is pnpm-only because OpenClaw loads bundled

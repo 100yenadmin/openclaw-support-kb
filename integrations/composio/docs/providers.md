@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Providers"
 source: "https://docs.composio.dev/docs/providers.md"
-source_hash: "9707bfc8c873d3aaf05f75ed38ef8feb355641c460862594268b43357e6749b9"
+source_hash: "5362fa6788dd8f666d4f6f62fd409f72d51d70879cc1b2a5fb76c99e9ab4af5f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers.md"
@@ -17,32 +17,40 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers.md
 
 
-Composio works with any AI framework. Each provider transforms Composio tools into the native format your framework expects — no glue code needed.
+Composio works with any AI framework. A provider is the adapter that turns Composio tools into the native tool format your framework expects, so you don't write glue code.
+
+Pick the provider that matches the SDK or agent framework you already use. Each one fetches tools, handles execution, and hands your agent objects it understands. If your framework isn't listed, you can [build your own provider](/docs/providers/custom-providers).
 
 # AI SDKs
 
-- [Anthropic](/docs/providers/anthropic) (Python, TypeScript)
+Use these when you call a model SDK directly.
 
-- [OpenAI](/docs/providers/openai) (Python, TypeScript)
+- [Anthropic](/docs/providers/anthropic) ('Python', 'TypeScript')
 
-- [Vercel AI SDK](/docs/providers/vercel) (TypeScript)
+- [OpenAI](/docs/providers/openai) ('Python', 'TypeScript')
 
-- [Google](/docs/providers/google) (Python, TypeScript)
+- [Vercel AI SDK](/docs/providers/vercel) ('TypeScript')
 
-# Agent Frameworks
+- [Google](/docs/providers/google) ('Python', 'TypeScript')
 
-- [LangChain](/docs/providers/langchain) (Python, TypeScript)
+# Agent frameworks
 
-- [CrewAI](/docs/providers/crewai) (Python)
+Use these when an agent framework orchestrates the tool calls for you.
 
-- [LlamaIndex](/docs/providers/llamaindex) (Python, TypeScript)
+- [LangChain](/docs/providers/langchain) ('Python', 'TypeScript')
 
-- [Mastra](/docs/providers/mastra) (TypeScript)
+- [CrewAI](/docs/providers/crewai) ('Python')
 
-- [AutoGen](/docs/providers/autogen) (Python)
+- [LlamaIndex](/docs/providers/llamaindex) ('Python', 'TypeScript')
+
+- [Mastra](/docs/providers/mastra) ('TypeScript')
+
+- [Pi](/docs/providers/pi) ('TypeScript')
+
+- [AutoGen](/docs/providers/autogen) ('Python')
 
 # Custom
 
-- [Build your own](/docs/providers/custom-providers) (Python, TypeScript)
+- [Build your own](/docs/providers/custom-providers) ('Python', 'TypeScript')
 
 ---

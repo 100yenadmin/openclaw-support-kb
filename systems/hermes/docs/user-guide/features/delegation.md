@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "a2a8c62307e98e9ff6e5c023a84fb2f59dd144beefe5c214440458cab7e936c6"
+source_hash: "3c2f03a1149fda7dd96437b33bbfe14f6c19db07eb376d5f6f3946a4aeae2056"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -172,7 +172,6 @@ Certain toolsets are blocked for subagents regardless of what you specify:
 - `clarify` — subagents cannot interact with the user
 - `memory` — no writes to shared persistent memory
 - `code_execution` — children should reason step-by-step
-- `send_message` — no cross-platform side effects (e.g., sending Telegram messages)
 
 ## Max Iterations
 
@@ -256,7 +255,7 @@ For **durable long-running work** that must survive interrupts or outlive the cu
 
 - Each subagent gets its **own terminal session** (separate from the parent)
 - **Nested delegation is opt-in** — only `role="orchestrator"` children can delegate further, and only when `max_spawn_depth` is raised from its default of 1 (flat). Disable globally with `orchestrator_enabled: false`.
-- Leaf subagents **cannot** call: `delegate_task`, `clarify`, `memory`, `send_message`, `execute_code`. Orchestrator subagents retain `delegate_task` but still cannot use the other four.
+- Leaf subagents **cannot** call: `delegate_task`, `clarify`, `memory`, `execute_code`. Orchestrator subagents retain `delegate_task` but still cannot use the other three.
 - **Interrupt propagation** — interrupting the parent interrupts all active children (including grandchildren under orchestrators)
 - Only the final summary enters the parent's context, keeping token usage efficient
 - Subagents inherit the parent's **API key, provider configuration, and credential pool** (enabling key rotation on rate limits)

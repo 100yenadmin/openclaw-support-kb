@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code execution"
 source: "https://docs.openclaw.ai/tools/code-execution"
-source_hash: "c78b0369b06405ade110558f205f009d872a8087d46daf09c427ab0c30018e74"
+source_hash: "80145beff3742939aeeb0e5af1874e9ce4fa54416a3c7948e1b9b3d34bba38e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-execution.md"
@@ -47,13 +47,13 @@ Steps
 Provide xAI credentials
 
     Sign in with Grok OAuth using an eligible SuperGrok or X Premium subscription,
-    use the remote-friendly device-code flow, or store an API key. OAuth works
-    for `code_execution` and `x_search`; `XAI_API_KEY` or plugin web-search
-    config can also power Grok `web_search`.
+    or store an API key. xAI OAuth uses device-code verification, so it works
+    from remote hosts without a localhost callback. OAuth works for
+    `code_execution` and `x_search`; `XAI_API_KEY` or plugin web-search config
+    can also power Grok `web_search`.
 
     ```bash
     openclaw models auth login --provider xai --method oauth
-    openclaw models auth login --provider xai --device-code
     ```
 
     During a fresh install, the same auth choices are available inside
@@ -61,7 +61,7 @@ Provide xAI credentials
 
     ```bash
     openclaw onboard --install-daemon
-    openclaw onboard --install-daemon --auth-choice xai-device-code
+    openclaw onboard --install-daemon --auth-choice xai-oauth
     ```
 
     Or use an API key:

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kubernetes"
 source: "https://docs.openclaw.ai/install/kubernetes"
-source_hash: "6034bf5f1f625b43719f861f29621c047c1c851d777744be31526acafaeb2ddb"
+source_hash: "9f12dff04a56e264f78e9778e14265c83a98601b7477b83bb60acd971567bd55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/kubernetes.md"
@@ -152,7 +152,7 @@ OPENCLAW_NAMESPACE=my-namespace ./scripts/k8s/deploy.sh
 Edit the `image` field in `scripts/k8s/manifests/deployment.yaml`:
 
 ```yaml
-image: ghcr.io/openclaw/openclaw:latest # or pin to a specific version from https://github.com/openclaw/openclaw/releases
+image: ghcr.io/openclaw/openclaw:latest # primary; official Docker Hub mirror: openclaw/openclaw:latest
 ```
 
 ### Expose beyond port-forward

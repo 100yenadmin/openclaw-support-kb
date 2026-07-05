@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Optional Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog"
-source_hash: "4be18e090f5fd284a404720369301fb8467d8de9b1ec9ec68e5b768629473c9d"
+source_hash: "f666b796486fc37dd088f9673dae4ffe5b1055a4423ba7c4b49e1b5830cd1c32"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/optional-skills-catalog.md"
@@ -219,6 +219,7 @@ hermes skills uninstall <skill-name>
 | [**godmode**](/docs/user-guide/skills/optional/security/security-godmode) | Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN. |
 | [**oss-forensics**](/docs/user-guide/skills/optional/security/security-oss-forensics) | Supply chain investigation, evidence recovery, and forensic analysis for GitHub repositories. Covers deleted commit recovery, force-push detection, IOC extraction, multi-source evidence collection, hypothesis formation/validation, and st... |
 | [**sherlock**](/docs/user-guide/skills/optional/security/security-sherlock) | OSINT username search across 400+ social networks. Hunt down social media accounts by username. |
+| [**unbroker**](/docs/user-guide/skills/optional/security/security-unbroker) | Autonomously remove your info from data-broker sites. |
 | [**web-pentest**](/docs/user-guide/skills/optional/security/security-web-pentest) | Authorized web application penetration testing — reconnaissance, vulnerability analysis, proof-based exploitation, and professional reporting. Adapts Shannon's "No Exploit, No Report" methodology with hard guardrails for scope, authoriza... |
 
 ## software-development
@@ -233,6 +234,7 @@ hermes skills uninstall <skill-name>
 
 | Skill | Description |
 |-------|-------------|
+| [**cloudflare-temporary-deploy**](/docs/user-guide/skills/optional/web-development/web-development-cloudflare-temporary-deploy) | Deploy a Worker live, no account, via wrangler --temporary. |
 | [**page-agent**](/docs/user-guide/skills/optional/web-development/web-development-page-agent) | Embed alibaba/page-agent into your own web application — a pure-JavaScript in-page GUI agent that ships as a single &lt;script> tag or npm package and lets end-users of your site drive the UI with natural language ("click login, fill userna... |
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "2e03165b747708711ff36aed938bec682c16613f407d4b73ffeb9c46417912ca"
+source_hash: "3fd584bad500dbe6acda2f55fc27a5f528c0b6abfad75f6ce17d37b07d66129e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -149,7 +149,17 @@ setup.
 
 You can optionally index session transcripts so `memory_search` can recall
 earlier conversations. This is opt-in via
-`memorySearch.experimental.sessionMemory`. See the
+`memorySearch.experimental.sessionMemory` and `sources: ["sessions"]`; the default
+source list is memory-only. The experimental flag enables session transcript
+indexing, while `sources` controls whether session chunks are searched.
+
+Session hits obey `tools.sessions.visibility`: the default `tree` setting only
+exposes the current session and sessions it spawned. To recall an unrelated
+same-agent gateway-dispatched session from a separate DM session, intentionally
+widen visibility to `agent`.
+
+When using QMD, also set `memory.qmd.sessions.enabled: true` so transcripts are
+exported into a QMD collection. See the
 [configuration reference](/reference/memory-config) for details.
 
 ## Troubleshooting

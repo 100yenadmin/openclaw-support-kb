@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs Guide"
 source: "https://docs.openclaw.ai/CLAUDE"
-source_hash: "9fdfe06499887fc3e39ba403194a10cc2e5d4ca356ae56cff2dcfe20a1ab5ef3"
+source_hash: "9e4c32ca311c4a9959192ef249ec5af714cc5b534397e4c46d7e786b2d0f83ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "claude.md"
@@ -38,6 +38,14 @@ This directory owns docs authoring, Mintlify link rules, and docs i18n policy.
 - Never add `docs/internal/**` pages to `docs/docs.json` navigation or link them from public docs.
 - `scripts/docs-sync-publish.mjs` excludes and prunes `docs/internal/**` from the public `openclaw/docs` publish repo if a page is force-added later.
 - Internal docs may mention repo paths, private app names, 1Password item names, and runbooks, but never include secret values.
+
+## Maturity Scorecard Editing
+
+`taxonomy.yaml` and `qa/maturity-scores.yaml` are the source inputs; generated maturity docs under `docs/maturity/` are projections and should not be hand-edited for score, LTS, taxonomy, QA profile, or evidence tables.
+`scripts/qa/render-maturity-docs.ts` owns generation; use `pnpm maturity:render` to refresh committed docs and `pnpm maturity:check` to verify them.
+`.github/workflows/maturity-scorecard.yml` renders artifact previews and can open generated-doc PRs; `.github/workflows/openclaw-release-checks.yml` dispatches it for release QA.
+Keep deterministic `qa-evidence.json.scorecard` data in GitHub Actions artifacts unless a maintainer explicitly asks for a sanitized committed projection.
+Human overrides must change source state in a PR and explain the reason plus public or redacted evidence.
 
 ## Docs i18n
 

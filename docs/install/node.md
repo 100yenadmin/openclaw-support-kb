@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
-source_hash: "5e5921952b5e88de9d6101db370c4d161adf3f85f2295362953ba53b0cd41132"
+source_hash: "c61db35314432dceaf77b795aa8ca3bd71862b0863963ab7be6a6113b0dc0ef4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/node.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Node.js
 Source: https://docs.openclaw.ai/install/node
 
-OpenClaw requires **Node 22.19 or newer**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
+OpenClaw requires **Node 22.19+, Node 23.11+, or Node 24+**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
 
 ## Check your version
 
@@ -21,7 +21,7 @@ OpenClaw requires **Node 22.19 or newer**. **Node 24 is the default and recommen
 node -v
 ```
 
-If this prints `v24.x.x` or higher, you're on the recommended default. If it prints `v22.19.x` or higher, you're on the supported Node 22 LTS path, but we still recommend upgrading to Node 24 when convenient. If Node isn't installed or the version is too old, pick an install method below.
+If this prints `v24.x.x` or higher, you're on the recommended default. If it prints `v22.19.x` or higher, you're on the supported Node 22 LTS path, but we still recommend upgrading to Node 24 when convenient. Node 23 versions before `v23.11.0` are unsupported. If Node isn't installed or the version is outside the supported range, pick an install method below.
 
 ## Install Node
 
