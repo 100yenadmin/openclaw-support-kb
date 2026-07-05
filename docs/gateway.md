@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway runbook"
 source: "https://docs.openclaw.ai/gateway"
-source_hash: "e34b9223a30733d3af92002bda25589296a6bc06efecdf593a44f86231896b7e"
+source_hash: "a7c85348e2d4cdf9db957b5152d9696ff2af2babce022226f752987a73c257c4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway.md"
@@ -281,6 +281,7 @@ RestartSec=5
 TimeoutStopSec=30
 TimeoutStartSec=30
 SuccessExitStatus=0 143
+OOMPolicy=continue
 KillMode=control-group
 
 [Install]

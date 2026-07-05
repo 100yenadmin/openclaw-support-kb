@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "36c22160aea8fbe7e70d33e18ddef270340849354b020fb118093cea522dd7dd"
+source_hash: "53dd632a6ed613898f323f62386e137c6701967c9a4e406957e4a74f3c76e195"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -17,13 +17,18 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/anthropic.md
 
 
-Composio integrates with Anthropic through the [Claude Messages API](https://docs.anthropic.com/en/api/messages) and the [Claude Agent SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk). Pick the tab that matches your integration.
+The Anthropic provider formats Composio tools for Claude and executes the tool calls Claude returns. It works two ways:
+
+* The [Claude Messages API](https://docs.anthropic.com/en/api/messages), where you run the tool-call loop yourself.
+* The [Claude Agent SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk), where the SDK runs the loop and Composio tools are exposed as an in-process MCP server.
+
+Pick the tab that matches your integration.
 
 > Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
 
 ### Messages API
 
-The Anthropic Provider transforms Composio tools into a format compatible with the Claude Messages API.
+The `AnthropicProvider` transforms Composio tools into the format the Claude Messages API expects, then executes the tool calls Claude requests and shapes the results back into Messages API content blocks.
 
 **Install**
 
@@ -75,7 +80,7 @@ response = client.messages.create(
     messages=messages,
 )
 
-# Agentic loop — keep executing tool calls until the model responds with text
+# Agentic loop: keep executing tool calls until the model responds with text
 while response.stop_reason == "tool_use":
     tool_use_blocks = [block for block in response.content if block.type == "tool_use"]
     results = composio.provider.handle_tool_calls(user_id="user_123", response=response)
@@ -129,7 +134,7 @@ let response = await client.messages.create({
     messages: messages,
 });
 
-// Agentic loop — keep executing tool calls until the model responds with text
+// Agentic loop: keep executing tool calls until the model responds with text
 while (response.stop_reason === "tool_use") {
     const toolResults = await composio.provider.handleToolCalls("user_123", response);
     messages.push({ role: "assistant", content: response.content });
@@ -149,9 +154,11 @@ for (const block of response.content) {
     }
 }
 ```
+> `handleToolCalls` does the loop body for you. It extracts every `tool_use` block from the response, executes the matching Composio tools, and returns a ready-to-append array of Messages API content (a `user` message holding `tool_result` blocks). That is why the TypeScript example spreads the result straight into `messages` with `messages.push(...toolResults)`. In Python it returns the raw result list, which the example wraps into `tool_result` blocks by hand.
+
 ### Claude Agent SDK
 
-The Claude Agent SDK provider transforms Composio tools into tools compatible with the Claude Agent SDK.
+The `ClaudeAgentSDKProvider` exposes your Composio tools to the Claude Agent SDK as an in-process MCP server. You build the server with `create_sdk_mcp_server` (Python) or `createSdkMcpServer` (TypeScript), register it on the agent, and the SDK runs the tool-call loop for you.
 
 **Install**
 
@@ -236,41 +243,18 @@ for await (const content of query({
     }
 }
 ```
-# Multi-turn chat
 
-For multi-turn apps, create the session once and reuse it across requests with `composio.use()`:
+# Provider specifics
 
-**Python:**
+A few things are specific to the Anthropic provider:
 
-```python
-from composio import Composio
+* **Tool caching.** Pass `cacheTools: true` to the constructor (`new AnthropicProvider({ cacheTools: true })`) to attach Anthropic's ephemeral `cache_control` to every tool definition and tool-result block. This lets Claude reuse cached tool schemas across requests and can cut prompt cost when you send the same large tool set on every turn.
+* **`handleToolCalls` returns Messages API content, not raw strings.** On the TypeScript side it returns `Anthropic.Messages.MessageParam[]` (a `user` message of `tool_result` blocks) that you append directly to your message list. This is why the loop above does not build `tool_result` blocks by hand.
+* **String-encoded tool inputs are handled for you.** Claude occasionally emits a tool's `input` as a JSON string instead of an object. The provider normalizes this before execution, so you do not have to parse it yourself.
+* **`cacheTools` only.** The constructor takes no other options. There is no agentic execution in this provider; you run the loop (Messages API) or hand the loop to the Claude Agent SDK (Agent SDK tab).
 
-composio = Composio()
+# Next
 
-# First request — create and store the session ID
-session = composio.create(user_id="user_123")
-session_id = session.session_id
-# store session_id in your database or chat state
-
-# Subsequent requests — reuse the session
-session = composio.use(session_id)
-tools = session.tools()
-```
-**TypeScript:**
-
-```typescript
-// @noErrors
-import { Composio } from '@composio/core';
-const composio = new Composio({ apiKey: 'your_api_key' });
-// ---cut---
-// First request — create and store the session ID
-const session = await composio.create("user_123");
-const sessionId = session.sessionId;
-// store sessionId in your database or chat state
-
-// Subsequent requests — reuse the session
-const session = await composio.use(sessionId);
-const tools = await session.tools();
-```
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

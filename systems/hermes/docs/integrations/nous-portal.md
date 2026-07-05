@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "4736ecd9b569d3889f023dfc254f435fa9cfad9f2800bbf667eda7a94b6ef7e1"
+source_hash: "e1e9dd3adcd241cbb887c80ef5f68f022aff4a9cc4c9e05131ed64b9e1b02c58"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -133,7 +133,7 @@ Your existing providers stay configured. You can switch between them with `/mode
 
 ### Headless / SSH / remote setup
 
-OAuth needs a browser, but the loopback callback runs on the machine where Hermes is running. For remote hosts, see [OAuth over SSH / Remote Hosts](/guides/oauth-over-ssh) — the same patterns work for the Portal as for any other OAuth-based provider (`ssh -L` port forwarding, `--manual-paste` for browser-only environments like Cloud Shell / Codespaces).
+OAuth needs a browser, but the loopback callback runs on the machine where Hermes is running. For remote hosts, see [OAuth over SSH / Remote Hosts](/guides/oauth-over-ssh) — the same patterns work for the Portal as for any other OAuth-based provider (`ssh -L` port forwarding).
 
 ### Profile setup
 

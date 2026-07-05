@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
-source_hash: "163f27a786057d0b54b862efb07850af8e93c58c06f3efe3a4f36564fe5a4e66"
+source_hash: "8599b01bfc7ff6b47aa56649cc19f47fa814742bd2e326fd29e98add2b978632"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/dev-setup.md"
@@ -47,17 +47,13 @@ For dev run modes, signing flags, and Team ID troubleshooting, see the macOS app
 
 > **Note**: Ad-hoc signed apps may trigger security prompts. If the app crashes immediately with "Abort trap 6", see the [Troubleshooting](#troubleshooting) section.
 
-## 3. Install the CLI
+## 3. Install the CLI and Gateway
 
-The macOS app expects a global `openclaw` CLI install to manage background tasks.
+The packaged app embeds the canonical `scripts/install-cli.sh` installer. On a
+fresh profile, choose **This Mac** during onboarding; the app installs the
+matching user-space CLI and runtime before starting the Gateway wizard.
 
-**To install it (recommended):**
-
-1. Open the OpenClaw app.
-2. Go to the **General** settings tab.
-3. Click **"Install CLI"**.
-
-Alternatively, install it manually:
+For manual development recovery, install the matching CLI yourself:
 
 ```bash
 npm install -g openclaw@<version>

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
-source_hash: "02dd551747317c27ccce7d717c1a41427e0e49a73567831ab58c4cd6856fe592"
+source_hash: "55a77ec0d0fbf28504da3710441e2384a2f29a30aa028841cd7f6e6d410d96fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-agents.md"
@@ -515,9 +515,9 @@ Time format in system prompt. Default: `auto` (OS preference).
 
 | Alias               | Model                           |
 | ------------------- | ------------------------------- |
-| `opus`              | `anthropic/claude-opus-4-6`     |
+| `opus`              | `anthropic/claude-opus-4-8`     |
 | `sonnet`            | `anthropic/claude-sonnet-4-6`   |
-| `gpt`               | `openai/gpt-5.5`                |
+| `gpt`               | `openai/gpt-5.4`                |
 | `gpt-mini`          | `openai/gpt-5.4-mini`           |
 | `gpt-nano`          | `openai/gpt-5.4-nano`           |
 | `gemini`            | `google/gemini-3.1-pro-preview` |
@@ -1107,6 +1107,7 @@ for provider examples and precedence.
 - `models`: optional per-agent model catalog/runtime overrides keyed by full `provider/model` ids. Use `models["provider/model"].agentRuntime` for per-agent runtime exceptions.
 - `runtime`: optional per-agent runtime descriptor. Use `type: "acp"` with `runtime.acp` defaults (`agent`, `backend`, `mode`, `cwd`) when the agent should default to ACP harness sessions.
 - `identity.avatar`: workspace-relative path, `http(s)` URL, or `data:` URI.
+- Local workspace-relative `identity.avatar` image files are limited to 2 MB. `http(s)` URLs and `data:` URIs are not checked with the local file-size limit.
 - `identity` derives defaults: `ackReaction` from `emoji`, `mentionPatterns` from `name`/`emoji`.
 - `subagents.allowAgents`: allowlist of configured agent ids for explicit `sessions_spawn.agentId` targets (`["*"]` = any configured target; default: same agent only). Include the requester id when self-targeted `agentId` calls should be allowed. Stale entries whose agent config was deleted are rejected by `sessions_spawn` and omitted from `agents_list`; run `openclaw doctor --fix` to clean them up, or add a minimal `agents.list[]` entry if that target should remain spawnable while inheriting defaults.
 - Sandbox inheritance guard: if the requester session is sandboxed, `sessions_spawn` rejects targets that would run unsandboxed.
@@ -1313,6 +1314,7 @@ Session field details
   - `mode`: `enforce` applies cleanup and is the default; `warn` emits warnings only.
   - `pruneAfter`: age cutoff for stale entries (default `30d`).
   - `maxEntries`: maximum number of entries in `sessions.json` (default `500`). Runtime writes batch cleanup with a small high-water buffer for production-sized caps; `openclaw sessions cleanup --enforce` applies the cap immediately.
+  - Short-lived gateway model-run probe sessions use fixed `24h` retention, but cleanup is pressure-gated: it only removes stale strict model-run probe rows when session-entry maintenance/cap pressure is reached. Only strict explicit probe keys matching `agent:*:explicit:model-run-<uuid>` are eligible; normal direct, group, thread, cron, hook, heartbeat, ACP, and sub-agent sessions do not inherit this 24h retention. When model-run cleanup runs, it runs before the broader `pruneAfter` stale-entry cleanup and `maxEntries` cap.
   - `rotateBytes`: deprecated and ignored; `openclaw doctor --fix` removes it from older configs.
   - `resetArchiveRetention`: retention for `*.reset.<timestamp>` transcript archives. Defaults to `pruneAfter`; set `false` to disable.
   - `maxDiskBytes`: optional sessions-directory disk budget. In `warn` mode it logs warnings; in `enforce` mode it removes oldest artifacts/sessions first.
@@ -1380,10 +1382,10 @@ Variables are case-insensitive. `{think}` is an alias for `{thinkingLevel}`.
 - Per-channel overrides: `channels.<channel>.ackReaction`, `channels.<channel>.accounts.<id>.ackReaction`.
 - Resolution order: account → channel → `messages.ackReaction` → identity fallback.
 - Scope: `group-mentions` (default), `group-all`, `direct`, `all`.
-- `removeAckAfterReply`: removes ack after reply on reaction-capable channels such as Slack, Discord, Telegram, WhatsApp, and iMessage.
-- `messages.statusReactions.enabled`: enables lifecycle status reactions on Slack, Discord, Telegram, and WhatsApp.
+- `removeAckAfterReply`: removes ack after reply on reaction-capable channels such as Slack, Discord, Signal, Telegram, WhatsApp, and iMessage.
+- `messages.statusReactions.enabled`: enables lifecycle status reactions on Slack, Discord, Signal, Telegram, and WhatsApp.
   On Slack and Discord, unset keeps status reactions enabled when ack reactions are active.
-  On Telegram and WhatsApp, set it explicitly to `true` to enable lifecycle status reactions.
+  On Signal, Telegram, and WhatsApp, set it explicitly to `true` to enable lifecycle status reactions.
 - `messages.statusReactions.emojis`: overrides lifecycle emoji keys:
   `queued`, `thinking`, `compacting`, `tool`, `coding`, `web`, `deploy`, `build`,
   `concierge`, `done`, `error`, `stallSoft`, and `stallHard`.

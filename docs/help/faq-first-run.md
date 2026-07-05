@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "33e2673b6544c8b8fa7a5349bb5c5d123f041571cb1f9fb918d3e987eb1577d9"
+source_hash: "489e446e70620d1607bcffa87dac3f0cc7000ea6648d98c28bcab35584123724"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -368,7 +368,12 @@ How long does install and onboarding usually take?
     Rough guide:
 
     - **Install:** 2-5 minutes
-    - **Onboarding:** 5-15 minutes depending on how many channels/models you configure
+    - **QuickStart onboarding:** usually a few minutes
+    - **Full onboarding:** longer when provider sign-in, channel pairing, daemon install,
+      network downloads, skills, or optional plugins need extra setup
+
+    The CLI wizard shows this timeline up front. You can skip optional steps and return
+    later with `openclaw configure`.
 
     If it hangs, use [Installer stuck](#quick-start-and-first-run-setup)
     and the fast debug loop in [I am stuck](#quick-start-and-first-run-setup).
@@ -566,7 +571,8 @@ What does onboarding actually do?
     - **Daemon install** (LaunchAgent on macOS; systemd user unit on Linux/WSL2)
     - **Health checks** and **skills** selection
 
-    It also warns if your configured model is unknown or missing auth.
+    It also sets duration expectations before the main prompts begin and warns if your
+    configured model is unknown or missing auth.
 
 
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Files"
 source: "https://docs.composio.dev/reference/v3/api-reference/files.md"
-source_hash: "71166241ba890898a03318c156e58f35114aca2008263066e14022f15e4bb20f"
+source_hash: "9680bd8760f3701b5d75ff28a61929865213e0d4a5944b4612a463ef85d3d7d2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/files.md"
@@ -17,9 +17,22 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/v3/api-reference/files.md
 
 
-{/* Auto-generated from OpenAPI spec. Do not edit directly. */}
+{/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/files.mdx, not this file. */}
 
-File management
+These endpoints handle files that tools read and write during execution. When a tool produces or consumes a file, Composio stores it in object storage and exchanges it through presigned URLs rather than streaming bytes through the API.
+
+You reach for these endpoints to:
+
+* **List files** that tools have generated, optionally filtered by app and action.
+* **Request an upload**: get a presigned S3 URL, `PUT` your file to it, then pass the returned reference into a tool's input.
+
+This keeps large payloads out of request bodies. Tools receive a file reference and resolve the underlying object on their side.
+
+> File uploads are a two-step flow. Call the upload-request endpoint to mint a presigned URL, then upload the file contents directly to that URL. The API never receives the raw bytes.
+
+If your agent works with files inside a session, prefer the session file mount, where the sandbox exposes uploaded files to running code. See the [remote sandbox](/docs/sandbox/remote) for the sandbox helpers (`upload_local_file`, `smart_file_extract`) that build on this storage.
+
+These endpoints use your project API key in the `x-api-key` header.
 
 # Endpoints
 

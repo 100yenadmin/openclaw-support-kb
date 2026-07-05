@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "92c93f81c8149d40ba4ec2c8e50b204a56ae7e7eaf9876973e9d0295d9412393"
+source_hash: "c673864f437a829a0518ae93e068e040cded3fedebfc73a405c7bcb5c8b80241"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -859,6 +859,12 @@ If no target resolves, OpenClaw returns a clear error
 | `/acp sessions`      | List recent ACP sessions from store.                      | `/acp sessions`                                               |
 | `/acp doctor`        | Backend health, capabilities, actionable fixes.           | `/acp doctor`                                                 |
 | `/acp install`       | Print deterministic install and enable steps.             | `/acp install`                                                |
+
+Runtime controls (`spawn`, `cancel`, `steer`, `close`, `status`, `set-mode`,
+`set`, `cwd`, `permissions`, `timeout`, `model`, and `reset-options`) require
+owner identity from external channels and `operator.admin` from internal Gateway
+clients. Authorized non-owner senders can still use `sessions`, `doctor`,
+`install`, and `help`.
 
 `/acp status` shows the effective runtime options plus runtime-level and
 backend-level session identifiers. Unsupported-control errors surface

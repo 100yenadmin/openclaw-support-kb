@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "74be191a4abaa9b2176edaf8234ef6d4ef3b6035acceaecab8781b82a3256e75"
+source_hash: "fe7c287dcff29dabd9a9733746849f62663ec5006d52199df045a4457af45622"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -17,13 +17,19 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/openai.md
 
 
-Composio integrates with OpenAI through the [Responses API](https://platform.openai.com/docs/api-reference/responses), [Chat Completions API](https://platform.openai.com/docs/api-reference/chat), and [Agents SDK](https://openai.github.io/openai-agents-python/). Pick the tab that matches your integration.
+The OpenAI provider formats Composio tools for OpenAI's function-calling and executes the tool calls the model returns. It works three ways:
+
+* The [Responses API](https://platform.openai.com/docs/api-reference/responses), the recommended way to build agentic flows, where you run the tool-call loop yourself.
+* The [Chat Completions API](https://platform.openai.com/docs/api-reference/chat), the classic message-based interface, where you also run the loop.
+* The [Agents SDK](https://openai.github.io/openai-agents-python/), where the SDK runs the loop and executes Composio tools for you.
+
+The OpenAI provider is the default provider for the Composio SDK, so you get it without configuring anything. Pick the tab that matches your integration.
 
 > Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
 
 ### Responses API
 
-The OpenAI Provider is the default provider for the Composio SDK. It transforms Composio tools into a format compatible with OpenAI function calling through the Responses API.
+The `OpenAIResponsesProvider` transforms Composio tools into OpenAI's function-calling format for the Responses API, then executes the tool calls the model returns and shapes the results into `function_call_output` items you feed back in.
 
 **Install**
 
@@ -49,7 +55,7 @@ OPENAI_API_KEY=xxxxxxxxx
 ```
 **Create session and run**
 
-The [Responses API](https://platform.openai.com/docs/api-reference/responses) is the recommended way to build agentic flows with OpenAI.
+The [Responses API](https://platform.openai.com/docs/api-reference/responses) is the recommended way to build agentic flows with OpenAI. You pass `previous_response_id` on each turn so the model keeps the prior context, and you send back only the new `function_call_output` items.
 
 **Python:**
 
@@ -77,7 +83,7 @@ response = client.responses.create(
     ]
 )
 
-# Agentic loop — keep executing tool calls until the model responds with text
+# Agentic loop: keep executing tool calls until the model responds with text
 while True:
     tool_calls = [o for o in response.output if o.type == "function_call"]
     if not tool_calls:
@@ -125,7 +131,7 @@ let response = await client.responses.create({
     ],
 });
 
-// Agentic loop — keep executing tool calls until the model responds with text
+// Agentic loop: keep executing tool calls until the model responds with text
 while (true) {
     const toolCalls = response.output.filter((o) => o.type === "function_call");
     if (toolCalls.length === 0) break;
@@ -155,7 +161,7 @@ for (const item of response.output) {
 ```
 ### Chat Completions
 
-The `OpenAIProvider` (Chat Completions) is the default provider used by the Composio SDK when no other provider is specified.
+The `OpenAIProvider` targets the Chat Completions API and is the default provider used by the Composio SDK when you do not specify one.
 
 **Install**
 
@@ -179,8 +185,7 @@ OPENAI_API_KEY=xxxxxxxxx
 ```
 **Create session and run**
 
-The [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) generates a model response from a list of messages.
-The `OpenAIProvider` (Chat Completions) is the default provider used by Composio SDK.
+The [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) generates a model response from a list of messages. You keep the full message list yourself and append each assistant message and its `tool` results before the next call.
 
 **Python:**
 
@@ -207,7 +212,7 @@ response = client.chat.completions.create(
     messages=messages,
 )
 
-# Agentic loop — keep executing tool calls until the model responds with text
+# Agentic loop: keep executing tool calls until the model responds with text
 while response.choices[0].message.tool_calls:
     results = composio.provider.handle_tool_calls(response=response, user_id="user_123")
     messages.append(response.choices[0].message)
@@ -254,7 +259,7 @@ let response = await client.chat.completions.create({
     messages: messages,
 });
 
-// Agentic loop — keep executing tool calls until the model responds with text
+// Agentic loop: keep executing tool calls until the model responds with text
 while (response.choices[0].message.tool_calls) {
     const results = await composio.provider.handleToolCalls("user_123", response);
     messages.push(response.choices[0].message);
@@ -276,7 +281,7 @@ console.log(response.choices[0].message.content);
 ```
 ### Agents SDK
 
-The OpenAI Agents SDK provider transforms Composio tools into the Agents SDK tool format with built-in execution.
+The `OpenAIAgentsProvider` transforms Composio tools into the Agents SDK tool format with execution built in, so the SDK runs the tool-call loop and you only define the agent and call `run`.
 
 **Install**
 
@@ -357,41 +362,19 @@ const result = await run(
 
 console.log(result.finalOutput);
 ```
-# Multi-turn chat
 
-For multi-turn apps, create the session once and reuse it across requests with `composio.use()`. Store the session ID in your database or chat state:
+# Provider specifics
 
-**Python:**
+The OpenAI integration ships three providers, one per API surface:
 
-```python
-from composio import Composio
+* **`OpenAIResponsesProvider`** for the Responses API. `handleToolCalls` executes the tool calls and returns `function_call_output` items keyed by `call_id`. You pair it with `previous_response_id` so you only resend new outputs each turn.
+* **`OpenAIProvider`** for the Chat Completions API. This is the SDK default, so `new Composio()` with no provider uses it. You keep the full message list and append each assistant message plus its `tool` results yourself.
+* **`OpenAIAgentsProvider`** for the Agents SDK. Tools come with execution wired in, so the SDK runs the loop and you do not call `handleToolCalls` at all.
 
-composio = Composio()
+Use the Responses or Agents provider for new agentic flows; reach for Chat Completions when you are extending an existing Chat Completions codebase.
 
-# First request — create and store the session ID
-session = composio.create(user_id="user_123")
-session_id = session.session_id
-# store session_id in your database or chat state
+# Next
 
-# Subsequent requests — reuse the session
-session = composio.use(session_id)
-tools = session.tools()
-```
-**TypeScript:**
-
-```typescript
-// @noErrors
-import { Composio } from '@composio/core';
-const composio = new Composio({ apiKey: 'your_api_key' });
-// ---cut---
-// First request — create and store the session ID
-const session = await composio.create("user_123");
-const sessionId = session.sessionId;
-// store sessionId in your database or chat state
-
-// Subsequent requests — reuse the session
-const session = await composio.use(sessionId);
-const tools = await session.tools();
-```
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

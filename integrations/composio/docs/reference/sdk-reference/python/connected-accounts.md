@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md"
-source_hash: "95c36d68c5a648ac1258f4044918ed3ffc9bc301baa19b6d112c2e94503eb40a"
+source_hash: "1c490fe5e92a45287051e5abc9011528a081426339d33f64624a6256b8694760"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/connected-accounts.md"
@@ -43,17 +43,50 @@ def update(nanoid: str, alias: str | None = ..., connection: connected_account_p
 
 ```python
 # Set an alias
-    composio.connected_accounts.update('ca_abc123', alias='work-gmail')
+composio.connected_accounts.update('ca_abc123', alias='work-gmail')
 
-    # Clear an alias
-    composio.connected_accounts.update('ca_abc123', alias='')
+# Clear an alias
+composio.connected_accounts.update('ca_abc123', alias='')
+```
+
+***
+
+## update\_acl()
+
+Update the per-user ACL on a SHARED connected account. Experimental — shape may change in future releases.  Only valid on SHARED connections; raises `ComposioAclOnlyForSharedError` on a PRIVATE connection. Omit a parameter to leave it unchanged; pass an empty list to clear an allow/deny list. At least one parameter must be provided.
+
+```python
+def update_acl(nanoid: str, allow_all_users: bool | None = ..., allowed_user_ids: List[str | None] = ..., not_allowed_user_ids: List[str | None] = ...) -> connected_account_patch_response.ConnectedAccountPatchRes...
+```
+
+**Parameters**
+
+| Name                    | Type                |
+| ----------------------- | ------------------- |
+| `nanoid`                | `str`               |
+| `allow_all_users?`      | `bool \| None`      |
+| `allowed_user_ids?`     | `List[str \| None]` |
+| `not_allowed_user_ids?` | `List[str \| None]` |
+
+**Returns**
+
+`connected_account_patch_response.ConnectedAccountPatchRes...` — Response with `id`, `status`, and `success`.
+
+**Example**
+
+```python
+composio.connected_accounts.update_acl(
+    'ca_abc',
+    allow_all_users=True,
+    not_allowed_user_ids=['user_bob'],
+)
 ```
 
 ***
 
 ## initiate()
 
-Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.  .. deprecated:: For Composio-managed (default) auth configs on redirectable OAuth schemes (OAuth1, OAuth2, DCR\_OAUTH), the legacy endpoint this method wraps is being retired: **2026-05-08** for new organizations and **2026-07-03** for all remaining organizations. After your org's cutover, this method will raise :class:`composio.exceptions.ComposioLegacyConnectedAccountsEndpointRetiredError` for that specific combination.  Use :meth:`ConnectedAccounts.link` for Composio-managed OAuth — it works for every redirectable scheme regardless of whether the auth config is Composio-managed or custom, and the return shape is the same.  Custom auth configs (your own OAuth app) and non-OAuth schemes (API key, bearer token, basic auth) are unaffected and continue to work on `initiate()`. See [https://docs.composio.dev/docs/changelog/2026/04/24](https://docs.composio.dev/docs/changelog/2026/04/24)
+Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.
 
 ```python
 def initiate(user_id: str, auth_config_id: str, callback_url: str | None = ..., allow_multiple: bool = ..., config: connected_account_create_params.ConnectionState | None = ..., alias: str | None = ...) -> ConnectionRequest
@@ -103,36 +136,36 @@ def link(user_id: str, auth_config_id: str, callback_url: str | None = ..., alia
 
 ```python
 # Create a connection request and redirect the user to the redirect url
-    connection_request = composio.connected_accounts.link('user_123', 'auth_config_123')
-    redirect_url = connection_request.redirect_url
-    print(f"Visit: {redirect_url} to authenticate your account")
+connection_request = composio.connected_accounts.link('user_123', 'auth_config_123')
+redirect_url = connection_request.redirect_url
+print(f"Visit: {redirect_url} to authenticate your account")
 
-    # Wait for the connection to be established
-    connected_account = connection_request.wait_for_connection()
+# Wait for the connection to be established
+connected_account = connection_request.wait_for_connection()
 
-    # Create a connection request with callback URL
-    connection_request = composio.connected_accounts.link(
-        'user_123',
-        'auth_config_123',
-        callback_url='https://your-app.com/callback'
-    )
-    redirect_url = connection_request.redirect_url
-    print(f"Visit: {redirect_url} to authenticate your account")
+# Create a connection request with callback URL
+connection_request = composio.connected_accounts.link(
+    'user_123',
+    'auth_config_123',
+    callback_url='https://your-app.com/callback'
+)
+redirect_url = connection_request.redirect_url
+print(f"Visit: {redirect_url} to authenticate your account")
 
-    # Wait for the connection to be established
-    connected_account = composio.connected_accounts.wait_for_connection(connection_request.id)
+# Wait for the connection to be established
+connected_account = composio.connected_accounts.wait_for_connection(connection_request.id)
 
-    connection_request = composio.connected_accounts.link(
-        'user_creator',
-        'auth_config_123',
-        experimental={
-            'account_type': 'SHARED',
-            'acl_config_for_shared': {
-                'allow_all_users': True,
-                'not_allowed_user_ids': ['user_bob'],
-            },
+connection_request = composio.connected_accounts.link(
+    'user_creator',
+    'auth_config_123',
+    experimental={
+        'account_type': 'SHARED',
+        'acl_config_for_shared': {
+            'allow_all_users': True,
+            'not_allowed_user_ids': ['user_bob'],
         },
-    )
+    },
+)
 ```
 
 ***

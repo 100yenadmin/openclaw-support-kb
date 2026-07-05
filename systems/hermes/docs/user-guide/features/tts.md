@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice & TTS"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tts"
-source_hash: "aa7072768f4b666356a929556e24bf7fa9ae07a929c487e25c44d6c9dd587b1e"
+source_hash: "20477b4c71bdc283c867132ec5c9ca2eb4ba7b4c953c5c8ff7245d3d14dedf5b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tts.md"
@@ -466,7 +466,7 @@ stt:
 
 **OpenAI API** — Accepts `VOICE_TOOLS_OPENAI_KEY` first and falls back to `OPENAI_API_KEY`. Supports `whisper-1`, `gpt-4o-mini-transcribe`, and `gpt-4o-transcribe`.
 
-**Mistral API (Voxtral Transcribe)** — Requires `MISTRAL_API_KEY`. Uses Mistral's [Voxtral Transcribe](https://docs.mistral.ai/capabilities/audio/speech_to_text/) models. Supports 13 languages, speaker diarization, and word-level timestamps. Install with `pip install hermes-agent[mistral]`.
+**Mistral API (Voxtral Transcribe)** — Requires `MISTRAL_API_KEY`. Uses Mistral's [Voxtral Transcribe](https://docs.mistral.ai/capabilities/audio/speech_to_text/) models. Supports 13 languages, speaker diarization, and word-level timestamps. Install with `cd ~/.hermes/hermes-agent && uv pip install -e ".[mistral]"`.
 
 **xAI Grok STT** — Requires `XAI_API_KEY`. Posts to `https://api.x.ai/v1/stt` as multipart/form-data. Good choice if you're already using xAI for chat or TTS and want one API key for everything. Auto-detection order puts it after Groq — explicitly set `stt.provider: xai` to force it.
 

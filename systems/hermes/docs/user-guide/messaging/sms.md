@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "SMS (Twilio)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/sms"
-source_hash: "af5f43d252d0ab7b39633bb0d224fd7095430a3364f445acf6007a22124f8dee"
+source_hash: "97da73bf25c8510f62b266f4c37ea7de538abad8943ef8779d00bb7cf7f18352"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/sms.md"
@@ -32,7 +32,7 @@ The SMS gateway shares credentials with the optional [telephony skill](/referenc
 - **Twilio account** — [Sign up at twilio.com](https://www.twilio.com/try-twilio) (free trial available)
 - **A Twilio phone number** with SMS capability
 - **A publicly accessible server** — Twilio sends webhooks to your server when SMS arrives
-- **aiohttp** — `pip install 'hermes-agent[sms]'`
+- **aiohttp** — `cd ~/.hermes/hermes-agent && uv pip install -e ".[sms]"`
 
 ---
 

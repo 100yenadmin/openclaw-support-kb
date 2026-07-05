@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md"
-source_hash: "32502f4fa1646dbafb50cc59e31bc17a6c85b3d0bfce9c806b31a7b0a8632d5a"
+source_hash: "ad52c316fae445d50edecd6e1b143cff014d50a65f50c79b68c0bdaa01154c3e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/managing-triggers.md"
@@ -17,9 +17,11 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md
 
 
+After a trigger is created, you manage it over its lifecycle: list active instances, pause one with `disable()`, bring it back with `enable()`, or remove it for good with `delete()`.
+
 # Listing active triggers
 
-List trigger instances that have been created. Results are cursor-paginated.
+List the trigger instances you've created. Results are cursor-paginated.
 
 **Python:**
 
@@ -33,7 +35,7 @@ active = composio.triggers.list_active(
 )
 
 for trigger in active.items:
-    print(f"{trigger.id} ({trigger.trigger_name}) - disabled_at={trigger.disabled_at}")
+    print(f"{trigger.id} ({trigger.trigger_name}) - disabled: {trigger.disabled_at is not None}")
 
 # Paginate with cursor
 if active.next_cursor:
@@ -95,15 +97,6 @@ await composio.triggers.disable('ti_abcd123');
 await composio.triggers.enable('ti_abcd123');
 ```
 
-You can also toggle triggers from the dashboard:
-
-1. Go to [Auth Configs](https://dashboard.composio.dev/~/project/auth-configs) and select your auth config
-2. Navigate to **Active Triggers**
-3. Toggle the trigger on or off
-
-![Enable/disable triggers from the dashboard](/images/trigger-enable-disable.png)
-*Enable/disable triggers from the dashboard*
-
 # Deleting triggers
 
 Permanently remove a trigger instance:
@@ -123,13 +116,5 @@ await composio.triggers.delete('ti_abcd123');
 ```
 
 > Deleting a trigger is permanent. Use `disable()` instead to temporarily stop receiving events.
-
-# What to read next
-
-- [Verifying webhooks](/docs/webhook-verification): Validate webhook signatures to ensure payloads are authentic
-
-- [Creating triggers](/docs/setting-up-triggers/creating-triggers): Create trigger instances to start receiving events from connected apps
-
-- [Subscribing to events](/docs/setting-up-triggers/subscribing-to-events): Set up webhooks or SDK subscriptions to handle trigger events
 
 ---

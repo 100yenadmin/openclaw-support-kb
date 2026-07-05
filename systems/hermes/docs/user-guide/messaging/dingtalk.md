@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "DingTalk"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/dingtalk"
-source_hash: "092c8d5b9afcb079f3e9078c8f2b75328d07bfb3a5550f5db8a7716515a4285a"
+source_hash: "0c1151fc3e159af238a5fd4d5f7a86968104d1970e0035de1ae9763ddd2c9a64"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/dingtalk.md"
@@ -57,7 +57,7 @@ This guide walks you through the full setup process — from creating your DingT
 Install the required Python packages:
 
 ```bash
-pip install "hermes-agent[dingtalk]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[dingtalk]"
 ```
 
 Or individually:

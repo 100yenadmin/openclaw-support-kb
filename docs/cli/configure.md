@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configure"
 source: "https://docs.openclaw.ai/cli/configure"
-source_hash: "a41698b8208912e88ee6a2ecac570184814342bb4f180397c12681b483d45f0c"
+source_hash: "f06f22e2a2c9ffb3693a131ce7a7357b9259ee31a0a4d18cd15c6c383052e3f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/configure.md"
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/cli/configure
 
 Interactive prompt for targeted changes to an existing setup: credentials, devices, agent defaults, gateway, channels, plugins, skills, and health checks.
 
-Use `openclaw onboard` for the full guided first-run journey, `openclaw setup` for the baseline config/workspace only, and `openclaw channels add` when you only need channel account setup.
+Use `openclaw onboard` or `openclaw setup` for the full guided first-run journey, `openclaw setup --baseline` for the baseline config/workspace only, and `openclaw channels add` when you only need channel account setup.
 
 Note
 

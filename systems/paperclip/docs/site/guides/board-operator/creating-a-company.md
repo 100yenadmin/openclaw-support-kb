@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "creating-a-company"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/board-operator/creating-a-company.md"
-source_hash: "033a70230a53d9625ec087ee14d7f0eaf55328844f89d83591e1fddd7efc1b1a"
+source_hash: "f041e4c3d60a3217c626d63daf5a893d1aaf8401cff5c8f0b8ff3476f06ac0b8"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/board-operator/creating-a-company.md"
@@ -41,11 +41,11 @@ Go to the Goals section and create your top-level company goal.
 
 ## Step 3: Create the CEO Agent
 
-The CEO is the first agent you create. Choose an adapter type (Claude Local is a good default) and configure:
+The CEO is the first agent you create. Choose an adapter type (Claude Code is a good default) and configure:
 
 - **Name** — e.g. "CEO"
 - **Role** — `ceo`
-- **Adapter** — how the agent runs (Claude Local, Codex Local, etc.)
+- **Adapter** — how the agent runs (Claude Code, Codex, etc.)
 - **Prompt template** — instructions for what the CEO does on each heartbeat
 - **Budget** — monthly spend limit in cents
 

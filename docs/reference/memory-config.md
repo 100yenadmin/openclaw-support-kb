@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "6db7f342dc8f3b1e371e51845bc1361a912f56d10edc53060199c7301995c40a"
+source_hash: "b055912147f3a281f0f1ee3e35d2bd7536c5c02bb3928f8080d89b514f0a6f53"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -475,6 +475,70 @@ Warning
 
 Session indexing is opt-in and runs asynchronously. Results can be slightly stale. Session logs live on disk, so treat filesystem access as the trust boundary.
 
+Session transcript hits also obey
+[`tools.sessions.visibility`](/gateway/config-tools#toolssessions). The default
+`tree` visibility only exposes the current session and sessions it spawned. To
+recall an unrelated same-agent gateway-dispatched session from a different
+session, such as a DM, intentionally widen visibility to `agent` (or `all` only
+when cross-agent recall is also required and agent-to-agent policy allows it).
+
+The examples below place these settings under `agents.defaults`. You can also
+apply equivalent `memorySearch` settings in a per-agent override when only one
+agent should index and search session transcripts.
+
+For same-agent gateway-to-DM recall:
+
+Tabs
+
+
+Builtin backend
+
+    ```json5
+    {
+      agents: {
+        defaults: {
+          memorySearch: {
+            experimental: { sessionMemory: true },
+            sources: ["memory", "sessions"],
+          },
+        },
+      },
+      tools: {
+        sessions: { visibility: "agent" },
+      },
+    }
+    ```
+
+
+QMD backend
+
+    ```json5
+    {
+      agents: {
+        defaults: {
+          memorySearch: {
+            experimental: { sessionMemory: true },
+            sources: ["memory", "sessions"],
+          },
+        },
+      },
+      memory: {
+        backend: "qmd",
+        qmd: {
+          sessions: { enabled: true },
+        },
+      },
+      tools: {
+        sessions: { visibility: "agent" },
+      },
+    }
+    ```
+
+
+When using QMD, `agents.defaults.memorySearch.experimental.sessionMemory` and
+`sources: ["sessions"]` do not by themselves export transcripts into QMD. Set
+`memory.qmd.sessions.enabled: true` as well.
+
 ---
 
 ## SQLite vector acceleration (sqlite-vec)
@@ -510,7 +574,7 @@ Set `memory.backend = "qmd"` to enable. All QMD settings live under `memory.qmd`
 | `rerank`                 | `boolean` | --       | Set to `false` with `searchMode: "query"` and QMD 2.1+ to skip QMD reranking          |
 | `includeDefaultMemory`   | `boolean` | `true`   | Auto-index `MEMORY.md` + `memory/**/*.md`                                             |
 | `paths[]`                | `array`   | --       | Extra paths: `{ name, path, pattern? }`                                               |
-| `sessions.enabled`       | `boolean` | `false`  | Index session transcripts                                                             |
+| `sessions.enabled`       | `boolean` | `false`  | Export session transcripts into QMD                                                   |
 | `sessions.retentionDays` | `number`  | --       | Transcript retention                                                                  |
 | `sessions.exportDir`     | `string`  | --       | Export directory                                                                      |
 

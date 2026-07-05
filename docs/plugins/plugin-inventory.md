@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "926554f22ba33dc5623fe3a75fef270ad909b1b796aa1a28e41f74aafeae7124"
+source_hash: "1812cf27476f10fc0817686d93cad1afd2933d5bb5a346a9671aa2ef80d80652"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-inventory.md"
@@ -57,7 +57,7 @@ Each entry lists the package, distribution route, and description.
 
 ## Core npm package
 
-59 plugins
+60 plugins
 
 - **[admin-http-rpc](/plugins/reference/admin-http-rpc)** (`@openclaw/admin-http-rpc`) - included in OpenClaw. OpenClaw admin HTTP RPC endpoint.
 
@@ -74,6 +74,8 @@ Each entry lists the package, distribution route, and description.
 - **[byteplus](/plugins/reference/byteplus)** (`@openclaw/byteplus-provider`) - included in OpenClaw. Adds BytePlus, BytePlus Plan model provider support to OpenClaw.
 
 - **[canvas](/plugins/reference/canvas)** (`@openclaw/canvas-plugin`) - included in OpenClaw. Experimental Canvas control and A2UI rendering surfaces for paired nodes.
+
+- **[clawrouter](/plugins/reference/clawrouter)** (`@openclaw/clawrouter`) - included in OpenClaw. Adds ClawRouter model provider support to OpenClaw.
 
 - **[codex-supervisor](/plugins/reference/codex-supervisor)** (`@openclaw/codex-supervisor`) - included in OpenClaw. Supervise Codex app-server sessions from OpenClaw.
 

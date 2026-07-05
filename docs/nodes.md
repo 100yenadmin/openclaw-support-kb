@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes"
-source_hash: "eb50f1e180d9bdf68fc81d2479cda4162065d3c26461bed7439389bb63902ff4"
+source_hash: "cab4d1c2ac6cee27ba8e2a09b354cccb9339e4002830ce86939916a43189a7cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes.md"
@@ -189,6 +189,14 @@ Related:
 - [Node host CLI](/cli/node)
 - [Exec tool](/tools/exec)
 - [Exec approvals](/tools/exec-approvals)
+
+### Local model inference
+
+A desktop or server node can expose chat-capable models from an Ollama server
+running on that node. Agents use the Ollama plugin's `node_inference` tool to
+discover installed models and run a bounded prompt remotely; the Gateway does
+not need direct network access to Ollama. See [Ollama node-local inference](/providers/ollama#node-local-inference)
+for setup, model filtering, and direct verification commands.
 
 ## Invoking commands
 

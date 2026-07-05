@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS IPC"
 source: "https://docs.openclaw.ai/platforms/mac/xpc"
-source_hash: "7926e0f73d82835455cfef7b54c89c19cda687c475a28cb3dc9d0fe6f3a16ce8"
+source_hash: "3846407ec00c325219e8dc55490f988b19cebb5cc1ed63fd053b2be73e3112e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/xpc.md"
@@ -29,6 +29,10 @@ Source: https://docs.openclaw.ai/platforms/mac/xpc
 
 - The app runs the Gateway (local mode) and connects to it as a node.
 - Agent actions are performed via `node.invoke` (e.g. `system.run`, `system.notify`, `canvas.*`).
+- Common Mac node commands include `canvas.*`, `camera.snap`, `camera.clip`,
+  `screen.snapshot`, `screen.record`, `system.run`, and `system.notify`.
+- The node reports a `permissions` map so agents can see whether screen,
+  camera, microphone, speech, automation, or accessibility access is available.
 
 ### Node service + app IPC
 

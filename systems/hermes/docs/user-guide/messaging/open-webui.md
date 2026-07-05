@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Open WebUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/open-webui"
-source_hash: "44b92846069a5e2dd56bfb06e2e19e97b54c732b6246ccc99d913d6ce5468824"
+source_hash: "eaf7f006dc58481778081b71b0ffff51efe5c67b9971cfd5a8a39b9d8829d678"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/open-webui.md"
@@ -42,44 +42,6 @@ For example, if a laptop points Open WebUI or another OpenAI-compatible client a
 Open WebUI talks to Hermes server-to-server, so you do not need `API_SERVER_CORS_ORIGINS` for this integration.
 
 ## Quick Setup
-
-### One-command local bootstrap (macOS/Linux, no Docker)
-
-If you want Hermes + Open WebUI wired together locally with a reusable launcher, run:
-
-```bash
-cd ~/.hermes/hermes-agent
-bash scripts/setup_open_webui.sh
-```
-
-What the script does:
-
-- ensures `~/.hermes/.env` contains `API_SERVER_ENABLED`, `API_SERVER_HOST`, `API_SERVER_KEY`, `API_SERVER_PORT`, and `API_SERVER_MODEL_NAME`
-- restarts the Hermes gateway so the API server comes up
-- installs Open WebUI into `~/.local/open-webui-venv`
-- writes a launcher at `~/.local/bin/start-open-webui-hermes.sh`
-- on macOS, installs a `launchd` user service; on Linux with `systemd --user`, installs a user service there
-
-Defaults:
-
-- Hermes API: `http://127.0.0.1:8642/v1`
-- Open WebUI: `http://127.0.0.1:8080`
-- model name advertised to Open WebUI: `Hermes Agent`
-
-Useful overrides:
-
-```bash
-OPEN_WEBUI_NAME='My Hermes UI' \
-OPEN_WEBUI_ENABLE_SIGNUP=true \
-HERMES_API_MODEL_NAME='My Hermes Agent' \
-bash scripts/setup_open_webui.sh
-```
-
-On Linux, automatic background service setup requires a working `systemd --user` session. If you are on a headless SSH box and want to skip service installation, run:
-
-```bash
-OPEN_WEBUI_ENABLE_SERVICE=false bash scripts/setup_open_webui.sh
-```
 
 ### 1. Enable the API server
 

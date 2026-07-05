@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tips & Best Practices"
 source: "https://hermes-agent.nousresearch.com/docs/guides/tips"
-source_hash: "2d4c7e01205ce09edadde67274e6e4295c53245f5a4791b0f21488fef6bb9885"
+source_hash: "99ed3a5f30edc634c4fc745b93af5af9bb910218ca931f1502d09bd9b9f9a324"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/tips.md"
@@ -146,7 +146,7 @@ Memory is a frozen snapshot — changes made during a session don't appear in th
 
 ### Don't Break the Prompt Cache
 
-Most LLM providers cache the system prompt prefix. If you keep your system prompt stable (same context files, same memory), subsequent messages in a session get **cache hits** that are significantly cheaper. Avoid changing the model or system prompt mid-session.
+Most LLM providers cache the conversation prefix (system prompt + history). If you keep your system prompt stable (same context files, same memory), subsequent messages in a session get **cache hits** that are significantly cheaper. The cache is keyed to the model and account — so an explicit `/model` switch, an [automatic provider fallback](../user-guide/features/fallback-providers.md), or a [credential-pool rotation](../user-guide/features/credential-pools.md) all force the next turn to re-read the entire conversation at full input price. Occasional switches are fine; frequent switching in a long session multiplies your cost.
 
 ### Use /compress Before Hitting Limits
 
@@ -162,7 +162,7 @@ Instead of running terminal commands one at a time, ask the agent to write a scr
 
 ### Choose the Right Model
 
-Use `/model` to switch models mid-session. Use a frontier model (Claude Sonnet/Opus, GPT-4o) for complex reasoning and architecture decisions. Switch to a faster model for simple tasks like formatting, renaming, or boilerplate generation.
+Use `/model` to switch models mid-session. Use a frontier model (Claude Sonnet/Opus, GPT-4o) for complex reasoning and architecture decisions. Switch to a faster model for simple tasks like formatting, renaming, or boilerplate generation. Keep in mind each switch resets the prompt cache (see above), so on long sessions it's often cheaper to start a fresh session on the other model than to bounce back and forth.
 
 :::tip
 Run `/usage` periodically to see your token consumption. Run `/insights` for a broader view of usage patterns over the last 30 days.

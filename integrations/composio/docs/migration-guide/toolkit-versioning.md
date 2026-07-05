@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkit versioning migration"
 source: "https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md"
-source_hash: "fdafa84cd39b07977b518cbdbb47d73d87aaa17783081a3a21f76a548ba78c2c"
+source_hash: "22e543ed0fce3d1a3fa75226db0497f52bd6ad7b3dbeea2d49faf9c5fa198736"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/toolkit-versioning.md"
@@ -160,12 +160,8 @@ const result = await composio.tools.execute({
 
 > The `dangerouslySkipVersionCheck` flag is only for migration or debugging. Never use in production.
 
-# What to read next
+# Next
 
 - [Migrate to sessions](/docs/migration-guide/direct-to-sessions): Move from older tool execution patterns to sessions
-
-- [Configuring sessions](/docs/configuring-sessions): Control toolkits, auth configs, connected accounts, and tool availability
-
-- [Tools and toolkits](/docs/tools-and-toolkits): Understand tool discovery and toolkit access in sessions
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "76540a75fa678af4c0f489554a1f447bb7e4fdcc7f6a482f66f6162b82e6a403"
+source_hash: "7d71502882e8dc2c075ab24fce5150dff7b339f01bb2c4b6fce4332e00833ba8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -98,6 +98,7 @@ exhaustive):
 | `tools.exec.host_sandbox_no_sandbox_defaults`                 | warn          | `exec host=sandbox` fails closed when sandbox is off                                 | `tools.exec.host`, `agents.defaults.sandbox.mode`                                                    | no       |
 | `tools.exec.host_sandbox_no_sandbox_agents`                   | warn          | Per-agent `exec host=sandbox` fails closed when sandbox is off                       | `agents.list[].tools.exec.host`, `agents.list[].sandbox.mode`                                        | no       |
 | `tools.exec.security_full_configured`                         | warn/critical | Host exec is running with `security="full"`                                          | `tools.exec.security`, `agents.list[].tools.exec.security`                                           | no       |
+| `tools.exec.agent_skill_mcp_boundary_drift`                   | warn          | Agent skill allowlists are present while host exec can reach MCP clients/registries  | `agents.list[].tools.exec.*`, sandbox/OS isolation, MCP server credentials                           | no       |
 | `tools.exec.fs_tools_disabled_but_exec_enabled`               | warn          | Filesystem tool policy does not make shell execution read-only                       | `tools.deny`, `agents.list[].tools.deny`, `agents.*.sandbox.workspaceAccess`                         | no       |
 | `tools.exec.auto_allow_skills_enabled`                        | warn          | Exec approvals trust skill bins implicitly                                           | host approvals file                                                                                  | no       |
 | `tools.exec.allowlist_interpreter_without_strict_inline_eval` | warn          | Interpreter allowlists permit inline eval without forced reapproval                  | `tools.exec.strictInlineEval`, `agents.list[].tools.exec.strictInlineEval`, exec approvals allowlist | no       |

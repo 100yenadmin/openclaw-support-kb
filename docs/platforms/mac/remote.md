@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote control"
 source: "https://docs.openclaw.ai/platforms/mac/remote"
-source_hash: "7fd26fc5252adebe0df8f5c4948a9af19db7f0149b420e0e5c6fbe33619db0fa"
+source_hash: "d0203aac76ff1be6de571200fdb14e587323cd27bcfb7a866aea7cc57188808e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/remote.md"
@@ -28,10 +28,17 @@ Remote mode supports two transports:
 - **SSH tunnel** (default): Uses `ssh -N -L ...` to forward the gateway port to localhost. The gateway will see the node's IP as `127.0.0.1` because the tunnel is loopback.
 - **Direct (ws/wss)**: Connects straight to the gateway URL. The gateway sees the real client IP.
 
+The app disables SSH connection multiplexing and post-authentication backgrounding for app-owned SSH processes so it can monitor and restart the exact process even when the selected alias enables `ControlMaster` or `ForkAfterAuthentication`.
+
+SSH host-key verification is strict by default because gateway credentials travel through this tunnel. For a managed SSH alias whose trust behavior you explicitly intend to use, opt in with `openclaw-mac configure-remote --ssh-target <alias> --ssh-host-key-policy openssh` or set `gateway.remote.sshHostKeyPolicy` to `"openssh"`. This opt-in uses the effective OpenSSH host-key policy; review the alias and any matching `Host *` or system configuration first. Changing the SSH target in the app or with `configure-remote` resets the policy to `strict` unless you explicitly opt in again.
+
 In SSH tunnel mode, discovered LAN/tailnet hostnames are saved as
 `gateway.remote.sshTarget`. The app keeps `gateway.remote.url` on the local
 tunnel endpoint, for example `ws://127.0.0.1:18789`, so CLI, Web Chat, and
 the local node-host service all use the same safe loopback transport.
+When discovery returns both raw Tailnet IPs and stable hostnames, the app
+prefers Tailscale MagicDNS or LAN names so remote connections survive address
+changes better.
 If the local tunnel port differs from the remote gateway port, set
 `gateway.remote.remotePort` to the port on the remote host.
 
@@ -97,7 +104,7 @@ the selected transport when it starts.
 ## Security notes
 
 - Prefer loopback binds on the remote host and connect via SSH, Tailscale Serve, or a trusted Tailnet/LAN direct URL.
-- SSH tunneling uses strict host-key checking; trust the host key first so it exists in `~/.ssh/known_hosts`.
+- SSH tunneling requires an already trusted host key by default. Trust the host key first so it exists in the configured known-hosts file, or explicitly choose `gateway.remote.sshHostKeyPolicy: "openssh"` for a managed alias whose OpenSSH trust policy you accept.
 - If you bind the Gateway to a non-loopback interface, require valid Gateway auth: token, password, or an identity-aware reverse proxy with `gateway.auth.mode: "trusted-proxy"`.
 - See [Security](/gateway/security) and [Tailscale](/gateway/tailscale).
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/api-reference/mcp.md"
-source_hash: "de4328f0bc139d7a9dbdb6d514f16c93e96e1d73cf059bc4408cf36b550cf536"
+source_hash: "706d41ee38e03843aaf9813647a47d53e607b10a5b41854cc7acf9aaafeaee5d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/mcp.md"
@@ -17,9 +17,15 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/api-reference/mcp.md
 
 
-{/* Auto-generated from OpenAPI spec. Do not edit directly. */}
+{/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/mcp.mdx, not this file. */}
 
-MCP server management
+> This API is deprecated. Use a session's MCP endpoint instead. Create a session with `composio.create(userId, { mcp: true })`, then read the hosted URL off `session.mcp.url`. See [Using sessions via MCP](/docs/sessions-via-mcp) and [migrating MCP servers to sessions](/docs/migration-guide/mcp-servers-to-sessions).
+
+The MCP API is the standalone, hosted [Model Context Protocol](https://modelcontextprotocol.io) server-management surface. It let you stand up and manage a separate server config per toolkit, then mint a per-user MCP URL that any MCP-compatible client could connect to.
+
+These endpoints create, list, update, and delete MCP servers, including custom servers spanning multiple apps, generate per-user MCP URLs, and manage per-user server instances and their connected accounts.
+
+Sessions replace this. A single `composio.create(...)` gives you the same MCP URL pattern, keyed by `user_id`, while handling tool discovery, authentication, context, and versioning for you. Your existing tools, auth configs (`ac_…`), and connected accounts carry over with no re-authentication. To pin a session to a fixed tool list the way a server did, use the direct-tools preset described in [Configuring sessions](/docs/configuring-sessions).
 
 # Endpoints
 

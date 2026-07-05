@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "d90af438238c3c0fcdbe323838f6a10ae93752c1ae012e86c62ce0b0b8434c0e"
+source_hash: "b119fcb5cd47f2d9f91ba2f690ff9bc18fa3227d535365b9ee252d14d229c2d8"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -294,6 +294,12 @@ Paperclip also persists an empty `OPENAI_API_KEY` override for those agents so a
 If the `codex` CLI is not installed or not on `PATH`, `codex_local` agent runs fail at execution time with a clear adapter error. Quota polling uses a short-lived `codex app-server` subprocess: when `codex` cannot be spawned, that provider reports `ok: false` in aggregated quota results and the API server keeps running (it must not exit on a missing binary).
 
 Local adapters require their corresponding CLI/session setup on the machine running Paperclip. External adapters are installed through the adapter/plugin flow and should not require hardcoded imports in `server/` or `ui/`.
+
+## Config Freshness
+
+Agent, project, environment, secret, skill, and workspace config edits are sampled at the next run boundary. A heartbeat that is already running finishes with the config it started with.
+
+When effective run config changes, Paperclip may intentionally skip a saved adapter session, refresh persisted workspace runtime config, replace a reused execution workspace, or avoid reusing a sandbox/environment lease. Fresh execution can lose adapter-specific session, workspace, or sandbox state; correctness of the next run's config takes priority over continuity. Plain environment values affect freshness through value hashes; run result JSON and workspace operation logs expose only the non-sensitive freshness decision categories, without storing secret values, full env maps, provider credentials, or private path details.
 
 ## Worktree-local Instances
 
@@ -727,6 +733,13 @@ The board UI generates agent onboarding prompts from the add-agent modal (`+` in
 - `GET /api/invites/:token/onboarding.txt` returns a plain-text onboarding doc intended for both human operators and agents (llm.txt-style handoff), including optional inviter message and suggested network host candidates.
 - `GET /api/skills/index` lists available skill documents.
 - `GET /api/skills/paperclip` returns the Paperclip heartbeat skill markdown.
+
+Hermes gateway agents use this same generic agent invite flow with
+`adapterType=hermes_gateway` and `agentDefaultsPayload.apiBaseUrl` /
+`agentDefaultsPayload.apiKey`. See
+[HERMES_GATEWAY_ONBOARDING.md](./HERMES_GATEWAY_ONBOARDING.md) for the full
+operator path, including Hermes credentials, invite approval, key claim, and
+fresh-state Docker smoke setup.
 
 ## OpenClaw Join Smoke Test
 

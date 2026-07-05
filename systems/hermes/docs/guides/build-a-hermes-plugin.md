@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin"
-source_hash: "c11569fe94255ced73492579264e946ad181578cf9e75000c1f647bbfa31d815"
+source_hash: "8bf166cef655b540d6ed806e2d7fa63ace964eff278029490e470719dfc86f84"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/build-a-hermes-plugin.md"
@@ -42,6 +42,10 @@ Hermes has several distinct pluggable interfaces — some use Python `register_*
 | A first-class **core** inference provider (not a plugin) | [Adding Providers](/developer-guide/adding-providers) |
 
 See the full [Pluggable interfaces table](/user-guide/features/plugins#pluggable-interfaces--where-to-go-for-each) for a consolidated view of every extension surface including config-driven (TTS, STT, MCP, shell hooks) and drop-in directory (gateway hooks) styles.
+:::
+
+:::caution Third-party-product plugins ship standalone — not into the core tree
+Plugins that integrate **someone else's product or project** — observability/metrics backends, vendor SaaS connectors, analytics dashboards, paid-service tie-ins — are built and distributed as **standalone plugin repos**, not merged into `NousResearch/hermes-agent`. Users install them into `~/.hermes/plugins/` or via a pip entry point; everything in this guide works the same way from a standalone repo. This is a coupling-and-maintenance decision (the core moves fast and we don't own your backend), not a quality bar — a plugin can be excellent and still belong in its own repo. Promote it in the Nous Research Discord `#plugins-skills-and-skins` channel. See [CONTRIBUTING.md](https://github.com/NousResearch/hermes-agent/blob/main/CONTRIBUTING.md) for the policy.
 :::
 
 ## What you're building
@@ -638,6 +642,20 @@ return None
 
 Any non-None, non-empty return with a `"context"` key (or a plain non-empty string) is collected and appended to the user message for the current turn.
 
+#### Oversized-context spill
+
+Per-hook context is capped at `10,000` characters by default. Anything above the cap is written to `$HERMES_HOME/hook_outputs/<session_id>/<uuid>.txt` and replaced with a head/tail preview plus the saved path. The model can read the full content via `read_file` or `terminal` if it genuinely needs it. This keeps a runaway plugin from inflating every subsequent turn's prompt and blowing out the prompt cache prefix. Tune in `config.yaml`:
+
+```yaml
+hooks:
+  output_spill:
+    enabled: true          # default: true
+    max_chars: 10000       # default; set higher to opt out of spilling
+    preview_head: 500      # chars shown at the top of the preview
+    preview_tail: 500      # chars shown at the bottom of the preview
+    # directory: null      # default: $HERMES_HOME/hook_outputs
+```
+
 #### How injection works
 
 Injected context is appended to the **user message**, not the system prompt. This is a deliberate design choice:
@@ -1207,6 +1225,10 @@ pip install hermes-plugin-calculator
 ```
 
 ## Distribute for NixOS
+
+:::warning Nix is no longer explicitly supported
+Nix/NixOS is no longer an explicitly supported install path (best-effort only) — see [Nix Setup](/getting-started/nix-setup). This section is kept for users already deploying on NixOS.
+:::
 
 NixOS users can install your plugin declaratively if you provide a `pyproject.toml` with entry points:
 

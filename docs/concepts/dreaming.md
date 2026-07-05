@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "713572bd73577f18a125acca65176a35ffc87adc6d7cffeb68babf139729f2fe"
+source_hash: "fe254ca09cb697742201a9b628e097a8c4ff752664659dd0df312269e384c7fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/dreaming.md"
@@ -213,6 +213,10 @@ Custom sweep cadence
 /dreaming off
 /dreaming help
 ```
+
+`/dreaming on` and `/dreaming off` change gateway-wide configuration. Channel
+callers must be owners, and Gateway clients must have `operator.admin`.
+`/dreaming status` and `/dreaming help` remain read-only.
 
 ## CLI workflow
 

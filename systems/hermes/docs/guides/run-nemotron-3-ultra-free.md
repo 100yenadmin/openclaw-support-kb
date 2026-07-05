@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Nemotron 3 Ultra free in Hermes Agent"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-nemotron-3-ultra-free"
-source_hash: "665d405727a93ce80fa1ae8d29ea06aa8069866417dc240c6fe9fd42709ec75a"
+source_hash: "ff32dc0185646a56c03dcf92e001762e6a0b6cfb23c16ddb7eebed0f30c9c4a5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-nemotron-3-ultra-free.md"
@@ -126,7 +126,7 @@ Already set up with another model?
 
 - **Don't see the model in the list?** Make sure you finished the Nous Portal connection and that you're on the **Free** plan. In the CLI, `hermes portal info` confirms you're logged in and routing through Nous.
 - **Picked the wrong variant?** Re-select `nvidia/nemotron-3-ultra:free` — the `:free` suffix is required to stay on the no-cost tier.
-- **Browser didn't open / you're on a remote host (CLI)?** See [OAuth over SSH / Remote Hosts](/guides/oauth-over-ssh) for port-forwarding and manual-paste workarounds.
+- **Browser didn't open / you're on a remote host (CLI)?** See [OAuth over SSH / Remote Hosts](/guides/oauth-over-ssh) for port-forwarding workarounds.
 
 ## See also
 

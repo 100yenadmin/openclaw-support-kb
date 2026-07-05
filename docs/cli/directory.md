@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "263dfef71f980548dd0f0aebca05bda01eb98625e406d38bdabe9e3d6afb3797"
+source_hash: "7a387eac6cb6d429eebf9e412c64ebd71b8ae9a44f13fa6950edbaf212977247"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/directory.md"
@@ -40,6 +40,7 @@ openclaw message send --channel slack --target user:U012ABCDEF --message "hello"
 ## ID formats (by channel)
 
 - WhatsApp: `+15551234567` (DM), `1234567890-1234567890@g.us` (group), `120363123456789@newsletter` (Channel/Newsletter outbound target)
+- Signal: configured aliases resolve to E.164/UUID DM targets or `group:<id>` group targets
 - Telegram: `@username` or numeric chat id; groups are numeric ids
 - Slack: `user:U…` and `channel:C…`
 - Discord: `user:<id>` and `channel:<id>`

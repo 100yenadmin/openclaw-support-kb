@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "05a9406470f9380ed4ce41956eb83e324a41744e45a9e688b72be07ef9b3639d"
+source_hash: "f627ace422def419788b97aefed736c32c207b12a7750cee7657f2508ef94631"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -220,6 +220,19 @@ Key policy rules:
   separate: legacy Codex model refs are legacy config repaired by doctor, while the bundled
   `codex` plugin owns Codex app-server runtime for canonical `openai/*` agent
   refs, explicit `agentRuntime.id: "codex"`, and legacy `codex/*` refs.
+
+When `plugins.allow` is unset and non-bundled plugins are auto-discovered from
+the workspace or global plugin roots, startup logs
+`plugins.allow is empty; discovered non-bundled plugins may auto-load: ...`.
+The warning includes discovered plugin ids and, for short lists, a minimal
+`plugins.allow` snippet. Run
+[`openclaw plugins list --enabled --verbose`](/cli/plugins#list) or
+[`openclaw plugins inspect <id>`](/cli/plugins#inspect) with the listed plugin
+id before copying trusted plugins into `openclaw.json`. The same trust-pinning
+guidance applies when diagnostics say a plugin loaded
+`without install/load-path provenance`: inspect that plugin id, then pin the
+trusted id in `plugins.allow` or reinstall from a trusted source so OpenClaw
+records install provenance.
 
 Run `openclaw doctor` or `openclaw doctor --fix` when config validation reports
 stale plugin ids, allowlist/tool mismatches, or legacy bundled plugin paths.

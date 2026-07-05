@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "65e897dfadce75e91af3ae60a82ad89075376f73acb8fdd10f332974f49b7ca2"
+source_hash: "5117de8c976be0fe73a6089ca4a300d69a800126c3bf14b1e04bdf25471a6de3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manifest.md"
@@ -198,6 +198,7 @@ or npm install metadata. Those belong in your plugin code and `package.json`.
 | `skills`                             | No       | `string[]`                       | Skill directories to load, relative to the plugin root.                                                                                                                                                                                         |
 | `name`                               | No       | `string`                         | Human-readable plugin name.                                                                                                                                                                                                                     |
 | `description`                        | No       | `string`                         | Short summary shown in plugin surfaces.                                                                                                                                                                                                         |
+| `icon`                               | No       | `string`                         | HTTPS image URL for marketplace/catalog cards. ClawHub accepts any valid `https://` URL and falls back to the default plugin icon when this is omitted or invalid.                                                                              |
 | `version`                            | No       | `string`                         | Informational plugin version.                                                                                                                                                                                                                   |
 | `uiHints`                            | No       | `Record<string, object>`         | UI labels, placeholders, and sensitivity hints for config fields.                                                                                                                                                                               |
 

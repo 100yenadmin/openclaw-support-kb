@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "7cad17df61776c4d5b626798e9fca3a4e5de162d099b8da101f7d7ee7245dad9"
+source_hash: "478026a84713db44880017cd50b1cd12e7b7dffcacfa850e842f7876813c0491"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -264,10 +264,8 @@ If you've set up white-labeled OAuth screens with custom auth configs, those car
 
 See [White-labeling authentication](/docs/white-labeling-authentication) for more.
 
-# Get started
+# Next
 
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, and session methods
-
-- [What is a session?](/docs/how-composio-works): Understand how sessions scope tools and connected accounts
 
 ---

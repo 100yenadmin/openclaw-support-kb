@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "1fb2d29b406516a22d77da672dd93f673f52489bacc21f306aa657807b4dd463"
+source_hash: "aedccd745216be4726ed00508604f7056802bb5a5024084e3ad2f17777aa0255"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/discord.md"
@@ -88,6 +88,7 @@ Generate an invite URL and add the bot to your server
 
     **General Permissions**
       - View Channels
+
     **Text Permissions**
       - Send Messages
       - Read Message History
@@ -105,7 +106,10 @@ Enable Developer Mode and collect your IDs
 
     Back in the Discord app, you need to enable Developer Mode so you can copy internal IDs.
 
-    1. Click **User Settings** (gear icon next to your avatar) → **Advanced** → toggle on **Developer Mode**
+    1. Click **User Settings** (gear icon next to your avatar) → Scroll to **Developer** in sidebar → toggle on **Developer Mode**
+
+        *(Note: On the Discord mobile app, Developer Mode is under **App Settings** → **Advanced**)*
+
     2. Right-click your **server icon** in the sidebar → **Copy Server ID**
     3. Right-click your **own avatar** → **Copy User ID**
 
@@ -1023,6 +1027,7 @@ Config writes
 Gateway proxy
 
     Route Discord gateway WebSocket traffic and startup REST lookups (application ID + allowlist resolution) through an HTTP(S) proxy with `channels.discord.proxy`.
+    Discord Gateway WebSocket proxying is explicit; WebSocket connections do not inherit ambient proxy environment variables from the Gateway process. Startup REST lookups use this proxy when `channels.discord.proxy` is configured.
 
 ```json5
 {

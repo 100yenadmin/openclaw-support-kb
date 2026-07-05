@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "c848fa472832a90000c7e0d62874be03cc3503b3bc7e675a1c747b54f98685c0"
+source_hash: "8cf075a9bcf1416d2ff190e9611b4e83f3edc33aba80325b5851ca323b6f4ac2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -54,7 +54,7 @@ We have updated several key terms in the SDK and API to improve clarity and cons
 | Apps          | Toolkits           | A collection of tools grouped under a single application                                                                             |
 | Integration   | Auth Config        | Configuration containing developer credentials and application-level settings such as scopes and API endpoints. Scoped to a toolkit. |
 | Connection    | Connected accounts | User-linked accounts associated with a toolkit                                                                                       |
-| Entity ID     | User ID            | The identifier of the user performing the action (UUID or email)                                                                     |
+| Entity ID     | userID             | The identifier of the user performing the action (UUID or email)                                                                     |
 | Trigger       | Trigger            | An event that can be subscribed to                                                                                                   |
 | Toolsets      | Providers          | LLM or agent framework that can be used with Composio to create agents                                                               |
 
@@ -92,11 +92,11 @@ npm install @composio/core
 
 Both SDKs now implement proper namespacing for each concept.
 
-## User ID scoping
+## UserID scoping
 
 The concept of `entity_id` has been expanded and renamed to `user_id`.
 
-All operations are now scoped to a user ID, including:
+All operations are now scoped to a userID, including:
 
 * Fetching tools
 * Initiating connections
@@ -603,7 +603,7 @@ const session = await composio.create("default", {
   experimental: { customTools: [getIssueInfo] },
 });
 ```
-For more information, see [Custom Tools and Toolkits](/docs/toolkits/custom-tools-and-toolkits).
+For more information, see [Custom Tools and Toolkits](/docs/extending-sessions/custom-tools-and-toolkits).
 
 ## Auth configs (formerly integrations)
 
@@ -712,7 +712,7 @@ const authConfig = await composio.authConfigs.create('LINEAR', {
 
 console.log(authConfig);
 ```
-For using custom authentication credentials, refer to the [Programmatic Auth Configs](/docs/auth-configuration/programmatic-auth-configs) documentation.
+For using custom authentication credentials, refer to the [Programmatic Auth Configs](/docs/programmatic-auth-configs) documentation.
 
 > The callback URL for creating custom OAuth configs is now `https://backend.composio.dev/api/v3/toolkits/auth/callback`. The previous URL was `https://backend.composio.dev/api/v1/auth-apps/add`.
 
@@ -959,7 +959,7 @@ await composio.triggers.enable("ti_abcd123");
 
 We recommend listening to triggers through webhooks. The following are example routes for Next.js and FastAPI.
 
-For development, you can also [listen to triggers through the SDK](/docs/setting-up-triggers/subscribing-to-events#sdk-subscriptions).
+For development, you can also [listen to triggers through the SDK](/docs/setting-up-triggers/subscribing-to-events#receive-events-locally).
 
 **FastAPI:**
 

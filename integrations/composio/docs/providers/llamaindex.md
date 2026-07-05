@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "d36e2f361d4d5e4726174813390da798102b53831822ff5df8170f8ffdb83980"
+source_hash: "05b24c19c1c7a2cc57cab33bb7b5e84ebeec5985e8bbe1067383cda4038adb1f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/llamaindex.md
 
 
-The LlamaIndex provider transforms Composio tools into LlamaIndex's [FunctionTool](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/) format with built-in execution.
+The LlamaIndex provider turns Composio tools into LlamaIndex [`FunctionTool`](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/) objects that execute themselves. You connect an account, fetch the tools, hand them to a `FunctionAgent`, and LlamaIndex drives the calls. The provider ships for both Python and TypeScript.
 
 **Install**
 
@@ -96,5 +96,9 @@ const result = await myAgent.run(
 
 console.log(result.data.result);
 ```
+
+# Next
+
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---

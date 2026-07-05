@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "f9e030729fe2c6e664140746b9a1bfff4284489963cecc4890b8469ffc5a78b3"
+source_hash: "7cca352fa6af6ce16a9c7c80d87a1b8c4d4de611b2fd7177bcc5fe8a27a4e9ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -99,6 +99,8 @@ Notes:
 - Host execution (`gateway`/`node`) rejects `env.PATH` and loader overrides (`LD_*`/`DYLD_*`) to
   prevent binary hijacking or injected code.
 - OpenClaw sets `OPENCLAW_SHELL=exec` in the spawned command environment (including PTY and sandbox execution) so shell/profile rules can detect exec-tool context.
+- For channel-origin runs, OpenClaw also exposes a narrow sender/chat identity JSON payload in
+  `OPENCLAW_CHANNEL_CONTEXT` when the channel provided those ids.
 - `openclaw channels login` is blocked from `exec` because it is an interactive channel-auth flow; run it in a terminal on the gateway host, or use the channel-native login tool from chat when one exists.
 - Important: sandboxing is **off by default**. If sandboxing is off, implicit `host=auto`
   resolves to `gateway`. Explicit `host=sandbox` still fails closed instead of silently

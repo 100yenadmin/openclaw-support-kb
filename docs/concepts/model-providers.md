@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "63cce98d761869061a91bf29a8fc436fcc5c17245af1b55dadae6f0533908017"
+source_hash: "b6984ce9ceaa6d5c07ec4be52d5fd742f1a67ec4921826b4e8bd13e071fbf7d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -331,6 +331,7 @@ messages and normalizes `stats.cached` into `cacheRead`; legacy
 | Provider                                | Id                               | Auth env                                             | Example model                                              |
 | --------------------------------------- | -------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | BytePlus                                | `byteplus` / `byteplus-plan`     | `BYTEPLUS_API_KEY`                                   | `byteplus-plan/ark-code-latest`                            |
+| ClawRouter                              | `clawrouter`                     | `CLAWROUTER_API_KEY`                                 | `clawrouter/anthropic/claude-sonnet-4-6`                   |
 | Cohere                                  | `cohere`                         | `COHERE_API_KEY`                                     | `cohere/command-a-03-2025`                                 |
 | GitHub Copilot                          | `github-copilot`                 | `COPILOT_GITHUB_TOKEN` / `GH_TOKEN` / `GITHUB_TOKEN` | -                                                          |
 | Hugging Face Inference                  | `huggingface`                    | `HUGGINGFACE_HUB_TOKEN` or `HF_TOKEN`                | `huggingface/deepseek-ai/DeepSeek-R1`                      |

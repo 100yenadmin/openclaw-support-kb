@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "environment-variables"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/environment-variables.md"
-source_hash: "b8dd74b22de7bb8b7fb4245eda5ab632489f663bf5e61e5a4c6e79a453bc84d6"
+source_hash: "cbb0d46c06014a0c563f0111b884f69bea636d25824316c600f5a0c1306d5c31"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/environment-variables.md"
@@ -68,5 +68,5 @@ These are set automatically by the server when invoking agents:
 
 | Variable | Description |
 |----------|-------------|
-| `ANTHROPIC_API_KEY` | Anthropic API key (for Claude Local adapter) |
-| `OPENAI_API_KEY` | OpenAI API key (for Codex Local adapter) |
+| `ANTHROPIC_API_KEY` | Anthropic API key (for Claude Code adapter) |
+| `OPENAI_API_KEY` | OpenAI API key (for Codex adapter) |

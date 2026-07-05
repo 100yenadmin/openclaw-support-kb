@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Plugin Authoring Guide"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_AUTHORING_GUIDE.md"
-source_hash: "1cdf7bffdb00bc595795218d2ef766747427515dfc883f1feeb38ec389e2ac9a"
+source_hash: "dcd474016f28e36af74c33f8e1bb8f051947f0bd347aa0ed58865492de03276c"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_authoring_guide.md"
@@ -30,6 +30,9 @@ It is intentionally narrower than [PLUGIN_SPEC.md](./PLUGIN_SPEC.md). The spec i
 - Plugin UI runs as same-origin JavaScript inside the main Paperclip app.
 - Worker-side host APIs are capability-gated.
 - Plugin UI is not sandboxed by manifest capabilities.
+- External object reference providers are trusted-install only in the MVP.
+  Capabilities gate provider detection/resolution and host API calls, but they
+  are not a sandbox boundary for untrusted marketplace code.
 - Plugin database migrations are restricted to a host-derived plugin namespace.
 - Plugin-managed surfaces are first-class records (agents, projects, routines, and
   skills) rather than private plugin-only state.
@@ -39,6 +42,29 @@ It is intentionally narrower than [PLUGIN_SPEC.md](./PLUGIN_SPEC.md). The spec i
   `@paperclipai/plugin-sdk/ui`; use it for common Paperclip controls before
   building custom versions.
 - `ctx.assets` is not supported in the current runtime.
+
+## External object reference providers
+
+Plugins can contribute provider-neutral object reference detection and status
+resolution for URLs and future explicit links. Declare `objectReferences` in the
+manifest and add at least `external.objects.detect` and `external.objects.read`.
+
+```ts
+objectReferences: [
+  {
+    providerKey: "mocktracker",
+    displayName: "Mock Tracker",
+    objectTypes: ["ticket"],
+    urlPatterns: ["https://mock.example/tickets/:id"],
+  },
+],
+```
+
+Implement `onDetectExternalObjects()` in the worker to recognize sanitized URL
+candidates and return provider-stable identities. Implement
+`onResolveExternalObject()` to return normalized board-safe status metadata.
+Paperclip owns inline markdown rendering; plugins must not return React, HTML,
+or `dangerouslySetInnerHTML` content for inline references.
 
 ## Scaffold a plugin
 

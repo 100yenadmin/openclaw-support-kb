@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "97f19fe0c5bb2da01db62de9b025fc6e94241470bc2d17a604a4319dde025e5b"
+source_hash: "91ea9319aef27c66c66052db55fa04d76a13f42b4edb8b25e9f514663db63505"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -454,7 +454,7 @@ Build the default image
 
 Optional: build the common image
 
-    For a more functional sandbox image with common tooling (for example `curl`, `jq`, `nodejs`, `python3`, `git`):
+    For a more functional sandbox image with common tooling (for example `curl`, `jq`, Node 24, pnpm, `python3`, and `git`):
 
     From a source checkout:
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use Voice Mode with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes"
-source_hash: "8196d899c04da2675efc12dc0def0aae6b648567f85ffdee46829225219863d9"
+source_hash: "f6328781023d9456d53993149c5ec8f8a839ce2de44957b04c716d1d3086b086"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-voice-mode-with-hermes.md"
@@ -74,19 +74,19 @@ If that is not solid yet, fix text mode first.
 ### CLI microphone + playback
 
 ```bash
-pip install "hermes-agent[voice]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[voice]"
 ```
 
 ### Messaging platforms
 
 ```bash
-pip install "hermes-agent[messaging]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[messaging]"
 ```
 
 ### Premium ElevenLabs TTS
 
 ```bash
-pip install "hermes-agent[tts-premium]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[tts-premium]"
 ```
 
 ### Local NeuTTS (optional)
@@ -98,7 +98,7 @@ python -m pip install -U neutts[all]
 ### Everything
 
 ```bash
-pip install "hermes-agent[all]"
+cd ~/.hermes/hermes-agent && uv pip install -e ".[all]"
 ```
 
 ## Step 3: install system dependencies

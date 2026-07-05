@@ -1,8 +1,8 @@
 ---
 type: composio_doc
-title: "Tool Router"
+title: "Sessions (prev Tool Router)"
 source: "https://docs.composio.dev/reference/v3/api-reference/tool-router.md"
-source_hash: "177f92d060a96cd592ec314a6b9b694a8f56b05ad907e7ed813278dea00087ee"
+source_hash: "57729ffa5b0dac520ea2fe25482ae32c7bf34b23b004fb49f92c6f114fd2c015"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/tool-router.md"
@@ -13,13 +13,21 @@ duplicate_index: 1
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Tool Router (/reference/v3/api-reference/tool-router)
+# Sessions (prev Tool Router) (/reference/v3/api-reference/tool-router)
 Source: https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 
 
-{/* Auto-generated from OpenAPI spec. Do not edit directly. */}
+{/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/tool-router.mdx, not this file. */}
 
-(Labs) Tool router endpoints
+These are Composio's session endpoints. A **session** is the runtime context your agent uses to work for one of your users: it scopes which user's connected accounts are in play, which tools are available, how authentication happens, and where execution state lives. Read [What is a session?](/docs/how-composio-works) for the full concept.
+
+> Sessions were formerly called the "tool router", which is why these endpoints live under `tool_router`. They are the same thing.
+
+In the SDK you do not call these endpoints directly. Use `composio.create(...)` to start a session and `composio.use(...)` to resume one, then call `session.tools()`, `session.execute(...)`, and `session.authorize(...)` on the returned object.
+
+Reach for the raw API when you need lower-level control: creating and patching a session config, attaching to an existing session, searching for tools, executing tools and meta tools, opening link sessions for auth, proxying authenticated requests, and reading or writing files in a session mount.
+
+See [Configuring sessions](/docs/configuring-sessions) for toolkits, auth configs, account selection, and presets.
 
 # Endpoints
 

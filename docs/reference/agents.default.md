@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
-source_hash: "4eb84cc1cb91ac731e610300fedc94e3f3f8695716bc6a5ce691464be9e8eef3"
+source_hash: "d026bfb2f7d05927b86a8f95179a6af366553f3056fbec986c9f5fb5288c75d7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/agents.default.md"
@@ -51,6 +51,10 @@ cp docs/reference/AGENTS.default.md ~/.openclaw/workspace/AGENTS.md
 - Don't run destructive commands unless explicitly asked.
 - Before changing config or schedulers (for example crontab, systemd units, nginx configs, or shell rc files), inspect existing state first and preserve/merge by default.
 - Don't send partial/streaming replies to external messaging surfaces (only final replies).
+
+## Existing solutions preflight
+
+Before proposing or building a custom system, feature, workflow, tool, integration, or automation, do a brief check for open-source projects, maintained libraries, existing OpenClaw plugins, or free platforms that already solve it well enough. Prefer those when adequate. Build custom only when existing options are unsuitable, too expensive, unmaintained, unsafe, non-compliant, or the user explicitly asks for custom. Avoid paid-service recommendations unless the user explicitly approves spend. Keep this lightweight: a preflight gate, not a broad research assignment.
 
 ## Session start (required)
 

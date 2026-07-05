@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "dfcd0932af5394c2eba50fb33db8d177f2098e94e6b43b5b6dfe91115145ecb6"
+source_hash: "22ab3a78f15d9a972f7d3fdca301badf31af5a37aed1a17e9343b0c77abbe177"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -55,7 +55,6 @@ Configure `dmPolicy` to control who can DM the bot:
 - `"pairing"` - unknown users receive a pairing code; approve via CLI
 - `"allowlist"` - only users listed in `allowFrom` can chat
 - `"open"` - allow public DMs only when `allowFrom` includes `"*"`; with restrictive entries, only matching users can chat
-- `"disabled"` - disable all DMs
 
 **Approve a pairing request:**
 

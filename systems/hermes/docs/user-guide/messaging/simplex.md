@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/simplex.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "c3a58ba97b6272678ae03b0ca03cecc798d680a278ead5bb8457d59da3f7a737"
+source_hash: "f3f713ad24b10c6d6e11cfd4d1b01af7a529202ff3d204102bdb22403bea4822"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -81,7 +81,7 @@ SIMPLEX_HOME_CHANNEL=<contact-id>
 
 ## Find your contact ID or display name
 
-After starting the daemon, open a conversation with your agent contact. The numeric `contactId` appears in session logs or via `hermes send_message action=list`. If you'd rather use the display name shown in the SimpleX UI, that works too — `SIMPLEX_ALLOWED_USERS` accepts either form.
+After starting the daemon, open a conversation with your agent contact. The numeric `contactId` appears in session logs. If you'd rather use the display name shown in the SimpleX UI, that works too — `SIMPLEX_ALLOWED_USERS` accepts either form.
 
 ## Authorization
 
@@ -102,7 +102,7 @@ SIMPLEX_GROUP_ALLOWED=*              # any group the bot is in
 ```
 
 Address groups by prefixing the chat ID with `group:`, e.g.
-`simplex:group:12` in `send_message` or as a cron `deliver=` target.
+`simplex:group:12` as a cron `deliver=` target or in a `hermes send` call.
 
 ## Attachments
 
@@ -132,10 +132,10 @@ cronjob(
 )
 ```
 
-Or target a specific contact:
+Or target a specific contact via the cron job's `deliver:` field, or from a shell script with the [`hermes send` CLI](/guides/pipe-script-output):
 
-```python
-send_message(target="simplex:<contact-id>", message="Done!")
+```bash
+hermes send simplex:<contact-id> "Done!"
 ```
 
 ## Privacy notes

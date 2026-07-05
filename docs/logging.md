@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "84e1d2e3e5e92f6b2d0b5983617ceed9417ce809c0a1ee25db25c0e7aed7ab19"
+source_hash: "42428d0ce9d9d96a88723e5f143a28b41e9b61030deefb61962990c1ec5bb914"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -215,6 +215,12 @@ Available flags:
 These flags log through normal OpenClaw logging, so `openclaw logs --follow`
 and the Control UI Logs tab show them. Without the flags, the same diagnostics
 remain available at `debug` level.
+
+`[model-fetch]` start and response metadata (provider, API, model, status,
+latency, and request fields such as method, URL, timeout, proxy, and policy)
+is always emitted at `info` level regardless of
+`OPENCLAW_DEBUG_MODEL_TRANSPORT`, so basic model transport hygiene is visible
+without debug flags.
 
 ### Trace correlation
 

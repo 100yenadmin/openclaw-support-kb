@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "architecture"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/start/architecture.md"
-source_hash: "1dd2d9ff4f14c02036142af8bfac7f9ca9e60e9dfe440e2414718b2fb8971189"
+source_hash: "5305f1c8699301645d2378743f5ceeb7b054aa613c2ca41300ccc342af7ede2e"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/start/architecture.md"
@@ -37,7 +37,7 @@ Paperclip is a monorepo with four main layers.
 │  Schema, migrations, embedded mode  │
 ├─────────────────────────────────────┤
 │  Adapters                           │
-│  Claude Local, Codex Local,         │
+│  Claude Code, Codex,                │
 │  Process, HTTP                      │
 └─────────────────────────────────────┘
 ```

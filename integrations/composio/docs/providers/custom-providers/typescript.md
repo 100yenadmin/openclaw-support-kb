@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript Custom Provider"
 source: "https://docs.composio.dev/docs/providers/custom-providers/typescript.md"
-source_hash: "3ae409747d831bb2ab53e3777b2f39dd22a3ab93b93a4339ddeb385b389179ea"
+source_hash: "50742ed1931c59d7d2bfb57f8f9075040cb2fe70a146ea1bc981517c549f8d58"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/custom-providers/typescript.md"
@@ -17,24 +17,24 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/custom-providers/typescript.md
 
 
-This guide provides a comprehensive walkthrough of creating custom providers for the Composio TypeScript SDK, enabling compatibility with different AI frameworks and platforms.
+A **provider** adapts Composio tools to the format your AI framework expects. Write one, and any framework can call Composio's 1000+ tools. This guide shows you how to build your own in TypeScript.
 
-# Provider Architecture
+# Provider architecture
 
-The Composio SDK uses a provider architecture to adapt tools for different AI frameworks. The provider handles:
+A provider does three things:
 
-1. **Tool Format Transformation**: Converting Composio tools into formats compatible with specific AI platforms
-2. **Tool Execution**: Managing the flow of tool execution and results
-3. **Platform-Specific Compatibility**: Providing helper methods for seamless compatibility
+* **Transforms tool format**: converts Composio tools into the shape your AI platform expects.
+* **Executes tools**: runs tool calls and returns results.
+* **Adds platform helpers**: exposes convenience methods specific to your platform.
 
-# Types of Providers
+There are two kinds, depending on whether the target platform runs its own agent loop:
 
-There are two types of providers:
+| Type            | When to use                                                  | Examples           |
+| --------------- | ------------------------------------------------------------ | ------------------ |
+| **Non-agentic** | The platform has no agency of its own. You drive the loop.   | OpenAI             |
+| **Agentic**     | The platform runs its own agent loop and calls tools itself. | LangChain, AutoGPT |
 
-1. **Non-Agentic Providers**: Transform tools for platforms that don't have their own agency (e.g., OpenAI)
-2. **Agentic Providers**: Transform tools for platforms that have their own agency (e.g., LangChain, AutoGPT)
-
-# Provider Class Hierarchy
+Both extend `BaseProvider`:
 
 ```
 BaseProvider (Abstract)
@@ -45,9 +45,9 @@ BaseProvider (Abstract)
     └── [Your Custom Agentic Provider] (Concrete)
 ```
 
-# Creating a Non-Agentic Provider
+# Non-agentic provider
 
-Non-agentic providers implement the `BaseNonAgenticProvider` abstract class:
+A non-agentic provider extends `BaseNonAgenticProvider`. You supply a `name`, `wrapTool`, and `wrapTools`, and call the built-in `executeTool` when you're ready to run a tool.
 
 ```typescript
 import { BaseNonAgenticProvider, Tool } from '@composio/core';
@@ -108,9 +108,9 @@ export class MyAIProvider extends BaseNonAgenticProvider {
 }
 ```
 
-# Creating an Agentic Provider
+# Agentic provider
 
-Agentic providers implement the `BaseAgenticProvider` abstract class:
+An **agentic provider** extends `BaseAgenticProvider`. The difference from the non-agentic case: `wrapTool` and `wrapTools` receive an `executeToolFn`, which you embed in each tool so the framework's agent can run the tool itself.
 
 ```typescript
 import { BaseAgenticProvider, Tool, ExecuteToolFn } from '@composio/core';
@@ -177,9 +177,9 @@ export class MyAgentProvider extends BaseAgenticProvider {
 }
 ```
 
-# Using Your Custom Provider
+# Use your provider
 
-After creating your provider, use it with the Composio SDK:
+Pass an instance to `Composio` via the `provider` option. Every tool you fetch comes back in your custom format.
 
 ```typescript
 import { Composio } from '@composio/core';
@@ -203,9 +203,9 @@ const tools = await composio.tools.get('default', {
 console.log(tools); // These will be in your custom format
 ```
 
-# Provider State and Context
+# Provider state and context
 
-Your provider can maintain state and context:
+A provider is a class, so it can hold state. Use the constructor for config, and instance fields for caches or counters.
 
 ```typescript
 export class StatefulProvider extends BaseNonAgenticProvider {
@@ -253,9 +253,9 @@ export class StatefulProvider extends BaseNonAgenticProvider {
 }
 ```
 
-# Advanced: Provider Composition
+# Advanced: compose providers
 
-You can compose functionality by extending existing providers:
+You don't have to start from a base class. Extend an existing provider to add behavior like analytics or retries, and call `super` to reuse its logic.
 
 ```typescript
 import { OpenAIProvider } from '@composio/openai';
@@ -306,14 +306,14 @@ export class EnhancedOpenAIProvider extends OpenAIProvider {
 }
 ```
 
-# Best Practices
+# Best practices
 
-1. **Keep providers focused**: Each provider should integrate with one specific platform
-2. **Handle errors gracefully**: Catch and transform errors from tool execution
-3. **Follow platform conventions**: Adopt naming and structural conventions of the target platform
-4. **Optimize for performance**: Cache transformed tools when possible
-5. **Add helper methods**: Provide convenient methods for common platform-specific operations
-6. **Provide clear documentation**: Document your provider's unique features and usage
-7. **Use telemetry**: Set a meaningful provider name for telemetry insights
+* **Keep providers focused**: each provider should target one platform.
+* **Handle errors gracefully**: catch and transform errors from tool execution.
+* **Follow platform conventions**: adopt the naming and structure of the target platform.
+* **Cache transformed tools**: reuse wrapped tools instead of rebuilding them.
+* **Add helper methods**: expose convenience methods for common platform operations.
+* **Document your provider**: describe its features and usage.
+* **Set a meaningful `name`**: it's used for telemetry insights.
 
 ---

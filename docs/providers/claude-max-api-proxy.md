@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claude Max API proxy"
 source: "https://docs.openclaw.ai/providers/claude-max-api-proxy"
-source_hash: "dd95743bdcca7b41c1d57c106c6fe25c1c14e66680658044d5fbe6f487a634b7"
+source_hash: "d48d1d7e82b8069923e8652e1f691d3de87f609c0ff693c98457202b9fe843e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/claude-max-api-proxy.md"
@@ -22,9 +22,17 @@ usage outside Claude Code in the past. You must decide for yourself whether to u
 it and verify Anthropic's current billing rules before relying on it.
 
 Anthropic's current support docs say `claude -p` is Agent SDK/programmatic usage.
-Starting June 15, 2026, subscription-plan `claude -p` usage draws from a separate
-monthly Agent SDK credit first, then from usage credits at standard API rates if
-usage credits are enabled.
+Anthropic's June 15, 2026 support update paused the announced separate Agent SDK
+credit plan. For now, Claude Agent SDK, `claude -p`, and third-party app usage
+still draw from the signed-in subscription's usage limits.
+
+Before relying on this path, check Anthropic's [Agent SDK plan
+article](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan),
+plus the Claude Code support articles for
+[Pro/Max](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)
+or
+[Team/Enterprise](https://support.claude.com/en/articles/11845131-use-claude-code-with-your-team-or-enterprise-plan)
+accounts.
 
 ## Why use this?
 

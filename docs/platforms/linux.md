@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "4b055eca06424519fef6be05e227e62f5a29ab6ed2c27f702cbbbd1d2d3050a0"
+source_hash: "aef3c5284cc2336543965f8b4894802e9d0ce85ef5a17d5dfa57c460956277d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -92,6 +92,7 @@ RestartSec=5
 TimeoutStopSec=30
 TimeoutStartSec=30
 SuccessExitStatus=0 143
+OOMPolicy=continue
 KillMode=control-group
 
 [Install]
@@ -135,6 +136,11 @@ cat /proc/<child-pid>/oom_score_adj
 
 Expected value for covered children is `1000`. The Gateway process should keep
 its normal score, usually `0`.
+
+The recommended systemd unit also sets `OOMPolicy=continue`. This keeps the
+Gateway unit alive when a transient child process is selected by the OOM killer;
+the child command/session can fail and report its error without systemd marking
+the entire gateway service failed and restarting all channels.
 
 This does not replace normal memory tuning. If a VPS or container repeatedly
 kills children, increase the memory limit, reduce concurrency, or add stronger

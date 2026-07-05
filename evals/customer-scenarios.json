@@ -59,7 +59,7 @@
     "id": "chief-of-staff-integration",
     "prompt": "Find tools or skills to help my small business chief-of-staff agent work with CRM, email, calendar, and support apps.",
     "mustMention": ["VoltAgent", "ClawHub", "Composio", "toolkit", "openclaw mcp list", "OAuth", "approval"],
-    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", ["docs/clawhub/index.md", "docs/tools/clawhub.md"], "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", "integrations/composio/docs/tools-and-toolkits.md"],
+    "mustHaveDocs": ["skills-index/awesome-openclaw-skills.md", ["docs/clawhub/index.md", "docs/tools/clawhub.md"], "docs/cli/mcp.md", "integrations/composio/guide.md", "integrations/composio/toolkits.md", ["integrations/composio/docs/tools-and-toolkits.md", "integrations/composio/docs/toolkits.md", "integrations/composio/docs/extending-sessions/custom-tools-and-toolkits.md"]],
     "mustHaveRunbooks": ["runbooks/skill-discovery.md"]
   },
   {

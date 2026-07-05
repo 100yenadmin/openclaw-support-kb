@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "gemini-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/gemini-local.md"
-source_hash: "a0501005c60122568f386d10e6adf8a4777fcfffbb70b70c27e2bf73157d38bf"
+source_hash: "d6768c49878159537e908d03fb06a5f5072daf1a767536548c57e37ad20afc99"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/gemini-local.md"
@@ -17,7 +17,7 @@ Source: https://github.com/paperclipai/paperclip/blob/master/docs/adapters/gemin
 Raw source: https://raw.githubusercontent.com/paperclipai/paperclip/master/docs/adapters/gemini-local.md
 
 ---
-title: Gemini Local
+title: Gemini CLI
 summary: Gemini CLI local adapter setup and configuration
 ---
 

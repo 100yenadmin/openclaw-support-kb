@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from MCP servers to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md"
-source_hash: "f67344b0c84b8247d0ce1ac6cb9edbae3f9d053fea52927721f94b273f25e47a"
+source_hash: "85520e878e27d4ce75635e15d098e034e2d815a68e37fef7ee07c17bddadbe22"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/mcp-servers-to-sessions.md"
@@ -86,6 +86,7 @@ session = composio.create(
     toolkits=["gmail"],
     auth_configs={"gmail": "ac_xyz123"},
     tools={"gmail": {"enable": ["GMAIL_FETCH_EMAILS", "GMAIL_SEND_EMAIL"]}},
+    mcp=True,
 )
 mcp_url = session.mcp.url
 ```
@@ -110,6 +111,7 @@ const session = await composio.create("user-123", {
   toolkits: ["gmail"],
   authConfigs: { gmail: "ac_xyz123" },
   tools: { gmail: { enable: ["GMAIL_FETCH_EMAILS", "GMAIL_SEND_EMAIL"] } },
+  mcp: true,
 });
 const { mcp } = session;
 const mcpUrl = mcp.url;
@@ -225,7 +227,7 @@ spans them all (`toolkits=["gmail", "slack", "github"]`). Fewer moving parts.
 session once and keep using it across calls; see [Configuring Sessions](/docs/configuring-sessions).
 * **Sharing one account across users** — sessions support **shared connections**
 (`account_type:"SHARED"` + an allow/deny ACL), pinned per session. See
-[Shared connections](/docs/authenticating-users/shared-connections).
+[Shared connections](/docs/shared-connections).
 * **Tenant-specific params** (SharePoint sub-site, Jira subdomain) — prefill them via shared
 credentials on the auth config.
 * **White-labeling carries over** — pass the same white-labeled auth config IDs; users keep seeing
@@ -235,10 +237,8 @@ of sessions yet).
 * **Dashboard** — sessions are created via the SDK. For no-code, personal app connections, use
 **Composio For You** — reachable from the product switcher in the top-left of the dashboard.
 
-# Get started
+# Next
 
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, presets, and session methods
-
-- [What is a session?](/docs/how-composio-works): How sessions scope tools and connected accounts
 
 ---

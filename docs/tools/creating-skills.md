@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "3664362b840ed52a682ccb5a64a55c957383935b1558b9234ffd148df31449d3"
+source_hash: "207eb7040c32689645a70c8732a90cff92711865bfb2e90212d4931077a55dff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -247,7 +247,7 @@ Install the ClawHub skill
     metadata:
 
     ```bash
-    openclaw skills install clawhub-publish
+    openclaw skills install @openclaw/clawhub-publish
     ```
 
 

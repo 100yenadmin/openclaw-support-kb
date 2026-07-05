@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "codex-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/codex-local.md"
-source_hash: "18ff6544c53f6636c7030444a921bb00b713666df351e55a3f43b48e221cb00b"
+source_hash: "04fce2c442d5d0043a4071771716d892827d7cd418b2f8789cc4caf16801f12a"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/codex-local.md"
@@ -17,7 +17,7 @@ Source: https://github.com/paperclipai/paperclip/blob/master/docs/adapters/codex
 Raw source: https://raw.githubusercontent.com/paperclipai/paperclip/master/docs/adapters/codex-local.md
 
 ---
-title: Codex Local
+title: Codex
 summary: OpenAI Codex local adapter setup and configuration
 ---
 

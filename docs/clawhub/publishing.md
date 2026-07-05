@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Publishing on ClawHub"
 source: "https://docs.openclaw.ai/clawhub/publishing"
-source_hash: "e1b92be6cfe7ba55ef0e356a8f283c35451d15c691dbee5095d7dacf0bb04eea"
+source_hash: "9405983d3ae65b31ede35c1ecbeff1cc0daaa3306290bb26a1d62b5dfc5053e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/publishing.md"
@@ -31,13 +31,13 @@ where you have publisher access.
 Skills are published from a skill folder. The public page is:
 
 ```text
-https://clawhub.ai/<owner>/<slug>
+https://clawhub.ai/<owner>/skills/<slug>
 ```
 
 Example:
 
 ```text
-https://clawhub.ai/alice/review-helper
+https://clawhub.ai/alice/skills/review-helper
 ```
 
 The publish request includes the selected owner, slug, version, changelog, and

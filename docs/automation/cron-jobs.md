@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "7aafd5679b968d7670b69d24b8e6773c0dfde8dfd67aad85fbb646aab24e21ac"
+source_hash: "6218ce689bd84888951c320006416f2ad8e1ad135babe7178168aaf4bbb4686e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/cron-jobs.md"
@@ -180,11 +180,23 @@ ParamField
 
 ParamField
 
+  Per-job fallback model list, for example `--fallbacks openrouter/gpt-4.1-mini,openai/gpt-5`. Pass `--fallbacks ""` for a strict run with no fallbacks.
+
+ParamField
+
+  On `cron edit`, removes the per-job fallback override so the job follows configured fallback precedence. Cannot be combined with `--fallbacks`.
+
+ParamField
+
   On `cron edit`, removes the per-job model override so the job follows normal cron model-selection precedence (a stored cron-session override if set, otherwise the agent/default model). Cannot be combined with `--model`.
 
 ParamField
 
   Thinking level override.
+
+ParamField
+
+  On `cron edit`, removes the per-job thinking override so the job follows normal cron thinking precedence. Cannot be combined with `--thinking`.
 
 ParamField
 
@@ -528,7 +540,7 @@ Model override note:
 - API `cron.update` payload patches can set `model: null` to clear a stored job model override.
 - `openclaw cron edit <job-id> --clear-model` clears that override from the CLI (same effect as the `model: null` patch) and cannot be combined with `--model`.
 - Configured fallback chains still apply because cron `--model` is a job primary, not a session `/model` override.
-- Payload `fallbacks` replaces configured fallbacks for that job; `fallbacks: []` disables fallback and makes the run strict.
+- `openclaw cron add|edit --fallbacks ...` sets payload `fallbacks`, replacing configured fallbacks for that job; `--fallbacks ""` disables fallback and makes the run strict. `openclaw cron edit <job-id> --clear-fallbacks` clears the per-job override.
 - A plain `--model` with no explicit or configured fallback list does not fall through to the agent primary as a silent extra retry target.
 
 ## Configuration

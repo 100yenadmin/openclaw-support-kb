@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "f059d3f8d627c7538da67408ab08f6c5d4068b5f557205e320377754fb2b3620"
+source_hash: "8b7cadbd85859790e3f5e01b7e2394fa241e6d800916c5209e3db36612affdff"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -778,7 +778,7 @@ hermes mcp serve --verbose    # Debug logging on stderr
 
 ### How it works
 
-The MCP server reads conversation data directly from Hermes's session store (`~/.hermes/sessions/sessions.json` and the SQLite database). A background thread polls the database for new messages and maintains an in-memory event queue. For sending messages, it uses the same `send_message` infrastructure as the Hermes agent itself.
+The MCP server reads conversation data directly from Hermes's session store (`~/.hermes/sessions/sessions.json` and the SQLite database). A background thread polls the database for new messages and maintains an in-memory event queue. For sending messages, it uses the same internal send engine (`tools/send_message_tool.py`) that powers cron delivery and the `hermes send` CLI.
 
 The gateway does NOT need to be running for read operations (listing conversations, reading history, polling events). It DOES need to be running for send operations, since the platform adapters need active connections.
 

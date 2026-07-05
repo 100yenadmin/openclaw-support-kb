@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "55e10f69b581dc4905fb93b1fb85bb2d2d82c9b1cb61a02c066edd001f7f4c5e"
+source_hash: "a0147b9a8a57c1501b0564a5af5f229483bd2b4b5c00000b395018520533c855"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -122,6 +122,7 @@ Examples:
 openclaw doctor --lint
 openclaw doctor --lint --severity-min warning
 openclaw doctor --lint --json
+openclaw doctor --lint --all
 openclaw doctor --lint --only core/doctor/gateway-config --json
 ```
 
@@ -129,7 +130,7 @@ JSON output includes:
 
 - `ok`: whether any visible finding met the selected severity threshold
 - `checksRun`: number of health checks executed
-- `checksSkipped`: checks skipped by `--only` or `--skip`
+- `checksSkipped`: checks skipped by the selected profile, `--only`, or `--skip`
 - `findings`: structured diagnostics with `checkId`, `severity`, `message`, and
   optional `path`, `line`, `column`, `ocPath`, and `fixHint`
 
@@ -140,11 +141,13 @@ Exit codes:
 - `2`: command/runtime failure before lint findings could be emitted
 
 Use `--severity-min info|warning|error` to control both what is printed and what
-causes a non-zero lint exit. Use `--only <id>` for narrow preflight gates and
+causes a non-zero lint exit. Use `--all` to run the complete lint inventory,
+including deeper opt-in checks excluded from the default automation set. Use `--only <id>` for narrow preflight gates and
 `--skip <id>` to temporarily exclude a noisy check while keeping the rest of the
 lint run active.
-Lint-output options such as `--json`, `--severity-min`, `--only`, and `--skip`
-must be paired with `--lint`; regular doctor and repair runs reject them.
+Lint-output options such as `--json`, `--severity-min`, `--all`, `--only`, and
+`--skip` must be paired with `--lint`; regular doctor and repair runs reject
+them.
 
 ## What it does (summary)
 

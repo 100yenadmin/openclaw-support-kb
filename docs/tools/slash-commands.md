@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "ed85c0917f9aa3986062c8502b4d0df66ad760807790dc26513a7d99166a1c0d"
+source_hash: "128618c2a41c80b709067502303ab3889acaf96cf9b1feed3d7fa151c3bbd968"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -222,6 +222,7 @@ Model and run controls
     | `/reasoning [on\|off\|stream]` | Toggle reasoning visibility. Alias: `/reason` |
     | `/elevated [on\|off\|ask\|full]` | Toggle elevated mode. Alias: `/elev` |
     | `/exec host=<auto\|sandbox\|gateway\|node> security=<deny\|allowlist\|full> ask=<off\|on-miss\|always> node=<id>` | Show or set exec defaults |
+    | `/login [codex\|openai\|openai-codex]` | Pair Codex/OpenAI login from a private chat or Web UI session. Owner/admin only |
     | `/model [name\|#\|status]` | Show or set the model |
     | `/models [provider] [page] [limit=<n>\|all]` | List configured/auth-available providers or models |
     | `/queue <mode>` | Manage active-run queue behavior. See [Queue](/concepts/queue) and [Queue steering](/concepts/queue-steering) |
@@ -268,7 +269,7 @@ Discovery and status
     | `/tasks` | List active/recent background tasks for the current session |
     | `/context [list\|detail\|map\|json]` | Explain how context is assembled |
     | `/whoami` | Show your sender id. Alias: `/id` |
-    | `/usage off\|tokens\|full\|cost` | Control the per-response usage footer or print a local cost summary |
+    | `/usage off\|tokens\|full\|reset\|cost` | Control the per-response usage footer (`reset`/`inherit`/`clear`/`default` clears the session override to re-inherit the configured default) or print a local cost summary |
 
 
 
@@ -288,7 +289,7 @@ Subagents and ACP
     | Command | Description |
     | --- | --- |
     | `/subagents list\|log\|info` | Inspect sub-agent runs for the current session |
-    | `/acp spawn\|cancel\|steer\|close\|sessions\|status\|set-mode\|set\|cwd\|permissions\|timeout\|model\|reset-options\|doctor\|install\|help` | Manage ACP sessions and runtime options |
+    | `/acp spawn\|cancel\|steer\|close\|sessions\|status\|set-mode\|set\|cwd\|permissions\|timeout\|model\|reset-options\|doctor\|install\|help` | Manage ACP sessions and runtime options. Runtime controls require external owner or internal Gateway admin identity |
     | `/focus <target>` | Bind the current Discord thread or Telegram topic to a session target |
     | `/unfocus` | Remove the current thread binding |
     | `/agents` | List thread-bound agents for the current session |
@@ -336,14 +337,14 @@ must be in the same identity group.
 
 ### Bundled plugin commands
 
-| Command                                                                                      | Description                                                                       |
-| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `/dreaming [on\|off\|status\|help]`                                                          | Toggle memory dreaming. See [Dreaming](/concepts/dreaming)                        |
-| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]`                                      | Manage device pairing. See [Pairing](/channels/pairing)                           |
-| `/phone status\|arm ...\|disarm`                                                             | Temporarily arm high-risk phone node commands                                     |
-| `/voice status\|list\|set <voiceId>`                                                         | Manage Talk voice config. Discord native name: `/talkvoice`                       |
-| `/card ...`                                                                                  | Send LINE rich card presets. See [LINE](/channels/line)                           |
-| `/codex status\|models\|threads\|resume\|compact\|review\|diagnostics\|account\|mcp\|skills` | Control the Codex app-server harness. See [Codex harness](/plugins/codex-harness) |
+| Command                                                                                      | Description                                                                         |
+| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `/dreaming [on\|off\|status\|help]`                                                          | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming) |
+| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]`                                      | Manage device pairing. See [Pairing](/channels/pairing)                             |
+| `/phone status\|arm ...\|disarm`                                                             | Temporarily arm high-risk phone node commands                                       |
+| `/voice status\|list\|set <voiceId>`                                                         | Manage Talk voice config. Discord native name: `/talkvoice`                         |
+| `/card ...`                                                                                  | Send LINE rich card presets. See [LINE](/channels/line)                             |
+| `/codex status\|models\|threads\|resume\|compact\|review\|diagnostics\|account\|mcp\|skills` | Control the Codex app-server harness. See [Codex harness](/plugins/codex-harness)   |
 
 QQBot-only: `/bot-ping`, `/bot-version`, `/bot-help`, `/bot-upgrade`, `/bot-logs`
 
@@ -515,6 +516,7 @@ Session scoping per surface
     - **Native Discord commands:** `agent:<agentId>:discord:slash:<userId>`
     - **Native Slack commands:** `agent:<agentId>:slack:slash:<userId>` (prefix configurable via `channels.slack.slashCommand.sessionPrefix`)
     - **Native Telegram commands:** `telegram:slash:<userId>` (targets the chat session via `CommandTargetSessionKey`)
+    - **`/login codex`** sends device pairing codes only through private chat or Web UI response paths. Telegram group/topic invocations ask the owner to DM the bot instead.
     - **`/stop`** targets the active chat session to abort the current run.
 
 

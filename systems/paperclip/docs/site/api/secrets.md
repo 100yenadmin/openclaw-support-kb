@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "secrets"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/api/secrets.md"
-source_hash: "ae9fe7040bd19e6dc95c2938987a3da8e364a5f3e20aa96b6a4be7684a852358"
+source_hash: "31840021424508de5add5af43ad195a17ae9054e74876c85710d6fe5e35f8e22"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/api/secrets.md"
@@ -416,6 +416,30 @@ real value into the agent process environment. Paperclip's custody guarantees
 end at injection: the agent process can read, log, or forward the value, so
 treat any secret bound to an agent as exposed to that agent. See the custody
 boundaries note in the [secrets deploy guide](/deploy/secrets#custody-boundaries).
+
+User-specific env bindings use a definition key instead of a concrete
+`secretId`. The concrete value is resolved for the run's responsible user:
+
+```json
+{
+  "env": {
+    "GITHUB_TOKEN": {
+      "type": "user_secret_ref",
+      "key": "github_api_token",
+      "version": "latest",
+      "required": true,
+      "allowMissingOverride": false
+    }
+  }
+}
+```
+
+`required` defaults to `true` and `allowMissingOverride` defaults to `false`.
+Missing required user-secret values must fail closed before adapter dispatch.
+Optional missing values omit the environment variable; they must not inject an
+empty string or another user's value. Paperclip records value-free access
+events with `secretScope`, `responsibleUserId`, `credentialOwnerUserId`, and
+`userSecretDefinitionId`.
 
 ## Portability
 

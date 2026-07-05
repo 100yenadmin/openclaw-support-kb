@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/tool-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-search"
-source_hash: "6a548c2c9ba0a0abfd9415227e5d81877ba2a3c475c8338a65008e7d5509d974"
+source_hash: "857c59dae0b11eeaa763cc8e1c32ae45ce75c5c28f80a1685a6195a7a93152c5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-search.md"
@@ -33,7 +33,7 @@ specific tool's schema on demand.
 The tools that make up Hermes' core capability set (`terminal`,
 `read_file`, `write_file`, `patch`, `search_files`, `todo`, `memory`,
 `browser_*`, `web_search`, `web_extract`, `clarify`, `execute_code`,
-`delegate_task`, `session_search`, `send_message`, and the rest of
+`delegate_task`, `session_search`, and the rest of
 `_HERMES_CORE_TOOLS`) are *always* loaded directly. Only MCP tools and
 non-core plugin tools are eligible for deferral.
 :::

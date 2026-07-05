@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "fe66e30e62960ba661242e1f3b6abbadc6e20c3b9b67b086b4f6c4710ed09d13"
+source_hash: "044f9d790201782083a9e435bf068bf55ea10a01957b543630c8e4a4ab71ecbd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/mcp.md"
@@ -305,7 +305,7 @@ Current bridge behavior:
 
 - inbound `user` transcript messages are forwarded as `notifications/claude/channel`
 - Claude permission requests received over MCP are tracked in-memory
-- if the linked conversation later sends `yes abcde` or `no abcde`, the bridge converts that to `notifications/claude/channel/permission`
+- if the command owner in the linked conversation later sends `yes abcde` or `no abcde`, the bridge converts that to `notifications/claude/channel/permission`
 - these notifications are live-session only; if the MCP client disconnects, there is no push target
 
 This is intentionally client-specific. Generic MCP clients should rely on the standard polling tools.

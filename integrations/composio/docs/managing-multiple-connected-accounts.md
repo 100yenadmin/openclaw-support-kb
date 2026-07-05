@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing multiple connected accounts"
 source: "https://docs.composio.dev/docs/managing-multiple-connected-accounts.md"
-source_hash: "889f2039e3997ed33085588c265e6c92edde43016b1ef56f642945b10488c001"
+source_hash: "3dce6c785278b473446452a8c24d4ce1dd564e2042549bbce078b4bd54d07b2a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "managing-multiple-connected-accounts.md"
@@ -110,29 +110,14 @@ Aliases are human-readable labels for connected accounts (e.g., `"work-gmail"`, 
 
 ## Setting an alias during connection
 
-Pass `alias` to `session.authorize()`, `connectedAccounts.initiate()`, or `connectedAccounts.link()`:
+Pass `alias` to `session.authorize()`:
 
 **Python:**
 
 ```python
 session = composio.create(user_id="user_123")
 
-# Via session.authorize()
 connection_request = session.authorize("gmail", alias="work-gmail")
-
-# Via connectedAccounts.initiate()
-connection_request = composio.connected_accounts.initiate(
-    "user_123",
-    "ac_auth_config_id",
-    alias="work-gmail",
-)
-
-# Via connectedAccounts.link()
-connection_request = composio.connected_accounts.link(
-    "user_123",
-    "ac_auth_config_id",
-    alias="work-gmail",
-)
 ```
 
 **TypeScript:**
@@ -141,23 +126,10 @@ connection_request = composio.connected_accounts.link(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 const session = await composio.create("user_123");
-// Via session.authorize()
 const connectionRequest = await session.authorize("gmail", { alias: "work-gmail" });
-
-// Via connectedAccounts.initiate()
-const connectionRequest2 = await composio.connectedAccounts.initiate(
-  "user_123",
-  "ac_auth_config_id",
-  { alias: "work-gmail" },
-);
-
-// Via connectedAccounts.link()
-const connectionRequest3 = await composio.connectedAccounts.link(
-  "user_123",
-  "ac_auth_config_id",
-  { alias: "work-gmail" },
-);
 ```
+
+The direct-execution methods `connectedAccounts.initiate()` and `connectedAccounts.link()` accept the same `alias` parameter.
 
 ## Updating or clearing an alias
 
@@ -241,12 +213,8 @@ for (const toolkit of toolkits.items) {
 }
 ```
 
-# What to read next
+# Next
 
-- [Configuring sessions](/docs/configuring-sessions): Pass connectedAccounts, auth configs, and toolkit restrictions to sessions
-
-- [Manual authentication](/docs/authenticating-users/manually-authenticating): Pre-authenticate users with session.authorize() and Connect Links
-
-- [Authentication overview](/docs/authentication): Connect Links, OAuth, API keys, and how Composio manages auth
+- [Shared connections](/docs/shared-connections): Make one connected account usable by multiple users with a per-user access control list
 
 ---

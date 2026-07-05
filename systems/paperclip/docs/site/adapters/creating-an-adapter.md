@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "creating-an-adapter"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/creating-an-adapter.md"
-source_hash: "43cd139e65f08570edeceb115c5198098ec184f2822f879480f54244dc9e307f"
+source_hash: "77d105c6bbdf8c4f272d08d3ccf27fed1ee4fe644b51bc56c824efa8a473e6c8"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/creating-an-adapter.md"
@@ -72,7 +72,7 @@ my-adapter/                   # external plugin
 
 ```ts
 export const type = "my_agent";        // snake_case, globally unique
-export const label = "My Agent (local)";
+export const label = "My Agent";
 export const models = [
   { id: "model-a", label: "Model A" },
 ];

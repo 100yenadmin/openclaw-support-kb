@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "7e5100c735f94bbb9048b6bcc91114e0f974e2fc92dad2fabd043cdfe4c5f267"
+source_hash: "c227de2ce751a8dc9f534963d4ccd2826e28da8a597ce4d6371edbc5775484ab"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -17,13 +17,13 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/providers/google.md
 
 
-Composio integrates with Google through [Gemini function calling](https://ai.google.dev/) and the [Agent Development Kit (ADK)](https://google.github.io/adk-docs/). Pick the tab that matches your integration.
+The Google provider formats Composio tools for [Gemini](https://ai.google.dev/) and the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/). Pick the tab that matches your setup.
 
 > Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
 
 ### Gemini
 
-The Google Generative AI provider transforms Composio tools into a format compatible with Gemini function calling.
+The Google Generative AI provider transforms Composio tools into Gemini function declarations. Gemini is non-agentic, so the model returns function calls and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
 
 **Install**
 
@@ -68,7 +68,7 @@ config = types.GenerateContentConfig(tools=tools)
 chat = client.chats.create(model="gemini-3-pro-preview", config=config)
 response = chat.send_message("Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'")
 
-# Agentic loop — keep executing tool calls until the model responds with text
+# Agentic loop: keep executing tool calls until the model responds with text
 while response.function_calls:
     parts = []
     for fc in response.function_calls:
@@ -105,7 +105,7 @@ let response = await chat.sendMessage({
     message: "Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'",
 });
 
-// Agentic loop — keep executing tool calls until the model responds with text
+// Agentic loop: keep executing tool calls until the model responds with text
 while (response.functionCalls && response.functionCalls.length > 0) {
     const parts: Part[] = [];
     for (const fc of response.functionCalls) {
@@ -128,7 +128,7 @@ console.log(response.text);
 ```
 ### ADK
 
-The Google ADK provider transforms Composio tools into Google ADK's FunctionTool format for use with Google ADK agents. ADK integration is Python-only.
+The Google ADK provider transforms Composio tools into ADK's `FunctionTool` format. Unlike Gemini function calling, ADK runs the tool loop for you: hand the tools to an `Agent`, and the `Runner` executes calls and continues until the agent produces a final response. ADK integration is Python-only.
 
 **Install**
 
@@ -188,5 +188,9 @@ for event in events:
     if event.is_final_response() and event.content and event.content.parts:
         print(event.content.parts[0].text)
 ```
+
+# Next
+
+- [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 
 ---
