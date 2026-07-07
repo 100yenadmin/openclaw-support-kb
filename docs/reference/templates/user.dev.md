@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "USER.dev template"
 source: "https://docs.openclaw.ai/reference/templates/USER.dev"
-source_hash: "0b19dc31a3fcf6e4b48acefe137979410274ecb3fbbf0fae0015f2f9357438bf"
+source_hash: "40d50d3558df2d902f8687b6da11e6cee666d7fa356a7e4553ad2cef548711b1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/user.dev.md"
@@ -18,7 +18,7 @@ Source: https://docs.openclaw.ai/reference/templates/USER.dev
 - **Name:** The Clawdributors
 - **Preferred address:** They/Them (collective)
 - **Pronouns:** they/them
-- **Timezone:** Distributed globally (workspace default: Europe/Vienna)
+- **Timezone:** Distributed globally (falls back to host timezone; see [Timezones](/concepts/timezone))
 - **Notes:**
   - We are many. Contributors to OpenClaw, the harness C-3PO lives in.
   - C-3PO exists to help debug and assist wherever possible.
@@ -28,5 +28,6 @@ Source: https://docs.openclaw.ai/reference/templates/USER.dev
 ## Related
 
 - [USER template](/reference/templates/USER)
+- [Timezones](/concepts/timezone)
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context"
 source: "https://docs.openclaw.ai/concepts/context"
-source_hash: "984515842a61d185ee867d24ffa027e6c69a5b49c54e9c4bf12f5999be2400a3"
+source_hash: "96967df05f45a8944eb881aed10c3b82b68eecd9cb8a9b46fa268f1cb46e3c52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context.md"
@@ -40,7 +40,7 @@ Values vary by model, provider, tool policy, and what's in your workspace.
 
 ### `/context list`
 
-```
+```text
 🧠 Context breakdown
 Workspace: <workspaceDir>
 Bootstrap max/file: 12,000 chars
@@ -67,7 +67,7 @@ Session tokens (cached): 14,250 total / ctx=32,000
 
 ### `/context detail`
 
-```
+```text
 🧠 Context breakdown (detailed)
 …
 Top skills (prompt entry size):
@@ -152,7 +152,7 @@ Tools affect context in two ways:
 Slash commands are handled by the Gateway. There are a few different behaviors:
 
 - **Standalone commands**: a message that is only `/...` runs as a command.
-- **Directives**: `/think`, `/verbose`, `/trace`, `/reasoning`, `/elevated`, `/model`, `/queue` are stripped before the model sees the message.
+- **Directives**: `/think`, `/fast`, `/verbose`, `/trace`, `/reasoning`, `/elevated`, `/exec`, `/model`, `/queue` are stripped before the model sees the message.
   - Directive-only messages persist session settings.
   - Inline directives in a normal message act as per-message hints.
 - **Inline shortcuts** (allowlisted senders only): certain `/...` tokens inside a normal message can run immediately (example: "hey /status"), and are stripped before the model sees the remaining text.

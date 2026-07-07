@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Northflank"
 source: "https://docs.openclaw.ai/install/northflank"
-source_hash: "c5828ad383210d906499a91f5a610a5976b5bedf1e609e1e703446af531f3cbd"
+source_hash: "18ba32ca6be4171f62dee34e8079bbf93dca7cb9e19062e6c9f0ae6577021af1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/northflank.md"
@@ -13,10 +13,7 @@ duplicate_index: 1
 # Northflank
 Source: https://docs.openclaw.ai/install/northflank
 
-# Northflank
-
-Deploy OpenClaw on Northflank with a one-click template and access it through the web Control UI.
-This is the easiest "no terminal on the server" path: Northflank runs the Gateway for you.
+Deploy OpenClaw on Northflank with a one-click template and access it through the web Control UI. This is the easiest "no terminal on the server" path: Northflank runs the gateway for you.
 
 ## How to get started
 
@@ -32,22 +29,20 @@ This is the easiest "no terminal on the server" path: Northflank runs the Gatewa
 ## What you get
 
 - Hosted OpenClaw Gateway + Control UI
-- Persistent storage via Northflank Volume (`/data`) so `openclaw.json`,
-  per-agent `auth-profiles.json`, channel/provider state, sessions, and
-  workspace survive redeploys
+- Persistent storage via a Northflank Volume (`/data`) so `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, sessions, and workspace survive redeploys
 
 ## Connect a channel
 
-Use the Control UI at `/openclaw` or run `openclaw onboard` via SSH for channel setup instructions:
+Use the Control UI at `/openclaw`, or run `openclaw onboard` via SSH for channel setup instructions:
 
-- [Telegram](/channels/telegram) (fastest — just a bot token)
+- [Telegram](/channels/telegram) (fastest, just a bot token)
 - [Discord](/channels/discord)
 - [All channels](/channels)
 
 ## Next steps
 
 - Set up messaging channels: [Channels](/channels)
-- Configure the Gateway: [Gateway configuration](/gateway/configuration)
+- Configure the gateway: [Gateway configuration](/gateway/configuration)
 - Keep OpenClaw up to date: [Updating](/install/updating)
 
 ---

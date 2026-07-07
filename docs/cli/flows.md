@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Flows (redirect)"
 source: "https://docs.openclaw.ai/cli/flows"
-source_hash: "714447d02cf8c7c0e88bec0ad7aa15947102903c89da7679ef5f1e294a2f48ad"
+source_hash: "d5d07e2261854fd8240cc6892e771156f615e3778deadc187d055f960ebeb6a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/flows.md"
@@ -35,9 +35,7 @@ openclaw tasks flow cancel <lookup>
 
 ### Status filter values
 
-`--status` on `list` accepts one of:
-
-`queued`, `running`, `waiting`, `blocked`, `succeeded`, `failed`, `cancelled`, `lost`
+`--status` on `list` accepts one of: `queued`, `running`, `waiting`, `blocked`, `succeeded`, `failed`, `cancelled`, `lost`.
 
 ## Examples
 
@@ -50,7 +48,7 @@ openclaw tasks flow show flow_abc123 --json
 openclaw tasks flow cancel flow_abc123
 ```
 
-For full TaskFlow concepts and authoring see [TaskFlow](/automation/taskflow). For the parent `tasks` command see [tasks CLI reference](/cli/tasks).
+For TaskFlow concepts and authoring, see [TaskFlow](/automation/taskflow). For the parent `tasks` command, see [tasks CLI reference](/cli/tasks).
 
 ## Related
 

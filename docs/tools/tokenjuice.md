@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tokenjuice"
 source: "https://docs.openclaw.ai/tools/tokenjuice"
-source_hash: "d24afe9f6681a9f7b2d96b1a75ab493f7cfed9d33fbd1096ad367809276ff4b6"
+source_hash: "b7e67e961a9130dec6d6a09ea14f4fd693d3c0227329ce234e797d563e099030"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tokenjuice.md"
@@ -61,7 +61,7 @@ If you prefer editing config directly:
 
 - Compacts noisy `exec` and `bash` results before they are fed back into the session.
 - Keeps the original command execution untouched.
-- Preserves exact file-content reads and other commands that tokenjuice should leave raw.
+- Applies a safe-inventory policy: exact file-content reads stay raw, standalone repository-inventory commands can compact, and unsafe mixed command sequences stay raw.
 - Stays opt-in: disable the plugin if you want verbatim output everywhere.
 
 ## Verify it is working

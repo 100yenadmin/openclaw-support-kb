@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "b119fcb5cd47f2d9f91ba2f690ff9bc18fa3227d535365b9ee252d14d229c2d8"
+source_hash: "c852b7ce19f1b91b83becdcbe6165a25e2770dd26db5d140eec82e00ae266550"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -73,6 +73,18 @@ pnpm build-storybook
 ```
 
 These run the `@paperclipai/ui` Storybook on port `6006` and build the static output to `ui/storybook-static/`.
+
+## UI Fonts And Screenshots
+
+The board UI ships its own sans-serif webfont assets in `ui/public/fonts/`.
+`ui/src/index.css` declares Inter v4.1 variable regular and italic faces and wires
+the Tailwind `font-sans` token to those bundled files before system fallbacks.
+Linux screenshot or Storybook capture jobs should not install host Inter packages
+or inject external font CSS to make Paperclip text render correctly.
+
+Font assets live in Vite's public directory so `pnpm --filter @paperclipai/ui build`
+emits them under `ui/dist/fonts/`. The server package copies the same output into
+`server/ui-dist/fonts/` through `scripts/prepare-server-ui-dist.sh`.
 
 Inspect or stop the current repo's managed dev runner:
 
@@ -639,6 +651,14 @@ Environment overrides:
 - `PAPERCLIP_DB_BACKUP_INTERVAL_MINUTES=<minutes>`
 - `PAPERCLIP_DB_BACKUP_RETENTION_DAYS=<days>`
 - `PAPERCLIP_DB_BACKUP_DIR=/absolute/or/~/path`
+- `PAPERCLIP_DB_BACKUP_MAX_AGE_HOURS=<hours>` controls the `/api/health`
+  stale-backup warning threshold
+- `PAPERCLIP_DB_BACKUP_ALERT_FILE=/path/to/failure-marker` lets external cron
+  wrappers surface the last failed backup in `/api/health`
+
+Without `PAPERCLIP_DB_BACKUP_ALERT_FILE`, health checks look for
+`db-backup-to-s3.failure` in the backup directory, beside the backup directory,
+and in the default sibling `health/` directory.
 
 DB backups are not full instance filesystem backups. For full local disaster
 recovery, also back up local storage files and the local encrypted secrets key if

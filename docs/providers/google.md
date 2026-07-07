@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "7f91e47a4cca35b0e7c59583ee02e773911fd7dadce0a072fa76c981aa5cb591"
+source_hash: "bf6bbb780888aaaaa6fa7ba3005c86f3dfa57ceebd60812e82072025f9c048c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -13,15 +13,12 @@ duplicate_index: 1
 # Google (Gemini)
 Source: https://docs.openclaw.ai/providers/google
 
-The Google plugin provides access to Gemini models through Google AI Studio, plus
-image generation, media understanding (image/audio/video), text-to-speech, and web search via
-Gemini Grounding.
+The Google plugin provides access to Gemini models through Google AI Studio, plus image generation, media understanding (image/audio/video), text-to-speech, and web search via Gemini Grounding.
 
 - Provider: `google`
 - Auth: `GEMINI_API_KEY` or `GOOGLE_API_KEY`
 - API: Google Gemini API
-- Runtime option: provider/model `agentRuntime.id: "google-gemini-cli"`
-  reuses Gemini CLI OAuth while keeping model refs canonical as `google/*`.
+- Runtime option: `agentRuntime.id: "google-gemini-cli"` reuses Gemini CLI OAuth while keeping model refs canonical as `google/*`.
 
 ## Getting started
 
@@ -78,7 +75,7 @@ Verify the model is available
 
 Tip
 
-    The environment variables `GEMINI_API_KEY` and `GOOGLE_API_KEY` are both accepted. Use whichever you already have configured.
+    `GEMINI_API_KEY` and `GOOGLE_API_KEY` are both accepted. Use whichever you already have configured.
 
 
 
@@ -138,10 +135,8 @@ Verify the model is available
 
     **Environment variables:**
 
-    - `OPENCLAW_GEMINI_OAUTH_CLIENT_ID`
-    - `OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET`
-
-    (Or the `GEMINI_CLI_*` variants.)
+    - `OPENCLAW_GEMINI_OAUTH_CLIENT_ID` / `GEMINI_CLI_OAUTH_CLIENT_ID`
+    - `OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET` / `GEMINI_CLI_OAUTH_CLIENT_SECRET`
 
 
 Note
@@ -162,6 +157,10 @@ Note
     runtime when they want local Gemini CLI execution.
 
 
+
+Note
+
+`google/gemini-3-pro-preview` was retired on 2026-03-09; use `google/gemini-3.1-pro-preview` instead. Re-running Gemini API key setup (`openclaw onboard --auth-choice gemini-api-key` or `openclaw models auth login --provider google`) rewrites a stale configured default to the current model.
 
 ## Capabilities
 
@@ -225,6 +224,10 @@ Gemma 4 models (for example `gemma-4-26b-a4b-it`) support thinking mode. OpenCla
 rewrites `thinkingBudget` to a supported Google `thinkingLevel` for Gemma 4.
 Setting thinking to `off` preserves thinking disabled instead of mapping to
 `MINIMAL`.
+
+Gemini 2.5 Pro only works in thinking mode and rejects an explicit
+`thinkingBudget: 0`; OpenClaw strips that value for Gemini 2.5 Pro requests
+instead of sending it.
 
 ## Image generation
 
@@ -450,7 +453,9 @@ Direct Gemini cache reuse
 
     - Configure per-model or global params with either
       `cachedContent` or legacy `cached_content`
-    - If both are present, `cachedContent` wins
+    - Params from a more specific scope (model-level over global) always win.
+      Within the same scope, if both keys are set, `cached_content` wins.
+      Use only one key per scope to avoid surprises.
     - Example value: `cachedContents/prebuilt-context`
     - Gemini cache-hit usage is normalized into OpenClaw `cacheRead` from
       upstream `cachedContentTokenCount`

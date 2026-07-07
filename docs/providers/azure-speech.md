@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
-source_hash: "991253f636a0eb6324a641d559da4c41a866de6173df04c725f2f85c1f48c3d1"
+source_hash: "1de70ad7e2b8e0920355198bfba1ba0c3d84427334a2f8566d395513c154621f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/azure-speech.md"
@@ -13,15 +13,15 @@ duplicate_index: 1
 # Azure Speech
 Source: https://docs.openclaw.ai/providers/azure-speech
 
-Azure Speech is an Azure AI Speech text-to-speech provider. In OpenClaw it
-synthesizes outbound reply audio as MP3 by default, native Ogg/Opus for voice
-notes, and 8 kHz mulaw audio for telephony channels such as Voice Call.
-
-OpenClaw uses the Azure Speech REST API directly with SSML and sends the
-provider-owned output format through `X-Microsoft-OutputFormat`.
+Azure Speech is a bundled Azure AI Speech text-to-speech provider. OpenClaw
+calls the Azure Speech REST API directly with SSML, synthesizing MP3 for
+standard replies, native Ogg/Opus for voice notes, and 8 kHz mulaw for
+telephony channels such as Voice Call. The request sends the provider-owned
+output format through the `X-Microsoft-OutputFormat` header.
 
 | Detail                  | Value                                                                                                          |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Provider ID             | `azure-speech` (alias: `azure`)                                                                                |
 | Website                 | [Azure AI Speech](https://azure.microsoft.com/products/ai-services/ai-speech)                                  |
 | Docs                    | [Speech REST text-to-speech](https://learn.microsoft.com/azure/ai-services/speech-service/rest-text-to-speech) |
 | Auth                    | `AZURE_SPEECH_KEY` plus `AZURE_SPEECH_REGION`                                                                  |
@@ -57,7 +57,7 @@ Select Azure Speech in messages.tts
           provider: "azure-speech",
           providers: {
             "azure-speech": {
-              speakerVoice: "en-US-JennyNeural",
+              voice: "en-US-JennyNeural",
               lang: "en-US",
             },
           },
@@ -76,16 +76,23 @@ Send a message
 
 ## Configuration options
 
-| Option                  | Path                                                        | Description                                                                                           |
-| ----------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `apiKey`                | `messages.tts.providers.azure-speech.apiKey`                | Azure Speech resource key. Falls back to `AZURE_SPEECH_KEY`, `AZURE_SPEECH_API_KEY`, or `SPEECH_KEY`. |
-| `region`                | `messages.tts.providers.azure-speech.region`                | Azure Speech resource region. Falls back to `AZURE_SPEECH_REGION` or `SPEECH_REGION`.                 |
-| `endpoint`              | `messages.tts.providers.azure-speech.endpoint`              | Optional Azure Speech endpoint/base URL override.                                                     |
-| `baseUrl`               | `messages.tts.providers.azure-speech.baseUrl`               | Optional Azure Speech base URL override.                                                              |
-| `speakerVoice`          | `messages.tts.providers.azure-speech.speakerVoice`          | Azure voice ShortName (default `en-US-JennyNeural`). Legacy alias: `voice`.                           |
-| `lang`                  | `messages.tts.providers.azure-speech.lang`                  | SSML language code (default `en-US`).                                                                 |
-| `outputFormat`          | `messages.tts.providers.azure-speech.outputFormat`          | Audio-file output format (default `audio-24khz-48kbitrate-mono-mp3`).                                 |
-| `voiceNoteOutputFormat` | `messages.tts.providers.azure-speech.voiceNoteOutputFormat` | Voice-note output format (default `ogg-24khz-16bit-mono-opus`).                                       |
+All options live under `messages.tts.providers["azure-speech"]`.
+
+| Option                  | Description                                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| `apiKey`                | Azure Speech resource key. Falls back to `AZURE_SPEECH_KEY`, `AZURE_SPEECH_API_KEY`, or `SPEECH_KEY`. |
+| `region`                | Azure Speech resource region. Falls back to `AZURE_SPEECH_REGION` or `SPEECH_REGION`.                 |
+| `endpoint`              | Optional Azure Speech endpoint override. Falls back to `AZURE_SPEECH_ENDPOINT`.                       |
+| `baseUrl`               | Optional Azure Speech base URL override.                                                              |
+| `voice`                 | Azure voice ShortName (default `en-US-JennyNeural`). Legacy alias: `voiceId`.                         |
+| `lang`                  | SSML language code (default `en-US`).                                                                 |
+| `outputFormat`          | Audio-file output format (default `audio-24khz-48kbitrate-mono-mp3`).                                 |
+| `voiceNoteOutputFormat` | Voice-note output format (default `ogg-24khz-16bit-mono-opus`).                                       |
+| `timeoutMs`             | Request timeout override in milliseconds. Falls back to the global `messages.tts.timeoutMs`.          |
+
+The provider is considered configured once `apiKey` is set plus one of
+`region`, `endpoint`, or `baseUrl`. Env vars are only checked as a fallback
+for config keys left unset.
 
 ## Notes
 
@@ -104,7 +111,8 @@ Voice names
 
     Use the Azure Speech voice `ShortName` value, for example
     `en-US-JennyNeural`. The bundled provider can list voices through the
-    same Speech resource and filters voices marked deprecated or retired.
+    same Speech resource and filters out voices marked deprecated, retired,
+    or disabled.
 
 
 Audio outputs
@@ -112,14 +120,15 @@ Audio outputs
     Azure accepts output formats such as `audio-24khz-48kbitrate-mono-mp3`,
     `ogg-24khz-16bit-mono-opus`, and `riff-24khz-16bit-mono-pcm`. OpenClaw
     requests Ogg/Opus for `voice-note` targets so channels can send native
-    voice bubbles without an extra MP3 conversion.
+    voice bubbles without an extra MP3 conversion, and forces
+    `raw-8khz-8bit-mono-mulaw` for telephony targets.
 
 
 Alias
 
-    `azure` is accepted as a provider alias for existing PRs and user config,
-    but new config should use `azure-speech` to avoid confusion with Azure
-    OpenAI model providers.
+    `azure` is accepted as a provider alias for existing config, but new
+    config should use `azure-speech` to avoid confusion with Azure OpenAI
+    model providers.
 
 
 ## Related

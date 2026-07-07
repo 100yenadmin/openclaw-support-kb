@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Architecture"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/architecture"
-source_hash: "d6985af05693b35fb4561367e528b2eda92976288dcc49de58ac3ae31cf2afea"
+source_hash: "97fb20ca8a714f57dead2ca69993c0035bc3d2b6ed9878a0f54c8ad22661a836"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/architecture.md"
@@ -244,7 +244,7 @@ Long-running process with 20 platform adapters, unified session routing, user au
 
 Three discovery sources: `~/.hermes/plugins/` (user), `.hermes/plugins/` (project), and pip entry points. Plugins register tools, hooks, and CLI commands through a context API. Two specialized plugin types exist: memory providers (`plugins/memory/`) and context engines (`plugins/context_engine/`). Both are single-select — only one of each can be active at a time, configured via `hermes plugins` or `config.yaml`.
 
-→ [Plugin Guide](/guides/build-a-hermes-plugin), [Memory Provider Plugin](./memory-provider-plugin.md)
+→ [Plugin Guide](/developer-guide/plugins), [Memory Provider Plugin](./memory-provider-plugin.md)
 
 ### Cron
 

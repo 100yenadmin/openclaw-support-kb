@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin install overrides"
 source: "https://docs.openclaw.ai/plugins/install-overrides"
-source_hash: "a3e6e33169b3615e4e97afeeccdac1133a0ae46f5191f9ce19b4409c17419ff6"
+source_hash: "6e8b0ce2cb5ec9f3ced1dae0b3288df3389c807c6fa273087577c0b760b4ac92"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/install-overrides.md"
@@ -13,9 +13,10 @@ duplicate_index: 1
 # Plugin install overrides
 Source: https://docs.openclaw.ai/plugins/install-overrides
 
-Plugin install overrides let maintainers test setup-time plugin installs against
-a specific npm package or local npm-pack tarball. They are for E2E and package
-validation only. Normal users should install plugins with
+Plugin install overrides let maintainers point setup-time plugin installs at
+a specific npm package or local npm-pack tarball instead of the catalog,
+bundled, or default npm source. They exist for E2E and package validation
+only; normal users install plugins with
 [`openclaw plugins install`](/cli/plugins).
 
 Warning
@@ -37,27 +38,26 @@ export OPENCLAW_PLUGIN_INSTALL_OVERRIDES='{
 
 The override map is JSON keyed by plugin id. Values support:
 
-- `npm:<registry-spec>` for registry packages and exact versions or tags
-- `npm-pack:<path.tgz>` for local tarballs produced by `npm pack`
-
-Relative `npm-pack:` paths resolve from the current working directory.
+| Prefix                | Source                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------ |
+| `npm:<registry-spec>` | Registry packages, exact versions, or tags                                                       |
+| `npm-pack:<path.tgz>` | Local tarballs produced by `npm pack`; relative paths resolve from the current working directory |
 
 ## Behavior
 
-When a setup-time flow asks to install a plugin whose id appears in the map,
-OpenClaw uses the override source instead of the catalog, bundled, or default
-npm source. This applies to onboarding and other flows that use the shared
+When a setup-time flow installs a plugin whose id appears in the map, OpenClaw
+uses the override source instead of the catalog, bundled, or default npm
+source. This applies to onboarding and any other flow using the shared
 setup-time plugin installer.
 
-Overrides still enforce the expected plugin id. A tarball mapped to `codex`
-must install a plugin whose manifest id is `codex`.
-
-Overrides do not inherit official trusted-source status. Even when the catalog
-entry normally represents an OpenClaw-owned package, an override is treated as
-operator-supplied test input.
-
-Workspace `.env` files cannot enable install overrides. Set these variables in
-the trusted shell, CI job, or remote test command that launches OpenClaw.
+- Overrides still enforce the expected plugin id: a tarball mapped to `codex`
+  must install a plugin whose manifest id is `codex`.
+- Overrides do not inherit official trusted-source status. Even when the
+  catalog entry normally represents an OpenClaw-owned package, an override is
+  treated as operator-supplied test input.
+- Workspace `.env` files cannot enable install overrides; both env vars are on
+  the blocked workspace dotenv list. Set them in the trusted shell, CI job, or
+  remote test command that launches OpenClaw.
 
 ## Package E2E
 
@@ -80,8 +80,8 @@ find "$OPENCLAW_STATE_DIR/npm/projects" -path '*/node_modules/@openclaw/codex/pa
 grep -R '"@openclaw/codex"' "$OPENCLAW_STATE_DIR/npm/projects"/*/package-lock.json
 ```
 
-For live provider E2E, source the real API key from a trusted shell or CI secret
-before launching the test command. Do not print keys; report only the source and
-whether the key was present.
+For live provider E2E, source the real API key from a trusted shell or CI
+secret before launching the test command. Do not print keys; report only the
+source and whether the key was present.
 
 ---

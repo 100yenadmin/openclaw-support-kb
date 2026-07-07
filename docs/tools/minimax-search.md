@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
-source_hash: "5387d843ff38d2b04d943f90340d614b2350aa2a4c2eb092b207819c5fb45af3"
+source_hash: "7ca05314c4500e25b7072a28aed9365c9f8789d1931e765524aa24977d55ac5a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/minimax-search.md"
@@ -40,9 +40,10 @@ Store the key
 
 
 OpenClaw also accepts `MINIMAX_CODING_API_KEY`, `MINIMAX_OAUTH_TOKEN`, and
-`MINIMAX_API_KEY` as env aliases. `MINIMAX_API_KEY` should point at a
-search-enabled Token Plan credential; ordinary MiniMax model API keys may not
-be accepted by the Token Plan search endpoint.
+`MINIMAX_API_KEY` as env aliases, checked in that order after
+`MINIMAX_CODE_PLAN_KEY`. `MINIMAX_API_KEY` should point at a search-enabled
+Token Plan credential; ordinary MiniMax model API keys may not be accepted by
+the Token Plan search endpoint.
 
 ## Config
 
@@ -99,10 +100,10 @@ can satisfy the MiniMax Search bearer credential.
 
 ## Supported parameters
 
-| Parameter | Type    | Constraints | Description                                                                 |
-| --------- | ------- | ----------- | --------------------------------------------------------------------------- |
-| `query`   | string  | required    | Search query string.                                                        |
-| `count`   | integer | 1-10        | Number of results to return. OpenClaw trims the returned list to this size. |
+| Parameter | Type    | Constraints     | Description                                                                 |
+| --------- | ------- | --------------- | --------------------------------------------------------------------------- |
+| `query`   | string  | required        | Search query string.                                                        |
+| `count`   | integer | 1-10, default 5 | Number of results to return. OpenClaw trims the returned list to this size. |
 
 Provider-specific filters are not currently supported.
 

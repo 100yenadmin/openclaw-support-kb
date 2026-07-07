@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Elevated mode"
 source: "https://docs.openclaw.ai/tools/elevated"
-source_hash: "12746620d7fdcae0c0df186939a1d21e3e8367c97a4084ad2b2ff9a7abb65cfc"
+source_hash: "66e9a9bacfa65bb5732a6a28a0d7cb218af2e964e6433c3c8a0a8d979eb1a76d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/elevated.md"
@@ -13,25 +13,22 @@ duplicate_index: 1
 # Elevated mode
 Source: https://docs.openclaw.ai/tools/elevated
 
-When an agent runs inside a sandbox, its `exec` commands are confined to the
-sandbox environment. **Elevated mode** lets the agent break out and run commands
-outside the sandbox instead, with configurable approval gates.
+When an agent runs inside a sandbox, its `exec` commands are confined to the sandbox environment. **Elevated mode** lets the agent break out and run commands outside the sandbox instead, with configurable approval gates.
 
 Info
 
-  Elevated mode only changes behavior when the agent is **sandboxed**. For
-  unsandboxed agents, exec already runs on the host.
+  Elevated mode only changes behavior when the agent is **sandboxed**. For unsandboxed agents, exec already runs on the host.
 
 ## Directives
 
 Control elevated mode per-session with slash commands:
 
-| Directive        | What it does                                                           |
-| ---------------- | ---------------------------------------------------------------------- |
-| `/elevated on`   | Run outside the sandbox on the configured host path, keep approvals    |
-| `/elevated ask`  | Same as `on` (alias)                                                   |
-| `/elevated full` | Run outside the sandbox on the configured host path and skip approvals |
-| `/elevated off`  | Return to sandbox-confined execution                                   |
+| Directive        | What it does                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `/elevated on`   | Run outside the sandbox on the configured host path, keep approvals                                                             |
+| `/elevated ask`  | Same as `on` (alias)                                                                                                            |
+| `/elevated full` | Run outside the sandbox on the configured host path and skip approvals when the mode/host approval policy is already permissive |
+| `/elevated off`  | Return to sandbox-confined execution                                                                                            |
 
 Also available as `/elev on|off|ask|full`.
 
@@ -84,8 +81,10 @@ Commands run outside the sandbox
 
     With elevated active, `exec` calls leave the sandbox. The effective host is
     `gateway` by default, or `node` when the configured/session exec target is
-    `node`. In `full` mode, exec approvals are skipped. In `on`/`ask` mode,
-    configured approval rules still apply.
+    `node`. In `full` mode, exec approvals are skipped when the resolved exec
+    mode/host approval policy is already fully permissive (security `full`,
+    ask `off`); otherwise the normal approval policy still applies. In
+    `on`/`ask` mode, configured approval rules always apply.
 
 
 ## Resolution order
@@ -98,9 +97,9 @@ Commands run outside the sandbox
 
 - **Global gate**: `tools.elevated.enabled` (must be `true`)
 - **Sender allowlist**: `tools.elevated.allowFrom` with per-channel lists
-- **Per-agent gate**: `agents.list[].tools.elevated.enabled` (can only further restrict)
+- **Per-agent gate**: `agents.list[].tools.elevated.enabled` (can only further restrict; both the global and per-agent gate must be `true`)
 - **Per-agent allowlist**: `agents.list[].tools.elevated.allowFrom` (sender must match both global + per-agent)
-- **Discord fallback**: if `tools.elevated.allowFrom.discord` is omitted, `channels.discord.allowFrom` is used as fallback
+- **Channel-provided fallback allowlist**: channel plugins can optionally supply a fallback allowlist through an SDK adapter hook, used when `tools.elevated.allowFrom.<provider>` is not configured. No bundled channel currently implements this hook, so in practice every provider needs an explicit `tools.elevated.allowFrom.<provider>` entry today.
 - **All gates must pass**; otherwise elevated is treated as unavailable
 
 Allowlist entry formats:
@@ -117,7 +116,7 @@ Allowlist entry formats:
 
 - **Tool policy**: if `exec` is denied by tool policy, elevated cannot override it.
 - **Host selection policy**: elevated does not turn `auto` into a free cross-host override. It uses the configured/session exec target rules, choosing `node` only when the target is already `node`.
-- **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults for authorized senders and does not require elevated mode.
+- **Separate from `/exec`**: the `/exec` directive adjusts per-session exec defaults (host, security, ask, node) for authorized senders and does not require elevated mode.
 
 Note
 

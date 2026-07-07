@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Credits"
 source: "https://docs.openclaw.ai/reference/credits"
-source_hash: "e102a5ed41eb36470f559338bac07da8d76e309a6e81f1203e4fca674840f6af"
+source_hash: "f58c326938849cb01117072893b2ee9109afd0292659991b4cb303f4d18f73b5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/credits.md"
@@ -13,9 +13,7 @@ duplicate_index: 1
 # Credits
 Source: https://docs.openclaw.ai/reference/credits
 
-## The name
-
-OpenClaw = CLAW + TARDIS, because every space lobster needs a time and space machine.
+OpenClaw = CLAW + TARDIS: every space lobster needs a time and space machine.
 
 ## Credits
 
@@ -27,11 +25,11 @@ OpenClaw = CLAW + TARDIS, because every space lobster needs a time and space mac
 
 - **Maxim Vovshin** (@Hyaxia, [36747317+Hyaxia@users.noreply.github.com](mailto:36747317+Hyaxia@users.noreply.github.com)) - Blogwatcher skill
 - **Nacho Iacovino** (@nachoiacovino, [nacho.iacovino@gmail.com](mailto:nacho.iacovino@gmail.com)) - Location parsing (Telegram and WhatsApp)
-- **Vincent Koc** ([@vincentkoc](https://github.com/vincentkoc), [@vincent_koc](https://x.com/vincent_koc)) - Agents, Telemetry, Hooks, Security
+- **Vincent Koc** ([@vincentkoc](https://github.com/vincentkoc), [@vincent_koc](https://x.com/vincent_koc)) - Agents, telemetry, hooks, security
 
 ## License
 
-MIT - Free as a lobster in the ocean.
+MIT, copyright OpenClaw Foundation. Third-party notices for incorporated or adapted code are in `THIRD_PARTY_NOTICES.md`.
 
 > "We are all just playing with our own prompts." (An AI, probably high on tokens)
 

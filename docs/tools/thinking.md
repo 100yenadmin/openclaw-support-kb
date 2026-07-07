@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "afcb964c0b0d5e8db4d2007ecff160b10df756153d06b3a6575966bed07beffd"
+source_hash: "089cbebfeafc06a207bc5798e1b3f152d32da4433e7ff782bf6b18807ae1cd35"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -16,12 +16,12 @@ Source: https://docs.openclaw.ai/tools/thinking
 ## What it does
 
 - Inline directive in any inbound body: `/t <level>`, `/think:<level>`, or `/thinking <level>`.
-- Levels (aliases): `off | minimal | low | medium | high | xhigh | adaptive | max`
-  - minimal → "think"
-  - low → "think hard"
-  - medium → "think harder"
-  - high → "ultrathink" (max budget)
-  - xhigh → "ultrathink+" (GPT-5.2+ and Codex models, plus Anthropic Claude Opus 4.7+ effort)
+- Levels (aliases): `off | minimal | low | medium | high | xhigh | adaptive | max`, roughly mirroring Anthropic's classic "think" < "think hard" < "think harder" < "ultrathink" magic-word ladder:
+  - minimal ~ "think"
+  - low ~ "think hard"
+  - medium ~ "think harder"
+  - high ~ "ultrathink" (max budget)
+  - xhigh ~ "ultrathink+" (GPT-5.2+ and Codex models, plus Anthropic Claude Opus 4.7+ effort)
   - adaptive → provider-managed adaptive thinking (supported for Claude 4.6 on Anthropic/Bedrock, Anthropic Claude Opus 4.7+, and Google Gemini dynamic thinking)
   - max → provider max reasoning (Anthropic Claude Opus 4.7+; Ollama maps this to its highest native `think` effort)
   - `x-high`, `x_high`, `extra-high`, `extra high`, and `extra_high` map to `xhigh`.

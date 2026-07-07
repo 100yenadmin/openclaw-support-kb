@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SOUL.md personality guide"
 source: "https://docs.openclaw.ai/concepts/soul"
-source_hash: "211ea0daa1d5c445fc720a9bf50d017310f036c4df3b5b26cd6e1d4f438a45ad"
+source_hash: "0fe5933dd61e91c7339832b78f5d33197192a441045e1644edf09c314ff5c63d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/soul.md"
@@ -13,45 +13,26 @@ duplicate_index: 1
 # SOUL.md personality guide
 Source: https://docs.openclaw.ai/concepts/soul
 
-`SOUL.md` is where your agent's voice lives.
-
-OpenClaw injects it on normal sessions, so it has real weight. If your agent
-sounds bland, hedgy, or weirdly corporate, this is usually the file to fix.
+`SOUL.md` is where your agent's voice lives. OpenClaw injects it into normal
+sessions, so it carries real weight: if your agent sounds bland, hedgy, or
+corporate, this is usually the file to fix.
 
 ## What belongs in SOUL.md
 
-Put the stuff that changes how the agent feels to talk to:
+Put the stuff that changes how the agent feels to talk to: tone, opinions,
+brevity, humor, boundaries, default level of bluntness.
 
-- tone
-- opinions
-- brevity
-- humor
-- boundaries
-- default level of bluntness
-
-Do **not** turn it into:
-
-- a life story
-- a changelog
-- a security policy dump
-- a giant wall of vibes with no behavioral effect
-
-Short beats long. Sharp beats vague.
+Do **not** turn it into a life story, a changelog, a security policy dump, or a
+wall of vibes with no behavioral effect. Short beats long. Sharp beats vague.
 
 ## Why this works
 
-This lines up with OpenAI's prompt guidance:
-
-- The prompt engineering guide says high-level behavior, tone, goals, and
-  examples belong in the high-priority instruction layer, not buried in the
-  user turn.
-- The same guide recommends treating prompts like something you iterate on,
-  pin, and evaluate, not magical prose you write once and forget.
-
-For OpenClaw, `SOUL.md` is that layer.
-
-If you want better personality, write stronger instructions. If you want stable
-personality, keep them concise and versioned.
+This lines up with OpenAI's prompt guidance: high-level behavior, tone, goals,
+and examples belong in the high-priority instruction layer, not buried in the
+user turn, and prompts should be iterated on, pinned, and evaluated rather than
+written once and forgotten. For OpenClaw, `SOUL.md` is that layer: write
+stronger instructions for better personality, keep them concise and versioned
+for stable personality.
 
 OpenAI refs:
 
@@ -61,8 +42,6 @@ OpenAI refs:
 ## The Molty prompt
 
 Paste this into your agent and let it rewrite `SOUL.md`.
-
-Path fixed for OpenClaw workspaces: use `SOUL.md`, not `http://SOUL.md`.
 
 ```md
 Read your `SOUL.md`. Now rewrite it with these changes:
@@ -81,31 +60,19 @@ Save the new `SOUL.md`. Welcome to having a personality.
 
 ## What good looks like
 
-Good `SOUL.md` rules sound like this:
+Good rules: have a take, skip filler, be funny when it fits, call out bad ideas
+early, stay concise unless depth is actually useful.
 
-- have a take
-- skip filler
-- be funny when it fits
-- call out bad ideas early
-- stay concise unless depth is actually useful
-
-Bad `SOUL.md` rules sound like this:
-
-- maintain professionalism at all times
-- provide comprehensive and thoughtful assistance
-- ensure a positive and supportive experience
-
-That second list is how you get mush.
+Bad rules: "maintain professionalism at all times," "provide comprehensive and
+thoughtful assistance," "ensure a positive and supportive experience." That's
+how you get mush.
 
 ## One warning
 
-Personality is not permission to be sloppy.
-
-Keep `AGENTS.md` for operating rules. Keep `SOUL.md` for voice, stance, and
-style. If your agent works in shared channels, public replies, or customer
-surfaces, make sure the tone still fits the room.
-
-Sharp is good. Annoying is not.
+Personality is not permission to be sloppy. Keep `AGENTS.md` for operating
+rules; keep `SOUL.md` for voice, stance, and style. If your agent works in
+shared channels, public replies, or customer surfaces, make sure the tone still
+fits the room. Sharp is good. Annoying is not.
 
 ## Related
 

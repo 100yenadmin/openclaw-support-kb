@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TOOLS.dev template"
 source: "https://docs.openclaw.ai/reference/templates/TOOLS.dev"
-source_hash: "1861d4559370e9928fcb4a339b8dad1d61a2185f130007bc7b057f70001de48c"
+source_hash: "785d0e9787b5541322da23ac879cb305547358dfe4b556a704c54581e74edbc6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/tools.dev.md"
@@ -15,8 +15,7 @@ Source: https://docs.openclaw.ai/reference/templates/TOOLS.dev
 
 # TOOLS.md - User Tool Notes (editable)
 
-This file is for _your_ notes about external tools and conventions.
-It does not define which tools exist; OpenClaw provides built-in tools internally.
+This file is for _your_ notes about external tools and conventions. It does not define which tools exist; OpenClaw provides built-in tools internally, and skills add the rest.
 
 ## Examples
 

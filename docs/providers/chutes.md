@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chutes"
 source: "https://docs.openclaw.ai/providers/chutes"
-source_hash: "540e5d965c4c21e41966851d632c3c7130c11af84aabb3fdab339e6da834d498"
+source_hash: "ffbf3be0522189fe1526e86f95c7c8cb1fd5264d552091c956a4547c44fa3312"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/chutes.md"
@@ -14,19 +14,21 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/chutes
 
 [Chutes](https://chutes.ai) exposes open-source model catalogs through an
-OpenAI-compatible API. OpenClaw supports both browser OAuth and direct API-key
-auth for the `chutes` provider.
+OpenAI-compatible API. OpenClaw supports both browser OAuth and API-key auth.
 
-| Property | Value                        |
-| -------- | ---------------------------- |
-| Provider | `chutes`                     |
-| API      | OpenAI-compatible            |
-| Base URL | `https://llm.chutes.ai/v1`   |
-| Auth     | OAuth or API key (see below) |
+| Property         | Value                                                   |
+| ---------------- | ------------------------------------------------------- |
+| Provider         | `chutes`                                                |
+| Plugin           | official external package (`@openclaw/chutes-provider`) |
+| API              | OpenAI-compatible                                       |
+| Base URL         | `https://llm.chutes.ai/v1`                              |
+| Auth             | OAuth or API key (see below)                            |
+| Runtime env vars | `CHUTES_API_KEY`, `CHUTES_OAUTH_TOKEN`                  |
+
+`CHUTES_OAUTH_TOKEN` supplies an already-obtained OAuth access token directly
+(for example in CI), bypassing the interactive browser flow below.
 
 ## Install plugin
-
-Install the official plugin, then restart Gateway:
 
 ```bash
 openclaw plugins install @openclaw/chutes-provider
@@ -34,6 +36,9 @@ openclaw gateway restart
 ```
 
 ## Getting started
+
+Both paths set the default model to `chutes/zai-org/GLM-4.7-TEE` and register
+the Chutes catalog.
 
 Tabs
 
@@ -52,13 +57,6 @@ Run the OAuth onboarding flow
         OpenClaw launches the browser flow locally, or shows a URL + redirect-paste
         flow on remote/headless hosts. OAuth tokens auto-refresh through OpenClaw auth
         profiles.
-
-
-Verify the default model
-
-        After onboarding, the default model is set to
-        `chutes/zai-org/GLM-4.7-TEE` and the Chutes static catalog is
-        registered.
 
 
 
@@ -82,30 +80,21 @@ Run the API key onboarding flow
         ```
 
 
-Verify the default model
 
-        After onboarding, the default model is set to
-        `chutes/zai-org/GLM-4.7-TEE` and the Chutes static catalog is
-        registered.
-
-
-
-
-Note
-
-Both auth paths register the Chutes static catalog and set the default model to
-`chutes/zai-org/GLM-4.7-TEE`. Runtime environment variables: `CHUTES_API_KEY`,
-`CHUTES_OAUTH_TOKEN`.
 
 ## Discovery behavior
 
-When Chutes auth is available, OpenClaw queries the Chutes catalog with that
-credential and uses the discovered models. If discovery fails, OpenClaw falls
-back to a static catalog so onboarding and startup still work.
+When Chutes auth is available, OpenClaw queries `GET /v1/models` with that
+credential and uses the discovered models, cached for 5 minutes per
+credential. On an expired/unauthorized key (HTTP 401), OpenClaw retries once
+without credentials. If discovery still returns no rows, fails, or returns any
+other non-2xx status, it falls back to the bundled static catalog (both API-key
+and OAuth discovery use this same path). If discovery fails at startup, the
+static catalog is used automatically.
 
 ## Default aliases
 
-OpenClaw registers three convenience aliases for the Chutes static catalog:
+OpenClaw registers three convenience aliases for the Chutes catalog:
 
 | Alias           | Target model                                          |
 | --------------- | ----------------------------------------------------- |
@@ -115,7 +104,7 @@ OpenClaw registers three convenience aliases for the Chutes static catalog:
 
 ## Built-in starter catalog
 
-The static fallback catalog includes current Chutes refs:
+The bundled fallback catalog has 47 models. A representative sample of current refs:
 
 | Model ref                                             |
 | ----------------------------------------------------- |
@@ -127,6 +116,8 @@ The static fallback catalog includes current Chutes refs:
 | `chutes/chutesai/Mistral-Small-3.2-24B-Instruct-2506` |
 | `chutes/Qwen/Qwen3-Coder-Next-TEE`                    |
 | `chutes/openai/gpt-oss-120b-TEE`                      |
+
+Run `openclaw models list --all --provider chutes` for the full list.
 
 ## Config example
 
@@ -149,14 +140,14 @@ AccordionGroup
 
 OAuth overrides
 
-    You can customize the OAuth flow with optional environment variables:
+    Customize the OAuth flow with optional environment variables:
 
     | Variable | Purpose |
     | -------- | ------- |
-    | `CHUTES_CLIENT_ID` | Custom OAuth client ID |
-    | `CHUTES_CLIENT_SECRET` | Custom OAuth client secret |
-    | `CHUTES_OAUTH_REDIRECT_URI` | Custom redirect URI |
-    | `CHUTES_OAUTH_SCOPES` | Custom OAuth scopes |
+    | `CHUTES_CLIENT_ID` | OAuth client id (prompted if unset) |
+    | `CHUTES_CLIENT_SECRET` | OAuth client secret |
+    | `CHUTES_OAUTH_REDIRECT_URI` | Redirect URI (default `http://127.0.0.1:1456/oauth-callback`) |
+    | `CHUTES_OAUTH_SCOPES` | Space-separated scopes (default `openid profile chutes:invoke`) |
 
     See the [Chutes OAuth docs](https://chutes.ai/docs/sign-in-with-chutes/overview)
     for redirect-app requirements and help.
@@ -166,9 +157,8 @@ OAuth overrides
 
 Notes
 
-    - API-key and OAuth discovery both use the same `chutes` provider id.
     - Chutes models are registered as `chutes/<model-id>`.
-    - If discovery fails at startup, the static catalog is used automatically.
+    - Chutes does not report token usage while streaming (`supportsUsageInStreaming: false`); usage totals still show once the stream completes.
 
 
 

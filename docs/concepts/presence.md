@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "7d715403a3bf98118b8aafa81afc42b48814b0c2880ba17f599b507582c9b154"
+source_hash: "c20b9e7d1044c5642c6e5baea3c8f79fbc90af5db5240d8632696fa262a4b344"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
@@ -30,9 +30,10 @@ Presence entries are structured objects with fields like:
 - `ip`: best-effort IP address
 - `version`: client version string
 - `deviceFamily` / `modelIdentifier`: hardware hints
-- `mode`: `ui`, `webchat`, `cli`, `backend`, `probe`, `test`, `node`, ...
-- `lastInputSeconds`: "seconds since last user input" (if known)
-- `reason`: `self`, `connect`, `node-connected`, `periodic`, ...
+- `mode`: `ui`, `webchat`, `cli`, `backend`, `node`, `probe`, `test`
+- `lastInputSeconds`: seconds since last user input, if known
+- `reason`: free-form client-supplied string; the Gateway itself only emits `self`, `connect`, and `disconnect`
+- `deviceId`, `roles`, `scopes`: device identity and role/scope hints from the connect handshake
 - `ts`: last update timestamp (ms since epoch)
 
 ## Producers (where presence comes from)
@@ -66,14 +67,14 @@ upserts a presence entry for that node (same flow as other WS clients).
 
 ## Merge + dedupe rules (why `instanceId` matters)
 
-Presence entries are stored in a single in-memory map:
+Presence entries are stored in a single in-memory map, keyed case-insensitively
+by the first available of, in order: a paired device id, `connect.client.instanceId`,
+or the per-connection id as a last resort.
 
-- Entries are keyed by a **presence key**.
-- The best key is a stable `instanceId` (from `connect.client.instanceId`) that survives restarts.
-- Keys are case-insensitive.
-
-If a client reconnects without a stable `instanceId`, it may show up as a
-**duplicate** row.
+CLI clients are excluded from tracking entirely (see above), so their
+connection id never becomes a key. For every other client, the connection id
+fallback means a client that reconnects without a stable `instanceId` shows up
+as a **duplicate** row.
 
 ## TTL and bounded size
 
@@ -86,9 +87,11 @@ This keeps the list fresh and avoids unbounded memory growth.
 
 ## Remote/tunnel caveat (loopback IPs)
 
-When a client connects over an SSH tunnel / local port forward, the Gateway may
-see the remote address as `127.0.0.1`. To avoid overwriting a good client-reported
-IP, loopback remote addresses are ignored.
+When a client connects over an SSH tunnel / local port forward, the Gateway
+may see the remote address as `127.0.0.1`. To avoid recording that tunnel
+address as the client's IP, connect handling omits `ip` entirely for
+detected-local (loopback) clients rather than writing the loopback address
+into the entry.
 
 ## Consumers
 

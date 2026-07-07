@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Working with Skills"
 source: "https://hermes-agent.nousresearch.com/docs/guides/work-with-skills"
-source_hash: "717f5073a0124e725b1cee4dcdc7e070b556e9d8bbc8ce6edd7dfeb63735d0c8"
+source_hash: "32966673ad4a31ec18118c14bd28d80eb87b036cc7d7f64997b267dcf037d311"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/work-with-skills.md"
@@ -148,7 +148,7 @@ skill_view("writing-plans")
 
 Plugin skills are **not** listed in the system prompt and don't appear in `skills_list`. They're opt-in — load them explicitly when you know a plugin provides one. When loaded, the agent sees a banner listing sibling skills from the same plugin.
 
-For how to ship skills in your own plugin, see [Build a Hermes Plugin → Bundle skills](/guides/build-a-hermes-plugin#bundle-skills).
+For how to ship skills in your own plugin, see [Build a Hermes Plugin → Bundle skills](/developer-guide/plugins#bundle-skills).
 
 ---
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gemini search"
 source: "https://docs.openclaw.ai/tools/gemini-search"
-source_hash: "d8dd7a6287cd60604d400ea7c5db1cd97532f6325c37ed3072e66b506b7d6750"
+source_hash: "8c2855ef772337259ca9843c7249b61b8281fcf9f7804e61af12962e841efb5f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/gemini-search.md"
@@ -83,9 +83,8 @@ inline citations. The results include both the synthesized answer and the source
 URLs.
 
 - Citation URLs from Gemini grounding are automatically resolved from Google
-  redirect URLs to direct URLs.
-- Redirect resolution uses the SSRF guard path (HEAD + redirect checks +
-  http/https validation) before returning the final citation URL.
+  redirect URLs to direct URLs via a HEAD request through OpenClaw's SSRF-guarded
+  fetch path (redirect following, http/https validation).
 - Redirect resolution uses strict SSRF defaults, so redirects to
   private/internal targets are blocked.
 

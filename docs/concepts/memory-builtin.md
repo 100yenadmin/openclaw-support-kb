@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "c5246d2a22d49c042b40b671a5aa9074a3e7deaf11e1f97229c1bc10547452e2"
+source_hash: "f80e5816e5eabd57e87988e30faab106b3ce44c5ae8a8c41912725f462903e7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -13,8 +13,9 @@ duplicate_index: 1
 # Builtin memory engine
 Source: https://docs.openclaw.ai/concepts/memory-builtin
 
-The builtin engine is the default memory backend. It stores your memory index in
-a per-agent SQLite database and needs no extra dependencies to get started.
+The builtin engine is the default memory backend. It stores your memory index
+in a per-agent SQLite database and needs no extra dependencies to get
+started.
 
 ## What it provides
 
@@ -26,9 +27,9 @@ a per-agent SQLite database and needs no extra dependencies to get started.
 
 ## Getting started
 
-By default, the builtin engine uses OpenAI embeddings. If you already have
-`OPENAI_API_KEY` or `models.providers.openai.apiKey` configured, vector search
-works with no extra memory config.
+By default, the builtin engine uses OpenAI embeddings. If `OPENAI_API_KEY` or
+`models.providers.openai.apiKey` is already configured, vector search works
+with no extra memory config.
 
 To set a provider explicitly:
 
@@ -46,8 +47,8 @@ To set a provider explicitly:
 
 Without an embedding provider, only keyword search is available.
 
-To force local GGUF embeddings, install the official llama.cpp provider plugin,
-then point `local.modelPath` at a GGUF file:
+To force local GGUF embeddings, install the official llama.cpp provider
+plugin, then point `local.modelPath` at a GGUF file:
 
 ```bash
 openclaw plugins install @openclaw/llama-cpp-provider
@@ -73,10 +74,11 @@ openclaw plugins install @openclaw/llama-cpp-provider
 
 | Provider          | ID                  | Notes                               |
 | ----------------- | ------------------- | ----------------------------------- |
-| Bedrock           | `bedrock`           | Uses AWS credential chain           |
+| Bedrock           | `bedrock`           | Uses the AWS credential chain       |
 | DeepInfra         | `deepinfra`         | Default: `BAAI/bge-m3`              |
 | Gemini            | `gemini`            | Supports multimodal (image + audio) |
-| GitHub Copilot    | `github-copilot`    | Uses Copilot subscription           |
+| GitHub Copilot    | `github-copilot`    | Uses your Copilot subscription      |
+| LM Studio         | `lmstudio`          | Local/self-hosted                   |
 | Local             | `local`             | `@openclaw/llama-cpp-provider`      |
 | Mistral           | `mistral`           |                                     |
 | Ollama            | `ollama`            | Local/self-hosted                   |
@@ -88,16 +90,17 @@ Set `memorySearch.provider` to switch away from OpenAI.
 
 ## How indexing works
 
-OpenClaw indexes `MEMORY.md` and `memory/*.md` into chunks (~400 tokens with
-80-token overlap) and stores them in a per-agent SQLite database.
+OpenClaw indexes `MEMORY.md` and `memory/*.md` into chunks (400 tokens with
+80-token overlap by default) and stores them in a per-agent SQLite database.
 
 - **Index location:** the owning agent database at
   `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
 - **Storage maintenance:** SQLite WAL sidecars are bounded with periodic and
   shutdown checkpoints.
-- **File watching:** changes to memory files trigger a debounced reindex (1.5s).
-- **Auto-reindex:** when the embedding provider, model, or chunking config
-  changes, the entire index is rebuilt automatically.
+- **File watching:** changes to memory files trigger a debounced reindex
+  (1.5s default).
+- **Auto-reindex:** the index rebuilds automatically when the embedding
+  provider, model, chunking config, configured sources, or scope change.
 - **Reindex on demand:** `openclaw memory index --force`
 
 Info
@@ -118,8 +121,8 @@ The builtin engine is the right choice for most users:
 Consider switching to [QMD](/concepts/memory-qmd) if you need reranking, query
 expansion, or want to index directories outside the workspace.
 
-Consider [Honcho](/concepts/memory-honcho) if you want cross-session memory with
-automatic user modeling.
+Consider [Honcho](/concepts/memory-honcho) if you want cross-session memory
+with automatic user modeling.
 
 ## Troubleshooting
 
@@ -139,11 +142,12 @@ Set `memorySearch.provider: "local"` when you want local embeddings.
 **Stale results?** Run `openclaw memory index --force` to rebuild. The watcher
 may miss changes in rare edge cases.
 
-**sqlite-vec not loading?** OpenClaw falls back to in-process cosine similarity
-automatically. `openclaw memory status --deep` reports the local vector store
-separately from the embedding provider, so `Vector store: unavailable` points
-at sqlite-vec loading while `Embeddings: unavailable` points at provider/auth
-or model readiness. Check logs for the specific load error.
+**sqlite-vec not loading?** OpenClaw falls back to in-process cosine
+similarity automatically. `openclaw memory status --deep` reports the local
+vector store separately from the embedding provider, so `Vector store:
+unavailable` points at sqlite-vec loading while `Embeddings: unavailable`
+points at provider/auth or model readiness. Check logs for the specific load
+error.
 
 ## Configuration
 

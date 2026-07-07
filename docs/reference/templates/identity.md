@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "IDENTITY template"
 source: "https://docs.openclaw.ai/reference/templates/IDENTITY"
-source_hash: "3f870060561c432fb428ac40a0f0ff414d8c2a58ddd9e7c143242612428d825f"
+source_hash: "5dca4423a5dfcb30bf853667727541956c3a01c306420400936276b28fbacf94"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/identity.md"
@@ -35,7 +35,9 @@ This isn't just metadata. It's the start of figuring out who you are.
 Notes:
 
 - Save this file at the workspace root as `IDENTITY.md`.
-- For avatars, use a workspace-relative path like `avatars/openclaw.png`.
+- For avatars, use a workspace-relative path like `avatars/openclaw.png`, an `http(s)` URL, or a data URI.
+- Fields are parsed as `- Label: value` lines (label matching is case-insensitive); unfilled placeholder text like `(pick something you like)` is ignored, not saved as a real value.
+- `Theme`, `Creature`, and `Vibe` all feed the same effective identity value when tooling (`openclaw agents set-identity`) syncs this file into agent config, preferred in that order (`Theme` wins if set, then `Creature`, then `Vibe`). Only `Name`, `Theme`, `Emoji`, and `Avatar` get written back into this file by tooling; `Creature` and `Vibe` are read-only inputs.
 
 ## Related
 

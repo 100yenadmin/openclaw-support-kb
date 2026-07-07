@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway lifecycle on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/child-process"
-source_hash: "87ad0c4324770f2c86a87708363b916eb77872ff4f60e99ac783b17ed496761e"
+source_hash: "3ce8003264a83c90ea675012edd8992421c38eae150399f8db936e2c5f5f82b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/child-process.md"
@@ -13,19 +13,20 @@ duplicate_index: 1
 # Gateway lifecycle on macOS
 Source: https://docs.openclaw.ai/platforms/mac/child-process
 
-The macOS app **manages the Gateway via launchd** by default and does not spawn
-the Gateway as a child process. It first tries to attach to an already-running
-Gateway on the configured port; if none is reachable, it enables the launchd
-service via the external `openclaw` CLI (no embedded runtime). This gives you
-reliable auto-start at login and restart on crashes.
+The macOS app manages the Gateway via **launchd** by default and does not
+spawn the Gateway as a child process. It first tries to attach to an
+already-running Gateway on the configured port; if none is reachable, it
+enables the launchd service via the external `openclaw` CLI (no embedded
+runtime). This gives reliable auto-start at login and restart on crashes.
 
-Child-process mode (Gateway spawned directly by the app) is **not in use** today.
-If you need tighter coupling to the UI, run the Gateway manually in a terminal.
+Child-process mode (Gateway spawned directly by the app) is **not in use**
+today. If you need tighter coupling to the UI, run the Gateway manually in a
+terminal.
 
 ## Default behavior (launchd)
 
-- The app installs a per-user LaunchAgent labeled `ai.openclaw.gateway`
-  (or `ai.openclaw.<profile>` when using `--profile`/`OPENCLAW_PROFILE`; legacy `com.openclaw.*` is supported).
+- The app installs a per-user LaunchAgent labeled `ai.openclaw.gateway` (or
+  `ai.openclaw.<profile>` when using `--profile`/`OPENCLAW_PROFILE`).
 - When Local mode is enabled, the app ensures the LaunchAgent is loaded and
   starts the Gateway if needed.
 - Logs are written to the launchd gateway log path (visible in Debug Settings).
@@ -41,10 +42,9 @@ Replace the label with `ai.openclaw.<profile>` when running a named profile.
 
 ## Unsigned dev builds
 
-`scripts/restart-mac.sh --no-sign` is for fast local builds when you don't have
-signing keys. To prevent launchd from pointing at an unsigned relay binary, it:
-
-- Writes `~/.openclaw/disable-launchagent`.
+`scripts/restart-mac.sh --no-sign` is for fast local builds without signing
+keys. To stop launchd from pointing at an unsigned relay binary, it writes
+`~/.openclaw/disable-launchagent`.
 
 Signed runs of `scripts/restart-mac.sh` clear this override if the marker is
 present. To reset manually:
@@ -55,10 +55,10 @@ rm ~/.openclaw/disable-launchagent
 
 ## Attach-only mode
 
-To force the macOS app to **never install or manage launchd**, launch it with
-`--attach-only` (or `--no-launchd`). This sets `~/.openclaw/disable-launchagent`,
-so the app only attaches to an already running Gateway. You can toggle the same
-behavior in Debug Settings.
+To force the macOS app to never install or manage launchd, launch it with
+`--attach-only` (or `--no-launchd`). This sets
+`~/.openclaw/disable-launchagent`, so the app only attaches to an already
+running Gateway. Toggle the same behavior in Debug Settings.
 
 ## Remote mode
 
@@ -71,8 +71,8 @@ remote host and connects over that tunnel.
 - Built-in restart/KeepAlive semantics.
 - Predictable logs and supervision.
 
-If a true child-process mode is ever needed again, it should be documented as a
-separate, explicit dev-only mode.
+If a true child-process mode is ever needed again, it should be documented as
+a separate, explicit dev-only mode.
 
 ## Related
 

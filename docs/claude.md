@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs Guide"
 source: "https://docs.openclaw.ai/CLAUDE"
-source_hash: "9e4c32ca311c4a9959192ef249ec5af714cc5b534397e4c46d7e786b2d0f83ce"
+source_hash: "08545acb20897763cdcf24f2208bf26031a138c7fb5746c330fc4ac6c1df9615"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "claude.md"
@@ -30,6 +30,7 @@ This directory owns docs authoring, Mintlify link rules, and docs i18n policy.
 
 - For docs, UI copy, and picker lists, order services/providers alphabetically unless the section is explicitly describing runtime order or auto-detection order.
 - Keep bundled plugin naming consistent with the repo-wide plugin terminology rules in the root `AGENTS.md`.
+- Generated docs, never hand-edit: `docs/plugins/reference/**`, `docs/plugins/reference.md`, and `docs/plugins/plugin-inventory.md` come from `pnpm plugins:inventory:gen`; `docs/docs_map.md` from `pnpm docs:map:gen`; `docs/maturity/**` from `pnpm maturity:render`.
 
 ## Internal Docs
 

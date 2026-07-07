@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "128618c2a41c80b709067502303ab3889acaf96cf9b1feed3d7fa151c3bbd968"
+source_hash: "d2dff037eb549496841de5bcc057885fce47aa51def390425454092870ac2aa8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -262,8 +262,8 @@ Discovery and status
     | `/commands` | Show the generated command catalog |
     | `/tools [compact\|verbose]` | Show what the current agent can use right now |
     | `/status` | Show execution/runtime status, Gateway and system uptime, plugin health, plus provider usage/quota |
-    | `/status plugins` | Show detailed plugin health: load errors, quarantines, channel failures, dependency issues, compatibility notices |
-    | `/goal [status\|start\|pause\|resume\|complete\|block\|clear] ...` | Manage the current session's durable [goal](/tools/goal) |
+    | `/status plugins` | Show detailed plugin health: load errors, quarantines, channel plugin failures, dependency issues, compatibility notices. Requires `commands.plugins: true` |
+    | `/goal [status\|start\|edit\|pause\|resume\|complete\|block\|clear] ...` | Manage the current session's durable [goal](/tools/goal) |
     | `/diagnostics [note]` | Owner-only support-report flow. Asks for exec approval every time |
     | `/crestodian <request>` | Run the Crestodian setup and repair helper from an owner DM |
     | `/tasks` | List active/recent background tasks for the current session |
@@ -278,6 +278,7 @@ Skills, allowlists, approvals
     | Command | Description |
     | --- | --- |
     | `/skill <name> [input]` | Run a skill by name |
+    | `/learn [request]` | Draft one reviewable skill from the current conversation or named sources through [Skill Workshop](/tools/skill-workshop) |
     | `/allowlist [list\|add\|remove] ...` | Manage allowlist entries. Text-only |
     | `/approve <id> <decision>` | Resolve exec or plugin approval prompts |
     | `/btw <question>` | Ask a side question without changing session context. Alias: `/side`. See [BTW](/tools/btw) |
@@ -337,14 +338,14 @@ must be in the same identity group.
 
 ### Bundled plugin commands
 
-| Command                                                                                      | Description                                                                         |
-| -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `/dreaming [on\|off\|status\|help]`                                                          | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming) |
-| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]`                                      | Manage device pairing. See [Pairing](/channels/pairing)                             |
-| `/phone status\|arm ...\|disarm`                                                             | Temporarily arm high-risk phone node commands                                       |
-| `/voice status\|list\|set <voiceId>`                                                         | Manage Talk voice config. Discord native name: `/talkvoice`                         |
-| `/card ...`                                                                                  | Send LINE rich card presets. See [LINE](/channels/line)                             |
-| `/codex status\|models\|threads\|resume\|compact\|review\|diagnostics\|account\|mcp\|skills` | Control the Codex app-server harness. See [Codex harness](/plugins/codex-harness)   |
+| Command                                                 | Description                                                                                                                                                                                    |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/dreaming [on\|off\|status\|help]`                     | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming)                                                                                                            |
+| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]` | Manage device pairing. See [Pairing](/channels/pairing)                                                                                                                                        |
+| `/phone status\|arm ...\|disarm`                        | Temporarily arm high-risk phone node commands                                                                                                                                                  |
+| `/voice status\|list\|set <voiceId>`                    | Manage Talk voice config. Discord native name: `/talkvoice`                                                                                                                                    |
+| `/card ...`                                             | Send LINE rich card presets. See [LINE](/channels/line)                                                                                                                                        |
+| `/codex <action> ...`                                   | Bind, steer, and inspect the Codex app-server harness (status, threads, resume, model, fast, permissions, compact, review, mcp, skills, and more). See [Codex harness](/plugins/codex-harness) |
 
 QQBot-only: `/bot-ping`, `/bot-version`, `/bot-help`, `/bot-upgrade`, `/bot-logs`
 
@@ -379,7 +380,7 @@ Native command arguments
     specific options like `/think` levels follow the session's `/model` override.
 
 
-## `/tools` — what the agent can use now
+## `/tools`: what the agent can use now
 
 `/tools` answers a runtime question: **what this agent can use right now in this
 conversation** — not a static config catalog.
@@ -393,7 +394,7 @@ Results are session-scoped. Changing agent, channel, thread, sender
 authorization, or model can change the output. For profile and override editing,
 use the Control UI Tools panel or config surfaces.
 
-## `/model` — model selection
+## `/model`: model selection
 
 ```text
 /model             # show model picker
@@ -409,7 +410,7 @@ On Discord, `/model` and `/models` open an interactive picker with provider and
 model dropdowns. The picker respects `agents.defaults.models`, including
 `provider/*` entries.
 
-## `/config` — on-disk config writes
+## `/config`: on-disk config writes
 
 Note
 
@@ -426,7 +427,7 @@ Note
 Config is validated before write. Invalid changes are rejected. `/config`
 updates persist across restarts.
 
-## `/mcp` — MCP server config
+## `/mcp`: MCP server config
 
 Note
 
@@ -441,7 +442,7 @@ Note
 
 `/mcp` stores config in OpenClaw config, not embedded-agent project settings.
 
-## `/debug` — runtime-only overrides
+## `/debug`: runtime-only overrides
 
 Note
 
@@ -456,7 +457,7 @@ Note
 /debug reset
 ```
 
-## `/plugins` — plugin management
+## `/plugins`: plugin management
 
 Note
 
@@ -475,7 +476,7 @@ Note
 plugin runtime for new agent turns. `/plugins install` restarts managed
 Gateways automatically because plugin source modules changed.
 
-## `/trace` — plugin trace output
+## `/trace`: plugin trace output
 
 ```text
 /trace          # show current trace state
@@ -487,7 +488,7 @@ Gateways automatically because plugin source modules changed.
 mode. It does not replace `/debug` (runtime overrides) or `/verbose` (normal
 tool output).
 
-## `/btw` — side questions
+## `/btw`: side questions
 
 `/btw` is a quick side question about the current session context. Alias: `/side`.
 

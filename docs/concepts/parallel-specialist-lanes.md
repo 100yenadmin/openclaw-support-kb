@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Parallel specialist lanes"
 source: "https://docs.openclaw.ai/concepts/parallel-specialist-lanes"
-source_hash: "b452138a80faed9b21fe7854d9933aba5f64a737c988611b7c69af3b7192ee20"
+source_hash: "c94676c538f7ec26aaf3823f05f9db588851f291b3172a63d8bb20652bcf3ccb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/parallel-specialist-lanes.md"
@@ -14,8 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/concepts/parallel-specialist-lanes
 
 Parallel specialist lanes let one Gateway route different chats or rooms to
-different agents, while keeping the user experience fast. The trick is to treat
-parallelism as a scarce-resource design problem, not just as "more agents".
+different agents while keeping the user experience fast. Treat parallelism as
+a scarce-resource design problem, not just "more agents".
 
 ## First principles
 
@@ -30,10 +30,10 @@ real bottlenecks:
   focused.
 - **Ownership ambiguity**: duplicate agents doing the same job waste capacity.
 
-OpenClaw already serializes runs per session and caps global parallelism through
-the [command queue](/concepts/queue). Specialist lanes add policy on top:
-which agent owns which work, what stays in chat, and what becomes background
-work.
+OpenClaw already serializes runs per session and caps global parallelism
+through the [command queue](/concepts/queue). Specialist lanes add policy on
+top: which agent owns which work, what stays in chat, and what becomes
+background work.
 
 ## Recommended rollout
 
@@ -43,14 +43,15 @@ Give every lane a written contract in its workspace and system prompt:
 
 - **Purpose**: the work this lane owns.
 - **Non-goals**: work it should hand off instead of attempting.
-- **Chat budget**: quick answers stay in chat; long tasks should acknowledge
-  briefly, then run in a background sub-agent or task.
+- **Chat budget**: quick answers stay in chat; long tasks acknowledge briefly,
+  then run in a background sub-agent or task.
 - **Handoff rule**: when another lane owns the work, say where it should go and
   provide a compact handoff summary.
 - **Tool-risk rule**: prefer the smallest tool surface that can do the job.
 
 This is the cheapest phase and fixes most clogging: one coding job no longer
-turns the research lane into molasses, and each chat keeps its own context clean.
+turns the research lane into molasses, and each chat keeps its own context
+clean.
 
 ### Phase 2: priority and concurrency controls
 

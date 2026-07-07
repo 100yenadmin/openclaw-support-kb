@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qianfan"
 source: "https://docs.openclaw.ai/providers/qianfan"
-source_hash: "dffc1029ad8a9265e995d7a427975bf70c3c16738c5626effa78416ae9187863"
+source_hash: "84844b0413ef687a10f5785e5e967991c2d45e73db0c1bb2405e65495a78f0d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qianfan.md"
@@ -13,15 +13,15 @@ duplicate_index: 1
 # Qianfan
 Source: https://docs.openclaw.ai/providers/qianfan
 
-Qianfan is Baidu's MaaS platform, providing a **unified API** that routes requests to many models behind a single
-endpoint and API key. It is OpenAI-compatible, so most OpenAI SDKs work by switching the base URL.
+Qianfan is Baidu's MaaS platform: a unified, OpenAI-compatible API that routes requests to many models behind a single endpoint and API key. OpenClaw ships it as the official external plugin `@openclaw/qianfan-provider`.
 
-| Property | Value                             |
-| -------- | --------------------------------- |
-| Provider | `qianfan`                         |
-| Auth     | `QIANFAN_API_KEY`                 |
-| API      | OpenAI-compatible                 |
-| Base URL | `https://qianfan.baidubce.com/v2` |
+| Property      | Value                                    |
+| ------------- | ---------------------------------------- |
+| Provider      | `qianfan`                                |
+| Auth          | `QIANFAN_API_KEY`                        |
+| API           | OpenAI-compatible (`openai-completions`) |
+| Base URL      | `https://qianfan.baidubce.com/v2`        |
+| Default model | `qianfan/deepseek-v3.2`                  |
 
 ## Install plugin
 
@@ -44,7 +44,7 @@ Create a Baidu Cloud account
 
 Generate an API key
 
-    Create a new application or select an existing one, then generate an API key. The key format is `bce-v3/ALTAK-...`.
+    Create a new application or select an existing one, then generate an API key. Baidu Cloud keys use the `bce-v3/ALTAK-...` format.
 
 
 Run onboarding
@@ -52,6 +52,12 @@ Run onboarding
     ```bash
     openclaw onboard --auth-choice qianfan-api-key
     ```
+
+    Non-interactive runs read the key from `--qianfan-api-key <key>` or
+    `QIANFAN_API_KEY`. Onboarding writes the provider config, adds the
+    `QIANFAN` alias for the default model, and sets `qianfan/deepseek-v3.2`
+    as the default model when none is configured.
+
 
 
 Verify the model is available
@@ -68,9 +74,11 @@ Verify the model is available
 | `qianfan/deepseek-v3.2`              | text        | 98,304  | 32,768     | Yes       | Default model |
 | `qianfan/ernie-5.0-thinking-preview` | text, image | 119,000 | 64,000     | Yes       | Multimodal    |
 
+The catalog is static; there is no live model discovery.
+
 Tip
 
-The default model ref is `qianfan/deepseek-v3.2`. You only need to override `models.providers.qianfan` when you need a custom base URL or model metadata.
+You only need to override `models.providers.qianfan` when you need a custom base URL or model metadata.
 
 ## Config example
 
@@ -116,25 +124,16 @@ The default model ref is `qianfan/deepseek-v3.2`. You only need to override `mod
 }
 ```
 
+Note
+
+Model refs use the `qianfan/` prefix (for example `qianfan/deepseek-v3.2`).
+
 AccordionGroup
 
 
 Transport and compatibility
 
-    Qianfan runs through the OpenAI-compatible transport path, not native OpenAI request shaping. This means standard OpenAI SDK features work, but provider-specific parameters may not be forwarded.
-
-
-
-Catalog and overrides
-
-    The static catalog currently includes `deepseek-v3.2` and `ernie-5.0-thinking-preview`. Add or override `models.providers.qianfan` only when you need a custom base URL or model metadata.
-
-
-Note
-
-    Model refs use the `qianfan/` prefix (for example `qianfan/deepseek-v3.2`).
-
-
+    Qianfan runs through the OpenAI-compatible transport path, not native OpenAI request shaping. Standard OpenAI SDK features work, but provider-specific parameters may not be forwarded.
 
 
 
@@ -142,7 +141,7 @@ Troubleshooting
 
     - Ensure your API key starts with `bce-v3/ALTAK-` and has Qianfan API access enabled in the Baidu Cloud console.
     - If models are not listed, confirm your account has the Qianfan service activated.
-    - The default base URL is `https://qianfan.baidubce.com/v2`. Only change it if you use a custom endpoint or proxy.
+    - Only change the base URL if you use a custom endpoint or proxy.
 
 
 

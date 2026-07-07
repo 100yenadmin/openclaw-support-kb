@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex plugin"
 source: "https://docs.openclaw.ai/plugins/reference/codex"
-source_hash: "09854c23d3a123301e5d82ace0e985f8bb74e9c5e2d547fbd4856fbfcceea942"
+source_hash: "06cdc3eea1efb4f80c0d114db1b3611795d3a06e975dce0f4eda8892ddc66e27"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/codex.md"
@@ -24,7 +24,7 @@ OpenClaw Codex app-server harness and model provider plugin with a Codex-managed
 
 ## Surface
 
-providers: codex; contracts: mediaUnderstandingProviders, migrationProviders, webSearchProviders
+providers: codex; contracts: mediaUnderstandingProviders, migrationProviders, tools, webSearchProviders
 
 ## Related docs
 

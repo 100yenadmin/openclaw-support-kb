@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "09f06b899a2aaa1cacb78f754e5bcb484c2549467396363120a32bb760bca29c"
+source_hash: "4f31d1833006c545d0c3280539ca78684c3da909f6129249b43a88634f50a846"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
@@ -13,15 +13,15 @@ duplicate_index: 1
 # Deepgram
 Source: https://docs.openclaw.ai/providers/deepgram
 
-Deepgram is a speech-to-text API. In OpenClaw it is used for inbound
-audio/voice-note transcription through `tools.media.audio` and for Voice Call
-streaming STT through `plugins.entries.voice-call.config.streaming`.
+Deepgram is a speech-to-text API. OpenClaw uses it for inbound audio/voice-note
+transcription through `tools.media.audio` and for Voice Call streaming STT
+through `plugins.entries.voice-call.config.streaming`.
 
-For batch transcription, OpenClaw uploads the complete audio file to Deepgram
-and injects the transcript into the reply pipeline (`{{Transcript}}` +
-`[Audio]` block). For Voice Call streaming, OpenClaw forwards live G.711
-u-law frames over Deepgram's WebSocket `listen` endpoint and emits partial or
-final transcripts as Deepgram returns them.
+Batch transcription uploads the complete audio file to Deepgram and injects
+the transcript into the reply pipeline (`{{Transcript}}` + `[Audio]` block).
+Voice Call streaming forwards live G.711 u-law frames over Deepgram's
+WebSocket `listen` endpoint and emits partial/final transcripts as Deepgram
+returns them.
 
 | Detail        | Value                                                      |
 | ------------- | ---------------------------------------------------------- |
@@ -37,12 +37,9 @@ Steps
 
 Set your API key
 
-    Add your Deepgram API key to the environment:
-
-    ```
+    ```bash
     DEEPGRAM_API_KEY=dg_...
     ```
-
 
 
 Enable the audio provider
@@ -69,13 +66,14 @@ Send a voice note
 
 ## Configuration options
 
-| Option            | Path                                                         | Description                           |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------- |
-| `model`           | `tools.media.audio.models[].model`                           | Deepgram model id (default: `nova-3`) |
-| `language`        | `tools.media.audio.models[].language`                        | Language hint (optional)              |
-| `detect_language` | `tools.media.audio.providerOptions.deepgram.detect_language` | Enable language detection (optional)  |
-| `punctuate`       | `tools.media.audio.providerOptions.deepgram.punctuate`       | Enable punctuation (optional)         |
-| `smart_format`    | `tools.media.audio.providerOptions.deepgram.smart_format`    | Enable smart formatting (optional)    |
+| Option     | Path                                  | Description                           |
+| ---------- | ------------------------------------- | ------------------------------------- |
+| `model`    | `tools.media.audio.models[].model`    | Deepgram model id (default: `nova-3`) |
+| `language` | `tools.media.audio.models[].language` | Language hint (optional)              |
+
+`providerOptions.deepgram` merges extra query params directly into the
+Deepgram `/listen` request, so any Deepgram-supported param name works
+(for example `detect_language`, `punctuate`, `smart_format`):
 
 Tabs
 

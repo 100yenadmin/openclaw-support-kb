@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
-source_hash: "5db5f67d1e3fa23fc242f3ec615acba9370da0e044e13d5d9bb11d737085be76"
+source_hash: "407087b049839656712f81d47d6ae6fda42343797b864cdad0d82b27a94dc9a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/uninstall.md"
@@ -26,7 +26,7 @@ Recommended: use the built-in uninstaller:
 openclaw uninstall
 ```
 
-When using the CLI, state removal preserves configured workspace directories unless you also select `--workspace`.
+State removal preserves configured workspace directories unless you also select `--workspace`.
 
 Preview what will be removed (safe):
 
@@ -40,6 +40,8 @@ Non-interactive (automation / npx). Use with caution and only after confirming s
 openclaw uninstall --all --yes --non-interactive
 npx -y openclaw uninstall --all --yes --non-interactive
 ```
+
+Flags: `--service`, `--state`, `--workspace`, `--app` select individual scopes; `--all` selects all four.
 
 Manual steps (same result):
 
@@ -95,18 +97,18 @@ Use this if the gateway service keeps running but `openclaw` is missing.
 
 ### macOS (launchd)
 
-Default label is `ai.openclaw.gateway` (or `ai.openclaw.<profile>`; legacy `com.openclaw.*` may still exist):
+Default label is `ai.openclaw.gateway` (or `ai.openclaw.<profile>` with a profile):
 
 ```bash
 launchctl bootout gui/$UID/ai.openclaw.gateway
 rm -f ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 ```
 
-If you used a profile, replace the label and plist name with `ai.openclaw.<profile>`. Remove any legacy `com.openclaw.*` plists if present.
+If you used a profile, replace the label and plist name with `ai.openclaw.<profile>`.
 
 ### Linux (systemd user unit)
 
-Default unit name is `openclaw-gateway.service` (or `openclaw-gateway-<profile>.service`):
+Default unit name is `openclaw-gateway.service` (or `openclaw-gateway-<profile>.service`). A pre-rename `clawdbot-gateway.service` unit may still exist on machines upgraded from very old installs; `openclaw uninstall` / `openclaw gateway uninstall` detects and removes it automatically.
 
 ```bash
 systemctl --user disable --now openclaw-gateway.service
@@ -117,9 +119,8 @@ systemctl --user daemon-reload
 ### Windows (Scheduled Task)
 
 Default task name is `OpenClaw Gateway` (or `OpenClaw Gateway (<profile>)`).
-The task script lives under your state dir as `gateway.cmd`; current installs may
-also create a windowless `gateway.vbs` launcher that Task Scheduler runs instead
-of opening `gateway.cmd` directly.
+The task launches a windowless `gateway.vbs` script under your state dir, which in turn
+runs `gateway.cmd`; remove both.
 
 ```powershell
 schtasks /Delete /F /TN "OpenClaw Gateway"

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/cli/pairing"
-source_hash: "9907e721da1ecd22fd8a0746fef1544673f9b30a5520bb7cdb7bfe73238a273f"
+source_hash: "9835d33dea6f3b91b9107bbfbafa6b78bd59986f424aa7d8fd660be21ccd8606"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/pairing.md"
@@ -15,11 +15,9 @@ Source: https://docs.openclaw.ai/cli/pairing
 
 # `openclaw pairing`
 
-Approve or inspect DM pairing requests (for channels that support pairing).
+Approve or inspect DM pairing requests for channels that support pairing (chat DMs only - node/device pairing uses `openclaw devices`).
 
-Related:
-
-- Pairing flow: [Pairing](/channels/pairing)
+Related: [Pairing flow](/channels/pairing)
 
 ## Commands
 
@@ -37,17 +35,14 @@ openclaw pairing approve --channel telegram --account work <code> --notify
 
 List pending pairing requests for one channel.
 
-Options:
+| Option                  | Description                           |
+| ----------------------- | ------------------------------------- |
+| `[channel]`             | positional channel id                 |
+| `--channel <channel>`   | explicit channel id                   |
+| `--account <accountId>` | account id for multi-account channels |
+| `--json`                | machine-readable output               |
 
-- `[channel]`: positional channel id
-- `--channel <channel>`: explicit channel id
-- `--account <accountId>`: account id for multi-account channels
-- `--json`: machine-readable output
-
-Notes:
-
-- If multiple pairing-capable channels are configured, you must provide a channel either positionally or with `--channel`.
-- Extension channels are allowed as long as the channel id is valid.
+If multiple pairing-capable channels are configured, pass a channel positionally or with `--channel`. Extension channels work as long as the channel id is valid.
 
 ## `pairing approve`
 
@@ -59,25 +54,15 @@ Usage:
 - `openclaw pairing approve --channel <channel> <code>`
 - `openclaw pairing approve <code>` when exactly one pairing-capable channel is configured
 
-Options:
+Options: `--channel <channel>`, `--account <accountId>`, `--notify` (send a confirmation back to the requester on the same channel).
 
-- `--channel <channel>`: explicit channel id
-- `--account <accountId>`: account id for multi-account channels
-- `--notify`: send a confirmation back to the requester on the same channel
+### Owner bootstrap
 
-Owner bootstrap:
+If `commands.ownerAllowFrom` is empty when you approve a pairing code, OpenClaw also records the approved sender as the command owner, using a channel-scoped entry such as `telegram:123456789`. This only bootstraps the first owner - later pairing approvals never replace or expand `commands.ownerAllowFrom`.
 
-- If `commands.ownerAllowFrom` is empty when you approve a pairing code, OpenClaw also records the approved sender as the command owner, using a channel-scoped entry such as `telegram:123456789`.
-- This only bootstraps the first owner. Later pairing approvals do not replace or expand `commands.ownerAllowFrom`.
-- The command owner is the human operator account allowed to run owner-only commands and approve dangerous actions such as `/diagnostics`, `/export-trajectory`, `/config`, and exec approvals.
+The command owner is the human operator account allowed to run owner-only commands and approve dangerous actions such as `/diagnostics`, `/export-trajectory`, `/config`, and exec approvals. Pairing only lets a sender talk to the agent; it does not by itself grant owner privileges beyond this one-time bootstrap.
 
-## Notes
-
-- Channel input: pass it positionally (`pairing list telegram`) or with `--channel <channel>`.
-- `pairing list` supports `--account <accountId>` for multi-account channels.
-- `pairing approve` supports `--account <accountId>` and `--notify`.
-- If only one pairing-capable channel is configured, `pairing approve <code>` is allowed.
-- If you approved a sender before this bootstrap existed, run `openclaw doctor`; it warns when no command owner is configured and shows the `openclaw config set commands.ownerAllowFrom ...` command to fix it.
+If you approved a sender before this bootstrap existed, run `openclaw doctor`; it warns when no command owner is configured and shows the exact `openclaw config set commands.ownerAllowFrom ...` command to fix it.
 
 ## Related
 

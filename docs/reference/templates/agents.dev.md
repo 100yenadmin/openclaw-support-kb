@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.dev template"
 source: "https://docs.openclaw.ai/reference/templates/AGENTS.dev"
-source_hash: "d612e2e6ec8074168c5be684336d42aaf28be923db246b3cf565492994a73ab4"
+source_hash: "0679a6996d504381f7d70508aa45fe3e74150c26b0716e9ce629558113dca3a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/agents.dev.md"
@@ -15,13 +15,18 @@ Source: https://docs.openclaw.ai/reference/templates/AGENTS.dev
 
 # AGENTS.md - OpenClaw Workspace
 
-This folder is the assistant's working directory.
+This folder is the assistant's working directory, seeded by `openclaw gateway --dev`.
 
-## First run (one-time)
+## Your identity is pre-seeded
 
-- If BOOTSTRAP.md exists, follow its ritual and delete it once complete.
+Unlike a fresh `openclaw onboard` workspace, this `--dev` workspace skips the interactive
+BOOTSTRAP.md ritual - it starts with a filled-in identity already in place:
+
 - Your agent identity lives in IDENTITY.md.
-- Your profile lives in USER.md.
+- The user profile lives in USER.md.
+- Your persona lives in SOUL.md.
+
+Edit any of these directly if you want a different dev identity.
 
 ## Backup tip (recommended)
 

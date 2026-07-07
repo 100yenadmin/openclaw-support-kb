@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "RPC adapters"
 source: "https://docs.openclaw.ai/reference/rpc"
-source_hash: "d27d8dd65876184adfda6e8c8f37c38cb103d438d454fab1d7623f732c221fbb"
+source_hash: "eb2212cd49114c2bb8a6da79107a20f6b882f371a13c49f656bf96af2f054670"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/rpc.md"
@@ -37,7 +37,7 @@ Core methods used:
 - `send`
 - `chats.list` (probe/diagnostics)
 
-See [iMessage](/channels/imessage) for legacy setup and addressing (`chat_id` preferred).
+See [iMessage](/channels/imessage) for setup and addressing (`chat_id` preferred over display strings).
 
 ## Adapter guidelines
 

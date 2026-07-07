@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "97b1e8bc42f197a056d0da35ce646bc20c1ba33e776ae9587fd7d612d596951c"
+source_hash: "0d40d4b6e9d4b7094cca222aa4805c8d3f2ec65ad681aed2923e82dd65206f79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qa-channel.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # QA channel
 Source: https://docs.openclaw.ai/channels/qa-channel
 
-`qa-channel` is a bundled synthetic message transport for automated OpenClaw QA. It is not a production channel - it exists to exercise the same channel plugin boundary used by real transports while keeping state deterministic and fully inspectable.
+`qa-channel` is a repo-local synthetic message transport for automated OpenClaw QA (`extensions/qa-channel`, private package, excluded from packaged installs). It is not a production channel - it exists to exercise the same channel plugin boundary used by real transports while keeping state deterministic and fully inspectable.
 
 ## What it does
 
@@ -46,18 +46,20 @@ Account keys:
 
 - `enabled` - master toggle for this account.
 - `name` - optional display label.
-- `baseUrl` - synthetic bus URL.
-- `botUserId` - Matrix-style bot user id used in target grammar.
-- `botDisplayName` - display name for outbound messages.
-- `pollTimeoutMs` - long-poll wait window. Integer between 100 and 30000.
-- `allowFrom` - sender allowlist (user ids or `"*"`). Direct messages and
-  allowlisted group policy both use these synthetic sender ids.
+- `baseUrl` - synthetic bus URL. The account counts as configured once this is set.
+- `botUserId` - synthetic bot user id used in target grammar (default: `openclaw`).
+- `botDisplayName` - display name for outbound messages (default: `OpenClaw QA`).
+- `pollTimeoutMs` - long-poll wait window. Integer between 100 and 30000 (default: 1000).
+- `allowFrom` - sender allowlist (user ids or `"*"`; default: `["*"]`). DMs are
+  always `open` policy; allowlisted group policy also uses these synthetic
+  sender ids.
 - `groupPolicy` - shared-room policy: `"open"` (default), `"allowlist"`, or
   `"disabled"`.
 - `groupAllowFrom` - optional shared-room sender allowlist. When omitted under
   `"allowlist"`, QA Channel falls back to `allowFrom`.
 - `groups.<room>.requireMention` - require a bot mention before replying in a
-  specific group/channel room. `groups."*"` sets the default.
+  specific group/channel room (default: false). `groups."*"` sets the default;
+  per-room `tools` / `toolsBySender` set tool policy overrides.
 - `defaultTo` - fallback target when none is supplied.
 - `actions.messages` / `actions.reactions` / `actions.search` / `actions.threads` - per-action tool gating.
 
@@ -74,7 +76,7 @@ Host-side self-check (writes a Markdown report under `.artifacts/qa-e2e/`):
 pnpm qa:e2e
 ```
 
-This routes through `qa-lab`, starts the in-repo QA bus, boots the bundled `qa-channel` runtime slice, and runs a deterministic self-check.
+This routes through `qa-lab`, starts the in-repo QA bus, boots the `qa-channel` runtime slice, and runs a deterministic self-check.
 
 Full repo-backed scenario suite:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nix"
 source: "https://docs.openclaw.ai/install/nix"
-source_hash: "52f7558113751a142e8fc8cf2d8c7af12df357e769a1fa8c7c4c7a1ef4e522d4"
+source_hash: "70bcbafc6adc2c81864ea2eff79135801c3a773ba70fa94e73acf6803322f13b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/nix.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Nix
 Source: https://docs.openclaw.ai/install/nix
 
-Install OpenClaw declaratively with **[nix-openclaw](https://github.com/openclaw/nix-openclaw)** - the first-party, batteries-included Home Manager module.
+Install OpenClaw declaratively with **[nix-openclaw](https://github.com/openclaw/nix-openclaw)**, the first-party, batteries-included Home Manager module.
 
 Info
 
@@ -21,7 +21,7 @@ The [nix-openclaw](https://github.com/openclaw/nix-openclaw) repo is the source 
 
 ## What you get
 
-- Gateway + macOS app + tools (whisper, spotify, cameras) -- all pinned
+- Gateway + macOS app + tools (whisper, spotify, cameras), all pinned
 - Launchd service that survives reboots
 - Plugin system with declarative config
 - Instant rollback: `home-manager switch --rollback`
@@ -74,7 +74,7 @@ You can also set it manually:
 export OPENCLAW_NIX_MODE=1
 ```
 
-On macOS, the GUI app does not automatically inherit shell environment variables. Enable Nix mode via defaults instead:
+On macOS, the GUI app does not inherit shell environment variables. Enable Nix mode via `defaults` instead:
 
 ```bash
 defaults write ai.openclaw.mac openclaw.nixMode -bool true
@@ -82,15 +82,15 @@ defaults write ai.openclaw.mac openclaw.nixMode -bool true
 
 ### What changes in Nix mode
 
-- Auto-install and self-mutation flows are disabled
-- `openclaw.json` is treated as immutable. Startup-derived defaults stay runtime-only, and config writers such as setup, onboarding, mutating `openclaw update`, plugin install/update/uninstall/enable, `doctor --fix`, `doctor --generate-gateway-token`, and `openclaw config set` refuse to edit the file.
-- Agents should edit the Nix source instead. For nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) and set config under `programs.openclaw.config` or `instances.<name>.config`.
-- Missing dependencies surface Nix-specific remediation messages
-- UI surfaces a read-only Nix mode banner
+- Auto-install and self-mutation flows are disabled.
+- `openclaw.json` is treated as immutable. Startup-derived defaults stay runtime-only, and config writers (setup, onboarding, mutating `openclaw update`, plugin install/update/uninstall/enable, `doctor --fix`, `doctor --generate-gateway-token`, `openclaw config set`) refuse to edit the file.
+- Edit the Nix source instead. For nix-openclaw, use the agent-first [Quick Start](https://github.com/openclaw/nix-openclaw#quick-start) and set config under `programs.openclaw.config` or `instances.<name>.config`.
+- Missing dependencies surface Nix-specific remediation messages.
+- The UI shows a read-only Nix mode banner.
 
 ### Config and state paths
 
-OpenClaw reads JSON5 config from `OPENCLAW_CONFIG_PATH` and stores mutable data in `OPENCLAW_STATE_DIR`. When running under Nix, set these explicitly to Nix-managed locations so runtime state and config stay out of the immutable store.
+OpenClaw reads JSON5 config from `OPENCLAW_CONFIG_PATH` and stores mutable data in `OPENCLAW_STATE_DIR`. Under Nix, set these explicitly to Nix-managed locations so runtime state and config stay out of the immutable store.
 
 | Variable               | Default                                 |
 | ---------------------- | --------------------------------------- |
@@ -100,12 +100,9 @@ OpenClaw reads JSON5 config from `OPENCLAW_CONFIG_PATH` and stores mutable data 
 
 ### Service PATH discovery
 
-The launchd/systemd gateway service auto-discovers Nix-profile binaries so
-plugins and tools that shell out to `nix`-installed executables work without
-manual PATH setup:
+The launchd/systemd gateway service auto-discovers Nix-profile binaries so plugins and tools that shell out to `nix`-installed executables work without manual PATH setup:
 
-- When `NIX_PROFILES` is set, every entry is added to the service PATH in
-  right-to-left precedence (matches Nix shell precedence - rightmost wins).
+- When `NIX_PROFILES` is set, every entry is added to the service PATH in right-to-left precedence (matches Nix shell precedence: rightmost wins).
 - When `NIX_PROFILES` is unset, `~/.nix-profile/bin` is added as a fallback.
 
 This applies to both macOS launchd and Linux systemd service environments.

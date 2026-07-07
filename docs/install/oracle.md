@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Oracle Cloud"
 source: "https://docs.openclaw.ai/install/oracle"
-source_hash: "03d6feb7f3ecdb9c9a3a182f94e92bbf6ece836e8a7a28af5e3adf67ac1525aa"
+source_hash: "d0f4afbba13655c8834436169d70b1bd11c3e478b0285c4cd34511697f91034f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/oracle.md"
@@ -115,7 +115,7 @@ Configure the gateway
     systemctl --user restart openclaw-gateway.service
     ```
 
-    `gateway.trustedProxies=["127.0.0.1"]` here is only for the local Tailscale Serve proxy's forwarded-IP/local-client handling. It is **not** `gateway.auth.mode: "trusted-proxy"`. Diff viewer routes keep fail-closed behavior in this setup: raw `127.0.0.1` viewer requests without forwarded proxy headers can return `Diff not found`. Use `mode=file` / `mode=both` for attachments, or intentionally enable remote viewers and set `plugins.entries.diffs.config.viewerBaseUrl` (or pass a proxy `baseUrl`) if you need shareable viewer links.
+    `gateway.trustedProxies=["127.0.0.1"]` here is only for the local Tailscale Serve proxy's forwarded-IP/local-client handling. It is **not** `gateway.auth.mode: "trusted-proxy"`. Diff viewer routes keep fail-closed behavior in this setup: raw `127.0.0.1` viewer requests without forwarded proxy headers return `Diff not found`. Use `mode=file` / `mode=both` for attachments, or intentionally enable remote viewers and set `plugins.entries.diffs.config.viewerBaseUrl` (or pass a proxy `baseUrl`) if you need shareable viewer links.
 
 
 
@@ -163,7 +163,7 @@ With the VCN locked down (only UDP 41641 open) and the Gateway bound to loopback
 | fail2ban           | No          | Port 22 is blocked at the VCN; no brute-force surface.                    |
 | sshd hardening     | No          | Tailscale SSH does not use sshd.                                          |
 | Disable root login | No          | Tailscale authenticates by tailnet identity, not system users.            |
-| SSH key-only auth  | No          | Same — tailnet identity replaces system SSH keys.                         |
+| SSH key-only auth  | No          | Same -- tailnet identity replaces system SSH keys.                        |
 | IPv6 hardening     | Usually not | Depends on VCN/subnet settings; verify what is actually assigned/exposed. |
 
 Still recommended:
@@ -200,8 +200,8 @@ Verify the architecture with `uname -m` (should print `aarch64`). For binaries w
 
 OpenClaw state lives under:
 
-- `~/.openclaw/` — `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
-- `~/.openclaw/workspace/` — the agent workspace (SOUL.md, memory, artifacts).
+- `~/.openclaw/` -- `openclaw.json`, per-agent `auth-profiles.json`, channel/provider state, and session data.
+- `~/.openclaw/workspace/` -- the agent workspace (SOUL.md, memory, artifacts).
 
 These survive reboots. To take a portable snapshot:
 

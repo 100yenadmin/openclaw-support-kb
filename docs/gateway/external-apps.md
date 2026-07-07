@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway integrations for external apps"
 source: "https://docs.openclaw.ai/gateway/external-apps"
-source_hash: "a90cdd5982f81b71ea6a079ed0f445672b6c997a0cfcb4e097450fd0f3a7e5d7"
+source_hash: "00c8b6a3071eb777f732c9086541307727cb44cd9e77b7a7791572378f4eb6c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/external-apps.md"
@@ -13,10 +13,10 @@ duplicate_index: 1
 # Gateway integrations for external apps
 Source: https://docs.openclaw.ai/gateway/external-apps
 
-External apps should talk to OpenClaw through the Gateway protocol today. Use
-Gateway WebSocket and RPC methods when a script, dashboard, CI job, IDE
-extension, or another process wants to start agent runs, stream events, wait for
-results, cancel work, or inspect Gateway resources.
+External apps talk to OpenClaw through the Gateway protocol: WebSocket
+transport plus RPC methods. Use it when a script, dashboard, CI job, IDE
+extension, or another process wants to start agent runs, stream events, wait
+for results, cancel work, or inspect Gateway resources.
 
 Warning
 
@@ -38,9 +38,9 @@ Note
 | [`openclaw agent`](/cli/agent)          | Ready  | One-shot script integration when shelling out to the CLI is enough.                           |
 | [`openclaw message`](/cli/message)      | Ready  | Sending messages or channel actions from scripts.                                             |
 
-The source tree contains internal package work for a future client library, but
-that is not a public install surface. Treat it as preview implementation detail
-until the packages are published and versioned.
+A future client library package is in progress internally, but it is not a
+public install surface yet. Treat it as preview implementation detail until a
+release announces a published, versioned package.
 
 ## Recommended path
 
@@ -50,10 +50,10 @@ until the packages are published and versioned.
 4. Pin the OpenClaw version you test against.
 5. Recheck the RPC reference when upgrading OpenClaw.
 
-For agent runs, start with the `agent` RPC and pair it with `agent.wait` when
-you need a terminal result. For durable conversation state, use the `sessions.*`
-methods. For UI integrations, subscribe to Gateway events and render only the
-event families your app understands.
+For agent runs, start with the `agent` RPC and pair it with `agent.wait` for a
+terminal result. For durable conversation state, use the `sessions.*` methods.
+For UI integrations, subscribe to Gateway events and render only the event
+families your app understands.
 
 ## App code vs plugin code
 

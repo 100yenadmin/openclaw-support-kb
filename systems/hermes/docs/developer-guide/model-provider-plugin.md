@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "d05f33034b4b23df3fe8fc97c3d9c13e7ec226c5421e90316187adf6ffd5f942"
+source_hash: "772304ca4feeff05615fa4209208d38c7f807e0a43e5087afb09716b60097569"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -270,7 +270,7 @@ acme-inference = "acme_hermes_plugin:register"
 
 …where `acme_hermes_plugin:register` is a function that calls `register_provider(profile)`. The general PluginManager picks up entry-point plugins during `discover_and_load()`. For `kind: model-provider` pip plugins, you still need to declare the kind in your manifest (or rely on the source-text heuristic).
 
-See [Building a Hermes Plugin](/guides/build-a-hermes-plugin#distribute-via-pip) for the full entry-points setup.
+See [Building a Hermes Plugin](/developer-guide/plugins#distribute-via-pip) for the full entry-points setup.
 
 ## Related pages
 
@@ -278,6 +278,6 @@ See [Building a Hermes Plugin](/guides/build-a-hermes-plugin#distribute-via-pip)
 - [Adding Providers](/developer-guide/adding-providers) — end-to-end checklist for new inference backends (covers both the fast plugin path and the full CLI/auth integration)
 - [Memory Provider Plugins](/developer-guide/memory-provider-plugin)
 - [Context Engine Plugins](/developer-guide/context-engine-plugin)
-- [Building a Hermes Plugin](/guides/build-a-hermes-plugin) — general plugin authoring
+- [Building a Hermes Plugin](/developer-guide/plugins) — general plugin authoring
 
 ---

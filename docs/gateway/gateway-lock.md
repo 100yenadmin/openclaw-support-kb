@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway lock"
 source: "https://docs.openclaw.ai/gateway/gateway-lock"
-source_hash: "b6e48fc51a1f14ecbbbe5d5d664b22c92d91cc617347777806a04a2abd2132f5"
+source_hash: "b30f25c4e9c0e3782d7354284f75b4e217253f8989a1f4ffb6b42e4248ab017b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/gateway-lock.md"
@@ -15,32 +15,54 @@ Source: https://docs.openclaw.ai/gateway/gateway-lock
 
 ## Why
 
-- Ensure only one gateway instance runs per base port on the same host; additional gateways must use isolated profiles and unique ports.
-- Survive crashes/SIGKILL without leaving stale lock files.
-- Fail fast with a clear error when the control port is already occupied.
+- Only one gateway process should own a given config + port on a host; run additional gateways with isolated profiles and unique ports.
+- Survive crashes/SIGKILL without leaving stale lock files behind.
+- Fail fast with a clear error when another gateway already owns the port.
 
-## Mechanism
+## Two layers
 
-- The gateway first acquires a per-config lock file under the state lock directory and probes the configured port for an existing listener.
-- If the recorded lock owner is gone, the port is free, or the lock is stale, startup reclaims the lock and continues.
-- The gateway then binds the HTTP/WebSocket listener (default `ws://127.0.0.1:18789`) using an exclusive TCP listener.
-- If the bind fails with `EADDRINUSE`, startup throws `GatewayLockError("another gateway instance is already listening on ws://127.0.0.1:<port>")`.
-- On shutdown the gateway closes the HTTP/WebSocket server and removes the lock file.
+Startup enforces single-instance ownership in two independent steps, in order:
 
-## Error surface
+1. **File lock** acquires a per-config lock file under the state lock directory. As part of acquiring it, startup probes the configured port for a live listener to detect a stale (crashed) lock owner.
+2. **Socket bind** binds the HTTP/WebSocket listener (default `ws://127.0.0.1:18789`) as an exclusive TCP listener.
 
-- If another process holds the port, startup throws `GatewayLockError("another gateway instance is already listening on ws://127.0.0.1:<port>")`.
-- Other bind failures surface as `GatewayLockError("failed to bind gateway socket on ws://127.0.0.1:<port>: …")`.
+Each layer can fail independently and throws its own `GatewayLockError`.
+
+### File lock
+
+- If the lock file is missing, the recorded owner process is gone, or the owner's port probe shows no live listener, startup reclaims the lock and continues.
+- If the lock is actively held and none of the above apply, startup retries for up to 5 seconds (default) before giving up:
+
+  ```text
+  GatewayLockError("gateway already running (pid <pid>); lock timeout after <ms>ms")
+  ```
+
+### Socket bind
+
+- On `EADDRINUSE`, startup retries the bind for up to 20 attempts at 500ms intervals (roughly 10 seconds total) to ride out a `TIME_WAIT` window after a recently exited process.
+- If the port is still in use after retries:
+
+  ```text
+  GatewayLockError("another gateway instance is already listening on ws://127.0.0.1:<port>")
+  ```
+
+- Other bind failures:
+
+  ```text
+  GatewayLockError("failed to bind gateway socket on ws://127.0.0.1:<port>: <cause>")
+  ```
+
+On shutdown, the gateway closes the HTTP/WebSocket server and removes the lock file.
 
 ## Operational notes
 
-- If the port is occupied by _another_ process, the error is the same; free the port or choose another with `openclaw gateway --port <port>`.
-- Under a service supervisor, a new gateway process that sees an existing healthy `/healthz` responder leaves that process in control. On systemd, the duplicate starter exits with code 78 so the default `RestartPreventExitStatus=78` stops `Restart=always` from looping on a lock or `EADDRINUSE` conflict. If the existing process never becomes healthy, retries are bounded and startup fails with a clear lock error instead of looping forever.
-- The macOS app still maintains its own lightweight PID guard before spawning the gateway; the runtime lock is enforced by the lock file plus HTTP/WebSocket bind.
+- If the port is occupied by a different, non-gateway process, the error is the same; free the port or choose another with `openclaw gateway --port <port>`.
+- Under a service supervisor, a new gateway process that hits either error above first probes `/healthz` on the existing process. If that process is healthy, the new process leaves it in control instead of failing. On systemd, it exits with code `78`; the unit's `RestartPreventExitStatus=78` stops `Restart=always` from looping on a lock or `EADDRINUSE` conflict. If the existing process never becomes healthy, the health-probe retry is time-bounded and startup then fails with the lock error above instead of looping forever.
+- The macOS app keeps its own lightweight PID guard before spawning the gateway; the file lock and socket bind above are the actual runtime enforcement.
 
 ## Related
 
-- [Multiple Gateways](/gateway/multiple-gateways) — running multiple instances with unique ports
-- [Troubleshooting](/gateway/troubleshooting) — diagnosing `EADDRINUSE` and port conflicts
+- [Multiple Gateways](/gateway/multiple-gateways) - running multiple instances with unique ports
+- [Troubleshooting](/gateway/troubleshooting) - diagnosing `EADDRINUSE` and port conflicts
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
-source_hash: "bff3c138cbe76311f4c6e640e2f22328c449dce21af3ff21bcd12bb7759e53f0"
+source_hash: "e8f6e523ad69694bbba71f498ca37cb27a0b459b4ad5de1d4f88986a95dcbfd9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding.md"
@@ -13,10 +13,10 @@ duplicate_index: 1
 # Onboarding (macOS app)
 Source: https://docs.openclaw.ai/start/onboarding
 
-This doc describes the **current** first-run setup flow. The goal is a
-smooth "day 0" experience: pick where the Gateway runs, connect auth, run the
-wizard, and let the agent bootstrap itself.
-For a general overview of onboarding paths, see [Onboarding Overview](/start/onboarding-overview).
+The macOS app's first-run flow: pick where the Gateway runs, connect a
+verified AI backend, grant permissions, and hand off to the agent's own
+bootstrap ritual.
+For CLI onboarding and a comparison of both paths, see [Onboarding Overview](/start/onboarding-overview).
 
 Steps
 
@@ -41,8 +41,8 @@ Frame
 Security trust model:
 
 - By default, OpenClaw is a personal agent: one trusted operator boundary.
-- Shared/multi-user setups require lock-down (split trust boundaries, keep tool access minimal, and follow [Security](/gateway/security)).
-- Local onboarding now defaults new configs to `tools.profile: "coding"` so fresh local setups keep filesystem/runtime tools without forcing the unrestricted `full` profile.
+- Shared/multi-user setups need lock-down: split trust boundaries, keep tool access minimal, and follow [Security](/gateway/security).
+- Local onboarding defaults new configs to `tools.profile: "coding"` so fresh setups keep filesystem/runtime tools without the unrestricted `full` profile.
 - If hooks/webhooks or other untrusted content feeds are enabled, use a strong modern model tier and keep strict tool policy/sandboxing.
 
 Local vs Remote
@@ -53,22 +53,46 @@ Frame
 
 Where does the **Gateway** run?
 
-- **This Mac (Local only):** onboarding can configure auth and write credentials
-  locally.
+- **This Mac (Local only):** onboarding configures auth and writes credentials locally.
 - **Remote (over SSH/Tailnet):** onboarding does **not** configure local auth;
-  credentials must exist on the gateway host. The remote gateway token field
-  stores the token used by the macOS app to connect to that Gateway; existing
-  non-plaintext `gateway.remote.token` values are preserved until you replace
-  them.
+  credentials must already exist on the gateway host. The remote gateway token
+  field stores the token the macOS app uses to connect to that Gateway;
+  existing `gateway.remote.token` SecretRef values are preserved until you
+  replace them.
 - **Configure later:** skip setup and leave the app unconfigured.
 
 Tip
 
 **Gateway auth tip:**
 
-- The wizard now generates a **token** even for loopback, so local WS clients must authenticate.
-- If you disable auth, any local process can connect; use that only on fully trusted machines.
-- Use a **token** for multi-machine access or non-loopback binds.
+- Gateway auth mode defaults to `token` even for loopback binds, so local WS clients must authenticate.
+- Setting `gateway.auth.mode: "none"` lets any local process connect; use that only on fully trusted machines.
+- Use a token for multi-machine access or non-loopback binds.
+
+CLI
+
+  Local setup installs the global `openclaw` CLI via npm, pnpm, or bun,
+  preferring npm first. Node remains the recommended runtime for the Gateway
+  itself. Existing compatible installations are reused.
+
+Connect your AI
+
+  Once the Gateway is ready, onboarding looks for AI access you already have:
+  a Claude Code, Codex, or Gemini CLI login, or `OPENAI_API_KEY` /
+  `ANTHROPIC_API_KEY`. The best option is tested with a real completion and
+  only saved after it answers; when a test fails the app automatically tries
+  the next option and shows why the previous one failed. If several options
+  are found you can switch between them before continuing.
+
+If nothing is found (or nothing works), the manual key/token picker loads the
+Gateway's active text-inference provider plugins instead of using a fixed app
+list. The selected provider supplies its starter model and config; OpenClaw
+verifies the credential with the same live test before storing its auth profile. Next
+remains locked until one backend has passed, so the first agent chat cannot
+start without working inference. The Crestodian chat stays available from this
+page (and later under Settings → Crestodian) for help in plain language.
+
+Configure Later skips this step.
 
 Permissions
 
@@ -76,32 +100,15 @@ Frame
 
 <img src="/assets/macos-onboarding/05-permissions.png" alt="" />
 
-Onboarding requests TCC permissions needed for:
-
-- Automation (AppleScript)
-- Notifications
-- Accessibility
-- Screen Recording
-- Microphone
-- Speech Recognition
-- Camera
-- Location
-
-CLI
-
-
-Info
-This step is optional
-  The app can install the global `openclaw` CLI via npm, pnpm, or bun.
-  It prefers npm first, then pnpm, then bun if that is the only detected
-  package manager. For the Gateway runtime, Node remains the recommended path.
+Onboarding requests TCC permissions for: Automation (AppleScript), Notifications, Accessibility, Screen Recording, Microphone, Speech Recognition, Camera, and Location.
 
 Onboarding Chat (dedicated session)
 
-  After setup, the app opens a dedicated onboarding chat session so the agent can
-  introduce itself and guide next steps. This keeps first-run guidance separate
-  from your normal conversation. See [Bootstrapping](/start/bootstrapping) for
-  what happens on the gateway host during the first agent run.
+  After setup, the app opens a separate agent onboarding chat so the agent can
+  introduce itself and guide next steps without mixing that exchange into the
+  normal conversation history. This follows the Crestodian setup conversation;
+  it does not replace it. See [Bootstrapping](/start/bootstrapping) for what
+  happens on the gateway host during the agent's first real turn.
 
 ## Related
 

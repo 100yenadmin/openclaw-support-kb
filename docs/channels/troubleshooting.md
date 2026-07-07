@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "01c1ff61f4004c239a3cb499d025c2155da4139ae91cff41ec19f61a0fe9e742"
+source_hash: "f88bbf8b2b557833037711329bd556c1c24c5313e802656c20f8c8c1c517b108"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/troubleshooting.md"
@@ -36,8 +36,8 @@ Healthy baseline:
 
 ## After an update
 
-Use this when Telegram, iMessage, BlueBubbles-era configs, or another plugin
-channel disappears after updating.
+Use this when Telegram, iMessage, BlueBubbles-era configs, or another plugin channel disappears
+after updating.
 
 ```bash
 openclaw status --all
@@ -46,11 +46,10 @@ openclaw gateway restart
 openclaw status --all
 ```
 
-Look for `plugin load failed: dependency tree corrupted; run openclaw doctor
---fix` in `openclaw status --all`. That means the channel is configured, but
-the plugin setup/load path hit a corrupt dependency tree instead of registering
-the channel. `openclaw doctor --fix` removes stale plugin dependency staging
-directories and stale auth shadows, then `openclaw gateway restart` reloads the
+Look for `plugin load failed: dependency tree corrupted; run openclaw doctor --fix` in `openclaw
+status --all`. That means the channel is configured, but plugin setup/load hit a corrupted
+dependency tree instead of registering the channel. `openclaw doctor --fix` clears stale
+plugin-runtime dependency symlinks and stale auth shadows, then `openclaw gateway restart` reloads
 clean state.
 
 ## WhatsApp
@@ -119,9 +118,7 @@ Full troubleshooting: [Slack troubleshooting](/channels/slack#troubleshooting)
 | Can send but no receive on macOS     | Check macOS privacy permissions for Messages automation | Re-grant TCC permissions and restart channel process.                 |
 | DM sender blocked                    | `openclaw pairing list imessage`                        | Approve pairing or update allowlist.                                  |
 
-Full troubleshooting:
-
-- [iMessage troubleshooting](/channels/imessage#troubleshooting)
+Full troubleshooting: [iMessage troubleshooting](/channels/imessage#troubleshooting)
 
 ## Signal
 

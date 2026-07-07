@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TOOLS.md template"
 source: "https://docs.openclaw.ai/reference/templates/TOOLS"
-source_hash: "d2dfa1b9223f387afaa14b68f9d0e3d11a2cf0966651828c16f367aac3d3dd8b"
+source_hash: "b15efd5c67b2a1b45fbfde420ad56b5edaeb1de19cd612ce57ea64c8479186d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/tools.md"
@@ -15,18 +15,7 @@ Source: https://docs.openclaw.ai/reference/templates/TOOLS
 
 # TOOLS.md - Local Notes
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
-
-## What Goes Here
-
-Things like:
-
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup: camera names and locations, SSH hosts and aliases, preferred TTS voices, speaker/room names, device nicknames, anything environment-specific.
 
 ## Examples
 

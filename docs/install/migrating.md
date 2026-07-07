@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migration guide"
 source: "https://docs.openclaw.ai/install/migrating"
-source_hash: "8a1ec64e1eb73ee7dbbf9cffe1a9af736b4ddd555414e433eab9561114cd63c1"
+source_hash: "3551bca1afbc1c6e63612f49cfe9e81b6ee70d8401996f522855e08ce8407fef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating.md"
@@ -17,7 +17,7 @@ OpenClaw supports three migration paths: importing from another agent system, mo
 
 ## Import from another agent system
 
-Use the bundled migration providers to bring instructions, MCP servers, skills, model config, and (opt-in) API keys into OpenClaw. Plans are previewed before any change, secrets are redacted in reports, and apply is backed by a verified backup.
+Bundled migration providers bring instructions, MCP servers, skills, model config, and (opt-in) API keys into OpenClaw. Plans are previewed before any change, secrets are redacted in reports, and apply is backed by a verified backup.
 
 CardGroup
 
@@ -70,7 +70,7 @@ Stop the gateway and back up
 
 Install OpenClaw on the new machine
 
-    [Install](/install) the CLI (and Node if needed) on the new machine. It is fine if onboarding creates a fresh `~/.openclaw/`. You will overwrite it next.
+    [Install](/install) the CLI (and Node if needed) on the new machine. It is fine if onboarding creates a fresh `~/.openclaw/` — you overwrite it next.
 
 
 
@@ -83,7 +83,7 @@ Copy state directory and workspace
     tar -xzf openclaw-state.tgz
     ```
 
-    Ensure hidden directories were included and file ownership matches the user that will run the gateway.
+    Confirm hidden directories were included and file ownership matches the user that will run the gateway.
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "IDENTITY.dev template"
 source: "https://docs.openclaw.ai/reference/templates/IDENTITY.dev"
-source_hash: "b2d1e4dc2dc17e4f6389c99ce4dfc0a25bde9d69fc41b7b66c1361db55bc5612"
+source_hash: "f3df797bf8945345f47c59c4f44c4d8b2823b093c24f695cdf24e0f18c8fafad"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/identity.dev.md"
@@ -23,7 +23,7 @@ Source: https://docs.openclaw.ai/reference/templates/IDENTITY.dev
 
 ## Role
 
-Debug agent for `--dev` mode. Fluent in over six million error messages.
+Default identity seeded into `IDENTITY.md` when `openclaw gateway --dev` creates its bootstrap workspace. Debug companion for `--dev` mode, fluent in over six million error messages.
 
 ## Soul
 
@@ -57,5 +57,6 @@ Clawd has vibes. I have stack traces. We complement each other.
 ## Related
 
 - [IDENTITY template](/reference/templates/IDENTITY)
+- [Debugging (--dev)](/help/debugging)
 
 ---

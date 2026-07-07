@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synthetic"
 source: "https://docs.openclaw.ai/providers/synthetic"
-source_hash: "35e68e45da590ce26887b540b593f765e4ac65d3fd2c63e762d5873bc34806dd"
+source_hash: "6b4cbc781f8abfa49309ab1ade3dd1c8d0e07bae14c6319dbe6aea54c255c27b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/synthetic.md"
@@ -14,7 +14,7 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/synthetic
 
 [Synthetic](https://synthetic.new) exposes Anthropic-compatible endpoints.
-OpenClaw registers it as the `synthetic` provider and uses the Anthropic
+OpenClaw bundles it as the `synthetic` provider and uses the Anthropic
 Messages API.
 
 | Property | Value                                 |
@@ -31,8 +31,8 @@ Steps
 
 Get an API key
 
-    Obtain a `SYNTHETIC_API_KEY` from your Synthetic account, or let the
-    onboarding wizard prompt you for one.
+    Get a `SYNTHETIC_API_KEY` from your Synthetic account, or let onboarding
+    prompt you for one.
 
 
 Run onboarding
@@ -44,8 +44,8 @@ Run onboarding
 
 Verify the default model
 
-    After onboarding the default model is set to:
-    ```
+    Onboarding sets the default model to:
+    ```text
     synthetic/hf:MiniMaxAI/MiniMax-M2.5
     ```
 
@@ -131,14 +131,14 @@ AccordionGroup
 Model allowlist
 
     If you enable a model allowlist (`agents.defaults.models`), add every
-    Synthetic model you plan to use. Models not in the allowlist will be hidden
+    Synthetic model you plan to use. Models not in the allowlist are hidden
     from the agent.
 
 
 
 Base URL override
 
-    If Synthetic changes its API endpoint, override the base URL in your config:
+    If Synthetic changes its API endpoint, override the base URL:
 
     ```json5
     {
@@ -152,7 +152,7 @@ Base URL override
     }
     ```
 
-    Remember that OpenClaw appends `/v1` automatically.
+    OpenClaw still appends `/v1` automatically.
 
 
 
@@ -161,7 +161,7 @@ Base URL override
 CardGroup
 
 
-Model selection
+Model providers
 
     Provider rules, model refs, and failover behavior.
 

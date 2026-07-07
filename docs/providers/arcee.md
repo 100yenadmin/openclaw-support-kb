@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "ef872c960a671381d0478c936fe0553677ab7d8c2554a2a6132fae553bbf7435"
+source_hash: "3d3a3c64e046dc46aea59d8d2060291642ea7a7aae66750b5f97c50c6d981f86"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/arcee.md"
@@ -13,9 +13,9 @@ duplicate_index: 1
 # Arcee AI
 Source: https://docs.openclaw.ai/providers/arcee
 
-[Arcee AI](https://arcee.ai) provides access to the Trinity family of mixture-of-experts models through an OpenAI-compatible API. All Trinity models are Apache 2.0 licensed.
+[Arcee AI](https://arcee.ai) provides the Trinity family of mixture-of-experts models through an OpenAI-compatible API. All Trinity models are Apache 2.0 licensed. Arcee is an official OpenClaw plugin, not bundled with core, so it needs an install step before onboarding.
 
-Arcee AI models can be accessed directly via the Arcee platform or through [OpenRouter](/providers/openrouter).
+Access Arcee models directly through the Arcee platform or through [OpenRouter](/providers/openrouter).
 
 | Property | Value                                                                                 |
 | -------- | ------------------------------------------------------------------------------------- |
@@ -25,8 +25,6 @@ Arcee AI models can be accessed directly via the Arcee platform or through [Open
 | Base URL | `https://api.arcee.ai/api/v1` (direct) or `https://openrouter.ai/api/v1` (OpenRouter) |
 
 ## Install plugin
-
-Install the official plugin, then restart Gateway:
 
 ```bash
 openclaw plugins install @openclaw/arcee-provider
@@ -102,7 +100,7 @@ Set a default model
         }
         ```
 
-        The same model refs work for both direct and OpenRouter setups (for example `arcee/trinity-large-thinking`).
+        The same model refs work for both direct and OpenRouter setups.
 
 
 
@@ -136,13 +134,11 @@ Via OpenRouter
 
 ## Built-in catalog
 
-OpenClaw currently ships this Arcee static catalog:
-
-| Model ref                      | Name                   | Input | Context | Cost (in/out per 1M) | Notes                                     |
-| ------------------------------ | ---------------------- | ----- | ------- | -------------------- | ----------------------------------------- |
-| `arcee/trinity-large-thinking` | Trinity Large Thinking | text  | 256K    | $0.25 / $0.90        | Default model; reasoning enabled          |
-| `arcee/trinity-large-preview`  | Trinity Large Preview  | text  | 128K    | $0.25 / $1.00        | General-purpose; 400B params, 13B active  |
-| `arcee/trinity-mini`           | Trinity Mini 26B       | text  | 128K    | $0.045 / $0.15       | Fast and cost-efficient; function calling |
+| Model ref                      | Name                   | Input | Context | Max output | Cost (in/out per 1M) | Tools | Notes                                     |
+| ------------------------------ | ---------------------- | ----- | ------- | ---------- | -------------------- | ----- | ----------------------------------------- |
+| `arcee/trinity-large-thinking` | Trinity Large Thinking | text  | 256K    | 80K        | $0.25 / $0.90        | No    | Default model; extended thinking          |
+| `arcee/trinity-large-preview`  | Trinity Large Preview  | text  | 128K    | 16K        | $0.25 / $1.00        | Yes   | General-purpose; 400B params, 13B active  |
+| `arcee/trinity-mini`           | Trinity Mini 26B       | text  | 128K    | 80K        | $0.045 / $0.15       | Yes   | Fast and cost-efficient; function calling |
 
 Tip
 
@@ -163,15 +159,15 @@ AccordionGroup
 Environment note
 
     If the Gateway runs as a daemon (launchd/systemd), make sure `ARCEEAI_API_KEY`
-    (or `OPENROUTER_API_KEY`) is available to that process (for example, in
-    `~/.openclaw/.env` or via `env.shellEnv`).
+    (or `OPENROUTER_API_KEY`) is available to that process, for example in
+    `~/.openclaw/.env` or via `env.shellEnv`.
 
 
 
 OpenRouter routing
 
     When using Arcee models via OpenRouter, the same `arcee/*` model refs apply.
-    OpenClaw handles routing transparently based on your auth choice. See the
+    OpenClaw routes transparently based on your auth choice. See the
     [OpenRouter provider docs](/providers/openrouter) for OpenRouter-specific
     configuration details.
 

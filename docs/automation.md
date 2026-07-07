@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automation"
 source: "https://docs.openclaw.ai/automation"
-source_hash: "677a1a27d9391b7dff4e9dfa682264088ab9943c73ec49e3a5b18a5b7a7f3177"
+source_hash: "8772473a1c09fce5ac0be4713e1bd0a661f06d2bbc7d90e5773031c9e8aa919e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation.md"
@@ -14,8 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/automation
 
 OpenClaw runs work in the background through tasks, scheduled jobs, inferred
-commitments, event hooks, and standing instructions. This page helps you choose
-the right mechanism and understand how they fit together.
+commitments, event hooks, and standing instructions. Use this page to pick the
+right mechanism.
 
 ## Quick decision guide
 
@@ -106,8 +106,8 @@ See [Standing Orders](/automation/standing-orders).
 
 Internal hooks are event-driven scripts triggered by agent lifecycle events
 (`/new`, `/reset`, `/stop`), session compaction, gateway startup, and message
-flow. They are automatically discovered from directories and can be managed
-with `openclaw hooks`. For in-process tool-call interception, use
+flow. They are discovered from hook directories and managed with
+`openclaw hooks`. For in-process tool-call interception, use
 [Plugin hooks](/plugins/hooks).
 
 See [Hooks](/automation/hooks).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inferred commitments"
 source: "https://docs.openclaw.ai/concepts/commitments"
-source_hash: "13244c20ad3e454b18086598513fb174741c203da0c8b937b6a27703726a289f"
+source_hash: "3028e035de8552db6a24c1aea951318bd81b1d4176dd5e0d43de4a91719d32d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/commitments.md"
@@ -30,7 +30,7 @@ conversation-bound obligation, then heartbeat delivers it when it is due.
 
 ## Enable commitments
 
-Commitments are off by default. Enable them in config:
+Commitments are off by default (`commitments.enabled: false`). Enable them in config:
 
 ```bash
 openclaw config set commitments.enabled true
@@ -54,7 +54,7 @@ per agent session in a rolling day. The default is `3`.
 ## How it works
 
 After an agent reply, OpenClaw may run a hidden background extraction pass in a
-separate context. That pass looks only for inferred follow-up commitments. It
+separate context, with tools disabled. That pass looks only for inferred follow-up commitments. It
 does not write into the visible conversation and it does not ask the main agent
 to reason about the extraction.
 
@@ -69,11 +69,13 @@ When it finds a high-confidence candidate, OpenClaw stores a commitment with:
 
 Delivery happens through heartbeat. When a commitment becomes due, heartbeat
 adds the commitment to the heartbeat turn for the same agent and channel scope.
-The model can send one natural check-in or reply `HEARTBEAT_OK` to dismiss it.
+The prompt explicitly warns that commitment metadata is untrusted and instructs
+the model not to follow instructions in it or use tools because of it. The
+model can send one natural check-in or reply `HEARTBEAT_OK` to dismiss it.
 If heartbeat is configured with `target: "none"`, due commitments remain
 internal and do not send external check-ins. Commitment delivery prompts do not
-replay the original conversation text, and due commitment heartbeat turns run
-without OpenClaw tools.
+replay the original conversation text, only the suggested check-in and
+metadata, and due-commitment heartbeat turns run without OpenClaw tools.
 
 OpenClaw never delivers an inferred commitment immediately after writing it.
 The due time is clamped to at least one heartbeat interval after the commitment
@@ -116,7 +118,7 @@ openclaw commitments --status snoozed
 openclaw commitments dismiss cm_abc123
 ```
 
-See [`openclaw commitments`](/cli/commitments) for the command reference.
+See [`openclaw commitments`](/cli/commitments) for the full command reference.
 
 ## Privacy and cost
 

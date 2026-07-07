@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "llama.cpp Provider"
 source: "https://docs.openclaw.ai/plugins/llama-cpp"
-source_hash: "b86941366cca974da82d476f44da075665f6d2c790a26b48df3f2ac7b490f259"
+source_hash: "f55c32cc3bf51b6cdc519dd10920d478faebf35e4ba44b1eea12eecae6716378"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/llama-cpp.md"
@@ -13,9 +13,9 @@ duplicate_index: 1
 # llama.cpp Provider
 Source: https://docs.openclaw.ai/plugins/llama-cpp
 
-`llama-cpp` is the official external provider plugin for local GGUF embeddings.
-It owns the `node-llama-cpp` runtime dependency used by
-`memorySearch.provider: "local"`.
+`llama-cpp` is the official external provider plugin for local GGUF
+embeddings. It registers embedding provider id `local` and owns the
+`node-llama-cpp` runtime dependency used by `memorySearch.provider: "local"`.
 
 Install it before using local memory embeddings:
 
@@ -29,7 +29,7 @@ deleting a manually installed runtime inside the OpenClaw package directory.
 
 ## Configuration
 
-Set the memory search provider to `local`:
+Set `memorySearch.provider` to `local`:
 
 ```json5
 {
@@ -46,20 +46,33 @@ Set the memory search provider to `local`:
 }
 ```
 
-The default model is `embeddinggemma-300m-qat-Q8_0.gguf`. You can also point
-`local.modelPath` at a local `.gguf` file.
+`local.modelPath` defaults to the `hf:` URI shown above (`embeddinggemma-300m-qat-Q8_0.gguf`).
+Point it at a different `hf:` URI or a local `.gguf` file to use another
+model. `local.modelCacheDir` overrides where downloaded models are cached
+(default: `~/.node-llama-cpp/models`), and `local.contextSize` accepts an
+integer or `"auto"`.
 
 ## Native Runtime
 
-Use Node 24 for the smoothest native install path. Source checkouts using pnpm
-may need to approve and rebuild the native dependency:
+Use Node 24 for the smoothest native install path. Source checkouts using
+pnpm may need to approve and rebuild the native dependency:
 
 ```bash
 pnpm approve-builds
 pnpm rebuild node-llama-cpp
 ```
 
-For lower-friction local embeddings, use a local service provider such as
-Ollama or LM Studio instead.
+## Troubleshooting
+
+If `node-llama-cpp` is missing or fails to load, OpenClaw reports the failure
+with:
+
+1. Install the plugin: `openclaw plugins install @openclaw/llama-cpp-provider`.
+2. Use Node 24 for native installs/updates.
+3. From a pnpm source checkout: `pnpm approve-builds`, then `pnpm rebuild node-llama-cpp`.
+
+For lower-friction local embeddings without the native build step, set
+`memorySearch.provider` to a remote embedding provider such as `lmstudio`,
+`ollama`, `openai`, or `voyage` instead.
 
 ---

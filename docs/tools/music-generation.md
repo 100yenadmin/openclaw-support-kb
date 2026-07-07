@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "99bac8d67e48f147385cac96a9790ac3ace29015cbd296f346a8024e87c52210"
+source_hash: "d06f6ac055b2dfc72f6836cc610ddcfab82462f0fdfb3e720e7a273c3b11c451"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -13,26 +13,24 @@ duplicate_index: 1
 # Music generation
 Source: https://docs.openclaw.ai/tools/music-generation
 
-The `music_generate` tool lets the agent create music or audio through the
-shared music-generation capability with configured providers — ComfyUI,
-fal, Google, MiniMax, and OpenRouter today.
-
-For session-backed agent runs, OpenClaw starts music generation as a
-background task, tracks it in the task ledger, then wakes the agent again
-when the track is ready so the agent can tell the user and attach the
-finished audio. The completion agent follows the session's normal visible-reply
-mode: automatic final reply delivery when configured, or `message(action="send")`
-when the session requires the message tool. If the requester session is
-inactive or its active wake fails, and some generated audio is still missing
-from the completion reply, OpenClaw sends an idempotent direct fallback with
-only the missing audio.
+The `music_generate` tool creates music or audio through the shared
+music-generation capability, backed by ComfyUI, fal, Google, MiniMax, and
+OpenRouter.
 
 Note
 
-The built-in shared tool only appears when at least one music-generation
-provider is available. If you do not see `music_generate` in your agent's
-tools, configure `agents.defaults.musicGenerationModel` or set up a
-provider API key.
+`music_generate` only appears when at least one music-generation provider is
+available: an explicit `agents.defaults.musicGenerationModel` config, or an
+auth-configured provider (a set API key, for example).
+
+For session-backed agent runs, `music_generate` starts as a background task,
+tracks progress in the task ledger, then wakes the agent when the track is
+ready so it can tell the user and attach the finished audio. The completion
+agent follows the session's visible-reply contract: automatic final reply
+when configured, or `message(action="send")` when the session requires the
+message tool. If the requester session is inactive or its wake fails and
+generated audio is still missing from the reply, OpenClaw sends an
+idempotent direct fallback with just the missing audio.
 
 ## Quick start
 
@@ -76,9 +74,8 @@ Ask the agent
 
 
 
-    For direct synchronous contexts without a session-backed agent run,
-    the built-in tool still falls back to inline generation and returns
-    the final media path in the tool result.
+    Without a session-backed agent run (direct/local contexts), the tool
+    runs inline and returns the final media path in the same tool result.
 
 
 
@@ -118,6 +115,20 @@ Generate a cinematic piano track with soft strings and no vocals.
 Generate an energetic chiptune loop about launching a rocket at sunrise.
 ```
 
+Use `action: "list"` to inspect available providers/models, and
+`action: "status"` to inspect the active session-backed music task:
+
+```text
+/tool music_generate action=list
+/tool music_generate action=status
+```
+
+Direct generation example:
+
+```text
+/tool music_generate prompt="Dreamy lo-fi hip hop with vinyl texture and gentle rain" instrumental=true
+```
+
 ## Supported providers
 
 | Provider   | Default model                | Reference inputs | Supported controls                                    | Auth                                   |
@@ -125,8 +136,20 @@ Generate an energetic chiptune loop about launching a rocket at sunrise.
 | ComfyUI    | `workflow`                   | Up to 1 image    | Workflow-defined music or audio                       | `COMFY_API_KEY`, `COMFY_CLOUD_API_KEY` |
 | fal        | `fal-ai/minimax-music/v2.6`  | None             | `lyrics`, `instrumental`, `durationSeconds`, `format` | `FAL_KEY` or `FAL_API_KEY`             |
 | Google     | `lyria-3-clip-preview`       | Up to 10 images  | `lyrics`, `instrumental`, `format`                    | `GEMINI_API_KEY`, `GOOGLE_API_KEY`     |
-| MiniMax    | `music-2.6`                  | None             | `lyrics`, `instrumental`, `format=mp3`                | `MINIMAX_API_KEY` or MiniMax OAuth     |
+| MiniMax    | `music-2.6`                  | None             | `lyrics`, `instrumental`, `format` (mp3 only)         | `MINIMAX_API_KEY` or MiniMax OAuth     |
 | OpenRouter | `google/lyria-3-pro-preview` | Up to 1 image    | `lyrics`, `instrumental`, `durationSeconds`, `format` | `OPENROUTER_API_KEY`                   |
+
+MiniMax registers two provider ids sharing the same models: `minimax` for
+API-key auth and `minimax-portal` for OAuth. Model refs follow the auth path
+(`minimax/music-2.6` vs `minimax-portal/music-2.6`); see
+[MiniMax](/providers/minimax#music-generation).
+
+fal also exposes `fal-ai/ace-step/prompt-to-audio` (wav, no lyrics, no
+instrumental toggle) and `fal-ai/stable-audio-25/text-to-audio` (wav,
+prompt-only) alongside its default MiniMax-backed model. Google's default
+`lyria-3-clip-preview` outputs mp3 only; `lyria-3-pro-preview` also supports
+wav. MiniMax also exposes `music-2.6-free`, `music-cover`, and
+`music-cover-free`. OpenRouter also exposes `google/lyria-3-clip-preview`.
 
 ### Capability matrix
 
@@ -140,25 +163,6 @@ shared live sweep:
 | Google     |     ✓      |   ✓    | 10 images  | `generate`, `edit`                                                        |
 | MiniMax    |     ✓      |   —    | None       | `generate`                                                                |
 | OpenRouter |     ✓      |   ✓    | 1 image    | `generate`, `edit`                                                        |
-
-Use `action: "list"` to inspect available shared providers and models at
-runtime:
-
-```text
-/tool music_generate action=list
-```
-
-Use `action: "status"` to inspect the active session-backed music task:
-
-```text
-/tool music_generate action=status
-```
-
-Direct generation example:
-
-```text
-/tool music_generate prompt="Dreamy lo-fi hip hop with vinyl texture and gentle rain" instrumental=true
-```
 
 ## Tool parameters
 
@@ -213,9 +217,9 @@ them. Tool results report applied settings; `details.normalization`
 captures any requested-to-applied mapping.
 
 Provider request timeouts are operator configuration only. OpenClaw uses
-`agents.defaults.musicGenerationModel.timeoutMs` when configured, raises values
-below 120000ms to 120000ms, and otherwise defaults provider requests to
-300000ms.
+`agents.defaults.musicGenerationModel.timeoutMs` when configured, raises
+values below 120000ms to 120000ms, and otherwise defaults provider requests
+to 300000ms.
 
 ## Async behavior
 
@@ -227,6 +231,7 @@ Session-backed music generation runs as a background task:
 - **Duplicate prevention:** while a task is `queued` or `running`, later
   `music_generate` calls in the same session return task status instead of
   starting another generation. Use `action: "status"` to check explicitly.
+  A recently completed matching request is also deduplicated for 2 minutes.
 - **Status lookup:** `openclaw tasks list` or `openclaw tasks show <taskId>`
   inspects queued, running, and terminal status.
 - **Completion wake:** OpenClaw injects an internal completion event back
@@ -239,6 +244,11 @@ Session-backed music generation runs as a background task:
   session run inline and return the final audio result in the same turn.
 
 ### Task lifecycle
+
+The music task surfaces the same states as the general task registry (see
+[Background tasks](/automation/tasks#task-lifecycle) for the full state
+machine, including `timed_out`, `cancelled`, and `lost`). Most music runs
+move through:
 
 | State       | Meaning                                                                                        |
 | ----------- | ---------------------------------------------------------------------------------------------- |
@@ -280,8 +290,10 @@ OpenClaw tries providers in this order:
 2. `musicGenerationModel.primary` from config.
 3. `musicGenerationModel.fallbacks` in order.
 4. Auto-detection using auth-backed provider defaults only:
-   - current default provider first;
-   - remaining registered music-generation providers in provider-id order.
+   - current default text-model provider first, if it also offers music
+     generation;
+   - remaining registered music-generation providers, alphabetically by
+     provider id.
 
 If a provider fails, the next candidate is tried automatically. If all
 fail, the error includes details from each attempt.
@@ -308,19 +320,24 @@ fal
     bundled provider defaults to `fal-ai/minimax-music/v2.6` and also exposes
     `fal-ai/ace-step/prompt-to-audio` and
     `fal-ai/stable-audio-25/text-to-audio` for prompt-to-audio requests.
+    Lyrics and instrumental mode are MiniMax-model-only; the other two
+    models are prompt-only.
 
 
 Google (Lyria 3)
 
     Uses Lyria 3 batch generation. The current bundled flow supports
-    prompt, optional lyrics text, and optional reference images.
+    prompt, optional lyrics text, and optional reference images. The
+    default `lyria-3-clip-preview` model outputs mp3 only; the
+    `lyria-3-pro-preview` model also supports wav.
 
 
 MiniMax
 
     Uses the batch `music_generation` endpoint. Supports prompt, optional
     lyrics, instrumental mode, and mp3 output through either `minimax`
-    API-key auth or `minimax-portal` OAuth.
+    API-key auth or `minimax-portal` OAuth. Also exposes `music-2.6-free`,
+    `music-cover`, and `music-cover-free` models.
 
 
 OpenRouter
@@ -375,16 +392,17 @@ deterministically.
 
 ## Live tests
 
-Opt-in live coverage for the shared bundled providers:
+Opt-in live coverage for the shared bundled providers (fal, Google, MiniMax,
+OpenRouter):
 
 ```bash
 OPENCLAW_LIVE_TEST=1 pnpm test:live -- extensions/music-generation-providers.live.test.ts
 ```
 
-Repo wrapper:
+Equivalent repo wrapper, which drives the same test file:
 
 ```bash
-pnpm test:live:media music
+pnpm test:live:media:music
 ```
 
 This live file uses already-exported provider env vars ahead of stored auth

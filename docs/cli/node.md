@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "885b972527fc40eff9cd11ad4b97499e9f165ae9171e7f7c82b64c761c79103d"
+source_hash: "df99fa57fe671966583e7ea9b056118decce76d7737298123e9a28d96ad14d36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/node.md"
@@ -93,7 +93,8 @@ present in the install command environment.
 
 ## Service (background)
 
-Install a headless node host as a user service.
+Install a headless node host as a user service (launchd on macOS, systemd on
+Linux, Windows Task Scheduler on Windows).
 
 ```bash
 openclaw node install --host <gateway-host> --port 18789
@@ -127,9 +128,9 @@ Service commands accept `--json` for machine-readable output.
 
 The node host retries Gateway restart and network closes in-process. If the
 Gateway reports a terminal token/password/bootstrap auth pause, the node host
-logs the close detail and exits non-zero so launchd/systemd can restart it with
-fresh config and credentials. Pairing-required pauses stay in the foreground
-flow so the pending request can be approved.
+logs the close detail and exits non-zero so launchd/systemd/Task Scheduler can
+restart it with fresh config and credentials. Pairing-required pauses stay in
+the foreground flow so the pending request can be approved.
 
 ## Pairing
 
@@ -156,16 +157,18 @@ to auto-approving first-time node pairing from trusted CIDRs:
 }
 ```
 
-This is disabled by default. It only applies to fresh `role: node` pairing with
-no requested scopes. Operator/browser clients, Control UI, WebChat, and role,
+This is disabled by default (`autoApproveCidrs` is unset). It only applies to
+fresh `role: node` pairing with no requested scopes, from a client IP the
+Gateway trusts. Operator/browser clients, Control UI, WebChat, and role,
 scope, metadata, or public-key upgrades still require manual approval.
 
 If the node retries pairing with changed auth details (role/scopes/public key),
 the previous pending request is superseded and a new `requestId` is created.
 Run `openclaw devices list` again before approval.
 
-The node host stores its node id, token, display name, and gateway connection info in
-`~/.openclaw/node.json`.
+The node host stores its node id, token, display name, and gateway connection
+info in `node.json` in the OpenClaw state directory (`~/.openclaw` by default,
+or `$OPENCLAW_STATE_DIR` when set).
 
 ## Exec approvals
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/cli/setup"
-source_hash: "21f6bbe49d4bf61df1087224e75108be1b5619a29fe123e934564e151bc04390"
+source_hash: "5f0cdc950695facc2152daf0a7d7946f9d116f0bd960430eda54fadbc51c573a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/setup.md"
@@ -15,7 +15,20 @@ Source: https://docs.openclaw.ai/cli/setup
 
 # `openclaw setup`
 
-Run the full CLI onboarding flow. `openclaw setup` is an alias for `openclaw onboard`; use `--baseline` when you only need to initialize config/workspace folders without the wizard.
+`openclaw setup` runs the same guided onboarding flow as `openclaw onboard`
+(auth, workspace, Gateway, channels, skills, health). Use `--baseline` when you
+only need to initialize config/workspace folders without the wizard.
+
+`setup` accepts the same onboarding flags as `openclaw onboard`, including
+auth (`--auth-choice`, `--token`, provider key flags), Gateway
+(`--gateway-port`, `--gateway-bind`, `--gateway-auth`, `--install-daemon`),
+Tailscale (`--tailscale`), reset (`--reset`, `--reset-scope`), flow
+(`--flow quickstart|advanced|manual|import`), and skip flags
+(`--skip-channels`, `--skip-skills`, `--skip-bootstrap`, `--skip-search`,
+`--skip-health`, `--skip-ui`, `--skip-hooks`). See [Onboard](/cli/onboard) and
+[CLI automation](/start/wizard-cli-automation) for the full flag reference and
+non-interactive examples; `openclaw onboard --modern` (the Crestodian
+conversational assistant) has no `setup` equivalent.
 
 Note
 
@@ -31,15 +44,21 @@ Note
 | `--non-interactive`        | Run onboarding without prompts.                                                                     |
 | `--accept-risk`            | Acknowledge full-system agent access risk; required with `--non-interactive`.                       |
 | `--mode <mode>`            | Onboarding mode: `local` or `remote`.                                                               |
+| `--flow <flow>`            | Onboard flow: `quickstart`, `advanced`, `manual`, or `import`.                                      |
+| `--reset`                  | Reset config + credentials + sessions before onboarding (workspace only with `--reset-scope full`). |
+| `--reset-scope <scope>`    | Reset scope: `config`, `config+creds+sessions`, or `full`.                                          |
 | `--import-from <provider>` | Migration provider to run during onboarding.                                                        |
 | `--import-source <path>`   | Source agent home for `--import-from`.                                                              |
 | `--import-secrets`         | Import supported secrets during onboarding migration.                                               |
 | `--remote-url <url>`       | Remote Gateway WebSocket URL.                                                                       |
 | `--remote-token <token>`   | Remote Gateway token (optional).                                                                    |
+| `--json`                   | Output a JSON summary.                                                                              |
 
 ### Baseline mode
 
-`openclaw setup --baseline` preserves the older baseline-only behavior: it creates the config, workspace, and session directories, then exits without running onboarding.
+`openclaw setup --baseline` preserves the older baseline-only behavior: it
+creates the config, workspace, and session directories, then exits without
+running onboarding.
 
 ## Examples
 
@@ -53,13 +72,13 @@ openclaw setup --non-interactive --accept-risk --mode remote --remote-url wss://
 
 ## Notes
 
-- Plain `openclaw setup` runs the same guided journey as `openclaw onboard`.
 - After baseline setup, run `openclaw setup` or `openclaw onboard` for the full guided journey, `openclaw configure` for targeted changes, or `openclaw channels add` to add channel accounts.
 - If Hermes state is detected, interactive onboarding can offer migration automatically. Import onboarding requires a fresh setup; use [Migrate](/cli/migrate) for dry-run plans, backups, and overwrite mode outside onboarding.
 
 ## Related
 
 - [CLI reference](/cli)
+- [Onboard](/cli/onboard)
 - [Onboarding (CLI)](/start/wizard)
 - [Getting started](/start/getting-started)
 - [Install overview](/install)

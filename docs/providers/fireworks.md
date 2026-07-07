@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "541af6e8c5a5e95fa7ed650099da05cde434129f716e1aa43a7267313efa4c19"
+source_hash: "397df63547eaca5ddb6b5c96cce701adde173ac5549d550c5678b88be57550d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
@@ -96,7 +96,7 @@ openclaw onboard --non-interactive \
 
 Note
 
-  OpenClaw pins all Fireworks Kimi models to `thinking: off` because Fireworks rejects Kimi thinking parameters in production. Routing the same model through [Moonshot](/providers/moonshot) directly preserves Kimi reasoning output. See [thinking modes](/tools/thinking) for switching between providers.
+  OpenClaw pins all Fireworks Kimi models to `thinking: off` because Kimi on Fireworks can leak chain-of-thought into the visible reply unless the request explicitly disables thinking. Routing the same model through [Moonshot](/providers/moonshot) directly preserves Kimi reasoning output. See [thinking modes](/tools/thinking) for switching between providers.
 
 ## Custom Fireworks model ids
 
@@ -131,7 +131,7 @@ How model id prefixing works
 
 Why thinking is forced off for Kimi
 
-    Fireworks K2.6 returns a 400 if the request carries `reasoning_*` parameters even though Kimi supports thinking through Moonshot's own API. The provider policy (`extensions/fireworks/thinking-policy.ts`) advertises only the `off` thinking level for Kimi model ids, so manual `/think` switches and provider-policy surfaces stay aligned with the runtime contract.
+    Fireworks serves Kimi without a separate reasoning channel, so chain-of-thought can surface in the visible `content` stream. On every Fireworks Kimi request OpenClaw sends `thinking: { type: "disabled" }` and strips `reasoning`, `reasoning_effort`, and `reasoningEffort` from the payload (`extensions/fireworks/stream.ts`). The provider policy (`extensions/fireworks/thinking-policy.ts`) advertises only the `off` thinking level for Kimi model ids, so manual `/think` switches and provider-policy surfaces stay aligned with the runtime contract.
 
     To use Kimi reasoning end-to-end, configure the [Moonshot provider](/providers/moonshot) and route the same model through it.
 
@@ -148,7 +148,7 @@ Warning
       A key exported only in an interactive shell will not help a launchd or systemd daemon unless that environment is imported there too. Set the key in `~/.openclaw/.env` or via `env.shellEnv` to make it readable from the gateway process.
 
 
-    On macOS, `openclaw gateway install` already wires `~/.openclaw/.env` into the LaunchAgent environment file. Re-run install (or `openclaw doctor --fix`) after rotating the key.
+    OpenClaw loads `~/.openclaw/.env` when it loads config, so keys stored there reach managed gateway services on every platform. Restart the gateway (or re-run `openclaw doctor --fix`) after rotating the key.
 
 
 

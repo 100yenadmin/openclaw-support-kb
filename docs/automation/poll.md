@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Polls"
 source: "https://docs.openclaw.ai/automation/poll"
-source_hash: "910a335f1c486b2ff8bb5609e5082ef4100c6dbd862eb29bb0e29813a7494aad"
+source_hash: "cd24f559d66c937f8c8b376a72b0fd27a4346fb283057aa3a5b342e882a56496"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/poll.md"
@@ -13,11 +13,11 @@ duplicate_index: 1
 # Polls
 Source: https://docs.openclaw.ai/automation/poll
 
-This page moved to [Message tool](/cli/message). See [Message tool](/cli/message) for poll documentation.
+This page moved. Poll documentation, including `openclaw message poll` flags and per-channel limits, lives in [Message tool](/cli/message).
 
 ## Related
 
-- [Webhook](/automation/webhook)
+- [Webhooks](/automation/cron-jobs#webhooks)
 - [Scheduled tasks](/automation/cron-jobs)
 - [Background tasks](/automation/tasks)
 

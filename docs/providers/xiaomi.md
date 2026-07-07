@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "29a47d5fb321c02486dd650dbb4c446636fc6120f747bd31b36e23fa506f1c72"
+source_hash: "1bb61bb0241a72ef812fe38656fd20c2ed5953e2d6683634c38edcb18f5c9241"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -13,23 +13,22 @@ duplicate_index: 1
 # Xiaomi MiMo
 Source: https://docs.openclaw.ai/providers/xiaomi
 
-Xiaomi MiMo is the API platform for **MiMo** models. OpenClaw includes a bundled Xiaomi plugin with two text-provider presets:
+Xiaomi MiMo is the API platform for **MiMo** models. The bundled `xiaomi`
+plugin (`enabledByDefault: true`, no install step) registers two text
+providers plus a speech (TTS) provider:
 
-- `xiaomi` for pay-as-you-go keys (`sk-...`)
-- `xiaomi-token-plan` for Token Plan keys (`tp-...`) with regional endpoint presets
-
-The same plugin also registers the `xiaomi` speech (TTS) provider.
+- `xiaomi` - pay-as-you-go keys (`sk-...`)
+- `xiaomi-token-plan` - Token Plan keys (`tp-...`) with regional endpoint presets
 
 | Property         | Value                                                                                                                                              |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Provider ids     | `xiaomi` (pay-as-you-go), `xiaomi-token-plan` (Token Plan)                                                                                         |
-| Plugin           | bundled, `enabledByDefault: true`                                                                                                                  |
 | Auth env vars    | `XIAOMI_API_KEY`, `XIAOMI_TOKEN_PLAN_API_KEY`                                                                                                      |
 | Onboarding flags | `--auth-choice xiaomi-api-key`, `--auth-choice xiaomi-token-plan-cn`, `--auth-choice xiaomi-token-plan-sgp`, `--auth-choice xiaomi-token-plan-ams` |
 | Direct CLI flags | `--xiaomi-api-key <key>`, `--xiaomi-token-plan-api-key <key>`                                                                                      |
-| Contracts        | chat completions + `speechProviders`                                                                                                               |
-| API              | OpenAI-compatible (`openai-completions`)                                                                                                           |
-| Base URLs        | Pay-as-you-go: `https://api.xiaomimimo.com/v1`; Token Plan presets: `token-plan-{cn,sgp,ams}...`                                                   |
+| API              | OpenAI-compatible chat completions (`openai-completions`)                                                                                          |
+| Speech contract  | `speechProviders: ["xiaomi"]`                                                                                                                      |
+| Base URLs        | Pay-as-you-go: `https://api.xiaomimimo.com/v1`; Token Plan: `token-plan-{cn,sgp,ams}.xiaomimimo.com/v1`                                            |
 | Default models   | `xiaomi/mimo-v2-flash`, `xiaomi-token-plan/mimo-v2.5-pro`                                                                                          |
 | TTS default      | `mimo-v2.5-tts`, voice `mimo_default`; voicedesign model `mimo-v2.5-tts-voicedesign`                                                               |
 
@@ -75,6 +74,10 @@ Verify the model is available
     ```
 
 
+Tip
+
+Onboarding validates the key shape and warns when a `tp-...` key is entered into the pay-as-you-go path, or an `sk-...` key is entered into the Token Plan path.
+
 ## Pay-as-you-go catalog
 
 | Model ref              | Input       | Context   | Max output | Reasoning | Notes         |
@@ -83,32 +86,39 @@ Verify the model is available
 | `xiaomi/mimo-v2-pro`   | text        | 1,048,576 | 32,000     | Yes       | Large context |
 | `xiaomi/mimo-v2-omni`  | text, image | 262,144   | 32,000     | Yes       | Multimodal    |
 
-Tip
-
-The default model ref is `xiaomi/mimo-v2-flash`. The provider is injected automatically when `XIAOMI_API_KEY` is set or an auth profile exists.
-
 ## Token Plan catalog
 
 Choose the Token Plan auth choice that matches the regional base URL shown in Xiaomi's subscription UI:
 
-- `xiaomi-token-plan-cn` -> `https://token-plan-cn.xiaomimimo.com/v1`
-- `xiaomi-token-plan-sgp` -> `https://token-plan-sgp.xiaomimimo.com/v1`
-- `xiaomi-token-plan-ams` -> `https://token-plan-ams.xiaomimimo.com/v1`
+| Auth choice             | Base URL                                   |
+| ----------------------- | ------------------------------------------ |
+| `xiaomi-token-plan-cn`  | `https://token-plan-cn.xiaomimimo.com/v1`  |
+| `xiaomi-token-plan-sgp` | `https://token-plan-sgp.xiaomimimo.com/v1` |
+| `xiaomi-token-plan-ams` | `https://token-plan-ams.xiaomimimo.com/v1` |
 
 | Model ref                         | Input       | Context   | Max output | Reasoning | Notes         |
 | --------------------------------- | ----------- | --------- | ---------- | --------- | ------------- |
 | `xiaomi-token-plan/mimo-v2.5-pro` | text        | 1,048,576 | 131,072    | Yes       | Default model |
 | `xiaomi-token-plan/mimo-v2.5`     | text, image | 1,048,576 | 131,072    | Yes       | Multimodal    |
 
-Tip
+`xiaomi-token-plan` needs a regional base URL to resolve. The supported path
+is a bundled Token Plan onboarding choice or an explicit
+`models.providers.xiaomi-token-plan` config block with `baseUrl` set; the
+provider is not offered without one of those.
 
-Token Plan onboarding validates the key shape and warns when a `tp-...` key is entered into the pay-as-you-go path, or an `sk-...` key is entered into the Token Plan path.
+## Reasoning models
+
+`mimo-v2-pro`, `mimo-v2-omni`, `mimo-v2.5`, and `mimo-v2.5-pro` support
+OpenClaw's [`/think` directive](/tools/thinking) with levels `off`,
+`minimal`, `low`, `medium`, `high`, `xhigh`, and `max` (default `high`).
+`mimo-v2-flash` has no reasoning support.
 
 ## Text-to-speech
 
-The bundled `xiaomi` plugin also registers Xiaomi MiMo as a speech provider for
-`messages.tts`. It calls Xiaomi's chat-completions TTS contract with the text as
-an `assistant` message and optional style guidance as a `user` message.
+The bundled `xiaomi` plugin also registers Xiaomi MiMo as a speech provider
+for `messages.tts`. It calls Xiaomi's chat-completions TTS contract with the
+text as an `assistant` message and optional style guidance as a `user`
+message.
 
 | Property | Value                                    |
 | -------- | ---------------------------------------- |
@@ -138,15 +148,15 @@ an `assistant` message and optional style guidance as a `user` message.
 }
 ```
 
-Supported built-in voices include `mimo_default`, `default_zh`, `default_en`,
-`Mia`, `Chloe`, `Milo`, and `Dean`. Preset-voice models use `audio.voice`, so
-OpenClaw sends `speakerVoice` for `mimo-v2.5-tts` and `mimo-v2-tts`.
+Built-in voices: `mimo_default`, `default_zh`, `default_en`, `Mia`, `Chloe`,
+`Milo`, `Dean`. Preset-voice models (`mimo-v2.5-tts`, `mimo-v2-tts`) use
+`audio.voice`, so OpenClaw sends `speakerVoice` for those models.
 
-Xiaomi's voicedesign model, `mimo-v2.5-tts-voicedesign`, generates the voice
-from a natural-language style prompt instead of a preset voice id. Configure
-`style` with the desired voice description; OpenClaw sends it as the `user`
-message, sends the spoken text as the `assistant` message, and omits
-`audio.voice` for this model.
+The voicedesign model `mimo-v2.5-tts-voicedesign` generates the voice from a
+natural-language style prompt instead of a preset voice id. Set `style` to
+the desired voice description; OpenClaw sends it as the `user` message, sends
+the spoken text as the `assistant` message, and omits `audio.voice` for this
+model.
 
 ```json5
 {
@@ -165,8 +175,9 @@ message, sends the spoken text as the `assistant` message, and omits
 }
 ```
 
-For voice-note targets such as Feishu and Telegram, OpenClaw transcodes Xiaomi
-output to 48kHz Opus with `ffmpeg` before delivery.
+For channels that request a voice-note synthesis target (Discord, Feishu,
+Matrix, Telegram, and WhatsApp), OpenClaw transcodes Xiaomi output to 48kHz
+mono Opus with `ffmpeg` before delivery.
 
 ## Config example
 
@@ -259,17 +270,17 @@ AccordionGroup
 
 Auto-injection behavior
 
-    The `xiaomi` provider is injected automatically when `XIAOMI_API_KEY` is set in your environment or an auth profile exists. `xiaomi-token-plan` needs a regional base URL, so the supported path is the bundled Token Plan onboarding choice or an explicit `models.providers.xiaomi-token-plan` config block.
+    The `xiaomi` provider is auto-enabled when `XIAOMI_API_KEY` is set in your environment or an auth profile exists. `xiaomi-token-plan` needs a regional base URL, so the supported path is the bundled Token Plan onboarding choice or an explicit `models.providers.xiaomi-token-plan` config block.
 
 
 
 Model details
 
-    - **mimo-v2-flash** — lightweight and fast, ideal for general-purpose text tasks. No reasoning support.
-    - **mimo-v2-pro** — supports reasoning with a 1M token context window for long-document workloads.
-    - **mimo-v2-omni** — reasoning-enabled multimodal model that accepts both text and image inputs.
-    - **mimo-v2.5-pro** — Token Plan default with Xiaomi's current V2.5 reasoning stack.
-    - **mimo-v2.5** — Token Plan multimodal V2.5 route.
+    - **mimo-v2-flash** - lightweight and fast, ideal for general-purpose text tasks. No reasoning support.
+    - **mimo-v2-pro** - supports reasoning with a 1M token context window for long-document workloads.
+    - **mimo-v2-omni** - reasoning-enabled multimodal model that accepts both text and image inputs.
+    - **mimo-v2.5-pro** - Token Plan default with Xiaomi's current V2.5 reasoning stack.
+    - **mimo-v2.5** - Token Plan multimodal V2.5 route.
 
 
 Note
@@ -302,6 +313,11 @@ CardGroup
 Model selection
 
     Choosing providers, model refs, and failover behavior.
+
+
+Thinking levels
+
+    `/think` directive syntax and level mapping.
 
 
 Configuration reference

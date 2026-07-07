@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "19fb2e4eec005fe71acb105ed68fcff7409488129a50a276ace72cb5ffd35d2a"
+source_hash: "e36b2716d356f2ece67bc44d1a63675100d8f9d18e016afb9c7a009544b7c0cb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -25,7 +25,7 @@ Channels
 
 Plugins
 
-    Bundled plugins add Matrix, Nextcloud Talk, Nostr, Twitch, Zalo, and more without separate installs in normal current releases.
+    Official plugins add Matrix, Nextcloud Talk, Nostr, Twitch, Zalo, and dozens more with one install command.
 
 
 Routing
@@ -40,7 +40,7 @@ Media
 
 Apps and UI
 
-    Windows Hub, Web Control UI, macOS app, and mobile nodes.
+    Windows Hub, browser Control UI, macOS menu bar app, and mobile nodes.
 
 
 Mobile nodes
@@ -52,10 +52,13 @@ Mobile nodes
 
 **Channels:**
 
-- Built-in channels include Discord, Google Chat, iMessage, IRC, Signal, Slack, Telegram, WebChat, and WhatsApp
-- Bundled plugin channels include Feishu, LINE, Matrix, Mattermost, Microsoft Teams, Nextcloud Talk, Nostr, QQ Bot, Synology Chat, Tlon, Twitch, Zalo, and Zalo Personal
-- Optional separately installed channel plugins include Voice Call and third-party packages such as WeChat
-- Third-party channel plugins can extend the Gateway further, such as WeChat
+- iMessage, Telegram, and WebChat ship with the core install; every other channel is an
+  official plugin installed with `openclaw plugins install @openclaw/<id>` (or on demand
+  during `openclaw onboard` / `openclaw channels add`)
+- Official plugin channels: Discord, Feishu, Google Chat, IRC, LINE, Matrix, Mattermost,
+  Microsoft Teams, Nextcloud Talk, Nostr, QQ Bot, Raft, Signal, Slack, SMS, Synology Chat,
+  Tlon, Twitch, Voice Call, WhatsApp, Zalo, and Zalo Personal
+- External plugin channels maintained outside the OpenClaw repo: WeChat, Yuanbao, and Zalo ClawBot
 - Group chat support with mention-based activation
 - DM safety with allowlists and pairing
 
@@ -70,7 +73,8 @@ Mobile nodes
 
 - 35+ model providers (Anthropic, OpenAI, Google, and more)
 - Subscription auth via OAuth (e.g. OpenAI Codex)
-- Custom and self-hosted provider support (vLLM, SGLang, Ollama, and any OpenAI-compatible or Anthropic-compatible endpoint)
+- Custom and self-hosted provider support (vLLM, SGLang, Ollama, llama.cpp, LM Studio, and
+  any OpenAI-compatible or Anthropic-compatible endpoint)
 
 **Media:**
 
@@ -115,6 +119,6 @@ Channels
 
 Plugins
 
-    Bundled and third-party plugins that extend OpenClaw.
+    Official and external plugins that extend OpenClaw.
 
 ---

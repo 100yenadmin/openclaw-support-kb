@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Event Hooks"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks"
-source_hash: "90b0d807a00221323fefac34987ec77adfbdc679b6c9c79e02e163a30977a55a"
+source_hash: "aac8749be951aaac02b9b9b8b13361da6265fd186ea3777b1b99f731e908f81a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/hooks.md"
@@ -886,7 +886,7 @@ def my_callback(session_id: str, platform: str, **kwargs):
 
 ---
 
-See the **[Build a Plugin guide](/guides/build-a-hermes-plugin)** for the full walkthrough including tool schemas, handlers, and advanced hook patterns.
+See the **[Build a Plugin guide](/developer-guide/plugins)** for the full walkthrough including tool schemas, handlers, and advanced hook patterns.
 
 ---
 

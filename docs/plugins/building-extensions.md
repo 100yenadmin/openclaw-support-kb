@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins (redirect)"
 source: "https://docs.openclaw.ai/plugins/building-extensions"
-source_hash: "dd9456dd4d2ca6b4b7772c938956119c0e3217b15abd1e82bdc81cbeddaeb6b2"
+source_hash: "ffb1e33ae21dc1f46ecb1c74f530ff0fd5a8e9088ff5e2adb54281b13860ece8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-extensions.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Building plugins (redirect)
 Source: https://docs.openclaw.ai/plugins/building-extensions
 
-This page has moved to [Building Plugins](/plugins/building-plugins).
+This page has moved. See [Building Plugins](/plugins/building-plugins).
 
 ## Related
 

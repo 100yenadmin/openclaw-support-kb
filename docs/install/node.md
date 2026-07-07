@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
-source_hash: "c61db35314432dceaf77b795aa8ca3bd71862b0863963ab7be6a6113b0dc0ef4"
+source_hash: "de6bfb8ac5c5ee36ec52497709ca2af571f45dd899facdf0f39ee9f1ea19cde5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/node.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Node.js
 Source: https://docs.openclaw.ai/install/node
 
-OpenClaw requires **Node 22.19+, Node 23.11+, or Node 24+**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows. Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) will detect and install Node automatically - this page is for when you want to set up Node yourself and make sure everything is wired up correctly (versions, PATH, global installs).
+OpenClaw requires **Node 22.19+, Node 23.11+, or Node 24+**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows; Node 22 remains supported via the active LTS line. The [installer script](/install#alternative-install-methods) detects and installs Node automatically — use this page when you want to set up Node yourself (versions, PATH, global installs).
 
 ## Check your version
 
@@ -21,7 +21,7 @@ OpenClaw requires **Node 22.19+, Node 23.11+, or Node 24+**. **Node 24 is the de
 node -v
 ```
 
-If this prints `v24.x.x` or higher, you're on the recommended default. If it prints `v22.19.x` or higher, you're on the supported Node 22 LTS path, but we still recommend upgrading to Node 24 when convenient. Node 23 versions before `v23.11.0` are unsupported. If Node isn't installed or the version is outside the supported range, pick an install method below.
+`v24.x.x` or higher is the recommended default. `v22.19.x` or higher is the supported Node 22 LTS path (upgrade to Node 24 when convenient). Node 23 builds before `v23.11.0` are unsupported. If Node is missing or outside the supported range, pick an install method below.
 
 ## Install Node
 
@@ -95,7 +95,7 @@ fnm use 24
 
 Warning
 
-  Make sure your version manager is initialized in your shell startup file (`~/.zshrc` or `~/.bashrc`). If it isn't, `openclaw` may not be found in new terminal sessions because the PATH won't include Node's bin directory.
+  Initialize your version manager in your shell startup file (`~/.zshrc` or `~/.bashrc`). If you skip this, `openclaw` may not be found in new terminal sessions because PATH won't include Node's bin directory.
 
 
 ## Troubleshooting

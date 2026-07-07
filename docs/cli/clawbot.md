@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Clawbot"
 source: "https://docs.openclaw.ai/cli/clawbot"
-source_hash: "bd7ae3dbcac37cfa226138fba98f5b9657299d295b62bb8558449954411f141b"
+source_hash: "9147c139b098cf21dd47d9c0d516f84e75f48f3263a802b610fc215a441b7cc8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/clawbot.md"
@@ -15,15 +15,11 @@ Source: https://docs.openclaw.ai/cli/clawbot
 
 # `openclaw clawbot`
 
-Legacy alias namespace kept for backwards compatibility.
-
-Current supported alias:
-
-- `openclaw clawbot qr` (same behavior as [`openclaw qr`](/cli/qr))
+Legacy alias namespace kept for backward compatibility. It registers the same QR command as the top-level CLI, so `openclaw clawbot qr` accepts every [`openclaw qr`](/cli/qr) flag.
 
 ## Migration
 
-Prefer modern top-level commands directly:
+Prefer the modern top-level command:
 
 - `openclaw clawbot qr` -> `openclaw qr`
 

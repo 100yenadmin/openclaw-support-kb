@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare AI gateway"
 source: "https://docs.openclaw.ai/providers/cloudflare-ai-gateway"
-source_hash: "c844cbc332e9dadb3afd5d53dd89df55ea891e1cb038f4fde21c97542b3bd0e5"
+source_hash: "6e6755a8c22191c4185c659a8e9b608d362617337c4b1e96ddb0b316bc0f2aa9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cloudflare-ai-gateway.md"
@@ -13,11 +13,12 @@ duplicate_index: 1
 # Cloudflare AI gateway
 Source: https://docs.openclaw.ai/providers/cloudflare-ai-gateway
 
-Cloudflare AI Gateway sits in front of provider APIs and lets you add analytics, caching, and controls. For Anthropic, OpenClaw uses the Anthropic Messages API through your Gateway endpoint.
+[Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/) sits in front of provider APIs and adds analytics, caching, and controls. For Anthropic, OpenClaw uses the Anthropic Messages API through your Gateway endpoint.
 
 | Property      | Value                                                                                    |
 | ------------- | ---------------------------------------------------------------------------------------- |
 | Provider      | `cloudflare-ai-gateway`                                                                  |
+| Plugin        | official external package (`@openclaw/cloudflare-ai-gateway-provider`)                   |
 | Base URL      | `https://gateway.ai.cloudflare.com/v1/<account_id>/<gateway_id>/anthropic`               |
 | Default model | `cloudflare-ai-gateway/claude-sonnet-4-6`                                                |
 | API key       | `CLOUDFLARE_AI_GATEWAY_API_KEY` (your provider API key for requests through the Gateway) |

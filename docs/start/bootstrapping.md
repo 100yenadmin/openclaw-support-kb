@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "97bde4424c09df39be1f6a9ad6ab00e123c262dd77c403396d02ddd702212604"
+source_hash: "a85a7bc7088e5849f706a3f12fd3daf531f823e3c84167e75c4d979992173f09"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/bootstrapping.md"
@@ -13,35 +13,50 @@ duplicate_index: 1
 # Agent bootstrapping
 Source: https://docs.openclaw.ai/start/bootstrapping
 
-Bootstrapping is the **first-run** ritual that prepares an agent workspace and
-collects identity details. It happens after onboarding, when the agent starts
-for the first time.
+Bootstrapping is the first-run ritual that seeds a new agent workspace and
+walks the agent through picking an identity. It runs once, right after
+onboarding, on the agent's first real turn.
 
-## What bootstrapping does
+## What happens
 
-On the first agent run, OpenClaw bootstraps the workspace (default
-`~/.openclaw/workspace`):
+On the first run against a brand-new workspace (default `~/.openclaw/workspace`),
+OpenClaw:
 
-- Seeds `AGENTS.md`, `BOOTSTRAP.md`, `IDENTITY.md`, `USER.md`.
-- Runs a short Q&A ritual (one question at a time).
-- Writes identity + preferences to `IDENTITY.md`, `USER.md`, `SOUL.md`.
-- Removes `BOOTSTRAP.md` when finished so it only runs once.
+- Seeds `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, and `BOOTSTRAP.md`.
+- Has the agent follow `BOOTSTRAP.md`: a free-form conversation (not a fixed Q&A form) to settle on a name, personality, and vibe.
+- Writes what it learns into `IDENTITY.md`, `USER.md`, and `SOUL.md`.
+- Deletes `BOOTSTRAP.md` once the workspace looks configured, so the ritual only runs once.
 
-For embedded/local model runs, OpenClaw keeps `BOOTSTRAP.md` out of the
-privileged system context. On the primary interactive first run, it still passes
-the file contents in the user prompt so models that do not reliably call the
-`read` tool can complete the ritual. If the current run cannot safely access the
-workspace, the agent gets a limited bootstrap note instead of a generic greeting.
+A workspace counts as configured once `SOUL.md`, `IDENTITY.md`, or `USER.md` has
+diverged from its starter template, or a `memory/` folder exists.
+
+Note
+
+`BOOTSTRAP.md` covers the full identity conversation. See its contents at
+[BOOTSTRAP.md template](/reference/templates/BOOTSTRAP).
+
+## Embedded and local model runs
+
+For embedded or local-model runs, OpenClaw keeps `BOOTSTRAP.md` out of the
+privileged system context. On the primary interactive first run it still
+passes the file contents through the user prompt, so models that don't
+reliably call the `read` tool can still complete the ritual. If the current
+run cannot safely access the workspace, the agent gets a short limited-bootstrap
+note instead of a generic greeting.
 
 ## Skipping bootstrapping
 
-To skip this for a pre-seeded workspace, run `openclaw onboard --skip-bootstrap`.
+To skip this on a pre-seeded workspace, run:
+
+```bash
+openclaw onboard --skip-bootstrap
+```
 
 ## Where it runs
 
-Bootstrapping always runs on the **gateway host**. If the macOS app connects to
-a remote Gateway, the workspace and bootstrapping files live on that remote
-machine.
+Bootstrapping always runs on the gateway host. If the macOS app connects to a
+remote Gateway, the workspace and its bootstrap files live on that remote
+machine, not on the Mac.
 
 Note
 
@@ -52,5 +67,6 @@ host (for example, `user@gateway-host:~/.openclaw/workspace`).
 
 - macOS app onboarding: [Onboarding](/start/onboarding)
 - Workspace layout: [Agent workspace](/concepts/agent-workspace)
+- Template contents: [BOOTSTRAP.md template](/reference/templates/BOOTSTRAP)
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "a5c82a4e553d2a6eca8fafe563a9d18674d887a0b1a70917dedd9c34ea2d50de"
+source_hash: "f369b5a0ffc6740268464f57c03bcf7dc6a6c74074225655eebec202bfca2943"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Runway
 Source: https://docs.openclaw.ai/providers/runway
 
-OpenClaw ships a bundled `runway` provider for hosted video generation. The plugin is enabled by default and registers the `runway` provider against the `videoGenerationProviders` contract.
+OpenClaw ships a bundled `runway` provider for hosted video generation, enabled by default, registered against the `videoGenerationProviders` contract.
 
 | Property        | Value                                                             |
 | --------------- | ----------------------------------------------------------------- |
@@ -96,7 +96,7 @@ AccordionGroup
 Environment variable aliases
 
     OpenClaw recognizes both `RUNWAYML_API_SECRET` (canonical) and `RUNWAY_API_KEY`.
-    Either variable will authenticate the Runway provider.
+    Either variable authenticates the Runway provider.
 
 
 

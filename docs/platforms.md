@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "7629ec900d0c674794d8ee2d0a6278718955f1283683832e2294a12080be9f6d"
+source_hash: "1e1168d2188b76c8f404204dd2af514efdfd0eada69229cbc50eb05d914c1232"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -60,7 +60,7 @@ Use one of these (all supported):
 
 The service target depends on OS:
 
-- macOS: LaunchAgent (`ai.openclaw.gateway` or `ai.openclaw.<profile>`; legacy `com.openclaw.*`)
+- macOS: LaunchAgent (`ai.openclaw.gateway`, or `ai.openclaw.<profile>` for a named profile)
 - Linux/WSL2: systemd user service (`openclaw-gateway[-<profile>].service`)
 - Native Windows: Scheduled Task (`OpenClaw Gateway` or `OpenClaw Gateway (<profile>)`), with a per-user Startup-folder login item fallback if task creation is denied
 

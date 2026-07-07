@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw tasks`"
 source: "https://docs.openclaw.ai/cli/tasks"
-source_hash: "a1740b84e3b04d16821b7c274ef766397bb50395f97bcabd84a026ac588e4935"
+source_hash: "f69cb9a0e7f673325053999dbc8bf91513194aa6c7035e17a0292ec06812f636"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tasks.md"
@@ -16,7 +16,8 @@ Source: https://docs.openclaw.ai/cli/tasks
 Inspect durable background tasks and Task Flow state. With no subcommand,
 `openclaw tasks` is equivalent to `openclaw tasks list`.
 
-See [Background Tasks](/automation/tasks) for the lifecycle and delivery model.
+See [Background Tasks](/automation/tasks) for the lifecycle and delivery
+model, and its `tasks audit` section for full finding descriptions.
 
 ## Usage
 
@@ -38,9 +39,11 @@ openclaw tasks flow cancel <lookup>
 
 ## Root Options
 
-- `--json`: output JSON.
-- `--runtime <name>`: filter by kind: `subagent`, `acp`, `cron`, or `cli`.
-- `--status <name>`: filter by status: `queued`, `running`, `succeeded`, `failed`, `timed_out`, `cancelled`, or `lost`.
+| Flag               | Description                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------- |
+| `--json`           | Output JSON.                                                                                       |
+| `--runtime <name>` | Filter by kind: `subagent`, `acp`, `cron`, or `cli`.                                               |
+| `--status <name>`  | Filter by status: `queued`, `running`, `succeeded`, `failed`, `timed_out`, `cancelled`, or `lost`. |
 
 ## Subcommands
 
@@ -82,7 +85,16 @@ Cancels a running background task.
 openclaw tasks audit [--severity <warn|error>] [--code <name>] [--limit <n>] [--json]
 ```
 
-Surfaces stale, lost, delivery-failed, or otherwise inconsistent task and Task Flow records. Lost tasks retained until `cleanupAfter` are warnings; expired or unstamped lost tasks are errors.
+Surfaces stale, lost, delivery-failed, or otherwise inconsistent task and
+Task Flow records. Lost tasks retained until `cleanupAfter` are warnings;
+expired or unstamped lost tasks are errors.
+
+`--code` accepts task codes (`stale_queued`, `stale_running`, `lost`,
+`delivery_failed`, `missing_cleanup`, `inconsistent_timestamps`) and Task
+Flow codes (`restore_failed`, `stale_waiting`, `stale_blocked`,
+`cancel_stuck`, `missing_linked_tasks`, `blocked_task_missing`). See
+[Background Tasks](/automation/tasks) for severity and trigger detail per
+code.
 
 ### `maintenance`
 
@@ -90,17 +102,20 @@ Surfaces stale, lost, delivery-failed, or otherwise inconsistent task and Task F
 openclaw tasks maintenance [--apply] [--json]
 ```
 
-Previews or applies task and Task Flow reconciliation, cleanup stamping, pruning,
-and stale cron run session registry cleanup.
-For cron tasks, reconciliation uses persisted run logs/job state before marking an
-old active task `lost`, so completed cron runs do not become false audit errors
-just because the in-memory Gateway runtime state is gone. Offline CLI audit is
-not authoritative for the Gateway's process-local cron active-job set. CLI tasks
-with a run id/source id are marked `lost` when their live Gateway run context is
-gone, even if an old child-session row remains.
-When applied, maintenance also prunes `cron:<jobId>:run:<uuid>` session registry
-rows older than 7 days while preserving currently running cron jobs and leaving
-non-cron session rows untouched.
+Previews or applies task and Task Flow reconciliation, cleanup stamping,
+pruning, and stale cron run session registry cleanup.
+
+For cron tasks, reconciliation uses persisted run logs/job state before
+marking an old active task `lost`, so completed cron runs do not become
+false audit errors just because the in-memory Gateway runtime state is gone.
+Offline CLI audit is not authoritative for the Gateway's process-local cron
+active-job set. CLI tasks with a run id/source id are marked `lost` when
+their live Gateway run context is gone, even if an old child-session row
+remains.
+
+When applied, maintenance also prunes `cron:<jobId>:run:<uuid>` session
+registry rows older than 7 days while preserving currently running cron
+jobs and leaving non-cron session rows untouched.
 
 ### `flow`
 
@@ -111,6 +126,8 @@ openclaw tasks flow cancel <lookup>
 ```
 
 Inspects or cancels durable Task Flow state under the task ledger.
+`flow list --status` accepts `queued`, `running`, `waiting`, `blocked`,
+`succeeded`, `failed`, `cancelled`, or `lost`.
 
 ## Related
 

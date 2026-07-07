@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
-source_hash: "9aa6d5e084b06d5b405c1000894f69553d7bedbfc2e9f1a80212437979a0efa0"
+source_hash: "53286e81714280acf4064137fca57a70219c987325f8008df7cde1c242b30518"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/groq.md"
@@ -106,11 +106,7 @@ Tip
 
 ## Reasoning models
 
-OpenClaw maps its shared `/think` levels to Groq's model-specific `reasoning_effort` values:
-
-- For `qwen/qwen3-32b`, disabled thinking sends `none` and enabled thinking sends `default`.
-- For Groq GPT OSS reasoning models (`openai/gpt-oss-*`), OpenClaw sends `low`, `medium`, or `high` based on `/think` level. Disabled thinking omits `reasoning_effort` because those models do not support a disabled value.
-- DeepSeek R1 Distill, Qwen QwQ, and Compound use Groq's native reasoning surface; `/think` controls visibility but the model always reasons.
+Groq reasoning models (`reasoning: true` in the table above) map OpenClaw's shared `/think` levels onto `reasoning_effort` values of `low`, `medium`, or `high`. `/think off` or `/think none` omits `reasoning_effort` from the request rather than sending a disabled value.
 
 See [Thinking modes](/tools/thinking) for the shared `/think` levels and how OpenClaw translates them per provider.
 

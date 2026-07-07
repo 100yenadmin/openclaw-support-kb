@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave search"
 source: "https://docs.openclaw.ai/tools/brave-search"
-source_hash: "a33d6798affd607b344510d0357f64dc36cae41944b29a0f4fe96a1e0a8026b3"
+source_hash: "5e120c10aba461e2f61334c3bcd52420e54a8e226814982fa9c7583a7652886f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/brave-search.md"
@@ -50,8 +50,7 @@ OpenClaw supports Brave Search API as a `web_search` provider.
 }
 ```
 
-Provider-specific Brave search settings now live under `plugins.entries.brave.config.webSearch.*`.
-Legacy `tools.web.search.apiKey` still loads through the compatibility shim, but it is no longer the canonical config path.
+Provider-specific Brave search settings live under `plugins.entries.brave.config.webSearch.*`; this is the canonical config path. A shared top-level `tools.web.search.apiKey` and a scoped `tools.web.search.brave.*` still load through a compatibility merge, but new config should use the plugin-scoped path above.
 
 `webSearch.mode` controls the Brave transport:
 

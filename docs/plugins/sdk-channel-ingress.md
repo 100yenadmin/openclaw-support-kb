@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel ingress API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-ingress"
-source_hash: "b2d4d6ef39fd3fa5182b6220722e9476efad011b983b6f63c81d27cd518f4420"
+source_hash: "e887248dc672632bcb2d2349120d55568f8fe558ae9ffae6506f8d435c8280eb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-ingress.md"
@@ -13,18 +13,17 @@ duplicate_index: 1
 # Channel ingress API
 Source: https://docs.openclaw.ai/plugins/sdk-channel-ingress
 
-# Channel ingress API
+Channel ingress is the experimental access-control boundary for inbound
+channel events. Plugins own platform facts and side effects; core owns
+generic policy: DM/group allowlists, pairing-store DM entries, route gates,
+command gates, event auth, mention activation, redacted diagnostics, and
+admission.
 
-Channel ingress is the experimental access-control boundary for inbound channel
-events. Use `openclaw/plugin-sdk/channel-ingress-runtime` for receive paths.
-The older `openclaw/plugin-sdk/channel-ingress` subpath stays exported as a
+Use `openclaw/plugin-sdk/channel-ingress-runtime` for new receive paths. The
+older `openclaw/plugin-sdk/channel-ingress` subpath stays exported as a
 deprecated compatibility facade for third-party plugins.
 
-Plugins own platform facts and side effects. Core owns generic policy: DM/group
-allowlists, pairing-store DM entries, route gates, command gates, event auth,
-mention activation, redacted diagnostics, and admission.
-
-## Runtime Resolver
+## Runtime resolver
 
 ```ts
 
@@ -59,34 +58,37 @@ const result = await resolveChannelMessageIngress({
 });
 ```
 
-Do not precompute effective allowlists, command owners, or command groups. The
-resolver derives them from raw allowlists, store callbacks, route descriptors,
-access groups, policy, and conversation kind.
+Do not precompute effective allowlists, command owners, or command groups.
+The resolver derives them from raw allowlists, store callbacks, route
+descriptors, access groups, policy, and conversation kind.
 
 ## Result
 
 Bundled plugins should consume modern projections directly:
 
-- `ingress`: ordered gate decision and admission
-- `senderAccess`: sender/conversation authorization only
-- `routeAccess`: route and route-sender projection
-- `commandAccess`: command authorization; false when no command gate ran
-- `activationAccess`: mention/activation result
+| Field              | Meaning                                                            |
+| ------------------ | ------------------------------------------------------------------ |
+| `ingress`          | ordered gate decision and admission                                |
+| `senderAccess`     | sender/conversation authorization only                             |
+| `routeAccess`      | route and route-sender projection                                  |
+| `commandAccess`    | command authorization; `requested: false` when no command gate ran |
+| `activationAccess` | mention/activation result                                          |
 
-Event authorization remains available on the ordered `ingress.graph` and the
+Event authorization stays available on the ordered `ingress.graph` and the
 decisive `ingress.reasonCode`; no separate event projection is emitted.
 
 Deprecated third-party SDK helpers may rebuild older shapes internally. New
-bundled receive paths should not translate modern results back into local DTOs.
+bundled receive paths should not translate modern results back into local
+DTOs.
 
-## Access Groups
+## Access groups
 
 `accessGroup:<name>` entries stay redacted. Core resolves static
 `message.senders` groups itself and calls `resolveAccessGroupMembership` only
 for dynamic groups that require a platform lookup. Missing, unsupported, and
 failed groups fail closed.
 
-## Event Modes
+## Event modes
 
 | `authMode`       | Meaning                                          |
 | ---------------- | ------------------------------------------------ |
@@ -98,7 +100,7 @@ failed groups fail closed.
 
 Use `mayPair: false` for reactions, buttons, callbacks, and native commands.
 
-## Routes And Activation
+## Routes and activation
 
 Use route descriptors for room, topic, guild, thread, or nested route policy:
 
@@ -114,8 +116,8 @@ route: {
 ```
 
 Use `channelIngressRoutes(...)` when a plugin has several optional route
-descriptors; it filters disabled branches while keeping route facts generic and
-ordered by each descriptor's `precedence`.
+descriptors; it filters disabled branches while keeping route facts generic
+and ordered by each descriptor's `precedence`.
 
 Mention gating is an activation gate. A mention miss returns
 `admission: "skip"` so the turn kernel does not process an observe-only turn.
@@ -129,8 +131,8 @@ activation bypassed an explicit mention.
 
 ## Redaction
 
-Raw sender values and raw allowlist entries are resolver input only. They must
-not appear in resolved state, decisions, diagnostics, snapshots, or
+Raw sender values and raw allowlist entries are resolver input only. They
+must not appear in resolved state, decisions, diagnostics, snapshots, or
 compatibility facts. Use opaque subject ids, entry ids, route ids, and
 diagnostic ids.
 

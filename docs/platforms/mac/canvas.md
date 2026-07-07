@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "f6f28878de912234ab2e6ba671b7a669ecb6980b096d8441c13ec5a64d087a69"
+source_hash: "9109ca4a361e80c061dd0753e234626d015d0b0f3e9e7607ccb91de1300a9311"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
@@ -13,9 +13,9 @@ duplicate_index: 1
 # Canvas
 Source: https://docs.openclaw.ai/platforms/mac/canvas
 
-The macOS app embeds an agent-controlled **Canvas panel** using `WKWebView`. It
-is a lightweight visual workspace for HTML/CSS/JS, A2UI, and small interactive
-UI surfaces.
+The macOS app embeds an agent-controlled **Canvas panel** using `WKWebView`, a
+lightweight visual workspace for HTML/CSS/JS, A2UI, and small interactive UI
+surfaces.
 
 ## Where Canvas lives
 
@@ -23,38 +23,30 @@ Canvas state is stored under Application Support:
 
 - `~/Library/Application Support/OpenClaw/canvas/<session>/...`
 
-The Canvas panel serves those files via a **custom URL scheme**:
+The Canvas panel serves those files via a custom URL scheme,
+`openclaw-canvas://<session>/<path>`:
 
-- `openclaw-canvas://<session>/<path>`
+- `openclaw-canvas://main/` -> `<canvasRoot>/main/index.html`
+- `openclaw-canvas://main/assets/app.css` -> `<canvasRoot>/main/assets/app.css`
+- `openclaw-canvas://main/widgets/todo/` -> `<canvasRoot>/main/widgets/todo/index.html`
 
-Examples:
-
-- `openclaw-canvas://main/` → `<canvasRoot>/main/index.html`
-- `openclaw-canvas://main/assets/app.css` → `<canvasRoot>/main/assets/app.css`
-- `openclaw-canvas://main/widgets/todo/` → `<canvasRoot>/main/widgets/todo/index.html`
-
-If no `index.html` exists at the root, the app shows a **built-in scaffold page**.
+If no `index.html` exists at the root, the app shows a built-in scaffold page.
 
 ## Panel behavior
 
 - Borderless, resizable panel anchored near the menu bar (or mouse cursor).
 - Remembers size/position per session.
 - Auto-reloads when local canvas files change.
-- Only one Canvas panel is visible at a time (session is switched as needed).
+- Only one Canvas panel is visible at a time (session switches as needed).
 
-Canvas can be disabled from Settings → **Allow Canvas**. When disabled, canvas
-node commands return `CANVAS_DISABLED`.
+Canvas can be disabled from Settings -> **Allow Canvas**. When disabled,
+canvas node commands return `CANVAS_DISABLED`.
 
 ## Agent API surface
 
-Canvas is exposed via the **Gateway WebSocket**, so the agent can:
-
-- show/hide the panel
-- navigate to a path or URL
-- evaluate JavaScript
-- capture a snapshot image
-
-CLI examples:
+Canvas is exposed via the Gateway WebSocket, so the agent can show/hide the
+panel, navigate to a path or URL, evaluate JavaScript, and capture a
+snapshot image:
 
 ```bash
 openclaw nodes canvas present --node <id>
@@ -63,35 +55,22 @@ openclaw nodes canvas eval --node <id> --js "document.title"
 openclaw nodes canvas snapshot --node <id>
 ```
 
-Notes:
-
-- `canvas.navigate` accepts **local canvas paths**, `http(s)` URLs, and `file://` URLs.
-- If you pass `"/"`, the Canvas shows the local scaffold or `index.html`.
+`canvas.navigate` accepts local canvas paths, `http(s)` URLs, and `file://`
+URLs. Passing `"/"` shows the local scaffold or `index.html`.
 
 ## A2UI in Canvas
 
-A2UI is hosted by the Gateway canvas host and rendered inside the Canvas panel.
-When the Gateway advertises a Canvas host, the macOS app auto-navigates to the
-A2UI host page on first open.
+A2UI is hosted by the Gateway canvas host and rendered inside the Canvas
+panel. When the Gateway advertises a Canvas host, the macOS app auto-navigates
+to the A2UI host page on first open.
 
-Default A2UI host URL:
-
-```
-http://<gateway-host>:18789/__openclaw__/a2ui/
-```
+Default A2UI host URL: `http://<gateway-host>:18789/__openclaw__/a2ui/`
 
 ### A2UI commands (v0.8)
 
-Canvas currently accepts **A2UI v0.8** server→client messages:
-
-- `beginRendering`
-- `surfaceUpdate`
-- `dataModelUpdate`
-- `deleteSurface`
-
-`createSurface` (v0.9) is not supported.
-
-CLI example:
+Canvas accepts A2UI v0.8 server-to-client messages: `beginRendering`,
+`surfaceUpdate`, `dataModelUpdate`, `deleteSurface`. `createSurface` (v0.9) is
+not supported yet.
 
 ```bash
 cat > /tmp/a2ui-v0.8.jsonl <<'EOFA2'
@@ -102,7 +81,7 @@ EOFA2
 openclaw nodes canvas a2ui push --jsonl /tmp/a2ui-v0.8.jsonl --node <id>
 ```
 
-Quick smoke:
+Quick smoke test:
 
 ```bash
 openclaw nodes canvas a2ui push --node <id> --text "Hello from A2UI"
@@ -110,11 +89,7 @@ openclaw nodes canvas a2ui push --node <id> --text "Hello from A2UI"
 
 ## Triggering agent runs from Canvas
 
-Canvas can trigger new agent runs via deep links:
-
-- `openclaw://agent?...`
-
-Example (in JS):
+Canvas can trigger new agent runs via `openclaw://agent?...` deep links:
 
 ```js
 window.location.href = "openclaw://agent?message=Review%20this%20design";
@@ -122,16 +97,18 @@ window.location.href = "openclaw://agent?message=Review%20this%20design";
 
 Supported query parameters:
 
-- `message`: prefilled agent prompt.
-- `sessionKey`: stable session identifier.
-- `thinking`: optional thinking profile.
-- `deliver`, `to`, or `channel`: delivery target.
-- `timeoutSeconds`: optional run timeout.
-- `key`: app-generated safety token for trusted local callers.
+| Parameter                  | Meaning                                               |
+| -------------------------- | ----------------------------------------------------- |
+| `message`                  | Prefilled agent prompt.                               |
+| `sessionKey`               | Stable session identifier.                            |
+| `thinking`                 | Optional thinking profile.                            |
+| `deliver`, `to`, `channel` | Delivery target.                                      |
+| `timeoutSeconds`           | Optional run timeout.                                 |
+| `key`                      | App-generated safety token for trusted local callers. |
 
-The app prompts for confirmation unless a valid key is provided. Unkeyed links
-show the message and URL before approval, and ignore delivery routing fields;
-keyed links use the normal Gateway run path.
+The app prompts for confirmation unless a valid key is provided. Unkeyed
+links show the message and URL before approval, and ignore delivery routing
+fields; keyed links use the normal Gateway run path.
 
 ## Security notes
 

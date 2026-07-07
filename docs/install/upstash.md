@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Upstash Box"
 source: "https://docs.openclaw.ai/install/upstash"
-source_hash: "288ed935e92cbcbb51bf64ab1b106face4a14e7292bbb4bce07c8ae8caacd8e4"
+source_hash: "bf009195b9606668b5f071fee293511c56de8288ad955c0059de0da62b7c55af"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/upstash.md"
@@ -27,8 +27,8 @@ to the public internet.
 
 ## Create a Box
 
-Create a keep-alive Box in the Upstash Console. Note the Box ID, such as
-`right-flamingo-14486`, and your Box API key.
+Create a keep-alive Box in the Upstash Console. Note the Box ID (for example
+`right-flamingo-14486`) and your Box API key.
 
 Upstash maintains its current OpenClaw Box walkthrough at
 [OpenClaw Setup](https://upstash.com/docs/box/guides/openclaw-setup).

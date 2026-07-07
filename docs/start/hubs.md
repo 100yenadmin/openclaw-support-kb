@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "e642cae60574607bf880752f22c87b493b86c5e94ab506475b5eb85759b86b90"
+source_hash: "ffa5964d229f8fcd46fadb9fe6a5a632fe61ee1e6792cd95b2b10f0b1d485766"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
@@ -75,16 +75,16 @@ Use these hubs to discover every page, including deep dives and reference docs t
 
 - [Chat channels hub](/channels)
 - [Model providers hub](/providers/models)
-- [WhatsApp](/channels/whatsapp)
-- [Telegram](/channels/telegram)
-- [Slack](/channels/slack)
 - [Discord](/channels/discord)
-- [Mattermost](/channels/mattermost)
-- [Signal](/channels/signal)
-- [QQ Bot](/channels/qqbot)
 - [iMessage](/channels/imessage)
-- [Location parsing](/channels/location)
+- [Mattermost](/channels/mattermost)
+- [QQ Bot](/channels/qqbot)
+- [Signal](/channels/signal)
+- [Slack](/channels/slack)
+- [Telegram](/channels/telegram)
 - [WebChat](/web/webchat)
+- [WhatsApp](/channels/whatsapp)
+- [Location parsing](/channels/location)
 - [Webhooks](/automation/cron-jobs#webhooks)
 - [Gmail Pub/Sub](/automation/cron-jobs#gmail-pubsub-integration)
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Learning Path"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/learning-path"
-source_hash: "5e1610a2bf99ce3b2f72487d0f605c122936777a51054823eebf8cbf4bd96ccd"
+source_hash: "78a3261bf82bf605af492b13467f4a6d9003be609f43d3dcc4ee03959afd2ced"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/learning-path.md"
@@ -98,7 +98,7 @@ Cron jobs let Hermes Agent run tasks on a schedule — daily summaries, periodic
 Extend Hermes Agent with your own tools and reusable skill packages.
 
 1. [Plugins](/user-guide/features/plugins)
-2. [Build a Hermes Plugin](/guides/build-a-hermes-plugin)
+2. [Build a Hermes Plugin](/developer-guide/plugins)
 3. [Tools Overview](/user-guide/features/tools)
 4. [Skills Overview](/user-guide/features/skills)
 5. [MCP (Model Context Protocol)](/user-guide/features/mcp)

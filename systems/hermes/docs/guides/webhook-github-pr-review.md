@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automated GitHub PR Comments with Webhooks"
 source: "https://hermes-agent.nousresearch.com/docs/guides/webhook-github-pr-review"
-source_hash: "0cfcbb7c93aaa75d1eec27129a733aab99f3f765fc95643a47b6812403c11a6e"
+source_hash: "5bd25657740473c0f03baf58a83ac7c135210a84d6b63a8db25be42a18a31242"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/webhook-github-pr-review.md"
@@ -337,7 +337,7 @@ platforms:
 
 - **[Cron-Based PR Reviews](./github-pr-review-agent.md)** — poll for PRs on a schedule, no public endpoint needed
 - **[Webhook Reference](/user-guide/messaging/webhooks)** — full config reference for the webhook platform
-- **[Build a Plugin](/guides/build-a-hermes-plugin)** — package review logic into a shareable plugin
+- **[Build a Plugin](/developer-guide/plugins)** — package review logic into a shareable plugin
 - **[Profiles](/user-guide/profiles)** — run a dedicated reviewer profile with its own memory and config
 
 ---

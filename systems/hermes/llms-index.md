@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "6a56dd4691ce9d4506e091ec764d5a70d5a4b4ca2a6b2263fcdaff79fb913153"
+source_hash: "83717eb99b5a9fc4b23e8c98378c18813e01822df01d098c2e3a71bcf343ffdb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -113,7 +113,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Use MCP with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes): A practical guide to connecting MCP servers to Hermes Agent, filtering their tools, and using them safely in real workflows
 - [Use Voice Mode with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes): A practical guide to setting up and using Hermes voice mode across CLI, Telegram, Discord, and Discord voice channels
 - [Use SOUL.md with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-soul-with-hermes): How to use SOUL.md to shape Hermes Agent's default voice, what belongs there, and how it differs from AGENTS.md and /personality
-- [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin): Step-by-step guide to building a complete Hermes plugin with tools, hooks, data files, and skills
+- [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin)
 - [Automate with Cron](https://hermes-agent.nousresearch.com/docs/guides/automate-with-cron): Real-world automation patterns using Hermes cron — monitoring, reports, pipelines, and multi-skill workflows
 - [Work with Skills](https://hermes-agent.nousresearch.com/docs/guides/work-with-skills): Find, install, use, and create skills — on-demand knowledge that teaches Hermes new workflows
 - [Delegation Patterns](https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns): When and how to use subagent delegation — patterns for parallel research, code review, and multi-file work

@@ -1,12 +1,12 @@
 ---
 type: hermes_doc
 title: "Build a Hermes Plugin"
-source: "https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin"
-source_hash: "8bf166cef655b540d6ed806e2d7fa63ace964eff278029490e470719dfc86f84"
+source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugins"
+source_hash: "4fd1d683a866169efd1b788fcd1395157ab8c5975a6789b4a791119222096b14"
 system: "hermes"
 kb_namespace: "hermes-agent"
-doc_path: "guides/build-a-hermes-plugin.md"
-original_doc_path: "guides/build-a-hermes-plugin.md"
+doc_path: "developer-guide/plugins/index.md"
+original_doc_path: "developer-guide/plugins/index.md"
 duplicate_index: 1
 ---
 
@@ -14,7 +14,7 @@ duplicate_index: 1
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
-Source: https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin
+Source: https://hermes-agent.nousresearch.com/docs/developer-guide/plugins
 
 
 # Build a Hermes Plugin
@@ -33,6 +33,10 @@ Hermes has several distinct pluggable interfaces — some use Python `register_*
 | A **context-compression engine** | [Context Engine Plugins](/developer-guide/context-engine-plugin) |
 | An **image-generation backend** | [Image Generation Provider Plugins](/developer-guide/image-gen-provider-plugin) |
 | A **video-generation backend** | [Video Generation Provider Plugins](/developer-guide/video-gen-provider-plugin) |
+| A **web-search / extract backend** | [Web Search Provider Plugins](/developer-guide/web-search-provider-plugin) |
+| A **cloud browser backend** (Browserbase-style CDP session provider) | [Browser Provider Plugins](/developer-guide/browser-provider-plugin) |
+| A **secret-manager backend** (vault / password manager / OS keystore) | [Secret Source Plugins](/developer-guide/secret-source-plugin) |
+| A **dashboard OIDC/auth provider** | [Web Dashboard — custom providers](/user-guide/features/web-dashboard#custom-providers) — `ctx.register_dashboard_auth_provider()` |
 | A **TTS backend** (any CLI — Piper, VoxCPM, Kokoro, voice cloning, …) | [TTS custom command providers](/user-guide/features/tts#custom-command-providers) — config-driven, no Python needed |
 | An **STT backend** (custom whisper / ASR CLI) | [Voice Message Transcription](/user-guide/features/tts#voice-message-transcription-stt) — set `HERMES_LOCAL_STT_COMMAND` to a shell template |
 | **External tools via MCP** (filesystem, GitHub, Linear, any MCP server) | [MCP](/user-guide/features/mcp) — declare `mcp_servers.<name>` in `config.yaml` |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WebChat (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/webchat"
-source_hash: "f6fb3db387e4206b7e6b0a31c7a2979da1e82b6fbf78233d908d7f954a613e57"
+source_hash: "6a90a500a19fa9b5f3e93cc0ca7f22125e4019447959aee39364e0e244b77ba1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/webchat.md"
@@ -13,40 +13,39 @@ duplicate_index: 1
 # WebChat (macOS)
 Source: https://docs.openclaw.ai/platforms/mac/webchat
 
-The macOS menu bar app embeds the WebChat UI as a native SwiftUI view. It
-connects to the Gateway and defaults to the **main session** for the selected
-agent (with a session switcher for other sessions).
+The macOS menu bar app embeds the WebChat UI as a native SwiftUI view. It connects to the Gateway and defaults to the primary session for the selected agent (`main`, or `global` when `session.scope` is `global`).
+
+The full chat window is a native split view:
+
+- **Sessions sidebar**: searchable session list with pinned and recent sections, unread indicators, and context menus for pin/unpin, copy session key, and delete. A toolbar button (or Cmd-N) creates a real new session via `sessions.create`.
+- **Window toolbar**: context-usage ring (tokens and session cost, with a compact action), thinking-level picker, model picker, and a session actions menu (new session, refresh, copy session key, export transcript, compact, clear history).
+- **Transcript and composer**: assistant messages render as plain text with an avatar, user messages as accent bubbles. Typing `/` opens slash-command autocomplete backed by `commands.list`, with arrow/Tab/Return/Escape keyboard navigation. Right-click a message to copy it.
+
+The anchored quick-chat panel from the menu bar keeps the compact single-column layout with inline pickers.
 
 - **Local mode**: connects directly to the local Gateway WebSocket.
-- **Remote mode**: forwards the Gateway control port over SSH and uses that
-  tunnel as the data plane.
+- **Remote mode**: forwards the Gateway control port over SSH and uses that tunnel as the data plane.
 
 ## Launch and debugging
 
-- Manual: Lobster menu → "Open Chat".
+- Manual: Lobster menu -> "Open Chat".
 - Auto-open for testing:
 
   ```bash
-  dist/OpenClaw.app/Contents/MacOS/OpenClaw --webchat
+  dist/OpenClaw.app/Contents/MacOS/OpenClaw --chat
   ```
+
+  (`--webchat` is accepted as a legacy alias.)
 
 - Logs: `./scripts/clawlog.sh` (subsystem `ai.openclaw`, category `WebChatSwiftUI`).
 
 ## How it is wired
 
-- Data plane: Gateway WS methods `chat.history`, `chat.send`, `chat.abort`,
-  `chat.inject` and events `chat`, `agent`, `presence`, `tick`, `health`.
-- `chat.history` returns display-normalized transcript rows: inline directive
-  tags are stripped from visible text, plain-text tool-call XML payloads
-  (including `<tool_call>...</tool_call>`,
-  `<function_call>...</function_call>`, `<tool_calls>...</tool_calls>`,
-  `<function_calls>...</function_calls>`, and truncated tool-call blocks) and
-  leaked ASCII/full-width model control tokens are stripped, pure
-  silent-token assistant rows such as exact `NO_REPLY` / `no_reply` are
-  omitted, and oversized rows can be replaced with placeholders.
-- Session: defaults to the primary session (`main`, or `global` when scope is
-  global). The UI can switch between sessions.
+- Data plane: Gateway WS methods `chat.history`, `chat.send`, `chat.abort`, `chat.inject`, and events `chat`, `agent`, `presence`, `tick`, `health`.
+- `chat.history` returns a display-normalized transcript: inline directive tags are stripped from visible text, plain-text tool-call XML payloads (`<tool_call>`, `<function_call>`, `<tool_calls>`, `<function_calls>`, including truncated blocks) and leaked model control tokens are stripped, pure silent-token assistant rows such as exact `NO_REPLY`/`no_reply` are omitted, and oversized rows can be replaced with a truncated placeholder.
+- Session: defaults to the primary session as above; the UI can switch between sessions.
 - Onboarding uses a dedicated session to keep first-run setup separate.
+- Offline cache: the app keeps a small read-only cache of recent chat sessions and transcripts per gateway (`~/Library/Application Support/OpenClaw/chat-cache.sqlite`): cold opens paint the last known transcript immediately and refresh once the Gateway responds, and recent chats stay browsable while disconnected (sending stays disabled until the connection is back).
 
 ## Security surface
 
@@ -54,7 +53,7 @@ agent (with a session switcher for other sessions).
 
 ## Known limitations
 
-- The UI is optimized for chat sessions (not a full browser sandbox).
+- The UI is optimized for chat sessions, not a full browser sandbox.
 
 ## Related
 

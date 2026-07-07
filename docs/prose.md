@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenProse"
 source: "https://docs.openclaw.ai/prose"
-source_hash: "d2a01a4fb25c2aa7b76a8e4046cab349f5655fee2004d96a34ff10a530330915"
+source_hash: "30e0223b2eea13f06131c2413e894ec28b8fc39f7ca0a7a23cc7ab416bc786b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "prose.md"
@@ -43,7 +43,7 @@ Steps
 
 Enable the plugin
 
-    Bundled plugins are disabled by default. Enable OpenProse:
+    OpenProse is bundled but disabled by default. Enable it:
 
     ```bash
     openclaw plugins enable open-prose
@@ -69,7 +69,8 @@ Verify
 
 
 
-For a local checkout: `openclaw plugins install ./path/to/local/open-prose-plugin`
+From a repo checkout you can install the plugin directly:
+`openclaw plugins install ./extensions/open-prose`
 
 ## Slash command
 
@@ -121,18 +122,18 @@ parallel:
     prompt: "Summarize {topic}."
 
 session "Merge the findings + draft into a final answer."
-context: { findings, draft }
+  context: { findings, draft }
 ```
 
 ## OpenClaw runtime mapping
 
 OpenProse programs map to OpenClaw primitives:
 
-| OpenProse concept         | OpenClaw tool    |
-| ------------------------- | ---------------- |
-| Spawn session / Task tool | `sessions_spawn` |
-| File read / write         | `read` / `write` |
-| Web fetch                 | `web_fetch`      |
+| OpenProse concept         | OpenClaw tool                                   |
+| ------------------------- | ----------------------------------------------- |
+| Spawn session / Task tool | `sessions_spawn`                                |
+| File read / write         | `read` / `write`                                |
+| Web fetch                 | `web_fetch` (`exec` + curl when POST is needed) |
 
 Warning
 
@@ -146,17 +147,18 @@ OpenProse keeps state under `.prose/` in your workspace:
 
 ```text
 .prose/
-├── .env
+├── .env                      # config (key=value), e.g. OPENPROSE_POSTGRES_URL
 ├── runs/
 │   └── {YYYYMMDD}-{HHMMSS}-{random}/
-│       ├── program.prose
-│       ├── state.md
+│       ├── program.prose     # copy of the running program
+│       ├── state.md          # execution state
 │       ├── bindings/
+│       ├── imports/          # nested remote program runs
 │       └── agents/
-└── agents/
+└── agents/                   # project-scoped persistent agents
 ```
 
-User-level persistent agents live at:
+User-level persistent agents (shared across projects) live at:
 
 ```text
 ~/.prose/agents/
@@ -175,18 +177,21 @@ filesystem (default)
 
 in-context
 
-    Transient state kept in the context window. Suitable for small, short-lived
-    programs.
+    Transient state kept in the context window; select with `--in-context`.
+    Suitable for small, short-lived programs.
 
 
 sqlite (experimental)
 
-    Requires the `sqlite3` binary on `PATH`.
+    Select with `--state=sqlite`. Requires the `sqlite3` binary on `PATH`
+    (falls back to filesystem when missing); state lands in
+    `.prose/runs/{id}/state.db`.
 
 
 postgres (experimental)
 
-    Requires `psql` and a connection string.
+    Select with `--state=postgres`. Requires `psql` and a connection string in
+    `OPENPROSE_POSTGRES_URL` (set it in `.prose/.env`).
 
 
 Warning

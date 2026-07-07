@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "ab67e0cbd3c232a7ed156f1ec2b86d72564ee7b9c251ecc244d866edd8ff508b"
+source_hash: "9975ffc77284ccb620e04a0c199ad8287ea24c77ced4d050732ac04e7e929ff0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -221,8 +221,25 @@ Discovery config options
     | `region` | `AWS_REGION` / `AWS_DEFAULT_REGION` / `us-east-1` | AWS region used for discovery API calls. |
     | `providerFilter` | (all) | Matches Bedrock provider names (for example `anthropic`, `amazon`). |
     | `refreshInterval` | `3600` | Cache duration in seconds. Set to `0` to disable caching. |
-    | `defaultContextWindow` | `32000` | Context window used for discovered models (override if you know your model limits). |
-    | `defaultMaxTokens` | `4096` | Max output tokens used for discovered models (override if you know your model limits). |
+    | `defaultContextWindow` | `32000` | Context window used for discovered models with no known token limits (override if you know your model limits). |
+    | `defaultMaxTokens` | `4096` | Max output tokens used for discovered models with no known token limits (override if you know your model limits). |
+
+
+
+
+Context window and max-token limits
+
+    The Bedrock `ListFoundationModels` and `GetFoundationModel` APIs return no
+    token-limit metadata, only model ID, name, modalities, and lifecycle
+    status. OpenClaw ships a lookup table of known context windows and output
+    limits for popular Bedrock models (Claude, Nova, Llama, Mistral, DeepSeek,
+    and others) so session management, compaction thresholds, and
+    context-overflow detection work correctly for those models.
+
+    Discovered models not in the table fall back to `defaultContextWindow`
+    and `defaultMaxTokens`. If a model you use is missing accurate limits,
+    override it with an explicit
+    `models.providers["amazon-bedrock"].models` entry.
 
 
 
@@ -281,7 +298,9 @@ Inference profiles
     profile inherits that model's capabilities (context window, max tokens,
     reasoning, vision) and the correct Bedrock request region is injected
     automatically. This means cross-region Claude profiles work without manual
-    provider overrides.
+    provider overrides. Global cross-region profiles (`global.*`) are listed
+    first in `openclaw models list` since they generally offer better capacity
+    and automatic failover.
 
     Inference profile IDs look like `us.anthropic.claude-opus-4-6-v1:0` (regional)
     or `anthropic.claude-opus-4-6-v1:0` (global). If the backing model is already
@@ -330,24 +349,26 @@ Service tier
     }
     ```
 
-    Valid values are `default`, `flex`, `priority`, and `reserved`. Not all
-    models support all tiers — if an unsupported tier is requested, Bedrock will
-    return a validation error. Note: the error message is somewhat misleading;
-    it may say "The provided model identifier is invalid" rather than indicating
-    an unsupported service tier. If you see this error, check whether the model
-    supports the requested tier.
+    Valid values are `default`, `flex`, `priority`, and `reserved`. Claude
+    Fable 5 and Sonnet 5 only support the `default` tier; OpenClaw warns and
+    ignores `flex`, `priority`, or `reserved` requested for those models. For
+    other models, not every model supports every tier -- an unsupported tier
+    returns a Bedrock validation error, and the error message can be
+    misleading (for example "The provided model identifier is invalid"
+    rather than naming the tier as the problem). If you see this error, check
+    whether the model supports the requested tier.
 
 
 
 
-Claude Opus 4.7 temperature
+Claude Opus 4.7 and 4.8 temperature
 
-    Bedrock rejects the `temperature` parameter for Claude Opus 4.7. OpenClaw
-    omits `temperature` automatically for any Opus 4.7 Bedrock ref, including
-    foundation model ids, named inference profiles, application inference
-    profiles whose underlying model resolves to Opus 4.7 via
-    `bedrock:GetInferenceProfile`, and dotted `opus-4.7` variants with
-    optional region prefixes (`us.`, `eu.`, `ap.`, `apac.`, `au.`, `jp.`,
+    Bedrock rejects the `temperature` parameter for Claude Opus 4.7 and Opus
+    4.8. OpenClaw omits `temperature` automatically for any matching Bedrock
+    ref, including foundation model ids, named inference profiles, application
+    inference profiles whose underlying model resolves to Opus 4.7/4.8 via
+    `bedrock:GetInferenceProfile`, and dotted `opus-4.7`/`opus-4.8` variants
+    with optional region prefixes (`us.`, `eu.`, `ap.`, `apac.`, `au.`, `jp.`,
     `global.`). No config knob is required, and the omission applies to both
     the request options object and the `inferenceConfig` payload field.
 
@@ -359,17 +380,50 @@ Claude Fable 5
     regional inference ids such as `us.anthropic.claude-fable-5`.
     OpenClaw applies Fable's 1M context window, 128K output limit, always-on
     adaptive thinking, and supported effort mapping. `/think off` and
-    `/think minimal` map to `low`; unsupported temperature and forced tool
-    choice controls are omitted. Streaming output is held until Bedrock
-    returns a terminal status so mid-stream refusals do not expose partial text.
-    Fable supports only the standard service tier; OpenClaw ignores configured
-    `flex`, `priority`, and `reserved` tiers for this model.
+    `/think minimal` map to `low`; temperature and forced tool choice controls
+    are omitted, matching the Opus 4.7/4.8 route. Streaming output is held
+    until Bedrock returns a terminal status so mid-stream refusals do not
+    expose partial text.
 
     AWS requires an explicit `provider_data_share` data-retention opt-in before
     Fable is available. Prompts and completions are shared with Anthropic and
     retained for up to 30 days for trust and safety. Review and configure
     [Bedrock data retention](https://docs.aws.amazon.com/bedrock/latest/userguide/data-retention.html)
     before enabling the model.
+
+
+
+
+Claude Mythos 5
+
+    Claude Mythos 5 is available through Bedrock only for accounts with the
+    required limited-access approval. OpenClaw recognizes the foundation model
+    `anthropic.claude-mythos-5` and regional or global inference profiles such
+    as `us.anthropic.claude-mythos-5`.
+
+    OpenClaw applies the 1,000,000-token context window, 128,000-token output
+    limit, image input, prompt caching, refusal-safe streaming, and native
+    effort levels. Adaptive thinking is always enabled: `/think off` and
+    `/think minimal` map to `low`, while `xhigh` and `max` remain available.
+    Custom sampling and forced tool choice values are omitted.
+
+
+
+
+Claude Sonnet 5
+
+    AWS documents Sonnet 5 for both the
+    [`bedrock-runtime` and `bedrock-mantle` endpoints](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-5.html).
+    OpenClaw recognizes the Bedrock foundation model
+    `anthropic.claude-sonnet-5` and regional or global inference profiles such
+    as `us.anthropic.claude-sonnet-5`. It applies the 1,000,000-token context
+    window, 128,000-token output limit, image input, native effort levels,
+    prompt caching, and refusal-safe streaming.
+
+    Bedrock keeps adaptive thinking enabled for Sonnet 5. OpenClaw defaults to
+    `high`; `/think off` and `/think minimal` map to `low` because this route
+    cannot disable thinking. Custom temperature and forced tool choice values
+    are omitted while adaptive thinking is active.
 
 
 
@@ -401,12 +455,14 @@ Guardrails
     }
     ```
 
-    | Option | Required | Description |
-    | ------ | -------- | ----------- |
-    | `guardrailIdentifier` | Yes | Guardrail ID (e.g. `abc123`) or full ARN (e.g. `arn:aws:bedrock:us-east-1:123456789012:guardrail/abc123`). |
-    | `guardrailVersion` | Yes | Published version number, or `"DRAFT"` for the working draft. |
-    | `streamProcessingMode` | No | `"sync"` or `"async"` for guardrail evaluation during streaming. If omitted, Bedrock uses its default. |
-    | `trace` | No | `"enabled"` or `"enabled_full"` for debugging; omit or set `"disabled"` for production. |
+    `guardrailIdentifier` and `guardrailVersion` are required.
+
+    | Option | Description |
+    | ------ | ----------- |
+    | `guardrailIdentifier` | Guardrail ID (e.g. `abc123`) or full ARN (e.g. `arn:aws:bedrock:us-east-1:123456789012:guardrail/abc123`). |
+    | `guardrailVersion` | Published version number, or `"DRAFT"` for the working draft. |
+    | `streamProcessingMode` | `"sync"` or `"async"` for guardrail evaluation during streaming. If omitted, Bedrock uses its default. |
+    | `trace` | `"enabled"` or `"enabled_full"` for debugging; omit or set `"disabled"` for production. |
 
 
 Warning
@@ -438,8 +494,7 @@ Embeddings for memory search
 
     Bedrock embeddings use the same AWS SDK credential chain as inference (instance
     roles, SSO, access keys, shared config, and web identity). No API key is
-    needed. Set `memorySearch.provider: "bedrock"` explicitly to use Bedrock
-    embeddings.
+    needed.
 
     Supported embedding models include Amazon Titan Embed (v1, v2), Amazon Nova
     Embed, Cohere Embed (v3, v4), and TwelveLabs Marengo. See

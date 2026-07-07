@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SenseAudio"
 source: "https://docs.openclaw.ai/providers/senseaudio"
-source_hash: "9672fc0e704125207d0ad7d66ec03f102512a4779002cb2d6a445715d0997636"
+source_hash: "a9c7baeddf10e4c970cd3ada50120653460226495f9db9b006765b8447cdd4c7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/senseaudio.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # SenseAudio
 Source: https://docs.openclaw.ai/providers/senseaudio
 
-SenseAudio can transcribe inbound audio and voice-note attachments through OpenClaw's shared `tools.media.audio` pipeline. OpenClaw posts multipart audio to the OpenAI-compatible transcription endpoint and injects the returned text as `{{Transcript}}` plus an `[Audio]` block.
+SenseAudio transcribes inbound audio and voice-note attachments through OpenClaw's shared `tools.media.audio` pipeline. OpenClaw posts multipart audio to the OpenAI-compatible transcription endpoint and injects the returned text as `{{Transcript}}` plus an `[Audio]` block.
 
 | Property      | Value                                            |
 | ------------- | ------------------------------------------------ |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Honcho memory"
 source: "https://docs.openclaw.ai/concepts/memory-honcho"
-source_hash: "93fe9a93f8b882cc9f629630a37e702293de87468dee3f5c3674c7773a89bbe9"
+source_hash: "025068dd55382ca37fb760bed2cbeb759b329052402d8629abcd9c77bd8172b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-honcho.md"
@@ -13,26 +13,26 @@ duplicate_index: 1
 # Honcho memory
 Source: https://docs.openclaw.ai/concepts/memory-honcho
 
-[Honcho](https://honcho.dev) adds AI-native memory to OpenClaw. It persists
-conversations to a dedicated service and builds user and agent models over time,
-giving your agent cross-session context that goes beyond workspace Markdown
-files.
+[Honcho](https://honcho.dev) adds AI-native memory to OpenClaw through an
+external plugin. It persists conversations to a dedicated service and builds
+user and agent models over time, giving your agent cross-session context that
+goes beyond workspace Markdown files.
 
 ## What it provides
 
-- **Cross-session memory** -- conversations are persisted after every turn, so
+- **Cross-session memory** - conversations persist after every turn, so
   context carries across session resets, compaction, and channel switches.
-- **User modeling** -- Honcho maintains a profile for each user (preferences,
+- **User modeling** - Honcho maintains a profile for each user (preferences,
   facts, communication style) and for the agent (personality, learned
   behaviors).
-- **Semantic search** -- search over observations from past conversations, not
+- **Semantic search** - search over observations from past conversations, not
   just the current session.
-- **Multi-agent awareness** -- parent agents automatically track spawned
+- **Multi-agent awareness** - parent agents automatically track spawned
   sub-agents, with parents added as observers in child sessions.
 
 ## Available tools
 
-Honcho registers tools that the agent can use during conversation:
+Honcho registers tools the agent can use during conversation:
 
 **Data retrieval (fast, no LLM call):**
 
@@ -99,18 +99,18 @@ offers to migrate them.
 
 Info
 
-Migration is non-destructive -- files are uploaded to Honcho. Originals are
+Migration is non-destructive - files are uploaded to Honcho. Originals are
 never deleted or moved.
 
 ## How it works
 
 After every AI turn, the conversation is persisted to Honcho. Both user and
-agent messages are observed, allowing Honcho to build and refine its models over
+agent messages are observed, letting Honcho build and refine its models over
 time.
 
-During conversation, Honcho tools query the service in the `before_prompt_build`
-phase, injecting relevant context before the model sees the prompt. This ensures
-accurate turn boundaries and relevant recall.
+During conversation, Honcho tools query the service during OpenClaw's
+`before_prompt_build` plugin hook, injecting relevant context before the model
+sees the prompt.
 
 ## Honcho vs builtin memory
 
@@ -123,9 +123,9 @@ accurate turn boundaries and relevant recall.
 | **Multi-agent**   | Not tracked                  | Parent/child awareness              |
 | **Dependencies**  | None (builtin) or QMD binary | Plugin install                      |
 
-Honcho and the builtin memory system can work together. When QMD is configured,
-additional tools become available for searching local Markdown files alongside
-Honcho's cross-session memory.
+Honcho and the builtin memory system can work together. When QMD is
+configured, additional tools become available for searching local Markdown
+files alongside Honcho's cross-session memory.
 
 ## CLI commands
 
@@ -141,13 +141,12 @@ openclaw honcho search <query> [-k N] [-d D] # Semantic search over memory
 - [Plugin source code](https://github.com/plastic-labs/openclaw-honcho)
 - [Honcho documentation](https://docs.honcho.dev)
 - [Honcho OpenClaw integration guide](https://docs.honcho.dev/v3/guides/integrations/openclaw)
-- [Memory](/concepts/memory) -- OpenClaw memory overview
-- [Context Engines](/concepts/context-engine) -- how plugin context engines work
 
 ## Related
 
 - [Memory overview](/concepts/memory)
 - [Builtin memory engine](/concepts/memory-builtin)
 - [QMD memory engine](/concepts/memory-qmd)
+- [Context Engines](/concepts/context-engine)
 
 ---

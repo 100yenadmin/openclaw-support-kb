@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exa search"
 source: "https://docs.openclaw.ai/tools/exa-search"
-source_hash: "714fbeaf471910cc8d1cbae37e59d0c0329d082c9475b1b467f108b219391276"
+source_hash: "e75ed3e315ad4e06be0055b8a2e3da64ebfc921ab60fe32ff25e4ce32fea816d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exa-search.md"
@@ -13,13 +13,11 @@ duplicate_index: 1
 # Exa search
 Source: https://docs.openclaw.ai/tools/exa-search
 
-OpenClaw supports [Exa AI](https://exa.ai/) as a `web_search` provider. Exa
-offers neural, keyword, and hybrid search modes with built-in content
-extraction (highlights, text, summaries).
+[Exa AI](https://exa.ai/) is a `web_search` provider with neural, keyword, and
+hybrid search modes plus built-in content extraction (highlights, text,
+summaries).
 
 ## Install plugin
-
-Install the official plugin, then restart Gateway:
 
 ```bash
 openclaw plugins install @openclaw/exa-plugin
@@ -73,16 +71,17 @@ Store the key
 }
 ```
 
-**Environment alternative:** set `EXA_API_KEY` in the Gateway environment.
-For a gateway install, put it in `~/.openclaw/.env`.
+**Environment alternative:** set `EXA_API_KEY` in the Gateway environment. For
+a gateway install, put it in `~/.openclaw/.env`. See
+[Env vars](/help/faq#env-vars-and-env-loading).
 
 ## Base URL override
 
-Set `plugins.entries.exa.config.webSearch.baseUrl` when Exa search requests
-should go through a compatible proxy or alternate Exa endpoint. OpenClaw
-normalizes bare hosts by prepending `https://` and appends `/search` unless the
-path already ends there. The resolved endpoint is included in the search cache
-key, so results from different Exa endpoints are not shared.
+Set `plugins.entries.exa.config.webSearch.baseUrl` to route Exa search
+requests through a compatible proxy or alternate endpoint. OpenClaw
+normalizes bare hosts by prepending `https://` and appends `/search` unless
+the path already ends there. The resolved endpoint is part of the search
+cache key, so results from different endpoints are never shared.
 
 ## Tool parameters
 
@@ -92,7 +91,7 @@ Search query.
 
 ParamField
 
-Results to return (1–100).
+Results to return (1-100, subject to Exa search-type limits).
 
 ParamField
 
@@ -100,7 +99,7 @@ Search mode.
 
 ParamField
 
-Time filter.
+Time filter. Cannot be combined with `date_after`/`date_before`.
 
 ParamField
 
@@ -116,8 +115,7 @@ Content extraction options (see below).
 
 ### Content extraction
 
-Exa can return extracted content alongside search results. Pass a `contents`
-object to enable:
+Pass a `contents` object to control extracted content in results:
 
 ```javascript
 await web_search({
@@ -137,6 +135,12 @@ await web_search({
 | `highlights`    | `boolean \| { maxCharacters, query, numSentences, highlightsPerUrl }` | Extract key sentences  |
 | `summary`       | `boolean \| { query }`                                                | AI-generated summary   |
 
+If `contents` is omitted, Exa defaults to `{ highlights: true }` so results
+include key-sentence excerpts. Result descriptions resolve from highlights
+first, then summary, then full text -- whichever is available first. Results
+also preserve the raw `highlightScores` and `summary` fields from the Exa API
+response when available.
+
 ### Search modes
 
 | Mode             | Description                       |
@@ -150,19 +154,11 @@ await web_search({
 
 ## Notes
 
-- If no `contents` option is provided, Exa defaults to `{ highlights: true }`
-  so results include key sentence excerpts
-- Results preserve `highlightScores` and `summary` fields from the Exa API
-  response when available
-- Result descriptions are resolved from highlights first, then summary, then
-  full text — whichever is available
-- `freshness` and `date_after`/`date_before` cannot be combined — use one
-  time-filter mode
-- Up to 100 results can be returned per query (subject to Exa search-type
-  limits)
-- Results are cached for 15 minutes by default (configurable via
-  `cacheTtlMinutes`)
-- Exa is an official API integration with structured JSON responses
+- `count` accepts up to 100, subject to Exa search-type limits.
+- Results are cached for 15 minutes by default. Configure the shared
+  `tools.web.search.cacheTtlMinutes` (minutes) and
+  `tools.web.search.timeoutSeconds` (default 30s) to change caching and
+  request timeout for all `web_search` providers, including Exa.
 
 ## Related
 

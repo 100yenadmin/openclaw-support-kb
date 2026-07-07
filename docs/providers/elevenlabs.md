@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ElevenLabs"
 source: "https://docs.openclaw.ai/providers/elevenlabs"
-source_hash: "253850df3ebb54245e67a44968fa52a9fdafc1815f364c4703b4c160fb7ffdf0"
+source_hash: "76730d75ebd72be3e052aad5788001bd95275a3ed026b1be7b1352ebba04a53e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/elevenlabs.md"
@@ -14,7 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/elevenlabs
 
 OpenClaw uses ElevenLabs for text-to-speech, batch speech-to-text with Scribe
-v2, and streaming STT with Scribe v2 Realtime.
+v2, and streaming STT with Scribe v2 Realtime. The plugin is bundled and
+enabled by default; no `plugins install` step is needed.
 
 | Capability               | OpenClaw surface                                                     | Default                  |
 | ------------------------ | -------------------------------------------------------------------- | ------------------------ |
@@ -40,7 +41,7 @@ export ELEVENLABS_API_KEY="..."
       providers: {
         elevenlabs: {
           apiKey: "${ELEVENLABS_API_KEY}",
-          speakerVoiceId: "pMsXgVXv3BLzUgSXRplE",
+          voiceId: "pMsXgVXv3BLzUgSXRplE",
           modelId: "eleven_multilingual_v2",
         },
       },
@@ -52,12 +53,12 @@ export ELEVENLABS_API_KEY="..."
 Set `modelId` to `eleven_v3` to use ElevenLabs v3 TTS. OpenClaw keeps
 `eleven_multilingual_v2` as the default for existing installs.
 
-Discord voice channels use ElevenLabs' streaming TTS endpoint when ElevenLabs is
-the selected `voice.tts`/`messages.tts` provider. Playback starts from the
-returned audio stream instead of waiting for OpenClaw to download and write the
-whole audio file first. `latencyTier` maps to ElevenLabs'
-`optimize_streaming_latency` query parameter for models that accept it; OpenClaw
-omits that parameter for `eleven_v3`, which rejects it.
+Discord voice channels use ElevenLabs' streaming TTS endpoint when ElevenLabs
+is the selected `voice.tts`/`messages.tts` provider: playback starts from the
+returned audio stream instead of waiting for OpenClaw to download the whole
+audio file first. `latencyTier` maps to ElevenLabs' `optimize_streaming_latency`
+query parameter for models that accept it; OpenClaw omits that parameter for
+`eleven_v3`, which rejects it.
 
 ## Speech-to-text
 

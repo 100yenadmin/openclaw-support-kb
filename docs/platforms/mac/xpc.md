@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS IPC"
 source: "https://docs.openclaw.ai/platforms/mac/xpc"
-source_hash: "3846407ec00c325219e8dc55490f988b19cebb5cc1ed63fd053b2be73e3112e2"
+source_hash: "84434dc0a5735cd54a15eb2c3baa6dcda692692ece3af03fee7ba2cd95cc7b60"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/xpc.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/platforms/mac/xpc
 
 # OpenClaw macOS IPC architecture
 
-**Current model:** a local Unix socket connects the **node host service** to the **macOS app** for exec approvals + `system.run`. A `openclaw-mac` debug CLI exists for discovery/connect checks; agent actions still flow through the Gateway WebSocket and `node.invoke`. UI automation uses PeekabooBridge.
+A local Unix socket connects the node host service to the macOS app for exec approvals and `system.run`. An `openclaw-mac` debug CLI (`apps/macos/Sources/OpenClawMacCLI`) exists for discovery/connect checks; agent actions still flow through the Gateway WebSocket and `node.invoke`. UI automation uses PeekabooBridge.
 
 ## Goals
 
@@ -29,20 +29,18 @@ Source: https://docs.openclaw.ai/platforms/mac/xpc
 
 - The app runs the Gateway (local mode) and connects to it as a node.
 - Agent actions are performed via `node.invoke` (e.g. `system.run`, `system.notify`, `canvas.*`).
-- Common Mac node commands include `canvas.*`, `camera.snap`, `camera.clip`,
-  `screen.snapshot`, `screen.record`, `system.run`, and `system.notify`.
-- The node reports a `permissions` map so agents can see whether screen,
-  camera, microphone, speech, automation, or accessibility access is available.
+- Node commands include `canvas.*`, `camera.snap`, `camera.clip`, `screen.snapshot`, `screen.record`, `system.run`, and `system.notify`.
+- The node reports a `permissions` map so agents can see whether screen, camera, microphone, speech, automation, or accessibility access is available.
 
 ### Node service + app IPC
 
 - A headless node host service connects to the Gateway WebSocket.
-- `system.run` requests are forwarded to the macOS app over a local Unix socket.
+- `system.run` requests are forwarded to the macOS app over a local Unix socket (`ExecApprovalsSocket.swift`).
 - The app performs the exec in UI context, prompts if needed, and returns output.
 
 Diagram (SCI):
 
-```
+```text
 Agent -> Gateway -> Node Service (WS)
                       |  IPC (UDS + token + HMAC + TTL)
                       v
@@ -51,22 +49,15 @@ Agent -> Gateway -> Node Service (WS)
 
 ### PeekabooBridge (UI automation)
 
-- UI automation uses a separate UNIX socket named `bridge.sock` and the PeekabooBridge JSON protocol.
-- Host preference order (client-side): Peekaboo.app → Claude.app → OpenClaw.app → local execution.
-- Security: bridge hosts require an allowed TeamID; DEBUG-only same-UID escape hatch is guarded by `PEEKABOO_ALLOW_UNSIGNED_SOCKET_CLIENTS=1` (Peekaboo convention).
+- UI automation uses a separate UNIX socket (`~/Library/Application Support/OpenClaw/<socket>`) and the PeekabooBridge JSON protocol.
+- Host preference order (client-side): Peekaboo.app -> Claude.app -> OpenClaw.app -> local execution.
+- Security: bridge hosts require an allowlisted TeamID (the bundled `PeekabooBridgeHostCoordinator` allowlists a fixed team plus the app's own signing team); a DEBUG-only same-UID escape hatch is guarded by `PEEKABOO_ALLOW_UNSIGNED_SOCKET_CLIENTS=1` (Peekaboo convention).
 - See: [PeekabooBridge usage](/platforms/mac/peekaboo) for details.
 
 ## Operational flows
 
-- Restart/rebuild: `SIGN_IDENTITY="Apple Development:
-Developer
- (
-TEAMID
-)" scripts/restart-mac.sh`
-  - Kills existing instances
-  - Swift build + package
-  - Writes/bootstraps/kickstarts the LaunchAgent
-- Single instance: app exits early if another instance with the same bundle ID is running.
+- Restart/rebuild: `scripts/restart-mac.sh` kills existing instances, rebuilds via Swift, repackages, and relaunches. It auto-detects an available signing identity and falls back to `--no-sign` if none is found; pass `--sign` to require signing (fails if no key is available) or `--no-sign` to force the unsigned path. `SIGN_IDENTITY` set in the environment is unset on the signed path, so `scripts/codesign-mac-app.sh`'s own identity auto-detection picks the cert.
+- Single instance: the app checks `NSWorkspace.runningApplications` for a duplicate bundle ID and exits if more than one instance is found (`isDuplicateInstance()` in `MenuBar.swift`).
 
 ## Hardening notes
 
@@ -74,7 +65,7 @@ TEAMID
 - PeekabooBridge: `PEEKABOO_ALLOW_UNSIGNED_SOCKET_CLIENTS=1` (DEBUG-only) may allow same-UID callers for local development.
 - All communication remains local-only; no network sockets are exposed.
 - TCC prompts originate only from the GUI app bundle; keep the signed bundle ID stable across rebuilds.
-- IPC hardening: socket mode `0600`, token, peer-UID checks, HMAC challenge/response, short TTL.
+- Exec approvals socket hardening: file mode `0600`, shared token, peer-UID check (`getpeereid`), HMAC-SHA256 challenge/response, and a short TTL on requests.
 
 ## Related
 

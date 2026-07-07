@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "5dfe00885f896dbdd7941c1c0f2e88c4cad5f1fe9db4d9194587a5630cffffea"
+source_hash: "31038244e5f9514e93e27491ea248c81420b375ff6389403b8ab4d33eb4cb387"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-setup.md"
@@ -53,6 +53,12 @@ Provider plugin / ClawHub baseline
       "name": "@myorg/openclaw-my-plugin",
       "version": "1.0.0",
       "type": "module",
+      "dependencies": {
+        "typebox": "1.1.39"
+      },
+      "peerDependencies": {
+        "openclaw": ">=2026.3.24-beta.2"
+      },
       "openclaw": {
         "extensions": ["./index.ts"],
         "compat": {
@@ -70,13 +76,17 @@ Provider plugin / ClawHub baseline
 
 Note
 
-If you publish the plugin externally on ClawHub, those `compat` and `build` fields are required. The canonical publish snippets live in `docs/snippets/plugin-publish/`.
+Publishing externally on ClawHub requires `compat` and `build`. Canonical publish snippets live in `docs/snippets/plugin-publish/`.
 
 ### `openclaw` fields
 
 ParamField
 
-  Entry point files (relative to package root).
+  Entry point files (relative to package root). Valid source entries for workspace and git checkout development.
+
+ParamField
+
+  Built JavaScript peers for `extensions`, preferred when OpenClaw loads an installed npm package. See [SDK entry points](/plugins/sdk-entrypoints) for the source/built resolution order.
 
 ParamField
 
@@ -84,19 +94,31 @@ ParamField
 
 ParamField
 
+  Built JavaScript peer for `setupEntry`. Requires `setupEntry` to also be set.
+
+ParamField
+
+  `{ id, label }` fallback plugin identity, used when a plugin has no channel/provider metadata to derive an id or label from.
+
+ParamField
+
   Channel catalog metadata for setup, picker, quickstart, and status surfaces.
 
 ParamField
 
-  Provider ids registered by this plugin.
-
-ParamField
-
-  Install hints: `npmSpec`, `localPath`, `defaultChoice`, `minHostVersion`, `expectedIntegrity`, `allowInvalidConfigRecovery`.
+  Install hints: `npmSpec`, `localPath`, `defaultChoice`, `minHostVersion`, `expectedIntegrity`, `allowInvalidConfigRecovery`, `requiredPlatformPackages`.
 
 ParamField
 
   Startup behavior flags.
+
+ParamField
+
+  `pluginApi` version range this plugin supports. Required for external ClawHub publishes.
+
+Note
+
+Provider ids (`providers: string[]`) are manifest metadata, not package metadata. Declare them in `openclaw.plugin.json`, not here — see [Plugin manifest](/plugins/manifest).
 
 ### `openclaw.channel`
 
@@ -174,7 +196,7 @@ Note
 | `npmSpec`                    | `string`                            | Canonical npm spec for install/update fallback flows.                             |
 | `localPath`                  | `string`                            | Local development or bundled install path.                                        |
 | `defaultChoice`              | `"clawhub"` \| `"npm"` \| `"local"` | Preferred install source when multiple sources are available.                     |
-| `minHostVersion`             | `string`                            | Minimum supported OpenClaw version in the form `>=x.y.z` or `>=x.y.z-prerelease`. |
+| `minHostVersion`             | `string`                            | Minimum supported OpenClaw version, `>=x.y.z` or `>=x.y.z-prerelease`.            |
 | `expectedIntegrity`          | `string`                            | Expected npm dist integrity string, usually `sha512-...`, for pinned installs.    |
 | `allowInvalidConfigRecovery` | `boolean`                           | Lets bundled-plugin reinstall flows recover from specific stale-config failures.  |
 | `requiredPlatformPackages`   | `string[]`                          | Required platform-specific npm aliases verified during npm install.               |
@@ -184,7 +206,7 @@ AccordionGroup
 
 Onboarding behavior
 
-    Interactive onboarding also uses `openclaw.install` for install-on-demand surfaces. If your plugin exposes provider auth choices or channel setup/catalog metadata before runtime loads, onboarding can show that choice, prompt for ClawHub, npm, or local install, install or enable the plugin, then continue the selected flow. ClawHub onboarding choices use `clawhubSpec` and are preferred when present; npm choices require trusted catalog metadata with a registry `npmSpec`; exact versions and `expectedIntegrity` are optional npm pins. If `expectedIntegrity` is present, install/update flows enforce it for npm. Keep the "what to show" metadata in `openclaw.plugin.json` and the "how to install it" metadata in `package.json`.
+    Interactive onboarding uses `openclaw.install` for install-on-demand surfaces: if your plugin exposes provider auth choices or channel setup/catalog metadata before runtime loads, onboarding can prompt for ClawHub, npm, or local install, install or enable the plugin, then continue the selected flow. ClawHub choices use `clawhubSpec` and are preferred when present; npm choices require trusted catalog metadata with a registry `npmSpec` (exact versions and `expectedIntegrity` are optional pins, enforced on install/update when set). Keep "what to show" in `openclaw.plugin.json` and "how to install it" in `package.json`.
 
 
 minHostVersion enforcement
@@ -212,7 +234,7 @@ Pinned npm installs
 
 allowInvalidConfigRecovery scope
 
-    `allowInvalidConfigRecovery` is not a general bypass for broken configs. It is for narrow bundled-plugin recovery only, so reinstall/setup can repair known upgrade leftovers like a missing bundled plugin path or stale `channels.<id>` entry for that same plugin. If config is broken for unrelated reasons, install still fails closed and tells the operator to run `openclaw doctor --fix`.
+    `allowInvalidConfigRecovery` is not a general bypass for broken configs. It is narrow bundled-plugin recovery only, letting reinstall/setup repair known upgrade leftovers like a missing bundled plugin path or a stale `channels.<id>` entry for that same plugin. If config is broken for unrelated reasons, install still fails closed and tells the operator to run `openclaw doctor --fix`.
 
 
 ### Deferred full load
@@ -237,7 +259,7 @@ Warning
 
 Only enable deferred loading when your `setupEntry` registers everything the gateway needs before it starts listening (channel registration, HTTP routes, gateway methods). If the full entry owns required startup capabilities, keep the default behavior.
 
-If your setup/full entry registers gateway RPC methods, keep them on a plugin-specific prefix. Reserved core admin namespaces (`config.*`, `exec.approvals.*`, `wizard.*`, `update.*`) stay core-owned and always resolve to `operator.admin`.
+If your setup/full entry registers gateway RPC methods, keep them on a plugin-specific prefix. Reserved core admin namespaces (`config.*`, `exec.approvals.*`, `wizard.*`, `update.*`) stay core-owned and always normalize to `operator.admin`.
 
 ## Plugin manifest
 
@@ -261,12 +283,11 @@ Every native plugin must ship an `openclaw.plugin.json` in the package root. Ope
 }
 ```
 
-For channel plugins, add `kind` and `channels`:
+For channel plugins, add `channels` (and provider plugins add `providers`):
 
 ```json
 {
   "id": "my-channel",
-  "kind": "channel",
   "channels": ["my-channel"],
   "configSchema": {
     "type": "object",
@@ -292,7 +313,7 @@ See [Plugin manifest](/plugins/manifest) for the full schema reference.
 
 ## ClawHub publishing
 
-For plugin packages, use the package-specific ClawHub command:
+Skills and plugin packages use separate ClawHub publish commands. For plugin packages, use the package-specific command:
 
 ```bash
 clawhub package publish your-org/your-plugin --dry-run
@@ -301,11 +322,11 @@ clawhub package publish your-org/your-plugin
 
 Note
 
-The legacy skill-only publish alias is for skills. Plugin packages should always use `clawhub package publish`.
+`clawhub skill publish <path>` is a different command for publishing a skill folder, not a plugin package. See [Publishing on ClawHub](/clawhub/publishing).
 
 ## Setup entry
 
-The `setup-entry.ts` file is a lightweight alternative to `index.ts` that OpenClaw loads when it only needs setup surfaces (onboarding, config repair, disabled channel inspection).
+`setup-entry.ts` is a lightweight alternative to `index.ts` that OpenClaw loads when it only needs setup surfaces (onboarding, config repair, disabled channel inspection):
 
 ```typescript
 // setup-entry.ts
@@ -359,17 +380,13 @@ For hot setup-only paths, prefer the narrow setup helper seams over the broader 
 
 Use the broader `plugin-sdk/setup` seam when you want the full shared setup toolbox, including config-patch helpers such as `moveSingleAccountChannelSectionToDefaultAccount(...)`.
 
-Use `createSetupTranslator(...)` for fixed setup wizard copy. It follows the
-CLI wizard locale (`OPENCLAW_LOCALE`, then system locale variables) and falls
-back to English. Keep plugin-specific setup text in plugin-owned code and use
-shared catalog keys only for common setup labels, status text, and official
-bundled plugin setup copy.
+Use `createSetupTranslator(...)` for fixed setup wizard copy. It follows the CLI wizard locale (`OPENCLAW_LOCALE`, then system locale variables) and falls back to English. Keep plugin-specific setup text in plugin-owned code and use shared catalog keys only for common setup labels, status text, and official bundled plugin setup copy.
 
 The setup patch adapters stay hot-path safe on import. Their bundled single-account promotion contract-surface lookup is lazy, so importing `plugin-sdk/setup-runtime` does not eagerly load bundled contract-surface discovery before the adapter is actually used.
 
 ### Channel-owned single-account promotion
 
-When a channel upgrades from a single-account top-level config to `channels.<id>.accounts.*`, the default shared behavior is to move promoted account-scoped values into `accounts.default`.
+When a channel upgrades from a single-account top-level config to `channels.<id>.accounts.*`, the default shared behavior moves promoted account-scoped values into `accounts.default`.
 
 Bundled channels can narrow or override that promotion through their setup contract surface:
 
@@ -478,7 +495,7 @@ const setupWizard: ChannelSetupWizard = {
 };
 ```
 
-The `ChannelSetupWizard` type supports `credentials`, `textInputs`, `dmPolicy`, `allowFrom`, `groupAccess`, `prepare`, `finalize`, and more. See bundled plugin packages (for example the Discord plugin `src/channel.setup.ts`) for full examples.
+`ChannelSetupWizard` also supports `textInputs`, `dmPolicy`, `allowFrom`, `groupAccess`, `prepare`, `finalize`, and more. See the Discord plugin's `src/setup-core.ts` for a full bundled example.
 
 AccordionGroup
 
@@ -539,7 +556,7 @@ npm
     openclaw plugins install @myorg/openclaw-my-plugin
     ```
 
-    Bare package specs install from npm during the launch cutover.
+    Bare package specs install from npm during the launch cutover, unless the name matches a bundled or official plugin id, in which case OpenClaw uses that local/official copy instead. Use `clawhub:`, `npm:`, `git:`, or `npm-pack:` for deterministic source selection — see [Manage plugins](/plugins/manage-plugins).
 
 
 
@@ -561,17 +578,11 @@ npm package spec
 
 
 
-**In-repo plugins:** place under the bundled plugin workspace tree and they are automatically discovered during build.
-
-**Users can install:**
-
-```bash
-openclaw plugins install <package-name>
-```
+**In-repo plugins:** place under the bundled plugin workspace tree; they are automatically discovered during build.
 
 Info
 
-For npm-sourced installs, `openclaw plugins install` installs the package into a per-plugin project under `~/.openclaw/npm/projects` with lifecycle scripts disabled. Keep plugin dependency trees pure JS/TS and avoid packages that require `postinstall` builds.
+For npm-sourced installs, `openclaw plugins install` installs the package into a per-plugin project under `~/.openclaw/npm/projects` with lifecycle scripts disabled (`--ignore-scripts`). Keep plugin dependency trees pure JS/TS and avoid packages that require `postinstall` builds.
 
 Note
 

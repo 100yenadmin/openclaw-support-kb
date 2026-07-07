@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Prometheus metrics"
 source: "https://docs.openclaw.ai/gateway/prometheus"
-source_hash: "0f8c62fd09a9c6bdf22dc71321dc5b8713946069af5412c77315701fc78c20aa"
+source_hash: "e6540df75603c3c73b533fa93c6ecb3e1da7fdc4b8140181f09fe5101a27fc22"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/prometheus.md"
@@ -13,17 +13,21 @@ duplicate_index: 1
 # Prometheus metrics
 Source: https://docs.openclaw.ai/gateway/prometheus
 
-OpenClaw can expose diagnostics metrics through the official `diagnostics-prometheus` plugin. It listens to trusted diagnostics plus core-emitted gateway stability events, then renders a Prometheus text endpoint at:
+OpenClaw can expose diagnostics metrics through the official
+`diagnostics-prometheus` plugin. It listens to trusted diagnostics plus
+internally tagged, dispatcher-owned diagnostic events (queue, memory, and
+session-recovery signals), and renders a Prometheus text endpoint at:
 
 ```text
 GET /api/diagnostics/prometheus
 ```
 
-Content type is `text/plain; version=0.0.4; charset=utf-8`, the standard Prometheus exposition format.
+Content type is `text/plain; version=0.0.4; charset=utf-8`, the standard
+Prometheus exposition format.
 
 Warning
 
-The route uses Gateway authentication (operator scope). Do not expose it as a public unauthenticated `/metrics` endpoint. Scrape it through the same auth path you use for other operator APIs.
+The route uses Gateway authentication (operator scope, trusted-operator surface). Do not expose it as a public unauthenticated `/metrics` endpoint. Scrape it through the same auth path you use for other operator APIs.
 
 For traces, logs, OTLP push, and OpenTelemetry GenAI semantic attributes, see [OpenTelemetry export](/gateway/opentelemetry).
 
@@ -104,7 +108,7 @@ Wire Prometheus
 
 Note
 
-`diagnostics.enabled: true` is required. Without it, the plugin still registers the HTTP route but no diagnostic events flow into the exporter, so the response is empty.
+`diagnostics.enabled` defaults to `true`; set it to `false` only in tightly constrained environments. If it is `false`, the plugin still registers the HTTP route, but no diagnostic events flow into the exporter, so the response is empty.
 
 ## Metrics exported
 
@@ -118,6 +122,7 @@ Note
 | `openclaw_model_tokens_total`                    | counter   | `agent`, `channel`, `model`, `provider`, `token_type`                                     |
 | `openclaw_gen_ai_client_token_usage`             | histogram | `model`, `provider`, `token_type`                                                         |
 | `openclaw_model_cost_usd_total`                  | counter   | `agent`, `channel`, `model`, `provider`                                                   |
+| `openclaw_model_usage_duration_seconds`          | histogram | `agent`, `channel`, `model`, `provider`                                                   |
 | `openclaw_skill_used_total`                      | counter   | `activation`, `agent`, `skill`, `source`                                                  |
 | `openclaw_tool_execution_total`                  | counter   | `error_category`, `outcome`, `params_kind`, `tool`, `tool_owner`, `tool_source`           |
 | `openclaw_tool_execution_duration_seconds`       | histogram | `error_category`, `outcome`, `params_kind`, `tool`, `tool_owner`, `tool_source`           |
@@ -161,6 +166,8 @@ Note
 | `openclaw_memory_pressure_total`                 | counter   | `level`, `reason`                                                                         |
 | `openclaw_telemetry_exporter_total`              | counter   | `exporter`, `reason`, `signal`, `status`                                                  |
 | `openclaw_prometheus_series_dropped_total`       | counter   | none                                                                                      |
+| `openclaw_diagnostic_async_queue_dropped_total`  | counter   | `drop_class`                                                                              |
+| `openclaw_diagnostic_async_queue_length`         | gauge     | none                                                                                      |
 
 ## Label policy
 
@@ -259,7 +266,7 @@ AccordionGroup
 
 Empty response body
 
-    - Check `diagnostics.enabled: true` in config.
+    - Check that `diagnostics.enabled` is not set to `false` in config (it defaults to `true`).
     - Confirm the plugin is enabled and loaded with `openclaw plugins list --enabled`.
     - Generate some traffic; counters and histograms only emit lines after at least one event.
 

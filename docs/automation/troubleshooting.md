@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automation troubleshooting"
 source: "https://docs.openclaw.ai/automation/troubleshooting"
-source_hash: "bc8de3f8f34ddf1af4f942adbf46fa3cc8ed96223244d965dcef56231ee2b6b3"
+source_hash: "fa4c71761c8df077086d9c1bbca36e3717c4a2a36d7ecca7a50e1caee262506f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/troubleshooting.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Automation troubleshooting
 Source: https://docs.openclaw.ai/automation/troubleshooting
 
-This page moved to [Scheduled Tasks](/automation/cron-jobs#troubleshooting). See [Scheduled Tasks](/automation/cron-jobs#troubleshooting) for troubleshooting documentation.
+This page moved. Automation troubleshooting now lives at [Scheduled Tasks](/automation/cron-jobs#troubleshooting).
 
 ## Related
 

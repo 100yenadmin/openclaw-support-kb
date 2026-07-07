@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SGLang"
 source: "https://docs.openclaw.ai/providers/sglang"
-source_hash: "670ce5b50b2157704282840c5d382eb422831ae29c0a7755d265850bf96e6ec1"
+source_hash: "0359e1324e501db53846fd9e4d333b4913a06c67f9a8ce859abc0ada77c78cb3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/sglang.md"
@@ -77,11 +77,11 @@ Run onboarding or set a model directly
 ## Model discovery (implicit provider)
 
 When `SGLANG_API_KEY` is set (or an auth profile exists) and you **do not**
-define `models.providers.sglang`, OpenClaw will query:
+define `models.providers.sglang`, OpenClaw queries:
 
 - `GET http://127.0.0.1:30000/v1/models`
 
-and convert the returned IDs into model entries.
+and converts the returned IDs into model entries.
 
 Note
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secret Placeholder Conventions"
 source: "https://docs.openclaw.ai/reference/secret-placeholder-conventions"
-source_hash: "b60400fc09ecfd2dc752145d8a863d14161d00b1f74e5ef5e0c42eae312b26ab"
+source_hash: "e42d39ef1de89cff53565ebdce74850bb59f029bbd14dd024d3484566b312722"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secret-placeholder-conventions.md"
@@ -26,7 +26,7 @@ Use placeholders that are human-readable but do not resemble real secrets.
 ## Avoid these patterns in docs
 
 - Literal PEM private-key header or footer text.
-- Prefixes that resemble live credentials, for example `sk-...`, `xoxb-...`, `AKIA...`.
+- Prefixes that resemble live credentials, e.g. `sk-...`, `xoxb-...`, `AKIA...`.
 - Realistic-looking bearer tokens copied from runtime logs.
 
 ## Example

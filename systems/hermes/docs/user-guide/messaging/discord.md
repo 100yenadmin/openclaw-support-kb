@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "fe2bd771edaca69f225d1adc4652c5368a561a23bb6e8e1c1ffda04a577d61f0"
+source_hash: "9f5fdcfda07f364158bf5d07daa029aa4b4816e8c71fd7471eecb754f1a2bd53"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -183,7 +183,7 @@ This method requires **Public Bot** to be set to **ON** in Step 2. If you set Pu
 You can construct the invite URL directly using this format:
 
 ```
-https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot+applications.commands&permissions=274878286912
+https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot+applications.commands&permissions=309237763136
 ```
 
 Replace `YOUR_APP_ID` with the Application ID from Step 1.
@@ -200,6 +200,7 @@ These are the minimum permissions your bot needs:
 
 ### Recommended Additional Permissions
 
+- **Create Public Threads** - create threads
 - **Send Messages in Threads** — respond in thread conversations
 - **Add Reactions** — react to messages for acknowledgment
 
@@ -208,7 +209,7 @@ These are the minimum permissions your bot needs:
 | Level | Permissions Integer | What's Included |
 |-------|-------------------|-----------------|
 | Minimal | `117760` | View Channels, Send Messages, Read Message History, Attach Files |
-| Recommended | `274878286912` | All of the above plus Embed Links, Send Messages in Threads, Add Reactions |
+| Recommended | `309237763136` | All of the above plus Embed Links, Send Messages in Threads, Add Reactions, Create Public Threads |
 
 ## Step 6: Invite to Your Server
 

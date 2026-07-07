@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse"
 source: "https://docs.openclaw.ai/providers/pixverse"
-source_hash: "7e3841c8bce15319d3057943026d327d30eacb1840fefcaabc50d8b5da0c1ebe"
+source_hash: "fedc7fb9262c6bc1427dd0e481ff5e2630818c3c2a53c8df94bc2ef198175980"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/pixverse.md"
@@ -34,7 +34,7 @@ Steps
 Install the plugin
 
     ```bash
-    openclaw plugins install clawhub:@openclaw/pixverse-provider
+    openclaw plugins install @openclaw/pixverse-provider
     openclaw gateway restart
     ```
 
@@ -45,14 +45,17 @@ Set the API key
     openclaw onboard --auth-choice pixverse-api-key
     ```
 
-    The wizard asks whether to use the International endpoint
-    (`https://app-api.pixverse.ai/openapi/v2`) or the CN endpoint
-    (`https://app-api.pixverseai.cn/openapi/v2`) before writing `region` and
-    `baseUrl` into the provider config.
+    The wizard prompts for the International or CN endpoint (see API region
+    below) before writing `region` and `baseUrl` into the provider config.
+    Non-interactive runs (key from `--pixverse-api-key` or `PIXVERSE_API_KEY`)
+    default to International.
+
+    Onboarding also sets `agents.defaults.videoGenerationModel.primary` to
+    `pixverse/v6` when no default video model is configured yet.
 
 
 
-Set PixVerse as the default video provider
+Switch an existing default video provider (optional)
 
     ```bash
     openclaw config set agents.defaults.videoGenerationModel.primary "pixverse/v6"
@@ -75,12 +78,12 @@ The provider exposes PixVerse generation models through OpenClaw's shared video 
 
 Local image references are uploaded to PixVerse before the image-to-video request. Remote image URLs are passed through the PixVerse image upload endpoint as `image_url`.
 
-| Option          | Supported values                                                            |
-| --------------- | --------------------------------------------------------------------------- |
-| Duration        | 1-15 seconds                                                                |
-| Resolution      | `360P`, `540P`, `720P`, `1080P`                                             |
-| Aspect ratio    | `16:9`, `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9` for text-to-video |
-| Generated audio | `audio: true`                                                               |
+| Option          | Supported values                                                                                                                 |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Duration        | 1-15 seconds (default 5)                                                                                                         |
+| Resolution      | `360P`, `540P`, `720P`, `1080P` (default `540P`; `480P` requests map to `540P`)                                                  |
+| Aspect ratio    | `16:9` (default), `4:3`, `1:1`, `3:4`, `9:16`, `2:3`, `3:2`, `21:9`; text-to-video only, image-to-video follows the source image |
+| Generated audio | `audio: true`                                                                                                                    |
 
 Note
 
@@ -90,14 +93,14 @@ PixVerse image template generation is not exposed through `image_generate` yet. 
 
 The video provider accepts these optional provider-specific keys:
 
-| Option                               | Type   | Effect                            |
-| ------------------------------------ | ------ | --------------------------------- |
-| `seed`                               | number | Deterministic seed when supported |
-| `negativePrompt` / `negative_prompt` | string | Negative prompt                   |
-| `quality`                            | string | PixVerse quality such as `720p`   |
-| `motionMode` / `motion_mode`         | string | Image-to-video motion mode        |
-| `cameraMovement` / `camera_movement` | string | PixVerse camera movement preset   |
-| `templateId` / `template_id`         | number | Activated PixVerse template id    |
+| Option                               | Type   | Effect                                        |
+| ------------------------------------ | ------ | --------------------------------------------- |
+| `seed`                               | number | Deterministic seed, 0 to 2147483647           |
+| `negativePrompt` / `negative_prompt` | string | Negative prompt                               |
+| `quality`                            | string | PixVerse quality such as `720p`               |
+| `motionMode` / `motion_mode`         | string | Image-to-video motion mode (default `normal`) |
+| `cameraMovement` / `camera_movement` | string | PixVerse camera movement preset               |
+| `templateId` / `template_id`         | number | Activated PixVerse template id                |
 
 ## Configuration
 
@@ -120,14 +123,15 @@ AccordionGroup
 
 API region
 
-    OpenClaw defaults to the international PixVerse API. Set `models.providers.pixverse.region`
-    manually when your key belongs to a specific PixVerse platform region, or use
-    `openclaw onboard --auth-choice pixverse-api-key` to choose one in the setup wizard:
-
     | Region value    | PixVerse API base URL                         |
     | --------------- | --------------------------------------------- |
     | `international` | `https://app-api.pixverse.ai/openapi/v2`      |
     | `cn`            | `https://app-api.pixverseai.cn/openapi/v2`    |
+
+    Set `models.providers.pixverse.region` manually when your key belongs to a
+    specific PixVerse platform region, or run
+    `openclaw onboard --auth-choice pixverse-api-key` to choose one in the
+    setup wizard:
 
     ```json5
     {
@@ -169,8 +173,9 @@ Custom base URL
 Task polling
 
     PixVerse returns a `video_id` from the generation request. OpenClaw polls
-    `/openapi/v2/video/result/{video_id}` until the task succeeds, fails,
-    or times out.
+    `/openapi/v2/video/result/{video_id}` every 5 seconds until the task
+    succeeds, fails, or hits the timeout (default 5 minutes; override with
+    `agents.defaults.videoGenerationModel.timeoutMs`).
 
 
 ## Related

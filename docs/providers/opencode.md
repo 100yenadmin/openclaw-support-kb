@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "7bc678acd45530f7dbfe750a885bed3510556e1966def5293d97778661d70791"
+source_hash: "8318b3b30bd5463d70ed8f2cc44953f973e58a29eee256430b75070c17b43a8b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
@@ -20,9 +20,10 @@ OpenCode exposes two hosted catalogs in OpenClaw:
 | **Zen** | `opencode/...`    | `opencode`       |
 | **Go**  | `opencode-go/...` | `opencode-go`    |
 
-Both catalogs use the same OpenCode API key. OpenClaw keeps the runtime provider ids
-split so upstream per-model routing stays correct, but onboarding and docs treat them
-as one OpenCode setup.
+Both catalogs share one OpenCode API key (`OPENCODE_API_KEY`, alias
+`OPENCODE_ZEN_API_KEY`). OpenClaw keeps the runtime provider ids split so
+upstream per-model routing stays correct, but onboarding and docs treat them as
+one OpenCode setup.
 
 ## Getting started
 
@@ -31,7 +32,8 @@ Tabs
 
 Zen catalog
 
-    **Best for:** the curated OpenCode multi-model proxy (Claude, GPT, Gemini, GLM).
+    **Best for:** the curated OpenCode multi-model proxy (Claude, GPT, Gemini, GLM,
+    DeepSeek, Kimi, MiniMax, Qwen).
 
 
 Steps
@@ -70,7 +72,7 @@ Verify models are available
 
 Go catalog
 
-    **Best for:** the OpenCode-hosted Kimi, GLM, and MiniMax lineup.
+    **Best for:** the OpenCode-hosted Kimi, GLM, MiniMax, Qwen, and DeepSeek lineup.
 
 
 Steps
@@ -124,12 +126,18 @@ Verify models are available
 | Runtime provider | `opencode`                                                                                    |
 | Example models   | `opencode/claude-opus-4-6`, `opencode/gpt-5.5`, `opencode/gemini-3.1-pro`, `opencode/glm-5.2` |
 
+Run `openclaw models list --provider opencode` for the full current list, which
+also includes free-tier rows such as `opencode/big-pickle` and
+`opencode/deepseek-v4-flash-free`.
+
 ### Go
 
 | Property         | Value                                                                    |
 | ---------------- | ------------------------------------------------------------------------ |
 | Runtime provider | `opencode-go`                                                            |
 | Example models   | `opencode-go/kimi-k2.6`, `opencode-go/glm-5`, `opencode-go/minimax-m2.5` |
+
+See [OpenCode Go](/providers/opencode-go) for the full Go model table.
 
 ## Advanced configuration
 
@@ -138,7 +146,7 @@ AccordionGroup
 
 API key aliases
 
-    `OPENCODE_ZEN_API_KEY` is also supported as an alias for `OPENCODE_API_KEY`.
+    `OPENCODE_ZEN_API_KEY` is also accepted as an alias for `OPENCODE_API_KEY`.
 
 
 
@@ -149,10 +157,11 @@ Shared credentials
 
 
 
-Billing and dashboard
+Getting an API key
 
-    You sign in to OpenCode, add billing details, and copy your API key. Billing
-    and catalog availability are managed from the OpenCode dashboard.
+    Create an OpenCode account and generate an API key at
+    [opencode.ai/auth](https://opencode.ai/auth). Billing and catalog
+    availability are managed from the OpenCode dashboard.
 
 
 
@@ -169,14 +178,14 @@ Non-Gemini replay behavior
     Non-Gemini OpenCode refs keep the minimal OpenAI-compatible replay policy.
 
 
-Tip
-
-Entering one OpenCode key during setup stores credentials for both the Zen and
-Go runtime providers, so you only need to onboard once.
-
 ## Related
 
 CardGroup
+
+
+OpenCode Go
+
+    Full Go catalog reference.
 
 
 Model selection

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawFlow"
 source: "https://docs.openclaw.ai/automation/clawflow"
-source_hash: "46ab2c8e45fd79b62a4559e6d14726abcdac8ff95d984106a51ff29b29d3d94f"
+source_hash: "2a8e43d94b73e2a4559127a20d64ea5302940820c359df652473e31eee9765a6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/clawflow.md"
@@ -13,11 +13,11 @@ duplicate_index: 1
 # ClawFlow
 Source: https://docs.openclaw.ai/automation/clawflow
 
-ClawFlow was renamed to [Task flow](/automation/taskflow).
+ClawFlow was renamed to [Task Flow](/automation/taskflow). Use that page for durable multi-step flow orchestration.
 
 ## Related
 
-- [Task flow](/automation/taskflow)
+- [Task Flow](/automation/taskflow)
 - [Standing orders](/automation/standing-orders)
 - [Hooks](/automation/hooks)
 

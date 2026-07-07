@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Showcase"
 source: "https://docs.openclaw.ai/start/showcase"
-source_hash: "76dfd5cc1b8967743111196cd601d80dd2832f09d6f612311001fd37ed5b1fa1"
+source_hash: "3e7c487e3afcbdfa65b8b9404b9f2758d888fbe28802128dbda0ab11065a8c33"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/showcase.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Showcase
 Source: https://docs.openclaw.ai/start/showcase
 
-OpenClaw projects are not toy demos. People are shipping PR review loops, mobile apps, home automation, voice systems, devtools, and memory-heavy workflows from the channels they already use — chat-native builds on Telegram, WhatsApp, Discord, and terminals; real automation for booking, shopping, and support without waiting for an API; and physical-world integrations with printers, vacuums, cameras, and home systems.
+Community-built OpenClaw projects: PR review loops, mobile apps, home automation, voice systems, devtools, and memory workflows, built chat-native on Telegram, WhatsApp, Discord, and terminals.
 
 Info
 
@@ -24,6 +24,66 @@ Info
 Recent standouts across coding, devtools, mobile, and chat-native product building.
 
 CardGroup
+
+Dropage instant HTML deploy
+
+  **@jiantoucn** • `deploy` `hosting` `skill`
+
+Tell your agent "deploy this HTML" and get a public URL back in about a second. Pages self-expire after an hour — no server, no config, no signup.
+
+Anti-scam URL checker
+
+  **@phishguard-niki** • `security` `phishing` `skill`
+
+Paste any URL, get a verdict. 2.5M+ scam domains from 38 feeds (PhishTank, OpenPhish, CERT.PL, and more), matched locally so browsing history never leaves the machine.
+
+Product-design reasoning skills
+
+  **@monikazapisekstudio** • `product` `reasoning` `skills`
+
+A trio for product work: [Socratic Dialogue](https://clawhub.ai/monikazapisekstudio/skills/socratic-dialog) cross-examines a question before answering, [Kano Model Strategist](https://clawhub.ai/monikazapisekstudio/skills/kano-model-strategist) sorts features into what earns its place, and [Legible Agent Output](https://clawhub.ai/monikazapisekstudio/skills/legible-agent-output) rewrites agent output into plain language.
+
+Mailbox broker for sub-agents
+
+  **@albzhu** • `multi-agent` `async` `skill`
+
+Stops orchestrators from idling while sub-agents work: an async callback mechanism where results land in a mailbox instead of blocking the parent agent.
+
+lite-mode for low-RAM machines
+
+  **@mirajmahmudul** • `performance` `skill`
+
+Keeps OpenClaw usable on 2-4 GB machines: checks free memory and trims heavy features before the box starts swapping. [Source on GitHub](https://github.com/mirajmahmudul/openclaw-lite-mode).
+
+tokenomics cost tracker
+
+  **@ncz-os** • `devtools` `costs` `tokens`
+
+Token cost tracker from an NVIDIA engineer with first-class OpenClaw support: see exactly where your agent spend goes, per model and per session.
+
+Excalidraw diagram generator
+
+  **@swiftlysingh** • `diagrams` `excalidraw` `devtools`
+
+Describe a diagram in chat and get a programmatically generated Excalidraw sketch back.
+
+GA4 analytics skill
+
+  **@jdrhyne** • `analytics` `ga4` `skill`
+
+Had OpenClaw build its own Google Analytics query tool, then packaged and published it to ClawHub.
+
+ClawEval model rankings
+
+  **@AIgenteur** • `evals` `models` `devtools`
+
+Benchmarks models across 59 agent roles to answer "which LLM for my GPU?". A community favorite for picking local models.
+
+Music Craft
+
+  **@luischarro** • `music` `generation` `skill`
+
+Provider-agnostic song generation: plan the track, structure lyrics, and revise sparse results instead of one-shot prompting. Includes a [MiniMax variant](https://clawhub.ai/luischarro/music-craft-minimax) with BPM, key, structure, and mashup control.
 
 PR Review to Telegram Feedback
 
@@ -215,6 +275,36 @@ TradingView analysis
 
 Logs into TradingView via browser automation, screenshots charts, and performs technical analysis on demand. No API needed — just browser control.
 
+Car negotiation ($4,200 saved)
+
+  **@astuyve** • `negotiation` `email` `automation`
+
+Set OpenClaw loose on car dealers: it handled the back-and-forth negotiation and knocked $4,200 off the price.
+
+Flight check-in autopilot
+
+  **@armanddp** • `travel` `email` `automation`
+
+Finds the next flight in email, runs through online check-in, and picks a window seat — no airline app required.
+
+Insurance claim filing
+
+  **@avi_press** • `automation` `insurance` `browser`
+
+Filed an insurance claim and scheduled the follow-up appointment autonomously.
+
+Idealista real estate skill
+
+  **@quifago** • `real-estate` `api` `skill`
+
+Idealista API CLI for property queries and valuations, wrapped as a skill so the agent can house-hunt in chat.
+
+Gardening business back office
+
+  **@mjsweet** • `automation` `email` `invoicing`
+
+Watches Gmail for work orders, analyzes property photos sent over Telegram, writes multi-page LaTeX quote PDFs, and invoices through Xero.
+
 Slack auto-support
 
   **@henrymascot** • `slack` `automation` `support`
@@ -234,6 +324,30 @@ xuezh Chinese learning
 Chinese learning engine with pronunciation feedback and study flows via OpenClaw.
 
   <img src="/assets/showcase/xuezh-pronunciation.jpeg" alt="xuezh pronunciation feedback" />
+
+X post analysis pipeline
+
+  **@andrewjiang** • `analysis` `x` `pipeline`
+
+Pulled 4 million posts across 100 top X accounts and turned them into a queryable analysis pipeline.
+
+Lab results to Notion
+
+  **@danpeguine** • `health` `notion` `organization`
+
+Organized years of bloodwork lab results into a structured Notion database.
+
+Obsidian second brain
+
+  **@lexandstuff** • `obsidian` `whatsapp` `memory`
+
+Daily-driver assistant on WhatsApp with all memory stored as markdown in a version-controlled Obsidian vault: calorie and workout tracking, to-do lists, life admin.
+
+Family history bot
+
+  **@brtkwr** • `telegram` `memory` `family`
+
+Lives in a family Telegram group chat, documents stories across 50+ relatives, and asks informed follow-up questions — responding in Nepali for native speakers.
 
 WhatsApp memory vault
 
@@ -258,6 +372,24 @@ Separate memory manager that turns session files into memories, then beliefs, th
 Speech-first entry points, phone bridges, and transcription-heavy workflows.
 
 CardGroup
+
+Pebble Ring one-tap voice
+
+  **@thekitze** • `voice` `wearable` `hardware`
+
+One tap on a Pebble Ring starts a voice conversation with OpenClaw — agent access from a wearable.
+
+Creator media studio
+
+  **@cedric_chee** • `media` `tts` `transcription`
+
+A full media studio in chat: TTS, transcription, and browser automation hooked up to Codex 5.2 and MiniMax.
+
+Action Button walkie-talkie
+
+  **@buddyhadry** • `voice` `ios` `mobile`
+
+iPhone Action Button wired to OpenClaw: press, talk, and the agent talks back like a walkie-talkie.
 
 Clawdia phone bridge
 
@@ -293,6 +425,12 @@ Control and automate Home Assistant devices via natural language.
 
   <img src="/assets/showcase/homeassistant.png" alt="Home Assistant skill on ClawHub" />
 
+macOS menu bar manager
+
+  **@MagiMetal** • `macos` `swift` `ui`
+
+Native Swift menu bar app showing agent status with quick controls.
+
 Nix packaging
 
   **@openclaw** • `nix` `packaging` `deployment`
@@ -312,6 +450,18 @@ Calendar skill using khal and vdirsyncer. Self-hosted calendar integration.
 The physical-world side of OpenClaw: homes, sensors, cameras, vacuums, and other devices.
 
 CardGroup
+
+Self-built HomePod skill
+
+  **@localghost** • `homepod` `discovery` `skill`
+
+OpenClaw found the HomePods on the local network and wrote itself a skill to control them.
+
+$35 holo cube interface
+
+  **@andrewjiang** • `hardware` `display` `fun`
+
+A cheap holographic cube as the agent's physical face on the desk.
 
 GoHome automation
 
@@ -341,6 +491,12 @@ StarSwap marketplace
 
 Full astronomy gear marketplace. Built with and around the OpenClaw ecosystem.
 
+Clinch agent negotiation protocol
+
+  **@publicstringapps** • `protocol` `p2p` `skill`
+
+Open agent-to-agent negotiation: your agent haggles deals, schedules, and service agreements with other nodes and cryptographically signs the result — you just approve or reject.
+
 ## Submit your project
 
 Steps
@@ -365,5 +521,6 @@ Get featured
 
 - [Getting started](/start/getting-started)
 - [OpenClaw](/start/openclaw)
+- [Full X showcase on openclaw.ai](https://openclaw.ai/showcase/)
 
 ---

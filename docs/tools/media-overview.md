@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "f00e0224b71ad22bd4290bf283eaeea1b726f3fab087122bb5b5c8fba352056a"
+source_hash: "959d7733e16668e260fbfd4f019e04d28828f0053a87b13eb11124bb1cbfa85b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -69,17 +69,27 @@ Speech-to-text
 
 ## Provider capability matrix
 
+Note
+
+This table covers the dedicated media-generation, TTS, and STT plugins. Many
+chat-model providers (Anthropic, Google, OpenAI, and others) also understand
+inbound media through their reply model; see the full provider list in
+[Media understanding](/nodes/media-understanding#provider-support-matrix).
+
 | Provider          | Image | Video | Music | TTS | STT | Realtime voice | Media understanding |
 | ----------------- | :---: | :---: | :---: | :-: | :-: | :------------: | :-----------------: |
 | Alibaba           |       |   ✓   |       |     |     |                |                     |
+| Azure Speech      |       |       |       |  ✓  |     |                |                     |
 | BytePlus          |       |   ✓   |       |     |     |                |                     |
 | ComfyUI           |   ✓   |   ✓   |   ✓   |     |     |                |                     |
+| Deepgram          |       |       |       |     |  ✓  |                |                     |
 | DeepInfra         |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
-| Deepgram          |       |       |       |     |  ✓  |       ✓        |                     |
 | ElevenLabs        |       |       |       |  ✓  |  ✓  |                |                     |
 | fal               |   ✓   |   ✓   |   ✓   |     |     |                |                     |
-| Google            |   ✓   |   ✓   |   ✓   |  ✓  |     |       ✓        |          ✓          |
+| Google            |   ✓   |   ✓   |   ✓   |  ✓  |  ✓  |       ✓        |          ✓          |
 | Gradium           |       |       |       |  ✓  |     |                |                     |
+| Inworld           |       |       |       |  ✓  |     |                |                     |
+| LiteLLM           |   ✓   |       |       |     |     |                |                     |
 | Local CLI         |       |       |       |  ✓  |     |                |                     |
 | Microsoft         |       |       |       |  ✓  |     |                |                     |
 | Microsoft Foundry |   ✓   |       |       |     |     |                |                     |
@@ -87,21 +97,25 @@ Speech-to-text
 | Mistral           |       |       |       |     |  ✓  |                |                     |
 | OpenAI            |   ✓   |   ✓   |       |  ✓  |  ✓  |       ✓        |          ✓          |
 | OpenRouter        |   ✓   |   ✓   |   ✓   |  ✓  |  ✓  |                |          ✓          |
-| Qwen              |       |   ✓   |       |     |     |                |                     |
+| PixVerse          |       |   ✓   |       |     |     |                |                     |
+| Qwen              |       |   ✓   |       |     |     |                |          ✓          |
 | Runway            |       |   ✓   |       |     |     |                |                     |
 | SenseAudio        |       |       |       |     |  ✓  |                |                     |
 | Together          |       |   ✓   |       |     |     |                |                     |
+| Volcengine        |       |       |       |  ✓  |     |                |                     |
 | Vydra             |   ✓   |   ✓   |       |  ✓  |     |                |                     |
 | xAI               |   ✓   |   ✓   |       |  ✓  |  ✓  |                |          ✓          |
-| Xiaomi MiMo       |   ✓   |       |       |  ✓  |     |                |          ✓          |
+| Xiaomi MiMo       |       |       |       |  ✓  |     |                |                     |
 
 Note
 
-Media understanding uses any vision-capable or audio-capable model registered
-in your provider config. The matrix above lists providers with dedicated
-media-understanding support; most multimodal LLM providers (Anthropic, Google,
-OpenAI, etc.) can also understand inbound media when configured as the active
-reply model.
+**Realtime voice** here means provider-native bidirectional realtime (Talk
+`realtime` mode, e.g. Gemini Live or the OpenAI Realtime API) — only Google
+and OpenAI register it today. Deepgram, ElevenLabs, Mistral, OpenAI, and xAI
+separately register Voice Call streaming STT (one-way audio-to-text); see
+[Speech-to-text and Voice Call](#speech-to-text-and-voice-call) below.
+xAI Realtime voice is an upstream capability but is not registered in
+OpenClaw until the shared realtime-voice contract can represent it.
 
 ## Async vs synchronous
 
@@ -125,12 +139,13 @@ already delivered by the completion reply is not posted again.
 
 ## Speech-to-text and Voice Call
 
-Deepgram, DeepInfra, ElevenLabs, Mistral, OpenAI, OpenRouter, SenseAudio, and xAI can all transcribe
-inbound audio through the batch `tools.media.audio` path when configured.
-Channel plugins that preflight a voice note for mention gating or command
-parsing mark the transcribed attachment on the inbound context, so the shared
-media-understanding pass reuses that transcript instead of making a second
-STT call for the same audio.
+Deepgram, DeepInfra, ElevenLabs, Google, Groq, Mistral, OpenAI, OpenRouter,
+SenseAudio, and xAI can all transcribe inbound audio through the batch
+`tools.media.audio` path when configured. Channel plugins that preflight a
+voice note for mention gating or command parsing mark the transcribed
+attachment on the inbound context, so the shared media-understanding pass
+reuses that transcript instead of making a second STT call for the same
+audio.
 
 Deepgram, ElevenLabs, Mistral, OpenAI, and xAI also register Voice Call
 streaming STT providers, so live phone audio can be forwarded to the selected
@@ -148,7 +163,7 @@ AccordionGroup
 
 Google
 
-    Image, video, music, batch TTS, backend realtime voice, and
+    Image, video, music, batch TTS, batch STT, backend realtime voice, and
     media-understanding surfaces.
 
 
@@ -162,9 +177,9 @@ DeepInfra
 
     Chat/model routing, image generation/editing, text-to-video, batch TTS,
     batch STT, image media understanding, and memory-embedding surfaces.
-    DeepInfra-native rerank/classification/object-detection models are not
-    registered until OpenClaw has dedicated provider contracts for those
-    categories.
+    DeepInfra also exposes reranking, classification, object-detection, and
+    other native model types; OpenClaw has no provider contract for those
+    categories yet, so this plugin does not register them.
 
 
 xAI

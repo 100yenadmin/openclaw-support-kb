@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zai"
-source_hash: "888f5893046da6e39b40b2425c783e8f1a8431703bb599f68f9666773707f2f0"
+source_hash: "d2d2c46cb3a87261457864247cdd9e071ca54742ab40be118e6742907a3e5d36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zai.md"
@@ -24,7 +24,7 @@ Adds Z.AI model provider support to OpenClaw.
 
 ## Surface
 
-providers: zai; contracts: mediaUnderstandingProviders
+providers: zai; contracts: mediaUnderstandingProviders, usageProviders
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tutorial: GitHub PR Review Agent"
 source: "https://hermes-agent.nousresearch.com/docs/guides/github-pr-review-agent"
-source_hash: "cb8c3316ae62e051711129319ade516677485bde785c580b0beb658eabfe425b"
+source_hash: "9296a9542769a9cfd4ebb40c706b11172d2fb0e203eb052c86f513bfb9e9f027"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/github-pr-review-agent.md"
@@ -311,7 +311,7 @@ GitHub allows 5,000 API requests/hour for authenticated users. Each PR review us
 
 - **[Webhook-Based PR Reviews](./webhook-github-pr-review.md)** — get instant reviews when PRs are opened (requires a public endpoint)
 - **[Daily Briefing Bot](/guides/daily-briefing-bot)** — combine PR reviews with your morning news digest
-- **[Build a Plugin](/guides/build-a-hermes-plugin)** — wrap the review logic into a shareable plugin
+- **[Build a Plugin](/developer-guide/plugins)** — wrap the review logic into a shareable plugin
 - **[Profiles](/user-guide/profiles)** — run a dedicated reviewer profile with its own memory and config
 - **[Fallback Providers](/user-guide/features/fallback-providers)** — ensure reviews run even when one provider is down
 

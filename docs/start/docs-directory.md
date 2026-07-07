@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs directory"
 source: "https://docs.openclaw.ai/start/docs-directory"
-source_hash: "fb376390d90b67e6d2051ff6cea163520b5d0992daf09d5116ae9064d78f0256"
+source_hash: "6646ab07abffa13490f12a8e70868db6cc3ec1867ce41e99c9c65086c6a5c51b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/docs-directory.md"
@@ -40,27 +40,27 @@ For a complete map of the docs, see [Docs hubs](/start/hubs).
 - [Discovery and transports](/gateway/discovery)
 - [Remote access](/gateway/remote)
 
-## Providers and UX
+## Channels and UX
 
-- [WebChat](/web/webchat)
 - [Control UI (browser)](/web/control-ui)
-- [Telegram](/channels/telegram)
 - [Discord](/channels/discord)
-- [Mattermost](/channels/mattermost)
-- [QQ Bot](/channels/qqbot)
-- [iMessage](/channels/imessage)
 - [Groups](/channels/groups)
-- [WhatsApp group messages](/channels/group-messages)
-- [Media images](/nodes/images)
+- [iMessage](/channels/imessage)
+- [Mattermost](/channels/mattermost)
 - [Media audio](/nodes/audio)
+- [Media images](/nodes/images)
+- [QQ Bot](/channels/qqbot)
+- [Telegram](/channels/telegram)
+- [WebChat](/web/webchat)
+- [WhatsApp group messages](/channels/group-messages)
 
 ## Companion apps
 
-- [macOS app](/platforms/macos)
-- [iOS app](/platforms/ios)
 - [Android app](/platforms/android)
-- [Windows Hub](/platforms/windows)
+- [iOS app](/platforms/ios)
 - [Linux app](/platforms/linux)
+- [macOS app](/platforms/macos)
+- [Windows Hub](/platforms/windows)
 
 ## Operations and safety
 

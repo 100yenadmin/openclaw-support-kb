@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip UI Spec"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/spec/ui.md"
-source_hash: "102cb35b6b41f24d9bf1db956490c794545215c85f70a4435bc2e084eb7df6e8"
+source_hash: "92559c582c8d61b6ea7a67adfa7517087264929e20c790e819a40d88a45523cc"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/spec/ui.md"
@@ -58,7 +58,8 @@ Priority indicators:
 
 ### Typography
 
-- **Font:** System font stack (Inter if loaded, else `-apple-system, BlinkMacSystemFont, 'Segoe UI'`)
+- **Font:** Bundled Inter v4.1 variable WOFF2 for sans text, loaded from `/fonts/InterVariable.woff2` and `/fonts/InterVariable-Italic.woff2`, with `Inter`, `ui-sans-serif`, `system-ui`, `-apple-system`, `BlinkMacSystemFont`, and `'Segoe UI'` fallbacks.
+- **Mono:** System monospace stack via the `font-mono` token (`ui-monospace`, `SFMono-Regular`, `Menlo`, `Monaco`, `Consolas`, `Liberation Mono`, `Courier New`, `monospace`).
 - **Body:** 13px / 1.5 line-height
 - **Labels/metadata:** 11px / uppercase tracking
 - **Headings:** 14-18px / semi-bold, never all-caps

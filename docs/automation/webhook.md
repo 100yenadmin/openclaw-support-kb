@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Webhooks"
 source: "https://docs.openclaw.ai/automation/webhook"
-source_hash: "21cdbca28390215e4a45fc8f3f36a4e50818c9155eaab5413f4a1ba6c0207e15"
+source_hash: "a7bc0b72bfb3f0b5fde0d6186f8fdf43bee184742963044932fcbb2ce61fd5d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/webhook.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Webhooks
 Source: https://docs.openclaw.ai/automation/webhook
 
-This page moved to [Scheduled Tasks](/automation/cron-jobs#webhooks). See [Scheduled Tasks](/automation/cron-jobs#webhooks) for webhook documentation.
+This page moved. Webhook documentation now lives at [Scheduled Tasks](/automation/cron-jobs#webhooks).
 
 ## Related
 

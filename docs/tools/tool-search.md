@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool Search"
 source: "https://docs.openclaw.ai/tools/tool-search"
-source_hash: "446aba4fd431cb1dcc747fe87ab6547c5f6d99ad068d312f65fd858a11d3253b"
+source_hash: "aad60987db34f574bece4c81ba3e95460d1e5e19bd8de63d2f92bc398f8af860"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tool-search.md"
@@ -229,7 +229,7 @@ Use the compact directory surface instead for OpenClaw runs:
 }
 ```
 
-Tune code-mode timeout and search result limits:
+Tune code-mode timeout and search result limits (values shown are the defaults):
 
 ```json5
 {
@@ -243,6 +243,9 @@ Tune code-mode timeout and search result limits:
   },
 }
 ```
+
+The runtime clamps `codeTimeoutMs` to 1000-60000, `maxSearchLimit` to 1-50, and
+`searchDefaultLimit` to 1..`maxSearchLimit`.
 
 Disable it:
 
