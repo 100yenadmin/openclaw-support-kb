@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "skills-store"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/agent-developer/skills-store.md"
-source_hash: "4e7af85ce95b4e982e5ae459838ebca92c684d5b2b4ffcede4107b6baff6259d"
+source_hash: "d5698568b5a8144384d3ac00c9c38e6e4b62e54e88731193afc03ee3e8fa6222"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/agent-developer/skills-store.md"
@@ -57,7 +57,7 @@ The catalog splits skills into two **kinds**:
   `qa-acceptance`, `wireframe`, `github-pr-workflow`, `doc-maintenance`). These carry the
   reserved `paperclipai/paperclip/...` key namespace.
 - **`optional`** — additional curated skills you opt into (e.g. `agent-browser`,
-  `design-critique`, `release-announcement`, `last30days`).
+  `design-critique`, `release-announcement`, `last30days`, `ramp`).
 
 Every catalog skill carries metadata used for discovery and safety:
 
@@ -103,6 +103,24 @@ External imports (`github`, `skills_sh`, `url`) are held to two rules: they must
 `markdown_only` or `assets` (no scripts), and Git-backed sources **must resolve to a
 pinned 40-character commit SHA** before import, so a moving branch can never silently
 change what your agents run.
+
+### Thin wrappers for external live playbooks
+
+Some optional catalog skills intentionally do not vendor a third-party playbook. The
+`ramp` skill is the model: Paperclip ships the stable governance wrapper, source
+allowlist, and approval gates, then tells the agent to fetch Ramp's current published
+instructions from `agents.ramp.com` when the task starts.
+
+Use this pattern only when the external provider's setup flow changes often enough that
+a vendored snapshot would go stale, and when Paperclip can keep the safety boundary in
+the wrapper. For financial, legal, or account-control domains, the wrapper must require
+Paperclip approvals before spend, incorporation, account authorization, card issuance,
+data sharing, or other irreversible actions. The tradeoff should be documented in the
+skill or PR so reviewers can evaluate freshness against external-instruction risk. If
+the provider mixes official and community playbooks on the same host, the wrapper must
+fail closed on unclear provenance and require separate approval before using any
+third-party tool, connector, browser automation service, or credential flow introduced
+by a fetched playbook.
 
 ## Getting skills into your company
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "c852b7ce19f1b91b83becdcbe6165a25e2770dd26db5d140eec82e00ae266550"
+source_hash: "b3ed133a99cb077e8832eab081e15d9cf4b86e5c3a2c079ed97c1303a2fe8974"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -73,6 +73,26 @@ pnpm build-storybook
 ```
 
 These run the `@paperclipai/ui` Storybook on port `6006` and build the static output to `ui/storybook-static/`.
+
+The Storybook visual regression suite uses external PNG baselines instead of
+committed screenshots:
+
+```sh
+pnpm test:storybook-visual
+pnpm test:storybook-visual:update
+```
+
+`pnpm test:storybook-visual` downloads and verifies the baseline archive from
+`tests/storybook-visual/baseline-manifest.json` before running Playwright.
+Accepted visual changes should update the manifest metadata and publish a new
+immutable archive with `pnpm storybook-visual:baseline pack` and
+`pnpm storybook-visual:baseline upload`; do not commit generated PNG snapshots.
+
+PR visual checks are opt-in while the suite stabilizes. Add the
+`storybook-visual` label to a PR, or run the `Storybook Visual` GitHub Actions
+workflow manually, to produce downloadable Playwright report/test-result
+artifacts. Normal PR visual runs use read-only repository permissions and do not
+upload or mutate baseline objects.
 
 ## UI Fonts And Screenshots
 
