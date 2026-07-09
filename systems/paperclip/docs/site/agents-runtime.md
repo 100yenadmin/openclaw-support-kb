@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Agent Runtime Guide"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/agents-runtime.md"
-source_hash: "a979ad3892f743fcbfec882db90c8e6ada7279addc6091fd90ce0b23576ab778"
+source_hash: "23215530830ac360aa26c03f2689411dda3bc70d2a5bbcbce333bcfbbc76cf8b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/agents-runtime.md"
@@ -84,7 +84,7 @@ In agent runtime settings, configure heartbeat policy:
 For local adapters, set:
 
 - `cwd` (working directory)
-- `timeoutSec` (max runtime per heartbeat)
+- `timeoutSec` (max runtime per heartbeat; `0` uses the target default — no adapter timeout on local/SSH, a 4-hour backstop on sandbox targets — and a negative value disables the adapter timeout everywhere, including sandboxes)
 - `graceSec` (time before force-kill after timeout/cancel)
 - optional env vars and extra CLI args
 - use **Test environment** in agent configuration to run adapter-specific diagnostics before saving

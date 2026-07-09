@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "478026a84713db44880017cd50b1cd12e7b7dffcacfa850e842f7876813c0491"
+source_hash: "ccab32af3d1a38c12fb2e120b3841fd9bb7d4fd1c503a074c8831602bce3a08e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Migrating from Direct Tools to Sessions (/docs/migration-guide/direct-to-sessions)
 Source: https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md
 
+
+> _Written February 2026._
 
 This guide is for developers who are using Composio's **direct tool execution** pattern and want to migrate to **sessions**. For a comparison of the two patterns, see [Sessions vs Direct Execution](/docs/sessions-vs-direct-execution).
 

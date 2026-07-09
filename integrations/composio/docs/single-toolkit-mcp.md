@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "6b9e9b2841bf83af61efd9c591dbe79e050cfe5b83363fb02258a27e2f8c6824"
+source_hash: "4833cdc167558fdf292a31d6603fb37b45a61463f85df43d0e062790d0c5cdfd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -350,6 +350,46 @@ A Slack bot needs a Slack app to authenticate as and a stream of events. Composi
 
 This is `install.ts`, run once, built up three steps at a time:
 
+**`install.ts` — complete file**
+
+```typescript
+import { Composio } from '@composio/core';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+
+// The scopes the bot needs. The slackbot toolkit ships Composio-managed OAuth,
+// so you never register your own Slack app.
+const authConfig = await composio.authConfigs.create('slackbot', {
+  type: 'use_composio_managed_auth',
+  name: 'workspace-bot',
+  credentials: {
+    scopes: ['app_mentions:read', 'channels:history', 'chat:write', 'reactions:write', 'users:read'],
+    user_scopes: ['search:read'],
+  },
+});
+
+// One connection for the whole workspace: authorize it as SHARED.
+const setup = await composio.create('setup:workspace-bot', {
+  toolkits: ['slackbot'],
+  authConfigs: { slackbot: authConfig.id },
+  manageConnections: true,
+});
+const request = await setup.authorize('slackbot', {
+  callbackUrl: `${process.env.APP_URL}/setup/callback`,
+  experimental: { accountType: 'SHARED' },
+});
+console.log('Approve the install:', request.redirectUrl);
+
+// On the OAuth callback: open the ACL, subscribe your webhook, create triggers.
+// Persist connectedAccountId as SLACK_CONNECTION_ID for the bot server.
+export async function onSetupCallback(connectedAccountId: string) {
+  await composio.connectedAccounts.updateAcl(connectedAccountId, { allowAllUsers: true });
+  await composio.triggers.setWebhookSubscription({ webhookUrl: `${process.env.APP_URL}/webhooks/composio` });
+  await composio.triggers.create('setup:workspace-bot', 'SLACKBOT_CHANNEL_MESSAGE_RECEIVED', { triggerConfig: { is_bot_message: false } });
+  await composio.triggers.create('setup:workspace-bot', 'SLACKBOT_DIRECT_MESSAGE_RECEIVED', { triggerConfig: {} });
+}
+```
+
 A webhook subscription is the *pipe*; each trigger is a *tap*. Together they stream channel messages and DMs to your server. The connected account id that comes back from the OAuth callback is the `SLACK_CONNECTION_ID` the server pins into every session.
 
 # Build the bot
@@ -360,29 +400,664 @@ A webhook subscription is the *pipe*; each trigger is a *tap*. Together they str
 
 The whole idea, before any Slack: create a session for a user, hand the Pi provider the session so it can search and execute, and run a prompt. This already acts across every app that user has connected.
 
+**`bot.ts` — step 1: A basic agent**
+
+```typescript
+import { Composio } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// The smallest agent: one session, its tools, one prompt.
+export async function runAgent(userId: string, prompt: string) {
+  const session = await composio.create(userId);
+  const tools = piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    search: (params) => session.search(params),
+    execute: (slug, args, options) => session.execute(slug, args, options),
+  });
+  return runPi(tools, prompt);
+}
+```
+
 ## Put it in a Slack thread
 
 Turn the one-shot agent into a handler. Each Slack thread gets its own [session](/docs/configuring-sessions), reused so the agent keeps context, and the reply goes back with the `SLACKBOT_SEND_MESSAGE` tool. The session is keyed to the Slack user, so when Alice asks for a GitHub issue it opens as *Alice*, against her GitHub connection.
+
+**`bot.ts` — step 2: Wire it to Slack threads**
+
+```typescript
+import { Composio } from '@composio/core';
+import type { IncomingTriggerPayload } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+const callbackUrl = `${process.env.APP_URL}/connections/callback`;
+
+// One session per Slack thread, reused so the agent keeps context, with a short
+// transcript for memory across turns.
+const threads = new Map<string, { sessionId: string; history: { role: string; content: string }[] }>();
+const threadKey = (event: IncomingTriggerPayload) =>
+  `${event.payload?.channel}:${event.payload?.thread_ts ?? event.payload?.ts}`;
+
+async function sessionForThread(event: IncomingTriggerPayload) {
+  const key = threadKey(event);
+  const existing = threads.get(key);
+  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+
+  const session = await composio.create(event.userId, {
+    manageConnections: { enable: true, callbackUrl, waitForConnections: true },
+  });
+  const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
+  threads.set(key, memory);
+  return { session, memory };
+}
+
+function toolsForSession(session) {
+  return piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    callbackUrl,
+    search: (params) => session.search(params),
+    execute: (slug, args, options) => session.execute(slug, args, options),
+    connections: {
+      getToolkitStates: (toolkits) => session.toolkits({ toolkits }),
+      authorizeToolkit: async (toolkit) => {
+        const request = await session.authorize(toolkit, { callbackUrl });
+        return { status: 'needs_connection', redirectUrl: request.redirectUrl };
+      },
+      isConnected: (state) => state.connection?.isActive ?? false,
+    },
+  });
+}
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// Reply to one Slack message as the user who sent it.
+async function handleSlackMessage(event: IncomingTriggerPayload) {
+  const { session, memory } = await sessionForThread(event);
+  const prompt = [...memory.history.map((m) => `${m.role}: ${m.content}`), `user: ${event.payload?.text}`].join('\n');
+
+  const reply = await runPi(toolsForSession(session), prompt);
+
+  await session.execute('SLACKBOT_SEND_MESSAGE', {
+    channel: event.payload?.channel,
+    thread_ts: event.payload?.thread_ts,
+    text: reply,
+  });
+  memory.history.push({ role: 'user', content: event.payload?.text ?? '' }, { role: 'assistant', content: reply });
+}
+```
 
 ## Share one workspace connection
 
 By default a connected account is **PRIVATE**: only its creator can use it. The install authorized the Slack connection as **SHARED**, so you pin it into every session. Now Alice's session has *her* GitHub connection but *the workspace's* Slack connection. It posts as the bot, and acts everywhere else as Alice.
 
+**`bot.ts` — step 3: Share one workspace connection**
+
+```typescript
+import { Composio } from '@composio/core';
+import type { IncomingTriggerPayload } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+const callbackUrl = `${process.env.APP_URL}/connections/callback`;
+
+// One Slack connection, shared by the whole workspace. The bot posts as this
+// identity while acting in every other app as the individual user.
+const SHARED_SLACK_CONNECTION_ID = process.env.SLACK_CONNECTION_ID;
+
+// One session per Slack thread, reused so the agent keeps context, with a short
+// transcript for memory across turns.
+const threads = new Map<string, { sessionId: string; history: { role: string; content: string }[] }>();
+const threadKey = (event: IncomingTriggerPayload) =>
+  `${event.payload?.channel}:${event.payload?.thread_ts ?? event.payload?.ts}`;
+
+async function sessionForThread(event: IncomingTriggerPayload) {
+  const key = threadKey(event);
+  const existing = threads.get(key);
+  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+
+  const session = await composio.create(event.userId, {
+    // Pin the shared Slack connection; the session still resolves every other
+    // toolkit against this user's own connections.
+    connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
+    manageConnections: { enable: true, callbackUrl, waitForConnections: true },
+  });
+  const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
+  threads.set(key, memory);
+  return { session, memory };
+}
+
+function toolsForSession(session) {
+  return piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    callbackUrl,
+    search: (params) => session.search(params),
+    execute: (slug, args, options) => session.execute(slug, args, options),
+    connections: {
+      getToolkitStates: (toolkits) => session.toolkits({ toolkits }),
+      authorizeToolkit: async (toolkit) => {
+        const request = await session.authorize(toolkit, { callbackUrl });
+        return { status: 'needs_connection', redirectUrl: request.redirectUrl };
+      },
+      isConnected: (state) => state.connection?.isActive ?? false,
+    },
+  });
+}
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// Reply to one Slack message as the user who sent it.
+async function handleSlackMessage(event: IncomingTriggerPayload) {
+  const { session, memory } = await sessionForThread(event);
+  const prompt = [...memory.history.map((m) => `${m.role}: ${m.content}`), `user: ${event.payload?.text}`].join('\n');
+
+  const reply = await runPi(toolsForSession(session), prompt);
+
+  await session.execute('SLACKBOT_SEND_MESSAGE', {
+    channel: event.payload?.channel,
+    thread_ts: event.payload?.thread_ts,
+    text: reply,
+  });
+  memory.history.push({ role: 'user', content: event.payload?.text ?? '' }, { role: 'assistant', content: reply });
+}
+```
+
 ## Reach the gaps with the proxy
 
 Most Slack actions are `SLACKBOT_*` tools. The few that aren't, like the typing indicator and opening a DM channel, drop down to `session.proxyExecute`, which calls the Slack Web API with the pinned connection's auth so you never touch a token.
+
+**`bot.ts` — step 4: Reach the gaps with the proxy**
+
+```typescript
+import { Composio } from '@composio/core';
+import type { IncomingTriggerPayload } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+const callbackUrl = `${process.env.APP_URL}/connections/callback`;
+
+// One Slack connection, shared by the whole workspace. The bot posts as this
+// identity while acting in every other app as the individual user.
+const SHARED_SLACK_CONNECTION_ID = process.env.SLACK_CONNECTION_ID;
+
+// One session per Slack thread, reused so the agent keeps context, with a short
+// transcript for memory across turns.
+const threads = new Map<string, { sessionId: string; history: { role: string; content: string }[] }>();
+const threadKey = (event: IncomingTriggerPayload) =>
+  `${event.payload?.channel}:${event.payload?.thread_ts ?? event.payload?.ts}`;
+
+async function sessionForThread(event: IncomingTriggerPayload) {
+  const key = threadKey(event);
+  const existing = threads.get(key);
+  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+
+  const session = await composio.create(event.userId, {
+    // Pin the shared Slack connection; the session still resolves every other
+    // toolkit against this user's own connections.
+    connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
+    manageConnections: { enable: true, callbackUrl, waitForConnections: true },
+  });
+  const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
+  threads.set(key, memory);
+  return { session, memory };
+}
+
+// Anything the toolkit doesn't wrap as a tool, reach via the proxy: it calls the
+// Slack Web API with the pinned connection's auth, so you never touch a token.
+async function setStatus(session, event: IncomingTriggerPayload, status: string) {
+  await session
+    .proxyExecute({
+      toolkit: 'slackbot',
+      endpoint: 'https://slack.com/api/assistant.threads.setStatus',
+      method: 'POST',
+      body: { channel_id: event.payload?.channel, thread_ts: event.payload?.thread_ts, status },
+    })
+    .catch(() => {});
+}
+
+async function openDm(session, userId: string): Promise<string> {
+  const res = await session.proxyExecute({
+    toolkit: 'slackbot',
+    endpoint: 'https://slack.com/api/conversations.open',
+    method: 'POST',
+    body: { users: userId },
+  });
+  return res.data?.channel?.id;
+}
+
+function toolsForSession(session) {
+  return piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    callbackUrl,
+    search: (params) => session.search(params),
+    execute: (slug, args, options) => session.execute(slug, args, options),
+    connections: {
+      getToolkitStates: (toolkits) => session.toolkits({ toolkits }),
+      authorizeToolkit: async (toolkit) => {
+        const request = await session.authorize(toolkit, { callbackUrl });
+        return { status: 'needs_connection', redirectUrl: request.redirectUrl };
+      },
+      isConnected: (state) => state.connection?.isActive ?? false,
+    },
+  });
+}
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// Reply to one Slack message as the user who sent it.
+async function handleSlackMessage(event: IncomingTriggerPayload) {
+  const { session, memory } = await sessionForThread(event);
+  await setStatus(session, event, 'Working on it…');
+
+  const prompt = [...memory.history.map((m) => `${m.role}: ${m.content}`), `user: ${event.payload?.text}`].join('\n');
+  const reply = await runPi(toolsForSession(session), prompt);
+
+  await session.execute('SLACKBOT_SEND_MESSAGE', {
+    channel: event.payload?.channel,
+    thread_ts: event.payload?.thread_ts,
+    text: reply,
+  });
+  memory.history.push({ role: 'user', content: event.payload?.text ?? '' }, { role: 'assistant', content: reply });
+}
+```
 
 ## Redirect auth links
 
 The payoff. When the agent reaches for an app the user hasn't connected, the tool result carries a one-time Composio connect URL. You never want it in the channel or in the model's context. The bot extracts it, **redacts** it from the tool output, DMs it to the user privately, and the run resumes the moment they approve, because the session was created with `waitForConnections`.
 
+**`bot.ts` — step 5: Redirect auth links**
+
+```typescript
+import { Composio } from '@composio/core';
+import type { IncomingTriggerPayload } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+const callbackUrl = `${process.env.APP_URL}/connections/callback`;
+
+// One Slack connection, shared by the whole workspace. The bot posts as this
+// identity while acting in every other app as the individual user.
+const SHARED_SLACK_CONNECTION_ID = process.env.SLACK_CONNECTION_ID;
+
+// One session per Slack thread, reused so the agent keeps context, with a short
+// transcript for memory across turns.
+const threads = new Map<string, { sessionId: string; history: { role: string; content: string }[] }>();
+const threadKey = (event: IncomingTriggerPayload) =>
+  `${event.payload?.channel}:${event.payload?.thread_ts ?? event.payload?.ts}`;
+
+async function sessionForThread(event: IncomingTriggerPayload) {
+  const key = threadKey(event);
+  const existing = threads.get(key);
+  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+
+  const session = await composio.create(event.userId, {
+    // Pin the shared Slack connection; the session still resolves every other
+    // toolkit against this user's own connections.
+    connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
+    manageConnections: { enable: true, callbackUrl, waitForConnections: true },
+  });
+  const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
+  threads.set(key, memory);
+  return { session, memory };
+}
+
+// Anything the toolkit doesn't wrap as a tool, reach via the proxy: it calls the
+// Slack Web API with the pinned connection's auth, so you never touch a token.
+async function setStatus(session, event: IncomingTriggerPayload, status: string) {
+  await session
+    .proxyExecute({
+      toolkit: 'slackbot',
+      endpoint: 'https://slack.com/api/assistant.threads.setStatus',
+      method: 'POST',
+      body: { channel_id: event.payload?.channel, thread_ts: event.payload?.thread_ts, status },
+    })
+    .catch(() => {});
+}
+
+async function openDm(session, userId: string): Promise<string> {
+  const res = await session.proxyExecute({
+    toolkit: 'slackbot',
+    endpoint: 'https://slack.com/api/conversations.open',
+    method: 'POST',
+    body: { users: userId },
+  });
+  return res.data?.channel?.id;
+}
+
+// Redirect auth links. When a tool hits an app the user hasn't connected, the
+// result carries a one-time Composio connect URL. Never let the model or the
+// channel see it: redact it from the tool output and DM the user privately. The
+// session's manageConnections + waitForConnections resumes the run on approval.
+const CONNECT_LINK = /https:\/\/(?:connect\.composio\.dev|[^\s"']*composio[^\s"']*\/link)\/[^\s"')]+/gi;
+
+function redactLinks(value: T): T {
+  if (typeof value === 'string') return value.replace(CONNECT_LINK, '[connection link sent via DM]') as T;
+  if (Array.isArray(value)) return value.map(redactLinks) as T;
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, redactLinks(v)])) as T;
+  }
+  return value;
+}
+
+async function handleAuthLinks(session, event: IncomingTriggerPayload, value: T): Promise {
+  const links = [...new Set([...JSON.stringify(value ?? '').matchAll(CONNECT_LINK)].map((m) => m[0]))];
+  if (links.length > 0) {
+    const dm = await openDm(session, event.userId);
+    for (const url of links) {
+      await session.execute('SLACKBOT_SEND_MESSAGE', {
+        channel: dm,
+        text: `*Connection needed.* Approve access and I'll continue automatically:\n<${url}|Connect>`,
+      });
+    }
+  }
+  return redactLinks(value); // hand the model a result with the raw URL stripped
+}
+
+function toolsForSession(session, event: IncomingTriggerPayload) {
+  return piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    callbackUrl,
+    search: (params) => session.search(params),
+    // Every tool result passes through handleAuthLinks: connect URLs get DM'd to
+    // the user and redacted before the model ever sees them.
+    execute: async (slug, args, options) => handleAuthLinks(session, event, await session.execute(slug, args, options)),
+    connections: {
+      getToolkitStates: (toolkits) => session.toolkits({ toolkits }),
+      authorizeToolkit: async (toolkit) => {
+        const request = await session.authorize(toolkit, { callbackUrl });
+        await handleAuthLinks(session, event, request.redirectUrl);
+        return { status: 'needs_connection', redirectUrl: request.redirectUrl };
+      },
+      isConnected: (state) => state.connection?.isActive ?? false,
+    },
+  });
+}
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// Reply to one Slack message as the user who sent it.
+async function handleSlackMessage(event: IncomingTriggerPayload) {
+  const { session, memory } = await sessionForThread(event);
+  await setStatus(session, event, 'Working on it…');
+
+  const prompt = [...memory.history.map((m) => `${m.role}: ${m.content}`), `user: ${event.payload?.text}`].join('\n');
+  const reply = await runPi(toolsForSession(session, event), prompt);
+
+  await session.execute('SLACKBOT_SEND_MESSAGE', {
+    channel: event.payload?.channel,
+    thread_ts: event.payload?.thread_ts,
+    text: reply,
+  });
+  memory.history.push({ role: 'user', content: event.payload?.text ?? '' }, { role: 'assistant', content: reply });
+}
+```
+
 ## Serve the webhook
 
 Verify each trigger's signature with `composio.triggers.verifyWebhook`, then hand the payload to `handleSlackMessage` off the response path so a slow handler doesn't get retried. That's the whole server.
 
+**`bot.ts` — step 6: Serve the webhook**
+
+```typescript
+import { Composio } from '@composio/core';
+import type { IncomingTriggerPayload } from '@composio/core';
+import { PiProvider } from '@composio/experimental';
+import { createAgentSession, SessionManager } from '@earendil-works/pi-coding-agent';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const piProvider = new PiProvider();
+const callbackUrl = `${process.env.APP_URL}/connections/callback`;
+
+// One Slack connection, shared by the whole workspace. The bot posts as this
+// identity while acting in every other app as the individual user.
+const SHARED_SLACK_CONNECTION_ID = process.env.SLACK_CONNECTION_ID;
+
+// One session per Slack thread, reused so the agent keeps context, with a short
+// transcript for memory across turns.
+const threads = new Map<string, { sessionId: string; history: { role: string; content: string }[] }>();
+const threadKey = (event: IncomingTriggerPayload) =>
+  `${event.payload?.channel}:${event.payload?.thread_ts ?? event.payload?.ts}`;
+
+async function sessionForThread(event: IncomingTriggerPayload) {
+  const key = threadKey(event);
+  const existing = threads.get(key);
+  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+
+  const session = await composio.create(event.userId, {
+    // Pin the shared Slack connection; the session still resolves every other
+    // toolkit against this user's own connections.
+    connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
+    manageConnections: { enable: true, callbackUrl, waitForConnections: true },
+  });
+  const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
+  threads.set(key, memory);
+  return { session, memory };
+}
+
+// Anything the toolkit doesn't wrap as a tool, reach via the proxy: it calls the
+// Slack Web API with the pinned connection's auth, so you never touch a token.
+async function setStatus(session, event: IncomingTriggerPayload, status: string) {
+  await session
+    .proxyExecute({
+      toolkit: 'slackbot',
+      endpoint: 'https://slack.com/api/assistant.threads.setStatus',
+      method: 'POST',
+      body: { channel_id: event.payload?.channel, thread_ts: event.payload?.thread_ts, status },
+    })
+    .catch(() => {});
+}
+
+async function openDm(session, userId: string): Promise<string> {
+  const res = await session.proxyExecute({
+    toolkit: 'slackbot',
+    endpoint: 'https://slack.com/api/conversations.open',
+    method: 'POST',
+    body: { users: userId },
+  });
+  return res.data?.channel?.id;
+}
+
+// Redirect auth links. When a tool hits an app the user hasn't connected, the
+// result carries a one-time Composio connect URL. Never let the model or the
+// channel see it: redact it from the tool output and DM the user privately. The
+// session's manageConnections + waitForConnections resumes the run on approval.
+const CONNECT_LINK = /https:\/\/(?:connect\.composio\.dev|[^\s"']*composio[^\s"']*\/link)\/[^\s"')]+/gi;
+
+function redactLinks(value: T): T {
+  if (typeof value === 'string') return value.replace(CONNECT_LINK, '[connection link sent via DM]') as T;
+  if (Array.isArray(value)) return value.map(redactLinks) as T;
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, redactLinks(v)])) as T;
+  }
+  return value;
+}
+
+async function handleAuthLinks(session, event: IncomingTriggerPayload, value: T): Promise {
+  const links = [...new Set([...JSON.stringify(value ?? '').matchAll(CONNECT_LINK)].map((m) => m[0]))];
+  if (links.length > 0) {
+    const dm = await openDm(session, event.userId);
+    for (const url of links) {
+      await session.execute('SLACKBOT_SEND_MESSAGE', {
+        channel: dm,
+        text: `*Connection needed.* Approve access and I'll continue automatically:\n<${url}|Connect>`,
+      });
+    }
+  }
+  return redactLinks(value); // hand the model a result with the raw URL stripped
+}
+
+function toolsForSession(session, event: IncomingTriggerPayload) {
+  return piProvider.createSessionTools({
+    sessionId: session.sessionId,
+    callbackUrl,
+    search: (params) => session.search(params),
+    // Every tool result passes through handleAuthLinks: connect URLs get DM'd to
+    // the user and redacted before the model ever sees them.
+    execute: async (slug, args, options) => handleAuthLinks(session, event, await session.execute(slug, args, options)),
+    connections: {
+      getToolkitStates: (toolkits) => session.toolkits({ toolkits }),
+      authorizeToolkit: async (toolkit) => {
+        const request = await session.authorize(toolkit, { callbackUrl });
+        await handleAuthLinks(session, event, request.redirectUrl);
+        return { status: 'needs_connection', redirectUrl: request.redirectUrl };
+      },
+      isConnected: (state) => state.connection?.isActive ?? false,
+    },
+  });
+}
+
+// Run the Pi agent over a session's tools and return its final text.
+async function runPi(tools: unknown, prompt: string) {
+  const { session: pi } = await createAgentSession({
+    sessionManager: SessionManager.inMemory(process.cwd()),
+    customTools: tools,
+    tools: ['composio_search_tools', 'composio_manage_connections', 'composio_execute_tool'],
+  });
+  let reply = '';
+  pi.subscribe((e) => {
+    if (e.type === 'message_update' && e.assistantMessageEvent.type === 'text_delta') {
+      reply += e.assistantMessageEvent.delta;
+    }
+  });
+  await pi.prompt(prompt);
+  pi.dispose();
+  return reply;
+}
+
+// Reply to one Slack message as the user who sent it.
+async function handleSlackMessage(event: IncomingTriggerPayload) {
+  const { session, memory } = await sessionForThread(event);
+  await setStatus(session, event, 'Working on it…');
+
+  const prompt = [...memory.history.map((m) => `${m.role}: ${m.content}`), `user: ${event.payload?.text}`].join('\n');
+  const reply = await runPi(toolsForSession(session, event), prompt);
+
+  await session.execute('SLACKBOT_SEND_MESSAGE', {
+    channel: event.payload?.channel,
+    thread_ts: event.payload?.thread_ts,
+    text: reply,
+  });
+  memory.history.push({ role: 'user', content: event.payload?.text ?? '' }, { role: 'assistant', content: reply });
+}
+
+Bun.serve({
+  port: 3000,
+  async fetch(req) {
+    const url = new URL(req.url);
+    if (req.method === 'POST' && url.pathname === '/webhooks/composio') {
+      const { payload } = await composio.triggers.verifyWebhook({
+        payload: await req.text(),
+        secret: process.env.COMPOSIO_WEBHOOK_SECRET,
+        id: req.headers.get('webhook-id'),
+        timestamp: req.headers.get('webhook-timestamp'),
+        signature: req.headers.get('webhook-signature'),
+      });
+      void handleSlackMessage(payload);
+      return Response.json({ ok: true });
+    }
+    return new Response('Not found', { status: 404 });
+  },
+});
+```
+
 # The whole project
 
 The two files above are the spine. The real project rounds them out with grouped auth-link DMs, per-user routing, message chunking, reaction acks, and durable storage. Here's a slice of the actual source, with the Composio touch-points highlighted. Browse the tree, read the files:
+
+> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
 
 The complete project lives on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
 
@@ -452,25 +1127,225 @@ bun run connect
 
 The whole thing acts as one stable user, against the connections they own. Start there.
 
+**`src/runner.ts` — step 1: Create the Composio client**
+
+```typescript
+import { Composio } from '@composio/core';
+import { experimental_createLocalWorkbenchSession } from '@composio/experimental/workbench';
+import { createE2bSandbox } from './sandbox/e2b';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const userId = process.env.COMPOSIO_USER_ID ?? 'local-pr-reviewer-user';
+```
+
 ## Check the GitHub connection
 
 A local sandbox still leans on Composio for auth and [tool discovery](/docs/how-composio-works#meta-tools); only code execution moves to your side. So before booting any infrastructure, confirm this user actually has [GitHub connected](/docs/authentication), and hand them a connect link if not.
+
+**`src/runner.ts` — step 2: Check the GitHub connection**
+
+```typescript
+import { Composio } from '@composio/core';
+import { experimental_createLocalWorkbenchSession } from '@composio/experimental/workbench';
+import { createE2bSandbox } from './sandbox/e2b';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const userId = process.env.COMPOSIO_USER_ID ?? 'local-pr-reviewer-user';
+
+// Composio runs tools as a user. Before anything else, make sure this user has
+// an active GitHub connection. There's no point booting a sandbox without one.
+async function requireGithubConnection() {
+  const list = await composio.connectedAccounts.list({
+    userIds: [userId],
+    toolkitSlugs: ['github'],
+    statuses: ['ACTIVE'],
+  });
+  if (list.items?.[0]) return;
+
+  const request = await composio.toolkits.authorize(userId, 'github');
+  throw new Error(`Connect GitHub first: ${request.redirectUrl}`);
+}
+```
 
 ## Create the local sandbox session
 
 The core of the integration. You create a [Composio session](/docs/configuring-sessions#creating-a-session) yourself with code execution off (`workbench.enable: false`, so Composio will not run code for you), then hand that session to `experimental_createLocalWorkbenchSession`. The helper validates the session is local (it errors if the session has the remote workbench enabled, because the managed workbench and a local sandbox can't both run for one session) and returns the pieces you run yourself: a `helperSource` (a Python helper with `run_composio_tool`, `invoke_llm`, and `web_search`) and the `env` that helper needs to reach Composio from inside your box.
 
+**`src/runner.ts` — step 3: Create the local sandbox session**
+
+```typescript
+import { Composio } from '@composio/core';
+import { experimental_createLocalWorkbenchSession } from '@composio/experimental/workbench';
+import { createE2bSandbox } from './sandbox/e2b';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const userId = process.env.COMPOSIO_USER_ID ?? 'local-pr-reviewer-user';
+
+// Composio runs tools as a user. Before anything else, make sure this user has
+// an active GitHub connection. There's no point booting a sandbox without one.
+async function requireGithubConnection() {
+  const list = await composio.connectedAccounts.list({
+    userIds: [userId],
+    toolkitSlugs: ['github'],
+    statuses: ['ACTIVE'],
+  });
+  if (list.items?.[0]) return;
+
+  const request = await composio.toolkits.authorize(userId, 'github');
+  throw new Error(`Connect GitHub first: ${request.redirectUrl}`);
+}
+
+// The local sandbox session. Create a normal Composio session yourself with
+// `workbench.enable: false` (Composio won't run code for you), then hand that
+// session to the helper, which validates it's local and gives you the pieces to
+// run code yourself, wherever you choose.
+async function createWorkbench() {
+  const session = await composio.create(userId, {
+    toolkits: ['github'],
+    workbench: { enable: false },
+  });
+  return experimental_createLocalWorkbenchSession(composio, session);
+  // returns { helperSource, env }:
+  //   helperSource: a Python helper exposing run_composio_tool / invoke_llm / web_search
+  //   env:          the variables that helper needs to reach Composio from inside your box
+}
+```
+
 ## Start your sandbox, inject the helper
 
 Boot a box you control, write `helperSource` into it as `composio_helper.py`, and pass `env` to the process. That helper is the *only* Composio-specific thing your sandbox has to carry. E2B is the sample runner; swap it for anything that honors the same contract.
+
+**`src/runner.ts` — step 4: Start your sandbox, inject the helper**
+
+```typescript
+import { Composio } from '@composio/core';
+import { experimental_createLocalWorkbenchSession } from '@composio/experimental/workbench';
+import { createE2bSandbox } from './sandbox/e2b';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const userId = process.env.COMPOSIO_USER_ID ?? 'local-pr-reviewer-user';
+
+// Composio runs tools as a user. Before anything else, make sure this user has
+// an active GitHub connection. There's no point booting a sandbox without one.
+async function requireGithubConnection() {
+  const list = await composio.connectedAccounts.list({
+    userIds: [userId],
+    toolkitSlugs: ['github'],
+    statuses: ['ACTIVE'],
+  });
+  if (list.items?.[0]) return;
+
+  const request = await composio.toolkits.authorize(userId, 'github');
+  throw new Error(`Connect GitHub first: ${request.redirectUrl}`);
+}
+
+// The local sandbox session. Create a normal Composio session yourself with
+// `workbench.enable: false` (Composio won't run code for you), then hand that
+// session to the helper, which validates it's local and gives you the pieces to
+// run code yourself, wherever you choose.
+async function createWorkbench() {
+  const session = await composio.create(userId, {
+    toolkits: ['github'],
+    workbench: { enable: false },
+  });
+  return experimental_createLocalWorkbenchSession(composio, session);
+  // returns { helperSource, env }:
+  //   helperSource: a Python helper exposing run_composio_tool / invoke_llm / web_search
+  //   env:          the variables that helper needs to reach Composio from inside your box
+}
+
+export async function runReview(repo: string, pr: number) {
+  await requireGithubConnection();
+  const workbench = await createWorkbench();
+
+  // Start a sandbox you own, inject the helper, and pass the env. E2B is just
+  // the sample runner; swap createE2bSandbox for any box that honors the same
+  // contract: write a file, set env, run a command, stream output, tear down.
+  const sandbox = await createE2bSandbox({
+    apiKey: process.env.E2B_API_KEY,
+    helperSource: workbench.helperSource, // written as composio_helper.py
+    env: workbench.env,
+  });
+}
+```
 
 ## Run the reviewer and stream output
 
 Run the agent inside the sandbox and stream its output back. Whenever the agent calls `run_composio_tool`, the helper routes that GitHub action back through Composio under this user's connection. Tool *execution* happens in your box; discovery and auth stay managed.
 
+**`src/runner.ts` — step 5: Run the reviewer and stream output**
+
+```typescript
+import { Composio } from '@composio/core';
+import { experimental_createLocalWorkbenchSession } from '@composio/experimental/workbench';
+import { createE2bSandbox } from './sandbox/e2b';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const userId = process.env.COMPOSIO_USER_ID ?? 'local-pr-reviewer-user';
+
+// Composio runs tools as a user. Before anything else, make sure this user has
+// an active GitHub connection. There's no point booting a sandbox without one.
+async function requireGithubConnection() {
+  const list = await composio.connectedAccounts.list({
+    userIds: [userId],
+    toolkitSlugs: ['github'],
+    statuses: ['ACTIVE'],
+  });
+  if (list.items?.[0]) return;
+
+  const request = await composio.toolkits.authorize(userId, 'github');
+  throw new Error(`Connect GitHub first: ${request.redirectUrl}`);
+}
+
+// The local sandbox session. Create a normal Composio session yourself with
+// `workbench.enable: false` (Composio won't run code for you), then hand that
+// session to the helper, which validates it's local and gives you the pieces to
+// run code yourself, wherever you choose.
+async function createWorkbench() {
+  const session = await composio.create(userId, {
+    toolkits: ['github'],
+    workbench: { enable: false },
+  });
+  return experimental_createLocalWorkbenchSession(composio, session);
+  // returns { helperSource, env }:
+  //   helperSource: a Python helper exposing run_composio_tool / invoke_llm / web_search
+  //   env:          the variables that helper needs to reach Composio from inside your box
+}
+
+export async function runReview(repo: string, pr: number) {
+  await requireGithubConnection();
+  const workbench = await createWorkbench();
+
+  // Start a sandbox you own, inject the helper, and pass the env. E2B is just
+  // the sample runner; swap createE2bSandbox for any box that honors the same
+  // contract: write a file, set env, run a command, stream output, tear down.
+  const sandbox = await createE2bSandbox({
+    apiKey: process.env.E2B_API_KEY,
+    helperSource: workbench.helperSource, // written as composio_helper.py
+    env: workbench.env,
+  });
+
+  // Run the reviewer agent inside the sandbox and stream its output back. The
+  // agent calls run_composio_tool from composio_helper.py, which routes GitHub
+  // actions back through Composio under this user's connection.
+  const task = `Review PR #${pr} on ${repo}. Run the repo's real checks in this sandbox.`;
+  try {
+    await sandbox.run('npx --yes tsx agent.ts', {
+      env: { ...workbench.env, TASK: task, OPENAI_API_KEY: process.env.OPENAI_API_KEY },
+      onStdout: (chunk) => process.stdout.write(chunk),
+      onStderr: (chunk) => process.stderr.write(chunk),
+    });
+  } finally {
+    await sandbox.teardown();
+  }
+}
+```
+
 # The whole project
 
 The file above is the spine. The real project rounds it out with a CLI, a smoke/dry-run path, the E2B runner behind the sandbox contract, the reviewer agent and its review policy, and the `composio_helper.py` the helper source compiles to. Here's a slice of the actual source, with the Composio touch-points highlighted. Browse the tree, read the files:
+
+> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
 
 The complete project lives on GitHub: [local-pr-reviewer](https://github.com/ComposioHQ/local-pr-reviewer).
 
@@ -566,6 +1441,38 @@ Rule of thumb: posting *as the bot* uses `slackbot`; doing something *as a perso
 
 **Run the setup script to connect the bot.** For this bot, we first need to connect the bot itself to Composio, which only needs to be done once. The script creates an OAuth link for you to connect your *Slack bot* to Composio, which lets you use Composio to send messages on behalf of your bot.
 
+**`scripts/setup.ts` — complete file**
+
+```typescript
+import { Composio } from '@composio/core';
+
+const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
+const AUTH_CONFIG = process.env.COMPOSIO_SLACKBOT_AUTH_CONFIG_ID!;
+
+// Connect the bot's own Slack app once, so it can post and DM as the bot.
+async function main() {
+  const session = await composio.create('default', {
+    authConfigs: { slackbot: AUTH_CONFIG },
+  });
+
+  const toolkits = await session.toolkits({ toolkits: ['slackbot'] });
+  const active = toolkits.items.find((t) => t.slug === 'slackbot')?.connection?.isActive;
+  if (active) {
+    console.log('Bot already connected.');
+    return;
+  }
+
+  // Not connected: print the Connect Link, then wait for the user to finish.
+  const connectionRequest = await session.authorize('slackbot');
+  console.log('Authorize the bot:', connectionRequest.redirectUrl);
+
+  const account = await connectionRequest.waitForConnection();
+  console.log('Bot connected:', account.id);
+}
+
+main();
+```
+
 The first run prints a link and waits:
 
 ```text
@@ -603,7 +1510,76 @@ The script is idempotent and repeatable. Forgot a scope, or hit an issue? No str
 
 To send and update messages in our deterministic bot workflow, we use Composio's `SLACKBOT_SEND_MESSAGE` and `SLACKBOT_UPDATES_A_MESSAGE` tools via [manual tool execution](/docs/tools-direct/executing-tools). `SLACKBOT_SEND_MESSAGE` takes Block Kit `blocks`, so a message with interactive buttons can go through a tool too.
 
+**`api/_utils/slack.ts` — step 1: Send and update with named tools**
+
+```typescript
+import { composio } from './composio';
+
+const BOT_USER = 'default';
+
+// Sending a message is a named tool, even when it carries interactive buttons:
+// SLACKBOT_SEND_MESSAGE takes markdown_text for prose, or Block Kit `blocks`.
+export async function postMessage(channel: string, text: string, blocks?: unknown[]) {
+  const res = await composio.tools.execute('SLACKBOT_SEND_MESSAGE', {
+    userId: BOT_USER,
+    arguments: blocks ? { channel, blocks } : { channel, markdown_text: text },
+  });
+  return res.data as { ts?: string };
+}
+
+// Updating the draft after an edit is a tool too: SLACKBOT_UPDATES_A_MESSAGE.
+export async function updateMessage(channel: string, ts: string, blocks: unknown[]) {
+  await composio.tools.execute('SLACKBOT_UPDATES_A_MESSAGE', {
+    userId: BOT_USER,
+    arguments: { channel, ts, blocks },
+  });
+}
+```
+
 When a Slack action has no tool, like opening a modal (`views.open`), it drops to [`proxyExecute`](/docs/extending-sessions/proxy-execute): the escape hatch for anything the named tools don't cover, hitting any Slack Web API endpoint as a connected account with no token in your code.
+
+**`api/_utils/slack.ts` — step 2: The proxy for the one thing without a tool**
+
+```typescript
+import { composio } from './composio';
+
+const BOT_USER = 'default';
+
+// Sending a message is a named tool, even when it carries interactive buttons:
+// SLACKBOT_SEND_MESSAGE takes markdown_text for prose, or Block Kit `blocks`.
+export async function postMessage(channel: string, text: string, blocks?: unknown[]) {
+  const res = await composio.tools.execute('SLACKBOT_SEND_MESSAGE', {
+    userId: BOT_USER,
+    arguments: blocks ? { channel, blocks } : { channel, markdown_text: text },
+  });
+  return res.data as { ts?: string };
+}
+
+// Updating the draft after an edit is a tool too: SLACKBOT_UPDATES_A_MESSAGE.
+export async function updateMessage(channel: string, ts: string, blocks: unknown[]) {
+  await composio.tools.execute('SLACKBOT_UPDATES_A_MESSAGE', {
+    userId: BOT_USER,
+    arguments: { channel, ts, blocks },
+  });
+}
+
+// Opening a modal (views.open) has no Composio tool, so it drops to the proxy.
+// proxyExecute hits the raw endpoint as the bot's connected account, the escape
+// hatch for anything the named tools don't cover.
+export async function openModal(triggerId: string, view: unknown) {
+  const { items } = await composio.connectedAccounts.list({
+    userIds: [BOT_USER],
+    toolkitSlugs: ['slackbot'],
+    statuses: ['ACTIVE'],
+  });
+  await composio.tools.proxyExecute({
+    endpoint: '/views.open',
+    method: 'POST',
+    body: { trigger_id: triggerId, view },
+    connectedAccountId: items[0]?.id,
+  });
+}
+```
 
 # Make the buttons work
 
@@ -626,6 +1602,41 @@ const draftButton = {
 
 When it's clicked, Slack POSTs to your `/api/interactivity` handler. Verify the request, ack within Slack's 3-second window, then route on the `action_id`:
 
+**`api/interactivity.ts` — complete file**
+
+```typescript
+import { verifySlackSignature, readRawBody, updateMessage, postAsMember } from './_utils/slack';
+import { generateDraft } from './_utils/agent';
+import { draftMessage, connectMenu } from './_utils/blocks';
+
+// Slack POSTs here every time someone clicks a button. Verify it really came
+// from Slack, then ack within 3 seconds (Slack retries if you're slow).
+export default async function handler(req: Request, res: Response) {
+  const body = await readRawBody(req);
+  if (!verifySlackSignature(body, req.headers)) return res.status(401).end();
+
+  const payload = JSON.parse(new URLSearchParams(body).get('payload') ?? '{}');
+  res.status(200).end();        // ack immediately
+  await handleClick(payload);   // then do the slow work
+}
+
+// Each button carried its context in `value`, so the handler knows exactly what
+// to do. No model decides anything here: the flow is fixed.
+async function handleClick(payload: any) {
+  const action = payload.actions?.[0];
+  const ctx = JSON.parse(action?.value ?? '{}');
+
+  if (action?.action_id === 'draft') {
+    const draft = await generateDraft(ctx.memberEmail);   // launch the subagent
+    await updateMessage(ctx.dmChannel, ctx.dmTs, draftMessage(draft, ctx));
+  } else if (action?.action_id === 'connect') {
+    await updateMessage(ctx.dmChannel, ctx.dmTs, connectMenu(ctx));
+  } else if (action?.action_id === 'confirm') {
+    await postAsMember(ctx.memberEmail, ctx.channel, ctx.draft, ctx.threadTs);
+  }
+}
+```
+
 **Connect more tools** generates a per-member OAuth link for each toolkit the member hasn't connected, so they can add a source without leaving Slack:
 
 ![The connect-more-tools menu in Slack](/images/standup-slackbot/slack-connect.png)
@@ -641,9 +1652,83 @@ Now this is the cool and magical part, and the easy part: all the background age
 
 A [tool-router session](/docs/configuring-sessions) gives the agent its tools. Pass the member's email and your full list of toolkits, hand the tools to the model, and let it investigate and write. You don't have to check which ones the member set up: the session only exposes tools for the accounts they've actually connected, and ignores the rest.
 
+**`api/_utils/agent.ts` — step 1: A tool-router session writes the draft**
+
+```typescript
+import { Composio } from '@composio/core';
+import { VercelProvider } from '@composio/vercel';
+import { generateText, stepCountIs } from 'ai';
+
+const composio = new Composio({
+  apiKey: process.env.COMPOSIO_API_KEY,
+  provider: new VercelProvider(),
+});
+
+// The toolkits the bot can draft from. A member only has some of these connected,
+// and that's fine: the session just uses whatever they've actually authorized.
+const TOOLKITS = ['github', 'linear', 'notion', 'googlecalendar', 'slack'];
+
+// Spin up a tool-router session for one member and let the agent research and
+// write their standup. session.tools() returns Composio's research meta-tools
+// (search / execute / workbench), scoped to those toolkits.
+export async function generateDraft(memberEmail: string) {
+  const session = await composio.create(memberEmail, { toolkits: TOOLKITS });
+  const tools = await session.tools();
+
+  const { text } = await generateText({
+    model: 'anthropic/claude-sonnet-4-5',
+    system: "Write a concise daily standup from the member's recent activity.",
+    prompt: 'Research and write the standup update.',
+    tools,
+    stopWhen: stepCountIs(40),
+  });
+  return text.trim();
+}
+```
+
 ## Use what's connected, nothing more
 
 The router can also *manage* connections, asking the user to authorize any toolkits they haven't connected yet. During a draft you don't want that: if the agent reaches for a tool the member hasn't connected, it should skip it, not prompt them to log in. `manageConnections: false` removes those meta-tools, so the agent drafts from exactly what's already connected.
+
+**`api/_utils/agent.ts` — step 2: Keep the agent from connecting mid-draft**
+
+```typescript
+import { Composio } from '@composio/core';
+import { VercelProvider } from '@composio/vercel';
+import { generateText, stepCountIs } from 'ai';
+
+const composio = new Composio({
+  apiKey: process.env.COMPOSIO_API_KEY,
+  provider: new VercelProvider(),
+});
+
+// The toolkits the bot can draft from. A member only has some of these connected,
+// and that's fine: the session just uses whatever they've actually authorized.
+const TOOLKITS = ['github', 'linear', 'notion', 'googlecalendar', 'slack'];
+
+// Spin up a tool-router session for one member and let the agent research and
+// write their standup. session.tools() returns Composio's research meta-tools
+// (search / execute / workbench), scoped to those toolkits.
+export async function generateDraft(memberEmail: string) {
+  // manageConnections:false strips the connection meta-tools. The agent drafts
+  // from whatever the member already connected and never starts an OAuth flow
+  // mid-draft: if a tool needs auth, it's simply not in the session.
+  const session = await composio.create(memberEmail, {
+    toolkits: TOOLKITS,
+    manageConnections: false,
+  });
+  const tools = await session.tools();
+
+  const { text } = await generateText({
+    model: 'anthropic/claude-sonnet-4-5',
+    system: "Write a concise daily standup from the member's recent activity.",
+    prompt: 'Research and write the standup update.',
+    tools,
+    stopWhen: stepCountIs(40),
+  });
+  return text.trim();
+}
+```
 
 The bot posts the result back as a draft the member can confirm or edit:
 
@@ -651,6 +1736,8 @@ The bot posts the result back as a draft the member can confirm or edit:
 *The draft the agent writes, delivered to a teammate in Slack*
 
 # The whole project
+
+> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
 
 # Run it
 

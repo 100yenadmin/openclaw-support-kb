@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "b3ed133a99cb077e8832eab081e15d9cf4b86e5c3a2c079ed97c1303a2fe8974"
+source_hash: "555cb7f741d7739b31c0dc0ea1bf23ede85003ce07b03a580fa33278b2ba220b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -87,6 +87,14 @@ pnpm test:storybook-visual:update
 Accepted visual changes should update the manifest metadata and publish a new
 immutable archive with `pnpm storybook-visual:baseline pack` and
 `pnpm storybook-visual:baseline upload`; do not commit generated PNG snapshots.
+
+Known limitation: Storybook visual baselines are Linux/Ubuntu-only. The manifest
+pins the capture environment to `ubuntu-24.04` and the Playwright suite uses
+pixel-exact comparison, so local runs on macOS, Windows, or other non-matching
+platforms can report false-positive diffs from font rasterization and subpixel
+rendering. Use the `Storybook Visual` GitHub Actions workflow on `ubuntu-latest`
+as the source of truth, or run locally in a matching Linux environment before
+accepting or updating baselines.
 
 PR visual checks are opt-in while the suite stabilizes. Add the
 `storybook-visual` label to a PR, or run the `Storybook Visual` GitHub Actions

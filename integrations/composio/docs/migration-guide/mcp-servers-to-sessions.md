@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from MCP servers to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md"
-source_hash: "85520e878e27d4ce75635e15d098e034e2d815a68e37fef7ee07c17bddadbe22"
+source_hash: "27cf7aa30eea62d9f0233600f3a8c589e4413a3da26c016f547656551cb0355a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/mcp-servers-to-sessions.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Migrating from MCP servers to Sessions (/docs/migration-guide/mcp-servers-to-sessions)
 Source: https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md
 
+
+> _Written June 2026._
 
 This guide is for developers using Composio's **MCP servers** (`composio.mcp.create` /
 `composio.mcp.generate`, the "Single Toolkit MCP" flow) who want to migrate to **sessions**.

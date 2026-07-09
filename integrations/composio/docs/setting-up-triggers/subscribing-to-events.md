@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Receiving events"
 source: "https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md"
-source_hash: "edff1f8c3f09132f4d9a4f6e0e29fd25fb161e4db7b17a5518f13b12a92d662f"
+source_hash: "d84735602a8ec3ceca15f60569ba3adedd9c83a1db590028feee5579af85ee16"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/subscribing-to-events.md"
@@ -26,6 +26,8 @@ While developing, you want trigger events on your machine. The best option forwa
 ## Quick look with `subscribe()`
 
 `subscribe()` streams events straight to your process over a WebSocket, with no webhook URL, no tunnel, and no signing. It's the fastest way to eyeball what a trigger sends, but it bypasses your real webhook handler. Use it only for basic prototyping; for anything you intend to ship, forward events to your handler with one of the options below.
+
+> Under the hood `subscribe()` opens the WebSocket via [Pusher](https://pusher.com/). This is an implementation detail, but worth knowing if your runtime restricts WebSocket clients — prefer the webhook/forwarding options below for anything you ship.
 
 **Python:**
 

@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "f21fafd6ed7ddfe1a11d43c9bd152ae9f459e42a382d72824a238c5a08598c02"
+source_hash: "1855ee3442212e454dc33a1b55de1ff6c81b403cb6d078cc1e189248346e24d4"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -153,8 +153,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
+- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
 - https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md

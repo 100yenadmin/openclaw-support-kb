@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkit versioning migration"
 source: "https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md"
-source_hash: "22e543ed0fce3d1a3fa75226db0497f52bd6ad7b3dbeea2d49faf9c5fa198736"
+source_hash: "cf45feed66ca68b877c2ca7fabd5cd3bd076617e0a3b07f40542d1056b2cb75a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/toolkit-versioning.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Toolkit versioning migration (/docs/migration-guide/toolkit-versioning)
 Source: https://docs.composio.dev/docs/migration-guide/toolkit-versioning.md
 
+
+> _Written October 2025._
 
 Starting with Python SDK v0.9.0 and TypeScript SDK v0.2.0, manual tool execution requires explicit version specification. This is a breaking change from earlier versions where toolkit versioning was optional.
 

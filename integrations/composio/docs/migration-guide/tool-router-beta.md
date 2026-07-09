@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "dd20d5c89216c0369f2d4f96a7dd5ba5848cac491e1fe76b3f9c8b42b86e873c"
+source_hash: "e7642190aaebb22f645f7b0d3462f4fb77243a765881a1f2fcdbef20ddc7441c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Migrating from Experimental Tool Router (/docs/migration-guide/tool-router-beta)
 Source: https://docs.composio.dev/docs/migration-guide/tool-router-beta.md
 
+
+> **Legacy · written January 2026.** This is a point-in-time migration/legacy guide and may describe outdated APIs. For current guidance, see https://docs.composio.dev.
 
 This guide is for users who adopted the **experimental tool router** (`composio.experimental.tool_router`) during its beta period. The tool router has now graduated to a stable, first-class feature called **sessions** — with a simpler API, better auth handling, and full framework support.
 
