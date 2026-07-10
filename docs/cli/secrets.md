@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets"
 source: "https://docs.openclaw.ai/cli/secrets"
-source_hash: "f399bb1ff0e9c439d5ab4c9c0c06daf726ae0ae968477a027a3e188c41d89010"
+source_hash: "88df21c6e4b04d11451533520f03060cf4eff4d26571b1f4fbe0954ce356f90e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/secrets.md"
@@ -161,5 +161,6 @@ If `audit --check` still reports plaintext findings, update the remaining report
 
 - [CLI reference](/cli)
 - [Secrets management](/gateway/secrets)
+- [Vault SecretRefs](/plugins/vault)
 
 ---

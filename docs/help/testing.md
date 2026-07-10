@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing"
 source: "https://docs.openclaw.ai/help/testing"
-source_hash: "a8c8410d7cfc56cc411c53883dd93dc430f990ac921a6a76c584ea8f64413570"
+source_hash: "d122dbadab3e91ea6244b979f9a57af724638668caa93e22879d5d03f969e088"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing.md"
@@ -90,10 +90,13 @@ When debugging real providers/models (requires real creds):
 - Runtime performance reports: dispatch `OpenClaw Performance` with
   `live_openai_candidate=true` for a real `openai/gpt-5.5` agent turn or
   `deep_profile=true` for Kova CPU/heap/trace artifacts. Daily scheduled runs
-  publish mock-provider, deep-profile, and GPT 5.5 lane artifacts to
-  `openclaw/clawgrit-reports` when `CLAWGRIT_REPORTS_TOKEN` is configured. The
-  mock-provider report also includes source-level gateway boot, memory,
-  plugin-pressure, repeated fake-model hello-loop, and CLI startup numbers.
+  publish mock-provider, deep-profile, and GPT 5.5 lane reports to
+  `openclaw/clawgrit-reports` from a separate artifact-consuming publisher job;
+  missing or invalid publisher authentication fails scheduled and
+  `profile=release` runs. Manual non-release dispatches keep the GitHub artifacts
+  and treat report publication as advisory. The mock-provider report also
+  includes source-level gateway boot, memory, plugin-pressure, repeated
+  fake-model hello-loop, and CLI startup numbers.
 - Docker live model sweep: `pnpm test:docker:live-models`
   - Each selected model runs a text turn plus a small file-read-style probe.
     Models whose metadata advertises `image` input also run a tiny image turn.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "3dd2fa33da5a9b5d3b08e4a0304a7f1b398cfc42a0def30f04269546c6206d84"
+source_hash: "64efacdc841b73ea7e0c5a704e5a4639ec145ed785337945cc6db9dc3f01b5bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -17,13 +17,13 @@ Source: https://docs.openclaw.ai/
 
 <p align="center">
     <img
-        src="/assets/openclaw-logo-text-dark.png"
+        src="/assets/openclaw-hero-light.png"
         alt="OpenClaw"
         width="500"
         class="dark:hidden"
     />
     <img
-        src="/assets/openclaw-logo-text.png"
+        src="/assets/openclaw-hero-dark.png"
         alt="OpenClaw"
         width="500"
         class="hidden dark:block"
@@ -48,6 +48,11 @@ Get Started
 Run Onboarding
 
     Guided setup with `openclaw onboard` and pairing flows.
+
+
+Connect a Channel
+
+    Link Discord, Signal, Telegram, WhatsApp, and more to chat from anywhere.
 
 
 Open the Control UI

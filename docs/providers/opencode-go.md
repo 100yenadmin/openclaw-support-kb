@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go"
 source: "https://docs.openclaw.ai/providers/opencode-go"
-source_hash: "a4f94d8e57b6365d32fb2cf29a289d2fbaf45b4aa84d296624f6c212f87e76d9"
+source_hash: "4cbbc4ebdbca75b9f049904fb02a459604802d4bb1ae10eb55ad65570a3b69e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode-go.md"
@@ -106,9 +106,7 @@ Bundled rows:
 | `opencode-go/kimi-k2.5`         | Kimi K2.5         | 262,144   | 65,536     | Yes         |
 | `opencode-go/kimi-k2.6`         | Kimi K2.6         | 262,144   | 65,536     | Yes         |
 | `opencode-go/kimi-k2.7-code`    | Kimi K2.7 Code    | 262,144   | 262,144    | Yes         |
-| `opencode-go/mimo-v2-omni`      | MiMo V2 Omni      | 262,144   | 32,000     | Yes         |
 | `opencode-go/mimo-v2.5`         | MiMo V2.5         | 1M        | 128,000    | Yes         |
-| `opencode-go/mimo-v2-pro`       | MiMo V2 Pro       | 1,048,576 | 32,000     | No          |
 | `opencode-go/mimo-v2.5-pro`     | MiMo V2.5 Pro     | 1,048,576 | 128,000    | No          |
 | `opencode-go/minimax-m2.5`      | MiniMax M2.5      | 204,800   | 65,536     | No          |
 | `opencode-go/minimax-m2.7`      | MiniMax M2.7      | 204,800   | 131,072    | No          |

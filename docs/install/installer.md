@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "d1bed1fda66da36a7a9008f585c8782a11cf16abe9cd9a1a6290ccbb08d75f74"
+source_hash: "c5af593a95d88f3e8c80ea1fb1970ea598659484b99b869993cf6160c0836028"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -108,10 +108,10 @@ Install OpenClaw
 
 Post-install tasks
 
-    - Refreshes a loaded gateway service best-effort (`openclaw gateway install --force`, then restart)
-    - Runs `openclaw doctor --non-interactive` on upgrades and git installs (best effort)
-    - Attempts onboarding when appropriate (TTY available, onboarding not disabled, and bootstrap/config checks pass)
-    - Runs a post-install smoke verify when `--verify` is set
+    - Resolves the just-installed `openclaw` binary for follow-up commands
+    - For an unconfigured install, starts onboarding before doctor or gateway probes. With `--no-onboard` or no TTY, it prints the command to finish setup later.
+    - For a configured install, refreshes and restarts a loaded gateway service best-effort and runs doctor. Upgrades update plugins when possible, or print the manual command in a headless prompt-enabled run.
+    - When `--verify` runs, it checks the installed version and checks gateway health only after configuration exists.
 
 
 

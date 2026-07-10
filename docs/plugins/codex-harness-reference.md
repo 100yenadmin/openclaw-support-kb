@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "95c662a6c1bbe0262a66796306678d6b046df231b021291aae2cb4f96a8088fc"
+source_hash: "c504d36c9bbca1ff0711695fc852bf7377541eb16ff6237f152ff975e365c2a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -56,7 +56,7 @@ Top-level fields:
 ## App-server transport
 
 By default OpenClaw starts the managed Codex binary shipped with the bundled
-plugin (currently `@openai/codex` `0.142.5`):
+plugin (currently `@openai/codex` `0.144.1`):
 
 ```bash
 codex app-server --listen stdio://
@@ -111,7 +111,7 @@ For an already-running app-server, use WebSocket transport:
 | `defaultWorkspaceDir`                         | current process directory                              | Workspace used by `/codex bind` when `--cwd` is omitted.                                                                                                                                                                                                                                                                                                                                        |
 | `serviceTier`                                 | unset                                                  | Optional Codex app-server service tier. `"priority"` enables fast-mode routing, `"flex"` requests flex processing, and `null` clears the override. Legacy `"fast"` is accepted as `"priority"`.                                                                                                                                                                                                 |
 | `networkProxy`                                | disabled                                               | Opt into Codex permissions-profile networking for app-server commands. OpenClaw defines the selected `permissions.<profile>.network` config and selects it with `default_permissions` instead of sending `sandbox`.                                                                                                                                                                             |
-| `experimental.sandboxExecServer`              | `false`                                                | Preview opt-in that registers an OpenClaw sandbox-backed Codex environment with Codex app-server 0.132.0 or newer so native Codex execution can run inside the active OpenClaw sandbox.                                                                                                                                                                                                         |
+| `experimental.sandboxExecServer`              | `false`                                                | Preview opt-in that registers an OpenClaw sandbox-backed Codex environment with the supported Codex app-server so native Codex execution can run inside the active OpenClaw sandbox.                                                                                                                                                                                                            |
 
 `appServer.networkProxy` is explicit because it changes the Codex sandbox
 contract. When enabled, OpenClaw also sets `features.network_proxy.enabled` and
@@ -152,7 +152,7 @@ permission profile instead. Codex-managed network enforcement is sandboxed
 networking, so a full-access profile would not protect outbound traffic.
 
 The plugin blocks older or unversioned app-server handshakes: Codex app-server
-must report stable version `0.125.0` or newer.
+must report stable version `0.143.0` or newer.
 
 OpenClaw treats non-loopback WebSocket app-server URLs as remote and requires
 identity-bearing WebSocket auth through `appServer.authToken` or an
@@ -243,7 +243,7 @@ The stable default is fail-closed: active OpenClaw sandboxing disables native
 Codex execution surfaces that would otherwise run from the Codex app-server
 host. Use `appServer.experimental.sandboxExecServer: true` only when you want
 to try Codex's remote environment support with OpenClaw's sandbox backend.
-This preview path requires Codex app-server 0.132.0 or newer.
+This preview path works with every supported Codex app-server version.
 
 ```json5
 {
@@ -385,6 +385,15 @@ toward native `spawn_agent` for Codex-native subagent work, while
 Message-tool-only source replies also stay direct, since that is a
 turn-control contract.
 
+Tools marked `catalogMode: "direct-only"`, including the OpenClaw `computer`
+tool, are grouped under `openclaw_direct`. OpenClaw adds that namespace to
+Codex's `code_mode.direct_only_tool_namespaces` list without replacing
+operator-supplied entries. Codex therefore exposes those tools as
+`DirectModelOnly` in normal and code-mode-only threads instead of routing them
+through nested Code Mode `tools.*` calls. This boundary is required for
+image-bearing results: nested Code Mode serialization flattens image output to
+text, which would discard the screenshot needed for the next computer action.
+
 Set `codexDynamicToolsLoading: "direct"` only when connecting to a custom
 Codex app-server that cannot search deferred dynamic tools or when debugging
 the full tool payload.
@@ -469,16 +478,21 @@ If discovery fails or times out, OpenClaw uses a bundled fallback catalog:
 
 Note
 
-The current bundled harness is `@openai/codex` `0.142.5`. A `model/list` probe
-against that bundled app-server returned these public picker rows beyond the
-fallback catalog:
+The current bundled harness is `@openai/codex` `0.144.1`. A `model/list` probe
+against that bundled app-server returned these public picker rows:
 
-| Model id              | Input modalities | Reasoning efforts        |
-| --------------------- | ---------------- | ------------------------ |
-| `gpt-5.5`             | text, image      | low, medium, high, xhigh |
-| `gpt-5.4`             | text, image      | low, medium, high, xhigh |
-| `gpt-5.4-mini`        | text, image      | low, medium, high, xhigh |
-| `gpt-5.3-codex-spark` | text             | low, medium, high, xhigh |
+| Model id        | Input modalities | Reasoning efforts                    |
+| --------------- | ---------------- | ------------------------------------ |
+| `gpt-5.6-sol`   | text, image      | low, medium, high, xhigh, max, ultra |
+| `gpt-5.6-terra` | text, image      | low, medium, high, xhigh, max, ultra |
+| `gpt-5.6-luna`  | text, image      | low, medium, high, xhigh, max        |
+| `gpt-5.5`       | text, image      | low, medium, high, xhigh             |
+| `gpt-5.4`       | text, image      | low, medium, high, xhigh             |
+| `gpt-5.4-mini`  | text, image      | low, medium, high, xhigh             |
+| `gpt-5.2`       | text, image      | low, medium, high, xhigh             |
+
+The app-server catalog can report `ultra`; OpenClaw reasoning controls currently
+expose levels through `max`.
 
 Live picker rows are account-scoped and can change with the account, Codex
 catalog, or bundled version; run `/codex models` for the current list rather

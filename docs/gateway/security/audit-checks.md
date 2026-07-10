@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "560ceaa0c9e34a088f4c475448c03af70825b3bd8fac9ca7b3439adb24a37c97"
+source_hash: "d7ee74ac16f68be9651a483765f19fed1861f15959f8bba77b47f0ce66e1e76a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -53,7 +53,7 @@ exhaustive):
 | `gateway.http.no_auth`                                          | warn/critical      | Gateway HTTP APIs reachable with `auth.mode="none"`                                     | `gateway.auth.mode`, `gateway.http.endpoints.*`, `plugins.entries.admin-http-rpc`                    | no       |
 | `gateway.http.session_key_override_enabled`                     | info               | HTTP API callers can override `sessionKey`                                              | `gateway.http.allowSessionKeyOverride`                                                               | no       |
 | `gateway.tools_invoke_http.dangerous_allow`                     | warn/critical      | Re-enables dangerous tools over HTTP API for owner/admin callers                        | `gateway.tools.allow`                                                                                | no       |
-| `gateway.nodes.allow_commands_dangerous`                        | warn/critical      | Enables high-impact node commands (camera/screen/contacts/calendar/SMS)                 | `gateway.nodes.allowCommands`                                                                        | no       |
+| `gateway.nodes.allow_commands_dangerous`                        | warn/critical      | Enables high-impact node commands (desktop input/camera/screen/contacts/calendar/SMS)   | `gateway.nodes.allowCommands`                                                                        | no       |
 | `gateway.nodes.deny_commands_ineffective`                       | warn               | Pattern-like deny entries do not match shell text or groups                             | `gateway.nodes.denyCommands`                                                                         | no       |
 | `gateway.tailscale_funnel`                                      | critical           | Public internet exposure                                                                | `gateway.tailscale.mode`                                                                             | no       |
 | `gateway.tailscale_serve`                                       | info               | Tailnet exposure is enabled via Serve                                                   | `gateway.tailscale.mode`                                                                             | no       |

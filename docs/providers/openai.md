@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "d1a8be63dc405620072f35fcf9ad8f50f31feb763a3858d02e860b32d6a34547"
+source_hash: "e2d2840d7b91cc62fccc5f6ccb5aaf8eef58a9c1eb6ad53b1e72290b09a640e6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -50,15 +50,16 @@ changing config.
 
 ## Quick choice
 
-| Goal                                              | Use                                                                | Notes                                                                   |
-| ------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| ChatGPT/Codex subscription, native Codex runtime  | `openai/gpt-5.5`                                                   | Default setup. Sign in with Codex auth.                                 |
-| GPT-5.6 limited preview                           | `openai/gpt-5.6-sol`, `-terra`, or `-luna`                         | Needs an OpenAI-approved API org or Codex workspace allowlist entry.    |
-| Direct API-key billing for agent turns            | `openai/gpt-5.5` plus an ordered API-key auth profile              | Set `auth.order.openai` to put the key profile after subscription auth. |
-| Direct API-key billing, explicit OpenClaw runtime | `openai/gpt-5.5` plus provider/model `agentRuntime.id: "openclaw"` | Select a normal `openai` API-key profile.                               |
-| Latest ChatGPT Instant model alias                | `openai/chat-latest`                                               | Direct API-key only; moving alias, not the stable default.              |
-| Image generation or editing                       | `openai/gpt-image-2`                                               | Works with `OPENAI_API_KEY` or Codex OAuth.                             |
-| Transparent-background images                     | `openai/gpt-image-1.5`                                             | Set `outputFormat` to `png` or `webp` and `background=transparent`.     |
+| Goal                                              | Use                                                                | Notes                                                               |
+| ------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| ChatGPT/Codex subscription, native Codex runtime  | `openai/gpt-5.6-sol`                                               | Fresh subscription setup; sign in with Codex auth.                  |
+| Direct API-key billing for agent turns            | `openai/gpt-5.6` plus an ordered API-key auth profile              | Fresh API-key setup; the bare direct-API id resolves to Sol.        |
+| Choose an exact GPT-5.6 tier                      | `openai/gpt-5.6-sol`, `-terra`, or `-luna`                         | Check `models list` for the tiers available to this account.        |
+| Account without GPT-5.6 access                    | `openai/gpt-5.5`                                                   | Explicit recovery choice; OpenClaw does not silently downgrade.     |
+| Direct API-key billing, explicit OpenClaw runtime | `openai/gpt-5.6` plus provider/model `agentRuntime.id: "openclaw"` | Select a normal `openai` API-key profile.                           |
+| Latest ChatGPT Instant model alias                | `openai/chat-latest`                                               | Direct API-key only; moving alias, not the stable default.          |
+| Image generation or editing                       | `openai/gpt-image-2`                                               | Works with `OPENAI_API_KEY` or Codex OAuth.                         |
+| Transparent-background images                     | `openai/gpt-image-1.5`                                             | Set `outputFormat` to `png` or `webp` and `background=transparent`. |
 
 ## Naming map
 
@@ -76,26 +77,41 @@ route. Use `auth.order.openai` for new auth-order config.
 
 Note
 
-GPT-5.5 is available through both direct OpenAI Platform API-key access and
-subscription/OAuth routes. For ChatGPT/Codex subscription with native Codex
-execution, use `openai/gpt-5.5` and leave runtime config unset; that already
-selects the Codex harness. Use an API-key auth profile only when you want
-direct API-key auth for an agent model.
+Fresh OpenAI setup applies a GPT-5.6 primary only when no primary model is
+configured. Adding or refreshing OpenAI auth preserves an existing explicit
+selection, including `openai/gpt-5.5`, unless you explicitly use
+`models auth login --set-default` or `models set`. Use an API-key auth profile
+only when you want API-key auth for an agent model.
 
 ## GPT-5.6 limited preview
 
-OpenClaw recognizes three public GPT-5.6 model ids: `openai/gpt-5.6-sol`,
-`openai/gpt-5.6-terra`, and `openai/gpt-5.6-luna`. All three expose `xhigh` and
-`max` reasoning in the current catalog. OpenAI describes Sol as the flagship
-tier, Terra as the balanced tier, and Luna as the fast, lower-cost tier. See
-the [GPT-5.6 launch announcement](https://openai.com/index/previewing-gpt-5-6-sol/)
-and [preview access guide](https://help.openai.com/en/articles/20001325-a-preview-of-gpt-5-6-sol-terra-and-luna).
+OpenClaw recognizes the exact `openai/gpt-5.6-sol`,
+`openai/gpt-5.6-terra`, and `openai/gpt-5.6-luna` model ids. All three expose
+`xhigh` and `max` reasoning in the current catalog. OpenAI describes Sol as
+the flagship tier, Terra as the balanced tier, and Luna as the fast,
+lower-cost tier. See the
+[GPT-5.6 launch announcement](https://openai.com/index/previewing-gpt-5-6-sol/)
+and [access guide](https://help.openai.com/en/articles/20001325-a-preview-of-gpt-5-6-sol-terra-and-luna).
 
-Access is allowlisted during the preview and can be granted separately for the
-API and Codex; a paid ChatGPT plan alone does not grant access. OpenClaw keeps
-`openai/gpt-5.5` as the default and does not special-case the access error, so
-selecting a GPT-5.6 ref without access surfaces the upstream error directly
-instead of falling back silently.
+With direct OpenAI API-key auth, the bare `openai/gpt-5.6` id is an alias for
+Sol and is the fresh setup default. The native Codex catalog does not apply
+that direct-API alias client-side; depending on workspace access, it can show
+the exact Sol, Terra, and Luna ids. Fresh ChatGPT/Codex OAuth setup therefore
+uses `openai/gpt-5.6-sol`. Check the current account with:
+
+```bash
+openclaw models list --provider openai
+```
+
+API organization and Codex workspace access can differ. If GPT-5.6 is not
+available, select GPT-5.5 explicitly:
+
+```bash
+openclaw models set openai/gpt-5.5
+```
+
+OpenClaw surfaces the upstream access error and does not silently replace a
+GPT-5.6 selection with GPT-5.5.
 
 Note
 
@@ -121,23 +137,21 @@ were not set by explicit runtime config.
 | Text-to-speech            | `messages.tts.provider: "openai"` / `tts`                                                     | Yes                                                             |
 | Batch speech-to-text      | `tools.media.audio` / media understanding                                                     | Yes                                                             |
 | Streaming speech-to-text  | Voice Call `streaming.provider: "openai"`                                                     | Yes                                                             |
-| Realtime voice            | Voice Call `realtime.provider: "openai"` / Control UI Talk `talk.realtime.provider: "openai"` | Yes (OpenAI API key or Codex OAuth)                             |
+| Realtime voice            | Voice Call `realtime.provider: "openai"` / Control UI Talk `talk.realtime.provider: "openai"` | Yes (OpenAI Platform API key)                                   |
 | Embeddings                | memory embedding provider                                                                     | Yes                                                             |
 
 Note
 
 OpenAI Realtime voice goes through the public **OpenAI Platform Realtime
-API**. It accepts either a Platform API key or an `openai` OAuth profile,
-including an automatically discovered external Codex login. API-key sessions
-use the key's Platform billing; OAuth availability and billing follow the
-authenticated account's Realtime entitlement.
+API** and requires a Platform API key. Codex OAuth tokens authenticate the
+ChatGPT Codex backend instead; they are not interchangeable with Platform API
+keys for the public Realtime endpoints.
 
 If API-key auth reports missing billing, top up Platform credits at
 [platform.openai.com/account/billing](https://platform.openai.com/account/billing)
 for the organization backing your realtime credentials when using API-key
 auth. Realtime voice accepts the `openai` API-key auth profile created by
-`openclaw onboard --auth-choice openai-api-key`, an `openai` OAuth profile or
-external Codex login, a Platform `OPENAI_API_KEY` set via
+`openclaw onboard --auth-choice openai-api-key`, a Platform API key set via
 `talk.realtime.providers.openai.apiKey` for Control UI Talk, or
 `plugins.entries.voice-call.config.realtime.providers.openai.apiKey` for Voice
 Call, or the `OPENAI_API_KEY` environment variable.
@@ -209,11 +223,12 @@ Verify the model is available
 
     ### Route summary
 
-    | Model ref              | Runtime config                                       | Route                     | Auth                              |
-    | ----------------------- | ------------------------------------------------------ | --------------------------- | ------------------------------------ |
-    | `openai/gpt-5.5`       | unset, or provider/model `agentRuntime.id: "codex"`   | Codex app-server harness   | Ordered API-key auth profile       |
-    | `openai/gpt-5.4-mini`  | unset, or provider/model `agentRuntime.id: "codex"`   | Codex app-server harness   | Ordered API-key auth profile       |
-    | `openai/gpt-5.5`       | provider/model `agentRuntime.id: "openclaw"`          | OpenClaw embedded runtime  | Selected `openai` API-key profile  |
+    | Model ref             | Runtime config                                      | Route                    | Auth                             |
+    | --------------------- | --------------------------------------------------- | ------------------------ | -------------------------------- |
+    | `openai/gpt-5.6`      | unset, or provider/model `agentRuntime.id: "codex"` | Codex app-server harness | Ordered API-key auth profile     |
+    | `openai/gpt-5.6`      | provider/model `agentRuntime.id: "openclaw"`        | OpenClaw embedded runtime | Selected `openai` API-key profile |
+    | `openai/gpt-5.5`      | either runtime                                      | Selected agent runtime   | Selected OpenAI API-key profile  |
+    | `openai/gpt-5.4-mini` | unset, or provider/model `agentRuntime.id: "codex"` | Codex app-server harness | Ordered API-key auth profile     |
 
 
 Note
@@ -230,9 +245,13 @@ Note
     ```json5
     {
       env: { OPENAI_API_KEY: "example-openai-key-not-real" },
-      agents: { defaults: { model: { primary: "openai/gpt-5.5" } } },
+      agents: { defaults: { model: { primary: "openai/gpt-5.6" } } },
     }
     ```
+
+    The bare direct-API `gpt-5.6` id resolves to the Sol tier. If this API
+    organization does not expose GPT-5.6, set the primary to
+    `openai/gpt-5.5` explicitly.
 
     To try ChatGPT's current Instant model from the OpenAI API, set the model
     to `openai/chat-latest`:
@@ -244,10 +263,11 @@ Note
     }
     ```
 
-    `chat-latest` is a moving alias. OpenAI recommends `gpt-5.5` for production
-    API usage, so keep `openai/gpt-5.5` as the stable default unless you want
-    that alias behavior. The alias only accepts `medium` text verbosity;
-    OpenClaw forces any other requested verbosity to `medium` for this model.
+    `chat-latest` is a moving alias. Fresh OpenAI API-key setup instead uses
+    `openai/gpt-5.6`, whose bare direct-API id resolves to Sol. Existing
+    explicit primaries, including `openai/gpt-5.5`, remain unchanged. The
+    `chat-latest` alias only accepts `medium` text verbosity; OpenClaw forces
+    any other requested verbosity to `medium` for this model.
 
 
 Warning
@@ -294,7 +314,7 @@ Run Codex OAuth
 Use the canonical OpenAI model route
 
         ```bash
-        openclaw config set agents.defaults.model.primary openai/gpt-5.5
+        openclaw config set agents.defaults.model.primary openai/gpt-5.6-sol
         ```
 
         No runtime config is required for the default path. OpenAI agent
@@ -316,21 +336,27 @@ Verify Codex auth is available
 
     ### Route summary
 
-    | Model ref                | Runtime config                                | Route                                                  | Auth                                            |
-    | -------------------------- | ------------------------------------------------ | --------------------------------------------------------- | -------------------------------------------------- |
-    | `openai/gpt-5.5`         | unset, or provider/model `agentRuntime.id: "codex"` | Native Codex app-server harness                        | Codex sign-in, or an ordered `openai` auth profile |
-    | `openai/gpt-5.5`         | provider/model `agentRuntime.id: "openclaw"`  | OpenClaw embedded runtime, internal Codex-auth transport | Selected `openai` OAuth profile                 |
-    | Legacy Codex GPT-5.5 ref | repaired by doctor                            | Rewritten to `openai/gpt-5.5`                            | Migrated OpenAI OAuth profile                   |
-    | `codex-cli/gpt-5.5`      | repaired by doctor                            | Rewritten to `openai/gpt-5.5`                            | Codex app-server auth                           |
+    | Model ref                 | Runtime config                                      | Route                                                  | Auth                                               |
+    | ------------------------- | --------------------------------------------------- | ------------------------------------------------------ | -------------------------------------------------- |
+    | `openai/gpt-5.6-sol`      | unset, or provider/model `agentRuntime.id: "codex"` | Native Codex app-server harness                        | Codex sign-in, or an ordered `openai` auth profile |
+    | `openai/gpt-5.6-terra`    | unset, or provider/model `agentRuntime.id: "codex"` | Native Codex app-server harness                        | Codex sign-in when the catalog exposes Terra       |
+    | `openai/gpt-5.6-luna`     | unset, or provider/model `agentRuntime.id: "codex"` | Native Codex app-server harness                        | Codex sign-in when the catalog exposes Luna        |
+    | `openai/gpt-5.6-sol`      | provider/model `agentRuntime.id: "openclaw"`        | OpenClaw embedded runtime, internal Codex-auth transport | Selected `openai` OAuth profile                    |
+    | `openai/gpt-5.5`          | either runtime                                      | Selected agent runtime                                 | Selected OpenAI auth profile                       |
+    | Legacy Codex GPT-5.5 ref  | repaired by doctor                                  | Rewritten to `openai/gpt-5.5`                          | Migrated OpenAI OAuth profile                      |
+    | `codex-cli/gpt-5.5`       | repaired by doctor                                  | Rewritten to `openai/gpt-5.5`                          | Codex app-server auth                              |
 
 
 Warning
 
-    Prefer `openai/gpt-5.5` for new subscription-backed agent config. Older
+    Fresh subscription-backed setup uses exact `openai/gpt-5.6-sol`; the
+    native Codex catalog may also expose exact Terra or Luna refs. If the
+    account does not expose GPT-5.6, select `openai/gpt-5.5` explicitly. Older
     Codex GPT refs are legacy OpenClaw routes, not the native Codex runtime
-    path; run `openclaw doctor --fix` to migrate them. `gpt-5.3-codex-spark`
-    stays limited to accounts whose Codex subscription catalog advertises it;
-    direct OpenAI API-key and Azure refs for it stay suppressed.
+    path; run `openclaw doctor --fix` to migrate them without upgrading an
+    existing explicit GPT-5.5 selection. `gpt-5.3-codex-spark` stays limited
+    to accounts whose Codex subscription catalog advertises it; direct OpenAI
+    API-key and Azure refs for it stay suppressed.
 
 
 
@@ -347,22 +373,22 @@ Note
       plugins: { entries: { codex: { enabled: true } } },
       agents: {
         defaults: {
-          model: { primary: "openai/gpt-5.5" },
+          model: { primary: "openai/gpt-5.6-sol" },
         },
       },
     }
     ```
 
-    With an API-key backup, keep the model on `openai/gpt-5.5` and put the
-    auth order under `openai`. OpenClaw tries the subscription first, then the
-    API key, while staying on the Codex harness:
+    With an API-key backup, keep the selected model under `openai/*` and put
+    the auth order under `openai`. OpenClaw tries the subscription first, then
+    the API key, while staying on the Codex harness:
 
     ```json5
     {
       plugins: { entries: { codex: { enabled: true } } },
       agents: {
         defaults: {
-          model: { primary: "openai/gpt-5.5" },
+          model: { primary: "openai/gpt-5.6-sol" },
         },
       },
       auth: {
@@ -492,7 +518,9 @@ still account-based. OpenClaw selects auth in this order:
    `auth.order.openai`. Run `openclaw doctor --fix` to migrate older legacy
    Codex auth profile ids and auth order.
 2. The app-server's existing account, such as a local Codex CLI ChatGPT
-   sign-in.
+   sign-in. For the default isolated agent home, OpenClaw bridges that native
+   CLI account into the app-server through its login RPC; it does not share the
+   CLI's config, plugins, or thread store.
 3. For local stdio app-server launches only, and only when the app-server
    reports no account: `CODEX_API_KEY`, then `OPENAI_API_KEY`.
 
@@ -814,14 +842,14 @@ Realtime transcription
     | Prompt           | `...openai.prompt`                                                   | (unset) |
     | Silence duration | `...openai.silenceDurationMs`                                        | `800`   |
     | VAD threshold    | `...openai.vadThreshold`                                             | `0.5`   |
-    | Auth             | `...openai.apiKey`, `OPENAI_API_KEY`, or `openai` OAuth              | API keys connect directly; OAuth mints a Realtime transcription client secret |
+    | Auth             | `...openai.apiKey`, `OPENAI_API_KEY`, or `openai` API-key profile    | Platform API key required |
 
 
 Note
 
     Uses a WebSocket connection to `wss://api.openai.com/v1/realtime` with
-    G.711 u-law (`g711_ulaw` / `audio/pcmu`) audio. When only `openai` OAuth is
-    configured, the Gateway mints an ephemeral Realtime transcription client
+    G.711 u-law (`g711_ulaw` / `audio/pcmu`) audio. For an `openai` API-key
+    profile, the Gateway mints an ephemeral Realtime transcription client
     secret before opening the WebSocket. This streaming provider is for Voice
     Call's realtime transcription path; Discord voice currently records short
     segments and uses the batch `tools.media.audio` transcription path
@@ -838,20 +866,22 @@ Realtime voice
 
     | Setting                               | Config path                                                              | Default             |
     | --------------------------------------- | ---------------------------------------------------------------------------- | ---------------------- |
-    | Model                                  | `plugins.entries.voice-call.config.realtime.providers.openai.model`     | `gpt-realtime-2`    |
+    | Model                                  | `plugins.entries.voice-call.config.realtime.providers.openai.model`     | `gpt-realtime-2.1`  |
     | Voice                                  | `...openai.voice`                                                       | `alloy`             |
     | Temperature (Azure deployment bridge)  | `...openai.temperature`                                                 | `0.8`               |
     | VAD threshold                          | `...openai.vadThreshold`                                                | `0.5`                |
     | Silence duration                       | `...openai.silenceDurationMs`                                           | `500`                |
     | Prefix padding                         | `...openai.prefixPaddingMs`                                             | `300`                |
     | Reasoning effort                       | `...openai.reasoningEffort`                                             | (unset)              |
-    | Auth                                   | `openai` API-key/OAuth profile, external Codex login, `...openai.apiKey`, or `OPENAI_API_KEY` | API-key sources first; Codex OAuth fallback |
+    | Auth                                   | `openai` API-key profile, `...openai.apiKey`, or `OPENAI_API_KEY` | OpenAI Platform API key required |
 
-    Available built-in Realtime voices for `gpt-realtime-2`: `alloy`, `ash`,
+    Available built-in Realtime voices for `gpt-realtime-2.1`: `alloy`, `ash`,
     `ballad`, `coral`, `echo`, `sage`, `shimmer`, `verse`, `marin`, `cedar`.
     OpenAI recommends `marin` and `cedar` for the best Realtime quality. This
     is a separate set from the Text-to-speech voices above; a TTS-only voice
     such as `fable`, `nova`, or `onyx` is not valid for Realtime sessions.
+    Set the model explicitly to `gpt-realtime-2.1-mini` when you prefer the
+    smaller, lower-cost Realtime 2.1 variant.
 
 
 Note
@@ -886,6 +916,7 @@ Note
     `OPENAI_API_KEY=... GEMINI_API_KEY=... node --import tsx scripts/dev/realtime-talk-live-smoke.ts`;
     the OpenAI legs verify both the backend WebSocket bridge and the browser
     WebRTC SDP exchange without logging secrets.
+    Pass `--openai-only` to run those two legs without Google credentials.
 
 
 

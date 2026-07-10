@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "3c2511ad5d36a5f500c66de3898e8c986784b54dd6184a5b4fb22c8d24da02b0"
+source_hash: "0bac1575c0c06f148e521208b0540cdbd6599aeda81bf95fbb29ed0f9158c882"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -140,6 +140,7 @@ Voice-call credentials accept SecretRefs. `plugins.entries.voice-call.config.twi
           twilio: {
             accountSid: "ACxxxxxxxx",
             authToken: "...",
+            // region: "ie1", // optional: us1 | ie1 | au1; defaults to us1
           },
           telnyx: {
             apiKey: "...",
@@ -205,6 +206,11 @@ Top-level keys under `plugins.entries.voice-call.config` not shown above:
 | `responseModel`                 | unset        | Overrides the default model for classic (non-realtime) responses.                      |
 | `responseSystemPrompt`          | generated    | Custom system prompt for classic responses.                                            |
 | `responseTimeoutMs`             | `30000`      | Timeout for classic response generation (ms).                                          |
+
+Twilio defaults to its US1 REST endpoint. To process calls in a supported
+non-US Region, set `twilio.region` to `ie1` or `au1` and use credentials from
+that Region. See
+[Twilio's non-US REST API guide](https://www.twilio.com/docs/global-infrastructure/using-the-twilio-rest-api-in-a-non-us-region).
 
 AccordionGroup
 
@@ -350,7 +356,7 @@ Tabs
 Google Gemini Live
 
     Defaults: API key from `realtime.providers.google.apiKey`, `GEMINI_API_KEY`,
-    or `GOOGLE_API_KEY`; model `gemini-2.5-flash-native-audio-preview-12-2025`;
+    or `GOOGLE_API_KEY`; model `gemini-3.1-flash-live-preview`;
     voice `Kore`. `sessionResumption` and `contextWindowCompression` default on
     for longer, reconnectable calls. Use `silenceDurationMs`,
     `startSensitivity`, and `endSensitivity` to tune faster turn-taking on
@@ -377,7 +383,7 @@ Google Gemini Live
                 providers: {
                   google: {
                     apiKey: "${GEMINI_API_KEY}",
-                    model: "gemini-2.5-flash-native-audio-preview-12-2025",
+                    model: "gemini-3.1-flash-live-preview",
                     speakerVoice: "Kore",
                     silenceDurationMs: 500,
                     startSensitivity: "high",

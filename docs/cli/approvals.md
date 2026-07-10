@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Approvals"
 source: "https://docs.openclaw.ai/cli/approvals"
-source_hash: "4635642e68dba835325bdcf1c640739be527d384702db2d1e343c25f5b915d3b"
+source_hash: "81608427ad6374f997ed2751e8ecfcd89547a5e2cb6e3d59687ee926ead9661e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/approvals.md"
@@ -53,7 +53,7 @@ openclaw approvals get --node <id|name|ip>
 openclaw approvals get --gateway
 ```
 
-`get` shows the effective exec policy for the target: the requested `tools.exec` policy, the host approvals-file policy, and the merged effective result.
+`get` shows the effective exec policy for the target: the requested `tools.exec` policy, the host approvals-file policy, and the merged effective result. Nodes with a host-native policy, such as the Windows companion, show that policy directly instead of applying OpenClaw approvals-file policy math.
 
 Precedence:
 
@@ -75,6 +75,19 @@ openclaw approvals set --gateway --file ./exec-approvals.json
 
 `set` accepts JSON5, not only strict JSON. Use either `--file` or `--stdin`, not both.
 
+Host-native Windows nodes use their own policy shape:
+
+```bash
+openclaw approvals set --node <id|name|ip> --stdin <<'EOF'
+{
+  defaultAction: "deny",
+  rules: [{ pattern: "hostname", action: "allow" }]
+}
+EOF
+```
+
+The CLI reads the node's current hash first and sends it with the update, so concurrent local edits are rejected instead of overwritten. `rules` is required because this operation replaces the node's complete rule list; `defaultAction` is optional. A node that reports its native policy as disabled cannot be configured remotely; enable or configure the policy on that host first. Host-native policies do not support the `allowlist add|remove` helpers.
+
 ## "Never prompt" / YOLO example
 
 Set the host approvals defaults to `full` + `off` for a host that should never stop on exec approvals:
@@ -92,7 +105,7 @@ openclaw approvals set --stdin <<'EOF'
 EOF
 ```
 
-Node variant: same body with `openclaw approvals set --node <id|name|ip> --stdin`.
+For nodes that expose an OpenClaw approvals file, use the same body with `openclaw approvals set --node <id|name|ip> --stdin`. Host-native nodes require their owner-specific shape shown above.
 
 This changes the **host approvals file** only. To keep the requested OpenClaw policy aligned, also set:
 
@@ -136,7 +149,7 @@ No target flag means the local approvals file on disk.
 
 ## Notes
 
-- The node host must advertise `system.execApprovals.get/set` (macOS app or headless node host).
+- The node host must advertise `system.execApprovals.get/set` (macOS app, headless node host, or Windows companion).
 - Approvals files are stored per host in the OpenClaw state dir: `$OPENCLAW_STATE_DIR/exec-approvals.json`, or `~/.openclaw/exec-approvals.json` when the variable is unset.
 
 ## Related

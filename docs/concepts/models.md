@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models CLI"
 source: "https://docs.openclaw.ai/concepts/models"
-source_hash: "1a1ab8f18ec07fa9141569bbba95764e8e6c48ca55ba8b0686d99b29208515ae"
+source_hash: "629bfb625085cfa9143c0e4c3fbcbbd784e122aba7298a64e7cf88a9bddbc16d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/models.md"
@@ -36,7 +36,7 @@ Configuration reference
     Model config keys, defaults, and examples.
 
 
-A model ref (`provider/model`) chooses a provider and model. It does not usually choose the low-level agent runtime. OpenAI is the main exception: `openai/gpt-5.5` runs through the Codex app-server runtime by default on the official OpenAI provider. Subscription Copilot refs (`github-copilot/*`) can be opted into the external GitHub Copilot agent runtime plugin, but that path is always explicit (never selected by `auto`). Runtime overrides belong on provider/model policy, not on the whole agent or session. In Codex runtime mode, `openai/gpt-*` does not imply API-key billing; auth can come from a Codex account or an `openai` OAuth profile. See [Agent runtimes](/concepts/agent-runtimes) and [GitHub Copilot agent runtime](/plugins/copilot).
+A model ref (`provider/model`) chooses a provider and model. It does not usually choose the low-level agent runtime. OpenAI is the main exception: official `openai/gpt-*` agent refs run through the Codex app-server runtime by default. Subscription Copilot refs (`github-copilot/*`) can be opted into the external GitHub Copilot agent runtime plugin, but that path is always explicit (never selected by `auto`). Runtime overrides belong on provider/model policy, not on the whole agent or session. In Codex runtime mode, `openai/gpt-*` does not imply API-key billing; auth can come from a Codex account or an `openai` OAuth profile. See [Agent runtimes](/concepts/agent-runtimes) and [GitHub Copilot agent runtime](/plugins/copilot).
 
 ## Selection order
 
@@ -101,6 +101,13 @@ openclaw onboard
 ```
 
 Sets up model and auth for common providers without hand-editing config, including OpenAI Codex subscription OAuth and Anthropic (API key or Claude CLI reuse).
+
+With no primary model configured, fresh OpenAI API-key setup selects
+`openai/gpt-5.6`; the bare direct-API id resolves to the Sol tier. Fresh
+ChatGPT/Codex OAuth setup selects the exact `openai/gpt-5.6-sol` catalog ref.
+Reauthentication preserves an existing explicit primary model, including
+`openai/gpt-5.5`. If GPT-5.6 is unavailable to the account, select
+`openai/gpt-5.5` explicitly; OpenClaw does not silently downgrade it.
 
 ## "Model is not allowed" (and why replies stop)
 

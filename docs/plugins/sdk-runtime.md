@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "2e6418bfbaf12bc505d8c4f72fe731a490c4d7aeab0d28b6eaa6bae0a90528a9"
+source_hash: "2cac84fb635191758f7b037bad50685041bc45bfbac51112fe95d5c5ce2a01f2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -231,6 +231,29 @@ Warning
 
     Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. Use `plugins.entries.<id>.llm.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
 
+
+
+
+api.runtime.gateway
+
+    Call another Gateway method in process while preserving the current plugin's trusted runtime
+    identity. This is intended for bundled or trusted official plugins that compose plugin-owned
+    Gateway capabilities without opening a loopback WebSocket connection.
+
+    ```typescript
+    if (await api.runtime.gateway.isAvailable()) {
+      const result = await api.runtime.gateway.request<{ callId: string }>(
+        "voicecall.start",
+        { to: "+15550001234", mode: "conversation" },
+        { timeoutMs: 60_000 },
+      );
+    }
+    ```
+
+    Requests use `operator.write` scope and do not grant admin scope. Calls from arbitrary external
+    plugins are rejected. Failed methods throw a `GatewayClientRequestError`, preserving structured
+    `details`, retry metadata, and the Gateway error code for recovery flows. Use `isAvailable()`
+    before choosing this path from tools that can also run in standalone agent processes.
 
 
 

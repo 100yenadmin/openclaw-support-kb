@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "683e7563630dc3ab6a3037b3407a329c440686f8b410526405b95f68bd7a6e8b"
+source_hash: "4d791134855a49d35d97f879e28182cd4ce4f59e91915135f87c7e45186f8c9b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -679,7 +679,7 @@ directive warnings.
 - `speakerVoice` / `speakerVoiceId` (legacy aliases: `voice`, `voiceName`, `voice_name`, `google_voice`, `voiceId`)
 - `model` / `google_model`
 - `stability`, `similarityBoost`, `style`, `speed`, `useSpeakerBoost`
-- `vol` / `volume` (MiniMax volume, 0–10)
+- `vol` / `volume` (MiniMax volume, `(0, 10]`)
 - `pitch` (MiniMax integer pitch, −12 to 12; fractional values are truncated)
 - `emotion` (Volcengine emotion tag)
 - `applyTextNormalization` (`auto|on|off`)
@@ -1027,6 +1027,9 @@ Optional command working directory.
 ParamField
 ">Optional environment overrides for the command.
 
+    Command stdout and generated or converted audio are limited to 50 MiB. Diagnostic stderr is limited to 1 MiB. OpenClaw terminates the command and fails synthesis when either limit is exceeded.
+
+
 
 
 Microsoft (no API key)
@@ -1174,7 +1177,7 @@ ParamField
 Default `https://api.x.ai/v1`. Env: `XAI_BASE_URL`.
 
 ParamField
-Default `eve`. Live voices: `ara`, `eve`, `leo`, `rex`, `sal`, `una`. Legacy alias: `voiceId`.
+Default `eve`. With auth, `openclaw infer tts voices --provider xai` fetches the current built-in catalog; without auth it lists offline fallbacks `ara`, `eve`, `leo`, `rex`, and `sal`. Account custom voice IDs are forwarded even when absent from the built-in list. Legacy alias: `voiceId`.
 
 ParamField
 BCP-47 language code or `auto`. Default `en`.

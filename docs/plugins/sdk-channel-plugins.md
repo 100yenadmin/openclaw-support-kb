@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "10b7ca8e02818b0cc52d852b5e5f51ecbcf33b5c51b022ae66d74094b3857667"
+source_hash: "b21fa86eaa3995130def0e05c484edb4c8b2a23e8c4f4c6415bd0351feffcbc3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -165,6 +165,26 @@ normalizes numeric thread ids the same way core does, so prefer it over ad hoc
 `String(threadId)` comparisons. Plugins with provider-specific target grammar
 should expose `messaging.resolveOutboundSessionRoute(...)` so core gets
 provider-native session and thread identity without parser shims.
+
+### Account-scoped conversation binding support
+
+Set `conversationBindings.supportsCurrentConversationBinding` when the channel
+supports generic current-conversation bindings. `createChatChannelPlugin(...)`
+sets this static capability to `true` by default.
+
+If support differs by configured account, also implement
+`conversationBindings.isCurrentConversationBindingSupported({ accountId })`.
+Core evaluates this synchronous hook only after the static capability is
+enabled. Returning `false` makes generic current-conversation capability,
+bind, lookup, list, touch, and unbind operations unavailable for that account.
+Omitting the hook applies the static capability to every account.
+
+Resolve the answer from already-loaded account config or runtime state. This
+hook gates only generic current-conversation bindings; it does not replace
+configured binding rules or plugin-owned session routing. Contract tests
+should cover at least one supported and one unsupported account through the
+`ChannelPlugin["conversationBindings"]` contract exported by
+`openclaw/plugin-sdk/channel-core`.
 
 ## Approvals and channel capabilities
 

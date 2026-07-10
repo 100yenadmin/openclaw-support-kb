@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Maturity taxonomy"
 source: "https://docs.openclaw.ai/maturity/taxonomy"
-source_hash: "dffc493c580f21f6223acef1ec874ae2594ec4902f1e6b7e6cb3485a816155ac"
+source_hash: "841011e0f9e6642411cba418da84fcff102ec51e81078b6a578f231c474f43ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "maturity/taxonomy.md"
@@ -690,7 +690,7 @@ Session, memory, and context engine - M3 Beta - 9 areas
         <div><span className="maturity-score maturity-score-alpha"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-alpha">Alpha</span><span>57%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "57%" }} /></span></span></div>
         <div><span className="maturity-score maturity-score-beta"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-beta">Beta</span><span>79%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "79%" }} /></span></span></div>
         <div><span className="maturity-score maturity-score-beta"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-beta">Beta</span><span>79%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "79%" }} /></span></span></div>
-        <div className="maturity-category-docs">[Context](/concepts/context), [Context Engine](/concepts/context-engine), [Codex Context Engine Harness](/plan/codex-context-engine-harness)</div>
+        <div className="maturity-category-docs">[Context](/concepts/context), [Context Engine](/concepts/context-engine)</div>
       </div>
       <div className="maturity-category-row">
         <div className="maturity-category-area">

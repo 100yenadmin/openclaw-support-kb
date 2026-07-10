@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
-source_hash: "dc1f701eeeea81449a798ad403c3816e2de67c8335597ed4a36a660967bb864a"
+source_hash: "d99a36e337de8e2723521b3ff2175f43c784dfa9223a5f63c9015e59cad0ba6d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/wiki.md"
@@ -54,11 +54,33 @@ openclaw wiki obsidian command workspace:quick-switcher
 openclaw wiki obsidian daily
 ```
 
+## Agent selection
+
+When `plugins.entries.memory-wiki.config.vault.scope` is `agent`, select the
+vault with the top-level `--agent <id>` option:
+
+```bash
+openclaw wiki --agent support status
+openclaw wiki --agent support search "refund policy"
+openclaw wiki --agent marketing ingest ./campaign-notes.md
+```
+
+In a setup with multiple configured agents, `--agent` is required for CLI
+operations so a command cannot read or write an arbitrary default vault. If
+only one agent is configured, that agent remains the default. Unknown agent ids
+fail before the vault operation starts. The option does not change the selected
+path when `vault.scope` is `global`.
+
+Gateway clients follow the same rule: pass `agentId` on vault-backed `wiki.*`
+requests in an agent-scoped multi-agent setup. A missing or unknown id is an
+error. Agent turns, wiki tools, memory corpus supplements, and compiled prompt
+digests already carry the active runtime agent context.
+
 ## Commands
 
 ### `wiki status`
 
-Show vault mode, health, and Obsidian CLI availability. Use this first to check whether the vault is initialized, bridge mode is healthy, or Obsidian integration is available.
+Show vault mode and scope, resolved agent, health, and Obsidian CLI availability. Use this first to check whether the intended vault is initialized, bridge mode is healthy, or Obsidian integration is available.
 
 When bridge mode is active and configured to read memory artifacts, this command queries the running Gateway so it sees the same active memory plugin context as agent/runtime memory.
 
@@ -205,6 +227,11 @@ Roll back a previously applied ChatGPT import run, removing pages it created and
 
 Obsidian helper commands for vaults running in Obsidian-friendly mode: `status`, `search`, `open`, `command`, `daily`. These require the official `obsidian` CLI on `PATH` when `obsidian.useOfficialCli` is enabled.
 
+Configuration validation rejects `obsidian.useOfficialCli: true` when
+`vault.scope` is `agent` because `obsidian.vaultName` is one global setting,
+not a per-agent mapping. Obsidian-friendly Markdown rendering remains
+available.
+
 ## Practical usage guidance
 
 - Use `wiki search` + `wiki get` when provenance and page identity matter.
@@ -219,6 +246,8 @@ Obsidian helper commands for vaults running in Obsidian-friendly mode: `status`,
 `openclaw wiki` behavior is shaped by:
 
 - `plugins.entries.memory-wiki.config.vaultMode`
+- `plugins.entries.memory-wiki.config.vault.scope`
+- `plugins.entries.memory-wiki.config.vault.path`
 - `plugins.entries.memory-wiki.config.search.backend`
 - `plugins.entries.memory-wiki.config.search.corpus`
 - `plugins.entries.memory-wiki.config.bridge.*`

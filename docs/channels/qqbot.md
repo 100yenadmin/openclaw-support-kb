@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "470bbab0cd987aa5f99a3d65e9152d8992c9c45bc70e6a8ee58bac198293b4eb"
+source_hash: "6848a57ba2f17012e4bdfab10c1d2943f7877f9e67f00c9b70c42bf170b7f130"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -264,6 +264,11 @@ STT and TTS support two-level configuration with priority fallback:
 
 Set `enabled: false` on either to disable. Account-level TTS overrides use the
 same shape as `messages.tts` and deep-merge over channel/global TTS config.
+
+STT requests time out after 60 seconds by default. Plugin-specific STT uses the
+selected `models.providers.<id>.timeoutSeconds` override. Framework audio STT
+uses `tools.media.audio.models[0].timeoutSeconds`, then
+`tools.media.audio.timeoutSeconds`, then the selected provider override.
 
 Inbound QQ voice attachments are exposed to agents as audio media metadata
 while keeping raw voice files out of generic `MediaPaths`. `[[audio_as_voice]]`

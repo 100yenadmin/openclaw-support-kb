@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding overview"
 source: "https://docs.openclaw.ai/start/onboarding-overview"
-source_hash: "762d3c9a0940c9a87ad260bb79143629f67761bc59c4a1f0967639ab28229907"
+source_hash: "62746653f106173ee6e5a7f7d078d685f5b59b65b1c2a14df0217f3e6a9fdc6e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding-overview.md"
@@ -13,15 +13,16 @@ duplicate_index: 1
 # Onboarding overview
 Source: https://docs.openclaw.ai/start/onboarding-overview
 
-OpenClaw has two onboarding paths. Both configure auth, the Gateway, and
-optional chat channels — they just differ in how you interact with the setup.
+OpenClaw has terminal and macOS app onboarding. Both can detect existing AI
+access, verify it with a live completion, and configure a workspace and Gateway.
+The terminal flow also offers the full classic wizard for detailed setup.
 
 ## Which path should I use?
 
 |                | CLI onboarding                         | macOS app onboarding        |
 | -------------- | -------------------------------------- | --------------------------- |
 | **Platforms**  | macOS, Linux, Windows (native or WSL2) | macOS only                  |
-| **Interface**  | Terminal wizard                        | Guided UI + Crestodian chat |
+| **Interface**  | Guided, classic, and Crestodian chat   | Guided UI + Crestodian chat |
 | **Best for**   | Servers, headless, full control        | Desktop Mac, visual setup   |
 | **Automation** | `--non-interactive` for scripts        | Manual only                 |
 | **Command**    | `openclaw onboard`                     | Launch the app              |
@@ -31,15 +32,19 @@ you the most control.
 
 ## What onboarding configures
 
-Regardless of which path you choose, onboarding sets up:
+Guided onboarding sets up:
 
-1. **Model provider and auth** — API key, OAuth, or setup token for your chosen provider
+1. **Model provider and auth** — detected access or a verified API key
 2. **Workspace** — directory for agent files, bootstrap templates, and memory
 3. **Gateway** — port, bind address, auth mode
-4. **Channels** (optional) — built-in and bundled chat channels such as
+4. **Gateway service** — installs, starts, and probes the local Gateway
+
+The classic CLI wizard can additionally configure:
+
+1. **Channels** (optional) — built-in and bundled chat channels such as
    Discord, Feishu, Google Chat, iMessage, Mattermost, Microsoft Teams,
    Telegram, WhatsApp, and more
-5. **Daemon** (optional) — background service so the Gateway starts automatically
+2. **Advanced Gateway controls** — remote mode, network settings, and daemon choices
 
 ## CLI onboarding
 
@@ -49,7 +54,20 @@ Run in any terminal:
 openclaw onboard
 ```
 
-Add `--install-daemon` to also install the background service in one step.
+The guided flow detects existing AI access, live-tests candidates in order,
+falls through on failure, and offers masked manual key entry. It saves the
+model and credential only after a passing completion. From the same flow you
+can open Crestodian chat, switch to `openclaw onboard --classic`, or skip AI
+setup for now.
+
+These CLI interfaces switch both ways: guided onboarding offers Crestodian and
+the classic wizard, while Crestodian can open guided setup, classic setup, or a
+masked channel wizard without making you restart the command manually.
+
+Use `openclaw onboard --classic` for detailed model/auth, channel, skill,
+remote Gateway, or import setup. Adding `--install-daemon` also selects the
+classic flow and installs the background service in one step. Use `openclaw
+onboard --modern` or `openclaw crestodian` for conversational setup and repair.
 
 Full reference: [Onboarding (CLI)](/start/wizard)
 CLI command docs: [`openclaw onboard`](/cli/onboard)
@@ -68,8 +86,8 @@ Full reference: [Onboarding (macOS App)](/start/onboarding)
 
 ## Custom or unlisted providers
 
-If your provider is not listed in onboarding, choose **Custom Provider** and
-enter:
+If your provider is not listed, open the classic wizard, choose **Custom
+Provider**, and enter:
 
 - Endpoint compatibility: OpenAI-compatible (`/chat/completions`), OpenAI Responses-compatible (`/responses`), Anthropic-compatible (`/messages`), or unknown (probes all three and auto-detects)
 - Base URL and API key (API key is optional if the endpoint does not require one)

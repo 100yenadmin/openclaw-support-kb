@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audio and voice notes"
 source: "https://docs.openclaw.ai/nodes/audio"
-source_hash: "697469b98896d5e9d3445e1faae8e225ef37f2a372221938353f8a8b3d271858"
+source_hash: "340517b396a5f0aefa32e228264c229aed20d28ec2a910f6a4e2baa69edc4b22"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/audio.md"
@@ -182,7 +182,7 @@ Lowercase variables take precedence over uppercase; `NO_PROXY`/`no_proxy` entrie
 
 ## Mention detection in groups
 
-When `requireMention: true` is set for a group chat, OpenClaw transcribes audio **before** checking for mentions. This lets voice notes pass the mention gate even when the message has no text body.
+On channels that support audio preflight, OpenClaw transcribes audio **before** checking for mentions when `requireMention: true` is set for a group chat. This lets a captionless voice note pass the mention gate when its transcript contains a configured mention pattern. Channel-specific docs describe transports that require a typed mention instead.
 
 **How it works:**
 
@@ -204,7 +204,8 @@ When `requireMention: true` is set for a group chat, OpenClaw transcribes audio 
 
 - Scope rules use first-match-wins; `chatType` is normalized to `direct`, `group`, or `channel`.
 - Ensure your CLI exits 0 and prints plain text; JSON output needs to be massaged via `jq -r .text`.
-- For `parakeet-mlx`, if you pass `--output-dir`, OpenClaw reads `<output-dir>/<media-basename>.txt` when `--output-format` is `txt` (or omitted); non-`txt` output formats fall back to stdout parsing.
+- Known file-output modes are authoritative: an empty or missing inferred transcript file produces no transcript instead of falling back to CLI progress output.
+- For `parakeet-mlx`, use `--output-format txt` (or `all`) with `--output-dir` and the default `{filename}` output template. The upstream `PARAKEET_OUTPUT_FORMAT` and `PARAKEET_OUTPUT_TEMPLATE` environment variables are also honored. OpenClaw reads `<output-dir>/<media-basename>.txt`; the default `srt` format, other formats, and custom output templates continue to use stdout.
 - Keep timeouts reasonable (`timeoutSeconds`, default 60s) to avoid blocking the reply queue.
 - Preflight transcription only processes the **first** audio attachment for mention detection. Additional audio attachments are processed during the main media-understanding phase.
 

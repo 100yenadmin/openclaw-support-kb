@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "dcd0c6f5cc8510c93f508fe90f78270957f12c12cc2de8e704265ff96c600503"
+source_hash: "b4b8e20c49cea6d91279ce70384b91a17aefe410fd2bf5b081b52aa3af42e1f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/message.md"
@@ -98,7 +98,7 @@ openclaw message send --channel discord \
 - `--media <path-or-url>`: attach image/audio/video/document (local path or
   URL).
 - `--presentation <json>`: shared payload with `text`, `context`, `divider`,
-  `buttons`, `select` blocks, rendered per channel capability. See
+  `chart`, `buttons`, and `select` blocks, rendered per channel capability. See
   [Message Presentation](/plugins/message-presentation).
 - `--delivery <json>`: generic delivery preferences, for example `{"pin":
 true}`. `--pin` is shorthand for pinned delivery when the channel supports
@@ -119,6 +119,14 @@ openclaw message send --channel discord \
 ```bash
 openclaw message send --channel telegram --target @mychat --message "Choose:" \
   --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Yes","value":"cmd:yes"},{"label":"No","value":"cmd:no"}]}]}'
+```
+
+Slack renders supported chart blocks natively; other channels receive the same
+data as readable text:
+
+```bash
+openclaw message send --channel slack --target channel:C123 \
+  --presentation '{"blocks":[{"type":"chart","chartType":"bar","title":"Quarterly revenue","categories":["Q1","Q2"],"series":[{"name":"Revenue","values":[120,145]}],"xLabel":"Quarter"}]}'
 ```
 
 Telegram Mini App buttons use `webApp` (`web_app` still parses for legacy

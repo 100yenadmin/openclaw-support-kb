@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "b9f5c5c7a19afdd2516d762399f7ae9e6cfeb879a47c03b53b2397bdf8a05fed"
+source_hash: "b6a3e8c427deacb73228e38ab5f6774b60fb32c16ceba583e436aa77d1580e8c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/copilot
 
 The external `@openclaw/copilot` plugin runs embedded subscription Copilot
 agent turns through the GitHub Copilot CLI (`@github/copilot-sdk`) instead of
-OpenClaw's built-in PI harness. The Copilot CLI session owns the low-level
+OpenClaw's built-in harness. The Copilot CLI session owns the low-level
 agent loop: native tool execution, native compaction (`infiniteSessions`), and
 CLI-managed thread state under `copilotHome`. OpenClaw still owns chat
 channels, session files, model selection, dynamic tools (bridged), approvals,

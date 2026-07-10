@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Scoped Project API Key"
 source: "https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md"
-source_hash: "d55075f34df75e1a3b8fd9fd73971cd99306ae83587bbd78cc1fc8c65f751b00"
+source_hash: "d80059e1b214c76ef1800067403f6bd2ff5d2a4d356dcf807d161e3e40316234"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio/project-api-key-permissions.md"
@@ -17,11 +17,29 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 
 
+[Video: Scoped Project API Key walkthrough](https://youtube.com/watch?v=ySMu9lljkWg)
+
 A scoped project API key lets you choose which project resources the key can access. Reach for one when a key needs only a subset of your project, such as executing tools, reading logs, or managing connected accounts.
 
 > You pick a key's permissions when you create it, and they can't be changed afterward. To adjust them, create a new key and rotate your application to use it.
 
 > Default project API keys keep full project API key access. Scoped keys use the permission areas and access levels on this page.
+
+# Create a scoped API key
+
+Create a scoped key from the dashboard:
+
+Go to the [Composio Dashboard](https://dashboard.composio.dev).
+
+Select **Platform**.
+
+Select your project.
+
+Go to **Settings**.
+
+Open the **API Keys** tab.
+
+Click **Create API Key**, then choose the permission areas and access levels below.
 
 # Access levels
 

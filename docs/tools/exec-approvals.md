@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "fa309d50b07cb5b41672d49936cb27c8dc4a2d41a018ba5accb3ad82d606aab9"
+source_hash: "5f550ddd28e7e9d3827a0de1774eb5ba34c11b22fa6c26b30c301a11e703ec5c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -93,6 +93,16 @@ $OPENCLAW_STATE_DIR/exec-approvals.json
 The default approval socket follows the same root:
 `$OPENCLAW_STATE_DIR/exec-approvals.sock`, or
 `~/.openclaw/exec-approvals.sock` when the variable is unset.
+
+Releases before 2026.6.6 always kept the file in `~/.openclaw`. If
+`OPENCLAW_STATE_DIR` points somewhere else and an approvals file still exists
+in the default directory, run `openclaw doctor --fix` directly once to import
+it into the state directory (the original is archived with a `.migrated`
+suffix). Interactive doctor can also preview and confirm the import. Automated
+update and Gateway watch repair runs never import across state directories: a
+temporary or staging state directory must not capture the default
+installation's approvals. The same boundary applies to legacy
+`plugin-binding-approvals.json` imports into shared SQLite state.
 
 Example schema:
 
@@ -196,9 +206,13 @@ Examples that strict mode catches: `python -c`, `node -e`/`--eval`/`-p`,
 `ruby -e`, `perl -e`/`-E`, `php -r`, `lua -e`, `osascript -e` (also `awk`,
 `sed`, `make`, `find -exec`, and `xargs` inline forms).
 
-In strict mode these commands still need explicit approval, and
-`allow-always` does not persist new allowlist entries for them
-automatically.
+In strict mode these commands need reviewer or explicit approval. With
+`tools.exec.mode: "auto"`, the reviewer may grant one low-risk execution when
+the command has an enforceable plan; otherwise OpenClaw asks a human.
+`Codex app-server` command approvals that reach the reviewer fallback ask a
+human because their approval requests do not expose an enforceable resolved
+executable.
+`allow-always` does not persist new allowlist entries for inline-eval commands.
 
 ### `tools.exec.commandHighlighting`
 
@@ -438,6 +452,11 @@ The target selector chooses **Gateway** (local approvals) or a **Node**.
 Nodes must advertise `system.execApprovals.get/set` (macOS app or headless
 node host). If a node does not advertise exec approvals yet, edit its
 local approvals file directly.
+
+Some node hosts, including the Windows companion, own a different approval
+policy format. Control UI shows these host-native policies read-only. Use the
+companion app or `openclaw approvals set --node <id|name|ip>` with the native
+policy shape to edit them; see [Approvals CLI](/cli/approvals).
 
 CLI: `openclaw approvals` supports gateway or node editing - see
 [Approvals CLI](/cli/approvals).

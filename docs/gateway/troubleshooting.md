@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "36b5a319a6d5a37296116b178af67dd654b22be4dbe8fb0e3e60fbfa02cf7f86"
+source_hash: "19a9c150988ecc0a0166120e1bed4c090e3821ea6b07616e152151791dfb58a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -898,7 +898,7 @@ Related:
 
 - [Authentication](/gateway/authentication)
 - [Background exec and process tool](/gateway/background-process)
-- [Gateway-owned pairing](/gateway/pairing)
+- [Node pairing](/gateway/pairing)
 
 ## Related
 

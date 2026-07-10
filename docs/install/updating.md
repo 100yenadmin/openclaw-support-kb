@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "c312cba789210b082f0879405f616ac05e3acd261866e058af064680a52e02c0"
+source_hash: "476081dabdae4303a5f9e39c4be75d2d133335237dabb245d21a462c9305e4eb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -14,6 +14,11 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/install/updating
 
 Keep OpenClaw up to date.
+
+For Docker, Podman, and Kubernetes image replacements, see
+[Upgrading container images](/install/docker#upgrading-container-images). The
+gateway runs startup-safe upgrade work before readiness and exits if mounted
+state needs manual repair.
 
 ## Recommended: `openclaw update`
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "d2dff037eb549496841de5bcc057885fce47aa51def390425454092870ac2aa8"
+source_hash: "5e9c7d77fc235077f677e7ebe852ff20acf6039011a8057685d131462da167bb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -342,7 +342,7 @@ must be in the same identity group.
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/dreaming [on\|off\|status\|help]`                     | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming)                                                                                                            |
 | `/pair [qr\|status\|pending\|approve\|cleanup\|notify]` | Manage device pairing. See [Pairing](/channels/pairing)                                                                                                                                        |
-| `/phone status\|arm ...\|disarm`                        | Temporarily arm high-risk phone node commands                                                                                                                                                  |
+| `/phone status\|arm ...\|disarm`                        | Temporarily arm high-risk node commands (camera/screen/computer/writes). See [Computer use](/nodes/computer-use)                                                                               |
 | `/voice status\|list\|set <voiceId>`                    | Manage Talk voice config. Discord native name: `/talkvoice`                                                                                                                                    |
 | `/card ...`                                             | Send LINE rich card presets. See [LINE](/channels/line)                                                                                                                                        |
 | `/codex <action> ...`                                   | Bind, steer, and inspect the Codex app-server harness (status, threads, resume, model, fast, permissions, compact, review, mcp, skills, and more). See [Codex harness](/plugins/codex-harness) |
@@ -441,6 +441,11 @@ Note
 ```
 
 `/mcp` stores config in OpenClaw config, not embedded-agent project settings.
+`/mcp show` redacts credential-bearing fields, recognized credential flag
+values, and known secret-shaped arguments. When run from a group, the
+configuration is sent to the owner privately; if no private owner route is
+available, the command fails closed and asks the owner to retry from a direct
+chat.
 
 ## `/debug`: runtime-only overrides
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel outbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-outbound"
-source_hash: "120813c6c62feeb39c1f3d9829d6e28f1d05bd6c4aa660675a92d25eda9560e7"
+source_hash: "1bf07f78afae0cfa33c33209eb4bf70c665d6b9d6a8d5b120b64d805b921f7b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-outbound.md"
@@ -121,6 +121,28 @@ Runtime send helpers also live on `channel-outbound`:
 Use `payloadOutcomes` when a batch mixes sent, suppressed, and failed
 payloads. Do not infer hook cancellation from an empty legacy
 direct-delivery result.
+
+## Deferred delivery admission
+
+Use `message.durableFinal.admitDeferredDelivery(...)` when a resolved account
+cannot safely accept core-managed outbound or deferred delivery. Core calls
+this hook synchronously before live outbound work, including paths that skip
+queue persistence, and again before replaying a recovered intent. The context
+includes `cfg`, `channel`, `to`, `accountId`, and a `phase` of `live` or
+`recovery`.
+
+Return `{ status: "allowed" }` to continue. Return
+`{ status: "permanent_rejection", reason }` when the delivery must not be
+persisted, sent directly, or replayed. A live rejection fails before queue
+creation, message hooks, or platform work. A recovery rejection marks the
+queued record failed and skips reconciliation and replay. Omitting the hook
+means allowed.
+
+The hook is a synchronous admission decision, not a send path. Read only
+already-loaded config or runtime state; do not perform network, filesystem, or
+other asynchronous I/O. Contract tests should exercise both phases and both
+result variants through `ChannelMessageDurableFinalAdapter` from
+`openclaw/plugin-sdk/channel-outbound`.
 
 ## Compatibility dispatch
 

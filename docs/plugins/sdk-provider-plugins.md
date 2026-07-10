@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "1a767330d6ce2b6f38d8cf9ffed03f6a0d5668a48787fda1a25f0bad6d8e8157"
+source_hash: "f7ad83f3b74e40f264245fb06b186c9c48f33c1eb3a2fae4d9c91ff9629c8053"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -628,8 +628,11 @@ Usage and billing
         },
         ```
 
-        `resolveUsageAuth` has three outcomes. Return `{ token, accountId? }`
-        when the provider has a usage/billing credential. Return
+        `resolveUsageAuth` has three outcomes. Return
+        `{ token, accountId?, subscriptionType?, rateLimitTier? }` when the
+        provider has a usage/billing credential (the optional fields carry
+        non-secret plan metadata from the resolved profile into
+        `fetchUsageSnapshot`). Return
         `{ handled: true }` only when the provider has definitively handled usage
         auth but has no usable usage token, and OpenClaw must skip generic
         API-key/OAuth fallback. Return `null` or `undefined` when the provider did
@@ -871,6 +874,18 @@ Realtime voice
         clients. Implement `handleBargeIn` when a transport can detect that a
         human is interrupting assistant playback and the provider supports
         truncating or clearing the active audio response.
+        `submitToolResult` may return `void` for synchronous submission, or a
+        `Promise<void>` for an asynchronous completion boundary the provider
+        bridge can expose. Gateway relay sessions wait for that promise before
+        confirming a final result or clearing the linked run; reject it when
+        submission fails.
+        Set `supportsToolResultSuppression: false` when the provider cannot
+        honor `options.suppressResponse`. OpenClaw then avoids suppression for
+        internal forced-consult and cancellation results, and rejects direct
+        suppressed-result requests instead of silently starting a response.
+        Consumers of `createRealtimeVoiceBridgeSession` may likewise return a
+        promise from `onToolCall`; synchronous throws and rejections are routed
+        to the session's `onError` callback.
         Set `handlesInputAudioBargeIn` only when provider VAD confirms an
         interruption by calling `onClearAudio("barge-in")`. Providers that omit
         the flag use OpenClaw's local input-audio fallback detection.
@@ -965,6 +980,7 @@ Image and video generation
           id: "acme-ai",
           label: "Acme Video",
           defaultTimeoutMs: 600_000,
+          models: ["acme-video", "acme-image-video"],
           capabilities: {
             generate: { maxVideos: 1, maxDurationSeconds: 10, supportsResolution: true },
             imageToVideo: {
@@ -976,6 +992,21 @@ Image and video generation
             },
             videoToVideo: { enabled: false },
           },
+          catalogByModel: {
+            "acme-image-video": {
+              modes: ["imageToVideo"],
+              capabilities: {
+                imageToVideo: {
+                  enabled: true,
+                  maxVideos: 1,
+                  maxInputImages: 1,
+                  resolutions: ["480P", "720P", "1080P"],
+                  supportsResolution: true,
+                },
+                videoToVideo: { enabled: false },
+              },
+            },
+          },
           generateVideo: async (req) => ({ videos: [] }),
         });
         ```
@@ -983,6 +1014,13 @@ Image and video generation
         `capabilities` is required on both provider types; `edit` and the
         video transform blocks (`imageToVideo`, `videoToVideo`) always need an
         explicit `enabled` flag.
+
+        Use `catalogByModel` when a listed model's static modes or capabilities
+        differ from the provider defaults. This metadata keeps
+        `video_generate action=list` and model catalogs accurate without
+        invoking provider code. Request-time capability lookup and enforcement
+        still belong in `resolveModelCapabilities` and `generateVideo`; reuse
+        the same capability constant for both paths when possible.
 
 
 Web fetch and search

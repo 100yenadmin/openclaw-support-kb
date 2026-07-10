@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "a98924593bd703f366c51e710bbd959e9a5b45d0740dd9b0d9b19470f4f30594"
+source_hash: "5bd7266cf894197d1f7dafaf0847be180757da0971113b0550b1940f1c812ffc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -2148,11 +2148,11 @@ Add a repo check that fails new runtime writes to legacy state paths:
 - `cron/jobs.json`
 - `jobs-state.json`
 - `device-pair-notify.json`
-- `devices/pending.json`
-- `devices/paired.json`
-- `devices/bootstrap.json`
-- `nodes/pending.json`
-- `nodes/paired.json`
+- `devices/pending.json` / `devices/paired.json` / `devices/bootstrap.json`
+  (retired 2026.7: runtime store is `device_pairing_*` /
+  `device_bootstrap_tokens` in the shared state DB; paired records import at
+  gateway startup, transient pending/bootstrap rows are dropped)
+- `nodes/pending.json` / `nodes/paired.json` (retired 2026.7: folded into paired device records at gateway startup)
 - `identity/device.json`
 - `identity/device-auth.json`
 - `push/web-push-subscriptions.json`

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "7303e58f8f344b1c5a48d5471bcaaeadb573c84ada957487f7c1192d06f16774"
+source_hash: "2cf10a191b6df2624377a02b960eb08d99418c2cc5534021efb469ea1931e1af"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -134,6 +134,19 @@ Helpful BotFather toggles
     The same settings are available in [BotFather's web app](https://t.me/BotFather?startapp) if you prefer a UI over chat commands.
 
 
+
+## Dashboard Mini App
+
+Run `/dashboard` in a DM with the bot to open the OpenClaw dashboard inside Telegram.
+
+Requirements:
+
+- `gateway.tailscale.mode: "serve"` or `"funnel"` for the published HTTPS Mini App URL.
+- Your numeric Telegram user ID must be in the selected account's effective `allowFrom` or in `commands.ownerAllowFrom`.
+- Use a DM. In groups, `/dashboard` replies with `open this in a DM with the bot` and sends no button.
+- Docker installs: Serve/Funnel modes require the gateway to bind loopback next to `tailscaled`, which bridge networking with published ports cannot satisfy. Run the gateway container with `network_mode: host` and mount the host `tailscaled` socket (`/var/run/tailscale`) plus the `tailscale` CLI into the container.
+
+The Mini App is a Tailscale-only v1 path and does not support Telegram Web iframe.
 
 ## Access control and activation
 

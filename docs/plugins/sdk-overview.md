@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "1b37a71ed278175a39121d21e45320e3170ba855f7d6c84783a6a5204499bb3c"
+source_hash: "a2025b5038822233b1f948ad3b1e1a42f113f2eb2fc72d6cc284232a31ffd446"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -190,6 +190,14 @@ guidance remain available to non-Codex prompt surfaces for compatibility.
 | `api.registerNodeHostCommand(command)`          | Command handler exposed to paired nodes                      |
 | `api.registerNodeInvokePolicy(policy)`          | Allowlist/approval policy for node-invoked commands          |
 | `api.registerSecurityAuditCollector(collector)` | Findings collector for `openclaw security audit`             |
+
+Memory prompt supplement builders receive optional `agentId`,
+`agentSessionKey`, and `sandboxed` context. Memory corpus supplement `search`
+and `get` calls receive optional `agentId` and `sandboxed` context. Plugins with
+agent-owned storage should resolve that storage for each call instead of
+capturing one global path during registration. If an agent id is required but
+missing in a multi-agent operation, fail closed rather than choosing an
+arbitrary agent.
 
 Telegram interactive handlers can return `{ submitText }` to route text through
 Telegram's normal inbound agent path after the handler succeeds. OpenClaw keeps

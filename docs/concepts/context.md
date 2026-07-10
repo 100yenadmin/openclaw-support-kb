@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context"
 source: "https://docs.openclaw.ai/concepts/context"
-source_hash: "96967df05f45a8944eb881aed10c3b82b68eecd9cb8a9b46fa268f1cb46e3c52"
+source_hash: "cd9b34e8a43d048353784bec278dda74fbadec3ff39ae19b9c71d95253f4a715"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context.md"
@@ -83,12 +83,15 @@ Top tools (schema size):
 
 ### `/context map`
 
-Sends an image generated from the latest cached run report. Before a normal message has produced a run report in the session, `/context map` returns an unavailable message instead of rendering an estimate. Rectangle area is proportional to tracked prompt characters:
+Sends an image generated from the latest cached run report plus the session transcript. Before a normal message has produced a run report in the session, `/context map` returns an unavailable message instead of rendering an estimate. Rectangle area is proportional to tracked prompt characters:
 
+- conversation transcript (user messages, assistant replies, tool results, compaction summaries), plus per-turn runtime context and hook prompt additions that reach only the model
 - injected workspace files
 - base system prompt text
 - skill prompt entries
 - tool JSON schemas
+
+The conversation group grows as the session does, so the map changes turn over turn; after compaction it collapses into a summaries tile.
 
 `/context list`, `/context detail`, and `/context json` can still inspect an on-demand estimate when no run report is cached.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Overview"
 source: "https://docs.openclaw.ai/tools"
-source_hash: "c3c30a03ebf7aa2c59697731a01599dee0579ab4cc3e8a3ecf70c9de0b54a179"
+source_hash: "9683bdb528896016d856f562c38c341768b25889b1659a31535361680d8282bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools.md"
@@ -120,6 +120,7 @@ for contract details.
 Common plugin-provided tools include:
 
 - [Diffs](/tools/diffs) for rendering file and markdown diffs
+- [Show widget](/tools/show-widget) for self-contained inline SVG and HTML in web chat
 - [LLM Task](/tools/llm-task) for JSON-only workflow steps
 - [Lobster](/tools/lobster) for typed workflows with resumable approvals
 - [Tokenjuice](/tools/tokenjuice) for compacting noisy `exec` and `bash` tool

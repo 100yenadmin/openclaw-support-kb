@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "b84dad2b50182868fb3569ff8e436f564dea9bdbefaa571fde27aa6ae9bd5787"
+source_hash: "b81df4046dc7a5e35ba1a41e6534fee78703f3be5482483d5a4c50f47da51389"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -163,7 +163,14 @@ export default function register(api) {
       return { ingested: true };
     },
 
-    async assemble({ sessionId, messages, tokenBudget, availableTools, citationsMode }) {
+    async assemble({
+      sessionId,
+      sessionKey,
+      messages,
+      tokenBudget,
+      availableTools,
+      citationsMode,
+    }) {
       // Return messages that fit the budget
       return {
         messages: buildContext(messages, tokenBudget),
@@ -171,6 +178,8 @@ export default function register(api) {
         systemPromptAddition: buildMemorySystemPromptAddition({
           availableTools: availableTools ?? new Set(),
           citationsMode,
+          agentId: resolveSessionAgentId({ config: ctx.config, sessionKey }),
+          agentSessionKey: sessionKey,
         }),
       };
     },
@@ -248,8 +257,11 @@ ParamField
   Optional projection lifecycle for hosts with persistent backend threads (for example Codex app-server). `mode: "thread_bootstrap"` with a stable `epoch` asks the host to inject the assembled context once per epoch and reuse the backend thread until the epoch changes, instead of re-projecting every turn. Omit this field for normal per-turn projection.
 
 `compact` returns a `CompactResult`. When compaction rotates the active
-transcript, `result.sessionId` and `result.sessionFile` identify the successor
-session that the next retry or turn must use.
+transcript, `result.sessionTarget` (a typed `ContextEngineSessionTarget`
+carrying the storage mode, session identity, and transcript artifact path)
+identifies the successor session that the next retry or turn must use;
+`result.sessionId` mirrors the successor id. `result.sessionFile` is
+deprecated - report successors through `sessionTarget` instead.
 
 Optional members:
 

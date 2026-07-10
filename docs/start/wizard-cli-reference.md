@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "cb2240b44060d294d8cbe8e1e40abcfdb6ceaa66531986ef64f58d4208d94123"
+source_hash: "154f7608eac2b0a5de61b9b15626432892bdd10a823c9e43aa826bbffe7e0e8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -212,7 +212,8 @@ OpenAI Code subscription (OAuth)
 
     Browser flow; paste `code#state`.
 
-    Sets `agents.defaults.model` to `openai/gpt-5.5` through the Codex runtime when model is unset or already OpenAI-family.
+    On a fresh setup with no primary model, sets `agents.defaults.model` to
+    `openai/gpt-5.6-sol` through the Codex runtime.
 
 
 
@@ -220,7 +221,8 @@ OpenAI Code subscription (device pairing)
 
     Browser pairing flow with a short-lived device code.
 
-    Sets `agents.defaults.model` to `openai/gpt-5.5` through the Codex runtime when model is unset or already OpenAI-family.
+    On a fresh setup with no primary model, sets `agents.defaults.model` to
+    `openai/gpt-5.6-sol` through the Codex runtime.
 
 
 
@@ -228,7 +230,12 @@ OpenAI API key
 
     Uses `OPENAI_API_KEY` if present or prompts for a key, then stores the credential in auth profiles.
 
-    Sets `agents.defaults.model` to `openai/gpt-5.5` when model is unset, `openai/*`, or legacy Codex model refs.
+    On a fresh setup with no primary model, sets `agents.defaults.model` to
+    `openai/gpt-5.6`; the bare direct-API model id resolves to the Sol tier.
+
+    Adding or reauthenticating OpenAI preserves an existing explicit primary
+    model, including `openai/gpt-5.5`. If the account does not expose GPT-5.6,
+    select `openai/gpt-5.5` explicitly; OpenClaw does not silently downgrade it.
 
 
 

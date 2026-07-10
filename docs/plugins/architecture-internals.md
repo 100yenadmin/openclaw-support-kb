@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "1d33c56c568959585ed8fc9a61653cbdcea0bfe969b1eba5b023db185cb72a7f"
+source_hash: "4b752fe2548cea3cd9f3e0da6ea536417976ccf3e7bfcbc3954ddb194dd0e306"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture-internals.md"
@@ -331,7 +331,9 @@ that still runs on OpenClaw's normal inference loop.
 
 `resolveUsageAuth` decides whether OpenClaw should call `fetchUsageSnapshot` or
 fall back to generic credential resolution for usage/status surfaces. Return
-`{ token, accountId? }` when the provider has a usage credential, return
+`{ token, accountId?, subscriptionType?, rateLimitTier? }` when the provider
+has a usage credential (the optional plan metadata flows into
+`fetchUsageSnapshot`), return
 `{ handled: true }` when provider-owned usage auth has handled the request and
 must suppress generic API-key/OAuth fallback, and return `null` or `undefined`
 when the provider did not handle usage auth.
@@ -752,7 +754,7 @@ fallback rules, provider mapping, and plugin author checklist.
 
 Send-capable plugins declare what they can render through message capabilities:
 
-- `presentation` for semantic presentation blocks (`text`, `context`, `divider`, `buttons`, `select`)
+- `presentation` for semantic presentation blocks (`text`, `context`, `divider`, `chart`, `buttons`, `select`)
 - `delivery-pin` for pinned-delivery requests
 
 Core decides whether to render the presentation natively or degrade it to text.
@@ -1083,13 +1085,15 @@ export default function (api) {
     async ingest() {
       return { ingested: true };
     },
-    async assemble({ messages, availableTools, citationsMode }) {
+    async assemble({ messages, sessionKey, availableTools, citationsMode }) {
       return {
         messages,
         estimatedTokens: 0,
         systemPromptAddition: buildMemorySystemPromptAddition({
           availableTools: availableTools ?? new Set(),
           citationsMode,
+          agentId: resolveSessionAgentId({ config: ctx.config, sessionKey }),
+          agentSessionKey: sessionKey,
         }),
       };
     },
@@ -1132,13 +1136,15 @@ export default function (api) {
     async ingest() {
       return { ingested: true };
     },
-    async assemble({ messages, availableTools, citationsMode }) {
+    async assemble({ messages, sessionKey, availableTools, citationsMode }) {
       return {
         messages,
         estimatedTokens: 0,
         systemPromptAddition: buildMemorySystemPromptAddition({
           availableTools: availableTools ?? new Set(),
           citationsMode,
+          agentId: resolveSessionAgentId({ config: ctx.config, sessionKey }),
+          agentSessionKey: sessionKey,
         }),
       };
     },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin manifest"
 source: "https://docs.openclaw.ai/plugins/manifest"
-source_hash: "d030388d335eec3715ab243b67ce60a656223c13a553726032bf8e8a20e973b5"
+source_hash: "b6bf6961692d2ae557b01a836550e99fd6bed40bb2053f8928f334a9e47b1f4e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manifest.md"
@@ -518,7 +518,7 @@ Supported evidence entries:
 
 ## uiHints reference
 
-`uiHints` is a map from config field names to small rendering hints.
+`uiHints` is a map from config field names to small rendering hints. Keys can use dots for nested config fields, but no path segment may be `__proto__`, `constructor`, or `prototype`; setup rejects those names.
 
 ```json
 {

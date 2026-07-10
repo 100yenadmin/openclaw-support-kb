@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "93d164a5d77d77b74a1df8761707c90bcc88bfdaa1b26b2d93bc6b6b6520016d"
+source_hash: "8b56f100bc58336959d0e45a9a7cf68b6f14365c7cdae1a8d4ec60cbacd0422e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
@@ -72,16 +72,17 @@ Verify the model is available
 
 ## Built-in LLM catalog
 
-| Model ref                        | Input       | Context | Max output | Notes                                                            |
-| -------------------------------- | ----------- | ------- | ---------- | ---------------------------------------------------------------- |
-| `mistral/mistral-large-latest`   | text, image | 262,144 | 16,384     | Default model                                                    |
-| `mistral/mistral-medium-2508`    | text, image | 262,144 | 8,192      | Mistral Medium 3.1                                               |
-| `mistral/mistral-medium-3-5`     | text, image | 262,144 | 8,192      | Mistral Medium 3.5; adjustable reasoning                         |
-| `mistral/mistral-small-latest`   | text, image | 128,000 | 16,384     | Mistral Small 4; adjustable reasoning via API `reasoning_effort` |
-| `mistral/pixtral-large-latest`   | text, image | 128,000 | 32,768     | Pixtral                                                          |
-| `mistral/codestral-latest`       | text        | 256,000 | 4,096      | Coding                                                           |
-| `mistral/devstral-medium-latest` | text        | 262,144 | 32,768     | Devstral 2                                                       |
-| `mistral/magistral-small`        | text        | 128,000 | 40,000     | Reasoning-enabled                                                |
+| Model ref                        | Input       | Context | Max output | Notes                                                 |
+| -------------------------------- | ----------- | ------- | ---------- | ----------------------------------------------------- |
+| `mistral/mistral-large-latest`   | text, image | 262,144 | 16,384     | Default model                                         |
+| `mistral/mistral-medium-2508`    | text, image | 262,144 | 8,192      | Mistral Medium 3.1                                    |
+| `mistral/mistral-medium-3-5`     | text, image | 262,144 | 8,192      | Mistral Medium 3.5; adjustable reasoning              |
+| `mistral/mistral-small-latest`   | text, image | 262,144 | 16,384     | Mistral Small 4 latest; adjustable `reasoning_effort` |
+| `mistral/mistral-small-2603`     | text, image | 262,144 | 16,384     | Mistral Small 4 pinned; adjustable `reasoning_effort` |
+| `mistral/pixtral-large-latest`   | text, image | 128,000 | 32,768     | Pixtral                                               |
+| `mistral/codestral-latest`       | text        | 256,000 | 4,096      | Coding                                                |
+| `mistral/devstral-medium-latest` | text        | 262,144 | 32,768     | Devstral 2                                            |
+| `mistral/magistral-small`        | text        | 128,000 | 40,000     | Reasoning-enabled                                     |
 
 Browse the bundled catalog row before changing config:
 
@@ -165,7 +166,7 @@ AccordionGroup
 
 Adjustable reasoning
 
-    `mistral/mistral-small-latest` and `mistral/mistral-medium-3-5` support [adjustable reasoning](https://docs.mistral.ai/studio-api/conversations/reasoning/adjustable) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer).
+    `mistral/mistral-small-latest`, `mistral/mistral-small-2603`, and `mistral/mistral-medium-3-5` support [adjustable reasoning](https://docs.mistral.ai/studio-api/conversations/reasoning/adjustable) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer).
 
     OpenClaw maps the session **thinking** level to Mistral's API:
 

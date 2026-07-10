@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness runtime"
 source: "https://docs.openclaw.ai/plugins/codex-harness-runtime"
-source_hash: "9afc33b667cd858d967323aee478ebdec4ed08113fb744353fcee510e50e854b"
+source_hash: "135602a20dbd4f7158b8d4551554b9b5a59358a3a8e48432fd954dad9c684f42"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-runtime.md"
@@ -41,6 +41,11 @@ active agent workspace profile files. Skill catalogs and tool-routed
 `MEMORY.md` pointers are projected as turn-scoped collaboration developer
 instructions. When memory tools are unavailable, active `BOOTSTRAP.md` content
 and full `MEMORY.md` fall back to plain turn input context instead.
+
+Most OpenClaw dynamic tools use the searchable `openclaw` namespace. Tools
+marked `catalogMode: "direct-only"` use `openclaw_direct`, which Codex keeps
+directly model-visible as `DirectModelOnly` instead of exposing it to nested
+Code Mode execution.
 
 ## Thread bindings and model changes
 
@@ -131,7 +136,7 @@ Supported in Codex runtime v1:
 | Dynamic tool hooks                            | Supported                                                                        | `before_tool_call`, `after_tool_call`, and tool-result middleware run around OpenClaw-owned dynamic tools.                                                                                                                                                                                                                                                                                                                                                                          |
 | Lifecycle hooks                               | Supported as adapter observations                                                | `llm_input`, `llm_output`, `agent_end`, `before_compaction`, and `after_compaction` fire with honest Codex-mode payloads.                                                                                                                                                                                                                                                                                                                                                           |
 | Final-answer revision gate                    | Supported through native hook relay                                              | Codex `Stop` is relayed to `before_agent_finalize`; `revise` asks Codex for one more model pass before finalization.                                                                                                                                                                                                                                                                                                                                                                |
-| Native shell, patch, and MCP block or observe | Supported through native hook relay                                              | Codex `PreToolUse` and `PostToolUse` are relayed for committed native tool surfaces, including MCP payloads on Codex app-server `0.125.0` or newer. Blocking is supported; argument rewriting is not.                                                                                                                                                                                                                                                                               |
+| Native shell, patch, and MCP block or observe | Supported through native hook relay                                              | Codex `PreToolUse` and `PostToolUse` are relayed for committed native tool surfaces, including MCP payloads on Codex app-server `0.142.0` or newer. Blocking is supported; argument rewriting is not.                                                                                                                                                                                                                                                                               |
 | Native permission policy                      | Supported through Codex app-server approvals and compatibility native hook relay | Codex app-server approval requests route through OpenClaw after Codex review. The `PermissionRequest` native hook relay is opt-in for native approval modes because Codex emits it before guardian review.                                                                                                                                                                                                                                                                          |
 | App-server trajectory capture                 | Supported                                                                        | OpenClaw records the request it sent to app-server and the app-server notifications it receives.                                                                                                                                                                                                                                                                                                                                                                                    |
 

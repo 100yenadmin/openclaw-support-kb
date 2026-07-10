@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox vs tool policy vs elevated"
 source: "https://docs.openclaw.ai/gateway/sandbox-vs-tool-policy-vs-elevated"
-source_hash: "795344c49ddff73547b66d981a798eb7b0f1cbc5efa538b8db24ecfac2a390d3"
+source_hash: "0ca7409fa552239ff7a77f2f749ad03c58d05197273a46d35ba0f6108a820634"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandbox-vs-tool-policy-vs-elevated.md"
@@ -107,7 +107,7 @@ Available groups:
 | `group:ui`         | `browser`, `canvas`                                                                                                                                        |
 | `group:automation` | `heartbeat_respond`, `cron`, `gateway`                                                                                                                     |
 | `group:messaging`  | `message`                                                                                                                                                  |
-| `group:nodes`      | `nodes`                                                                                                                                                    |
+| `group:nodes`      | `nodes`, `computer`                                                                                                                                        |
 | `group:agents`     | `agents_list`, `get_goal`, `create_goal`, `update_goal`, `update_plan`, `skill_workshop`                                                                   |
 | `group:media`      | `image`, `image_generate`, `music_generate`, `video_generate`, `tts`                                                                                       |
 | `group:openclaw`   | most built-in OpenClaw tools (excludes the `read`/`write`/`edit`/`apply_patch`/`exec`/`process` fs and runtime primitives, `canvas`, and provider plugins) |

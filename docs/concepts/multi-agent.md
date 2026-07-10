@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "6a2a0539e90c853601535de4688840c61feccdd4a1637710c7387c566f5ca0c9"
+source_hash: "1f922fdea6fb23e5f9913d6f8d247386e97875179008d7558c00ecc5739ba5dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Multi-agent routing
 Source: https://docs.openclaw.ai/concepts/multi-agent
 
-Run multiple _isolated_ agents in one Gateway process, each with its own workspace, state directory (`agentDir`), and session store, plus multiple channel accounts (e.g. two WhatsApp numbers). Inbound messages route to the right agent through **bindings**.
+Run multiple agents in one Gateway process, each with its own workspace, state directory (`agentDir`), and session store, plus multiple channel accounts (e.g. two WhatsApp numbers). Inbound messages route to the right agent through **bindings**.
 
 An **agent** is the full per-persona scope: workspace files, auth profiles, model registry, and session store. A **binding** maps a channel account (a Slack workspace, a WhatsApp number, etc.) to one of those agents.
 
@@ -40,6 +40,11 @@ Warning
 Never reuse `agentDir` across agents — it causes auth/session state collisions. When a secondary agent's local OAuth credential is expired or its refresh fails, OpenClaw reads through to the default/main agent's credential for the same profile id and adopts whichever token is freshest, without copying the refresh token into the secondary agent's store. If you want a fully independent OAuth account, sign in from that agent. If you copy credentials manually, copy only portable static `api_key` or `token` profiles — OAuth refresh material is not portable by default (`copyToAgents` can opt a profile in explicitly).
 
 Skills load from each agent workspace plus shared roots such as `~/.openclaw/skills`, then filter by the effective agent skill allowlist. Use `agents.defaults.skills` for a shared baseline and `agents.list[].skills` for a per-agent replacement (explicit entries replace the default, they do not merge). See [Skills: per-agent vs shared](/tools/skills#per-agent-vs-shared-skills) and [Skills: agent allowlists](/tools/skills#agent-allowlists).
+
+Plugin-owned storage follows that plugin's configuration; adding a second agent
+does not automatically split every global plugin store. For example, configure
+[Memory Wiki per-agent vaults](/concepts/multi-agent#per-agent-memory-wiki-vaults)
+when personas must not share compiled wiki knowledge.
 
 Note
 
@@ -129,13 +134,44 @@ Restart and verify
 
 ## Multiple agents, multiple personas
 
-Each configured `agentId` is a fully isolated persona:
+Each configured `agentId` is a distinct persona boundary for core agent state:
 
 - Different accounts per channel (per `accountId`).
 - Different personalities (per-agent `AGENTS.md`/`SOUL.md`).
-- Separate auth and sessions, with no cross-talk unless explicitly enabled.
+- Separate auth and sessions, with cross-agent access enabled only through explicit features or plugin configuration.
 
-This lets multiple people share one Gateway while keeping their agent state isolated.
+This lets multiple people share one Gateway while keeping core agent state separate.
+
+## Per-agent Memory Wiki vaults
+
+Memory Wiki uses one global vault by default. To keep a support agent's
+compiled knowledge separate from a marketing agent's, set
+`plugins.entries.memory-wiki.config.vault.scope` to `agent`:
+
+```json5
+{
+  plugins: {
+    entries: {
+      "memory-wiki": {
+        enabled: true,
+        config: {
+          vault: {
+            scope: "agent",
+            path: "~/.openclaw/wiki",
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+The configured path is the parent directory. OpenClaw appends the normalized
+agent id, producing paths such as `~/.openclaw/wiki/support` and
+`~/.openclaw/wiki/marketing`. Agent-scoped CLI and Gateway operations require
+an explicit agent when multiple agents are configured. See
+[Memory Wiki per-agent vaults](/plugins/memory-wiki#per-agent-vaults) for bridge
+filtering, migration, and trust-boundary details.
 
 ## Cross-agent QMD memory search
 

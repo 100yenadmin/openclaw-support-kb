@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "d530798121038cb305e656c9a8963d83f185387f34aa91796af6aeba51118ca4"
+source_hash: "4a84c1a78b0c74962f81ef4d08e69ea263db782a1f4adf53a71b6c6e3c3e1b9d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-reference.md"
@@ -367,7 +367,7 @@ read, account-wide exposure fails closed.
   - `timeoutSeconds`: scrape request timeout in seconds (default: `60`).
 - `plugins.entries.xai.config.xSearch`: xAI X Search (Grok web search) settings.
   - `enabled`: enable the X Search provider.
-  - `model`: Grok model to use for search (e.g. `"grok-4-1-fast"`).
+  - `model`: Grok model to use for search (e.g. `"grok-4.3"`).
 - `plugins.entries.memory-core.config.dreaming`: memory dreaming settings. See [Dreaming](/concepts/dreaming) for phases and thresholds.
   - `enabled`: master dreaming switch (default `false`).
   - `frequency`: cron cadence for each full dreaming sweep (`"0 3 * * *"` by default).

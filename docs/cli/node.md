@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "df99fa57fe671966583e7ea9b056118decce76d7737298123e9a28d96ad14d36"
+source_hash: "1282904727db825ce900587a666fb6646fd0248f079c705693e77858e134f9ea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/node.md"
@@ -67,6 +67,7 @@ Options:
 - `--port <port>`: Gateway WebSocket port (default: `18789`)
 - `--context-path <path>`: Gateway WebSocket context path (e.g. `/openclaw-gw`). Appended to the WebSocket URL.
 - `--tls`: Use TLS for the gateway connection
+- `--no-tls`: Force a plaintext Gateway connection even when the local Gateway config enables TLS
 - `--tls-fingerprint <sha256>`: Expected TLS certificate fingerprint (sha256)
 - `--node-id <id>`: Override node id (clears pairing token)
 - `--display-name <name>`: Override the node display name

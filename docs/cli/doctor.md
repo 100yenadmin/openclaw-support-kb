@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "f4d256400c5f5ba959d5963277402e013663b1c65acb72b870225d541e3be6f1"
+source_hash: "88539aa8644434bbe0be1dea839962259d23cba3a1325a07fee16a4bcf163503"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -174,6 +174,13 @@ openclaw doctor --lint --all --skip core/doctor/session-locks
 ## Post-upgrade mode
 
 `openclaw doctor --post-upgrade` runs plugin compatibility probes for chaining after a build or upgrade. Findings go to stdout; exit code is 1 if any finding has `level: "error"`. Add `--json` for a machine-readable envelope (`{ probesRun, findings }`), suitable for CI, the community `fork-upgrade` skill, and other post-upgrade smoke tooling. If the installed plugin index is missing or malformed, JSON mode still emits the envelope with a `plugin.index_unavailable` error finding.
+
+Container image startup is the exception to the usual "run doctor after
+updating" flow. When `openclaw gateway run` starts on a new OpenClaw version, it
+runs safe state and plugin repairs before reporting ready. If repair cannot
+finish safely, startup exits and tells you to run the same image once with
+`openclaw doctor --fix` against the same mounted state/config before restarting
+the container normally.
 
 ## Notes
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "c6c955cdf750333fdb27c934d18709409b5230e8118893e08a5b2324d78d1117"
+source_hash: "fca3934ae69b4b6bc2cc48f4be32aebbccd77f93f09ae3c6dda83a57a7efebd1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
@@ -194,6 +194,8 @@ and also exposes `google/lyria-3-clip-preview`. OpenClaw sends `modalities:
 ["text", "audio"]`, streams the response, collects the audio chunks, and saves
 the result as generated media for channel delivery. Lyria models accept one
 reference image through the shared `music_generate image=...` parameter.
+Streaming audio, transcript retention, and the derived SSE event envelope are
+bounded by `agents.defaults.mediaMaxMb` (the default audio cap is 16 MB).
 
 ## Text-to-speech
 
