@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "e7642190aaebb22f645f7b0d3462f4fb77243a765881a1f2fcdbef20ddc7441c"
+source_hash: "59f9fdf6531e866bd6e8a9a6f93ec681360e31ab8b1066cde6e21b2a695e4716"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
@@ -36,10 +36,6 @@ pip install --upgrade composio
 ```
 
 **TypeScript:**
-
-```bash
-npm install @composio/core@latest
-```
 
 #### Update session creation
 

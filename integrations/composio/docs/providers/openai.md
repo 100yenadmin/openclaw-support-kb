@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "fe7c287dcff29dabd9a9733746849f62663ec5006d52199df045a4457af45622"
+source_hash: "734796c400f92beddfb9e9d4b050b31b7afd0b7f0282d1b53719e124de4dec0c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -35,15 +35,7 @@ The `OpenAIResponsesProvider` transforms Composio tools into OpenAI's function-c
 
 **Python:**
 
-```bash
-pip install composio composio_openai openai
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/openai openai
-```
 
 **Configure API Keys**
 
@@ -167,14 +159,8 @@ The `OpenAIProvider` targets the Chat Completions API and is the default provide
 
 **Python:**
 
-```bash
-pip install composio composio_openai openai
-```
 **TypeScript:**
 
-```bash
-npm install @composio/core @composio/openai openai
-```
 **Configure API Keys**
 
 > Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
@@ -287,14 +273,8 @@ The `OpenAIAgentsProvider` transforms Composio tools into the Agents SDK tool fo
 
 **Python:**
 
-```bash
-pip install composio composio-openai-agents openai-agents
-```
 **TypeScript:**
 
-```bash
-npm install @composio/core @composio/openai-agents @openai/agents
-```
 **Configure API Keys**
 
 > Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).

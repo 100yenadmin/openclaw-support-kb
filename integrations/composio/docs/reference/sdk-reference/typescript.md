@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript.md"
-source_hash: "37d2b9e74866aa4f6edd7ab47cd03c59102630ebd07c218d5097170075231b19"
+source_hash: "5a910ff0f01bd8d4184ef7973d87b34aa057e5753cc21670f256652ac98ad7cb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript.md"
@@ -18,30 +18,6 @@ Source: https://docs.composio.dev/reference/sdk-reference/typescript.md
 
 
 # Installation
-
-**npm:**
-
-```bash
-npm install @composio/core
-```
-
-**pnpm:**
-
-```bash
-pnpm add @composio/core
-```
-
-**yarn:**
-
-```bash
-yarn add @composio/core
-```
-
-**bun:**
-
-```bash
-bun add @composio/core
-```
 
 # Classes
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "8d21a71d09f9d59f15b0e10b3232d67b164d7013d5d8ed4a0a7ff6285c8ce31e"
+source_hash: "6f5cf4fd698b1fbaf0c38751c60b78a26386a7e1a080d1032ad7e7b66e3d4392"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -20,10 +20,6 @@ Source: https://docs.composio.dev/docs/providers/autogen.md
 The AutoGen provider turns Composio tools into AutoGen [`FunctionTool`](https://microsoft.github.io/autogen/) objects and registers them with your agents. You connect an account, fetch the tools, register them with a caller and executor agent, and AutoGen handles the conversation and tool calls.
 
 **Install**
-
-```bash
-pip install composio composio_autogen autogen-agentchat
-```
 
 **Configure API Keys**
 

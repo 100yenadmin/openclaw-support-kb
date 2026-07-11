@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "3d976c6ebb0ce371338fa7a65c63985df8cf06901bc77a99a146e76fc9673230"
+source_hash: "ddfb193cd2953ad9c0e1e70975e15f8ce14a53384832baee19d8835746f95aee"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -20,10 +20,6 @@ Source: https://docs.composio.dev/docs/providers/mastra.md
 The Mastra provider transforms Composio tools into [Mastra's tool format](https://mastra.ai/en/docs/tools-mcp/overview#creating-tools) with built-in execution. Pass the wrapped tools to a Mastra `Agent`, and the agent calls them automatically. Each tool gets both an input and an output schema, so Mastra can validate tool results as well as arguments.
 
 **Install**
-
-```bash
-npm install @composio/core @composio/mastra @mastra/core @ai-sdk/openai
-```
 
 **Configure API Keys**
 

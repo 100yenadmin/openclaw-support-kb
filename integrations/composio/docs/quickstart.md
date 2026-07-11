@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "660963de6c99234e7ce8cf61dd4c9cf1689a463907e1192cec38c896fc9c2f20"
+source_hash: "6912f2ae6b2d181119f46f3552b827b9f1e8553ef19481d445f7e32438752b5e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -25,15 +25,7 @@ Build your first AI agent with Composio Tools. You'll create a [session](/docs/h
 
 **Python:**
 
-```bash
-pip install python-dotenv composio composio-openai-agents openai-agents
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/openai-agents @openai/agents
-```
 
 #### Configure API Keys
 
@@ -151,14 +143,8 @@ readline.close();
 
 **Python:**
 
-```bash
-pip install python-dotenv composio composio-claude-agent-sdk claude-agent-sdk
-```
 **TypeScript:**
 
-```bash
-npm install dotenv @composio/core @composio/claude-agent-sdk @anthropic-ai/claude-agent-sdk
-```
 #### Configure API Keys
 
 > Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
@@ -297,9 +283,6 @@ readline.close();
 
 #### Install
 
-```bash
-npm install @composio/core @composio/vercel ai @ai-sdk/anthropic
-```
 #### Configure API Keys
 
 > Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).

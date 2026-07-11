@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Tools and Toolkits"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-tools-and-toolkits.md"
-source_hash: "cc53092b379821d4d11963a0ac8ae6810896e91a54c0240501d534f737ae39f7"
+source_hash: "423d1439283f5e5ed0e9dce356216bd5b1655776697f7c5516c76b495e7d06a3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-tools-and-toolkits.md"
@@ -31,15 +31,7 @@ Custom tools let you define tools that run in-process alongside remote Composio 
 
 **TypeScript:**
 
-```bash
-npm install @composio/core zod
-```
-
 **Python:**
-
-```bash
-pip install composio
-```
 
 **Initialize the client**
 
@@ -161,15 +153,7 @@ tools = session.tools()
 
 **TypeScript:**
 
-```bash
-npm install @composio/core zod
-```
-
 **Python:**
-
-```bash
-pip install composio
-```
 
 **Initialize the client**
 
@@ -311,15 +295,7 @@ tools = session.tools()
 
 **TypeScript:**
 
-```bash
-npm install @composio/core zod
-```
-
 **Python:**
-
-```bash
-pip install composio
-```
 
 **Initialize the client**
 

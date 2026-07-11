@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "dff5a495a5876db58c4d8069207b2294d690c791971da2ecaee335d1218fc3d7"
+source_hash: "d613ada81da5fcb8d57bb1d2aee7bbf6750a6b3af8ba10741f71e7322860f382"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -20,10 +20,6 @@ Source: https://docs.composio.dev/docs/providers/vercel.md
 The Vercel AI SDK provider transforms Composio tools into Vercel's [tool format](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling) with built-in execution, so you don't write a manual agentic loop. Each wrapped tool carries its own `execute` function, and the AI SDK calls it for you.
 
 **Install**
-
-```bash
-npm install @composio/core @composio/vercel ai @ai-sdk/anthropic
-```
 
 **Configure API Keys**
 

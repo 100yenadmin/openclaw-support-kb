@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Python SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/python.md"
-source_hash: "f5aaf207d8c989eac3909af07880c8f8ef7af104b1bdd10a960fdbe30dddfc04"
+source_hash: "97c8c594fed28c9dc2937a9b97b38b51cf67ca431b605b2562c246963588f828"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python.md"
@@ -22,16 +22,6 @@ Source: https://docs.composio.dev/reference/sdk-reference/python.md
 Complete API reference for the `composio` Python package.
 
 # Installation
-
-```bash
-pip install composio
-```
-
-Or with uv:
-
-```bash
-uv add composio
-```
 
 # Classes
 

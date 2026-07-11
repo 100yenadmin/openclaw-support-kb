@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "46d2367df01e670c09a267e37533e6f92c48c22a19d8d65dc8d4c9a5ad4a4f41"
+source_hash: "ca9335a1b645f695e93f397fe1f54f4e44c8e2129cc4e2541f03148ebb70bdac"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -87,10 +87,6 @@ pip install -U composio
 ```
 
 **TypeScript:**
-
-```bash
-npm install @composio/core
-```
 
 Both SDKs now implement proper namespacing for each concept.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "d7eb176ad11181072d40c5380e214b8c5978b953a7c7a85c0427c672e4bd03cb"
+source_hash: "51bb1491e9d65c7d5e86261795abbce65cc46301efd1c0ec389f1dad322eff8d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -29,15 +29,7 @@ The LangChain provider transforms each Composio tool into a LangChain [`DynamicS
 
 **Python:**
 
-```bash
-pip install composio composio_langchain langchain langchain_openai
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/langchain @langchain/openai @langchain/langgraph @langchain/core
-```
 
 **Configure API Keys**
 
@@ -127,9 +119,6 @@ The LangGraph provider transforms Composio tools into the same LangChain `Dynami
 
 **Install**
 
-```bash
-pip install composio composio_langgraph langgraph langchain_openai
-```
 **Configure API Keys**
 
 > Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).

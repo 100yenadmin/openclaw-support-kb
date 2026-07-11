@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "53dd632a6ed613898f323f62386e137c6701967c9a4e406957e4a74f3c76e195"
+source_hash: "edf1efef90c7a334d47d84030ba146e484c72202304bf0763c0292a25d4c2552"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -34,15 +34,7 @@ The `AnthropicProvider` transforms Composio tools into the format the Claude Mes
 
 **Python:**
 
-```bash
-pip install composio composio_anthropic anthropic
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/anthropic @anthropic-ai/sdk
-```
 
 **Configure API Keys**
 
@@ -164,14 +156,8 @@ The `ClaudeAgentSDKProvider` exposes your Composio tools to the Claude Agent SDK
 
 **Python:**
 
-```bash
-pip install composio composio_claude_agent_sdk claude-agent-sdk
-```
 **TypeScript:**
 
-```bash
-npm install @composio/core @composio/claude-agent-sdk @anthropic-ai/claude-agent-sdk
-```
 **Configure API Keys**
 
 > Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).

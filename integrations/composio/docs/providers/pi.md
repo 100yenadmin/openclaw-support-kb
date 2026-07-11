@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Pi"
 source: "https://docs.composio.dev/docs/providers/pi.md"
-source_hash: "4974173ff1d6a76b42ba8138cdfa2bab601e0dfb7f20267744a21820df8a9494"
+source_hash: "e71b64ba23d1e8ef1a0de952d18619185dbd3f2d5f136e22d872c5072b1cc2d6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/pi.md"
@@ -26,10 +26,6 @@ The Pi provider adapts Composio tools for [`@earendil-works/pi-coding-agent`](ht
 For most Pi apps, expose the dynamic helper tools. They let the model discover exact Composio tool slugs before it executes, request missing connections, and run sandbox commands when you enable them.
 
 **Install**
-
-```bash
-npm install @composio/core @composio/experimental @earendil-works/pi-coding-agent
-```
 
 **Configure API keys**
 

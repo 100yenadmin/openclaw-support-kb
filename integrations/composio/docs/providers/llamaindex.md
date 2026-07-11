@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "05b24c19c1c7a2cc57cab33bb7b5e84ebeec5985e8bbe1067383cda4038adb1f"
+source_hash: "2d4f1482d88366007472fe867dfbb90fc462371f952fa2d73187de15bd7ef6ae"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -23,15 +23,7 @@ The LlamaIndex provider turns Composio tools into LlamaIndex [`FunctionTool`](ht
 
 **Python:**
 
-```bash
-pip install composio composio_llamaindex llama-index llama-index-llms-openai
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/llamaindex @llamaindex/openai @llamaindex/workflow
-```
 
 **Configure API Keys**
 

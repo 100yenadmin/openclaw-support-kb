@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "c227de2ce751a8dc9f534963d4ccd2826e28da8a597ce4d6371edbc5775484ab"
+source_hash: "0d6d2ef4d6bb27a8150563207f612cb6d698876d05a978549cd323ea41d3fe14"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -29,15 +29,7 @@ The Google Generative AI provider transforms Composio tools into Gemini function
 
 **Python:**
 
-```bash
-pip install composio composio_google google-genai
-```
-
 **TypeScript:**
-
-```bash
-npm install @composio/core @composio/google @google/genai
-```
 
 **Configure API Keys**
 
@@ -132,9 +124,6 @@ The Google ADK provider transforms Composio tools into ADK's `FunctionTool` form
 
 **Install**
 
-```bash
-pip install composio composio_google_adk google-adk
-```
 **Configure API Keys**
 
 > Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "95de3afa168c7babc41a90a97443cd1509fb78a8f087c56c39decedbc8c5c400"
+source_hash: "07e726c7782ee2da823a623242ee1d57754eca3cafa4e03c09bd9c780350abb8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -20,10 +20,6 @@ Source: https://docs.composio.dev/docs/providers/crewai.md
 The CrewAI provider turns Composio tools into CrewAI [`BaseTool`](https://docs.crewai.com/concepts/tools) objects that execute themselves. You connect an account, fetch the tools, pass them to an `Agent`, and CrewAI runs the task end to end.
 
 **Install**
-
-```bash
-pip install composio composio_crewai crewai
-```
 
 **Configure API Keys**
 
