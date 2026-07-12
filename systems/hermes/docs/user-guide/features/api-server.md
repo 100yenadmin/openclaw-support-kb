@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "API Server"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server"
-source_hash: "1d7cfbf47ed74672e08ba6fc23dbd905c966e955ccd1f031d6e0beca466af890"
+source_hash: "393e1422c814c7621d92c3aeb3e66b9f3682e29738c2cf40e3c125e3f4d8be0c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/api-server.md"
@@ -240,7 +240,15 @@ Health check. Returns `{"status": "ok"}`. Also available at **GET /v1/health** f
 
 ### GET /health/detailed
 
-Extended health check that also reports active sessions, running agents, and resource usage. Useful for monitoring/observability tooling.
+Authenticated readiness check for monitoring and control planes. It reports
+bounded status for the active profile's config, state database, configured
+model, disk space, gateway/platform state, active API runs, pending process
+completions, and active delegations. The response exposes status and counts,
+not config values, credentials, paths, commands, queue payloads, or raw errors.
+
+The public `/health` route remains a cheap liveness probe and does not run
+readiness checks. A degraded readiness result still uses HTTP 200; inspect the
+top-level `status` and `readiness.checks` fields.
 
 ## Runs API (streaming-friendly alternative)
 

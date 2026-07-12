@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Working with Skills"
 source: "https://hermes-agent.nousresearch.com/docs/guides/work-with-skills"
-source_hash: "32966673ad4a31ec18118c14bd28d80eb87b036cc7d7f64997b267dcf037d311"
+source_hash: "2bfc1d1ee370e90f76ecd3e3af58b17de371866035af7b5c95d4c54a48ea9f75"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/work-with-skills.md"
@@ -108,7 +108,7 @@ hermes skills install official/research/arxiv
 # Install from the hub in a chat session
 /skills install official/creative/songwriting-and-ai-music
 
-# Install a single-file SKILL.md directly from any HTTP(S) URL
+# Install SKILL.md and its referenced support files from an HTTP(S) URL
 hermes skills install https://sharethis.chat/SKILL.md
 /skills install https://example.com/SKILL.md --name my-skill
 ```

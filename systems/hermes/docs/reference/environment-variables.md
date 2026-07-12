@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Environment Variables"
 source: "https://hermes-agent.nousresearch.com/docs/reference/environment-variables"
-source_hash: "7f91ee61d71fadc5ac45022538885c7ba736895e1db332415ead7b1c25550f83"
+source_hash: "4ca3fecdb95d492beb293bfc6984811ad6c672384204cce21c01a12b6042291e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/environment-variables.md"
@@ -27,6 +27,7 @@ Hermes reads environment variables from the process environment and, for user-ma
 |----------|-------------|
 | `OPENROUTER_API_KEY` | OpenRouter API key (recommended for flexibility) |
 | `OPENROUTER_BASE_URL` | Override the OpenRouter-compatible base URL |
+| `FIREWORKS_API_KEY` | Fireworks AI API key ([app.fireworks.ai](https://app.fireworks.ai/settings/users/api-keys)). Configure endpoint overrides with `model.base_url` in `config.yaml`. |
 | `HERMES_OPENROUTER_CACHE` | Enable OpenRouter response caching (`1`/`true`/`yes`/`on`). Overrides `openrouter.response_cache` in config.yaml. See [Response Caching](https://openrouter.ai/docs/guides/features/response-caching). |
 | `HERMES_OPENROUTER_CACHE_TTL` | Cache TTL in seconds (1-86400). Overrides `openrouter.response_cache_ttl` in config.yaml. |
 | `NOUS_BASE_URL` | Override Nous Portal base URL (rarely needed; development/testing only) |

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-commands"
-source_hash: "cfd2c8643395ba0872b1503aba6793db7918ae4d9d8f095805dbec8c49e5ff85"
+source_hash: "3f1a241a8aef7c2d234b09a2d27d4e88d86cd443df02e6b8ac284a353ab82bf8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-commands.md"
@@ -1078,7 +1078,7 @@ hermes skills inspect official/security/1password
 hermes skills inspect skills-sh/vercel-labs/json-render/json-render-react
 hermes skills install official/migration/openclaw-migration
 hermes skills install skills-sh/anthropics/skills/pdf --force
-hermes skills install https://sharethis.chat/SKILL.md                     # Direct URL (single-file SKILL.md)
+hermes skills install https://sharethis.chat/SKILL.md                     # Direct URL (+ referenced support files)
 hermes skills install https://example.com/SKILL.md --name my-skill        # Override name when frontmatter has none
 hermes skills check
 hermes skills update
@@ -1096,7 +1096,7 @@ Notes:
 - `--source skills-sh` searches the public `skills.sh` directory.
 - `--source well-known` lets you point Hermes at a site exposing `/.well-known/skills/index.json`.
 - `--source browse-sh` searches [browse.sh](https://browse.sh)'s catalog of 200+ site-specific browser-automation skills. Identifiers look like `browse-sh/airbnb.com/search-listings-ddgioa`.
-- Passing an `http(s)://…/*.md` URL installs a single-file SKILL.md directly. When frontmatter has no `name:` and the URL slug isn't a valid identifier, an interactive terminal prompts for a name; non-interactive surfaces (`/skills install` inside the TUI, gateway platforms) require `--name <x>` instead.
+- Passing an `http(s)://…/*.md` URL installs `SKILL.md` plus explicitly referenced files under `references/`, `templates/`, `scripts/`, `assets/`, and `examples/`. When frontmatter has no `name:` and the URL slug isn't a valid identifier, an interactive terminal prompts for a name; non-interactive surfaces (`/skills install` inside the TUI, gateway platforms) require `--name <x>` instead.
 
 ## `hermes bundles`
 
