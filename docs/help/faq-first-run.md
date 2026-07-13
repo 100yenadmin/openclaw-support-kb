@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "3df8b91f130889fa06042d797bd8e4989f41f480a0da8e327e086ebb642ef715"
+source_hash: "41ad2339d4bf46584122e76f2019cc5ff646bf7c036286006e7c738125f54efa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -161,8 +161,8 @@ Why are there two exec approval configs for chat approvals?
 
 What runtime do I need?
 
-    Node **22.19+** is required (Node 24 recommended). `pnpm` is the repo package manager.
-    Bun is **not recommended** for the Gateway.
+    Node **22.22.3+**, **24.15+**, or **25.9+** is required (Node 24 recommended). `pnpm` is the repo package manager.
+    Bun can install dependencies and run package scripts, but it cannot run the OpenClaw CLI or Gateway because it lacks `node:sqlite`.
 
 
 
@@ -253,7 +253,7 @@ Can I migrate my setup to a new machine without redoing onboarding?
 
     **Important:** if you only commit/push your workspace to GitHub, you back up
     **memory + bootstrap files**, but not session history or auth. Those live under
-    `~/.openclaw/` (for example `~/.openclaw/agents/<agentId>/sessions/`).
+    `~/.openclaw/` (for example `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`).
 
     Related: [Migrating](/install/migrating), [Where things live on disk](/help/faq#where-things-live-on-disk),
     [Agent workspace](/concepts/agent-workspace), [Doctor](/gateway/doctor),
@@ -766,9 +766,9 @@ If I buy a Mac mini to run OpenClaw, can I connect it to my MacBook Pro?
 
 Can I use Bun?
 
-    Not recommended - Bun has runtime bugs, especially with WhatsApp and Telegram. Use
-    **Node** for stable gateways. If you still want to experiment, do it on a
-    non-production gateway without WhatsApp/Telegram.
+    You can use Bun to install dependencies or run package scripts. The OpenClaw CLI and
+    Gateway require **Node** because the canonical state store uses `node:sqlite`; Bun does
+    not provide that API.
 
 
 

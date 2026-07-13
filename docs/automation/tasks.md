@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "ec53ed1149d3d32aca34c4f2222c64e30e9bfaf128d8a5266ab6b0bd96da34f5"
+source_hash: "81442863a9b179530fb39211c2178cdf776f0093c6e49ec0419b18f9f9b0ab68"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -325,6 +325,8 @@ For the full operator ledger, use the CLI: `openclaw tasks list`.
 ### Control UI
 
 The web Control UI has a **Tasks** page in the sidebar with live active and recent background tasks. Use it to inspect progress, open linked sessions, refresh the ledger, or cancel queued and running tasks.
+
+Chat panes also have a collapsible **Background tasks** rail scoped to the pane's agent: running tasks and subagents with a stop control, a finished section, and View transcript links into each task's child session. Open it from the activity toggle in the pane header (or the floating activity button in single-pane chat).
 
 ## Status integration (task pressure)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "0a5fd448af4dd45b111f8dea2ccbdd3e0c62cc25d040efd2ecaa7752f8393a28"
+source_hash: "a8296c8e44d946d660f7ae9f9a76aa4aabea2a3f2eb1a6f5fbe0ba7a2ecabebd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/update.md"
@@ -70,6 +70,9 @@ In Nix mode (`OPENCLAW_NIX_MODE=1`), mutating `openclaw update` runs are disable
 Warning
 
 Downgrades require confirmation because older versions can break configuration.
+If the install has already migrated sessions to SQLite, restore archived legacy
+transcript artifacts before starting an older file-backed version. See
+[Doctor: Downgrading after session SQLite migration](/cli/doctor#downgrading-after-session-sqlite-migration).
 
 ## `update status`
 

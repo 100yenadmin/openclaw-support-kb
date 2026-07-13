@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding reference"
 source: "https://docs.openclaw.ai/reference/wizard"
-source_hash: "171014d8cf887e2961dd3a558f280350fa13add20416267f410e65f611eb9b73"
+source_hash: "4a13142183910a1350c2079f619918d7ad99f398b65de58787e39ad399b7abdf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/wizard.md"
@@ -159,7 +159,7 @@ Daemon install
       - Onboarding attempts to enable lingering via `loginctl enable-linger <user>` so the Gateway stays up after logout.
       - May prompt for sudo (writes `/var/lib/systemd/linger`); it tries without sudo first.
     - Native Windows: Scheduled Task first; if task creation is denied, OpenClaw falls back to a per-user Startup-folder login item and starts the Gateway immediately.
-    - **Runtime selection:** Node (recommended; required for WhatsApp/Telegram - Bun can corrupt memory on reconnect). Only Node is offered interactively; `--daemon-runtime bun` is CLI-only.
+    - **Runtime selection:** Node is required because the canonical runtime state store uses `node:sqlite`. Legacy Bun services are migrated to Node during repair.
     - If token auth requires a token and `gateway.auth.token` is SecretRef-managed, daemon install validates it but does not persist resolved plaintext token values into supervisor service environment metadata.
     - If token auth requires a token and the configured token SecretRef is unresolved, daemon install is blocked with actionable guidance.
     - If both `gateway.auth.token` and `gateway.auth.password` are configured and `gateway.auth.mode` is unset, daemon install is blocked until mode is set explicitly.
@@ -238,7 +238,7 @@ Use this reference page for flag semantics and step ordering.
 ```bash
 openclaw agents add work \
   --workspace ~/.openclaw/workspace-work \
-  --model openai/gpt-5.5 \
+  --model openai/gpt-5.6-sol \
   --bind whatsapp:biz \
   --non-interactive \
   --json
@@ -285,7 +285,10 @@ Typical fields in `~/.openclaw/openclaw.json`:
 `openclaw agents add` writes `agents.list[]` and optional `bindings`.
 
 WhatsApp credentials go under `~/.openclaw/credentials/whatsapp/<accountId>/`.
-Sessions are stored under `~/.openclaw/agents/<agentId>/sessions/`.
+Active sessions and transcripts are stored in
+`~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`. The
+`~/.openclaw/agents/<agentId>/sessions/` directory is used for legacy migration
+inputs and archive/support artifacts.
 
 Some channels are delivered as plugins. When you pick one during setup, onboarding
 will prompt to install it (npm or a local path) before it can be configured.

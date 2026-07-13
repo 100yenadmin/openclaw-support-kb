@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "c5af593a95d88f3e8c80ea1fb1970ea598659484b99b869993cf6160c0836028"
+source_hash: "06d7518405ee77a1fcdcbe49144afbf373d3285b44e9bbae570e5c92709f1e6b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -21,7 +21,7 @@ OpenClaw ships three installer scripts, served from `openclaw.ai`.
 | [`install-cli.sh`](#install-clish) | macOS / Linux / WSL  | Installs Node + OpenClaw into a local prefix (`~/.openclaw`) via npm or git. No root required. |
 | [`install.ps1`](#installps1)       | Windows (PowerShell) | Installs Node if needed, installs OpenClaw via npm (default) or git, can run onboarding.       |
 
-All three support Node **22.19+, 23.11+, or 24+**; Node 24 is the default target for fresh installs.
+All three support Node **22.22.3+, 24.15+, or 25.9+**; Node 24 is the default target for fresh installs.
 
 ## Quick commands
 
@@ -90,8 +90,8 @@ Detect OS
 
 Ensure Node.js 24 by default
 
-    Checks Node version and installs Node 24 if needed (Homebrew on macOS, NodeSource setup scripts on Linux apt/dnf/yum). On macOS, Homebrew is installed only when the installer needs it for Node or Git. Node 22.19+ and 23.11+ remain supported for compatibility.
-    On Alpine/musl Linux, the installer uses apk packages instead of NodeSource; the configured Alpine repositories must provide a supported Node version (Alpine 3.21 or newer at the time of writing).
+    Checks Node version and installs Node 24 if needed (Homebrew on macOS, NodeSource setup scripts on Linux apt/dnf/yum). On macOS, Homebrew is installed only when the installer needs it for Node or Git. Node 22.22.3+, Node 24.15+, and Node 25.9+ are supported; Node 23 is unsupported.
+    On Alpine/musl Linux, the installer uses apk packages instead of NodeSource and verifies the actual linked SQLite version. Current stable Alpine package streams can provide a new-enough Node with vulnerable system SQLite; when that happens, use an official `node:24-alpine` container or a glibc-based host instead.
 
 
 Ensure Git
@@ -236,8 +236,9 @@ Steps
 
 Install local Node runtime
 
-    Downloads a pinned supported Node LTS tarball (the version is embedded in the script and updated independently, default `22.22.0`) to `<prefix>/tools/node-v<version>` and verifies SHA-256.
-    On Alpine/musl Linux, where Node does not publish compatible tarballs for the pinned runtime, installs `nodejs` and `npm` with `apk` and links that runtime into the prefix wrapper path. The Alpine repositories must provide a supported Node version (22.19+, 23.11+, or 24+); use Alpine 3.21 or newer if older repositories only provide Node 20 or 21.
+    Downloads a pinned supported Node LTS tarball (the version is embedded in the script and updated independently, default `24.15.0`) to `<prefix>/tools/node-v<version>` and verifies SHA-256.
+    Linux ARMv7 uses Node `22.22.3` because official Node 24+ ARMv7 binaries are unavailable.
+    On Alpine/musl Linux, where Node does not publish compatible tarballs for the pinned runtime, installs `nodejs` and `npm` with `apk`, then verifies both Node and the actual linked SQLite library. Current stable Alpine package streams may still link vulnerable SQLite even with a new-enough Node; use an official `node:24-alpine` container or a glibc-based host when the safety check rejects the package.
 
 
 Ensure Git
@@ -312,7 +313,7 @@ Flags reference
 | `--git \| --github`                     | Shortcut for git method                                                         |
 | `--git-dir \| --dir <path>`             | Git checkout directory (default: `~/openclaw`)                                  |
 | `--version <ver>`                       | OpenClaw version or dist-tag (default: `latest`)                                |
-| `--node-version <ver>`                  | Node version (default: `22.22.0`)                                               |
+| `--node-version <ver>`                  | Node version (default: `24.15.0`; `22.22.3` on Linux ARMv7)                     |
 | `--json`                                | Emit NDJSON events                                                              |
 | `--onboard`                             | Run `openclaw onboard` after install                                            |
 | `--no-onboard`                          | Skip onboarding (default)                                                       |
@@ -360,7 +361,7 @@ Ensure PowerShell + Windows environment
 
 Ensure Node.js 24 by default
 
-    If missing, attempts install via winget, then Chocolatey, then Scoop. If no package manager is available, the script downloads the official Node.js 24 Windows zip into `%LOCALAPPDATA%\OpenClaw\deps\portable-node` and adds it to the current process and user PATH. Node 22.19+ and 23.11+ remain supported for compatibility.
+    If missing, attempts install via winget, then Chocolatey, then Scoop. If no package manager is available, the script downloads the official Node.js 24 Windows zip into `%LOCALAPPDATA%\OpenClaw\deps\portable-node` and adds it to the current process and user PATH. Node 22.22.3+, Node 24.15+, and Node 25.9+ are supported; Node 23 is unsupported.
 
 
 Install OpenClaw

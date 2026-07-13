@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel location parsing"
 source: "https://docs.openclaw.ai/channels/location"
-source_hash: "3e004b5d097743f613521e3306e957e157f0c733ef21e382a581d08ef976e4d3"
+source_hash: "fadd154f5ec198ef7acbf761c1554845c9d3764354c910ea742c6a0afef863ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/location.md"
@@ -69,6 +69,12 @@ When a location is present, these fields are added to `ctx`:
 When the channel does not set an explicit source, OpenClaw infers it: live shares become `live`, locations with a name or address become `place`, everything else is `pin`.
 
 The prompt renderer treats `LocationName`, `LocationAddress`, and `LocationCaption` as untrusted metadata and serializes them through the same bounded JSON path used for other channel context.
+
+## Outbound payloads
+
+The message tool and Plugin SDK use the same `NormalizedLocation` shape for portable outbound locations. A coordinate-only payload represents a pin. Channels with native venue support may map `name` plus `address` to a venue card.
+
+Telegram currently exposes this through `message(action="send")`. Its first implementation is deliberately standalone: location payloads cannot be mixed with text or media, and incomplete venue pairs fail instead of silently dropping a name or address. Unsupported channels do not advertise the location parameter.
 
 ## Channel notes
 

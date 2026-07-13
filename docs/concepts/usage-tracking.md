@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "b1f0fa87ec09bd236b7cf77a1eb79dad82fbb2ac44975513061d014822b35d0f"
+source_hash: "77c3e5a6515b239a51e37e6050df0f00073c509d482a42c7d457dc1e51617f1d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/usage-tracking.md"
@@ -203,16 +203,10 @@ change:
   "aliases": { "<table>": { "<value>": "<label>" } },
   "output": {
     "sep": "", // joins surviving pieces
-    "default": [
-      /* pieces */
-    ], // fallback for any surface
+    "default": [/* pieces */], // fallback for any surface
     "surfaces": {
-      "discord": [
-        /* pieces */
-      ],
-      "telegram": [
-        /* pieces */
-      ],
+      "discord": [/* pieces */],
+      "telegram": [/* pieces */],
     },
   },
 }

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QMD memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-qmd"
-source_hash: "aebc26be6ed4576cdacdac68c12f63f6a9f5ae8ce979d62f0be9fe38b6239d5d"
+source_hash: "fb75b327bdeb8bc07b1ebdf51eb61e7ff8936e7c6f50382482a018fec104066a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-qmd.md"
@@ -276,8 +276,10 @@ keeps the older per-collection fallback for correctness.
 lexical-only, skips QMD vector status probes and embedding maintenance, and
 leaves semantic readiness checks to `vsearch` or `query` setups.
 
-**Search times out?** Increase `memory.qmd.limits.timeoutMs` (default:
-4000ms). Set it higher, for example `120000`, for slower hardware.
+**Search times out?** Increase `memory.qmd.limits.timeoutMs` (default: 4000ms).
+Set it higher, for example `120000`, for slower hardware. This limit applies to
+QMD's own search commands during agent `memory_search` calls; setup, sync,
+builtin fallback, and supplemental corpus work keep their own shorter deadlines.
 
 **Empty results in group or channel chats?** This is expected with the
 default `memory.qmd.scope`, which allows only direct sessions. Add an

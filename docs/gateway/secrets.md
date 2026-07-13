@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "5bb654223e71c425eab58d8140955711c4ab7b9c1c6646e7f1a7be1c0c8503c0"
+source_hash: "a261721b5c4d070f8156057e02afaf2bcd612245a06ba157b652adba1f86c596"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -247,9 +247,14 @@ Optional per-id errors:
 {
   "protocolVersion": 1,
   "values": {},
-  "errors": { "providers/openai/apiKey": { "message": "not found" } }
+  "errors": { "providers/openai/apiKey": { "code": "NOT_FOUND" } }
 }
 ```
+
+`code` is an optional machine-readable diagnostic. OpenClaw displays the recognized
+codes `NOT_FOUND` and `AMBIGUOUS_DUPLICATE_KEY` with the provider and ref id. Other
+codes and free-form fields such as `message` are accepted for protocol-v1 compatibility
+but are not displayed because resolver output can contain credential material.
 
 ## File-backed API keys
 
@@ -283,6 +288,8 @@ For `mode: "singleValue"`, the SecretRef `id` is `"value"`. For `mode: "json"`, 
 See [SecretRef Credential Surface](/reference/secretref-credential-surface) for the fields that accept SecretRefs.
 
 ## Exec integration examples
+
+For a dedicated 1Password guide covering service accounts, the bundled agent skill, and troubleshooting, see [1Password](/gateway/1password).
 
 AccordionGroup
 

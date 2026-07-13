@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "33997b723f90c63bfb10e5da864435c04f51f99d236392f9c9dacbc2607f2923"
+source_hash: "5b900fcafef5914a78e8caf9677990c54dc444bad6b4fad7b94b46149881b52a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/daemon.md"
@@ -33,7 +33,7 @@ openclaw daemon uninstall
 | Subcommand  | Options                                                                                          |
 | ----------- | ------------------------------------------------------------------------------------------------ |
 | `status`    | `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json` |
-| `install`   | `--port`, `--runtime <node\|bun>`, `--token`, `--wrapper <path>`, `--force`, `--json`            |
+| `install`   | `--port`, `--runtime <node>`, `--token`, `--wrapper <path>`, `--force`, `--json`                 |
 | `uninstall` | `--json`                                                                                         |
 | `start`     | `--json`                                                                                         |
 | `stop`      | `--json`, `--disable` (launchd only: persistently suppress KeepAlive/RunAtLoad until next start) |

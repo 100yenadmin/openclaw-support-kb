@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/start/setup"
-source_hash: "351f03cebdd000aaab95b74158fadacc88bfe75a8c0e7d596213877cf03a4169"
+source_hash: "c3dd1ca7ca35f21e4a1e29841b8ed6ea364459a7ffff1a8a9db441755e5afe95"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/setup.md"
@@ -28,7 +28,7 @@ Pick a setup workflow based on how often you want updates and whether you want t
 
 ## Prereqs (from source)
 
-- Node 24 recommended (Node 22 LTS, currently `22.19+`, still supported)
+- Node 24.15+ recommended (Node 22 LTS, currently `22.22.3+`, still supported)
 - `pnpm` required for source checkouts. OpenClaw loads bundled plugins from the
   `extensions/*` pnpm workspace packages in dev mode, so root `npm install` does
   not prepare the full source tree.
@@ -111,6 +111,11 @@ terminals. Non-interactive shells stay detached and print
 `tmux attach -t openclaw-gateway-watch-main`; use
 `OPENCLAW_GATEWAY_WATCH_ATTACH=0 pnpm gateway:watch` to keep an interactive run
 detached, or `pnpm gateway:watch:raw` for foreground watch mode. The watcher
+stops the active profile's installed Gateway service before taking over its
+configured/default port, preventing the service supervisor from replacing the
+source process. The service stays installed; run `pnpm openclaw gateway start`
+when you finish watching. The tmux pane remains available after startup failure
+so another terminal or agent can attach or capture its logs. The watcher
 reloads on relevant source, config, and bundled-plugin metadata changes. If the
 watched Gateway exits during startup, `gateway:watch` runs
 `openclaw doctor --fix --non-interactive` once and retries; set
@@ -139,7 +144,8 @@ openclaw health
 - **Where state lives:**
   - Channel/provider state: `~/.openclaw/credentials/`
   - Model auth profiles: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-  - Sessions: `~/.openclaw/agents/<agentId>/sessions/`
+  - Sessions and transcripts: `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
+  - Legacy/archive session artifacts: `~/.openclaw/agents/<agentId>/sessions/`
   - Logs: `/tmp/openclaw/`
 
 ## Credential storage map

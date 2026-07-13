@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "exe.dev"
 source: "https://docs.openclaw.ai/install/exe-dev"
-source_hash: "8412547e00c0bc6d170545b04a7b2438a6b095ecd76544f6c3f097de75f8172e"
+source_hash: "7cc420136f00c5dd2d30464a49053f68f8f894153a9102b7541291cc8544393b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/exe-dev.md"
@@ -176,9 +176,9 @@ From your local machine, create a patch file and pipe it to the VM:
   },
   agents: {
     defaults: {
-      model: { primary: "openai/gpt-5.5" },
+      model: { primary: "openai/gpt-5.6-sol" },
       models: {
-        "openai/gpt-5.5": { params: { fastMode: true } },
+        "openai/gpt-5.6-sol": { params: { fastMode: true } },
       },
     },
   },

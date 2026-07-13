@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Shared connections"
 source: "https://docs.composio.dev/docs/shared-connections.md"
-source_hash: "102dd436d05babe8fd6066918736437883407ee4e178981ff0ce81a5f6509ee3"
+source_hash: "d3fbc7468f8cc3544a824e185b37849ccc2f844fe0165a9b45fb1df40ddf6c70"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "shared-connections.md"
@@ -126,7 +126,7 @@ const composio = new Composio({ apiKey: 'your_api_key' });
 // user_alice starts a session that pins the shared Gmail connection.
 // Gmail tools loaded from this session will resolve to that connection
 // even though user_alice did not create it.
-const session = await composio.create("user_alice", {
+const session = await composio.sessions.create("user_alice", {
   connectedAccounts: {
     gmail: ["ca_gmail_shared"],
   },

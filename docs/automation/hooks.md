@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "28c6e87f13fb5e27c7e23dacf374ed77a5f00de072389ce0dcde5e90e003db7a"
+source_hash: "e70d6470401aed56f6a37015aea7c9875be6eadb68ee6d5949ad21c350e3e791"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/hooks.md"
@@ -243,7 +243,7 @@ openclaw hooks enable <hook-name>
 
 ### session-memory details
 
-Extracts the last user/assistant messages (default 15, configurable with `hooks.internal.entries.session-memory.messages`) and saves them to `<workspace>/memory/YYYY-MM-DD-HHMM.md` using the host local date. Memory capture runs in the background so `/new` and `/reset` acknowledgements are not delayed by transcript reads or optional slug generation. Set `hooks.internal.entries.session-memory.llmSlug: true` to generate descriptive filename slugs with the configured model (falls back to timestamp slugs when unavailable). Requires `workspace.dir` to be configured.
+Extracts the last user/assistant messages (default 15, configurable with `hooks.internal.entries.session-memory.messages`) and saves them to `<workspace>/memory/YYYY-MM-DD-HHMM.md` using the host local date. Memory capture runs in the background so `/new` and `/reset` acknowledgements are not delayed by transcript reads or optional slug generation. Set `hooks.internal.entries.session-memory.llmSlug: true` to generate descriptive filename slugs, and optionally set `hooks.internal.entries.session-memory.model` to a configured alias such as `sonnet`, a bare model ID on the agent's default provider, or a `provider/model` ref. Slug generation uses the agent's default model when `model` is omitted and falls back to timestamp slugs when unavailable. Requires `workspace.dir` to be configured.
 
 <a id="bootstrap-extra-files"></a>
 

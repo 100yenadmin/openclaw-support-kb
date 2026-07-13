@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "1552a0f3e3ddb5053e57c450df43748f44e84cca46fcabd90277fc16aba1332e"
+source_hash: "f2c78f1c5445250089cb9ff83152c03b7230a4d7b2866d1ca3aa2a1a8d4f1e8f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -73,6 +73,21 @@ Note
   Codex CLI's native `$CODEX_HOME/skills` directory is **not** an OpenClaw
   skill root. Use `openclaw migrate plan codex` to inventory those skills, then
   `openclaw migrate codex` to copy them into your OpenClaw workspace.
+
+## Node-hosted skills
+
+A connected headless node can publish skills installed in its active OpenClaw
+skills directory (`~/.openclaw/skills` by default; profile environment overrides
+apply). They appear in the normal agent skill list while the node is connected
+and disappear when it disconnects. A local or Gateway skill keeps its name on
+collision; the node skill receives a deterministic node-prefixed name.
+Node-hosted v1 requires the directory name to match the skill's `name`
+frontmatter field.
+
+The skill entry includes the node locator. Its files, relative references, and
+binaries live on the node, so load and execute it with
+`exec host=node node=<node-id>`. Restart the node host after changing its skill
+files. See [Nodes](/nodes#node-hosted-skills) for pairing and off-switches.
 
 ## Per-agent vs shared skills
 

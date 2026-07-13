@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "ddfb193cd2953ad9c0e1e70975e15f8ce14a53384832baee19d8835746f95aee"
+source_hash: "1fba4b262b6b0c8253ba2b108ac7a6d62409e4eb13d889c97dbd1bf6ae1ad887"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -42,7 +42,7 @@ const composio = new Composio({
 });
 
 // Create a session for your user
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 const tools = await session.tools();
 
 const agent = new Agent({

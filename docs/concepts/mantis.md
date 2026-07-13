@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mantis"
 source: "https://docs.openclaw.ai/concepts/mantis"
-source_hash: "84ad768814d4ae8bb336f1d5ce26bd81f7c9fea0de5e6fa4b01873d2b8d26fe9"
+source_hash: "00b3bf9a776bb5049a01e1e421c74eb69c711b83f91ad222455f832941ccd29d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/mantis.md"
@@ -362,8 +362,9 @@ slow or unavailable, add it behind the same Crabbox interface rather than
 hardcoding a fallback.
 
 VM baseline: Linux with a desktop-capable Chrome/Chromium, CDP access, VNC/
-noVNC, Node 22+ and pnpm, an OpenClaw checkout, and outbound access to the
-target transport, GitHub, model providers, and the credential broker.
+noVNC, Node 22.22.3+, 24.15+, or 25.9+ and pnpm, an OpenClaw checkout, and
+outbound access to the target transport, GitHub, model providers, and the
+credential broker.
 
 Secret names used across the Mantis workflows:
 

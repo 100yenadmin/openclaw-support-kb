@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Approvals"
 source: "https://docs.openclaw.ai/cli/approvals"
-source_hash: "81608427ad6374f997ed2751e8ecfcd89547a5e2cb6e3d59687ee926ead9661e"
+source_hash: "613310a6021bc5d8310c8e3df392bde3d5cf934103c94ba567b55b24411819fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/approvals.md"
@@ -54,6 +54,12 @@ openclaw approvals get --gateway
 ```
 
 `get` shows the effective exec policy for the target: the requested `tools.exec` policy, the host approvals-file policy, and the merged effective result. Nodes with a host-native policy, such as the Windows companion, show that policy directly instead of applying OpenClaw approvals-file policy math.
+
+For file-backed nodes, the merged view requires a host-resolved policy snapshot. Older nodes show the effective policy as unavailable instead of assuming the Gateway's requested policy also applies on the host.
+
+Note
+
+Per-session `/exec` overrides are not included. Run `/exec` in the relevant session to inspect its current defaults.
 
 Precedence:
 

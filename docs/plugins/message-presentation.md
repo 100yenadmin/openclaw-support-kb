@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "e5cf995bf2be975be17300829d2dbc94cc6b4147a999dd917f4e35b4b783539d"
+source_hash: "4fda81c034fa45072e330a30a74c462e46deb8325f2199d93314223483ddc356"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -18,7 +18,7 @@ It lets agents, CLI commands, approval flows, and plugins describe the message
 intent once, while each channel plugin renders the best native shape it can.
 
 Use presentation for portable message UI: text sections, small context/footer
-text, dividers, charts, buttons, select menus, and card title/tone.
+text, dividers, charts, tables, buttons, select menus, and card title/tone.
 
 Do not add new provider-native fields such as Discord `components`, Slack
 `blocks`, Telegram `buttons`, Teams `card`, or Feishu `card` to the shared
@@ -64,20 +64,39 @@ type MessagePresentationBlock =
       series: Array<{ name: string; values: number[] }>;
       xLabel?: string;
       yLabel?: string;
+    }
+  | {
+      type: "table";
+      caption: string;
+      headers: string[];
+      rows: Array
+Array
+>;
+      rowHeaderColumnIndex?: number;
     };
 
 type MessagePresentationAction =
   | { type: "command"; command: string }
-  | { type: "callback"; value: string };
+  | { type: "callback"; value: string }
+  | {
+      type: "approval";
+      approvalId: string;
+      approvalKind: "exec" | "plugin";
+      decision: "allow-once" | "allow-always" | "deny";
+    }
+  | { type: "url"; url: string }
+  | { type: "web-app"; url: string };
 
 type MessagePresentationButton = {
   label: string;
   action?: MessagePresentationAction;
   /** Legacy callback value. Prefer action for new controls. */
   value?: string;
+  /** @deprecated Use an action with type "url". */
   url?: string;
+  /** @deprecated Use an action with type "web-app". */
   webApp?: { url: string };
-  /** @deprecated Use webApp. Accepted for legacy JSON payloads only. */
+  /** @deprecated Use an action with type "web-app". */
   web_app?: { url: string };
   priority?: number;
   disabled?: boolean;
@@ -87,7 +106,9 @@ type MessagePresentationButton = {
 
 type MessagePresentationOption = {
   label: string;
-  action?: MessagePresentationAction;
+  action?: Extract
+MessagePresentationAction
+;
   /** Legacy callback value. Prefer action for new controls. */
   value?: string;
 };
@@ -110,13 +131,18 @@ Button semantics:
 - `action.type: "callback"` carries opaque plugin data through the channel's
   interaction path. Channel plugins must not reinterpret callback data as slash
   commands.
+- `action.type: "approval"` identifies one durable operator approval, its
+  explicit `exec` or `plugin` kind, and the requested decision. Channel plugins
+  encode that action into a transport-private callback and resolve it through
+  the approval service; they must not parse `/approve` command text or infer
+  kind from the ID.
+- `action.type: "url"` opens a normal link.
+- `action.type: "web-app"` launches a channel-native web app.
 - `value` is the legacy opaque callback value. New controls should use `action`
   so channel plugins can map commands and callbacks without guessing from text.
-- `url` is a link button. It can exist without `value`.
-- `webApp` describes a channel-native web app button. Telegram renders this
-  as `web_app` and only supports it in private chats. `web_app` is still
-  accepted in loose JSON payloads for compatibility, but TypeScript producers
-  should use `webApp`.
+- `url`, `webApp`, and `web_app` remain accepted as deprecated boundary inputs.
+  Normalizers preserve these fields so renderers can distinguish shipped legacy
+  semantics from explicit typed actions. New producers should use `action`.
 - `label` is required and is also used in text fallback.
 - `style` is advisory. Renderers should map unsupported styles to a safe
   default, not fail the send.
@@ -135,7 +161,7 @@ Button semantics:
 
 Select semantics:
 
-- `options[].action` has the same command/callback meaning as button `action`.
+- `options[].action` accepts only `command` or `callback`; approval and link actions are button-only.
 - `options[].value` is the legacy selected application value.
 - `placeholder` is advisory and may be ignored by channels without native
   select support.
@@ -152,6 +178,32 @@ Chart semantics:
   Other channels receive the chart title, axes, categories, series, and values
   as deterministic text. This is also the accessibility fallback.
 
+Table semantics:
+
+- `caption` is a required short heading. `headers` must contain at least one
+  unique, non-empty column label.
+- `rows` must contain at least one row. Every row must have exactly one cell per
+  header, and every cell must be a non-empty string or a finite number.
+- `rowHeaderColumnIndex` is an optional zero-based index identifying the column
+  whose cells should be exposed as row headers by native renderers.
+- Table normalization is atomic. An invalid caption, header, row width, cell,
+  or row-header index drops the table block instead of truncating or repairing
+  its data.
+- Native table rendering is opt-in through `presentationCapabilities.tables`.
+  Other channels receive the caption and every row as deterministic linear
+  text, with internal whitespace collapsed:
+
+  ```text
+  Open pipeline (table)
+  - Account: Acme; Stage: Won; ARR: 125000
+  - Account: Globex; Stage: Review; ARR: 82000
+  ```
+
+There is no separate `report` discriminator. Compose a report from `title`,
+`tone`, `text`, `context`, `chart`, `table`, and action blocks. This keeps each
+block independently renderable and gives the complete report the same
+deterministic text fallback.
+
 ## Producer examples
 
 Simple card:
@@ -166,8 +218,16 @@ Simple card:
     {
       "type": "buttons",
       "buttons": [
-        { "label": "Approve", "value": "deploy:approve", "style": "success" },
-        { "label": "Decline", "value": "deploy:decline", "style": "danger" }
+        {
+          "label": "Approve",
+          "action": { "type": "callback", "value": "deploy:approve" },
+          "style": "success"
+        },
+        {
+          "label": "Decline",
+          "action": { "type": "callback", "value": "deploy:decline" },
+          "style": "danger"
+        }
       ]
     }
   ]
@@ -182,7 +242,12 @@ URL-only link button:
     { "type": "text", "text": "Release notes are ready." },
     {
       "type": "buttons",
-      "buttons": [{ "label": "Open notes", "url": "https://example.com/release" }]
+      "buttons": [
+        {
+          "label": "Open notes",
+          "action": { "type": "url", "url": "https://example.com/release" }
+        }
+      ]
     }
   ]
 }
@@ -195,7 +260,12 @@ Telegram Mini App button:
   "blocks": [
     {
       "type": "buttons",
-      "buttons": [{ "label": "Launch", "web_app": { "url": "https://example.com/app" } }]
+      "buttons": [
+        {
+          "label": "Launch",
+          "action": { "type": "web-app", "url": "https://example.com/app" }
+        }
+      ]
     }
   ]
 }
@@ -236,6 +306,29 @@ Chart:
       "xLabel": "Quarter",
       "yLabel": "Revenue"
     }
+  ]
+}
+```
+
+Table report:
+
+```json
+{
+  "title": "Pipeline report",
+  "tone": "info",
+  "blocks": [
+    { "type": "text", "text": "Current opportunities by stage." },
+    {
+      "type": "table",
+      "caption": "Open pipeline",
+      "headers": ["Account", "Stage", "ARR"],
+      "rows": [
+        ["Acme", "Won", 125000],
+        ["Globex", "Review", 82000]
+      ],
+      "rowHeaderColumnIndex": 0
+    },
+    { "type": "context", "text": "Updated from the CRM snapshot." }
   ]
 }
 ```
@@ -284,6 +377,7 @@ const adapter: ChannelOutboundAdapter = {
     context: true,
     divider: true,
     charts: false,
+    tables: false,
     limits: {
       actions: {
         maxActions: 25,
@@ -330,6 +424,7 @@ type ChannelPresentationCapabilities = {
   context?: boolean;
   divider?: boolean;
   charts?: boolean;
+  tables?: boolean;
   limits?: {
     actions?: {
       maxActions?: number;
@@ -371,8 +466,9 @@ On the canonical outbound path used by CLI and standard message actions, core:
 2. Resolves the target channel's outbound adapter.
 3. Reads `presentationCapabilities`.
 4. Applies generic capability limits such as action count, label length, and
-   select option count when the adapter advertises them. Chart blocks become
-   deterministic text unless the adapter explicitly advertises `charts: true`.
+   select option count when the adapter advertises them. Chart and table blocks
+   become deterministic text unless the adapter explicitly advertises
+   `charts: true` or `tables: true`, respectively.
 5. Calls `renderPresentation` when the adapter can render the payload.
 6. Falls back to conservative text when the adapter is absent or cannot render.
 7. Sends the resulting payload through the normal channel delivery path.
@@ -399,6 +495,7 @@ Fallback text includes:
 - button labels, including URLs for link buttons
 - select option labels
 - chart title, type, axes, categories, series, and values
+- table caption, headers, and every row value
 
 ### Button value fallback visibility
 
@@ -410,8 +507,12 @@ keeping opaque callback data private:
   copy the command and run it manually in the channel input.
 - **`callback`-typed actions** and legacy **`value`** fields render as
   label-only. The opaque callback value is not exposed in fallback text.
-- **`url` / `webApp`** buttons render the URL text alongside the button
-  label, since the URL is user-facing.
+- **`approval`-typed actions** render label-only. Approval IDs and decisions are
+  transport data and are not exposed through generic scalar helpers or fallback
+  text.
+- **`url` / `web-app` actions** and deprecated **`url` / `webApp` / `web_app`**
+  inputs render the URL text alongside the button label, since the URL is
+  user-facing.
 - **Select options** render as label-only. The underlying option value is not
   exposed in fallback text.
 
@@ -426,6 +527,7 @@ Examples:
 - Telegram with inline buttons disabled sends text fallback.
 - A channel without select support lists select options as text.
 - A channel without native chart support lists the chart data as text.
+- A channel without native table support lists every table row as text.
 - A URL-only button becomes either a native link button or a fallback URL line.
 - Optional pin failures do not fail the delivered message.
 
@@ -443,7 +545,7 @@ Current bundled renderers:
 | Matrix          | Text fallback plus structured event field | Buttons/selects advertise as supported, but every block currently renders as `renderMessagePresentationFallbackText` output carried in a `com.openclaw.presentation` event field, not native interactive widgets. |
 | Mattermost      | Text plus interactive props               | Selects and dividers are not supported; those blocks degrade to text.                                                                                                                                             |
 | Microsoft Teams | Adaptive Cards                            | Plain `message` text is included with the card when both are provided. Selects, styles, and disabled state are not supported.                                                                                     |
-| Slack           | Block Kit                                 | Renders `chart` as native `data_visualization`; preserves legacy `channelData.slack.blocks`, but new shared sends should use `presentation`.                                                                      |
+| Slack           | Block Kit                                 | Renders `chart` as native `data_visualization` and `table` as native `data_table`; preserves legacy `channelData.slack.blocks`, but new shared sends should use `presentation`.                                   |
 | Telegram        | Text plus inline keyboards                | Buttons/selects require inline button capability for the target surface; otherwise text fallback is used.                                                                                                         |
 | Plain channels  | Text fallback                             | Channels without a renderer still get readable output.                                                                                                                                                            |
 
@@ -466,6 +568,7 @@ helpers. It supports:
 - context
 - divider
 - chart
+- table
 - URL-only buttons
 - generic delivery metadata through `ReplyPayload.delivery`
 
@@ -485,8 +588,11 @@ code:
   presentationToInteractiveReply,
   renderMessagePresentationChartFallbackText,
   renderMessagePresentationFallbackText,
+  renderMessagePresentationTableFallbackText,
   resolveMessagePresentationActionValue,
+  resolveMessagePresentationButtonAction,
   resolveMessagePresentationControlValue,
+  resolveMessagePresentationOptionAction,
 } from "openclaw/plugin-sdk/interactive-runtime";
 ```
 
@@ -501,10 +607,17 @@ Non-deprecated helpers worth knowing:
   `--presentation` flag) into `MessagePresentation`.
 - `isMessagePresentationInteractiveBlock(block)` narrows a block to the
   `buttons` | `select` union.
+- `resolveMessagePresentationButtonAction(button)` and
+  `resolveMessagePresentationOptionAction(option)` return the canonical typed
+  action while accepting deprecated boundary fields. An explicit `action`
+  always wins.
 - `resolveMessagePresentationActionValue(action)` /
-  `resolveMessagePresentationControlValue(control)` read the effective
-  command/callback value off an `action`, falling back to the legacy `value`
-  field for `resolveMessagePresentationControlValue`.
+  `resolveMessagePresentationControlValue(control)` read command/callback
+  scalar values only. A non-scalar canonical action never falls through to a
+  legacy shadow `value`, so approval IDs and link targets stay typed.
+- `renderMessagePresentationChartFallbackText(block)` /
+  `renderMessagePresentationTableFallbackText(block)` render one structured
+  data block as deterministic text for channel-specific fallback paths.
 
 The legacy `InteractiveReply*` types and conversion helpers are marked
 `@deprecated` in the SDK:
@@ -533,6 +646,13 @@ Approval helpers also have presentation-first replacements:
   `buildApprovalInteractiveReply(...)`
 - use `buildExecApprovalPresentation(...)` instead of
   `buildExecApprovalInteractiveReply(...)`
+
+Those shipped builders remain command-backed for plugin compatibility. Gateway
+and bundled channel code that owns a durable approval kind should use
+`buildTypedApprovalPresentation(...)`,
+`buildTypedExecApprovalPendingReplyPayload(...)`, or
+`buildTypedPluginApprovalPendingReplyPayload(...)` so transports receive an
+explicit `approval` action instead of inferring semantics from `/approve` text.
 
 `renderMessagePresentationFallbackText(...)` returns an empty string for
 presentation blocks that have no text fallback, such as a divider-only
@@ -568,8 +688,9 @@ messages where the provider supports those operations.
 - Declare generic capability limits on `presentationCapabilities.limits` when
   they are known.
 - Preserve final platform limits in the renderer and tests.
-- Add fallback tests for unsupported charts, buttons, selects, URL buttons,
-  title/text duplication, and mixed `message` plus `presentation` sends.
+- Add fallback tests for unsupported charts, tables, buttons, selects, URL
+  buttons, title/text duplication, and mixed `message` plus `presentation`
+  sends.
 - Add delivery pin support through `deliveryCapabilities.pin` and
   `pinDeliveredMessage` only when the provider can pin the sent message id.
 - Do not expose new provider-native card/block/component/button fields through

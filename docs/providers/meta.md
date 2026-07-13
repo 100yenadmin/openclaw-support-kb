@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meta"
 source: "https://docs.openclaw.ai/providers/meta"
-source_hash: "45ffbc9becd5ded93d8c3200d70b817f0da0e0d36d0cb7a98544465b1c635042"
+source_hash: "c848374ce24af103bb43e16bc2e233442dd82df357350c0206161b5fa4ddee15"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/meta.md"
@@ -25,7 +25,7 @@ plugin.
 | Onboarding flag   | `--auth-choice meta-api-key`       |
 | Direct CLI flag   | `--meta-api-key <key>`             |
 | API               | Responses API (`openai-responses`) |
-| Base URL          | `https://api.ai.meta.com/v1`       |
+| Base URL          | `https://api.meta.ai/v1`           |
 | Default model     | `meta/muse-spark-1.1`              |
 | Default reasoning | `high` (`reasoning.effort`)        |
 
@@ -82,7 +82,7 @@ openclaw onboard --non-interactive --accept-risk \
 
 | Model ref             | Name           | Reasoning | Context window | Max output |
 | --------------------- | -------------- | --------- | -------------- | ---------- |
-| `meta/muse-spark-1.1` | Muse Spark 1.1 | yes       | 1,048,576      | 128,000    |
+| `meta/muse-spark-1.1` | Muse Spark 1.1 | yes       | 1,048,576      | 131,072    |
 
 Capabilities:
 

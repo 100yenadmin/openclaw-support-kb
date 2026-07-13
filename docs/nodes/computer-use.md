@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Computer use"
 source: "https://docs.openclaw.ai/nodes/computer-use"
-source_hash: "f7b6b22550907b7f3ffddebf6cc8b59b4d2e353b6e40c4e5066c73eee5e3bc98"
+source_hash: "d4589163b6c69c6a023fa879849db32a3adf19ae667a9bb3e47329fb12c681c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/computer-use.md"
@@ -76,6 +76,14 @@ Reads reuse `screen.snapshot`; there is no second capture path. See [Camera and 
    Arming requires `operator.admin` (or the owner) and auto-expires. The legacy `/phone arm all` group intentionally excludes desktop control; use the explicit `computer` group. Arming only toggles what the gateway may invoke; the macOS app still enforces its **Allow Computer Control** setting and OS permissions.
 
 For persistent authorization, add `computer.act` to `gateway.nodes.allowCommands` **and remove it from** `gateway.nodes.denyCommands`; the deny list wins. Persistent authorization does not auto-expire. Entries already present before `/phone arm` remain after `/phone disarm`; do not convert a temporary grant to persistent while it is armed.
+
+Authorization is deliberately split between enabling and use. Arming or
+persistently configuring `computer.act` requires administrative authority.
+Once armed, an authenticated operator with `operator.write` can invoke
+`computer.act` through `node.invoke` until the grant expires or is disarmed;
+there is no per-action admin check. Approving a node that declares
+`computer.act` only records the surface so it can be armed later and does not
+enable invocation by itself.
 
 ## Safety
 

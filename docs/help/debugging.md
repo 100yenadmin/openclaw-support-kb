@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "a7c9bb321c5446182765f9debef5b2c9269a34e4d06721d1ed59f6dc40943740"
+source_hash: "f417d14dad325104759957a315ab2f2402749b245c79d14c2da55eb0e3701908"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/debugging.md"
@@ -90,13 +90,25 @@ By default this starts or restarts a tmux session named `openclaw-gateway-watch-
 
 ```bash
 tmux attach -t openclaw-gateway-watch-main
+# Read recent output without attaching
+tmux capture-pane -ep -t openclaw-gateway-watch-main -S -200
 ```
+
+The pane uses tmux `remain-on-exit`, so startup failures stay available for attach or capture instead of deleting the session. Re-running `pnpm gateway:watch` respawns that pane.
 
 The tmux pane runs the raw watcher:
 
 ```bash
 node scripts/watch-node.mjs gateway --force
 ```
+
+Before watching the configured/default port, the tmux wrapper stops the active profile's installed Gateway service. This hands the port to the source watcher without launchd, systemd, or Scheduled Task respawning and replacing it. The service stays installed; restore it after the watch session with:
+
+```bash
+pnpm openclaw gateway start
+```
+
+When an explicit `--port` or `OPENCLAW_GATEWAY_PORT` differs from the installed service's effective port, the wrapper leaves the service running so both Gateways can run side by side.
 
 Foreground mode without tmux:
 
@@ -105,6 +117,8 @@ pnpm gateway:watch:raw
 # or
 OPENCLAW_GATEWAY_WATCH_TMUX=0 pnpm gateway:watch
 ```
+
+Raw mode does not manage the installed service. Run `pnpm openclaw gateway stop` first when it uses the same port.
 
 Keep tmux management but disable auto-attach:
 

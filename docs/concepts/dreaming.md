@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "ddfef5de1bbee09a55fcabe1889fe0de22aac2bc8d8f36977f3aef056a11af34"
+source_hash: "93850303938e5fcc17b5747c1f668aa45378afd95a8df97a2323e355ad64f6ac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/dreaming.md"
@@ -93,7 +93,7 @@ Backfill commands
 
 
 
-The Control UI exposes the same diary backfill/reset flow so you can inspect results in the Dreams scene before deciding whether grounded candidates deserve promotion. A distinct grounded Scene lane shows which staged short-term entries came from historical replay, which promoted items were grounded-led, and lets you clear only grounded-only staged entries without touching live short-term state.
+The Control UI exposes the same diary backfill/reset flow on the agent's Memory tab (Agents page) so you can inspect results in the dream scene before deciding whether grounded candidates deserve promotion. A distinct grounded Scene lane shows which staged short-term entries came from historical replay, which promoted items were grounded-led, and lets you clear only grounded-only staged entries without touching live short-term state.
 
 ## Deep ranking signals
 

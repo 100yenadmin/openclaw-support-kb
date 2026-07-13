@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Local sandbox"
 source: "https://docs.composio.dev/docs/sandbox/local.md"
-source_hash: "62da74d31013a5539d8250e6a818a76ce4e6aacb906a287b6dfaed1cbf933ed7"
+source_hash: "f520dc5431f2de84ab7c735fbad9c318162d789625e2868d338aea768b008d7a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sandbox/local.md"
@@ -40,7 +40,7 @@ import { experimental_createLocalWorkbenchSession } from '@composio/experimental
 const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
 
 // Create the session with the remote sandbox disabled, so code runs in your box.
-const session = await composio.create('user_123', {
+const session = await composio.sessions.create('user_123', {
   toolkits: ['github'],
   workbench: { enable: false },
 });

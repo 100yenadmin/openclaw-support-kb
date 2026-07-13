@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "d65be64d12a1b51e6bb7b4bc6b349043c0821af81184765c7a5e7ffe6d7eece3"
+source_hash: "7a611431e22b1d7a67f2cbfb53dd37a23038453966a1fb995373e14bca542989"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/googlechat.md"
@@ -189,7 +189,6 @@ Use these identifiers for delivery and allowlists:
           systemPrompt: "Short answers only.",
         },
       },
-      actions: { reactions: true },
       typingIndicator: "message",
       mediaMaxMb: 20,
     },
@@ -203,9 +202,9 @@ Notes:
 - Default webhook path is `/googlechat` when `webhookPath` is unset; `webhookUrl` can supply the path instead.
 - Group keys must be stable space ids (`spaces/<spaceId>`). Display-name keys are deprecated and logged as such.
 - `dangerouslyAllowNameMatching` re-enables mutable email principal matching for allowlists (break-glass compatibility mode); doctor warns about email entries.
-- Reactions are enabled by default and exposed through the `reactions` tool and `channels action`; disable with `actions.reactions: false`.
+- Google Chat reaction actions are not exposed. The plugin uses service-account authentication, while Google Chat reaction endpoints require user authentication. Existing `actions.reactions` config is accepted for compatibility but has no effect.
 - Native approval cards use Google Chat `cardsV2` button clicks, not reaction events. Approvers come from `dm.allowFrom` or `defaultTo` and must be stable numeric `users/<id>` values.
-- Message actions expose `send` for text and `upload-file` for explicit attachment sends. `upload-file` accepts `media` / `filePath` / `path` plus optional `message`, `filename`, and thread targeting (`threadId` / `replyTo`).
+- Message actions expose text `send` only. Google Chat attachment upload requires user authentication, while this plugin uses service-account authentication, so outbound file upload is not exposed.
 - `typingIndicator`: `message` (default) posts a `_
 Bot
  is typing..._` placeholder and edits it into the first reply; `none` disables it; `reaction` requires user OAuth and currently falls back to `message` with a logged error under service-account auth.
@@ -269,7 +268,6 @@ openclaw channels status
 - [Gateway configuration](/gateway/configuration)
 - [Groups](/channels/groups) — group chat behavior and mention gating
 - [Pairing](/channels/pairing) — DM authentication and pairing flow
-- [Reactions](/tools/reactions)
 - [Security](/gateway/security) — access model and hardening
 
 ---

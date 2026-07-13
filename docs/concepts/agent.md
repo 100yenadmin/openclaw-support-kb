@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "cf78da0faa422ebd3ee72c24434be42be9f91a4d527cb8a3691188a360cb7859"
+source_hash: "98d5c2ab03e596b1d9624b484d4dc0a3c7b400ddc4af50050442f36481ebb416"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent.md"
@@ -95,13 +95,15 @@ runtime surface.
 
 ## Sessions
 
-Session transcripts are stored as JSONL at:
+Session rows are stored in the per-agent SQLite database:
 
-- `~/.openclaw/agents/<agentId>/sessions/
-SessionId
-.jsonl`
+- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
 
-The session ID is stable and chosen by OpenClaw. OpenClaw does not read session folders from other tools.
+Transcript JSONL files can still live under
+`~/.openclaw/agents/<agentId>/sessions/` as legacy migration inputs, deleted or
+reset archives, imports, exports, and support artifacts. Active agent history is
+stored in SQLite with the session rows. The session ID is stable and chosen by
+OpenClaw. OpenClaw does not read session folders from other tools.
 
 ## Steering while streaming
 
@@ -122,7 +124,8 @@ Control soft block chunking with `agents.defaults.blockStreamingChunk` (defaults
 800-1200 chars; prefers paragraph breaks, then newlines; sentences last).
 Coalesce streamed chunks with `agents.defaults.blockStreamingCoalesce` to reduce
 single-line spam (idle-based merging before send). Non-Telegram channels require
-explicit `*.blockStreaming: true` to enable block replies.
+explicit `*.streaming.block.enabled: true` to enable block replies (QQ Bot
+instead streams block replies unless `channels.qqbot.streaming.mode` is `"off"`).
 Verbose tool summaries are emitted at tool start (no debounce); Control UI
 streams tool output via agent events when available.
 More details: [Streaming + chunking](/concepts/streaming).

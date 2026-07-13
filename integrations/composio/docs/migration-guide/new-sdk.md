@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "ca9335a1b645f695e93f397fe1f54f4e44c8e2129cc4e2541f03148ebb70bdac"
+source_hash: "93d900ba63756448a51759e1f510e02f34bcaa829012fa2bd35edb49aa54687c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -597,7 +597,7 @@ const getIssueInfo = experimental_createTool("GET_ISSUE_INFO", {
   },
 });
 
-const session = await composio.create("default", {
+const session = await composio.sessions.create("default", {
   experimental: { customTools: [getIssueInfo] },
 });
 ```

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logbook plugin"
 source: "https://docs.openclaw.ai/plugins/logbook"
-source_hash: "1d669f976c9060edbfc48c9ddcc50451b74c314b5513d5d4fffc743422ff31a8"
+source_hash: "b40ff24174d63b2a9c32237e9d7ab07c5ea7b9cc2f80b8049335fb93f47d4d83"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/logbook.md"
@@ -64,7 +64,7 @@ Configure an explicit vision model for deterministic startup:
       logbook: {
         enabled: true,
         config: {
-          visionModel: "codex/gpt-5.5",
+          visionModel: "codex/gpt-5.6-sol",
         },
       },
     },
@@ -146,7 +146,7 @@ text.
           nodeId: "my-mac",
           screenIndex: 0,
           maxWidth: 1440,
-          visionModel: "codex/gpt-5.5",
+          visionModel: "codex/gpt-5.6-sol",
           retentionDays: 14,
         },
       },

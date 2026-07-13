@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "8feec4a41202cd4591e3d760cc13275d4a6d2430a9ef91f18b0511130eabe801"
+source_hash: "866ffd78142f46c6113b0432c8131e23be3a626fc176daaa94718d2bcf3ac15c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -109,6 +109,13 @@ command list:
 | none                                                  | `operator.pairing`                    |
 | non-exec node commands                                | `operator.pairing` + `operator.write` |
 | `system.run`, `system.run.prepare`, or `system.which` | `operator.pairing` + `operator.admin` |
+
+Approving a node declaration does not enable commands that have a separate
+runtime allowlist gate. For example, approving a node that declares
+`computer.act` requires pairing plus write scope, but only records the surface.
+An administrator or owner must still arm `computer.act`. While it remains
+armed, invoking it through the write-scoped `node.invoke` method does not
+require admin scope for each action.
 
 Node pairing establishes identity and trust; it does not replace a node's own
 `system.run` exec approval policy.

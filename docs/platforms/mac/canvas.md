@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "9109ca4a361e80c061dd0753e234626d015d0b0f3e9e7607ccb91de1300a9311"
+source_hash: "b69f82c8df0fffff262da7fd58d34924639c7b2712dfa39eaaa9fc4077f8ae1a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
@@ -50,7 +50,7 @@ snapshot image:
 
 ```bash
 openclaw nodes canvas present --node <id>
-openclaw nodes canvas navigate --node <id> --url "/"
+openclaw nodes canvas navigate --node <id> "/"
 openclaw nodes canvas eval --node <id> --js "document.title"
 openclaw nodes canvas snapshot --node <id>
 ```
@@ -58,13 +58,20 @@ openclaw nodes canvas snapshot --node <id>
 `canvas.navigate` accepts local canvas paths, `http(s)` URLs, and `file://`
 URLs. Passing `"/"` shows the local scaffold or `index.html`.
 
+Gateway-hosted targets under `/__openclaw__/canvas/` and
+`/__openclaw__/a2ui/` are resolved through the node session's current scoped
+Canvas URL. The app refreshes that short-lived capability before navigation;
+you do not need to construct or copy a capability URL yourself.
+
 ## A2UI in Canvas
 
 A2UI is hosted by the Gateway canvas host and rendered inside the Canvas
 panel. When the Gateway advertises a Canvas host, the macOS app auto-navigates
 to the A2UI host page on first open.
 
-Default A2UI host URL: `http://<gateway-host>:18789/__openclaw__/a2ui/`
+The advertised URL is capability-scoped, for example
+`http://<gateway-host>:18789/__openclaw__/cap/<token>/__openclaw__/a2ui/?platform=macos`.
+Treat it as ephemeral credentials, not a stable link.
 
 ### A2UI commands (v0.8)
 
@@ -115,6 +122,10 @@ fields; keyed links use the normal Gateway run path.
 - Canvas scheme blocks directory traversal; files must live under the session root.
 - Local Canvas content uses a custom scheme (no loopback server required).
 - External `http(s)` URLs are allowed only when explicitly navigated.
+- Ordinary web pages are render-only. Agent actions are accepted only from the
+  app-owned Canvas scheme or the exact capability-scoped Gateway A2UI document
+  selected by the app; subframes, redirects, stale capabilities, and changed
+  queries cannot dispatch actions.
 
 ## Related
 

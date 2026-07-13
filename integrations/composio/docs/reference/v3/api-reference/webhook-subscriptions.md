@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md"
-source_hash: "b823a91cbba131531bcdbcb7e29bac092fc75c4db57d5f97bcad44e72a85f816"
+source_hash: "719ffe29f41d7a0afbaadc6ccc4f606ba9db139ed080c76599278f9ab2ae5c58"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/webhook-subscriptions.md"
@@ -130,7 +130,7 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
     const toolkit = payload.data.toolkit.slug;
 
     // Look up the user and send them a re-auth link
-    const session = await composio.create(lookupUser(accountId));
+    const session = await composio.sessions.create(lookupUser(accountId));
     const connectionRequest = await session.authorize(toolkit);
     if (connectionRequest.redirectUrl) {
       notifyUser(connectionRequest.redirectUrl);
@@ -147,5 +147,11 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 > Always [verify webhook signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures) before processing events in production.
 
 # Endpoints
+
+---
+
+
+# Toolkits
+
 
 ---

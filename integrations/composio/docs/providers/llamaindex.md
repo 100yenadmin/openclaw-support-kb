@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "2d4f1482d88366007472fe867dfbb90fc462371f952fa2d73187de15bd7ef6ae"
+source_hash: "00bc3772959aa0cc8cb6ff8e4793a63392a29548cd7993bc9fce36a0e5ab0c03"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -74,7 +74,7 @@ const composio = new Composio({
 });
 
 // Create a session for your user
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 const tools = await session.tools();
 
 const myAgent = agent({

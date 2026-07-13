@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "API Server"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server"
-source_hash: "393e1422c814c7621d92c3aeb3e66b9f3682e29738c2cf40e3c125e3f4d8be0c"
+source_hash: "8083e52547fbfd344bbbb4bee874c2055d3ff87c016fa250b5a801095c23d330"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/api-server.md"
@@ -289,9 +289,18 @@ Statuses are retained briefly after terminal states (`completed`, `failed`, or `
 
 Server-Sent Events stream of the run's tool-call progress, token deltas, and lifecycle events. Designed for dashboards and thick clients that want to attach/detach without losing state.
 
+Unconsumed event buffers expire after five minutes so a detached client cannot
+grow memory indefinitely. This expires transport state only: a run that is
+still executing remains visible to status polling, approval, stop control, and
+concurrency accounting until its executor work actually exits. A connected SSE
+subscriber continues draining normally.
+
 ### POST /v1/runs/\{run_id\}/stop
 
 Interrupt a running agent turn. The endpoint returns immediately with `{"status": "stopping"}` while Hermes asks the active agent to stop at the next safe interruption point.
+The run stays tracked as `stopping` until the executor-backed work exits, then
+settles as `cancelled`; requesting stop never hides a worker that is still
+running.
 
 ### POST /v1/runs/\{run_id\}/approval
 

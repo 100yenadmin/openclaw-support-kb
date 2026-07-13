@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "036a9f735fd038074cc343c9a038a33199e15dc51b7912898274b0daaaff6b9b"
+source_hash: "1791a911f567cc5041b4f195ea23edbbb585365339b3ca0024b7dce2d7464791"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
@@ -162,18 +162,6 @@ ParamField
 AccordionGroup
 
 
-Legacy input aliases
-
-    Still accepted for backward compatibility:
-
-    - `format` -> `fileFormat`
-    - `imageFormat` -> `fileFormat`
-    - `imageQuality` -> `fileQuality`
-    - `imageScale` -> `fileScale`
-    - `imageMaxWidth` -> `fileMaxWidth`
-
-
-
 Validation and limits
 
     - `before`/`after`: max 512 KiB each.
@@ -244,22 +232,11 @@ File fields (file and both modes)
 
 
 
-Compatibility aliases (always returned)
-
-    - `format` (= `fileFormat`)
-    - `imagePath` (= `filePath`)
-    - `imageBytes` (= `fileBytes`)
-    - `imageQuality` (= `fileQuality`)
-    - `imageScale` (= `fileScale`)
-    - `imageMaxWidth` (= `fileMaxWidth`)
-
-
-
-| Mode     | Returns                                                                                                      |
-| -------- | ------------------------------------------------------------------------------------------------------------ |
-| `"view"` | Viewer fields only.                                                                                          |
-| `"file"` | File fields only, no viewer artifact.                                                                        |
-| `"both"` | Viewer fields plus file fields. If file rendering fails, viewer still returns with `fileError`/`imageError`. |
+| Mode     | Returns                                                                                         |
+| -------- | ----------------------------------------------------------------------------------------------- |
+| `"view"` | Viewer fields only.                                                                             |
+| `"file"` | File fields only, no viewer artifact.                                                           |
+| `"both"` | Viewer fields plus file fields. If file rendering fails, viewer still returns with `fileError`. |
 
 ### Collapsed unchanged sections
 

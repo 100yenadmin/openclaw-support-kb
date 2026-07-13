@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawRouter"
 source: "https://docs.openclaw.ai/providers/clawrouter"
-source_hash: "cff1b9ab204a88e974473bf5b0dbae3439a44760f72053fedf378f61d28dcf61"
+source_hash: "a68d7ca9adcf72b2b2cb99e328a6385aab9166c8ff085daeeeaaa73eecb12bac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/clawrouter.md"
@@ -139,6 +139,13 @@ The dry run resolves the SecretRef but never prints its value. To rotate the
 credential, update the external Secret that supplies `CLAWROUTER_API_KEY` and
 restart the gateway workload so the new process environment is loaded. The
 config file and model reference do not change.
+
+For a source-built standalone Docker gateway, ClawRouter is already included in
+the root runtime. Select only the channel plugin that needs separate packaging,
+such as `OPENCLAW_EXTENSIONS=clickclack`, `slack`, or `msteams`; see
+[source-built images with selected plugins](/install/docker#source-built-images-with-selected-plugins).
+Archive/appliance deployments must package the same landed source through their
+own artifact pipeline rather than consuming the OCI image.
 
 ## Readiness and live proof
 

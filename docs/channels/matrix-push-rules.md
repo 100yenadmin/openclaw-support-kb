@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix push rules for quiet previews"
 source: "https://docs.openclaw.ai/channels/matrix-push-rules"
-source_hash: "45b29c405a20d5f70e6dccc1d42a21832bdb8cb8ac26a618353cdc618776a267"
+source_hash: "be635d97e859a684c674a24329d7044a4bc9859efdd912ec1aee75f5c68d0922"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-push-rules.md"
@@ -13,11 +13,11 @@ duplicate_index: 1
 # Matrix push rules for quiet previews
 Source: https://docs.openclaw.ai/channels/matrix-push-rules
 
-When `channels.matrix.streaming` is `"quiet"`, OpenClaw streams the reply by editing a single preview event in place. Previews are sent as non-notifying `m.notice` events, and the finalized edit is marked with `content["com.openclaw.finalized_preview"] = true`. Matrix clients notify on that final edit only if a per-user push rule matches the marker. This page is for operators who self-host Matrix and want to install that rule for each recipient account.
+When `channels.matrix.streaming.mode` is `"quiet"`, OpenClaw streams the reply by editing a single preview event in place. Previews are sent as non-notifying `m.notice` events, and the finalized edit is marked with `content["com.openclaw.finalized_preview"] = true`. Matrix clients notify on that final edit only if a per-user push rule matches the marker. This page is for operators who self-host Matrix and want to install that rule for each recipient account.
 
-`streaming: "progress"` finalizes its drafts through the same path, so the same rule also fires for progress-mode finalized edits.
+`streaming.mode: "progress"` finalizes its drafts through the same path, so the same rule also fires for progress-mode finalized edits.
 
-If you only want stock Matrix notification behavior, use `streaming: "partial"` or leave streaming off. See [Matrix channel setup](/channels/matrix#streaming-previews).
+If you only want stock Matrix notification behavior, use `streaming.mode: "partial"` or leave streaming off. See [Matrix channel setup](/channels/matrix#streaming-previews).
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ Configure quiet previews
 {
   channels: {
     matrix: {
-      streaming: "quiet",
+      streaming: { mode: "quiet" },
     },
   },
 }

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "11489b486b2805f0d38db96f9228a1dd8b889ecbe58d2cb22dc51bc0b852297b"
+source_hash: "5064d1e5c7abd187f17f134981164d41ec79e6cbfbe9ddea77eed54d1d9bb45a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -267,7 +267,7 @@ Feishu/Lark does not support native slash-command menus, so send these as plain 
 ### Message limits
 
 - `textChunkLimit` - outbound text chunk size (default: `4000` chars)
-- `chunkMode` - `"length"` (default) splits at the limit; `"newline"` prefers newline boundaries
+- `streaming.chunkMode` - `"length"` (default) splits at the limit; `"newline"` prefers newline boundaries
 - `mediaMaxMb` - media upload/download limit (default: `30` MB)
 
 ### Streaming
@@ -278,14 +278,16 @@ Feishu/Lark supports streaming replies via interactive cards (Card Kit streaming
 {
   channels: {
     feishu: {
-      streaming: true, // enable streaming card output (default: true)
-      blockStreaming: true, // opt into completed-block streaming
+      streaming: {
+        mode: "partial", // streaming card output (default: "partial")
+        block: { enabled: true }, // opt into completed-block streaming
+      },
     },
   },
 }
 ```
 
-Set `streaming: false` to send the complete reply in one message; `renderMode: "raw"` (plain text instead of cards) also disables streaming cards. `blockStreaming` is off by default; enable it only when you want completed assistant blocks flushed before the final reply.
+Set `streaming.mode: "off"` to send the complete reply in one message; `renderMode: "raw"` (plain text instead of cards) also disables streaming cards. `streaming.block.enabled` is off by default; enable it only when you want completed assistant blocks flushed before the final reply. Legacy boolean `streaming` and the flat `blockStreaming` / `blockStreamingCoalesce` / `chunkMode` keys migrate to this nested shape via `openclaw doctor --fix`.
 
 ### Quota optimization
 
@@ -335,6 +337,10 @@ The plugin ships agent tools for Feishu documents, chats, knowledge base, cloud 
 | `tools.bitable` | `feishu_bitable_*` Bitable/Base operations    | `true`              |
 
 `tools.base` is an alias for `tools.bitable`; the explicit `bitable` value wins when both are set. Per-account gates live under `accounts.<id>.tools`.
+
+Grant `drive:drive.metadata:readonly` for direct `feishu_drive info` lookups outside the root
+directory, unless the app already has the full `drive:drive` scope. Without either scope, `info`
+keeps the legacy root-directory lookup available through `drive:drive:readonly`.
 
 ### ACP sessions
 
@@ -605,11 +611,11 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.dynamicAgentCreation.agentDirTemplate`  | Agent directory name template                                                        | `~/.openclaw/agents/{agentId}/agent` |
 | `channels.feishu.dynamicAgentCreation.maxAgents`         | Maximum number of dynamic agents to create                                           | unlimited                            |
 | `channels.feishu.textChunkLimit`                         | Message chunk size                                                                   | `4000`                               |
-| `channels.feishu.chunkMode`                              | Chunk splitting (`length` or `newline`)                                              | `length`                             |
+| `channels.feishu.streaming.chunkMode`                    | Chunk splitting (`length` or `newline`)                                              | `length`                             |
 | `channels.feishu.mediaMaxMb`                             | Media size limit                                                                     | `30`                                 |
 | `channels.feishu.renderMode`                             | Reply rendering (`auto`, `raw`, `card`)                                              | `auto`                               |
-| `channels.feishu.streaming`                              | Streaming card output                                                                | `true`                               |
-| `channels.feishu.blockStreaming`                         | Completed-block reply streaming                                                      | `false`                              |
+| `channels.feishu.streaming.mode`                         | Streaming card output (`partial` or `off`)                                           | `partial`                            |
+| `channels.feishu.streaming.block.enabled`                | Completed-block reply streaming                                                      | `false`                              |
 | `channels.feishu.typingIndicator`                        | Send typing reactions                                                                | `true`                               |
 | `channels.feishu.resolveSenderNames`                     | Resolve sender display names                                                         | `true`                               |
 | `channels.feishu.configWrites`                           | Allow channel-initiated config writes (needed by dynamic agents)                     | `true`                               |

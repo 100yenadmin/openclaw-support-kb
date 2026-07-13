@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex plugin"
 source: "https://docs.openclaw.ai/plugins/reference/codex"
-source_hash: "06cdc3eea1efb4f80c0d114db1b3611795d3a06e975dce0f4eda8892ddc66e27"
+source_hash: "152f90a5c602b4781368dab921b91fa28f9d9bf484e553c5393137c20cd4907c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/codex.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/codex
 
 # Codex plugin
 
-OpenClaw Codex app-server harness and model provider plugin with a Codex-managed GPT catalog.
+Codex app-server harness, model provider, and native session catalog.
 
 ## Distribution
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "ad2052f9310bf8dac381cddea62650a76b0187fc6d6c3c44f9b37acd951dc8a4"
+source_hash: "37ebe2acbc6061819a1c64c6416ec23adfa716a07944e938168fca274e638e1b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/ansible.md"
@@ -47,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/openclaw/openclaw-ansible/main/inst
 1. Tailscale (mesh VPN for secure remote access)
 2. UFW firewall (SSH + Tailscale ports only)
 3. Docker CE + Compose V2 (default agent sandbox backend)
-4. Node.js and pnpm (OpenClaw requires Node 22.19+ or 23.11+; Node 24 is recommended)
+4. Node.js and pnpm (OpenClaw requires Node 22.22.3+, 24.15+, or 25.9+; Node 24 is recommended)
 5. OpenClaw, installed host-based, not containerized
 6. A systemd service with security hardening
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "3ec402a6a29fb031d57755ba68db99161c377bf669bb2118fdda18e07dc4db2f"
+source_hash: "9659340529e54f77e26cb03db3604752ef968d336509323cbfd6c9bd39ea3c79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -88,6 +88,8 @@ Actions:
 Notes:
 
 - Only backgrounded sessions are listed/persisted — in memory only, not on disk. Sessions are lost on process restart.
+- A live background session blocks cooperative host suspension and safe Gateway restart until the process owner confirms its actual exit.
+- `process remove` can hide a running session immediately after requesting termination; suspension and restart remain blocked until exit confirmation.
 - Session logs are only saved to chat history if you run `process poll`/`log` and the tool result is recorded.
 - `process` is scoped per agent; it only sees sessions started by that agent.
 - Use `poll`/`log` for status, logs, or completion confirmation when automatic completion wake is unavailable.

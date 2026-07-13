@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "4e78ac980ac3fb4a6119cee83a8ac720fc280a917ae70eb2aa99e89e5b962e44"
+source_hash: "b6c2cd093876716db7d021865eec2feae3be583cd5cf63fbc1eb2e624bdadba6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -207,7 +207,7 @@ A form-based editor for `config.yaml`. All 150+ configuration fields are auto-di
 - **agent** — max iterations, gateway timeout, service tier
 - **delegation** — subagent limits, reasoning effort
 - **memory** — provider selection, context injection settings
-- **approvals** — dangerous command approval mode (ask/yolo/deny)
+- **approvals** — dangerous command approval mode (smart/manual/off)
 - And more — every section of config.yaml has corresponding form fields
 
 Fields with known valid values (terminal backend, skin, approval mode, etc.) render as dropdowns. Booleans render as toggles. Everything else is a text input.

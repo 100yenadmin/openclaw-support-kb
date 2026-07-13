@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy"
 source: "https://docs.openclaw.ai/cli/policy"
-source_hash: "a9b2d70a7016bac9ecf811aa752ed3e7bdc329ad17848f01e2c4ccbea2f5950b"
+source_hash: "e2c17ecf940cb849b5df723d88598312a309cb487d215e946cae0a40b3859592"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/policy.md"
@@ -620,9 +620,9 @@ Example JSON output:
     ],
     "modelRefs": [
       {
-        "ref": "openai/gpt-5.5",
+        "ref": "openai/gpt-5.6-sol",
         "provider": "openai",
-        "model": "gpt-5.5",
+        "model": "gpt-5.6-sol",
         "source": "oc://openclaw.config/agents/defaults/model"
       }
     ],

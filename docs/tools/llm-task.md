@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM task"
 source: "https://docs.openclaw.ai/tools/llm-task"
-source_hash: "5f81e6a7c32a49bd153df83e96fe1e4cedc009c26c57ba5a0c4719a7f176053d"
+source_hash: "de679bb814379209420a3ef2e122b43d8b53ab647d6181a7f071a903f49a9cbe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/llm-task.md"
@@ -56,9 +56,9 @@ allowlist mode instead.
         "enabled": true,
         "config": {
           "defaultProvider": "openai",
-          "defaultModel": "gpt-5.5",
+          "defaultModel": "gpt-5.6-sol",
           "defaultAuthProfileId": "main",
-          "allowedModels": ["openai/gpt-5.5"],
+          "allowedModels": ["openai/gpt-5.6-sol"],
           "maxTokens": 800,
           "timeoutMs": 30000
         }

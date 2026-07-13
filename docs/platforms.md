@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "1e1168d2188b76c8f404204dd2af514efdfd0eada69229cbc50eb05d914c1232"
+source_hash: "3fb6bdd91c830b23be34b5e839681d849b34c565cce4b7910b3f64d4b866c566"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -13,9 +13,9 @@ duplicate_index: 1
 # Platforms
 Source: https://docs.openclaw.ai/platforms
 
-OpenClaw core is written in TypeScript. **Node is the recommended runtime**.
-Bun is not recommended for the Gateway — known issues with WhatsApp and
-Telegram channels; see [Bun (experimental)](/install/bun) for details.
+OpenClaw core is written in TypeScript. **Node is the required runtime** because
+the canonical state store uses `node:sqlite`. Bun remains available for
+dependency installation and package scripts; see [Bun](/install/bun).
 
 Companion apps exist for Windows Hub, macOS (menu bar app), and mobile nodes
 (iOS/Android). Linux companion apps are planned, but the Gateway is fully

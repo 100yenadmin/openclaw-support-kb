@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "e4c8d6bb96bfbb6cbc20646db398d0d31cb0b0bba5a93207641ea3a508b1d5bd"
+source_hash: "4f80b9b58ce8b6d09d624ae95c58eda17960d81efd1032eda06111dd0efb6d5c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -342,6 +342,7 @@ Replace broad infra-runtime imports
     | Transport readiness waits | `openclaw/plugin-sdk/transport-ready-runtime` |
     | Secure token helpers | `openclaw/plugin-sdk/secure-random-runtime` |
     | Bounded async task concurrency | `openclaw/plugin-sdk/concurrency-runtime` |
+    | Required-value assertions for provable invariants | `openclaw/plugin-sdk/expect-runtime` |
     | Numeric coercion | `openclaw/plugin-sdk/number-runtime` |
     | Process-local async lock | `openclaw/plugin-sdk/async-lock-runtime` |
     | File locks | `openclaw/plugin-sdk/file-lock` |
@@ -401,7 +402,7 @@ Common import path table
   | `plugin-sdk/core` | Legacy umbrella re-export for channel entry definitions/builders | `defineChannelPluginEntry`, `createChatChannelPlugin` |
   | `plugin-sdk/config-schema` | Root config schema export | `OpenClawSchema` |
   | `plugin-sdk/provider-entry` | Single-provider entry helper | `defineSingleProviderPluginEntry` |
-  | `plugin-sdk/channel-core` | Focused channel entry definitions and builders | `defineChannelPluginEntry`, `defineSetupPluginEntry`, `createChatChannelPlugin`, `createChannelPluginBase` |
+  | `plugin-sdk/channel-core` | Focused channel entry definitions and builders | `defineChannelPluginEntry`, `defineSetupPluginEntry`, `createChatChannelPlugin`, `createChannelPluginBase`, `createChannelConfigUiHints` |
   | `plugin-sdk/setup` | Shared setup wizard helpers | Setup translator, allowlist prompts, setup status builders |
   | `plugin-sdk/setup-runtime` | Setup-time runtime helpers | `createSetupTranslator`, import-safe setup patch adapters, lookup-note helpers, `promptResolvedAllowFrom`, `splitSetupEntries`, delegated setup proxies |
   | `plugin-sdk/setup-adapter-runtime` | Deprecated setup adapter alias | Use `plugin-sdk/setup-runtime` |
@@ -447,7 +448,8 @@ Common import path table
   | `plugin-sdk/approval-auth-runtime` | Approval auth helpers | Approver resolution, same-chat action auth |
   | `plugin-sdk/approval-client-runtime` | Approval client helpers | Native exec approval profile/filter helpers |
   | `plugin-sdk/approval-delivery-runtime` | Approval delivery helpers | Native approval capability/delivery adapters |
-  | `plugin-sdk/approval-gateway-runtime` | Approval gateway helpers | Shared approval gateway-resolution helper |
+  | `plugin-sdk/approval-gateway-runtime` | Approval gateway helpers | Shared approval gateway resolver |
+  | `plugin-sdk/approval-reference-runtime` | Approval transport references | Deterministic durable-locator helper for transport-limited callbacks |
   | `plugin-sdk/approval-handler-adapter-runtime` | Approval adapter helpers | Lightweight native approval adapter loading helpers for hot channel entrypoints |
   | `plugin-sdk/approval-handler-runtime` | Approval handler helpers | Broader approval handler runtime helpers; prefer the narrower adapter/gateway seams when they are enough |
   | `plugin-sdk/approval-native-runtime` | Approval target helpers | Native approval target/account binding helpers |
@@ -466,7 +468,7 @@ Common import path table
   | `plugin-sdk/exec-approvals-runtime` | Exec approval policy helpers | `loadExecApprovals`, `resolveExecApprovalsFromFile`, `ExecApprovalsFile` |
   | `plugin-sdk/collection-runtime` | Bounded cache helpers | `pruneMapToMaxSize` |
   | `plugin-sdk/diagnostic-runtime` | Diagnostic gating helpers | `isDiagnosticFlagEnabled`, `isDiagnosticsEnabled` |
-  | `plugin-sdk/error-runtime` | Error formatting helpers | `formatUncaughtError`, `isApprovalNotFoundError`, error graph helpers |
+  | `plugin-sdk/error-runtime` | Error helpers | `formatUncaughtError`, `isApprovalNotFoundError`, error graph helpers, `PlatformMessageNotDispatchedError` |
   | `plugin-sdk/fetch-runtime` | Wrapped fetch/proxy helpers | `resolveFetch`, proxy helpers, EnvHttpProxyAgent option helpers |
   | `plugin-sdk/host-runtime` | Host normalization helpers | `normalizeHostname`, `normalizeScpRemoteHost` |
   | `plugin-sdk/retry-runtime` | Retry helpers | `RetryConfig`, `retryAsync`, policy runners |
@@ -481,7 +483,7 @@ Common import path table
   | `plugin-sdk/reply-history` | Reply-history helpers | `createChannelHistoryWindow`; deprecated map-helper compatibility exports such as `buildPendingHistoryContextFromMap`, `recordPendingHistoryEntry`, and `clearHistoryEntriesIfEnabled` |
   | `plugin-sdk/reply-reference` | Reply reference planning | `createReplyReferencePlanner` |
   | `plugin-sdk/reply-chunking` | Reply chunk helpers | Text/markdown chunking helpers |
-  | `plugin-sdk/session-store-runtime` | Session store helpers | Store path + updated-at helpers |
+  | `plugin-sdk/session-store-runtime` | Session store helpers | Scoped session row helpers, store path helpers, and updated-at reads |
   | `plugin-sdk/state-paths` | State path helpers | State and OAuth dir helpers |
   | `plugin-sdk/routing` | Routing/session-key helpers | `resolveAgentRoute`, `buildAgentSessionKey`, `resolveDefaultAgentBoundAccountId`, session-key normalization helpers |
   | `plugin-sdk/status-helpers` | Channel status helpers | Channel/account status summary builders, runtime-state defaults, issue metadata helpers |
@@ -520,7 +522,7 @@ Common import path table
   | `plugin-sdk/media-generation-runtime` | Shared media-generation helpers | Shared failover helpers, candidate selection, and missing-model messaging for image/video/music generation |
   | `plugin-sdk/media-understanding` | Media-understanding helpers | Media understanding provider types plus provider-facing image/audio helper exports |
   | `plugin-sdk/text-runtime` | Deprecated broad text compatibility export | Use `string-coerce-runtime`, `text-chunking`, `text-utility-runtime`, and `logging-core` |
-  | `plugin-sdk/text-chunking` | Text chunking helpers | Outbound text chunking helper |
+  | `plugin-sdk/text-chunking` | Text chunking helpers | Outbound text and offset-preserving range chunking helpers |
   | `plugin-sdk/speech` | Speech helpers | Speech provider types plus provider-facing directive, registry, validation helpers, and OpenAI-compatible TTS builder |
   | `plugin-sdk/speech-core` | Shared speech core | Speech provider types, registry, directives, normalization |
   | `plugin-sdk/realtime-transcription` | Realtime transcription helpers | Provider types, registry helpers, and shared WebSocket session helper |
@@ -838,6 +840,20 @@ Memory embedding provider API
 
 
 
+Accordion
+ OutboundDeliveryResult">
+    **Old**: return `{ ok, messageId, error }` through
+    `ChannelSendRawResult` and normalize it with
+    `createRawChannelSendResultAdapter(...)`.
+
+    **New**: return `OutboundDeliveryResult` fields and attach the channel with
+    `createAttachedChannelResultAdapter(...)`. Failed sends should throw instead
+    of returning an error string. The raw result type remains available until
+    the next plugin-SDK major release.
+
+
+
+
 Subagent session messages types renamed
 
     Two legacy type aliases still exported from `src/plugins/runtime/types.ts`:
@@ -850,6 +866,44 @@ Subagent session messages types renamed
     The runtime method `readSession` is deprecated in favor of
     `getSessionMessages`. Same signature; the old method calls through to the
     new one.
+
+
+
+
+Removed session and transcript file APIs
+
+    The SQLite session/transcript flip removes or deprecates plugin-facing APIs
+    that exposed active `sessions.json` stores, JSONL transcript paths, or lists
+    of session files. Runtime plugins should use session identity and SDK runtime
+    helpers instead of resolving or mutating active files.
+
+    | Migrating surface | Replacement |
+    | ----------------- | ----------- |
+    | Deprecated `loadSessionStore(...)`, `updateSessionStore(...)`, and `resolveSessionStoreEntry(...)` | `getSessionEntry(...)`, `listSessionEntries(...)`, and row-level session mutations. |
+    | Deprecated `resolveSessionFilePath(...)` | Session identity (`sessionKey`, `sessionId`, and SDK runtime target helpers) plus Gateway methods that operate on the current session. |
+    | Removed `saveSessionStore(...)` | Gateway-owned session runtime APIs; plugin code should request or mutate session state through documented runtime/context helpers instead of writing the active store file. |
+    | Removed `resolveSessionTranscriptPathInDir(...)` and `resolveAndPersistSessionFile(...)` | Session identity and Gateway methods that operate on the current session. |
+    | `readLatestAssistantTextFromSessionTranscript(...)` | Identity-backed transcript readers exposed by the current runtime context, or Gateway history/session methods when the plugin is outside the transcript owner path. |
+    | `SessionTranscriptUpdate.sessionFile` | `SessionTranscriptUpdate.target` with `agentId`, `sessionKey`, and `sessionId`. |
+    | Memory sync inputs such as `sessionFiles` | Identity-backed transcript/session sources provided by the host; do not crawl active JSONL files for live sessions. |
+    | Runtime options named `transcriptPath` or `sessionFile` for active sessions | `sessionTarget`/runtime target objects that carry storage-neutral session identity. |
+
+    Legacy JSONL transcript files remain valid as import, archive, export, and
+    support artifacts. They are no longer the steady-state runtime contract for
+    active sessions.
+
+    Official plugins released with `v2026.7.1-beta.5` imported the four
+    deprecated helpers above. `openclaw/plugin-sdk/session-store-runtime` keeps
+    that exact bridge through 2026-10-12; new plugins must use the replacements.
+    `resolveStorePath(...)` remains a supported SDK helper and is not part of
+    this deprecation.
+
+    `openclaw plugins inspect --all --runtime` reports non-bundled plugins whose
+    load errors or diagnostics still reference these removed file APIs. The
+    `@openclaw/plugin-inspector` advisory sweep must use version `0.3.17` or
+    newer so external package scans also flag whole-store session helpers,
+    session file-path helpers, legacy transcript file targets, and low-level
+    transcript helpers before release.
 
 
 

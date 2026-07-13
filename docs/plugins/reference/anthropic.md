@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic plugin"
 source: "https://docs.openclaw.ai/plugins/reference/anthropic"
-source_hash: "58701dee012bf0b57092c732c2959626b4a777209b9c5dfd6ccf7e6688e4812d"
+source_hash: "3a41c1cb71d6d7b660ddb7c1a81430b0979ccf8443608f2bf5f02e3c95e6e2e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/anthropic.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/anthropic
 
 # Anthropic plugin
 
-Adds Anthropic model provider support to OpenClaw.
+Anthropic models, Claude CLI, and native Claude session catalog.
 
 ## Distribution
 
@@ -25,6 +25,14 @@ Adds Anthropic model provider support to OpenClaw.
 ## Surface
 
 providers: anthropic; contracts: mediaUnderstandingProviders, usageProviders
+
+<!-- openclaw-plugin-reference:manual-start -->
+
+node commands: anthropic.claude.sessions.list.v1,
+anthropic.claude.sessions.read.v1; contracts: mediaUnderstandingProviders,
+usageProviders
+
+<!-- openclaw-plugin-reference:manual-end -->
 
 ## Related docs
 

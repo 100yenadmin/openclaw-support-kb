@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio SDK — Instructions for AI Code Generators"
 source: "https://docs.composio.dev/llms-full.txt"
-source_hash: "2ea9a040284917a2f851afeb5396892a35556da095e6514ae40125cf0bb72eac"
+source_hash: "3959a1d32ad58882e9979c41802bcb4c707a28cee8fa830f535747fe31171232"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "ai-code-generator-instructions.md"
@@ -33,7 +33,7 @@ Composio supports two integration modes: **Native Tools** (with a provider packa
 from composio import Composio
 
 composio = Composio()
-session = composio.create(user_id="user_123")
+session = composio.sessions.create(user_id="user_123")
 tools = session.tools()
 # Pass tools to your agent/LLM framework
 ```
@@ -43,7 +43,7 @@ tools = session.tools()
 import { Composio } from "@composio/core";
 
 const composio = new Composio();
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 const tools = await session.tools();
 // Pass tools to your agent/LLM framework
 ```
@@ -60,10 +60,10 @@ Use `session.mcp.url` and `session.mcp.headers` with any MCP-compatible client (
 
 ### 2.1 — ALWAYS DO THE FOLLOWING
 
-1. **Use `composio.create(user_id)`** to create a session — this is the entry point for all Composio integrations.
+1. **Use `composio.sessions.create(user_id)`** to create a session — this is the entry point for all Composio integrations.
 2. **Use `session.tools()`** for native tool integration or **`session.mcp.url`** for MCP integration.
 3. **Import** from the correct provider package (`composio_<provider>` for Python, `@composio/<provider>` for TypeScript).
-4. **Pass `user_id` to `composio.create()`**, not to individual tool calls.
+4. **Pass `user_id` to `composio.sessions.create()`**, not to individual tool calls.
 
 ### 2.2 — NEVER DO THE FOLLOWING
 

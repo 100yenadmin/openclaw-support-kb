@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "6912f2ae6b2d181119f46f3552b827b9f1e8553ef19481d445f7e32438752b5e"
+source_hash: "460b4554052d9c6e05ee0ae337f421a54dff6d137d15c4993cb90fa87e44f5d6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -101,12 +101,12 @@ const composio = new Composio({ provider: new OpenAIAgentsProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.create(userId);
+const session = await composio.sessions.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.use(sessionId);
+// const session = await composio.sessions.use(sessionId);
 
 const agent = new Agent({
   name: "Personal Assistant",
@@ -227,12 +227,12 @@ const composio = new Composio({ provider: new ClaudeAgentSDKProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.create(userId);
+const session = await composio.sessions.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.use(sessionId);
+// const session = await composio.sessions.use(sessionId);
 
 const customServer = createSdkMcpServer({
   name: "composio",
@@ -306,12 +306,12 @@ const composio = new Composio({ provider: new VercelProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.create(userId);
+const session = await composio.sessions.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.use(sessionId);
+// const session = await composio.sessions.use(sessionId);
 
 const readline = createInterface({ input: process.stdin, output: process.stdout });
 

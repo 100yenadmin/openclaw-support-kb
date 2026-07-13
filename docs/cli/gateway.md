@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "38c6ac6419b7836bb43b00b09f05a275b58010571b90940c6ba6ca4339233d55"
+source_hash: "eb5c7539d947f6156946eb8d024047d360b163e444e4253d21c6b7df22ccffc8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -130,7 +130,7 @@ ParamField
 
 `--claude-cli-logs` is a deprecated alias for `--cli-backend-logs`.
 
-For `--bind custom`, set `gateway.customBindHost` to an IPv4 address; the Gateway falls back to `0.0.0.0` if that address is unavailable. IPv6-only bring-your-own-host setups need an IPv4 sidecar or proxy in front of the Gateway.
+For `--bind custom`, set `gateway.customBindHost` to an IPv4 address. Any address other than `127.0.0.1` or `0.0.0.0` also requires `127.0.0.1` on the same port for same-host clients; startup fails if either listener cannot bind. Wildcard `0.0.0.0` does not add a separate required alias. IPv6-only bring-your-own-host setups need an IPv4 sidecar or proxy in front of the Gateway.
 
 ## Restart the Gateway
 
@@ -565,7 +565,7 @@ AccordionGroup
 Command options
 
     - `gateway status`: `--url`, `--token`, `--password`, `--timeout`, `--no-probe`, `--require-rpc`, `--deep`, `--json`
-    - `gateway install`: `--port`, `--runtime <node|bun>` (default: `node`), `--token`, `--wrapper <path>`, `--force`, `--json`
+    - `gateway install`: `--port`, `--runtime <node>` (default: `node`), `--token`, `--wrapper <path>`, `--force`, `--json`
     - `gateway restart`: `--safe`, `--skip-deferral`, `--force`, `--wait <duration>`, `--json`
     - `gateway uninstall|start`: `--json`
     - `gateway stop`: `--disable`, `--json`

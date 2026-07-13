@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "770a5ffa0a495001b7426bd639ca96da4d5171fd595d2ed6456f3e3d8fe2f517"
+source_hash: "49bb4931acae4d6a81d65881e26afd5fe60c09de0b3f94c5c0ded947d82e9e80"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-runtimes.md"
@@ -23,7 +23,7 @@ configuration. They are different layers:
 | Layer         | Examples                                     | Meaning                                                             |
 | ------------- | -------------------------------------------- | ------------------------------------------------------------------- |
 | Provider      | `anthropic`, `github-copilot`, `openai`      | How OpenClaw authenticates, discovers models, and names model refs. |
-| Model         | `claude-opus-4-6`, `gpt-5.5`                 | The model selected for the agent turn.                              |
+| Model         | `claude-opus-4-6`, `gpt-5.6-sol`             | The model selected for the agent turn.                              |
 | Agent runtime | `claude-cli`, `codex`, `copilot`, `openclaw` | The low-level loop or backend that executes the prepared turn.      |
 | Channel       | Discord, Slack, Telegram, WhatsApp           | Where messages enter and leave OpenClaw.                            |
 
@@ -74,7 +74,7 @@ keeps the model ref as `openai/*` and selects the `codex` runtime:
 {
   agents: {
     defaults: {
-      model: "openai/gpt-5.5",
+      model: "openai/gpt-5.6-sol",
     },
   },
 }
@@ -250,7 +250,7 @@ The Codex runtime support contract is documented in
 Status output can show both `Execution` and `Runtime` labels. Read them as
 diagnostics, not provider names:
 
-- A model ref such as `openai/gpt-5.5` is the selected provider/model.
+- A model ref such as `openai/gpt-5.6-sol` is the selected provider/model.
 - A runtime id such as `codex` is the loop executing the turn.
 - A channel label such as Telegram or Discord is where the conversation is happening.
 

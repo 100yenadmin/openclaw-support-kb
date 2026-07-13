@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "006241205649e5cad68f3f45fcc8251f312c24a41a6f1b31337141c7c01134a4"
+source_hash: "3e7214c8c28fd77e913049fe4838b7593d6f3df9dea3af8df2f6dd2467884768"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
@@ -334,9 +334,9 @@ Native-client-specific routing:
 - Google Chat native cards preserve the manual `/approve` fallback in message text, but card button
   callbacks carry only opaque action tokens; the approval id and decision are recovered from
   server-side pending state.
-- WhatsApp emoji approvals handle both exec and plugin prompts only when the matching top-level
-  forwarding family is enabled and routes to WhatsApp; target-only WhatsApp forwarding stays on the
-  shared forwarding path unless it matches the same native origin target.
+- WhatsApp emoji approvals handle both exec and plugin prompts when the matching top-level
+  forwarding family routes to WhatsApp. Native-origin prompts bind directly; shared target-mode
+  delivery binds the same typed approval metadata to the accepted WhatsApp message receipt.
 - Signal reaction approvals handle both exec and plugin prompts only when the matching top-level
   forwarding family is enabled and routes to Signal. Direct same-chat Signal exec approvals can
   suppress the local `/approve` fallback without explicit approvers; Signal reaction resolution
@@ -346,9 +346,10 @@ Native-client-specific routing:
   include `com.openclaw.approval` custom event content on the first prompt event so OpenClaw-aware
   Matrix clients can read structured approval state while stock clients keep the plain-text
   `/approve` fallback.
-- Native Discord approval buttons route by approval id kind: `plugin:` ids go straight to plugin
-  approvals, everything else goes to exec approvals. Native Telegram approval buttons follow the
-  same bounded exec-to-plugin fallback as `/approve`.
+- Native Discord and Telegram approval buttons carry an explicit exec or plugin owner kind in
+  transport-private callback data and resolve only that owner. Older `/approve` controls that lack
+  a kind remain a bounded compatibility path: they try only owner kinds the actor may approve,
+  continue only after an approval-not-found result, and never infer ownership from the approval ID.
 - The requester does not need to be an approver.
 - If no operator UI or configured approval client can accept the request, the prompt falls back to
   `askFallback`.
@@ -365,6 +366,23 @@ See:
 - [Discord](/channels/discord)
 - [Telegram](/channels/telegram)
 - [QQ bot](/channels/qqbot)
+
+### Official mobile operator apps
+
+The official iOS and Android apps can also review Gateway-owned pending exec
+approvals when an `operator.admin` connection is used, or when their paired
+`operator.approvals` device was explicitly targeted by the request. They read
+the same sanitized durable record used by the
+Control UI, submit a kind-aware decision, and display the Gateway's canonical
+first-answer result. The Apple Watch mirrors these approval prompts through
+the paired iPhone, with allow-once and deny actions. Direct Watch Gateway mode
+does not review approvals.
+
+A lost resolve acknowledgement does not make the submitted choice authoritative:
+the app disables the controls and reads the record again. If another surface
+won, the app shows that recorded decision. Pending prompts remain bound to the
+Gateway that issued them, so switching the active Gateway cannot redirect an
+old approval ID.
 
 ### macOS IPC flow
 

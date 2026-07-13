@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool plugins"
 source: "https://docs.openclaw.ai/plugins/tool-plugins"
-source_hash: "9e05c633a80fb52e10f888d2aeb70b583962c97c033310807a21a139ca381e46"
+source_hash: "b603f05ad983cd6202be860ac1c898e02685fc75058696ca427f0fa8c02ee9b8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/tool-plugins.md"
@@ -24,7 +24,7 @@ or [Provider Plugins](/plugins/sdk-provider-plugins) instead.
 
 ## Requirements
 
-- Node 22.19+, Node 23.11+, or Node 24+.
+- Node 22.22.3+, Node 24.15+, or Node 25.9+.
 - TypeScript ESM package output.
 - `typebox` in `dependencies` (not just `devDependencies` - the generated
   plugin imports it at runtime).

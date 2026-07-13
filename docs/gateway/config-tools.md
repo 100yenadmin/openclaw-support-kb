@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "de22f2b728a127fab2bb9438f59e924389956196b6a2adbcab97e2d05b2fdac9"
+source_hash: "df39844f2d5f498693cc6721efb1b31bd2b609968db3af133bf437336d7f0eda"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -214,7 +214,7 @@ Controls elevated exec access outside the sandbox:
       commandHighlighting: false,
       applyPatch: {
         enabled: true,
-        allowModels: ["gpt-5.5"],
+        allowModels: ["gpt-5.6-sol"],
       },
     },
   },

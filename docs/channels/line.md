@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LINE"
 source: "https://docs.openclaw.ai/channels/line"
-source_hash: "75e827944af21ab4fd1ab19d91398f0ea4002d60501d487f646e88391b377bc8"
+source_hash: "b1a9babe113d2d909e3f53d73e5cb80cb24e8e24a799f67ef1d28c51c7024bef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/line.md"
@@ -148,8 +148,9 @@ Allowlists and policies:
 - `channels.line.dmPolicy`: `pairing | allowlist | open | disabled` (default `pairing`)
 - `channels.line.allowFrom`: allowlisted LINE user IDs for DMs; `dmPolicy: "open"` requires `["*"]`
 - `channels.line.groupPolicy`: `allowlist | open | disabled` (default `allowlist`)
-- `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups
-- Per-group overrides: `channels.line.groups.<groupId>.allowFrom` (plus `enabled`, `requireMention`, `systemPrompt`, `skills`)
+- `channels.line.groupAllowFrom`: allowlisted LINE user IDs for groups; DM `allowFrom` entries do not admit group senders
+- Per-group overrides: `channels.line.groups.<groupId>.allowFrom` (plus `enabled`, `requireMention`, `systemPrompt`, `skills`). With
+  `groupPolicy: "allowlist"`, set `groupAllowFrom` or the per-group `allowFrom`; an empty group allowlist blocks group messages even when DMs are open.
 - Static sender access groups can be referenced from `allowFrom`, `groupAllowFrom`, and per-group `allowFrom` with `accessGroup:<name>`; see [Access groups](/channels/access-groups).
 - Runtime note: if `channels.line` is completely missing, runtime falls back to `groupPolicy="allowlist"` for group checks (even if `channels.defaults.groupPolicy` is set).
 
@@ -189,9 +190,7 @@ messages.
       },
       flexMessage: {
         altText: "Status card",
-        contents: {
-          /* Flex payload */
-        },
+        contents: {/* Flex payload */},
       },
       templateMessage: {
         type: "confirm",

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "9e82cff889b2f75c6bcea529465862e4f6074fd7946466c9600d5ac472f00f7e"
+source_hash: "f72807f5e068fba50bdc0652b22b9898bddde26275bc4f4dd36358c2e4d1cdfb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Gateway on macOS
 Source: https://docs.openclaw.ai/platforms/mac/bundled-gateway
 
-OpenClaw.app does not bundle Node/Bun or the Gateway runtime. The macOS app
+OpenClaw.app does not bundle Node or the Gateway runtime. The macOS app
 expects an **external** `openclaw` CLI install, does not spawn the Gateway as
 a child process, and manages a per-user launchd service to keep the Gateway
 running (or attaches to an already-running local Gateway).
@@ -32,7 +32,7 @@ OpenClaw package.
 
 ## Manual recovery
 
-Node 24 is recommended for a manual install; Node 22.19+ also works. Install
+Node 24.15+ is recommended for a manual install; Node 22.22.3+ also works. Install
 `openclaw` globally:
 
 ```bash
@@ -67,6 +67,10 @@ Logging:
 - launchd stdout: `~/Library/Logs/openclaw/gateway.log` (profiles use
   `gateway-<profile>.log`)
 - launchd stderr: suppressed
+- If the host loops with repeated `EADDRINUSE` or fast restarts, check for
+  duplicate `ai.openclaw.gateway` / `ai.openclaw.node` LaunchAgents and the
+  launchd-marker workaround in
+  [Gateway troubleshooting](/gateway/troubleshooting#macos-launchd-supervisor-loop-with-duplicate-gatewaynode-launchagents).
 
 ## Version compatibility
 

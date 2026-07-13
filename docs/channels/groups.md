@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "573362a57c1dc6935f22997505cbc5a678791f71e4f1a5e6c9ff8d22ccb48790"
+source_hash: "570a21f33564801f090218ce11bfc44f0755d32066c8dfe31a7d5c55c6801d74"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -51,7 +51,7 @@ always-on group chatter -> user request, or room event when configured
 
 For normal group/channel requests, OpenClaw defaults to `messages.groupChat.visibleReplies: "automatic"`: the final assistant text posts to the room as the visible reply.
 
-Use `messages.groupChat.visibleReplies: "message_tool"` when a shared room should let the agent decide when to speak by calling `message(action=send)`. This works best with tool-reliable models (for example GPT 5.5). If the model misses the tool and returns substantive final text, OpenClaw keeps that text private instead of posting it to the room.
+Use `messages.groupChat.visibleReplies: "message_tool"` when a shared room should let the agent decide when to speak by calling `message(action=send)`. This works best with tool-reliable models (for example GPT-5.6 Sol). If the model misses the tool and returns substantive final text, OpenClaw keeps that text private instead of posting it to the room.
 
 Use `"automatic"` for models or runtimes that do not reliably follow tool-only delivery: normal text finals post directly to the room, and the agent may still call `message(action=send)` for files, images, or other attachments that cannot ride along with the final text.
 

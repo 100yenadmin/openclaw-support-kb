@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Trajectory bundles"
 source: "https://docs.openclaw.ai/tools/trajectory"
-source_hash: "a44cf95ccc79fbdbe216427943f74430422d1379d5abf504b4f66ed3d2a125d1"
+source_hash: "943a69da5f5559e8c75baba249a756bb5b7d1aa84202cc09b2d747182861540c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/trajectory.md"
@@ -119,31 +119,15 @@ Events are written as JSON Lines with this schema marker:
 `manifest.json` lists the files present in a given bundle; some files are
 omitted when the session did not capture the corresponding runtime data.
 
-## Capture location
+## Capture storage
 
-By default, runtime trajectory events are written beside the session file:
+Runtime trajectory events are stored with the session in the per-agent SQLite
+database. Exporting a trajectory materializes a redacted JSONL support bundle;
+the live runtime capture is not a session-adjacent JSONL sidecar.
 
-```text
-<session>.trajectory.jsonl
-```
-
-OpenClaw also writes a best-effort pointer file beside the session:
-
-```text
-<session>.trajectory-path.json
-```
-
-Set `OPENCLAW_TRAJECTORY_DIR` to store runtime trajectory sidecars in a
-dedicated directory instead, one JSONL file per session id:
-
-```bash
-export OPENCLAW_TRAJECTORY_DIR=/var/lib/openclaw/trajectories
-```
-
-Session maintenance removes trajectory sidecars when their owning session
-entry is pruned, capped, or evicted by the sessions disk budget. Runtime files
-outside the sessions directory are removed only when the pointer target still
-proves it belongs to that session.
+Legacy `.trajectory.jsonl` and `.trajectory-path.json` files may still appear
+from older releases or explicit legacy-file exports. Session maintenance treats
+those files as cleanup targets; active capture writes database rows.
 
 ## Disable capture
 
@@ -153,12 +137,12 @@ export OPENCLAW_TRAJECTORY=0
 
 This disables runtime trajectory capture before starting OpenClaw.
 `/export-trajectory` can still export the transcript branch, but runtime-only
-files such as compiled context, provider artifacts, and prompt metadata may be
+data such as compiled context, provider artifacts, and prompt metadata may be
 missing.
 
 ## Tune flush timeout
 
-OpenClaw flushes runtime trajectory sidecars during agent cleanup. The default
+OpenClaw flushes runtime trajectory rows during agent cleanup. The default
 cleanup timeout is 10,000 ms. On slow disks or large stores, set
 `OPENCLAW_TRAJECTORY_FLUSH_TIMEOUT_MS` before starting OpenClaw:
 
@@ -184,7 +168,7 @@ redacts sensitive values before writing export files:
 
 The exporter also bounds input size:
 
-- runtime sidecar files: the live capture file is a rolling window capped at 10 MiB, dropping the oldest events to make room for new ones; export accepts existing runtime sidecar files up to 50 MiB
+- runtime capture: the live capture is a rolling window capped at 10 MiB, dropping the oldest events to make room for new ones; export accepts existing legacy runtime sidecar files up to 50 MiB
 - session files: 50 MiB
 - runtime events per export: 200,000
 - total exported events: 250,000
@@ -198,7 +182,6 @@ and cannot know every application-specific secret.
 If the export has no runtime events:
 
 - confirm OpenClaw was started without `OPENCLAW_TRAJECTORY=0`
-- check whether `OPENCLAW_TRAJECTORY_DIR` points to a writable directory
 - run another message in the session, then export again
 - inspect `manifest.json` for `runtimeEventCount`
 

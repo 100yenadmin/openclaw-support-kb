@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp group messages"
 source: "https://docs.openclaw.ai/channels/group-messages"
-source_hash: "9e92f6ec14c27726ceb3d16f0b1429a67cbd9ba80cb37828a3474d1f61567733"
+source_hash: "8fac006ff8bf67ab45bac4306a28e7fbbfb0676c7861ae8e3c8249205fa85e71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/group-messages.md"
@@ -92,7 +92,7 @@ Only owner numbers (from `channels.whatsapp.allowFrom`, or the bot's own E.164 w
 
 - Heartbeats run in the agent's main session; group sessions never get heartbeat runs.
 - Echo suppression remembers the combined prompt (history + current message) per session so the bot's own delivered messages do not retrigger it; an identical repeated batch can be skipped as an echo.
-- Session store entries appear as `agent:<agentId>:whatsapp:group:<jid>` in the session store (`~/.openclaw/agents/<agentId>/sessions/sessions.json` by default); a missing entry just means the group has not triggered a run yet.
+- Session store entries appear as `agent:<agentId>:whatsapp:group:<jid>` in the per-agent SQLite session store; a missing entry just means the group has not triggered a run yet.
 - Typing indicators follow `session.typingMode` / `agents.defaults.typingMode`. When visible replies are opted into message-tool-only mode, typing starts immediately by default so group members can see the agent working even if no automatic final reply is posted. Explicit typing-mode config still wins.
 
 ## Related

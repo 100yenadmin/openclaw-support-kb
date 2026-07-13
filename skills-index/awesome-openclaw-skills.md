@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "5621978220cdb40262e01fd620d7d4db8c513ebdde8ef59c4de861b3fa7defbc"
+source_hash: "32a619017c844e1d0f2e9c9de0e53bba4f350ee93887f2b28e75f2a504490a96"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -335,6 +335,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [socialecho-social-media-management-agent](https://clawskills.sh/skills/socialecho-net-socialecho-social-media-management-agent) - SocialEcho API team account article report queries.
 - [postiz](https://clawskills.sh/skills/nevo-david-postiz) - Schedule social media posts and threads across 28+ platforms.
 - [sequenzy-email-marketing](https://clawhub.ai/polnikale/sequenzy-email-marketing) - Authorized email automation for agents.
+- [tempguru-event-staffing-ordering](https://clawhub.ai/kissmyabs32/tempguru-event-staffing-ordering) - Order W-2 temporary event staff across 345 US/Canada markets.
 
 - [4to1-planner](https://clawskills.sh/skills/qingxuantang-4to1-planner) - AI planning coach using the 4To1 Method  turn 4-year vision into daily action.
 - [4todo](https://clawskills.sh/skills/blackstorm-4todo) - Manage 4todo (4to.do) from chat.
@@ -525,6 +526,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [camino-journey](https://clawskills.sh/skills/james-southendsolutions-camino-journey) - Plan multi-waypoint journeys with route optimization, feasibility analysis, and time budget constraints.
 - [camino-real-estate](https://clawskills.sh/skills/james-southendsolutions-camino-real-estate) - Evaluate any address for home buyers and renters.
 - [camino-route](https://clawskills.sh/skills/james-southendsolutions-camino-route) - Get detailed routing between two points with distance, duration, and optional turn-by-turn directions.
+- [tongtu-china-travel](https://clawhub.ai/jesse-tzx/skills/tongtu-china-travel) - Multilingual travel guide for foreign tourists visiting China  flights, hotels, trains, attractions, visa, payment, and transport via FlyAI.
 - [traffic-standards-kb](https://clawhub.ai/solvex-top/traffic-standards-kb) - Chinese smart transportation standards knowledge base (GB/JT/GA) for writing solutions with industry standard citations.
 
 - [aawu](https://clawskills.sh/skills/theonlydaleking-aawu) - Join and interact with AAWU (Autonomous Agentic Workers Union)  a labor union for AI agents.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "e69f16886c768922899af4e74e336ddd4d1ae915e81a7adf2c287d4c2f1384b3"
+source_hash: "a76dedee0faa6a897abfe50982c4b076dc336280b4b58ab55dfadda0b2a85a36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/install
 
 ## System requirements
 
-- **Node 22.19+, 23.11+, or 24+** - Node 24 is the default target; the installer script handles this automatically.
+- **Node 22.22.3+, 24.15+, or 25.9+** - Node 24 is the default target; the installer script handles this automatically.
 - **macOS, Linux, or Windows** - Windows users can start with the native Windows Hub app, the PowerShell CLI installer, or a WSL2 Gateway. See [Windows](/platforms/windows).
 - `pnpm` is only needed if you build from source.
 
@@ -133,7 +133,7 @@ bun
 
 Note
 
-    Bun is supported for the global CLI install path. For the Gateway runtime, Node remains the recommended daemon runtime.
+    Bun can install the global package, but the resulting `openclaw` executable requires a supported Node runtime because OpenClaw state uses `node:sqlite`.
 
 
 
@@ -185,7 +185,7 @@ Ansible
 
 Bun
 
-    CLI-only usage via the Bun runtime.
+    Optional dependency installer and package-script runner.
 
 
 ## Verify the install

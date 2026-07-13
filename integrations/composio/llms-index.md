@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "d142cac172e3fe9d7a5d8d731c66366cf51c28cd5ce9ef0ae95c8298da49d4e0"
+source_hash: "38d599e2e75b0f2e2e58c3e09a4abfb9972cee6fc434a95041c9910978e24349"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -17,7 +17,7 @@ Source: https://docs.composio.dev/llms.txt
 
 > Composio powers 1000+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.
 
-> **For AI agents:** Give your agent tools it can call directly with `composio.create(user_id)` + `session.tools()` and a provider package (e.g. `composio_openai`, `@composio/openai`). To connect over MCP instead, create the session with `mcp: true` and read `session.mcp.url` from any MCP-compatible client. See any page's .md endpoint for full usage instructions.
+> **For AI agents:** Give your agent tools it can call directly with `composio.sessions.create(user_id)` + `session.tools()` and a provider package (e.g. `composio_openai`, `@composio/openai`). To connect over MCP instead, create the session with `mcp: true` and read `session.mcp.url` from any MCP-compatible client. See any page's .md endpoint for full usage instructions.
 
 ## Get Started
 
@@ -118,17 +118,17 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/api-reference/api-keys.md
+- https://docs.composio.dev/reference/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/api-reference/connected-accounts.md
+- https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/logs.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
 - https://docs.composio.dev/reference/api-reference/organization.md
-- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/organization-management.md
-- https://docs.composio.dev/reference/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/tool-router.md
-- https://docs.composio.dev/reference/api-reference/tools.md
-- https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
+- https://docs.composio.dev/reference/api-reference/tools.md
 - https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
@@ -155,17 +155,17 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
-- https://docs.composio.dev/reference/v3/api-reference/mcp.md
+- https://docs.composio.dev/reference/v3/api-reference/files.md
+- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md
+- https://docs.composio.dev/reference/v3/api-reference/mcp.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md
-- https://docs.composio.dev/reference/v3/api-reference/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/tools.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/v3/api-reference/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
-- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 
 ## Toolkits
 

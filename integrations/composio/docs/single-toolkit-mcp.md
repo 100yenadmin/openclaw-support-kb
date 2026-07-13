@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "090f9a9fab9f13c44ec9712dbd636b1841a8c9023d1f22fb3a5254b8aca0f7c4"
+source_hash: "647539ea31e34210b12cef6374bebbbac15af885a23761acfc23cde0b494c9a7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -361,7 +361,7 @@ const authConfig = await composio.authConfigs.create('slackbot', {
 });
 
 // One connection for the whole workspace: authorize it as SHARED.
-const setup = await composio.create('setup:workspace-bot', {
+const setup = await composio.sessions.create('setup:workspace-bot', {
   toolkits: ['slackbot'],
   authConfigs: { slackbot: authConfig.id },
   manageConnections: true,
@@ -422,7 +422,7 @@ async function runPi(tools: unknown, prompt: string) {
 
 // The smallest agent: one session, its tools, one prompt.
 export async function runAgent(userId: string, prompt: string) {
-  const session = await composio.create(userId);
+  const session = await composio.sessions.create(userId);
   const tools = piProvider.createSessionTools({
     sessionId: session.sessionId,
     search: (params) => session.search(params),
@@ -457,9 +457,9 @@ const threadKey = (event: IncomingTriggerPayload) =>
 async function sessionForThread(event: IncomingTriggerPayload) {
   const key = threadKey(event);
   const existing = threads.get(key);
-  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+  if (existing) return { session: await composio.sessions.use(existing.sessionId), memory: existing };
 
-  const session = await composio.create(event.userId, {
+  const session = await composio.sessions.create(event.userId, {
     manageConnections: { enable: true, callbackUrl, waitForConnections: true },
   });
   const memory = { sessionId: session.sessionId, history: [] as { role: string; content: string }[] };
@@ -547,9 +547,9 @@ const threadKey = (event: IncomingTriggerPayload) =>
 async function sessionForThread(event: IncomingTriggerPayload) {
   const key = threadKey(event);
   const existing = threads.get(key);
-  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+  if (existing) return { session: await composio.sessions.use(existing.sessionId), memory: existing };
 
-  const session = await composio.create(event.userId, {
+  const session = await composio.sessions.create(event.userId, {
     // Pin the shared Slack connection; the session still resolves every other
     // toolkit against this user's own connections.
     connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
@@ -640,9 +640,9 @@ const threadKey = (event: IncomingTriggerPayload) =>
 async function sessionForThread(event: IncomingTriggerPayload) {
   const key = threadKey(event);
   const existing = threads.get(key);
-  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+  if (existing) return { session: await composio.sessions.use(existing.sessionId), memory: existing };
 
-  const session = await composio.create(event.userId, {
+  const session = await composio.sessions.create(event.userId, {
     // Pin the shared Slack connection; the session still resolves every other
     // toolkit against this user's own connections.
     connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
@@ -757,9 +757,9 @@ const threadKey = (event: IncomingTriggerPayload) =>
 async function sessionForThread(event: IncomingTriggerPayload) {
   const key = threadKey(event);
   const existing = threads.get(key);
-  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+  if (existing) return { session: await composio.sessions.use(existing.sessionId), memory: existing };
 
-  const session = await composio.create(event.userId, {
+  const session = await composio.sessions.create(event.userId, {
     // Pin the shared Slack connection; the session still resolves every other
     // toolkit against this user's own connections.
     connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
@@ -906,9 +906,9 @@ const threadKey = (event: IncomingTriggerPayload) =>
 async function sessionForThread(event: IncomingTriggerPayload) {
   const key = threadKey(event);
   const existing = threads.get(key);
-  if (existing) return { session: await composio.use(existing.sessionId), memory: existing };
+  if (existing) return { session: await composio.sessions.use(existing.sessionId), memory: existing };
 
-  const session = await composio.create(event.userId, {
+  const session = await composio.sessions.create(event.userId, {
     // Pin the shared Slack connection; the session still resolves every other
     // toolkit against this user's own connections.
     connectedAccounts: { slackbot: [SHARED_SLACK_CONNECTION_ID] },
@@ -1479,7 +1479,7 @@ async function requireGithubConnection() {
 // session to the helper, which validates it's local and gives you the pieces to
 // run code yourself, wherever you choose.
 async function createWorkbench() {
-  const session = await composio.create(userId, {
+  const session = await composio.sessions.create(userId, {
     toolkits: ['github'],
     workbench: { enable: false },
   });
@@ -1523,7 +1523,7 @@ async function requireGithubConnection() {
 // session to the helper, which validates it's local and gives you the pieces to
 // run code yourself, wherever you choose.
 async function createWorkbench() {
-  const session = await composio.create(userId, {
+  const session = await composio.sessions.create(userId, {
     toolkits: ['github'],
     workbench: { enable: false },
   });
@@ -1581,7 +1581,7 @@ async function requireGithubConnection() {
 // session to the helper, which validates it's local and gives you the pieces to
 // run code yourself, wherever you choose.
 async function createWorkbench() {
-  const session = await composio.create(userId, {
+  const session = await composio.sessions.create(userId, {
     toolkits: ['github'],
     workbench: { enable: false },
   });
@@ -1726,7 +1726,7 @@ const AUTH_CONFIG = process.env.COMPOSIO_SLACKBOT_AUTH_CONFIG_ID!;
 
 // Connect the bot's own Slack app once, so it can post and DM as the bot.
 async function main() {
-  const session = await composio.create('default', {
+  const session = await composio.sessions.create('default', {
     authConfigs: { slackbot: AUTH_CONFIG },
   });
 
@@ -1947,7 +1947,7 @@ const TOOLKITS = ['github', 'linear', 'notion', 'googlecalendar', 'slack'];
 // write their standup. session.tools() returns Composio's research meta-tools
 // (search / execute / workbench), scoped to those toolkits.
 export async function generateDraft(memberEmail: string) {
-  const session = await composio.create(memberEmail, { toolkits: TOOLKITS });
+  const session = await composio.sessions.create(memberEmail, { toolkits: TOOLKITS });
   const tools = await session.tools();
 
   const { text } = await generateText({
@@ -1988,7 +1988,7 @@ export async function generateDraft(memberEmail: string) {
   // manageConnections:false strips the connection meta-tools. The agent drafts
   // from whatever the member already connected and never starts an OAuth flow
   // mid-draft: if a tool needs auth, it's simply not in the session.
-  const session = await composio.create(memberEmail, {
+  const session = await composio.sessions.create(memberEmail, {
     toolkits: TOOLKITS,
     manageConnections: false,
   });

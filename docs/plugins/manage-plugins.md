@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "14c45b94dd458d8d101eae25ad6166bc6639d9c3dc1be3132692d72e5d9afbf0"
+source_hash: "cdc5803b73240f655b6eae3bdd70c46bbcb8ea4a38e79252b4ed1f9df6a412d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -13,12 +13,53 @@ duplicate_index: 1
 # Manage plugins
 Source: https://docs.openclaw.ai/plugins/manage-plugins
 
-Common plugin management commands. For the full command contract, flags,
-source-selection rules, and edge cases, see [`openclaw plugins`](/cli/plugins).
+The Control UI covers the common discovery, install, enable, and disable
+workflow. The CLI adds update, uninstall, advanced configuration, and explicit
+install-source controls. For its full command contract, flags, source-selection
+rules, and edge cases, see [`openclaw plugins`](/cli/plugins).
 
-Typical workflow: find a package, install it from ClawHub, npm, git, or a
-local path, let the managed Gateway auto-restart (or restart it manually),
-then verify the plugin's runtime registrations.
+Typical CLI workflow: find a package, install it from ClawHub, npm, git, or a
+local path, let the managed Gateway auto-restart (or restart it manually), then
+verify the plugin's runtime registrations.
+
+## Use the Control UI
+
+Open **Plugins** in the Control UI, or use `/settings/plugins` relative to the
+configured Control UI base path. For example, a base path of `/openclaw` uses
+`/openclaw/settings/plugins`. The page has two tabs:
+
+- **Installed** shows the full local inventory grouped by category (channels,
+  model providers, memory, tools). Each row opens a detail view; its overflow
+  (`…`) menu enables or disables the plugin and, for externally installed
+  plugins, offers **Remove**. The tab also lists the configured
+  [MCP servers](/cli/mcp) with the same menu-driven enable, disable, and remove
+  actions, editing `mcp.servers` in the Gateway configuration.
+- **Discover** is the store: featured plugins included with OpenClaw, official
+  external plugins, and a curated connector shelf. Connector cards either add a
+  hosted MCP server in one click (GitHub, Notion, Linear, Sentry,
+  Home Assistant) or jump into a prefilled ClawHub search. Typing in the search
+  box queries [ClawHub](https://clawhub.ai/plugins) inline and appends a **From
+  ClawHub** section with download counts and source-verification badges.
+
+Included plugins do not need a package install. Their menu action is **Enable**
+or **Disable**. Workboard, for example, is included with OpenClaw and disabled
+by default, so choose **Enable** to turn it on. Bundled plugins cannot be
+removed, only disabled.
+
+Catalog and search access require `operator.read`. Install, enable, disable,
+remove, and MCP server changes require `operator.admin`. A ClawHub install is
+performed by the Gateway and preserves its trust, integrity, and plugin-install
+policy checks.
+
+Installing or removing plugin code requires a Gateway restart. Enablement
+changes can be applied without a restart when the installed plugin and current
+Gateway runtime support it; otherwise the UI tells you a restart is required.
+OAuth-backed MCP connectors still need a one-time `openclaw mcp login <name>`
+from the CLI after they are added.
+
+The Control UI does not install from arbitrary npm, git, or local-path sources,
+update plugins, or expose rich plugin configuration. Use the CLI workflows
+below for those operations.
 
 ## List and search plugins
 

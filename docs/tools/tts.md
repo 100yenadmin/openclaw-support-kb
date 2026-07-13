@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "4d791134855a49d35d97f879e28182cd4ce4f59e91915135f87c7e45186f8c9b"
+source_hash: "3ad40c7b3caefe3eb932e189076c7aaa45ed144e4caa6500f01b0e2786025bb6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -976,7 +976,7 @@ ParamField
 Env: `GRADIUM_API_KEY`.
 
 ParamField
-Default `https://api.gradium.ai`.
+HTTPS Gradium API URL on `api.gradium.ai`. Default `https://api.gradium.ai`.
 
 ParamField
 Default Emma (`YTpq7expH9539ERJ`). Legacy alias: `voiceId`.

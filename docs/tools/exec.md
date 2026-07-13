@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "75b0ace9a1b0be52211cc95421387a6e606b7f2f057017c37e05603be66aab1f"
+source_hash: "57859cdc82b2e49a85c1fa5404d464a7108b05d11398f444a65283cfc2981e0c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -161,7 +161,7 @@ openclaw config get agents.list
 openclaw config set 'agents.list[0].tools.exec.node' "node-id-or-name"
 ```
 
-Control UI: the Nodes tab includes a small "Exec node binding" panel for the same settings.
+Control UI: the **Devices** page includes a small "Exec node binding" panel for the same settings.
 
 ## Session overrides (`/exec`)
 
@@ -251,7 +251,7 @@ Paste (bracketed by default):
 {
   tools: {
     exec: {
-      applyPatch: { workspaceOnly: true, allowModels: ["gpt-5.5"] },
+      applyPatch: { workspaceOnly: true, allowModels: ["gpt-5.6-sol"] },
     },
   },
 }

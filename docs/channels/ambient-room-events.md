@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ambient room events"
 source: "https://docs.openclaw.ai/channels/ambient-room-events"
-source_hash: "5a72cdd0416b738f1190fbccb9695ee23b5ecaf0d9e60b378ebd25e531c34590"
+source_hash: "12cc534856b7afdd4ad05f532ceaaabe8936ff4f9830cac3d15d7069814249a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/ambient-room-events.md"
@@ -196,7 +196,7 @@ The agent-specific `agents.list[].groupChat.unmentionedInbound` value overrides 
 
 `messages.groupChat.visibleReplies` defaults to `"automatic"` for normal group/channel user requests. Keep that default when final assistant text should post visibly without an explicit message-tool call.
 
-For ambient always-on rooms, `messages.groupChat.visibleReplies: "message_tool"` is still recommended, especially with latest-generation, tool-reliable models such as GPT 5.5. It lets the agent decide when to speak by calling the message tool. If the model returns final text without calling the tool, OpenClaw keeps that final text private and logs suppressed-delivery metadata.
+For ambient always-on rooms, `messages.groupChat.visibleReplies: "message_tool"` is still recommended, especially with latest-generation, tool-reliable models such as GPT-5.6 Sol. It lets the agent decide when to speak by calling the message tool. If the model returns final text without calling the tool, OpenClaw keeps that final text private and logs suppressed-delivery metadata.
 
 Room events stay strict even when other group requests use automatic replies. Unmentioned ambient room events always require `message(action=send)` for visible output.
 

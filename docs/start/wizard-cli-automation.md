@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI automation"
 source: "https://docs.openclaw.ai/start/wizard-cli-automation"
-source_hash: "16ae90cd9da7ff71c537545392e12b51b3ebbd427092f67a1625e77404ab283e"
+source_hash: "6d9d4f4cc9ca374010f218204ab7ffa393841465742f3d96fd11599ca3b103bc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-automation.md"
@@ -213,7 +213,7 @@ Anthropic setup-token auth remains supported, but OpenClaw prefers Claude CLI re
 ```bash
 openclaw agents add work \
   --workspace ~/.openclaw/workspace-work \
-  --model openai/gpt-5.5 \
+  --model openai/gpt-5.6-sol \
   --bind whatsapp:biz \
   --non-interactive \
   --json

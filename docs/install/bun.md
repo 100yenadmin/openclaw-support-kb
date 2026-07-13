@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
-title: "Bun (experimental)"
+title: "Bun"
 source: "https://docs.openclaw.ai/install/bun"
-source_hash: "f989d721cd113ef4ced63ad37a04f5bf201d6234ab723aeefc77c4052021c281"
+source_hash: "9c25d802585c1a5c9b0929e3e3a09f26d8ea98181c8020ef148d64e2e0a4d9b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/bun.md"
@@ -10,14 +10,14 @@ original_doc_path: "install/bun.md"
 duplicate_index: 1
 ---
 
-# Bun (experimental)
+# Bun
 Source: https://docs.openclaw.ai/install/bun
 
 Warning
 
-Bun is not recommended for gateway runtime (known issues with WhatsApp and Telegram). Use Node for production.
+Bun cannot run the OpenClaw CLI or Gateway because it does not provide the required `node:sqlite` API. Install a supported Node version for all OpenClaw runtime commands.
 
-Bun is an optional local runtime for running TypeScript directly (`bun run ...`, `bun --watch ...`). The default package manager remains `pnpm`, which is fully supported and used by docs tooling. Bun cannot use `pnpm-lock.yaml` and ignores it.
+Bun remains usable as an optional dependency installer and package-script runner. The default package manager remains `pnpm`, which is fully supported and used by docs tooling. Bun cannot use `pnpm-lock.yaml` and ignores it.
 
 ## Install
 
@@ -45,12 +45,15 @@ Build and test
     bun run vitest run
     ```
 
+    Commands that launch OpenClaw itself must still run through Node.
+
+
 
 ## Lifecycle scripts
 
 Bun blocks dependency lifecycle scripts unless explicitly trusted. For this repo, the commonly blocked scripts are not required:
 
-- `baileys` `preinstall`: checks Node major >= 20 (OpenClaw requires Node 22.19+ or 23.11+, with Node 24 recommended)
+- `baileys` `preinstall`: checks Node major >= 20 (OpenClaw requires Node 22.22.3+, 24.15+, or 25.9+, with Node 24 recommended)
 - `protobufjs` `postinstall`: emits warnings about incompatible version schemes (no build artifacts)
 
 If you hit a runtime issue that needs these scripts, trust them explicitly:

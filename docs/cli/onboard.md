@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "3f9d523733ee8bb63a1ff7bbb36a306263323c95259dbd648b4591e2fc6aab76"
+source_hash: "94225fd3a047b3bda951f8a186213ca7cb96ada87f443b1c2ca5b207b11eab9a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/onboard.md"
@@ -15,10 +15,10 @@ Source: https://docs.openclaw.ai/cli/onboard
 
 # `openclaw onboard`
 
-Guided setup that detects existing AI access, verifies it with a live completion,
-and configures the workspace and local Gateway. `openclaw setup` is the same
-entry point; `openclaw setup --baseline` only writes the baseline
-config/workspace.
+Guided setup that establishes inference first: it detects existing AI access,
+requires a live completion, persists only the working route, and then starts
+Crestodian to configure the rest. `openclaw setup` is the same entry point;
+`openclaw setup --baseline` only writes the baseline config/workspace.
 
 CardGroup
 
@@ -62,33 +62,48 @@ openclaw onboard --skip-bootstrap
 openclaw onboard --mode remote --remote-url wss://gateway-host:18789
 ```
 
-- `--classic`: opens the full step-by-step wizard.
+- `--classic`: opens the full step-by-step wizard. It cannot be combined with
+  `--non-interactive`; omit `--classic` for automated setup.
 - `--flow quickstart`: opens the classic wizard with minimal prompts and
   auto-generates a gateway token.
 - `--flow manual` (alias `advanced`): opens the classic wizard with full prompts
   for port, bind, and auth.
 - `--flow import`: runs a detected migration provider (for example Hermes via `--import-from hermes`), previews the plan, then applies after confirmation. Import only runs against a fresh OpenClaw setup - reset config, credentials, sessions, and workspace state first if any exist. Use [`openclaw migrate`](/cli/migrate) for dry-run plans, overwrite mode, reports, and exact mappings.
-- `--modern` starts the Crestodian conversational setup/repair assistant.
+- `--modern` is a compatibility alias for the Crestodian conversational setup
+  assistant. It uses the same live-inference gate as `openclaw crestodian` and
+  accepts only `--workspace`, `--accept-risk`,
+  `--non-interactive`, and `--json`. Other setup flags are rejected instead of
+  being silently ignored.
 
 ## Guided flow
 
 Plain `openclaw onboard` starts the guided flow. It shows the security notice,
-asks for a workspace, detects AI access already available through configured
-models, API-key environment variables, and supported local CLIs, then tests the
-recommended candidate with a real completion. If that candidate fails,
-onboarding shows the reason and automatically tries the next usable candidate.
+detects AI access already available through configured models, API-key
+environment variables, and supported local CLIs, then tests the recommended
+candidate with a real completion. If that candidate fails, onboarding shows
+the reason and automatically tries the next usable candidate.
 
-If automatic detection is exhausted, choose another detected candidate, enter
-a provider API key in a masked prompt, open Crestodian chat, switch to the
-classic wizard, or skip AI setup for now. A manual key is tested through the
-same live completion path. OpenClaw persists the selected model, workspace, and
-QuickStart Gateway settings only after the test succeeds; a failed candidate
-does not replace the configured model or save the attempted credential.
+If automatic detection is exhausted, choose another detected candidate or enter
+a provider API key in a masked prompt. A manual key is tested through the same
+live completion path. Guided onboarding
+does not offer Crestodian or a skip-AI exit before a candidate passes. OpenClaw
+persists only the verified model route and its credential after the test
+succeeds; a failed candidate does not replace the configured model or save the
+attempted credential. Workspace and Gateway setup remain unchanged until
+Crestodian starts.
 
-Guided setup, the classic wizard, and Crestodian chat are interchangeable. The
-guided flow offers chat and classic choices; inside Crestodian, use `open setup
-wizard`, `open classic wizard`, or `open channel wizard for <channel>` to switch
-back. Channel credentials are always collected in a masked terminal wizard.
+In guided mode, `--workspace <dir>` supplies Crestodian's proposed workspace
+and the isolated inference context. It is not persisted until you approve the
+Crestodian setup proposal. Classic and noninteractive onboarding persist their
+workspace through their normal setup flow.
+
+After inference passes, guided onboarding immediately starts Crestodian with
+the verified model. Crestodian can then configure the workspace, Gateway,
+channels, agents, plugins, and other optional features. Inside Crestodian, use
+`open channel wizard for <channel>` to hand channel credential collection to a
+masked terminal wizard. To change the model provider or its authentication,
+exit Crestodian and run `openclaw onboard`; Crestodian does not open the guided
+or classic provider flows.
 
 On a configured install, running `openclaw onboard` again verifies the current
 default model first, so the same flow acts as a verification and repair pass.
@@ -98,21 +113,23 @@ workspace, so a model provided by a workspace plugin can fail here while still
 working in the agent.
 Use `openclaw onboard --classic` for provider-specific auth, channels, skills,
 remote Gateway setup, imports, or full Gateway controls. For conversational
-setup and repair, run `openclaw crestodian`; `openclaw onboard --modern` opens
-the same chat for onboarding. After configuring model/auth, the classic wizard
-can optionally verify the default model with a live completion; verification
-failure never blocks completion.
+non-inference setup and repair, run `openclaw crestodian`; `openclaw onboard
+--modern` is a compatibility alias through the same inference gate. The classic
+wizard can optionally verify the default model with a live completion, but
+Crestodian will not start until its own live inference check passes.
 
 In an interactive terminal, bare `openclaw` (no subcommand) routes by config
 state:
 
 - If the active config file is missing or has no authored settings (empty or
   metadata-only), it starts guided onboarding.
-- If the config file exists but fails validation, it starts
-  [Crestodian](/cli/crestodian) for repair.
-- If the config file is valid, it opens the normal agent TUI, either locally
-  or connected to a reachable configured Gateway. On a configured install,
-  reach Crestodian with `/crestodian` inside the TUI or `openclaw crestodian`.
+- If the config file exists but fails validation, it starts the classic
+  onboarding path with `openclaw doctor` guidance. Crestodian needs working
+  inference and is not used to repair this pre-inference state.
+- If the config file is valid, it opens the normal agent TUI. A reachable
+  configured Gateway with an agent and model goes directly to that UI without
+  onboarding or Crestodian. On a configured install, reach Crestodian with
+  `/crestodian` inside the TUI or `openclaw crestodian`.
 
 Plaintext `ws://` is accepted for loopback, private IP literals, `.local`, and Tailnet `*.ts.net` gateway URLs. For other trusted private-DNS names, set `OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=1` in the onboarding process environment.
 
@@ -203,10 +220,12 @@ With `--secret-input-mode ref`, onboarding writes env-backed refs instead of pla
 - `--allow-unconfigured` is a separate `openclaw gateway run` escape hatch; it does not let onboarding skip `gateway.mode`.
 
 ```bash
+export OPENAI_API_KEY="your-provider-key"
 export OPENCLAW_GATEWAY_TOKEN="your-token"
 openclaw onboard --non-interactive \
   --mode local \
-  --auth-choice skip \
+  --auth-choice openai-api-key \
+  --secret-input-mode ref \
   --gateway-auth token \
   --gateway-token-ref-env OPENCLAW_GATEWAY_TOKEN \
   --accept-risk
@@ -261,7 +280,7 @@ Token-based model auth (used with `--auth-choice token`):
 
 Cloudflare AI Gateway: `--cloudflare-ai-gateway-account-id <id>`, `--cloudflare-ai-gateway-gateway-id <id>`.
 
-Daemon install control: `--no-install-daemon` / `--skip-daemon` (aliases; skip gateway service install), `--daemon-runtime <node|bun>`.
+Daemon install control: `--no-install-daemon` / `--skip-daemon` (aliases; skip gateway service install), `--daemon-runtime <node>`.
 
 Skills: `--node-manager <npm|pnpm|bun>` (default `npm`), `--skip-skills`.
 
@@ -271,7 +290,9 @@ Output: `--suppress-gateway-token-output` suppresses token-bearing Gateway/UI ou
 
 Note
 
-`--json` does not imply non-interactive mode. Use `--non-interactive` for scripts.
+`--json` does not imply non-interactive mode in guided or classic onboarding.
+With `--modern`, JSON is a one-shot Crestodian overview and exits after that
+single result. Use `--non-interactive` for other scripts.
 
 ## Provider prefiltering
 
@@ -293,7 +314,9 @@ Some web-search providers trigger provider-specific follow-up prompts during onb
 
 ## Common follow-up commands
 
-Use `openclaw configure` later for targeted changes and `openclaw channels add` for channel-only setup.
+Use `openclaw configure` later for targeted non-inference changes and `openclaw
+channels add` for channel-only setup. For model provider or auth route changes,
+run `openclaw onboard` instead.
 
 ```bash
 openclaw channels add

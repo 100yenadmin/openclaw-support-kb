@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
-source_hash: "c2dcb73f55d22f2a997711baba857622f3a8127b0beecc2ee9c4ddb0be48d603"
+source_hash: "36d06021ed4f5fbefb4e2eb302156deb37936318d28b1e159efaaad6c93f4c57"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/gradium.md"
@@ -85,11 +85,11 @@ Config key
 }
 ```
 
-| Key                                             | Type   | Description                                                                       |
-| ----------------------------------------------- | ------ | --------------------------------------------------------------------------------- |
-| `messages.tts.providers.gradium.apiKey`         | string | Resolved API key. Supports `${ENV}` and secret refs.                              |
-| `messages.tts.providers.gradium.baseUrl`        | string | API origin override. Trailing slashes stripped. Default `https://api.gradium.ai`. |
-| `messages.tts.providers.gradium.speakerVoiceId` | string | Default voice id used when no directive override is present.                      |
+| Key                                             | Type   | Description                                                                                             |
+| ----------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- |
+| `messages.tts.providers.gradium.apiKey`         | string | Resolved API key. Supports `${ENV}` and secret refs.                                                    |
+| `messages.tts.providers.gradium.baseUrl`        | string | HTTPS Gradium API URL on `api.gradium.ai`. Trailing slashes stripped. Default `https://api.gradium.ai`. |
+| `messages.tts.providers.gradium.speakerVoiceId` | string | Default voice id used when no directive override is present.                                            |
 
 Output format is chosen automatically by target surface (see [Output](#output)) and is not configurable in `openclaw.json`.
 

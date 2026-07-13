@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "d17519cc4907c7002beea2686e1e4a34e1b2f2a1e2ab7d04a54889b69839201c"
+source_hash: "999351b833666ff801e6e7cc99511a83bea2c11eec84c9e1bf3ba6014cad72b7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
@@ -142,9 +142,10 @@ These live under `~/.openclaw/` and should NOT be committed to the workspace rep
 
 - `~/.openclaw/openclaw.json` (config)
 - `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` (model auth profiles: OAuth + API keys)
+- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (session rows, transcripts, and per-agent runtime state)
 - `~/.openclaw/agents/<agentId>/agent/codex-home/` (per-agent Codex runtime account, config, skills, plugins, and native thread state)
 - `~/.openclaw/credentials/` (channel/provider state plus legacy OAuth import data)
-- `~/.openclaw/agents/<agentId>/sessions/` (session transcripts + metadata)
+- `~/.openclaw/agents/<agentId>/sessions/` (legacy migration sources and archive/support artifacts)
 - `~/.openclaw/skills/` (managed skills)
 
 If you need to migrate sessions or config, copy them separately and keep them out of version control.
@@ -270,7 +271,9 @@ Seed missing files
 
 Copy sessions (optional)
 
-    If you need sessions, copy `~/.openclaw/agents/<agentId>/sessions/` from the old machine separately.
+    If you need sessions, copy `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
+    from the old machine separately. Copy `~/.openclaw/agents/<agentId>/sessions/`
+    only when you also need legacy migration inputs or archive/support artifacts.
 
 
 ## Advanced notes

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "e109743138e5cea38fcb8166375a1cbc5b38be63569d240fd6db2ef53acef4b7"
+source_hash: "36e56664daf721c8ed6030146ed472e6172f592ef31c4572c37dd0b935b2c8dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-control.md"
@@ -275,9 +275,10 @@ Notes:
 - `upload` can also set file inputs directly via `--input-ref` or `--element`.
 
 Stable tab ids and labels survive Chromium raw-target replacement when OpenClaw
-can prove the replacement tab, such as same URL or a single old tab becoming a
-single new tab after form submission. Raw target ids are still volatile; prefer
-`suggestedTargetId` from `tabs` in scripts.
+can prove the replacement tab, such as a unique old/new pair for the same URL or
+a single old tab becoming a single new tab after form submission. Ambiguous
+duplicate-URL replacements receive fresh handles. Raw target ids are still
+volatile; prefer `suggestedTargetId` from `tabs` in scripts.
 
 Snapshot flags at a glance:
 
@@ -382,10 +383,10 @@ When an action fails (e.g. "not visible", "strict mode violation", "covered"):
 Examples:
 
 ```bash
-openclaw browser status --json
-openclaw browser snapshot --interactive --json
-openclaw browser requests --filter api --json
-openclaw browser cookies --json
+openclaw browser --json status
+openclaw browser --json snapshot --interactive
+openclaw browser --json requests --filter api
+openclaw browser --json cookies
 ```
 
 Role snapshots in JSON include `refs` plus a small `stats` block (lines/chars/refs/interactive) so tools can reason about payload size and density.

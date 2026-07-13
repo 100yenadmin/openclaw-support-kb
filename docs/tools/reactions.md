@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reactions"
 source: "https://docs.openclaw.ai/tools/reactions"
-source_hash: "5ba4eefbfe5bf718f30f052d5fc424fe5d27941e72825bb2171bf54097eafaf5"
+source_hash: "fbc1c153e6522cdb91373b6495b9fa24da00b636cace230c31a0e115595b1b67"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/reactions.md"
@@ -43,14 +43,6 @@ AccordionGroup
 Discord and Slack
 
     - Empty `emoji` removes all of the bot's reactions on the message.
-    - `remove: true` removes just the specified emoji.
-
-
-
-
-Google Chat
-
-    - Empty `emoji` (or `remove: true`) removes the bot's own reactions on the message, filtered to `emoji` when set.
     - `remove: true` removes just the specified emoji.
 
 

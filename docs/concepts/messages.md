@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "577635bcaa57a34298cb30886b98e37cebcfcbde5047b98245893dda7564d174"
+source_hash: "edcb68ab4193a471b6995290acf9aab13989f63c839a8837eb1a21f4a1b25fb0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/messages.md"
@@ -131,7 +131,7 @@ Block streaming sends partial replies as the model produces text blocks; chunkin
 - `agents.defaults.blockStreamingChunk` (`minChars|maxChars|breakPreference`)
 - `agents.defaults.blockStreamingCoalesce` (idle-based batching)
 - `agents.defaults.humanDelay` (human-like pause between block replies)
-- Channel overrides: `*.blockStreaming` and `*.blockStreamingCoalesce` (block streaming is off unless `*.blockStreaming` is explicitly set to `true`, on every channel including Telegram).
+- Channel overrides: `*.streaming.block.enabled` and `*.streaming.block.coalesce` on bundled channels; stale flat keys are migrated by `openclaw doctor --fix`. Block streaming is off unless explicitly enabled, on every channel including Telegram. QQ Bot is the exception: it has no `streaming.block` keys and streams block replies unless `channels.qqbot.streaming.mode` is `"off"`.
 
 Details: [Streaming + chunking](/concepts/streaming).
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "476081dabdae4303a5f9e39c4be75d2d133335237dabb245d21a462c9305e4eb"
+source_hash: "d2679e6af1e6796c955e29b028e3629745c3b692f74ebb18214571163503dbf2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -253,6 +253,10 @@ Gateway version and reachability, and recover an installed-but-unloaded macOS
 LaunchAgent when possible. If the Gateway cannot make that handoff safely,
 `update.run` reports a safe shell command instead of running the package
 manager in-process.
+
+The Control UI sidebar update card starts this same `update.run` flow. In the
+signed macOS app, the card updates the app through Sparkle first; after relaunch,
+the app brings its managed local Gateway to the matching version.
 
 ## After updating
 

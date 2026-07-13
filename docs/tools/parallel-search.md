@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Parallel search"
 source: "https://docs.openclaw.ai/tools/parallel-search"
-source_hash: "c05a0ef7aab1d098cfb268f5d1b36727264fd23bc425b696fc95a86dcb29abfc"
+source_hash: "5a9749f6339ea5acd8179bd5a00120c8f4782afdf85949d5b34d4739a53f0853"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/parallel-search.md"
@@ -140,7 +140,7 @@ improves subsequent results. Max 1000 chars on `parallel`; the free
 ParamField
 
 Optional identifier of the model making the call (e.g. `claude-opus-4-7`,
-`gpt-5.5`), max 100 chars. Lets Parallel tailor default settings for your
+`gpt-5.6-sol`), max 100 chars. Lets Parallel tailor default settings for your
 model's capabilities. Pass the exact active model slug; do not shorten to a
 family alias.
 

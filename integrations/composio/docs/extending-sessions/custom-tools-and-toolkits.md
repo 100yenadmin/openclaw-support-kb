@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Tools and Toolkits"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-tools-and-toolkits.md"
-source_hash: "423d1439283f5e5ed0e9dce356216bd5b1655776697f7c5516c76b495e7d06a3"
+source_hash: "5635e84fa569f7a231b95f2de1e39e7a67a06762b1fd7a8f8c750724f9df7fc2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-tools-and-toolkits.md"
@@ -121,7 +121,7 @@ import { z } from "zod/v3";
 declare const getUserProfile: ReturnType<typeof experimental_createTool>;
 const composio = new Composio({ apiKey: "your_api_key" });
 
-const session = await composio.create("user_1", {
+const session = await composio.sessions.create("user_1", {
   experimental: {
     customTools: [getUserProfile],
   },
@@ -261,7 +261,7 @@ import { z } from "zod/v3";
 declare const sendPromoEmail: ReturnType<typeof experimental_createTool>;
 const composio = new Composio({ apiKey: "your_api_key" });
 
-const session = await composio.create("user_1", {
+const session = await composio.sessions.create("user_1", {
   toolkits: ["gmail"],
   experimental: {
     customTools: [sendPromoEmail],
@@ -384,7 +384,7 @@ import { z } from "zod/v3";
 declare const userManagement: ReturnType<typeof experimental_createToolkit>;
 const composio = new Composio({ apiKey: "your_api_key" });
 
-const session = await composio.create("user_1", {
+const session = await composio.sessions.create("user_1", {
   experimental: {
     customToolkits: [userManagement],
   },
@@ -439,7 +439,7 @@ const replyGuide = experimental_createTool("GET_REPLY_STYLE_GUIDE", {
   execute: async ({ topic }) => ({ topic, tone: "concise and helpful" }),
 });
 
-const session = await composio.create("user_1", {
+const session = await composio.sessions.create("user_1", {
   experimental: {
     customTools: [replyGuide],
   },
@@ -531,7 +531,7 @@ Use these methods to list registered tools and toolkits. Slugs include their fin
 ```typescript
 import { Composio } from "@composio/core";
 const composio = new Composio({ apiKey: "your_api_key" });
-const session = await composio.create("user_1");
+const session = await composio.sessions.create("user_1");
 const customTools = session.customTools();
 const customToolkits = session.customToolkits();
 ```
@@ -556,7 +556,7 @@ import { z } from "zod/v3";
 declare const getUserProfile: ReturnType<typeof experimental_createTool>;
 const composio = new Composio({ apiKey: "your_api_key" });
 
-const session = await composio.use("session_id", {
+const session = await composio.sessions.use("session_id", {
   customTools: [getUserProfile],
 });
 ```
@@ -583,7 +583,7 @@ Use `session.execute()` to run custom tools directly, outside of an agent loop. 
 ```typescript
 import { Composio } from "@composio/core";
 const composio = new Composio({ apiKey: "your_api_key" });
-const session = await composio.create("user_1");
+const session = await composio.sessions.create("user_1");
 const result = await session.execute("GET_USER_PROFILE");
 ```
 

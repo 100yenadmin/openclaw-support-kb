@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "69c4a3bdbb96678ab368b677790b2a52a3327b99f1a4b86f293c1c0af7c916ce"
+source_hash: "a0f6dcbda21dd08206e9256b91b573b39d31fb3179fa3bc886f6fd3669e05b5f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -318,9 +318,9 @@ Example patch:
   },
   agents: {
     defaults: {
-      model: { primary: "openai/gpt-5.5" },
+      model: { primary: "openai/gpt-5.6-sol" },
       models: {
-        "openai/gpt-5.5": { params: { fastMode: true } },
+        "openai/gpt-5.6-sol": { params: { fastMode: true } },
       },
     },
   },

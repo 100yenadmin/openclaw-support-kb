@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Controlling scopes"
 source: "https://docs.composio.dev/docs/controlling-scopes.md"
-source_hash: "1a9325df9972e04e406e43c210e85e1d66c54f23ad4828f97933f088c1eaea65"
+source_hash: "35a3eb9c73f78fea227b203b65a62d1cdfebe6be5c4d4248f813c4021a2185da"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "controlling-scopes.md"
@@ -144,7 +144,7 @@ session = composio.create(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 const authConfig = { id: 'ac_your_github_config' };
-const session = await composio.create('user_123', {
+const session = await composio.sessions.create('user_123', {
   authConfigs: { github: authConfig.id },
 });
 ```

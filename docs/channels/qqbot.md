@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "6848a57ba2f17012e4bdfab10c1d2943f7877f9e67f00c9b70c42bf170b7f130"
+source_hash: "fa06e4238453be720b0f1b5406d0d0ae0ece59862592ea1fcef8abd5b344e216"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -115,6 +115,28 @@ Notes:
   or a structured SecretRef object.
 - Legacy `secretref:...` / `secretref-env:...` marker strings are rejected for
   `clientSecret`; use a structured SecretRef object instead.
+
+### Streaming
+
+```json5
+{
+  channels: {
+    qqbot: {
+      streaming: {
+        mode: "partial", // block streaming: "partial" (default) or "off"
+        nativeTransport: true, // use QQ's official C2C stream_messages API for DMs
+      },
+    },
+  },
+}
+```
+
+- `streaming.mode: "off"` disables block streaming for the account.
+- `streaming.nativeTransport: true` streams C2C (DM) replies through QQ's
+  official `stream_messages` API; group/channel targets are unaffected.
+- Legacy `streaming: true|false` scalars and the `streaming.c2cStreamApi` key
+  migrate to this shape via `openclaw doctor --fix`.
+- `/bot-streaming on|off` toggles the same config from a DM.
 
 ### Access policy
 

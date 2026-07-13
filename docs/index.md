@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "64efacdc841b73ea7e0c5a704e5a4639ec145ed785337945cc6db9dc3f01b5bf"
+source_hash: "a0a8c97fdcccd78e2ccbd0d81bba0a15e43c5ff1b0fd81ae7c6b5bc8627b703d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -60,6 +60,69 @@ Open the Control UI
     Launch the browser dashboard for chat, config, and sessions.
 
 
+## Browse docs
+
+Mobile browsers may show the section menu without the full desktop tab bar. Use
+these hub links to reach the same top-level docs areas from the page body.
+
+Columns
+
+
+Get started
+
+    Overview, showcase, first steps, and setup guides.
+
+
+Install
+
+    Install paths, updates, containers, hosting, and advanced setup.
+
+
+Channels
+
+    Messaging channels, pairing, routing, access groups, and channel QA.
+
+
+Agents
+
+    Architecture, sessions, context, memory, and multi-agent routing.
+
+
+Capabilities
+
+    Tools, skills, cron, webhooks, and automation capabilities.
+
+
+ClawHub
+
+    Plugin marketplace, publishing, curation, and trust guidance.
+
+
+Models
+
+    Providers, model configuration, failover, and local model services.
+
+
+Platforms
+
+    macOS, Windows, iOS, Android, nodes, and web surfaces.
+
+
+Gateway & Ops
+
+    Gateway configuration, security, diagnostics, and operations.
+
+
+Reference
+
+    CLI reference, schemas, RPC, release notes, and templates.
+
+
+Help
+
+    Troubleshooting, FAQs, testing, diagnostics, and environment checks.
+
+
 ## What is OpenClaw?
 
 OpenClaw is a **self-hosted gateway** that connects your favorite chat apps — Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more via channel plugins — to AI coding agents. You run a single Gateway process on your own machine (or a server), and it becomes the bridge between your messaging apps and an always-available AI assistant.
@@ -73,7 +136,7 @@ OpenClaw is a **self-hosted gateway** that connects your favorite chat apps — 
 - **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
 - **Open source**: MIT licensed, community-driven
 
-**What do you need?** Node 24 (recommended), or Node 22 LTS (`22.19+`) for compatibility, an API key from your chosen provider, and 5 minutes. For best quality and security, use the strongest latest-generation model available.
+**What do you need?** Node 24.15+ (recommended), Node 22 LTS (`22.22.3+`) for compatibility, or Node 25.9+, an API key from your chosen provider, and 5 minutes. For best quality and security, use the strongest latest-generation model available.
 
 ## How it works
 

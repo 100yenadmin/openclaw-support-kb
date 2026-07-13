@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "efd3de60148f20c2084ad342866098edc9f3ebf88f16e440898635aa2cd0803d"
+source_hash: "7dca43acb2e800f9f2864db94534881051df52e838d5159a1daa69951b6a94d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -88,6 +88,9 @@ flowchart LR
   machine running OpenClaw").
 - **BM25 keyword search** matches exact terms (IDs, error strings, config
   keys).
+- **Filename search** indexes paths separately from note bodies. Exact full
+  paths, basenames, and filename stems rank ahead of partial path matches,
+  while snippets and body keyword scores still come from note content.
 
 If only one path is available, the other runs alone.
 
@@ -160,6 +163,10 @@ remain text, but they match against visual and audio content. See
 for setup.
 
 ## Session memory search
+
+For exact full-text recall from session transcripts, use [`sessions_search`](/concepts/session-search)
+and then open a result with `sessions_history`. Session-memory search remains the semantic,
+experimental complement.
 
 Optionally index session transcripts so `memory_search` can recall earlier
 conversations. This is opt-in: set `experimental.sessionMemory: true` and add

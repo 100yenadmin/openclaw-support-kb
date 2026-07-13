@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "fb47fced6b723442c57827fe705c7357a9e5c8232f57191713b47add929a5e66"
+source_hash: "d19a939d993c72c97770fab12c954fd22e039a440f630d547b8625d3427fd88e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -13,14 +13,15 @@ duplicate_index: 1
 # Linux app
 Source: https://docs.openclaw.ai/platforms/linux
 
-The Gateway is fully supported on Linux. Node is the recommended runtime; Bun
-is not recommended (known WhatsApp/Telegram issues).
+The Gateway is fully supported on Linux and requires Node. Bun can still be used
+as a dependency installer or package-script runner, but it cannot run OpenClaw
+because it does not provide `node:sqlite`.
 
 There is no native Linux companion app yet. Contributions are welcome.
 
 ## Quick path (VPS)
 
-1. Install Node 24 (recommended) or Node 22.19+ (LTS, still supported).
+1. Install Node 24.15+ (recommended), Node 22.22.3+ (LTS), or Node 25.9+.
 2. `npm i -g openclaw@latest`
 3. `openclaw onboard --install-daemon`
 4. From your laptop: `ssh -N -L 18789:127.0.0.1:18789 <user>@<host>`
@@ -34,7 +35,7 @@ Full server guide: [Linux Server](/vps). Step-by-step VPS example:
 
 - [Getting Started](/start/getting-started)
 - [Install & updates](/install/updating)
-- Optional: [Bun (experimental)](/install/bun), [Nix](/install/nix), [Docker](/install/docker)
+- Optional: [Bun package workflow](/install/bun), [Nix](/install/nix), [Docker](/install/docker)
 
 ## Gateway service (systemd)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw agent runtime workflow"
 source: "https://docs.openclaw.ai/openclaw-agent-runtime"
-source_hash: "a308e97a6f709e6b5a39d0bd8147e3e972313e86371c057b7714ec30fe3e5917"
+source_hash: "ff7a37e18bde7be0627494eb0db83f58575efc8dfe6c603ff16e2498e0c301b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "openclaw-agent-runtime.md"
@@ -62,13 +62,13 @@ State lives in the OpenClaw state directory: `~/.openclaw` by default, or
 | `state/openclaw.sqlite`                        | Shared runtime state database                                      |
 | `agents/<agentId>/agent/openclaw-agent.sqlite` | Per-agent model auth profiles (API keys + OAuth) and runtime state |
 | `credentials/`                                 | Provider/channel credentials outside the auth profile store        |
-| `agents/<agentId>/sessions/`                   | Session transcripts plus the `sessions.json` index                 |
+| `agents/<agentId>/sessions/`                   | Transcript history and legacy session migration sources            |
 | `sessions/`                                    | Legacy single-agent session store (old installs only)              |
 | `workspace/`                                   | Default agent workspace (extra agents use `workspace-<agentId>`)   |
 
 Delete those paths for a full reset. Narrower resets:
 
-- Sessions only: delete `agents/<agentId>/sessions/` for that agent.
+- Sessions only: do not delete `agents/<agentId>/agent/openclaw-agent.sqlite`; session rows live there alongside other per-agent state. Use `/new` or `/reset` to start a fresh session for one chat, and `openclaw sessions cleanup` for session maintenance.
 - Keep auth: leave `agents/<agentId>/agent/openclaw-agent.sqlite` and `credentials/` in place.
 
 Legacy `auth-profiles.json` files are no longer read at runtime;

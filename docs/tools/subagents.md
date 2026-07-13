@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "b055b9db3b8d2a952b2436c9086df5a6ee1da8eaa9d827222e62737d81d3bdec"
+source_hash: "273b9b8b5f7f370e9835f067964761beba72a52c4daee66a5198284914c904dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -651,10 +651,10 @@ status summaries, descendant completion gating, and per-session
 concurrency checks.
 
 After a gateway restart, stale unended restored runs are pruned unless
-their child session is marked `abortedLastRun: true`. Those
-restart-aborted child sessions remain recoverable through the sub-agent
-orphan recovery flow, which sends a synthetic resume message before
-clearing the aborted marker.
+their child session is marked `abortedLastRun: true`. Restart-aborted
+runs remain registered for the sub-agent orphan recovery flow: stale
+runs are finalized without a resume, while fresh child sessions receive
+a synthetic resume message before the aborted marker is cleared.
 
 Automatic restart recovery is bounded per child session. If the same
 sub-agent child is accepted for orphan recovery repeatedly inside the
@@ -692,6 +692,7 @@ still need normal device approval for scope upgrades.
 
 ## Related
 
+- [Session tools and state changes](/concepts/session-tool)
 - [ACP agents](/tools/acp-agents)
 - [Agent send](/tools/agent-send)
 - [Background tasks](/automation/tasks)

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "What is a session?"
 source: "https://docs.composio.dev/docs/how-composio-works.md"
-source_hash: "dc27f5fa767e6700b618c7b254f72b395dd0bd5e352b8f4685745cfc7b968bba"
+source_hash: "b2dacc66528f7be496e13d52a1bfdb4d4f2810fccb44c1d8bcc13f6dd49eb0ee"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "how-composio-works.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/how-composio-works.md
 
 
-A **session** is the runtime context for an agentic run: the scoped environment an AI agent works in while it acts for one of your users. You create it with `composio.create(userId)`, and it ties together the user, the toolkits available, authentication, and connected accounts. By default it gives the agent meta tools to discover, authenticate, and execute app tools at runtime, instead of loading hundreds of tool definitions into context.
+A **session** is the runtime context for an agentic run: the scoped environment an AI agent works in while it acts for one of your users. In TypeScript, you create it with `composio.sessions.create(userId)`; Python uses `composio.create(user_id)`. It ties together the user, the toolkits available, authentication, and connected accounts. By default it gives the agent meta tools to discover, authenticate, and execute app tools at runtime, instead of loading hundreds of tool definitions into context.
 
 # The basics
 
@@ -36,7 +36,7 @@ tools = session.tools()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 
 const tools = await session.tools();
 ```
@@ -93,9 +93,9 @@ The sandbox is scoped to the session, so files, variables, helper functions, and
 
 # How sessions behave
 
-Every `create()` call returns a new session ID. Use it for a fresh task context.
+Every session-creation call returns a new session ID. Use it for a fresh task context.
 
-Sessions persist on the server and don't expire. For multi-turn conversations, store the session ID and reuse it with `composio.use()` instead of calling `create()` again.
+Sessions persist on the server and don't expire. For multi-turn conversations, store the session ID and reuse it with TypeScript's `composio.sessions.use()` or Python's `composio.use()` instead of creating another session.
 
 **Python:**
 
@@ -109,7 +109,7 @@ tools = session.tools()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.use("session_id");
+const session = await composio.sessions.use("session_id");
 const tools = await session.tools();
 ```
 
@@ -130,7 +130,7 @@ session.update(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.use("session_id");
+const session = await composio.sessions.use("session_id");
 await session.update({
   toolkits: ["gmail", "slack"],
   authConfigs: { gmail: "ac_new_config" },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Typing indicators"
 source: "https://docs.openclaw.ai/concepts/typing-indicators"
-source_hash: "609b9bae0c625ecb37c72c4706182caedf8a184d0dbea42c80b58215d34b9733"
+source_hash: "70465f07be34f0e8c1ec351c11a6609d5d6fd788fcbb862feb47494ad633295d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typing-indicators.md"
@@ -76,7 +76,7 @@ CardGroup
 
 Presence
 
-    How the Gateway tracks connected clients and surfaces them in the macOS Instances tab.
+    How the Gateway tracks connected clients for the Control UI Devices page and macOS Instances tab.
 
 
 Streaming and chunking

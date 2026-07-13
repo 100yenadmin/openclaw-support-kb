@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Using sessions via MCP"
 source: "https://docs.composio.dev/docs/sessions-via-mcp.md"
-source_hash: "b88218db9d8bb722391638b82c38ac25758e8a23ff874f3504de68d5a70c0213"
+source_hash: "cf86c2eac390e4ba4362834036919d25fddca920cfefa6d36f4105b8135839b3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-via-mcp.md"
@@ -43,7 +43,7 @@ mcp_headers = session.mcp.headers
 import { Composio } from "@composio/core";
 
 const composio = new Composio();
-const session = await composio.create("user_123", { mcp: true });
+const session = await composio.sessions.create("user_123", { mcp: true });
 
 const mcpUrl = session.mcp.url;
 const mcpHeaders = session.mcp.headers;
@@ -51,7 +51,7 @@ const mcpHeaders = session.mcp.headers;
 
 You don't need a provider package to use the MCP endpoint, so you can drop it from your `Composio()` setup if MCP is all you need.
 
-> Resuming a stored session? Pass the same flag, `composio.use(sessionId, { mcp: true })` (TypeScript) or `composio.use(session_id, mcp=True)` (Python), to surface `session.mcp` on the reused session.
+> Resuming a stored session? Pass the same flag, `composio.sessions.use(sessionId, { mcp: true })` (TypeScript) or `composio.use(session_id, mcp=True)` (Python), to surface `session.mcp` on the reused session.
 
 > The MCP endpoint and `session.tools()` are backed by the same session. Toolkits, auth configs, and connected accounts you set when [configuring the session](/docs/configuring-sessions) apply to both.
 
@@ -85,7 +85,7 @@ import { Composio, SessionPreset } from "@composio/core";
 
 const composio = new Composio();
 
-const session = await composio.create("user_123", {
+const session = await composio.sessions.create("user_123", {
   toolkits: ["gmail"],
   tools: { gmail: { enable: ["GMAIL_FETCH_EMAILS", "GMAIL_CREATE_EMAIL_DRAFT"] } },
   sessionPreset: SessionPreset.DIRECT_TOOLS,
@@ -146,7 +146,7 @@ import { Composio } from "@composio/core";
 import { createMCPClient } from "@ai-sdk/mcp";
 
 const composio = new Composio();
-const { mcp } = await composio.create("user_123", { mcp: true });
+const { mcp } = await composio.sessions.create("user_123", { mcp: true });
 
 const client = await createMCPClient({
   transport: {

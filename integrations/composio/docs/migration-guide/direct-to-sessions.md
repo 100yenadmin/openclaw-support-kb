@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "ccab32af3d1a38c12fb2e120b3841fd9bb7d4fd1c503a074c8831602bce3a08e"
+source_hash: "117d56cca5526981b7fa0c3e1b2dedbdacae3f85e5d1527bdc4a68a9787c5b70"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -69,7 +69,7 @@ const composio = new Composio({ apiKey: 'your_api_key' });
 // const tools = await composio.tools.get("user_123", { toolkits: ["GITHUB", "SLACK"] });
 
 // After: create a session with your existing auth configs
-const session = await composio.create("user_123", {
+const session = await composio.sessions.create("user_123", {
   authConfigs: {
     github: "ac_your_github_config",
     slack: "ac_your_slack_config",
@@ -98,7 +98,7 @@ tools = session.tools()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 // Before: manually specifying which tools to fetch
 // const tools = await composio.tools.get("user_123", { toolkits: ["GITHUB"] });
 
@@ -133,7 +133,7 @@ connected_account = connection_request.wait_for_connection()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 // Before: manual auth flow
 // const connectionRequest = await composio.connectedAccounts.link("user_123", "ac_your_github_config", {
 //   callbackUrl: "https://your-app.com/callback"
@@ -183,7 +183,7 @@ import { Composio } from '@composio/core';
 
 // After: no version management needed
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 ```
 
 # Restricting toolkits
@@ -209,7 +209,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123", {
+const session = await composio.sessions.create("user_123", {
   toolkits: ["github", "gmail", "slack"],
   authConfigs: {
     github: "ac_your_github_config",
@@ -242,7 +242,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123", {
+const session = await composio.sessions.create("user_123", {
   authConfigs: {
     gmail: "ac_your_gmail_config",
   },

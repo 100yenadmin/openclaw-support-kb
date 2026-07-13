@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "8f5b3ea9d905eb6ea67b32e8a7add4b73a08dbbb23bc5bbbc8763f2ef3f14e0a"
+source_hash: "247e9d9553ea22e05e376c37b0eb71c4d3ceeed00f8a27c9e3447d24fa3deb13"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
@@ -142,16 +142,24 @@ Example:
 
 ## Session storage
 
-Session stores live under the state directory (default `~/.openclaw`):
+Runtime session rows live in each agent's SQLite database under the state
+directory (default `~/.openclaw`):
 
-- `~/.openclaw/agents/<agentId>/sessions/sessions.json`
-- JSONL transcripts live alongside the store
+- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
 
-You can override the store path via `session.store` and `{agentId}` templating.
+Older installs may have legacy transcript JSONL files and a `sessions.json` row
+store under `~/.openclaw/agents/<agentId>/sessions/`. Gateway startup and
+`openclaw doctor --fix` import hot legacy rows/history into SQLite
+automatically. Use `openclaw doctor --session-sqlite inspect
+--session-sqlite-all-agents` and the
+[Doctor](/cli/doctor#session-sqlite-migration) validation sequence when you need
+explicit migration evidence.
+You can still select a legacy store path via `session.store` and `{agentId}`
+templating for migration and offline-maintenance workflows.
 
 Gateway and ACP session discovery also scans disk-backed agent stores under the
 default `agents/` root and under templated `session.store` roots. Discovered
-stores must stay inside that resolved agent root and use a regular
+stores must stay inside that resolved agent root and use a regular legacy
 `sessions.json` file. Symlinks and out-of-root paths are ignored.
 
 ## WebChat behavior

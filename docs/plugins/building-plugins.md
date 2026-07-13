@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "5f6c7bf35b6ac5d8546f1d551f3ba709c60e2693989c87339eef65ce2955ff44"
+source_hash: "5a1ea4fba1e32afc45788cb53088ca69aa820dd35ce26c4e0c6e3743d94bad0f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -29,7 +29,7 @@ Bare package specs still install from npm during the launch cutover. Use the
 
 ## Requirements
 
-- Node 22.19+, Node 23.11+, or Node 24+, and `npm` or `pnpm`.
+- Node 22.22.3+, Node 24.15+, or Node 25.9+, and `npm` or `pnpm`.
 - TypeScript ESM modules.
 - For in-repo bundled plugin work, clone the repository and run `pnpm install`.
   Source-checkout plugin development is pnpm-only because OpenClaw discovers
@@ -260,6 +260,10 @@ Install
 Tools can be required or optional. Required tools are always available when the
 plugin is enabled. Optional tools need explicit user opt-in before OpenClaw
 loads the owning plugin runtime.
+
+Tool factories receive trusted runtime context, including `deliveryContext`,
+`nativeChannelId` for the active platform conversation when available, and
+`requesterSenderId`.
 
 ```typescript
 register(api) {

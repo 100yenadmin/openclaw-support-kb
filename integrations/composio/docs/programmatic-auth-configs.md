@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Programmatic auth configs"
 source: "https://docs.composio.dev/docs/programmatic-auth-configs.md"
-source_hash: "0e6ff5daf3761e7933d67dc44778746caa43d6e464dd660b93d6d041fb4806f1"
+source_hash: "5ce0ed72424ee4929939e89284acf39f6dda15be8ab6fecf3b022351a8f2fdbd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "programmatic-auth-configs.md"
@@ -156,7 +156,7 @@ session = composio.create(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 const authConfig = { id: 'ac_your_notion_config' };
-const session = await composio.create('user_123', {
+const session = await composio.sessions.create('user_123', {
   authConfigs: { notion: authConfig.id },
 });
 ```

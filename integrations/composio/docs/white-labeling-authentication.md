@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling authentication"
 source: "https://docs.composio.dev/docs/white-labeling-authentication.md"
-source_hash: "b193ccb861e3f7a0845d50fe2a2ad070073926a0e670a0a68eaa9f0ec5b14c3f"
+source_hash: "5053522265a105f8ab263e9ee295091bdedf9df3b024decefaee033c204d0aed"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "white-labeling-authentication.md"
@@ -135,7 +135,7 @@ connection_request = session.authorize(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.create("user_123");
+const session = await composio.sessions.create("user_123");
 const connectionRequest = await session.authorize("gmail", {
   callbackUrl: "https://your-app.com/callback",
 });

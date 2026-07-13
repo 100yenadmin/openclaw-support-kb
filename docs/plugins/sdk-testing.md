@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "f2fa54c06f8499631231babc2bbc791fe273bfcfd31973e6a939ca23d9fc74e5"
+source_hash: "5c25f6bb1201e8d444d128703fca6b1e9ad61c0c55dc140524a8f1c11d0dc968"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-testing.md"
@@ -336,7 +336,7 @@ patterns is recommended.
 
 ## Test configuration
 
-OpenClaw uses Vitest 4 with V8 coverage thresholds. For plugin tests:
+OpenClaw uses Vitest 4 with informational V8 coverage reporting. For plugin tests:
 
 ```bash
 # Run all tests

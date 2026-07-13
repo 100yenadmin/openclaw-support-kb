@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "c7907f464dde2c96d071d1096aa99b150dae0d6f28b27eb89f4fcfcabd0f2549"
+source_hash: "7ad06933e4c9f6ec84023701b922a69aa1b680eee6ff9c6a2148fb08d9c52898"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
@@ -166,8 +166,9 @@ Example:
 
 ## Sessions and memory
 
-- Session files: `~/.openclaw/agents/<agentId>/sessions/{{SessionId}}.jsonl`
-- Session metadata (token usage, last route, etc): `~/.openclaw/agents/<agentId>/sessions/sessions.json`
+- Session rows, transcript rows, and metadata (token usage, last route, etc): `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`
+- Legacy/archive transcript artifacts: `~/.openclaw/agents/<agentId>/sessions/`
+- Legacy row migration source: `~/.openclaw/agents/<agentId>/sessions/sessions.json`
 - `/new` or `/reset` starts a fresh session for that chat (configurable via `session.resetTriggers`). If sent alone, OpenClaw acknowledges the reset without invoking the model.
 - `/compact [instructions]` compacts the session context and reports the remaining context budget.
 

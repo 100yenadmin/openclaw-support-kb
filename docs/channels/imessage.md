@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "4c4066e2f40ecaa80491bab706ea18ba8669dcfd28cd7c55fe6cbbb43c100b09"
+source_hash: "29ed4e4f1cdca8a4d809955ffc764f3ba6277d269c589ae8c4c16a3d0bc9d8d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -556,7 +556,7 @@ Attachments and media
 Outbound text and chunking
 
     - text chunk limit: `channels.imessage.textChunkLimit` (default 4000)
-    - chunk mode: `channels.imessage.chunkMode`
+    - chunk mode: `channels.imessage.streaming.chunkMode`
       - `length` (default)
       - `newline` (paragraph-first splitting)
     - outbound markdown bold/italic/underline/strikethrough is converted to native styled text (macOS 15+ recipients render the styling; older recipients see plain text without the markers); markdown tables are converted per the channel markdown table mode

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Firecrawl"
 source: "https://docs.openclaw.ai/tools/firecrawl"
-source_hash: "f3201e6ce094d58d82d0d8499cd0916cca1b9259129612b1569fe6ccba2fdb3d"
+source_hash: "5d06b33ca872a11336f4c77d441869df949c9134ba8f801641eb9f5c29aee4fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/firecrawl.md"
@@ -30,9 +30,19 @@ openclaw plugins install @openclaw/firecrawl-plugin
 openclaw gateway restart
 ```
 
-## Keyless web_fetch and API keys
+## Keyless access and API keys
 
-The explicitly selected hosted Firecrawl `web_fetch` fallback supports starter access without an API key. Add `FIRECRAWL_API_KEY` in the gateway environment or configure it when you need higher limits. Firecrawl `web_search` and `firecrawl_scrape` require an API key.
+Firecrawl registers two `web_search` providers:
+
+- **Firecrawl Search** (`firecrawl`) — uses the hosted `/v2/search` API with your
+  key; auto-detected when a key is present.
+- **Firecrawl Search (Free)** (`firecrawl-free`) — uses the hosted keyless starter
+  tier, no API key required. It is **opt-in only** and never auto-selected, since
+  selecting it sends your search queries to Firecrawl's free tier.
+
+The explicitly selected Firecrawl `web_fetch` fallback is also keyless. The
+explicit `firecrawl_search` and `firecrawl_scrape` tools require an API key. Add
+`FIRECRAWL_API_KEY` in the gateway environment or configure it for higher limits.
 
 ## Configure Firecrawl search
 
@@ -64,6 +74,7 @@ The explicitly selected hosted Firecrawl `web_fetch` fallback supports starter a
 Notes:
 
 - Choosing Firecrawl in onboarding or `openclaw configure --section web` enables the installed Firecrawl plugin automatically.
+- Pick **Firecrawl Search (Free)** in onboarding (or set `provider: "firecrawl-free"`) to run keyless with no API key. The keyed **Firecrawl Search** provider sends `plugins.entries.firecrawl.config.webSearch.apiKey` or `FIRECRAWL_API_KEY`.
 - `web_search` with Firecrawl supports `query` and `count`.
 - For Firecrawl-specific controls like `sources`, `categories`, or result scraping, use `firecrawl_search`.
 - `baseUrl` defaults to hosted Firecrawl at `https://api.firecrawl.dev`. Self-hosted overrides are allowed only for private/internal endpoints; HTTP is accepted only for those private targets.
@@ -120,14 +131,17 @@ Set `plugins.entries.firecrawl.config.webSearch.baseUrl`, `plugins.entries.firec
 
 ### `firecrawl_search`
 
-Use this when you want Firecrawl-specific search controls instead of generic `web_search`.
+Use this when you want Firecrawl-specific search controls instead of generic `web_search`. Requires an API key.
 
 Parameters:
 
 - `query`
-- `count`
+- `count` (1-100)
 - `sources`
 - `categories`
+- `includeDomains` / `excludeDomains` (hostnames only; mutually exclusive)
+- `tbs` (time filter, for example `qdr:d`, `qdr:w`, `sbd:1`)
+- `location` and `country` (geo-targeting)
 - `scrapeResults`
 - `timeoutSeconds`
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md"
-source_hash: "261c0976a3488dcaf34285e50a40d449b51951f7ccb1cf4a339dcbee89ba9407"
+source_hash: "59cf359d9aed677cec314e43d99bdb0e0a59a95605e2dcfcfcde2872d36db188"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/mcp.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md
 
 
-> **Deprecated**: Use a session's MCP endpoint instead: `composio.create(userId, \{ mcp: true \})`
+> **Deprecated**: Use a session's MCP endpoint instead: `composio.sessions.create(userId, \{ mcp: true \})`
 returns a session that exposes `session.mcp.url` / `session.mcp.headers`. MCP is now
 opt-in per session; the standalone `composio.mcp` server-management API is kept only for
 backwards compatibility. Prefer the session MCP endpoint; do not generate new code against

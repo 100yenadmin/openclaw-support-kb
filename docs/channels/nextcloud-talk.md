@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nextcloud Talk"
 source: "https://docs.openclaw.ai/channels/nextcloud-talk"
-source_hash: "35cc860bd047f5b87f30ba6cf316118052787b99d3688a4b41c1bda5a1778338"
+source_hash: "4cce4811a832f5693097003c690e9bee03227d6ffb9dd4dde584f3356ac86d40"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/nextcloud-talk.md"
@@ -166,9 +166,9 @@ Provider options:
 - `channels.nextcloud-talk.dmHistoryLimit`: DM history limit (0 disables).
 - `channels.nextcloud-talk.dms`: per-DM overrides keyed by user ID (`historyLimit`).
 - `channels.nextcloud-talk.textChunkLimit`: outbound text chunk size in chars (default: 4000).
-- `channels.nextcloud-talk.chunkMode`: `length` (default) or `newline` to split on blank lines (paragraph boundaries) before length chunking.
-- `channels.nextcloud-talk.blockStreaming`: disable block streaming for this channel.
-- `channels.nextcloud-talk.blockStreamingCoalesce`: block streaming coalesce tuning.
+- `channels.nextcloud-talk.streaming.chunkMode`: `length` (default) or `newline` to split on blank lines (paragraph boundaries) before length chunking.
+- `channels.nextcloud-talk.streaming.block.enabled`: enable or disable block streaming for this channel.
+- `channels.nextcloud-talk.streaming.block.coalesce`: block streaming coalesce tuning.
 - `channels.nextcloud-talk.responsePrefix`: outbound reply prefix.
 - `channels.nextcloud-talk.markdown.tables`: markdown table rendering mode (`off | bullets | code | block`).
 - `channels.nextcloud-talk.mediaMaxMb`: inbound media cap (MB).

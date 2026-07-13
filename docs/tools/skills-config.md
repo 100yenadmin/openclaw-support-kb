@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "5a087f16030c5ada5052d3cfe8f0dfc0571e8569385560516bc381983dacdf7f"
+source_hash: "5312968b84d390bc2e98ba3cf1fae5c35ce14f6a00a386995a1ae871fca01c51"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -91,8 +91,8 @@ ParamField
 ParamField
 
   Node package manager preference for skill installs. This only affects skill
-  installs — the Gateway runtime should still use Node (Bun is not
-  recommended for WhatsApp/Telegram). `openclaw setup --node-manager` and
+  installs - the OpenClaw CLI and Gateway runtime require Node because the
+  canonical state store uses `node:sqlite`. `openclaw setup --node-manager` and
   `openclaw onboard --node-manager` accept `npm`, `pnpm`, or `bun`; set
   `"yarn"` directly in config for Yarn-backed skill installs.
 
@@ -348,9 +348,13 @@ Warning
 
 ParamField
 
-  When `true`, agents can create pending proposals from durable conversation
-  signals after successful turns. User-prompted skill creation always goes
-  through Skill Workshop regardless of this setting.
+  When `true`, OpenClaw can create pending proposals from durable corrections
+  and can review successful, substantial completed work after the system becomes
+  idle. This can add a background model run after eligible turns. User-prompted
+  skill creation and `/learn` continue to work when the setting is `false`.
+
+See [Self-learning](/tools/self-learning) for eligibility, privacy, cost,
+proposal-only permissions, and troubleshooting.
 
 ParamField
 
@@ -489,6 +493,11 @@ Creating skills
 Skill Workshop
 
     Proposal queue for agent-drafted skills.
+
+
+Self-learning
+
+    Conservative, opt-in proposals from completed work.
 
 
 Slash commands
