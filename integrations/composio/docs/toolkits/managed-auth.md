@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed Auth"
 source: "https://docs.composio.dev/toolkits/managed-auth.md"
-source_hash: "0ad852e25a42aa0a3b7368f0aa6d99b421b930217159c1725fc3e3e497272ca7"
+source_hash: "1bfb63e0fb98871f01d74600d1db8f54602d8ab250dafdf5879f6d8de50c35b2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/managed-auth.md"
@@ -41,7 +41,7 @@ session = composio.create(user_id="user_123")
 import { Composio } from '@composio/core';
 
 const composio = new Composio();
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 // Tools that need an account return a Connect Link automatically
 ```
 

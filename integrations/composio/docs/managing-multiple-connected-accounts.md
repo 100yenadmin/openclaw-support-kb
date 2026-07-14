@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing multiple connected accounts"
 source: "https://docs.composio.dev/docs/managing-multiple-connected-accounts.md"
-source_hash: "dd37d4db310033cd3acbb4c7ffa1d469c37359645a5725a9e5079e4eac244967"
+source_hash: "3dce6c785278b473446452a8c24d4ce1dd564e2042549bbce078b4bd54d07b2a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "managing-multiple-connected-accounts.md"
@@ -41,7 +41,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   multiAccount: {
     enable: true,
@@ -85,7 +85,7 @@ personal_connection = personal_auth.wait_for_connection()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   multiAccount: { enable: true },
 });
@@ -125,7 +125,7 @@ connection_request = session.authorize("gmail", alias="work-gmail")
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const connectionRequest = await session.authorize("gmail", { alias: "work-gmail" });
 ```
 
@@ -176,7 +176,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   connectedAccounts: {
     gmail: ["ca_work_gmail_id"],
     github: ["ca_personal_github_id"],
@@ -203,7 +203,7 @@ for toolkit in toolkits.items:
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const toolkits = await session.toolkits();
 
 for (const toolkit of toolkits.items) {

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/extending-sessions/proxy-execute.md"
-source_hash: "7693e292cfcc99fb77ee6743266ad8d693cb3462f2f3704bdbd96378b4aae079"
+source_hash: "4e134b1331547e55466884fb69fb3f2b0586f21c6d443b0bdbe927a013c438cc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/proxy-execute.md"
@@ -58,7 +58,7 @@ print(response.data)
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create('user_123', { toolkits: ['github'] });
+const session = await composio.create('user_123', { toolkits: ['github'] });
 const { status, data } = await session.proxyExecute({
   toolkit: 'github',
   endpoint: '/repos/composiohq/composio/issues/1',

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Importing existing connections"
 source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "c2279d92f9f38289e5fe1d4f6a5514c631b3eec65287b2bc533e84ceeff59d27"
+source_hash: "3ccf63e4a6c1ff3fdbb19ed5391779880f28f4dbaede908f4d09e1baea31475c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "importing-existing-connections.md"
@@ -309,7 +309,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your-api-key' });
-const session = await composio.sessions.create('user_123', {
+const session = await composio.create('user_123', {
   authConfigs: { gmail: 'ac_your_auth_config' },
   toolkits: ['gmail'],
 });

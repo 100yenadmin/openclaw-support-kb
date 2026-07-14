@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Using sessions via MCP"
 source: "https://docs.composio.dev/docs/sessions-via-mcp.md"
-source_hash: "cf86c2eac390e4ba4362834036919d25fddca920cfefa6d36f4105b8135839b3"
+source_hash: "134b5a813c845abce3df4704791b37fb1bb59620b10e640f5d792c6b61830784"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-via-mcp.md"
@@ -31,7 +31,7 @@ Opt into MCP by passing `mcp: true` when you create the session. The session the
 from composio import Composio
 
 composio = Composio()
-session = composio.create(user_id="user_123", mcp=True)
+session = composio.sessions.create(user_id="user_123", mcp=True)
 
 mcp_url = session.mcp.url
 mcp_headers = session.mcp.headers
@@ -43,7 +43,7 @@ mcp_headers = session.mcp.headers
 import { Composio } from "@composio/core";
 
 const composio = new Composio();
-const session = await composio.sessions.create("user_123", { mcp: true });
+const session = await composio.create("user_123", { mcp: true });
 
 const mcpUrl = session.mcp.url;
 const mcpHeaders = session.mcp.headers;
@@ -51,7 +51,7 @@ const mcpHeaders = session.mcp.headers;
 
 You don't need a provider package to use the MCP endpoint, so you can drop it from your `Composio()` setup if MCP is all you need.
 
-> Resuming a stored session? Pass the same flag, `composio.sessions.use(sessionId, { mcp: true })` (TypeScript) or `composio.use(session_id, mcp=True)` (Python), to surface `session.mcp` on the reused session.
+> Resuming a stored session? Pass the same flag, `composio.use(sessionId, { mcp: true })` (TypeScript) or `composio.use(session_id, mcp=True)` (Python), to surface `session.mcp` on the reused session.
 
 > The MCP endpoint and `session.tools()` are backed by the same session. Toolkits, auth configs, and connected accounts you set when [configuring the session](/docs/configuring-sessions) apply to both.
 
@@ -66,7 +66,7 @@ from composio import Composio, SESSION_PRESET_DIRECT_TOOLS
 
 composio = Composio()
 
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits=["gmail"],
     tools={"gmail": {"enable": ["GMAIL_FETCH_EMAILS", "GMAIL_CREATE_EMAIL_DRAFT"]}},
@@ -85,7 +85,7 @@ import { Composio, SessionPreset } from "@composio/core";
 
 const composio = new Composio();
 
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   tools: { gmail: { enable: ["GMAIL_FETCH_EMAILS", "GMAIL_CREATE_EMAIL_DRAFT"] } },
   sessionPreset: SessionPreset.DIRECT_TOOLS,
@@ -146,7 +146,7 @@ import { Composio } from "@composio/core";
 import { createMCPClient } from "@ai-sdk/mcp";
 
 const composio = new Composio();
-const { mcp } = await composio.sessions.create("user_123", { mcp: true });
+const { mcp } = await composio.create("user_123", { mcp: true });
 
 const client = await createMCPClient({
   transport: {
@@ -165,7 +165,7 @@ MCP is the more portable option. Any MCP-compatible client connects with just a 
 The trade-off is that the MCP client talks to Composio's server directly, so anything the SDK does *around* tool execution doesn't apply:
 
 * **Tool-call modifiers don't run.** `beforeExecute` / `afterExecute` hooks and `modifySchema` transforms live in the SDK's execution path. Over MCP the client executes tools against the server and bypasses them, so you can't intercept, reshape, log, or gate calls the way you can with tools your agent calls directly.
-* **Session-bound custom tools and toolkits don't work.** Tools created with `createCustomTool` / `createCustomToolkit` run in your process. The MCP server only exposes Composio's hosted tools, so your local custom tools aren't available over the endpoint.
+* **Session-bound custom tools and toolkits don't work.** Tools created with `experimental_createTool` / `experimental_createToolkit` in TypeScript, or `composio.experimental.tool` / `composio.experimental.Toolkit` in Python, run in your process. The MCP server only exposes Composio's hosted tools, so your local custom tools aren't available over the endpoint.
 
 If you need any of those, call tools directly through a [provider](/docs/providers) instead of over MCP.
 

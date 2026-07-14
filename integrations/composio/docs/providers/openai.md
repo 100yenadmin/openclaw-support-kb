@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "b3fad317365bf885e7c6cf3422171835f9d90f8021258a4d0a6e183ad0ca2e1e"
+source_hash: "734796c400f92beddfb9e9d4b050b31b7afd0b7f0282d1b53719e124de4dec0c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -109,7 +109,7 @@ const composio = new Composio({
 const client = new OpenAI();
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 let response = await client.responses.create({
@@ -229,7 +229,7 @@ const composio = new Composio({
 const client = new OpenAI();
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
@@ -326,7 +326,7 @@ const composio = new Composio({
 });
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const agent = new Agent({

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "929ed870e52da655098887c67632ac921cad3843e958dc6df5d8649580fd01fb"
+source_hash: "0d6d2ef4d6bb27a8150563207f612cb6d698876d05a978549cd323ea41d3fe14"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -83,7 +83,7 @@ const composio = new Composio({
 const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! });
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const chat = ai.chats.create({

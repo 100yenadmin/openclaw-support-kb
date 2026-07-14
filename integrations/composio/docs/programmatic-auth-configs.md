@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Programmatic auth configs"
 source: "https://docs.composio.dev/docs/programmatic-auth-configs.md"
-source_hash: "5ce0ed72424ee4929939e89284acf39f6dda15be8ab6fecf3b022351a8f2fdbd"
+source_hash: "c02f5549e63036fb8251debbb9b5df3b26a31b806b9a0b0e9bd0636771c53d87"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "programmatic-auth-configs.md"
@@ -144,7 +144,7 @@ Creating an auth config does not change which credentials a session uses. Pass t
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     auth_configs={"notion": auth_config.id},
 )
@@ -156,12 +156,30 @@ session = composio.create(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 const authConfig = { id: 'ac_your_notion_config' };
-const session = await composio.sessions.create('user_123', {
+const session = await composio.create('user_123', {
   authConfigs: { notion: authConfig.id },
 });
 ```
 
 See [Configuring sessions](/docs/configuring-sessions#custom-auth-configs) for how `authConfigs` interacts with account selection and precedence.
+
+# Find auth configs
+
+In TypeScript, filter `authConfigs.list()` by name or ID with `search`. Disabled configs are excluded by default; set `showDisabled` to include them. Auth config responses use `id` as their canonical identifier.
+
+```typescript
+import { Composio } from '@composio/core';
+
+const composio = new Composio();
+const configs = await composio.authConfigs.list({
+  search: 'github',
+  showDisabled: true,
+});
+
+for (const config of configs.items) {
+  console.log(config.id);
+}
+```
 
 # Discover the required fields
 

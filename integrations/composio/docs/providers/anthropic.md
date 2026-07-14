@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "10c2c70d01c75ad4434bab95699f89942a7aaacbdec489e421d08ce176d25a7a"
+source_hash: "edf1efef90c7a334d47d84030ba146e484c72202304bf0763c0292a25d4c2552"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -109,7 +109,7 @@ const composio = new Composio({
 const client = new Anthropic();
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const messages: Anthropic.MessageParam[] = [
@@ -209,7 +209,7 @@ const composio = new Composio({
 });
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 const toolServer = createSdkMcpServer({
     name: "composio",

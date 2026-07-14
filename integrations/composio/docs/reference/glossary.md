@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Glossary"
 source: "https://docs.composio.dev/reference/glossary.md"
-source_hash: "afe7a8458f6f735de495a185b59d019cd2ceca247336f8610fa85283b3947347"
+source_hash: "fb42a3433b1d27dcda7c21a376dd3ddc3984bb7c946f8d5fdf728afb76037132"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/glossary.md"
@@ -99,7 +99,7 @@ An adapter package that transforms Composio tools into the format an AI framewor
 
 ### Session
 
-An ephemeral, immutable configuration object returned by TypeScript's `composio.sessions.create(userId)` or Python's `composio.create(user_id)`. It ties together a userID, the available toolkits, an auth config, and connected accounts, and it exposes `tools()`, `authorize()`, and `toolkits()` (plus `mcp.url` when created with `mcp: true`). See [What is a session?](/docs/how-composio-works).
+An ephemeral, immutable configuration object returned by `composio.create(userId)`. It ties together a userID, the available toolkits, an auth config, and connected accounts, and it exposes `tools()`, `authorize()`, and `toolkits()` (plus `mcp.url` when created with `mcp: true`). See [What is a session?](/docs/how-composio-works).
 
 ### Session ID
 

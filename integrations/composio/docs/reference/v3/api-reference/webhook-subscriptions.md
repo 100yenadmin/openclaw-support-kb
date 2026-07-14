@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md"
-source_hash: "719ffe29f41d7a0afbaadc6ccc4f606ba9db139ed080c76599278f9ab2ae5c58"
+source_hash: "5c5d8160efe9e5ad42f80ecb86b0b1d63fc49bc617dbdc5d532922d8c4c918a1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/webhook-subscriptions.md"
@@ -130,7 +130,7 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
     const toolkit = payload.data.toolkit.slug;
 
     // Look up the user and send them a re-auth link
-    const session = await composio.sessions.create(lookupUser(accountId));
+    const session = await composio.create(lookupUser(accountId));
     const connectionRequest = await session.authorize(toolkit);
     if (connectionRequest.redirectUrl) {
       notifyUser(connectionRequest.redirectUrl);

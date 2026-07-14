@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Remote sandbox"
 source: "https://docs.composio.dev/docs/sandbox/remote.md"
-source_hash: "1b46400f6bba7844befa9489967e8fc95087fd9b5b0801ff89a345cb73832353"
+source_hash: "a600ca4bc48f8ea15ae6068e66de3b7bc3a5d4feb87150b5f7266884d19989cc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sandbox/remote.md"
@@ -95,7 +95,7 @@ report.save("./report.pdf")
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 
 // Upload a local file; the sandbox sees it at /mnt/files/sales.csv
 const uploaded = await session.experimental.files.upload("./sales.csv");

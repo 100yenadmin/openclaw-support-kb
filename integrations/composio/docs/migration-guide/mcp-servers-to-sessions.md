@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from MCP servers to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md"
-source_hash: "ba8b8c994a17523e6b67ed1c2c6f0a9b82e84dcc90982635113a29561c7274c4"
+source_hash: "27cf7aa30eea62d9f0233600f3a8c589e4413a3da26c016f547656551cb0355a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/mcp-servers-to-sessions.md"
@@ -109,7 +109,7 @@ const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
 // const mcpUrl = instance.url;
 
 // After: one session, same toolkit + auth config + tools
-const session = await composio.sessions.create("user-123", {
+const session = await composio.create("user-123", {
   toolkits: ["gmail"],
   authConfigs: { gmail: "ac_xyz123" },
   tools: { gmail: { enable: ["GMAIL_FETCH_EMAILS", "GMAIL_SEND_EMAIL"] } },
@@ -158,7 +158,7 @@ session = composio.create(
 import { Composio, SessionPreset } from '@composio/core';
 
 const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
-const session = await composio.sessions.create("user-123", {
+const session = await composio.create("user-123", {
   toolkits: ["gmail"],
   authConfigs: { gmail: "ac_xyz123" },
   tools: { gmail: { enable: ["GMAIL_FETCH_EMAILS", "GMAIL_SEND_EMAIL"] } },
@@ -191,7 +191,7 @@ tools = session.tools()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
-const session = await composio.sessions.create("user-123");
+const session = await composio.create("user-123");
 const tools = await session.tools();
 ```
 
@@ -213,7 +213,7 @@ result = session.execute(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: process.env.COMPOSIO_API_KEY });
-const session = await composio.sessions.create("user-123");
+const session = await composio.create("user-123");
 const result = await session.execute("GITHUB_CREATE_ISSUE", {
   owner: "my-org",
   repo: "my-repo",

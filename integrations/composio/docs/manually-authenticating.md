@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Manual auth management"
 source: "https://docs.composio.dev/docs/manually-authenticating.md"
-source_hash: "d1323efb8dd7862c4797dd13321c03aac16234b3236a4cae70a35b3b3cafeb49"
+source_hash: "1275b8405087b51822a0169c0601de63ffc17a85ca3084ca07e425f5ea80872d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "manually-authenticating.md"
@@ -45,7 +45,7 @@ print(f"Connected: {connected_account.id}")
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 
 const connectionRequest = await session.authorize("gmail");
 
@@ -80,7 +80,7 @@ print(connection_request.redirect_url)
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const connectionRequest = await session.authorize("gmail", {
   callbackUrl: "https://your-app.com/callback?user_id=user_123&source=onboarding",
 });
@@ -118,7 +118,7 @@ for toolkit in toolkits.items:
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const toolkits = await session.toolkits();
 
 toolkits.items.forEach((toolkit) => {
@@ -144,7 +144,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   manageConnections: false,
 });
 ```
@@ -192,7 +192,7 @@ const composio = new Composio({ apiKey: "your-api-key" });
 
 const requiredToolkits = ["gmail", "github"];
 
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   manageConnections: false, // Disable in-chat auth prompts
 });
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed vs custom auth"
 source: "https://docs.composio.dev/docs/custom-app-vs-managed-app.md"
-source_hash: "35ccecc4b546681de463a279a599e1c686daa1012589bfd8a4cdd6032583f03e"
+source_hash: "309245435b704cb0943c6f69f1171266470d24cf378bfada8cbc3c0ac3480522"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "custom-app-vs-managed-app.md"
@@ -97,7 +97,7 @@ session = composio.create(
 import { Composio } from '@composio/core';
 
 const composio = new Composio();
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   authConfigs: {
     github: "ac_your_github_config",
     // toolkits not listed here still use Composio managed auth
@@ -127,7 +127,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio();
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   authConfigs: {
     github: "ac_your_github_config",
     google: "ac_your_google_config",

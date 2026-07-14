@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "a22fe72bc7cca76fe4dcda10ab0ffb0200c02c4775d71471155c7df1ffc9b9f5"
+source_hash: "4c3869b2711d542f1fb7f62dcf7ffb58615a0103ea2275c587a157c8c355d59f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -102,6 +102,8 @@ The bar adapts to terminal width — full layout at ≥ 76 columns, compact at 5
 | Red | ≥ 95% | Near overflow — consider `/compress` |
 
 Use `/usage` for a detailed breakdown including per-category costs (input vs output tokens).
+
+On the `openai-codex` provider, `/usage` also shows any banked usage-limit resets on your ChatGPT account ("You have N resets banked - use /usage reset to activate"). `/usage reset` redeems one banked reset, fully restoring your 5-hour and weekly limits. Hermes refuses to redeem while your limits aren't exhausted (a banked reset restores the full allowance, so spending it early wastes it) — pass `/usage reset --force` to redeem anyway.
 
 ### Session Resume Display
 

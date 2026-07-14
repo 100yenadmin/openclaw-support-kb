@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "460b4554052d9c6e05ee0ae337f421a54dff6d137d15c4993cb90fa87e44f5d6"
+source_hash: "466f44f15ad3539a7ba51ea26d986d4e8baf81cad079879e2a3f4645d9dd84e9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -18,6 +18,8 @@ Source: https://docs.composio.dev/docs/quickstart.md
 
 
 Build your first AI agent with Composio Tools. You'll create a [session](/docs/how-composio-works) for a user, give your agent access to [tools](/docs/how-composio-works), and let it take action across 1000+ apps.
+
+> The TypeScript SDK is ESM-only and requires Node.js 22.22.3 or newer. Use `import` syntax rather than CommonJS `require()`.
 
 ## OpenAI Agents
 
@@ -52,10 +54,10 @@ composio = Composio(provider=OpenAIAgentsProvider())
 
 # Create a session for your user
 user_id = "user_123"
-session = composio.create(user_id=user_id)
+session = composio.sessions.create(user_id=user_id)
 tools = session.tools()
 
-# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# For multi-turn, store the session ID in your db and reuse instead of creating another session:
 # session_id = session.session_id
 # session = composio.use(session_id)
 
@@ -101,12 +103,12 @@ const composio = new Composio({ provider: new OpenAIAgentsProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.sessions.create(userId);
+const session = await composio.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.sessions.use(sessionId);
+// const session = await composio.use(sessionId);
 
 const agent = new Agent({
   name: "Personal Assistant",
@@ -171,10 +173,10 @@ composio = Composio(provider=ClaudeAgentSDKProvider())
 
 # Create a session for your user
 user_id = "user_123"
-session = composio.create(user_id=user_id)
+session = composio.sessions.create(user_id=user_id)
 tools = session.tools()
 
-# For multi-turn, store the session ID in your db and reuse instead of calling create() again:
+# For multi-turn, store the session ID in your db and reuse instead of creating another session:
 # session_id = session.session_id
 # session = composio.use(session_id)
 
@@ -227,12 +229,12 @@ const composio = new Composio({ provider: new ClaudeAgentSDKProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.sessions.create(userId);
+const session = await composio.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.sessions.use(sessionId);
+// const session = await composio.use(sessionId);
 
 const customServer = createSdkMcpServer({
   name: "composio",
@@ -306,12 +308,12 @@ const composio = new Composio({ provider: new VercelProvider() });
 
 // Create a session for your user
 const userId = "user_123";
-const session = await composio.sessions.create(userId);
+const session = await composio.create(userId);
 const tools = await session.tools();
 
 // For multi-turn, store the session ID in your db and reuse instead of calling create() again:
 // const sessionId = session.sessionId;
-// const session = await composio.sessions.use(sessionId);
+// const session = await composio.use(sessionId);
 
 const readline = createInterface({ input: process.stdin, output: process.stdout });
 
@@ -357,7 +359,7 @@ while (true) {
 readline.close();
 ```
 
-By default, each `composio.create()` call returns a new session with access to all toolkits. Sessions are highly configurable beyond that: [Reusing a session](/docs/how-composio-works#how-sessions-behave) covers storing a session ID and calling `composio.use()` across multi-turn requests, while [Configuring Sessions](/docs/configuring-sessions) covers restricting toolkits, auth configs, and connected accounts.
+By default, each `composio.sessions.create()` call returns a new session with access to all toolkits. Sessions are highly configurable beyond that: [Reusing a session](/docs/how-composio-works#how-sessions-behave) covers storing a session ID and calling `composio.use()` across multi-turn requests, while [Configuring Sessions](/docs/configuring-sessions) covers restricting toolkits, auth configs, and connected accounts.
 
 Prefer to connect over the Model Context Protocol instead? Every session also exposes an MCP endpoint. See [Using sessions via MCP](/docs/sessions-via-mcp).
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "763aa319ded3213c0f78e5666e542628db82afe1b74d20b19f5180422580006d"
+source_hash: "d613ada81da5fcb8d57bb1d2aee7bbf6750a6b3af8ba10741f71e7322860f382"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -42,7 +42,7 @@ import { generateText, stepCountIs } from "ai";
 const composio = new Composio({ provider: new VercelProvider() });
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const { text } = await generateText({

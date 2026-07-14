@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Agent Runs Subsystem Spec"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/spec/agent-runs.md"
-source_hash: "9ba568966b77613b32c9d2c5bc8b21c93d8f0e06cbfa04c967250adef1006848"
+source_hash: "ccacc7fcf6f3c1cd169c841995d294474046224c6c9babe08342b683f6072e4c"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/spec/agent-runs.md"
@@ -331,7 +331,7 @@ Codex emits JSONL events. Parse line-by-line and extract:
    - `cached_input_tokens`
    - `output_tokens`
 
-Codex JSONL currently may not include cost; store token usage and leave cost null/unknown unless available.
+Codex JSONL currently may not include cost; store token usage as per-run totals and mark the ledger row `unpriced` unless a cost is available.
 
 ## 7.3 Common local adapter process handling
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "6239dd4f8f292df04ea9d7705ab4ea54208e5fc31f9f12399a2f5e8423608767"
+source_hash: "51bb1491e9d65c7d5e86261795abbce65cc46301efd1c0ec389f1dad322eff8d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -76,7 +76,7 @@ const composio = new Composio({
 });
 
 // Create a session for your user
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 
 const toolNode = new ToolNode(tools);

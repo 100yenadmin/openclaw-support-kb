@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "b7e6350232481d708647e510d74f6df1651fb8e0543dbad2ff9e6f2c60fe5016"
+source_hash: "f9816f90f398316e4cba6ed27860f34298c0d1b9633c4c31fb9f7441c97f536e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "configuring-sessions.md"
@@ -22,7 +22,7 @@ Source: https://docs.composio.dev/docs/configuring-sessions.md
 **Python:**
 
 ```python
-session = composio.create(user_id="user_123")
+session = composio.sessions.create(user_id="user_123")
 ```
 
 **TypeScript:**
@@ -30,7 +30,7 @@ session = composio.create(user_id="user_123")
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 ```
 
 By default, a session has access to every toolkit in the Composio catalog. Your agent can discover and use any of them through `COMPOSIO_SEARCH_TOOLS`. Use the options below to restrict or customize what's available.
@@ -45,13 +45,13 @@ To limit a session to specific toolkits, pass an array of toolkit slugs. The age
 
 ```python
 # Using array format
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits=["github", "gmail", "slack"]
 )
 
 # Using object format with enable key
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits={"enable": ["github", "gmail", "slack"]}
 )
@@ -63,12 +63,12 @@ session = composio.create(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 // Using array format
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["github", "gmail", "slack"],
 });
 
 // Using object format with enable key
-const session2 = await composio.sessions.create("user_123", {
+const session2 = await composio.create("user_123", {
   toolkits: { enable: ["github", "gmail", "slack"] },
 });
 ```
@@ -80,7 +80,7 @@ To keep every toolkit discoverable except a few, use the `disable` syntax. This 
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits={"disable": ["exa", "firecrawl"]}
 )
@@ -91,7 +91,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: { disable: ["exa", "firecrawl"] },
 });
 ```
@@ -113,7 +113,7 @@ composio = Composio(
     provider=OpenAIAgentsProvider(),
 )
 
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits=["gmail"],
     tools={
@@ -143,7 +143,7 @@ const composio = new Composio({
   apiKey: 'your_api_key',
   provider: new OpenAIAgentsProvider(),
 });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   tools: {
     gmail: {
@@ -174,7 +174,7 @@ composio = Composio(
     provider=OpenAIAgentsProvider(),
 )
 
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits=["gmail"],
     tools={
@@ -213,7 +213,7 @@ const composio = new Composio({
   apiKey: 'your_api_key',
   provider: new OpenAIAgentsProvider(),
 });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   tools: {
     gmail: {
@@ -247,7 +247,7 @@ To enable only specific tools, pass an `enable` list per toolkit:
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     tools={
         # Only these Gmail tools will be available
@@ -263,7 +263,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   tools: {
     // Only these Gmail tools will be available
     gmail: { enable: ["GMAIL_SEND_EMAIL", "GMAIL_FETCH_EMAILS"] },
@@ -278,7 +278,7 @@ The shorthand array syntax is equivalent to `enable`:
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     tools={
         "gmail": ["GMAIL_SEND_EMAIL", "GMAIL_FETCH_EMAILS"],
@@ -292,7 +292,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   tools: {
     gmail: ["GMAIL_SEND_EMAIL", "GMAIL_FETCH_EMAILS"],
     github: ["GITHUB_CREATE_ISSUE", "GITHUB_GET_ISSUE"]
@@ -305,7 +305,7 @@ To keep every tool in a toolkit except a few, use `disable`:
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     tools={
         # All Slack tools except delete
@@ -321,7 +321,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   tools: {
     // All Slack tools except delete
     slack: { disable: ["SLACK_DELETE_MESSAGE"] },
@@ -348,13 +348,13 @@ To apply tag filters across all toolkits, pass `tags` at the session level:
 
 ```python
 # Only include read-only and idempotent tools
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     tags=["readOnlyHint", "idempotentHint"]
 )
 
 # Enable some tags, disable others
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     tags={
         "enable": ["readOnlyHint"],
@@ -369,12 +369,12 @@ session = composio.create(
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
 // Only include read-only and idempotent tools
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   tags: ["readOnlyHint", "idempotentHint"]
 });
 
 // Enable some tags, disable others
-const sessionWithTagConfig = await composio.sessions.create("user_123", {
+const sessionWithTagConfig = await composio.create("user_123", {
   tags: {
     enable: ["readOnlyHint"],
     disable: ["destructiveHint"]
@@ -387,7 +387,7 @@ To override the global tags for a specific toolkit, set `tags` inside that toolk
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     # Global: only read-only tools
     tags=["readOnlyHint"],
@@ -405,7 +405,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   // Global: only read-only tools
   tags: ["readOnlyHint"],
   tools: {
@@ -443,7 +443,7 @@ composio = Composio(
     provider=OpenAIAgentsProvider(),
 )
 
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     toolkits=["gmail"],
     preload={
@@ -472,7 +472,7 @@ const composio = new Composio({
   apiKey: 'your_api_key',
   provider: new OpenAIAgentsProvider(),
 });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   toolkits: ["gmail"],
   preload: {
     tools: ["GMAIL_FETCH_EMAILS", "GMAIL_CREATE_EMAIL_DRAFT"],
@@ -498,7 +498,7 @@ Use your own OAuth credentials instead of Composio's defaults. Pass an auth conf
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     auth_configs={
         "github": "ac_your_github_config",
@@ -512,7 +512,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   authConfigs: {
     github: "ac_your_github_config",
     slack: "ac_your_slack_config",
@@ -529,7 +529,7 @@ When a user has multiple connected accounts for the same toolkit, specify which 
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     connected_accounts={
         "gmail": ["ca_work_gmail"],
@@ -543,7 +543,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   connectedAccounts: {
     gmail: ["ca_work_gmail"],
     github: ["ca_personal_github"],
@@ -572,7 +572,7 @@ By default, sessions include the [sandbox](/docs/sandbox/remote), a persistent e
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     sandbox={
         "enable": False
@@ -585,7 +585,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   sandbox: {
     enable: false,
   },
@@ -618,7 +618,7 @@ Defaults to `standard` when omitted.
 **Python:**
 
 ```python
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_123",
     sandbox={
         "sandbox_size": "large",
@@ -631,7 +631,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   sandbox: {
     enable: true,
     sandboxSize: "large",
@@ -662,7 +662,7 @@ tools = session.tools()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const tools = await session.tools();
 ```
 
@@ -685,7 +685,7 @@ connected_account = connection_request.wait_for_connection()
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const connectionRequest = await session.authorize("github", {
   callbackUrl: "https://myapp.com/callback",
 });
@@ -716,7 +716,7 @@ for toolkit in toolkits.items:
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const toolkits = await session.toolkits();
 
 toolkits.items.forEach((toolkit) => {
@@ -737,7 +737,7 @@ connected = session.toolkits(is_connected=True)
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const connected = await session.toolkits({ isConnected: true });
 ```
 
@@ -762,7 +762,7 @@ while True:
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123");
+const session = await composio.create("user_123");
 const allToolkits: any[] = [];
 let cursor: string | undefined;
 
@@ -791,7 +791,7 @@ print(result["session_id"], result["deleted"])
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create('user_123');
+const session = await composio.create('user_123');
 const result = await session.delete();
 console.log(result.sessionId, result.deleted);
 ```

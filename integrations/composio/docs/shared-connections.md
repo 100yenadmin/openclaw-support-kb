@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Shared connections"
 source: "https://docs.composio.dev/docs/shared-connections.md"
-source_hash: "d3fbc7468f8cc3544a824e185b37849ccc2f844fe0165a9b45fb1df40ddf6c70"
+source_hash: "6a518197fca0748bad888a333f07b65bf41a0f11b05c33837ea0bf2ffad416ce"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "shared-connections.md"
@@ -108,7 +108,7 @@ The session config itself is **not** experimental. You pin the connection by ID 
 # user_alice starts a session that pins the shared Gmail connection.
 # Gmail tools loaded from this session will resolve to that connection
 # even though user_alice did not create it.
-session = composio.create(
+session = composio.sessions.create(
     user_id="user_alice",
     connected_accounts={
         "gmail": ["ca_gmail_shared"],
@@ -126,7 +126,7 @@ const composio = new Composio({ apiKey: 'your_api_key' });
 // user_alice starts a session that pins the shared Gmail connection.
 // Gmail tools loaded from this session will resolve to that connection
 // even though user_alice did not create it.
-const session = await composio.sessions.create("user_alice", {
+const session = await composio.create("user_alice", {
   connectedAccounts: {
     gmail: ["ca_gmail_shared"],
   },

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "16664b900b5263b5d6aa76833a261e38524ca84e542936a21e3da06b5ec98077"
+source_hash: "59f9fdf6531e866bd6e8a9a6f93ec681360e31ab8b1066cde6e21b2a695e4716"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
@@ -60,7 +60,7 @@ session = composio.create(
 const session = await composio.experimental.toolRouter.createSession('user_123');
 
 // Stable (after)
-const session = await composio.sessions.create('user_123');
+const session = await composio.create('user_123');
 ```
 
 #### Moving users (optional)
@@ -90,7 +90,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create('user_123',
+const session = await composio.create('user_123',
     {
         authConfigs: {
             github: "ac_your_github_config",

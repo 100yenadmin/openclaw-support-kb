@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/docs/authentication.md"
-source_hash: "0d4e36ef52b7a2314c5c6b8b5be87b11225edd659dba41f04e1c1f76d37c061a"
+source_hash: "b7aec9499b0877648e2e0c9eeb5ad716f8aa8b9fd01e5b494b6aa794618e76fd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication.md"
@@ -62,7 +62,7 @@ session = composio.create(
 ```typescript
 import { Composio } from '@composio/core';
 const composio = new Composio({ apiKey: 'your_api_key' });
-const session = await composio.sessions.create("user_123", {
+const session = await composio.create("user_123", {
   manageConnections: { callbackUrl: "https://yourapp.com/chat" },
 });
 ```
