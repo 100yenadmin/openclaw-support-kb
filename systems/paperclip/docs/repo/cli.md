@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "27b45afdd2623be3e71ca2adcde56e276ab86bd736b11621be3ccb04afae9447"
+source_hash: "4bf654b9f26f9baed266977ad452775c701e56fbf1e2b107cb76abc5940ba93d"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -826,9 +826,9 @@ pnpm paperclipai plugin tool:execute --payload-json '{...}'
 pnpm paperclipai plugin health <plugin-id>
 pnpm paperclipai plugin logs <plugin-id>
 pnpm paperclipai plugin upgrade <plugin-id>
-pnpm paperclipai plugin config <plugin-id>
-pnpm paperclipai plugin config:set <plugin-id> --payload-json '{"configJson":{...}}'
-pnpm paperclipai plugin config:test <plugin-id> --payload-json '{"configJson":{...}}'
+pnpm paperclipai plugin config <plugin-id> --company-id <company-id>
+pnpm paperclipai plugin config:set <plugin-id> --company-id <company-id> --payload-json '{"configJson":{...}}'
+pnpm paperclipai plugin config:test <plugin-id> --company-id <company-id> --payload-json '{"configJson":{...}}'
 pnpm paperclipai plugin jobs <plugin-id>
 pnpm paperclipai plugin job:runs <plugin-id> <job-id>
 pnpm paperclipai plugin job:trigger <plugin-id> <job-id> [--payload-json '{...}']

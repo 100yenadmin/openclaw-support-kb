@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Mixture of Agents"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mixture-of-agents"
-source_hash: "4a83b899bbf04e6a90235234050c5e3f3922c658af512d1d46707e73b9168f4e"
+source_hash: "4da3738139d09eed9a82448f0a82566540b71f0effe714ff86418bac731cbd65"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mixture-of-agents.md"
@@ -144,6 +144,35 @@ moa:
 ```
 
 Leave it unset (or `0`/blank) to keep the prior uncapped behavior.
+
+### Per-slot reasoning effort
+
+Reference and aggregator slots may also set `reasoning_effort`. Use this when
+you want the same model to contribute at different depths, or when the
+aggregator should think harder than the advisory references. Valid values match
+Hermes' normal reasoning controls: `none`, `minimal`, `low`, `medium`, `high`,
+`xhigh`, and `max`.
+
+```yaml
+moa:
+  presets:
+    deep_review:
+      reference_models:
+        - provider: openai-codex
+          model: gpt-5.6-sol
+          reasoning_effort: low
+        - provider: openai-codex
+          model: gpt-5.6-sol
+          reasoning_effort: xhigh
+        - provider: xai-oauth
+          model: grok-4.5
+      aggregator:
+        provider: openai-codex
+        model: gpt-5.6-sol
+        reasoning_effort: high
+```
+
+Omit `reasoning_effort` to use the provider/Hermes default for that slot.
 
 ## Terminal preset management
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "6f5cf4fd698b1fbaf0c38751c60b78a26386a7e1a080d1032ad7e7b66e3d4392"
+source_hash: "d6646e23ded3b90002da76c1c1d6f354a3d31cb7021ba7aa2d1eb75de28712d3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -19,6 +19,8 @@ Source: https://docs.composio.dev/docs/providers/autogen.md
 
 The AutoGen provider turns Composio tools into AutoGen [`FunctionTool`](https://microsoft.github.io/autogen/) objects and registers them with your agents. You connect an account, fetch the tools, register them with a caller and executor agent, and AutoGen handles the conversation and tool calls.
 
+The provider runs on the [`ag2`](https://github.com/ag2ai/ag2) distribution, the community-maintained continuation of AutoGen 0.2, so it works for AG2 projects out of the box.
+
 **Install**
 
 **Configure API Keys**
@@ -32,7 +34,9 @@ OPENAI_API_KEY=xxxxxxxxx
 **Create session and run**
 
 ```python
-from autogen import AssistantAgent, UserProxyAgent
+import os
+
+from autogen import AssistantAgent, LLMConfig, UserProxyAgent
 from composio import Composio
 from composio_autogen import AutogenProvider
 
@@ -45,7 +49,11 @@ tools = session.tools()
 chatbot = AssistantAgent(
     "chatbot",
     system_message="Reply TERMINATE when the task is done or when user's content is empty",
-    llm_config={"config_list": [{"model": "gpt-5.2"}]},
+    llm_config=LLMConfig({
+        "api_type": "openai",
+        "model": "gpt-5.2",
+        "api_key": os.environ["OPENAI_API_KEY"],
+    }),
 )
 
 user_proxy = UserProxyAgent(

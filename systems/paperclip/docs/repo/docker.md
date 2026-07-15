@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Docker Quickstart"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DOCKER.md"
-source_hash: "0e0aa0bf9182e8784f3ac7f36b77b80d57782d26d4b5d749d024a2ac85685a14"
+source_hash: "f0ed4294ead39d2a96d6208927323cfba23525246910a9eb1e24094194e7e718"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/docker.md"
@@ -51,6 +51,7 @@ docker run --name paperclip \
   -e HOST=0.0.0.0 \
   -e PAPERCLIP_HOME=/paperclip \
   -e BETTER_AUTH_SECRET=$(openssl rand -hex 32) \
+  -e PAPERCLIP_TOOL_ACTION_SIGNING_SECRET=$(openssl rand -hex 32) \
   -v "$(pwd)/data/docker-paperclip:/paperclip" \
   paperclip-local
 ```
@@ -74,6 +75,7 @@ Single container, no external database. Data persists via a bind mount.
 
 ```sh
 BETTER_AUTH_SECRET=$(openssl rand -hex 32) \
+PAPERCLIP_TOOL_ACTION_SIGNING_SECRET=$(openssl rand -hex 32) \
   docker compose -f docker/docker-compose.quickstart.yml up --build
 ```
 
@@ -205,6 +207,7 @@ The `docker/quadlet/` directory contains unit files to run Paperclip + PostgreSQ
    ```sh
    cat > ~/.config/containers/systemd/paperclip.env <<EOL
    BETTER_AUTH_SECRET=$(openssl rand -hex 32)
+   PAPERCLIP_TOOL_ACTION_SIGNING_SECRET=$(openssl rand -hex 32)
    POSTGRES_USER=paperclip
    POSTGRES_PASSWORD=paperclip
    POSTGRES_DB=paperclip
