@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "619ff01204042dbc7f41314e440ac59d1cc988cc71407ddbd18ec8c39cba045d"
+source_hash: "f882e3aacb063412b69f522a47457448fc101babc6cdb47032985c499a8ab419"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -392,10 +392,6 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
     store: "~/.openclaw/cron/jobs.json",
     maxConcurrentRuns: 8, // default; cron dispatch + isolated cron agent-turn execution
     sessionRetention: "24h",
-    runLog: {
-      maxBytes: "2mb",
-      keepLines: 2000,
-    },
   },
 
   // Webhooks

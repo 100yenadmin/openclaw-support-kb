@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix plugin"
 source: "https://docs.openclaw.ai/plugins/reference/matrix"
-source_hash: "e111d0c5a6b4efc1c37c2869e164155d09e79204fa3c76201ef86b42baeb68df"
+source_hash: "c97cab0c6c8b8b08680039ea10c2fdf8ae1d28b9d1c2b979726f2d573a6cbf3d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/matrix.md"
@@ -24,10 +24,10 @@ OpenClaw Matrix channel plugin for rooms and direct messages.
 
 ## Surface
 
-channels: matrix
+channels: `matrix`
 
 ## Related docs
 
-- [matrix](/channels/matrix)
+- [Matrix](/channels/matrix)
 
 ---

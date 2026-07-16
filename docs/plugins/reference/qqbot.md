@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ Bot plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qqbot"
-source_hash: "ff63ec604dd7ec0c9e3a9873c673bf55760def5e3ce54478ff4cd4d6e272a4c3"
+source_hash: "e469853d2dfbbb874802dff65502081319fc2651fbcf009417ae8fed5fa03f88"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qqbot.md"
@@ -24,7 +24,7 @@ OpenClaw QQ Bot channel plugin for group and direct-message workflows.
 
 ## Surface
 
-channels: qqbot; contracts: tools; skills
+channels: `qqbot`; contracts: `tools`; skills
 
 ## Related docs
 

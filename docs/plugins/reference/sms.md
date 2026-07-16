@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sms plugin"
 source: "https://docs.openclaw.ai/plugins/reference/sms"
-source_hash: "888d80759f57f380bb42632789cd0bcb04ea3f3c7f464de7e914c1900b584362"
+source_hash: "3f46a6436a91eef62a00f8e787006dae6d895631a227b5ada6245a359e4abb68"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/sms.md"
@@ -24,7 +24,7 @@ Twilio SMS channel plugin for OpenClaw text messages.
 
 ## Surface
 
-channels: sms
+channels: `sms`
 
 ## Related docs
 

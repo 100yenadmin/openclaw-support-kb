@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel ingress API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-ingress"
-source_hash: "e887248dc672632bcb2d2349120d55568f8fe558ae9ffae6506f8d435c8280eb"
+source_hash: "14c22a42669375fe793ebf181a7d4eb72e02c7623decd3ef228c685dadd4de55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-ingress.md"
@@ -19,9 +19,7 @@ generic policy: DM/group allowlists, pairing-store DM entries, route gates,
 command gates, event auth, mention activation, redacted diagnostics, and
 admission.
 
-Use `openclaw/plugin-sdk/channel-ingress-runtime` for new receive paths. The
-older `openclaw/plugin-sdk/channel-ingress` subpath stays exported as a
-deprecated compatibility facade for third-party plugins.
+Use `openclaw/plugin-sdk/channel-ingress-runtime` for receive paths.
 
 ## Runtime resolver
 

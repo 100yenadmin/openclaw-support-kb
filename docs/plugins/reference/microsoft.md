@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft plugin"
 source: "https://docs.openclaw.ai/plugins/reference/microsoft"
-source_hash: "2adea5924899e78aae8c1665379d4ceba80deb53136800740811ea2999ff9705"
+source_hash: "5fc80791d6c274b909fd37599cb51cb14cad5fa9712aa7fbe59ad497a39ea552"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/microsoft.md"
@@ -24,6 +24,6 @@ Adds text-to-speech provider support.
 
 ## Surface
 
-contracts: speechProviders
+contracts: `speechProviders`
 
 ---

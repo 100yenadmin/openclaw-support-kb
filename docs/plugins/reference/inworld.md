@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld plugin"
 source: "https://docs.openclaw.ai/plugins/reference/inworld"
-source_hash: "1a81b22d3824b04ee12bc5971bcfad64cb6a5b784a69800daa9f80826ce4af7b"
+source_hash: "6c1a3af9676dbde985de678f6afb841e1de6da6f308fb4897845b6b3aa90286f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/inworld.md"
@@ -24,7 +24,7 @@ Inworld streaming text-to-speech (MP3, OGG_OPUS, PCM telephony).
 
 ## Surface
 
-contracts: speechProviders
+contracts: `speechProviders`
 
 ## Related docs
 

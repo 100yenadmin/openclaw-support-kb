@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrating from Hermes"
 source: "https://docs.openclaw.ai/install/migrating-hermes"
-source_hash: "550c0b652a3c5bed502bca03c72195d8fcbba80e56337110deff94645f6f1431"
+source_hash: "d41de94191e2503dae537df5ea796a25e134083956fd8465180b5408f8de193d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating-hermes.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Migrating from Hermes
 Source: https://docs.openclaw.ai/install/migrating-hermes
 
-The bundled Hermes migration provider detects state at `~/.hermes`, previews every change before applying, redacts secrets in plans and reports, and writes a verified OpenClaw backup before it touches anything.
+The bundled Hermes migration provider follows `HERMES_HOME` and the active Hermes profile, falling back to `~/.hermes` on macOS/Linux or `%LOCALAPPDATA%\hermes` on Windows. It previews every change before applying, redacts secrets in plans and reports, and writes a verified OpenClaw backup before it touches anything. An explicit `--from` path always wins.
 
 Note
 
@@ -26,7 +26,7 @@ Tabs
 
 Onboarding wizard
 
-    Detects Hermes at `~/.hermes` and shows a preview before applying.
+    Detects the active Hermes home/profile and shows a preview before applying.
 
     ```bash
     openclaw onboard --flow import
@@ -49,7 +49,7 @@ CLI
     openclaw migrate apply hermes --yes  # apply with confirmation skipped
     ```
 
-    Add `--from <path>` when Hermes lives outside `~/.hermes`.
+    Add `--from <path>` to override Hermes home/profile discovery.
 
 
 
@@ -61,13 +61,13 @@ AccordionGroup
 Model configuration
 
     - Default model selection from Hermes `config.yaml`.
-    - Configured model providers and custom OpenAI-compatible endpoints from `providers` and `custom_providers`.
+    - Configured model providers and custom endpoints from `model`, `providers`, and `custom_providers`, including current Hermes Chat Completions, Codex Responses, and Anthropic Messages transports.
 
 
 
 MCP servers
 
-    MCP server definitions from `mcp_servers` or `mcp.servers`.
+    MCP server definitions from `mcp_servers` or `mcp.servers`, including disabled state, timeouts, parallel-tool support, OAuth scope, compatible TLS fields, and native/resource/prompt tool policy. Literal environment variables and headers require credential-import consent. Hermes-only lifecycle, sampling, elicitation, preflight, keepalive, CA-bundle, password-protected client-key, and pre-registered OAuth-client settings become manual-review items instead of invalid OpenClaw config.
 
 
 Workspace files
@@ -84,12 +84,12 @@ Memory configuration
 
 Skills
 
-    Skills with a `SKILL.md` file under `skills/<name>/` are copied, along with per-skill config values from `skills.config`.
+    Skills with a `SKILL.md` file anywhere under `skills/` are discovered recursively, flattened into the OpenClaw workspace skill directory, and copied with their support files. Per-skill config values from `skills.config` are preserved.
 
 
 Auth credentials
 
-    Interactive `openclaw migrate` asks before importing auth credentials, with yes selected by default. Accepting imports OpenCode OpenAI OAuth and GitHub Copilot entries from OpenCode's `auth.json`, plus the [supported Hermes `.env` keys](/cli/migrate#supported-env-keys). Hermes's own `auth.json` OAuth entries are legacy state: they surface as a manual reauth/doctor item instead of importing into live auth. Use `--include-secrets` to import credentials in a non-interactive run, `--no-auth-credentials` to skip credential import entirely, or the onboarding wizard's `--import-secrets` flag.
+    Interactive `openclaw migrate` asks before importing auth credentials, with yes selected by default. Accepted imports include current Hermes OpenAI Codex OAuth entries, OpenCode OpenAI OAuth and GitHub Copilot entries, and the [supported Hermes `.env` keys](/cli/migrate#supported-env-keys). Use `--include-secrets` for non-interactive import, `--no-auth-credentials` to skip credentials, or onboarding's `--import-secrets` flag. After importing Hermes OAuth, do not keep Hermes and OpenClaw using the same refresh grant; reauthenticate one side before running both.
 
 
 ## What stays archive-only
@@ -101,7 +101,9 @@ The provider copies these into the migration report directory for manual review,
 - `logs/`
 - `cron/`
 - `mcp-tokens/`
-- `state.db`
+- `plans/`, `workspace/`, `skins/`, and `kanban/`
+- `pairing/` and `platforms/` stores, plus gateway routing/process state
+- `state.db`, `hermes_state.db`, `projects.db`, `response_store.db`, `memory_store.db`, `verification_evidence.db`, `kanban.db`, and `retaindb_queue.db`
 
 OpenClaw refuses to execute or trust this state automatically because formats and trust assumptions can drift between systems. Move what you need by hand after reviewing the archive.
 
@@ -161,13 +163,13 @@ Rerun with `--overwrite` only when replacing the existing target is intentional.
 
 Conflicts are unusual on a fresh install. They typically show up when you re-run the import against a setup that already has user edits.
 
-If a conflict surfaces mid-apply (for example, an unexpected race on a config file), Hermes marks remaining dependent config items as `skipped` with reason `blocked by earlier apply conflict` instead of writing them partially. The migration report records each blocked item so you can resolve the original conflict and rerun the import.
+If a conflict surfaces mid-apply (for example, an unexpected race on a config file), that item is reported as a conflict while independent files, skills, credentials, archives, and config entries continue. Resolve the conflicted item and rerun the import; identical memory imports are idempotent.
 
 ## Secrets
 
 Interactive `openclaw migrate` asks whether to import detected auth credentials, with yes selected by default.
 
-- Accepting imports OpenCode OpenAI OAuth and GitHub Copilot entries from OpenCode's `auth.json`, plus the [supported `.env` keys](/cli/migrate#supported-env-keys). Hermes's own `auth.json` OAuth entries are reported for manual OpenAI reauth or doctor repair instead.
+- Accepting imports current Hermes OpenAI Codex OAuth entries, OpenCode OpenAI OAuth and GitHub Copilot entries, and the [supported `.env` keys](/cli/migrate#supported-env-keys).
 - Use `--no-auth-credentials`, or answer no at the prompt, to import non-secret state only.
 - Use `--include-secrets` to import credentials in an unattended `--yes` run.
 - Use the onboarding wizard's `--import-secrets` flag to import credentials from the wizard.

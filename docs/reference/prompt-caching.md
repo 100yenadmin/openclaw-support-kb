@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Prompt caching"
 source: "https://docs.openclaw.ai/reference/prompt-caching"
-source_hash: "99765a43fdef24d2686ba81abf5611406d85346618da2a3dc26e239d690843b3"
+source_hash: "737be5a6085bc7874db175e5344518a46fe9fe1a4c5473a9f4ad161c914fc6ab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/prompt-caching.md"
@@ -27,6 +27,7 @@ Provider references:
 ### `cacheRetention`
 
 Values: `"none" | "short" | "long"`. Configurable as a global default, per model, and per agent.
+`"standard"` is not an alias; use `"short"` for the provider's default cache window. Invalid values are ignored with a warning.
 
 ```yaml
 agents:

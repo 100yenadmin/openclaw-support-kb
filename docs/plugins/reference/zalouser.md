@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo Personal plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zalouser"
-source_hash: "7e6fbc2f4b80b2d64a796a9fd56aea0516f3c89ccd92e5a8b859ff0ef5f879c2"
+source_hash: "0b7c1191e6b7282366a3fc049a1bc49be65f3a5c725bb9944af8cc69421c2828"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zalouser.md"
@@ -24,7 +24,7 @@ OpenClaw Zalo Personal Account plugin via native zca-js integration.
 
 ## Surface
 
-channels: zalouser; contracts: tools
+channels: `zalouser`; contracts: `tools`
 
 ## Related docs
 

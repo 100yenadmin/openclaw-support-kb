@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram plugin"
 source: "https://docs.openclaw.ai/plugins/reference/telegram"
-source_hash: "e20ca8800904fa8874b0b50f9b4908df6658d8910caf43bfb2e0c47758ccd3e3"
+source_hash: "1171efcbe0c4768b280b2770164c4a507825033e08fac8e6fd23607ba4413ecf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/telegram.md"
@@ -24,10 +24,10 @@ Adds the Telegram channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: telegram
+channels: `telegram`
 
 ## Related docs
 
-- [telegram](/channels/telegram)
+- [Telegram](/channels/telegram)
 
 ---

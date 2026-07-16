@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "File Transfer plugin"
 source: "https://docs.openclaw.ai/plugins/reference/file-transfer"
-source_hash: "5cb79c76b4e35ec76c6184206fa760a4d322c82054a36f079384d6b58e8423d5"
+source_hash: "3ab33d3d0a3cb1ffb59381f5343a16e7b01aa51f01693bd1ce8d3c96d1d20908"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/file-transfer.md"
@@ -24,6 +24,6 @@ Fetch, list, and write files on paired nodes via dedicated node commands. Bypass
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ---

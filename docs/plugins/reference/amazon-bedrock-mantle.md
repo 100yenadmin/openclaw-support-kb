@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock Mantle plugin"
 source: "https://docs.openclaw.ai/plugins/reference/amazon-bedrock-mantle"
-source_hash: "ecdddafdbd076b1e57d5d8d1cb42e8306b696033d3e2d0e7633c0e73cc7b3e1f"
+source_hash: "c7dffb791f7ce2abb2ea9e1db3d3b68eff21a981d4f06d1c2983b9da5ba74145"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/amazon-bedrock-mantle.md"
@@ -24,7 +24,7 @@ OpenClaw Amazon Bedrock Mantle provider plugin for OpenAI-compatible model routi
 
 ## Surface
 
-providers: amazon-bedrock-mantle
+providers: `amazon-bedrock-mantle`
 
 ## Related docs
 

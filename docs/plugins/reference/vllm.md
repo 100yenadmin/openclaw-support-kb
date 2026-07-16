@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "vLLM plugin"
 source: "https://docs.openclaw.ai/plugins/reference/vllm"
-source_hash: "68eb2f47dcf546a49e7c6c6c4ea58f425810d8c3ebff6957316b6249ebf50864"
+source_hash: "34c44d3c890c44e1b9e7af803ebe39c0243487dee245449e00bce4dfac16148a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/vllm.md"
@@ -24,7 +24,7 @@ Adds vLLM model provider support to OpenClaw.
 
 ## Surface
 
-providers: vllm
+providers: `vllm`
 
 ## Related docs
 

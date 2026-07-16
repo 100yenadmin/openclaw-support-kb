@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "97b1825a520858e6e0d1c9e0640f4a986a6606e56f394ef1ad93dd3e77beabd0"
+source_hash: "96342be1ed692a73246e061cc77c6ae05839cec4f6fb11c574a5bfa2557e0d28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -346,7 +346,10 @@ in the draft:
 
 - **`streaming.progress.commentary`** - render the model's pre-tool
   **commentary** (a short "I'll check... then..." narration) interleaved with
-  tool lines in the progress draft.
+  tool lines in the progress draft. On Discord and Telegram in progress mode,
+  the same preamble supplies the status headline even when this optional lane
+  is off; other channels keep their existing progress behavior. See
+  [Progress drafts](/concepts/progress-drafts#status-headline).
 
 ```json
 {

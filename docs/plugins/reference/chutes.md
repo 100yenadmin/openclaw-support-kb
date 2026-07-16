@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chutes plugin"
 source: "https://docs.openclaw.ai/plugins/reference/chutes"
-source_hash: "ddd26a237852dac336b8b91332b28fe07ceb8b485e00dffbbc80268ff0238eef"
+source_hash: "7d8dbd9852ebb9ff4711b0d804eadb434003e1a34509beedc62376b0218b020d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/chutes.md"
@@ -24,10 +24,10 @@ Adds Chutes model provider support to OpenClaw.
 
 ## Surface
 
-providers: chutes
+providers: `chutes`
 
 ## Related docs
 
-- [chutes](/providers/chutes)
+- [Chutes](/providers/chutes)
 
 ---

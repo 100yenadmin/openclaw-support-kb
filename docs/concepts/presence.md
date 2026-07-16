@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "502bb038f932123e54c4d4adf7c52f0bbce6a4591268ce29ce48fa360ba23b62"
+source_hash: "5c6d5b06ee2eeb312cb70722f4247a1cc63afbdd157c5a6f5738497b7079f408"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
@@ -19,7 +19,7 @@ OpenClaw "presence" is a lightweight, best-effort view of:
 - **user-visible clients connected to the Gateway** (mac app, WebChat, nodes, etc.)
 
 Presence renders live connection metadata in the Control UI **Devices** page
-and the macOS app's **Instances** tab.
+(under **Settings → Devices**) and the macOS app's **Instances** tab.
 
 This page covers the Gateway client roster. To detect the Mac you most recently
 used and route node alerts there, see

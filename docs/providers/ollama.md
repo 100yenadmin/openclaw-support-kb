@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "e33babe7b00ff6088694aeae438448a88d48778a13917d4ccf8622988937ecc1"
+source_hash: "efec33feedf1aab4b0bbb9badee300dd2550dc928aba6de157e7a94289a170f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -86,6 +86,12 @@ Run onboarding
         ```
 
         Select **Ollama**, then pick a mode: **Cloud + Local**, **Cloud only**, or **Local only**.
+
+        On a fresh guided setup, OpenClaw first checks the default or configured
+        Ollama host. If an installed model advertises tool support, the shared
+        CLI/macOS setup ladder offers it immediately and verifies it with a real
+        completion. This automatic check never pulls a model; if no suitable
+        installed model exists, onboarding continues to the normal Ollama picker.
 
 
 Select a model

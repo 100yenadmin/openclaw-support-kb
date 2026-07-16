@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/xai"
-source_hash: "2a67bb3d7e504fc67fd7d21715427648cb6fc5959bc5e13b8b2ec5e26ec1937b"
+source_hash: "8706771e3b48bc43c20d13e47bda1de66dd99203edddc132aedb8b6ecbbbe722"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/xai.md"
@@ -24,7 +24,7 @@ Adds xAI model provider support to OpenClaw.
 
 ## Surface
 
-providers: xai; contracts: imageGenerationProviders, mediaUnderstandingProviders, realtimeTranscriptionProviders, speechProviders, tools, videoGenerationProviders, webSearchProviders
+providers: `xai`; contracts: `imageGenerationProviders`, `mediaUnderstandingProviders`, `realtimeTranscriptionProviders`, `realtimeVoiceProviders`, `speechProviders`, `tools`, `videoGenerationProviders`, `webSearchProviders`
 
 ## Related docs
 

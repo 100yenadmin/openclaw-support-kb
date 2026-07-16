@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Lobster plugin"
 source: "https://docs.openclaw.ai/plugins/reference/lobster"
-source_hash: "63b1ec6541ab71e616cddd547d195c57961e798c079b2fa0844c5a45a2d22037"
+source_hash: "a0a61b7a9a15f65b01aaf89785603d65dd0007f9aac5e2da8ced3fb4f442880e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/lobster.md"
@@ -24,6 +24,6 @@ Lobster workflow tool plugin for typed pipelines and resumable approvals.
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ---

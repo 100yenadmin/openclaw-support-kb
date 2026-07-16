@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/multi-profile-gateways.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways"
-source_hash: "8f8fbc032c6195ed2eafadd5e434681a320faf33afe7a2ad44f528abe40aaf33"
+source_hash: "4921a23a9d5a829b0ed7dbd2755ed2ca560e6b47b4a9fb44a0d934b6535906ba"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-profile-gateways.md"
@@ -203,6 +203,50 @@ into a shared environment (this also means subprocesses like MCP servers and
 Kanban workers only ever see their own profile's secrets). Kanban,
 profile-scoped skills/memory/SOUL, and model routing all behave per-profile
 exactly as they do with separate gateways.
+
+### Routing shared-bot chats to profiles (`profile_routes`)
+
+Multiplexing selects a profile per **credential** (each profile's own bot
+token) or per **URL prefix** (`/p/<profile>/` for HTTP platforms). When several
+communities share **one** bot token — for example one Discord bot serving many
+guilds — you can additionally route specific guilds/channels/threads to
+different profiles with `gateway.profile_routes`:
+
+```yaml
+gateway:
+  multiplex_profiles: true
+  profile_routes:
+    # An entire Discord server → one profile
+    - name: acme-server
+      platform: discord
+      guild_id: "1234567890"
+      profile: acme
+
+    # One channel in that server → a different profile
+    - name: acme-support
+      platform: discord
+      guild_id: "1234567890"
+      chat_id: "9876543210"
+      profile: acme-support
+
+    # A Telegram group (no guild concept — chat_id only)
+    - name: tg-group
+      platform: telegram
+      chat_id: "-1001234567890"
+      profile: tg-profile
+```
+
+Routes are matched most-specific-first (`thread_id` > `chat_id` > `guild_id`),
+all declared fields must hold (AND), and a route keyed on a channel also
+matches threads/forum posts whose parent is that channel. Messages that match
+no route stay on the default/active profile. The routed profile gets the full
+per-profile isolation described above (config, skills, memory, credentials,
+session namespace). Routing works on every platform adapter, not just Discord.
+
+`profile_routes` requires `gateway.multiplex_profiles: true`; with
+multiplexing off the routes are ignored. If a route names a profile that does
+not exist on disk, the gateway logs a warning naming the profile and source and
+falls back to the default home.
 
 ## Start, stop, or restart all gateways at once
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meta plugin"
 source: "https://docs.openclaw.ai/plugins/reference/meta"
-source_hash: "e682cfbc1d9b6684faca0925d047c10498b55c6a77bb651b200047dd86d5c2c9"
+source_hash: "8286e3831db092f0b65bda9c309547388e22e465204b3e4d62bc790eb7722f51"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/meta.md"
@@ -24,10 +24,10 @@ Adds Meta model provider support to OpenClaw.
 
 ## Surface
 
-providers: meta
+providers: `meta`
 
 ## Related docs
 
-- [meta](/providers/meta)
+- [Meta](/providers/meta)
 
 ---

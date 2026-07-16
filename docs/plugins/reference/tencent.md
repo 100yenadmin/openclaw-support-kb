@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tencent plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tencent"
-source_hash: "0478d75165ee15192354f53d528ff7a173c60d36d541cbb1e10fe6c42dc1048e"
+source_hash: "0bdec95639e1523b47308e778088312cd718efd4a2da221ceb77babaaf9693e1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tencent.md"
@@ -24,7 +24,7 @@ Adds Tencent TokenHub, Tencent Tokenplan model provider support to OpenClaw.
 
 ## Surface
 
-providers: tencent-tokenhub, tencent-tokenplan
+providers: `tencent-tokenhub`, `tencent-tokenplan`
 
 ## Related docs
 

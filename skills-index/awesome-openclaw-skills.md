@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "32a619017c844e1d0f2e9c9de0e53bba4f350ee93887f2b28e75f2a504490a96"
+source_hash: "9f934b7a85ae85bd4e8cce1a815b2f0da5165b9a2c0d16792170e33c5ee30c45"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -70,6 +70,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [skywork-ppt](https://clawskills.sh/skills/gxcun17-skywork-ppt) - Generate, imitate, and edit PowerPoint presentations with skywork.
 - [skywork-music-maker](https://clawskills.sh/skills/gxcun17-skywork-music-maker) - Create professional music with Mureka AI.
 - [before-you-build](https://clawhub.ai/bin1874/before-you-build) - Review product risk before building.
+- [ditto-profile](https://clawhub.ai/ohad6k/ditto-profile) - Load your mined personal profile so agents work like you.
 
 - [1p-shortlink](https://clawskills.sh/skills/tuanpmt-1p-shortlink) - Create short URLs and submit feature requests using 1p.io.
 - [2captcha](https://clawskills.sh/skills/adinvadim-2captcha) - Solve CAPTCHAs using 2Captcha service.
@@ -468,6 +469,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [context-anchor](https://clawskills.sh/skills/boscoeuk-context-anchor) - Recover from context compaction by scanning memory files.
 - [continuity](https://clawskills.sh/skills/riley-coyote-continuity) - Asynchronous reflection and memory integration for genuine AI.
 - [continuity-framework](https://clawskills.sh/skills/riley-coyote-continuity-framework) - Asynchronous reflection and memory integration.
+- [ai-footprints](https://clawhub.ai/Piccolo123/ai-footprints) - Cross-platform bookmark manager with AI categorization, shared collections, and Agent API access.
 
 - [agent-defibrillator](https://clawskills.sh/skills/hazy2go-agent-defibrillator) - Watchdog that monitors your AI agent gateway and restarts it when it crashes.
 - [android-transfer-skill](https://clawskills.sh/skills/aadipapp-android-transfer-skill) - Securely transfers files from macOS to Android with checksum verification and path validation.

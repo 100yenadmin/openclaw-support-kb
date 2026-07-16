@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine plugin"
 source: "https://docs.openclaw.ai/plugins/reference/volcengine"
-source_hash: "da8983728ba1a3b143b2854c321f30fc5b1a30f8a45d3280c8f60e93652b51bf"
+source_hash: "d6515d8b2b0e1d3a414290e7d8cd7c106b0deedd8176b52f715dc7bdfb076548"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/volcengine.md"
@@ -24,7 +24,7 @@ Adds Volcengine, Volcengine Plan model provider support to OpenClaw.
 
 ## Surface
 
-providers: volcengine, volcengine-plan; contracts: speechProviders
+providers: `volcengine`, `volcengine-plan`; contracts: `speechProviders`
 
 ## Related docs
 

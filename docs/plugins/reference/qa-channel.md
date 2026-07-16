@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA Channel plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qa-channel"
-source_hash: "e82759978864e855b0f75a40df072179aeb04c5e64734a37ab2f7c50762c56cd"
+source_hash: "a2db364403767831a6d52e731257f14883075e6d3bad727dab82450fade1a385"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qa-channel.md"
@@ -24,7 +24,7 @@ Adds the QA Channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: qa-channel
+channels: `qa-channel`
 
 ## Related docs
 

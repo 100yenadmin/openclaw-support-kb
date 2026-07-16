@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Elevenlabs plugin"
 source: "https://docs.openclaw.ai/plugins/reference/elevenlabs"
-source_hash: "9d256f6b247e891499bbcdccaf13fbd5467ebe50c18b323c4136646a75dc8de0"
+source_hash: "aaa35d7b8bee7e8c4ec3a3af9949f35126c7dfb2719107ad60c253dd1a6328a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/elevenlabs.md"
@@ -24,7 +24,7 @@ Adds media understanding provider support. Adds realtime transcription provider 
 
 ## Surface
 
-contracts: mediaUnderstandingProviders, realtimeTranscriptionProviders, speechProviders
+contracts: `mediaUnderstandingProviders`, `realtimeTranscriptionProviders`, `speechProviders`
 
 ## Related docs
 

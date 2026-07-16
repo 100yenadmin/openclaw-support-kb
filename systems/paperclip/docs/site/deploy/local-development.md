@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "-> {\"status\":\"ok\"}"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/local-development.md"
-source_hash: "da1b4be87225522dd02efe813a1b51eb7d0103a052ce9ed4fd69da422aed6610"
+source_hash: "8cbe331c352773b2dcd26868d282055317f86a0b3092d7fdc7187f2252c5296b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/local-development.md"
@@ -95,6 +95,32 @@ curl http://localhost:3100/api/health
 
 curl http://localhost:3100/api/companies
 # -> []
+```
+
+## Safe Worktree Bootstrap for Local Agent Runs
+
+For safer parallel local experiments, initialize a dedicated worktree instance instead of reusing your main checkout:
+
+```sh
+pnpm paperclipai worktree:make local-lab --seed-mode minimal
+cd ~/paperclip-local-lab
+pnpm paperclipai worktree env                       # inspect generated env exports
+eval "$(pnpm paperclipai worktree env)"             # bash/zsh
+pnpm paperclipai run
+pnpm paperclipai doctor
+```
+
+If the experiment gets noisy, repair or reseed the worktree without touching the main branch:
+
+```sh
+pnpm paperclipai worktree repair --branch paperclip-local-lab
+pnpm paperclipai worktree reseed --from . --to paperclip-local-lab
+```
+
+When done, shut it down and remove the isolated state explicitly:
+
+```sh
+pnpm paperclipai worktree:cleanup local-lab --force
 ```
 
 ## Reset Dev Data

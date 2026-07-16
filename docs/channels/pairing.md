@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "b5da5b9b39c82abfe7f81f29daecabe5c1096e21801db9d54cddf0d95998c1eb"
+source_hash: "7323846bd2856e3a6dc95a8fcb6eabfe1b2e75f0cf5edcf0ba7ed51c94330027"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/pairing.md"
@@ -123,7 +123,7 @@ creates a device pairing request that must be approved.
 
 Use an already connected Control UI session with `operator.admin` access:
 
-1. Open the Control UI and select **Nodes**.
+1. Open the Control UI and go to **Settings → Devices**.
 2. On the **Devices** page, click **Pair mobile device**.
 3. Keep **Full access (recommended)**, or select **Limited access** to omit
    administrative Gateway controls.

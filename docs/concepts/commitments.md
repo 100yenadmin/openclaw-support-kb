@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inferred commitments"
 source: "https://docs.openclaw.ai/concepts/commitments"
-source_hash: "3028e035de8552db6a24c1aea951318bd81b1d4176dd5e0d43de4a91719d32d0"
+source_hash: "2d5be3e53b4476c1f3f7cbebe3e4cc922761760bbf19c6677145570bff0a9213"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/commitments.md"
@@ -127,8 +127,8 @@ usage after eligible turns. The pass is hidden from the user-visible
 conversation, but it can read the recent exchange needed to decide whether a
 follow-up exists.
 
-Stored commitments are local OpenClaw state. They are operational memory, not
-long-term memory. Disable the feature with:
+Stored commitments are local OpenClaw operational memory in the shared SQLite
+state database, not long-term memory. Disable the feature with:
 
 ```bash
 openclaw config set commitments.enabled false

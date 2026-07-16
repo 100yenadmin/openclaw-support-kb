@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "IRC plugin"
 source: "https://docs.openclaw.ai/plugins/reference/irc"
-source_hash: "eafe918ae3225081bb7c85dc90a72d100fda209aedf5133e6b839af262fb586b"
+source_hash: "b977f252d2f4f3032dd6c1b080c45a7199962913a1fb5cc841aaaa1b4160a757"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/irc.md"
@@ -24,7 +24,7 @@ Adds the IRC channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: irc
+channels: `irc`
 
 ## Related docs
 

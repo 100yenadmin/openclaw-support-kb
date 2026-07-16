@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawRouter plugin"
 source: "https://docs.openclaw.ai/plugins/reference/clawrouter"
-source_hash: "eae0ef8921f95f51af936e7a4b6c1f2f57713559fb897bd0b306073a3ad3a8f7"
+source_hash: "20275905ac6c26478031f4e2f6761afa8c94e0711bd47b443212dda65bc58c6e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/clawrouter.md"
@@ -24,7 +24,7 @@ Adds ClawRouter model provider support to OpenClaw.
 
 ## Surface
 
-providers: clawrouter; contracts: usageProviders
+providers: `clawrouter`; contracts: `usageProviders`
 
 ## Related docs
 

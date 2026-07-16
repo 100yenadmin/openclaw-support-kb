@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cohere plugin"
 source: "https://docs.openclaw.ai/plugins/reference/cohere"
-source_hash: "5f8723893ca9dd2ae0366f5d79cc99e6c032fc08fe3ab08a2a53ebe38b463b10"
+source_hash: "2acce9ef23d02c9087fbe1b2668bfcef9ae31a3ce26a2f4a0a3117bd5065d023"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/cohere.md"
@@ -24,7 +24,7 @@ OpenClaw Cohere provider plugin.
 
 ## Surface
 
-providers: cohere
+providers: `cohere`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex supervision"
 source: "https://docs.openclaw.ai/specs/codex-supervision"
-source_hash: "a74d34ecece466700d1deb24c8005dec2239c89f482905b6e157d4bfc315e59d"
+source_hash: "35a5716ea5941829aad253b09ddf3e12a9e33d1871bcc191d6164d6e4f3b2780"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "specs/codex-supervision.md"
@@ -27,8 +27,14 @@ Supervisor plugin or second Codex protocol implementation.
 
 ## Product boundary
 
-The catalog registers whenever the Codex plugin is active. Enable agent-facing
-supervision tools with:
+The catalog registers whenever the Codex plugin is active unless native session
+discovery is explicitly disabled with:
+
+```text
+plugins.entries.codex.config.sessionCatalog.enabled = false
+```
+
+Enable agent-facing supervision tools with:
 
 ```text
 plugins.entries.codex.config.supervision.enabled = true
@@ -60,7 +66,9 @@ backend passes its live check, independently of which primary backend the user
 selects. Supervision activates only when that opportunistic plugin setup
 succeeds. An explicit disabled plugin, policy block, or
 `supervision.enabled: false` remains authoritative for supervision tools, but
-does not disable the operator session catalog.
+does not disable the operator session catalog. `sessionCatalog.enabled: false`
+disables operator discovery and paired-node catalog commands; the Codex
+provider and harness remain active.
 
 ## Ownership
 

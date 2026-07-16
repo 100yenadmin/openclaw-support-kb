@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "866ffd78142f46c6113b0432c8131e23be3a626fc176daaa94718d2bcf3ac15c"
+source_hash: "f7a7da54c335f25ad3d3217224a86340fd03c249081d320fc3327c8a401f17bb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -104,11 +104,11 @@ stores relate.
 `node.pair.approve` derives extra required scopes from the pending request's
 command list:
 
-| Declared commands                                     | Required scopes                       |
-| ----------------------------------------------------- | ------------------------------------- |
-| none                                                  | `operator.pairing`                    |
-| non-exec node commands                                | `operator.pairing` + `operator.write` |
-| `system.run`, `system.run.prepare`, or `system.which` | `operator.pairing` + `operator.admin` |
+| Declared commands                                                                                                    | Required scopes                       |
+| -------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| none                                                                                                                 | `operator.pairing`                    |
+| ordinary node commands                                                                                               | `operator.pairing` + `operator.write` |
+| `system.run`, `system.run.prepare`, `system.which`, `browser.proxy`, `fs.listDir`, or `system.execApprovals.get/set` | `operator.pairing` + `operator.admin` |
 
 Approving a node declaration does not enable commands that have a separate
 runtime allowlist gate. For example, approving a node that declares

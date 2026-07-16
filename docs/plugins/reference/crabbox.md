@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Crabbox plugin"
 source: "https://docs.openclaw.ai/plugins/reference/crabbox"
-source_hash: "77de612802f51cda74a9e7896998c2d8d69bc93db346348b2a8ec01850ca9cef"
+source_hash: "7de178a92c6010fe29dfb0acaa8e86fd491bd8136ec0db04b38cadce9cfee081"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/crabbox.md"
@@ -24,7 +24,7 @@ Cloud worker provider backed by the Crabbox CLI.
 
 ## Surface
 
-contracts: workerProviders
+contracts: `workerProviders`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

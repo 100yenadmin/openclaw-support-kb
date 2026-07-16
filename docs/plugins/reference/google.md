@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google plugin"
 source: "https://docs.openclaw.ai/plugins/reference/google"
-source_hash: "055c0f244080666440aa42e1e020be633b7969d5dd6e4da8d1ea717b12992664"
+source_hash: "24251680c2f72249cfbae8d3f8552c76c1ba4716404ddd71c373ba69d33e4f55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/google.md"
@@ -24,7 +24,7 @@ Adds Google, Google Gemini CLI, Google Vertex model provider support to OpenClaw
 
 ## Surface
 
-providers: google, google-gemini-cli, google-vertex; contracts: imageGenerationProviders, mediaUnderstandingProviders, memoryEmbeddingProviders, musicGenerationProviders, realtimeVoiceProviders, speechProviders, usageProviders, videoGenerationProviders, webSearchProviders
+providers: `google`, `google-gemini-cli`, `google-vertex`; contracts: `imageGenerationProviders`, `mediaUnderstandingProviders`, `memoryEmbeddingProviders`, `musicGenerationProviders`, `realtimeVoiceProviders`, `speechProviders`, `usageProviders`, `videoGenerationProviders`, `webSearchProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate Claude plugin"
 source: "https://docs.openclaw.ai/plugins/reference/migrate-claude"
-source_hash: "d6e74c5d11326e015024b27f7d1497867558b0095e1e5bb6e6e0add11ee77a4c"
+source_hash: "e43b7aea009781c6754b70691fd3cbeab2bc221946dc7430a2c2c2c3ffb3e7e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/migrate-claude.md"
@@ -24,6 +24,6 @@ Imports Claude Code and Claude Desktop instructions, MCP servers, skills, and sa
 
 ## Surface
 
-contracts: migrationProviders
+contracts: `migrationProviders`
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic plugin"
 source: "https://docs.openclaw.ai/plugins/reference/anthropic"
-source_hash: "3a41c1cb71d6d7b660ddb7c1a81430b0979ccf8443608f2bf5f02e3c95e6e2e9"
+source_hash: "be0efc0ef6c42f0b1edfd3685f73ed233367f49d349f6e5f1c33266fa2f8da0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/anthropic.md"
@@ -24,7 +24,7 @@ Anthropic models, Claude CLI, and native Claude session catalog.
 
 ## Surface
 
-providers: anthropic; contracts: mediaUnderstandingProviders, usageProviders
+providers: `anthropic`; contracts: `mediaUnderstandingProviders`, `usageProviders`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

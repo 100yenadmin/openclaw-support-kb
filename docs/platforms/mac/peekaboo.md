@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Peekaboo bridge"
 source: "https://docs.openclaw.ai/platforms/mac/peekaboo"
-source_hash: "c37943a1ce8f6bc43cd772bebc28aa22db474ba4959612f0d230a93a2a369f91"
+source_hash: "6690bad071fb292d7f8d5744b34a6cdce1d63195634e47494ef809cbca3b14c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/peekaboo.md"
@@ -34,9 +34,9 @@ Use Peekaboo for the broad macOS automation surface via OpenClaw.app's permissio
 
 ## Enable the bridge
 
-In the macOS app: **Settings -> Enable Peekaboo Bridge**.
+In the macOS app: **Settings -> Enable Peekaboo Bridge**. The toggle requires **Allow Computer Control** to be on, since both grant local UI automation; with Computer Control off the toggle is disabled and the host does not run. To drive Peekaboo without Computer Control, run Peekaboo's own Mac app as the host instead.
 
-When enabled, OpenClaw starts a local UNIX socket server at `~/Library/Application Support/OpenClaw/<socket-name>`. If disabled, the host stops and `peekaboo` falls back to other available hosts. The coordinator also maintains legacy socket symlinks (`clawdbot`, `clawdis`, `moltbot` under Application Support) pointing at the current socket for older `peekaboo` installs.
+When enabled (and Computer Control is on), OpenClaw starts a local UNIX socket server at `~/Library/Application Support/OpenClaw/<socket-name>`. If disabled, the host stops and `peekaboo` falls back to other available hosts. The coordinator also maintains legacy socket symlinks (`clawdbot`, `clawdis`, `moltbot` under Application Support) pointing at the current socket for older `peekaboo` installs.
 
 ## Client discovery order
 

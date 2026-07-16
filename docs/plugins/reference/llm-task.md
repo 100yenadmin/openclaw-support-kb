@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LLM Task plugin"
 source: "https://docs.openclaw.ai/plugins/reference/llm-task"
-source_hash: "23624a2b55aaeb2fcdded24d063dc33238cd289cabe34bbb321323e600a666b6"
+source_hash: "cf3fc96ab2a93df3b1235d7f7e9e991491c5c8a8ed6527768ecb2d8c6e961d8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/llm-task.md"
@@ -24,6 +24,6 @@ Generic JSON-only LLM tool for structured tasks callable from workflows.
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "06d7518405ee77a1fcdcbe49144afbf373d3285b44e9bbae570e5c92709f1e6b"
+source_hash: "5adcd478c7a222936406b1c9867a3f8ea117cfc3f526d02f85c321fba057fd7c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -256,8 +256,8 @@ Install OpenClaw under prefix
 Refresh loaded gateway service
 
     If a gateway service is already loaded from that same prefix, the script runs
-    `openclaw gateway install --force`, then `openclaw gateway restart`, and
-    probes gateway health best-effort.
+    `openclaw gateway install --force`, which activates the replacement service,
+    and then probes gateway health best-effort.
 
 
 ### Examples (install-cli.sh)

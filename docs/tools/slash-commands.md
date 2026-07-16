@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "5e9c7d77fc235077f677e7ebe852ff20acf6039011a8057685d131462da167bb"
+source_hash: "ef0bb31aacc3501be4a9be7f6044a01e30143b640a05e985d9812b86988aa59f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -136,7 +136,7 @@ ParamField
 
 ParamField
 
-  Enables `/restart` and gateway restart tool actions.
+  Enables `/restart` and external `SIGUSR1` restart requests.
 
 ParamField
 
@@ -194,8 +194,11 @@ Sessions and runs
     | `/stop` | Abort the current run |
     | `/session idle <duration\|off>` | Manage thread-binding idle expiry |
     | `/session max-age <duration\|off>` | Manage thread-binding max-age expiry |
-    | `/export-session [path]` | Export the current session to HTML. Alias: `/export` |
+    | `/export-session [path]` | Owner-only. Export the current session to HTML inside the workspace. Alias: `/export` |
     | `/export-trajectory [path]` | Export a JSONL trajectory bundle for the current session. Alias: `/trajectory` |
+
+    Explicit `/export-session` paths replace existing files inside the
+    workspace. Omit the path to generate a collision-safe filename.
 
 
 Note
@@ -265,7 +268,7 @@ Discovery and status
     | `/status plugins` | Show detailed plugin health: load errors, quarantines, channel plugin failures, dependency issues, compatibility notices. Requires `commands.plugins: true` |
     | `/goal [status\|start\|edit\|pause\|resume\|complete\|block\|clear] ...` | Manage the current session's durable [goal](/tools/goal) |
     | `/diagnostics [note]` | Owner-only support-report flow. Asks for exec approval every time |
-    | `/crestodian <request>` | Run the Crestodian setup and repair helper from an owner DM |
+    | `/openclaw <request>` | Run the OpenClaw setup and repair helper from an owner DM |
     | `/tasks` | List active/recent background tasks for the current session |
     | `/context [list\|detail\|map\|json]` | Explain how context is assembled |
     | `/whoami` | Show your sender id. Alias: `/id` |
@@ -474,12 +477,23 @@ Note
 /plugin show context7
 /plugins enable context7
 /plugins disable context7
-/plugins install ./path/to/plugin
+/plugins install clawhub:<package>
+/plugins install npm:@openclaw/<official-package>
+/plugins install npm:<package> --force
+/plugins install git:<repository>@<ref> --force
 ```
 
 `/plugins enable|disable` updates plugin config and hot-reloads the Gateway
 plugin runtime for new agent turns. `/plugins install` restarts managed
-Gateways automatically because plugin source modules changed.
+Gateways automatically because plugin source modules changed. Trusted ClawHub
+and official-catalog installs do not need extra acknowledgement. Arbitrary npm,
+git, archive, `npm-pack:`, and local path sources show a provenance warning and
+require a trailing `--force` after you review the source. This flag acknowledges
+the source and permits replacement of an existing install; it does not bypass
+`security.installPolicy` or installer security checks. ClawHub releases with
+risk warnings still require the separate shell-only
+`--acknowledge-clawhub-risk` flag. Marketplace, linked, and pinned installs also
+remain shell-only.
 
 ## `/trace`: plugin trace output
 

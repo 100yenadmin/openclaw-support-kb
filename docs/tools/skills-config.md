@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "5312968b84d390bc2e98ba3cf1fae5c35ce14f6a00a386995a1ae871fca01c51"
+source_hash: "bcc546b563cc581b13dc6cbaf4f63bdc3cdfc4852cd2f6a2575ba8de62a12afd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -35,7 +35,7 @@ Most skills configuration lives under `skills` in
     workshop: {
       autonomous: { enabled: false },
       allowSymlinkTargetWrites: false,
-      approvalPolicy: "pending",
+      approvalPolicy: "auto",
       maxPending: 50,
       maxSkillBytes: 40000,
     },
@@ -358,8 +358,8 @@ proposal-only permissions, and troubleshooting.
 
 ParamField
 
-  `pending` requires operator approval before agent-initiated apply, reject,
-  or quarantine. `auto` allows those actions without approval.
+  `auto` allows agent-initiated apply, reject, or quarantine without an
+  additional approval prompt. `pending` requires operator approval.
 
 ParamField
 

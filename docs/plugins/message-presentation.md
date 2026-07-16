@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "4fda81c034fa45072e330a30a74c462e46deb8325f2199d93314223483ddc356"
+source_hash: "81ef1fe48c7852a2ba46a941b41b91618e3c89e18319250d0f553df988d44643"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -503,7 +503,7 @@ When a channel cannot render interactive controls, button and select values
 fall back to plain text. The fallback behavior preserves usability while
 keeping opaque callback data private:
 
-- **`command`-typed actions** render as `label: \`command\`` so users can
+- **`command`-typed actions** render as `` label: `command` `` so users can
   copy the command and run it manually in the channel input.
 - **`callback`-typed actions** and legacy **`value`** fields render as
   label-only. The opaque callback value is not exposed in fallback text.

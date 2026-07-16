@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Twitch plugin"
 source: "https://docs.openclaw.ai/plugins/reference/twitch"
-source_hash: "61d40c657461a386a18a67dfe451029dd101ceb8905ae9c0398a85a6376c5130"
+source_hash: "e723ddd7231271585945ad7578b794f7f1096d4fb07461f9987d5861b275e330"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/twitch.md"
@@ -24,7 +24,7 @@ OpenClaw Twitch channel plugin for chat and moderation workflows.
 
 ## Surface
 
-channels: twitch
+channels: `twitch`
 
 ## Related docs
 

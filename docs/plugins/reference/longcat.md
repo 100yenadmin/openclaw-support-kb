@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LongCat plugin"
 source: "https://docs.openclaw.ai/plugins/reference/longcat"
-source_hash: "0a371942e7d5a072c5f94a09f4f5532c3b8c9150f8db723abc1b427ac7dacb29"
+source_hash: "aedbfdb451aa2d83163596fb9edd3bc067b3750b6e5de6b6ef95ecf80168bd0d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/longcat.md"
@@ -24,7 +24,7 @@ OpenClaw LongCat provider plugin.
 
 ## Surface
 
-providers: longcat
+providers: `longcat`
 
 ## Related docs
 

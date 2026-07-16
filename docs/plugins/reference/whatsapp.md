@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp plugin"
 source: "https://docs.openclaw.ai/plugins/reference/whatsapp"
-source_hash: "2b6016ac44e7bec98056abd98be51837f6f07b6aa9019478b3e15aeb29cfdc56"
+source_hash: "e95fff431ee6f2dddf5a0fefb6dc150832002d902ff411611692466145f7d278"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/whatsapp.md"
@@ -24,10 +24,10 @@ OpenClaw WhatsApp channel plugin for WhatsApp Web chats.
 
 ## Surface
 
-channels: whatsapp; contracts: tools; skills
+channels: `whatsapp`; contracts: `tools`; skills
 
 ## Related docs
 
-- [whatsapp](/channels/whatsapp)
+- [WhatsApp](/channels/whatsapp)
 
 ---

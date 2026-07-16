@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "709e46744eb52c4cbb605e5054d3f056744ec2184c727e8bb3e07a3af41a99cd"
+source_hash: "374df48b5b5dc58ade191faded05cf70ff422b19bc8b00db61c0d09cba7dfb3e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -463,16 +463,12 @@ Configure cron jobs
         enabled: true,
         maxConcurrentRuns: 8, // default; cron dispatch + isolated cron agent-turn execution
         sessionRetention: "24h",
-        runLog: {
-          maxBytes: "2mb",
-          keepLines: 2000,
-        },
       },
     }
     ```
 
     - `sessionRetention`: prune completed isolated run sessions from SQLite session rows (default `24h`; set `false` to disable).
-    - `runLog`: prune retained cron run-history rows per job. History is stored in SQLite; `maxBytes` (default `2_000_000`) is retained for compatibility with older file-backed run logs, `keepLines` defaults to `2000`.
+    - Run history automatically keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
     - See [Cron jobs](/automation/cron-jobs) for feature overview and CLI examples.
 
 

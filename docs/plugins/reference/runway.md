@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway plugin"
 source: "https://docs.openclaw.ai/plugins/reference/runway"
-source_hash: "71e05c5cc02c6f9672cccbf788a383c46857427555f59e223c4521aa2a7bb382"
+source_hash: "ec99fc5a7caeb1825f793fdc8bba796424032a0435044b5f6119dd12f03cfc95"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/runway.md"
@@ -24,10 +24,10 @@ Adds video generation provider support.
 
 ## Surface
 
-contracts: videoGenerationProviders
+contracts: `videoGenerationProviders`
 
 ## Related docs
 
-- [runway](/providers/runway)
+- [Runway](/providers/runway)
 
 ---

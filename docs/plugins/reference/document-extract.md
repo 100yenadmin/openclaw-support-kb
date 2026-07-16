@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Document Extract plugin"
 source: "https://docs.openclaw.ai/plugins/reference/document-extract"
-source_hash: "f750696ebbdd48f6a94756e6567390f4e604828afc2fa57bb178f5a44c4f67b5"
+source_hash: "98c1978170bac541757b1522343dcba5d5cb91227651f32cdd9c7cb824063ec6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/document-extract.md"
@@ -24,7 +24,7 @@ Extract text and fallback page images from local document attachments.
 
 ## Surface
 
-contracts: documentExtractors
+contracts: `documentExtractors`
 
 ## Related docs
 

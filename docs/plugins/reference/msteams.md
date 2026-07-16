@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams plugin"
 source: "https://docs.openclaw.ai/plugins/reference/msteams"
-source_hash: "a8c64bb5794b959401ef8999f6843ea533027d80332db45ca5f622a9fdc36308"
+source_hash: "f972637bf2a174af0c28b2b35871aaac37b8caabe9bee56a1712298a09733a81"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/msteams.md"
@@ -24,10 +24,10 @@ OpenClaw Microsoft Teams channel plugin for bot conversations.
 
 ## Surface
 
-channels: msteams
+channels: `msteams`
 
 ## Related docs
 
-- [msteams](/channels/msteams)
+- [Microsoft Teams](/channels/msteams)
 
 ---

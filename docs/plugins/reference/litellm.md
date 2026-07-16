@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LiteLLM plugin"
 source: "https://docs.openclaw.ai/plugins/reference/litellm"
-source_hash: "bec42199e23f8a5284c323f2459bf5d037d86f95ca60127802219959ccd4c81f"
+source_hash: "7274816621d47d996841fa1068328af63134eb7a0e9c3660371aa16872908f6a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/litellm.md"
@@ -24,7 +24,7 @@ Adds LiteLLM model provider support to OpenClaw.
 
 ## Surface
 
-providers: litellm; contracts: imageGenerationProviders
+providers: `litellm`; contracts: `imageGenerationProviders`
 
 ## Related docs
 

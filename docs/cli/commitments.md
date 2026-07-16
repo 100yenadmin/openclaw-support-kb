@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw commitments`"
 source: "https://docs.openclaw.ai/cli/commitments"
-source_hash: "51092c56361f29ed0c4833dc60b139fd311b9eadbaf217fffd0e3185132e494f"
+source_hash: "8ab9dff92b15d32677d2698b5a1d406320d2ffefbe0b1b47f5f8287365bb45cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/commitments.md"
@@ -80,7 +80,7 @@ openclaw commitments --all --json
 
 ## Output
 
-Text output prints the commitment count, the store path, any active filters,
+Text output prints the commitment count, the shared SQLite database path, any active filters,
 and one row per commitment:
 
 - commitment id
@@ -91,7 +91,7 @@ and one row per commitment:
 - suggested check-in text
 
 JSON output includes the count, the active status and agent filters, the
-commitment store path, and the full stored records.
+shared SQLite database path, and the full stored records.
 
 ## Related
 

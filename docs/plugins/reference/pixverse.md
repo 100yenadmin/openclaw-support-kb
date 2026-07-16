@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse plugin"
 source: "https://docs.openclaw.ai/plugins/reference/pixverse"
-source_hash: "8c45264021784b72d8cf39c8d4558f0e62ab655d5aa6a8d0ac9b792611f62bc2"
+source_hash: "d4abfc1c92158b8a96d635876856ecb67f6c4fd259b55d1ce1df3d461f1aa1fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/pixverse.md"
@@ -24,7 +24,7 @@ OpenClaw PixVerse video generation provider plugin.
 
 ## Surface
 
-contracts: videoGenerationProviders
+contracts: `videoGenerationProviders`
 
 ## Related docs
 

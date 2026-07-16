@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vydra plugin"
 source: "https://docs.openclaw.ai/plugins/reference/vydra"
-source_hash: "219a3084c73515300d32e3dfaabcf581be3be3f7733e3c8304a42a5f009269b8"
+source_hash: "55b620de01ed259b95fb2758fa2be0ba53c165d8463b5d858915433bca970774"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/vydra.md"
@@ -24,7 +24,7 @@ Adds Vydra model provider support to OpenClaw.
 
 ## Surface
 
-providers: vydra; contracts: imageGenerationProviders, speechProviders, videoGenerationProviders
+providers: `vydra`; contracts: `imageGenerationProviders`, `speechProviders`, `videoGenerationProviders`
 
 ## Related docs
 

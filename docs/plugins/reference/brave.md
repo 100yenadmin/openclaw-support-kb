@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Brave plugin"
 source: "https://docs.openclaw.ai/plugins/reference/brave"
-source_hash: "b5f13ae1a7861f1af2ae36188972330e9d1e3fe63ce41317abc782e7ff442f83"
+source_hash: "1b552b16568ad9b8d5127eb3bafa53d6a3cd3d64e3c808c01830dab7b4b8ba69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/brave.md"
@@ -24,7 +24,7 @@ OpenClaw Brave Search provider plugin for web search.
 
 ## Surface
 
-contracts: webSearchProviders
+contracts: `webSearchProviders`
 
 ## Related docs
 

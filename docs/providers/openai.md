@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "4a6f8d26fc2f9dd92a94d5259324e1647981cecf56813391aecf5a95cb5910b2"
+source_hash: "8533684f7cbac4332f27d81c9d07dac31fa8ebdcc4189ad5ca9905d80cb7588f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -25,8 +25,9 @@ implicitly. The `openai/*` prefix alone does not select a runtime.
   profile when you want key-based billing.
 - **Non-agent OpenAI APIs** - direct OpenAI Platform access, billed per use,
   through `OPENAI_API_KEY` or an `openai` API-key auth profile.
-- **Legacy config** - old Codex model refs and profile ids are repaired to
-  `openai/*` by `openclaw doctor --fix`.
+- **Legacy config** - `codex/*` and `openai-codex/*` refs are repaired to
+  `openai/*` plus model-scoped `agentRuntime.id: "codex"` by
+  `openclaw doctor --fix`.
 
 OpenAI explicitly supports subscription OAuth usage in external tools and
 workflows like OpenClaw.
@@ -92,9 +93,10 @@ closed when the effective route is not declared Codex-compatible.
 Runtime selection does not change credential type or billing: Platform API-key
 auth and ChatGPT/Codex subscription auth remain distinct.
 
-`openclaw doctor --fix` migrates legacy Codex model refs, legacy Codex auth
-profile ids, and legacy Codex auth-order entries to the canonical `openai`
-route. Use `auth.order.openai` for new auth-order config.
+`openclaw doctor --fix` migrates legacy `codex/*` and `openai-codex/*` model
+refs, legacy Codex auth profile ids, and legacy Codex auth-order entries to the
+canonical `openai` route. Migrated model refs receive model-scoped
+`agentRuntime.id: "codex"`; use `auth.order.openai` for new auth-order config.
 
 Note
 

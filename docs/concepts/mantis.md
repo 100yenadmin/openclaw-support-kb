@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mantis"
 source: "https://docs.openclaw.ai/concepts/mantis"
-source_hash: "00b3bf9a776bb5049a01e1e421c74eb69c711b83f91ad222455f832941ccd29d"
+source_hash: "e4a343a1deea67d37c541e66abffd8b1e61c79f9ebadf9fe3768b6c8fb68b4a1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/mantis.md"
@@ -329,7 +329,7 @@ Comment triggers, from a PR with write/maintain/admin access:
 @openclaw-mantis discord status reactions baseline=origin/main candidate=HEAD
 @openclaw-mantis telegram
 @openclaw-mantis telegram scenario=telegram-status-command
-@openclaw-mantis telegram scenarios=telegram-status-command,telegram-mentioned-message-reply
+@openclaw-mantis telegram scenarios=telegram-status-command,channel-canary
 @openclaw-mantis web ui chat
 @openclaw-mantis web-ui-chat candidate=HEAD
 ```
@@ -366,18 +366,24 @@ noVNC, Node 22.22.3+, 24.15+, or 25.9+ and pnpm, an OpenClaw checkout, and
 outbound access to the target transport, GitHub, model providers, and the
 credential broker.
 
-Secret names used across the Mantis workflows:
+Credential and environment names used across Mantis commands and workflows:
 
 - `OPENCLAW_QA_DISCORD_MANTIS_BOT_TOKEN`
-- `OPENCLAW_QA_DISCORD_DRIVER_BOT_TOKEN`
-- `OPENCLAW_QA_DISCORD_SUT_BOT_TOKEN`
 - `OPENCLAW_QA_DISCORD_GUILD_ID`
 - `OPENCLAW_QA_DISCORD_CHANNEL_ID`
+- Local `qa mantis run --credential-source env` also requires
+  `OPENCLAW_QA_DISCORD_DRIVER_BOT_TOKEN`, `OPENCLAW_QA_DISCORD_SUT_BOT_TOKEN`,
+  and `OPENCLAW_QA_DISCORD_SUT_APPLICATION_ID`. GitHub workflows normally use
+  `--credential-source convex` and the broker credentials below instead of raw
+  Discord bot tokens.
 - `OPENCLAW_QA_REDACT_PUBLIC_METADATA=1` for public artifact uploads
 - `OPENCLAW_QA_CONVEX_SITE_URL`, `OPENCLAW_QA_CONVEX_SECRET_CI`
+- `OPENAI_API_KEY` (or the Telegram Desktop proof-specific
+  `OPENCLAW_MANTIS_AGENT_OPENAI_API_KEY`)
 - `CRABBOX_COORDINATOR` / `CRABBOX_COORDINATOR_TOKEN` (workflows also accept
   `OPENCLAW_QA_MANTIS_CRABBOX_COORDINATOR` / `_TOKEN` as a fallback and map
   them onto the plain names before invoking Crabbox)
+- `CRABBOX_ACCESS_CLIENT_ID`, `CRABBOX_ACCESS_CLIENT_SECRET`
 - `MANTIS_GITHUB_APP_ID`, `MANTIS_GITHUB_APP_PRIVATE_KEY`
 
 The Mantis runner must never print Discord/Slack/Telegram bot tokens,

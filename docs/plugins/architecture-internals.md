@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "457c1aac731104e1140def86caaeb491f643f99f4472ad268d4c2051431b8dd3"
+source_hash: "788151012f90517bee05c9fa3653fc31d3395cbda44f7e3dd0d07fcaf9c3fd20"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture-internals.md"
@@ -595,6 +595,7 @@ Plugins can also launch background subagent runs through `api.runtime.subagent`:
 const result = await api.runtime.subagent.run({
   sessionKey: "agent:main:subagent:search-helper",
   message: "Expand this query into focused follow-up searches.",
+  toolsAlsoAllow: ["my_plugin_progress"],
   provider: "openai",
   model: "gpt-4.1-mini",
   deliver: false,
@@ -604,6 +605,7 @@ const result = await api.runtime.subagent.run({
 Notes:
 
 - `provider` and `model` are optional per-run overrides, not persistent session changes.
+- `toolsAlsoAllow` accepts exact, uniquely owned tool names registered by the calling plugin. Core and ambiguous names are rejected. It is additive to the normal profile, but operator allowlists and denies remain authoritative.
 - OpenClaw only honors those override fields for trusted callers.
 - For plugin-owned fallback runs, operators must opt in with `plugins.entries.<id>.subagent.allowModelOverride: true`.
 - Use `plugins.entries.<id>.subagent.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets, or `"*"` to allow any target explicitly.

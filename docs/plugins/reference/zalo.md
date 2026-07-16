@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zalo"
-source_hash: "938eaf078a48af57d1a8340af9aa7d9add620f799f42e936c8e0546211411cb8"
+source_hash: "635c33712f63fd9dd0034a15fd9ad4761e9fba1b7d36aaab43acddccb6471e13"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zalo.md"
@@ -24,7 +24,7 @@ OpenClaw Zalo channel plugin for bot and webhook chats.
 
 ## Surface
 
-channels: zalo
+channels: `zalo`
 
 ## Related docs
 

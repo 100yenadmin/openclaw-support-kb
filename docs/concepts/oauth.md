@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "f59f3af7da9cee02f816a11adab727552f7745bad7041e907ddceb45e2bdbc58"
+source_hash: "8016acd7cd2fa5027ee953846a74c73a33064d4a011a388c664b0cb26ace8538"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -126,7 +126,7 @@ OpenClaw's interactive login flows are implemented in `openclaw/plugin-sdk/llm.t
 
 Flow shape:
 
-1. start Anthropic setup-token or paste-token from OpenClaw
+1. create the token by running `claude setup-token` on any machine with Claude Code, then start Anthropic setup-token or paste-token from OpenClaw
 2. OpenClaw stores the resulting Anthropic credential in an auth profile
 3. model selection stays on `anthropic/...`
 4. existing Anthropic auth profiles remain available for rollback/order control

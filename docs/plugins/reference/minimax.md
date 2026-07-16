@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax plugin"
 source: "https://docs.openclaw.ai/plugins/reference/minimax"
-source_hash: "8c7acbc32d559f61538398fa2c7b12b8a135106f2666af68cda9af40176337ca"
+source_hash: "df682b89d21096fff531d62e5beb6368cbe7a55ddc3070d6b0bd4be5b3550143"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/minimax.md"
@@ -24,7 +24,7 @@ Adds MiniMax, MiniMax Portal model provider support to OpenClaw.
 
 ## Surface
 
-providers: minimax, minimax-portal; contracts: imageGenerationProviders, mediaUnderstandingProviders, musicGenerationProviders, speechProviders, usageProviders, videoGenerationProviders, webSearchProviders
+providers: `minimax`, `minimax-portal`; contracts: `imageGenerationProviders`, `mediaUnderstandingProviders`, `musicGenerationProviders`, `speechProviders`, `usageProviders`, `videoGenerationProviders`, `webSearchProviders`
 
 ## Related docs
 

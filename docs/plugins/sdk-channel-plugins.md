@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "331bf410b670c28bda9bf2531f097cc2b1af3a71c5027c07b28c9509b9e4a2d6"
+source_hash: "357eafd953d40a4d93540d83257dea9c61aeba9b178edf9b77393f35897f5849"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -80,11 +80,11 @@ Inbound receivers that defer platform acknowledgements should declare
 ack timing in monitor-local state. Cover every declared policy with
 `verifyChannelMessageReceiveAckPolicyAdapterProofs(...)`.
 
-Legacy reply helpers such as `createChannelTurnReplyPipeline`,
-`dispatchInboundReplyWithBase`, and `recordInboundSessionAndDispatchReply`
-remain available for compatibility dispatchers. Do not use them for new
-channel code; start with the `message` adapter, receipts, and receive/send
-lifecycle helpers on `openclaw/plugin-sdk/channel-outbound` instead.
+Legacy reply helpers such as `dispatchInboundReplyWithBase` and
+`recordInboundSessionAndDispatchReply` remain available for compatibility
+dispatchers. Do not use them for new channel code; start with the `message`
+adapter, receipts, and receive/send lifecycle helpers on
+`openclaw/plugin-sdk/channel-outbound` instead.
 
 ### Inbound ingress (experimental)
 
@@ -97,9 +97,7 @@ effects stay in the plugin. Keep plugin identity normalization in the
 descriptor you pass to the resolver; do not serialize raw match values from
 the resolved state or decision. See
 [Channel ingress API](/plugins/sdk-channel-ingress) for the API design,
-ownership boundary, and test expectations. The older
-`openclaw/plugin-sdk/channel-ingress` subpath stays exported as a deprecated
-compatibility facade for third-party plugins.
+ownership boundary, and test expectations.
 
 ### Typing indicators
 

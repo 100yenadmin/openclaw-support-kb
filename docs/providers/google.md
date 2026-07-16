@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "50fc3261909c468e8d353cf0e6b2664cfb3b60642cbe852b0cc27b596c9d0081"
+source_hash: "4708e887b6acf27a490c9cc9f3fcabee22bd2e0053176a47597eafca9f16110c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -33,6 +33,11 @@ API key
 
 
 Steps
+
+
+Get an API key
+
+        Create a free key in [Google AI Studio](https://aistudio.google.com/apikey).
 
 
 Run onboarding
@@ -83,7 +88,7 @@ Tip
 
 Gemini CLI (OAuth)
 
-    **Best for:** reusing an existing Gemini CLI login via PKCE OAuth instead of a separate API key.
+    **Best for:** signing in with your Google account through Gemini CLI OAuth instead of using a separate API key.
 
 
 Warning
@@ -151,6 +156,10 @@ Note
     If login fails before the browser flow starts, make sure the local `gemini`
     command is installed and on `PATH`.
 
+
+    Onboarding auto-detection lists an existing Gemini CLI login but never
+    auto-tests it because Gemini CLI has no tool-free probe. Choose Gemini CLI
+    OAuth or a Gemini API key to continue.
 
     `google-gemini-cli/*` model refs are legacy compatibility aliases. New
     configs should use `google/*` model refs plus the `google-gemini-cli`

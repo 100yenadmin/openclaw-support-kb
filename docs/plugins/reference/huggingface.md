@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hugging Face plugin"
 source: "https://docs.openclaw.ai/plugins/reference/huggingface"
-source_hash: "6be949e1d6c4b0ccecdd1a48ed10b3fad53f9f668ed7c81380992160fb7ac1ea"
+source_hash: "3bac76a2c8068d5f2c7c59f1f514793015c2a7ac117ff582e81c606695fade69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/huggingface.md"
@@ -24,7 +24,7 @@ Adds Hugging Face model provider support to OpenClaw.
 
 ## Surface
 
-providers: huggingface
+providers: `huggingface`
 
 ## Related docs
 

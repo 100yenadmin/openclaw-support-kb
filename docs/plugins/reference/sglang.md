@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SGLang plugin"
 source: "https://docs.openclaw.ai/plugins/reference/sglang"
-source_hash: "44d64bfed2613517fa52acea0b78cfef536ceda2ab8640d437b161bd3983e7e7"
+source_hash: "ac6a079fc7bc8a89b3220012dac0d6ec1fee12441b34201bf2fd3b63fe62038e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/sglang.md"
@@ -24,7 +24,7 @@ Adds SGLang model provider support to OpenClaw.
 
 ## Surface
 
-providers: sglang
+providers: `sglang`
 
 ## Related docs
 

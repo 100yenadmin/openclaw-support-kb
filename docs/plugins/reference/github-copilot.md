@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GitHub Copilot plugin"
 source: "https://docs.openclaw.ai/plugins/reference/github-copilot"
-source_hash: "9871700decc9d4fbb5c7f24da4b23b0c58bc2e9d38a0a7e6d440badcd71f194b"
+source_hash: "f84b9f9aed8f8ae865bc9250797f58fbfa72a99b112f45dad101536a43573379"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/github-copilot.md"
@@ -24,7 +24,7 @@ Adds GitHub Copilot model provider support to OpenClaw.
 
 ## Surface
 
-providers: github-copilot; contracts: memoryEmbeddingProviders, usageProviders
+providers: `github-copilot`; contracts: `memoryEmbeddingProviders`, `usageProviders`
 
 ## Related docs
 

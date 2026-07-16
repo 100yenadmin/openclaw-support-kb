@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Worker"
 source: "https://docs.openclaw.ai/cli/worker"
-source_hash: "0e744d031096ce16116d9ac1384c90e4c7c46f626cfb3e9800842f26b2ed1ce3"
+source_hash: "d0e3f5863f9ea90de62f91b297ad9e6d3c655960b8a43680f3e3a6ea21f1c837"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/worker.md"
@@ -53,8 +53,10 @@ Worker mode does not start channels, Gateway HTTP surfaces, or plugin auto-start
 beyond the assigned session toolset. It uses a throwaway state directory and has
 no standing provider or forge credentials.
 
-Worker-to-worker session dispatch is not exposed in this mode. Agent dispatch
-and placement remain gateway-owned milestone-3 surfaces.
+Worker-to-worker session dispatch is not exposed in this mode. Placement and
+dispatch remain gateway-owned: an operator can dispatch an existing local,
+managed-worktree session through the Gateway, while a worker process cannot
+dispatch itself or another worker.
 
 The prepared assignment carries the transcript context, accepted base leaf,
 commit sequence, and live-event cursor. On a tunnel reconnect, the process

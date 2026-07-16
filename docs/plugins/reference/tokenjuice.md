@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tokenjuice plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tokenjuice"
-source_hash: "86cd9a6dcf8fee80c9f698a4a2c8b10dfd3ae0d5223090b1ff223f30f29f0666"
+source_hash: "a4e0b2b9090d7cb850f2fb6a006157d680b25decf20a64bf2fe9eff685190542"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tokenjuice.md"
@@ -24,10 +24,10 @@ Compacts exec and bash tool results with tokenjuice reducers.
 
 ## Surface
 
-contracts: agentToolResultMiddleware
+contracts: `agentToolResultMiddleware`
 
 ## Related docs
 
-- [tokenjuice](/tools/tokenjuice)
+- [Tokenjuice](/tools/tokenjuice)
 
 ---

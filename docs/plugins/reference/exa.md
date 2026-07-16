@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exa plugin"
 source: "https://docs.openclaw.ai/plugins/reference/exa"
-source_hash: "119d2e5989a0270999c234b35dc49ca05fa13722563a07fb7218a2742fa07bc7"
+source_hash: "8dce6aa58af35b69f68745353cb424303e101af1893d7ca85095639a2a69a5cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/exa.md"
@@ -24,7 +24,7 @@ Adds web search provider support.
 
 ## Surface
 
-contracts: webSearchProviders
+contracts: `webSearchProviders`
 
 ## Related docs
 

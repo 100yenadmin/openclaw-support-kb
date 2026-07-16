@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate Hermes plugin"
 source: "https://docs.openclaw.ai/plugins/reference/migrate-hermes"
-source_hash: "40d826322d01a65e1380869aed23fd7b279a4163cd3465199864eeb7f02a8a78"
+source_hash: "7f2a1a4eacd23c76b681775124216883470ede7c10877b1561b4ae982e342b3a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/migrate-hermes.md"
@@ -24,6 +24,6 @@ Imports Hermes configuration, memories, skills, and supported credentials into O
 
 ## Surface
 
-contracts: migrationProviders
+contracts: `migrationProviders`
 
 ---

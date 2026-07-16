@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code mode"
 source: "https://docs.openclaw.ai/reference/code-mode"
-source_hash: "3dcfd9d7f58c33c48e699cafda151ae1c9324c056f4fce6713f5c899dd6f0a02"
+source_hash: "e7a8603984ab2571f8c53fd5773fdce1bc3ec69e504292bfee34197d2561d250"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/code-mode.md"
@@ -39,7 +39,8 @@ identically-named `exec`/`wait` tools.
 ## What it does
 
 - The model-visible tool list becomes `exec`, `wait`, plus any direct-only tool
-  such as `computer` whose image result cannot survive the guest bridge.
+  such as `computer` or the native-vision `image` loader whose image result
+  cannot survive the guest bridge.
 - `exec` evaluates model-generated JavaScript or TypeScript in an isolated
   QuickJS-WASI worker thread.
 - Every catalog-eligible enabled tool (OpenClaw core, plugin, MCP, client) is hidden from

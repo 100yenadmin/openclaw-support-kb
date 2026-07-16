@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synthetic plugin"
 source: "https://docs.openclaw.ai/plugins/reference/synthetic"
-source_hash: "cc2d32a0ca27c8f48833200d0ff2829ad93c3e794433b718704612b41ef254cd"
+source_hash: "e79350dd74c4446577eb00c6e6e1daeaf0b89833eac14f07ac5b50559f273b92"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/synthetic.md"
@@ -24,10 +24,10 @@ Adds Synthetic model provider support to OpenClaw.
 
 ## Surface
 
-providers: synthetic
+providers: `synthetic`
 
 ## Related docs
 
-- [synthetic](/providers/synthetic)
+- [Synthetic](/providers/synthetic)
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "773970424f2e89f6d44e3753a480dcca76e9f88af28558b1075a0919aa2c28ad"
+source_hash: "3b7295237ca3839228b58688f8c0477d50a0b74c0c62ce1c774c49921af22892"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -71,7 +71,11 @@ Install the plugin
     ```
 
     Treat plugin installs like running code. Prefer pinned versions for
-    reproducible production installs.
+    reproducible production installs. ClawHub packages and OpenClaw's
+    bundled/official catalog are trusted sources. New arbitrary npm, git,
+    local path/archive, `npm-pack:`, or marketplace sources require
+    `--force` in noninteractive installs after you
+    review and trust the source.
 
 
 

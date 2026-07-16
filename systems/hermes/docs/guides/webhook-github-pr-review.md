@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automated GitHub PR Comments with Webhooks"
 source: "https://hermes-agent.nousresearch.com/docs/guides/webhook-github-pr-review"
-source_hash: "24280b7d13258ec4bc2ef90bb600447509af4da71d4a1d6658687e872b624f18"
+source_hash: "a1627833b65085305d861b763dbbd722ff7256cd19129e7fb11ed6f1b846b538"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/webhook-github-pr-review.md"
@@ -323,7 +323,6 @@ platforms:
   webhook:
     enabled: true
     extra:
-      host: "0.0.0.0"         # bind address (default: 0.0.0.0)
       port: 8644               # listen port (default: 8644)
       secret: ""               # optional global fallback secret
       rate_limit: 30           # requests per minute per route

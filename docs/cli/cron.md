@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "8e58bc23907f30c99500f885e37089ded7546dd70f94c24cf70e47e553630a10"
+source_hash: "59f56fd57b10d74cf376869e4d2eb9a478f75cb29ad19204bbb9c341f76fdf93"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -221,10 +221,10 @@ Cron does not classify final-output prose or approval-looking refusal phrases as
 
 ## Retention
 
-Retention and pruning are controlled in config:
+Retention behavior:
 
 - `cron.sessionRetention` (default `24h`, or `false` to disable) prunes completed isolated run sessions.
-- `cron.runLog.keepLines` (default `2000`) prunes retained SQLite run-history rows per job. `cron.runLog.maxBytes` (default `2000000`) remains accepted for compatibility with older file-backed run logs; SQLite pruning is row-count based.
+- Run history keeps the newest 2000 terminal rows per cron job. Lost rows retain the standard 24-hour lost-task cleanup window.
 
 ## Migrating older jobs
 

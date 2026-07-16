@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LINE plugin"
 source: "https://docs.openclaw.ai/plugins/reference/line"
-source_hash: "7003d702f2e0b59e15a767179a9f34817b67a01eb702e567afa1512586a04705"
+source_hash: "387823e9a09722cae3a22619e8f1ca31eacb5478d48d44f00a66786240b32ea0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/line.md"
@@ -24,10 +24,10 @@ OpenClaw LINE channel plugin for LINE Bot API chats.
 
 ## Surface
 
-channels: line
+channels: `line`
 
 ## Related docs
 
-- [line](/channels/line)
+- [LINE](/channels/line)
 
 ---

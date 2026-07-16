@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qianfan plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qianfan"
-source_hash: "c4845e3235c618a511e68b527705a982e90361fe1d6755876276e49a53f77807"
+source_hash: "75775a5694693b5bbf905f59c9a3205d8fe7a354f9fe71e40e9c682c415a1a0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qianfan.md"
@@ -24,7 +24,7 @@ Adds Qianfan model provider support to OpenClaw.
 
 ## Surface
 
-providers: qianfan
+providers: `qianfan`
 
 ## Related docs
 

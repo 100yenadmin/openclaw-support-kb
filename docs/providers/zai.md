@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "d726616a64d8ea3249f9474fe0bb9308ccc5bdf8a897379d6d076b9cef4bec14"
+source_hash: "332e2263ef81db881e75dd4d555fe7058219c2cfce8db19101ca25d4101dd060"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/zai.md"
@@ -116,6 +116,38 @@ then `zai-cn`) before Coding Plan endpoints (`zai-coding-global`, then
 `zai-coding-cn`), and stopping at the first endpoint that accepts a request.
 Use an explicit `--auth-choice` to force a Coding Plan endpoint if your key
 works on both.
+
+## Rate limits and overloads
+
+Z.AI documents the Coding Plan and general-purpose agent tools as capacity
+managed services. In Z.AI's own docs:
+
+- [General-purpose agent tools](https://docs.z.ai/devpack/tool/others),
+  including OpenClaw, are served on a best-effort basis. During high inference
+  load, typically around 2-6 PM Singapore time, some requests may face temporary
+  rate limits.
+- [Coding Plan rate and concurrency limits](https://docs.z.ai/devpack/usage-policy)
+  are tied to the plan tier and can be adjusted dynamically based on resource
+  availability. Off-peak hours may have higher concurrency.
+- [API error code `1302`](https://docs.z.ai/api-reference/api-code) means "Rate
+  limit reached for requests". API error code `1305` means "The service may be
+  temporarily overloaded, please try again later".
+
+If you see a temporary `429` or `1305` response during a busy period, wait and
+retry the request. If failures are repeatable outside peak periods, or only
+occur for one endpoint, model, or request shape, check the configured endpoint
+and model first:
+
+```bash
+openclaw models list --all --provider zai
+openclaw config get models.providers.zai.baseUrl
+```
+
+Coding Plan keys should use a Coding Plan endpoint such as
+`https://api.z.ai/api/coding/paas/v4`; general API keys should use a general API
+endpoint such as `https://api.z.ai/api/paas/v4`. Persistent failures with the
+same key and endpoint can indicate a provider-side rejection or plan limitation,
+not ordinary peak-load throttling.
 
 ## Config example
 

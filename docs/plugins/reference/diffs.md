@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs plugin"
 source: "https://docs.openclaw.ai/plugins/reference/diffs"
-source_hash: "c3ad17e4eb62350267cfd6d12bfd1ae284700db231bd02749427436c2a1d73d9"
+source_hash: "ab1204fb0cc8eddd8e38421a3f2ccf9052aded62dfdb4760403e21c4df1ea84c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/diffs.md"
@@ -24,6 +24,6 @@ OpenClaw read-only diff viewer plugin and file renderer for agents.
 
 ## Surface
 
-contracts: tools; skills
+contracts: `tools`; skills
 
 ---

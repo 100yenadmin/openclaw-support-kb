@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "8afd6dd60b46e36afdbdb42ffeb0ab2757a5a0b858842472e48f6b46be4f68f0"
+source_hash: "f9fceb106a65e237be42bdc37e9836167afcd3fe86f6e633e4a9714e0824d566"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -30,7 +30,7 @@ If the config file is missing entirely, step 4 is skipped; shell import still ru
 
 ## Provider credentials and workspace `.env`
 
-Do not keep provider API keys only in a workspace `.env`. OpenClaw blocks a large set of provider credential and endpoint-redirect keys from workspace `.env` files, including every known provider auth env var (for example `GEMINI_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `MISTRAL_API_KEY`, `GROQ_API_KEY`, `DEEPSEEK_API_KEY`, `PERPLEXITY_API_KEY`, `BRAVE_API_KEY`, `TAVILY_API_KEY`, `EXA_API_KEY`, `FIRECRAWL_API_KEY`), plus any key ending in `_API_HOST`, `_BASE_URL`, or `_HOMESERVER`, and the entire `OPENCLAW_*`, `CLAWHUB_*`, `ANTHROPIC_API_KEY_*`, and `OPENAI_API_KEY_*` namespaces.
+Do not keep provider API keys only in a workspace `.env`. OpenClaw blocks a large set of provider credential and endpoint-redirect keys from workspace `.env` files, including every known provider auth env var (for example `GEMINI_API_KEY`, `GOOGLE_API_KEY`, `XAI_API_KEY`, `MISTRAL_API_KEY`, `GROQ_API_KEY`, `DEEPSEEK_API_KEY`, `PERPLEXITY_API_KEY`, `BRAVE_API_KEY`, `TAVILY_API_KEY`, `EXA_API_KEY`, `FIRECRAWL_API_KEY`), plus any key ending in `_API_HOST`, `_BASE_URL`, `_ENDPOINT`, or `_HOMESERVER`, and the entire `OPENCLAW_*`, `CLAWHUB_*`, `ANTHROPIC_API_KEY_*`, and `OPENAI_API_KEY_*` namespaces.
 
 Use one of these trusted sources for provider credentials instead:
 
@@ -39,7 +39,7 @@ Use one of these trusted sources for provider credentials instead:
 - The config `env` block in `~/.openclaw/openclaw.json`.
 - Optional login-shell import when `env.shellEnv.enabled` or `OPENCLAW_LOAD_SHELL_ENV=1` is enabled.
 
-If you previously stored provider keys only in a workspace `.env`, move them to one of the trusted sources above. Workspace `.env` can still provide ordinary project variables that are not credentials, endpoint redirects, host overrides, or `OPENCLAW_*` runtime controls.
+If you previously stored provider keys or endpoint routing values only in a workspace `.env`, move them to one of the trusted sources above. Workspace `.env` can still provide ordinary project variables that are not credentials, endpoint redirects, host overrides, or `OPENCLAW_*` runtime controls.
 
 See [Workspace `.env` files](/gateway/security#workspace-env-files) for the security rationale.
 

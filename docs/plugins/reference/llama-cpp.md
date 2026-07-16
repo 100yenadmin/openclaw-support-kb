@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Llama Cpp plugin"
 source: "https://docs.openclaw.ai/plugins/reference/llama-cpp"
-source_hash: "f1355d05ff5d316ad0a802e7b9390d7562fdf2b605d1adf6114735e4646670a5"
+source_hash: "8c93949c2db00b4e4432e91ffd23a0a23d2cbd52edb0df96594d0dd44d739006"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/llama-cpp.md"
@@ -24,7 +24,7 @@ Local GGUF embeddings through node-llama-cpp.
 
 ## Surface
 
-contracts: embeddingProviders
+contracts: `embeddingProviders`
 
 ## Related docs
 

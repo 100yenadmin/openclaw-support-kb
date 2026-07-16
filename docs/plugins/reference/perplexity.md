@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Perplexity plugin"
 source: "https://docs.openclaw.ai/plugins/reference/perplexity"
-source_hash: "7c32f2affe2a39adc6e9c33c1e50b6707ce667a315e742fd15097f876054246e"
+source_hash: "95ddb2575ddc9217d2fff4a2eeb17678ab1fac650ea5f766d0d06e2e8bb0939b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/perplexity.md"
@@ -24,7 +24,7 @@ Adds web search provider support.
 
 ## Surface
 
-contracts: webSearchProviders
+contracts: `webSearchProviders`
 
 ## Related docs
 

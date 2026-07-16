@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slack"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack"
-source_hash: "bbb57f2c64375e0f97ddca7b6f2ede9045c6930cf876df4eab093ef9da311189"
+source_hash: "4b548d757b95bab0a1b1656ae83160371a59ddfb5d672126296719b054d827a3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/slack.md"
@@ -229,6 +229,12 @@ hermes gateway              # Foreground
 hermes gateway install      # Install as a user service
 sudo hermes gateway install --system   # Linux only: boot-time system service
 ```
+
+:::tip Codex reasoning-effort safety
+For Codex-backed Slack peer-agent channels, prefer `agent.reasoning_effort: high` or lower. `xhigh`
+can spend the entire turn in hidden reasoning and never produce visible assistant text; Hermes now
+suppresses those incomplete-turn warnings from the thread and keeps the diagnostics in gateway logs.
+:::
 
 ---
 

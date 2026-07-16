@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
-source_hash: "1de70ad7e2b8e0920355198bfba1ba0c3d84427334a2f8566d395513c154621f"
+source_hash: "13870dd9287a7bfeb984329a23d27457ab786a3c734ae1b697127162058a4bb5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/azure-speech.md"
@@ -82,7 +82,7 @@ All options live under `messages.tts.providers["azure-speech"]`.
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
 | `apiKey`                | Azure Speech resource key. Falls back to `AZURE_SPEECH_KEY`, `AZURE_SPEECH_API_KEY`, or `SPEECH_KEY`. |
 | `region`                | Azure Speech resource region. Falls back to `AZURE_SPEECH_REGION` or `SPEECH_REGION`.                 |
-| `endpoint`              | Optional Azure Speech endpoint override. Falls back to `AZURE_SPEECH_ENDPOINT`.                       |
+| `endpoint`              | Optional Azure Speech endpoint override. Falls back to trusted `AZURE_SPEECH_ENDPOINT`.               |
 | `baseUrl`               | Optional Azure Speech base URL override.                                                              |
 | `voice`                 | Azure voice ShortName (default `en-US-JennyNeural`). Legacy alias: `voiceId`.                         |
 | `lang`                  | SSML language code (default `en-US`).                                                                 |
@@ -92,7 +92,9 @@ All options live under `messages.tts.providers["azure-speech"]`.
 
 The provider is considered configured once `apiKey` is set plus one of
 `region`, `endpoint`, or `baseUrl`. Env vars are only checked as a fallback
-for config keys left unset.
+for config keys left unset. Workspace `.env` files cannot set
+`AZURE_SPEECH_ENDPOINT`; use the process environment, global runtime dotenv,
+or explicit config for endpoint routing.
 
 ## Notes
 

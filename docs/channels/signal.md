@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "d4b206f28f8862b9dce257f7f535995eb217dd6fa49c61172443525d788eca5c"
+source_hash: "c50a34e19332a42d05a64976558c650cacab136d36ce98ca3b71e97ea1c6cd14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/signal.md"
@@ -52,6 +52,9 @@ Run the guided setup
     openclaw channels add
     ```
     The wizard detects whether `signal-cli` is on `PATH` and, when missing, offers to install it: downloads the official native GraalVM build on Linux x86-64, or installs via Homebrew on macOS and other architectures. It then prompts for the bot number and `signal-cli` path.
+
+    For non-interactive setup, `openclaw channels add --channel signal` also accepts `--signal-number <e164>` for the bot phone number, plus `--http-host <host>` and `--http-port <port>` for the Signal daemon endpoint (default `127.0.0.1:8080`).
+
 
 
 Link or register the account
@@ -274,8 +277,35 @@ Groups:
 - `channels.signal.groupAllowFrom` controls which groups or senders can trigger group replies when `allowlist` is set; entries can be Signal group IDs (raw, `group:<id>`, or `signal:group:<id>`), sender phone numbers, `uuid:<id>` values, or `*`.
 - `channels.signal.groups["<group-id>" | "*"]` can override group behavior with `requireMention`, `tools`, and `toolsBySender`.
 - Use `channels.signal.accounts.<id>.groups` for per-account overrides in multi-account setups.
-- Allowlisting a group through `groupAllowFrom` does not disable mention gating by itself. A specifically configured `channels.signal.groups["<group-id>"]` entry processes every group message unless `requireMention: true` is explicitly set.
+- Allowlisting a Signal group through `groupAllowFrom` does not disable mention gating by itself. A specifically configured `channels.signal.groups["<group-id>"]` entry processes every group message unless `requireMention=true` is set.
+- With `requireMention=true`, Signal native @mentions are matched from structured mention metadata against the bot account phone or `accountUuid`. Configured `mentionPatterns` remain a plain-text fallback.
 - Runtime note: if `channels.signal` is completely missing, runtime falls back to `groupPolicy="allowlist"` for group checks (even if `channels.defaults.groupPolicy` is set).
+
+Mention-gated group with bounded context:
+
+```json5
+{
+  channels: {
+    signal: {
+      account: "+15551234567",
+      accountUuid: "bot-signal-uuid",
+      groupPolicy: "allowlist",
+      groupAllowFrom: ["group:<signal-group-id>"],
+      historyLimit: 8,
+      groups: {
+        "<signal-group-id>": { requireMention: true },
+      },
+    },
+  },
+  messages: {
+    groupChat: {
+      mentionPatterns: ["\\bopenclaw\\b"],
+    },
+  },
+}
+```
+
+Allowed group messages that do not mention the bot stay silent and are kept only in the bounded pending history window. When a later native @mention or fallback text mention triggers the bot, OpenClaw includes that recent context and replies to the same group. Skipped attachment bodies are not downloaded; they may appear only as compact media placeholders in the pending context.
 
 ## How it works (behavior)
 
@@ -449,6 +479,7 @@ Provider options:
 - `channels.signal.enabled`: enable/disable channel startup.
 - `channels.signal.apiMode`: `auto | native | container` (default: auto). See [Container mode](#container-mode-bbernhardsignal-cli-rest-api).
 - `channels.signal.account`: E.164 for the bot account.
+- `channels.signal.accountUuid`: optional bot account UUID for native @mention detection and loop protection.
 - `channels.signal.cliPath`: path to `signal-cli`.
 - `channels.signal.configPath`: optional `signal-cli --config` directory.
 - `channels.signal.httpUrl`: full daemon URL (overrides host/port).
@@ -482,7 +513,7 @@ Provider options:
 
 Related global options:
 
-- `agents.list[].groupChat.mentionPatterns` (Signal does not support native mentions).
+- `agents.list[].groupChat.mentionPatterns` (plain-text fallback; Signal native @mentions are detected from structured metadata when the bot account identity is configured).
 - `messages.groupChat.mentionPatterns` (global fallback).
 - `messages.responsePrefix`.
 

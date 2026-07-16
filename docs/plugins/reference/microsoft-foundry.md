@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Foundry plugin"
 source: "https://docs.openclaw.ai/plugins/reference/microsoft-foundry"
-source_hash: "82be4cf62b5749f6b6a2c1a1518b4de7bb4db3cc60315b047f752e48fcfa932d"
+source_hash: "055b21545be557fe901b3f0bc6e6f3035f30a17dddc061f55eb62d08c38f9014"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/microsoft-foundry.md"
@@ -24,7 +24,7 @@ Adds Microsoft Foundry model provider support to OpenClaw.
 
 ## Surface
 
-providers: microsoft-foundry; contracts: imageGenerationProviders
+providers: `microsoft-foundry`; contracts: `imageGenerationProviders`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

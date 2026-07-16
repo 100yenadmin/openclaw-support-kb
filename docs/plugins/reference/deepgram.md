@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram plugin"
 source: "https://docs.openclaw.ai/plugins/reference/deepgram"
-source_hash: "18b2181e7b52b2a9ef4cc0c3e024e326f92ebd056c2e961022df65bb8d8b01d0"
+source_hash: "6e1c78fea51b045d03cd360e4db5bf87b6fc41ffe79285a7186a7b258b614f0e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/deepgram.md"
@@ -24,7 +24,7 @@ Adds media understanding provider support. Adds realtime transcription provider 
 
 ## Surface
 
-contracts: mediaUnderstandingProviders, realtimeTranscriptionProviders
+contracts: `mediaUnderstandingProviders`, `realtimeTranscriptionProviders`
 
 ## Related docs
 

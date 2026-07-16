@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/openai"
-source_hash: "cfe87ec6f298c7a281d294c3ef870eb7d1d0d22453fc537655c943b462f89ef3"
+source_hash: "0b9717d51321571953a6971ea31eba63ba394fd17ce72179d748cd0faac77f74"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/openai.md"
@@ -24,7 +24,7 @@ Adds OpenAI model provider support to OpenClaw.
 
 ## Surface
 
-providers: openai; contracts: imageGenerationProviders, mediaUnderstandingProviders, memoryEmbeddingProviders, realtimeTranscriptionProviders, realtimeVoiceProviders, speechProviders, usageProviders, videoGenerationProviders
+providers: `openai`; contracts: `imageGenerationProviders`, `mediaUnderstandingProviders`, `memoryEmbeddingProviders`, `realtimeTranscriptionProviders`, `realtimeVoiceProviders`, `speechProviders`, `usageProviders`, `videoGenerationProviders`
 
 ## Related docs
 

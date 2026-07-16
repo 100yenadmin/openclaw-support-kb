@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "ab9380a3ffd69482e6254af6c6aecebff82a766059aa99ee846ae44fd5636d1a"
+source_hash: "27ed71c9e6f9f4491c3226e99a83d8739d6f11f6e5be16c6db8cf9b4a0b0f769"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
@@ -90,6 +90,8 @@ The lists below are generated from the source target registry and checked agains
 - `channels.slack.accounts.*.signingSecret`
 - `channels.sms.authToken`
 - `channels.sms.accounts.*.authToken`
+- `channels.clickclack.token`
+- `channels.clickclack.accounts.*.token`
 - `channels.discord.token`
 - `channels.discord.pluralkit.token`
 - `channels.discord.voice.tts.providers.*.apiKey`

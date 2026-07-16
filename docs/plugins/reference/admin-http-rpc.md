@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Admin Http Rpc plugin"
 source: "https://docs.openclaw.ai/plugins/reference/admin-http-rpc"
-source_hash: "90cc649f03fdeb39a7ffe48a7eec9dd2729dbf09f8f3483f6fc0022160a38710"
+source_hash: "dac5eac17adfb7768dc41979da140245d00790197750736b27f4b1c842e5bca7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/admin-http-rpc.md"
@@ -24,7 +24,7 @@ OpenClaw admin HTTP RPC endpoint.
 
 ## Surface
 
-contracts: gatewayMethodDispatch
+contracts: `gatewayMethodDispatch`
 
 ## Related docs
 

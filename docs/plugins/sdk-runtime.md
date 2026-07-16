@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "ef70ec293807fab7a77036507f12baf76522314737cee2254daddc15a5035d08"
+source_hash: "5174f6c35d3cdca28cee5918dea6362520d7e7651549edda885aa9a453d3f423"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -56,7 +56,7 @@ Warning
 
 `api.runtime.config.loadConfig()` and `api.runtime.config.writeConfigFile(...)` are deprecated. They warn once per plugin at runtime and remain available only for old external plugins during the migration window. Bundled plugins must not use them: an internal config boundary guard fails the build if plugin code calls them or imports those helpers from plugin SDK subpaths. Use `current()`, a passed-in `cfg`, `mutateConfigFile(...)`, or `replaceConfigFile(...)` instead.
 
-For direct SDK imports, prefer the focused config subpaths over the broad `openclaw/plugin-sdk/config-runtime` compatibility barrel: `config-contracts` for types, `plugin-config-runtime` for already-loaded config assertions and plugin entry lookup, `runtime-config-snapshot` for current process snapshots, and `config-mutation` for writes. Bundled plugin tests should mock these focused subpaths directly instead of mocking the broad compatibility barrel.
+For direct SDK imports, prefer the focused config subpaths over the broad `openclaw/plugin-sdk/config-runtime` compatibility barrel: `config-contracts` for types, `plugin-config-runtime` for already-loaded config assertions, plugin entry lookup, and canonical config merging, `runtime-config-snapshot` for current process snapshots, and `config-mutation` for writes. Bundled plugin tests should mock these focused subpaths directly instead of mocking the broad compatibility barrel.
 
 Internal OpenClaw runtime code follows the same direction: load config once at the CLI, gateway, or process boundary, then pass that value through. Successful mutation writes refresh the process runtime snapshot and advance its internal revision; long-lived caches should key off the runtime-owned cache key instead of serializing config locally. Long-lived runtime modules have a zero-tolerance scanner for ambient `loadConfig()` calls; use a passed `cfg`, a request `context.getRuntimeConfig()`, or `getRuntimeConfig()` at an explicit process boundary.
 
@@ -321,6 +321,7 @@ api.runtime.subagent
     const { runId } = await api.runtime.subagent.run({
       sessionKey: "agent:main:subagent:search-helper",
       message: "Expand this query into focused follow-up searches.",
+      toolsAlsoAllow: ["my_plugin_progress"],
       provider: "openai", // optional override
       model: "gpt-5.6-sol", // optional override
       deliver: false,
@@ -347,7 +348,44 @@ Warning
     Model overrides (`provider`/`model`) require operator opt-in via `plugins.entries.<id>.subagent.allowModelOverride: true` in config. Untrusted plugins can still run subagents, but override requests are rejected.
 
 
+    `toolsAlsoAllow` adds exact, uniquely owned tools registered by the calling plugin to the worker's normal tool surface. The runtime rejects core tools and names shared with another plugin. Profiles and operator tool policies still apply, including explicit allowlists and denies.
+
     `deleteSession(...)` can delete sessions created by the same plugin through `api.runtime.subagent.run(...)`. Deleting arbitrary user or operator sessions still requires an admin-scoped Gateway request.
+
+
+
+api.runtime.sandbox
+
+    Inspect the effective sandbox workspace authority for an agent session.
+
+    ```typescript
+    const authority = api.runtime.sandbox.resolveWorkspaceAuthority({
+      config: cfg,
+      agentId,
+      sessionKey,
+    });
+
+    const liveAuthority = await api.runtime.sandbox.prepareWorkspaceAuthority({
+      config: cfg,
+      agentId,
+      sessionKey,
+      workspaceDir,
+      confinedToolNames: ["my_plugin_safe_tool"],
+    });
+    ```
+
+    The result reports whether this session is sandboxed, whether its workspace
+    is unavailable, read-only, or writable, and an optional `confinementError`
+    when the effective Docker, tool, session, browser, or elevated policy can
+    escape that workspace. Use this for host-owned delegation decisions that
+    must not grant a worker more authority than its caller. It is an attestation
+    helper, not a replacement for checking the caller's own authorization.
+
+    `prepareWorkspaceAuthority(...)` performs the same policy check and also
+    prepares the Docker sandbox for `workspaceDir`. It rejects a hot container
+    whose live config hash does not match the requested mounts or policy. Pass
+    only exact tool names whose registered implementations the calling plugin
+    confines; wildcard prefixes do not prove tool ownership.
 
 
 
@@ -727,15 +765,16 @@ MyRecord
     await store.register("key-1", { value: "hello" });
     const claimed = await store.registerIfAbsent("dedupe-key", { value: "first" });
     const value = await store.lookup("key-1");
+    await store.deleteIf?.("key-1", (current) => current.value === "hello");
     await store.consume("key-1");
     await store.clear();
     ```
 
-    Keyed stores survive restarts and are isolated by the runtime-bound plugin id. Use `registerIfAbsent(...)` for atomic dedupe claims: it returns `true` when the key was missing or expired and registered, or `false` when a live value already exists without overwriting its value, creation time, or TTL. Limits: `maxEntries` per namespace, 50,000 live rows per plugin, JSON values under 64KB, and optional TTL expiry. By default, a write at either row limit sheds the oldest live rows from the namespace being written; sibling namespaces are not evicted for that write, and the write still fails if the namespace cannot free enough rows. Set `overflowPolicy: "reject-new"` for durable ownership records that must never be evicted: new keys fail at either limit, while existing keys remain updateable.
+    Keyed stores survive restarts and are isolated by the runtime-bound plugin id. Use `registerIfAbsent(...)` for atomic dedupe claims: it returns `true` when the key was missing or expired and registered, or `false` when a live value already exists without overwriting its value, creation time, or TTL. Use `deleteIf(...)` when cleanup must remove only the value previously observed; its synchronous predicate and deletion run in one SQLite transaction. Limits: `maxEntries` per namespace, 50,000 live rows per plugin, JSON values under 64KB, and optional TTL expiry. By default, a write at either row limit sheds the oldest live rows from the namespace being written; sibling namespaces are not evicted for that write, and the write still fails if the namespace cannot free enough rows. Set `overflowPolicy: "reject-new"` for durable ownership records that must never be evicted: new keys fail at either limit, while existing keys remain updateable.
 
     `openSyncKeyedStore
 T
-(...)` returns the same store shape with synchronous methods (`register`, `registerIfAbsent`, `lookup`, `consume`, `clear` all return values directly instead of promises) for callers that cannot await.
+(...)` returns the same store shape with synchronous methods (`register`, `registerIfAbsent`, `deleteIf`, `lookup`, `consume`, `clear` all return values directly instead of promises) for callers that cannot await.
 
     `openChannelIngressQueue
 TPayload
@@ -758,7 +797,7 @@ api.runtime.channel
     | `text` | Chunking (`chunkText`, `chunkMarkdownText`, `resolveChunkMode`), control-command detection, Markdown table conversion. |
     | `reply` | Buffered-block reply dispatch, envelope formatting, effective messages/human-delay config resolution. |
     | `routing` | `buildAgentSessionKey`, `resolveAgentRoute`. |
-    | `pairing` | `buildPairingReply`, allowlist reads, pairing-request upserts. |
+    | `pairing` | `buildPairingReply`, allowlist reads/removals, pairing-request upserts, and request-derived approval entries. |
     | `media` | Remote media download/save (see below). |
     | `activity` | Record/read last channel activity. |
     | `session` | Session metadata from inbound events, last-route updates. |

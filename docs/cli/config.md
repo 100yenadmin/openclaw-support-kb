@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "a0f6dcbda21dd08206e9256b91b573b39d31fb3179fa3bc886f6fd3669e05b5f"
+source_hash: "642b4553f21c403a3319124ec53c173f8665d5eb2b07ccfedeb098b9735b06fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -480,6 +480,8 @@ Writes to `plugins.entries` (or any subpath) always require a restart, since the
 ## Write safety
 
 `openclaw config set` and other OpenClaw-owned config writers validate the full post-change config before committing it to disk. If the new payload fails schema validation or looks like a destructive clobber, the active config is left alone and the rejected payload is saved beside it as `openclaw.json.rejected.*`.
+
+OpenClaw-owned writes reserialize JSON5 as standard JSON. When the source contains comments, the writer warns immediately before removing them; use a direct editor when preserving comments matters.
 
 Warning
 

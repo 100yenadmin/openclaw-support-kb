@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas plugin"
 source: "https://docs.openclaw.ai/plugins/reference/canvas"
-source_hash: "a63926a189890ac1a0c2571f6ffc7d1a8723c80bb7177c0a967dfa53785dd550"
+source_hash: "e1962ec2a037728b56ed6d5a43447396d9bda92322270d086d37efbbef6dc78c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/canvas.md"
@@ -24,6 +24,6 @@ Experimental Canvas control and A2UI rendering surfaces for paired nodes.
 
 ## Surface
 
-contracts: tools; skills
+contracts: `tools`; skills
 
 ---

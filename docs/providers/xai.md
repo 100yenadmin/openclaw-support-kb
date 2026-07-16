@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "e2943ac1355db81fec7ae7d8b2e335fc3e70d05f9f1c59c758586483bbb2a00e"
+source_hash: "79e0c41dfe96e7e78b2e2b258bd20ac0f3b9afabca449de6f45ccde7edde5ae0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -142,27 +142,27 @@ The bundled plugin maps supported xAI APIs onto OpenClaw's shared provider and
 tool contracts. Capabilities that do not fit the shared contract are listed
 below or under known limits.
 
-| xAI capability             | OpenClaw surface                        | Status                                                        |
-| -------------------------- | --------------------------------------- | ------------------------------------------------------------- |
-| Chat / Responses           | `xai/<model>` model provider            | Yes                                                           |
-| Server-side web search     | `web_search` provider `grok`            | Yes                                                           |
-| Server-side X search       | `x_search` tool                         | Yes                                                           |
-| Server-side code execution | `code_execution` tool                   | Yes                                                           |
-| Images                     | `image_generate`                        | Yes                                                           |
-| Videos                     | `video_generate`                        | Classic full workflow; Video 1.5 image-to-video               |
-| Batch text-to-speech       | `messages.tts.provider: "xai"` / `tts`  | Yes                                                           |
-| Streaming TTS              | -                                       | Not implemented by the xAI provider yet                       |
-| Batch speech-to-text       | `tools.media.audio` media understanding | Yes                                                           |
-| Streaming speech-to-text   | Voice Call `streaming.provider: "xai"`  | Yes                                                           |
-| Realtime voice             | -                                       | Not exposed yet; needs a different session/WebSocket contract |
-| Files / batches            | Generic model API compatibility only    | Not a first-class OpenClaw tool                               |
+| xAI capability             | OpenClaw surface                        | Status                                               |
+| -------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| Chat / Responses           | `xai/<model>` model provider            | Yes                                                  |
+| Server-side web search     | `web_search` provider `grok`            | Yes                                                  |
+| Server-side X search       | `x_search` tool                         | Yes                                                  |
+| Server-side code execution | `code_execution` tool                   | Yes                                                  |
+| Images                     | `image_generate`                        | Yes                                                  |
+| Videos                     | `video_generate`                        | Yes                                                  |
+| Batch text-to-speech       | `messages.tts.provider: "xai"` / `tts`  | Yes                                                  |
+| Streaming TTS              | `textToSpeechStream`                    | Yes via `wss://api.x.ai/v1/tts` (not realtime voice) |
+| Batch speech-to-text       | `tools.media.audio` media understanding | Yes                                                  |
+| Streaming speech-to-text   | Voice Call `streaming.provider: "xai"`  | Yes                                                  |
+| Realtime voice             | Talk `talk.realtime.provider: "xai"`    | Yes; gateway-relay for native Talk nodes             |
+| Files / batches            | Generic model API compatibility only    | Not a first-class OpenClaw tool                      |
 
 Note
 
 OpenClaw uses xAI's REST image/video/TTS/STT APIs for media generation and
 batch transcription, xAI's streaming STT WebSocket for live voice-call
-transcription, and the Responses API for chat, search, and code-execution
-tools.
+transcription, xAI's Grok Voice Agent WebSocket for Talk realtime sessions,
+and the Responses API for chat, search, and code-execution tools.
 
 ### Legacy fast-mode compatibility
 
@@ -376,9 +376,18 @@ Text-to-speech
 
 Note
 
-    OpenClaw uses xAI's batch `/v1/tts` endpoint and authenticated
-    `/v1/tts/voices` catalog. xAI also offers streaming TTS over WebSocket, but
-    the bundled xAI provider does not implement that streaming hook yet.
+    OpenClaw uses xAI's batch `/v1/tts` endpoint for buffered synthesis,
+    authenticated `/v1/tts/voices` catalog discovery, and native
+    `wss://api.x.ai/v1/tts` for streaming synthesis. Streaming is restricted to
+    the native `api.x.ai` host, so custom `baseUrl` values are rejected on this
+    path. It uses the existing language, voice, codec, and speed controls; xAI
+    defaults apply to sample rate and bit rate. Audio-file synthesis honors all
+    configured codecs. Voice-note targets use MP3 for streaming and buffered
+    fallback because xAI's raw codecs do not carry codec/rate metadata. The
+    stream sends `text.delta` then
+    `text.done`, receives `audio.delta`, `audio.done`, or `error`, and applies an
+    idle `timeoutMs` that refreshes for every audio chunk. It is separate from
+    realtime voice sessions. See xAI's [Streaming TTS API](https://docs.x.ai/developers/rest-api-reference/inference/voice) contract.
 
 
 
@@ -477,6 +486,75 @@ Note
 
 
 
+Realtime voice (Talk)
+
+    The bundled `xai` plugin registers Grok Voice Agent realtime sessions for
+    Talk mode through the shared `registerRealtimeVoiceProvider` contract.
+
+    - Endpoint: `wss://api.x.ai/v1/realtime?model=<voice-model>`
+    - Default model: `grok-voice-latest`
+    - Default voice: `eve`
+    - Transport: `gateway-relay` (iOS, Android, and Control UI relay paths)
+    - Audio: PCM16 24 kHz or G.711 µ-law 8 kHz
+    - Barge-in: xAI server VAD interrupts the response; OpenClaw clears queued playback
+      and truncates unplayed provider history
+
+    Configure Talk on the Gateway:
+
+    ```json5
+    {
+      talk: {
+        realtime: {
+          provider: "xai",
+          mode: "realtime",
+          transport: "gateway-relay",
+          brain: "agent-consult",
+          providers: {
+            xai: {
+              model: "grok-voice-latest",
+              voice: "eve",
+              // Opt in only if provider-side session replay is acceptable.
+              sessionResumption: false,
+            },
+          },
+        },
+      },
+      env: { XAI_API_KEY: "xai-..." },
+    }
+    ```
+
+    Provider-owned config also resolves from
+    `plugins.entries.voice-call.config.realtime.providers.xai` when Voice Call
+    or shared realtime selectors reuse the same provider map. Supported keys are
+    `apiKey`, `baseUrl`, `model`, `voice`, `vadThreshold`, `silenceDurationMs`,
+    `prefixPaddingMs`, `reasoningEffort`, and `sessionResumption`.
+    `reasoningEffort` accepts only `high` or `none`, matching the xAI Voice Agent API.
+
+    xAI's server VAD always creates responses and handles audio interruption.
+    Use `consultRouting: "provider-direct"`; forced transcript routing and disabling
+    input-audio interruption are not supported by the xAI Voice Agent protocol.
+
+
+Note
+
+    xAI OAuth or `XAI_API_KEY` can authenticate realtime voice. Browser-owned
+    WebRTC is not part of this provider surface yet; use gateway-relay Talk on
+    native nodes or the Control UI relay path.
+
+
+
+Note
+
+    `sessionResumption` defaults to `false`. When set to `true`, OpenClaw asks
+    xAI to retain enough session state to resume the same conversation after a
+    reconnect and then reconnects with the returned conversation id. Leave it
+    disabled when provider-side replay/retention is not acceptable; interrupted
+    sockets then fail closed instead of silently starting a fresh conversation.
+
+
+
+
+
 x_search configuration
 
     The bundled xAI plugin exposes `x_search` as an OpenClaw tool for
@@ -568,10 +646,10 @@ Known limits
       the client-side or custom tools used by OpenClaw's shared agent loop.
       See the
       [xAI multi-agent limitations](https://docs.x.ai/developers/model-capabilities/text/multi-agent#limitations).
-    - xAI Realtime voice is not registered as an OpenClaw provider yet. It
-      needs a different bidirectional voice session contract than batch STT
-      or streaming transcription.
-    - xAI image `quality`, image `mask`, and the native `auto` aspect ratio are
+    - xAI Realtime voice currently exposes gateway-relay Talk transport only.
+      Browser-owned provider WebSocket sessions are not wired in the Control UI
+      yet.
+    - xAI image `quality`, image `mask`, and extra native-only aspect ratios are
       not exposed until the shared `image_generate` tool has corresponding
       cross-provider controls.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nostr plugin"
 source: "https://docs.openclaw.ai/plugins/reference/nostr"
-source_hash: "9529ef14cb76ce311f782acd8e0963bc25191961862d5c14469cc1c750fdab79"
+source_hash: "76d57a2f6b20eae9cc81aefe5f3291c788bc9a7459a0f3097b51e3cdc0cc08ae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/nostr.md"
@@ -24,7 +24,7 @@ OpenClaw Nostr channel plugin for NIP-04 encrypted direct messages.
 
 ## Surface
 
-channels: nostr
+channels: `nostr`
 
 ## Related docs
 

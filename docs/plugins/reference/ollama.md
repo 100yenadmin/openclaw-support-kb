@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama plugin"
 source: "https://docs.openclaw.ai/plugins/reference/ollama"
-source_hash: "5e63a2c2c02c66832ec0e12f25bb399e546c58120f30bbe8eecabb0261f575d1"
+source_hash: "30e7c99a67b5f7d1d1ae5d402155b269fc94265aa2293d893be815f386cdc902"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/ollama.md"
@@ -24,7 +24,7 @@ Adds Ollama, Ollama Cloud model provider support to OpenClaw.
 
 ## Surface
 
-providers: ollama, ollama-cloud; contracts: memoryEmbeddingProviders, tools, webSearchProviders
+providers: `ollama`, `ollama-cloud`; contracts: `memoryEmbeddingProviders`, `tools`, `webSearchProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawRouter"
 source: "https://docs.openclaw.ai/providers/clawrouter"
-source_hash: "a68d7ca9adcf72b2b2cb99e328a6385aab9166c8ff085daeeeaaa73eecb12bac"
+source_hash: "93e51913990721fe4f063ff1e4f37a960c7fdc18b0bfa1de8db4557f107c64dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/clawrouter.md"
@@ -231,8 +231,11 @@ transport to use, so you never install every upstream company's auth plugin.
 | `llm.stream` + streaming `google.generate_content` route | `google-generative-ai` |
 
 The plugin also applies the matching replay and tool-schema policies for those
-families (OpenAI/DeepSeek/Gemini tool-schema compat; native Anthropic and
-Google Gemini replay policies). A catalog provider exposing only an
+families (OpenAI/DeepSeek/Gemini/Perplexity tool-schema compat; native
+Anthropic and Google Gemini replay policies). Perplexity models get a strict
+schema rewrite: `patternProperties` and `additionalProperties` are removed and
+every object schema declares `properties`, because Perplexity rejects tool
+schemas without them. A catalog provider exposing only an
 unsupported request format is intentionally not advertised as an OpenClaw
 text model. Normalize those providers to one of the supported contracts in
 ClawRouter rather than sending an incompatible payload.

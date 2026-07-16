@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "b6a3e8c427deacb73228e38ab5f6774b60fb32c16ceba583e436aa77d1580e8c"
+source_hash: "e67d5a04a7e145e57703518f5b6c13528df3089930190fd73341103c70526287"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -303,7 +303,7 @@ plugin policies, before-tool-call hooks, and two-phase plugin approvals via
 the gateway (`plugin.approval.request`) all run through the exact same code
 path as native PI attempts.
 
-The SDK Tool returned by `convertOpenClawToolToSdkTool` is marked with:
+Each SDK tool returned by the Copilot tool bridge is marked with:
 
 - `overridesBuiltInTool: true` — replaces the Copilot CLI's built-in tool of
   the same name (edit, read, write, bash, ...) so every tool call routes back

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare AI Gateway plugin"
 source: "https://docs.openclaw.ai/plugins/reference/cloudflare-ai-gateway"
-source_hash: "19a46d1abed7d21b577634c61933818b3b55fef530308c4b145f25bd80281f04"
+source_hash: "a60b292fa3017ba2ca91ffa63dc99b47c83e2a339a47a4594742ee0d3d4210e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/cloudflare-ai-gateway.md"
@@ -24,7 +24,7 @@ Adds Cloudflare AI Gateway model provider support to OpenClaw.
 
 ## Surface
 
-providers: cloudflare-ai-gateway
+providers: `cloudflare-ai-gateway`
 
 ## Related docs
 

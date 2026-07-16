@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser plugin"
 source: "https://docs.openclaw.ai/plugins/reference/browser"
-source_hash: "e77e7348d05a380cd8390e65db219e08c27511cb0c0d8fa0748c3e421d47d409"
+source_hash: "6f560da219ea3ab4f05b2356dd242d13c869b6f53c2911177e9eeacff8fe409a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/browser.md"
@@ -24,7 +24,7 @@ Adds agent-callable tools.
 
 ## Surface
 
-contracts: tools; skills
+contracts: `tools`; skills
 
 ## Related docs
 

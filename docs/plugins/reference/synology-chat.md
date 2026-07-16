@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synology Chat plugin"
 source: "https://docs.openclaw.ai/plugins/reference/synology-chat"
-source_hash: "806f1666ca921750fb262381b7ad0d9580dd0ab27f8d993f72ef20da66ace7bb"
+source_hash: "0c5aecae45f705a33bdb605d28660cffdfa143d24230ecc71fd463ac30ad0259"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/synology-chat.md"
@@ -24,7 +24,7 @@ Synology Chat channel plugin for OpenClaw channels and direct messages.
 
 ## Surface
 
-channels: synology-chat
+channels: `synology-chat`
 
 ## Related docs
 

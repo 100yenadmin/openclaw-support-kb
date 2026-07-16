@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepSeek plugin"
 source: "https://docs.openclaw.ai/plugins/reference/deepseek"
-source_hash: "33c0d430b8ae94278eaac7a2c203271eb9f54765ef335967ed6ca69736b7a137"
+source_hash: "313117ebeba6733a9cf9729d323b9f963ae3a0749983b137c8575f6e4230b583"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/deepseek.md"
@@ -24,7 +24,7 @@ Adds DeepSeek model provider support to OpenClaw.
 
 ## Surface
 
-providers: deepseek; contracts: usageProviders
+providers: `deepseek`; contracts: `usageProviders`
 
 ## Related docs
 

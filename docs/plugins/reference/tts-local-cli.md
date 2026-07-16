@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TTS Local CLI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tts-local-cli"
-source_hash: "0cb8427234ec16b25d55c5fdfb388aa83b33021b07c7864bb9052f473254c047"
+source_hash: "d7f5e015c86eef584133b0c198fd7f47364e0edc82346784c10550a664df742e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tts-local-cli.md"
@@ -24,6 +24,6 @@ Adds text-to-speech provider support.
 
 ## Surface
 
-contracts: speechProviders
+contracts: `speechProviders`
 
 ---

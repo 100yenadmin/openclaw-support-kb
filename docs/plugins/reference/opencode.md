@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode plugin"
 source: "https://docs.openclaw.ai/plugins/reference/opencode"
-source_hash: "55b5a4644427dc643baec2c6265706871ed477349f7c58c399071edea0352b8a"
+source_hash: "b3f0a4cb4d2f3a1999f6fe2868e9d93b702168f1c9517fb9121969aa0bfddb73"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/opencode.md"
@@ -24,7 +24,23 @@ Adds OpenCode model provider support to OpenClaw.
 
 ## Surface
 
-providers: opencode; contracts: mediaUnderstandingProviders
+providers: `opencode`; contracts: `mediaUnderstandingProviders`
+
+<!-- openclaw-plugin-reference:manual-start -->
+
+## Native sessions
+
+OpenClaw auto-detects the `opencode` CLI on the Gateway and paired nodes. Stored
+sessions then appear in the **OpenCode** sessions-sidebar group, with read-only
+transcript browsing through the official `opencode --pure db ... --format json`
+and `opencode --pure export` commands. The restricted environment and `--pure`
+mode prevent catalog browsing from loading project plugins or inheriting unrelated
+Gateway credentials.
+
+Turn **OpenCode Session Catalog** off under **Config > Plugins > OpenCode** to
+disable discovery. It is enabled by default.
+
+<!-- openclaw-plugin-reference:manual-end -->
 
 ## Related docs
 

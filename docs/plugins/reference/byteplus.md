@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BytePlus plugin"
 source: "https://docs.openclaw.ai/plugins/reference/byteplus"
-source_hash: "aae00be8215133ad2084aea44785a4c18327133e8b1ec8e2794f4fa1998d7b32"
+source_hash: "85296d790419aedec779d50be12a0862e89004b9cbb53ae770dd738e3a7af779"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/byteplus.md"
@@ -24,6 +24,6 @@ Adds BytePlus, BytePlus Plan model provider support to OpenClaw.
 
 ## Surface
 
-providers: byteplus, byteplus-plan; contracts: videoGenerationProviders
+providers: `byteplus`, `byteplus-plan`; contracts: `videoGenerationProviders`
 
 ---

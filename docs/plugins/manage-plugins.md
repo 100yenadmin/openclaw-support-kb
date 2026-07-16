@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "cdc5803b73240f655b6eae3bdd70c46bbcb8ea4a38e79252b4ed1f9df6a412d1"
+source_hash: "b681eb559b00cedb0ca657b1b022c1534d9c20c7c424574bf482de6775b8ff79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -49,7 +49,10 @@ removed, only disabled.
 Catalog and search access require `operator.read`. Install, enable, disable,
 remove, and MCP server changes require `operator.admin`. A ClawHub install is
 performed by the Gateway and preserves its trust, integrity, and plugin-install
-policy checks.
+policy checks. Enabling an installed plugin as an administrator also records
+that explicit trust by adding the selected plugin to an existing restrictive
+`plugins.allow` list. An explicit `plugins.deny` entry remains authoritative and
+must be removed before enabling the plugin.
 
 Installing or removing plugin code requires a Gateway restart. Enablement
 changes can be applied without a restart when the installed plugin and current
@@ -126,12 +129,17 @@ openclaw plugins install --link ./my-plugin
 Bare package specs install from npm during the launch cutover, unless the
 name matches a bundled or official plugin id, in which case OpenClaw uses
 that local/official copy instead. Use `clawhub:`, `npm:`, `git:`, or
-`npm-pack:` for deterministic source selection.
+`npm-pack:` for deterministic source selection. OpenClaw's bundled and official
+catalog packages are trusted alongside ClawHub packages. New arbitrary npm,
+git, local path/archive, `npm-pack:`, or marketplace sources require
+`--force` in noninteractive installs after you review
+and trust the source.
 
-Use `--force` only to overwrite an existing install target from a different
-source. For routine upgrades of a tracked npm, ClawHub, or hook-pack install,
-use `openclaw plugins update` instead; `--force` is not supported with
-`--link`.
+`--force` confirms a non-ClawHub source without prompting and overwrites an
+existing install target when needed. For routine upgrades of a tracked npm,
+ClawHub, or hook-pack install, use `openclaw plugins update` instead. With
+`--link`, `--force` only confirms the source; the linked directory is not
+copied or overwritten.
 
 ## Restart and inspect
 

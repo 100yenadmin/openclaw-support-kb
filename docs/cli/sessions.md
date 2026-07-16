@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "521c23845e0898d8ea1e171ae0e4753a86788f911a5a37fe22dd3d2a71db199e"
+source_hash: "b4898ac2028bc5633825496f9bad9062035be61523da3d5eda67a7d2b7398d93"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sessions.md"
@@ -138,7 +138,7 @@ openclaw sessions cleanup --json
 
 - Scope note: `openclaw sessions cleanup` maintains session stores,
   transcripts, trajectory rows, and legacy trajectory sidecars. It does not
-  prune cron run history, which is managed by `cron.runLog.keepLines`
+  prune cron run history, which automatically keeps the newest 2000 rows per job
   ([Cron configuration](/automation/cron-jobs#configuration)).
 - Cleanup also prunes unreferenced legacy/archive transcript artifacts,
   compaction checkpoints, and trajectory sidecars older than

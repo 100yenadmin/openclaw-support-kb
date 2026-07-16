@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "8175d7633a522d706d6fc03abf1316298ecb7d2235382abfe0d7738c5955caa1"
+source_hash: "4867e1426723f5c9bca5dea6cfd3fb446d31d99beb479b2ac1d78257063e8ef5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
@@ -338,6 +338,25 @@ register(api) {
   api.registerService(/* ... */);
 }
 ```
+
+Long-lived services may emit small invalidation or lifecycle events through
+their service context:
+
+```typescript
+api.registerService({
+  id: "index-events",
+  start(ctx) {
+    ctx.gatewayEvents?.emit("changed", { revision: 1 }, { scope: "operator.read" });
+  },
+});
+```
+
+OpenClaw namespaces this as `plugin.<plugin-id>.changed`. Event names are one
+lowercase segment, payloads must be bounded JSON, and the scope must be
+`operator.read`, `operator.write`, or `operator.admin`. The emitter exists only
+for the service lifetime and is revoked after stop or failed start. Prefer
+version or invalidation payloads over full records so authorized clients reread
+canonical state through the plugin's scoped Gateway methods.
 
 Discovery mode builds a non-activating registry snapshot. It may still
 evaluate the plugin entry and the channel plugin object so OpenClaw can

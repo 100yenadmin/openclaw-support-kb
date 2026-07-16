@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium plugin"
 source: "https://docs.openclaw.ai/plugins/reference/gradium"
-source_hash: "772c38c3cf2a5d9e8df7ac601e983321d79f168cfca60b12d9b6aadb18140843"
+source_hash: "ac9f0730c3fc04ea64c00bf7bd7e811ae3194f4890fc5b1854b3c841be525a36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/gradium.md"
@@ -24,7 +24,7 @@ Adds text-to-speech provider support.
 
 ## Surface
 
-contracts: speechProviders
+contracts: `speechProviders`
 
 ## Related docs
 

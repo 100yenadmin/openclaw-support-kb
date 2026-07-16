@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Venice plugin"
 source: "https://docs.openclaw.ai/plugins/reference/venice"
-source_hash: "a625e9fe175b26788dc468bce23ad406596504b48d10b668ccab450e1b2a152f"
+source_hash: "1e10e0dc1ee7ac9811e55f9b210de8e2927faf77a13b4cfe5316d85357cc1b53"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/venice.md"
@@ -24,7 +24,7 @@ Adds Venice model provider support to OpenClaw.
 
 ## Surface
 
-providers: venice; contracts: usageProviders
+providers: `venice`; contracts: `usageProviders`
 
 ## Related docs
 

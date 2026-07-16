@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot Proxy plugin"
 source: "https://docs.openclaw.ai/plugins/reference/copilot-proxy"
-source_hash: "78a4342f8d257bfa93c6bf9170d4e6d3d95796f9f33aab1ae05ea69f1ce8d82f"
+source_hash: "b7e1ad1a4f407c57686c9afebbe29a03800d6a748daf9a44d8045f3d771247ff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/copilot-proxy.md"
@@ -24,6 +24,6 @@ Adds Copilot Proxy model provider support to OpenClaw.
 
 ## Surface
 
-providers: copilot-proxy
+providers: `copilot-proxy`
 
 ---

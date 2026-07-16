@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra plugin"
 source: "https://docs.openclaw.ai/plugins/reference/deepinfra"
-source_hash: "a2f6673fd0bdaab5b40205c1e003decce23f811fae40893bfc2140d8e61d9754"
+source_hash: "354e752dc0ae618e836c4fbd14e00a264f45971c4dd8c02d012aa90736bf32c3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/deepinfra.md"
@@ -24,7 +24,7 @@ Adds DeepInfra model provider support to OpenClaw.
 
 ## Surface
 
-providers: deepinfra; contracts: imageGenerationProviders, mediaUnderstandingProviders, memoryEmbeddingProviders, speechProviders, videoGenerationProviders
+providers: `deepinfra`; contracts: `imageGenerationProviders`, `mediaUnderstandingProviders`, `memoryEmbeddingProviders`, `speechProviders`, `videoGenerationProviders`
 
 ## Related docs
 

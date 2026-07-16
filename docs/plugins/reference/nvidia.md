@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA plugin"
 source: "https://docs.openclaw.ai/plugins/reference/nvidia"
-source_hash: "143878e2a3aba40775900f4fd48f1ce82091f14385a942313d4a18c481cf897e"
+source_hash: "137a3c8d2467c980e550c3b34c719d982bc60b3e041dbe58468d91cd1961c25d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/nvidia.md"
@@ -24,7 +24,7 @@ Adds NVIDIA model provider support to OpenClaw.
 
 ## Surface
 
-providers: nvidia
+providers: `nvidia`
 
 ## Related docs
 

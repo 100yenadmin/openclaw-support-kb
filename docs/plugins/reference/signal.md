@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal plugin"
 source: "https://docs.openclaw.ai/plugins/reference/signal"
-source_hash: "e0af89bb4f33f1fa0ec3f9325afc5ed8530e0fced96e164a44b881307e6baae6"
+source_hash: "c5bcbdc878a6eba21c798f544fce092281debf11f467825009aaec4605b18a20"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/signal.md"
@@ -24,10 +24,10 @@ Adds the Signal channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: signal
+channels: `signal`
 
 ## Related docs
 
-- [signal](/channels/signal)
+- [Signal](/channels/signal)
 
 ---

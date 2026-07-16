@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qwen"
-source_hash: "808160c1b9ea8651af25219458c037dc8d63ca66eef52e3e6f495f9b075b41c4"
+source_hash: "8a088f951ebbd2c5c6ebf33178641021a23dab9e869f3d1fc62f71e2f238e575"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qwen.md"
@@ -24,7 +24,7 @@ Adds Qwen, Qwen Cloud, Model Studio, DashScope, Qwen Oauth, Qwen Portal, Qwen CL
 
 ## Surface
 
-providers: qwen, qwencloud, modelstudio, dashscope, qwen-oauth, qwen-portal, qwen-cli, qwen-token-plan, bailian-token-plan; contracts: mediaUnderstandingProviders, videoGenerationProviders
+providers: `qwen`, `qwencloud`, `modelstudio`, `dashscope`, `qwen-oauth`, `qwen-portal`, `qwen-cli`, `qwen-token-plan`, `bailian-token-plan`; contracts: `mediaUnderstandingProviders`, `videoGenerationProviders`
 
 ## Related docs
 

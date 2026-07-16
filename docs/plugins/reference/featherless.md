@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Featherless plugin"
 source: "https://docs.openclaw.ai/plugins/reference/featherless"
-source_hash: "d14d9c2cc3e979a305ae7d14863447d9810527a5bd58beb7ac4da0e0e39868df"
+source_hash: "54200b45101d34514b5086a1a9035b6c45b774cb21714f0cfd1f8561a40103bd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/featherless.md"
@@ -24,7 +24,7 @@ OpenClaw Featherless AI provider plugin.
 
 ## Surface
 
-providers: featherless
+providers: `featherless`
 
 ## Related docs
 

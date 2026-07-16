@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech plugin"
 source: "https://docs.openclaw.ai/plugins/reference/azure-speech"
-source_hash: "991ae12eaed9ce275f832fb39693765a435585132ea8d91a054cd8bbc2f68812"
+source_hash: "933ddb2347ba2ea4e5462aee3c5f1ab56c3566d854ab7acf02cbfb7aedf88e75"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/azure-speech.md"
@@ -24,7 +24,7 @@ Azure AI Speech text-to-speech (MP3, native Ogg/Opus voice notes, PCM telephony)
 
 ## Surface
 
-contracts: speechProviders
+contracts: `speechProviders`
 
 ## Related docs
 

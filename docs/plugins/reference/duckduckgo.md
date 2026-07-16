@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DuckDuckGo plugin"
 source: "https://docs.openclaw.ai/plugins/reference/duckduckgo"
-source_hash: "b461689b8e6ce3aefd82c0d59894032eb64b6c36945de12bcea4172555b2b3f6"
+source_hash: "ba380464c4dcf4749b447b98ca9bd6f2f67b32017e36b2cfb9ac0a617714d8cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/duckduckgo.md"
@@ -24,7 +24,7 @@ Adds web search provider support.
 
 ## Surface
 
-contracts: webSearchProviders
+contracts: `webSearchProviders`
 
 ## Related docs
 

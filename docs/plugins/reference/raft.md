@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raft plugin"
 source: "https://docs.openclaw.ai/plugins/reference/raft"
-source_hash: "aa5f453ac6eaba5ff6e8f6949fc90cef243d7f386fb57206b2133bd939dfb54b"
+source_hash: "cef9a1a87007ce88bb4c51730f90928eebb3e85b2661d8e397d1f0db20947e50"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/raft.md"
@@ -24,10 +24,10 @@ OpenClaw Raft channel plugin for secure CLI wake bridges.
 
 ## Surface
 
-channels: raft
+channels: `raft`
 
 ## Related docs
 
-- [raft](/channels/raft)
+- [Raft](/channels/raft)
 
 ---

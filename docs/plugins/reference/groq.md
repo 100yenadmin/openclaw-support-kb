@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq plugin"
 source: "https://docs.openclaw.ai/plugins/reference/groq"
-source_hash: "c591105b563740a4a9ad026abc0c610b51de264099348df6724bd03b9ad9be19"
+source_hash: "bf53c5c16a7e1790998512eedf7f4c045e0ff32e7707a52571ba59b711f0027f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/groq.md"
@@ -24,7 +24,7 @@ Adds Groq model provider support to OpenClaw.
 
 ## Surface
 
-providers: groq; contracts: mediaUnderstandingProviders
+providers: `groq`; contracts: `mediaUnderstandingProviders`
 
 ## Related docs
 

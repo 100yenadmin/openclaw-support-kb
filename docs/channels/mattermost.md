@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "59dec9fa7ec2867be58b18d54885b14c483b50f685c8eb16991133c13f27b1c0"
+source_hash: "e2f593e3c743723bf8b1d16eb7c4c7039aedc9c99ed913edb1cb32b04ad6e747"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
@@ -464,7 +464,7 @@ Config and reachability
 
 ### Direct API integration (external scripts)
 
-External scripts and webhooks can post buttons directly via the Mattermost REST API instead of going through the agent's `message` tool. Use `buildButtonAttachments()` from the plugin when possible; if posting raw JSON, follow these rules:
+External scripts and webhooks can post buttons directly via the Mattermost REST API instead of going through the agent's `message` tool. Prefer OpenClaw's `message` tool. For direct integrations, import `buildButtonAttachments` from `@openclaw/mattermost/api.js`; if posting raw JSON, follow these rules:
 
 **Payload structure:**
 

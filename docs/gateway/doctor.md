@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "d9999f15adb50fbf394d41b237eaacff2c600ac6ec5c036406db0bbd81069ec4"
+source_hash: "136a7be7b7154302685dcc1586d6ae39789633203132677d7b03944e6e1cab33"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -170,7 +170,7 @@ Health, UI, and updates
     - Optional pre-flight update for git installs (interactive only).
     - UI protocol freshness check (rebuilds Control UI when the protocol schema is newer).
     - Health check + restart prompt.
-    - Skills status summary (eligible/missing/blocked) and plugin status.
+    - Problem-only skill and plugin notes; healthy inventory stays in `openclaw skills check` and `openclaw plugins list`.
 
 
 
@@ -550,7 +550,7 @@ Note
 
 9. Security warnings
 
-    Doctor emits warnings when a provider is open to DMs without an allowlist, or when a policy is configured in a dangerous way.
+    Doctor emits a Security note only when it finds a warning, such as a provider open to DMs without an allowlist or a dangerously configured policy. Use `openclaw security audit` for the full security inventory.
 
 
 10. systemd linger (Linux)
@@ -560,13 +560,14 @@ Note
 
 11. Workspace status (skills, plugins, and TaskFlows)
 
-    Doctor prints a summary of the workspace state for the default agent:
+    Doctor prints problems and actions for the default agent, not healthy-state inventory:
 
-    - **Skills status**: counts eligible, missing-requirements, and allowlist-blocked skills.
-    - **Plugin status**: counts enabled/disabled/errored plugins; lists plugin IDs for any errors; reports bundle plugin capabilities.
+    - **Skills**: lists allowed but unusable skill names; use `openclaw skills check` for requirement details and full counts.
+    - **Plugins**: reports only errored plugin IDs; use `openclaw plugins list` for loaded, imported, disabled, and bundle-plugin inventory.
     - **Plugin compatibility warnings**: flags plugins that have compatibility issues with the current runtime.
     - **Plugin diagnostics**: surfaces any load-time warnings or errors emitted by the plugin registry.
     - **TaskFlow recovery**: surfaces suspicious managed TaskFlows that need manual inspection or cancellation.
+    - **Claude CLI**: reports only binary, authentication, profile, workspace, or project-directory problems; healthy probe details are omitted.
 
 
 

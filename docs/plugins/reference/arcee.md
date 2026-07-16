@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee plugin"
 source: "https://docs.openclaw.ai/plugins/reference/arcee"
-source_hash: "664d8c8571038520db9639b9e5b6d88b8c3c1bd37ef1e6493363372749053bc1"
+source_hash: "89de7871ce75f837cbdc4850adfbe8b96ed6d8ec78dc0ee63229ee4e6795d85c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/arcee.md"
@@ -24,7 +24,7 @@ Adds Arcee model provider support to OpenClaw.
 
 ## Surface
 
-providers: arcee
+providers: `arcee`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "4bf654b9f26f9baed266977ad452775c701e56fbf1e2b107cb76abc5940ba93d"
+source_hash: "9093062d5123250698aaab4937496a9b0b085784394a5ef9993476505c6cd8aa"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -420,9 +420,11 @@ Required Paperclip runtime skills (heartbeat, etc.) remain server-enforced and
 are added on top of whatever the desired set names.
 
 Company skill mutations (`skills install`, `skills import`, `skills create`, and
-`skills scan-projects`) require board authentication, an explicit `skills:create`
-grant, or an agent whose permissions keep `canCreateSkills` enabled. They do not
-require `agents:create` unless the command also creates agents.
+`skills scan-projects`) are open to same-company actors by default. Missing
+`skills:create` grants and `canCreateSkills` settings do not deny these commands;
+only an explicit company skill policy restriction does. Core safety and company
+boundary checks still apply, and `agents:create` remains required when a command
+also creates agents.
 
 ### Catalog (app-shipped skills)
 

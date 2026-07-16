@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Lancedb plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-lancedb"
-source_hash: "292542fb7c3d6355ec9a89f7fddaf03a85d9b4809ca1109792759dd4d2a32c90"
+source_hash: "32d3925201e315ce0288ae330c35e03166a90948eee44b1125089c853a5df5d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-lancedb.md"
@@ -24,7 +24,7 @@ OpenClaw LanceDB-backed long-term memory plugin with auto-recall, auto-capture, 
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tlon plugin"
 source: "https://docs.openclaw.ai/plugins/reference/tlon"
-source_hash: "d112847daca88348daa034b54ba758f4f8deb47af61b6c6564a3b47ea060a950"
+source_hash: "492a5a26fcd5f3d58d809b5f563a0da91aa1508a723c9082315cb95ad388a55c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/tlon.md"
@@ -24,7 +24,7 @@ OpenClaw Tlon/Urbit channel plugin for chat workflows.
 
 ## Surface
 
-channels: tlon; skills
+channels: `tlon`; skills
 
 ## Related docs
 

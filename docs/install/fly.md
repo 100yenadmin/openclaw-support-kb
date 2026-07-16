@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "83b9a7e65801ecbed9bdf9f356b073b30103cc3ea0b95dc9175ac04062ce3d2c"
+source_hash: "25b69a54bef60ff52e416cfd7a4a2c4fdd24c78096c02d0d59b63db8f4fb7abb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -294,7 +294,13 @@ fly machine update <machine-id> --vm-memory 2048 -y
 
 Gateway refuses to start with "already running" errors after a container restart.
 
-The single-instance lock file lives at `<tmpdir>/openclaw-<uid>/gateway.<hash>.lock` (Linux: `/tmp/openclaw-<uid>/gateway.<hash>.lock`), not on the persistent `/data` volume, so a full container restart normally clears it along with the rest of the container filesystem. If the lock survives (for example a `fly machine restart` that preserves the container filesystem) and blocks startup, remove it manually:
+The runtime lock files live at `<tmpdir>/openclaw-<uid>/gateway.<hash>.lock`
+and `gateway.state.<hash>.lock` (Linux:
+`/tmp/openclaw-<uid>/gateway.*.lock`), not on the persistent `/data` volume, so
+a full container restart normally clears them along with the rest of the
+container filesystem. If a lock survives (for example a `fly machine restart`
+that preserves the container filesystem) and blocks startup, remove it
+manually:
 
 ```bash
 fly ssh console --command "rm -f /tmp/openclaw-*/gateway.*.lock"

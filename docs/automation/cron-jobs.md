@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "825cfd18d5265977038d37276d1cfe800b77cc49baa05a8e9a6247938022f0f8"
+source_hash: "088727bf6248a4d840faf6882778871c1f552bb63e0bc89c3af2677e899b5681"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/cron-jobs.md"
@@ -606,7 +606,6 @@ Use the latest-generation, best-tier model available from your provider for untr
     },
     webhookToken: "replace-with-dedicated-webhook-token",
     sessionRetention: "24h",
-    runLog: { maxBytes: "2mb", keepLines: 2000 },
   },
 }
 ```
@@ -632,7 +631,7 @@ Retry behavior
 
 Maintenance
 
-    `cron.sessionRetention` (default `24h`, `false` disables) prunes isolated run-session entries. `cron.runLog.keepLines` limits retained SQLite run-history rows per job; `maxBytes` is retained for config compatibility with older file-backed run logs.
+    `cron.sessionRetention` (default `24h`, `false` disables) prunes isolated run-session entries. Run history keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
 
 
 Legacy store migration

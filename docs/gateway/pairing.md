@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "2d1206bbd727a6d1d3e9cc1342628055bcafb994c652dd4d65c026023c00e04f"
+source_hash: "5180becd240e19bf9495c18560793ee74ba061ec69c5f2075148ef47b5429e2b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/pairing.md"
@@ -95,9 +95,10 @@ Notes:
 - `node.pair.approve` uses the pending request's declared commands to enforce
   extra approval scopes:
   - commandless request: `operator.pairing`
-  - non-exec command request: `operator.pairing` + `operator.write`
-  - `system.run` / `system.run.prepare` / `system.which` request:
-    `operator.pairing` + `operator.admin`
+  - ordinary command request: `operator.pairing` + `operator.write`
+  - admin-sensitive request containing `system.run`, `system.run.prepare`,
+    `system.which`, `browser.proxy`, `fs.listDir`, or
+    `system.execApprovals.get/set`: `operator.pairing` + `operator.admin`
 
 Warning
 

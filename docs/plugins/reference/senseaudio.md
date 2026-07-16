@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Senseaudio plugin"
 source: "https://docs.openclaw.ai/plugins/reference/senseaudio"
-source_hash: "eb8db598af87512af4528965e02d3751c76fd53d2cdab1e4799235edb512d5fe"
+source_hash: "56a523ab06b4e05617d959cc5f12e1a7a1605d325928535600e00995548eeb05"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/senseaudio.md"
@@ -24,7 +24,7 @@ Adds media understanding provider support.
 
 ## Surface
 
-contracts: mediaUnderstandingProviders
+contracts: `mediaUnderstandingProviders`
 
 ## Related docs
 

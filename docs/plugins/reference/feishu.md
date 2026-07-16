@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu plugin"
 source: "https://docs.openclaw.ai/plugins/reference/feishu"
-source_hash: "cbbd5e7c296f3cd33bbdc7c1dbc47d69645f6ee7b9bec17c953adc5d9928fa2c"
+source_hash: "a70c0b8be027fc8dd62c39b04a83b734b753bb24f1ce238c124b1a4c70b5dc25"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/feishu.md"
@@ -24,7 +24,7 @@ OpenClaw Feishu/Lark channel plugin for chats and workplace tools (community mai
 
 ## Surface
 
-channels: feishu; contracts: tools; skills
+channels: `feishu`; contracts: `tools`; skills
 
 ## Related docs
 

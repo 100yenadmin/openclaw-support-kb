@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SearXNG plugin"
 source: "https://docs.openclaw.ai/plugins/reference/searxng"
-source_hash: "d4e8189fbe98cb8a08e15e0bd3270adbb2effc89bca04ebe0bf3e3a3b11e3b51"
+source_hash: "5b2275127aa3fa60ae277c55beae3c2b0fc5eaf21dcb3e0115a7d4079a4178d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/searxng.md"
@@ -24,6 +24,6 @@ Adds web search provider support.
 
 ## Surface
 
-contracts: webSearchProviders
+contracts: `webSearchProviders`
 
 ---

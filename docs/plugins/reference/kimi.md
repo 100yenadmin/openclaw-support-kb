@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kimi plugin"
 source: "https://docs.openclaw.ai/plugins/reference/kimi"
-source_hash: "71e053ad4a2546f66884174b03d83fa280e135301aeed3296c377f46ebcd5438"
+source_hash: "d1214d6b3a34cb0ff15ce0cec64eb1a07f5dc283a69ad9d572130cdc04e5b546"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/kimi.md"
@@ -24,7 +24,7 @@ Adds Kimi, Kimi Coding model provider support to OpenClaw.
 
 ## Surface
 
-providers: kimi, kimi-coding
+providers: `kimi`, `kimi-coding`
 
 ## Related docs
 

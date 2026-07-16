@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nextcloud Talk plugin"
 source: "https://docs.openclaw.ai/plugins/reference/nextcloud-talk"
-source_hash: "55ae31f8408ee57f652a7798719085e513560432f61fb41cdd398425b5d9be95"
+source_hash: "02a73043ef65c04595efed984ea239e998443d5f279cfcc5ee995be2790a39ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/nextcloud-talk.md"
@@ -24,7 +24,7 @@ OpenClaw Nextcloud Talk channel plugin for conversations.
 
 ## Surface
 
-channels: nextcloud-talk
+channels: `nextcloud-talk`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go plugin"
 source: "https://docs.openclaw.ai/plugins/reference/opencode-go"
-source_hash: "3e8838295b1f1514ded23a734d89e496f0cfc9c643661a1e1bbca34cfdcad64f"
+source_hash: "9d1cdd1d226d4ca755003e6430b9be9149641c417ea88f474ffdedfeb7734479"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/opencode-go.md"
@@ -24,7 +24,7 @@ Adds OpenCode Go model provider support to OpenClaw.
 
 ## Surface
 
-providers: opencode-go; contracts: mediaUnderstandingProviders
+providers: `opencode-go`; contracts: `mediaUnderstandingProviders`
 
 ## Related docs
 

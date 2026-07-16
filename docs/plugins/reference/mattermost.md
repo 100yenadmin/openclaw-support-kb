@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost plugin"
 source: "https://docs.openclaw.ai/plugins/reference/mattermost"
-source_hash: "7286d9c42ddee21cf9871da07e23fcd5a4991cc4fc8e08fc7f6221e73b4d018a"
+source_hash: "9e820e2a813adf6e63814f5e5b4d23cf5c4fe2be1a9b37cbd9b399040c473ccc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/mattermost.md"
@@ -24,7 +24,7 @@ Adds the Mattermost channel surface for sending and receiving OpenClaw messages.
 
 ## Surface
 
-channels: mattermost
+channels: `mattermost`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web Readability plugin"
 source: "https://docs.openclaw.ai/plugins/reference/web-readability"
-source_hash: "1c7509dfd554d703b177192b8c8fdeb44a8a70270fd3f7f7e423543f5bd989f4"
+source_hash: "a73492e5fb16d4114f336b035fe8a9a8c4453ae91a30e40d19609d6e3e5f8fd3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/web-readability.md"
@@ -24,6 +24,6 @@ Extract readable article content from local HTML web fetch responses.
 
 ## Surface
 
-contracts: webContentExtractors
+contracts: `webContentExtractors`
 
 ---

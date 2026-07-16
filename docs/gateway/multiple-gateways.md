@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multiple gateways"
 source: "https://docs.openclaw.ai/gateway/multiple-gateways"
-source_hash: "263f23c2885b240bc9ce95d42b358cf195b91dd1e07ee7f258e48742010d958d"
+source_hash: "1b3c086f44c1cf67c01c828d399c6e1274f3f02819c82bc7c24acc877796414b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/multiple-gateways.md"
@@ -98,7 +98,9 @@ Keep these unique per Gateway instance:
 | `gateway.port` (or `--port`) | Unique per instance                  |
 | Derived browser/CDP ports    | See below                            |
 
-Sharing any of these causes config races and port conflicts.
+Sharing any of these causes config, state, or port conflicts. Gateway startup
+enforces unique state-directory ownership even when
+`OPENCLAW_ALLOW_MULTI_GATEWAY=1` skips the per-config singleton.
 
 ## Port mapping (derived)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ComfyUI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/comfy"
-source_hash: "ee3a96cab016075d879baa72674850d25bb591946faaa4526d5d844c8cf1e432"
+source_hash: "d5daaf704ef68b2eaf009392a1b3fc642445aa7642412d6ad6d50753d5624789"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/comfy.md"
@@ -24,7 +24,7 @@ Adds ComfyUI model provider support to OpenClaw.
 
 ## Surface
 
-providers: comfy; contracts: imageGenerationProviders, musicGenerationProviders, videoGenerationProviders
+providers: `comfy`; contracts: `imageGenerationProviders`, `musicGenerationProviders`, `videoGenerationProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "29ed4e4f1cdca8a4d809955ffc764f3ba6277d269c589ae8c4c16a3d0bc9d8d1"
+source_hash: "969c2781185916a0a618cb4675bd6905edb2f873641763e69122b8734ab1739f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -636,7 +636,7 @@ Available actions
 
 Message IDs
 
-    Inbound iMessage context includes both short `MessageSid` values and full message GUIDs (`MessageSidFull`) when available. Short IDs are scoped to the recent SQLite-backed reply cache and are checked against the current chat before use. If a short ID has expired or belongs to another chat, retry with the full `MessageSidFull`.
+    Inbound iMessage context includes both short `MessageSid` values and full message GUIDs (`MessageSidFull`) when available. Short IDs are scoped to the recent SQLite-backed reply cache and are checked against the current chat before use. If a short ID expires, retry with its `MessageSidFull` while targeting the conversation that supplied it. Full IDs do not bypass conversation or account binding, so replace an ID from another chat with one from the current target. Remote delegated calls can reject stale full IDs when current-conversation evidence is unavailable.
 
 
 

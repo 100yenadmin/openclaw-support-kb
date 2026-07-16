@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workspaces plugin"
 source: "https://docs.openclaw.ai/plugins/reference/workspaces"
-source_hash: "354c0a8b4db1540f26033890b33c3cf42e3549301884e13b8bc7247d2390f5cd"
+source_hash: "246a0c5f823e5ca48100dcbb81274b6457429178276eca7620bc61153cc94324"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/workspaces.md"
@@ -24,6 +24,6 @@ Agent-composable Workspaces document and control-plane backend.
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ---

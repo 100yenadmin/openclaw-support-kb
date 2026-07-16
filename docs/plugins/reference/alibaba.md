@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Alibaba plugin"
 source: "https://docs.openclaw.ai/plugins/reference/alibaba"
-source_hash: "d115fafdad498e926809c3f81fe5ae21ee32a93d05705a3148dada2e2a04d81d"
+source_hash: "059f8935e2a81d242174bbe59f21c3c65a2ed63487cd97876b81a7dfc26c3e9d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/alibaba.md"
@@ -24,7 +24,7 @@ Adds video generation provider support.
 
 ## Surface
 
-contracts: videoGenerationProviders
+contracts: `videoGenerationProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Novita plugin"
 source: "https://docs.openclaw.ai/plugins/reference/novita"
-source_hash: "b2167c10a758fe8ca4e1a2be952cc9531da10416de58c598c39fd11ddfe09f02"
+source_hash: "c8e5f8ceb2e4a1924ba4cdd0ccd3eb2476656f2230f1883fed4017485e7c471a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/novita.md"
@@ -24,7 +24,7 @@ Adds Novita, Novita AI, Novitaai model provider support to OpenClaw.
 
 ## Surface
 
-providers: novita, novita-ai, novitaai
+providers: `novita`, `novita-ai`, `novitaai`
 
 ## Related docs
 

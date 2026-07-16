@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Core plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-core"
-source_hash: "4f96d5d7f0845b7fd610f57c9f1f8c85f27b88132df9900fff9a994d88eced4a"
+source_hash: "9619309c5fbb503d3613e682ed1a78781eeed31dcc1a7dd5bed08fca13e960ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-core.md"
@@ -24,6 +24,6 @@ Adds agent-callable tools.
 
 ## Surface
 
-contracts: tools
+contracts: `tools`
 
 ---

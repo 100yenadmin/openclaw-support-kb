@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "StepFun plugin"
 source: "https://docs.openclaw.ai/plugins/reference/stepfun"
-source_hash: "69aff21f6ecb5f2025530aaa88f05b3359d1367674dd35173471eb274ff42fb0"
+source_hash: "767787f3f22b9cc9e029cb38c7d0bef083ca448b8bd99e1c3f85cea7cfad2acb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/stepfun.md"
@@ -24,7 +24,7 @@ Adds StepFun, StepFun Plan model provider support to OpenClaw.
 
 ## Surface
 
-providers: stepfun, stepfun-plan
+providers: `stepfun`, `stepfun-plan`
 
 ## Related docs
 

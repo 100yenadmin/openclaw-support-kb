@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gmi plugin"
 source: "https://docs.openclaw.ai/plugins/reference/gmi"
-source_hash: "23395e469bf09bcf27d20857b32f8e74918a5733401363ea4dc5ea313d097e3c"
+source_hash: "83869f97382d89dfc80d43640fae1b93bcec0cafa9e0fc2c569a024f2dacbf14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/gmi.md"
@@ -24,7 +24,7 @@ OpenClaw GMI Cloud provider plugin.
 
 ## Surface
 
-providers: gmi, gmi-cloud, gmicloud
+providers: `gmi`, `gmi-cloud`, `gmicloud`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Firecrawl plugin"
 source: "https://docs.openclaw.ai/plugins/reference/firecrawl"
-source_hash: "ab190479f2a39776b0460954c3235a401d59e2359c2315fce12c309ba4eff56c"
+source_hash: "7bfb366828629de464a01a3651d7d8769ddc3c00e1db422219851263bd2588de"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/firecrawl.md"
@@ -24,7 +24,7 @@ Adds agent-callable tools. Adds web fetch provider support. Adds web search prov
 
 ## Surface
 
-contracts: tools, webFetchProviders, webSearchProviders
+contracts: `tools`, `webFetchProviders`, `webSearchProviders`
 
 ## Related docs
 

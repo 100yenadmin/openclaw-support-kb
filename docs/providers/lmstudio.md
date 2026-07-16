@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "026bb9a66e6a7bbc6c6f9f1606fd7ed0069b65921caece9958e2def462508568"
+source_hash: "c88598c13f0b60a6e806a193351ba6c81bf5bd59cd1a874ae58ccb1425ff20d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/lmstudio.md"
@@ -58,6 +58,12 @@ Run onboarding
     ```
 
     Choose `LM Studio`, then pick a model at the `Default model` prompt.
+
+    On a fresh guided setup, OpenClaw first queries `/api/v1/models` on the
+    default or configured LM Studio host. An existing LLM is offered through the
+    same CLI/macOS setup ladder and verified with a real completion before its
+    configuration is saved. The automatic check never downloads a model and
+    ignores embedding-only catalog entries.
 
 
 

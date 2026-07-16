@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together plugin"
 source: "https://docs.openclaw.ai/plugins/reference/together"
-source_hash: "5ff9963b4bfca089e93a3f18c1c37946645b330e5a2de33c8bab48dced95424d"
+source_hash: "34af3419d098ef9c8097f9f784307b59d8a4a74386ed917c0cd39953f3f4df0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/together.md"
@@ -24,7 +24,7 @@ Adds Together model provider support to OpenClaw.
 
 ## Surface
 
-providers: together; contracts: videoGenerationProviders
+providers: `together`; contracts: `videoGenerationProviders`
 
 ## Related docs
 

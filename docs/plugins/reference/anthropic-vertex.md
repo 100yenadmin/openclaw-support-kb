@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic Vertex plugin"
 source: "https://docs.openclaw.ai/plugins/reference/anthropic-vertex"
-source_hash: "1d76471dc7b71e4eb4f13bd5c728acbf0ad5c90a29f694ec04d1c165e4992ab7"
+source_hash: "6f4a2b524a1022a8e4b05c78cca9a8c2a5069fb4943d9892a66d71e42832de0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/anthropic-vertex.md"
@@ -24,7 +24,7 @@ OpenClaw Anthropic Vertex provider plugin for Claude models on Google Vertex AI.
 
 ## Surface
 
-providers: anthropic-vertex
+providers: `anthropic-vertex`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "0d6d2ef4d6bb27a8150563207f612cb6d698876d05a978549cd323ea41d3fe14"
+source_hash: "623e20310395b9ff3645076f6975e2f54058f12f0584b71ed2956c90de826627"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -23,7 +23,7 @@ The Google provider formats Composio tools for [Gemini](https://ai.google.dev/) 
 
 ### Gemini
 
-The Google Generative AI provider transforms Composio tools into Gemini function declarations. Gemini is non-agentic, so the model returns function calls and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
+In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed callables, and the `google-genai` SDK's Automatic Function Calling executes tool calls inside the chat loop for you. In TypeScript, the Google provider transforms Composio tools into Gemini function declarations, and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
 
 **Install**
 
@@ -45,11 +45,11 @@ GOOGLE_API_KEY=xxxxxxxxx
 
 ```python
 from composio import Composio
-from composio_google import GoogleProvider
+from composio_gemini import GeminiProvider
 from google import genai
 from google.genai import types
 
-composio = Composio(provider=GoogleProvider())
+composio = Composio(provider=GeminiProvider())
 client = genai.Client()
 
 # Create a session for your user
@@ -58,16 +58,11 @@ tools = session.tools()
 
 config = types.GenerateContentConfig(tools=tools)
 chat = client.chats.create(model="gemini-3-pro-preview", config=config)
-response = chat.send_message("Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'")
 
-# Agentic loop: keep executing tool calls until the model responds with text
-while response.function_calls:
-    parts = []
-    for fc in response.function_calls:
-        result = composio.provider.execute_tool_call(user_id="user_123", function_call=fc)
-        parts.append(types.Part.from_function_response(name=fc.name, response=result))
-    response = chat.send_message(parts)
-
+# Automatic Function Calling executes tool calls inside the chat loop
+response = chat.send_message(
+    "Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'"
+)
 print(response.text)
 ```
 **TypeScript:**

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA Lab plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qa-lab"
-source_hash: "ca55d721cc089ea1099e7853845e217ef5b89e1426e16942638878199141387b"
+source_hash: "d6e89569eecad0d5665f7d4c5067053091e3eef9998359d50827af565da915b8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qa-lab.md"
@@ -24,6 +24,6 @@ OpenClaw QA lab plugin with private debugger UI and scenario runner.
 
 ## Surface
 
-contracts: webSearchProviders, workerProviders
+contracts: `tools`, `webSearchProviders`, `workerProviders`
 
 ---
