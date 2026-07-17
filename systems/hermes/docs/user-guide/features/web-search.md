@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/web-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search"
-source_hash: "de90f3da247d318762b96a7dc614d0bb109d7e560c42f08bdd3be38194ea8e18"
+source_hash: "35ec01a9bc61e72f7a64ef03fc46e94539f4d85ef3966eca60b0c38d866f557d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-search.md"
@@ -37,7 +37,7 @@ Both are configured through a single backend selection. Providers are chosen via
 | **Tavily** | `TAVILY_API_KEY` | ✔ | ✔ | 1 000 searches/mo |
 | **Exa** | `EXA_API_KEY` | ✔ | ✔ | 1 000 searches/mo |
 | **Parallel** | `PARALLEL_API_KEY` | ✔ | ✔ | Paid |
-| **xAI (Grok)** | `XAI_API_KEY` or `hermes auth login xai-oauth` | ✔ | — | Paid (SuperGrok or per-token) |
+| **xAI (Grok)** | `XAI_API_KEY` or `hermes auth add xai-oauth` | ✔ | — | Paid (SuperGrok or per-token) |
 
 Brave Search, DDGS, and xAI are **search-only** — pair any of them with Firecrawl/Tavily/Exa/Parallel when you also need `web_extract`. DDGS uses the [`ddgs` Python package](https://pypi.org/project/ddgs/) under the hood; if it isn't already installed, run `pip install ddgs` (or let Hermes lazy-install it on first use). xAI runs Grok's server-side `web_search` tool on the Responses API — results are LLM-generated rather than index-backed, so titles, descriptions, and URL choice are all model output (see the [trust-model caveat](#xai-grok) below).
 
@@ -316,7 +316,7 @@ XAI_API_KEY=sk-xai-your-key-here
 or for SuperGrok subscribers:
 
 ```bash
-hermes auth login xai-oauth
+hermes auth add xai-oauth
 ```
 
 Then select xAI as the search backend:

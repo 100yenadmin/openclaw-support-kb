@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Tools Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/tools-reference"
-source_hash: "b7fd696e4fe83e8e6262272d553de8a9f8c072bc3cce943d9808b17ceee8e361"
+source_hash: "066c1e1b8a75e91500096a262ed0fec6f71ee0f3db9d90e113cc9a76f7a6705f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/tools-reference.md"
@@ -255,7 +255,7 @@ Registered on the `hermes-discord` platform toolset. Moderation actions require 
 
 ## `spotify` toolset
 
-Registered by the bundled `spotify` plugin. Requires an OAuth token — run `hermes spotify setup` once to authorize.
+Registered by the bundled `spotify` plugin. Requires an OAuth token — run `hermes auth spotify` once to authorize.
 
 | Tool | Description | Requires environment |
 |------|-------------|----------------------|

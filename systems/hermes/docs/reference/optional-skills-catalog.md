@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Optional Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog"
-source_hash: "c866d4157af2e65bea0398cd510ad754b971656b1645f7c30f3e502e798207f3"
+source_hash: "7a57a76a7b2b04d76479d8a78d2724e7811388054d1290936a73f170e9809e98"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/optional-skills-catalog.md"
@@ -77,6 +77,7 @@ hermes skills uninstall <skill-name>
 | [**kanban-video-orchestrator**](/docs/user-guide/skills/optional/creative/creative-kanban-video-orchestrator) | Plan, set up, and monitor a multi-agent video production pipeline backed by Hermes Kanban. Use when the user wants to make ANY video — narrative film, product/marketing, music video, explainer, ASCII/terminal art, abstract/generative loo... |
 | [**meme-generation**](/docs/user-guide/skills/optional/creative/creative-meme-generation) | Generate real meme images by picking a template and overlaying text with Pillow. Produces actual .png meme files. |
 | [**pixel-art**](/docs/user-guide/skills/optional/creative/creative-pixel-art) | Pixel art w/ era palettes (NES, Game Boy, PICO-8). |
+| [**unreal-mcp**](/docs/user-guide/skills/optional/creative/creative-unreal-mcp) | Use when the user wants to do anything in Unreal Engine through Epic's official editor-embedded MCP server (catalog entry: unreal-engine) — build/light/populate scenes, place and transform actors, author Blueprints, animate with Sequence... |
 
 ## devops
 

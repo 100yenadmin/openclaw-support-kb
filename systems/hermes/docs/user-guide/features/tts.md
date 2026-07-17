@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice & TTS"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tts"
-source_hash: "20477b4c71bdc283c867132ec5c9ca2eb4ba7b4c953c5c8ff7245d3d14dedf5b"
+source_hash: "a5a3dea83bebfe25f1541ca6980edd197ba5229800ee0fb6cc813d386982c929"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tts.md"
@@ -70,7 +70,7 @@ tts:
     base_url: "https://api.openai.com/v1"  # Override for OpenAI-compatible TTS endpoints
     speed: 1.0                  # 0.25 - 4.0
   minimax:
-    model: "speech-2.8-hd"     # speech-2.8-hd (default), speech-2.8-turbo
+    model: "speech-02-hd"     # speech-02-hd (default), speech-02-turbo
     voice_id: "English_Graceful_Lady"  # See https://platform.minimax.io/faq/system-voice-id
     speed: 1                    # 0.5 - 2.0
     vol: 1                      # 0 - 10

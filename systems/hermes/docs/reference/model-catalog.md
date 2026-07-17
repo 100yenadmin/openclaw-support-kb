@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/model-catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/model-catalog"
-source_hash: "2080c568d5a4c74bbcaada5df95c7f40c19186f684298ae43b8329505620042e"
+source_hash: "64249433510acc9f5bdaa4a4c9f10ef78ea26cbf160dac2abb8245c88335381a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/model-catalog.md"
@@ -43,7 +43,7 @@ Published on every merge to `main` via the existing `deploy-site.yml` GitHub Pag
       "metadata": {},
       "models": [
         {"id": "z-ai/glm-5.2",         "description": "default", "default": true},
-        {"id": "moonshotai/kimi-k2.6", "description": "recommended", "metadata": {}},
+        {"id": "moonshotai/kimi-k3",   "description": "recommended", "metadata": {}},
         {"id": "openai/gpt-5.4",       "description": ""}
       ]
     },
@@ -52,7 +52,7 @@ Published on every merge to `main` via the existing `deploy-site.yml` GitHub Pag
       "models": [
         {"id": "z-ai/glm-5.2", "default": true},
         {"id": "anthropic/claude-opus-4.7"},
-        {"id": "moonshotai/kimi-k2.6"}
+        {"id": "moonshotai/kimi-k3"}
       ]
     }
   }

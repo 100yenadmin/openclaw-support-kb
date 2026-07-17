@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "72d26b54afd5ea96d0c7fb7d2f5e2cdb5d4f7aeb9113fc054b70cd1af4de1e53"
+source_hash: "20cfcf0faf6f66c582aa4dd4ef4f137106eaf1471b765f66a0f934f60fd0c18e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -131,7 +131,7 @@ Mid-session model switching works on every surface — it's the `/model` slash c
 - **CLI / TUI:** `/model claude-sonnet-4` or `/model openrouter:anthropic/claude-sonnet-4.6`
 - **TUI gateway RPC:** `command.dispatch` with `{"command": "/model claude-sonnet-4"}`
 - **ACP:** the IDE sends the slash command as a prompt; the agent dispatches it
-- **API server:** include a `model` field in the request body or set `X-Hermes-Model`
+- **API server:** include a `model` field in the request body
 
 Provider-aware resolution (the same model name picks the right format for whatever provider you're on) is built in. See `hermes_cli/model_switch.py`.
 

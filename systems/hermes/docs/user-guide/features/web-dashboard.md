@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "b6c2cd093876716db7d021865eec2feae3be583cd5cf63fbc1eb2e624bdadba6"
+source_hash: "a995089e7c77cb1408db30dc6f12c141f3b208be8e9dad6f52ba2c53c5d26265"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -1103,7 +1103,7 @@ When you run `hermes update`, the web frontend is automatically rebuilt if `npm`
 
 ## Themes & plugins
 
-The dashboard ships with six built-in themes and can be extended with user-defined themes, plugin tabs, and backend API routes — all drop-in, no repo clone needed.
+The dashboard ships with eight built-in themes and can be extended with user-defined themes, plugin tabs, and backend API routes — all drop-in, no repo clone needed.
 
 **Switch themes live** from the header bar — click the palette icon next to the language switcher. Selection persists to `config.yaml` under `dashboard.theme` and is restored on page load.
 
@@ -1115,6 +1115,7 @@ Built-in themes:
 |-------|-----------|
 | **Hermes Teal** (`default`) | Dark teal + cream, system fonts, comfortable spacing |
 | **Hermes Teal (Large)** (`default-large`) | Same as default with 18px text and roomier spacing |
+| **Nous Blue** (`nous-blue`) | Nous-branded blue accents with airy spacing |
 | **Midnight** (`midnight`) | Deep blue-violet, Inter + JetBrains Mono |
 | **Ember** (`ember`) | Warm crimson + bronze, Spectral serif + IBM Plex Mono |
 | **Mono** (`mono`) | Grayscale, IBM Plex, compact |

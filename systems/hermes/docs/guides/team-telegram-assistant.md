@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tutorial: Team Telegram Assistant"
 source: "https://hermes-agent.nousresearch.com/docs/guides/team-telegram-assistant"
-source_hash: "d1306507cc184049b98c152b38e2c5e6153c2d312f6a4cbd451cfdabead75081"
+source_hash: "ddbed171a6418f9082b8696ab50069e9514ba9b33d50579779437802a74842ef"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/team-telegram-assistant.md"
@@ -387,7 +387,7 @@ On a shared team bot, use Docker as the terminal backend so agent commands run i
 
 ```bash
 # In ~/.hermes/.env
-TERMINAL_BACKEND=docker
+TERMINAL_ENV=docker
 TERMINAL_DOCKER_IMAGE=nikolaik/python-nodejs:python3.11-nodejs20
 ```
 

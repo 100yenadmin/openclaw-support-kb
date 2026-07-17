@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/codex-app-server-runtime.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "6e6bb96b80a24bb255d91ed096caaf26615fe6269ff4ae7f087bf9d7de929007"
+source_hash: "b54ff95d8ace74d435c56804dba81f4d7d7218eda8af39caa12a3422ff9f1265"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -157,7 +157,7 @@ The kanban tools are gated by `HERMES_KANBAN_TASK` env var the dispatcher sets �
    ```bash
    codex login                  # writes tokens to ~/.codex/auth.json
    ```
-   Hermes' own `hermes auth login codex` writes to `~/.hermes/auth.json` — that's a separate session. **Run `codex login` separately** if you haven't.
+   Hermes' own `hermes auth add openai-codex` writes to `~/.hermes/auth.json` — that's a separate session. **Run `codex login` separately** if you haven't.
 
 3. **(Optional) Install the Codex plugins you want.** When you enable the runtime, Hermes auto-migrates whichever curated plugins you've already installed via Codex CLI:
    ```bash
@@ -404,7 +404,7 @@ This runtime is **opt-in beta**. Working as of Hermes Agent 2026.5 + Codex CLI 0
 
 Known limitations:
 
-- **Hermes auth and codex auth are separate sessions.** You need both `codex login` AND `hermes auth login codex` for the cleanest UX (the runtime uses codex's session for the LLM call). This is a deliberate design choice in Hermes' `_import_codex_cli_tokens` — Hermes won't share OAuth state with codex CLI to avoid clobbering each other on token refresh.
+- **Hermes auth and codex auth are separate sessions.** You need both `codex login` AND `hermes auth add openai-codex` for the cleanest UX (the runtime uses codex's session for the LLM call). This is a deliberate design choice in Hermes' `_import_codex_cli_tokens` — Hermes won't share OAuth state with codex CLI to avoid clobbering each other on token refresh.
 - **`delegate_task`, `memory`, `session_search`, `todo` are unavailable on this runtime.** They need the running AIAgent context which a stateless MCP callback can't provide. Use `/codex-runtime auto` when you need these.
 - **No inline patch preview in approval prompts when codex doesn't track the changeset.** Codex's `fileChange` approval params don't always carry the changeset. Hermes caches the data from the corresponding `item/started` notification when possible, but if approval arrives before the item has streamed, the prompt falls back to whatever `reason` codex provides.
 - **Sub-second cancellation isn't guaranteed.** Mid-stream interrupts (Ctrl+C while codex is responding) are sent via `turn/interrupt`, but if codex has already flushed the final message, you get the response anyway.

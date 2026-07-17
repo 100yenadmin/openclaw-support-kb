@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tips & Best Practices"
 source: "https://hermes-agent.nousresearch.com/docs/guides/tips"
-source_hash: "41a7549cb2b8311a0a368c1c251eb2e284e7781eacddeb80c4b9b71435dcfe22"
+source_hash: "7414f4ef70208337292ff1d84cb6d55a4214b74856005cb1cd2c66c6a3bdd4df"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/tips.md"
@@ -194,11 +194,11 @@ By default, messaging sessions never auto-reset — context lives until you `/re
 
 ### Use Docker for Untrusted Code
 
-When working with untrusted repositories or running unfamiliar code, use Docker or Daytona as your terminal backend. Set `TERMINAL_BACKEND=docker` in your `.env`. Destructive commands inside a container can't harm your host system.
+When working with untrusted repositories or running unfamiliar code, use Docker or Daytona as your terminal backend. Set `TERMINAL_ENV=docker` in your `.env`. Destructive commands inside a container can't harm your host system.
 
 ```bash
 # In your .env:
-TERMINAL_BACKEND=docker
+TERMINAL_ENV=docker
 TERMINAL_DOCKER_IMAGE=hermes-sandbox:latest
 ```
 

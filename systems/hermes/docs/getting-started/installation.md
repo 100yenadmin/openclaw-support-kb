@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "9a38a128447f6b68f330673a4e2f24be370e29fd191a4d69a96d8ac62156a01f"
+source_hash: "5e41cbcc3c796cbca82f35e76aadbd13af2d4f1060402aec2b19955ff1663282"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -81,6 +81,7 @@ hermes model          # Choose your LLM provider and model
 hermes tools          # Configure which tools are enabled
 hermes gateway setup  # Set up messaging platforms
 hermes config set     # Set individual config values
+hermes config get     # Inspect individual config values
 hermes setup          # Or run the full setup wizard to configure everything at once
 ```
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Cron Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/guides/cron-troubleshooting"
-source_hash: "369857ce11ef2372435922c90c2052c1405235e3241b795ac1f22507c545f34d"
+source_hash: "70fbb0231a0fb2129865facc8c92491ba3105c66feff3b3babdf794dc279280b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/cron-troubleshooting.md"
@@ -124,7 +124,7 @@ Skills must be installed before they can be attached to cron jobs. If a skill is
 
 ### Check 2: Check skill name vs. skill folder name
 
-Skill names are case-sensitive and must match the installed skill's folder name. If your job specifies `ai-funding-daily-report` but the skill folder is `ai-funding-daily-report`, confirm the exact name from `hermes skills list`.
+Skill names are case-sensitive and must match the installed skill's folder name. If your job specifies `ai-funding-report` but the skill folder is `ai-funding-daily-report`, confirm the exact name from `hermes skills list`.
 
 ### Check 3: Skills that require interactive tools
 

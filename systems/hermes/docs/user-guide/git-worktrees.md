@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Git Worktrees"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/git-worktrees"
-source_hash: "a56ad65ce3b3d301bccf55ed06f214601e845f501d7076627050bdb5163a1a74"
+source_hash: "9284033c78286c1928b3a646e1a44abfd6f7dda13f9d378c78b71b07ba0ae882"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/git-worktrees.md"
@@ -183,5 +183,9 @@ This combination gives you:
 - Strong guarantees that different agents and experiments do not step on each other.
 - Fast iteration cycles with easy recovery from bad edits.
 - Clean, reviewable pull requests.
+
+## Developing the UI surfaces across worktrees
+
+The TypeScript surfaces (`ui-tui/`, `apps/desktop/`) each need a `node_modules`, which a fresh `npm ci` per worktree duplicates across every branch. If you hack on the TUI or desktop app from multiple worktrees, see [TUI & Desktop from Worktrees](../developer-guide/worktree-ui-dev.md) for the `htui` / `hgui` helpers that share one install by symlink.
 
 ---

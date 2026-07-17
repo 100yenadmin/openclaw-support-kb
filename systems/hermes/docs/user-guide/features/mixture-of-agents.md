@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Mixture of Agents"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mixture-of-agents"
-source_hash: "4da3738139d09eed9a82448f0a82566540b71f0effe714ff86418bac731cbd65"
+source_hash: "93d3d274238f0de00d7acc2793613f3a6c9c1ea331390b33474b789a6fcb2fd2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mixture-of-agents.md"
@@ -151,7 +151,7 @@ Reference and aggregator slots may also set `reasoning_effort`. Use this when
 you want the same model to contribute at different depths, or when the
 aggregator should think harder than the advisory references. Valid values match
 Hermes' normal reasoning controls: `none`, `minimal`, `low`, `medium`, `high`,
-`xhigh`, and `max`.
+`xhigh`, `max`, and `ultra`.
 
 ```yaml
 moa:

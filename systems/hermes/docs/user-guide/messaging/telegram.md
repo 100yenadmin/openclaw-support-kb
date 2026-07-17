@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Telegram"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
-source_hash: "de1a1796dda60e36696d6c6edcdf0731e14b065a62ef294761de165cd151a810"
+source_hash: "83bf465ad9f12aed1e2bd03bf0ad42802709f94b46034c9c2b8eba6467fe73e8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/telegram.md"
@@ -253,7 +253,7 @@ The gateway extracts `MEDIA:/path/to/file` tags from agent replies and ships the
 | **Archives** | `zip`, `rar`, `7z`, `tar`, `gz`, `bz2` |
 | **Books / packages** | `epub`, `apk`, `ipa` |
 
-Anything on this list delivered as a native attachment on platforms that support it (Telegram, Discord, Signal, Slack, WhatsApp, Feishu, Matrix, etc.); on platforms without native support it falls back to a link or plain-text indicator. The **bold** categories were added in the last few releases — if you were relying on the model saying `here is the file: /path/to/report.docx` instead, swap to `MEDIA:/path/to/report.docx` for native delivery.
+Anything on this list is delivered as a native attachment on platforms that support it (Telegram, Discord, Signal, Slack, WhatsApp, Feishu, Matrix, etc.); on platforms without native support it falls back to a link or plain-text indicator. The **bold** categories were added in the last few releases — if you were relying on the model saying `here is the file: /path/to/report.docx` instead, swap to `MEDIA:/path/to/report.docx` for native delivery.
 
 ## Webhook Mode
 

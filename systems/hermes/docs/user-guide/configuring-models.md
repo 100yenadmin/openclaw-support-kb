@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "2c5c877f9f5611ebe88485d05fccd747a4aca121312f1f54d6ac7fe38e4de4f4"
+source_hash: "f7a4c0555762b85a5f090704b467ab8af7599d5360ed6cba4a9c19cee6f3fedf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -245,9 +245,9 @@ Then `/model fav` or `/model grok` in chat. User aliases shadow built-in short n
 hermes model            # Interactive provider + model picker (the canonical way to switch defaults)
 ```
 
-`hermes model` walks you through picking a provider, authenticating (OAuth flows open a browser; API-key providers prompt for the key), and then choosing a specific model from that provider's curated catalog. The choice is written to `model.provider` and `model.model` in `~/.hermes/config.yaml`.
+`hermes model` walks you through picking a provider, authenticating (OAuth flows open a browser; API-key providers prompt for the key), and then choosing a specific model from that provider's curated catalog. The choice is written to `model.provider` and `model.default` in `~/.hermes/config.yaml`.
 
-To list providers/models without launching the picker, use the dashboard or the REST endpoints below. To inspect what the CLI will actually use right now: `hermes config show | grep '^model\.'` and `hermes status`.
+To list providers/models without launching the picker, use the dashboard or the REST endpoints below. To inspect what the CLI will actually use right now: `hermes config get model --json` and `hermes status`.
 
 ### Direct config edit
 

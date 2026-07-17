@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AI Providers"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/providers"
-source_hash: "3f5e57d0a9aeaa065e25834cb53b0ac715e8a20c49c2268761d6e4f23daaee41"
+source_hash: "425a3fdc4de2db6f7e6721a37b1c90c9bb4a94b48181c20d1c0a063d089dd0a5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/providers.md"
@@ -95,7 +95,7 @@ Don't have a subscription yet? Get one at [portal.nousresearch.com/manage-subscr
 :::info Codex Note
 The OpenAI Codex provider authenticates via device code (open a URL, enter a code). Hermes stores the resulting credentials in its own auth store under `~/.hermes/auth.json` and can import existing Codex CLI credentials from `~/.codex/auth.json` when present. No Codex CLI installation is required.
 
-If a token refresh fails with a terminal error (HTTP 4xx, `invalid_grant`, revoked grant, etc.), Hermes marks the refresh token as dead and stops replaying it so you don't see a flood of identical auth failures. The next request surfaces a typed re-auth message instead. Run `hermes auth add codex-oauth` (or `hermes model` → OpenAI Codex) to start a fresh device-code login; the quarantine clears on the next successful exchange.
+If a token refresh fails with a terminal error (HTTP 4xx, `invalid_grant`, revoked grant, etc.), Hermes marks the refresh token as dead and stops replaying it so you don't see a flood of identical auth failures. The next request surfaces a typed re-auth message instead. Run `hermes auth add openai-codex` (or `hermes model` → OpenAI Codex) to start a fresh device-code login; the quarantine clears on the next successful exchange.
 :::
 
 :::warning
