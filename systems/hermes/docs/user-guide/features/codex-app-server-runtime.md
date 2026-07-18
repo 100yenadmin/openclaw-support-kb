@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/codex-app-server-runtime.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "b54ff95d8ace74d435c56804dba81f4d7d7218eda8af39caa12a3422ff9f1265"
+source_hash: "d9eaef8266155120fd2138fede57077164e235b2113f57a2e3ca480d54e63733"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -145,6 +145,21 @@ The kanban tools are gated by `HERMES_KANBAN_TASK` env var the dispatcher sets â
 | Kanban orchestrator tools | yes | yes (via callback) |
 | All gateway platforms | yes | yes |
 | Non-OpenAI providers | yes | n/a â€” OpenAI/Codex-scoped |
+
+### Live display
+
+Even though the agent loop runs inside the Codex subprocess, the runtime
+bridges Codex's event stream into the same display path the default runtime
+uses:
+
+- Live assistant deltas, reasoning (including summary deltas), and stable-ID
+  tool start/completion events surface in the TUI, desktop, and messaging
+  gateways as the turn runs. The completion-only history projector remains
+  separate, so a resumed session hydrates the same tool cards shown during
+  the turn.
+- Gateway commentary stays visible when token streaming is disabled, and
+  live tool events are forwarded even for notifications drained ahead of an
+  approval request. Commentary honors `display.show_commentary`.
 
 ## Prerequisites
 

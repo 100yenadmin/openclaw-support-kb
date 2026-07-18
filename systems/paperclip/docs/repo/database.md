@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "fe008d1a14d12d4c8b6c89ebf2b0c7ff3522fcb354eb64b2436bbae3182ebee8"
+source_hash: "a47e12bb28397daf7b024c03312876043983122103590ad2d6f47f5657f4980e"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -184,6 +184,16 @@ Paperclip stores current-user sidebar membership state in:
 These rows are company-scoped and user-scoped. A missing row means the user is joined, so existing users keep seeing projects and agents in the sidebar until they explicitly leave them. Rows only control sidebar visibility; they do not affect project/agent detail access, all-pages, selectors, assignment flows, or existing company permissions.
 
 Both tables use a unique key on `(company_id, user_id, resource_id)` and keep `state` as `joined` or `left`. Join/leave mutations are idempotent board-user `/me` operations and write activity entries when the effective state changes.
+
+## Decision training snapshot retention
+
+`decision_training_examples` stores a point-in-time copy of an issue, its comments, relevant runs, and the selected decision. Each row carries the `scrub_deleted_comments_v1` retention policy marker, and JSONL exports include that marker alongside the snapshot.
+
+- Deleting a captured source comment transactionally replaces that comment in every affected snapshot with a content-free redaction tombstone. The original body, presentation, and metadata are not retained in the training record.
+- Deleting an issue deletes its decision-training examples through the `issue_id` foreign-key cascade.
+- Deleting a training example deletes only that example and does not mutate the source issue.
+
+This policy makes training exports self-describing while keeping the decision record usable after a comment deletion without retaining content the author removed.
 
 ## Plugin database namespaces
 
