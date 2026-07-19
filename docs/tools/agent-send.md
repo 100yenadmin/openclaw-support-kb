@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
-source_hash: "f8b1b2d6e853a4b400759dd4d72623ac1b7a5fb376bfd73eec4a7f23f5defdfb"
+source_hash: "31cb59127962ddb203cba0327e3c0569cc2e7b0e62bc5bb1f48fbc1081d9c5af"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/agent-send.md"
@@ -82,7 +82,7 @@ Deliver the reply to a channel
 | Flag                        | Description                                                          |
 | --------------------------- | -------------------------------------------------------------------- |
 | `--message <text>`          | Inline message to send                                               |
-| `--message-file <path>`     | Read the message from a valid UTF-8 file                             |
+| `--message-file <path>`     | Read the message from a valid UTF-8 file (max 4 MiB)                 |
 | `--to <dest>`               | Derive session key from a target (phone, chat id)                    |
 | `--session-key <key>`       | Use an explicit session key                                          |
 | `--agent <id>`              | Target a configured agent (uses its `main` session)                  |
@@ -104,7 +104,8 @@ Deliver the reply to a channel
 - By default, the CLI goes **through the Gateway**. Add `--local` to force the
   embedded runtime on the current machine.
 - Pass exactly one of `--message` or `--message-file`. File messages preserve
-  multiline content after removing an optional UTF-8 BOM.
+  multiline content after removing an optional UTF-8 BOM. Files larger than
+  4 MiB are rejected before dispatch.
 - If the Gateway request fails, the CLI **falls back** to the local embedded
   run; a Gateway timeout falls back with a fresh session instead of racing the
   original transcript.

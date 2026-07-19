@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "fb0e32e697f2fa1247d9d7ebb23c33aded9c87320d4ed9d0184e19a1c002c7f8"
+source_hash: "a0f24ea23d808f9e0ef559c4d5b8d3cedec42fdfc58e198b013049aa63fd6894"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -204,18 +204,17 @@ How do I configure fast mode for GPT 5.5?
 
 Why do I see "Model ... is not allowed" and then no reply?
 
-    If `agents.defaults.models` is set, it becomes the **allowlist** for
-    `/model` and session overrides. Picking a model outside that list returns
+    If `agents.defaults.modelPolicy.allow` is non-empty, it becomes the
+    **allowlist** for `/model`, session overrides, and `--model`. Picking a model outside that list returns
     this instead of a normal reply:
 
     ```text
-    Model "provider/model" is not allowed. Use /models to list providers, or /models <provider> to list models.
-    Add it with: openclaw config set agents.defaults.models '{"provider/model":{}}' --strict-json --merge
+    Model override "provider/model" is not allowed by agents.defaults.modelPolicy.allow.
     ```
 
-    Fix: add the exact model to `agents.defaults.models`, add a provider
-    wildcard such as `"provider/*": {}` for dynamic catalogs, remove the
-    allowlist, or pick a model from `/model list`. If the command also
+    Fix: add the exact model or a provider wildcard such as `"provider/*"` to
+    the named `modelPolicy.allow` list, remove/empty that list, or pick a model
+    from `/model list`. If the command also
     included `--runtime codex`, update the allowlist first, then retry the
     same `/model provider/model --runtime codex` command.
 

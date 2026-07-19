@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets apply plan contract"
 source: "https://docs.openclaw.ai/gateway/secrets-plan-contract"
-source_hash: "f0e0140809d967a1e37b23e457aea473fae65976898fd8de0798579e84c3042e"
+source_hash: "0351ca6f4974d08ff144325ccc1b7c3d9d5abfffeffd0dfe4179b2fc61d56598"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets-plan-contract.md"
@@ -14,6 +14,12 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/gateway/secrets-plan-contract
 
 This page defines the strict contract enforced by `openclaw secrets apply`. If a target does not match these rules, apply fails before mutating any file.
+
+## Plan file requirements
+
+`openclaw secrets apply --from <plan.json>` accepts regular files up to 16 MiB (16,777,216 bytes). The limit applies to the complete serialized file, including whitespace. Directories, FIFOs, device files, and files larger than the limit are rejected before JSON parsing or target validation.
+
+`openclaw secrets configure --plan-out <plan.json>` enforces the same limit on the UTF-8 serialized output before creating the file. Hand-written plans and external plan generators must also keep the serialized file within this boundary.
 
 ## Plan file shape
 
@@ -127,7 +133,7 @@ No writes are committed for an invalid plan: target resolution and path validati
 ## Runtime and audit scope notes
 
 - Ref-only `auth-profiles.json` entries (`keyRef`/`tokenRef`) are included in runtime credential resolution and audit coverage.
-- `secrets apply` writes supported `openclaw.json` targets, supported `auth-profiles.json` targets, and three optional scrub passes, each on by default: `scrubEnv` (removes migrated plaintext values from `.env`), `scrubAuthProfilesForProviderTargets` (clears plaintext/unused-ref residue in `auth-profiles.json` for providers a plan just migrated), and `scrubLegacyAuthJson` (drops migrated `api_key` entries from legacy `auth.json` stores). Set any of `options.scrubEnv`, `options.scrubAuthProfilesForProviderTargets`, `options.scrubLegacyAuthJson` to `false` in the plan to skip that pass.
+- `secrets apply` writes supported `openclaw.json` targets, supported `auth-profiles.json` targets, and three optional scrub passes, each on by default: `scrubEnv` (removes migrated plaintext values from `.env` files in the effective state and active-config directories), `scrubAuthProfilesForProviderTargets` (clears plaintext/unused-ref residue in `auth-profiles.json` for providers a plan just migrated), and `scrubLegacyAuthJson` (drops migrated `api_key` entries from legacy `auth.json` stores). Set any of `options.scrubEnv`, `options.scrubAuthProfilesForProviderTargets`, `options.scrubLegacyAuthJson` to `false` in the plan to skip that pass.
 
 ## Operator checks
 

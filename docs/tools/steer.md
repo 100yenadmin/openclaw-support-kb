@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steer"
 source: "https://docs.openclaw.ai/tools/steer"
-source_hash: "5c10649ad80d86066c3461cec1fc6e79177b585c45f8e6a1bcd2aad2d54368a5"
+source_hash: "ffce9f2fb8a67a40bdfe387f902dd12ae1d7dbb86cfbded4accfe837545f71d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/steer.md"
@@ -44,6 +44,11 @@ that tries to inject that command's message into the active run at the next
 supported runtime boundary, regardless of the stored `/queue` setting. When
 that injection is not available, the command prefix is stripped and `<message>`
 continues as a normal prompt.
+
+The explicit `/steer` (and `/tell`) command is Gateway-backed. In
+`openclaw chat` or `openclaw tui --local`, select `/queue steer` and send the
+guidance as a normal message; the embedded runtime applies the same steering
+policy without forwarding a Gateway command.
 
 Use:
 

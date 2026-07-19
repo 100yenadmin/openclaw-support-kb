@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Chat"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/google_chat"
-source_hash: "82acce7ca2cdb5bcfa41f39d2aa9c5b2f7a38e40b37175283b58290ff487fea9"
+source_hash: "6c583616fb9c23f78dce7085e00bfcf68399239557f55924b341663a274b62f8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/google_chat.md"
@@ -201,6 +201,23 @@ You should see a log line like:
 Send "hola" in the test DM. The bot posts a "Hermes is thinking…" marker, then
 edits that same message in place with the real response — no "message deleted"
 tombstones.
+
+### Customizing the working-state marker
+
+The marker text is configurable via `typing_status_text` in
+`~/.hermes/config.yaml` — e.g. a kitten assistant named Ada:
+
+```yaml
+platforms:
+  google_chat:
+    # Custom working-state marker text (default: "Hermes is thinking…").
+    typing_status_text: "is pouncing… 🐾"
+```
+
+Unlike Slack's ephemeral status line, this is a **real posted message** that
+gets edited in place with the response — so whatever you set here briefly
+appears in the chat as a normal message. Set `typing_indicator: false` to
+disable the marker entirely.
 
 ---
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
-source_hash: "15411d52ccf07589d5e0490b46ae5833519060bef12a8b75867c6296ffee400a"
+source_hash: "65e768a5b0996e7638d96c2a8673a6dfcf2fa415b0caa00439ee27422f9ac52a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/volcengine.md"
@@ -104,10 +104,6 @@ Coding (volcengine-plan)
     | ------------------------------------------------- | ------------------------ | ----- | ------- |
     | `volcengine-plan/ark-code-latest`                 | Ark Coding Plan          | text  | 256,000 |
     | `volcengine-plan/doubao-seed-code`                | Doubao Seed Code         | text  | 256,000 |
-    | `volcengine-plan/doubao-seed-code-preview-251028` | Doubao Seed Code Preview | text  | 256,000 |
-    | `volcengine-plan/glm-4.7`                         | GLM 4.7 Coding           | text  | 200,000 |
-    | `volcengine-plan/kimi-k2-thinking`                | Kimi K2 Thinking         | text  | 256,000 |
-    | `volcengine-plan/kimi-k2.5`                       | Kimi K2.5 Coding         | text  | 256,000 |
 
 
 Both catalogs are static (no `/models` discovery call) and support OpenAI-compatible streamed usage accounting. Tool schemas for both providers automatically drop `minLength`, `maxLength`, `minItems`, `maxItems`, `minContains`, and `maxContains` keywords, since the Volcengine tool-call API rejects them.

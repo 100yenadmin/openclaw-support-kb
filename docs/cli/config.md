@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "642b4553f21c403a3319124ec53c173f8665d5eb2b07ccfedeb098b9735b06fa"
+source_hash: "c615a5b71d9fb90ed564f64f8fa9e64db6560cf422df0caeb1416078db93948a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -63,6 +63,8 @@ openclaw config set 'agents.list[1].tools.exec.node' "node-id-or-name"
 ### `config get`
 
 Reads a value from the redacted config snapshot (secrets never print). `--json` prints the raw value as JSON; otherwise strings/numbers/booleans print bare and objects/arrays print as formatted JSON.
+
+When the path is missing, `--json` writes `{ "error": "Config path not found: <path>" }` to stdout and exits with status 1. Without `--json`, the diagnostic remains on stderr.
 
 ```bash
 openclaw config get browser.executablePath
@@ -195,6 +197,8 @@ Batch mode
     openclaw config set --batch-file ./config-set.batch.json --dry-run
     ```
 
+    Batch files are limited to 8 MiB.
+
 
 
 Warning
@@ -287,6 +291,8 @@ Paste or pipe a config-shaped JSON5 patch instead of running many path-based `co
 openclaw config patch --file ./openclaw.patch.json5 --dry-run
 openclaw config patch --file ./openclaw.patch.json5
 ```
+
+Patch files are limited to 8 MiB. Piped `--stdin` patches are limited to 1 MiB.
 
 Pipe a patch over stdin for remote setup scripts:
 

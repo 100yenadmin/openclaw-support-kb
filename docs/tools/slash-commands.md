@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "ef0bb31aacc3501be4a9be7f6044a01e30143b640a05e985d9812b86988aa59f"
+source_hash: "730be69f49a5b7bb3c91806c51a8efbd382c574451b01fcea0a5a1be8ca6eb1f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -410,8 +410,9 @@ use the Control UI Tools panel or config surfaces.
 ```
 
 On Discord, `/model` and `/models` open an interactive picker with provider and
-model dropdowns. The picker respects `agents.defaults.models`, including
-`provider/*` entries.
+model dropdowns. The picker respects `agents.defaults.modelPolicy.allow`,
+including `provider/*` entries. Without an explicit allowlist, model entries and
+aliases do not restrict selection.
 
 ## `/config`: on-disk config writes
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "705fbf4eae186fff3ae4e2b80f1de0438bbe25a23244740f536a9380e8d8ebe0"
+source_hash: "27c432b5daa187f146ebd6cbd93fac267a5d6134982b3963a85a3ed8137b85bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -111,6 +111,19 @@ Implementation:
 - `sanitizeToolCallInputs` in `src/agents/session-transcript-repair.ts`
 - Applied in `sanitizeSessionHistory`
   (`src/agents/embedded-agent-runner/replay-history.ts`)
+
+---
+
+## Global rule: tool result pairing
+
+Tool results are paired to tool-call occurrences within each assistant turn before
+provider-specific call IDs are rewritten. Provider-generated IDs may repeat on later
+turns, so a result adjacent to a repeated call stays with that occurrence. A displaced
+result is moved only when exactly one unresolved occurrence can own it; ambiguous
+extras are dropped and missing occurrences receive synthetic error results.
+
+Implementation: `sanitizeToolUseResultPairing` in
+`src/agents/session-transcript-repair.ts`
 
 ---
 

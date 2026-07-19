@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "b15a41e202c6106af6586c9fb16dec932cc526b4fa5c38c40762d75755797781"
+source_hash: "e81eca1d2eab134afd6aaf39a1fb53f01a50fe032b06dea679023e5e738b0c16"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/minimax.md"
@@ -292,7 +292,7 @@ The bundled `minimax` plugin registers MiniMax T2A v2 as a speech provider for `
 
 - Default TTS model: `speech-2.8-hd`
 - Default voice: `English_expressive_narrator`
-- Bundled model ids: `speech-2.8-hd`, `speech-2.8-turbo`, `speech-2.6-hd`, `speech-2.6-turbo`, `speech-02-hd`, `speech-02-turbo`, `speech-01-hd`, `speech-01-turbo`, `speech-01-240228`
+- Bundled model ids: `speech-2.8-hd`, `speech-2.8-turbo`, `speech-2.6-hd`, `speech-2.6-turbo`, `speech-02-hd`, `speech-02-turbo`, `speech-01-hd`, `speech-01-turbo`
 - Auth resolution order: `messages.tts.providers.minimax.apiKey`, then `minimax-portal` OAuth/token auth profiles, then Token Plan environment keys (`MINIMAX_OAUTH_TOKEN`, `MINIMAX_CODE_PLAN_KEY`, `MINIMAX_CODING_API_KEY`), then `MINIMAX_API_KEY`
 - If no TTS host is configured, OpenClaw reuses the configured `minimax-portal` OAuth host and strips Anthropic-compatible path suffixes such as `/anthropic`
 - Normal audio attachments stay MP3. Voice-note targets (Feishu, Telegram, and other channels that request a voice-note-compatible attachment) are transcoded from MiniMax MP3 to 48kHz Opus with `ffmpeg`, because e.g. the Feishu/Lark file API only accepts `file_type: "opus"` for native audio messages
@@ -396,7 +396,8 @@ Configuration options
     | `models.providers.minimax.api` | Prefer `anthropic-messages`; `openai-completions` is optional for OpenAI-compatible payloads |
     | `models.providers.minimax.apiKey` | MiniMax API key (`MINIMAX_API_KEY`) |
     | `models.providers.minimax.models` | Define `id`, `name`, `reasoning`, `contextWindow`, `maxTokens`, `cost` |
-    | `agents.defaults.models` | Alias models you want in the allowlist |
+    | `agents.defaults.models` | Per-model aliases, parameters, and metadata |
+    | `agents.defaults.modelPolicy.allow` | Optional explicit model allowlist |
     | `models.mode` | Keep `merge` if you want to add MiniMax alongside built-ins |
 
 

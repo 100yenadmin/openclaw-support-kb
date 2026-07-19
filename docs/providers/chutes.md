@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chutes"
 source: "https://docs.openclaw.ai/providers/chutes"
-source_hash: "ffbf3be0522189fe1526e86f95c7c8cb1fd5264d552091c956a4547c44fa3312"
+source_hash: "3824412724086cddd8d7c5e9b5b8d46612065b483dcfb7caabdc0522ccbcf91a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/chutes.md"
@@ -37,7 +37,7 @@ openclaw gateway restart
 
 ## Getting started
 
-Both paths set the default model to `chutes/zai-org/GLM-4.7-TEE` and register
+Both paths set the default model to `chutes/zai-org/GLM-5-TEE` and register
 the Chutes catalog.
 
 Tabs
@@ -94,28 +94,24 @@ static catalog is used automatically.
 
 ## Default aliases
 
-OpenClaw registers three convenience aliases for the Chutes catalog:
+OpenClaw registers two convenience aliases for the Chutes catalog:
 
-| Alias           | Target model                                          |
-| --------------- | ----------------------------------------------------- |
-| `chutes-fast`   | `chutes/zai-org/GLM-4.7-FP8`                          |
-| `chutes-pro`    | `chutes/deepseek-ai/DeepSeek-V3.2-TEE`                |
-| `chutes-vision` | `chutes/chutesai/Mistral-Small-3.2-24B-Instruct-2506` |
+| Alias           | Target model                           |
+| --------------- | -------------------------------------- |
+| `chutes-pro`    | `chutes/deepseek-ai/DeepSeek-V3.2-TEE` |
+| `chutes-vision` | `chutes/moonshotai/Kimi-K2.5-TEE`      |
 
 ## Built-in starter catalog
 
-The bundled fallback catalog has 47 models. A representative sample of current refs:
+The bundled fallback catalog contains these five currently served models:
 
-| Model ref                                             |
-| ----------------------------------------------------- |
-| `chutes/zai-org/GLM-4.7-TEE`                          |
-| `chutes/zai-org/GLM-5-TEE`                            |
-| `chutes/deepseek-ai/DeepSeek-V3.2-TEE`                |
-| `chutes/deepseek-ai/DeepSeek-R1-0528-TEE`             |
-| `chutes/moonshotai/Kimi-K2.5-TEE`                     |
-| `chutes/chutesai/Mistral-Small-3.2-24B-Instruct-2506` |
-| `chutes/Qwen/Qwen3-Coder-Next-TEE`                    |
-| `chutes/openai/gpt-oss-120b-TEE`                      |
+| Model ref                              |
+| -------------------------------------- |
+| `chutes/zai-org/GLM-5-TEE`             |
+| `chutes/deepseek-ai/DeepSeek-V3.2-TEE` |
+| `chutes/moonshotai/Kimi-K2.5-TEE`      |
+| `chutes/MiniMaxAI/MiniMax-M2.5-TEE`    |
+| `chutes/Qwen/Qwen3.5-397B-A17B-TEE`    |
 
 Run `openclaw models list --all --provider chutes` for the full list.
 
@@ -125,9 +121,9 @@ Run `openclaw models list --all --provider chutes` for the full list.
 {
   agents: {
     defaults: {
-      model: { primary: "chutes/zai-org/GLM-4.7-TEE" },
+      model: { primary: "chutes/zai-org/GLM-5-TEE" },
       models: {
-        "chutes/zai-org/GLM-4.7-TEE": { alias: "Chutes GLM 4.7" },
+        "chutes/zai-org/GLM-5-TEE": { alias: "Chutes GLM 5" },
         "chutes/deepseek-ai/DeepSeek-V3.2-TEE": { alias: "Chutes DeepSeek V3.2" },
       },
     },

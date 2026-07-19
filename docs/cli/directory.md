@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "0f79958c3fdbde2e42fb07bbda8e6a49cb89268861af6a4aa0e296819c446df4"
+source_hash: "6667429bfa3a3560dbf1fd47b116ad723e5be96274519a0354f893d59d8b3aa2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/directory.md"
@@ -30,6 +30,7 @@ Default (non-JSON) output is `id` (and sometimes `name`) separated by a tab.
 ## Notes
 
 - For many channels, results are config-backed (allowlists / configured groups) rather than a live provider directory.
+- WhatsApp group listing is live. Gateway lookups reuse its owned connection; a standalone command opens the linked session only when no other process owns that account and otherwise reports that live groups are unavailable.
 - An already-installed channel plugin can lack directory support. In that case the command reports the unsupported operation; it does not try to reinstall or upgrade the plugin to add support.
 
 ## Using results with `message send`

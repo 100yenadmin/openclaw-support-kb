@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Formal verification (security models)"
 source: "https://docs.openclaw.ai/security/formal-verification"
-source_hash: "a2fb0920e5d41b233598052941ef32d499e856f6ef5c55d079b9d9177291421e"
+source_hash: "2aa1ce366e74e7346844306477fd98bcc5fa9bc80236db8ef3512a2ef1ef6f75"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/formal-verification.md"
@@ -129,7 +129,7 @@ Follow-on models that tighten fidelity around real-world failure modes: non-atom
 
 ### Routing dmScope precedence and identityLinks
 
-**Claim:** routing keeps DM sessions isolated by default and only collapses sessions when explicitly configured, via channel precedence and identity links. Channel-specific `dmScope` overrides win over global defaults; `identityLinks` collapse sessions only within explicit linked groups, not across unrelated peers.
+**Claim:** `dmScope` precedence and identity links behave deterministically: the default `main` scope shares one rolling session across a single owner's DMs (the personal-agent default), while any configured isolating scope (`per-peer`, `per-channel-peer`, `per-account-channel-peer`) keeps DM sessions strictly separated. Channel-specific `dmScope` overrides win over global defaults; `identityLinks` collapse sessions only within explicit linked groups, not across unrelated peers. Multi-user inboxes are expected to opt into an isolating scope (the runtime security audit recommends this when it detects multi-user DM traffic).
 
 | Result         | Targets                                                                   |
 | -------------- | ------------------------------------------------------------------------- |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClickClack"
 source: "https://docs.openclaw.ai/channels/clickclack"
-source_hash: "e6f64b29b63862b628aaef11e1163fcb0c4fe30a0260f191eb1f210d2d789c4c"
+source_hash: "389531df42bf7ada2a1d3a85499ff2dc5275bdf42a4fd29e287fc4f15697717a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/clickclack.md"
@@ -20,20 +20,33 @@ Use this when you want an OpenClaw agent to appear as a ClickClack bot user. Cli
 ## Quick setup
 
 In ClickClack, open **Workspace settings → Integrations → OpenClaw**, create a
-bot, and copy its token. Then configure the channel:
+bot using **Setup code (recommended)**, and copy the generated command:
 
 ```bash
-openclaw channels add clickclack --base-url https://clickclack.example.com --token ccb_... --workspace default
+openclaw channels add clickclack --code 'https://clickclack.example.com/#XXXX-XXXX-XXXX'
 ```
 
-`workspace` accepts a workspace id (`wsp_...`), slug, or display name.
-`channels add` verifies the server, token, and workspace after saving, then
-reports whether the running gateway picked up the new account. If OpenClaw is
-already running, ClickClack connects automatically and no second command is
-needed. Otherwise, start it with:
+The setup code is single-use and expires after 10 minutes. OpenClaw claims it,
+receives the newly minted bot token and workspace settings, saves the account,
+verifies the connection, and reports whether the running gateway picked it up.
+The setup code itself is not stored in OpenClaw config.
+
+Setup-code claims use HTTPS for public servers. Plain HTTP is also supported for
+local installations on loopback or private networks, including `localhost`,
+private IP addresses, and internal hostnames that resolve only to private
+addresses.
+
+If OpenClaw is already running, ClickClack connects automatically and no second
+command is needed. Otherwise, start it with:
 
 ```bash
 openclaw gateway
+```
+
+You can also pass the code separately from the server URL:
+
+```bash
+openclaw channels add clickclack --code XXXX-XXXX-XXXX --base-url https://clickclack.example.com
 ```
 
 For guided setup, run:
@@ -45,6 +58,18 @@ openclaw onboard
 Select ClickClack, then enter the server URL, bot token, and workspace when
 prompted. Guided setup checks the server, token, and workspace after saving; a
 failed check does not discard the configuration.
+
+### Alternative: manual token
+
+Choose **Manual token** in ClickClack when configuring a non-OpenClaw client or
+when you explicitly need to manage the token yourself:
+
+```bash
+openclaw channels add clickclack --base-url https://clickclack.example.com --token ccb_... --workspace default
+```
+
+`workspace` accepts a workspace id (`wsp_...`), slug, or display name.
+`--code` cannot be combined with `--token`, `--token-file`, or `--use-env`.
 
 ### Alternative: env-based token
 

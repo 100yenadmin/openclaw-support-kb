@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Webhooks plugin"
 source: "https://docs.openclaw.ai/plugins/webhooks"
-source_hash: "db1f9042d851c93ecc819d8595f192d4679a487398fd01621257dd20b9c54cf4"
+source_hash: "37a7eb153e6c4ca86bda13bf9a9442f899a34f8d5d3404fce8d13b2931af8b41"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/webhooks.md"
@@ -65,12 +65,12 @@ Route fields:
 
 `secret` accepts a plain string or a SecretRef: `{ source: "env" | "file" | "exec", provider: "default", id: "..." }`.
 
-Every configured route registers at startup regardless of whether its secret
-currently resolves. An unresolvable secret does not disable or skip the
-route - requests to it fail authentication (`401`) until the secret can be
-resolved. SecretRef values are re-resolved on every request, so rotating the
-underlying secret (env var, file, or exec output) takes effect without a
-Gateway restart.
+SecretRefs resolve into the Gateway's startup config snapshot. When one route's
+secret cannot resolve, the Gateway keeps running and that exact route stays
+registered but cold: requests receive a generic authentication failure (`401`).
+Other routes remain available. Fix the SecretRef source, then reload or restart
+the Gateway to activate the new snapshot. SecretRef values are never resolved
+on the public request path.
 
 ## Security model
 

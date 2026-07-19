@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "84ad73d42567104f181844cb2fc0602a9074b4bdca12976442773ef561dd834c"
+source_hash: "f02eb6c38b8440dd934ae3c4b5b5cc77340fa61fe022b0dd1858388492f24bb5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -167,6 +167,30 @@ hermes gateway status       # Check default service status
 hermes gateway status --system         # Linux only: inspect the system service explicitly
 ```
 
+### Optional Linux event-loop watchdog
+
+A systemd-managed gateway can opt into process recovery when Python's asyncio
+event loop stops receiving scheduling time. This covers whole-process stalls
+that also prevent platform-specific liveness tasks from running:
+
+```yaml title="~/.hermes/config.yaml"
+gateway:
+  systemd_watchdog_seconds: 120
+```
+
+Regenerate the service unit after changing this setting:
+
+```bash
+hermes gateway install --force
+```
+
+A positive value makes the generated unit use `Type=notify`,
+`NotifyAccess=main`, and the matching `WatchdogSec`. Hermes sends heartbeats
+only while its event loop is making timely progress; systemd restarts the
+process when they stop. The default `0` keeps the existing `Type=simple`
+behavior. This setting is Linux/systemd-only and does not treat an ordinary
+platform network disconnect as an event-loop failure.
+
 ## Chat Commands (Inside Messaging)
 
 | Command | Description |
@@ -201,6 +225,27 @@ hermes gateway status --system         # Linux only: inspect the system service 
 ### Session Persistence
 
 Sessions persist across messages until they reset. The agent remembers your conversation context.
+
+### Delivery Reliability
+
+Final agent responses are recorded in a durable **delivery ledger**
+(`state.db`) around each platform send. If the gateway crashes or restarts
+between producing a response and the platform confirming receipt, the next
+boot redelivers the stored response instead of losing it — or re-running the
+whole turn.
+
+Semantics are honest at-least-once:
+
+- A response whose send **never started** is redelivered as-is.
+- A response that was **mid-send** when the gateway died (the platform may or
+  may not have received it) is redelivered with a visible
+  "♻️ Recovered reply — … may be a duplicate" prefix. Ambiguity is labeled,
+  never silently resent.
+- Redelivery is bounded: 3 attempts, 24-hour freshness, then the row is
+  abandoned. Delivered rows are pruned after 7 days.
+
+Disable with `gateway.delivery_ledger: false` in `config.yaml` (restores the
+old behavior: in-flight responses are lost on crash).
 
 ### Reset Policies
 

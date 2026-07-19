@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cerebras"
 source: "https://docs.openclaw.ai/providers/cerebras"
-source_hash: "0c35958869e6ed8050812733009ba29de79826c0b1bfa0435d0b06ac5c8a47b6"
+source_hash: "77c6a11a437b95793a8e6cedd4d63b4e186777b8a0a4e974b11d76b906cafc1a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cerebras.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Cerebras
 Source: https://docs.openclaw.ai/providers/cerebras
 
-[Cerebras](https://www.cerebras.ai) provides high-speed OpenAI-compatible inference on custom inference hardware. The plugin ships a static four-model catalog (no live discovery).
+[Cerebras](https://www.cerebras.ai) provides high-speed OpenAI-compatible inference on custom inference hardware. The plugin ships a static two-model catalog (no live discovery).
 
 | Property        | Value                                                     |
 | --------------- | --------------------------------------------------------- |
@@ -72,7 +72,7 @@ Verify models are available
     openclaw models list --provider cerebras
     ```
 
-    Lists all four static models. If `CEREBRAS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
+    Lists both static models. If `CEREBRAS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
 
 
 
@@ -87,18 +87,12 @@ openclaw onboard --non-interactive \
 
 ## Built-in catalog
 
-All four models share a 128k context window and 8,192 max output tokens.
+Both models share a 128k context window and 8,192 max output tokens.
 
-| Model ref                                 | Name                 | Reasoning | Notes                                  |
-| ----------------------------------------- | -------------------- | --------- | -------------------------------------- |
-| `cerebras/zai-glm-4.7`                    | Z.ai GLM 4.7         | yes       | Default model; preview reasoning model |
-| `cerebras/gpt-oss-120b`                   | GPT OSS 120B         | yes       | Production reasoning model             |
-| `cerebras/qwen-3-235b-a22b-instruct-2507` | Qwen 3 235B Instruct | no        | Preview non-reasoning model            |
-| `cerebras/llama3.1-8b`                    | Llama 3.1 8B         | no        | Production speed-focused model         |
-
-Warning
-
-Cerebras marks `zai-glm-4.7` and `qwen-3-235b-a22b-instruct-2507` as preview models, and `llama3.1-8b` plus `qwen-3-235b-a22b-instruct-2507` are documented for deprecation on May 27, 2026. Check Cerebras' [supported-models page](https://inference-docs.cerebras.ai/models/overview) before relying on them for production workloads.
+| Model ref               | Name         | Reasoning | Notes                                  |
+| ----------------------- | ------------ | --------- | -------------------------------------- |
+| `cerebras/zai-glm-4.7`  | Z.ai GLM 4.7 | yes       | Default model; preview reasoning model |
+| `cerebras/gpt-oss-120b` | GPT OSS 120B | yes       | Production reasoning model             |
 
 ## Manual config
 

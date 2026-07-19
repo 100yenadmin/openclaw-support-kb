@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "77c3e5a6515b239a51e37e6050df0f00073c509d482a42c7d457dc1e51617f1d"
+source_hash: "17c94ab380b833135d88c08ac290756b82221fe6c9629dfd3ed822f1fe5283f0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/usage-tracking.md"
@@ -253,12 +253,18 @@ Pipe a value through verbs left to right; a non-verb segment is the fallback.
 | Verb            | Effect                                | Example                           |
 | --------------- | ------------------------------------- | --------------------------------- |
 | `num`           | compact count                         | `272000 -> 272k`                  |
-| `fixed:N`       | N decimals (default 2)                | `0.0377`                          |
+| `fixed:N`       | N decimals (`0..100`, default 2)      | `0.0377`                          |
 | `dur`           | seconds to duration                   | `14820 -> 4h07m`                  |
 | `pct`           | append `%`                            | `96 -> 96%`                       |
 | `inv`           | `100 - x`                             | for used to remaining             |
 | `alias:TABLE`   | lookup in `aliases`, echo if unlisted | `medium -> 🌗`                    |
 | `meter:W:SCALE` | W-cell glyph bar over a 0-100 value   | `[⣿⣿⠐⠐⠐]` (`meter:1` = one glyph) |
+
+`fixed:N` accepts only a complete decimal integer from 0 through 100. Invalid
+precision arguments make that interpolation empty.
+
+`meter:W:SCALE` accepts only a complete decimal integer width from 1 through 100. Leave the width blank to use the default 5 (`meter::braille`); invalid
+widths make that interpolation empty.
 
 ### Piece forms
 

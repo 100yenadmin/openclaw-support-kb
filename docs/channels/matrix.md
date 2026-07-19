@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix"
 source: "https://docs.openclaw.ai/channels/matrix"
-source_hash: "dec9f5b7411eb36675cc4eb2b5f09ed397d57968534ae81a44a62c449a015624"
+source_hash: "533acdefdfcbd1aeacb2461498eafe56c7c7fdda58d69e4c7922589ce0f2648b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix.md"
@@ -110,7 +110,7 @@ The wizard converts a friendly name into a normalized account ID (`Ops Bot` -> `
 
 ### Cached credentials
 
-Matrix caches credentials under `~/.openclaw/credentials/matrix/`: `credentials.json` for the default account, `credentials-<account>.json` for named accounts. When cached credentials exist, OpenClaw treats Matrix as configured even without an `accessToken` in the config file - this covers setup, `openclaw doctor`, and channel-status probes.
+Matrix caches account credentials in the shared `state/openclaw.sqlite` plugin state. When cached credentials exist, OpenClaw treats Matrix as configured even without an `accessToken` in the config file - this covers setup, `openclaw doctor`, and channel-status probes. Upgrades import the retired `~/.openclaw/credentials/matrix/credentials*.json` files through `openclaw doctor --fix`, verify the SQLite rows, then archive the files.
 
 ### Environment variables
 
@@ -604,7 +604,7 @@ Matrix inherits global defaults from `session.threadBindings` and supports per-c
 - `threadBindings.idleHours`
 - `threadBindings.maxAgeHours`
 - `threadBindings.spawnSessions`: gates both subagent and ACP thread spawns.
-- `threadBindings.spawnSubagentSessions` / `threadBindings.spawnAcpSessions`: narrower overrides for subagent-only or ACP-only spawns.
+- Deprecated `threadBindings.spawnSubagentSessions` / `threadBindings.spawnAcpSessions` keys are migrated to `spawnSessions` by `openclaw doctor --fix`.
 - `threadBindings.defaultSpawnContext`
 
 Matrix thread-bound session spawns default on. Set `threadBindings.spawnSessions: false` to block top-level `/focus` and `/acp spawn --thread auto|here` from creating/binding Matrix threads. Set `threadBindings.defaultSpawnContext: "isolated"` when native subagent thread spawns should not fork the parent transcript.

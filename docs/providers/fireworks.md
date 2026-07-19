@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "397df63547eaca5ddb6b5c96cce701adde173ac5549d550c5678b88be57550d9"
+source_hash: "9dd39e38f1e37a4b2c660db06133d3b10ed6bc2af5426f850a19a76c8e9156e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
@@ -24,8 +24,8 @@ Source: https://docs.openclaw.ai/providers/fireworks
 | Direct CLI flag | `--fireworks-api-key <key>`                            |
 | API             | OpenAI-compatible (`openai-completions`)               |
 | Base URL        | `https://api.fireworks.ai/inference/v1`                |
-| Default model   | `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo` |
-| Default alias   | `Kimi K2.5 Turbo`                                      |
+| Default model   | `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo` |
+| Default alias   | `Kimi K2.6 Turbo`                                      |
 
 ## Getting started
 
@@ -60,7 +60,7 @@ export FIREWORKS_API_KEY=fw-...
 
 
 
-    Onboarding stores the key against the `fireworks` provider in your auth profiles and sets the **Fire Pass** Kimi K2.5 Turbo router as the default model.
+    Onboarding stores the key against the `fireworks` provider in your auth profiles and sets the **Fire Pass** Kimi K2.6 Turbo router as the default model.
 
 
 
@@ -70,7 +70,7 @@ Verify the model is available
     openclaw models list --provider fireworks
     ```
 
-    The list should include `Kimi K2.6` and `Kimi K2.5 Turbo (Fire Pass)`. If `FIREWORKS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
+    The list should include `Kimi K2.6` and `Kimi K2.6 Turbo (Fire Pass)`. If `FIREWORKS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
 
 
 
@@ -92,7 +92,7 @@ openclaw onboard --non-interactive \
 | Model ref                                              | Name                        | Input        | Context | Max output | Thinking             |
 | ------------------------------------------------------ | --------------------------- | ------------ | ------- | ---------- | -------------------- |
 | `fireworks/accounts/fireworks/models/kimi-k2p6`        | Kimi K2.6                   | text + image | 262,144 | 262,144    | Forced off           |
-| `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo` | Kimi K2.5 Turbo (Fire Pass) | text + image | 256,000 | 256,000    | Forced off (default) |
+| `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo` | Kimi K2.6 Turbo (Fire Pass) | text + image | 256,000 | 256,000    | Forced off (default) |
 
 Note
 
@@ -121,7 +121,7 @@ How model id prefixing works
 
     Every Fireworks model ref in OpenClaw starts with `fireworks/` followed by the exact id or router path from the Fireworks platform. For example:
 
-    - Router model: `fireworks/accounts/fireworks/routers/kimi-k2p5-turbo`
+    - Router model: `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo`
     - Direct model: `fireworks/accounts/fireworks/models/<model-name>`
 
     OpenClaw strips the `fireworks/` prefix when constructing the API request and sends the remaining path to the Fireworks endpoint as the OpenAI-compatible `model` field.

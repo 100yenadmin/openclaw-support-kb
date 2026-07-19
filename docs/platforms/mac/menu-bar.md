@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Menu bar"
 source: "https://docs.openclaw.ai/platforms/mac/menu-bar"
-source_hash: "d5203bd621b4c846aa5adb3b36af747a02a932379289a09b0c8f745a8b596003"
+source_hash: "1a38deca2e55dae37cbbe5b29b4e7929057fd9c6205c2b60b72f35ac448fb6eb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/menu-bar.md"
@@ -20,6 +20,7 @@ Source: https://docs.openclaw.ai/platforms/mac/menu-bar
 - A root "Context" item opens a submenu with recent sessions instead of expanding them in the root menu.
 - A "Nodes" block in the root menu lists paired **devices** only (from `node.list`), not client/presence entries.
 - A root "Usage" section appears below Context when provider usage snapshots are available, followed by cost details when available.
+- **Quick Chat** opens the floating main-session composer; its current global shortcut appears beside the item.
 
 ## State model
 

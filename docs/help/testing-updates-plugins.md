@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "4a99f241aa65590c15d87908e549175f3c4c41b7df844115bddc32c1391b9dd9"
+source_hash: "38dc699d7daf76312e363dc4f1647666a9947fdbf04cfeb465bcf2c3e792742c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
@@ -62,7 +62,7 @@ pnpm release:check
 ```
 
 `release:check` runs config/docs/API drift checks (config schema, config docs
-baseline, plugin SDK API baseline and exports, plugin versions/inventory),
+baseline, plugin SDK API contract manifest and exports, plugin versions/inventory),
 writes the package dist inventory, runs `npm pack --dry-run`, rejects forbidden
 packed files, installs the tarball into a temp prefix, runs postinstall, and
 smokes bundled channel entrypoints.

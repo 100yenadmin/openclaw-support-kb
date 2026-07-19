@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
-source_hash: "05b857e81c51331e39cc222e333fd59ead18cf7ddfe58f58ebbed7b56ec7558e"
+source_hash: "3c5f15b34ba5baa4d2b134a0504bd18b3d6604ad3ddb2ce33bcdf46d35dfd0a6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/lobster.md"
@@ -255,6 +255,27 @@ Notes:
 
 - `stdin: $step.stdout` and `stdin: $step.json` pass a prior step's output.
 - `condition` (or `when`) can gate steps on `$step.approved`.
+
+### Injected environment variables
+
+Every step shell inherits the parent environment plus these Lobster-injected
+variables, so commands can reference resolved workflow args without embedding
+raw values into the command string:
+
+- `LOBSTER_ARG_
+NAME
+` - one per workflow arg. The name is uppercased with each
+  run of non-alphanumeric characters collapsed to `_`, so arg `user-id` becomes
+  `LOBSTER_ARG_USER_ID`.
+- `LOBSTER_ARGS_JSON` - every resolved arg as a single JSON string.
+
+That is the complete injected set. There are **no** per-step output variables
+such as `LOBSTER_STEP_<id>_STDOUT` or `LOBSTER_STEP_<id>_JSON_<field>`; shells
+treat those names as unset, so parameter-expansion defaults can hide the error.
+Read a prior step's output through step references instead - `$step.stdout`,
+`$step.json`, or `$step.json.<field>` - in a `stdin:`, `env:`, or `condition:`
+value. (`LOBSTER_STATE_DIR` is a separate runtime setting for the state
+directory, not a per-run arg.)
 
 ## Tool parameters
 

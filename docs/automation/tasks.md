@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "81442863a9b179530fb39211c2178cdf776f0093c6e49ec0419b18f9f9b0ab68"
+source_hash: "541ff45802449a01254bafe20d7fb274ce628ce14eeffa7cf450d5c20e8901f2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -23,7 +23,7 @@ Tasks do **not** replace sessions, cron jobs, or heartbeats - they are the **act
 
 Note
 
-Not every agent run creates a task. Heartbeat turns and normal interactive chat do not. All cron executions, ACP spawns, subagent spawns, and gateway-dispatched CLI agent commands do.
+Not every agent run creates a task. Heartbeat turns and normal interactive chat do not. All cron executions, ACP spawns, subagent spawns, gateway-dispatched CLI agent commands, and agent-started background `exec` commands do.
 
 ## TL;DR
 
@@ -327,6 +327,8 @@ For the full operator ledger, use the CLI: `openclaw tasks list`.
 The web Control UI has a **Tasks** page in the sidebar with live active and recent background tasks. Use it to inspect progress, open linked sessions, refresh the ledger, or cancel queued and running tasks.
 
 Chat panes also have a collapsible **Background tasks** rail scoped to the pane's agent: running tasks and subagents with a stop control, a finished section, and View transcript links into each task's child session. Open it from the activity toggle in the pane header (or the floating activity button in single-pane chat).
+
+Select a task in the rail to inspect its bounded input prompt and latest output or error summary. Running work stays separate from finished work, and finished rows show whether the task completed or failed. On iOS, open **Chat actions → Background Tasks**; on Android, open the Chat overflow menu and select **Background tasks**. Both mobile views use the same Running and Finished grouping and open task details on selection.
 
 ## Status integration (task pressure)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "f9fceb106a65e237be42bdc37e9836167afcd3fe86f6e633e4a9714e0824d566"
+source_hash: "be75eb6bb77cebfc805377ca989f645bdd56b93f59353c9d2f0d207fe579b3ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -172,6 +172,13 @@ shorthand values.
 | `OPENCLAW_STATE_DIR`     | Override the state directory (default `~/.openclaw`).                                                                                                                                                                                   |
 | `OPENCLAW_CONFIG_PATH`   | Override the config file path (default `~/.openclaw/openclaw.json`).                                                                                                                                                                    |
 | `OPENCLAW_INCLUDE_ROOTS` | Path-list of directories where `$include` directives may resolve files outside the config directory (default: none - `$include` is confined to the config dir). Tilde-expanded.                                                         |
+
+## Agent helper tool downloads
+
+Set `OPENCLAW_OFFLINE=1` to prevent OpenClaw from downloading its pinned `fd`
+and `ripgrep` helper binaries. Existing helpers under the OpenClaw tools
+directory and working system binaries remain eligible; a missing helper stays
+unavailable instead of triggering a network request.
 
 ## Logging
 

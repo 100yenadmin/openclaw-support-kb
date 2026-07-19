@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "cef2a1add1eacaba0c08aadaa4923ac0ac53a442fb61572bc31456e32c163f41"
+source_hash: "6f3a8f91f6318fc4324d7e5dc4504fcc006ad26521642e604c310a92d4a3882b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -326,7 +326,15 @@ Mention gating
 
 Group messages require a mention unless overridden per group. Defaults live per subsystem under `*.groups."*"`.
 
-Replying to a bot message counts as an implicit mention when the channel exposes reply metadata; quoting a bot message can also count on channels that expose quote metadata. Current built-in cases: Discord, Microsoft Teams, QQBot, Slack, Telegram, WhatsApp, and Zalo personal.
+Supported implicit mention facts are channel-specific:
+
+| Fact                  | Current built-in producers                       |
+| --------------------- | ------------------------------------------------ |
+| Reply to the bot      | Discord, Microsoft Teams, QQBot, Slack, Telegram |
+| Quote of the bot      | WhatsApp, Zalo personal                          |
+| Bot joined the thread | Mattermost, Slack, Tlon                          |
+
+Each fact defaults to enabled when the channel produces it. Set the corresponding `implicitMentions` flag to `false` to stop that fact from bypassing mention gating; native explicit mentions remain unaffected. A flag has no effect on channels that do not produce that fact.
 
 ```json5
 {

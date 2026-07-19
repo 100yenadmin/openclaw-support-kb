@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "fdbefd97d2e224af39ce395c4b153ec7d7748b75565c97030587de63f842e3f6"
+source_hash: "9a7f20965c18434b5bed6e9e9260188a9ca81a5cb56ab3c09ffe71ccc6aae1fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -44,12 +44,13 @@ the browser through the Control UI. Docs: [Dashboard](/web/dashboard).
 
 ## Locale
 
-The wizard localizes fixed onboarding copy. Resolve order: `OPENCLAW_LOCALE`,
-`LC_ALL`, `LC_MESSAGES`, `LANG`, then English. Supported locales: `en`,
-`zh-CN`, `zh-TW`.
+The wizard localizes fixed onboarding copy. It uses the first nonblank value from
+`OPENCLAW_LOCALE`, `LC_ALL`, `LC_MESSAGES`, and `LANG`, in that order, then
+falls back to English. Supported locales: `en`, `zh-CN`, `zh-TW`.
 
 ```bash
 OPENCLAW_LOCALE=zh-CN openclaw onboard
+OPENCLAW_LOCALE=en openclaw onboard # Explicit English override
 ```
 
 Product names, commands, config keys, URLs, provider IDs, model IDs, and
@@ -82,8 +83,10 @@ Plain `openclaw onboard` follows this path:
 2. Detect configured models, API-key environment variables, supported local AI
    CLIs, and already installed tool-capable models from reachable Ollama or LM
    Studio servers on the Gateway host. This read-only pass never downloads a
-   model. Gemini CLI and Antigravity installs are reported but not auto-tested
-   because they cannot enforce a tool-free probe.
+   model. Gemini CLI, Antigravity, Pi, and OpenCode installs are also reported
+   when they cannot serve as the reusable inference route for guided setup.
+   Gemini and Antigravity cannot enforce the tool-free probe; Pi and OpenCode
+   are whole-agent harnesses rather than setup inference routes.
 3. Test the first detected candidate with a real completion. On failure, show the
    reason and continue to the next usable candidate.
 4. If detection is exhausted, choose OpenAI, Anthropic, xAI (Grok), Google, or
@@ -120,7 +123,7 @@ QuickStart (defaults)
     - Gateway port **18789**
     - Gateway auth **Token** (auto-generated, even on loopback)
     - Tool policy: `tools.profile: "coding"` for new setups (an existing explicit profile is preserved)
-    - DM isolation: `session.dmScope: "per-channel-peer"` for new setups. Details: [CLI setup reference](/start/wizard-cli-reference#outputs-and-internals)
+    - DM sessions: onboarding preserves an explicit `session.dmScope` and otherwise leaves it unset, so the `"main"` default keeps all direct messages across channels in the agent's rolling main session—the personal-agent default. For shared or multi-user inboxes, use `"per-channel-peer"`; `openclaw security audit` recommends isolation when it detects multi-user DM traffic. Details: [CLI setup reference](/start/wizard-cli-reference#outputs-and-internals)
     - Tailscale exposure **Off**
     - Telegram and WhatsApp DMs default to **allowlist**: Telegram asks for a numeric Telegram user ID, WhatsApp asks for a phone number
 

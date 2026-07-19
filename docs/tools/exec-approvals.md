@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "e7baaed962a0b05d9d06bbb918890a726ce5ee9c448b5542076a1b4c1a5c429d"
+source_hash: "cd7192553de81d7464e126074fb9f4a1ade92f70b5783525bb189262aa65c115"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -98,15 +98,12 @@ The default approval socket follows the same root:
 `$OPENCLAW_STATE_DIR/exec-approvals.sock`, or
 `~/.openclaw/exec-approvals.sock` when the variable is unset.
 
-Releases before 2026.6.6 always kept the file in `~/.openclaw`. If
-`OPENCLAW_STATE_DIR` points somewhere else and an approvals file still exists
-in the default directory, run `openclaw doctor --fix` directly once to import
-it into the state directory (the original is archived with a `.migrated`
-suffix). Interactive doctor can also preview and confirm the import. Automated
-update and Gateway watch repair runs never import across state directories: a
-temporary or staging state directory must not capture the default
-installation's approvals. The same boundary applies to legacy
-`plugin-binding-approvals.json` imports into shared SQLite state.
+State directories are independent trust scopes. When `OPENCLAW_STATE_DIR`
+points somewhere else, OpenClaw never imports or archives
+`~/.openclaw/exec-approvals.json`; configure approvals separately for the
+custom state directory. Doctor also imports legacy
+`plugin-binding-approvals.json` only when it belongs to the active state
+directory.
 
 Example schema:
 

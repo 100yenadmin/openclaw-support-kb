@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "5a1ea4fba1e32afc45788cb53088ca69aa820dd35ce26c4e0c6e3743d94bad0f"
+source_hash: "ba6c90497442394986fd7bafab10c87b2fb28936a0c79116844fb5a3d39a16b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -155,9 +155,15 @@ Register the tool
           name: "my_tool",
           description: "Echo one input value",
           parameters: Type.Object({ input: Type.String() }),
+          outputSchema: Type.Object(
+            { input: Type.String() },
+            { additionalProperties: false },
+          ),
           async execute(_id, params) {
+            const details = { input: params.input };
             return {
               content: [{ type: "text", text: `Got: ${params.input}` }],
+              details,
             };
           },
         });
@@ -272,14 +278,27 @@ register(api) {
       name: "workflow_tool",
       description: "Run a workflow",
       parameters: Type.Object({ pipeline: Type.String() }),
+      outputSchema: Type.Object(
+        { pipeline: Type.String() },
+        { additionalProperties: false },
+      ),
       async execute(_id, params) {
-        return { content: [{ type: "text", text: params.pipeline }] };
+        return {
+          content: [{ type: "text", text: params.pipeline }],
+          details: { pipeline: params.pipeline },
+        };
       },
     },
     { optional: true },
   );
 }
 ```
+
+`outputSchema` is optional. It describes the structured `details` value used by
+[Code Mode](/tools/code-mode) and [Tool Search](/tools/tool-search). Catalog
+calls reject invalid schemas before execution and validate the final value after
+tool hooks. Omit it for tools without a stable JSON result. See
+[Tool plugins](/plugins/tool-plugins#output-contracts) for the full contract.
 
 Every tool registered with `api.registerTool(...)` must also be declared in the
 plugin manifest:

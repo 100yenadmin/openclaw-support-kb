@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "49491eb397103932d0eaadbdfa7e31760b8739ce430524116104272fb5005b81"
+source_hash: "2ec03cd30886ec09140935603b293a856b243f4da6ef9174b50832bebcbfe32c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -137,7 +137,7 @@ flags, and plugin allow/deny references into this block. Explicit canonical
 ## App-server transport
 
 For ordinary harness turns, OpenClaw starts the managed Codex binary shipped
-with the official plugin (currently `@openai/codex` `0.144.3`):
+with the official plugin (currently `@openai/codex` `0.144.6`):
 
 ```bash
 codex app-server --listen stdio://
@@ -168,7 +168,8 @@ with native clients. A private supervised binding uses the supervision
 connection regardless of the ordinary harness default. Independent App Server
 processes retain separate live status and approval state.
 
-For an already-running app-server, use WebSocket transport:
+For non-production testing against an already-running app-server, WebSocket
+transport is available:
 
 ```json5
 {
@@ -190,6 +191,9 @@ For an already-running app-server, use WebSocket transport:
 }
 ```
 
+Codex classifies WebSocket transport as experimental and unsupported. Prefer
+managed stdio or the local Unix control socket for production workloads.
+
 `appServer` fields:
 
 | Field                                         | Default                                                | Meaning                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -206,6 +210,7 @@ For an already-running app-server, use WebSocket transport:
 | `loopDetectionPreToolUseRelay`                | `true`                                                 | Install the Codex `PreToolUse` subprocess used only for OpenClaw loop detection and its explicit no-policy marker. Set `false` to reduce per-tool process fan-out. Before-tool plugin hooks and trusted-tool policy still install their required relay.                                                                                                                                         |
 | `requestTimeoutMs`                            | `60000`                                                | Timeout for app-server control-plane calls.                                                                                                                                                                                                                                                                                                                                                     |
 | `turnCompletionIdleTimeoutMs`                 | `60000`                                                | Quiet window after Codex accepts a turn or after a turn-scoped app-server request while OpenClaw waits for `turn/completed`.                                                                                                                                                                                                                                                                    |
+| `turnAssistantCompletionIdleTimeoutMs`        | `10000`                                                | Quiet window after a final/non-commentary assistant item or pre-tool raw assistant completion arms the assistant-output release while OpenClaw still waits for `turn/completed`. Raising it gives Codex more time to emit `turn/completed` before OpenClaw interrupts and releases the session lane.                                                                                            |
 | `postToolRawAssistantCompletionIdleTimeoutMs` | `300000`                                               | Completion-idle and progress guard used after a tool handoff, native tool completion, post-tool raw assistant progress, raw reasoning completion, or reasoning progress while OpenClaw waits for `turn/completed`. Use this for trusted or heavy workloads where post-tool synthesis can legitimately stay quiet longer than the final assistant release budget.                                |
 | `mode`                                        | `"yolo"` unless local Codex requirements disallow YOLO | Preset for YOLO or guardian-reviewed execution.                                                                                                                                                                                                                                                                                                                                                 |
 | `approvalPolicy`                              | `"never"` or an allowed guardian approval policy       | Native Codex approval policy sent to thread start, resume, and turn.                                                                                                                                                                                                                                                                                                                            |
@@ -254,8 +259,9 @@ If the normal app-server runtime would be `danger-full-access`, enabling
 permission profile instead. Codex-managed network enforcement is sandboxed
 networking, so a full-access profile would not protect outbound traffic.
 
-The plugin blocks older or unversioned app-server handshakes: Codex app-server
-must report stable version `0.143.0` or newer.
+The plugin blocks older, newer-unvalidated, prerelease, build-suffixed, or
+unversioned app-server handshakes. Codex app-server must report a stable version
+from `0.143.0` through the bundled `0.144.6`.
 
 OpenClaw treats non-loopback WebSocket app-server URLs as remote and requires
 identity-bearing WebSocket auth through `appServer.authToken` or an
@@ -600,7 +606,7 @@ If discovery fails or times out, OpenClaw uses a bundled fallback catalog:
 
 Note
 
-The current bundled harness is `@openai/codex` `0.144.3`. A `model/list` probe
+The current bundled harness is `@openai/codex` `0.144.6`. A `model/list` probe
 against that bundled app-server returned these public picker rows:
 
 | Model id        | Input modalities | Reasoning efforts                    |

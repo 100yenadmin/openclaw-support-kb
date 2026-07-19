@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "8533684f7cbac4332f27d81c9d07dac31fa8ebdcc4189ad5ca9905d80cb7588f"
+source_hash: "02bdd2432f73bf8a509975e7aee03f850fcd25249eb9958d5fb537c1cb1b9607"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -178,6 +178,11 @@ auth. Realtime voice accepts the `openai` API-key auth profile created by
 `talk.realtime.providers.openai.apiKey` for Control UI Talk, or
 `plugins.entries.voice-call.config.realtime.providers.openai.apiKey` for Voice
 Call, or the `OPENAI_API_KEY` environment variable.
+
+In Control UI Video Talk, OpenAI WebRTC receives camera context on demand:
+when the model calls `describe_view`, the browser sends one bounded JPEG over
+the realtime data channel. OpenClaw does not attach a continuous camera track
+to the OpenAI session.
 
 ## Memory embeddings
 

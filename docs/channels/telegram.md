@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "e4f0f9919c8479613f1fcee83423afdccde33830cc735ca4cb171bc14bfb6334"
+source_hash: "bb7140de32312e004198524dd2d5d3137f44ac7ac858b01984a5eb318defde44"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -811,7 +811,7 @@ Long polling vs webhook
 
     Webhook mode validates request guards, the Telegram secret token, and the JSON body, then commits the update to its durable ingress queue before returning an empty `200`. Successful durable adoption includes `x-openclaw-delivery-accepted: durable`; health, routing, authentication, validation, and storage-error responses omit this header. Reverse proxies and host controllers can require the header to distinguish OpenClaw adoption from a generic empty `200` without inferring acceptance from response timing.
 
-    OpenClaw then processes the update asynchronously through the same per-chat/per-topic bot lanes used by long polling, so slow agent turns do not hold Telegram's delivery ACK.
+    After the durable write, OpenClaw claims and processes updates through the core channel-ingress drain (per-chat/per-topic lanes, complete at turn adoption, pre-adoption stall timeout). Slow agent turns do not hold Telegram's delivery ACK.
 
 
 

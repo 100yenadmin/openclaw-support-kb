@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "fa06e4238453be720b0f1b5406d0d0ae0ece59862592ea1fcef8abd5b344e216"
+source_hash: "d4c127444b1658e3933fd6e7f021dd9f5a807e19f169b5bb727966b3cc4afc2b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -46,6 +46,12 @@ openclaw channels add --channel qqbot --token "AppID:AppSecret"
 ```
 
 5. Restart the Gateway.
+
+## Inbound durability
+
+For QQ gateway turn events, OpenClaw persists the raw event before advancing the saved gateway resume sequence. Pending or retryable turns survive a Gateway restart, remain serialized per conversation, and use the provider event ID to suppress duplicate queue entries while the active or retained completion record exists.
+
+If durable admission fails, OpenClaw terminates the current gateway socket without advancing the sequence. The reconnect/resume path can then request the uncommitted event again. Delivery is still at least once across the queue-to-agent boundary, so a crash during handoff can replay a turn.
 
 Interactive setup:
 

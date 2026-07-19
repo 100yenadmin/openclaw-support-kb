@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Active computer presence"
 source: "https://docs.openclaw.ai/nodes/presence"
-source_hash: "987a919183d8bc5531d9e9bf6492ef765d72fb1e107b58c0a52d1617b679d832"
+source_hash: "8c26ad5253519e8af344019e97b4dddca765b701d79cacd0c83e05323089af77"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/presence.md"
@@ -99,20 +99,21 @@ the `nodes` tool can read `node.list` or `node.describe` instead.
 
 ## How connection alerts are routed
 
-After a node finishes its Gateway handshake, OpenClaw waits 750 milliseconds so
-the connecting Mac can submit its first activity sample. It then tries the
-connected notification-capable Mac with the freshest activity.
+After a node finishes its first successful Gateway handshake after approval,
+OpenClaw waits 750 milliseconds so the connecting Mac can submit its first
+activity sample. It then tries the connected notification-capable Mac with the
+freshest activity.
 
 - If primary delivery succeeds, no other Mac receives the alert.
 - If no active Mac is available or primary delivery fails, OpenClaw waits five
   seconds and tries every remaining connected Mac that exposes `system.notify`.
-- A reconnect alert for the same node is suppressed for five minutes after an
-  actual delivery attempt, preventing reconnect flapping from producing a
-  notification storm.
+- Later reconnects are silent. The Gateway records the successful connection
+  in pairing metadata, so a Gateway restart does not replay alerts for every
+  previously connected node.
 
-Alerts are bound to exact node connections. A disconnected or replaced source
-session cannot complete an old scheduled alert, and a replacement destination
-connection can still participate in fallback delivery.
+Alerts are bound to the authenticated node identity. A replacement session for
+the same node takes over its pending first-connection alert; if that node is no
+longer connected when delivery runs, the alert is canceled.
 
 ## Troubleshooting
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix migration"
 source: "https://docs.openclaw.ai/channels/matrix-migration"
-source_hash: "f5c282db74d59bf89aaa3a64493296b8215e78d8452462afb824f4c7fa1e43e7"
+source_hash: "2062e701c1acac1ad3b8bfcbcca3c88b07427e41982c15800a786fa21163a004"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-migration.md"
@@ -20,7 +20,7 @@ For most users, the upgrade is in place:
 - the plugin stays `@openclaw/matrix`
 - the channel stays `matrix`
 - your config stays under `channels.matrix`
-- cached credentials stay under `~/.openclaw/credentials/matrix/`
+- cached credentials move into the shared `state/openclaw.sqlite` plugin state
 - runtime state stays under `~/.openclaw/matrix/`
 
 You do not need to rename config keys or reinstall the plugin under a new name.
@@ -32,11 +32,11 @@ into the root OpenClaw package.
 
 ## What the migration does automatically
 
-Matrix migration runs when you run [`openclaw doctor --fix`](/gateway/doctor), and as a fallback when the Matrix client starts and still finds file-based sidecar state next to its SQLite store.
+Matrix migration runs when you run [`openclaw doctor --fix`](/gateway/doctor). File-based sidecars next to the dedicated Matrix store retain their client-start fallback, but credential-file import is Doctor-only; runtime reads only canonical SQLite credential state.
 
-Automatic migration covers:
+Doctor migration covers:
 
-- reusing your cached Matrix credentials
+- importing and verifying retired `~/.openclaw/credentials/matrix/credentials*.json` files before archiving them
 - keeping the same account selection and `channels.matrix` config
 - importing file-based sidecar state (`bot-storage.json` sync cache, `recovery-key.json`, `legacy-crypto-migration.json`, IndexedDB snapshots) into Matrix SQLite state; migrated files are archived with a `.migrated` suffix
 - reusing the most complete existing token-hash storage root for the same Matrix account, homeserver, user, and device when the access token changes later

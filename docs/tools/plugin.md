@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "3b7295237ca3839228b58688f8c0477d50a0b74c0c62ce1c774c49921af22892"
+source_hash: "dc4def9f4b33d7970f0729bd2d188515e5005a8588995ebcaefaf99f3daa345f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -302,6 +302,13 @@ serves your channels, not only a wrapper or supervisor.
 | Plugin path is blocked for suspicious ownership or permissions | Inspect the diagnostic before the config error                                                                                             | Fix filesystem ownership/permissions, then run `openclaw plugins registry --refresh`                    |
 | `OPENCLAW_NIX_MODE=1` blocks lifecycle commands                | Confirm the install is managed by Nix                                                                                                      | Change plugin selection in the Nix source instead of using plugin mutator commands                      |
 | Dependency import fails at runtime                             | Check whether the plugin was installed through npm/git/ClawHub or loaded from a local path                                                 | Run `openclaw plugins update <id>`, reinstall the source, or install local plugin dependencies yourself |
+
+When an enabled managed plugin fails payload verification during Gateway
+startup, OpenClaw quarantines that exact installed plugin root for the boot and
+continues serving other plugins. `openclaw status --all`, `openclaw health`,
+and `openclaw doctor` report it as `configured-unavailable`. Fix or reinstall
+the plugin, then restart the Gateway. A healthy explicit `plugins.load.paths`
+override with the same plugin id is not quarantined by a stale broken install.
 
 When stale plugin config still names a no-longer-discoverable channel plugin,
 config validation downgrades that channel key to a warning instead of a hard

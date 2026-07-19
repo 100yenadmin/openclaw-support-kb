@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "e2f593e3c743723bf8b1d16eb7c4c7039aedc9c99ed913edb1cb32b04ad6e747"
+source_hash: "b7b3b9d7106561c10190fcb166aebe7c4d67a1eed5910c9d1d3055bb15622bb0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
@@ -199,6 +199,7 @@ Notes:
 - `onchar` still responds to explicit @mentions.
 - `channels.mattermost.requireMention` is still honored, but `chatmode` is preferred. Per-channel `groups.<channelId>.requireMention` settings win over both.
 - After the bot sends a visible reply in a channel thread, later messages in that same thread are answered without a new @mention or `onchar` prefix, so multi-turn thread conversations keep flowing. Participation is remembered for 7 days after the bot last replied in that thread and persists across gateway restarts. Threads the bot has only observed are unaffected; start a new top-level message to require an explicit mention again.
+- Set `channels.mattermost.implicitMentions.threadParticipation: false` to stop participated-thread follow-ups from bypassing mention gating. Account overrides use `channels.mattermost.accounts.<id>.implicitMentions`. Mattermost does not currently produce `replyToBot` or `quotedBot` facts, so those flags have no effect here.
 
 ## Threading and sessions
 

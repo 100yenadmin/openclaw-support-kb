@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "c50a34e19332a42d05a64976558c650cacab136d36ce98ca3b71e97ea1c6cd14"
+source_hash: "bb344cd987248f44bd33586a5033a79464a3151871b9a7ac5644422d88e758fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/signal.md"
@@ -371,6 +371,10 @@ Signal exec and plugin approval prompts use the top-level `approvals.exec` and `
 - Use `/approve <id> allow-always` when a request offers persistent approval.
 
 Approval reaction resolution requires explicit Signal approvers from `channels.signal.allowFrom`, `channels.signal.defaultTo`, or the matching account-level fields. Direct same-chat exec approval prompts can still suppress the duplicate local `/approve` fallback without explicit approvers; no-approver group approvals keep the local fallback visible.
+
+## Question reactions
+
+For an `ask_user` prompt with one non-secret, single-select question and one to four options, Signal shows `1️⃣` through `4️⃣` beside the option labels. React to the delivered prompt with the matching number to answer it. OpenClaw verifies the reaction targets the bot-authored message, then maps the number to the canonical option through the Gateway. Stale or duplicate taps are ignored. Multi-question, multi-select, and free-text prompts remain text-reply-only; normal Signal DM/group admission rules authorize the sender.
 
 ## Delivery targets (CLI/cron)
 

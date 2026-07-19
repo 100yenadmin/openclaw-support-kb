@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex supervision"
 source: "https://docs.openclaw.ai/specs/codex-supervision"
-source_hash: "35a5716ea5941829aad253b09ddf3e12a9e33d1871bcc191d6164d6e4f3b2780"
+source_hash: "6c54030ca7ce41a4736cef1a55aba2254d50481c9d4cceee6d439576f832dfd9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "specs/codex-supervision.md"
@@ -119,8 +119,9 @@ or assume that daemon implicitly.
 ## Catalog flow
 
 The generic Gateway method `sessions.catalog.list` dispatches to the `codex`
-catalog provider, which always requests `archived: false` and
-the interactive `cli` and `vscode` source kinds. It combines:
+catalog provider, which always requests `archived: false` and lets App Server
+apply its interactive-source default: `cli`, `vscode`, Atlas, and ChatGPT. It
+combines:
 
 1. Gateway-local `thread/list` results from the supervision App Server,
    which defaults to managed user-home stdio.
@@ -154,6 +155,13 @@ Host failures remain local to each host result. An offline node or unavailable
 local App Server does not erase healthy hosts from the page. Connectivity is a
 host property, not a thread status: a failed host result contains no fresh
 session rows and does not project `offline` onto native threads.
+
+The Control UI requests progressive catalog updates. Each local or paired host
+appears when its own App Server listing settles; the aggregate response remains
+the compatibility and recovery snapshot. The visible page reconciles after
+connectivity changes, on focus, and at most every 30 seconds, with a faster pass
+after changes. Native Codex sessions created in another client are therefore
+eventually discovered without importing them into OpenClaw storage.
 
 Catalog discovery is passive. Listing or reading metadata must not call
 `thread/resume`, subscribe the OpenClaw client to live thread requests, or
@@ -270,11 +278,11 @@ snapshot; it is not the durable continuation thread. Starting a distinct
 canonical harness thread on the first turn prevents OpenClaw from becoming a
 competing source writer merely because process-local status failed to see a
 Desktop-owned turn. The visible-history mirror and pinned snapshot may omit work
-that has not yet completed in an active source. The original CLI or VS Code
-source remains eligible for both native and OpenClaw catalogs. The canonical
-branch remains a native Codex thread in the supervision store, but native clients
-may filter its `appServer` source kind, so Codex Desktop visibility is not a
-contract.
+that has not yet completed in an active source. The original CLI, VS Code,
+Atlas, or ChatGPT source remains eligible for both native and OpenClaw catalogs.
+The canonical branch remains a native Codex thread in the supervision store,
+but native clients may filter its `appServer` source kind, so Codex Desktop
+visibility is not a contract.
 
 ## Archive behavior
 

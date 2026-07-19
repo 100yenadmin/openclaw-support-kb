@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "3e7214c8c28fd77e913049fe4838b7593d6f3df9dea3af8df2f6dd2467884768"
+source_hash: "a008ea93fb242a76bc69960b86eae917191800d6a18b770c6b5c01f3e97c0250"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
@@ -188,6 +188,10 @@ main session are either suppressed or reported through a safe direct route when 
 - In webchat-only or internal-session flows with no external target, followup delivery stays session-only (`deliver: false`).
 - If a caller explicitly requests strict external delivery with no resolvable external channel, the request fails with `INVALID_REQUEST`.
 - If `bestEffortDeliver` is enabled and no external channel can be resolved, delivery is downgraded to session-only instead of failing.
+
+## Minimal scopes for third-party clients
+
+Gateway approval resolution is guarded by the dedicated `operator.approvals` scope. This applies to both the owner-specific `exec.approval.resolve` method and the kind-agnostic `approval.resolve` method; `operator.write` does not subsume it. Dashboards and integrations should request only the scopes required by the methods they use. Treat approval-resolution access as remote-execution-grade authority and grant `operator.approvals` deliberately, even when the client only presents a small approval UI.
 
 ## Approval forwarding to chat channels
 

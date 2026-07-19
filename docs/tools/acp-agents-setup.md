@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
-source_hash: "c2fd07d7ed8d2fb959910c139feb5b927fc8f29889c6432976623bc89a0fbe80"
+source_hash: "5ad9fee7f4619b3fe5dc809e648ea565266b61878bd3883f333f2dc3c1e2d0a1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents-setup.md"
@@ -240,6 +240,8 @@ What this does:
   bootstrap.
 - Exposes plugin tools already registered by installed and enabled OpenClaw
   plugins.
+- Passes the active ACP session identity to plugin tool factories, so
+  agent-scoped tools stay in that agent's namespace.
 - Keeps the feature explicit and default-off.
 
 Security and trust notes:

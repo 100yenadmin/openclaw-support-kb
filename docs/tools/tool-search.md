@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool Search"
 source: "https://docs.openclaw.ai/tools/tool-search"
-source_hash: "04825dc7704a1b7d1807669af0393365bfc7fcca4385a1ee067fe0c72f488cae"
+source_hash: "17d09bd6526fb6c59db9709375f05e0f578753fb7ee12a49668982f6f1b0d464"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tool-search.md"
@@ -21,6 +21,9 @@ This page documents OpenClaw Tool Search. It is not the Codex-native tool
 search or dynamic-tools surface. Codex-native code mode, tool search, deferred
 dynamic tools, and nested tool calls are stable Codex harness surfaces and do
 not depend on `tools.toolSearch`.
+
+For the generic OpenClaw runtime that exposes a QuickJS-WASI `exec`/`wait`
+surface instead of Tool Search controls, see [Code Mode](/tools/code-mode).
 
 When enabled for OpenClaw runs, the model receives one `tool_search_code` tool
 by default, plus any direct-only tools whose structured results cannot cross
@@ -124,7 +127,15 @@ client-provided app tools.
 `openclaw.tools.search(query, options?)`
 
 Searches the effective catalog for the current run. Results are compact and safe
-to put back into prompt context.
+to put back into prompt context. Each hit includes a bounded TypeScript-style
+`input` signature, such as `{ id: string; mode?: "drip" | "flood" }`, so the
+model can skip `describe` when that signature is sufficient. A trusted
+OpenClaw core or plugin tool may also include a compact `output` hint, such as
+`Array<{ id: string; paid: boolean }>`. MCP and client output-schema claims are
+not promoted into this trusted hint. Their untrusted input schemas are also
+deferred as `input: "unknown"`; use `describe` before calling them. Open,
+oversized, or otherwise partial output schemas omit the hint and remain
+available through `describe` instead.
 
 ```js
 const hits = await openclaw.tools.search("calendar event", { limit: 5 });
@@ -132,7 +143,8 @@ const hits = await openclaw.tools.search("calendar event", { limit: 5 });
 
 `openclaw.tools.describe(id)`
 
-Loads full metadata for one search result, including the exact input schema.
+Loads full metadata for one search result, including the exact input schema and
+the trusted full `outputSchema` when the tool declares one.
 
 ```js
 const calendarCreate = await openclaw.tools.describe("mcp:calendar:create_event");
@@ -140,7 +152,11 @@ const calendarCreate = await openclaw.tools.describe("mcp:calendar:create_event"
 
 `openclaw.tools.call(id, args)`
 
-Calls a selected tool through OpenClaw.
+Calls a selected tool through OpenClaw and returns the raw `{ tool, result }`
+envelope. JSON-returning tools normally place their value in
+`result.details`. If a trusted tool declares `outputSchema`, OpenClaw compiles
+the schema before execution and validates final `details` after normal tool
+hooks before returning the catalog call.
 
 ```js
 await openclaw.tools.call(calendarCreate.id, {
@@ -148,6 +164,12 @@ await openclaw.tools.call(calendarCreate.id, {
   start: "2026-05-09T14:00:00Z",
 });
 ```
+
+Tool authors declare output contracts on the tool's `outputSchema` property.
+It describes `AgentToolResult.details`, not rendered content blocks. Include
+all non-throwing variants or omit it for unstable results. See
+[Code Mode output contracts](/tools/code-mode#declared-output-contracts) and
+[Tool plugins](/plugins/tool-plugins#output-contracts).
 
 The structured fallback mode exposes the same operations as tools:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "8e6f0a2b78871b2f294c3aabfebfe38bc277f2a1de9050a3d51a8a972057e84a"
+source_hash: "f6c5c86629c5d69fb1a68f070c62bb4bf20a7f2d466fa2040bf1f6e94cba8fd4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -37,6 +37,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [Anthropic (API + Claude CLI)](/providers/anthropic)
 - [Arcee AI (Trinity models)](/providers/arcee)
 - [Azure Speech](/providers/azure-speech)
+- [Baseten (Inkling + Model APIs)](/providers/baseten)
 - [BytePlus (International)](/concepts/model-providers#byteplus-international)
 - [Cerebras](/providers/cerebras)
 - [Chutes](/providers/chutes)
@@ -75,7 +76,6 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [Perplexity (web search)](/providers/perplexity-provider)
 - [Qianfan](/providers/qianfan)
 - [Qwen Cloud](/providers/qwen)
-- [Qwen OAuth / Portal](/providers/qwen-oauth)
 - [Runway](/providers/runway)
 - [SenseAudio](/providers/senseaudio)
 - [SGLang (local models)](/providers/sglang)

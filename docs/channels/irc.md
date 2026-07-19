@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "IRC"
 source: "https://docs.openclaw.ai/channels/irc"
-source_hash: "d70431af2e8683bc1fb78727fca9e0c9c7ee2a1c8a5c8b97cdc0275a9d903aef"
+source_hash: "f6eb3e300f59df6b923e5983ac3c24561beabccad118f8e33b7c45d27f458427"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/irc.md"
@@ -48,6 +48,12 @@ openclaw gateway run
 ```
 
 Prefer a private IRC server for bot coordination. If you intentionally use a public IRC network, common choices include Libera.Chat, OFTC, and Snoonet. Avoid predictable public channels for bot or swarm backchannel traffic.
+
+## Inbound durability
+
+OpenClaw writes each accepted IRC `PRIVMSG` to its durable ingress queue before normal policy checks and agent dispatch. Pending or retryable messages survive a Gateway restart and remain serialized per channel or direct-message peer.
+
+IRC does not provide a replayable delivery ID or resend messages missed by a disconnected client. OpenClaw therefore assigns a local ID that is stable only within the current TCP connection. The queue protects the local accept-to-dispatch window; it cannot recover a message that never reached OpenClaw or deduplicate a server resend across connections.
 
 ## Connection settings
 

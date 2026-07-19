@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "298d40deb04b4177fcc20200b7eaa16a166abadc579f66f8f38d38e6aa9be847"
+source_hash: "2c8c07fb7f76d2b073aa2cf593dc4fd4ddbbec323b07fc9af6821213ca2d63ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -170,6 +170,8 @@ observation-only.
 | `session_start` / `session_end`          | Track session lifecycle boundaries. `reason` is one of `new`, `reset`, `idle`, `daily`, `compaction`, `deleted`, `shutdown`, `restart`, or `unknown`. `shutdown`/`restart` fire from the Gateway shutdown finalizer when the process stops or restarts with active sessions, so plugins (memory, transcript stores) can finalize ghost rows instead of leaving them open across restarts. The finalizer is bounded so a slow plugin cannot block SIGTERM/SIGINT. |
 | `before_compaction` / `after_compaction` | Observe or annotate compaction cycles                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | `before_reset`                           | Observe session-reset events (`/reset`, programmatic resets)                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+For `sessions.create` calls with `parentSessionKey` and `emitCommandHooks: true`, a distinct child always receives `session_start`. Callers declare whether the parent also receives terminal `session_end` with `succeedsParent`: `true` means successor, `false` means parallel child. Omission preserves the legacy parent-rollover behavior. The `command:new` and `before_reset` hooks still describe the requested `/new` action in both cases.
 
 **Subagents**
 

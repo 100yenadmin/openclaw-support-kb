@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel ingress API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-ingress"
-source_hash: "14c22a42669375fe793ebf181a7d4eb72e02c7623decd3ef228c685dadd4de55"
+source_hash: "d93aaa771f39ba2f47fea68729dfde46484748b0995f3d2f37b624dce227ae59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-ingress.md"
@@ -123,8 +123,10 @@ Most channels should leave activation after sender and command gates. Public
 chat surfaces that must quiet non-mentioned traffic before sender allowlist
 noise can opt into `activation.order: "before-sender"` when text-command
 bypass is disabled. Channels with implicit activation, such as replies in bot
-threads, can pass `activation.allowedImplicitMentionKinds`; the projected
-`activationAccess.shouldBypassMention` then reports when command or implicit
+threads, resolve `channels.defaults.implicitMentions` plus channel and account
+overrides with `resolveChannelImplicitMentions(...)`, then pass the result as
+`activation.implicitMentions`. The projected
+`activationAccess.shouldBypassMention` reports when command or implicit
 activation bypassed an explicit mention.
 
 ## Redaction

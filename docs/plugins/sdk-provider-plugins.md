@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "f7ad83f3b74e40f264245fb06b186c9c48f33c1eb3a2fae4d9c91ff9629c8053"
+source_hash: "e90b4d2651d3addcbcc4b6c4ba1b23c58082e6b00f650caaa555ceaca2b6c614"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -521,7 +521,7 @@ Add runtime hooks (as needed)
     | Family | What it wires in | Bundled examples |
     | --- | --- | --- |
     | `google-thinking` | Gemini thinking payload normalization on the shared stream path | `google`, `google-gemini-cli` |
-    | `kilocode-thinking` | Kilo reasoning wrapper on the shared proxy stream path, with `kilo/auto` and unsupported proxy reasoning ids skipping injected thinking | `kilocode` |
+    | `kilocode-thinking` | Kilo reasoning wrapper on the shared proxy stream path, with `kilo-auto/balanced` and unsupported proxy reasoning ids skipping injected thinking | `kilocode` |
     | `moonshot-thinking` | Moonshot binary native-thinking payload mapping from config + `/think` level | `moonshot` |
     | `minimax-fast-mode` | MiniMax fast-mode model rewrite on the shared stream path | `minimax`, `minimax-portal` |
     | `openai-responses-defaults` | Shared native OpenAI/Codex Responses wrappers: attribution headers, `/fast`/`serviceTier`, text verbosity, native Codex web search, reasoning-compat payload shaping, and Responses context management | `openai` |

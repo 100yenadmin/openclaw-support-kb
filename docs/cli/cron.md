@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "59f56fd57b10d74cf376869e4d2eb9a478f75cb29ad19204bbb9c341f76fdf93"
+source_hash: "66531fc20f3e1756a19f69c0697c2687bf6c3b6fb99eccd4fcfcb88283cc58d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -230,7 +230,7 @@ Retention behavior:
 
 Note
 
-If you have cron jobs from before the current delivery and store format, run `openclaw doctor --fix`. Doctor normalizes legacy cron fields (`jobId`, `schedule.cron`, top-level delivery fields including legacy `threadId`, payload `provider` delivery aliases) and migrates `notify: true` webhook fallback jobs from `cron.webhook` to explicit webhook delivery. Jobs that already announce to a chat keep that delivery and get a completion webhook destination. When `cron.webhook` is unset, the inert top-level `notify` marker is removed for jobs with no migration target (the existing delivery is preserved unchanged), so `doctor --fix` no longer keeps re-warning about them.
+If you have cron jobs from before the current delivery and store format, run `openclaw doctor --fix`. Doctor normalizes legacy cron fields (`jobId`, `schedule.cron`, top-level delivery fields including legacy `threadId`, payload `provider` delivery aliases) and migrates `notify: true` webhook fallback jobs from the retired raw `cron.webhook` value to explicit webhook delivery before removing that config key. Jobs that already announce to a chat keep that delivery and get a completion webhook destination. Without a legacy webhook, the inert top-level `notify` marker is removed for jobs with no migration target (the existing delivery is preserved unchanged), so `doctor --fix` no longer keeps re-warning about them.
 
 ## Common edits
 

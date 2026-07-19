@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo"
 source: "https://docs.openclaw.ai/channels/zalo"
-source_hash: "6965312049bc2cfeac6d21611bb59fbd74092b550abc2c2ffdd24d063d646b70"
+source_hash: "288e3898796d2aa2c0d258dba27a4ae081f6a886fb2cf8729eeb95f719aa310b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/zalo.md"
@@ -68,13 +68,13 @@ This page covers **Zalo Bot Creator / Marketplace bots**. **Zalo Official Accoun
 
 ## Limits
 
-| Limit                          | Value                                                                         |
-| ------------------------------ | ----------------------------------------------------------------------------- |
-| Outbound text chunk size       | 2000 characters (Zalo API limit)                                              |
-| Media size (inbound/outbound)  | `channels.zalo.mediaMaxMb`, default `5` MB                                    |
-| Webhook request body           | 1 MB, 30s read timeout                                                        |
-| Webhook rate limit             | 120 requests / 60s per path+client IP, then HTTP 429                          |
-| Webhook duplicate-event window | 5 minutes (keyed on path + account + event name + chat + sender + message id) |
+| Limit                         | Value                                                                    |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| Outbound text chunk size      | 2000 characters (Zalo API limit)                                         |
+| Media size (inbound/outbound) | `channels.zalo.mediaMaxMb`, default `5` MB                               |
+| Webhook request body          | 1 MB, 30s read timeout                                                   |
+| Webhook rate limit            | 120 requests / 60s per path+client IP, then HTTP 429                     |
+| Webhook replay tombstones     | 30 days, up to 20,000 completed events per account (keyed by message id) |
 
 ## Access control
 
@@ -107,6 +107,7 @@ Group chats are supported by the plugin (`chatTypes: ["direct", "group"]`) and g
   - Zalo sends events with an `X-Bot-Api-Secret-Token` header, checked with a constant-time comparison.
   - Gateway HTTP handles webhook requests at `channels.zalo.webhookPath` (defaults to the webhook URL's path).
   - Requests must use `Content-Type: application/json` (or a `+json` media type).
+  - HTTP 200 is returned only after the raw event is durably stored; storage failures return HTTP 500.
   - getUpdates polling and webhook are mutually exclusive per Zalo API docs.
 
 ## Supported message types

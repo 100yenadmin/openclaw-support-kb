@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "a418c4405f11b1fa81a999f1a1907d7116d3f0cd8276c9061f353f98576e9a1d"
+source_hash: "a55620aef21e7f2ba02d4648b76642bc1df729efe6027963132d110b2fa3215f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -437,6 +437,13 @@ yourself.
 
 This keeps text, image, video, music, TTS, approval, and messaging-tool
 outputs on the same delivery path as OpenClaw-backed runs.
+
+Set `AgentHarnessAttemptResult.hostOwnedToolMediaUrls` only for native artifacts
+that the trusted harness runtime created and persisted itself. Every entry must
+also appear in `toolMediaUrls`. Never include model-selected dynamic-tool or
+OpenClaw-tool media. On `message_tool_only` routes, this narrow provenance lets
+native runtime artifacts survive source-reply suppression; normal send policy
+and ambient-room admission still apply.
 
 ### Terminal tool outcomes
 

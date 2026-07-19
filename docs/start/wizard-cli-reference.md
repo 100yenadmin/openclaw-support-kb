@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "5f38b9bca0385d3017d64e0f7afb7e6140faffaa5dbbed2cc81e0961ee15aef6"
+source_hash: "dd28b05bc135aa5b23c4f8835840751d4e86fc69f6b1e3ee67591bc72cf1a9e4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -399,7 +399,7 @@ Typical fields in `~/.openclaw/openclaw.json`:
 - `agents.defaults.model` / `models.providers` (if Minimax chosen)
 - `tools.profile` (local onboarding defaults to `"coding"` when unset; existing explicit values are preserved)
 - `gateway.*` (mode, bind, auth, tailscale)
-- `session.dmScope` (local onboarding defaults this to `per-channel-peer` when unset; existing explicit values are preserved)
+- `session.dmScope` (onboarding preserves explicit values and otherwise leaves it unset, so the `main` default keeps all direct messages across channels in the agent's rolling main session—the personal-agent default. For shared or multi-user inboxes, use `per-channel-peer`; `openclaw security audit` recommends isolation when it detects multi-user DM traffic)
 - `channels.telegram.botToken`, `channels.discord.token`, `channels.matrix.*`, `channels.signal.*`, `channels.imessage.*`
 - Channel allowlists (Discord, iMessage, Signal, Slack, Telegram, WhatsApp) when you opt in during prompts; Discord and Slack also resolve entered names to IDs
 - `skills.install.nodeManager`
@@ -424,6 +424,12 @@ Note
 
 Some channels are delivered as plugins. When selected during setup, the wizard
 prompts to install the plugin (npm or local path) before channel configuration.
+
+### Installed app recommendations
+
+After the model access check succeeds, classic interactive onboarding on macOS scans application names and bundle IDs without requesting macOS privacy permissions. It searches the official plugin catalogs and ClawHub, then asks the configured model to reject false name matches and recommend relevant plugins or skills. Recommended matches are selected by default; optional matches require an explicit selection.
+
+The results screen lists the detected applications and shows: "App names were matched using your configured model and ClawHub search." Set `wizard.appRecommendations` to `false` to disable both this onboarding step and Gateway access to node app inventories. The scan is not used in quickstart or non-macOS onboarding.
 
 ## Non-interactive setup
 

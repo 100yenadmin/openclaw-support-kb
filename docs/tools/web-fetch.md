@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web fetch"
 source: "https://docs.openclaw.ai/tools/web-fetch"
-source_hash: "bab863360abd4f97b74cf2320aeccbae869f9ddedc87cd8fe10f96cfcb6cd7cc"
+source_hash: "0f1aef7321a0224a3581f712c42dbb13a1aa18efe0185b36353d76d05012f0a9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web-fetch.md"
@@ -38,6 +38,22 @@ Output format after main-content extraction.
 ParamField
 
 Truncate output to this many characters. Clamped to `tools.web.fetch.maxCharsCap`.
+
+## Result
+
+`web_fetch` returns a closed structured result with these fields:
+
+- Request metadata: `url`, `finalUrl`, `status`, `extractMode`, and `extractor`
+- Optional response metadata: `contentType`, `title`, and `warning` (omitted when absent)
+- Wrapped content metadata: `externalContent`, `truncated`, `length`, `rawLength`,
+  `fetchedAt`, `tookMs`, and `text`
+- Optional `cached: true` on a cache hit
+- Optional `spill: { path, chars, truncated? }` when truncated content was written
+  to a private temporary file; `truncated` is present only when that file contains
+  partial source content
+
+`length` is the wrapped `text` length. `rawLength` is the extracted content length
+before external-content wrapping.
 
 ## How it works
 

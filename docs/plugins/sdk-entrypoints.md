@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "4867e1426723f5c9bca5dea6cfd3fb446d31d99beb479b2ac1d78257063e8ef5"
+source_hash: "19f4a5d6c244d782194494abe469f5e55d5a322e965220e6ffba471e783f373b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
@@ -83,6 +83,13 @@ export default defineToolPlugin({
       parameters: Type.Object({
         symbol: Type.String({ description: "Ticker symbol." }),
       }),
+      outputSchema: Type.Object(
+        {
+          symbol: Type.String(),
+          hasKey: Type.Boolean(),
+        },
+        { additionalProperties: false },
+      ),
       execute: async ({ symbol }, config) => ({ symbol, hasKey: Boolean(config.apiKey) }),
     }),
   ],
@@ -94,6 +101,9 @@ export default defineToolPlugin({
 - `execute` returns a plain string or JSON-serializable value; the helper
   wraps it as a text tool result with `details` set to the original
   (unstringified) return value.
+- `outputSchema` optionally describes that original `details` value for Code
+  Mode and Tool Search. Catalog calls reject an invalid schema before execution
+  and validate the final value before returning it.
 - For custom tool results, `openclaw/plugin-sdk/tool-results` exports
   `textResult` and `jsonResult`.
 - Tool names are static, so `openclaw plugins build` derives
@@ -139,7 +149,10 @@ export default definePluginEntry({
   `openclaw/plugin-sdk/session-catalog` and
   `api.registerSessionCatalog({ id, label, list, read, continueSession?, archive? })`.
   Core owns the `sessions.catalog.*` Gateway methods; providers return host,
-  session, and normalized transcript projections without registering RPCs.
+  session, and normalized transcript projections without registering RPCs. A
+  list provider should call the optional `onHost(host)` callback as each host
+  settles; the returned host array remains required as the final compatibility
+  snapshot.
 - `kind` is deprecated: declare an exclusive slot (`"memory"` or
   `"context-engine"`) in the `openclaw.plugin.json` manifest `kind` field
   instead. Runtime-entry `kind` remains only as a compatibility fallback for

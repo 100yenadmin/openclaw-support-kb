@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
-source_hash: "7ba23741c154f8162329c52b329a1dacbb7a74b907b544a000187ad98b6cb0bf"
+source_hash: "22c2e5dda33bf64350a38fba3d07b2f5020184a96b376e43866523a1ee7c441c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding.md"
@@ -96,9 +96,11 @@ To use a Claude subscription when the Gateway host has no Claude CLI login, run
 printed token as **Anthropic setup-token** under **Connect with an API key or
 token**.
 
-Gemini CLI and Antigravity remain available for normal use after setup. Their
-installed CLIs are shown for context but are not auto-tested because neither can
-enforce the tool-free inference probe.
+Installed Gemini CLI, Antigravity, Pi, and OpenCode CLIs are shown for context
+when they cannot be selected as the reusable guided-setup inference route.
+Gemini and Antigravity cannot enforce the tool-free inference probe. Pi and
+OpenCode are whole-agent harnesses rather than setup inference routes; their
+session integrations require separate runtime and plugin setup.
 
 You can also sign in through the provider's own OAuth or device-pairing flow.
 The built-in choices include OpenAI/ChatGPT, OpenRouter, GitHub Copilot, Google
@@ -112,7 +114,21 @@ the credential with the same live test before storing its auth profile. Next
 remains locked until one backend has passed, so the first agent chat cannot
 start without working inference. After that live check passes, OpenClaw becomes
 available to help configure the remaining workspace, Gateway, channels, and
-other optional features; it is also available later under Settings → OpenClaw.
+other optional features. When OpenClaw offers a short list of choices, the app
+shows native option cards; choosing one sends the selection, and **Skip for
+now** always leaves the choice optional. OpenClaw is also available later under
+Settings → OpenClaw.
+
+Import memories (shown when detected)
+
+For a local Gateway, onboarding checks the Mac for memories from supported AI
+tools: Claude Code auto-memory, Codex consolidated memories, and Hermes memory
+files. When any are found, this page lists each source with its memory count
+and lets you import the selected sources into the agent workspace under
+`memory/imports/` for indexed recall. Already-imported files are skipped, and
+the page never appears when there is nothing to import. Skipping is safe; the
+dashboard's Memory import page offers the same import later with per-file
+control.
 
 Permissions
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "18f468f48995b2f82149a977480b99dde5a5be9297d0a29c5c7af558e8bdac0b"
+source_hash: "849c42081b091c55b5c19b78f4d6d325a32730b7d7c7b6525ef6adccabef119f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -882,6 +882,18 @@ ParamField
 
 
 
+Provider `apiKey` fields can be raw strings or SecretRefs. During cold Gateway
+startup, an unavailable TTS SecretRef marks the built-in TTS capability
+configured-unavailable instead of stopping the Gateway. `tts.speak` then returns
+`UNAVAILABLE` with reason `SECRET_SURFACE_UNAVAILABLE`, and no provider request is
+sent. Status and doctor list the degraded TTS owner and its config paths. The
+explicit refs remain in the runtime snapshot, so environment or profile
+credentials cannot silently select a different account. Reloads and config-write
+preflight apply the owner-aware degradation policy: an unchanged eligible TTS
+owner may keep its last-known-good credentials as stale, while a new or changed
+failure becomes cold without blocking healthy owners. Structurally invalid refs
+and resolved values still fail startup or reject the update.
+
 
 Azure Speech
 
@@ -1200,7 +1212,7 @@ ParamField
 Default `https://api.xiaomimimo.com/v1`. Env: `XIAOMI_BASE_URL`.
 
 ParamField
-Default `mimo-v2.5-tts`. Env: `XIAOMI_TTS_MODEL`. Also supports `mimo-v2-tts` and `mimo-v2.5-tts-voicedesign`.
+Default `mimo-v2.5-tts`. Env: `XIAOMI_TTS_MODEL`. Also supports `mimo-v2.5-tts-voicedesign`.
 
 ParamField
 Default `mimo_default` for preset-voice models. Env: `XIAOMI_TTS_VOICE`. Legacy alias: `voice`. Not sent for `mimo-v2.5-tts-voicedesign`.

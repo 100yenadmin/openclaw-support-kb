@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrating from Hermes"
 source: "https://docs.openclaw.ai/install/migrating-hermes"
-source_hash: "d41de94191e2503dae537df5ea796a25e134083956fd8465180b5408f8de193d"
+source_hash: "6e5940c72cca83b6782f58b4a8e4c6246f444a915e732bf2ae2cf5257ec0e481"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating-hermes.md"
@@ -74,6 +74,7 @@ Workspace files
 
     - `SOUL.md` and `AGENTS.md` are copied into the OpenClaw agent workspace.
     - `memories/MEMORY.md` and `memories/USER.md` are **appended** to the matching OpenClaw memory files instead of overwriting them.
+    - Memory-only surfaces behave differently: the onboarding memory page and the Control UI Memory import page copy these two files under `memory/imports/hermes/` for indexed recall and leave existing workspace memory untouched.
 
 
 

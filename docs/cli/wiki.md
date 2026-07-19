@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
-source_hash: "d99a36e337de8e2723521b3ff2175f43c784dfa9223a5f63c9015e59cad0ba6d"
+source_hash: "d3977be4850677748f63f2dfd09e1da469d219af5f54e2d6f4eff9de6c07605a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/wiki.md"
@@ -127,10 +127,7 @@ openclaw wiki get <path-from-json-result>
 
 ### `wiki compile`
 
-Rebuild indexes, related blocks, dashboards, and compiled digests. Writes stable machine-facing artifacts under:
-
-- `.openclaw-wiki/cache/agent-digest.json`
-- `.openclaw-wiki/cache/claims.jsonl`
+Rebuild indexes, related blocks, dashboards, and the compiled query/prompt snapshot. The snapshot is persisted in OpenClaw's shared SQLite plugin state and kept in memory for synchronous prompt projection; it does not create cache files in the vault.
 
 If `render.createDashboards` is enabled, compile also refreshes report pages.
 

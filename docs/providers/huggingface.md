@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hugging Face (inference)"
 source: "https://docs.openclaw.ai/providers/huggingface"
-source_hash: "02314f215058fc238c54292b40bd45016fe3d25b25b0a1fb285d330dd0ee0e6f"
+source_hash: "ea5ec9bd0e234380caa516f0cbd04c3cae5b25a893f3905f90d372ef9644ab0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/huggingface.md"
@@ -88,16 +88,15 @@ Sets `huggingface/deepseek-ai/DeepSeek-R1` as the default model.
 
 Model refs use the form `huggingface/<org>/<model>` (Hub-style IDs). OpenClaw's built-in catalog:
 
-| Model                        | Ref (prefix with `huggingface/`)          |
-| ---------------------------- | ----------------------------------------- |
-| DeepSeek R1                  | `deepseek-ai/DeepSeek-R1`                 |
-| DeepSeek V3.1                | `deepseek-ai/DeepSeek-V3.1`               |
-| GPT-OSS 120B                 | `openai/gpt-oss-120b`                     |
-| Llama 3.3 70B Instruct Turbo | `meta-llama/Llama-3.3-70B-Instruct-Turbo` |
+| Model         | Ref (prefix with `huggingface/`) |
+| ------------- | -------------------------------- |
+| DeepSeek R1   | `deepseek-ai/DeepSeek-R1`        |
+| DeepSeek V3.1 | `deepseek-ai/DeepSeek-V3.1`      |
+| GPT-OSS 120B  | `openai/gpt-oss-120b`            |
 
 Tip
 
-When your token is valid, OpenClaw also discovers any other model from **GET** `https://router.huggingface.co/v1/models` at onboarding time and Gateway startup, so your catalog can include far more than the four models above. You can append `:fastest` or `:cheapest` to any model id; HF's router routes to the matching inference provider. Set your default provider order in [Inference Provider settings](https://hf.co/settings/inference-providers).
+When your token is valid, OpenClaw also discovers any other model from **GET** `https://router.huggingface.co/v1/models` at onboarding time and Gateway startup, so your catalog can include far more than the three models above. You can append `:fastest` or `:cheapest` to any model id; HF's router routes to the matching inference provider. Set your default provider order in [Inference Provider settings](https://hf.co/settings/inference-providers).
 
 ## Advanced configuration
 
@@ -203,7 +202,7 @@ Config: DeepSeek with cheapest and fastest variants
 
 
 
-Config: DeepSeek + Llama + GPT-OSS with aliases
+Config: DeepSeek + GPT-OSS with aliases
 
     ```json5
     {
@@ -211,14 +210,10 @@ Config: DeepSeek + Llama + GPT-OSS with aliases
         defaults: {
           model: {
             primary: "huggingface/deepseek-ai/DeepSeek-V3.1",
-            fallbacks: [
-              "huggingface/meta-llama/Llama-3.3-70B-Instruct-Turbo",
-              "huggingface/openai/gpt-oss-120b",
-            ],
+            fallbacks: ["huggingface/openai/gpt-oss-120b"],
           },
           models: {
             "huggingface/deepseek-ai/DeepSeek-V3.1": { alias: "DeepSeek V3.1" },
-            "huggingface/meta-llama/Llama-3.3-70B-Instruct-Turbo": { alias: "Llama 3.3 70B Turbo" },
             "huggingface/openai/gpt-oss-120b": { alias: "GPT-OSS 120B" },
           },
         },

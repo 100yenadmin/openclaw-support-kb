@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "79e0c41dfe96e7e78b2e2b258bd20ac0f3b9afabca449de6f45ccde7edde5ae0"
+source_hash: "0210d5d0d11d2034ce2970d5a859b6cc840df73c4579bdd84ab101994a0af1e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -135,6 +135,14 @@ Tip
 Use `grok-4.5` for general chat, coding, and agentic work where it is available.
 Grok 4.3 remains the regional-safe setup default; `grok-build-0.1` and both
 dated Grok 4.20 variants remain selectable.
+
+Catalog context and token-cost metadata follows xAI's live
+[model pages](https://docs.x.ai/developers/models) and
+[pricing page](https://docs.x.ai/developers/pricing). xAI applies higher rates
+when a request crosses its documented long-context threshold; OpenClaw's flat
+catalog cost fields record the short-context rates. Grok Build, xAI's separate
+coding-agent CLI, is available at [x.ai/cli](https://x.ai/cli) and currently
+uses Grok 4.5.
 
 ## Feature coverage
 

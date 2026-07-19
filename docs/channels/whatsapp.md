@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "90ccbe74b520aa17e0ce28c504a61bddb133b5ffb5c4665a5e596552af2d694c"
+source_hash: "b763c7c4d5d25b71b3e5f330e7c3742e0add4f8d8de75c3fff3118e811bf82da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -255,6 +255,10 @@ WhatsApp can render exec and plugin approval prompts as `👍`/`👎` reactions,
 `approvals.exec` and `approvals.plugin` are independent; enabling WhatsApp as a channel only links the transport and sends nothing unless the matching approval family is enabled and routed there. Session mode delivers native emoji approvals only for approvals that originate from WhatsApp. Target mode uses the shared forwarding pipeline for explicit targets and does not create separate approver-DM fanout.
 
 WhatsApp approval reactions require explicit approvers in `allowFrom` (or `"*"`). `defaultTo` sets ordinary default message targets, not an approver list. Manual `/approve` commands still pass the normal WhatsApp sender-authorization path before approval resolution.
+
+## Question reactions
+
+For an `ask_user` prompt with one non-secret, single-select question and one to four options, WhatsApp shows `1️⃣` through `4️⃣` beside the option labels. React to the delivered prompt with the matching number to answer it. OpenClaw maps the number to the canonical option through the Gateway; stale or duplicate taps are ignored. Multi-question, multi-select, and free-text prompts remain text-reply-only. Normal WhatsApp DM/group admission rules authorize the reacting sender.
 
 ## Plugin hooks and privacy
 

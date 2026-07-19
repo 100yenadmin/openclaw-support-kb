@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "0361ec0817ce335908d221bd4f45d98a3f481371f0a9b96eb1908c60415bac39"
+source_hash: "fd07e3d5619a5be53c46eb434999456dad52581f75cdcdb0ccffe1d9fc473c67"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -216,6 +216,9 @@ The bundled Hermes provider follows `$HERMES_HOME` and the active profile, then 
 - MCP server definitions from `mcp_servers` or `mcp.servers`. Exact OpenClaw mappings cover default Streamable HTTP routing, OAuth scope, boolean TLS verification, separate client certificate/key paths, and Hermes native/resource/prompt tool policy. Unsupported Hermes-only runtime or credential fields are reported for manual review.
 - `SOUL.md` and `AGENTS.md` into the OpenClaw agent workspace.
 - `memories/MEMORY.md` and `memories/USER.md` appended to workspace memory files.
+  Memory-only surfaces (the onboarding memory page and the Control UI Memory
+  import page) instead copy these files under `memory/imports/hermes/` for
+  indexed recall without touching existing workspace memory.
 - Memory config defaults for OpenClaw file memory, plus archive or manual-review items for external memory providers such as Honcho.
 - Skills that include a `SKILL.md` file anywhere under `skills/`; nested skills are flattened into the workspace skill directory.
 - Per-skill config values from `skills.config`.

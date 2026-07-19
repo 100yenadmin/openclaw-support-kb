@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "9975ffc77284ccb620e04a0c199ad8287ea24c77ced4d050732ac04e7e929ff0"
+source_hash: "081f1071343db2dd28975df6c7ee341efa9dc40d924d17259118eb3f2e4860b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -67,7 +67,7 @@ Add a Bedrock provider and model to your config
                 auth: "aws-sdk",
                 models: [
                   {
-                    id: "us.anthropic.claude-opus-4-6-v1:0",
+                    id: "us.anthropic.claude-opus-4-6-v1",
                     name: "Claude Opus 4.6 (Bedrock)",
                     reasoning: true,
                     input: ["text", "image"],
@@ -81,7 +81,7 @@ Add a Bedrock provider and model to your config
           },
           agents: {
             defaults: {
-              model: { primary: "amazon-bedrock/us.anthropic.claude-opus-4-6-v1:0" },
+              model: { primary: "amazon-bedrock/us.anthropic.claude-opus-4-6-v1" },
             },
           },
         }
@@ -302,8 +302,8 @@ Inference profiles
     first in `openclaw models list` since they generally offer better capacity
     and automatic failover.
 
-    Inference profile IDs look like `us.anthropic.claude-opus-4-6-v1:0` (regional)
-    or `anthropic.claude-opus-4-6-v1:0` (global). If the backing model is already
+    Inference profile IDs look like `us.anthropic.claude-opus-4-6-v1` (regional)
+    or `anthropic.claude-opus-4-6-v1` (global). If the backing model is already
     in the discovery results, the profile inherits its full capability set;
     otherwise safe defaults apply.
 

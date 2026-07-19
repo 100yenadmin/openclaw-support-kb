@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "9d983864f502681c6a3dd9d742545d8d62abbec435b1b630953dc4579e053525"
+source_hash: "47d92f55cec6a1d9e0ceed1ea48fa33b710846a9b7531032c9f61de66c3a9e0c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -83,6 +83,7 @@ and `openclaw memory status --deep`.
 
 ## Secrets
 
+- When the running Gateway has any isolated SecretRef owner from startup, reload, or a config write, status includes `degradedSecretOwners` in JSON and a **Degraded secrets** overview row in human output. Each entry names the owner, degradation state (`cold` or `stale`), config paths, and redacted reason. Cold owners are unavailable; stale owners continue with last-known-good values.
 - Read-only status surfaces (`status`, `status --json`, `status --all`)
   resolve supported SecretRefs for their targeted config paths when
   possible.

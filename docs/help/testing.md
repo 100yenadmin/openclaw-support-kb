@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing"
 source: "https://docs.openclaw.ai/help/testing"
-source_hash: "138ab674971352ae329fb940f6c6fa59d770df565f815330b3c1fbb1a7f92c0a"
+source_hash: "4992ecc57d6a6b3bb8747c2a0ec7f2681347e7f5773ef59945f62577f534b58c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing.md"
@@ -129,6 +129,12 @@ When debugging real providers/models (requires real creds):
   - Installs the packaged OpenClaw tarball in Docker, runs OpenAI API-key
     onboarding, and verifies the Codex plugin plus `@openai/codex` dependency
     were downloaded into the managed npm project root on demand.
+- Codex npm-plugin live package smoke: `pnpm test:docker:live-codex-npm-plugin`
+  - Installs the candidate OpenClaw package and exact Codex plugin into Docker,
+    then uses a real OpenAI key for CLI preflight and same-session turns.
+  - Its zero-retry medium-thinking follow-through turn must send progress, keep
+    working through randomized workspace reads and an exact artifact write,
+    then send completion. A progress-only terminal turn fails the lane.
 - Live plugin tool dependency smoke: `pnpm test:docker:live-plugin-tool`
   - Packs a fixture plugin with a real `slugify` dependency, installs it
     through `npm-pack:`, verifies the dependency under the managed npm

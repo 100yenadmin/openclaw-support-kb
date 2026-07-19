@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Supervise Codex sessions"
 source: "https://docs.openclaw.ai/plugins/codex-supervision"
-source_hash: "cae17ef3451b29a5fcc28bf08e5eb9d597c185c4b4a3c22a5377b85e2450f5d9"
+source_hash: "43d51460df74f96adc41f863b2b76430f6abf54d44be75f9da395b475a202b65"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-supervision.md"
@@ -14,8 +14,9 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/plugins/codex-supervision
 
 Codex supervision is an opt-in capability of the official `codex` plugin. It
-shows non-archived Codex Desktop and CLI source sessions from the Gateway
-computer and opted-in paired computers in the normal sessions sidebar and Chat pane.
+shows non-archived Codex CLI, VS Code, Atlas, and ChatGPT source sessions from
+the Gateway computer and opted-in paired computers in the normal sessions
+sidebar and Chat pane.
 
 The initial release deliberately keeps ownership narrow:
 
@@ -141,6 +142,12 @@ closed instead of risking the node or Gateway connection.
 Open the **Codex** group in the normal sessions sidebar. It lists the same sessions
 grouped by host. **Load more sessions** appends the next page from each host that
 has older rows, and those appended rows survive the sidebar's periodic refresh.
+Each host appears as soon as its own native listing settles. The visible page
+reconciles after node-connectivity changes, when it regains focus, and at most
+every 30 seconds; a changed result gets a faster follow-up pass. Sessions created
+in Codex Desktop, the CLI, or another native client therefore appear without a
+full page reload. The first page follows Codex's own most-recently-updated order,
+so a newly created native session is eligible immediately.
 Each returned search page scans a bounded number of native pages per host rather
 than sending the query to App Server, because native search can also match
 transcript previews.
@@ -269,11 +276,11 @@ the source thread or displaying the pending Chat. Starting a distinct canonical
 harness thread on the first turn lets another Codex process keep owning the
 source without creating competing rollout writers.
 
-The original CLI or VS Code source remains visible to native clients and the
-OpenClaw catalog. The canonical branch is stored as a native Codex thread, but
-its source kind is `appServer`; Codex Desktop or another native client may filter
-that source kind, so the branch itself is not guaranteed to appear in every
-native history view.
+The original CLI, VS Code, Atlas, or ChatGPT source remains visible to native
+clients and the OpenClaw catalog. The canonical branch is stored as a native
+Codex thread, but its source kind is `appServer`; Codex Desktop or another
+native client may filter that source kind, so the branch itself is not guaranteed
+to appear in every native history view.
 
 An active row reported by OpenClaw's App Server cannot start a new branch. Wait
 for the current turn to finish and refresh the catalog. Codex App Server

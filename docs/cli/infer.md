@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inference CLI"
 source: "https://docs.openclaw.ai/cli/infer"
-source_hash: "21548f665f03087633e2f0c44c5a6b8a2c893c4a5ead8654ee963373eb8dc730"
+source_hash: "56afe87e594dd240467f2c28352c4f3d1302ac93d1a3cb7d0d4b9d2ceb272e05"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/infer.md"
@@ -189,7 +189,7 @@ Notes:
   ```bash
   openclaw infer image providers --json
   openclaw infer image generate \
-    --model google/gemini-3.1-flash-image-preview \
+    --model google/gemini-3.1-flash-image \
     --prompt "Minimal flat test image: one blue square on a white background, no text." \
     --output ./openclaw-infer-image-smoke.png \
     --json

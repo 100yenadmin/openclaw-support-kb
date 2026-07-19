@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "4708e887b6acf27a490c9cc9f3fcabee22bd2e0053176a47597eafca9f16110c"
+source_hash: "080c0600a072da486a470630ff782ed755a1f093970939123c729386f4868c8d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -241,9 +241,9 @@ instead of sending it.
 ## Image generation
 
 The bundled `google` image-generation provider defaults to
-`google/gemini-3.1-flash-image-preview`.
+`google/gemini-3.1-flash-image`.
 
-- Also supports `google/gemini-3-pro-image-preview`
+- Also supports `google/gemini-3-pro-image`
 - Generate: up to 4 images per request
 - Edit mode: enabled, up to 5 input images
 - Geometry controls: `size`, `aspectRatio`, and `resolution`
@@ -255,7 +255,7 @@ To use Google as the default image provider:
   agents: {
     defaults: {
       imageGenerationModel: {
-        primary: "google/gemini-3.1-flash-image-preview",
+        primary: "google/gemini-3.1-flash-image",
       },
     },
   },
@@ -449,15 +449,19 @@ nearest supported level, while `-1` leaves Google's default in place. See the
 Note
 
 Control UI Talk supports Google Live browser sessions with constrained one-use
-tokens. Backend-only realtime voice providers can also run through the generic
-Gateway relay transport, which keeps provider credentials on the Gateway.
+tokens. In Video Talk, the browser sends bounded JPEG frames directly to
+Google Live at the provider's maximum of one frame per second. The
+`describe_view` function reports whether that camera stream is active.
+Camera frames do not pass through the Gateway. Backend-only realtime voice
+providers can also run through the generic Gateway relay transport, which
+keeps provider credentials on the Gateway.
 
 For maintainer live verification, run
 `OPENAI_API_KEY=... GEMINI_API_KEY=... node --import tsx scripts/dev/realtime-talk-live-smoke.ts`.
 The smoke also covers OpenAI backend/WebRTC paths; the Google leg mints the same
 constrained Live API token shape used by Control UI Talk, opens the browser
-WebSocket endpoint, sends the initial setup payload, and waits for
-`setupComplete`.
+WebSocket endpoint, sends the initial setup payload plus a JPEG frame, and
+verifies a text response and `describe_view` function roundtrip.
 
 ## Advanced configuration
 

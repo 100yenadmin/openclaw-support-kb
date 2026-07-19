@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics flags"
 source: "https://docs.openclaw.ai/diagnostics/flags"
-source_hash: "ef9aa92021fbdd83f0955cb61ab5392e3d87c09c8ce83df78839c3bb2cba4dc9"
+source_hash: "932adecc46c8e1277df624d4b3348f03a8a57215fb19ddb79cda32eae069ba64"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "diagnostics/flags.md"
@@ -28,14 +28,17 @@ Diagnostics flags turn on extra logging for one subsystem without raising
 
 ## Known flags
 
-| Flag             | Enables                                                   |
-| ---------------- | --------------------------------------------------------- |
-| `telegram.http`  | Telegram Bot API HTTP error logging                       |
-| `brave.http`     | Brave Search request/response/cache logging               |
-| `profiler`       | Reply-stage profiler and Codex app-server profiler (both) |
-| `reply.profiler` | Reply-stage profiler only                                 |
-| `codex.profiler` | Codex app-server profiler only                            |
-| `timeline`       | Structured JSONL timeline artifact (see below)            |
+| Flag                  | Enables                                                   |
+| --------------------- | --------------------------------------------------------- |
+| `telegram.http`       | Telegram Bot API HTTP error logging                       |
+| `brave.http`          | Brave Search request/response/cache logging               |
+| `profiler`            | Reply-stage profiler and Codex app-server profiler (both) |
+| `reply.profiler`      | Reply-stage profiler only                                 |
+| `codex.profiler`      | Codex app-server profiler only                            |
+| `health`              | Gateway health probe/account/binding debug details        |
+| `ingress.timing`      | Session load, model selection, and model catalog timings  |
+| `plugin.load-profile` | Synchronous plugin module-load timings                    |
+| `timeline`            | Structured JSONL timeline artifact (see below)            |
 
 ## Enable via config
 

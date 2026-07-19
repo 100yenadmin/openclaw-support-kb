@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "31038244e5f9514e93e27491ea248c81420b375ff6389403b8ab4d33eb4cb387"
+source_hash: "82b6e48f92fd018d12422d845d50c3ed14564d9842906dfd3256f8b61b9b2088"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-setup.md"
@@ -380,7 +380,7 @@ For hot setup-only paths, prefer the narrow setup helper seams over the broader 
 
 Use the broader `plugin-sdk/setup` seam when you want the full shared setup toolbox, including config-patch helpers such as `moveSingleAccountChannelSectionToDefaultAccount(...)`.
 
-Use `createSetupTranslator(...)` for fixed setup wizard copy. It follows the CLI wizard locale (`OPENCLAW_LOCALE`, then system locale variables) and falls back to English. Keep plugin-specific setup text in plugin-owned code and use shared catalog keys only for common setup labels, status text, and official bundled plugin setup copy.
+Use `createSetupTranslator(...)` for fixed setup wizard copy. It uses the first nonblank value from `OPENCLAW_LOCALE`, `LC_ALL`, `LC_MESSAGES`, and `LANG`, in that order, then falls back to English. Set `OPENCLAW_LOCALE=en` for an explicit English override. Keep plugin-specific setup text in plugin-owned code and use shared catalog keys only for common setup labels, status text, and official bundled plugin setup copy.
 
 The setup patch adapters stay hot-path safe on import. Their bundled single-account promotion contract-surface lookup is lazy, so importing `plugin-sdk/setup-runtime` does not eagerly load bundled contract-surface discovery before the adapter is actually used.
 

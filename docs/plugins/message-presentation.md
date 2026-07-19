@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "81ef1fe48c7852a2ba46a941b41b91618e3c89e18319250d0f553df988d44643"
+source_hash: "d4d3ede5748fb39c4a3e5836eebde6ea7cf11d52eeea41d813d8092c520009e9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -84,8 +84,22 @@ type MessagePresentationAction =
       approvalKind: "exec" | "plugin";
       decision: "allow-once" | "allow-always" | "deny";
     }
+  | {
+      type: "question";
+      questionId: string;
+      optionValue: string;
+    }
   | { type: "url"; url: string }
-  | { type: "web-app"; url: string };
+  | {
+      type: "web-app";
+      url: string;
+      widgetId?: string;
+    }
+  | {
+      type: "web-app";
+      url?: string;
+      widgetId: string;
+    };
 
 type MessagePresentationButton = {
   label: string;
@@ -136,8 +150,22 @@ Button semantics:
   encode that action into a transport-private callback and resolve it through
   the approval service; they must not parse `/approve` command text or infer
   kind from the ID.
+- `action.type: "question"` identifies one choice for a live, runtime-authored
+  `ask_user` question. Like `approval`, this is an OpenClaw runtime action;
+  agents and plugins must not synthesize question IDs. Telegram, Discord, and
+  Slack map it to transport-private native callbacks and resolve the choice
+  through the Gateway. When the question becomes answered, expired, or
+  cancelled, those channels edit the delivered message, remove its actions,
+  and append the terminal status. WhatsApp, Signal, and iMessage render up to
+  four single-select choices as `1️⃣` through `4️⃣` reactions. Other question
+  shapes degrade to label text, and the user can answer with a plain-text
+  reply.
 - `action.type: "url"` opens a normal link.
-- `action.type: "web-app"` launches a channel-native web app.
+- `action.type: "web-app"` launches a channel-native web app. Set `url` for a
+  URL-backed app or `widgetId` for an OpenClaw-hosted widget whose launch
+  mechanics are owned by the channel; at least one is required. When both are
+  present, a channel can prefer its native hosted-widget launch and use the URL
+  where that mechanism is unavailable.
 - `value` is the legacy opaque callback value. New controls should use `action`
   so channel plugins can map commands and callbacks without guessing from text.
 - `url`, `webApp`, and `web_app` remain accepted as deprecated boundary inputs.
@@ -510,9 +538,10 @@ keeping opaque callback data private:
 - **`approval`-typed actions** render label-only. Approval IDs and decisions are
   transport data and are not exposed through generic scalar helpers or fallback
   text.
-- **`url` / `web-app` actions** and deprecated **`url` / `webApp` / `web_app`**
-  inputs render the URL text alongside the button label, since the URL is
-  user-facing.
+- **`url` actions**, URL-backed **`web-app` actions**, and deprecated **`url` /
+  `webApp` / `web_app`** inputs render the URL text alongside the button label,
+  since the URL is user-facing. Hosted-widget-only actions render label-only on
+  channels without a native widget launch.
 - **Select options** render as label-only. The underlying option value is not
   exposed in fallback text.
 

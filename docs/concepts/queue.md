@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "6da90345285b52a6b2860e7e95f4aa24fdfc28368e6b2779513c5f64d20e3b26"
+source_hash: "ff9ba7625d92ad8ce2e3cf52c3672d5ec51bed658f2c1c1e3c41932468215802"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue.md"
@@ -123,9 +123,16 @@ overflow summary.
 - Queued waits are not projected as active agent runs for `sessions.list` and
   do not own active-run timeout semantics; only the active phase does.
 
-Clients (including the TUI) forward mid-run prompts and let Gateway apply the
-queue mode. Esc/`/stop` uses a session-scoped abort so lost local handles
-cannot leave a still-queued prompt running.
+Gateway-backed clients (including `openclaw tui`) forward mid-run prompts and
+let the Gateway apply the queue mode. Esc/`/stop` uses a session-scoped abort
+so lost local handles cannot leave a still-queued prompt running.
+
+`openclaw chat` and `openclaw tui --local` apply the same four modes in the
+embedded runtime. Local `steer` injects into an active embedded run when that
+runtime accepts steering and otherwise becomes a followup; `followup` and
+`collect` remain local pending work; `interrupt` aborts the active local run
+before starting the newest message. The explicit `/steer <message>` command is
+not a local-mode command.
 
 ## Scope and guarantees
 

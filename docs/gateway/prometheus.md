@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Prometheus metrics"
 source: "https://docs.openclaw.ai/gateway/prometheus"
-source_hash: "e6540df75603c3c73b533fa93c6ecb3e1da7fdc4b8140181f09fe5101a27fc22"
+source_hash: "5ede2ac9adc0f582fa4b3268d979ee341c112f244adb3b3daab1eebe6cd5ab29"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/prometheus.md"
@@ -116,8 +116,8 @@ Note
 | ------------------------------------------------ | --------- | ----------------------------------------------------------------------------------------- |
 | `openclaw_run_completed_total`                   | counter   | `channel`, `model`, `outcome`, `provider`, `trigger`                                      |
 | `openclaw_run_duration_seconds`                  | histogram | `channel`, `model`, `outcome`, `provider`, `trigger`                                      |
-| `openclaw_model_call_total`                      | counter   | `api`, `error_category`, `model`, `outcome`, `provider`, `transport`                      |
-| `openclaw_model_call_duration_seconds`           | histogram | `api`, `error_category`, `model`, `outcome`, `provider`, `transport`                      |
+| `openclaw_model_call_total`                      | counter   | `api`, `error_category`, `model`, `observation_unit`, `outcome`, `provider`, `transport`  |
+| `openclaw_model_call_duration_seconds`           | histogram | `api`, `error_category`, `model`, `observation_unit`, `outcome`, `provider`, `transport`  |
 | `openclaw_model_failover_total`                  | counter   | `from_model`, `from_provider`, `lane`, `reason`, `suspended`, `to_model`, `to_provider`   |
 | `openclaw_model_tokens_total`                    | counter   | `agent`, `channel`, `model`, `provider`, `token_type`                                     |
 | `openclaw_gen_ai_client_token_usage`             | histogram | `model`, `provider`, `token_type`                                                         |
@@ -168,6 +168,11 @@ Note
 | `openclaw_prometheus_series_dropped_total`       | counter   | none                                                                                      |
 | `openclaw_diagnostic_async_queue_dropped_total`  | counter   | `drop_class`                                                                              |
 | `openclaw_diagnostic_async_queue_length`         | gauge     | none                                                                                      |
+
+For model-call metrics, `observation_unit="request"` measures one observable
+provider request. `observation_unit="turn"` measures a synthetic Claude Code
+or Codex CLI agent turn that can contain multiple hidden provider requests.
+Keep those series separate when comparing latency.
 
 ## Label policy
 

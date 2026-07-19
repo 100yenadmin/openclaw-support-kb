@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugins"
-source_hash: "4fd1d683a866169efd1b788fcd1395157ab8c5975a6789b4a791119222096b14"
+source_hash: "92c01d3ae903de11b050babe062262db08a1108b8260ca5a0e9ddc3e1d11a559"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugins/index.md"
@@ -27,6 +27,8 @@ Hermes has several distinct pluggable interfaces — some use Python `register_*
 | If you want to add… | Read |
 |---|---|
 | Custom tools, hooks, slash commands, skills, or CLI subcommands | **This guide** (the general plugin surface) |
+| A **native desktop app** extension (panes, pages, status bar, palette, themes) | [Desktop Plugin SDK](/developer-guide/desktop-plugin-sdk) |
+| A **web dashboard** extension (tabs, shell slots, themes) | [Extending the Dashboard](/user-guide/features/extending-the-dashboard) |
 | An **LLM / inference backend** (new provider) | [Model Provider Plugins](/developer-guide/model-provider-plugin) |
 | A **gateway channel** (Discord/Telegram/IRC/Teams/etc.) | [Adding Platform Adapters](/developer-guide/adding-platform-adapters) |
 | A **memory backend** (Honcho/Mem0/Supermemory/etc.) | [Memory Provider Plugins](/developer-guide/memory-provider-plugin) |

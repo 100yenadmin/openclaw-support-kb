@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec tool"
 source: "https://docs.openclaw.ai/tools/exec"
-source_hash: "57859cdc82b2e49a85c1fa5404d464a7108b05d11398f444a65283cfc2981e0c"
+source_hash: "20aa9f99a79e29222cc047f593d39fd855d8508b99691dd2fe3d9f7df0961148"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec.md"
@@ -86,6 +86,7 @@ Notes:
 - Important: sandboxing is **off by default**. If sandboxing is off, implicit `host=auto` resolves to `gateway`. Explicit `host=sandbox` still fails closed instead of silently running on the gateway host. Enable sandboxing or use `host=gateway` with approvals.
 - Script preflight checks (for common Python/Node shell-syntax mistakes) only inspect files inside the effective `workdir` boundary. If a script path resolves outside `workdir`, preflight is skipped for that file. Preflight also skips entirely when `host=gateway` and the effective policy is `security=full` with `ask=off`.
 - For long-running work that starts now, start it once and rely on automatic completion wake when it is enabled and the command emits output or fails. Use `process` for logs, status, input, or intervention; do not emulate scheduling with sleep loops, timeout loops, or repeated polling.
+- Agent-started background commands appear in the Web, iOS, and Android background-task views until they finish. The task ledger is finalized before the completion heartbeat wakes the agent again.
 - For work that should happen later or on a schedule, use cron instead of `exec` sleep/delay patterns.
 
 ## Config

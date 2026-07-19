@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Twitch"
 source: "https://docs.openclaw.ai/channels/twitch"
-source_hash: "b3fb1d452d0c871d7ff38ded576c14fe87b327d48733e0032069fef3f38bc647"
+source_hash: "065f88f34b6bdc2cead0dcc5473cbcb64e1682962e3d0b568d4f88035e754b23"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/twitch.md"
@@ -114,6 +114,12 @@ Minimal config:
 - Each joined channel maps to an isolated group session key `agent:<agentId>:twitch:group:<channel>`.
 - `username` is the bot's account (who authenticates), `channel` is which chat room to join. One account entry joins exactly one channel.
 - Tokens work with or without the `oauth:` prefix; OpenClaw normalizes both ways (the setup wizard expects the `oauth:` form).
+
+## Inbound durability
+
+OpenClaw durably queues each accepted Twitch chat message before normal dispatch. Pending or retryable messages survive a Gateway restart, stay serialized for the configured channel, and use Twitch's message ID to suppress duplicate queue entries while the active or retained completion record exists.
+
+Twitch chat does not replay a `PRIVMSG` after the client has accepted it. This protects the local accept-to-dispatch crash window, but it cannot recover messages missed before durable admission. If the queue append itself fails, OpenClaw logs the failure; reconnecting does not ask Twitch to resend that message.
 
 ## Token refresh (optional)
 

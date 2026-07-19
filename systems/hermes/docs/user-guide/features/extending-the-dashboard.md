@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Extending the Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/extending-the-dashboard"
-source_hash: "b8e266e808b1e90bed2f297d81355b40d4e975c1d1c4c71233ee351175722d7f"
+source_hash: "dd6edd7e85b2040e85a206ea59f6cedf0e7b57175859b53c508f2d5b408e47dc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/extending-the-dashboard.md"
@@ -28,6 +28,10 @@ The Hermes web dashboard (`hermes dashboard`) is built to be reskinned and exten
 All three are **drop-in at runtime**: no repo clone, no `npm run build`, no patching the dashboard source. This page is the canonical reference for all three.
 
 If you just want to use the dashboard, see [Web Dashboard](./web-dashboard). If you want to reskin the terminal CLI (not the web dashboard), see [Skins & Themes](./skins) — the CLI skin system is unrelated to dashboard themes.
+
+:::note Not the desktop app
+This page covers the **web dashboard** (`hermes dashboard`) plugin system — `window.__HERMES_PLUGIN_SDK__`, a `manifest.json`, and a pre-built JS bundle. The **native desktop app** (`hermes desktop`) has its own, unrelated SDK — `@hermes/plugin-sdk`, a single ESM file, no build step — documented at [Desktop Plugin SDK](/developer-guide/desktop-plugin-sdk). Only the backend `plugin_api.py` namespace (`/api/plugins/<name>`) is shared between them.
+:::
 
 :::note How the pieces compose
 Themes and plugins are independent but synergistic. A theme can stand alone (just a YAML file). A plugin can stand alone (just a tab). Together they let you build a complete visual reskin with custom HUDs — the example `strike-freedom-cockpit` demo (lives in the `hermes-example-plugins` companion repo — see [Combined theme + plugin demo](#combined-theme--plugin-demo) for install steps) does exactly that.

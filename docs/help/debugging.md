@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "f417d14dad325104759957a315ab2f2402749b245c79d14c2da55eb0e3701908"
+source_hash: "6fab1c6bf8c5ecab42fe5517f1ed9f46fff2afbe5ba08d9f80ddc5c8bd8d4e55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/debugging.md"
@@ -41,6 +41,7 @@ Debugging helpers for streaming output, gateway iteration, and startup profiling
 ## Plugin lifecycle trace
 
 Set `OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1` for a phase-by-phase breakdown of plugin metadata, discovery, registry, runtime mirror, config mutation, and refresh work. Writes to stderr, so JSON command output stays parseable.
+Plugin load failures include their stack trace while this trace is enabled.
 
 ```bash
 OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1 openclaw plugins install tokenjuice --force
@@ -53,6 +54,12 @@ OPENCLAW_PLUGIN_LIFECYCLE_TRACE=1 openclaw plugins install tokenjuice --force
 ```
 
 Use this before reaching for a CPU profiler. From a source checkout, measure the built runtime with `node dist/entry.js ...` after `pnpm build`; `pnpm openclaw ...` also measures source-runner overhead.
+
+For synchronous module-load timings, use the shared diagnostics surface instead of a separate plugin-only environment switch:
+
+```bash
+OPENCLAW_DIAGNOSTICS=plugin.load-profile openclaw plugins list
+```
 
 ## CLI startup and command profiling
 

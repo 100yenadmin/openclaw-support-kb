@@ -1,17 +1,17 @@
 ---
 type: openclaw_doc
-title: "Code mode"
-source: "https://docs.openclaw.ai/reference/code-mode"
-source_hash: "e7a8603984ab2571f8c53fd5773fdce1bc3ec69e504292bfee34197d2561d250"
+title: "Code Mode"
+source: "https://docs.openclaw.ai/tools/code-mode"
+source_hash: "d3b889f9ca1bac00e90edd5540268087292f632250808347368fdd584bbe7fce"
 system: "openclaw"
 kb_namespace: "openclaw"
-doc_path: "reference/code-mode.md"
-original_doc_path: "reference/code-mode.md"
+doc_path: "tools/code-mode.md"
+original_doc_path: "tools/code-mode.md"
 duplicate_index: 1
 ---
 
-# Code mode
-Source: https://docs.openclaw.ai/reference/code-mode
+# Code Mode
+Source: https://docs.openclaw.ai/tools/code-mode
 
 Code mode is an experimental, opt-in OpenClaw agent-runtime feature. When
 enabled, the model no longer sees every enabled tool schema; instead, it sees
@@ -26,7 +26,7 @@ separate implementations:
 - Codex Code Mode runs inside the Codex coding harness. Its `exec` tool is a
   freeform-grammar tool: the model writes raw JavaScript source (optionally
   prefixed by a `// @exec: {...}` pragma line for execution options), executed
-  in a Deno/V8 runtime.
+  in Codex's in-process V8 Code Mode runtime.
 - OpenClaw code mode runs in the generic OpenClaw agent runtime and is
   disabled unless `tools.codeMode.enabled: true` is configured. Its `exec`
   tool takes a JSON `{ code, language }` payload, executed in a QuickJS-WASI
@@ -43,9 +43,13 @@ identically-named `exec`/`wait` tools.
   cannot survive the guest bridge.
 - `exec` evaluates model-generated JavaScript or TypeScript in an isolated
   QuickJS-WASI worker thread.
-- Every catalog-eligible enabled tool (OpenClaw core, plugin, MCP, client) is hidden from
-  the model prompt and exposed inside the guest program through `ALL_TOOLS`
+- Every catalog-eligible enabled tool (OpenClaw core, plugin, MCP, client) is hidden as a
+  standalone model tool and exposed inside the guest program through `ALL_TOOLS`
   and `tools`.
+- The `exec` description carries a bounded quick index of exact OpenClaw/plugin
+  catalog ids, compact input hints, and compact declared output hints when a
+  trusted tool provides an output schema. It omits descriptions, full schemas,
+  MCP entries, and overflow entries; guest-side catalog lookup remains the fallback.
 - Guest code searches the hidden catalog, describes a tool's schema, and calls
   a tool through the same execution path used by normal agent turns (policy,
   approvals, hooks, telemetry all still apply).
@@ -60,10 +64,13 @@ behavior, or model selection.
 
 ## Why use it
 
-- Smaller prompt surface: providers get two control tools and only the few
-  required direct tools instead of dozens or hundreds of full tool schemas.
+- Smaller prompt surface: providers get two control tools, a bounded native-tool
+  index, and only the few required direct tools instead of dozens or hundreds
+  of full tool schemas.
 - Better orchestration: the model can use loops, joins, small transforms,
   conditional logic, and parallel nested tool calls inside one code cell.
+- Fewer model round trips: a declared output contract lets the model call and
+  transform a tool result in one `exec`; unknown outputs remain raw-first.
 - Provider neutral: works for OpenClaw, plugin, MCP, and client tools without
   depending on provider-native code execution.
 - Fails closed: if code mode is enabled but the QuickJS-WASI runtime is
@@ -73,7 +80,14 @@ behavior, or model selection.
 Most useful for agents with a large enabled tool catalog, or workflows where
 the model needs to search, combine, and call several tools before answering.
 
-## Enable it
+Keep direct tool exposure for a small catalog or a model that does not reliably
+write short programs. Use [Tool Search](/tools/tool-search) when you want a
+compact catalog but prefer structured search/describe/call controls instead of
+the QuickJS-WASI guest.
+
+## Quickstart
+
+### Enable Code Mode
 
 ```json5
 {
@@ -122,6 +136,25 @@ Set explicit limits for tighter bounds:
   },
 }
 ```
+
+### What the model does
+
+For a tool with a declared output such as
+`Array<{ id: string; paid: boolean; tons: number }>`, one guest program can
+select, call, and transform it:
+
+```javascript
+const [shipmentTool] = await tools.search("list shipments");
+const shipments = await tools.callValue(shipmentTool.id, {});
+return shipments.filter((shipment) => !shipment.paid && shipment.tons > 10);
+```
+
+When a quick-index line ends in `-> ?`, the output shape is unknown. The first
+`exec` must return `await tools.callValue(...)` unchanged. A later `exec` can
+transform the observed value. This costs an extra model turn, but prevents the
+model from guessing field names.
+
+### Verify the active surface
 
 To confirm the model payload shape while debugging, run the Gateway with
 targeted logging:
@@ -311,12 +344,15 @@ type CodeModeFailedResult = {
 };
 ```
 
-`exec` returns `waiting` when the QuickJS VM suspends with resumable state that
-still needs a model-visible continuation; the result includes a `runId` for
-`wait`. Namespace bridge calls, including MCP namespace calls, are auto-drained
-inside the same `exec`/`wait` call while they are ready, so a compact code
-block can call an MCP tool without forcing one model tool call per namespace
-await.
+`exec` returns `waiting` when the guest suspends with resumable state that still
+needs a model-visible continuation — an explicit `yield_control(...)`, or a
+bridge tool call that has not resolved within the exec deadline. The result
+includes a `runId` for `wait`. Bridge tool calls — `tools.search`/`describe`/
+`call` and namespace calls, including MCP namespace calls — are auto-drained
+inside the same `exec`/`wait` call while they resolve within the deadline, so a
+compact code block that awaits several tools runs to completion in one model
+turn instead of forcing one model tool call per await. Restart-safe runs never
+auto-drain; their pending work still goes through the replay-safe checks.
 
 `exec` returns `completed` only when the guest VM has no pending work and the
 final value is JSON-compatible after OpenClaw's output adapter runs.
@@ -375,8 +411,19 @@ declare function json(value: unknown): void;
 declare function yield_control(reason?: string): Promise<void>;
 ```
 
-`ALL_TOOLS` is compact metadata for the run-scoped catalog; it does not
-contain full schemas by default.
+`ALL_TOOLS` is compact metadata for the run-scoped catalog; it does not contain
+full schemas by default. The model-visible `exec` description also includes a
+bounded, deterministic subset of exact OpenClaw/plugin ids, compact input
+hints, and trusted declared output hints. Descriptions remain deferred so
+adversarial catalog prose cannot steer the model. When that index omits a tool,
+read `ALL_TOOLS` or call `tools.search(...)` inside the guest program.
+
+The arrow in each quick-index line describes the `tools.callValue(...)` value.
+`-> Array<{ id: string }>` is a declared output hint; `-> ?` is output unknown.
+Unknown outputs stay raw-first: return the value unchanged, observe it, then
+filter or map it in a later `exec` instead of guessing field names. This also
+applies when a declared-output read feeds a final `-> ?` call: return that
+call's raw value without wrapping it in the requested answer shape.
 
 ```typescript
 type ToolCatalogEntry = {
@@ -386,8 +433,18 @@ type ToolCatalogEntry = {
   description: string;
   source: "openclaw" | "mcp" | "client";
   sourceName?: string;
+  input: string;
+  output?: string;
 };
 ```
+
+`input` is a bounded TypeScript-style signature for the common case. Use
+`tools.describe(...)` when the exact full schema is still needed. Remote MCP
+and client entries use `input: "unknown"` so their untrusted schemas stay
+deferred until `describe`. `output` is
+present only for a complete compact hint derived from a trusted OpenClaw core
+or plugin `outputSchema`. MCP and client output-schema claims are not promoted
+into this trusted catalog hint.
 
 Plugin tools use `source: "openclaw"` with `sourceName` set to the owning
 plugin id; there is no separate `"plugin"` source value. `source: "mcp"` is
@@ -399,6 +456,7 @@ Full schema is loaded only on demand:
 ```typescript
 type ToolCatalogEntryWithSchema = ToolCatalogEntry & {
   parameters: unknown;
+  outputSchema?: unknown;
 };
 ```
 
@@ -412,6 +470,7 @@ ToolCatalogEntry
   describe(id: string): Promise
 ToolCatalogEntryWithSchema
 ;
+  callValue(id: string, input?: unknown): Promise<unknown>;
   call(id: string, input?: unknown): Promise<unknown>;
   [safeToolName: string]: unknown;
 };
@@ -422,17 +481,113 @@ Convenience tool functions are installed only for unambiguous safe names:
 ```typescript
 const files = await tools.search("read local file");
 const fileRead = await tools.describe(files[0].id);
-const content = await tools.call(fileRead.id, { path: "README.md" });
+const content = await tools.callValue(fileRead.id, { path: "README.md" });
 
 // If the hidden catalog has an unambiguous `web_search` entry:
 const hits = await tools.web_search({ query: "OpenClaw code mode" });
 ```
 
-MCP catalog entries are not callable through `tools.call(...)` or convenience
-functions in code mode; they are exposed only through the generated `MCP`
-namespace. TypeScript-style declaration files are available through the
-read-only `API` virtual file surface, so agents can inspect MCP signatures
-without adding MCP schemas to the prompt:
+`tools.callValue(...)` returns a normal tool's JSON `details` value directly.
+`tools.call(...)` preserves the raw `{ tool, result }` envelope for callers
+that need content blocks or other result metadata.
+
+## Declared output contracts
+
+OpenClaw tools can declare `outputSchema` for the structured value placed in
+`AgentToolResult.details`. This is useful for Code Mode and Tool Search; it is
+not a provider-native tool response schema and does not change direct tool
+exposure.
+
+For a tool made with `defineToolPlugin`, declare the schema beside
+`parameters`:
+
+```typescript
+
+const Shipment = Type.Object(
+  {
+    id: Type.String(),
+    paid: Type.Boolean(),
+    tons: Type.Number(),
+  },
+  { additionalProperties: false },
+);
+
+export default defineToolPlugin({
+  id: "shipping",
+  name: "Shipping",
+  description: "Shipment tools.",
+  tools: (tool) => [
+    tool({
+      name: "shipping_list",
+      description: "List shipments.",
+      parameters: Type.Object({}),
+      outputSchema: Type.Array(Shipment),
+      execute: async () => loadShipments(),
+    }),
+  ],
+});
+```
+
+For `api.registerTool(...)` or a factory tool, put the same `outputSchema`
+property on the returned `AnyAgentTool` object.
+
+Current built-in contracts include `agents_list`, `apply_patch`,
+`conversations_list`, `conversations_send`, `conversations_turn`, `edit`,
+`openclaw`, `read`, `screen`,
+`sessions_history`, `sessions_list`, `sessions_search`, `sessions_send`,
+`session_status`, `spawn_task`, `terminal`, `web_fetch`, and `web_search`.
+Exact passthroughs can reuse their owning protocol schema instead of
+duplicating a model-only contract. For example, the conversation tools expose
+the same Gateway result schemas used by `conversations.list`,
+`conversations.send`, and `conversations.turn`; `web_fetch` owns a tool-local
+schema whose hint exposes stable metadata, text, cache state, and nested spill
+metadata; `web_search` declares its exact normalized results/answer/error/raw
+union as a complete quick-index hint. Filesystem contracts return structured
+read text, image, truncation, and optional-not-found outcomes; explicit edit
+change state plus diff/patch data; and apply-patch path summaries. When the
+quick index declares the fields, one cell can compose discovery and delivery
+without a separate inspection turn:
+
+```javascript
+const listed = await tools.conversations_list({ query: "build bot" });
+const target = listed.conversations.find((item) => item.label === "Build bot");
+if (!target) throw new Error("conversation not found");
+return await tools.conversations_send({
+  conversationRef: target.conversationRef,
+  message: "Build finished.",
+});
+```
+
+The nested calls still use normal tool policy, hooks, and approvals. If a full
+contract is exact but too large for the bounded quick index, it remains
+available through `tools.describe(...)` and the arrow stays `-> ?`.
+
+The contract rules are strict:
+
+- Describe the exact JSON-compatible `details` value, not rendered `content`
+  blocks or a provider envelope.
+- Include every non-throwing success or error variant. Omit `outputSchema` when
+  the tool has no stable structured result.
+- Close object layers with `{ additionalProperties: false }` for a complete
+  quick-index hint. Open, oversized, or otherwise partial schemas stay
+  available through `tools.describe(...)` but do not enable one-turn field use.
+- OpenClaw compiles the schema before running the tool, then validates final
+  `details` after normal tool hooks and before a catalog call returns. An
+  invalid schema cannot run the tool; a mismatch fails without printing the
+  value.
+- Compact hints are deterministic and bounded. `tools.describe(...)` exposes
+  the full trusted schema when the compact hint is insufficient.
+- Installed plugin code is already trusted local code. Remote MCP and client
+  metadata remains untrusted and cannot opt into these quick-index hints.
+
+See [Tool plugins](/plugins/tool-plugins#output-contracts) for plugin authoring
+details.
+
+MCP catalog entries are not callable through `tools.callValue(...)`,
+`tools.call(...)`, or convenience functions in code mode; they are exposed
+only through the generated `MCP` namespace. TypeScript-style declaration files
+are available through the read-only `API` virtual file surface, so agents can
+inspect MCP signatures without adding MCP schemas to the prompt:
 
 ```typescript
 const files = await API.list("mcp");
@@ -740,7 +895,7 @@ because their structured results cannot cross the QuickJS bridge.
 MCP entries stay in the run-scoped catalog so policy, approvals, hooks,
 telemetry, transcript projection, and exact tool ids remain shared with
 normal tool execution. The guest-facing `ALL_TOOLS`, `tools.search(...)`,
-`tools.describe(...)`, and `tools.call(...)` views omit MCP entries. The
+`tools.describe(...)`, `tools.callValue(...)`, and `tools.call(...)` views omit MCP entries. The
 generated `MCP.<server>.<tool>({ ...input })` namespace resolves back to the
 exact catalog id and dispatches through the same executor path.
 
@@ -953,7 +1108,7 @@ Code mode coverage should prove:
 - all catalog-eligible effective non-MCP tools appear in `ALL_TOOLS`
 - direct-only tools stay model-visible and do not appear in `ALL_TOOLS`
 - denied tools do not appear in `ALL_TOOLS`
-- `tools.search`, `tools.describe`, and `tools.call` work for OpenClaw tools
+- `tools.search`, `tools.describe`, `tools.callValue`, and `tools.call` work for OpenClaw tools
 - `API.list("mcp")` and `API.read("mcp/<server>.d.ts")` expose TypeScript-style
   MCP declarations without a bridge/tool call
 - MCP namespace `$api()` remains available as an inline fallback for schemas
@@ -990,7 +1145,7 @@ Run these as integration or end-to-end tests when changing the runtime:
 7. In `exec`, read `ALL_TOOLS` and assert the catalog-eligible effective test
    tools are present while direct-only tools are absent.
 8. In `exec`, call OpenClaw/plugin/client tools through `tools.search`,
-   `tools.describe`, and `tools.call`.
+   `tools.describe`, and `tools.callValue` (or raw `tools.call`).
 9. In `exec`, call `API.list("mcp")` and `API.read("mcp/<server>.d.ts")` and
    assert the declaration files describe visible MCP tools.
 10. In `exec`, call MCP tools through `MCP.<server>.<tool>({ ...input })` and

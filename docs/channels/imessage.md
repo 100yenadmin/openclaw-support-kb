@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "969c2781185916a0a618cb4675bd6905edb2f873641763e69122b8734ab1739f"
+source_hash: "2439b067afa89699e426888b824bc33a1158a8bbdeaeb0743bf1f5bc89aafe72"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -702,6 +702,15 @@ Approval reactions (👍 / 👎)
 
 
 
+
+Question reactions (1️⃣ / 2️⃣ / 3️⃣ / 4️⃣)
+
+    For an `ask_user` prompt with one non-secret, single-select question and one to four options, OpenClaw adds numbered emoji choices. React to the delivered prompt with the matching number to answer it. The reaction must carry the stable GUID of the bot-authored message; OpenClaw then maps the number to the canonical option through the Gateway. Stale or duplicate taps are ignored.
+
+    Multi-question, multi-select, and free-text prompts remain text-reply-only. Question reactions follow normal iMessage DM/group admission rules. They are recognized even when general `reactionNotifications` is `"off"`, without turning unrelated reactions into agent events.
+
+
+
 ## Config writes
 
 iMessage allows channel-initiated config writes by default (for `/config set|unset` when `commands.config: true`).
@@ -806,10 +815,10 @@ The "Flag on" column shows behavior on an `imsg` build that emits `balloon_bundl
 
 ## Inbound recovery after a bridge or gateway restart
 
-iMessage recovers messages missed while the gateway was down, and at the same time suppresses the stale "backlog bomb" Apple can flush after a Push recovery. The default behavior is always on, built on the inbound dedupe.
+iMessage recovers messages missed while the gateway was down, and at the same time suppresses the stale "backlog bomb" Apple can flush after a Push recovery. The default behavior is always on, built on durable ingress plus an age fence.
 
-- **Replay dedupe.** Every dispatched inbound message is recorded by its Apple GUID in persistent plugin state (`imessage.inbound-dedupe`), claimed at ingestion and committed after handling (released on a transient failure so it can retry). Anything already handled is dropped instead of dispatched twice. This is what lets recovery replay aggressively without per-message bookkeeping.
-- **Downtime recovery.** On startup the monitor remembers the last dispatched `chat.db` rowid (a persisted per-account cursor) and passes it to `imsg watch.subscribe` as `since_rowid`, so imsg replays the rows that landed while the gateway was down, then tails live. Replay is bounded to the most recent 500 rows and to messages up to ~2 hours old, and the dedupe drops anything already handled.
+- **Durable replay protection.** Before advancing the recovery cursor, OpenClaw journals each raw row in the shared SQLite ingress queue with its Apple GUID as the event ID. A completed row leaves a tombstone for about 4 hours, capped at 10,000 entries, so a replay with the same GUID is dropped even after a restart. A pending row stays recoverable until dispatch adopts it.
+- **Downtime recovery.** On startup the monitor remembers the last durably admitted `chat.db` rowid (a persisted per-account cursor) and passes it to `imsg watch.subscribe` as `since_rowid`, so imsg replays rows that were not yet journaled and then tails live. Rows journaled before a crash resume from SQLite. Replay is bounded to the most recent 500 rows and to messages up to ~2 hours old, and GUID tombstones drop anything already handled.
 - **Stale-backlog age fence.** Rows above the startup boundary are genuinely live; one whose send date is more than ~15 minutes older than its arrival is the Push-flush backlog and is suppressed. Replayed rows (at or below the boundary) use the wider recovery window instead, so a recently-missed message is delivered while ancient history is not.
 
 Recovery works over both local and remote `cliPath` setups, because `since_rowid` replay runs over the same `imsg` RPC connection. The difference is the window: when the gateway can read `chat.db` (local), it anchors the startup rowid boundary, caps the replay span, and delivers missed messages up to a couple of hours old. Over a remote SSH `cliPath` it cannot read the database, so the replay is uncapped and every row uses the live age fence — it still recovers recently-missed messages and still suppresses old backlog, just with the narrower live window. Run the gateway on the Messages Mac for the wider recovery window.

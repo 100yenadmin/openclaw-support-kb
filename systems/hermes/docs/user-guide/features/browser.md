@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/browser"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser"
-source_hash: "df30c9fc49ddd0bf149f324dfaf00642be88ad365ee5fac52a494ff6827e6825"
+source_hash: "714dd71dc06d18f736835808e7c64c5ee67be9370c72209b651d0013cf3bf588"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/browser.md"
@@ -642,6 +642,24 @@ browser:
 ```
 
 When enabled, recording starts automatically on the first `browser_navigate` and saves to `~/.hermes/browser_recordings/` when the session closes. Works in both local and cloud (Browserbase) modes. Recordings older than 72 hours are automatically cleaned up.
+
+## Headed Mode (Visible Browser Window)
+
+By default, the local browser runs headless. Enable headed mode to get a visible Chromium window you can watch and interact with:
+
+```yaml
+browser:
+  headed: true  # default: false
+```
+
+Or via environment variable: `AGENT_BROWSER_HEADED=1`.
+
+Headed mode does two things:
+
+1. **Launches Chromium with a visible window** (passes `--headed` to agent-browser in local mode).
+2. **Keeps the window open between turns.** Normally the browser session is cleaned up after every agent reply; in headed mode the per-turn cleanup is skipped so you can watch the agent work, intervene manually (sign-in challenges, CAPTCHAs), and keep login state warm across the conversation.
+
+Idle sessions are still reaped after `browser.inactivity_timeout` (default 120s of no browser activity), and all sessions are closed on shutdown. Headed mode only affects the local browser — cloud sessions (Browserbase) are unaffected.
 
 ## Stealth Features
 

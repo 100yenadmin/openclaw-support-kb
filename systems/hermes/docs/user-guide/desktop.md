@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop App"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "bfdeaea0777f94d5b7c6d40f818031e4eae98908d12051bbb466b2c2f920c14b"
+source_hash: "e137ece5480acdba132d9ef99578bb7aa810a61f1c072dce9c9e1f7293764144"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -232,6 +232,17 @@ The remote gateway host is configured per [profile](./profiles.md), so each prof
 - **Connection refused / times out** — the backend bound to `127.0.0.1` (the default) or a firewall/VPN is blocking the port. Bind to `0.0.0.0` or the tailscale IP and open the port to your trusted network.
 
 For the same setup from the web-dashboard angle, see [Web Dashboard → Connecting Hermes Desktop to a remote backend](./features/web-dashboard.md#connecting-hermes-desktop-to-a-remote-backend); the env vars are catalogued under [Environment Variables → Web Dashboard & Hermes Desktop](../reference/environment-variables.md#web-dashboard--hermes-desktop).
+
+## Extending the desktop app
+
+The desktop app is contribution-driven — panes, pages, sidebar nav, status-bar
+items, palette commands, keybinds, and themes all register through one SDK, and
+you can add your own. A plugin is a single ESM file dropped in
+`$HERMES_HOME/desktop-plugins/<id>/plugin.js`; the app loads it within seconds and
+hot-reloads every save. Manage installed plugins live in **Settings → Plugins**.
+
+See [Desktop Plugin SDK](../developer-guide/desktop-plugin-sdk.md) for the full
+reference. (This is separate from the [web dashboard plugin system](./features/extending-the-dashboard.md).)
 
 ## Troubleshooting
 

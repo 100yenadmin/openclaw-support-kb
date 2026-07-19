@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "ebca589c74b302f1bcb644a2346d99e38f06cf1f0e743db6f9d669c6fce82ced"
+source_hash: "fa53bee8df455b25ff5a4a888d5ed360af542686ecd98c40a48ccafed38deecc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -56,7 +56,7 @@ Per agent, on the Gateway host (resolved via `src/config/sessions.ts`):
 | `pruneAfter`            | `"30d"`               | stale-entry age cutoff                                                                      |
 | `maxEntries`            | `500`                 | cap on session entries                                                                      |
 | `resetArchiveRetention` | keep (no age cutoff)  | age cutoff for `*.reset.*`/`*.deleted.*` transcript archives; a duration opts into deletion |
-| `maxDiskBytes`          | `2gb`                 | per-agent sessions disk budget; `false` disables                                            |
+| `maxDiskBytes`          | `10gb`                | per-agent sessions disk budget; `false` disables                                            |
 | `highWaterBytes`        | 80% of `maxDiskBytes` | target after budget cleanup                                                                 |
 
 Archived transcripts are kept by default and compressed with zstd (`*.jsonl.<reason>.<timestamp>.zst`) when the runtime supports it, so deleting or resetting a session never silently discards conversation history. The disk budget evicts the oldest archives first, before touching live sessions.
@@ -144,8 +144,9 @@ A `sessionKey` identifies which conversation bucket you are in (routing + isolat
 Each `sessionKey` points at a current `sessionId` (the SQLite transcript identity that continues the conversation). Decision logic lives in `initSessionState()` in `src/auto-reply/reply/session.ts`.
 
 - **Reset** (`/new`, `/reset`) creates a new `sessionId` for that `sessionKey`.
-- **Daily reset** (default 4:00 AM local time on the gateway host) creates a new `sessionId` on the next message after the reset boundary.
-- **Idle expiry** (`session.reset.idleMinutes`, or legacy `session.idleMinutes`) creates a new `sessionId` when a message arrives after the idle window. If daily and idle are both configured, whichever expires first wins.
+- **No automatic reset** is the default. The current `sessionId` continues while compaction keeps the active model context bounded.
+- **Daily reset** (`session.reset.mode: "daily"`) creates a new `sessionId` on the next message after the configured local-hour boundary (`session.reset.atHour`, default `4`).
+- **Idle expiry** (`session.reset.mode: "idle"` with `session.reset.idleMinutes`, or legacy `session.idleMinutes`) creates a new `sessionId` when a message arrives after the idle window. If daily and idle are both configured, whichever expires first wins.
 - **Control UI reconnect resume** preserves the currently visible session for one reconnect send when the Gateway receives the matching `sessionId` from an operator UI client. This is a one-shot signal; ordinary stale sends still create a new `sessionId`.
 - **System events** (heartbeat, cron wakeups, exec notifications, gateway bookkeeping) may mutate the session row but never extend daily/idle reset freshness. Reset rollover discards queued system-event notices for the previous session before the fresh prompt is built.
 - **Parent fork policy** uses OpenClaw's active branch when creating a thread or subagent fork. If that branch is too large (over a fixed internal cap, currently 100K tokens), OpenClaw starts the child with isolated context instead of failing or inheriting unusable history. Sizing is automatic and not configurable; legacy `session.parentForkMaxTokens` config is removed by `openclaw doctor --fix`.
@@ -208,6 +209,8 @@ More on limits: [/reference/token-use](/reference/token-use).
 ## Compaction: what it is
 
 Compaction summarizes older conversation into a persisted `compaction` entry in the transcript and keeps recent messages intact. After compaction, future turns see the compaction summary plus messages after `firstKeptEntryId`. Compaction is **persistent**, unlike session pruning - see [/concepts/session-pruning](/concepts/session-pruning).
+
+Embedded OpenClaw compaction inherits the session thinking level by default. Set `agents.defaults.compaction.thinkingLevel` to use a separate level for summary calls; the runtime clamps it to each concrete compaction model or fallback. Native Codex app-server compaction owns its compact request and cannot accept a per-compaction thinking override, so OpenClaw warns and leaves that setting to Codex.
 
 AGENTS.md section reinjection after compaction is opt-in via `agents.defaults.compaction.postCompactionSections`; when unset or `[]`, OpenClaw does not append AGENTS.md excerpts on top of the compaction summary.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building CLI backend plugins"
 source: "https://docs.openclaw.ai/plugins/cli-backend-plugins"
-source_hash: "cb2317441f1509f9e4a8974f5beaf7ab82866dbd019ceb790b3024a0b964ab5d"
+source_hash: "4f0ee8d6ddcd110f4f18137d352a9328a546765d0bd121bb94eacd3bac612c6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/cli-backend-plugins.md"
@@ -230,6 +230,7 @@ only for behavior that really belongs to the backend.
 | `sideQuestionToolMode`             | Declare disabled native tools for `/btw` side questions                     |
 | `bundleMcp` / `bundleMcpMode`      | Opt into OpenClaw's loopback MCP tool bridge                                |
 | `ownsNativeCompaction`             | Backend owns its own compaction - OpenClaw defers                           |
+| `subscriptionAuthDispatch`         | Opted-in embedded runs on subscription credentials execute via this backend |
 | `runtimeArtifact`                  | Bound a script launcher to its complete bundled package tree                |
 
 Keep these hooks provider-owned. Do not add CLI-specific branches to core when

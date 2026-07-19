@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/google-meet"
-source_hash: "d8da5cc9414b4a4ab061f688e937093163d66637ccc80d9462a902b03803cf7e"
+source_hash: "dff7d3504384c8dcf06cfc4681fd33bcf60875066dd92b50f0f69781c311a2dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/google-meet.md"
@@ -1224,6 +1224,7 @@ For clean duplex audio, route Meet output and Meet microphone through separate v
 
 ## Related
 
+- [Meeting plugins overview](/plugins/meeting-plugins)
 - [Voice call plugin](/plugins/voice-call)
 - [Talk mode](/nodes/talk)
 - [Building plugins](/plugins/building-plugins)

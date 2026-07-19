@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "29b29ba2b58b1fb9217e2df47ee574b24d6781c7438329241be52d52a9494bf9"
+source_hash: "8e7a91285463ad9908c8815c4342220d467abb5e654e7acf7759b1ffa86b4f14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -50,9 +50,6 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
 - Launched from inside a configured agent workspace directory, TUI auto-selects
   that agent for the session key default (unless `--session` is explicitly
   `agent:<id>:...`).
-- To show the Gateway hostname in the footer for non-local URL-backed
-  connections, run `openclaw config set tui.footer.showRemoteHost true`. Off by
-  default; never shown for loopback or embedded local connections.
 - Local mode uses the embedded agent runtime directly. Most local tools work,
   but Gateway-only features are unavailable.
 - Local mode adds `/auth [provider]` to the TUI command surface.

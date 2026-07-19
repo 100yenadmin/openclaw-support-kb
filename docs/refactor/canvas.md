@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas plugin refactor"
 source: "https://docs.openclaw.ai/refactor/canvas"
-source_hash: "fc5f2ea7c2ece9233ab64e84bd916132b101174e34f595251b73ae447c389cc5"
+source_hash: "450feb3363fc88d6c5acdff183c878b11149a329d8e880b659da7d05cd76bb7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/canvas.md"
@@ -115,7 +115,7 @@ Before calling the refactor complete:
 - `rg "createCanvasHostHandler|handleA2uiHttpRequest" src/gateway` returns no gateway runtime ownership.
 - `rg "apps/shared/OpenClawKit/Tools/CanvasA2UI|canvas-a2ui-copy|extensions/canvas/src/host/a2ui" scripts .github package.json` finds only compatibility wrappers or plugin-owned paths.
 - `pnpm plugins:inventory:check` passes.
-- `pnpm plugin-sdk:api:check` passes, or generated API baselines are intentionally updated and reviewed.
+- `pnpm plugin-sdk:api:check` passes, or generated API contract records are intentionally updated and reviewed.
 - Targeted Canvas tests pass.
 - Changed-lanes tests pass for Canvas host/A2UI paths.
 - PR body explicitly says Canvas is experimental and plugin-backed.

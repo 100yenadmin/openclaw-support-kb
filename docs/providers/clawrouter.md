@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawRouter"
 source: "https://docs.openclaw.ai/providers/clawrouter"
-source_hash: "93e51913990721fe4f063ff1e4f37a960c7fdc18b0bfa1de8db4557f107c64dc"
+source_hash: "73b32f74b71419632b67f5585ee35d5b970fe8fe77471a12ebc1170451f5f321"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/clawrouter.md"
@@ -68,8 +68,8 @@ List granted models
     Use the returned model refs exactly as shown. They retain the upstream
     namespace, such as `clawrouter/openai/gpt-5.5`,
     `clawrouter/anthropic/claude-sonnet-4-6`, or
-    `clawrouter/google/gemini-3.5-flash`. If `agents.defaults.models` is an
-    allowlist in your configuration, add each selected ClawRouter ref to it.
+    `clawrouter/google/gemini-3.5-flash`. If `agents.defaults.modelPolicy.allow`
+    is configured, add each selected ClawRouter ref to it.
 
 
 
@@ -267,7 +267,7 @@ the same ClawRouter policy can change the remaining percentage.
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | No ClawRouter models                     | Confirm the plugin is enabled and allowed by `plugins.allow`, then check that the credential is active and grants at least one ready provider. |
 | A configured ClawRouter model is missing | Inspect its `/v1/catalog` capability and route support. Unsupported transport contracts are intentionally filtered.                            |
-| `Unknown model: clawrouter/...`          | Add the exact catalog ref to `agents.defaults.models` when that configuration map is being used as an allowlist.                               |
+| Model override rejected by policy        | Add the exact catalog ref or `clawrouter/*` to `agents.defaults.modelPolicy.allow`.                                                            |
 | `401` or `403` from catalog or usage     | Reissue or re-scope the ClawRouter credential; OpenClaw does not fall back to upstream provider keys.                                          |
 | Model call fails after discovery         | Check the provider connection and upstream health in ClawRouter, then retry after its readiness state recovers.                                |
 | Usage has totals but no percentage       | The policy is unmetered; add a monthly budget in ClawRouter to expose a percentage window.                                                     |

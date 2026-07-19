@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together AI"
 source: "https://docs.openclaw.ai/providers/together"
-source_hash: "58791435244a28c85c8292e6bd880c016aa6d3b8d3e811a4cd877bd2c778cc18"
+source_hash: "563dd60b59a291d25f7be50f8db6153e905f1cf7e71e306008718e6bf72b856f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/together.md"
@@ -91,7 +91,7 @@ shared `video_generate` tool.
 | Property             | Value                                                                                     |
 | -------------------- | ----------------------------------------------------------------------------------------- |
 | Default video model  | `Wan-AI/Wan2.2-T2V-A14B`                                                                  |
-| Other models         | `Wan-AI/Wan2.2-I2V-A14B`, `minimax/Hailuo-02`, `Kwai/Kling-2.1-Master`                    |
+| Other models         | `Wan-AI/Wan2.2-I2V-A14B`, `minimax/hailuo-02`, `kwaivgI/kling-2.1-master`                 |
 | Modes                | text-to-video; image-to-video only with `Wan-AI/Wan2.2-I2V-A14B` (single reference image) |
 | Duration             | 1-10 seconds                                                                              |
 | Supported parameters | `size` (parsed as `<width>x<height>`); `aspectRatio`/`resolution` are not read            |

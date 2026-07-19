@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model provider quickstart"
 source: "https://docs.openclaw.ai/providers/models"
-source_hash: "a49e5002e50704c42edadd2dddf67b3572dc8220771d7ae183a30ae458756198"
+source_hash: "c48accbc92b1ee392b1cd7b9a83f11f2b4645f284727d0bb554aea0e288c9a92"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/models.md"
@@ -31,6 +31,7 @@ Pick a provider, authenticate, then set the default model as `provider/model`.
 - [Alibaba Model Studio](/providers/alibaba)
 - [Amazon Bedrock](/providers/bedrock)
 - [Anthropic (API + Claude CLI)](/providers/anthropic)
+- [Baseten (Inkling + Model APIs)](/providers/baseten)
 - [BytePlus (International)](/concepts/model-providers#byteplus-international)
 - [Chutes](/providers/chutes)
 - [Cloudflare AI Gateway](/providers/cloudflare-ai-gateway)
