@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/model-catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/model-catalog"
-source_hash: "64249433510acc9f5bdaa4a4c9f10ef78ea26cbf160dac2abb8245c88335381a"
+source_hash: "e76163ba8294f341f860a7e9ac045f9f43f2616d0a388c0ac0eed55514f6687d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/model-catalog.md"
@@ -103,6 +103,20 @@ model_catalog:
 ```
 
 The overriding manifest only needs to populate the provider block(s) it cares about. Other providers continue to resolve against the master URL.
+
+### Hiding providers from the picker
+
+`excluded_providers` lets you hide specific providers from the `/model` picker even when valid credentials exist. Useful when credentials are present for legacy or testing providers that shouldn't appear in normal use (e.g. an old Copilot or OpenRouter token still cached in `auth.json` or discovered via the `gh` CLI).
+
+```yaml
+model_catalog:
+  excluded_providers:
+    - copilot
+    - openrouter
+    - openai
+```
+
+The exclusion is matched case-insensitively against every key a provider can surface under — the Hermes id and models.dev id (built-in mapped providers), the overlay pid and resolved Hermes slug (overlay providers), and the canonical slug (canonical providers) — so a single entry like `copilot` hides the provider regardless of which section emits it. It is honored by every `/model` picker surface: the gateway interactive/text pickers, the TUI picker, and the interactive `hermes model` CLI picker. An empty list (or omitting the key) has no effect.
 
 ## Updating the manifest
 

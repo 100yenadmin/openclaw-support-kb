@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp Business (Cloud API)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp-cloud"
-source_hash: "6a3d3a06abadbb3edf9e9dcf9e30c0e21d40753184160073d71b26986711cd9e"
+source_hash: "551b2daede249f53d24d3c419f4f49a30ec68493920b9d4eddd64f36085494a5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp-cloud.md"
@@ -129,7 +129,7 @@ cloudflared tunnel --url http://localhost:8090
 Note the printed URL — that's what you'll give Meta.
 
 :::warning Quick tunnels rotate
-The free quick-tunnel URL changes every time you restart `cloudflared`.  For a stable URL, log in with `cloudflared tunnel login` and create a named tunnel.  Free Cloudflare accounts get unlimited named tunnels — see [Cloudflare's docs](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) for the named-tunnel workflow.
+The free quick-tunnel URL changes every time you restart `cloudflared`.  For a stable URL, log in with `cloudflared tunnel login` and create a named tunnel.  Free Cloudflare accounts get unlimited named tunnels — see [Cloudflare's docs](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/) for the named-tunnel workflow.
 :::
 
 ### ngrok

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "08eaec816d61d1f6822b1275cb159e2128497f9fa4d3b74ada4ab468d2acca13"
+source_hash: "7a94d95ece149c1b1f07f7fd157382b06d1d770cbd3c8adb7365befd767b2afd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -1336,12 +1336,16 @@ native Anthropic provider already controls effort directly and is unaffected.
 You can also change the reasoning effort at runtime with the `/reasoning` command:
 
 ```
-/reasoning           # Show current effort level and display state
-/reasoning high      # Set reasoning effort to high
-/reasoning none      # Disable reasoning
-/reasoning show      # Show model thinking above each response
-/reasoning hide      # Hide model thinking
+/reasoning                # Show current effort level and display state
+/reasoning high           # Set reasoning effort to high (this session only)
+/reasoning high --global  # Set effort and persist to config.yaml
+/reasoning none           # Disable reasoning (this session only)
+/reasoning show           # Show model thinking above each response
+/reasoning hide           # Hide model thinking
 ```
+
+Effort changes are session-scoped by default; add `--global` to save the
+new level as your `agent.reasoning_effort` default.
 
 #### Per-Model Reasoning Overrides
 

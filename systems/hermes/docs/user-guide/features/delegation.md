@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "891227ac6bf0e73308ab48ba99666dc34e31f726f8f9971ad4fca7aa037b18cf"
+source_hash: "5b5682ec3497a784789d5f85c155e114bb04cfb96bee1e535de263522309ff1b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -218,6 +218,22 @@ The TUI ships a `/agents` overlay (alias `/tasks`) that turns recursive `delegat
 - Post-hoc review: step through each subagent's turn-by-turn history even after they've returned to the parent
 
 The classic CLI just prints `/agents` as a text summary; the TUI is where the overlay shines. See [TUI — Slash commands](/user-guide/tui#slash-commands).
+
+## Live Transcripts
+
+Every `delegate_task` dispatch also creates one **append-only, human-readable log per task** so you (or the parent agent) can watch a subagent work in real time instead of waiting for the consolidated summary:
+
+```
+<hermes_home>/cache/delegation/live/<delegation_id>/task-<n>.log
+```
+
+The dispatch response includes the paths as `live_transcripts`, and the files are pre-created at dispatch time, so this works immediately:
+
+```bash
+tail -f ~/.hermes/cache/delegation/live/deleg_ab12cd34/task-0.log
+```
+
+Each line is timestamped and shows the child's assistant text, thinking snippets, tool calls (`-> tool_name({args})`), tool results, and a final status marker. A `manifest.json` in the same directory describes the batch (goals, task count, per-task status). The logs persist after completion — they double as the full-fidelity operational record alongside the summary — and directories older than 7 days are pruned automatically on new dispatches. Because they live under `cache/delegation`, they are also readable from remote terminal backends (Docker/Modal/SSH).
 
 ## Depth Limit and Nested Orchestration
 

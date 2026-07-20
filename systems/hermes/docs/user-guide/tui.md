@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "TUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/tui"
-source_hash: "a4ac1d51b092da68af7fdcb85a1d68f43609b3e617b77016b04760df58a0dfc5"
+source_hash: "419f9f63b3a47313eb34c72dcbdd127cffafbfc76d8e5511b0afeed12593cbe5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/tui.md"
@@ -147,9 +147,9 @@ Open it with any of these:
 - `/sessions new` to create a fresh live session immediately.
 - Click the `N live sessions` count in the status line.
 
-<img alt="Hermes TUI Session Orchestrator with one live session and a +new row" src="/img/docs/tui-session-orchestrator/session-orchestrator.png" />
+<img alt="Hermes TUI Session Orchestrator with one live session and a +new row" src="/docs/img/docs/tui-session-orchestrator/session-orchestrator.png" />
 
-<video controls muted loop playsInline src="/img/docs/tui-session-orchestrator/session-orchestrator-demo.mp4" title="Hermes TUI Session Orchestrator demo" />
+<video controls muted loop playsInline src="/docs/img/docs/tui-session-orchestrator/session-orchestrator-demo.mp4" title="Hermes TUI Session Orchestrator demo" style={{maxWidth: '100%'}}></video>
 
 Inside the switcher:
 

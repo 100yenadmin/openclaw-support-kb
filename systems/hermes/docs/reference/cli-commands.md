@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-commands"
-source_hash: "230c8e8e14b7095c1a9d66e41e30c17326147edb96ac286fd75f90b18ef70e18"
+source_hash: "e8f1a67189c02a513fe1534ddd8083f232fd6d4e697c7189b156c120e0d9244c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-commands.md"
@@ -212,7 +212,7 @@ Switch between already-configured models without leaving a session:
 /model openrouter:anthropic/claude-sonnet-4  # Switch back to cloud
 ```
 
-By default, `/model` changes apply **to the current session only**. Add `--global` to persist the change to `config.yaml`:
+By default, `/model` changes apply **to the current session only**. Add `--global` to persist the change to `config.yaml` (or set `model.persist_switch_by_default: true` to make every switch persist):
 
 ```
 /model claude-sonnet-4 --global     # Switch and save as new default
@@ -222,7 +222,7 @@ By default, `/model` changes apply **to the current session only**. Add `--globa
 If you've only configured OpenRouter, `/model` will only show OpenRouter models. To add another provider (Anthropic, DeepSeek, Copilot, etc.), exit your session and run `hermes model` from the terminal.
 :::
 
-Provider and base URL changes are persisted to `config.yaml` automatically. When switching away from a custom endpoint, the stale base URL is cleared to prevent it leaking into other providers.
+On a `--global` switch, provider and base URL changes are persisted to `config.yaml` alongside the model. When switching away from a custom endpoint, the stale base URL is cleared to prevent it leaking into other providers.
 
 ## `hermes gateway`
 
