@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Agent with Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal"
-source_hash: "4060b3b1b5ce1e230dba07727477294059b088bd1f98cda15d51faec6d352b54"
+source_hash: "4937eda78abaf64699d8f28bf294650f65c4d79bb6aba32d5279974e30ee8d53"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-hermes-with-nous-portal.md"
@@ -133,7 +133,7 @@ hermes config set model.default anthropic/claude-sonnet-4.6
 
 ### Don't pick Hermes-4 for agent work
 
-Hermes-4-70B and Hermes-4-405B are available on the Portal at deep discounts, but they're **chat/reasoning models**, not tool-call-tuned. They will struggle with multi-step agent loops. Use them via [Nous Chat](https://chat.nousresearch.com) for conversation/research work, or through the [subscription proxy](/user-guide/features/subscription-proxy) from non-agent tools. For Hermes Agent itself, stick to the frontier agentic models above.
+Hermes-4-70B and Hermes-4-405B are available on the Portal at deep discounts, but they're **chat/reasoning models**, not tool-call-tuned. They will struggle with multi-step agent loops. Use them for conversation/research work through the [subscription proxy](/user-guide/features/subscription-proxy) from non-agent tools. For Hermes Agent itself, stick to the frontier agentic models above.
 
 The Portal's own [info page](https://portal.nousresearch.com/info) carries this warning too — it's the official Nous guidance, not just a Hermes-side opinion.
 

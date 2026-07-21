@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AI Providers"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/providers"
-source_hash: "425a3fdc4de2db6f7e6721a37b1c90c9bb4a94b48181c20d1c0a063d089dd0a5"
+source_hash: "1f30c51d427933104ed38d822909e6855c86be3769900f5548b6938c5325a7a6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/providers.md"
@@ -75,7 +75,7 @@ In the `model:` config section, you can use either `default:` or `model:` as the
 
 ### Nous Portal
 
-[Nous Portal](https://portal.nousresearch.com) is Nous Research's unified subscription gateway and **the recommended way to run Hermes Agent**. One OAuth login covers 300+ frontier agentic models (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM, MiniMax, Grok, ...) plus the [Tool Gateway](/user-guide/features/tool-gateway) (web search, image generation, TTS, browser automation) plus [Nous Chat](https://chat.nousresearch.com) — billed against your Nous subscription instead of separate per-provider accounts.
+[Nous Portal](https://portal.nousresearch.com) is Nous Research's unified subscription gateway and **the recommended way to run Hermes Agent**. One OAuth login covers 300+ frontier agentic models (Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM, MiniMax, Grok, ...) plus the [Tool Gateway](/user-guide/features/tool-gateway) (web search, image generation, TTS, browser automation) — billed against your Nous subscription instead of separate per-provider accounts.
 
 ```bash
 hermes setup --portal     # fresh install — OAuth + provider + gateway in one command

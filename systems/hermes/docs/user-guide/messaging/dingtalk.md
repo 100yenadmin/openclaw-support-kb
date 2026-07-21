@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "DingTalk"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/dingtalk"
-source_hash: "0c1151fc3e159af238a5fd4d5f7a86968104d1970e0035de1ae9763ddd2c9a64"
+source_hash: "f72f6be82cccbb9e24dc1b80b70628d94a30295d7c7c30e51beba077da11aebf"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/dingtalk.md"
@@ -167,7 +167,7 @@ gateway:
 
 - `group_sessions_per_user: true` keeps each participant's context isolated inside shared group chats
 - `require_mention: true` prevents the bot from responding to every group message — it only answers when someone @-mentions it
-- `allowed_users` under `dingtalk.extra` is an alternative to `DINGTALK_ALLOWED_USERS`; if both are set, they're merged
+- `allowed_users` under `dingtalk.extra` is an alternative to `DINGTALK_ALLOWED_USERS`; set one or the other (if both are set, only users present in both lists are authorized)
 
 ### Start the Gateway
 

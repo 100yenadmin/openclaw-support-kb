@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slash Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/slash-commands"
-source_hash: "cb668439dff23d7cac28e5f29ce0c02e143034bd44bd2fc6354b8770fee0cbf1"
+source_hash: "27aac1ace8df4949a7e3bd0054af3028c7d78aca58c41fc839c6bc082a943e5c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/slash-commands.md"
@@ -126,7 +126,7 @@ Type `/` in the CLI to open the autocomplete menu. Built-in commands are case-in
 | `/version` | Show Hermes Agent version, build, and environment info. |
 | `/usage` | Show token usage, cost breakdown, session duration, and — when available from the active provider — an **Account limits** section with remaining quota / credits / plan usage pulled live from the provider's API. |
 | `/credits` | Show your Nous credit balance and a top-up handoff link. |
-| `/billing` | CLI terminal-billing flow for Nous — view balance, buy credits, and manage auto-reload / monthly limits. |
+| `/billing` | CLI Remote Spending flow for Nous — view balance, buy credits, and manage auto-reload / monthly limits. |
 | `/insights` | Show usage insights and analytics (last 30 days) |
 | `/platforms` (alias: `/gateway`) | Show gateway/messaging platform status (CLI-only summary view). |
 | `/paste` | Attach a clipboard image |

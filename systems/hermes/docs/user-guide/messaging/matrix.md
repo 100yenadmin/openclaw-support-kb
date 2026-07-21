@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Matrix"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/matrix"
-source_hash: "fb217161c98ed067576130e4735b4674cf6f39b56571bb835fc09e23899b3f51"
+source_hash: "2a9ba92a1bbc644f09da2827f6e987b51476d7744ed10b5a35e195a77022db7e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/matrix.md"
@@ -110,6 +110,7 @@ matrix:
   session_scope: room             # auto|room|thread; room is recommended for project rooms
   auto_thread: true               # Auto-create threads for responses (default: true)
   dm_mention_threads: false       # Create thread when @mentioned in DM (default: false)
+  max_message_length: 16000       # Outbound chunk size in chars (default: 16000, max: 65535)
 ```
 
 Or via environment variables:
