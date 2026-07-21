@@ -24,6 +24,7 @@ export const DEFAULT_MIN_GBRAIN_VERSION = "0.19.0";
 export const DEFAULT_AGENT_SCAN_SPEC = "snyk-agent-scan@0.5.0";
 export const GBRAIN_SOURCE_ID = "openclaw-support-kb";
 export const GBRAIN_SOURCE_NAME = "Customer Support KB";
+export const GBRAIN_VERIFY_LIMIT = 10;
 export const SOURCE_MARKER_FILE = ".openclaw-support-kb-source";
 const GBRAIN_SOURCE_ID_PATTERN = new RegExp(`\\b${escapeRegExp(GBRAIN_SOURCE_ID)}\\b`, "i");
 export const GBRAIN_VERIFY_QUERIES = [
@@ -385,7 +386,7 @@ export function gbrainSyncArgs(targetDir, sourceResult = {}) {
 }
 
 export function gbrainSearchArgs(query, sourceResult = {}) {
-  const args = ["search", query];
+  const args = ["search", query, "--limit", String(GBRAIN_VERIFY_LIMIT)];
   if (sourceResult.sourceScoped !== false) args.push("--source", GBRAIN_SOURCE_ID);
   return args;
 }
