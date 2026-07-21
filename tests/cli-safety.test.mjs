@@ -239,10 +239,17 @@ test("client sync registers and uses the named GBrain source", () => {
   assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: true }), [
     "search",
     "Hermes config",
+    "--limit",
+    "10",
     "--source",
     GBRAIN_SOURCE_ID,
   ]);
-  assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: false }), ["search", "Hermes config"]);
+  assert.deepEqual(gbrainSearchArgs("Hermes config", { sourceScoped: false }), [
+    "search",
+    "Hermes config",
+    "--limit",
+    "10",
+  ]);
 
   for (const script of ["scripts/update-client.mjs", "scripts/sync-local.mjs"]) {
     const text = readFileSync(path.join(repoRoot, script), "utf8");
