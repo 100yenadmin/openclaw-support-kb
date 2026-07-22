@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding redesign"
 source: "https://docs.openclaw.ai/start/onboarding-redesign"
-source_hash: "72bdaed2a25706af322f54931564652e45b90e6d8f756c2175c9599d45c98c53"
+source_hash: "ee0b59fec78f2ce82b6aee5391b5d16946d9d0eefaa6dffbe095d3ddfc892562"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding-redesign.md"
@@ -317,8 +317,8 @@ restart` from the real environment and verify the plist. Product follow-up:
 
 ## Decision log
 
-- Magical scan with kill switch, not consent-first (phase 1; disclosure lives
-  in the scanning progress line and results note).
+- Magical scan with kill switch, not consent-first (phase 1; persistent output
+  discloses model and ClawHub use before scanning, and the results note repeats it).
 - Full vertical including the node `device.apps` command (phase 1).
 - Third-party ClawHub skills are never pre-selected and are labeled as
   installing the publisher's code; official entries may be pre-checked

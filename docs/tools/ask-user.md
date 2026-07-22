@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ask user"
 source: "https://docs.openclaw.ai/tools/ask-user"
-source_hash: "520abd3fcc385852d772309c3ffca33ce752b3db3ebbee3b9e055278eca3c9d1"
+source_hash: "0fd6d82b06b1edf4a07b1fac91baddfcb718ebc745e81455efe9fff0f899c9e1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/ask-user.md"
@@ -87,9 +87,7 @@ Example answered result:
   "status": "answered",
   "answers": {
     "answers": {
-      "deploy_target": {
-        "answers": ["Staging (Recommended)"]
-      }
+      "deploy_target": ["Staging (Recommended)"]
     }
   }
 }

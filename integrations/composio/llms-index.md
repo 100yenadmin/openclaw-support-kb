@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "d0d2b2cf7f59c73d24ef7c946c786e4b4fe5eb3498e9419d5a52e75b8f1ce180"
+source_hash: "c062948727dc5e47f6d8975bba66d4f6cb41d4f2054e8ccae88aaca5122dbf67"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -117,8 +117,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/errors.md
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
-- https://docs.composio.dev/reference/api-reference/api-keys.md
 - https://docs.composio.dev/reference/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/api-reference/api-keys.md
 - https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/logs.md

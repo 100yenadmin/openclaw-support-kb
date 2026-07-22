@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "c975349fe5cb79e202b3edb17234dba395e1956be59bc6545007b7f85aa99a31"
+source_hash: "db3a9fe967055da6a7d915c05b62dde3fb076a136818be0b4ed0ffe0d7e6625f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/slack.md"
@@ -337,8 +337,8 @@ CodeGroup
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
-    "assistant_view": {
-      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+    "agent_view": {
+      "agent_description": "OpenClaw connects Slack Agent View conversations to OpenClaw agents.",
       "suggested_prompts": [
         { "title": "What can you do?", "message": "What can you help me with?" },
         {
@@ -391,8 +391,7 @@ CodeGroup
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -423,8 +422,8 @@ CodeGroup
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
-    "assistant_view": {
-      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+    "agent_view": {
+      "agent_description": "OpenClaw connects Slack Agent View conversations to OpenClaw agents.",
       "suggested_prompts": [
         { "title": "What can you do?", "message": "What can you help me with?" },
         {
@@ -466,8 +465,7 @@ CodeGroup
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "message.channels",
         "message.groups",
         "message.im"
@@ -564,8 +562,8 @@ CodeGroup
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
-    "assistant_view": {
-      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+    "agent_view": {
+      "agent_description": "OpenClaw connects Slack Agent View conversations to OpenClaw agents.",
       "suggested_prompts": [
         { "title": "What can you do?", "message": "What can you help me with?" },
         {
@@ -619,8 +617,7 @@ CodeGroup
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -656,8 +653,8 @@ CodeGroup
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
-    "assistant_view": {
-      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+    "agent_view": {
+      "agent_description": "OpenClaw connects Slack Agent View conversations to OpenClaw agents.",
       "suggested_prompts": [
         { "title": "What can you do?", "message": "What can you help me with?" },
         {
@@ -700,8 +697,7 @@ CodeGroup
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "message.channels",
         "message.groups",
         "message.im"
@@ -895,8 +891,8 @@ Base manifest (Socket Mode default):
       "messages_tab_enabled": true,
       "messages_tab_read_only_enabled": false
     },
-    "assistant_view": {
-      "assistant_description": "OpenClaw connects Slack assistant threads to OpenClaw agents.",
+    "agent_view": {
+      "agent_description": "OpenClaw connects Slack Agent View conversations to OpenClaw agents.",
       "suggested_prompts": [
         { "title": "What can you do?", "message": "What can you help me with?" },
         {
@@ -949,8 +945,7 @@ Base manifest (Socket Mode default):
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -988,8 +983,7 @@ For **HTTP Request URLs mode**, replace `settings` with the HTTP variant and add
       "bot_events": [
         "app_home_opened",
         "app_mention",
-        "assistant_thread_context_changed",
-        "assistant_thread_started",
+        "app_context_changed",
         "channel_rename",
         "member_joined_channel",
         "member_left_channel",
@@ -1016,7 +1010,9 @@ For **HTTP Request URLs mode**, replace `settings` with the HTTP variant and add
 
 Surface different features that extend the above defaults.
 
-The default manifest enables the Slack App Home **Home** tab and subscribes to `app_home_opened`. When a workspace member opens the Home tab, OpenClaw publishes a safe default Home view with `views.publish`; no conversation payload or private configuration is included. When single slash command mode is enabled, the command hint uses `channels.slack.slashCommand.name`; installations using native commands or no slash commands omit that hint. The **Messages** tab remains enabled for Slack DMs. The manifest also enables Slack assistant threads with `features.assistant_view`, `assistant:write`, `assistant_thread_started`, and `assistant_thread_context_changed`; assistant threads route to their own OpenClaw thread sessions and keep Slack-provided thread context available to the agent.
+The default manifest enables the Slack App Home **Home** tab and subscribes to `app_home_opened`. When a workspace member opens the Home tab, OpenClaw publishes a safe default Home view with `views.publish`; no conversation payload or private configuration is included. When single slash command mode is enabled, the command hint uses `channels.slack.slashCommand.name`; installations using native commands or no slash commands omit that hint. The **Messages** tab remains enabled for Slack DMs. New apps use Slack Agent View through `features.agent_view`, `assistant:write`, and `app_context_changed`. Each visible Agent View root routes to its own OpenClaw thread session, and Slack's ordered active-view entities reach the agent only as untrusted context.
+
+Existing apps that already use `features.assistant_view` can keep their current manifest. OpenClaw continues to handle `assistant_thread_started` and `assistant_thread_context_changed` for those installs. Slack makes migration from Assistant View to Agent View irreversible and requires users to hard refresh afterward, so do not replace `assistant_view` on an existing app until you intend to migrate the whole workspace.
 
 AccordionGroup
 
@@ -1027,6 +1023,8 @@ Optional native slash commands
 
     - Use `/agentstatus` instead of `/status` because the `/status` command is reserved.
     - No more than 25 slash commands can be registered on a Slack app at once (Slack platform limit).
+
+    OpenClaw registers handlers for enabled native commands, but Slack manifest entries remain administrator-managed and are not synchronized at runtime. Add `/login` to the manifest manually; the example below includes it instead of the optional `/side` alias to remain at 25 commands. `/login` can be surfaced anywhere, but it issues pairing codes only in private chats or the Web UI.
 
     Replace your existing `features.slash_commands` section with a subset of [available commands](/tools/slash-commands#command-list):
 
@@ -1148,9 +1146,9 @@ Socket Mode (default)
       "usage_hint": "<question>"
     },
     {
-      "command": "/side",
-      "description": "Ask a side question without changing session context",
-      "usage_hint": "<question>"
+      "command": "/login",
+      "description": "Pair Codex login",
+      "usage_hint": "[codex|openai]"
     },
     {
       "command": "/usage",
@@ -1359,7 +1357,7 @@ Mentions and channel users
 
     - explicit app mention (`<@botId>`)
     - Slack user-group mention (`<!subteam^S...>`) when the bot user is a member of that user group; requires `usergroups:read`
-    - mention regex patterns (`agents.list[].groupChat.mentionPatterns`, fallback `messages.groupChat.mentionPatterns`)
+    - mention regex patterns (`agents.entries.*.groupChat.mentionPatterns`, fallback `messages.groupChat.mentionPatterns`)
     - replies to the bot's own Slack message (`implicitMentions.replyToBot`)
     - follow-ups in threads where the bot participated (`implicitMentions.threadParticipation`)
 
@@ -1388,10 +1386,10 @@ Mentions and channel users
 
 - DMs route as `direct`; channels as `channel`; MPIMs as `group`.
 - Slack route bindings accept raw peer IDs plus Slack target forms such as `channel:C12345678`, `user:U12345678`, and `<@U12345678>`.
-- With default `session.dmScope=main`, Slack DMs collapse to agent main session.
+- With default `session.dmScope=main`, ordinary Slack DMs collapse to the agent main session. Agent View roots and existing Assistant View threads remain isolated as `:thread:<threadTs>` sessions.
 - Channel sessions: `agent:<agentId>:slack:channel:<channelId>`.
 - Ordinary top-level channel messages stay on the per-channel session, even when `replyToMode` is non-`off`.
-- Slack thread replies use the parent Slack `thread_ts` for session suffixes (`:thread:<threadTs>`), even when outbound reply threading is disabled with `replyToMode="off"`.
+- Slack channel, MPIM, Agent View, and Assistant View thread replies use the parent Slack `thread_ts` for session suffixes (`:thread:<threadTs>`). Ordinary DM reply threads remain a UI affordance on the base DM session.
 - OpenClaw seeds an eligible top-level channel root into `agent:<agentId>:slack:channel:<channelId>:thread:<rootTs>` when that root is expected to start a visible Slack thread, so the root and later thread replies share one OpenClaw session. This applies to `app_mention` events, explicit bot or configured mention-pattern matches, and `requireMention: false` channels with non-`off` `replyToMode`.
 - `channels.slack.thread.historyScope` default is `thread`; `thread.inheritParent` default is `false`.
 - `channels.slack.thread.initialHistoryLimit` controls how many existing thread messages are fetched when a new thread session starts (default `20`; set `0` to disable).
@@ -1417,13 +1415,13 @@ When a `message` tool call runs inside a Slack thread and targets the same chann
 
 Note
 
-`replyToMode="off"` disables outbound Slack reply threading, including explicit `[[reply_to_*]]` tags. It does not flatten inbound Slack thread sessions: messages already posted inside a Slack thread still route to the `:thread:<threadTs>` session. This differs from Telegram, where explicit tags are still honored in `"off"` mode. Slack threads hide messages from the channel while Telegram replies stay visible inline.
+`replyToMode="off"` disables optional outbound Slack reply threading, including explicit `[[reply_to_*]]` tags. Agent View and Assistant View are Slack-managed threaded experiences, so their replies and status remain on the visible root regardless of this setting. It does not flatten other inbound Slack thread sessions. This differs from Telegram, where explicit tags are still honored in `"off"` mode. Slack threads hide messages from the channel while Telegram replies stay visible inline.
 
 ## Ack reactions
 
 `ackReaction` sends an acknowledgement emoji while OpenClaw is processing an inbound message. `ackReactionScope` decides _when_ that emoji is actually sent.
 
-By default, the acknowledgement stays static while Slack's native assistant thread status shows progress with rotating loading messages. Set `messages.statusReactions.enabled: true` to opt into the queued/thinking/tool/done/error reaction lifecycle instead.
+By default, the acknowledgement stays static while Slack's native agent/assistant thread status shows progress with rotating loading messages. Set `messages.statusReactions.enabled: true` to opt into the queued/thinking/tool/done/error reaction lifecycle instead.
 
 ### Emoji (`ackReaction`)
 
@@ -1432,7 +1430,7 @@ Resolution order:
 - `channels.slack.accounts.<accountId>.ackReaction`
 - `channels.slack.ackReaction`
 - `messages.ackReaction`
-- agent identity emoji fallback (`agents.list[].identity.emoji`, else `"eyes"` / 👀)
+- agent identity emoji fallback (`agents.entries.*.identity.emoji`, else `"eyes"` / 👀)
 
 Notes:
 
@@ -1567,7 +1565,7 @@ To speak to OpenClaw in Slack today, send a Slack audio clip to the OpenClaw app
 
 Audio clips and Slackbot dictation have different privacy semantics: clips follow Slack file-retention policy and OpenClaw downloads them for transcription, while Slack says dictation audio is not stored.
 
-In a channel with `requireMention: true`, a captionless audio clip can satisfy the gate by speaking a configured mention pattern (`agents.list[].groupChat.mentionPatterns`, falling back to `messages.groupChat.mentionPatterns`). OpenClaw authorizes the sender before downloading or transcribing the clip, then admits it only when the transcript matches. A failed or nonmatching speculative transcript is discarded with the downloaded clip; it is not retained in channel history. Native Slack `@bot` identity cannot be inferred from speech, so configure a spoken-name pattern or include a typed mention. If transcript echoing is enabled, the echo is sent only after admission.
+In a channel with `requireMention: true`, a captionless audio clip can satisfy the gate by speaking a configured mention pattern (`agents.entries.*.groupChat.mentionPatterns`, falling back to `messages.groupChat.mentionPatterns`). OpenClaw authorizes the sender before downloading or transcribing the clip, then admits it only when the transcript matches. A failed or nonmatching speculative transcript is discarded with the downloaded clip; it is not retained in channel history. Native Slack `@bot` identity cannot be inferred from speech, so configure a spoken-name pattern or include a typed mention. If transcript echoing is enabled, the echo is sent only after admission.
 
 ## Media, chunking, and delivery
 
@@ -1919,6 +1917,7 @@ Same-chat `/approve` also works in Slack channels and DMs that already support c
 - Optional presence polling can map an observed human participant's `away` to `active` transition into the participant's most recently active eligible Slack session. The default is off.
 - `channel_id_changed` can migrate channel config keys when `configWrites` is enabled.
 - Channel topic/purpose metadata is treated as untrusted context and can be injected into routing context.
+- Agent View `app_context` entities are validated in Slack relevance order and exposed only as structured untrusted context; an omitted context clears the turn rather than reusing stale entities.
 - Thread starter and initial thread-history context seeding are filtered by configured sender allowlists when applicable.
 - Block actions, shortcuts, and modal interactions emit structured `Slack interaction: ...` system events with rich payload fields:
   - block actions: selected values, labels, picker values, and `workflow_*` metadata
@@ -2130,7 +2129,7 @@ When a single Slack message contains multiple file attachments:
 ### Size, download, and model limits
 
 - **Size cap**: Default 20 MB per file. Configurable via `channels.slack.mediaMaxMb`.
-- **Audio transcription cap**: `tools.media.audio.maxBytes` also applies when the downloaded file is sent to a transcription provider or CLI.
+- **Audio transcription cap**: the selected audio-capable `tools.media.models[]` entry's `maxBytes` also applies when the downloaded file is sent to a transcription provider or CLI.
 - **Download failures**: Files that Slack cannot serve, expired URLs, inaccessible files, oversize files, and Slack auth/login HTML responses are skipped instead of being reported as unsupported formats.
 - **Vision model**: Image analysis uses the active reply model when it supports vision, or the image model configured at `agents.defaults.imageModel`.
 

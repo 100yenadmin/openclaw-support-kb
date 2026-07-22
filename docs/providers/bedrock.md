@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "081f1071343db2dd28975df6c7ee341efa9dc40d924d17259118eb3f2e4860b0"
+source_hash: "83fbfa94d22fe55d6a3128fb12dab7778e80476f0542350b16de8e1b122738ac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -477,16 +477,14 @@ Embeddings for memory search
 
     Bedrock can also serve as the embedding provider for
     [memory search](/concepts/memory-search). This is configured separately from the
-    inference provider -- set `agents.defaults.memorySearch.provider` to `"bedrock"`:
+    inference provider -- set `memory.search.provider` to `"bedrock"`:
 
     ```json5
     {
-      agents: {
-        defaults: {
-          memorySearch: {
-            provider: "bedrock",
-            model: "amazon.titan-embed-text-v2:0", // default
-          },
+      memory: {
+        search: {
+          provider: "bedrock",
+          model: "amazon.titan-embed-text-v2:0", // default
         },
       },
     }

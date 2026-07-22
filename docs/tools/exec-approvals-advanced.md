@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "a008ea93fb242a76bc69960b86eae917191800d6a18b770c6b5c01f3e97c0250"
+source_hash: "66a57f7ba7e54548df706b8eb0f8ad9b3814829ab8901ff7c92f3cc331a116d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
@@ -126,9 +126,9 @@ automatically.
 
 Configuration location:
 
-- `safeBins` comes from config (`tools.exec.safeBins` or per-agent `agents.list[].tools.exec.safeBins`).
-- `safeBinTrustedDirs` comes from config (`tools.exec.safeBinTrustedDirs` or per-agent `agents.list[].tools.exec.safeBinTrustedDirs`).
-- `safeBinProfiles` comes from config (`tools.exec.safeBinProfiles` or per-agent `agents.list[].tools.exec.safeBinProfiles`). Per-agent profile keys override global keys.
+- `safeBins` comes from config (`tools.exec.safeBins` or per-agent `agents.entries.*.tools.exec.safeBins`).
+- `safeBinTrustedDirs` comes from config (`tools.exec.safeBinTrustedDirs` or per-agent `agents.entries.*.tools.exec.safeBinTrustedDirs`).
+- `safeBinProfiles` comes from config (`tools.exec.safeBinProfiles` or per-agent `agents.entries.*.tools.exec.safeBinProfiles`). Per-agent profile keys override global keys.
 - allowlist entries live in the host-local approvals file under `agents.<id>.allowlist` (or via Control UI / `openclaw approvals allowlist ...`).
 - `openclaw security audit` warns with `tools.exec.safe_bins_interpreter_unprofiled` when interpreter/runtime bins appear in `safeBins` without explicit profiles.
 - `openclaw doctor --fix` can scaffold missing custom `safeBinProfiles.<bin>` entries as `{}` (review and tighten afterward). Interpreter/runtime bins are not auto-scaffolded.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP lifecycle refactor"
 source: "https://docs.openclaw.ai/refactor/acp"
-source_hash: "6ba26412bc20a32ae1991f6542e17b411f83b5cda4cd1cd94cbe4ea9ba560911"
+source_hash: "5acc877d29bc0a0fa59e1044c41df2c6961e8647c4c420fee28a0f06f22b0998"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/acp.md"
@@ -109,12 +109,11 @@ type AcpxProcessLease = {
 };
 ```
 
-The wrapper process should receive the lease id and gateway instance id in its
-environment:
+The wrapper process receives the lease id and gateway instance id as portable
+arguments:
 
 ```sh
-OPENCLAW_ACPX_LEASE_ID=...
-OPENCLAW_GATEWAY_INSTANCE_ID=...
+--openclaw-acpx-lease-id ... --openclaw-gateway-instance-id ...
 ```
 
 When the platform allows it, verification should prefer live process metadata
@@ -123,7 +122,7 @@ that cannot be confused by command quoting:
 - root PID still exists
 - live wrapper path is under `wrapperRoot`
 - process group matches the lease when available
-- environment contains the expected lease id when readable
+- arguments contain the expected lease id
 - command hash or executable path matches the lease
 
 If the live process cannot be verified, cleanup fails closed.

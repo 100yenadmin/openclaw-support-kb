@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "3eb604e1717b7e184df550c65dc67fbe8106ae161653f80a69381adc7b82d64e"
+source_hash: "63c1d587df2a6e6b35ae1c061e94e87df7e5274c072659724fb90bbf0711aa25"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -261,7 +261,7 @@ The default existing-session path is host-only Chrome MCP auto-connect. If the b
 Current existing-session limits:
 
 - Snapshot-driven actions use refs, not CSS selectors.
-- `browser.actionTimeoutMs` defaults supported `act` requests to 60000 ms when callers omit `timeoutMs`; per-call `timeoutMs` still wins.
+- Supported `act` requests use a built-in 60000 ms default when callers omit `timeoutMs`; per-call `timeoutMs` still wins.
 - `click` is left-click only.
 - `type` does not support `slowly=true`.
 - `press` does not support `delayMs`.

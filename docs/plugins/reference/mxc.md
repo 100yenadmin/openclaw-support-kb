@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mxc plugin"
 source: "https://docs.openclaw.ai/plugins/reference/mxc"
-source_hash: "f5f9e0dc6208da2e2a9850de5da513e894ef3b39151ee8390f934c85a25b6f0a"
+source_hash: "0d8682c3be30f15bb60629c2264611de0704e03fe6ad07cc79f5605b93da8360"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/mxc.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/mxc
 
 # Mxc plugin
 
-OS-level sandboxed tool execution via MXC for MXC-capable Windows hosts: runs commands in ProcessContainer (Windows) with configured MXC policy files.
+OS-level sandboxed tool execution via MXC: runs commands in a Windows ProcessContainer with configured MXC policy files.
 
 ## Distribution
 

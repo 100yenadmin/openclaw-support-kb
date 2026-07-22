@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime architecture"
 source: "https://docs.openclaw.ai/agent-runtime-architecture"
-source_hash: "21b55cc6802f0a946df328f283784fa50a98387efaa3f88953c223afa0366469"
+source_hash: "7c98a4bb9281ef14af682ef33763628d02b5e510ac2f6e078849462488642b8b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "agent-runtime-architecture.md"
@@ -58,6 +58,12 @@ Resource types not listed in a manifest fall back to discovery of conventional `
 - Runtime policy is model/provider-scoped `agentRuntime.id` config (model entry wins over provider entry). Unset or `default` resolves to `auto`.
 - `auto` selects a registered plugin harness that supports the effective provider route, otherwise the built-in OpenClaw runtime. A provider or model prefix alone never selects a harness.
 - OpenAI may select `codex` implicitly only for an exact official HTTPS Platform Responses or ChatGPT Responses route with no authored request override. Completions adapters, custom endpoints, and routes with authored request behavior stay on `openclaw`; plaintext official HTTP endpoints are rejected. See [OpenAI implicit agent runtime](/providers/openai#implicit-agent-runtime).
+
+## Model Runtime Generations
+
+Gateway startup and config, plugin, or auth publication build one prepared model runtime generation per configured agent. Each generation owns the discovered auth template, model registry, and projected model catalog as one atomic snapshot. Agent runs fork mutable auth and registry stores from that snapshot; browse, status, cron, doctor, TUI, PDF, and image paths read the published catalog instead of repeating filesystem discovery.
+
+Standalone embedded runtimes publish the same snapshot shape at their activation boundary. A failed or stale generation is never served alongside a newer partial generation; the lifecycle owner must publish a complete replacement first.
 
 ## Related
 

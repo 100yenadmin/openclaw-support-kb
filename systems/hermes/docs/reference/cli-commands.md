@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-commands"
-source_hash: "e8f1a67189c02a513fe1534ddd8083f232fd6d4e697c7189b156c120e0d9244c"
+source_hash: "955e78faf4079a75be6402e8b39faa25b2d0d58d44e8d5bf00392aa846482eeb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-commands.md"
@@ -444,7 +444,8 @@ Pull API keys from an external secret manager at process startup instead of stor
 | Subcommand | Description |
 |------------|-------------|
 | `setup` | Interactive wizard: install the pinned `bws` binary, store an access token, and pick a project. Accepts `--project-id`, `--access-token`, and `--server-url` for non-interactive use. |
-| `status` | Show current config, binary path/version, and last fetch info. |
+| `status` | Show current config, binary path/version, and token validation status. |
+| `token` | Rotate the access token: validates the new token against Bitwarden before storing it in `.env` (a rejected token changes nothing). Accepts `--access-token` for non-interactive use and `--no-verify` to skip the probe. |
 | `sync` | Fetch secrets now and report what changed. Add `--apply` to actually export the secrets into the current shell's environment (default is dry-run). |
 | `install` | Download and verify the pinned `bws` binary. `--force` re-downloads even if a managed copy already exists. |
 | `disable` | Turn off the Bitwarden integration. |

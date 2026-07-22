@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel inbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-inbound"
-source_hash: "69905a3f0d155b6cf94693d137f511374ec795167bc844f18c8c90b57840b8f7"
+source_hash: "d73048c282177040df4b598fb73116b435ddd7e7f93270d18ee5002090983b86"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-inbound.md"
@@ -43,6 +43,14 @@ delivery, and live preview behavior.
   record, dispatch, and finalize for one inbound platform event.
 - `dispatchChannelInboundReply(...)`: records and dispatches an already
   assembled inbound reply with a delivery adapter.
+
+For media-only inbound events, keep the message body and command text empty and
+pass one `ChannelInboundMediaInput` fact per native attachment. When an ambient
+history line or another text-only carrier must describe those facts, use
+`formatMediaPlaceholderText(media)`. It classifies each fact from `kind`, MIME
+type, then path or URL extension; undownloaded native attachments should still
+contribute one type-only fact each. Do not use the formatter to synthesize the
+primary inbound body.
 
 Bundled/native channels that already receive the injected plugin runtime
 object can call the same helpers under `runtime.channel.inbound.*` instead of

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SenseAudio"
 source: "https://docs.openclaw.ai/providers/senseaudio"
-source_hash: "a9c7baeddf10e4c970cd3ada50120653460226495f9db9b006765b8447cdd4c7"
+source_hash: "c2586b1a02048beccb793d08d0ee4e1c2e6c2ee3738634a5e87ea69b6d2ba4c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/senseaudio.md"
@@ -62,13 +62,13 @@ Send a voice note
 
 ## Options
 
-| Option     | Path                                  | Description                         |
-| ---------- | ------------------------------------- | ----------------------------------- |
-| `model`    | `tools.media.audio.models[].model`    | SenseAudio ASR model id             |
-| `language` | `tools.media.audio.models[].language` | Optional language hint              |
-| `prompt`   | `tools.media.audio.prompt`            | Optional transcription prompt       |
-| `baseUrl`  | `tools.media.audio.baseUrl` or model  | Override the OpenAI-compatible base |
-| `headers`  | `tools.media.audio.request.headers`   | Extra request headers               |
+| Option     | Path                            | Description                         |
+| ---------- | ------------------------------- | ----------------------------------- |
+| `model`    | `tools.media.models[].model`    | SenseAudio ASR model id             |
+| `language` | `tools.media.models[].language` | Optional language hint              |
+| `prompt`   | `tools.media.models[].prompt`   | Optional transcription prompt       |
+| `baseUrl`  | `tools.media.models[].baseUrl`  | Override the OpenAI-compatible base |
+| `headers`  | `tools.media.models[].headers`  | Extra request headers               |
 
 Note
 

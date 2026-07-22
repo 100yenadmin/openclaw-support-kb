@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "65e2829b98c9d335dfb2cea9e462ea2d8c319030bd54c03c83419f716e6f6e88"
+source_hash: "1437bd037809bd6bf8cdb377833590fc5ad57e129466813fdf2a6c9afd73f5bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -123,7 +123,7 @@ Modes and ACP runtime
     - For persistent thread-bound sessions, use `sessions_spawn` with `thread: true` and `mode: "session"`.
     - If the requester channel does not support thread bindings, use `mode: "run"` instead of retrying an impossible thread-bound combination.
     - For ACP harness sessions (Claude Code, Gemini CLI, OpenCode, or explicit Codex ACP/acpx), use `sessions_spawn` with `runtime: "acp"` when the tool advertises that runtime. See [ACP delivery model](/tools/acp-agents#delivery-model) when debugging completions or agent-to-agent loops. When the `codex` plugin is enabled, Codex chat/thread control should prefer `/codex ...` over ACP unless the user explicitly asks for ACP/acpx.
-    - OpenClaw hides `runtime: "acp"` until ACP is enabled, the requester is not sandboxed, and a backend plugin such as `acpx` is loaded. `runtime: "acp"` expects an external ACP harness id, or an `agents.list[]` entry with `runtime.type="acp"`; use the default sub-agent runtime for normal OpenClaw config agents from `agents_list`.
+    - OpenClaw hides `runtime: "acp"` until ACP is enabled, the requester is not sandboxed, and a backend plugin such as `acpx` is loaded. `runtime: "acp"` expects an external ACP harness id, or an `agents.entries.*` entry with `runtime.type="acp"`; use the default sub-agent runtime for normal OpenClaw config agents from `agents_list`.
 
 
 
@@ -158,8 +158,8 @@ session to confirm the effective tool list.
 
 **Defaults:**
 
-- **Model:** native sub-agents inherit the caller unless you set `agents.defaults.subagents.model` (or per-agent `agents.list[].subagents.model`). ACP runtime spawns use the same configured subagent model when present; otherwise the ACP harness keeps its own default. An explicit `sessions_spawn.model` still wins.
-- **Thinking:** native sub-agents inherit the caller unless you set `agents.defaults.subagents.thinking` (or per-agent `agents.list[].subagents.thinking`). ACP runtime spawns also apply `agents.defaults.models["provider/model"].params.thinking` for the selected model. An explicit `sessions_spawn.thinking` still wins.
+- **Model:** native sub-agents inherit the caller unless you set `agents.defaults.subagents.model` (or per-agent `agents.entries.*.subagents.model`). ACP runtime spawns use the same configured subagent model when present; otherwise the ACP harness keeps its own default. An explicit `sessions_spawn.model` still wins.
+- **Thinking:** native sub-agents inherit the caller unless you set `agents.defaults.subagents.thinking` (or per-agent `agents.entries.*.subagents.thinking`). ACP runtime spawns also apply `agents.defaults.models["provider/model"].params.thinking` for the selected model. An explicit `sessions_spawn.thinking` still wins.
 - **Run timeout:** OpenClaw uses `agents.defaults.subagents.runTimeoutSeconds` when set; otherwise it falls back to `0` (no timeout). `sessions_spawn` does not accept per-call timeout overrides.
 - **Process lifetime:** a detached OpenClaw sub-agent has its own run lifecycle. A background task created inside an external CLI backend is different: it shares the parent CLI subprocess and stops if that parent reaches `agents.defaults.timeoutSeconds`.
 - **Task delivery:** native sub-agents receive the delegated task in their first visible `[Subagent Task]` message. The sub-agent system prompt carries runtime rules and routing context, not a hidden duplicate of the task.
@@ -175,7 +175,7 @@ in the tool result: `resolvedModel` contains the applied model ref and
 - `suggest` (default): keep the standard prompt nudge to use sub-agents for larger or slower work.
 - `prefer`: tell the main agent to stay responsive and delegate anything more involved than a direct reply through `sessions_spawn`.
 
-Per-agent override: `agents.list[].subagents.delegationMode`.
+Per-agent override: `agents.entries.*.subagents.delegationMode`.
 
 ```json5
 {
@@ -220,7 +220,7 @@ ParamField
 
 ParamField
 
-  `acp` is only for external ACP harnesses (`claude`, `droid`, `gemini`, `opencode`, or explicitly requested Codex ACP/acpx) and for `agents.list[]` entries whose `runtime.type` is `acp`.
+  `acp` is only for external ACP harnesses (`claude`, `droid`, `gemini`, `opencode`, or explicitly requested Codex ACP/acpx) and for `agents.entries.*` entries whose `runtime.type` is `acp`.
 
 ParamField
 
@@ -246,6 +246,7 @@ ParamField
 
   If `thread: true` and `mode` is omitted, default becomes `session`. `mode: "session"` requires `thread: true`.
   If thread binding is unavailable for the requester channel, use `mode: "run"` instead.
+  With `visible: true`, omit `mode`; visible sessions are persistent and do not support `mode: "run"`.
 
 ParamField
 
@@ -282,7 +283,7 @@ Warning
 their latest assistant turn back to the requester; external delivery stays with
 the parent/requester agent.
 
-With `visible: true`, `model`, `cwd`, and a same-agent `context: "fork"` are supported. A sandboxed target restricts `cwd` to that agent's workspace. Thread binding, `mode`, thinking overrides, light bootstrap context, and attachment staging are unavailable on this path because visible sessions are persistent dashboard sessions created through `sessions.create`. Visible spawning is also rejected when inherited tool restrictions cannot be carried into the dashboard session. See [Managed worktrees](/concepts/managed-worktrees) for checkout naming, setup, cleanup, and restore behavior.
+With `visible: true`, `model`, `cwd`, and a same-agent `context: "fork"` are supported. A sandboxed target restricts `cwd` to that agent's workspace. Thread binding, `mode`, thinking overrides, `lightContext`, `attachments`, and `attachAs` are unavailable on this path because visible sessions are persistent dashboard sessions created through `sessions.create`. Visible spawning is rejected when the requester was itself spawned with an inherited tool allowlist or denylist; that restriction is fixed at spawn time and has no config override. Session listing and addressing obey `tools.sessions.visibility`; the default `tree` scope covers the current session and its own spawn subtree. See [Managed worktrees](/concepts/managed-worktrees) for checkout naming, setup, cleanup, and restore behavior.
 
 ### Task names and targeting
 
@@ -415,7 +416,7 @@ ParamField
 
 ParamField
 
-  Block `sessions_spawn` calls that omit `agentId` (forces explicit profile selection). Per-agent override: `agents.list[].subagents.requireAgentId`.
+  Block `sessions_spawn` calls that omit `agentId` (forces explicit profile selection). Per-agent override: `agents.entries.*.subagents.requireAgentId`.
 
 ParamField
 
@@ -431,11 +432,11 @@ Use `agents_list` to see which agent ids are currently allowed for
 model and embedded runtime metadata so callers can distinguish OpenClaw, Codex
 app-server, and other configured native runtimes.
 
-`allowAgents` entries must point at configured agent ids in `agents.list[]`.
+`allowAgents` entries must point at configured agent ids in `agents.entries.*`.
 `["*"]` means any configured target agent plus the requester. If an agent config
 is deleted but its id remains in `allowAgents`, `sessions_spawn` rejects that id
 and `agents_list` omits it. Run `openclaw doctor --fix` to clean stale
-allowlist entries, or add a minimal `agents.list[]` entry when the target should
+allowlist entries, or add a minimal `agents.entries.*` entry when the target should
 remain spawnable while inheriting defaults.
 
 ### Auto-archive
@@ -505,6 +506,7 @@ final answer, the correct follow-up is the exact silent token
 
 ### Tool policy by depth
 
+- A child captures the requester's effective sender policy when it is spawned. Senderless child runs and authenticated operator resumes keep that snapshot even if `toolsBySender` changes later; current global, agent, provider, sandbox, and sub-agent restrictions still apply. A new external channel turn targeting the child re-resolves current sender policy instead.
 - Role and control scope are written into session metadata at spawn time. That keeps flat or restored session keys from accidentally regaining orchestrator privileges.
 - **Depth 1 (orchestrator, when `maxSpawnDepth >= 2`):** gets `sessions_spawn`, `subagents`, `sessions_list`, `sessions_history` so it can spawn children and inspect their status. Other session/system tools remain denied.
 - **Depth 1 (leaf, when `maxSpawnDepth == 1`):** no session tools (current default behavior).
@@ -661,7 +663,7 @@ profile stage:
 }
 ```
 
-Use per-agent `agents.list[].tools.alsoAllow: ["browser"]` when only one
+Use per-agent `agents.entries.*.tools.alsoAllow: ["browser"]` when only one
 agent should get browser automation.
 
 ## Concurrency

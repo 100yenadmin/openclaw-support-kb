@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bonjour discovery"
 source: "https://docs.openclaw.ai/gateway/bonjour"
-source_hash: "3c60dc0c316a3025993338fb827f6f690ec0d98abdcf29a2e3af4c6dda15bc3a"
+source_hash: "29ef95f4add04d4b2460561f76da060367a13d57d1b02d50db20fc2cea907e16"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/bonjour.md"
@@ -150,11 +150,11 @@ openclaw plugins enable bonjour
 
 When enabled, Bonjour uses `discovery.mdns.mode` to decide how much TXT metadata to publish; the same mode controls optional TXT hints in wide-area DNS-SD records. Modes:
 
-| Mode                | Behavior                                                                                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `minimal` (default) | Core TXT keys only; omits `sshPort`, `cliPath`, `tailnetDns`.                                                                                                 |
-| `full`              | Adds `sshPort`, `cliPath`, `tailnetDns` — use when clients need those hints.                                                                                  |
-| `off`               | Suppresses LAN multicast without changing plugin enablement; wide-area DNS-SD can still publish the minimal beacon when `discovery.wideArea.enabled` is true. |
+| Mode                | Behavior                                                                                                                                 |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `minimal` (default) | Core TXT keys only; omits `sshPort`, `cliPath`, `tailnetDns`.                                                                            |
+| `full`              | Adds `sshPort`, `cliPath`, `tailnetDns` — use when clients need those hints.                                                             |
+| `off`               | Suppresses LAN multicast without changing plugin enablement; wide-area DNS-SD can still publish when `discovery.wideArea.domain` is set. |
 
 ## When to disable Bonjour
 

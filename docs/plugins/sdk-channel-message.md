@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel message API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-message"
-source_hash: "99d8e4bb0edbf5a53caf0b6cae6021631e56d6a50a5d5cbb3bb5307f781e740d"
+source_hash: "3c9ad95d850cc41da9611e00eb94a9d192a9ba6f3f310c90943c144ca6de61ed"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-message.md"
@@ -15,13 +15,11 @@ Source: https://docs.openclaw.ai/plugins/sdk-channel-message
 
 This page moved to [Channel outbound API](/plugins/sdk-channel-outbound).
 
-`openclaw/plugin-sdk/channel-message` and
-`openclaw/plugin-sdk/channel-message-runtime` remain deprecated compatibility
-subpaths for older plugins; both are thin aliases over the shared channel
-message core. New channel plugins should use
+`openclaw/plugin-sdk/channel-message` remains a deprecated compatibility
+subpath for older plugins. New channel plugins should use
 `openclaw/plugin-sdk/channel-outbound` for message lifecycle, receipt,
 durable send, and live preview helpers instead of adding new helpers to the
-deprecated subpaths.
+deprecated subpath.
 
 Removal plan: keep these aliases through the external plugin migration
 window, then remove them in the next major SDK cleanup after callers have

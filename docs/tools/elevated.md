@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Elevated mode"
 source: "https://docs.openclaw.ai/tools/elevated"
-source_hash: "66e9a9bacfa65bb5732a6a28a0d7cb218af2e964e6433c3c8a0a8d979eb1a76d"
+source_hash: "7443e7a888f9f7486dc70254571224c68d1cabefeca08c2b5057015f7214ef4f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/elevated.md"
@@ -97,8 +97,8 @@ Commands run outside the sandbox
 
 - **Global gate**: `tools.elevated.enabled` (must be `true`)
 - **Sender allowlist**: `tools.elevated.allowFrom` with per-channel lists
-- **Per-agent gate**: `agents.list[].tools.elevated.enabled` (can only further restrict; both the global and per-agent gate must be `true`)
-- **Per-agent allowlist**: `agents.list[].tools.elevated.allowFrom` (sender must match both global + per-agent)
+- **Per-agent gate**: `agents.entries.*.tools.elevated.enabled` (can only further restrict; both the global and per-agent gate must be `true`)
+- **Per-agent allowlist**: `agents.entries.*.tools.elevated.allowFrom` (sender must match both global + per-agent)
 - **Channel-provided fallback allowlist**: channel plugins can optionally supply a fallback allowlist through an SDK adapter hook, used when `tools.elevated.allowFrom.<provider>` is not configured. No bundled channel currently implements this hook, so in practice every provider needs an explicit `tools.elevated.allowFrom.<provider>` entry today.
 - **All gates must pass**; otherwise elevated is treated as unavailable
 

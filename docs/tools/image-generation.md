@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "fc3ea0210269c2dcb94dd7bc0d94c579e9005768dd0c101805af54b08d0167fc"
+source_hash: "0de25e31b772b630ac22b1dbaf01b6607bf4827db55b949f8e7750870bf22287"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -27,7 +27,7 @@ Note
 
 The tool only appears when at least one image-generation provider is
 available. If you do not see `image_generate` in your agent's tools,
-configure `agents.defaults.imageGenerationModel`, set up a provider API key,
+configure `agents.defaults.mediaModels.image`, set up a provider API key,
 or sign in with OpenAI ChatGPT/Codex OAuth.
 
 ## Quick start
@@ -274,14 +274,13 @@ Per-call model overrides are exact
 Auto-detection is auth-aware
 
     A provider default only enters the candidate list when OpenClaw can
-    actually authenticate that provider. Set
-    `agents.defaults.mediaGenerationAutoProviderFallback: false` to use only
-    explicit `model`, `primary`, and `fallbacks` entries.
+    actually authenticate that provider. Automatic fallback across authenticated
+    providers is always enabled; a per-call `model` remains authoritative.
 
 
 Timeouts
 
-    Set `agents.defaults.imageGenerationModel.timeoutMs` for slow image
+    Set `agents.defaults.mediaModels.image.timeoutMs` for slow image
     backends. A per-call `timeoutMs` tool parameter overrides the configured
     default, and configured defaults override plugin-authored provider
     defaults. Google and OpenRouter hosted image providers use 180 second

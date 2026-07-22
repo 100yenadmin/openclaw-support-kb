@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "fe4bc873211243189842c9e499f490ae14d6f383b27c292c6ad79c6e1993c5ce"
+source_hash: "bdbe4d0b7e3d3e718c7e4212bb2900874e8f0facf9fca9fe9c16957787d1c75b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/token-use.md"
@@ -25,7 +25,7 @@ OpenClaw assembles its own system prompt on every run. It includes:
   Codex turns get the compact skills block as turn-scoped collaboration
   developer instructions; other harnesses get it in the normal prompt surface.
   Bounded by `skills.limits.maxSkillsPromptChars`, with optional per-agent
-  override at `agents.list[].skillsLimits.maxSkillsPromptChars`.
+  override at `agents.entries.*.skillsLimits.maxSkillsPromptChars`.
 - Self-update instructions
 - Workspace + bootstrap files (`AGENTS.md`, `SOUL.md`, `TOOLS.md`,
   `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `BOOTSTRAP.md` when new, plus
@@ -47,8 +47,9 @@ OpenClaw assembles its own system prompt on every run. It includes:
     daily memory for that first turn, controlled by
     `agents.defaults.startupContext`. Bare chat `/new` and `/reset` are
     acknowledged without invoking the model.
-  - Post-compaction `AGENTS.md` excerpts are separate and require explicit
-    `agents.defaults.compaction.postCompactionSections` opt-in.
+  - Post-compaction `AGENTS.md` excerpts require explicit
+    `agents.defaults.compaction.postCompactionSections` opt-in; plugins can add
+    other context through `before_prompt_build`.
 - Time (UTC + user timezone)
 - Reply tags + heartbeat behavior
 - Runtime metadata (host/OS/model/thinking)
@@ -72,7 +73,7 @@ Everything the model receives counts toward the context limit:
 
 Runtime-heavy surfaces have their own explicit caps under
 `agents.defaults.contextLimits` (per-agent overrides under
-`agents.list[].contextLimits`):
+`agents.entries.*.contextLimits`):
 
 | Key                      | Purpose                                                                  |
 | ------------------------ | ------------------------------------------------------------------------ |
@@ -206,7 +207,7 @@ TTL is `1h`, setting the heartbeat interval just under that (e.g., `55m`) can
 avoid re-caching the full prompt, reducing cache write costs.
 
 In multi-agent setups, you can keep one shared model config and tune cache
-behavior per agent with `agents.list[].params.cacheRetention`.
+behavior per agent with `agents.entries.*.params.cacheRetention`.
 
 For a full knob-by-knob guide, see [Prompt Caching](/reference/prompt-caching).
 
@@ -251,7 +252,7 @@ agents:
         cacheRetention: "none" # avoid cache writes for bursty notifications
 ```
 
-`agents.list[].params` merges on top of the selected model's `params`, so you
+`agents.entries.*.params` merges on top of the selected model's `params`, so you
 can override only `cacheRetention` and inherit other model defaults
 unchanged.
 

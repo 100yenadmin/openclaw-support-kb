@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Debugging"
 source: "https://docs.openclaw.ai/help/debugging"
-source_hash: "6fab1c6bf8c5ecab42fe5517f1ed9f46fff2afbe5ba08d9f80ddc5c8bd8d4e55"
+source_hash: "3dc479c3648fa6cda53ab960a089eb33ba6776ac0ec91fde591b685a3cdd35ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/debugging.md"
@@ -21,8 +21,8 @@ Debugging helpers for streaming output, gateway iteration, and startup profiling
 
 ```text
 /debug show
-/debug set messages.responsePrefix="[openclaw]"
-/debug unset messages.responsePrefix
+/debug set channels.whatsapp.responsePrefix="[openclaw]"
+/debug unset channels.whatsapp.responsePrefix
 /debug reset
 ```
 
@@ -190,6 +190,8 @@ What this does:
    - Seeds the workspace files if missing: `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`.
    - Default identity: **C3-PO** (protocol droid).
    - `pnpm gateway:dev` also sets `OPENCLAW_SKIP_CHANNELS=1` to skip channel providers.
+
+Dev Gateways ignore ambient channel environment triggers by default, so credentials inherited from your shell do not connect the development instance to real channel services. Explicit `channels.<id>` configuration still works. Pass `--dev-ambient-channels` with `--dev` to restore ambient channel auto-configuration for that run.
 
 Reset flow (fresh start):
 

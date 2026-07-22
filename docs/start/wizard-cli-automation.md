@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI automation"
 source: "https://docs.openclaw.ai/start/wizard-cli-automation"
-source_hash: "6d9d4f4cc9ca374010f218204ab7ffa393841465742f3d96fd11599ca3b103bc"
+source_hash: "3a5751d5526b82a62c59ccfb6d0ab7ded34bf6e6e8e7a8d00df87d60d09c9b59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-automation.md"
@@ -219,7 +219,7 @@ openclaw agents add work \
   --json
 ```
 
-Config keys it writes (`agents.list[]` entry for the new agent id):
+Config keys it writes (`agents.entries.*` entry for the new agent id):
 
 - `name`
 - `workspace`

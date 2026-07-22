@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code Mode"
 source: "https://docs.openclaw.ai/tools/code-mode"
-source_hash: "d3b889f9ca1bac00e90edd5540268087292f632250808347368fdd584bbe7fce"
+source_hash: "c437e28b64d872eba9ce40c80dcff8e3d916cc7737674fcc6b428be84e56be54"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-mode.md"
@@ -169,6 +169,14 @@ openclaw gateway
 With code mode active, the logged model-facing tool names should be `exec` and
 `wait`. For the full redacted provider payload, add
 `OPENCLAW_DEBUG_MODEL_PAYLOAD=full-redacted` for a short debugging session.
+
+## Use Swarm for agent fan-out
+
+[Swarm](/tools/swarm) adds `agents.run()`, `phase()`, and `log()` guest globals
+for orchestrating concurrent sub-agents from Code Mode scripts. Enable both
+`tools.codeMode` and `tools.swarm`, then use normal JavaScript control flow for
+fan-out, decision gates, and structured collection. Swarm is a separate opt-in
+gate; enabling Code Mode alone does not expose the `agents.*` API.
 
 ## Technical tour
 
@@ -1163,6 +1171,7 @@ Docs-only changes to this page should still run `pnpm check:docs`.
 
 ## Related
 
+- [Swarm](/tools/swarm) for fan-out agent orchestration from Code Mode scripts
 - [Tool Search](/tools/tool-search)
 - [Agent runtimes](/concepts/agent-runtimes)
 - [Exec tool](/tools/exec)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "f80e5816e5eabd57e87988e30faab106b3ce44c5ae8a8c41912725f462903e7b"
+source_hash: "dcced4ac6de5a349ec750ec7c28e4b2cb240a4cf81e90fb7c29bf9435ea0605e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -35,11 +35,9 @@ To set a provider explicitly:
 
 ```json5
 {
-  agents: {
-    defaults: {
-      memorySearch: {
-        provider: "openai",
-      },
+  memory: {
+    search: {
+      provider: "openai",
     },
   },
 }
@@ -56,14 +54,12 @@ openclaw plugins install @openclaw/llama-cpp-provider
 
 ```json5
 {
-  agents: {
-    defaults: {
-      memorySearch: {
-        provider: "local",
-        fallback: "none",
-        local: {
-          modelPath: "~/.node-llama-cpp/models/embeddinggemma-300m-qat-Q8_0.gguf",
-        },
+  memory: {
+    search: {
+      provider: "local",
+      fallback: "none",
+      local: {
+        modelPath: "~/.node-llama-cpp/models/embeddinggemma-300m-qat-Q8_0.gguf",
       },
     },
   },
@@ -86,7 +82,7 @@ openclaw plugins install @openclaw/llama-cpp-provider
 | OpenAI-compatible | `openai-compatible` | Generic `/v1/embeddings` endpoint   |
 | Voyage            | `voyage`            |                                     |
 
-Set `memorySearch.provider` to switch away from OpenAI.
+Set `memory.search.provider` to switch away from OpenAI.
 
 ## How indexing works
 
@@ -106,7 +102,7 @@ OpenClaw indexes `MEMORY.md` and `memory/*.md` into chunks (400 tokens with
 Info
 
 You can also index Markdown files outside the workspace with
-`memorySearch.extraPaths`. See the
+`memory.search.extraPaths`. See the
 [configuration reference](/reference/memory-config#additional-memory-paths).
 
 ## When to use
@@ -137,7 +133,7 @@ openclaw memory index --force --agent main
 ```
 
 Both standalone CLI commands and the Gateway use the same `local` provider id.
-Set `memorySearch.provider: "local"` when you want local embeddings.
+Set `memory.search.provider: "local"` when you want local embeddings.
 
 **Stale results?** Run `openclaw memory index --force` to rebuild. The watcher
 may miss changes in rare edge cases.

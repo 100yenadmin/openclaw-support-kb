@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LiteLLM"
 source: "https://docs.openclaw.ai/providers/litellm"
-source_hash: "c9acee10362aef033d9fdcc6097ca5d035cd338b2a78767dc4d94436a5efb1d0"
+source_hash: "310fcf1802294d3edb37f861920e78664faf6b611e5139a077edb930279eed31"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/litellm.md"
@@ -107,7 +107,7 @@ The default model onboarding writes is `litellm/claude-opus-4-6`.
 
 LiteLLM can back the `image_generate` tool through OpenAI-compatible `/images/generations` and
 `/images/edits` routes. Default image model is `gpt-image-2`; configure a different one under
-`agents.defaults.imageGenerationModel`:
+`agents.defaults.mediaModels.image`:
 
 ```json5
 {

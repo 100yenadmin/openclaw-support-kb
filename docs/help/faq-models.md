@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "a0f24ea23d808f9e0ef559c4d5b8d3cedec42fdfc58e198b013049aa63fd6894"
+source_hash: "94602292275f6ed38eea6990e0c6495828b4b214e94d9302ceaa5c3fd66d8137"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -508,8 +508,7 @@ Can I control which auth profile is tried first?
     OpenClaw may skip a profile in a short **cooldown** (rate limits,
     timeouts, auth failures) or a longer **disabled** state
     (billing/insufficient credits). Inspect with `openclaw models status
-    --json` and check `auth.unusableProfiles`. Tune with
-    `auth.cooldowns.billingBackoffHours*`. Rate-limit cooldowns can be
+    --json` and check `auth.unusableProfiles`. Rate-limit cooldowns can be
     model-scoped — a profile cooling down for one model can still serve a
     sibling model on the same provider; billing/disabled windows block the
     whole profile.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway integrations for external apps"
 source: "https://docs.openclaw.ai/gateway/external-apps"
-source_hash: "b8908b55f541939d789cc0c39594a6054a885c80606c97710e8190ba8e352ac9"
+source_hash: "06f3093be9b1f3230fcee079bc2e5e85d84b1db65ce3e7706dafed9486c7ef1c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/external-apps.md"
@@ -18,11 +18,15 @@ transport plus RPC methods. Use it when a script, dashboard, CI job, IDE
 extension, or another process wants to start agent runs, stream events, wait
 for results, cancel work, or inspect Gateway resources.
 
-Warning
+Note
 
-  There is no public npm client package yet. Do not add OpenClaw client package
-  names as application dependencies until release notes announce a published
-  package and this page includes install instructions.
+  For npm packages, device pairing, reconnect recovery, history, subscriptions,
+  and approvals, start with
+  [Building a Gateway client](https://docs.openclaw.ai/gateway/clients). If your
+  app supervises the Gateway as a child process, also read
+  [Embedding OpenClaw](https://docs.openclaw.ai/gateway/embedding). During the
+  initial package rollout, npm may return `E404` until the first package-bearing
+  OpenClaw release is published.
 
 Note
 
@@ -31,16 +35,14 @@ Note
 
 ## What is available today
 
-| Surface                                 | Status | Use it for                                                                                    |
-| --------------------------------------- | ------ | --------------------------------------------------------------------------------------------- |
-| [Gateway protocol](/gateway/protocol)   | Ready  | WebSocket transport, connect handshake, auth scopes, protocol versioning, and events.         |
-| [Gateway RPC reference](/reference/rpc) | Ready  | Current Gateway methods for agents, sessions, tasks, models, tools, artifacts, and approvals. |
-| [`openclaw agent`](/cli/agent)          | Ready  | One-shot script integration when shelling out to the CLI is enough.                           |
-| [`openclaw message`](/cli/message)      | Ready  | Sending messages or channel actions from scripts.                                             |
-
-A future client library package is in progress internally, but it is not a
-public install surface yet. Treat it as preview implementation detail until a
-release announces a published, versioned package.
+| Surface                                                          | Status        | Use it for                                                                                    |
+| ---------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------- |
+| [Gateway client guide](https://docs.openclaw.ai/gateway/clients) | Release train | npm packages, auth, reconnect, history, events, approvals, and version policy.                |
+| [Embedding guide](https://docs.openclaw.ai/gateway/embedding)    | Release train | Child-process environment, readiness, lifecycle, recovery, RPC ownership, and packaging.      |
+| [Gateway protocol](/gateway/protocol)                            | Ready         | WebSocket transport, connect handshake, auth scopes, protocol versioning, and events.         |
+| [Gateway RPC reference](/reference/rpc)                          | Ready         | Current Gateway methods for agents, sessions, tasks, models, tools, artifacts, and approvals. |
+| [`openclaw agent`](/cli/agent)                                   | Ready         | One-shot script integration when shelling out to the CLI is enough.                           |
+| [`openclaw message`](/cli/message)                               | Ready         | Sending messages or channel actions from scripts.                                             |
 
 ## Recommended path
 
@@ -180,6 +182,8 @@ plugins loaded by OpenClaw.
 
 ## Related
 
+- [Building a Gateway client](https://docs.openclaw.ai/gateway/clients)
+- [Embedding OpenClaw](https://docs.openclaw.ai/gateway/embedding)
 - [Gateway protocol](/gateway/protocol)
 - [Gateway RPC reference](/reference/rpc)
 - [CLI agent command](/cli/agent)

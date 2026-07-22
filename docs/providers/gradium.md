@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gradium"
 source: "https://docs.openclaw.ai/providers/gradium"
-source_hash: "36d06021ed4f5fbefb4e2eb302156deb37936318d28b1e159efaaad6c93f4c57"
+source_hash: "aeda867c371c13426d5d06535896f02eebf9df299467e87740050d7f7e0fef34"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/gradium.md"
@@ -50,14 +50,12 @@ Config key
 
     ```json5
     {
-      messages: {
-        tts: {
-          auto: "always",
-          provider: "gradium",
-          providers: {
-            gradium: {
-              apiKey: "${GRADIUM_API_KEY}",
-            },
+      tts: {
+        auto: "always",
+        provider: "gradium",
+        providers: {
+          gradium: {
+            apiKey: "${GRADIUM_API_KEY}",
           },
         },
       },
@@ -69,27 +67,25 @@ Config key
 
 ```json5
 {
-  messages: {
-    tts: {
-      auto: "always",
-      provider: "gradium",
-      providers: {
-        gradium: {
-          speakerVoiceId: "YTpq7expH9539ERJ",
-          // apiKey: "${GRADIUM_API_KEY}",
-          // baseUrl: "https://api.gradium.ai",
-        },
+  tts: {
+    auto: "always",
+    provider: "gradium",
+    providers: {
+      gradium: {
+        speakerVoiceId: "YTpq7expH9539ERJ",
+        // apiKey: "${GRADIUM_API_KEY}",
+        // baseUrl: "https://api.gradium.ai",
       },
     },
   },
 }
 ```
 
-| Key                                             | Type   | Description                                                                                             |
-| ----------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- |
-| `messages.tts.providers.gradium.apiKey`         | string | Resolved API key. Supports `${ENV}` and secret refs.                                                    |
-| `messages.tts.providers.gradium.baseUrl`        | string | HTTPS Gradium API URL on `api.gradium.ai`. Trailing slashes stripped. Default `https://api.gradium.ai`. |
-| `messages.tts.providers.gradium.speakerVoiceId` | string | Default voice id used when no directive override is present.                                            |
+| Key                                    | Type   | Description                                                                                             |
+| -------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------- |
+| `tts.providers.gradium.apiKey`         | string | Resolved API key. Supports `${ENV}` and secret refs.                                                    |
+| `tts.providers.gradium.baseUrl`        | string | HTTPS Gradium API URL on `api.gradium.ai`. Trailing slashes stripped. Default `https://api.gradium.ai`. |
+| `tts.providers.gradium.speakerVoiceId` | string | Default voice id used when no directive override is present.                                            |
 
 Output format is chosen automatically by target surface (see [Output](#output)) and is not configurable in `openclaw.json`.
 
@@ -131,7 +127,7 @@ Output format is selected by target surface; the provider does not synthesize ot
 
 ## Auto-select order
 
-Among configured TTS providers, Gradium's auto-select order is `30`. See [Text-to-Speech](/tools/tts) for how OpenClaw picks the active provider when `messages.tts.provider` is not pinned.
+Among configured TTS providers, Gradium's auto-select order is `30`. See [Text-to-Speech](/tools/tts) for how OpenClaw picks the active provider when `tts.provider` is not pinned.
 
 ## Related
 

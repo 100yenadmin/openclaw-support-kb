@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Adding capabilities (contributor guide)"
 source: "https://docs.openclaw.ai/plugins/adding-capabilities"
-source_hash: "5fd39163f372d0832750a273a5109fc50e6872f99ada997e18839916da193d45"
+source_hash: "8dc2a5a3d7805119e4256bbd10754c363f1d75a16ecccb332680ac6fb740be7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/adding-capabilities.md"
@@ -101,7 +101,7 @@ Image generation follows the standard shape:
 The config key is intentionally separate from vision-analysis routing:
 
 - `agents.defaults.imageModel` analyzes images.
-- `agents.defaults.imageGenerationModel` generates images.
+- `agents.defaults.mediaModels.image` generates images.
 
 Keep those separate so fallback and policy remain explicit.
 

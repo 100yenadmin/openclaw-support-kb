@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel outbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-outbound"
-source_hash: "765ee09604340eabb0f4858307ae3d756d8032c871836050589fbc02a16eb6aa"
+source_hash: "f020b327a5d7a2938ac09a14746a8bb9afd9180686382304c94628a6aac2e5bb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-outbound.md"
@@ -122,6 +122,10 @@ export const demoMessageAdapter = defineChannelMessageAdapter({
 Only declare capabilities the native transport actually preserves. Cover
 each declared send, receipt, live-preview, and receive-ack capability with
 the contract helpers exported from this subpath.
+
+## Outbound echo suppression
+
+When a platform may redeliver the plugin's own outbound message as inbound, call `recordOutboundMessageIdentity(...)` with the channel, account, conversation, and a stable platform message or source identity. The shared inbound turn path drops matching identities for a bounded 30-second window before session recording or agent dispatch; a source identity may be reserved before send or refreshed when a channel route is removed to close delivery races. `isRecentOutboundMessageIdentity(...)` exposes the same query for channel diagnostics and tests. Do not maintain a parallel channel-local TTL cache for the same stable identity.
 
 ## Plain-text sanitization
 

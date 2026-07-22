@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "2813fdd2dfdb3bc4d2772de9191135758309dbb4cec27fb0679fa7d87ad21d19"
+source_hash: "9bb4a7179a516d02929655e3f2de48ce86f5a8275deaa3a9bac277c3e01d4a6b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -22,7 +22,7 @@ Note
 
 `video_generate` only appears when at least one video-generation provider is
 available. If it is missing from your agent tools, set a provider API key or
-configure `agents.defaults.videoGenerationModel`.
+configure `agents.defaults.mediaModels.video`.
 
 `video_generate` has three runtime modes, resolved from the reference inputs
 in the call:
@@ -52,7 +52,7 @@ Configure auth
 Pick a default model (optional)
 
     ```bash
-    openclaw config set agents.defaults.videoGenerationModel.primary "google/veo-3.1-fast-generate-preview"
+    openclaw config set agents.defaults.mediaModels.video.primary "google/veo-3.1-fast-generate-preview"
     ```
 
 
@@ -257,7 +257,7 @@ ParamField
 Output filename hint.
 
 ParamField
-Optional provider operation timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.videoGenerationModel.timeoutMs` if configured, otherwise the plugin-authored provider default when one exists.
+Optional provider operation timeout in milliseconds. When omitted, OpenClaw uses `agents.defaults.mediaModels.video.timeoutMs` if configured, otherwise the plugin-authored provider default when one exists.
 
 ParamField
 
@@ -337,8 +337,8 @@ OpenClaw resolves the model in this order:
 If a provider fails, the next candidate is tried automatically. If all
 candidates fail, the error includes details from each attempt.
 
-Set `agents.defaults.mediaGenerationAutoProviderFallback: false` to use
-only the explicit `model`, `primary`, and `fallbacks` entries.
+Automatic fallback across authenticated providers is always enabled. A per-call
+`model` remains authoritative.
 
 ```json5
 {
@@ -605,7 +605,7 @@ Set the default video-generation model in your OpenClaw config:
 Or via the CLI:
 
 ```bash
-openclaw config set agents.defaults.videoGenerationModel.primary "qwen/wan2.6-t2v"
+openclaw config set agents.defaults.mediaModels.video.primary "qwen/wan2.6-t2v"
 ```
 
 ## Related

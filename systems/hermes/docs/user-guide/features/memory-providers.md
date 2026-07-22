@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "f5b3ffde1ce3f3f700dbe7bb1d5787e8868b0b9193cfa30b659f3f18e0355691"
+source_hash: "0cad95c3503387bef45e12450962b8f28404e6c935111aea9de128e59c92dc5c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -297,7 +297,7 @@ Context database by Volcengine (ByteDance) with filesystem-style knowledge hiera
 | | |
 |---|---|
 | **Best for** | Self-hosted knowledge management with structured browsing |
-| **Requires** | `pip install openviking` + running server |
+| **Requires** | OpenViking initialized, validated, and running |
 | **Data storage** | Self-hosted (local or cloud) |
 | **Cost** | Free (open-source, AGPL-3.0) |
 
@@ -305,18 +305,34 @@ Context database by Volcengine (ByteDance) with filesystem-style knowledge hiera
 
 **Setup:**
 ```bash
-# Start the OpenViking server first
-pip install openviking
+# Prepare OpenViking first
+openviking-server init
+openviking-server doctor
 openviking-server
 
 # Then configure Hermes
 hermes memory setup    # select "openviking"
 # Or manually:
 hermes config set memory.provider openviking
-echo "OPENVIKING_ENDPOINT=http://localhost:1933" >> ~/.hermes/.env
-# Authenticated servers should use a user/admin API key:
-echo "OPENVIKING_API_KEY=..." >> ~/.hermes/.env
 ```
+
+`hermes memory setup` can reuse or copy connection values from
+`~/.openviking/ovcli.conf`. Manual setup uses the active profile's `.env` file;
+for the default profile that is `~/.hermes/.env`, and for named profiles use
+`~/.hermes/profiles/<profile>/.env`.
+
+```text
+OPENVIKING_ENDPOINT=http://127.0.0.1:1933
+# OPENVIKING_API_KEY=...
+# OPENVIKING_ACCOUNT=default
+# OPENVIKING_USER=default
+# OPENVIKING_AGENT=hermes
+```
+
+OpenViking server settings live in `ov.conf` (`--config`,
+`OPENVIKING_CONFIG_FILE`, or `~/.openviking/ov.conf`). Client connection values
+live in `ovcli.conf` (`OPENVIKING_CLI_CONFIG_FILE` or
+`~/.openviking/ovcli.conf`).
 
 **Key features:**
 - Tiered context loading: L0 (~100 tokens) → L1 (~2k) → L2 (full)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy plugin"
 source: "https://docs.openclaw.ai/plugins/reference/policy"
-source_hash: "6c0f07c635b352b4027593e5bdb6d6dfb131d61b83f53c481f9901975b9e5d24"
+source_hash: "0bf20a0eb919cd3e16ef20a39a7e9f29b2554eb4e2293b9a718503803aa5c255"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/policy.md"
@@ -73,7 +73,7 @@ Named policy scopes under `scopes.<scopeName>` can add stricter normal policy
 sections for the selector they list. `agentIds` supports `tools`,
 `agents.workspace`, `sandbox`, and `dataHandling.memory`; `channelIds` supports
 `ingress.channels`.
-Runtime agent ids that are not explicitly listed in `agents.list[]` are checked
+Runtime agent ids that are not explicitly listed in `agents.entries.*` are checked
 against inherited global/default posture rather than silently passing with no
 evidence. Every scope present in `policy.jsonc` must be valid and enforceable
 for its selector. Overlay rules are additional claims, so they do not weaken

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "2439b067afa89699e426888b824bc33a1158a8bbdeaeb0743bf1f5bc89aafe72"
+source_hash: "633f5054b4b48646574fc8d4859ef1b11507b1aeb07e14eb8d2cbcc284a7bf06"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -355,7 +355,7 @@ Warning
     Mention gating for groups:
 
     - iMessage has no native mention metadata
-    - mention detection uses regex patterns (`agents.list[].groupChat.mentionPatterns`, fallback `messages.groupChat.mentionPatterns`)
+    - mention detection uses regex patterns (`agents.entries.*.groupChat.mentionPatterns`, fallback `messages.groupChat.mentionPatterns`)
     - with no configured patterns, mention gating cannot be enforced
     - control commands from authorized senders bypass mention gating
 
@@ -920,7 +920,7 @@ Group messages are ignored
     - `channels.imessage.groupPolicy`
     - `channels.imessage.groupAllowFrom`
     - `channels.imessage.groups` allowlist behavior
-    - mention pattern configuration (`agents.list[].groupChat.mentionPatterns`)
+    - mention pattern configuration (`agents.entries.*.groupChat.mentionPatterns`)
 
 
 

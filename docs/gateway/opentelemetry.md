@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenTelemetry export"
 source: "https://docs.openclaw.ai/gateway/opentelemetry"
-source_hash: "05a6380305c3fd262d890132251abc587c62f5576a77f43d8b4d1f1d4f4da6f1"
+source_hash: "862d71d15cc0d1e68f4f47bb72c008b44ef44c486e1c7604a2df7be51d96c788"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/opentelemetry.md"
@@ -356,28 +356,18 @@ bounds; content remains off by default.
 
 ### Session liveness telemetry
 
-`diagnostics.stuckSessionWarnMs` is the no-progress age threshold for session
-liveness diagnostics. A `processing` session does not age toward this
-threshold while OpenClaw observes reply, tool, status, block, or ACP runtime
-progress. Typing keepalives do not count as progress, so a silent model or
-harness can still be detected.
+A `processing` session does not age toward the built-in liveness threshold while OpenClaw observes reply, tool, status, block, or ACP runtime progress. Typing keepalives do not count as progress, so a silent model or harness can still be detected.
 
 OpenClaw classifies sessions by the work it can still observe:
 
 - `session.long_running`: active embedded work, model calls, or tool calls
-  are still making progress. Owned model calls that stay silent past
-  `diagnostics.stuckSessionWarnMs` also report as long-running before
-  `diagnostics.stuckSessionAbortMs`, so slow or non-streaming model providers
-  do not look like stalled gateway sessions while abort-observable.
+  are still making progress. Owned silent model calls also report as long-running before the built-in abort threshold, so slow or non-streaming model providers do not look like stalled gateway sessions while abort-observable.
 - `session.stalled`: active work exists, but the active run has not reported
   recent progress. Owned model calls switch from `session.long_running` to
-  `session.stalled` at or after `diagnostics.stuckSessionAbortMs`; ownerless
+  `session.stalled` at or after the built-in abort threshold; ownerless
   stale model/tool activity is not treated as harmless long-running work.
   Stalled embedded runs stay observe-only at first, then abort-drain after
-  `diagnostics.stuckSessionAbortMs` with no progress so queued turns behind
-  the lane can resume. When unset, the abort threshold defaults to the safer
-  extended window of at least 5 minutes and 3x
-  `diagnostics.stuckSessionWarnMs`.
+  the abort threshold with no progress so queued turns behind the lane can resume.
 - `session.stuck`: stale session bookkeeping with no active work, or an idle
   queued session with stale ownerless model/tool activity. This releases the
   affected session lane immediately after recovery gates pass.

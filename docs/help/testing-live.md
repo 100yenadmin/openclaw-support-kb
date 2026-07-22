@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "79bac43088420c23648d77ea30fb75e502cc4d5ee420c36efef8aa9d269d4d91"
+source_hash: "a1d4e5e6f3f668f4ff9dbb3085580fce25284ac89deb92d7a31f1fe21a463624"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-live.md"
@@ -350,7 +350,7 @@ Docker notes:
   the Gateway and physical Codex app-server, then repeats the output and
   compaction wave. Tune the bounded work with
   `OPENCLAW_LIVE_CODEX_HARNESS_COMPACTION_STRESS_TURNS` (1-8) and
-  `OPENCLAW_LIVE_CODEX_HARNESS_LARGE_OUTPUT_BYTES` (100000-1000000).
+  `OPENCLAW_LIVE_CODEX_HARNESS_LARGE_OUTPUT_BYTES` (100000-800000).
 - Optional loop-relay opt-out probe:
   `OPENCLAW_LIVE_CODEX_HARNESS_DISABLE_LOOP_RELAY=1`
 - The requested thinking preference may map to the nearest effort advertised

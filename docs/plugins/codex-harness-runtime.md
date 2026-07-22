@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness runtime"
 source: "https://docs.openclaw.ai/plugins/codex-harness-runtime"
-source_hash: "a06a1fa097220a53cff2042900af2242fd1dac6c8951031898a77e5e48452d9f"
+source_hash: "e5adc6fdf93e04734287643cdc0091042ade707710a5dba2fda3843dea962e31"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-runtime.md"
@@ -323,8 +323,8 @@ writes an OpenClaw-owned session transcript tool result.
 
 OpenClaw continues to own media delivery and media provider selection. Image,
 video, music, PDF, TTS, and media understanding use matching provider/model
-settings such as `agents.defaults.imageGenerationModel`,
-`videoGenerationModel`, `pdfModel`, and `messages.tts`.
+settings such as `agents.defaults.mediaModels.image`,
+`agents.defaults.mediaModels.video`, `pdfModel`, and `tts`.
 
 Text, images, video, music, TTS, approvals, and messaging-tool output continue
 through the normal OpenClaw delivery path; media generation does not require

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "7ed62965e365244bd9f5035bf1bcb788bbc29b1de430096f8d0c2f7bdfd96ee9"
+source_hash: "d1a17cde5afbeeaf67c734b877f112aa2d6f035cb667400da729a2017d678438"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -516,9 +516,9 @@ xAI
 
 ## TTS for calls
 
-Voice Call uses the core `messages.tts` configuration for streaming speech on
+Voice Call uses the core `tts` configuration for streaming speech on
 calls. You can override it under the plugin config with the **same shape** —
-it deep-merges with `messages.tts`.
+it deep-merges with `tts`.
 
 ```json5
 {
@@ -560,12 +560,10 @@ Core TTS only
 
 ```json5
 {
-  messages: {
-    tts: {
-      provider: "openai",
-      providers: {
-        openai: { speakerVoice: "alloy" },
-      },
+  tts: {
+    provider: "openai",
+    providers: {
+      openai: { speakerVoice: "alloy" },
     },
   },
 }

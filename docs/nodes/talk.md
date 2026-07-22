@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Talk mode"
 source: "https://docs.openclaw.ai/nodes/talk"
-source_hash: "ed1a0fc389601eb8b6574ad3efb9310fae3ffeea424a94d5bab7576369295b15"
+source_hash: "5d5c76c68f84f3c8873f33320d4390a9cdf781a9f6e500f333b782c42e4fbdcb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/talk.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/nodes/talk
 
 Talk mode covers five runtime shapes:
 
-- **Native macOS/iOS/Android Talk**: local speech recognition, Gateway chat, and `talk.speak` TTS. Nodes advertise the `talk` capability and declare which `talk.*` commands they support.
+- **Native macOS/iOS/Android Talk**: native speech recognition, Gateway chat, and `talk.speak` TTS. Apple Speech recognition on macOS/iOS may use network services; Android behavior depends on the installed speech service. Nodes advertise the `talk` capability and declare which `talk.*` commands they support.
 - **iOS Talk (realtime)**: client-owned WebRTC for OpenAI realtime configs that select `webrtc` transport or omit transport. Explicit `gateway-relay`, `provider-websocket`, and non-OpenAI realtime configs stay on the Gateway-owned relay; non-realtime configs use the native speech loop.
 - **Browser Talk**: `talk.client.create` for client-owned `webrtc`/`provider-websocket` sessions, or `talk.session.create` for Gateway-owned `gateway-relay` sessions. `managed-room` is reserved for Gateway handoff and walkie-talkie rooms.
 - **Android Talk (realtime)**: opt in with `talk.realtime.mode: "realtime"` and `talk.realtime.transport: "gateway-relay"`. Otherwise Android stays on native speech recognition, Gateway chat, and `talk.speak`.
@@ -106,11 +106,10 @@ Supported keys: `voice` / `voice_id` / `voiceId`, `model` / `model_id` / `modelI
 | ---------------------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `provider`                               | -                                          | Active Talk TTS provider. Use `elevenlabs`, `mlx`, or `system` for macOS-local playback paths.                                                                                                                                                                             |
 | `providers.<id>.voiceId`                 | -                                          | ElevenLabs falls back to `ELEVENLABS_VOICE_ID` / `SAG_VOICE_ID`, or the first available voice with an API key.                                                                                                                                                             |
-| `speechLocale`                           | device default                             | BCP 47 locale for Android, iOS, and macOS speech recognition. Android also forwards the language component to realtime input transcription.                                                                                                                                |
+| `speechLocale`                           | device default                             | BCP 47 locale for Android, iOS, and macOS native speech recognition. Apple Speech may use network services; Android also forwards the language component to realtime input transcription.                                                                                  |
 | `providers.elevenlabs.modelId`           | `eleven_v3`                                |                                                                                                                                                                                                                                                                            |
 | `providers.mlx.modelId`                  | `mlx-community/Soprano-80M-bf16`           |                                                                                                                                                                                                                                                                            |
 | `providers.elevenlabs.apiKey`            | -                                          | Falls back to `ELEVENLABS_API_KEY` (or gateway shell profile if available).                                                                                                                                                                                                |
-| `speechLocale`                           | device default                             | BCP 47 locale id for on-device Talk speech recognition on iOS/macOS.                                                                                                                                                                                                       |
 | `silenceTimeoutMs`                       | `700` ms macOS/Android, `900` ms iOS       | Pause window before Talk sends the transcript.                                                                                                                                                                                                                             |
 | `interruptOnSpeech`                      | `true`                                     |                                                                                                                                                                                                                                                                            |
 | `outputFormat`                           | `pcm_44100` macOS/iOS, `pcm_24000` Android | Set `mp3_*` to force MP3 streaming.                                                                                                                                                                                                                                        |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "4b06cc73f89addff258f221f8b4975b5065e8a5b356d01783635cd0169ca6c6c"
+source_hash: "d0007390e6ed72763b715b6ab3ee59bb1ab1f5095fee9696d7586858ae756ca4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
@@ -66,10 +66,10 @@ Send a voice note
 
 ## Configuration options
 
-| Option     | Path                                  | Description                           |
-| ---------- | ------------------------------------- | ------------------------------------- |
-| `model`    | `tools.media.audio.models[].model`    | Deepgram model id (default: `nova-3`) |
-| `language` | `tools.media.audio.models[].language` | Language hint (optional)              |
+| Option     | Path                            | Description                           |
+| ---------- | ------------------------------- | ------------------------------------- |
+| `model`    | `tools.media.models[].model`    | Deepgram model id (default: `nova-3`) |
+| `language` | `tools.media.models[].language` | Language hint (optional)              |
 
 `providerOptions.deepgram` merges extra query params directly into the
 Deepgram `/listen` request, so any Deepgram-supported param name works
@@ -183,8 +183,7 @@ Authentication
 
 Proxy and custom endpoints
 
-    Override endpoints or headers with `tools.media.audio.baseUrl` and
-    `tools.media.audio.headers` when using a proxy.
+    Override endpoints or headers on the Deepgram `tools.media.models[]` entry when using a proxy.
 
 
 Output behavior

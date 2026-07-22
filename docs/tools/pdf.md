@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
-source_hash: "03476f0b2220cbaff0513c186c6c1c1ed6a68b3570c128c6c3a2bcc7bf214489"
+source_hash: "65e7339be0218e2c8bc468cdf964359151565c4e98d4234fb00074c7cfca4d09"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/pdf.md"
@@ -54,7 +54,7 @@ Optional model override in `provider/model` form.
 
 ParamField
 
-Per-PDF size cap in MB. Defaults to `agents.defaults.pdfMaxBytesMb`, or `10` if unset.
+Per-PDF size cap in MB. Defaults to `agents.defaults.pdfMaxMb`, or `10` if unset.
 
 Notes:
 
@@ -113,11 +113,11 @@ Details:
 }
 ```
 
-| Key                             | Default | Meaning                                                                                   |
-| ------------------------------- | ------- | ----------------------------------------------------------------------------------------- |
-| `agents.defaults.pdfModel`      | unset   | Explicit primary/fallback PDF models; falls back to `imageModel`, then the session model. |
-| `agents.defaults.pdfMaxBytesMb` | `10`    | Per-PDF size cap in MB.                                                                   |
-| `agents.defaults.pdfMaxPages`   | `20`    | Max pages processed per PDF.                                                              |
+| Key                           | Default | Meaning                                                                                   |
+| ----------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `agents.defaults.pdfModel`    | unset   | Explicit primary/fallback PDF models; falls back to `imageModel`, then the session model. |
+| `agents.defaults.pdfMaxMb`    | `10`    | Per-PDF size cap in MB.                                                                   |
+| `agents.defaults.pdfMaxPages` | `20`    | Max pages processed per PDF.                                                              |
 
 See [Configuration Reference](/gateway/config-agents#agent-defaults) for full field details.
 

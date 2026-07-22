@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "9274bee47b148edb0912399db88e930ea7b49858b4fc29d4fc2ee40a3b66608f"
+source_hash: "e6e8bd819420a89f92694652c2c61fb76d7c01aef3f94ac758151d3f2f83028c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
@@ -30,7 +30,7 @@ Related: [Memory](/concepts/memory) concept, [Dreaming](/concepts/dreaming),
 openclaw memory status [--agent <id>] [--deep] [--index] [--fix] [--json] [--verbose]
 ```
 
-Without `--agent`, runs for every agent in `agents.list`; if no agent list is
+Without `--agent`, runs for every agent in `agents.entries`; if no agent list is
 configured, falls back to the default agent.
 
 | Flag        | Effect                                                                                                                                                                                                                                                                                                    |
@@ -46,7 +46,7 @@ scheduled sweeps never seem to run, the managed dreaming cron depends on the
 default agent's heartbeat firing to trigger reconciliation. See
 [Dreaming](/concepts/dreaming) for scheduling details.
 
-Status also lists any extra search paths from `agents.defaults.memorySearch.extraPaths`.
+Status also lists any extra search paths from `memory.search.extraPaths`.
 
 ## `memory index`
 

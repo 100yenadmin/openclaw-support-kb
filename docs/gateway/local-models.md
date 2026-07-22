@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
-source_hash: "3fa9c028fa592f9206c932c4ea2881d0b7e2fb049cf112f05c5d01c7ca5d57a9"
+source_hash: "8bb24928c82ed540ba611519e1e5f71c22062bf9ce372501ac09d0a31fe70dda"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-models.md"
@@ -189,6 +189,8 @@ Behavior notes for local/proxied `/v1` backends:
 - OpenClaw treats these as proxy-style OpenAI-compatible routes, not native OpenAI endpoints.
 - Native-OpenAI-only request shaping does not apply: no `service_tier`, no Responses `store`, no OpenAI reasoning-compat payload shaping, no prompt-cache hints.
 - Hidden OpenClaw attribution headers (`originator`, `version`, `User-Agent`) are not injected on custom proxy URLs.
+
+Compat declarations are only for the custom endpoint described by this provider row. Catalog-known routes use provider-owned capabilities instead; see the [custom-provider capability guide](/gateway/config-tools#custom-provider-capability-declarations).
 
 Compat overrides for stricter OpenAI-compatible backends:
 

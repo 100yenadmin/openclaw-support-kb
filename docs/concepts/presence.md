@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "5c6d5b06ee2eeb312cb70722f4247a1cc63afbdd157c5a6f5738497b7079f408"
+source_hash: "0373a50f7357d64c58e8bfcf1050be00284e85e162ba7444f1d5b8b3d94f7470"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
@@ -64,7 +64,14 @@ stay tracked because test suites use them as stand-ins for real clients.
 ### 3) `system-event` beacons
 
 Clients can send richer periodic beacons via the `system-event` method. The mac
-app uses this to report host name, IP, and `lastInputSeconds`.
+app uses this to report host name, IP, version, and liveness metadata. Physical
+input activity is not part of this generic beacon; the purpose-specific native
+node event described in [Active computer presence](/nodes/presence) owns it. The
+Mac tags these beacons with `system-presence-clear-last-input`; current Gateways
+use that backward-compatible marker to remove any input recency retained from an
+older app. The beacon also carries a fixed 30-day value so older Gateways that
+ignore the tag overwrite exact recency instead of retaining it. No new activity
+is sampled for this compatibility value.
 
 ### 4) Node connects (role: node)
 

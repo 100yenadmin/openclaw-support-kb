@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "8b56f100bc58336959d0e45a9a7cf68b6f14365c7cdae1a8d4ec60cbacd0422e"
+source_hash: "89c06a0e8c27a24927527d59d681f49dac8adc409cf6612f9476d10ac67fa6a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
@@ -213,10 +213,8 @@ Memory embeddings
 
     ```json5
     {
-      agents: {
-        defaults: {
-          memorySearch: { provider: "mistral" },
-        },
+      memory: {
+        search: { provider: "mistral" },
       },
     }
     ```

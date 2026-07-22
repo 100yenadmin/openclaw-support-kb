@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
-source_hash: "65e768a5b0996e7638d96c2a8673a6dfcf2fa415b0caa00439ee27422f9ac52a"
+source_hash: "233e39c4baa751f6b50eb56f0bb8c0f91643508afc5641a8f62a244964202c5d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/volcengine.md"
@@ -121,23 +121,21 @@ Then enable it in `openclaw.json`:
 
 ```json5
 {
-  messages: {
-    tts: {
-      auto: "always",
-      provider: "volcengine",
-      providers: {
-        volcengine: {
-          apiKey: "byteplus_seed_speech_api_key",
-          voice: "en_female_anna_mars_bigtts",
-          speedRatio: 1.0,
-        },
+  tts: {
+    auto: "always",
+    provider: "volcengine",
+    providers: {
+      volcengine: {
+        apiKey: "byteplus_seed_speech_api_key",
+        voice: "en_female_anna_mars_bigtts",
+        speedRatio: 1.0,
       },
     },
   },
 }
 ```
 
-Available fields under `messages.tts.providers.volcengine`: `apiKey`, `voice`, `speedRatio` (0.2-3.0), `emotion`, `cluster`, `resourceId`, `appKey`, and `baseUrl`. `!emotion=<value>` also works as an inline voice directive when voice-setting overrides are allowed.
+Available fields under `tts.providers.volcengine`: `apiKey`, `voice`, `speedRatio` (0.2-3.0), `emotion`, `cluster`, `resourceId`, `appKey`, and `baseUrl`. `!emotion=<value>` also works as an inline voice directive when voice-setting overrides are allowed.
 
 For voice-note targets, OpenClaw requests provider-native `ogg_opus`. For normal audio attachments, it requests `mp3`. Provider aliases `bytedance` and `doubao` also resolve to this speech provider.
 
@@ -155,7 +153,7 @@ export VOLCENGINE_TTS_TOKEN="speech_access_token"
 export VOLCENGINE_TTS_CLUSTER="volcano_tts"
 ```
 
-Other optional TTS env vars: `VOLCENGINE_TTS_VOICE`, `VOLCENGINE_TTS_APP_KEY`, and `VOLCENGINE_TTS_BASE_URL` override the corresponding `messages.tts.providers.volcengine` config fields when set.
+Other optional TTS env vars: `VOLCENGINE_TTS_VOICE`, `VOLCENGINE_TTS_APP_KEY`, and `VOLCENGINE_TTS_BASE_URL` override the corresponding `tts.providers.volcengine` config fields when set.
 
 ## Advanced configuration
 

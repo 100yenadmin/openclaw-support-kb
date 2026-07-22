@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "47d92f55cec6a1d9e0ceed1ea48fa33b710846a9b7531032c9f61de66c3a9e0c"
+source_hash: "8847121053b0174c32cacf479d8705b430c45ecaa03634c46b8e3b83f5d1c7f9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -103,7 +103,7 @@ and `openclaw memory status --deep`.
 
 `status --json --all` reports memory details from the active memory plugin
 runtime selected by `plugins.slots.memory`. Custom memory plugins can leave
-built-in `agents.defaults.memorySearch.enabled` disabled and still report
+built-in `memory.search.enabled` disabled and still report
 their own files, chunks, vector, and FTS state.
 
 ## Related

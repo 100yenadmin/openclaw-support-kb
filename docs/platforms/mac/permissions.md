@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS permissions"
 source: "https://docs.openclaw.ai/platforms/mac/permissions"
-source_hash: "a859ff0af0828b4b030cf7e3b30b0dc700d6397a94b9e3b21a4a4584a9ce6c9d"
+source_hash: "7b5728731d5bad42171788b917b10fd2fc6aecc475b96b02dfa75ae3a3ae286a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/permissions.md"
@@ -31,6 +31,8 @@ Prefer granting Accessibility to OpenClaw.app, Peekaboo.app, or another signed h
 macOS TCC grants Accessibility to the code identity of the process it sees. If a Homebrew, nvm, pnpm, or npm workflow causes a shared `node` executable to receive Accessibility, any JavaScript package launched through that same executable may inherit GUI automation privileges.
 
 Treat a `node` entry in System Settings as broad permission for that Node runtime, not as permission for one npm package. Avoid granting Accessibility to `node` unless you trust every script and package launched through that exact Node install.
+
+Accessibility approval does not enable activity sharing. **Settings -> Permissions -> Active computer detection** is a separate, off-by-default control for sharing bounded idle duration with your Gateway. Turning it off clears retained activity without revoking Accessibility or disconnecting the node.
 
 If you accidentally granted Accessibility to `node`, remove that entry from System Settings -> Privacy & Security -> Accessibility. Then grant the signed app or helper that should own UI automation.
 

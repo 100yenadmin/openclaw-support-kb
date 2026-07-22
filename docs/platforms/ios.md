@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "5bea0f962fe42d3f83dfaa6ba446bf7f0c65778a219049365668f35232b756d7"
+source_hash: "bb3c7599c84818c9c9068b0e5e1a1ee8d9bb92282595f878c8f0edb3c448c810"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -63,6 +63,14 @@ creation has a token or password auth path.
 
    If the setup code contains both LAN and Tailscale Serve routes, the app
    probes them in order and saves the first reachable endpoint.
+
+   Paired gateways remain in the **Gateways** list. The checkmark identifies
+   the focused gateway; use the bolt control on another row to keep its
+   operator session connected at the same time. Switching focus does not
+   disconnect other enabled gateways. Only the focused gateway receives the
+   iPhone's capability-bearing node session, so camera, screen, location, and
+   other device commands always have one unambiguous owner. iOS may suspend
+   these foreground connections after the app enters the background.
 
 4. The official app connects automatically. If **Pending approval** shows a
    request, review its role and scopes before approving it.

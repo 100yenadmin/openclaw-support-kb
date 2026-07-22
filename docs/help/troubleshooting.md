@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "e13630614e2bf2a7a6fb766ddc7f0747c8d8d064503892f5b1806c7d318328f2"
+source_hash: "e6ec1e24c2be8c231304cd177e7b72251a2cede82908401346d0028e2417dd04"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
@@ -63,7 +63,7 @@ Common causes:
   shell, and runtime work).
 - `tools.profile: "full"` removes profile restrictions; limit to trusted
   operator-controlled agents.
-- Per-agent `agents.list[].tools` overrides narrow or expand the root profile
+- Per-agent `agents.entries.*.tools` overrides narrow or expand the root profile
   for one agent.
 
 Change the profile, restart or reload the Gateway, then recheck with

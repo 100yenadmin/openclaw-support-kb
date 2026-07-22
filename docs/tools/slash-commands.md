@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "730be69f49a5b7bb3c91806c51a8efbd382c574451b01fcea0a5a1be8ca6eb1f"
+source_hash: "b3f56caf5e3db2b92f495698fa4de21094e8ab48ce40ece498c49b3ac0ac03d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -58,7 +58,7 @@ Directive behavior details
       do **not** persist session settings.
     - Directives only apply for **authorized senders**. If `commands.allowFrom`
       is set, it is the only allowlist used; otherwise authorization comes from
-      channel allowlists/pairing plus `commands.useAccessGroups`. Unauthorized
+      channel allowlists, pairing, and always-on access-group enforcement. Unauthorized
       senders see directives treated as plain text.
 
 
@@ -162,10 +162,6 @@ ParamField
   Per-provider allowlist for command authorization. When configured, it is the
   **only** authorization source for commands and directives. Use `"*"` for a
   global default; provider-specific keys override it.
-
-ParamField
-
-  Enforces allowlists/policies for commands when `commands.allowFrom` is not set.
 
 ## Command list
 
@@ -422,10 +418,10 @@ Note
 
 ```text
 /config show
-/config show messages.responsePrefix
-/config get messages.responsePrefix
-/config set messages.responsePrefix="[openclaw]"
-/config unset messages.responsePrefix
+/config show channels.whatsapp.responsePrefix
+/config get channels.whatsapp.responsePrefix
+/config set channels.whatsapp.responsePrefix="[openclaw]"
+/config unset channels.whatsapp.responsePrefix
 ```
 
 Config is validated before write. Invalid changes are rejected. `/config`
@@ -460,9 +456,9 @@ Note
 
 ```text
 /debug show
-/debug set messages.responsePrefix="[openclaw]"
+/debug set channels.whatsapp.responsePrefix="[openclaw]"
 /debug set channels.whatsapp.allowFrom=["+1555","+4477"]
-/debug unset messages.responsePrefix
+/debug unset channels.whatsapp.responsePrefix
 /debug reset
 ```
 

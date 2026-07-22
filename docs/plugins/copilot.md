@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "aba5c500d6ba4aebaeddd64a7cfdb24b621f8ea88c1af2b473fbcab8b6ea3318"
+source_hash: "7370affee822eff9c3c7600c8ae4c01b63a2b9bec915fe7b67cd9e4a359e17ee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -217,8 +217,7 @@ plus a small set of env defaults inside `extensions/copilot/src/`:
 | `enableSessionTelemetry` | Optional SDK session telemetry flag.                                                                                                                                                                                                                                                            |
 
 OpenClaw plugin hooks need no Copilot-specific attempt configuration. The
-harness runs `before_prompt_build` (and the legacy `before_agent_start`
-compatibility hook), `llm_input`, `llm_output`, and `agent_end` through the
+harness runs `before_prompt_build`, `llm_input`, `llm_output`, and `agent_end` through the
 standard harness helpers. Successful SDK compactions also run
 `before_compaction` and `after_compaction`. Bridged OpenClaw tools run
 `before_tool_call` and report `after_tool_call`; `hooksConfig` remains for

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
-source_hash: "d3977be4850677748f63f2dfd09e1da469d219af5f54e2d6f4eff9de6c07605a"
+source_hash: "4c55ee8ed29f1565b87f5df382b721b6958855d2a4138f241a40b7724b47bd00"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/wiki.md"
@@ -15,7 +15,12 @@ Source: https://docs.openclaw.ai/cli/wiki
 
 # `openclaw wiki`
 
-Inspect and maintain the `memory-wiki` vault. Provided by the bundled `memory-wiki` plugin.
+Inspect and maintain the `memory-wiki` vault. Provided by the bundled optional `memory-wiki` plugin. Enable it before first use:
+
+```bash
+openclaw plugins enable memory-wiki
+openclaw gateway restart
+```
 
 Related: [Memory Wiki plugin](/plugins/memory-wiki), [Memory Overview](/concepts/memory), [CLI: memory](/cli/memory)
 

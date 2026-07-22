@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote control"
 source: "https://docs.openclaw.ai/platforms/mac/remote"
-source_hash: "98173104a3f99c9ac148e358b2b14df8d5d5122e70da06521576d81e64df513f"
+source_hash: "786d244894ddb3aee9868a45bac4c034bf04bb0ea2f662a3093b2fa1540bff8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/remote.md"
@@ -60,7 +60,7 @@ openclaw-mac configure-remote \
   --token "$OPENCLAW_GATEWAY_TOKEN"
 ```
 
-Both forms write `~/.openclaw/openclaw.json`, mark onboarding complete, and let the app own the selected transport on next start. `--local-port`/`--remote-port` default to `18789`. Other flags: `--password`, `--identity <path>`, `--ssh-host-key-policy <strict|openssh>`, `--project-root <path>`, `--cli-path <path>`, `--json`. Run `openclaw-mac configure-remote --help` for the full reference.
+`openclaw-mac connect`, `wizard`, and `configure-remote` resolve the active config in this order: `OPENCLAW_CONFIG_PATH`, then `$OPENCLAW_STATE_DIR/openclaw.json`, then `~/.openclaw/openclaw.json`. Both configuration forms write that active file, mark onboarding complete, and let the app own the selected transport on next start. `--local-port`/`--remote-port` default to `18789`. Other flags: `--password`, `--identity <path>`, `--ssh-host-key-policy <strict|openssh>`, `--project-root <path>`, `--cli-path <path>`, `--json`. Run `openclaw-mac configure-remote --help` for the full reference.
 
 To configure from the UI instead:
 

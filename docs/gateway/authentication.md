@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Authentication"
 source: "https://docs.openclaw.ai/gateway/authentication"
-source_hash: "3fd1c1443287a431592efae5d5a236e87172d8fdcd0749bfcc71453beea70a8e"
+source_hash: "52376a1a387e8fa4c7bdc3a1ecdf9bb9f97ab3ec9c6d1f2ca4f93fb03e4943fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/authentication.md"
@@ -69,7 +69,9 @@ openclaw models auth login --provider anthropic --method cli --set-default
 
 This is two steps: log Claude Code into Anthropic on the host, then tell OpenClaw to route Anthropic model selection through the local `claude-cli` backend and store the matching OpenClaw auth profile.
 
-If `claude` isn't on `PATH`, install Claude Code or set `agents.defaults.cliBackends.claude-cli.command` to the binary path.
+The gateway service must resolve `claude` on `PATH`. If a deployment needs a
+nonstandard executable path, register a wrapper through a
+[CLI backend plugin](/plugins/cli-backend-plugins).
 
 ## Manual token entry
 

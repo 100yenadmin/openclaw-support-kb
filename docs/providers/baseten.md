@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Baseten"
 source: "https://docs.openclaw.ai/providers/baseten"
-source_hash: "5246c5bfe47c18e1f664b9fdd95d5be584bc0c02b99d396de1d2622f05ecefd5"
+source_hash: "9938598ae97a38073eeae43ab62c8875f7f18cc0564f13975e69f97bcd2dd25e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/baseten.md"
@@ -144,22 +144,6 @@ Most setups only need the API key. To pin the provider explicitly:
             input: ["text", "image"],
             contextWindow: 1048000,
             maxTokens: 32000,
-            compat: {
-              supportsStore: false,
-              supportsDeveloperRole: false,
-              supportsUsageInStreaming: true,
-              supportsStrictMode: true,
-              supportsTools: true,
-              supportsReasoningEffort: true,
-              supportedReasoningEfforts: ["none", "minimal", "low", "medium", "high", "xhigh"],
-              reasoningEffortMap: {
-                off: "none",
-                none: "none",
-                adaptive: "xhigh",
-                max: "xhigh",
-              },
-              maxTokensField: "max_tokens",
-            },
           },
         ],
       },

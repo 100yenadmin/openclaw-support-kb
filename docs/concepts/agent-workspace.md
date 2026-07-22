@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "e8aee738ef011050b8bb0c41e371eb65d063514e00fc2767ae9dcf00b62c089d"
+source_hash: "21775e2aa7afe66b505dd0718f62331f5d8c8e8cb79f35c423a0341b866bf684"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
@@ -29,7 +29,7 @@ When sandboxing is enabled and `workspaceAccess` is not `"rw"`, tools operate in
 - Default: `~/.openclaw/workspace`
 - If `OPENCLAW_PROFILE` is set and not `"default"`, the default becomes `~/.openclaw/workspace-<profile>`.
 - `OPENCLAW_WORKSPACE_DIR` overrides both of the above when set.
-- Non-default agents (`agents.list[]`) without an explicit workspace resolve to `<state-dir>/workspace-<agentId>`, not the shared default workspace.
+- Non-default agents (`agents.entries.*`) without an explicit workspace resolve to `<state-dir>/workspace-<agentId>`, not the shared default workspace.
 
 Override in `~/.openclaw/openclaw.json`:
 
@@ -43,7 +43,7 @@ Override in `~/.openclaw/openclaw.json`:
 }
 ```
 
-Per-agent override: `agents.list[].workspace`.
+Per-agent override: `agents.entries.*.workspace`.
 
 `openclaw onboard`, `openclaw configure`, or `openclaw setup` create the workspace and seed the bootstrap files if they are missing.
 
@@ -285,7 +285,7 @@ Copy sessions (optional)
 
 ## Advanced notes
 
-- Multi-agent routing can use different workspaces per agent via `agents.list[].workspace`. See [Channel routing](/channels/channel-routing) for routing configuration.
+- Multi-agent routing can use different workspaces per agent via `agents.entries.*.workspace`. See [Channel routing](/channels/channel-routing) for routing configuration.
 - If `agents.defaults.sandbox` is enabled, non-main sessions can use per-session sandbox workspaces under `agents.defaults.sandbox.workspaceRoot`.
 
 ## Related

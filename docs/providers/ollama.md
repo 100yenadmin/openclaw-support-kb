@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "efec33feedf1aab4b0bbb9badee300dd2550dc928aba6de157e7a94289a170f4"
+source_hash: "512ba1103962c8cdfea07d99abe6204dcd0b09804df33b057aaa7afb4485a6a9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -50,7 +50,7 @@ Remote and Ollama Cloud hosts
 
 Custom provider ids
 
-    A custom provider with `api: "ollama"` follows the same rules. For example, an `ollama-remote` provider pointed at a private LAN host can use `apiKey: "ollama-local"`; sub-agents resolve that marker through the Ollama provider hook instead of treating it as a missing credential. `agents.defaults.memorySearch.provider` can also point at a custom provider id so embeddings use that Ollama endpoint.
+    A custom provider with `api: "ollama"` follows the same rules. For example, an `ollama-remote` provider pointed at a private LAN host can use `apiKey: "ollama-local"`; sub-agents resolve that marker through the Ollama provider hook instead of treating it as a missing credential. `memory.search.provider` can also point at a custom provider id so embeddings use that Ollama endpoint.
 
 
 Auth profiles
@@ -63,7 +63,7 @@ Memory embedding scope
     Bearer auth for Ollama memory embeddings is scoped to the host it was declared for:
 
     - A provider-level key is sent only to that provider's host.
-    - `agents.*.memorySearch.remote.apiKey` is sent only to its remote embedding host.
+    - `memory.search.remote.apiKey` and per-agent overrides are sent only to their remote embedding host.
     - A pure `OLLAMA_API_KEY` env value is treated as the Ollama Cloud convention and is not sent to local/self-hosted hosts by default.
 
 
@@ -88,10 +88,13 @@ Run onboarding
         Select **Ollama**, then pick a mode: **Cloud + Local**, **Cloud only**, or **Local only**.
 
         On a fresh guided setup, OpenClaw first checks the default or configured
-        Ollama host. If an installed model advertises tool support, the shared
-        CLI/macOS setup ladder offers it immediately and verifies it with a real
-        completion. This automatic check never pulls a model; if no suitable
-        installed model exists, onboarding continues to the normal Ollama picker.
+        Ollama host. An installed model is offered automatically only when
+        `/api/show` confirms tool support and a context window of at least 16K;
+        missing or smaller context metadata stays on the manual setup path. The
+        shared CLI/macOS setup ladder still verifies the selected route with a
+        real completion before saving it. This automatic check never pulls a
+        model; if no suitable installed model exists, onboarding continues to the
+        normal Ollama picker.
 
 
 Select a model
@@ -1162,14 +1165,12 @@ Memory embeddings
 
     ```json5
     {
-      agents: {
-        defaults: {
-          memorySearch: {
-            provider: "ollama",
-            remote: {
-              // Default for Ollama. Raise on larger hosts if reindexing is too slow.
-              nonBatchConcurrency: 1,
-            },
+      memory: {
+        search: {
+          provider: "ollama",
+          remote: {
+            // Default for Ollama. Raise on larger hosts if reindexing is too slow.
+            nonBatchConcurrency: 1,
           },
         },
       },
@@ -1180,16 +1181,14 @@ Memory embeddings
 
     ```json5
     {
-      agents: {
-        defaults: {
-          memorySearch: {
-            provider: "ollama",
-            model: "nomic-embed-text",
-            remote: {
-              baseUrl: "http://gpu-box.local:11434",
-              apiKey: "ollama-local",
-              nonBatchConcurrency: 2,
-            },
+      memory: {
+        search: {
+          provider: "ollama",
+          model: "nomic-embed-text",
+          remote: {
+            baseUrl: "http://gpu-box.local:11434",
+            apiKey: "ollama-local",
+            nonBatchConcurrency: 2,
           },
         },
       },

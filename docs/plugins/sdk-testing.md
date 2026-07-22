@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "bd1d60a0184ff2fd86911ccd6c9c75b1559ac3b855a04248a8f39017302297ae"
+source_hash: "3dec6da5b015037458e987b9ca707e277263906a1c436ff6c1a0e89594b91e18"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-testing.md"
@@ -43,10 +43,10 @@ plugins, and they may import Vitest or other repo-only test dependencies.
 
 Use these focused subpaths for bundled plugin tests. The former
 `openclaw/plugin-sdk/testing` barrel was repo-local, excluded from shipped
-packages, and has been removed. The legacy `openclaw/plugin-sdk/test-utils`
-alias remains repo-local; `pnpm run lint:plugins:no-extension-test-core-imports`
-(`scripts/check-no-extension-test-core-imports.ts`) rejects new extension-test
-imports of that alias.
+packages, and has been removed. The former `openclaw/plugin-sdk/test-utils`
+alias was removed with it. `pnpm run lint:plugins:no-extension-test-core-imports`
+(`scripts/check-no-extension-test-core-imports.ts`) keeps extension tests on
+the focused test subpaths above.
 
 ### Available exports
 
@@ -178,11 +178,9 @@ entry to declare `kind: "memory"`.
 
 ### Testing runtime config access
 
-Prefer the shared plugin runtime mock from `openclaw/plugin-sdk/plugin-test-runtime`.
-Its `runtime.config.loadConfig()` and `runtime.config.writeConfigFile(...)`
-mocks throw by default so tests catch new usage of deprecated compatibility
-APIs. Override those mocks only when the test is explicitly covering legacy
-compatibility behavior.
+Prefer the shared plugin runtime mock from
+`openclaw/plugin-sdk/plugin-test-runtime`. Its runtime config helpers model the
+current snapshot and mutation APIs.
 
 ### Unit testing a channel plugin
 
@@ -328,11 +326,11 @@ pnpm test src/plugins/contracts/runtime-seams.contract.test.ts
 `scripts/run-additional-boundary-checks.mjs` runs a set of `lint:plugins:*`
 import-boundary checks in CI; each can also be run standalone locally:
 
-| Command                                                        | Enforces                                                                                    |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `pnpm run lint:plugins:no-monolithic-plugin-sdk-entry-imports` | Bundled plugins cannot import the monolithic `openclaw/plugin-sdk` root barrel.             |
-| `pnpm run lint:plugins:no-extension-src-imports`               | Production extension files cannot import the repo `src/**` tree directly (`../../src/...`). |
-| `pnpm run lint:plugins:no-extension-test-core-imports`         | Extension test files cannot import `plugin-sdk/test-utils` or other core-only test helpers. |
+| Command                                                        | Enforces                                                                                     |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `pnpm run lint:plugins:no-monolithic-plugin-sdk-entry-imports` | Bundled plugins cannot import the monolithic `openclaw/plugin-sdk` root barrel.              |
+| `pnpm run lint:plugins:no-extension-src-imports`               | Production extension files cannot import the repo `src/**` tree directly (`../../src/...`).  |
+| `pnpm run lint:plugins:no-extension-test-core-imports`         | Extension test files cannot import removed SDK test aliases or other core-only test helpers. |
 
 External plugins are not subject to these lint rules, but following the same
 patterns is recommended.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "f369b5a0ffc6740268464f57c03bcf7dc6a6c74074225655eebec202bfca2943"
+source_hash: "07dbd791db5bc2d6ba3bfecb122d843f292ca2e366743c34f73d5cab44d89b22"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
@@ -40,7 +40,7 @@ Set the API key
 Set Runway as the default video provider
 
     ```bash
-    openclaw config set agents.defaults.videoGenerationModel.primary "runway/gen4.5"
+    openclaw config set agents.defaults.mediaModels.video.primary "runway/gen4.5"
     ```
 
 

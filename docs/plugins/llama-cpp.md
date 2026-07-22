@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "llama.cpp Provider"
 source: "https://docs.openclaw.ai/plugins/llama-cpp"
-source_hash: "28d554513810f808e9d660d48e7589aed963b4fe9c1375d2df555dc1dca7453b"
+source_hash: "72e93ba5d23324abc4692b32557e82e42b1fb5b1f2f7a5524ee900b0d7e43ec5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/llama-cpp.md"
@@ -99,17 +99,15 @@ own read-only cache resolver, including repository, branch, and split-file namin
 
 ## Memory embedding configuration
 
-Set `memorySearch.provider` to `local`:
+Set `memory.search.provider` to `local`:
 
 ```json5
 {
-  agents: {
-    defaults: {
-      memorySearch: {
-        provider: "local",
-        local: {
-          modelPath: "hf:ggml-org/embeddinggemma-300m-qat-q8_0-GGUF/embeddinggemma-300m-qat-Q8_0.gguf",
-        },
+  memory: {
+    search: {
+      provider: "local",
+      local: {
+        modelPath: "hf:ggml-org/embeddinggemma-300m-qat-q8_0-GGUF/embeddinggemma-300m-qat-Q8_0.gguf",
       },
     },
   },
@@ -160,7 +158,7 @@ with:
 
 For local inference without an in-process native dependency, use the Ollama or
 LM Studio provider instead. For lower-friction local embeddings, set
-`memorySearch.provider` to a remote embedding provider such as `lmstudio`,
+`memory.search.provider` to a remote embedding provider such as `lmstudio`,
 `ollama`, `openai`, or `voyage` instead.
 
 ---

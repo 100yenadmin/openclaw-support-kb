@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
-source_hash: "42c1f69a418340cafe564d5622a3d795adf2572955ba3996cd4d1fed8420d737"
+source_hash: "8fef5fd779ded2123aec6b69218c6f08694bf4aebe0f4b6036a614bba80c08be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sandbox.md"
@@ -100,7 +100,7 @@ Run `openclaw doctor --fix` to migrate valid legacy entries into SQLite. Invalid
 
 ## Configuration
 
-Sandbox settings live in `~/.openclaw/openclaw.json` under `agents.defaults.sandbox` (per-agent overrides go in `agents.list[].sandbox`):
+Sandbox settings live in `~/.openclaw/openclaw.json` under `agents.defaults.sandbox` (per-agent overrides go in `agents.entries.*.sandbox`):
 
 ```jsonc
 {

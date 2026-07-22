@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node pairing"
 source: "https://docs.openclaw.ai/gateway/pairing"
-source_hash: "5180becd240e19bf9495c18560793ee74ba061ec69c5f2075148ef47b5429e2b"
+source_hash: "6fdc867109503af125e03e1ceda3f220584f05731015c4f8a00a94a0c76ed5ad"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/pairing.md"
@@ -105,8 +105,8 @@ Warning
 Node pairing approval records the trusted capability surface. It does **not** pin the live node command surface per node.
 
 - Live node commands come from what the node declares on connect, filtered by
-  the gateway's global node command policy (`gateway.nodes.allowCommands` and
-  `denyCommands`).
+  the gateway's global node command policy (`gateway.nodes.commands.allow` and
+  `gateway.nodes.commands.deny`).
 - Per-node `system.run` allow and ask policy lives on the node in
   `exec.approvals.node.*`, not in the pairing record.
 

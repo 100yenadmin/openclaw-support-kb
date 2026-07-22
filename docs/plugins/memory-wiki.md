@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "fd046e2347e051aebbb7e17098f6392ec33431bb79490e3b8591cbd2384218b7"
+source_hash: "2f4ffef5c57b378b3f11335083e24dbcb674e79dfc0212f33f774073522d48ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-wiki.md"
@@ -21,6 +21,13 @@ It does not replace the active memory plugin. Recall, promotion, indexing, and
 dreaming stay owned by whichever memory backend is configured
 (`memory-core`, QMD, Honcho, etc.). `memory-wiki` sits beside it and compiles
 knowledge into a maintained wiki layer.
+
+Enable the plugin before using its CLI, tools, or runtime integration:
+
+```bash
+openclaw plugins enable memory-wiki
+openclaw gateway restart
+```
 
 | Layer                | Owns                                                                              |
 | -------------------- | --------------------------------------------------------------------------------- |

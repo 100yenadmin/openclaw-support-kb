@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "The main session"
 source: "https://docs.openclaw.ai/concepts/main-session"
-source_hash: "830edc2c2a7a66356f185e1cf9e759a74c6797911d48f8efef844e487e08136f"
+source_hash: "e0f2f1044889bbffb5b0010c3be0bd7184be2a99c7ef3f6d5fb4ac64d699b1e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/main-session.md"
@@ -66,20 +66,26 @@ continuity comes from layers around it:
   is enabled by default; any configured DM isolation turns it off unless you
   opt in explicitly. See [Memory configuration](/reference/memory-config).
 
-## A rolling session, not an immortal one
+## A rolling session with durable history
 
 The main session rolls forward through resets and compaction rather than
-growing forever:
+making the model carry its entire history at once:
 
 - By default there is no automatic reset; compaction keeps the active context
   bounded while preserving the rolling session. Daily and idle resets are
   opt-in (see [Session management](/concepts/session)). On `/new` and `/reset`,
   the tail of the ending conversation is saved to daily memory notes, and the
-  next session re-primes recent notes.
+  next session re-primes recent notes. Reset assigns a new live session id but
+  keeps the previous SQLite transcript searchable under the same main-session
+  key.
 - When the conversation approaches the context window, compaction summarizes
   and continues in place — the transcript history stays in the session store.
-- The per-agent session store keeps archived transcripts until a disk budget
-  (default 10 GB) evicts the oldest ones.
+- Session lists show the current live conversation, not every historical
+  session id behind it.
+- When the per-agent store's physical database, WAL, and session artifacts
+  exceed the disk budget (default 10 GB), OpenClaw extracts the oldest
+  unreferenced history to a verified compressed archive before removing its
+  database rows. Live, routed, and in-flight sessions are never budget victims.
 
 ## When you want isolation instead
 

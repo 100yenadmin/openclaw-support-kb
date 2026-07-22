@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "c584e6ac9f903f3b0b5128b1f0463af2d11f2029ccc7a239996e944a067f300e"
+source_hash: "b3a74c27d0fd6cc00afd1d1b61e2bff84e150d6be1e858998fc603a00bd0bb82"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -22,7 +22,7 @@ Setup commands by intent:
 - `openclaw setup` and `openclaw onboard` verify inference first, then start OpenClaw for Gateway, workspace, channels, skills, and health setup.
 - `openclaw setup --baseline` creates the baseline config and workspace without walking the guided onboarding flow.
 - `openclaw configure` changes targeted parts of an existing setup: model auth, gateway, channels, plugins, or skills.
-- `openclaw channels add` configures channel accounts after the baseline exists; run without flags for guided setup, or with channel-specific flags for scripts.
+- `openclaw channels add` configures channel accounts after the baseline exists; a channel selection alone uses guided setup, while account, credential, or channel-config flags use the direct path for scripts.
 
 ## Command pages
 

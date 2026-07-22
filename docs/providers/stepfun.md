@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "StepFun"
 source: "https://docs.openclaw.ai/providers/stepfun"
-source_hash: "fd4129071de615101118d3334b2e07dc2067e89bef4eff78d44827d704e0946f"
+source_hash: "87f9a56826cd8ae7341cc332989e47d9a7d0ad9187f4586e8b66d97286fd3b8d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/stepfun.md"
@@ -191,26 +191,6 @@ Full config: Standard provider
                 cost: { input: 0.2, output: 1.15, cacheRead: 0.04, cacheWrite: 0 },
                 contextWindow: 262144,
                 maxTokens: 262144,
-                compat: {
-                  supportsStore: false,
-                  supportsDeveloperRole: false,
-                  supportsUsageInStreaming: false,
-                  supportsReasoningEffort: true,
-                  supportsStrictMode: false,
-                  supportedReasoningEfforts: ["low", "medium", "high"],
-                  maxTokensField: "max_tokens",
-                  reasoningEffortMap: {
-                    off: "low",
-                    none: "low",
-                    minimal: "low",
-                    low: "low",
-                    medium: "medium",
-                    high: "high",
-                    xhigh: "high",
-                    adaptive: "high",
-                    max: "high",
-                  },
-                },
               },
               {
                 id: "step-3.5-flash",
@@ -253,26 +233,6 @@ Full config: Step Plan provider
                 cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
                 contextWindow: 262144,
                 maxTokens: 262144,
-                compat: {
-                  supportsStore: false,
-                  supportsDeveloperRole: false,
-                  supportsUsageInStreaming: false,
-                  supportsReasoningEffort: true,
-                  supportsStrictMode: false,
-                  supportedReasoningEfforts: ["low", "medium", "high"],
-                  maxTokensField: "max_tokens",
-                  reasoningEffortMap: {
-                    off: "low",
-                    none: "low",
-                    minimal: "low",
-                    low: "low",
-                    medium: "medium",
-                    high: "high",
-                    xhigh: "high",
-                    adaptive: "high",
-                    max: "high",
-                  },
-                },
               },
               {
                 id: "step-3.5-flash",

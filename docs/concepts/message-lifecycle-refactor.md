@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message lifecycle refactor"
 source: "https://docs.openclaw.ai/concepts/message-lifecycle-refactor"
-source_hash: "cfa1d451bc1685d24a8debe27a86e703006c24e9ed282d8bae87df0dbe93cf15"
+source_hash: "5d3374cca72dc6be0d271ee374bd2626cc491bbf9a974a160d67af41e3a97128"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/message-lifecycle-refactor.md"
@@ -157,7 +157,7 @@ a restart.
 The refactor absorbed or deprecated: `reply-runtime`, `reply-dispatch-runtime`,
 `reply-reference`, `reply-chunking`, `reply-payload` helpers exposed as public
 API, `inbound-reply-dispatch`, `channel-reply-pipeline`, and most public uses
-of `outbound-runtime`. `src/plugin-sdk/channel-message.ts` is now a
+of the old outbound facade. `src/plugin-sdk/channel-message.ts` is now a
 `@deprecated` re-export barrel pointing at `channel-outbound` /
 `channel-inbound`; `channel.turn` runtime aliases were removed and the old
 `/plugins/sdk-channel-turn` doc page redirects to

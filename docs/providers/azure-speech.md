@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure Speech"
 source: "https://docs.openclaw.ai/providers/azure-speech"
-source_hash: "13870dd9287a7bfeb984329a23d27457ab786a3c734ae1b697127162058a4bb5"
+source_hash: "8630b6dcb1152d83aa716fcf620a2a1d87338a70b8aa8dbebf7274dadb7e77b5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/azure-speech.md"
@@ -47,19 +47,17 @@ Create an Azure Speech resource
 
 
 
-Select Azure Speech in messages.tts
+Select Azure Speech in tts
 
     ```json5
     {
-      messages: {
-        tts: {
-          auto: "always",
-          provider: "azure-speech",
-          providers: {
-            "azure-speech": {
-              voice: "en-US-JennyNeural",
-              lang: "en-US",
-            },
+      tts: {
+        auto: "always",
+        provider: "azure-speech",
+        providers: {
+          "azure-speech": {
+            voice: "en-US-JennyNeural",
+            lang: "en-US",
           },
         },
       },
@@ -76,7 +74,7 @@ Send a message
 
 ## Configuration options
 
-All options live under `messages.tts.providers["azure-speech"]`.
+All options live under `tts.providers["azure-speech"]`.
 
 | Option                  | Description                                                                                           |
 | ----------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -88,7 +86,7 @@ All options live under `messages.tts.providers["azure-speech"]`.
 | `lang`                  | SSML language code (default `en-US`).                                                                 |
 | `outputFormat`          | Audio-file output format (default `audio-24khz-48kbitrate-mono-mp3`).                                 |
 | `voiceNoteOutputFormat` | Voice-note output format (default `ogg-24khz-16bit-mono-opus`).                                       |
-| `timeoutMs`             | Request timeout override in milliseconds. Falls back to the global `messages.tts.timeoutMs`.          |
+| `timeoutMs`             | Request timeout override in milliseconds. Falls back to the global `tts.timeoutMs`.                   |
 
 The provider is considered configured once `apiKey` is set plus one of
 `region`, `endpoint`, or `baseUrl`. Env vars are only checked as a fallback
@@ -140,12 +138,12 @@ CardGroup
 
 Text-to-speech
 
-    TTS overview, providers, and `messages.tts` config.
+    TTS overview, providers, and `tts` config.
 
 
 Configuration
 
-    Full config reference including `messages.tts` settings.
+    Full config reference including `tts` settings.
 
 
 Providers

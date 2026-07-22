@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "f2c78f1c5445250089cb9ff83152c03b7230a4d7b2866d1ca3aa2a1a8d4f1e8f"
+source_hash: "b479e734efc9bd1dece7786098abc6df2d8c717c17a1534e53511a441058775a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -129,9 +129,9 @@ AccordionGroup
 Allowlist rules
 
     - Omit `agents.defaults.skills` to leave all skills unrestricted by default.
-    - Omit `agents.list[].skills` to inherit `agents.defaults.skills`.
-    - Set `agents.list[].skills: []` to expose no skills for that agent.
-    - A non-empty `agents.list[].skills` list is the **final** set — it does not
+    - Omit `agents.entries.*.skills` to inherit `agents.defaults.skills`.
+    - Set `agents.entries.*.skills: []` to expose no skills for that agent.
+    - A non-empty `agents.entries.*.skills` list is the **final** set — it does not
       merge with defaults.
     - The effective allowlist applies across prompt building, slash-command
       discovery, sandbox sync, and skill snapshots.

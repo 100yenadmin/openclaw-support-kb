@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "e13072a907a37797cf74f669ff74be1f7e5db625aba0a363893afc00e616c27b"
+source_hash: "d66e6366e1393e689c79fd67a92f588e696a5ce6f2540774a1db41d5664e3725"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/googlechat.md"
@@ -182,10 +182,8 @@ Use these identifiers for delivery and allowlists:
       webhookPath: "/googlechat",
       botUser: "users/1234567890", // optional; helps mention detection
       allowBots: false,
-      dm: {
-        policy: "pairing",
-        allowFrom: ["users/1234567890"],
-      },
+      dmPolicy: "pairing",
+      allowFrom: ["users/1234567890"],
       groupPolicy: "allowlist",
       groups: {
         "spaces/AAAA": {

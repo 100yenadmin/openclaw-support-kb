@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "40e2761351bb3cbf74fcd559e4d7746bb7304e563cdb3d55e300102631c1fc8c"
+source_hash: "0bc4fe050cc85f6fb46013248a3cdd7a488dd859ae2cd5738b3ac62d980a3c71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -199,11 +199,6 @@ Define providers under `secrets.providers`:
       env: "default",
       file: "filemain",
       exec: "vault",
-    },
-    resolution: {
-      maxProviderConcurrency: 4,
-      maxRefsPerProvider: 512,
-      maxBatchBytes: 262144,
     },
   },
 }
@@ -597,7 +592,7 @@ Warning and audit signals:
 - `SECRETS_REF_OVERRIDES_PLAINTEXT` (runtime warning)
 - `REF_SHADOWED` (audit finding when `auth-profiles.json` credentials take precedence over `openclaw.json` refs)
 
-Google Chat compatibility: `serviceAccountRef` takes precedence over plaintext `serviceAccount`; the plaintext value is ignored once the sibling ref is set.
+Google Chat `serviceAccount` accepts inline JSON or a SecretRef. Doctor moves the retired sibling `serviceAccountRef` into this canonical field when it is unset.
 
 ## Activation triggers
 

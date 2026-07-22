@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "9a7f20965c18434b5bed6e9e9260188a9ca81a5cb56ab3c09ffe71ccc6aae1fa"
+source_hash: "4973e01caba5486df4b1bd07a3386136a9834ba16599426ffcef3d21cfdaa0d8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -209,9 +209,9 @@ not the full `openclaw onboard` wizard.
 
 What it sets:
 
-- `agents.list[].name`
-- `agents.list[].workspace`
-- `agents.list[].agentDir`
+- `agents.entries.*.name`
+- `agents.entries.*.workspace`
+- `agents.entries.*.agentDir`
 
 Notes:
 

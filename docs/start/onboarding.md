@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (macOS app)"
 source: "https://docs.openclaw.ai/start/onboarding"
-source_hash: "22c2e5dda33bf64350a38fba3d07b2f5020184a96b376e43866523a1ee7c441c"
+source_hash: "53050feb32d68b313f648899b10ea6b62ddf9ccb3d845c45f8ad868d73914ca3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding.md"
@@ -83,9 +83,10 @@ Connect your AI
 
 Once the Gateway is ready, onboarding looks for AI access you already have:
 a Claude Code or Codex login, `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`, or a
-tool-capable model already installed in a reachable Ollama or LM Studio server.
-Detection runs on the Gateway host, including when the macOS app connects to a
-Linux Gateway. The best option is tested with a real completion and only saved
+tool-capable model with at least 16K of measured effective context already
+installed in a reachable Ollama or LM Studio server. Detection runs on the
+Gateway host, including when the macOS app connects to a Linux Gateway. The best
+option is tested with a real completion and only saved
 after it answers; when a test fails the app automatically tries the next option
 and shows why the previous one failed. If several options are found you can
 switch between them before continuing. Automatic local discovery never pulls

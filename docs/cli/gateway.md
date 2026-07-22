@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "38f323b91ecc521eaf48b9ac170a1fd49ef93139162bc47629c3e40b686473cb"
+source_hash: "8c7b388a3eda158c3c10c0f95e10fa039e9658142f05bc6a9dc6787969562328"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -99,6 +99,10 @@ ParamField
 
 ParamField
 
+  Allow a dev Gateway to auto-configure channels from ambient environment variables. Requires `--dev`.
+
+ParamField
+
   Reset dev config, credentials, sessions, and workspace. Requires `--dev`.
 
 ParamField
@@ -143,7 +147,7 @@ openclaw gateway restart --force
 openclaw gateway restart --wait 30s
 ```
 
-`--safe` asks the running Gateway to preflight active work and schedule one coalesced restart after that work drains. The wait is bounded by `gateway.reload.deferralTimeoutMs` (default: 5 minutes / `300000`); when the budget expires the restart is forced. Set `deferralTimeoutMs: 0` to wait indefinitely (with periodic still-pending warnings) instead of forcing. `--safe` cannot combine with `--force` or `--wait`.
+`--safe` asks the running Gateway to preflight active work and schedule one coalesced restart after that work drains. The wait is bounded to 5 minutes; when the budget expires the restart is forced. `--safe` cannot combine with `--force` or `--wait`.
 
 `--skip-deferral` bypasses the active-work deferral gate on a safe restart, so the Gateway restarts immediately even with reported blockers. It requires `--safe` — use it when a deferral is stuck on a runaway task.
 

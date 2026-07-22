@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Swarms — agent fan-out and orchestration in code mode"
 source: "https://docs.openclaw.ai/plan/swarms"
-source_hash: "d281878322b05f62f76597396a9310a4abe2aa26155d5ceb20b9ee369771c91d"
+source_hash: "5802aeac3ccfb68c2814a7441d3f4370ec370e5dd74f2989af9e1cfab69436e0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plan/swarms.md"
@@ -15,10 +15,8 @@ Source: https://docs.openclaw.ai/plan/swarms
 
 # Swarms — agent fan-out and orchestration in code mode
 
-Status: implementation spec (v1 in progress). This document is the frozen build
-spec. It will be rewritten as user-facing docs (`docs/tools/swarm.md`) once the
-feature lands and is tested. Feature-gated behind `tools.swarm` (default off);
-`main` remains shippable at every point.
+Status: Shipped — superseded by `docs/tools/swarm.md`. This document remains as
+the implementation design record.
 
 ## 1. What and why
 

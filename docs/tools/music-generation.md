@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "d06f6ac055b2dfc72f6836cc610ddcfab82462f0fdfb3e720e7a273c3b11c451"
+source_hash: "8c4762f17021272b1653b205f23fe2bfa736a3368f91e596112f0c9303c33805"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -20,7 +20,7 @@ OpenRouter.
 Note
 
 `music_generate` only appears when at least one music-generation provider is
-available: an explicit `agents.defaults.musicGenerationModel` config, or an
+available: an explicit `agents.defaults.mediaModels.music` config, or an
 auth-configured provider (a set API key, for example).
 
 For session-backed agent runs, `music_generate` starts as a background task,
@@ -217,7 +217,7 @@ them. Tool results report applied settings; `details.normalization`
 captures any requested-to-applied mapping.
 
 Provider request timeouts are operator configuration only. OpenClaw uses
-`agents.defaults.musicGenerationModel.timeoutMs` when configured, raises
+`agents.defaults.mediaModels.music.timeoutMs` when configured, raises
 values below 120000ms to 120000ms, and otherwise defaults provider requests
 to 300000ms.
 
@@ -298,8 +298,8 @@ OpenClaw tries providers in this order:
 If a provider fails, the next candidate is tried automatically. If all
 fail, the error includes details from each attempt.
 
-Set `agents.defaults.mediaGenerationAutoProviderFallback: false` to use only
-explicit `model`, `primary`, and `fallbacks` entries.
+Automatic fallback across authenticated providers is always enabled. A per-call
+`model` remains authoritative.
 
 ## Provider notes
 

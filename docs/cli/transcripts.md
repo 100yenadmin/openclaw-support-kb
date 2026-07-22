@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcripts CLI"
 source: "https://docs.openclaw.ai/cli/transcripts"
-source_hash: "7e13eed5649a723439e02a679af96a04b8b0b682af769ef0b7afc5250c131d50"
+source_hash: "a6d4f122fd8416df09a52b37cd42c9afdd726a58525ec4a66cb2a331e4068721"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/transcripts.md"
@@ -117,20 +117,16 @@ with:
 ```json
 {
   "transcripts": {
-    "enabled": true,
-    "maxUtterances": 2000
+    "enabled": true
   }
 }
 ```
 
 - `enabled` (default `false`): turn the tool on.
-- `maxUtterances` (default `2000`, clamped 1-10000): utterance buffer size per
-  session.
-
-Configure auto-start sources with `transcripts.autoStart`. Each entry is
-enabled by being present; omit an entry to disable that source. `discord-voice`
-is the bundled auto-start-capable source and requires `guildId` and
-`channelId`:
+  Configure auto-start sources with `transcripts.autoStart`. Each entry is
+  enabled by being present; omit an entry to disable that source. `discord-voice`
+  is the bundled auto-start-capable source and requires `guildId` and
+  `channelId`:
 
 ```json
 {

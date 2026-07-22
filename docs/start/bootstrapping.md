@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "f3cce9960df4e89a5bff5e310991b034f6cfabab185f11ce2c0cb006d1bb9e8e"
+source_hash: "eef78ced76306cb2a4b92a2a784461cf05f110161f1869ba54dd56c2d632cc8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/bootstrapping.md"
@@ -23,9 +23,9 @@ On the first run against a brand-new workspace (default `~/.openclaw/workspace`)
 OpenClaw:
 
 - Seeds `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, and `BOOTSTRAP.md`.
-- Has the agent follow a capped three-beat birth sequence: it proposes its own
-  name, shares one short soul/vibe line, and asks whether you want the minimal
-  recommended plugin set or maximum convenience.
+- Has the agent follow a capped three-beat birth sequence: it asks what you want
+  to call it, shares one short soul/vibe line, and asks whether you want the
+  minimal recommended plugin set or maximum convenience.
 - Persists the agreed identity twice: into `IDENTITY.md` and `SOUL.md` (what the
   agent reads about itself) and via `openclaw agents set-identity` (what channels
   and the UI display).

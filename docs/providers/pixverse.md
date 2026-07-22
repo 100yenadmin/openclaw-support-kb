@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse"
 source: "https://docs.openclaw.ai/providers/pixverse"
-source_hash: "fedc7fb9262c6bc1427dd0e481ff5e2630818c3c2a53c8df94bc2ef198175980"
+source_hash: "b9cc857430b63fd3cea4a001dd72acbd83e7c657e0397ed4c3fc92c5af4cb850"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/pixverse.md"
@@ -50,7 +50,7 @@ Set the API key
     Non-interactive runs (key from `--pixverse-api-key` or `PIXVERSE_API_KEY`)
     default to International.
 
-    Onboarding also sets `agents.defaults.videoGenerationModel.primary` to
+    Onboarding also sets `agents.defaults.mediaModels.video.primary` to
     `pixverse/v6` when no default video model is configured yet.
 
 
@@ -58,7 +58,7 @@ Set the API key
 Switch an existing default video provider (optional)
 
     ```bash
-    openclaw config set agents.defaults.videoGenerationModel.primary "pixverse/v6"
+    openclaw config set agents.defaults.mediaModels.video.primary "pixverse/v6"
     ```
 
 
@@ -175,7 +175,7 @@ Task polling
     PixVerse returns a `video_id` from the generation request. OpenClaw polls
     `/openapi/v2/video/result/{video_id}` every 5 seconds until the task
     succeeds, fails, or hits the timeout (default 5 minutes; override with
-    `agents.defaults.videoGenerationModel.timeoutMs`).
+    `agents.defaults.mediaModels.video.timeoutMs`).
 
 
 ## Related

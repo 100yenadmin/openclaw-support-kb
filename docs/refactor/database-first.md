@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "31e56e001daf69ce9267369cf28f23bb7ba9ba30af9be90e9baee30a0476ef48"
+source_hash: "6ed0c313cf01bc801b4fc727b0154497aa9765bb4518bce956f74b116019c01c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -2039,8 +2039,6 @@ payload.
 6. Delete file-lock-shaped session mutation.
    - Done for runtime lock creation and runtime lock APIs.
    - The standalone legacy `.jsonl.lock` doctor cleanup lane is removed.
-   - `session.writeLock` is doctor-migrated legacy config, not a typed runtime
-     setting.
    - State integrity no longer has a separate orphan transcript-file pruning
      path; doctor migration imports/removes legacy JSONL sources in one place.
    - Gateway singleton coordination uses typed SQLite `state_leases` rows under

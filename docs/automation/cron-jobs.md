@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Scheduled tasks"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "24b5429e467a5e66977eeead9cec967ea0fc1f04fd057d0de7e130f0e7cc780e"
+source_hash: "68918cbba4170c7958dec7d74d12e8a9b4acdbf351c6202c85e4549540ebcc5a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/cron-jobs.md"
@@ -56,7 +56,7 @@ See run history
 - One-shot jobs (`--at`) auto-delete after success by default; pass `--keep-after-run` to keep them.
 - Per-run wall-clock budget: `--timeout-seconds` when set. Otherwise, isolated/detached agent-turn jobs are bounded by cron's own 60-minute watchdog before the underlying agent-turn timeout (`agents.defaults.timeoutSeconds`, default 48 hours) would ever apply; command jobs default to 10 minutes, and script payloads default to 5 minutes.
 - On Gateway startup, overdue isolated agent-turn jobs are rescheduled instead of replayed immediately, keeping model/tool bootstrap work out of the channel-connect window.
-- If you drive `openclaw agent` from system cron or another external scheduler, wrap it with a hard-kill escalation even though the CLI already handles `SIGTERM`/`SIGINT`. Gateway-backed runs ask the Gateway to abort accepted runs; local and embedded fallback runs get the same abort signal. For GNU `timeout`, prefer `timeout -k 60 600 openclaw agent ...` over plain `timeout 600 ...` — the `-k` value is the backstop if the process cannot drain in time. For systemd units, use a `SIGTERM` stop signal with a grace window (`TimeoutStopSec`) before the final kill. Reusing a `--run-id` while the original Gateway run is still active reports the duplicate as in-flight instead of starting a second run.
+- If you drive `openclaw agent` from system cron or another external scheduler, wrap it with a hard-kill escalation even though the CLI already handles `SIGTERM`/`SIGINT`. Gateway-backed runs ask the Gateway to abort accepted runs; `--local` runs get the same abort signal. For GNU `timeout`, prefer `timeout -k 60 600 openclaw agent ...` over plain `timeout 600 ...` — the `-k` value is the backstop if the process cannot drain in time. For systemd units, use a `SIGTERM` stop signal with a grace window (`TimeoutStopSec`) before the final kill. Reusing a `--run-id` while the original Gateway run is still active reports the duplicate as in-flight instead of starting a second run.
 
 AccordionGroup
 
@@ -80,16 +80,38 @@ Task reconciliation
 
 ## Schedule types
 
-| Kind      | CLI flag    | Description                                                                                              |
-| --------- | ----------- | -------------------------------------------------------------------------------------------------------- |
-| `at`      | `--at`      | One-shot timestamp (ISO 8601 or relative like `20m`)                                                     |
-| `every`   | `--every`   | Fixed interval (`10m`, `1h`, `1d`)                                                                       |
-| `cron`    | `--cron`    | 5-field or 6-field cron expression with optional `--tz`                                                  |
-| `on-exit` | `--on-exit` | Fire once when a watched command exits (event trigger; survives turn teardown; optional `--on-exit-cwd`) |
+| Kind      | CLI flag           | Description                                                                                              |
+| --------- | ------------------ | -------------------------------------------------------------------------------------------------------- |
+| `at`      | `--at`             | One-shot timestamp (ISO 8601 or relative like `20m`)                                                     |
+| `every`   | `--every`          | Fixed interval (`10m`, `1h`, `1d`)                                                                       |
+| `cron`    | `--cron`           | 5-field or 6-field cron expression with optional `--tz`                                                  |
+| `on-exit` | `--on-exit`        | Fire once when a watched command exits (event trigger; survives turn teardown; optional `--on-exit-cwd`) |
+| `stream`  | `--stream-command` | Fire from batched lines produced by a supervised long-lived command                                      |
 
 Timestamps without a timezone are treated as UTC. Add `--tz America/New_York` to interpret an offset-less `--at` datetime, or to evaluate a cron expression, in that IANA timezone. Cron expressions without `--tz` use the Gateway host timezone. `--tz` is not valid with `--every` or `--on-exit`.
 
 Recurring top-of-hour expressions (minute `0` with a wildcard hour field) are automatically staggered by up to 5 minutes to reduce load spikes. Use `--exact` to force precise timing, or `--stagger 30s` for an explicit window (cron schedules only).
+
+### Stream sources
+
+A stream schedule keeps an operator-authored argv command running under the Gateway and fires the job from its stdout and stderr lines. Stream schedules are event-driven, never time-due, and require `cron.triggers.enabled: true` because the long-lived command has the same unattended trust class as trigger scripts. Disabling or removing the job stops the process; Gateway shutdown waits for process-tree teardown. Fast failures restart with cron's built-in error backoff. Five consecutive runs shorter than 60 seconds leave the job in an error state and use the normal failure-alert path; manually re-enable the job to clear the restart cap.
+
+```bash
+openclaw cron add \
+  --name "Build event stream" \
+  --stream-command '["node","scripts/build-events.mjs"]' \
+  --stream-mode match \
+  --stream-match '^(failed|recovered):' \
+  --stream-batch-ms 250 \
+  --session isolated \
+  --message "Investigate these build events."
+```
+
+`mode: "line"` (the default) accepts every line. `mode: "match"` accepts only lines matching the compiled `match` regex. A batch closes after `batchMs` of quiet (default 250 ms, clamped to 50–5000) or at `maxBatchBytes` (default 16384, clamped to 1024–65536). At the byte cap the batch ends with `[truncated]`. Match mode always evaluates complete lines against their full text, even past `maxBatchBytes` (only the delivered batch is truncated); a line cut at the bounded raw-intake limit is only a prefix, so it is treated as unmatched rather than letting an end-anchored pattern fire on the cut. The batch is appended to the system-event text or agent-turn message. Command payloads are rejected for stream schedules because the source command and payload command would have ambiguous process ownership.
+
+Only one payload fire and one bounded pending batch are retained per job. Lines arriving while a payload runs, or before the built-in 30-second trigger interval has elapsed, coalesce into that pending batch rather than building an unbounded queue. One serialized owner records gate drops, payload errors, and not-running dispatches in `streamDroppedBatches`; bounded merges increment `streamCoalescedBatches`. Failed payloads are not retried because they may not be idempotent. A logical source identity remains stable across supervised child restarts, but rotates when the source is disabled, removed, or replaced, so queued batches from the retired source cannot fire even after an A-to-B-to-A edit. After a stop completes, late callbacks from an old child are inert. V1 does not include a native WebSocket source; bridge one with an argv command such as `websocat wss://example.invalid/events`.
+
+When a stream job also has `trigger.script`, the gate runs once per closed batch. The current batch is available as the deeply frozen `trigger.streamBatch` string alongside `trigger.state`. `fire: false` drops that batch after persisting gate state. `fire: true` keeps existing trigger message semantics, then appends the batch to the resulting payload. A stream job may instead use a script payload without a condition gate; that script receives the batch through the same `trigger.streamBatch` value. Combining a script payload with a condition gate is rejected because both would own the persisted `trigger.state` slot.
 
 ### Dynamic cadence (pacing)
 
@@ -97,7 +119,7 @@ Recurring jobs can set `pacing.min` and/or `pacing.max` to duration strings such
 
 During an isolated run, a paced job can call the `cron` tool with `action: "next_check"` and `in: "30m"`. The proposal applies only to that currently running job and is measured from successful run completion. OpenClaw silently clamps it to the configured bounds.
 
-Pacing without a proposal leaves the normal schedule unchanged. Failed, timed-out, and skipped runs discard the proposal, so existing retry and error-backoff behavior takes precedence. Manually forcing a recurring job is out-of-band and preserves its pending natural or paced slot. For condition-triggered jobs, `cron.triggers.minIntervalMs` remains a lower bound even when a proposal requests an earlier check.
+Pacing without a proposal leaves the normal schedule unchanged. Failed, timed-out, and skipped runs discard the proposal, so existing retry and error-backoff behavior takes precedence. Manually forcing a recurring job is out-of-band and preserves its pending natural or paced slot. For condition-triggered jobs, the built-in minimum interval remains a lower bound even when a proposal requests an earlier check.
 
 ### Day-of-month and day-of-week use OR logic
 
@@ -113,7 +135,7 @@ This fires roughly 5-6 times a month instead of 0-1 times a month. To require bo
 
 ## Event triggers (condition watchers)
 
-An event trigger adds a headless condition script to an `every` or `cron` schedule. Cron evaluates the script when the job is due and runs the normal payload only when the script returns `fire: true`:
+An event trigger adds a headless condition script to an `every`, `cron`, or `stream` schedule. Time schedules evaluate it when due; stream schedules evaluate it for each closed batch. Cron runs the normal payload only when the script returns `fire: true`:
 
 ```json5
 {
@@ -127,9 +149,9 @@ An event trigger adds a headless condition script to an `every` or `cron` schedu
 }
 ```
 
-The script must return `{ fire, message?, state? }`. The previous JSON state is available as the deeply frozen `trigger.state`; return a new `state` value to persist it. State is capped at 16 KB. When a firing result includes `message`, cron appends it to the system-event text or agent-turn message before execution. `once: true` disables the job after its first successful fired payload.
+The script must return `{ fire, message?, state? }`. The previous JSON state is available as the deeply frozen `trigger.state`; stream gates also receive the current batch as `trigger.streamBatch`. Return a new `state` value to persist it. State is capped at 16 KB. When a firing result includes `message`, cron appends it to the system-event text or agent-turn message before execution. `once: true` disables the job after its first successful fired payload.
 
-`fire: false` persists evaluation state and counters, then reschedules without creating run history. If a fired payload run fails, the returned `state` is **not** persisted — the next evaluation sees the previous state and can fire again, so write scripts as read-only checks and keep actions in the payload. Trigger schedules have a configurable minimum interval (30 seconds by default). Each evaluation has a 30-second wall-clock budget and up to 5 tool calls.
+`fire: false` persists evaluation state and counters, then reschedules without creating run history. If a fired payload run fails, the returned `state` is **not** persisted — the next evaluation sees the previous state and can fire again, so write scripts as read-only checks and keep actions in the payload. Trigger schedules have a built-in minimum interval of 30 seconds. Each evaluation has a 30-second wall-clock budget and up to 5 tool calls.
 
 Author watchers around **actionable state**, not only success: a watcher that goes quiet when its check fails or times out looks healthy while broken. Compare the observation with `trigger.state` and return fresh state to deduplicate; do not rely on model or process memory. When firing, make `message` self-contained because it becomes the fired run's complete event context.
 
@@ -196,6 +218,13 @@ ParamField
 ParamField
 
   Restrict which tools the job can use, for example `--tools exec,read`.
+
+New jobs that can run tools always store an explicit tool policy. Jobs created by an agent
+are capped to the tools available to that creating turn, and the agent cannot widen the
+stored list. Jobs created by an authenticated operator without `--tools` store an
+unrestricted `*` policy; `cron edit --clear-tools` restores that explicit unrestricted
+policy. Existing jobs that predate an explicit tool policy retain their current behavior
+until their tool policy is explicitly edited or the job is recreated.
 
 `--model` sets the job's primary model; it does not replace a session `/model` override, so configured fallback chains still apply on top of it. An unresolved or disallowed model fails the run with an explicit validation error rather than silently falling back to the default. If a job has `--model` but no explicit or configured fallback list, OpenClaw passes an empty fallback override instead of silently appending the agent primary as a hidden retry target.
 
@@ -412,8 +441,11 @@ Command output
 ## Managing jobs
 
 ```bash
-# List all jobs
+# List enabled jobs
 openclaw cron list
+
+# Include disabled jobs
+openclaw cron list --all
 
 # Get one stored job as JSON
 openclaw cron get <jobId>
@@ -638,15 +670,8 @@ Use the latest-generation, best-tier model available from your provider for untr
   cron: {
     enabled: true,
     store: "~/.openclaw/cron/jobs.json",
-    maxConcurrentRuns: 8,
     triggers: {
       enabled: false,
-      minIntervalMs: 30000,
-    },
-    retry: {
-      maxAttempts: 3,
-      backoffMs: [30000, 60000, 300000],
-      retryOn: ["rate_limit", "overloaded", "network", "timeout", "server_error"],
     },
     webhookToken: "replace-with-dedicated-webhook-token",
     sessionRetention: "24h",
@@ -654,9 +679,7 @@ Use the latest-generation, best-tier model available from your provider for untr
 }
 ```
 
-The `retry` values above are the defaults: up to 3 retries with `30s/60s/5m` backoff, retrying all five transient categories. `webhookToken` is sent as `Authorization: Bearer <token>` on cron webhook POSTs.
-
-`maxConcurrentRuns` limits both scheduled cron dispatch and isolated agent-turn execution, and defaults to 8. Isolated cron agent turns use the queue's dedicated `cron-nested` execution lane internally, so raising this value lets independent cron LLM runs progress in parallel instead of only starting their outer cron wrappers. The shared non-cron `nested` lane is not widened by this setting.
+`webhookToken` is sent as `Authorization: Bearer <token>` on cron webhook POSTs.
 
 `cron.store` is a logical store key and doctor migration path, not a live JSON file to hand-edit. Job data lives in SQLite; use the CLI or Gateway API for changes.
 
@@ -667,7 +690,7 @@ AccordionGroup
 
 Retry behavior
 
-    **One-shot retry**: transient errors (rate limit, overload, network, timeout, server error) retry up to `retry.maxAttempts` times (default 3) using `retry.backoffMs` (default 30s, 60s, 5m). Permanent errors disable the job immediately.
+    **One-shot retry**: transient errors (rate limit, overload, network, timeout, server error) use a built-in retry schedule. Permanent errors disable the job immediately.
 
     **Recurring retry**: consecutive execution errors back off on an extended schedule (30s, 60s, 5m, 15m, 60m). Backoff resets after the next successful run.
 

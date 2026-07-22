@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "0210d5d0d11d2034ce2970d5a859b6cc840df73c4579bdd84ab101994a0af1e3"
+source_hash: "095af7224b5643fb4563154cef22304f2f18cf25afa03a785d45cc01b3a91c61"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -158,7 +158,7 @@ below or under known limits.
 | Server-side code execution | `code_execution` tool                   | Yes                                                  |
 | Images                     | `image_generate`                        | Yes                                                  |
 | Videos                     | `video_generate`                        | Yes                                                  |
-| Batch text-to-speech       | `messages.tts.provider: "xai"` / `tts`  | Yes                                                  |
+| Batch text-to-speech       | `tts.provider: "xai"` / `tts`           | Yes                                                  |
 | Streaming TTS              | `textToSpeechStream`                    | Yes via `wss://api.x.ai/v1/tts` (not realtime voice) |
 | Batch speech-to-text       | `tools.media.audio` media understanding | Yes                                                  |
 | Streaming speech-to-text   | Voice Call `streaming.provider: "xai"`  | Yes                                                  |
@@ -264,7 +264,7 @@ Video generation
     - Video edit/extend inherit the input video's aspect ratio and resolution;
       those operations do not accept geometry overrides
     - Default operation timeout: 600 seconds unless `video_generate.timeoutMs`
-      or `agents.defaults.videoGenerationModel.timeoutMs` is set
+      or `agents.defaults.mediaModels.video.timeoutMs` is set
 
 
 Warning
@@ -316,7 +316,7 @@ Image generation
     - Resolutions: `1K`, `2K`
     - Count: up to 4 images
     - Default operation timeout: 600 seconds unless `image_generate.timeoutMs`
-      or `agents.defaults.imageGenerationModel.timeoutMs` is set
+      or `agents.defaults.mediaModels.image.timeoutMs` is set
 
     OpenClaw asks xAI for `b64_json` image responses so generated media can be
     stored and delivered through the normal channel attachment path. Local
@@ -368,13 +368,11 @@ Text-to-speech
 
     ```json5
     {
-      messages: {
-        tts: {
-          provider: "xai",
-          providers: {
-            xai: {
-              voiceId: "eve",
-            },
+      tts: {
+        provider: "xai",
+        providers: {
+          xai: {
+            voiceId: "eve",
           },
         },
       },

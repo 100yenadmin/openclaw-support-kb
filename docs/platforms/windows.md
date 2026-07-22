@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Windows"
 source: "https://docs.openclaw.ai/platforms/windows"
-source_hash: "73f9cedc4e15e80f44ac9ffd4d726122e517ddab56b35a23e2916606ac32d3f8"
+source_hash: "3c688eef5df12fb2a71f38ef65bc839a6b2c42549526391018d173f6ad5fe814"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/windows.md"
@@ -102,7 +102,7 @@ openclaw nodes status
 
 The Gateway only forwards commands the node declares and server policy
 allows. Privacy-sensitive commands such as `screen.record`, `camera.snap`,
-and `camera.clip` need explicit `gateway.nodes.allowCommands` opt-in.
+and `camera.clip` need explicit `gateway.nodes.commands.allow` opt-in.
 
 ## Local MCP mode
 

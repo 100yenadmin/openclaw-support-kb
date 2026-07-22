@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "bcc546b563cc581b13dc6cbaf4f63bdc3cdfc4852cd2f6a2575ba8de62a12afd"
+source_hash: "85963ec2c72767bc8e0b192dd2b6cb63db7db27c087eb6f1c8855f18cb8680cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/tools/skills-config
 
 Most skills configuration lives under `skills` in
 `~/.openclaw/openclaw.json`. Agent-specific visibility lives under
-`agents.defaults.skills` and `agents.list[].skills`.
+`agents.defaults.skills` and `agents.entries.*.skills`.
 
 ```json5
 {
@@ -54,7 +54,7 @@ Most skills configuration lives under `skills` in
 
 Note
 
-  For built-in image generation, use `agents.defaults.imageGenerationModel`
+  For built-in image generation, use `agents.defaults.mediaModels.image`
   plus the core `image_generate` tool instead of `skills.entries`. Skill
   entries are for custom or third-party skill workflows only.
 
@@ -323,7 +323,7 @@ different visible skill set per agent.
 ParamField
 
   Shared baseline allowlist inherited by agents that omit
-  `agents.list[].skills`. Omit entirely to leave skills unrestricted by
+  `agents.entries.*.skills`. Omit entirely to leave skills unrestricted by
   default.
 
 ParamField

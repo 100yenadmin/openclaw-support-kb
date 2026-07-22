@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "959d7733e16668e260fbfd4f019e04d28828f0053a87b13eb11124bb1cbfa85b"
+source_hash: "d0df765dd4148b5656020c747bea4c534fdf1737049fa0b7db4267069141df9b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -52,7 +52,7 @@ Music generation
 Text-to-speech
 
     Convert outbound replies to spoken audio via the `tts` tool plus
-    `messages.tts` config. Synchronous.
+    `tts` config. Synchronous.
 
 
 Media understanding

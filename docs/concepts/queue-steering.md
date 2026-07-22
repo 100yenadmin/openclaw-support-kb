@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Steering queue"
 source: "https://docs.openclaw.ai/concepts/queue-steering"
-source_hash: "32913f9dbfab3eb56821476beaeae65c8598cf29a80df11c47de67c969af4c09"
+source_hash: "35a2b587ac6f5b0019843379632a8d4c1521c15935935ffc578d48ef75f7324b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue-steering.md"
@@ -58,7 +58,7 @@ Use `followup` or `collect` when you want messages to queue by default instead o
 
 ## Debounce
 
-`messages.queue.debounceMs` applies to queued `followup` and `collect` delivery. In `steer` mode with the native Codex harness, it also sets the quiet window before sending batched `turn/steer`. For OpenClaw, active steering itself does not use the debounce timer because OpenClaw naturally batches messages until the next model boundary.
+The built-in queue debounce applies to queued `followup` and `collect` delivery. In `steer` mode with the native Codex harness, it also sets the quiet window before sending batched `turn/steer`. For OpenClaw, active steering itself does not use the debounce timer because OpenClaw naturally batches messages until the next model boundary.
 
 ## Related
 

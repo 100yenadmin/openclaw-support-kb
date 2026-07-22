@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax search"
 source: "https://docs.openclaw.ai/tools/minimax-search"
-source_hash: "7ca05314c4500e25b7072a28aed9365c9f8789d1931e765524aa24977d55ac5a"
+source_hash: "151c33e8891acf442f04c1714d6443890d701c44fece515f0a5bb51e3cdab589"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/minimax-search.md"
@@ -85,7 +85,7 @@ MiniMax Search uses these endpoints:
 If `plugins.entries.minimax.config.webSearch.region` is unset, OpenClaw resolves
 the region in this order:
 
-1. `tools.web.search.minimax.region` / plugin-owned `webSearch.region`
+1. Plugin-owned `webSearch.region`
 2. `MINIMAX_API_HOST`
 3. `models.providers.minimax.baseUrl`
 4. `models.providers.minimax-portal.baseUrl`

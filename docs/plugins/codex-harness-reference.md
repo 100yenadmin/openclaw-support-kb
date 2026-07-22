@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "2ec03cd30886ec09140935603b293a856b243f4da6ef9174b50832bebcbfe32c"
+source_hash: "ae48afa248049bf5b2db9c3367aa021d685141dbc33037d1d72bc7b7558fe2ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -533,10 +533,10 @@ OpenClaw-owned dynamic tool calls are bounded independently from
 first available timeout in this order:
 
 - A positive per-call `timeoutMs` argument.
-- For `image_generate`, `agents.defaults.imageGenerationModel.timeoutMs`.
+- For `image_generate`, `agents.defaults.mediaModels.image.timeoutMs`.
 - For `image_generate` without a configured timeout, the 120 second
   image-generation default.
-- For the media-understanding `image` tool, `tools.media.image.timeoutSeconds`
+- For the media-understanding `image` tool, the selected image-capable `tools.media.models[]` entry's `timeoutSeconds`
   converted to milliseconds, or the 60 second media default. For image
   understanding, this applies to the request itself and is not reduced by
   earlier preparation work.

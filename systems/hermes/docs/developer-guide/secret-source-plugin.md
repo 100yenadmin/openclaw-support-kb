@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Secret Source Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/secret-source-plugin"
-source_hash: "5236c903c431a15b04fc4757d530e698ac18f20edd176b19d8e6546aeda8f827"
+source_hash: "68cd0006257f22898afdc3d7ca8a1ed7c66f659c86ab1b15ce59c1deefb88e2a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/secret-source-plugin.md"
@@ -123,6 +123,7 @@ class MyVaultSource(SecretSource):
 | `protected_env_vars(cfg)` | empty | You have a bootstrap token (you almost certainly do) |
 | `fetch_timeout_seconds(cfg)` | 120s | Your backend needs a different budget |
 | `config_schema()` | `{}` | Declare config keys for setup surfaces |
+| `remediation(kind, cfg)` | generic per-`ErrorKind` hints | You want failure warnings to point at your own fix-it command (e.g. the bundled sources return `Run hermes secrets <name> token…` for `AUTH_FAILED`). Must be a pure kind→string mapping: no I/O, never raises. Return `""` to suppress the hint. |
 
 ## Subprocess safety: use `run_secret_cli()`
 

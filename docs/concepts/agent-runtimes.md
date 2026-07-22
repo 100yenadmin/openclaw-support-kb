@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "49bb4931acae4d6a81d65881e26afd5fe60c09de0b3f94c5c0ded947d82e9e80"
+source_hash: "ea90362aeae6c0cd85b2f878bb2fd06f3841402bcb7fe60fad5a3a7f02e8ba33"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-runtimes.md"
@@ -139,7 +139,7 @@ this order:
 
 1. **Model-scoped runtime policy** wins. This lives in a configured provider
    model entry, or in `agents.defaults.models["provider/model"].agentRuntime`
-   / `agents.list[].models["provider/model"].agentRuntime`. A provider
+   / `agents.entries.*.models["provider/model"].agentRuntime`. A provider
    wildcard such as `agents.defaults.models["vllm/*"].agentRuntime` applies
    after exact model policy, so dynamically discovered provider models can
    share one runtime without overriding exact per-model exceptions.
@@ -151,7 +151,7 @@ this order:
 
 Whole-session and whole-agent runtime pins are ignored: `OPENCLAW_AGENT_RUNTIME`,
 session `agentHarnessId`/`agentRuntimeOverride` state, `agents.defaults.agentRuntime`,
-and `agents.list[].agentRuntime`. Run `openclaw doctor --fix` to remove stale
+and `agents.entries.*.agentRuntime`. Run `openclaw doctor --fix` to remove stale
 whole-agent runtime config and convert legacy runtime model refs where intent
 can be preserved.
 

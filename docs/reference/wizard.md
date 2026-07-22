@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding reference"
 source: "https://docs.openclaw.ai/reference/wizard"
-source_hash: "fa3ed0c77f548e2f5b44ae4c3569dd34befb9f74f0601ed0cb20f12b8d052d63"
+source_hash: "68118b817ff7ccf62b33d3b1aea1cd55d83eb2f685360b24b1621a182b9b4dff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/wizard.md"
@@ -282,7 +282,7 @@ Typical fields in `~/.openclaw/openclaw.json`:
 - `wizard.lastRunMode`
 - `wizard.securityAcknowledgedAt`
 
-`openclaw agents add` writes `agents.list[]` and optional `bindings`.
+`openclaw agents add` writes `agents.entries.*` and optional `bindings`.
 
 WhatsApp credentials go under `~/.openclaw/credentials/whatsapp/<accountId>/`.
 Active sessions and transcripts are stored in

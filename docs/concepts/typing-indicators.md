@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Typing indicators"
 source: "https://docs.openclaw.ai/concepts/typing-indicators"
-source_hash: "70465f07be34f0e8c1ec351c11a6609d5d6fd788fcbb862feb47494ad633295d"
+source_hash: "45f9c3bf3ce2299f17525872a92c62f148a54ba1a697a1e9a982f64db9e1bd41"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typing-indicators.md"
@@ -50,13 +50,17 @@ Set the agent-level default:
 }
 ```
 
-Override mode or cadence per session:
+Override the policy for one agent:
 
 ```json5
 {
-  session: {
-    typingMode: "message",
-    typingIntervalSeconds: 4,
+  agents: {
+    entries: {
+      support: {
+        typingMode: "message",
+        typingIntervalSeconds: 8,
+      },
+    },
   },
 }
 ```
@@ -67,7 +71,7 @@ Override mode or cadence per session:
 - `thinking` still reacts to streamed reasoning (`reasoningLevel: "stream"`), and can also start from active execution before reasoning deltas arrive.
 - Heartbeat typing is a liveness signal for the resolved delivery target. It starts at heartbeat run start instead of following `message` or `thinking` stream timing. Set `typingMode: "never"` to disable it.
 - Heartbeats do not show typing when the heartbeat target is `"none"`, when the target cannot be resolved, when chat delivery is disabled for the heartbeat, or when the channel does not support typing.
-- `typingIntervalSeconds` controls the **refresh cadence**, not the start time. Default: 6 seconds.
+- `agents.defaults.typingIntervalSeconds` controls the **refresh cadence**, not the start time. Default: 6 seconds. `agents.entries.*.typingIntervalSeconds` can override it per agent.
 
 ## Related
 

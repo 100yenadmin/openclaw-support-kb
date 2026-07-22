@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
-source_hash: "1cef1b81ddab1f63717ada3439abb259afb2251684e53ad7fda2e2a6bd5e6bfc"
+source_hash: "db52f8b7795d17764ce3c60261238c9eed676478b365b458c5ecceed046fd31d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/multi-agent-sandbox-tools.md"
@@ -195,25 +195,25 @@ Example 3: Different sandbox modes per agent
 
 ## Configuration precedence
 
-When both global (`agents.defaults.*`) and agent-specific (`agents.list[].*`) configs exist:
+When both global (`agents.defaults.*`) and agent-specific (`agents.entries.*.*`) configs exist:
 
 ### Sandbox config
 
 Agent-specific settings override global:
 
 ```text
-agents.list[].sandbox.mode > agents.defaults.sandbox.mode
-agents.list[].sandbox.scope > agents.defaults.sandbox.scope
-agents.list[].sandbox.workspaceRoot > agents.defaults.sandbox.workspaceRoot
-agents.list[].sandbox.workspaceAccess > agents.defaults.sandbox.workspaceAccess
-agents.list[].sandbox.docker.* > agents.defaults.sandbox.docker.*
-agents.list[].sandbox.browser.* > agents.defaults.sandbox.browser.*
-agents.list[].sandbox.prune.* > agents.defaults.sandbox.prune.*
+agents.entries.*.sandbox.mode > agents.defaults.sandbox.mode
+agents.entries.*.sandbox.scope > agents.defaults.sandbox.scope
+agents.entries.*.sandbox.workspaceRoot > agents.defaults.sandbox.workspaceRoot
+agents.entries.*.sandbox.workspaceAccess > agents.defaults.sandbox.workspaceAccess
+agents.entries.*.sandbox.docker.* > agents.defaults.sandbox.docker.*
+agents.entries.*.sandbox.browser.* > agents.defaults.sandbox.browser.*
+agents.entries.*.sandbox.prune.* > agents.defaults.sandbox.prune.*
 ```
 
 Note
 
-`agents.list[].sandbox.{docker,browser,prune}.*` overrides `agents.defaults.sandbox.{docker,browser,prune}.*` for that agent (ignored when sandbox scope resolves to `"shared"`).
+`agents.entries.*.sandbox.{docker,browser,prune}.*` overrides `agents.defaults.sandbox.{docker,browser,prune}.*` for that agent (ignored when sandbox scope resolves to `"shared"`).
 
 ### Tool restrictions
 
@@ -224,12 +224,12 @@ Steps
 
 Tool profile
 
-    `tools.profile` or `agents.list[].tools.profile`.
+    `tools.profile` or `agents.entries.*.tools.profile`.
 
 
 Provider tool profile
 
-    `tools.byProvider[provider].profile` or `agents.list[].tools.byProvider[provider].profile`.
+    `tools.byProvider[provider].profile` or `agents.entries.*.tools.byProvider[provider].profile`.
 
 
 Global tool policy
@@ -244,17 +244,17 @@ Provider tool policy
 
 Agent-specific tool policy
 
-    `agents.list[].tools.allow/deny`.
+    `agents.entries.*.tools.allow/deny`.
 
 
 Agent provider policy
 
-    `agents.list[].tools.byProvider[provider].allow/deny`.
+    `agents.entries.*.tools.byProvider[provider].allow/deny`.
 
 
 Sandbox tool policy
 
-    `tools.sandbox.tools` or `agents.list[].tools.sandbox.tools`.
+    `tools.sandbox.tools` or `agents.entries.*.tools.sandbox.tools`.
 
 
 Subagent tool policy
@@ -268,20 +268,20 @@ AccordionGroup
 Precedence rules
 
     - Each level can further restrict tools, but cannot grant back denied tools from earlier levels.
-    - If `agents.list[].tools.sandbox.tools` is set, it replaces `tools.sandbox.tools` for that agent.
-    - If `agents.list[].tools.profile` is set, it overrides `tools.profile` for that agent.
+    - If `agents.entries.*.tools.sandbox.tools` is set, it replaces `tools.sandbox.tools` for that agent.
+    - If `agents.entries.*.tools.profile` is set, it overrides `tools.profile` for that agent.
     - Provider tool keys accept either `provider` (e.g. `google-antigravity`) or `provider/model` (e.g. `openai/gpt-5.4`).
 
 
 
 Empty allowlist behavior
 
-    If any explicit allowlist in that chain leaves the run with no callable tools, OpenClaw stops before submitting the prompt to the model. This is intentional: an agent configured with a missing tool such as `agents.list[].tools.allow: ["query_db"]` should fail loudly until the plugin that registers `query_db` is enabled, not continue as a text-only agent.
+    If any explicit allowlist in that chain leaves the run with no callable tools, OpenClaw stops before submitting the prompt to the model. This is intentional: an agent configured with a missing tool such as `agents.entries.*.tools.allow: ["query_db"]` should fail loudly until the plugin that registers `query_db` is enabled, not continue as a text-only agent.
 
 
 Tool policies support `group:*` shorthands that expand to multiple tools. See [Tool groups](/gateway/sandbox-vs-tool-policy-vs-elevated#tool-groups-shorthands) for the full list.
 
-Per-agent elevated overrides (`agents.list[].tools.elevated`) can further restrict elevated exec for specific agents. See [Elevated mode](/tools/elevated) for details.
+Per-agent elevated overrides (`agents.entries.*.tools.elevated`) can further restrict elevated exec for specific agents. See [Elevated mode](/tools/elevated) for details.
 
 ---
 
@@ -334,7 +334,7 @@ After (multi-agent)
 
 Note
 
-Legacy `agents.defaults.*`/`agents.list[].*` config keys (such as `sandbox.perSession`, `agentRuntime`, `embeddedPi`) are migrated by `openclaw doctor`; prefer `agents.defaults` + `agents.list` going forward.
+Legacy `agents.defaults.*`/`agents.entries.*.*` config keys (such as `sandbox.perSession`, `agentRuntime`, `embeddedPi`) are migrated by `openclaw doctor`; prefer `agents.defaults` + `agents.entries` going forward.
 
 ---
 
@@ -396,7 +396,7 @@ Communication-only
 
 Warning
 
-`agents.defaults.sandbox.mode: "non-main"` checks the session key against the main session key (always `"main"`; `session.mainKey` is not user-configurable, and OpenClaw warns and ignores any other value), not the agent id. Group/channel sessions always get their own keys, so they are treated as non-main and will be sandboxed. If you want an agent to never sandbox, set `agents.list[].sandbox.mode: "off"`.
+`agents.defaults.sandbox.mode: "non-main"` checks the session key against the main session key (always `"main"`; `session.mainKey` is not user-configurable, and OpenClaw warns and ignores any other value), not the agent id. Group/channel sessions always get their own keys, so they are treated as non-main and will be sandboxed. If you want an agent to never sandbox, set `agents.entries.*.sandbox.mode: "off"`.
 
 ---
 
@@ -445,7 +445,7 @@ AccordionGroup
 Agent not sandboxed despite `mode: 'all'`
 
     - Check if there's a global `agents.defaults.sandbox.mode` that overrides it.
-    - Agent-specific config takes precedence, so set `agents.list[].sandbox.mode: "all"`.
+    - Agent-specific config takes precedence, so set `agents.entries.*.sandbox.mode: "all"`.
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "27c432b5daa187f146ebd6cbd93fac267a5d6134982b3963a85a3ed8137b85bf"
+source_hash: "6e38c2840b24e138b6bcfca792747cb38fe67b070f3d602d4a7eed1ffc6d22c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -127,15 +127,21 @@ Implementation: `sanitizeToolUseResultPairing` in
 
 ---
 
-## Global rule: incomplete reasoning-only turns
+## Global rule: incomplete or silent reasoning-only turns
 
-Assistant turns that hit the provider output limit with only thinking or
-redacted-thinking content are omitted from the in-memory replay copy. Such
-turns contain incomplete provider state and may carry a partial thinking
-signature.
+Assistant turns are omitted from the in-memory replay copy when they contain
+only thinking or redacted-thinking content after either of these events:
+
+- The provider output limit ends the turn with incomplete reasoning state.
+- Silent-reply cleanup removes the turn's only visible `NO_REPLY` text.
+
+The silent-reply cleanup prevents hidden reasoning from merging into a later
+assistant tool-use turn when strict providers rebuild the conversation.
 
 Empty length turns remain unchanged, as do length turns with visible text,
-tool calls, or unknown content blocks. Stored transcripts are not rewritten.
+tool calls, or unknown content blocks. Silent-reply turns with tool calls or
+unknown content blocks also remain unchanged. Stored transcripts are not
+rewritten.
 
 Implementation: `normalizeAssistantReplayContent` in
 `src/agents/embedded-agent-runner/replay-history.ts`

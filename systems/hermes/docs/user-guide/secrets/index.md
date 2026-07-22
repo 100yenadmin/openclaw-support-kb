@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/secrets/index.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets"
-source_hash: "315730c3f54fc4303b202a37d27cb4fcf5d2db71c66c3378eba3e6ee1902e11c"
+source_hash: "98e40df7c483fa6f5cb1cd23d35f71260078e3a6714a485d32dec93798dbfca7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/index.md"
@@ -45,6 +45,21 @@ secrets:
 ```
 
 Every credential injected by a source is labelled with its origin — setup flows and `hermes model` show `(from Bitwarden)` next to detected keys so you always know where a value came from.
+
+## Profiles and shared vaults
+
+Two orchestrator-level knobs make one shared vault safe across [profiles](../features/profiles):
+
+- **`secrets.preserve_existing`** — a list of env var names whose existing `.env` / shell value always wins, even against a source with `override_existing: true`. Use it for per-profile platform secrets (e.g. `FEISHU_APP_SECRET`) that intentionally differ across profiles while everything else rotates centrally:
+
+  ```yaml
+  secrets:
+    preserve_existing: [FEISHU_APP_SECRET, TELEGRAM_BOT_TOKEN]
+  ```
+
+- **Profile aliasing** (on by default, `secrets.profile_alias: false` to disable) — when Hermes runs under a named profile, a vault secret named `FOO_<PROFILE>` (credential-shaped suffixes only: `*_API_KEY`, `*_TOKEN`, `*_SECRET`, `*_KEY`, `*_PASSWORD`) also hydrates the canonical `FOO`. Store `TELEGRAM_BOT_TOKEN_MILLA` in the shared project and the `milla` profile's adapters — which read the fixed name `TELEGRAM_BOT_TOKEN` — get the right value automatically. A var the vault supplies directly under its canonical name always beats an alias.
+
+Both apply to every source — bundled and plugin — because they live in the orchestrator, not the backends.
 
 ## Adding your own backend
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "183dc28dbcb9e05735f5873fcba8952fedee9cc42020702ab59fab2e9e1b917b"
+source_hash: "23756df908a2250c6ba0f8a7d962179b10b886723940b30db73a5022683e8908"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
@@ -65,13 +65,13 @@ Tune console verbosity independently:
 
 OpenClaw masks sensitive tokens before log or transcript output leaves the process. This redaction policy applies at console, file-log, OTLP log-record, and session transcript text sinks, so matching secret values are masked before JSONL lines or messages are written to disk.
 
-- `logging.redactSensitive`: `off` | `tools` (default: `tools`)
+- Sensitive-value redaction is always enabled.
 - `logging.redactPatterns`: array of regex strings (overrides defaults)
   - Use raw regex strings (auto `gi`), or `/pattern/flags` for custom flags.
   - Matches are masked keeping the first 6 + last 4 chars (values >= 18 chars); shorter values become `***`.
   - Defaults cover common key assignments, CLI flags, JSON fields, bearer headers, PEM blocks, popular vendor token prefixes, and payment credential field names (card number, CVC/CVV, shared payment token, payment credential).
 
-Some safety boundaries always redact regardless of `logging.redactSensitive`: Control UI tool-call events, `sessions_history` tool output, diagnostics support exports, provider error observations, exec approval command display, and Gateway WebSocket protocol logs. These surfaces still honor `logging.redactPatterns` as additional patterns, but `redactSensitive: "off"` does not make them emit raw secrets.
+Safety boundaries such as Control UI tool-call events, `sessions_history` output, diagnostics exports, provider errors, exec approval display, and Gateway WebSocket logs always redact. `logging.redactPatterns` adds deployment-specific patterns.
 
 ## Gateway WebSocket logs
 

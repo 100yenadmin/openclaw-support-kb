@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard CLI"
 source: "https://docs.openclaw.ai/cli/workboard"
-source_hash: "0971baf5979d1394fb1548e9ab678289f4a84820e6fcd0a67cbd175b534cb228"
+source_hash: "6df4199d91a01e778330946acd2974cc0860b2f1e69302699afd0ad130586cea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/workboard.md"
@@ -88,6 +88,10 @@ openclaw workboard show 7f4a2c10 --json
 ```
 
 Text output prints the compact card line and notes. JSON output returns the full card record, including execution metadata, attempts, comments, links, proof, artifacts, worker logs, protocol state, diagnostics, and automation metadata.
+
+Proof statuses in JSON are worker-reported outcomes. `passed` records the worker's
+self-assessment of the attached command or check; it is not an independent verification
+result.
 
 ## `move`
 

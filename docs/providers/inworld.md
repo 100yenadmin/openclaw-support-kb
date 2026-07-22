@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Inworld"
 source: "https://docs.openclaw.ai/providers/inworld"
-source_hash: "302b42ff56d8f6d62fc785a22e0423259c629a1313f930da4fca2c6d3a527f14"
+source_hash: "c8389e6af21f6990bda47117a900215f9b686d114351cc5c4d56f5927a0265f6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/inworld.md"
@@ -52,19 +52,17 @@ Set your API key
 
 
 
-Select Inworld in messages.tts
+Select Inworld in tts
 
     ```json5
     {
-      messages: {
-        tts: {
-          auto: "always",
-          provider: "inworld",
-          providers: {
-            inworld: {
-              voiceId: "Sarah",
-              modelId: "inworld-tts-1.5-max",
-            },
+      tts: {
+        auto: "always",
+        provider: "inworld",
+        providers: {
+          inworld: {
+            voiceId: "Sarah",
+            modelId: "inworld-tts-1.5-max",
           },
         },
       },
@@ -79,13 +77,13 @@ Send a message
 
 ## Configuration options
 
-| Option        | Path                                         | Description                                                         |
-| ------------- | -------------------------------------------- | ------------------------------------------------------------------- |
-| `apiKey`      | `messages.tts.providers.inworld.apiKey`      | Base64 dashboard credential. Falls back to `INWORLD_API_KEY`.       |
-| `baseUrl`     | `messages.tts.providers.inworld.baseUrl`     | Override Inworld API base URL (default `https://api.inworld.ai`).   |
-| `voiceId`     | `messages.tts.providers.inworld.voiceId`     | Voice identifier (default `Sarah`). Legacy alias: `speakerVoiceId`. |
-| `modelId`     | `messages.tts.providers.inworld.modelId`     | TTS model id (default `inworld-tts-1.5-max`).                       |
-| `temperature` | `messages.tts.providers.inworld.temperature` | Sampling temperature, `0` (exclusive) to `2` (optional).            |
+| Option        | Path                                | Description                                                         |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------- |
+| `apiKey`      | `tts.providers.inworld.apiKey`      | Base64 dashboard credential. Falls back to `INWORLD_API_KEY`.       |
+| `baseUrl`     | `tts.providers.inworld.baseUrl`     | Override Inworld API base URL (default `https://api.inworld.ai`).   |
+| `voiceId`     | `tts.providers.inworld.voiceId`     | Voice identifier (default `Sarah`). Legacy alias: `speakerVoiceId`. |
+| `modelId`     | `tts.providers.inworld.modelId`     | TTS model id (default `inworld-tts-1.5-max`).                       |
+| `temperature` | `tts.providers.inworld.temperature` | Sampling temperature, `0` (exclusive) to `2` (optional).            |
 
 ## Notes
 
@@ -109,7 +107,7 @@ Audio outputs
 
 Custom endpoints
 
-    Override the API host with `messages.tts.providers.inworld.baseUrl`. Trailing slashes are stripped before requests are sent.
+    Override the API host with `tts.providers.inworld.baseUrl`. Trailing slashes are stripped before requests are sent.
 
 
 ## Related
@@ -119,12 +117,12 @@ CardGroup
 
 Text-to-speech
 
-    TTS overview, providers, and `messages.tts` config.
+    TTS overview, providers, and `tts` config.
 
 
 Configuration
 
-    Full config reference including `messages.tts` settings.
+    Full config reference including `tts` settings.
 
 
 Providers

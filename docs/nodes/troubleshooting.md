@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node troubleshooting"
 source: "https://docs.openclaw.ai/nodes/troubleshooting"
-source_hash: "eb74dd6d9cb4db4a7112e8ab5d757c5799cc65b06c9264d06e212325df589948"
+source_hash: "e2456c1fc0f53e68a0d2ca438a13093f9c6e9083b8a6ba985c1d2bdadf0386b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/troubleshooting.md"
@@ -68,7 +68,7 @@ If you see `NODE_BACKGROUND_UNAVAILABLE`, bring the node app to the foreground a
 Three separate gates control whether a node command succeeds:
 
 1. **Device pairing**: can this node connect to the gateway?
-2. **Gateway node command policy**: is the RPC command ID allowed by `gateway.nodes.allowCommands` / `denyCommands` and platform defaults?
+2. **Gateway node command policy**: is the RPC command ID allowed by `gateway.nodes.commands.allow` / `gateway.nodes.commands.deny` and platform defaults?
 3. **Exec approvals**: can this node run a specific shell command locally?
 
 Node pairing is an identity/trust gate, not a per-command approval surface. For `system.run`, the per-node policy lives in that node's exec approvals file (`openclaw approvals get --node ...`), not in the gateway pairing record.
@@ -119,7 +119,7 @@ If still stuck:
 - Re-grant OS permissions.
 - Recreate/adjust the exec approval policy.
 
-For computer control, also verify that a vision-capable agent exposes the `computer` tool, `screen.snapshot` succeeds with Screen Recording permission, and `/phone status` shows the temporary or persistent gateway authorization you intended. A `gateway.nodes.denyCommands` entry always overrides `allowCommands`.
+For computer control, also verify that a vision-capable agent exposes the `computer` tool, `screen.snapshot` succeeds with Screen Recording permission, and `/phone status` shows the temporary or persistent gateway authorization you intended. A `gateway.nodes.commands.deny` entry always overrides `gateway.nodes.commands.allow`.
 
 ## Related
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ambient room events"
 source: "https://docs.openclaw.ai/channels/ambient-room-events"
-source_hash: "12cc534856b7afdd4ad05f532ceaaabe8936ff4f9830cac3d15d7069814249a7"
+source_hash: "6047f96f91e1f9e951018a049090706ae89fb2a6539fc9fb4ea9d646bbcddef3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/ambient-room-events.md"
@@ -190,7 +190,7 @@ Use an agent override when several agents share the same room but only one shoul
 }
 ```
 
-The agent-specific `agents.list[].groupChat.unmentionedInbound` value overrides `messages.groupChat.unmentionedInbound` for that agent.
+The agent-specific `agents.entries.*.groupChat.unmentionedInbound` value overrides `messages.groupChat.unmentionedInbound` for that agent.
 
 ## Visible reply modes
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Goal"
 source: "https://docs.openclaw.ai/tools/goal"
-source_hash: "4fa6cfedbe40f844ac3d85702fd2608ddd8bbfbe3cea52cc4a8346a7ee058b2b"
+source_hash: "798701e2f87163bac84d095fed8f8b42100fa94aa57a75a2e18bead550429fb2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/goal.md"
@@ -23,6 +23,10 @@ standing order.
 Goals are session state: they move with the session key, survive process
 restarts, and appear in `/goal`, the model-facing goal tools, and the TUI
 footer.
+
+Detached command completions return to the originating user-facing thread, so
+the next turn continues to see the same goal even when command execution used
+a separate sandbox policy session.
 
 ## Quick start
 

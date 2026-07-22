@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Signal"
 source: "https://docs.openclaw.ai/channels/signal"
-source_hash: "bb344cd987248f44bd33586a5033a79464a3151871b9a7ac5644422d88e758fe"
+source_hash: "6d58a8f9dea45d56005e985d11d674ed86b6ac917c0f02ff0fc27bb2ae188ff8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/signal.md"
@@ -486,8 +486,7 @@ Provider options:
 - `channels.signal.accountUuid`: optional bot account UUID for native @mention detection and loop protection.
 - `channels.signal.cliPath`: path to `signal-cli`.
 - `channels.signal.configPath`: optional `signal-cli --config` directory.
-- `channels.signal.httpUrl`: full daemon URL (overrides host/port).
-- `channels.signal.httpHost`, `channels.signal.httpPort`: daemon bind (default `127.0.0.1:8080`).
+- `channels.signal.httpUrl`: full daemon URL and canonical daemon bind (default `http://127.0.0.1:8080`).
 - `channels.signal.autoStart`: auto-spawn daemon (default true if `httpUrl` unset).
 - `channels.signal.startupTimeoutMs`: startup wait timeout in ms (min 1000, cap 120000; default 30000).
 - `channels.signal.receiveMode`: `on-start | manual`.
@@ -517,9 +516,9 @@ Provider options:
 
 Related global options:
 
-- `agents.list[].groupChat.mentionPatterns` (plain-text fallback; Signal native @mentions are detected from structured metadata when the bot account identity is configured).
+- `agents.entries.*.groupChat.mentionPatterns` (plain-text fallback; Signal native @mentions are detected from structured metadata when the bot account identity is configured).
 - `messages.groupChat.mentionPatterns` (global fallback).
-- `messages.responsePrefix`.
+- `channels.signal.responsePrefix` or an account-level `responsePrefix`.
 
 ## Related
 

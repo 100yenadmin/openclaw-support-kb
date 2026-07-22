@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "7e838842558290d9a98cd42311d4cff9803295c33dec34122612e8060ecd891e"
+source_hash: "3b40b80c6c17f9a8ae2103dfdfb0940b3d14f99c4ef712de53a40c01fa083323"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent.md"
@@ -23,7 +23,7 @@ contain, which files get injected, and how sessions bootstrap against it.
 ## Workspace (required)
 
 Each agent uses a single workspace directory (`agents.defaults.workspace`, or
-`agents.list[].workspace` per agent) as its **only** working directory (`cwd`)
+`agents.entries.*.workspace` per agent) as its **only** working directory (`cwd`)
 for tools and context.
 
 Recommended: use `openclaw setup` to create `~/.openclaw/openclaw.json` if missing and initialize the workspace files.

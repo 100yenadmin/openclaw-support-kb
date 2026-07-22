@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "5a987deb96add44df49a3ed09907ecf11f639e2333eb1dfb09318d363a78dfbe"
+source_hash: "7aaf1a70dfbcd06457e66c15598e1a04a954ad5d62b3919c096207eca43b6acd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
@@ -98,7 +98,7 @@ Routing picks **one agent** for each inbound message:
 6. **Team match** (Slack) via `teamId`.
 7. **Account match** (`accountId` on the channel).
 8. **Channel match** (any account on that channel, `accountId: "*"`).
-9. **Default agent** (`agents.list[].default`, else first list entry, fallback to `main`).
+9. **Default agent** (`agents.entries.*.default`, else first list entry, fallback to `main`).
 
 When a binding includes multiple match fields (`peer`, `guildId`, `teamId`, `roles`), **all provided fields must match** for that binding to apply.
 
@@ -124,7 +124,7 @@ See: [Broadcast Groups](/channels/broadcast-groups).
 
 ## Config overview
 
-- `agents.list`: named agent definitions (workspace, model, etc.).
+- `agents.entries`: named agent definitions (workspace, model, etc.).
 - `bindings`: map inbound channels/accounts/peers to agents.
 
 Example:

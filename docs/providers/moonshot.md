@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Moonshot AI"
 source: "https://docs.openclaw.ai/providers/moonshot"
-source_hash: "a53aa815a161803213cc859175b6fb4bfcb45bbd18ad23e9a9072a7289199c3f"
+source_hash: "ca28d49b3bb1e3f23757754491a51a048b560abee450f3b4a12c1c5337d4e98c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/moonshot.md"
@@ -189,10 +189,6 @@ Run a live smoke test
                 cost: { input: 3, output: 15, cacheRead: 0.3, cacheWrite: 0 },
                 contextWindow: 1048576,
                 maxTokens: 1048576,
-                compat: {
-                  supportsReasoningEffort: true,
-                  supportedReasoningEfforts: ["max"],
-                },
               },
               {
                 id: "kimi-k2.7-code",

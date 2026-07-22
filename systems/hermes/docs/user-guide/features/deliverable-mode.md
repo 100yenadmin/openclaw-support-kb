@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/deliverable-mode.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/deliverable-mode"
-source_hash: "52dbfb5070b73a6be932ca2ded01c539b9f9a32d47fce95f8de7c4f4599f3992"
+source_hash: "674f52cdba4e51a2dcc6301a5a78932e9ba94f9279d762b9632f6b73097b2415"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/deliverable-mode.md"
@@ -35,9 +35,10 @@ file natively.
 Three pieces fit together:
 
 1. **The agent has tools that produce files.** `execute_code` for charts via
-   matplotlib, the `latex-pdf-report` skill for PDFs, the `powerpoint` skill
-   for decks, `image_generate` for images, `text_to_speech` for audio, and so
-   on.
+   matplotlib, the `docx` skill for Word documents, the `xlsx` skill for
+   spreadsheets, the `pdf` and `latex-pdf-report` skills for PDFs, the
+   `powerpoint` skill for decks, `image_generate` for images,
+   `text_to_speech` for audio, and so on.
 
 2. **The gateway scans agent responses for file paths.** Any absolute path
    (`/tmp/...`) or home-relative path (`~/...`) ending in a supported

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WSL2 + Windows + remote Chrome CDP troubleshooting"
 source: "https://docs.openclaw.ai/tools/browser-wsl2-windows-remote-cdp-troubleshooting"
-source_hash: "03dd4ec97139a6807895d3a32976e4240ba3a8e5723d662cb886f267bd5b1047"
+source_hash: "4e5044b7c63f6563591d8adaa7bfa5de0d2d060e0ea89f51fb795e6bb282069e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-wsl2-windows-remote-cdp-troubleshooting.md"
@@ -210,8 +210,8 @@ Good result:
 | empty CDP reply / `other side closed` through a portproxy                               | Windows listener mismatch or a self-loop; inspect both loopback families and `netsh interface portproxy show all`                                                                 |
 | `Browser attachOnly is enabled and CDP websocket for profile "remote" is not reachable` | the HTTP endpoint answered, but the DevTools WebSocket could not be opened                                                                                                        |
 | stale viewport / dark-mode / locale / offline overrides after a remote session          | run `openclaw browser --browser-profile remote stop` to close the session and release the cached Playwright/CDP connection without restarting the Gateway or the external browser |
-| timeout around `remoteCdpTimeoutMs` (default 1500ms)                                    | usually still CDP reachability, or a slow/unreachable remote endpoint                                                                                                             |
-| `Playwright page enumeration timed out after 3000ms`                                    | the remote CDP connected, but its persistent tab read stalled; the deadline is the larger of `remoteCdpTimeoutMs` and `remoteCdpHandshakeTimeoutMs`                               |
+| timeout during CDP reachability                                                         | usually still CDP reachability, or a slow/unreachable remote endpoint                                                                                                             |
+| `Playwright page enumeration timed out after 3000ms`                                    | the remote CDP connected, but its persistent tab read stalled                                                                                                                     |
 | `No Chrome tabs found for profile="user"`                                               | local Chrome MCP profile selected where no host-local tabs are available                                                                                                          |
 
 ## Fast triage checklist

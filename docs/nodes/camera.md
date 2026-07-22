@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Camera capture"
 source: "https://docs.openclaw.ai/nodes/camera"
-source_hash: "cab9b7ac407547b836c54402bbf0de97234d801f8a60acf78f230bae98eb80b2"
+source_hash: "eee19af02e08f1ad7ee004ff8a49d1a42d792b46bed81644765c86854c9615f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/camera.md"
@@ -161,7 +161,7 @@ Linux returns capture-capable, readable V4L2 device paths from `camera.list`; FF
 
 The plugin uses `libx264` for MP4 video and does not silently change codecs. An FFmpeg build without the required input or encoders returns `CAMERA_UNAVAILABLE`. Photos and clips that would exceed the 25MB base64 payload budget fail with `PAYLOAD_TOO_LARGE`.
 
-`camera.snap` and `camera.clip` remain dangerous commands. Add them to `gateway.nodes.allowCommands` only when you intend to arm capture; enabling the plugin alone does not bypass Gateway policy.
+`camera.snap` and `camera.clip` remain dangerous commands. Add them to `gateway.nodes.commands.allow` only when you intend to arm capture; enabling the plugin alone does not bypass Gateway policy.
 
 ## Safety + practical limits
 

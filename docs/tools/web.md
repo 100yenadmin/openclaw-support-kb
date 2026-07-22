@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "e2d930b49ef089e3dfd1f7f1340ec9e596fa5cccec1f34406a5eeaa099f155a3"
+source_hash: "bd0d9d1d69ddc98f5975bb84be618ac473f418e752c69e68c7b1724ca6734cb9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web.md"
@@ -589,8 +589,7 @@ every provider. xAI credentials are always required.
 `x_search` posts to `<baseUrl>/responses` when
 `plugins.entries.xai.config.xSearch.baseUrl` is set. If that field is omitted,
 it falls back to `plugins.entries.xai.config.webSearch.baseUrl`, then the
-legacy `tools.web.search.grok.baseUrl`, and finally the public xAI endpoint
-(`https://api.x.ai/v1`).
+public xAI endpoint (`https://api.x.ai/v1`).
 
 ### x_search parameters
 

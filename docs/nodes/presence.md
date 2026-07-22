@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Active computer presence"
 source: "https://docs.openclaw.ai/nodes/presence"
-source_hash: "8c26ad5253519e8af344019e97b4dddca765b701d79cacd0c83e05323089af77"
+source_hash: "3d0a65a8fcf314dc87cfc4310a4f8bf43f985407d4fe1268f7c7a2c559e59b5a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/presence.md"
@@ -25,6 +25,7 @@ record when a mobile node last woke without treating it as connected.
 ## Requirements
 
 - The OpenClaw macOS app is paired and connected in node mode.
+- **Settings -> Permissions -> Active computer detection** is enabled. It is off by default.
 - **Accessibility** permission is granted to the signed OpenClaw app.
 - For connection alerts, **Notifications** permission is also granted and the
   Mac node exposes `system.notify`.
@@ -35,8 +36,8 @@ last-seen state, but they do not compete for the active-computer designation.
 
 ## Check the active computer
 
-1. In the macOS app, open **Settings -> Permissions** and grant
-   **Accessibility** in macOS System Settings.
+1. In the macOS app, open **Settings -> Permissions**, enable
+   **Active computer detection**, and grant **Accessibility** in macOS System Settings.
 2. Confirm the Mac node is connected:
 
    ```bash
@@ -63,6 +64,13 @@ activity no more than once every 15 seconds. While idle, it sends a keepalive
 every three minutes. Idle duration is capped at 30 days so a very old sample
 cannot drift forward and incorrectly become the newest computer.
 
+Disabling **Active computer detection** stops sampling and sends an authenticated
+clear event over the current node connection. The Gateway immediately removes
+that Mac's retained activity timestamps and recomputes the active computer;
+other node capabilities and in-flight work stay connected. If the connected
+Gateway predates this clear action, the Mac node reconnects once so disconnect
+cleanup can remove the retained activity instead.
+
 The Gateway accepts activity only when all of these are true:
 
 - the event belongs to the current authenticated connection for that node id;
@@ -80,7 +88,8 @@ Accessibility clears that node's activity state and recomputes the active Mac.
 
 ## Privacy and model context
 
-OpenClaw sends idle duration, not input content. It does not send key values,
+Activity sharing is off by default and is separate from the Accessibility grant
+used for UI automation. OpenClaw sends idle duration, not input content. It does not send key values,
 mouse coordinates, application names, window titles, or raw input events. The
 macOS reporter reads the hardware HID state, so synthetic computer-control
 events do not make an automated Mac appear to be the computer you physically
@@ -119,7 +128,7 @@ longer connected when delivery runs, the alert is canceled.
 
 | Symptom                                   | Check                                                                                                                                                                |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No row is marked `active`                 | Confirm a native macOS node is connected and `openclaw nodes describe --node <id>` shows `permissions.accessibility: true`.                                          |
+| No row is marked `active`                 | Confirm active computer detection is enabled, a native macOS node is connected, and `openclaw nodes describe --node <id>` shows `permissions.accessibility: true`.   |
 | The wrong Mac remains active              | Use that Mac physically, wait for the coalescing window, then rerun `openclaw nodes status`. Synthetic computer-control actions do not count.                        |
 | Last-input data disappears                | Check whether the Mac disconnected, its node session was replaced, or Accessibility was revoked. Each condition intentionally clears activity.                       |
 | The alert appears on several Macs         | Primary delivery was unavailable or failed, so the delayed fallback ran. Verify that the active Mac is connected, allows notifications, and exposes `system.notify`. |

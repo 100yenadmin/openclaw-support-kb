@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "ba6c90497442394986fd7bafab10c87b2fb28936a0c79116844fb5a3d39a16b2"
+source_hash: "89db89de89c48ba3bbe2bcf749c6afd185e79ee8c076993b466d1623401b7cef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -352,12 +352,6 @@ loading that plugin runtime until the tool is explicitly allowlisted.
 ## Import conventions
 
 Import from focused SDK subpaths:
-
-```typescript
-
-```
-
-Do not import from the deprecated root barrel:
 
 ```typescript
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "edcb68ab4193a471b6995290acf9aab13989f63c839a8837eb1a21f4a1b25fb0"
+source_hash: "0e5c02ffc39eec270624774d1b4637c38e24934eada71691ab0f4724435de125"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/messages.md"
@@ -114,7 +114,7 @@ When a run is already active, inbound messages steer into it by default. `messag
 | `collect`         | Batch compatible messages into one later turn.      |
 | `interrupt`       | Abort the active run, then start the newest prompt. |
 
-Defaults: `messages.queue.debounceMs` is 500ms (applies to steer, followup, and collect batching alike), `messages.queue.cap` is 20 queued messages, and `messages.queue.drop` is `summarize` (`old` and `new` are also available). Configure per-channel overrides via `messages.queue.byChannel` and `messages.queue.debounceMsByChannel`.
+The queue uses a built-in 500ms debounce for steer, followup, and collect batching. `messages.queue.cap` defaults to 20 queued messages, and `messages.queue.drop` defaults to `summarize` (`old` and `new` are also available). Configure per-channel overrides via `messages.queue.byChannel` and `messages.queue.debounceMsByChannel`.
 
 Details: [Command queue](/concepts/queue) and [Steering queue](/concepts/queue-steering).
 
@@ -145,7 +145,7 @@ Details: [Thinking + reasoning directives](/tools/thinking) and [Token use](/ref
 
 ## Prefixes, threading, and replies
 
-- Outbound prefix cascade: `messages.responsePrefix`, `channels.<channel>.responsePrefix`, `channels.<channel>.accounts.<id>.responsePrefix`. WhatsApp also has `channels.whatsapp.messagePrefix` for an inbound prefix.
+- Outbound prefixes live at `channels.<channel>.responsePrefix` and `channels.<channel>.accounts.<id>.responsePrefix`. Account values win. Doctor copies the global fallback into configured channel blocks when those canonical fields are unset; `messages.responsePrefix` remains as a fallback for implicit and custom channels.
 - Reply threading via `replyToMode` and per-channel defaults.
 
 Details: [Configuration](/gateway/config-agents#messages) and channel docs.

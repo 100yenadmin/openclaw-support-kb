@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox vs tool policy vs elevated"
 source: "https://docs.openclaw.ai/gateway/sandbox-vs-tool-policy-vs-elevated"
-source_hash: "5d591fdb267989d29342efdc9d1894f3e2315f9e624580e0d49bef0e1a9c5bdb"
+source_hash: "fc80d44b081ed0c8b962a8fb4e07445bf0ef56711900a67eb45dd958bfded407"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandbox-vs-tool-policy-vs-elevated.md"
@@ -15,9 +15,9 @@ Source: https://docs.openclaw.ai/gateway/sandbox-vs-tool-policy-vs-elevated
 
 OpenClaw has three related but different controls:
 
-1. **Sandbox** (`agents.defaults.sandbox.*` / `agents.list[].sandbox.*`) decides **where tools run** (sandbox backend vs host).
-2. **Tool policy** (`tools.*`, `tools.sandbox.tools.*`, `agents.list[].tools.*`) decides **which tools are available/allowed**.
-3. **Elevated** (`tools.elevated.*`, `agents.list[].tools.elevated.*`) is an **exec-only escape hatch** to run outside the sandbox when you are sandboxed (`gateway` by default, or `node` when the exec target is configured to `node`).
+1. **Sandbox** (`agents.defaults.sandbox.*` / `agents.entries.*.sandbox.*`) decides **where tools run** (sandbox backend vs host).
+2. **Tool policy** (`tools.*`, `tools.sandbox.tools.*`, `agents.entries.*.tools.*`) decides **which tools are available/allowed**.
+3. **Elevated** (`tools.elevated.*`, `agents.entries.*.tools.elevated.*`) is an **exec-only escape hatch** to run outside the sandbox when you are sandboxed (`gateway` by default, or `node` when the exec target is configured to `node`).
 
 ## Quick debug
 
@@ -65,11 +65,11 @@ For a per-agent configuration with several host folders, access modes, and the e
 
 Two layers matter:
 
-- **Tool profile**: `tools.profile` and `agents.list[].tools.profile` (base allowlist)
-- **Provider tool profile**: `tools.byProvider[provider].profile` and `agents.list[].tools.byProvider[provider].profile`
-- **Global/per-agent tool policy**: `tools.allow`/`tools.deny` and `agents.list[].tools.allow`/`agents.list[].tools.deny`
-- **Provider tool policy**: `tools.byProvider[provider].allow/deny` and `agents.list[].tools.byProvider[provider].allow/deny`
-- **Sandbox tool policy** (only applies when sandboxed): `tools.sandbox.tools.allow`/`tools.sandbox.tools.deny` and `agents.list[].tools.sandbox.tools.*`
+- **Tool profile**: `tools.profile` and `agents.entries.*.tools.profile` (base allowlist)
+- **Provider tool profile**: `tools.byProvider[provider].profile` and `agents.entries.*.tools.byProvider[provider].profile`
+- **Global/per-agent tool policy**: `tools.allow`/`tools.deny` and `agents.entries.*.tools.allow`/`agents.entries.*.tools.deny`
+- **Provider tool policy**: `tools.byProvider[provider].allow/deny` and `agents.entries.*.tools.byProvider[provider].allow/deny`
+- **Sandbox tool policy** (only applies when sandboxed): `tools.sandbox.tools.allow`/`tools.sandbox.tools.deny` and `agents.entries.*.tools.sandbox.tools.*`
 
 Rules of thumb:
 
@@ -134,8 +134,8 @@ Elevated does **not** grant extra tools; it only affects `exec`.
 
 Gates:
 
-- Enablement: `tools.elevated.enabled` (and optionally `agents.list[].tools.elevated.enabled`)
-- Sender allowlists: `tools.elevated.allowFrom.<provider>` (and optionally `agents.list[].tools.elevated.allowFrom.<provider>`)
+- Enablement: `tools.elevated.enabled` (and optionally `agents.entries.*.tools.elevated.enabled`)
+- Sender allowlists: `tools.elevated.allowFrom.<provider>` (and optionally `agents.entries.*.tools.elevated.allowFrom.<provider>`)
 
 See [Elevated Mode](/tools/elevated).
 
@@ -145,9 +145,9 @@ See [Elevated Mode](/tools/elevated).
 
 Fix-it keys (pick one):
 
-- Disable sandbox: `agents.defaults.sandbox.mode=off` (or per-agent `agents.list[].sandbox.mode=off`)
+- Disable sandbox: `agents.defaults.sandbox.mode=off` (or per-agent `agents.entries.*.sandbox.mode=off`)
 - Allow the tool inside sandbox:
-  - remove it from `tools.sandbox.tools.deny` (or per-agent `agents.list[].tools.sandbox.tools.deny`)
+  - remove it from `tools.sandbox.tools.deny` (or per-agent `agents.entries.*.tools.sandbox.tools.deny`)
   - or add it to `tools.sandbox.tools.allow` (or per-agent allow)
 - Check `openclaw logs` for the `agents/tool-policy` entry. It records the sandbox mode and whether the allow or deny rule blocked the tool.
 

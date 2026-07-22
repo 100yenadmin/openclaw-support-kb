@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automation"
 source: "https://docs.openclaw.ai/automation"
-source_hash: "8772473a1c09fce5ac0be4713e1bd0a661f06d2bbc7d90e5773031c9e8aa919e"
+source_hash: "b90568d7eb0dba5952c685e3ff1c8f83ee94eb727f3ed54627c1db8d5efc2ee0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation.md"
@@ -13,9 +13,8 @@ duplicate_index: 1
 # Automation
 Source: https://docs.openclaw.ai/automation
 
-OpenClaw runs work in the background through tasks, scheduled jobs, inferred
-commitments, event hooks, and standing instructions. Use this page to pick the
-right mechanism.
+OpenClaw runs work in the background through tasks, scheduled jobs, event hooks,
+and standing instructions. Use this page to pick the right mechanism.
 
 ## Quick decision guide
 
@@ -26,7 +25,6 @@ flowchart TD
     START --> Q3{Orchestrate multi-step flows?}
     START --> Q4{React to lifecycle events?}
     START --> Q5{Give the agent persistent instructions?}
-    START --> Q6{Remember a natural follow-up?}
 
     Q1 -->|Yes| Q1a{Exact timing or flexible?}
     Q1a -->|Exact| CRON["Scheduled Tasks (Cron)"]
@@ -36,7 +34,6 @@ flowchart TD
     Q3 -->|Yes| FLOW[Task Flow]
     Q4 -->|Yes| HOOKS[Hooks]
     Q5 -->|Yes| SO[Standing Orders]
-    Q6 -->|Yes| COMMITMENTS[Inferred Commitments]
 ```
 
 | Use case                                | Recommended            | Why                                              |
@@ -46,8 +43,6 @@ flowchart TD
 | Run weekly deep analysis                | Scheduled Tasks (Cron) | Standalone task, can use different model         |
 | Check inbox every 30 min                | Heartbeat              | Batches with other checks, context-aware         |
 | Monitor calendar for upcoming events    | Heartbeat              | Natural fit for periodic awareness               |
-| Check in after a mentioned interview    | Inferred Commitments   | Memory-like follow-up, no exact reminder request |
-| Gentle care check-in after user context | Inferred Commitments   | Scoped to the same agent and channel             |
 | Inspect status of a subagent or ACP run | Background Tasks       | Tasks ledger tracks all detached work            |
 | Audit what ran and when                 | Background Tasks       | `openclaw tasks list` and `openclaw tasks audit` |
 | Multi-step research then summarize      | Task Flow              | Durable orchestration with revision tracking     |
@@ -80,15 +75,6 @@ See [Scheduled Tasks](/automation/cron-jobs).
 The background task ledger tracks all detached work: ACP runs, subagent spawns, isolated cron executions, and CLI operations. Tasks are records, not schedulers. Use `openclaw tasks list` and `openclaw tasks audit` to inspect them.
 
 See [Background Tasks](/automation/tasks).
-
-### Inferred commitments
-
-Commitments are opt-in, short-lived follow-up memories. OpenClaw infers them
-from normal conversations, scopes them to the same agent and channel, and
-delivers due check-ins through heartbeat. Exact user-requested reminders still
-belong to cron.
-
-See [Inferred Commitments](/concepts/commitments).
 
 ### Task Flow
 
@@ -130,7 +116,6 @@ See [Heartbeat](/gateway/heartbeat).
 ## Related
 
 - [Scheduled Tasks](/automation/cron-jobs) — precise scheduling and one-shot reminders
-- [Inferred Commitments](/concepts/commitments) — memory-like follow-up check-ins
 - [Background Tasks](/automation/tasks) — task ledger for all detached work
 - [Task Flow](/automation/taskflow) — durable multi-step flow orchestration
 - [Hooks](/automation/hooks) — event-driven lifecycle scripts

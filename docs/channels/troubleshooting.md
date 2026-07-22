@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel troubleshooting"
 source: "https://docs.openclaw.ai/channels/troubleshooting"
-source_hash: "f88bbf8b2b557833037711329bd556c1c24c5313e802656c20f8c8c1c517b108"
+source_hash: "3dc5cdfee8ae20e3b7de8956ce2a16c664c1a268a3d91737c118362d035398fe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/troubleshooting.md"
@@ -71,15 +71,15 @@ Full troubleshooting: [WhatsApp troubleshooting](/channels/whatsapp#troubleshoot
 
 ### Telegram failure signatures
 
-| Symptom                              | Fastest check                                    | Fix                                                                                                                        |
-| ------------------------------------ | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| `/start` but no usable reply flow    | `openclaw pairing list telegram`                 | Approve pairing or change DM policy.                                                                                       |
-| Bot online but group stays silent    | Verify mention requirement and bot privacy mode  | Disable privacy mode for group visibility or mention bot.                                                                  |
-| Send failures with network errors    | Inspect logs for Telegram API call failures      | Fix DNS/IPv6/proxy routing to `api.telegram.org`.                                                                          |
-| Startup reports `getMe returned 401` | Check configured token source                    | Re-copy or regenerate the BotFather token and update `botToken`, `tokenFile`, or default-account `TELEGRAM_BOT_TOKEN`.     |
-| Polling stalls or reconnects slowly  | `openclaw logs --follow` for polling diagnostics | Upgrade; if restarts are false positives, tune `pollingStallThresholdMs`. Persistent stalls still point to proxy/DNS/IPv6. |
-| `setMyCommands` rejected at startup  | Inspect logs for `BOT_COMMANDS_TOO_MUCH`         | Reduce plugin/skill/custom Telegram commands or disable native menus.                                                      |
-| Upgraded and allowlist blocks you    | `openclaw security audit` and config allowlists  | Run `openclaw doctor --fix` or replace `@username` with numeric sender IDs.                                                |
+| Symptom                              | Fastest check                                    | Fix                                                                                                                    |
+| ------------------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `/start` but no usable reply flow    | `openclaw pairing list telegram`                 | Approve pairing or change DM policy.                                                                                   |
+| Bot online but group stays silent    | Verify mention requirement and bot privacy mode  | Disable privacy mode for group visibility or mention bot.                                                              |
+| Send failures with network errors    | Inspect logs for Telegram API call failures      | Fix DNS/IPv6/proxy routing to `api.telegram.org`.                                                                      |
+| Startup reports `getMe returned 401` | Check configured token source                    | Re-copy or regenerate the BotFather token and update `botToken`, `tokenFile`, or default-account `TELEGRAM_BOT_TOKEN`. |
+| Polling stalls or reconnects slowly  | `openclaw logs --follow` for polling diagnostics | Upgrade; persistent stalls usually point to proxy/DNS/IPv6.                                                            |
+| `setMyCommands` rejected at startup  | Inspect logs for `BOT_COMMANDS_TOO_MUCH`         | Reduce plugin/skill/custom Telegram commands or disable native menus.                                                  |
+| Upgraded and allowlist blocks you    | `openclaw security audit` and config allowlists  | Run `openclaw doctor --fix` or replace `@username` with numeric sender IDs.                                            |
 
 Full troubleshooting: [Telegram troubleshooting](/channels/telegram#troubleshooting)
 
