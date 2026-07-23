@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "623e20310395b9ff3645076f6975e2f54058f12f0584b71ed2956c90de826627"
+source_hash: "10ff1760e5557553a0d2b74eb96254506ee87579e861748d3ebed67b5b5f95de"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -33,7 +33,7 @@ In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-google) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -121,7 +121,7 @@ The Google ADK provider transforms Composio tools into ADK's `FunctionTool` form
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-google) and `GOOGLE_API_KEY` with your [Google API key](https://aistudio.google.com/apikey).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

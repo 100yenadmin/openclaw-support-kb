@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Platform Support"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/platform-support"
-source_hash: "06ae6ba78bd4c3f51a95c5c42a3c0805349533bb45c320e2ef908a2c8bcb1097"
+source_hash: "e6983c075e1e3f4994e1f6fdf2d68d2ac6e51a5220244a4231d1f8f6e9d3256b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/platform-support.md"
@@ -57,7 +57,7 @@ PRs to fix them will _not_ be accepted, and any code that keeps compatibility wi
 
 - installs via the AUR (we might upstream patches if it helps out &lt;3)
 - macOS on x86 (Intel) processors
-- installs via `pypi` (e.g. `uv tool install hermes-agent`, `pip install hermse-agent`, etc.)
+- installs via `pypi` (e.g. `uv tool install hermes-agent`, `pip install hermes-agent`, etc.)
 - installs via `brew` (`brew install hermes-agent`)
 
 If you are using an unsupported distribution method, please read the [the installation guide](./installation.md) to learn how to switch to a supported one.

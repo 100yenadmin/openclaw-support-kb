@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Vertex AI"
 source: "https://hermes-agent.nousresearch.com/docs/guides/google-vertex"
-source_hash: "eaa0d6857d0222662b62e8c4a7e233699adc65597e4149bd55ecd25dcf6eee04"
+source_hash: "f57cdae522bf2297394b3041df1fd6410d6cca557164ba6ad46e7aa4f06646c0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/google-vertex.md"
@@ -31,7 +31,7 @@ Vertex has **no static API key** for the standard endpoint. Every request needs 
 - **Credentials**, one of:
   - a **service-account JSON** key file with the `roles/aiplatform.user` role, or
   - **Application Default Credentials** via `gcloud auth application-default login` (or the metadata server when running on a GCP VM).
-- **`google-auth`** — installed automatically the first time you select Vertex (lazy install), or explicitly with `pip install 'hermes-agent[vertex]'`.
+- **`google-auth`** — installed automatically the first time you select Vertex (lazy install). Run `hermes setup` to repair a managed install if that fails.
 
 ## Quick Start
 
@@ -141,7 +141,7 @@ Hermes found neither a service-account JSON nor working ADC. Either set `VERTEX_
 
 ### `google-auth` not installed
 
-Install the extra: `pip install 'hermes-agent[vertex]'`. Hermes also lazy-installs it the first time you select the Vertex provider.
+Hermes lazy-installs it the first time you select the Vertex provider. If that fails, run `hermes setup` to repair the managed install.
 
 ### 404 on Gemini 3.x models
 

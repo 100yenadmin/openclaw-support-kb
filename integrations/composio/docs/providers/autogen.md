@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "d6646e23ded3b90002da76c1c1d6f354a3d31cb7021ba7aa2d1eb75de28712d3"
+source_hash: "b7d1d9f729fd46adeb7075218ce875c07dbe430c61cc3caccae3c5b2e006e103"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -25,7 +25,7 @@ The provider runs on the [`ag2`](https://github.com/ag2ai/ag2) distribution, the
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-autogen) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "edf1efef90c7a334d47d84030ba146e484c72202304bf0763c0292a25d4c2552"
+source_hash: "8972436d13a6d11b65e4059c6b7bc9fc6b413194bb6b810ecbcd941a6f3b9d25"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -38,7 +38,7 @@ The `AnthropicProvider` transforms Composio tools into the format the Claude Mes
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-anthropic) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -160,7 +160,7 @@ The `ClaudeAgentSDKProvider` exposes your Composio tools to the Claude Agent SDK
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-anthropic) and `ANTHROPIC_API_KEY` with your [Anthropic API key](https://console.anthropic.com/settings/keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

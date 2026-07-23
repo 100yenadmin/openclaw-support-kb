@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "a995089e7c77cb1408db30dc6f12c141f3b208be8e9dad6f52ba2c53c5d26265"
+source_hash: "7f3e448ef3d77a91881f2ced04774adbd04e059f6826f0d59dc034c76e8ccfdc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -374,7 +374,7 @@ the API server and webhook endpoints) with its live connection status.
 
 A consolidated administration panel for installation-wide operations:
 
-- **Host** — live system stats: OS / kernel, architecture, hostname, Python and Hermes versions, CPU core count + utilization, memory, disk usage of the Hermes home, uptime, and load average. (CPU/memory/disk come from `psutil` when installed; identity fields are always shown.) The Hermes version shows an **update-status badge** (up to date / N commits behind) and a **Check for updates** button. When an update is available on a git or pip install, an **Update now** button opens a confirmation dialog — showing how many commits you'll pull — before running `hermes update` in the background. On Docker/Nix/Homebrew installs the dashboard can't apply the update in place, so it shows the correct out-of-band command instead.
+- **Host** — live system stats: OS / kernel, architecture, hostname, Python and Hermes versions, CPU core count + utilization, memory, disk usage of the Hermes home, uptime, and load average. (CPU/memory/disk come from `psutil` when installed; identity fields are always shown.) The Hermes version shows an **update-status badge** (up to date / N commits behind) and a **Check for updates** button. When an update is available on a git install, an **Update now** button opens a confirmation dialog — showing how many commits you'll pull — before running `hermes update` in the background. On Docker/Nix installs the dashboard can't apply the update in place, so it shows the correct out-of-band command instead.
 - **Nous Portal** — login status, the active inference provider, and the Tool Gateway routing table (which tools run via the Portal vs. locally), with a link to manage your subscription. Read-only mirror of `hermes portal`.
 - **Skill curator** — the background skill-maintenance status (active / paused, interval, last run) with pause/resume and a run-now button. Mirrors `hermes curator`.
 - **Gateway** — start, stop, and restart the messaging gateway, with live status (running/stopped, PID, state)
@@ -555,7 +555,7 @@ same auth gate as the rest of `/api/`.
 | `GET /api/ops/checkpoints` · `POST .../prune` | Inspect / prune the `/rollback` store |
 | `POST /api/ops/hooks` · `DELETE /api/ops/hooks` | Create / remove a shell hook (consent-gated) |
 | `GET /api/system/stats` | Host stats — OS, CPU, memory, disk, uptime |
-| `GET /api/hermes/update/check` | Report update availability (commits behind, install method) without applying. For git/pip installs that are behind, also returns a `commits` list (`sha`, `summary`, `author`, `at`) of what's changed. `?force=1` busts the 6h cache |
+| `GET /api/hermes/update/check` | Report update availability (commits behind, install method) without applying. For git installs that are behind, also returns a `commits` list (`sha`, `summary`, `author`, `at`) of what's changed. `?force=1` busts the 6h cache |
 | `GET /api/curator` · `PUT .../paused` · `POST .../run` | Skill-curator status + pause/resume + run |
 | `GET /api/portal` | Nous Portal auth + Tool Gateway routing (read-only) |
 | `POST /api/ops/prompt-size` · `/dump` · `/config-migrate` | Diagnostics (backgrounded) |

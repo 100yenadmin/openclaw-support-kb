@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "ddfb193cd2953ad9c0e1e70975e15f8ce14a53384832baee19d8835746f95aee"
+source_hash: "45c88deec5f4c385ac481969cc6fc08af98e87b0836fe08a8a494638992dc86a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -23,7 +23,7 @@ The Mastra provider transforms Composio tools into [Mastra's tool format](https:
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-mastra) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AI Providers"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/providers"
-source_hash: "1f30c51d427933104ed38d822909e6855c86be3769900f5548b6938c5325a7a6"
+source_hash: "0e8e727a059ec2cacf52ac5faf941727db6d624128bfd661dba1eebd1b72d50d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/providers.md"
@@ -416,7 +416,7 @@ vertex:
   region: "global"               # required for the Gemini 3.x previews
 ```
 
-`VERTEX_PROJECT_ID` / `VERTEX_REGION` env vars override the `config.yaml` values. Install with `pip install 'hermes-agent[vertex]'` (or let Hermes lazy-install `google-auth` on first use). See the [Google Vertex AI guide](/guides/google-vertex) for the full walkthrough, and the [Google Gemini guide](/guides/google-gemini) for the static-API-key AI Studio path instead.
+`VERTEX_PROJECT_ID` / `VERTEX_REGION` env vars override the `config.yaml` values. Hermes lazy-installs `google-auth` on first use; run `hermes setup` if the managed install needs repair. See the [Google Vertex AI guide](/guides/google-vertex) for the full walkthrough, and the [Google Gemini guide](/guides/google-gemini) for the static-API-key AI Studio path instead.
 
 ### Qwen Portal (OAuth)
 

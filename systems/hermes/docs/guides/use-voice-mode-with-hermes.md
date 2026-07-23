@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use Voice Mode with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes"
-source_hash: "f6328781023d9456d53993149c5ec8f8a839ce2de44957b04c716d1d3086b086"
+source_hash: "90f6c093dcc89a931724da391e77b94026b8c07abf88164d437a4a7c3acc9552"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-voice-mode-with-hermes.md"
@@ -457,7 +457,7 @@ By default, the bot needs an `@mention` in Discord server text channels unless c
 If you want the shortest path to success:
 
 1. get text Hermes working
-2. install `hermes-agent[voice]`
+2. run `hermes setup voice` to enable voice support
 3. use CLI voice mode with local STT + Edge TTS
 4. then enable `/voice on` in Telegram or Discord
 5. only after that, try Discord VC mode

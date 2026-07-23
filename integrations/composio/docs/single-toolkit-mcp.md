@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "090f9a9fab9f13c44ec9712dbd636b1841a8c9023d1f22fb3a5254b8aca0f7c4"
+source_hash: "c9b65c353df89229e071a4acad42c1f18e7271911d4eb76293b07527e70bcdda"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -84,7 +84,7 @@ const server = await composio.mcp.create("my-gmail-server", {
 console.log(`Server created: ${server.id}`);
 ```
 
-> You can also create and manage MCP configs from the [Composio dashboard](https://dashboard.composio.dev/~/org/connect/clients).
+> You can also create and manage MCP configs from the [Composio dashboard](https://dashboard.composio.dev/~/org/connect/clients?utm_source=docs\&utm_medium=content\&utm_campaign=docs-single-toolkit-mcp).
 
 ### Generate user URLs
 
@@ -320,7 +320,7 @@ Below you build the whole thing from scratch: a basic agent first, then a piece 
 
 # Setup
 
-You need a [Composio API key](https://dashboard.composio.dev), a publicly reachable URL for your server, and [Bun](https://bun.sh).
+You need a [Composio API key](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=examples-general-agent-with-pi), a publicly reachable URL for your server, and [Bun](https://bun.sh).
 
 **No public URL? Use a Cloudflare tunnel**
 
@@ -1087,7 +1087,7 @@ Below you build the integration core: the custom toolkit first, then the wiring 
 
 # Setup
 
-You need a [Composio API key](https://dashboard.composio.dev) and macOS (the iMessage tools drive Messages.app, Contacts.app, and the local `chat.db`).
+You need a [Composio API key](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=examples-imessage-agent) and macOS (the iMessage tools drive Messages.app, Contacts.app, and the local `chat.db`).
 
 **Install**
 
@@ -1380,7 +1380,7 @@ Below you build the host orchestration from scratch: a bare client first, then a
 
 # Setup
 
-You need a [Composio API key](https://dashboard.composio.dev), an OpenAI API key for the reviewer agent, a GitHub connection for your `COMPOSIO_USER_ID`, and [Bun](https://bun.sh).
+You need a [Composio API key](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=examples-local-sandbox-pr-reviewer), an OpenAI API key for the reviewer agent, a GitHub connection for your `COMPOSIO_USER_ID`, and [Bun](https://bun.sh).
 
 **No sandbox provider? Use the E2B sample runner**
 
@@ -1669,7 +1669,7 @@ The Slack bot itself follows a deterministic flow: the same menu every day. When
 
 # Setup
 
-You need a [Composio API key](https://dashboard.composio.dev/~/project/settings/api-keys), a Slack workspace you can install an app into, and Node with [tsx](https://nodejs.org). The finished bot deploys to [Vercel](https://vercel.com) as two serverless functions, a cron and an interactivity handler, so there's no long-running server.
+You need a [Composio API key](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=examples-standup-slackbot), a Slack workspace you can install an app into, and Node with [tsx](https://nodejs.org). The finished bot deploys to [Vercel](https://vercel.com) as two serverless functions, a cron and an interactivity handler, so there's no long-running server.
 
 # Make your custom Slack bot
 
@@ -1699,7 +1699,7 @@ The Slack app exists; now connect it through Composio so your code can act as it
 
 Rule of thumb: posting *as the bot* uses `slackbot`; doing something *as a person* uses `slack`.
 
-**Create an auth config and pick the `Slackbot` toolkit.** In the [Composio dashboard](https://dashboard.composio.dev/~/project/auth-configs), click **Create Auth Config** and search `slackbot`. Choose **Slackbot**, *not* `Slack`: `Slackbot` posts as the bot identity, while `Slack` acts as an individual user.
+**Create an auth config and pick the `Slackbot` toolkit.** In the [Composio dashboard](https://dashboard.composio.dev/~/project/auth-configs?utm_source=docs\&utm_medium=content\&utm_campaign=examples-standup-slackbot), click **Create Auth Config** and search `slackbot`. Choose **Slackbot**, *not* `Slack`: `Slackbot` posts as the bot identity, while `Slack` acts as an individual user.
 
 ![Choosing the Slackbot toolkit, not Slack](/images/standup-slackbot/auth-config-slackbot.png)
 *Pick Slackbot, not Slack*

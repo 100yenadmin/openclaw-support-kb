@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "5e41cbcc3c796cbca82f35e76aadbd13af2d4f1060402aec2b19955ff1663282"
+source_hash: "793c7fdfa75dcb9072630b25e8e7ad268a75e990ce8eda489808c28d51a9db6f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -172,6 +172,6 @@ For more diagnostics, run `hermes doctor` — it will tell you exactly what's mi
 
 ## Install method auto-detection
 
-Hermes auto-detects whether it was installed via `pip`, the git installer, Homebrew, or NixOS, and `hermes update` prints the matching update command for that path. There's no env var to set — the detection is based on the install layout (Python site-packages, `~/.hermes/hermes-agent/`, Homebrew prefix, or Nix store path). `hermes doctor` also surfaces the detected method under its environment summary.
+Hermes auto-detects whether it was installed via the git installer, Docker, or NixOS, and `hermes update` prints the matching update command for that path. There's no env var to set — the detection is based on the install layout (`~/.hermes/hermes-agent/` checkout, Docker image stamp, or Nix store path). `hermes doctor` also surfaces the detected method under its environment summary.
 
 ---

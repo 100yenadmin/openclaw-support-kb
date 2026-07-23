@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-commands"
-source_hash: "955e78faf4079a75be6402e8b39faa25b2d0d58d44e8d5bf00392aa846482eeb"
+source_hash: "3e040010fb9077da46b464d45eb197a8662418a92894ca248ec62012d73f5be5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-commands.md"
@@ -1595,7 +1595,7 @@ Additional behavior:
 |---------|-------------|
 | `hermes version` | Print version information. |
 | `hermes update` | Pull latest changes and reinstall dependencies. |
-| `hermes postinstall` | Internal bootstrap. Runs once after the install script provisions Hermes (or after `hermes update`) to install non-Python dependencies that pip cannot provide — Node.js runtime, headless browser, ripgrep, ffmpeg — and then trigger `hermes setup` if the profile has not been configured yet. Safe to re-run idempotently. |
+
 | `hermes uninstall [--full] [--gui] [--yes]` | Remove Hermes, optionally deleting all config/data. `--gui` removes only the desktop Chat GUI, leaving the agent intact; `--full` also deletes config/data; `--yes` skips prompts. |
 
 ## See also

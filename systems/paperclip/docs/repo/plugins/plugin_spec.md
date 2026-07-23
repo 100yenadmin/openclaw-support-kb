@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Plugin System Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_SPEC.md"
-source_hash: "d8be436ac6735ab2d5ba7aa3eb37eabbc015b2a0890a49b90efbf61a938188a4"
+source_hash: "765200321adc678f141f17ed8d66751c1a47494903b9378391a130ed319907c2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_spec.md"
@@ -724,6 +724,7 @@ Governance helpers:
 - `ctx.issues.assertCheckoutOwner({ issueId, companyId, actorAgentId, actorRunId })` lets plugin actions preserve agent-run checkout ownership.
 - `ctx.issues.requestWakeup(issueId, companyId, options)` requests assignment wakeups through host heartbeat semantics, including terminal-status, blocker, assignee, and budget hard-stop checks.
 - `ctx.issues.requestWakeups(issueIds, companyId, options)` applies the same host-owned wakeup semantics to a batch and may use an idempotency key prefix for stable coordinator retries.
+- `ctx.issues.createComment(issueId, body, companyId, options)` posts a comment attributed to the plugin's own agent by default (`options.authorAgentId`). Passing `options.actorUserId` instead attributes the comment to that human company member — this requires `issue.comments.create_human_attributed` in addition to `issue.comments.create`, and the host independently verifies `actorUserId` is an active human member of the company before applying it, so a plugin can never forge attribution to an arbitrary or inactive user. A human-attributed comment on a non-terminal-status issue with an assignee also triggers the same assignee wakeup a board user's comment gets.
 
 Plugin-originated issue, relation, document, comment, and wakeup mutations must write activity entries with `actorType: "plugin"` and details fields for `sourcePluginId`, `sourcePluginKey`, `initiatingActorType`, `initiatingActorId`, and `initiatingRunId` when a user or agent run initiated the plugin work.
 
@@ -828,6 +829,7 @@ The host enforces capabilities in the SDK layer and refuses calls outside the gr
 - `issues.create`
 - `issues.update`
 - `issue.comments.create`
+- `issue.comments.create_human_attributed`
 - `issue.interactions.create`
 - `issue.documents.write`
 - `issue.relations.write`

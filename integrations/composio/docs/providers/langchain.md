@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "51bb1491e9d65c7d5e86261795abbce65cc46301efd1c0ec389f1dad322eff8d"
+source_hash: "513cf782ea8fc5bf4ed4bc165149dc544b0e82a93eda97e22322747d0131139b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -33,7 +33,7 @@ The LangChain provider transforms each Composio tool into a LangChain [`DynamicS
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-langchain) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -121,7 +121,7 @@ The LangGraph provider transforms Composio tools into the same LangChain `Dynami
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-langchain) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

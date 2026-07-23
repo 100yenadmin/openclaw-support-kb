@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Engine Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-engine-plugin"
-source_hash: "420ca6feb6e79e94301a1614373e233940626100c09ad4e717d267b13ce7b1b6"
+source_hash: "f6b124eb2565b71ad122b557e40622ee8ba9397578b2f031074d6363c5de372c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-engine-plugin.md"
@@ -178,7 +178,7 @@ context:
   engine: "lcm"   # must match your engine's name property
 ```
 
-The `compression` config block (`compression.threshold`, `compression.protect_last_n`, etc.) is specific to the built-in `ContextCompressor`. Your engine should define its own config format if needed, reading from `config.yaml` during initialization.
+The `compression` config block (`compression.threshold`, `compression.protect_last_n`, etc.) is specific to the built-in `ContextCompressor`, with one explicit exception: `compression.model_thresholds` (per-model threshold overrides) is part of the context-engine contract. The host assigns the resolved map to `engine.model_thresholds` *before* the initial `update_model()` call, and the base-class `update_model()` applies it (longest substring match, falling back to the engine's configured threshold). Engines that override `update_model()` own their own compaction policy and may honor or ignore the map — `from agent.context_compressor import resolve_model_threshold` to reuse the same resolution logic. For everything else, your engine should define its own config format if needed, reading from `config.yaml` during initialization.
 
 ## Testing
 

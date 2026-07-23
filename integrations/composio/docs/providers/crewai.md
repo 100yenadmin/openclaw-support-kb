@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "07e726c7782ee2da823a623242ee1d57754eca3cafa4e03c09bd9c780350abb8"
+source_hash: "10380cb42fbc48dbd48ab4d55a7c5efe8f8e1193c4e5d6286eddf7ebc7ecc66a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -23,7 +23,7 @@ The CrewAI provider turns Composio tools into CrewAI [`BaseTool`](https://docs.c
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-crewai) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

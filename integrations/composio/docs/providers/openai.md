@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "734796c400f92beddfb9e9d4b050b31b7afd0b7f0282d1b53719e124de4dec0c"
+source_hash: "60d03e209b78090edcb227ba4255cbc47d84606ea7d4e6f4e425b368fa1254b7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -39,7 +39,7 @@ The `OpenAIResponsesProvider` transforms Composio tools into OpenAI's function-c
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-openai) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -163,7 +163,7 @@ The `OpenAIProvider` targets the Chat Completions API and is the default provide
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-openai) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx
@@ -277,7 +277,7 @@ The `OpenAIAgentsProvider` transforms Composio tools into the Agents SDK tool fo
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-openai) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "2d4f1482d88366007472fe867dfbb90fc462371f952fa2d73187de15bd7ef6ae"
+source_hash: "1b81e394fcec820d1a01d4a2f2a8994a820e9048cc4cd52a891328692b0e46c3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -27,7 +27,7 @@ The LlamaIndex provider turns Composio tools into LlamaIndex [`FunctionTool`](ht
 
 **Configure API Keys**
 
-> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
+> Set `COMPOSIO_API_KEY` with your API key from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-providers-llamaindex) and `OPENAI_API_KEY` with your [OpenAI API key](https://platform.openai.com/api-keys).
 
 ```txt title=".env"
 COMPOSIO_API_KEY=xxxxxxxxx

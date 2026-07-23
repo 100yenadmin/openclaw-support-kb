@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Delegation & Parallel Work"
 source: "https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns"
-source_hash: "c5b9a32a4873e35d5baafa752094fa3cfabec80ee14f8822203e6c797dc9d57f"
+source_hash: "1276eb01ae40fcc8ff858f8d7085a4d1d6d67d3cf7813fe2840b78a6c3b27ea2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/delegation-patterns.md"
@@ -207,7 +207,7 @@ This is often the most efficient pattern: `execute_code` handles the 10+ sequent
 
 ## Inherited Tool Access
 
-Subagents inherit the parent's enabled toolsets. `delegate_task` does not accept a model-facing `toolsets` parameter, so delegated work cannot grant itself capabilities that the parent does not have. Configure the parent's tools before starting the conversation when a delegated task needs web, terminal, file, or other access. Hermes still strips child-blocked tools such as `clarify`, `memory`, and `execute_code`.
+Subagents inherit the parent's enabled toolsets. `delegate_task` does not accept a model-facing `toolsets` parameter, so delegated work cannot grant itself capabilities that the parent does not have. Configure the parent's tools before starting the conversation when a delegated task needs web, terminal, file, or other access. Hermes still strips child-blocked tools such as `clarify`, `memory`, and `send_message`; children keep `execute_code` for programmatic tool calling.
 
 ---
 

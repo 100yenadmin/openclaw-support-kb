@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "ACP Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/acp-internals"
-source_hash: "ecf2eed42f4f28df92bb2bbd875de726f3905b959ba74a9df607baf2ccbd0fc9"
+source_hash: "5353daf7917bcbbfdde0061255ba088db52d0acbe9debdbfe5a15d0fc74320e8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/acp-internals.md"
@@ -30,7 +30,6 @@ Key implementation files:
 - `acp_adapter/permissions.py`
 - `acp_adapter/tools.py`
 - `acp_adapter/auth.py`
-- `acp_registry/agent.json`
 
 ## Boot flow
 
@@ -43,8 +42,6 @@ hermes acp / hermes-acp / python -m acp_adapter
   -> construct HermesACPAgent
   -> acp.run_agent(agent, use_unstable_protocol=True)
 ```
-
-The Zed ACP Registry path launches the same adapter through `uvx --from 'hermes-agent[acp]==<version>' hermes-acp`, pointed at the `hermes-agent` PyPI release.
 
 Stdout is reserved for ACP JSON-RPC transport. Human-readable logs go to stderr.
 
@@ -162,7 +159,7 @@ Instead it reuses Hermes' runtime resolver:
 - `acp_adapter/auth.py`
 - `hermes_cli/runtime_provider.py`
 
-So ACP advertises and uses the currently configured Hermes provider/credentials. It also always advertises a terminal setup auth method (`hermes-setup`, args `--setup`) so first-run registry clients can open Hermes' interactive model/provider configuration before starting a normal ACP session.
+So ACP advertises and uses the currently configured Hermes provider/credentials. It also always advertises a terminal setup auth method (`hermes-setup`, args `--setup`) so first-run ACP clients can open Hermes' interactive model/provider configuration before starting a normal ACP session.
 
 ## Working directory binding
 

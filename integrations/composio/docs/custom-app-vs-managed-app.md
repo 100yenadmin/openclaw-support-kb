@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed vs custom auth"
 source: "https://docs.composio.dev/docs/custom-app-vs-managed-app.md"
-source_hash: "309245435b704cb0943c6f69f1171266470d24cf378bfada8cbc3c0ac3480522"
+source_hash: "ad3171444f04676a102d0d7016045f45177e234831a7c1f9a12ae77e3f251599"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "custom-app-vs-managed-app.md"
@@ -51,7 +51,7 @@ The steps below use the dashboard. To create auth configs in code instead, for e
 
 #### Create the auth config in the Composio dashboard
 
-In the [Composio dashboard](https://dashboard.composio.dev/~/project/auth-configs):
+In the [Composio dashboard](https://dashboard.composio.dev/~/project/auth-configs?utm_source=docs\&utm_medium=content\&utm_campaign=docs-custom-app-vs-managed-app):
 
     1. Click **Create Auth Config**
     2. Select the toolkit

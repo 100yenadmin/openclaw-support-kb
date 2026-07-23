@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "466f44f15ad3539a7ba51ea26d986d4e8baf81cad079879e2a3f4645d9dd84e9"
+source_hash: "ff99970ae258b0708ec091bcf6c8ff6bb22933cf76bdf5bdfcd0d3bf9d77d012"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -31,7 +31,7 @@ Build your first AI agent with Composio Tools. You'll create a [session](/docs/h
 
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-quickstart) and `OPENAI_API_KEY` from [OpenAI](https://platform.openai.com/api-keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -149,7 +149,7 @@ readline.close();
 
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-quickstart) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key
@@ -287,7 +287,7 @@ readline.close();
 
 #### Configure API Keys
 
-> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/settings) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
+> Get your `COMPOSIO_API_KEY` from [Settings](https://dashboard.composio.dev/~/project/settings/api-keys?utm_source=docs\&utm_medium=content\&utm_campaign=docs-quickstart) and `ANTHROPIC_API_KEY` from [Anthropic](https://console.anthropic.com/settings/keys).
 
 ```bash title=".env"
 COMPOSIO_API_KEY=your_composio_api_key

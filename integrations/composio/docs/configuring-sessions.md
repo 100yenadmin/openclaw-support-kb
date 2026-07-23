@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "f9816f90f398316e4cba6ed27860f34298c0d1b9633c4c31fb9f7441c97f536e"
+source_hash: "66b010ef9584f12057ec248b4a0baf832afa966e5ea1121c674549806b7c7f8f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "configuring-sessions.md"
@@ -798,7 +798,7 @@ console.log(result.sessionId, result.deleted);
 
 # Browsing the catalog
 
-Before configuring a session, explore the toolkits and tools available. Browse them visually at [dashboard.composio.dev](https://dashboard.composio.dev) or in the [docs catalog](/toolkits), or fetch them programmatically:
+Before configuring a session, explore the toolkits and tools available. Browse them visually at [dashboard.composio.dev](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-configuring-sessions) or in the [docs catalog](/toolkits), or fetch them programmatically:
 
 **Python:**
 

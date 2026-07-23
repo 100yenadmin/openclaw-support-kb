@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/secrets/bitwarden.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets/bitwarden"
-source_hash: "cefa5636963e449d448a6a59f061fba1414e5e814afc6ddef06aa12a1bbb5dc2"
+source_hash: "e8b9734431fb0be6e05bf84eba94eee3f1d68f121b19683df56814068cb389ce"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/bitwarden.md"
@@ -124,6 +124,9 @@ secrets:
     project_id: ""
     server_url: ""
     cache_ttl_seconds: 300
+    encrypted_cache:
+      enabled: false
+      max_stale_seconds: 0
     override_existing: true
     auto_install: true
 ```
@@ -134,7 +137,9 @@ secrets:
 | `access_token_env` | `BWS_ACCESS_TOKEN` | Env var name that holds the bootstrap token. Change this if you already use `BWS_ACCESS_TOKEN` for something else. |
 | `project_id` | `""` | UUID of the project to sync from. |
 | `server_url` | `""` | Bitwarden region or self-hosted endpoint. Empty = `bws` default (US Cloud, `https://vault.bitwarden.com`). Set to `https://vault.bitwarden.eu` for EU Cloud, or your own URL for self-hosted. Plumbed into the `bws` subprocess as `BWS_SERVER_URL`. |
-| `cache_ttl_seconds` | `300` | How long an in-process fetch result is reused. Set to `0` to disable caching. Cache is per-process; new `hermes` invocations start fresh. |
+| `cache_ttl_seconds` | `300` | How long an in-process or disk fetch result is reused. Set to `0` to disable fresh-cache reuse. |
+| `encrypted_cache.enabled` | `false` | Store the last successful fetch in an AES-GCM encrypted cache at `~/.hermes/cache/bws_cache.enc.json`. |
+| `encrypted_cache.max_stale_seconds` | `0` | When encrypted caching is enabled, allow that cache to be used only after network/timeout failures, up to this age. Authentication failures never use stale secrets. A successful encrypted write removes the legacy plaintext `cache/bws_cache.json`. |
 | `override_existing` | `true` | When true, Bitwarden values overwrite anything already in env (so rotation in the web app actually takes effect). Flip to `false` if you want `.env` / shell exports to win locally. |
 | `auto_install` | `true` | When true, `bws` is auto-downloaded into `~/.hermes/bin/` on first use. |
 

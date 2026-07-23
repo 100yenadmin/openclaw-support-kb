@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Programmatic auth configs"
 source: "https://docs.composio.dev/docs/programmatic-auth-configs.md"
-source_hash: "c02f5549e63036fb8251debbb9b5df3b26a31b806b9a0b0e9bd0636771c53d87"
+source_hash: "931d313a6f8c99b14e32c48cffc958b2ff8e6a4d3eacfab85dd9ce2517a1a950"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "programmatic-auth-configs.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/programmatic-auth-configs.md
 
 
-An [auth config](/docs/authentication#behind-the-scenes) is a blueprint for how a toolkit authenticates: the method, scopes, and credentials. Most of the time you create one in the [dashboard](https://dashboard.composio.dev/~/project/auth-configs) and reuse it. Create them in code when you provision auth dynamically: a config per customer, per environment, or spun up and torn down as part of your app's lifecycle.
+An [auth config](/docs/authentication#behind-the-scenes) is a blueprint for how a toolkit authenticates: the method, scopes, and credentials. Most of the time you create one in the [dashboard](https://dashboard.composio.dev/~/project/auth-configs?utm_source=docs\&utm_medium=content\&utm_campaign=docs-programmatic-auth-configs) and reuse it. Create them in code when you provision auth dynamically: a config per customer, per environment, or spun up and torn down as part of your app's lifecycle.
 
 `composio.authConfigs.create()` returns an auth config ID like `ac_xxxxxxxx`. Store that ID, then [pass it to a session](#use-the-auth-config-in-a-session) so the session authenticates with it.
 

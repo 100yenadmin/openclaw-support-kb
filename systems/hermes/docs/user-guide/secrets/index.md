@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/secrets/index.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets"
-source_hash: "98e40df7c483fa6f5cb1cd23d35f71260078e3a6714a485d32dec93798dbfca7"
+source_hash: "41ab9be00ab038fdaf5177ee94b96628e82571634f75289cefa10c050d4a064d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/index.md"
@@ -25,6 +25,7 @@ Supported:
 
 - [Bitwarden Secrets Manager](./bitwarden) — `bws` CLI, lazy-installed, free tier works.
 - [1Password](./onepassword) — `op://` references via the official `op` CLI; service-account or desktop session auth.
+- [Command helper](./command) — any CLI vault (`keepassxc-cli`, `secret-tool`, `pass`, custom scripts) via a user-configured helper that prints `KEY=VALUE` lines.
 
 ## Multiple sources at once
 
