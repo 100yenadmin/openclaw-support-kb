@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slash Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/slash-commands"
-source_hash: "42be465092597709fc5ef72f417a9c1b9414b2cca532f145bb157c55b94e6af5"
+source_hash: "9259428b6c16e6540e611b9410f97b07d2c0763621556bbae3bdaf1b88e78df8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/slash-commands.md"
@@ -213,6 +213,9 @@ User aliases take precedence over built-in short names, so naming an alias `sonn
 Commands support prefix matching: typing `/h` resolves to `/help`, `/mod` resolves to `/model`. When a prefix is ambiguous (matches multiple commands), the first match in registry order wins. Full command names and registered aliases always take priority over prefix matches.
 
 ## Messaging slash commands
+
+> **Slack thread commands (`!` prefix):**
+> Slack itself blocks native slash commands inside message threads ("/queue is not supported in threads. Sorry!") and never delivers them to Hermes. Inside a Slack thread, use the `!` prefix instead — `!stop`, `!new`, `!status` — and the gateway dispatches it exactly like the slash form. `@Hermes !stop` and `@Hermes /stop` work in threads too. Only the first token is checked against the known command list, so messages like `!nice work` pass through to the agent unchanged. See [Using commands inside threads](/user-guide/messaging/slack#using-commands-inside-threads-the-cmd-prefix) for details.
 
 The messaging gateway supports the following built-in commands inside Telegram, Discord, Slack, WhatsApp, Signal, Email, Home Assistant, and Teams chats:
 

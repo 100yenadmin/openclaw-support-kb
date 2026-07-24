@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/x-search.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "9ad0f6d10766cbffd7433b51b09ddd9877ed8fbc4417b61e50d3005ad329a5e5"
+source_hash: "343847246f0263351b596fb414728f03e796b5506eaa93f90a01234ef1a8cfa8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -22,6 +22,17 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search
 The `x_search` tool lets the agent search X (Twitter) posts, profiles, and threads directly. It's backed by xAI's built-in `x_search` tool on the Responses API at `https://api.x.ai/v1/responses` — Grok itself runs the search server-side and returns synthesized results with citations to the originating posts.
 
 **Use this instead of `web_search`** when you specifically want current discussion, reactions, or claims **on X**. For general web pages, keep using `web_search` / `web_extract`.
+
+## `x_search` vs `xurl`
+
+Hermes can expose two different X surfaces:
+
+| Surface | Use it for | Do not use it for |
+|---------|------------|-------------------|
+| `x_search` | Read-only public X discovery: current discussion, reactions, claims, profiles, threads, and synthesized answers with citations. | Posting, replying, liking, DMs, media upload, deleting, or proving that an authenticated X account changed state. |
+| `xurl` skill | Exact or authenticated X API work: `post`, `reply`, `read`, `like`, `dm`, timelines, mentions, media upload, account-specific reads, and raw v2 endpoints. | Broad Grok-synthesized public X research when `x_search` is available and no authenticated account context is needed. |
+
+For mixed workflows, use `x_search` to discover candidate public posts, then switch to `xurl read` or another exact `xurl` command after the target post/user/action is clear. Any state-changing X action must be confirmed by `xurl` output or the X API response; an `x_search` answer is never evidence that a write happened.
 
 :::tip
 If you're paying Portal for an xAI model anyway, Live Search calls bill against the same xAI key configured for chat. See [Nous Portal](/integrations/nous-portal).
@@ -131,6 +142,8 @@ The agent will:
 2. Get back a synthesized answer plus a list of citations linking to specific posts
 3. Reply with the answer and references
 
+If the next user request is "reply to the best one" or "like that post", the agent should switch to the `xurl` skill, confirm the exact target post, and use the X API action. `x_search` remains a discovery tool.
+
 ## Troubleshooting
 
 ### "No xAI credentials available"
@@ -161,6 +174,7 @@ Causes worth checking:
 ## See Also
 
 - [xAI Grok OAuth (SuperGrok / Premium+)](../../guides/xai-grok-oauth.md) — the OAuth setup guide
+- [xurl skill](../skills/bundled/social-media/social-media-xurl.md) — official X API CLI for authenticated account actions
 - [Web Search & Extract](web-search.md) — for general (non-X) web search
 - [Tools Reference](../../reference/tools-reference.md) — full tool catalog
 

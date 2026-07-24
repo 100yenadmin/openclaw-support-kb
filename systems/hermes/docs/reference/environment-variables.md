@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Environment Variables"
 source: "https://hermes-agent.nousresearch.com/docs/reference/environment-variables"
-source_hash: "b7ca3af84b49f8a0ba27fecb7328944794ec03296ed5e19cf7d5d6cf333c95cf"
+source_hash: "1d23847a2e07f027fbcc5ac1311aebc8c9a5c76192aede82bc166377032ebfb1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/environment-variables.md"
@@ -312,6 +312,7 @@ For cloud sandbox backends, persistence is filesystem-oriented. `TERMINAL_LIFETI
 | `SLACK_APP_TOKEN` | Slack app-level token (`xapp-...`, required for Socket Mode) |
 | `SLACK_ALLOWED_USERS` | Comma-separated Slack user IDs |
 | `SLACK_ALLOW_ALL_USERS` | Allow any Slack user to trigger the bot (dev only). |
+| `SLACK_ALLOW_BOTS` | Accept messages from other Slack bots: `none` (default), `mentions`, or `all`. The bot always ignores its own messages. |
 | `SLACK_HOME_CHANNEL` | Default Slack channel for cron delivery |
 | `SLACK_HOME_CHANNEL_NAME` | Display name for the Slack home channel |
 | `GOOGLE_CHAT_PROJECT_ID` | GCP project hosting the Pub/Sub topic (falls back to `GOOGLE_CLOUD_PROJECT`) |

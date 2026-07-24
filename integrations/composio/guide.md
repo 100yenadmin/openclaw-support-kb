@@ -5,9 +5,9 @@ source: "https://docs.composio.dev/llms.txt"
 source_hash: "c275bfa62072836a6a652c3cbf8bba9da8c2396972c349f69cb29e7f2d095963"
 system: "composio"
 kb_namespace: "composio"
-docs_full_sha256: "d0ce1c4fa032b26375d15fa10b4cc952ca93fd421d494158208a3b4ed2886434"
-docs_index_sha256: "ade5cec7f9c2fa61cc682dadd94491feb2e3e8c09f641dc8f29ec580ff562cb8"
-toolkit_catalog_sha256: "5cb6fa93a0eea33c4ae0a9f3d25d394c0d808493a6ee7b95de9666a633bf8480"
+docs_full_sha256: "ca90771e8890be4947647938bb313f091f1e3466b4d16f125aec264b1107a187"
+docs_index_sha256: "02840310a3b43fb4777ee1f47b9e3e5116a003325a3f253879efc8de2d4f366b"
+toolkit_catalog_sha256: "4e8d4ad913479559b2ed8915ce8368986e8a581f2d65e48323e0a6dc70c14ad5"
 ---
 
 # Composio Integration Guide For OpenClaw Agents

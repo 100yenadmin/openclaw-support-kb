@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Pets (Petdex Mascots)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/pets"
-source_hash: "e7214374747962d0015207f8d8f22bd8f817a168905f99015078b5b93fd77e07"
+source_hash: "574c58506db06e96beef31bbe34a2baa7d01854de86e04e91e0792ff8bee67ff"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/pets.md"
@@ -219,7 +219,8 @@ Common gotchas:
 
 ## See also
 
-- The [`petdex` skill](../skills/bundled/productivity/productivity-petdex.md)
-  lets the agent install and switch pets for you on request.
+- The [`hermes-agent` skill](../skills/bundled/autonomous-ai-agents/autonomous-ai-agents-hermes-agent.md)
+  lets the agent install and switch pets for you on request (see its
+  `references/petdex.md`).
 
 ---

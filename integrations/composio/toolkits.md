@@ -2,10 +2,10 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "3333213064daa62f289762336fa872e169e3152c2c5ec443ceae53f540e711c7"
+source_hash: "1db01aac9e2c332a689642b1bf34f74a5962f303989c33d730ca976a6be29621"
 system: "composio"
 kb_namespace: "composio"
-catalog_snapshot_sha256: "5cb6fa93a0eea33c4ae0a9f3d25d394c0d808493a6ee7b95de9666a633bf8480"
+catalog_snapshot_sha256: "4e8d4ad913479559b2ed8915ce8368986e8a581f2d65e48323e0a6dc70c14ad5"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -25,9 +25,9 @@ No rendered toolkit text captured.
 ## Toolkit Slugs Captured From Static Page
 
 - gmail - https://composio.dev/toolkits/gmail
-- outlook - https://composio.dev/toolkits/outlook
 - googlecalendar - https://composio.dev/toolkits/googlecalendar
 - googledrive - https://composio.dev/toolkits/googledrive
+- outlook - https://composio.dev/toolkits/outlook
 - twitter - https://composio.dev/toolkits/twitter
 - googlesheets - https://composio.dev/toolkits/googlesheets
 - supabase - https://composio.dev/toolkits/supabase
