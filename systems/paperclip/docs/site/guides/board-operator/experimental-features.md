@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "experimental-features"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/board-operator/experimental-features.md"
-source_hash: "e58c3d0b1349787eb4dd5ff69338d5aacfec32b7eca42332803b51d8e66aad12"
+source_hash: "b11c5c62a0a3d3578e76745ab38f80bdf809a72030cf443078dd1ea7d672b15b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/board-operator/experimental-features.md"
@@ -66,5 +66,6 @@ Before enabling an experimental feature:
 
 ## Related references
 
+- See [Status Cards](/guides/board-operator/status-cards) for the watched-query summary experiment, refresh policies, and cost model.
 - See the CLI caveat in [Control-Plane Commands](/cli/control-plane-commands).
 - See the repo CLI reference in [`doc/CLI.md`](https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md) when working from the repository.

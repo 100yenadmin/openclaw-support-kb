@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "20cfcf0faf6f66c582aa4dd4ef4f137106eaf1471b765f66a0f934f60fd0c18e"
+source_hash: "081e25d5495dab8a1f49c5901d457c4fc5a10e24393772b34549602dfd84caaa"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -108,10 +108,35 @@ POST /v1/runs/{id}/approval      Resolve a pending approval
 POST /v1/runs/{id}/stop          Interrupt the run
 GET  /v1/capabilities            Machine-readable feature flags
 GET  /v1/models                  Lists hermes-agent
+GET  /api/model/options          Provider-aware picker inventory
 GET  /health, /health/detailed
 ```
 
 Setup, headers (`X-Hermes-Session-Id`, `X-Hermes-Session-Key`), and frontend wiring: [API Server](../user-guide/features/api-server).
+
+### Model catalog surfaces
+
+The OpenAI-compatible API intentionally keeps `GET /v1/models` minimal: it is
+the compatibility endpoint frontends expect, not the full Hermes provider/model
+picker catalog.
+
+If an external control plane needs Hermes' curated provider rows, per-model
+pricing, or capability hints, use one of the authenticated picker surfaces:
+
+- API server REST: `GET /api/model/options` with the API-server bearer key
+- Dashboard backend REST: `GET /api/model/options` with `X-Hermes-Session-Token`
+- TUI gateway RPC: `model.options`
+
+Those surfaces share the same payload builder and the same custom-provider
+probe policy:
+
+- Normal open: probe only the current custom provider so offline saved
+  endpoints do not stall the picker.
+- Explicit refresh (`refresh=1` or `refresh: true`): bust the provider-model
+  cache and probe all saved custom providers so live catalogs repopulate fully.
+
+Use `/v1/models` for OpenAI-client compatibility. Use `/api/model/options` or
+`model.options` when you are building a Hermes-aware model picker.
 
 ---
 

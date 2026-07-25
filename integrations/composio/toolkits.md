@@ -2,10 +2,10 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "1db01aac9e2c332a689642b1bf34f74a5962f303989c33d730ca976a6be29621"
+source_hash: "9197cc475ae74af11dbf2cde62e36e69f963262834865d6e121009ab82b51aa9"
 system: "composio"
 kb_namespace: "composio"
-catalog_snapshot_sha256: "4e8d4ad913479559b2ed8915ce8368986e8a581f2d65e48323e0a6dc70c14ad5"
+catalog_snapshot_sha256: "3c9ad257b9d3987959ea95347caf0592bf9857c5feafcac62d98adc15284ee94"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -54,6 +54,31 @@ No rendered toolkit text captured.
 - tavily - https://composio.dev/toolkits/tavily
 - jira - https://composio.dev/toolkits/jira
 - exa - https://composio.dev/toolkits/exa
+- cursor/framework/hermes-agent - https://composio.dev/toolkits/cursor/framework/hermes-agent
+- whatsapp/framework/claude-cowork - https://composio.dev/toolkits/whatsapp/framework/claude-cowork
+- googleslides/framework/claude-code - https://composio.dev/toolkits/googleslides/framework/claude-code
+- whatsapp/framework/claude-code - https://composio.dev/toolkits/whatsapp/framework/claude-code
+- whatsapp - https://composio.dev/toolkits/whatsapp
+- todoist/framework/hermes-agent - https://composio.dev/toolkits/todoist/framework/hermes-agent
+- cursor/framework/opencode - https://composio.dev/toolkits/cursor/framework/opencode
+- whatsapp/framework/codex - https://composio.dev/toolkits/whatsapp/framework/codex
+- cursor/framework/openclaw - https://composio.dev/toolkits/cursor/framework/openclaw
+- share_point/framework/claude-cowork - https://composio.dev/toolkits/share_point/framework/claude-cowork
+- todoist/framework/codex - https://composio.dev/toolkits/todoist/framework/codex
+- share_point/framework/claude-code - https://composio.dev/toolkits/share_point/framework/claude-code
+- freshdesk/framework/claude-code - https://composio.dev/toolkits/freshdesk/framework/claude-code
+- servicenow/framework/claude-code - https://composio.dev/toolkits/servicenow/framework/claude-code
+- cloudflare/framework/hermes-agent - https://composio.dev/toolkits/cloudflare/framework/hermes-agent
+- affinity/framework/claude-code - https://composio.dev/toolkits/affinity/framework/claude-code
+- postman/framework/codex - https://composio.dev/toolkits/postman/framework/codex
+- clickup/framework/hermes-agent - https://composio.dev/toolkits/clickup/framework/hermes-agent
+- new_relic/framework/claude-code - https://composio.dev/toolkits/new_relic/framework/claude-code
+- cursor/framework/claude-cowork - https://composio.dev/toolkits/cursor/framework/claude-cowork
+- clickup/framework/codex - https://composio.dev/toolkits/clickup/framework/codex
+- clockify/framework/claude-code - https://composio.dev/toolkits/clockify/framework/claude-code
+- basecamp/framework/claude-code - https://composio.dev/toolkits/basecamp/framework/claude-code
+- share_point - https://composio.dev/toolkits/share_point
+- share_point/framework/codex - https://composio.dev/toolkits/share_point/framework/codex
 
 ## Categories
 

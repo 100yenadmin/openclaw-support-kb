@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generatedAt": "2026-07-24T11:14:43.074Z",
+  "generatedAt": "2026-07-25T10:48:30.932Z",
   "openclawReleaseTag": "v2026.7.1",
   "docsSha256": "f7001f06f2bfc6b12c7a614fc7f17852e125ea0b050c5690c88be876a1b19287",
   "composioDocsSha256": "ca90771e8890be4947647938bb313f091f1e3466b4d16f125aec264b1107a187",
   "composioDocsIndexSha256": "02840310a3b43fb4777ee1f47b9e3e5116a003325a3f253879efc8de2d4f366b",
-  "composioToolkitsSha256": "4e8d4ad913479559b2ed8915ce8368986e8a581f2d65e48323e0a6dc70c14ad5",
-  "hermesDocsSha256": "3864d63ab69a4ed9dbfcc7de995719c68b11365d73ac89d99ecc27c30e6412ec",
+  "composioToolkitsSha256": "3c9ad257b9d3987959ea95347caf0592bf9857c5feafcac62d98adc15284ee94",
+  "hermesDocsSha256": "527aa4937214d47c3e90920c78257f8340cef13bd386031986b97a5ca4fb1e23",
   "hermesDocsIndexSha256": "8c1babd5b6d1146b7107f63f54a6f3f4b53e3bc0c9ff4e6dbff5642d54471acc",
   "paperclipDocsIndexSha256": "dea15772e7b77a3492af0f81d98a66999ff22cccaf812e6ed00a6bc24b5e756e",
-  "paperclipDocsSha256": "bcef9397552d08ce1660c77fe10e64c965e79bf233cc5615fe7f2719d114da31",
-  "artifactSha256": "301a5b52c17ef9ea7ebe301db3dd96b497832e89f08314a54b1f98b76daa1a2f",
-  "sourceCount": 1147,
+  "paperclipDocsSha256": "d3eadfbe8daeb3d7b4edf211b0354c865635bdc3282f4410d58ac271b04ebd49",
+  "artifactSha256": "4d729bb5c6947d163ed159f145198e9efd1435e626f61b5129761b0877ce9b54",
+  "sourceCount": 1151,
   "logicalSources": {
     "openclaw": 752,
     "composio": 119,
-    "hermes": 183,
-    "paperclip": 93
+    "hermes": 186,
+    "paperclip": 94
   },
   "minGbrainVersion": "0.19.0",
   "notes": "Local-first customer KB for GBrain. Installs as openclaw-support-kb for compatibility, with logical namespaces for OpenClaw, Hermes Agent, Paperclip Mission Control, and Composio integrations."
