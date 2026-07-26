@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "0f4d524e72b6eb4310d20b4e321cf55afd17f464a501f76a15cc5d8875adf1f2"
+source_hash: "ebdd8dfdd0554f66a1f8eb99f4c00fa8a3f3731f9a59427c1cac8dc9b9397897"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -24,7 +24,7 @@ Steps
 
 Collect attachments
 
-    Collect inbound attachments (`MediaPaths`, `MediaUrls`, `MediaTypes`).
+    Collect ordered inbound media facts (`path`, `url`, `contentType`, and `kind`).
 
 
 Select per capability
@@ -122,7 +122,7 @@ CLI entry
         "gemini-3-flash",
         "--allowed-tools",
         "read_file",
-        "Read the media at {{MediaPath}} and describe it in <= {{MaxChars}} characters.",
+        "Read the media at {{AttachmentPath}} and describe it in <= {{MaxChars}} characters.",
       ],
       maxChars: 500,
       maxBytes: 52428800,
@@ -131,7 +131,7 @@ CLI entry
     }
     ```
 
-    CLI templates can also use `{{MediaDir}}` (directory containing the media file), `{{OutputDir}}` (scratch dir created for this run), and `{{OutputBase}}` (scratch file base path, no extension).
+    CLI templates can also use `{{AttachmentUrl}}`, `{{AttachmentContentType}}`, `{{AttachmentDir}}`, `{{AttachmentIndex}}`, `{{OutputDir}}` (scratch dir created for this run), and `{{OutputBase}}` (scratch file base path, no extension). The older `{{MediaPath}}`, `{{MediaUrl}}`, `{{MediaType}}`, and `{{MediaDir}}` names remain deprecated compatibility aliases.
 
 
 
@@ -333,7 +333,7 @@ Shared models + overrides
                 "gemini-3-flash",
                 "--allowed-tools",
                 "read_file",
-                "Read the media at {{MediaPath}} and describe it in <= {{MaxChars}} characters.",
+                "Read the media at {{AttachmentPath}} and describe it in <= {{MaxChars}} characters.",
               ],
               capabilities: ["image", "video"],
             },
@@ -363,7 +363,7 @@ Audio + video only
               {
                 type: "cli",
                 command: "whisper",
-                args: ["--model", "base", "{{MediaPath}}"],
+                args: ["--model", "base", "{{AttachmentPath}}"],
               },
             ],
           },
@@ -380,7 +380,7 @@ Audio + video only
                   "gemini-3-flash",
                   "--allowed-tools",
                   "read_file",
-                  "Read the media at {{MediaPath}} and describe it in <= {{MaxChars}} characters.",
+                  "Read the media at {{AttachmentPath}} and describe it in <= {{MaxChars}} characters.",
                 ],
               },
             ],
@@ -403,7 +403,7 @@ Image only
             maxChars: 500,
             models: [
               { provider: "openai", model: "gpt-5.6-sol" },
-              { provider: "anthropic", model: "claude-opus-4-8" },
+              { provider: "anthropic", model: "claude-opus-5" },
               {
                 type: "cli",
                 command: "gemini",
@@ -412,7 +412,7 @@ Image only
                   "gemini-3-flash",
                   "--allowed-tools",
                   "read_file",
-                  "Read the media at {{MediaPath}} and describe it in <= {{MaxChars}} characters.",
+                  "Read the media at {{AttachmentPath}} and describe it in <= {{MaxChars}} characters.",
                 ],
               },
             ],

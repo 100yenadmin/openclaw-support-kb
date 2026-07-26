@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Android app"
 source: "https://docs.openclaw.ai/platforms/android"
-source_hash: "20ece3b5469dcb36188e36771b0ea4a7e1a4741b4badaa6811f83577b0f76c96"
+source_hash: "488e5dc33ae667e2cbf7a13cd1fe76ea0d6a36ef1d3a2a4b0e7ec88697fc60da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/android.md"
@@ -24,6 +24,7 @@ The official Android app is available on [Google Play](https://play.google.com/s
 - Install: [Google Play](https://play.google.com/store/apps/details?id=ai.openclaw.app&hl=en_IN) or `OpenClaw-Android.apk` from a supported [GitHub Release](https://github.com/openclaw/openclaw/releases), [Getting Started](/start/getting-started) for the Gateway, then [Pairing](/channels/pairing).
 - Gateway: [Runbook](/gateway) + [Configuration](/gateway/configuration).
   - Protocols: [Gateway protocol](/gateway/protocol) (nodes + control plane).
+- **Settings → OpenClaw** opens a dedicated Gateway settings assistant when the operator connection has `operator.admin` and the Gateway supports `openclaw.chat`. Its setup conversation stays separate from ordinary Chat, redacts secret replies locally, and moves to Chat only after you tap **Open Chat**.
 
 System control (launchd/systemd) lives on the Gateway host — see [Gateway](/gateway).
 

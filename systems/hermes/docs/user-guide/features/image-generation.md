@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/image-generation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/image-generation"
-source_hash: "aad77974861e38b01ea45d465daf8c779a36ac0b16cee6c068f1e279e852c857"
+source_hash: "e71f571546f646878601972701ec351e3442aceee1c430acfdcd816328fd1ac6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/image-generation.md"
@@ -133,6 +133,19 @@ FAL models with an editing endpoint: `flux-2/klein/9b`, `flux-2-pro`,
 `qwen-image`. Pure text-to-image FAL models (`z-image/turbo`, `recraft`,
 `krea/*`) reject image inputs with a clear error pointing you at an
 edit-capable model.
+
+:::note OpenAI (Codex auth) is best-effort
+
+The Codex surface (`chatgpt.com/backend-api/codex`) hosts `image_generation`
+as a tool the chat model may call, and Hermes cannot force the call — the
+backend rejects every `tool_choice` shape for hosted tools, so the request
+relies on instructions to steer the model. When the host model declines to
+invoke the tool, the call fails with `empty_response`. Whether the hosted
+image tool is reachable at all has also been reported to vary between
+accounts. If you need image generation to work deterministically, configure
+the **OpenAI** (API key), **FAL**, or **xAI** backend instead.
+
+:::
 
 The active model's editing capability is surfaced in the tool description at
 runtime, so the agent knows whether `image_url` will be honored before it

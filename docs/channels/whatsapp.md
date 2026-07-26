@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "638f063312fec59842d3a6fdc2b976ac36de51f8d08bc7aaba1d6f9e2738ac54"
+source_hash: "f9a30f53573eace3df560d4116699468b808388d1cd7bc975b1cccabc441f40d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -99,7 +99,10 @@ openclaw gateway
 
 
 
-Approve the first pairing request (pairing mode)
+Approve the first DM access request (pairing mode)
+
+    Open **Settings → Channels → DM access requests**, find the WhatsApp account,
+    and approve the sender. If you prefer the CLI:
 
 ```bash
 openclaw pairing list whatsapp
@@ -108,7 +111,9 @@ CODE
 
 ```
 
-    Pairing requests expire after 1 hour; pending requests are capped at 3 per account.
+    DM access requests expire after 1 hour; pending requests are capped at 3 per
+    account. This approval is separate from the WhatsApp login QR used to link the
+    account itself.
 
 
 
@@ -156,7 +161,6 @@ Personal-number fallback
 - Direct chats use DM session rules (`session.dmScope`; default `main` collapses DMs into the agent main session). Group sessions are isolated per JID (`agent:<agentId>:whatsapp:group:<jid>`).
 - WhatsApp Channels/Newsletters can be explicit outbound targets via their native `@newsletter` JID, using channel session metadata (`agent:<agentId>:whatsapp:channel:<jid>`) rather than DM semantics.
 - WhatsApp Web transport honors standard proxy environment variables on the gateway host (`HTTPS_PROXY`, `HTTP_PROXY`, `NO_PROXY`, lowercase variants). Prefer host-level proxy config over per-channel settings.
-- With `messages.removeAckAfterReply` enabled, OpenClaw clears the ack reaction once a visible reply is delivered.
 
 ## Call the current requester with MeowCaller (experimental)
 
@@ -532,17 +536,12 @@ Set `messages.statusReactions.enabled: true` to let WhatsApp replace the ack rea
   messages: {
     statusReactions: {
       enabled: true,
-      emojis: {
-        deploy: "🛫",
-        build: "🏗️",
-        concierge: "💁",
-      },
     },
   },
 }
 ```
 
-Notes: `channels.whatsapp.ackReaction` still controls eligibility for direct messages and groups; the queued state uses the same effective emoji as plain ack reactions; WhatsApp has one bot reaction slot per message, so lifecycle updates replace the current reaction in place; `messages.removeAckAfterReply: true` clears the final status reaction after the configured done/error hold; tool emoji categories include `tool`, `coding`, `web`, `deploy`, `build`, and `concierge`.
+Notes: `channels.whatsapp.ackReaction` still controls eligibility for direct messages and groups; the queued state uses the same effective emoji as plain ack reactions; WhatsApp has one bot reaction slot per message, so lifecycle updates replace the current reaction in place and restore the ack after the final done/error state.
 
 ## Multi-account and credentials
 
@@ -738,7 +737,8 @@ Primary reference: [Configuration reference - WhatsApp](/gateway/config-channels
 | Access           | `dmPolicy`, `allowFrom`, `groupPolicy`, `groupAllowFrom`, `groups`                                             |
 | Delivery         | `textChunkLimit`, `streaming.chunkMode`, `mediaMaxMb`, `sendReadReceipts`, `ackReaction`, `reactionLevel`      |
 | Multi-account    | `accounts.<id>.enabled`, `accounts.<id>.authDir`, and other per-account overrides                              |
-| Operations       | `configWrites`, `debounceMs`, `enabled`                                                                        |
+| Operations       | `configWrites`, `enabled`                                                                                      |
+| Inbound batching | `messages.inbound.debounceMs`, `messages.inbound.byChannel.whatsapp`                                           |
 | Session behavior | `session.dmScope`, `historyLimit`, `dmHistoryLimit`, `dms.<id>.historyLimit`                                   |
 | Prompts          | `groups.<id>.systemPrompt`, `groups["*"].systemPrompt`, `direct.<id>.systemPrompt`, `direct["*"].systemPrompt` |
 

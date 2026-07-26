@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "a0a8c97fdcccd78e2ccbd0d81bba0a15e43c5ff1b0fd81ae7c6b5bc8627b703d"
+source_hash: "57160fd3cc5d6a7e5061adf07389728c1f1d7d5ecd6d01f2233b5d7103f5be69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -34,7 +34,8 @@ Source: https://docs.openclaw.ai/
 
 <p align="center">
   <strong>Any OS gateway for AI agents across Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp, Zalo, and more.</strong><br />
-  Send a message, get an agent response from your pocket. Run one Gateway across channel plugins, WebChat, and mobile nodes.
+  Send a message, get an agent response from your pocket. Run one Gateway across channel plugins, WebChat, and mobile nodes.<br />
+  Developed in the open by the <a href="https://openclaw.org">OpenClaw Foundation</a>, a non-profit.
 </p>
 
 Columns

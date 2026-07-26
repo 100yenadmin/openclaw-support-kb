@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "63c1d587df2a6e6b35ae1c061e94e87df7e5274c072659724fb90bbf0711aa25"
+source_hash: "7a47242f03e2501b9295a3f4df44a5b8e8063d51f1e19c4c3a044763e6dd0838"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -202,6 +202,16 @@ openclaw browser dialog --dismiss --dialog-id d1
 Managed Chrome profiles save ordinary click-triggered downloads into the OpenClaw downloads directory (`/tmp/openclaw/downloads` by default, or the configured temp root). Use `waitfordownload` or `download` when the agent needs to wait for a specific file and return its path; those explicit waiters own the next download. Uploads accept files from the OpenClaw temp uploads root and OpenClaw-managed inbound media, including `media://inbound/<id>` and sandbox-relative `media/inbound/<id>` references. Nested media refs, traversal, and arbitrary local paths are rejected.
 
 When an action opens a modal dialog, the action response returns `blockedByDialog` with `browserState.dialogs.pending`; pass `--dialog-id` to answer it directly. Dialogs handled outside OpenClaw appear under `browserState.dialogs.recent`.
+
+Batch actions:
+
+```bash
+openclaw browser batch --actions '[{"kind":"wait","timeMs":500},{"kind":"click","ref":"12"},{"kind":"type","ref":"23","text":"hello"}]'
+openclaw browser batch --actions-file plan.json
+openclaw browser batch --actions-file - --continue
+```
+
+`openclaw browser batch` sends a `kind="batch"` `/act` request with nested `BrowserActRequest` actions (`wait`, `click`, `type`, `evaluate`, ...) — not `open`/`navigate`/`snapshot`/`screenshot`, which are CLI subcommands, not `/act` kinds. `--continue` sets `stopOnError=false` (default stops on first error); `--target-id` scopes the whole batch to one tab. A failed nested action makes the command exit nonzero; use `--json` to retain the ordered `results` response. See [Browser batch CLI](/tools/browser-control#browser-batch-cli) for the full contract (ref lifecycle, target id conflicts, error summary). `batch` is not supported on `profile="user"` / existing-session profiles.
 
 ## State and storage
 

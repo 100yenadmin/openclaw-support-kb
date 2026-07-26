@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock Mantle"
 source: "https://docs.openclaw.ai/providers/bedrock-mantle"
-source_hash: "49150b61874528f4459dd5e39d54a5244733512ce8e0e6966ca7bdf81afcb208"
+source_hash: "2c7efff1c8cc3410f8827efb879a23e70ec5cfb869e89f29a92171bb3d352d18"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock-mantle.md"
@@ -193,8 +193,9 @@ Endpoint unavailability
 
 Claude via the Anthropic Messages route
 
-    When automatic discovery owns the model list, OpenClaw appends four Claude
+    When automatic discovery owns the model list, OpenClaw appends five Claude
     models after a successful lookup, regardless of what `/v1/models` returns:
+    `amazon-bedrock-mantle/anthropic.claude-opus-5` (Claude Opus 5),
     `amazon-bedrock-mantle/anthropic.claude-sonnet-5` (Claude Sonnet 5),
     `amazon-bedrock-mantle/anthropic.claude-opus-4-7` (Claude Opus 4.7), and
     `amazon-bedrock-mantle/anthropic.claude-mythos-5` (Claude Mythos 5), plus
@@ -203,6 +204,12 @@ Claude via the Anthropic Messages route
     the same bearer-authenticated Anthropic-compatible endpoint
     (`<mantle-base>/anthropic`), so the AWS bearer token is not treated like an
     Anthropic API key.
+
+    Claude Opus 5 publishes a 1,000,000-token context window, 128,000-token
+    output limit, image input, and `$5/$25` input/output pricing. Adaptive
+    thinking defaults to `high`; `/think off` disables thinking, and
+    `/think xhigh|max` uses the model's native effort levels. OpenClaw omits
+    caller-selected sampling parameters.
 
     Claude Sonnet 5 always uses adaptive thinking and defaults to `high`
     effort. `/think off` and `/think minimal` map to `low` because the Mantle

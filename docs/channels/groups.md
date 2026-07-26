@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "c7a066799c3640741e381efc6a4d1e79b6405d8cf7c0855107f1acee9f729b13"
+source_hash: "fa14f94a9c686060cbe2aa361fdd7cc9f6e9d2cfec8624643b6cecf1eb2bfe10"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -123,6 +123,8 @@ By default OpenClaw keeps context as received: allowlists decide who can trigger
 | `"allowlist_quote"` | `allowlist`, plus keep the explicitly quoted/replied-to message from any sender. |
 
 Set it per channel (`channels.<channel>.contextVisibility`), per account (`channels.<channel>.accounts.<accountId>.contextVisibility`), or globally (`channels.defaults.contextVisibility`). Channels that fetch supplemental context (Discord, Feishu, iMessage, Matrix, Microsoft Teams, Signal, Slack, Telegram, WhatsApp) apply the policy when building inbound context; unknown policy combinations fail closed and omit the context.
+
+These modes filter channel-supplied supplemental context only. Tool policy and the owner-only tool inventory are still selected from the current turn's originating requester, not every sender represented in the prompt. See [Requester-scoped controls and prompt context](/gateway/security#requester-scoped-controls-and-prompt-context).
 
 ![Group message flow](/images/groups-flow.svg)
 

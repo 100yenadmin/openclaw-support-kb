@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "e5dadc5aa0e33941730f83c7243d0ec484587b8f938288558e14dfdb477e5a3b"
+source_hash: "1505842708d3c41e293ce86ffa8e7705b464727ea6313cf994ea351ac8c2c9fc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -796,7 +796,7 @@ Look for:
 
 - Cron enabled and next wake present.
 - Job run history status (`ok`, `skipped`, `error`).
-- Heartbeat skip reasons (`quiet-hours`, `requests-in-flight`, `cron-in-progress`, `lanes-busy`, `alerts-disabled`, `empty-heartbeat-file`, `no-tasks-due`).
+- Heartbeat skip reasons (`quiet-hours`, `requests-in-flight`, `cron-in-progress`, `lanes-busy`, `alerts-disabled`, `empty-heartbeat-file`).
 
 AccordionGroup
 
@@ -806,8 +806,7 @@ Common signatures
     - `cron: scheduler disabled; jobs will not run automatically` → cron disabled.
     - `cron: timer tick failed` → scheduler tick failed; check file/log/runtime errors.
     - `heartbeat skipped` with `reason=quiet-hours` → outside active hours window.
-    - `heartbeat skipped` with `reason=empty-heartbeat-file` → `HEARTBEAT.md` exists but only contains blank, comment, header, fence, or empty-checklist scaffolding, so OpenClaw skips the model call.
-    - `heartbeat skipped` with `reason=no-tasks-due` → `HEARTBEAT.md` contains a `tasks:` block, but none of the tasks are due on this tick.
+    - `heartbeat skipped` with `reason=empty-heartbeat-file` → heartbeat monitor scratch only contains blank, comment, header, fence, or empty-checklist scaffolding, so OpenClaw skips the model call.
     - `heartbeat: unknown accountId` → invalid account id for heartbeat delivery target.
     - `heartbeat skipped` with `reason=dm-blocked` → heartbeat target resolved to a DM-style destination while `agents.defaults.heartbeat.directPolicy` (or per-agent override) is set to `block`.
 

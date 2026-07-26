@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
-source_hash: "7eb6511b10717b79b34abfd094de20c4ea89e78280b924a9f39e08c711cb97fb"
+source_hash: "d9e49c9172c94fb8eee80eb6309b79ef3160fbdbbdc5e8a55291e569e34c118e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture.md"
@@ -47,23 +47,23 @@ SDK overview
 
 Capabilities are the public **native plugin** model inside OpenClaw. Every native OpenClaw plugin registers against one or more capability types:
 
-| Capability             | Registration method                              | Example plugins                |
-| ---------------------- | ------------------------------------------------ | ------------------------------ |
-| Text inference         | `api.registerProvider(...)`                      | `anthropic`, `openai`          |
-| CLI inference backend  | `api.registerCliBackend(...)`                    | `anthropic`, `openai`          |
-| Embeddings             | `api.registerEmbeddingProvider(...)`             | Provider-owned vector plugins  |
-| Speech                 | `api.registerSpeechProvider(...)`                | `elevenlabs`, `microsoft`      |
-| Realtime transcription | `api.registerRealtimeTranscriptionProvider(...)` | `openai`                       |
-| Realtime voice         | `api.registerRealtimeVoiceProvider(...)`         | `google`, `openai`             |
-| Media understanding    | `api.registerMediaUnderstandingProvider(...)`    | `google`, `openai`             |
-| Transcripts source     | `api.registerTranscriptSourceProvider(...)`      | `discord`                      |
-| Image generation       | `api.registerImageGenerationProvider(...)`       | `fal`, `google`, `openai`      |
-| Music generation       | `api.registerMusicGenerationProvider(...)`       | `fal`, `google`, `minimax`     |
-| Video generation       | `api.registerVideoGenerationProvider(...)`       | `fal`, `google`, `qwen`        |
-| Web fetch              | `api.registerWebFetchProvider(...)`              | `firecrawl`                    |
-| Web search             | `api.registerWebSearchProvider(...)`             | `brave`, `firecrawl`, `google` |
-| Channel / messaging    | `api.registerChannel(...)`                       | `matrix`, `msteams`            |
-| Gateway discovery      | `api.registerGatewayDiscoveryService(...)`       | `bonjour`                      |
+| Capability             | Registration method                              | Example plugins                                             |
+| ---------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| Text inference         | `api.registerProvider(...)`                      | `anthropic`, `openai`                                       |
+| CLI inference backend  | `api.registerCliBackend(...)`                    | `anthropic`, `openai`                                       |
+| Embeddings             | `api.registerEmbeddingProvider(...)`             | Provider-owned vector plugins                               |
+| Speech                 | `api.registerSpeechProvider(...)`                | `elevenlabs`, `microsoft`                                   |
+| Realtime transcription | `api.registerRealtimeTranscriptionProvider(...)` | `openai`                                                    |
+| Realtime voice         | `api.registerRealtimeVoiceProvider(...)`         | `google`, `openai`                                          |
+| Media understanding    | `api.registerMediaUnderstandingProvider(...)`    | `google`, `openai`                                          |
+| Transcripts source     | `api.registerTranscriptSourceProvider(...)`      | `discord`, `google-meet`, `teams-meetings`, `zoom-meetings` |
+| Image generation       | `api.registerImageGenerationProvider(...)`       | `fal`, `google`, `openai`                                   |
+| Music generation       | `api.registerMusicGenerationProvider(...)`       | `fal`, `google`, `minimax`                                  |
+| Video generation       | `api.registerVideoGenerationProvider(...)`       | `fal`, `google`, `qwen`                                     |
+| Web fetch              | `api.registerWebFetchProvider(...)`              | `firecrawl`                                                 |
+| Web search             | `api.registerWebSearchProvider(...)`             | `brave`, `firecrawl`, `google`                              |
+| Channel / messaging    | `api.registerChannel(...)`                       | `matrix`, `msteams`                                         |
+| Gateway discovery      | `api.registerGatewayDiscoveryService(...)`       | `bonjour`                                                   |
 
 Note
 
@@ -236,7 +236,7 @@ That matters for context-sensitive plugins. A channel can hide or expose message
 
 This is why embedded-runner routing changes are still plugin work: the runner is responsible for forwarding the current chat/session identity into the plugin discovery boundary so the shared `message` tool exposes the right channel-owned surface for the current turn.
 
-For channel-owned execution helpers, bundled plugins should keep the execution runtime inside their own plugin modules. Core no longer owns the Discord, Slack, Telegram, or WhatsApp message-action runtimes under `src/agents/tools`. We do not publish separate `plugin-sdk/*-action-runtime` subpaths, and bundled plugins should import their own local runtime code directly from their plugin-owned modules.
+For channel-owned execution helpers, channel plugins should keep the execution runtime inside their own plugin modules. Core no longer owns the Discord, Slack, Telegram, or WhatsApp message-action runtimes under `src/agents/tools`. We do not publish separate `plugin-sdk/*-action-runtime` subpaths, and those plugins should import their own local runtime code directly from their plugin-owned modules.
 
 The same boundary applies to provider-named SDK seams in general: core should not import channel-specific convenience barrels for Discord, Signal, Slack, WhatsApp, or similar plugins. If core needs a behavior, either consume the bundled plugin's own `api.ts` / `runtime-api.ts` barrel or promote the need into a narrow generic capability in the shared SDK.
 

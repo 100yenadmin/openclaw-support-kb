@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration reference"
 source: "https://docs.openclaw.ai/gateway/configuration-reference"
-source_hash: "a6e76c3c02870d3046fa781ac3ef61416e542d52e282b36131622250865eed95"
+source_hash: "33da04a69631a0a5845de23522a11d42bbd27fba50c88afefbfdd8fa6dfc7a71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-reference.md"
@@ -517,7 +517,6 @@ See [Plugins](/tools/plugin).
     prefs: {
       theme: "claw", // claw | knot | dash | custom
       themeMode: "system", // light | dark | system
-      textScale: 100, // 90 | 100 | 110 | 125 | 140
       locale: "en",
       chatShowThinking: true,
       chatShowToolCalls: true,
@@ -532,7 +531,7 @@ See [Plugins](/tools/plugin).
 
 - `seamColor`: accent color for native app UI chrome (Talk Mode bubble tint, etc.).
 - `assistant`: Control UI identity override. Falls back to active agent identity.
-- `prefs`: operator display preferences. This is the canonical home so agents can
+- `prefs`: cross-device operator preferences. This is the canonical home so agents can
   change them through the approval gate and every Control UI client stays in
   sync; browsers mirror the values into local storage for instant boot and keep
   a device-local copy when they cannot write config (viewer scope, offline).
@@ -542,6 +541,8 @@ See [Plugins](/tools/plugin).
   delivery remains separate and unchanged.
   `showAdvancedSettings` defaults to `false`; Settings search may temporarily
   open one matching advanced group without changing this preference.
+  Presentation-only preferences such as text scale, chat width, and live
+  sidebar activity stay browser-local and are configured in Settings.
   Connected clients apply server-side changes live: the gateway broadcasts a
   hash-only `config.changed` event after every persisted config write and
   clients refresh their snapshot (skipped while a local settings draft has
@@ -581,7 +582,6 @@ See [Plugins](/tools/plugin).
       // toolTitles: false, // opt-in AI purpose titles for tool calls (spends utility-model tokens)
       // embedSandbox: "scripts", // strict | scripts | trusted
       // allowExternalEmbedUrls: false, // dangerous: allow absolute external http(s) embed URLs
-      // chatMessageMaxWidth: "min(1280px, 82%)", // optional centered chat transcript max-width
       // allowedOrigins: ["https://control.example.com"], // required for non-loopback Control UI
       // dangerouslyAllowHostHeaderOriginFallback: false, // dangerous Host-header origin fallback mode
     },
@@ -663,13 +663,13 @@ Gateway field details
   Default `false`.
 - `controlUi.allowedOrigins`: explicit browser-origin allowlist for Gateway WebSocket connects. Required for public non-loopback browser origins. Private same-origin LAN/Tailnet UI loads from loopback, RFC1918/link-local, `.local`, `.ts.net`, or Tailscale CGNAT hosts are accepted without enabling Host-header fallback.
 - `controlUi.toolTitles`: opt in to AI-generated purpose titles for tool calls in Control UI chat. Default: `false` (tool rendering stays fully deterministic with no background model calls). When enabled, the `chat.toolTitles` method labels complex calls through standard utility-model routing — the agent's `utilityModel` (an operator decision that may send bounded tool arguments to the chosen provider, like every utility task), or the session provider's declared small-model default (OpenAI → `gpt-5.6-luna`, Anthropic → `claude-haiku-4-5`) — and caches results in the per-agent state database so repeat views never re-bill. `utilityModel: \"\"` disables titles like every other utility task; titles never fall back to the primary model.
-- `controlUi.chatMessageMaxWidth`: optional max-width for the centered Control UI chat transcript. Accepts constrained CSS width values such as `960px`, `82%`, `min(1280px, 82%)`, and `calc(100% - 2rem)`.
 - `controlUi.dangerouslyAllowHostHeaderOriginFallback`: dangerous mode that enables Host-header origin fallback for deployments that intentionally rely on Host-header origin policy.
 - `terminal.enabled`: opt in to the admin-scoped operator terminal. Default: `false`. The terminal starts a host PTY in the selected agent workspace, inherits the Gateway process environment, and is refused for agents with `sandbox.mode: "all"`. Enable it only for trusted operator deployments; changing it restarts the Gateway and updates the Control UI content security policy.
 - `terminal.shell`: optional shell executable. When unset, OpenClaw uses `$SHELL` on Unix and `%ComSpec%` on Windows.
 - `terminal.detachedSessionTimeoutSeconds`: how long a terminal session survives after its connection drops (page reload, laptop sleep), staying reattachable via `terminal.attach` with its recent output replayed. Default: `300`. Set `0` to kill sessions the moment their connection drops. Detached sessions keep running their commands, so shorten this on shared or exposed hosts.
 - `remote.transport`: `ssh` (default) or `direct` (ws/wss). For `direct`, `remote.url` must be `wss://` for public hosts; plaintext `ws://` is accepted only for loopback, LAN, link-local, `.local`, `.ts.net`, and Tailscale CGNAT hosts.
 - `remote.remotePort`: gateway port on the remote SSH host. Defaults to `18789`; use this when the local tunnel port differs from the remote gateway port.
+- `remote.tlsFingerprint`: expected SHA-256 certificate fingerprint for a remote `wss://` Gateway. The macOS app applies it to both operator/control and companion-node connections. Without an explicit value, macOS records a first-use pin only after normal system trust succeeds.
 - `remote.sshHostKeyPolicy`: macOS SSH tunnel host-key policy. `strict` is the default and requires an already trusted key. `openssh` is an explicit opt-in to the effective OpenSSH configuration for managed aliases; review matching user and system SSH settings before using it. The macOS app and `configure-remote` reset this policy to `strict` when changing targets unless explicitly opted in again.
 - `gateway.remote.token` / `.password` are remote-client credential fields. They do not configure gateway auth by themselves.
 - `gateway.push.apns.relay.baseUrl`: base HTTPS URL for the external APNs relay used after relay-backed iOS builds publish registrations to the gateway. Public App Store builds use the hosted OpenClaw relay. Custom relay URLs must match a deliberately separate iOS build/deployment path whose relay URL points at that relay.
@@ -1244,7 +1244,7 @@ writer is best-effort, not a lossless compliance archive.
 }
 ```
 
-- Default log file: `/tmp/openclaw/openclaw-YYYY-MM-DD.log`.
+- Default log file: `/tmp/openclaw/openclaw-YYYY-MM-DD.log`; named profiles use `/tmp/openclaw/openclaw-<profile>-YYYY-MM-DD.log`.
 - Set `logging.file` for a stable path.
 - `consoleLevel` bumps to `debug` when `--verbose`.
 - `maxFileBytes`: maximum active log file size in bytes before rotation (positive integer; default: `104857600` = 100 MB). OpenClaw keeps up to five numbered archives beside the active file.
@@ -1498,28 +1498,34 @@ See [Cron Jobs](/automation/cron-jobs). Isolated cron executions are tracked as 
 
 Template placeholders expanded in `tools.media.models[].args`:
 
-| Variable           | Description                                       |
-| ------------------ | ------------------------------------------------- |
-| `{{Body}}`         | Full inbound message body                         |
-| `{{RawBody}}`      | Raw body (no history/sender wrappers)             |
-| `{{BodyStripped}}` | Body with group mentions stripped                 |
-| `{{From}}`         | Sender identifier                                 |
-| `{{To}}`           | Destination identifier                            |
-| `{{MessageSid}}`   | Channel message id                                |
-| `{{SessionId}}`    | Current session UUID                              |
-| `{{IsNewSession}}` | `"true"` when new session created                 |
-| `{{MediaUrl}}`     | Inbound media pseudo-URL                          |
-| `{{MediaPath}}`    | Local media path                                  |
-| `{{MediaType}}`    | Media type (image/audio/document/…)               |
-| `{{Transcript}}`   | Audio transcript                                  |
-| `{{Prompt}}`       | Resolved media prompt for CLI entries             |
-| `{{MaxChars}}`     | Resolved max output chars for CLI entries         |
-| `{{ChatType}}`     | `"direct"` or `"group"`                           |
-| `{{GroupSubject}}` | Group subject (best effort)                       |
-| `{{GroupMembers}}` | Group members preview (best effort)               |
-| `{{SenderName}}`   | Sender display name (best effort)                 |
-| `{{SenderE164}}`   | Sender phone number (best effort)                 |
-| `{{Provider}}`     | Provider hint (whatsapp, telegram, discord, etc.) |
+| Variable                    | Description                                       |
+| --------------------------- | ------------------------------------------------- |
+| `{{Body}}`                  | Full inbound message body                         |
+| `{{RawBody}}`               | Raw body (no history/sender wrappers)             |
+| `{{BodyStripped}}`          | Body with group mentions stripped                 |
+| `{{From}}`                  | Sender identifier                                 |
+| `{{To}}`                    | Destination identifier                            |
+| `{{MessageSid}}`            | Channel message id                                |
+| `{{SessionId}}`             | Current session UUID                              |
+| `{{IsNewSession}}`          | `"true"` when new session created                 |
+| `{{AttachmentUrl}}`         | Current attachment URL or provider reference      |
+| `{{AttachmentPath}}`        | Current attachment local path                     |
+| `{{AttachmentContentType}}` | Current attachment MIME content type              |
+| `{{AttachmentDir}}`         | Directory containing `AttachmentPath`             |
+| `{{AttachmentIndex}}`       | Zero-based source fact index                      |
+| `{{Transcript}}`            | Audio transcript                                  |
+| `{{Prompt}}`                | Resolved media prompt for CLI entries             |
+| `{{MaxChars}}`              | Resolved max output chars for CLI entries         |
+| `{{ChatType}}`              | `"direct"` or `"group"`                           |
+| `{{GroupSubject}}`          | Group subject (best effort)                       |
+| `{{GroupMembers}}`          | Group members preview (best effort)               |
+| `{{SenderName}}`            | Sender display name (best effort)                 |
+| `{{SenderE164}}`            | Sender phone number (best effort)                 |
+| `{{Provider}}`              | Provider hint (whatsapp, telegram, discord, etc.) |
+
+The legacy `{{MediaPath}}`, `{{MediaUrl}}`, `{{MediaType}}`, and `{{MediaDir}}`
+names remain available during the plugin SDK compatibility window but are
+deprecated. New configuration should use the `Attachment*` variables.
 
 ---
 

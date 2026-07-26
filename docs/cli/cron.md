@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "8f7165fa98d08b487ce6cda07a967d614e83a35d9c1a54092d6922d65ef3acbe"
+source_hash: "0ddd814387ed0195a3c0bfc613d78f8b30419d5372321b5dedfc24c78a46a840"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -316,6 +316,18 @@ openclaw cron runs --id <job-id> --run-id <run-id>
 `cron list --json` and `cron show <job-id> --json` include a top-level `status` field on each job, computed from `enabled`, `state.runningAtMs`, and `state.lastRunStatus`. Values: `disabled`, `running`, `ok`, `error`, `skipped`, or `idle`. JSON status stays canonical and undecorated so external tooling can read job state without re-deriving it; human output may decorate repeated `error` statuses with a failure count.
 
 `cron runs` entries include delivery diagnostics with the intended cron target, the resolved target, message-tool sends, fallback use, and delivered state.
+
+Private per-job scratch (heartbeat checklists and similar monitor context):
+
+```bash
+openclaw cron scratch <job-id>                  # print current scratch content
+openclaw cron scratch <job-id> --json           # scratch plus revision metadata
+openclaw cron scratch <job-id> --set "text"     # replace scratch with exact text
+openclaw cron scratch <job-id> --file notes.md  # replace scratch from a file (- for stdin)
+openclaw cron scratch <job-id> --unset          # remove the scratch row
+```
+
+Scratch is stored in the shared state database, capped at 256 KiB, and never included in `cron list`/`cron get`/`cron runs` output. Writes are compare-and-swap guarded against the revision read at command start; pass `--expected-revision <n>` to pin an explicit revision instead. See [Heartbeat](/gateway/heartbeat#monitor-scratch-optional) for how heartbeat monitors use scratch.
 
 Agent and session retargeting:
 

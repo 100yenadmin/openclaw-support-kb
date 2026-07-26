@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "8f9315b0aa7ff99335fbfb9ddb377bda34d8cbc3cd3804ea719b79cf51c397c2"
+source_hash: "6d8ba7f8903d52892b4c23ae2aff1a1fab99a5aff850cbc3d3a5c911b17a420a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -159,7 +159,7 @@ Further restrict tools for specific providers or models. Order: base profile →
 
 ### `tools.toolsBySender`
 
-Restricts tools for a specific requester identity. This is defense-in-depth on top of channel access control; sender values must come from the channel adapter, not message text.
+Restricts tools for the current turn's originating requester. This is defense-in-depth on top of channel access control; sender values must come from the channel adapter, not message text. It does not authenticate other content in the model prompt; see [Requester-scoped controls and prompt context](/gateway/security#requester-scoped-controls-and-prompt-context).
 
 ```json5
 {
@@ -283,7 +283,7 @@ Configures inbound media understanding (image/audio/video):
         {
           type: "cli",
           command: "whisper",
-          args: ["--model", "base", "{{MediaPath}}"],
+          args: ["--model", "base", "{{AttachmentPath}}"],
           capabilities: ["audio"],
         },
         { provider: "ollama", model: "gemma4:26b", capabilities: ["image"] },
@@ -313,7 +313,7 @@ Media model entry fields
     **CLI entry** (`type: "cli"`):
 
     - `command`: executable to run
-    - `args`: templated args (supports `{{MediaPath}}`, `{{Prompt}}`, `{{MaxChars}}`, etc.; `openclaw doctor --fix` migrates deprecated `{input}` placeholders to `{{MediaPath}}`)
+    - `args`: templated args (supports `{{AttachmentPath}}`, `{{AttachmentUrl}}`, `{{AttachmentContentType}}`, `{{AttachmentDir}}`, `{{AttachmentIndex}}`, `{{Prompt}}`, `{{MaxChars}}`, etc.; `openclaw doctor --fix` migrates deprecated `{input}` placeholders to `{{AttachmentPath}}`). The older `{{MediaPath}}`, `{{MediaUrl}}`, `{{MediaType}}`, and `{{MediaDir}}` aliases remain available during their compatibility window but are deprecated.
 
     **Common fields:**
 

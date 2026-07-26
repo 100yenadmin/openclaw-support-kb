@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "f9c64f9ee4e714511bbc9927aafbab71fc8ab9a2a109a0c8af6eba8bea842f83"
+source_hash: "f9c28edd26f12b16ddb706a4387b60921841d6f96e9b6672acc6986a3040dbff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -59,7 +59,9 @@ Tail the latest log
     ```
     If RPC is down, fall back to:
     ```bash
-    tail -f "$(ls -t /tmp/openclaw/openclaw-*.log | head -1)"
+    tail -f "/tmp/openclaw/openclaw-$(date +%F).log"
+    # Named profile example:
+    tail -f "/tmp/openclaw/openclaw-dev-$(date +%F).log"
     ```
     File logs are separate from service logs; see [Logging](/logging) and [Troubleshooting](/gateway/troubleshooting).
 
@@ -1430,7 +1432,7 @@ AccordionGroup
 
 Where are logs?
 
-    File logs (structured): `/tmp/openclaw/openclaw-YYYY-MM-DD.log`. Set a stable path via `logging.file`; file log level via `logging.level`; console verbosity via `--verbose` and `logging.consoleLevel`.
+    File logs (structured): `/tmp/openclaw/openclaw-YYYY-MM-DD.log` for the default profile, or `/tmp/openclaw/openclaw-<profile>-YYYY-MM-DD.log` for a named profile. Set a stable path via `logging.file`; file log level via `logging.level`; console verbosity via `--verbose` and `logging.consoleLevel`.
 
     Fastest tail:
 

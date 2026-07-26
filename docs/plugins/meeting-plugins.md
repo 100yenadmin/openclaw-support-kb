@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meeting plugins"
 source: "https://docs.openclaw.ai/plugins/meeting-plugins"
-source_hash: "203f6f658256440d1e1910372096f9c086ce2da91ab22f6264bfe5eeb4a66a0b"
+source_hash: "6dc61596cd914106b0297dcb8cac42c815f1f4da2b716a10ed680f2fe42be229"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/meeting-plugins.md"
@@ -19,13 +19,13 @@ These plugins participate in meetings. They are separate from messaging channels
 
 ## Choose a plugin
 
-| Platform        | Plugin                                      | Accepted meeting links                                                                                      | Installation                             | Participation paths                                      | Platform-specific capabilities                                                                                |
-| --------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Google Meet     | [`google-meet`](/plugins/google-meet)       | `meet.google.com/...`                                                                                       | Install from npm or ClawHub, then enable | Local Chrome, Chrome on a paired node, or Twilio dial-in | Can create meetings through the Meet API or a signed-in browser; can read supported Meet artifacts with OAuth |
-| Microsoft Teams | [`teams-meetings`](/plugins/teams-meetings) | Work links under `teams.microsoft.com/l/meetup-join/...` and consumer links under `teams.live.com/meet/...` | Included; enable it                      | Local Chrome or Chrome on a paired node                  | Guest join for work and consumer meetings                                                                     |
-| Zoom            | [`zoom-meetings`](/plugins/zoom-meetings)   | `zoom.us/j/...` and account subdomains such as `example.zoom.us/j/...`                                      | Included; enable it                      | Local Chrome or Chrome on a paired node                  | Guest join through the Zoom Web App                                                                           |
+| Platform        | Plugin                                      | Accepted meeting links                                                                                      | Installation                                    | Participation paths                                      | Platform-specific capabilities                                                                                |
+| --------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Google Meet     | [`google-meet`](/plugins/google-meet)       | `meet.google.com/...`                                                                                       | Install from npm or ClawHub; enabled by default | Local Chrome, Chrome on a paired node, or Twilio dial-in | Can create meetings through the Meet API or a signed-in browser; can read supported Meet artifacts with OAuth |
+| Microsoft Teams | [`teams-meetings`](/plugins/teams-meetings) | Work links under `teams.microsoft.com/l/meetup-join/...` and consumer links under `teams.live.com/meet/...` | Included; enabled by default                    | Local Chrome or Chrome on a paired node                  | Guest join for work and consumer meetings                                                                     |
+| Zoom            | [`zoom-meetings`](/plugins/zoom-meetings)   | `zoom.us/j/...` and account subdomains such as `example.zoom.us/j/...`                                      | Included; enabled by default                    | Local Chrome or Chrome on a paired node                  | Guest join through the Zoom Web App                                                                           |
 
-Choose Google Meet when you need meeting creation, Google API artifacts, or a Twilio phone path. Choose Teams or Zoom for direct browser guest participation on those platforms. The Teams and Zoom plugins do not create meetings, dial in, call the vendor API, or record meetings.
+Choose Google Meet when you need meeting creation, Google API artifacts, or a Twilio phone path. Choose Teams or Zoom for direct browser guest participation on those platforms. The Teams and Zoom plugins do not create meetings, dial in, call the vendor API, or capture audio/video recordings.
 
 ## Choose a mode
 
@@ -39,7 +39,17 @@ The three plugins share the same modes:
 
 Use `transcribe` when the agent only needs meeting text. Use `agent` for normal OpenClaw reasoning and tools. Use `bidi` when low-latency direct voice is more important than routing each turn through the regular agent.
 
-Caption transcripts are session-scoped runtime data, not durable meeting recordings. Caption availability still depends on the meeting platform, account, language, and host policy. See the platform guide for its transcript limits and status fields.
+The bounded live transcript remains available only in `transcribe` mode. In all
+three modes, browser joins also persist completed caption rows and a derived
+summary to the shared state database. Leaving the meeting finalizes visible
+captions and writes the summary; use [`openclaw transcripts`](/cli/transcripts)
+to list, inspect, or export it. This durable notes path does not change the live
+agent-consult transcript or create an audio/video recording.
+
+Automatic notes are on by default. Set `transcripts.enabled: false` to disable
+durable notes globally. An explicitly selected `transcribe` session retains its
+bounded live-caption tail without writing durable rows. Caption availability
+still depends on the meeting platform, account, language, and host policy.
 
 ## Prepare Chrome and audio
 
@@ -62,18 +72,21 @@ command -v sox
 
 The Gateway host still owns the OpenClaw agent and model credentials when Chrome runs on a paired node. Configure a realtime transcription provider and OpenClaw TTS for `agent` mode, or a realtime voice provider for `bidi` mode. The platform guides contain the provider and audio-command options.
 
-## Enable the plugin
+## Install or disable plugins
 
-Install Google Meet before enabling it. Teams meetings and Zoom are included with OpenClaw and only need to be enabled:
+Install Google Meet separately; it is enabled by default after installation. Teams meetings and Zoom are included with OpenClaw and enabled by default:
 
 ```bash
 # Google Meet only
 openclaw plugins install npm:@openclaw/google-meet
+```
 
-# Enable only the meeting plugins you use
-openclaw plugins enable google-meet
-openclaw plugins enable teams-meetings
-openclaw plugins enable zoom-meetings
+Disable any meeting plugin you do not use:
+
+```bash
+openclaw plugins disable google-meet
+openclaw plugins disable teams-meetings
+openclaw plugins disable zoom-meetings
 ```
 
 Restart the Gateway if your plugin-management path does not restart it automatically. Then run the platform setup check before joining.
@@ -87,6 +100,8 @@ Restart the Gateway if your plugin-management path does not restart it automatic
 | Zoom            | `openclaw zoommeetings setup`  | `openclaw zoommeetings join 'https://zoom.us/j/1234567890'`                   |
 
 Treat any failed setup check as a blocker for that transport and mode. For an observe-only smoke test, select `transcribe` mode and confirm that status reports an in-call session before expecting caption text.
+
+For talk-back smoke tests, verified speech requires more than bytes accepted by the playback command. The shared command-pair bridge correlates a bounded waveform fingerprint from the current output generation with audio returning on the BlackHole microphone capture path; Google Meet, Teams, and Zoom do not report `speechOutputVerified: true` when only the output-byte counter advances or unrelated participant audio is present.
 
 ## Handle platform policy prompts
 

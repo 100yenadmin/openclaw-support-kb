@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "421d6688db6b3a4e6a11d25621bd007f4ebc5635427afa1f4a0dda5ec786b5b4"
+source_hash: "2b5b18673a62fb9113294828f5560f9691c31c3c9d23d881421a5c3a9f8f6874"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -236,6 +236,15 @@ fetch can use `createHostedOutboundMediaStore(...)` from
 `openclaw/plugin-sdk/outbound-media` with plugin state stores. Keep platform
 route parsing and token enforcement in the channel plugin; the shared helper
 only owns media loading, expiry metadata, chunk rows, and cleanup.
+
+Inbound attachments use ordered facts, not parallel `Media*` fields. Normalize
+channel records with `toInboundMediaFacts(...)` from
+`openclaw/plugin-sdk/channel-inbound` and pass them as `media` when building the
+inbound context. When a plugin must authorize local media reads, import
+`getAgentScopedMediaLocalRoots(...)` or
+`getAgentScopedMediaLocalRootsForSources(...)` from the focused
+`openclaw/plugin-sdk/media-local-roots` subpath. The old
+`agent-media-payload` builder/root facade is deprecated compatibility.
 
 ### Native payload shaping
 
@@ -850,6 +859,21 @@ What createChatChannelPlugin does for you
       when a native reply target was resolved, so payload helpers can preserve
       explicit reply tags without consuming an implicit single-use reply slot.
 
+
+    ### Group tool-policy adapters
+
+    A channel that implements `group.resolveToolPolicy` and supports
+    `toolsBySender` must forward the complete `ChannelGroupContext` to its
+    shared policy resolver. In particular, honor `senderPolicyMode: "never"`
+    by skipping sender-specific overlays at both the matched-group and wildcard
+    scopes while still applying the base `tools` policy.
+
+    OpenClaw sets this mode only for trusted non-ingress execution whose sender
+    authority was already captured in a server-owned envelope, such as an
+    explicitly capped scheduled run. Plugins must not derive the mode from
+    inbound metadata, persist it as channel state, or expose it as config. Add
+    an adapter test that proves the mode skips a wildcard `toolsBySender` entry
+    without dropping the matching base `tools` restriction.
 
 
 

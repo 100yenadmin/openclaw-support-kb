@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "249f8800d7f0be4e72ab8c3d84063d43a797d395bea14e0cffd9cb23c264db39"
+source_hash: "7a93334daf61013b7666a59f581883ca8a85b4acb56585dea5f8ff4a64036e70"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -162,11 +162,11 @@ existing explicit primary model; `models auth login --set-default` and
 - Provider: `anthropic`
 - Auth: `ANTHROPIC_API_KEY`
 - Optional rotation: `ANTHROPIC_API_KEYS`, `ANTHROPIC_API_KEY_1`, `ANTHROPIC_API_KEY_2`, plus `OPENCLAW_LIVE_ANTHROPIC_KEY` (single override)
-- Example model: `anthropic/claude-opus-4-6`
+- Example model: `anthropic/claude-opus-5`
 - CLI: `openclaw onboard --auth-choice apiKey`
 - Direct public Anthropic requests support the shared `/fast` toggle and `params.fastMode`, including API-key and OAuth-authenticated traffic sent to `api.anthropic.com`; OpenClaw maps that to Anthropic `service_tier` (`auto` vs `standard_only`)
 - Preferred Claude CLI config keeps the model ref canonical and selects the CLI
-  backend separately: `anthropic/claude-opus-4-8` with
+  backend separately: `anthropic/claude-opus-5` with
   model-scoped `agentRuntime.id: "claude-cli"`. Legacy
   `claude-cli/claude-opus-4-7` refs still work for compatibility.
 
@@ -176,7 +176,7 @@ Claude CLI reuse (`claude -p`) is a sanctioned OpenClaw integration path. Anthro
 
 ```json5
 {
-  agents: { defaults: { model: { primary: "anthropic/claude-opus-4-6" } } },
+  agents: { defaults: { model: { primary: "anthropic/claude-opus-5" } } },
 }
 ```
 

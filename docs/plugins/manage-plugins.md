@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "b681eb559b00cedb0ca657b1b022c1534d9c20c7c424574bf482de6775b8ff79"
+source_hash: "c4b615f11c6cff076a4d228a8e61e1d75922043cee9a5b5ad0fce9ef0498160d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -140,6 +140,11 @@ existing install target when needed. For routine upgrades of a tracked npm,
 ClawHub, or hook-pack install, use `openclaw plugins update` instead. With
 `--link`, `--force` only confirms the source; the linked directory is not
 copied or overwritten.
+
+If a newly installed plugin requires configuration that is not present yet,
+OpenClaw records the install but leaves the plugin disabled. Configure
+`plugins.entries.<id>.config`, then run `openclaw plugins enable <id>`. If an
+existing config entry is present but invalid, install fails without rewriting it.
 
 ## Restart and inspect
 

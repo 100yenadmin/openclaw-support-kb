@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Messages"
 source: "https://docs.openclaw.ai/concepts/messages"
-source_hash: "0e5c02ffc39eec270624774d1b4637c38e24934eada71691ab0f4724435de125"
+source_hash: "1e1f98eedc48641a5e4d3ef4f2e8b906a0f55d396a039b42b68041524a1140be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/messages.md"
@@ -58,7 +58,7 @@ Rapid consecutive text messages from the same sender can be batched into one age
 - Debounce applies to text-only messages; media/attachments flush immediately.
 - Control commands (stop/abort/status, etc.) bypass debouncing so they dispatch immediately.
 - Disabled by default: `messages.inbound.debounceMs` has no built-in default, so debouncing only activates once you set it (globally or per channel).
-- iMessage's `coalesceSameSenderDms` opt-in is the one exception: it holds all same-sender DM text (commands included) long enough for Apple's command+URL split-send to arrive as one turn. Group chats always dispatch instantly regardless of this setting.
+- iMessage follows the same generic debounce policy. `imsg` 0.13.1 and newer coalesces Apple URL-preview split-sends before OpenClaw receives them, so no iMessage-specific debounce setting is needed.
 
 ## Sessions and devices
 

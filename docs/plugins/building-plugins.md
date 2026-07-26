@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "89db89de89c48ba3bbe2bcf749c6afd185e79ee8c076993b466d1623401b7cef"
+source_hash: "af01b2411c60e717fe7dbaef9e6de59609d63c82ad8199598a31b804ee5efa8d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -370,6 +370,12 @@ and resolve to `operator.admin`. The
 routes that declare `contracts.gatewayMethodDispatch: ["authenticated-request"]`.
 
 For the full import map, see [Plugin SDK overview](/plugins/sdk-overview).
+
+OpenClaw SDK compatibility fields carry TypeScript `@deprecated` annotations,
+which editors surface as migration warnings. To enforce them at build time,
+enable a type-aware rule such as
+[`@typescript-eslint/no-deprecated`](https://typescript-eslint.io/rules/no-deprecated/).
+Oxlint is not type-aware, so it cannot enforce these annotations.
 
 ## Pre-submission checklist
 

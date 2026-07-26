@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool plugins"
 source: "https://docs.openclaw.ai/plugins/tool-plugins"
-source_hash: "cbda661be4dfd4c4f98b83edeb33097a1534562fcb958603f55b28deae602bda"
+source_hash: "da3fb11c263c59bfe5e8e8b09d4e52ffd5b51957e462b467f44ed684f7401e1d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/tool-plugins.md"
@@ -360,6 +360,13 @@ openclaw plugins build --entry ./dist/index.js --check
 openclaw plugins validate --entry ./dist/index.js
 npm test
 ```
+
+OpenClaw SDK compatibility fields carry TypeScript `@deprecated` annotations,
+which editors surface as migration warnings. To enforce them in CI, enable a
+type-aware rule such as
+[`@typescript-eslint/no-deprecated`](https://typescript-eslint.io/rules/no-deprecated/).
+Oxlint is not type-aware, so it cannot enforce these annotations. The generated
+`plugins init` scaffold therefore does not add a deprecation lint config.
 
 `plugins validate` checks that:
 

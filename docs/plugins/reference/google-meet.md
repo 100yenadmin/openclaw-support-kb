@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Meet plugin"
 source: "https://docs.openclaw.ai/plugins/reference/google-meet"
-source_hash: "acfdb22d4a620d62e2779642e7586077c6a21374819aa372b57b51d10185e2f9"
+source_hash: "26a9fbb51c7b53660266445aaaefe0e084723138351403b8da2c4a05fd49f806"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/google-meet.md"
@@ -24,7 +24,7 @@ OpenClaw Google Meet participant plugin for joining calls through Chrome or Twil
 
 ## Surface
 
-contracts: `tools`
+contracts: `tools`, `transcriptSourceProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "5051d6bf07e9705e0561eb7db3cfb1b1a71c89029d13b387ebf97130d0a8f263"
+source_hash: "e65938407d05724233794a58f01e253eaaf3139973078520d11f85b4b32ea0e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -53,7 +53,7 @@ Build the image
     ./scripts/docker/setup.sh
     ```
 
-    Use `ghcr.io/openclaw/openclaw` or `openclaw/openclaw` and avoid unofficial mirrors, which don't share OpenClaw's release timing or retention policy. Official tags: `main`, `latest`, `<version>` (e.g. `2026.2.26`), and beta tags such as `2026.2.26-beta.1` (betas never move `latest`/`main`). The default `main`/`latest`/`<version>` image bundles the `codex` and `diagnostics-otel` plugins. A `-browser` variant (e.g. `latest-browser`) also ships with Chromium baked in, useful for the [sandboxed browser](/gateway/sandboxing#sandboxed-browser) tool without a first-run Playwright install.
+    Use `ghcr.io/openclaw/openclaw` or `openclaw/openclaw` and avoid unofficial mirrors, which don't share OpenClaw's release timing or retention policy. Version-specific tags include releases such as `2026.2.26` and prereleases such as `2026.2.26-beta.1`. Stable releases move `latest` and `main`; trailing-month Gateway releases move only `extended-stable`. Variants include `slim`, `main-slim`, `extended-stable-slim`, `latest-browser`, `main-browser`, and `extended-stable-browser`. The default images bundle the `codex` and `diagnostics-otel` plugins. A `-browser` variant also ships with Chromium baked in, useful for the [sandboxed browser](/gateway/sandboxing#sandboxed-browser) tool without a first-run Playwright install.
 
 
 

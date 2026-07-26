@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "23756df908a2250c6ba0f8a7d962179b10b886723940b30db73a5022683e8908"
+source_hash: "271a1db58e9436ed9cee2068320161b637c16ecc1b65d003c6d6d95b568a76ea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
@@ -32,7 +32,7 @@ agent model: openai/gpt-5.6-sol (thinking=medium, fast=on)
 
 ## File-based logger
 
-- Default rolling log file is under `/tmp/openclaw/` (one file per day): `openclaw-YYYY-MM-DD.log`, dated by the gateway host's local timezone. If that directory is unsafe or unwritable (wrong owner, world-writable, a symlink), OpenClaw falls back to a user-scoped `os.tmpdir()/openclaw-<uid>` path instead; on Windows it always uses that OS-tmpdir fallback.
+- Default rolling log files are under `/tmp/openclaw/` (one file per day), dated by the gateway host's local timezone. The default profile uses `openclaw-YYYY-MM-DD.log`; named profiles use `openclaw-<profile>-YYYY-MM-DD.log` (for example, `openclaw-dev-YYYY-MM-DD.log`). If that directory is unsafe or unwritable (wrong owner, world-writable, a symlink), OpenClaw falls back to a user-scoped `os.tmpdir()/openclaw-<uid>` path instead; on Windows it always uses that OS-tmpdir fallback.
 - Active log files rotate at `logging.maxFileBytes` (default: 100 MB), keeping up to five numbered archives (`.1` through `.5`) and continuing to write a fresh active file.
 - Configure the log file path and level via `~/.openclaw/openclaw.json`: `logging.file`, `logging.level`.
 - The file format is one JSON object per line.

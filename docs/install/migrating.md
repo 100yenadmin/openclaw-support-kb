@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migration guide"
 source: "https://docs.openclaw.ai/install/migrating"
-source_hash: "3551bca1afbc1c6e63612f49cfe9e81b6ee70d8401996f522855e08ce8407fef"
+source_hash: "7ff73af6ffcb57af989282ca8f675ac0084953bf1f7f167a3a4feab7bd7d314b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating.md"
@@ -17,7 +17,7 @@ OpenClaw supports three migration paths: importing from another agent system, mo
 
 ## Import from another agent system
 
-Bundled migration providers bring instructions, MCP servers, skills, model config, and (opt-in) API keys into OpenClaw. Plans are previewed before any change, secrets are redacted in reports, and apply is backed by a verified backup.
+Bundled migration providers bring instructions, MCP servers, skills, model config, and (opt-in) API keys into OpenClaw. Plans are previewed before any change and secrets are redacted in reports. Standalone `openclaw migrate` is backed by a verified backup; fresh onboarding imports instead stage and verify local artifacts before publishing them with configuration committed before any irreversible external activation.
 
 CardGroup
 

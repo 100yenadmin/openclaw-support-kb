@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin setup and config"
 source: "https://docs.openclaw.ai/plugins/sdk-setup"
-source_hash: "b85157835937ddca6b2e93d333ae8512d0d136c6783cee933ec5a0c1e12b9c66"
+source_hash: "3a23625875f00d42e87caec6dea8d22ad76b77013ca397dd8a7098326d24dfc9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-setup.md"
@@ -124,6 +124,62 @@ Provider ids (`providers: string[]`) are manifest metadata, not package metadata
 
 `openclaw.channel` is cheap package metadata for channel discovery and setup surfaces before runtime loads.
 
+### Channel-owned setup fields
+
+Channel plugins should define setup fields once in runtime code with `defineChannelSetupContract(...)` and publish the matching serializable projection under `openclaw.channel.setup.fields`. The runtime definition infers the plugin-local input type, parses both guided and non-interactive values, and keeps channel-specific keys out of core types. Package metadata lets `openclaw channels add <channel-id> --help` and `openclaw channels add --channel <channel-id> --help` discover only the selected channel's options without loading the plugin.
+
+```ts
+
+export const setupContract = defineChannelSetupContract({
+  fields: {
+    endpoint: {
+      kind: "string",
+      cli: { flags: "--endpoint <url>", description: "Service endpoint" },
+    },
+    transport: {
+      kind: "choice",
+      choices: ["native", "container"],
+      cli: { flags: "--transport <kind>", description: "Transport owner" },
+    },
+  },
+  adapter: {
+    applyAccountConfig: ({ cfg, input }) => ({
+      ...cfg,
+      channels: { ...cfg.channels, example: input },
+    }),
+  },
+});
+```
+
+```json
+{
+  "openclaw": {
+    "channel": {
+      "id": "example",
+      "setup": {
+        "fields": [
+          {
+            "key": "endpoint",
+            "kind": "string",
+            "cli": { "flags": "--endpoint <url>", "description": "Service endpoint" }
+          },
+          {
+            "key": "transport",
+            "kind": "choice",
+            "choices": ["native", "container"],
+            "cli": { "flags": "--transport <kind>", "description": "Transport owner" }
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+Supported field kinds are `string`, `boolean`, `integer`, `string-list`, and `choice`. Use `sensitive: true` for credentials. Each field key must equal the camelCased attribute name of its long CLI flag, including any negated form, such as `apiToken` for `--api-token`. Boolean fields may add `cli.negatedFlags` when both positive and `--no-*` forms are needed. `channel`, `account`, and the account display `name` remain the shared control envelope.
+
+The released `setup`/`ChannelSetupInput` adapter stays available for existing external plugins. New plugins should expose `setupContract`; OpenClaw always prefers it when both are present.
+
 | Field                                  | Type       | What it means                                                                 |
 | -------------------------------------- | ---------- | ----------------------------------------------------------------------------- |
 | `id`                                   | `string`   | Canonical channel id.                                                         |
@@ -145,6 +201,7 @@ Provider ids (`providers: string[]`) are manifest metadata, not package metadata
 | `quickstartAllowFrom`                  | `boolean`  | Opt this channel into the standard quickstart `allowFrom` setup flow.         |
 | `forceAccountBinding`                  | `boolean`  | Require explicit account binding even when only one account exists.           |
 | `preferSessionLookupForAnnounceTarget` | `boolean`  | Prefer session lookup when resolving announce targets for this channel.       |
+| `setup`                                | `object`   | Serializable channel-owned setup fields used for lazy CLI option discovery.   |
 
 Example:
 
@@ -545,7 +602,7 @@ AccordionGroup
 
 Shared allowFrom prompts
 
-    For DM allowlist prompts that only need the standard `note -> prompt -> parse -> merge -> patch` flow, prefer the shared setup helpers from `openclaw/plugin-sdk/setup`: `createPromptParsedAllowFromForAccount(...)`, `createTopLevelChannelParsedAllowFromPrompt(...)`, and `createNestedChannelParsedAllowFromPrompt(...)`.
+    For DM allowlist prompts that only need the standard `note -> prompt -> parse -> merge -> patch` flow, prefer the shared setup helpers from `openclaw/plugin-sdk/setup`: `createPromptParsedAllowFromForAccount(...)` and `createTopLevelChannelParsedAllowFromPrompt(...)`.
 
 
 Standard channel setup status
@@ -581,7 +638,7 @@ Binary-backed setup helpers
 
     - `createDetectedBinaryStatus(...)` for status blocks that vary only by labels, hints, scores, and binary detection
     - `createCliPathTextInput(...)` for path-backed text inputs
-    - `createDelegatedSetupWizardStatusResolvers(...)`, `createDelegatedPrepare(...)`, `createDelegatedFinalize(...)`, and `createDelegatedResolveConfigured(...)` when `setupEntry` needs to forward to a heavier full wizard lazily
+    - `createDelegatedSetupWizardProxy(...)` when `setupEntry` needs to forward status, prepare, or finalize behavior to a heavier full wizard lazily
     - `createDelegatedTextInputShouldPrompt(...)` when `setupEntry` only needs to delegate a `textInputs[*].shouldPrompt` decision
 
 

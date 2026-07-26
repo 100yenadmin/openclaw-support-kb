@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audio and voice notes"
 source: "https://docs.openclaw.ai/nodes/audio"
-source_hash: "6c03f67c9bf2558d3af6da164f61e1b62fe4b5c00c8d354882f70fbba87e9335"
+source_hash: "27c1b9df3077c061769b6ed908007a4aa8fe0b56ca4ee7073e61acb7b636b537"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/audio.md"
@@ -71,7 +71,7 @@ The provider inventory reports the local fallback winner separately from global 
         {
           type: "cli",
           command: "whisper",
-          args: ["--model", "base", "{{MediaPath}}"],
+          args: ["--model", "base", "{{AttachmentPath}}"],
           timeoutSeconds: 45,
           capabilities: ["audio"],
         },
@@ -158,7 +158,7 @@ The provider inventory reports the local fallback winner separately from global 
 - Transcript is available to templates as `{{Transcript}}`.
 - `tools.media.audio.echoTranscript` is off by default; `echoFormat` accepts a `{transcript}` placeholder.
 - CLI stdout is capped at 5MB; keep CLI output concise.
-- CLI `args` should use `{{MediaPath}}` for the local audio file path. Run `openclaw doctor --fix` to migrate deprecated `{input}` placeholders from older `audio.transcription.command` configs (retired key: `audio.transcription`, replaced by `tools.media.models`).
+- CLI `args` should use `{{AttachmentPath}}` for the local audio file path. Run `openclaw doctor --fix` to migrate deprecated `{input}` placeholders from older `audio.transcription.command` configs (retired key: `audio.transcription`, replaced by `tools.media.models`). `{{MediaPath}}` remains a deprecated compatibility alias.
 - `tools.media.concurrency` bounds media tasks; it is not a GPU scheduler.
 
 ### Resident local STT

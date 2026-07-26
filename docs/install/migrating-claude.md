@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrating from Claude"
 source: "https://docs.openclaw.ai/install/migrating-claude"
-source_hash: "6e766d6766e28cf6ec48cab6529e2cc14ef78f027324191a9b5db276093e1a8a"
+source_hash: "9f75ce56185f2f884793a9c69385ff6d1fb7d283d8f71c55d5c92cc1879b0dc1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating-claude.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Migrating from Claude
 Source: https://docs.openclaw.ai/install/migrating-claude
 
-OpenClaw imports local Claude state through the bundled Claude migration provider. The provider previews every item before changing state, redacts secrets in plans and reports, and creates a verified backup before apply.
+OpenClaw imports local Claude state through the bundled Claude migration provider. The provider previews every item before changing state and redacts secrets in plans and reports. Standalone `openclaw migrate` creates a verified backup; the fresh onboarding path stages the import and publishes it only after verification succeeds.
 
 Note
 

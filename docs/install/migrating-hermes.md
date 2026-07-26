@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrating from Hermes"
 source: "https://docs.openclaw.ai/install/migrating-hermes"
-source_hash: "6e5940c72cca83b6782f58b4a8e4c6246f444a915e732bf2ae2cf5257ec0e481"
+source_hash: "d92bfe886e9f7afc3de66e000d96a5a7b19b5e2236ba01640bf691cdf04c664d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/migrating-hermes.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Migrating from Hermes
 Source: https://docs.openclaw.ai/install/migrating-hermes
 
-The bundled Hermes migration provider follows `HERMES_HOME` and the active Hermes profile, falling back to `~/.hermes` on macOS/Linux or `%LOCALAPPDATA%\hermes` on Windows. It previews every change before applying, redacts secrets in plans and reports, and writes a verified OpenClaw backup before it touches anything. An explicit `--from` path always wins.
+The bundled Hermes migration provider follows `HERMES_HOME` and the active Hermes profile, falling back to `~/.hermes` on macOS/Linux or `%LOCALAPPDATA%\hermes` on Windows. It previews every change before applying and redacts secrets in plans and reports. Standalone `openclaw migrate` writes a verified backup; the fresh onboarding path stages config, credentials, and files and publishes them only after imported inference verifies. An explicit `--from` path always wins.
 
 Note
 

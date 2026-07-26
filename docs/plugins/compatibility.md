@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "d11245ddc39fb99a6e0811682e90c928302dde4450d5ba8b5b17945d17328e9e"
+source_hash: "bce7bf5621869631c0faa92df774654fc983644bbf03c6ad8b2d0e1675015ee1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
@@ -28,6 +28,8 @@ Plugin compatibility contracts are tracked in the core registry at
 - owner: `sdk`, `config`, `setup`, `channel`, `provider`, `plugin-execution`,
   `agent-runtime`, or `core`
 - introduction and deprecation dates when applicable
+- an exact removal date once the owning maintainer approves it; an omitted
+  `removeAfter` keeps a deprecated surface ineligible for removal
 - replacement guidance
 - docs, diagnostics, and tests that cover the old and new behavior
 

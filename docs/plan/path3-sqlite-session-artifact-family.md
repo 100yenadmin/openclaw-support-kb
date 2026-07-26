@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Path 3 SQLite session artifact family"
 source: "https://docs.openclaw.ai/plan/path3-sqlite-session-artifact-family"
-source_hash: "52a8b665150a0b48d738b9e10543cdb3fc0d5845ab73b48a4b052bc83d384efe"
+source_hash: "b1032f2ff4a2afbeeb6060c8c9077420a3be792fd5e5ec3a8ec72905c3b34c0c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plan/path3-sqlite-session-artifact-family.md"
@@ -106,8 +106,6 @@ The focused proof should use:
 node scripts/run-vitest.mjs src/config/sessions/session-accessor.conformance.test.ts
 ```
 
-If the final tests live in `store.session-lifecycle-mutation.test.ts`, run that
-file explicitly with the same wrapper. Broad `pnpm` gates should stay on
-Crabbox/Testbox for this Codex worktree.
+Broad `pnpm` gates should stay on Crabbox/Testbox for this Codex worktree.
 
 ---

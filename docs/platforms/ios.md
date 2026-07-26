@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "bb3c7599c84818c9c9068b0e5e1a1ee8d9bb92282595f878c8f0edb3c448c810"
+source_hash: "4e2ea4328d5302f4be4ba08d984609552577cfe323bc8c3ac79116b8e3aeea65"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -24,6 +24,7 @@ Availability: iPhone app builds are distributed through Apple channels when enab
 - Keeps a small read-only offline cache of recent chat sessions and transcripts per paired gateway: cold opens paint the last known transcript immediately and refresh once the gateway responds, recent chats stay browsable while disconnected, and reset/forget purges the protected local cache.
 - Queues text messages sent while disconnected in a durable per-gateway outbox (up to 50): queued bubbles show in the transcript, flush in order on reconnect with idempotent retries, remain durable until canonical history confirms the send, retry with backoff before surfacing a retry/delete action, and expire instead of sending after 48 hours offline; reset/forget clears the queue with the cache.
 - Chat is the single text-and-voice surface. Chat actions can open the full Sessions screen without leaving Chat and can show or hide assistant reasoning and tool activity. Tap the microphone for draft dictation, open its menu to record a voice note, or use the inline Talk control for realtime voice; the Talk control animates from live microphone or playback level while listening or speaking.
+- **Settings -> OpenClaw** opens a dedicated Gateway settings assistant when the operator connection has `operator.admin` and the Gateway supports `openclaw.chat`. Its setup conversation stays separate from ordinary Chat, redacts secret replies locally, and moves to Chat only after you tap **Open Chat**.
 - Speaks assistant messages on demand: long-press a message in Chat and choose **Listen**. The app plays supported gateway `tts.speak` clips with the configured TTS provider and falls back to on-device speech when gateway audio is unavailable or unplayable. Playback stops on session switch or backgrounding.
 
 ## Requirements

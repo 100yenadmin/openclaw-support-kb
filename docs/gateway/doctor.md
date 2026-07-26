@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "6e5e7ecf1670eab3085ab85b58ada652b6aed5bbebbce583c7d5e74a88b9e38b"
+source_hash: "2fb8ca7d2864ab7b4c7fe5507de905cb583390f648681116c416e28e614dbf1c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -351,7 +351,7 @@ Note
     | `channels.whatsapp.messagePrefix` and legacy `messages.messagePrefix`                            | `channels.whatsapp.responsePrefix`                                            |
     | `channels.whatsapp.ackReaction`                                                                  | global `messages.ackReaction` and `ackReactionScope` where translatable        |
     | `cron.failureDestination`                                                                        | destination fields on `cron.failureAlert`                                     |
-    | `gateway.controlUi.chatMessageMaxWidth`                                                          | `ui.prefs.chatMessageMaxWidth`                                                |
+    | `gateway.controlUi.chatMessageMaxWidth`, presentation-only `ui.prefs` keys                       | removed (text scale, chat width, and live sidebar activity are browser-local) |
     | `agents.list`                                                                                    | keyed `agents.entries`                                                        |
     | top-level `defaultModel`                                                                         | `agents.defaults.model`                                                      |
     | `messages.messagePrefix`                                                                         | `channels.whatsapp.responsePrefix`                                            |

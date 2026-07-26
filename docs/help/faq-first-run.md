@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "41ad2339d4bf46584122e76f2019cc5ff646bf7c036286006e7c738125f54efa"
+source_hash: "adca4ea91e8d5d119bedb153912a8cc8304261d2c1cd28b06ab67b41d6f9ddbe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -67,12 +67,10 @@ Heartbeat keeps skipping. What do the skip reasons mean?
     | Skip reason | Meaning |
     | --- | --- |
     | `quiet-hours` | Outside the configured active-hours window |
-    | `empty-heartbeat-file` | `HEARTBEAT.md` exists but only has blank, comment, header, fence, or empty-checklist scaffolding |
-    | `no-tasks-due` | Task mode is active but no task interval is due yet |
+    | `empty-heartbeat-file` | Heartbeat monitor scratch exists but only has blank, comment, header, fence, or empty-checklist scaffolding |
     | `alerts-disabled` | All heartbeat visibility is off (`showOk`, `showAlerts`, and `useIndicator` all disabled) |
 
-    In task mode, due timestamps advance only after a real heartbeat run completes.
-    Skipped runs do not mark tasks as completed.
+    Older heartbeat `tasks:` blocks migrate to independently scheduled cron jobs with `openclaw doctor --fix`.
 
     Docs: [Heartbeat](/gateway/heartbeat), [Automation](/automation).
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "94602292275f6ed38eea6990e0c6495828b4b214e94d9302ceaa5c3fd66d8137"
+source_hash: "5c5a55617c8c0a4939290648cb6505fcc3efe40f487449c2a8321738ac832dcd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -274,8 +274,8 @@ Are opus / sonnet / gpt built-in shortcuts?
 
     | Alias | Resolves to |
     | --- | --- |
-    | `opus` | `anthropic/claude-opus-4-8` |
-    | `sonnet` | `anthropic/claude-sonnet-4-6` |
+    | `opus` | `anthropic/claude-opus-5` |
+    | `sonnet` | `anthropic/claude-sonnet-5` |
     | `gpt` | `openai/gpt-5.4` |
     | `gpt-mini` | `openai/gpt-5.4-mini` |
     | `gpt-nano` | `openai/gpt-5.4-nano` |

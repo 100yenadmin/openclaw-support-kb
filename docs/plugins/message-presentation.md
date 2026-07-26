@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "d4d3ede5748fb39c4a3e5836eebde6ea7cf11d52eeea41d813d8092c520009e9"
+source_hash: "3388ee96ec2655a608c284db156ce73e3fbfbe065246c3b168240d44e995a10d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -651,9 +651,8 @@ Non-deprecated helpers worth knowing:
 The legacy `InteractiveReply*` types and conversion helpers are marked
 `@deprecated` in the SDK:
 
-- `InteractiveReply`, `InteractiveReplyBlock`, `InteractiveReplyButton`,
-  `InteractiveReplyOption`, `InteractiveReplySelectBlock`, and
-  `InteractiveReplyTextBlock`
+- `InteractiveReply`, `InteractiveReplyBlock`, `InteractiveReplyButton`, and
+  `InteractiveReplyOption`
 - `normalizeInteractiveReply(...)`
 - `hasInteractiveReplyBlocks(...)`
 - `interactiveReplyToPresentation(...)`
@@ -669,8 +668,6 @@ them; send `presentation` and let core/channel adaptation handle rendering.
 
 Approval helpers also have presentation-first replacements:
 
-- use `buildApprovalPresentationFromActionDescriptors(...)` instead of
-  `buildApprovalInteractiveReplyFromActionDescriptors(...)`
 - use `buildApprovalPresentation(...)` instead of
   `buildApprovalInteractiveReply(...)`
 - use `buildExecApprovalPresentation(...)` instead of

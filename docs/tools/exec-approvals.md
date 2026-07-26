@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "a3b4358c2fe1b105fa02ddbdd927506da578299c13e01d4a82a77388748b7015"
+source_hash: "95be54831e212e5e3ee7f2f9b24a1c4b68a33b3f4deac0fa5c0690f8d8f93939"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -130,10 +130,13 @@ Example schema:
         {
           "id": "B0C8C0B3-2C2D-4F8A-9A3C-5A4B3C2D1E0F",
           "pattern": "~/Projects/**/bin/rg",
+          "argPattern": "sha256:argv:...",
           "source": "allow-always",
           "lastUsedAt": 1737150000000,
-          "lastUsedCommand": "rg -n TODO",
           "lastResolvedPath": "/Users/user/Projects/.../bin/rg"
+        },
+        {
+          "pattern": "~/Projects/**/bin/git"
         }
       ]
     }
@@ -406,18 +409,22 @@ argv matching. Prefer the UI or approval flow to regenerate those entries
 instead of hand-editing the encoded value. If OpenClaw cannot parse argv
 for a command segment, entries with `argPattern` do not match.
 
+Generated `allow-always` entries are argv-bound. New generated entries include
+`argPattern`; older generated path-only entries are ignored and need a fresh
+approval. For a manual path-only rule, omit both `source` and `argPattern`.
+
 Each allowlist entry supports:
 
-| Field              | Meaning                                              |
-| ------------------ | ---------------------------------------------------- |
-| `pattern`          | Resolved binary path glob or bare command-name glob  |
-| `argPattern`       | Optional ECMAScript argv regex; omitted is path-only |
-| `id`               | Stable opaque ID; generated as a UUID when absent    |
-| `source`           | Entry source, such as `allow-always`                 |
-| `commandText`      | Legacy plaintext input; discarded during load        |
-| `lastUsedAt`       | Last-used timestamp                                  |
-| `lastUsedCommand`  | Last command that matched                            |
-| `lastResolvedPath` | Last resolved binary path                            |
+| Field              | Meaning                                                                  |
+| ------------------ | ------------------------------------------------------------------------ |
+| `pattern`          | Resolved binary path glob or bare command-name glob                      |
+| `argPattern`       | ECMAScript argv regex or generated exact-argv hash; omitted is path-only |
+| `id`               | Stable opaque ID; generated as a UUID when absent                        |
+| `source`           | Generated entry source, such as `allow-always`; omit for manual entries  |
+| `commandText`      | Legacy plaintext input; discarded during load                            |
+| `lastUsedAt`       | Last-used timestamp                                                      |
+| `lastUsedCommand`  | Last command that matched; omitted for generated hashed argv entries     |
+| `lastResolvedPath` | Last resolved binary path                                                |
 
 ## Auto-allow skill CLIs
 

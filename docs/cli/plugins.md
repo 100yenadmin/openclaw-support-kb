@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "373886d5bdc975f3ef6ad7886156204073829b7257d95f8504437270514b8efc"
+source_hash: "8d4be5422fbabdcda7ebd6f6198db664d26f284e85553a1885be7d68b4e38d59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/plugins.md"
@@ -200,7 +200,9 @@ Config includes and invalid-config repair
 
     If your `plugins` section is backed by a single-file `$include`, `plugins install/update/enable/disable/uninstall` write through to that included file and leave `openclaw.json` untouched. Root includes, include arrays, and includes with sibling overrides fail closed instead of flattening. See [Config includes](/gateway/configuration) for the supported shapes.
 
-    If config is invalid during install, `plugins install` normally fails closed and tells you to run `openclaw doctor --fix` first. During Gateway startup and hot reload, invalid plugin config fails closed like any other invalid config; `openclaw doctor --fix` can quarantine the invalid plugin entry. The only documented install-time exception is a narrow bundled-plugin recovery path for plugins that explicitly opt into `openclaw.install.allowInvalidConfigRecovery`.
+    If config is invalid before install, `plugins install` normally fails closed and tells you to run `openclaw doctor --fix` first. During Gateway startup and hot reload, invalid plugin config fails closed like any other invalid config; `openclaw doctor --fix` can quarantine the invalid plugin entry. The only pre-existing-config exception is a narrow bundled-plugin recovery path for plugins that explicitly opt into `openclaw.install.allowInvalidConfigRecovery`.
+
+    When the existing host config is valid but the newly installed plugin's own config is absent, OpenClaw records the install disabled instead of writing an invalid enabled entry. Configure `plugins.entries.<id>.config`, then run `openclaw plugins enable <id>`. If an existing plugin config entry is present but invalid, install fails without rewriting it.
 
 
 
@@ -605,6 +607,25 @@ credentials, query strings, or fragments. Unpinned refreshes can report a
 hosted snapshot or bundled fallback result without failing the command. Pinned
 refreshes fail unless they accept a fresh hosted payload, and successful hosted
 refreshes fail if OpenClaw cannot persist the validated snapshot.
+
+The built-in `clawhub-public` profile expects payload identity
+`clawhub-official`. OpenClaw will bundle ClawHub's production public key after
+ClawHub generates and hands off that key. Until then, the built-in profile does
+not grant signed-feed install authority. Public keys must come from a trusted
+release or operator channel, not from a key endpoint on the feed host.
+
+OpenClaw verifies the DSSE envelope and, when a profile declares `feedId`,
+requires the decoded payload ID to match it. The built-in `clawhub-public`
+profile always declares its identity, preventing a valid document for another
+feed from being replayed through that profile.
+
+During the staged rollout, existing custom signed profiles that omit `feedId`
+retain signature verification without payload-identity binding. New custom
+profiles should declare `feedId`. The feed-profile configuration surface is
+landing separately with the presentation metadata needed by Control UI; its
+Doctor diagnostic must ask the operator to supply a missing identity and must
+not infer one from the feed URL. This trust binding does not restore the retired
+root `marketplaces` key.
 
 ## Related
 

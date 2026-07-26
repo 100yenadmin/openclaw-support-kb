@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "RPC adapters"
 source: "https://docs.openclaw.ai/reference/rpc"
-source_hash: "eb2212cd49114c2bb8a6da79107a20f6b882f371a13c49f656bf96af2f054670"
+source_hash: "d3cd93598de40f7d20e8ab293d5df2f1af55cb47d06a1543562ecb532861f585"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/rpc.md"
@@ -20,7 +20,7 @@ OpenClaw integrates external CLIs via JSON-RPC. Two patterns are used today.
 - `signal-cli` runs as a daemon with JSON-RPC over HTTP.
 - Event stream is SSE (`/api/v1/events`).
 - Health probe: `/api/v1/check`.
-- OpenClaw owns lifecycle when `channels.signal.autoStart=true`.
+- OpenClaw owns lifecycle when `channels.signal.transport.kind="managed-native"` (the default).
 
 See [Signal](/channels/signal) for setup and endpoints.
 

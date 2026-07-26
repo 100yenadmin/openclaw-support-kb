@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "85963ec2c72767bc8e0b192dd2b6cb63db7db27c087eb6f1c8855f18cb8680cf"
+source_hash: "72ee5ed10545a44a5e04f8998b66c4553f05d358a2f2983c35c122b49243dee7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -25,7 +25,6 @@ Most skills configuration lives under `skills` in
       extraDirs: ["~/Projects/agent-scripts/skills"],
       allowSymlinkTargets: ["~/Projects/manager/skills"],
       watch: true,
-      watchDebounceMs: 250,
     },
     install: {
       preferBrew: true,
@@ -77,10 +76,6 @@ ParamField
 
   Watch skill folders and refresh the skills snapshot when `SKILL.md` files
   change. Covers nested files under grouped skill roots.
-
-ParamField
-
-  Debounce window for skill watcher events in milliseconds.
 
 ## Install (`skills.install`)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "b479e734efc9bd1dece7786098abc6df2d8c717c17a1534e53511a441058775a"
+source_hash: "5efbd10c89e727d394d077c6d6f93b7f989b4a5a9cc7d3fd7e5b635fcfacc0e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -599,13 +599,13 @@ Skills watcher
           extraDirs: ["~/Projects/agent-scripts/skills"],
           allowSymlinkTargets: ["~/Projects/manager/skills"],
           watch: true, // default
-          watchDebounceMs: 250, // default
         },
       },
     }
     ```
 
-    Use `allowSymlinkTargets` for intentional symlinked layouts where a skill
+    Watcher events use a built-in 250 ms debounce. Use `allowSymlinkTargets`
+    for intentional symlinked layouts where a skill
     root symlink points outside the configured root, for example
     `<workspace>/skills/manager -> ~/Projects/manager/skills`.
     Enable `skills.workshop.allowSymlinkTargetWrites` only when Skill Workshop

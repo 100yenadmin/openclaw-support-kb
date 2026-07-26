@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock"
 source: "https://docs.openclaw.ai/providers/bedrock"
-source_hash: "83fbfa94d22fe55d6a3128fb12dab7778e80476f0542350b16de8e1b122738ac"
+source_hash: "dd7b53f9622d201f7ee5953c061ba1f3e2d477e2123a2ca6a57c40aeb2e4e340"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/bedrock.md"
@@ -350,7 +350,7 @@ Service tier
     ```
 
     Valid values are `default`, `flex`, `priority`, and `reserved`. Claude
-    Fable 5 and Sonnet 5 only support the `default` tier; OpenClaw warns and
+    Fable 5, Opus 5, and Sonnet 5 only support the `default` tier; OpenClaw warns and
     ignores `flex`, `priority`, or `reserved` requested for those models. For
     other models, not every model supports every tier -- an unsupported tier
     returns a Bedrock validation error, and the error message can be
@@ -361,16 +361,32 @@ Service tier
 
 
 
-Claude Opus 4.7 and 4.8 temperature
+Claude Opus 5, 4.8, and 4.7 temperature
 
-    Bedrock rejects the `temperature` parameter for Claude Opus 4.7 and Opus
-    4.8. OpenClaw omits `temperature` automatically for any matching Bedrock
+    Bedrock rejects the `temperature` parameter for Claude Opus 5, Opus 4.8,
+    and Opus 4.7. OpenClaw omits `temperature` automatically for any matching Bedrock
     ref, including foundation model ids, named inference profiles, application
-    inference profiles whose underlying model resolves to Opus 4.7/4.8 via
+    inference profiles whose underlying model resolves to Opus 5/4.8/4.7 via
     `bedrock:GetInferenceProfile`, and dotted `opus-4.7`/`opus-4.8` variants
     with optional region prefixes (`us.`, `eu.`, `ap.`, `apac.`, `au.`, `jp.`,
     `global.`). No config knob is required, and the omission applies to both
     the request options object and the `inferenceConfig` payload field.
+
+
+
+Claude Opus 5
+
+    Use `amazon-bedrock/anthropic.claude-opus-5` on the Messages-API Bedrock
+    endpoint, or a regional/global inference profile such as
+    `global.anthropic.claude-opus-5` when it appears in Bedrock discovery.
+    OpenClaw applies the 1,000,000-token context window, 128,000-token output
+    limit, image input, prompt caching, refusal-safe streaming, and native
+    `xhigh`/`max` effort levels.
+
+    Adaptive thinking defaults to `high`. `/think off` disables thinking, while
+    `/think xhigh|max` keeps adaptive thinking enabled. OpenClaw omits custom
+    sampling parameters and unsupported non-default service tiers.
+
 
 
 

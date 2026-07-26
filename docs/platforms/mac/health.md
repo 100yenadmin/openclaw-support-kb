@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health checks (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/health"
-source_hash: "09c80f1c2269819fc15f47d04e05d4cb9358dd6cbca0dacdec7b6910e0356c72"
+source_hash: "dd9cee111ecda7ba0d61047b73cda88ebc771f6035cc3fe96f014e3d0c354e91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/health.md"
@@ -47,8 +47,8 @@ does not flicker while offline.
 ## When in doubt
 
 Use the CLI flow in [Gateway health](/gateway/health) (`openclaw status`,
-`openclaw status --deep`, `openclaw health --json`) and tail
-`/tmp/openclaw/openclaw-*.log`, filtering for `web-heartbeat` / `web-reconnect`.
+`openclaw status --deep`, `openclaw health --json`) and run
+`openclaw logs --follow`, filtering for `web-heartbeat` / `web-reconnect`.
 
 ## Related
 
