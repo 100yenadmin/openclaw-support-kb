@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Environment Variables"
 source: "https://hermes-agent.nousresearch.com/docs/reference/environment-variables"
-source_hash: "a25cdd45ac3caa8a63f9cadf9dc2893d79620c58656fca276df4509230a122d9"
+source_hash: "a788ced423ccf6530122dc4ab923115246bbfdb246a415c85da5a25b783bb3a0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/environment-variables.md"
@@ -746,7 +746,7 @@ Advanced per-platform knobs for throttling the outbound message batcher. Most us
 
 | Variable | Description |
 |----------|-------------|
-| `HERMES_MAX_ITERATIONS` | Max tool-calling iterations per conversation (default: 90) |
+| `HERMES_MAX_ITERATIONS` | Max tool-calling iterations per conversation (default: 500) |
 | `HERMES_INFERENCE_MODEL` | Override model name at process level (takes priority over `config.yaml` for the session). Also settable via `-m`/`--model` flag. |
 | `HERMES_YOLO_MODE` | Set to `1` to bypass dangerous-command approval prompts. Equivalent to `--yolo`. |
 | `HERMES_ACCEPT_HOOKS` | Auto-approve any unseen shell hooks declared in `config.yaml` without a TTY prompt. Equivalent to `--accept-hooks` or `hooks_auto_accept: true`. |

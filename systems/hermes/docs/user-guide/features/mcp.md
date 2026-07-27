@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "88e7198e726f169fd2f5737e9d8429361605121d14c7d0437328a5e7bb76b29e"
+source_hash: "0cc1adbedd056e0a8c05c2496ec6b6e0ef39edc4e0bb386920d67dcf3d472e98"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -472,6 +472,24 @@ mcp_servers:
 ```
 
 All server tools are registered except the excluded ones.
+
+### Glob patterns
+
+Both lists accept fnmatch-style globs alongside exact names — essential for
+huge flat surfaces like Cloudflare's API MCP (`?codemode=false`, ~3,300
+tools) where excluding product areas one endpoint at a time is impractical:
+
+```yaml
+mcp_servers:
+  cloudflare:
+    url: "https://mcp.cloudflare.com/mcp?codemode=false"
+    auth: oauth
+    tools:
+      exclude: ["*_radar_*", "*_accounts_dlp_*", "*_zones_web3_*"]
+```
+
+Entries without glob metacharacters (`*`, `?`, `[`) match exactly — `docs`
+excludes only the tool named `docs`, never `docs_search`.
 
 ### Precedence rule
 

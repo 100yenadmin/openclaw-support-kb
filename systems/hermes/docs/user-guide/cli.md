@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "67bfbbd994b511def77fb47207ad4938d40e365414a8b0162ea7d596783dbb63"
+source_hash: "732cba639b4d2787703451af295dc498ba3dee1f619ab916a23502f0c9aabe61"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -148,6 +148,7 @@ Common examples:
 | `/reasoning high` | Increase reasoning effort |
 | `/title My Session` | Name the current session |
 | `/status` | Show session info — model/profile/tokens/duration — followed by a local **Session recap** block (recent turn counts, top tools used, files touched, latest user prompt + assistant reply). Pure local compute; no LLM call. |
+| `/context [all]` | Visual context-usage breakdown — glyph block grid + per-category token table (system prompt / tools / skills / memory / conversation / free space). `/context all` adds per-skill and per-toolset costs. |
 | `/sessions` | Open an interactive session picker right inside the classic CLI (same surface the TUI uses). Type to filter, arrow keys to navigate, Enter to resume. |
 
 For the full built-in CLI and messaging lists, see [Slash Commands Reference](../reference/slash-commands.md).

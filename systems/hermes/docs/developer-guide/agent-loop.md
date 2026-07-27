@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Agent Loop Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/agent-loop"
-source_hash: "cdb38aca966f41180f18d8305ce4451e9bca615b6b732706235990193cebd7d2"
+source_hash: "60bdbecfa6adb0d3b4519256ec2713980ec4bc5d365a7b578dcfbe7eb21e7e08"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/agent-loop.md"
@@ -194,7 +194,7 @@ These tools modify agent state directly and return synthetic tool results withou
 
 The agent tracks iterations via `IterationBudget`:
 
-- Default: 90 iterations (configurable via `agent.max_turns`)
+- Default: 500 iterations (configurable via `agent.max_turns`)
 - Each agent gets its own budget. Subagents get independent budgets capped at `delegation.max_iterations` (default 50) — total iterations across parent + subagents can exceed the parent's cap
 - At 100%, the agent stops and returns a summary of work done
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/reference/v3/api-reference/projects.md"
-source_hash: "693d316a4a49efc2f3c26372ae4629914380a0b91dbd1375ddd1eba9bc6bb3fd"
+source_hash: "601c37c33125e32523de2c9ef11cb4196fe11dc7e754bd5a315f14ca131f0623"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/projects.md"
@@ -74,5 +74,11 @@ Each project has settings that control security, logging, and display behavior. 
 Notable security setting: `require_mcp_api_key`, when `true`, requires MCP server requests to include a valid `x-api-key` header. This defaults to `true` for organizations created on or after March 5, 2026.
 
 # Endpoints
+
+---
+
+
+# Toolkits
+
 
 ---

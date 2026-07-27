@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Agent with Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal"
-source_hash: "4937eda78abaf64699d8f28bf294650f65c4d79bb6aba32d5279974e30ee8d53"
+source_hash: "6ca7c37049daf05d0ce6e1c264984b9d35fff98d408a53f7675b3e39ff93fdbc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-hermes-with-nous-portal.md"
@@ -241,7 +241,7 @@ The quarantine clears automatically on successful re-login.
 
 ### Model I want isn't in the `/model` picker
 
-The Portal catalog mirrors OpenRouter's model list (300+). If a model is missing, try typing the OpenRouter-style slug directly:
+The Portal catalog draws on OpenRouter's model list (300+) plus models served through proprietary or secondary providers. If a model is missing, try typing the OpenRouter-style slug directly:
 
 ```bash
 /model anthropic/claude-opus-4.6

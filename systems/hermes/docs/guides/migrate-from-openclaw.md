@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Migrate from OpenClaw"
 source: "https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw"
-source_hash: "1b9cd9d9fb1ab11b64e946cb5e67bd8bf4d7c0dd419a3eb31d317a16fb26b10e"
+source_hash: "b6dfa3a8502bf77fb29bbb37b471224dd0f6dd08d221d2a3853c3305cef1a717"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/migrate-from-openclaw.md"
@@ -20,6 +20,10 @@ Source: https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw
 # Migrate from OpenClaw
 
 `hermes claw migrate` imports your OpenClaw (or legacy Clawdbot/Moldbot) setup into Hermes. This guide covers exactly what gets migrated, the config key mappings, and what to verify after migration.
+
+:::note
+Coming from **Claude Code** or **OpenAI Codex CLI** instead? Use [`hermes import-agent`](../user-guide/import-from-other-agents.md).
+:::
 
 :::tip
 If your OpenClaw setup was multi-provider, `hermes setup --portal` collapses it to one OAuth — 300+ models plus the Tool Gateway in a single login. See [Nous Portal](/integrations/nous-portal).

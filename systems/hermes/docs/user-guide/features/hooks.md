@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Event Hooks"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks"
-source_hash: "d2f7cff01b17bef8d7c13f94ead0a3a5be988a629ce80ac1d06b96d2cf43950f"
+source_hash: "8755f2aa204d502df5fe9191096fd3d86173f6d2ccd34e220dfd79557b7186d6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/hooks.md"
@@ -972,7 +972,7 @@ Fires **once per child agent** after `delegate_task` finishes. Whether you deleg
 ```python
 def my_callback(parent_session_id: str, child_role: str | None,
                 child_summary: str | None, child_status: str,
-                duration_ms: int, **kwargs):
+                tool_call_history: list[dict], duration_ms: int, **kwargs):
 ```
 
 | Parameter | Type | Description |
@@ -981,6 +981,7 @@ def my_callback(parent_session_id: str, child_role: str | None,
 | `child_role` | `str \| None` | Orchestrator role tag set on the child (`None` if the feature isn't enabled) |
 | `child_summary` | `str \| None` | The final response the child returned to the parent |
 | `child_status` | `str` | `"completed"`, `"failed"`, `"interrupted"`, or `"error"` |
+| `tool_call_history` | `list[dict]` | Ordered metadata-only tool calls: `tool_name`, bounded `tool_input`, `input_bytes`, `output_bytes`, and `status`; raw inputs and outputs are excluded |
 | `duration_ms` | `int` | Wall-clock time spent running the child, in milliseconds |
 
 **Fires:** In `tools/delegate_tool.py`, after `ThreadPoolExecutor.as_completed()` drains all child futures. Firing is marshalled to the parent thread so hook authors don't have to reason about concurrent callback execution.

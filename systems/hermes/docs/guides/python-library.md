@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Using Hermes as a Python Library"
 source: "https://hermes-agent.nousresearch.com/docs/guides/python-library"
-source_hash: "03ce15cb01878f2d2e9d391c25bbbf88ca642434da9a97ef4183098182e2ea5f"
+source_hash: "eec19046081ccd8cfbc1d6d4254f3afe7811cc79b56438990d5d47bd48c16e98"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/python-library.md"
@@ -322,7 +322,7 @@ print(review)
 | `disabled_toolsets` | `List[str]` | `None` | Blacklist specific toolsets |
 | `save_trajectories` | `bool` | `False` | Save conversations to JSONL |
 | `ephemeral_system_prompt` | `str` | `None` | Custom system prompt (not saved to trajectories) |
-| `max_iterations` | `int` | `90` | Max tool-calling iterations per conversation |
+| `max_iterations` | `int` | `500` | Max tool-calling iterations per conversation |
 | `skip_context_files` | `bool` | `False` | Skip loading AGENTS.md files |
 | `skip_memory` | `bool` | `False` | Disable persistent memory read/write |
 | `api_key` | `str` | `None` | API key (falls back to env vars) |
@@ -342,7 +342,7 @@ print(review)
 :::warning
 - **Thread safety**: Create one `AIAgent` per thread or task. Never share an instance across concurrent calls.
 - **Resource cleanup**: The agent automatically cleans up resources (terminal sessions, browser instances) when a conversation ends. If you're running in a long-lived process, ensure each conversation completes normally.
-- **Iteration limits**: The default `max_iterations=90` is generous. For simple Q&A use cases, consider lowering it (e.g., `max_iterations=10`) to prevent runaway tool-calling loops and control costs.
+- **Iteration limits**: The default `max_iterations=500` is generous. For simple Q&A use cases, consider lowering it (e.g., `max_iterations=10`) to prevent runaway tool-calling loops and control costs.
 :::
 
 ---
