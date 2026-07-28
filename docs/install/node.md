@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node.js"
 source: "https://docs.openclaw.ai/install/node"
-source_hash: "4e765c8da9ce9748f66c4c2e88fe8443836c6cdd68e35f9975c15f69920e134f"
+source_hash: "f68b21f7d127eb23d2693f27d6fdf46a2be89a771d4bbefa6f3c0d306f5a36d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/node.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Node.js
 Source: https://docs.openclaw.ai/install/node
 
-OpenClaw requires **Node 22.22.3+, Node 24.15+, or Node 25.9+**. **Node 24 is the default and recommended runtime** for installs, CI, and release workflows; Node 22 remains supported via the active LTS line. Node 23 is unsupported. The [installer script](/install#alternative-install-methods) detects and installs Node automatically — use this page when you want to set up Node yourself (versions, PATH, global installs).
+OpenClaw requires **Node 22.22.3+, Node 24.15+, or Node 25.9+** (which includes Node 26). **Node 26 is the default and recommended runtime** — it starts the Gateway noticeably faster and uses less memory than Node 24, and the installer script provisions it when Node is missing. CI and release workflows still pin Node 24; Node 22 remains supported via its LTS line. Node 23 is unsupported. The [installer script](/install#alternative-install-methods) detects and installs Node automatically — use this page when you want to set up Node yourself (versions, PATH, global installs).
 
 ## Check your version
 
@@ -21,7 +21,7 @@ OpenClaw requires **Node 22.22.3+, Node 24.15+, or Node 25.9+**. **Node 24 is th
 node -v
 ```
 
-`v24.15.0` or newer 24.x is the recommended default. `v22.22.3` or newer 22.x is the supported Node 22 LTS path; Node `v25.9.0+` is also supported. Node 23 is unsupported. If Node is missing or outside the supported range, pick an install method below.
+`v26` (any release) is the recommended default. `v24.15.0` or newer 24.x remains fully supported (and is what CI pins); `v22.22.3` or newer 22.x is the supported Node 22 LTS path; Node `v25.9.0+` is also supported. Node 23 is unsupported. If Node is missing or outside the supported range, pick an install method below.
 
 ## Install Node
 
@@ -45,7 +45,7 @@ Linux
     **Ubuntu / Debian:**
 
     ```bash
-    curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+    curl -fsSL https://deb.nodesource.com/setup_26.x | sudo -E bash -
     sudo apt-get install -y nodejs
     ```
 
@@ -88,8 +88,8 @@ Using a version manager (nvm, fnm, mise, asdf)
 Example with fnm:
 
 ```bash
-fnm install 24
-fnm use 24
+fnm install 26
+fnm use 26
 ```
 
 

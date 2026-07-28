@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md"
-source_hash: "ad52c316fae445d50edecd6e1b143cff014d50a65f50c79b68c0bdaa01154c3e"
+source_hash: "be62d7b601bf7789230b4c4ed7313c490f3265124ea68e913487b5ead580cafa"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/managing-triggers.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/setting-up-triggers/managing-triggers.md
 
 After a trigger is created, you manage it over its lifecycle: list active instances, pause one with `disable()`, bring it back with `enable()`, or remove it for good with `delete()`.
 
-# Listing active triggers
+# Listing active triggers [#listing-active-triggers]
 
 List the trigger instances you've created. Results are cursor-paginated.
 
@@ -71,7 +71,7 @@ if (active.nextCursor) {
 | `auth_config_ids` / `authConfigIds`             | Array of auth config IDs                     |
 | `show_disabled` / `showDisabled`                | Include disabled triggers (default: `false`) |
 
-# Enable / Disable triggers
+# Enable / Disable triggers [#enable--disable-triggers]
 
 Pause a trigger temporarily without deleting it:
 
@@ -97,7 +97,7 @@ await composio.triggers.disable('ti_abcd123');
 await composio.triggers.enable('ti_abcd123');
 ```
 
-# Deleting triggers
+# Deleting triggers [#deleting-triggers]
 
 Permanently remove a trigger instance:
 

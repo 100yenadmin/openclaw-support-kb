@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Threat model (MITRE ATLAS)"
 source: "https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS"
-source_hash: "21a735e26b14dc8b85098dc8fcfc46606412738ce47d84f5584378fd23e47b08"
+source_hash: "f6a87aa3b263a099dbae8bc339b3df2c7fab253b272190a89ad6ce5c9b14fb68"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/threat-model-atlas.md"
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/security/THREAT-MODEL-ATLAS
 
 This threat model documents adversarial threats to the OpenClaw AI agent platform and ClawHub skill marketplace. It is a living document maintained by the OpenClaw community. See [Contributing to the threat model](/security/CONTRIBUTING-THREAT-MODEL) for how to report new threats, propose attack chains, or suggest mitigations.
 
-**Key ATLAS resources:** [Techniques](https://atlas.mitre.org/techniques/) | [Tactics](https://atlas.mitre.org/tactics/) | [Case studies](https://atlas.mitre.org/studies/) | [ATLAS GitHub](https://github.com/mitre-atlas/atlas-data) | [Contributing to ATLAS](https://atlas.mitre.org/resources/contribute)
+**Key ATLAS resources:** [ATLAS website](https://atlas.mitre.org/) | [ATLAS data and contribution guide](https://github.com/mitre-atlas/atlas-data)
 
 ---
 

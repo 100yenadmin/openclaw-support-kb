@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/reference/v3/api-reference/projects.md"
-source_hash: "601c37c33125e32523de2c9ef11cb4196fe11dc7e754bd5a315f14ca131f0623"
+source_hash: "b4a61fcf257c59b83043c277b3ad0643a863d652c4cea958e007aff8cf6e35e6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/projects.md"
@@ -39,7 +39,7 @@ Common reasons to use multiple projects:
 * **Separate products**: keep resources for different apps independent
 * **Client isolation**: give each client their own project with separate credentials and data
 
-# Managing projects
+# Managing projects [#managing-projects]
 
 Manage projects from the [dashboard](https://dashboard.composio.dev/~/org/) or via the API using an **organization API key** (`x-org-api-key`).
 
@@ -67,18 +67,12 @@ curl -X POST https://backend.composio.dev/api/v3.1/org/owner/project/new \
 
 The list endpoint supports pagination with `limit` and `cursor`; getting a project by ID returns the full project object including its API keys.
 
-# Project settings
+# Project settings [#project-settings]
 
 Each project has settings that control security, logging, and display behavior. The project detail endpoints return current configuration for inspection. Use **Settings > Project Settings** in the [dashboard](https://dashboard.composio.dev/~/project/settings/general) to update project settings.
 
 Notable security setting: `require_mcp_api_key`, when `true`, requires MCP server requests to include a valid `x-api-key` header. This defaults to `true` for organizations created on or after March 5, 2026.
 
-# Endpoints
-
----
-
-
-# Toolkits
-
+# Endpoints [#endpoints]
 
 ---

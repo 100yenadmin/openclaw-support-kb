@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "4ddd0ed2f7f6561aebd8ad337b6e754b0dd8219a41b49202e218a21d96dd58fc"
+source_hash: "953405a033f3578535ad5b4f08a90f8223ebcbc6125b8110704b2aadd17858e3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -54,7 +54,7 @@ const { text } = await generateText({
 
 console.log(text);
 ```
-# Provider specifics
+# Provider specifics [#provider-specifics]
 
 **Strict mode.** Some models reject tool schemas that contain optional parameters. Pass `strict: true` to the provider to drop every non-required property from each tool's input schema before it reaches the AI SDK:
 
@@ -68,7 +68,7 @@ const composio = new Composio({ provider: new VercelProvider({ strict: true }) }
 
 > The provider converts each Composio tool's JSON Schema to a Zod schema for the AI SDK and normalizes tool arguments, so it still works when a model emits tool input as a JSON string rather than an object.
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

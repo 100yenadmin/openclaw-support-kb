@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "10380cb42fbc48dbd48ab4d55a7c5efe8f8e1193c4e5d6286eddf7ebc7ecc66a"
+source_hash: "73af6b8ef841cbf9bedbc2892da6aedfd31dfcb674c341d6ff903c807e507e9f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -60,7 +60,7 @@ crew = Crew(agents=[agent], tasks=[task])
 result = crew.kickoff()
 print(result)
 ```
-# Provider specifics
+# Provider specifics [#provider-specifics]
 
 Each Composio tool becomes a CrewAI `BaseTool` whose `args_schema` is built from the tool's input schema, so CrewAI validates arguments before running anything.
 
@@ -72,7 +72,7 @@ When validation fails, the tool does not raise. It returns a structured result i
 
 Check `successful` in your task output rather than wrapping calls in `try`/`except`.
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

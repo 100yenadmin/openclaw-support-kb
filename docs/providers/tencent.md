@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tencent Cloud (TokenHub / TokenPlan)"
 source: "https://docs.openclaw.ai/providers/tencent"
-source_hash: "a4b1de0fb000d4957c4b734228caf72afde9b781c6c87cf25e9f1b54c08ff4cd"
+source_hash: "b2d0f4fdb30c73e1b8252af24f805e8eac7849083e12a5286d65902b22a96d27"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/tencent.md"
@@ -109,11 +109,11 @@ Note
 
 ## Built-in catalog
 
-| Model ref                      | Name                   | Input | Context | Max output | Notes             |
-| ------------------------------ | ---------------------- | ----- | ------- | ---------- | ----------------- |
-| `tencent-tokenhub/hy3-preview` | hy3 preview (TokenHub) | text  | 256,000 | 64,000     | reasoning-enabled |
-| `tencent-tokenhub/hy3`         | hy3 (TokenHub)         | text  | 256,000 | 64,000     | reasoning-enabled |
-| `tencent-tokenplan/hy3`        | hy3 (TokenPlan)        | text  | 256,000 | 64,000     | reasoning-enabled |
+| Model ref                      | Name                   | Input | Context | Max output | Notes                      |
+| ------------------------------ | ---------------------- | ----- | ------- | ---------- | -------------------------- |
+| `tencent-tokenhub/hy3-preview` | hy3 preview (TokenHub) | text  | 256,000 | 128,000    | deprecated; use `hy3`      |
+| `tencent-tokenhub/hy3`         | hy3 (TokenHub)         | text  | 256,000 | 128,000    | reasoning-enabled; current |
+| `tencent-tokenplan/hy3`        | hy3 (TokenPlan)        | text  | 256,000 | 128,000    | reasoning-enabled; current |
 
 hy3 is Tencent Hunyuan's large MoE language model for reasoning, long-context instruction following, code, and agent workflows. Tencent's OpenAI-compatible examples use `hy3` as the model id and support standard chat-completions tool calling plus `reasoning_effort`.
 

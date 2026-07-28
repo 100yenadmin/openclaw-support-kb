@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meta"
 source: "https://docs.openclaw.ai/providers/meta"
-source_hash: "c848374ce24af103bb43e16bc2e233442dd82df357350c0206161b5fa4ddee15"
+source_hash: "ad66323f0e55ff3b3494a906cef43a82cc0b89fdd4a87afb41c15e84f2402ba9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/meta.md"
@@ -80,13 +80,13 @@ openclaw onboard --non-interactive --accept-risk \
 
 ## Built-in catalog
 
-| Model ref             | Name           | Reasoning | Context window | Max output |
-| --------------------- | -------------- | --------- | -------------- | ---------- |
-| `meta/muse-spark-1.1` | Muse Spark 1.1 | yes       | 1,048,576      | 131,072    |
+| Model ref             | Name           | Input       | Reasoning | Context window | Max output | Input / cached input / output per 1M tokens |
+| --------------------- | -------------- | ----------- | --------- | -------------- | ---------- | ------------------------------------------- |
+| `meta/muse-spark-1.1` | Muse Spark 1.1 | text, image | yes       | 1,048,576      | 131,072    | $1.25 / $0.15 / $4.25                       |
 
 Capabilities:
 
-- Text + image input
+- Text and image input
 - Tool calling and streaming
 - Reasoning effort: `minimal`, `low`, `medium`, `high`, `xhigh` (default: `high`)
 - Stateless encrypted reasoning replay (`store: false`, `include: ["reasoning.encrypted_content"]`)

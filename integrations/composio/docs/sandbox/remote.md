@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Remote sandbox"
 source: "https://docs.composio.dev/docs/sandbox/remote.md"
-source_hash: "a600ca4bc48f8ea15ae6068e66de3b7bc3a5d4feb87150b5f7266884d19989cc"
+source_hash: "4b92c95bb7ad7b94bf2e36c17f37f6fe2c3b68848551c0e697b3e8231f7cae79"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sandbox/remote.md"
@@ -21,13 +21,13 @@ The **sandbox** is a persistent Python environment where your agent writes and e
 
 > **Renamed from workbench**: This feature used to be called the **workbench**. The preferred session config key is now `sandbox`, but `workbench` still works as a fully supported alias, in both SDKs and on the wire. It isn't deprecated, so existing code keeps running unchanged. The `COMPOSIO_REMOTE_WORKBENCH` and `COMPOSIO_REMOTE_BASH_TOOL` meta tools keep their names.
 
-# Where it fits
+# Where it fits [#where-it-fits]
 
 Use the sandbox when a task is too complex for individual tool calls. Your agent starts with [`SEARCH_TOOLS` to find the right tools, then uses `MULTI_EXECUTE`](/docs/how-composio-works#meta-tools) for straightforward calls. When the task involves bulk operations, data transformations, or multi-step logic, the agent reaches for `COMPOSIO_REMOTE_WORKBENCH` instead.
 
-# What the sandbox provides
+# What the sandbox provides [#what-the-sandbox-provides]
 
-## Built-in helpers
+## Built-in helpers [#built-in-helpers]
 
 These functions are pre-initialized in every sandbox, so your agent can call them without any setup:
 
@@ -40,19 +40,19 @@ These functions are pre-initialized in every sandbox, so your agent can call the
 | `web_search`         | Search the web and return results for research or data enrichment                                     |
 | `smart_file_extract` | Extract text from PDFs, images, and other file formats in the sandbox                                 |
 
-## Libraries
+## Libraries [#libraries]
 
 The sandbox ships with common packages pre-installed: `pandas`, `numpy`, `matplotlib`, `Pillow`, `PyTorch`, and `reportlab`. Beyond these, the sandbox maintains a list of supported packages and their dependencies. If the agent uses a package that isn't already installed, the sandbox installs it automatically.
 
-## Error correction
+## Error correction [#error-correction]
 
 The sandbox corrects common mistakes in the code your agent generates. For example, if a script accesses `result["apiKey"]` but the actual field name is `api_key`, the sandbox resolves the mismatch instead of failing.
 
-## Persistent state
+## Persistent state [#persistent-state]
 
 The sandbox runs as a persistent Jupyter notebook. Variables, imports, files, and in-memory state from one call are available in the next.
 
-## Compute tier
+## Compute tier [#compute-tier]
 
 Sandboxes default to `standard` (1 vCPU, 1 GB RAM). For heavier workloads (large dataframes, ML preprocessing, or big bulk operations), pick a larger tier when creating the session via `sandbox.sandboxSize` (TypeScript) or `sandbox.sandbox_size` (Python).
 
@@ -67,7 +67,7 @@ Larger tiers require `@composio/core` ≥ `0.8.1` or `composio` ≥ `0.12.1`. Se
 
 > **Pricing:** Sandboxes are not billed today. Composio plans to begin billing for sandbox usage soon (metered by tier and runtime).
 
-# Files and mounts
+# Files and mounts [#files-and-mounts]
 
 The sandbox has a persistent file mount at `/mnt/files/`. Code running in the sandbox reads and writes files there, and the mount survives sandbox restarts: changing the [compute tier](#compute-tier) recreates the sandbox and clears in-memory state, but `/mnt/files/` persists.
 
@@ -120,7 +120,7 @@ A `RemoteFile` carries the file's bytes and a presigned `downloadUrl`. Read it w
 
 Every file lives on the session's default `files` mount, surfaced at `/mnt/files/`. Each method takes a `mountId` to address a mount by ID, but there's no SDK call to create custom mounts today, so you'll normally work with `files`.
 
-# Next
+# Next [#next]
 
 - [Local sandbox](/docs/sandbox/local): Run the same tool calls in a sandbox you own, while Composio keeps managed auth and discovery.
 

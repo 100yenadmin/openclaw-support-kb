@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/mcp.md"
-source_hash: "261c0976a3488dcaf34285e50a40d449b51951f7ccb1cf4a339dcbee89ba9407"
+source_hash: "adbf4d225db1efdf80992fa2c44e82d6e4d7c13db00e0951b72685741252f791"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/mcp.md"
@@ -23,7 +23,7 @@ opt-in per session; the standalone `composio.mcp` server-management API is kept 
 backwards compatibility. Prefer the session MCP endpoint; do not generate new code against
 `composio.mcp`. See [https://docs.composio.dev/docs/sessions-via-mcp](https://docs.composio.dev/docs/sessions-via-mcp)
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.mcp` property:
 
@@ -32,15 +32,15 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.mcp.list();
 ```
 
-# Properties
+# Properties [#properties]
 
 | Name     | Type       |
 | -------- | ---------- |
 | `client` | `Composio` |
 
-# Methods
+# Methods [#methods]
 
-## create()
+## create() [#create]
 
 Create a new MCP configuration.
 
@@ -80,7 +80,7 @@ const server = await composio.mcpConfig.create("personal-mcp-server", {
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Delete an MCP server configuration permanently
 
@@ -128,7 +128,7 @@ console.log("Server still exists:", serverExists); // Should be false
 
 ***
 
-## generate()
+## generate() [#generate]
 
 Get server URLs for an existing MCP server.
 The response is wrapped according to the provider's specifications.
@@ -161,7 +161,7 @@ const mcp = await composio.experimental.mcp.generate("default", "<mcp_config_id>
 
 ***
 
-## get()
+## get() [#get]
 
 Retrieve detailed information about a specific MCP server by its ID
 
@@ -202,7 +202,7 @@ const mcpUrl = server.MCPUrl;
 
 ***
 
-## list()
+## list() [#list]
 
 List the MCP servers with optional filtering and pagination
 
@@ -246,7 +246,7 @@ const namedServers = await composio.experimental.mcp.list({
 
 ***
 
-## update()
+## update() [#update]
 
 Update an existing MCP server configuration with new settings
 

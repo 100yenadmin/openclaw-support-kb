@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Receiving events"
 source: "https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events.md"
-source_hash: "d84735602a8ec3ceca15f60569ba3adedd9c83a1db590028feee5579af85ee16"
+source_hash: "d77e52f8f1e840ed8beee31d5efb1aab35e15df1edb0505a1bfaf1965f5bf452"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/subscribing-to-events.md"
@@ -19,11 +19,11 @@ Source: https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events
 
 Once a trigger is active, its events come to you as the same payload, whether you're testing locally or running in production. Develop against your local handler first, then point Composio at your production URL when you ship.
 
-# Receive events locally
+# Receive events locally [#receive-events-locally]
 
 While developing, you want trigger events on your machine. The best option forwards them to the real webhook handler you'll run in production, so you test the exact path (including `parse()` and signature verification) before you ship.
 
-## Quick look with `subscribe()`
+## Quick look with `subscribe()` [#quick-look-with-subscribe]
 
 `subscribe()` streams events straight to your process over a WebSocket, with no webhook URL, no tunnel, and no signing. It's the fastest way to eyeball what a trigger sends, but it bypasses your real webhook handler. Use it only for basic prototyping; for anything you intend to ship, forward events to your handler with one of the options below.
 
@@ -62,7 +62,7 @@ await composio.triggers.subscribe(
 
 Filter the stream by `triggerId`, `triggerSlug`, `connectedAccountId`, `toolkits`, or `userId`, or pass no filters to receive every trigger event in the project.
 
-## Forward to your local handler with the CLI (recommended)
+## Forward to your local handler with the CLI (recommended) [#forward-to-your-local-handler-with-the-cli-recommended]
 
 The Composio CLI streams realtime events and forwards each one to your local URL, signed exactly like production. No public URL, no tunnel, and it runs your real handler (and [`parse()`](#handling-events)) end to end.
 
@@ -72,7 +72,7 @@ composio dev triggers listen --forward "http://localhost:8000/webhooks/composio"
 
 Events are signed with `COMPOSIO_WEBHOOK_SECRET` if it's set, otherwise the CLI prints a generated secret to verify against. Filter the stream with `--toolkits`, `--trigger-slug`, or `--trigger-id`, and tee events to a file with `--out events.jsonl`.
 
-## Cloudflare Tunnel
+## Cloudflare Tunnel [#cloudflare-tunnel]
 
 Expose your local server with [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/), no account needed for quick runs:
 
@@ -82,7 +82,7 @@ cloudflared tunnel --url http://localhost:8000
 
 Register the printed `trycloudflare.com` URL as your [webhook URL](#receive-events-in-production), then events reach your handler at `http://localhost:8000/webhooks/composio`.
 
-## ngrok
+## ngrok [#ngrok]
 
 Expose your local server with [ngrok](https://ngrok.com):
 
@@ -92,7 +92,7 @@ ngrok http 8000
 
 Register the printed `ngrok-free.app` URL as your [webhook URL](#receive-events-in-production) the same way.
 
-# Receive events in production
+# Receive events in production [#receive-events-in-production]
 
 Register your webhook URL once per project. Composio then `POST`s every trigger event to it. Set it from the SDK:
 
@@ -126,7 +126,7 @@ console.log(`Delivering events to ${subscription.webhookUrl}`);
 
 Your webhook endpoint must be publicly reachable. Composio's outbound IPs are dynamic, so IP allowlists and VPN-only endpoints won't work. Authenticate payloads with [signature verification](#verifying-signatures) instead.
 
-# Handling events
+# Handling events [#handling-events]
 
 In your handler, pass the incoming request to `parse()`. It returns the typed, normalized payload. Pass `verifySecret` and it verifies the signature first, so one call both authenticates and parses.
 
@@ -187,7 +187,7 @@ export async function POST(request: Request) {
 
 > Composio delivers other project events (like [connection expiry](/docs/authentication#connection-lifecycle)) to this same URL. `parse()` returns those too. Route on `result.payload.triggerSlug` and ignore what you don't handle.
 
-## Inspecting trigger payload schemas
+## Inspecting trigger payload schemas [#inspecting-trigger-payload-schemas]
 
 Each trigger type declares the shape of the `data` it sends. Inspect it before you write your handler:
 
@@ -227,7 +227,7 @@ Or generate typed stubs for your project (scope to the toolkits you use with `--
 composio generate --toolkits github   # auto-detects TypeScript or Python
 ```
 
-## Webhook payload shape
+## Webhook payload shape [#webhook-payload-shape]
 
 Every trigger event arrives in the same envelope. `metadata` tells you where the event came from; `data` holds the event itself, in the shape the trigger type declares.
 
@@ -262,7 +262,7 @@ Every trigger event arrives in the same envelope. `metadata` tells you where the
 
 > This is the V3 payload, the default for new organizations. See [webhook payload versions](#webhook-payload-versions) for V2 and V1.
 
-# Verifying signatures
+# Verifying signatures [#verifying-signatures]
 
 Composio signs every webhook request. `parse({ verifySecret })` verifies the signature for you (and `verifyWebhook()` does the same at a lower level), so most handlers need nothing more. You only need this section if you're **not** using the Composio SDK.
 
@@ -329,7 +329,7 @@ function verifyWebhook(
 
 > Reject requests whose `webhook-timestamp` is too old to block replays. The SDK's `parse()` and `verifyWebhook()` enforce a 300-second tolerance by default; pass `tolerance` to change it, or `0` to disable the check.
 
-# Webhook payload versions
+# Webhook payload versions [#webhook-payload-versions]
 
 `parse()` and `verifyWebhook()` auto-detect the version. If you process payloads manually, here are the formats:
 
@@ -396,7 +396,7 @@ Metadata fields are mixed into the `data` object alongside event data.
 }
 ```
 
-# Next
+# Next [#next]
 
 - [Managing triggers](/docs/setting-up-triggers/managing-triggers): List, enable, disable, and delete trigger instances
 

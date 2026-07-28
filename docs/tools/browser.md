@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "95ccc07fa6cea97e57b82c2ed1901b8e13f2d06c0297728b17bc512246aaedc8"
+source_hash: "e52d50e40ff402a05cc38bcf683317b46efcefa9f45d2603e930778bb0ad6377"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -24,6 +24,7 @@ OpenClaw can run a **dedicated Chrome/Brave/Edge/Chromium profile** that the age
 - A separate browser profile named **openclaw** (orange accent by default).
 - Deterministic tab control (list/open/focus/close).
 - Agent actions (click/type/drag/select), snapshots, screenshots, PDFs.
+- Question answering over readable page text without returning a full snapshot.
 - Playwright-backed profiles save direct attachment navigations under the managed downloads directory and return `{ url, suggestedFilename, path }` metadata after final-URL policy validation.
 - Playwright-backed agent actions return a `downloads` array with the same managed metadata when the action immediately starts one or more downloads.
 - A bundled `browser-automation` skill that teaches agents the snapshot,
@@ -106,6 +107,17 @@ The browser plugin ships two levels of agent guidance:
 Plugin-bundled skills are listed in the agent's available skills when the
 plugin is enabled. The full skill instructions load on demand, so routine
 turns do not pay the full token cost.
+
+For “read this page and answer X,” use browser `action="extract"` with a
+`query`. It sends sanitized, bounded readable text through one model call and
+returns only the answer; keep `snapshot` for choosing actions and obtaining
+refs. Extraction requires a Playwright-backed profile and falls back to a
+snapshot workflow when it cannot complete.
+
+On large pages, pass `selector` to capture only the relevant CSS subtree and
+`ignoreSelectors` to remove repeated chrome before conversion. Pass a JSON
+`schema` when the caller needs validated machine-usable fields in
+`details.json`; without it, extraction remains a free-text answer.
 
 ## Missing browser command or tool
 
@@ -202,6 +214,11 @@ Browser settings live in `~/.openclaw/openclaw.json`.
 extraction mode when a caller does not pass an explicit `snapshotFormat` or
 `mode`; see [Browser control API](/tools/browser-control) for per-call
 snapshot options.
+
+On drivers with stable document identity, repeated AI or role snapshots of the
+same tab, document, and option family mark newly appeared ref-bearing elements
+with `[new]`. The first snapshot—and the first snapshot after navigation—sets
+an unmarked baseline. Existing-session snapshots omit deltas.
 
 ### Tab cleanup ownership
 

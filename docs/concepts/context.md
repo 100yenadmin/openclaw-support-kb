@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context"
 source: "https://docs.openclaw.ai/concepts/context"
-source_hash: "cd9b34e8a43d048353784bec278dda74fbadec3ff39ae19b9c71d95253f4a715"
+source_hash: "693d23fde1f9590c166e6e01aed208bc2cf7a689f6d9ec811ca04621de39c592"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context.md"
@@ -50,10 +50,8 @@ System prompt (run): 38,412 chars (~9,603 tok) (Project Context 23,901 chars (~5
 Injected workspace files:
 - AGENTS.md: OK | raw 1,742 chars (~436 tok) | injected 1,742 chars (~436 tok)
 - SOUL.md: OK | raw 912 chars (~228 tok) | injected 912 chars (~228 tok)
-- TOOLS.md: TRUNCATED | raw 54,210 chars (~13,553 tok) | injected 20,962 chars (~5,241 tok)
 - IDENTITY.md: OK | raw 211 chars (~53 tok) | injected 211 chars (~53 tok)
 - USER.md: OK | raw 388 chars (~97 tok) | injected 388 chars (~97 tok)
-- HEARTBEAT.md: MISSING | raw 0 | injected 0
 - BOOTSTRAP.md: OK | raw 0 chars (~0 tok) | injected 0 chars (~0 tok)
 
 Skills list (system prompt text): 2,184 chars (~546 tok) (12 skills)
@@ -125,10 +123,8 @@ By default, OpenClaw injects a fixed set of workspace files (if present):
 
 - `AGENTS.md`
 - `SOUL.md`
-- `TOOLS.md`
 - `IDENTITY.md`
 - `USER.md`
-- `HEARTBEAT.md`
 - `BOOTSTRAP.md` (first-run only)
 
 Large files are truncated per-file using `agents.defaults.bootstrapMaxChars` (default `20000` chars). OpenClaw also enforces a total bootstrap injection cap across files with `agents.defaults.bootstrapTotalMaxChars` (default `60000` chars). `/context` shows **raw vs injected** sizes and whether truncation happened.

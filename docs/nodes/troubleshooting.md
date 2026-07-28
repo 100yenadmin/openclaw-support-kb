@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node troubleshooting"
 source: "https://docs.openclaw.ai/nodes/troubleshooting"
-source_hash: "e2456c1fc0f53e68a0d2ca438a13093f9c6e9083b8a6ba985c1d2bdadf0386b2"
+source_hash: "07c3426ab2a830ca564034e6a588085e862a3c93618b3e8afabb329096d2f449"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/troubleshooting.md"
@@ -119,7 +119,7 @@ If still stuck:
 - Re-grant OS permissions.
 - Recreate/adjust the exec approval policy.
 
-For computer control, also verify that a vision-capable agent exposes the `computer` tool, `screen.snapshot` succeeds with Screen Recording permission, and `/phone status` shows the temporary or persistent gateway authorization you intended. A `gateway.nodes.commands.deny` entry always overrides `gateway.nodes.commands.allow`.
+For computer control, also verify that the node-local Computer Control toggle is enabled, its pairing update is approved, a vision-capable agent exposes the `computer` tool, and `screen.snapshot` succeeds with Screen Recording permission. A `gateway.nodes.commands.deny` entry always overrides a platform default or `gateway.nodes.commands.allow`.
 
 ## Related
 

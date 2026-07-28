@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS IPC"
 source: "https://docs.openclaw.ai/platforms/mac/xpc"
-source_hash: "bb59e12ff31dbd30059f312e607cf23af517b4d53413ea005a6d20b1448aa540"
+source_hash: "6e05ce27ca29f93375ddf195d61a57ff26e580e0d322c6b0008ffed3b313c467"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/xpc.md"
@@ -66,7 +66,9 @@ Agent -> Gateway -> Node Service (WS)
 - PeekabooBridge: `PEEKABOO_ALLOW_UNSIGNED_SOCKET_CLIENTS=1` (DEBUG-only) may allow same-UID callers for local development.
 - All communication remains local-only; no network sockets are exposed.
 - TCC prompts originate only from the GUI app bundle; keep the signed bundle ID stable across rebuilds.
-- Exec approvals socket hardening: file mode `0600`, shared token, peer-UID check (`getpeereid`), HMAC-SHA256 challenge/response, and a short TTL on requests.
+- Exec approvals socket hardening: file mode `0600`, shared token stored in the
+  `exec_approvals_config` row of `state/openclaw.sqlite`, peer-UID check
+  (`getpeereid`), HMAC-SHA256 challenge/response, and a short TTL on requests.
 
 ## Related
 

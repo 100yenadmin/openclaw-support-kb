@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClawHub CLI"
 source: "https://docs.openclaw.ai/clawhub/cli"
-source_hash: "4ea967b600aff1af9c5535e43f4f43fb5e4b88a6f721c0823e77ab7b17f45a09"
+source_hash: "1808be625a5967d3576b0e99d9f7bdd0a3e9d6c8b0a4b8821aab572074547868"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "clawhub/cli.md"
@@ -28,6 +28,7 @@ Two command-line surfaces talk to ClawHub:
 openclaw skills search "calendar"
 openclaw skills install @owner/<slug>
 openclaw skills install @owner/<slug> --version <version> --global
+openclaw skills install skills-sh:<owner>/<repo>/<slug>
 openclaw skills update @owner/<slug>
 openclaw skills update --all --acknowledge-clawhub-risk
 openclaw skills verify @owner/<slug> --card
@@ -44,6 +45,12 @@ Skill installs target the active workspace `skills/` directory by default; add
 explicit `clawhub:` prefix to force ClawHub resolution over npm, git, or a
 local path. Full flag reference: [`openclaw skills`](/cli/skills) and
 [`openclaw plugins`](/cli/plugins).
+
+`skills-sh:` is an explicitly external catalog reference. OpenClaw sends it to
+ClawHub and installs the exact commit-pinned GitHub source returned by the
+resolver; it never downloads skill content from skills.sh directly. Unclaimed
+entries are labeled **Not scanned by ClawHub**. Claimed and ClawHub-scanned
+skills use the native `@owner/<slug>` form instead.
 
 ### Release trust
 

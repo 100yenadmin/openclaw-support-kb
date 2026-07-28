@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness runtime"
 source: "https://docs.openclaw.ai/plugins/codex-harness-runtime"
-source_hash: "d07cb21c433293212981f57a965f61478e6d41e5a4024bd0e7b40b3e67a23c9b"
+source_hash: "026c83b95b5f03d1cee636d0acaaf86b91b59c16ede5cd18ac58a401041d9f53"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-runtime.md"
@@ -130,8 +130,8 @@ Codex heartbeat turns get `heartbeat_respond` in the searchable OpenClaw tool
 catalog by default so the agent can record whether the wake should stay quiet
 or notify. Heartbeat initiative guidance is sent as a Codex collaboration-mode
 developer instruction scoped to the heartbeat turn; ordinary chat turns stay
-in Codex Default mode. When `HEARTBEAT.md` is non-empty, the heartbeat
-instructions point Codex at the file instead of inlining its contents.
+in Codex Default mode. The heartbeat monitor's cron scratch is appended to the
+heartbeat prompt when present.
 
 ## Hook boundaries
 

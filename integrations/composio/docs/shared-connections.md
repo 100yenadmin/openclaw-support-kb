@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Shared connections"
 source: "https://docs.composio.dev/docs/shared-connections.md"
-source_hash: "6a518197fca0748bad888a333f07b65bf41a0f11b05c33837ea0bf2ffad416ce"
+source_hash: "20231f538a20bd2770a1fde7940bbe7cacd55a73a98a43d6154669f2031a73f1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "shared-connections.md"
@@ -27,7 +27,7 @@ Typical use cases:
 * **Background agents acting on behalf of multiple users.** The agent runs as a single service account but executes work for many `userID`s.
 * **Team mailboxes.** `support@` or `sales@` accounts where any teammate can send and read mail through your app.
 
-# SHARED vs PRIVATE
+# SHARED vs PRIVATE [#shared-vs-private]
 
 |                                    | PRIVATE (default)           | SHARED                                                                                   |
 | ---------------------------------- | --------------------------- | ---------------------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ Typical use cases:
 | **How it's used**                  | Implicit lookup by `userID` | Must be **explicitly pinned** in a session                                               |
 | **ACL fields**                     | Ignored                     | `allowAllUsers`, `allowedUserIds`, `notAllowedUserIds` (inside the `experimental` block) |
 
-# Creating a SHARED connection
+# Creating a SHARED connection [#creating-a-shared-connection]
 
 Pass an `experimental` block to `link()` (`accountType` in TypeScript, `account_type` in Python) set to `"SHARED"`, and optionally an initial ACL. Omit the ACL block to keep the default deny-by-default state (only the creator can use it until you grant access).
 
@@ -96,7 +96,7 @@ The returned `connectedAccountId` (`ca_...`) is the ID you'll pin into other use
 
 > ACL fields are only valid on SHARED connections. Sending an `experimental.acl_config_for_shared` block on a PRIVATE connection raises `ComposioAclOnlyForSharedError`.
 
-# Using a shared connection
+# Using a shared connection [#using-a-shared-connection]
 
 Pin the SHARED connection into a session through `connectedAccounts`. The session belongs to a *different* `userID` than the creator, and the pin is what makes the SHARED connection visible to that session.
 
@@ -137,20 +137,20 @@ const tools = await session.tools();
 
 > A session may pin **at most one SHARED connection per toolkit**. Pinning two SHARED Gmail connections in the same session is rejected at session create time. Mixing one SHARED with multiple PRIVATE pins is allowed.
 
-# ACL resolution rule
+# ACL resolution rule [#acl-resolution-rule]
 
 When a non-creator `userID` attempts to use a SHARED connection, the ACL is evaluated in this order:
 
 1. `userId` ∈ `notAllowedUserIds` → **DENY**
 2. `allowAllUsers === true` → **ALLOW**
 3. `userId` ∈ `allowedUserIds` → **ALLOW**
-4. otherwise → **DENY** *(deny-by-default)*
+4. otherwise → **DENY*&#x2A; &#x2A;(deny-by-default)*
 
-Deny wins on conflict, which lets you express *"share with everyone except a few people"* by setting `allowAllUsers: true` and naming the exceptions in `notAllowedUserIds`.
+Deny wins on conflict, which lets you express &#x2A;"share with everyone except a few people"* by setting `allowAllUsers: true` and naming the exceptions in `notAllowedUserIds`.
 
 The creator can always use their own connection. The ACL only governs other `userID`s.
 
-## Common ACL patterns
+## Common ACL patterns [#common-acl-patterns]
 
 The table below shows the inner shape of the ACL block (`aclConfigForShared` in TypeScript, `acl_config_for_shared` in Python). Wrap it inside the `experimental` block at the call site. Field names are camelCase in the TypeScript samples; Python callers translate to snake\_case (`allow_all_users`, `allowed_user_ids`, `not_allowed_user_ids`).
 
@@ -164,7 +164,7 @@ The table below shows the inner shape of the ACL block (`aclConfigForShared` in 
 
 Each list accepts up to 1000 entries; each `userID` is 1..256 characters.
 
-# Updating the ACL
+# Updating the ACL [#updating-the-acl]
 
 Call `updateAcl()` on the connected accounts namespace to change access after creation. It follows PATCH semantics: pass only the fields you want to change, omit a field to leave it unchanged, and pass an empty array to clear an allow or deny list.
 
@@ -217,15 +217,15 @@ await composio.connectedAccounts.updateAcl("ca_gmail_shared", {
 
 ACL writes are restricted to the connection's creator or an API key caller. Other callers get a permission error.
 
-# Listing SHARED connections
+# Listing SHARED connections [#listing-shared-connections]
 
 By default `list()` returns **PRIVATE only**, so shared accounts must be requested explicitly. Pass an `account_type` (Python) or `accountType` (TypeScript) filter to scope the query.
 
-| Value                                | Returns                  |
-| ------------------------------------ | ------------------------ |
-| `'PRIVATE'` *(default when omitted)* | Only PRIVATE connections |
-| `'SHARED'`                           | Only SHARED connections  |
-| `'ALL'`                              | PRIVATE + SHARED         |
+| Value                                          | Returns                  |
+| ---------------------------------------------- | ------------------------ |
+| `'PRIVATE'&#x60; &#x2A;(default when omitted)* | Only PRIVATE connections |
+| `'SHARED'`                                     | Only SHARED connections  |
+| `'ALL'`                                        | PRIVATE + SHARED         |
 
 The filter is a flat query param on the wire (`?account_type=...`), so it stays flat in both SDKs, unlike the create and update surfaces, which nest under `experimental`.
 
@@ -264,7 +264,7 @@ const sharedForAlice = await composio.connectedAccounts.list({
 });
 ```
 
-# Inspecting the ACL
+# Inspecting the ACL [#inspecting-the-acl]
 
 `get()` and `list()` responses surface `accountType` and `aclConfigForShared` under the same `experimental` block as the request shape. The `aclConfigForShared` field is populated only when the caller is the connection's creator or is using an API key. Other callers see the `experimental` block without that field.
 
@@ -308,7 +308,7 @@ if (account.experimental) {
 }
 ```
 
-# Error handling
+# Error handling [#error-handling]
 
 | Error                                              | When                                                                                                                                                                                   |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -318,7 +318,7 @@ if (account.experimental) {
 
 The access errors are caught the same way as any other Composio exception (`ComposioAclOnlyForSharedError` and `ComposioSharedAccessDeniedError` are exported from `@composio/core`, and live under `composio.exceptions` in Python).
 
-# Next
+# Next [#next]
 
 - [Configuring sessions](/docs/configuring-sessions): Pin connected accounts, auth configs, and toolkit restrictions into a session
 

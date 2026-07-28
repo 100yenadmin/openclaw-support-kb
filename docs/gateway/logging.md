@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "271a1db58e9436ed9cee2068320161b637c16ecc1b65d003c6d6d95b568a76ea"
+source_hash: "ae25c10d3ad9c763ba27f978493e617cac7c74fc9f9d2be4b9a6915a7c60299e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
@@ -59,7 +59,7 @@ The CLI captures `console.log/info/warn/error/debug/trace`, writes them to file 
 Tune console verbosity independently:
 
 - `logging.consoleLevel` (default `info`)
-- `logging.consoleStyle` (`pretty` | `compact` | `json`; defaults to `pretty` on a TTY, `compact` otherwise)
+- `logging.consoleStyle` (`pretty` | `json`). When unset, output is `pretty` on a TTY and the automatic `compact` style otherwise. `compact` is no longer a settable value; `openclaw doctor --fix` maps a stored one to `pretty`.
 
 ## Redaction
 

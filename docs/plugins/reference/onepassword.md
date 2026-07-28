@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onepassword plugin"
 source: "https://docs.openclaw.ai/plugins/reference/onepassword"
-source_hash: "45dfd9b7eab97aeab28c0bbcd267763d8c14672b136f1deb657d447c84ac4c1e"
+source_hash: "e3d67e7ac01fe5d692332528cdf44474dbb00ba151f357d7b1bf68820f5c9054"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/onepassword.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/onepassword
 
 # Onepassword plugin
 
-Curated 1Password secrets broker with approval policy and SQLite audit history.
+1Password SecretRef resolver and curated agent broker with approval policy and SQLite audit history.
 
 ## Distribution
 

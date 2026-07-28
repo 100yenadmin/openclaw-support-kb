@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing multiple connected accounts"
 source: "https://docs.composio.dev/docs/managing-multiple-connected-accounts.md"
-source_hash: "3dce6c785278b473446452a8c24d4ce1dd564e2042549bbce078b4bd54d07b2a"
+source_hash: "f53bafb8e0bdb1e1fe59fac465588c6ee317e5cc5503b6f051da59a75e1dc1da"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "managing-multiple-connected-accounts.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/managing-multiple-connected-accounts.md
 
 Users can connect multiple accounts for the same toolkit (e.g., personal and work Gmail accounts). This guide covers how to enable multi-account mode, label accounts with aliases, and select which account to use.
 
-# Multi-account mode
+# Multi-account mode [#multi-account-mode]
 
 By default, each session uses **one account per toolkit**. Enable multi-account mode to let users connect and use multiple accounts for the same toolkit within a single session.
 
@@ -50,7 +50,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-## Configuration options
+## Configuration options [#configuration-options]
 
 | Option (TS / Python)                                      | Type      | Default | Description                                                                                                                                                                                                                                                                                                                                                          |
 | --------------------------------------------------------- | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,7 +60,7 @@ const session = await composio.create("user_123", {
 
 When multi-account mode is disabled (the default), each session uses the most recently connected account for each toolkit.
 
-# Connecting multiple accounts
+# Connecting multiple accounts [#connecting-multiple-accounts]
 
 Call `session.authorize()` multiple times for the same toolkit. Each call creates a separate connected account.
 
@@ -101,14 +101,14 @@ console.log(`Connect personal Gmail: ${personalAuth.redirectUrl}`);
 const personalConnection = await personalAuth.waitForConnection();
 ```
 
-# Aliases
+# Aliases [#aliases]
 
 Aliases are human-readable labels for connected accounts (e.g., `"work-gmail"`, `"personal-github"`). They make it easier for agents and users to identify which account is which.
 
 * Must be unique per user and toolkit within a project
 * Can be set during connection or updated after
 
-## Setting an alias during connection
+## Setting an alias during connection [#setting-an-alias-during-connection]
 
 Pass `alias` to `session.authorize()`:
 
@@ -131,7 +131,7 @@ const connectionRequest = await session.authorize("gmail", { alias: "work-gmail"
 
 The direct-execution methods `connectedAccounts.initiate()` and `connectedAccounts.link()` accept the same `alias` parameter.
 
-## Updating or clearing an alias
+## Updating or clearing an alias [#updating-or-clearing-an-alias]
 
 **Python:**
 
@@ -155,7 +155,7 @@ await composio.connectedAccounts.update("ca_abc123", { alias: "work-gmail" });
 await composio.connectedAccounts.update("ca_abc123", { alias: "" });
 ```
 
-# Selecting a specific account for a session
+# Selecting a specific account for a session [#selecting-a-specific-account-for-a-session]
 
 Pin a session to specific accounts by passing their IDs in the session config. To retrieve connected account IDs, see [List accounts](/docs/auth-configuration/connected-accounts#list-accounts).
 
@@ -184,7 +184,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Viewing session's active accounts
+# Viewing session's active accounts [#viewing-sessions-active-accounts]
 
 Use `session.toolkits()` to see which accounts are currently active:
 
@@ -213,7 +213,7 @@ for (const toolkit of toolkits.items) {
 }
 ```
 
-# Next
+# Next [#next]
 
 - [Shared connections](/docs/shared-connections): Make one connected account usable by multiple users with a per-user access control list
 

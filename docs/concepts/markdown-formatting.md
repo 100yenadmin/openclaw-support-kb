@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Markdown formatting"
 source: "https://docs.openclaw.ai/concepts/markdown-formatting"
-source_hash: "17fad498f41fb430ab4edd5c3b8e29a72d61a1861dff7b909617040a4e78ffb7"
+source_hash: "9918e9c31c5e9ce6e4ebd5ae9a12f91f71ef4e0739bf9eecd99587f58b8f3408"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/markdown-formatting.md"
@@ -110,6 +110,15 @@ delivery behavior across channels.
 Spoiler markers (`||spoiler||`) are parsed for Signal (mapped to `SPOILER`
 style ranges) and Telegram (mapped to `<tg-spoiler>`). Other channels treat
 `||...||` as plain text.
+
+## Collapsible details
+
+The Control UI and Telegram accounts with `richMessages: true` render
+`<details><summary>Label</summary>` disclosures as native collapsible sections.
+OpenClaw tells the model about this option only when the current reply surface
+supports it. Other channels, including Telegram accounts without rich messages,
+flatten each disclosure to `**Summary**` followed by the visible body so no
+content is hidden or lost.
 
 ## Adding or updating a channel formatter
 

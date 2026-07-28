@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "8972436d13a6d11b65e4059c6b7bc9fc6b413194bb6b810ecbcd941a6f3b9d25"
+source_hash: "1151183b1d0425d4b21f971c8eca249e7f5f9f39d7e260f7b3e0e2b7424dacec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -24,9 +24,7 @@ The Anthropic provider formats Composio tools for Claude and executes the tool c
 
 Pick the tab that matches your integration.
 
-> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
-
-### Messages API
+### messages
 
 The `AnthropicProvider` transforms Composio tools into the format the Claude Messages API expects, then executes the tool calls Claude requests and shapes the results back into Messages API content blocks.
 
@@ -148,7 +146,7 @@ for (const block of response.content) {
 ```
 > `handleToolCalls` does the loop body for you. It extracts every `tool_use` block from the response, executes the matching Composio tools, and returns a ready-to-append array of Messages API content (a `user` message holding `tool_result` blocks). That is why the TypeScript example spreads the result straight into `messages` with `messages.push(...toolResults)`. In Python it returns the raw result list, which the example wraps into `tool_result` blocks by hand.
 
-### Claude Agent SDK
+### agent-sdk
 
 The `ClaudeAgentSDKProvider` exposes your Composio tools to the Claude Agent SDK as an in-process MCP server. You build the server with `create_sdk_mcp_server` (Python) or `createSdkMcpServer` (TypeScript), register it on the agent, and the SDK runs the tool-call loop for you.
 
@@ -230,7 +228,7 @@ for await (const content of query({
 }
 ```
 
-# Provider specifics
+# Provider specifics [#provider-specifics]
 
 A few things are specific to the Anthropic provider:
 
@@ -239,7 +237,7 @@ A few things are specific to the Anthropic provider:
 * **String-encoded tool inputs are handled for you.** Claude occasionally emits a tool's `input` as a JSON string instead of an object. The provider normalizes this before execution, so you do not have to parse it yourself.
 * **`cacheTools` only.** The constructor takes no other options. There is no agentic execution in this provider; you run the loop (Messages API) or hand the loop to the Claude Agent SDK (Agent SDK tab).
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

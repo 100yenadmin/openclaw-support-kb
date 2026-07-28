@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio Connect"
 source: "https://docs.composio.dev/docs/composio-connect.md"
-source_hash: "5198c0b4d72bc420245b8c421e5072dc8d0e2762c9c20edd9ab55fb6ff939751"
+source_hash: "ea7dd568e1749fd3b4822f508f08b3dd76fba3a1421a1b7df59c8ce26497e20a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "composio-connect.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/composio-connect.md
 
 Give any AI agent the ability to act across 1000+ apps. Bring your agent to where you work.
 
-# How Composio Connect works
+# How Composio Connect works [#how-composio-connect-works]
 
 Composio Connect is an MCP server at `https://connect.composio.dev/mcp` that gives your AI agent access to 1000+ apps — Gmail, Notion, Slack, GitHub, Linear, HubSpot, Strava, and more — through a single connection.
 
@@ -264,7 +264,7 @@ Open the [OpenAI Agent Builder](https://platform.openai.com/agent-builder) and c
 
 #### Add MCP Server
 
-Click **MCP** in the sidebar, then click **+ Server**. Paste the URL:
+Click **MCP*&#x2A; in the sidebar, then click **+ Server**. Paste the URL:
 
 ```
 https://connect.composio.dev/mcp
@@ -313,11 +313,11 @@ Use this config with any MCP-compatible client:
 }
 ```
 
-# Connect your apps
+# Connect your apps [#connect-your-apps]
 
 Your agent will prompt you to connect apps when needed. If you want to connect apps ahead of time, open the [Composio dashboard](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-composio-connect) and click **Connect Apps** in the sidebar.
 
-# Available MCP tools
+# Available MCP tools [#available-mcp-tools]
 
 Composio Connect exposes 7 meta-tools that orchestrate access to all supported apps. Your agent uses these to discover, connect, and execute upstream tools — you don't need to call them directly.
 
@@ -329,31 +329,31 @@ Composio Connect exposes 7 meta-tools that orchestrate access to all supported a
 * **`COMPOSIO_REMOTE_WORKBENCH`** — Run Python in a remote sandbox for bulk operations or processing large tool responses.
 * **`COMPOSIO_REMOTE_BASH_TOOL`** — Run bash in a remote sandbox for file processing and large data handling.
 
-# Troubleshooting
+# Troubleshooting [#troubleshooting]
 
-## Tools aren't appearing in my agent
+## Tools aren't appearing in my agent [#tools-arent-appearing-in-my-agent]
 
 1. Confirm the MCP server is connected. In Claude Desktop, go to **Settings > Connectors** and check that Composio shows a `CUSTOM` badge. In Claude Code, run `/mcp` and confirm Composio is enabled.
-2. Clear the connector cache. In Claude Desktop: click the **⋮** next to Composio and select **Clear cache**.
+2. Clear the connector cache. In Claude Desktop: click the &#x2A;*⋮** next to Composio and select **Clear cache**.
 3. If the issue persists, disconnect and re-add the connector:
-  * **Claude Desktop** — click **⋮ > Disconnect**, then **Remove**. Re-add via **Add custom connector**.
+  * **Claude Desktop*&#x2A; — click **⋮ > Disconnect**, then **Remove**. Re-add via **Add custom connector**.
   * **Claude Code** — re-run the setup command from the Claude Code section above.
 
-## The OAuth link expired or didn't open
+## The OAuth link expired or didn't open [#the-oauth-link-expired-or-didnt-open]
 
 OAuth links are short-lived. If the browser window doesn't open or the link has expired, ask your agent to retry the action — Composio will generate a fresh link. You can also open the [Composio dashboard](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-composio-connect), click **Connect Apps**, and start the flow manually.
 
-## An app action is failing with an auth error
+## An app action is failing with an auth error [#an-app-action-is-failing-with-an-auth-error]
 
 1. Open the [Composio dashboard](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-composio-connect) and click **Connect Apps**.
 2. Find the app in question. If the connection is unhealthy, click **Disconnect** and reconnect.
 3. Retry the action in your agent.
 
-## I want to remove or reconnect an app
+## I want to remove or reconnect an app [#i-want-to-remove-or-reconnect-an-app]
 
 Open [dashboard.composio.dev](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-composio-connect) and click **Connect Apps**. From there you can disconnect, delete, or re-authorize any app.
 
-## I still need help
+## I still need help [#i-still-need-help]
 
 Reach out at [tech@composio.dev](mailto:tech@composio.dev) or join the [Composio Discord](https://discord.com/invite/cNruWaAhQk).
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LlamaIndex"
 source: "https://docs.composio.dev/docs/providers/llamaindex.md"
-source_hash: "1b81e394fcec820d1a01d4a2f2a8994a820e9048cc4cd52a891328692b0e46c3"
+source_hash: "91446544552e996c8ea8e937b653b1112fe40da2cbb2bf2a0e053225733bb669"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/llamaindex.md"
@@ -89,7 +89,7 @@ const result = await myAgent.run(
 console.log(result.data.result);
 ```
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtime"
 source: "https://docs.openclaw.ai/concepts/agent"
-source_hash: "3b40b80c6c17f9a8ae2103dfdfb0940b3d14f99c4ef712de53a40c01fa083323"
+source_hash: "33e2d527ca95a3320e07813e69dcf240568027dd157d1dee5acc3a8c88c8ce55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent.md"
@@ -42,10 +42,8 @@ Inside the workspace, OpenClaw expects these user-editable files:
 | -------------- | ---------------------------------------------------- |
 | `AGENTS.md`    | Operating instructions + "memory"                    |
 | `SOUL.md`      | Persona, boundaries, tone                            |
-| `TOOLS.md`     | User-maintained tool notes and conventions           |
 | `IDENTITY.md`  | Agent name/vibe/emoji                                |
 | `USER.md`      | User profile + preferred address                     |
-| `HEARTBEAT.md` | Heartbeat-specific instructions                      |
 | `BOOTSTRAP.md` | One-time first-run ritual (deleted after completion) |
 | `MEMORY.md`    | Root long-term memory file, if present               |
 
@@ -76,8 +74,7 @@ To disable bootstrap file creation entirely (for pre-seeded workspaces), set:
 
 Core tools (read/exec/edit/write and related system tools) are always available,
 subject to tool policy. `apply_patch` is on by default for OpenAI models and gated by
-`tools.exec.applyPatch` (`enabled`, `workspaceOnly`, `allowModels`). `TOOLS.md` does **not** control which tools exist; it's
-guidance for how _you_ want them used.
+`tools.exec.applyPatch` (`enabled`, `workspaceOnly`, `allowModels`). The `## Tools` section of `AGENTS.md` does **not** control which tools exist; it is guidance for how _you_ want them used.
 
 ## Skills
 

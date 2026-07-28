@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Swarm"
 source: "https://docs.openclaw.ai/tools/swarm"
-source_hash: "7b507b328da027d99cfab58af964a1db94c49cf92ef29e0b9e0ae5f72d6f6a97"
+source_hash: "363f8523e582f80f9852ffdcde984a8b751e4832f9290b59142105f83fb49a80"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/swarm.md"
@@ -319,14 +319,15 @@ is rejected with the relevant config key in the error.
 
 ## Observe a Swarm
 
-Open the parent session's dashboard in the Control UI while a swarm is active.
-The Swarm widget renders each active collector group as one dot per child with
-queued, running, done, or failed state. Labels appear in dot tooltips, so short
-stable labels make larger swarms easier to read.
+Keep the parent session open in Chat while a swarm is active. The Control UI and
+native Android, iOS, and macOS chat surfaces show a compact Swarm progress widget
+between the transcript and composer, rendering each active collector group as one
+dot per child with queued, running, done, or failed state. Accessible labels identify
+each child and status; the Control UI also exposes them as dot tooltips. The widget
+disappears after every group child reaches a terminal state.
 
-The session sidebar keeps the normal parent/child tree. Expand the parent row
-to inspect a collector child or open its transcript without losing the swarm
-hierarchy.
+The session sidebar keeps the normal parent/child tree. Expand the parent row to
+inspect a collector child or open its transcript without losing the swarm hierarchy.
 
 Collector results remain waitable until their group is archived. After every
 member reaches its retention deadline, OpenClaw archives the group's children

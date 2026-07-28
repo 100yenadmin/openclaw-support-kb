@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node + tsx crash"
 source: "https://docs.openclaw.ai/debug/node-issue"
-source_hash: "81bb334b43f5e70c93db1cf2d6f6d204b7aa7cab216d948226817e91fc1a4164"
+source_hash: "21fac057ff8cbd081d71e76978897ca3bdff16ad0dc75388f31aebb889c4ebd1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "debug/node-issue.md"
@@ -56,14 +56,8 @@ pnpm install
 node --import tsx src/entry.ts status
 ```
 
-Minimal isolated repro (loads only the module from the original stack trace):
-
-```bash
-node --import tsx scripts/repro/tsx-name-repro.ts
-```
-
-Both commands currently exit cleanly. If either throws `__name is not a
-function` again, capture the exact Node version, `tsx` version
+The command currently exits cleanly. If it throws `__name is not a function`
+again, capture the exact Node version, `tsx` version
 (`node_modules/tsx/package.json`), and full stack trace before filing upstream.
 
 ## Workarounds (if the crash returns)

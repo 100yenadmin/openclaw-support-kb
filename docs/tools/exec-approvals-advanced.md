@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals — advanced"
 source: "https://docs.openclaw.ai/tools/exec-approvals-advanced"
-source_hash: "66a57f7ba7e54548df706b8eb0f8ad9b3814829ab8901ff7c92f3cc331a116d9"
+source_hash: "1efc553d0d87c6c5e84fdd106f1ccdd98b9454c289f0962238f23accae8e7328"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals-advanced.md"
@@ -116,7 +116,7 @@ automatically.
 
 ### Safe bins versus allowlist
 
-| Topic            | `tools.exec.safeBins`                                  | Allowlist (`exec-approvals.json`)                                                  |
+| Topic            | `tools.exec.safeBins`                                  | Allowlist (SQLite exec approvals document)                                         |
 | ---------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | Goal             | Auto-allow narrow stdin filters                        | Explicitly trust specific executables                                              |
 | Match type       | Executable name + safe-bin argv policy                 | Resolved executable path glob, or bare command-name glob for PATH-invoked commands |
@@ -129,7 +129,7 @@ Configuration location:
 - `safeBins` comes from config (`tools.exec.safeBins` or per-agent `agents.entries.*.tools.exec.safeBins`).
 - `safeBinTrustedDirs` comes from config (`tools.exec.safeBinTrustedDirs` or per-agent `agents.entries.*.tools.exec.safeBinTrustedDirs`).
 - `safeBinProfiles` comes from config (`tools.exec.safeBinProfiles` or per-agent `agents.entries.*.tools.exec.safeBinProfiles`). Per-agent profile keys override global keys.
-- allowlist entries live in the host-local approvals file under `agents.<id>.allowlist` (or via Control UI / `openclaw approvals allowlist ...`).
+- allowlist entries live in the host-local approvals document under `agents.<id>.allowlist` (or via Control UI / `openclaw approvals allowlist ...`).
 - `openclaw security audit` warns with `tools.exec.safe_bins_interpreter_unprofiled` when interpreter/runtime bins appear in `safeBins` without explicit profiles.
 - `openclaw doctor --fix` can scaffold missing custom `safeBinProfiles.<bin>` entries as `{}` (review and tighten afterward). Interpreter/runtime bins are not auto-scaffolded.
 
@@ -399,7 +399,8 @@ Gateway -> Node Service (WS)
 
 Security notes:
 
-- Unix socket mode `0600`, token stored in `exec-approvals.json`.
+- Unix socket mode `0600`, token stored in the `exec_approvals_config` row of
+  `state/openclaw.sqlite`.
 - Same-UID peer check.
 - Challenge/response (nonce + HMAC token + request hash) + short TTL.
 

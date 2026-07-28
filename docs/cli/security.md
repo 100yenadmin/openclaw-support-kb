@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/cli/security"
-source_hash: "c173690293e488e6d38a8615ba45fd359e6526d81177706b3054e833544ff8b5"
+source_hash: "1924c46dc7868905c3d204b1b941c0b340b8402e6dde9cf084407b3e67ca4ed1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/security.md"
@@ -130,7 +130,6 @@ Applies safe, deterministic remediations:
 
 - flips common `groupPolicy="open"` to `groupPolicy="allowlist"` (including account variants in supported channels)
 - when WhatsApp group policy flips to `allowlist`, seeds `groupAllowFrom` from the stored `allowFrom` file when that list exists and config does not already define `allowFrom`
-- sets `logging.redactSensitive` from `"off"` to `"tools"`
 - tightens permissions for state/config and common sensitive files (`credentials/*.json`, `auth-profiles.json`, `openclaw-agent.sqlite`, and legacy session artifacts)
 - also tightens config include files referenced from `openclaw.json`
 - uses `chmod` on POSIX hosts and `icacls` resets on Windows

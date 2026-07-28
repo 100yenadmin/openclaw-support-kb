@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript Custom Provider"
 source: "https://docs.composio.dev/docs/providers/custom-providers/typescript.md"
-source_hash: "50742ed1931c59d7d2bfb57f8f9075040cb2fe70a146ea1bc981517c549f8d58"
+source_hash: "6a232689b33bc4fe46ab8020c18550cba9b482da2de173782f7a7d8bc55f7b2e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/custom-providers/typescript.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/providers/custom-providers/typescript.md
 
 A **provider** adapts Composio tools to the format your AI framework expects. Write one, and any framework can call Composio's 1000+ tools. This guide shows you how to build your own in TypeScript.
 
-# Provider architecture
+# Provider architecture [#provider-architecture]
 
 A provider does three things:
 
@@ -45,7 +45,7 @@ BaseProvider (Abstract)
     └── [Your Custom Agentic Provider] (Concrete)
 ```
 
-# Non-agentic provider
+# Non-agentic provider [#non-agentic-provider]
 
 A non-agentic provider extends `BaseNonAgenticProvider`. You supply a `name`, `wrapTool`, and `wrapTools`, and call the built-in `executeTool` when you're ready to run a tool.
 
@@ -108,7 +108,7 @@ export class MyAIProvider extends BaseNonAgenticProvider {
 }
 ```
 
-# Agentic provider
+# Agentic provider [#agentic-provider]
 
 An **agentic provider** extends `BaseAgenticProvider`. The difference from the non-agentic case: `wrapTool` and `wrapTools` receive an `executeToolFn`, which you embed in each tool so the framework's agent can run the tool itself.
 
@@ -177,7 +177,7 @@ export class MyAgentProvider extends BaseAgenticProvider {
 }
 ```
 
-# Use your provider
+# Use your provider [#use-your-provider]
 
 Pass an instance to `Composio` via the `provider` option. Every tool you fetch comes back in your custom format.
 
@@ -203,7 +203,7 @@ const tools = await composio.tools.get('default', {
 console.log(tools); // These will be in your custom format
 ```
 
-# Provider state and context
+# Provider state and context [#provider-state-and-context]
 
 A provider is a class, so it can hold state. Use the constructor for config, and instance fields for caches or counters.
 
@@ -253,7 +253,7 @@ export class StatefulProvider extends BaseNonAgenticProvider {
 }
 ```
 
-# Advanced: compose providers
+# Advanced: compose providers [#advanced-compose-providers]
 
 You don't have to start from a base class. Extend an existing provider to add behavior like analytics or retries, and call `super` to reuse its logic.
 
@@ -306,7 +306,7 @@ export class EnhancedOpenAIProvider extends OpenAIProvider {
 }
 ```
 
-# Best practices
+# Best practices [#best-practices]
 
 * **Keep providers focused**: each provider should target one platform.
 * **Handle errors gracefully**: catch and transform errors from tool execution.

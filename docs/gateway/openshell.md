@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenShell"
 source: "https://docs.openclaw.ai/gateway/openshell"
-source_hash: "d9b0bf2d3012c90337355fa599b401f16edfbebc42638274ddbcf203f86a0273"
+source_hash: "884863ebf04a8ce381873b1b6df6b0f0a18cf8eb8e7562a13eb06cba2504b603"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openshell.md"
@@ -27,6 +27,7 @@ workspace sync mode.
 - OpenShell plugin installed (`openclaw plugins install @openclaw/openshell-sandbox`)
 - `openshell` CLI on `PATH` (or a custom path via
   `plugins.entries.openshell.config.command`)
+- OpenSSH client available on the Gateway host
 - An OpenShell account with sandbox access
 - OpenClaw Gateway running on the host
 
@@ -259,6 +260,18 @@ remote workspace for that scope, and the next use seeds a fresh one from
 local. For `mirror` mode, recreate mainly resets the remote execution
 environment since local stays canonical.
 
+OpenClaw keeps a registered sandbox's shipped legacy runtime name after an
+upgrade so its remote workspace remains addressable. Recreating that scope
+deletes the legacy runtime; the next use creates the current 19-character
+runtime name.
+
+OpenShell v0.0.92 can still locate a sandbox record created by v0.0.68, but a
+Docker-backed sandbox may remain in a non-Ready phase after the gateway
+upgrade. OpenClaw preserves the registered runtime identity, refuses to create
+a replacement implicitly, and reports the scoped `openclaw sandbox recreate`
+command. Treat that recreation as destructive in `remote` mode because the
+remote workspace is canonical.
+
 Recreate after changing any of:
 
 - `agents.defaults.sandbox.backend`
@@ -273,6 +286,26 @@ canonical paths (via realpath) before every read, write, mkdir, remove, and
 rename, rejecting mid-path symlinks. A symlink swap or remounted workspace
 cannot redirect file access outside the mirrored tree.
 
+## Custom image contract
+
+The OpenShell source image owns the remote operating system and package set.
+OpenClaw does not apply Docker image, root-filesystem, network, user, or package
+settings to this backend.
+
+Custom images used with the OpenClaw filesystem bridge must provide:
+
+- `/bin/sh`
+- `python3` or `python` for pinned write, edit, rename, and remove operations
+- GNU-compatible `stat` and `find`
+- standard `mkdir`, `mv`, `rm`, and `rmdir` utilities
+
+Package installation and private certificate roots must be included in the
+source image or installed from inside the sandbox. The selected OpenShell
+policy must permit the required network destinations, and the sandbox user and
+filesystem must permit the writes. `sandbox.docker.network`,
+`sandbox.docker.readOnlyRoot`, `sandbox.docker.user`, and
+`sandbox.docker.setupCommand` do not configure OpenShell.
+
 ## Current limitations
 
 - Sandbox browser is not supported on the OpenShell backend.
@@ -280,6 +313,9 @@ cannot redirect file access outside the mirrored tree.
   if binds are configured.
 - Docker-specific runtime knobs under `sandbox.docker.*` (other than `env`)
   apply only to the Docker backend.
+- Native plugin code and Gateway RPC stay on the Gateway host. Plugin-owned and
+  MCP tools are available to sandboxed sessions only when sandbox tool policy
+  allows them.
 
 ## How it works
 

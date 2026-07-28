@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migration guides"
 source: "https://docs.composio.dev/docs/migration-guide.md"
-source_hash: "e8997e845c19d29d947f82d35039699e8923ffa58517ee90cdce03906ef5cb4f"
+source_hash: "b83e9b224399052077ca9ecdda30119a7676b720881f12c21bcce7690d74903e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/migration-guide.md
 
 > _Written December 2025._
 
-# Available migration guides
+# Available migration guides [#available-migration-guides]
 
 **Migrating from Direct Tools to Sessions**
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "RemoteFile"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/remote-file.md"
-source_hash: "65507be190d4440574ad77a355c455e2ef82bdffbf67342942a8618c447a1a93"
+source_hash: "e5c6a6ef8183bf640d0301d13cc4a7e9fdce53ca8383eb60b0d4b22ccfacc49f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/remote-file.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/remote-file.md
 
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.remoteFile` property:
 
@@ -26,7 +26,7 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.remoteFile.list();
 ```
 
-# Properties
+# Properties [#properties]
 
 | Name                 | Type     | Description                                              |
 | -------------------- | -------- | -------------------------------------------------------- |
@@ -35,9 +35,9 @@ const result = await composio.remoteFile.list();
 | `mountRelativePath`  | `string` | Relative path within the mount (e.g. "report.pdf")       |
 | `sandboxMountPrefix` | `string` | Absolute mount path inside the sandbox (e.g. /mnt/files) |
 
-# Methods
+# Methods [#methods]
 
-## blob()
+## blob() [#blob]
 
 Fetches the file content as a Blob.
 
@@ -51,7 +51,7 @@ async blob(): Promise
 
 ***
 
-## buffer()
+## buffer() [#buffer]
 
 Fetches the file content as a buffer.
 
@@ -65,7 +65,7 @@ async buffer(): Promise
 
 ***
 
-## save()
+## save() [#save]
 
 Downloads and saves the file to the local filesystem.
 Requires a Node.js runtime with file system support (not available in Cloudflare Workers/Edge).
@@ -86,7 +86,7 @@ async save(path?: string): Promise<string>
 
 ***
 
-## text()
+## text() [#text]
 
 Fetches the file content as UTF-8 text.
 
@@ -100,7 +100,7 @@ async text(): Promise<string>
 
 ***
 
-## parse()
+## parse() [#parse]
 
 Parses an API response (snake\_case) and returns a RemoteFile instance.
 

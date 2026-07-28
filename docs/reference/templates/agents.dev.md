@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "AGENTS.dev template"
 source: "https://docs.openclaw.ai/reference/templates/AGENTS.dev"
-source_hash: "0679a6996d504381f7d70508aa45fe3e74150c26b0716e9ce629558113dca3a5"
+source_hash: "4dcacceda64a1d93ea00955e0ab3e3ff2702bfaed6883ebdf8915a0c545161b4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/agents.dev.md"
@@ -58,7 +58,18 @@ Before proposing or building a custom system, feature, workflow, tool, integrati
 
 ## Heartbeats (optional)
 
-- HEARTBEAT.md can hold a tiny checklist for heartbeat runs; keep it small.
+- The heartbeat monitor's cron scratch can hold a tiny checklist for heartbeat runs; keep it small.
+
+## Tools
+
+Skills define how tools work. Keep environment-specific details here so shared skills can update independently without exposing your local setup.
+
+Example placeholders (replace or remove them):
+
+```markdown
+- SSH: dev-server -> 192.168.1.100, user admin
+- TTS: preferred voice "Nova"; default speaker Office
+```
 
 ## Customize
 

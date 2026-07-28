@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "StepFun"
 source: "https://docs.openclaw.ai/providers/stepfun"
-source_hash: "87f9a56826cd8ae7341cc332989e47d9a7d0ad9187f4586e8b66d97286fd3b8d"
+source_hash: "39a230e5d02e1eeff49ba1b383bfc9959575fd5bb1f11e012a47a811ccfa9fb5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/stepfun.md"
@@ -197,7 +197,7 @@ Full config: Standard provider
                 name: "Step 3.5 Flash",
                 reasoning: true,
                 input: ["text"],
-                cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+                cost: { input: 0.1, output: 0.3, cacheRead: 0.02, cacheWrite: 0 },
                 contextWindow: 262144,
                 maxTokens: 65536,
               },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "b836b2a2b7cef3e12fd1bbebe9554b333dd443eecf04ea213456ce43a8f8400a"
+source_hash: "b506845bac3f53a5ba9007b0f119d616c29a8a8483a326c15e9d57809ebdb1ec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -103,7 +103,6 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
     file: "/tmp/openclaw/openclaw.log",
     consoleLevel: "info",
     consoleStyle: "pretty",
-    redactSensitive: "tools",
   },
 
   // Message formatting
@@ -262,7 +261,6 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
         directPolicy: "allow", // allow (default) | block
         to: "+15555550123",
         prompt: "HEARTBEAT",
-        ackMaxChars: 300,
       },
       sandbox: {
         mode: "non-main",

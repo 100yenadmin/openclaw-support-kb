@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "513cf782ea8fc5bf4ed4bc165149dc544b0e82a93eda97e22322747d0131139b"
+source_hash: "34e253a9f31c6b03d93ec126e1b4c11cee235df0fa85fd123dcb686f954e12de"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -19,9 +19,7 @@ Source: https://docs.composio.dev/docs/providers/langchain.md
 
 The LangChain provider formats Composio tools for [LangChain](https://python.langchain.com/) and [LangGraph](https://langchain-ai.github.io/langgraph/) agents. Pick the tab that matches your setup.
 
-> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
-
-### LangChain
+### langchain
 
 The LangChain provider transforms each Composio tool into a LangChain [`DynamicStructuredTool`](https://js.langchain.com/docs/concepts/tools/) with built-in execution. You can hand the tools to `create_agent` in Python or wire them into a graph node in TypeScript, and the framework runs the tool loop for you.
 
@@ -113,7 +111,7 @@ const finalState = await app.invoke({
 });
 console.log(finalState.messages[finalState.messages.length - 1].content);
 ```
-### LangGraph
+### langgraph
 
 The LangGraph provider transforms Composio tools into the same LangChain `DynamicStructuredTool` format, ready to use with LangGraph agents. LangGraph integration is Python-only.
 
@@ -148,7 +146,7 @@ result = agent.invoke({"messages": [("user", "Send an email to john@example.com 
 print(result["messages"][-1].content)
 ```
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

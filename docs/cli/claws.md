@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claws"
 source: "https://docs.openclaw.ai/cli/claws"
-source_hash: "b08b06945e051417aeaf95221816723ee0fa9d9a8c17af126dd20bb1b79065c8"
+source_hash: "fb966652eb7bd8b48bfa78e4d5f8d567b647ecd770588bb972087f63477b6b87"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/claws.md"
@@ -45,8 +45,9 @@ workspace sidecars referenced by that manifest:
 }
 ```
 
-`CLAW.md` starts with YAML frontmatter. Its Markdown body describes the Claw
-for people and is not part of the agent configuration:
+`CLAW.md` starts with YAML frontmatter. A non-empty Markdown body is the
+portable agent prompt. OpenClaw applies it as the Claw-managed `SOUL.md` for
+the new agent:
 
 ```md
 ---
@@ -65,7 +66,8 @@ cronJobs: []
 
 # Incident triage
 
-Creates one agent for reviewing and routing incidents.
+You review incoming incidents, identify severity and ownership, and leave a
+concise handoff with evidence.
 ```
 
 `metadata` is a string-to-string map for portable consumer hints. OpenClaw's
@@ -118,15 +120,16 @@ limited to 1 MiB, package metadata to 256 KiB, and workspace sources enforce
 separate per-file and aggregate limits. Workspace sources also reject symlinked
 parents.
 
-Workspace files are declared by path and read from package sidecars. Bootstrap
-files such as `SOUL.md` use named entries; additional files use package-relative
-sources and workspace-relative targets:
+The `CLAW.md` body is the preferred portable source for `SOUL.md`; do not also
+declare a `SOUL.md` sidecar when the body is non-empty. Other bootstrap files
+use named entries, while additional files use package-relative sources and
+workspace-relative targets:
 
 ```json
 {
   "workspace": {
     "bootstrapFiles": {
-      "SOUL.md": { "source": "workspace/SOUL.md" }
+      "AGENTS.md": { "source": "workspace/AGENTS.md" }
     },
     "files": [
       {
@@ -357,8 +360,11 @@ openclaw claws export incident-triage --out ./incident-triage-export --json
 ```
 
 The result contains `package.json`, canonical `CLAW.md`, and managed workspace
-sidecars. It is a portable Claw package, not a whole-instance backup: unrelated
-agents, credentials, sessions, and unowned local state are excluded.
+sidecars. Managed `SOUL.md` content is emitted as the `CLAW.md` body when it is
+non-empty UTF-8 and the combined document fits the manifest limit. Otherwise,
+export retains it as an explicit sidecar so the package remains importable. It
+is a portable Claw package, not a whole-instance backup: unrelated agents,
+credentials, sessions, and unowned local state are excluded.
 
 ## Command reference
 

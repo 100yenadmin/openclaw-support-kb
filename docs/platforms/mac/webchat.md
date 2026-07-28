@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WebChat (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/webchat"
-source_hash: "f13653f0f8d0c9e2b61e60c188502da1279d42fb4bf5b3d95894af5bae769472"
+source_hash: "6a3da68a177cb37162884d8e423e159a6386e90d9b9ea74b1c8b372df12811d7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/webchat.md"
@@ -31,6 +31,7 @@ profile contains a private-network `ws://` or secure `wss://` endpoint and its
 optional token or password; credentials are stored in the macOS Keychain.
 Secure profiles maintain their own system-trust-gated first-use certificate pin
 and do not inherit `gateway.remote.tlsFingerprint` from the primary Gateway.
+Dashboard windows enforce that same saved-profile pinning policy.
 Removing a profile also closes its open windows and shuts down its secondary
 connection.
 
@@ -48,6 +49,17 @@ The menu-bar app's configured Gateway remains the owner of Mac node
 capabilities and Talk Mode. Additional Gateway windows are operator-only, so a
 second Gateway cannot silently retarget global microphone or device controls.
 Listen/TTS and normal chat actions use the window's own Gateway connection.
+
+### Gateway picker
+
+The dashboard header shows a Gateway picker when the Mac app has at least two
+configured Gateways. Choose a Gateway to replace the current dashboard in the
+same window, or Option-click it to open a separate dashboard window. **Set as
+primary…** makes the viewed token-authenticated profile the Mac app's primary
+Gateway after confirmation; this resets Talk Mode, canvas, and chat
+connections. While connected, the sidebar footer also shows the current Gateway
+and marks it when it is primary. Password-only profiles can be viewed but cannot
+be made primary.
 
 ## Quick Chat bar
 

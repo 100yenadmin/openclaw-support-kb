@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NovitaAI"
 source: "https://docs.openclaw.ai/providers/novita"
-source_hash: "a0281994959bd39db35402532d3a6222271ce2c83ccc07a076fa200e982e0fbe"
+source_hash: "d2ef86ba2270af1aa3106a1848579a4ed702ae84329eb4fed104d117a7f0d7b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/novita.md"
@@ -16,7 +16,7 @@ Source: https://docs.openclaw.ai/providers/novita
 NovitaAI is a hosted AI infrastructure provider with an OpenAI-compatible API.
 It ships as a bundled OpenClaw provider (no separate plugin install), so
 credentials go through the normal model auth flow and model refs look like
-`novita/deepseek/deepseek-v3-0324`.
+`novita/deepseek/deepseek-v4-pro`.
 
 ## Setup
 
@@ -34,22 +34,26 @@ export NOVITA_API_KEY="<your-novita-api-key>" # pragma: allowlist secret
 
 ## Defaults
 
-| Setting       | Value                              |
-| ------------- | ---------------------------------- |
-| Provider id   | `novita`                           |
-| Aliases       | `novita-ai`, `novitaai`            |
-| Base URL      | `https://api.novita.ai/openai/v1`  |
-| Env var       | `NOVITA_API_KEY`                   |
-| Default model | `novita/deepseek/deepseek-v3-0324` |
+| Setting       | Value                             |
+| ------------- | --------------------------------- |
+| Provider id   | `novita`                          |
+| Aliases       | `novita-ai`, `novitaai`           |
+| Base URL      | `https://api.novita.ai/openai/v1` |
+| Env var       | `NOVITA_API_KEY`                  |
+| Default model | `novita/deepseek/deepseek-v4-pro` |
 
 ## Bundled model catalog
 
-- `novita/moonshotai/kimi-k2.5`
-- `novita/minimax/minimax-m2.7`
-- `novita/zai-org/glm-5`
-- `novita/deepseek/deepseek-v3-0324`
-- `novita/deepseek/deepseek-r1-0528`
-- `novita/qwen/qwen3-235b-a22b-fp8`
+- `novita/moonshotai/kimi-k3`
+- `novita/moonshotai/kimi-k2.7-code`
+- `novita/minimax/minimax-m3`
+- `novita/zai-org/glm-5.2`
+- `novita/deepseek/deepseek-v4-pro`
+- `novita/deepseek/deepseek-v4-flash`
+- `novita/qwen/qwen3.7-max`
+
+`novita/minimax/minimax-m2.7` remains selectable as a deprecated compatibility
+entry but is hidden from model pickers.
 
 This is a starting point, not a live catalog. Your account, region, or
 Novita's current offering may add, remove, or restrict routes. Check before

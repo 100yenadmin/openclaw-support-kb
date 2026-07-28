@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode plugin"
 source: "https://docs.openclaw.ai/plugins/reference/opencode"
-source_hash: "b3f0a4cb4d2f3a1999f6fe2868e9d93b702168f1c9517fb9121969aa0bfddb73"
+source_hash: "fec8bb8cf21cd40b3db5d56c1c629daf9e78dd7cc6260bb8075e1dde58bce51d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/opencode.md"
@@ -31,11 +31,18 @@ providers: `opencode`; contracts: `mediaUnderstandingProviders`
 ## Native sessions
 
 OpenClaw auto-detects the `opencode` CLI on the Gateway and paired nodes. Stored
-sessions then appear in the **OpenCode** sessions-sidebar group, with read-only
-transcript browsing through the official `opencode --pure db ... --format json`
-and `opencode --pure export` commands. The restricted environment and `--pure`
-mode prevent catalog browsing from loading project plugins or inheriting unrelated
-Gateway credentials.
+sessions then appear in the **OpenCode** sessions-sidebar group, with transcript
+browsing through the official `opencode --pure db ... --format json` and
+`opencode --pure export` commands. Local rows also offer **Continue**, which
+creates an OpenClaw session whose first turn resumes the native OpenCode session
+through ACP. OpenCode retains the full server-side model context, and the catalog
+viewer continues to show that history. OpenClaw also imports the recent native
+history into the adopted session transcript. Very long transcripts import only
+their most recent 200 items using a 512 KiB serialized-item budget. Paired-node
+rows remain view-only.
+
+The restricted environment and `--pure` mode prevent catalog browsing from
+loading project plugins or inheriting unrelated Gateway credentials.
 
 Turn **OpenCode Session Catalog** off under **Config > Plugins > OpenCode** to
 disable discovery. It is enabled by default.

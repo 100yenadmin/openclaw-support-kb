@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "API Server"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server"
-source_hash: "b54047dc381990b6bde0e2e6d6a6b851d9a5b139e594925b7f2be09496865fd9"
+source_hash: "1499e4db89ba45e5026d696f542758f81b0b8d39e1bf16735ebeee87d5c6769d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/api-server.md"
@@ -387,6 +387,17 @@ Statuses are retained briefly after terminal states (`completed`, `failed`, or `
 ### GET /v1/runs/\{run_id\}/events
 
 Server-Sent Events stream of the run's tool-call progress, token deltas, and lifecycle events. Designed for dashboards and thick clients that want to attach/detach without losing state.
+
+When the agent delegates work to background subagents, the stream also carries
+`subagent.start` and `subagent.complete` lifecycle events, so clients can
+observe delegation outcomes — including timeouts and failures — instead of the
+run going silent while a child works. The `subagent.complete` payload carries
+the child's status, summary, duration, token/cost figures, and a
+`child_session_id` for correlation; free-text fields pass forced secret
+redaction before leaving the process. Per-tool child events
+(`subagent.tool`, progress ticks) are intentionally **not** forwarded — they
+are high-volume UI noise; use the per-child live transcript files for
+play-by-play.
 
 Unconsumed event buffers expire after five minutes so a detached client cannot
 grow memory indefinitely. This expires transport state only: a run that is

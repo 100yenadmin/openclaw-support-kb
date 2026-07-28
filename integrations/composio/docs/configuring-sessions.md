@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "66b010ef9584f12057ec248b4a0baf832afa966e5ea1121c674549806b7c7f8f"
+source_hash: "02a0079521325fa0a690f22fb5d50e2e3bf480e508c64d9fb135eb18fda66367"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "configuring-sessions.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/configuring-sessions.md
 
 
-# Creating a session
+# Creating a session [#creating-a-session]
 
 **Python:**
 
@@ -37,7 +37,7 @@ By default, a session has access to every toolkit in the Composio catalog. Your 
 
 You can also attach local custom tools and custom toolkits that run in-process alongside Composio tools. See [Custom tools and toolkits](/docs/extending-sessions/custom-tools-and-toolkits).
 
-# Enabling toolkits
+# Enabling toolkits [#enabling-toolkits]
 
 To limit a session to specific toolkits, pass an array of toolkit slugs. The agent can only discover and use tools from these toolkits.
 
@@ -73,7 +73,7 @@ const session2 = await composio.create("user_123", {
 });
 ```
 
-# Disabling toolkits
+# Disabling toolkits [#disabling-toolkits]
 
 To keep every toolkit discoverable except a few, use the `disable` syntax. This is useful when you want broad access but need to exclude specific toolkits.
 
@@ -96,7 +96,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Direct tools preset
+# Direct tools preset [#direct-tools-preset]
 
 The direct tools preset preloads every tool allowed by session filters into the session's tool list and disables session meta tools by default. Use it for specialized agents with a narrow tool set that don't need dynamic tool discovery, in-chat auth, or workbench helpers.
 
@@ -159,7 +159,7 @@ console.log(tools.map((tool) => tool.name));
 // GMAIL_CREATE_EMAIL_DRAFT
 ```
 
-## Enable selected meta tools
+## Enable selected meta tools [#enable-selected-meta-tools]
 
 With the direct tools preset, you can re-enable supported meta tool groups that your agent still needs. This session loads Gmail tools upfront while keeping connection management and workbench support available:
 
@@ -238,7 +238,7 @@ console.log(tools.map((tool) => tool.name));
 // COMPOSIO_REMOTE_BASH_TOOL
 ```
 
-# Enabling or disabling specific tools
+# Enabling or disabling specific tools [#enabling-or-disabling-specific-tools]
 
 To control which individual tools are available within a toolkit, use the `tools` configuration. The key is the toolkit slug and the value specifies which tools to enable or disable.
 
@@ -331,7 +331,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Filtering tools by tags
+# Filtering tools by tags [#filtering-tools-by-tags]
 
 Tools carry behavior tags that you can filter on. The available tags are:
 
@@ -417,7 +417,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Preloading tools
+# Preloading tools [#preloading-tools]
 
 Return a known set of tools directly from `session.tools()` and the session MCP tool list, without the agent searching for them first.
 
@@ -491,7 +491,7 @@ For SDK custom tools, set `preload: true` on the custom tool or custom toolkit. 
 
 To preload every tool allowed by the session filters, use the `preload.tools = "all"` shortcut (`preload={"tools": "all"}` in Python, `preload: { tools: "all" }` in TypeScript). The `all` shorthand works for both Composio tools and SDK custom tools.
 
-# Custom auth configs
+# Custom auth configs [#custom-auth-configs]
 
 Use your own OAuth credentials instead of Composio's defaults. Pass an auth config ID per toolkit:
 
@@ -522,7 +522,7 @@ const session = await composio.create("user_123", {
 
 See [White-labeling authentication](/docs/white-labeling-authentication) for branding, or [Managed vs custom auth](/docs/custom-app-vs-managed-app) for toolkits that require your own credentials.
 
-# Account selection
+# Account selection [#account-selection]
 
 When a user has multiple connected accounts for the same toolkit, specify which one the session uses:
 
@@ -553,7 +553,7 @@ const session = await composio.create("user_123", {
 
 > Arrays are the preferred format for `connectedAccounts`. A single string (e.g. `"ca_work_gmail"`) is still accepted for backwards compatibility and is automatically coerced to a single-element array. Only one account per toolkit is allowed when [multi-account mode](/docs/managing-multiple-connected-accounts) is disabled.
 
-## Precedence
+## Precedence [#precedence]
 
 When executing a tool, the session selects the connected account in this order:
 
@@ -565,7 +565,7 @@ When executing a tool, the session selects the connected account in this order:
 
 When a user has multiple connected accounts for a toolkit, the session uses the most recently connected one.
 
-# Disabling the sandbox
+# Disabling the sandbox [#disabling-the-sandbox]
 
 By default, sessions include the [sandbox](/docs/sandbox/remote), a persistent environment that provides `COMPOSIO_REMOTE_WORKBENCH` and `COMPOSIO_REMOTE_BASH_TOOL`. If your use case doesn't need code execution, disable it:
 
@@ -600,7 +600,7 @@ When disabled:
 
 > `sandbox` is the preferred config key. `workbench` still works as a fully supported alias and isn't deprecated, so existing code keeps running unchanged.
 
-# Sandbox compute tier
+# Sandbox compute tier [#sandbox-compute-tier]
 
 The sandbox runs per session. Pick a compute tier to match the workload: heavier code execution or larger in-memory data benefits from a bigger sandbox. Pass the tier via `sandbox.sandbox_size` (snake\_case on the wire, `sandboxSize` in the TypeScript SDK).
 
@@ -643,11 +643,11 @@ const session = await composio.create("user_123", {
 
 Changing `sandbox_size` on an existing session recreates the sandbox on the next access. The sandbox's in-memory filesystem state is lost, but the persistent [`/mnt/files/` mount](/docs/sandbox/remote#files-and-mounts) survives the restart.
 
-# Session methods
+# Session methods [#session-methods]
 
 For framework examples, see provider-specific documentation like [OpenAI](/docs/providers/openai) or [Vercel AI SDK](/docs/providers/vercel). To connect over MCP instead, see [Using sessions via MCP](/docs/sessions-via-mcp).
 
-## tools()
+## tools() [#tools]
 
 Get the tools the session exposes for your AI framework. By default these are the session's [meta tools](/toolkits/meta-tools), formatted for your configured provider.
 
@@ -666,7 +666,7 @@ const session = await composio.create("user_123");
 const tools = await session.tools();
 ```
 
-## authorize()
+## authorize() [#authorize]
 
 Manually authenticate a user to a toolkit outside of the chat flow.
 
@@ -697,7 +697,7 @@ const connectedAccount = await connectionRequest.waitForConnection();
 
 For more details, see [Manually authenticating users](/docs/manually-authenticating).
 
-## toolkits()
+## toolkits() [#toolkits]
 
 List the toolkits enabled for the session and their connection status, sorted by popularity. Use it to build a UI showing which apps are connected. Each toolkit includes its `slug`, `name`, `logo`, and connection status, and the call returns the first 20 by default.
 
@@ -773,7 +773,7 @@ do {
 } while (cursor);
 ```
 
-## delete()
+## delete() [#delete]
 
 Delete a session when you're done with it. Deleted sessions immediately stop being retrievable or executable, and the call returns the deleted `session_id`. Deleting a missing or already-deleted session surfaces the backend `404`.
 
@@ -796,7 +796,7 @@ const result = await session.delete();
 console.log(result.sessionId, result.deleted);
 ```
 
-# Browsing the catalog
+# Browsing the catalog [#browsing-the-catalog]
 
 Before configuring a session, explore the toolkits and tools available. Browse them visually at [dashboard.composio.dev](https://dashboard.composio.dev?utm_source=docs\&utm_medium=content\&utm_campaign=docs-configuring-sessions) or in the [docs catalog](/toolkits), or fetch them programmatically:
 
@@ -847,7 +847,7 @@ console.log(tool.inputParameters);
 console.log(tool.outputParameters);
 ```
 
-# Next
+# Next [#next]
 
 - [Sandbox](/docs/sandbox/remote): Give sessions a persistent compute environment with COMPOSIO_REMOTE_WORKBENCH and COMPOSIO_REMOTE_BASH_TOOL
 

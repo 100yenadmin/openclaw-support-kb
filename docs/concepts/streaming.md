@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "26e9456b77669d98f290a48e090036352dc8288697f0595a4ac2e236cfb0dfe6"
+source_hash: "abaf396f16c6070ba5f30af4ed77a2b5641d006225bf98fbdf7ed6900cf9e191"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -74,10 +74,8 @@ exceeds the limit.
 Bundled channels spell these overrides as
 `channels.<id>.streaming.{chunkMode,block.enabled,block.coalesce}`. The flat
 `*.chunkMode` / `*.blockStreaming` / `*.blockStreamingCoalesce` spellings are
-legacy on every bundled channel: `openclaw doctor --fix` migrates them into
-the nested shape, and channel schemas reject them. External SDK plugin
-configs that still use the flat spellings keep working through a deprecated
-fallback (with a runtime warning) until the next release train.
+rejected everywhere. `openclaw doctor --fix` migrates legacy configs into the
+nested shape.
 
 **Boundary semantics** for `blockStreamingBreak`:
 

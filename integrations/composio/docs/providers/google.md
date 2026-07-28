@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "10ff1760e5557553a0d2b74eb96254506ee87579e861748d3ebed67b5b5f95de"
+source_hash: "8f3ad43e85c28f618e3453f18247a618378f37cfaf355a1e635069ccafd7eef7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -19,9 +19,7 @@ Source: https://docs.composio.dev/docs/providers/google.md
 
 The Google provider formats Composio tools for [Gemini](https://ai.google.dev/) and the [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/). Pick the tab that matches your setup.
 
-> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
-
-### Gemini
+### gemini
 
 In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed callables, and the `google-genai` SDK's Automatic Function Calling executes tool calls inside the chat loop for you. In TypeScript, the Google provider transforms Composio tools into Gemini function declarations, and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
 
@@ -113,7 +111,7 @@ while (response.functionCalls && response.functionCalls.length > 0) {
 
 console.log(response.text);
 ```
-### ADK
+### adk
 
 The Google ADK provider transforms Composio tools into ADK's `FunctionTool` format. Unlike Gemini function calling, ADK runs the tool loop for you: hand the tools to an `Agent`, and the `Runner` executes calls and continues until the agent produces a final response. ADK integration is Python-only.
 
@@ -173,7 +171,7 @@ for event in events:
         print(event.content.parts[0].text)
 ```
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

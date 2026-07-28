@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diagnostics flags"
 source: "https://docs.openclaw.ai/diagnostics/flags"
-source_hash: "bff5e0a06143d0e419ed35bd533f54ac961ba7b9d883f127b97bad7ebae0fc48"
+source_hash: "ead9681be3af349acecb61faf9a408263c163fd407f3dd3e8d4830f5863b56dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "diagnostics/flags.md"
@@ -169,7 +169,7 @@ Named profiles use `/tmp/openclaw/openclaw-<profile>-YYYY-MM-DD.log`; for
 example, `--dev` uses `openclaw-dev-YYYY-MM-DD.log`.
 
 If you set `logging.file`, use that path instead. Logs are JSONL (one JSON
-object per line). Redaction still applies based on `logging.redactSensitive`.
+object per line). Redaction still applies; it is always on.
 See [Logging](/logging) for the full log-path resolution, rotation, and
 redaction model.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "b59a0a4d92e3edbe5b376bb626a5dcb2d0aca5784a4908dde80ae1692e072664"
+source_hash: "6a43edabea65dba213a78fb740e52ad51eb3cfaff0801cc763555036417dceaf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -249,6 +249,7 @@ Register the provider
     | Network limits | Fetches use OpenClaw's SSRF guard, one 5-second timeout budget across pagination, a 4 MiB response limit per page, and a 50-page limit. Cross-origin pagination links are rejected; credentials are removed after a cross-origin redirect. |
     | Cache | Successful, non-empty catalogs are cached for 60 seconds by provider, endpoint, and resolved credential. Empty or unusable results are not cached. |
     | Filtering | Exact live IDs keep their trusted static metadata. New rows are projected conservatively as text/chat models. Disabled, archived, deprecated, explicitly non-chat, embedding, reranking, moderation, speech, image-only, and video-only rows are excluded. Use `readRows` only to select rows from a nonstandard response envelope; provider-specific model semantics still belong in a custom catalog. |
+    | Admission | Optional. Set `acceptUnknownModel: ({ id, record }) => boolean` when your request shaping is model-version specific, so discovery cannot publish a model you cannot yet build a valid request for. It is called only for IDs your static catalog does not already publish; known IDs bypass it and keep their published metadata. Return `false` to drop the row. Providers that omit it keep the previous behavior unchanged. Prefer comparing the vendor's advertised capabilities against your own contract checks over a hand-maintained model list, and fail closed when the row carries no capability data. |
     | Failure | Live discovery is advisory. Auth, network, timeout, pagination, parsing, empty-catalog, and filtering failures return the provider-owned static seed instead of removing the provider. |
 
     For a non-Bearer or nonstandard list endpoint, pass options instead of
@@ -274,11 +275,9 @@ Register the provider
     whose model-list host differs from their inference host.
 
     If the provider needs custom model semantics rather than the conservative
-    OpenAI-compatible projection, keep that projection in the plugin and use
-    `openclaw/plugin-sdk/provider-catalog-live-runtime` for the shared fetch
-    lifecycle. The helper gives you guarded HTTP fetches, provider-auth headers,
-    structured HTTP errors, TTL caching, and static fallback behavior without
-    putting provider policy in OpenClaw core.
+    OpenAI-compatible projection, keep only that projection in the plugin. Pass
+    it as `projectRows`; the shared runtime still owns guarded fetches,
+    provider-auth headers, cache admission, and static fallback.
 
     Use `buildLiveModelProviderConfig` when the live API only tells you which
     provider-owned static catalog rows are currently available:
@@ -329,6 +328,11 @@ Register the provider
         fetchGuard: params.fetchGuard,
         ttlMs: 60_000,
         auditContext: "acme-ai-model-discovery",
+        projectRows: (rows, fallback) =>
+          rows.flatMap((row) => {
+            const model = projectAcmeModel(row, fallback);
+            return model ? [model] : [];
+          }),
       });
     }
 
@@ -367,37 +371,6 @@ Register the provider
         });
       },
     });
-    ```
-
-    Use `getCachedLiveProviderModelRows` when the provider API returns richer
-    metadata and the plugin needs to project rows into OpenClaw model
-    definitions itself:
-
-    ```typescript index.ts
-    import {
-      getCachedLiveProviderModelRows,
-      LiveModelCatalogHttpError,
-    } from "openclaw/plugin-sdk/provider-catalog-live-runtime";
-
-    async function discoverAcmeModels(apiKey: string) {
-      try {
-        const rows = await getCachedLiveProviderModelRows({
-          providerId: "acme-ai",
-          endpoint: "https://api.acme-ai.com/v1/models",
-          apiKey,
-          ttlMs: 60_000,
-          auditContext: "acme-ai-model-discovery",
-        });
-        return rows
-          .map((row) => projectAcmeModel(row))
-          .filter((model) => model !== null);
-      } catch (error) {
-        if (error instanceof LiveModelCatalogHttpError) {
-          return STATIC_MODELS;
-        }
-        throw error;
-      }
-    }
     ```
 
     `run` should stay auth-gated and return `null` when no usable credential is

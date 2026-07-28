@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fleet"
 source: "https://docs.openclaw.ai/cli/fleet"
-source_hash: "d69284aff7aa29f4892bbba10a663f7e3a6a6a723906b711155eff6af0e8aeb8"
+source_hash: "10744eca72580caa6bad4f76843b5dfb71a4b11412096a223540dd823c8b96c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/fleet.md"
@@ -232,7 +232,7 @@ Restore needs an existing stopped container because its inspected runtime profil
 
 Both commands accept `--max-bytes <bytes>` to bound archived or extracted file data, and both apply the same fixed one-million budget of archive path segments so metadata-only archive bombs cannot exhaust host inodes and every accepted backup stays restorable. Backup accepts `--out <path>` and both commands support `--json`.
 
-Archives contain regular files and directories only. Backup never follows or stores symlinks, hard links, sockets, or device nodes; skipped counts are reported in the result. Restore rejects archives containing any other entry type. Recreatable symlink trees such as workspace `node_modules` must be reinstalled inside the cell after a restore.
+Archives contain regular files and directories only. Backup never follows or stores symlinks, hard links, sockets, or device nodes; skipped counts are reported in the result. Restore rejects archives containing any other entry type, ignores archived ownership, and clamps restored file and directory modes before applying the cell runtime owner. Recreatable symlink trees such as workspace `node_modules` must be reinstalled inside the cell after a restore.
 
 ## `fleet doctor`
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Sessions"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/sessions.md"
-source_hash: "cded93d31367d4be62760000a2d4ea25d3f667069ecf1036ce1570a30229cf0f"
+source_hash: "cec97e0505c7af6eadac647f8dbc467c5048446b811e55d8254249251d1fcdab"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/sessions.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/sessions.md
 
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.sessions` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.sessions.list();
 ```
 
-# Methods
+# Methods [#methods]
 
-## create()
+## create() [#create]
 
 Creates a new tool router session for a user.
 Use `sessionPreset: SessionPreset.DIRECT_TOOLS` when all needed tools
@@ -89,7 +89,7 @@ const session = await composio.sessions.create('user_123', {
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Delete a tool router session by ID.
 
@@ -113,7 +113,7 @@ async delete(id: string, requestOptions?: ComposioRequestOptions): Promise
 
 ***
 
-## use()
+## use() [#use]
 
 Use an existing session
 

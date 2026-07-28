@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/v3/errors.md"
-source_hash: "9b435631beba7882492463832989dc52862f6f1143fd94a65b6239b4d3cdf3e1"
+source_hash: "196dab9657c01ff2597500b7fbd5ba8d5cad1649fc896ae0bfeebef102b17486"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/errors.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/reference/v3/errors.md
 
 Composio uses conventional HTTP response codes to indicate the success or failure of an API request. In general: codes in the `2xx` range indicate success, codes in the `4xx` range indicate an error with the information provided, and codes in the `5xx` range indicate an error with Composio's servers.
 
-# The error object
+# The error object [#the-error-object]
 
 ```json
 {
@@ -32,7 +32,7 @@ Composio uses conventional HTTP response codes to indicate the success or failur
 }
 ```
 
-## Attributes
+## Attributes [#attributes]
 
 | Attribute       | Description                                                                 |
 | --------------- | --------------------------------------------------------------------------- |
@@ -41,7 +41,7 @@ Composio uses conventional HTTP response codes to indicate the success or failur
 | `request_id`    | A unique identifier for this request. Include this when contacting support. |
 | `suggested_fix` | When available, guidance on how to resolve the error.                       |
 
-# HTTP status codes
+# HTTP status codes [#http-status-codes]
 
 | Code               | Status               | Description                                                                                      |
 | ------------------ | -------------------- | ------------------------------------------------------------------------------------------------ |
@@ -55,9 +55,9 @@ Composio uses conventional HTTP response codes to indicate the success or failur
 | 429                | Too Many Requests    | Too many requests hit the API too quickly. We recommend an exponential backoff of your requests. |
 | 500, 502, 503, 504 | Server Errors        | Something went wrong on Composio's end.                                                          |
 
-# Error types
+# Error types [#error-types]
 
-## Authentication errors
+## Authentication errors [#authentication-errors]
 
 Composio uses two types of API keys:
 
@@ -73,7 +73,7 @@ Composio uses two types of API keys:
 
 > See [Authenticating users](/docs/authentication) for more help.
 
-## Tool errors
+## Tool errors [#tool-errors]
 
 Errors that occur when fetching or executing tools.
 
@@ -85,7 +85,7 @@ Errors that occur when fetching or executing tools.
 
 > See [Tools and toolkits](/docs/how-composio-works) for more help.
 
-## Connection errors
+## Connection errors [#connection-errors]
 
 Errors related to connected accounts.
 
@@ -95,7 +95,7 @@ Errors related to connected accounts.
 | Auth refresh required       | The OAuth token has expired. Prompt the user to re-authenticate. |
 | Connected account deleted   | The connection was removed. Create a new connection.             |
 
-## Trigger errors
+## Trigger errors [#trigger-errors]
 
 Errors related to trigger subscriptions.
 
@@ -106,11 +106,11 @@ Errors related to trigger subscriptions.
 
 > See [Triggers](/docs/triggers) for more help.
 
-# Rate limiting
+# Rate limiting [#rate-limiting]
 
 When you hit rate limits, you'll receive a `429` status code. See [Rate Limits](/reference/v3/rate-limits) for details on limits by plan and best practices for handling rate limit errors.
 
-# Getting help
+# Getting help [#getting-help]
 
 When contacting support, include the `request_id` from the error response.
 

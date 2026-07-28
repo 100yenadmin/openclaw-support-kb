@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "ef337a4a0a724c8522bef5ff7902c4d0e197df7a2c6ab3902e5987012af5a87d"
+source_hash: "dae3020f5cfc6f93cba1a67636b650e760e1009d262d5f9ed455d2190c7163f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -249,7 +249,7 @@ Token Plan:
 }
 ```
 
-Pricing comes from the bundled manifest (Token Plan models include tiered cache-read pricing), so the config example omits `cost`.
+Token Plan charges against a fixed subscription's Credits rather than per-token USD pricing, so its bundled catalog rows use zero USD cost and the config example omits `cost`.
 
 AccordionGroup
 

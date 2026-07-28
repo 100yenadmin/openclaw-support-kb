@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom OAuth webhooks"
 source: "https://docs.composio.dev/docs/setting-up-triggers/custom-oauth-webhooks.md"
-source_hash: "4f4cddb5919932722217d5fcd54f99cb23e9314315adf0a984c0448fcbe39378"
+source_hash: "2a0892dcd23a5ec22d449e7232dff28a737d380a89b96c79bc49638660eb2538"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/custom-oauth-webhooks.md"
@@ -44,7 +44,7 @@ Every inbound event is signature-checked at ingress before any trigger fires:
 
 The walkthrough below uses Slack as the example and the [Webhook Endpoints API](/reference/api-reference/webhook-endpoints). For setup notes specific to each toolkit, see its FAQ section, for example [Slack](/toolkits/slack) or [Notion](/toolkits/notion).
 
-# Step 1: Discover what credentials the endpoint needs
+# Step 1: Discover what credentials the endpoint needs [#step-1-discover-what-credentials-the-endpoint-needs]
 
 Call the schema endpoint for the toolkit. The `setup_fields` in the response tell you exactly what to collect from the provider's app dashboard.
 
@@ -75,7 +75,7 @@ Sample response:
 }
 ```
 
-# Step 2: Create the endpoint
+# Step 2: Create the endpoint [#step-2-create-the-endpoint]
 
 ```bash
 curl -X POST "https://backend.composio.dev/api/v3.1/webhook_endpoints" \
@@ -102,7 +102,7 @@ Sample response:
 
 Hold on to two values from the response: `id` (used as `` below) and `webhook_url` (you'll paste this into the provider's app dashboard in step 4). The call is **idempotent per `(toolkit_slug, client_id)` within a project**. Calling it again with the same pair returns the existing endpoint without rotating the URL or wiping the secret.
 
-# Step 3: Store the credentials returned by the schema
+# Step 3: Store the credentials returned by the schema [#step-3-store-the-credentials-returned-by-the-schema]
 
 `PATCH` all the fields the schema returned in a single request. For Slack, that's the signing secret and (when needed) the app-level token together:
 
@@ -125,7 +125,7 @@ For Slack, the credentials come from:
 
 > **Store the credentials before you switch the provider's callback URL in step 4.** If the provider posts to the URL without a secret on the endpoint, every request fails with `400`, and the provider may auto-disable the endpoint after a window of consecutive failures (Slack: \~36 hours).
 
-# Step 4: Point the provider's app dashboard at the URL
+# Step 4: Point the provider's app dashboard at the URL [#step-4-point-the-providers-app-dashboard-at-the-url]
 
 Paste the `webhook_url` from step 2 into the provider's app dashboard:
 
@@ -134,7 +134,7 @@ Paste the `webhook_url` from step 2 into the provider's app dashboard:
 
 For providers that issue a verification challenge on save (Slack `url_verification`, Notion's verification token, and so on), Composio responds automatically, with no handshake code on your side. Once the provider accepts the URL, go [create your trigger](/docs/setting-up-triggers/creating-triggers).
 
-# Updating an endpoint
+# Updating an endpoint [#updating-an-endpoint]
 
 To rotate the signing secret or update any single field, `PATCH` it (other fields are preserved):
 
@@ -170,7 +170,7 @@ curl "https://backend.composio.dev/api/v3.1/webhook_endpoints" \
   -H "x-api-key: "
 ```
 
-# Next
+# Next [#next]
 
 - [Creating triggers](/docs/setting-up-triggers/creating-triggers): Activate a trigger for a user so events start flowing
 

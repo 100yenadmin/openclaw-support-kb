@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md"
-source_hash: "1d1e568c26a0892267ddcce4a6855fc0953902c2ff59cad2eef23d27ccc59e62"
+source_hash: "d5098a58a6b06cfbfb2147bb10ac3fbac35f087661dea5596ce856cea53d2398"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/connected-accounts.md"
@@ -30,7 +30,7 @@ Composio creates a connected account when a user completes the flow defined by a
 
 Each account is addressed by its `nanoid`. List endpoints accept filters so you can find accounts by user, toolkit, or auth config.
 
-# Link auth (Composio Connect Links)
+# Link auth (Composio Connect Links) [#link-auth-composio-connect-links]
 
 A Composio Connect Link is a hosted, secure sign-in page. You create one with the create auth link session endpoint, redirect the user to the returned URL, and Composio handles the rest: the user signs in, Composio creates the connected account, and Composio stores and refreshes its tokens. Credentials never pass through your app. This works for all Composio managed connections, with no OAuth credentials to set up.
 
@@ -40,6 +40,6 @@ These endpoints use your project API key in the `x-api-key` header.
 
 > Shared-connection ACL fields are experimental and nested under an `experimental` block on the wire. Pin a specific SDK version if you depend on the current shape.
 
-# Endpoints
+# Endpoints [#endpoints]
 
 ---

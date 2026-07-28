@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bootstrapping"
 source: "https://docs.openclaw.ai/start/bootstrapping"
-source_hash: "eef78ced76306cb2a4b92a2a784461cf05f110161f1869ba54dd56c2d632cc8a"
+source_hash: "9fdda26765ccaa22f638c9208bae14d9448ae63be261eeaebaa02d545f873a07"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/bootstrapping.md"
@@ -22,7 +22,7 @@ onboarding, on the agent's first real turn.
 On the first run against a brand-new workspace (default `~/.openclaw/workspace`),
 OpenClaw:
 
-- Seeds `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, and `BOOTSTRAP.md`.
+- Seeds `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `USER.md`, and `BOOTSTRAP.md`. Environment-specific tool notes belong in the `## Tools` section of `AGENTS.md`.
 - Has the agent follow a capped three-beat birth sequence: it asks what you want
   to call it, shares one short soul/vibe line, and asks whether you want the
   minimal recommended plugin set or maximum convenience.

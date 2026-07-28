@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "0ee3f23d47c623d9b46687ebb16a2a1cf445e1f8d67d060527f00ea90bf67e64"
+source_hash: "de301d5d190dbbaa233fb7cf7c5625aca63a5d8fc6d7ff232fe5dca89197b3a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/tui.md"
@@ -93,6 +93,7 @@ openclaw tui --local
 ## Keyboard shortcuts
 
 - Enter: send message
+- Shift+Enter or Ctrl+J: insert a newline without sending
 - Esc: abort active run
 - Ctrl+C: clear input (press twice to exit)
 - Ctrl+D: exit
@@ -226,6 +227,7 @@ Tips:
 
 - On connect, the TUI loads the latest history (default 200 messages).
 - Streaming responses update in place until finalized.
+- Messages sent to the same session from another client appear automatically.
 - The TUI also listens to agent tool events for richer tool cards.
 
 ## Connection details

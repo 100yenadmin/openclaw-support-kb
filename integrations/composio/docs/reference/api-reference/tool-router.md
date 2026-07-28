@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Sessions (prev Tool Router)"
 source: "https://docs.composio.dev/reference/api-reference/tool-router.md"
-source_hash: "b0c3dc02407f544111757b3ca860eb1d04cfda637af47518ee45b44935200fe7"
+source_hash: "11d14a8f28eb394a631569280c36377154b124033d89eef4ab7f5931a87356cc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/tool-router.md"
@@ -29,6 +29,6 @@ Reach for the raw API when you need lower-level control: creating and patching a
 
 See [Configuring sessions](/docs/configuring-sessions) for toolkits, auth configs, account selection, and presets.
 
-# Endpoints
+# Endpoints [#endpoints]
 
 ---

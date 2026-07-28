@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AuthConfigs"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md"
-source_hash: "d388b794a9b58095975bc5a631395c24ae34d321f2bf5076f7ce423976771d7b"
+source_hash: "983df672c91961576802689af8832ec172d40be314f03eae51920cd22bbb74c8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/auth-configs.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md
 
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.authConfigs` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.authConfigs.list();
 ```
 
-# Methods
+# Methods [#methods]
 
-## create()
+## create() [#create]
 
 Create a new auth config
 
@@ -63,7 +63,7 @@ const authConfig = await authConfigs.create('my-toolkit', {
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Deletes an authentication configuration.
 
@@ -95,7 +95,7 @@ await composio.authConfigs.delete('auth_abc123');
 
 ***
 
-## disable()
+## disable() [#disable]
 
 Disables an authentication configuration.
 
@@ -127,7 +127,7 @@ await composio.authConfigs.disable('auth_abc123');
 
 ***
 
-## enable()
+## enable() [#enable]
 
 Enables an authentication configuration.
 
@@ -159,7 +159,7 @@ await composio.authConfigs.enable('auth_abc123');
 
 ***
 
-## get()
+## get() [#get]
 
 Retrieves a specific authentication configuration by its ID.
 
@@ -192,7 +192,7 @@ console.log(authConfig.toolkit.slug); // e.g., 'github'
 
 ***
 
-## list()
+## list() [#list]
 
 Lists authentication configurations based on provided filter criteria.
 
@@ -239,7 +239,7 @@ const managedConfigs = await composio.authConfigs.list({
 
 ***
 
-## update()
+## update() [#update]
 
 Updates an existing authentication configuration.
 
@@ -283,7 +283,7 @@ const updatedConfig = await composio.authConfigs.update('auth_abc123', {
 
 ***
 
-## updateStatus()
+## updateStatus() [#updatestatus]
 
 Updates the status of an authentication configuration.
 

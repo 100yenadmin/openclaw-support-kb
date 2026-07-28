@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "c8e72176e70c5cb14f116709a7fac8bdc21d67da4b5430bdc3579deed4fe0668"
+source_hash: "48a888da6c72d5e86daefbf23e8c5c3c69e8b948e7b6f9f49e85264ce57379ca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/nvidia.md"
@@ -117,16 +117,15 @@ pickers.
 | `nvidia/nvidia/nemotron-3-ultra-550b-a55b` | Nemotron 3 Ultra 550B | 1,048,576 | 8,192      |
 | `nvidia/nvidia/nemotron-3-super-120b-a12b` | Nemotron 3 Super 120B | 1,000,000 | 8,192      |
 | `nvidia/z-ai/glm-5.2`                      | GLM 5.2               | 202,752   | 8,192      |
-| `nvidia/moonshotai/kimi-k2.6`              | Kimi K2.6             | 262,144   | 8,192      |
+| `nvidia/moonshotai/kimi-k2.6`              | Kimi K2.6             | 262,144   | 65,536     |
 | `nvidia/minimaxai/minimax-m3`              | Minimax M3            | 196,608   | 8,192      |
 | `nvidia/deepseek-ai/deepseek-v4-pro`       | DeepSeek V4 Pro       | 262,144   | 16,384     |
-| `nvidia/qwen/qwen3.5-397b-a17b`            | Qwen3.5 397B A17B     | 262,144   | 16,384     |
+| `nvidia/qwen/qwen3.5-397b-a17b`            | Qwen3.5 397B A17B     | 262,144   | 32,768     |
 
 The full compatibility catalog also retains these shipped refs for existing
 configurations: `nvidia/moonshotai/kimi-k2.5`, `nvidia/z-ai/glm-5.1`,
-`nvidia/minimaxai/minimax-m2.5`, `nvidia/z-ai/glm5`, and
-`nvidia/minimaxai/minimax-m2.7`. They remain available by exact reference but
-never appear in onboarding or model pickers.
+`nvidia/z-ai/glm5`, and `nvidia/minimaxai/minimax-m2.7`. They remain available
+by exact reference but never appear in onboarding or model pickers.
 
 ## Advanced configuration
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md"
-source_hash: "1c490fe5e92a45287051e5abc9011528a081426339d33f64624a6256b8694760"
+source_hash: "4a3d8bf68fd76347bc25fe20a3581ea72abd80a1950c8116c3b0fc100f093bbf"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/connected-accounts.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
 
 
-# Methods
+# Methods [#methods]
 
-## update()
+## update() [#update]
 
 Update a connected account's alias and/or credentials.
 
@@ -51,7 +51,7 @@ composio.connected_accounts.update('ca_abc123', alias='')
 
 ***
 
-## update\_acl()
+## update\_acl() [#update_acl]
 
 Update the per-user ACL on a SHARED connected account. Experimental — shape may change in future releases.  Only valid on SHARED connections; raises `ComposioAclOnlyForSharedError` on a PRIVATE connection. Omit a parameter to leave it unchanged; pass an empty list to clear an allow/deny list. At least one parameter must be provided.
 
@@ -84,7 +84,7 @@ composio.connected_accounts.update_acl(
 
 ***
 
-## initiate()
+## initiate() [#initiate]
 
 Compound function to create a new connected account. This function creates a new connected account and returns a connection request.  Users can then wait for the connection to be established using the `wait_for_connection` method.
 
@@ -109,7 +109,7 @@ def initiate(user_id: str, auth_config_id: str, callback_url: str | None = ..., 
 
 ***
 
-## link()
+## link() [#link]
 
 Create a Composio Connect Link for a user to connect their account to a given auth config.  This method will return an external link which you can use for the user to connect their account.
 
@@ -170,7 +170,7 @@ connection_request = composio.connected_accounts.link(
 
 ***
 
-## wait\_for\_connection()
+## wait\_for\_connection() [#wait_for_connection]
 
 Wait for connected account with given ID to be active
 

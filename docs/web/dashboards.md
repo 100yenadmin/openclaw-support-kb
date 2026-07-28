@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session Dashboards"
 source: "https://docs.openclaw.ai/web/dashboards"
-source_hash: "aad18ceeb7d92ba1e0f4306398a7cbda3c9eb375eb8b464906c748e543d7d262"
+source_hash: "943ff50b17e8644311adbce63664c96795b04da8a28e524019815c7e08a6a8cb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboards.md"
@@ -22,6 +22,20 @@ your chat docked beside it.
 There is nothing to set up and no separate app to configure: dashboards are a
 core feature, owned by the thread, stored with the agent, and they survive
 `/new` and `/reset` (the conversation context clears; the board stays).
+
+## Find your dashboards
+
+Open `/dashboards` to see every thread whose preferred face is Dashboard, with
+the most recently updated thread first. Open any row to go directly to that
+thread's `/dashboard/<agent>/<sessionRef>` URL.
+
+The Chat or Dashboard face preference is stored server-side per thread. It
+therefore follows you when you connect to the same gateway from another device.
+Opening a thread from the sidebar, Sessions, Tasks, Workboard, or Worktrees
+applies that stored face even when the thread is outside the page of sessions
+already loaded by the browser.
+The active dashboard tab and remembered chat-dock position remain per-device UI
+state, so each browser can keep its own working layout.
 
 ## Build a dashboard by asking
 
@@ -102,6 +116,8 @@ one-tap, revision-bound approval as everything else.
 - Deleting a thread deletes its board.
 - Boards live on your gateway (in the owning agent's database) and appear on
   every device you connect from.
+- Switching a thread to the Dashboard face adds it to `/dashboards`. Switching
+  it back to Chat removes it.
 - The security model, storage details, and design rationale live in
   [Dashboard Architecture](/web/dashboard-architecture), including the
   documented sandbox tradeoffs.

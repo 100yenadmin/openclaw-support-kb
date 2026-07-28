@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ask user"
 source: "https://docs.openclaw.ai/tools/ask-user"
-source_hash: "0fd6d82b06b1edf4a07b1fac91baddfcb718ebc745e81455efe9fff0f899c9e1"
+source_hash: "7b4c6ff7939d788fbf6bf2de38204d5c07fe08e7f635b572be49e59628f03771"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/ask-user.md"
@@ -58,6 +58,11 @@ The default timeout is 900 seconds. `timeoutSeconds` is clamped to the range
 If the question expires or is cancelled before an answer arrives, the tool
 returns `status: "no_answer"`. The agent then continues with its best judgment.
 An aborted agent run cancels its pending Gateway question.
+
+Gateway question records include the optional originating `runId`. Clients can
+use it to keep the prompt and its terminal answer summary with the correct agent
+turn, including after reconnecting and recovering the question with
+`question.list` or `question.get`.
 
 ## Tool schema
 

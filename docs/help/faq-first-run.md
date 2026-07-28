@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "adca4ea91e8d5d119bedb153912a8cc8304261d2c1cd28b06ab67b41d6f9ddbe"
+source_hash: "864147c009ce511001b575be18fc016fc022b3c0fca76afe2195c3244db62b69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -159,7 +159,7 @@ Why are there two exec approval configs for chat approvals?
 
 What runtime do I need?
 
-    Node **22.22.3+**, **24.15+**, or **25.9+** is required (Node 24 recommended). `pnpm` is the repo package manager.
+    Node **22.22.3+**, **24.15+**, or **25.9+** is required (Node 26 recommended). `pnpm` is the repo package manager.
     Bun can install dependencies and run package scripts, but it cannot run the OpenClaw CLI or Gateway because it lacks `node:sqlite`.
 
 

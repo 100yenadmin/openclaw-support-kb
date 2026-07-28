@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference/authenticating-to-composio.md"
-source_hash: "9f00e6402d64926bf57fb3556179a095058571d0e765af01da360cb7f0437613"
+source_hash: "d596a98aa2fb218cf732ff6b9c39c3afe162bc2d859234fef0aea370d1b15f86"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio.md"
@@ -25,9 +25,9 @@ Composio has three kinds of API key. They share the same authentication flow —
 | -------------------------------------------------------------------------- | --------------- | ------------------------------------------------- |
 | Project API key                                                            | `x-api-key`     | Full access to a single project.                  |
 | Organization API key                                                       | `x-org-api-key` | Access across every project in your organization. |
-| Scoped project API key <span style={{ color: '#059669' }}>**· New**</span> | `x-api-key`     | A chosen subset of a single project's resources.  |
+| Scoped project API key <span style="{ color: '#059669' }">**· New**</span> | `x-api-key`     | A chosen subset of a single project's resources.  |
 
-# Project API key
+# Project API key [#project-api-key]
 
 A project API key authenticates to one project with full access. Use it for most application code.
 
@@ -40,7 +40,7 @@ curl https://backend.composio.dev/api/v3.1/tools \
   -H "x-api-key: $COMPOSIO_API_KEY"
 ```
 
-# Organization API key
+# Organization API key [#organization-api-key]
 
 An organization API key authenticates across every project in your organization. Use it for organization-level endpoints.
 
@@ -53,7 +53,7 @@ curl https://backend.composio.dev/api/v3.1/org/projects \
   -H "x-org-api-key: $COMPOSIO_ORG_API_KEY"
 ```
 
-# Scoped project API key
+# Scoped project API key [#scoped-project-api-key]
 
 A scoped project API key authenticates to a single project but reaches only the resources you grant it — for example, executing tools without managing connected accounts. It uses the same `x-api-key` header as a default project key.
 

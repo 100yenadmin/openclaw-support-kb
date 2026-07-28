@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from MCP servers to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md"
-source_hash: "27cf7aa30eea62d9f0233600f3a8c589e4413a3da26c016f547656551cb0355a"
+source_hash: "fbfcb9f5e315328f8a85104639e36df6037b6893daf8176c4576655311d321e0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/mcp-servers-to-sessions.md"
@@ -33,7 +33,7 @@ SDK. Use **Composio For You** to connect across 1000+ apps in a few clicks — s
 product switcher in the top-left of the dashboard. Reserve `session.mcp.url` for programmatic,
 in-app use.
 
-# What carries over (you keep all of this)
+# What carries over (you keep all of this) [#what-carries-over-you-keep-all-of-this]
 
 * **Your tools** — every tool you exposed on a server is available in a session.
 * **Your auth configs and connected accounts** — pass the same `ac_…` IDs; your users **do not
@@ -43,7 +43,7 @@ MCP-compatible client — the same way, the same protocol.
 * **Per-user isolation** — still keyed by `user_id`.
 * **Tool restriction** — you can still pin a session to an exact, fixed tool list (see Step 3).
 
-# What changes
+# What changes [#what-changes]
 
 |                       | MCP servers (today)                                                 | Sessions                                                                              |
 | --------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -59,7 +59,7 @@ The *why*: a session is one managed endpoint that replaces N static server confi
 runtime tool discovery, and keeps context small — without losing the fixed-tool-list behavior you
 have today if that's what you want.
 
-# Migrating
+# Migrating [#migrating]
 
 #### Replace the server config + generate with a session
 
@@ -169,12 +169,12 @@ const session = await composio.create("user-123", {
 Leave the preset off to get the upgrade: the agent discovers and loads tools at runtime, so you can
 span many toolkits without bloating context.
 
-# Beyond the MCP URL
+# Beyond the MCP URL [#beyond-the-mcp-url]
 
 A session isn't only an MCP endpoint — it's also a normal SDK object, which is handy for non-agent
 code paths.
 
-## Native tools for your framework
+## Native tools for your framework [#native-tools-for-your-framework]
 
 `session.tools()` returns provider-wrapped native tools for OpenAI, Anthropic, LangChain, the Vercel
 AI SDK, and others, so you skip manual schema wiring. With the direct-tools preset it returns your
@@ -195,7 +195,7 @@ const session = await composio.create("user-123");
 const tools = await session.tools();
 ```
 
-## Execute a tool without an LLM
+## Execute a tool without an LLM [#execute-a-tool-without-an-llm]
 
 For a deterministic, non-agent path, call a tool directly on the session.
 
@@ -221,7 +221,7 @@ const result = await session.execute("GITHUB_CREATE_ISSUE", {
 });
 ```
 
-# Things to know
+# Things to know [#things-to-know]
 
 * **Multiple toolkits on one endpoint** — where you ran several single-toolkit servers, one session
 spans them all (`toolkits=["gmail", "slack", "github"]`). Fewer moving parts.
@@ -239,7 +239,7 @@ of sessions yet).
 * **Dashboard** — sessions are created via the SDK. For no-code, personal app connections, use
 **Composio For You** — reachable from the product switcher in the top-left of the dashboard.
 
-# Next
+# Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, presets, and session methods
 

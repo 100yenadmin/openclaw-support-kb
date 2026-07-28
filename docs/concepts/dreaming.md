@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dreaming"
 source: "https://docs.openclaw.ai/concepts/dreaming"
-source_hash: "93850303938e5fcc17b5747c1f668aa45378afd95a8df97a2323e355ad64f6ac"
+source_hash: "4028f2d8b5985cfd39d7d937d30d5a9472885028da12156f4fa70cf2733a1e89"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/dreaming.md"
@@ -109,14 +109,6 @@ Deep ranking uses six weighted base signals plus phase reinforcement:
 | Conceptual richness | 0.06   | Concept-tag density from snippet/path             |
 
 Light and REM phase hits add a small recency-decayed boost from `memory/.dreams/phase-signals.json`.
-
-Shadow-trial results can layer on top of the base score as a review signal before any durable write: a helpful trial gives a candidate a small bounded boost, a neutral trial keeps it deferred, and a harmful trial marks it rejected for that scoring pass. This signal is report-only - it can change candidate ordering or review metadata, but never writes to `MEMORY.md` or promotes a candidate by itself.
-
-### QA shadow trial report coverage
-
-QA Lab includes a report-only scenario for exploring how a future dreaming shadow trial could review a candidate memory before promotion: an agent compares a baseline answer against an answer that can use the candidate memory, then writes a local report with a verdict, reason, and risk flags. This coverage is scoped to QA - it verifies the report artifact stays separate from `MEMORY.md` and that the agent never claims the candidate was promoted. It does not add production shadow-trial behavior or change the deep-phase promotion engine.
-
-The `memory-core` shadow-trial runner keeps the same report-only contract for code paths that need a stable artifact. It accepts the candidate, trial prompt, baseline outcome, candidate outcome, verdict, reason, risk flags, and evidence references, then writes a report with `promotion action: report-only`. Helpful verdicts map to a `promote` recommendation, neutral verdicts map to `defer`, and harmful verdicts map to `reject` - none of those writes to `MEMORY.md` or applies deep-phase promotion.
 
 ## Scheduling
 

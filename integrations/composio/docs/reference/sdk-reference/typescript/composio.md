@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/composio.md"
-source_hash: "968b584ba07f1feddd8eeb60c0bf827789a70cf66d803724d06c1fc939dd1962"
+source_hash: "8e55b47c0cb2da06ef32287a386b78d6ef5c538450719b9398ede22a94ce4a2c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/composio.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/composio.md
 
 
-# Constructor
+# Constructor [#constructor]
 
-## constructor()
+## constructor() [#constructor-1]
 
 Creates a new instance of the Composio SDK.
 
@@ -61,7 +61,7 @@ const composio = new Composio({
 
 ***
 
-# Properties
+# Properties [#properties]
 
 | Name                                                                   | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Description                                                                      |
 | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
@@ -89,9 +89,9 @@ Prefer `composio.sessions.create(...)` for new code. The top-level
 \| `triggers` | `Triggers` | Manage webhook triggers and event subscriptions |
 \| `use` | `(id: string, options: \{ customToolkits?: CustomToolkit[]; customTools?: CustomTool[]; mcp: true \}, requestOptions: ComposioRequestOptions) => Promise` | Use an existing tool router session |
 
-# Methods
+# Methods [#methods]
 
-## createSession() (deprecated)
+## createSession() (deprecated) [#createsession-deprecated]
 
 > **Deprecated**: Will be removed in a future version of the SDK. Instead, construct a new
 instance directly with the headers you need: `new Composio(\{ ...existingConfig, defaultHeaders \})`.
@@ -144,7 +144,7 @@ await composioWithCustomHeaders.tools.list();
 
 ***
 
-## flush()
+## flush() [#flush]
 
 Flush any pending telemetry and wait for it to complete.
 
@@ -181,7 +181,7 @@ export default {
 
 ***
 
-## getClient()
+## getClient() [#getclient]
 
 Get the Composio SDK client.
 
@@ -195,7 +195,7 @@ getClient(): ComposioClient
 
 ***
 
-## getConfig()
+## getConfig() [#getconfig]
 
 Get the configuration SDK is initialized with.
 

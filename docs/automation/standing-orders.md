@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Standing orders"
 source: "https://docs.openclaw.ai/automation/standing-orders"
-source_hash: "8a05c6ddcc643a5923c07e5c03e33c62bcad3224b7bf5fd013a10049d60438a8"
+source_hash: "ade4908db1bacd33012f80411f7b32a968ff43eb6a38f6dc83fe8bc804bf2b2e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/standing-orders.md"
@@ -25,6 +25,8 @@ Standing orders grant your agent **permanent operating authority** for defined p
 
 Standing orders are defined in your [agent workspace](/concepts/agent-workspace) files. The recommended approach is to include them directly in `AGENTS.md` (which is auto-injected every session) so the agent always has them in context. For larger configurations, you can also place them in a dedicated file like `standing-orders.md` and reference it from `AGENTS.md`.
 
+For a strict, ephemeral CI or scripting entry point, use [`openclaw agent exec`](/cli/agent#agent-exec). It skips workspace bootstrap files, so each one-shot run is self-contained rather than governed by standing orders.
+
 Each program specifies:
 
 1. **Scope** - what the agent is authorized to do
@@ -36,7 +38,7 @@ The agent loads these instructions every session via the workspace bootstrap fil
 
 Tip
 
-Put standing orders in `AGENTS.md` to guarantee they're loaded every session. The workspace bootstrap automatically injects `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, `HEARTBEAT.md`, `BOOTSTRAP.md`, and `MEMORY.md` - but not arbitrary files in subdirectories.
+Put standing orders in `AGENTS.md` to guarantee they're loaded every session. The workspace bootstrap automatically injects `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `USER.md`, `BOOTSTRAP.md`, and `MEMORY.md` - but not arbitrary files in subdirectories.
 
 ## Anatomy of a standing order
 

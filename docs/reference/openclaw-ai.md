@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "@openclaw/ai package"
 source: "https://docs.openclaw.ai/reference/openclaw-ai"
-source_hash: "751dc452f3d7131fb9edbc6433ca3291d6a77446c4973ccce1e7f0f9f4378083"
+source_hash: "9d370cc2ee4de3a5dab23c88882b7b64c2a02906db041609059215a011cffe58"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/openclaw-ai.md"
@@ -21,10 +21,10 @@ Responses, Azure OpenAI Responses, ChatGPT/Codex Responses, Google Generative
 AI, Google Vertex, Mistral Conversations).
 
 It publishes alongside the root `openclaw` package on every release, pinned to
-the same version, with its own `npm-shrinkwrap.json` so its transitive
-dependency tree is locked at install time. Installing `openclaw` installs the
-matching `@openclaw/ai` automatically; library consumers can depend on it
-directly without any OpenClaw application code.
+the same version. Its exact-pinned direct dependencies resolve at install time;
+the package ships no npm lockfile. Installing `openclaw` installs the matching
+`@openclaw/ai` automatically, and library consumers can depend on it directly
+without any OpenClaw application code.
 
 ## Quick start
 

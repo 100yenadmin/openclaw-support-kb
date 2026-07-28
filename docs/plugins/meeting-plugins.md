@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meeting plugins"
 source: "https://docs.openclaw.ai/plugins/meeting-plugins"
-source_hash: "6dc61596cd914106b0297dcb8cac42c815f1f4da2b716a10ed680f2fe42be229"
+source_hash: "5106ab3715d8936da43712bee5b5971bae29f8a94d68d11213a73844feb955fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/meeting-plugins.md"
@@ -111,7 +111,7 @@ Browser automation handles the normal guest-name, prejoin camera and microphone,
 - Microsoft Teams may require tenant sign-in, email verification, or organizer admission.
 - Zoom may require authentication, email verification, a passcode, CAPTCHA completion, or host admission; an account can also disable browser join.
 
-When a join or status result reports `manualActionRequired`, complete the reported step in the same OpenClaw Chrome profile before retrying. Repeatedly opening new tabs does not resolve an account, tenant, lobby, or CAPTCHA gate.
+When a join or status result includes `manualAction`, complete its reported step in the same OpenClaw Chrome profile before retrying. Repeatedly opening new tabs does not resolve an account, tenant, lobby, or CAPTCHA gate.
 
 Only join meetings where the operator is authorized to add an agent. Tell participants when local policy or consent rules require disclosure of automated participation, transcription, or synthesized speech.
 

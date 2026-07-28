@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "9dd39e38f1e37a4b2c660db06133d3b10ed6bc2af5426f850a19a76c8e9156e9"
+source_hash: "37796697886605099b420d61b740b909294bdcf869ad76a38c400da5046cee98"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
@@ -13,19 +13,19 @@ duplicate_index: 1
 # Fireworks
 Source: https://docs.openclaw.ai/providers/fireworks
 
-[Fireworks](https://fireworks.ai) exposes open-weight and routed models through an OpenAI-compatible API. Install the official Fireworks provider plugin to use two pre-cataloged Kimi models and any Fireworks model or router id at runtime.
+[Fireworks](https://fireworks.ai) exposes open-weight and routed models through an OpenAI-compatible API. Install the official Fireworks provider plugin to use the current Fire Pass GLM router, two pre-cataloged Kimi models, and any Fireworks model or router id at runtime.
 
-| Property        | Value                                                  |
-| --------------- | ------------------------------------------------------ |
-| Provider id     | `fireworks` (alias: `fireworks-ai`)                    |
-| Package         | `@openclaw/fireworks-provider`                         |
-| Auth env var    | `FIREWORKS_API_KEY`                                    |
-| Onboarding flag | `--auth-choice fireworks-api-key`                      |
-| Direct CLI flag | `--fireworks-api-key <key>`                            |
-| API             | OpenAI-compatible (`openai-completions`)               |
-| Base URL        | `https://api.fireworks.ai/inference/v1`                |
-| Default model   | `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo` |
-| Default alias   | `Kimi K2.6 Turbo`                                      |
+| Property        | Value                                               |
+| --------------- | --------------------------------------------------- |
+| Provider id     | `fireworks` (alias: `fireworks-ai`)                 |
+| Package         | `@openclaw/fireworks-provider`                      |
+| Auth env var    | `FIREWORKS_API_KEY`                                 |
+| Onboarding flag | `--auth-choice fireworks-api-key`                   |
+| Direct CLI flag | `--fireworks-api-key <key>`                         |
+| API             | OpenAI-compatible (`openai-completions`)            |
+| Base URL        | `https://api.fireworks.ai/inference/v1`             |
+| Default model   | `fireworks/accounts/fireworks/routers/glm-5p2-fast` |
+| Default alias   | `GLM 5.2 Fast`                                      |
 
 ## Getting started
 
@@ -60,7 +60,7 @@ export FIREWORKS_API_KEY=fw-...
 
 
 
-    Onboarding stores the key against the `fireworks` provider in your auth profiles and sets the **Fire Pass** Kimi K2.6 Turbo router as the default model.
+    Onboarding stores the key against the `fireworks` provider in your auth profiles and sets Fireworks' current [Fire Pass](https://docs.fireworks.ai/firepass) GLM 5.2 Fast router as the default model.
 
 
 
@@ -70,7 +70,7 @@ Verify the model is available
     openclaw models list --provider fireworks
     ```
 
-    The list should include `Kimi K2.6` and `Kimi K2.6 Turbo (Fire Pass)`. If `FIREWORKS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
+    The list should include `GLM 5.2 Fast`, `Kimi K2.6`, and `Kimi K2.6 Fast`. If `FIREWORKS_API_KEY` is unresolved, `openclaw models status --json` reports the missing credential under `auth.unusableProfiles`.
 
 
 
@@ -89,10 +89,11 @@ openclaw onboard --non-interactive \
 
 ## Built-in catalog
 
-| Model ref                                              | Name                        | Input        | Context | Max output | Thinking             |
-| ------------------------------------------------------ | --------------------------- | ------------ | ------- | ---------- | -------------------- |
-| `fireworks/accounts/fireworks/models/kimi-k2p6`        | Kimi K2.6                   | text + image | 262,144 | 262,144    | Forced off           |
-| `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo` | Kimi K2.6 Turbo (Fire Pass) | text + image | 256,000 | 256,000    | Forced off (default) |
+| Model ref                                              | Name           | Input        | Context | Max output | Thinking     |
+| ------------------------------------------------------ | -------------- | ------------ | ------- | ---------- | ------------ |
+| `fireworks/accounts/fireworks/routers/glm-5p2-fast`    | GLM 5.2 Fast   | text + image | 256,000 | 256,000    | On (default) |
+| `fireworks/accounts/fireworks/models/kimi-k2p6`        | Kimi K2.6      | text + image | 262,144 | 262,144    | Forced off   |
+| `fireworks/accounts/fireworks/routers/kimi-k2p6-turbo` | Kimi K2.6 Fast | text + image | 262,144 | 256,000    | Forced off   |
 
 Note
 
@@ -100,7 +101,7 @@ Note
 
 ## Custom Fireworks model ids
 
-OpenClaw accepts any Fireworks model or router id at runtime. Use the exact id shown by Fireworks and prefix it with `fireworks/`. Dynamic resolution clones the Fire Pass template (text + image input, OpenAI-compatible API, default cost zero) and disables thinking automatically when the id matches the Kimi pattern. GLM dynamic ids are marked text-only unless you configure a custom model entry with image input.
+OpenClaw accepts any Fireworks model or router id at runtime. Use the exact id shown by Fireworks and prefix it with `fireworks/`. Dynamic resolution clones the Fire Pass template (text + image input and the OpenAI-compatible API) and disables thinking automatically when the id matches the Kimi pattern. GLM dynamic ids are marked text-only unless you configure a custom model entry with image input.
 
 ```json5
 {

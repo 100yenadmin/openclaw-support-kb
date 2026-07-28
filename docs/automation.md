@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automation"
 source: "https://docs.openclaw.ai/automation"
-source_hash: "17e545abc4b5f51be37e208a3a68c6c386f43908074cd8f2d41d82dba97835dc"
+source_hash: "6e03c7c0aaba6ff8ed2efa63f7c703f694f61cf1432dcbe7d837e0fe6b21e1cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation.md"
@@ -100,7 +100,7 @@ See [Hooks](/automation/hooks).
 
 ### Heartbeat
 
-Heartbeat is a periodic main-session turn (default every 30 minutes). It batches checklist-style monitoring (inbox, calendar, notifications) in one agent turn with full session context. Heartbeat turns do not create task records and do not extend daily/idle session reset freshness. Heartbeat scratch is small prompt context; schedule recurring work as cron jobs. Empty heartbeat scratch skips as `empty-heartbeat-file`. Heartbeats defer while cron work is active or queued, and `heartbeat.skipWhenBusy` can also defer an agent while that same agent's session-keyed subagent or nested lanes are busy.
+Heartbeat is a periodic main-session turn (default every 30 minutes). It batches checklist-style monitoring (inbox, calendar, notifications) in one agent turn with full session context. Heartbeat turns do not create task records and do not extend daily/idle session reset freshness. Heartbeat monitor scratch is small prompt context; schedule recurring work as cron jobs. Empty scratch skips as `empty-heartbeat-file`. Scheduled heartbeats automatically defer while the main queue or cron work is busy, another reply or embedded run for the same agent is active, or the resolved target session has active or queued work.
 
 See [Heartbeat](/gateway/heartbeat).
 

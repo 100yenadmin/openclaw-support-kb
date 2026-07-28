@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference.md"
-source_hash: "6cc7f87a300d5e5f1c7a4019d6d9accbb8bb0d305148e30a3d23e12dacfd8a00"
+source_hash: "8b705728efbbe97e2903af89cc765a6b6cffeb9ea0c889b03c56be9fea3ccb85"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference.md"
@@ -19,13 +19,13 @@ Source: https://docs.composio.dev/reference.md
 
 Composio powers tool discovery, execution, authentication, and context management for your AI agents with 1000+ toolkits. This reference covers our REST APIs and SDKs.
 
-# Quick Reference
+# Quick Reference [#quick-reference]
 
 * **Base URL**:
 * **[Authenticating to Composio](/reference/authenticating-to-composio)**: `x-api-key` (project) or `x-org-api-key` (organization) header
 * **[Rate Limits](/reference/rate-limits)**: 2K-10K requests per minute (plan-dependent)
 
-# REST API
+# REST API [#rest-api]
 
 | API                                                               | Description                                                   |
 | ----------------------------------------------------------------- | ------------------------------------------------------------- |
@@ -36,7 +36,7 @@ Composio powers tool discovery, execution, authentication, and context managemen
 | [Triggers](/reference/api-reference/triggers)                     | Subscribe to webhooks from connected apps                     |
 | [Toolkits](/reference/api-reference/toolkits)                     | Browse available apps and their tools                         |
 
-# SDK Reference
+# SDK Reference [#sdk-reference]
 
 - [TypeScript SDK](/reference/sdk-reference/typescript):
 TypeScript SDK reference

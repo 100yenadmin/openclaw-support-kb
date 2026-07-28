@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ bot"
 source: "https://docs.openclaw.ai/channels/qqbot"
-source_hash: "6c6f990426d60a7707c5a7565258a5054cd5d592d09f63da9719e35df22b9793"
+source_hash: "5b5b7ff1775acb7ac9520ef123e283708a42e95eb7a55040f30fbb92a621d83f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qqbot.md"
@@ -152,6 +152,11 @@ Notes:
   `allowFrom` has a concrete (non-wildcard) entry, otherwise `open`.
   `groupPolicy` defaults to `allowlist` once either `groupAllowFrom` or
   `allowFrom` has a concrete entry, otherwise `open`.
+- `contextVisibility` controls quoted-message text that QQ supplies as
+  supplemental context. The default, `"all"`, keeps quoted text as received.
+  Set `"allowlist"` to include quoted bodies only when the quoted sender passes
+  the configured sender policy, or `"allowlist_quote"` to keep explicit quotes
+  while filtering other supplemental context. See [Groups](/channels/groups#context-visibility-and-allowlists).
 - "Auth: allowlist" slash commands require an explicit non-wildcard entry in
   `allowFrom` (or `groupAllowFrom` for group invocations) regardless of
   `dmPolicy` / `groupPolicy` — see [Slash commands](#slash-commands).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release performance sweep"
 source: "https://docs.openclaw.ai/reference/release-performance-sweep"
-source_hash: "264ee52c9c798dc403ca3881302041dfd1c6a3da1af0117814f514bddedf81ab"
+source_hash: "ebb5dbb93c03913a5a71632658e0de90c55d460632e52361351cb6684c6ad4b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/release-performance-sweep.md"
@@ -296,8 +296,8 @@ that made npm materialize a large nested OpenClaw dependency tree and all 12
 `@napi-rs/canvas` platform packages. The nested tree is smaller in `v2026.5.28`,
 and the canvas platform fanout no longer lands in the local audit.
 
-For a plain-English explanation of shrinkwrap and the maintainer-level package
-checks, see [npm shrinkwrap](/gateway/security/shrinkwrap).
+For the current dependency review and package policy, see
+[dependency locking](/gateway/security/dependency-locking).
 
 ## Supply-chain interpretation
 

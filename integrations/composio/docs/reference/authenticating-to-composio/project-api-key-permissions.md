@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Scoped Project API Key"
 source: "https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md"
-source_hash: "d80059e1b214c76ef1800067403f6bd2ff5d2a4d356dcf807d161e3e40316234"
+source_hash: "4ae8abf9c31201d14dbcdd95d7c30d38e83ee50b9d1bf4aa102ff3d7a492ffec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio/project-api-key-permissions.md"
@@ -25,7 +25,7 @@ A scoped project API key lets you choose which project resources the key can acc
 
 > Default project API keys keep full project API key access. Scoped keys use the permission areas and access levels on this page.
 
-# Create a scoped API key
+# Create a scoped API key [#create-a-scoped-api-key]
 
 Create a scoped key from the dashboard:
 
@@ -41,7 +41,7 @@ Open the **API Keys** tab.
 
 Click **Create API Key**, then choose the permission areas and access levels below.
 
-# Access levels
+# Access levels [#access-levels]
 
 | Access level   | What it allows                                                      |
 | -------------- | ------------------------------------------------------------------- |
@@ -54,7 +54,7 @@ Some read routes use `POST` because the request body carries filters or lookup i
 
 When v3 and v3.1 expose the same route shape, this page lists one representative version instead of repeating both. Version-specific routes are listed separately.
 
-# Permission areas
+# Permission areas [#permission-areas]
 
 Jump to each permission area to see the routes it covers.
 
@@ -71,7 +71,7 @@ Jump to each permission area to see the routes it covers.
 | Observability      | No access, Read only                             | [View routes](#observability)      |
 | Sessions           | No access, Read only, Write only, Read and write | [View routes](#sessions)           |
 
-# Auth configs
+# Auth configs [#auth-configs]
 
 View and modify auth configs.
 
@@ -84,7 +84,7 @@ View and modify auth configs.
 | Write  | `DELETE` | `/api/v3/auth_configs/{nanoid}`          |
 | Write  | `PATCH`  | `/api/v3/auth_configs/{nanoid}/{status}` |
 
-# Connected accounts
+# Connected accounts [#connected-accounts]
 
 View and manage connected accounts.
 
@@ -100,7 +100,7 @@ View and manage connected accounts.
 | Write  | `DELETE` | `/api/v3/connected_accounts/{nanoid}`          |
 | Write  | `POST`   | `/api/v3.1/connected_accounts/{nanoid}/revoke` |
 
-# Tools
+# Tools [#tools]
 
 View tool definitions, inputs, scopes, and versions.
 
@@ -114,7 +114,7 @@ View tool definitions, inputs, scopes, and versions.
 | Read   | `GET`  | `/api/v3.1/tools/get_scopes_required`          |
 | Read   | `POST` | `/api/v3.1/tools/execute/{tool_slug}/input`    |
 
-# Tool execution
+# Tool execution [#tool-execution]
 
 Execute predefined Composio tools.
 
@@ -125,7 +125,7 @@ Execute predefined Composio tools.
 | Write  | `POST` | `/api/v3/files/upload/response`       |
 | Write  | `GET`  | `/api/v3/files/list`                  |
 
-# Proxy execute
+# Proxy execute [#proxy-execute]
 
 Execute raw proxy requests against connected accounts.
 
@@ -136,7 +136,7 @@ Proxy execute is separate from tool execution. Grant it only when your applicati
 | Write  | `POST` | `/api/v3.1/tools/execute/proxy`                          |
 | Write  | `POST` | `/api/v3/tool_router/session/{session_id}/proxy_execute` |
 
-# Toolkits
+# Toolkits [#toolkits]
 
 View and install toolkits.
 
@@ -148,7 +148,7 @@ View and install toolkits.
 | Read   | `GET`  | `/api/v3/toolkits/changelog`  |
 | Write  | `POST` | `/api/v3/toolkits/multi`      |
 
-# Triggers
+# Triggers [#triggers]
 
 View trigger types, manage trigger instances, and subscribe to trigger events. The realtime routes are called by the SDK (`triggers.subscribe()`) and the CLI to receive trigger events.
 
@@ -166,7 +166,7 @@ View trigger types, manage trigger instances, and subscribe to trigger events. T
 | Write  | `PATCH`  | `/api/v3/trigger_instances/manage/{triggerId}` |
 | Write  | `DELETE` | `/api/v3/trigger_instances/manage/{triggerId}` |
 
-# Webhooks
+# Webhooks [#webhooks]
 
 View and manage webhook endpoints and subscriptions.
 
@@ -187,7 +187,7 @@ View and manage webhook endpoints and subscriptions.
 | Write  | `DELETE` | `/api/v3/webhook_subscriptions/{id}`               |
 | Write  | `POST`   | `/api/v3/webhook_subscriptions/{id}/rotate_secret` |
 
-# Observability
+# Observability [#observability]
 
 View execution logs and project usage summaries.
 
@@ -198,7 +198,7 @@ View execution logs and project usage summaries.
 | Read   | `POST` | `/api/v3.1/project/usage/{entity_type}` |
 | Read   | `POST` | `/api/v3.1/project/usage/summary`       |
 
-# Sessions
+# Sessions [#sessions]
 
 Create and operate sessions and MCP servers. This permission area covers MCP server management, the MCP runtime transport, and the tool router MCP transport.
 
@@ -236,7 +236,7 @@ Create and operate sessions and MCP servers. This permission area covers MCP ser
 | Write  | `POST`   | `/api/v3/tool_router/session/{session_id}/mounts/{mount_id}/delete`       |
 | Write  | `POST`   | `/api/v3.1/tool_router/session/{session_id}/attach`                       |
 
-# What to read next
+# What to read next [#what-to-read-next]
 
 - [Authenticating to Composio](/reference/authenticating-to-composio): Authenticate API requests with project and organization API keys
 

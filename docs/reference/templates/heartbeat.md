@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
-title: "HEARTBEAT.md template"
+title: "Retired HEARTBEAT.md workspace file"
 source: "https://docs.openclaw.ai/reference/templates/HEARTBEAT"
-source_hash: "56c80a24eae3b11165e1f91462a319030d83e98d95fb7c2c22f2be0544906d33"
+source_hash: "d2c6d99c524e5013b91c9221275b1439a24190b4ae9539a8997b612b4cde733f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/heartbeat.md"
@@ -10,30 +10,29 @@ original_doc_path: "reference/templates/heartbeat.md"
 duplicate_index: 1
 ---
 
-# HEARTBEAT.md template
+# Retired HEARTBEAT.md workspace file
 Source: https://docs.openclaw.ai/reference/templates/HEARTBEAT
 
-# HEARTBEAT.md template
+# HEARTBEAT.md is retired
 
-`HEARTBEAT.md` lives in the agent workspace and holds the periodic heartbeat checklist. Keep it empty, or with only whitespace, Markdown comments, ATX headings, empty list stubs (`- `, `* [ ]`), or fence markers, to make OpenClaw skip the heartbeat model call entirely (`reason=empty-heartbeat-file`).
+OpenClaw no longer creates `HEARTBEAT.md` in new workspaces or reads it at runtime. Heartbeat instructions now live in the system-owned monitor's cron scratch in the shared state database.
 
-Shipped default content:
+Manage the current scratch with the monitor job id from `openclaw cron list --all`:
 
-```markdown
-<!-- Heartbeat template; comments-only content prevents scheduled heartbeat API calls. -->
-
-# Keep this file empty (or with only comments) to skip heartbeat API calls.
-
-# Add a short checklist below when the heartbeat should inspect shared context.
+```bash
+openclaw cron scratch <jobId>
+openclaw cron scratch <jobId> --set "..."
+openclaw cron scratch <jobId> --file notes.md
+openclaw cron scratch <jobId> --unset
 ```
 
-Add a short checklist below the comment lines only when one heartbeat turn should inspect the items together. Keep it small: heartbeat runs read this file every tick (default every 30 minutes), so bloated instructions burn tokens on every wake.
-
-For independently scheduled or due-only checks, create [cron jobs](/automation/cron-jobs). Heartbeat scratch no longer supports scheduler syntax. Run `openclaw doctor --fix` to convert older `tasks:` blocks.
+If an older workspace still contains `HEARTBEAT.md`, run `openclaw doctor --fix`. Doctor imports its instructions into monitor scratch, converts valid legacy `tasks:` entries into cron jobs, archives the original under the state directory, and removes the workspace file.
 
 ## Related
 
 - [Heartbeat](/gateway/heartbeat)
+- [Cron CLI](/cli/cron)
+- [Doctor](/cli/doctor)
 - [Heartbeat config](/gateway/config-agents)
 
 ---

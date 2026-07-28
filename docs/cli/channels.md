@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channels"
 source: "https://docs.openclaw.ai/cli/channels"
-source_hash: "9a2f12b1a1c9b263592e891a9bf03db7b338670e237a5c6b541abb5d9fc2afba"
+source_hash: "af4c95500c43247b736dd85edac2182633eabb6f8068f9f62cdff957c7d5033e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/channels.md"
@@ -112,7 +112,7 @@ If a channel plugin needs to be installed during a flag-driven add command, Open
 
 Both guided setup and flag-driven setup pass through the selected channel's parser, validation, account resolution, config writer, and post-write hooks. Unsupported flags fail with the owning channel's setup error instead of being accepted through a global input bag.
 
-When you run `openclaw channels add` with no direct account, credential, or channel-config flags, the interactive wizard can prompt. A positional channel id and `--channel <id>` both preselect that channel without bypassing guidance:
+When you run `openclaw channels add` with no direct account, credential, or channel-config flags, the interactive wizard can prompt. A positional channel id and `--channel <id>` both open that channel's guided setup immediately. Back returns to the full channel picker:
 
 ```bash
 openclaw channels add telegram

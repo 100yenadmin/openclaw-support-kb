@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "913a2cc3e22c779a81da8e6e9ae19f5d4db765371bee65a0c07c776d91278117"
+source_hash: "3b2bae71d33e7dfb4f62ceeb996086f83b26c6dc5838f7c8e1515720117f7614"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -87,7 +87,6 @@ exhaustive):
 | `hooks.installs_unpinned_npm_specs`                             | warn               | Hook install records are not pinned to immutable npm specs                              | hook install metadata                                                                                   | no       |
 | `hooks.installs_missing_integrity`                              | warn               | Hook install records lack integrity metadata                                            | hook install metadata                                                                                   | no       |
 | `hooks.installs_version_drift`                                  | warn               | Hook install records drift from installed packages                                      | hook install metadata                                                                                   | no       |
-| `logging.redact_off`                                            | warn               | Sensitive values leak to logs/status                                                    | `logging.redactSensitive`                                                                               | yes      |
 | `browser.control_invalid_config`                                | warn               | Browser control config is invalid before runtime                                        | `browser.*`                                                                                             | no       |
 | `browser.control_no_auth`                                       | critical           | Browser control exposed without token/password auth                                     | `gateway.auth.*`                                                                                        | no       |
 | `browser.remote_cdp_http`                                       | warn               | Remote CDP over plain HTTP lacks transport encryption                                   | browser profile `cdpUrl`                                                                                | no       |

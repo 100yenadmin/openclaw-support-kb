@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/session.md"
-source_hash: "d3394f53ce4e81b8db1d4710a7d2ce73e15f04f4d09f6bc1c17a0f1855bac566"
+source_hash: "3fdb4fcb5680c7f781a127ccc108f9083149ffbb9eaba38b1ebcea0f5fb5138e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/session.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/session.md
 
 
-# Properties
+# Properties [#properties]
 
 | Name            | Type                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                        |
 | --------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,9 +29,9 @@ Source: https://docs.composio.dev/reference/sdk-reference/typescript/session.md
 | `sessionId`     | `string`                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `warnings`      | `Warning[]`                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                    |
 
-# Methods
+# Methods [#methods]
 
-## authorize()
+## authorize() [#authorize]
 
 Initiate an authorization flow for a toolkit.
 Returns a ConnectionRequest with a redirect URL for the user.
@@ -65,7 +65,7 @@ async authorize(toolkit: string, options?: { callbackUrl?: string; alias?: strin
 
 ***
 
-## customToolkits()
+## customToolkits() [#customtoolkits]
 
 List all custom toolkits registered in this session.
 Returns toolkits with their tools showing final slugs.
@@ -80,7 +80,7 @@ customToolkits(): RegisteredCustomToolkit[]
 
 ***
 
-## customTools()
+## customTools() [#customtools]
 
 List all custom tools registered in this session.
 Returns tools with their final slugs, schemas, and resolved toolkit.
@@ -101,7 +101,7 @@ customTools(options?: { toolkit?: string }): RegisteredCustomTool[]
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Delete this session.
 
@@ -124,7 +124,7 @@ async delete(requestOptions?: ComposioRequestOptions): Promise
 
 ***
 
-## execute()
+## execute() [#execute]
 
 Execute a tool within the session.
 
@@ -151,7 +151,7 @@ async execute(toolSlug: string, arguments_?: Record<string, unknown>, options?: 
 
 ***
 
-## proxyExecute()
+## proxyExecute() [#proxyexecute]
 
 Proxy an API call through Composio's auth layer using the session's connected account.
 The backend resolves the connected account from the toolkit within the session.
@@ -173,7 +173,7 @@ async proxyExecute(params: SessionProxyExecuteParams, requestOptions?: ComposioR
 
 ***
 
-## search()
+## search() [#search]
 
 Search for tools by semantic use case.
 Returns relevant tools for the given query with schemas and guidance.
@@ -195,7 +195,7 @@ async search(params: { query: string; toolkits?: string[]; }, requestOptions?: C
 
 ***
 
-## toolkits()
+## toolkits() [#toolkits]
 
 Query the connection state of toolkits in the session.
 Supports pagination and filtering by toolkit slugs.
@@ -217,7 +217,7 @@ async toolkits(options?: ToolRouterToolkitsOptions, requestOptions?: ComposioReq
 
 ***
 
-## tools()
+## tools() [#tools]
 
 Get the tools available in the session, formatted for your AI framework.
 Requires a provider to be configured in the Composio constructor.
@@ -242,7 +242,7 @@ async tools(modifiers?: SessionMetaToolOptions, requestOptions?: ComposioRequest
 
 ***
 
-## update()
+## update() [#update]
 
 Partially update the session configuration.
 Only the fields provided will be changed; omitted fields are preserved.

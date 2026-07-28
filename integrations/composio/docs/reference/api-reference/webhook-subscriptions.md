@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md"
-source_hash: "13174a0b4216e005ed0d95a52130afc88d9acc47149cd6c2c36488a68135512c"
+source_hash: "382aa9408ef6b17ab5853ef481244afe0b1a1b24728febb04a5bccced257cb2f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-subscriptions.md"
@@ -27,7 +27,7 @@ Each subscription is addressed by its `id`. You can update its URL and filters w
 
 Every webhook request Composio sends includes `webhook-id`, `webhook-timestamp`, and `webhook-signature` headers. Store the secret as `COMPOSIO_WEBHOOK_SECRET` and verify each payload before trusting it. See [Verifying signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures) for the SDK and manual verification flows.
 
-# Event types
+# Event types [#event-types]
 
 A subscription's `enabled_events` controls which events get delivered to its URL. Two broad families exist:
 
@@ -36,7 +36,7 @@ A subscription's `enabled_events` controls which events get delivered to its URL
 
 List everything you can subscribe to with the `/webhook_subscriptions/event_types` endpoint, then scope a subscription to the events you handle.
 
-# Detecting connection expiry
+# Detecting connection expiry [#detecting-connection-expiry]
 
 Composio automatically refreshes OAuth tokens before they expire. But when a refresh token is revoked or expires, the connection enters an `EXPIRED` state and the user must re-authenticate.
 
@@ -146,6 +146,6 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 
 > Always [verify webhook signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures) before processing events in production.
 
-# Endpoints
+# Endpoints [#endpoints]
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chutes"
 source: "https://docs.openclaw.ai/providers/chutes"
-source_hash: "3824412724086cddd8d7c5e9b5b8d46612065b483dcfb7caabdc0522ccbcf91a"
+source_hash: "fef057028229bdb09792d0f37938307edb858b929513470873f7af979c33113f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/chutes.md"
@@ -37,7 +37,7 @@ openclaw gateway restart
 
 ## Getting started
 
-Both paths set the default model to `chutes/zai-org/GLM-5-TEE` and register
+Both paths set the default model to `chutes/zai-org/GLM-5.2-TEE` and register
 the Chutes catalog.
 
 Tabs
@@ -70,7 +70,7 @@ Steps
 Get an API key
 
         Create a key at
-        [chutes.ai/settings/api-keys](https://chutes.ai/settings/api-keys).
+        [chutes.ai/app/settings/api-keys](https://chutes.ai/app/settings/api-keys).
 
 
 Run the API key onboarding flow
@@ -99,19 +99,23 @@ OpenClaw registers two convenience aliases for the Chutes catalog:
 | Alias           | Target model                           |
 | --------------- | -------------------------------------- |
 | `chutes-pro`    | `chutes/deepseek-ai/DeepSeek-V3.2-TEE` |
-| `chutes-vision` | `chutes/moonshotai/Kimi-K2.5-TEE`      |
+| `chutes-vision` | `chutes/moonshotai/Kimi-K2.6-TEE`      |
 
 ## Built-in starter catalog
 
-The bundled fallback catalog contains these five currently served models:
+The bundled fallback catalog contains these current starter models plus two
+compatible prior-generation refs that remain selectable but are hidden from
+pickers:
 
-| Model ref                              |
-| -------------------------------------- |
-| `chutes/zai-org/GLM-5-TEE`             |
-| `chutes/deepseek-ai/DeepSeek-V3.2-TEE` |
-| `chutes/moonshotai/Kimi-K2.5-TEE`      |
-| `chutes/MiniMaxAI/MiniMax-M2.5-TEE`    |
-| `chutes/Qwen/Qwen3.5-397B-A17B-TEE`    |
+| Model ref                              | Picker status |
+| -------------------------------------- | ------------- |
+| `chutes/zai-org/GLM-5.2-TEE`           | Visible       |
+| `chutes/deepseek-ai/DeepSeek-V3.2-TEE` | Visible       |
+| `chutes/moonshotai/Kimi-K2.6-TEE`      | Visible       |
+| `chutes/MiniMaxAI/MiniMax-M2.5-TEE`    | Visible       |
+| `chutes/Qwen/Qwen3.6-27B-TEE`          | Visible       |
+| `chutes/moonshotai/Kimi-K2.5-TEE`      | Hidden        |
+| `chutes/Qwen/Qwen3.5-397B-A17B-TEE`    | Hidden        |
 
 Run `openclaw models list --all --provider chutes` for the full list.
 
@@ -121,9 +125,9 @@ Run `openclaw models list --all --provider chutes` for the full list.
 {
   agents: {
     defaults: {
-      model: { primary: "chutes/zai-org/GLM-5-TEE" },
+      model: { primary: "chutes/zai-org/GLM-5.2-TEE" },
       models: {
-        "chutes/zai-org/GLM-5-TEE": { alias: "Chutes GLM 5" },
+        "chutes/zai-org/GLM-5.2-TEE": { alias: "Chutes GLM 5.2" },
         "chutes/deepseek-ai/DeepSeek-V3.2-TEE": { alias: "Chutes DeepSeek V3.2" },
       },
     },

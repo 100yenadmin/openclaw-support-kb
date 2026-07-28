@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Importing existing connections"
 source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "3ccf63e4a6c1ff3fdbb19ed5391779880f28f4dbaede908f4d09e1baea31475c"
+source_hash: "84fece28bb50e91a91caa490524582084aa60e6fa6e1a620dd8e3cae0e5f430f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "importing-existing-connections.md"
@@ -25,15 +25,15 @@ This is useful when:
 * You're adopting Composio and want to onboard existing users without disrupting them
 * You want to use bearer tokens with OAuth toolkits (Gmail, GitHub, Slack, etc.) without setting up an OAuth app
 
-# How it works
+# How it works [#how-it-works]
 
-# Prerequisites
+# Prerequisites [#prerequisites]
 
 1. **An [auth config](/docs/programmatic-auth-configs)** for the toolkit you're importing into
 2. **The existing credentials** for each user (API keys, bearer tokens, username/password, etc.)
 3. **A userID** for each user. Any string that uniquely identifies them in your system.
 
-# API keys
+# API keys [#api-keys]
 
 For services that use API key authentication (e.g., SendGrid, Tavily, PostHog):
 
@@ -78,7 +78,7 @@ const connection = await composio.connectedAccounts.initiate(
 console.log('Connected:', connection.id);
 ```
 
-# Bearer tokens
+# Bearer tokens [#bearer-tokens]
 
 If you manage your own OAuth flow and already have an access token for a service, you can import it into Composio as a bearer token. This lets you bring existing OAuth connections into Composio without re-authenticating your users. It works with **all toolkits that support OAuth2 or S2S auth** (Gmail, GitHub, Slack, Google Docs, and more). Any additional parameters the toolkit supports (e.g., `subdomain`, `base_url`) work the same way.
 
@@ -127,7 +127,7 @@ const connection = await composio.connectedAccounts.initiate(
 console.log('Connected:', connection.id);
 ```
 
-# Basic auth
+# Basic auth [#basic-auth]
 
 **Python:**
 
@@ -172,7 +172,7 @@ const connection = await composio.connectedAccounts.initiate(
 console.log('Connected:', connection.id);
 ```
 
-# Updating credentials
+# Updating credentials [#updating-credentials]
 
 When credentials expire or rotate, update them in place without recreating the connection. Fields you omit are preserved. Fields set to `null` are removed.
 
@@ -290,7 +290,7 @@ curl -X PATCH https://backend.composio.dev/api/v3.1/connected_accounts/ca_xxx \
   -d '{"connection":{"state":{"authScheme":"BASIC","val":{"username":"user@example.com","password":"new-password"}}}}'
 ```
 
-# Using in your session
+# Using in your session [#using-in-your-session]
 
 Pass the auth config or connection ID when creating a session:
 
@@ -315,7 +315,7 @@ const session = await composio.create('user_123', {
 });
 ```
 
-# Next
+# Next [#next]
 
 - [Managing multiple accounts](/docs/managing-multiple-connected-accounts): Pin and select connected accounts for a user
 

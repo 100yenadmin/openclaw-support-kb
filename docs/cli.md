@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "b3a74c27d0fd6cc00afd1d1b61e2bff84e150d6be1e858998fc603a00bd0bb82"
+source_hash: "1128692232ce21d4664ddc27b382a2728e0f184e9984eee262e94c1bc96f755b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -54,6 +54,10 @@ Setup commands by intent:
 | `--no-color`            | Disable ANSI colors (`NO_COLOR=1` is also respected)                                                    |
 | `--update`              | Shorthand for [`openclaw update`](/cli/update); works for both source checkouts and package installs    |
 | `-V`, `--version`, `-v` | Print version and exit                                                                                  |
+
+A named `--profile` replaces canonical state and config paths inherited from
+another profile, including a running Gateway service. Explicitly customized
+state directories and config paths remain unchanged.
 
 ## Output modes
 

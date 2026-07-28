@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md"
-source_hash: "1daff77e833f60d42c75cd48abe728c62bad4c43d546f4dcb66b642fe0fe8d39"
+source_hash: "7b5718556200f8bc91cd896f0f788f885f6206024f45baadeb3a55466b32b20e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/triggers.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
 
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.triggers` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.triggers.list();
 ```
 
-# Methods
+# Methods [#methods]
 
-## create()
+## create() [#create]
 
 Create a new trigger instance for a user
 If the connected account id is not provided, the first connected account for the user and toolkit will be used
@@ -52,7 +52,7 @@ async create(userId: string, slug: string, body?: TriggerInstanceUpsertParams, r
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Delete a trigger instance
 
@@ -73,7 +73,7 @@ async delete(triggerId: string, requestOptions?: ComposioRequestOptions): Promis
 
 ***
 
-## disable()
+## disable() [#disable]
 
 Disable a trigger instance
 
@@ -94,7 +94,7 @@ async disable(triggerId: string, requestOptions?: ComposioRequestOptions): Promi
 
 ***
 
-## enable()
+## enable() [#enable]
 
 Enable a trigger instance
 
@@ -115,7 +115,7 @@ async enable(triggerId: string, requestOptions?: ComposioRequestOptions): Promis
 
 ***
 
-## getType()
+## getType() [#gettype]
 
 Retrieve a trigger type by its slug for the provided version of the app
 Use the global toolkit versions param when initializing composio to pass a toolkitversion
@@ -137,7 +137,7 @@ async getType(slug: string, requestOptions?: ComposioRequestOptions): Promise
 
 ***
 
-## listActive()
+## listActive() [#listactive]
 
 Fetch list of all the active triggers
 
@@ -167,7 +167,7 @@ const triggers = await triggers.listActive({
 
 ***
 
-## listEnum()
+## listEnum() [#listenum]
 
 Fetches the list of all the available trigger enums
 
@@ -189,7 +189,7 @@ async listEnum(requestOptions?: ComposioRequestOptions): Promise
 
 ***
 
-## listTypes()
+## listTypes() [#listtypes]
 
 List all the trigger types
 
@@ -210,7 +210,7 @@ async listTypes(query?: TriggersTypeListParams, requestOptions?: ComposioRequest
 
 ***
 
-## parse()
+## parse() [#parse]
 
 Parse an incoming webhook HTTP request into a typed, normalized trigger payload.
 
@@ -289,7 +289,7 @@ export async function POST(request: Request) {
 
 ***
 
-## setWebhookSubscription()
+## setWebhookSubscription() [#setwebhooksubscription]
 
 Create or update the project webhook subscription used for webhook delivery.
 
@@ -320,7 +320,7 @@ await composio.triggers.setWebhookSubscription({
 
 ***
 
-## subscribe()
+## subscribe() [#subscribe]
 
 Subscribe to all the triggers
 
@@ -349,7 +349,7 @@ triggers.subscribe((data) => {
 
 ***
 
-## unsubscribe()
+## unsubscribe() [#unsubscribe]
 
 Unsubscribe from all the triggers
 
@@ -373,7 +373,7 @@ await triggers.unsubscribe();
 
 ***
 
-## update()
+## update() [#update]
 
 Update an existing trigger instance
 
@@ -395,7 +395,7 @@ async update(triggerId: string, body: TriggerInstanceManageUpdateParams, request
 
 ***
 
-## verifyWebhook()
+## verifyWebhook() [#verifywebhook]
 
 Verify an incoming webhook payload and signature.
 

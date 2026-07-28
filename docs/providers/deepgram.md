@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "d0007390e6ed72763b715b6ab3ee59bb1ab1f5095fee9696d7586858ae756ca4"
+source_hash: "0764c2ad68fcd7941825ad948491247033fce6901746ad571c6aaa549cd68f72"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
@@ -25,7 +25,6 @@ returns them.
 
 | Detail        | Value                                                      |
 | ------------- | ---------------------------------------------------------- |
-| Website       | [deepgram.com](https://deepgram.com)                       |
 | Docs          | [developers.deepgram.com](https://developers.deepgram.com) |
 | Auth          | `DEEPGRAM_API_KEY`                                         |
 | Default model | `nova-3`                                                   |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "1fb6f303bdddeb1289938e35b28b1687b85f0f237b0d8f2887ac887410d7901e"
+source_hash: "ed6d8e9e5d1c0a5219cdc02b474b3a02d7f4e587cd7d97ded42b9368777c4277"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -81,7 +81,9 @@ Control UI
     Settings show common fields first. Each section keeps its advanced fields
     in a collapsed **Advanced (N)** group; use **Show advanced** to expand all
     groups. Settings search always includes both tiers and opens the matching
-    advanced group when needed.
+    advanced group when needed. Per-channel settings under **Settings ->
+    Channels** use the same split and share the **Show advanced** preference,
+    with **Hide advanced** on the divider to collapse them again.
 
 
 Direct edit

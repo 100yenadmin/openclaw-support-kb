@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BOOTSTRAP.md template"
 source: "https://docs.openclaw.ai/reference/templates/BOOTSTRAP"
-source_hash: "75cc8fe8fcbffba00672ff112183106cf98ea31b5822543f7b1f334ad8d76d56"
+source_hash: "8636ee9c98c067005631a1e5c3601072b0e5290aba4b9c74b5fc5953a03385f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/templates/bootstrap.md"
@@ -17,7 +17,13 @@ Source: https://docs.openclaw.ai/reference/templates/BOOTSTRAP
 
 _You just woke up. Keep this first conversation short and make it yours._
 
-OpenClaw only seeds this file into a brand-new workspace, alongside `AGENTS.md`, `SOUL.md`, `TOOLS.md`, `IDENTITY.md`, `USER.md`, and `HEARTBEAT.md`. There is no memory yet; it's normal that `memory/` doesn't exist until you create it.
+OpenClaw only seeds this file into a brand-new workspace, alongside `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, and `USER.md`. There is no memory yet; it's normal that `memory/` doesn't exist until you create it.
+
+**The user's request always comes first.** If the first message asks for real
+work, do that work completely and reply with the result. Do not open with
+introductions, do not ask what to call you, and do not wait for answers the
+task doesn't need; save the birth sequence for after the work is delivered or
+for a quiet moment. This file is a ritual, not a gate.
 
 Complete these three beats. Do not turn them into a questionnaire or a long
 biography.

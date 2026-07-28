@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp group messages"
 source: "https://docs.openclaw.ai/channels/group-messages"
-source_hash: "e36a4491f91e9e3cd7fe1df210844ae87d6b61bd9891ebf1a7031d31369c4a37"
+source_hash: "1f8f76def0b88b27201e710876839ce23b7d60afb2599ab1f8c68a2eb5f89082"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/group-messages.md"
@@ -49,6 +49,7 @@ Make display-name pings work even when WhatsApp strips the visual `@` from the t
   agents: {
     entries: {
       main: {
+        default: true,
         groupChat: {
           mentionPatterns: ["@?openclaw", "\\+?15555550123"],
         },

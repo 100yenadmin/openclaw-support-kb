@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "0ddd814387ed0195a3c0bfc613d78f8b30419d5372321b5dedfc24c78a46a840"
+source_hash: "7a13420e375e3eb6bdb4346409fa8f2f2ea28b750798dd339fbc836d1ab0c9d1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -63,6 +63,8 @@ openclaw cron create "*/15 * * * *" \
 
 `--session` accepts `main`, `isolated`, `current`, or `session:<id>`.
 
+Agent-turn jobs default to the creating conversation when session context is available. Without a session key, including ordinary CLI calls and API calls that omit one, the target falls back to `isolated`.
+
 AccordionGroup
 
 
@@ -112,7 +114,7 @@ Reminders created from an active chat preserve the live chat delivery target for
 Failure notifications resolve in this order:
 
 1. `delivery.failureDestination` on the job.
-2. Global `cron.failureDestination`.
+2. The global destination fields on `cron.failureAlert` (`mode`, `channel`, `to`, `accountId`). The retired `cron.failureDestination` block is merged into them by `openclaw doctor --fix`.
 3. The job's primary announce target (when neither of the above resolves to a concrete destination).
 
 Note

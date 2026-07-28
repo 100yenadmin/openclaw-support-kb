@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Formal verification (security models)"
 source: "https://docs.openclaw.ai/security/formal-verification"
-source_hash: "2aa1ce366e74e7346844306477fd98bcc5fa9bc80236db8ef3512a2ef1ef6f75"
+source_hash: "18bdb4ad9783dd09de46e1d5189c3ce890b9d17f61f4f2f484929b42ead9fcbd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "security/formal-verification.md"
@@ -28,7 +28,7 @@ This is **not** a proof that OpenClaw is secure in all respects, and it does not
 
 ## Where the models live
 
-Models are maintained in a separate repo: [vignesh07/openclaw-formal-models](https://github.com/vignesh07/openclaw-formal-models).
+Models were maintained in a separate repo: `vignesh07/openclaw-formal-models`.
 
 Note
 
@@ -42,17 +42,7 @@ That repository is currently unreachable (GitHub returns "Repository not found" 
 
 ## Reproducing results
 
-Clone the models repo and run TLC:
-
-```bash
-git clone https://github.com/vignesh07/openclaw-formal-models
-cd openclaw-formal-models
-
-# Java 11+ required (TLC runs on the JVM).
-# The repo vendors a pinned tla2tools.jar and provides bin/tlc plus Make targets.
-
-make <target>
-```
+Reproduction instructions are unavailable while the previously documented models repository is not publicly reachable. Ask in the OpenClaw maintainer channels for a verified current location before attempting the targets below.
 
 There is no CI integration back into this repo yet; a future iteration could add CI-run models with public artifacts (counterexample traces, run logs) or a hosted "run this model" workflow for small bounded checks.
 

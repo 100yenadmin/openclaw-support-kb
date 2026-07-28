@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling authentication"
 source: "https://docs.composio.dev/docs/white-labeling-authentication.md"
-source_hash: "5e73c060f6db8a55831a1d257beed9851c02b670a58d99d5c24e17e6d2187d71"
+source_hash: "335a5e4b65655d77591b4bd67368ed1d6183377df784323c232826bfed0f3aba"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "white-labeling-authentication.md"
@@ -26,7 +26,7 @@ There are four places where Composio branding shows up during authentication:
 | [**Browser address bar**](#routing-the-callback-through-your-domain)  | `backend.composio.dev` flashes during OAuth redirect-back       | Proxy the redirect through your domain              |
 | [**Post-auth success page**](#redirecting-users-after-authentication) | Composio-branded success page after OAuth completes             | Pass a `callbackUrl` when initiating the connection |
 
-# Customizing the Connect Link
+# Customizing the Connect Link [#customizing-the-connect-link]
 
 The Connect Link is the hosted page your users see when connecting their accounts. By default it shows Composio branding.
 
@@ -43,7 +43,7 @@ This applies to all Connect Link flows across all toolkits, for both [in-chat](/
   * **Logo doesn't appear after uploading:** Clear browser cache or try incognito.
   * **Upload fails with "failed to fetch":** Retry or use a smaller image.
 
-# Using your own OAuth apps
+# Using your own OAuth apps [#using-your-own-oauth-apps]
 
 OAuth toolkits like Google and GitHub show a consent screen that says which app is requesting access. By default this reads "Composio wants to connect to your account." To show your app name instead, create a custom auth config with your own OAuth credentials and pass that auth config when creating a session.
 
@@ -51,7 +51,7 @@ OAuth toolkits like Google and GitHub show a consent screen that says which app 
 
 - [Managed vs custom auth](/docs/custom-app-vs-managed-app): Decide when to use custom credentials, create an auth config, and pass it to sessions.
 
-## Switching from Composio-managed to your own OAuth app
+## Switching from Composio-managed to your own OAuth app [#switching-from-composio-managed-to-your-own-oauth-app]
 
 Existing connected accounts are tied to the auth config they were created with. Switching to a custom auth config affects new connections for that toolkit; existing users keep using their current connected accounts until they re-authenticate or you import/migrate their credentials.
 
@@ -59,7 +59,7 @@ Existing connected accounts are tied to the auth config they were created with. 
 * Existing connections continue refreshing with their original auth config.
 * To fully migrate an existing user, delete the old connected account and have them re-authenticate with the new auth config, or import their credentials into the new config where supported.
 
-# Routing the callback through your domain
+# Routing the callback through your domain [#routing-the-callback-through-your-domain]
 
 During OAuth, the browser briefly redirects through `backend.composio.dev` so Composio can capture the auth token. Some toolkits also display this URL on the consent screen.
 
@@ -117,7 +117,7 @@ Here's how the redirect flow works. Your proxy just forwards the browser redirec
 
 > For FAQs and setup guides for individual toolkits, browse the [toolkits page](/toolkits).
 
-# Redirecting users after authentication
+# Redirecting users after authentication [#redirecting-users-after-authentication]
 
 By default, after OAuth completes, users land on a Composio-hosted success page that shows Composio branding. To bypass this page and send users to your own domain instead, pass a `callbackUrl` when calling `session.authorize()`:
 
@@ -143,7 +143,7 @@ const connectionRequest = await session.authorize("gmail", {
 
 After authentication, Composio redirects the user to your callback URL instead of the default success page. For full details on the parameters appended to your callback URL, see [Manually authenticating users → Redirecting users after authentication](/docs/manually-authenticating#redirecting-users-after-authentication).
 
-# Next
+# Next [#next]
 
 - [Managed vs custom auth](/docs/custom-app-vs-managed-app): Set up auth configs for OAuth apps, API keys, and toolkits without managed auth
 

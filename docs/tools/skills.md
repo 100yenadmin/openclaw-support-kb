@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "5efbd10c89e727d394d077c6d6f93b7f989b4a5a9cc7d3fd7e5b635fcfacc0e2"
+source_hash: "e2391232ec9ffc9a3de3c2d0aef800ca1883da2572a3b14cd2184826ee138e6c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -179,6 +179,7 @@ publish and sync.
 | Action                             | Command                                                |
 | ---------------------------------- | ------------------------------------------------------ |
 | Install a skill into the workspace | `openclaw skills install @owner/<slug>`                |
+| Install an external skills.sh ref  | `openclaw skills install skills-sh:owner/repo/slug`    |
 | Install from a Git repository      | `openclaw skills install git:owner/repo@ref`           |
 | Install a local skill directory    | `openclaw skills install ./path/to/skill --as my-tool` |
 | Install for all local agents       | `openclaw skills install @owner/<slug> --global`       |

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Claude Code Plugin"
 source: "https://docs.composio.dev/docs/claude-code-plugin.md"
-source_hash: "9b79dea5cc864b22a8a1a6196fd9bed7917bc63070faadb250d7a906ecb11c67"
+source_hash: "998198945f0119d5778b60dc6dced2b20a728a12e620fefd5484641af02d7617"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "claude-code-plugin.md"
@@ -21,7 +21,7 @@ The **Composio plugin for Claude Code** lets Claude act on 1,000+ apps — send 
 
 > Using Cursor, Codex, Claude Desktop, or another MCP client? See [Composio Connect](/docs/composio-connect).
 
-# Install
+# Install [#install]
 
 #### Add the Composio marketplace
 
@@ -41,13 +41,13 @@ Restart Claude Code (or run `/reload-plugins`) when prompted.
 
 #### Ask Claude to do something
 
-Try: *"Star `composiohq/composio` on GitHub."*
+Try: &#x2A;"Star `composiohq/composio` on GitHub."*
 
 The first time, Claude installs the Composio CLI if it's missing, signs you in with `composio login`, and gives you an OAuth link for GitHub. Approve it in your browser and Claude runs the action.
 
 > Prefer to set things up ahead of time? Run `curl -fsSL https://composio.dev/install | bash`, then `composio login`.
 
-# What you can do
+# What you can do [#what-you-can-do]
 
 Naming the app in your prompt keeps tool search scoped and the run reliable.
 
@@ -71,7 +71,7 @@ In parallel, fetch my last 10 Gmail emails, my open Linear issues, and today's
 Google Calendar events. Redact personal info, then give me a concise summary.
 ```
 
-# Connecting apps
+# Connecting apps [#connecting-apps]
 
 Apps connect on demand — the first task that needs one hands you an OAuth link. To connect an app ahead of time:
 
@@ -81,7 +81,7 @@ Apps connect on demand — the first task that needs one hands you an OAuth link
 
 Works for any of the 1,000+ supported apps — `slack`, `github`, `gmail`, `notion`, `linear`, `hubspot`, and more.
 
-# Team setup
+# Team setup [#team-setup]
 
 To pre-install the plugin for everyone on your team, add this to your project's `.claude/settings.json`:
 
@@ -102,7 +102,7 @@ To pre-install the plugin for everyone on your team, add this to your project's 
 ```
 Anyone who clones the repo and opens it in Claude Code will be prompted to enable the plugin. See the Claude Code [plugin scopes](https://docs.claude.com/en/docs/claude-code/plugins-reference#plugin-installation-scopes) reference for `user` vs `project` vs `local` scope behavior.
 
-# Updating
+# Updating [#updating]
 
 To pull the latest plugin release:
 
@@ -113,11 +113,11 @@ To pull the latest plugin release:
 
 New capabilities usually ship in the Composio CLI itself — `composio upgrade` picks them up without touching the plugin.
 
-# Source code
+# Source code [#source-code]
 
 The plugin is open source: [ComposioHQ/composio-plugin-cc](https://github.com/ComposioHQ/composio-plugin-cc). Issues and PRs welcome.
 
-# Troubleshooting
+# Troubleshooting [#troubleshooting]
 
 For plugin issues — install errors, marketplace not updating — see the [Claude Code plugin troubleshooting docs](https://docs.claude.com/en/docs/claude-code/plugins-reference#common-issues).
 

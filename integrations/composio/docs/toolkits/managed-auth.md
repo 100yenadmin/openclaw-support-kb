@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed Auth"
 source: "https://docs.composio.dev/toolkits/managed-auth.md"
-source_hash: "1bfb63e0fb98871f01d74600d1db8f54602d8ab250dafdf5879f6d8de50c35b2"
+source_hash: "c9b55c04e052d96ff42871e5c898b9e667eef81206888fdfbd1f015557bc1b68"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/managed-auth.md"
@@ -21,7 +21,7 @@ Managed auth means Composio registers and maintains the OAuth app for a toolkit,
 
 When a tool needs an account, the [`COMPOSIO_MANAGE_CONNECTIONS`](/toolkits/meta-tools/manage_connections) meta tool returns a secure [Connect Link](/docs/tools-direct/authenticating-tools#hosted-authentication-connect-link). The user signs in there, and Composio stores and refreshes their tokens. You write no auth code. See [Authentication](/docs/authentication) for the full flow.
 
-# When you don't need to do anything
+# When you don't need to do anything [#when-you-dont-need-to-do-anything]
 
 For any toolkit with managed auth, you don't register an OAuth app, manage credentials, or handle token refresh. Create a session and start calling tools:
 
@@ -45,7 +45,7 @@ const session = await composio.create("user_123");
 // Tools that need an account return a Connect Link automatically
 ```
 
-# When you need your own credentials
+# When you need your own credentials [#when-you-need-your-own-credentials]
 
 You need a custom auth config when you want to:
 
@@ -55,11 +55,11 @@ You need a custom auth config when you want to:
 
 See [Managed vs custom auth](/docs/custom-app-vs-managed-app) for the full decision guide and setup steps. You can mix the two: use your own credentials for some toolkits and managed auth for the rest.
 
-# Find a toolkit
+# Find a toolkit [#find-a-toolkit]
 
 Search the list below to check whether a toolkit has managed auth. Toolkits under **Composio Managed App Available** work out of the box. Toolkits under **Requires your own credentials** need a custom auth config.
 
-# Check programmatically
+# Check programmatically [#check-programmatically]
 
 To check a single toolkit from a script, call the toolkit endpoint and read its managed auth schemes:
 

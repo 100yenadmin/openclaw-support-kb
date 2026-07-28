@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/v3/api-reference/tools.md"
-source_hash: "4cccd8451e955fab839c6c44cf4fdb55100e33db69afc59ea749212c673d3965"
+source_hash: "cc2f5ec33ffc07a41e861e553a90d1e6f02cb9d5ce86cb59553a51e4d325299d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/tools.md"
@@ -34,7 +34,7 @@ These endpoints authenticate with your project API key in the `x-api-key` header
 
 For the concepts behind tools, schemas, and authentication, see [Tools and toolkits](/docs/how-composio-works).
 
-# Proxy execute
+# Proxy execute [#proxy-execute]
 
 Proxy execute sends an authenticated HTTP request through a toolkit's [connected account](/docs/auth-configuration/connected-accounts) without a predefined tool, and Composio injects the OAuth token, API key, or other credentials on the server side so your code never touches raw secrets. Reach for it when you need an endpoint that Composio's predefined tools do not cover, when you need a request shape (custom query parameters, field masks, or advanced filters) that a predefined tool cannot express, or when a terminal agent would otherwise hardcode a bearer token in a `curl` call.
 
@@ -59,6 +59,6 @@ console.log(status, data);
 
 Proxy execute is a form of [direct tool execution](/docs/sessions-vs-direct-execution): it bypasses session state, tool schemas, and modifiers. If you are building an agent, prefer [sessions](/docs/configuring-sessions), and use the proxy only for the specific API call that is not available as a tool. The full request and response schema lives in the [`POST /api/v3.1/tools/execute/proxy`](/reference/api-reference/tools/postToolsExecuteProxy) reference.
 
-# Endpoints
+# Endpoints [#endpoints]
 
 ---

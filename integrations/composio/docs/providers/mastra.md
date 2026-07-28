@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "45c88deec5f4c385ac481969cc6fc08af98e87b0836fe08a8a494638992dc86a"
+source_hash: "2e83a28165020fe02dcb10af7d2c64005d202a5a4eda680818168eb97c41cd53"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -59,7 +59,7 @@ const { text } = await agent.generate([
 
 console.log(text);
 ```
-# Provider specifics
+# Provider specifics [#provider-specifics]
 
 **Strict mode.** Pass `strict: true` to drop every non-required property from each tool's input schema before Mastra compiles it:
 
@@ -73,7 +73,7 @@ const composio = new Composio({ provider: new MastraProvider({ strict: true }) }
 
 > The provider runs each tool's JSON Schema through Mastra's schema-compat layer and inlines internal `$ref` pointers first. A few Composio tools reference `$defs` entries that the upstream API does not emit. Rather than crash `tools.get`, the provider falls back to a permissive object schema for that property and logs one warning per tool, so the affected field validates loosely.
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

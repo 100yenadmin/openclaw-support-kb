@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels"
-source_hash: "02407a288d585c7cb38ce2a7fd13bb09ffdb5f5844c529f967db13bc0f60fc25"
+source_hash: "dcd17eaecb9af831ab6e0ff9344299385e63026dd9b401d3e678fc9abd0b5a62"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels.md"
@@ -23,6 +23,7 @@ restart. "External plugin" channels are maintained outside the OpenClaw repo.
 
 ## Supported channels
 
+- [Buzz](/channels/buzz) - Buzz team rooms with threaded replies (official plugin).
 - [Discord](/channels/discord) - Discord Bot API + Gateway; supports servers, channels, and DMs (official plugin).
 - [Feishu](/channels/feishu) - Feishu/Lark bot via WebSocket (official plugin).
 - [Google Chat](/channels/googlechat) - Google Chat API app via HTTP webhook (official plugin).

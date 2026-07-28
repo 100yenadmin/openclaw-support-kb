@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "ff99970ae258b0708ec091bcf6c8ff6bb22933cf76bdf5bdfcd0d3bf9d77d012"
+source_hash: "a9cc842eb4e82e655d9068f9fc49373b20dfde13062dadd056b0fd757a7ef5b4"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -363,7 +363,7 @@ By default, each `composio.sessions.create()` call returns a new session with ac
 
 Prefer to connect over the Model Context Protocol instead? Every session also exposes an MCP endpoint. See [Using sessions via MCP](/docs/sessions-via-mcp).
 
-# Next
+# Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions):
 Restrict toolkits, set custom auth configs, and select connected accounts

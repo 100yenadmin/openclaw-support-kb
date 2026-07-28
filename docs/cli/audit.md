@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audit records"
 source: "https://docs.openclaw.ai/cli/audit"
-source_hash: "8f0a3d0e9b9898289506cdf7d871a55eea89d09716ac03d993807ae84b2ad264"
+source_hash: "c96dd8af6b6025625148c7a7373bd965abce3e0f44bed2f273e84f797a5adfcc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/audit.md"
@@ -19,10 +19,10 @@ Query the Gateway's metadata-only audit ledger for agent runs, tool actions, and
 opt-in message lifecycle records.
 
 The ledger is on by default for run and tool events. Set
-[`audit.enabled: false`](/gateway/configuration-reference#audit) and restart the
-Gateway to stop all new event records. Message records are separately disabled by
-default; set `audit.messages` to `direct` or `all` and restart the Gateway to
-record them. Existing records stay queryable until they expire (30 days).
+[`logging.audit.enabled: false`](/gateway/configuration-reference#audit) and
+restart the Gateway to stop all new event records. Message records are
+separately disabled by default; set `logging.audit.messages` to `direct` or
+`all` and restart the Gateway to record them. Existing records stay queryable until they expire (30 days).
 
 The ledger is separate from conversation transcripts: it records identity,
 ordering, provenance, action, status, and normalized outcome codes, but never

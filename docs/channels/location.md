@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel location parsing"
 source: "https://docs.openclaw.ai/channels/location"
-source_hash: "fadd154f5ec198ef7acbf761c1554845c9d3764354c910ea742c6a0afef863ae"
+source_hash: "105090d0cad2dcb923ecdf284dd4c0f929bab70e5bb3bae6576e917af13a4b64"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/location.md"
@@ -39,7 +39,7 @@ Locations are rendered as friendly lines without brackets. Coordinates use six d
 If the channel includes a label, address, or caption/comment, it is preserved in the context payload and appears in the prompt as fenced untrusted JSON (fields are omitted when absent):
 
 ````text
-Location (untrusted metadata):
+Location:
 ```json
 {
   "latitude": 48.858844,

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "4b761ecf6cdeb9c4f4b5d1c5030da6003f45142d81c1209dc44b5dcb0d9d4503"
+source_hash: "749b6a021a9ea42605f1c0e96948d3c5602e0b3abce051dd8a57526086a361cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -62,6 +62,21 @@ Internal OpenClaw runtime code follows the same direction: load config once at t
 Provider and channel execution paths must use the active runtime config snapshot, not a file snapshot returned for config readback or editing. File snapshots preserve source values such as SecretRef markers for UI and writes; provider callbacks need the resolved runtime view. When a helper may be called with either the active source snapshot or the active runtime snapshot, route through `selectApplicableRuntimeConfig()` before reading credentials.
 
 ## Reusable runtime utilities
+
+Model-picker integrations use two focused runtime subpaths. Import the typed
+`ModelPickerAction` and `ModelPickerCapabilityProfile` contracts from
+`openclaw/plugin-sdk/interactive-runtime`. Import
+`applySessionModelSelection(...)` and its result types from
+`openclaw/plugin-sdk/model-session-runtime`; this is the live-session mutation
+seam, including its authoritative conflict check and post-commit effects. The
+lower-level session-entry model helpers are not a picker persistence API.
+
+Model-picker actions carry only bounded snapshot and catalog tokens. Channel
+actor identity, source-message binding, and serialized callback data stay in
+the channel's private authenticated envelope. Channel codecs opt into resolving
+these actions with `{ modelPicker: true }`; channels without a picker
+capability continue to fail closed instead of treating the action as an opaque
+callback.
 
 Use inbound `botLoopProtection` facts for bot-authored inbound messages. Core applies the shared in-memory sliding-window guard before session record and dispatch, without tying the policy to one channel. The guard tracks `(scopeId, conversationId, participant pair)` keys, counts both directions of a pair together, applies a cooldown once the window budget is exceeded, and prunes inactive entries opportunistically.
 
@@ -197,7 +212,9 @@ api.runtime.agent
 
     Prefer `getSessionEntry(...)`, `listSessionEntries(...)`, `patchSessionEntry(...)`, or `upsertSessionEntry(...)` for session workflows. These helpers address sessions by agent/session identity so plugins do not depend on the legacy `sessions.json` storage shape. Use `preserveActivity: true` for metadata-only patches that should not refresh session activity, and `replaceEntry: true` only when the callback returns a complete entry and deleted fields must stay deleted. Doctor and migration paths can combine `fallbackEntry`, `skipMaintenance`, and `requireWriteSuccess` for one atomic canonical-store repair.
 
-    `createSessionEntry(...)` creates a new canonical session row and transcript. Its trusted `initialEntry` surface is deliberately narrow: a non-empty `agentHarnessId`, optional `modelSelectionLocked: true`, and optional `pluginExtensions`. The injected runtime accepts only harness ids owned by the calling plugin through `registerAgentHarness(...)`; this is an ownership invariant, not a sandbox between in-process plugins. It rejects an existing row; `label` and `spawnedCwd` are separate creation fields rather than trusted-entry patches.
+    `createSessionEntry(...)` creates a new canonical session row and transcript. Its trusted `initialEntry` surface is deliberately narrow. A plugin may select an owned `agentHarnessId`; seed an owned CLI backend with `cliBackendId`, `model`, and `cliSessionBinding`; or seed a persistent ACP session with `acpBackendId` and `acpSessionBinding: { acpAgentId, agentSessionId }`. The ACP variant persists the supplied native agent session id through the canonical SQLite ACP metadata owner so the first turn resumes that external session. The injected runtime restricts plugin-owned CLI and ACP sessions to the calling plugin's `plugin:<id>:` namespace; harness ids must be owned through `registerAgentHarness(...)`. These are ownership invariants, not a sandbox between in-process plugins. Creation rejects an existing row; `label` and `spawnedCwd` are separate creation fields rather than trusted-entry patches.
+
+    Before advertising an ACP-backed action, use `resolveAcpSessionAvailability(...)` from `openclaw/plugin-sdk/acp-runtime`. It applies the canonical enablement, dispatch, allowed-agent, registered-backend, and backend-health checks; recheck it immediately before creating the session.
 
     Creation holds the session lifecycle mutation fence through `afterCreate`, so new work waits for plugin-owned initialization to finish and pre-existing admitted work makes creation fail. The callback receives a clone of the created state. If it returns a patch, that patch may contain only `pluginExtensions`, and its value is the complete final `pluginExtensions` field. A callback or final-persistence failure rolls back the unchanged new row and transcript; guarded rollback preserves a row changed or claimed concurrently. `recoverMatchingInitialEntry: true` is only for retrying interrupted initialization when the persisted trusted fields match exactly, and recovery requires `afterCreate` to return a final patch.
 
@@ -828,7 +845,7 @@ TPayload
 
 Warning
 
-    `openBlobStore`, `openKeyedStore`, `openSyncKeyedStore`, `withLease`, `openChannelIngressQueue`, and `openChannelIngressDrain` are available only to bundled plugins and trusted official plugin installations in this release.
+    `openBlobStore`, `openKeyedStore`, `openSyncKeyedStore`, `withLease`, `openChannelIngressQueue`, and `openChannelIngressDrain` are available only to bundled plugins and trusted official plugin installations in this release. The rejection names the plugin id and the origin it loaded from; a channel plugin loaded from `plugins.load.paths` or an unofficial install is untrusted, so its ingress monitor fails channel start instead of running without a durable queue.
 
 
 
@@ -909,6 +926,36 @@ api.runtime.channel
     Several fields under `reply`, `session`, and `inbound` carry per-field `@deprecated` notes pointing at the current channel-turn kernel or channel-outbound adapters; check the inline JSDoc on the specific helper before building new code on it.
 
 
+
+## Gateway service events
+
+Long-lived services registered with `api.registerService(...)` receive a process-local
+`ctx.gatewayEvents` facade when the process runs a Gateway broadcaster; in runtimes without one the
+field is absent, so feature-detect it and keep a fallback (for example a coarse poll). Use
+`onSessionsChanged(...)` to react after the Gateway broadcasts a `sessions.changed` notice:
+
+```typescript
+let unsubscribeSessionsChanged: (() => void) | undefined;
+
+api.registerService({
+  id: "session-index",
+  start(ctx) {
+    unsubscribeSessionsChanged = ctx.gatewayEvents?.onSessionsChanged((event) => {
+      // event: { sessionKey, agentId?, label?, displayName?, reason?, phase? }
+      refreshSession(event.sessionKey);
+    });
+  },
+  stop() {
+    unsubscribeSessionsChanged?.();
+    unsubscribeSessionsChanged = undefined;
+  },
+});
+```
+
+The handler runs in the Gateway process and does not add a Gateway protocol subscription. Keep the
+returned unsubscribe function and call it during service cleanup. The payload is a lightweight
+change notice; use `api.runtime.agent.session.getSessionEntry(...)` when the plugin needs the full
+current session entry.
 
 ## Storing runtime references
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Creating triggers"
 source: "https://docs.composio.dev/docs/setting-up-triggers/creating-triggers.md"
-source_hash: "32a63c32c8128bc0b086a4c9c392bb61a5fbe3042d84a3af44f0bfc7d0a3273b"
+source_hash: "f4d1941d857eeabd58d5fa16e8df270f419fbe64f091bc4463d0cd38be8db95f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "setting-up-triggers/creating-triggers.md"
@@ -21,7 +21,7 @@ A trigger watches for one event (like `GITHUB_COMMIT_EVENT`) on one user's conne
 
 The user needs a [connected account](/docs/authentication) for the toolkit you want to monitor. See [Authentication](/docs/authentication) if you haven't set that up.
 
-# Inspect the trigger type
+# Inspect the trigger type [#inspect-the-trigger-type]
 
 Each trigger type declares the config it needs. Check it before you create, so you pass the right fields.
 
@@ -49,7 +49,7 @@ console.log(triggerType.config);
 // {"properties": {"owner": {...}, "repo": {...}}, "required": ["owner", "repo"]}
 ```
 
-# Create the trigger
+# Create the trigger [#create-the-trigger]
 
 Pass the user, the trigger slug, and the config the type requires.
 
@@ -89,7 +89,7 @@ console.log(`Trigger created: ${trigger.triggerId}`);
 
 You only pass a `user_id`. Composio resolves that user's connected account for the toolkit automatically.
 
-## Targeting a specific connected account
+## Targeting a specific connected account [#targeting-a-specific-connected-account]
 
 If a user has more than one connected account for the toolkit, Composio uses the first active connection for the user and the trigger's toolkit. Pass a connected account ID to pick exactly which account the trigger watches.
 
@@ -120,7 +120,7 @@ Trigger instances default to the `'latest'` toolkit version. If you parse payloa
 
 That's it. The trigger is active. Next, [receive its events](/docs/setting-up-triggers/subscribing-to-events).
 
-# Next
+# Next [#next]
 
 - [Receiving events](/docs/setting-up-triggers/subscribing-to-events): Get trigger events locally with the SDK or in production over your webhook URL
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "19f4a5d6c244d782194494abe469f5e55d5a322e965220e6ffba471e783f373b"
+source_hash: "da62ffcc809204c8bcaae380c5db61f2ac44737f9b9b499c3230a8dd48974d7f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
@@ -235,6 +235,13 @@ CLI registration:
   shapes and strips terminal control sequences from descriptions before
   rendering help. Cover every top-level command root the registrar exposes.
   `commands` alone stays on the eager compatibility path.
+- Root descriptors may define a synchronous, pure
+  `machineOutput({ argv, stdoutIsTTY })` resolver for JSON, JSONL, or other
+  machine-readable stdout modes that are not selected solely by `--json`.
+  Parse command tokens with `getRootOptionAwareCommandPath` from
+  `openclaw/plugin-sdk/cli-argv`. Keep the resolver in lightweight CLI metadata
+  and share it with full registration. Nested descriptors do not expose this
+  field.
 - Use `api.registerNodeCliFeature(...)` for paired-node feature commands so
   they land under `openclaw nodes` (equivalent to
   `registerCli(registrar, { parentPath: ["nodes"], ... })`).
@@ -266,11 +273,15 @@ unconfigured, or when deferred loading is enabled. See
 
 Pair `defineSetupPluginEntry(...)` with the narrow setup helper families:
 
-| Import                              | Use for                                                                                                                                                                            |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `openclaw/plugin-sdk/setup-runtime` | Runtime-safe setup helpers: `createSetupTranslator`, import-safe setup patch adapters, lookup-note output, `promptResolvedAllowFrom`, `splitSetupEntries`, delegated setup proxies |
-| `openclaw/plugin-sdk/channel-setup` | Optional-install setup surfaces                                                                                                                                                    |
-| `openclaw/plugin-sdk/setup-tools`   | Setup/install CLI, archive, and docs helpers                                                                                                                                       |
+| Import                                  | Use for                                                                                                                                                                            |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `openclaw/plugin-sdk/setup-runtime`     | Runtime-safe setup helpers: `createSetupTranslator`, import-safe setup patch adapters, lookup-note output, `promptResolvedAllowFrom`, `splitSetupEntries`, delegated setup proxies |
+| `openclaw/plugin-sdk/channel-setup`     | Optional-install setup surfaces                                                                                                                                                    |
+| `openclaw/plugin-sdk/channel-dm-policy` | Account-aware DM policy descriptors for setup flows                                                                                                                                |
+| `openclaw/plugin-sdk/setup-tools`       | Setup/install CLI, archive, and docs helpers                                                                                                                                       |
+| `openclaw/plugin-sdk/archive`           | Bounded archive extraction and single-entry reads                                                                                                                                  |
+| `openclaw/plugin-sdk/root-walk`         | Budgeted, root-bounded directory walking                                                                                                                                           |
+| `openclaw/plugin-sdk/secret-file`       | Pinned secret reads and first-writer-wins creation                                                                                                                                 |
 
 Keep heavy SDKs, CLI registration, and long-lived runtime services in the
 full entry.

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "60d03e209b78090edcb227ba4255cbc47d84606ea7d4e6f4e425b368fa1254b7"
+source_hash: "ecc2aade8addce13c781ddfe806044f07412b60dc2a63127dfd74057a3854a11"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -25,9 +25,7 @@ The OpenAI provider formats Composio tools for OpenAI's function-calling and exe
 
 The OpenAI provider is the default provider for the Composio SDK, so you get it without configuring anything. Pick the tab that matches your integration.
 
-> Choose your integration type · [Use this guide to decide](/docs/native-tools-vs-mcp)
-
-### Responses API
+### responses
 
 The `OpenAIResponsesProvider` transforms Composio tools into OpenAI's function-calling format for the Responses API, then executes the tool calls the model returns and shapes the results into `function_call_output` items you feed back in.
 
@@ -151,7 +149,7 @@ for (const item of response.output) {
     }
 }
 ```
-### Chat Completions
+### chat
 
 The `OpenAIProvider` targets the Chat Completions API and is the default provider used by the Composio SDK when you do not specify one.
 
@@ -265,7 +263,7 @@ while (response.choices[0].message.tool_calls) {
 
 console.log(response.choices[0].message.content);
 ```
-### Agents SDK
+### agents
 
 The `OpenAIAgentsProvider` transforms Composio tools into the Agents SDK tool format with execution built in, so the SDK runs the tool-call loop and you only define the agent and call `run`.
 
@@ -343,7 +341,7 @@ const result = await run(
 console.log(result.finalOutput);
 ```
 
-# Provider specifics
+# Provider specifics [#provider-specifics]
 
 The OpenAI integration ships three providers, one per API surface:
 
@@ -353,7 +351,7 @@ The OpenAI integration ships three providers, one per API surface:
 
 Use the Responses or Agents provider for new agentic flows; reach for Chat Completions when you are extending an existing Chat Completions codebase.
 
-# Next
+# Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Using sessions via MCP"
 source: "https://docs.composio.dev/docs/sessions-via-mcp.md"
-source_hash: "134b5a813c845abce3df4704791b37fb1bb59620b10e640f5d792c6b61830784"
+source_hash: "4f6da32565cc1123ad690a1c97b9150ce38d3339d25205e50e0e6d37860e0fba"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-via-mcp.md"
@@ -21,7 +21,7 @@ By default Composio gives your agent **tools it can call directly**. Composio fo
 
 If you'd rather connect over the [Model Context Protocol](https://modelcontextprotocol.io), every session also exposes a hosted MCP endpoint. This is useful when you want to plug a session into an MCP-native client like Claude Desktop, Cursor, or any framework's MCP transport. No provider package required.
 
-# The MCP endpoint
+# The MCP endpoint [#the-mcp-endpoint]
 
 Opt into MCP by passing `mcp: true` when you create the session. The session then exposes its hosted MCP server. Read the URL and headers off `session.mcp`:
 
@@ -55,7 +55,7 @@ You don't need a provider package to use the MCP endpoint, so you can drop it fr
 
 > The MCP endpoint and `session.tools()` are backed by the same session. Toolkits, auth configs, and connected accounts you set when [configuring the session](/docs/configuring-sessions) apply to both.
 
-# A single URL for a fixed set of tools
+# A single URL for a fixed set of tools [#a-single-url-for-a-fixed-set-of-tools]
 
 Combine `mcp: true` with the [direct-tools preset](/docs/configuring-sessions) to get one MCP URL that serves exactly the tools you list, with no search or meta tools in front of them. This is the closest equivalent to a classic hosted MCP server scoped to a handful of tools.
 
@@ -98,7 +98,7 @@ console.log(session.mcp.url);
 
 Any MCP client pointed at that URL sees only `GMAIL_FETCH_EMAILS` and `GMAIL_CREATE_EMAIL_DRAFT`. See [Configuring Sessions](/docs/configuring-sessions) for the full set of toolkit, tool, and auth filters.
 
-# Wire it into your framework
+# Wire it into your framework [#wire-it-into-your-framework]
 
 Pass `session.mcp.url` and `session.mcp.headers` to your framework's MCP client.
 
@@ -158,7 +158,7 @@ const client = await createMCPClient({
 const tools = await client.tools();
 ```
 
-# Trade-offs
+# Trade-offs [#trade-offs]
 
 MCP is the more portable option. Any MCP-compatible client connects with just a URL, and it's supported across more frameworks and apps (Claude Desktop, Cursor, the OpenAI Responses API, and others) without a provider package.
 
@@ -169,7 +169,7 @@ The trade-off is that the MCP client talks to Composio's server directly, so any
 
 If you need any of those, call tools directly through a [provider](/docs/providers) instead of over MCP.
 
-# Next
+# Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Restrict toolkits, set custom auth configs, and select connected accounts
 

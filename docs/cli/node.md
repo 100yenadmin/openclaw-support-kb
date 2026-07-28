@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "3ff51df612ca3aa1929f8472d29bedf79420cbb0bd8d3c4e517f36a94f5b348b"
+source_hash: "d1982e7dd003c1395a30f80bbd24616e4c3d58d8251d1e2b0806fb4890077a5f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/node.md"
@@ -254,8 +254,8 @@ it contains the device keypair and auth tokens.
 
 `system.run` is gated by local exec approvals:
 
-- `$OPENCLAW_STATE_DIR/exec-approvals.json`, or
-  `~/.openclaw/exec-approvals.json` when the variable is unset
+- `$OPENCLAW_STATE_DIR/state/openclaw.sqlite#exec_approvals_config`, or
+  `~/.openclaw/state/openclaw.sqlite#exec_approvals_config` when the variable is unset
 - [Exec approvals](/tools/exec-approvals)
 - `openclaw approvals --node <id|name|ip>` (edit from the Gateway)
 

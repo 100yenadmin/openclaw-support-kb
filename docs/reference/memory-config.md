@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "c9dd07d5308b5e283c8772b7f134202892afc0eca1c35180047b9c75f26085db"
+source_hash: "e6e72eb0f343573ce562452fee95dc2cc9b71a422ae52232268651828d9aaca7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -474,10 +474,10 @@ Concurrency, polling, and timeout behavior are provider-owned.
 
 Index session transcripts and surface them via `memory_search`:
 
-| Key                           | Type       | Default      | Description                              |
-| ----------------------------- | ---------- | ------------ | ---------------------------------------- |
-| `rememberAcrossConversations` | `boolean`  | `false`      | Permit private cross-conversation recall |
-| `sources`                     | `string[]` | `["memory"]` | Add `"sessions"` to include transcripts  |
+| Key                           | Type       | Default                                                    | Description                              |
+| ----------------------------- | ---------- | ---------------------------------------------------------- | ---------------------------------------- |
+| `rememberAcrossConversations` | `boolean`  | On for personal installs; off with configured DM isolation | Permit private cross-conversation recall |
+| `sources`                     | `string[]` | `["memory"]`                                               | Add `"sessions"` to include transcripts  |
 
 Warning
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "eb7d2f56fb228cba7fe11a63a84961a8b92bf8703f107222a42b983c0a400be8"
+source_hash: "7ba2575932bc87fbc473647f3bc2d33c8e951a2a0239ebfb5d17a4f39496df6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -28,7 +28,7 @@ Each agent has its own:
 Auth profiles are per-agent, read from:
 
 ```text
-~/.openclaw/agents/<agentId>/agent/auth-profiles.json
+~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite
 ```
 
 Note
@@ -256,6 +256,8 @@ Bindings are deterministic and most-specific wins. See [Channel routing](/channe
 - If multiple bindings match within the same tier, the first one in config order wins.
 - If a binding sets multiple match fields (for example `peer` + `guildId`), all specified fields must match (`AND` semantics).
 - A binding that omits `accountId` matches only the default account, not every account. Use `accountId: "*"` for a channel-wide fallback, or `accountId: "<name>"` for one account. Adding the same binding again with an explicit account id upgrades the existing channel-only binding instead of duplicating it.
+
+For existing multi-agent configs, `openclaw doctor --fix` materializes legacy ambient default routing into channel-wide bindings plus explicit heartbeat, Custodian, and Talk targets. Single-agent configs are unchanged.
 
 ## Multiple accounts / phone numbers
 

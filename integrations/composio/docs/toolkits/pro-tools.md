@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Pro Tools"
 source: "https://docs.composio.dev/toolkits/pro-tools.md"
-source_hash: "4886e6a3c09e323fa9211803cdb8d486abc5992718f0f522c774e4450a7029a4"
+source_hash: "6018602c3e24f97227af835f2f3a4c2ca7a18405ff3232743dce1dea3a1b2295"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/pro-tools.md"
@@ -19,21 +19,21 @@ Source: https://docs.composio.dev/toolkits/pro-tools.md
 
 Some tool calls cost more to run — search APIs, code sandboxes, ML inference. We call those pro tools and price them separately.
 
-# What counts as a pro tool?
+# What counts as a pro tool? [#what-counts-as-a-pro-tool]
 
 - [Search APIs](/toolkits/composio_search): Composio Search, Perplexity, Exa, SerpAPI
 
 - [Code execution](/toolkits/codeinterpreter): Sandboxed runtimes like E2B
 
-} title="Web scraping & data extraction" description="Crawlers and structured extraction" />
+" title="Web scraping & data extraction" description="Crawlers and structured extraction" />
 
-} title="AI/ML inference" description="Hosted model calls and embeddings" />
+" title="AI/ML inference" description="Hosted model calls and embeddings" />
 
-} title="Document processing & OCR" description="PDF, image, and document parsing" />
+" title="Document processing & OCR" description="PDF, image, and document parsing" />
 
-} title="Compute-intensive operations" description="Long-running or heavy transforms" />
+" title="Compute-intensive operations" description="Long-running or heavy transforms" />
 
-# Pricing
+# Pricing [#pricing]
 
 Pro tool calls are roughly 3x the cost of a standard tool call. Full pricing is on the [pricing page](https://composio.dev/pricing).
 
@@ -44,7 +44,7 @@ Pro tool calls are roughly 3x the cost of a standard tool call. Full pricing is 
 | Serious Business   | 2M                           | 50k                     | $0.249/1k                       | $0.747/1k                  |
 | Enterprise         | Flexible                     | Flexible                | Flexible                        | Flexible                   |
 
-# Rate limits
+# Rate limits [#rate-limits]
 
 Pro tools have lower rate limits than standard tool calls. If you need more, [contact us](mailto:billing@composio.dev).
 

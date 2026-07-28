@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "ffa5964d229f8fcd46fadb9fe6a5a632fe61ee1e6792cd95b2b10f0b1d485766"
+source_hash: "eda0a22a08308dc0d5f23ddef3961416bd8c20618a760c63edc6884f6e08d6dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
@@ -188,10 +188,10 @@ Use these hubs to discover every page, including deep dives and reference docs t
 - [Default AGENTS](/reference/AGENTS.default)
 - [Templates: AGENTS](/reference/templates/AGENTS)
 - [Templates: BOOTSTRAP](/reference/templates/BOOTSTRAP)
-- [Templates: HEARTBEAT](/reference/templates/HEARTBEAT)
+- [Retired HEARTBEAT.md workspace file](/reference/templates/HEARTBEAT)
 - [Templates: IDENTITY](/reference/templates/IDENTITY)
 - [Templates: SOUL](/reference/templates/SOUL)
-- [Templates: TOOLS](/reference/templates/TOOLS)
+- [Templates: AGENTS](/reference/templates/AGENTS)
 - [Templates: USER](/reference/templates/USER)
 
 ## Project

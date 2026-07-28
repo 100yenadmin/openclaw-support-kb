@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen"
 source: "https://docs.openclaw.ai/providers/qwen"
-source_hash: "f1b77365cd3b9befce490eed88ebea3b6499675957aeb157c56bc114c3f1cdef"
+source_hash: "b2645ba9a96222f600e060da5bb44151c919775ba99a1ea7cac797cda19a2407"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qwen.md"
@@ -275,25 +275,20 @@ present in the static catalog.
 
 ### Token Plan catalog
 
-Token Plan uses a separate exact-string allowlist. Image-generation-only plan
-models are not included here because they use different APIs.
+Token Plan uses a separate exact-string allowlist. The built-in catalog shows
+Alibaba's currently recommended plan models and keeps the newer Qwen3-Coder
+compatibility tier selectable but hidden. Other allowlisted model IDs remain
+available as custom model refs. Image-generation-only plan models are not
+included here because they use different APIs.
 
-| Model ref                           | Input       | Context   |
-| ----------------------------------- | ----------- | --------- |
-| `qwen-token-plan/qwen3.7-max`       | text        | 1,000,000 |
-| `qwen-token-plan/qwen3.7-plus`      | text, image | 1,000,000 |
-| `qwen-token-plan/qwen3.6-plus`      | text, image | 1,000,000 |
-| `qwen-token-plan/qwen3.6-flash`     | text, image | 1,000,000 |
-| `qwen-token-plan/deepseek-v4-pro`   | text        | 1,000,000 |
-| `qwen-token-plan/deepseek-v4-flash` | text        | 1,000,000 |
-| `qwen-token-plan/deepseek-v3.2`     | text        | 131,072   |
-| `qwen-token-plan/kimi-k2.7-code`    | text, image | 262,144   |
-| `qwen-token-plan/kimi-k2.6`         | text, image | 262,144   |
-| `qwen-token-plan/kimi-k2.5`         | text, image | 262,144   |
-| `qwen-token-plan/glm-5.2`           | text        | 1,000,000 |
-| `qwen-token-plan/glm-5.1`           | text        | 202,752   |
-| `qwen-token-plan/glm-5`             | text        | 202,752   |
-| `qwen-token-plan/MiniMax-M2.5`      | text        | 196,608   |
+| Model ref                          | Input       | Context   | Picker status |
+| ---------------------------------- | ----------- | --------- | ------------- |
+| `qwen-token-plan/qwen3.7-plus`     | text, image | 1,000,000 | visible       |
+| `qwen-token-plan/qwen3.6-plus`     | text, image | 1,000,000 | visible       |
+| `qwen-token-plan/qwen3-coder-next` | text        | 262,144   | hidden        |
+| `qwen-token-plan/kimi-k2.5`        | text, image | 262,144   | visible       |
+| `qwen-token-plan/glm-5`            | text        | 202,752   | visible       |
+| `qwen-token-plan/MiniMax-M2.5`     | text        | 196,608   | visible       |
 
 ## Thinking controls
 

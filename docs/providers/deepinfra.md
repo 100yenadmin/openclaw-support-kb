@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra"
 source: "https://docs.openclaw.ai/providers/deepinfra"
-source_hash: "ba012c660873a490ab609aef6fae5952e3a4ac5f0e927c326b08ad3d74fdb2fc"
+source_hash: "b99c240a3adfaed904fe7d2f10faeb427093e700020538e292b0f741dd8b08fb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepinfra.md"
@@ -88,11 +88,13 @@ Any model on [deepinfra.com](https://deepinfra.com/) works with the
 
 ```text
 deepinfra/deepseek-ai/DeepSeek-V4-Flash
-deepinfra/deepseek-ai/DeepSeek-V3.2
-deepinfra/MiniMaxAI/MiniMax-M2.5
-deepinfra/moonshotai/Kimi-K2.5
+deepinfra/deepseek-ai/DeepSeek-V4-Pro
+deepinfra/zai-org/GLM-5.2
+deepinfra/stepfun-ai/Step-3.7-Flash
+deepinfra/moonshotai/Kimi-K2.7-Code
+deepinfra/moonshotai/Kimi-K2.6
+deepinfra/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B
 deepinfra/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B
-deepinfra/zai-org/GLM-5.1
 ...and many more
 ```
 

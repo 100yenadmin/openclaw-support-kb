@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Experimental"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md"
-source_hash: "562d0de57362808fd3f61c21acbc159eb5a94e1a4a0e8a2098561a2efe71a404"
+source_hash: "eef18ceac8de6a6a19335a2b66aefcfc45be30dc9c295b2952561f0c2f6d47be"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/experimental.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md
 
 
-# Usage
+# Usage [#usage]
 
 Access this class through the `composio.experimental` property:
 
@@ -26,15 +26,15 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.experimental.list();
 ```
 
-# Methods
+# Methods [#methods]
 
-## updateAcl() (deprecated)
+## updateAcl() (deprecated) [#updateacl-deprecated]
 
 > **Deprecated**: Use `composio.connectedAccounts.updateAcl(...)` instead — ACL updates graduated onto the `connectedAccounts` mount. This experimental alias is kept only for backwards compatibility and will be removed once the API graduates. Prefer the `connectedAccounts` mount; do not generate new code against this alias.
 
 Compatibility alias for `composio.connectedAccounts.updateAcl(...)`.
 Update the per-user ACL on a SHARED connected account.
-**Experimental — shape may change in future releases.**
+&#x2A;*Experimental — shape may change in future releases.**
 
 Only meaningful for SHARED connections — calling this on a PRIVATE
 connection raises `ComposioAclOnlyForSharedError` (400). ACL writes

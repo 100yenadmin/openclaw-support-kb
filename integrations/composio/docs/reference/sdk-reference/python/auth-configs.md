@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AuthConfigs"
 source: "https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md"
-source_hash: "a61292dc6fea3c1f01e900770db81fad3a5b294185a5571b6b5e55954d3c9376"
+source_hash: "0167815ddea193798671187a7976c610424c9988f867aca55a5443fbfcd7abee"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/auth-configs.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
 
 
-# Methods
+# Methods [#methods]
 
-## list()
+## list() [#list]
 
 Lists authentication configurations based on provided filter criteria.
 
@@ -39,7 +39,7 @@ def list(query: auth_config_list_params.AuthConfigListParams = ...) -> auth_conf
 
 ***
 
-## create()
+## create() [#create]
 
 Create a new auth config
 
@@ -60,7 +60,7 @@ def create(toolkit: str, options: auth_config_create_params.AuthConfig) -> auth_
 
 ***
 
-## get()
+## get() [#get]
 
 Retrieves a specific authentication configuration by its ID
 
@@ -80,7 +80,7 @@ def get(nanoid: str) -> auth_config_retrieve_response.AuthConfigRetrieveResponse
 
 ***
 
-## update()
+## update() [#update]
 
 Updates an existing authentication configuration.  This method allows you to modify properties of an auth config such as credentials, scopes, or tool restrictions. The update type (custom or default) determines which fields can be updated.
 
@@ -101,7 +101,7 @@ def update(nanoid: str, options: auth_config_update_params.AuthConfigUpdateParam
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Deletes an existing authentication configuration.
 
@@ -121,7 +121,7 @@ def delete(nanoid: str) -> Dict
 
 ***
 
-## enable()
+## enable() [#enable]
 
 Enables an existing authentication configuration.
 
@@ -141,7 +141,7 @@ def enable(nanoid: str) -> Dict
 
 ***
 
-## disable()
+## disable() [#disable]
 
 Disables an existing authentication configuration.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "0bc4fe050cc85f6fb46013248a3cdd7a488dd859ae2cd5738b3ac62d980a3c71"
+source_hash: "6a081e34139498c8f0e4502d65147b4d84c8fcf08a91b3fdf3b3a0e206e6f6e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -21,7 +21,7 @@ Plaintext still works. SecretRefs are opt-in per credential.
 
 Warning
 
-Plaintext credentials remain agent-readable if they sit in files the agent can inspect, including `openclaw.json`, `auth-profiles.json`, `.env`, or generated `agents/*/agent/models.json` files. SecretRefs only reduce that local blast radius once every supported credential is migrated and `openclaw secrets audit --check` reports no plaintext residue.
+Plaintext credentials remain agent-readable when they sit in files the agent can inspect, including `openclaw.json`, `.env`, retired auth-profile JSON archives, or generated `agents/*/agent/models.json` files. SecretRefs reduce that local blast radius once every supported credential is migrated and `openclaw secrets audit --check` reports no plaintext residue.
 
 ## Runtime model
 
@@ -30,6 +30,7 @@ Plaintext credentials remain agent-readable if they sit in files the agent can i
 - Reload validates each mapped owner independently, then publishes one atomic snapshot. Healthy owners refresh. An eligible failed owner keeps its last-known-good value and becomes stale only when its ref identities, provider definitions, and complete non-secret owner contract are unchanged; a changed or new failed owner becomes cold. A strict failure rejects the reload and preserves the active snapshot.
 - Policy violations (for example an OAuth-mode auth profile combined with SecretRef input) fail activation before the runtime swap.
 - Runtime requests read only the active in-memory snapshot. Model-provider SecretRef credentials pass through auth storage and stream options as process-local sentinels until egress. Outbound delivery paths (Discord reply/thread delivery, Telegram action sends) also read that snapshot and do not re-resolve refs per send.
+- Read-only channel capability discovery evaluates accounts independently. A configured-but-unavailable account does not hide healthy sibling accounts' message actions, while direct sends through the unavailable account still fail closed.
 
 This keeps secret-provider outages off hot request paths.
 
@@ -57,7 +58,7 @@ SecretRefs stop credentials from being persisted in config and generated model f
 For production deployments where agent-accessible files are in scope, treat migration as complete only when all of these hold:
 
 - Supported credentials use SecretRefs instead of plaintext values.
-- Legacy plaintext residue is scrubbed from `openclaw.json`, `auth-profiles.json`, `.env`, and generated `models.json` files.
+- Legacy plaintext residue is scrubbed from `openclaw.json`, the SQLite auth-profile store, `.env`, and generated `models.json` files. Retired auth JSON is doctor-owned migration input and is never rewritten by `secrets apply`.
 - `openclaw secrets audit --check` is clean after migration.
 - Any remaining unsupported or rotating credentials are protected by OS isolation, container isolation, or an external credential proxy.
 
@@ -86,7 +87,7 @@ Examples of inactive surfaces
   - `gateway.remote.url` is configured
   - `gateway.tailscale.mode` is `serve` or `funnel`
   - In local mode without those remote surfaces: `gateway.remote.token` is active when token auth can win and no env/auth token is configured; `gateway.remote.password` is active only when password auth can win and no env/auth password is configured.
-- `gateway.auth.token` SecretRef is inactive for startup auth resolution when `OPENCLAW_GATEWAY_TOKEN` is set, because env token input wins for that runtime.
+- Active `gateway.auth.token` / `gateway.auth.password` SecretRefs stay authoritative over `OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`; environment credentials are fallbacks when the corresponding local config input is absent.
 
 ## Gateway auth surface diagnostics
 
@@ -291,20 +292,25 @@ For a dedicated 1Password guide covering service accounts, the bundled agent ski
 AccordionGroup
 
 
-1Password CLI
+1Password
 
     ```json5
     {
+      plugins: {
+        entries: {
+          onepassword: {
+            enabled: true,
+          },
+        },
+      },
       secrets: {
         providers: {
-          onepassword_openai: {
+          onepassword: {
             source: "exec",
-            command: "/opt/homebrew/bin/op",
-            allowSymlinkCommand: true, // required for Homebrew symlinked binaries
-            trustedDirs: ["/opt/homebrew"],
-            args: ["read", "op://Personal/OpenClaw QA API Key/password"],
-            passEnv: ["HOME"],
-            jsonOnly: false,
+            pluginIntegration: {
+              pluginId: "onepassword",
+              integrationId: "onepassword",
+            },
           },
         },
       },
@@ -313,12 +319,20 @@ AccordionGroup
           openai: {
             baseUrl: "https://api.openai.com/v1",
             models: [{ id: "gpt-5", name: "gpt-5" }],
-            apiKey: { source: "exec", provider: "onepassword_openai", id: "value" },
+            apiKey: {
+              source: "exec",
+              provider: "onepassword",
+              id: "op://Engineering/OpenAI/apiKey",
+            },
           },
         },
       },
     }
     ```
+
+    The bundled [1Password plugin](/plugins/onepassword) uses the official
+    `op` CLI and the plugin's service-account token file.
+
 
 
 Bitwarden Secrets Manager (`bws`)
@@ -590,7 +604,7 @@ Runtime-minted or rotating credentials and OAuth refresh material are intentiona
 Warning and audit signals:
 
 - `SECRETS_REF_OVERRIDES_PLAINTEXT` (runtime warning)
-- `REF_SHADOWED` (audit finding when `auth-profiles.json` credentials take precedence over `openclaw.json` refs)
+- `REF_SHADOWED` (audit finding when SQLite auth-profile credentials take precedence over `openclaw.json` refs)
 
 Google Chat `serviceAccount` accepts inline JSON or a SecretRef. Doctor moves the retired sibling `serviceAccountRef` into this canonical field when it is unset.
 
@@ -699,11 +713,10 @@ secrets audit
 
     Findings include:
 
-    - Plaintext values at rest (`openclaw.json`, `auth-profiles.json`, `.env`, and generated `agents/*/agent/models.json`).
+    - Plaintext values at rest (`openclaw.json`, SQLite auth-profile rows, `.env`, and generated `agents/*/agent/models.json`).
     - Plaintext sensitive provider header residues in generated `models.json` entries.
     - Unresolved refs.
-    - Precedence shadowing (`auth-profiles.json` taking priority over `openclaw.json` refs).
-    - Legacy residues (`auth.json`, OAuth reminders).
+    - Precedence shadowing (SQLite auth profiles taking priority over `openclaw.json` refs).
 
     Exec note: by default, audit skips exec SecretRef resolvability checks to avoid command side effects. Use `openclaw secrets audit --allow-exec` to execute exec providers during audit.
 
@@ -716,8 +729,8 @@ secrets configure
     Interactive helper that:
 
     - Configures `secrets.providers` first (`env`/`file`/`exec`, add/edit/remove).
-    - Lets you select supported secret-bearing fields in `openclaw.json` plus `auth-profiles.json` for one agent scope.
-    - Can create a new `auth-profiles.json` mapping directly in the target picker.
+    - Lets you select supported secret-bearing fields in `openclaw.json` plus the SQLite auth-profile store for one agent scope.
+    - Can create a new auth-profile mapping directly in the target picker.
     - Captures SecretRef details (`source`, `provider`, `id`).
     - Runs preflight resolution and can apply immediately.
 
@@ -731,8 +744,8 @@ secrets configure
 
     `configure` apply defaults:
 
-    - Scrub matching static credentials from `auth-profiles.json` for targeted providers.
-    - Scrub legacy static `api_key` entries from `auth.json`.
+    - Scrub matching static credentials from SQLite auth-profile rows for targeted providers.
+    - Leave retired `auth.json` untouched; run `openclaw doctor --fix` to migrate and archive it.
     - Scrub matching known secret lines from the effective state and active-config `.env` files (deduplicated when both paths match).
 
 

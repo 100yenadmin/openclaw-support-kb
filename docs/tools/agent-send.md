@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent send"
 source: "https://docs.openclaw.ai/tools/agent-send"
-source_hash: "9774900315d8636a7e2121e807ef9362528a3624aeecae44b3b6c0cb39a7169e"
+source_hash: "d79524bf6ddd248c5b204625b21582a52d55f306ce61d7d24264835a229e133b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/agent-send.md"
@@ -17,6 +17,9 @@ Source: https://docs.openclaw.ai/tools/agent-send
 inbound chat message. Use it for scripted workflows, testing, and
 programmatic delivery. Full flag and behavior reference:
 [Agent CLI reference](/cli/agent).
+
+For strict, ephemeral CI or coding automation that should own setup, cleanup,
+output projection, and process status, use [`openclaw agent exec`](/cli/agent#agent-exec).
 
 ## Quick start
 

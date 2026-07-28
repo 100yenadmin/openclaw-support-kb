@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/sdk-reference/python/mcp.md"
-source_hash: "6d62ee7553cdee27827d4584930a643798e0b952135b561cf0e975dd03f5b261"
+source_hash: "9c044c108760c4f692497f29ab816568d13dcc6cb7461f0d1b60d4f1453cac3e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/mcp.md"
@@ -19,9 +19,9 @@ Source: https://docs.composio.dev/reference/sdk-reference/python/mcp.md
 
 > **Deprecated**: Use a session's MCP endpoint instead: `composio.create(user_id, mcp=True)` returns a session that exposes `session.mcp.url` / `session.mcp.headers`. MCP is now opt-in per session; this standalone `composio.mcp` server-management API is kept only for backwards compatibility. Prefer the session MCP endpoint; do not generate new code against `composio.mcp`. See [https://docs.composio.dev/docs/sessions-via-mcp](https://docs.composio.dev/docs/sessions-via-mcp)
 
-# Methods
+# Methods [#methods]
 
-## create()
+## create() [#create]
 
 Create a new MCP server configuration with specified toolkits and authentication settings.
 
@@ -82,7 +82,7 @@ def create(name: str, toolkits: List[Union[ConfigToolkit, str]], manually_manage
 
 ***
 
-## list()
+## list() [#list]
 
 List MCP servers with optional filtering and pagination.
 
@@ -121,7 +121,7 @@ def list(page_no: int | None = ..., limit: int | None = ..., toolkits: str | Non
 
 ***
 
-## get()
+## get() [#get]
 
 Retrieve detailed information about a specific MCP server/config.
 
@@ -148,7 +148,7 @@ def get(server_id: str)
 
 ***
 
-## update()
+## update() [#update]
 
 Update an existing MCP server configuration.
 
@@ -196,7 +196,7 @@ def update(server_id: str, name: str | None = ..., toolkits: List[Union[ConfigTo
 
 ***
 
-## delete()
+## delete() [#delete]
 
 Permanently delete an MCP server configuration.
 
@@ -228,7 +228,7 @@ def delete(server_id: str) -> Dict[str, Any]
 
 ***
 
-## generate()
+## generate() [#generate]
 
 Get server URLs for an existing MCP server.  This matches the TypeScript implementation exactly.
 

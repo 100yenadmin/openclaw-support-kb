@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "21775e2aa7afe66b505dd0718f62331f5d8c8e8cb79f35c423a0341b866bf684"
+source_hash: "6120d18da9b7c5c546ca66dc5fd8e0ffd069a8e37aa7c4d18bdb3a694a65b4d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
@@ -92,14 +92,9 @@ IDENTITY.md - name, vibe, emoji
     The agent's name, vibe, and emoji. Created/updated during the bootstrap ritual.
 
 
-TOOLS.md - local tool conventions
+AGENTS.md Tools section - local tool conventions
 
-    Notes about your local tools and conventions. Does not control tool availability; it is only guidance.
-
-
-HEARTBEAT.md - heartbeat checklist
-
-    Optional tiny checklist for heartbeat runs. Keep it short to avoid token burn.
+    The `## Tools` section holds local environment notes and conventions. It does not control tool availability; it is only guidance.
 
 
 BOOT.md - startup checklist
@@ -142,7 +137,7 @@ These live under `~/.openclaw/` and should NOT be committed to the workspace rep
 
 - `~/.openclaw/openclaw.json` (config)
 - `~/.openclaw/state/openclaw.sqlite` (shared workspace setup state and attestations)
-- `~/.openclaw/agents/<agentId>/agent/auth-profiles.json` (model auth profiles: OAuth + API keys)
+- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (model auth profiles, routing state, and other agent-scoped durability)
 - `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (session rows, transcripts, and per-agent runtime state)
 - `~/.openclaw/agents/<agentId>/agent/codex-home/` (per-agent Codex runtime account, config, skills, plugins, and native thread state)
 - `~/.openclaw/credentials/` (channel/provider state plus legacy OAuth import data)
@@ -173,7 +168,7 @@ Initialize the repo
     ```bash
     cd ~/.openclaw/workspace
     git init
-    git add AGENTS.md SOUL.md TOOLS.md IDENTITY.md USER.md HEARTBEAT.md memory/
+    git add AGENTS.md SOUL.md IDENTITY.md USER.md memory/
     git commit -m "Add agent workspace"
     ```
 
@@ -290,7 +285,7 @@ Copy sessions (optional)
 
 ## Related
 
-- [Heartbeat](/gateway/heartbeat) - HEARTBEAT.md workspace file
+- [Heartbeat](/gateway/heartbeat) - heartbeat monitors and cron scratch
 - [Sandboxing](/gateway/sandboxing) - workspace access in sandboxed environments
 - [Session](/concepts/session) - session storage paths
 - [Standing orders](/automation/standing-orders) - persistent instructions in workspace files

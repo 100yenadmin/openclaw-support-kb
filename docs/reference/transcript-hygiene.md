@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "6e38c2840b24e138b6bcfca792747cb38fe67b070f3d602d4a7eed1ffc6d22c1"
+source_hash: "4dbfea71e253af1e0cd4c2cd51c491e649e1bd1eae67d8ba0b6313be7061d1ee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -14,18 +14,11 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/reference/transcript-hygiene
 
 OpenClaw applies **provider-specific fixes** to transcripts before a run
-(building model context). Most of these are **in-memory** adjustments used to
-satisfy strict provider requirements. A separate session-file repair pass may
-also rewrite stored JSONL before the session is loaded, but only for
-malformed lines or persisted turns that are invalid durable records.
-Delivered assistant replies are preserved on disk; provider-specific
+(building model context). These are **in-memory** adjustments used to satisfy
+strict provider requirements. Runtime transcript state stays in SQLite;
+provider-specific
 assistant-prefill stripping happens only while constructing outbound
 payloads.
-
-When a repair occurs, the original file is written to a transient
-`*.bak-<pid>-<ts>` sibling before the atomic replace, then removed once the
-replace succeeds. The backup is retained only if cleanup itself fails, in
-which case the path is reported back.
 
 Scope includes:
 
@@ -70,12 +63,8 @@ All transcript hygiene is centralized in the embedded runner:
 - Sanitization/repair application: `sanitizeSessionHistory` in
   `src/agents/embedded-agent-runner/replay-history.ts`
 
-Separate from transcript hygiene, session files are repaired (if needed)
-before load:
-
-- `repairSessionFileIfNeeded` in `src/agents/session-file-repair.ts`
-- Called from `src/agents/embedded-agent-runner/run/attempt.ts` and
-  `src/agents/embedded-agent-runner/compact.ts`
+Legacy JSONL validation and import belong to `openclaw doctor --fix`; the
+embedded runner does not repair or reopen file-backed runtime transcripts.
 
 ---
 

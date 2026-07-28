@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
-source_hash: "8fef5fd779ded2123aec6b69218c6f08694bf4aebe0f4b6036a614bba80c08be"
+source_hash: "fb62e2fbad83f3e3d1910cfabdb9250536a8d0f6c28cbe268d7409ce60e8cd01"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sandbox.md"
@@ -14,6 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/cli/sandbox
 
 Manage sandbox runtimes for isolated agent execution: Docker containers, SSH targets, or OpenShell backends.
+
+[`openclaw agent exec`](/cli/agent#agent-exec) does not use these configured runtimes. Its isolated implicit policy config turns the agent sandbox off, allows full Gateway-host execution, and restricts filesystem tools to `--cwd`.
 
 ## Commands
 

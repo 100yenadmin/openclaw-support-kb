@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ambient room events"
 source: "https://docs.openclaw.ai/channels/ambient-room-events"
-source_hash: "6047f96f91e1f9e951018a049090706ae89fb2a6539fc9fb4ea9d646bbcddef3"
+source_hash: "24703ed87fc2609e7986bf508368e0f4c42bfae82e480e8f1a849533ea40f3e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/ambient-room-events.md"
@@ -36,6 +36,28 @@ Set the global group-chat behavior:
 ```
 
 Then make the room always-on by disabling mention gating for that room. The room must still pass its normal `groupPolicy`, room allowlist, and sender allowlist.
+
+## Prerequisites
+
+Two settings silently disable ambient room events even when `unmentionedInbound: "room_event"` is set.
+
+**Mention gating must be off for the room.** `requireMention: true` drops unmentioned messages before routing, so they never become room events. The agent then has no room backlog at all — it only ever sees messages that mentioned it. If the agent reports that it cannot see recent room history, check mention gating before anything else.
+
+**The agent needs the `message` tool.** Room events use strict visible delivery, so posting requires `message(action=send)`. The `message` tool ships in the `messaging` tool profile; the `minimal` and `coding` profiles do not include it. An agent on `tools.profile: "coding"` will listen to room events and can never speak. Grant it explicitly when the profile omits it:
+
+```json5
+{
+  agents: {
+    entries: {
+      "<agent-id>": {
+        tools: { alsoAllow: ["message"] },
+      },
+    },
+  },
+}
+```
+
+Check the effective surface with `openclaw agents list` and a probe turn rather than assuming the profile includes it.
 
 After saving the config, the Gateway hot-applies `messages` settings. Restart only when file watching or config reload is disabled (`gateway.reload.mode: "off"`).
 

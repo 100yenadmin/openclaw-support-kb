@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Endpoints"
 source: "https://docs.composio.dev/reference/api-reference/webhook-endpoints.md"
-source_hash: "5df2920b4ebcbded6ddf2b30e30c1818e0402eb494451dceefcaa28339dffec0"
+source_hash: "8d9dcf43bd2576a1f1d91938d08ed6cabb8ad63792e4313795c5fd4400750ae0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-endpoints.md"
@@ -27,6 +27,6 @@ Each endpoint is addressed by its `nano_id`. The `POST` to `/webhook_endpoints/{
 
 This is distinct from [webhook subscriptions](/reference/api-reference/webhook-subscriptions), which control where Composio delivers outbound trigger events. To verify the signature on payloads Composio sends you, see [Verifying signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures). To set up the trigger events those payloads carry, see [Triggers](/docs/triggers).
 
-# Endpoints
+# Endpoints [#endpoints]
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets"
 source: "https://docs.openclaw.ai/cli/secrets"
-source_hash: "cbbf60e9056e54bc26a865cb195a762df6ee78832989dd936a0c93519501b810"
+source_hash: "67c84d1a54891b9a9ddae4c50e0ebcaf2b5a450cb0d8cfbd91a02c578fd95bee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/secrets.md"
@@ -42,7 +42,7 @@ Exit codes for CI/gates:
 - `audit --check` returns `1` on findings.
 - Unresolved refs return `2` (regardless of `--check`).
 
-Related: [Secrets Management](/gateway/secrets) · [SecretRef Credential Surface](/reference/secretref-credential-surface) · [Security](/gateway/security)
+Related: [Secrets Management](/gateway/secrets) · [1Password plugin](/plugins/onepassword) · [SecretRef Credential Surface](/reference/secretref-credential-surface) · [Security](/gateway/security)
 
 ## Reload runtime snapshot
 
@@ -167,5 +167,6 @@ If `audit --check` still reports plaintext findings, update the remaining report
 - [CLI reference](/cli)
 - [Secrets management](/gateway/secrets)
 - [Vault SecretRefs](/plugins/vault)
+- [1Password plugin](/plugins/onepassword)
 
 ---

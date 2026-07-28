@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audit history"
 source: "https://docs.openclaw.ai/gateway/audit"
-source_hash: "334c839ec8d7f4d270f1285b1546fd85949482b21b7a98fd91869e98fe8e8758"
+source_hash: "61128ed0a3415b6f4fde6cf9cd34c735f5b9ea8ee9e5e22d27f53a59d2e71a39"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/audit.md"
@@ -44,7 +44,7 @@ field reference and query filters.
 
 ## Message lifecycle events
 
-Set [`audit.messages`](/gateway/configuration-reference#audit) to choose what
+Set [`logging.audit.messages`](/gateway/configuration-reference#audit) to choose what
 is recorded, then restart the Gateway:
 
 - `off` (default): no message records.

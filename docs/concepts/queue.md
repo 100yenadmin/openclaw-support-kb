@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Command queue"
 source: "https://docs.openclaw.ai/concepts/queue"
-source_hash: "9ae1e8f36be568f18eb29dd9a7e4d8782f6d4b3344120fc17186598b77a6fa43"
+source_hash: "694b14e309659d29205f8ba96eb5d1310f8d3eec068b40fdcca542de730d5990"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/queue.md"
@@ -18,11 +18,11 @@ OpenClaw serializes inbound auto-reply runs (all channels) through a tiny in-pro
 ## Why
 
 - Auto-reply runs can be expensive (LLM calls) and can collide when multiple inbound messages arrive close together.
-- Serializing avoids competing for shared resources (session files, logs, CLI stdin) and reduces the chance of upstream rate limits.
+- Serializing avoids competing for shared resources (session state, logs, CLI stdin) and reduces the chance of upstream rate limits.
 
 ## How it works
 
-- A lane-aware FIFO queue drains each lane with a configurable concurrency cap (default 1 for unconfigured lanes; `main` defaults to 4, `subagent` to 8).
+- A lane-aware FIFO queue drains each lane with a configurable concurrency cap (default 1 for unconfigured lanes; `main` uses `min(16, max(8, available CPU parallelism))`, and `subagent` defaults to 8).
 - `runEmbeddedAgent` enqueues by **session key** (lane `session:<key>`) to guarantee only one active run per session.
 - Each session run is then queued into a **global lane** (`main` by default) so overall parallelism is capped by `agents.defaults.maxConcurrent`.
 - When verbose logging is enabled, queued runs emit a short notice if they waited more than ~2s before starting.

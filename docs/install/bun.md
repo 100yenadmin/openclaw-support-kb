@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bun"
 source: "https://docs.openclaw.ai/install/bun"
-source_hash: "9c25d802585c1a5c9b0929e3e3a09f26d8ea98181c8020ef148d64e2e0a4d9b6"
+source_hash: "a70a12ef9f9cbec565826b294ccd2fb6d5082664a4b9e372b3e6896d0b250aaa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/bun.md"
@@ -15,9 +15,9 @@ Source: https://docs.openclaw.ai/install/bun
 
 Warning
 
-Bun cannot run the OpenClaw CLI or Gateway because it does not provide the required `node:sqlite` API. Install a supported Node version for all OpenClaw runtime commands.
+Bun releases up to 1.3.x cannot run the OpenClaw CLI or Gateway because they do not provide the required `node:sqlite` API. OpenClaw feature-probes the runtime: Bun builds that ship `node:sqlite` (1.4.0 canary and later) can run the CLI and Gateway experimentally, while older Bun versions are rejected at startup. Node remains the supported and recommended runtime for all OpenClaw runtime commands.
 
-Bun remains usable as an optional dependency installer and package-script runner. The default package manager remains `pnpm`, which is fully supported and used by docs tooling. Bun cannot use `pnpm-lock.yaml` and ignores it.
+Bun remains usable as an optional package-script runner. The default package manager remains `pnpm`, which is fully supported and used by docs tooling. Bun cannot use `pnpm-lock.yaml` and ignores it, and current Bun versions fail to resolve this repo's `pnpm-workspace.yaml` layout during `bun install`, so dependency installs should use `pnpm install`.
 
 ## Install
 
@@ -27,14 +27,10 @@ Steps
 Install dependencies
 
     ```sh
-    bun install
+    pnpm install
     ```
 
-    `bun.lock` / `bun.lockb` are gitignored, so there is no repo churn. To skip lockfile writes entirely:
-
-    ```sh
-    bun install --no-save
-    ```
+    Current Bun versions (including 1.4 canary) cannot resolve this repo's pnpm workspace layout, so `bun install` fails during workspace resolution. Use `pnpm install`.
 
 
 
@@ -45,7 +41,7 @@ Build and test
     bun run vitest run
     ```
 
-    Commands that launch OpenClaw itself must still run through Node.
+    Commands that launch OpenClaw itself should still run through Node; Bun runtimes that provide `node:sqlite` (1.4.0 canary and later) can run them experimentally.
 
 
 
@@ -53,7 +49,7 @@ Build and test
 
 Bun blocks dependency lifecycle scripts unless explicitly trusted. For this repo, the commonly blocked scripts are not required:
 
-- `baileys` `preinstall`: checks Node major >= 20 (OpenClaw requires Node 22.22.3+, 24.15+, or 25.9+, with Node 24 recommended)
+- `baileys` `preinstall`: checks Node major >= 20 (OpenClaw requires Node 22.22.3+, 24.15+, or 25.9+, with Node 26 recommended)
 - `protobufjs` `postinstall`: emits warnings about incompatible version schemes (no build artifacts)
 
 If you hit a runtime issue that needs these scripts, trust them explicitly:

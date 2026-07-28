@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser"
 source: "https://docs.openclaw.ai/cli/browser"
-source_hash: "7a47242f03e2501b9295a3f4df44a5b8e8063d51f1e19c4c3a044763e6dd0838"
+source_hash: "f9f91e1c4c17d96e85f719b96d15ada813fc8872c01baab58b351357f7345742"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/browser.md"
@@ -141,7 +141,25 @@ openclaw browser close t1
 
 Raw target ids are volatile diagnostic handles, not durable agent memory: when Chromium replaces the underlying raw target during a navigation or form submit, OpenClaw keeps the stable `tabId`/label attached to the replacement tab when it can prove the match. Prefer `suggestedTargetId`.
 
-## Snapshot / screenshot / actions
+## Extract / snapshot / screenshot / actions
+
+Answer a question from the current page without printing the page content:
+
+```bash
+openclaw browser extract "What is the main conclusion?"
+openclaw browser extract "Which deadline is listed?" --target-id docs --timeout-ms 90000
+openclaw browser extract "List the releases" --selector "main" --ignore-selector "nav" --schema '{"type":"array","items":{"type":"object"}}'
+```
+
+`extract` uses the selected agent model, returns only the wrapped answer, and
+reports `NOT_FOUND` when the answer is absent. Its overall timeout defaults to
+60 seconds and is clamped to 5–120 seconds. It requires a Playwright-backed
+profile; use `snapshot` when you need refs or when extraction is unavailable.
+Use `--selector <css>` to limit large pages to matching subtrees and repeat
+`--ignore-selector <css>` to remove navigation, footers, ads, or banners before
+conversion. `--schema <json>` requests validated structured output in
+`details.json`; invalid structured output is retried once, then fails with
+guidance to retry without the schema.
 
 Snapshot:
 
@@ -281,7 +299,7 @@ Current existing-session limits:
 - File uploads require `--ref` / `--input-ref`, do not support CSS `--element`, and support one file at a time.
 - Dialog hooks do not support `--timeout`.
 - Screenshots support page captures and `--ref`, but not CSS `--element`.
-- `responsebody`, download interception, PDF export, and batch actions still require a managed browser or raw CDP profile.
+- `extract`, `responsebody`, download interception, PDF export, and batch actions still require a managed browser or raw CDP profile.
 
 ## Remote browser control (node host proxy)
 

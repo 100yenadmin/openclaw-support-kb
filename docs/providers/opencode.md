@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "8318b3b30bd5463d70ed8f2cc44953f973e58a29eee256430b75070c17b43a8b"
+source_hash: "5835adc6802ce4f16d158b284b58848e8a11afa1e774429dc70e429989ab4a33"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
@@ -55,7 +55,7 @@ Run onboarding
 Set a Zen model as the default
 
         ```bash
-        openclaw config set agents.defaults.model.primary "opencode/claude-opus-4-6"
+        openclaw config set agents.defaults.model.primary "opencode/gpt-5.6-sol"
         ```
 
 
@@ -113,7 +113,7 @@ Verify models are available
 ```json5
 {
   env: { OPENCODE_API_KEY: "sk-..." },
-  agents: { defaults: { model: { primary: "opencode/claude-opus-4-6" } } },
+  agents: { defaults: { model: { primary: "opencode/gpt-5.6-sol" } } },
 }
 ```
 
@@ -121,14 +121,16 @@ Verify models are available
 
 ### Zen
 
-| Property         | Value                                                                                         |
-| ---------------- | --------------------------------------------------------------------------------------------- |
-| Runtime provider | `opencode`                                                                                    |
-| Example models   | `opencode/claude-opus-4-6`, `opencode/gpt-5.5`, `opencode/gemini-3.1-pro`, `opencode/glm-5.2` |
+| Property         | Value                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------- |
+| Runtime provider | `opencode`                                                                                        |
+| Example models   | `opencode/gpt-5.6-sol`, `opencode/gemini-3.6-flash`, `opencode/minimax-m3`, `opencode/big-pickle` |
 
 Run `openclaw models list --provider opencode` for the full current list, which
-also includes free-tier rows such as `opencode/big-pickle` and
-`opencode/deepseek-v4-flash-free`.
+also includes the currently promoted free-tier rows `opencode/big-pickle`,
+`opencode/deepseek-v4-flash-free`, `opencode/laguna-s-2.1-free`,
+`opencode/ling-3.0-flash-free`, `opencode/mimo-v2.5-free`,
+`opencode/nemotron-3-ultra-free`, and `opencode/north-mini-code-free`.
 
 ### Go
 
