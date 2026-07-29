@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "1151183b1d0425d4b21f971c8eca249e7f5f9f39d7e260f7b3e0e2b7424dacec"
+source_hash: "4bffcb91e74b10ca8a60f9db7909b0bf150a0c1358de2a147889e93a70e116ec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -20,7 +20,7 @@ Source: https://docs.composio.dev/docs/providers/anthropic.md
 The Anthropic provider formats Composio tools for Claude and executes the tool calls Claude returns. It works two ways:
 
 * The [Claude Messages API](https://docs.anthropic.com/en/api/messages), where you run the tool-call loop yourself.
-* The [Claude Agent SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-agent-sdk), where the SDK runs the loop and Composio tools are exposed as an in-process MCP server.
+* The [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview), where the SDK runs the loop and Composio tools are exposed as an in-process MCP server.
 
 Pick the tab that matches your integration.
 

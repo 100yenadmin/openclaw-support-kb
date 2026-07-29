@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "a9b5bc64f821bf366beb7c85c7d77ba585d44b20bb4f51e366517b5b1454119e"
+source_hash: "bf5a87151fd1c9cf0160918838d815c3515f3c23981bc3f3f93b7b51c63941e8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -295,7 +295,7 @@ For Docker sandboxes, you can also enable the **egress credential-injection prox
 # From the Hermes install directory (the curl installer placed it at
 # ~/.hermes/hermes-agent on Linux/macOS or %LOCALAPPDATA%\hermes\hermes-agent on Windows):
 cd ~/.hermes/hermes-agent
-uv pip install -e ".[voice]"
+uv pip install --python ./venv/bin/python -e ".[voice]"
 # Includes faster-whisper for free local speech-to-text
 ```
 

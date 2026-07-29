@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Voice Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode"
-source_hash: "0f96682f1c2b98eb053a6255a7585c69eaeeaa28eb83fbc74faa86d83bbef227"
+source_hash: "c70c8d22f3ba5f03c9630aaade32134d3a8be41c7940923bc94a3905c3fbe9ed"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/voice-mode.md"
@@ -22,6 +22,8 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mod
 Hermes Agent supports full voice interaction across CLI and messaging platforms. Talk to the agent using your microphone, hear spoken replies, and have live voice conversations in Discord voice channels.
 
 If you want a practical setup walkthrough with recommended configurations and real usage patterns, see [Use Voice Mode with Hermes](/guides/use-voice-mode-with-hermes).
+
+For hands-free session start — saying "hey hermes" (or any phrase) to open a fresh voice session on the CLI, TUI, or desktop app — see [Wake Word](/user-guide/features/wake-word).
 
 ## Prerequisites
 
@@ -173,6 +175,8 @@ Both `silence_threshold` and `silence_duration` are configurable in `config.yaml
 ### Ending a voice chat by voice
 
 Say **"stop"** — and nothing else — to end the voice conversation hands-free. The match is deliberately strict: the whole utterance (case-insensitive, surrounding punctuation ignored) must equal a configured phrase, so "stop doing that and try X instead" still reaches the agent normally. Customize the phrase list with `voice.stop_phrases` in `config.yaml` (e.g. `["stop", "goodbye hermes"]`), or set it to `[]` to disable. A voice chat also ends on its own after three consecutive silent cycles (no speech detected).
+
+**Typing** a bare stop phrase while a voice chat is active works the same way on every surface (CLI, TUI, desktop): the message ends the voice chat instead of being sent to the agent. Outside a voice chat, typed "stop" is an ordinary message.
 
 ### Streaming TTS
 
@@ -449,6 +453,11 @@ tts:
     model: "gpt-4o-mini-tts"
     voice: "alloy"                 # alloy, echo, fable, onyx, nova, shimmer
     base_url: "https://api.openai.com/v1"  # optional: override for self-hosted or OpenAI-compatible endpoints
+    # The `text_to_speech` tool accepts an optional per-call `instructions`
+    # argument (tone, emotion, pacing, accent, whispering) that is forwarded
+    # to `gpt-4o-mini-tts` and to OpenAI-compatible voice-design servers
+    # (e.g. Qwen3-TTS-VoiceDesign via oMLX). See OpenAI's voice-design guide:
+    # https://platform.openai.com/docs/guides/text-to-speech
   neutts:
     ref_audio: ''
     ref_text: ''
@@ -490,6 +499,7 @@ DISCORD_ALLOWED_USERS=...
 | **Groq** | `whisper-large-v3` | Fast (~1s) | Better | Free tier | Yes |
 | **OpenAI** | `whisper-1` | Fast (~1s) | Good | Paid | Yes |
 | **OpenAI** | `gpt-4o-transcribe` | Medium (~2s) | Best | Paid | Yes |
+| **OpenAI** | `gpt-transcribe` | Fast | Best | Paid ($0.0045/min) | Yes |
 | **Mistral** | `voxtral-mini-latest` | Fast | Good | Paid | Yes |
 | **xAI** | `grok-stt` | Fast | Good | Paid | Yes |
 
@@ -505,6 +515,12 @@ Provider priority (automatic fallback): **local** > **groq** > **openai**
 | **NeuTTS** | Good | Free | Depends on CPU/GPU | No |
 
 NeuTTS uses the `tts.neutts` config block above.
+
+For `openai`, the `text_to_speech` tool accepts an optional `instructions`
+argument that unlocks `gpt-4o-mini-tts`'s voice-design capability (tone,
+emotion, pacing, accent, whispering). The same field also routes to
+OpenAI-compatible voice-design servers mounted via `tts.openai.base_url`
+(e.g. Qwen3-TTS-VoiceDesign via oMLX).
 
 ---
 

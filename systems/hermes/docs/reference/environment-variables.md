@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Environment Variables"
 source: "https://hermes-agent.nousresearch.com/docs/reference/environment-variables"
-source_hash: "06fb7178dd28d726d679761a5d4ea4ef9d7e19875e8474bb12c3102b305ebc65"
+source_hash: "d8028154cbdc13c5aa3635895766fa1e015a2661107efe6ea472bd4bc0c1f2c6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/environment-variables.md"
@@ -167,6 +167,7 @@ For native Anthropic auth, Hermes prefers Claude Code's own credential files whe
 | `KREA_API_KEY` | Krea API key for Krea 2 image generation ([krea.ai](https://krea.ai/)) |
 | `GROQ_API_KEY` | Groq Whisper STT API key ([groq.com](https://groq.com/)) |
 | `ELEVENLABS_API_KEY` | ElevenLabs premium TTS voices ([elevenlabs.io](https://elevenlabs.io/)) |
+| `PORCUPINE_ACCESS_KEY` | Picovoice Porcupine wake-word engine ([console.picovoice.ai](https://console.picovoice.ai/)) — only for `wake_word.provider: porcupine`; the default openWakeWord and sherpa engines need no key |
 | `STT_GROQ_MODEL` | Override the Groq STT model (default: `whisper-large-v3-turbo`) |
 | `GROQ_BASE_URL` | Override the Groq OpenAI-compatible STT endpoint |
 | `STT_OPENAI_MODEL` | Override the OpenAI STT model (default: `whisper-1`) |

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp Business (Cloud API)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp-cloud"
-source_hash: "551b2daede249f53d24d3c419f4f49a30ec68493920b9d4eddd64f36085494a5"
+source_hash: "bbde98d04e7aa314c11191384d42b1ebedfc210bc1d56cc0a84e3d1056effc71"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp-cloud.md"
@@ -238,7 +238,7 @@ All settings live in `~/.hermes/.env`.  Required values are in **bold**.
 | `WHATSAPP_CLOUD_ALLOW_ALL_USERS` | `false` | Set to `true` to bypass the allowlist. |
 | `WHATSAPP_CLOUD_APP_ID` | — | Optional, for future analytics integration. |
 | `WHATSAPP_CLOUD_WABA_ID` | — | Optional, for future analytics integration. |
-| `WHATSAPP_CLOUD_WEBHOOK_HOST` | `0.0.0.0` | Interface the webhook server binds to. |
+| `WHATSAPP_CLOUD_WEBHOOK_HOST` | unset (dual-stack: all interfaces, IPv4+IPv6) | Interface the webhook server binds to. |
 | `WHATSAPP_CLOUD_WEBHOOK_PORT` | `8090` | Port the webhook server binds to.  Must match the port your tunnel forwards. |
 | `WHATSAPP_CLOUD_WEBHOOK_PATH` | `/whatsapp/webhook` | URL path Meta posts to. |
 | `WHATSAPP_CLOUD_API_VERSION` | `v20.0` | Meta Graph API version. Only override if a newer version is recommended in Meta's docs. |

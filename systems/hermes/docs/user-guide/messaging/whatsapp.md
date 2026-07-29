@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp"
-source_hash: "411e02f64de2706ca0233617fb74f8d0562592e1657e0169d9fd12f507c02839"
+source_hash: "2e5e6b5885c7b9787a3ce0406a9547eade8f9f13f1ba40e40906422c86e7e25f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp.md"
@@ -193,7 +193,10 @@ Hermes supports voice on WhatsApp:
 whatsapp:
   reply_prefix: ""                          # Empty string disables the header
   # reply_prefix: "🤖 *My Bot*\n──────\n"  # Custom prefix (supports \n for newlines)
+  send_read_receipts: false                 # Mark accepted inbound messages as read (blue ticks)
 ```
+
+When `send_read_receipts` is `true`, the adapter marks policy-accepted inbound messages as read after DM/group/mention filtering passes. Rejected messages (e.g., from non-allowlisted senders) are not marked read. Disabled by default for privacy. Changing this setting automatically restarts the bridge subprocess on the next connection.
 
 ---
 

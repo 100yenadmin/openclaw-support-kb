@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "83717eb99b5a9fc4b23e8c98378c18813e01822df01d098c2e3a71bcf343ffdb"
+source_hash: "a1da6f0d8308fedf0ef4dcbecaf7ad113d5280b065c0d407d46f35a77749f47d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -96,7 +96,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Integrations Overview](https://hermes-agent.nousresearch.com/docs/integrations/index)
 - [Providers](https://hermes-agent.nousresearch.com/docs/integrations/providers)
 - [MCP (Model Context Protocol)](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp): Connect Hermes Agent to external tool servers via MCP — and control exactly which MCP tools Hermes loads
-- [ACP (Agent Context Protocol)](https://hermes-agent.nousresearch.com/docs/user-guide/features/acp): Use Hermes Agent inside ACP-compatible editors such as VS Code, Zed, and JetBrains
+- [ACP (Agent Context Protocol)](https://hermes-agent.nousresearch.com/docs/user-guide/features/acp): Use Hermes Agent inside ACP-compatible editors and collaboration platforms
 - [API Server](https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server): Expose hermes-agent as an OpenAI-compatible API for any frontend
 - [Honcho Memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/honcho): AI-native persistent memory via Honcho — dialectic reasoning, multi-agent user modeling, and deep personalization
 - [Provider Routing](https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing)

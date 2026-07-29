@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Teams"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams"
-source_hash: "c7888670c8a49c76a6954f7250b708f5970e30754e0c1deba63bedbfdd9a9328"
+source_hash: "10543e52ce960f5d0ab40064a43791c64fdcbb51bf268ba8cd3ffc53b1fcbc42"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/teams.md"
@@ -130,7 +130,7 @@ docker logs -f hermes
 
 Look for:
 ```
-[teams] Webhook server listening on 0.0.0.0:3978/api/messages
+[teams] Webhook server listening on * (all interfaces, IPv4+IPv6):3978/api/messages
 ```
 
 ---

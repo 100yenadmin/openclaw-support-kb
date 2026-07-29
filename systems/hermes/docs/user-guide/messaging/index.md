@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "139cdc8a92da6965d51224c9eaa534c939af3d287d80e221aa0f1677448852fa"
+source_hash: "e63bc0c58fef9886aebd3dfa392479546ff580eae8714de5842d482b9c50d001"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -55,6 +55,7 @@ Bots need both a model provider and tool providers (TTS, web). A [Nous Portal](/
 | ntfy | — | — | — | — | — | — | — |
 | Raft | — | — | — | — | — | — | — |
 | IRC | — | — | — | — | — | — | — |
+| Buzz | — | ✅ | — | ✅ | — | — | — |
 
 **Voice** = TTS audio replies and/or voice message transcription. **Images** = send/receive images. **Files** = send/receive file attachments. **Threads** = threaded conversations. **Reactions** = emoji reactions on messages. **Typing** = typing indicator while processing. **Streaming** = progressive message updates via editing.
 
@@ -740,6 +741,7 @@ Defaults to `false`. Only platforms whose adapter implements `delete_message` ho
 - [Open WebUI + API Server](open-webui.md)
 - [Raft Setup](raft.md)
 - [IRC Setup](irc.md)
+- [Buzz Setup](buzz.md)
 - [Webhooks](webhooks.md)
 
 ---

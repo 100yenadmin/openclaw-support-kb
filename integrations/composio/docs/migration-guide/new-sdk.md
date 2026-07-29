@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "58fec23a660494c8b053ba2284eb457ea519fb79e0b173b3b0d388433e18bc7d"
+source_hash: "6684a15dd09f0ac5df4f5c80b2cc81553bc7d3614db0dd3f665ad6ff39db74e3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -1077,7 +1077,7 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 
 ## Local tools [#local-tools]
 
-Previously, the Python SDK included &#x2A;[local tools](https://github.com/ComposioHQ/composio/tree/master/python/composio/tools/local)*. These were tools defined within the SDK and consisted of local shell and code-related tools such as "clipboard", "sqltool", and "shelltool".
+Previously, the Python SDK included &#x2A;[local tools](https://github.com/ComposioHQ/composio/tree/0.5.0%2Bpost.1/python/composio/tools/local)*. These were tools defined within the SDK and consisted of local shell and code-related tools such as "clipboard", "sqltool", and "shelltool".
 
 This feature is currently in development for both Python and TypeScript SDKs, with newly created tools built for improved agent accuracy.
 

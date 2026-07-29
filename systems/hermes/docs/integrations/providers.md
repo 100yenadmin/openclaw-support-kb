@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AI Providers"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/providers"
-source_hash: "0e8e727a059ec2cacf52ac5faf941727db6d624128bfd661dba1eebd1b72d50d"
+source_hash: "e6d39f0621dd1a58a0de3465f433128fc52b86131cb2e21a8d2e3458be02db9a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/providers.md"
@@ -857,7 +857,7 @@ hermes model
 # If LM Studio server auth is enabled, enter LM_API_KEY when prompted
 ```
 
-By default, Hermes explicitly asks LM Studio to load the selected model with 64K context length before the first request.
+Hermes preserves the context of an already-loaded LM Studio instance. For an unloaded model in the default explicit mode, Hermes omits `context_length` unless you configured one in Hermes, so LM Studio can apply its own model setting. Hermes then uses only the context length LM Studio reports after loading.
 
 To change context length in LM Studio:
 

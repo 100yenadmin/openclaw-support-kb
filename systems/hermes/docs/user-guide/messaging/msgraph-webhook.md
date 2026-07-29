@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Microsoft Graph Webhook Listener"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/msgraph-webhook"
-source_hash: "065adcd34fe4d11eb79a20c338fea7dc44fb7c7632d89180973303b6e82102bf"
+source_hash: "f3194779955c735b54dd8dc5cec3031170e0de85e50014cba0d1bc7eebe2c2a7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/msgraph-webhook.md"
@@ -74,7 +74,7 @@ All settings go under `platforms.msgraph_webhook.extra`:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `host` | `0.0.0.0` | Bind address for the HTTP listener. Non-loopback binds require `allowed_source_cidrs`; loopback (`127.0.0.1` / `::1`) is the easiest dev-tunnel / reverse-proxy setup. |
+| `host` | unset (dual-stack: all interfaces, IPv4+IPv6) | Bind address for the HTTP listener. Non-loopback binds require `allowed_source_cidrs`; loopback (`127.0.0.1` / `::1`) is the easiest dev-tunnel / reverse-proxy setup. |
 | `port` | `8646` | Bind port. |
 | `webhook_path` | `/msgraph/webhook` | URL path Graph POSTs to. |
 | `health_path` | `/health` | Readiness endpoint. |

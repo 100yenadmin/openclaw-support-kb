@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop App"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "e2edb356413b71e75e057d1c440983168b9791c525ffa602c68fbdf560dc4b6c"
+source_hash: "bbf2c836ca6125d51eab15c69e1e59f3512c158acc3514abe9771ecf96a74367"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -330,6 +330,32 @@ npm run pack         # unpacked app under release/ (no installer)
 ```
 
 macOS/Windows signing and notarization run automatically when the relevant credentials are present in the environment (`CSC_LINK` / `CSC_KEY_PASSWORD` / `APPLE_*` for macOS, `WIN_CSC_*` for Windows).
+
+### macOS permissions and local rebuilds (TCC)
+
+macOS remembers permission grants (Full Disk Access, Desktop/Downloads/Documents,
+Accessibility, Automation, microphone) against the app's *code-signing identity*,
+not its path. Locally built and self-updated apps are signed with a stable
+identifier-pinned ad-hoc signature, so grants persist across updates out of the
+box.
+
+For the strongest guarantee — a certificate-anchored identity, the same
+mechanism yabai/skhd users rely on — create a self-signed code-signing
+certificate once and tell Hermes to use it:
+
+1. Keychain Access → Certificate Assistant → **Create a Certificate…**
+2. Name: `Hermes Local Signing`, Identity Type: *Self-Signed Root*,
+   Certificate Type: **Code Signing**.
+3. `hermes config set desktop.macos_signing_identity "Hermes Local Signing"`
+
+The next update re-signs the rebuilt app with that certificate; every TCC grant
+survives. No Apple Developer account is required. Notarized release builds are
+detected and never re-signed.
+
+One-time note: changing the signing identity (including the first update after
+this fix) changes the app's identity once, so macOS will re-prompt one final
+time. Grants are stable from then on. If a permission gets stuck, reset it with
+`tccutil reset All com.nousresearch.hermes` and re-grant.
 
 ## See also
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/multi-profile-gateways.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways"
-source_hash: "ccf80af377139efd705b234c2260364e41142a984b0b408a75c867aa6e7197aa"
+source_hash: "b77497955960efdf47a2cfc7e033bc146a5c8a770720bf3e686725ecf1a01714"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-profile-gateways.md"
@@ -172,6 +172,24 @@ Port-binding platforms covered by this rule: `webhook`, `api_server`,
 `msgraph_webhook`, `feishu`, `wecom_callback`, `bluebubbles`, `sms`,
 `whatsapp_cloud`, `line`. Configure any of these **only on the default profile**;
 every profile is reachable through its `/p/<profile>/` prefix.
+
+Authentication follows the profile named in the URL. Unprefixed endpoints keep
+using the default listener's existing credentials.
+
+- `/p/coder/...` API-server requests must use `API_SERVER_KEY` from
+  `~/.hermes/profiles/coder/.env`; the default listener key is rejected.
+- A webhook route that targets `coder` must declare `profile: coder` beside
+  its existing route-specific `secret` in the default profile's
+  `config.yaml`. That secret is then accepted only at
+  `/p/coder/webhooks/<route>` and is rejected on every other profile prefix.
+- Webhook routes without `profile` remain default-profile routes and are not
+  reachable through a named profile prefix.
+
+Keep port-binding platforms disabled in secondary profile configs. The shared
+listener and its route definitions stay on the default profile; profile
+binding controls which profile each authenticated webhook route may execute.
+Named API requests fail closed when the target profile has no
+`API_SERVER_KEY`.
 
 Only this shared-listener conflict degrades to a skipped profile. Security
 configuration errors remain fatal: for example, an `open` own-policy platform

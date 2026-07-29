@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session files"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/session-files.md"
-source_hash: "344f36f1c7742f0b24057dd9a06c8375ddc0da392c303b99b2bf220ee4f87afa"
+source_hash: "948b1f9778466a3ad40df7e3fac4ed85bb0c29f20f61795a6256c73728f7e420"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/session-files.md"
@@ -140,6 +140,8 @@ Uploads a file to the session's file mount.
 
 Accepts a file path (local or URL), a native File object, or a raw buffer.
 The file is stored in the virtual filesystem associated with the tool router session.
+URL inputs require a Node.js or Bun runtime so the destination can be DNS-validated;
+edge runtimes must fetch the file themselves and pass a File or ArrayBuffer.
 
 ```typescript
 async upload(input: string | File | ArrayBuffer | Uint8Array, options?: ToolRouterSessionFilesMountUploadOptions): Promise

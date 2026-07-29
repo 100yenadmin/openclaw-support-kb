@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/wecom-callback.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom-callback"
-source_hash: "3f842772f55b2c420aeeb0a11eed17b2a14b8034ddf02d532bdcd6e00efdfc10"
+source_hash: "62709a4add6a70356d8a2bf5caa344fd49eac1372240ac5371b755d003b73749"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/wecom-callback.md"
@@ -71,7 +71,7 @@ WECOM_CALLBACK_TOKEN=your-callback-token
 WECOM_CALLBACK_ENCODING_AES_KEY=your-43-char-aes-key
 
 # Optional
-WECOM_CALLBACK_HOST=0.0.0.0
+# WECOM_CALLBACK_HOST=  # optional pin; unset = dual-stack (all interfaces, IPv4+IPv6)
 WECOM_CALLBACK_PORT=8645
 WECOM_CALLBACK_ALLOWED_USERS=user1,user2
 ```
@@ -97,7 +97,7 @@ Set these in `config.yaml` under `platforms.wecom_callback.extra`, or use enviro
 | `agent_id` | — | Agent ID of the self-built app (required) |
 | `token` | — | Callback verification token (required) |
 | `encoding_aes_key` | — | 43-character AES key for callback encryption (required) |
-| `host` | `0.0.0.0` | Bind address for the HTTP callback server |
+| `host` | unset (dual-stack: all interfaces, IPv4+IPv6) | Bind address for the HTTP callback server |
 | `port` | `8645` | Port for the HTTP callback server |
 | `path` | `/wecom/callback` | URL path for the callback endpoint |
 
@@ -188,7 +188,8 @@ WeCom hits the public URL you registered. Confirm:
 **Port not reachable / listener not bound.**
 Check `hermes gateway run` logs for the bound host/port. If the adapter bound to
 `127.0.0.1` you must front it with a reverse proxy or tunnel — WeCom's servers
-can't reach loopback. Set `extra.host: 0.0.0.0` in `config.yaml` (plus
+can't reach loopback. Leave `extra.host` unset so the default dual-stack
+bind (all interfaces, IPv4+IPv6) applies, or pin an interface in `config.yaml` (plus
 `allowed_source_cidrs` if exposing directly) or keep loopback and use a tunnel
 such as Cloudflare Tunnel / nginx.
 

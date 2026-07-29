@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/photon.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/photon"
-source_hash: "0c5347c434738bd17df21ddf2fda289882df089c168e47969812d207901ef0b9"
+source_hash: "64340799175488d091931e147ff7818b73b6fbfc65dd8d0fd7342b7ba34235a0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/photon.md"
@@ -88,7 +88,11 @@ The setup, in order:
    user with that number already exists, so re-running is safe.
 5. **Prints your assigned iMessage line** — the number you text to reach
    your agent.
-6. **Runs `npm install`** inside the plugin's sidecar directory.
+6. **Runs `npm install`** inside the plugin's sidecar directory. On
+   read-only / immutable install trees (hosted Docker images, Podman,
+   Nix) the sidecar automatically falls back to a writable mirror under
+   `~/.hermes/photon/sidecar`; set `PHOTON_SIDECAR_DIR` to pin an
+   explicit location.
 
 Runtime credentials are written to `~/.hermes/.env`
 (`PHOTON_PROJECT_ID` = the Spectrum project id, `PHOTON_PROJECT_SECRET`),
@@ -217,9 +221,27 @@ Common issues:
   `voice()` content builders via the sidecar's `/send-attachment`
   endpoint. Captions arrive as a separate iMessage bubble after the
   media.
+- **Native polls are supported.** Hermes sends poll content through
+  spectrum-ts' `poll()` builder via the sidecar's `/send-poll` endpoint.
+- **Message effects are supported.** Hermes sends text with native iMessage
+  bubble/screen effects through spectrum-ts' iMessage `effect()` builder
+  via the sidecar's `/send-effect` endpoint.
 - **Photon's free quotas:** 5,000 messages per server per day,
   50 new-conversation initiations per shared line per day. Increases
   available — email `help@photon.codes`.
+- **Cron and standalone sends need the gateway running.** Out-of-process
+  senders (cron jobs, `hermes send`, the dashboard) reuse the sidecar the
+  gateway spawned — they read its port/token from
+  `<hermes-home>/runtime/photon-sidecar.json`, written once the sidecar
+  passes its health check and removed when it stops. If a standalone send
+  reports the gateway appears to be down, start (or restart) the gateway
+  first.
+- **Shared/free-tier lines can't initiate conversations with new
+  targets.** Photon-side policy: a shared line can only message a number
+  after that number has texted the line first. A cron/standalone send to a
+  brand-new recipient will be rejected by Photon even when Hermes is set
+  up correctly — either have the recipient message the line once, or move
+  to a dedicated line.
 
 ## Env vars
 

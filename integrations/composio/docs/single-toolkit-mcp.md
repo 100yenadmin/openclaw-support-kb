@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "2f24e65c228059011c8afbd61e5fdbfa4489ca287ec4578b9fad941586562ebc"
+source_hash: "38ec3964cea91898ba42ac8739fb56b9c9fbee617934f8e0a5c30de88c90e1eb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -416,9 +416,7 @@ Verify each trigger's signature with `composio.triggers.verifyWebhook`, then han
 
 The two files above are the spine. The real project rounds them out with grouped auth-link DMs, per-user routing, message chunking, reaction acks, and durable storage. Here's a slice of the actual source, with the Composio touch-points highlighted. Browse the tree, read the files:
 
-> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
-
-The complete project lives on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
+> The Slack bot browser is a documentation snapshot; a public repository is not available.
 
 # Run it [#run-it]
 
@@ -658,7 +656,7 @@ Use the exact slug from the Composio triggers catalog for each. Signature verifi
 
 The key files, in one place. The custom toolkit and the session wiring carry the integration, the eve provider is imported from `@composio/experimental/eve`, and the rest is local macOS glue.
 
-> The iMessage code browser is an implementation slice, not a standalone fixture. The complete runnable project will be published in the Composio examples repo.
+> The iMessage implementation is maintained in [platform-imessage](https://github.com/ComposioHQ/platform-imessage).
 
 The complete, runnable project will be published in the Composio examples repo.
 
@@ -750,9 +748,7 @@ Run the agent inside the sandbox and stream its output back. Whenever the agent 
 
 The file above is the spine. The real project rounds it out with a CLI, a smoke/dry-run path, the E2B runner behind the sandbox contract, the reviewer agent and its review policy, and the `composio_helper.py` the helper source compiles to. Here's a slice of the actual source, with the Composio touch-points highlighted. Browse the tree, read the files:
 
-> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
-
-The complete project lives on GitHub: [local-pr-reviewer](https://github.com/ComposioHQ/local-pr-reviewer).
+> The local PR reviewer browser is a documentation snapshot; a public repository is not available.
 
 # Run it [#run-it]
 
@@ -1010,7 +1006,7 @@ The bot posts the result back as a draft the member can confirm or edit:
 
 # The whole project [#the-whole-project]
 
-> The complete project is on GitHub: [composio-slack-bot](https://github.com/ComposioHQ/composio-slack-bot).
+> The standup bot browser is a documentation snapshot; a public repository is not available.
 
 # Run it [#run-it]
 

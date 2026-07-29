@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/v3/errors.md"
-source_hash: "196dab9657c01ff2597500b7fbd5ba8d5cad1649fc896ae0bfeebef102b17486"
+source_hash: "33a2446a1f2431198915ed1851a0507b6e4fa26d579f2d1db8106e346ec2a801"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/errors.md"
@@ -64,12 +64,12 @@ Composio uses two types of API keys:
 * **Project API key** (`x-api-key`) — For project-level operations
 * **Organization API key** (`x-org-api-key`) — For organization-level access across projects
 
-| Error                      | Cause                                                                                               |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
-| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://dashboard.composio.dev/settings). |
-| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                   |
-| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                  |
-| Insufficient permissions   | The API key doesn't have access to this resource.                                                   |
+| Error                      | Cause                                                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Invalid API key            | The API key is incorrect or revoked. Verify in [Settings](https://dashboard.composio.dev/~/project/settings/api-keys). |
+| No authentication provided | The request is missing the `x-api-key` or `x-org-api-key` header.                                                      |
+| Invalid organization key   | The organization API key is incorrect or revoked. Verify in Organization Settings.                                     |
+| Insufficient permissions   | The API key doesn't have access to this resource.                                                                      |
 
 > See [Authenticating users](/docs/authentication) for more help.
 
