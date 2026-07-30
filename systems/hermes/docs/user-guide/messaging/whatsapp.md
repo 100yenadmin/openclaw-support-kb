@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp"
-source_hash: "2e5e6b5885c7b9787a3ce0406a9547eade8f9f13f1ba40e40906422c86e7e25f"
+source_hash: "3796e8d8942a3ed7f644a61543defa09f61a84c2b3da96953bef538db783c38d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp.md"
@@ -224,6 +224,16 @@ Code blocks and inline code are preserved as-is since WhatsApp supports triple-b
 ### Tool Progress
 
 When the agent calls tools (web search, file operations, etc.), WhatsApp displays real-time progress indicators showing which tool is running. This is enabled by default — no configuration needed.
+
+### Native Polls, Clarify-as-Poll, and Locations
+
+The Baileys-bridge adapter (bot mode) supports several native WhatsApp message types:
+
+- **Polls** — the agent can send a native WhatsApp poll (question + options) via the bridge's `/send-poll` endpoint. Poll votes flow back into the conversation.
+- **Clarify questions as polls** — when the agent asks a multiple-choice clarify question, it's rendered as a native single-select poll; tapping an option answers the question. If the poll fails to send, the adapter falls back to a plain text question. Approval prompts are **never** mapped onto polls — polls are only used for genuine multiple-choice clarifies.
+- **Location pins** — the agent can send a native location pin (latitude/longitude, optional name/address) via `/send-location`, and incoming shared locations (including live locations) are delivered to the agent as location messages.
+
+All of this works out of the box in bot (Baileys) mode; no configuration needed.
 
 ### Message Batching (Debounce)
 

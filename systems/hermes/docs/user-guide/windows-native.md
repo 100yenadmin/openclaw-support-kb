@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (Native) Guide"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-native"
-source_hash: "0f293644696d9fdd8709eb4dd50c0694b2063b9edcf0faa3b8536e4770709d48"
+source_hash: "362ccc24a978a9b02696c3ab06a94c15153393455b5b25707aa80947a389f58a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-native.md"
@@ -21,7 +21,7 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/windows-native
 
 Hermes runs natively on Windows 10 and Windows 11 — no WSL, no Cygwin, no Docker. This page is the deep dive: what works natively, what's WSL-only, what the installer actually does, and the Windows-specific knobs you might need to touch.
 
-If you just want to install, the one-liner on the [landing page](/) or [Installation page](../getting-started/installation#windows-native-powershell) is all you need. Come back here when something surprises you.
+If you just want to install, the one-liner on the [landing page](/) or [Installation page](../getting-started/installation#windows-native) is all you need. Come back here when something surprises you.
 
 :::tip Want WSL instead?
 If you prefer a real POSIX environment (for the dashboard's embedded terminal, `fork` semantics, Linux-style file watchers, etc.), see the **[Windows (WSL2) Guide](./windows-wsl-quickstart.md)**. Both coexist cleanly: native data lives under `%LOCALAPPDATA%\hermes`, WSL data lives under `~/.hermes`.

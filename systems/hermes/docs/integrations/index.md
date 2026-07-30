@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Integrations"
 source: "https://hermes-agent.nousresearch.com/docs/integrations"
-source_hash: "0670810505611f9ff0db3f01ee72102ab659081422721141e597d054403bcba7"
+source_hash: "8ebde9126f662556abf7a024b68da92f5f3ab201263dd8f6c48c4c39b6b6de07"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/index.md"
@@ -85,7 +85,7 @@ Text-to-speech and speech-to-text across all messaging platforms:
 | **xAI TTS** | Good | Paid | `XAI_API_KEY` |
 | **NeuTTS** | Good | Free | None needed |
 
-Speech-to-text supports six providers: local faster-whisper (free, runs on-device), a local command wrapper, Groq, OpenAI Whisper API, Mistral, and xAI. Voice message transcription works across Telegram, Discord, WhatsApp, and other messaging platforms. See [Voice & TTS](/user-guide/features/tts) and [Voice Mode](/user-guide/features/voice-mode) for details.
+Speech-to-text supports eight providers: local faster-whisper (free, runs on-device), a local command wrapper, Groq, OpenAI Whisper API, Mistral, xAI, ElevenLabs Scribe, and DeepInfra. Voice message transcription works across Telegram, Discord, WhatsApp, and other messaging platforms. See [Voice & TTS](/user-guide/features/tts) and [Voice Mode](/user-guide/features/voice-mode) for details.
 
 ## IDE & Editor Integration
 

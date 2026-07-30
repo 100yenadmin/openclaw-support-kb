@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugins"
-source_hash: "f5f1a2de210a1e1f7703e9c3a52ee9553aba00b1c77426e4234b9534542ad4fc"
+source_hash: "18ab998406b6c60f7842201b51bca4f486eced58e80e84cf157a3dc80bb88c63"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugins/index.md"
@@ -589,7 +589,11 @@ def register(ctx):
 
 Without `override=True`, the registry rejects any registration that would
 shadow an existing tool from a different toolset — this prevents
-accidental overwrites. The override is logged at INFO level so it's
+accidental overwrites. Overriding a **built-in** tool additionally
+requires the operator to opt in via
+`plugins.entries.<plugin_id>.allow_tool_override: true` in `config.yaml`;
+without that gate, `register_tool(override=True)` raises
+`PluginToolOverrideError`. The override is logged so it's
 auditable in `~/.hermes/logs/agent.log`. Plugins load after built-in
 tools, so the registration order is correct: your handler replaces the
 built-in one.
@@ -611,7 +615,7 @@ Each hook is documented in full on the **[Event Hooks reference](/user-guide/fea
 
 | Hook | Fires when | Callback signature | Returns |
 |------|-----------|-------------------|---------|
-| [`pre_tool_call`](/user-guide/features/hooks#pre_tool_call) | Before any tool executes | `tool_name: str, args: dict, task_id: str` | ignored |
+| [`pre_tool_call`](/user-guide/features/hooks#pre_tool_call) | Before any tool executes | `tool_name: str, args: dict, task_id: str` | optional directive: `{"action": "block", "message": ...}` vetoes the call; `{"action": "approve", "message": ...}` escalates to the human-approval gate |
 | [`post_tool_call`](/user-guide/features/hooks#post_tool_call) | After any tool returns | `tool_name: str, args: dict, result: str, task_id: str, duration_ms: int` | ignored |
 | [`pre_llm_call`](/user-guide/features/hooks#pre_llm_call) | Once per turn, before the tool-calling loop | `session_id: str, user_message: str, conversation_history: list, is_first_turn: bool, model: str, platform: str` | [context injection](#pre_llm_call-context-injection) |
 | [`post_llm_call`](/user-guide/features/hooks#post_llm_call) | Once per turn, after the tool-calling loop (successful turns only) | `session_id: str, user_message: str, assistant_response: str, conversation_history: list, model: str, platform: str` | ignored |
@@ -623,7 +627,7 @@ Each hook is documented in full on the **[Event Hooks reference](/user-guide/fea
 | `kanban_task_completed` | A kanban task completes (worker process) | `task_id, board, assignee, run_id, profile_name, summary: str \| None` | ignored |
 | `kanban_task_blocked` | A kanban task is blocked (worker process) | `task_id, board, assignee, run_id, profile_name, reason: str \| None` | ignored |
 
-Most hooks are fire-and-forget observers — their return values are ignored. The exception is `pre_llm_call`, which can inject context into the conversation.
+Most hooks are fire-and-forget observers — their return values are ignored. The exceptions are `pre_llm_call`, which can inject context into the conversation, and `pre_tool_call`, which can return a block/approve directive.
 
 All callbacks should accept `**kwargs` for forward compatibility. If a hook callback crashes, it's logged and skipped. Other hooks and the agent continue normally.
 
@@ -1075,7 +1079,8 @@ class MyContextEngine(ContextEngine):
 
     def update_from_response(self, usage) -> None: ...
     def should_compress(self, prompt_tokens: int = None) -> bool: ...
-    def compress(self, messages, current_tokens=None, focus_topic=None) -> list: ...
+    def compress(self, messages, current_tokens=None, focus_topic=None,
+                 force=False, memory_context="") -> list: ...
 
 def register(ctx):
     ctx.register_context_engine(MyContextEngine())

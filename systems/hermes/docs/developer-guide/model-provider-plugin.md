@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Model Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin"
-source_hash: "772304ca4feeff05615fa4209208d38c7f807e0a43e5087afb09716b60097569"
+source_hash: "eb0b72d88ddf1f8b371f6c828dd15e756cbd49161edf02e8dc57e91876b25910"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/model-provider-plugin.md"
@@ -149,11 +149,11 @@ class AcmeProfile(ProviderProfile):
         reasoning dict). Default: ({}, {})."""
         return {}, {}
 
-    def fetch_models(self, *, api_key=None, timeout=8.0) -> list[str] | None:
+    def fetch_models(self, *, api_key=None, base_url=None, timeout=8.0) -> list[str] | None:
         """Live catalog fetch. Default hits {models_url or base_url}/models with
         Bearer auth. Override for: custom auth (Anthropic), no REST endpoint
         (Bedrock → None), or public/unauthenticated catalogs (OpenRouter)."""
-        return super().fetch_models(api_key=api_key, timeout=timeout)
+        return super().fetch_models(api_key=api_key, base_url=base_url, timeout=timeout)
 ```
 
 ## Hook reference examples

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Teams Meetings"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams-meetings"
-source_hash: "53a4e006f4a27c505e84b324d40c4ec9b54c377b3395fbe822ab35b0a1461ffb"
+source_hash: "7ca80e21203497b2567e2ba8024f3ac3aefd578d6d03627a24f001f6c9e81e96"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/teams-meetings.md"
@@ -82,11 +82,12 @@ The webhook listener is a gateway platform named `msgraph_webhook`. At minimum, 
 
 ```bash
 MSGRAPH_WEBHOOK_ENABLED=true
-MSGRAPH_WEBHOOK_HOST=127.0.0.1
 MSGRAPH_WEBHOOK_PORT=8646
 MSGRAPH_WEBHOOK_CLIENT_STATE=<random-shared-secret>
 MSGRAPH_WEBHOOK_ACCEPTED_RESOURCES=communications/onlineMeetings
 ```
+
+The bind host is read from the platform's `extra.host` in `config.yaml` (there is no `MSGRAPH_WEBHOOK_HOST` env var — see the [webhook listener reference](msgraph-webhook.md)).
 
 The listener exposes:
 - `/msgraph/webhook` for Graph notifications

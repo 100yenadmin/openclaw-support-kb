@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "AWS Bedrock"
 source: "https://hermes-agent.nousresearch.com/docs/guides/aws-bedrock"
-source_hash: "4d0dd3250fe6be213e0e23a76eccbd8b1360d9b1ae86bd32528ac391248c98f8"
+source_hash: "47b0ec7b696568f842bce86fe6e2588e6784d0d71ae8748ebb6dadaaacb941b9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/aws-bedrock.md"
@@ -100,6 +100,14 @@ bedrock:
     provider_filter: ["anthropic", "amazon"]  # Only show these providers
     refresh_interval: 3600                     # Cache for 1 hour
 ```
+
+### Prompt caching (cachePoint)
+
+Hermes automatically applies prompt caching on the Bedrock **Converse API** path by inserting `cachePoint` markers after the system prompt, tool definitions, and the latest message. Because sending a `cachePoint` block to a model that doesn't support it raises a `ValidationException`, markers are only added for models on a known-good allowlist (Anthropic Claude and Amazon Nova model IDs); unknown models default to no cache markers. Claude models normally use the AnthropicBedrock SDK path, which has its own prompt caching — the Converse `cachePoint` path covers Nova and the bearer-token Claude fallback. No configuration needed; cache reads/writes show up in usage accounting.
+
+### Context-window probing
+
+For models whose context window isn't in Hermes' static table, Hermes can probe the real limit by sending oversized requests at fixed tiers (~1.3M and ~2.2M tokens) and parsing the `maximum` reported in Bedrock's length-validation error. Probed values feed the same metadata cache as the static table; stale cached entries that under-report a model's window (e.g. entries seeded before a model's 1M window went GA) are dropped automatically in favor of the larger known value.
 
 ## Available Models
 

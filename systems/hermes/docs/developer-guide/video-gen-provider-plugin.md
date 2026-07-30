@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Video Generation Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/video-gen-provider-plugin"
-source_hash: "3860fd6707334ed5601dea7721e2ace3871b46c00e30d3200b6c08308ba68db8"
+source_hash: "4d51f4d698467c98c085190a5acf9c9de9f2c645dd4bc9692d1a69e0662aafd0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/video-gen-provider-plugin.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/developer-guide/video-gen-pro
 
 # Building a Video Generation Provider Plugin
 
-Video-gen provider plugins register a backend that services every `video_generate` tool call. Built-in providers (xAI, FAL) ship as plugins. Add a new one, or override a bundled one, by dropping a directory into `plugins/video_gen/<name>/`.
+Video-gen provider plugins register a backend that services every `video_generate` tool call. Built-in providers (xAI, FAL, DeepInfra) ship as plugins. Add a new one, or override a bundled one, by dropping a directory into `plugins/video_gen/<name>/`.
 
 :::tip
 Video-gen mirrors [Image Generation Provider Plugins](/developer-guide/image-gen-provider-plugin) almost line-for-line — if you've built an image-gen backend, you already know the shape. The main differences: a `capabilities()` method advertising modalities/aspect-ratios/durations, and a routing convention (pass `image_url` to use image-to-video, omit it to use text-to-video — the provider picks the right endpoint internally).

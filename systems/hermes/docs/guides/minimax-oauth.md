@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MiniMax OAuth"
 source: "https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth"
-source_hash: "98a79dd0c1d6ae0b5bef4b1a7820862f2797ac0c5cfe61a2dc754e186b7dbd4f"
+source_hash: "65fa5cf1624587987d43539e53f9b0aa6307a16543cf07ed11c7c617592810e9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/minimax-oauth.md"
@@ -183,7 +183,7 @@ hermes --provider minimax-oauth
 
 Both models support up to 200,000 tokens of context.
 
-`MiniMax-M2.7-highspeed` is also used automatically as the auxiliary model for vision and delegation tasks when `minimax-oauth` is the primary provider.
+`MiniMax-M2.7` is also used automatically as the auxiliary model for vision and delegation tasks when `minimax-oauth` is the primary provider.
 
 ## Troubleshooting
 

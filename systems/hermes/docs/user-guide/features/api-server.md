@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "API Server"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server"
-source_hash: "6aeb03ee107dbe5bc004be3dcb969748c7f71996429172127ffe3047967bde58"
+source_hash: "a8e84f1b8400ab6c7b5f2c314c2b9c0227818aae85dc9af3fe06255f7ec21e89"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/api-server.md"
@@ -581,9 +581,14 @@ gateway:
     key: your-secret-key
     cors_origins: http://localhost:3000
     model_name: my-hermes
+    max_concurrent_runs: 10   # concurrent-run cap; 0 disables the limit
 ```
 
 `port`, `key`, `host`, `cors_origins`, and `model_name` are automatically bridged into the platform's `extra` settings, so they behave exactly like their `API_SERVER_*` environment-variable counterparts. Environment variables take precedence over `config.yaml` values. The block is also accepted under `gateway.platforms.api_server:` or a top-level `platforms.api_server:` section.
+
+### Concurrent-run cap
+
+The API server limits how many agent runs may execute at once across the OpenAI-compatible and Runs endpoints. The cap is read from `gateway.api_server.max_concurrent_runs` (default **10**; `0` disables the limit, negative values clamp to 0). When the cap is reached, new run-starting requests are rejected with **HTTP 429** `Too many concurrent runs (max N)` — clients should back off and retry.
 
 ## Security Headers
 

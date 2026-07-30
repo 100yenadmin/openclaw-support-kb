@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "49163a4983788e0297468a09ebaff3c7d85aa6a3237c0aaa416544ae825926ee"
+source_hash: "215c6208f3c2527fb26c11e1a5dff67d67ec4543b9742764ce4956ddd0975ff4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -218,6 +218,24 @@ See [Session Search Tool](/user-guide/sessions#session-search-tool) for the thre
 | **Token cost** | Fixed per session (~1,300 tokens) | On-demand (searched when needed) |
 
 **Memory** is for critical facts that should always be in context. **Session search** is for "did we discuss X last week?" queries where the agent needs to recall specifics from past conversations.
+
+## Learning Journey (`/journey`)
+
+The learning journey is a timeline view of everything Hermes has learned — saved skills and memory entries plotted over time (oldest at top, newest at bottom), with a playable "constellation" scrubber that replays the build-up. The same graph data drives three surfaces:
+
+- **Classic CLI / standalone** — `hermes journey` (aliases: `hermes learning`, `hermes memory-graph`) renders the timeline in the terminal. Flags: `--play` animates the build-up (`--fps` to tune it), `--width`/`--height` override the render size, `--no-color` disables color, and `--json` dumps the raw graph payload.
+- **TUI** — `/journey` (aliases: `/learning`, `/memory-graph`) opens the timeline as an overlay.
+- **Desktop app** — `/journey` opens the Star Map / memory-graph panel, an interactive visual of the same nodes.
+
+Beyond viewing, the journey is also where you **prune and correct** what Hermes has learned:
+
+| Command | What it does |
+|---------|--------------|
+| `hermes journey list` | List node ids — skill names and `memory:<source>:<index>` ids for memory chunks. |
+| `hermes journey delete <node> [-y]` | Delete a node. Skills are **archived** (restorable), memory chunks are removed. `-y` skips the confirmation. |
+| `hermes journey edit <node>` | Open the node's content (a skill's `SKILL.md` or the memory chunk) in `$EDITOR`. |
+
+The same `list` / `delete <id>` / `edit <id>` subcommands work from the in-chat `/journey` command on the CLI, and the desktop panel offers edit/delete on nodes directly.
 
 ## Configuration
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Extending the Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/extending-the-dashboard"
-source_hash: "dd6edd7e85b2040e85a206ea59f6cedf0e7b57175859b53c508f2d5b408e47dc"
+source_hash: "5fbb1282d25b8d66956b268c186e08b1ed5d04f8e41c21afb3b9f98efc433fe6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/extending-the-dashboard.md"
@@ -760,7 +760,7 @@ Routes are mounted under `/api/plugins/<name>/`, so the above becomes:
 - `GET  /api/plugins/my-plugin/data`
 - `POST /api/plugins/my-plugin/action`
 
-Plugin API routes bypass session-token authentication since the dashboard server binds to localhost by default. **Don't expose the dashboard on a public interface with `--host 0.0.0.0` if you run untrusted plugins** — their routes become reachable too.
+Plugin API routes sit behind the dashboard's normal auth gate — unauthenticated requests get a `401` before the plugin route runs, and requests to a disabled plugin's routes are rejected at request time. Still, **don't expose the dashboard on a public interface with `--host 0.0.0.0` if you run untrusted plugins** — an authenticated session can reach their routes too.
 
 #### Accessing Hermes internals
 

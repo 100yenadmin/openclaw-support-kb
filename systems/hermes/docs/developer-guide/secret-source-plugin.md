@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Secret Source Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/secret-source-plugin"
-source_hash: "68cd0006257f22898afdc3d7ca8a1ed7c66f659c86ab1b15ce59c1deefb88e2a"
+source_hash: "eaf49ff2302187f2862b95f431b63afd7b7332d26461ae9a2923a858a47f9a3f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/secret-source-plugin.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/developer-guide/secret-source
 
 # Building a Secret Source Plugin
 
-Secret sources resolve provider credentials from an external secret manager (a vault, a password manager, an OS keystore, a custom script) into environment variables at process startup — after `~/.hermes/.env` loads, before Hermes reads credentials. Bitwarden and 1Password ship in-tree; **every other backend is a plugin**. This guide covers building one.
+Secret sources resolve provider credentials from an external secret manager (a vault, a password manager, an OS keystore, a custom script) into environment variables at process startup — after `~/.hermes/.env` loads, before Hermes reads credentials. Bitwarden, 1Password, and a generic command-helper source ship in-tree; **every other backend is a plugin**. This guide covers building one.
 
 :::tip
 The bundled set is deliberately closed, same policy as [memory providers](/developer-guide/memory-provider-plugin): PRs adding new vault backends under `agent/secret_sources/` are closed with a pointer to this guide. Publish your backend as a standalone plugin repo and share it in the Nous Research Discord (`#plugins-skills-and-skins`).

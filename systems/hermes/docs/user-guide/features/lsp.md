@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "LSP — Semantic Diagnostics"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/lsp"
-source_hash: "684455ab5eedbb46e55f3665b7dbcfe6c3f1193fae84288670a75ae26dde9a18"
+source_hash: "14e75bd64ba777b1d3ee0d1ede20176063d318c9bef33695a1feaeca97bac3f9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/lsp.md"
@@ -177,6 +177,13 @@ lsp:
   #   manual  — only use binaries already on PATH
   install_strategy: auto
 
+  # How long an unused language-server client stays alive (seconds).
+  # Idle servers are shut down automatically and respawned on the next
+  # relevant file operation. Set to 0 to disable idle reaping and keep
+  # servers alive for the life of the process. Values below 30s are
+  # clamped to 30 so a sweep can never reap a client mid-operation.
+  idle_timeout: 600
+
   # Per-server overrides (all optional).
   servers:
     pyright:
@@ -235,9 +242,13 @@ answered after it). Slow servers that haven't re-checked yet result
 in "no data" for that edit — never in yesterday's errors being
 re-reported as current.
 
-Servers are kept alive for the life of the Hermes process. There's
-no idle-timeout reaper — the cost of restarting the server's index
-on every write would be far higher than holding the daemon.
+Servers are kept alive while they're being used and shut down after
+`lsp.idle_timeout` seconds (default 600) with no file activity — a
+long-running gateway that touches many worktrees no longer accumulates
+one language-server process per workspace forever. A reaped server is
+respawned automatically on the next relevant file operation. Set
+`idle_timeout: 0` to disable reaping and hold every server's index warm
+for the life of the process.
 
 ## Disabling
 

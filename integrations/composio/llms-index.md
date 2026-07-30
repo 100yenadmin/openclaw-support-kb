@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "fdfb22da5f75cdebf0ff96a241dcab5850796eff65c223e17b64a28f0f50483a"
+source_hash: "f0684bc3ec3454da399b7dc93bd1535f53625c284fe2697e1c6828a44871565b"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -60,6 +60,7 @@ Source: https://docs.composio.dev/llms.txt
 
 - https://docs.composio.dev/docs/extending-sessions/proxy-execute.md
 - https://docs.composio.dev/docs/extending-sessions/custom-tools-and-toolkits.md
+- https://docs.composio.dev/docs/extending-sessions/custom-mcp.md
 
 ## Authenticate users
 
@@ -116,28 +117,12 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/glossary.md
 - https://docs.composio.dev/reference.md
 - https://docs.composio.dev/reference/rate-limits.md
-- https://docs.composio.dev/reference/authenticating-to-composio.md
-- https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 - https://docs.composio.dev/reference/v3/authentication.md
 - https://docs.composio.dev/reference/v3/errors.md
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
-- https://docs.composio.dev/reference/api-reference/api-keys.md
-- https://docs.composio.dev/reference/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/api-reference/files.md
-- https://docs.composio.dev/reference/api-reference/connected-accounts.md
-- https://docs.composio.dev/reference/api-reference/logs.md
-- https://docs.composio.dev/reference/api-reference/mcp.md
-- https://docs.composio.dev/reference/api-reference/organization.md
-- https://docs.composio.dev/reference/api-reference/organization-management.md
-- https://docs.composio.dev/reference/api-reference/tool-router.md
-- https://docs.composio.dev/reference/api-reference/projects.md
-- https://docs.composio.dev/reference/api-reference/toolkits.md
-- https://docs.composio.dev/reference/api-reference/tools.md
-- https://docs.composio.dev/reference/api-reference/triggers.md
-- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
-- https://docs.composio.dev/reference/api-reference/webhook-events.md
-- https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/authenticating-to-composio.md
+- https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 - https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
 - https://docs.composio.dev/reference/sdk-reference/python/composio.md
 - https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
@@ -160,18 +145,34 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
+- https://docs.composio.dev/reference/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/api-reference/api-keys.md
+- https://docs.composio.dev/reference/api-reference/connected-accounts.md
+- https://docs.composio.dev/reference/api-reference/logs.md
+- https://docs.composio.dev/reference/api-reference/mcp.md
+- https://docs.composio.dev/reference/api-reference/organization.md
+- https://docs.composio.dev/reference/api-reference/files.md
+- https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/tool-router.md
+- https://docs.composio.dev/reference/api-reference/toolkits.md
+- https://docs.composio.dev/reference/api-reference/tools.md
+- https://docs.composio.dev/reference/api-reference/organization-management.md
+- https://docs.composio.dev/reference/api-reference/triggers.md
+- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/api-reference/webhook-events.md
+- https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
+- https://docs.composio.dev/reference/v3/api-reference/triggers.md
+- https://docs.composio.dev/reference/v3/api-reference/toolkits.md
+- https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/projects.md
-- https://docs.composio.dev/reference/v3/api-reference/tool-router.md
-- https://docs.composio.dev/reference/v3/api-reference/toolkits.md
-- https://docs.composio.dev/reference/v3/api-reference/tools.md
-- https://docs.composio.dev/reference/v3/api-reference/triggers.md
-- https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/v3/api-reference/projects.md
+- https://docs.composio.dev/reference/v3/api-reference/tools.md
 
 ## Toolkits
 

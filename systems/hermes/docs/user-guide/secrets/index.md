@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/secrets/index.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets"
-source_hash: "41ab9be00ab038fdaf5177ee94b96628e82571634f75289cefa10c050d4a064d"
+source_hash: "414f44196c7451344fd2af1e4c974c7ccd4ddf72070bef9f03de904c952d5d5f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/index.md"
@@ -49,7 +49,7 @@ Every credential injected by a source is labelled with its origin — setup flow
 
 ## Profiles and shared vaults
 
-Two orchestrator-level knobs make one shared vault safe across [profiles](../features/profiles):
+Two orchestrator-level knobs make one shared vault safe across [profiles](../profiles):
 
 - **`secrets.preserve_existing`** — a list of env var names whose existing `.env` / shell value always wins, even against a source with `override_existing: true`. Use it for per-profile platform secrets (e.g. `FEISHU_APP_SECRET`) that intentionally differ across profiles while everything else rotates centrally:
 

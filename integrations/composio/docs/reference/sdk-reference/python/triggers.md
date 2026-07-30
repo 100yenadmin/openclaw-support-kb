@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/python/triggers.md"
-source_hash: "288197de4fcaaed3b1fb5f6303951f0c7ff6a18adc4f1f5d87feb928a8c7f37e"
+source_hash: "6a19d147de5a6c60d52d4c80467825253ab7c4ed84b6060bb110d743aa27df20"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/triggers.md"
@@ -249,6 +249,6 @@ async def webhook(request: Request):
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/triggers.py#L881)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/triggers.py#L936)
 
 ---

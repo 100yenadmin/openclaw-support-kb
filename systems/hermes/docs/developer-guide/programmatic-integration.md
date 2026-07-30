@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "081e25d5495dab8a1f49c5901d457c4fc5a10e24393772b34549602dfd84caaa"
+source_hash: "ca9561c7a8295945f840168ff83a1bb7138946b203acdc7c163bf6d2bf902d84"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -41,7 +41,8 @@ Full lifecycle, event bridge, and approval flow: [ACP Internals](./acp-internals
 
 ```bash
 hermes acp                  # serve ACP on stdio
-hermes acp --bootstrap      # print install snippet for an ACP-capable IDE
+hermes acp --check          # verify ACP dependencies and adapter imports
+hermes acp --setup          # interactive provider/model setup for ACP terminal auth
 ```
 
 ---

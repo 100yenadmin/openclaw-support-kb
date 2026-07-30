@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/credential-pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "8fd193fb49bfd4c18d4cb8f24a20e9f29df8450e82ddab90200d7a9578cca1dc"
+source_hash: "5ec7db27b48540e1f9546ab5171512995d0ecde9f5a6da33caccdb8398045bf6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -45,7 +45,7 @@ Your request
           → Second 429 → rotate to next pool key
       → All keys exhausted → fallback_model (different provider)
   → 402 billing error?
-      → Immediately rotate to next pool key (24h cooldown)
+      → Immediately rotate to next pool key (1h cooldown)
   → 401 auth expired?
       → Try refreshing the token (OAuth)
       → Refresh failed → rotate to next pool key
@@ -153,15 +153,17 @@ The pool handles different errors differently:
 | Error | Behavior | Cooldown |
 |-------|----------|----------|
 | **429 Rate Limit** | Retry same key once (transient). Second consecutive 429 rotates to next key | 1 hour |
-| **402 Billing/Quota** | Immediately rotate to next key | 24 hours |
-| **401 Auth Expired** | Try refreshing the OAuth token first. Rotate only if refresh fails | — |
+| **402 Billing/Quota** | Immediately rotate to next key | 1 hour |
+| **401 Auth Expired** | Try refreshing the OAuth token first. Rotate only if refresh fails | 5 minutes |
 | **All keys exhausted** | Fall through to `fallback_model` if configured | — |
+
+Provider-supplied `reset_at` timestamps override these default cooldowns.
 
 The `has_retried_429` flag resets on every successful API call, so a single transient 429 doesn't trigger rotation.
 
 ## Custom Endpoint Pools
 
-Custom OpenAI-compatible endpoints (Together.ai, RunPod, local servers) get their own pools, keyed by the endpoint name from `custom_providers` in config.yaml.
+Custom OpenAI-compatible endpoints (Together.ai, RunPod, local servers) get their own pools, keyed by the endpoint name from the `providers:` dict in config.yaml (or the legacy `custom_providers` list, which is auto-migrated).
 
 When you set up a custom endpoint via `hermes model`, it auto-generates a name like "Together.ai" or "Local (localhost:8080)". This name becomes the pool key.
 

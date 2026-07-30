@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Migrate from OpenClaw"
 source: "https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw"
-source_hash: "b6dfa3a8502bf77fb29bbb37b471224dd0f6dd08d221d2a3853c3305cef1a717"
+source_hash: "a7e27374c3172383e06d1ded32ad6938c0a2416f6932199d55b396997661c524"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/migrate-from-openclaw.md"
@@ -90,7 +90,7 @@ Skill conflicts are handled by `--skill-conflict`: `skip` leaves the existing He
 | What | OpenClaw config path | Hermes destination | Notes |
 |------|---------------------|-------------------|-------|
 | Default model | `agents.defaults.model` | `config.yaml` → `model` | Can be a string or `{primary, fallbacks}` object |
-| Custom providers | `models.providers.*` | `config.yaml` → `custom_providers` | Maps `baseUrl`, `apiType`/`api` — handles both short ("openai", "anthropic") and hyphenated ("openai-completions", "anthropic-messages", "google-generative-ai") values |
+| Custom providers | `models.providers.*` | `config.yaml` → `custom_providers` (auto-migrated to the canonical `providers:` dict on the next `hermes update` config migration) | Maps `baseUrl`, `apiType`/`api` — handles both short ("openai", "anthropic") and hyphenated ("openai-completions", "anthropic-messages", "google-generative-ai") values |
 | Provider API keys | `models.providers.*.apiKey` | `~/.hermes/.env` | Requires `--migrate-secrets`. See [API key resolution](#api-key-resolution) below. |
 
 ### Agent behavior

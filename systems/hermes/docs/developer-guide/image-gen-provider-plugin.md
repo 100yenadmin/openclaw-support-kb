@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Image Generation Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/image-gen-provider-plugin"
-source_hash: "075ae895245b178d54c6e9230d847ddbde9c5f611ea4cb23bce09896bb92d0e6"
+source_hash: "443d9001a7a5fbc8e9dfa363462e216765fc1286ed1cb2fdb9551585b979f31d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/image-gen-provider-plugin.md"
@@ -19,7 +19,7 @@ Source: https://hermes-agent.nousresearch.com/docs/developer-guide/image-gen-pro
 
 # Building an Image Generation Provider Plugin
 
-Image-gen provider plugins register a backend that services every `image_generate` tool call — DALL·E, gpt-image, Grok, Flux, Imagen, Stable Diffusion, fal, Replicate, a local ComfyUI rig, anything. Built-in providers (OpenAI, OpenAI-Codex, xAI) all ship as plugins. You can add a new one, or override a bundled one, by dropping a directory into `plugins/image_gen/<name>/`.
+Image-gen provider plugins register a backend that services every `image_generate` tool call — DALL·E, gpt-image, Grok, Flux, Imagen, Stable Diffusion, fal, Replicate, a local ComfyUI rig, anything. Built-in providers (OpenAI, OpenAI-Codex, xAI, FAL, Krea, DeepInfra, OpenRouter) all ship as plugins. You can add a new one, or override a bundled one, by dropping a directory into `plugins/image_gen/<name>/`.
 
 :::tip
 Image-gen is one of several **backend plugins** Hermes supports. The others (with more specialized ABCs) are [Memory Provider Plugins](/developer-guide/memory-provider-plugin), [Context Engine Plugins](/developer-guide/context-engine-plugin), and [Model Provider Plugins](/developer-guide/model-provider-plugin). General tool/hook/CLI plugins live in [Build a Hermes Plugin](/developer-guide/plugins).

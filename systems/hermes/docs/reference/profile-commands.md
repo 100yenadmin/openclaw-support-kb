@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "reference/profile-commands"
 source: "https://hermes-agent.nousresearch.com/docs/reference/profile-commands"
-source_hash: "b9169e14b5bd9b2069221343e89a4ee649e47fdf780190c1188d362df694716d"
+source_hash: "ce9c793d0d07204e98c6426a30bb1dc714ffbce2d82e6308f3557232ac1bc58d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/profile-commands.md"
@@ -178,7 +178,7 @@ hermes profile delete mybot --yes
 ```
 
 :::warning
-This permanently deletes the profile's entire directory including all config, memories, sessions, and skills. Cannot delete the currently active profile.
+This permanently deletes the profile's entire directory including all config, memories, sessions, and skills. The `default` profile (`~/.hermes`) cannot be deleted — use `hermes uninstall` to remove everything.
 :::
 
 ## `hermes profile show`

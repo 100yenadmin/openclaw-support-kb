@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "6006cd577fb874c52c29a0a4733b0248640727c849d3815486a46f241ab59f54"
+source_hash: "467c87fdf559e4b10bbf3d18960a7abfd33afb7c3079c6c2a74146fa1c02a97a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -588,6 +588,19 @@ When enabled, makes the `/verbose` slash command available in the gateway, letti
 ```yaml
 display:
   tool_progress_command: true
+```
+
+#### `display.reasoning_style`
+
+**Type:** string — **Default (Discord):** `"subtext"` — **Values:** `code`, `blockquote`, `subtext`
+
+Controls how the model's reasoning block is rendered when reasoning display is enabled. Discord defaults to `subtext`, which uses Discord's native `-# ` small grey metadata text so reasoning stays visually secondary to the answer. `blockquote` renders it as a `>` quote, and `code` (the default on other platforms) uses a fenced code block. Long reasoning is collapsed to the first 15 lines.
+
+```yaml
+display:
+  platforms:
+    discord:
+      reasoning_style: subtext   # code | blockquote | subtext
 ```
 
 ## Slash Command Access Control

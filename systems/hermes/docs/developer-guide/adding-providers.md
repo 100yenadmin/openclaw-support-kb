@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "2c3972ccfaf87e6804c1803f2b8cdd2447a46edaf84aac35bf8a9107fd4074ba"
+source_hash: "9f4575d6ded2e6ccb7e3c2735406317bd90ae1e71e7d11158b0d3ac15e528fc3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -351,11 +351,11 @@ For docs-only examples, the exact file set may differ. The point is to cover:
 - provider:model parsing
 - any adapter-specific message conversion
 
-Run tests with xdist disabled:
+Run the targeted tests (or use `scripts/run_tests.sh`, which runs each file in its own subprocess):
 
 ```bash
 source venv/bin/activate
-python -m pytest tests/hermes_cli/test_runtime_provider_resolution.py tests/cli/test_cli_provider_resolution.py tests/hermes_cli/test_setup_model_provider.py tests/run_agent/test_provider_parity.py -n0 -q
+python -m pytest tests/hermes_cli/test_runtime_provider_resolution.py tests/cli/test_cli_provider_resolution.py tests/hermes_cli/test_setup_model_provider.py tests/run_agent/test_provider_parity.py -q
 ```
 
 For deeper changes, run the full suite before pushing:

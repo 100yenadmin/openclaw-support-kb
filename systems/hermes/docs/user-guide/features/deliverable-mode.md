@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/deliverable-mode.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/deliverable-mode"
-source_hash: "674f52cdba4e51a2dcc6301a5a78932e9ba94f9279d762b9632f6b73097b2415"
+source_hash: "083161d408550a987d1115546ee3f94e47fbaf6cf9954f06828e04dbac3bf6f6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/deliverable-mode.md"
@@ -54,12 +54,13 @@ Three pieces fit together:
 | Category | Extensions | Delivery |
 |---|---|---|
 | Images | `.png .jpg .jpeg .gif .webp .bmp .tiff .svg` | Inline embed |
-| Video | `.mp4 .mov .avi .mkv .webm` | Inline embed (where supported) |
-| Audio | `.mp3 .wav .ogg .m4a .flac` | Voice / audio attachment |
-| Documents | `.pdf .docx .doc .odt .rtf .txt .md` | File upload |
-| Data | `.xlsx .xls .csv .tsv .json .xml .yaml .yml` | File upload |
-| Presentations | `.pptx .ppt .odp` | File upload |
-| Archives | `.zip .tar .gz .tgz .bz2 .7z` | File upload |
+| Video | `.mp4 .mov .avi .mkv .webm .3gp` | Inline embed (where supported) |
+| Audio | `.mp3 .m2a .wav .ogg .opus .m4a .flac` | Voice / audio attachment |
+| Documents | `.pdf .docx .doc .odt .rtf .txt .md .epub` | File upload |
+| Data | `.xlsx .xls .ods .csv .tsv .json .xml .yaml .yml` | File upload |
+| Geospatial | `.kmz .kml .geojson .gpx` | File upload |
+| Presentations | `.pptx .ppt .odp .key` | File upload |
+| Archives | `.zip .tar .gz .tgz .bz2 .xz .7z .rar .apk .ipa` | File upload |
 | Web | `.html .htm` | File upload |
 
 `.py`, `.log`, and other source-file extensions are intentionally excluded so

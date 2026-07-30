@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Agent with Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal"
-source_hash: "6ca7c37049daf05d0ce6e1c264984b9d35fff98d408a53f7675b3e39ff93fdbc"
+source_hash: "55de6ba8cb214e70b44be493d563104ca9d0fdfb3ef3520ccc1e08722fd3d45b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/run-hermes-with-nous-portal.md"
@@ -164,7 +164,7 @@ You'll see per-tool routing — `via Nous Portal` for the ones routed through th
 Because the Tool Gateway includes OpenAI TTS, [voice mode](/user-guide/features/voice-mode) works without a separate OpenAI key:
 
 ```bash
-hermes setup voice
+hermes setup tts
 # → pick "Nous Subscription" for TTS
 # → pick a speech-to-text backend (local faster-whisper is free, no setup)
 ```
@@ -176,7 +176,7 @@ Then in any messaging-platform session (Telegram, Discord, Signal, etc.), send a
 The Portal subscription works for [cron jobs](/user-guide/features/cron) and [batch processing](/user-guide/features/batch-processing) the same way it works for interactive chat — the OAuth refresh token is reused automatically. No additional setup; just schedule cron jobs and they'll bill against your subscription.
 
 ```bash
-hermes cron create "every day at 9am" \
+hermes cron create "0 9 * * *" \
   "Search the web for top AI news and summarize the 5 most important stories" \
   --name "Daily AI news"
 ```

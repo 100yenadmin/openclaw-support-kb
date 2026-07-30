@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "OAuth over SSH / Remote Hosts"
 source: "https://hermes-agent.nousresearch.com/docs/guides/oauth-over-ssh"
-source_hash: "da4d01fa032bb28b38dcc80321722c05e9df2c73b1f9cb1a1534215e41bf8b68"
+source_hash: "246b8659e68aea4d9b8f94f0ad4d2876688d6121d37b2d17d036505e679f0677"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/oauth-over-ssh.md"
@@ -34,7 +34,7 @@ The fix is a one-line SSH local-forward. For MCP servers on an interactive termi
 ssh -N -L 43827:127.0.0.1:43827 user@remote-host
 
 # In your existing SSH session on the remote machine:
-hermes auth add spotify --no-browser
+hermes auth spotify --no-browser
 # → Hermes prints an authorize URL. Open it in a browser on your laptop.
 # → Your browser redirects to 127.0.0.1:43827/callback, the tunnel forwards
 #   the request to the remote listener, login completes.
@@ -105,7 +105,7 @@ ssh -N -L 43827:127.0.0.1:43827 user@remote-host
 
 ```bash
 ssh user@remote-host
-hermes auth add spotify --no-browser
+hermes auth spotify --no-browser
 ```
 
 Hermes detects the SSH session, skips the browser auto-open, and prints an authorize URL plus a `Waiting for callback on http://127.0.0.1:<port>/callback` line.

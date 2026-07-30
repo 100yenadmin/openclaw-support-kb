@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automation Blueprints"
 source: "https://hermes-agent.nousresearch.com/docs/guides/automation-blueprints"
-source_hash: "442d44865b9e7e68fb1d27d026116a1925d863f365e152fc9c8acd62b7102c09"
+source_hash: "2f932973ebf75a709f014b61fa16409ec961674335762b3e58db580226cfce9e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/automation-blueprints.md"
@@ -89,7 +89,7 @@ Review for:
 - Missing tests for new behavior
 
 Post a concise review. If the PR is a trivial docs/typo change, say so briefly." \
-  --skill github-code-review \
+  --skills github-code-review \
   --deliver github_comment
 ```
 
@@ -445,7 +445,7 @@ If action is 'closed' and pull_request.merged is true:
 5. Reference the original PR in the new PR description
 
 If action is not 'closed' or not merged, respond with [SILENT]." \
-  --skill github-pr-workflow \
+  --skills github-pr-workflow \
   --deliver log
 ```
 

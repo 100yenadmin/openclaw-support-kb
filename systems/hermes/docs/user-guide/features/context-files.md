@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Files"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files"
-source_hash: "4626ed65a18207d86028b7ee655cbcd08c4b5ad01b227b5d7d0d580302674609"
+source_hash: "8c97c410be4145fb3831edbae60e631339c635fb7164e35038111587f4aa5f6d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/context-files.md"
@@ -122,7 +122,7 @@ Context files are loaded by `build_context_files_prompt()` in `agent/prompt_buil
 1. **Scan working directory** — checks for `.hermes.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules` (first match wins)
 2. **Content is read** — each file is read as UTF-8 text
 3. **Security scan** — content is checked for prompt injection patterns
-4. **Truncation** — files exceeding `context_file_max_chars` characters (default 20,000) are head/tail truncated (70% head, 20% tail, with a marker in the middle)
+4. **Truncation** — files exceeding the character cap are head/tail truncated (70% head, 20% tail, with a marker in the middle). The cap is an explicit `context_file_max_chars` from config.yaml when set; otherwise it scales dynamically with the model's context window (floor 20,000 chars, ceiling 500,000)
 5. **Assembly** — all sections are combined under a `# Project Context` header
 6. **Injection** — the assembled content is added to the system prompt
 
@@ -184,7 +184,7 @@ This scanner protects against common injection patterns, but it's not a substitu
 
 | Limit | Value |
 |-------|-------|
-| Max chars per file | `context_file_max_chars` (default 20,000, ~7,000 tokens) |
+| Max chars per file | `context_file_max_chars` when set; otherwise dynamic (scales with model context window, floor 20,000, ceiling 500,000) |
 | Head truncation ratio | 70% |
 | Tail truncation ratio | 20% |
 | Truncation marker | 10% (shows char counts and suggests using file tools) |

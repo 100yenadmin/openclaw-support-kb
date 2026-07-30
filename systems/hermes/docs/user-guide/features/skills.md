@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skills System"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
-source_hash: "4df4739480e2550a320bb6aca3fdd10ae2758cbee6226e5d50ac3f08d0081375"
+source_hash: "b85f35da5d1bb6d29fb3e3f4b7e1646b74c17b78474d7265878e1441526c4df8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skills.md"
@@ -825,7 +825,7 @@ hermes skills install my-org/hermes-skills/deploy-runbook
 
 #### Non-default paths
 
-If your skills don't live under `skills/` (common when you're adding a `skills/` subtree to an existing project), edit the tap entry in `~/.hermes/.hub/taps.json`:
+If your skills don't live under `skills/` (common when you're adding a `skills/` subtree to an existing project), edit the tap entry in `~/.hermes/skills/.hub/taps.json`:
 
 ```json
 {
@@ -867,7 +867,7 @@ Inside a running session:
 /skills tap remove myorg/skills-repo
 ```
 
-Taps are stored in `~/.hermes/.hub/taps.json` (created on demand).
+Taps are stored in `~/.hermes/skills/.hub/taps.json` (created on demand).
 
 ## Bundled skill updates (`hermes skills reset`)
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/computer-use.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use"
-source_hash: "6688be984be17399e1710e74a3d98e45e1bf460be051b128cfe95e1ab4de367a"
+source_hash: "1e6b13a37e8cf858f6dbbc51228a7b23e2af0226877422ba86bc7289e217f479"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/computer-use.md"
@@ -88,6 +88,34 @@ hermes -t computer_use chat
 ```
 
 or add `computer_use` to your enabled toolsets in `~/.hermes/config.yaml`.
+
+## Permission modes and logged-in browser profiles
+
+Hermes maps its existing approval UX onto cua-driver 0.10's immutable daemon
+modes. There is no second permission toggle to keep in sync:
+
+| Hermes session | cua-driver mode | Human intervention | `existing_profile` |
+|---|---|---|---|
+| Manual or smart approvals (default) | `standard` | Normal Hermes approvals; Cua stops at its protected boundary | Refuses unless a certified protected host is available; Hermes does not claim one today |
+| `--yolo`, `/yolo`, or `approvals.mode: off` | private `unrestricted` daemon | One explicit Hermes risk acceptance; no runtime Cua prompts | Allowed within Cua's built-in, managed, and user policy ceilings |
+
+The unrestricted daemon is private to that Hermes session. Turning `/yolo`
+off, resetting/closing the session, cancellation cleanup, or process exit ends
+the Cua session and stops that daemon. It never changes the machine-wide
+daemon's mode or grants another Hermes conversation the same authority.
+
+`smart` approval remains `standard`: an LLM classification is not protected
+human consent. Cua's `bounded` manifest mode is also not inferred from smart
+approval or a normal tool confirmation; it needs a separately trusted host
+that reviews and launches the exact manifest.
+
+<div class="alert alert--warning">
+
+YOLO/unrestricted mode does not protect against prompt injection or unintended
+input. Use it only in a disposable VM or with accounts and data whose full
+compromise you accept.
+
+</div>
 
 ## `hermes computer-use doctor` — your first triage stop
 
@@ -404,14 +432,12 @@ HERMES_CUA_DRIVER_CMD=/path/to/cua/libs/cua-driver/rust/target/debug/cua-driver
 
 ### Notes & gotchas
 
-- **Hermes spawns its own `cua-driver mcp` child over stdio** — it does
-  *not* attach to the long-running `cua-driver serve` autostart daemon
-  or its named pipe. So the scheduled task / LaunchAgent is unnecessary
-  for testing (`-NoAutoStart` is fine). The autostart daemon and the
-  Windows UIAccess worker (`cua-driver-uia.exe`) only matter for
-  foreground-safe input on some apps (e.g. WPF); the standard tool
-  surface works through the stdio child. On Windows SSH sessions, the
-  autostart pattern IS needed — see the Limitations section.
+- **Hermes spawns a `cua-driver mcp` stdio proxy.** In a normal session the
+  proxy connects to (and may start) the standard machine daemon. In explicit
+  Hermes YOLO, Hermes instead owns a private `cua-driver serve --embedded`
+  child and points the proxy at its private socket or named pipe. The Windows
+  autostart/UIAccess pattern still matters for interactive Session 1+ input
+  from SSH — see the Limitations section.
 - **Locked binary on Windows.** A running `cua-driver-serve` daemon can
   hold `cua-driver.exe` and block an overwrite on rebuild.
   `install-local.ps1` renames the locked binary out of the way

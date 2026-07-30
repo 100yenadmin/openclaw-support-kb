@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Cron Internals"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/cron-internals"
-source_hash: "adbd20a17fe4ce97950b5b411cc3797ec3e9a8e6f85b489146c7494c315b0350"
+source_hash: "02e244356b2348decae579f60720a5cda627f88576a87e7590089703664bf9d3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/cron-internals.md"
@@ -127,7 +127,7 @@ The active provider is chosen by the `cron.provider` config key:
   historical in-process loop calling `scheduler.tick()` every 60 seconds. This
   is byte-identical to the pre-provider behavior.
 - **a named provider** (e.g. `chronos`, a managed-cron provider for
-  scale-to-zero deployments) → discovered from `plugins/cron/<name>/` or
+  scale-to-zero deployments) → discovered from `plugins/cron_providers/<name>/` or
   `$HERMES_HOME/plugins/<name>/`.
 
 If a named provider is missing, fails to load, or reports `is_available() ==

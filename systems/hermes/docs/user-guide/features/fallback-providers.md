@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/fallback-providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "daf855e813f2b9cf9e265df4c9eab926c2c8183b4bdc627a3b44ddc01ffde21c"
+source_hash: "095af2c91a8061bf6ecda90a9f83d34a36d95d5efce171279d79fbb55ce4d1f1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -59,6 +59,7 @@ Each entry requires both `provider` and `model`. Entries missing either field ar
 
 | Provider | Value | Requirements |
 |----------|-------|-------------|
+| AI Gateway | `ai-gateway` | `AI_GATEWAY_API_KEY` |
 | OpenRouter | `openrouter` | `OPENROUTER_API_KEY` |
 | Nous Portal | `nous` | `hermes setup --portal` (fresh) or `hermes auth add nous` (OAuth) |
 | OpenAI Codex | `openai-codex` | `hermes model` (ChatGPT OAuth) |
@@ -440,7 +441,7 @@ See [Scheduled Tasks (Cron)](/user-guide/features/cron) for full configuration d
 | Approval classification | Layered (see above) | `auxiliary.approval` |
 | Title generation | Layered (see above) | `auxiliary.title_generation` |
 | Triage specifier | Layered (see above) | `auxiliary.triage_specifier` |
-| Delegation | Provider override only (no automatic fallback) | `delegation.provider` / `delegation.model` |
-| Cron jobs | Per-job provider override only (no automatic fallback) | Per-job `provider` / `model` |
+| Delegation | Inherits the parent's `fallback_providers` chain; optional provider/model override | `delegation.provider` / `delegation.model` |
+| Cron jobs | Inherit the configured `fallback_providers` chain; optional per-job provider override | Per-job `provider` / `model` |
 
 ---

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Using sessions via MCP"
 source: "https://docs.composio.dev/docs/sessions-via-mcp.md"
-source_hash: "4f6da32565cc1123ad690a1c97b9150ce38d3339d25205e50e0e6d37860e0fba"
+source_hash: "adcde6a8182ffde15140765ac2cddbc190c1b04dbb02e975a98447fe94e8ba17"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-via-mcp.md"
@@ -20,6 +20,8 @@ Source: https://docs.composio.dev/docs/sessions-via-mcp.md
 By default Composio gives your agent **tools it can call directly**. Composio formats them as function schemas for your framework through a [provider package](/docs/providers). That's what the [Quickstart](/docs/quickstart) uses, and it's the right choice for most agents.
 
 If you'd rather connect over the [Model Context Protocol](https://modelcontextprotocol.io), every session also exposes a hosted MCP endpoint. This is useful when you want to plug a session into an MCP-native client like Claude Desktop, Cursor, or any framework's MCP transport. No provider package required.
+
+> Want to bring tools from your own remote MCP server into Composio instead? See [Custom MCP](/docs/extending-sessions/custom-mcp).
 
 # The MCP endpoint [#the-mcp-endpoint]
 

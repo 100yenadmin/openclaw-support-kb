@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Google Chat"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/google_chat"
-source_hash: "6c583616fb9c23f78dce7085e00bfcf68399239557f55924b341663a274b62f8"
+source_hash: "bcdac97711cb7ff5f53ad8ccd203781d3795b6cb1d57b0c8a0067d0e42d1b080"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/google_chat.md"
@@ -240,6 +240,16 @@ automatically split across multiple messages.
 Thread support: when a user replies inside a thread, Hermes detects the
 `thread.name` and posts its reply in the same thread, so each thread gets a
 separate Hermes session.
+
+### Clarify questions as interactive cards
+
+When the agent asks a multiple-choice clarify question, the adapter renders it
+as a native **Card v2** with one button per choice plus an
+**"Other / type answer"** button, instead of a plain numbered text list.
+Clicking a button answers the question directly (`CARD_CLICKED` events route
+the choice back into the waiting session). If the card fails to send, or the
+question has no fixed choices, the adapter falls back to the standard text
+clarify. No configuration needed.
 
 ---
 

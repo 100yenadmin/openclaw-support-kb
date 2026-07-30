@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Portal"
 source: "https://hermes-agent.nousresearch.com/docs/integrations/nous-portal"
-source_hash: "a0811bccce408468ffa15595fe698b59407b4be6d4619fdc420629c9cdece454"
+source_hash: "bebe5930a2459272a043197c424ad62905aaf017b64a590cbc79085d8d04509b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/nous-portal.md"
@@ -230,16 +230,19 @@ The Tool Gateway settings live under their respective tool sections:
 
 ```yaml
 web:
-  backend: nous       # web search/extract routes through Tool Gateway
+  backend: firecrawl
+  use_gateway: true   # web search/extract routes through Tool Gateway
 
 image_gen:
-  provider: nous
+  use_gateway: true
 
 tts:
-  provider: nous
+  provider: openai
+  use_gateway: true
 
 browser:
-  backend: nous
+  cloud_provider: browser-use
+  use_gateway: true
 ```
 
 The OAuth refresh token is stored separately at `~/.hermes/auth.json` (not in `config.yaml` — credentials and configuration are kept separate by design).

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "b5cf2da11dc523f310e0a8faeee068c05a679f26df76ad2ba0221f5219dbc09a"
+source_hash: "187fd78e77a5c085b70f9c92e430321dd78cb7d3c287563f16308bf0387b6729"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -171,10 +171,13 @@ If omitted, subagents use the same model as the parent.
 `delegate_task` does not accept a model-facing `toolsets` parameter. Each subagent inherits the parent's enabled toolsets so the model cannot grant a child capabilities that the parent does not have. Configure the parent's tools before starting the conversation if delegated work needs additional capabilities.
 
 Certain tools are blocked for subagents even when the parent has them:
-- `delegation` — blocked for leaf subagents (the default). Retained for `role="orchestrator"` children, bounded by `max_spawn_depth` — see [Depth Limit and Nested Orchestration](#depth-limit-and-nested-orchestration) below.
+- `delegate_task` — blocked for leaf subagents (the default). Retained for `role="orchestrator"` children, bounded by `max_spawn_depth` — see [Depth Limit and Nested Orchestration](#depth-limit-and-nested-orchestration) below.
 - `clarify` — subagents cannot interact with the user
 - `memory` — no writes to shared persistent memory
-- `code_execution` — children should reason step-by-step
+- `send_message` — no cross-platform side effects
+- `cronjob` — no scheduling more work in the parent's name
+
+Both roles retain `execute_code` (programmatic tool calling) so children can batch mechanical work.
 
 ## Max Iterations
 

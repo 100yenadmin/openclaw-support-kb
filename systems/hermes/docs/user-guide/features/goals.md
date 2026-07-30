@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Goals"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/goals"
-source_hash: "c9dc6e387e90db20063eb90bcc9d4c37c58a4edd986089af0b8838836f698aa6"
+source_hash: "dab7bbf6bc892eb9bc173d69a0458ecb8332b046b53ffd6ba3d8716a4fa40905"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/goals.md"
@@ -150,7 +150,7 @@ After every turn, Hermes calls an auxiliary model with:
 
 - The standing goal text
 - The agent's most recent final response (last ~4 KB of text)
-- A system prompt telling the judge to reply with strict JSON: `{"done": <bool>, "reason": "<one-sentence rationale>"}`
+- A system prompt telling the judge to reply with strict one-line JSON: `{"verdict": "done" | "continue" | "wait", "reason": "<one-sentence rationale>"}` (wait verdicts add `wait_on_session` / `wait_on_pid` / `wait_for_seconds`; the legacy `{"done": <bool>, "reason": "..."}` shape is still accepted)
 
 The judge is deliberately conservative: it marks a goal `done` only when the response **explicitly** confirms the goal is complete, when the final deliverable is clearly produced, or when the goal is unachievable/blocked (treated as DONE with a block reason so we don't burn budget on impossible tasks).
 

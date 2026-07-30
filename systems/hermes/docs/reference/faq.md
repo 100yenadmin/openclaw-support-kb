@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "FAQ & Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/reference/faq"
-source_hash: "83920263f28c62d4bca3c4adf0905c2742e22f20827fa50a7d915c70c67cae89"
+source_hash: "ff2301961530e3c0fd74d547405e5623a5672385ce065192120b26e13f1fceed"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/faq.md"
@@ -326,16 +326,18 @@ model:
   context_length: 131072  # your model's actual context window
 ```
 
-Or for custom endpoints, add it per-model:
+Or for custom endpoints, add it per-model on the provider entry:
 
 ```yaml
-custom_providers:
-  - name: "My Server"
-    base_url: "http://localhost:11434/v1"
+providers:
+  my-server:
+    api: "http://localhost:11434/v1"
     models:
       qwen3.5:27b:
         context_length: 64000
 ```
+
+(Older configs use the legacy `custom_providers:` list — still supported and auto-migrated to `providers:`.)
 
 See [Context Length Detection](../integrations/providers.md#context-length-detection) for how auto-detection works and all override options.
 

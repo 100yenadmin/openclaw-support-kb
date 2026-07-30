@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugin LLM Access"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugin-llm-access"
-source_hash: "9fa794871e137279ec1709c043c765376e2880d8e737375ce6371e9b9c1bc067"
+source_hash: "345328bf2830fdc1ce129246aec7dff748a79ad6e6f9958ed5b77abe45f95516"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugin-llm-access.md"
@@ -313,7 +313,8 @@ class PluginLlmCompleteResult:
     audit: Dict[str, Any]        # plugin_id, purpose, profile
 
 @dataclass
-class PluginLlmStructuredResult(PluginLlmCompleteResult):
+class PluginLlmStructuredResult:
+    # same fields as PluginLlmCompleteResult, plus:
     parsed: Optional[Any]        # JSON object when content_type == "json"
     content_type: str            # "json" or "text"
     # audit also carries schema_name when supplied

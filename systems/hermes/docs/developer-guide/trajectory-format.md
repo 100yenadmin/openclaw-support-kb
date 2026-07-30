@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/trajectory-format.md"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/trajectory-format"
-source_hash: "94dd8dcfb388254bb1cafb7f787bf3d1b62fcb3c689447c2d3d8e6ee40dc8fc3"
+source_hash: "5e497622f513e4d4bb52699ea3522e9f82947d0cae4a74a3f14f7a26bf1a7021"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/trajectory-format.md"
@@ -234,17 +234,16 @@ preventing Arrow schema mismatch errors during dataset loading.
 
 ## Controlling Trajectory Saving
 
-In the CLI, trajectory saving is controlled by:
+Trajectory saving is a `run_agent.py` / library-level switch — the `hermes` CLI
+does not expose a config key or flag for it:
 
-```yaml
-# config.yaml
-agent:
-  save_trajectories: true  # default: false
+```bash
+python run_agent.py --save_trajectories --query='your question here'
 ```
 
-Or via the `--save-trajectories` flag. When the agent initializes with
-`save_trajectories=True`, the `_save_trajectory()` method is called at the end
-of each conversation turn.
+Or programmatically: `AIAgent(..., save_trajectories=True)` /
+`initialize_agent(..., save_trajectories=True)`. When enabled, the
+`_save_trajectory()` method is called at the end of each conversation turn.
 
 The batch runner always saves trajectories (that's its primary purpose).
 

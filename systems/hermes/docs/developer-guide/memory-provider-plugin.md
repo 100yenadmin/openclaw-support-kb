@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/memory-provider-plugin"
-source_hash: "9176f45815ab5fe99e338983bd22658fc6d19ff644a1f0da091b3c6cdc581926"
+source_hash: "a070ba7e6c342e2d7c35fcdee9357b0fd9c8e453e10cdd4bc3d2796fd3f9855d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/memory-provider-plugin.md"
@@ -89,8 +89,8 @@ class MyMemoryProvider(MemoryProvider):
 |--------|-----------|----------|
 | `system_prompt_block()` | System prompt assembly | Static provider info |
 | `prefetch(query, *, session_id="")` | Before each API call | Return recalled context |
-| `queue_prefetch(query)` | After each turn | Pre-warm for next turn |
-| `sync_turn(user, assistant, *, session_id="")` | After each completed turn | Persist conversation |
+| `queue_prefetch(query, *, session_id="")` | After each turn | Pre-warm for next turn |
+| `sync_turn(user, assistant, *, session_id="", messages=None)` | After each completed turn | Persist conversation |
 | `on_session_end(messages)` | Conversation ends | Final extraction/flush |
 | `on_pre_compress(messages)` | Before context compression | Save insights before discard |
 | `on_memory_write(action, target, content)` | Built-in memory writes | Mirror to your backend |

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skins & Themes"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skins"
-source_hash: "e827b4e7fea2a112e3c3922ed05a89b68c1e1a5a2c740f64046a6a3ff8f604bd"
+source_hash: "6d257c1bd8573118d898df19427a4c986bb7f7ca40a04118be18ed6c5925eff0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skins.md"
@@ -69,7 +69,7 @@ Controls all color values throughout the CLI. Values are hex color strings.
 | `banner_dim` | Muted text in the banner (separators, secondary labels) | `#B8860B` (dark goldenrod) |
 | `banner_text` | Body text in the banner (tool names, skill names) | `#FFF8DC` (cornsilk) |
 | `ui_accent` | General UI accent color (highlights, active elements) | `#FFBF00` |
-| `ui_label` | UI labels and tags | `#4dd0e1` (teal) |
+| `ui_label` | UI labels and tags | `#DAA520` (goldenrod) |
 | `ui_ok` | Success indicators (checkmarks, completion) | `#4caf50` (green) |
 | `ui_error` | Error indicators (failures, blocked) | `#ef5350` (red) |
 | `ui_warn` | Warning indicators (caution, approval prompts) | `#ffa726` (orange) |
@@ -80,7 +80,7 @@ Controls all color values throughout the CLI. Values are hex color strings.
 | `session_border` | Session ID dim border color | `#8B8682` |
 | `status_bar_bg` | Background color for the TUI status / usage bar | `#1a1a2e` |
 | `voice_status_bg` | Background color for the voice-mode status badge | `#1a1a2e` |
-| `selection_bg` | Background color for the TUI mouse-selection highlighter. Falls back to `completion_menu_current_bg` when unset. | `#333355` |
+| `selection_bg` | Background color for the TUI mouse-selection highlighter. Falls back to `completion_menu_current_bg` when unset. | `#3a3a55` |
 | `completion_menu_bg` | Background color for the completion menu list | `#1a1a2e` |
 | `completion_menu_current_bg` | Background color for the active completion row | `#333355` |
 | `completion_menu_meta_bg` | Background color for the completion meta column | `#1a1a2e` |

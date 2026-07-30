@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Yuanbao"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/yuanbao"
-source_hash: "80a03ce4513af3ebf089f5ba7ea65899b84dfa78d75f672f6d0e56b9985387ba"
+source_hash: "dd46735b7e86b86ca7504c6ca712c2cf67b029ac06c0f763e91036210bfdb24c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/yuanbao.md"
@@ -111,6 +111,7 @@ The adapter will connect to the Yuanbao WebSocket gateway, authenticate using HM
 - **Automatic reconnection** — handles WebSocket disconnections with exponential backoff
 - **Group information queries** — retrieve group details and member lists
 - **Sticker/Emoji support** — send TIMFaceElem stickers and emoji in conversations
+- **WeChat forwarded chat-history support** — when a user forwards a WeChat chat-history bundle into Yuanbao, the adapter decodes the forwarded records (sender nicknames, text, and multimedia entries, including nested forwards) and injects them into the conversation so the agent can read the full forwarded thread
 - **Auto-sethome** — first user to message the bot is automatically set as the home channel owner
 - **Slow-response notification** — sends a waiting message when the agent takes longer than expected
 
@@ -257,7 +258,7 @@ When you ask the bot to create or export a file, it sends the file directly to y
 1. Check gateway logs for error patterns
 2. Increase heartbeat timeout in connection settings
 3. Ensure stable network connection to Yuanbao API
-4. Consider enabling verbose logging: `HERMES_LOG_LEVEL=debug`
+4. Consider enabling verbose logging: `hermes gateway run -vv`
 
 ## Access Control
 
@@ -315,7 +316,7 @@ These values are currently not configurable via environment variables. They are 
 Enable debug logging to troubleshoot connection issues:
 
 ```bash
-HERMES_LOG_LEVEL=debug hermes gateway
+hermes gateway run -vv
 ```
 
 ## Integration with Other Features

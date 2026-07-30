@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tools Runtime"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/tools-runtime"
-source_hash: "2d66f08ff2a1a04ae6ccaa4a3b00c6a8e59ff0625aeb626ac7cd185a6ebc6e0a"
+source_hash: "ff78f903d17d3cf8425b6a31ce6f1216427b2733a0c6fada8430df8558038ef4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/tools-runtime.md"
@@ -53,7 +53,7 @@ registry.register(
 )
 ```
 
-Each call creates a `ToolEntry` stored in the singleton `ToolRegistry._tools` dict keyed by tool name. If a name collision occurs across toolsets, a warning is logged and the later registration wins.
+Each call creates a `ToolEntry` stored in the singleton `ToolRegistry._tools` dict keyed by tool name. A registration that would shadow an existing tool from a **different** toolset is rejected (with an error log) unless the caller passes `override=True`; plugin overrides of built-in tools additionally require the operator opt-in `plugins.entries.<plugin_id>.allow_tool_override: true` in `config.yaml`.
 
 ### Discovery: `discover_builtin_tools()`
 
@@ -226,6 +226,7 @@ The terminal system supports multiple backends:
 - singularity
 - modal
 - daytona
+- vercel_sandbox
 
 It also supports:
 
