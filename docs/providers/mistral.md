@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "5b33206904b3c333e687a6d75c052b635b1fed5d6e7c5df2eadef25308a2859b"
+source_hash: "07b9b5f4cbd9f54f98b1076b394de225e5eb4447e6331fcbfd367b19b1571d39"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
@@ -164,7 +164,7 @@ AccordionGroup
 
 Adjustable reasoning
 
-    `mistral/mistral-small-latest`, `mistral/mistral-small-2603`, and `mistral/mistral-medium-3-5` support [adjustable reasoning](https://docs.mistral.ai/studio-api/conversations/reasoning/adjustable) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer).
+    `mistral/mistral-small-latest`, `mistral/mistral-small-2603`, and `mistral/mistral-medium-3-5` support [adjustable reasoning](https://docs.mistral.ai/studio-api/conversations/reasoning) on the Chat Completions API via `reasoning_effort` (`none` minimizes extra thinking in the output; `high` surfaces full thinking traces before the final answer).
 
     OpenClaw maps the session **thinking** level to Mistral's API:
 

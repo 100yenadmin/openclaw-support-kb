@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "8b793535dea204eac06ce371c877b3c3a493fb5d2611a16530c4b5bfc32d1276"
+source_hash: "c5da9db6375a656f2b0de011000e17ce2d1c76da27e95ec8491d1f002c9dc1ab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/mcp.md"
@@ -687,7 +687,7 @@ probe --json
     }
     ```
 
-    `probe --json` opens a live MCP client session and prints its result directly; unlike `status`/`doctor`, the output has no top-level `path` field. `resources` and `prompts` keys are present only when the server actually advertises that capability (a server without prompts omits the `prompts` key rather than reporting `false`). Use `probe` for reachability and capability proof, not for static config audits.
+    `probe --json` opens a live MCP client session and prints its result directly; unlike `status`/`doctor`, the output has no top-level `path` field. `resources` and `prompts` keys are present only when the server actually advertises that capability (a server without prompts omits the `prompts` key rather than reporting `false`). The command prints the complete result before exiting nonzero when diagnostics are present or a selected enabled server did not connect, so automation can inspect partial successes. Use `probe` for reachability and capability proof, not for static config audits.
 
 
 
@@ -903,6 +903,8 @@ Registry commands do not start the channel bridge. Only `probe` and `doctor --pr
 
 The browser Control UI includes a dedicated MCP settings page at `/settings/mcp`; the previous `/mcp` path remains an alias. The page shows configured server counts, enabled/OAuth/filter summaries, per-server transport rows, enable/disable controls, common CLI commands, and a scoped editor for the `mcp` config section.
 
+For a shorter setup walkthrough covering Settings, the composer path (**+** → **Connectors** → **Add MCP server…**) and its **This session** / **Everywhere** scopes, CLI, and direct config, see [Connect MCP servers](/tools/mcp).
+
 Use the page for operator edits and quick inventory. Use `openclaw mcp doctor --probe` or `openclaw mcp probe` when you need live server proof.
 
 Operator workflow:
@@ -994,6 +996,7 @@ Current limits:
 
 ## Related
 
+- [Connect MCP servers](/tools/mcp)
 - [CLI reference](/cli)
 - [Plugins](/cli/plugins)
 

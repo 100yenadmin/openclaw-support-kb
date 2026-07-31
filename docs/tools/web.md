@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "bd0d9d1d69ddc98f5975bb84be618ac473f418e752c69e68c7b1724ca6734cb9"
+source_hash: "0b7780eca37ae93b1c3d35840aab7008a9c511ee4b5c49fac560bb00ebc77393"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web.md"
@@ -46,6 +46,14 @@ Configure
     This stores the provider and any needed credential. For API-backed
     providers you can instead set the provider's env var (for example
     `BRAVE_API_KEY`) and skip this step.
+
+    You can also configure search by talking to
+    [OpenClaw](/cli/openclaw): say `configure web search` in `openclaw setup`
+    or in the Control UI's **Settings → Ask OpenClaw** chat. The hosted flow
+    owns provider choice and credential entry — API keys are masked in the
+    browser, and the terminal chat hands off to the masked wizard via
+    `open search wizard`.
+
 
 
 Use it

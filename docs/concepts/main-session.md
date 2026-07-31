@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "The main session"
 source: "https://docs.openclaw.ai/concepts/main-session"
-source_hash: "e0f2f1044889bbffb5b0010c3be0bd7184be2a99c7ef3f6d5fb4ac64d699b1e7"
+source_hash: "a4031b3d5612f3c6d57e9fc22dffb4fd0739f5fd3385a5e2945cb32fcf83715b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/main-session.md"
@@ -43,7 +43,8 @@ world converges:
   Activity queues up as compact notices — coalesced per conversation, never
   one wake-up per message — and the agent sees them the next time it runs: on
   your next message or on a scheduled heartbeat. The agent can also read the
-  sessions it watches, so "what did I miss in the family group?" works.
+  sessions it watches — its system prompt names them — so "what did I miss in
+  the family group?" works.
 - **Background work.** Sub-agents and spawned sessions announce their results
   back to the session that started them, so work the agent kicked off from
   Home reports back to Home.

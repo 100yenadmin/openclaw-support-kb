@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "43176dd2b8d0f56b12366e4681f4dbfd3a73adf012b2d33049d04a7317c9ab0a"
+source_hash: "b2e6cb039f5a90501a4aca2e63dbc30a67b0fc6a72053801d600b4de292d0eeb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -156,6 +156,7 @@ export default function register(api) {
       id: "my-engine",
       name: "My Context Engine",
       ownsCompaction: true,
+      acceptedHostParams: ["sessionKey"],
     },
 
     async ingest({ sessionId, message, isHeartbeat }) {
@@ -219,12 +220,20 @@ Then enable it in config:
 
 Required members:
 
-| Member             | Kind     | Purpose                                                  |
-| ------------------ | -------- | -------------------------------------------------------- |
-| `info`             | Property | Engine id, name, version, and whether it owns compaction |
-| `ingest(params)`   | Method   | Store a single message                                   |
-| `assemble(params)` | Method   | Build context for a model run (returns `AssembleResult`) |
-| `compact(params)`  | Method   | Summarize/reduce context                                 |
+| Member             | Kind     | Purpose                                                                            |
+| ------------------ | -------- | ---------------------------------------------------------------------------------- |
+| `info`             | Property | Engine id, name, version, accepted host parameters, and whether it owns compaction |
+| `ingest(params)`   | Method   | Store a single message                                                             |
+| `assemble(params)` | Method   | Build context for a model run (returns `AssembleResult`)                           |
+| `compact(params)`  | Method   | Summarize/reduce context                                                           |
+
+Set `info.acceptedHostParams` to the host-added lifecycle fields the engine
+accepts. Current keys are `sessionKey`, `prompt`, `runtimeSettings`,
+`sessionTarget`, and `runtimeContext`. OpenClaw intersects the declaration with
+the fields available for each lifecycle method, so undeclared or unknown keys
+are never injected. Engines without this declaration receive the pre-host-field
+legacy parameter set through 2026-08-12; after that date, undeclared engines
+receive every current host field.
 
 `assemble` returns an `AssembleResult` with:
 
@@ -293,10 +302,9 @@ rendered directly to users and does not create a dedicated reporting surface.
 - `diagnostics`: closed fallback and degraded reason codes when known
 
 Fields that can be unknown are represented as `null`; discriminator fields such
-as runtime mode and selection source remain non-nullable. Older engines remain
-compatible: if a strict legacy engine rejects `runtimeSettings` as an unknown
-property, OpenClaw retries the lifecycle call without it instead of quarantining
-the engine.
+as runtime mode and selection source remain non-nullable. Engines that accept
+`runtimeSettings` must include it in `info.acceptedHostParams` during the
+compatibility window.
 
 ### Host requirements
 

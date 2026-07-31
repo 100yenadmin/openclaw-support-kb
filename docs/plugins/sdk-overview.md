@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "9a784c3efaa6013ad3e12070e862853ae2e49c537b7d2ddcd69a6596e5b61e8f"
+source_hash: "08d7807b8462309208507558a63023ae9b9ad68bb403f130d11e36689db1fc28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -621,10 +621,10 @@ For an end-to-end authoring guide, see
 
 ### Exclusive slots
 
-| Method                                     | What it registers                                                                                                                                                                                  |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api.registerContextEngine(id, factory)`   | Context engine (one active at a time). Lifecycle callbacks receive `runtimeSettings` when the host can provide model/provider/mode diagnostics; older strict engines are retried without that key. |
-| `api.registerMemoryCapability(capability)` | Unified memory capability                                                                                                                                                                          |
+| Method                                     | What it registers                                                                                                                                                                                                             |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api.registerContextEngine(id, factory)`   | Context engine (one active at a time). Declare accepted host-added lifecycle fields with `info.acceptedHostParams`; undeclared engines receive the legacy field set through 2026-08-12, then receive all current host fields. |
+| `api.registerMemoryCapability(capability)` | Unified memory capability                                                                                                                                                                                                     |
 
 ### Deprecated memory embedding adapters
 

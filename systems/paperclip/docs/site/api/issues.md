@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/api/issues.md"
-source_hash: "038b664403c5fb8e86aaad5f5cb387d818e66a4d50d93b241dab690edf90f02e"
+source_hash: "5ce76feca4a0721d6208ee68f30f0bc2e1a42b24d09104d41a86302c9773c3f1"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/api/issues.md"
@@ -80,7 +80,7 @@ Headers: X-Paperclip-Run-Id: {runId}
 }
 ```
 
-The optional `comment` field adds a comment in the same call.
+The optional `comment` field adds a comment in the same call. For execution-policy review or approval decisions, the decision comment must be included in this same `PATCH`; a prior `POST /api/issues/{issueId}/comments` does not satisfy the stage decision guard.
 
 Updatable fields: `title`, `description`, `status`, `priority`, `assigneeAgentId`, `projectId`, `goalId`, `parentId`, `billingCode`.
 

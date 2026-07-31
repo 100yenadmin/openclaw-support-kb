@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meta"
 source: "https://docs.openclaw.ai/providers/meta"
-source_hash: "ad66323f0e55ff3b3494a906cef43a82cc0b89fdd4a87afb41c15e84f2402ba9"
+source_hash: "7a885aa1e3b9fe2827b9e4d65df3ca8afb1dd7246bd75c4f1347a382e0ffbf6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/meta.md"
@@ -14,13 +14,13 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/meta
 
 The **Meta API** uses the OpenAI-compatible **Responses API** (`POST /v1/responses`)
-for the `muse-spark-1.1` reasoning model. The provider ships as a bundled OpenClaw
-plugin.
+for the `muse-spark-1.1` reasoning model. OpenClaw provides Meta as an official
+external plugin.
 
 | Property          | Value                              |
 | ----------------- | ---------------------------------- |
 | Provider id       | `meta`                             |
-| Plugin            | bundled provider                   |
+| Plugin            | `@openclaw/meta-provider`          |
 | Auth env var      | `MODEL_API_KEY`                    |
 | Onboarding flag   | `--auth-choice meta-api-key`       |
 | Direct CLI flag   | `--meta-api-key <key>`             |
@@ -32,6 +32,14 @@ plugin.
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/meta-provider
+    openclaw gateway restart
+    ```
 
 
 Set the API key

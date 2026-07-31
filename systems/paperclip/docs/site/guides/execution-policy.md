@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Execution Policy: Review & Approval Workflows"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/execution-policy.md"
-source_hash: "92053574db13d3e5cebac8ddb43fe00fb840f0199e88c349b7c7e43fd4dd7fd3"
+source_hash: "7ef5511a084d2beb1103810610ed19100dd0afe36c11b6ea6d2f1ebdd43276d4"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/execution-policy.md"
@@ -191,8 +191,25 @@ This prevents silent completions where an agent finishes work but leaves no trac
 - Only the **active reviewer/approver** (the `currentParticipant` in execution state) can advance or reject the current stage.
 - Non-participants who attempt to transition the issue receive a `422 Unprocessable Entity` error.
 - Both approvals and change requests **require a comment** — empty or whitespace-only comments are rejected.
+- The decision comment must be included in the same `PATCH /api/issues/{issueId}` request that changes the status. A prior `POST /api/issues/{issueId}/comments` entry remains normal discussion and does not satisfy the review/approval decision guard.
 
 ## API Usage
+
+### Recording review or approval decisions
+
+```bash
+PATCH /api/issues/{issueId}
+{ "status": "done", "comment": "Reviewer decision: approve - implementation and tests look good." }
+```
+
+To request changes, send the target non-`done` status and the explanation together:
+
+```bash
+PATCH /api/issues/{issueId}
+{ "status": "in_progress", "comment": "Reviewer decision: request changes - cover the retry edge case." }
+```
+
+Do not split a decision into `POST /comments` followed by a status-only `PATCH`; the runtime only records the decision from the `comment` field on the same status update.
 
 ### Setting an execution policy on issue creation
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "3ca4305d9ab3fcc824f7665cca942af7348a0e98b5a5ce4f061bb58295deb9c7"
+source_hash: "58267977ded7a56a40a71a00dbfc5ec51d40e4979a5bd9c0c9d03a75acb5c50d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -275,6 +275,13 @@ session rows live in
 imported and archived out of the active sessions directory after successful
 import; archive-tier JSONL files remain support artifacts, not runtime
 fallbacks.
+
+The regular `openclaw doctor` pass also reports canonical SQLite transcripts
+whose initial session header was never persisted. `openclaw doctor --fix`
+prepends a current header and rebuilds the transcript indexes in one
+transaction while preserving existing event IDs, parent links, row timestamps,
+and session-list recency. Headerless legacy or malformed transcripts remain
+rejected until their owning migration can validate them.
 
 Modes:
 

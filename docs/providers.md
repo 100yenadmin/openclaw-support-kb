@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "f6c5c86629c5d69fb1a68f070c62bb4bf20a7f2d466fa2040bf1f6e94cba8fd4"
+source_hash: "6a632a0f69e57aee273751fcfe4f22b80821403a1d6211b18a3f7556d5f0a1c3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -94,7 +94,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 
 ## Shared overview pages
 
-- [Additional provider variants](/providers/models#additional-provider-variants) - Anthropic Vertex, Copilot Proxy, and Gemini CLI OAuth
+- [Additional provider variants](/providers/models#additional-provider-variants) - Anthropic Vertex, Copilot Proxy, and the optional Gemini CLI runtime
 - [Image Generation](/tools/image-generation) - Shared `image_generate` tool, provider selection, and failover
 - [Music Generation](/tools/music-generation) - Shared `music_generate` tool, provider selection, and failover
 - [Video Generation](/tools/video-generation) - Shared `video_generate` tool, provider selection, and failover

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synthetic"
 source: "https://docs.openclaw.ai/providers/synthetic"
-source_hash: "403b0af437375655f052982a28241e2ce3a59cf849f37ed56525f17e4326d5a3"
+source_hash: "e8293152fafc2225f1195941ac1440168593ab50a944b183ea94068aee1c7a2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/synthetic.md"
@@ -14,8 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/synthetic
 
 [Synthetic](https://synthetic.new) exposes Anthropic-compatible endpoints.
-OpenClaw bundles it as the `synthetic` provider and uses the Anthropic
-Messages API.
+OpenClaw provides it through the official `@openclaw/synthetic-provider`
+plugin and uses the Anthropic Messages API.
 
 | Property | Value                                 |
 | -------- | ------------------------------------- |
@@ -27,6 +27,14 @@ Messages API.
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/synthetic-provider
+    openclaw gateway restart
+    ```
 
 
 Get an API key

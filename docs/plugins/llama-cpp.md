@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "llama.cpp Provider"
 source: "https://docs.openclaw.ai/plugins/llama-cpp"
-source_hash: "72e93ba5d23324abc4692b32557e82e42b1fb5b1f2f7a5524ee900b0d7e43ec5"
+source_hash: "f5a3a86684112b956325c1fd2df30312fca11adb8c0d943d77f4b0e78f7b1ade"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/llama-cpp.md"
@@ -29,22 +29,23 @@ deleting a manually installed runtime inside the OpenClaw package directory.
 
 ## Local text inference
 
-Choose **Local model (llama.cpp)** during interactive onboarding. OpenClaw asks
-before downloading the default model:
+Choose **llama.cpp** during interactive onboarding. OpenClaw installs the
+official provider plugin, then asks before downloading the default model:
 
-`hf:bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf`
+`hf:unsloth/gemma-4-E4B-it-GGUF/gemma-4-E4B-it-Q4_K_M.gguf`
 
-The Qwen3 4B Instruct 2507 Q4_K_M file is about 2.5 GB. Budget roughly 3 GB of
-RAM for model weights, plus context and OpenClaw runtime overhead. The default
-context is automatically sized with an 8,192-token cap so it remains practical
-on 8 GB machines. Configure a larger context only when the machine has enough
+The Gemma 4 E4B IT Q4_K_M file is about 5.0 GB. OpenClaw offers this default
+only on machines with at least 16 GiB of RAM, leaving room for model weights,
+context, and Gateway overhead. The default context is automatically sized with
+an 8,192-token cap. Configure a larger context only when the machine has enough
 memory.
 
 The onboarding discovery check is read-only. It offers llama.cpp automatically
 only when the default or configured GGUF file is already in the model cache; it
 never downloads during discovery. Ollama and LM Studio remain separate local
 service choices and keep their own discovery flows. Manually choosing llama.cpp
-is the path that prompts for the default model download.
+is the path that installs the runtime, prompts for the default model download,
+and verifies a real model reply before marking setup complete.
 
 The provider uses the GGUF model's embedded chat template and native
 node-llama-cpp function calling. Text streams token by token. Tool calls return

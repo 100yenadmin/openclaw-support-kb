@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "6f1e410f2250b5cc967030ccc644f7c3457ffdeb881325665922ddb43c5fcda0"
+source_hash: "487c935574f49573cfed7fc8ea3bc5cb1b695acd8f28ab7dc154a92f09aa4e14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -453,8 +453,7 @@ Docker feels limited - how do I enable full features?
 
     - Persist `/home/node` with `OPENCLAW_HOME_VOLUME` so caches survive.
     - Bake system deps into the image with `OPENCLAW_IMAGE_APT_PACKAGES`.
-    - Install Playwright browsers via the bundled CLI: `node /app/node_modules/playwright-core/cli.js install chromium`.
-    - Set `PLAYWRIGHT_BROWSERS_PATH` and persist that path.
+    - Bake Playwright Chromium and its system dependencies into the image with `OPENCLAW_INSTALL_BROWSER=1`.
 
     Docs: [Docker](/install/docker), [Browser](/tools/browser).
 

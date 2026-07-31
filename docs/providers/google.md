@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "759a1e0afe5fe302160770c308ca3a1a0bf8465c6e87942c2ddba8ceb45dd0e2"
+source_hash: "00d21162647d08e4a1e10394631842fd9917b5bfaa509a0cb150cd29da753c55"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -18,18 +18,20 @@ The Google plugin provides access to Gemini models through Google AI Studio, plu
 - Provider: `google`
 - Auth: `GEMINI_API_KEY` or `GOOGLE_API_KEY`
 - API: Google Gemini API
-- Runtime option: `agentRuntime.id: "google-gemini-cli"` reuses Gemini CLI OAuth while keeping model refs canonical as `google/*`.
+- Managed-cloud provider: `google-vertex` with Google Cloud Application Default Credentials
+- Optional runtime: `agentRuntime.id: "google-gemini-cli"` runs an explicitly configured model through the local Gemini CLI
 
 ## Getting started
 
-Choose your preferred auth method and follow the setup steps.
+For most installations, use a Google AI Studio API key. Use `google-vertex` when
+the Gateway already runs inside a managed Google Cloud environment.
 
 Tabs
 
 
-API key
+AI Studio API key
 
-    **Best for:** standard Gemini API access through Google AI Studio.
+    **Recommended for:** standard Gemini API access.
 
 
 Steps
@@ -93,22 +95,29 @@ Tip
 
 
 
-Gemini CLI (OAuth)
+Gemini CLI runtime
 
-    **Best for:** signing in with your Google account through Gemini CLI OAuth instead of using a separate API key.
+    **Advanced use only:** run a canonical `google/*` model through an installed
+    Gemini CLI while keeping authentication on the supported AI Studio API-key
+    path.
 
-
-Warning
-
-    The `google-gemini-cli` provider is an unofficial integration. Some users
-    report account restrictions when using OAuth this way. Use at your own risk.
-
+    OpenClaw does not offer new Gemini CLI OAuth or Antigravity OAuth setup.
+    [Google ended consumer Gemini CLI Login with Google access on June 18, 2026](https://developers.google.com/gemini-code-assist/docs/deprecations/code-assist-individuals),
+    and the [Antigravity terms](https://antigravity.google/terms) prohibit
+    third-party tools from accessing the service through Antigravity OAuth. Use
+    an AI Studio API key or Vertex AI instead.
 
 
 Steps
 
 
-Install the Gemini CLI
+Configure Google AI Studio
+
+        Complete the API-key setup in the first tab. OpenClaw must have a usable
+        `google` API-key profile before the CLI runtime can be selected.
+
+
+Install Gemini CLI
 
         The local `gemini` command must be available on `PATH`.
 
@@ -124,53 +133,38 @@ Install the Gemini CLI
         common Windows/npm layouts.
 
 
-Log in via OAuth
+Select the CLI runtime
 
-        ```bash
-        openclaw models auth login --provider google-gemini-cli --set-default
+        Keep the canonical Google model ref and opt that model into the CLI
+        runtime:
+
+        ```json5
+        {
+          agents: {
+            defaults: {
+              model: { primary: "google/gemini-3.1-pro-preview" },
+              models: {
+                "google/gemini-3.1-pro-preview": {
+                  agentRuntime: { id: "google-gemini-cli" },
+                },
+              },
+            },
+          },
+        }
         ```
 
 
-Verify the model is available
 
-        ```bash
-        openclaw models list --provider google
-        ```
-
-
-
-    - Default model: `google/gemini-3.1-pro-preview`
     - Runtime: `google-gemini-cli`
-    - Alias: `gemini-cli`
+    - Auth: selected Google AI Studio API-key profile
+    - Model refs: canonical `google/*`
 
-    Gemini 3.1 Pro's Gemini API model id is `gemini-3.1-pro-preview`. OpenClaw accepts the shorter `google/gemini-3.1-pro` as a convenience alias and normalizes it before provider calls.
+    Existing valid Gemini CLI OAuth profiles remain executable for compatibility,
+    but OpenClaw cannot create or repair them. If one breaks, replace it with a
+    Google AI Studio API-key profile.
 
-    **Environment variables:**
-
-    - `OPENCLAW_GEMINI_OAUTH_CLIENT_ID` / `GEMINI_CLI_OAUTH_CLIENT_ID`
-    - `OPENCLAW_GEMINI_OAUTH_CLIENT_SECRET` / `GEMINI_CLI_OAUTH_CLIENT_SECRET`
-
-
-Note
-
-    If Gemini CLI OAuth requests fail after login, set `GOOGLE_CLOUD_PROJECT` or
-    `GOOGLE_CLOUD_PROJECT_ID` on the gateway host and retry.
-
-
-
-Note
-
-    If login fails before the browser flow starts, make sure the local `gemini`
-    command is installed and on `PATH`.
-
-
-    Onboarding auto-detection lists an existing Gemini CLI login but never
-    auto-tests it because Gemini CLI has no tool-free probe. Choose Gemini CLI
-    OAuth or a Gemini API key to continue.
-
-    `google-gemini-cli/*` model refs are legacy compatibility aliases. New
-    configs should use `google/*` model refs plus the `google-gemini-cli`
-    runtime when they want local Gemini CLI execution.
+    `google-gemini-cli/*` refs remain legacy compatibility aliases. New configs
+    should use `google/*` model refs plus the explicit runtime selection above.
 
 
 
@@ -467,6 +461,8 @@ The smoke also covers OpenAI backend/WebRTC paths; the Google leg mints the same
 constrained Live API token shape used by Control UI Talk, opens the browser
 WebSocket endpoint, sends the initial setup payload plus a JPEG frame, and
 verifies a text response and `describe_view` function roundtrip.
+The OpenAI path also performs a synthesized PCM24 speech-to-response audio
+roundtrip; pass `--openai-audio-cycles 3` for a short repeated lifecycle soak.
 
 ## Advanced configuration
 
@@ -508,10 +504,9 @@ Direct Gemini cache reuse
 
 Gemini CLI usage notes
 
-    When using the `google-gemini-cli` OAuth provider, OpenClaw uses Gemini
-    CLI `stream-json` output by default and normalizes usage from the final
-    `stats` payload. Legacy `--output-format json` overrides still use the
-    JSON parser.
+    The optional `google-gemini-cli` runtime uses Gemini CLI `stream-json`
+    output by default and normalizes usage from the final `stats` payload.
+    Legacy `--output-format json` overrides still use the JSON parser.
 
     - Streamed reply text comes from assistant `message` events.
     - For legacy JSON output, reply text comes from the CLI JSON `response` field.

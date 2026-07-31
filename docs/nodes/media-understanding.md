@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media understanding"
 source: "https://docs.openclaw.ai/nodes/media-understanding"
-source_hash: "ebdd8dfdd0554f66a1f8eb99f4c00fa8a3f3731f9a59427c1cac8dc9b9397897"
+source_hash: "b107b7c637fd6c162eb8f48fe2331e67eef2ecaf5c85c0d09fb2dde59c33da78"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-understanding.md"
@@ -208,11 +208,6 @@ Provider auth (image/video)
     - Image: Anthropic/OpenAI &rarr; Google &rarr; MiniMax &rarr; Deepinfra &rarr; MiniMax Portal &rarr; Z.AI
     - Video: Google &rarr; Qwen &rarr; Moonshot
 
-
-
-Antigravity CLI (image/video only)
-
-    First installed `agy` or `antigravity` binary (override with `OPENCLAW_ANTIGRAVITY_CLI`), sandboxed against the media's directory.
 
 
 To disable auto-detection for a capability:

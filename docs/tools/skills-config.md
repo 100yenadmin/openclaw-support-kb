@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "72ee5ed10545a44a5e04f8998b66c4553f05d358a2f2983c35c122b49243dee7"
+source_hash: "e2f989a7c925a45ad4cc463e589b338b85514b15e3df4dc5cca0af5bb6d54790"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -32,7 +32,7 @@ Most skills configuration lives under `skills` in
       allowUploadedArchives: false,
     },
     workshop: {
-      autonomous: { enabled: false },
+      autonomous: { mode: "auto" },
       allowSymlinkTargetWrites: false,
       approvalPolicy: "auto",
       maxPending: 50,
@@ -343,10 +343,11 @@ Warning
 
 ParamField
 
-  When `true`, OpenClaw can create pending proposals from durable corrections
-  and can review successful, substantial completed work after the system becomes
-  idle. This can add a background model run after eligible turns. User-prompted
-  skill creation and `/learn` continue to work when the setting is `false`.
+  `off` disables autonomous capture while keeping the durable-instruction
+  suggestion nudge. `propose` creates pending proposals from corrections and
+  substantial completed work. `auto` sends the same captures through the normal
+  scanner-gated Workshop apply path. User-prompted skill creation, `/learn`, and
+  manual history scan continue to work in every mode.
 
 See [Self-learning](/tools/self-learning) for eligibility, privacy, cost,
 proposal-only permissions, and troubleshooting.

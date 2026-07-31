@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo"
 source: "https://docs.openclaw.ai/channels/zalo"
-source_hash: "288e3898796d2aa2c0d258dba27a4ae081f6a886fb2cf8729eeb95f719aa310b"
+source_hash: "7f4c9fb55dc4e5b0cb4c47543bda038023b42d4ed979cb451060d083aff4821d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/zalo.md"
@@ -107,7 +107,7 @@ Group chats are supported by the plugin (`chatTypes: ["direct", "group"]`) and g
   - Zalo sends events with an `X-Bot-Api-Secret-Token` header, checked with a constant-time comparison.
   - Gateway HTTP handles webhook requests at `channels.zalo.webhookPath` (defaults to the webhook URL's path).
   - Requests must use `Content-Type: application/json` (or a `+json` media type).
-  - HTTP 200 is returned only after the raw event is durably stored; storage failures return HTTP 500.
+  - HTTP 200 is returned only after the raw event is durably stored; storage failures return HTTP 500. The durable `200` carries `x-openclaw-delivery-accepted: durable`, so reverse proxies can require it to distinguish OpenClaw acceptance from a generic `200` (authentication, validation, and storage-error responses omit it).
   - getUpdates polling and webhook are mutually exclusive per Zalo API docs.
 
 ## Supported message types

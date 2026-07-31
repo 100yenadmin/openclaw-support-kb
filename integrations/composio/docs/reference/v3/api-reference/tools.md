@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/v3/api-reference/tools.md"
-source_hash: "6747733d591202bb363c1ed318af7602e4639fc5aa2e01851b9f0910a249d2b9"
+source_hash: "cc2f5ec33ffc07a41e861e553a90d1e6f02cb9d5ce86cb59553a51e4d325299d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/tools.md"
@@ -60,11 +60,5 @@ console.log(status, data);
 Proxy execute is a form of [direct tool execution](/docs/sessions-vs-direct-execution): it bypasses session state, tool schemas, and modifiers. If you are building an agent, prefer [sessions](/docs/configuring-sessions), and use the proxy only for the specific API call that is not available as a tool. The full request and response schema lives in the [`POST /api/v3.1/tools/execute/proxy`](/reference/api-reference/tools/postToolsExecuteProxy) reference.
 
 # Endpoints [#endpoints]
-
----
-
-
-# Toolkits
-
 
 ---

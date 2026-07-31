@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams meetings plugin"
 source: "https://docs.openclaw.ai/plugins/reference/teams-meetings"
-source_hash: "5625d2e6aa5874012564a75d431bffae2ea363a7bcbc16af96e872526b56577b"
+source_hash: "b4465bf73fc472255dcf5685797ca76c373b6b6bca4d23146b021782882606e8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/teams-meetings.md"
@@ -20,7 +20,7 @@ Join Microsoft Teams meetings as a Chrome browser guest.
 ## Distribution
 
 - Package: `@openclaw/teams-meetings`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/teams-meetings`
 
 ## Surface
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QR"
 source: "https://docs.openclaw.ai/cli/qr"
-source_hash: "3e285270727e19bfda5e66bfecf2e61e2b39853102ddaac1288173ee605263c2"
+source_hash: "b218c1e23788206b98fafd5ada3d8a94cd7adacfd7d74466f3eb603005d6fd82"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/qr.md"
@@ -23,6 +23,7 @@ openclaw qr --setup-code-only
 openclaw qr --json
 openclaw qr --remote
 openclaw qr --limited
+openclaw qr --voice-node
 openclaw qr --url wss://gateway.example/ws
 ```
 
@@ -43,11 +44,12 @@ openclaw devices approve <requestId>
 - `--token <token>`: override the gateway token the bootstrap flow authenticates against
 - `--password <password>`: override the gateway password the bootstrap flow authenticates against
 - `--limited`: omit administrative Gateway access from the handed-off operator token
+- `--voice-node`: issue node credentials plus only `operator.read` and `operator.talk`
 - `--setup-code-only`: print only the setup code
 - `--no-ascii`: skip ASCII QR rendering
 - `--json`: emit JSON (`setupCode`, `gatewayUrl`, optional `gatewayUrls`, `auth`, `access`, optional `accessDowngraded`, `urlSource`)
 
-`--token` and `--password` are mutually exclusive.
+`--token` and `--password` are mutually exclusive. `--limited` and `--voice-node` are mutually exclusive.
 
 ## Setup code contents
 
@@ -57,6 +59,8 @@ The setup code carries an opaque, short-lived `bootstrapToken`, not the shared g
 - a full native-mobile `operator` handoff token with `operator.admin`, `operator.approvals`, `operator.read`, `operator.talk.secrets`, and `operator.write`
 
 Use `--limited` to keep the same node token while omitting `operator.admin` from the operator handoff. Pairing-mutation scope is never handed off by a setup code.
+
+Use `--voice-node` for an embedded or room voice client. It keeps the node token and hands off a separate operator token limited to `operator.read` and `operator.talk`; it cannot send messages, mutate configuration, or invoke general write-scoped Gateway methods.
 
 Plaintext LAN `ws://` setup remains available, but OpenClaw automatically uses
 the limited profile because a network observer could capture and race the bearer

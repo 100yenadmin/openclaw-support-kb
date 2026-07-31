@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
-source_hash: "fb1b5b5b7ebdf15d2ae53abd08e94a811414f94b6b244d24553b6ffbaea4d9b9"
+source_hash: "90861565a7d55d51321a5c196c416ecaee6a06d050d9def0aa1825c1ef0d8a0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/agents.default.md"
@@ -74,11 +74,12 @@ Before proposing or building a custom system, feature, workflow, tool, integrati
 ## Memory system (recommended)
 
 - Daily log: `memory/YYYY-MM-DD.md` (create `memory/` if needed).
-- Long-term memory: `MEMORY.md` for durable facts, preferences, and decisions.
+- User model: `USER.md` for dated active or superseded directives about stable preferences and profile facts.
+- Long-term memory: `MEMORY.md` for durable non-profile facts and decisions.
 - Lowercase `memory.md` is legacy repair input only; do not keep both root files on purpose.
 - On session start, read today + yesterday + `MEMORY.md` when present.
 - Before writing memory files, read them first; write only concrete updates, never empty placeholders.
-- Capture: decisions, preferences, constraints, open loops.
+- Capture preferences as directives in `USER.md`; capture decisions, constraints, and open loops in durable or daily memory as appropriate.
 - Avoid secrets unless explicitly requested.
 
 ## Tools

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "c4b615f11c6cff076a4d228a8e61e1d75922043cee9a5b5ad0fce9ef0498160d"
+source_hash: "d83c08d8f3027d7dc0435c2484f2413eb1d82bed7d3e79aef311c8b0a7326c4c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -179,9 +179,11 @@ runs.
 `openclaw plugins update --all` is the bulk maintenance path. It still
 respects ordinary tracked install specs, but trusted official OpenClaw
 plugin records sync to the current official catalog target instead of
-staying pinned to a stale exact official package; when `update.channel` is
-`beta`, that sync prefers the beta release line. Use a targeted
-`update <plugin-id>` to keep an exact or tagged official spec untouched.
+staying pinned to a stale exact official package. The canonical channel
+resolver uses both `update.channel` and the installed core version, so an
+installed beta core with no configured channel keeps official plugins on the
+beta release line. Use a targeted `update <plugin-id>` to keep an exact or
+tagged official spec untouched.
 
 For npm installs, pass an explicit package spec to switch the tracked
 record:

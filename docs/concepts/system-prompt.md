@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "2b3dcf91005bf414e1e9b190f77fff4e8b6ae4948aff4d03d24d590cd2adba92"
+source_hash: "dd1cdb57071089a8aba6a7096e521699f7a4859e18314245861217bd87061864"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -48,7 +48,7 @@ The prompt is compact, with fixed sections:
 - **Documentation**: local docs/source path and when to read them.
 - **Workspace Files (injected)**: notes that bootstrap files are included below.
 - **Sandbox** (when enabled): sandboxed runtime, sandbox paths, elevated-exec availability.
-- **Current Date & Time**: time zone only (cache-stable; the live clock comes from `session_status`).
+- **Temporal Context**: local date and time zone below the cache boundary; exact time comes from `session_status` when available.
 - **Assistant Output Directives**: compact attachment, voice-note, and reply-tag syntax.
 - **Collapsible Details** (when supported): teaches the model to keep optional depth in `<details>` disclosures while leaving the primary answer and required actions visible.
 - **Heartbeats**: heartbeat prompt and ack behavior, when heartbeats are enabled for the default agent.
@@ -139,14 +139,13 @@ To inspect how much each injected file contributes (raw vs injected, truncation,
 
 ## Time handling
 
-The **Current Date & Time** section appears only when the user timezone is known, and only includes the **time zone** (no dynamic clock or time format) to keep the prompt cache-stable.
+The **Temporal Context** section includes the user-local calendar date and time zone. It appears below the cache boundary, so day rollover or a timezone change does not invalidate the stable prefix.
 
-Use `session_status` when the agent needs the current time; its status card includes a timestamp line. The same tool can optionally set a per-session model override (`model=default` clears it).
+Use `session_status` when the agent needs the exact current time and the tool is available; its status card includes a timestamp line. The same tool can optionally set a per-session model override (`model=default` clears it).
 
 Configure with:
 
 - `agents.defaults.userTimezone`
-- `agents.defaults.timeFormat` (`auto` | `12` | `24`)
 
 See [Timezones](/concepts/timezone) and [Date & Time](/date-time) for full behavior details.
 

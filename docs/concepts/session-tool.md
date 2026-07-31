@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session tools"
 source: "https://docs.openclaw.ai/concepts/session-tool"
-source_hash: "805b22136a5f6c23acf24ae2011b4878b251139243dc6289a566faf1639f9123"
+source_hash: "f56764a9cfaf471d27e1cc5e3157e956f843f956f07a27a4ddc14bf085601fca"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session-tool.md"
@@ -155,7 +155,9 @@ Session tools are scoped to limit what the agent can see:
 
 Default is `tree`. Sandboxed sessions are clamped to `tree` regardless of config.
 With the default `session.dmScope: "main"`, group activity makes watched
-same-agent group sessions readable from the main session.
+same-agent group sessions readable from the main session, and the main
+session's system prompt lists those watched sessions so the agent knows it can
+read them.
 
 ## Further reading
 

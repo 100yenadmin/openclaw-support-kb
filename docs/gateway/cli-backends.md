@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI backends"
 source: "https://docs.openclaw.ai/gateway/cli-backends"
-source_hash: "5b301ce6d388cea8fb3242d2b661180d7c06d871e7f4859ab1d421983069e0bb"
+source_hash: "49b0ff8a91b67d2494795617130079d2602b79ff4b6270e9c91c1904f3d090dd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/cli-backends.md"
@@ -237,7 +237,11 @@ The bundled Google plugin registers for `google-gemini-cli`:
 | `sessionMode`             | `existing`                                                                             |
 | `sessionIdFields`         | `["session_id", "sessionId"]`                                                          |
 
-Prerequisite: the local Gemini CLI must be installed and on `PATH` as `gemini` (`brew install gemini-cli` or `npm install -g @google/gemini-cli`).
+Prerequisites: the local Gemini CLI must be installed and on `PATH` as `gemini`
+(`brew install gemini-cli` or `npm install -g @google/gemini-cli`), and the
+selected model must have a supported Google AI Studio API-key profile. Existing
+valid legacy Gemini CLI OAuth profiles remain runtime-compatible, but OpenClaw
+does not create or repair them.
 
 Gemini CLI output notes:
 

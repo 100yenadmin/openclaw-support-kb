@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "7cb49d0222a8bd78e57248cffa2634aaf50364141b3823d0b449d363565e9ee1"
+source_hash: "4fc19e8600a7d05e4f604cf518f4c2ea42c01e07190abdb6871516d4470d69db"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -83,7 +83,7 @@ ParamField
 
 ParamField
 
-  Codex only. Forces a fresh source Codex app-server `app/list` traversal before planning native plugin activation. Off by default to keep migration planning fast.
+  Codex only. Forces a fresh source Codex app-server `app/installed` snapshot read before planning native plugin activation. Off by default to keep migration planning fast.
 
 ParamField
 " type="string">
@@ -178,13 +178,13 @@ openclaw migrate apply codex --yes --plugin google-calendar
   recall. Raw rollout memory is not imported.
 - Codex CLI skill directories under `$CODEX_HOME/skills`, excluding Codex's `.system` cache.
 - Personal AgentSkills under `$HOME/.agents/skills`, copied into the current OpenClaw agent workspace for per-agent ownership.
-- Source-installed `openai-curated` Codex plugins discovered through Codex app-server `plugin/list`. Planning reads `plugin/read` for each enabled installed plugin.
+- Source-installed `openai-curated` Codex plugins discovered through Codex app-server `plugin/installed`. Planning reads `plugin/read` for each enabled installed plugin.
 
 App-backed plugin migration has extra gates:
 
 - App-backed plugins require the source Codex app-server account to be a ChatGPT subscription account. Non-ChatGPT or missing account responses are skipped with `codex_subscription_required`.
-- By default, migration does not call source `app/list`, so app-backed plugins that pass the account gate are planned without source app-accessibility verification, and account-lookup transport failures skip with `codex_account_unavailable`.
-- Pass `--verify-plugin-apps` to force a fresh source `app/list` snapshot and require every owned app to be present, enabled, and accessible before planning native activation. In that mode, account-lookup transport failures fall through to source app-inventory verification. The snapshot is kept in memory for the current process only; it is never written to migration output or target config.
+- By default, migration does not read the source app inventory, so app-backed plugins that pass the account gate are planned without source app-accessibility verification, and account-lookup transport failures skip with `codex_account_unavailable`.
+- Pass `--verify-plugin-apps` to force a fresh source `app/installed` snapshot (with authorized metadata from batched `app/read`) and require every owned app to be present, enabled, and accessible before planning native activation. In that mode, account-lookup transport failures fall through to source app-inventory verification. The snapshot is kept in memory for the current process only; it is never written to migration output or target config.
 
 Disabled plugins, unreadable plugin details, subscription-gated source accounts, and (when `--verify-plugin-apps` is set) missing, disabled, or inaccessible apps become manual skipped items with typed reasons instead of target config entries. Apply calls app-server `plugin/install` for each selected eligible plugin, even if the target app-server already reports that plugin as installed and enabled. Migrated Codex plugins are usable only in sessions that select the native Codex harness; they are not exposed to OpenClaw provider runs, ACP conversation bindings, or other harnesses.
 

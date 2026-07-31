@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "f72807f5e068fba50bdc0652b22b9898bddde26275bc4f4dd36358c2e4d1cdfb"
+source_hash: "993bddfa3bff1d54b1cbf4e70597b2dab83d602879abfc372038bcbc69febdae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -32,8 +32,8 @@ OpenClaw package.
 
 ## Manual recovery
 
-Node 24.15+ is recommended for a manual install; Node 22.22.3+ also works. Install
-`openclaw` globally:
+For a manual install, use Node 26 (recommended) or another supported release:
+Node 22.22.3+, Node 24.15+, or Node 25.9+. Install `openclaw` globally:
 
 ```bash
 npm install -g openclaw@<version>

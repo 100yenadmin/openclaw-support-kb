@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "dcced4ac6de5a349ec750ec7c28e4b2cb240a4cf81e90fb7c29bf9435ea0605e"
+source_hash: "b6e1b69a880eb2ebeccbf8b32902dc9434ddeebdf288033972a2cf07adcde6fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -22,6 +22,8 @@ started.
 - **Keyword search** via FTS5 full-text indexing (BM25 scoring).
 - **Vector search** via embeddings from any supported provider.
 - **Hybrid search** that combines both for best results.
+- **Deterministic ranking** by relevance, recency, and write-time importance.
+- **Trusted trigger recall** for bounded pre-reply context without a recall model.
 - **CJK support** via trigram tokenization for Chinese, Japanese, and Korean.
 - **sqlite-vec acceleration** for in-database vector queries (optional).
 
@@ -86,8 +88,19 @@ Set `memory.search.provider` to switch away from OpenAI.
 
 ## How indexing works
 
-OpenClaw indexes `MEMORY.md` and `memory/*.md` into chunks (400 tokens with
-80-token overlap by default) and stores them in a per-agent SQLite database.
+OpenClaw indexes `MEMORY.md`, an existing root `USER.md`, and `memory/*.md` into
+chunks (400 tokens with 80-token overlap by default) and stores them in a
+per-agent SQLite database. OpenClaw does not create `USER.md` automatically.
+
+Each chunk can carry nullable importance and trigger metadata. Null values are
+neutral, so older indexes remain usable. Search combines hybrid relevance,
+recency decay, and importance; trigger recall only injects curated or
+promoted-trusted entries.
+
+Each indexed chunk also has SQLite-owned provenance: origin class (`owner`,
+`agent`, `untrusted`, or `system`), session kind, observation time, and an
+optional supersession key. This metadata is stored separately from Markdown
+so recalled prose cannot rewrite its own trust classification.
 
 - **Index location:** the owning agent database at
   `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite`

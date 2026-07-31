@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "749b6a021a9ea42605f1c0e96948d3c5602e0b3abce051dd8a57526086a361cf"
+source_hash: "7a52c0c02fc843f5558228c9ef3a95687f643b03b8e58304d542b5e2bdd123ba"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -267,6 +267,38 @@ api.runtime.llm
     });
     ```
 
+    `maxTokens` and `temperature` are advisory sampling hints. The selected
+    provider, CLI, or harness applies them when its transport exposes an
+    equivalent control and otherwise may ignore them. They do not weaken the
+    execution mode's isolation guarantees.
+
+    To require the configured agent runtime and a literal zero-tool model
+    surface, select isolated execution explicitly:
+
+    ```typescript
+    const result = await api.runtime.llm.complete({
+      messages: [{ role: "user", content: "Return one JSON value." }],
+      systemPrompt: "You are a JSON-only function.",
+      model: "openai/gpt-5.6-sol",
+      execution: {
+        mode: "isolated-agent-runtime",
+        authProfileId: "openai:work",
+        timeoutMs: 30_000,
+      },
+    });
+    ```
+
+    This mode accepts exactly one user message. Core derives the configured CLI
+    or harness owner, starts a fresh context, exposes no model-callable tools,
+    and never falls back to direct provider transport. Unsupported runtimes fail
+    before inference. `result.execution.owner` reports the selected owner;
+    token usage remains absent when a CLI cannot report it.
+
+    Completion failures expose a stable `code` on the thrown error. Isolated
+    callers can distinguish authorization, invalid isolated input, unsupported
+    or unavailable runtimes, aborts, timeouts, rejected output, and other
+    completion failures without matching message text.
+
     Provider orchestration can also acquire the configured local-service
     lifecycle before issuing an HTTP request:
 
@@ -315,7 +347,7 @@ api.runtime.llm
 
 Warning
 
-    Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. Use `plugins.entries.<id>.llm.allowedModels` to restrict trusted plugins to specific canonical `provider/model` targets. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
+    Model overrides require operator opt-in via `plugins.entries.<id>.llm.allowModelOverride: true` in config. `plugins.entries.<id>.llm.allowedModels` restricts those overrides; `plugins.entries.<id>.llm.allowedCompletionModels` separately restricts every completion, including host-resolved defaults. For direct completions, a `model@profile` override remains part of the authorized model override. Isolated `model@profile` overrides and `execution.authProfileId` require `plugins.entries.<id>.llm.allowAuthProfileOverride: true`. Cross-agent completions require `plugins.entries.<id>.llm.allowAgentIdOverride: true`.
 
 
 
@@ -356,6 +388,7 @@ api.runtime.subagent
       provider: "openai", // optional override
       model: "gpt-5.6-sol", // optional override
       deliver: false,
+      completionDelivery: "current-requester", // optional, before_dispatch hooks only
     });
 
     // Wait for completion
@@ -380,6 +413,8 @@ Warning
 
 
     `toolsAlsoAllow` adds exact, uniquely owned tools registered by the calling plugin to the worker's normal tool surface. The runtime rejects core tools and names shared with another plugin. Profiles and operator tool policies still apply, including explicit allowlists and denies.
+
+    `completionDelivery: "current-requester"` is default-off and is only available while a `before_dispatch` hook is handling an authenticated inbound request. OpenClaw captures the canonical requester session and delivery route before invoking the plugin, then delivers the subagent completion through the normal announce path. Plugins cannot provide or override requester lineage or destination fields. Calls outside that requester-bound hook context are rejected.
 
     `deleteSession(...)` can delete sessions created by the same plugin through `api.runtime.subagent.run(...)`. Deleting arbitrary user or operator sessions still requires an admin-scoped Gateway request.
 
@@ -425,6 +460,7 @@ api.runtime.nodes
     List connected nodes and invoke a node-host command from Gateway-loaded plugin code or from plugin CLI commands. Use this when a plugin owns local work on a paired device, for example a browser or audio bridge on another Mac.
 
     ```typescript
+    const controller = new AbortController();
     const { nodes } = await api.runtime.nodes.list({ connected: true });
 
     const result = await api.runtime.nodes.invoke({
@@ -432,8 +468,15 @@ api.runtime.nodes
       command: "my-plugin.command",
       params: { action: "start" },
       timeoutMs: 30000,
+      signal: controller.signal,
     });
     ```
+
+    Pass the agent tool or request `AbortSignal` as `signal` when the caller can
+    be canceled. Gateway-loaded calls forward cancellation to the paired node;
+    node-host command handlers receive it as `context.signal` so they can stop
+    in-flight requests and release local resources. Existing calls that omit the
+    signal retain their previous behavior.
 
     `nodes.list(...)` includes each connected node's advertised
     `nodePluginTools` descriptors when that node exposes plugin or MCP-backed

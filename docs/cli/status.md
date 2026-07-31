@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "8847121053b0174c32cacf479d8705b430c45ecaa03634c46b8e3b83f5d1c7f9"
+source_hash: "7f97cc3f08b35ee09ae2cc088214c23b511868752a2ce1c58243b482cc53e3be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -28,6 +28,7 @@ openclaw status --usage
 | `--deep`                | Runs live probes (WhatsApp Web + Telegram + Discord + Slack + Signal). Also enables the security audit.         |
 | `--usage`               | Prints normalized provider usage windows as `X% left`.                                                          |
 | `--json`                | Machine-readable output.                                                                                        |
+| `--timeout <ms>`        | Probe timeout in milliseconds (default: `10000`).                                                               |
 | `--verbose` / `--debug` | Also print the raw Gateway target resolution before the report.                                                 |
 
 Plain `openclaw status` stays on the fast read-only path and marks memory as

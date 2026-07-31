@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "8c7b388a3eda158c3c10c0f95e10fa039e9658142f05bc6a9dc6787969562328"
+source_hash: "9c44268a7e48764290e479d2cce15a17d70a572d01ebac8c15ff737ee05ff0a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -496,6 +496,10 @@ ParamField
 " type="string">
   `user@host` or `user@host:port` (port defaults to `22`).
 
+OpenClaw launches only an SSH client found in OS-managed system directories. On native Windows,
+install the **OpenSSH Client** optional feature; Windows places it under
+`%SystemRoot%\System32\OpenSSH`.
+
 ParamField
 " type="string">
   Identity file.
@@ -603,6 +607,7 @@ Command options
 Lifecycle behavior
 
     - `gateway start` is idempotent: when the managed service is already running, it reports the running process and leaves it untouched. A loaded but stopped service is started as before.
+    - If `gateway start` or `gateway restart` needs to repair a stale service definition, the command refuses when the invoking shell resolves a different state directory, config path, or port than the installed service. Match or unset the conflicting environment overrides, or use `openclaw gateway install --force` to retarget the service intentionally.
     - Use `gateway restart` to restart a managed service. Do not chain `gateway stop` and `gateway start` as a restart substitute.
     - In a non-interactive shell, `gateway stop` requires `--force`. Interactive terminals keep the existing prompt-free behavior. For automation and tests, prefer `gateway run --dev` or an isolated `--profile` with a free port.
     - On macOS, `gateway stop` uses `launchctl bootout` by default, which removes the LaunchAgent from the current boot session without persisting a disable — KeepAlive auto-recovery stays active for future crashes and `gateway start` re-enables cleanly without a manual `launchctl enable`. Pass `--disable` to persistently suppress KeepAlive and RunAtLoad so the gateway does not respawn until the next explicit `gateway start`; use this when a manual stop should survive reboots.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
-source_hash: "1261b9a5e0d0b63e32c99c3dd42345c46897dcc90c6ade2c48f9fb41bfcb4bea"
+source_hash: "8e1010ece822239ffc7d882e2ab089cb7dde0736a3e2181db04c5b2a61cf94b3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/digitalocean.md"
@@ -58,8 +58,8 @@ Connect and install
 
     apt update && apt upgrade -y
 
-    # Install Node.js 24
-    curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
+    # Install Node.js 26
+    curl -fsSL https://deb.nodesource.com/setup_26.x | bash -
     apt install -y nodejs
 
     # Install OpenClaw

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "c2f7b6ab66a0ddec9d43429939403d31c9b20d3dad5ddcced6723f2ce2bb4795"
+source_hash: "59c297ebea3563d4eb13facba2456f621a9079a016f0c1f05bdb9689fc6fb803"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-live.md"
@@ -226,7 +226,7 @@ Notes:
 - It resolves CLI smoke metadata from the owning plugin, then installs the matching Linux CLI package (`@anthropic-ai/claude-code` or `@google/gemini-cli`) into a cached writable prefix at `OPENCLAW_DOCKER_CLI_TOOLS_DIR` (default: `~/.cache/openclaw/docker-cli-tools`).
 - `codex-cli` is no longer a bundled CLI backend; use `openai/*` with the Codex app-server runtime instead (see [Live: Codex app-server harness smoke](#live-codex-app-server-harness-smoke)).
 - `pnpm test:docker:live-cli-backend:claude-subscription` requires portable Claude Code subscription OAuth through either `~/.claude/.credentials.json` with `claudeAiOauth.subscriptionType` or `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token`. It first proves direct `claude -p` in Docker, then runs two Gateway CLI-backend turns without preserving Anthropic API-key env vars. This subscription lane disables the Claude MCP/tool and image probes by default because it consumes the signed-in subscription's usage limits and Anthropic can change Claude Agent SDK / `claude -p` billing and rate-limit behavior without an OpenClaw release.
-- Claude and Gemini support the same probe set (text turn, image classification, MCP `cron` tool call, model-switch continuity) through the flags above, but none of those probes run by default - opt in per flag as needed.
+- Claude and Gemini support the same probe set (text turn, image classification, MCP `automations` tool call, model-switch continuity) through the flags above, but none of those probes run by default - opt in per flag as needed.
 
 ## Live: APNs HTTP/2 proxy reachability
 

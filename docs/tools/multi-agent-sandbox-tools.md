@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
-source_hash: "db52f8b7795d17764ce3c60261238c9eed676478b365b458c5ecceed046fd31d"
+source_hash: "ccf8af401d6b0a0773316b3e955b60e9202cc3da09029799ea02d2cdade80574"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/multi-agent-sandbox-tools.md"
@@ -49,16 +49,14 @@ Example 1: Personal + restricted family agent
     ```json
     {
       "agents": {
-        "list": [
-          {
-            "id": "main",
+        "entries": {
+          "main": {
             "default": true,
             "name": "Personal Assistant",
             "workspace": "~/.openclaw/workspace",
             "sandbox": { "mode": "off" }
           },
-          {
-            "id": "family",
+          "family": {
             "name": "Family Bot",
             "workspace": "~/.openclaw/workspace-family",
             "sandbox": {
@@ -76,13 +74,13 @@ Example 1: Personal + restricted family agent
               }
             }
           }
-        ]
+        }
       },
       "bindings": [
         {
           "agentId": "family",
           "match": {
-            "provider": "whatsapp",
+            "channel": "whatsapp",
             "accountId": "*",
             "peer": {
               "kind": "group",
@@ -106,14 +104,13 @@ Example 2: Work agent with shared sandbox
     ```json
     {
       "agents": {
-        "list": [
-          {
-            "id": "personal",
+        "entries": {
+          "personal": {
+            "default": true,
             "workspace": "~/.openclaw/workspace-personal",
             "sandbox": { "mode": "off" }
           },
-          {
-            "id": "work",
+          "work": {
             "workspace": "~/.openclaw/workspace-work",
             "sandbox": {
               "mode": "all",
@@ -125,7 +122,7 @@ Example 2: Work agent with shared sandbox
               "deny": ["browser", "gateway", "discord"]
             }
           }
-        ]
+        }
       }
     }
     ```
@@ -137,12 +134,14 @@ Example 2b: Global coding profile + messaging-only agent
     {
       "tools": { "profile": "coding" },
       "agents": {
-        "list": [
-          {
-            "id": "support",
+        "entries": {
+          "main": {
+            "default": true
+          },
+          "support": {
             "tools": { "profile": "messaging", "allow": ["slack"] }
           }
-        ]
+        }
       }
     }
     ```
@@ -165,16 +164,15 @@ Example 3: Different sandbox modes per agent
             "scope": "session"
           }
         },
-        "list": [
-          {
-            "id": "main",
+        "entries": {
+          "main": {
+            "default": true,
             "workspace": "~/.openclaw/workspace",
             "sandbox": {
               "mode": "off"
             }
           },
-          {
-            "id": "public",
+          "public": {
             "workspace": "~/.openclaw/workspace-public",
             "sandbox": {
               "mode": "all",
@@ -185,7 +183,7 @@ Example 3: Different sandbox modes per agent
               "deny": ["exec", "write", "edit", "apply_patch"]
             }
           }
-        ]
+        }
       }
     }
     ```
@@ -319,14 +317,13 @@ After (multi-agent)
     ```json
     {
       "agents": {
-        "list": [
-          {
-            "id": "main",
+        "entries": {
+          "main": {
             "default": true,
             "workspace": "~/.openclaw/workspace",
             "sandbox": { "mode": "off" }
           }
-        ]
+        }
       }
     }
     ```
@@ -334,7 +331,7 @@ After (multi-agent)
 
 Note
 
-Legacy `agents.defaults.*`/`agents.entries.*.*` config keys (such as `sandbox.perSession`, `agentRuntime`, `embeddedPi`) are migrated by `openclaw doctor`; prefer `agents.defaults` + `agents.entries` going forward.
+Legacy `agents.list` rosters and retired per-agent keys (such as `sandbox.perSession`, `agentRuntime`, and `embeddedPi`) are migrated by `openclaw doctor`; prefer `agents.defaults` + `agents.entries` going forward.
 
 ---
 

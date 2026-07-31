@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "a9cc842eb4e82e655d9068f9fc49373b20dfde13062dadd056b0fd757a7ef5b4"
+source_hash: "5489a9f0e428b0b5fdda789a8bf7798a93e4c9c3227c00a396099bda0ae74935"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -26,6 +26,8 @@ Build your first AI agent with Composio Tools. You'll create a [session](/docs/h
 #### Install
 
 **Python:**
+
+The Composio Python SDK requires **Python 3.10 or newer**.
 
 **TypeScript:**
 

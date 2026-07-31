@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI chat completions"
 source: "https://docs.openclaw.ai/gateway/openai-http-api"
-source_hash: "0219531a6e9abf39d5927f4e54832dc902db792b56ff44093c50cf40cd81bef3"
+source_hash: "801d9416e3022d069acfe1fbf9e6b9bd895a592c5164971d2060019db3976149"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openai-http-api.md"
@@ -167,20 +167,20 @@ Security note: allowlisting a hostname does not bypass private/internal IP block
 
 ### Supported request fields
 
-| Field                      | Notes                                                                                                                                         |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tools`                    | Array of `{ "type": "function", "function": { ... } }`                                                                                        |
-| `tool_choice`              | `"auto"`, `"none"`, `"required"`, or `{ "type": "function", "function": { "name": "..." } }`                                                  |
-| `messages[*].role: "tool"` | Follow-up turns                                                                                                                               |
-| `messages[*].tool_call_id` | Binds a tool result back to a prior tool call                                                                                                 |
-| `max_completion_tokens`    | Number; per-call cap on total completion tokens (reasoning tokens included). Current field name; used when both it and `max_tokens` are sent. |
-| `max_tokens`               | Number; legacy alias, ignored when `max_completion_tokens` is also present.                                                                   |
-| `temperature`              | Number 0-2; best-effort, forwarded to the upstream provider. `400 invalid_request_error` if out of range.                                     |
-| `top_p`                    | Number 0-1; best-effort. `400 invalid_request_error` if out of range.                                                                         |
-| `frequency_penalty`        | Number -2.0 to 2.0; best-effort. `400 invalid_request_error` if out of range.                                                                 |
-| `presence_penalty`         | Number -2.0 to 2.0; best-effort. `400 invalid_request_error` if out of range.                                                                 |
-| `seed`                     | Integer; best-effort. `400 invalid_request_error` for non-integer values.                                                                     |
-| `stop`                     | String or array of up to 4 strings; best-effort. `400 invalid_request_error` for more than 4 sequences or non-string/empty entries.           |
+| Field                      | Notes                                                                                                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tools`                    | Array of `{ "type": "function", "function": { ... } }`                                                                                                                               |
+| `tool_choice`              | `"auto"`, `"none"`, `"required"`, or `{ "type": "function", "function": { "name": "..." } }`                                                                                         |
+| `messages[*].role: "tool"` | Follow-up turns                                                                                                                                                                      |
+| `messages[*].tool_call_id` | Binds a tool result back to a prior tool call                                                                                                                                        |
+| `max_completion_tokens`    | Positive safe integer; per-call cap on total completion tokens (reasoning tokens included). Current field name; used when both fields are non-null. Null or omitted leaves it unset. |
+| `max_tokens`               | Positive safe integer; legacy alias. It is still validated when `max_completion_tokens` is non-null, then ignored for precedence. Null or omitted leaves it unset.                   |
+| `temperature`              | Number 0-2; best-effort, forwarded to the upstream provider. `400 invalid_request_error` if out of range.                                                                            |
+| `top_p`                    | Number 0-1; best-effort. `400 invalid_request_error` if out of range.                                                                                                                |
+| `frequency_penalty`        | Number -2.0 to 2.0; best-effort. `400 invalid_request_error` if out of range.                                                                                                        |
+| `presence_penalty`         | Number -2.0 to 2.0; best-effort. `400 invalid_request_error` if out of range.                                                                                                        |
+| `seed`                     | Integer; best-effort. `400 invalid_request_error` for non-integer values.                                                                                                            |
+| `stop`                     | String or array of up to 4 strings; best-effort. `400 invalid_request_error` for more than 4 sequences or non-string/empty entries.                                                  |
 
 All sampling and token-cap fields ride the same agent stream-param channel and are forwarded best-effort:
 

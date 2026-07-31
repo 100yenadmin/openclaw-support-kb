@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/cli/nodes"
-source_hash: "a428aedae29c3fca6cc2a7b7370ee799484c8b8d0f0c64f493b4a54714ff5433"
+source_hash: "8fdd9cf6fa0401340a18c6a77d71fda4c693f31c9b927b1f8625586fb40e260f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/nodes.md"
@@ -52,7 +52,7 @@ These commands drive the gateway-owned `node.pair.*` store, separate from device
 - `approve` scope requirements follow the pending request's declared commands:
   - commandless request: `operator.pairing`
   - ordinary node commands: `operator.pairing` + `operator.write`
-  - admin-sensitive commands (`system.run`, `system.run.prepare`, `system.which`, `browser.proxy`, `fs.listDir`, and `system.execApprovals.get/set`): `operator.pairing` + `operator.admin`
+  - admin-sensitive commands (`system.run`, `system.run.prepare`, `system.which`, `browser.proxy`, `browser.proxy.upload.v1`, `fs.listDir`, and `system.execApprovals.get/set`): `operator.pairing` + `operator.admin`
 - `remove` scope: `operator.pairing` can remove non-operator node rows; a device-token caller revoking its own node role on a mixed-role device additionally needs `operator.admin`.
 
 ## Invoke

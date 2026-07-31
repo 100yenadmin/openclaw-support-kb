@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Meta plugin"
 source: "https://docs.openclaw.ai/plugins/reference/meta"
-source_hash: "8286e3831db092f0b65bda9c309547388e22e465204b3e4d62bc790eb7722f51"
+source_hash: "691693c4487ef30f5df3333052ecbe9c8e137cce51e7509edfeaff689a0cf5a2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/meta.md"
@@ -20,7 +20,7 @@ Adds Meta model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/meta-provider`
-- Install route: included in OpenClaw; npm; ClawHub: `clawhub:@openclaw/meta-provider`
+- Install route: npm; ClawHub: `clawhub:@openclaw/meta-provider`
 
 ## Surface
 

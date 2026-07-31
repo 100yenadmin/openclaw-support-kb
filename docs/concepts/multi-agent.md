@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "7ba2575932bc87fbc473647f3bc2d33c8e951a2a0239ebfb5d17a4f39496df6f"
+source_hash: "4b19336ba1fc07375462625b5f299eb346e98d486e6d418d14a8ba04f9088160"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -16,6 +16,8 @@ Source: https://docs.openclaw.ai/concepts/multi-agent
 Run multiple _isolated_ agents in one Gateway process, each with its own workspace, state directory (`agentDir`), and SQLite-backed session history, plus multiple channel accounts (e.g. two WhatsApp numbers). Inbound messages route to the right agent through **bindings**.
 
 An **agent** is the full per-persona scope: workspace files, auth profiles, model registry, and session store. A **binding** maps a channel account (a Slack workspace, a WhatsApp number, etc.) to one of those agents.
+
+For a focused setup guide with account and conversation examples, see [Agent bindings](/concepts/agent-bindings).
 
 ## What is one agent
 

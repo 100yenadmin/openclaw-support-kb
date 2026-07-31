@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Active memory"
 source: "https://docs.openclaw.ai/concepts/active-memory"
-source_hash: "8f1365676a3dd4d604522e2ada2376c60a09ac36d009f63d90ad4c3000caa5ae"
+source_hash: "dc89313ca473a797d617440c89df921199f9cea760eb4e536ee639f3345ab712"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/active-memory.md"
@@ -13,13 +13,18 @@ duplicate_index: 1
 # Active memory
 Source: https://docs.openclaw.ai/concepts/active-memory
 
-Active memory is an optional bundled plugin that runs a blocking memory
-recall sub-agent before the main reply, for eligible conversational sessions.
-It exists because most memory systems are reactive: the main agent has to
-decide to search memory, or the user has to say "remember this." By then the
-moment for the recalled fact to feel natural has passed. Active memory gives
-the system one bounded chance to surface relevant memory before the main
-reply is generated.
+Active Memory is the deep-recall lane for eligible conversational sessions.
+The default `escalate` mode runs its blocking recall sub-agent only when the
+message asks about the past and the deterministic memory lane found no strong
+trusted trigger match. This keeps ordinary replies fast while preserving a
+deeper search path for prior decisions, conversations, and temporal or
+multi-hop questions.
+
+Flat retrieval is strongest for direct fact matches and weaker on temporal and
+multi-session questions. [LongMemEval (arXiv:2410.10813)](https://arxiv.org/abs/2410.10813)
+measures that gap, while the PrefEval benchmark highlights the value of
+preference-adjacent reminders. Escalation by default spends the blocking model
+call where those harder recall shapes are actually present.
 
 ## Remember across conversations
 
@@ -82,6 +87,7 @@ Paste into `openclaw.json` for an advanced safe default: plugin on, scoped to
         enabled: true,
         config: {
           enabled: true,
+          mode: "escalate",
           agents: ["main"],
           allowedChatTypes: ["direct"],
           modelFallback: "google/gemini-3-flash",
@@ -117,6 +123,7 @@ To inspect it live in a conversation:
 What the key fields do:
 
 - `plugins.entries.active-memory.enabled: true` turns the plugin on
+- `config.mode: "escalate"` runs deep recall only for recall intent without a strong deterministic hit
 - `config.agents: ["main"]` opts only the `main` agent in
 - `config.allowedChatTypes: ["direct"]` scopes it to direct-message sessions (opt in groups/channels explicitly)
 - `config.model` (optional) pins a dedicated recall model; unset inherits the current session model
@@ -129,14 +136,17 @@ What the key fields do:
 
 ```mermaid
 flowchart LR
-  U["User Message"] --> Q["Build Memory Query"]
-  Q --> R["Active Memory Blocking Memory Sub-Agent"]
-  R -->|NONE / no relevant memory| M["Main Reply"]
-  R -->|relevant summary| I["Append Hidden active_memory_plugin System Context"]
-  I --> M["Main Reply"]
+  U["User Message"] --> D["Deterministic Trigger Recall"]
+  D -->|strong trusted match| I["Inject Bounded Hidden Context"]
+  D -->|weak or empty| H["Check Recall Intent"]
+  H -->|no| M["Main Reply"]
+  H -->|yes| R["Active Memory Deep Recall Sub-Agent"]
+  R -->|NONE| M
+  R -->|relevant summary| I
+  I --> M
 ```
 
-The blocking sub-agent can call only the configured memory recall tools (see
+The deep-recall sub-agent can call only the configured memory recall tools (see
 [Memory tools](#memory-tools)). If the connection between the query and
 available memory is weak, it returns `NONE` and the main reply proceeds
 without extra context.
@@ -162,7 +172,7 @@ personalization would be surprising.
 
 ## When it runs
 
-Active Memory has two activation paths:
+Active Memory has two targeting paths for the deep-recall lane:
 
 1. **Remember across conversations** automatically targets agents whose
    effective `memory.search.rememberAcrossConversations` setting is enabled, but
@@ -175,6 +185,18 @@ Both paths require the plugin to be enabled and an eligible interactive
 persistent conversation. A session-scoped `/active-memory off` pauses both
 paths for that conversation. If any condition fails, active memory does not run
 for that turn, and the main reply is unaffected.
+
+`config.mode` controls when a targeted turn starts the blocking sub-agent:
+
+| Mode       | Behavior                                                                |
+| ---------- | ----------------------------------------------------------------------- |
+| `escalate` | Default. Run only for recall intent when lane 1 has no strong hit.      |
+| `always`   | Preserve the previous behavior and run on every eligible targeted turn. |
+| `off`      | Disable deep recall without unloading the plugin.                       |
+
+The deterministic trusted-trigger lane remains available in `off` mode.
+`rememberAcrossConversations` is unchanged: it still controls whether deep
+recall may search other private conversations.
 
 ### Session types
 
@@ -632,6 +654,7 @@ All active memory configuration lives under `plugins.entries.active-memory`.
 | Key                          | Type                                                                                                 | Meaning                                                                                                                                                                                                                                           |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `enabled`                    | `boolean`                                                                                            | Enables the plugin itself                                                                                                                                                                                                                         |
+| `config.mode`                | `"escalate" \| "always" \| "off"`                                                                    | Controls when the blocking deep-recall sub-agent runs; default `"escalate"`                                                                                                                                                                       |
 | `config.agents`              | `string[]`                                                                                           | Agent ids that may use active memory                                                                                                                                                                                                              |
 | `config.model`               | `string`                                                                                             | Optional blocking sub-agent model ref; when unset, inherits the current session model                                                                                                                                                             |
 | `config.allowedChatTypes`    | `("direct" \| "group" \| "channel" \| "explicit")[]`                                                 | Session types that may run active memory; defaults to `["direct"]`                                                                                                                                                                                |
@@ -677,6 +700,7 @@ Start with `recent`:
         enabled: true,
         config: {
           agents: ["main"],
+          mode: "escalate",
           queryMode: "recent",
           promptStyle: "balanced",
           timeoutMs: 15000,
@@ -691,8 +715,9 @@ Start with `recent`:
 
 Use `/verbose on` for the status line and `/trace on` for the debug summary
 while tuning — both are sent as a follow-up after the main reply, not
-before. Then move to `message` for lower latency, or `full` if extra context
-is worth the slower sub-agent run.
+before. Use `always` only when every eligible turn warrants the latency. Keep
+`escalate` for the recommended balance, then choose `message`, `recent`, or
+`full` for the deep-recall query itself.
 
 ### Cold-start grace
 

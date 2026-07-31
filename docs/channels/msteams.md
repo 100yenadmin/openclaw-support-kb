@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams"
 source: "https://docs.openclaw.ai/channels/msteams"
-source_hash: "b16908e76f182a6b7a492192df3b15cb39bf1818338c970a6e0141b571cc32b4"
+source_hash: "9fcb97f51f3220388aff8eec5ce88f201baa47aad45c36fb47bdccb7f180e09d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/msteams.md"
@@ -157,7 +157,7 @@ Disable with:
 **Group access**
 
 - Default: `channels.msteams.groupPolicy = "allowlist"` (blocked unless you add `groupAllowFrom`). `channels.defaults.groupPolicy` can override the shared default when `channels.msteams.groupPolicy` is unset.
-- `channels.msteams.groupAllowFrom` controls which senders or static sender access groups can trigger in group chats/channels (falls back to `channels.msteams.allowFrom`).
+- `channels.msteams.groupAllowFrom` controls which senders, static sender access groups, or group/channel conversation IDs can trigger in group chats/channels (falls back to `channels.msteams.allowFrom`). Conversation IDs can use `19:...@thread.tacv2`, `19:...@thread.v2`, or `19:...@thread.skype`; preserve the exact ID casing. OpenClaw ignores `;messageid=...` suffixes. Conversation IDs never grant personal-DM access.
 - Set `groupPolicy: "open"` to allow any member (still mention-gated by default).
 - To block **all** channels, set `channels.msteams.groupPolicy: "disabled"`.
 

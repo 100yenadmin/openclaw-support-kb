@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building CLI backend plugins"
 source: "https://docs.openclaw.ai/plugins/cli-backend-plugins"
-source_hash: "c0ace5639ff0ed22d2c542e5c993037051996105edf3e5df60b6cc694d874465"
+source_hash: "457ca0d202ed47c87c8ecd1b9c7230b9f1ae3db728cff12c17d5dd112576d754"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/cli-backend-plugins.md"
@@ -314,6 +314,23 @@ preserves it through the `2026.8.x` line. New and updated plugins should use can
 `ctx.toolAvailability.openClaw` names and declare
 `toolAvailabilityEnforcement: "execution-args"` explicitly; the beta
 compatibility path is scheduled for removal after that window.
+
+### `parseJsonlEvent`: provider-specific JSONL streams
+
+Set `parseJsonlEvent` when a backend emits line-delimited JSON that does not
+match the built-in Claude, Codex, or Gemini dialects. The hook receives one raw
+line plus the resolved backend id and config, and returns one normalized event,
+multiple events, or `null` to let the built-in parser try the line.
+
+Supported events are incremental assistant text, incremental thinking, native
+tool start/result display, session ids, and terminal results. Terminal results
+may include final text, usage, an error, and a successor session id. Session ids
+reported by either event shape participate in resumed-session and fork
+persistence.
+
+Tool events describe work the backend already performed. OpenClaw renders and
+summarizes them, but does not treat them as host tool execution, trusted
+diagnostics, loopback correlation, or message-delivery evidence.
 
 ### `ownsNativeCompaction`: opting out of OpenClaw compaction
 

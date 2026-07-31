@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Timezones"
 source: "https://docs.openclaw.ai/concepts/timezone"
-source_hash: "9daf006a3d190110ce17151c69d5e9ab7fe136a1a9f8dbd528b630780245f34e"
+source_hash: "9fa5a05a75dbe49b84f03f3d25e614aa83888f35d16a98d9b2a20c489ab11eaa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/timezone.md"
@@ -19,11 +19,11 @@ OpenClaw standardizes timestamps so the model sees a **single reference time** i
 
 | Surface           | What it shows                                                                                              | Default                               | Configured via                                         |
 | ----------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------ |
-| Message envelopes | Wraps inbound channel messages: `[Signal +1555 Sun 2026-01-18 00:19:42 PST] hello`                         | Host-local                            | `agents.defaults.envelopeTimezone`                     |
+| Message envelopes | Wraps inbound channel messages: `[Signal +1555 Sun 2026-01-18 00:19:42 PST] hello`                         | Host timezone if `userTimezone` unset | `agents.defaults.userTimezone`                         |
 | Tool payloads     | Channel `readMessages`-style tools return raw provider time plus normalized `timestampMs` / `timestampUtc` | UTC fields always present             | Not configurable; preserves provider-native timestamps |
-| System prompt     | A small `Current Date & Time` block with the **time zone only** (no clock value, for cache stability)      | Host timezone if `userTimezone` unset | `agents.defaults.userTimezone`                         |
+| System prompt     | A volatile `Temporal Context` block with the local date and time zone; exact time remains tool-backed      | Host timezone if `userTimezone` unset | `agents.defaults.userTimezone`                         |
 
-The system prompt deliberately omits the live clock to keep prompt caching stable across turns. When the agent needs the current time, it calls `session_status`.
+The date and zone live below the system-prompt cache boundary, so day rollover does not invalidate the stable prefix. The prompt deliberately omits the live clock; when the agent needs exact current time and `session_status` is available, it calls that tool.
 
 ## Setting the user timezone
 
@@ -37,25 +37,15 @@ The system prompt deliberately omits the live clock to keep prompt caching stabl
 }
 ```
 
-If `userTimezone` is unset, OpenClaw resolves the host timezone at runtime via `Intl.DateTimeFormat().resolvedOptions().timeZone` (no config write). `agents.defaults.timeFormat` (`auto` | `12` | `24`) controls 12h/24h rendering in envelopes and downstream surfaces, not in the system prompt section.
+If `userTimezone` is unset, OpenClaw resolves the host timezone at runtime via
+`Intl.DateTimeFormat().resolvedOptions().timeZone` without writing config. The same
+resolved zone is used for message envelopes, queued system events, the prompt's local
+date, and heartbeat active hours.
 
-## Envelope timezone values
+Clock rendering follows the host operating-system and locale preference. There is no
+separate 12-hour or 24-hour config setting.
 
-`agents.defaults.envelopeTimezone` accepts:
-
-- `"local"` (default) or `"host"` - host machine's timezone.
-- `"utc"` or `"gmt"` - UTC.
-- `"user"` - the resolved `agents.defaults.userTimezone` (falls back to host timezone if unset).
-- Any explicit IANA zone string, e.g. `"Europe/Vienna"`.
-
-## When to override
-
-- **Use `"utc"`** for stable timestamps across hosts in different regions, or to match UTC-aligned diagnostics/log output.
-- **Use `"user"`** to keep envelopes aligned with the configured user timezone regardless of which zone the gateway host runs in.
-- **Use a fixed IANA zone** when the gateway host is in one zone but the envelope should always read in another zone regardless of host migration.
-- **Set `envelopeTimestamp: "off"`** when timestamp context is not useful for the conversation. This removes absolute timestamps from envelopes, direct agent prompt prefixes, and embedded model-input prefixes.
-
-For the full behavior reference, examples per provider, and elapsed-time formatting, see [Date & Time](/date-time).
+For provider examples and elapsed-time formatting, see [Date & Time](/date-time).
 
 ## Related
 

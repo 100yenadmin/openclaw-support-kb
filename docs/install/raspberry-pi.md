@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
-source_hash: "76a42999d7b14cdaeb037c2dfe84826630b88965a7ebb232f5820d219614c949"
+source_hash: "da58955b3e5060fbd3a19ea5e68bef8480eaf414eb94216804fd6f5de4a489c9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/raspberry-pi.md"
@@ -80,10 +80,10 @@ Update the system
 
 
 
-Install Node.js 24
+Install Node.js 26
 
     ```bash
-    curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+    curl -fsSL https://deb.nodesource.com/setup_26.x | sudo -E bash -
     sudo apt install -y nodejs
     node --version
     ```

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "0326c161be5f7e6c1b39ee11566f81cbf21dca44afb237ad0a732dfe03cc51c1"
+source_hash: "6be361da42e2634963107c78077340b672f9056e7d283d9161b1761a7c788780"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -373,6 +373,7 @@ This command:
 - creates an isolated instance under `~/.paperclip-worktrees/instances/<worktree-id>/`
 - when run inside a linked git worktree, mirrors the effective git hooks into that worktree's private git dir
 - picks a free app port and embedded PostgreSQL port
+- disables automatic database backups for the isolated instance
 - by default seeds the isolated DB in `minimal` mode from the current effective Paperclip instance/config (repo-local worktree config when present, otherwise the default instance) via a logical SQL snapshot
 
 Seed modes:
@@ -392,6 +393,7 @@ Provisioned git worktrees also pause seeded routines that still have enabled sch
 That repo-local env also sets:
 
 - `PAPERCLIP_IN_WORKTREE=true`
+- `PAPERCLIP_DB_BACKUP_ENABLED=false`
 - `PAPERCLIP_WORKTREE_NAME=<worktree-name>`
 - `PAPERCLIP_WORKTREE_COLOR=<hex-color>`
 
@@ -672,6 +674,11 @@ schemas. Defaults:
 - every 60 minutes
 - retain 30 days
 - backup dir: `~/.paperclip/instances/default/data/backups`
+
+Automatic backups are disabled for isolated worktree instances created with
+`paperclipai worktree init` or `paperclipai worktree:make`. Existing worktree
+configs are migrated to the disabled setting when their server next starts. The
+main/default instance keeps the normal enabled-by-default behavior.
 
 Configure these in:
 

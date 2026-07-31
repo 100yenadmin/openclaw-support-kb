@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synology Chat"
 source: "https://docs.openclaw.ai/channels/synology-chat"
-source_hash: "2287ec1e1ee6da1c71351c9c52e99d4d96d3126a73c6f22bf6c603fcd7eb5c80"
+source_hash: "33739f2f4f4926e7f0438634837cb521e82b1880262bbb2385882abaa3d9ab0a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/synology-chat.md"
@@ -59,7 +59,7 @@ Webhook auth details:
 
 ## Inbound durability
 
-After token, sender-policy, and rate-limit checks pass, OpenClaw removes the webhook token from the stored envelope and durably queues the event before acknowledging it. The route returns `204` only after that append succeeds; a persistence failure returns `503` so Synology Chat can retry instead of silently losing the message.
+After token, sender-policy, and rate-limit checks pass, OpenClaw removes the webhook token from the stored envelope and durably queues the event before acknowledging it. The route returns `204` only after that append succeeds; a persistence failure returns `503` so Synology Chat can retry instead of silently losing the message. The durable `204` carries `x-openclaw-delivery-accepted: durable`; authentication, validation, and storage-error responses omit the marker, so reverse proxies can require it to distinguish durable acceptance from a generic response.
 
 Pending or retryable events survive a Gateway restart. Synology's stable `post_id` suppresses duplicate queue entries while the corresponding active or retained completion record exists. Delivery remains at least once across the queue-to-agent handoff, so a crash at that boundary can still replay a turn.
 

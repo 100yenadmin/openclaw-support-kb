@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/skills"
-source_hash: "d4a175ad4332121cf23d108c519b51274aaaedd5c39c0af513a464e6ac83f844"
+source_hash: "49b00e6f41311a783cc2130782b4f6cdc7c7136670789f264d966bbd0baa07a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/skills.md"
@@ -37,6 +37,10 @@ The macOS app surfaces OpenClaw skills via the gateway; it does not parse skills
 ## Remote mode
 
 - Install and config updates happen on the gateway host, not the local Mac.
+- When skill files, config, Mac-node connectivity, its catalog, or its executable
+  inventory changes, the gateway emits `skills.changed` after invalidating its
+  authoritative snapshot. An open Skills pane then refetches `skills.status`,
+  including changes that finish while an earlier request is still in flight.
 
 ## Related
 

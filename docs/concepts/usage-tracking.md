@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Usage tracking"
 source: "https://docs.openclaw.ai/concepts/usage-tracking"
-source_hash: "17c94ab380b833135d88c08ac290756b82221fe6c9629dfd3ed822f1fe5283f0"
+source_hash: "a10dc4895187990451e1590d4483f0726691b209f96ffc8a9701cb0d29e73dce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/usage-tracking.md"
@@ -322,7 +322,7 @@ provider-neutral for CLI, app, and Control UI consumers.
 - **DeepSeek**: API key via env/config/auth store (`DEEPSEEK_API_KEY`).
   Shows each provider-reported currency balance.
 - **GitHub Copilot**: OAuth tokens in auth profiles.
-- **Gemini CLI**: OAuth tokens in auth profiles.
+- **Gemini CLI**: existing OAuth profiles or supported Google API-key profiles.
 - **MiniMax**: API key or MiniMax OAuth auth profile. OpenClaw treats
   `minimax`, `minimax-cn`, and `minimax-portal` as the same MiniMax quota
   surface, prefers stored MiniMax OAuth when present, and otherwise falls back

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams meetings plugin"
 source: "https://docs.openclaw.ai/plugins/teams-meetings"
-source_hash: "dfe5d77dbdc0de750b2da525d35253b89495c756d959929928bbfd71ad5f7896"
+source_hash: "a9f6927afd1240e6bf3c38cec67bdeb0648a998a59c4878e69b7226303e8bbc5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/teams-meetings.md"
@@ -20,13 +20,15 @@ The `teams-meetings` plugin joins Microsoft Teams links as a guest in the OpenCl
 Talk-back uses the same local audio prerequisites as the [Google Meet plugin](/plugins/google-meet): macOS, the `BlackHole 2ch` virtual audio device, and SoX.
 
 ```bash
+openclaw plugins install @openclaw/teams-meetings
+openclaw gateway restart
 brew install blackhole-2ch sox
 sudo reboot
 system_profiler SPAudioDataType | grep -i BlackHole
 command -v sox
 ```
 
-The plugin is included and enabled by default. Add an entry only to customize it, then check setup:
+The plugin is enabled by default after installation. Add an entry only to customize it, then check setup:
 
 ```json5
 {

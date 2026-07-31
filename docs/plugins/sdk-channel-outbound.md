@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel outbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-outbound"
-source_hash: "f020b327a5d7a2938ac09a14746a8bb9afd9180686382304c94628a6aac2e5bb"
+source_hash: "672ced252dc2abd887f95d96c27e0ba31d36a0858fb5e36cbfdc5e04568c4a03"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-outbound.md"
@@ -64,10 +64,12 @@ returns.
 Optional settings include custom append delays, a `drain` option block for
 advanced drain ordering/concurrency/retry policy, an external `abortSignal`, a
 clock, pump error reporting, a stopped-error factory, and admission policy.
-The returned monitor exposes `admit`, `start`, `pause`, `stop`, `waitForIdle`,
-`isRunning`, and `isStopped`. `stop` first settles accepted admissions, then
-aborts and disposes the drain, waits for the pump and active deliveries, and
-disposes again to close the lazy-creation race.
+The returned monitor exposes `admit`, `ensureQueueAvailable`, `start`, `pause`,
+`stop`, `waitForIdle`, `isRunning`, and `isStopped`. Use the idempotent
+`ensureQueueAvailable()` check when plugin-owned migration or preparation must
+run after the queue opens but before the drain starts. `stop` first settles
+accepted admissions, then aborts and disposes the drain, waits for the pump and
+active deliveries, and disposes again to close the lazy-creation race.
 
 Keep transport-specific redaction, raw-envelope validation, non-retryable
 classification, and persisted payload shape in the plugin. Webhook transports

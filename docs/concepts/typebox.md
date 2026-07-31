@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "2b0015305bda936132d5d4509e124e41ec4310b1d28d14d5c1e4171a5183b721"
+source_hash: "ef77a03ab4b78b5795391e0056f44e43e1e53839526bb51fbfd4c973a30b21f7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typebox.md"
@@ -67,8 +67,11 @@ The authoritative advertised **discovery** inventory lives in `src/gateway/serve
 
 - `pnpm protocol:gen` writes JSON Schema (draft-07) to `dist/protocol.schema.json`.
 - `pnpm protocol:gen:swift` generates the Swift gateway models.
+- `pnpm protocol:check:swift` verifies the committed Swift models without rewriting them.
 - `pnpm protocol:gen:kotlin` generates the Android protocol models and constants.
 - `pnpm protocol:check` checks the registry structure, runs all three generators, and verifies the committed Swift and Kotlin output (the JSON Schema output is a gitignored build artifact).
+
+When a gateway schema affects native clients, run `pnpm protocol:gen:swift`, review the generated diff, then run `pnpm protocol:check:swift`. Commit the schema and `GatewayModels.swift` update together. Stable decoding behavior belongs in the focused `GatewayModelsCompatibilityTests.swift` regressions rather than in handwritten model copies.
 
 ## How the schemas are used at runtime
 

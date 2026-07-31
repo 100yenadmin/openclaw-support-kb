@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "6c20fae36ee412f23898af94bd671255dc5b89f30e72d7e480c06fa15136e0ef"
+source_hash: "5e8ee2704d2f73e41dcf83d96d77f85c3b01a36142eaeb7dce612023ce3eeef3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -221,6 +221,7 @@ After review:
 
 ```bash
 openclaw skills workshop inspect <proposal-id>
+openclaw skills workshop evaluate <proposal-id>
 openclaw skills workshop apply <proposal-id>
 ```
 

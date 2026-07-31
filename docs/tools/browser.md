@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "e52d50e40ff402a05cc38bcf683317b46efcefa9f45d2603e930778bb0ad6377"
+source_hash: "405fda1193ca60fe2d8337c01346beee5e9598980e8c58f867f4aaa25dc8c66f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -936,6 +936,11 @@ The agent gets **one tool** for browser automation:
 How it maps:
 
 - `browser snapshot` returns a stable UI tree (AI or ARIA).
+- `browser navigate` also returns the loaded page's snapshot inline (efficient
+  interactive tier, so the payload stays compact and bounded), so the agent
+  does not need a follow-up snapshot call. Batch `act` results that report a
+  cross-document navigation include the same fresh page state. Navigations
+  that resolve to a download skip it.
 - `browser act` uses the snapshot `ref` IDs to click/type/drag/select.
 - `browser screenshot` captures pixels (full page, element, or labeled refs).
 - `browser doctor` checks Gateway, plugin, profile, browser, and tab readiness.

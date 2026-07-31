@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "095af7224b5643fb4563154cef22304f2f18cf25afa03a785d45cc01b3a91c61"
+source_hash: "df37bed593db39e9a3228906b347509e3616baa11ea5a262a4178ac91752d826"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -53,10 +53,13 @@ Existing install
     openclaw models auth login --provider xai --method oauth
     ```
 
-    Apply Grok as the default model separately:
+    With no existing primary model, OAuth setup selects `xai/auto`. The plugin
+    resolves that stable ref from xAI's authenticated model catalog and remote
+    default, so future xAI default changes do not require an OpenClaw update.
+    It preserves an existing primary; opt in explicitly when needed:
 
     ```bash
-    openclaw models set xai/grok-4.3
+    openclaw models set xai/auto
     ```
 
     Rerun full onboarding only if you intentionally want to change Gateway,
@@ -67,7 +70,8 @@ Existing install
 API-key path
 
     API-key setup still works for xAI Console keys and for media surfaces
-    that need key-backed provider config:
+    that need key-backed provider config. It keeps Grok 4.3 as the
+    regional-safe setup default:
 
     ```bash
     openclaw models auth login --provider xai --method api-key
@@ -80,7 +84,7 @@ Pick a model
 
     ```json5
     {
-      agents: { defaults: { model: { primary: "xai/grok-4.3" } } },
+      agents: { defaults: { model: { primary: "xai/auto" } } },
     }
     ```
 
@@ -100,7 +104,8 @@ bundled xAI model provider reuses it as a fallback too.
   `openclaw models auth login --provider xai --method oauth`; it uses
   device-code verification, not a localhost callback.
 - If sign-in succeeds but Grok is not the default model, run
-  `openclaw models set xai/grok-4.3`.
+  `openclaw models set xai/auto`. OAuth login preserves an existing
+  primary model unless you explicitly change it.
 - Inspect saved xAI auth profiles:
 
   ```bash
@@ -132,9 +137,10 @@ see [legacy compatibility and moving aliases](#legacy-compatibility-and-moving-a
 
 Tip
 
-Use `grok-4.5` for general chat, coding, and agentic work where it is available.
-Grok 4.3 remains the regional-safe setup default; `grok-build-0.1` and both
-dated Grok 4.20 variants remain selectable.
+Use `xai/auto` to follow xAI's authenticated OAuth default, or select a concrete
+id such as `xai/grok-4.5` to remain pinned. API-key setup keeps Grok 4.3 as the
+regional-safe default; `grok-build-0.1` and both dated Grok 4.20 variants remain
+selectable.
 
 Catalog context and token-cost metadata follows xAI's live
 [model pages](https://docs.x.ai/developers/models) and

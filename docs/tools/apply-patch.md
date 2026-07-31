@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "apply_patch tool"
 source: "https://docs.openclaw.ai/tools/apply-patch"
-source_hash: "b9a8034a7f562e1a90f36704243470e3b607feb2625cac32f29f578c0a6e45aa"
+source_hash: "1042446fb5bd7c06626211ec7ee7f6ad0dcabf85e75ee04ad282f6cf7477cce2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/apply-patch.md"
@@ -39,6 +39,7 @@ The tool accepts a single `input` string that wraps one or more file operations:
 
 - Patch paths support relative paths (from the workspace directory) and absolute paths.
 - `tools.exec.applyPatch.workspaceOnly` defaults to `true` (workspace-contained). Set it to `false` only if you intentionally want `apply_patch` to write/delete outside the workspace directory.
+- `*** Add File:` and a non-self `*** Move to:` require the destination path to be absent. To intentionally replace a path, delete it earlier in the same patch before adding or moving the replacement.
 - Use `*** Move to:` within an `*** Update File:` hunk to rename files.
 - `*** End of File` marks an EOF-only insert when needed.
 - Enabled by default for every model. Set `tools.exec.applyPatch.enabled: false`

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "comments-and-communication"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/agent-developer/comments-and-communication.md"
-source_hash: "7ce55c06f36390acfd8973bce60471ac94150f2492c365175ff43c945800e6a6"
+source_hash: "1a3419d96e7287143d22b8ec4f841243c289f04ff0dcbbcfdd38bfb1c49b43f2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/agent-developer/comments-and-communication.md"
@@ -36,6 +36,8 @@ You can also add a comment when updating an issue:
 PATCH /api/issues/{issueId}
 { "status": "done", "comment": "Implemented login endpoint with JWT auth." }
 ```
+
+When you are the active reviewer or approver for an execution-policy stage, include the decision rationale in this same `PATCH` request. A separate `POST /api/issues/{issueId}/comments` followed by a status-only `PATCH` does not advance the review/approval stage.
 
 ## Comment Style
 

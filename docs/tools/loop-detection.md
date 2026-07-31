@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool-loop detection"
 source: "https://docs.openclaw.ai/tools/loop-detection"
-source_hash: "e8ea5056a0cf05942071c48ee32cdb22da282affce43bb9a186e3bd19a4edf56"
+source_hash: "595c925d93995862d0564e1720897190c04f2021a986d8e26e107a0735736d17"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/loop-detection.md"
@@ -68,6 +68,8 @@ Per-agent override (optional, at `agents.entries.*.tools.loopDetection`):
 ```
 
 The per-agent setting overrides the global setting.
+
+You can also enable the global rolling-history detectors in **Settings -> Labs** in the Control UI.
 
 ### Field behavior
 

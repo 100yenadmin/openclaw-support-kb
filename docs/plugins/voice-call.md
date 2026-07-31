@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice call plugin"
 source: "https://docs.openclaw.ai/plugins/voice-call"
-source_hash: "d1a17cde5afbeeaf67c734b877f112aa2d6f035cb667400da729a2017d678438"
+source_hash: "13b8fc9ee9af422ee672e3b0be63bf2d7bef133f87d9caec68fef82bd543120f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/voice-call.md"
@@ -958,7 +958,7 @@ openclaw logs --follow
 
 Common causes:
 
-- `publicUrl` points at a different path than `serve.path`.
+- `publicUrl` does not match the public webhook URL configured with the provider. A reverse proxy may map that public path to a different `serve.path`, but `publicUrl` must remain the provider-facing URL.
 - The tunnel URL changed after the Gateway started.
 - A proxy forwards the request but strips or rewrites host/proto headers.
 - Firewall or DNS routes the public hostname somewhere other than the Gateway.
@@ -972,8 +972,10 @@ under your control.
 
 ### Signature verification fails
 
-Provider signatures are checked against the public URL OpenClaw reconstructs
-from the incoming request. If signatures fail:
+Twilio and Plivo URL signatures use `publicUrl` when it is configured: its
+scheme, host, and path are preserved, while the request query is applied.
+Without `publicUrl`, OpenClaw reconstructs the URL from the request. Telnyx
+signatures do not include the request URL. If signatures fail:
 
 - Confirm the provider webhook URL exactly matches `publicUrl`, including scheme, host, and path.
 - For ngrok free-tier URLs, update `publicUrl` when the tunnel hostname changes.

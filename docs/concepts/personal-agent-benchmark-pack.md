@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal agent benchmark pack"
 source: "https://docs.openclaw.ai/concepts/personal-agent-benchmark-pack"
-source_hash: "3da75e7bb79266afa08811f2c41856a200380a30c89bf756d7ec72773226ee30"
+source_hash: "bcc9b63aaa707d3d57e4abebf72db2da2b2afa5a2d889f477241306fd5fcc380"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/personal-agent-benchmark-pack.md"
@@ -36,20 +36,19 @@ Ten scenarios, defined in `qa/scenarios/personal/*.yaml`:
 | `personal-no-fake-progress`                | Proof-backed completion claims that avoid fake progress before local evidence exists         |
 | `personal-failure-recovery`                | Failure recovery that reports partial status and keeps retry boundaries clear                |
 
-The machine-readable pack metadata (id list, title, description) lives in
-`extensions/qa-lab/src/scenario-packs.ts` as `QA_PERSONAL_AGENT_SCENARIO_IDS`.
-Run the pack with `--pack personal-agent`:
+The machine-readable `personal-agent` profile lives in root `taxonomy.yaml` as
+semantic coverage IDs. QA Lab resolves every primary owner from the catalog;
+there is no second scenario-ID list. Run it with:
 
 ```bash
-OPENCLAW_ENABLE_PRIVATE_QA_CLI=1 pnpm openclaw qa suite \
+OPENCLAW_ENABLE_PRIVATE_QA_CLI=1 pnpm openclaw qa run \
+  --qa-profile personal-agent \
   --provider-mode mock-openai \
-  --pack personal-agent \
   --concurrency 1
 ```
 
-`--pack` is additive with repeated `--scenario` flags. Explicit scenarios run
-first, then the pack scenarios run in `QA_PERSONAL_AGENT_SCENARIO_IDS` order
-with duplicates removed.
+Use repeated `--scenario` flags to narrow the profile. Scenario file and
+taxonomy order do not affect membership or execution order.
 
 The pack targets `qa-channel` with `mock-openai` or another local QA provider
 lane. Do not point it at live chat services or real personal accounts.
@@ -67,9 +66,10 @@ inspect and file in issues.
 
 ## Extending the pack
 
-Add new `.yaml` cases under `qa/scenarios/personal/`, then add the scenario id
-to `QA_PERSONAL_AGENT_SCENARIO_IDS`. Keep each case small, local, deterministic
-in `mock-openai`, and focused on one personal assistant behavior.
+Add new `.yaml` cases under `qa/scenarios/personal/`, declare the exact primary
+coverage ID they prove, and add that semantic ID to the taxonomy profile when
+it belongs in this benchmark. Keep each case small, local, deterministic in
+`mock-openai`, and focused on one personal assistant behavior.
 
 Good follow-up candidates: redacted trajectory export checks, local-only
 plugin workflow checks.

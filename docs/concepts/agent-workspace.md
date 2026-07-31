@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "6120d18da9b7c5c546ca66dc5fd8e0ffd069a8e37aa7c4d18bdb3a694a65b4d4"
+source_hash: "3124d56ada1cdc8d1042904f2262514c295eb46ca31171027683a1924d571465"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
@@ -29,6 +29,7 @@ When sandboxing is enabled and `workspaceAccess` is not `"rw"`, tools operate in
 - Default: `~/.openclaw/workspace`
 - If `OPENCLAW_PROFILE` is set and not `"default"`, the default becomes `~/.openclaw/workspace-<profile>`.
 - `OPENCLAW_WORKSPACE_DIR` overrides both of the above when set.
+- `openclaw onboard --non-interactive` uses `<state-dir>/workspace` when `OPENCLAW_STATE_DIR` is non-default, including for the initial `main` agent entry.
 - Non-default agents (`agents.entries.*`) without an explicit workspace resolve to `<state-dir>/workspace-<agentId>`, not the shared default workspace.
 
 Override in `~/.openclaw/openclaw.json`:
@@ -82,9 +83,9 @@ SOUL.md - persona and tone
     Persona, tone, and boundaries. Loaded every session. Guide: [SOUL.md personality guide](/concepts/soul).
 
 
-USER.md - who the user is
+USER.md - directive-based user model (optional)
 
-    Who the user is and how to address them. Loaded every session.
+    Stable preferences, communication style, relationships, and active-project context. Write entries as dated active or superseded directives. Loaded every session with a separate 4,000-character budget. See [User model](/concepts/user-model).
 
 
 IDENTITY.md - name, vibe, emoji
@@ -114,7 +115,7 @@ memory/YYYY-MM-DD.md - daily memory log
 
 MEMORY.md - curated long-term memory (optional)
 
-    Curated long-term memory: durable facts, preferences, decisions, and short summaries. Keep detailed logs in `memory/YYYY-MM-DD.md` so memory tools can retrieve them on demand without injecting them into every prompt. Only load `MEMORY.md` in the main, private session (not shared/group contexts). See [Memory](/concepts/memory) for the workflow and automatic memory flush.
+    Curated long-term memory: durable non-profile facts, decisions, and short summaries. Keep detailed logs in `memory/YYYY-MM-DD.md` so memory tools can retrieve them on demand without injecting them into every prompt. Only load `MEMORY.md` in the main, private session (not shared/group contexts). See [Memory](/concepts/memory) for the workflow and automatic memory flush.
 
 
 skills/ - workspace skills (optional)
@@ -129,7 +130,7 @@ canvas/ - Canvas UI files (optional)
 
 Note
 
-If a bootstrap file is missing, OpenClaw injects a "missing file" marker into the session and continues. Large bootstrap files are truncated when injected; adjust limits with `agents.defaults.bootstrapMaxChars` (default: `20000`) and `agents.defaults.bootstrapTotalMaxChars` (default: `60000`). `openclaw setup` can recreate missing defaults without overwriting existing files.
+If a required bootstrap file is missing, OpenClaw injects a "missing file" marker into the session and continues. Optional `USER.md` and `MEMORY.md` files are omitted when absent. Large bootstrap files are truncated when injected; adjust general limits with `agents.defaults.bootstrapMaxChars` (default: `20000`) and `agents.defaults.bootstrapTotalMaxChars` (default: `60000`). `USER.md` keeps its separate 4,000-character cap. `openclaw setup` can recreate missing defaults without overwriting existing files.
 
 ## What is NOT in the workspace
 
@@ -137,7 +138,7 @@ These live under `~/.openclaw/` and should NOT be committed to the workspace rep
 
 - `~/.openclaw/openclaw.json` (config)
 - `~/.openclaw/state/openclaw.sqlite` (shared workspace setup state and attestations)
-- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (model auth profiles, routing state, and other agent-scoped durability)
+- `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (model auth profiles, routing state, standing intents, and other agent-scoped durability)
 - `~/.openclaw/agents/<agentId>/agent/openclaw-agent.sqlite` (session rows, transcripts, and per-agent runtime state)
 - `~/.openclaw/agents/<agentId>/agent/codex-home/` (per-agent Codex runtime account, config, skills, plugins, and native thread state)
 - `~/.openclaw/credentials/` (channel/provider state plus legacy OAuth import data)

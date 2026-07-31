@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cron vs heartbeat"
 source: "https://docs.openclaw.ai/automation/cron-vs-heartbeat"
-source_hash: "7b7964a65b6a81dffbfd6288d028a1354c6593628d6423c2422212e93fd51fda"
+source_hash: "ef7d3d8571cb22efd36927029ad72f58a5ed1c56ea9aa0bcaaacbc19bd552800"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/cron-vs-heartbeat.md"
@@ -13,11 +13,11 @@ duplicate_index: 1
 # Cron vs heartbeat
 Source: https://docs.openclaw.ai/automation/cron-vs-heartbeat
 
-This page moved. See [Scheduled Tasks (Cron) vs Heartbeat](/automation#scheduled-tasks-cron-vs-heartbeat) for the decision table.
+This page moved. See [Automations vs Heartbeat](/automation#automations-vs-heartbeat) for the decision table.
 
 ## Related
 
-- [Scheduled tasks](/automation/cron-jobs)
+- [Automations](/automation/cron-jobs)
 - [Heartbeat](/gateway/heartbeat)
 - [Background tasks](/automation/tasks)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "8bcfb920b4f10df91e066594ef4d42a2edf8b5cd200ec143c8d96db2d6663141"
+source_hash: "067d88b1d81edcc4e97abd76de5ecdc315caec430f39db7ed2919b5c36684682"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -28,11 +28,11 @@ Working...
 
 Note
 
-  Discord already defaults to `streaming.mode: "progress"` when
-  `channels.discord.streaming` is unset, so progress drafts
-  show up there without any config. Every other channel defaults to `partial`
-  or `off`; see [Streaming and chunking](/concepts/streaming#channel-mapping)
-  for the full per-channel default table.
+  Discord and Telegram default to `streaming.mode: "progress"`, so progress
+  drafts show up there without any config. Set `mode: "partial"` on either to
+  stream answer text instead. Every other channel defaults to `partial` or
+  `off`; see [Streaming and chunking](/concepts/streaming#channel-mapping) for
+  the full per-channel default table.
 
 ## Quick start
 
@@ -48,7 +48,7 @@ Note
 }
 ```
 
-Defaults from here: a start delay of 5 seconds, compact progress lines while
+Defaults from here: a start delay of 1.5 seconds, compact progress lines while
 useful work happens, and suppression of the older standalone progress messages
 for that turn. Raw tool-line drafts use
 an automatic one-word label; a status headline omits that redundant title
@@ -66,11 +66,14 @@ migration, see [Streaming and chunking](/concepts/streaming).
 | Label           | Optional starter/status line such as `Working`.                                   |
 | Progress lines  | Compact run updates using the same tool icons and detail formatter as `/verbose`. |
 
+The status headline sits above the rolling progress lines and both stay visible,
+so one message answers what the agent is doing and how far it has got.
+
 For raw tool progress, the label appears once the agent starts meaningful work
 and stays busy for the initial delay.
 It sits at the top of the rolling progress-line list, so it scrolls away once
-enough concrete work lines appear. A status headline shows only the agent's
-plain-language status unless a label is configured explicitly. Plain text-only
+enough concrete work lines appear. The implicit label is hidden while a status
+headline is present unless you configure one explicitly. Plain text-only
 replies never show a progress draft; a line appears only for real work updates,
 for example `🛠️ Bash: run tests`, `🔎 Web Search: for "discord edit message"`,
 or `✍️ Write: to /tmp/file`.
@@ -163,7 +166,9 @@ Hide the label and show only progress lines:
 
 Progress lines come from real run events: tool starts, item updates, task
 plans, approvals, command output, patch summaries, and similar agent activity.
-They are enabled by default (`progress.toolProgress`, default `true`).
+They are enabled by default (`progress.toolProgress`, default `true`) and stay
+visible underneath the status headline. Set `progress.toolProgress: false` to
+keep the headline alone.
 
 Tools can also emit typed progress while a single call is still running. That
 is how a slow fetch or search updates the visible draft before the tool

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin architecture internals"
 source: "https://docs.openclaw.ai/plugins/architecture-internals"
-source_hash: "fd9364fb3aef81c6deda210ee84bf3ef176846674558b8a4d7e2a0aa666a0382"
+source_hash: "121b337a1f68f2b9585b83d862301d4cf21f91b388c91321659cc70bb25b045f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture-internals.md"
@@ -1076,7 +1076,12 @@ pipeline rather than just add memory search or hooks.
 
 export default function (api) {
   api.registerContextEngine("lossless-claw", (ctx) => ({
-    info: { id: "lossless-claw", name: "Lossless Claw", ownsCompaction: true },
+    info: {
+      id: "lossless-claw",
+      name: "Lossless Claw",
+      ownsCompaction: true,
+      acceptedHostParams: ["sessionKey"],
+    },
     async ingest() {
       return { ingested: true };
     },

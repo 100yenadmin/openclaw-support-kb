@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "ef052bd0d3ac2191157240e91dfaa2264d5c1ccd34560e272eec48ab2fa2b83b"
+source_hash: "bf153f49272a383c58e6ba5cdccf615b32db020e67e681dfc49f3437d756841b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -88,10 +88,10 @@ Detect OS
     Supports macOS and Linux (including WSL).
 
 
-Ensure Node.js 24 by default
+Ensure Node.js 26 by default
 
     Checks Node version and installs Node 26 if needed (Homebrew `node` on macOS, NodeSource setup scripts on Linux apt/dnf/yum). On macOS, Homebrew is installed only when the installer needs it for Node or Git. Node 22.22.3+, Node 24.15+, and Node 25.9+ are supported; Node 23 is unsupported.
-    On Alpine/musl Linux, the installer uses apk packages instead of NodeSource and verifies the actual linked SQLite version. Current stable Alpine package streams can provide a new-enough Node with vulnerable system SQLite; when that happens, use an official `node:24-alpine` container or a glibc-based host instead.
+    On Alpine/musl Linux, the installer uses apk packages instead of NodeSource and verifies the actual linked SQLite version. Current stable Alpine package streams can provide a new-enough Node with vulnerable system SQLite; when that happens, use an official `node:26-alpine` container or a glibc-based host instead.
 
 
 Ensure Git
@@ -359,7 +359,7 @@ Ensure PowerShell + Windows environment
     Requires PowerShell 5+.
 
 
-Ensure Node.js 24 by default
+Ensure a supported Node.js runtime
 
     If missing, attempts install via winget, then Chocolatey, then Scoop. If no package manager is available, the script downloads the official Node.js 26 Windows zip into `%LOCALAPPDATA%\OpenClaw\deps\portable-node` and adds it to the current process and user PATH. Node 22.22.3+, Node 24.15+, and Node 25.9+ are supported; Node 23 is unsupported.
 

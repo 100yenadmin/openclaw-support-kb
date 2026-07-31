@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dashboard"
 source: "https://docs.openclaw.ai/web/dashboard"
-source_hash: "51ff90ea7c98c66a3687ded3637015e376a9ebd6d59478e93179b245cdb15941"
+source_hash: "811601c1983ca3e19a4fb701f4fd4e32a5e24b3fd598a7bcbcc310757d2b2a15"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboard.md"
@@ -91,7 +91,7 @@ Non-goals for v1:
   - SecretRef-managed token: resolve the external secret provider, or export `OPENCLAW_GATEWAY_TOKEN` in this shell and rerun `openclaw dashboard`
   - Runtime token generated because no shared secret was configured: run `openclaw doctor --generate-gateway-token`, restart the Gateway, then use the configured token
 - In the dashboard settings, paste the token or password into the auth field, then connect.
-- The UI language picker lives in **Settings -> General -> Language**, not under Appearance.
+- The UI language picker lives in **Settings → Appearance → Language**.
 
 ## Related
 

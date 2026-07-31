@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "8cbff8574afc0f7814cb5006f97ff627c058428a17e823850f5b403ad0e23136"
+source_hash: "3eb7b17bd24bd4f1552256ee99dabfc8f143164925d1f61aed8e569752078f52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qa-channel.md"
@@ -96,7 +96,7 @@ Builds the QA site, starts the Docker-backed gateway + QA Lab stack, and prints 
 
 ## Related
 
-- [QA overview](/concepts/qa-e2e-automation) - overall stack, transport adapters, Matrix profiles, and scenario authoring
+- [QA overview](/concepts/qa-e2e-automation) - overall stack, transport adapters, the Matrix live lane, and scenario authoring
 - [Pairing](/channels/pairing)
 - [Groups](/channels/groups)
 - [Channels overview](/channels)

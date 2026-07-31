@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS permissions"
 source: "https://docs.openclaw.ai/platforms/mac/permissions"
-source_hash: "7b5728731d5bad42171788b917b10fd2fc6aecc475b96b02dfa75ae3a3ae286a"
+source_hash: "ba1702d55a2412a4cba3f3c7b5bd10d2e8a74fffb57916d1c29c2d52ee81d539"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/permissions.md"
@@ -17,7 +17,7 @@ macOS permission grants are fragile. TCC associates a permission grant with the 
 
 ## Requirements for stable permissions
 
-- Same path: run the app from a fixed location (for OpenClaw, `dist/OpenClaw.app`).
+- Same path: run a release app from `/Applications/OpenClaw.app`; keep development builds at one fixed path such as `dist/OpenClaw.app`.
 - Same bundle identifier: OpenClaw's bundle ID is `ai.openclaw.mac`; changing it creates a new permission identity.
 - Signed app: unsigned or ad-hoc signed builds do not persist permissions.
 - Consistent signature: use a real Apple Development or Developer ID certificate so the signature stays stable across rebuilds.
@@ -35,6 +35,12 @@ Treat a `node` entry in System Settings as broad permission for that Node runtim
 Accessibility approval does not enable activity sharing. **Settings -> Permissions -> Active computer detection** is a separate, off-by-default control for sharing bounded idle duration with your Gateway. Turning it off clears retained activity without revoking Accessibility or disconnecting the node.
 
 If you accidentally granted Accessibility to `node`, remove that entry from System Settings -> Privacy & Security -> Accessibility. Then grant the signed app or helper that should own UI automation.
+
+## Separate Computer Control grants
+
+macOS keeps Accessibility, Event Posting, input listening, and Screen Recording in separate TCC buckets. One successful grant does not prove the others are usable. OpenClaw's Computer Control status checks Accessibility, Event Posting, and Screen Recording separately; this is why screenshots can succeed while clicks and typing fail.
+
+An Accessibility row can also remain visibly enabled while its code requirement is pinned to an older build. When OpenClaw reports **Accessibility grant may be stale**, select OpenClaw under **System Settings -> Privacy & Security -> Accessibility**, remove it with **-**, then re-add `/Applications/OpenClaw.app`. Quit and reopen OpenClaw afterward because Accessibility trust can remain cached in the running process.
 
 ## Recovery checklist when prompts disappear
 

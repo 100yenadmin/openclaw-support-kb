@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zoom meetings plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zoom-meetings"
-source_hash: "aa06f24afd95c2878655efafa8b200d854b765e9a8b35e5ac79a41f98714b37d"
+source_hash: "17e779dced95fe2ef2ee542b01cca746aed6eb88bafe2e9662a5f8dfbb8120c3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zoom-meetings.md"
@@ -20,7 +20,7 @@ Join Zoom meetings as a Chrome browser guest.
 ## Distribution
 
 - Package: `@openclaw/zoom-meetings`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/zoom-meetings`
 
 ## Surface
 

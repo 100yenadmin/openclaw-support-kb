@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Wiki"
 source: "https://docs.openclaw.ai/cli/wiki"
-source_hash: "4c55ee8ed29f1565b87f5df382b721b6958855d2a4138f241a40b7724b47bd00"
+source_hash: "f988020b19f12a7a6dd8fc3a858a38d1c663e39668c00c8e0ff2a132510d3779"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/wiki.md"
@@ -223,7 +223,7 @@ A non-dry-run import that changes any page records an import run id, printed in 
 
 ### `wiki chatgpt rollback <run-id>`
 
-Roll back a previously applied ChatGPT import run, removing pages it created and restoring pages it overwrote. No-ops (and reports `alreadyRolledBack`) if the run was already rolled back.
+Roll back a previously applied ChatGPT import run, removing pages it created and restoring pages it overwrote. Pages changed after import are moved under the run's `.openclaw-wiki/import-runs/<run-id>/recovered/` directory instead of being deleted. Recovery paths remain in the command result on retries and later `alreadyRolledBack` responses. Interrupted runs remain `rolling_back` while target recovery or derived-artifact compilation is incomplete. A persisted process-restart fence separates those phases: after it, retries rebuild indexes and compiled caches without rewriting source pages or moving later pathname writes. A later normal compile may refresh machine-managed Related blocks. This covers in-process failure and process restart after ordinary filesystem calls return, not kernel or host power-loss ordering.
 
 ### `wiki obsidian ...`
 

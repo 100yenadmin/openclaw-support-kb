@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image and media support"
 source: "https://docs.openclaw.ai/nodes/images"
-source_hash: "c166885f4d10ffbb68f1749321d2fc023da49cd7d2b6d2dee8d315198b84bf43"
+source_hash: "212197fb82cdd3922335ea7df8b134cafacdb7f3e52e2bc8cbc0de44d85f1010"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/images.md"
@@ -14,6 +14,10 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/nodes/images
 
 The WhatsApp channel runs on Baileys Web. This page covers media handling rules for send, gateway, and agent replies.
+
+For inline audio and video in the Control UI and native apps, including
+portable formats, byte limits, and lazy transcoding, see
+[Media playback](/nodes/media-playback).
 
 ## Goals
 
@@ -98,6 +102,7 @@ The 16MB audio/video and 100MB document figures above are the shared per-kind me
 
 - [Camera capture](/nodes/camera)
 - [Media understanding](/nodes/media-understanding)
+- [Media playback](/nodes/media-playback)
 - [Audio and voice notes](/nodes/audio)
 
 ---

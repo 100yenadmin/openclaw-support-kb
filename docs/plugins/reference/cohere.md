@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cohere plugin"
 source: "https://docs.openclaw.ai/plugins/reference/cohere"
-source_hash: "2acce9ef23d02c9087fbe1b2668bfcef9ae31a3ce26a2f4a0a3117bd5065d023"
+source_hash: "7e4ca5264e287d452ea383c311f1e52b5091b99c082547ec8395d94fe46e7a36"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/cohere.md"
@@ -20,7 +20,7 @@ OpenClaw Cohere provider plugin.
 ## Distribution
 
 - Package: `@openclaw/cohere-provider`
-- Install route: included in OpenClaw; npm; ClawHub: `clawhub:@openclaw/cohere-provider`
+- Install route: npm; ClawHub: `clawhub:@openclaw/cohere-provider`
 
 ## Surface
 

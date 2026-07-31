@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sub-agents"
 source: "https://docs.openclaw.ai/tools/subagents"
-source_hash: "098e4fc7f5b39ecab2f74a024fcf12ac115017cfa27e29aeda9af034892c9c4e"
+source_hash: "d256a948c05fedea1a3625670e97fb3bd7156deb3aaa4f5bbb828378718283c6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/subagents.md"
@@ -316,6 +316,11 @@ answer until those completions arrive.
 `sessions_yield` is the waiting primitive. Do not replace it with polling
 loops over `subagents`, `sessions_list`, `sessions_history`, shell
 `sleep`, or process polling just to detect child completion.
+
+On native Codex harness turns, `wait_agent` keeps the current turn active and
+is reserved for an intentional same-turn wait when the immediate next step is
+blocked on the child. Use `sessions_yield` instead when a native child's result
+should resume the parent in a later turn.
 
 Only use `sessions_yield` when the session's effective tool list includes
 it. Some minimal or custom tool profiles may expose `sessions_spawn` and

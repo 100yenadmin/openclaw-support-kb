@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dashboard Architecture"
 source: "https://docs.openclaw.ai/web/dashboard-architecture"
-source_hash: "4012e4a03f67dc2f0406cb1e1910039fbae13c707144825409cbec4816c5293e"
+source_hash: "ce346c271a6d277e487ed7e74f893b7e7fdcab81581bd5c8f1713196f848f871"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboard-architecture.md"
@@ -332,7 +332,7 @@ capabilities? }` — create/update by name; `pin` places it on the board.
 - `dashboard { action, ... }` — board management verbs: `read`, `tab_create`,
   `tab_update`, `tab_delete`, `tabs_reorder`, `widget_move`, `widget_remove`,
   `unpin`, `focus_tab`, `set_chat_dock`.
-- Existing `cron` tools cover the automation tier; no new tool needed.
+- The existing `automations` tool covers the automation tier; no new tool needed.
 
 Tool descriptions teach the size/anchor vocabulary and the tier model. The
 agent is told about user tier-1 events via session notices, e.g.

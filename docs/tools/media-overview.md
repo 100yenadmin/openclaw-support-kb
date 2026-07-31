@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media overview"
 source: "https://docs.openclaw.ai/tools/media-overview"
-source_hash: "d0df765dd4148b5656020c747bea4c534fdf1737049fa0b7db4267069141df9b"
+source_hash: "9fb915b7bcd905844f8c2b0ea45e62624647856e7f18ee65fdef3d1e6c26f7ff"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/media-overview.md"
@@ -65,6 +65,12 @@ Speech-to-text
 
     Transcribe inbound voice messages through batch STT or Voice Call
     streaming STT providers.
+
+
+Media playback
+
+    Play assistant audio and video inline across the Control UI and native
+    apps, with managed access and portable playback renditions.
 
 
 ## Provider capability matrix
@@ -196,6 +202,7 @@ xAI
 - [Video generation](/tools/video-generation)
 - [Music generation](/tools/music-generation)
 - [Text-to-speech](/tools/tts)
+- [Media playback](/nodes/media-playback)
 - [Media understanding](/nodes/media-understanding)
 - [Audio nodes](/nodes/audio)
 - [Talk mode](/nodes/talk)

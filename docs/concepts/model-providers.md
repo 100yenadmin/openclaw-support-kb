@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "9049a86c52a44f1173b876e5cfbd7589fb6e6d7b3869a0eb3c103b24f28b4297"
+source_hash: "e614640216cb373f2c238ae573d045929dd4619094ca7ce1a2d0dce996a034cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -268,63 +268,18 @@ Z.AI (GLM)
 - Thinking: `/think adaptive` uses Google dynamic thinking. Gemini 3/3.1 omit a fixed `thinkingLevel`; Gemini 2.5 sends `thinkingBudget: -1`.
 - Direct Gemini runs also accept `agents.defaults.models["google/<model>"].params.cachedContent` (or legacy `cached_content`) to forward a provider-native `cachedContents/...` handle; Gemini cache hits surface as OpenClaw `cacheRead`
 
-### Google Vertex and Gemini CLI
+### Google Vertex and Gemini CLI runtime
 
-- Providers: `google-vertex`, `google-gemini-cli`
-- Auth: Vertex uses gcloud ADC; Gemini CLI uses its OAuth flow
+- `google-vertex`: managed Google Cloud access through gcloud Application
+  Default Credentials.
+- `google-gemini-cli`: optional local runtime for an explicitly configured
+  canonical `google/*` model.
 
-Warning
-
-Gemini CLI OAuth in OpenClaw is an unofficial integration. Some users have reported Google account restrictions after using third-party clients. Review Google terms and use a non-critical account if you choose to proceed.
-
-Gemini CLI OAuth is shipped as part of the bundled `google` plugin.
-
-Steps
-
-
-Install Gemini CLI
-
-
-Tabs
-
-
-brew
-
-        ```bash
-        brew install gemini-cli
-        ```
-
-
-npm
-
-        ```bash
-        npm install -g @google/gemini-cli
-        ```
-
-
-
-
-Enable plugin
-
-    ```bash
-    openclaw plugins enable google
-    ```
-
-
-Login
-
-    ```bash
-    openclaw models auth login --provider google-gemini-cli --set-default
-    ```
-
-    Default model: `google-gemini-cli/gemini-3-flash-preview`. You do **not** paste a client id or secret into `openclaw.json`. The CLI login flow stores tokens in auth profiles on the gateway host.
-
-
-
-Set project (if needed)
-
-    If requests fail after login, set `GOOGLE_CLOUD_PROJECT` or `GOOGLE_CLOUD_PROJECT_ID` on the gateway host.
-
+OpenClaw does not create Gemini CLI OAuth or Antigravity OAuth profiles. Connect
+Google through an AI Studio API key or Vertex AI. If you explicitly choose the
+Gemini CLI runtime, it can use the selected Google API-key profile. Existing
+valid Gemini CLI OAuth profiles remain runtime-compatible, but they are not a
+setup or recovery route.
 
 Gemini CLI uses `stream-json` by default. OpenClaw reads assistant stream
 messages and normalizes `stats.cached` into `cacheRead`; legacy
@@ -376,7 +331,7 @@ messages and normalizes `stats.cached` into `cacheRead`; legacy
 | Venice                                  | `venice`                         | `VENICE_API_KEY`                                     | -                                                      |
 | Vercel AI Gateway                       | `vercel-ai-gateway`              | `AI_GATEWAY_API_KEY`                                 | `vercel-ai-gateway/anthropic/claude-opus-4.6`          |
 | Volcano Engine (Doubao)                 | `volcengine` / `volcengine-plan` | `VOLCANO_ENGINE_API_KEY`                             | `volcengine-plan/ark-code-latest`                      |
-| xAI                                     | `xai`                            | SuperGrok/X Premium OAuth or `XAI_API_KEY`           | `xai/grok-4.3`                                         |
+| xAI                                     | `xai`                            | SuperGrok/X Premium OAuth or `XAI_API_KEY`           | OAuth: `xai/auto`; API key: `xai/grok-4.3`             |
 | Xiaomi                                  | `xiaomi` / `xiaomi-token-plan`   | `XIAOMI_API_KEY` / `XIAOMI_TOKEN_PLAN_API_KEY`       | `xiaomi/mimo-v2.5` / `xiaomi-token-plan/mimo-v2.5-pro` |
 
 #### Quirks worth knowing
@@ -406,7 +361,7 @@ NVIDIA
 
 xAI
 
-    Uses the xAI Responses path. The recommended path is SuperGrok/X Premium OAuth; API keys still work via `XAI_API_KEY` or plugin config, and Grok `web_search` reuses the same auth profile before API-key fallback. Grok 4.5 is selectable for chat, coding, and agentic work where available; `grok-4.3` remains the regional-safe bundled default. Older `/fast` and `params.fastMode: true` configurations still resolve through xAI's Grok 4.3 compatibility redirects, but new configurations should select a current model directly. `tool_stream` defaults on; disable via `agents.defaults.models["xai/<model>"].params.tool_stream=false`.
+    Uses the xAI Responses path. The recommended path is SuperGrok/X Premium OAuth; fresh setup selects `xai/auto`, which follows xAI's authenticated default model without an OpenClaw update. Existing concrete model ids stay pinned. API keys still work via `XAI_API_KEY` or plugin config and keep `grok-4.3` as the regional-safe setup default. Grok `web_search` reuses the same auth profile before API-key fallback. Older `/fast` and `params.fastMode: true` configurations still resolve through xAI's Grok 4.3 compatibility redirects, but new configurations should select a current model directly. `tool_stream` defaults on; disable via `agents.defaults.models["xai/<model>"].params.tool_stream=false`.
 
 
 ## Providers via `models.providers` (custom/base URL)

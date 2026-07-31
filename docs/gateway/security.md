@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security"
-source_hash: "f1d5eefed6fce8750802ee3d5c2a22fade3d57a782bc1fbee674f21b14262163"
+source_hash: "2aac10a7844bef6691e2ee11bbeab9bc1e1b3ebc3b3d25b7b71e3cb8cd629bc2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security.md"
@@ -17,7 +17,7 @@ Warning
 
   **Personal assistant trust model.** This guidance assumes one trusted
   operator boundary per gateway (single-user, personal-assistant model).
-  OpenClaw is **not** a hostile multi-tenant security boundary for multiple
+  OpenClaw is not a hostile multi-tenant security boundary for multiple
   adversarial users sharing one agent or gateway. For mixed-trust or
   adversarial-user operation, split trust boundaries: separate gateway +
   credentials, ideally separate OS users or hosts.
@@ -661,6 +661,7 @@ Trusted proxy headers do not make node device pairing automatically trusted - `g
 - OpenClaw's gateway is local/loopback first. If you terminate TLS at a reverse proxy, set HSTS there.
 - If the gateway itself terminates HTTPS, `gateway.http.securityHeaders.strictTransportSecurity` emits the HSTS header from OpenClaw responses.
 - Non-loopback Control UI deployments require `gateway.controlUi.allowedOrigins` by default; `allowedOrigins: ["*"]` is an explicit allow-all policy, not a hardened default - avoid it outside tightly controlled local testing.
+- Failed authentication from loopback is never locked out, so a local CLI cannot be denied before its credentials are checked. Wrong credentials are still tracked and progressively delayed (bounded delay, one shared timer per key); successful authentication resets the failure history. This raises the cost of repeated guessing from one loopback source; it is not a defense against an attacker who can already open many parallel loopback connections, because credentials are compared before the failure response is delayed. Loopback reachability is a trust boundary in its own right - see [Node pairing](/gateway/pairing#silent-local-pairing).
 - Browser-origin auth failures on loopback are still rate-limited even with the general loopback exemption enabled, but the lockout key is scoped per normalized `Origin` value instead of one shared localhost bucket.
 - `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true` enables Host-header origin fallback mode; treat it as a dangerous operator-selected policy.
 - Treat DNS rebinding and proxy-host header behavior as deployment hardening concerns; keep `trustedProxies` tight and avoid exposing the gateway directly to the public internet.

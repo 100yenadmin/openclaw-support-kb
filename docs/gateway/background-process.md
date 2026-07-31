@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "93c02e0117dcb8b0a50eed0724216bf487a9b811ebc925a2e1846cd6e4855864"
+source_hash: "67e8e07ce18a66dc69169e12b4298a83df537a2c0c6e1dce32ec5a6e292db9e1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -38,6 +38,7 @@ Behavior:
 - When backgrounded (explicit or via `yieldMs` timeout), the tool returns `status: "running"` + `sessionId` and a short output tail.
 - Backgrounded and `yieldMs` runs inherit `tools.exec.timeoutSeconds` unless the call passes an explicit `timeout`.
 - Output stays in memory until the session is polled or cleared.
+- Finished sessions expire after their configured TTL. The registry also retains at most 50 finished sessions and 2,000,000 total output characters, evicting the oldest records first. The newest completed session retains its full output even if it exceeds the aggregate limit.
 - If the `process` tool is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.
 - Spawned exec commands receive `OPENCLAW_SHELL=exec` for context-aware shell/profile rules.
 - For long-running work that starts now: start it once and rely on automatic completion wake (when enabled) once the command emits output or fails.
@@ -88,6 +89,7 @@ Actions:
 Notes:
 
 - Only backgrounded sessions are listed/persisted — in memory only, not on disk. Sessions are lost on process restart.
+- Resetting or deleting a session clears only its completed background processes; other sessions, explicit shared scopes, and running processes remain unaffected.
 - A live background session blocks cooperative host suspension and safe Gateway restart until the process owner confirms its actual exit.
 - `process remove` can hide a running session immediately after requesting termination; suspension and restart remain blocked until exit confirmation.
 - Session logs are only saved to chat history if you run `process poll`/`log` and the tool result is recorded.

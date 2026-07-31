@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Webhooks"
 source: "https://docs.openclaw.ai/cli/webhooks"
-source_hash: "062fa77647d18dabcd3877730e69d88751c391423f7c3035920701f200befe46"
+source_hash: "cf842a404aa3475388140fec5c8467361bc9d936eede34080bd4271ae6f442a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/webhooks.md"
@@ -42,6 +42,10 @@ openclaw webhooks gmail setup --account you@example.com --hook-url https://gatew
 ```
 
 Installs `gcloud` and `gog` if missing, authenticates `gcloud`, creates the Pub/Sub topic and subscription, starts the Gmail watch, and writes `hooks.gmail` config with `hooks.enabled=true`. Prints `Next: openclaw webhooks gmail run`.
+
+Warning
+
+This command connects Gmail transport but does not create a restricted reader agent or the session-key policy required by the templated preset. Without a custom Gmail mapping that sets `agentId`, inbound email runs as the default agent with that agent's effective workspace, sandbox, and tool policy. Complete [Configure a restricted Gmail reader](/automation/cron-jobs#configure-a-restricted-gmail-reader-recommended) before running setup for an untrusted inbox.
 
 ### Required
 

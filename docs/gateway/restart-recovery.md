@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Restart recovery"
 source: "https://docs.openclaw.ai/gateway/restart-recovery"
-source_hash: "9ddfad84c375f8ba02a72e0dcfb06592b223455789de344e2396c6d4e505ec5d"
+source_hash: "1447a834763a0a79d23739ff461a0ec0ec7878fa0e25491511e170c9a4221527"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/restart-recovery.md"
@@ -64,8 +64,13 @@ Three complementary mechanisms mark sessions whose turn did not finish:
   Recovery never replays a hook interrupted mid-call. Once an unhandled hook
   finishes, its checkpoint records that result, but recovery still fails closed
   while that hook remains active: a checkpoint cannot prove that the same
-  plugin code and configuration loaded after the restart. Handled text and
-  silent results are checkpointed separately for deterministic settlement.
+  plugin code and configuration loaded after the restart. A
+  `before_agent_reply` hook may declare a host-enforced
+  `eligibleTriggers` scope; a hook limited to scheduled `heartbeat` or `cron`
+  turns is not active for a recovered user turn and therefore does not block
+  it. Unscoped or invalid registrations remain active for this safety check.
+  Handled text and silent results are checkpointed separately for deterministic
+  settlement.
   Durable recovery claims written by older versions have no source-ownership
   marker, so they receive the same fail-closed hook check during an upgrade.
 - **At shutdown:** during the restart drain, every session with an active run
@@ -230,6 +235,9 @@ channels.start --params '{"channel":"<id>"}'`
 - **Logs:** recovery decisions are logged under the
   `main-session-restart-recovery` and `subagent-interrupted-resume`
   subsystems.
+- **Reply hooks:** automatically delivered replies from resumed main-session
+  turns run the normal `reply_payload_sending` hook before channel delivery,
+  with the recovered session, run, account, and conversation context.
 
 ## What is not resumed
 

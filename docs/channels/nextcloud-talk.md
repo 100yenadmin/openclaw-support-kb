@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nextcloud Talk"
 source: "https://docs.openclaw.ai/channels/nextcloud-talk"
-source_hash: "4cce4811a832f5693097003c690e9bee03227d6ffb9dd4dde584f3356ac86d40"
+source_hash: "b0fad0fc7e3101efc123a2e3ab5ea1bc365607aba9736f00123a11e41a6b7981"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/nextcloud-talk.md"
@@ -92,6 +92,7 @@ Minimal config:
 
 - Bots cannot initiate DMs. The user must message the bot first.
 - The webhook URL must be reachable from the Nextcloud server; set `webhookPublicUrl` when the gateway sits behind a proxy. Webhook requests are HMAC-SHA256 signed with the bot secret; invalid signatures are rejected and rate limited.
+- HTTP 200 is returned only after the raw event is durably stored; storage failures return HTTP 500. The durable `200` carries `x-openclaw-delivery-accepted: durable` (signature, validation, and storage-error responses omit it), so reverse proxies can require the marker to distinguish OpenClaw acceptance from a generic `200`.
 - Media uploads are not supported by the bot API; outbound media is appended as an `Attachment: <url>` line.
 - The webhook payload does not distinguish DMs from rooms; set `apiUser` + `apiPassword` to enable room-type lookups (cached about 5 minutes). Without them, every conversation is treated as a room.
 - Outbound requests go through the SSRF guard. For a Nextcloud host on a trusted private/internal network, opt in with `channels.nextcloud-talk.network.dangerouslyAllowPrivateNetwork: true`.

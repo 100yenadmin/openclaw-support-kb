@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "e36b2716d356f2ece67bc44d1a63675100d8f9d18e016afb9c7a009544b7c0cb"
+source_hash: "bab35e7ab7a9f82d4b035370bd29855b69e2b0cdb9256f6dba17075c3d44e5c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -79,6 +79,7 @@ Mobile nodes
 **Media:**
 
 - Images, audio, video, and documents in and out
+- [Inline audio and video playback](/nodes/media-playback) across the Control UI, iOS/macOS, Android, and the Linux companion
 - Shared image generation and video generation capability surfaces
 - Voice note transcription
 - Text-to-speech with multiple providers

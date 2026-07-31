@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mattermost"
 source: "https://docs.openclaw.ai/channels/mattermost"
-source_hash: "b7b3b9d7106561c10190fcb166aebe7c4d67a1eed5910c9d1d3055bb15622bb0"
+source_hash: "abc7cf8f39cd723199fca2b1052fe92119b4aafb10ed7d501280fecc794c6ec8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/mattermost.md"
@@ -358,6 +358,20 @@ Streaming behavior notes
     - See [Streaming](/concepts/streaming#preview-streaming-modes) for the channel-mapping matrix.
 
 
+
+## Read channel history (message tool)
+
+Use `message action=read` or the CLI to read posts from a channel that the configured Mattermost bot can access:
+
+```bash
+openclaw message read --channel mattermost --target channel:<channelId> --limit 5 --json
+```
+
+- Results follow Mattermost's ordered post list and include normalized `timestampMs` and `timestampUtc` fields.
+- `limit` defaults to 60 and is capped at Mattermost's maximum of 200. Use either `before=<postId>` or `after=<postId>` for pagination; the two cursors cannot be combined.
+- Direct operator calls rely on Mattermost's channel membership and `read_channel` permission. A provider 403 remains a normal, visible tool error.
+- Delegated reads of the current Mattermost conversation are allowed for the current account. Cross-channel delegated reads additionally require the destination channel ID under `channels.mattermost.groups`, a `"*"` groups entry, or `groupPolicy: "open"`. Cross-account and cross-channel DM reads fail closed.
+- History reads are disabled by default. Set `channels.mattermost.actions.messages: true` to enable them. Override the setting per account with `channels.mattermost.accounts.<id>.actions.messages`.
 
 ## Reactions (message tool)
 

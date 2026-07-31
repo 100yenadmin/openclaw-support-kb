@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "57160fd3cc5d6a7e5061adf07389728c1f1d7d5ecd6d01f2233b5d7103f5be69"
+source_hash: "bdcab9d0c4dd9905acaaa964ea5dd176ca2f717186894a5f1a2c1808205fd526"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -137,7 +137,7 @@ OpenClaw is a **self-hosted gateway** that connects your favorite chat apps — 
 - **Agent-native**: built for coding agents with tool use, sessions, memory, and multi-agent routing
 - **Open source**: MIT licensed, community-driven
 
-**What do you need?** Node 24.15+ (recommended), Node 22 LTS (`22.22.3+`) for compatibility, or Node 25.9+, an API key from your chosen provider, and 5 minutes. For best quality and security, use the strongest latest-generation model available.
+**What do you need?** Node 26 (recommended), or another supported release: Node 22.22.3+, Node 24.15+, or Node 25.9+. You also need an API key from your chosen provider and 5 minutes. For best quality and security, use the strongest latest-generation model available.
 
 ## How it works
 

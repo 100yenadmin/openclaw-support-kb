@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "4973e01caba5486df4b1bd07a3386136a9834ba16599426ffcef3d21cfdaa0d8"
+source_hash: "77ebefcba38029a08967b1ecd08d17d6629ba64a1bf92a8a1ab64f6d42cdca84"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -34,6 +34,20 @@ setup, channel pairing, daemon controls, skills, and imports. Run it explicitly
 with `openclaw onboard --classic`; the guided inference picker does not delegate
 into it. After inference passes, OpenClaw can use `open channel wizard for
 <channel>` to hand channel setup that needs secrets to a masked terminal wizard.
+Workspace skills and web search are configured the same conversational way:
+`configure skills` and `configure web search` host those setup flows in the
+chat, and `open search wizard` hands credential entry to the masked terminal
+wizard.
+For a local Gateway, `configure gateway` guides port, bind, auth, and Tailscale
+settings but saves config without restarting; say `restart gateway` afterward,
+or use `open gateway wizard` for masked terminal credential entry and then run
+`openclaw gateway restart`. Remote Gateway mode remains an onboarding or
+`openclaw configure` choice rather than a hosted chat wizard.
+
+After onboarding has created the default agent workspace, `import memory` can
+copy detected local memory into it. This conversational import does not change
+config or import credentials or skills, needs no Gateway restart, and reports
+per-source partial or failed copies honestly.
 To change the model provider or its authentication, exit OpenClaw and run
 `openclaw onboard`; OpenClaw does not open guided or classic provider flows.
 
@@ -72,8 +86,9 @@ Tip
 The classic wizard includes a web search step where you can pick a provider: Brave,
 DuckDuckGo, Exa, Firecrawl, Gemini, Grok, Kimi, MiniMax Search, Ollama Web
 Search, Perplexity, SearXNG, or Tavily. Some need an API key; others are
-key-free. Configure this later with `openclaw configure --section web`. Docs:
-[Web tools](/tools/web).
+key-free. Configure this later with `openclaw configure --section web`, or say
+`configure web search` in the OpenClaw chat to run the same provider setup
+conversationally. Docs: [Web tools](/tools/web).
 
 ## Guided default
 
@@ -83,10 +98,9 @@ Plain `openclaw onboard` follows this path:
 2. Detect configured models, API-key environment variables, supported local AI
    CLIs, and already installed tool-capable models from reachable Ollama or LM
    Studio servers on the Gateway host. This read-only pass never downloads a
-   model. Gemini CLI, Antigravity, Pi, and OpenCode installs are also reported
-   when they cannot serve as the reusable inference route for guided setup.
-   Gemini and Antigravity cannot enforce the tool-free probe; Pi and OpenCode
-   are whole-agent harnesses rather than setup inference routes.
+   model. Pi and OpenCode installs may also be reported for context when they
+   cannot serve as the reusable inference route. Gemini CLI and Antigravity are
+   not offered as detected setup routes.
 3. Test the first detected candidate with a real completion. On failure, show the
    reason and continue to the next usable candidate.
 4. If detection is exhausted, choose OpenAI, Anthropic, xAI (Grok), Google, or

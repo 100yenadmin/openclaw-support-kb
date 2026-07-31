@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Compaction"
 source: "https://docs.openclaw.ai/concepts/compaction"
-source_hash: "3455819129baac634736fda253b2a1eb430f3b2393799675a96a83d0c4d5fa62"
+source_hash: "130d4b6a0112e017574a40a7e4428359f1b0faa5ce134bf0773c7ab559e0cb22"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/compaction.md"
@@ -119,8 +119,11 @@ When `agents.defaults.compaction.maxActiveTranscriptBytes` is set, OpenClaw
 triggers normal local compaction before a run if transcript history reaches
 that size. This is useful for long-running sessions where provider-side context
 management may keep model context healthy while persisted transcript history
-keeps growing. It does not split raw bytes; it asks the normal compaction
-pipeline to create a semantic summary.
+keeps growing. Set a positive byte count or size string such as `"20mb"` to opt
+in; `0` or an unset value disables the guard. It does not split raw bytes; it
+asks the normal compaction pipeline to create a semantic summary. For Codex
+app-server sessions, the same threshold caps native rollout transcripts and
+oversized native threads restart fresh.
 
 Warning
 
@@ -129,7 +132,7 @@ checkpoint artifacts are not the active compaction target.
 
 ### Successor transcripts
 
-When `agents.defaults.compaction.truncateAfterCompaction` is enabled, a context engine may return an explicit compacted successor session identity. OpenClaw adopts that successor and records checkpoint metadata against it. The built-in SQLite compactor keeps the current session identity and does not create a second runtime transcript.
+A context engine may return an explicit compacted successor session identity. OpenClaw adopts that successor and records checkpoint metadata against it. The built-in SQLite compactor keeps the current session identity and does not create a second runtime transcript.
 
 OpenClaw no longer writes separate `.checkpoint.*.jsonl` copies for new
 compactions. Existing legacy checkpoint files can still be used while referenced

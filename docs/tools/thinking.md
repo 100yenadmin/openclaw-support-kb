@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "5499ff7d05647e847212771a4dda41dad6d79150c177d3e5678601f9e53ee464"
+source_hash: "5136764fe44d095f5a4b6e562a3f660144a82233aba04676dd6407d1157852d3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -130,7 +130,7 @@ Malformed local-model reasoning tags are handled conservatively. Closed `<think>
 
 ## Heartbeats
 
-- Heartbeat probe body is the configured heartbeat prompt (default: `Follow the heartbeat monitor scratch context when provided. Recurring tasks are cron jobs; create or change their schedules with cron tools or the openclaw cron CLI, not heartbeat scratch. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.`). Inline directives in a heartbeat message apply as usual (but avoid changing session defaults from heartbeats).
+- Heartbeat probe body is the configured heartbeat prompt (default: `Follow the heartbeat monitor scratch context when provided. Recurring tasks are automations; create or change their schedules with the automations tool, not heartbeat scratch. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.`). Inline directives in a heartbeat message apply as usual (but avoid changing session defaults from heartbeats).
 - Heartbeat delivery uses the last outbound-capable non-reasoning payload. Separate reasoning or `Thinking` payloads remain internal, and a reasoning-only heartbeat result produces no alert.
 
 ## Web chat UI

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin permission requests"
 source: "https://docs.openclaw.ai/plugins/plugin-permission-requests"
-source_hash: "d7c69303e78190fc7c42ea1c016a0dcf8dd11503e2223d5841f57fc61341d77f"
+source_hash: "5959c9aa1281e6b084d2f2030196cd857573a6acc6f738b35c744737483e42d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-permission-requests.md"
@@ -118,9 +118,10 @@ current call and passes the resolved value to `onResolution`. If your plugin
 offers `allow-always`, document and implement exactly what future calls it
 trusts.
 
-If the hook also returns `params`, OpenClaw applies those parameter changes only
-after the approval succeeds. A lower-priority hook can still block after a
-higher-priority hook requested approval.
+If the hook also returns `params`, OpenClaw snapshots the base parameters and
+those overrides when approval is requested, then applies the overrides only
+after approval succeeds. A lower-priority hook can still block, but cannot
+rewrite the parameters covered by the pending approval.
 
 `allowedDecisions` limits the buttons and commands shown to the user. The
 Gateway rejects a resolve attempt for any decision the request did not offer.

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Export company with agents and projects"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/board-operator/importing-and-exporting.md"
-source_hash: "7a25f0cc7efa8d7c74198af2b9db690e0f3ecd8d60fa35718321caef006d37ed"
+source_hash: "1185227cdd11ac915557a50e61f17b271a98d8c6f939eff49727925c9444dcbd"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/board-operator/importing-and-exporting.md"
@@ -46,6 +46,14 @@ my-company/
 - **AGENT.md** files contain agent identity, role, and instructions.
 - **SKILL.md** files are compatible with the Agent Skills ecosystem.
 - **.paperclip.yaml** holds Paperclip-specific config (adapter types, env inputs, budgets) as an optional sidecar.
+
+## Export & Import in the App
+
+Both flows are also available in the web UI as company settings pages: **Export** and **Import** appear in the company settings navigation.
+
+The **Export** page lets you pick exactly which files go into the bundle before downloading it. Above the file tree it shows a **"Not included in this export"** panel — the export fidelity report — listing data the bundle will not carry (for example attachments, approvals, cost history, or activity log entries), with blocking issues highlighted.
+
+The **Import** page previews the package, lets you resolve name collisions and adapter assignments, and applies the import. A **"Start imported agents and routines paused"** checkbox (on by default) makes imported agents and routines land paused instead of live. After the import finishes, an **"Activate imported agents and routines"** panel lists everything that was imported paused so you can resume the agents and activate the routines you select — nothing starts running until you say so.
 
 ## Exporting a Company
 
@@ -160,6 +168,8 @@ The preview shows:
 
 Imported agents always land with timer heartbeats disabled. Assignment/on-demand wake behavior from the package is preserved, but scheduled runs stay off until a board operator re-enables them.
 
+Imports can additionally request `pauseAutomations` (the default in the app's Import page) so imported agents and routines land fully paused. Use the post-import activation panel — or resume the agents and activate the routines individually — when you are ready for them to run.
+
 ### Common Workflows
 
 **Clone a company template from GitHub:**
@@ -202,10 +212,13 @@ The CLI commands use these API endpoints under the hood:
 | Action | Endpoint |
 |--------|----------|
 | Export company | `POST /api/companies/{companyId}/export` |
+| Export fidelity report | `GET /api/companies/{companyId}/export/fidelity` |
 | Preview import (existing company) | `POST /api/companies/{companyId}/imports/preview` |
 | Apply import (existing company) | `POST /api/companies/{companyId}/imports/apply` |
 | Preview import (new company) | `POST /api/companies/import/preview` |
 | Apply import (new company) | `POST /api/companies/import` |
+
+Import apply requests accept `pauseAutomations: true` to create imported agents and routines in a paused state.
 
 CEO agents can also use the safe import routes (`/imports/preview` and `/imports/apply`) which enforce non-destructive rules: `replace` is rejected, collisions resolve with `rename` or `skip`, and issues are always created as new.
 
