@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Update"
 source: "https://docs.openclaw.ai/cli/update"
-source_hash: "aaa4ae7f890e55e58bd55b7560ce898a2e74245119d01ff838c95817e7912d2f"
+source_hash: "6cc00f7c11eee3b7bad873e16ad3975218610fa28fa39372796762ccebfb3e34"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/update.md"
@@ -266,7 +266,7 @@ Fetch upstream
 
 Preflight build (dev only)
 
-    Runs the TypeScript build in a temp worktree. If the tip fails, walks back up to 10 commits to find the newest buildable commit. Set `OPENCLAW_UPDATE_PREFLIGHT_LINT=1` to also run lint during this preflight; lint runs in constrained serial mode because user update hosts are often smaller than CI runners.
+    Runs the TypeScript build in a temp worktree. If the tip fails, walks back up to 10 commits to find the newest buildable commit. Content-addressed declaration outputs from the successful candidate are reused by the final checkout build; rebased source changes automatically invalidate the affected cache groups. Set `OPENCLAW_UPDATE_PREFLIGHT_LINT=1` to also run lint during this preflight; lint runs in constrained serial mode because user update hosts are often smaller than CI runners.
 
 
 Rebase
@@ -279,9 +279,9 @@ Install dependencies
     Uses the repo package manager. For pnpm checkouts, the updater bootstraps `pnpm` on demand (via `corepack` first, then a temporary `npm install pnpm@11` fallback) instead of running `npm run build` inside a pnpm workspace. If pnpm bootstrap still fails, the updater stops early with a package-manager-specific error instead of trying `npm run build` in the checkout.
 
 
-Build Control UI
+Build checkout
 
-    Builds the gateway and the Control UI.
+    Builds the gateway and Control UI once in the final checkout. The updater runs the standalone Control UI build only when a target build omitted those assets or doctor later removes them.
 
 
 Run doctor

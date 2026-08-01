@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "487c935574f49573cfed7fc8ea3bc5cb1b695acd8f28ab7dc154a92f09aa4e14"
+source_hash: "d6d6640efedb75c4b357e1b4a7dbc9745b311b74b66c3dd885d293d32175fe32"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -462,7 +462,7 @@ Docker feels limited - how do I enable full features?
 
 Can I keep DMs personal but make groups public/sandboxed with one agent?
 
-    Yes, if private traffic is **DMs** and public traffic is **groups**. Set `agents.defaults.sandbox.mode: "non-main"` so group/channel sessions (non-main keys) run in the configured sandbox backend while the main DM session stays on-host. Docker is the default backend once sandboxing is enabled. Restrict tools available in sandboxed sessions via `tools.sandbox.tools`.
+    Yes, if private traffic is **DMs** and public traffic is **groups**. Set `agents.defaults.sandbox.mode: "non-main"` so group/channel sessions (non-main keys) run in the configured sandbox backend while the main DM session stays on-host. Select `backend: "docker"` for Docker or `backend: "podman"` for Podman. Restrict tools available in sandboxed sessions via `tools.sandbox.tools`.
 
     Setup walkthrough: [Groups: personal DMs + public groups](/channels/groups#pattern-personal-dms-public-groups-single-agent). Key reference: [Gateway configuration](/gateway/config-agents#agentsdefaultssandbox).
 
@@ -694,7 +694,7 @@ Why do I need a token on localhost now?
 
 Do I have to restart after changing config?
 
-    The Gateway watches the config and supports hot-reload: `gateway.reload.mode: "hybrid"` (default) hot-applies safe changes and restarts for critical ones. `hot`, `restart`, and `off` are also supported. Most `tools.*`, `agents.*` policy, `session.*`, and `messages.*` changes apply immediately with no reload action at all; `gateway.*` binding/port changes require a restart.
+    The Gateway watches the config and supports hot-reload: `gateway.reload.mode: "hybrid"` (default) hot-applies safe changes and restarts for critical ones. `off` disables config reload; the earlier `hot` and `restart` modes are retired. Most `tools.*`, `agents.*` policy, `session.*`, and `messages.*` changes apply immediately with no reload action at all; `gateway.*` binding/port changes require a restart.
 
 
 

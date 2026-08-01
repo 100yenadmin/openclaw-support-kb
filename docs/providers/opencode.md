@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "5835adc6802ce4f16d158b284b58848e8a11afa1e774429dc70e429989ab4a33"
+source_hash: "d4eab9e9ed09ce033ebbf797b0e2ec4a8e065854b2a03a1ad13078556a16963d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
@@ -78,6 +78,14 @@ Go catalog
 Steps
 
 
+Install the Go catalog plugin
+
+        ```bash
+        openclaw plugins install @openclaw/opencode-go-provider
+        openclaw gateway restart
+        ```
+
+
 Run onboarding
 
         ```bash
@@ -117,7 +125,7 @@ Verify models are available
 }
 ```
 
-## Built-in catalogs
+## Provider catalogs
 
 ### Zen
 

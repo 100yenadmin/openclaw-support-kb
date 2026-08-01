@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Rich output protocol"
 source: "https://docs.openclaw.ai/reference/rich-output-protocol"
-source_hash: "0f96361f553b7dbeed440773be5f1346a87cdf35b2540d615b0beae4fa071bad"
+source_hash: "460f2e98c14371c6cff1ec1b837df4a55f16d583af78ae8057224541edad9dc5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/rich-output-protocol.md"
@@ -38,7 +38,34 @@ Do not emit text commands for attachments from tools, plugins, streaming blocks,
 
 Legacy final-reply text may still be normalized for compatibility, but this is not a general plugin/tool protocol.
 
-Plain Markdown image syntax (`![alt](url)`) stays text by default. Channels that want Markdown images treated as media replies opt in at their outbound adapter; Telegram does this so `![alt](url)` becomes a media attachment.
+## Legacy `MEDIA:` lines
+
+Legacy final assistant replies can still attach local media with a plain
+standalone `MEDIA:` line. The parser only recognizes lines whose trimmed text
+starts with `MEDIA:` outside Markdown wrappers and code fences.
+
+Valid legacy final reply:
+
+```text
+Here is the generated image.
+
+MEDIA:/workspace/image.png
+```
+
+These remain ordinary text and do not attach media:
+
+```text
+**MEDIA:/workspace/image.png**
+`MEDIA:/workspace/image.png`
+Here is your image: MEDIA:/workspace/image.png
+```
+
+Prefer structured `mediaUrl` / `mediaUrls` fields for tools, plugins, browser
+output, streaming blocks, and message actions.
+
+Plain Markdown image syntax stays text by default. Channels that intentionally
+map Markdown image replies to media attachments opt in at their outbound
+adapter; Telegram does this so `![alt](url)` can still become a media reply.
 
 When block streaming is enabled, media must ride on structured payload fields. If the same media URL appears in a streamed block and again in the final assistant payload, OpenClaw delivers it once and strips the duplicate from the final payload.
 

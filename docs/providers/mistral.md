@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "07b9b5f4cbd9f54f98b1076b394de225e5eb4447e6331fcbfd367b19b1571d39"
+source_hash: "2b85877a9a2dfefadda8799485fefa346369a9891f748d222bd1b5a65187909d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
@@ -13,12 +13,14 @@ duplicate_index: 1
 # Mistral
 Source: https://docs.openclaw.ai/providers/mistral
 
-The bundled `mistral` plugin registers four contracts: chat completions, media understanding (Voxtral batch transcription), realtime STT for Voice Call (Voxtral Realtime), and memory embeddings (`mistral-embed`).
+The official external `mistral` plugin registers four contracts: chat completions,
+media understanding (Voxtral batch transcription), realtime STT for Voice Call
+(Voxtral Realtime), and memory embeddings (`mistral-embed`).
 
 | Property         | Value                                       |
 | ---------------- | ------------------------------------------- |
 | Provider id      | `mistral`                                   |
-| Plugin           | bundled, enabled by default                 |
+| Plugin           | `@openclaw/mistral-provider`                |
 | Auth env var     | `MISTRAL_API_KEY`                           |
 | Onboarding flag  | `--auth-choice mistral-api-key`             |
 | Direct CLI flag  | `--mistral-api-key <key>`                   |
@@ -32,6 +34,14 @@ The bundled `mistral` plugin registers four contracts: chat completions, media u
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/mistral-provider
+    openclaw gateway restart
+    ```
 
 
 Get your API key
@@ -82,7 +92,7 @@ Verify the model is available
 | `mistral/mistral-medium-2508`    | text, image | 128,000 | 8,192      | Deprecated; hidden; use Mistral Medium 3.5            |
 | `mistral/devstral-medium-latest` | text        | 262,144 | 32,768     | Deprecated; hidden; use Mistral Medium 3.5            |
 
-Browse the bundled catalog row before changing config:
+Browse the plugin catalog row before changing config:
 
 ```bash
 openclaw models list --all --provider mistral --plain
@@ -120,7 +130,7 @@ The media transcription path uses `/v1/audio/transcriptions`. The default audio 
 
 ## Voice Call streaming STT
 
-The bundled `mistral` plugin registers Voxtral Realtime as a Voice Call streaming STT provider.
+The `mistral` plugin registers Voxtral Realtime as a Voice Call streaming STT provider.
 
 | Setting      | Config path                                                            | Default                                 |
 | ------------ | ---------------------------------------------------------------------- | --------------------------------------- |
@@ -199,7 +209,7 @@ Warning
 
 Note
 
-    Other bundled Mistral catalog models do not use this parameter. Mistral's native Magistral models are deprecated; use adjustable reasoning on Mistral Small 4 or Mistral Medium 3.5 for current API models.
+    Other Mistral catalog models do not use this parameter. Mistral's native Magistral models are deprecated; use adjustable reasoning on Mistral Small 4 or Mistral Medium 3.5 for current API models.
 
 
 

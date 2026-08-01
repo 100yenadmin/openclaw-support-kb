@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DuckDuckGo search"
 source: "https://docs.openclaw.ai/tools/duckduckgo-search"
-source_hash: "47e860fa04b0e859ce032b97e3c2a6a47629f0509861d3d004c02bfc6eb3213b"
+source_hash: "b4ccc4fe294a67e3916af1bd2f2f90d5c26964769af02390c864a000c70af2e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/duckduckgo-search.md"
@@ -24,6 +24,14 @@ Warning
 DuckDuckGo is never auto-selected, since auto-detection only considers providers with usable credentials. Set it explicitly:
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/duckduckgo-plugin
+    openclaw gateway restart
+    ```
 
 
 Configure

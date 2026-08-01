@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — agents"
 source: "https://docs.openclaw.ai/gateway/config-agents"
-source_hash: "a25721531b973ed9180714529efd365044471f74208997305e617ff7d1a9c2c4"
+source_hash: "d97c701a57d5ca3d52013f95cb449334e52138236f5900d1db735a5d193b9c50"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-agents.md"
@@ -731,7 +731,7 @@ Optional sandboxing for the embedded agent. See [Sandboxing](/gateway/sandboxing
     defaults: {
       sandbox: {
         mode: "non-main", // off (default) | non-main | all
-        backend: "docker", // docker (default) | ssh | openshell
+        backend: "docker", // docker (default) | podman | openshell | ssh
         scope: "agent", // session | agent (default) | shared
         workspaceAccess: "none", // none (default) | ro | rw
         workspaceRoot: "~/.openclaw/sandboxes",
@@ -950,7 +950,7 @@ N
   - Defaults are the container image baseline; use a custom browser image with a custom
     entrypoint to change container defaults.
 
-Browser sandboxing and `sandbox.docker.binds` are Docker-only.
+Browser sandboxing requires the Docker engine. `sandbox.docker.binds` applies to both the Docker and Podman backends.
 
 Build images (from a source checkout):
 

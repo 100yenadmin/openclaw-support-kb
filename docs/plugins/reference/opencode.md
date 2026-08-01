@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode plugin"
 source: "https://docs.openclaw.ai/plugins/reference/opencode"
-source_hash: "fec8bb8cf21cd40b3db5d56c1c629daf9e78dd7cc6260bb8075e1dde58bce51d"
+source_hash: "7367da350e3cb01b64b8f7d5dcdd58f8be2291c021bb8d565b2e699f7baf9d49"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/opencode.md"
@@ -20,7 +20,7 @@ Adds OpenCode model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/opencode-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/opencode-provider`
 
 ## Surface
 

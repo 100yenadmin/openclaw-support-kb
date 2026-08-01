@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine plugin"
 source: "https://docs.openclaw.ai/plugins/reference/volcengine"
-source_hash: "d6515d8b2b0e1d3a414290e7d8cd7c106b0deedd8176b52f715dc7bdfb076548"
+source_hash: "a1e7cdd22c320ad99ff9bd44a1c9479c61bc5797113ab8df1941a39b644d6c96"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/volcengine.md"
@@ -20,7 +20,7 @@ Adds Volcengine, Volcengine Plan model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/volcengine-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/volcengine-provider`
 
 ## Surface
 

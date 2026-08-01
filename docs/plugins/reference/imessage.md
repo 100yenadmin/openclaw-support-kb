@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage plugin"
 source: "https://docs.openclaw.ai/plugins/reference/imessage"
-source_hash: "d3b52b7fa47bb9a4c9a282c1ea6ed8519c93228d38ca157907d326edde9d0fab"
+source_hash: "1e279b05c29210eccf53202400b8b171fb929e2e54e54029f986fe2d4f4a95a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/imessage.md"
@@ -20,7 +20,7 @@ Adds the iMessage channel surface for sending and receiving OpenClaw messages.
 ## Distribution
 
 - Package: `@openclaw/imessage`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/imessage`
 
 ## Surface
 

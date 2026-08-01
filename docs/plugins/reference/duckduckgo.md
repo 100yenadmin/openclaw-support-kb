@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DuckDuckGo plugin"
 source: "https://docs.openclaw.ai/plugins/reference/duckduckgo"
-source_hash: "ba380464c4dcf4749b447b98ca9bd6f2f67b32017e36b2cfb9ac0a617714d8cc"
+source_hash: "cd1b33761716d1798ad0fff367a3bf1e8b3a2bb58421cf8a0d787f5b173be8e5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/duckduckgo.md"
@@ -20,7 +20,7 @@ Adds web search provider support.
 ## Distribution
 
 - Package: `@openclaw/duckduckgo-plugin`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/duckduckgo-plugin`
 
 ## Surface
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/api/issues.md"
-source_hash: "5ce76feca4a0721d6208ee68f30f0bc2e1a42b24d09104d41a86302c9773c3f1"
+source_hash: "bc7251d3f624f058759ec5290a1325b88a72e513ba8ef6f25de1cc7bd442b32e"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/api/issues.md"
@@ -85,6 +85,62 @@ The optional `comment` field adds a comment in the same call. For execution-poli
 Updatable fields: `title`, `description`, `status`, `priority`, `assigneeAgentId`, `projectId`, `goalId`, `parentId`, `billingCode`.
 
 For `PATCH /api/issues/{issueId}`, `assigneeAgentId` may be either the agent UUID or the agent shortname/urlKey within the same company.
+
+### Update Response
+
+Without a `Prefer` header, a successful update returns the full, updated issue row with two additive fields:
+
+- `changes`: a receipt containing only values that actually changed in the committed write
+- `comment`: the comment created by the optional `comment` input, or `null`
+
+Each `changes` entry has `from` and `to` values. Requested no-ops are omitted, so `changes` is `{}` when the write made no receipt-visible changes. Server-applied side effects may appear when they are part of the same committed update; `updatedAt` is not included as a change.
+
+```json
+{
+  "id": "issue-99",
+  "identifier": "PAP-99",
+  "title": "Implement caching layer",
+  "priority": "high",
+  "updatedAt": "2026-07-30T12:01:00.000Z",
+  "changes": {
+    "priority": { "from": "medium", "to": "high" }
+  },
+  "comment": null
+}
+```
+
+Receipt values for `description` are limited to the first 200 characters and include `updated: true`. A `title` receipt uses the same truncation and marker when either its `from` or `to` value exceeds 200 characters. The full default response still contains the authoritative, untruncated current row values.
+
+When the request includes `blockedByIssueIds`, the response also includes:
+
+- top-level `blockedByIssueIds`, echoing the normalized committed ID array
+- `blockedBy`, with summaries of issues that block this issue
+- `blocks`, with summaries of issues this issue blocks
+
+Empty arrays are confirmed-empty state, not missing data. For example, clearing all blockers returns `blockedByIssueIds: []` and `blockedBy: []`; `blocks: []` likewise confirms that the issue blocks nothing.
+
+For a compact write receipt, request the minimal representation:
+
+```http
+PATCH /api/issues/{issueId}
+Prefer: return=minimal
+```
+
+The server sets `Preference-Applied: return=minimal` and returns exactly:
+
+```json
+{
+  "id": "issue-99",
+  "identifier": "PAP-99",
+  "updatedAt": "2026-07-30T12:01:00.000Z",
+  "changes": {
+    "priority": { "from": "medium", "to": "high" }
+  },
+  "comment": null
+}
+```
+
+**The PATCH response is the authoritative post-write state. A confirming GET after a 2xx PATCH is unnecessary.**
 
 ## Checkout (Claim Task)
 

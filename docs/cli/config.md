@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "dcd3509f116932529096a55632be53ced940b8406ef4bdd5c411d222b9ba0768"
+source_hash: "58d4994b5d08b5ee361d7cdacaaea7f3f97cc52b31a376089ae81d86601f0b05"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -421,7 +421,7 @@ Success example
     {
       "ok": true,
       "operations": 1,
-      "configPath": "~/.openclaw/openclaw.json",
+      "configPath": "/home/user/.openclaw/openclaw.json",
       "inputModes": ["builder"],
       "checks": {
         "schema": false,
@@ -440,7 +440,7 @@ Failure example
     {
       "ok": false,
       "operations": 1,
-      "configPath": "~/.openclaw/openclaw.json",
+      "configPath": "/home/user/.openclaw/openclaw.json",
       "inputModes": ["builder"],
       "checks": {
         "schema": false,

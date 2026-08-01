@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "f55a86225f344d1feb20c29e0d4fc21f1770aabbde02857cf90521905370d28b"
+source_hash: "cdc2e1f2e086a828a1a784ab021d32487df294dec3ccc98381a74f84b8ca764c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/discord.md"
@@ -53,7 +53,7 @@ Enable privileged intents
 
     Still on the **Bot** page, under **Privileged Gateway Intents** enable:
 
-    - **Message Content Intent** (required)
+    - **Message Content Intent** (required for normal guild messages)
     - **Server Members Intent** (recommended; required for role allowlists, name-to-ID matching, and channel-audience access groups)
     - **Presence Intent** (optional; only for presence updates)
 
@@ -250,6 +250,12 @@ CODE
     Pairing codes expire after 1 hour. After approval, chat with your agent in a Discord DM.
 
 
+
+If Discord cannot grant Message Content Intent, OpenClaw can still operate in DMs and in
+guild channels where users explicitly mention the bot. Set
+`channels.discord.intents.messageContent: false` so the Gateway does not request the
+unavailable privileged intent, and keep `requireMention: true` on every configured guild
+channel. Discord omits user-authored content from other guild messages in this mode.
 
 Note
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "b506845bac3f53a5ba9007b0f119d616c29a8a8483a326c15e9d57809ebdb1ec"
+source_hash: "6068110ef29e7ca4a9fbc148f22f4a0f2b9e5a09a5003819588dc2b027a543d3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -373,7 +373,6 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
   // Cron jobs
   cron: {
     enabled: true,
-    store: "~/.openclaw/cron/jobs.json",
     sessionRetention: "24h",
   },
 

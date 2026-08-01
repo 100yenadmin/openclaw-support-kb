@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "51bb0c545f49c45f2c7bac2a02ceacbdbfd88867049cdd11b6950309c13ba96f"
+source_hash: "6ad1ac29fdb6722d7b99562dfa936cb428ffb224887e272d2f03ce422b92f6de"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
@@ -218,6 +218,12 @@ Outbound attachments from the agent use structured media fields on the message t
 ```
 
 OpenClaw sends structured media alongside the text. Legacy final assistant replies may still be normalized for compatibility, but tool output, browser output, streaming blocks, and message actions do not parse text as attachment commands.
+
+If you must use a legacy final-reply `MEDIA:` line, keep it as standalone plain
+text. Markdown wrappers, code fences, and inline prose such as
+`**MEDIA:/path.png**`, `` `MEDIA:/path.png` ``, or
+`Here is the image: MEDIA:/path.png` stay text and do not attach media. See
+[Rich output protocol](/reference/rich-output-protocol#legacy-media-lines).
 
 Local-path behavior follows the same file-read trust model as the agent:
 

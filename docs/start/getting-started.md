@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "08e1ab2362467aa28918ceb8d7cc335f4226b7326c3439775a24036ac217e4b7"
+source_hash: "17e754a5d866be3dd599c0a977cb4bf5c68cc08ad4617800986cb7e38de39b52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -132,7 +132,7 @@ Then set:
   "gateway": {
     "controlUi": {
       "enabled": true,
-      "root": "~/.openclaw/control-ui-custom"
+      "root": "${HOME}/.openclaw/control-ui-custom"
     }
   }
 }

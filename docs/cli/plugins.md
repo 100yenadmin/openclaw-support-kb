@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "216f5d828fc2cb68c6d906f16c9719424d281b6c5783f9e607eacdc864ba2eaf"
+source_hash: "561391abe4cf265348b4c8e3c0b56f82110d3f97b28896baf9dc881546d27724"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/plugins.md"
@@ -555,7 +555,7 @@ The `--json` flag outputs a machine-readable report suitable for scripting and a
 openclaw plugins doctor
 ```
 
-`doctor` reports plugin load errors, manifest/discovery diagnostics, compatibility notices, and stale plugin config references such as missing plugin slots. When the install tree and plugin config are clean it prints `No plugin issues detected.` If stale config remains but the install tree is otherwise healthy, the summary says so instead of implying full plugin health.
+`doctor` reports plugin load errors, manifest/discovery diagnostics, compatibility notices, and stale plugin config references such as missing plugin slots. It loads plugin modules without activating plugins and does not query the running Gateway. When these local checks pass, it prints `Plugin discovery, module loading, compatibility, and configuration checks passed. Run "openclaw health" to check the running Gateway, including runtime quarantines and fallbacks.` The [health command](/cli/health) reads current runtime quarantine and fallback state from the Gateway. If stale config remains but the install tree is otherwise healthy, the summary says so instead of implying full plugin health.
 
 If a configured plugin is present on disk but blocked by the loader's path-safety checks, config validation keeps the plugin entry and reports it as `present but blocked`. Fix the preceding blocked-plugin diagnostic, such as path ownership or world-writable permissions, instead of removing the `plugins.entries.<id>` or `plugins.allow` config.
 

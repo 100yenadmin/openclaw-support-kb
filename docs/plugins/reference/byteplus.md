@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "BytePlus plugin"
 source: "https://docs.openclaw.ai/plugins/reference/byteplus"
-source_hash: "85296d790419aedec779d50be12a0862e89004b9cbb53ae770dd738e3a7af779"
+source_hash: "95e323ea06778ca5fdb3ae3cc944e45b0c7e42d90588de2feb04fb1f63dfdfa4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/byteplus.md"
@@ -20,7 +20,7 @@ Adds BytePlus, BytePlus Plan model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/byteplus-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/byteplus-provider`
 
 ## Surface
 

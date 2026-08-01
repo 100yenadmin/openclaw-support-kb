@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "4b19336ba1fc07375462625b5f299eb346e98d486e6d418d14a8ba04f9088160"
+source_hash: "277df971f3151879ad6e0ad21f73bcc9680a25a0e815073c8752cf3a92e4944b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -306,7 +306,7 @@ Discord bots per agent
               guilds: {
                 "123456789012345678": {
                   channels: {
-                    "222222222222222222": { allow: true, requireMention: false },
+                    "222222222222222222": { enabled: true, requireMention: false },
                   },
                 },
               },
@@ -316,7 +316,7 @@ Discord bots per agent
               guilds: {
                 "123456789012345678": {
                   channels: {
-                    "333333333333333333": { allow: true, requireMention: false },
+                    "333333333333333333": { enabled: true, requireMention: false },
                   },
                 },
               },

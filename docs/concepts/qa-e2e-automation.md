@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "1c684c4ff0efdbc90c190451fb4ef4fe68895be39812d508a5a9c0d60a1f23d5"
+source_hash: "3e49faa5bd3e6476ed08c122cec395e83a6a64782667516f8f6eea24f7a6f4f5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/qa-e2e-automation.md"
@@ -689,8 +689,9 @@ Slack YAML module scenarios (`qa/scenarios/channels/slack-*.yaml`):
 
 - `slack-canary`
 - `slack-mention-gating`
-- `slack-mpim-app-mention-dedupe` - opens a real C-prefixed group DM, sends one
-  mention, verifies exactly one SUT reply in that MPIM, then closes it.
+- `slack-mpim-app-mention-dedupe` - opens a real C-prefixed group DM, verifies
+  exactly one SUT reply after message/app-mention twin delivery, confirms a
+  native threaded follow-up can recall that bot reply, then closes the MPIM.
 - `slack-allowlist-block`
 - `slack-channel-disabled-warning` - opt-in real-Slack probe that confirms a
   configured disabled channel emits a structured warning without replying.
@@ -1233,12 +1234,13 @@ The minimum adoption bar for a new channel:
 4. Mount the runner as `openclaw qa <runner>` instead of registering a
    competing root command. Runner plugins should declare `qaRunners` in
    `openclaw.plugin.json` and export a matching `qaRunnerCliRegistrations`
-   array from `runtime-api.ts`. Keep `runtime-api.ts` light; lazy CLI and
-   runner execution should stay behind separate entrypoints. An optional
-   `adapterFactory` exposes the transport to shared scenarios without changing
-   the command's existing scenario catalog. Same-channel partitions are serial
-   unless the factory declares that every instance owns isolated credentials or
-   disposable servers, Gateway state, and artifact paths.
+   array from a lightweight `qa-runner-api.ts` surface. Installed plugins using
+   the shipped `runtime-api.ts` contract remain supported through 2026-10-01
+   while authors migrate. Keep runner execution behind lazy entrypoints. An
+   optional `adapterFactory` exposes the transport to shared scenarios without
+   changing the command's existing scenario catalog. Same-channel partitions
+   are serial unless the factory declares that every instance owns isolated
+   credentials or disposable servers, Gateway state, and artifact paths.
 5. Author or adapt YAML scenarios under the themed `qa/scenarios/`
    directories.
 6. Use the generic scenario helpers for new scenarios.
@@ -1263,8 +1265,7 @@ Preferred generic helpers for new scenarios:
 - `waitForChannelReady`
 - `injectInboundMessage`
 - `injectOutboundMessage`
-- `waitForTransportOutboundMessage`
-- `waitForChannelOutboundMessage`
+- `waitForOutboundMessage`
 - `waitForNoTransportOutbound`
 - `getTransportSnapshot`
 - `readTransportMessage`
@@ -1273,10 +1274,10 @@ Preferred generic helpers for new scenarios:
 - `resetTransport`
 
 Compatibility aliases remain available for existing scenarios -
-`waitForQaChannelReady`, `waitForOutboundMessage`, `waitForNoOutbound`,
-`formatConversationTranscript`, `resetBus` - but new scenario authoring
-should use the generic names. The aliases exist to avoid a flag-day
-migration, not as the model going forward.
+`waitForQaChannelReady`, `waitForNoOutbound`, `formatConversationTranscript`,
+and `resetBus` - but new scenario authoring should use the generic names.
+Use the canonical `waitForOutboundMessage` for outbound checks instead of
+adding transport- or channel-specific outbound wait aliases.
 
 ## Reporting
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral plugin"
 source: "https://docs.openclaw.ai/plugins/reference/mistral"
-source_hash: "ee5dbea1a1401208694d25ed26bd091e6e4cf3a49efbea1ab33cefc4d79de48c"
+source_hash: "6b6afe4091626b4b32dd708e7e699f80d6ec01299410bb6b4ba67b76bfb56b79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/mistral.md"
@@ -20,7 +20,7 @@ Adds Mistral model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/mistral-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/mistral-provider`
 
 ## Surface
 

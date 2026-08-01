@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "25b69a54bef60ff52e416cfd7a4a2c4fdd24c78096c02d0d59b63db8f4fb7abb"
+source_hash: "5fa21df951de4f57ca2c8ae86ee5dfbe8dce2fd33b1e388bb7b1a39954c68f97"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -189,7 +189,7 @@ Create config file
           "groupPolicy": "allowlist",
           "guilds": {
             "YOUR_GUILD_ID": {
-              "channels": { "general": { "allow": true } },
+              "channels": { "general": { "enabled": true } },
               "requireMention": false
             }
           }

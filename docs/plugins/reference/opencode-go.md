@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go plugin"
 source: "https://docs.openclaw.ai/plugins/reference/opencode-go"
-source_hash: "9d1cdd1d226d4ca755003e6430b9be9149641c417ea88f474ffdedfeb7734479"
+source_hash: "9087c2abc507f59546d0706e89ec9581c1e31108eec429ad1870661c4fa2e282"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/opencode-go.md"
@@ -20,7 +20,7 @@ Adds OpenCode Go model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/opencode-go-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/opencode-go-provider`
 
 ## Surface
 

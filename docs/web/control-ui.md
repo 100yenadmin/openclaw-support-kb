@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI"
 source: "https://docs.openclaw.ai/web/control-ui"
-source_hash: "9161baab23a667ae59dbf9f66538fd475e0278c4d4d44a9ff0a25660d0fe27b9"
+source_hash: "f01057e45767e349712fafc02b32fd8c6dc9c2ae796ca0cb622ed609f3ccaf59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/control-ui.md"
@@ -99,6 +99,7 @@ Note
 - Tailscale Serve can skip the pairing round trip for Control UI operator sessions when `gateway.auth.allowTailscale: true`, Tailscale identity verifies, and the browser presents its device identity. Device-less browsers and node-role connections still follow the normal device checks.
 - Direct Tailnet binds and LAN browser connects still require explicit approval. Browser profiles without device identity cannot use loopback auto-approval.
 - Each browser profile generates a unique device ID, so switching browsers or clearing browser data requires re-pairing.
+- Private windows and browser profiles that discard site data on exit, including Firefox Never remember history, also discard the stored device identity and per-device token. They will appear as a new browser after each restart; use a persistent browser profile to stay paired, and remove stale entries with `openclaw devices remove <deviceId>` when the paired-device list grows.
 
 ## Pair a mobile device
 

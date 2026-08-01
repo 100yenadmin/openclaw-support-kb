@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ComfyUI"
 source: "https://docs.openclaw.ai/providers/comfy"
-source_hash: "dada964abdd7fd19be744fe9021062f2ba7157aaad16331e973b0aae540e4dce"
+source_hash: "e33289b78dd96f5620b30f681a9f258eff2ccf4afbfd6df89a157d909d9a6f1f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/comfy.md"
@@ -13,8 +13,14 @@ duplicate_index: 1
 # ComfyUI
 Source: https://docs.openclaw.ai/providers/comfy
 
-OpenClaw ships a bundled `comfy` plugin for workflow-driven ComfyUI runs. The
-plugin is entirely workflow-driven: OpenClaw does not map generic `size`,
+Install the official `comfy` plugin for workflow-driven ComfyUI runs:
+
+```bash
+openclaw plugins install @openclaw/comfy-provider
+openclaw gateway restart
+```
+
+The plugin is entirely workflow-driven: OpenClaw does not map generic `size`,
 `aspectRatio`, `resolution`, `durationSeconds`, or TTS-style controls onto
 your graph.
 

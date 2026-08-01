@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "9c44268a7e48764290e479d2cce15a17d70a572d01ebac8c15ff737ee05ff0a8"
+source_hash: "96b038c186544ce4bc7cb3e67a2d4c93a2734b8f6b73ffef26f31acc8949ffb5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -158,6 +158,16 @@ openclaw gateway restart --wait 30s
 Warning
 
 Inline `--password` can be exposed in local process listings. Prefer `--password-file`, env, or a SecretRef-backed `gateway.auth.password`.
+
+### Install identity
+
+Service management (`install`, `start`, `stop`, `restart`, `uninstall`, Doctor service repair, and self-update service handling) belongs to the install that owns the host service. That is the canonical `.openclaw` directory under the OS account home, or the `.openclaw-<profile>` directory a named profile projects there. Named profiles use distinct native service identities.
+
+`OPENCLAW_HOME`, or an `OPENCLAW_STATE_DIR` or `OPENCLAW_CONFIG_PATH` that points elsewhere, is treated as isolated state and skipped. A relocated or copied state tree cannot adopt and rewrite the account's host service.
+
+On macOS and Windows, native service-managed profile names must be lowercase. Runtime-only profiles may still use uppercase, but case-distinct names such as `Main` and `main` share paths on normal case-insensitive filesystems and cannot safely own separate native services. On macOS, the lowercase names `gateway` and `node` are also unavailable for native service management because their historical LaunchAgent labels collide with the default Gateway and node-host services.
+
+Named profiles must also use the native service identity derived from `OPENCLAW_PROFILE`. Unset `OPENCLAW_LAUNCHD_LABEL`, `OPENCLAW_SYSTEMD_UNIT`, or `OPENCLAW_WINDOWS_TASK_NAME` before service management; custom identities remain available for the default profile or runtime-only/external-supervisor setups.
 
 ### External supervisors
 

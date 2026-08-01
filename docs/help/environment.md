@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "0ed788628525de08dff7679f47e93333821bc71bd141dd2a1d424e91754acc07"
+source_hash: "c0c3e37def5fff49c6ade4c4ccaf41ba0f1477bf59b1355acb416f884c8754a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -255,6 +255,8 @@ unavailable instead of triggering a network request.
 ### `OPENCLAW_HOME`
 
 When set, `OPENCLAW_HOME` replaces the system home directory (`$HOME` / `os.homedir()`) for internal OpenClaw path defaults. This includes the default state directory, config path, agent directories, credentials, installer onboarding workspace, and the default dev checkout used by `openclaw update --channel dev`.
+
+`OPENCLAW_HOME` does not grant ownership of the OS account's native Gateway service. Gateway service-management commands treat a relocated home as isolated state; use the OS account home and a named profile when a separate native service identity is required.
 
 **Precedence:** `OPENCLAW_HOME` > `$HOME` > `USERPROFILE` > Termux `PREFIX` home fallback on Android > `os.homedir()`
 

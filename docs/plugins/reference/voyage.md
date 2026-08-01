@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voyage plugin"
 source: "https://docs.openclaw.ai/plugins/reference/voyage"
-source_hash: "2b3115d30675dcf3f5b331e82badeb9ea479b8d23228e15fb7a0dc22941f1e10"
+source_hash: "ad13c009c3b06cb6a309a8d774e51ef142b3e8e8be408f2c90441485032b0ca8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/voyage.md"
@@ -20,7 +20,7 @@ Adds memory embedding provider support.
 ## Distribution
 
 - Package: `@openclaw/voyage-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/voyage-provider`
 
 ## Surface
 

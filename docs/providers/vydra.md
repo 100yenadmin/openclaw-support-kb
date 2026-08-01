@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vydra"
 source: "https://docs.openclaw.ai/providers/vydra"
-source_hash: "e2e3c1f7d885a2bb569a26697298c9350894f263cba717b98d4e858d5d6b0d8e"
+source_hash: "73a9059f1ced18c72c1069147b514bcc76648c5d902187db5fe2668d412c23d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/vydra.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Vydra
 Source: https://docs.openclaw.ai/providers/vydra
 
-The bundled Vydra plugin adds:
+The official Vydra plugin adds:
 
 - Image generation via `vydra/grok-imagine`
 - Video generation via `vydra/veo3` (text-to-video) and `vydra/kling` (image-to-video)
@@ -24,7 +24,7 @@ OpenClaw uses the same `VYDRA_API_KEY` for all three capabilities.
 | Property        | Value                                                                     |
 | --------------- | ------------------------------------------------------------------------- |
 | Provider id     | `vydra`                                                                   |
-| Plugin          | bundled, `enabledByDefault: true`                                         |
+| Plugin          | `@openclaw/vydra-provider`                                                |
 | Auth env var    | `VYDRA_API_KEY`                                                           |
 | Onboarding flag | `--auth-choice vydra-api-key`                                             |
 | Direct CLI flag | `--vydra-api-key <key>`                                                   |
@@ -38,6 +38,15 @@ Use `https://www.vydra.ai/api/v1` as the base URL. Vydra's apex host (`https://v
 ## Setup
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/vydra-provider
+    openclaw gateway restart
+    ```
+
 
 
 Run interactive onboarding
@@ -66,7 +75,7 @@ AccordionGroup
 
 Image generation
 
-    Default and only bundled image model:
+    Default and only Vydra image model:
 
     - `vydra/grok-imagine`
 
@@ -84,7 +93,7 @@ Image generation
     }
     ```
 
-    Bundled support is text-to-image only, at most one image per request. Vydra's hosted edit routes expect remote image URLs, and the bundled plugin does not add a Vydra-specific upload bridge.
+    Vydra support is text-to-image only, at most one image per request. Vydra's hosted edit routes expect remote image URLs, and the plugin does not add a Vydra-specific upload bridge.
 
 
 Note
@@ -119,8 +128,8 @@ Video generation
     Notes:
 
     - `vydra/kling` rejects local file uploads up front; only a remote image URL reference works.
-    - Vydra's `kling` HTTP route has been inconsistent about whether it requires `image_url` or `video_url`; the bundled provider sends the same remote image URL in both fields.
-    - The bundled plugin stays conservative and does not forward undocumented style knobs such as aspect ratio, resolution, watermark, or generated audio.
+    - Vydra's `kling` HTTP route has been inconsistent about whether it requires `image_url` or `video_url`; the plugin sends the same remote image URL in both fields.
+    - The plugin stays conservative and does not forward undocumented style knobs such as aspect ratio, resolution, watermark, or generated audio.
 
 
 Note
@@ -141,7 +150,7 @@ Video live tests
     pnpm test:live -- extensions/vydra/vydra.live.test.ts
     ```
 
-    The bundled Vydra live file covers:
+    The Vydra live file covers:
 
     - `vydra/veo3` text-to-video
     - `vydra/kling` image-to-video using a remote image URL
@@ -178,7 +187,7 @@ Speech synthesis
     - Model: `elevenlabs/tts`
     - Voice id: `21m00Tcm4TlvDq8ikWAM` ("Rachel")
 
-    The bundled plugin exposes this one known-good default voice and returns MP3 audio files.
+    The plugin exposes this one known-good default voice and returns MP3 audio files.
 
 
 

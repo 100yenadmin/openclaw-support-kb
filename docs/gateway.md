@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway runbook"
 source: "https://docs.openclaw.ai/gateway"
-source_hash: "bb5945a7db7f39be46d6807efdb23b794ab870d9af6eb2236c0f00f7c2c79369"
+source_hash: "ca4dbb4d343181d50d02b0b18b4baf3dfd6a2be4fbced5ef336a988b4a784433"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway.md"
@@ -132,9 +132,9 @@ Gateway startup uses the same effective port and bind when it seeds local Contro
 | `gateway.reload.mode` | Behavior                                   |
 | --------------------- | ------------------------------------------ |
 | `off`                 | No config reload                           |
-| `hot`                 | Apply only hot-safe changes                |
-| `restart`             | Restart on reload-required changes         |
 | `hybrid` (default)    | Hot-apply when safe, restart when required |
+
+The earlier `hot` and `restart` modes are retired; [`openclaw doctor --fix`](/cli/doctor) maps both to `hybrid`.
 
 ## Operator command set
 

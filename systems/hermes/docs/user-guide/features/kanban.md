@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Kanban (Multi-Agent Board)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban"
-source_hash: "9cc55c77bf24be250883803b151949fea2dde9817e5f10197c8903295f8e703e"
+source_hash: "fb7cf8c2de4f252078e11231b9b3e9c87ca26779bebd60c745fe7d0c4045a1ad"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban.md"
@@ -916,6 +916,30 @@ hermes kanban notify-unsubscribe t_abcd \
 ```
 
 A subscription removes itself automatically once the task reaches `done` or `archived`; no cleanup needed.
+
+### Multi-profile setups: delivery is profile-owned
+
+In a one-gateway-per-profile deployment (one dispatcher, separate gateway
+processes for `writer`, `admin`, etc. — see the [multi-gateway
+guide](https://github.com/NousResearch/hermes-agent/blob/main/docs/kanban/multi-gateway.md)),
+dispatch and delivery have separate owners:
+
+- **Dispatch stays single-owner.** Exactly one gateway keeps
+  `kanban.dispatch_in_gateway: true` and runs the dispatcher; every other
+  gateway sets it to `false`.
+- **Notification delivery is profile-owned.** Every gateway — including
+  non-dispatch ones — runs the notifier and polls only subscriptions stamped
+  with a profile whose platform adapters it hosts. A task created from the
+  `writer` profile's Telegram gets its `completed`/`blocked` message delivered
+  by the `writer` gateway, even though the `default` gateway did the
+  dispatching.
+- **Legacy subscriptions** created before profile stamping (no
+  `notifier_profile` on the row) are delivered only by the gateway that holds
+  the actual dispatcher singleton lock, so two gateways never race for them.
+
+Duplicate delivery across gateways is prevented by the atomic per-event claim
+in the board DB. No relays, credential sharing, or extra dispatchers are
+needed — each profile gateway simply delivers through its own adapters.
 
 ## Runs — one row per attempt
 

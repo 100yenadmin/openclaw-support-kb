@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "7aaf1a70dfbcd06457e66c15598e1a04a954ad5d62b3919c096207eca43b6acd"
+source_hash: "e825a7c58cea2397deaa9526615288592f10930b09a4055d624ee0f9d13c6697"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
@@ -22,7 +22,7 @@ channel converge on the agent's [main session](/concepts/main-session).
 
 ## Key terms
 
-- **Channel**: a bundled channel plugin such as `discord`, `googlechat`, `imessage`, `irc`, `line`, `signal`, `slack`, `telegram`, or `whatsapp`, plus installed plugin channels. `webchat` is the internal WebChat UI channel and is not a configurable outbound channel.
+- **Channel**: a channel plugin such as `discord`, `googlechat`, `imessage`, `irc`, `line`, `signal`, `slack`, `telegram`, or `whatsapp`. `webchat` is the internal WebChat UI channel and is not a configurable outbound channel.
 - **AccountId**: per-channel account instance (when supported).
 - Optional channel default account: `channels.<channel>.defaultAccount` chooses
   which account is used when an outbound path does not specify `accountId`.

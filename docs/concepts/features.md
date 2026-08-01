@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "bab35e7ab7a9f82d4b035370bd29855b69e2b0cdb9256f6dba17075c3d44e5c1"
+source_hash: "b3a349b1da1692cdeb3ac33d284eb22c4a8022d2a669aab7604777772e92e149"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -52,10 +52,10 @@ Mobile nodes
 
 **Channels:**
 
-- iMessage, Telegram, and WebChat ship with the core install; every other channel is an
+- Telegram and WebChat ship with the core install; every other channel is an
   official plugin installed with `openclaw plugins install @openclaw/<id>` (or on demand
   during `openclaw onboard` / `openclaw channels add`)
-- Official plugin channels: Discord, Feishu, Google Chat, IRC, LINE, Matrix, Mattermost,
+- Official plugin channels: Discord, Feishu, Google Chat, iMessage, IRC, LINE, Matrix, Mattermost,
   Microsoft Teams, Nextcloud Talk, Nostr, QQ Bot, Raft, Signal, Slack, SMS, Synology Chat,
   Tlon, Twitch, Voice Call, WhatsApp, Zalo, and Zalo Personal
 - External plugin channels maintained outside the OpenClaw repo: WeChat, Yuanbao, and Zalo ClawBot

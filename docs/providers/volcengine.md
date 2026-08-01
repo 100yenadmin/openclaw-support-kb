@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
-source_hash: "c6019d1e777171730ad6a739abd87ff9cfd2fc74d10798336b68d262acad1e6d"
+source_hash: "0d2878e10372c2b8b7208d8ccded9c8cb558d6b8dddfa9f279c3ea0881c9bb19"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/volcengine.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Volcengine (Doubao)
 Source: https://docs.openclaw.ai/providers/volcengine
 
-The Volcengine provider gives access to Doubao models and third-party models hosted on Volcano Engine, with separate endpoints for general and coding workloads. The same bundled plugin also registers Volcengine Speech as a TTS provider.
+The Volcengine provider gives access to Doubao models and third-party models hosted on Volcano Engine, with separate endpoints for general and coding workloads. The same official plugin also registers Volcengine Speech as a TTS provider.
 
 | Detail     | Value                                                      |
 | ---------- | ---------------------------------------------------------- |
@@ -25,6 +25,14 @@ The Volcengine provider gives access to Doubao models and third-party models hos
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/volcengine-provider
+    openclaw gateway restart
+    ```
 
 
 Set the API key

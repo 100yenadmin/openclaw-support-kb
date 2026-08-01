@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health checks"
 source: "https://docs.openclaw.ai/gateway/health"
-source_hash: "93eeddb502b7291f6eed790c36c21d62052165f4069230fad5fb4a907b005c81"
+source_hash: "e203b415abd1769644c49c53b074aaf3f54e95c192bdc910a09329561dc766bc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/health.md"
@@ -46,7 +46,7 @@ health commands above for live connectivity checks.
 
 - `channels.<provider>.healthMonitor.enabled`: disable health-monitor restarts for a specific channel while leaving global monitoring enabled.
 - `channels.<provider>.accounts.<accountId>.healthMonitor.enabled`: multi-account override that wins over the channel-level setting.
-- These per-channel overrides apply to the built-in channels that expose them today: Discord, Google Chat, iMessage, IRC, Microsoft Teams, Signal, Slack, Telegram, and WhatsApp.
+- These per-channel overrides apply to the channels that expose them today: Discord, Google Chat, iMessage, IRC, Microsoft Teams, Signal, Slack, Telegram, and WhatsApp.
 - A crashing channel is recovered by its own auto-restart backoff first (`auto-restart attempt N/10` in the logs). The health monitor stays out of the way until that ladder ends with `giving up after 10 restart attempts`, then takes over as the last restart owner.
 
 ## Inbound ingress health

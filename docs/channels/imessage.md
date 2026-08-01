@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iMessage"
 source: "https://docs.openclaw.ai/channels/imessage"
-source_hash: "e843d85ea1ad9f42a94ca53778ff66fecd31c41f1113db692a7cfdb35f2c353d"
+source_hash: "1b960172f92d8bbe266f23c2c28f8618afd4dcf5d1834eaef2975bb89117beef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/imessage.md"
@@ -26,6 +26,14 @@ BlueBubbles support was removed. Migrate `channels.bluebubbles` configs to `chan
 Status: native external CLI integration. The Gateway spawns `imsg rpc` and speaks JSON-RPC over stdio — no separate daemon or port. Private API mode is strongly encouraged for a complete iMessage channel; replies, tapbacks, effects, polls, attachment replies, and group actions require `imsg launch` and a successful private API probe.
 
 For the common local setup, OpenClaw setup can offer a user-confirmed Homebrew install or update for `imsg` on the signed-in Messages Mac. Manual setup and SSH-wrapper topologies remain operator-managed: install or update `imsg` in the same user context that will run the Gateway or wrapper.
+
+## Install the plugin
+
+Install the official iMessage plugin on the Gateway host, then restart the Gateway:
+
+```bash
+openclaw plugins install @openclaw/imessage
+```
 
 CardGroup
 
@@ -226,7 +234,7 @@ Warning
 
 **Disabling SIP is a real security tradeoff.** SIP is one of macOS's core protections against running modified system code; turning it off system-wide opens up additional attack surface and side effects. Notably, **disabling SIP on Apple Silicon Macs also disables the ability to install and run iOS apps on your Mac**.
 
-Treat this as a deliberate operational choice, especially on a primary personal Mac. For production-quality OpenClaw iMessage, prefer a dedicated Mac or bot macOS user where you are comfortable enabling the bridge. If your threat model cannot tolerate SIP being off anywhere, bundled iMessage is limited to basic mode — text and media send/receive only, no reactions / edit / unsend / effects / group ops.
+Treat this as a deliberate operational choice, especially on a primary personal Mac. For production-quality OpenClaw iMessage, prefer a dedicated Mac or bot macOS user where you are comfortable enabling the bridge. If your threat model cannot tolerate SIP being off anywhere, the iMessage plugin is limited to basic mode — text and media send/receive only, no reactions / edit / unsend / effects / group ops.
 
 ### Setup
 

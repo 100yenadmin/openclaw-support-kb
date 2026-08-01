@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "cb075f037e9f1f15ca7bf4aacc13140aaf8893b578695edf57a3239a6447fa7e"
+source_hash: "14a4b730858263e44b611393c2d0cc5caf0ee7bc677ea5b4b61215c9ad6867f2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -579,20 +579,20 @@ for the checklist.
 
 ### Reload modes
 
-| Mode                   | Behavior                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------------- |
-| **`hybrid`** (default) | Hot-applies safe changes instantly. Automatically restarts for critical ones.           |
-| **`hot`**              | Hot-applies safe changes only. Logs a warning when a restart is needed - you handle it. |
-| **`restart`**          | Restarts the Gateway on any config change, safe or not.                                 |
-| **`off`**              | Disables file watching. Changes take effect on the next manual restart.                 |
+| Mode                   | Behavior                                                                      |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| **`hybrid`** (default) | Hot-applies safe changes instantly. Automatically restarts for critical ones. |
+| **`off`**              | Disables file watching. Changes take effect on the next manual restart.       |
 
 ```json5
 {
   gateway: {
-    reload: { mode: "hybrid", debounceMs: 300 },
+    reload: { mode: "hybrid" },
   },
 }
 ```
+
+The earlier `hot` and `restart` modes are retired; [`openclaw doctor --fix`](/cli/doctor) maps both to `hybrid`. Reload debounce is no longer configurable and runs behind a built-in default.
 
 ### What hot-applies vs what needs a restart
 

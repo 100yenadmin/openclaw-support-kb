@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: live suites"
 source: "https://docs.openclaw.ai/help/testing-live"
-source_hash: "59c297ebea3563d4eb13facba2456f621a9079a016f0c1f05bdb9689fc6fb803"
+source_hash: "7634f6f902a75d6375c4b64c5546438ba3ebb7988c74d4e1a9ce059696ec3c52"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-live.md"
@@ -618,7 +618,7 @@ If you have keys enabled, you can also test via:
 
 More providers you can include in the live matrix (if you have creds/config):
 
-- Built-in: `anthropic`, `cerebras`, `github-copilot`, `google`, `google-antigravity`, `google-gemini-cli`, `google-vertex`, `groq`, `mistral`, `openai`, `openrouter`, `opencode`, `opencode-go`, `xai`, `zai`
+- First-party provider plugins: `anthropic`, `cerebras`, `github-copilot`, `google`, `google-antigravity`, `google-gemini-cli`, `google-vertex`, `groq`, `mistral`, `openai`, `openrouter`, `opencode`, `opencode-go`, `xai`, `zai`
 - Via `models.providers` (custom endpoints): `minimax` (cloud/API), plus any OpenAI/Anthropic-compatible proxy (LM Studio, vLLM, LiteLLM, etc.)
 
 Tip
@@ -656,7 +656,7 @@ Docker runners below with an explicit `OPENCLAW_PROFILE_FILE`.
 - Test: `extensions/comfy/comfy.live.test.ts`
 - Enable: `OPENCLAW_LIVE_TEST=1 COMFY_LIVE_TEST=1 pnpm test:live -- extensions/comfy/comfy.live.test.ts`
 - Scope:
-  - Exercises the bundled comfy image, video, and `music_generate` paths
+  - Exercises the comfy image, video, and `music_generate` paths
   - Skips each capability unless `plugins.entries.comfy.config.<capability>` is configured
   - Useful after changing comfy workflow submission, polling, downloads, or plugin registration
 

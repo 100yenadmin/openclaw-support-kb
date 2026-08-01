@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "1fe2735abbb99b2b60c38a402ea015673cdb69a8057df729b31b4f6257caa3e9"
+source_hash: "34957fbaaa460d219defff43c66afcc5cbfbc363f1f495b4d618595273ca4f7a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -114,6 +114,12 @@ for an efficient source-server update: it restores tracked build outputs that
 `pnpm build` rewrites, fails closed on any other local changes, fast-forwards
 `main` (or rebases a local server branch onto `origin/main`), installs
 dependencies, builds clean, and restarts the gateway.
+
+Generated output roots such as `dist`, `dist-runtime`, and package-local
+`dist` directories must be real directories. Builds refuse symbolic-link roots
+before reading or mutating their contents so cleanup cannot affect the link
+target. Replace an output-root symlink with a real directory before updating or
+building a source checkout.
 
 ```bash
 ssh you@server 'cd /path/to/openclaw && scripts/update-gateway.sh'

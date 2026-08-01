@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go"
 source: "https://docs.openclaw.ai/providers/opencode-go"
-source_hash: "4cbbc4ebdbca75b9f049904fb02a459604802d4bb1ae10eb55ad65570a3b69e5"
+source_hash: "7ff7758d8196c19257e6c0b52dbbf1b5dde287d7b707089951215d2262bf8538"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode-go.md"
@@ -16,15 +16,24 @@ Source: https://docs.openclaw.ai/providers/opencode-go
 OpenCode Go is the Go catalog inside [OpenCode](/providers/opencode). It shares
 the `OPENCODE_API_KEY` credential with the Zen catalog, but keeps its own
 runtime provider id (`opencode-go`) so upstream per-model routing stays
-correct.
+correct. OpenClaw provides it as the official external
+`@openclaw/opencode-go-provider` plugin.
 
 | Property         | Value                                              |
 | ---------------- | -------------------------------------------------- |
 | Runtime provider | `opencode-go`                                      |
+| Plugin           | `@openclaw/opencode-go-provider`                   |
 | Auth             | `OPENCODE_API_KEY` (alias: `OPENCODE_ZEN_API_KEY`) |
 | Parent setup     | [OpenCode](/providers/opencode)                    |
 
 ## Getting started
+
+Install the official plugin and restart the Gateway:
+
+```bash
+openclaw plugins install @openclaw/opencode-go-provider
+openclaw gateway restart
+```
 
 Tabs
 
@@ -90,10 +99,10 @@ Verify models are available
 }
 ```
 
-## Built-in catalog
+## Catalog
 
 Run `openclaw models list --provider opencode-go` for the current model list.
-Bundled rows:
+Current rows:
 
 | Model ref                       | Name              | Context   | Max output | Image input |
 | ------------------------------- | ----------------- | --------- | ---------- | ----------- |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/gateway/doctor"
-source_hash: "7a788e8fcb2a3a432d26cf81756d11fa5e7ed35de54a7b9efec86f137c4c29dd"
+source_hash: "26afb178ea08b06a7cf38b6b6d8c721ee01d5156fc13616685eddeaf1cacc881"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/doctor.md"
@@ -395,7 +395,7 @@ Note
 
 2b. OpenCode provider overrides
 
-    If you have added `models.providers.opencode`, `opencode-zen`, or `opencode-go` manually, it overrides the built-in OpenCode catalog from `openclaw/plugin-sdk/llm`. That can force models onto the wrong API or zero out costs. Doctor warns so you can remove the override and restore per-model API routing + costs.
+    If you have added `models.providers.opencode`, `opencode-zen`, or `opencode-go` manually while the matching official external plugin is installed and enabled, it overrides that plugin-provided catalog. That can force models onto the wrong API or zero out costs. Doctor warns so you can remove the override and restore per-model API routing + costs. Without the matching plugin, the entry remains a valid standalone custom provider.
 
 
 2c. Browser migration and Chrome MCP readiness
@@ -481,7 +481,7 @@ Note
     - payload `provider` delivery aliases → explicit `delivery.channel`
     - legacy `notify: true` webhook fallback jobs → explicit webhook delivery from the retired raw `cron.webhook` value when valid; announce jobs keep their chat delivery and get `delivery.completionDestination`. Doctor then removes the old config key. Without a usable legacy webhook, the inert top-level `notify` marker is removed for no-target jobs (existing delivery, including announce, is preserved) since runtime delivery never reads it.
 
-    The Gateway also sanitizes malformed cron rows at load time so valid jobs keep running. Raw malformed rows are copied to `jobs-quarantine.json` next to the active store before removal from `jobs.json`; doctor reports quarantined rows so you can review or repair them manually.
+    The Gateway also sanitizes malformed cron rows at load time so valid jobs keep running. Malformed rows are quarantined in the shared SQLite state database in the same transaction that removes them from active scheduling; doctor reports those records and imports any `jobs-quarantine.json` sidecars left by older releases.
 
     Gateway startup normalizes the runtime projection and ignores the top-level `notify` marker, but leaves persisted cron state for doctor repair. Doctor removes inert markers for jobs with no migration target (`delivery.mode` none/absent, an unusable legacy webhook target, or existing announce/chat delivery), leaving existing delivery untouched, so repeated `doctor --fix` runs no longer re-warn about the same job.
 

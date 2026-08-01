@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Chat channels"
 source: "https://docs.openclaw.ai/channels"
-source_hash: "dcd17eaecb9af831ab6e0ff9344299385e63026dd9b401d3e678fc9abd0b5a62"
+source_hash: "bbcb17958557ada3b26832b8143b15aa750481e7cfba03a4183e00016a2e809b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels.md"
@@ -16,7 +16,7 @@ Source: https://docs.openclaw.ai/channels
 OpenClaw can talk to you on any chat app you already use. Each channel connects via the Gateway.
 Text is supported everywhere; media and reactions vary by channel.
 
-iMessage, Telegram, and the WebChat UI ship with the core install. Channels marked
+Telegram and the WebChat UI ship with the core install. Channels marked
 "official plugin" install with one command (`openclaw plugins install @openclaw/<id>`)
 or on demand during `openclaw onboard` / `openclaw channels add`, then need a Gateway
 restart. "External plugin" channels are maintained outside the OpenClaw repo.
@@ -27,7 +27,7 @@ restart. "External plugin" channels are maintained outside the OpenClaw repo.
 - [Discord](/channels/discord) - Discord Bot API + Gateway; supports servers, channels, and DMs (official plugin).
 - [Feishu](/channels/feishu) - Feishu/Lark bot via WebSocket (official plugin).
 - [Google Chat](/channels/googlechat) - Google Chat API app via HTTP webhook (official plugin).
-- [iMessage](/channels/imessage) - Included in core. Native macOS integration via the `imsg` bridge on a signed-in Mac (or SSH wrapper when the Gateway runs elsewhere), including private API actions for replies, tapbacks, effects, attachments, and group management.
+- [iMessage](/channels/imessage) - Native macOS integration via the `imsg` bridge on a signed-in Mac (or SSH wrapper when the Gateway runs elsewhere), including private API actions for replies, tapbacks, effects, attachments, and group management (official plugin).
 - [IRC](/channels/irc) - Classic IRC servers; channels + DMs with pairing/allowlist controls (official plugin).
 - [LINE](/channels/line) - LINE Messaging API bot (official plugin).
 - [Matrix](/channels/matrix) - Matrix protocol (official plugin).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "8c4762f17021272b1653b205f23fe2bfa736a3368f91e596112f0c9303c33805"
+source_hash: "5f85b2315ed161e3ec14b6e1b3b0c66e66f0c7dafdf720cfffc99dfee09656c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -309,9 +309,8 @@ AccordionGroup
 ComfyUI
 
     Workflow-driven and depends on the configured graph plus node mapping
-    for prompt/output fields. The bundled `comfy` plugin plugs into the
-    shared `music_generate` tool through the music-generation provider
-    registry.
+    for prompt/output fields. The `comfy` plugin plugs into the shared
+    `music_generate` tool through the music-generation provider registry.
 
 
 fal

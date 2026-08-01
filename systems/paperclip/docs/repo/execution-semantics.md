@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Execution Semantics"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/execution-semantics.md"
-source_hash: "10ed42de94ea4bfc2879563fdef1c11e0c62e17c48dc2781cdd24927cea6d677"
+source_hash: "0efbb4b39703788c0b186009253abeac84772c65e7195399d9e7189d9ce9b42f"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/execution-semantics.md"
@@ -536,6 +536,11 @@ Recovery rule:
 - if that recovery wake also finishes and the issue is still stranded, Paperclip moves the issue to `blocked` and opens or updates an explicit recovery action when a bounded owner/action is known; the visible comment is evidence, not the recovery path by itself
 
 This is a dispatch recovery, not a continuation recovery.
+
+Recovery hand-back is covered by the same liveness guarantee:
+
+- an `issue_recovery_action_restored` wake requested while the resolving recovery run is still active is persisted as a follow-up and dispatched only after that run exits, so it cannot be coalesced into the run that requested it
+- if that follow-up is nevertheless lost, the stranded-work backstop treats an assigned `todo` issue with a resolved `handed_back` recovery action from during or after its latest successful run as stranded and queues the bounded assignment recovery wake; the successful resolving run is not, by itself, evidence that the handed-back source work is live
 
 ### 9.2 Stranded assigned `in_progress`
 

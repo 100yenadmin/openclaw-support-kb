@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NovitaAI"
 source: "https://docs.openclaw.ai/providers/novita"
-source_hash: "d2ef86ba2270af1aa3106a1848579a4ed702ae84329eb4fed104d117a7f0d7b0"
+source_hash: "9c3c440847201de8cc2151164b275257f36b00b32de96543625523d0a809ee08"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/novita.md"
@@ -14,11 +14,18 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/providers/novita
 
 NovitaAI is a hosted AI infrastructure provider with an OpenAI-compatible API.
-It ships as a bundled OpenClaw provider (no separate plugin install), so
-credentials go through the normal model auth flow and model refs look like
-`novita/deepseek/deepseek-v4-pro`.
+OpenClaw provides NovitaAI through the official external
+`@openclaw/novita-provider` plugin. Model refs use the
+`novita/deepseek/deepseek-v4-pro` form.
 
 ## Setup
+
+Install the plugin and restart the Gateway:
+
+```bash
+openclaw plugins install @openclaw/novita-provider
+openclaw gateway restart
+```
 
 Create an API key at [novita.ai/settings/key-management](https://novita.ai/settings/key-management), then run:
 
@@ -36,13 +43,14 @@ export NOVITA_API_KEY="<your-novita-api-key>" # pragma: allowlist secret
 
 | Setting       | Value                             |
 | ------------- | --------------------------------- |
+| Plugin        | `@openclaw/novita-provider`       |
 | Provider id   | `novita`                          |
 | Aliases       | `novita-ai`, `novitaai`           |
 | Base URL      | `https://api.novita.ai/openai/v1` |
 | Env var       | `NOVITA_API_KEY`                  |
 | Default model | `novita/deepseek/deepseek-v4-pro` |
 
-## Bundled model catalog
+## Model catalog
 
 - `novita/moonshotai/kimi-k3`
 - `novita/moonshotai/kimi-k2.7-code`

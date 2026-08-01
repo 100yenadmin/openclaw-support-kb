@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model providers"
 source: "https://docs.openclaw.ai/concepts/model-providers"
-source_hash: "e614640216cb373f2c238ae573d045929dd4619094ca7ce1a2d0dce996a034cf"
+source_hash: "085e18bc6c019c0012d16a0b6c55291ffca78efce61297d97a984577258a4b45"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-providers.md"
@@ -490,10 +490,18 @@ Coding models (volcengine-plan)
 
 BytePlus ARK provides access to the same models as Volcano Engine for international users.
 
+- Plugin: `@openclaw/byteplus-provider`
 - Provider: `byteplus` (coding: `byteplus-plan`)
 - Auth: `BYTEPLUS_API_KEY`
 - Example model: `byteplus-plan/ark-code-latest`
 - CLI: `openclaw onboard --auth-choice byteplus-api-key`
+
+Install the official plugin and restart the Gateway:
+
+```bash
+openclaw plugins install @openclaw/byteplus-provider
+openclaw gateway restart
+```
 
 ```json5
 {

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
-source_hash: "ccf8af401d6b0a0773316b3e955b60e9202cc3da09029799ea02d2cdade80574"
+source_hash: "87607b909622a0f129d0632d0f7c8801ae66a044a15b301133f60e0ae91cfc28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/multi-agent-sandbox-tools.md"
@@ -95,7 +95,7 @@ Example 1: Personal + restricted family agent
     **Result:**
 
     - `main` agent: runs on host, full tool access.
-    - `family` agent: runs in Docker (one container per agent), only `read` and current-conversation message sends.
+    - `family` agent: runs in the configured container sandbox backend (one container per agent), only `read` and current-conversation message sends.
 
 
 
@@ -211,7 +211,7 @@ agents.entries.*.sandbox.prune.* > agents.defaults.sandbox.prune.*
 
 Note
 
-`agents.entries.*.sandbox.{docker,browser,prune}.*` overrides `agents.defaults.sandbox.{docker,browser,prune}.*` for that agent (ignored when sandbox scope resolves to `"shared"`).
+`agents.entries.*.sandbox.{docker,browser,prune}.*` overrides `agents.defaults.sandbox.{docker,browser,prune}.*` for that agent (ignored when sandbox scope resolves to `"shared"`). The `docker` block configures both built-in container backends.
 
 ### Tool restrictions
 

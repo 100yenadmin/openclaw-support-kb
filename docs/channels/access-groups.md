@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Access groups"
 source: "https://docs.openclaw.ai/channels/access-groups"
-source_hash: "b7354fc5d3d26d8666f58ca4cdf2a289b0516fdf4926696b5e0d8d48131b8bc1"
+source_hash: "94e0651c4f6d8e3b1d4249dbfce414aed16815296f5345641dbe0e29654d8eb9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/access-groups.md"
@@ -127,7 +127,7 @@ Access groups work in the shared message-channel authorization paths:
 - channel-specific per-room sender allowlists that use the same sender matching rules (for example Google Chat `groups.<space>.users`)
 - command authorization paths that reuse message-channel sender allowlists
 
-Channel support depends on whether that channel is wired through the shared OpenClaw sender-authorization helpers. Current bundled support includes ClickClack, Discord, Feishu, Google Chat, iMessage, IRC, LINE, Mattermost, Microsoft Teams, Nextcloud Talk, Nostr, QQ Bot, Signal, Slack, SMS, Telegram, WhatsApp, Zalo, and Zalo Personal. Static `message.senders` groups are channel-agnostic, so new message channels get them by using the shared plugin SDK ingress helpers instead of custom allowlist expansion.
+Channel support depends on whether that channel is wired through the shared OpenClaw sender-authorization helpers. Current supported channel integrations include ClickClack, Discord, Feishu, Google Chat, iMessage, IRC, LINE, Mattermost, Microsoft Teams, Nextcloud Talk, Nostr, QQ Bot, Signal, Slack, SMS, Telegram, WhatsApp, Zalo, and Zalo Personal. Static `message.senders` groups are channel-agnostic, so new message channels get them by using the shared plugin SDK ingress helpers instead of custom allowlist expansion.
 
 ## Discord channel audiences
 

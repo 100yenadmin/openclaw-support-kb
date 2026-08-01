@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "6bc1785a50b3d3553cb91148ddf09e726bc6112345775c64350460a95d0ab89e"
+source_hash: "6a3eca472acbb00c155b2d4e63eadb6aeb9099ff5905164255704d57024ed14f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -601,8 +601,8 @@ Model catalog entries
     | `requiresAssistantAfterToolResult` | Requires an assistant message after tool results. |
     | `requiresThinkingAsText` | Replays reasoning as text rather than structured content. |
     | `requiresReasoningContentOnAssistantMessages` | Preserves DeepSeek-style `reasoning_content` during replay. |
-    | `toolSchemaProfile` | Selects a provider-defined tool-schema normalization profile. |
-    | `unsupportedToolSchemaKeywords` | Removes named JSON Schema keywords rejected by the endpoint. |
+    | `toolSchemaProfile` | Selects a tool-schema normalization profile. Custom model entries recognize `llamacpp` and `gemini`. The `llamacpp` profile removes `pattern` and `maxLength` values at or above 2000; built-in `llama-cpp`, `ollama`, and `lmstudio` providers apply the same cleaner automatically. Custom `llama-server` models must select it explicitly. See the llama.cpp example below. |
+    | `unsupportedToolSchemaKeywords` | Removes named JSON Schema keywords rejected by the endpoint before tool schemas are sent. Use this for endpoint-specific gaps beyond a profile's targeted transformations. |
     | `toolCallArgumentsEncoding` | Selects the endpoint's tool-call argument encoding. |
     | `requiresOpenAiAnthropicToolPayload` | Converts OpenAI-shaped tool calls to Anthropic-family payloads. |
 
@@ -682,6 +682,46 @@ Kimi Coding
     ```
 
     Anthropic-compatible, built-in provider. Shortcut: `openclaw onboard --auth-choice kimi-code-api-key`.
+
+
+
+Local models (llama.cpp / llama-server)
+
+    Point a **custom** `openai-completions` provider at a remote `llama-server` (or another OpenAI-compatible llama.cpp endpoint). The built-in `llama-cpp`, `ollama`, and `lmstudio` providers apply the llama.cpp schema cleaner automatically; a custom endpoint does not. Set `compat.toolSchemaProfile: "llamacpp"` on each model whose llama-server chat template compiles tool arguments into GBNF. The profile removes `pattern` and `maxLength` values at or above 2000, covering the `cron` tool's `trigger.script` limit of 65536. It is a targeted mitigation, not complete compatibility for every JSON Schema constraint or `minLength`.
+
+    ```json5
+    {
+      agents: {
+        defaults: {
+          model: { primary: "my-llamacpp/qwen35" },
+        },
+      },
+      models: {
+        mode: "merge",
+        providers: {
+          "my-llamacpp": {
+            baseUrl: "http://127.0.0.1:8080/v1",
+            apiKey: "llamacpp-no-key",
+            api: "openai-completions",
+            models: [
+              {
+                id: "qwen35",
+                name: "Qwen3.5 (llama-server)",
+                contextWindow: 8192,
+                maxTokens: 2048,
+                compat: {
+                  supportsTools: true,
+                  toolSchemaProfile: "llamacpp",
+                },
+              },
+            ],
+          },
+        },
+      },
+    }
+    ```
+
+    On older builds without `toolSchemaProfile`, the broader fallback is `compat.unsupportedToolSchemaKeywords: ["pattern", "patternProperties", "format", "propertyNames", "uniqueItems", "contains", "minContains", "maxContains", "minLength", "maxLength"]`. Unlike the profile, this removes every listed keyword unconditionally.
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "dae3020f5cfc6f93cba1a67636b650e760e1009d262d5f9ed455d2190c7163f3"
+source_hash: "cb5bbf0877243e72a53a9e2fcdee1a3f090ccedea8cec80eb2775ee2d033cc72"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -13,9 +13,8 @@ duplicate_index: 1
 # Xiaomi MiMo
 Source: https://docs.openclaw.ai/providers/xiaomi
 
-Xiaomi MiMo is the API platform for **MiMo** models. The bundled `xiaomi`
-plugin (`enabledByDefault: true`, no install step) registers two text
-providers plus a speech (TTS) provider:
+Xiaomi MiMo is the API platform for **MiMo** models. The official external
+`xiaomi` plugin registers two text providers plus a speech (TTS) provider:
 
 - `xiaomi` - pay-as-you-go keys (`sk-...`)
 - `xiaomi-token-plan` - Token Plan keys (`tp-...`) with regional endpoint presets
@@ -35,6 +34,15 @@ providers plus a speech (TTS) provider:
 ## Getting started
 
 Steps
+
+
+Install the plugin
+
+    ```bash
+    openclaw plugins install @openclaw/xiaomi-provider
+    openclaw gateway restart
+    ```
+
 
 
 Get the right key
@@ -101,7 +109,7 @@ Choose the Token Plan auth choice that matches the regional base URL shown in Xi
 | `xiaomi-token-plan/mimo-v2.5`     | text, image | 1,048,576 | 131,072    | Yes       | Multimodal    |
 
 `xiaomi-token-plan` needs a regional base URL to resolve. The supported path
-is a bundled Token Plan onboarding choice or an explicit
+is a Token Plan onboarding choice or an explicit
 `models.providers.xiaomi-token-plan` config block with `baseUrl` set; the
 provider is not offered without one of those.
 
@@ -113,7 +121,7 @@ OpenClaw's [`/think` directive](/tools/thinking) with levels `off`,
 
 ## Text-to-speech
 
-The bundled `xiaomi` plugin also registers Xiaomi MiMo as a speech provider
+The `xiaomi` plugin also registers Xiaomi MiMo as a speech provider
 for `tts`. It calls Xiaomi's chat-completions TTS contract with the
 text as an `assistant` message and optional style guidance as a `user`
 message.
@@ -210,7 +218,8 @@ mono Opus with `ffmpeg` before delivery.
 }
 ```
 
-Pricing and compat flags come from the bundled plugin manifest, so the config example omits `cost` and `compat` to avoid diverging from runtime behavior.
+Pricing and compat flags come from the plugin manifest, so the config example
+omits `cost` and `compat` to avoid diverging from runtime behavior.
 
 Token Plan:
 
@@ -249,14 +258,16 @@ Token Plan:
 }
 ```
 
-Token Plan charges against a fixed subscription's Credits rather than per-token USD pricing, so its bundled catalog rows use zero USD cost and the config example omits `cost`.
+Token Plan charges against a fixed subscription's Credits rather than per-token
+USD pricing, so its catalog rows use zero USD cost and the config example omits
+`cost`.
 
 AccordionGroup
 
 
 Auto-injection behavior
 
-    The `xiaomi` provider is auto-enabled when `XIAOMI_API_KEY` is set in your environment or an auth profile exists. `xiaomi-token-plan` needs a regional base URL, so the supported path is the bundled Token Plan onboarding choice or an explicit `models.providers.xiaomi-token-plan` config block.
+    The `xiaomi` provider is auto-enabled when `XIAOMI_API_KEY` is set in your environment or an auth profile exists. `xiaomi-token-plan` needs a regional base URL, so the supported path is the Token Plan onboarding choice or an explicit `models.providers.xiaomi-token-plan` config block.
 
 
 

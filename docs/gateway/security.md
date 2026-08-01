@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/gateway/security"
-source_hash: "2aac10a7844bef6691e2ee11bbeab9bc1e1b3ebc3b3d25b7b71e3cb8cd629bc2"
+source_hash: "d5b1a6b9ba30b79290eba3aef52e396d6c2519a3b2ab90f94770f2a6daf01f79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security.md"
@@ -359,7 +359,7 @@ Dedicated doc: [Sandboxing](/gateway/sandboxing)
 Two complementary approaches:
 
 - **Full Gateway in Docker** (container boundary): [Docker](/install/docker)
-- **Tool sandbox** (`agents.defaults.sandbox`; host gateway + sandbox-isolated tools; Docker is the default backend): [Sandboxing](/gateway/sandboxing)
+- **Tool sandbox** (`agents.defaults.sandbox`; host gateway + sandbox-isolated tools; built-in Docker and Podman backends): [Sandboxing](/gateway/sandboxing)
 
 Note
 

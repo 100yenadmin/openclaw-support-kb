@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ComfyUI plugin"
 source: "https://docs.openclaw.ai/plugins/reference/comfy"
-source_hash: "d5daaf704ef68b2eaf009392a1b3fc642445aa7642412d6ad6d50753d5624789"
+source_hash: "f1c30055b32d69a65532d0be98a748dc6462bb3906b42d2bb9ce7b38e65c85c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/comfy.md"
@@ -20,7 +20,7 @@ Adds ComfyUI model provider support to OpenClaw.
 ## Distribution
 
 - Package: `@openclaw/comfy-provider`
-- Install route: included in OpenClaw
+- Install route: npm; ClawHub: `clawhub:@openclaw/comfy-provider`
 
 ## Surface
 
