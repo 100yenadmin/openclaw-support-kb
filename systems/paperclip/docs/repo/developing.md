@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "9008fa70a132264fcb2ce0e20dbee86bf701b20de9ef5305aee1aec9001e16a3"
+source_hash: "4a737b3c2f209519a1e2b0b7fdaa70620c4aff229be054830edf34c6e61f786a"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -459,6 +459,8 @@ That repo-local env also sets:
 The server/UI use those values for worktree-specific branding such as the top banner and dynamically colored favicon.
 Authenticated worktree servers also use the `PAPERCLIP_INSTANCE_ID` value to scope Better Auth cookie names.
 Browser cookies are shared by host rather than port, so this prevents logging into one `127.0.0.1:<port>` worktree from replacing another worktree server's session cookie.
+
+When Paperclip closes a server-managed git worktree, it also reclaims the isolated instance referenced by that worktree's repo-local `.paperclip/.env`. New server-managed worktrees use a collision-resistant instance id derived from the resolved absolute worktree path. Cleanup requires that exact id, stops a running embedded PostgreSQL process, and then removes the instance directory. The deletion guard only accepts canonical instance paths below `PAPERCLIP_WORKTREES_DIR/instances/`; legacy or mismatched ids, pointers to the default/live Paperclip home, and all other locations are logged and left untouched.
 
 Print shell exports explicitly when needed:
 

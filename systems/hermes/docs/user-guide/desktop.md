@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop App"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "106bfa223257139938699226b46fdf76052aead690ae6b3f3049b0528d572a3b"
+source_hash: "53ae2965012888f2a5dd4890f920983ffc6e5fd3587ed073a71d35d7f4d958f0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -148,6 +148,7 @@ Manage providers, models, tools, and credentials from a real UI instead of editi
 - **Every provider and model in the menus** — the GUI surfaces the full provider list and every model that `hermes model` knows about, so you pick from the same catalog the CLI sees rather than a curated subset.
 - **xAI Grok OAuth** — Grok is a first-class OAuth provider in the launcher; sign in through the browser flow like the other OAuth providers.
 - **Tool-backend installs from the GUI** — run a tool backend's post-setup install steps directly from the app instead of dropping to a terminal.
+- **Terminal font picker** — choose an installed font in **Settings → Appearance**. Nerd Fonts such as `MesloLGS NF` render Powerlevel10k separators and icons in both interactive and agent terminals; the setting is saved per profile.
 - **Auxiliary-model warning** — if you switch the main model to a new provider while auxiliary tasks (titling, summarization, and similar helpers) are still pinned to another provider, the app warns you so you don't unknowingly split work across two providers.
 - **VS Code Marketplace themes** — beyond the built-in theme presets, the appearance settings include a live VS Code Marketplace search: pick any color theme and the app downloads, converts, and installs it as a desktop theme. The same importer is available from the command palette (*Install theme*), and imported themes can be removed again from the appearance settings.
 - **Keep computer awake** — **Settings → Advanced → Keep computer awake** stops the machine from sleeping so long or overnight agent runs keep going (the display can still dim). This is a per-computer setting.

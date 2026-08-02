@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (Native) Guide"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-native"
-source_hash: "362ccc24a978a9b02696c3ab06a94c15153393455b5b25707aa80947a389f58a"
+source_hash: "5568f25ff720dbd241b371a9daef8c19c19d826b7ad6796e11ba7fd01e4bdae3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-native.md"
@@ -68,7 +68,7 @@ On first launch (and on demand when a missing tool is detected), Hermes runs a s
 | Dependency | Why Hermes needs it |
 |---|---|
 | **PortableGit** | Provides `bash.exe` for the terminal tool and `git` for in-session clones. Provisioned at install time, not by `dep_ensure`. |
-| **Node.js 22** | Required for the browser tool (`agent-browser`), the TUI's web bridge, and the WhatsApp bridge. |
+| **Node.js 26** | Required for the browser tool (`agent-browser`), the TUI's web bridge, and the WhatsApp bridge. |
 | **ffmpeg** | Audio format conversion for TTS / voice messages. |
 | **ripgrep** | Fast file search — falls back to `grep` if unavailable. |
 | **npm packages** | `agent-browser`, Playwright Chromium, and any per-toolset Node deps are installed once at first browser-tool use. |
@@ -81,7 +81,7 @@ Top-to-bottom, in order:
 
 1. **Bootstraps `uv`** — Astral's fast Python manager. Installed to `%USERPROFILE%\.local\bin`.
 2. **Installs Python 3.11** via `uv`. No existing Python needed.
-3. **Installs Node.js 22** (winget if available, else a portable Node tarball unpacked under `%LOCALAPPDATA%\hermes\node`). Used for the browser tool and the WhatsApp bridge.
+3. **Installs Node.js 26** (winget if available, else a portable Node tarball unpacked under `%LOCALAPPDATA%\hermes\node`). Used for the browser tool and the WhatsApp bridge.
 4. **Installs portable Git** — if `git` is already on PATH the installer uses it; otherwise it downloads a trimmed, self-contained **PortableGit** (~45 MB, from the official `git-for-windows` release) to `%LOCALAPPDATA%\hermes\git`. No admin, no Windows installer registry, no interference with anything else on the box.
 5. **Clones the repo** to `%LOCALAPPDATA%\hermes\hermes-agent` and creates a virtualenv inside it.
 6. **Tiered `uv pip install`** — tries `.[all]` first, falls back to progressively smaller sets (`[messaging,dashboard,ext]` → `[messaging]` → `.`) if a `git+https` dep flakes on rate-limited GitHub. Prevents "single flake drops you to a bare install" failure mode.
@@ -318,7 +318,7 @@ You set it in the current process only; close and reopen the shell, or set it at
 Chromium is auto-installed on first run. If the install failed (rate-limited GitHub, Playwright CDN hiccup), run `hermes doctor` — it will surface the missing Chromium and print the exact `npx playwright install chromium` command to fix it.
 
 **`agent-browser` fails with a weird Node version error.**
-The installer provisions Node 22 at `%LOCALAPPDATA%\hermes\node` but your PATH may have an older system Node 18 first. Either move Hermes's node dir earlier on PATH, or delete the system install if you don't use Node elsewhere.
+The installer provisions Node 26 at `%LOCALAPPDATA%\hermes\node` but your PATH may have an older system Node 18 first. Either move Hermes's node dir earlier on PATH, or delete the system install if you don't use Node elsewhere.
 
 **Chinese / Japanese / Arabic characters show as `?` in the CLI.**
 The UTF-8 stdio shim didn't activate. Check that `HERMES_DISABLE_WINDOWS_UTF8` is NOT set (`Get-ChildItem env:HERMES_DISABLE_WINDOWS_UTF8`). If it's empty and you still see `?`, the console host (very old `cmd.exe`) may not support UTF-8 at all — switch to Windows Terminal.

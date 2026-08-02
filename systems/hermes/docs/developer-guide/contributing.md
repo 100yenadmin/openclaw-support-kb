@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "5d2ee999289b680537f1c6dbdefb956e6d0e8f6c43837415d7e7934879725467"
+source_hash: "5b80c9311af8f5b7e364e8d9df76e04932d586d6ff0b42081279eec0a1a8b1e0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -49,7 +49,7 @@ We value contributions in this order:
 | **Git**              | With the `git-lfs` extension installed                                                        |
 | **Python 3.11–3.13** | uv will install it if missing                                                                 |
 | **uv**               | Fast Python package manager ([install](https://docs.astral.sh/uv/))                           |
-| **Node.js 20+**      | Optional — needed for browser tools and WhatsApp bridge (matches root `package.json` engines) |
+| **Node.js 26+**      | Optional — needed for browser tools and WhatsApp bridge (matches root `package.json` engines) |
 
 ### Install with the standard installer
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "a47e12bb28397daf7b024c03312876043983122103590ad2d6f47f5657f4980e"
+source_hash: "e69e848412bae7f69c3c6c54be718bacb6070b38dc82415dd9205d50b3366ac8"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -194,6 +194,14 @@ Both tables use a unique key on `(company_id, user_id, resource_id)` and keep `s
 - Deleting a training example deletes only that example and does not mutate the source issue.
 
 This policy makes training exports self-describing while keeping the decision record usable after a comment deletion without retaining content the author removed.
+
+## Decision queues and triage provenance
+
+The decisions desk stores queue membership and decide-by/snooze state in `decision_queues`, `decision_queue_items`, and `decision_triage`. These sidecars use the stable attention identity `(source_kind, source_id)` so all attention source kinds can participate without copying source titles, bodies, projects, or other visibility-sensitive data.
+
+`decision_triage_events` is append-only history for queue and triage changes. Current rows and history both carry server-derived user/agent, heartbeat run, API-key, and responsible-user attribution where applicable. Queue reads must resolve and authorize their source rows at read time; a sidecar row is never a visibility grant.
+
+Triage writes serialize on the company and attention-source identity so concurrent partial updates preserve both fields and produce monotonic history versions.
 
 ## Plugin database namespaces
 

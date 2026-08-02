@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "ACP Host Integration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/acp"
-source_hash: "feba686ad5a69739113802075f464f19f4efe17c273e655bd5a2b75640982b6e"
+source_hash: "5ab334820efdb22ff9a984f8d57001ef0b2258a4dddbbdfc971a3504a115c376"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/acp.md"
@@ -102,7 +102,7 @@ This is the standalone command. The terminal-auth flow (`hermes acp --setup`) al
 
 What it does:
 
-- Installs Node.js 22 LTS into `~/.hermes/node/` if missing
+- Installs Node.js 26 into `~/.hermes/node/` if missing
 - `npm install -g agent-browser @askjo/camofox-browser` into that prefix (no sudo needed — `npm`'s `--prefix` points at the user-writable Hermes-managed Node)
 - Installs Playwright Chromium, or uses a detected system Chrome/Chromium when available
 

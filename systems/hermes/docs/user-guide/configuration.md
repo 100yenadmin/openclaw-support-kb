@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "60e55ea569a4bf5206ef8a2e0725f7877be2ef243db123e8b2ba20c0bdf29cbf"
+source_hash: "a7ac2f771344572c56d8eb9f3e39330be3a432897062ece18d91e2ba3009cf16"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -135,6 +135,7 @@ Hermes supports seven terminal backends. Each determines where the agent's shell
 terminal:
   backend: local    # local | docker | ssh | modal | daytona | vercel_sandbox | singularity
   cwd: "."          # Gateway/cron working directory (CLI always uses launch dir)
+  font_family: ""   # Desktop terminal font; e.g. "MesloLGS NF"
   timeout: 180      # Per-command timeout in seconds
   home_mode: auto   # auto | real | profile — subprocess HOME policy
   env_passthrough: []  # Env var names to forward to sandboxed execution (terminal + execute_code)
@@ -142,6 +143,8 @@ terminal:
   modal_image: "nikolaik/python-nodejs:python3.11-nodejs20"                 # Container image for Modal backend
   daytona_image: "nikolaik/python-nodejs:python3.11-nodejs20"               # Container image for Daytona backend
 ```
+
+`terminal.font_family` controls the embedded terminal in Hermes Desktop. It accepts either one locally installed family name (for example, `MesloLGS NF`) or a CSS font stack. Hermes appends its bundled JetBrains Mono stack as a fallback, and an empty value keeps the default. You can edit the same profile-scoped setting in **Settings → Appearance → Terminal Font**; no Google Fonts download or system-font permission is required.
 
 For cloud sandboxes such as Modal, Daytona, and Vercel Sandbox, `container_persistent: true` means Hermes will try to preserve filesystem state across sandbox recreation. It does not promise that the same live sandbox, PID space, or background processes will still be running later.
 

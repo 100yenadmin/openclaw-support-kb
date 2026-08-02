@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nix & NixOS Setup"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/nix-setup"
-source_hash: "5091b76bc4be42bb3865f16fa80e99832cfb8386424fe8a4a94f8fa8a4106d8c"
+source_hash: "838b76d79ac247b18c402cc0e513c8f10d13bad0e96506d70dca11976754e357"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/nix-setup.md"
@@ -785,7 +785,7 @@ nix develop
 
 # Shell provides:
 #   - Python 3.12 + uv (deps installed into .venv on first entry)
-#   - Node.js 22, ripgrep, git, openssh, ffmpeg on PATH
+#   - Node.js 26, ripgrep, git, openssh, ffmpeg on PATH
 #   - Stamp-file optimization: re-entry is near-instant if deps haven't changed
 
 hermes setup

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T10:52:49.817Z",
+  "generatedAt": "2026-08-02T10:53:52.626Z",
   "physicalGbrainSourceId": "openclaw-support-kb",
   "note": "This v1 repo installs as one GBrain source for backwards compatibility. Agents must use logical namespaces and source/path filters to avoid mixing OpenClaw, Hermes, Paperclip, and Composio facts.",
   "logicalSources": [
