@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md"
-source_hash: "67fa99cd3d443d38e6b8c8e42c293d8d8d62e6af418ec52ce784bf65252fa4b2"
+source_hash: "f330418618c373626c1c245810855e6513d7e7613b1fe076faeb9bf3668dfbec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/v3/api-reference/webhook-subscriptions.md"
@@ -147,11 +147,5 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 > Always [verify webhook signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures) before processing events in production.
 
 # Endpoints [#endpoints]
-
----
-
-
-# Toolkits
-
 
 ---

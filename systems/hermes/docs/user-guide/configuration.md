@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "867b35e4f989c4f2d4734c23e5b2e09556d049498d46a1c8bf152f4eeafaffeb"
+source_hash: "e2569374d56f8b458e39097087ed6a3566f3159dbf5bae61cff760a6746011af"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -1745,8 +1745,19 @@ When `display.runtime_footer.enabled: true`, Hermes appends a small runtime-cont
 display:
   runtime_footer:
     enabled: true
-    fields: ["model", "context_pct", "cwd"]   # supported fields: model, context_pct, cwd
+    fields: ["model", "context_pct", "cwd"]   # order shown; drop any to hide
 ```
+
+Supported fields:
+
+| Field | Renders | Example |
+| --- | --- | --- |
+| `model` | Bare model id, vendor prefix dropped | `gpt-5.4` |
+| `context_pct` | Last-call context occupancy as a percent | `5%` |
+| `latency` | Wall-clock duration of the turn | `22s`, `1m05s` |
+| `cwd` | Home-relative working directory | `~` |
+
+The default field set is `["model", "context_pct", "cwd"]`. `latency` is opt-in — add it to `fields` to use it. Fields whose data is unavailable are skipped silently rather than rendering an empty slot.
 
 The `/footer` slash command toggles this at runtime in any session.
 
