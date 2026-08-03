@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom MCP"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md"
-source_hash: "e0bff08ca76861b998a413097843a4007cef1e149f0a0905969556bbe2657b9a"
+source_hash: "851cba449bebcc4fa47c5639451603d4bec35f0a81de053227e31556a894fb9d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-mcp.md"
@@ -132,6 +132,36 @@ Choose the mode that matches your server, then complete any required connection:
 
 For DCR OAuth, the server must support the standard authorization-code flow. Other OAuth grant types aren't supported.
 
+## Create the auth config for automatic account matching [#create-the-auth-config-for-automatic-account-matching]
+
+For API-key and DCR OAuth servers, create the toolkit's auth config with `is_enabled_for_tool_router` set to `true`:
+
+```bash
+curl --request POST \
+  --url https://backend.composio.dev/api/v3.1/auth_configs \
+  --header "x-api-key: $COMPOSIO_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "toolkit": { "slug": "CUSTOM_ACME" },
+    "auth_config": {
+      "type": "use_custom_auth",
+      "authScheme": "API_KEY",
+      "credentials": {},
+      "is_enabled_for_tool_router": true
+    }
+  }'
+```
+
+This flag is what lets sessions find the toolkit's connected accounts by `user_id` automatically. Without it, session executions fail with `NoActiveConnection` even when an active account exists, and you must [select the account explicitly](#use-an-authenticated-server) in every session. If you already created the config without the flag, patch it:
+
+```bash
+curl --request PATCH \
+  --url https://backend.composio.dev/api/v3.1/auth_configs/ac_xxxxxxxx \
+  --header "x-api-key: $COMPOSIO_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{ "is_enabled_for_tool_router": true }'
+```
+
 # Sync and resync tools [#sync-and-resync-tools]
 
 Call `POST /api/v3.1/custom/toolkits/sync` to fetch the server's current tools:
@@ -243,7 +273,7 @@ With the default search-first session, your agent can discover the custom tools 
 
 ## Use an authenticated server [#use-an-authenticated-server]
 
-For API-key and DCR OAuth servers, explicitly select the connected account in the session config. Don't rely on automatic account matching for Custom MCP toolkits yet.
+Sessions match a connected account by `user_id` automatically when the toolkit's auth config was [created with `is_enabled_for_tool_router: true`](#create-the-auth-config-for-automatic-account-matching). If your auth config doesn't have that flag, explicitly select the connected account in the session config instead:
 
 **Python:**
 
@@ -323,7 +353,7 @@ See [Toolkit Versioning](/docs/tools-direct/toolkit-versioning) for more example
 
 **Sessions and tool APIs**
 
-    * **Select authenticated accounts explicitly:** Custom MCP sessions don't reliably match a connected account automatically. Pass its ID through `connected_accounts` in Python or `connectedAccounts` in TypeScript.
+    * **Automatic account matching requires a flag:** sessions only match a custom toolkit's connected accounts when its auth config has `is_enabled_for_tool_router: true`. Set it at creation (or PATCH it in later); otherwise pass the account ID through `connected_accounts` in Python or `connectedAccounts` in TypeScript.
     * **Prefer the v3.1 tools API:** The v3 tools API pins a default version that doesn't contain custom tools. If you must use v3, explicitly select `latest` as described above.
 
 # Related guides [#related-guides]

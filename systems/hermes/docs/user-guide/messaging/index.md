@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "df828e8e17021b693ef9039f559b626a2282f3d880e42ec81aa3049ce17242a0"
+source_hash: "267259852d1ca6585dbe06c2d59080bbcc0a8b1eefb99d2bec5d0f39956c1628"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -816,6 +816,7 @@ Defaults to `false`. Only platforms whose adapter implements `delete_message` ho
 - [Raft Setup](raft.md)
 - [IRC Setup](irc.md)
 - [Buzz Setup](buzz.md)
+- [A2A (Agent-to-Agent) Setup](a2a.md)
 - [Webhooks](webhooks.md)
 
 ---

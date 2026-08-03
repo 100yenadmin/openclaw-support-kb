@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "low-level script for direct database maintenance"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/secrets.md"
-source_hash: "ea294f8f0a8e16bced2b4aa8946fa277b0449163d03d3e4ddc94adea7c1a2ebb"
+source_hash: "45d0675377a5ba6feb68a88418f629ccf7bc4e2cfa1b532213c4dce2fd82c7f5"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/secrets.md"
@@ -68,6 +68,13 @@ can be human-readable; the binding key is what the agent process receives.
 Project env applies to every issue run in that project. When a project env key
 matches an agent env key, the project value wins before Paperclip injects its
 own `PAPERCLIP_*` runtime variables.
+
+Separately from env bindings, the **server itself** consumes a company secret
+named `GITHUB_TOKEN`, `GH_TOKEN`, or `PAPERCLIP_GITHUB_TOKEN` (by name, no
+binding needed) to authenticate server-side git operations — cloning private
+GitHub repos for repo-only project workspaces and refreshing worktree base
+refs. See
+[Execution workspaces](../guides/board-operator/execution-workspaces-and-runtime-services.md#private-repositories-and-repo-only-project-workspaces).
 
 ## User-Specific Secrets
 

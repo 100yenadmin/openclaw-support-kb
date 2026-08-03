@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/session-storage"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/session-storage"
-source_hash: "4ac06c9e8630c9f08875fc3916cd7bf4fb051716203ec6f5369338f9c99d689a"
+source_hash: "fa8c3c3c0a9c810960a5f09c7b4ac99f8ad77f49c168b2ca78a68fc1d06b0e86"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/session-storage.md"
@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 CREATE INDEX IF NOT EXISTS idx_messages_session ON messages(session_id, timestamp);
+CREATE INDEX IF NOT EXISTS idx_messages_session_id ON messages(session_id, id);
 ```
 
 Notes:

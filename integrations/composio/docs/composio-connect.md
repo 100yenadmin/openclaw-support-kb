@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio Connect"
 source: "https://docs.composio.dev/docs/composio-connect.md"
-source_hash: "ea7dd568e1749fd3b4822f508f08b3dd76fba3a1421a1b7df59c8ce26497e20a"
+source_hash: "99907f372fef287f3e6e5fa61f00363bbaac8b74c805834afbe6babaf9d6a852"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "composio-connect.md"
@@ -355,6 +355,6 @@ Open [dashboard.composio.dev](https://dashboard.composio.dev?utm_source=docs\&ut
 
 ## I still need help [#i-still-need-help]
 
-Reach out at [tech@composio.dev](mailto:tech@composio.dev) or join the [Composio Discord](https://discord.com/invite/cNruWaAhQk).
+Reach out at [support@composio.dev](mailto:support@composio.dev) or join the [Composio Discord](https://discord.com/invite/cNruWaAhQk).
 
 ---
