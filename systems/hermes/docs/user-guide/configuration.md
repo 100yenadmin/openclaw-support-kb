@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "e2569374d56f8b458e39097087ed6a3566f3159dbf5bae61cff760a6746011af"
+source_hash: "07f4fcb42e483e7a57130daecf7fa74a28cc6b187a490c70dca753d66b7b8c35"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -1202,6 +1202,8 @@ auxiliary:
     #     model: google/gemini-2.5-flash
     #     base_url: ""
     #     api_key: ""
+    # max_concurrency: 2       # Optional: cap simultaneous compression LLM calls so
+                               # multiple sessions don't pile retries on a degraded provider
 
   # Auto-generated session titles. Empty language follows the conversation;
   # set e.g. "English" or "Japanese" to pin titles to one language.
@@ -1229,6 +1231,15 @@ auxiliary:
     base_url: ""
     api_key: ""
     timeout: 30
+
+  # Auto-generated short session titles after the first exchange
+  title_generation:
+    provider: "auto"
+    model: ""
+    base_url: ""
+    api_key: ""
+    timeout: 30
+    # max_concurrency: 2       # Optional: cap simultaneous title-generation calls
 
   # Kanban triage specifier — `hermes kanban specify <id>` (or the
   # dashboard's ✨ Specify button on Triage-column cards) uses this
@@ -1278,6 +1289,25 @@ Each entry supports the same three knobs as any auxiliary task config:
 | `base_url` | (Optional) Custom OpenAI-compatible endpoint |
 
 `fallback_chain` is available on any auxiliary task — `compression`, `vision`, `web_extract`, `approval`, `skills_hub`, `mcp`, etc.
+
+### Limiting auxiliary concurrency
+
+`max_concurrency` caps in-flight LLM calls for auxiliary tasks such as `compression` and `title_generation` across the whole process. `auxiliary.vision.max_concurrency` is excluded: it already controls only vision's CPU-bound image encode/resize workers, not LLM requests. This is most useful when:
+
+- Many sessions can spawn background work simultaneously (Discord/Telegram channels, multiple terminals)
+- Your provider is rate-limited or going through an incident and retries would amplify the burst
+
+The default is unlimited. A typical safety cap is `2`:
+
+```yaml
+auxiliary:
+  title_generation:
+    max_concurrency: 2
+  compression:
+    max_concurrency: 2
+```
+
+The semaphore wraps the entire call including retries and fallbacks, so a single slow call counts only once toward the limit.
 
 ### OpenRouter routing & Pareto Code for auxiliary tasks
 

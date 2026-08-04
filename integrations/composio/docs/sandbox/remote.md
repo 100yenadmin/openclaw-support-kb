@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Remote sandbox"
 source: "https://docs.composio.dev/docs/sandbox/remote.md"
-source_hash: "4b92c95bb7ad7b94bf2e36c17f37f6fe2c3b68848551c0e697b3e8231f7cae79"
+source_hash: "27d3531afb75c0340d99d1ab620706692151e312c2a12bca70f2d2cd7238faa5"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sandbox/remote.md"
@@ -20,6 +20,8 @@ Source: https://docs.composio.dev/docs/sandbox/remote.md
 The **sandbox** is a persistent Python environment where your agent writes and executes code. It has programmatic access to all Composio tools, plus helper functions for calling LLMs, uploading files, and making API requests. State persists across calls within a [session](/docs/how-composio-works). Your agent runs code in it through the `COMPOSIO_REMOTE_WORKBENCH` meta tool, and shell commands through `COMPOSIO_REMOTE_BASH_TOOL`.
 
 > **Renamed from workbench**: This feature used to be called the **workbench**. The preferred session config key is now `sandbox`, but `workbench` still works as a fully supported alias, in both SDKs and on the wire. It isn't deprecated, so existing code keeps running unchanged. The `COMPOSIO_REMOTE_WORKBENCH` and `COMPOSIO_REMOTE_BASH_TOOL` meta tools keep their names.
+
+> **Composio doesn't run or replace your agent**: Your agent and its model stay entirely yours — Composio never proxies your LLM or runs an agent on your behalf. It discovers, authenticates, and executes tools. The one place Composio itself can call a model is *inside the sandbox*, and only when your code opts in — most directly through the [`invoke_llm`](#built-in-helpers) helper. That optional, sandbox-only usage is the sole source of any Composio-side **LLM tokens**. The sandbox is opt-in per [session](/docs/configuring-sessions) via `sandbox: { enable: true }` — don't enable it (or simply never call `invoke_llm`) and Composio uses no LLM tokens at all.
 
 # Where it fits [#where-it-fits]
 

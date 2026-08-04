@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "3029d13bd74e13a87197a836a08d71c127e764d884168691a3fab7b2abf5c3b0"
+source_hash: "92c597c4f734e9bd9f0cd04a8086cf79a126187fbe2996dd1b748b55d7889c46"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -235,6 +235,8 @@ Set a predefined personality to change the agent's tone:
 ```
 
 Built-in personalities include: `helpful`, `concise`, `technical`, `creative`, `teacher`, `kawaii`, `catgirl`, `pirate`, `shakespeare`, `surfer`, `noir`, `uwu`, `philosopher`, `hype`.
+
+To go back to the default (no overlay), use `/personality none` — `default` and `neutral` work too.
 
 You can also define custom personalities in `~/.hermes/config.yaml`:
 

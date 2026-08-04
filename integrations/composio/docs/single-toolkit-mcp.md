@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "38ec3964cea91898ba42ac8739fb56b9c9fbee617934f8e0a5c30de88c90e1eb"
+source_hash: "dcb64445ee5a7f128fd0a74ce97cb722d35854abc0bb1558127f97399d4511c9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -952,6 +952,13 @@ import { verifySlackSignature, readRawBody, updateMessage, postAsMember } from '
 import { generateDraft } from './_utils/agent';
 import { draftMessage, connectMenu } from './_utils/blocks';
 
+type SlackInteractionPayload = {
+  actions?: Array<{
+    action_id?: string;
+    value?: string;
+  }>;
+};
+
 // Slack POSTs here every time someone clicks a button. Verify it really came
 // from Slack, then ack within 3 seconds (Slack retries if you're slow).
 export default async function handler(req: Request, res: Response) {
@@ -965,7 +972,7 @@ export default async function handler(req: Request, res: Response) {
 
 // Each button carried its context in `value`, so the handler knows exactly what
 // to do. No model decides anything here: the flow is fixed.
-async function handleClick(payload: any) {
+async function handleClick(payload: SlackInteractionPayload) {
   const action = payload.actions?.[0];
   const ctx = JSON.parse(action?.value ?? '{}');
 

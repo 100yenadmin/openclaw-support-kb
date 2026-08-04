@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "267259852d1ca6585dbe06c2d59080bbcc0a8b1eefb99d2bec5d0f39956c1628"
+source_hash: "af56782ac9f2bacf81d6a6332bed73f33f55ba3e4a13db811d2d36dafa951393"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -205,7 +205,7 @@ platform network disconnect as an event-loop failure.
 |---------|-------------|
 | `/new` or `/reset` | Start a fresh conversation |
 | `/model [provider:model]` | Show or change the model (supports `provider:model` syntax) |
-| `/personality [name]` | Set a personality |
+| `/personality [name]` | Set a personality (`none` to reset) |
 | `/retry` | Retry the last message |
 | `/undo` | Remove the last exchange |
 | `/status` | Show session info |

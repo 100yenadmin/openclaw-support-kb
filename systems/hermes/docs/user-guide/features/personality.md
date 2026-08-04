@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Personality & SOUL.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/personality"
-source_hash: "416c1dedf75c9a24defc760fa6e5a17f4b7715905bdadc10cad7f7f1a2d3cc08"
+source_hash: "1c536b6f5aef3c302825c483cd97781742275ef9020654ba0c9f43b043bdb684"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/personality.md"
@@ -239,6 +239,18 @@ Then switch to it with:
 ```text
 /personality codereviewer
 ```
+
+## Resetting to the default
+
+To cancel the active personality overlay and return to base behavior (your `SOUL.md` persona), use any of:
+
+```text
+/personality none
+/personality default
+/personality neutral
+```
+
+All three clear the overlay: the saved `agent.system_prompt` is emptied and the change takes effect on your next message. Running `/personality` with no arguments also lists `none` alongside the available presets.
 
 ## Recommended workflow
 

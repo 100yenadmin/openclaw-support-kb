@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "5489a9f0e428b0b5fdda789a8bf7798a93e4c9c3227c00a396099bda0ae74935"
+source_hash: "065797f03aaa21f8483a262a4a6860c40b26719114ad31af6fc0edcd98d6db28"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/quickstart.md
 
 
-Build your first AI agent with Composio Tools. You'll create a [session](/docs/how-composio-works) for a user, give your agent access to [tools](/docs/how-composio-works), and let it take action across 1000+ apps.
+Build your first AI agent with Composio Tools. You'll create a [session](/docs/how-composio-works) for a user, give your agent access to [tools](/docs/how-composio-works), and let it take action across [1000+ apps](/toolkits).
 
 > The TypeScript SDK is ESM-only and requires Node.js 22.22.3 or newer. Use `import` syntax rather than CommonJS `require()`.
 

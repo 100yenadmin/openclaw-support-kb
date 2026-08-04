@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom MCP"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md"
-source_hash: "851cba449bebcc4fa47c5639451603d4bec35f0a81de053227e31556a894fb9d"
+source_hash: "7a80672b80c62c7a55ddaf82f46d2fdd7354f2773661c3caf4e56a574fc1b789"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-mcp.md"
@@ -119,6 +119,41 @@ Composio adds the `CUSTOM_` prefix and returns the normalized toolkit slug:
 > **This endpoint only registers new toolkits**: Despite `upsert` in the route name, this endpoint does not update or replace an existing toolkit. If the slug already exists, the request returns `409 Conflict`.
 
 To change the server URL, name, or authentication scheme, [delete the existing toolkit](#delete-or-replace-a-custom-mcp), then register it again. Deletion also revokes and removes the toolkit's auth configurations and connected accounts.
+
+# Add a toolkit logo [#add-a-toolkit-logo]
+
+Without a logo, your toolkit shows the Composio logo in the dashboard and on end-user connect screens. To ship your own branding, include `toolkit_config.logo_file` when you register: the image itself, base64-encoded. Composio validates it, stores it on Composio-hosted asset storage, and renders it everywhere the toolkit appears. You don't host anything, and the logo keeps working even if your own site changes or goes down.
+
+```bash
+curl --request POST \
+  --url https://backend.composio.dev/api/v3.1/custom/toolkits/upsert \
+  --header "x-api-key: $COMPOSIO_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "slug": "ACME",
+    "toolkit_config": {
+      "name": "Acme",
+      "app_url": "https://mcp.example.com/mcp",
+      "logo_file": {
+        "content": "iVBORw0KGgoAAAANSUhEUgAA...",
+        "mime_type": "image/png"
+      },
+      "auth_schemes": [
+        {
+          "mode": "NO_AUTH"
+        }
+      ]
+    }
+  }'
+```
+
+Set `content` to your image encoded as base64: a single line, with no line breaks or whitespace. The image must be:
+
+* **PNG or JPEG** (`mime_type` of `image/png` or `image/jpeg`)
+* **Square**, between 256 and 1024 pixels
+* **At most 3MB** before encoding
+
+Omit `logo_file` to keep the Composio default. Because registration is insert-only, changing a logo later means deleting the toolkit and registering it again with the new image.
 
 # Complete setup for your authentication mode [#complete-setup-for-your-authentication-mode]
 
