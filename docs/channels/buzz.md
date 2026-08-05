@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Buzz"
 source: "https://docs.openclaw.ai/channels/buzz"
-source_hash: "891e976c3bd2cdccb03734072205a8f94f32a1699d98d2a2140733b0f8a73f3e"
+source_hash: "6b234ab53a6e997e24886dca0439498f52e7cbf9a84b6d8cf924625837450c32"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/buzz.md"
@@ -24,6 +24,8 @@ in a hosted or self-hosted Buzz workspace.
 - Shows typing while an accepted agent turn is running
 - Preserves Markdown in replies and sends text through OpenClaw's built-in
   `message` tool
+- Sends native Buzz mentions to current room members from replies and proactive
+  messages
 - Supports mention requirements and sender allowlists
 - Discovers rooms after the bot has been approved
 - Resolves current Buzz profile names, avatars, room names, and room membership
@@ -173,6 +175,7 @@ Agents can:
 - Receive Buzz kind `9` normal messages, kind `40002` rich-content messages,
   and kind `40008` structured diffs
 - Send Markdown text to an approved Buzz room as a normal kind `9` message
+- Send native room-member mentions from normal replies and proactive messages
 - Use the configured default room when a workflow does not specify a target
 - Use the routed agent's normal skills, memory, and allowed tools
 
@@ -198,6 +201,39 @@ ROOM_UUID
  \
   --message "Hello from OpenClaw"
 ```
+
+### Native mentions
+
+Write a unique current room member's profile name as `@Display Name`. OpenClaw
+keeps the visible text unchanged and adds the native Buzz `p` tag, including on
+threaded replies. Names are resolved only against the target room's current
+relay-signed membership and bounded profile snapshot.
+
+For an explicit identity, include its NIP-27 reference in the message:
+
+```bash
+openclaw message send \
+  --channel buzz \
+  --target engineering \
+  --message "Please review this, nostr:npub1..."
+```
+
+The referenced public key must be a current member of the target room. Without
+an explicit identity, unknown names and duplicate profile names fail visibly
+instead of sending text that looks like a mention without notifying anyone.
+When the message contains an explicit identity, unresolved or ambiguous labels
+remain presentation text; include every intended identity explicitly. Ambiguous
+errors list candidate public keys so the sender can retry with the intended
+`nostr:npub...` identity. Out-of-room public keys always fail. Mention-like text
+inside inline or fenced Markdown code is ignored, and one message can carry at
+most 50 native mentions.
+
+Connected Gateways resolve names from their existing in-memory directory
+snapshot and do not query the relay per message. Profiles beyond the bounded
+snapshot require an explicit `nostr:npub...` identity. A standalone mention send
+loads membership and profiles through one bounded authenticated relay session,
+publishes, and closes it; standalone messages without mention syntax keep the
+existing direct publish path.
 
 ### Directory and sender labels
 

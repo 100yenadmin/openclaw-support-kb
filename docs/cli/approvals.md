@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Approvals"
 source: "https://docs.openclaw.ai/cli/approvals"
-source_hash: "ae031712e9613b7cee2573f46a4c227a28e1bfb7aa12c989ef85982495747ffb"
+source_hash: "1ed022a65a87e7ce7fb178356c676ebf6e34c23e457757a8250f8faf68577572"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/approvals.md"
@@ -32,10 +32,13 @@ openclaw exec-policy show --json
 openclaw exec-policy preset yolo
 openclaw exec-policy preset cautious --json
 
-openclaw exec-policy set --host gateway --security full --ask off --ask-fallback full
+openclaw exec-policy set --host gateway --security full --ask off --ask-fallback full --json
 ```
 
 Presets (`yolo`, `cautious`, `deny-all`) apply `host`, `security`, `ask`, and `askFallback` together. `set` applies only the flags you pass; each accepted value is validated (`--host auto|sandbox|gateway|node`, `--security deny|allowlist|full`, `--ask off|on-miss|always`, `--ask-fallback deny|allowlist|full`).
+
+`show`, `preset`, and `set` accept `--json` and return the same requested,
+host, and effective policy facts as one JSON object.
 
 Scope:
 

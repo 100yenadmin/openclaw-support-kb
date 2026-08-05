@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "2431716545cb8f71ee982a89582786647bd9045632f45e6009b95bcde8941a8f"
+source_hash: "f252447857613a517995d8fd3b07374b5dfb64e56fc73d574e2fea1614401613"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/hooks.md"
@@ -22,10 +22,13 @@ Related: [Hooks](/automation/hooks) - [Plugin hooks](/plugins/hooks)
 ## List hooks
 
 ```bash
+openclaw hooks --json
 openclaw hooks list [--eligible] [--json] [-v|--verbose]
 ```
 
-Lists hooks discovered from workspace, managed, extra, and bundled directories.
+Bare `openclaw hooks` and `openclaw hooks --json` use the same list operation as
+`openclaw hooks list`. The command discovers hooks from workspace, managed,
+extra, and bundled directories.
 
 - `--eligible`: only hooks whose requirements are met.
 - `--json`: structured output.

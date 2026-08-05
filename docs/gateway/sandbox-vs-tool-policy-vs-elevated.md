@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox vs tool policy vs elevated"
 source: "https://docs.openclaw.ai/gateway/sandbox-vs-tool-policy-vs-elevated"
-source_hash: "fc80d44b081ed0c8b962a8fb4e07445bf0ef56711900a67eb45dd958bfded407"
+source_hash: "121ea21b680693722813e7e4a92bb12bb7d6dcd4e7c70aab437e3cfba91b6349"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandbox-vs-tool-policy-vs-elevated.md"
@@ -78,7 +78,7 @@ Rules of thumb:
 - Tool policy is the hard stop: `/exec` cannot override a denied `exec` tool.
 - Tool policy filters tool availability by name; it does not inspect side effects inside `exec`. If `exec` is allowed, denying `write`, `edit`, or `apply_patch` does not make shell commands read-only.
 - `/exec` only changes session defaults for authorized senders; it does not grant tool access.
-- Provider tool keys accept either `provider` (e.g. `google-antigravity`) or `provider/model` (e.g. `openai/gpt-5.4`).
+- Provider tool keys accept either `provider` (e.g. `anthropic`) or `provider/model` (e.g. `openai/gpt-5.4`).
 - Gateway logs include `agents/tool-policy` audit entries when a tool policy step removes tools or a sandbox tool policy blocks a call. Use `openclaw logs` to see the rule label, config key, and affected tool names.
 
 ### Tool groups (shorthands)

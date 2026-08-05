@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Completion"
 source: "https://docs.openclaw.ai/cli/completion"
-source_hash: "8e8e1315a4108ed4e0d74820c1ffa7e4b6075180d2514cc92e1cca82983d38b0"
+source_hash: "8262a06e1fbb253056c67e5a26d5c513809b73e0e05a169ef335d1e264bfa44d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/completion.md"
@@ -46,6 +46,8 @@ The install writes a small `# OpenClaw Completion` block into your shell profile
 | fish       | `~/.config/fish/config.fish`                                                                                                                                                               |
 | powershell | `~/.config/powershell/Microsoft.PowerShell_profile.ps1` (on Windows: `Documents/PowerShell/Microsoft.PowerShell_profile.ps1`, or `Documents/WindowsPowerShell/...` for Windows PowerShell) |
 | zsh        | `~/.zshrc`                                                                                                                                                                                 |
+
+Profile changes are staged beside the destination and atomically replace it only after a complete durable write. A failed install leaves an existing profile unchanged.
 
 ## Notes
 

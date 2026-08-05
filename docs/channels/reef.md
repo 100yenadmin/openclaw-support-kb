@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reef"
 source: "https://docs.openclaw.ai/channels/reef"
-source_hash: "0b098941e04d84182b05992ade8cac38dcaecd3b37d7c8cfb1b30f656e49ee4e"
+source_hash: "67d7624e5eb6e0029f6b019123e63f972ca41a83f851adccd258f2c5526060ee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/reef.md"
@@ -94,6 +94,8 @@ Reef lives under `channels.reef`:
 
 ## Adding a friend
 
+Friendship changes and review decisions from authenticated chat require the sender to match an explicit `commands.ownerAllowFrom` entry. Wildcards can admit commands, but do not grant owner authority. A configured owner can make either change in chat; friendship changes can also use `openclaw reef friend` on the Gateway host.
+
 The receiving side mints a short-lived code in an authenticated chat:
 
 ```text
@@ -153,6 +155,8 @@ Reef runs a fail-closed classifier at both ends: outbound DLP before encryption,
 /reef review list
 /reef review approve <digest>
 ```
+
+These review commands use the same explicit owner check described in [Adding a friend](#adding-a-friend). If no chat sender is configured as an owner, add the intended owner to `commands.ownerAllowFrom` before deciding a review.
 
 Deterministic checks (size, UTF-8, destination pin, secret patterns) run before any model call and cannot be overridden.
 

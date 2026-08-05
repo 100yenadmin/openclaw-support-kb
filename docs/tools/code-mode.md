@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code Mode"
 source: "https://docs.openclaw.ai/tools/code-mode"
-source_hash: "a20f4d386138669ff5b595bb5608145becf5f06730ca882f0100c26e32ab3e73"
+source_hash: "3d7583e533c4fa9a977e2d392624c75f28d0cada046a7167140d287ef6640717"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-mode.md"
@@ -1001,6 +1001,9 @@ Each result's `telemetry` field reports: hidden catalog size and a source
 breakdown (`openclaw`/`mcp`/`client` counts), cumulative search/describe/call
 counts for the run's catalog, and the model-visible tool names (`exec`,
 `wait`, and retained direct-only tools).
+The `counterScope` identifies one counter lifetime, changing when a catalog is
+replaced or restored but remaining stable when tools are appended or prompt
+policy narrows that catalog.
 
 The run metadata (`meta.agentMeta` in `openclaw agent --json`, mirrored on the
 `agent exec --json` envelope) adds per-run stats:

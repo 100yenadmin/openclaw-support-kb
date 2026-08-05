@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard plugin"
 source: "https://docs.openclaw.ai/plugins/workboard"
-source_hash: "d290417b79d3b8e63ed5c986c50966f06a3784f6f51fe29f280b2ca2b5530304"
+source_hash: "580f0de455e3986b5b906f14a21b09230336af082b8a66d2cac3803de2ef2ad0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/workboard.md"
@@ -381,6 +381,7 @@ Diagnostics are computed from local card metadata. Built-in checks flag:
 | `repeated_failures`         | Card's tracked failure count reaches 2 or more.                                |
 | `missing_proof`             | `done` card with no proof, artifacts, or attachments.                          |
 | `orphaned_session`          | `running` card with a `sessionKey` but no `execution` metadata.                |
+| `archived_but_active`       | Archived card remains in any non-`done` lifecycle status.                      |
 
 ## Permissions
 

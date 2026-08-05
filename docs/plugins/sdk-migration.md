@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "3fd5cd8693a4060b757c5295dcb9f2bc76103310784ba60d80b0f621b01e00c3"
+source_hash: "1a8365c9f390e120c6e36b11ca2a4a093aa197ab6e58fc5cde77f7075fa92626"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -1104,15 +1104,6 @@ bundled-only modules were demoted to private-local build mappings.
 All core plugins have already migrated. External plugins should migrate
 before the next major release. Run `pnpm plugins:boundary-report` to see which
 compat records are due soonest for the surfaces your plugin uses.
-
-## Suppressing the warnings temporarily
-
-```bash
-OPENCLAW_SUPPRESS_PLUGIN_SDK_COMPAT_WARNING=1 openclaw gateway run
-OPENCLAW_SUPPRESS_EXTENSION_API_WARNING=1 openclaw gateway run
-```
-
-This is a temporary escape hatch, not a permanent solution.
 
 ## Related
 

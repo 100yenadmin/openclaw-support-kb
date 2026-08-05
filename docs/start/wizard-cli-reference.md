@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "0468723786acb5f3a09cfdbfbadba59c6d6647625ba1bbc38c8fc051077020a6"
+source_hash: "bb7bd19b13ab940ca66d6550873aadc17cdf76c87ed73abd6a85632822f3d68b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -372,11 +372,13 @@ Credential storage mode:
   - Env refs: validates variable name + non-empty value in the current onboarding environment.
   - Provider refs: validates provider config and resolves the requested id.
   - If preflight fails, onboarding shows the error and lets you retry.
-- In non-interactive mode, `--secret-input-mode ref` is env-backed only.
-  - Set the provider env var in the onboarding process environment.
+- In non-interactive mode, `--secret-input-mode ref` creates only env-backed references for new credentials.
+  - Set the provider env var in the onboarding process environment when adding a new credential.
   - Inline key flags (for example `--openai-api-key`) require that env var to be set; otherwise onboarding fails fast.
-  - For custom providers, non-interactive `ref` mode stores `models.providers.<id>.apiKey` as `{ source: "env", provider: "default", id: "CUSTOM_API_KEY" }`.
+  - Existing resolvable named auth profiles are reused unchanged, including existing `env`, `file`, and `exec` references; no new `apiKey` or `keyRef` is written and no additional provider env var is required.
+  - For new custom-provider credentials, non-interactive `ref` mode stores `models.providers.<id>.apiKey` as `{ source: "env", provider: "default", id: "CUSTOM_API_KEY" }`.
   - In that custom-provider case, `--custom-api-key` requires `CUSTOM_API_KEY` to be set; otherwise onboarding fails fast.
+  - Existing plaintext profile credentials remain unchanged; reference mode does not migrate them. Run `openclaw secrets configure --apply`, then `openclaw secrets audit --check`. See [Secrets management](/gateway/secrets).
 - Gateway auth credentials support plaintext and SecretRef choices in interactive setup:
   - Token mode: **Generate/store plaintext token** (default) or **Use SecretRef**.
   - Password mode: plaintext or SecretRef.

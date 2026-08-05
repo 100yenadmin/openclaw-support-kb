@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Backup"
 source: "https://docs.openclaw.ai/cli/backup"
-source_hash: "2d737d98897151262c92d00d109276ab3f8727bbf630f23bc114f61e732f7f23"
+source_hash: "8d38102526e7cad20fa67536b730a33b3287899103589227752eb3328e22690e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/backup.md"
@@ -32,6 +32,9 @@ openclaw backup sqlite verify ~/Backups/openclaw-sqlite/<snapshot-id>
 openclaw backup sqlite verify ~/Backups/openclaw-sqlite/<snapshot-id> --scratch ~/Private/openclaw-scratch
 openclaw backup sqlite restore ~/Backups/openclaw-sqlite/<snapshot-id> --target ./restored/openclaw.sqlite
 ```
+
+Archive `create` and `verify`, plus SQLite `create`, `list`, `verify`, and
+`restore`, accept `--json` for one machine-readable result on stdout.
 
 ## Notes
 

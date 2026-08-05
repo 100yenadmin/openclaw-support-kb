@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux server"
 source: "https://docs.openclaw.ai/vps"
-source_hash: "353632f0ebc34aa840d09fa2ed68e6de53a4b67e1e9926260973a819b49dcaab"
+source_hash: "fc24b016080b0e70c0a585d39514cb567387e741a3815ecba040444db4ed1470"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "vps.md"
@@ -24,6 +24,9 @@ CardGroup
 
 Azure
 Linux VM
+
+Daytona
+Cloud sandbox with preview URLs
 
 DigitalOcean
 Simple paid VPS

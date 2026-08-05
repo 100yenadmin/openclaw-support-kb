@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "1ee37718d1859c1d6426b091953ad2092b9c4648972f17fe464e6bc1409a0e19"
+source_hash: "b49a1ca97705cec7c1981ac8b904af7f98547a6c0f2ec21b4c9c8f4dff59aa21"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
@@ -69,6 +69,12 @@ openclaw memory search [query] [--query <text>] [--agent <id>] [--max-results <n
 - `--agent <id>`: defaults to the default agent (not the full agent list).
 - `--max-results <n>`: cap result count (positive integer).
 - `--min-score <n>`: filter out matches below this score.
+
+If the index remains dirty after the bounded search-time refresh, human output
+warns that matches may be incomplete. With `--json`, the response adds
+`stale: true`, plus `warning` and `action` fields describing how to rebuild the
+index. Treat an empty `results` array as authoritative only when `stale` is
+absent.
 
 ## `memory promote`
 

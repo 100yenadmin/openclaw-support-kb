@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automations (cron)"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "636d970d7469142c01ed7ee44d646cd5fff943694431d0917af9d1d1b83d2e61"
+source_hash: "86e4fa9233c8a9ea1d4f20ee94354987789042bb7ba32c1ce3770750e03e709f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -304,18 +304,20 @@ Manual run and inspection:
 openclaw automations list
 openclaw automations list --agent ops
 openclaw automations get <job-id>
+openclaw automations get <job-id> --json
 openclaw automations show <job-id>
 openclaw automations run <job-id>
 openclaw automations run <job-id> --due
 openclaw automations run <job-id> --wait --wait-timeout 10m
 openclaw automations run <job-id> --wait --wait-timeout 10m --poll-interval 2s
 openclaw automations runs --id <job-id> --limit 50
+openclaw automations runs --id <job-id> --limit 50 --json
 openclaw automations runs --id <job-id> --run-id <run-id>
 ```
 
 `openclaw automations list` shows enabled jobs by default. Pass `--all` to include disabled jobs, or `--agent <id>` to show only jobs whose effective normalized agent id matches; jobs without a stored agent id count as the configured default agent.
 
-`openclaw automations get <job-id>` returns the stored job JSON directly. Use `automations show <job-id>` when you want the human-readable view with delivery-route preview.
+`openclaw automations get <job-id>` returns the stored job JSON directly. `get` and `runs` accept `--json` as the explicit machine-output spelling. Use `automations show <job-id>` when you want the human-readable view with delivery-route preview.
 
 `automations list --json` and `automations show <job-id> --json` include a top-level `status` field on each job, computed from `enabled`, `state.runningAtMs`, and `state.lastRunStatus`. Values: `disabled`, `running`, `ok`, `error`, `skipped`, or `idle`. JSON status stays canonical and undecorated so external tooling can read job state without re-deriving it; human output may decorate repeated `error` statuses with a failure count.
 

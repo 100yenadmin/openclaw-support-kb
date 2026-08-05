@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Feishu"
 source: "https://docs.openclaw.ai/channels/feishu"
-source_hash: "344e34252ee7596715746cca9ae37cad7f2d645c65c72587cc44823f249809ab"
+source_hash: "a94a89ec229b57f1b2e3d7bf59abe1be581ac77e8ef76248dcb384a4905f9937"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/feishu.md"
@@ -652,7 +652,7 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.defaultAccount`                         | Default account for outbound routing                                                 | `default`                            |
 | `channels.feishu.verificationToken`                      | Required for webhook mode                                                            | -                                    |
 | `channels.feishu.encryptKey`                             | Required for webhook mode                                                            | -                                    |
-| `channels.feishu.webhookPath`                            | Webhook route path                                                                   | `/feishu/events`                     |
+| `channels.feishu.webhookPath`                            | Canonical HTTP request path (must start with `/`)                                    | `/feishu/events`                     |
 | `channels.feishu.webhookHost`                            | Webhook bind host                                                                    | `127.0.0.1`                          |
 | `channels.feishu.webhookPort`                            | Webhook bind port                                                                    | `3000`                               |
 | `channels.feishu.accounts.<id>.appId`                    | App ID                                                                               | -                                    |
@@ -694,6 +694,14 @@ Full configuration: [Gateway configuration](/gateway/configuration)
 | `channels.feishu.tools.scopes`                           | Enable app scopes diagnostic tool                                                    | `true`                               |
 | `channels.feishu.tools.bitable`                          | Enable Bitable/Base tools                                                            | `true`                               |
 | `channels.feishu.accounts.<id>.tools.bitable`            | Per-account Bitable/Base tool gate                                                   | inherited                            |
+
+In webhook mode, both `channels.feishu.webhookPath` and
+`channels.feishu.accounts.<id>.webhookPath` must be canonical HTTP request paths
+beginning with `/`, such as `/feishu/events`. An optional query string is
+supported and must match exactly. Full URLs, relative paths, URL fragments, dot
+segments, and unencoded spaces or Unicode are rejected. If an existing
+configuration contains a noncanonical path, run `openclaw doctor --fix` to
+repair it before starting the gateway.
 
 ## Supported message types
 

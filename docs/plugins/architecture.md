@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin internals"
 source: "https://docs.openclaw.ai/plugins/architecture"
-source_hash: "d9e49c9172c94fb8eee80eb6309b79ef3160fbdbbdc5e8a55291e569e34c118e"
+source_hash: "967ca961db6bbc224ca1abcfd67c6e41ddfc901b4518c8e0dca9953babdb69b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/architecture.md"
@@ -176,7 +176,7 @@ After startup, Gateway keeps the current metadata snapshot as a replaceable runt
 The snapshot and lookup table keep repeated startup decisions on the fast path:
 
 - channel ownership
-- deferred channel startup
+- startup plugin planning
 - startup plugin ids
 - provider and CLI backend ownership
 - setup provider, command alias, model catalog provider, and manifest contract ownership

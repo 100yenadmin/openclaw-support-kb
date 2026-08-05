@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "`openclaw commitments`"
 source: "https://docs.openclaw.ai/cli/commitments"
-source_hash: "06e08b9bf39e1d163dc9a9733366f74e53119e588a73d89cead2a379ca6b3492"
+source_hash: "a151c6a8bebdb920484b849e3de4dfa22e5c4bf60f6bb26e0b6f4787a727b4c3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/commitments.md"
@@ -91,6 +91,32 @@ and one row per commitment:
 
 JSON output includes the count, the active status and agent filters, the
 shared SQLite database path, and the full stored records.
+
+### Dismissal output
+
+`dismiss` changes only active `pending` or `snoozed` commitments. Missing,
+already dismissed, sent, and expired commitments remain unchanged. Duplicate
+IDs are ignored after their first occurrence, and results preserve request order.
+
+When every requested commitment is dismissed, `--json` returns:
+
+```json
+{ "dismissed": ["cm_abc123", "cm_def456"] }
+```
+
+When a request includes stale or inactive IDs, the command reports both results
+and exits with status `1`:
+
+```json
+{ "dismissed": ["cm_abc123"], "notDismissed": ["cm_missing", "cm_expired"] }
+```
+
+If no requested commitment can be dismissed, the command still exits with status
+`1`:
+
+```json
+{ "dismissed": [], "notDismissed": ["cm_missing"] }
+```
 
 ## Related
 

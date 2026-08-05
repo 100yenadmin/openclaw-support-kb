@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "4e6e118dcdc923819cb127010aae4dce99fc1e67799971e6101daea6a70e028e"
+source_hash: "6d8e1198fd953481ca9656a113d8ecb13ab8d532ba57d65e31fa46ef96cfdf93"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -490,6 +490,18 @@ Index session transcripts and surface them via `memory_search`:
 Warning
 
 Session indexing is opt-in and runs asynchronously. Results can be slightly stale. Session logs live on disk, so treat filesystem access as the trust boundary.
+
+Note
+
+The [session-memory hook](/automation/hooks#session-memory) saves conversation
+excerpts to `<workspace>/memory/`, which the `memory` source already indexes.
+If transcript indexing is also enabled, the same conversation can appear from
+both `memory` and `sessions`, resulting in overlapping search results and
+additional embedding work. For hook-only recall, set `sources: ["memory"]` and
+`rememberAcrossConversations: false`; `sources` alone is insufficient because
+cross-conversation recall automatically adds `sessions`. For full-transcript
+recall instead, run `openclaw hooks disable session-memory`. Enable both only
+when you intentionally want both representations.
 
 Ordinary model-invoked session transcript search obeys
 [`tools.sessions.visibility`](/gateway/config-tools#toolssessions). The default

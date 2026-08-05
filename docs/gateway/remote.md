@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "8212b646530abba83b5882f4eace0c459b99d921d25b0f200c6b6a9b976c045b"
+source_hash: "f3eb8e294fe68f91287bf21374b5f256408f79763571710e20c3c9d1d3db6f30"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/remote.md"
@@ -50,6 +50,8 @@ ssh -N -L 18789:127.0.0.1:18789 user@gateway-host
 ```
 
 With the tunnel up, `openclaw health` and `openclaw status --deep` reach the remote Gateway via `ws://127.0.0.1:18789`. `openclaw gateway status`, `openclaw gateway health`, `openclaw gateway probe`, and `openclaw gateway call` can also target a forwarded URL via `--url`.
+
+To replace per-client SSH tunnels with one private `wss://` endpoint while keeping the Gateway on loopback, follow [Give your Gateway a stable HTTPS URL](/gateway/stable-https-url).
 
 Note
 

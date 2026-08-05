@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "c5da9db6375a656f2b0de011000e17ce2d1c76da27e95ec8491d1f002c9dc1ab"
+source_hash: "17b1b0353c40b7240f59abdb29ed48a2e6f6f6e1450f2d277972deb2a929dd4d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/mcp.md"
@@ -466,11 +466,11 @@ config to Codex.
 
 Commands:
 
-- `openclaw mcp list`
-- `openclaw mcp show [name]`
-- `openclaw mcp status [--verbose]`
-- `openclaw mcp doctor [name] [--probe]`
-- `openclaw mcp probe [name]`
+- `openclaw mcp list [--json]`
+- `openclaw mcp show [name] [--json]`
+- `openclaw mcp status [--verbose] [--json]`
+- `openclaw mcp doctor [name] [--probe] [--json]`
+- `openclaw mcp probe [name] [--json]`
 - `openclaw mcp add <name> [flags]`
 - `openclaw mcp set <name> <json>`
 - `openclaw mcp configure <name> [flags]`

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tailscale"
 source: "https://docs.openclaw.ai/gateway/tailscale"
-source_hash: "993d11baf0d8612082ce970933a29fe8fbd356cf339a4e0c20d2274a691157c9"
+source_hash: "a46a7b816d5645fd60ab4087b1ec7ebdba3c529e2b07c90e39915aced60db8c4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/tailscale.md"
@@ -14,6 +14,10 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/gateway/tailscale
 
 OpenClaw can auto-configure Tailscale **Serve** (tailnet) or **Funnel** (public) for the Gateway dashboard and WebSocket port. This keeps the gateway bound to loopback while Tailscale provides HTTPS, routing, and (for Serve) identity headers.
+
+Note
+
+Looking for the step-by-step setup? See [Give your Gateway a stable HTTPS URL](/gateway/stable-https-url).
 
 ## Modes
 
@@ -117,7 +121,7 @@ This tokenless flow assumes the gateway host is trusted. If untrusted local code
 
 Scope of the bypass:
 
-- Applies only to the Control UI WebSocket auth surface. HTTP API endpoints (`/v1/*`, `/tools/invoke`, `/api/channels/*`, etc.) never use Tailscale identity-header auth; they always follow the gateway's normal HTTP auth mode.
+- Applies to the Control UI WebSocket auth surface and read-only `GET`/`HEAD` requests for Control UI profile avatars. Other HTTP API endpoints (`/v1/*`, `/tools/invoke`, `/api/channels/*`, etc.) never use Tailscale identity-header auth; they always follow the gateway's normal HTTP auth mode.
 - For Control UI operator sessions that already carry browser device identity, a verified Tailscale identity skips the bootstrap-token/QR pairing round trip.
 - It does not bypass device identity itself: device-less clients are still rejected, and node-role connections still go through normal pairing and auth checks.
 

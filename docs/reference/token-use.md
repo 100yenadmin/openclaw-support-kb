@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Token use and costs"
 source: "https://docs.openclaw.ai/reference/token-use"
-source_hash: "b90f18d2d5a547602c9eb87e28c3f77d3a6903d4d54c92148c2191abc9ee03c1"
+source_hash: "659de6f97f330cf345eeee81eec964cece917c4e20167d4bdd9e0fa443eda76b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/token-use.md"
@@ -133,8 +133,7 @@ Other surfaces:
 - **CLI:** `openclaw status --usage` and `openclaw channels list` show
   normalized provider quota windows (`X% left`, not per-response costs).
   Current usage-window providers: Claude (Anthropic), ClawRouter, Copilot
-  (GitHub), DeepSeek, Gemini (Google Gemini CLI), MiniMax, OpenAI, Xiaomi,
-  Xiaomi Token Plan, and z.ai.
+  (GitHub), DeepSeek, MiniMax, OpenAI, Xiaomi, Xiaomi Token Plan, and z.ai.
 
 Usage surfaces normalize common provider-native field aliases before
 display. For OpenAI-family Responses traffic, that includes both

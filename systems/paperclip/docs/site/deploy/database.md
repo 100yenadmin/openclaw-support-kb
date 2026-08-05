@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "DATABASE_URL=postgres://paperclip:paperclip@localhost:5432/paperclip"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/database.md"
-source_hash: "91bdf5d32f46fc72fffbfc3a9c1d0b1d9e297c2b37499fb41c060ed0430ed2f0"
+source_hash: "951149002cf86b22568fdd69886c93376050c5ed9d61a5f7af09c52ccfa5c067"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/database.md"
@@ -74,15 +74,13 @@ For production, use a hosted provider like [Supabase](https://supabase.com/).
 
 Use the **direct connection** (port 5432) for migrations and the **pooled connection** (port 6543) for the application.
 
-If using connection pooling, disable prepared statements:
+If using connection pooling (transaction mode), disable prepared statements via the environment — no source edits needed:
 
-```ts
-// packages/db/src/client.ts
-export function createDb(url: string) {
-  const sql = postgres(url, { prepare: false });
-  return drizzlePg(sql, { schema });
-}
+```sh
+DATABASE_PREPARED_STATEMENTS=false
 ```
+
+Related optional client tuning (driver defaults apply when unset): `DATABASE_POOL_MAX`, `DATABASE_IDLE_TIMEOUT_SECONDS`, `DATABASE_CONNECT_TIMEOUT_SECONDS`.
 
 ## Switching Between Modes
 

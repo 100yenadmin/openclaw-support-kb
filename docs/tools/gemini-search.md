@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gemini search"
 source: "https://docs.openclaw.ai/tools/gemini-search"
-source_hash: "8c2855ef772337259ca9843c7249b61b8281fcf9f7804e61af12962e841efb5f"
+source_hash: "4a61b69bb472ff28b878018600034dfa82958c762361ed758c6f02ed65113f03"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/gemini-search.md"
@@ -51,6 +51,14 @@ Store the key
           webSearch: {
             apiKey: "AIza...", // optional if GEMINI_API_KEY or models.providers.google.apiKey is set
             baseUrl: "https://generativelanguage.googleapis.com/v1beta", // optional; falls back to models.providers.google.baseUrl
+            headers: {
+              "X-Routing-Target": "staging",
+              "X-Gateway-Token": {
+                source: "env",
+                provider: "default",
+                id: "GEMINI_GATEWAY_TOKEN",
+              },
+            },
             model: "gemini-2.5-flash", // default
           },
         },
@@ -74,6 +82,30 @@ then `models.providers.google.apiKey`. For base URLs, the dedicated
 `models.providers.google.baseUrl`.
 
 For a gateway install, put env keys in `~/.openclaw/.env`.
+
+### Request headers
+
+Set `plugins.entries.google.config.webSearch.headers` when an operator gateway
+needs extra request metadata. Plain string values use normal config handling;
+they are not automatically treated as secret merely because they are headers.
+When a header contains a secret, use a [SecretRef](/gateway/secrets) value as
+shown above. OpenClaw resolves that value at runtime and applies the existing
+secret redaction path to it.
+
+The Gemini request keeps ownership of `Content-Type`, `x-goog-api-key`, and
+`x-goog-api-client`; those values override same-named configured headers.
+`models.providers.google.headers` are not inherited because they belong to the
+model provider endpoint, which can differ from the web-search endpoint.
+
+Empty plain-string values are valid. Invalid fields and transport-owned or
+framing names such as `Content-Length`, `Host`, and `Transfer-Encoding` fail the
+current search before cache lookup or network I/O.
+
+Effective header names and values partition the in-memory search cache through a
+digest, so two routing targets do not share results. Configured values for the
+provider-owned names above are ignored and do not partition the cache. On a
+cross-origin redirect, the guarded fetch path retains only its standard safe
+redirect headers.
 
 ## How it works
 

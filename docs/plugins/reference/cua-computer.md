@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cua Computer plugin"
 source: "https://docs.openclaw.ai/plugins/reference/cua-computer"
-source_hash: "54ca1f73d50c065450bacb74539448f56e72515caee9fbb7eae290f3ca5029d7"
+source_hash: "bdc165ebbe86a68c1c000aebfc9c5b084a414fd7e5f955ed5ef1430a9fd4e76d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/cua-computer.md"
@@ -15,7 +15,9 @@ Source: https://docs.openclaw.ai/plugins/reference/cua-computer
 
 # Cua Computer plugin
 
-Experimental cua-driver computer control for Windows and Linux node hosts.
+Experimental CUA Driver SDK computer control for Windows and Linux node hosts. It preserves
+the node `screen.snapshot` and `computer.act` contract while using a configured, trusted
+CUA Driver 0.14.1 SDK session directly; it does not run a CUA daemon or MCP proxy.
 
 ## Distribution
 

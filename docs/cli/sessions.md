@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "b4898ac2028bc5633825496f9bad9062035be61523da3d5eda67a7d2b7398d93"
+source_hash: "b7bb2a4c6a0a740e8ac7f3afe596d72dbd3804e994b50be93f01ec6692fd9b11"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sessions.md"
@@ -82,6 +82,81 @@ skipped.
   "sessions": [
     { "agentId": "main", "key": "agent:main:main", "model": "openai/gpt-5.6-sol" },
     { "agentId": "work", "key": "agent:work:main", "model": "anthropic/claude-sonnet-4-6" }
+  ]
+}
+```
+
+## Archive sessions
+
+Archive one or more sessions through the running Gateway:
+
+```bash
+openclaw sessions archive "agent:main:scratch-1"
+openclaw sessions archive "agent:main:scratch-1" "agent:main:scratch-2"
+openclaw sessions archive "agent:work:scratch-1" --agent work
+openclaw sessions archive "agent:main:scratch-1" --dry-run
+openclaw sessions archive "agent:main:scratch-1" --json
+```
+
+Archive uses the same `sessions.patch` lifecycle operation as the Control UI.
+It keeps the transcript, marks the session archived, and removes the session
+from the default active list. Already archived sessions are successful no-ops.
+Use `--dry-run` to validate every key and preview the result without changing
+session state.
+
+## Delete sessions
+
+Delete one or more sessions through the running Gateway:
+
+```bash
+openclaw sessions delete "agent:main:scratch-1"
+openclaw sessions delete "agent:main:scratch-1" "agent:main:scratch-2" --yes
+openclaw sessions delete "agent:work:scratch-1" --agent work --yes
+openclaw sessions delete "agent:main:scratch-1" --dry-run
+openclaw sessions delete "agent:main:scratch-1" --yes --json
+```
+
+Warning
+
+  Delete is destructive. In an interactive terminal it asks once before
+  deleting the valid keys. Non-interactive and `--json` deletion requires
+  `--yes`. Use `--dry-run` first when scripting a bulk cleanup.
+
+Delete uses the same `sessions.delete` lifecycle operation as the Control UI,
+with transcript cleanup enabled. The Gateway removes the live session row,
+transcript generations, session-owned runtime state, bindings, boards, and
+other lifecycle artifacts. For ordinary sessions it retains the transcript as
+a verified `.jsonl.deleted.<timestamp>` archive; incognito transcripts are
+removed without an archive. If a managed worktree cannot be removed safely,
+the command reports the preserved branch and path for manual cleanup.
+
+Both lifecycle commands:
+
+- accept multiple keys and report one ordered result per key;
+- use `--agent <id>` to select the owning agent, which is required for a
+  `global` key outside the default agent;
+- support `--url`, `--token`, `--password`, and `--timeout <ms>` Gateway
+  connection overrides;
+- return a non-zero exit when any key is unknown or any operation fails, while
+  still processing the other valid keys;
+- emit one stable JSON envelope with `ok`, `operation`, `dryRun`, and `results`
+  when `--json` is set.
+
+Example mixed-result JSON:
+
+```json
+{
+  "ok": false,
+  "operation": "archive",
+  "dryRun": false,
+  "results": [
+    { "key": "agent:main:scratch-1", "ok": true, "status": "archived" },
+    {
+      "key": "agent:main:missing",
+      "ok": false,
+      "status": "not_found",
+      "error": "Session not found. Run openclaw sessions list --json to choose a valid key."
+    }
   ]
 }
 ```

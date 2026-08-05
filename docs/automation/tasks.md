@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "c15d650c98207524c82d797d3cc6da8d9c9fb5a0dbfe33f47122f8c84330c310"
+source_hash: "58dcf902e516b4b23723f591a05e25f8ffcd926ebd9570edb4916992c77f7dd6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -74,6 +74,16 @@ Cancel and notify
 
     # Change notification policy for a task
     openclaw tasks notify <lookup> state_changes
+    ```
+
+
+
+Recover delivery
+
+    ```bash
+    # Retry or dismiss up to 10 blocked completion deliveries
+    openclaw tasks retry <lookup> [lookup...]
+    openclaw tasks dismiss <lookup> [lookup...]
     ```
 
 
@@ -162,6 +172,12 @@ stateDiagram-v2
 
 Transitions happen automatically - agent run lifecycle events (start, end, error) update the task status; you do not manage it manually.
 
+Execution and result delivery are separate. A subagent task can remain
+`succeeded` while its `deliveryStatus` is `session_queued` or `failed`. The
+terminal outcome is `succeeded` after delivery and `blocked` when the work
+finished but the result could not be handed back. This preserves the completed
+result instead of misreporting the child execution as failed.
+
 Agent run completion is authoritative for active task records. A successful detached run finalizes as `succeeded`, ordinary run errors finalize as `failed`, timeouts finalize as `timed_out`, and cancel/abort outcomes finalize as `cancelled`. Once a task is terminal, later lifecycle signals do not downgrade it - an operator-cancelled or already-`failed`/`timed_out`/`lost` task stays that way even if a success signal arrives afterwards.
 
 `lost` is runtime-aware:
@@ -178,6 +194,14 @@ When a task reaches a terminal state, OpenClaw notifies you. There are two deliv
 **Direct delivery** - if the task has a channel target (the `requesterOrigin`), the completion message goes straight to that channel (Discord, Slack, Telegram, etc.). Group and channel task completions are instead routed through the requester session so the parent agent can write the visible reply. For subagent completions, OpenClaw also preserves bound thread/topic routing when available and can fill a missing `to` / account from the requester session's stored route (`lastChannel` / `lastTo` / `lastAccountId`) before giving up on direct delivery.
 
 **Session-queued delivery** - if direct delivery fails or no origin is set, the update is queued as a system event in the requester's session and surfaces on the next heartbeat.
+
+Durable subagent completion handoffs retry for up to 30 minutes with capped
+exponential backoff. A queued handoff is not reported as delivered until the
+queue settles. If delivery reaches its deadline or fails permanently, the task
+shows a blocked terminal outcome and retains its canonical result for 7 days.
+Use `openclaw tasks retry` to create a fenced new delivery generation, or
+`openclaw tasks dismiss` to record intentional non-delivery. Retry can duplicate
+a visible result when an earlier provider acknowledgement was ambiguous.
 
 Tip
 
@@ -233,6 +257,20 @@ tasks cancel
     ```
 
     For ACP and subagent tasks, this kills the child session; ACP and automation cancellations route through the running Gateway (`tasks.cancel`). For CLI-tracked tasks, cancellation is recorded in the task registry (there is no separate child runtime handle). Status transitions to `cancelled` and a delivery notification is sent when applicable.
+
+
+
+tasks retry | dismiss
+
+    ```bash
+    openclaw tasks retry <lookup> [lookup...]
+    openclaw tasks dismiss <lookup> [lookup...]
+    ```
+
+    These commands recover blocked subagent completion deliveries. Each request
+    accepts 1-10 task lookups. Retry preserves the canonical result and starts a
+    new fenced queue generation; dismiss keeps the task blocked and records that
+    the operator intentionally stopped delivery.
 
 
 
@@ -326,7 +364,7 @@ For the full operator ledger, use the CLI: `openclaw tasks list`.
 
 ### Control UI
 
-The web Control UI has a **Tasks** page in the sidebar with live active and recent background tasks. Use it to inspect progress, open linked sessions, refresh the ledger, or cancel queued and running tasks.
+The web Control UI has a **Tasks** page in the sidebar with live active and recent background tasks. Use it to inspect progress, open linked sessions, refresh the ledger, cancel queued and running tasks, or retry/dismiss a blocked completion delivery. Task detail keeps execution status and delivery status separate and exposes the retained result for copying.
 
 Chat panes also have a collapsible **Background tasks** rail scoped to the pane's agent, with running work, stop controls, and a finished section. Open it from the activity toggle in the pane header (or the floating activity button in single-pane chat).
 

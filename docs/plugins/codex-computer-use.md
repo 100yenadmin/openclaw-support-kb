@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "56217a2dc8cbed794d83ac7833e3bb291fe4ed01dbb6059dbfc2347cb752192a"
+source_hash: "f3defe76fe956385783530fb6863ff7377c0b4691dd908634f7b6f97d7a2f752"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
@@ -124,7 +124,9 @@ also tries to register the bundled Codex marketplace from
 as a fallback for legacy standalone installs. If setup still cannot make the
 MCP server available, the turn fails before the thread starts.
 Strict readiness failures are harness preflight failures, so model fallback
-does not repeat the same local readiness sequence for every model candidate.
+does not repeat the same local readiness sequence for every Codex candidate.
+A candidate resolved to another harness remains eligible and enters that
+runtime through its normal policy checks.
 
 After changing Computer Use config, use `/new` or `/reset` in the affected
 chat before testing if an existing Codex thread has already started.

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Install from npm via API"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/overview.md"
-source_hash: "abece66b57cfa032c7d54b8de81f8f2993a0a4cc451f993fabbedfcbbf2f3525"
+source_hash: "c6f238a876a8c4f540275334b80d1d1c60bc6bf3a4ed578830d66c3eca9c5e62"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/overview.md"
@@ -57,7 +57,7 @@ before the CLI starts:
 | Adapter | Credential topology | Which credential file wins on managed sandbox targets |
 |---------|---------------------|-------------------------------------------------------|
 | [`codex_local`](/adapters/codex-local) | Host-owns-auth for Paperclip-managed `CODEX_HOME` | A host-owned `auth.json` is symlinked into the managed `CODEX_HOME` and uploaded to the sandbox. If a per-agent `OPENAI_API_KEY` is configured, Paperclip writes an API-key `auth.json` instead and that file wins. A login baked into the sandbox image is shadowed because Codex runs with Paperclip's uploaded `CODEX_HOME`. |
-| [`claude_local`](/adapters/claude-local) | Snapshot-owns-auth for managed remote Claude config | Paperclip uploads only sanitized settings and skill/runtime assets. When the remote managed config has no Claude credential files, it copies `.credentials.json` or `credentials.json` from the sandbox image's own `$HOME/.claude`, so the image's login wins. |
+| [`claude_local`](/adapters/claude-local) | Snapshot-owns-auth for managed remote Claude config | A configured `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` (agent or environment env) wins over any stored login. Otherwise Paperclip uploads only sanitized settings and skill/runtime assets, and when the remote managed config has no Claude credential files it copies `.credentials.json` or `credentials.json` from the sandbox image's own `$HOME/.claude`, so the image's login wins. |
 
 Worked examples:
 

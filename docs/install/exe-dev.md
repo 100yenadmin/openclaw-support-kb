@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "exe.dev"
 source: "https://docs.openclaw.ai/install/exe-dev"
-source_hash: "7cc420136f00c5dd2d30464a49053f68f8f894153a9102b7541291cc8544393b"
+source_hash: "de6eac2e81f216a162ddaa2101918ae7f241a88d5a6edaaf5a8cdf96bafb4406"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/exe-dev.md"
@@ -126,7 +126,7 @@ Access OpenClaw and approve devices
 
     Open `https://<vm-name>.exe.xyz/` (see the Control UI output from onboarding). If it prompts for auth, paste the configured shared secret from the VM.
 
-    This guide uses token auth by default, so retrieve `gateway.auth.token` with `openclaw config get gateway.auth.token`, or generate a new one with `openclaw doctor --n`. If you switched the gateway to password auth, use `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD` instead.
+    This guide uses token auth by default, so run `openclaw gateway auth-token --show` in an interactive terminal to retrieve the configured token. If no token is configured, generate one with `openclaw doctor --generate-gateway-token` and restart the Gateway. If you switched the gateway to password auth, use `gateway.auth.password` / `OPENCLAW_GATEWAY_PASSWORD` instead.
 
     Approve devices with `openclaw devices list` and `openclaw devices approve <requestId>`. When in doubt, use Shelley from your browser.
 

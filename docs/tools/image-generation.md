@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "211ea53b313842fe8b038bbe9bfd0006e29cb7109fa1e1afe0751b0ce3c02445"
+source_hash: "ed8192e486f6584d08ce5401b87e5033d57fc636ba29a61bf8b492cd82d310ab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -348,6 +348,15 @@ OpenAI gpt-image-2 (and gpt-image-1.5)
     `aspectRatio` or `resolution` directly; when possible OpenClaw maps
     those into a supported `size`, otherwise the tool reports them as
     ignored overrides.
+
+    For direct OpenAI Images API requests, `gpt-image-2` and its
+    `gpt-image-2-2026-04-21` snapshot preserve valid explicit
+    `WIDTHxHEIGHT` sizes instead of snapping them to presets. Both
+    dimensions must be multiples of 16, neither may exceed 3840 pixels,
+    the aspect ratio cannot exceed 3:1, and the image must contain
+    between 655,360 and 8,294,400 pixels. For example, `1024x640` is
+    valid. When only `aspectRatio` is specified, OpenClaw still selects
+    the closest supported size.
 
     OpenAI-specific options live under the `openai` object:
 

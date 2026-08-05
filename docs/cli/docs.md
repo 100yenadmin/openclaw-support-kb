@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs"
 source: "https://docs.openclaw.ai/cli/docs"
-source_hash: "fc767f5daa7b5356687518413aaabfbdfb6a4fa96d305112e8abf40f7f4ce57e"
+source_hash: "b1a788ea3479665061408feeb8e5d656627858006c7aa116ea87eef5141482d2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/docs.md"
@@ -20,13 +20,15 @@ Search the live OpenClaw docs index from the terminal.
 ## Usage
 
 ```bash
-openclaw docs                       # print docs entrypoint and example search
-openclaw docs <query...>            # search the live docs index
+openclaw docs                              # print docs entrypoint and example search
+openclaw docs --json                       # print the same guidance as JSON
+openclaw docs <query...> [--json]          # search the live docs index
 ```
 
-| Argument     | Description                                                                        |
-| ------------ | ---------------------------------------------------------------------------------- |
-| `[query...]` | Free-form search query. Multi-word queries are joined with spaces and sent as one. |
+| Argument/option | Description                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `[query...]`    | Free-form search query. Multi-word queries are joined with spaces and sent as one. |
+| `--json`        | Emit one machine-readable JSON object on stdout.                                   |
 
 With no query, `openclaw docs` prints the docs entrypoint URL and a sample search command instead of running a search.
 
@@ -34,6 +36,7 @@ With no query, `openclaw docs` prints the docs entrypoint URL and a sample searc
 
 ```bash
 openclaw docs browser existing-session
+openclaw docs browser existing-session --json
 openclaw docs sandbox allowHostControl
 openclaw docs gateway token secretref
 ```
@@ -54,6 +57,11 @@ In non-rich output (piped, `--no-color`, scripts), the same data renders as Mark
 - [Title](https://docs.openclaw.ai/...) - snippet
 - [Title](https://docs.openclaw.ai/...) - snippet
 ```
+
+With `--json`, stdout contains one object with the normalized query and result
+list. With no query, `query` is `null`, `url` is the docs entrypoint, and
+`results` is empty. Styling and headings are suppressed; request diagnostics
+stay on stderr so stdout can be piped directly to a JSON parser.
 
 ## Exit codes
 

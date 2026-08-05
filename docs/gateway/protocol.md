@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway protocol"
 source: "https://docs.openclaw.ai/gateway/protocol"
-source_hash: "7d08dbbdcc215b9f641e67655b60b65eacdc7023a1b03344124f63c261847ad5"
+source_hash: "65306060906cece674eaa2f1393337f3a2f43a4f6b4dcca70347d5c8a83d65b0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/protocol.md"
@@ -159,7 +159,8 @@ Gateway responds with `hello-ok`:
     "policy": {
       "maxPayload": 26214400,
       "maxBufferedBytes": 52428800,
-      "tickIntervalMs": 15000
+      "tickIntervalMs": 15000,
+      "attachments": { "maxBytes": 20971520, "maxImageBytes": 6291456 }
     }
   }
 }
@@ -168,7 +169,32 @@ Gateway responds with `hello-ok`:
 `server`, `features`, `snapshot`, `policy`, and `auth` are all required by
 `HelloOkSchema` (`packages/gateway-protocol/src/schema/frames.ts`). `auth`
 reports the negotiated role/scopes even when no device token is issued (shape
-above). `pluginSurfaceUrls` is optional and maps plugin surface names (e.g.
+above). `policy.attachments` is optional (older gateways omit it) and advertises
+the decoded-size ceilings chat attachments face on `chat.send`, `sessions.send`,
+and session-creation initial turns:
+
+| Field           | Meaning                                                                                             |
+| --------------- | --------------------------------------------------------------------------------------------------- |
+| `maxBytes`      | Largest decoded size accepted for a single attachment (`agents.defaults.mediaMaxMb`, default 20 MB) |
+| `maxImageBytes` | Largest decoded size accepted for a single image: `min(maxBytes, 6 MB agent-hydration cap)`         |
+
+Validating before send:
+
+1. Check each file's decoded size against `maxImageBytes` for images and
+   `maxBytes` for everything else.
+2. Serialize the whole request and check its encoded size against
+   `policy.maxPayload`. `policy.attachments` is a per-attachment ceiling, never a
+   promise the frame fits: attachments travel as base64, so a 20 MB file is about
+   26.7 MB on the wire and exceeds the default 25 MiB frame limit on its own.
+3. Treat the server as authoritative for everything else. Accepted MIME types and
+   per-message handling are deliberately not advertised because they depend on
+   the entrypoint, the resolved model, and payload sniffing. The gateway can
+   return a typed rejection, while text-only model runs can omit additional
+   images after their offload cap and still complete the request.
+4. Re-read the values on every reconnect. They are a connection-time snapshot, so
+   a live `mediaMaxMb` edit reaches existing connections only after they reconnect.
+
+`pluginSurfaceUrls` is optional and maps plugin surface names (e.g.
 `canvas`) to scoped hosted URLs; it may expire, so nodes call
 `node.pluginSurface.refresh` with `{ "surface": "canvas" }` for a fresh entry.
 The deprecated `canvasHostUrl` / `canvasCapability` / `node.canvas.capability.refresh`
@@ -1070,10 +1096,13 @@ third-party clients.
 | Default tick interval (pre `hello-ok`)    | `30_000` ms                                           | `packages/gateway-client/src/client.ts`                                                                                   |
 | Tick-timeout close                        | code `4000` when silence exceeds `tickIntervalMs * 2` | `packages/gateway-client/src/client.ts`                                                                                   |
 | `MAX_PAYLOAD_BYTES`                       | `25 * 1024 * 1024` (25 MB)                            | `src/gateway/server-constants.ts`                                                                                         |
+| Chat attachment ceiling                   | `agents.defaults.mediaMaxMb`, default 20 MB decoded   | `src/gateway/chat-attachment-policy.ts`                                                                                   |
+| Chat attachment image ceiling             | `min(attachment ceiling, 6 MB)`                       | `src/gateway/chat-attachment-policy.ts`, `packages/media-core/src/constants.ts`                                           |
 
 The server advertises the effective `policy.tickIntervalMs`,
-`policy.maxPayload`, and `policy.maxBufferedBytes` in `hello-ok`; clients
-should honor those values rather than the pre-handshake defaults.
+`policy.maxPayload`, `policy.maxBufferedBytes`, and `policy.attachments` in
+`hello-ok`; clients should honor those values rather than the pre-handshake
+defaults or hardcoded attachment sizes.
 
 The reference client lets finite requests own their configured deadline when
 every pending request has one. An `expectFinal` request without a finite

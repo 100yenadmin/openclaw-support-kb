@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Devices"
 source: "https://docs.openclaw.ai/cli/devices"
-source_hash: "73d9adc9025a0f0da145fd752227e2b031004dc04e9576def8adf535fdba98c5"
+source_hash: "7456544914e8e1060926d2784cb6d72599ea66a9949161e46b26588d0ef88b16"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/devices.md"
@@ -148,8 +148,10 @@ Use this when Control UI or other clients keep failing with `AUTH_TOKEN_MISMATCH
 1. Confirm current gateway token source:
 
    ```bash
-   openclaw config get gateway.auth.token
+   openclaw gateway auth-token --show
    ```
+
+   Run the command in an interactive terminal on the Gateway host and treat its output as a secret.
 
 2. List paired devices and identify the affected device id:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI automation"
 source: "https://docs.openclaw.ai/start/wizard-cli-automation"
-source_hash: "3a5751d5526b82a62c59ccfb6d0ab7ded34bf6e6e8e7a8d00df87d60d09c9b59"
+source_hash: "d81381e81337ec172f5beec46e5a571d3d364284f92921a3f748f48a47eaea64"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-automation.md"
@@ -38,9 +38,9 @@ Add `--json` for a machine-readable summary.
 
 - `--gateway-port` defaults to `18789`; only pass it to override.
 - `--skip-bootstrap` skips creating default workspace files, for automation that pre-seeds its own workspace.
-- `--secret-input-mode ref` stores an env-backed reference (`{ source: "env", provider: "default", id: "
+- `--secret-input-mode ref` stores new credentials as env-backed references (`{ source: "env", provider: "default", id: "
 ENV_VAR
-" }`) in the auth profile instead of the plaintext key. In non-interactive `ref` mode, the provider env var must already be set in the process environment: passing an inline key flag without its matching env var fails fast.
+" }`); set the provider env var when adding a credential or passing an inline key flag. Existing resolvable named profiles and their `env`, `file`, or `exec` references are reused unchanged, without a new credential write or additional provider env var. Existing plaintext is not migrated; run `openclaw secrets configure --apply`, then `openclaw secrets audit --check`. See [Secrets management](/gateway/secrets).
 
 ```bash
 openclaw onboard --non-interactive --accept-risk \

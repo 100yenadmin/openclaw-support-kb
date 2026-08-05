@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "e88354f4a78690f494640c133900e8be946f655e7a2e0f481aee57b777b8bcc8"
+source_hash: "9d0c0dff3cc94945315eaeeece895b06d49aeeaf2e1fbfc3c7c5a4c66c869423"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-failover.md"
@@ -127,7 +127,7 @@ Credential types:
 OAuth logins create distinct profiles so multiple accounts can coexist.
 
 - Default: `provider:default` when no email is available.
-- OAuth with email: `provider:<email>` (for example `google-antigravity:user@gmail.com`).
+- OAuth with email: `provider:<email>` (for example `openai:user@example.com`).
 
 Profiles live in the per-agent `openclaw-agent.sqlite` auth profile store.
 

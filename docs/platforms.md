@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "3fb6bdd91c830b23be34b5e839681d849b34c565cce4b7910b3f64d4b866c566"
+source_hash: "0c931a185cd8f0953eb1427a324840c25d71f76cae0e394d6536a3005c0ef682"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -34,12 +34,13 @@ Linux-compatible Gateway runtime.
 ## VPS and hosting
 
 - VPS hub: [VPS hosting](/vps)
-- Fly.io: [Fly.io](/install/fly)
-- Hetzner (Docker): [Hetzner](/install/hetzner)
-- GCP (Compute Engine): [GCP](/install/gcp)
 - Azure (Linux VM): [Azure](/install/azure)
-- exe.dev (VM + HTTPS proxy): [exe.dev](/install/exe-dev)
+- Daytona (cloud sandbox): [Daytona](/install/daytona)
 - EasyRunner (Podman + Caddy): [EasyRunner](/platforms/easyrunner)
+- exe.dev (VM + HTTPS proxy): [exe.dev](/install/exe-dev)
+- Fly.io: [Fly.io](/install/fly)
+- GCP (Compute Engine): [GCP](/install/gcp)
+- Hetzner (Docker): [Hetzner](/install/hetzner)
 
 ## Common links
 

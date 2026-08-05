@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "API usage and costs"
 source: "https://docs.openclaw.ai/reference/api-usage-costs"
-source_hash: "28a1f6fd2b541f77edebae296f528c9ae764d03a787b3df55b8deef14a46a318"
+source_hash: "ef5e6008af16b0820831d7f19756af521b5b79c866491a114fa6a2133d33011b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/api-usage-costs.md"
@@ -40,7 +40,7 @@ Map of OpenClaw features that can call paid provider APIs, where each reads its 
 **CLI usage windows** (provider quotas, not per-message cost)
 
 - `openclaw status --usage` and `openclaw channels list` show provider **usage windows** as `X% left`.
-- Current usage-window providers: Anthropic, ClawRouter, DeepSeek, GitHub Copilot, Gemini CLI, MiniMax, OpenAI (covers ChatGPT/Codex OAuth/token auth), Xiaomi, and z.ai. See [Models CLI](/cli/models) and [Channels CLI](/cli/channels) for the full provider/flag list.
+- Current usage-window providers: Anthropic, ClawRouter, DeepSeek, GitHub Copilot, MiniMax, OpenAI (covers ChatGPT/Codex OAuth/token auth), Xiaomi, and z.ai. See [Models CLI](/cli/models) and [Channels CLI](/cli/channels) for the full provider/flag list.
 - MiniMax's raw `usage_percent` / `usagePercent` fields report remaining quota, so OpenClaw inverts them; count-based fields win when present. If the response includes a `model_remains` array, OpenClaw picks the chat-model entry, derives the window label from timestamps when needed, and includes the model name in the plan label.
 - Usage auth comes from provider-specific hooks when available, otherwise OpenClaw falls back to matching OAuth/API-key credentials from auth profiles, env, or config.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Migrate"
 source: "https://docs.openclaw.ai/cli/migrate"
-source_hash: "4fc19e8600a7d05e4f604cf518f4c2ea42c01e07190abdb6871516d4470d69db"
+source_hash: "fe7634908055ebd29b1128702ca9b7358568d0993a63db583461f474cc8eea0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/migrate.md"
@@ -58,6 +58,10 @@ ParamField
   Override the source state directory. Hermes follows `$HERMES_HOME` and the active profile, then uses the platform default (`~/.hermes` or `%LOCALAPPDATA%\hermes`). Codex defaults to `~/.codex` (or `$CODEX_HOME`), Claude defaults to `~/.claude`.
 
 ParamField
+" type="string">
+  Import into a configured agent. Omit this only when the configured default agent is the intended owner. Invalid and unknown agent IDs are rejected.
+
+ParamField
 
   Import supported credentials without prompting. Interactive apply asks before importing detected auth credentials, with yes selected by default; non-interactive `--yes` requires `--include-secrets` to import them.
 
@@ -80,6 +84,10 @@ ParamField
 ParamField
 " type="string">
   Select one Codex plugin install item by plugin name or item id. Repeat the flag to migrate multiple Codex plugins. When omitted, interactive Codex migrations show a native Codex plugin checkbox selector and non-interactive migrations keep all planned plugins. Applies only to source-installed `openai-curated` Codex plugins discovered by the Codex app-server inventory.
+
+ParamField
+" type="string">
+  Select one exact migration item by its plan ID. Repeat the flag to migrate multiple items. For example, `--item auth:openai` limits a Codex migration to the detected OpenAI credential item.
 
 ParamField
 
@@ -160,6 +168,16 @@ The bundled Codex provider detects Codex CLI state at `~/.codex` by default, or 
 
 Use this provider when moving to the OpenClaw Codex harness and you want to promote useful personal Codex CLI assets deliberately. Local Codex app-server launches use a per-agent `CODEX_HOME`, so they do not read your personal `~/.codex` by default. The normal process `HOME` is still inherited, so Codex can see shared `$HOME/.agents/*` skills/plugin marketplace entries and subprocesses can find user-home config and tokens.
 
+Codex `auth.json` credentials are sensitive migration inputs. The default
+agent-scoped runtime does not consume a copied or mounted `auth.json` directly;
+
+Replace `<agent-id>` with that configured agent's ID:
+
+```bash
+openclaw migrate plan codex --from <codex-home> --agent <agent-id> --include-secrets --item auth:openai
+openclaw migrate apply codex --from <codex-home> --agent <agent-id> --include-secrets --item auth:openai --yes
+```
+
 Running `openclaw migrate codex` in an interactive terminal previews the full plan, then opens checkbox selectors before the final apply confirmation. Skill copy items are prompted first. Use `Toggle all on` or `Toggle all off` for bulk selection. Press Space to toggle rows, or Enter to activate the highlighted row and continue. Planned skills start checked, conflict skills start unchecked, and `Skip for now` skips skill copies for this run while still continuing to plugin selection. When source-installed curated Codex plugins are migratable and `--plugin` was not supplied, migration then prompts for native Codex plugin activation by plugin name. Plugin items start checked unless the target OpenClaw Codex plugin config already has that plugin. Existing target plugins start unchecked and show a conflict hint such as `conflict: plugin exists`; choose `Toggle all off` to migrate no native Codex plugins in that run, or `Skip for now` to stop before applying.
 
 For scripted or exact runs, select one or more skills or plugins explicitly:
@@ -173,6 +191,9 @@ openclaw migrate apply codex --yes --plugin google-calendar
 
 ### What Codex imports
 
+- ChatGPT OAuth or OpenAI API-key credentials from `$CODEX_HOME/auth.json`,
+  imported into the agent's OpenClaw auth store only when `--include-secrets`
+  is set.
 - Consolidated Codex `MEMORY.md` and `memory_summary.md` from
   `$CODEX_HOME/memories`, copied under `memory/imports/codex/` for indexed
   recall. Raw rollout memory is not imported.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent sandbox and tools"
 source: "https://docs.openclaw.ai/tools/multi-agent-sandbox-tools"
-source_hash: "87607b909622a0f129d0632d0f7c8801ae66a044a15b301133f60e0ae91cfc28"
+source_hash: "c8decc12432d0504f9fd4bd6b626e64fed4d1222e78db48a7d362b9f8ce7ec7f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/multi-agent-sandbox-tools.md"
@@ -268,7 +268,7 @@ Precedence rules
     - Each level can further restrict tools, but cannot grant back denied tools from earlier levels.
     - If `agents.entries.*.tools.sandbox.tools` is set, it replaces `tools.sandbox.tools` for that agent.
     - If `agents.entries.*.tools.profile` is set, it overrides `tools.profile` for that agent.
-    - Provider tool keys accept either `provider` (e.g. `google-antigravity`) or `provider/model` (e.g. `openai/gpt-5.4`).
+    - Provider tool keys accept either `provider` (e.g. `anthropic`) or `provider/model` (e.g. `openai/gpt-5.4`).
 
 
 

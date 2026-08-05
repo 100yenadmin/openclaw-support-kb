@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "58d4994b5d08b5ee361d7cdacaaea7f3f97cc52b31a376089ae81d86601f0b05"
+source_hash: "a6eedf4018c2913f3a016e21a49b0bebef0a67790383ff1aa476d068591bca69"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -31,9 +31,11 @@ Guided sections: `workspace`, `model`, `web`, `gateway`, `daemon`, `channels`, `
 
 ```bash
 openclaw config file
+openclaw config file --json
 openclaw config --section model
 openclaw config --section gateway --section daemon
 openclaw config schema
+openclaw config schema --json
 openclaw config get browser.executablePath
 openclaw config set browser.executablePath "/usr/bin/google-chrome"
 openclaw config set browser.profiles.work.executablePath "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
@@ -62,7 +64,7 @@ openclaw config set 'agents.entries.work.tools.exec.node' "node-id-or-name"
 
 ### `config get`
 
-Reads a value from the redacted config snapshot (secrets never print). `--json` prints the raw value as JSON; otherwise strings/numbers/booleans print bare and objects/arrays print as formatted JSON.
+Reads a value from the redacted config snapshot (secrets never print). `--json` prints the same redacted value as JSON; otherwise strings/numbers/booleans print bare and objects/arrays print as formatted JSON.
 
 When the path is missing, `--json` writes `{ "error": "Config path not found: <path>" }` to stdout and exits with status 1. Without `--json`, the diagnostic remains on stderr.
 
@@ -74,6 +76,8 @@ openclaw config get agents.defaults.model --json
 ### `config file`
 
 Prints the active config file path, resolved from `OPENCLAW_CONFIG_PATH` or the default location. The path names a regular file, not a symlink; see [Write safety](#write-safety).
+
+With `--json`, stdout contains an object with the resolved path under `path`.
 
 ### `config schema`
 
@@ -100,8 +104,12 @@ Related runtime RPC
 
 ```bash
 openclaw config schema
+openclaw config schema --json
 openclaw config schema > openclaw.schema.json
 ```
+
+The schema is JSON in both modes. `--json` is accepted as the explicit
+machine-output spelling and keeps stdout reserved for the schema document.
 
 ### `config validate`
 
@@ -126,7 +134,7 @@ openclaw config set gateway.port 19001 --strict-json
 openclaw config set channels.whatsapp.groups '["*"]' --strict-json
 ```
 
-`config get <path> --json` prints the raw value as JSON instead of terminal-formatted text.
+`config get <path> --json` prints the redacted value as JSON instead of terminal-formatted text.
 
 When a write changes `agents.defaults.model` or a per-agent `agents.entries.*.model`, OpenClaw resolves each changed primary or fallback through the configured provider catalogs before writing. Unknown model references are rejected without changing the active config; run `openclaw models list` to see available models.
 

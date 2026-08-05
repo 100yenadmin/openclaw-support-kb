@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "6a43edabea65dba213a78fb740e52ad51eb3cfaff0801cc763555036417dceaf"
+source_hash: "d253f8963fe0ada99e07afb81dafe0c5dac617b463ad0597f1556aefb3b33ca2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -720,6 +720,7 @@ Common provider hooks
       | `resolveTransportTurnState` | Native per-turn headers/metadata |
       | `resolveWebSocketSessionPolicy` | Native WS session headers/cool-down |
       | `formatApiKey` | Custom runtime token shape |
+      | `loginOAuth` | Callback-based OAuth login for the session SDK `AuthStorage` API |
       | `refreshOAuth` | Custom OAuth refresh |
       | `buildAuthDoctorHint` | Auth repair guidance |
       | `matchesContextOverflowError` | Provider-owned overflow detection |
@@ -999,7 +1000,15 @@ Image and video generation
             generate: { maxCount: 4, supportsSize: true },
             edit: { enabled: false },
           },
-          generateImage: async (req) => ({ images: [] }),
+          generateImage: async (req) => ({
+            images: [
+              {
+                buffer: await generateAcmeImageBytes(req),
+                mimeType: "image/png",
+                fileName: "acme-image.png",
+              },
+            ],
+          }),
         });
 
         api.registerVideoGenerationProvider({
@@ -1033,9 +1042,23 @@ Image and video generation
               },
             },
           },
-          generateVideo: async (req) => ({ videos: [] }),
+          generateVideo: async (req) => ({
+            videos: [
+              {
+                url: await generateAcmeVideoUrl(req),
+                mimeType: "video/mp4",
+              },
+            ],
+          }),
         });
         ```
+
+        The illustrative helpers stand in for provider calls: the image helper
+        returns non-empty encoded bytes, while the video helper returns a hosted
+        media URL. Video providers may return non-empty encoded bytes instead,
+        or both when the URL is a delivery fallback. Empty result arrays and
+        empty buffers are candidate failures, except that a video asset with a
+        usable URL ignores an empty buffer and continues with the URL.
 
         `capabilities` is required on both provider types; `edit` and the
         video transform blocks (`imageToVideo`, `videoToVideo`) always need an

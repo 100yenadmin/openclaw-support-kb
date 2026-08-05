@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "993bddfa3bff1d54b1cbf4e70597b2dab83d602879abfc372038bcbc69febdae"
+source_hash: "7274fe76330ce236bd57c72200000755933163efef3a63fdc2f6e24571a629ef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -121,7 +121,7 @@ openclaw gateway --port 18999 --bind loopback
 Then:
 
 ```bash
-openclaw gateway call health --url ws://127.0.0.1:18999 --timeout 3000
+openclaw gateway call health --port 18999 --timeout 3000
 ```
 
 ## Related

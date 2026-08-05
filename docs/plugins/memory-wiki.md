@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory wiki"
 source: "https://docs.openclaw.ai/plugins/memory-wiki"
-source_hash: "5c05a27bbba5aa4fc0ef52aa205475ecb130dcdf5af904d090993fa2daf5a8f9"
+source_hash: "f4906b486eaa77c6e92a2ef65f1570dfe64dc46a4758bcf0eb49b497f5624e85"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/memory-wiki.md"
@@ -443,10 +443,9 @@ the existing `~/.openclaw/wiki/main` path.
 
 Agent tools, compiled prompt digests, and the wiki supplement exposed through
 `memory_search` / `memory_get` resolve the vault from the active agent context.
-For CLI and Gateway calls in a setup with multiple configured agents, provide
-the agent explicitly with `openclaw wiki --agent <agentId> ...` or the Gateway
-request's `agentId`. A single configured agent remains the default when no id is
-provided.
+CLI calls use the configured default agent unless the command passes
+`--agent <agentId>`. Gateway calls in a multi-agent setup still require the
+request's `agentId`.
 
 In bridge mode, agent-scoped imports accept a public memory artifact only when
 its `agentIds` includes the selected agent. Artifacts owned by another agent,

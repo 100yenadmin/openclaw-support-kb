@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool Search"
 source: "https://docs.openclaw.ai/tools/tool-search"
-source_hash: "d26c9df9100e19bc2aa30fbb395f53fa40207201664d47e61fe15dfe89c0c298"
+source_hash: "ce36057211a5b6d86a626922cb7a2b9dcbd8243d08282011c166957b88588225"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tool-search.md"
@@ -337,6 +337,9 @@ Code mode attaches a `telemetry` object to every `tool_search_code` result:
 
 - `catalogSize`: number of catalog entries the runtime resolved
 - `sources`: catalog entry counts split into `openclaw`, `mcp`, and `client`
+- `counterScope`: opaque identifier for the counter lifetime; it stays stable
+  when tools are appended or prompt policy narrows the catalog, and changes
+  when the catalog is replaced or restored
 - `searchCount`, `describeCount`, `callCount`: running totals for the catalog
   session, carried across calls rather than reset per call
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "6a3eca472acbb00c155b2d4e63eadb6aeb9099ff5905164255704d57024ed14f"
+source_hash: "5c7c08ca4f08ddaf75675655b2feb91db188af0a2aa7b395f00a67cf1d67f0eb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -159,7 +159,7 @@ Further restrict tools for specific providers or models. Order: base profile →
   tools: {
     profile: "coding",
     byProvider: {
-      "google-antigravity": { profile: "minimal" },
+      anthropic: { profile: "minimal" },
       "openai/gpt-5.4": { allow: ["group:fs", "sessions_list"] },
     },
   },

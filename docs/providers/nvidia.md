@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "48a888da6c72d5e86daefbf23e8c5c3c69e8b948e7b6f9f49e85264ce57379ca"
+source_hash: "3a0cde8495b64c7428906e026eb2cac0092a535d7923a763fbbea95996cf8211"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/nvidia.md"
@@ -82,10 +82,11 @@ When an NVIDIA API key is configured, setup and model-selection paths fetch
 NVIDIA's public featured-model catalog from
 `https://assets.ngc.nvidia.com/products/api-catalog/featured-models.json` and
 cache the result for 24 hours (first 32 entries, imported as free text-input
-rows). New featured models from build.nvidia.com therefore appear in setup and
-model-selection surfaces without waiting for an OpenClaw release. When the
-live feed is available, the first returned model is the preselected option
-during NVIDIA setup.
+rows). New or republished featured models from build.nvidia.com therefore appear
+in setup and model-selection surfaces after the cache refreshes, without waiting
+for an OpenClaw release. A fresh NVIDIA catalog overrides bundled retirement
+metadata. When the live feed is available, its first model is preselected during
+NVIDIA setup.
 
 The fetch uses a fixed HTTPS host policy for `assets.ngc.nvidia.com`. If no
 NVIDIA API key is configured, or if the feed is unavailable or malformed,
@@ -109,8 +110,8 @@ hosted in NVIDIA's catalog when their context, latency, or behavior fits better.
 ## Bundled fallback catalog
 
 The selectable bundled rows snapshot NVIDIA's featured-model catalog. Deprecated
-compatibility rows remain resolvable by exact reference but stay out of model
-pickers.
+compatibility rows keep existing exact model references recognizable but stay
+out of model pickers.
 
 | Model ref                                  | Name                  | Context   | Max output |
 | ------------------------------------------ | --------------------- | --------- | ---------- |
@@ -120,12 +121,14 @@ pickers.
 | `nvidia/moonshotai/kimi-k2.6`              | Kimi K2.6             | 262,144   | 65,536     |
 | `nvidia/minimaxai/minimax-m3`              | Minimax M3            | 196,608   | 8,192      |
 | `nvidia/deepseek-ai/deepseek-v4-pro`       | DeepSeek V4 Pro       | 262,144   | 16,384     |
-| `nvidia/qwen/qwen3.5-397b-a17b`            | Qwen3.5 397B A17B     | 262,144   | 32,768     |
 
 The full compatibility catalog also retains these shipped refs for existing
-configurations: `nvidia/moonshotai/kimi-k2.5`, `nvidia/z-ai/glm-5.1`,
-`nvidia/z-ai/glm5`, and `nvidia/minimaxai/minimax-m2.7`. They remain available
-by exact reference but never appear in onboarding or model pickers.
+configurations and migration: `nvidia/qwen/qwen3.5-397b-a17b`,
+`nvidia/moonshotai/kimi-k2.5`, `nvidia/z-ai/glm-5.1`, `nvidia/z-ai/glm5`, and
+`nvidia/minimaxai/minimax-m2.7`. These references stay hidden from bundled and
+offline model pickers unless NVIDIA republishes them in its featured catalog.
+NVIDIA has retired the Qwen endpoint, so requests using its model reference no
+longer work. Migrate existing Qwen configurations to an active model.
 
 ## Advanced configuration
 
@@ -145,8 +148,9 @@ Catalog and pricing
     OpenClaw prefers NVIDIA's public featured-model catalog when NVIDIA auth is
     configured and caches it for 24 hours. The bundled selectable fallback is a
     static snapshot of NVIDIA's featured-model catalog; deprecated exact-reference
-    compatibility rows are hidden from model pickers. Costs default to `0` in
-    source since NVIDIA currently offers free API access for the listed models.
+    compatibility rows stay hidden from that fallback. Fresh featured rows can
+    restore models that NVIDIA has republished. Costs default to `0` in source
+    since NVIDIA currently offers free API access for the listed models.
 
 
 

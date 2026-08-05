@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "1128692232ce21d4664ddc27b382a2728e0f184e9984eee262e94c1bc96f755b"
+source_hash: "6ab435b616f5b41bbc4e023880669bc774223cab3fca7bf9563371267707f553"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -64,7 +64,12 @@ state directories and config paths remain unchanged.
 - ANSI colors and progress indicators render only in TTY sessions.
 - OSC-8 hyperlinks render as clickable links where supported; otherwise the
   CLI falls back to plain URLs.
-- `--json` (and `--plain` where supported) disables styling for clean output.
+- On bounded reporting commands, `--json` reserves stdout for one JSON document;
+  styling and progress output are suppressed, and warnings and diagnostics stay on
+  stderr.
+- Interactive UIs and wizards, long-running servers and streams, shell integration,
+  and pure side-effect commands may omit `--json` when they have no meaningful
+  report to return.
 - Long-running commands show a progress indicator (OSC 9;4 when supported).
 
 ## Color palette

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
-source_hash: "9ba1f196d892bc2e58d0ec719cb21a2b63b30489d29596b6be9b9eb23f5cbd00"
+source_hash: "99807317d4626c27209975d51596a5cff4ce23e561812102c73a0be275706b96"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/agents.md"
@@ -183,9 +183,9 @@ Config sample:
 ```json5
 {
   agents: {
-    list: [
-      {
-        id: "main",
+    entries: {
+      main: {
+        default: true,
         identity: {
           name: "OpenClaw",
           theme: "space lobster",
@@ -193,7 +193,7 @@ Config sample:
           avatar: "avatars/openclaw.png",
         },
       },
-    ],
+    },
   },
 }
 ```

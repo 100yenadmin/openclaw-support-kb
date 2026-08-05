@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "652bcfefaa362eadd960b0cff19600d0191beb6c1d87703e2074edd3484ac398"
+source_hash: "d2934bbece1cdcfaf14de81a1e6fe17d54236ceee6d6d5b8dc8e1da274aa3bef"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -188,7 +188,7 @@ without exceptions outside doctor/import/export/debug boundaries.
 - [x] Keep Kysely generated types aligned after any schema change.
       Files: `src/state/openclaw-state-schema.sql`,
       `src/state/openclaw-agent-schema.sql`,
-      `src/state/*generated*`.
+      `src/state/*-db.generated.d.ts`.
       Proof: no schema change in this pass; `pnpm db:kysely:check`;
       `pnpm lint:kysely`.
 - [x] Re-run focused tests for touched stores, commands, and scripts.
@@ -301,12 +301,12 @@ The branch already has a real shared SQLite base:
   macOS runtime locator, CI, and public install docs all agree.
 - `src/state/openclaw-state-db.ts` opens `openclaw.sqlite`, sets WAL,
   `synchronous=NORMAL`, `busy_timeout=30000`, `foreign_keys=ON`, and applies
-  the generated schema module derived from
+  the build-inlined schema bytes derived from
   `src/state/openclaw-state-schema.sql`.
-- Kysely table types and runtime schema modules are generated from disposable
-  SQLite databases created from the committed `.sql` files; runtime code no
-  longer keeps copy-pasted schema strings for global, per-agent, or proxy
-  capture databases.
+- Kysely table types are generated from disposable SQLite databases created
+  from the committed `.sql` files. Source runs read those canonical files;
+  packaged builds inline the same bytes, so runtime code keeps no committed
+  copy-pasted schema strings or packaged SQL assets.
 - Runtime stores derive selected and inserted row types from those generated
   Kysely `DB` interfaces instead of shadowing SQLite row shapes by hand. Raw SQL
   remains limited to schema application, pragmas, and migration-only DDL.
