@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/profiles"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "84ebb772a236e4643993b2dc8d797b6b338cf67a5c1ca967d6290c39f1bd7451"
+source_hash: "f4b671d54053970470bad8a4d98d466cfba2c3aa85a6e85bca573e12bec33f36"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -24,6 +24,10 @@ Run multiple independent Hermes agents on the same machine — each with its own
 ## What are profiles?
 
 A profile is a separate Hermes home directory. Each profile gets its own directory containing its own `config.yaml`, `.env`, `SOUL.md`, memories, sessions, skills, cron jobs, and state database. Profiles let you run separate agents for different purposes — a coding assistant, a personal bot, a research agent — without mixing up Hermes state.
+
+:::caution Give every agent its own profile
+Never point two agent processes at the same profile (the same Hermes home). Both write memory automatically, and each loads the other's writes into its system prompt at session start — so two writers on one home compound each other's state until it stops being anything you configured. Profiles exist exactly to prevent this; agents that need shared memory should use an [external memory provider](/user-guide/features/memory-providers) instead.
+:::
 
 When you create a profile, it automatically becomes its own command. Create a profile called `coder` and you immediately have `coder chat`, `coder setup`, `coder gateway start`, etc.
 

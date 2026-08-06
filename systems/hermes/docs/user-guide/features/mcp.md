@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "3d4e548fc3bedcbf74eb5e21e2f80ad219d7c66d4ed6c37beb74e5a9c3753708"
+source_hash: "60ce75ade6d04b19aacdb268f434f7b6c19052f91a689b791f4fbe6be586647f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -22,6 +22,10 @@ Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp
 MCP lets Hermes Agent connect to external tool servers so the agent can use tools that live outside Hermes itself — GitHub, databases, file systems, browser stacks, internal APIs, and more.
 
 If you have ever wanted Hermes to use a tool that already exists somewhere else, MCP is usually the cleanest way to do it.
+
+:::tip Coming from Claude Code?
+The `mcpServers` block in your `~/.claude.json` maps to `mcp_servers` in Hermes' `config.yaml` — and `hermes import-agent claude-code` migrates it (along with skills and instructions) automatically. See [Import from Other Agents](../import-from-other-agents.md).
+:::
 
 ## What MCP gives you
 

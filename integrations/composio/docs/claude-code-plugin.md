@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Claude Code Plugin"
 source: "https://docs.composio.dev/docs/claude-code-plugin.md"
-source_hash: "998198945f0119d5778b60dc6dced2b20a728a12e620fefd5484641af02d7617"
+source_hash: "c887e1e7b825a974a014a719aeb1793da187d9c9f52b072689da7c6f9664ef5f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "claude-code-plugin.md"
@@ -45,7 +45,7 @@ Try: &#x2A;"Star `composiohq/composio` on GitHub."*
 
 The first time, Claude installs the Composio CLI if it's missing, signs you in with `composio login`, and gives you an OAuth link for GitHub. Approve it in your browser and Claude runs the action.
 
-> Prefer to set things up ahead of time? Run `curl -fsSL https://composio.dev/install | bash`, then `composio login`.
+> Prefer to set things up ahead of time? Run `curl -fsSL https://composio.dev/install | sh` to install the CLI and configure your shell, then open a new terminal and run `composio login`.
 
 # What you can do [#what-you-can-do]
 

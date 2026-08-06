@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Tips & Best Practices"
 source: "https://hermes-agent.nousresearch.com/docs/guides/tips"
-source_hash: "7414f4ef70208337292ff1d84cb6d55a4214b74856005cb1cd2c66c6a3bdd4df"
+source_hash: "5a35c06d684d0436f2dba117a9f91cde6d43ea8a7eee831af23c1827b0b62600"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/tips.md"
@@ -165,7 +165,7 @@ Instead of running terminal commands one at a time, ask the agent to write a scr
 Use `/model` to switch models mid-session. Use a frontier model (Claude Sonnet/Opus, GPT-4o) for complex reasoning and architecture decisions. Switch to a faster model for simple tasks like formatting, renaming, or boilerplate generation. Keep in mind each switch resets the prompt cache (see above), so on long sessions it's often cheaper to start a fresh session on the other model than to bounce back and forth.
 
 :::tip
-Run `/usage` periodically to see your token consumption. Run `/insights` for a broader view of usage patterns over the last 30 days.
+Run `/usage` periodically to see your token consumption. Run `/insights` for a broader view of usage patterns over the last 30 days. To see what your *fixed* per-message cost is before any conversation — system prompt, skills index, memory, tool schemas — run [`hermes prompt-size`](/reference/cli-commands#hermes-prompt-size) (works offline).
 :::
 
 ## Messaging Tips

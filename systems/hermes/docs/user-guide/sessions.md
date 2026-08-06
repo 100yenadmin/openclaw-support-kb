@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Sessions"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/sessions"
-source_hash: "ec3d5063485e6a41349bec31c8afbbcb8ccf632a4de15608945e5437b1e2e8e9"
+source_hash: "ccb9d28f58b725846089a4558372ae9bc48d5219e4ed9410264db1a087983ada"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/sessions.md"
@@ -73,7 +73,9 @@ into chat.
 :::tip
 Use `/compress` when a session gets long, `/new` for a fresh thread, and
 `hermes sessions prune` only when you want to delete old ended sessions from
-storage. Compression reduces the active context; it is not a privacy delete.
+storage. If `state.db` has simply grown large, start with the non-destructive
+option first: `hermes sessions optimize` merges FTS5 index segments and
+VACUUMs the database without touching any session data. Compression reduces the active context; it is not a privacy delete.
 Pass a name to `/new` (e.g. `/new payments-refactor`) to set the new session's
 initial title up front — useful for finding it later with `/resume <name>` or
 in the `/sessions` picker.

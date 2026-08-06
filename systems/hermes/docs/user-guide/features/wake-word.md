@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Wake Word"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/wake-word"
-source_hash: "27b64860edaa494e6d78959734da1973cad550c9b2560940ca797e11b49c796e"
+source_hash: "13b25850c0b631dcda892b839f604b5fc658552a4d7e59341e112b8b509d999e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/wake-word.md"
@@ -47,6 +47,43 @@ On the desktop app, a hands-free voice conversation can be ended by simply
 spoken command ends the conversation instead of being sent to the agent. Only a
 whole-utterance stop command matches, so a real request like "stop the docker
 container" still goes through normally.
+
+
+
+## Remote desktop (client capture)
+
+When the desktop app connects to a **remote** Hermes backend (for example a
+headless Docker host or a machine in another room), the backend often has **no
+microphone**. Server-side PortAudio then fails with “Failed to open the
+wake-word microphone.”
+
+Hermes supports **client capture** for that case:
+
+1. The desktop arms wake with `capture: client` (automatic for the GUI when the
+   backend has no local input device, or set explicitly below).
+2. openWakeWord still runs **on the backend** (same engines, same models).
+3. The desktop opens the **local Mac/PC microphone**, resamples to 16 kHz mono
+   int16, and streams short frames via the `wake.feed` RPC.
+4. On detection the backend emits `wake.detected` as usual; the desktop starts
+   the normal voice pipeline on the client mic.
+
+```yaml
+wake_word:
+  enabled: true
+  capture: auto    # auto | local | client
+  # auto   — local PortAudio unless the desktop arms with client_capture
+  # local  — always open the backend mic (CLI/TUI default)
+  # client — always expect wake.feed PCM from the desktop (remote-friendly)
+```
+
+The desktop GUI always passes `client_capture: true` on `wake.start`, so remote
+backends without a mic arm in client mode automatically. CLI and TUI keep local
+capture unless you set `capture: client` explicitly.
+
+Privacy note: with client capture, wake PCM travels over the authenticated
+desktop↔backend WebSocket (same channel as the rest of the session). Detection
+still does not send audio to third-party wake APIs; the engine is local to the
+backend process.
 
 ## Engines
 
@@ -95,6 +132,7 @@ wake_word:
   enabled: false
   surface: auto               # eligible surface: "auto" | "cli" | "tui" | "gui"
   input_device: null           # PortAudio input index or device-name substring; null = process default
+  capture: auto               # auto | local | client — where PCM is captured (see Remote desktop)
   provider: openwakeword      # "openwakeword" (free, local) | "sherpa" (free, any phrase) | "porcupine"
   phrase: "hey hermes"        # cosmetic label only — detection is keyed by the model/keyword below
   sensitivity: 0.6            # 0.0-1.0 — higher = stricter (fewer false triggers), consistent across all engines

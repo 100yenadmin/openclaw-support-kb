@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Local LLMs on Mac"
 source: "https://hermes-agent.nousresearch.com/docs/guides/local-llm-on-mac"
-source_hash: "39e6ba73230db3bf4d432fff958b02a25207dc84f2364330559393d654b2ecd1"
+source_hash: "cd3b4407c3a49d2280e67cd208cc4b479c71a12cac0fb37a43707ef3d04d1c54"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/local-llm-on-mac.md"
@@ -251,5 +251,9 @@ HERMES_STREAM_READ_TIMEOUT=1800
 | API call (non-streaming) | 1800s | No change needed | `HERMES_API_TIMEOUT` |
 
 The stream read timeout is the one most likely to cause issues — it's the socket-level deadline for receiving the next chunk of data. During prefill on large contexts, local models may produce no output for minutes while processing the prompt. The auto-detection handles this transparently.
+
+:::tip A silent first turn is usually prefill, not a hang
+Hermes sends its system prompt and tool schemas on every call, so on slower hardware the first turn can involve minutes of silence while the model processes that prompt before generating anything. That's prefill at work, not a stalled session. See [Slow first response (prefill)](./local-ollama-setup.md#slow-first-response-prefill) in the Ollama guide for mitigations like keeping the model loaded and trimming the fixed prompt with `hermes prompt-size`.
+:::
 
 ---

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Kanban (Multi-Agent Board)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban"
-source_hash: "fb7cf8c2de4f252078e11231b9b3e9c87ca26779bebd60c745fe7d0c4045a1ad"
+source_hash: "daaf0d3853bf61444953e0bb6703efca474a47fe3b4decc793102992dce389f3"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban.md"
@@ -510,6 +510,10 @@ hermes kanban create "Translate the docs site to French" \
 ```
 
 Use it for open-ended, multi-step, or "keep going until X is true" cards. Skip it for cheap one-shot work — the per-turn judge overhead isn't worth it, and the dispatcher's existing retry/circuit-breaker already handles transient worker failures. The judge is only as good as your goal text, so write the body as **explicit acceptance criteria**.
+
+:::note Goal-mode cards borrow the `/goal` engine — they don't connect to it
+`--goal` runs the continuation loop *inside that one card's worker session*. It shares the engine with the [`/goal` slash command](./goals), not the state: setting a `/goal` in a chat session never creates, claims, or moves a kanban card, and a goal-mode card's loop is invisible to any chat session's `/goal status`. If you want this conversation to keep iterating, use [`/goal`](./goals); if you want work on the board, create a card.
+:::
 
 ### How the orchestrator behaves
 

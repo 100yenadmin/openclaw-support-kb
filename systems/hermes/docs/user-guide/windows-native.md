@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Windows (Native) Guide"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/windows-native"
-source_hash: "5568f25ff720dbd241b371a9daef8c19c19d826b7ad6796e11ba7fd01e4bdae3"
+source_hash: "9fed71aadacb49012f55bdc062dc0cfed3325c87b9d6248b4cf4ca5ff4c8d5b4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/windows-native.md"
@@ -300,7 +300,7 @@ Consequence: any codepath that said "check if this PID is alive" via `os.kill(pi
 ## Common pitfalls
 
 **`hermes: command not found` right after install.**
-Open a new PowerShell window. The installer added `%LOCALAPPDATA%\hermes\bin` to User PATH, but existing shells need to be restarted to pick it up. In the meantime you can run `& "$env:LOCALAPPDATA\hermes\bin\hermes.cmd"`.
+Open a new PowerShell window. The installer added `%LOCALAPPDATA%\hermes\hermes-agent\venv\Scripts` to User PATH, but existing shells need to be restarted to pick it up. In the meantime you can run `& "$env:LOCALAPPDATA\hermes\hermes-agent\venv\Scripts\hermes.exe"`.
 
 **`WinError 193: %1 is not a valid Win32 application` when running a tool.**
 You hit a shebang-script invocation that bypassed the `.cmd` shim. Hermes resolves commands through `shutil.which(cmd, path=local_bin)` so PATHEXT picks up `.CMD` — if you're invoking the tool via a hardcoded path instead, switch to the `.cmd` variant (e.g., `npx.cmd`, not `npx`).

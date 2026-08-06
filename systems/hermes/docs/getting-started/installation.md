@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "793c7fdfa75dcb9072630b25e8e7ad268a75e990ce8eda489808c28d51a9db6f"
+source_hash: "7fd53fd78c66d06ca1c43671809033062582e6155befb17d54bedc024021f44b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -155,6 +155,14 @@ Running Hermes as a dedicated unprivileged user (e.g. a `hermes` systemd service
    ```
 
 4. **Verify:** `hermes doctor` should now run cleanly. If you get `ModuleNotFoundError: No module named 'dotenv'`, you're invoking the repo source `hermes` file (`~/.hermes/hermes-agent/hermes`) with system Python instead of the venv launcher (`~/.hermes/hermes-agent/venv/bin/hermes`) — fix step 3.
+
+5. **Running the messaging gateway from this account?** A user-level service stops at logout and does not start at boot until you enable lingering for the service user:
+
+   ```bash
+   sudo loginctl enable-linger <service-user>
+   ```
+
+   See [Messaging Gateway](/user-guide/messaging/) for the service setup itself.
 
 The same pattern works on Arch (the installer uses pacman with the same sudo-detection logic), Fedora/RHEL, and openSUSE — those distros don't support `--with-deps` at all, so an administrator always installs the system libraries separately. The relevant `dnf`/`zypper` commands are printed by the installer.
 
