@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "List issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/control-plane-commands.md"
-source_hash: "729e55fb1d191bbc516343fcc4e7756ff3ff30e40ad748cdaa61ad7c73bece62"
+source_hash: "95c97737e076e3de4657383415b13c8cce6e8813e06159c0f0bb064621075941"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/control-plane-commands.md"
@@ -109,7 +109,7 @@ pnpm paperclipai skills import ./skills/my-skill --company-id <company-id>
 pnpm paperclipai skills import owner/repo/path/to/skill --company-id <company-id>
 
 # Attach desired company skills to an agent after install/import
-pnpm paperclipai skills agent sync <agent-id> --skill github-pr-workflow --company-id <company-id>
+pnpm paperclipai skills agent sync <agent-id> --skill github-pr-workflow --mode add --company-id <company-id>
 ```
 
 ## Approval Commands

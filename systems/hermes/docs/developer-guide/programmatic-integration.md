@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "ca9561c7a8295945f840168ff83a1bb7138946b203acdc7c163bf6d2bf902d84"
+source_hash: "7537dbe090264ef43127f44973ed2f19acd989dd2673a64f158db10bfd36f83b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -63,7 +63,8 @@ clarify.respond         sudo.respond            secret.respond
 approval.respond        config.set / config.get commands.catalog
 command.resolve         command.dispatch        cli.exec
 reload.mcp              reload.env              process.stop
-delegation.status       subagent.interrupt      spawn_tree.save / list / load
+delegation.status       subagent.interrupt      subagent.steer
+spawn_tree.save / list / load
 terminal.resize         clipboard.paste         image.attach
 ```
 

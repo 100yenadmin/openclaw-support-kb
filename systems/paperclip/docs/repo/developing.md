@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "6d77635a9e967f46e2116bdf4c093a0522a67164b42ab0fc55759b4d45eeeb62"
+source_hash: "a82faf8b68dc2a6ae6b1db15d1af24e7001f96b046826bf662bbdaaf5dc81ac1"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -353,6 +353,14 @@ Every local install keeps runtime state directly under the selected instance roo
 ```
 
 `PAPERCLIP_HOME` and `PAPERCLIP_INSTANCE_ID` override the home root and instance id respectively. `paperclipai onboard` echoes the resolved values in its banner (`Local home: <home> | instance: <id> | config: <path>`) so you can confirm where state will land before continuing.
+
+Config updates preserve unrecognized top-level and nested keys so provider or
+plugin extensions survive `configure` and worktree port repair. Likely
+misspellings of known keys produce a warning but are not removed. If an
+existing `config.json` is malformed, `onboard` and `configure` first create a
+byte-for-byte sibling backup named `config.json.invalid-1` (then `-2`, and so
+on). Repair from defaults requires an interactive confirmation; non-interactive
+runs stop without replacing the original.
 
 ## Database in Dev (Auto-Handled)
 

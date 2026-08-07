@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Scheduled Tasks (Cron)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron"
-source_hash: "21f8b3e77e9cbb81a0c93fb5508ccae020963a9703a4b6036f0d3bc33f60d895"
+source_hash: "dbfb8d0ad31142b0fb89dea8ef10fc0eb5b99f0ea8478d22cd6d8bd84473a5e5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/cron.md"
@@ -649,6 +649,30 @@ cronjob(action="remove", job_id="...")
 ```
 
 For `update`, pass `skills=[]` to remove all attached skills.
+
+### Manual runs are asynchronous
+
+`cronjob(action="run")` fires the job immediately **in the background** (like
+`delegate_task`): the tool call returns at once with a handle, and the job's
+outcome — success/failure, delivery target, next scheduled run, and an output
+excerpt — re-enters the conversation as a new message when the run finishes.
+The agent (and you) can keep working in the meantime, and a job that is
+already mid-run is refused with "already running" instead of double-firing.
+
+You can also pass `prompt` with `action="run"` to inject transient per-run
+context:
+
+```python
+cronjob(action="run", job_id="...", prompt="CONTEXT: focus on the EU region today")
+```
+
+The context is appended to the job's stored prompt under a `## Run Context`
+header for that single fire only — it is never persisted to the job
+definition, and it passes the same prompt-injection scan as stored prompts.
+
+Runtimes that can't receive detached results (one-shot `hermes -z`, `hermes
+cron run` from the CLI, cron child sessions, Kanban workers) fall back to
+synchronous execution automatically.
 
 ## Toolsets available to cron jobs
 

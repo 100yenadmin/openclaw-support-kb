@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "510d2220c3aebd8c75130428e05ed70f19a162cd54ae3daeae311c2efff34289"
+source_hash: "8a55ad79fa7f31b79feafdf8f15c9f017dce0eb21e0e5a1c98556e293b828649"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -383,7 +383,7 @@ pnpm paperclipai agent runtime-state <agent-id>
 pnpm paperclipai agent runtime-state:reset-session <agent-id> [--task-key <key>]
 pnpm paperclipai agent task-sessions <agent-id>
 pnpm paperclipai agent skills <agent-id>
-pnpm paperclipai agent skills:sync <agent-id> --desired-skills paperclip,github
+pnpm paperclipai agent skills:sync <agent-id> --desired-skills paperclip,github --mode add
 pnpm paperclipai agent instructions-path:update <agent-id> --payload-json '{"path":"/path/to/AGENTS.md"}'
 pnpm paperclipai agent instructions-bundle <agent-id>
 pnpm paperclipai agent instructions-bundle:update <agent-id> --payload-json '{"mode":"managed"}'
@@ -483,9 +483,10 @@ By default the command creates a `todo` issue assigned to the target agent and w
 1. **Company install** — adds or updates a row in `company_skills` for the
    whole company. This is what `skills install`, `skills import`, `skills create`,
    and `skills scan-projects` do.
-2. **Agent attach** — replaces an agent's *desired* company skill set
-   (`skills agent sync`/`clear`). This is a desired-state operation on the
-   agent's adapter config; it does not change the company library.
+2. **Agent attach** — merges an agent's *desired* company skill set with an
+   explicit `add`, `remove`, or `replace` mode (`skills agent sync`/`clear`).
+   This is a desired-state operation on the agent's adapter config; it does not
+   change the company library.
 3. **Adapter runtime sync** — the adapter reconciles the desired skill set
    with files on disk and reports an `AgentSkillSnapshot` (`skills agent list`).
    `skills agent sync` triggers this automatically after updating desired state.
@@ -582,12 +583,14 @@ maintenance loop for catalog-installed skills:
 
 ```sh
 pnpm paperclipai skills agent list <agent-id-or-shortname> --company-id <company-id>
-pnpm paperclipai skills agent sync <agent-id-or-shortname> --skill <skill-id-or-key-or-slug> [--skill <skill-id-or-key-or-slug>...] --company-id <company-id>
+pnpm paperclipai skills agent sync <agent-id-or-shortname> --skill <skill-id-or-key-or-slug> [--skill <skill-id-or-key-or-slug>...] --mode <add|remove|replace> --company-id <company-id>
 pnpm paperclipai skills agent clear <agent-id-or-shortname> --yes --company-id <company-id>
 ```
 
-`skills agent sync` replaces the agent's non-required desired skill set (it is
-not additive) and returns the resulting adapter `AgentSkillSnapshot`.
+`skills agent sync` requires a merge mode and returns the resulting adapter
+`AgentSkillSnapshot`. `add` preserves all unnamed assignments, `remove` deletes
+only named assignments, and `replace` destructively overwrites the complete
+non-required desired skill set.
 `skills agent clear` sends an empty desired list. Required Paperclip skills are
 still enforced by the server in both cases.
 

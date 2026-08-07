@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/adding-platform-adapters"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "79db6edcb345ef658b6d85f8d9bb6a3ad70eda21f80c9f639042f3e0add86d0a"
+source_hash: "a66a142f92f54c2f863ebe216effa9ca61c7f5d1c92b9b42872e1732b9e07218"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -135,7 +135,15 @@ def register(ctx):
         name="my_platform",
         label="My Platform",
         adapter_factory=lambda cfg: MyPlatformAdapter(cfg),
+        # PASSIVE probe — "are deps/config present right now?".  Called from
+        # status displays and config loading, so it must NEVER pip-install.
         check_fn=check_requirements,
+        # ACTIVE installer (optional) — only for platforms with a
+        # lazy-installable SDK.  create_adapter() calls it when check_fn
+        # returns False, right before the gateway connects the platform.
+        # Typically wraps tools.lazy_deps.ensure_and_bind(...).  Omit it
+        # and a False check_fn is a hard block.
+        # ensure_deps_fn=ensure_requirements,
         validate_config=validate_config,
         required_env=["MY_PLATFORM_TOKEN"],
         install_hint="pip install my-platform-sdk",
