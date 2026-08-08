@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node"
 source: "https://docs.openclaw.ai/cli/node"
-source_hash: "d1982e7dd003c1395a30f80bbd24616e4c3d58d8251d1e2b0806fb4890077a5f"
+source_hash: "3abd788140b3569529318c07df12c20cc8971b010600976e1a8a9e0f3bb997c8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/node.md"
@@ -132,6 +132,12 @@ Options:
 - `--display-name <name>`: Override the node display name
 - `--runtime <runtime>`: Service runtime (`node`)
 - `--force`: Reinstall/overwrite if already installed
+
+> **Linux (systemd user service):** Run `sudo loginctl enable-linger <user>` after
+> install. Without lingering, `systemd --user` tears down the node service when
+> your last SSH session ends, so the node silently goes offline after logout.
+> `openclaw node install` prints this warning when it detects lingering is
+> disabled.
 
 Manage the service:
 

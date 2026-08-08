@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Scheduled Tasks (Cron)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron"
-source_hash: "dbfb8d0ad31142b0fb89dea8ef10fc0eb5b99f0ea8478d22cd6d8bd84473a5e5"
+source_hash: "29c4c14ff7702faca8860a3d7875e252b70348fb11e41f5531f8c5121e1b197a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/cron.md"
@@ -79,6 +79,33 @@ Every morning at 9am, check Hacker News for AI news and send me a summary on Tel
 ```
 
 Hermes will use the unified `cronjob` tool internally.
+
+## Pre-dispatch configuration validation
+
+Before constructing any agent machinery for a scheduled run, the scheduler
+validates that the job's configuration can actually produce a successful run:
+
+- the provider API key resolves (skipped when a `fallback_providers` chain is
+  configured, since the fallback path may rescue a missing primary key),
+- attached skills are ready (no missing required environment variables,
+  commands, or credential files),
+- delivery platform targets are known and have gateway credentials configured
+  (`local`/`origin` targets are never checked).
+
+When validation fails, the job's `last_status` becomes `blocked_config`, ONE
+alert is delivered (it is not repeated every tick), and **no LLM call is
+made** — a misconfigured job never spends tokens. The next healthy run clears
+the blocked state so a future configuration break alerts again.
+
+To disable the validation and restore the old behavior (the run proceeds and
+fails during execution):
+
+```yaml
+cron:
+  preflight: false
+```
+
+Or: `hermes config set cron.preflight false`
 
 ## Letting unpinned jobs track global defaults
 

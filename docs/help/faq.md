@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "d6d6640efedb75c4b357e1b4a7dbc9745b311b74b66c3dd885d293d32175fe32"
+source_hash: "d35e38e5bdf0205fc91b5522b489f6cb10e63a6453aa4cf86c57c8128aab0304"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -182,7 +182,8 @@ How can I use different models or settings for different tasks?
 
     - **Cron jobs**: isolated jobs can set a `model` override per job.
     - **Agents**: route tasks to separate agents with different default models, thinking levels, and stream params.
-    - **On-demand switch**: `/model` switches the current session model at any time.
+    - **Configured default + current session**: A direct owner/admin `/model <model>` changes the session and requests a best-effort configured-default update. If the agent has no explicit primary model, the target is the shared `agents.defaults.model` fallback.
+    - **Current session only**: `/model <model> -s` (or `--session`) changes only this session and leaves configured defaults unchanged.
 
     Example - same model, different per-agent settings:
 

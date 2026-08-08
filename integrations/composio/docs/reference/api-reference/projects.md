@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Projects"
 source: "https://docs.composio.dev/reference/api-reference/projects.md"
-source_hash: "d3e9f6dda2ccd5b22de49f560dc9938c1d4d81644b100dbb0d452f6517f0fd07"
+source_hash: "6453590050a3fe502cb2fa6b85367dcf5a3fe1a652eea18cbc180cec4d050295"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/projects.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Projects (/reference/api-reference/projects)
 Source: https://docs.composio.dev/reference/api-reference/projects.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/projects.mdx, not this file. */}
 
@@ -74,5 +76,16 @@ Each project has settings that control security, logging, and display behavior. 
 Notable security setting: `require_mcp_api_key`, when `true`, requires MCP server requests to include a valid `x-api-key` header. This defaults to `true` for organizations created on or after March 5, 2026.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/project/usage/summary` | [Project usage summary](/reference/api-reference/projects/postProjectUsageSummary) |
+| `POST` | `/api/v3.1/project/usage/{entity_type}` | [Project usage breakdown](/reference/api-reference/projects/postProjectUsageByEntityType) |
+| `GET` | `/api/v3.1/org/project/list` | [List all projects](/reference/api-reference/projects/getOrgProjectList) |
+| `POST` | `/api/v3.1/org/owner/project/new` | [Create a new project](/reference/api-reference/projects/postOrgOwnerProjectNew) |
+| `GET` | `/api/v3.1/org/owner/project/list` | [List all projects](/reference/api-reference/projects/getOrgOwnerProjectList) |
+| `GET` | `/api/v3.1/org/owner/project/{nano_id}` | [Get project details by ID With Org Api key](/reference/api-reference/projects/getOrgOwnerProjectByNanoId) |
+| `DELETE` | `/api/v3.1/org/owner/project/{nano_id}` | [Delete a project](/reference/api-reference/projects/deleteOrgOwnerProjectByNanoId) |
+| `POST` | `/api/v3.1/org/owner/project/{nano_id}/regenerate_api_key` | [Delete and generate new API key for project](/reference/api-reference/projects/postOrgOwnerProjectByNanoIdRegenerateApiKey) |
 
 ---

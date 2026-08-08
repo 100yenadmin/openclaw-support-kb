@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Media playback"
 source: "https://docs.openclaw.ai/nodes/media-playback"
-source_hash: "dacb48f6c75000a4f0ca024c2b991e141ed2640700ad306e1559e19c9434a5f2"
+source_hash: "3a642c86196d95bf73e8569b14c2f208b9afbf2f061c2fc2eab263a0ac75593f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/media-playback.md"
@@ -65,8 +65,9 @@ Playback conversion is lazy:
    unplayable-media fallback and keep the download action available.
 
 Transcoding accepts sources up to 20 minutes and never raises the normal audio
-or video byte cap. Cached playback renditions are pruned by normal media-store
-maintenance.
+or video byte cap. Cached playback renditions use a fixed seven-day retention
+that Gateway maintenance enforces at startup and hourly, independently of
+`attachments.ttlHours`.
 
 ## Managed attachments and access
 

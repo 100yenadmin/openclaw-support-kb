@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "5fa21df951de4f57ca2c8ae86ee5dfbe8dce2fd33b1e388bb7b1a39954c68f97"
+source_hash: "95d8488ca97cefcbc02ff6636706259a10b003c3c7973d656dbf9823b6b71928"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -294,18 +294,13 @@ fly machine update <machine-id> --vm-memory 2048 -y
 
 Gateway refuses to start with "already running" errors after a container restart.
 
-The runtime lock files live at `<tmpdir>/openclaw-<uid>/gateway.<hash>.lock`
-and `gateway.state.<hash>.lock` (Linux:
-`/tmp/openclaw-<uid>/gateway.*.lock`), not on the persistent `/data` volume, so
-a full container restart normally clears them along with the rest of the
-container filesystem. If a lock survives (for example a `fly machine restart`
-that preserves the container filesystem) and blocks startup, remove it
-manually:
-
-```bash
-fly ssh console --command "rm -f /tmp/openclaw-*/gateway.*.lock"
-fly machine restart <machine-id>
-```
+With `OPENCLAW_STATE_DIR=/data`, the lock tree lives under
+`/data/tmp/openclaw-<uid>` and persists with the volume. OpenClaw normally
+reclaims stale owners automatically. If startup continues to report an owner,
+first use `fly status` and `fly logs` to verify that no other machine or Gateway
+process is using the volume. Do not delete the lock tree while an owner may
+still be running; see [Gateway lock](/gateway/gateway-lock) for the ownership
+and stale-recovery contract.
 
 ### Config not being read
 

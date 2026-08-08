@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Auth Configs"
 source: "https://docs.composio.dev/reference/api-reference/auth-configs.md"
-source_hash: "c398e26dff827553eb703f4b71cc48e0f83d55f241267daba01351803c260050"
+source_hash: "2186b64263c03c041dea042ff1e168f5a31314f401ba89ece73bb675b2cf73b0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/auth-configs.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Auth Configs (/reference/api-reference/auth-configs)
 Source: https://docs.composio.dev/reference/api-reference/auth-configs.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/auth-configs.mdx, not this file. */}
 
@@ -47,5 +49,14 @@ Most OAuth toolkits work out of the box with Composio managed auth. For the othe
 These endpoints use your project API key in the `x-api-key` header. Each auth config is addressed by its `nanoid`, and you can enable or disable one without deleting it.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/auth_configs` | [Create new authentication configuration](/reference/api-reference/auth-configs/postAuthConfigs) |
+| `GET` | `/api/v3.1/auth_configs` | [List authentication configurations with optional filters](/reference/api-reference/auth-configs/getAuthConfigs) |
+| `GET` | `/api/v3.1/auth_configs/{nanoid}` | [Get single authentication configuration by ID](/reference/api-reference/auth-configs/getAuthConfigsByNanoid) |
+| `PATCH` | `/api/v3.1/auth_configs/{nanoid}` | [Update an authentication configuration](/reference/api-reference/auth-configs/patchAuthConfigsByNanoid) |
+| `DELETE` | `/api/v3.1/auth_configs/{nanoid}` | [Delete an authentication configuration](/reference/api-reference/auth-configs/deleteAuthConfigsByNanoid) |
+| `PATCH` | `/api/v3.1/auth_configs/{nanoid}/{status}` | [Enable or disable an authentication configuration](/reference/api-reference/auth-configs/patchAuthConfigsByNanoidByStatus) |
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "ca1d7e97f901ae8b2748cba53d5dd3cd513df1d72842b53325e501b51136ba8b"
+source_hash: "417c3bb9cb33302e34b39f79e1679521a1614bd4a9f357da79f2fedf183e257c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -20,6 +20,11 @@ Health checks and quick fixes for the gateway, channels, plugins, skills, model 
 When Gateway status reports degraded SecretRef owners, doctor prints a **Secret runtime degradation** warning with every cold or stale owner, affected config path, redacted reason, and the `openclaw secrets reload` retry command.
 
 When channel ingress events are dead-lettered, doctor names each affected channel account and points to [`openclaw channels dead-letters list`](/cli/channels#inbound-dead-letters) for inspection and recovery.
+
+When the Gateway has exporter health facts, doctor reports the latest trusted
+per-signal state and transport under **Telemetry exporters**. The summary is
+redacted and does not include endpoint values, headers, certificates, payloads,
+or raw errors.
 
 Related:
 

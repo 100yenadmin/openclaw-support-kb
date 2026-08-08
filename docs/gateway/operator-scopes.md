@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "0628b35f53fd84a66d92d5a9edd5831ed06949a286672758242646d30318643e"
+source_hash: "34a56fdfcc7c83c9115db46930dab60bc868dc9454729f27d6931b5f821013a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -37,7 +37,7 @@ require the `node` role.
 
 | Scope                   | Meaning                                                                                                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `operator.read`         | Read-only status, lists, catalog, logs, session reads, and other non-mutating calls.                                                                          |
+| `operator.read`         | Read-only status, lists, catalog, logs, session reads, retained audit and execution-identity diagnostics, and other non-mutating calls.                       |
 | `operator.write`        | Mutating operator actions: sending messages, invoking tools, updating talk/voice settings, node command relay. Also satisfies `operator.read`.                |
 | `operator.admin`        | Administrative access. Satisfies every `operator.*` scope. Required for config mutation, updates, native hooks, reserved namespaces, and high-risk approvals. |
 | `operator.pairing`      | Device and node pairing management: list, approve, reject, remove, rotate, revoke.                                                                            |
@@ -84,12 +84,27 @@ independent of the connecting client's `client.id` or `client.mode`. Client
 identity can still affect connection and device-auth policy, but it neither
 grants nor removes session mutation authority.
 
+`audit.run.inspect` intentionally uses `operator.read`. Every client with that
+scope in a Gateway operator domain may receive the retained execution-identity
+context, including bounded pseudonymized references and secret-redacted display
+labels. `operator.read` is not a per-user or hostile multi-tenant privacy
+boundary. Operators who must keep this data separate need separate Gateway
+trust domains.
+
 ## Device pairing approvals
 
 Device pairing records are the durable source of approved roles and scopes.
 An already-paired device does not get broader access silently: a reconnect
 that asks for a broader role or broader scopes creates a new pending upgrade
 request.
+
+The explicit exception is the administrator-capable Control UI owner profile
+issued directly on the Gateway host by `openclaw dashboard` or graphical
+onboarding. Its short-lived, single-use bootstrap can approve the exact closed
+scope set for a fresh browser or upgrade an existing limited credential only
+when it binds to that same signed browser keypair. Generic Control UI and
+Telegram handoffs, mobile setup profiles, shared credentials, locality, and
+caller-selected scopes do not receive this exception.
 
 Approving a device request:
 

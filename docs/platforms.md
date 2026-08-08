@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Platforms"
 source: "https://docs.openclaw.ai/platforms"
-source_hash: "0c931a185cd8f0953eb1427a324840c25d71f76cae0e394d6536a3005c0ef682"
+source_hash: "7ae916a0d4f6b1a6d46c08943d28c951ca5eb6109002df89a82a1faf3009efcf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms.md"
@@ -25,11 +25,12 @@ Linux-compatible Gateway runtime.
 
 ## Choose your OS
 
-- macOS: [macOS](/platforms/macos)
-- iOS: [iOS](/platforms/ios)
 - Android: [Android](/platforms/android)
-- Windows: [Windows](/platforms/windows)
+- ChromeOS: [ChromeOS (Crostini)](/platforms/chromeos)
+- iOS: [iOS](/platforms/ios)
 - Linux: [Linux](/platforms/linux)
+- macOS: [macOS](/platforms/macos)
+- Windows: [Windows](/platforms/windows)
 
 ## VPS and hosting
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway lock"
 source: "https://docs.openclaw.ai/gateway/gateway-lock"
-source_hash: "bac867effc5e7251c9acf4bd562cd2afd31b0475df867300c77471181c025b8b"
+source_hash: "353604021d2c30b2a088590251cd7d4a2f2d6ecdc84370a8633d4bf7b12bb392"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/gateway-lock.md"
@@ -31,6 +31,9 @@ Each layer can fail independently and throws its own `GatewayLockError`.
 
 ### State and config locks
 
+- Lock files, SQLite coordinators, and transient reclaim guards live under
+  `$OPENCLAW_STATE_DIR/tmp/openclaw-<uid>` (or `openclaw` on platforms without
+  a user ID). An overridden state directory therefore owns its complete lock tree.
 - Lock liveness comes from the recorded PID, platform process start identity when available, and Gateway process identity. A verified owner remains authoritative during startup before its port begins listening.
 - A dedicated SQLite coordinator serializes metadata inspection, stale-owner reclamation, and lock replacement. Its exclusive transaction is released automatically if the owning process crashes.
 - If a lock file is missing or the recorded owner process is gone, startup reclaims the lock and continues.
@@ -57,6 +60,10 @@ Each layer can fail independently and throws its own `GatewayLockError`.
 
 On shutdown, the gateway closes the HTTP/WebSocket server and removes its state
 and config lock files.
+
+The state-local layout is a clean version boundary. Binaries from before this
+change use the process temp directory, so an old and new binary sharing one state
+directory during an upgrade do not exclude each other through these locks.
 
 ## Operational notes
 

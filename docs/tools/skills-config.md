@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "e2f989a7c925a45ad4cc463e589b338b85514b15e3df4dc5cca0af5bb6d54790"
+source_hash: "46e3e5f73de792d80c2a480a2641aab9ff6c15300b1309206ab82a3cf54fe724"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -173,16 +173,9 @@ ParamField
 
   Optional allowlist of directories that may contain the policy executable.
 
-ParamField
-
-  Bypasses command path ownership and permission checks. Use only when the
-  path is protected by another mechanism.
-
-ParamField
-
-  Allows the configured command path to be a symlink. The resolved target
-  must still satisfy the other path checks. Interpreter script arguments must
-  be direct regular files, not symlinks.
+The policy command and interpreter script arguments must be direct regular
+files with trusted ownership, restricted permissions, and verifiable parent
+directories. Symlinks and insecure paths are rejected.
 
 The policy receives one JSON object on stdin with `protocolVersion: 1`,
 `openclawVersion`, `targetType`, `targetName`, `sourcePath`, `sourcePathKind`,

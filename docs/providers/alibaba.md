@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Alibaba Model Studio"
 source: "https://docs.openclaw.ai/providers/alibaba"
-source_hash: "b89a1f4617246650ea2be26cac3b5514b0024cab0c95837199064f87b10d0ba0"
+source_hash: "fd7f601795ff5c584cd4cfbf6360f1f1dc6038596362e24c1661a1a820179994"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/alibaba.md"
@@ -95,15 +95,22 @@ Note
 
 ## Capabilities and limits
 
-All three modes share the same per-request video count and duration cap; only the input shape differs.
+Each model advertises only its matching runtime mode. Geometry also follows the
+vendor protocol for that model family instead of sending one generic parameter shape.
 
-| Mode               | Max output videos | Max input images | Max input videos | Max duration | Supported controls                                        |
-| ------------------ | ----------------- | ---------------- | ---------------- | ------------ | --------------------------------------------------------- |
-| Text-to-video      | 1                 | n/a              | n/a              | 10 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark` |
-| Image-to-video     | 1                 | 1                | n/a              | 10 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark` |
-| Reference-to-video | 1                 | n/a              | 4                | 10 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark` |
+| Mode                         | Max output videos | Reference limits                      | Max duration | Supported controls                                                   |
+| ---------------------------- | ----------------- | ------------------------------------- | ------------ | -------------------------------------------------------------------- |
+| Text-to-video                | 1                 | n/a                                   | 15 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark`            |
+| Image-to-video               | 1                 | 1 image                               | 15 s         | `resolution`, `audio`, `watermark`                                   |
+| Reference-to-video (Wan 2.6) | 1                 | 5 total images/videos; up to 3 videos | 10 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark`            |
+| Reference-to-video (Wan 2.7) | 1                 | 5 total images/videos; up to 3 videos | 10 s         | `size`, `aspectRatio`, `resolution`, `watermark`; audio is always on |
 
-A request that omits `durationSeconds` gets DashScope's accepted default of **5 seconds**. Set `durationSeconds` explicitly on the [video generation tool](/tools/video-generation) to extend up to 10 s.
+Wan 2.6 text/reference models translate `resolution` plus `aspectRatio` to the
+documented exact `size`. Wan 2.6 image-to-video sends the `resolution` tier and
+uses the input image's aspect ratio. Wan 2.7 reference-to-video sends the newer
+`media`, `resolution`, and `ratio` fields and always generates audio.
+
+A request that omits `durationSeconds` gets DashScope's accepted default of **5 seconds**.
 
 Warning
 

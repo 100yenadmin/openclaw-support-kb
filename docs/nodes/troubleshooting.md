@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node troubleshooting"
 source: "https://docs.openclaw.ai/nodes/troubleshooting"
-source_hash: "07c3426ab2a830ca564034e6a588085e862a3c93618b3e8afabb329096d2f449"
+source_hash: "5ddc8bdab322e818228d3fa758bd14a837905717f9882f1c2c7c838043997f51"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/troubleshooting.md"
@@ -14,6 +14,42 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/nodes/troubleshooting
 
 Use this page when a node is visible in status but node tools fail.
+
+## Node goes offline after SSH logout (Linux)
+
+On Linux, `openclaw node install` creates a **user-level** systemd service. The
+`systemd --user` instance is torn down when your last login session ends, so the
+node service stops the moment you log out — even though it looked healthy
+(`enabled` + `running`) while you were connected.
+
+Check lingering:
+
+```bash
+loginctl show-user "$USER" -p Linger
+```
+
+If it reads `Linger=no`, enable it (may require sudo):
+
+```bash
+sudo loginctl enable-linger "$USER"
+```
+
+Then restart the node service and verify it survives logout:
+
+```bash
+openclaw node restart
+# log out, then from another machine:
+openclaw nodes status
+```
+
+`openclaw node install` prints a warning with this recovery command when it
+detects lingering is disabled. Don't mix a user-level service with a
+system-level one for the same node. The duplicate-scope guard that prevents
+two managers from running the same unit name is enforced for gateway units
+(two supervisors on the same port SIGTERM each other in a restart loop); for
+node services the installer does not raise this guard, so a leftover unit in
+the other scope can leave the node in an ambiguous state. Fully remove one
+before switching.
 
 ## Command ladder
 

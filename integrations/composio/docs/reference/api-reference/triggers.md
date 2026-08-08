@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/api-reference/triggers.md"
-source_hash: "33a809f0e795b79938bfcd0e5f7cfd72885d53861443872b57853ab59f4a2097"
+source_hash: "f3bba020de516d2739635eb5b51cf8a1884800f9fe88b1e4ed81e84f4941e778"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/triggers.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Triggers (/reference/api-reference/triggers)
 Source: https://docs.composio.dev/reference/api-reference/triggers.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/triggers.mdx, not this file. */}
 
@@ -39,5 +41,15 @@ These endpoints authenticate with your project API key in the `x-api-key` header
 For the full concept overview, see [Triggers](/docs/triggers).
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/trigger_instances/{slug}/upsert` | [Create or update a trigger](/reference/api-reference/triggers/postTriggerInstancesBySlugUpsert) |
+| `GET` | `/api/v3.1/trigger_instances/active` | [List active triggers](/reference/api-reference/triggers/getTriggerInstancesActive) |
+| `DELETE` | `/api/v3.1/trigger_instances/manage/{triggerId}` | [Delete a trigger](/reference/api-reference/triggers/deleteTriggerInstancesManageByTriggerId) |
+| `PATCH` | `/api/v3.1/trigger_instances/manage/{triggerId}` | [Enable or disable a trigger](/reference/api-reference/triggers/patchTriggerInstancesManageByTriggerId) |
+| `GET` | `/api/v3.1/triggers_types/list/enum` | [List trigger type enums](/reference/api-reference/triggers/getTriggersTypesListEnum) |
+| `GET` | `/api/v3.1/triggers_types/{slug}` | [Get trigger type by slug](/reference/api-reference/triggers/getTriggersTypesBySlug) |
+| `GET` | `/api/v3.1/triggers_types` | [List trigger types](/reference/api-reference/triggers/getTriggersTypes) |
 
 ---

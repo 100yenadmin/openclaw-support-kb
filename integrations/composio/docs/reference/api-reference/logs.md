@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Logs"
 source: "https://docs.composio.dev/reference/api-reference/logs.md"
-source_hash: "0c9b86942ad7b423429617d0c5f27fef8e613aa570cc95629d4301295291fd31"
+source_hash: "81c55e0e40d9579361c9dc9cb29a4a3605494a8a71f414a8fac339ad3f4da206"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/logs.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Logs (/reference/api-reference/logs)
 Source: https://docs.composio.dev/reference/api-reference/logs.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/logs.mdx, not this file. */}
 
@@ -160,5 +162,10 @@ curl https://backend.composio.dev/api/v3.1/logs/tool_execution/log_-jRTWClpBoVo 
 ```
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/logs/tool_execution` | [Search and retrieve tool execution logs](/reference/api-reference/logs/postLogsToolExecution) |
+| `GET` | `/api/v3.1/logs/tool_execution/{id}` | [Get log details by ID](/reference/api-reference/logs/getLogsToolExecutionById) |
 
 ---

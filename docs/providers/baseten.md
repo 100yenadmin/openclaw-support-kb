@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Baseten"
 source: "https://docs.openclaw.ai/providers/baseten"
-source_hash: "8c8260a33f428989353943e5d8dfb5ffd77f6895ca351069a3bae11158e347cd"
+source_hash: "89e4ca2d0feb4d0fc17275e95d34211f457792bc3aa4d18394ad17f3f959f88a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/baseten.md"
@@ -90,7 +90,7 @@ Verify the live catalog
 }
 ```
 
-Use `/model baseten/thinkingmachines/inkling` to switch an existing chat.
+Use `/model baseten/thinkingmachines/inkling -s` to switch the current session.
 
 ## Bundled fallback catalog
 

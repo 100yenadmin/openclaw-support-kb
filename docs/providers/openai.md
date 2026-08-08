@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "17f8965875e685498a70a027a6654ad9872fe53dc7ade08ce13e686ae32176fb"
+source_hash: "70aeb5c1d5a1c8eea74d877601cf09dda5657ee47f29a1db61ec7c7aceaf26bb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -479,7 +479,7 @@ Note
     ```
 
     Use `--profile-id` for multiple Codex OAuth logins in the same agent, then
-    control them via auth ordering or `/model ...@<profileId>`:
+    control them via auth ordering or `/model ...@<profileId> -s`:
 
     ```bash
     openclaw models auth login --provider openai --profile-id openai:ritsuko

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "9f4575d6ded2e6ccb7e3c2735406317bd90ae1e71e7d11158b0d3ac15e528fc3"
+source_hash: "5a4495f519548d9a8bee7c40f71e9f8c434a90b0135919706119076461dc4fc0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -50,6 +50,10 @@ The important abstraction is `api_mode`.
 - Codex uses `codex_responses`.
 - Anthropic uses `anthropic_messages`.
 - A new non-OpenAI protocol usually means adding a new adapter and a new `api_mode` branch.
+
+### Tool-call wire format
+
+Hermes stores conversation history in the OpenAI chat-completions shape internally, so the `chat_completions` transport's `convert_messages` / `convert_tools` (`agent/transports/chat_completions.py`) are near-identity, and every other transport converts *from* that shape into its native protocol. The canonical reference for the shape — `tools` definitions with JSON-schema `parameters`, assistant `tool_calls` entries with stringified `function.arguments`, and `role: "tool"` result messages keyed by `tool_call_id` — is the [OpenAI chat completions API reference](https://platform.openai.com/docs/api-reference/chat/create). When you write a native adapter, that page defines the input side of your conversion; your provider's docs define the output side.
 
 ## Choose the implementation path first
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "90894966f4bfb8e36a677560937304961bd3575cfabdae9d2c27617712f6719a"
+source_hash: "ed27f4540ee9d2378e56c7f6f8e35cc568d615140b4560b6d0ea8714235c5cd8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -108,16 +108,10 @@ Plugin-bundled skills are listed in the agent's available skills when the
 plugin is enabled. The full skill instructions load on demand, so routine
 turns do not pay the full token cost.
 
-For “read this page and answer X,” use browser `action="extract"` with a
-`query`. It sends sanitized, bounded readable text through one model call and
-returns only the answer; keep `snapshot` for choosing actions and obtaining
-refs. Extraction requires a Playwright-backed profile and falls back to a
-snapshot workflow when it cannot complete.
-
-On large pages, pass `selector` to capture only the relevant CSS subtree and
-`ignoreSelectors` to remove repeated chrome before conversion. Pass a JSON
-`schema` when the caller needs validated machine-usable fields in
-`details.json`; without it, extraction remains a free-text answer.
+For page text, use a selector-scoped snapshot or `act:evaluate` that returns
+only the relevant text or structured data, then let the active agent model
+reason over that bounded result. Use efficient snapshots for controls and
+action discovery; they intentionally omit most non-interactive prose.
 
 ## Missing browser command or tool
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Scoped Project API Key"
 source: "https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md"
-source_hash: "4ae8abf9c31201d14dbcdd95d7c30d38e83ee50b9d1bf4aa102ff3d7a492ffec"
+source_hash: "709a20424480eafb13e625fbf251515ba8f21e4b7f51c84e24e8f7bd5cbb65b7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio/project-api-key-permissions.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Scoped Project API Key (/reference/authenticating-to-composio/project-api-key-permissions)
 Source: https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 [Video: Scoped Project API Key walkthrough](https://youtube.com/watch?v=ySMu9lljkWg)
 

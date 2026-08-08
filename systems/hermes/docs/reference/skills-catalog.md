@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bundled Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/skills-catalog"
-source_hash: "278294f1c2098db3fcbe28d60d2e73e9a2b883e03969a939b60461a8d8bfbccb"
+source_hash: "d0baf4a9e944b8f011ebcbee54e6ff82340ec8a8a97e6765a543285e2cfddc70"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/skills-catalog.md"
@@ -111,6 +111,7 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 | Skill | Description | Path |
 |-------|-------------|------|
 | [`airtable`](/docs/user-guide/skills/bundled/productivity/productivity-airtable) | Airtable REST API via curl. Records CRUD, filters, upserts. | `productivity/airtable` |
+| [`document-to-action-items`](/docs/user-guide/skills/bundled/productivity/productivity-document-to-action-items) | Extract cited obligations, deadlines, tasks from documents. | `productivity/document-to-action-items` |
 | [`docx`](/docs/user-guide/skills/bundled/productivity/productivity-docx) | Create, read, edit Word .docx documents and templates. | `productivity/docx` |
 | [`google-workspace`](/docs/user-guide/skills/bundled/productivity/productivity-google-workspace) | Gmail, Calendar, Drive, Docs, Sheets via gws CLI or Python. | `productivity/google-workspace` |
 | [`maps`](/docs/user-guide/skills/bundled/productivity/productivity-maps) | Geocode, POIs, routes, timezones via OpenStreetMap/OSRM. | `productivity/maps` |

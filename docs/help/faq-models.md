@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "5c5a55617c8c0a4939290648cb6505fcc3efe40f487449c2a8321738ac832dcd"
+source_hash: "618022cba61a6ac836bfbeb997fcb3c7a8aa7191095a9cca9c41d53d6abbfa20"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -60,7 +60,8 @@ How do I switch models without wiping my config?
 
     Change only the model fields — avoid full config replaces.
 
-    - `/model` in chat (per-session, see [Slash commands](/tools/slash-commands))
+    - `/model <model> -s` in chat (current session only; see [Slash commands](/tools/slash-commands))
+    - direct owner/admin `/model <model>` (current session plus a best-effort configured-default update request)
     - `openclaw models set ...` (updates just model config)
     - `openclaw configure --section model` (interactive)
     - edit `agents.defaults.model` in `~/.openclaw/openclaw.json` directly
@@ -102,22 +103,26 @@ Can I use self-hosted models (llama.cpp, vLLM, Ollama)?
 
 How do I switch models on the fly (without restarting)?
 
-    Send `/model <name>` as a standalone message. See
+    Send `/model <name> -s` as a standalone message for a temporary switch.
+    A direct owner/admin `/model <name>` without `-s` also requests a
+    best-effort configured-default update. See
     [Slash commands](/tools/slash-commands) for the
     full command list, including the numbered picker (`/model`, `/model
-    list`, `/model 3`), `/model default` to clear a session override, and
+    list`, `/model 3`), `/model default` to clear a session model override, and
     `/model status` for endpoint/API-mode detail.
 
     Force a specific auth profile per session with `@profile`:
 
     ```text
-    /model opus@anthropic:default
-    /model opus@anthropic:work
+    /model opus@anthropic:default -s
+    /model opus@anthropic:work -s
     ```
 
-    To unpin a profile set with `@profile`, re-run `/model` without the
-    suffix (e.g. `/model anthropic/claude-opus-4-6`), or pick the default from
-    `/model`. Use `/model status` to confirm the active auth profile.
+    A model selection without `@profile` preserves an existing compatible
+    profile pin. Choose another explicit `@profile` suffix to replace it. Use
+    `/model status` to inspect the active auth profile. `/model default` keeps
+    a compatible auth pin and clears one that does not match the configured
+    default provider.
 
 
 
@@ -256,7 +261,7 @@ Can I use MiniMax as my default and OpenAI for complex tasks?
     }
     ```
 
-    Then `/model gpt`.
+    Then `/model gpt -s`.
 
     **Option B: separate agents** — Agent A defaults to MiniMax, Agent B
     defaults to OpenAI; route by agent or use `/agent` to switch.
@@ -306,8 +311,9 @@ How do I define/override model shortcuts (aliases)?
     }
     ```
 
-    Then `/model sonnet` (or `/<alias>` when supported) resolves to that
-    model id.
+    Then `/model sonnet -s` resolves to that model id for the current session.
+    Omit `-s` only when an owner/admin also wants to request a configured-default
+    update.
 
 
 

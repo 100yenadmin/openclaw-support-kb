@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Rate Limits"
 source: "https://docs.composio.dev/reference/rate-limits.md"
-source_hash: "63f7dc5da20cd3b330f6b46ab43ba887529d51282e35a8f0536550273a273df2"
+source_hash: "7a7a3c2ce6e595ce4cfee7b74dd21f5cf00f91e335540207ef928ff9cb34d084"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/rate-limits.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Rate Limits (/reference/rate-limits)
 Source: https://docs.composio.dev/reference/rate-limits.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 Composio enforces rate limits **per organization** over a fixed one-minute window. Every authenticated endpoint draws from the same budget — tool execution, connected accounts, triggers, and the rest — so the limit below is your organization's total across all API calls.
 

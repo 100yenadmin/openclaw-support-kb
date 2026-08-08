@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "dfdef2f3668343054f2680da784bd3ae1f7879d7c1272715f67de495439347d4"
+source_hash: "43d964d9e8ea29fb0657b912a10561b280ccf459b163b2d3d6085828239ec5c8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -859,6 +859,14 @@ whether voice-style TTS should ask providers for a native `voice-note` target or
 keep normal `audio-file` synthesis, and whether the channel transcodes
 non-native output before sending.
 
+Telegram also advertises captioned final TTS. With `tts.mode: "final"` and
+Auto-TTS set to `always` (or eligible `inbound` mode), streamed text is held
+until synthesis finishes and sent as the voice-note caption. Text beyond
+Telegram's caption limit follows the voice note as a normal text message. If
+synthesis or a proven pre-send delivery step fails, OpenClaw sends the visible
+text instead. `tagged` mode keeps its normal streaming behavior, and text
+inside a `[[tts:text]]` block remains audio-only.
+
 After synthesis, OpenClaw persists batch TTS output in the media store under
 `tool-speech-synthesis`. The reply uses that stable media path instead of a
 provider temporary file, and normal media maintenance prunes expired output.
@@ -903,9 +911,11 @@ When `tts.auto` is enabled, OpenClaw:
 - Summarizes long replies when summaries are enabled, using
   `summaryModel` (or `agents.defaults.model.primary`).
 - Attaches the generated audio to the reply.
-- In `mode: "final"`, still sends audio-only TTS for streamed final replies
-  after the text stream completes; the generated media goes through the same
-  channel media normalization as normal reply attachments.
+- In `mode: "final"`, sends TTS after streamed text completes. Channels without
+  captioned-final support receive an audio-only supplement; Telegram puts text
+  within its caption limit on the voice note and sends overflow as follow-up
+  text. Generated media goes through the same channel media normalization as
+  normal reply attachments.
 
 If the reply exceeds `maxLength`, OpenClaw never skips audio outright:
 

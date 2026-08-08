@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio SDK — Notes for AI Code Generators"
 source: "https://docs.composio.dev/llms-full.txt"
-source_hash: "7f4407acec21b808c2af5cc50fd6c6912e6bdb32d4d747cb840193f2cb946c4a"
+source_hash: "ec107c21f22d74582cc67b0f2f025f33e5202b7daeac51e95283e666e56eff52"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "ai-code-generator-instructions.md"
@@ -62,6 +62,32 @@ Use `session.mcp.url` and `session.mcp.headers` with any MCP-compatible client (
 - Composio-managed auth is the default: the agent connects accounts at runtime through the session, so users don't need to pre-create auth configs or connected accounts for managed toolkits.
 - Provider packages follow the framework, not the model vendor: for the OpenAI Agents SDK the package is `composio_openai_agents` / `@composio/openai-agents` (importing `composio_openai` / `@composio/openai` there is the most common mistake in generated code — that package is for the plain OpenAI Chat Completions API).
 - **Direct execution** (`composio.tools.get()`, `composio.tools.execute()`, `provider.handle_tool_calls()`) is a fully supported lower-level interface: your code picks the tool, no runtime discovery. It fits deterministic workflows and scripts; sessions fit agents that decide at runtime. The tradeoffs are documented at https://docs.composio.dev/docs/sessions-vs-direct-execution. Note that direct execution requires a toolkit version (https://docs.composio.dev/docs/tools-direct/toolkit-versioning).
+
+---
+
+# 3. Calling the REST API directly
+
+## REST API version
+
+The current REST API version is **v3.1**, served at `https://backend.composio.dev/api/v3.1`. Prefer it for new code and new examples.
+
+`https://backend.composio.dev/api/v3` is the previous version. It is frozen with pinned tool-version defaults and remains supported — existing v3 integrations keep working and do not need to migrate.
+
+## Tool-endpoint version defaults on v3.1
+
+On v3.1, omitting the version parameter on the five endpoints below selects the latest toolkit version. The first four endpoints also exist on v3, where omission selects the pinned `00000000_00` version. `POST /tools/scopes/required` is v3.1-only.
+
+| Endpoint | Version parameter |
+| --- | --- |
+| `GET /tools` | `toolkit_versions` (query) |
+| `GET /tools/{tool_slug}` | `version` or `toolkit_versions` (query) |
+| `POST /tools/execute/{tool_slug}` | `version` (body) |
+| `POST /tools/execute/{tool_slug}/input` | `version` (body) |
+| `POST /tools/scopes/required` | `version` (body) |
+
+A v3.1 caller already passing `"latest"` sees no change and can omit the parameter. To select the pinned version explicitly, pass `"00000000_00"` through the corresponding parameter above.
+
+This version-default change is limited to the five endpoints above.
 
 
 ---

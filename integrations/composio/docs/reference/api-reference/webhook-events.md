@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Events"
 source: "https://docs.composio.dev/reference/api-reference/webhook-events.md"
-source_hash: "c62e81499bab3dedea9ddb15056f170ff6fd6e5f25c2537b12f28cd111590941"
+source_hash: "8619a384c65ce6d915ed0cec4e401194dedf4762d5def49f900d6e35c7956e14"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-events.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Webhook Events (/reference/api-reference/webhook-events)
 Source: https://docs.composio.dev/reference/api-reference/webhook-events.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from openapi-webhooks.json. Edit the overview at api-overviews/webhook-events.mdx, not this file. */}
 

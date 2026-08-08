@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "92c597c4f734e9bd9f0cd04a8086cf79a126187fbe2996dd1b748b55d7889c46"
+source_hash: "0e468d4411f3f0e604da9f2095ba255358beda6e66699ab1886ed05c57c305d5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -63,6 +63,25 @@ hermes chat --verbose
 hermes -w                         # Interactive mode in worktree
 hermes -w -z "Fix issue #123"     # Single query in worktree
 ```
+
+### Plugin management
+
+The `hermes plugins` commands manage native Hermes plugins and portable Agent
+Plugins v1 packages through the same opt-in workflow:
+
+```bash
+hermes plugins install owner/repository --no-enable
+hermes plugins list
+hermes plugins enable <plugin-name>
+hermes plugins disable <plugin-name>
+hermes plugins update <plugin-name>
+hermes plugins remove <plugin-name>
+```
+
+Portable packages remain disabled until explicitly enabled. Hermes currently
+loads portable Agent Skills and stdio MCP entries. See the
+[plugin developer guide](/developer-guide/plugins#portable-agent-plugins-v1-packages)
+for the exact supported subset and trust boundary.
 
 ## Interface Layout
 

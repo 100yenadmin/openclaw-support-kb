@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "1a577a590662005999344ba96f3538247e824ed1ae4c9f1b37500032d75e3d99"
+source_hash: "63c0d96d54fbff9968f17ded46d02c325589e7ac513cf2da5896fe12591ac09a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness.md"
@@ -72,10 +72,10 @@ channel is the communication surface.
 
 - The official `@openclaw/codex` plugin installed. Include `codex` in
   `plugins.allow` if your config uses an allowlist.
-- Codex app-server `0.146.0`. The plugin ships and manages `@openai/codex`
-  `0.146.0` by default, so a `codex` command on `PATH` does not affect normal
+- Codex app-server `0.146.1`. The plugin ships and manages `@openai/codex`
+  `0.146.1` by default, so a `codex` command on `PATH` does not affect normal
   startup. Explicit custom, remote, and macOS desktop-owned app-servers must
-  report the same exact stable `0.146.0` version.
+  report the same exact stable `0.146.1` version.
 - Node.js on the remote Codex app-server host when `remoteWorkspaceRoot` is set
   and cross-machine workspace attachments must be transferred.
 - Codex auth through `openclaw models auth login --provider openai`, an
@@ -1187,7 +1187,7 @@ instead of a plain OpenAI API-key failure.
 Doctor rewrites legacy model refs to `openai/*`, removes stale session and
 whole-agent runtime pins, and preserves existing auth-profile overrides.
 
-**The app-server is rejected:** use exactly stable Codex `0.146.0`. Older or
+**The app-server is rejected:** use exactly stable Codex `0.146.1`. Older or
 newer versions, prereleases, build-suffixed versions, and unversioned servers
 are rejected because OpenClaw validates generated schemas and runtime contracts
 against the Codex version it ships. Update or remove custom, remote, or desktop

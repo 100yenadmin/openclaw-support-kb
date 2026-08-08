@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "adcc40b3ea1750aaaa1d01e5c633edbd74b097762b9d96909e9eebb44005c33b"
+source_hash: "66933e6b3b0a8dc53c59db2d44760a50a3f76abc7b663cf75636ef4edfa8c36f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/hooks.md"
@@ -314,6 +314,14 @@ Plugin-managed internal hooks are different: they participate in this page's
 coarse command/lifecycle event system and show up in `openclaw hooks list` as
 `plugin:<id>`. Use those for side effects and compatibility with hook packs, not
 for ordered middleware or policy gates.
+
+The legacy Plugin SDK `api.registerHook` registers into the internal event
+system only (`command:new`, `gateway:startup`, `message:received`, ...). Typed
+lifecycle event names such as `before_tool_call`, `message_received`, or
+`session_start` are dispatched exclusively by the typed hook runner and are
+**not** invoked through `registerHook`. Registering a typed name with
+`registerHook` emits a registration warning pointing to the public `api.on(...)`
+API as the replacement; it never silently no-ops.
 
 For the complete plugin hook reference, see [Plugin hooks](/plugins/hooks).
 

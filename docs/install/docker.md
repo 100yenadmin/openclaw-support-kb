@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "0952ab7e96b46b21651c346461b2d25f23a1945fc4b2324f75a15a651720fb6f"
+source_hash: "5382ab3c84883b9d7a438a11cb61742abdf162720aa64031a87f80b311045963"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -190,7 +190,8 @@ Optional variables accepted by `scripts/docker/setup.sh` (and, for the gateway c
 | `OPENCLAW_DISABLE_BUNDLED_SOURCE_OVERLAYS`      | Disable bundled plugin source bind-mount overlays                                                                 |
 | `OTEL_EXPORTER_OTLP_ENDPOINT`                   | Shared OTLP/HTTP collector endpoint for OpenTelemetry export                                                      |
 | `OTEL_EXPORTER_OTLP_*_ENDPOINT`                 | Signal-specific OTLP endpoints for traces, metrics, or logs                                                       |
-| `OTEL_EXPORTER_OTLP_PROTOCOL`                   | OTLP protocol override. Only `http/protobuf` is supported today                                                   |
+| `OTEL_EXPORTER_OTLP_PROTOCOL`                   | Shared OTLP protocol fallback. Only `http/protobuf` is supported today                                            |
+| `OTEL_EXPORTER_OTLP_*_PROTOCOL`                 | Signal-specific protocol fallback for traces, metrics, or logs; wins over the shared fallback                     |
 | `OTEL_SERVICE_NAME`                             | Service name used for OpenTelemetry resources                                                                     |
 | `OTEL_SEMCONV_STABILITY_OPT_IN`                 | Opt in to latest experimental GenAI semantic attributes                                                           |
 | `OPENCLAW_OTEL_PRELOADED`                       | Skip starting a second OpenTelemetry SDK when one is preloaded                                                    |

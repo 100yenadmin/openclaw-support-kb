@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "f3defe76fe956385783530fb6863ff7377c0b4691dd908634f7b6f97d7a2f752"
+source_hash: "2e048009c7a7be3a632069f76ca96eadbca1eceba011e7df4519dba24febbe5c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
@@ -249,7 +249,7 @@ reconciliation so OpenClaw does not override that selection.
 
 ## Remote marketplaces
 
-Codex 0.146.0 can read and install Computer Use plugins from discovered remote
+Codex 0.146.1 can read and install Computer Use plugins from discovered remote
 marketplaces. OpenClaw passes the opaque remote plugin ID returned by Codex to
 `plugin/read` and `plugin/install`; a human-readable plugin name is not a valid
 substitute.

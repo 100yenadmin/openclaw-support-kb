@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/reference/api-reference/connected-accounts.md"
-source_hash: "f70c618ba12f27001ed99ed4d08f02f86f3f24ae7b0aefbf85ea71a5c675ef30"
+source_hash: "4fe744cf1f5298431b3a18b26e2c378f7dd0f2cb8715798b060d48fdce799677"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/connected-accounts.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Connected Accounts (/reference/api-reference/connected-accounts)
 Source: https://docs.composio.dev/reference/api-reference/connected-accounts.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/connected-accounts.mdx, not this file. */}
 
@@ -53,5 +55,18 @@ Turn it on in the dashboard under **Settings → General → Configuration**. Th
 > Connections you start from the dashboard can't complete while a verifier URL is set. A dashboard connection is owned by a Composio dashboard user, which isn't one of your app's users and isn't disclosed to your endpoint, so your app can't report a matching `user_id`. Test from your own app, or clear the verifier URL while you work in the dashboard.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/connected_accounts/{nanoid}/revoke` | [Revoke a connected account at the provider](/reference/api-reference/connected-accounts/postConnectedAccountsByNanoidRevoke) |
+| `POST` | `/api/v3.1/connected_accounts/complete_auth` | [Complete a deferred OAuth connection after identity verification](/reference/api-reference/connected-accounts/postConnectedAccountsCompleteAuth) |
+| `GET` | `/api/v3.1/connected_accounts` | [List connected accounts with optional filters](/reference/api-reference/connected-accounts/getConnectedAccounts) |
+| `POST` | `/api/v3.1/connected_accounts` | [Create a new connected account](/reference/api-reference/connected-accounts/postConnectedAccounts) |
+| `GET` | `/api/v3.1/connected_accounts/{nanoid}` | [Get connected account details by ID](/reference/api-reference/connected-accounts/getConnectedAccountsByNanoid) |
+| `DELETE` | `/api/v3.1/connected_accounts/{nanoid}` | [Delete a connected account](/reference/api-reference/connected-accounts/deleteConnectedAccountsByNanoid) |
+| `PATCH` | `/api/v3.1/connected_accounts/{nanoid}` | [Update a connected account](/reference/api-reference/connected-accounts/patchConnectedAccountsByNanoid) |
+| `PATCH` | `/api/v3.1/connected_accounts/{nanoId}/status` | [Enable or disable a connected account](/reference/api-reference/connected-accounts/patchConnectedAccountsByNanoIdStatus) |
+| `POST` | `/api/v3.1/connected_accounts/{nanoid}/refresh` | [Re-initiate authentication for a connected account (DEPRECATED) (Legacy)](/reference/api-reference/connected-accounts/postConnectedAccountsByNanoidRefresh) |
+| `POST` | `/api/v3.1/connected_accounts/link` | [Create a new auth link session](/reference/api-reference/connected-accounts/postConnectedAccountsLink) |
 
 ---

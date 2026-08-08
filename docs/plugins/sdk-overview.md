@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK overview"
 source: "https://docs.openclaw.ai/plugins/sdk-overview"
-source_hash: "5ef7493b79b28a2e411cb126a2dec2dedee2759e12236a1b243a0e65f7332e89"
+source_hash: "0ac57e990b22867081c8603e71b045e9215903b6f47f301917d270ecf11d8aa1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-overview.md"
@@ -625,6 +625,15 @@ For an end-to-end authoring guide, see
 | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `api.registerContextEngine(id, factory)`   | Context engine (one active at a time). Declare accepted host-added lifecycle fields with `info.acceptedHostParams`; undeclared engines receive the legacy field set through 2026-08-12, then receive all current host fields. |
 | `api.registerMemoryCapability(capability)` | Unified memory capability                                                                                                                                                                                                     |
+
+To participate in durable admitted turns, context engines must declare
+`currentTurnFence: "before-current-turn-entry-v1"` and
+`turnAdvancementIdempotency: "atomic-idempotent-v1"` under
+`info.transcriptSemantics`, then implement `commitTurn(...)` as an atomic,
+idempotent write keyed by `advancementKey`. Without the full contract, OpenClaw
+uses the legacy context path for the whole logical turn and its retries, leaves
+the configured engine unchanged, and tries that engine again on the next
+logical turn.
 
 ### Deprecated memory embedding adapters
 

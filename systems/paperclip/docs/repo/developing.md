@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "a82faf8b68dc2a6ae6b1db15d1af24e7001f96b046826bf662bbdaaf5dc81ac1"
+source_hash: "b5b892524a46379cba3717ef4b865dae6d698689d89f495fff85379c94b596c2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -489,6 +489,7 @@ The default `worktree init` still seeds eagerly and writes `seed-complete` immed
 
 - `pnpm paperclipai worktree ensure-seeded` performs the deferred seed **exactly once**. It is lock-guarded and idempotent: a present `seed-complete` marker or a missing `seed-pending` marker short-circuits it, so it is safe to call repeatedly and from concurrent processes. It reads the source instance from the `seed-pending` marker unless you pass `--from-config`.
 - `paperclipai run` calls `ensureWorktreeSeeded` automatically before doctor/boot, so `run` transparently seeds a lean worktree on first launch.
+- Managed git-worktree runtime startup also runs `scripts/provision-worktree-runtime.sh` automatically when a legacy workspace policy has no explicit runtime provision command and the worktree is still `seed-pending`. An explicitly configured runtime provision command always takes precedence.
 - Worktrees created before lazy seeding shipped have neither marker; they are treated as already-seeded for backward compatibility (never re-cloned).
 
 **Seed-pending guard.** `pnpm dev` (the dev-runner) refuses to boot a worktree whose database is still `seed-pending` and points you at the fix:

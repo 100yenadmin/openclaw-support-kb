@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool-loop detection"
 source: "https://docs.openclaw.ai/tools/loop-detection"
-source_hash: "595c925d93995862d0564e1720897190c04f2021a986d8e26e107a0735736d17"
+source_hash: "02ed5d8471d87557b16b8da5419a5e8165504b639971b61b3ba5780e3e87c550"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/loop-detection.md"
@@ -135,8 +135,13 @@ spend and lockups while preserving normal tool access.
 
 - Warnings come first.
 - Blocking follows once a pattern persists past the warning threshold.
-- Critical thresholds block the next tool-cycle and surface a clear
-  loop-detection reason in the run record.
+- In the embedded agent loop, the first critical loop blocks the whole tool
+  batch before any tool in that batch runs. The model then gets one more
+  response with its normal tools.
+- During that response, the model can answer, ask a question, or continue with
+  a different tool or different arguments.
+- Another critical loop in the same run blocks its whole batch and ends the
+  run. A new user run starts with a fresh recovery allowance.
 - The post-compaction guard emits `compaction_loop_persisted` errors naming
   the offending tool and identical-call count.
 

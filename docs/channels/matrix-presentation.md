@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix presentation metadata"
 source: "https://docs.openclaw.ai/channels/matrix-presentation"
-source_hash: "f65b21425b06b8fe4ecf0655794faccb9611bf45af137b634f16c26f4065c7d9"
+source_hash: "027bf6fb46f81a3201765a3dd285fb91c2f3b0de8d8fbd9df992d5fcf5117152"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix-presentation.md"
@@ -35,7 +35,7 @@ Stock Matrix clients keep rendering the plain text `body`. OpenClaw-aware client
         "options": [
           {
             "label": "DeepSeek",
-            "value": "/model deepseek/deepseek-chat"
+            "value": "/model deepseek/deepseek-chat -s"
           }
         ]
       }
@@ -76,7 +76,7 @@ The Matrix outbound adapter advertises native support for:
 
 This metadata does not add Matrix callback semantics. Button and select values are fallback interaction payloads, usually slash commands or text commands. A Matrix client that wants to support interaction resolves the control value (`action.command`, then `action.value`, then `value`) and sends it back to the room as a normal message.
 
-For example, a button with value `/model deepseek/deepseek-chat` can be handled by sending that value as an encrypted Matrix text message in the same room.
+For example, a button with value `/model deepseek/deepseek-chat -s` can be handled by sending that value as an encrypted Matrix text message in the same room. The explicit session flag prevents a presentation control from requesting a configured-default update.
 
 ## Relationship to approval metadata
 

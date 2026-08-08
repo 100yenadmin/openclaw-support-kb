@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "b2e6cb039f5a90501a4aca2e63dbc30a67b0fc6a72053801d600b4de292d0eeb"
+source_hash: "0c7800d075b49492d309aba262c370c83a6bc10548ba24986ee837ef502172d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -156,7 +156,11 @@ export default function register(api) {
       id: "my-engine",
       name: "My Context Engine",
       ownsCompaction: true,
-      acceptedHostParams: ["sessionKey"],
+      acceptedHostParams: ["sessionKey", "runtimeContext"],
+      transcriptSemantics: {
+        currentTurnFence: "before-current-turn-entry-v1",
+        turnAdvancementIdempotency: "atomic-idempotent-v1",
+      },
     },
 
     async ingest({ sessionId, message, isHeartbeat }) {
@@ -187,6 +191,16 @@ export default function register(api) {
     async compact({ sessionId, force }) {
       // Summarize older context
       return { ok: true, compacted: true };
+    },
+
+    async commitTurn({ advancementKey, messages, prePromptMessageCount }) {
+      // Atomically store the accepted turn and advancementKey. Return
+      // "duplicate" when that exact key was committed by an earlier retry.
+      return await commitAcceptedTurn({
+        advancementKey,
+        messages,
+        prePromptMessageCount,
+      });
     },
   }));
 }
@@ -234,6 +248,26 @@ the fields available for each lifecycle method, so undeclared or unknown keys
 are never injected. Engines without this declaration receive the pre-host-field
 legacy parameter set through 2026-08-12; after that date, undeclared engines
 receive every current host field.
+
+For durable admitted turns, declare both transcript semantics:
+
+- `currentTurnFence: "before-current-turn-entry-v1"`
+- `turnAdvancementIdempotency: "atomic-idempotent-v1"`
+
+and implement `commitTurn(...)` as one atomic, idempotent write keyed by
+`advancementKey`. Return `{ status: "committed" }` for the first write and
+`{ status: "duplicate" }` when a host retry presents an already-committed key.
+Pre-turn transcript reads during bootstrap, maintenance, assembly, and retries
+then see the exact transcript prefix before the admitted user message. The host
+calls `commitTurn` only for the accepted successful turn; failed or aborted
+turns do not advance context-engine state.
+
+Without the full declaration and method, OpenClaw uses the legacy context path
+for the whole logical turn, including retries. The configured context-engine
+slot is not changed, and OpenClaw tries the configured engine again on the next
+logical turn. The same turn-local degradation applies if a declared fence
+cannot be honored because its exact admitted message is missing, rewritten, or
+already crossed by a transcript cursor.
 
 `assemble` returns an `AssembleResult` with:
 

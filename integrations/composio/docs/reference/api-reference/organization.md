@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Organization"
 source: "https://docs.composio.dev/reference/api-reference/organization.md"
-source_hash: "f475104582c887160555538688211bf245b68a6c3e495ce7f1b498bdba9c414d"
+source_hash: "ab3ef59f9a36ce048f0d438856a0efa914e771979c76df5651780a716893b662"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/organization.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Organization (/reference/api-reference/organization)
 Source: https://docs.composio.dev/reference/api-reference/organization.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/organization.mdx, not this file. */}
 
@@ -207,5 +209,10 @@ curl -X POST https://backend.composio.dev/api/v3.1/project/usage/tool_calls \
 ```
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/org/usage/summary` | [Org usage summary](/reference/api-reference/organization/postOrgUsageSummary) |
+| `POST` | `/api/v3.1/org/usage/{entity_type}` | [Org usage breakdown](/reference/api-reference/organization/postOrgUsageByEntityType) |
 
 ---

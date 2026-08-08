@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "9d0c0dff3cc94945315eaeeece895b06d49aeeaf2e1fbfc3c7c5a4c66c869423"
+source_hash: "eacf47da7ae8ba8f39807b74b90618e1f07590edac8f58e29ecb8f73ef8df185"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-failover.md"
@@ -83,7 +83,7 @@ Opt in to suppress repeat auth failures with:
 OPENCLAW_FALLBACK_SKIP_TTL_MS=60000
 ```
 
-When enabled, OpenClaw records an in-memory, session-scoped skip marker for a non-primary fallback candidate after an auth-class failure, keyed by session id, provider, and model. Primary candidates are never skipped, so an explicit user model selection still surfaces the real auth error. The cache is process-local and clears on Gateway restart.
+When enabled, OpenClaw records an in-memory, session-scoped skip marker for a non-primary fallback candidate after an auth-class failure. The key includes the session, provider, model, and selected automatic or explicit profile ID. Switching profiles does not inherit another profile's failure marker. Primary candidates are never skipped, so an explicit user model selection still surfaces the real auth error. The cache is process-local and clears on Gateway restart.
 
 The value is a TTL in milliseconds. `0` or unset disables the cache. Positive values are clamped between 1 second and 10 minutes.
 
@@ -164,17 +164,17 @@ If no explicit order is configured, OpenClaw uses a round-robin order:
 
 ### Session stickiness (cache-friendly)
 
-OpenClaw **pins the chosen auth profile per session** to keep provider caches warm. It does **not** rotate on every request. The pinned profile is reused until:
+OpenClaw **pins the automatically chosen auth profile per session** to keep provider caches warm. It does **not** rotate on every request. An automatic pin may rotate or clear when:
 
 - the session is reset (`/new` / `/reset`)
 - a compaction completes (compaction count increments)
 - the profile is in cooldown/disabled
 
-Manual selection via `/model …@<profileId>` sets a **user override** for that session and is not auto-rotated until a new session starts.
+Manual selection via `/model …@<profileId> -s` sets a **user override**. A valid user pin survives `/new`, `/reset`, session rollover, compaction, and cooldown windows. OpenClaw clears it when the profile disappears, no longer matches the selected provider, or the user selects another explicit profile. `/model default -s` clears the model override while retaining a compatible auth pin and clearing an incompatible one.
 
 Note
 
-Auto-pinned profiles (selected by the session router) are treated as a **preference**: they are tried first, but OpenClaw may rotate to another profile on rate limits/timeouts. When the original profile becomes available again, new runs can prefer it again without changing the selected model or runtime. User-pinned profiles stay locked to that profile; if it fails and model fallbacks are configured, OpenClaw moves to the next model instead of switching profiles.
+Auto-pinned profiles (selected by the session router) are treated as a **preference**: they are tried first, but OpenClaw may rotate to another profile on rate limits/timeouts. When the original profile becomes available again, new runs can prefer it again without changing the selected model or runtime. User-pinned profiles stay locked on eligible same-provider candidates. A retained pin on the configured default can still move through configured model fallbacks; an explicit user model selection remains strict and reports failure instead.
 
 ### OpenAI Codex subscription plus API-key backup
 
@@ -199,6 +199,8 @@ Use a user-pinned profile only when you want to force one account/key for that s
 ## Cooldowns
 
 When a profile fails due to auth/rate-limit errors (or a timeout that looks like rate limiting), OpenClaw marks it in cooldown and moves to the next profile.
+
+CLI-backed runtimes settle profile health only after their resume, fork, and fresh-session recovery attempts finish. A terminal credential failure cools down the exact selected profile before model fallback; a successful run clears stale failure state. Transcript, format, context, pre-provider timeout, and ambient CLI failures without a selected profile do not change shared profile health.
 
 AccordionGroup
 

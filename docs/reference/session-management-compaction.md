@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "0e56d31e948853c49ce56a374865a4817eefbfed50c1b5642cabf31cea5f926c"
+source_hash: "a7cd089232dc447e8861eac58c5f6dbdf817157311b29dfa56f7c280b816cc97"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -56,7 +56,7 @@ Per agent, on the Gateway host (resolved via `src/config/sessions.ts`):
 | `pruneAfter`            | `"30d"`               | stale-entry age cutoff                                                                      |
 | `maxEntries`            | `500`                 | cap on session entries                                                                      |
 | `resetArchiveRetention` | keep (no age cutoff)  | age cutoff for `*.reset.*`/`*.deleted.*` transcript archives; a duration opts into deletion |
-| `maxDiskBytes`          | `10gb`                | per-agent sessions disk budget; `false` disables                                            |
+| `maxDiskBytes`          | `10gb`                | per-agent sessions disk budget; `false`, `0`, or `"0"` disables                             |
 | `highWaterBytes`        | 80% of `maxDiskBytes` | target after budget cleanup                                                                 |
 
 Reset advances the live `sessionKey -> sessionId` mapping but keeps the previous SQLite session, transcript, trajectory, and search rows. That history remains searchable under the same session key; ordinary entry and session lists show only the new live mapping. Retained reset history is bounded by the disk budget, not by `resetArchiveRetention`, which only ages archive artifacts. Explicit deletion is different: it writes and verifies a compressed transcript archive (`*.jsonl.deleted.<timestamp>.zst` when zstd is available) before removing the deleted session's rows.

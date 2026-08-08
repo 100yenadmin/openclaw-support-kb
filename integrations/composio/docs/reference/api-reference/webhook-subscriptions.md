@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md"
-source_hash: "382aa9408ef6b17ab5853ef481244afe0b1a1b24728febb04a5bccced257cb2f"
+source_hash: "47a67919f4d865334cbd92e84d89bfa583fd9445af7792abc07b64fac907d8a0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-subscriptions.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Webhook Subscriptions (/reference/api-reference/webhook-subscriptions)
 Source: https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/webhook-subscriptions.mdx, not this file. */}
 
@@ -147,5 +149,21 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 > Always [verify webhook signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures) before processing events in production.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `POST` | `/api/v3.1/webhook_subscriptions` | [Create webhook subscription](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptions) |
+| `GET` | `/api/v3.1/webhook_subscriptions` | [List webhook subscriptions](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptions) |
+| `GET` | `/api/v3.1/webhook_subscriptions/{id}` | [Get webhook subscription](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptionsById) |
+| `PATCH` | `/api/v3.1/webhook_subscriptions/{id}` | [Update webhook subscription](/reference/api-reference/webhook-subscriptions/patchWebhookSubscriptionsById) |
+| `DELETE` | `/api/v3.1/webhook_subscriptions/{id}` | [Delete webhook subscription](/reference/api-reference/webhook-subscriptions/deleteWebhookSubscriptionsById) |
+| `POST` | `/api/v3.1/webhook_subscriptions/{id}/rotate_secret` | [Rotate webhook secret](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptionsByIdRotateSecret) |
+| `GET` | `/api/v3.1/webhook_subscriptions/event_types` | [List available event types](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptionsEventTypes) |
+
+---
+
+
+# Toolkits
+
 
 ---

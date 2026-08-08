@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen"
 source: "https://docs.openclaw.ai/providers/qwen"
-source_hash: "b2645ba9a96222f600e060da5bb44151c919775ba99a1ea7cac797cda19a2407"
+source_hash: "75c772a749092fc7716e13d2d60550e62dd7037710cc04f6ef126b5b596aa566"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qwen.md"
@@ -332,12 +332,23 @@ To make Qwen the default video provider:
 }
 ```
 
-Video-generation limits: 1 output video per request, up to 1 input image
-(image-to-video), up to 4 input videos (video-to-video), max 10 seconds
-duration. Supports `size`, `aspectRatio`, `resolution`, `audio`, and
-`watermark`. Reference image/video inputs require remote http(s) URLs; local
-file paths are rejected up front because the DashScope video endpoint does not
-accept uploaded local buffers for those references.
+Each Wan model advertises only its matching runtime mode:
+
+| Mode                         | Models                           | Reference limits                      | Max duration | Supported controls                                                   |
+| ---------------------------- | -------------------------------- | ------------------------------------- | ------------ | -------------------------------------------------------------------- |
+| Text-to-video                | `wan2.6-t2v`                     | n/a                                   | 15 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark`            |
+| Image-to-video               | `wan2.6-i2v`                     | 1 image                               | 15 s         | `resolution`, `audio`, `watermark`                                   |
+| Reference-to-video (Wan 2.6) | `wan2.6-r2v`, `wan2.6-r2v-flash` | 5 total images/videos; up to 3 videos | 10 s         | `size`, `aspectRatio`, `resolution`, `audio`, `watermark`            |
+| Reference-to-video (Wan 2.7) | `wan2.7-r2v`                     | 5 total images/videos; up to 3 videos | 10 s         | `size`, `aspectRatio`, `resolution`, `watermark`; audio is always on |
+
+Wan 2.6 text/reference models translate `resolution` plus `aspectRatio` to the
+documented exact `size`. Wan 2.6 image-to-video sends the `resolution` tier and
+uses the input image's aspect ratio. Wan 2.7 reference-to-video sends
+`media`, `resolution`, and `ratio` and always generates audio.
+
+Reference image/video inputs require remote http(s) URLs; local file paths are
+rejected up front because the DashScope video endpoint does not accept uploaded
+local buffers for those references.
 
 Note
 

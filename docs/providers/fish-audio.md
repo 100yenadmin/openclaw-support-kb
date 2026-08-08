@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fish Audio"
 source: "https://docs.openclaw.ai/providers/fish-audio"
-source_hash: "4f89c4bbf52eb0781966044528f3e52d782f9fcc5401c761673a6ba0e4fe22e3"
+source_hash: "d601a8df86728a21bdd74370b924960ce2ee9e4e049d335c25292d92f65da69b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fish-audio.md"
@@ -25,6 +25,15 @@ research, and non-commercial evaluation are allowed; commercial use requires a
 separate Fish Audio license. Hosted API use follows Fish Audio's service terms.
 
 ## Hosted S2.1
+
+Install the `fish-audio-speech` plugin:
+
+```bash
+openclaw plugins install @openclaw/fish-audio-speech
+```
+
+The plugin id is `fish-audio-speech`. The provider and TTS configuration id
+remain `fish-audio`.
 
 Set an API key from the [Fish Audio API Keys](https://fish.audio/app/api-keys) page:
 

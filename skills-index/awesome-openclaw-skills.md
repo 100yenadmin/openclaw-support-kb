@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "9f934b7a85ae85bd4e8cce1a815b2f0da5165b9a2c0d16792170e33c5ee30c45"
+source_hash: "42bf867b926c2f83bc4f93ed3dd139a873941e65ebefa0a28d6deb770624f603"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -70,7 +70,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [skywork-ppt](https://clawskills.sh/skills/gxcun17-skywork-ppt) - Generate, imitate, and edit PowerPoint presentations with skywork.
 - [skywork-music-maker](https://clawskills.sh/skills/gxcun17-skywork-music-maker) - Create professional music with Mureka AI.
 - [before-you-build](https://clawhub.ai/bin1874/before-you-build) - Review product risk before building.
-- [ditto-profile](https://clawhub.ai/ohad6k/ditto-profile) - Load your mined personal profile so agents work like you.
+- [emulo](https://clawhub.ai/ohad6k/emulo) - Load your mined personal profile so agents work like you.
 
 - [1p-shortlink](https://clawskills.sh/skills/tuanpmt-1p-shortlink) - Create short URLs and submit feature requests using 1p.io.
 - [2captcha](https://clawskills.sh/skills/adinvadim-2captcha) - Solve CAPTCHAs using 2Captcha service.
@@ -187,6 +187,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [skywork-design](https://clawskills.sh/skills/gxcun17-skywork-design) - Generate and edit images via Skywork Image for posters, logos and more.
 
 - [ai-video-remix](https://clawskills.sh/skills/abu-shotai-ai-video-remix) - AI-driven video remix from local library using ShotAI.
+- [modellix](https://clawhub.ai/modellix/modellix) - Unified API for AI image and video generation.
 
 - [alter-actions](https://clawskills.sh/skills/olivieralter-alter-actions) - Trigger Alter macOS app actions via x-callback-urls.
 - [apple-contacts](https://clawskills.sh/skills/tyler6204-apple-contacts) - Look up contacts from macOS Contacts.app.
@@ -366,6 +367,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [async-task](https://clawskills.sh/skills/enderfga-async-task) - Execute long-running tasks without HTTP timeouts.
 - [atlassian-mcp](https://clawskills.sh/skills/atakanermis-atlassian-mcp) - Run the Model Context Protocol (MCP) Atlassian server.
 - [boss-ai-agent](https://clawskills.sh/skills/tonypk-boss-ai-agent) - AI management middleware with 14 mentors and 9 culture packs.
+- [FlowBoard](https://clawhub.ai/rasimme/plugins/flowboard) - Persistent per-project context and Kanban for agents.
 
 - [4claw](https://clawskills.sh/skills/mfergpt-4claw) - 4claw  a moderated imageboard for AI agents.
 - [aap-passport](https://clawskills.sh/skills/ira-hash-aap-passport) - Agent Attestation Protocol - The Reverse Turing Test.
@@ -557,6 +559,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [english-learn-cards](https://clawskills.sh/skills/racymind-english-learn-cards) - Flashcard-based English vocabulary learning.
 - [expanso-cve-scan](https://clawskills.sh/skills/aronchick-expanso-cve-scan) - Scan SBOM for known CVE vulnerabilities.
 - [ezbookkeeping](https://clawskills.sh/skills/mayswind-ezbookkeeping) - ezBookkeeping is a lightweight, self-hosted personal finance app.
+- [first-principles](https://clawhub.ai/deciqai/first-principles) - Strip problems to foundational truths, then rebuild reasoning.
 - [fix-life-in-1-day](https://clawskills.sh/skills/evgyur-fix-life-in-1-day) - Fix your entire life in 1 day.
 - [founder-coach](https://clawskills.sh/skills/goforu-founder-coach) - AI-powered startup mindset coach that helps founders upgrade.
 

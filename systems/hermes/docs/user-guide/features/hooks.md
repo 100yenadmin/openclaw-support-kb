@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Event Hooks"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks"
-source_hash: "87cd2d53d412a648b362b346550634714f2dcc68fda23c312c88b7a7b8e892cb"
+source_hash: "a5ad95c6dce192c1c51c86778329c250faad6395a8fe2df77fd9b0df504ef0bc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/hooks.md"
@@ -1290,6 +1290,11 @@ def my_callback(
 **Return value:** Non-empty `str` to replace the response text, `None` or empty string to leave it unchanged. **First non-empty string wins** when multiple plugins register — mirroring `transform_tool_result`.
 
 **Use cases:** Apply a personality/vocabulary transform (pirate-speak, Spongebob), redact user-specific identifiers from the final text, append a project-specific signature footer, enforce a house style guide without burning tokens on SOUL instructions.
+
+When CLI streaming is enabled, an append-only transform is printed after the
+streamed body. A transform that replaces the response is printed in full after
+the streamed body, labeled as a post-stream transformation, so replacement
+content is never silently lost.
 
 ```python
 import os, re

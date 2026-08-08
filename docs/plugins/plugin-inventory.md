@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "7e6918e97fb43a3d501fc144352919205c42c4a7ca2f6820556bcb3ca675aa52"
+source_hash: "1759ce7ddb8d81dec4f37cbacaf9933b726e72a7affce56c553e7fcbe2f1fdab"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-inventory.md"
@@ -231,7 +231,7 @@ Each entry lists the package, distribution route, and description.
 
 - **[fireworks](/plugins/reference/fireworks)** (`@openclaw/fireworks-provider`) - npm; ClawHub: `clawhub:@openclaw/fireworks-provider`. Adds Fireworks model provider support to OpenClaw.
 
-- **[fish-audio](/plugins/reference/fish-audio)** (`@openclaw/fish-audio-speech`) - npm; ClawHub: `clawhub:@openclaw/fish-audio-speech`. Fish Audio S2.1 hosted text-to-speech with streaming, voice notes, and telephony output.
+- **[fish-audio-speech](/plugins/reference/fish-audio-speech)** (`@openclaw/fish-audio-speech`) - npm; ClawHub: `clawhub:@openclaw/fish-audio-speech`. Fish Audio S2.1 hosted text-to-speech with streaming, voice notes, and telephony output.
 
 - **[gmi](/plugins/reference/gmi)** (`@openclaw/gmi-provider`) - npm; ClawHub: `clawhub:@openclaw/gmi-provider`. OpenClaw GMI Cloud provider plugin.
 

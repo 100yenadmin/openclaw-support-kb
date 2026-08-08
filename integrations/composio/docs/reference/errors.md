@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Errors"
 source: "https://docs.composio.dev/reference/errors.md"
-source_hash: "1f6e67842f99941e228ad49ebdf954dc90ffffebd86b122cd6de088336012d7c"
+source_hash: "cf152e2ff1c064ac46704e9e31a07acac5d58432e126238dbcd35a47019183a9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/errors.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Errors (/reference/errors)
 Source: https://docs.composio.dev/reference/errors.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 Composio uses conventional HTTP response codes to indicate the success or failure of an API request. In general: codes in the `2xx` range indicate success, codes in the `4xx` range indicate an error with the information provided, and codes in the `5xx` range indicate an error with Composio's servers.
 

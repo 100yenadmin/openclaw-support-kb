@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Native Codex plugins"
 source: "https://docs.openclaw.ai/plugins/codex-native-plugins"
-source_hash: "c5f62ac21ee4248ace4ae8d5caf03dea0c24d5b057b27138e823fa07718c00ab"
+source_hash: "848365c8f8f2a25876ae3c0056cfdfc5b53ed4aae36952a22898acc91910b082"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-native-plugins.md"
@@ -27,8 +27,8 @@ working.
 - The agent runtime must be the native Codex harness.
 - `plugins.entries.codex.enabled` is `true`.
 - `plugins.entries.codex.config.codexPlugins.enabled` is `true`.
-- Codex app-server reports exactly stable `0.146.0`. The official plugin ships
-  `@openai/codex` `0.146.0`; custom, remote, and macOS desktop-owned binaries
+- Codex app-server reports exactly stable `0.146.1`. The official plugin ships
+  `@openai/codex` `0.146.1`; custom, remote, and macOS desktop-owned binaries
   must use the same exact version.
 - The target Codex app-server can see the expected marketplace, plugin, and
   app inventory.

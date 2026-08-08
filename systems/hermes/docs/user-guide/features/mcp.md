@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "60ce75ade6d04b19aacdb268f434f7b6c19052f91a689b791f4fbe6be586647f"
+source_hash: "69991a161333d2172117a7c73ab49a7a8bc9bacda6ee0f0d361dc1aad4c5a530"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -325,6 +325,25 @@ mcp_servers:
 
 You can also keep the cert and key fully separate via `client_cert` (combined PEM) plus an explicit `client_key`. Paths support `~` expansion; a missing file raises a clear, server-scoped error rather than an opaque TLS handshake failure.
 
+## Per-user identity header
+
+Remote HTTP/SSE MCP servers that key behavior on a caller identity (per-user rate limits, audit trails, multi-tenant routing) can be sent an identity header on every request via `identity_header`:
+
+```yaml
+mcp_servers:
+  team_api:
+    url: "https://mcp.team.example.com/mcp"
+    identity_header:
+      name: "X-User-Id"
+      value_from: "static"   # "static" (default) or "profile"
+      value: "alice"         # required for static
+```
+
+- `value_from: static` sends the literal `value` from config.yaml.
+- `value_from: profile` sends the active Hermes profile name, resolved once at connect time — useful when multiple profiles on one machine talk to the same server and it needs to tell them apart.
+
+An explicit entry in the server's `headers` mapping with the same name (any casing) always wins; the identity header never overrides your own header config. Invalid `identity_header` blocks are warned about and ignored — they never block the server from connecting. On stdio servers the key is ignored with a warning (stdio transports have no headers).
+
 ## Basic configuration reference
 
 Hermes reads MCP config from `~/.hermes/config.yaml` under `mcp_servers`.
@@ -340,6 +359,7 @@ Hermes reads MCP config from `~/.hermes/config.yaml` under `mcp_servers`.
 | `headers` | mapping | HTTP headers for remote servers |
 | `client_cert` | string \| list | Client certificate for mTLS — a combined PEM path, or `[cert, key]` / `[cert, key, password]` |
 | `client_key` | string | Client private-key PEM path (when separate from `client_cert`) |
+| `identity_header` | mapping | Optional per-user identity header for HTTP/SSE servers — `{name, value_from: static\|profile, value}` |
 | `timeout` | number | Tool call timeout |
 | `connect_timeout` | number | Initial connection timeout (also bounds the MCP `initialize` handshake) |
 | `idle_timeout_seconds` | number | Recycle a stdio server after this many seconds without a tool call (`0` = never, default). The server restarts transparently on the next tool call. |

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "0fbf4d735de2c0205016f7e359b48199b66c0c3656b054c145cacfdcc4213b31"
+source_hash: "3df8f46266fe33ac2f924ea30e9ae272349c896a477695bf64fb1703a78b6097"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -86,6 +86,15 @@ Inbound receivers that defer platform acknowledgements should declare
 `message.receive.defaultAckPolicy` and `supportedAckPolicies` instead of hiding
 ack timing in monitor-local state. Cover every declared policy with
 `verifyChannelMessageReceiveAckPolicyAdapterProofs(...)`.
+
+### TTS voice delivery
+
+Declare native voice-note behavior under `capabilities.tts.voice`. Set
+`synthesisTarget: "voice-note"` when TTS providers should produce a native
+voice-note format. Set `captionedFinalText: true` only when the outbound voice
+operation accepts visible final text and enforces its transport's caption and
+overflow rules. Core then holds final-mode streamed text for that operation and
+falls back to text when the voice payload is proven unsent.
 
 Legacy reply helpers such as `dispatchInboundReplyWithBase` and
 `recordInboundSessionAndDispatchReply` remain available for compatibility

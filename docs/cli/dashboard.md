@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dashboard"
 source: "https://docs.openclaw.ai/cli/dashboard"
-source_hash: "bede41a3db1d9a271ab1054df126bf4c9cbd1da46a6f5f482499a923fd65128a"
+source_hash: "fc89464cbdb6faebea10b48590db425d553257d5bc4f37d18b522fcea87ddb91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/dashboard.md"
@@ -15,9 +15,10 @@ Source: https://docs.openclaw.ai/cli/dashboard
 
 # `openclaw dashboard`
 
-Open the Control UI with a short-lived, one-time browser pairing link. A successful handoff leaves
-that browser with its own durable device credential, so reopening the dashboard does not depend on
-the shared Gateway token.
+Open the Control UI with a short-lived, one-time owner pairing link. A successful handoff gives that
+signed browser a durable administrator device credential, so reopening the dashboard does not depend
+on the shared Gateway token. Opening a fresh handoff in the same browser can also repair a previously
+limited device credential.
 
 ```bash
 openclaw dashboard
@@ -50,7 +51,7 @@ Notes:
 - Resolves configured `gateway.auth.token` SecretRefs when possible.
 - `browserUrl` carries a single-use, ten-minute bootstrap in the URL fragment. The Control UI strips
   it immediately, binds it to the browser's signed device identity, and stores only the resulting
-  per-device credential.
+  administrator per-device credential. Another browser profile cannot inherit or replay that grant.
 - Follows `gateway.tls.enabled`: TLS-enabled gateways print/open `https://` Control UI URLs and connect over `wss://`.
 - For `lan` or a wildcard `custom` bind, same-host launches always use loopback because a wildcard is not a browser destination. Plaintext `tailnet` and `custom` binds also use `127.0.0.1` so the browser has a secure context; TLS-enabled specific hosts keep the configured address so certificate names match.
 - Before delivering an authenticated loopback URL for a specific-interface bind, the command probes the configured interface and verifies that it and `127.0.0.1` are owned by the same Gateway process. Ambiguous listener ownership fails closed with status guidance.

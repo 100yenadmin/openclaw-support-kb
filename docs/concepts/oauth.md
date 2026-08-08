@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "ee80af52c50b36e56f358f5a309e55ed145abff383a9fd0a1ec6e10285b226e9"
+source_hash: "2026295d552d2bdee3ae6cc17bab9525121052cc698c30b5876d27e6514c9163"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -203,11 +203,11 @@ The auth profile store supports multiple profile IDs for the same provider.
 Pick which one is used:
 
 - globally via config ordering (`auth.order`)
-- per-session via `/model ...@<profileId>`
+- per-session via `/model ...@<profileId> -s`
 
 Example (session override):
 
-- `/model Opus@anthropic:work`
+- `/model Opus@anthropic:work -s`
 
 List existing profile IDs with:
 

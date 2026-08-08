@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "7f97cc3f08b35ee09ae2cc088214c23b511868752a2ce1c58243b482cc53e3be"
+source_hash: "4031efa84696bd6ec2ee0ae3edc89923741da584348567bbad4e2803b745e173"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -81,6 +81,9 @@ and `openclaw memory status --deep`.
 - Overview includes update channel + git SHA (for source checkouts).
 - Update info surfaces in the Overview; if an update is available, status
   prints a hint to run `openclaw update` (see [Updating](/install/updating)).
+- `status --all` includes a **Telemetry exporters** diagnosis with the latest
+  trusted per-signal exporter state and transport. Endpoint values, headers,
+  certificates, payloads, and raw errors are not shown.
 
 ## Secrets
 

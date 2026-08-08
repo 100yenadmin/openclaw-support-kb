@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference/authenticating-to-composio.md"
-source_hash: "d596a98aa2fb218cf732ff6b9c39c3afe162bc2d859234fef0aea370d1b15f86"
+source_hash: "bb394464d98e4facb08b821c9f17347eb00cad11cfe94918aa1be8649b9145d8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Overview (/reference/authenticating-to-composio)
 Source: https://docs.composio.dev/reference/authenticating-to-composio.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 Every Composio API request authenticates with an API key. Send the key in a request header and Composio resolves it to your project or organization.
 

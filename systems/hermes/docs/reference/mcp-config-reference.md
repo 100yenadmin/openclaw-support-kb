@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP Config Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference"
-source_hash: "45c78049e26354189746ad4d0f4f723e67c915e398435ac9cf15df57a78a1978"
+source_hash: "e6c44a3386350d916d9ee45ada7e3a2d8e9f12b9055751f5097ac2cd00159782"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/mcp-config-reference.md"
@@ -79,6 +79,7 @@ mcp_servers:
 | `auth` | string | HTTP | Authentication method. Set to `oauth` to enable OAuth 2.1 with PKCE |
 | `sampling` | mapping | both | Server-initiated LLM request policy (see MCP guide) |
 | `elicitation` | mapping | both | Server-initiated user-input requests. `enabled` (default `true`) and `timeout` in seconds (default `300`). Form-mode requests route through the approval surface; URL-mode is declined (see MCP guide) |
+| `trust` | string | both | Trust tier: `full` (default) or `untrusted`. On an `untrusted` server, every write-capable tool call (any tool without a `readOnlyHint: true` annotation) requires user approval through the standard approval surface before it runs. `readOnlyHint` is a server-supplied *hint* — a lying server can at most skip approval for tools it claims are read-only, never gain extra access — so mark any server you don't fully control as `untrusted`. Unrecognized values are treated as `untrusted` (fail-closed) |
 
 ## Environment variable references
 

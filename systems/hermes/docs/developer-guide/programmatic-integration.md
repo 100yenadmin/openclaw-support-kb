@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "7537dbe090264ef43127f44973ed2f19acd989dd2673a64f158db10bfd36f83b"
+source_hash: "04e0f5539f16acbb78993e834656f74aa37fe6a1564bf17a9dd0a4aeb3f8beca"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -69,6 +69,18 @@ terminal.resize         clipboard.paste         image.attach
 ```
 
 `session.active_list`, `session.activate`, and `session.close` are the process-local live-session controls used by the TUI session switcher. Use `session.list` / `/resume` for saved transcript discovery; use the active-session methods only for sessions that are currently open in the TUI gateway process.
+
+### Rewinding history on `prompt.submit`
+
+A rewind / edit / regenerate is a `prompt.submit` that drops part of the stored transcript before running the new turn. Because that write is a destructive rewrite of the session's durable rows, the gateway honors it only when the client states its intent:
+
+| Parameter | Meaning |
+|-----------|---------|
+| `truncate_before_user_ordinal` | Zero-based index of the user turn to cut at. Everything from that turn onward is dropped. Display-only timeline rows (`display_kind`) are not counted. |
+| `confirm_truncate` | Required whenever an ordinal is sent. Declares that this submit really is a rewind, not an ordinary send that happens to carry a leftover ordinal. |
+| `confirm_empty_truncate` | Additionally required when the cut would leave the transcript empty (ordinal `0`). |
+
+An ordinal without `confirm_truncate` is refused with code `4029` and nothing is written. Hosts that implement rewind must set the flag at the moment the user asks for it, and must never keep the ordinal in state across ordinary submits.
 
 ### Events streamed back
 

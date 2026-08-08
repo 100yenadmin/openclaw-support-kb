@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA overview"
 source: "https://docs.openclaw.ai/concepts/qa-e2e-automation"
-source_hash: "3e49faa5bd3e6476ed08c122cec395e83a6a64782667516f8f6eea24f7a6f4f5"
+source_hash: "939fc650f891210a1b7605aafcebbde4c01e65aca0db4dc2f2d889225c4e4dda"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/qa-e2e-automation.md"
@@ -1241,6 +1241,9 @@ The minimum adoption bar for a new channel:
    changing the command's existing scenario catalog. Same-channel partitions
    are serial unless the factory declares that every instance owns isolated
    credentials or disposable servers, Gateway state, and artifact paths.
+   Module-backed flow scenarios additionally require
+   `adapterFactory.supportsModuleFlows: true`; those factories must return
+   adapters that implement `prepareFlow`.
 5. Author or adapt YAML scenarios under the themed `qa/scenarios/`
    directories.
 6. Use the generic scenario helpers for new scenarios.

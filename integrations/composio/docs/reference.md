@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference.md"
-source_hash: "8b705728efbbe97e2903af89cc765a6b6cffeb9ea0c889b03c56be9fea3ccb85"
+source_hash: "e27ddc9f2f896d4e0f8441b3bcc6f8fdcdcb2620ecad5a43fc1a476cd0a66f3a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference.md"
@@ -17,11 +17,13 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference.md
 
 
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
+
 Composio powers tool discovery, execution, authentication, and context management for your AI agents with 1000+ toolkits. This reference covers our REST APIs and SDKs.
 
 # Quick Reference [#quick-reference]
 
-* **Base URL**:
+* **Base URL**: `https://backend.composio.dev/api/v3.1`
 * **[Authenticating to Composio](/reference/authenticating-to-composio)**: `x-api-key` (project) or `x-org-api-key` (organization) header
 * **[Rate Limits](/reference/rate-limits)**: 2K-10K requests per minute (plan-dependent)
 

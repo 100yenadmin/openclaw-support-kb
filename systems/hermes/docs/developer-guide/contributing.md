@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "5b80c9311af8f5b7e364e8d9df76e04932d586d6ff0b42081279eec0a1a8b1e0"
+source_hash: "b53cda1853e370f11c758d2c18c6992d236219df19894299de3183b8361575a9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -291,6 +291,27 @@ fix(cli): prevent crash in save_config_value when model is a string
 feat(gateway): add WhatsApp multi-user session isolation
 fix(security): prevent shell injection in sudo password piping
 ```
+
+### Repo-local review checklists: `.agents/checks/*.md`
+
+Projects built on (or reviewed by) Hermes can keep reviewer checklists inside the repository under `.agents/checks/`. Each file is a focused, plain-markdown checklist that an agent loads before reviewing a change touching the matching area:
+
+```
+.agents/
+  checks/
+    security.md        # e.g. "grep the diff for shell interpolation; check subprocess calls quote args"
+    migrations.md      # e.g. "every schema change ships a backfill and a rollback note"
+    public-api.md      # e.g. "exported signatures changed? flag for semver review"
+```
+
+Conventions that make these work well:
+
+- **One concern per file**, named after the concern. Small files get read in full; a monolithic `checklist.md` gets skimmed.
+- **Write checks as verifiable actions** ("run X and confirm Y"), not aspirations ("code should be secure").
+- **State the trigger at the top** — which paths or change types the checklist applies to — so an agent (or human) can skip irrelevant ones cheaply.
+- Keep them in version control next to the code they guard: they evolve with the codebase, and a PR that changes the rules changes the checklist in the same diff.
+
+When you ask Hermes to review a PR in a repository that has `.agents/checks/`, tell it (or teach it via a skill) to read the relevant checklists first and report against them. This gives review agents the project-specific bar that generic review prompts miss.
 
 ## Reporting Issues
 

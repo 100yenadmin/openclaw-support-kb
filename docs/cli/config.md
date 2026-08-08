@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "a6eedf4018c2913f3a016e21a49b0bebef0a67790383ff1aa476d068591bca69"
+source_hash: "3af6abbe97a68e6b4f5780f01df8b7471aa24fd2e28af35fb31666ebca519f79"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -40,6 +40,7 @@ openclaw config get browser.executablePath
 openclaw config set browser.executablePath "/usr/bin/google-chrome"
 openclaw config set browser.profiles.work.executablePath "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 openclaw config set agents.defaults.heartbeat.every "2h"
+openclaw config set logging.audit.executionIdentity true
 openclaw config set 'agents.entries.main.tools.exec.node' "node-id-or-name"
 openclaw config set agents.defaults.models '{"openai/gpt-5.4":{}}' --strict-json --merge
 openclaw config set channels.discord.token --ref-provider default --ref-source env --ref-id DISCORD_BOT_TOKEN
@@ -256,7 +257,6 @@ File provider (--provider-source file)
     - `--provider-path <path>` (required)
     - `--provider-mode <singleValue|json>`
     - `--provider-max-bytes <bytes>`
-    - `--provider-allow-insecure-path`
 
 
 
@@ -274,8 +274,6 @@ KEY
 ENV_VAR
 ` (repeatable)
     - `--provider-trusted-dir <path>` (repeatable)
-    - `--provider-allow-insecure-path`
-    - `--provider-allow-symlink-command`
 
 
 

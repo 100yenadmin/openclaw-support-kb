@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Files"
 source: "https://docs.composio.dev/reference/api-reference/files.md"
-source_hash: "89dbf14535ad95a74e67eb8aa58cccccd56a4bf35246963d196466075cd7cece"
+source_hash: "3900b79df70ba06f5ff3ddfc8ad35983a497ccfa47adcab67d220aa21becd2c1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/files.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Files (/reference/api-reference/files)
 Source: https://docs.composio.dev/reference/api-reference/files.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/files.mdx, not this file. */}
 
@@ -35,5 +37,10 @@ If your agent works with files inside a session, prefer the session file mount, 
 These endpoints use your project API key in the `x-api-key` header.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `GET` | `/api/v3.1/files/list` | [List files with optional app and action filters (DEPRECATED) (Legacy)](/reference/api-reference/files/getFilesList) |
+| `POST` | `/api/v3.1/files/upload/request` | [Create presigned URL for request file upload to S3](/reference/api-reference/files/postFilesUploadRequest) |
 
 ---

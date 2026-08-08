@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "62598850effaa859cacaf7f4ced9741da5eed09fe1f3b1b17c74b382bd0b0755"
+source_hash: "9045e281c5a7beab486a6b9291f70cf8b2f545cbe158b0aa5f3534319d07c29f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -284,6 +284,7 @@ resource controls (systemd `MemoryMax=`, container memory limits).
 
 - [Install overview](/install)
 - [Linux server](/vps)
+- [ChromeOS (Crostini)](/platforms/chromeos)
 - [Raspberry Pi](/platforms/raspberry-pi)
 - [Gateway runbook](/gateway)
 - [Gateway configuration](/gateway/configuration)

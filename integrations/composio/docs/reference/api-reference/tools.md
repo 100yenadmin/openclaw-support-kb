@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/api-reference/tools.md"
-source_hash: "9375330f8a06a15c3e98d17fdcc0a52a74e48a07b57ae6cdfd874c7c10518479"
+source_hash: "31b73cdbe1d998914edc20ec64eb8359ac35fe65ed79ed1f8bb53a04faf03cd8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/tools.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Tools (/reference/api-reference/tools)
 Source: https://docs.composio.dev/reference/api-reference/tools.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/tools.mdx, not this file. */}
 
@@ -60,5 +62,15 @@ console.log(status, data);
 Proxy execute is a form of [direct tool execution](/docs/sessions-vs-direct-execution): it bypasses session state, tool schemas, and modifiers. If you are building an agent, prefer [sessions](/docs/configuring-sessions), and use the proxy only for the specific API call that is not available as a tool. The full request and response schema lives in the [`POST /api/v3.1/tools/execute/proxy`](/reference/api-reference/tools/postToolsExecuteProxy) reference.
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `GET` | `/api/v3.1/tools` | [List available tools](/reference/api-reference/tools/getTools) |
+| `GET` | `/api/v3.1/tools/enum` | [Get tool enum list](/reference/api-reference/tools/getToolsEnum) |
+| `GET` | `/api/v3.1/tools/{tool_slug}` | [Get tool by slug](/reference/api-reference/tools/getToolsByToolSlug) |
+| `POST` | `/api/v3.1/tools/execute/{tool_slug}` | [Execute tool](/reference/api-reference/tools/postToolsExecuteByToolSlug) |
+| `POST` | `/api/v3.1/tools/execute/{tool_slug}/input` | [Generate tool inputs from natural language](/reference/api-reference/tools/postToolsExecuteByToolSlugInput) |
+| `POST` | `/api/v3.1/tools/execute/proxy` | [Execute proxy request](/reference/api-reference/tools/postToolsExecuteProxy) |
+| `POST` | `/api/v3.1/tools/scopes/required` | [Get required scopes for tools](/reference/api-reference/tools/postToolsScopesRequired) |
 
 ---

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "62304467ce9805f05bc39f694ef580fcb6fe20daada85b8eaa42306239c4aaae"
+source_hash: "6966500a389be3ba23b1a8ad1c5076a9b20df0e53e0d1d917b2913499f04c48b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
@@ -16,6 +16,8 @@ Local KB namespace: composio
 # Toolkits (/reference/api-reference/toolkits)
 Source: https://docs.composio.dev/reference/api-reference/toolkits.md
 
+
+> **API version:** This page documents Composio REST API v3.1, the current version, at `https://backend.composio.dev/api/v3.1`. `https://backend.composio.dev/api/v3` is the previous version and remains supported.
 
 {/* Auto-generated from OpenAPI spec. Edit the overview at api-overviews/toolkits.mdx, not this file. */}
 
@@ -36,5 +38,13 @@ These endpoints authenticate with your project API key in the `x-api-key` header
 To browse toolkits visually, see the [toolkits catalog](/toolkits). For the concepts and SDK usage, see [Tools and toolkits](/docs/how-composio-works) and [Configuring sessions](/docs/configuring-sessions).
 
 # Endpoints [#endpoints]
+
+| Method | Path | Endpoint |
+| --- | --- | --- |
+| `GET` | `/api/v3.1/toolkits` | [List available toolkits](/reference/api-reference/toolkits/getToolkits) |
+| `GET` | `/api/v3.1/toolkits/categories` | [List toolkit categories](/reference/api-reference/toolkits/getToolkitsCategories) |
+| `GET` | `/api/v3.1/toolkits/{slug}` | [Get toolkit by slug](/reference/api-reference/toolkits/getToolkitsBySlug) |
+| `POST` | `/api/v3.1/toolkits/multi` | [Fetch multiple toolkits](/reference/api-reference/toolkits/postToolkitsMulti) |
+| `GET` | `/api/v3.1/toolkits/changelog` | [Get toolkits changelog](/reference/api-reference/toolkits/getToolkitsChangelog) |
 
 ---
