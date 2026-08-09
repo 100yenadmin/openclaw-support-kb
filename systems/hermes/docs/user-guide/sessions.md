@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Sessions"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/sessions"
-source_hash: "ccb9d28f58b725846089a4558372ae9bc48d5219e4ed9410264db1a087983ada"
+source_hash: "e2240c83f2b85b444ef494fe4cdfcf714b81fb50a7b9b6c746b599a654f14060"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/sessions.md"
@@ -151,11 +151,32 @@ hermes -r 20250305_091523_a1b2c3d4
 # Resume by title
 hermes --resume "refactoring auth"
 
+# Resume the most recent session — same lookup as -c
+hermes --resume latest
+
 # Or with the chat subcommand
 hermes chat --resume 20250305_091523_a1b2c3d4
 ```
 
 Session IDs are shown when you exit a CLI session, and can be found with `hermes sessions list`.
+
+:::note
+`latest` is a reserved keyword for `--resume`. A session literally titled "latest" is still reachable by its ID or via `-c latest` (title match).
+:::
+
+### Resume in a Specific Directory
+
+Pass `--in <dir>` to change into a directory before starting or resuming. Combined with `--resume latest` (or `-c`), the most recent session for that directory's workspace is picked — no need to `cd` first or remember session IDs:
+
+```bash
+# Resume the latest session that belongs to ./my-project
+hermes --resume latest --in ./my-project
+
+# Works with the TUI too
+hermes --tui --resume latest --in ./my-project
+```
+
+`--in` also pins the session to that directory: the resumed session's recorded working directory is not restored (as if `--no-restore-cwd` were passed).
 
 ### Resume Restores the Working Directory
 

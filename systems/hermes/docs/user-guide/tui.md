@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "TUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/tui"
-source_hash: "419f9f63b3a47313eb34c72dcbdd127cffafbfc76d8e5511b0afeed12593cbe5"
+source_hash: "ee0d61e87183f304b9803c84023ffc63d089abeed7e92d95957bdef9d6e53beb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/tui.md"
@@ -32,10 +32,14 @@ hermes --tui
 # Resume the latest TUI session (falls back to the latest classic session)
 hermes --tui -c
 hermes --tui --continue
+hermes --tui --resume latest
 
 # Resume a specific session by ID or title
 hermes --tui -r 20260409_000000_aa11bb
 hermes --tui --resume "my t0p session"
+
+# Resume the latest session for a specific project directory
+hermes --tui --resume latest --in ./my-project
 
 # Run source directly — skips the prebuild step (for TUI contributors)
 hermes --tui --dev
@@ -207,6 +211,8 @@ Unset the variable or pass `--resume <id>` explicitly to override on a per-launc
 ## Status line
 
 The TUI's status line tracks agent state in real time:
+
+After a session is named, its title appears as an accent-colored badge at the far-right edge of the status line. The title takes the workspace label's place and truncates on narrow terminals.
 
 | Status | Meaning |
 |--------|---------|

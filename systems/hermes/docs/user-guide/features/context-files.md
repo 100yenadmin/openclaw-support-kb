@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Files"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files"
-source_hash: "8c97c410be4145fb3831edbae60e631339c635fb7164e35038111587f4aa5f6d"
+source_hash: "bc9539916e43895e4717e44f8ec9bbffe6274bcc89f2b3dd2eb06d7886820bcb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/context-files.md"
@@ -39,6 +39,21 @@ Only **one** project context type is loaded per session (first match wins): `.he
 ## AGENTS.md
 
 `AGENTS.md` is the primary project context file. It tells the agent how your project is structured, what conventions to follow, and any special instructions.
+
+### Directory Chain (git root → working directory)
+
+When your working directory sits inside a git repository, Hermes loads a **merged chain** of `AGENTS.md` files at session start: the git-root `AGENTS.md` first, then the `AGENTS.md` in every intermediate directory down to your working directory. Deeper files appear later in the prompt, so more specific guidance takes precedence. Each file gets its own provenance header (e.g. `## ../../AGENTS.md`), and identical copies along the chain are deduplicated.
+
+```
+monorepo/                   (git root, cwd = packages/webapp/)
+├── AGENTS.md              ← Loaded first (repo-wide conventions)
+└── packages/
+    ├── AGENTS.md          ← Loaded second
+    └── webapp/
+        └── AGENTS.md      ← Loaded last (most specific, takes precedence)
+```
+
+Outside a git repository, only the working directory itself is checked — parents are never consulted, so an `AGENTS.md` planted in `/tmp` or `$HOME` can't leak into unrelated sessions.
 
 ### Progressive Subdirectory Discovery
 

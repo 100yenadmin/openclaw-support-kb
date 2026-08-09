@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "FAQ & Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/reference/faq"
-source_hash: "3ed9099a6dd4f1c5863618c69a9accdebc11ee590f19cbe90a098cb69bdeac0a"
+source_hash: "191ea8e86901d1ceaa9006503bae22da5f7089d3a22017984390cf0b1c33a9bb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/faq.md"
@@ -225,6 +225,21 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 ---
 
 ### Provider & Model Issues
+
+#### The agent says "Hermes policy" or "Hermes guardrails" refused my request
+
+A model cannot reliably identify why it refused a request. If the refusal appears only in the assistant's prose, its claim that a hidden Hermes runtime policy caused it may be a hallucinated explanation or a restriction applied by the selected model or provider.
+
+Hermes enforcement is explicit: a blocked tool action returns a tool error naming the denied command or path, and an approval-required action shows an approval prompt. Hermes does not silently turn those execution controls into a general content-refusal layer. Provider-level controls can still apply when configured, such as Amazon Bedrock Guardrails.
+
+To isolate the source:
+
+1. Run `/status` to confirm the active model and provider.
+2. Check whether the refusal includes an actual Hermes tool error or approval prompt. If it is prose only, do not treat the model's attribution as runtime evidence.
+3. Retry in a fresh session with another configured model or provider. A refusal that changes with the model is model/provider behavior, not a Hermes execution control.
+4. If an explicit tool error appears, use its exact text when reporting the problem.
+
+See [Security](/user-guide/security) for Hermes' documented execution controls and [Providers](/integrations/providers) for provider configuration.
 
 #### `/model` only shows one provider / can't switch providers
 

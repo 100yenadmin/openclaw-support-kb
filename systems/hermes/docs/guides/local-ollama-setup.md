@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Run Hermes Locally with Ollama — Zero API Cost"
 source: "https://hermes-agent.nousresearch.com/docs/guides/local-ollama-setup"
-source_hash: "0c885acabba0288c285c7e3e496051b5e87ed4abb2d455406556bdee5817a2cd"
+source_hash: "55a0c6ee61f1fa6c7276dd2eec409d3319572a090024afafc495bef09976ca76"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/local-ollama-setup.md"
@@ -302,9 +302,9 @@ What helps:
 
 ### Model doesn't follow tool calls
 
-Smaller models (3B, 7B) sometimes ignore tool-call instructions and produce plain text instead of structured function calls. Solutions:
+Models without tool-call support produce plain text instead of structured function calls. Solutions:
 
-- **Use a bigger model** — `gemma4:31b` or `gemma2:27b` handle tool calls much better than 3B/7B models.
+- **Use a model with tool-call support** — of the models listed above, only `gemma4:31b` has reliable tool calling.
 - **Hermes has auto-repair** — it detects malformed tool calls and attempts to fix them automatically.
 - **Set up a fallback** — if the local model fails 3 times, Hermes falls back to a cloud provider.
 
