@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — tools and custom providers"
 source: "https://docs.openclaw.ai/gateway/config-tools"
-source_hash: "5c7c08ca4f08ddaf75675655b2feb91db188af0a2aa7b395f00a67cf1d67f0eb"
+source_hash: "8bcb7c86834513ad5cf45ecaf4cfb19d6c93242288c26e44eb23d5eddf828ac5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-tools.md"
@@ -52,7 +52,7 @@ Local onboarding defaults new local configs to `tools.profile: "coding"` when un
 | `group:openclaw`   | All built-in tools above except `read`/`write`/`edit`/`apply_patch`/`exec`/`process`/`canvas` (excludes plugin tools)                                                                                                                                  |
 | `group:plugins`    | Tools owned by loaded plugins, including configured MCP servers exposed through `bundle-mcp`                                                                                                                                                           |
 
-`spawn_task` lets a coding agent propose confirmed follow-up work without starting it. The Control UI shows the title and summary as an actionable chip; a Gateway-backed TUI shows an equivalent interactive prompt. Accepting either creates a fresh managed-worktree session and sends the full prompt there while the current turn continues. `dismiss_task` withdraws a still-pending suggestion by the ephemeral `task_id` returned from `spawn_task`.
+`spawn_task` lets a coding agent propose confirmed follow-up work without starting it. The suggestion's project directory must be a git checkout; invalid suggestions, including a non-git directory or blank prompt, are rejected when the tool records them. The Control UI shows the title and summary as an actionable chip; a Gateway-backed TUI shows an equivalent interactive prompt. Accepting a suggestion can start it in a fresh managed worktree (the default), start it locally in a new session in the suggested checkout, send it to a cloud worker profile when one is configured, or deliver it into the source session. OpenClaw sends the full prompt to the selected destination while the current turn continues. `dismiss_task` withdraws a still-pending suggestion by the ephemeral `task_id` returned from `spawn_task`.
 
 The tools are offered only when the initiating operator surface can receive and action Gateway task-suggestion events. Channel sessions and local/embedded TUI sessions do not receive them; channel transports need a portable typed task action before they can safely expose this flow. Suggestions are process-local and disappear when the Gateway restarts. Both tools remain in the `coding` profile and `group:sessions`, so normal `tools.allow` and `tools.deny` policy configures them automatically when the surface supports them.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "fadc5c8fdbe5f13aa7b5e1977990f5ba77b18e5e0887d133f0f2f683a28236b0"
+source_hash: "9c197e634bc32a24614d6acdaff20bac4678430dbea34000704962581934803a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -317,9 +317,9 @@ This example gives the `research` agent a writable primary workspace, read-only 
         scope: "agent",
       },
     },
-    list: [
-      {
-        id: "research",
+    entries: {
+      research: {
+        default: true,
         workspace: "/srv/openclaw/research-workspace",
         sandbox: {
           workspaceAccess: "rw",
@@ -330,7 +330,7 @@ This example gives the `research` agent a writable primary workspace, read-only 
           },
         },
       },
-    ],
+    },
   },
 }
 ```
@@ -370,16 +370,16 @@ openclaw sandbox recreate --agent research
         },
       },
     },
-    list: [
-      {
-        id: "build",
+    entries: {
+      build: {
+        default: true,
         sandbox: {
           docker: {
             binds: ["/mnt/cache:/cache:rw"],
           },
         },
       },
-    ],
+    },
   },
 }
 ```

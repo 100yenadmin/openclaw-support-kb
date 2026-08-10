@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "50541320661014d39e83d20a99be092c1f22f35b954e61a44bbfda55b279f2eb"
+source_hash: "5c103a1f979dd7213ab2f411634e747965b28f1ccb0ea4a15a7cf9df6f46f2b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -176,44 +176,13 @@ an explicit agent when multiple agents are configured. See
 [Memory Wiki per-agent vaults](/plugins/memory-wiki#per-agent-vaults) for bridge
 filtering, migration, and trust-boundary details.
 
-## Cross-agent QMD memory search
+## Cross-agent memory search
 
-To let one agent search another agent's QMD session transcripts, add extra collections under `agents.entries.*.memory.search.qmd.extraCollections`. Use `memory.search.qmd.extraCollections` when every agent should share the same collections.
-
-```json5
-{
-  agents: {
-    defaults: {
-      workspace: "~/workspaces/main",
-    },
-    entries: {
-      main: {
-        default: true,
-        workspace: "~/workspaces/main",
-        memory: {
-          search: {
-            qmd: {
-              extraCollections: [{ path: "notes" }], // resolves inside workspace -> collection named "notes-main"
-            },
-          },
-        },
-      },
-      family: { workspace: "~/workspaces/family" },
-    },
-  },
-  memory: {
-    backend: "qmd",
-    search: {
-      qmd: {
-        extraCollections: [{ path: "~/agents/family/sessions", name: "family-sessions" }],
-      },
-    },
-    qmd: { includeDefaultMemory: false },
-  },
-}
-```
-
-An extra-collection path can be shared across agents, but its `name` stays explicit when the path is outside the agent workspace. Paths inside the workspace stay agent-scoped so each agent keeps its own transcript search set.
+The QMD cross-agent search path was removed. Builtin memory does not search
+another agent's transcript corpus; each agent searches only its own configured
+memory and eligible same-agent session sources. Put intentionally shared
+Markdown in an explicit shared `memory.search.extraPaths` directory when the
+same reference material should be indexed by multiple agents.
 
 ## One WhatsApp number, multiple people (DM split)
 

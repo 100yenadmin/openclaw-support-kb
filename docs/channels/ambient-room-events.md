@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ambient room events"
 source: "https://docs.openclaw.ai/channels/ambient-room-events"
-source_hash: "24703ed87fc2609e7986bf508368e0f4c42bfae82e480e8f1a849533ea40f3e7"
+source_hash: "e9a00b019c7283921677b88dc217abfd770987de5f8d7e026811b318dd742cf2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/ambient-room-events.md"
@@ -199,15 +199,15 @@ Use an agent override when several agents share the same room but only one shoul
     },
   },
   agents: {
-    list: [
-      {
-        id: "main",
+    entries: {
+      main: {
+        default: true,
         groupChat: {
           unmentionedInbound: "room_event",
           mentionPatterns: ["@openclaw", "openclaw"],
         },
       },
-    ],
+    },
   },
 }
 ```

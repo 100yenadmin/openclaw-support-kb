@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DNS"
 source: "https://docs.openclaw.ai/cli/dns"
-source_hash: "573ad6522fc7cb7850b1578815a395e05be3b45dba8c11126afef091490448cc"
+source_hash: "6af82d41dd472cdd49160dce744e1446fa63099a0b8a8afce10faa7e677b50a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/dns.md"
@@ -37,7 +37,7 @@ openclaw dns setup --apply
 | `--domain <domain>` | Wide-area discovery domain (for example `openclaw.internal`).                       |
 | `--apply`           | Install/update CoreDNS config and (re)start the service. Requires sudo, macOS only. |
 
-Without `--domain`, OpenClaw uses `discovery.wideArea.domain` from config.
+Without `--domain`, OpenClaw uses `discovery.wideArea.domain` from config. Setting that domain enables wide-area discovery.
 
 Without `--apply`, the command only prints:
 

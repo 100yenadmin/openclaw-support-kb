@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vydra"
 source: "https://docs.openclaw.ai/providers/vydra"
-source_hash: "73a9059f1ced18c72c1069147b514bcc76648c5d902187db5fe2668d412c23d0"
+source_hash: "06ef52ec0bab33d34e941f65788d9bfe82aa072bd9365837c5dba477220a395e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/vydra.md"
@@ -85,8 +85,10 @@ Image generation
     {
       agents: {
         defaults: {
-          imageGenerationModel: {
-            primary: "vydra/grok-imagine",
+          mediaModels: {
+            image: {
+              primary: "vydra/grok-imagine",
+            },
           },
         },
       },
@@ -117,8 +119,10 @@ Video generation
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "vydra/veo3",
+          mediaModels: {
+            video: {
+              primary: "vydra/veo3",
+            },
           },
         },
       },

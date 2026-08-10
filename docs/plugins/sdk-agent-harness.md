@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "30020135594399caad11802e1ddca4cabbba30d697f9209c1e41af47d174ee40"
+source_hash: "9a9e661c4c913969dcfffe4edce0b663315ea69009115cdad9c9efb94f84a83e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -48,6 +48,21 @@ Before a harness is selected, OpenClaw has already resolved:
 
 A harness runs a prepared attempt; it does not pick providers, replace channel
 delivery, or silently switch models.
+
+### Native tool-policy enforcement
+
+Set `conversationToolPolicySupport: "exact"` only when `runAttempt` enforces every
+explicit OpenClaw tool-policy layer across native and built-in tools, OpenClaw
+tools, requester and configured MCP servers, apps, delegation, and resumed
+threads. Core passes `params.pluginHarnessToolPolicyRestricted` as the prepared
+decision that the native surface must be isolated. Default tool-profile narrowing
+does not set this flag.
+
+Omit the declaration when any native capability can bypass those layers.
+OpenClaw then visibly rejects explicitly restricted turns before invoking the
+harness. The operator can switch the session to the embedded runtime or upgrade
+the harness. Channel `/btw` side questions with a restrictive direct policy are
+rejected by core and are not covered by this declaration.
 
 ### Harness-owned auth bootstrap
 
@@ -436,9 +451,9 @@ Per-agent overrides use the same model-scoped shape:
 ```json
 {
   "agents": {
-    "list": [
-      {
-        "id": "codex-only",
+    "entries": {
+      "codex-only": {
+        "default": true,
         "model": "openai/gpt-5.6-sol",
         "models": {
           "openai/gpt-5.6-sol": {
@@ -446,7 +461,7 @@ Per-agent overrides use the same model-scoped shape:
           }
         }
       }
-    ]
+    }
   }
 }
 ```

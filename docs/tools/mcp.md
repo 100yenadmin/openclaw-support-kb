@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Connect MCP servers"
 source: "https://docs.openclaw.ai/tools/mcp"
-source_hash: "833a559973037d63975b099eed70fecc1b0993700f5b6cf22da4a148869f94da"
+source_hash: "6b7c2cafc6d58def2a5655b76186efe4376caec092e902a145a5a4cc427c87cd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/mcp.md"
@@ -117,7 +117,7 @@ Set `auth: "oauth"` plus any required `oauth` metadata, then:
 openclaw mcp login <name>
 ```
 
-Follow the printed authorization URL and rerun with `--code` when prompted.
+Follow the printed authorization URL. OpenClaw normally captures the loopback redirect and saves the credentials automatically; use the printed `--code` command when the browser cannot reach the callback listener.
 
 ### Changes do not reach an active agent
 

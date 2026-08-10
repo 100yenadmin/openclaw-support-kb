@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MCP"
 source: "https://docs.openclaw.ai/cli/mcp"
-source_hash: "17b1b0353c40b7240f59abdb29ed48a2e6f6f6e1450f2d277972deb2a929dd4d"
+source_hash: "27fc9815dbd4575e8d853917f2cd948943a974d88167764bfe68b0e706c029c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/mcp.md"
@@ -491,7 +491,7 @@ Notes:
 - `set` expects one JSON object value on the command line.
 - `configure` updates enablement, tool filters, timeouts, OAuth, TLS, and parallel-tool-call hints without replacing the whole server definition. Add `--probe` to verify the updated server before saving.
 - `tools` updates per-server tool filters. Include/exclude entries are MCP tool names and simple `*` globs.
-- `login` runs the OAuth flow for HTTP servers configured with `auth: "oauth"`. The first run prints an authorization URL; rerun with `--code` after approval.
+- `login` runs the OAuth flow for HTTP servers configured with `auth: "oauth"`. For a loopback redirect, OpenClaw listens for the browser callback and completes login automatically. The printed `--code` command remains the fallback for remote, headless, or unreachable callbacks.
 - `logout` clears stored OAuth credentials for the named server without removing the saved server definition.
 - `reload` disposes cached in-process MCP runtimes for the current CLI process only. Gateway or agent processes in another process still need their own reload or restart path.
 - Use `transport: "streamable-http"` for Streamable HTTP MCP servers. `openclaw mcp set` also normalizes CLI-native `type: "http"` to the same canonical config shape for compatibility.
@@ -820,13 +820,13 @@ Start login
     openclaw mcp login docs
     ```
 
-    OpenClaw prints the authorization URL and stores temporary OAuth verifier state in shared SQLite.
+    OpenClaw starts the registered loopback callback, prints the authorization URL, and stores temporary OAuth verifier state in shared SQLite. Approve the request in the browser and return to the terminal; token exchange completes automatically after the callback arrives.
 
 
 
-Finish with the code
+Use the manual fallback when needed
 
-    After approving in the browser, pass the returned code back to OpenClaw.
+    If the browser runs on another machine or cannot reach the printed loopback address, copy the returned code and pass it back to OpenClaw.
 
     ```bash
     openclaw mcp login docs --code abc123

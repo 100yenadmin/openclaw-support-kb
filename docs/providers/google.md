@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "00d21162647d08e4a1e10394631842fd9917b5bfaa509a0cb150cd29da753c55"
+source_hash: "8e65c35b013d4f9acd983aae3799100615bb3d9f9031434471a50a19b742def6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -255,8 +255,10 @@ To use Google as the default image provider:
 {
   agents: {
     defaults: {
-      imageGenerationModel: {
-        primary: "google/gemini-3.1-flash-image",
+      mediaModels: {
+        image: {
+          primary: "google/gemini-3.1-flash-image",
+        },
       },
     },
   },
@@ -283,8 +285,10 @@ To use Google as the default video provider:
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "google/veo-3.1-fast-generate-preview",
+      mediaModels: {
+        video: {
+          primary: "google/veo-3.1-fast-generate-preview",
+        },
       },
     },
   },
@@ -313,8 +317,10 @@ To use Google as the default music provider:
 {
   agents: {
     defaults: {
-      musicGenerationModel: {
-        primary: "google/lyria-3-clip-preview",
+      mediaModels: {
+        music: {
+          primary: "google/lyria-3-clip-preview",
+        },
       },
     },
   },

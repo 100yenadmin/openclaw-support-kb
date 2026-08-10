@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automations"
 source: "https://docs.openclaw.ai/automation/cron-jobs"
-source_hash: "d0eda60b90726579731ff878549ee2c153c12c58dc59e643a6271c030000f11f"
+source_hash: "fd34ef0f0ad9de6e7f61b456e86131d18891274c3305365e1298aea45bd75f32"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/cron-jobs.md"
@@ -251,7 +251,7 @@ Model-selection precedence for isolated jobs, highest first:
 3. User-selected stored automation-session model override
 4. Agent/default model selection
 
-Fast mode follows the resolved live selection. If the selected model config has `params.fastMode`, isolated automation runs use it by default; a stored session `fastMode` override (then an agent `fastModeDefault`) still wins over model config either direction. Auto mode uses the model's `params.fastAutoOnSeconds` cutoff, defaulting to 60 seconds.
+Fast mode follows the resolved live selection. Isolated automation resolves it in this order: stored session `fastMode`, per-agent `agents.entries.*.fastModeDefault`, global `agents.defaults.fastModeDefault`, then selected-model `params.fastMode`. Auto mode uses the model's `params.fastAutoOnSeconds` cutoff, defaulting to 60 seconds.
 
 If a run hits a live model-switch handoff, the scheduler retries with the switched provider/model and persists that selection (and any new auth profile) for the active run. Retries are bounded: after the initial attempt plus 2 switch retries, the scheduler aborts instead of looping.
 
@@ -859,7 +859,7 @@ Retry behavior
 
 Maintenance
 
-    `cron.sessionRetention` (default `24h`, `false` disables) prunes isolated run-session entries. Run history keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
+    `cron.sessionRetention` (default `24h`, `false` or `"0h"` disables) prunes isolated run-session entries. Run history keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
 
 
 Legacy store migration

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "6ab435b616f5b41bbc4e023880669bc774223cab3fca7bf9563371267707f553"
+source_hash: "72c35687e4afb0e342698dfe8ea2cfc7b34100e6ab0f1f2745bf3c726c04e24c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -31,9 +31,9 @@ Setup commands by intent:
 | Setup and onboarding         | [`openclaw`](/cli/openclaw) · [`setup`](/cli/setup) · [`onboard`](/cli/onboard) · [`configure`](/cli/configure) · [`config`](/cli/config) · [`completion`](/cli/completion) · [`doctor`](/cli/doctor) · [`dashboard`](/cli/dashboard) |
 | Reset, backup, and migration | [`backup`](/cli/backup) · [`migrate`](/cli/migrate) · [`reset`](/cli/reset) · [`uninstall`](/cli/uninstall) · [`update`](/cli/update)                                                                                                 |
 | Messaging and agents         | [`message`](/cli/message) · [`agent`](/cli/agent) · [`agents`](/cli/agents) · [`attach`](/cli/attach) · [`acp`](/cli/acp) · [`mcp`](/cli/mcp)                                                                                         |
-| Health and sessions          | [`status`](/cli/status) · [`health`](/cli/health) · [`sessions`](/cli/sessions) · [`audit`](/cli/audit)                                                                                                                               |
+| Health and sessions          | [`status`](/cli/status) · [`health`](/cli/health) · [`sessions`](/cli/sessions) · [`resume`](/cli/resume) · [`audit`](/cli/audit)                                                                                                     |
 | Gateway and logs             | [`gateway`](/cli/gateway) · [`logs`](/cli/logs) · [`system`](/cli/system)                                                                                                                                                             |
-| Models and inference         | [`models`](/cli/models) · [`promos`](/cli/promos) · [`infer`](/cli/infer) · `capability` (alias for [`infer`](/cli/infer)) · [`memory`](/cli/memory) · [`commitments`](/cli/commitments) · [`wiki`](/cli/wiki)                        |
+| Models and inference         | [`models`](/cli/models) · [`promos`](/cli/promos) · [`infer`](/cli/infer) · `capability` (alias for [`infer`](/cli/infer)) · [`memory`](/cli/memory) · [`wiki`](/cli/wiki)                                                            |
 | Network and nodes            | [`directory`](/cli/directory) · [`nodes`](/cli/nodes) · [`devices`](/cli/devices) · [`node`](/cli/node) · [`worker`](/cli/worker)                                                                                                     |
 | Runtime and sandbox          | [`approvals`](/cli/approvals) · `exec-policy` (see [`approvals`](/cli/approvals)) · [`sandbox`](/cli/sandbox) · [`tui`](/cli/tui) · `chat`/`terminal` (aliases for [`tui --local`](/cli/tui)) · [`browser`](/cli/browser)             |
 | Automation                   | [`cron`](/cli/cron) · [`tasks`](/cli/tasks) · [`hooks`](/cli/hooks) · [`webhooks`](/cli/webhooks) · [`transcripts`](/cli/transcripts)                                                                                                 |
@@ -190,9 +190,6 @@ openclaw [--dev] [--profile <name>] <command>
     set
     validate
     emit
-  commitments
-    list
-    dismiss
   wiki
     status
     doctor
@@ -425,6 +422,7 @@ openclaw [--dev] [--profile <name>] <command>
   docs
   dns
     setup
+  resume
   tui
   chat (alias: tui --local)
   terminal (alias: tui --local)

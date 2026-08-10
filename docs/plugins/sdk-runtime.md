@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin runtime helpers"
 source: "https://docs.openclaw.ai/plugins/sdk-runtime"
-source_hash: "f27b3ad39fba79563bdb388b9df46b4dcb547c2300710f2ac05415d72b8407a6"
+source_hash: "a84c11f24b073fa173137164528a0c646aaaa4f8ef1ff9174a3b5f1071d2a0a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-runtime.md"
@@ -90,7 +90,7 @@ these actions with `{ modelPicker: true }`; channels without a picker
 capability continue to fail closed instead of treating the action as an opaque
 callback.
 
-Use inbound `botLoopProtection` facts for bot-authored inbound messages. Core applies the shared in-memory sliding-window guard before session record and dispatch, without tying the policy to one channel. The guard tracks `(scopeId, conversationId, participant pair)` keys, counts both directions of a pair together, applies a cooldown once the window budget is exceeded, and prunes inactive entries opportunistically.
+Use inbound `botLoopProtection` facts for bot-authored inbound messages. Core applies the shared in-memory sliding-window guard before session record and dispatch, without tying the policy to one channel. The guard tracks `(scopeId, conversationId, participant pair)` keys, counts both directions of a pair together, applies a cooldown once the window budget is exceeded, and prunes inactive entries opportunistically. Retryable transports should also supply a stable `eventId`; replaying an accepted event while it remains in the active window does not consume another budget slot. Suppressed events add no retained event-identity state.
 
 Channel plugins that expose this behavior to operators should prefer the shared `channels.defaults.botLoopProtection` shape for baseline budgets, then layer channel/provider-specific overrides on top. The shared config uses seconds because it is user-facing:
 
@@ -118,6 +118,7 @@ return {
     conversationId: "channel-1",
     senderId: "bot-a",
     receiverId: "bot-b",
+    eventId: providerEvent.id,
     config: channelConfig.botLoopProtection,
     defaultsConfig: runtimeConfig.channels?.defaults?.botLoopProtection,
     defaultEnabled: allowBotsMode !== "off",
@@ -769,7 +770,7 @@ api.runtime.system
     System-level utilities.
 
     ```typescript
-    await api.runtime.system.enqueueSystemEvent(event);
+    const accepted = api.runtime.system.enqueueSystemEvent(text, options);
     api.runtime.system.requestHeartbeat({
       source: "other",
       intent: "event",
@@ -874,20 +875,6 @@ MyBlobMetadata
       { contentType: "text/plain" },
     );
     const blob = await blobs.lookup("artifact-1");
-
-    await api.runtime.state.withLease(
-      {
-        namespace: "my-feature",
-        key: "writer",
-        database: { scope: "agent", agentId },
-        leaseMs: 5 * 60_000,
-        waitMs: 30_000,
-      },
-      async ({ signal, assertOwned }) => {
-        await runExternalWriter({ signal });
-        assertOwned();
-      },
-    );
     ```
 
     Keyed stores survive restarts and are isolated by the runtime-bound plugin id. Use `registerIfAbsent(...)` for atomic dedupe claims: it returns `true` when the key was missing or expired and registered, or `false` when a live value already exists without overwriting its value, creation time, or TTL. Use `deleteIf(...)` when cleanup must remove only the value previously observed; its synchronous predicate and deletion run in one SQLite transaction. Limits: `maxEntries` per namespace, 50,000 live rows per plugin, JSON values under 64KB, and optional TTL expiry. By default, a write at either row limit sheds the oldest live rows from the namespace being written; sibling namespaces are not evicted for that write, and the write still fails if the namespace cannot free enough rows. Set `overflowPolicy: "reject-new"` for durable ownership records that must never be evicted: new keys fail at either limit, while existing keys remain updateable.
@@ -904,14 +891,14 @@ TMetadata
 TPayload
 (...)` opens a persisted ingress queue scoped to the calling plugin, for buffering inbound events that need at-least-once processing across restarts. When stale-claim recovery uses `shouldRecover`, also provide `shouldRecoverCorrupt` if corrupt claimed payloads should be quarantined: its payload-independent claim identity lets the plugin preserve live owner and lane policy before the queue tombstones the row.
 
-    `withLease(...)` serializes cooperative plugin work across OpenClaw processes. Choose `database: { scope: "shared" }` for one global owner or `{ scope: "agent", agentId }` for independent per-agent ownership. Forward the callback's `AbortSignal` into every fallible operation. `assertOwned()` is a point-in-time checkpoint before starting another important step; the host also verifies ownership after the callback. Lease loss or caller cancellation aborts the signal. Acquisition waits and heartbeats happen outside short synchronous SQLite transactions; plugins never receive database paths or handles. This is cooperative cancellation, not a fencing token or authorization for unfenced external writes.
+    Plugin-state leases were removed. Use short SQLite transactions for atomic database work and plugin-scoped keyed stores (`openKeyedStore` or `openSyncKeyedStore`) for bounded durable state.
 
     `openChannelIngressDrain(...)` opens the core channel-agnostic worker over that queue (or creates a queue when none is supplied). The drain owns stale-claim recovery, per-lane claim serialization, complete-at-adoption or complete-on-dispatch-return, retry/dead-letter disposition, optional pre-adoption supersede, and claim→adoption stall timeout. Wire claim ownership into reply generation with `turnAdoptionLifecycle` (via `bindIngressLifecycleToReplyOptions` from `plugin-sdk/channel-outbound`). Channel plugins keep accept-side enqueue, lane derivation, non-retryable classification, and any supersede authorization policy.
 
 
 Warning
 
-    `openBlobStore`, `openKeyedStore`, `openSyncKeyedStore`, `withLease`, `openChannelIngressQueue`, and `openChannelIngressDrain` are available only to bundled plugins and trusted official plugin installations in this release. The rejection names the plugin id and the origin it loaded from; a channel plugin loaded from `plugins.load.paths` or an unofficial install is untrusted, so its ingress monitor fails channel start instead of running without a durable queue.
+    `openBlobStore`, `openKeyedStore`, `openSyncKeyedStore`, `openChannelIngressQueue`, and `openChannelIngressDrain` are available only to bundled plugins and trusted official plugin installations in this release. The rejection names the plugin id and the origin it loaded from; a channel plugin loaded from `plugins.load.paths` or an unofficial install is untrusted, so its ingress monitor fails channel start instead of running without a durable queue.
 
 
 

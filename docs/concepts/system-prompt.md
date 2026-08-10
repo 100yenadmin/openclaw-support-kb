@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "System prompt"
 source: "https://docs.openclaw.ai/concepts/system-prompt"
-source_hash: "dd1cdb57071089a8aba6a7096e521699f7a4859e18314245861217bd87061864"
+source_hash: "0eae0fe9f7a3d3d34fef4591d594ed0442adf613db1ab91d84530e951bc7d9c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/system-prompt.md"
@@ -31,7 +31,7 @@ Provider plugins can contribute cache-aware guidance without replacing the OpenC
 
 Use provider-owned contributions for model-family-specific tuning. Reserve the legacy `before_prompt_build` hook for compatibility or truly global prompt changes.
 
-The bundled OpenAI/Codex GPT-5-family overlay (`resolveGpt5SystemPromptContribution`) uses this mechanism: a `stablePrefix` behavior contract (execution policy, tool discipline, output contract, completion contract) plus an optional `interaction_style` override for a friendlier tone. It applies to any `gpt-5*` model id routed through the OpenAI or Codex plugins, controlled by `agents.defaults.promptOverlays.gpt5.personality` (`"friendly"`/`"on"` or `"off"`).
+The bundled OpenAI/Codex GPT-5-family overlay (`resolveGpt5SystemPromptContribution`) uses this mechanism: a `stablePrefix` behavior contract (execution policy, tool discipline, output contract, completion contract) plus an optional `interaction_style` override for a friendlier tone. It applies to any `gpt-5*` model id routed through the OpenAI or Codex plugins, controlled by the OpenAI plugin setting `plugins.entries.openai.config.personality` (`"friendly"`/`"on"` or `"off"`).
 
 ## Structure
 
@@ -119,13 +119,12 @@ Note
 
 Large files are truncated with a marker:
 
-| Limit                                        | Config key                                         | Default  |
-| -------------------------------------------- | -------------------------------------------------- | -------- |
-| Per-file max characters                      | `agents.defaults.bootstrapMaxChars`                | 20000    |
-| Total across all files                       | `agents.defaults.bootstrapTotalMaxChars`           | 60000    |
-| Truncation warning (`off`\|`once`\|`always`) | `agents.defaults.bootstrapPromptTruncationWarning` | `always` |
+| Limit                   | Config key                               | Default |
+| ----------------------- | ---------------------------------------- | ------- |
+| Per-file max characters | `agents.defaults.bootstrapMaxChars`      | 20000   |
+| Total across all files  | `agents.defaults.bootstrapTotalMaxChars` | 60000   |
 
-Missing files inject a short missing-file marker. Detailed raw/injected counts stay in diagnostics such as `/context`, `/status`, doctor, and logs.
+When truncation happens, OpenClaw always injects a concise notice into the system prompt saying some bootstrap files were truncated and to read the affected files directly; this notice is built in and not configurable, and it deliberately omits per-file details. Missing files inject a short missing-file marker. File names and raw/injected counts stay in diagnostics such as `/context`, `/status`, doctor, and logs.
 
 For memory files, truncation is not data loss: the file stays intact on disk. On native Codex, `MEMORY.md` is read on demand through memory tools when available, with bounded prompt fallback otherwise. On other harnesses, the model only sees the shortened injected copy until it reads or searches memory directly. If `MEMORY.md` is repeatedly truncated, distill it into a shorter durable summary, move detailed history into `memory/*.md`, or intentionally raise the bootstrap limits.
 

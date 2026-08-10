@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bonjour discovery"
 source: "https://docs.openclaw.ai/gateway/bonjour"
-source_hash: "29ef95f4add04d4b2460561f76da060367a13d57d1b02d50db20fc2cea907e16"
+source_hash: "dcee58777bb3ed8837fdc9120ab15532ab654712cd29580b7bb53897a76f437e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/bonjour.md"
@@ -30,11 +30,11 @@ If the node and gateway are on different networks, multicast mDNS can't cross th
 ```json5
 {
   gateway: { bind: "tailnet" }, // tailnet-only (recommended)
-  discovery: { wideArea: { enabled: true, domain: "openclaw.internal" } },
+  discovery: { wideArea: { domain: "openclaw.internal" } },
 }
 ```
 
-`discovery.wideArea.domain` also accepts the `OPENCLAW_WIDE_AREA_DOMAIN` env var as a fallback when unset.
+Setting `discovery.wideArea.domain` enables wide-area discovery. OpenClaw also accepts the `OPENCLAW_WIDE_AREA_DOMAIN` env var as a fallback when the config key is unset.
 
 ### One-time DNS server setup (gateway host, macOS only)
 

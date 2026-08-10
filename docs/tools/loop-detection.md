@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool-loop detection"
 source: "https://docs.openclaw.ai/tools/loop-detection"
-source_hash: "02ed5d8471d87557b16b8da5419a5e8165504b639971b61b3ba5780e3e87c550"
+source_hash: "eb2dd12d8e55f07a25fd0eb1584178dfb053158934f91cbb4f74c58dd0d7eea3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/loop-detection.md"
@@ -53,16 +53,16 @@ Per-agent override (optional, at `agents.entries.*.tools.loopDetection`):
 ```json5
 {
   agents: {
-    list: [
-      {
-        id: "safe-runner",
+    entries: {
+      "safe-runner": {
+        default: true,
         tools: {
           loopDetection: {
             enabled: true,
           },
         },
       },
-    ],
+    },
   },
 }
 ```

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "1a8365c9f390e120c6e36b11ca2a4a093aa197ab6e58fc5cde77f7075fa92626"
+source_hash: "d79ef57a8774fdf8ee872093f66223260e0cd7e331e13d640e4297e778c6d16a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -87,6 +87,23 @@ External-plugin compatibility work follows this order:
 5. Document the deprecation and migration path.
 6. Remove only after the announced migration window, usually in a major
    release.
+
+### Channel state migration declarations
+
+Channel plugins should declare `doctorContract.stateMigrations: true` in
+`openclaw.plugin.json` and export `stateMigrations` from their doctor-contract
+artifact. Plan-based migrations can use
+`definePluginDoctorMigrationFromPlans(...)` from
+`openclaw/plugin-sdk/runtime-doctor-migrations` to preserve existing move, copy, preview,
+and plugin-state import behavior.
+
+The setup-entry `legacyStateMigrations` option and feature flag,
+`setupFeatures.legacyStateMigrations`,
+`BundledChannelLegacyStateMigrationDetector`, and
+`ChannelPlugin.lifecycle.detectLegacyStateMigrations` remain supported through
+one doctor-pipeline adapter for external plugins, but are deprecated. Removal
+plan: remove that adapter after OpenClaw 2027.1 only when a published-plugin
+reader sweep finds no remaining users.
 
 ### AuthStorage SQLite migration
 
@@ -460,12 +477,12 @@ Replace with focused imports
 Replace broad infra-runtime imports
 
     `openclaw/plugin-sdk/infra-runtime` still exists for external
-    compatibility, but new code should import the focused surface it actually
+    compatibility, but new code should use the supported surface it actually
     needs:
 
-    | Need | Import |
+    | Need | Replacement |
     | --- | --- |
-    | System event queue helpers | `openclaw/plugin-sdk/system-event-runtime` |
+    | New system event producers | `api.runtime.system.enqueueSystemEvent` |
     | Heartbeat wake, event, and visibility helpers | `openclaw/plugin-sdk/heartbeat-runtime` |
     | Pending delivery queue drain | `openclaw/plugin-sdk/delivery-queue-runtime` |
     | Channel activity telemetry | `openclaw/plugin-sdk/channel-activity-runtime` |
@@ -484,6 +501,14 @@ Replace broad infra-runtime imports
     | Numeric coercion | `openclaw/plugin-sdk/number-runtime` |
     | Process-local async lock | `openclaw/plugin-sdk/async-lock-runtime` |
     | File locks | `openclaw/plugin-sdk/file-lock` |
+
+    System event snapshot inspection and consume helpers remain available only
+    through the deprecated `openclaw/plugin-sdk/infra-runtime` compatibility
+    surface; there is no modern public replacement. Current snapshots carry an
+    opaque `id` for one queued occurrence. Preserve it through copies and
+    serialization when returning a snapshot to consume. Legacy ID-less callers
+    retain structural matching, which can be ambiguous after queue churn. Do
+    not treat the ID as persistent or valid across restarts.
 
     File-lock nesting is owner-scoped. Pass the same `reentrantOwner` only for
     nested acquisitions in one logical operation; omit it for ordinary locking.

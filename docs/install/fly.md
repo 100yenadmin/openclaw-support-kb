@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "95d8488ca97cefcbc02ff6636706259a10b003c3c7973d656dbf9823b6b71928"
+source_hash: "827f00c9154b2ed1ae1ffe34d696f26318b81a09b83400aff54bb57d59987714"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -164,12 +164,11 @@ Create config file
           },
           "maxConcurrent": 4
         },
-        "list": [
-          {
-            "id": "main",
+        "entries": {
+          "main": {
             "default": true
           }
-        ]
+        }
       },
       "auth": {
         "profiles": {

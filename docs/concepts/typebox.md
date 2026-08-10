@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TypeBox"
 source: "https://docs.openclaw.ai/concepts/typebox"
-source_hash: "ef77a03ab4b78b5795391e0056f44e43e1e53839526bb51fbfd4c973a30b21f7"
+source_hash: "93f7c245418996450738ef0cacd02d8e46cddd6ff9c0c58278b111362cd44e60"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/typebox.md"
@@ -191,7 +191,7 @@ Example: add a new `system.echo` request that returns `{ ok: true, text }`.
 
 1. **Schema (source of truth)**
 
-Add to `packages/gateway-protocol/src/schema/system.ts` (or the closest matching feature module):
+Add to `packages/gateway-protocol/src/schema/system-info.ts` (or the closest matching feature module):
 
 ```ts
 export const SystemEchoParamsSchema = Type.Object(

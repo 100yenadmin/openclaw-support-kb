@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "eda0a22a08308dc0d5f23ddef3961416bd8c20618a760c63edc6884f6e08d6dd"
+source_hash: "6f53596fbd014f6f85fd60d5d7fa9c172aad096bf8fa549aca7132cf075189cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
@@ -155,14 +155,13 @@ Use these hubs to discover every page, including deep dives and reference docs t
 - [macOS voice overlay](/platforms/mac/voice-overlay)
 - [macOS WebChat](/platforms/mac/webchat)
 - [macOS Canvas](/platforms/mac/canvas)
-- [macOS child process](/platforms/mac/child-process)
+- [macOS gateway (launchd)](/platforms/mac/bundled-gateway)
 - [macOS health](/platforms/mac/health)
 - [macOS icon](/platforms/mac/icon)
 - [macOS logging](/platforms/mac/logging)
 - [macOS permissions](/platforms/mac/permissions)
 - [macOS remote](/platforms/mac/remote)
 - [macOS signing](/platforms/mac/signing)
-- [macOS gateway (launchd)](/platforms/mac/bundled-gateway)
 - [macOS XPC](/platforms/mac/xpc)
 - [macOS skills](/platforms/mac/skills)
 - [macOS Peekaboo](/platforms/mac/peekaboo)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pull request review flow"
 source: "https://docs.openclaw.ai/reference/pull-request-review-flow"
-source_hash: "bafbd43e339a8b0adba54b2b224414ec0eb14c2ddd7358c3451bd8031b8b3ba0"
+source_hash: "4282c562df153d16fcc5f348dcddd781b6581bdf84b3a5fbb28b3da266568e9e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/pull-request-review-flow.md"
@@ -50,7 +50,9 @@ and help maintainers with guarded repair or automerge flows.
 A positive ClawSweeper result is supporting evidence, not maintainer approval.
 Maintainers still decide whether and when a PR is ready to merge.
 
-ClawSweeper is queue-based. Do not expect an immediate response after opening a
+ClawSweeper is queue-based. When you open a non-draft PR or mark a draft ready
+for review, it posts a short receipt comment right away, but the review itself
+still waits for a queue slot. Do not expect an immediate review after opening a
 PR, pushing a commit, or adding a review request. Label updates after a
 ClawSweeper run can also take time.
 

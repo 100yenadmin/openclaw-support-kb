@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory overview"
 source: "https://docs.openclaw.ai/concepts/memory"
-source_hash: "55fa267333337dc84ee62b77bbef082a626bbda73eefee3e7221a5f145627c1d"
+source_hash: "0bce905feb5e22c9243b73be6c11b8bac55315c22090178bec674c39d19491c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory.md"
@@ -151,17 +151,6 @@ Use [scheduled tasks](/automation/cron-jobs) for exact reminders, timed checks,
 and recurring work. Memory can still summarize the durable context around that
 work.
 
-## Retired inferred commitments
-
-Some future follow-ups are not durable facts. If a future event should trigger
-an action, use a [standing intent](/concepts/standing-intents). If a clock time
-should trigger it, use a [scheduled task](/automation/cron-jobs).
-
-The inferred commitments experiment is retired. OpenClaw no longer extracts or
-delivers those follow-ups. Use [scheduled tasks](/automation/cron-jobs) for
-future actions; the legacy `openclaw commitments` command remains available to
-inspect or dismiss existing stored rows.
-
 ## Memory tools
 
 The agent has three tools for working with memory:
@@ -191,7 +180,7 @@ a generic OpenAI-compatible endpoint.
 See [Memory search](/concepts/memory-search) for how search works, tuning
 options, and provider setup.
 
-## Memory backends
+## Memory engines
 
 CardGroup
 
@@ -199,11 +188,6 @@ Builtin (default)
 
 SQLite-based. Works out of the box with keyword search, vector similarity, and
 hybrid search. No extra dependencies.
-
-QMD
-
-Local-first sidecar with reranking, query expansion, and the ability to index
-directories outside the workspace.
 
 Honcho
 
@@ -340,7 +324,6 @@ openclaw memory index --force   # Rebuild the index
 
 - [Memory search](/concepts/memory-search): search pipeline, providers, and tuning.
 - [Builtin memory engine](/concepts/memory-builtin): default SQLite backend.
-- [QMD memory engine](/concepts/memory-qmd): advanced local-first sidecar.
 - [Honcho memory](/concepts/memory-honcho): AI-native cross-session memory.
 - [Memory LanceDB](/plugins/memory-lancedb): LanceDB-backed plugin with OpenAI-compatible embeddings.
 - [Memory Wiki](/plugins/memory-wiki): compiled knowledge vault and wiki-native tools.

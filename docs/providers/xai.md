@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "xAI"
 source: "https://docs.openclaw.ai/providers/xai"
-source_hash: "df37bed593db39e9a3228906b347509e3616baa11ea5a262a4178ac91752d826"
+source_hash: "4ccc7eb81b78d607b2f7a13daa412dcf5e2468f43e6246b8a1ff0634f81adde4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xai.md"
@@ -290,8 +290,10 @@ Warning
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "xai/grok-imagine-video",
+          mediaModels: {
+            video: {
+              primary: "xai/grok-imagine-video",
+            },
           },
         },
       },
@@ -335,8 +337,10 @@ Image generation
     {
       agents: {
         defaults: {
-          imageGenerationModel: {
-            primary: "xai/grok-imagine-image",
+          mediaModels: {
+            image: {
+              primary: "xai/grok-imagine-image",
+            },
           },
         },
       },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Honcho memory"
 source: "https://docs.openclaw.ai/concepts/memory-honcho"
-source_hash: "025068dd55382ca37fb760bed2cbeb759b329052402d8629abcd9c77bd8172b6"
+source_hash: "739715f346cc484ae465fa1433243e6c2523c17d37bfaf980c98c8f6f56cb43b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-honcho.md"
@@ -114,18 +114,17 @@ sees the prompt.
 
 ## Honcho vs builtin memory
 
-|                   | Builtin / QMD                | Honcho                              |
-| ----------------- | ---------------------------- | ----------------------------------- |
-| **Storage**       | Workspace Markdown files     | Dedicated service (local or hosted) |
-| **Cross-session** | Via memory files             | Automatic, built-in                 |
-| **User modeling** | Manual (write to MEMORY.md)  | Automatic profiles                  |
-| **Search**        | Vector + keyword (hybrid)    | Semantic over observations          |
-| **Multi-agent**   | Not tracked                  | Parent/child awareness              |
-| **Dependencies**  | None (builtin) or QMD binary | Plugin install                      |
+|                   | Builtin memory              | Honcho                              |
+| ----------------- | --------------------------- | ----------------------------------- |
+| **Storage**       | Workspace Markdown files    | Dedicated service (local or hosted) |
+| **Cross-session** | Via memory files            | Automatic, built-in                 |
+| **User modeling** | Manual (write to MEMORY.md) | Automatic profiles                  |
+| **Search**        | Vector + keyword (hybrid)   | Semantic over observations          |
+| **Multi-agent**   | Not tracked                 | Parent/child awareness              |
+| **Dependencies**  | None                        | Plugin install                      |
 
-Honcho and the builtin memory system can work together. When QMD is
-configured, additional tools become available for searching local Markdown
-files alongside Honcho's cross-session memory.
+Honcho and the builtin memory system can work together. Builtin search keeps
+local Markdown available alongside Honcho's cross-session memory.
 
 ## CLI commands
 
@@ -146,7 +145,6 @@ openclaw honcho search <query> [-k N] [-d D] # Semantic search over memory
 
 - [Memory overview](/concepts/memory)
 - [Builtin memory engine](/concepts/memory-builtin)
-- [QMD memory engine](/concepts/memory-qmd)
 - [Context Engines](/concepts/context-engine)
 
 ---

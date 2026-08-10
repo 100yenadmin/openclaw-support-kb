@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zoom meetings plugin"
 source: "https://docs.openclaw.ai/plugins/zoom-meetings"
-source_hash: "1d91624e592fcd77b0c0244dde5621af7c47da4a081481e9f570dd024e6b6460"
+source_hash: "d5e792e646e203739e3306899cb2fca6555b516e9da036131495ae1ed62cb695"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/zoom-meetings.md"
@@ -17,7 +17,7 @@ The `zoom-meetings` plugin joins Zoom meeting links as a guest through the Zoom 
 
 ## Setup
 
-Talk-back uses the same local audio prerequisites as the [Google Meet plugin](/plugins/google-meet): macOS, the `BlackHole 2ch` virtual audio device, and SoX.
+Talk-back uses the shared [meeting-plugin audio setup](/plugins/meeting-plugins#prepare-chrome-and-audio): `BlackHole 2ch` plus SoX on macOS, or PipeWire-Pulse plus `pactl`/`pacat`/`parec` on Linux.
 
 ```bash
 openclaw plugins install @openclaw/zoom-meetings
@@ -26,6 +26,13 @@ brew install blackhole-2ch sox
 sudo reboot
 system_profiler SPAudioDataType | grep -i BlackHole
 command -v sox
+```
+
+On Linux, verify the desktop user's PipeWire-Pulse session instead:
+
+```bash
+pactl info
+command -v pactl pacat parec
 ```
 
 The plugin is enabled by default after installation. Add an entry only to customize it, then check setup:
@@ -52,7 +59,7 @@ openclaw zoommeetings setup
 openclaw zoommeetings join 'https://zoom.us/j/1234567890'
 ```
 
-Use `chromeNode.node` to run Chrome, BlackHole, and SoX on a paired macOS node. The node must allow `zoommeetings.chrome` and `browser.proxy`.
+Use `chromeNode.node` to run Chrome and its native virtual-audio backend on a paired macOS or Linux node. The node must allow `zoommeetings.chrome` and `browser.proxy`; backend setup and generated commands resolve on that node, not on the Gateway host.
 
 ## Modes
 

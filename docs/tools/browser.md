@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "ed27f4540ee9d2378e56c7f6f8e35cc568d615140b4560b6d0ea8714235c5cd8"
+source_hash: "562cb9809761fbf781c7363a15dbd327a857851d35b8ce15fb6581ad95126f6c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -921,7 +921,7 @@ Important behavior details:
 Security guidance:
 
 - Do **not** relax browser SSRF policy by default.
-- Prefer narrow host exceptions such as `hostnameAllowlist` or `allowedHostnames` over broad private-network access.
+- Prefer narrow wildcard-aware `allowedHostnames` exceptions over broad private-network access.
 - Use `dangerouslyAllowPrivateNetwork: true` only in intentionally trusted environments where private-network browser access is required and reviewed.
 
 ## Agent tools + how control works

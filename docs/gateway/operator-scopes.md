@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "34a56fdfcc7c83c9115db46930dab60bc868dc9454729f27d6931b5f821013a3"
+source_hash: "cf06608222620aca6ee2e51725d2bb2c8dba0bca89b7700e145b6096e01855c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -64,6 +64,11 @@ dispatch so authorization failures have one canonical structured response:
   `operator.talk.secrets`.
 - `talk.client.*`, `talk.session.*`, `talk.speak`, and `talk.mode` need
   `operator.talk` (or the compatible broader `operator.write`).
+- `sessions.patch` needs `operator.write` for session organization fields and
+  the per-session `model` override. Other runtime overrides, including
+  thinking, fast, verbose, trace, and reasoning levels, need `operator.admin`.
+  Persisting a selected model as the configured agent default is also
+  admin-only.
 
 Some handlers then apply stricter checks based on the concrete thing being
 approved or mutated:

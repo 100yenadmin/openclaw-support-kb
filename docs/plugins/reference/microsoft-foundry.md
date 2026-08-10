@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Foundry plugin"
 source: "https://docs.openclaw.ai/plugins/reference/microsoft-foundry"
-source_hash: "055b21545be557fe901b3f0bc6e6f3035f30a17dddc061f55eb62d08c38f9014"
+source_hash: "7cf3859564f359b694c9ecc23a1adbab48f3bd006ef0378b46c0861849bd1e98"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/microsoft-foundry.md"
@@ -82,9 +82,11 @@ name in the request `model` field:
 {
   agents: {
     defaults: {
-      imageGenerationModel: {
-        primary: "microsoft-foundry/<deployment-name>",
-        timeoutMs: 600000,
+      mediaModels: {
+        image: {
+          primary: "microsoft-foundry/<deployment-name>",
+          timeoutMs: 600000,
+        },
       },
     },
   },

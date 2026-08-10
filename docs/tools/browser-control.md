@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser control API"
 source: "https://docs.openclaw.ai/tools/browser-control"
-source_hash: "cd0a13208c29dbd784f8a033dd8ded934297bf81b626905c76abad7302e0b8a8"
+source_hash: "ee7e31cbe094f40e0e6fd02cd134f7c29caf2dce6992baa35b2f9a08aa120b11"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-control.md"
@@ -468,8 +468,7 @@ Strict-mode example (block private/internal destinations by default):
   browser: {
     ssrfPolicy: {
       dangerouslyAllowPrivateNetwork: false,
-      hostnameAllowlist: ["*.example.com", "example.com"],
-      allowedHostnames: ["localhost"], // optional exact allow
+      allowedHostnames: ["*.example.com", "example.com", "localhost"],
     },
   },
 }

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qwen"
 source: "https://docs.openclaw.ai/providers/qwen"
-source_hash: "75c772a749092fc7716e13d2d60550e62dd7037710cc04f6ef126b5b596aa566"
+source_hash: "dd3a1bc3ccd13a42f3885f0e324e0c1c89c355e71e9066fe84cab0d13dab0225"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qwen.md"
@@ -326,7 +326,7 @@ To make Qwen the default video provider:
 {
   agents: {
     defaults: {
-      videoGenerationModel: { primary: "qwen/wan2.6-t2v" },
+      mediaModels: { video: { primary: "qwen/wan2.6-t2v" } },
     },
   },
 }

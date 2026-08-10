@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Buzz"
 source: "https://docs.openclaw.ai/channels/buzz"
-source_hash: "6b234ab53a6e997e24886dca0439498f52e7cbf9a84b6d8cf924625837450c32"
+source_hash: "ff20cd31dab6a3b2ad32738dfa118632e3467741ddcc7a4c5be96c198f7942b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/buzz.md"
@@ -290,10 +290,10 @@ workspace, or model while one Gateway and Buzz bot serve all of them:
 ```json5
 {
   agents: {
-    list: [
-      { id: "support", workspace: "~/.openclaw/workspace-support" },
-      { id: "engineering", workspace: "~/.openclaw/workspace-engineering" },
-    ],
+    entries: {
+      support: { default: true, workspace: "~/.openclaw/workspace-support" },
+      engineering: { workspace: "~/.openclaw/workspace-engineering" },
+    },
   },
   bindings: [
     {

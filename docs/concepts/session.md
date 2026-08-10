@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "ed1cff68718312ec54bfc77e554bafce7f74c41218e50320d345e29cb3ff39d7"
+source_hash: "e74e187fc3a17c1c1251395d2e02552b65ae255c06015fef0caa9c2c7adad243"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session.md"
@@ -16,6 +16,9 @@ Source: https://docs.openclaw.ai/concepts/session
 OpenClaw routes every inbound message to a **session** based on where it came
 from: DMs, group chats, cron jobs, etc. All session state is owned by the
 **gateway**; UI clients query the gateway for session data.
+
+To continue the same Gateway-owned session in the Control UI, terminal, or a
+coding harness, see [Session synchronization and attachment](/concepts/session-attachment).
 
 For the personal-agent default — one rolling conversation shared by all your
 DM channels, with group activity and background work flowing into it — see

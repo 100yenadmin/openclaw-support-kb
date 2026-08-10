@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PDF tool"
 source: "https://docs.openclaw.ai/tools/pdf"
-source_hash: "65e7339be0218e2c8bc468cdf964359151565c4e98d4234fb00074c7cfca4d09"
+source_hash: "bfa6f3b069a191c46a04194d259a5ec60ec91882e63cfb89a2483fc68a8be783"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/pdf.md"
@@ -106,7 +106,7 @@ Details:
         primary: "anthropic/claude-opus-4-6",
         fallbacks: ["openai/gpt-5.4-mini"],
       },
-      pdfMaxBytesMb: 10,
+      pdfMaxMb: 10,
       pdfMaxPages: 20,
     },
   },
@@ -192,6 +192,6 @@ Encrypted PDF with extraction fallback:
 ## Related
 
 - [Tools Overview](/tools) - all available agent tools
-- [Configuration Reference](/gateway/config-agents#agent-defaults) - pdfMaxBytesMb and pdfMaxPages config
+- [Configuration Reference](/gateway/config-agents#agent-defaults) - `pdfMaxMb` and `pdfMaxPages` config
 
 ---

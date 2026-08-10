@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex plugin"
 source: "https://docs.openclaw.ai/plugins/reference/codex"
-source_hash: "703eda117d8d977e77d6cdb735a13da964e8e4f8b654b385372b134e6d2c57f2"
+source_hash: "351eb9069cbae29a0deb7d529851b8cae5798ab5e64b51da67937f5b08f9e9ce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/codex.md"
@@ -24,7 +24,7 @@ Codex app-server harness and native session catalog.
 
 ## Surface
 
-contracts: `mediaUnderstandingProviders`, `migrationProviders`, `tools`, `webSearchProviders`
+commands: `/codex`; contracts: `mediaUnderstandingProviders`, `migrationProviders`, `tools`, `webSearchProviders`
 
 ## Related docs
 

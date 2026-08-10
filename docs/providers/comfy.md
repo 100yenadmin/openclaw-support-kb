@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ComfyUI"
 source: "https://docs.openclaw.ai/providers/comfy"
-source_hash: "e33289b78dd96f5620b30f681a9f258eff2ccf4afbfd6df89a157d909d9a6f1f"
+source_hash: "2722afe62c8f82fe8d9a9bca58babeb98220ee8eb9941fca16872935b8344461"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/comfy.md"
@@ -97,8 +97,10 @@ Set the default model
         {
           agents: {
             defaults: {
-              imageGenerationModel: {
-                primary: "comfy/workflow",
+              mediaModels: {
+                image: {
+                  primary: "comfy/workflow",
+                },
               },
             },
           },
@@ -190,8 +192,10 @@ Set the default model
         {
           agents: {
             defaults: {
-              imageGenerationModel: {
-                primary: "comfy/workflow",
+              mediaModels: {
+                image: {
+                  primary: "comfy/workflow",
+                },
               },
             },
           },
@@ -291,8 +295,10 @@ Image workflows
     {
       agents: {
         defaults: {
-          imageGenerationModel: {
-            primary: "comfy/workflow",
+          mediaModels: {
+            image: {
+              primary: "comfy/workflow",
+            },
           },
         },
       },
@@ -334,8 +340,10 @@ Video workflows
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "comfy/workflow",
+          mediaModels: {
+            video: {
+              primary: "comfy/workflow",
+            },
           },
         },
       },

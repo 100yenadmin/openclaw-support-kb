@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "06f46f8009d812944ba0f47fdb508e1a238b6f7c93c56d62a627b526673452cd"
+source_hash: "66acd61563934a3a32444f8090409c1ee702d8c354c7851c9b8cce3777e9c25d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -119,11 +119,11 @@ regardless of where they are loaded from.
     defaults: {
       skills: ["github", "weather"], // shared baseline
     },
-    list: [
-      { id: "writer" }, // inherits github, weather
-      { id: "docs", skills: ["docs-search"] }, // replaces defaults entirely
-      { id: "locked-down", skills: [] }, // no skills
-    ],
+    entries: {
+      writer: { default: true }, // inherits github, weather
+      docs: { skills: ["docs-search"] }, // replaces defaults entirely
+      "locked-down": { skills: [] }, // no skills
+    },
   },
 }
 ```

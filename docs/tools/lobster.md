@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
-source_hash: "3c5f15b34ba5baa4d2b134a0504bd18b3d6604ad3ddb2ce33bcdf46d35dfd0a6"
+source_hash: "8c47b2a5028a429b1212015d7a16e368c296586d85de32dd33b564e4eaaefc4e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/lobster.md"
@@ -99,14 +99,14 @@ Or per-agent:
 ```json
 {
   "agents": {
-    "list": [
-      {
-        "id": "main",
+    "entries": {
+      "main": {
+        "default": true,
         "tools": {
           "alsoAllow": ["lobster"]
         }
       }
-    ]
+    }
   }
 }
 ```
@@ -173,12 +173,12 @@ For a **structured LLM step** inside a workflow, enable the optional
     }
   },
   "agents": {
-    "list": [
-      {
-        "id": "main",
+    "entries": {
+      "main": {
+        "default": true,
         "tools": { "alsoAllow": ["llm-task"] }
       }
-    ]
+    }
   }
 }
 ```

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "c0c3e37def5fff49c6ade4c4ccaf41ba0f1477bf59b1355acb416f884c8754a0"
+source_hash: "7bfcd2d6b33bd9aa6a21b47b6613e40c4ed3bfb4efd29224dae2ae278320a175"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -13,14 +13,14 @@ duplicate_index: 1
 # Environment variables
 Source: https://docs.openclaw.ai/help/environment
 
-OpenClaw pulls environment variables from multiple sources. The rule is **never override existing values**.
+OpenClaw pulls environment variables from multiple sources. The normal rule is **never override existing values**. For an OpenClaw-installed systemd service, the global `.env` may replace only service values that OpenClaw recorded as managed; operator-owned service values still take precedence.
 Workspace `.env` files are a lower-trust source: OpenClaw ignores provider credentials and protected runtime controls from workspace `.env` before applying precedence.
 
 ## Precedence (highest to lowest)
 
 1. **Process environment** (what the Gateway process already has from the parent shell/daemon).
 2. **`.env` in the current working directory** (dotenv default; does not override; provider credentials and protected runtime controls are ignored).
-3. **Global `.env`** at `~/.openclaw/.env` (aka `$OPENCLAW_STATE_DIR/.env`; recommended for provider API keys; does not override).
+3. **Global `.env`** at `~/.openclaw/.env` (aka `$OPENCLAW_STATE_DIR/.env`; recommended for provider API keys; does not override except for recorded OpenClaw-managed systemd service values).
 4. **Config `env` block** in `~/.openclaw/openclaw.json` (applied only if missing).
 5. **Optional login-shell import** (`env.shellEnv.enabled` or `OPENCLAW_LOAD_SHELL_ENV=1`), applied only for missing expected keys.
 

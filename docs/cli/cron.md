@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automations (cron)"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "86e4fa9233c8a9ea1d4f20ee94354987789042bb7ba32c1ce3770750e03e709f"
+source_hash: "8b27e854aee85c2b1260efe33d54c5aa017fa80969fbcc5d67223c928563094b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -199,7 +199,7 @@ Isolated automation runs resolve the active model in this order:
 
 ### Fast mode
 
-Isolated automation fast mode follows the resolved live model selection. Model config `params.fastMode` applies by default, but a stored session `fastMode` override still wins over config. When the resolved mode is `auto`, the cutoff uses the selected model's `params.fastAutoOnSeconds` value, defaulting to 60 seconds.
+Isolated automation fast mode follows the resolved live model selection. It resolves stored session `fastMode`, per-agent `agents.entries.*.fastModeDefault`, global `agents.defaults.fastModeDefault`, then selected-model `params.fastMode`. When the resolved mode is `auto`, the cutoff uses the selected model's `params.fastAutoOnSeconds` value, defaulting to 60 seconds.
 
 ### Live model switch retries
 
@@ -227,7 +227,7 @@ The scheduler does not classify final-output prose or approval-looking refusal p
 
 Retention behavior:
 
-- `cron.sessionRetention` (default `24h`, or `false` to disable) prunes completed isolated run sessions.
+- `cron.sessionRetention` (default `24h`, or `false` to disable; a zero duration such as `"0h"` also disables) prunes completed isolated run sessions.
 - Run history keeps the newest 2000 terminal rows per job. Lost rows retain the standard 24-hour lost-task cleanup window.
 
 ## Migrating older jobs

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Release policy"
 source: "https://docs.openclaw.ai/reference/RELEASING"
-source_hash: "c04a9df0e876f38bdfc6e6c981df33bbfe519946d32730ccec3d05c9a6a2aa9f"
+source_hash: "0dfe79bbc199438a436c7d566cf7b2a5a49e096402e9c91fa5f6d1394f02a9b4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/releasing.md"
@@ -495,7 +495,7 @@ Use this box to answer "does the release behave correctly in QA scenarios and li
 
 ### Package
 
-The Package box is the installable-product gate. It is backed by `Package Acceptance` and the resolver `scripts/resolve-openclaw-package-candidate.mjs`. The resolver normalizes a candidate into the `package-under-test` tarball consumed by Docker E2E, validates the package inventory, records the package version and SHA-256, and keeps the workflow harness ref separate from the package source ref.
+The Package box is the installable-product gate. It is backed by `Package Acceptance` and the resolver `scripts/resolve-openclaw-package-candidate.mts`. The resolver normalizes a candidate into the `package-under-test` tarball consumed by Docker E2E, validates the package inventory, records the package version and SHA-256, and keeps the workflow harness ref separate from the package source ref.
 
 Supported candidate sources:
 
@@ -724,7 +724,7 @@ If a maintainer must fall back to local npm authentication, run any 1Password CL
 - [`.github/workflows/openclaw-release-checks.yml`](https://github.com/openclaw/openclaw/blob/main/.github/workflows/openclaw-release-checks.yml)
 - [`.github/workflows/openclaw-cross-os-release-checks-reusable.yml`](https://github.com/openclaw/openclaw/blob/main/.github/workflows/openclaw-cross-os-release-checks-reusable.yml)
 - [`.github/workflows/docker-release.yml`](https://github.com/openclaw/openclaw/blob/main/.github/workflows/docker-release.yml)
-- [`scripts/resolve-openclaw-package-candidate.mjs`](https://github.com/openclaw/openclaw/blob/main/scripts/resolve-openclaw-package-candidate.mjs)
+- [`scripts/resolve-openclaw-package-candidate.mts`](https://github.com/openclaw/openclaw/blob/main/scripts/resolve-openclaw-package-candidate.mts)
 - [`scripts/openclaw-npm-release-check.ts`](https://github.com/openclaw/openclaw/blob/main/scripts/openclaw-npm-release-check.ts)
 - [`scripts/package-mac-dist.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/package-mac-dist.sh)
 - [`scripts/make_appcast.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/make_appcast.sh)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fal"
 source: "https://docs.openclaw.ai/providers/fal"
-source_hash: "fc84e2911ea7acadd10b6a891fe73fc1ea4e34f5e9202e1591a6d21139deab60"
+source_hash: "89e69cda20bb316a1725ce0c7c37f9e0e7a9e91597e2f860b44654e120c43dcd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fal.md"
@@ -46,8 +46,10 @@ Set a default image model
     {
       agents: {
         defaults: {
-          imageGenerationModel: {
-            primary: "fal/fal-ai/flux/dev",
+          mediaModels: {
+            image: {
+              primary: "fal/fal-ai/flux/dev",
+            },
           },
         },
       },
@@ -120,8 +122,10 @@ To use Krea 2 Medium:
 {
   agents: {
     defaults: {
-      imageGenerationModel: {
-        primary: "fal/krea/v2/medium/text-to-image",
+      mediaModels: {
+        image: {
+          primary: "fal/krea/v2/medium/text-to-image",
+        },
       },
     },
   },
@@ -181,8 +185,10 @@ Seedance 2.0 config example
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "fal/bytedance/seedance-2.0/fast/text-to-video",
+          mediaModels: {
+            video: {
+              primary: "fal/bytedance/seedance-2.0/fast/text-to-video",
+            },
           },
         },
       },
@@ -197,8 +203,10 @@ Seedance 2.0 reference-to-video config example
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "fal/bytedance/seedance-2.0/fast/reference-to-video",
+          mediaModels: {
+            video: {
+              primary: "fal/bytedance/seedance-2.0/fast/reference-to-video",
+            },
           },
         },
       },
@@ -219,8 +227,10 @@ HeyGen video-agent config example
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "fal/fal-ai/heygen/v2/video-agent",
+          mediaModels: {
+            video: {
+              primary: "fal/fal-ai/heygen/v2/video-agent",
+            },
           },
         },
       },
@@ -246,8 +256,10 @@ Use fal as the default music provider:
 {
   agents: {
     defaults: {
-      musicGenerationModel: {
-        primary: "fal/fal-ai/minimax-music/v2.6",
+      mediaModels: {
+        music: {
+          primary: "fal/fal-ai/minimax-music/v2.6",
+        },
       },
     },
   },

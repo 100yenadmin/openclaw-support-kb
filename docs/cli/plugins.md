@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/cli/plugins"
-source_hash: "71a5faf91371930b372916196d81ba18fdf4000d4fade651cf167b0415a5c647"
+source_hash: "e337dc4caf2fe631e9e6f6e5dd0c5c5009c4d9eddef2208a4477ec4e07e0d088"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/plugins.md"
@@ -80,7 +80,7 @@ Bundled plugins ship with OpenClaw. Some are enabled by default (for example bun
 
 Native OpenClaw plugins ship `openclaw.plugin.json` with an inline JSON Schema (`configSchema`, even if empty). Compatible bundles use their own bundle manifests instead.
 
-`plugins list` shows `Format: openclaw` or `Format: bundle`. Verbose list/info output also shows the bundle subtype (`codex`, `claude`, or `cursor`) plus detected bundle capabilities.
+`plugins list` shows `Format: openclaw` or `Format: bundle`. Verbose list/info output also shows the bundle subtype (`agent (Agent Plugins)`, `codex`, `claude`, or `cursor`) plus detected bundle capabilities.
 
 ## Author
 
@@ -343,6 +343,7 @@ Remote marketplace rules
 For local paths and archives, OpenClaw auto-detects:
 
 - native OpenClaw plugins (`openclaw.plugin.json`)
+- Agent Plugins bundles (root `plugin.json` declaring the [Agent Plugins](https://agent-plugins.org) `$schema`)
 - Codex-compatible bundles (`.codex-plugin/plugin.json`)
 - Claude-compatible bundles (`.claude-plugin/plugin.json`, or the default Claude component layout when that manifest file is absent)
 - Cursor-compatible bundles (`.cursor-plugin/plugin.json`)
@@ -357,7 +358,7 @@ top-level script files as local helpers. List standalone files explicitly in
 
 Note
 
-Compatible bundles install into the normal plugin root and participate in the same list/info/enable/disable flow. Today, bundle skills, Claude command-skills, Claude `settings.json` defaults, Claude `.lsp.json` / manifest-declared `lspServers` defaults, Cursor command-skills, and compatible Codex hook directories are supported; other detected bundle capabilities are shown in diagnostics/info but are not yet wired into runtime execution.
+Compatible bundles install into the normal plugin root and participate in the same list/info/enable/disable flow. Today, bundle skills, bundle MCP servers, Agent Plugins skills/MCP (with the `PLUGIN_ROOT`/`PLUGIN_DATA` subprocess contract), Claude command-skills, Claude `settings.json` defaults, Claude `.lsp.json` / manifest-declared `lspServers` defaults, Cursor command-skills, and compatible Codex hook directories are supported; other detected bundle capabilities are shown in diagnostics/info but are not yet wired into runtime execution. See [Plugin bundles](/plugins/bundles) for the per-format mapping.
 
 Use `-l`/`--link` to point at a local plugin directory without copying it (adds
 to `plugins.load.paths`):

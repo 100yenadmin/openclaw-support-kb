@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Music generation"
 source: "https://docs.openclaw.ai/tools/music-generation"
-source_hash: "5f85b2315ed161e3ec14b6e1b3b0c66e66f0c7dafdf720cfffc99dfee09656c0"
+source_hash: "d7e9d316393a3f0c2c93763a9b9fa60065087e4a582010c45dbc2e0cc788d5fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/music-generation.md"
@@ -55,8 +55,10 @@ Pick a default model (optional)
         {
           agents: {
             defaults: {
-              musicGenerationModel: {
-                primary: "google/lyria-3-clip-preview",
+              mediaModels: {
+                music: {
+                  primary: "google/lyria-3-clip-preview",
+                },
               },
             },
           },
@@ -273,9 +275,11 @@ openclaw tasks cancel <taskId>
 {
   agents: {
     defaults: {
-      musicGenerationModel: {
-        primary: "google/lyria-3-clip-preview",
-        fallbacks: ["fal/fal-ai/minimax-music/v2.6", "minimax/music-2.6"],
+      mediaModels: {
+        music: {
+          primary: "google/lyria-3-clip-preview",
+          fallbacks: ["fal/fal-ai/minimax-music/v2.6", "minimax/music-2.6"],
+        },
       },
     },
   },
@@ -287,8 +291,8 @@ openclaw tasks cancel <taskId>
 OpenClaw tries providers in this order:
 
 1. `model` parameter from the tool call (if the agent specifies one).
-2. `musicGenerationModel.primary` from config.
-3. `musicGenerationModel.fallbacks` in order.
+2. `agents.defaults.mediaModels.music.primary` from config.
+3. `agents.defaults.mediaModels.music.fallbacks` in order.
 4. Auto-detection using auth-backed provider defaults only:
    - current default text-model provider first, if it also offers music
      generation;
@@ -427,7 +431,7 @@ sections are configured.
 
 - [Background tasks](/automation/tasks) — task tracking for detached `music_generate` runs
 - [ComfyUI](/providers/comfy)
-- [Configuration reference](/gateway/config-agents#agent-defaults) — `musicGenerationModel` config
+- [Configuration reference](/gateway/config-agents#agent-defaults) — `agents.defaults.mediaModels.music` config
 - [Google (Gemini)](/providers/google)
 - [MiniMax](/providers/minimax)
 - [Models](/concepts/models) — model configuration and failover

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugins"
 source: "https://docs.openclaw.ai/tools/plugin"
-source_hash: "01488004715d1bbbb3765562b9d4d566e59672710be9360c4653f0c556c16076"
+source_hash: "a2813102e829c48ba79e06102ecaaebaa2cf74e8da45b22df7f9fd16612df7bb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/plugin.md"
@@ -242,10 +242,10 @@ paths.
 
 OpenClaw recognizes two plugin formats:
 
-| Format                 | How it loads                                                                 | Use when                                                               |
-| ---------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Native OpenClaw plugin | `openclaw.plugin.json` plus a runtime module loaded in process               | You are installing or building OpenClaw-specific runtime capabilities  |
-| Compatible bundle      | Codex, Claude, or Cursor plugin layout mapped into OpenClaw plugin inventory | You are reusing compatible skills, commands, hooks, or bundle metadata |
+| Format                 | How it loads                                                                                | Use when                                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Native OpenClaw plugin | `openclaw.plugin.json` plus a runtime module loaded in process                              | You are installing or building OpenClaw-specific runtime capabilities  |
+| Compatible bundle      | Agent Plugins, Codex, Claude, or Cursor plugin layout mapped into OpenClaw plugin inventory | You are reusing compatible skills, commands, hooks, or bundle metadata |
 
 Both formats appear in `openclaw plugins list`, `openclaw plugins inspect`,
 `openclaw plugins enable`, and `openclaw plugins disable`. See

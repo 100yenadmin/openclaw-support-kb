@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message presentation"
 source: "https://docs.openclaw.ai/plugins/message-presentation"
-source_hash: "3388ee96ec2655a608c284db156ce73e3fbfbe065246c3b168240d44e995a10d"
+source_hash: "394c9acfc41ef5d45066d4413997df3c51371d302f956cdc45db3bf01ccc7453"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/message-presentation.md"
@@ -440,6 +440,25 @@ const adapter: ChannelOutboundAdapter = {
 };
 ```
 
+When a capability depends on per-account configuration or the delivery's text
+funnel — for example Telegram only renders native tables on `richMessages`
+accounts and only on the markdown path — declare the optional
+`resolvePresentationCapabilities({ cfg, accountId, formatting })` hook next to
+the static object. Core resolves capabilities once per delivery and the hook
+takes precedence over the static declaration; keep the static object as the
+account-independent baseline.
+
+```ts
+const adapter: ChannelOutboundAdapter = {
+  presentationCapabilities: BASE_CAPABILITIES,
+  resolvePresentationCapabilities: ({ cfg, accountId, formatting }) => ({
+    ...BASE_CAPABILITIES,
+    tables: isRichAccount(cfg, accountId) && formatting?.parseMode !== "HTML",
+  }),
+  // ...
+};
+```
+
 Capability booleans describe what the renderer can make interactive. Optional
 `limits` describe the generic envelope core can adapt before calling the
 renderer:
@@ -513,6 +532,12 @@ plugins own native rendering and interaction handling.
 ## Degradation rules
 
 Presentation must be safe to send on limited channels.
+
+Producers that hand-author the plain rendering of the same facts can mark it
+with `presentationTextMode: "fallback"` on the reply payload. Channels that
+render the presentation's data blocks natively drop that text; when every
+`table` and `chart` block degrades and no interactive block remains, the
+authored text ships verbatim instead of the generic flatten below.
 
 Fallback text includes:
 

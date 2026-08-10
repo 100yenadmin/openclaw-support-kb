@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LiteLLM"
 source: "https://docs.openclaw.ai/providers/litellm"
-source_hash: "310fcf1802294d3edb37f861920e78664faf6b611e5139a077edb930279eed31"
+source_hash: "1805264ee5eef8ddfdb0cf21e53e1d352ec1473615adc544e381e6a5679013a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/litellm.md"
@@ -121,9 +121,11 @@ LiteLLM can back the `image_generate` tool through OpenAI-compatible `/images/ge
   },
   agents: {
     defaults: {
-      imageGenerationModel: {
-        primary: "litellm/gpt-image-2",
-        timeoutMs: 180_000,
+      mediaModels: {
+        image: {
+          primary: "litellm/gpt-image-2",
+          timeoutMs: 180000,
+        },
       },
     },
   },

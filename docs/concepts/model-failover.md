@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Model failover"
 source: "https://docs.openclaw.ai/concepts/model-failover"
-source_hash: "eacf47da7ae8ba8f39807b74b90618e1f07590edac8f58e29ecb8f73ef8df185"
+source_hash: "ce26e771022a6718d0d861bcda2e194af8ae5e5d8940fa6859aa2e8ba019eed6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/model-failover.md"
@@ -101,7 +101,7 @@ When a later probe succeeds and the session returns to the selected primary, Ope
 ↪️ Model Fallback cleared: <primary> (was <fallback>)
 ```
 
-These notices are operational messages, not assistant content. They deliver once per state change, including side-effect-only turns when feasible, but repeated turn-local fallback transitions do not repeat them. Delivery bypasses normal source-reply suppression, does not consume the first assistant reply slot for threaded channels, and is excluded from text-to-speech and commitment extraction.
+These notices are operational messages, not assistant content. They deliver once per state change, including side-effect-only turns when feasible, but repeated turn-local fallback transitions do not repeat them. Delivery bypasses normal source-reply suppression, does not consume the first assistant reply slot for threaded channels, and is excluded from text-to-speech.
 
 ## Auth storage (keys + OAuth)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Full release validation"
 source: "https://docs.openclaw.ai/reference/full-release-validation"
-source_hash: "af4a880de80d1fc3d2ab16e4de9dc7e69c316b6ca813d488243ca03008a0dd5c"
+source_hash: "acccda1f7b495f0196dd705b46d8ccdce60e0d4a637db87b9e7667d9ad90c530"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/full-release-validation.md"
@@ -93,6 +93,11 @@ Its final zero-retry, medium-thinking turn sends visible progress with omitted
 Codex `final`, reads randomized workspace inputs, writes their exact artifact,
 and sends explicit completion. This catches the v2026.7.1 regression where an
 ordinary progress send terminated the turn.
+
+Use `-f skip_package_telegram_e2e=true` only when the release owner explicitly
+defers the Package Acceptance Telegram E2E to a follow-up beta. The input is
+rejected for `stable` and `full`, recorded in validation evidence, and does not disable the focused
+`rerun_group=npm-telegram` workflow.
 
 ## Top-level stages
 

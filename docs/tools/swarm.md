@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Swarm"
 source: "https://docs.openclaw.ai/tools/swarm"
-source_hash: "363f8523e582f80f9852ffdcde984a8b751e4832f9290b59142105f83fb49a80"
+source_hash: "f97eac5d5678e4399d008115bbaedd66c8b30d563a1f14cadf701af538ac9419"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/swarm.md"
@@ -260,14 +260,13 @@ it can be spawned but cannot start swarms from its own top-level sessions:
 {
   tools: { swarm: { enabled: true, defaultAgentId: "worker" } },
   agents: {
-    list: [
-      {
-        id: "main",
+    entries: {
+      main: {
         default: true,
         subagents: { allowAgents: ["worker"] },
       },
-      { id: "worker", tools: { swarm: false } },
-    ],
+      worker: { tools: { swarm: false } },
+    },
   },
 }
 ```

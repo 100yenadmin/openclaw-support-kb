@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS app"
 source: "https://docs.openclaw.ai/platforms/macos"
-source_hash: "b67e6cdded1890c17ca9849f2bca772d05bd4e2de34031cf1ebf51b9b39cac8d"
+source_hash: "0d8efb17f347af8a33128f651d3b632d325e8c8321e5ca1285dde5f47ef1b8f7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/macos.md"
@@ -72,6 +72,10 @@ The dashboard update card names what the app will update:
   managed local Gateway, or another install the app does not own. The button
   runs that Gateway's normal update flow instead of changing the Mac app.
 
+Either button asks for confirmation first. The card hands the update to the app
+only after you choose **Update Mac app and restart**, so a misclick never starts
+Sparkle.
+
 A failed coordinated update stays in its setup-style window with retry,
 [update guide](/install/updating), and Discord actions. Automatic repair never
 downgrades a newer Gateway or overrides an `extended-stable` channel pin.
@@ -84,8 +88,9 @@ updates only the local Mac node runtime and skips the notification when the
 remote Gateway is older than the app.
 
 Sparkle follows the Gateway's `update.channel` setting. `beta` and `dev` opt in
-to beta app builds; `stable`, `extended-stable`, and missing or unknown values
-stay on stable app builds.
+to beta app builds; `extended-stable` accepts only extended-stable app releases,
+so it stays quiet when no matching app release exists. `stable`, missing, and
+unknown values stay on stable app builds.
 
 ## Open dashboard links
 
@@ -138,7 +143,7 @@ own docs.
 | Install or debug the CLI/Gateway service | [Gateway on macOS](/platforms/mac/bundled-gateway)                                          |
 | Keep state out of cloud-synced folders   | [Gateway on macOS](/platforms/mac/bundled-gateway#state-directory-on-macos)                 |
 | Debug app discovery and connectivity     | [Gateway on macOS](/platforms/mac/bundled-gateway#debug-app-connectivity)                   |
-| Understand launchd behavior              | [Gateway lifecycle](/platforms/mac/child-process)                                           |
+| Understand launchd behavior              | [Gateway on macOS](/platforms/mac/bundled-gateway)                                          |
 | Fix permissions or signing/TCC issues    | [macOS permissions](/platforms/mac/permissions)                                             |
 | Detect the Mac you most recently used    | [Active computer presence](/nodes/presence)                                                 |
 | Connect to a remote Gateway              | [Remote control](/platforms/mac/remote)                                                     |

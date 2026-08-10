@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "8e7a91285463ad9908c8815c4342220d467abb5e654e7acf7759b1ffa86b4f14"
+source_hash: "de69aac9116a03c24cf0ea81089941f1d25b03dd5831c9dedee3e0f326c9136e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -17,6 +17,22 @@ Source: https://docs.openclaw.ai/cli/tui
 
 Open the terminal UI connected to the Gateway, or run it in local embedded
 mode.
+
+```bash
+openclaw tui [target]
+```
+
+`target` can be a Control UI session URL, a compact `host/agent/ref`, a bare
+short reference such as `movies-a1166b81`, or a literal `agent:...` session key.
+A URL or host target authoritatively selects that Gateway; a bare reference
+uses the configured or default Gateway. You can also paste a Control UI URL
+directly as `openclaw <url>` and place the TUI options after it, for example
+`openclaw <url> --token <token> --deliver`.
+
+The bare-URL form accepts `--token`, `--password`, `--tls-fingerprint`,
+`--deliver`, `--thinking`, `--message`, `--timeout-ms`, and `--history-limit`.
+Use `openclaw tui <url>` when you need another TUI option; `--local`, `--url`,
+and `--session` conflict with a session URL.
 
 Related guide: [TUI](/web/tui)
 
@@ -42,8 +58,22 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
 ## Notes
 
 - `--local` cannot combine with `--url`, `--token`, `--password`, or `--tls-fingerprint`.
-- `tui` resolves configured Gateway auth SecretRefs for token/password auth
-  when possible (`env`/`file`/`exec` providers).
+- Pass only one Gateway target. A URL target cannot combine with `--url`, and
+  any positional target cannot combine with `--session` or local mode.
+- A URL or host target never reuses configured credentials or
+  `OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`. It uses the stored
+  device token for that exact Gateway origin, or explicit `--token`/`--password`
+  credentials. On first contact, pass one of those credentials once, approve
+  the pairing request in that Gateway's Control UI, and retry; see
+  [Devices](/cli/devices).
+- Session URLs must stay credential-free. Userinfo and sensitive query or
+  fragment parameters such as `token` and `password` are rejected.
+- Short references resolve through the Gateway. If a short reference is
+  ambiguous, the CLI prints candidate names and longer ID prefixes without
+  attaching to either session.
+- With no URL/host target or explicit `--url`, `tui` resolves configured Gateway
+  auth SecretRefs for token/password auth when possible (`env`/`file`/`exec`
+  providers).
 - With no explicit URL or port, `tui` follows the active local Gateway port
   recorded by the running Gateway. Explicit `--url`, `OPENCLAW_GATEWAY_URL`,
   `OPENCLAW_GATEWAY_PORT`, and remote Gateway config keep precedence.
@@ -52,11 +82,25 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
   `agent:<id>:...`).
 - Local mode uses the embedded agent runtime directly. Most local tools work,
   but Gateway-only features are unavailable.
+- Local mode requires exclusive ownership of the configured state directory. It
+  refuses to start while a Gateway or another embedded writer owns that state;
+  run without `--local` to use the active Gateway, or stop it first with
+  `openclaw gateway stop`.
 - Local mode adds `/auth [provider]` to the TUI command surface.
 - Plugin approval gates still apply in local mode: tools that require approval
   prompt for a decision in the terminal, nothing is silently auto-approved.
 - Session [goals](/tools/goal) appear in the footer and can be managed with
   `/goal`.
+
+## Session target errors
+
+| Failure                                    | Recovery                                                                                                                                         |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| The Gateway predates short-link resolution | Copy the full session key from that Gateway's Control UI.                                                                                        |
+| Session missing or short ref ambiguous     | For the configured/local Gateway, run `openclaw sessions list`; for a URL/host target, choose a longer or full key in that Gateway's Control UI. |
+| Gateway unreachable                        | The error names the selected origin. For a `*.ts.net` host, connect Tailscale and confirm the Gateway is reachable on the tailnet.               |
+| Stored device token revoked or rotated     | Rotate it with `openclaw devices rotate --device <deviceId> --role operator`, then reconnect.                                                    |
+| TLS certificate pin mismatch               | The original TLS fingerprint error passes through unchanged; verify the configured or explicit pin before retrying.                              |
 
 ## Examples
 
@@ -64,6 +108,9 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
 openclaw chat
 openclaw tui --local
 openclaw tui
+openclaw tui https://gateway.example/dashboard/main/movies-a1166b81
+openclaw https://gateway.example/dashboard/main/movies-a1166b81 --token <token>
+openclaw tui movies-a1166b81
 openclaw tui --url ws://127.0.0.1:18789 --token <token>
 openclaw tui --session main --deliver
 openclaw chat --message "Compare my config to the docs and tell me what to fix"
@@ -101,6 +148,8 @@ rerun `openclaw config validate`. See [TUI](/web/tui) and
 
 - [CLI reference](/cli)
 - [TUI](/web/tui)
+- [Control UI URLs](/web/urls)
+- [Devices](/cli/devices)
 - [Goal](/tools/goal)
 
 ---

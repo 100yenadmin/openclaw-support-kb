@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "7370affee822eff9c3c7600c8ae4c01b63a2b9bec915fe7b67cd9e4a359e17ee"
+source_hash: "8668368ff9d6562e25c3b9132b9462262d280ba40f5b576d49b23bebd8ff0feb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -268,13 +268,13 @@ keeps `/btw` behavior identical to other non-Codex runtimes.
 
 ## Doctor
 
-`extensions/copilot/doctor-contract-api.ts` is auto-loaded by
-`src/plugins/doctor-contract-registry.ts`. It contributes:
+The Copilot plugin contributes doctor repair metadata through its manifest and
+doctor contract:
 
 - An empty `legacyConfigRules` (no retired fields yet).
 - A no-op `normalizeCompatibilityConfig` (kept so future field retirements
   have a stable in-tree home).
-- One `sessionRouteStateOwners` entry: provider `github-copilot`, runtime
+- Its manifest declares one `sessionRouteStateOwners` entry: provider `github-copilot`, runtime
   `copilot`, CLI session key `copilot`, auth profile prefix `github-copilot:`.
 
 ## Limitations

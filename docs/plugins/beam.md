@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Beam plugin"
 source: "https://docs.openclaw.ai/plugins/beam"
-source_hash: "e25481553c1ab2c84cada636fed82dc0266e309a093f546d6c10fce74a089321"
+source_hash: "010110a3d340843dcdff005ee09be1e0b8860366a27a0a2d7616d2ae9926a5e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/beam.md"
@@ -96,7 +96,7 @@ A successful upload returns the stable Beam id and a relative Control UI URL:
 {
   "ok": true,
   "beamId": "0123456789abcdef0123456789abcdef",
-  "url": "/chat?session=catalog%3Abeam%3Agateway%3A0123456789abcdef0123456789abcdef"
+  "url": "/chat/main?catalog=beam&host=gateway&thread=<beamId>"
 }
 ```
 

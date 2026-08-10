@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "43d964d9e8ea29fb0657b912a10561b280ccf459b163b2d3d6085828239ec5c8"
+source_hash: "387a4ac15a00c80ff644ed75f8cd15c8010bbeac3b1573507fd5d9c7374c5199"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -575,16 +575,16 @@ voice, model, persona, or auto-TTS mode. The agent block deep-merges over
     },
   },
   agents: {
-    list: [
-      {
-        id: "reader",
+    entries: {
+      reader: {
+        default: true,
         tts: {
           providers: {
             elevenlabs: { speakerVoiceId: "EXAVITQu4vr4xnSDxMaL" },
           },
         },
       },
-    ],
+    },
   },
 }
 ```

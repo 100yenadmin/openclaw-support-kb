@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory architecture"
 source: "https://docs.openclaw.ai/concepts/memory-architecture"
-source_hash: "4167ad1a83f73b9c6d4e54079e81021f8f59a76db5efc6c60748e214663fc313"
+source_hash: "7f9aa5b6eb8d3c95edc594a8542131e45dc5ffebcbc686bb99a699d6fe3850b5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-architecture.md"
@@ -410,14 +410,14 @@ authority in a future session.
 Memory architecture is mostly convention over configuration; these are the
 knobs that exist:
 
-| Concern                         | Where                                                           | Reference                                                        |
-| ------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
-| Dreaming enable, cadence, model | `plugins.entries.memory-core.config.dreaming`                   | [Dreaming](/concepts/dreaming)                                   |
-| Search providers, hybrid tuning | `memory.search`                                                 | [Memory config](/reference/memory-config)                        |
-| Escalation lane mode, scope     | `plugins.entries.active-memory`                                 | [Active memory](/concepts/active-memory)                         |
-| Cross-conversation recall       | `agents.entries.<id>.memory.search.rememberAcrossConversations` | [Active memory](/concepts/active-memory)                         |
-| Flush behavior                  | `agents.defaults.compaction.memoryFlush`                        | [Memory overview](/concepts/memory)                              |
-| Backend selection               | plugin slots                                                    | [Builtin](/concepts/memory-builtin), [QMD](/concepts/memory-qmd) |
+| Concern                         | Where                                                           | Reference                                                |
+| ------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------- |
+| Dreaming enable, cadence, model | `plugins.entries.memory-core.config.dreaming`                   | [Dreaming](/concepts/dreaming)                           |
+| Search providers, hybrid tuning | `memory.search`                                                 | [Memory config](/reference/memory-config)                |
+| Escalation lane mode, scope     | `plugins.entries.active-memory`                                 | [Active memory](/concepts/active-memory)                 |
+| Cross-conversation recall       | `agents.entries.<id>.memory.search.rememberAcrossConversations` | [Active memory](/concepts/active-memory)                 |
+| Flush behavior                  | `agents.defaults.compaction.memoryFlush`                        | [Memory overview](/concepts/memory)                      |
+| Memory plugin selection         | `plugins.slots.memory`                                          | [Builtin](/concepts/memory-builtin), [Plugins](/plugins) |
 
 ## Related
 

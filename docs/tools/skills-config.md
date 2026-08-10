@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "46e3e5f73de792d80c2a480a2641aab9ff6c15300b1309206ab82a3cf54fe724"
+source_hash: "31ab34c40c558720b4921a71113d02c27a9e16f2d8e8bc1dfe96ba283729f56e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -299,11 +299,11 @@ different visible skill set per agent.
     defaults: {
       skills: ["github", "weather"], // shared baseline
     },
-    list: [
-      { id: "writer" }, // inherits github, weather
-      { id: "docs", skills: ["docs-search"] }, // replaces defaults entirely
-      { id: "locked-down", skills: [] }, // no skills
-    ],
+    entries: {
+      writer: { default: true }, // inherits github, weather
+      docs: { skills: ["docs-search"] }, // replaces defaults entirely
+      "locked-down": { skills: [] }, // no skills
+    },
   },
 }
 ```

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Broadcast groups"
 source: "https://docs.openclaw.ai/channels/broadcast-groups"
-source_hash: "8ee81c0fa42e2b1d242d132dbdc20a269de3d072e48556a06212fb3d69f480d5"
+source_hash: "6236b7adb04d7fa62b6feee881e1f1edd82e902041af49e0089e07a95a2d6e1b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/broadcast-groups.md"
@@ -69,26 +69,24 @@ Every listed agent id must exist in `agents.entries`: config validation reports 
 ```json
 {
   "agents": {
-    "list": [
-      {
-        "id": "code-reviewer",
+    "entries": {
+      "code-reviewer": {
+        "default": true,
         "name": "Code Reviewer",
         "workspace": "/path/to/code-reviewer",
         "sandbox": { "mode": "all" }
       },
-      {
-        "id": "security-auditor",
+      "security-auditor": {
         "name": "Security Auditor",
         "workspace": "/path/to/security-auditor",
         "sandbox": { "mode": "all" }
       },
-      {
-        "id": "docs-generator",
+      "docs-generator": {
         "name": "Documentation Generator",
         "workspace": "/path/to/docs-generator",
         "sandbox": { "mode": "all" }
       }
-    ]
+    }
   },
   "broadcast": {
     "strategy": "parallel",
@@ -202,11 +200,11 @@ AccordionGroup
     ```json
     {
       "agents": {
-        "list": [
-          { "id": "security-scanner", "name": "Security Scanner" },
-          { "id": "code-formatter", "name": "Code Formatter" },
-          { "id": "test-generator", "name": "Test Generator" }
-        ]
+        "entries": {
+          "security-scanner": { "default": true, "name": "Security Scanner" },
+          "code-formatter": { "name": "Code Formatter" },
+          "test-generator": { "name": "Test Generator" }
+        }
       }
     }
     ```
@@ -217,10 +215,13 @@ AccordionGroup
     ```json
     {
       "agents": {
-        "list": [
-          { "id": "reviewer", "tools": { "allow": ["read", "exec"] } },
-          { "id": "fixer", "tools": { "allow": ["read", "write", "edit", "exec"] } }
-        ]
+        "entries": {
+          "reviewer": {
+            "default": true,
+            "tools": { "allow": ["read", "exec"] }
+          },
+          "fixer": { "tools": { "allow": ["read", "write", "edit", "exec"] } }
+        }
       }
     }
     ```
@@ -325,24 +326,22 @@ Example 1: Code review team
         ]
       },
       "agents": {
-        "list": [
-          {
-            "id": "code-formatter",
+        "entries": {
+          "code-formatter": {
+            "default": true,
             "workspace": "~/agents/formatter",
             "tools": { "allow": ["read", "write"] }
           },
-          {
-            "id": "security-scanner",
+          "security-scanner": {
             "workspace": "~/agents/security",
             "tools": { "allow": ["read", "exec"] }
           },
-          {
-            "id": "test-coverage",
+          "test-coverage": {
             "workspace": "~/agents/testing",
             "tools": { "allow": ["read", "exec"] }
           },
-          { "id": "docs-checker", "workspace": "~/agents/docs", "tools": { "allow": ["read"] } }
-        ]
+          "docs-checker": { "workspace": "~/agents/docs", "tools": { "allow": ["read"] } }
+        }
       }
     }
     ```
@@ -360,11 +359,11 @@ Example 2: Multi-language pipeline
         "+15555550123": ["detect-language", "translator-en", "translator-de"]
       },
       "agents": {
-        "list": [
-          { "id": "detect-language", "workspace": "~/agents/lang-detect" },
-          { "id": "translator-en", "workspace": "~/agents/translate-en" },
-          { "id": "translator-de", "workspace": "~/agents/translate-de" }
-        ]
+        "entries": {
+          "detect-language": { "default": true, "workspace": "~/agents/lang-detect" },
+          "translator-en": { "workspace": "~/agents/translate-en" },
+          "translator-de": { "workspace": "~/agents/translate-de" }
+        }
       }
     }
     ```

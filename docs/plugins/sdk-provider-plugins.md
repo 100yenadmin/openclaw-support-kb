@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "d253f8963fe0ada99e07afb81dafe0c5dac617b463ad0597f1556aefb3b33ca2"
+source_hash: "64222b5bbccc28079f5b44d587993743e163f51f1a901be708c5eae5294275ed"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -913,9 +913,20 @@ Realtime voice
         Consumers of `createRealtimeVoiceBridgeSession` may likewise return a
         promise from `onToolCall`; synchronous throws and rejections are routed
         to the session's `onError` callback.
+        The host may pass `sendUserMessage(text, { toolChoice })` while the
+        response state is idle to force one named function for that response;
+        later responses return to the session's configured tool choice.
         Set `handlesInputAudioBargeIn` only when provider VAD confirms an
         interruption by calling `onClearAudio("barge-in")`. Providers that omit
         the flag use OpenClaw's local input-audio fallback detection.
+
+        A browser-session request can include `gatewayControl` when the host has
+        explicitly negotiated server-owned provider control. The provider keeps
+        vendor authentication and signaling private, calls
+        `gatewayControl.bindBridge(bridge)` before connecting the attached
+        control transport, and forwards bridge events through the supplied
+        callbacks. The Gateway remains the owner of tool policy and run
+        lifecycle. Do not infer or enable this mode from a model name alone.
 
 
 Media understanding

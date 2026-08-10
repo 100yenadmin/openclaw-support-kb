@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin testing"
 source: "https://docs.openclaw.ai/plugins/sdk-testing"
-source_hash: "d656c7e8c767391ebc9dfc79703c6b7312eaf03a5888decd54544a3b121d4f97"
+source_hash: "2357a44a2a8ad82b6b188b35f84e69aa495681420ff8b7c76397d35319fc803d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-testing.md"
@@ -64,7 +64,6 @@ the focused test subpaths above.
 | `installChannelSetupContractSuite`                                        | Install generic channel setup contract cases. Import from `plugin-sdk/channel-test-helpers`                                                 |
 | `installChannelStatusContractSuite`                                       | Install generic channel status contract cases. Import from `plugin-sdk/channel-test-helpers`                                                |
 | `expectDirectoryIds`                                                      | Assert channel directory ids from a directory-list function. Import from `plugin-sdk/channel-test-helpers`                                  |
-| `assertBundledChannelEntries`                                             | Assert bundled channel entrypoints expose the expected public contract. Import from `plugin-sdk/channel-test-helpers`                       |
 | `formatEnvelopeTimestamp`                                                 | Format deterministic envelope timestamps. Import from `plugin-sdk/channel-test-helpers`                                                     |
 | `expectPairingReplyText`                                                  | Assert channel pairing reply text and extract its code. Import from `plugin-sdk/channel-test-helpers`                                       |
 | `describePluginRegistrationContract`                                      | Install plugin registration contract checks. Import from `plugin-sdk/plugin-test-contracts`                                                 |
@@ -324,7 +323,7 @@ pnpm test src/plugins/contracts/runtime-seams.contract.test.ts
 
 ## Lint enforcement (in-repo plugins)
 
-`scripts/run-additional-boundary-checks.mjs` runs a set of `lint:plugins:*`
+`scripts/run-additional-boundary-checks.mts` runs a set of `lint:plugins:*`
 import-boundary checks in CI; each can also be run standalone locally:
 
 | Command                                                        | Enforces                                                                                     |

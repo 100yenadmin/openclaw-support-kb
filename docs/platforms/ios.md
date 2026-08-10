@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "b6cd803777a81b1b57f2ee5a2a472266320e6aa54282077f11279b85d574d924"
+source_hash: "a2de0d1ad806d929241ff958cf170806ae2017f9d4114c81ba6aa168a91e5747"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -38,10 +38,12 @@ Availability: iPhone app builds are distributed through Apple channels when enab
 
 ## Quick start (pair + connect)
 
-On first launch the app walks through a short pairing explainer and a
-permissions page (notifications, camera, microphone, photos, contacts,
-calendar, reminders, location). Every grant is optional and can be changed
-later in **Settings** -> **Permissions**, or in the iOS Settings app.
+On first launch the app walks through a short pairing explainer, then Gateway
+setup. It does not present an aggregate permissions page. Optional access is
+requested when you use the related feature, or after you tap **Continue** for
+that permission under **Settings** -> **Permissions** -> **Privacy & Access**.
+**Continue** immediately presents the native iOS authorization prompt. You can
+change granted access later in the iOS Settings app.
 
 1. Start an authenticated Gateway with a route your phone can reach. Tailscale
    Serve is the recommended remote path:

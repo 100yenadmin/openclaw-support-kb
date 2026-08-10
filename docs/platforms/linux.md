@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "9045e281c5a7beab486a6b9291f70cf8b2f545cbe158b0aa5f3534319d07c29f"
+source_hash: "4919529452a6dac1de0420a1b780e68ab99d4391081f69a9c8add46e1f9d9c80"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -210,7 +210,7 @@ Write a unit by hand only for a custom setup. Minimal user-unit example
 
 ```ini
 [Unit]
-Description=OpenClaw Gateway (profile: <profile>, v<version>)
+Description=OpenClaw Gateway (profile: <profile>)
 After=network-online.target
 Wants=network-online.target
 StartLimitBurst=5
@@ -247,9 +247,9 @@ sessions and channel connections, so OpenClaw biases transient child
 processes to be killed first when possible.
 
 For eligible Linux child spawns, OpenClaw wraps the command in a short
-`/bin/sh` shim that raises the child's own `oom_score_adj` to `1000`, then
-`exec`s the real command. This is unprivileged: a process may always raise
-its own OOM score.
+`/bin/sh` shim that attempts to raise the child's own `oom_score_adj` to
+`1000`, then `exec`s the real command. This is unprivileged: a process may
+always raise its own OOM score.
 
 Covered child process surfaces:
 
@@ -261,6 +261,9 @@ Covered child process surfaces:
 The wrapper is Linux-only and skipped when `/bin/sh` is unavailable, or when
 the child env sets `OPENCLAW_CHILD_OOM_SCORE_ADJ` to `0`, `false`, `no`, or
 `off`.
+Use this opt-out only for controlled diagnosis: it removes child-first OOM
+protection and makes the Gateway more likely to be selected as the victim under
+real memory pressure.
 
 Verify a child process:
 
@@ -268,8 +271,9 @@ Verify a child process:
 cat /proc/<child-pid>/oom_score_adj
 ```
 
-Expected value for covered children is `1000`; the Gateway process itself
-keeps its normal score (usually `0`).
+When the write succeeds, the expected value for covered children is `1000`.
+If `/proc` is unavailable or unwritable, the child still runs without the OOM
+bias. The Gateway process itself keeps its normal score (usually `0`).
 
 The systemd unit's `OOMPolicy=continue` keeps the Gateway service alive when
 a transient child is selected by the OOM killer instead of marking the whole

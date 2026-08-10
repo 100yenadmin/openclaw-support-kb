@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "d35e38e5bdf0205fc91b5522b489f6cb10e63a6453aa4cf86c57c8128aab0304"
+source_hash: "3b1c511b02c9f886077609182e058f03c39f0094145e97a20fe6316a192661a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -190,20 +190,19 @@ How can I use different models or settings for different tasks?
     ```json5
     {
       agents: {
-        list: [
-          {
-            id: "coder",
+        entries: {
+          coder: {
+            default: true,
             model: "xiaomi/mimo-v2.5-pro",
             thinkingDefault: "high",
             params: { temperature: 0.1 },
           },
-          {
-            id: "chat",
+          chat: {
             model: "xiaomi/mimo-v2.5-pro",
             thinkingDefault: "off",
             params: { temperature: 0.8 },
           },
-        ],
+        },
       },
     }
     ```
@@ -1022,7 +1021,7 @@ How does OpenClaw load environment variables?
     - `.env` from the current working directory.
     - a global fallback `.env` from `~/.openclaw/.env` (`$OPENCLAW_STATE_DIR/.env`).
 
-    Neither `.env` file overrides existing env vars. Provider credential and endpoint-routing keys are an exception for workspace `.env`: keys such as `GEMINI_API_KEY`, `XAI_API_KEY`, `MISTRAL_API_KEY`, or any key ending in `_ENDPOINT` (and other bundled-provider auth or endpoint env vars) are ignored from workspace `.env` and should live in the process environment, `~/.openclaw/.env`, or config `env`.
+    Normally, neither `.env` file overrides existing env vars. For an OpenClaw-installed systemd service, the global `.env` may replace only service values that OpenClaw recorded as managed; operator-owned service values still take precedence. Provider credential and endpoint-routing keys are an exception for workspace `.env`: keys such as `GEMINI_API_KEY`, `XAI_API_KEY`, `MISTRAL_API_KEY`, or any key ending in `_ENDPOINT` (and other bundled-provider auth or endpoint env vars) are ignored from workspace `.env` and should live in the process environment, `~/.openclaw/.env`, or config `env`.
 
     Inline env vars in config apply only if missing from the process env:
 

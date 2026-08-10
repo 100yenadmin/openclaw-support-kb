@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Video generation"
 source: "https://docs.openclaw.ai/tools/video-generation"
-source_hash: "0f52ff60aff3ec4f4ec4fc6e135311d0aec6a0c43d30ae85d03d13363976e98f"
+source_hash: "bbae73daf2799a999f4ea371d9eb35305c6a35a8396449624add24d1c139abe2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/video-generation.md"
@@ -328,8 +328,8 @@ aggregated error includes the skip reason for each.
 OpenClaw resolves the model in this order:
 
 1. **`model` tool parameter** - if the agent specifies one in the call.
-2. **`videoGenerationModel.primary`** from config.
-3. **`videoGenerationModel.fallbacks`** in order.
+2. **`agents.defaults.mediaModels.video.primary`** from config.
+3. **`agents.defaults.mediaModels.video.fallbacks`** in order.
 4. **Auto-detection** - providers that have valid auth, starting with the
    current default provider, then remaining providers in alphabetical
    order.
@@ -344,10 +344,12 @@ Automatic fallback across authenticated providers is always enabled. A per-call
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "google/veo-3.1-fast-generate-preview",
-        fallbacks: ["runway/gen4.5", "qwen/wan2.6-t2v"],
-        timeoutMs: 180000, // optional per-tool provider request timeout override
+      mediaModels: {
+        video: {
+          primary: "google/veo-3.1-fast-generate-preview",
+          fallbacks: ["runway/gen4.5", "qwen/wan2.6-t2v"],
+          timeoutMs: 180000, // optional per-tool provider request timeout override
+        },
       },
     },
   },
@@ -594,9 +596,11 @@ Set the default video-generation model in your OpenClaw config:
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "qwen/wan2.6-t2v",
-        fallbacks: ["qwen/wan2.6-r2v-flash"],
+      mediaModels: {
+        video: {
+          primary: "qwen/wan2.6-t2v",
+          fallbacks: ["qwen/wan2.6-r2v-flash"],
+        },
       },
     },
   },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin inventory"
 source: "https://docs.openclaw.ai/plugins/plugin-inventory"
-source_hash: "1759ce7ddb8d81dec4f37cbacaf9933b726e72a7affce56c553e7fcbe2f1fdab"
+source_hash: "8ee7ae1e0dd91dfbbe81829deafbe922f9608c69cba386966154c7555377e0f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/plugin-inventory.md"
@@ -15,8 +15,9 @@ Source: https://docs.openclaw.ai/plugins/plugin-inventory
 
 # Plugin inventory
 
-This page is generated from `extensions/*/package.json`, `openclaw.plugin.json`,
-and the root npm package `files` exclusions. Regenerate it with:
+This page is generated from top-level `extensions/*/openclaw.plugin.json`
+manifests and the root npm package `files` exclusions. Optional `package.json`
+metadata enriches package and distribution details. Regenerate it with:
 
 ```bash
 pnpm plugins:inventory:gen
@@ -57,7 +58,9 @@ Each entry lists the package, distribution route, and description.
 
 ## Core npm package
 
-54 plugins
+58 plugins
+
+- **[active-memory](/plugins/reference/active-memory)** (`openclaw`) - included in OpenClaw. Runs bounded pre-reply memory retrieval and implements per-agent Remember across conversations for eligible private conversations.
 
 - **[admin-http-rpc](/plugins/reference/admin-http-rpc)** (`@openclaw/admin-http-rpc`) - included in OpenClaw. OpenClaw admin HTTP RPC endpoint.
 
@@ -84,6 +87,8 @@ Each entry lists the package, distribution route, and description.
 - **[cua-computer](/plugins/reference/cua-computer)** (`@openclaw/cua-computer`) - included in OpenClaw. Experimental CUA Driver SDK computer control for Windows and Linux node hosts.
 
 - **[deepgram](/plugins/reference/deepgram)** (`@openclaw/deepgram-provider`) - included in OpenClaw. Adds media understanding provider support. Adds realtime transcription provider support.
+
+- **[device-pair](/plugins/reference/device-pair)** (`openclaw`) - included in OpenClaw. Generate setup codes and approve device pairing requests.
 
 - **[document-extract](/plugins/reference/document-extract)** (`@openclaw/document-extract-plugin`) - included in OpenClaw. Extract text and fallback page images from local document attachments.
 
@@ -137,6 +142,8 @@ Each entry lists the package, distribution route, and description.
 
 - **[openai](/plugins/reference/openai)** (`@openclaw/openai-provider`) - included in OpenClaw. Adds OpenAI model provider support to OpenClaw.
 
+- **[opencode-go](/plugins/reference/opencode-go)** (`@openclaw/opencode-go-provider`) - included in OpenClaw. Adds OpenCode Go model provider support to OpenClaw.
+
 - **[openrouter](/plugins/reference/openrouter)** (`@openclaw/openrouter-provider`) - included in OpenClaw. Adds OpenRouter model provider support to OpenClaw.
 
 - **[policy](/plugins/reference/policy)** (`@openclaw/policy`) - included in OpenClaw. Adds policy-backed doctor checks for workspace conformance.
@@ -148,6 +155,8 @@ Each entry lists the package, distribution route, and description.
 - **[senseaudio](/plugins/reference/senseaudio)** (`@openclaw/senseaudio-provider`) - included in OpenClaw. Adds media understanding provider support.
 
 - **[sglang](/plugins/reference/sglang)** (`@openclaw/sglang-provider`) - included in OpenClaw. Adds SGLang model provider support to OpenClaw.
+
+- **[talk-voice](/plugins/reference/talk-voice)** (`openclaw`) - included in OpenClaw. Manage Talk voice selection (list/set).
 
 - **[telegram](/plugins/reference/telegram)** (`@openclaw/telegram`) - included in OpenClaw. Adds the Telegram channel surface for sending and receiving OpenClaw messages.
 
@@ -169,7 +178,7 @@ Each entry lists the package, distribution route, and description.
 
 ## Official external packages
 
-91 plugins
+90 plugins
 
 - **[acpx](/plugins/reference/acpx)** (`@openclaw/acpx`) - npm; ClawHub. OpenClaw ACP runtime backend with plugin-owned session and transport management.
 
@@ -285,8 +294,6 @@ Each entry lists the package, distribution route, and description.
 
 - **[opencode](/plugins/reference/opencode)** (`@openclaw/opencode-provider`) - npm; ClawHub: `clawhub:@openclaw/opencode-provider`. Adds OpenCode model provider support to OpenClaw.
 
-- **[opencode-go](/plugins/reference/opencode-go)** (`@openclaw/opencode-go-provider`) - npm; ClawHub: `clawhub:@openclaw/opencode-go-provider`. Adds OpenCode Go model provider support to OpenClaw.
-
 - **[openshell](/plugins/reference/openshell)** (`@openclaw/openshell-sandbox`) - npm; ClawHub. OpenClaw sandbox backend for the NVIDIA OpenShell CLI with mirrored local workspaces and SSH command execution.
 
 - **[parallel](/tools/parallel-search)** (`@openclaw/parallel-plugin`) - npm; ClawHub: `clawhub:@openclaw/parallel-plugin`. Adds web search provider support.
@@ -309,7 +316,7 @@ Each entry lists the package, distribution route, and description.
 
 - **[slack](/plugins/reference/slack)** (`@openclaw/slack`) - npm; ClawHub. OpenClaw Slack channel plugin for channels, DMs, commands, and app events.
 
-- **[sms](/plugins/reference/sms)** (`@openclaw/sms`) - npm; ClawHub: `clawhub:@openclaw/sms`. Twilio SMS channel plugin for OpenClaw text messages.
+- **[sms](/plugins/reference/sms)** (`@openclaw/sms`) - npm; ClawHub: `clawhub:@openclaw/sms`. Twilio SMS/MMS channel plugin for OpenClaw messages.
 
 - **[stepfun](/plugins/reference/stepfun)** (`@openclaw/stepfun-provider`) - npm; ClawHub: `clawhub:@openclaw/stepfun-provider`. Adds StepFun, StepFun Plan model provider support to OpenClaw.
 

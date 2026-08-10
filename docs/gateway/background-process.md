@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "67e8e07ce18a66dc69169e12b4298a83df537a2c0c6e1dce32ec5a6e292db9e1"
+source_hash: "0c7ab2fb67b71bb8ed82b711ae25f80897093c0f1b6bd7d313259d5e6b509a71"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -34,11 +34,11 @@ Parameters:
 
 Behavior:
 
-- Foreground runs return output directly.
+- Foreground runs return retained output directly and disclose when earlier output exceeded the aggregate cap.
 - When backgrounded (explicit or via `yieldMs` timeout), the tool returns `status: "running"` + `sessionId` and a short output tail.
 - Backgrounded and `yieldMs` runs inherit `tools.exec.timeoutSeconds` unless the call passes an explicit `timeout`.
-- Output stays in memory until the session is polled or cleared.
-- Finished sessions expire after their configured TTL. The registry also retains at most 50 finished sessions and 2,000,000 total output characters, evicting the oldest records first. The newest completed session retains its full output even if it exceeds the aggregate limit.
+- Output stays in memory up to the per-session aggregate cap until the session is polled or cleared.
+- Finished sessions expire after their configured TTL. The registry also retains at most 50 finished sessions and 2,000,000 total retained output characters, evicting the oldest records first. The newest completed session retains its capped per-session aggregate even when that record alone exceeds the global limit.
 - If the `process` tool is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.
 - Spawned exec commands receive `OPENCLAW_SHELL=exec` for context-aware shell/profile rules.
 - For long-running work that starts now: start it once and rely on automatic completion wake (when enabled) once the command emits output or fails.
@@ -50,8 +50,8 @@ Behavior:
 | Variable                                 | Effect                                                                                                           |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `OPENCLAW_BASH_YIELD_MS`                 | Default yield before backgrounding (ms). Default 10000, clamped 10-120000.                                       |
-| `OPENCLAW_BASH_MAX_OUTPUT_CHARS`         | In-memory output cap (chars).                                                                                    |
-| `OPENCLAW_BASH_PENDING_MAX_OUTPUT_CHARS` | Pending stdout/stderr cap per stream (chars).                                                                    |
+| `OPENCLAW_BASH_MAX_OUTPUT_CHARS`         | In-memory aggregate cap in characters. Default 200000, clamped 1000-200000.                                      |
+| `OPENCLAW_BASH_PENDING_MAX_OUTPUT_CHARS` | Pending stdout/stderr cap per stream. Default 30000, clamped 1000-200000 and limited by the aggregate cap.       |
 | `OPENCLAW_BASH_JOB_TTL_MS`               | TTL for finished sessions (ms), bounded to 1m-3h.                                                                |
 | `OPENCLAW_PROCESS_INPUT_WAIT_IDLE_MS`    | Idle-output threshold before writable background sessions are marked as likely waiting for input. Default 15000. |
 
@@ -100,6 +100,7 @@ Notes:
 - `process list` includes a derived `name` (command verb + target) for quick scans.
 - `process list`, `poll`, and `log` report `waitingForInput` only when the session still has writable stdin and has been idle longer than the input-wait threshold (default 15000 ms, `OPENCLAW_PROCESS_INPUT_WAIT_IDLE_MS`).
 - `process log` uses line-based `offset`/`limit`. When both are omitted, it returns the last 200 lines with a paging hint. When `offset` is set and `limit` isn't, it returns from `offset` to the end (not capped to 200).
+- `process poll` and `process log` distinguish output discarded at the aggregate retention cap from output merely omitted by the pending buffer or retained tail. Discarded output cannot be recovered; paged logs can inspect only the retained portion.
 - `poll`'s `timeout` waits up to that many milliseconds before returning; values above 30000 are clamped to 30000.
 - Polling is for on-demand status, not wait-loop scheduling. If the work should happen later, use cron.
 

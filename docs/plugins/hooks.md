@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "b6fc05a4b3bf421f4c65eb997002b7688953f872d3db93785f01556dca03ed7f"
+source_hash: "981c9ea4d646b7a17f4db8837ae3076653564af08581b06bd12228dd37d05336"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -457,12 +457,12 @@ Load the file directly and restart the Gateway:
 ```json5
 {
   agents: {
-    list: [
-      {
-        id: "maintenance-agent",
+    entries: {
+      "maintenance-agent": {
+        default: true,
         workspace: "~/.openclaw/workspace-maintenance",
       },
-    ],
+    },
   },
   bindings: [
     {

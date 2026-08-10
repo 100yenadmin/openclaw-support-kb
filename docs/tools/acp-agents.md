@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "5555152a204b6db64b8f349c74d1abb81e163c63c674c8a1f75f73158686298d"
+source_hash: "cf4393b81fb56468222fdbdc5cf47eb2f769b96c863e14cc44f0cc6989d09c6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -417,9 +417,9 @@ Use `agents.entries.*.runtime` to define ACP defaults once per agent:
 ```json5
 {
   agents: {
-    list: [
-      {
-        id: "codex",
+    entries: {
+      codex: {
+        default: true,
         runtime: {
           type: "acp",
           acp: {
@@ -430,14 +430,13 @@ Use `agents.entries.*.runtime` to define ACP defaults once per agent:
           },
         },
       },
-      {
-        id: "claude",
+      claude: {
         runtime: {
           type: "acp",
           acp: { agent: "claude", backend: "acpx", mode: "persistent" },
         },
       },
-    ],
+    },
   },
   bindings: [
     {
@@ -605,10 +604,10 @@ ParamField
   session as system events. OpenClaw records the full relay history in the
   child agent's SQLite state and removes it with the child session. Parent
   progress streams show assistant commentary and ACP status progress by default unless
-  `streaming.progress.commentary=false`. Discord also defaults parent
-  previews to progress mode when no stream mode is configured. Status
-  progress still honors `acp.stream.tagVisibility`, so tags such as `plan`
-  remain hidden unless explicitly enabled.
+  `streaming.progress.commentary=false`. Discord parent progress requires an
+  explicit `streaming.mode: "progress"`; unset Discord streaming stays quiet.
+  Status progress still honors `acp.stream.tagVisibility`, so tags such as
+  `plan` remain hidden unless explicitly enabled.
 
 ACP `sessions_spawn` runs use `agents.defaults.subagents.runTimeoutSeconds`
 for their default child turn limit. The tool does not accept per-call

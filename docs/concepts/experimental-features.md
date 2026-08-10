@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Experimental features"
 source: "https://docs.openclaw.ai/concepts/experimental-features"
-source_hash: "6cc3958ad4db37344416caf10bf3e938ee4cc248e0aa40360025ee4b5ff1406e"
+source_hash: "c9dc51adc110fe3ecb81219ba549894be3007d84e6db4156fd55c27159bb1021"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/experimental-features.md"
@@ -27,6 +27,7 @@ Experimental features are preview surfaces behind explicit flags. They need more
 | Local model runtime | `agents.defaults.experimental.localModelLean`, `agents.entries.*.experimental.localModelLean` | A smaller or stricter local backend chokes on OpenClaw's full default tool surface                                                | [Local Models](/gateway/local-models)                                                  |
 | Codex harness       | `plugins.entries.codex.config.appServer.experimental.sandboxExecServer`                       | You want native Codex app-server 0.143.0 or newer to target an OpenClaw sandbox-backed exec-server instead of disabling Code Mode | [Codex harness reference](/plugins/codex-harness-reference#sandboxed-native-execution) |
 | Code Mode           | `tools.codeMode.enabled`                                                                      | You want compact code-orchestrated access to a hidden OpenClaw tool catalog                                                       | [Code Mode](/tools/code-mode)                                                          |
+| Cloud workers       | `cloudWorkers.desktop`                                                                        | You want to watch or control desktop-capable cloud worker environments from the Control UI                                        | [Cloud Worker Desktop](/gateway/cloud-workers#desktop-interactive)                     |
 | Swarm               | `tools.swarm.enabled`                                                                         | You want Code Mode scripts to orchestrate bounded groups of sub-agents in parallel                                                | [Swarm](/tools/swarm)                                                                  |
 
 ## Control UI Labs
@@ -36,9 +37,11 @@ Control UI switch. Enabling or disabling a lab patches the canonical Gateway
 config immediately; the page shows a restart hint only when a feature requires
 one.
 
-Code Mode and Swarm are the currently shipped Labs entries. Both switches
-write existing validated config keys and normally take effect for future agent
-runs without restarting the Gateway.
+The currently shipped Labs entries are Code Mode, Swarm, Tool Search,
+Tool-loop detection, Lean tools for local models, Message audit metadata, and
+Cloud Worker Desktop. Message audit metadata and Cloud Worker Desktop require a
+Gateway restart; the other switches normally take effect for future agent runs
+without restarting.
 
 ## Local model lean mode
 
@@ -93,15 +96,15 @@ For one agent only:
 ```json5
 {
   agents: {
-    list: [
-      {
-        id: "local",
+    entries: {
+      local: {
+        default: true,
         model: "lmstudio/gemma-4-e4b-it",
         experimental: {
           localModelLean: true,
         },
       },
-    ],
+    },
   },
 }
 ```

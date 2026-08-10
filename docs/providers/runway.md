@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "07dbd791db5bc2d6ba3bfecb122d843f292ca2e366743c34f73d5cab44d89b22"
+source_hash: "5cf0c0492284bbe0353e1037416c05b7de3d999935eccecb213bc59f6ef7d2f5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
@@ -80,8 +80,10 @@ Note
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "runway/gen4.5",
+      mediaModels: {
+        video: {
+          primary: "runway/gen4.5",
+        },
       },
     },
   },

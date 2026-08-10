@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Parallel specialist lanes"
 source: "https://docs.openclaw.ai/concepts/parallel-specialist-lanes"
-source_hash: "c94676c538f7ec26aaf3823f05f9db588851f291b3172a63d8bb20652bcf3ccb"
+source_hash: "18c5a2a5bb66b7f916faf19694834eeea009746f9ec546cd27c8ea70490c2509"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/parallel-specialist-lanes.md"
@@ -68,7 +68,6 @@ Tune queue and model capacity around the business value of each lane:
   messages: {
     queue: {
       mode: "collect",
-      debounceMs: 1000,
       cap: 20,
       drop: "summarize",
     },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Yuanbao"
 source: "https://docs.openclaw.ai/channels/yuanbao"
-source_hash: "5697a6ba22dc8aa557a327720890974acebd3a4aa8003acba72c7f5b13676f1b"
+source_hash: "d04d7c8291328d3f222bef2325d422e59782252c5574c89d8900ef14e2eaed62"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/yuanbao.md"
@@ -296,11 +296,11 @@ Use `bindings` to route Yuanbao DMs or groups to different agents:
 ```json5
 {
   agents: {
-    list: [
-      { id: "main" },
-      { id: "agent-a", workspace: "/home/user/agent-a" },
-      { id: "agent-b", workspace: "/home/user/agent-b" },
-    ],
+    entries: {
+      main: { default: true },
+      "agent-a": { workspace: "/home/user/agent-a" },
+      "agent-b": { workspace: "/home/user/agent-b" },
+    },
   },
   bindings: [
     {

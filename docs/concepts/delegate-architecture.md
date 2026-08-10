@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Delegate architecture"
 source: "https://docs.openclaw.ai/concepts/delegate-architecture"
-source_hash: "438616cd9823bd480d036bb6146a36eedd6f090356890d2aaf9931bf177b5664"
+source_hash: "8f4b689114baa38a2b6a4d83d2e167159dd728d96bb3b7162de5dd761b31f77f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/delegate-architecture.md"
@@ -217,16 +217,15 @@ Route inbound messages to the delegate agent using [Multi-Agent Routing](/concep
 ```json5
 {
   agents: {
-    list: [
-      { id: "main", workspace: "~/.openclaw/workspace" },
-      {
-        id: "delegate",
+    entries: {
+      main: { default: true, workspace: "~/.openclaw/workspace" },
+      delegate: {
         workspace: "~/.openclaw/workspace-delegate",
         tools: {
           deny: ["browser", "canvas"],
         },
       },
-    ],
+    },
   },
   bindings: [
     // Route a specific channel account to the delegate
@@ -263,10 +262,9 @@ A complete delegate configuration handling email, calendar, and social media:
 ```json5
 {
   agents: {
-    list: [
-      { id: "main", default: true, workspace: "~/.openclaw/workspace" },
-      {
-        id: "org-assistant",
+    entries: {
+      main: { default: true, workspace: "~/.openclaw/workspace" },
+      "org-assistant": {
         name: "[Organization] Assistant",
         workspace: "~/.openclaw/workspace-org",
         agentDir: "~/.openclaw/agents/org-assistant/agent",
@@ -276,7 +274,7 @@ A complete delegate configuration handling email, calendar, and social media:
           deny: ["write", "edit", "apply_patch", "browser", "canvas"],
         },
       },
-    ],
+    },
   },
   bindings: [
     {

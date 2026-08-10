@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenShell"
 source: "https://docs.openclaw.ai/gateway/openshell"
-source_hash: "5cb923a8aa11b3222fd7b66bf381f08faec2420c9999d603d10474d24061452a"
+source_hash: "238de6e5e3b699ef7fea2aa67f2a7055374aa098126a7a8b8a3c53e865abb6d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/openshell.md"
@@ -237,9 +237,9 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) live under
     defaults: {
       sandbox: { mode: "off" },
     },
-    list: [
-      {
-        id: "researcher",
+    entries: {
+      researcher: {
+        default: true,
         sandbox: {
           mode: "all",
           backend: "openshell",
@@ -247,7 +247,7 @@ Sandbox-level settings (`mode`, `scope`, `workspaceAccess`) live under
           workspaceAccess: "rw",
         },
       },
-    ],
+    },
   },
   plugins: {
     entries: {

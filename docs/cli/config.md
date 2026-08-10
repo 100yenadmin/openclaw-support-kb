@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "3af6abbe97a68e6b4f5780f01df8b7471aa24fd2e28af35fb31666ebca519f79"
+source_hash: "5b3fd4cae4d0b66a2985a95f3aaf3c1d71743989c24a7b776c8750c499a23aee"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -125,6 +125,13 @@ Note
 
 If validation is already failing, start with `openclaw configure` or `openclaw doctor --fix`. `openclaw chat` does not bypass the invalid-config guard.
 
+Provider and runtime `params` bags are intentionally typed as
+`Record<string, unknown>` because their owners define the supported keys and
+values. `openclaw config validate` can validate the container and overall
+config shape, but it cannot type-check provider-specific parameter names or
+values. Passing validation does not prove that a param is supported; consult
+the provider docs and verify behavior on the selected runtime and provider.
+
 ## Values
 
 Values parse as JSON5 when possible; otherwise they are treated as raw strings. Use `--strict-json` to require standard JSON with no string fallback (JSON5-only syntax such as comments, trailing commas, or unquoted keys is then rejected). `--json` is a legacy alias for `--strict-json` on `config set`.
@@ -214,7 +221,7 @@ Batch mode
 
 Warning
 
-SecretRef assignments are rejected on unsupported runtime-mutable surfaces (for example `hooks.token`, `commands.ownerDisplaySecret`, Discord thread-binding webhook tokens, and WhatsApp creds JSON). See [SecretRef Credential Surface](/reference/secretref-credential-surface).
+SecretRef assignments are rejected on unsupported runtime-mutable surfaces (for example `hooks.token`, Discord thread-binding webhook tokens, and WhatsApp creds JSON). See [SecretRef Credential Surface](/reference/secretref-credential-surface).
 
 Batch parsing always uses the batch payload (`--batch-json`/`--batch-file`) as the source of truth; `--strict-json` / `--json` do not change batch parsing behavior.
 
@@ -334,12 +341,19 @@ Example patch:
     defaults: {
       model: { primary: "openai/gpt-5.6-sol" },
       models: {
-        "openai/gpt-5.6-sol": { params: { fastMode: true } },
+        "openai/gpt-5.6-sol": {
+          agentRuntime: { id: "openclaw" },
+          params: { fastMode: true },
+        },
       },
     },
   },
 }
 ```
+
+The runtime pin makes this an embedded OpenClaw recipe. A valid `fastMode`
+value is a portable typed runtime control and does not choose OpenClaw by
+itself.
 
 Use `--replace-path <path>` when one object or array must become exactly the provided value instead of being recursively patched:
 

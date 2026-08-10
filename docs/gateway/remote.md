@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "f3eb8e294fe68f91287bf21374b5f256408f79763571710e20c3c9d1d3db6f30"
+source_hash: "6aff209df11e08b9396e65608ad76e9b66dca1632212c186728c1844f088a93e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/remote.md"
@@ -17,6 +17,9 @@ OpenClaw runs one Gateway (the master) on a host and connects every client to it
 
 - **Operators** (you, or the macOS app): direct LAN/Tailnet WebSocket is simplest when the Gateway is reachable; SSH tunneling is the universal fallback.
 - **Nodes** (iOS/Android and other devices): connect to the Gateway **WebSocket** (LAN/tailnet or SSH tunnel).
+
+Remote clients can continue the same Gateway-owned conversation by URL or short
+reference. See [Session synchronization and attachment](/concepts/session-attachment).
 
 ## The core idea
 

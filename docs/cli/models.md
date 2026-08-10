@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "032f0e33e79089cb0ecf48e71a06eeb7ba02d52c1053231d876448094e81a3f0"
+source_hash: "abacd998940e8c1f906e4b1545d2379a825ace039f86f4b9bb5f7679fd58cf59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/models.md"
@@ -62,6 +62,8 @@ Options:
 | `--agent <id>`            | Configured agent id; overrides `OPENCLAW_AGENT_DIR`.                                                                                     |
 
 Probe rows can come from auth profiles, env credentials, or `models.json`. Probe status buckets: `ok`, `auth`, `rate_limit`, `billing`, `timeout`, `format`, `unknown`, `no_model`.
+
+Direct `models status --probe` runs create temporary internal sessions in the selected agent's canonical database, so the command requires exclusive ownership of the configured state directory. Stop a running Gateway with `openclaw gateway stop` before probing; the command removes its internal sessions and releases the state lock when it finishes or is interrupted.
 
 Probe detail/reason codes to expect when a probe never reaches a model call:
 

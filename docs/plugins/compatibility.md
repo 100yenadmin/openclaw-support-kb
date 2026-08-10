@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "4faa0e99c6c273e6ff41ddd84117598abcd6f7b0f73001851b8cefe5dbe8350d"
+source_hash: "70bc5680003c0cae15a4bd162b008982d3b3977c3124a95259ebcc7bc51fa4df"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
@@ -41,6 +41,13 @@ Doctor repair and migration compatibility is tracked separately at
 `src/commands/doctor/shared/deprecation-compat.ts`. Those records cover old
 config shapes, install-ledger layouts, and repair shims that may need to
 stay available after the runtime compatibility path is removed.
+
+Every doctor compatibility record declares `introduced` and `removeAfter`.
+The `pnpm check:doctor-deprecation-registry` guard fails when a record is still
+`deprecated` on or after `removeAfter`; maintainers must either remove it after
+supported-upgrade proof or move it to `removal-pending` with a documented
+blocker. `removal-pending` records do not fail the date guard, but remain in the
+explicit review queue until their upgrade conditions are met.
 
 Release sweeps should check both registries. Do not delete a doctor
 migration just because the matching runtime or config compatibility record

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web"
 source: "https://docs.openclaw.ai/web"
-source_hash: "d3b34ba5b008ab8633f2a3462b5572b9b56e7835756133fab382aeaa1a8d2f69"
+source_hash: "a5643b760abcd23c97159db078fd907661438d1d6f1ced2e63c88f204bf8ff9b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web.md"
@@ -66,28 +66,6 @@ Integrated Serve (recommended)
     ```
 
     Open `https://<magicdns>/` (or your configured `gateway.controlUi.basePath`).
-
-
-
-Tailnet bind + token
-
-    ```json5
-    {
-      gateway: {
-        bind: "tailnet",
-        controlUi: { enabled: true },
-        auth: { mode: "token", token: "your-token" },
-      },
-    }
-    ```
-
-    Start the gateway (this non-loopback example uses shared-secret token auth):
-
-    ```bash
-    openclaw gateway
-    ```
-
-    Open `http://<tailscale-ip>:18789/` (or your configured `gateway.controlUi.basePath`).
 
 
 

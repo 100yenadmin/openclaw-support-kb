@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "601cbdb3436cbbbbbe565db01336cee7481573d91e04d10de0e19ec9991d55ab"
+source_hash: "83666688df7ba7c22ad041ceaf1e917dffbc07c79540fd78fa1e3635dc759ceb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
@@ -33,13 +33,13 @@ openclaw memory status [--agent <id>] [--deep] [--index] [--fix] [--json] [--ver
 Without `--agent`, runs for every agent in `agents.entries`; if no agent list is
 configured, falls back to the default agent.
 
-| Flag        | Effect                                                                                                                                                                                                                                                                                                                                                                       |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--deep`    | Probe vector-store, embedding-provider, and semantic-search readiness (implies extra provider calls). Plain `memory status` stays fast and skips this; a complete persisted index is shown as `indexed (unprobed)`, while unknown vector/semantic state means it was not probed. QMD lexical `searchMode: "search"` always skips semantic vector probes, even with `--deep`. |
-| `--index`   | Reindex if the store is dirty. Implies `--deep`.                                                                                                                                                                                                                                                                                                                             |
-| `--fix`     | Repair stale recall locks and normalize promotion metadata.                                                                                                                                                                                                                                                                                                                  |
-| `--json`    | Print JSON.                                                                                                                                                                                                                                                                                                                                                                  |
-| `--verbose` | Emit detailed per-phase logs.                                                                                                                                                                                                                                                                                                                                                |
+| Flag        | Effect                                                                                                                                                                                                                                                                           |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--deep`    | Probe vector-store, embedding-provider, and semantic-search readiness (implies extra provider calls). Plain `memory status` stays fast and skips this; a complete persisted index is shown as `indexed (unprobed)`, while unknown vector/semantic state means it was not probed. |
+| `--index`   | Reindex if the store is dirty. Implies `--deep`.                                                                                                                                                                                                                                 |
+| `--fix`     | Repair stale recall locks and normalize promotion metadata.                                                                                                                                                                                                                      |
+| `--json`    | Print JSON.                                                                                                                                                                                                                                                                      |
+| `--verbose` | Emit detailed per-phase logs.                                                                                                                                                                                                                                                    |
 
 If the `Dreaming` line stays `off` even with `dreaming.enabled: true`, or
 scheduled sweeps never seem to run, the managed dreaming cron depends on the

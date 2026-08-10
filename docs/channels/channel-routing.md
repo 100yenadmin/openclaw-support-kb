@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "e825a7c58cea2397deaa9526615288592f10930b09a4055d624ee0f9d13c6697"
+source_hash: "59c13a38f34857db20f798fa6fc915e945408f647f9fe3ebfd1c044167f0879d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
@@ -132,7 +132,13 @@ Example:
 ```json5
 {
   agents: {
-    list: [{ id: "support", name: "Support", workspace: "~/.openclaw/workspace-support" }],
+    entries: {
+      support: {
+        default: true,
+        name: "Support",
+        workspace: "~/.openclaw/workspace-support",
+      },
+    },
   },
   bindings: [
     { match: { channel: "slack", teamId: "T123" }, agentId: "support" },

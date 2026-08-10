@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "e30bd31058505fa48ddcbc3b9c4f743916a528e496b931d59f430cb0a8b4c4aa"
+source_hash: "2944cbf7b0cf671332d9371d844399d5f544039f9572efbd9be727e1b70a7544"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -81,13 +81,10 @@ Directive behavior details
     debug: false,
     restart: true,
     ownerAllowFrom: ["discord:123456789012345678"],
-    ownerDisplay: "raw",
-    ownerDisplaySecret: "${OWNER_ID_HASH_SECRET}",
     allowFrom: {
       "*": ["user1"],
       discord: ["user:123"],
     },
-    useAccessGroups: true,
   },
 }
 ```
@@ -154,17 +151,14 @@ ParamField
 
 ParamField
 
-  Controls how owner ids appear in the system prompt.
-
-ParamField
-
-  HMAC secret used when `commands.ownerDisplay: "hash"`.
-
-ParamField
-
   Per-provider allowlist for command authorization. When configured, it is the
   **only** authorization source for commands and directives. Use `"*"` for a
   global default; provider-specific keys override it.
+
+When `commands.allowFrom` is not configured, command authorization follows
+the channel's allowlists and pairing state. Access-group entries referenced by
+channel allowlists are resolved automatically; there is no command-level
+access-group toggle.
 
 ## Command list
 
@@ -354,13 +348,13 @@ must be in the same identity group.
 
 ### Bundled plugin commands
 
-| Command                                                 | Description                                                                                                                                                                                    |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/dreaming [on\|off\|status\|help]`                     | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming)                                                                                                            |
-| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]` | Manage device pairing. See [Pairing](/channels/pairing)                                                                                                                                        |
-| `/voice status\|list\|set <voiceId>`                    | Manage Talk voice config. Discord native name: `/talkvoice`                                                                                                                                    |
-| `/card ...`                                             | Send LINE rich card presets. See [LINE](/channels/line)                                                                                                                                        |
-| `/codex <action> ...`                                   | Bind, steer, and inspect the Codex app-server harness (status, threads, resume, model, fast, permissions, compact, review, mcp, skills, and more). See [Codex harness](/plugins/codex-harness) |
+| Command                                                                             | Description                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/dreaming [on\|off\|status\|help]`                                                 | Toggle memory dreaming (owner or Gateway admin). See [Dreaming](/concepts/dreaming)                                                                                                            |
+| `/pair [qr\|status\|pending\|approve\|cleanup\|notify]`                             | Manage device pairing. See [Pairing](/channels/pairing)                                                                                                                                        |
+| [`/voice`](/nodes/talk#choose-a-talk-voice-from-chat) `status\|list\|set <voiceId>` | Manage Talk voice config. Discord native name: `/talkvoice`                                                                                                                                    |
+| `/card ...`                                                                         | Send LINE rich card presets. See [LINE](/channels/line)                                                                                                                                        |
+| `/codex <action> ...`                                                               | Bind, steer, and inspect the Codex app-server harness (status, threads, resume, model, fast, permissions, compact, review, mcp, skills, and more). See [Codex harness](/plugins/codex-harness) |
 
 QQBot-only: `/bot-ping`, `/bot-version`, `/bot-help`, `/bot-upgrade`, `/bot-logs`
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "7274fe76330ce236bd57c72200000755933163efef3a63fdc2f6e24571a629ef"
+source_hash: "675f61f6bf2feeee59358aba9caf5cb1f7c7dcad0cae5db0613319683661a5c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -61,6 +61,29 @@ Behavior:
 - Quitting the app does **not** stop the Gateway (launchd keeps it alive).
 - If a Gateway is already running on the configured port, the app attaches to
   it instead of starting a new one.
+
+Use the CLI for lifecycle checks and recovery:
+
+```bash
+openclaw gateway status --deep
+openclaw gateway restart
+```
+
+Launchd provides auto-start at login, crash restarts, and one predictable log
+location without tying the Gateway lifetime to the app process.
+
+### Attach-only development
+
+When another process already owns the local Gateway, run the development app
+without installing or changing its LaunchAgent:
+
+```bash
+scripts/restart-mac.sh --attach-only
+```
+
+Launching the app directly with `--attach-only` or `--no-launchd` has the same
+effect. The override persists in `~/.openclaw/disable-launchagent`; remove that
+file to restore app-managed launchd behavior.
 
 Logging:
 

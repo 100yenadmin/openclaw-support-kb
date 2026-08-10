@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Progress drafts"
 source: "https://docs.openclaw.ai/concepts/progress-drafts"
-source_hash: "067d88b1d81edcc4e97abd76de5ecdc315caec430f39db7ed2919b5c36684682"
+source_hash: "ee0b79e327ec1aa55453ba94951fac40b8abe97c86ca615eb677fdd90587f934"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/progress-drafts.md"
@@ -28,11 +28,11 @@ Working...
 
 Note
 
-  Discord and Telegram default to `streaming.mode: "progress"`, so progress
-  drafts show up there without any config. Set `mode: "partial"` on either to
-  stream answer text instead. Every other channel defaults to `partial` or
-  `off`; see [Streaming and chunking](/concepts/streaming#channel-mapping) for
-  the full per-channel default table.
+  Discord defaults preview streaming to `off`; set `streaming.mode: "progress"`
+  to opt in. Telegram defaults to `progress` without additional config. Set
+  `mode: "partial"` on either to stream answer text instead. See
+  [Streaming and chunking](/concepts/streaming#channel-mapping) for the full
+  per-channel default table.
 
 ## Quick start
 
@@ -418,7 +418,7 @@ the final answer, except for the label if one is configured.
 
 | Channel         | Progress transport                     | Notes                                                                                                                                                     |
 | --------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Discord         | Send one message, then edit it.        | Defaults to `progress` mode; the final answer carries a `-#` activity receipt and the status draft is deleted after the answer lands.                     |
+| Discord         | Send one message, then edit it.        | `progress` is explicit opt-in; the final answer carries a `-#` activity receipt and the status draft is deleted after the answer lands.                   |
 | Matrix          | Send one event, then edit it.          | Account-level streaming config controls account-level drafts.                                                                                             |
 | Microsoft Teams | Native Teams stream in personal chats. | `streaming.mode: "block"` maps to Teams block delivery instead.                                                                                           |
 | Slack           | Native stream or editable draft post.  | Needs a reply thread target; top-level DMs without one still get draft preview posts and edits.                                                           |

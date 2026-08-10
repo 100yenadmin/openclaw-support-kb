@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "14a4b730858263e44b611393c2d0cc5caf0ee7bc677ea5b4b61215c9ad6867f2"
+source_hash: "a42db9c46fd6c87c38d37616ccd0f5182cb117310ffc9d32a29f88cd18f3b8b1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -226,14 +226,14 @@ Set up group chat mention gating
         },
       },
       agents: {
-        list: [
-          {
-            id: "main",
+        entries: {
+          main: {
+            default: true,
             groupChat: {
               mentionPatterns: ["@openclaw", "openclaw"],
             },
           },
-        ],
+        },
       },
       channels: {
         whatsapp: {
@@ -262,11 +262,11 @@ Restrict skills per agent
         defaults: {
           skills: ["github", "weather"],
         },
-        list: [
-          { id: "writer" }, // inherits github, weather
-          { id: "docs", skills: ["docs-search"] }, // replaces defaults
-          { id: "locked-down", skills: [] }, // no skills
-        ],
+        entries: {
+          writer: { default: true }, // inherits github, weather
+          docs: { skills: ["docs-search"] }, // replaces defaults
+          "locked-down": { skills: [] }, // no skills
+        },
       },
     }
     ```
@@ -453,7 +453,7 @@ Configure cron jobs
     }
     ```
 
-    - `sessionRetention`: prune completed isolated run sessions from SQLite session rows (default `24h`; set `false` to disable).
+    - `sessionRetention`: prune completed isolated run sessions from SQLite session rows (default `24h`; set `false` or a zero duration such as `"0h"` to disable).
     - Run history automatically keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
     - See [Cron jobs](/automation/cron-jobs) for feature overview and CLI examples.
 
@@ -509,10 +509,10 @@ Configure multi-agent routing
     ```json5
     {
       agents: {
-        list: [
-          { id: "home", default: true, workspace: "~/.openclaw/workspace-home" },
-          { id: "work", workspace: "~/.openclaw/workspace-work" },
-        ],
+        entries: {
+          home: { default: true, workspace: "~/.openclaw/workspace-home" },
+          work: { workspace: "~/.openclaw/workspace-work" },
+        },
       },
       bindings: [
         { agentId: "home", match: { channel: "whatsapp", accountId: "personal" } },

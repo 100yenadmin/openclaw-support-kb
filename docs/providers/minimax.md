@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "01556c8645488add4f7b1bb6888bbdbbe9e356e9e38a218118e9503e147a0c2c"
+source_hash: "7375da3b9943e405afa27abeb74d5a2a5e0264567b7fd9481d3c45dd6f2d2628"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/minimax.md"
@@ -274,7 +274,7 @@ The MiniMax plugin registers the `image-01` model for the `image_generate` tool 
 {
   agents: {
     defaults: {
-      imageGenerationModel: { primary: "minimax/image-01" },
+      mediaModels: { image: { primary: "minimax/image-01" } },
     },
   },
 }
@@ -321,7 +321,7 @@ The bundled MiniMax plugin registers music generation through the shared `music_
 {
   agents: {
     defaults: {
-      musicGenerationModel: { primary: "minimax/music-2.6" },
+      mediaModels: { music: { primary: "minimax/music-2.6" } },
     },
   },
 }
@@ -344,7 +344,7 @@ The bundled MiniMax plugin registers video generation through the shared `video_
 {
   agents: {
     defaults: {
-      videoGenerationModel: { primary: "minimax/MiniMax-Hailuo-2.3" },
+      mediaModels: { video: { primary: "minimax/MiniMax-Hailuo-2.3" } },
     },
   },
 }

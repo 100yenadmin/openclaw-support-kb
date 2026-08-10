@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "006c5700b089ecd1884cf70b6aa25b93cb30a91f73a8bc57aa52bec2563a814d"
+source_hash: "8c9ed20e1d5ce93a1ac0572ac236a42177ce0253e89e7a22df56f063ba274b9c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -189,16 +189,16 @@ instead of being overwritten in one editable draft.
 
 ### Channel mapping
 
-Discord and Telegram default to `progress` when `streaming` is unset; Slack,
-Mattermost, and MS Teams default to `partial`.
+Discord defaults to `off` when `streaming` is unset, Telegram defaults to
+`progress`, and Slack, Mattermost, and MS Teams default to `partial`.
 
-| Channel    | `off` | `partial` | `block` | `progress`                        |
-| ---------- | ----- | --------- | ------- | --------------------------------- |
-| Telegram   | Yes   | Yes       | Yes     | editable progress draft (default) |
-| Discord    | Yes   | Yes       | Yes     | editable progress draft (default) |
-| Slack      | Yes   | Yes       | Yes     | Yes                               |
-| Mattermost | Yes   | Yes       | Yes     | Yes                               |
-| MS Teams   | Yes   | Yes       | Yes     | native progress stream            |
+| Channel    | `off`         | `partial` | `block` | `progress`                        |
+| ---------- | ------------- | --------- | ------- | --------------------------------- |
+| Telegram   | Yes           | Yes       | Yes     | editable progress draft (default) |
+| Discord    | Yes (default) | Yes       | Yes     | editable progress draft (opt-in)  |
+| Slack      | Yes           | Yes       | Yes     | Yes                               |
+| Mattermost | Yes           | Yes       | Yes     | Yes                               |
+| MS Teams   | Yes           | Yes       | Yes     | native progress stream            |
 
 Preview chunk config (`streaming.preview.chunk.*`, e.g. under
 `channels.discord.streaming` or `channels.telegram.streaming`) defaults to

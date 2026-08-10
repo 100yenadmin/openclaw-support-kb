@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "417c3bb9cb33302e34b39f79e1679521a1614bd4a9f357da79f2fedf183e257c"
+source_hash: "b85b424567c6851e0bd28c8b9ae185f6133773445b5c595e7547f6075ebd0496"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -197,7 +197,6 @@ Modernized core doctor checks stay attached to the ordered doctor contribution t
 ```bash
 openclaw doctor --lint --only core/doctor/gateway-config --json
 openclaw doctor --lint --skip core/doctor/skills-readiness
-openclaw doctor --lint --all --skip core/doctor/session-locks
 ```
 
 `--only` and `--skip` accept full check ids and may be repeated. If an `--only` id is not registered, no check runs for that id; use `checksRun`/`checksSkipped` in the output to confirm a focused gate selects the checks you expect.

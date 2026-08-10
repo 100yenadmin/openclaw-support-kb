@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tailscale"
 source: "https://docs.openclaw.ai/gateway/tailscale"
-source_hash: "a46a7b816d5645fd60ab4087b1ec7ebdba3c529e2b07c90e39915aced60db8c4"
+source_hash: "ff27361aa9d796f7948d450bf1588349dd342954fd37d9e4e9a8291a5e25e53e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/tailscale.md"
@@ -72,10 +72,11 @@ Use this to have the gateway listen directly on the Tailnet IP, with no Serve/Fu
 }
 ```
 
-Connect from another Tailnet device:
+Connect a native or CLI client from another Tailnet device:
 
-- Control UI: `http://<tailscale-ip>:18789/`
 - WebSocket: `ws://<tailscale-ip>:18789`
+
+Do not use the direct plain-HTTP address for the browser Control UI. Remote plain HTTP cannot create browser device identity, and token/password auth does not replace it. Use Tailscale Serve for the Control UI.
 
 Note
 

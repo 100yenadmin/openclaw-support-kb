@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "d0162df1d545c22e5df81f8360c3d59e9f7e2e659ad370c5593b7c4a650ea300"
+source_hash: "41e65d2142628e16b98831b64d743d58080cb56232ac3b9d841191300fbaa743"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -123,7 +123,6 @@ How do I authenticate the dashboard on localhost vs remote?
 
     - **Tailscale Serve** (recommended): keep bind loopback, run `openclaw gateway --tailscale serve`, open `https://<magicdns>/`. With `gateway.auth.allowTailscale: true`, identity headers satisfy Control UI/WebSocket auth (no pasted shared secret, assumes a trusted gateway host); HTTP APIs still need shared-secret auth unless you deliberately use private-ingress `none` or trusted-proxy HTTP auth.
       Concurrent bad-auth Serve attempts from the same client are serialized before the failed-auth limiter records them, so a second bad retry can already show `retry later`.
-    - **Tailnet bind**: run `openclaw gateway --bind tailnet --token "<token>"` (or configure password auth), open `http://<tailscale-ip>:18789/`, paste the matching shared secret in dashboard settings.
     - **Identity-aware reverse proxy**: keep the Gateway behind a trusted proxy, set `gateway.auth.mode: "trusted-proxy"`, open the proxy URL. Same-host loopback proxies need explicit `gateway.auth.trustedProxy.allowLoopback: true`.
     - **SSH tunnel**: `ssh -N -L 18789:127.0.0.1:18789 user@gateway-host`, then open `http://127.0.0.1:18789/`. Shared-secret auth still applies over the tunnel; paste the configured token or password if prompted.
 

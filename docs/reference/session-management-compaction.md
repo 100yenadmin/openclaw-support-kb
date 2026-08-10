@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management deep dive"
 source: "https://docs.openclaw.ai/reference/session-management-compaction"
-source_hash: "a7cd089232dc447e8861eac58c5f6dbdf817157311b29dfa56f7c280b816cc97"
+source_hash: "5e23d5064f8d5619cae093c0f53cea411ae923dea73408d5bc293472ea622f90"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/session-management-compaction.md"
@@ -82,11 +82,9 @@ Normal Gateway writes flow through the session accessor, which serializes per-ag
 
 OpenClaw no longer creates automatic `sessions.json.bak.*` rotation backups during Gateway writes. The current schema rejects the legacy `session.maintenance.rotateBytes` key, and `openclaw doctor --fix` removes it from older configs.
 
-Transcript mutations use the session write queue for the SQLite transcript target:
-
-Session write locks use fixed production defaults. The corresponding
-`OPENCLAW_SESSION_WRITE_LOCK_*` environment variables remain available for
-process-level diagnostics and emergency overrides.
+Transcript mutations pass through the session accessor and SQLite writer queue.
+Each mutation verifies the active run's durable writer claim inside its commit
+transaction, so a superseded run cannot write to the transcript.
 
 ### Downgrading After The SQLite Flip
 
@@ -114,7 +112,7 @@ artifacts before importing.
 
 Isolated cron runs create their own session entries/transcripts with dedicated retention:
 
-- `cron.sessionRetention` (default `"24h"`) prunes old isolated cron run sessions from the store; `false` disables.
+- `cron.sessionRetention` (default `"24h"`) prunes old isolated cron run sessions from the store; `false` or a zero duration such as `"0h"` disables.
 - Run history keeps the newest 2000 terminal rows per cron job. Lost rows retain their 24-hour cleanup window.
 
 When cron force-creates a new isolated run session, it sanitizes the previous `cron:<jobId>` session entry before writing the new row: it carries safe preferences (thinking/fast/verbose/reasoning settings, labels, display name) and explicit user-selected model/auth overrides, but drops ambient conversation context (channel/group routing, send/queue policy, elevation, origin, ACP runtime binding) so a fresh isolated run cannot inherit stale delivery or runtime authority from an older run.

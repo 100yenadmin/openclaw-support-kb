@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
-source_hash: "8e1010ece822239ffc7d882e2ab089cb7dde0736a3e2181db04c5b2a61cf94b3"
+source_hash: "b614c3d190d34e863e2a81e2c86e8dd4c66c98fdad215bec5e0f978e6bf86b45"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/digitalocean.md"
@@ -137,15 +137,6 @@ Access the Control UI
     Then open `https://<magicdns>/` from any device on your tailnet.
 
     Tailscale Serve authenticates Control UI and WebSocket traffic via tailnet identity headers, which assumes the gateway host itself is trusted. HTTP API endpoints still follow the gateway's normal auth mode (token/password) regardless. To require explicit shared-secret credentials over Serve, set `gateway.auth.allowTailscale: false` and use `gateway.auth.mode: "token"` or `"password"`.
-
-    **Option C: Tailnet bind (no Serve)**
-
-    ```bash
-    openclaw config set gateway.bind tailnet
-    openclaw gateway restart
-    ```
-
-    Then open `http://<tailscale-ip>:18789` (token required).
 
 
 

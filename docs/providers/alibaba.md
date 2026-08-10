@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Alibaba Model Studio"
 source: "https://docs.openclaw.ai/providers/alibaba"
-source_hash: "fd7f601795ff5c584cd4cfbf6360f1f1dc6038596362e24c1661a1a820179994"
+source_hash: "443d6da35131591e8e08e37e004de175f1381a7c7fc1696d9a53093a895b8187"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/alibaba.md"
@@ -60,8 +60,10 @@ Set a default video model
     {
       agents: {
         defaults: {
-          videoGenerationModel: {
-            primary: "alibaba/wan2.6-t2v",
+          mediaModels: {
+            video: {
+              primary: "alibaba/wan2.6-t2v",
+            },
           },
         },
       },

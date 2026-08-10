@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "llama.cpp Provider"
 source: "https://docs.openclaw.ai/plugins/llama-cpp"
-source_hash: "f5a3a86684112b956325c1fd2df30312fca11adb8c0d943d77f4b0e78f7b1ade"
+source_hash: "0896b049c720fb285b1c538cc2bbe07ca58fc4ecb3c15e1ce079553d38459810"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/llama-cpp.md"
@@ -117,14 +117,8 @@ Set `memory.search.provider` to `local`:
 
 `local.modelPath` defaults to the `hf:` URI shown above (`embeddinggemma-300m-qat-Q8_0.gguf`).
 Point it at a different `hf:` URI or a local `.gguf` file to use another
-model. `local.modelCacheDir` overrides where downloaded models are cached
-(default: `~/.node-llama-cpp/models`), and `local.contextSize` accepts an
-integer or `"auto"`.
-
-When `local.contextSize` is numeric, the provider also gives that requirement
-to node-llama-cpp's automatic GPU-layer placement. This lets node-llama-cpp fit
-the model and embedding context together while retaining its memory-safety
-checks. With `"auto"`, node-llama-cpp keeps its normal automatic placement.
+model. Cache placement and embedding context sizing are managed by the
+llama.cpp provider; `memory.search.local` exposes only `modelPath`.
 
 ## Native runtime
 

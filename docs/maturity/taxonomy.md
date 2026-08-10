@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Maturity taxonomy"
 source: "https://docs.openclaw.ai/maturity/taxonomy"
-source_hash: "23cca40755ef52a4b9c8a737ad1f54764982d3ca07f67818d7095b129398179b"
+source_hash: "02ac266eec40eb77e298488f1c84a71c3a496845a511b5af6d0d92e82a4d1214"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "maturity/taxonomy.md"
@@ -1531,14 +1531,14 @@ Automation: cron, hooks, tasks, polling - M3 Beta - 6 areas
       <div className="maturity-category-row">
         <div className="maturity-category-area">
           <span className="maturity-category-title">Heartbeat</span>
-          <span>7 capabilities</span>
+          <span>4 capabilities</span>
         </div>
         <div><span className="maturity-score maturity-score-experimental"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-experimental">Experimental</span><span>14%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "14%" }} /></span></span></div>
         <div><span className="maturity-score maturity-score-beta"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-beta">Beta</span><span>79%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "79%" }} /></span></span></div>
         <div><span className="maturity-score maturity-score-beta"><span className="maturity-score-label"><span className="maturity-level-pill maturity-level-beta">Beta</span><span>79%</span></span><span className="maturity-meter" aria-hidden="true"><span style={{ width: "79%" }} /></span></span></div>
         <div className="maturity-category-docs">
 
-    [Index](/automation/index), [Heartbeat](/gateway/heartbeat), [Commitments](/concepts/commitments)
+    [Index](/automation/index), [Heartbeat](/gateway/heartbeat)
 
     </div>
       </div>

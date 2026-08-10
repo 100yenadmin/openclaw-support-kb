@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together AI"
 source: "https://docs.openclaw.ai/providers/together"
-source_hash: "0330e071a5362d6413e482d148f0ad793505c181d5815271b1766fdf9c7a2889"
+source_hash: "d7383dca70fde1818721cd2db559f65fcdfa578a71a86ba20ee78969572df814"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/together.md"
@@ -101,8 +101,10 @@ To use Together as the default video provider:
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "together/Wan-AI/Wan2.2-T2V-A14B",
+      mediaModels: {
+        video: {
+          primary: "together/Wan-AI/Wan2.2-T2V-A14B",
+        },
       },
     },
   },

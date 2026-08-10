@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "PixVerse"
 source: "https://docs.openclaw.ai/providers/pixverse"
-source_hash: "b9cc857430b63fd3cea4a001dd72acbd83e7c657e0397ed4c3fc92c5af4cb850"
+source_hash: "6fff83c1cb20e6d2e933bfefb681365041d142f4bb5fc7948089abb9ff1761c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/pixverse.md"
@@ -108,8 +108,10 @@ The video provider accepts these optional provider-specific keys:
 {
   agents: {
     defaults: {
-      videoGenerationModel: {
-        primary: "pixverse/v6",
+      mediaModels: {
+        video: {
+          primary: "pixverse/v6",
+        },
       },
     },
   },
