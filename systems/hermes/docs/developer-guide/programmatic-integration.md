@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Programmatic Integration"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration"
-source_hash: "04e0f5539f16acbb78993e834656f74aa37fe6a1564bf17a9dd0a4aeb3f8beca"
+source_hash: "bfed31457b7629f28f3359153ebb2dff93fa411b5b098563d63c9636b732f187"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/programmatic-integration.md"
@@ -76,8 +76,8 @@ A rewind / edit / regenerate is a `prompt.submit` that drops part of the stored 
 
 | Parameter | Meaning |
 |-----------|---------|
-| `truncate_before_user_ordinal` | Zero-based index of the user turn to cut at. Everything from that turn onward is dropped. Display-only timeline rows (`display_kind`) are not counted. |
-| `confirm_truncate` | Required whenever an ordinal is sent. Declares that this submit really is a rewind, not an ordinary send that happens to carry a leftover ordinal. |
+| `truncate_before_user_ordinal` | Zero-based index of the user turn to cut at. Everything from that turn onward is dropped. Display-only timeline rows (`display_kind`) are not counted. Must be a real integer — a JSON boolean is refused with code `4004`. |
+| `confirm_truncate` | Required whenever an ordinal is sent. Declares that this submit really is a rewind, not an ordinary send that happens to carry a leftover ordinal. Sending it without an ordinal is refused with code `4004` (leaked rewind state). |
 | `confirm_empty_truncate` | Additionally required when the cut would leave the transcript empty (ordinal `0`). |
 
 An ordinal without `confirm_truncate` is refused with code `4029` and nothing is written. Hosts that implement rewind must set the flag at the moment the user asks for it, and must never keep the ordinal in state across ordinary submits.

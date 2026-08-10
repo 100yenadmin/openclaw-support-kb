@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "42bf867b926c2f83bc4f93ed3dd139a873941e65ebefa0a28d6deb770624f603"
+source_hash: "f6ec29722b2eb4c400568a9ad6329fb7711db3a017ee6a779fb75cdaffc9519a"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -70,6 +70,8 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [skywork-ppt](https://clawskills.sh/skills/gxcun17-skywork-ppt) - Generate, imitate, and edit PowerPoint presentations with skywork.
 - [skywork-music-maker](https://clawskills.sh/skills/gxcun17-skywork-music-maker) - Create professional music with Mureka AI.
 - [before-you-build](https://clawhub.ai/bin1874/before-you-build) - Review product risk before building.
+- [ditto-profile](https://clawhub.ai/ohad6k/ditto-profile) - Load your mined personal profile so agents work like you.
+- [skill-navigator](https://clawhub.ai/grubbylee/skills/skill-navigator) - Recommends the right installed local Agent Skill.
 - [emulo](https://clawhub.ai/ohad6k/emulo) - Load your mined personal profile so agents work like you.
 
 - [1p-shortlink](https://clawskills.sh/skills/tuanpmt-1p-shortlink) - Create short URLs and submit feature requests using 1p.io.
@@ -251,6 +253,8 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [openclaw-free-web-search](https://clawskills.sh/skills/wd041216-bit-openclaw-free-web-search) - Free, private web search for OpenClaw with self-hosted SearXNG + Scrapling anti-bot + multi-source cross-validation. Zero API keys, zero cost. Tells you how much to trust the answer.
 - [xquik-x-twitter-scraper](https://clawskills.sh/skills/kriptoburak-xquik-x-twitter-scraper) - X API scraper with 40+ tools for AI agents.
 - [skywork-search](https://clawskills.sh/skills/gxcun17-skywork-search) - AI-powered web search for real-time information  retrieve up-to-date content.
+- [tavily](https://clawhub.ai/bert-builder/tavily) - AI-optimized web search using Tavily Search API.
+- [newsflash](https://clawhub.ai/zatmonkey/newsflash) - Corroborated real-time news briefings and alerts for agents.
 
 - [adhd-assistant](https://clawskills.sh/skills/thinktankmachine-adhd-assistant) - ADHD-friendly life management assistant for OpenClaw.
 - [adhd-ssistant](https://clawskills.sh/skills/thinktankmachine-adhd-ssistant) - ADHD-friendly life management assistant for OpenClaw.
@@ -338,6 +342,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [postiz](https://clawskills.sh/skills/nevo-david-postiz) - Schedule social media posts and threads across 28+ platforms.
 - [sequenzy-email-marketing](https://clawhub.ai/polnikale/sequenzy-email-marketing) - Authorized email automation for agents.
 - [tempguru-event-staffing-ordering](https://clawhub.ai/kissmyabs32/tempguru-event-staffing-ordering) - Order W-2 temporary event staff across 345 US/Canada markets.
+- [posteahora](https://clawhub.ai/sashadiz/posteahora) - Schedule and publish social posts across every major network.
 
 - [4to1-planner](https://clawskills.sh/skills/qingxuantang-4to1-planner) - AI planning coach using the 4To1 Method  turn 4-year vision into daily action.
 - [4todo](https://clawskills.sh/skills/blackstorm-4todo) - Manage 4todo (4to.do) from chat.
@@ -472,6 +477,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [continuity](https://clawskills.sh/skills/riley-coyote-continuity) - Asynchronous reflection and memory integration for genuine AI.
 - [continuity-framework](https://clawskills.sh/skills/riley-coyote-continuity-framework) - Asynchronous reflection and memory integration.
 - [ai-footprints](https://clawhub.ai/Piccolo123/ai-footprints) - Cross-platform bookmark manager with AI categorization, shared collections, and Agent API access.
+- [obsidian-cli-plugins](https://clawhub.ai/dxshelley/obsidian-cli-plugins) - Automate Obsidian vaults, tasks, journals, and Git sync.
 
 - [agent-defibrillator](https://clawskills.sh/skills/hazy2go-agent-defibrillator) - Watchdog that monitors your AI agent gateway and restarts it when it crashes.
 - [android-transfer-skill](https://clawskills.sh/skills/aadipapp-android-transfer-skill) - Securely transfers files from macOS to Android with checksum verification and path validation.

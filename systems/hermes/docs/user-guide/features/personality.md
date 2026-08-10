@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Personality & SOUL.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/personality"
-source_hash: "1c536b6f5aef3c302825c483cd97781742275ef9020654ba0c9f43b043bdb684"
+source_hash: "8b809a18dc7e6f79e56845a1155706f2fee4fbdf8a75c958bce29f12de4c3367"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/personality.md"
@@ -224,7 +224,7 @@ These are convenient overlays, but your global `SOUL.md` still gives Hermes its 
 
 ## Custom personalities in config
 
-You can also define named custom personalities in `~/.hermes/config.yaml` under `agent.personalities`.
+Built-in personalities are always available on every surface (CLI, messaging platforms, TUI, and the desktop app). You can add your own — or override a built-in by reusing its name — in `~/.hermes/config.yaml` under `agent.personalities`.
 
 ```yaml
 agent:
@@ -240,9 +240,11 @@ Then switch to it with:
 /personality codereviewer
 ```
 
+Your selection is stored as a name in `display.personality`. Personalities never touch `agent.system_prompt` — that field is reserved for a manual system prompt you write yourself, and it applies only when no personality is selected.
+
 ## Resetting to the default
 
-To cancel the active personality overlay and return to base behavior (your `SOUL.md` persona), use any of:
+To cancel the active personality overlay and return to base behavior (your `SOUL.md` persona, plus `agent.system_prompt` if you set one), use any of:
 
 ```text
 /personality none
@@ -250,7 +252,11 @@ To cancel the active personality overlay and return to base behavior (your `SOUL
 /personality neutral
 ```
 
-All three clear the overlay: the saved `agent.system_prompt` is emptied and the change takes effect on your next message. Running `/personality` with no arguments also lists `none` alongside the available presets.
+All three clear the selection (`display.personality`) and the change takes effect on your next message. Running `/personality` with no arguments also lists `none` alongside the available presets and marks the active one.
+
+:::note One-time reset on upgrade
+Older Hermes versions saved personality state inconsistently across surfaces, which could re-enable a personality you had previously turned off. On your first run after upgrading, any saved personality selection is reset to `none` once (the migration prints which personality was cleared). Re-enable it with `/personality <name>` if you still want it. Manual `agent.system_prompt` text is never touched.
+:::
 
 ## Recommended workflow
 
