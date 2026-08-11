@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "b53cda1853e370f11c758d2c18c6992d236219df19894299de3183b8361575a9"
+source_hash: "de04d1308f8c1251e630c06b32e4a8a71ec764aa469effc4e65dd422e8020fca"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -172,23 +172,7 @@ When contributing code, keep these rules in mind:
 
 Key patterns:
 
-### 1. `termios` and `fcntl` are Unix-only
-
-Always catch both `ImportError` and `NotImplementedError`:
-
-```python
-try:
-    from simple_term_menu import TerminalMenu
-    menu = TerminalMenu(options)
-    idx = menu.show()
-except (ImportError, NotImplementedError):
-    # Fallback: numbered menu
-    for i, opt in enumerate(options):
-        print(f"  {i+1}. {opt}")
-    idx = int(input("Choice: ")) - 1
-```
-
-### 2. File encoding
+### 1. File encoding
 
 Some environments may save `.env` files in non-UTF-8 encodings:
 
@@ -199,7 +183,7 @@ except UnicodeDecodeError:
     load_dotenv(env_path, encoding="latin-1")
 ```
 
-### 3. Process management
+### 2. Process management
 
 `os.setsid()`, `os.killpg()`, and signal handling differ across platforms:
 
@@ -209,7 +193,7 @@ if platform.system() != "Windows":
     kwargs["preexec_fn"] = os.setsid
 ```
 
-### 4. Path separators
+### 3. Path separators
 
 Use `pathlib.Path` instead of string concatenation with `/`.
 

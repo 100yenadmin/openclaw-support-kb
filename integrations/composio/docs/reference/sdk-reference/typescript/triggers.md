@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md"
-source_hash: "7b5718556200f8bc91cd896f0f788f885f6206024f45baadeb3a55466b32b20e"
+source_hash: "7c7e247ad54fd1e7ddfc36740fa93f1d555429096f49648d29f7077a5ffbfdfb"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/triggers.md"
@@ -447,5 +447,11 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 ```
 
 ***
+
+---
+
+
+# Toolkits
+
 
 ---

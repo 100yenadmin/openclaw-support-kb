@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/browser"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser"
-source_hash: "77d49ef37765802de350ab17c2cabd780537e4bb0b5edfe95b9cb30124aea3cd"
+source_hash: "e27107487827ec95dd5fcf394a8420d5f4afa0d10312b7ce5d56309cab2b1d8c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/browser.md"
@@ -23,6 +23,7 @@ Hermes Agent includes a full browser automation toolset with multiple backend op
 
 - **Browserbase cloud mode** via [Browserbase](https://browserbase.com) for managed cloud browsers and anti-bot tooling
 - **Browser Use cloud mode** via [Browser Use](https://browser-use.com) as an alternative cloud browser provider
+- **Browser Use mode** via the [Browser Use CLI 3.0](https://github.com/browser-use/browser-use) — a new browser harness that is SOTA for web tasks; automates your local Chrome or Browser Use cloud browsers
 - **Firecrawl cloud mode** via [Firecrawl](https://firecrawl.dev) for cloud browsers with built-in scraping
 - **Camofox local mode** via [Camofox](https://github.com/jo-inc/camofox-browser) for local anti-detection browsing (Firefox-based fingerprint spoofing)
 - **Local Chromium-family CDP** — connect browser tools to your own Chrome, Brave, Chromium, or Edge instance using `/browser connect`
@@ -70,7 +71,34 @@ To use Browser Use as your cloud browser provider, add:
 BROWSER_USE_API_KEY=***
 ```
 
-Get your API key at [browser-use.com](https://browser-use.com). Browser Use provides a cloud browser via its REST API. If both Browserbase and Browser Use credentials are set, Browserbase takes priority.
+Get your API key at [browser-use.com](https://browser-use.com).
+
+### Browser Use mode (default)
+
+Browser Use mode uses the [Browser Use CLI 3.0](https://github.com/browser-use/browser-use) — a new browser harness that is state-of-the-art at web tasks — instead of the built-in browser tools. The agent writes and executes Python in the browser to click, type, drag, scrape, and interact with webpages.
+
+**This is the default browser mode**: when `browser.backend` is unset and the `browser-use` CLI is runnable (installed, or available through `uvx`), the agent gets the single `browser_exec` tool. If the CLI can't run, Hermes falls back to the built-in browser tools automatically.
+
+The mode is a **driver** that composes with your configured browser backend: it drives your local Chrome, a Nous-subscription cloud browser, Browserbase, Firecrawl, or Browser Use cloud browsers — whichever browser source is selected in `hermes tools` → Browser Automation. The one exception is Camofox, which has no CDP endpoint for the harness to attach to; Camofox setups automatically keep the built-in browser tools.
+
+To opt out and force the built-in browser tools, use `/browser use off`, or:
+
+```yaml
+# Add to ~/.hermes/config.yaml
+browser:
+  backend: "off"
+```
+
+(`backend: "browser-use"` remains valid to force the mode explicitly.)
+
+Browser Use's own cloud browsers need `browser-use auth login` or `BROWSER_USE_API_KEY`; other browser sources use their existing credentials unchanged.
+
+:::note
+Because Browser Use mode executes model-written Python on your machine, the
+`browser_exec` tool is only offered to sessions that also have terminal
+access. Platforms configured without the terminal toolset (e.g. a locked-down
+messaging surface) keep the default browser tools instead.
+:::
 
 ### Firecrawl cloud mode
 

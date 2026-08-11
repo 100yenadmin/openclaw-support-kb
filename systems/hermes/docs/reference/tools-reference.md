@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Tools Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/tools-reference"
-source_hash: "837d0e25c8f6b89bc3330e810435b8bbfdb2488325a3112bb04432f9ebfc3839"
+source_hash: "a384fce07f75b8fb463e44814d6695d293c5430b0db70ba5136461a5331a9857"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/tools-reference.md"
@@ -139,6 +139,8 @@ Registered when the agent is either (a) spawned by the kanban dispatcher (`HERME
 | `kanban_list` | List board tasks with filters. Orchestrator-only; hidden from dispatcher-spawned task workers. | profile with `kanban` toolset |
 | `kanban_complete` | Mark the current task done with a structured handoff payload (results, artifacts, follow-ups). | `HERMES_KANBAN_TASK` or `kanban` toolset |
 | `kanban_block` | Block the current task on a question for the user — the dispatcher pauses, surfaces the question, and resumes once a human replies. | `HERMES_KANBAN_TASK` or `kanban` toolset |
+| `kanban_request_review` | Hand the implementation to a reviewer with `summary`, optional structured `metadata`, and an optional reviewer profile. Moves the same task to `review`; it is not a block and does not affect block-loop accounting. | `HERMES_KANBAN_TASK` or `kanban` toolset |
+| `kanban_request_changes` | Reviewer verdict for an actively claimed review run. Closes the review run, reapplies parent gating, and routes the task back to the original implementer without using a block. | `HERMES_KANBAN_TASK` or `kanban` toolset |
 | `kanban_heartbeat` | Send a progress heartbeat during a long-running operation so the dispatcher knows the worker is still alive. | `HERMES_KANBAN_TASK` or `kanban` toolset |
 | `kanban_comment` | Add a comment to the task thread without changing its state — useful for surfacing intermediate findings. | `HERMES_KANBAN_TASK` or `kanban` toolset |
 | `kanban_create` | Fan out child tasks from the current task. Used by orchestrators and follow-up-spawning workers. | `HERMES_KANBAN_TASK` or `kanban` toolset |

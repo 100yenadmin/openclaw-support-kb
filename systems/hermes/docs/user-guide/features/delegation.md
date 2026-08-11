@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "a7f0cae7c11a3aef65974a78a3dccf39b96800d77683acba04ddb9f716abefe7"
+source_hash: "28b3587dd53968c4743d6df0cae5fd4f5ba64d82a5b1f228998e7124635a5eba"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -165,6 +165,23 @@ delegation:
 ```
 
 If omitted, subagents use the same model as the parent.
+
+### Cost strategy: frontier planner, inexpensive workers
+
+Decomposing a problem into well-specified subtasks takes frontier-level judgment; executing a subtask that already comes with a clear goal, full context, and an output contract usually doesn't. Meanwhile the children are where the tokens go — a parallel batch of subagents typically burns the large majority of a run's total tokens, so the worker model is where the cost actually lives. Pinning `delegation.model` to an inexpensive model while your main session stays on a frontier model keeps the planning quality where it matters and cuts spend where the volume is:
+
+```yaml
+# ~/.hermes/config.yaml
+model:
+  default: "your-frontier-model"     # parent (planner) stays on the frontier model
+delegation:
+  model: "your-inexpensive-model"    # all delegate_task children run on this
+  provider: "openrouter"             # optional: route children to a different provider
+```
+
+Resolution order: `delegation.base_url` (direct endpoint) takes precedence, then `delegation.provider` (full credential bundle resolved via the runtime provider system), and when neither is set children inherit the parent's provider and credentials; `delegation.model` applies in all cases, and when it is empty children inherit the parent's model.
+
+Note that the pin is global: `delegate_task` has no per-task model parameter, so every child in a batch runs on the configured delegation model. For quality-sensitive subtasks that need a stronger model, either leave `delegation.model` unset for that session or hand the task to the [kanban board](kanban.md#per-task-model-override), which does support a per-task model override.
 
 ## Inherited Tool Access
 

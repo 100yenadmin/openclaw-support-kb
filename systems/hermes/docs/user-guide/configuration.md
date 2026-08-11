@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "419629a15571efb3ffda3176dc9ee0f5b4c4ab20daab091820ec84ad25c017a1"
+source_hash: "9f2045ea694a3208ef95a360b42c26745d318dbf438f4f4a3338eefb033d94da"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -81,6 +81,24 @@ An administrator can pin specific config and secret values that a standard user
 cannot override, via a system-level managed directory. See
 [Managed Scope](/user-guide/managed-scope).
 :::
+
+## Runtime Limits
+
+Long-running Hermes server surfaces (including the gateway and
+`hermes serve --isolated`) apply the configured `RLIMIT_NOFILE` soft limit
+during startup when the operating system supports it:
+
+```yaml
+runtime:
+  nofile_soft_limit: 4096
+```
+
+The default is `4096`. Hermes clamps the target to the operating system's hard
+limit and never lowers a process that already has a higher soft limit. Set the
+value to `0`, `false`, or `null` to disable the adjustment. On Windows and in
+sandboxes
+where the limit cannot be changed, startup continues without changing the
+limit.
 
 ## Environment Variable Substitution
 

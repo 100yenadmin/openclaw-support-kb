@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Subscriptions"
 source: "https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md"
-source_hash: "47a67919f4d865334cbd92e84d89bfa583fd9445af7792abc07b64fac907d8a0"
+source_hash: "6fe95be6d2f8de4111c969696cc5d9a72965ba0b340b222a4eeb5d355246c39a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-subscriptions.md"
@@ -159,11 +159,5 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 | `DELETE` | `/api/v3.1/webhook_subscriptions/{id}` | [Delete webhook subscription](/reference/api-reference/webhook-subscriptions/deleteWebhookSubscriptionsById) |
 | `POST` | `/api/v3.1/webhook_subscriptions/{id}/rotate_secret` | [Rotate webhook secret](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptionsByIdRotateSecret) |
 | `GET` | `/api/v3.1/webhook_subscriptions/event_types` | [List available event types](/reference/api-reference/webhook-subscriptions/getWebhookSubscriptionsEventTypes) |
-
----
-
-
-# Toolkits
-
 
 ---

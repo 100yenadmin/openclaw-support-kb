@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bundled Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/skills-catalog"
-source_hash: "b7144fa31ec9f57936876de3040ea858559e5c542287bfb7171b1d5f365a76a7"
+source_hash: "27f425017749ef600b07a097a2a4abe8629986d49892fd29c47eea5f38b32ef5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/skills-catalog.md"
@@ -42,6 +42,7 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 | [`codex`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-codex) | Delegate coding to OpenAI Codex CLI (features, PRs). | `autonomous-ai-agents/codex` |
 | [`computer-use`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-computer-use) | Drive the desktop in the background without stealing focus. | `autonomous-ai-agents/computer-use` |
 | [`hermes-agent`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-hermes-agent) | Use, configure, theme, extend, and orchestrate Hermes Agent. | `autonomous-ai-agents/hermes-agent` |
+| [`merge-reconciler`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-merge-reconciler) | Neutral third-party resolution of agent merge conflicts. | `autonomous-ai-agents/merge-reconciler` |
 | [`opencode`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-opencode) | Delegate coding to OpenCode CLI (features, PR review). | `autonomous-ai-agents/opencode` |
 
 ## creative
@@ -64,6 +65,12 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 | [`sketch`](/docs/user-guide/skills/bundled/creative/creative-sketch) | Throwaway HTML mockups: 2-3 design variants to compare. | `creative/sketch` |
 | [`songwriting-and-ai-music`](/docs/user-guide/skills/bundled/creative/creative-songwriting-and-ai-music) | Songwriting craft and Suno AI music prompts. | `creative/songwriting-and-ai-music` |
 | [`touchdesigner-mcp`](/docs/user-guide/skills/bundled/creative/creative-touchdesigner-mcp) | Control TouchDesigner via twozero MCP. | `creative/touchdesigner-mcp` |
+
+## devops
+
+| Skill | Description | Path |
+|-------|-------------|------|
+| [`sdlc-review`](/docs/user-guide/skills/bundled/devops/devops-sdlc-review) | Review Kanban handoffs and route verified outcomes. | `devops/sdlc-review` |
 
 ## email
 
