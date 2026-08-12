@@ -2,10 +2,10 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "9197cc475ae74af11dbf2cde62e36e69f963262834865d6e121009ab82b51aa9"
+source_hash: "3649aa953ea2e804ff6c705952970c2ad2392f3ce8f3e2c569ebdb5b30441484"
 system: "composio"
 kb_namespace: "composio"
-catalog_snapshot_sha256: "3c9ad257b9d3987959ea95347caf0592bf9857c5feafcac62d98adc15284ee94"
+catalog_snapshot_sha256: "9afed6ddd7a051a288fa7fca9a8856e548533a6e7236b0adb34038b57d855707"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -53,7 +53,7 @@ No rendered toolkit text captured.
 - salesforce - https://composio.dev/toolkits/salesforce
 - tavily - https://composio.dev/toolkits/tavily
 - jira - https://composio.dev/toolkits/jira
-- exa - https://composio.dev/toolkits/exa
+- instagram - https://composio.dev/toolkits/instagram
 - cursor/framework/hermes-agent - https://composio.dev/toolkits/cursor/framework/hermes-agent
 - whatsapp/framework/claude-cowork - https://composio.dev/toolkits/whatsapp/framework/claude-cowork
 - googleslides/framework/claude-code - https://composio.dev/toolkits/googleslides/framework/claude-code
@@ -66,7 +66,6 @@ No rendered toolkit text captured.
 - share_point/framework/claude-cowork - https://composio.dev/toolkits/share_point/framework/claude-cowork
 - todoist/framework/codex - https://composio.dev/toolkits/todoist/framework/codex
 - share_point/framework/claude-code - https://composio.dev/toolkits/share_point/framework/claude-code
-- freshdesk/framework/claude-code - https://composio.dev/toolkits/freshdesk/framework/claude-code
 - servicenow/framework/claude-code - https://composio.dev/toolkits/servicenow/framework/claude-code
 - cloudflare/framework/hermes-agent - https://composio.dev/toolkits/cloudflare/framework/hermes-agent
 - affinity/framework/claude-code - https://composio.dev/toolkits/affinity/framework/claude-code

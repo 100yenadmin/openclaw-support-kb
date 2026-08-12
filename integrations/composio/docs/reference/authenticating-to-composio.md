@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Overview"
 source: "https://docs.composio.dev/reference/authenticating-to-composio.md"
-source_hash: "bb394464d98e4facb08b821c9f17347eb00cad11cfe94918aa1be8649b9145d8"
+source_hash: "85532b15f44452a6414a03588441c8c4160a503f42e5d9f65d529c1de79b264c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/authenticating-to-composio.md"
@@ -29,7 +29,7 @@ Composio has three kinds of API key. They share the same authentication flow —
 | Organization API key                                                       | `x-org-api-key` | Access across every project in your organization. |
 | Scoped project API key <span style="{ color: '#059669' }">**· New**</span> | `x-api-key`     | A chosen subset of a single project's resources.  |
 
-# Project API key [#project-api-key]
+## Project API key [#project-api-key]
 
 A project API key authenticates to one project with full access. Use it for most application code.
 
@@ -42,7 +42,7 @@ curl https://backend.composio.dev/api/v3.1/tools \
   -H "x-api-key: $COMPOSIO_API_KEY"
 ```
 
-# Organization API key [#organization-api-key]
+## Organization API key [#organization-api-key]
 
 An organization API key authenticates across every project in your organization. Use it for organization-level endpoints.
 
@@ -55,7 +55,7 @@ curl https://backend.composio.dev/api/v3.1/org/projects \
   -H "x-org-api-key: $COMPOSIO_ORG_API_KEY"
 ```
 
-# Scoped project API key [#scoped-project-api-key]
+## Scoped project API key [#scoped-project-api-key]
 
 A scoped project API key authenticates to a single project but reaches only the resources you grant it — for example, executing tools without managing connected accounts. It uses the same `x-api-key` header as a default project key.
 

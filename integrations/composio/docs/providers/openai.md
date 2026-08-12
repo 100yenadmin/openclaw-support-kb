@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "ecc2aade8addce13c781ddfe806044f07412b60dc2a63127dfd74057a3854a11"
+source_hash: "b24d8f1735d01fda58ce09030df612f860a087291f67e8449a13c9d529e5c7c7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -341,7 +341,7 @@ const result = await run(
 console.log(result.finalOutput);
 ```
 
-# Provider specifics [#provider-specifics]
+## Provider specifics [#provider-specifics]
 
 The OpenAI integration ships three providers, one per API surface:
 
@@ -351,7 +351,7 @@ The OpenAI integration ships three providers, one per API surface:
 
 Use the Responses or Agents provider for new agentic flows; reach for Chat Completions when you are extending an existing Chat Completions codebase.
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

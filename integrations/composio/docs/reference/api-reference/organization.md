@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Organization"
 source: "https://docs.composio.dev/reference/api-reference/organization.md"
-source_hash: "ab3ef59f9a36ce048f0d438856a0efa914e771979c76df5651780a716893b662"
+source_hash: "611e420169b969cf11a0451a46569b74e52b2093867521513832f2c6f859cee0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/organization.md"
@@ -30,7 +30,7 @@ There are two query shapes:
 
 Each shape comes in an org-scoped and a project-scoped flavor. The org-scoped endpoints are documented below; the project-scoped usage endpoints (`POST /api/v3.1/project/usage/*`) also appear on the [Projects](/reference/api-reference/projects) reference page.
 
-# Authentication [#authentication]
+## Authentication [#authentication]
 
 | Endpoint                                     | Header                                   | Scope                    |
 | -------------------------------------------- | ---------------------------------------- | ------------------------ |
@@ -41,14 +41,14 @@ Each shape comes in an org-scoped and a project-scoped flavor. The org-scoped en
 
 The org endpoints accept a `project_id` filter so you can slice by project without rotating keys.
 
-# Entity types [#entity-types]
+## Entity types [#entity-types]
 
 | Entity type  | What it counts                              |
 | ------------ | ------------------------------------------- |
 | `tool_calls` | Every tool execution (successful or failed) |
 | `sessions`   | Sessions created                            |
 
-# Summary [#summary]
+## Summary [#summary]
 
 Totals across entity types for a time window.
 
@@ -74,7 +74,7 @@ Response:
 }
 ```
 
-## Summary parameters [#summary-parameters]
+### Summary parameters [#summary-parameters]
 
 | Field                | Type                | Default     | Notes                                                          |
 | -------------------- | ------------------- | ----------- | -------------------------------------------------------------- |
@@ -85,7 +85,7 @@ Response:
 | `filters.session_id` | string \| string\[] | —           | Filter events by session                                       |
 | `filters.project_id` | string \| string\[] | —           | Only meaningful on org endpoints; ignored on project endpoints |
 
-# Breakdown [#breakdown]
+## Breakdown [#breakdown]
 
 One entity type, grouped by a dimension. Useful for answering "top N" questions.
 
@@ -118,14 +118,14 @@ Response:
 }
 ```
 
-## Breakdown `group_by` options [#breakdown-group_by-options]
+### Breakdown `group_by` options [#breakdown-group_by-options]
 
 | Entity       | Org scope                                                                                  | Project scope           | Default     |
 | ------------ | ------------------------------------------------------------------------------------------ | ----------------------- | ----------- |
 | `tool_calls` | `tool_slug`, `toolkit_slug`, `connected_account_id`, `user_id`, `session_id`, `project_id` | same minus `project_id` | `tool_slug` |
 | `sessions`   | `user_id`, `project_id`                                                                    | `user_id`               | `user_id`   |
 
-## Breakdown parameters [#breakdown-parameters]
+### Breakdown parameters [#breakdown-parameters]
 
 | Field             | Type                | Default          | Notes                                         |
 | ----------------- | ------------------- | ---------------- | --------------------------------------------- |
@@ -137,7 +137,7 @@ Response:
 | `limit`           | number              | 50               | Max groups returned                           |
 | `filters`         | object              | —                | See Filters below                             |
 
-# Filters [#filters]
+## Filters [#filters]
 
 Filters live in a `filters` object on the request body. Each filter value can be a **single string** or an **array of strings**:
 
@@ -155,16 +155,16 @@ Filters live in a `filters` object on the request body. Each filter value can be
 
 The `project_id` filter is only meaningful on the org-scoped endpoints. Project endpoints accept the field but ignore it (your key already pins the scope to a single project).
 
-# Time ranges [#time-ranges]
+## Time ranges [#time-ranges]
 
 * `from` and `to` are **epoch milliseconds**.
 * `from` defaults to 30 days before `to`.
 * `to` defaults to the current time.
 * Maximum range: **366 days**. Longer ranges return a 400.
 
-# Recipes [#recipes]
+## Recipes [#recipes]
 
-## Top 10 tools my org called last week [#top-10-tools-my-org-called-last-week]
+### Top 10 tools my org called last week [#top-10-tools-my-org-called-last-week]
 
 ```bash
 WEEK_AGO=$(( $(date +%s) - 604800 ))000
@@ -180,7 +180,7 @@ curl -X POST https://backend.composio.dev/api/v3.1/org/usage/tool_calls \
   }"
 ```
 
-## Tool call count per user for my project this month [#tool-call-count-per-user-for-my-project-this-month]
+### Tool call count per user for my project this month [#tool-call-count-per-user-for-my-project-this-month]
 
 ```bash
 MONTH_AGO=$(( $(date +%s) - 2592000 ))000
@@ -196,7 +196,7 @@ curl -X POST https://backend.composio.dev/api/v3.1/project/usage/tool_calls \
   }"
 ```
 
-## Which toolkits is a specific user using? [#which-toolkits-is-a-specific-user-using]
+### Which toolkits is a specific user using? [#which-toolkits-is-a-specific-user-using]
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/project/usage/tool_calls \
@@ -208,7 +208,7 @@ curl -X POST https://backend.composio.dev/api/v3.1/project/usage/tool_calls \
   }'
 ```
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

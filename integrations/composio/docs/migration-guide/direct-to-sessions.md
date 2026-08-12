@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "75e7d0184e834e205bccf9dfd2c63d3419048cfb394c2f9f028e1fb6dc438a55"
+source_hash: "c79723a3747b5e696effc1fc37fed4e8386cabc099bd8ec159ae093dcbb5d5e2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -25,7 +25,7 @@ With sessions, you don't need to manage tool fetching, authentication, or execut
 
 If you're starting fresh, use [Configuring Sessions](/docs/configuring-sessions) instead.
 
-# What changes [#what-changes]
+## What changes [#what-changes]
 
 |                      | Direct tools                                      | Sessions                                                               |
 | -------------------- | ------------------------------------------------- | ---------------------------------------------------------------------- |
@@ -34,7 +34,7 @@ If you're starting fresh, use [Configuring Sessions](/docs/configuring-sessions)
 | **Execution**        | You call `tools.execute()` with version pinning   | Agent executes tools through `COMPOSIO_MULTI_EXECUTE_TOOL`             |
 | **Toolkit versions** | You manage versions manually                      | Handled automatically                                                  |
 
-# Migrating [#migrating]
+## Migrating [#migrating]
 
 #### Pass your existing auth configs to the session
 
@@ -186,7 +186,7 @@ const composio = new Composio({ apiKey: 'your_api_key' });
 const session = await composio.create("user_123");
 ```
 
-# Restricting toolkits [#restricting-toolkits]
+## Restricting toolkits [#restricting-toolkits]
 
 If you were fetching tools from specific toolkits, you can restrict the session to only those toolkits:
 
@@ -219,7 +219,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Multiple connected accounts [#multiple-connected-accounts]
+## Multiple connected accounts [#multiple-connected-accounts]
 
 If your users have multiple accounts for the same toolkit (e.g., work and personal Gmail), you can specify which one to use per session:
 
@@ -254,19 +254,19 @@ const session = await composio.create("user_123", {
 
 If you don't specify, the most recently connected account is used. See [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts) for details.
 
-# Triggers [#triggers]
+## Triggers [#triggers]
 
 Triggers don't work with sessions yet. Continue using them the same way you do today with `composio.triggers.create()`, `composio.triggers.enable()`, and webhook subscriptions.
 
 See [Triggers](/docs/triggers) for setup instructions.
 
-# White labeling [#white-labeling]
+## White labeling [#white-labeling]
 
 If you've set up white-labeled OAuth screens with custom auth configs, those carry over automatically. Just pass the same auth config IDs to your session via `auth_configs` / `authConfigs`. Your users will continue to see your branding on consent screens.
 
 See [White-labeling authentication](/docs/white-labeling-authentication) for more.
 
-# Next [#next]
+## Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Toolkits, auth configs, account selection, and session methods
 

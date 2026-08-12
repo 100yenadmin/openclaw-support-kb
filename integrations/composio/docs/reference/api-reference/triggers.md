@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/api-reference/triggers.md"
-source_hash: "f3bba020de516d2739635eb5b51cf8a1884800f9fe88b1e4ed81e84f4941e778"
+source_hash: "732f13df0d5d74227d754f780ee9263b296ffbc63ed179f599f6365a54a3114a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/triggers.md"
@@ -40,7 +40,7 @@ These endpoints authenticate with your project API key in the `x-api-key` header
 
 For the full concept overview, see [Triggers](/docs/triggers).
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

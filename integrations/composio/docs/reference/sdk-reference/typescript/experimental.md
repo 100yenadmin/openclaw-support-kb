@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Experimental"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md"
-source_hash: "eef18ceac8de6a6a19335a2b66aefcfc45be30dc9c295b2952561f0c2f6d47be"
+source_hash: "a5fbe4162c88706cb8ccc821ede02c66ce4c41f10f96e37ce8a5a39bec3b410b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/experimental.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/experimental.md
 
 
-# Usage [#usage]
+## Usage [#usage]
 
 Access this class through the `composio.experimental` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.experimental.list();
 ```
 
-# Methods [#methods]
+## Methods [#methods]
 
-## updateAcl() (deprecated) [#updateacl-deprecated]
+### updateAcl() (deprecated) [#updateacl-deprecated]
 
 > **Deprecated**: Use `composio.connectedAccounts.updateAcl(...)` instead — ACL updates graduated onto the `connectedAccounts` mount. This experimental alias is kept only for backwards compatibility and will be removed once the API graduates. Prefer the `connectedAccounts` mount; do not generate new code against this alias.
 

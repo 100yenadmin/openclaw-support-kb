@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Python SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/python.md"
-source_hash: "92f8980cd7bdc1fdd525b573beab9c467e5cb428a1cc35f1af25b5458df655cb"
+source_hash: "74b5370cec20f39d10e0a7b7d23343f1ca7ffdbb573e623aefe396779f408ff2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python.md"
@@ -21,9 +21,9 @@ Source: https://docs.composio.dev/reference/sdk-reference/python.md
 
 Complete API reference for the `composio` Python package.
 
-# Installation [#installation]
+## Installation [#installation]
 
-# Classes [#classes]
+## Classes [#classes]
 
 | Class                                                                     | Description                                                                         |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ Complete API reference for the `composio` Python package.
 | [`MCP`](/reference/sdk-reference/python/mcp)                              | MCP (Model Control Protocol) class. Provides enhanced MCP server operations  Thi... |
 | [`Session`](/reference/sdk-reference/python/session)                      | A Composio session — the object returned by `composio.create(...)` / \`\`composi... |
 
-# Quick Start [#quick-start]
+## Quick Start [#quick-start]
 
 ```python
 from composio import Composio
@@ -54,9 +54,9 @@ result = composio.tools.execute(
 )
 ```
 
-# Decorators [#decorators]
+## Decorators [#decorators]
 
-## before\_execute [#before_execute]
+### before\_execute [#before_execute]
 
 [View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L280)
 
@@ -66,7 +66,7 @@ def my_modifier(...):
     ...
 ```
 
-## after\_execute [#after_execute]
+### after\_execute [#after_execute]
 
 [View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L241)
 
@@ -76,7 +76,7 @@ def my_modifier(...):
     ...
 ```
 
-## before\_file\_upload [#before_file_upload]
+### before\_file\_upload [#before_file_upload]
 
 Build a `Modifier` for the file-upload hook (same scoping pattern as :func:`before_execute`).  Your callable may take **either**:  - a single `context` argument (:class:`BeforeFileUploadContext`) — the preferred form, exposes `context["source"]` (`"path"` or `"url"`), or - three positional arguments `(path, tool, toolkit)` — legacy form, kept for back-compat.  Return a new path/URL string to substitute, or `False` to abort the upload (raises :class:`~composio.exceptions.FileUploadAbortedError`).  Pass the returned `Modifier` in `modifiers=[...]` on :meth:`composio.core.models.tools.Tools.execute` or `tools.get`. Multiple such modifiers are composed in list order.
 
@@ -88,7 +88,7 @@ def my_modifier(...):
     ...
 ```
 
-## schema\_modifier [#schema_modifier]
+### schema\_modifier [#schema_modifier]
 
 [View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/_modifiers.py#L377)
 

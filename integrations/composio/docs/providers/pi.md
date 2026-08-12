@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Pi"
 source: "https://docs.composio.dev/docs/providers/pi.md"
-source_hash: "adad1d11936ef46d0616dfb02658cfc719e825d89957b78a31f4f57037f70e8f"
+source_hash: "9d0ba69190045725f0848fdf95af7ee003d163c9af017a5a2ef6222c517019f7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/pi.md"
@@ -21,7 +21,7 @@ The Pi provider adapts Composio tools for [`@earendil-works/pi-coding-agent`](ht
 
 > The Pi provider ships from `@composio/experimental` for TypeScript projects.
 
-# Dynamic session helpers [#dynamic-session-helpers]
+## Dynamic session helpers [#dynamic-session-helpers]
 
 For most Pi apps, expose the dynamic helper tools. They let the model discover exact Composio tool slugs before it executes, request missing connections, and run sandbox commands when you enable them.
 
@@ -119,7 +119,7 @@ The provider creates these Pi tools:
 
 You can rename any of these helpers through the `names` option on `createSessionTools`, and the constants live on `PI_COMPOSIO_SESSION_TOOL_NAMES`.
 
-# Hooks [#hooks]
+## Hooks [#hooks]
 
 Hooks are the Pi provider's distinctive feature: middleware that wraps each helper so you control what runs and what the model sees. Pass a `hooks` object to `createSessionTools`. Each hook is `(ctx, next)`: `await next()` runs the default behavior, returning a value replaces what the model sees, and `ctx.deny(reason)` blocks the call. `ctx.request` is mutable; `ctx.context` is read-only.
 
@@ -172,7 +172,7 @@ Available hooks, each keyed on `PiSessionHooks`:
 
 Every `ctx.request` is fully typed, so your editor surfaces the exact fields. `ctx.deny` is also exported as `denyPiToolCall(reason)`.
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

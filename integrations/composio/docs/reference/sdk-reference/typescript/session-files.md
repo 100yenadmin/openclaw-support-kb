@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session files"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/session-files.md"
-source_hash: "948b1f9778466a3ad40df7e3fac4ed85bb0c29f20f61795a6256c73728f7e420"
+source_hash: "643d56f729de826330f732f50b78a5f189697ce14b282a691b00714de08e180c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/session-files.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/session-files.md
 
 
-# Methods [#methods]
+## Methods [#methods]
 
-## delete() [#delete]
+### delete() [#delete]
 
 Deletes a file or directory at the specified path on the session's file mount.
 
@@ -57,7 +57,7 @@ await session.experimental.files.delete('/old-backup', {
 
 ***
 
-## download() [#download]
+### download() [#download]
 
 Downloads a file from the session's file mount to the local filesystem.
 
@@ -95,7 +95,7 @@ await session.experimental.files.download('/exports/data.json', {
 
 ***
 
-## list() [#list]
+### list() [#list]
 
 Lists files and directories at the specified path on the session's file mount.
 
@@ -134,7 +134,7 @@ while (result.nextCursor) {
 
 ***
 
-## upload() [#upload]
+### upload() [#upload]
 
 Uploads a file to the session's file mount.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AuthConfigs"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md"
-source_hash: "983df672c91961576802689af8832ec172d40be314f03eae51920cd22bbb74c8"
+source_hash: "6a6cadad1d7d632b46dff5de43ce08e5151585dda4deb6c644e9608e86ae31e1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/auth-configs.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md
 
 
-# Usage [#usage]
+## Usage [#usage]
 
 Access this class through the `composio.authConfigs` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.authConfigs.list();
 ```
 
-# Methods [#methods]
+## Methods [#methods]
 
-## create() [#create]
+### create() [#create]
 
 Create a new auth config
 
@@ -63,7 +63,7 @@ const authConfig = await authConfigs.create('my-toolkit', {
 
 ***
 
-## delete() [#delete]
+### delete() [#delete]
 
 Deletes an authentication configuration.
 
@@ -95,7 +95,7 @@ await composio.authConfigs.delete('auth_abc123');
 
 ***
 
-## disable() [#disable]
+### disable() [#disable]
 
 Disables an authentication configuration.
 
@@ -127,7 +127,7 @@ await composio.authConfigs.disable('auth_abc123');
 
 ***
 
-## enable() [#enable]
+### enable() [#enable]
 
 Enables an authentication configuration.
 
@@ -159,7 +159,7 @@ await composio.authConfigs.enable('auth_abc123');
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 Retrieves a specific authentication configuration by its ID.
 
@@ -192,7 +192,7 @@ console.log(authConfig.toolkit.slug); // e.g., 'github'
 
 ***
 
-## list() [#list]
+### list() [#list]
 
 Lists authentication configurations based on provided filter criteria.
 
@@ -239,7 +239,7 @@ const managedConfigs = await composio.authConfigs.list({
 
 ***
 
-## update() [#update]
+### update() [#update]
 
 Updates an existing authentication configuration.
 
@@ -283,7 +283,7 @@ const updatedConfig = await composio.authConfigs.update('auth_abc123', {
 
 ***
 
-## updateStatus() [#updatestatus]
+### updateStatus() [#updatestatus]
 
 Updates the status of an authentication configuration.
 

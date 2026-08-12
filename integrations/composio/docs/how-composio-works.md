@@ -2,7 +2,7 @@
 type: composio_doc
 title: "What is a session?"
 source: "https://docs.composio.dev/docs/how-composio-works.md"
-source_hash: "427b17c7d92a7cf88b6d401f7500a1e862129b4a0371f970ed4d53999b95bf7e"
+source_hash: "a24eeeabef3c31e36793ac02168b962502eac03fd71cc7a5c6713973ed84eca5"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "how-composio-works.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/how-composio-works.md
 
 A **session** is the runtime context for an agentic run: the scoped environment an AI agent works in while it acts for one of your users. You create it with `composio.create(userId)`, and it ties together the user, the toolkits available, authentication, and connected accounts. By default it gives the agent meta tools to discover, authenticate, and execute app tools at runtime, instead of loading hundreds of tool definitions into context.
 
-# The basics [#the-basics]
+## The basics [#the-basics]
 
 Create a session for a user, then read its tools formatted for your framework. To connect over MCP instead, see [Using sessions via MCP](/docs/sessions-via-mcp).
 
@@ -48,7 +48,7 @@ A session scopes four things:
 * **Authentication**: managed auth, custom auth configs, and connected-account selection.
 * **Execution state**: logs, tool memory, MCP state, and workbench files for the task.
 
-# Tools and toolkits [#tools-and-toolkits]
+## Tools and toolkits [#tools-and-toolkits]
 
 A **toolkit** is a collection of related tools for a service. The `github` toolkit, for example, contains tools for creating issues, managing pull requests, and starring repositories.
 
@@ -56,7 +56,7 @@ A **tool** is an individual action your agent can execute. Each tool has an inpu
 
 Every toolkit in the catalog is discoverable by default. Create a session without a `toolkits` parameter and the agent can find any of them at runtime. To restrict the set, pass `toolkits` when you create the session. See [Enable and disable toolkits](/docs/configuring-sessions). You can also bind local, in-process tools to a session with the experimental [custom tools and toolkits](/docs/extending-sessions/custom-tools-and-toolkits) API.
 
-# Users [#users]
+## Users [#users]
 
 A user is an identifier from your app. Composio stores connections under that ID, so tools run with the right account and stay isolated from other users. Use a stable identifier like your database ID, never one that can change.
 
@@ -69,7 +69,7 @@ A user is an identifier from your app. Composio stores connections under that ID
 
 A user can connect multiple accounts for the same toolkit, like work and personal Gmail. Use the same userID, then select the connected account when a session needs a specific one. See [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts).
 
-# Meta tools [#meta-tools]
+## Meta tools [#meta-tools]
 
 A session gives your agent meta tools, a small fixed set that discover, authenticate, and execute tools at runtime, so you never load hundreds of tool definitions into context:
 
@@ -77,7 +77,7 @@ The agent searches for relevant tools, authenticates if needed, and executes the
 
 Know the exact tools upfront? The [direct tools preset](/docs/configuring-sessions#direct-tools-preset) returns them directly from `session.tools()` with no search step, while keeping session auth, connected accounts, and the workbench.
 
-# Authentication [#authentication]
+## Authentication [#authentication]
 
 When a tool needs a connection, the session generates a Connect Link with `session.authorize()`, or the agent handles the flow through `COMPOSIO_MANAGE_CONNECTIONS`.
 
@@ -85,13 +85,13 @@ In chat, the agent can pause, ask the user to connect an app, then retry the too
 
 For OAuth toolkits, Composio uses [managed apps](/docs/custom-app-vs-managed-app) by default. Bring your own app when you need your own branding, scopes, or consent screen.
 
-# Sandbox [#sandbox]
+## Sandbox [#sandbox]
 
 Handle large responses and bulk operations in the remote sandbox. Instead of stuffing long tool responses into the model context, the agent reads files, searches outputs, writes Python, transforms data, and calls Composio tools in bulk.
 
 The sandbox is scoped to the session, so files, variables, helper functions, and intermediate results stay available while the agent works through a task.
 
-# How sessions behave [#how-sessions-behave]
+## How sessions behave [#how-sessions-behave]
 
 Every `create()` call returns a new session ID. Use it for a fresh task context.
 
@@ -140,7 +140,7 @@ await session.update({
 
 Create a new session for a different user or a fundamentally different task setup. Reuse or update a session when the same conversation should keep its tool, auth, and workbench context.
 
-# Next [#next]
+## Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Enable toolkits, set auth configs, and select connected accounts
 

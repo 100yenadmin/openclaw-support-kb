@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Eve"
 source: "https://docs.composio.dev/docs/providers/eve.md"
-source_hash: "b1a725e4d1c24896684e5e6be957e0e73c1feab942306cf27c802acbfa387cdf"
+source_hash: "c2d6297e6d28eebbb7796724b7bfa608efcbbb9b17de2867a821428c058962e1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/eve.md"
@@ -22,7 +22,7 @@ The eve provider adapts Composio tools for the [eve](https://github.com/vercel/e
 > The eve provider is experimental and currently ships from `@composio/experimental` for TypeScript
 projects.
 
-# Usage [#usage]
+## Usage [#usage]
 
 eve owns the agent loop and discovers tools from files, so you register the provider on the Composio client and expose the session's tools from a file under `agent/tools/`.
 
@@ -90,7 +90,7 @@ Your agent now has the Tool Router meta-tools (`COMPOSIO_SEARCH_TOOLS`, `COMPOSI
 straight through. It does not convert to a zod schema, which would trip eve's dynamic-tool
 normalizer.
 
-# Hooks [#hooks]
+## Hooks [#hooks]
 
 Pass a `hooks` object to the constructor to wrap the Tool Router meta-tools. Each hook is `(ctx, next)`: `await next()` runs the default behavior, returning a value replaces what the model sees, and `ctx.deny(reason)` blocks the call. `ctx.request` is mutable; `ctx.context` is read-only.
 
@@ -130,7 +130,7 @@ Available hooks, each keyed on `EveProviderHooks`:
 
 `ctx.request` carries the meta-tool's raw `{ slug, args }`, and `ctx.deny` is also exported as `denyEveToolCall(reason)`.
 
-## Require approval [#require-approval]
+### Require approval [#require-approval]
 
 Map Composio tools onto eve's durable approval flow with `needsApproval`. The callback receives the original Composio tool plus eve's approval context:
 
@@ -145,7 +145,7 @@ const provider = new EveProvider({
 
 When this returns `true`, eve pauses before execution and asks the user to approve the call. `requireApprovalForTools` protects both direct calls and matching entries inside `COMPOSIO_MULTI_EXECUTE_TOOL`. Use an exact slug allowlist for side-effecting tools rather than approving every tool in a toolkit.
 
-# Next [#next]
+## Next [#next]
 
 - [iMessage on eve](/examples/imessage-agent): A full example: a custom toolkit for local iMessage plus the eve provider, on one session.
 

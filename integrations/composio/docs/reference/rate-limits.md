@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Rate Limits"
 source: "https://docs.composio.dev/reference/rate-limits.md"
-source_hash: "7a7a3c2ce6e595ce4cfee7b74dd21f5cf00f91e335540207ef928ff9cb34d084"
+source_hash: "c0663a25d6ccef9f27fa34a7a74a05f6f70a8339a31cd2e8adb505b063a1c158"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/rate-limits.md"
@@ -21,7 +21,7 @@ Source: https://docs.composio.dev/reference/rate-limits.md
 
 Composio enforces rate limits **per organization** over a fixed one-minute window. Every authenticated endpoint draws from the same budget — tool execution, connected accounts, triggers, and the rest — so the limit below is your organization's total across all API calls.
 
-# Rate limits by plan [#rate-limits-by-plan]
+## Rate limits by plan [#rate-limits-by-plan]
 
 | Plan       | Rate limit      | Window   |
 | ---------- | --------------- | -------- |
@@ -30,7 +30,7 @@ Composio enforces rate limits **per organization** over a fixed one-minute windo
 | Growth     | 10,000 requests | 1 minute |
 | Enterprise | Custom          | -        |
 
-# Rate limit headers [#rate-limit-headers]
+## Rate limit headers [#rate-limit-headers]
 
 Every response includes headers so you can track usage without guessing:
 
@@ -41,7 +41,7 @@ Every response includes headers so you can track usage without guessing:
 | `X-RateLimit-Window-Size` | Window size (e.g., `60s` for 60 seconds)                |
 | `Retry-After`             | Seconds until the window resets (only on 429 responses) |
 
-# Rate limit response [#rate-limit-response]
+## Rate limit response [#rate-limit-response]
 
 When you exceed the rate limit, you'll receive a `429 Too Many Requests` response:
 
@@ -51,7 +51,7 @@ When you exceed the rate limit, you'll receive a `429 Too Many Requests` respons
 }
 ```
 
-# Best practices [#best-practices]
+## Best practices [#best-practices]
 
 1. **Watch `X-RateLimit-Remaining`** — read it on each response to know how much headroom you have left in the window.
 
@@ -59,7 +59,7 @@ When you exceed the rate limit, you'll receive a `429 Too Many Requests` respons
 
 3. **Cache what doesn't change** — keep tool definitions and other static data client-side so you don't spend requests re-fetching them.
 
-# Need higher limits? [#need-higher-limits]
+## Need higher limits? [#need-higher-limits]
 
 If you hit these limits regularly, upgrade your plan or [talk to us](https://calendly.com/composiohq/enterprise) about custom limits for your use case.
 

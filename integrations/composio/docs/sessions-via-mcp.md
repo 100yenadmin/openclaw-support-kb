@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Using sessions via MCP"
 source: "https://docs.composio.dev/docs/sessions-via-mcp.md"
-source_hash: "adcde6a8182ffde15140765ac2cddbc190c1b04dbb02e975a98447fe94e8ba17"
+source_hash: "e5b7749d72b9e9a105158c8f7d2f9be3a2cc72954ed8953211dc47f0f14f2cfe"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sessions-via-mcp.md"
@@ -17,13 +17,15 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/sessions-via-mcp.md
 
 
-By default Composio gives your agent **tools it can call directly**. Composio formats them as function schemas for your framework through a [provider package](/docs/providers). That's what the [Quickstart](/docs/quickstart) uses, and it's the right choice for most agents.
+Use this guide when you are building an application with Composio and want to expose one user's session over MCP. The application creates and configures the session, then passes its hosted MCP endpoint to a compatible client.
 
-If you'd rather connect over the [Model Context Protocol](https://modelcontextprotocol.io), every session also exposes a hosted MCP endpoint. This is useful when you want to plug a session into an MCP-native client like Claude Desktop, Cursor, or any framework's MCP transport. No provider package required.
+By default, Composio gives your agent tools it can call directly through a [provider package](/docs/providers). That is what the [Quickstart](/docs/quickstart) uses. Set `mcp: true` when an MCP transport fits your application better. No provider package is required for this route.
+
+> **Connecting an existing agent instead?**: If you use Codex or Claude Code and did not explicitly choose MCP, install the native [Composio agent plugin](/docs/agent-plugins). If you explicitly want MCP in an existing client, use [Composio Connect](/docs/composio-connect).
 
 > Want to bring tools from your own remote MCP server into Composio instead? See [Custom MCP](/docs/extending-sessions/custom-mcp).
 
-# The MCP endpoint [#the-mcp-endpoint]
+## The MCP endpoint [#the-mcp-endpoint]
 
 Opt into MCP by passing `mcp: true` when you create the session. The session then exposes its hosted MCP server. Read the URL and headers off `session.mcp`:
 
@@ -57,7 +59,7 @@ You don't need a provider package to use the MCP endpoint, so you can drop it fr
 
 > The MCP endpoint and `session.tools()` are backed by the same session. Toolkits, auth configs, and connected accounts you set when [configuring the session](/docs/configuring-sessions) apply to both.
 
-# A single URL for a fixed set of tools [#a-single-url-for-a-fixed-set-of-tools]
+## A single URL for a fixed set of tools [#a-single-url-for-a-fixed-set-of-tools]
 
 Combine `mcp: true` with the [direct-tools preset](/docs/configuring-sessions) to get one MCP URL that serves exactly the tools you list, with no search or meta tools in front of them. This is the closest equivalent to a classic hosted MCP server scoped to a handful of tools.
 
@@ -100,7 +102,7 @@ console.log(session.mcp.url);
 
 Any MCP client pointed at that URL sees only `GMAIL_FETCH_EMAILS` and `GMAIL_CREATE_EMAIL_DRAFT`. See [Configuring Sessions](/docs/configuring-sessions) for the full set of toolkit, tool, and auth filters.
 
-# Wire it into your framework [#wire-it-into-your-framework]
+## Wire it into your framework [#wire-it-into-your-framework]
 
 Pass `session.mcp.url` and `session.mcp.headers` to your framework's MCP client.
 
@@ -160,7 +162,7 @@ const client = await createMCPClient({
 const tools = await client.tools();
 ```
 
-# Trade-offs [#trade-offs]
+## Trade-offs [#trade-offs]
 
 MCP is the more portable option. Any MCP-compatible client connects with just a URL, and it's supported across more frameworks and apps (Claude Desktop, Cursor, the OpenAI Responses API, and others) without a provider package.
 
@@ -171,7 +173,7 @@ The trade-off is that the MCP client talks to Composio's server directly, so any
 
 If you need any of those, call tools directly through a [provider](/docs/providers) instead of over MCP.
 
-# Next [#next]
+## Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Restrict toolkits, set custom auth configs, and select connected accounts
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "TypeScript SDK Reference"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript.md"
-source_hash: "3adf905a70ce5fe94dc371b38a54ec432e0c67cc5879496a1fcf0a1856c410d4"
+source_hash: "7974ef7ba3c13d0dd4c4ba2f1a51920c449cfb9f402ff32f8024078be83f5eec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript.md
 
 
-# Installation [#installation]
+## Installation [#installation]
 
-# Classes [#classes]
+## Classes [#classes]
 
 | Class                                                                         | Description                                                                 |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
@@ -36,7 +36,7 @@ Source: https://docs.composio.dev/reference/sdk-reference/typescript.md
 | [`Tools`](/reference/sdk-reference/typescript/tools)                          | This class is used to manage tools in the Composio SDK.                     |
 | [`Triggers`](/reference/sdk-reference/typescript/triggers)                    | Trigger (Instance) class                                                    |
 
-# Quick Start [#quick-start]
+## Quick Start [#quick-start]
 
 ```typescript
 import { Composio } from '@composio/core';

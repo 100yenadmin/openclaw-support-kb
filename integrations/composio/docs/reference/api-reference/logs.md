@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Logs"
 source: "https://docs.composio.dev/reference/api-reference/logs.md"
-source_hash: "81c55e0e40d9579361c9dc9cb29a4a3605494a8a71f414a8fac339ad3f4da206"
+source_hash: "899dfb20e486a985a946c49936957e40be1858d01433ca9a2aec06daae9c2063"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/logs.md"
@@ -25,7 +25,7 @@ The Logs API returns **individual tool execution events**, one record per tool c
 
 All endpoints in this section require a **project API key** (`x-api-key`) or a valid session cookie.
 
-# List logs [#list-logs]
+## List logs [#list-logs]
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/logs/tool_execution \
@@ -67,7 +67,7 @@ The response contains a page of log entries and a `next_cursor`:
 
 Pass `next_cursor` back as `cursor` on the next request to paginate. When `next_cursor` is `null`, you've reached the end.
 
-## Filter fields [#filter-fields]
+### Filter fields [#filter-fields]
 
 Pass one or more filters in the `filters` array. Filters are **AND**-combined.
 
@@ -84,7 +84,7 @@ Pass one or more filters in the `filters` array. Filters are **AND**-combined.
 | `request_id`           | Request ID (useful for correlating with your own logs)      |
 | `log_id`               | Exact log ID (equivalent to the detail endpoint)            |
 
-## Operators [#operators]
+### Operators [#operators]
 
 | Operator       | Meaning                  |
 | -------------- | ------------------------ |
@@ -93,7 +93,7 @@ Pass one or more filters in the `filters` array. Filters are **AND**-combined.
 | `contains`     | Substring match          |
 | `not_contains` | Substring does not match |
 
-## Parameters [#parameters]
+### Parameters [#parameters]
 
 | Field             | Type           | Default | Notes                                          |
 | ----------------- | -------------- | ------- | ---------------------------------------------- |
@@ -103,7 +103,7 @@ Pass one or more filters in the `filters` array. Filters are **AND**-combined.
 | `time_range.from` | number         | —       | Epoch milliseconds                             |
 | `time_range.to`   | number         | —       | Epoch milliseconds                             |
 
-# Get a single log [#get-a-single-log]
+## Get a single log [#get-a-single-log]
 
 Fetch one log by ID to get the **full** payload, including request/response bodies, timing breakdowns, and source metadata:
 
@@ -121,9 +121,9 @@ The detail response includes everything from the list shape plus:
 
 This is the endpoint to call when you need to reconstruct *exactly* what happened, for example when debugging a 500 from a user report.
 
-# Recipes [#recipes]
+## Recipes [#recipes]
 
-## Find failed Gmail tool calls in the last hour [#find-failed-gmail-tool-calls-in-the-last-hour]
+### Find failed Gmail tool calls in the last hour [#find-failed-gmail-tool-calls-in-the-last-hour]
 
 ```bash
 NOW=$(date +%s)000
@@ -140,7 +140,7 @@ curl -X POST https://backend.composio.dev/api/v3.1/logs/tool_execution \
   }"
 ```
 
-## Get failures for a specific user [#get-failures-for-a-specific-user]
+### Get failures for a specific user [#get-failures-for-a-specific-user]
 
 ```bash
 curl -X POST https://backend.composio.dev/api/v3.1/logs/tool_execution \
@@ -154,14 +154,14 @@ curl -X POST https://backend.composio.dev/api/v3.1/logs/tool_execution \
   }'
 ```
 
-## Fetch a single log's full request/response [#fetch-a-single-logs-full-requestresponse]
+### Fetch a single log's full request/response [#fetch-a-single-logs-full-requestresponse]
 
 ```bash
 curl https://backend.composio.dev/api/v3.1/logs/tool_execution/log_-jRTWClpBoVo \
   -H "x-api-key: YOUR_PROJECT_API_KEY"
 ```
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

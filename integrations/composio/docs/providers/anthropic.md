@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Anthropic"
 source: "https://docs.composio.dev/docs/providers/anthropic.md"
-source_hash: "4bffcb91e74b10ca8a60f9db7909b0bf150a0c1358de2a147889e93a70e116ec"
+source_hash: "352c2a0443fc793b77bd51bd5ee9c460f10f83475380bf6b9f219898fa7e8b40"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/anthropic.md"
@@ -228,7 +228,9 @@ for await (const content of query({
 }
 ```
 
-# Provider specifics [#provider-specifics]
+The provider registers each tool's complete object schema. Object arguments that declare no properties reach execution with arbitrary nested keys unchanged, while root-level constraints such as `additionalProperties` and `patternProperties` remain enforced. Invalid arguments return an error result, and the tool does not run.
+
+## Provider specifics [#provider-specifics]
 
 A few things are specific to the Anthropic provider:
 
@@ -237,7 +239,7 @@ A few things are specific to the Anthropic provider:
 * **String-encoded tool inputs are handled for you.** Claude occasionally emits a tool's `input` as a JSON string instead of an object. The provider normalizes this before execution, so you do not have to parse it yourself.
 * **`cacheTools` only.** The constructor takes no other options. There is no agentic execution in this provider; you run the loop (Messages API) or hand the loop to the Claude Agent SDK (Agent SDK tab).
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

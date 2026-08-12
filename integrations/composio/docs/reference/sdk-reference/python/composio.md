@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio"
 source: "https://docs.composio.dev/reference/sdk-reference/python/composio.md"
-source_hash: "976a0f10fbda39c1f961c7bb6e5f1eacdcbab3ebd00ba29a8333a4184f404389"
+source_hash: "204633ba0ffdf3d71d9bf9e01f2fb196b32b8e42dc17164a7c3049c6b9d9aa04"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/composio.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/composio.md
 
 
-# Properties [#properties]
+## Properties [#properties]
 
 | Name                                                                       | Type                |
 | -------------------------------------------------------------------------- | ------------------- |

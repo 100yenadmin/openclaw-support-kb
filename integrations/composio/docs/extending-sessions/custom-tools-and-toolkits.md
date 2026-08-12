@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Tools and Toolkits"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-tools-and-toolkits.md"
-source_hash: "0ff4a9be174b741a9abcf411e9600c5a00f84b94412ea5db2992c3eec39784ca"
+source_hash: "b5b18da226fe95bc27bcb7dd0ff7541d77cb7f47e9c64f99c5f77a7b84b2f112"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-tools-and-toolkits.md"
@@ -408,7 +408,7 @@ session = composio.create(
 tools = session.tools()
 ```
 
-# Preloading custom tools [#preloading-custom-tools]
+## Preloading custom tools [#preloading-custom-tools]
 
 Custom tools are searchable by default. Set `preload: true` / `preload=True` on a
 custom tool when it should be returned directly from `session.tools()`. Toolkit
@@ -485,7 +485,7 @@ print([tool.name for tool in tools])
 # ... other default meta tools
 ```
 
-# Meta tools integration [#meta-tools-integration]
+## Meta tools integration [#meta-tools-integration]
 
 Custom tools work automatically with Composio's meta tools:
 
@@ -498,7 +498,7 @@ Custom tools work automatically with Composio's meta tools:
 
 > Custom tools are not supported in the sandbox.
 
-# Context object (`ctx`) [#context-object-ctx]
+## Context object (`ctx`) [#context-object-ctx]
 
 Every custom tool's `execute` function receives `(input, ctx)`. Use `ctx` to access the current user, make authenticated API requests, or call other Composio tools.
 
@@ -520,7 +520,7 @@ Every custom tool's `execute` function receives `(input, ctx)`. Use `ctx` to acc
 
 See the full API in the SDK reference: [TypeScript](/reference/sdk-reference/typescript/session-context-impl) | [Python](/reference/sdk-reference/python/session-context-impl)
 
-# Verifying registration [#verifying-registration]
+## Verifying registration [#verifying-registration]
 
 Use these methods to list registered tools and toolkits. Slugs include their final `LOCAL_` prefix, and toolkit-scoped tools also include the toolkit slug.
 
@@ -541,7 +541,7 @@ custom_tools = session.custom_tools()
 custom_toolkits = session.custom_toolkits()
 ```
 
-# Reusing a session with custom tools [#reusing-a-session-with-custom-tools]
+## Reusing a session with custom tools [#reusing-a-session-with-custom-tools]
 
 When [reusing a session](/docs/how-composio-works#how-sessions-behave) via `composio.use()`, you can attach custom tools at the same time:
 
@@ -572,7 +572,7 @@ session = composio.use(
 )
 ```
 
-# Programmatic execution [#programmatic-execution]
+## Programmatic execution [#programmatic-execution]
 
 Use `session.execute()` to run custom tools directly, outside of an agent loop. Custom tools execute in-process; remote tools are sent to the backend automatically.
 
@@ -591,23 +591,23 @@ const result = await session.execute("GET_USER_PROFILE");
 result = session.execute("GET_USER_PROFILE")
 ```
 
-# Best practices [#best-practices]
+## Best practices [#best-practices]
 
-## Naming and descriptions [#naming-and-descriptions]
+### Naming and descriptions [#naming-and-descriptions]
 
 The agent relies on your tool's name and description to decide when to call it. Be specific: "Send weekly promo email" is better than "Send email". Include what the tool does, when to use it, and what it returns.
 
 In TypeScript, use uppercase slugs like `SEND_PROMO_EMAIL`. In Python, slugs are inferred from the function name, so `snake_case` produces clean defaults. You can also pass `slug` and `name` explicitly.
 
-## Accessing authenticated APIs [#accessing-authenticated-apis]
+### Accessing authenticated APIs [#accessing-authenticated-apis]
 
 If your tool calls an API that requires user credentials (Gmail, GitHub, and so on), set `extendsToolkit` / `extends_toolkit` to the toolkit name. Composio handles authentication automatically, and the agent can prompt users to connect their account when needed.
 
-## Defining inputs in Python [#defining-inputs-in-python]
+### Defining inputs in Python [#defining-inputs-in-python]
 
 Your tool's first parameter must be a Pydantic `BaseModel`. The field descriptions become what the agent sees as the input schema, and the function's docstring becomes the tool description. You can override this by passing `description` explicitly.
 
-## Tool names get prefixed [#tool-names-get-prefixed]
+### Tool names get prefixed [#tool-names-get-prefixed]
 
 Slugs exposed to the agent are automatically prefixed with `LOCAL_` and the toolkit name (if applicable):
 
@@ -616,7 +616,7 @@ Slugs exposed to the agent are automatically prefixed with `LOCAL_` and the tool
 
 Your slugs cannot start with `LOCAL_`. This prefix is reserved.
 
-# Next [#next]
+## Next [#next]
 
 - [Configuring sessions](/docs/configuring-sessions): Filter toolkits and tools, set auth configs, and read tools with session.tools()
 

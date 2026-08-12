@@ -2,7 +2,7 @@
 type: composio_doc
 title: "AutoGen"
 source: "https://docs.composio.dev/docs/providers/autogen.md"
-source_hash: "bc6b8bbf505e4749c051a682aa5c20d77e96ec51803286c6e920e90e8f13cae2"
+source_hash: "2f54621d45b9c80e95e049861553a96f4027d99e93778fce9785648540841e11"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/autogen.md"
@@ -74,7 +74,7 @@ response = user_proxy.initiate_chat(
 print(response.chat_history)
 ```
 
-# Provider specifics [#provider-specifics]
+## Provider specifics [#provider-specifics]
 
 AutoGen needs tools registered with two agents, not passed once. Call `composio.provider.register_tools(caller=..., executor=..., tools=tools)`: the `caller` decides which tool to invoke, and the `executor` runs it.
 
@@ -82,7 +82,7 @@ Each tool comes back as an AutoGen `FunctionTool` with a generated `name`. AutoG
 
 > `register_tools` is unique to the AutoGen provider. Other providers pass tools straight into the agent constructor, so don't expect this method elsewhere.
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

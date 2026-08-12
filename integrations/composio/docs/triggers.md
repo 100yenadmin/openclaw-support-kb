@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/docs/triggers.md"
-source_hash: "56db1d75181b80174e942440217c9cef8f1a2708c00fb27f8855530edb46ab26"
+source_hash: "fd36e7c7909635f7d84d12e1f2d8322547d3c05083db0773ca9854f10778b4bd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "triggers.md"
@@ -19,11 +19,11 @@ Source: https://docs.composio.dev/docs/triggers.md
 
 When something happens in a connected app (a new Slack message, a GitHub commit, an incoming email), a **trigger** sends that event to your app as a structured payload. You write the handler. Composio handles the connection to the provider, delivery, retries, and signing.
 
-# Where events arrive [#where-events-arrive]
+## Where events arrive [#where-events-arrive]
 
 Composio delivers every event to one destination you control: your webhook URL. You register it once per project, and Composio `POST`s every trigger event there, signed so you can verify it.
 
-# Realtime vs polling [#realtime-vs-polling]
+## Realtime vs polling [#realtime-vs-polling]
 
 Under the hood, Composio learns about events in one of two ways. You don't configure this. It's a property of the trigger type, and it only affects how quickly an event reaches you.
 
@@ -36,20 +36,20 @@ Either way, the event lands in the same place: your subscription or webhook URL,
 
 > If you **bring your own OAuth app**, some providers only deliver to URLs registered on that app, so you register Composio's ingress URL there once. See [Custom OAuth webhooks](/docs/setting-up-triggers/custom-oauth-webhooks).
 
-# Trigger types and instances [#trigger-types-and-instances]
+## Trigger types and instances [#trigger-types-and-instances]
 
 A **trigger type** is a kind of event you can listen for, like `GITHUB_COMMIT_EVENT` or a new Slack message. Each toolkit has its own set.
 
 A **trigger instance** is a trigger type you've activated for one [user's connected account](/docs/how-composio-works). It has its own `ti_*` ID that you can enable, disable, or delete independently.
 
-# Working with triggers [#working-with-triggers]
+## Working with triggers [#working-with-triggers]
 
 0. **Authenticate** the user for the toolkit: an [auth config](/docs/authentication#behind-the-scenes) and a [connected account](/docs/authentication). See [Authentication](/docs/authentication).
 1. **Create** a trigger for the user's connected account. See [Creating triggers](/docs/setting-up-triggers/creating-triggers).
 2. **Receive** its events: locally with `subscribe()`, or in production at your webhook URL. See [Receiving events](/docs/setting-up-triggers/subscribing-to-events).
 3. **Manage** triggers: enable, disable, or delete. See [Managing triggers](/docs/setting-up-triggers/managing-triggers).
 
-# Next [#next]
+## Next [#next]
 
 - [Creating triggers](/docs/setting-up-triggers/creating-triggers): Activate a trigger for a user so events start flowing
 

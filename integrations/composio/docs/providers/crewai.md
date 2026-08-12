@@ -2,7 +2,7 @@
 type: composio_doc
 title: "CrewAI"
 source: "https://docs.composio.dev/docs/providers/crewai.md"
-source_hash: "73af6b8ef841cbf9bedbc2892da6aedfd31dfcb674c341d6ff903c807e507e9f"
+source_hash: "e331d7bbd1d2ffbc0b9bdf9bf685d8699e3b670613124404a26b18d3644e03f5"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/crewai.md"
@@ -60,9 +60,13 @@ crew = Crew(agents=[agent], tasks=[task])
 result = crew.kickoff()
 print(result)
 ```
-# Provider specifics [#provider-specifics]
+## Provider specifics [#provider-specifics]
 
 Each Composio tool becomes a CrewAI `BaseTool` whose `args_schema` is built from the tool's input schema, so CrewAI validates arguments before running anything.
+
+Object arguments that declare no properties accept and preserve arbitrary nested keys. For objects that declare named properties, undeclared keys are rejected unless the schema allows them with `additionalProperties`. Schemas that use `patternProperties` or schema-valued `additionalProperties` also validate dynamic keys before execution.
+
+The provider preserves whether an optional argument was omitted or explicitly set to `None`. By default, declared defaults are included, while optional arguments without defaults stay absent. Set `schema_config={"skip_defaults": True}` when creating the provider to leave declared defaults absent too.
 
 When validation fails, the tool does not raise. It returns a structured result instead:
 
@@ -72,7 +76,7 @@ When validation fails, the tool does not raise. It returns a structured result i
 
 Check `successful` in your task output rather than wrapping calls in `try`/`except`.
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Triggers"
 source: "https://docs.composio.dev/reference/sdk-reference/python/triggers.md"
-source_hash: "6a19d147de5a6c60d52d4c80467825253ab7c4ed84b6060bb110d743aa27df20"
+source_hash: "5ca222b7a4d6662489d4fed70876d75d48774415789243f892e6af2d6bdc0488"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/triggers.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/triggers.md
 
 
-# Methods [#methods]
+## Methods [#methods]
 
-## set\_webhook\_subscription() [#set_webhook_subscription]
+### set\_webhook\_subscription() [#set_webhook_subscription]
 
 Create or update the project webhook subscription used for webhook delivery.  If a subscription already exists, the first subscription is updated. Otherwise a new subscription is created. By default this subscribes to V3 trigger message events.
 
@@ -49,7 +49,7 @@ composio.triggers.set_webhook_subscription(
 
 ***
 
-## get\_type() [#get_type]
+### get\_type() [#get_type]
 
 Get a trigger type by its slug Uses the global toolkit version provided when initializing composio instance to fetch trigger for specific toolkit version
 
@@ -69,7 +69,7 @@ def get_type(slug: str) -> TriggersTypeRetrieveResponse
 
 ***
 
-## list\_active() [#list_active]
+### list\_active() [#list_active]
 
 List all active triggers
 
@@ -91,7 +91,7 @@ def list_active(trigger_ids: list[str | None] = ..., trigger_names: list[str | N
 
 ***
 
-## list() [#list]
+### list() [#list]
 
 List all the trigger types.
 
@@ -109,7 +109,7 @@ def list(cursor: str | None = ..., limit: int | None = ..., toolkit_slugs: list[
 
 ***
 
-## create() [#create]
+### create() [#create]
 
 Create a trigger instance
 
@@ -132,7 +132,7 @@ def create(slug: str, user_id: str | None = ..., connected_account_id: str | Non
 
 ***
 
-## subscribe() [#subscribe]
+### subscribe() [#subscribe]
 
 Subscribe to a trigger and receive trigger events.
 
@@ -152,7 +152,7 @@ def subscribe(timeout: float = ...) -> TriggerSubscription
 
 ***
 
-## verify\_webhook() [#verify_webhook]
+### verify\_webhook() [#verify_webhook]
 
 Verify an incoming webhook payload and signature.  This method validates that the webhook request is authentic by: 1. Validating the webhook timestamp is within the tolerance window 2. Verifying the HMAC-SHA256 signature using the correct algorithm 3. Parsing the payload and detecting the webhook version (V1, V2, or V3)
 
@@ -200,7 +200,7 @@ def webhook():
 
 ***
 
-## parse() [#parse]
+### parse() [#parse]
 
 Parse an incoming webhook request into a typed, normalized trigger payload.  Pass a framework request object, or pass `body=` and `headers=` explicitly. When `verify_secret` is provided, the SDK verifies the webhook signature before returning the normalized trigger payload. When it is omitted, the SDK parses the body without verifying the signature.  `request` may be any object exposing the request body and headers, such as a Flask, Django, or FastAPI request. The body is read from `.body` (or `.data` / `.get_data()`), and the headers are read from `.headers`. Because this SDK is synchronous, async frameworks must pass an already-read raw body, for example via `body=await request.body()`.
 

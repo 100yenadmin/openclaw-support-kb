@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Files"
 source: "https://docs.composio.dev/reference/api-reference/files.md"
-source_hash: "3900b79df70ba06f5ff3ddfc8ad35983a497ccfa47adcab67d220aa21becd2c1"
+source_hash: "d261646b593a0e4d3923289a13777589db4f95c1b1644f8eb82a990cff60bb76"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/files.md"
@@ -36,7 +36,7 @@ If your agent works with files inside a session, prefer the session file mount, 
 
 These endpoints use your project API key in the `x-api-key` header.
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md"
-source_hash: "68970c31220a2e5e782ac07afc11403df4ba806d111df30c239773bb61afa2dc"
+source_hash: "897c9ff13e3c752ede7c99f3dd814ebbf6e8c8c936d0ede9345178ae44f15314"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/toolkits.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md
 
 
-# Usage [#usage]
+## Usage [#usage]
 
 Access this class through the `composio.toolkits` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.toolkits.list();
 ```
 
-# Methods [#methods]
+## Methods [#methods]
 
-## authorize() [#authorize]
+### authorize() [#authorize]
 
 Authorizes a user to use a toolkit.
 This method will create an auth config if one doesn't exist and initiate a connection request.
@@ -58,7 +58,7 @@ const connectionRequest = await composio.toolkits.authorize(userId, 'github');
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 Retrieves a specific toolkit by its slug identifier.
 
@@ -107,7 +107,7 @@ console.log(githubToolkit.authConfigDetails); // Authentication configuration de
 
 ***
 
-## getAuthConfigCreationFields() [#getauthconfigcreationfields]
+### getAuthConfigCreationFields() [#getauthconfigcreationfields]
 
 Retrieves the fields required for creating an auth config for a toolkit.
 
@@ -129,7 +129,7 @@ async getAuthConfigCreationFields(toolkitSlug: string, authScheme: AuthSchemeTyp
 
 ***
 
-## getConnectedAccountInitiationFields() [#getconnectedaccountinitiationfields]
+### getConnectedAccountInitiationFields() [#getconnectedaccountinitiationfields]
 
 Retrieves the fields required for initiating a connected account for a toolkit.
 
@@ -151,7 +151,7 @@ async getConnectedAccountInitiationFields(toolkitSlug: string, authScheme: AuthS
 
 ***
 
-## listCategories() [#listcategories]
+### listCategories() [#listcategories]
 
 Retrieves all toolkit categories available in the Composio SDK.
 

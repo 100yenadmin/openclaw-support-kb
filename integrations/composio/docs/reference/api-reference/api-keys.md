@@ -2,7 +2,7 @@
 type: composio_doc
 title: "API Keys"
 source: "https://docs.composio.dev/reference/api-reference/api-keys.md"
-source_hash: "3b750465b0ebfe610e0d81bb9e62cc185dd96adb31ab195f65285cd5f9910bee"
+source_hash: "5e5801d23d715a07809a5b44a46e3f84866766b9eb9f35cd2934da4bfcd4d016"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/api-keys.md"
@@ -23,7 +23,7 @@ Source: https://docs.composio.dev/reference/api-reference/api-keys.md
 
 API key management
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

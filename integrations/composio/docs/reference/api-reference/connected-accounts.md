@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/reference/api-reference/connected-accounts.md"
-source_hash: "4fe744cf1f5298431b3a18b26e2c378f7dd0f2cb8715798b060d48fdce799677"
+source_hash: "0d86c4580fa4d3d1b3a5ab70199d029a02345375d622dec0e3f89a47ca46a1a4"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/connected-accounts.md"
@@ -32,7 +32,7 @@ Composio creates a connected account when a user completes the flow defined by a
 
 Each account is addressed by its `nanoid`. List endpoints accept filters so you can find accounts by user, toolkit, or auth config.
 
-# Link auth (Composio Connect Links) [#link-auth-composio-connect-links]
+## Link auth (Composio Connect Links) [#link-auth-composio-connect-links]
 
 A Composio Connect Link is a hosted, secure sign-in page. You create one with the create auth link session endpoint, redirect the user to the returned URL, and Composio handles the rest: the user signs in, Composio creates the connected account, and Composio stores and refreshes its tokens. Credentials never pass through your app. This works for all Composio managed connections, with no OAuth credentials to set up.
 
@@ -42,7 +42,7 @@ These endpoints use your project API key in the `x-api-key` header.
 
 > Shared-connection ACL fields are experimental and nested under an `experimental` block on the wire. Pin a specific SDK version if you depend on the current shape.
 
-# Callback identity verification [#callback-identity-verification]
+## Callback identity verification [#callback-identity-verification]
 
 Anyone who opens a Connect Link and consents becomes the account attached to that flow. On its own that is exploitable: someone starts a connection under their own user, copies the authorization URL before consenting, and gets a different person to finish it, attaching that person's provider account under the attacker's identity. This is OAuth session fixation. Callback identity verification defends against it by confirming the returning user before a connection activates.
 
@@ -54,7 +54,7 @@ Turn it on in the dashboard under **Settings → General → Configuration**. Th
 
 > Connections you start from the dashboard can't complete while a verifier URL is set. A dashboard connection is owned by a Composio dashboard user, which isn't one of your app's users and isn't disclosed to your endpoint, so your app can't report a matching `user_id`. Test from your own app, or clear the verifier URL while you work in the dashboard.
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

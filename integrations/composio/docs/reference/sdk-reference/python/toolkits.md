@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/sdk-reference/python/toolkits.md"
-source_hash: "dfa7ab45d92173b7fc587dc0a92bfef66b2f1a16e3f13bbcba186f7ac6758351"
+source_hash: "62aab61c449c11f05e0fb11e00f818a996877e7d6eb2cbb89fa5f1e6a3b8a7aa"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/toolkits.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/toolkits.md
 
 
-# Methods [#methods]
+## Methods [#methods]
 
-## list() [#list]
+### list() [#list]
 
 List all toolkits.
 
@@ -43,7 +43,7 @@ def list(category: str | None = ..., cursor: str | None = ..., limit: float | No
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 ```python
 def get(slug: str | None = ..., query: toolkit_list_params.ToolkitListParams | None = ...) -> Union[toolkit_retrieve_response.ToolkitRetrieveResponse, ...
@@ -62,7 +62,7 @@ def get(slug: str | None = ..., query: toolkit_list_params.ToolkitListParams | N
 
 ***
 
-## list\_categories() [#list_categories]
+### list\_categories() [#list_categories]
 
 List all categories of toolkits.
 
@@ -72,7 +72,7 @@ def list_categories()
 
 ***
 
-## authorize() [#authorize]
+### authorize() [#authorize]
 
 Authorize a user to a toolkit  If auth config is not found, it will be created using composio managed auth.
 
@@ -89,7 +89,7 @@ def authorize(user_id: str, toolkit: str)
 
 ***
 
-## get\_connected\_account\_initiation\_fields() [#get_connected_account_initiation_fields]
+### get\_connected\_account\_initiation\_fields() [#get_connected_account_initiation_fields]
 
 Get the required property for a given toolkit and auth scheme.
 
@@ -111,7 +111,7 @@ def get_connected_account_initiation_fields(toolkit: str, auth_scheme: AuthSchem
 
 ***
 
-## get\_auth\_config\_creation\_fields() [#get_auth_config_creation_fields]
+### get\_auth\_config\_creation\_fields() [#get_auth_config_creation_fields]
 
 Get the required property for a given toolkit and auth scheme.
 

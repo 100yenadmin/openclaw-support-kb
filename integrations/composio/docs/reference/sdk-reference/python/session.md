@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session"
 source: "https://docs.composio.dev/reference/sdk-reference/python/session.md"
-source_hash: "2d27b45b51f5d6839bd50f49d71cc1a528798c5fb5015e24fcfcce2d3e3c8f5f"
+source_hash: "fd2d03194b09fda008f7919ea4aeeb87ee4b784868904ce52aca4a4aebb0b377"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/session.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/session.md
 
 
-# Properties [#properties]
+## Properties [#properties]
 
 | Name           | Type                              |
 | -------------- | --------------------------------- |
@@ -25,9 +25,9 @@ Source: https://docs.composio.dev/reference/sdk-reference/python/session.md
 | `experimental` | `'ToolRouterSessionExperimental'` |
 | `preload`      | `Any`                             |
 
-# Methods [#methods]
+## Methods [#methods]
 
-## tools() [#tools]
+### tools() [#tools]
 
 Get provider-wrapped tools for execution with your AI framework.  Returns tools configured for this session, wrapped in the format expected by your AI provider (OpenAI, Anthropic, LangChain, etc.).  When custom tools are bound to the session, execution of COMPOSIO\_MULTI\_EXECUTE\_TOOL is intercepted: local tools are executed in-process, remote tools are sent to the backend.
 
@@ -47,7 +47,7 @@ def tools(modifiers: 'Modifiers' | None = ...) -> TToolCollection
 
 ***
 
-## authorize() [#authorize]
+### authorize() [#authorize]
 
 Authorize a toolkit for the user and get a connection request.  Initiates the OAuth flow and returns a ConnectionRequest with redirect URL.
 
@@ -70,7 +70,7 @@ def authorize(toolkit: str, callback_url: str | None = ..., alias: str | None = 
 
 ***
 
-## toolkits() [#toolkits]
+### toolkits() [#toolkits]
 
 Get toolkit connection states for the session.
 
@@ -94,7 +94,7 @@ def toolkits(toolkits: List[str | None] = ..., next_cursor: str | None = ..., li
 
 ***
 
-## search() [#search]
+### search() [#search]
 
 Search for tools by semantic use case.  Returns relevant tools for the given query with schemas and guidance.
 
@@ -115,7 +115,7 @@ def search(query: str, model: str | None = ...) -> SessionSearchResponse
 
 ***
 
-## execute() [#execute]
+### execute() [#execute]
 
 Execute a tool within the session.  For custom tools, accepts the original slug (e.g. "GREP") or the full slug (e.g. "LOCAL\_GREP"). Custom tools are executed in-process; remote tools are sent to the Composio backend.
 
@@ -137,7 +137,7 @@ def execute(tool_slug: str, arguments: Dict[str, Any | None] = ..., account: str
 
 ***
 
-## custom\_tools() [#custom_tools]
+### custom\_tools() [#custom_tools]
 
 List all custom tools registered in this session.  Returns tools with their final slugs, schemas, and resolved toolkit.
 
@@ -157,7 +157,7 @@ def custom_tools(toolkit: str | None = ...) -> List[RegisteredCustomTool]
 
 ***
 
-## custom\_toolkits() [#custom_toolkits]
+### custom\_toolkits() [#custom_toolkits]
 
 List all custom toolkits registered in this session.  Returns toolkits with their tools showing final slugs.
 
@@ -171,7 +171,7 @@ def custom_toolkits() -> List[RegisteredCustomToolkit]
 
 ***
 
-## proxy\_execute() [#proxy_execute]
+### proxy\_execute() [#proxy_execute]
 
 Proxy an API call through Composio's auth layer.
 
@@ -195,7 +195,7 @@ def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'P
 
 ***
 
-## update() [#update]
+### update() [#update]
 
 Partially update the session configuration.  Only the fields provided will be changed; omitted fields are preserved. Mutates this session's `preload` in-place.  Pass `None` for `manage_connections`, `sandbox`/`workbench`, or `multi_account` to clear the stored value.  `workbench` is a backwards-compatible alias for `sandbox`. Prefer `sandbox` in new code.  All parameters use the same types as the Stainless-generated `client.tool_router.session.patch()` method.
 
@@ -220,7 +220,7 @@ def update(toolkits: Union[session_patch_params.Toolkits, 'Omit'] = ..., tools: 
 
 ***
 
-## delete() [#delete]
+### delete() [#delete]
 
 Delete this session.  Deleted sessions immediately stop being retrievable or executable. An already-deleted session surfaces the backend 404.
 

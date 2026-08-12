@@ -2,7 +2,7 @@
 type: composio_doc
 title: "ConnectedAccounts"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md"
-source_hash: "deeb5fd003f96a658cb7d2e6479011a81a68bacd82d3ce484dde74154ec93101"
+source_hash: "e2be4ed9785c9933ca6f6c85eae2801e714cb77808ffdebdebf061b278e6ff15"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/connected-accounts.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md
 
 
-# Usage [#usage]
+## Usage [#usage]
 
 Access this class through the `composio.connectedAccounts` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.connectedAccounts.list();
 ```
 
-# Methods [#methods]
+## Methods [#methods]
 
-## delete() [#delete]
+### delete() [#delete]
 
 Deletes a connected account.
 
@@ -59,7 +59,7 @@ await composio.connectedAccounts.delete('conn_abc123');
 
 ***
 
-## disable() [#disable]
+### disable() [#disable]
 
 Disable a connected account
 
@@ -94,7 +94,7 @@ console.log(disabledAccount.isDisabled); // true
 
 ***
 
-## enable() [#enable]
+### enable() [#enable]
 
 Enable a connected account
 
@@ -123,7 +123,7 @@ console.log(enabledAccount.isDisabled); // false
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 Retrieves a specific connected account by its ID.
 
@@ -156,7 +156,7 @@ console.log(account.toolkit.slug); // e.g., 'github'
 
 ***
 
-## initiate() [#initiate]
+### initiate() [#initiate]
 
 Compound function to create a new connected account.
 This function creates a new connected account and returns a connection request.
@@ -237,7 +237,7 @@ const connectionRequest = await composio.connectedAccounts.initiate(
 
 ***
 
-## link() [#link]
+### link() [#link]
 
 ```typescript
 async link(userId: string, authConfigId: string, options?: CreateConnectedAccountLinkOptions, requestOptions?: ComposioRequestOptions): Promise
@@ -282,7 +282,7 @@ const connectedAccount = await composio.connectedAccounts.waitForConnection(conn
 
 ***
 
-## list() [#list]
+### list() [#list]
 
 Lists all connected accounts based on provided filter criteria.
 
@@ -322,7 +322,7 @@ const githubAccounts = await composio.connectedAccounts.list({
 
 ***
 
-## refresh() [#refresh]
+### refresh() [#refresh]
 
 Refreshes a connected account's authentication credentials.
 
@@ -354,7 +354,7 @@ const refreshedAccount = await composio.connectedAccounts.refresh('conn_abc123')
 
 ***
 
-## update() [#update]
+### update() [#update]
 
 Enable or disable a connected account. Accepts `{ enabled: boolean }`.
 
@@ -385,7 +385,7 @@ await composio.connectedAccounts.update('ca_abc123', { enabled: false });
 
 ***
 
-## updateAcl() [#updateacl]
+### updateAcl() [#updateacl]
 
 Update the per-user ACL on a SHARED connected account.
 &#x2A;*Experimental — shape may change in future releases.**
@@ -430,7 +430,7 @@ await composio.connectedAccounts.updateAcl('ca_abc123', { allowedUserIds: [] });
 
 ***
 
-## updateStatus() [#updatestatus]
+### updateStatus() [#updatestatus]
 
 Update the status of a connected account
 
@@ -467,7 +467,7 @@ const disabledAccount = await composio.connectedAccounts.updateStatus('conn_abc1
 
 ***
 
-## waitForConnection() [#waitforconnection]
+### waitForConnection() [#waitforconnection]
 
 Waits for a connection request to complete and become active.
 

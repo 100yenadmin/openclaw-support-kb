@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "6966500a389be3ba23b1a8ad1c5076a9b20df0e53e0d1d917b2913499f04c48b"
+source_hash: "1b0e18117f761cbd07537ba4920ae639580e1f46d30ad2975895c1ea715f138f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
@@ -37,7 +37,7 @@ These endpoints authenticate with your project API key in the `x-api-key` header
 
 To browse toolkits visually, see the [toolkits catalog](/toolkits). For the concepts and SDK usage, see [Tools and toolkits](/docs/how-composio-works) and [Configuring sessions](/docs/configuring-sessions).
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

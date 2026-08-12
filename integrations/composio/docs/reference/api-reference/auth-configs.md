@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Auth Configs"
 source: "https://docs.composio.dev/reference/api-reference/auth-configs.md"
-source_hash: "2186b64263c03c041dea042ff1e168f5a31314f401ba89ece73bb675b2cf73b0"
+source_hash: "15ec768cd51103099dc66e9e0019c9cbe06ecd17e366d7ecdd2640a6747631de"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/auth-configs.md"
@@ -33,7 +33,7 @@ Each auth config defines:
 
 Reach for a custom auth config when you need your own branding on consent screens, custom scopes, a dedicated rate-limit quota, or a custom toolkit instance. See [managed vs custom auth](/docs/custom-app-vs-managed-app) for the decision and [how Composio handles authentication](/docs/authentication) for the full picture.
 
-# Auth schemes [#auth-schemes]
+## Auth schemes [#auth-schemes]
 
 The `auth_scheme` on an auth config determines how users authenticate to the toolkit. Composio supports four. The schemes available for a given toolkit come from the toolkit itself.
 
@@ -48,7 +48,7 @@ Most OAuth toolkits work out of the box with Composio managed auth. For the othe
 
 These endpoints use your project API key in the `x-api-key` header. Each auth config is addressed by its `nanoid`, and you can enable or disable one without deleting it.
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

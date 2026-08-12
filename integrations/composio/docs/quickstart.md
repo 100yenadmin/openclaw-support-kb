@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "065797f03aaa21f8483a262a4a6860c40b26719114ad31af6fc0edcd98d6db28"
+source_hash: "4631e37403c4649d1bc6e76cd38473c48ba8d6edd9eab107419c4f9ca5512586"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -17,7 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/quickstart.md
 
 
-Build your first AI agent with Composio Tools. You'll create a [session](/docs/how-composio-works) for a user, give your agent access to [tools](/docs/how-composio-works), and let it take action across [1000+ apps](/toolkits).
+Build an agent that chooses Composio tools at runtime. Type a task, connect an app if needed, and continue in the same conversation.
+
+Pick your framework below. A Composio [session](/docs/how-composio-works) gives your agent tool discovery, account connections, and execution across [1000+ apps](/toolkits). It exposes only a small set of meta tools, so app schemas are loaded when the agent needs them.
 
 > The TypeScript SDK is ESM-only and requires Node.js 22.22.3 or newer. Use `import` syntax rather than CommonJS `require()`.
 
@@ -65,7 +67,11 @@ tools = session.tools()
 
 agent = Agent(
     name="Personal Assistant",
-    instructions="You are a helpful personal assistant. Use Composio tools to take action.",
+    instructions=(
+        "Use Composio tools to complete the request. "
+        "If a connection is required, share its Connect Link and wait. "
+        "Ask for confirmation before creating, updating, or deleting data."
+    ),
     model="gpt-5.2",
     tools=tools,
 )
@@ -114,7 +120,10 @@ const tools = await session.tools();
 
 const agent = new Agent({
   name: "Personal Assistant",
-  instructions: "You are a helpful personal assistant. Use Composio tools to take action.",
+  instructions:
+    "Use Composio tools to complete the request. " +
+    "If a connection is required, share its Connect Link and wait. " +
+    "Ask for confirmation before creating, updating, or deleting data.",
   model: "gpt-5.2",
   tools,
 });
@@ -186,7 +195,11 @@ custom_server = create_sdk_mcp_server(name="composio", version="1.0.0", tools=to
 
 async def main():
     options = ClaudeAgentOptions(
-        system_prompt="You are a helpful assistant. Use tools to complete tasks.",
+        system_prompt=(
+            "Use Composio tools to complete the request. "
+            "If a connection is required, share its Connect Link and wait. "
+            "Ask for confirmation before creating, updating, or deleting data."
+        ),
         permission_mode="bypassPermissions",
         mcp_servers={"composio": custom_server},
     )
@@ -257,6 +270,10 @@ Example tasks:
 
 let isFirstQuery = true;
 const options = {
+  systemPrompt:
+    "Use Composio tools to complete the request. " +
+    "If a connection is required, share its Connect Link and wait. " +
+    "Ask for confirmation before creating, updating, or deleting data.",
   mcpServers: { composio: customServer },
   permissionMode: "bypassPermissions" as const,
 };
@@ -338,7 +355,10 @@ while (true) {
   process.stdout.write("Assistant: ");
 
   const result = await streamText({
-    system: "You are a helpful personal assistant. Use Composio tools to take action.",
+    system:
+      "Use Composio tools to complete the request. " +
+      "If a connection is required, share its Connect Link and wait. " +
+      "Ask for confirmation before creating, updating, or deleting data.",
     model: anthropic("claude-sonnet-4-6"),
     messages,
     stopWhen: stepCountIs(10),
@@ -361,13 +381,27 @@ while (true) {
 readline.close();
 ```
 
-By default, each `composio.sessions.create()` call returns a new session with access to all toolkits. Sessions are highly configurable beyond that: [Reusing a session](/docs/how-composio-works#how-sessions-behave) covers storing a session ID and calling `composio.use()` across multi-turn requests, while [Configuring Sessions](/docs/configuring-sessions) covers restricting toolkits, auth configs, and connected accounts.
+Ask for any task that needs an app tool: `Summarize my unread emails from today`, or `List all open issues on the composio github repository`. If a task needs access to an account, the agent gives you a Connect Link. Open it, approve the connection, and tell the agent to continue.
 
-Prefer to connect over the Model Context Protocol instead? Every session also exposes an MCP endpoint. See [Using sessions via MCP](/docs/sessions-via-mcp).
+## What just happened? [#what-just-happened]
 
-# Next [#next]
+* The provider you picked formats Composio tools for your framework and wires in execution.
+* `composio.sessions.create()` creates a Composio session for `user_123`. The session scopes connections and tool calls to that ID.
+* Composio sessions persist. In an application, store the session ID (`session.session_id` in Python, `session.sessionId` in TypeScript) and restore it with `composio.use(session_id)` instead of creating a new session for every turn. See [Reusing a session](/docs/how-composio-works#how-sessions-behave).
+* `session.tools()` gives the agent a small set of meta tools for finding, connecting, and running app tools. It does not load thousands of tool schemas into the model context.
 
-- [Configuring Sessions](/docs/configuring-sessions):
-Restrict toolkits, set custom auth configs, and select connected accounts
+> **Use your application's user ID in production**: `user_123` is only for this local example. Replace it with a stable ID from your database. Each ID gets separate connections and tool calls.
+
+You can inspect the selected tools, inputs, responses, and timing with the [Logs API](/reference/api-reference/logs).
+
+## Adapt the example [#adapt-the-example]
+
+- [Use another framework](/docs/providers): Choose OpenAI, Anthropic, Vercel AI SDK, LangChain, CrewAI, or another supported provider.
+
+- [Configure the session](/docs/configuring-sessions): Restrict toolkits, preload tools, or select connected accounts.
+
+- [Design authentication](/docs/authentication): Add Connect Links and per-user connections to your application.
+
+- [Expose an MCP endpoint](/docs/sessions-via-mcp): Use the same Composio session from an MCP-compatible application.
 
 ---

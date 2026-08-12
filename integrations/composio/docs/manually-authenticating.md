@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Manual auth management"
 source: "https://docs.composio.dev/docs/manually-authenticating.md"
-source_hash: "b70b809b0384d7b47f6718be5b8e95713f30e9f552e9d6960281ffb17ce8ba30"
+source_hash: "6176d949f0506ef0751a99e8fb1f7437f942fe4d5be6270c5e21c59a4e406d4f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "manually-authenticating.md"
@@ -22,7 +22,7 @@ Manual authentication lets you connect users to toolkits outside the chat flow. 
 * Pre-authenticate users before they start chatting.
 * Build a custom connections UI in your app.
 
-# Authorize a toolkit [#authorize-a-toolkit]
+## Authorize a toolkit [#authorize-a-toolkit]
 
 Call `session.authorize()` to generate a [Connect Link](/docs/tools-direct/authenticating-tools#hosted-authentication-connect-link) URL, redirect the user, and wait for them to finish:
 
@@ -60,7 +60,7 @@ Redirect the user to the `redirectUrl`. After they authenticate, they'll return 
 
 > If the user closes the Connect Link without completing auth, the connection remains in `INITIATED` status until it expires.
 
-# Redirecting users after authentication [#redirecting-users-after-authentication]
+## Redirecting users after authentication [#redirecting-users-after-authentication]
 
 Pass a `callbackUrl` to control where users land after authenticating. You can include query parameters to carry context through the flow, for example to identify which `userID` or session triggered the connection.
 
@@ -99,7 +99,7 @@ After authentication, Composio redirects the user to your callback URL with the 
 https://your-app.com/callback?user_id=user_123&source=onboarding&status=success&connected_account_id=ca_abc123
 ```
 
-# Check connection status [#check-connection-status]
+## Check connection status [#check-connection-status]
 
 Use `session.toolkits()` to see all toolkits in the session and their connection status:
 
@@ -126,7 +126,7 @@ toolkits.items.forEach((toolkit) => {
 });
 ```
 
-# Disabling in-chat auth [#disabling-in-chat-auth]
+## Disabling in-chat auth [#disabling-in-chat-auth]
 
 By default, sessions include the `COMPOSIO_MANAGE_CONNECTIONS` meta-tool that prompts users to authenticate during chat. To turn it off and handle auth entirely in your own UI, set `manage_connections` to `False`:
 
@@ -149,7 +149,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Putting it together [#putting-it-together]
+## Putting it together [#putting-it-together]
 
 A common pattern is to verify all required connections before starting the agent:
 
@@ -216,7 +216,7 @@ for (const slug of pending) {
 console.log("All toolkits connected!");
 ```
 
-# Next [#next]
+## Next [#next]
 
 - [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts): Let a user connect work and personal accounts for the same toolkit, then pick which one runs
 

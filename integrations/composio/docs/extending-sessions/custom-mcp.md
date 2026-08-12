@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom MCP"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md"
-source_hash: "7a80672b80c62c7a55ddaf82f46d2fdd7354f2773661c3caf4e56a574fc1b789"
+source_hash: "a5e628674eaeadf5843f9d383c13f10c130d78518dca5c35e3b2ff379cd8d9d8"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-mcp.md"
@@ -23,7 +23,7 @@ Custom MCP lets you use tools from your remote MCP server in the same session as
 
 This is different from [Custom Tools and Toolkits](/docs/extending-sessions/custom-tools-and-toolkits). Custom tools run inside your application. A custom MCP server runs outside Composio and exposes its tools over a public HTTPS endpoint.
 
-# Custom MCP lifecycle [#custom-mcp-lifecycle]
+## Custom MCP lifecycle [#custom-mcp-lifecycle]
 
 A Custom MCP moves through this lifecycle:
 
@@ -35,7 +35,7 @@ A Custom MCP moves through this lifecycle:
 
 > **API-only while Custom MCP is experimental**: Use the lifecycle endpoints below to register, sync, and delete Custom MCP toolkits. They aren't included in the public API reference or SDKs yet, and their contracts may change. Dashboard management is coming soon for customers who prefer a UI.
 
-# Register a Custom MCP [#register-a-custom-mcp]
+## Register a Custom MCP [#register-a-custom-mcp]
 
 Call `POST /api/v3.1/custom/toolkits/upsert` with your public server URL and authentication scheme. Authenticate the request with your Composio project API key.
 
@@ -120,7 +120,7 @@ Composio adds the `CUSTOM_` prefix and returns the normalized toolkit slug:
 
 To change the server URL, name, or authentication scheme, [delete the existing toolkit](#delete-or-replace-a-custom-mcp), then register it again. Deletion also revokes and removes the toolkit's auth configurations and connected accounts.
 
-# Add a toolkit logo [#add-a-toolkit-logo]
+## Add a toolkit logo [#add-a-toolkit-logo]
 
 Without a logo, your toolkit shows the Composio logo in the dashboard and on end-user connect screens. To ship your own branding, include `toolkit_config.logo_file` when you register: the image itself, base64-encoded. Composio validates it, stores it on Composio-hosted asset storage, and renders it everywhere the toolkit appears. You don't host anything, and the logo keeps working even if your own site changes or goes down.
 
@@ -155,7 +155,7 @@ Set `content` to your image encoded as base64: a single line, with no line break
 
 Omit `logo_file` to keep the Composio default. Because registration is insert-only, changing a logo later means deleting the toolkit and registering it again with the new image.
 
-# Complete setup for your authentication mode [#complete-setup-for-your-authentication-mode]
+## Complete setup for your authentication mode [#complete-setup-for-your-authentication-mode]
 
 Choose the mode that matches your server, then complete any required connection:
 
@@ -167,7 +167,7 @@ Choose the mode that matches your server, then complete any required connection:
 
 For DCR OAuth, the server must support the standard authorization-code flow. Other OAuth grant types aren't supported.
 
-## Create the auth config for automatic account matching [#create-the-auth-config-for-automatic-account-matching]
+### Create the auth config for automatic account matching [#create-the-auth-config-for-automatic-account-matching]
 
 For API-key and DCR OAuth servers, create the toolkit's auth config with `is_enabled_for_tool_router` set to `true`:
 
@@ -197,7 +197,7 @@ curl --request PATCH \
   --data '{ "is_enabled_for_tool_router": true }'
 ```
 
-# Sync and resync tools [#sync-and-resync-tools]
+## Sync and resync tools [#sync-and-resync-tools]
 
 Call `POST /api/v3.1/custom/toolkits/sync` to fetch the server's current tools:
 
@@ -243,7 +243,7 @@ Call the sync endpoint only if the initial sync fails or the server's tool defin
 
 A Custom MCP toolkit can contain at most 500 tools. If the server returns more than 500, the sync fails without importing a partial tool list. The last successful version stays available.
 
-# Delete or replace a Custom MCP [#delete-or-replace-a-custom-mcp]
+## Delete or replace a Custom MCP [#delete-or-replace-a-custom-mcp]
 
 The registration endpoint cannot update an existing toolkit. To replace its URL, name, or authentication scheme, delete the toolkit and register it again.
 
@@ -267,11 +267,11 @@ curl --request DELETE \
 
 > **Deletion also removes connections**: Deletion removes the custom toolkit and its tools. It also revokes and removes the toolkit's auth configurations and connected accounts. Any replacement starts with new connections.
 
-# Use Custom MCP in a session [#use-custom-mcp-in-a-session]
+## Use Custom MCP in a session [#use-custom-mcp-in-a-session]
 
 Once the toolkit is synced, add its `CUSTOM_*` slug to a session.
 
-## Use a no-auth server [#use-a-no-auth-server]
+### Use a no-auth server [#use-a-no-auth-server]
 
 Pass the toolkit slug when you create the session:
 
@@ -306,7 +306,7 @@ const tools = await session.tools();
 
 With the default search-first session, your agent can discover the custom tools through `COMPOSIO_SEARCH_TOOLS` and execute them through the Tool Router.
 
-## Use an authenticated server [#use-an-authenticated-server]
+### Use an authenticated server [#use-an-authenticated-server]
 
 Sessions match a connected account by `user_id` automatically when the toolkit's auth config was [created with `is_enabled_for_tool_router: true`](#create-the-auth-config-for-automatic-account-matching). If your auth config doesn't have that flag, explicitly select the connected account in the session config instead:
 
@@ -343,7 +343,7 @@ const session = await composio.sessions.create("user_123", {
 
 The pinned account must belong to the custom toolkit and be active. Explicit selection ensures tool calls use its credentials.
 
-# What you manage and what Composio handles [#what-you-manage-and-what-composio-handles]
+## What you manage and what Composio handles [#what-you-manage-and-what-composio-handles]
 
 | Area           | You manage                                                                                       | Composio handles                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
@@ -352,7 +352,7 @@ The pinned account must belong to the custom toolkit and be active. Explicit sel
 | Authentication | Implementing the server's API-key or DCR OAuth behavior and completing each required connection. | Storing connected-account credentials and sending them when discovering or calling tools.          |
 | Lifecycle      | Choosing when to resync, delete, or replace the toolkit.                                         | Providing the project-scoped registration, sync, and deletion operations.                          |
 
-# Technical behavior [#technical-behavior]
+## Technical behavior [#technical-behavior]
 
 Each registered server becomes a custom toolkit scoped to your project:
 
@@ -371,7 +371,7 @@ Custom toolkits use dated registry versions. The v3.1 tools API selects the late
 
 See [Toolkit Versioning](/docs/tools-direct/toolkit-versioning) for more examples.
 
-# Known gaps [#known-gaps]
+## Known gaps [#known-gaps]
 
 **Setup and lifecycle**
 
@@ -391,7 +391,7 @@ See [Toolkit Versioning](/docs/tools-direct/toolkit-versioning) for more example
     * **Automatic account matching requires a flag:** sessions only match a custom toolkit's connected accounts when its auth config has `is_enabled_for_tool_router: true`. Set it at creation (or PATCH it in later); otherwise pass the account ID through `connected_accounts` in Python or `connectedAccounts` in TypeScript.
     * **Prefer the v3.1 tools API:** The v3 tools API pins a default version that doesn't contain custom tools. If you must use v3, explicitly select `latest` as described above.
 
-# Related guides [#related-guides]
+## Related guides [#related-guides]
 
 - [Using sessions via MCP](/docs/sessions-via-mcp): Connect an MCP client to a Composio-hosted session
 

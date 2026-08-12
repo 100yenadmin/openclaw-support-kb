@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Composio CLI"
 source: "https://docs.composio.dev/docs/cli.md"
-source_hash: "edecccdf56273144e37de1b559c107e7cb10ccd08b512a120395c4fe9359367c"
+source_hash: "0556896d2b2b9a8059b03d57ee47f952cd398f40b655603e190d8a21a15a677d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "cli.md"
@@ -17,11 +17,11 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/docs/cli.md
 
 
-The Composio CLI gives Claude Code a local tool surface. From your terminal, Claude can connect apps, execute tools, inspect schemas, call authenticated APIs, and debug Composio projects while it works with you. It's the command-line side of [Composio for You](https://composio.dev/for-you).
+The Composio CLI gives coding agents and terminals a local tool surface. Codex, Claude Code, or a person at the terminal can connect apps, execute tools, inspect schemas, call authenticated APIs, and debug Composio projects. It is also the runtime underneath the native [Composio agent plugins](/docs/agent-plugins).
 
-Reach for it when you want Claude to act in your connected apps directly, instead of pasting API keys, schemas, and one-off scripts into the chat.
+Reach for it when you want an agent to act in your connected apps directly, without building an SDK application or configuring MCP.
 
-# Install [#install]
+## Install [#install]
 
 Install the CLI with one command:
 
@@ -37,13 +37,26 @@ Open a new terminal, then log in:
 composio login
 ```
 
-Open Claude Code in the project you want to work in. `composio login` installs the `composio-cli` skill for Claude Code by default. To install it manually:
+Install the native plugin for Codex or Claude Code:
+
+```bash
+composio setup --target auto
+```
+
+`auto` detects supported agents on your machine. Use `--target codex` or `--target claude` to configure only one. See [Agent plugins](/docs/agent-plugins) for manual plugin commands and host-specific details.
+
+Setup asks before changing local files. Add `--yes` when you run it from an agent, script, CI job, or another non-interactive shell.
+
+`composio login` installs the standalone `composio-cli` skill for Claude Code by default. For Codex, prefer `composio setup --target codex`; it installs the native plugin, which bundles the CLI skill.
+
+If you explicitly need the standalone skill without the native plugin, install it manually for the agent host:
 
 ```bash
 composio --install-skill composio-cli claude
+composio --install-skill composio-cli codex
 ```
 
-## Install with options [#install-with-options]
+### Install with options [#install-with-options]
 
 Pin a version and opt in to agent plugin setup:
 
@@ -76,7 +89,7 @@ curl -fsSL https://composio.dev/install | sh -s -- @composio/cli@0.3.1
 | `--agent`                      | Log in as a Composio agent after installation.                                                                                                                                                                                                              | Off                                |
 | `--no-plugins`                 | Skip agent plugin setup. Kept for compatibility and now matches the default.                                                                                                                                                                                | Off                                |
 
-## Shell setup overrides [#shell-setup-overrides]
+### Shell setup overrides [#shell-setup-overrides]
 
 By default the installer infers your login shell from `$SHELL` and configures it. Set `COMPOSIO_INSTALL_SHELL` to force a specific shell instead:
 
@@ -114,7 +127,7 @@ Shell-specific installer variants (`zsh.sh`, `bash.sh`, and `fish.sh` in the rep
 
 Shell setup is idempotent: repeated installs keep exactly one managed PATH block per startup file and reconcile it when the bin directory changes. Setup falls back to writing the same PATH block inline when the installed CLI predates `composio install --shell`, delegated setup fails, or delegated setup leaves a stale block. Startup-file changes only affect future terminals; in the current one, either open a new terminal or run the absolute path the installer prints.
 
-## Verify the installation [#verify-the-installation]
+### Verify the installation [#verify-the-installation]
 
 ```bash
 composio --version
@@ -123,7 +136,7 @@ which composio
 
 The installer supports Linux x64, Linux ARM64, macOS Intel, and macOS Apple Silicon. On Windows, install and run it inside [WSL](https://learn.microsoft.com/windows/wsl/install).
 
-## Update [#update]
+### Update [#update]
 
 ```bash
 composio upgrade
@@ -131,7 +144,7 @@ composio upgrade
 
 This replaces the bundle in `~/.composio` in place and leaves the `~/.local/bin/composio` entry point pointing at it. Pass a version to pin a specific release (`composio upgrade 0.3.1`), or `--beta` for the latest prerelease.
 
-## Install manually from GitHub Releases [#install-manually-from-github-releases]
+### Install manually from GitHub Releases [#install-manually-from-github-releases]
 
 Download the archive for your platform from [GitHub Releases](https://github.com/ComposioHQ/composio/releases), then install the complete bundle. Keep the support files beside the executable.
 
@@ -151,7 +164,7 @@ fi
 export PATH="$COMPOSIO_BIN_DIR:$PATH"
 ```
 
-## Uninstall [#uninstall]
+### Uninstall [#uninstall]
 
 Remove only installer-owned entry points and release artifacts. This keeps your credentials, configuration, and cache data in `~/.composio`. The file list below matches the current release layout; if you installed a different version, compare it against the contents of that release's archive.
 
@@ -209,13 +222,13 @@ The command below also deletes saved credentials, configuration, and caches. Run
 rm -rf "${COMPOSIO_INSTALL_DIR:-$HOME/.composio}"
 ```
 
-# Knowledge work in Claude Code [#knowledge-work-in-claude-code]
+## Agent and terminal workflows [#agent-and-terminal-workflows]
 
-This is the recommended way to use Composio from inside Claude Code. The CLI executes tools, connects accounts, scripts workflows, calls authenticated APIs, and inspects trigger events, all without you wiring up a custom integration first.
+The CLI executes tools, connects accounts, scripts workflows, calls authenticated APIs, and inspects trigger events without you wiring up a custom integration first. Native Codex and Claude Code plugins expose these capabilities to the agent; the same commands work directly in your terminal.
 
-## Search, connect, and execute tools [#search-connect-and-execute-tools]
+### Search, connect, and execute tools [#search-connect-and-execute-tools]
 
-Use this flow when Claude needs to act in one of your connected apps:
+Use this flow when you or your agent needs to act in one of your connected apps:
 
 ```bash
 # Find the right tool
@@ -241,15 +254,15 @@ The commands you'll reach for most:
 | `composio link`    | Connect an app account                        |
 | `composio proxy`   | Call provider APIs with Composio-managed auth |
 
-Use `composio proxy` when Claude already knows the provider's API endpoint and just needs Composio to inject auth from your connected account:
+Use `composio proxy` when the agent already knows the provider's API endpoint and just needs Composio to inject auth from your connected account:
 
 ```bash
 composio proxy https://gmail.googleapis.com/gmail/v1/users/me/profile --toolkit gmail
 ```
 
-## Run scripts and sub-agents [#run-scripts-and-sub-agents]
+### Run scripts and sub-agents [#run-scripts-and-sub-agents]
 
-Reach for `composio run` when Claude needs a multi-step workflow: loops, parallel fan-out, data transformation, or LLM-assisted summarization. It runs inline TS/JS or a file, with `execute()`, `search()`, `proxy()`, `experimental_subAgent()`, `result.prompt()`, and `z` injected.
+Reach for `composio run` when the agent needs a multi-step workflow: loops, parallel fan-out, data transformation, or LLM-assisted summarization. It runs inline TS/JS or a file, with `execute()`, `search()`, `proxy()`, `experimental_subAgent()`, `result.prompt()`, and `z` injected.
 
 Run a single scripted workflow:
 
@@ -306,9 +319,9 @@ Run a checked-in script:
 composio run --file ./workflow.ts -- --repo composiohq/composio
 ```
 
-## Listen to trigger events [#listen-to-trigger-events]
+### Listen to trigger events [#listen-to-trigger-events]
 
-Use trigger listening when Claude needs to wait for new events, inspect incoming payloads, or forward events while debugging. Event streaming lives in the developer namespace:
+Use trigger listening when the agent needs to wait for new events, inspect incoming payloads, or forward events while debugging. Event streaming lives in the developer namespace:
 
 ```bash
 # Compact table view for matching events
@@ -320,17 +333,17 @@ composio dev listen --trigger-slug GMAIL_NEW_GMAIL_MESSAGE --json --max-events 5
 # Forward each matching event to a local or hosted webhook
 composio dev listen --toolkits github --forward https://example.com/webhook
 
-# Append matching events to a local file for Claude to inspect
+# Append matching events to a local file for an agent to inspect
 composio dev listen --toolkits slack --out ./events.jsonl
 ```
 
 Filter by toolkit, trigger slug, trigger ID, connected account ID, or userID to focus Claude on a single event source.
 
-# Build on the Composio platform [#build-on-the-composio-platform]
+## Build on the Composio platform [#build-on-the-composio-platform]
 
 Use these commands while building on the Composio developer platform. They initialize local project context, create auth configs, manage connected accounts, test tool execution, inspect logs, and debug trigger flows.
 
-## Initialize project context [#initialize-project-context]
+### Initialize project context [#initialize-project-context]
 
 ```bash
 # Initialize local project context
@@ -345,7 +358,7 @@ composio dev projects list
 composio dev projects switch
 ```
 
-## Inspect toolkits and versions [#inspect-toolkits-and-versions]
+### Inspect toolkits and versions [#inspect-toolkits-and-versions]
 
 ```bash
 composio dev toolkits list
@@ -354,7 +367,7 @@ composio dev toolkits info github
 composio dev toolkits version github
 ```
 
-## Create and inspect auth configs [#create-and-inspect-auth-configs]
+### Create and inspect auth configs [#create-and-inspect-auth-configs]
 
 ```bash
 # List existing auth configs
@@ -370,7 +383,7 @@ composio dev auth-configs create "GitHub OAuth" \
   --custom-credentials '{ "client_id": "...", "client_secret": "..." }'
 ```
 
-## Manage connected accounts [#manage-connected-accounts]
+### Manage connected accounts [#manage-connected-accounts]
 
 Top-level `composio link` is the fastest path for personal knowledge work. Use the developer connected-account commands when you're building against project users, auth configs, and playground flows.
 
@@ -383,7 +396,7 @@ composio dev connected-accounts whoami ca_xxx
 composio dev connected-accounts link
 ```
 
-## Execute and inspect logs [#execute-and-inspect-logs]
+### Execute and inspect logs [#execute-and-inspect-logs]
 
 ```bash
 # Execute a tool through the developer playground path
@@ -396,7 +409,7 @@ composio dev logs tools log_xxx
 composio dev logs triggers --limit 20
 ```
 
-## Work with triggers [#work-with-triggers]
+### Work with triggers [#work-with-triggers]
 
 ```bash
 composio dev triggers list gmail
@@ -407,7 +420,7 @@ composio dev triggers enable ti_xxx
 composio dev listen --trigger-slug GMAIL_NEW_GMAIL_MESSAGE --json --max-events 5
 ```
 
-## Generate type definitions [#generate-type-definitions]
+### Generate type definitions [#generate-type-definitions]
 
 For legacy direct tool execution projects, generate local TypeScript or Python types from tool schemas:
 
@@ -419,7 +432,7 @@ composio generate py --toolkits github,gmail
 
 Reach for this section when you're debugging auth configs, connected accounts, trigger delivery, or tool execution in a Composio project. For user-facing app development, start with the SDK and session docs and keep the CLI as a local debugging companion.
 
-# Building on top of the CLI [#building-on-top-of-the-cli]
+## Building on top of the CLI [#building-on-top-of-the-cli]
 
 > Don't build a production integration on top of the CLI. It's in constant development, and Composio doesn't offer CLI-level SLAs as an application runtime contract. For a stable integration, build on the Composio SDKs and APIs instead.
 
@@ -430,7 +443,7 @@ That said, the CLI works well as a bootstrap or helper layer for agent-native pr
 
 For an example of a product built around CLI-driven agent workflows, see [Houston](https://github.com/gethouston/houston).
 
-# Help [#help]
+## Help [#help]
 
 Use `--help` on the root command or any subcommand:
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Programmatic auth configs"
 source: "https://docs.composio.dev/docs/programmatic-auth-configs.md"
-source_hash: "d4fef57c90208dc85d10130c1c0a5c0acf88696faae543f1a68c1b00ae809130"
+source_hash: "3edc705ffe7109fc70b28164e23399cb2c3675af2e8fc42549448fcac18ba69b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "programmatic-auth-configs.md"
@@ -21,7 +21,7 @@ An [auth config](/docs/authentication#behind-the-scenes) is a blueprint for how 
 
 `composio.authConfigs.create()` returns an auth config ID like `ac_xxxxxxxx`. Store that ID, then [pass it to a session](#use-the-auth-config-in-a-session) so the session authenticates with it.
 
-# Composio managed auth [#composio-managed-auth]
+## Composio managed auth [#composio-managed-auth]
 
 For OAuth2 toolkits, Composio maintains a managed app so you can create an auth config without bringing your own credentials. This is the fastest way to start.
 
@@ -54,7 +54,7 @@ const authConfig = await composio.authConfigs.create('github', {
 console.log(authConfig.id); // ac_xxxxxxxx
 ```
 
-# Your own OAuth2 credentials [#your-own-oauth2-credentials]
+## Your own OAuth2 credentials [#your-own-oauth2-credentials]
 
 Bring your own OAuth app to show your branding on consent screens, request custom scopes, or get a dedicated rate-limit quota. Register the app in the provider's developer portal, set its authorized redirect URI to Composio's callback, then pass the client ID and secret.
 
@@ -105,7 +105,7 @@ const authConfig = await composio.authConfigs.create('notion', {
 
 > Omit `oauth_redirect_uri` to use Composio's default callback. Set it only when you [route the callback through your own domain](/docs/white-labeling-authentication#routing-the-callback-through-your-domain).
 
-# Other auth types [#other-auth-types]
+## Other auth types [#other-auth-types]
 
 Toolkits that use API keys, bearer tokens, basic auth, or no auth follow the same call. Set `auth_scheme` to the toolkit's scheme and put the required fields in `credentials`. For a toolkit whose key the user supplies at connect time, pass empty `credentials`.
 
@@ -137,7 +137,7 @@ const authConfig = await composio.authConfigs.create('perplexityai', {
 });
 ```
 
-# Use the auth config in a session [#use-the-auth-config-in-a-session]
+## Use the auth config in a session [#use-the-auth-config-in-a-session]
 
 Creating an auth config does not change which credentials a session uses. Pass the auth config ID to `authConfigs` (keyed by toolkit) when you create the session, and the session authenticates that toolkit with your config. Toolkits you leave out keep using Composio managed auth.
 
@@ -163,7 +163,7 @@ const session = await composio.create('user_123', {
 
 See [Configuring sessions](/docs/configuring-sessions#custom-auth-configs) for how `authConfigs` interacts with account selection and precedence.
 
-# Find auth configs [#find-auth-configs]
+## Find auth configs [#find-auth-configs]
 
 In TypeScript, filter `authConfigs.list()` by name or ID with `search`. Disabled configs are excluded by default; set `showDisabled` to include them. Auth config responses use `id` as their canonical identifier.
 
@@ -181,7 +181,7 @@ for (const config of configs.items) {
 }
 ```
 
-# Discover the required fields [#discover-the-required-fields]
+## Discover the required fields [#discover-the-required-fields]
 
 Different schemes need different credential fields. To build the `credentials` object dynamically, ask the toolkit which fields it requires for a given scheme before you create the config.
 
@@ -209,7 +209,7 @@ const fields = await composio.toolkits.getAuthConfigCreationFields('notion', 'OA
 console.log(fields);
 ```
 
-# Next [#next]
+## Next [#next]
 
 - [Controlling scopes](/docs/controlling-scopes): Override the default OAuth scopes Composio requests for a toolkit
 

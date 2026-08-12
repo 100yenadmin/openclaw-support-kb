@@ -2,7 +2,7 @@
 type: composio_doc
 title: "LangChain"
 source: "https://docs.composio.dev/docs/providers/langchain.md"
-source_hash: "34e253a9f31c6b03d93ec126e1b4c11cee235df0fa85fd123dcb686f954e12de"
+source_hash: "7e770cc653a8f30198472bd4fb7972bbe2598ace2b926eabf7c1f044b40476ee"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/langchain.md"
@@ -146,7 +146,15 @@ result = agent.invoke({"messages": [("user", "Send an email to john@example.com 
 print(result["messages"][-1].content)
 ```
 
-# Next [#next]
+## Python argument validation [#python-argument-validation]
+
+The Python LangChain and LangGraph providers build a Pydantic argument model from each tool's JSON Schema. Object arguments that declare no properties accept and preserve arbitrary nested keys. For objects that declare named properties, undeclared keys are rejected unless the schema allows them with `additionalProperties`.
+
+Schemas that use `patternProperties` or schema-valued `additionalProperties` validate dynamic keys before execution. The providers also preserve whether an optional argument was omitted or explicitly set to `None`. By default, declared defaults are included, while optional arguments without defaults stay absent. Set `schema_config={"skip_defaults": True}` when creating the provider to leave declared defaults absent too.
+
+When validation fails, the tool does not run. LangChain surfaces the failure as a tool error observation so the agent can correct its arguments and retry.
+
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

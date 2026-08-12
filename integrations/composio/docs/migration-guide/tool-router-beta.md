@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Experimental Tool Router"
 source: "https://docs.composio.dev/docs/migration-guide/tool-router-beta.md"
-source_hash: "ee4d8734e99716c62525f117c92e0a2751c178eadc69d7a2805e15952656201c"
+source_hash: "381a969393a35d38a634d7a9e08e48757bda35898b5774a6d8d1c4dc4fd85c57"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/tool-router-beta.md"
@@ -23,7 +23,7 @@ This guide is for users who adopted the **experimental tool router** (`composio.
 
 If you never used `composio.experimental.tool_router`, you can skip this guide and start with [Configuring Sessions](/docs/configuring-sessions).
 
-# The basics [#the-basics]
+## The basics [#the-basics]
 
 #### Upgrade composio package
 
@@ -100,7 +100,7 @@ const session = await composio.create('user_123',
 );
 ```
 
-# Next [#next]
+## Next [#next]
 
 - [Configuring Sessions](/docs/configuring-sessions): Restrict toolkits, set auth configs, and select connected accounts
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "6684a15dd09f0ac5df4f5c80b2cc81553bc7d3614db0dd3f665ad6ff39db74e3"
+source_hash: "ee99b7ebc0eb365faeb61ce89409ce0b3e1756eed5ad5153bf2172bc5a2f98b0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -27,7 +27,7 @@ A lot of these changes have happened in the background, but we are excited to fi
 
 The new API features improved usability, enhanced stability, and better scalability. The SDKs built on top of it simplify the developer experience, making it easier than ever to build useful agents.
 
-# What's new? [#whats-new]
+## What's new? [#whats-new]
 
 A lot of the changes are on the infra side, but from the SDK point of view, here is what you can expect:
 
@@ -38,7 +38,7 @@ A lot of the changes are on the infra side, but from the SDK point of view, here
 
 There aren't too many new flashy features here (yet) mainly because we wanted to get the bones right — but we feel we have a solid foundation to ship incredible new experiences on top very quickly.
 
-# State of the new SDK and what is happening with the old SDKs? [#state-of-the-new-sdk-and-what-is-happening-with-the-old-sdks]
+## State of the new SDK and what is happening with the old SDKs? [#state-of-the-new-sdk-and-what-is-happening-with-the-old-sdks]
 
 Currently, the new SDKs are in a preview release. These new SDKs come almost fully formed, we do not expect many breaking changes to them but are releasing them in a preview state to get feedback and make necessary changes before locking them in.
 
@@ -46,7 +46,7 @@ As we lock the new SDKs in place, we will deprecate support for the old SDKs. Th
 
 We urge you to upgrade to the new SDKs as soon as possible.
 
-# Nomenclature [#nomenclature]
+## Nomenclature [#nomenclature]
 
 We have updated several key terms in the SDK and API to improve clarity and consistency. The following table summarizes these changes:
 
@@ -60,7 +60,7 @@ We have updated several key terms in the SDK and API to improve clarity and cons
 | Trigger       | Trigger            | An event that can be subscribed to                                                                                                   |
 | Toolsets      | Providers          | LLM or agent framework that can be used with Composio to create agents                                                               |
 
-# Switch to nano IDs from UUIDs [#switch-to-nano-ids-from-uuids]
+## Switch to nano IDs from UUIDs [#switch-to-nano-ids-from-uuids]
 
 We have transitioned from UUIDs to nano IDs throughout the platform for the following reasons:
 
@@ -76,7 +76,7 @@ We have transitioned from UUIDs to nano IDs throughout the platform for the foll
 
 > Nano IDs are short, unique, and prefixed to indicate the resource type.
 
-# SDK Changes [#sdk-changes]
+## SDK Changes [#sdk-changes]
 
 Upgrade to the latest SDK version using the appropriate package manager:
 
@@ -90,7 +90,7 @@ pip install -U composio
 
 Both SDKs now implement proper namespacing for each concept.
 
-## UserID scoping [#userid-scoping]
+### UserID scoping [#userid-scoping]
 
 The concept of `entity_id` has been expanded and renamed to `user_id`.
 
@@ -103,7 +103,7 @@ All operations are now scoped to a userID, including:
 
 This change provides explicit specification of the user for whom the action is being performed. When a user may have multiple accounts (such as work and personal Gmail connections), you can use the more specific connected account ID.
 
-## Replacing ToolSets with Providers [#replacing-toolsets-with-providers]
+### Replacing ToolSets with Providers [#replacing-toolsets-with-providers]
 
 We have deprecated "toolsets" in favor of "providers". This change allows Composio to provide deeper standardization for tool implementation across different frameworks.
 
@@ -165,7 +165,7 @@ You can now use the same tools across any framework with our unified interface, 
 
 Read more about [providers in our documentation](/docs/providers/openai) and explore the [complete list of available providers](/docs/providers/openai).
 
-## Fetching and filtering tools [#fetching-and-filtering-tools]
+### Fetching and filtering tools [#fetching-and-filtering-tools]
 
 Previously, you could filter tools by:
 
@@ -263,7 +263,7 @@ const tools_4 = await composio.tools.get(userId, {
 });
 ```
 
-## Fetching raw tool data [#fetching-raw-tool-data]
+### Fetching raw tool data [#fetching-raw-tool-data]
 
 To examine the raw schema definition of a tool for understanding input/output parameters or building custom logic around tool definitions, use the following methods:
 
@@ -291,7 +291,7 @@ const tool = await composio.tools.getRawComposioToolBySlug('GITHUB_GET_OCTOCAT')
 console.log(JSON.stringify(tool, null, 2));
 ```
 
-## Executing tools [#executing-tools]
+### Executing tools [#executing-tools]
 
 Tool execution remains largely unchanged, with `user_id` now explicitly required.
 
@@ -354,7 +354,7 @@ console.log('Tool results:', result);
 
 For more information on executing tools for different frameworks, see [Replacing ToolSets with Providers](#replacing-toolsets-with-providers).
 
-## Tool Modifiers (formerly Tool Processors) [#tool-modifiers-formerly-tool-processors]
+### Tool Modifiers (formerly Tool Processors) [#tool-modifiers-formerly-tool-processors]
 
 Tool processors have been renamed to *tool modifiers* and now provide an improved developer experience. The implementation is now available in TypeScript too! (previously Python-only).
 
@@ -393,7 +393,7 @@ While tool processors could previously be applied during SDK initialization, too
 * **Chat Completion providers**: Modifiers are specified and applied during tool execution
 * **Agentic frameworks**: Modifiers are specified and applied during tool fetching
 
-### Schema Modifiers [#schema-modifiers]
+#### Schema Modifiers [#schema-modifiers]
 
 The following example demonstrates schema modifier usage, applicable across all providers:
 
@@ -455,7 +455,7 @@ const tools = await composio.tools.get(
 
 console.log(JSON.stringify(tools, null, 2));
 ```
-### Before Modifiers [#before-modifiers]
+#### Before Modifiers [#before-modifiers]
 
 The following example shows creating and using a before modifier for a Chat Completion provider. For agentic frameworks, view the [complete before modifier documentation](/docs/tools-direct/modify-tool-behavior/before-execution-modifiers):
 
@@ -495,7 +495,7 @@ const result_1 = await composio.tools.execute(
   }
 );
 ```
-### After Modifiers [#after-modifiers]
+#### After Modifiers [#after-modifiers]
 
 The following example shows creating and using an after modifier for a Chat Completion provider. For agentic frameworks, view the [complete after modifier documentation](/docs/tools-direct/modify-tool-behavior/after-execution-modifiers):
 
@@ -542,7 +542,7 @@ const result_2 = await composio.tools.execute(
   }
 );
 ```
-## Custom Tools [#custom-tools]
+### Custom Tools [#custom-tools]
 
 Custom tools are now session-scoped. Define local tools with the experimental custom-tools API and attach them when creating or reusing a session.
 
@@ -603,7 +603,7 @@ const session = await composio.create("default", {
 ```
 For more information, see [Custom Tools and Toolkits](/docs/extending-sessions/custom-tools-and-toolkits).
 
-## Auth configs (formerly integrations) [#auth-configs-formerly-integrations]
+### Auth configs (formerly integrations) [#auth-configs-formerly-integrations]
 
 Integrations are now called *auth configs*. While the terminology has changed, the underlying concept remains the same.
 
@@ -714,7 +714,7 @@ For using custom authentication credentials, refer to the [Programmatic Auth Con
 
 > The callback URL for creating custom OAuth configs is now `https://backend.composio.dev/api/v3/toolkits/auth/callback`. The previous URL was `https://backend.composio.dev/api/v1/auth-apps/add`.
 
-## Connected accounts / User IDs [#connected-accounts--user-ids]
+### Connected accounts / User IDs [#connected-accounts--user-ids]
 
 The primary change in connected accounts and user IDs is that user IDs are now a more prominent concept compared to entities in previous versions.
 
@@ -830,11 +830,11 @@ await connRequest.waitForConnection();
 // If you only have the connection request ID, you can also wait using:
 await composio.connectedAccounts.waitForConnection(id);
 ```
-## Triggers [#triggers]
+### Triggers [#triggers]
 
 Composio continues to support listening to application events using triggers through WebSockets and webhooks.
 
-### Creating triggers [#creating-triggers]
+#### Creating triggers [#creating-triggers]
 
 The process for creating triggers and specifying their configuration has been redesigned for improved clarity and intuitiveness.
 
@@ -850,7 +850,7 @@ composio = Composio()
 user_id = "user@example.com"
 trigger_config = composio.triggers.get_type("GITHUB_COMMIT_EVENT")
 print(trigger_config.config)
-## Trigger Config
+### Trigger Config
 # {
 #     "properties": {
 #         "owner": {
@@ -919,7 +919,7 @@ const createResponse = await composio.triggers.create(userId, 'GITHUB_COMMIT_EVE
 });
 console.log(createResponse);
 ```
-### Enabling/Disabling triggers [#enablingdisabling-triggers]
+#### Enabling/Disabling triggers [#enablingdisabling-triggers]
 
 You can enable or disable triggers through either the SDK or the dashboard. The dashboard process remains unchanged.
 
@@ -953,7 +953,7 @@ print(enabled_instance)
 // @noErrors
 await composio.triggers.enable("ti_abcd123");
 ```
-### Listening to triggers [#listening-to-triggers]
+#### Listening to triggers [#listening-to-triggers]
 
 We recommend listening to triggers through webhooks. The following are example routes for Next.js and FastAPI.
 
@@ -1073,9 +1073,9 @@ export default async function webhookHandler(req: NextApiRequest, res: NextApiRe
 }
 ```
 
-# Coming Soon [#coming-soon]
+## Coming Soon [#coming-soon]
 
-## Local tools [#local-tools]
+### Local tools [#local-tools]
 
 Previously, the Python SDK included &#x2A;[local tools](https://github.com/ComposioHQ/composio/tree/0.5.0%2Bpost.1/python/composio/tools/local)*. These were tools defined within the SDK and consisted of local shell and code-related tools such as "clipboard", "sqltool", and "shelltool".
 
@@ -1083,13 +1083,13 @@ This feature is currently in development for both Python and TypeScript SDKs, wi
 
 This feature is currently in development for both Python and TypeScript SDKs.
 
-# API Endpoints [#api-endpoints]
+## API Endpoints [#api-endpoints]
 
 The following table lists important API endpoints that have changed. You can use this reference to quickly find the new v3 API endpoint for migration:
 
 > This list is not exhaustive. Please refer to the [API Reference](/reference) for the complete list of endpoints.
 
-## Toolkits (formerly Apps) [#toolkits-formerly-apps]
+### Toolkits (formerly Apps) [#toolkits-formerly-apps]
 
 | Previous Endpoint                  | Current Endpoint                  |
 | :--------------------------------- | :-------------------------------- |
@@ -1097,7 +1097,7 @@ The following table lists important API endpoints that have changed. You can use
 | `GET /api/v1/apps/list/categories` | `GET /api/v3/toolkits/categories` |
 | `GET /api/v1/apps/{appName}`       | `GET /api/v3/toolkits/{slug}`     |
 
-## Tools (formerly Actions) [#tools-formerly-actions]
+### Tools (formerly Actions) [#tools-formerly-actions]
 
 | Previous Endpoint                                    | Current Endpoint                               |
 | :--------------------------------------------------- | :--------------------------------------------- |
@@ -1108,7 +1108,7 @@ The following table lists important API endpoints that have changed. You can use
 | `POST /api/v2/actions/{actionId}/execute/get.inputs` | `POST /api/v3/tools/execute/{tool_slug}/input` |
 | `POST /api/v2/actions/proxy`                         | `POST /api/v3/tools/execute/proxy`             |
 
-## Auth Configs (formerly Integrations/Connectors) [#auth-configs-formerly-integrationsconnectors]
+### Auth Configs (formerly Integrations/Connectors) [#auth-configs-formerly-integrationsconnectors]
 
 | Previous Endpoint                             | Current Endpoint                       |
 | :-------------------------------------------- | :------------------------------------- |
@@ -1119,7 +1119,7 @@ The following table lists important API endpoints that have changed. You can use
 | `DELETE /api/v1/integrations/{integrationId}` | `DELETE /api/v3/auth_configs/{nanoid}` |
 | `POST /api/v2/integrations/create`            | `POST /api/v3/auth_configs`            |
 
-## Connected Accounts (formerly Connections) [#connected-accounts-formerly-connections]
+### Connected Accounts (formerly Connections) [#connected-accounts-formerly-connections]
 
 | Previous Endpoint                                                | Current Endpoint                                   |
 | :--------------------------------------------------------------- | :------------------------------------------------- |
@@ -1132,7 +1132,7 @@ The following table lists important API endpoints that have changed. You can use
 | `POST /api/v1/connectedAccounts/{connectedAccountId}/enable`     | `PATCH /api/v3/connected_accounts/{nanoId}/status` |
 | `POST /api/v1/connectedAccounts/{connectedAccountId}/reinitiate` | `POST /api/v3/connected_accounts/{nanoid}/refresh` |
 
-## Triggers [#triggers-1]
+### Triggers [#triggers-1]
 
 | Previous Endpoint                                                 | Current Endpoint                                      |
 | :---------------------------------------------------------------- | :---------------------------------------------------- |

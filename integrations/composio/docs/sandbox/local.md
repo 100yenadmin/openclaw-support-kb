@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Local sandbox"
 source: "https://docs.composio.dev/docs/sandbox/local.md"
-source_hash: "448ffc1b8661adcc39c0e6e47b19c3c3964bca957b891a0c01f1460d6d37f9f1"
+source_hash: "51e1304923be3f500db1a3940af69257f936de5e66ede1f5337e0abc7ed286bd"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "sandbox/local.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/sandbox/local.md
 
 A **local sandbox** runs your agent's code in your own infrastructure instead of Composio's hosted [remote sandbox](/docs/sandbox/remote), so code execution never leaves your security boundary.
 
-# When to use it [#when-to-use-it]
+## When to use it [#when-to-use-it]
 
 Reach for a local sandbox when:
 
@@ -29,7 +29,7 @@ Reach for a local sandbox when:
 
 If none of that applies, use the [remote sandbox](/docs/sandbox/remote). It's the same helper surface with no infrastructure to run.
 
-# Create a local sandbox session [#create-a-local-sandbox-session]
+## Create a local sandbox session [#create-a-local-sandbox-session]
 
 A local sandbox session is a [session](/docs/how-composio-works) created with the remote sandbox turned off. Set `workbench.enable: false`, then pass the session to `experimental_createLocalWorkbenchSession` (from the `@composio/experimental` package), which returns the two pieces you run yourself.
 
@@ -59,7 +59,7 @@ You get back two things:
 
 > The API ships under the `experimental_` prefix and the `@composio/experimental/workbench` entry point, so the surface may change in a future release.
 
-# The helper contract [#the-helper-contract]
+## The helper contract [#the-helper-contract]
 
 `helperSource` is a Python module your agent imports. It exposes the same helpers the [remote sandbox](/docs/sandbox/remote#built-in-helpers) runs, with the same signatures, so the agent calls tools without knowing that execution is local:
 
@@ -87,13 +87,13 @@ Most of the workbench helpers run in a local sandbox today. Only the file helper
 
 If your agent needs one of the file helpers, use the [remote sandbox](/docs/sandbox/remote) for now.
 
-# Security: the sandbox is your boundary [#security-the-sandbox-is-your-boundary]
+## Security: the sandbox is your boundary [#security-the-sandbox-is-your-boundary]
 
 The helper reaches Composio with your project `COMPOSIO_API_KEY`, injected into the sandbox through `env`. Any code or output in the sandbox can read it, and that key acts across every connection on the project.
 
 > The sandbox is your security boundary. Isolate it like anything else holding a project credential, and rotate `COMPOSIO_API_KEY` if a run could have leaked it.
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope tools, auth, and sandbox state to a user
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed vs custom auth"
 source: "https://docs.composio.dev/docs/custom-app-vs-managed-app.md"
-source_hash: "ac7efc7b87e0842e703e68f1e9492ccf31c6381f8d71110bff9bd288b7e89dc8"
+source_hash: "e3712e9d0d8b7af3e263eea20ff7deb153c4500f154cac8e69d2323975fec839"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "custom-app-vs-managed-app.md"
@@ -24,7 +24,7 @@ Composio supports two ways to authenticate users with toolkits.
 
 This page covers when to use each, how to create a custom auth config, and how to wire it into a session.
 
-# When to use Composio managed apps [#when-to-use-composio-managed-apps]
+## When to use Composio managed apps [#when-to-use-composio-managed-apps]
 
 Managed apps are the default. Every toolkit that supports OAuth has a Composio managed app ready to go. Use them when:
 
@@ -32,7 +32,7 @@ Managed apps are the default. Every toolkit that supports OAuth has a Composio m
 * **Default scopes cover your needs.** Composio requests sensible defaults for each toolkit.
 * **Branding on consent screens doesn't matter yet.** Users will see "Composio wants to access your account" during OAuth. Fine for internal tools, prototypes, and development. You can still [white-label the Connect Link page](/docs/white-labeling-authentication#customizing-the-connect-link) with your logo and app title without needing your own OAuth app.
 
-# When to use a custom auth config [#when-to-use-a-custom-auth-config]
+## When to use a custom auth config [#when-to-use-a-custom-auth-config]
 
 Bring your own credentials when any of these apply:
 
@@ -43,7 +43,7 @@ Bring your own credentials when any of these apply:
 * **You're connecting to a custom instance.** Self-hosted or regional variants (e.g., a private Salesforce subdomain) need their own OAuth app.
 * **Enterprise customers require your branding end-to-end.**
 
-# Create a custom auth config [#create-a-custom-auth-config]
+## Create a custom auth config [#create-a-custom-auth-config]
 
 To check whether a toolkit already has a Composio managed app, see the [managed auth toolkit list](/toolkits/managed-auth). You can still create a custom auth config for branding, scopes, rate limits, polling intervals, or custom instances.
 
@@ -105,7 +105,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-# Mixing per toolkit [#mixing-per-toolkit]
+## Mixing per toolkit [#mixing-per-toolkit]
 
 You don't have to pick one approach for all toolkits. Use your own credentials for toolkits where users see consent screens (GitHub, Google, Slack) and Composio managed auth for the rest. Each toolkit gets its own auth config independently.
 
@@ -136,11 +136,11 @@ const session = await composio.create("user_123", {
 });
 ```
 
-## Toolkits without managed auth [#toolkits-without-managed-auth]
+### Toolkits without managed auth [#toolkits-without-managed-auth]
 
 Some toolkits don't have Composio managed auth. For these, the setup is the same as above, except the provider may ask for API keys or instance details instead of OAuth credentials. Browse the full list on the [managed auth page](/toolkits/managed-auth) or check individual toolkit pages on the [toolkits page](/toolkits).
 
-# Next [#next]
+## Next [#next]
 
 - [Programmatic auth configs](/docs/programmatic-auth-configs): Create auth configs in code and pass them to a session
 

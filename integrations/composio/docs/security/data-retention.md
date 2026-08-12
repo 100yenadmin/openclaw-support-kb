@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Data retention"
 source: "https://docs.composio.dev/docs/security/data-retention.md"
-source_hash: "836a452a5fc1acf35dfff787ff8592e59d3d253f38a065080f11ceb4753d8264"
+source_hash: "5f7319d4d368b26d0425e93e64463483e24d396d35f19c4b76afd8ff4cc00903"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "security/data-retention.md"
@@ -19,13 +19,13 @@ Source: https://docs.composio.dev/docs/security/data-retention.md
 
 Composio stores audit logs for tool executions so you can observe and debug your agents. You control whether the request and response payloads for each call are stored.
 
-# Customer data vs. your end users' data [#customer-data-vs-your-end-users-data]
+## Customer data vs. your end users' data [#customer-data-vs-your-end-users-data]
 
 Throughout this guide, *you* are the Composio customer. *Your end users* are the people your agent acts on behalf of. Each end user is identified by the `user_id` you provide. Composio stores this value as supplied and uses it to associate connected accounts, sessions, and execution logs.
 
 Tool requests and responses may contain additional end-user data. The **Log storage** setting controls whether these payloads are retained; it does not remove the `user_id` or other audit metadata.
 
-# What Composio stores [#what-composio-stores]
+## What Composio stores [#what-composio-stores]
 
 Composio creates logs for tool executions and trigger events. These logs contain:
 
@@ -33,11 +33,11 @@ Composio creates logs for tool executions and trigger events. These logs contain
 * By default, the **request arguments** and **response data** for each tool execution.
 * For trigger events, similar audit metadata and, by default, the trigger payloads.
 
-# How long logs are retained [#how-long-logs-are-retained]
+## How long logs are retained [#how-long-logs-are-retained]
 
 Tool execution logs and trigger event logs are retained for up to **one year**, after which they are automatically deleted.
 
-# How long files are available [#how-long-files-are-available]
+## How long files are available [#how-long-files-are-available]
 
 When a tool uses or returns a file (an attachment, image, document, export, and so on), Composio stages it in temporary object storage and shares it through a presigned URL. The URL is valid for **1 hour by default**. You can configure this URL TTL per project in **Project Settings**, up to 24 hours.
 
@@ -48,7 +48,7 @@ Workbench storage has two separate lifecycles:
 * Files written to `/mnt/files` are backed by temporary object storage and are automatically deleted after **24 hours**.
 * Other sandbox files, variables, and runtime state are temporary and may be cleared after approximately **12 hours** of inactivity.
 
-# Choose what we store: the Log storage setting [#choose-what-we-store-the-log-storage-setting]
+## Choose what we store: the Log storage setting [#choose-what-we-store-the-log-storage-setting]
 
 You control whether call payloads are stored for each project in **Settings → General → Log storage**:
 
@@ -61,7 +61,7 @@ With **Don't store data**, Composio keeps an audit trail but does not retain you
 
 > To stop storing payloads, open the Dashboard, choose your project, go to **Settings → General → Log storage**, and select **Don't store data**.
 
-## Changing the setting affects new calls [#changing-the-setting-affects-new-calls]
+### Changing the setting affects new calls [#changing-the-setting-affects-new-calls]
 
 You can switch between the two log-storage options at any time. Each change applies only to new calls:
 
@@ -70,7 +70,7 @@ You can switch between the two log-storage options at any time. Each change appl
 
 Payloads for calls made while storage was disabled were never stored and cannot be recovered later.
 
-# Where your data goes [#where-your-data-goes]
+## Where your data goes [#where-your-data-goes]
 
 Choosing **Don't store data** stops Composio from persisting your payloads, but data may still pass through the following locations during execution:
 
@@ -80,7 +80,7 @@ Choosing **Don't store data** stops Composio from persisting your payloads, but 
 * Your configured **trigger destinations**, which receive trigger events in real time.
 * An isolated third-party **code sandbox**, if you use Workbench or remote code execution. Ordinary Python or shell execution does not inherently send code or sandbox files to an LLM provider. Model-provider processing occurs only in the cases described below.
 
-## When Workbench uses an LLM [#when-workbench-uses-an-llm]
+### When Workbench uses an LLM [#when-workbench-uses-an-llm]
 
 When a task requires advanced processing, the agent or MCP client may use Workbench and call `invoke_llm` from the submitted code—for example, to summarize, analyze, extract, or generate content. Only the information passed to `invoke_llm` is sent to the model provider; sandbox files and previous results are not sent unless the submitted code includes them.
 
@@ -88,7 +88,7 @@ There is one separate case: if submitted Python contains a syntax error and auto
 
 So "Don't store data" controls what Composio retains, not whether data is processed during execution. For the current list of our sub-processors and our data-handling terms, see the [Composio Trust Center](https://trust.composio.dev/subprocessors).
 
-# Stronger guarantees [#stronger-guarantees]
+## Stronger guarantees [#stronger-guarantees]
 
 If your organization needs a contractual zero-data-retention arrangement or shorter retention windows, [contact sales](https://composio.dev/contact?utm_source=docs). For our data-handling policies and sub-processor list, see the [Composio Trust Center](https://trust.composio.dev).
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Events"
 source: "https://docs.composio.dev/reference/api-reference/webhook-events.md"
-source_hash: "8619a384c65ce6d915ed0cec4e401194dedf4762d5def49f900d6e35c7956e14"
+source_hash: "2d3714880768d9f7c575d984f3058b99a299acb6e7d583260cdf3a5b2c600fff"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-events.md"
@@ -25,7 +25,7 @@ Webhook events delivered by the Composio platform to your registered endpoints.
 
 Configure your webhook subscriptions via the [Webhook Subscriptions API](/reference/api-reference/webhook-subscriptions/postWebhookSubscriptions), and verify signatures as described in [Verifying signatures](/docs/setting-up-triggers/subscribing-to-events#verifying-signatures).
 
-# Events [#events]
+## Events [#events]
 
 | Event                                | Description                                                                                      |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------ |
@@ -33,7 +33,7 @@ Configure your webhook subscriptions via the [Webhook Subscriptions API](/refere
 | `composio.connected_account.expired` | [Connection expired](/reference/api-reference/webhook-events/composio_connected_account_expired) |
 | `composio.trigger.disabled`          | [Trigger disabled](/reference/api-reference/webhook-events/composio_trigger_disabled)            |
 
-# Legacy payloads (deprecated) [#legacy-payloads-deprecated]
+## Legacy payloads (deprecated) [#legacy-payloads-deprecated]
 
 Older subscriptions may still receive these payload formats. The event type is unchanged — only the payload shape differs, selected by the subscription's version. You can upgrade an existing subscription at any time by updating its `version` — see [Update a webhook subscription](/reference/api-reference/webhook-subscriptions/patchWebhookSubscriptionsById). New integrations should use the current events above.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "MCP"
 source: "https://docs.composio.dev/reference/api-reference/mcp.md"
-source_hash: "0a0d3003543e6f307f58f7505826d14660b56d049887bba9b9e4da8f7a61fd60"
+source_hash: "2ea4589936c6e7dbe15a4096046687ee3a065529e17a239b48be4c794d490ada"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/mcp.md"
@@ -29,7 +29,7 @@ These endpoints create, list, update, and delete MCP servers, including custom s
 
 Sessions replace this. A single `composio.create(...)` gives you the same MCP URL pattern, keyed by `user_id`, while handling tool discovery, authentication, context, and versioning for you. Your existing tools, auth configs (`ac_…`), and connected accounts carry over with no re-authentication. To pin a session to a fixed tool list the way a server did, use the direct-tools preset described in [Configuring sessions](/docs/configuring-sessions).
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

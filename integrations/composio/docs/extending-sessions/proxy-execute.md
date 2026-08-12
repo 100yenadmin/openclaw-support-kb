@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/extending-sessions/proxy-execute.md"
-source_hash: "074b55d7773a3d8b798d7810d82a99bfd1d9d666599b68b2cce8d72c65397335"
+source_hash: "0eb16d3fb56a590ece90e3e1e306573f1223048acf8393343d06e50c70fbd27b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/proxy-execute.md"
@@ -25,12 +25,12 @@ Proxy execute is a building block, not just a fallback. Use it to build experien
 
 > **Use a scoped API key**: Proxy execute is gated behind its own permission. Authenticate with a [scoped project API key](/reference/authenticating-to-composio/project-api-key-permissions) that has the **Proxy execute** permission granted. Default full-access keys already include it.
 
-# When to use it [#when-to-use-it]
+## When to use it [#when-to-use-it]
 
 * **Endpoints with no predefined tool.** You need a specific endpoint (an unusual GitHub, LinkedIn, or Notion route) that isn't exposed as a Composio tool. Send it through the proxy instead of extracting the raw token and calling the API yourself.
 * **Request shapes a tool can't express.** Custom query parameters, partial field masks, or advanced filters on Gmail, Drive, Sheets, and similar. The proxy gives you the full HTTP surface of the upstream API while Composio keeps managing auth.
 
-# Quick start [#quick-start]
+## Quick start [#quick-start]
 
 **Python:**
 
@@ -76,7 +76,7 @@ The `endpoint` is a path relative to the toolkit's base URL (`/repos/...` resolv
 
 > Proxy execute rejects cross-domain requests. The `endpoint` must resolve to the same domain as the toolkit's connected account (a GitHub connection can only call `api.github.com` paths). This is an intentional security boundary, not a quota, so you can't work around it by reshaping the request.
 
-# Parameters [#parameters]
+## Parameters [#parameters]
 
 | Parameter    | Required | Type                                              | Description                                                                                                       |
 | ------------ | -------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -86,7 +86,7 @@ The `endpoint` is a path relative to the toolkit's base URL (`/repos/...` resolv
 | `body`       | No       | `object`                                          | JSON request body. Used with `POST`, `PUT`, and `PATCH`.                                                          |
 | `parameters` | No       | `Array<{ name, value, in }>`                      | Extra headers or query parameters. `in` is `"header"` or `"query"`.                                               |
 
-# Response shape [#response-shape]
+## Response shape [#response-shape]
 
 The call returns the upstream response verbatim:
 
@@ -99,7 +99,7 @@ The call returns the upstream response verbatim:
 
 > Don't set the `Authorization` header yourself through `parameters`. Composio injects the correct one from the connected account's auth scheme, and setting it manually overrides that credential and usually produces a `401`.
 
-# Error handling [#error-handling]
+## Error handling [#error-handling]
 
 `status` and `data` reflect exactly what the toolkit API returned, so check `status` and branch on the common failures.
 
@@ -110,7 +110,7 @@ The call returns the upstream response verbatim:
 | `403 Forbidden`         | The user's OAuth scopes or API key don't cover this endpoint.   | Update the [auth config scopes](/docs/auth-configuration/custom-auth-configs) and have the user re-consent. |
 | `429 Too Many Requests` | Upstream rate limit (GitHub, Google, and so on).                | Honor the `Retry-After` header and back off. Composio doesn't retry automatically.                          |
 
-# Next [#next]
+## Next [#next]
 
 - [Custom tools and toolkits](/docs/extending-sessions/custom-tools-and-toolkits): Define in-process tools and toolkits that run alongside Composio tools
 

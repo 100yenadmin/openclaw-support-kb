@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Controlling scopes"
 source: "https://docs.composio.dev/docs/controlling-scopes.md"
-source_hash: "bf994b7103d247c7f0a7325a97209822bb3e5fef9d29c9af1a705a5d27b704d3"
+source_hash: "f0638fa99a61fc6064cdc31349e38ea77c2f65a6e9c361a2807594989cd759ea"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "controlling-scopes.md"
@@ -23,7 +23,7 @@ You control scopes on an [auth config](/docs/authentication#behind-the-scenes), 
 
 > Scopes apply to OAuth toolkits. Toolkits that authenticate with API keys or bearer tokens don't have scopes to set.
 
-# Set scopes with Composio managed auth [#set-scopes-with-composio-managed-auth]
+## Set scopes with Composio managed auth [#set-scopes-with-composio-managed-auth]
 
 Pass a `scopes` field in `credentials` to override the defaults while still using Composio's managed OAuth app. Give scopes as a comma-separated string.
 
@@ -57,7 +57,7 @@ const authConfig = await composio.authConfigs.create('hubspot', {
 });
 ```
 
-# Set scopes with your own OAuth app [#set-scopes-with-your-own-oauth-app]
+## Set scopes with your own OAuth app [#set-scopes-with-your-own-oauth-app]
 
 When you bring your own OAuth credentials, put `scopes` alongside the client ID and secret. Make sure your OAuth app has those scopes approved in the provider's portal.
 
@@ -99,7 +99,7 @@ const authConfig = await composio.authConfigs.create('github', {
 });
 ```
 
-# Update scopes on an existing config [#update-scopes-on-an-existing-config]
+## Update scopes on an existing config [#update-scopes-on-an-existing-config]
 
 Change the scopes on an auth config you already created without recreating it.
 
@@ -125,7 +125,7 @@ await composio.authConfigs.update('ac_1234', {
 
 > Changing scopes affects new connections only. Users with an existing [connected account](/docs/authentication#behind-the-scenes) keep the scopes they already granted until they reconnect. To apply new scopes to a current user, have them re-authenticate.
 
-# Use the auth config in a session [#use-the-auth-config-in-a-session]
+## Use the auth config in a session [#use-the-auth-config-in-a-session]
 
 Setting scopes on an auth config does nothing until a session uses it. Pass the auth config ID to `authConfigs` (keyed by toolkit) when you create the session, and the session requests your scopes when the user connects that toolkit.
 
@@ -149,7 +149,7 @@ const session = await composio.create('user_123', {
 });
 ```
 
-# Next [#next]
+## Next [#next]
 
 - [White-labeling authentication](/docs/white-labeling-authentication): Remove Composio branding from your auth flows
 

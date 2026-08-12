@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
-source_hash: "312b24aefb20b7a28d0d6d40eca9d68ae8a008705c941f88bacc9f7804792996"
+source_hash: "d8a5fecf6b53f55d46b5ba0d86aeba5fcce0de2464073d79a552324e0171641c"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tools.md"
@@ -17,9 +17,9 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/python/tools.md
 
 
-# Methods [#methods]
+## Methods [#methods]
 
-## get\_raw\_composio\_tool\_by\_slug() [#get_raw_composio_tool_by_slug]
+### get\_raw\_composio\_tool\_by\_slug() [#get_raw_composio_tool_by_slug]
 
 Returns schema for the given tool slug.
 
@@ -39,7 +39,7 @@ def get_raw_composio_tool_by_slug(slug: str) -> Tool
 
 ***
 
-## get\_raw\_composio\_tools() [#get_raw_composio_tools]
+### get\_raw\_composio\_tools() [#get_raw_composio_tools]
 
 Get a list of tool schemas based on the provided filters.
 
@@ -63,7 +63,7 @@ def get_raw_composio_tools(tools: list[str | None] = ..., search: str | None = .
 
 ***
 
-## get\_raw\_tool\_router\_meta\_tools() [#get_raw_tool_router_meta_tools]
+### get\_raw\_tool\_router\_meta\_tools() [#get_raw_tool_router_meta_tools]
 
 Fetches the tools exposed by a tool router session.  This method fetches helper/meta tools and any preloaded app tools from the Composio API and transforms them to the expected format. It provides access to the underlying tool data without provider-specific wrapping.
 
@@ -111,7 +111,7 @@ meta_tools = tools_model.get_raw_tool_router_meta_tools(
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 Get a tool or list of tools based on the provided arguments.  The return type is automatically inferred based on the provider's generic parameters. For example: - OpenAIProvider -> list\[ChatCompletionToolParam] - AnthropicProvider -> list\[ToolParam] - CustomProvider\[MyTool, list\[MyTool]] -> list\[MyTool]
 
@@ -138,7 +138,7 @@ def get(user_id: str, slug: str | None = ..., tools: list[str | None] = ..., sea
 
 ***
 
-## execute() [#execute]
+### execute() [#execute]
 
 Execute a tool with the provided parameters.  This method calls the Composio API to execute the tool and returns the response.
 
@@ -167,7 +167,7 @@ def execute(slug: str, arguments: Dict, connected_account_id: str | None = ..., 
 
 ***
 
-## proxy() [#proxy]
+### proxy() [#proxy]
 
 Proxy a tool call to the Composio API
 

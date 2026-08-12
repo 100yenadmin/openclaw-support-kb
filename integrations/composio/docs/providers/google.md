@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "8f3ad43e85c28f618e3453f18247a618378f37cfaf355a1e635069ccafd7eef7"
+source_hash: "f6c499c73e3843cd7036ba07fc688b6f74a9279eab777022332636d56acd68d7"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -22,6 +22,8 @@ The Google provider formats Composio tools for [Gemini](https://ai.google.dev/) 
 ### gemini
 
 In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed callables, and the `google-genai` SDK's Automatic Function Calling executes tool calls inside the chat loop for you. In TypeScript, the Google provider transforms Composio tools into Gemini function declarations, and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
+
+Object arguments that declare no properties preserve arbitrary nested keys in both providers. The TypeScript provider also adds `type: "object"` to schema nodes that declare `properties` without a type, which is the shape Gemini expects for object schemas.
 
 **Install**
 
@@ -171,7 +173,7 @@ for event in events:
         print(event.content.parts[0].text)
 ```
 
-# Next [#next]
+## Next [#next]
 
 - [What is a session?](/docs/how-composio-works): How sessions scope users, tools, and auth, and how to reuse them across requests.
 

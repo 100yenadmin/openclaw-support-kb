@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Claude Code Plugin"
 source: "https://docs.composio.dev/docs/claude-code-plugin.md"
-source_hash: "c887e1e7b825a974a014a719aeb1793da187d9c9f52b072689da7c6f9664ef5f"
+source_hash: "cc45c4555c720e8ce5402bee58cb4acc0a8ff40ce139c5dc8f6ae8363a73146f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "claude-code-plugin.md"
@@ -19,9 +19,9 @@ Source: https://docs.composio.dev/docs/claude-code-plugin.md
 
 The **Composio plugin for Claude Code** lets Claude act on 1,000+ apps — send the Slack message, open the Linear issue, check your calendar, draft the email. Your agent decides what to do; Composio handles the rest: OAuth, permissions, and finding the right tool for each task. No API keys, no config files.
 
-> Using Cursor, Codex, Claude Desktop, or another MCP client? See [Composio Connect](/docs/composio-connect).
+> Using Codex? Follow the [Codex setup](/docs/agent-plugins#configure-one-agent). If you explicitly want MCP in Cursor, Claude Desktop, or another MCP client, use [Composio Connect](/docs/composio-connect).
 
-# Install [#install]
+## Install [#install]
 
 #### Add the Composio marketplace
 
@@ -47,7 +47,7 @@ The first time, Claude installs the Composio CLI if it's missing, signs you in w
 
 > Prefer to set things up ahead of time? Run `curl -fsSL https://composio.dev/install | sh` to install the CLI and configure your shell, then open a new terminal and run `composio login`.
 
-# What you can do [#what-you-can-do]
+## What you can do [#what-you-can-do]
 
 Naming the app in your prompt keeps tool search scoped and the run reliable.
 
@@ -71,7 +71,7 @@ In parallel, fetch my last 10 Gmail emails, my open Linear issues, and today's
 Google Calendar events. Redact personal info, then give me a concise summary.
 ```
 
-# Connecting apps [#connecting-apps]
+## Connecting apps [#connecting-apps]
 
 Apps connect on demand — the first task that needs one hands you an OAuth link. To connect an app ahead of time:
 
@@ -81,7 +81,7 @@ Apps connect on demand — the first task that needs one hands you an OAuth link
 
 Works for any of the 1,000+ supported apps — `slack`, `github`, `gmail`, `notion`, `linear`, `hubspot`, and more.
 
-# Team setup [#team-setup]
+## Team setup [#team-setup]
 
 To pre-install the plugin for everyone on your team, add this to your project's `.claude/settings.json`:
 
@@ -102,7 +102,7 @@ To pre-install the plugin for everyone on your team, add this to your project's 
 ```
 Anyone who clones the repo and opens it in Claude Code will be prompted to enable the plugin. See the Claude Code [plugin scopes](https://docs.claude.com/en/docs/claude-code/plugins-reference#plugin-installation-scopes) reference for `user` vs `project` vs `local` scope behavior.
 
-# Updating [#updating]
+## Updating [#updating]
 
 To pull the latest plugin release:
 
@@ -113,11 +113,11 @@ To pull the latest plugin release:
 
 New capabilities usually ship in the Composio CLI itself — `composio upgrade` picks them up without touching the plugin.
 
-# Source code [#source-code]
+## Source code [#source-code]
 
 The plugin is open source: [ComposioHQ/composio-plugin-cc](https://github.com/ComposioHQ/composio-plugin-cc). Issues and PRs welcome.
 
-# Troubleshooting [#troubleshooting]
+## Troubleshooting [#troubleshooting]
 
 For plugin issues — install errors, marketplace not updating — see the [Claude Code plugin troubleshooting docs](https://docs.claude.com/en/docs/claude-code/plugins-reference#common-issues).
 

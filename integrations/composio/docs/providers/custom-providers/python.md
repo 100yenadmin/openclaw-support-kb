@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Python Custom Provider"
 source: "https://docs.composio.dev/docs/providers/custom-providers/python.md"
-source_hash: "b3f001e08cccbe706a109cbac4c4fd0244cdb113d64d6b313e5a4db9a95ca168"
+source_hash: "12abe05cbbd2afee90c66b157879bff98ecfdd75f2d0131c5acea403182ab040"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/custom-providers/python.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/providers/custom-providers/python.md
 
 A **custom provider** adapts Composio tools to the format your AI framework expects, so you can use 1000+ tools with a platform Composio doesn't ship support for. This guide shows you how to build one in Python.
 
-# Provider architecture [#provider-architecture]
+## Provider architecture [#provider-architecture]
 
 A provider does two things:
 
@@ -46,7 +46,7 @@ BaseProvider (Abstract)
     └── [Your Custom Agentic Provider] (Concrete)
 ```
 
-# Quick start [#quick-start]
+## Quick start [#quick-start]
 
 Scaffold a working provider with the `make create-provider` script:
 
@@ -87,7 +87,7 @@ From there:
 3. Implement your provider logic in `composio_<provider-name>/provider.py`.
 4. Test with the demo script: `python <provider-name>_demo.py`.
 
-# Creating a non-agentic provider [#creating-a-non-agentic-provider]
+## Creating a non-agentic provider [#creating-a-non-agentic-provider]
 
 A non-agentic provider extends `NonAgenticProvider` and implements two methods: `wrap_tool` (transform one tool) and `wrap_tools` (transform a collection). Add helper methods to execute tool calls in your platform's format.
 
@@ -150,7 +150,7 @@ class MyAIProvider(NonAgenticProvider[MyAITool, MyAIToolCollection], name="my-ai
         )
 ```
 
-# Creating an agentic provider [#creating-an-agentic-provider]
+## Creating an agentic provider [#creating-an-agentic-provider]
 
 An agentic provider extends `AgenticProvider`. Because the platform calls tools itself, `wrap_tool` receives an `execute_tool` function that you wrap into a callable the framework can invoke directly.
 
@@ -200,11 +200,11 @@ class MyAgentProvider(AgenticProvider[AgentTool, List[AgentTool]], name="my-agen
         return [self.wrap_tool(tool, execute_tool) for tool in tools]
 ```
 
-# Using your custom provider [#using-your-custom-provider]
+## Using your custom provider [#using-your-custom-provider]
 
 Pass an instance of your provider to `Composio`, and every tool you fetch comes back in your format.
 
-## Non-agentic provider [#non-agentic-provider]
+### Non-agentic provider [#non-agentic-provider]
 
 You drive the loop: fetch tools, send them to the platform, then hand the response back to the provider to execute the calls.
 
@@ -239,7 +239,7 @@ result = composio.provider.handle_tool_calls(response=response, user_id="default
 print(result)
 ```
 
-## Agentic provider [#agentic-provider]
+### Agentic provider [#agentic-provider]
 
 The framework runs the loop. Fetch tools, attach them to an agent, and the agent calls them itself.
 
@@ -279,7 +279,7 @@ async def main():
 asyncio.run(main())
 ```
 
-# Best practices [#best-practices]
+## Best practices [#best-practices]
 
 * **Keep providers focused**: each provider integrates with one platform.
 * **Handle errors gracefully**: catch and transform errors from tool execution.

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Organization Management"
 source: "https://docs.composio.dev/reference/api-reference/organization-management.md"
-source_hash: "ca0aea46efe255cd0518429460e9248f4b275682b273f86eb6847b75dbf37eb0"
+source_hash: "847524b784ecb29e56af56b3b311a278353627b1b2e79d48cd83c7f901d4e2a2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/organization-management.md"
@@ -23,7 +23,7 @@ Source: https://docs.composio.dev/reference/api-reference/organization-managemen
 
 Organization Management API endpoints
 
-# Endpoints [#endpoints]
+## Endpoints [#endpoints]
 
 | Method | Path | Endpoint |
 | --- | --- | --- |

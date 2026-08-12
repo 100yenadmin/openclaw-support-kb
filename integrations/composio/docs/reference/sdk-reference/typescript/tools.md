@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/tools.md"
-source_hash: "1de490410fc1d359ae222a5b2620d79380e52edd5afcb02c3f8fa9c2f5057ee6"
+source_hash: "cc34c85fcdedde282a39e6eddc00e4ed11fd3eefc9a3ed6ec6f0efa689225d7f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/tools.md"
@@ -17,7 +17,7 @@ Local KB namespace: composio
 Source: https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 
 
-# Usage [#usage]
+## Usage [#usage]
 
 Access this class through the `composio.tools` property:
 
@@ -26,9 +26,9 @@ const composio = new Composio({ apiKey: 'your-api-key' });
 const result = await composio.tools.list();
 ```
 
-# Methods [#methods]
+## Methods [#methods]
 
-## execute() [#execute]
+### execute() [#execute]
 
 Executes a given tool with the provided parameters.
 
@@ -109,7 +109,7 @@ const result = await composio.tools.execute('HACKERNEWS_GET_FRONTPAGE', {
 
 ***
 
-## executeSessionTool() [#executesessiontool]
+### executeSessionTool() [#executesessiontool]
 
 Executes a tool based on a tool router session.
 
@@ -134,7 +134,7 @@ async executeSessionTool(toolSlug: string, body: ToolExecuteMetaParams, modifier
 
 ***
 
-## get() [#get]
+### get() [#get]
 
 Get a list of tools from Composio based on filters.
 This method fetches the tools from the Composio API and wraps them using the provider.
@@ -192,7 +192,7 @@ const emailTools = await composio.tools.get('default', {
 
 ***
 
-## getInput() [#getinput]
+### getInput() [#getinput]
 
 Fetches the input parameters for a given tool.
 
@@ -226,7 +226,7 @@ console.log(inputParams.schema);
 
 ***
 
-## getRawComposioToolBySlug() [#getrawcomposiotoolbyslug]
+### getRawComposioToolBySlug() [#getrawcomposiotoolbyslug]
 
 Retrieves a specific tool by its slug from the Composio API.
 
@@ -291,7 +291,7 @@ console.log({
 
 ***
 
-## getRawComposioTools() [#getrawcomposiotools]
+### getRawComposioTools() [#getrawcomposiotools]
 
 Lists Composio API tools available to the SDK.
 
@@ -365,7 +365,7 @@ const authSpecificTools = await composio.tools.getRawComposioTools({
 
 ***
 
-## getRawToolRouterSessionTools() [#getrawtoolroutersessiontools]
+### getRawToolRouterSessionTools() [#getrawtoolroutersessiontools]
 
 Fetches tools exposed by a tool router session.
 This includes helper/meta tools plus any tools preloaded into the session.
@@ -396,7 +396,7 @@ console.log(sessionTools);
 
 ***
 
-## getToolsEnum() [#gettoolsenum]
+### getToolsEnum() [#gettoolsenum]
 
 Fetches the list of all available tools in the Composio SDK.
 
@@ -427,7 +427,7 @@ console.log(toolsEnum.items);
 
 ***
 
-## proxyExecute() [#proxyexecute]
+### proxyExecute() [#proxyexecute]
 
 Proxies a custom request to a toolkit/integration.
 
