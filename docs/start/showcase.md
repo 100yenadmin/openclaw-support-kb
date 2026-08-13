@@ -327,7 +327,7 @@ Chinese learning engine with pronunciation feedback and study flows via OpenClaw
 
 X post analysis pipeline
 
-  **@andrewjiang** • `analysis` `x` `pipeline`
+  **@community-member** • `analysis` `x` `pipeline`
 
 Pulled 4 million posts across 100 top X accounts and turned them into a queryable analysis pipeline.
 
@@ -459,7 +459,7 @@ OpenClaw found the HomePods on the local network and wrote itself a skill to con
 
 $35 holo cube interface
 
-  **@andrewjiang** • `hardware` `display` `fun`
+  **@community-member** • `hardware` `display` `fun`
 
 A cheap holographic cube as the agent's physical face on the desk.
 
