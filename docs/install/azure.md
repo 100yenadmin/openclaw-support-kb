@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Azure"
 source: "https://docs.openclaw.ai/install/azure"
-source_hash: "796d3039fac0e90dcdf4abdb97cecf289b4203d24af65cb3d8da7f63241c0c20"
+source_hash: "8316c53e51958e0f8918ba017d6e339978200cf3feb4fc93a73083ce25fb3ad0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/azure.md"
@@ -298,6 +298,7 @@ Verify the gateway
     After onboarding completes:
 
     ```bash
+    openclaw doctor --json
     openclaw gateway status
     ```
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Trusted proxy auth"
 source: "https://docs.openclaw.ai/gateway/trusted-proxy-auth"
-source_hash: "3557dc7fd388a80eab284111a2310a1217a5050325fe147e84d7b54b12cf7dd7"
+source_hash: "46eef43a87dfc88e3030eb940c7c4e89318b9a5acc22dafd90cc84bf2b93549f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/trusted-proxy-auth.md"
@@ -74,6 +74,9 @@ Authorize
 
     auth: {
       mode: "trusted-proxy",
+      identityScopes: {
+        "admin@company.org": ["operator.admin"],
+      },
       trustedProxy: {
         // Header containing authenticated user identity (required)
         userHeader: "x-forwarded-user",
@@ -125,6 +128,10 @@ ParamField
   Must be `"trusted-proxy"`.
 
 ParamField
+">
+  Connection-only operator scopes granted to verified trusted-proxy or Tailscale identities. Email keys match case-insensitively; unknown scope names fail config validation.
+
+ParamField
 
   Header name containing the authenticated user identity.
 
@@ -151,6 +158,37 @@ ParamField
 Warning
 
 Only enable `allowLoopback` when the local reverse proxy is the intended trust boundary. Any local process that can connect to the Gateway can try to send proxy identity headers, so keep direct Gateway access private to the host and require proxy-owned headers such as `x-forwarded-proto`, or a signed assertion header where your proxy supports one.
+
+## Per-identity scope grants
+
+Use `gateway.auth.identityScopes` to give selected verified users additional
+operator scopes without widening their persistent device grant:
+
+```json5
+{
+  gateway: {
+    auth: {
+      mode: "trusted-proxy",
+      identityScopes: {
+        "admin@example.com": ["operator.admin"],
+        "operator@example.com": ["operator.read", "operator.write"],
+      },
+      trustedProxy: {
+        userHeader: "x-forwarded-user",
+      },
+    },
+  },
+}
+```
+
+The map key is the verified trusted-proxy identity or Tailscale WhoIs login.
+Email matching is case-insensitive; non-email identities match exactly. On each
+connection, OpenClaw adds the matching identity scopes to the device-authorized
+scopes, then applies an explicit `x-openclaw-scopes` connection cap.
+
+These grants are session-only. They do not create or update device pairing
+records and do not trigger device scope-upgrade requests. Token, password, and
+no-auth connections do not carry a verified identity and never receive a grant.
 
 ## Automatic device approval
 
@@ -179,7 +217,7 @@ The default is `enabled: false`. When enabled, all of these rules apply:
 1. The WebSocket must have authenticated through the `trusted-proxy` method with a non-empty user identity that passed `allowUsers` when an allowlist is configured. Token, password, Tailscale, and unauthenticated connections never use this policy.
 2. Only a new Control UI or WebChat browser device can be approved automatically. Any request for an existing device, including a scope upgrade, remains pending for manual approval with `openclaw devices approve <requestId>`.
 3. The device is approved with role `operator`. If the connect request includes scopes, the grant is the exact intersection of the requested scopes and `deviceAutoApprove.scopes`. If the request omits scopes, the configured list is granted; when that list is omitted, it defaults to `operator.read`, `operator.write`, and `operator.approvals`. The resulting grant is then additionally capped by the connection's [`x-openclaw-scopes`](#control-ui-pairing-behavior) proxy header when present, so a proxy that narrows a user's scopes also limits the **persistent** device grant, not just the session — a present-but-empty header yields no scopes. This cap applies even when the client omits its own scope list.
-4. `operator.admin` is allowed only through explicit listing in `deviceAutoApprove.scopes`. When listed, every proxy-authenticated user can request and automatically receive full admin on a new browser device; requests without scopes receive full admin automatically. `openclaw security audit` reports the CRITICAL `gateway.trusted_proxy_device_auto_approve_admin` finding, and the Gateway logs a warning once at startup. Prefer manual admin approval with `openclaw devices approve` or `openclaw devices rotate` until per-identity roles are available.
+4. `operator.admin` is allowed only through explicit listing in `deviceAutoApprove.scopes`. When listed, every proxy-authenticated user can request and automatically receive full admin on a new browser device; requests without scopes receive full admin automatically. `openclaw security audit` reports the CRITICAL `gateway.trusted_proxy_device_auto_approve_admin` finding, and the Gateway logs a warning once at startup. Prefer a targeted [`identityScopes`](#per-identity-scope-grants) admin grant when selected verified users need session admin without a persistent admin device grant.
 
 Warning
 
@@ -191,17 +229,17 @@ When `gateway.auth.mode = "trusted-proxy"` is active and the request passes trus
 
 Scope implications:
 
-- Device-less Control UI WebSocket sessions connect but receive no operator scopes by default. OpenClaw clears the requested scope list to `[]` so a session not bound to an approved paired device/token cannot self-declare permissions.
+- Device-less Control UI WebSocket sessions cannot self-declare permissions. OpenClaw clears their requested scope list to `[]`, then applies any matching server-side `identityScopes` grant after proxy identity verification.
 - If methods fail with `missing scope` after a successful WebSocket connect, use HTTPS so the browser can generate device identity and complete pairing. See [Control UI insecure HTTP](/web/control-ui#insecure-http).
 - Older configs that still contain the retired
   `gateway.controlUi.dangerouslyDisableDeviceAuth=true` key use the bounded
   [Control UI upgrade migration](/web/control-ui#device-pairing-first-connection).
 
-Reverse-proxy scope capping: if your proxy sends `x-openclaw-scopes` on the Control UI WebSocket upgrade request, OpenClaw caps the session scopes to the intersection of the requested scopes and the declared scopes. This header does not grant scopes; it only narrows what the session can hold. When `deviceAutoApprove.enabled` is true, the same cap also applies to the persistent device grant written by [automatic device approval](#automatic-device-approval), so an auto-approved device never holds more than the proxy declared.
+Reverse-proxy scope capping: if your proxy sends `x-openclaw-scopes` on the Control UI WebSocket upgrade request, OpenClaw caps device enrollment or upgrade requests and the final union of device-authorized and identity-granted session scopes. This header does not grant scopes; it only narrows authority. When `deviceAutoApprove.enabled` is true, the cap also limits the persistent device grant written by [automatic device approval](#automatic-device-approval).
 
 Implications:
 
-- Pairing is no longer the primary gate for device-less Control UI access. When `deviceAutoApprove.enabled` is true, the proxy identity also becomes the approval gate for new browser device enrollment.
+- Pairing is no longer the primary gate for device-less Control UI access. A matching `identityScopes` entry can authorize that session without creating a pairing record. When `deviceAutoApprove.enabled` is true, the proxy identity also becomes the approval gate for new browser device enrollment.
 - Your reverse proxy auth policy and `allowUsers` become the effective access control.
 - Keep gateway ingress locked to trusted proxy IPs only (`gateway.trustedProxies` + firewall).
 
@@ -549,7 +587,7 @@ Connection succeeds but methods report missing scope
 
     Common causes:
 
-    - Device-less Control UI session: trusted-proxy auth can admit the WebSocket connection without device identity, but OpenClaw clears scopes on device-less sessions by design.
+    - Device-less Control UI session: OpenClaw clears self-declared scopes by design, and no matching `gateway.auth.identityScopes` grant was configured.
     - Custom backend client: the retired Control UI upgrade input never grants access to arbitrary backend or CLI-shaped WebSocket clients.
     - Overly narrow `x-openclaw-scopes`: if your proxy injects this header on the Control UI WebSocket upgrade request, the session scopes are capped to that set. An empty header value yields no scopes.
 

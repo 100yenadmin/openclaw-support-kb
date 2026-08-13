@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills config"
 source: "https://docs.openclaw.ai/tools/skills-config"
-source_hash: "31ab34c40c558720b4921a71113d02c27a9e16f2d8e8bc1dfe96ba283729f56e"
+source_hash: "cdffe60073799a8296778fe45840e9b65f8bdc41a044b12e2af45d86a1c075d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills-config.md"
@@ -339,8 +339,9 @@ ParamField
   `off` disables autonomous capture while keeping the durable-instruction
   suggestion nudge. `propose` creates pending proposals from corrections and
   substantial completed work. `auto` sends the same captures through the normal
-  scanner-gated Workshop apply path. User-prompted skill creation, `/learn`, and
-  manual history scan continue to work in every mode.
+  scanner-gated Workshop apply path and runs daily collection cleanup that can
+  rewrite or drop eligible writable skills. User-prompted skill creation,
+  `/learn`, and manual history scan continue to work in every mode.
 
 See [Self-learning](/tools/self-learning) for eligibility, privacy, cost,
 proposal-only permissions, and troubleshooting.

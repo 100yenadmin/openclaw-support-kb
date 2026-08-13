@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepInfra"
 source: "https://docs.openclaw.ai/providers/deepinfra"
-source_hash: "b99c240a3adfaed904fe7d2f10faeb427093e700020538e292b0f741dd8b08fb"
+source_hash: "0e57598b614a18db6f0fce587d27c9d9a7209312fab033628ce1beef2a2e1109"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepinfra.md"
@@ -45,7 +45,7 @@ export DEEPINFRA_API_KEY="<your-deepinfra-api-key>" # pragma: allowlist secret
 
 ```json5
 {
-  env: { DEEPINFRA_API_KEY: "<your-deepinfra-api-key>" }, // pragma: allowlist secret
+  env: { vars: { DEEPINFRA_API_KEY: "<your-deepinfra-api-key>" } }, // pragma: allowlist secret
   agents: {
     defaults: {
       model: { primary: "deepinfra/deepseek-ai/DeepSeek-V4-Flash" },

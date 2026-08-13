@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode"
 source: "https://docs.openclaw.ai/providers/opencode"
-source_hash: "6c6fdac525b39db88660169d7ef16108d2c3dff38e41877ffb385bd0c8ddde58"
+source_hash: "49958e65924d0e2890706422f5d9465ef1f43f811fab5873b12c1465b6a52735"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode.md"
@@ -119,7 +119,7 @@ Verify models are available
 
 ```json5
 {
-  env: { OPENCODE_API_KEY: "sk-..." },
+  env: { vars: { OPENCODE_API_KEY: "sk-..." } },
   agents: { defaults: { model: { primary: "opencode/gpt-5.6-sol" } } },
 }
 ```

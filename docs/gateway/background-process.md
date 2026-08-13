@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "0c7ab2fb67b71bb8ed82b711ae25f80897093c0f1b6bd7d313259d5e6b509a71"
+source_hash: "2fea08fd4bce57370610d3c6a48fcb0d32c4e266c2af3d112d31651faa804bf8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -19,24 +19,24 @@ OpenClaw runs shell commands through the `exec` tool and keeps long-running task
 
 Parameters:
 
-| Parameter    | Description                                                                                                                                                |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `command`    | Required. Shell command to run.                                                                                                                            |
-| `workdir`    | Working directory; omit to use the default cwd.                                                                                                            |
-| `env`        | Extra environment variables for the command.                                                                                                               |
-| `yieldMs`    | Milliseconds to wait before backgrounding (default 10000).                                                                                                 |
-| `background` | Run in background immediately.                                                                                                                             |
-| `timeout`    | Timeout in seconds (default `tools.exec.timeoutSeconds`); kills the process on expiry. Set `timeout: 0` to disable the exec process timeout for that call. |
-| `pty`        | Run in a pseudo-terminal when available (TTY-required CLIs, coding agents).                                                                                |
-| `elevated`   | Run outside the sandbox if elevated mode is enabled/allowed (`gateway` by default, or `node` when the exec target is `node`).                              |
-| `host`       | Exec target: `auto`, `sandbox`, `gateway`, or `node`.                                                                                                      |
-| `node`       | Node id/name, used with `host: "node"`.                                                                                                                    |
+| Parameter        | Description                                                                                                                                                       |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `command`        | Required. Shell command to run.                                                                                                                                   |
+| `workdir`        | Working directory; omit to use the default cwd.                                                                                                                   |
+| `env`            | Extra environment variables for the command.                                                                                                                      |
+| `yieldMs`        | Milliseconds to wait before backgrounding (default 10000).                                                                                                        |
+| `background`     | Run in background immediately.                                                                                                                                    |
+| `timeoutSeconds` | Timeout in seconds (default `tools.exec.timeoutSeconds`); kills the process on expiry. Set `timeoutSeconds: 0` to disable the exec process timeout for that call. |
+| `pty`            | Run in a pseudo-terminal when available (TTY-required CLIs, coding agents).                                                                                       |
+| `elevated`       | Run outside the sandbox if elevated mode is enabled/allowed (`gateway` by default, or `node` when the exec target is `node`).                                     |
+| `host`           | Exec target: `auto`, `sandbox`, `gateway`, or `node`.                                                                                                             |
+| `node`           | Node id/name, used with `host: "node"`.                                                                                                                           |
 
 Behavior:
 
 - Foreground runs return retained output directly and disclose when earlier output exceeded the aggregate cap.
 - When backgrounded (explicit or via `yieldMs` timeout), the tool returns `status: "running"` + `sessionId` and a short output tail.
-- Backgrounded and `yieldMs` runs inherit `tools.exec.timeoutSeconds` unless the call passes an explicit `timeout`.
+- Backgrounded and `yieldMs` runs inherit `tools.exec.timeoutSeconds` unless the call passes an explicit `timeoutSeconds`.
 - Output stays in memory up to the per-session aggregate cap until the session is polled or cleared.
 - Finished sessions expire after their configured TTL. The registry also retains at most 50 finished sessions and 2,000,000 total retained output characters, evicting the oldest records first. The newest completed session retains its capped per-session aggregate even when that record alone exceeds the global limit.
 - If the `process` tool is disallowed, `exec` runs synchronously and ignores `yieldMs`/`background`.

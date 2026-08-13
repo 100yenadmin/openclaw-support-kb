@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI setup reference"
 source: "https://docs.openclaw.ai/start/wizard-cli-reference"
-source_hash: "bb7bd19b13ab940ca66d6550873aadc17cdf76c87ed73abd6a85632822f3d68b"
+source_hash: "32db16d18e9d5845b3f48e1fef17e5a83cfe76990ee1f5532484cd42f8b92467"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-reference.md"
@@ -234,7 +234,8 @@ OpenAI API key
     Uses `OPENAI_API_KEY` if present or prompts for a key, then stores the credential in auth profiles.
 
     On a fresh setup with no primary model, sets `agents.defaults.model` to
-    `openai/gpt-5.6`; the bare direct-API model id resolves to the Sol tier.
+    `openai/gpt-5.6-sol`. The bare direct-API `openai/gpt-5.6` alias remains
+    supported and resolves to the same tier.
 
     Adding or reauthenticating OpenAI preserves an existing explicit primary
     model, including `openai/gpt-5.5`. If the account does not expose GPT-5.6,
@@ -375,7 +376,7 @@ Credential storage mode:
 - In non-interactive mode, `--secret-input-mode ref` creates only env-backed references for new credentials.
   - Set the provider env var in the onboarding process environment when adding a new credential.
   - Inline key flags (for example `--openai-api-key`) require that env var to be set; otherwise onboarding fails fast.
-  - Existing resolvable named auth profiles are reused unchanged, including existing `env`, `file`, and `exec` references; no new `apiKey` or `keyRef` is written and no additional provider env var is required.
+  - Existing resolvable named auth profiles are reused unchanged, including existing `env`, `file`, `exec`, and `store` references; no new `apiKey` or `keyRef` is written and no additional provider env var is required.
   - For new custom-provider credentials, non-interactive `ref` mode stores `models.providers.<id>.apiKey` as `{ source: "env", provider: "default", id: "CUSTOM_API_KEY" }`.
   - In that custom-provider case, `--custom-api-key` requires `CUSTOM_API_KEY` to be set; otherwise onboarding fails fast.
   - Existing plaintext profile credentials remain unchanged; reference mode does not migrate them. Run `openclaw secrets configure --apply`, then `openclaw secrets audit --check`. See [Secrets management](/gateway/secrets).
@@ -442,7 +443,7 @@ The results screen lists the detected applications and shows: "App names were ma
 powerful and full system access is risky):
 
 ```bash
-openclaw onboard --non-interactive --accept-risk \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice apiKey \
   --anthropic-api-key "$ANTHROPIC_API_KEY"
 ```

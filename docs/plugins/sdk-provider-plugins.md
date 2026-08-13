@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "64222b5bbccc28079f5b44d587993743e163f51f1a901be708c5eae5294275ed"
+source_hash: "69976f7bd2d1990bd73e0f413621934be974b6d6d7355369197840076bfed3f5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -630,14 +630,18 @@ Native transport identity
             session_id: ctx.sessionId ?? "",
             turn_id: ctx.turnId,
           },
-        }),
-        resolveWebSocketSessionPolicy: (ctx) => ({
-          headers: {
-            "x-session-id": ctx.sessionId ?? "",
+          websocket: {
+            headers: {
+              "x-session-id": ctx.sessionId ?? "",
+            },
+            degradeCooldownMs: 60_000,
           },
-          degradeCooldownMs: 60_000,
         }),
         ```
+
+        The older `resolveWebSocketSessionPolicy` hook remains supported but is
+        deprecated. Move its fields under `resolveTransportTurnState.websocket`;
+        fields from the new hook take precedence during migration.
 
 
 Usage and billing
@@ -717,8 +721,8 @@ Common provider hooks
       | `prepareExtraParams` | Default request params |
       | `createStreamFn` | Fully custom StreamFn transport |
       | `wrapStreamFn` | Custom headers/body wrappers on the normal stream path |
-      | `resolveTransportTurnState` | Native per-turn headers/metadata |
-      | `resolveWebSocketSessionPolicy` | Native WS session headers/cool-down |
+      | `resolveTransportTurnState` | Native per-turn headers/metadata and WebSocket headers/cool-down |
+      | `resolveWebSocketSessionPolicy` | Deprecated WebSocket compatibility hook; use `resolveTransportTurnState` |
       | `formatApiKey` | Custom runtime token shape |
       | `loginOAuth` | Callback-based OAuth login for the session SDK `AuthStorage` API |
       | `refreshOAuth` | Custom OAuth refresh |

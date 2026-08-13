@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "NVIDIA"
 source: "https://docs.openclaw.ai/providers/nvidia"
-source_hash: "3a0cde8495b64c7428906e026eb2cac0092a535d7923a763fbbea95996cf8211"
+source_hash: "779365c51209e5fe7b8a99bd7d05efbb4cab5812cf0c3ca72726cf194895b64f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/nvidia.md"
@@ -59,7 +59,7 @@ Warning
 
 ```json5
 {
-  env: { NVIDIA_API_KEY: "nvapi-..." },
+  env: { vars: { NVIDIA_API_KEY: "nvapi-..." } },
   models: {
     providers: {
       nvidia: {

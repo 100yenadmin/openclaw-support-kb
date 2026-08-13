@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Browser Provider Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/browser-provider-plugin"
-source_hash: "ad50b255ab70ba2556c2a3233a66f1080aea14b568474bf1e6f028ca8c493250"
+source_hash: "4d7d9993828e66a22c62ed0e059dd8d4b2ec02a52914a917865c010e21b4c03c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/browser-provider-plugin.md"
@@ -139,7 +139,7 @@ def get_setup_schema(self) -> dict:
              "prompt": "My Backend API key",
              "url": "https://mybackend.example"},
         ],
-        "post_setup": "agent_browser",   # auto-installs the agent-browser npm dep
+        "post_setup": "agent_browser",   # ensures local Chromium is installed (agent-browser itself resolves via npx)
     }
 ```
 

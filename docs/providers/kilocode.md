@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Kilo Gateway"
 source: "https://docs.openclaw.ai/providers/kilocode"
-source_hash: "1795ee543f4e632f13d16dfe33b009e6f58b4e88f62fdeb6f028146104d04e14"
+source_hash: "e9be521528d6b0902a5473b5a0125073be5a5c558167924c660eee1aacd9290a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/kilocode.md"
@@ -79,7 +79,7 @@ Any model on the gateway is addressable as `kilocode/<upstream-id>` (for example
 
 ```json5
 {
-  env: { KILOCODE_API_KEY: "<your-kilocode-api-key>" }, // pragma: allowlist secret
+  env: { vars: { KILOCODE_API_KEY: "<your-kilocode-api-key>" } }, // pragma: allowlist secret
   agents: {
     defaults: {
       model: { primary: "kilocode/kilo-auto/balanced" },

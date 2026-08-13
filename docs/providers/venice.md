@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Venice AI"
 source: "https://docs.openclaw.ai/providers/venice"
-source_hash: "9b5ed0affeb145d73bd962e0e9fccb546f2b2240e845401a3a97483b21fc1558"
+source_hash: "8ed54f0a36850ce16956aba344be70c403bcfa447d55a5cda32e76c49e874c6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/venice.md"
@@ -72,7 +72,7 @@ Environment variable
 Non-interactive
 
         ```bash
-        openclaw onboard --non-interactive \
+        openclaw onboard --non-interactive --accept-risk --skip-health \
           --auth-choice venice-api-key \
           --venice-api-key "vapi_xxxxxxxxxxxx"
         ```
@@ -254,7 +254,7 @@ Config file example
 
     ```json5
     {
-      env: { VENICE_API_KEY: "vapi_..." },
+      env: { vars: { VENICE_API_KEY: "vapi_..." } },
       agents: { defaults: { model: { primary: "venice/zai-org-glm-4.7" } } },
       models: {
         mode: "merge",

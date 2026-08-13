@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Sessions (prev Tool Router)"
 source: "https://docs.composio.dev/reference/api-reference/tool-router.md"
-source_hash: "5251e803f8920abd84dbe9f0921c28da355b2c7da82002e871ce714e46bb4d6b"
+source_hash: "459738d9a2fc70334a9f0f01ba6e64cb5bf436a5a7ee7a5cfbd6f9da98999f26"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/tool-router.md"
@@ -52,5 +52,11 @@ See [Configuring sessions](/docs/configuring-sessions) for toolkits, auth config
 | `POST` | `/api/v3.1/tool_router/session/{session_id}/mounts/{mount_id}/download_url` | [Create a presigned download URL for a mount file](/reference/api-reference/tool-router/postToolRouterSessionBySessionIdMountsByMountIdDownloadUrl) |
 | `POST` | `/api/v3.1/tool_router/session/{session_id}/mounts/{mount_id}/upload_url` | [Create a presigned upload URL for a mount file](/reference/api-reference/tool-router/postToolRouterSessionBySessionIdMountsByMountIdUploadUrl) |
 | `POST` | `/api/v3.1/tool_router/session/{session_id}/mounts/{mount_id}/delete` | [Delete a file from a session mount](/reference/api-reference/tool-router/postToolRouterSessionBySessionIdMountsByMountIdDelete) |
+
+---
+
+
+# Toolkits
+
 
 ---

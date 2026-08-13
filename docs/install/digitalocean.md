@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
-source_hash: "b614c3d190d34e863e2a81e2c86e8dd4c66c98fdad215bec5e0f978e6bf86b45"
+source_hash: "957c9e493520b86b464195b43a9f9a5e712fccc83eb67aa9506a6d2e011d140d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/digitalocean.md"
@@ -93,11 +93,11 @@ Run onboarding
 Add swap (recommended for 1 GB Droplets)
 
     ```bash
-    fallocate -l 2G /swapfile
-    chmod 600 /swapfile
-    mkswap /swapfile
-    swapon /swapfile
-    echo '/swapfile none swap sw 0 0' >> /etc/fstab
+    sudo fallocate -l 2G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
     ```
 
 
@@ -151,9 +151,13 @@ These survive Droplet reboots. To take a portable snapshot:
 
 ```bash
 openclaw backup create
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
 ```
 
-DigitalOcean snapshots back up the whole Droplet; `openclaw backup create` is portable across hosts.
+DigitalOcean snapshots back up the whole Droplet; `openclaw backup create` is
+portable across hosts. Restore verifies and extracts into a fresh staging
+directory; activation is a separate offline step. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the rollback warnings and activation sequence.
 
 ## 1 GB RAM tips
 

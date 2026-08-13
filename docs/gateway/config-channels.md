@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration — channels"
 source: "https://docs.openclaw.ai/gateway/config-channels"
-source_hash: "773ea8c2bb18d75a00d5721a0cda3de96d28cd4b52364a84c9d01d60f34b84c3"
+source_hash: "cb8dbf14f4453259d41bddc824113cc64032ae017ccf2d9a0f4739c4cc3a94f8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/config-channels.md"
@@ -120,11 +120,9 @@ WhatsApp runs through the gateway's web channel (Baileys Web). It starts automat
 
 ```json5
 {
-  web: {
-    enabled: true,
-  },
   channels: {
     whatsapp: {
+      enabled: true,
       dmPolicy: "pairing", // pairing | allowlist | open | disabled
       allowFrom: ["+15555550123", "+447700900123"],
       textChunkLimit: 4000,
@@ -201,12 +199,6 @@ Multi-account WhatsApp
       actions: { reactions: true, sendMessage: true },
       reactionNotifications: "own", // off | own | all
       mediaMaxMb: 100,
-      retry: {
-        attempts: 3,
-        minDelayMs: 400,
-        maxDelayMs: 30000,
-        jitter: 0.1,
-      },
       network: {
         autoSelectFamily: true,
         dnsResultOrder: "ipv4first",
@@ -484,9 +476,12 @@ TOKEN
 - Slack detects Enterprise Grid org-wide installations automatically from the
   bot token with `auth.test`; no installation-mode setting is required.
   Enterprise DMs support `disabled`, `open`, `allowlist`, and workspace-scoped
-  `pairing`. Channel and user policies must use stable Slack IDs; mutable names
-  and unsupported channel prefixes fail startup. Mention-pattern channel
-  scopes and static route-binding peers use workspace-qualified Slack targets.
+  `pairing`. Channel policies require `team:<team-id>:channel:<channel-id>`.
+  User policies accept either an org-wide stable user ID or
+  `team:<team-id>:user:<user-id>` for workspace scope. Mutable names and
+  unsupported channel prefixes fail startup.
+  Mention-pattern channel scopes and static route-binding peers use
+  workspace-qualified Slack targets.
   Direct Socket Mode or HTTP messages, mentions, workspace-qualified actions,
   deferred delivery, proactive sends, supported event listeners and
   interactions, static route bindings, and Slack-native approvals from

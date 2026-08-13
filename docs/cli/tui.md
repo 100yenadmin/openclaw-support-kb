@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "de69aac9116a03c24cf0ea81089941f1d25b03dd5831c9dedee3e0f326c9136e"
+source_hash: "1710b3d250456dcbbae5d31397cb052b3be8e320fc66ec8d78289fe086a1bb2b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -72,7 +72,7 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
   ambiguous, the CLI prints candidate names and longer ID prefixes without
   attaching to either session.
 - With no URL/host target or explicit `--url`, `tui` resolves configured Gateway
-  auth SecretRefs for token/password auth when possible (`env`/`file`/`exec`
+  auth SecretRefs for token/password auth when possible (`env`/`file`/`exec`/`store`
   providers).
 - With no explicit URL or port, `tui` follows the active local Gateway port
   recorded by the running Gateway. Explicit `--url`, `OPENCLAW_GATEWAY_URL`,

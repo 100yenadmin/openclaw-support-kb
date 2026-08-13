@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "3874f2a27ec565963aa39043e659a69f43e20dd2467fc7a9f41f65f7bc016094"
+source_hash: "0766afe402c5ef2fe320eee85469c97c7c61ea9d5de8a1ea31a70dc7245105a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -494,7 +494,7 @@ recall instead, run `openclaw hooks disable session-memory`. Enable both only
 when you intentionally want both representations.
 
 Ordinary model-invoked session transcript search obeys
-[`tools.sessions.visibility`](/gateway/config-tools#toolssessions). The default
+[`tools.sessions.visibility`](/gateway/config-tools#tools-sessions). The default
 `tree` visibility exposes the current session, sessions it spawned, and
 same-agent group sessions watched through ambient group awareness. Other
 unrelated sessions require `agent` visibility (or `all` only when cross-agent

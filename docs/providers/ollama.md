@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "518cb2cd6fddeef77bbd160f3f8938d568b5b4a14b95faa4853114a92cede960"
+source_hash: "106b12f58f5da3489a8b52c4af297f74113349647012619e76b8191927055f0e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -113,11 +113,10 @@ Verify
     Non-interactive:
 
     ```bash
-    openclaw onboard --non-interactive \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --auth-choice ollama \
       --custom-base-url "http://ollama-host:11434" \
-      --custom-model-id "qwen3.5:27b" \
-      --accept-risk
+      --custom-model-id "qwen3.5:27b"
     ```
 
     `--custom-base-url` and `--custom-model-id` are optional; omitting them uses the local default host and the `gemma4` suggested model.
@@ -463,9 +462,16 @@ timeout and cap `num_ctx`:
   },
   tools: {
     media: {
+      models: [
+        {
+          provider: "ollama",
+          model: "qwen2.5vl:7b",
+          timeoutSeconds: 300,
+          capabilities: ["image"],
+        },
+      ],
       image: {
         timeoutSeconds: 180,
-        models: [{ provider: "ollama", model: "qwen2.5vl:7b", timeoutSeconds: 300 }],
       },
     },
   },
@@ -1097,7 +1103,7 @@ Thinking control
         defaults: {
           models: {
             "ollama/gemma4": {
-              thinking: "low",
+              params: { thinking: "low" },
             },
           },
         },
@@ -1194,8 +1200,10 @@ Streaming configuration
     For native requests, thinking control is forwarded directly: `/think off`
     and `openclaw agent --thinking off` send top-level `think: false` unless
     an explicit `params.think`/`params.thinking` is configured; `/think
-    low|medium|high` send the matching effort string; `/think max` maps to
-    Ollama's highest effort, `think: "high"`.
+    low|medium|high` send the matching effort string. Verified full-effort
+    Ollama Cloud families such as GLM 5.2 and DeepSeek V4 also send native
+    `think: "max"` for `/think max`; other models and local servers keep the
+    compatible `think: "high"` mapping.
 
 
 Tip

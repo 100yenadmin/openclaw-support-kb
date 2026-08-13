@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "18ff91bbdba02e60d0890169e67cff004f67766c6a048004a53a97210fc7a1ab"
+source_hash: "33244bcce67ee6d37f054d18fa8abcd96e72266119491abdcac9f77984270760"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -181,21 +181,6 @@ curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -
 CardGroup
 
 
-Docker
-
-    Containerized or headless deployments.
-
-
-Podman
-
-    Rootless container alternative to Docker.
-
-
-Nix
-
-    Declarative install via Nix flake.
-
-
 Ansible
 
     Automated fleet provisioning.
@@ -204,6 +189,26 @@ Ansible
 Bun
 
     Optional dependency installer and package-script runner.
+
+
+ClawDock
+
+    Community Docker Compose setup and shell helpers.
+
+
+Docker
+
+    Containerized or headless deployments.
+
+
+Nix
+
+    Declarative install via Nix flake.
+
+
+Podman
+
+    Rootless container alternative to Docker.
 
 
 ## Verify the install
@@ -224,15 +229,16 @@ If you want managed startup after install:
 
 Deploy OpenClaw on a cloud server or VPS. See [Linux server](/vps) for the full
 provider picker (DigitalOcean, Hetzner, Hostinger, Fly.io, GCP, Azure, Railway,
-Northflank, Oracle Cloud, Raspberry Pi, and more), or deploy declaratively on
-[Render](/install/render).
+Northflank, Oracle Cloud, Raspberry Pi, and more), deploy declaratively on
+[Render](/install/render), or try the experimental [Cloudflare Containers](/install/cloudflare)
+template.
 
 CardGroup
 
 
-VPS
+Cloudflare
 
-    Pick a provider.
+    Experimental Worker + Container deployment.
 
 
 Docker VM
@@ -245,9 +251,29 @@ Kubernetes
     K8s deployment.
 
 
-## Update, migrate, or uninstall
+macOS VM
+
+    Isolated local or hosted macOS deployment.
+
+
+Upstash Box
+
+    Managed Linux host with SSH-tunneled access.
+
+
+VPS
+
+    Pick a provider.
+
+
+## Back up, update, migrate, or uninstall
 
 CardGroup
+
+
+Backups
+
+    Create, verify, and restore state archives.
 
 
 Updating

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Environment variables"
 source: "https://docs.openclaw.ai/help/environment"
-source_hash: "7bfcd2d6b33bd9aa6a21b47b6613e40c4ed3bfb4efd29224dae2ae278320a175"
+source_hash: "3eefbfef0453b8233cca29955d1a568426fea2b41d740676056d56f574fa1c59"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/environment.md"
@@ -107,20 +107,20 @@ See [Workspace `.env` files](/gateway/security#workspace-env-files) for the secu
 
 ## Config `env` block
 
-Two equivalent ways to set inline env vars (both are non-overriding):
+Set inline env vars under `env.vars` (values are non-overriding):
 
 ```json5
 {
   env: {
-    OPENROUTER_API_KEY: "sk-or-...",
     vars: {
+      OPENROUTER_API_KEY: "sk-or-...",
       GROQ_API_KEY: "gsk-...",
     },
   },
 }
 ```
 
-The config `env` block accepts literal string values only. It does not expand
+The config `env.vars` block accepts literal string values only. It does not expand
 `file:...` values; for example, `XAI_API_KEY: "file:secrets/xai-api-key.txt"`
 is passed to providers as that exact string.
 

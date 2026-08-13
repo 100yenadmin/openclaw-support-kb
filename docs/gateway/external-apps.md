@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway integrations for external apps"
 source: "https://docs.openclaw.ai/gateway/external-apps"
-source_hash: "06f3093be9b1f3230fcee079bc2e5e85d84b1db65ce3e7706dafed9486c7ef1c"
+source_hash: "9659876bd34c6c1af50368788fbbb8229a8c5fdb0ce41b5ccea1c95446f9447f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/external-apps.md"
@@ -68,24 +68,31 @@ host-neutral suspension handshake:
 4. If it is `ready`, save the returned `suspensionId`, then freeze or snapshot
    the process before `expiresAtMs`.
 5. After thaw, or if suspension is abandoned, call `gateway.suspend.resume`
-   with that `suspensionId` over the existing WebSocket or Admin HTTP control
-   path.
+   with that `suspensionId` over the existing or a newly authenticated
+   WebSocket. The CLI equivalents are `openclaw gateway suspend` and
+   `openclaw gateway resume <suspensionId>`.
 
-A prepared Gateway rejects new WebSocket handshakes. A WebSocket controller
-must keep its authenticated connection open across the host operation. If that
-cannot be guaranteed, enable and use the
-[Admin HTTP RPC plugin](/plugins/admin-http-rpc) before preparing. If the
-control path is lost, wait for the two-minute lease to expire before
-reconnecting; expiry reopens admission automatically.
+A prepared Gateway accepts authenticated WebSocket connects, but fences every
+method except `gateway.suspend.*`. Controllers may reconnect after thaw and
+call resume. The [Admin HTTP RPC plugin](/plugins/admin-http-rpc) remains
+available for hosts that cannot speak WebSocket at all. If every control path
+is lost, the two-minute lease expiry reopens admission automatically.
 
 The RPC contract is:
 
 - `gateway.suspend.prepare` — `operator.admin`; params
-  `{ "requestId": "stable-host-operation-id" }`
+  `{ "requestId": "stable-host-operation-id", "terminalPolicy": "preserve" }`
 - `gateway.suspend.status` — `operator.read`; params
   `{ "suspensionId": "id-from-prepare" }`
 - `gateway.suspend.resume` — `operator.admin`; params
   `{ "suspensionId": "id-from-prepare" }`
+
+`terminalPolicy` is optional and accepts only `"preserve"` or `"terminate"`.
+Omitting it defaults to `"preserve"`, so open terminal sessions block normal
+host suspension. A caller preparing an update that will terminate the Gateway
+may explicitly use `"terminate"`; this ignores open process-local terminal
+sessions only. Terminal persistence activity and all other tracked work still
+block preparation.
 
 IDs are trimmed, must contain a non-whitespace character, and are limited to
 128 characters. A busy prepare result has `status: "busy"`, `reason`,

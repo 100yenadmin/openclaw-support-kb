@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Android / Termux"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/termux"
-source_hash: "524dc924bebb31c7708a64964d53af7a0b76cca73e3abdcba6a3b81d2009f6eb"
+source_hash: "587d01f53c86dd5bfe0174f6a08ef3930e0696d36f4b1fcdd1964d8e3afc0dda"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/termux.md"
@@ -168,12 +168,20 @@ hermes setup
 
 ### Install optional Node dependencies manually
 
-The tested Termux path skips Node/browser bootstrap on purpose. If you want to experiment with browser tooling later:
+The tested Termux path skips Node/browser bootstrap on purpose. If you want to experiment with browser tooling later, what you need depends on which backend you use:
 
-```bash
-pkg install nodejs-lts
-npm install
-```
+- **Cloud browser providers** (Browserbase, Browser Use, Firecrawl) host their own Chromium, so Node.js alone is enough — `agent-browser` resolves lazily via `npx agent-browser` on first use:
+
+  ```bash
+  pkg install nodejs-lts
+  ```
+
+- **Local browser automation** on Termux needs a real `agent-browser` install — the bare npx fallback is deliberately rejected in local mode as too fragile to advertise as ready:
+
+  ```bash
+  pkg install nodejs-lts
+  npm install -g agent-browser && agent-browser install
+  ```
 
 The browser tool automatically includes Termux directories (`/data/data/com.termux/files/usr/bin`) in its PATH search, so `agent-browser` and `npx` are discovered without any extra PATH configuration.
 

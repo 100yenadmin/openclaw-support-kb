@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI automation"
 source: "https://docs.openclaw.ai/start/wizard-cli-automation"
-source_hash: "d81381e81337ec172f5beec46e5a571d3d364284f92921a3f748f48a47eaea64"
+source_hash: "21db58e46052743af0eb634066b5c3f52bdb1827a89efbd194700c3f3459a503"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard-cli-automation.md"
@@ -14,6 +14,8 @@ duplicate_index: 1
 Source: https://docs.openclaw.ai/start/wizard-cli-automation
 
 Use `openclaw onboard --non-interactive` to script setup. It requires `--accept-risk`: non-interactive setup can write credentials and daemon config without a confirmation prompt, so the flag is the explicit risk acknowledgement.
+
+Each command must install a managed Gateway with `--install-daemon`, use `--skip-health` for config-only setup, or run with an already-running compatible Gateway.
 
 Note
 
@@ -40,10 +42,10 @@ Add `--json` for a machine-readable summary.
 - `--skip-bootstrap` skips creating default workspace files, for automation that pre-seeds its own workspace.
 - `--secret-input-mode ref` stores new credentials as env-backed references (`{ source: "env", provider: "default", id: "
 ENV_VAR
-" }`); set the provider env var when adding a credential or passing an inline key flag. Existing resolvable named profiles and their `env`, `file`, or `exec` references are reused unchanged, without a new credential write or additional provider env var. Existing plaintext is not migrated; run `openclaw secrets configure --apply`, then `openclaw secrets audit --check`. See [Secrets management](/gateway/secrets).
+" }`); set the provider env var when adding a credential or passing an inline key flag. Existing resolvable named profiles and their `env`, `file`, `exec`, or `store` references are reused unchanged, without a new credential write or additional provider env var. Existing plaintext is not migrated; run `openclaw secrets configure --apply`, then `openclaw secrets audit --check`. See [Secrets management](/gateway/secrets).
 
 ```bash
-openclaw onboard --non-interactive --accept-risk \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice openai-api-key \
   --secret-input-mode ref
@@ -57,7 +59,7 @@ AccordionGroup
 Anthropic API key example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice apiKey \
       --anthropic-api-key "$ANTHROPIC_API_KEY" \
@@ -68,7 +70,7 @@ Anthropic API key example
 Cloudflare AI Gateway example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice cloudflare-ai-gateway-api-key \
       --cloudflare-ai-gateway-account-id "your-account-id" \
@@ -81,7 +83,7 @@ Cloudflare AI Gateway example
 Gemini example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice gemini-api-key \
       --gemini-api-key "$GEMINI_API_KEY" \
@@ -92,7 +94,7 @@ Gemini example
 Mistral example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice mistral-api-key \
       --mistral-api-key "$MISTRAL_API_KEY" \
@@ -103,7 +105,7 @@ Mistral example
 Moonshot example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice moonshot-api-key \
       --moonshot-api-key "$MOONSHOT_API_KEY" \
@@ -114,7 +116,7 @@ Moonshot example
 Ollama example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice ollama \
       --custom-model-id "qwen3.5:27b" \
@@ -125,7 +127,7 @@ Ollama example
 OpenCode example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice opencode-zen \
       --opencode-zen-api-key "$OPENCODE_API_KEY" \
@@ -137,7 +139,7 @@ OpenCode example
 Synthetic example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice synthetic-api-key \
       --synthetic-api-key "$SYNTHETIC_API_KEY" \
@@ -148,7 +150,7 @@ Synthetic example
 Vercel AI Gateway example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice ai-gateway-api-key \
       --ai-gateway-api-key "$AI_GATEWAY_API_KEY" \
@@ -159,7 +161,7 @@ Vercel AI Gateway example
 Z.AI example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice zai-api-key \
       --zai-api-key "$ZAI_API_KEY" \
@@ -170,7 +172,7 @@ Z.AI example
 Custom provider example
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice custom-api-key \
       --custom-base-url "https://llm.example.com/v1" \
@@ -190,7 +192,7 @@ Custom provider example
 
     ```bash
     export CUSTOM_API_KEY="your-key"
-    openclaw onboard --non-interactive --accept-risk \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice custom-api-key \
       --custom-base-url "https://llm.example.com/v1" \

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugin LLM Access"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugin-llm-access"
-source_hash: "345328bf2830fdc1ce129246aec7dff748a79ad6e6f9958ed5b77abe45f95516"
+source_hash: "53ac0ee1c63258d3abba5afd40da338cd4ad2f4c0128661cf1cf825e2e4e2a8a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugin-llm-access.md"
@@ -236,6 +236,7 @@ result = ctx.llm.complete(
     agent_id=None,         # optional, gated
     profile=None,          # optional, gated — explicit auth-profile name
     purpose="optional-audit-string",
+    task=None,             # optional — a plugin-registered auxiliary slot
 )
 # → PluginLlmCompleteResult(text, provider, model, agent_id, usage, audit)
 ```
@@ -273,6 +274,7 @@ result = ctx.llm.complete_structured(
     agent_id=None,
     profile=None,
     purpose=None,
+    task=None,             # optional — a plugin-registered auxiliary slot
 )
 # → PluginLlmStructuredResult(text, provider, model, agent_id,
 #                             usage, parsed, content_type, audit)
@@ -292,13 +294,48 @@ against your schema if `jsonschema` is installed.
 ### Async
 
 ```python
-result = await ctx.llm.acomplete(messages=...)
-result = await ctx.llm.acomplete_structured(instructions=..., input=...)
+result = await ctx.llm.acomplete(messages=..., task="classifier")
+result = await ctx.llm.acomplete_structured(
+    instructions=..., input=..., task="classifier"
+)
 ```
 
 Same arguments and result types as their sync counterparts. Use
 these from gateway adapters, async hooks, or any plugin code
 already running on an asyncio loop.
+
+### Task-routed auxiliary calls
+
+Pass `task=` to any of the four call shapes when a plugin needs its
+own configured auxiliary route. Register that task during plugin setup;
+plugin defaults apply until the operator overrides its provider and model
+in `auxiliary.<task>`:
+
+```python
+def register(ctx):
+    ctx.register_auxiliary_task(
+        "classifier", display_name="Classifier", description="Classify input."
+    )
+
+
+result = ctx.llm.complete(messages=[...], task="classifier")
+result = ctx.llm.complete_structured(instructions=..., input=..., task="classifier")
+```
+
+```yaml
+auxiliary:
+  classifier:
+    provider: openrouter
+    model: vendor/model-id
+```
+
+Plugins may supply provider/model registration defaults for their own
+tasks. Operator configuration in `auxiliary.<task>` overrides those
+defaults and controls the deployment choice. A plugin can only use a task
+it registered itself; unknown or foreign task names fail before provider
+invocation. `allow_task_override: true` is an explicit operator grant for
+using Hermes built-in auxiliary tasks; it does not permit another plugin's
+tasks. Omit `task=` (or use `"auto"`) to keep the active main provider/model.
 
 ### Result attributes
 
@@ -337,6 +374,8 @@ config block, a plugin can:
 
 …and that's it. `provider=`, `model=`, `agent_id=`, and `profile=`
 arguments raise `PluginLlmTrustError` until the operator opts in.
+Likewise, `task=` can use only the plugin's registered auxiliary task
+unless the operator grants `allow_task_override` for a built-in task.
 
 **Most plugins never need this section.** A plugin that just calls
 `ctx.llm.complete(messages=...)` with no overrides runs against
@@ -391,6 +430,7 @@ path-derived key for nested plugins (`image_gen/openai`,
 | ↳ allowlist     | —       | `allowed_models: [...]`          |
 | `agent_id=`     | denied  | `allow_agent_id_override: true`  |
 | `profile=`      | denied  | `allow_profile_override: true`   |
+| built-in `task=` | denied  | `allow_task_override: true`      |
 
 Each override is independently gated. Granting `allow_model_override`
 does **not** also grant `allow_provider_override` — a plugin trusted

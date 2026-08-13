@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Secrets management"
 source: "https://docs.openclaw.ai/gateway/secrets"
-source_hash: "9684395ac36501c03d1dffa7c36497fd9fd2b6587322060cc1dffd308e4e3c13"
+source_hash: "6489d6f4756b5e74b9a56c6de2d90ac4db1e4663185c111d8394aab0284a7d4b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/secrets.md"
@@ -103,8 +103,8 @@ The log entry includes the reason the active-surface policy used.
 In interactive onboarding, choosing SecretRef storage runs preflight validation before saving:
 
 - Env refs: validates the env var name and confirms a non-empty value is visible during setup.
-- Provider refs (`file` or `exec`): validates provider selection, resolves `id`, and checks the resolved value type.
-- Quickstart flow: when `gateway.auth.token` is already a SecretRef, onboarding resolves it before probe/dashboard bootstrap (for `env`, `file`, and `exec` refs) using the same fail-fast gate.
+- Provider refs (`file`, `exec`, or `store`): validates provider selection, resolves `id`, and checks the resolved value type.
+- Quickstart flow: when `gateway.auth.token` is already a SecretRef, onboarding resolves it before probe/dashboard bootstrap (for `env`, `file`, `exec`, and `store` refs) using the same fail-fast gate.
 
 Validation failure shows the error and lets you retry.
 
@@ -113,7 +113,7 @@ Validation failure shows the error and lets you retry.
 One object shape everywhere:
 
 ```json5
-{ source: "env" | "file" | "exec", provider: "default", id: "..." }
+{ source: "env" | "file" | "exec" | "store", provider: "default", id: "..." }
 ```
 
 Tabs
@@ -167,6 +167,20 @@ exec
 
 
 
+store
+
+    ```json5
+    { source: "store", provider: "default", id: "OPENAI_API_KEY" }
+    ```
+
+    Validation:
+
+    - `provider` must match `^[a-z][a-z0-9_-]{0,63}$`
+    - `id` uses the environment-name grammar `^[A-Z][A-Z0-9_]{0,127}$`
+    - This release resolves only the Gateway-wide team scope
+
+
+
 ## Provider config
 
 Define providers under `secrets.providers`:
@@ -176,6 +190,7 @@ Define providers under `secrets.providers`:
   secrets: {
     providers: {
       default: { source: "env" },
+      teamstore: { source: "store" },
       filemain: {
         source: "file",
         path: "~/.openclaw/secrets.json",
@@ -200,10 +215,13 @@ Define providers under `secrets.providers`:
       env: "default",
       file: "filemain",
       exec: "vault",
+      store: "teamstore",
     },
   },
 }
 ```
+
+Provider aliases are source-specific. A matching explicit provider entry wins; if an `env` or `store` default alias is also used by an entry for another source, that source's built-in provider wins. Non-default aliases and `file` or `exec` providers must resolve to an explicit entry with the matching source.
 
 Env provider
 
@@ -253,6 +271,47 @@ Optional per-id errors:
 codes `NOT_FOUND` and `AMBIGUOUS_DUPLICATE_KEY` with the provider and ref id. Other
 codes and free-form fields such as `message` are accepted for protocol-v1 compatibility
 but are not displayed because resolver output can contain credential material.
+
+Store provider
+
+- Reads values from OpenClaw's shared state SQLite database.
+- The provider has no connection settings. `secrets.defaults.store` selects its default alias.
+- Only team scope is resolved in this release. Identity scope is reserved for a later release.
+
+## Shared secret store
+
+The shared secret store is a Gateway-wide, team-scoped place for secrets and environment values that should be available to every Gateway process using the same state database. Manage it from **Settings → Secrets** in the Control UI or locally with `openclaw secrets store`. The CLI commands operate on the local state database and do not accept Gateway URL or token options.
+
+Entries have a `secret` or `env` kind. The kind controls CLI disclosure, not SecretRef resolution:
+
+- `secret` values are write-only after saving. Gateway list results, the Control UI, and CLI list/get output never include them; there is no reveal RPC.
+- `env` values remain visible to administrators in the Control UI and can be returned by `store list` and `store get`. Team-scoped `env` entries are also added to the environment of commands run by OpenClaw's own exec tool, after inherited process values and before explicit per-call env. Protected host keys and sandbox-blocked credential names are ignored with a visible warning. This covers direct tool calls, Code Mode (whose guest reaches shell through the same `openclaw:core:exec` tool), sandboxed exec, and `node` -hosted exec.
+
+It does not cover commands executed inside a provider-native harness — the Codex app-server and its sandbox exec-server, or ACP children such as Claude Code. Those harnesses assemble their own child environment and never pass through OpenClaw's exec preparation, so store entries are absent there. The store snapshot is also read once per agent run, so entries added mid-run apply from the next run onward.
+
+`secret` entries are never injected into subprocess environments. They remain available only through `store` SecretRefs because plaintext env injection would bypass the store disclosure boundary; safe secret injection requires a future egress-substitution mechanism.
+
+Names use the same uppercase grammar as env SecretRefs, and each UTF-8 value is limited to 64 KiB (65,536 bytes). A `secret` entry must carry a value; empty secrets are rejected because they would surface only as a confusing downstream auth failure. `env` entries may be empty. This supports PEM keys and service-account JSON without inheriting the smaller limits of ordinary environment variables.
+
+Reference an entry from `openclaw.json` with the `store` source:
+
+```json5
+{
+  models: {
+    providers: {
+      openai: {
+        apiKey: { source: "store", provider: "default", id: "OPENAI_API_KEY" },
+      },
+    },
+  },
+}
+```
+
+Control UI set/delete operations automatically refresh the active secrets runtime when the changed name is referenced by a `store` SecretRef in the active source config. Names that are not referenced skip that work. Direct CLI writes remain an offline/local path; after changing a config-referenced value with the CLI, run `openclaw secrets reload` so the active in-memory snapshot picks it up.
+
+Warning
+
+Store values are not encrypted at rest. They are stored unencrypted in the shared state SQLite database (`state/openclaw.sqlite`), protected by the same `0600` file and `0700` directory permissions as other credentials in that database. Operators who need stronger storage isolation should use an external exec provider such as the [1Password plugin](/plugins/onepassword) or [Vault SecretRefs](/plugins/vault).
 
 ## File-backed API keys
 
@@ -603,6 +662,7 @@ Warning and audit signals:
 
 - `SECRETS_REF_OVERRIDES_PLAINTEXT` (runtime warning)
 - `REF_SHADOWED` (audit finding when SQLite auth-profile credentials take precedence over `openclaw.json` refs)
+- `STORE_PLAINTEXT_RESIDUE` (audit finding when a stored name still has an equivalent plaintext config value)
 
 Google Chat `serviceAccount` accepts inline JSON or a SecretRef. Doctor moves the retired sibling `serviceAccountRef` into this canonical field when it is unset.
 
@@ -715,6 +775,7 @@ secrets audit
     - Plaintext sensitive provider header residues in generated `models.json` entries.
     - Unresolved refs.
     - Precedence shadowing (SQLite auth profiles taking priority over `openclaw.json` refs).
+    - Store residue (a stored name still has an equivalent plaintext value in config).
 
     Exec note: by default, audit skips exec SecretRef resolvability checks to avoid command side effects. Use `openclaw secrets audit --allow-exec` to execute exec providers during audit.
 
@@ -726,7 +787,7 @@ secrets configure
 
     Interactive helper that:
 
-    - Configures `secrets.providers` first (`env`/`file`/`exec`, add/edit/remove).
+    - Configures `secrets.providers` first (`env`/`file`/`exec`/`store`, add/edit/remove).
     - Lets you select supported secret-bearing fields in `openclaw.json` plus the SQLite auth-profile store for one agent scope.
     - Can create a new auth-profile mapping directly in the target picker.
     - Captures SecretRef details (`source`, `provider`, `id`).
@@ -785,9 +846,11 @@ For static credentials, runtime no longer depends on plaintext legacy auth stora
 - Legacy static `api_key` entries are scrubbed when discovered.
 - OAuth-related compatibility behavior remains separate.
 
-## Web UI note
+## Control UI
 
-Some SecretInput unions are easier to configure in raw editor mode than in form mode.
+Open **Settings → Secrets** to list, add, edit, bulk-import, or soft-delete team-scoped entries. Bulk Add accepts dotenv `NAME=VALUE` assignments, including quoted multiline values. Credential-like names default to `secret`; clear **Auto-detect secrets** to import all entries as visible environment values.
+
+This store page manages values only. Configure the corresponding `store` SecretRef on a supported field through its settings form or the raw editor. Identity-scoped entries are reserved for a later release and are not exposed by this page.
 
 ## Related
 

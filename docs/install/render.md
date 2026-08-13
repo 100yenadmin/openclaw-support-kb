@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Render"
 source: "https://docs.openclaw.ai/install/render"
-source_hash: "a6ecabc61e6e61efeef314250544264a80cf44c2cb781b20118a72b5bd13bf0b"
+source_hash: "fbba7fd0ec4844ce877feadcecc01c2c6d5c982e7b2c19cf23667323f1861031"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/render.md"
@@ -34,7 +34,8 @@ services:
     name: openclaw
     runtime: docker
     plan: starter
-    healthCheckPath: /health
+    dockerCommand: node openclaw.mjs gateway --allow-unconfigured
+    healthCheckPath: /startupz
     envVars:
       - key: OPENCLAW_GATEWAY_PORT
         value: "8080"
@@ -50,12 +51,12 @@ services:
       sizeGB: 1
 ```
 
-| Feature               | Purpose                                                    |
-| --------------------- | ---------------------------------------------------------- |
-| `runtime: docker`     | Builds from the repo's Dockerfile                          |
-| `healthCheckPath`     | Render monitors `/health` and restarts unhealthy instances |
-| `generateValue: true` | Auto-generates a cryptographically secure value            |
-| `disk`                | Persistent storage that survives redeploys                 |
+| Feature               | Purpose                                                          |
+| --------------------- | ---------------------------------------------------------------- |
+| `runtime: docker`     | Builds from the repo's Dockerfile                                |
+| `healthCheckPath`     | Render admits traffic after `/startupz` reports startup complete |
+| `generateValue: true` | Auto-generates a cryptographically secure value                  |
+| `disk`                | Persistent storage that survives redeploys                       |
 
 ## Choosing a plan
 
@@ -65,7 +66,7 @@ services:
 | Starter   | Never             | 1GB+          | Personal use, small teams     |
 | Standard+ | Never             | 1GB+          | Production, multiple channels |
 
-The Blueprint defaults to `starter`. To use the free tier, change `plan: free` in your fork's `render.yaml` — note that with no persistent disk, OpenClaw state resets on each deploy.
+The Blueprint defaults to `starter`. To use the free tier, change `plan: free` **and delete the `disk:` block** in your fork's `render.yaml`; Render rejects a Blueprint that attaches a persistent disk to a free instance. Without that disk, OpenClaw state resets on every deploy.
 
 ## After deployment
 
@@ -107,9 +108,12 @@ From the Render Dashboard shell, export state, config, auth profiles, and worksp
 
 ```bash
 openclaw backup create
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
 ```
 
-This creates a portable backup archive. See [Backup](/cli/backup).
+Restore verifies and extracts into a fresh staging directory; activation is a
+separate offline step. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the rollback warnings and activation sequence.
 
 ## Troubleshooting
 
@@ -130,7 +134,7 @@ Happens on the free tier (no persistent disk). Upgrade to a paid plan, or regula
 
 ### Health check failures
 
-If builds succeed but deploys fail, the service may be taking too long to start or `/health` may not be reachable. Check:
+If builds succeed but deploys fail, the service may be taking too long to start or `/startupz` may not be reachable. Check:
 
 - Build logs for errors
 - Whether the container runs locally with `docker build && docker run`

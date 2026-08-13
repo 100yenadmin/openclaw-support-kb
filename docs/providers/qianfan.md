@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Qianfan"
 source: "https://docs.openclaw.ai/providers/qianfan"
-source_hash: "86a3a5a148f3166f5f00a0ce136f976ab017a6930cee3c2e9ed06092e53ef691"
+source_hash: "cd8c0331b8eb79f5e5805ff4b9d6cf4e0d2f251ae38d8539ca7084c3c1649a0e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/qianfan.md"
@@ -89,7 +89,7 @@ This example explicitly selects the current DeepSeek flagship instead of the onb
 
 ```json5
 {
-  env: { QIANFAN_API_KEY: "bce-v3/ALTAK-..." },
+  env: { vars: { QIANFAN_API_KEY: "bce-v3/ALTAK-..." } },
   agents: {
     defaults: {
       model: { primary: "qianfan/deepseek-v4-pro" },

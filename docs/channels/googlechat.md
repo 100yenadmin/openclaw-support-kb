@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "7eb44daace83a2b0b42b1231f99db60c8576c4bf9167e5ebe1ee47b39a1a462e"
+source_hash: "df41b641a9b9cb69b21ca3403c9e99e5d317a1e94570027cf364f64a8e579b11"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/googlechat.md"
@@ -202,7 +202,7 @@ Use these identifiers for delivery and allowlists:
 
 Notes:
 
-- Service account credentials: `serviceAccountFile` (path) or `serviceAccount` (inline JSON string, object, or env/file/exec SecretRef). Env vars `GOOGLE_CHAT_SERVICE_ACCOUNT` (inline JSON) and `GOOGLE_CHAT_SERVICE_ACCOUNT_FILE` (path) apply to the default account only. Multi-account setups use `channels.googlechat.accounts.<id>` with the same keys, including per-account `serviceAccount` SecretRefs.
+- Service account credentials: `serviceAccountFile` (path) or `serviceAccount` (inline JSON string, object, or env/file/exec/store SecretRef). Env vars `GOOGLE_CHAT_SERVICE_ACCOUNT` (inline JSON) and `GOOGLE_CHAT_SERVICE_ACCOUNT_FILE` (path) apply to the default account only. Multi-account setups use `channels.googlechat.accounts.<id>` with the same keys, including per-account `serviceAccount` SecretRefs.
 - Default webhook path is `/googlechat` when `webhookPath` is unset; `webhookUrl` can supply the path instead.
 - Group keys must be stable space ids (`spaces/<spaceId>`). Display-name keys are deprecated and logged as such.
 - `dangerouslyAllowNameMatching` re-enables mutable email principal matching for allowlists (break-glass compatibility mode); doctor warns about email entries.

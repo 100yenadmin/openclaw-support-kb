@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness reference"
 source: "https://docs.openclaw.ai/plugins/codex-harness-reference"
-source_hash: "35075ec4460f2f67ecccdd51b160adb29dcfa614684808929aad82a03d1ee52c"
+source_hash: "ca30b4f8d1807dcc40635f4beae2c84cff652480a78aad779ee8fd79feaf11c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness-reference.md"
@@ -281,13 +281,14 @@ structured SecretRefs fail before any token or header is sent.
 
 When native Codex plugins are configured, OpenClaw caches one
 runtime-and-workspace-scoped `plugin/installed` snapshot. This snapshot covers
-installed curated and workspace plugins, including disabled ownership;
+installed plugins from Codex-discovered marketplaces, including disabled ownership;
 `plugin/read` resolves only exact configured plugin identities. Failed or
-incomplete installed snapshots are never cached. OpenClaw uses `plugin/list`
-only to find or repair an explicitly enabled curated plugin missing from that
-installed snapshot. It calls `plugin/install` only for an explicitly configured
-enabled curated plugin; it never installs, enables, or authenticates a
-workspace plugin.
+incomplete installed snapshots are never cached. `/codex plugins available`
+queries `plugin/list` for the current conversation workspace, while
+`/codex plugins install <plugin>@<marketplace>` installs only after an owner or
+`operator.admin` explicitly authorizes that plugin. Existing explicitly
+configured curated plugins retain their automatic recovery path. The model's
+plugin-discovery tool cannot install, enable, or authenticate a plugin.
 
 `app/installed` reports installed app runtime state, and `app/read` returns
 authenticated metadata for at most 100 requested app IDs per call. OpenClaw

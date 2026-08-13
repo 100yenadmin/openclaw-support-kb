@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Baseten"
 source: "https://docs.openclaw.ai/providers/baseten"
-source_hash: "89e4ca2d0feb4d0fc17275e95d34211f457792bc3aa4d18394ad17f3f959f88a"
+source_hash: "b97c6d28f3e161e71d0f75a58d0dd310e23e0ee38406226e8e7502bd78836f4b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/baseten.md"
@@ -53,7 +53,7 @@ openclaw onboard --auth-choice baseten-api-key
 ```
 
 ```bash Direct flag
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice baseten-api-key \
   --baseten-api-key "$BASETEN_API_KEY"
 ```
@@ -124,7 +124,7 @@ Most setups only need the API key. To pin the provider explicitly:
 
 ```json5
 {
-  env: { BASETEN_API_KEY: "..." },
+  env: { vars: { BASETEN_API_KEY: "..." } },
   agents: {
     defaults: {
       model: { primary: "baseten/thinkingmachines/inkling" },

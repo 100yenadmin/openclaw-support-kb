@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daytona"
 source: "https://docs.openclaw.ai/install/daytona"
-source_hash: "fabf67016bb3168f3735fdc11c4dd636ecf763bd2a340f7fdd095816ee89a2e6"
+source_hash: "830227d7f41ddf3d70abff53fdfb451daa005453cfff3ea5bef7628d8e7c2c8f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/daytona.md"
@@ -201,9 +201,13 @@ Create a bot with [@BotFather](https://t.me/botfather) (`/newbot`), copy the
 token, then configure OpenClaw from the sandbox SSH session:
 
 ```bash
-openclaw config set channels.telegram.enabled true
-openclaw config set channels.telegram.botToken YOUR_BOT_TOKEN
+export TELEGRAM_BOT_TOKEN="<bot-token>"
+openclaw channels add --channel telegram --use-env
 ```
+
+Also store `TELEGRAM_BOT_TOKEN=<bot-token>` in `~/.openclaw/.env` so the
+background Gateway receives it after a restart. `--use-env` validates the token
+without copying it into `openclaw.json`.
 
 Restart the Gateway (see above), send your bot a DM, then approve the pairing
 code it reports:

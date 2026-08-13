@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groq"
 source: "https://docs.openclaw.ai/providers/groq"
-source_hash: "b61a94eb9ad31367376df79594c9255a667a99725427175cd1cf4c2264cb4df2"
+source_hash: "f60e63ac8c2c5e0d2e318e90006a4b7dd6bf9c63207a4be9085cbce0a0698082"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/groq.md"
@@ -75,7 +75,7 @@ Verify the catalog is reachable
 
 ```json5
 {
-  env: { GROQ_API_KEY: "gsk_..." },
+  env: { vars: { GROQ_API_KEY: "gsk_..." } },
   agents: {
     defaults: {
       model: { primary: "groq/openai/gpt-oss-120b" },
@@ -113,13 +113,13 @@ See [Thinking modes](/tools/thinking) for the shared `/think` levels and how Ope
 
 Groq's plugin also registers an **audio media-understanding provider** so voice messages can be transcribed through the shared `tools.media.audio` surface.
 
-| Property           | Value                                     |
-| ------------------ | ----------------------------------------- |
-| Shared config path | `tools.media.audio`                       |
-| Default base URL   | `https://api.groq.com/openai/v1`          |
-| Default model      | `whisper-large-v3-turbo`                  |
-| Auto priority      | 20                                        |
-| API endpoint       | OpenAI-compatible `/audio/transcriptions` |
+| Property          | Value                                     |
+| ----------------- | ----------------------------------------- |
+| Shared model path | `tools.media.models`                      |
+| Default base URL  | `https://api.groq.com/openai/v1`          |
+| Default model     | `whisper-large-v3-turbo`                  |
+| Auto priority     | 20                                        |
+| API endpoint      | OpenAI-compatible `/audio/transcriptions` |
 
 To make Groq the default audio backend:
 
@@ -127,9 +127,7 @@ To make Groq the default audio backend:
 {
   tools: {
     media: {
-      audio: {
-        models: [{ provider: "groq" }],
-      },
+      models: [{ provider: "groq", capabilities: ["audio"] }],
     },
   },
 }

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Automations (cron)"
 source: "https://docs.openclaw.ai/cli/cron"
-source_hash: "8b27e854aee85c2b1260efe33d54c5aa017fa80969fbcc5d67223c928563094b"
+source_hash: "7c56db76e185e733a6c927c1fcfd28249d7993b73f59a24a301460d0d0bbe65c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/cron.md"
@@ -58,6 +58,13 @@ openclaw automations create "*/15 * * * *" \
 ```
 
 `--command <shell>` stores `argv: ["sh", "-lc", <shell>]`. Use `--command-argv '["node","scripts/report.mjs"]'` for exact argv execution. Command jobs capture stdout/stderr, record normal run history, and route output through the same `announce`, `webhook`, or `none` delivery modes as isolated jobs. A command that prints only `NO_REPLY` is suppressed.
+
+Use `--display-name <name>` when the list and detail views should show a
+human-readable label distinct from the automation's stable name. Set or update
+that label with `automations add|edit --display-name`. Use
+`automations edit <job-id> --clear-display-name` to remove the label and restore
+the stable name in list and detail views. The set and clear options cannot be
+combined.
 
 ## Sessions
 

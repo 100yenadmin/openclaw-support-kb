@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Notifications"
 source: "https://docs.openclaw.ai/web/notifications"
-source_hash: "e695dceaf68173fb9f86835df137f14788cf938f228376f6c7c2e852c2d2778d"
+source_hash: "a524cb48b1defb3f8204b180ec2c7f17634ee2d812af1b805dce4fd2c19dc0e1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/notifications.md"
@@ -13,7 +13,7 @@ duplicate_index: 1
 # Notifications
 Source: https://docs.openclaw.ai/web/notifications
 
-OpenClaw can ping you when something needs your attention — in the browser that runs the Control UI, or through native macOS notifications when you use the OpenClaw macOS app. Everything lives under **Settings → Notifications**: enable the current device, check its status, and send yourself a test.
+OpenClaw can ping you when something needs your attention — in the browser that runs the Control UI, or through native macOS notifications when you use the OpenClaw macOS app. Your first chat send may request permission automatically; **Settings → Notifications** remains the place to enable or repair the current device, check its status, and send yourself a test.
 
 This page covers those two surfaces. It does not control channel reaction notifications, Android notification forwarding, or iOS background push — the mobile apps register for push through their own node paths; see [iOS](/platforms/ios) and [Nodes](/nodes).
 
@@ -31,6 +31,8 @@ The macOS app deliberately uses the native permission flow instead of browser pu
 
 ## Enable browser notifications
 
+The Control UI asks for notification permission automatically the first time you send a chat message, once per browser and origin. **Settings → Notifications** remains the manual path for enabling or repairing notifications, including after you deny the automatic prompt.
+
 1. Open the Control UI in a browser that supports service workers, `PushManager`, and notifications.
 2. Make sure the Control UI is connected to the Gateway.
 3. Open **Settings → Notifications** and select **Enable notifications**.
@@ -42,6 +44,8 @@ Behind the scenes, enabling creates a push subscription in this browser and regi
 **Send test** asks the Gateway to push a test message to every registered browser subscription. **Unsubscribe** removes the current browser's endpoint from the Gateway, then unsubscribes locally.
 
 ## Enable notifications in the macOS app
+
+The macOS app also asks automatically on your first chat send, but only while permission is **Not requested**. It never opens System Settings automatically after a denial; use **Settings → Notifications** to manage permission manually.
 
 1. Open **Settings → Notifications** in the OpenClaw macOS app.
 2. Select **Enable notifications** while the permission shows **Not requested**.

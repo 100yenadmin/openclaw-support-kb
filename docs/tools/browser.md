@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Browser (OpenClaw-managed)"
 source: "https://docs.openclaw.ai/tools/browser"
-source_hash: "562cb9809761fbf781c7363a15dbd327a857851d35b8ce15fb6581ad95126f6c"
+source_hash: "bb8cd8d6b0f39d60000cea1c841afd956fdb0a14489433388f30b8fee6e4f53f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser.md"
@@ -175,31 +175,27 @@ Browser settings live in `~/.openclaw/openclaw.json`.
     },
     // snapshotDefaults: { mode: "efficient" }, // default snapshot mode when the caller omits one
     defaultProfile: "openclaw",
-    color: "#FF4500",
     headless: false,
     noSandbox: false,
     attachOnly: false,
     executablePath: "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
     profiles: {
-      openclaw: { cdpPort: 18800, color: "#FF4500" },
+      openclaw: { cdpPort: 18800 },
       work: {
         cdpPort: 18801,
-        color: "#0066CC",
         headless: true,
         executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
       },
       user: {
         driver: "existing-session",
         attachOnly: true,
-        color: "#00AA00",
       },
       brave: {
         driver: "existing-session",
         attachOnly: true,
         userDataDir: "~/Library/Application Support/BraveSoftware/Brave-Browser",
-        color: "#FB542B",
       },
-      remote: { cdpUrl: "http://10.0.0.42:9222", color: "#00AA00" },
+      remote: { cdpUrl: "http://10.0.0.42:9222" },
     },
   },
 }
@@ -263,15 +259,11 @@ browser-specific model settings.
 {
   tools: {
     media: {
-      image: {
-        models: [
-          { provider: "bytedance", model: "doubao-seed-2.0-pro" },
-          // Add fallback candidates; first success wins
-          { provider: "openai", model: "gpt-4o" },
-        ],
-      },
-      // Shared media models also work when tagged for image support.
-      // models: [{ provider: "openai", model: "gpt-4o", capabilities: ["image"] }],
+      models: [
+        { provider: "bytedance", model: "doubao-seed-2.0-pro", capabilities: ["image"] },
+        // Add fallback candidates; first success wins
+        { provider: "openai", model: "gpt-4o", capabilities: ["image"] },
+      ],
     },
   },
   agents: {
@@ -299,8 +291,9 @@ Screenshot image blocks are private tool results: the agent can inspect them,
 but OpenClaw does not automatically attach them to channel replies. To share a
 screenshot, ask the agent to send it explicitly with the message tool.
 
-Use the existing `tools.media.image` / `tools.media.models` fields for model
-fallbacks, timeouts, byte limits, profiles, and provider request settings.
+Use `tools.media.models` for model fallbacks, timeouts, byte limits, profiles,
+and provider request settings. Tag screenshot-capable entries with the `image`
+capability.
 
 If the active main model already supports vision and no explicit image
 understanding model is configured, OpenClaw keeps the normal image result so the
@@ -327,6 +320,21 @@ SSRF policy
 - Browser navigation and open-tab requests are preflight checked. During the action and bounded post-action grace, guarded Playwright interactions (click, coordinate click, hover, drag, scroll, select, press, type, form fill, and evaluate) intercept policy-denied top-level and subframe document loads before HTTP request bytes, then best-effort re-check the final `http(s)` URL.
 - Before each fresh OpenClaw-managed Chrome launch, OpenClaw best-effort disables network prediction, suppressing Chromium's observed speculative preconnect for those denied loads. This is defense in depth, not a policy boundary: a browser reused across a control-service restart and other browser backends may not share the hardening. Playwright routing is still not a network firewall and does not intercept redirect hops, a popup's first request, Service Worker traffic, page code that runs after the bounded guard window, or every background/subresource path. Complete egress isolation requires owner-side isolation or a policy-enforcing proxy.
 - In strict SSRF mode, remote CDP endpoint discovery and `/json/version` probes (`cdpUrl`) are checked too.
+- Guarded remote CDP connections now fail closed when the selected driver cannot
+  keep the approved endpoint bound to the actual socket. Use the regular
+  `openclaw` driver for Browserless, Browserbase, Notte, or other guarded
+  remote CDP providers. `existing-session`/Chrome MCP profiles with an explicit
+  `cdpUrl` or `--browserUrl`/`--wsEndpoint` MCP argument are rejected under the
+  default strict Browser policy because Chrome MCP cannot carry OpenClaw's
+  pinned DNS lookup or guarded discovery result across its subprocess boundary.
+  They remain supported only when private-network Browser access is explicitly
+  trusted. Otherwise, omit the explicit endpoint and attach Chrome MCP to a
+  host-local Chrome profile, or switch the profile to the regular driver for
+  guarded CDP.
+- Redirecting CDP discovery to a different authority remains unsupported unless
+  the active policy explicitly allows that authority change. Revalidating a
+  returned hostname is not enough; the WebSocket transport must use the endpoint
+  that passed policy validation.
 - Gateway/provider `HTTP_PROXY`, `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables do not automatically proxy the OpenClaw-managed browser. Managed Chrome launches direct by default so provider proxy settings do not weaken browser SSRF checks.
 - OpenClaw-managed local CDP readiness probes and DevTools WebSocket connections bypass the managed network proxy for the exact launched loopback endpoint, so `openclaw browser start` still works when an operator proxy blocks loopback egress.
 - To proxy the managed browser itself, pass explicit Chrome proxy flags through `browser.extraArgs`, such as `--proxy-server=...` or `--proxy-pac-url=...`. Strict SSRF mode blocks explicit browser proxy routing unless private-network browser access is intentionally enabled.
@@ -371,7 +379,6 @@ Profile behavior
   The diagnostics do not enable acceleration, add a global acceleration setting,
   or grant sandbox browser device access.
 - `executablePath` can be set globally or per local managed profile. Per-profile values override `browser.executablePath`, so different managed profiles can launch different Chromium-based browsers. Both forms accept `~` for your OS home directory.
-- `color` (top-level and per-profile) tints the browser UI so you can see which profile is active.
 - Default profile is `openclaw` (managed standalone). Use `defaultProfile: "user"` to opt into the signed-in user browser.
 - Auto-detect order: system default browser if Chromium-based; otherwise Chrome, Brave, Edge, Chromium, Chrome Canary.
 - `driver: "existing-session"` uses Chrome DevTools MCP instead of raw CDP. It can attach through Chrome MCP auto-connect, or through `cdpUrl` when you already have a DevTools endpoint for the running browser.
@@ -500,7 +507,6 @@ Example:
         cdpUrl: "wss://production-sfo.browserless.io?token=
 BROWSERLESS_API_KEY
 ",
-        color: "#00AA00",
       },
     },
   },
@@ -531,7 +537,6 @@ Browserless as an externally managed CDP service:
       browserless: {
         cdpUrl: "ws://127.0.0.1:3000",
         attachOnly: true,
-        color: "#00AA00",
       },
     },
   },
@@ -596,7 +601,6 @@ proxies.
         cdpUrl: "wss://connect.browserbase.com?apiKey=
 BROWSERBASE_API_KEY
 ",
-        color: "#F97316",
       },
     },
   },
@@ -632,7 +636,6 @@ WebSocket gateway.
         cdpUrl: "wss://us-prod.notte.cc/sessions/connect?token=
 NOTTE_API_KEY
 ",
-        color: "#7C3AED",
       },
     },
   },
@@ -711,7 +714,7 @@ Official background and setup references:
 - [Chrome DevTools MCP README](https://github.com/ChromeDevTools/chrome-devtools-mcp)
 
 Built-in profile: `user`. Create your own custom existing-session profile if
-you want a different name, color, or browser data directory.
+you want a different name or browser data directory.
 
 By default the built-in `user` profile uses Chrome MCP auto-connect, which
 targets the default local Google Chrome profile. Use `userDataDir` for Brave,
@@ -726,7 +729,6 @@ directory:
         driver: "existing-session",
         attachOnly: true,
         userDataDir: "~/Library/Application Support/BraveSoftware/Brave-Browser",
-        color: "#FB542B",
       },
     },
   },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-agent routing"
 source: "https://docs.openclaw.ai/concepts/multi-agent"
-source_hash: "5c103a1f979dd7213ab2f411634e747965b28f1ccb0ea4a15a7cf9df6f46f2b2"
+source_hash: "35d98e96ec4d9e10af38d830b9ce91226d58a4af2552df47199408f99a25d2c5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-agent.md"
@@ -182,7 +182,8 @@ The QMD cross-agent search path was removed. Builtin memory does not search
 another agent's transcript corpus; each agent searches only its own configured
 memory and eligible same-agent session sources. Put intentionally shared
 Markdown in an explicit shared `memory.search.extraPaths` directory when the
-same reference material should be indexed by multiple agents.
+same reference material should be indexed by multiple agents. For the full
+upgrade path, see [Migrating from QMD](/concepts/memory-builtin#migrating-from-qmd).
 
 ## One WhatsApp number, multiple people (DM split)
 

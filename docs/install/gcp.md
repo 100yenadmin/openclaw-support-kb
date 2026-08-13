@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "GCP"
 source: "https://docs.openclaw.ai/install/gcp"
-source_hash: "a09d4aa06070d7d2321d42a11d46acc110bd5eccdca7717715fa702396f8bde5"
+source_hash: "88b0d71bc82957e8fca032a14f434e6d3cf7fad50e5e924800eac81b409fd3f4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/gcp.md"
@@ -205,15 +205,19 @@ Docker Compose configuration
         env_file:
           - .env
         environment:
-          - HOME=/home/node
-          - NODE_ENV=production
-          - TERM=xterm-256color
-          - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-          - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-          - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
-          - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
-          - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
-          - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+          HOME: /home/node
+          NODE_ENV: production
+          TERM: xterm-256color
+          OPENCLAW_STATE_DIR: /home/node/.openclaw
+          OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
+          OPENCLAW_CONFIG_DIR: /home/node/.openclaw
+          OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
+          OPENCLAW_GATEWAY_BIND: ${OPENCLAW_GATEWAY_BIND}
+          OPENCLAW_GATEWAY_PORT: ${OPENCLAW_GATEWAY_PORT}
+          OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
+          GOG_KEYRING_PASSWORD: ${GOG_KEYRING_PASSWORD}
+          XDG_CONFIG_HOME: ${XDG_CONFIG_HOME}
+          PATH: /home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         volumes:
           - ${OPENCLAW_CONFIG_DIR}:/home/node/.openclaw
           - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
@@ -232,9 +236,39 @@ Docker Compose configuration
             "${OPENCLAW_GATEWAY_PORT}",
             "--allow-unconfigured",
           ]
+
+      openclaw-cli:
+        image: ${OPENCLAW_IMAGE}
+        network_mode: "service:openclaw-gateway"
+        env_file:
+          - .env
+        environment:
+          HOME: /home/node
+          TERM: xterm-256color
+          OPENCLAW_STATE_DIR: /home/node/.openclaw
+          OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
+          OPENCLAW_CONFIG_DIR: /home/node/.openclaw
+          OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
+          OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
+          GOG_KEYRING_PASSWORD: ${GOG_KEYRING_PASSWORD}
+          XDG_CONFIG_HOME: ${XDG_CONFIG_HOME}
+          PATH: /home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        volumes:
+          - ${OPENCLAW_CONFIG_DIR}:/home/node/.openclaw
+          - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
+        stdin_open: true
+        tty: true
+        init: true
+        entrypoint: ["node", "dist/index.js"]
+        depends_on:
+          - openclaw-gateway
     ```
 
     `--allow-unconfigured` is only for bootstrap convenience, not a substitute for real gateway configuration. Still set auth (`gateway.auth.token` or password) and a safe bind mode for your deployment.
+
+    The `.env` paths are host-side bind-mount sources. Both services override
+    those variables with `/home/node/...` paths inside the container so the
+    non-root `node` user never tries to write to a host-only path.
 
 
 

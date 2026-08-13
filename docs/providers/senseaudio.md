@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SenseAudio"
 source: "https://docs.openclaw.ai/providers/senseaudio"
-source_hash: "9e5897bd1e2ab73f9bb552be7ec8bfcea67493963740d0f9be26f6a0d74df07c"
+source_hash: "e2ab8c1345ec61ec61cd37705862e5c9a83c3fab725fef2ce97e810407f08746"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/senseaudio.md"
@@ -44,9 +44,15 @@ Enable the audio provider
     {
       tools: {
         media: {
+          models: [
+            {
+              provider: "senseaudio",
+              model: "senseaudio-asr-pro-1.5-260319",
+              capabilities: ["audio"],
+            },
+          ],
           audio: {
             enabled: true,
-            models: [{ provider: "senseaudio", model: "senseaudio-asr-pro-1.5-260319" }],
           },
         },
       },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "StepFun"
 source: "https://docs.openclaw.ai/providers/stepfun"
-source_hash: "39a230e5d02e1eeff49ba1b383bfc9959575fd5bb1f11e012a47a811ccfa9fb5"
+source_hash: "faefa3fc6c327d41eaec4ce4df82f81a71e2e1bd655c4507e8f8bc7457d99164"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/stepfun.md"
@@ -172,7 +172,7 @@ Full config: Standard provider
 
     ```json5
     {
-      env: { STEPFUN_API_KEY: "your-key" },
+      env: { vars: { STEPFUN_API_KEY: "your-key" } },
       agents: { defaults: { model: { primary: "stepfun/step-3.5-flash" } } },
       models: {
         mode: "merge",
@@ -214,7 +214,7 @@ Full config: Step Plan provider
 
     ```json5
     {
-      env: { STEPFUN_API_KEY: "your-key" },
+      env: { vars: { STEPFUN_API_KEY: "your-key" } },
       agents: { defaults: { model: { primary: "stepfun-plan/step-3.5-flash" } } },
       models: {
         mode: "merge",

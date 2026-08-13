@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Northflank"
 source: "https://docs.openclaw.ai/install/northflank"
-source_hash: "18ba32ca6be4171f62dee34e8079bbf93dca7cb9e19062e6c9f0ae6577021af1"
+source_hash: "f34c0449d23da21da6d388e5e1018754d6a32837eea955d885edfaa6d31a62e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/northflank.md"
@@ -20,11 +20,20 @@ Deploy OpenClaw on Northflank with a one-click template and access it through th
 1. Click [Deploy OpenClaw](https://northflank.com/stacks/deploy-openclaw) to open the template.
 2. Create an [account on Northflank](https://app.northflank.com/signup) if you don't already have one.
 3. Click **Deploy OpenClaw now**.
-4. Set the required environment variable: `OPENCLAW_GATEWAY_TOKEN` (use a strong random value).
+4. Set these required environment variables:
+   - `OPENCLAW_GATEWAY_TOKEN` (use a strong random value)
+   - `OPENCLAW_STATE_DIR=/data/.openclaw`
+   - `OPENCLAW_WORKSPACE_DIR=/data/workspace`
 5. Click **Deploy stack** to build and run the OpenClaw template.
 6. Wait for the deployment to complete, then click **View resources**.
 7. Open the OpenClaw service.
 8. Open the public OpenClaw URL at `/openclaw` and connect using the configured shared secret. This template uses `OPENCLAW_GATEWAY_TOKEN` by default; if you replace it with password auth, use that password instead.
+
+From the Northflank shell, run the read-only deployment preflight:
+
+```bash
+openclaw doctor --json
+```
 
 ## What you get
 

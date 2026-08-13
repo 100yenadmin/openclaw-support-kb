@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Personal assistant setup"
 source: "https://docs.openclaw.ai/start/openclaw"
-source_hash: "6ad1ac29fdb6722d7b99562dfa936cb428ffb224887e272d2f03ce422b92f6de"
+source_hash: "99982fbb883891f3693d56c281a91c395d45f2b688cc4a2ed3113bea757f9ebf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/openclaw.md"
@@ -134,15 +134,14 @@ Example:
       // Start with 0; enable later.
       heartbeat: { every: "0m" },
     },
-    list: [
-      {
-        id: "main",
+    entries: {
+      main: {
         default: true,
         groupChat: {
           mentionPatterns: ["@openclaw", "openclaw"],
         },
       },
-    ],
+    },
   },
   channels: {
     whatsapp: {

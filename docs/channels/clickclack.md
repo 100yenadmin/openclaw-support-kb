@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ClickClack"
 source: "https://docs.openclaw.ai/channels/clickclack"
-source_hash: "8092f1cd9c1a642006510638abb4ada19b12a32aed57a6517982e9bd91130f8f"
+source_hash: "0d91771646ec9dc19ffd1dff66098c5f55990e47ba0a2c52f77b70f95c5d154c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/clickclack.md"
@@ -121,7 +121,7 @@ id (`wsp_...`), slug, or name; the gateway resolves it to the id at startup.
 | ----------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `baseUrl`               | none (required)     | Public ClickClack URL used for browser-facing links.                                                                  |
 | `apiBaseUrl`            | `baseUrl`           | Optional server-to-server endpoint for REST and realtime WebSocket traffic.                                           |
-| `token`                 | none                | Bot token as a plain string or secret ref (`source: "env" \| "file" \| "exec"`).                                      |
+| `token`                 | none                | Bot token as a plain string or secret ref (`source: "env" \| "file" \| "exec" \| "store"`).                           |
 | `tokenFile`             | none                | Path to a bot-token file; takes precedence over `token`.                                                              |
 | `workspace`             | none (required)     | Workspace id, slug, or name.                                                                                          |
 | `replyMode`             | `"agent"`           | `"agent"` runs the full agent pipeline; `"model"` sends short direct model completions.                               |

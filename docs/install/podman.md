@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Podman"
 source: "https://docs.openclaw.ai/install/podman"
-source_hash: "c9b7a873123ad56d117719940911e9fcf53741b8b7b577b4318db15453d15f34"
+source_hash: "689b2f10475c5de197d3ffcfd70c17a6070051dbf114049adc859e57c10714e4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/podman.md"
@@ -205,6 +205,14 @@ podman run --rm -it \
 
 On SELinux hosts, add `,Z` to both bind mounts if Podman blocks access to the
 mounted state.
+
+After restarting the Gateway with the updated image, run the read-only
+deployment preflight through the container-aware host CLI:
+
+```bash
+export OPENCLAW_CONTAINER=openclaw
+openclaw doctor --json
+```
 
 ## Useful commands
 

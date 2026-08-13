@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Use Voice Mode with Hermes"
 source: "https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes"
-source_hash: "c223bf54e1b02f60a8a1fb5265d7d673d64d99ab39acc04f9b65eca4d823c39d"
+source_hash: "3cd14021ce6b81287d57a69a65e05621f76dab9b532427124af77f243f7bd581"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/use-voice-mode-with-hermes.md"
@@ -179,6 +179,7 @@ If you skip that install or it fails, the wizard falls back to Edge TTS.
 ```yaml
 voice:
   record_key: "ctrl+b"
+  submit_mode: "direct"  # TUI: direct | draft
   max_recording_seconds: 120
   auto_tts: false
   beep_enabled: true
@@ -197,6 +198,18 @@ tts:
 ```
 
 This is a good conservative default for most people.
+
+In the TUI, `voice.submit_mode` controls what happens after transcription:
+
+- `direct` (default) submits the transcript immediately.
+- `draft` puts the transcript in the composer so you can edit or cancel it before pressing Enter.
+
+For editable voice drafts, set:
+
+```yaml
+voice:
+  submit_mode: "draft"
+```
 
 If you want local TTS instead, switch the `tts` block to:
 

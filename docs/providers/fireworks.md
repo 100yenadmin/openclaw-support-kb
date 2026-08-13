@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fireworks"
 source: "https://docs.openclaw.ai/providers/fireworks"
-source_hash: "37796697886605099b420d61b740b909294bdcf869ad76a38c400da5046cee98"
+source_hash: "f5819e25c2b7b49f27bf553baefb2f86a4a845a8e48b5c6deefb4f568ef537c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/fireworks.md"
@@ -49,7 +49,7 @@ openclaw onboard --auth-choice fireworks-api-key
 ```
 
 ```bash Direct flag
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice fireworks-api-key \
   --fireworks-api-key "$FIREWORKS_API_KEY"
 ```

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agents"
 source: "https://docs.openclaw.ai/cli/agents"
-source_hash: "99807317d4626c27209975d51596a5cff4ce23e561812102c73a0be275706b96"
+source_hash: "c5f315c7e4f9dc188af8db258f5d110c80d977b8758f915eb62f7a8a6bb191e3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/agents.md"
@@ -84,7 +84,7 @@ Options: `--force`, `--json`.
 
 Use routing bindings to pin inbound channel traffic to a specific agent.
 
-If you also want different visible skills per agent, configure `agents.defaults.skills` and `agents.entries.*.skills` in `openclaw.json`. See [Skills config](/tools/skills-config) and [Configuration reference](/gateway/config-agents#agentsdefaultsskills).
+If you also want different visible skills per agent, configure `agents.defaults.skills` and `agents.entries.*.skills` in `openclaw.json`. See [Skills config](/tools/skills-config) and [Configuration reference](/gateway/config-agents#agents-defaults-skills).
 
 List bindings:
 

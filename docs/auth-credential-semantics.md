@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Auth credential semantics"
 source: "https://docs.openclaw.ai/auth-credential-semantics"
-source_hash: "33800c7b345d719fa5266a143adb6e1d2547a523d3cf86485d0b1266f8eab0dd"
+source_hash: "dd52c771f69e5417fc203d5056abb802a52da592b1e8c9144eb270d9d3d1dac5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "auth-credential-semantics.md"
@@ -76,6 +76,7 @@ Do not write `type: "aws-sdk"` into the credential store; stored credentials are
 
 - When `auth.order.<provider>` or the auth-store order override is set for a provider, `models status --probe` only probes profile ids that remain in the resolved auth order for that provider. The stored override wins over `auth.order` config.
 - A stored profile for that provider that is omitted from the explicit order is not silently tried later. Probe output reports it with `reasonCode: excluded_by_auth_order` and the detail `Excluded by auth.order for this provider.`
+- A valid session user pin is an explicit per-session exception: OpenClaw tries that profile first even when it is omitted from the provider order, then uses the ordered same-provider profiles as retry candidates. A cooldown or disabled window applies only to the affected profile; it does not suppress its eligible siblings.
 
 ## Probe target resolution
 

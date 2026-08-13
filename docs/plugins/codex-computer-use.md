@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex Computer Use"
 source: "https://docs.openclaw.ai/plugins/codex-computer-use"
-source_hash: "a89b5d9b41b638ae4616c075850f5c35d988ca16717c96e9ef876fa6c0532029"
+source_hash: "8fe210291c43271cbe662093e7148094d1d470f22b871c3fcf40ad97c6f952ad"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-computer-use.md"
@@ -332,7 +332,7 @@ tools when available, and the specific message for the failing setup step.
 This Codex-owned Computer Use path runs on macOS, where the MCP server may need
 local OS permissions before it can inspect or control apps. (For cross-platform
 desktop control on Windows and Linux node hosts, see the
-[cua-computer fulfiller](/nodes/computer-use#windows-and-linux-experimental-via-cua-driver).)
+[cua-computer fulfiller](/nodes/computer-use#windows-and-linux-experimental%2C-via-cua-driver-sdk).)
 If OpenClaw says Computer Use is installed but the MCP server is unavailable,
 verify the Codex-side Computer Use setup first:
 

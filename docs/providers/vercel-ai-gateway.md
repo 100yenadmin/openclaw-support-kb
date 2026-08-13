@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vercel AI gateway"
 source: "https://docs.openclaw.ai/providers/vercel-ai-gateway"
-source_hash: "43356a9d4a3ee93ef7ac37f1a9eacb85b04b363e7e9569d25809c8b67df2b1e3"
+source_hash: "930a682a12e79bcf66c72325755481f3cc37bec4db213297e2bcd770f08ccc8e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/vercel-ai-gateway.md"
@@ -75,7 +75,7 @@ Verify the model is available
 ## Non-interactive example
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice ai-gateway-api-key \
   --ai-gateway-api-key "$AI_GATEWAY_API_KEY"

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "bf153f49272a383c58e6ba5cdccf615b32db020e67e681dfc49f3437d756841b"
+source_hash: "3e836adfdd0c574c860cfddb809fe21ed0db6c450bcce2db13b22d9cd45cb77b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -312,7 +312,9 @@ Flags reference
 | `--npm`                                 | Shortcut for npm method                                                         |
 | `--git \| --github`                     | Shortcut for git method                                                         |
 | `--git-dir \| --dir <path>`             | Git checkout directory (default: `~/openclaw`)                                  |
+| `--no-git-update`                       | Skip `git pull` for an existing git checkout                                    |
 | `--version <ver>`                       | OpenClaw version or dist-tag (default: `latest`)                                |
+| `--compatible-with <ver>`               | Refuse a CLI that cannot modify config written by `<ver>`                       |
 | `--node-version <ver>`                  | Node version (default: `24.15.0`; `22.22.3` on Linux ARMv7)                     |
 | `--json`                                | Emit NDJSON events                                                              |
 | `--onboard`                             | Run `openclaw onboard` after install                                            |

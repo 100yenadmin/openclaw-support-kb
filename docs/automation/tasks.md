@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "58dcf902e516b4b23723f591a05e25f8ffcd926ebd9570edb4916992c77f7dd6"
+source_hash: "eb2c020e24e6fbf21d25f884dc31befc59e36ec259fd8162fade64e8f21b4ce4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -128,7 +128,7 @@ Notify defaults for automations and media
 
     Automation tasks (main-session and isolated) use `silent` notify policy - they create records for tracking but do not generate task notifications of their own; the scheduler owns its delivery path.
 
-    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake so the agent can write the follow-up message and attach the finished media itself. The requester agent follows its normal visible-reply contract: automatic final reply when configured, or `message(action="send")` plus `NO_REPLY` when the session requires message-tool replies. If the requester session is no longer active or its active wake fails, and the completion agent misses some or all generated media, OpenClaw sends an idempotent direct fallback with only the missing media to the original channel target.
+    Session-backed `image_generate`, `music_generate`, and `video_generate` runs also use `silent` notify policy. They still create task records, but completion is handed back to the original agent session as an internal wake. The requester agent follows its current visible-reply contract: successful completion includes a short user-facing caption and every structured generated attachment from the completion event, while failure produces a concise visible failure. Internal task and session details stay private. If the requester session is no longer active or its active wake fails, and the completion agent misses some or all generated media, OpenClaw sends an idempotent direct fallback with only the missing media to the original channel target.
 
 
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Security"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/security"
-source_hash: "5c85b6451d84665759bd368e9e9cd2fd2cdee4a697affdc2df455bf863323dab"
+source_hash: "b6da4a85c07c431efc3242dd8748851fdbc89a71fdacd41981fe9e67d3192883"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/security.md"
@@ -297,13 +297,23 @@ These categories are always denied, even when `HERMES_WRITE_SAFE_ROOT` is unset:
 
 | Category | Examples |
 |----------|----------|
-| OS credential stores | `~/.ssh/`, `~/.aws/`, `~/.kube/`, `/etc/sudoers`, `~/.netrc` |
+| OS credential stores | `~/.ssh/` (keys, `authorized_keys`), `~/.aws/`, `~/.kube/`, `/etc/sudoers`, `~/.netrc` |
 | Hermes credential stores | `auth.json`, `.env`, `.anthropic_oauth.json`, `mcp-tokens/`, `pairing/` under HERMES_HOME (active profile and global root) |
 | Project secret files | `.env`, `.env.local`, `.env.production`, `.envrc` anywhere on disk |
 
 Sensitive paths inside the safe root are still blocked — pointing `HERMES_WRITE_SAFE_ROOT` at `$HOME` does not allow writing `~/.ssh/id_rsa`.
 
 Safe-root violations return `Write denied: '…' is outside HERMES_WRITE_SAFE_ROOT (…)`. Credential-path blocks use `Write denied: '…' is a protected system/credential file.`
+
+**Exception — `~/.ssh/config` is approval-gated, not hard-blocked.** The SSH
+*client config* holds no private-key material and editing it (host aliases,
+`ProxyJump`, VS Code Remote-SSH targets) is a routine task, so `write_file` /
+`patch` route it through the same approve-once/session/always prompt the
+terminal tool already uses for `~/.ssh` writes — instead of the flat refusal
+that used to apply. It can still carry `ProxyCommand` / `Match exec` directives
+that run commands, so the write is never silent. Non-interactive callers (ACP
+file bridge, background jobs with no human channel) fail closed. Private keys,
+`authorized_keys`, and everything else under `~/.ssh/` remain hard-blocked.
 
 ### HERMES_WRITE_SAFE_ROOT (optional sandbox)
 

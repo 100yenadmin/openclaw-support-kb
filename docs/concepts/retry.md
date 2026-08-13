@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Retry policy"
 source: "https://docs.openclaw.ai/concepts/retry"
-source_hash: "2e64b043ce01d68939d8ec9245c836ccc195a4f1247a5e9ed637c2ad30d43e3e"
+source_hash: "00641258b530a9e14d1b330954302d953bb134b9923ec5aa94db2d29ca24e550"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/retry.md"
@@ -50,30 +50,7 @@ Source: https://docs.openclaw.ai/concepts/retry
 
 ## Configuration
 
-Set retry policy per provider in `~/.openclaw/openclaw.json`:
-
-```json5
-{
-  channels: {
-    telegram: {
-      retry: {
-        attempts: 3,
-        minDelayMs: 400,
-        maxDelayMs: 30000,
-        jitter: 0.1,
-      },
-    },
-    discord: {
-      retry: {
-        attempts: 3,
-        minDelayMs: 500,
-        maxDelayMs: 30000,
-        jitter: 0.1,
-      },
-    },
-  },
-}
-```
+Discord and Telegram channel retry timings are built in and are not configurable in `openclaw.json`.
 
 ## Notes
 

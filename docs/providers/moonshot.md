@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Moonshot AI"
 source: "https://docs.openclaw.ai/providers/moonshot"
-source_hash: "1988941c2c6bf1be423c2597e2a7300507bb9ad06241aeccdcf2ae3edeb74acf"
+source_hash: "10878a134b4490b800fc1eae9fb06c4938d39bf5b2809989bc674c3422ce309e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/moonshot.md"
@@ -135,7 +135,7 @@ Run a live smoke test
 
     ```json5
     {
-      env: { MOONSHOT_API_KEY: "sk-..." },
+      env: { vars: { MOONSHOT_API_KEY: "sk-..." } },
       agents: {
         defaults: {
           model: { primary: "moonshot/kimi-k3" },
@@ -281,7 +281,7 @@ Verify the model is available
 
     ```json5
     {
-      env: { KIMI_API_KEY: "sk-..." },
+      env: { vars: { KIMI_API_KEY: "sk-..." } },
       agents: {
         defaults: {
           model: { primary: "kimi/kimi-for-coding" },

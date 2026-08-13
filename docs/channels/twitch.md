@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Twitch"
 source: "https://docs.openclaw.ai/channels/twitch"
-source_hash: "065f88f34b6bdc2cead0dcc5473cbcb64e1682962e3d0b568d4f88035e754b23"
+source_hash: "315a8c19cb8f31a589b7b539a5a616bbe1bd584f921391fffd739707410946d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/twitch.md"
@@ -131,6 +131,10 @@ For automatic refresh, create your own app at the [Twitch Developer Console](htt
 {
   channels: {
     twitch: {
+      username: "openclaw",
+      accessToken: "oauth:abc123...",
+      clientId: "xyz789...",
+      channel: "yourchannel",
       clientSecret: "your_client_secret",
       refreshToken: "your_refresh_token",
     },
@@ -190,6 +194,9 @@ User ID allowlist (most secure)
         twitch: {
           accounts: {
             default: {
+              username: "openclaw",
+              accessToken: "oauth:abc123...",
+              channel: "yourchannel",
               allowFrom: ["123456789", "987654321"],
             },
           },
@@ -207,6 +214,9 @@ Role-based
         twitch: {
           accounts: {
             default: {
+              username: "openclaw",
+              accessToken: "oauth:abc123...",
+              channel: "yourchannel",
               allowedRoles: ["moderator", "vip"],
             },
           },
@@ -226,6 +236,9 @@ Disable @mention requirement
         twitch: {
           accounts: {
             default: {
+              username: "openclaw",
+              accessToken: "oauth:abc123...",
+              channel: "yourchannel",
               requireMention: false,
             },
           },
@@ -347,8 +360,8 @@ ParamField
 ### Provider options
 
 - `channels.twitch.enabled` - Enable/disable channel startup
-- `channels.twitch.username` / `accessToken` / `clientId` / `channel` - Simplified single-account config (implicit `default` account; takes precedence over `accounts.default`)
-- `channels.twitch.accounts.<accountName>` - Multi-account config (all account fields above)
+- `channels.twitch.username` / `accessToken` / `clientId` / `channel` - Simplified single-account config with an implicit `default` account
+- `channels.twitch.accounts.<accountName>` - Multi-account config (all account fields above); do not combine it with top-level account credentials
 - `channels.twitch.defaultAccount` - Which account name is the default
 - `channels.twitch.markdown.tables` - Markdown table rendering mode (`off` | `bullets` | `code` | `block`)
 
@@ -359,14 +372,17 @@ Full example:
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw",
-      accessToken: "oauth:abc123...",
-      clientId: "xyz789...",
-      channel: "yourchannel",
-      clientSecret: "secret123...",
-      refreshToken: "refresh456...",
-      allowFrom: ["123456789"],
+      defaultAccount: "default",
       accounts: {
+        default: {
+          username: "openclaw",
+          accessToken: "oauth:abc123...",
+          clientId: "xyz789...",
+          channel: "yourchannel",
+          clientSecret: "secret123...",
+          refreshToken: "refresh456...",
+          allowFrom: ["123456789"],
+        },
         second: {
           username: "mybot",
           accessToken: "oauth:def456...",

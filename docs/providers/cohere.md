@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cohere"
 source: "https://docs.openclaw.ai/providers/cohere"
-source_hash: "d206e6d2b5f09a2364634c8646633df4e8052a7432fdd8876ceddf2740b77e4c"
+source_hash: "17bd7b726b34b1da5535090520a440a166000c58aacc240e6a7fddd211352c82"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cohere.md"
@@ -52,7 +52,7 @@ openclaw gateway restart
 3. Run onboarding:
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice cohere-api-key \
   --cohere-api-key "$COHERE_API_KEY"
 ```

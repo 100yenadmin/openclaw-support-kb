@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Webhooks plugin"
 source: "https://docs.openclaw.ai/plugins/webhooks"
-source_hash: "37a7eb153e6c4ca86bda13bf9a9442f899a34f8d5d3404fce8d13b2931af8b41"
+source_hash: "d323fff05ca76922d368fdd01a01145b838e1ef7f2cb402864b0dd6de6e5c77d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/webhooks.md"
@@ -63,7 +63,7 @@ Route fields:
 | `controllerId` | no       | `webhooks/<routeId>`          | Used as the default `create_flow` controller. |
 | `description`  | no       | -                             | Operator note only.                           |
 
-`secret` accepts a plain string or a SecretRef: `{ source: "env" | "file" | "exec", provider: "default", id: "..." }`.
+`secret` accepts a plain string or a SecretRef: `{ source: "env" | "file" | "exec" | "store", provider: "default", id: "..." }`.
 
 SecretRefs resolve into the Gateway's startup config snapshot. When one route's
 secret cannot resolve, the Gateway keeps running and that exact route stays

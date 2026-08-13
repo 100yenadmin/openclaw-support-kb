@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "f736d46cb880252fc31180265bb6c233309db044c623528b622480abd6aab06c"
+source_hash: "382910a0a7d2dd3aa1050e16ef812ffd2e0b6ac883c3213522d59b2531640654"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -118,6 +118,42 @@ Info
 You can also index Markdown files outside the workspace with
 `memory.search.extraPaths`. See the
 [configuration reference](/reference/memory-config#additional-memory-paths).
+
+## Migrating from QMD
+
+QMD has been removed; builtin is the only memory engine. After upgrading, run:
+
+```bash
+openclaw doctor --fix
+```
+
+Doctor removes the retired `memory.backend`, `memory.qmd`, and
+`memory.search.qmd` settings, including agent-scoped `memory.search.qmd`
+forms. It preserves QMD paths and extra collections as the corresponding
+`memory.search.extraPaths` entries, including `{ path, pattern }` globs. When
+Memory Core finds a retired per-agent QMD workspace under
+`~/.openclaw/agents/<agentId>/qmd/`, Doctor also offers to remove its derived
+indexes, model downloads, collection metadata, and session exports.
+
+Canonical memory remains in `MEMORY.md`, `USER.md`, `memory/*.md`, and the
+migrated extra paths. Builtin indexes those same Markdown sources on its next
+sync. The cutover is lossless by construction: no canonical memory content is
+copied or deleted; only derived state is rebuilt.
+
+Builtin now covers most QMD use cases with:
+
+- hybrid BM25 and vector retrieval by default, followed by temporal decay,
+  importance, and project affinity before MMR diversity,
+- bounded lexical query expansion for conversational searches,
+- string or `{ path, pattern }` entries in `memory.search.extraPaths`, and
+- optional image and audio indexing under `extraPaths` only.
+
+QMD query mode's learned cross-encoder reranking and HyDE generation are not
+part of builtin memory. MMR reduces duplicate results but is not a learned
+relevance reranker. To replace QMD's in-process, zero-key GGUF embeddings,
+install the [llama.cpp provider](/plugins/llama-cpp) and set
+`memory.search.provider: "local"`; without an embedding provider, builtin uses
+BM25 keyword search only.
 
 ## When to use
 

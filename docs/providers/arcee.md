@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Arcee AI"
 source: "https://docs.openclaw.ai/providers/arcee"
-source_hash: "6849e000e00eae93f44e571a86bb7f64b49d275b2380e7e09c6d7a0f413cfb09"
+source_hash: "9a4114877764c71e5a199287ac7143aad0b9fd4137386a348ac416afab74d4fa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/arcee.md"
@@ -114,7 +114,7 @@ Tabs
 Direct (Arcee platform)
 
     ```bash
-    openclaw onboard --non-interactive \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice arceeai-api-key \
       --arceeai-api-key "$ARCEEAI_API_KEY"
@@ -125,7 +125,7 @@ Direct (Arcee platform)
 Via OpenRouter
 
     ```bash
-    openclaw onboard --non-interactive \
+    openclaw onboard --non-interactive --accept-risk --skip-health \
       --mode local \
       --auth-choice arceeai-openrouter \
       --openrouter-api-key "$OPENROUTER_API_KEY"

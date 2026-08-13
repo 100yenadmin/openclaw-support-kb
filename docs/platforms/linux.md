@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "4919529452a6dac1de0420a1b780e68ab99d4391081f69a9c8add46e1f9d9c80"
+source_hash: "0eaa9ca93ed0320bc079e86119230336f27b8e16878458e71b834797549e1959"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -33,6 +33,14 @@ The OpenClaw Linux companion is a Tauri desktop app for a local Gateway. It:
   Settings → Import Memory)
 - renders agent-driven Canvas and bundled A2UI content for a colocated CLI node host
 - remains available from the system tray when its window is closed
+
+### Host sleep
+
+On systems with systemd-logind, the companion prepares a suspension lease for
+its local Gateway before the host sleeps. After wake, it reconnects and resumes
+the Gateway; remote Gateway routes are left untouched. If logind or the system
+bus is unavailable, the sleep hook disables itself and the app continues
+normally.
 
 Realtime voice Talk inside the companion's embedded WebView is not validated:
 the shell does not grant microphone capture to the WebKitGTK WebView, so

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Volcengine (Doubao)"
 source: "https://docs.openclaw.ai/providers/volcengine"
-source_hash: "0d2878e10372c2b8b7208d8ccded9c8cb558d6b8dddfa9f279c3ea0881c9bb19"
+source_hash: "d29de214078e78c1b37e23c432df5cace06ee803631002c28dd9c5b03d92a27f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/volcengine.md"
@@ -73,7 +73,7 @@ Tip
 For non-interactive setup (CI, scripting), pass the key directly:
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice volcengine-api-key \
   --volcengine-api-key "$VOLCANO_ENGINE_API_KEY"

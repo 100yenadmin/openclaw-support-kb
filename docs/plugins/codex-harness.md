@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Codex harness"
 source: "https://docs.openclaw.ai/plugins/codex-harness"
-source_hash: "36776741d481f7249c4873a4aae8c92a0fc2141524e57228fabd4bdca7689aad"
+source_hash: "8cdc2a3392525ea7993f196b3312b9041220f55acafa22761438a1198219801f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/codex-harness.md"
@@ -505,6 +505,8 @@ Keep provider refs and runtime policy separate:
 | List or filter Codex threads                               | `/codex threads [filter]`                                                                             |
 | Read or update the bound thread's native goal              | `/codex goal [status\|set <objective>\|pause\|resume\|block\|complete\|clear]`                        |
 | List native Codex plugins                                  | `/codex plugins list`                                                                                 |
+| Discover available native Codex marketplace plugins        | `/codex plugins available`                                                                            |
+| Install and authorize one native Codex plugin              | `/codex plugins install <plugin>@<marketplace>`                                                       |
 | Enable or disable a configured native Codex plugin         | `/codex plugins enable <name>`, `/codex plugins disable <name>`                                       |
 | Resume a stored Codex CLI session as a paired-node turn    | `/codex sessions --host <node> [filter]`, then `/codex resume <session-id> --host <node> --bind here` |
 | View non-archived Codex sessions across computers          | Enable Codex supervision and open **Codex Sessions**                                                  |
@@ -553,7 +555,7 @@ route is eligible to select Codex implicitly:
 
 ### Mixed provider deployment
 
-Keep Claude as the default agent and add a named Codex agent:
+Configure a Claude `main` agent and add a named Codex agent:
 
 ```json5
 {
@@ -565,12 +567,12 @@ Keep Claude as the default agent and add a named Codex agent:
     },
   },
   agents: {
+    ownership: "explicit",
     defaults: {
       model: "anthropic/claude-opus-4-6",
     },
     entries: {
       main: {
-        default: true,
         model: "anthropic/claude-opus-4-6",
       },
       codex: {
@@ -582,10 +584,7 @@ Keep Claude as the default agent and add a named Codex agent:
 }
 ```
 
-The `main` agent uses its normal provider path. The `codex` agent uses Codex
-app-server when its effective OpenAI route remains compatible; add explicit
-model-scoped `agentRuntime.id: "codex"` when that should be a fail-closed
-requirement.
+This explicit fleet has no default agent; target `main` or `codex` with a session, `--agent`, or binding. The `main` agent uses its normal provider path. The `codex` agent uses Codex app-server when its effective OpenAI route remains compatible; add explicit model-scoped `agentRuntime.id: "codex"` when that should be a fail-closed requirement.
 
 ### Fail-closed Codex deployment
 
@@ -742,8 +741,12 @@ Common forms:
 - `/codex account` shows account and rate-limit status.
 - `/codex mcp` lists Codex app-server MCP server status.
 - `/codex skills` lists Codex app-server skills.
-- `/codex plugins list`, `/codex plugins enable <name>`, and
-  `/codex plugins disable <name>` manage configured native Codex plugins.
+- `/codex plugins list` shows configured native plugins; `/codex plugins
+available` discovers Codex marketplace plugins in the bound workspace.
+- `/codex plugins install <plugin>@<marketplace>` installs and authorizes one
+  discovered plugin. `/codex plugins enable <name>` and `/codex plugins
+disable <name>` update its persisted policy. Mutations require an owner or
+  `operator.admin` gateway client.
 - `/codex computer-use [status|install]` manages Codex Computer Use.
 - `/codex help` lists the full command tree.
 
@@ -821,10 +824,12 @@ model or Codex runtime.
 
 When native Codex plugins are configured, OpenClaw reads and caches one
 runtime-and-workspace-scoped `plugin/installed` snapshot. That one snapshot
-covers both curated and workspace plugins, including disabled plugin ownership.
-`plugin/read` resolves only explicitly configured plugin details; `plugin/list`
-is reserved for finding or repairing an explicitly enabled missing curated
-plugin. OpenClaw never installs, enables, or authenticates workspace plugins.
+covers configured plugins from Codex-discovered marketplaces, including
+disabled plugin ownership. `plugin/read` resolves only explicitly configured
+plugin details. `/codex plugins available` queries `plugin/list` with the
+bound workspace, while `/codex plugins install <plugin>@<marketplace>` is the
+owner- or administrator-authorized installation path. Routine thread setup
+retains existing explicitly configured curated-plugin recovery.
 
 `app/installed` supplies the installed app runtime snapshot, and `app/read`
 supplies authenticated app metadata in batches of at most 100 app IDs. OpenClaw
@@ -852,8 +857,8 @@ the `plugin/installed` snapshot and reads only the exact configured plugin's
 details to keep its apps denied. This check never installs, enables, or
 authenticates the plugin.
 
-OpenClaw does not install unknown apps; it activates only explicitly configured
-marketplace plugins with `plugin/install` and refreshes their installed
+OpenClaw does not install unknown apps or let the model authorize new plugin
+installs. Owner-approved plugin installation refreshes the target runtime
 inventory. Missing inventory methods, authentication errors, transport
 failures, and connector refresh failures fail closed.
 

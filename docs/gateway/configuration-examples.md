@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "6068110ef29e7ca4a9fbc148f22f4a0f2b9e5a09a5003819588dc2b027a543d3"
+source_hash: "8842868f12348ca73bff2e85fb85b707366a764d5f577171c766ccfefb160269"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -71,8 +71,8 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
 {
   // Environment + shell
   env: {
-    OPENROUTER_API_KEY: "sk-or-...",
     vars: {
+      OPENROUTER_API_KEY: "sk-or-...",
       GROQ_API_KEY: "gsk-...",
     },
     shellEnv: {
@@ -257,7 +257,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
       heartbeat: {
         every: "30m",
         model: "anthropic/claude-sonnet-4-6",
-        target: "last",
+        target: "whatsapp",
         directPolicy: "allow", // allow (default) | block
         to: "+15555550123",
         prompt: "HEARTBEAT",

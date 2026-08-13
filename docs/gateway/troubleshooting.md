@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Troubleshooting"
 source: "https://docs.openclaw.ai/gateway/troubleshooting"
-source_hash: "50e4945d23457d28899a29945c6c6b15ed45e6623175d00d7a9c92f5a67602da"
+source_hash: "f3798f4d4c7db581c4382e793ea1e0c63aa0ceedb8474c3a61a61c33c93ca71b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/troubleshooting.md"
@@ -807,6 +807,7 @@ Common signatures
     - `cron: timer tick failed` → scheduler tick failed; check file/log/runtime errors.
     - `heartbeat skipped` with `reason=quiet-hours` → outside active hours window.
     - `heartbeat skipped` with `reason=empty-heartbeat-file` → heartbeat monitor scratch only contains blank, comment, header, fence, or empty-checklist scaffolding, so OpenClaw skips the model call.
+    - `heartbeat skipped` with `reason=no-route` → the default `owner` target has no concrete owner in `commands.ownerAllowFrom` or channel `allowFrom`, the owner cannot resolve to a DM, or no channel is configured. Explicit `last` also needs a session conversation route.
     - `heartbeat: unknown accountId` → invalid account id for heartbeat delivery target.
     - `heartbeat skipped` with `reason=dm-blocked` → heartbeat target resolved to a DM-style destination while `agents.defaults.heartbeat.directPolicy` (or per-agent override) is set to `block`.
 

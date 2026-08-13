@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building a Gateway client"
 source: "https://docs.openclaw.ai/gateway/clients"
-source_hash: "fa790d5c68a31ef1334b608fe27838219562f254169b3d2b067df0d8d6d6bb2c"
+source_hash: "cc5dff9afe0661149e8cf2bddb58f8558c7b7adfac6f03d8215aa1e375703614"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/clients.md"
@@ -200,6 +200,9 @@ Rows returned by `chat.history` can carry an `__openclaw` metadata envelope:
 - `kind` identifies synthetic rows. A compaction boundary uses
   `kind: "compaction"` and may include `tokensBefore` and `tokensAfter` when a
   matching checkpoint recorded those metrics.
+
+  A session reset boundary uses `kind: "reset"`. It has no checkpoint token
+  metrics.
 
 Page backward with the response's `hasMore` and `nextOffset` values. Numeric
 offsets describe the current transcript projection, so do not persist them as

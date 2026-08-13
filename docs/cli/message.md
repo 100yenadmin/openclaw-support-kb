@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Message"
 source: "https://docs.openclaw.ai/cli/message"
-source_hash: "2d105f8acb7e9e60f37b10b0bfd4c65f1848b0431886fc5d190016eab8940802"
+source_hash: "88e56d564aa7a4368d5b4557bd9a93ef66f596399ed5035e7f421f8ef716368d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/message.md"
@@ -105,8 +105,9 @@ true}`. `--pin` is shorthand for pinned delivery when the channel supports
   it.
 - `--reply-to <id>`, `--thread-id <id>` (Telegram forum topic; Slack thread
   timestamp, same field as `--reply-to`).
-- `--force-document` (Telegram, WhatsApp): send images/GIFs/videos as
-  documents to avoid channel compression.
+- `--force-document`: preserve original image bytes on Slack, or send
+  images/GIFs/videos as documents on Telegram and WhatsApp, to avoid channel
+  compression.
 - `--silent` (Telegram, Discord): send without a notification.
 - `--gif-playback` (WhatsApp only): treat video media as GIF playback.
 

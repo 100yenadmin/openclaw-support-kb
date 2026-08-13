@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway on macOS"
 source: "https://docs.openclaw.ai/platforms/mac/bundled-gateway"
-source_hash: "675f61f6bf2feeee59358aba9caf5cb1f7c7dcad0cae5db0613319683661a5c1"
+source_hash: "0f1a32879fb18e3c8834929b21fbbf3e58ce36eef01997bf3065e900d6da98cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/bundled-gateway.md"
@@ -93,7 +93,7 @@ Logging:
 - If the host loops with repeated `EADDRINUSE` or fast restarts, check for
   duplicate `ai.openclaw.gateway` / `ai.openclaw.node` LaunchAgents and the
   launchd-marker workaround in
-  [Gateway troubleshooting](/gateway/troubleshooting#macos-launchd-supervisor-loop-with-duplicate-gatewaynode-launchagents).
+  [Gateway troubleshooting](/gateway/troubleshooting#macos-launchd-supervisor-loop-with-duplicate-gateway%2Fnode-launchagents).
 
 ## Version compatibility
 

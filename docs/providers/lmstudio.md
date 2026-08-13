@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "93787f58ec2f4d3c47abf0354cf4bf9a6ecbb5c3d34f0361e8705a04533f6976"
+source_hash: "bf64d9e9374681450b3683a4793fc8e413029040e8ebc499c4649c64a6a5f742"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/lmstudio.md"
@@ -86,7 +86,7 @@ curl http://localhost:1234/api/v1/models
 ## Non-interactive onboarding
 
 ```bash
-openclaw onboard --non-interactive --accept-risk --auth-choice lmstudio
+openclaw onboard --non-interactive --accept-risk --skip-health --auth-choice lmstudio
 ```
 
 Or specify base URL, model, and API key explicitly:
@@ -95,6 +95,7 @@ Or specify base URL, model, and API key explicitly:
 openclaw onboard \
   --non-interactive \
   --accept-risk \
+  --skip-health \
   --auth-choice lmstudio \
   --custom-base-url http://localhost:1234/v1 \
   --lmstudio-api-key "$LM_API_TOKEN" \

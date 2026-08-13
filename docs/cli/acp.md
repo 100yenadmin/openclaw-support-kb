@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP"
 source: "https://docs.openclaw.ai/cli/acp"
-source_hash: "3e06ff7febafa0b073152b458ffced448d812dff59524c415d425859806c6fdc"
+source_hash: "ef41bc5a4e95f37493ce929fd6131819022265e7ac5a70ba8d04d7007cd7bb9f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/acp.md"
@@ -203,7 +203,7 @@ acpx openclaw -s codex-bridge --cwd /path/to/repo \
 
 If you want `acpx openclaw` to target a specific Gateway and session key every time, override the `openclaw` agent command in `~/.acpx/config.json`:
 
-```json
+```json validate=false
 {
   "agents": {
     "openclaw": {

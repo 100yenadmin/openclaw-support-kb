@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SMS"
 source: "https://docs.openclaw.ai/channels/sms"
-source_hash: "3738fe6f246918d40d51ee341f07f11443d31804b320ea891afc0f6109d399a9"
+source_hash: "4d46b141b69889fdfbc283bb3afaeb62b8ebfc5ab40682085b84520988b21b1a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/sms.md"
@@ -243,7 +243,7 @@ Then enable the channel in config:
 
 ### SecretRef auth token
 
-`authToken` can be a SecretRef (`source: "env" | "file" | "exec"`). Use this when the Gateway should resolve the Twilio Auth Token from the OpenClaw secrets runtime instead of storing plaintext config:
+`authToken` can be a SecretRef (`source: "env" | "file" | "exec" | "store"`). Use this when the Gateway should resolve the Twilio Auth Token from the OpenClaw secrets runtime instead of storing plaintext config:
 
 ```json5
 {

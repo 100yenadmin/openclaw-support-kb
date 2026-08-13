@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Give your Gateway a stable HTTPS URL"
 source: "https://docs.openclaw.ai/gateway/stable-https-url"
-source_hash: "8d081f1722c2e3f631d5c1a26400b890042df28dd9e34aca40f24c9db0251a59"
+source_hash: "8e711811678cc110d714c310e952be3339078816545694689d27ac13fc49f0be"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/stable-https-url.md"
@@ -17,7 +17,7 @@ Tailscale Serve gives your Gateway one HTTPS URL without exposing the Gateway po
 
 The result is `https://<host>.<tailnet>.ts.net`, reachable from permitted devices on your tailnet and not from the public internet. The matching WebSocket URL is `wss://<host>.<tailnet>.ts.net`.
 
-If you need a public URL, use [Tailscale Funnel](/gateway/tailscale#public-internet-funnel-shared-password) instead. Funnel is public, and OpenClaw requires password auth for it.
+If you need a public URL, use [Tailscale Funnel](/gateway/tailscale#public-internet-funnel-%2B-shared-password) instead. Funnel is public, and OpenClaw requires password auth for it.
 
 ## Before you begin
 

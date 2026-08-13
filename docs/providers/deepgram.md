@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Deepgram"
 source: "https://docs.openclaw.ai/providers/deepgram"
-source_hash: "0764c2ad68fcd7941825ad948491247033fce6901746ad571c6aaa549cd68f72"
+source_hash: "5dfe000c060d11d27f687715fdf2d606a5e2a7d58f1794f98e51a8f54bd9115b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepgram.md"
@@ -47,9 +47,9 @@ Enable the audio provider
     {
       tools: {
         media: {
+          models: [{ provider: "deepgram", model: "nova-3", capabilities: ["audio"] }],
           audio: {
             enabled: true,
-            models: [{ provider: "deepgram", model: "nova-3" }],
           },
         },
       },
@@ -83,9 +83,11 @@ With language hint
     {
       tools: {
         media: {
+          models: [
+            { provider: "deepgram", model: "nova-3", language: "en", capabilities: ["audio"] },
+          ],
           audio: {
             enabled: true,
-            models: [{ provider: "deepgram", model: "nova-3", language: "en" }],
           },
         },
       },
@@ -99,6 +101,7 @@ With Deepgram options
     {
       tools: {
         media: {
+          models: [{ provider: "deepgram", model: "nova-3", capabilities: ["audio"] }],
           audio: {
             enabled: true,
             providerOptions: {
@@ -108,7 +111,6 @@ With Deepgram options
                 smart_format: true,
               },
             },
-            models: [{ provider: "deepgram", model: "nova-3" }],
           },
         },
       },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Transcript hygiene"
 source: "https://docs.openclaw.ai/reference/transcript-hygiene"
-source_hash: "4dbfea71e253af1e0cd4c2cd51c491e649e1bd1eae67d8ba0b6313be7061d1ee"
+source_hash: "b182008d5c27ee04679e0bda5a9bcd7aab8e2dcbaf5ec6245642ca8dd4633286"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/transcript-hygiene.md"
@@ -83,9 +83,9 @@ Implementation:
 - Max image side is configurable via `agents.defaults.imageMaxDimensionPx`
   (default: `1200`)
 - Blank text blocks are removed while this pass walks replay content.
-  Assistant turns that become empty are dropped from the replay copy; user
-  and tool-result turns that become empty receive a non-empty
-  omitted-content placeholder.
+  Assistant turns that become empty are dropped unless they own opaque
+  provider replay state; user and tool-result turns that become empty receive
+  a non-empty omitted-content placeholder.
 
 ---
 

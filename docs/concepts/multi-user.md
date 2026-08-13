@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multi-user mode"
 source: "https://docs.openclaw.ai/concepts/multi-user"
-source_hash: "5a883cff7c6c026194cb74b9ddfdb6b0992edd87441029dab42de73932f3472a"
+source_hash: "c1ae2a0913420ee3655e3f8bba8d2f2bfd51242c839206fd1a398399b71e52aa"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/multi-user.md"
@@ -34,6 +34,12 @@ The web app keeps ownership and presence visually distinct:
 - The sidebar's person filter shows sessions created by one identity while preserving the existing custom groups.
 
 When fewer than two distinct creators appear in the loaded session list, OpenClaw hides all ownership and person-filter chrome. A single-user gateway therefore looks unchanged.
+
+## Identity-scoped convenience state
+
+When a connection has a durable Gateway profile, new-session preferences and picker recents follow that person across browsers. Preferences remain per agent, while recents are derived only from sessions that person created. Connections without a durable identity keep browser-local preferences and derive recents from the loaded session roster.
+
+This state improves continuity; it is not an authorization or isolation boundary. Operator scopes still control actions, and a shared Gateway remains one trust domain for sessions, tools, credentials, and files.
 
 ## Drafts
 

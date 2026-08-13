@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Health checks"
 source: "https://docs.openclaw.ai/gateway/health"
-source_hash: "e203b415abd1769644c49c53b074aaf3f54e95c192bdc910a09329561dc766bc"
+source_hash: "68ac4997781eecbbcdef27ae7f37b2141143be315dde40e2ae09085c5f4e3ec7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/health.md"
@@ -58,6 +58,20 @@ Channel connectivity and inbound admission are separate failure domains. A chann
 - Recovery stays automatic. The ingress verdict describes the account's last start attempt and is cleared by the next one, so the ordinary restart path is also how a transient queue-open failure recovers. Those restarts log as `health-monitor: restarting (reason: ingress-unavailable)` instead of the generic `stuck`.
 - If the restarts keep repeating, the cause is not transient. Check the logged ingress failure: a plugin denied the `openChannelIngressQueue` capability, for example, needs operator action rather than another restart.
 - Channels that never report ingress state are unaffected: absence means "no signal", never "broken". There is no traffic-staleness heuristic, so a genuinely quiet channel is never marked unhealthy for having received nothing.
+
+## HTTP probes
+
+The Gateway exposes three unauthenticated `GET`/`HEAD` probe pairs:
+
+| Endpoints               | Meaning                                                                                                       | Use                                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `/health`, `/healthz`   | The HTTP server is live.                                                                                      | Process liveness and restart decisions.                        |
+| `/startup`, `/startupz` | Startup work is complete and the Gateway is not draining. Channel health is not consulted.                    | Orchestrator startup and traffic admission.                    |
+| `/ready`, `/readyz`     | Startup is complete, the Gateway is not draining, and configured channel accounts pass deep readiness checks. | Operator monitoring that should surface hard channel failures. |
+
+`/startupz` returns `503` with `status: "starting"` while startup sidecars are pending, `503` with `status: "draining"` during drain, and `200` with `status: "started"` otherwise. Use it for Kubernetes, Fly, Render, and similar traffic admission. A broken Telegram or other channel account can make `/readyz` return `503` without taking a healthy Control UI out of service through `/startupz`.
+
+Remote unauthenticated startup responses contain only `ok` and `status`. Local-direct and authenticated callers also receive `version`, `uptimeMs`, and `pendingReason` while startup is pending. Readiness details follow the same local-or-authenticated gate because they can name failing subsystems.
 
 ## Uptime monitoring
 

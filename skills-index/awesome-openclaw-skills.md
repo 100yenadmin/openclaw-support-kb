@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "f6ec29722b2eb4c400568a9ad6329fb7711db3a017ee6a779fb75cdaffc9519a"
+source_hash: "6d258505f306da54b39dd161c416fdcce0befac1a50e8d0dc90b19a870b05376"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -190,6 +190,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 
 - [ai-video-remix](https://clawskills.sh/skills/abu-shotai-ai-video-remix) - AI-driven video remix from local library using ShotAI.
 - [modellix](https://clawhub.ai/modellix/modellix) - Unified API for AI image and video generation.
+- [riffkit](https://clawhub.ai/riffkit/riffkit) - Riff a winning TikTok into your own product video.
 
 - [alter-actions](https://clawskills.sh/skills/olivieralter-alter-actions) - Trigger Alter macOS app actions via x-callback-urls.
 - [apple-contacts](https://clawskills.sh/skills/tyler6204-apple-contacts) - Look up contacts from macOS Contacts.app.

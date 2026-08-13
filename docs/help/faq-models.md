@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: models and auth"
 source: "https://docs.openclaw.ai/help/faq-models"
-source_hash: "618022cba61a6ac836bfbeb997fcb3c7a8aa7191095a9cca9c41d53d6abbfa20"
+source_hash: "0fa6a041caeeadf0ebf2aae0c7581b1fb72cc12dfc6f3eb350ddf0ded20a9d45"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-models.md"
@@ -248,7 +248,7 @@ Can I use MiniMax as my default and OpenAI for complex tasks?
 
     ```json5
     {
-      env: { MINIMAX_API_KEY: "sk-...", OPENAI_API_KEY: "sk-..." },
+      env: { vars: { MINIMAX_API_KEY: "sk-...", OPENAI_API_KEY: "sk-..." } },
       agents: {
         defaults: {
           model: { primary: "minimax/MiniMax-M3" },
@@ -330,7 +330,7 @@ How do I add models from other providers like OpenRouter or Z.AI?
           models: { "openrouter/anthropic/claude-sonnet-4-6": {} },
         },
       },
-      env: { OPENROUTER_API_KEY: "sk-or-..." },
+      env: { vars: { OPENROUTER_API_KEY: "sk-or-..." } },
     }
     ```
 
@@ -344,7 +344,7 @@ How do I add models from other providers like OpenRouter or Z.AI?
           models: { "zai/glm-5.1": {} },
         },
       },
-      env: { ZAI_API_KEY: "..." },
+      env: { vars: { ZAI_API_KEY: "..." } },
     }
     ```
 

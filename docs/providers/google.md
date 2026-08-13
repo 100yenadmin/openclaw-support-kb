@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google (Gemini)"
 source: "https://docs.openclaw.ai/providers/google"
-source_hash: "8e65c35b013d4f9acd983aae3799100615bb3d9f9031434471a50a19b742def6"
+source_hash: "4270b39a5245b661933f3a46686b2b1ce11de9d1e8ccacfff51519553cd8b460"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/google.md"
@@ -51,7 +51,7 @@ Run onboarding
         Or pass the key directly:
 
         ```bash
-        openclaw onboard --non-interactive \
+        openclaw onboard --non-interactive --accept-risk --skip-health \
           --mode local \
           --auth-choice gemini-api-key \
           --gemini-api-key "$GEMINI_API_KEY"

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "891a71be2321d86bbe50aa3d3ea1576bf8cb3093d8948abc1fc0d549a91e96ed"
+source_hash: "cd0ca02461f85cb4136a8635696ee9fa1c75997a2d8763bed440666a969b471c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
@@ -347,7 +347,7 @@ Viewer assets:
 
 The viewer document resolves these assets relative to the viewer URL, so an optional `baseUrl` path prefix carries through to asset requests too.
 
-URL resolution order: tool-call `baseUrl` (after strict validation) -> plugin `viewerBaseUrl` -> loopback `127.0.0.1` default. If gateway bind mode is `custom` and `gateway.customBindHost` is set, that host is used instead of loopback.
+URL resolution order: tool-call `baseUrl` (after strict validation) -> plugin `viewerBaseUrl` -> `gateway.publicOrigin` -> the existing bind-aware Gateway fallback.
 
 `baseUrl` rules: must be `http://` or `https://`; query and hash are rejected; origin plus optional base path is allowed.
 
@@ -420,7 +420,7 @@ Input validation errors
 Viewer accessibility
 
     - Viewer URL resolves to `127.0.0.1` by default.
-    - For remote access, either set plugin `viewerBaseUrl`, pass `baseUrl` per call, or use `gateway.bind=custom` with `gateway.customBindHost`.
+    - For remote access, set `gateway.publicOrigin`, set plugin `viewerBaseUrl`, or pass `baseUrl` per call.
     - If `gateway.trustedProxies` includes loopback for a same-host proxy (for example Tailscale Serve), raw loopback viewer requests without forwarded client-IP headers fail closed by design.
     - For that proxy topology, prefer `mode: "file"`/`"both"` for an attachment, or intentionally enable `security.allowRemoteViewer` plus plugin `viewerBaseUrl`/a proxy `baseUrl` for a shareable viewer link.
     - Enable `security.allowRemoteViewer` only when external viewer access is intended.

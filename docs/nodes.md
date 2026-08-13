@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/nodes"
-source_hash: "e3f6aec935f8061dff81b7e2a8bf871b9c3f167d841cc0079c17a6daf8a1fc1a"
+source_hash: "e0f91236543040342d2a1e270094e13b3fc98d825a448064b52bd027ab4653a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes.md"
@@ -100,7 +100,21 @@ On the node machine:
 openclaw node run --host <gateway-host> --port 18789 --display-name "Build Node"
 ```
 
-`node run` also accepts `--context-path` (Gateway WS context path), `--tls`, `--tls-fingerprint <sha256>`, and `--node-id` (override the legacy client instance ID; this does not reset pairing). On macOS, pass `--share-installed-apps` to advertise `device.apps`; sharing is off by default. Use `--no-share-installed-apps` to disable a previously saved opt-in.
+For one-paste setup, create a **Node host** setup link from the Control UI
+Devices page, then run its copyable command on the node machine:
+
+```bash
+openclaw node run --pair "oc-pair://<setup-code>"
+```
+
+The link is single-use and expires after 10 minutes. It supplies the endpoint,
+bootstrap token, TLS mode, and certificate pin when available. Explicit
+gateway flags override the corresponding `--pair` values. Pairing does not
+pre-approve command execution; the first `system.run` request still follows
+the normal pending-approval or SSH-verification path. See
+[Node pairing](/gateway/pairing#one-paste-node-pairing).
+
+`node run` also accepts `--pair`, `--context-path` (Gateway WS context path), `--tls`, `--tls-fingerprint <sha256>`, and `--node-id` (override the legacy client instance ID; this does not reset pairing). On macOS, pass `--share-installed-apps` to advertise `device.apps`; sharing is off by default. Use `--no-share-installed-apps` to disable a previously saved opt-in.
 
 ### Remote gateway via SSH tunnel (loopback bind)
 
@@ -398,6 +412,29 @@ Gateway transcript, and reject attachments and images. Claude Desktop rows and
 nodes that do not advertise the run command remain view-only. The macOS app
 node does not advertise this command yet, so its rows remain view-only.
 
+### Host OpenClaw sessions
+
+A headless node host can separately opt into full OpenClaw session hosting from
+its local installation:
+
+```json5
+{
+  nodeHost: {
+    workerRuns: { enabled: true },
+  },
+}
+```
+
+Restart the node host after enabling this setting. At startup it advertises the
+exact OpenClaw version, worker-bundle hash, and worker protocol features of its
+own installation. The Gateway offers the device as a session host only while
+that advertisement is live, and provisioning requires the node and Gateway
+versions to match exactly. If they differ, update the node before retrying.
+
+This setting completes device-environment provisioning but does not yet enable
+turn launch on the device. The local-install chain adds supervised launch and
+workspace transport in subsequent steps.
+
 See [Anthropic: Claude sessions across computers](/providers/anthropic#claude-sessions-across-computers)
 for the Control UI behavior and storage sources.
 
@@ -476,7 +513,7 @@ These rows describe the Gateway policy ceiling, not the commands implemented by 
 
 Desktop host commands (`system.run`, `system.run.prepare`, `system.which`, `browser.proxy`, `browser.proxy.upload.v1`, `mcp.tools.call.v1`, and `screen.snapshot` on macOS/Windows/Linux) are not part of the static platform-default table above. They become available once the operator approves a pairing request that declares them, after which the node's approved command set carries them forward on reconnect.
 
-Dangerous or privacy-heavy commands require a one-time persistent opt-in with `gateway.nodes.commands.allow`, even if a node declares them: `camera.snap`, `camera.clip`, `camera.ptz.control`, `screen.record`, `contacts.add`, `calendar.add`, `reminders.add`, `health.summary`, `sms.send`, `sms.search`. `gateway.nodes.commands.deny` always wins over defaults and extra allowlist entries. See [HealthKit summaries](/platforms/ios-healthkit) for the iPhone consent gate and [Computer use](/nodes/computer-use) for the local enablement, pairing, capability, and tool-policy gates around desktop input.
+Dangerous or privacy-heavy commands require a one-time persistent opt-in with `gateway.nodes.commands.allow`, even if a node declares them: `camera.snap`, `camera.clip`, `camera.ptz.control`, `desktop.stream`, `screen.record`, `contacts.add`, `calendar.add`, `reminders.add`, `health.summary`, `sms.send`, `sms.search`. `gateway.nodes.commands.deny` always wins over defaults and extra allowlist entries. See [Paired node desktops](/gateway/configuration-reference#paired-node-desktops), [HealthKit summaries](/platforms/ios-healthkit), and [Computer use](/nodes/computer-use) for the local enablement, pairing, capability, and tool-policy gates around desktop access.
 
 Plugin-owned node commands can add a Gateway node-invoke policy. That policy runs after the allowlist check and before forwarding to the node, so raw `node.invoke`, CLI helpers, and dedicated agent tools share the same plugin permission boundary. Dangerous plugin node commands still require explicit `gateway.nodes.commands.allow` opt-in.
 
@@ -503,9 +540,9 @@ Node-related settings live under `gateway.nodes` and `tools.exec`:
       pluginTools: {
         enabled: true,
       },
-      // Persistently enable dangerous/privacy-heavy node commands (camera.snap, etc.).
+      // Persistently enable dangerous/privacy-heavy node commands.
       commands: {
-        allow: ["camera.snap", "screen.record"],
+        allow: ["camera.snap", "desktop.stream", "screen.record"],
         // Block exact command names even if defaults or commands.allow include them.
         deny: ["camera.clip"],
       },

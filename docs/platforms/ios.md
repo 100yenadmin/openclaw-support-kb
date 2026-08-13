@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "a2de0d1ad806d929241ff958cf170806ae2017f9d4114c81ba6aa168a91e5747"
+source_hash: "a92bebc140612b7765faa75c22d718a9cfce009ac22f3d434c17a22ede062e70"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -58,7 +58,7 @@ Gateway has not been configured yet, run `openclaw onboard` first so setup-code
 creation has a token or password auth path.
 
 2. Open the [Control UI](/web/control-ui), select **Nodes**, and click
-   **Pair mobile device** on the **Devices** page. Full access is recommended
+   **Pair device** on the **Devices** page. Full access is recommended
    and selected by default; choose Limited access only when you want to omit
    administrative Gateway controls, then click **Create setup code**.
 

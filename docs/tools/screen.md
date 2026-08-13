@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Screen"
 source: "https://docs.openclaw.ai/tools/screen"
-source_hash: "e77ee1ed85da431387f273adb0643d3d81abb5e40a0e42751694b905f9343a01"
+source_hash: "28a88e1e76974c12f8c43b4bd76d92a9e15276d0addf5779dbd00026de377e30"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/screen.md"
@@ -51,7 +51,7 @@ panels.
 ## Related
 
 - [Control UI](/web/control-ui)
-- [Gateway protocol](/gateway/protocol#method-families)
+- [Gateway protocol](/gateway/protocol#rpc-method-families)
 - [Browser tool](/tools/browser)
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Context engine"
 source: "https://docs.openclaw.ai/concepts/context-engine"
-source_hash: "0c7800d075b49492d309aba262c370c83a6bc10548ba24986ee837ef502172d4"
+source_hash: "b6f96d5e65f65e995319090a76129570e551b5988928c575fe9043e29c98d790"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/context-engine.md"
@@ -193,13 +193,12 @@ export default function register(api) {
       return { ok: true, compacted: true };
     },
 
-    async commitTurn({ advancementKey, messages, prePromptMessageCount }) {
+    async commitTurn({ advancementKey, messages }) {
       // Atomically store the accepted turn and advancementKey. Return
       // "duplicate" when that exact key was committed by an earlier retry.
       return await commitAcceptedTurn({
         advancementKey,
         messages,
-        prePromptMessageCount,
       });
     },
   }));
@@ -241,13 +240,13 @@ Required members:
 | `assemble(params)` | Method   | Build context for a model run (returns `AssembleResult`)                           |
 | `compact(params)`  | Method   | Summarize/reduce context                                                           |
 
-Set `info.acceptedHostParams` to the host-added lifecycle fields the engine
-accepts. Current keys are `sessionKey`, `prompt`, `runtimeSettings`,
+Set `info.acceptedHostParams` to restrict the host-added lifecycle fields the
+engine receives. Current keys are `sessionKey`, `prompt`, `runtimeSettings`,
 `sessionTarget`, and `runtimeContext`. OpenClaw intersects the declaration with
 the fields available for each lifecycle method, so undeclared or unknown keys
-are never injected. Engines without this declaration receive the pre-host-field
-legacy parameter set through 2026-08-12; after that date, undeclared engines
-receive every current host field.
+are never injected. Engines without this declaration receive every current
+host field; declare an explicit list, including `[]`, when the engine validates
+a narrower input shape.
 
 For durable admitted turns, declare both transcript semantics:
 
@@ -257,6 +256,10 @@ For durable admitted turns, declare both transcript semantics:
 and implement `commitTurn(...)` as one atomic, idempotent write keyed by
 `advancementKey`. Return `{ status: "committed" }` for the first write and
 `{ status: "duplicate" }` when a host retry presents an already-committed key.
+The `messages` payload contains only the inclusive range from the admitted user
+entry through the accepted terminal entry. Engines that need the earlier
+transcript during bootstrap or rebuild should read it through the transcript
+cursor API, `readSessionTranscriptVisibleMessageDelta(...)`.
 Pre-turn transcript reads during bootstrap, maintenance, assembly, and retries
 then see the exact transcript prefix before the admitted user message. The host
 calls `commitTurn` only for the accepted successful turn; failed or aborted
@@ -336,9 +339,9 @@ rendered directly to users and does not create a dedicated reporting surface.
 - `diagnostics`: closed fallback and degraded reason codes when known
 
 Fields that can be unknown are represented as `null`; discriminator fields such
-as runtime mode and selection source remain non-nullable. Engines that accept
-`runtimeSettings` must include it in `info.acceptedHostParams` during the
-compatibility window.
+as runtime mode and selection source remain non-nullable. Engines that restrict
+host parameters and accept `runtimeSettings` must include it in
+`info.acceptedHostParams`.
 
 ### Host requirements
 

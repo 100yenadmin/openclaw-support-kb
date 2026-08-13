@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "1b0e18117f761cbd07537ba4920ae639580e1f46d30ad2975895c1ea715f138f"
+source_hash: "9aafa743d8185af8e95c299f15c7d77df3a79d90a52ccfa2466694941e4e4722"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
@@ -41,8 +41,11 @@ To browse toolkits visually, see the [toolkits catalog](/toolkits). For the conc
 
 | Method | Path | Endpoint |
 | --- | --- | --- |
+| `DELETE` | `/api/v3.1/custom/toolkits/{slug}` | [Delete a custom toolkit](/reference/api-reference/toolkits/deleteCustomToolkitsBySlug) |
 | `GET` | `/api/v3.1/toolkits` | [List available toolkits](/reference/api-reference/toolkits/getToolkits) |
 | `GET` | `/api/v3.1/toolkits/categories` | [List toolkit categories](/reference/api-reference/toolkits/getToolkitsCategories) |
+| `POST` | `/api/v3.1/custom/toolkits/upsert` | [Upsert a custom toolkit](/reference/api-reference/toolkits/postCustomToolkitsUpsert) |
+| `POST` | `/api/v3.1/custom/toolkits/sync` | [Sync a custom toolkit](/reference/api-reference/toolkits/postCustomToolkitsSync) |
 | `GET` | `/api/v3.1/toolkits/{slug}` | [Get toolkit by slug](/reference/api-reference/toolkits/getToolkitsBySlug) |
 | `POST` | `/api/v3.1/toolkits/multi` | [Fetch multiple toolkits](/reference/api-reference/toolkits/postToolkitsMulti) |
 | `GET` | `/api/v3.1/toolkits/changelog` | [Get toolkits changelog](/reference/api-reference/toolkits/getToolkitsChangelog) |

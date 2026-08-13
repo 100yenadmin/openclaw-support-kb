@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "dc3a5ae06cbc12887fa9e261603e705135a8c6b31c92cb49d57734aa57b3596e"
+source_hash: "9875006530ba6802b894cc19d47de2cac46aaee624c7f084ba9571e181ace907"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/zai.md"
@@ -164,7 +164,7 @@ you want to force a specific Coding Plan or general API surface.
 
 ```json5
 {
-  env: { ZAI_API_KEY: "sk-..." },
+  env: { vars: { ZAI_API_KEY: "sk-..." } },
   models: {
     providers: {
       zai: {

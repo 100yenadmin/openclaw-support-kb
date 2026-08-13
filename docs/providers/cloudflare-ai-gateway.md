@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare AI gateway"
 source: "https://docs.openclaw.ai/providers/cloudflare-ai-gateway"
-source_hash: "6e6755a8c22191c4185c659a8e9b608d362617337c4b1e96ddb0b316bc0f2aa9"
+source_hash: "2c3c5aeabdd1c9febf460ec4187d3ac5b523df0714f92d3305210a6720d12109"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/cloudflare-ai-gateway.md"
@@ -86,7 +86,7 @@ Verify the model is available
 For scripted or CI setups, pass all values on the command line:
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice cloudflare-ai-gateway-api-key \
   --cloudflare-ai-gateway-account-id "your-account-id" \

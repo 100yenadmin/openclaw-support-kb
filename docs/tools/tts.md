@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Text-to-speech"
 source: "https://docs.openclaw.ai/tools/tts"
-source_hash: "387a4ac15a00c80ff644ed75f8cd15c8010bbeac3b1573507fd5d9c7374c5199"
+source_hash: "826b6eba4979985ff92fb64a0e09e6ba1f984f86fb01558021e790340c823748"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/tts.md"
@@ -791,13 +791,13 @@ directive warnings.
 **Disable model overrides entirely:**
 
 ```json5
-{ messages: { tts: { modelOverrides: { enabled: false } } } }
+{ tts: { modelOverrides: { enabled: false } } }
 ```
 
 **Allow provider switching while keeping other knobs configurable:**
 
 ```json5
-{ messages: { tts: { modelOverrides: { enabled: true, allowProvider: true, allowSeed: false } } } }
+{ tts: { modelOverrides: { enabled: true, allowProvider: true, allowSeed: false } } }
 ```
 
 ## Slash commands

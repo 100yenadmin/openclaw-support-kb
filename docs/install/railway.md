@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Railway"
 source: "https://docs.openclaw.ai/install/railway"
-source_hash: "0f7f4a6effc96781fe34880af6dd66ffaf48b9eee2971f5b7ec339ea6f31ec33"
+source_hash: "706f8079eb21460e43f5278fe7b83328bcad64d75ecc6b0b5d62aae39f4ba197"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/railway.md"
@@ -40,8 +40,8 @@ Set variables
 
     - `OPENCLAW_GATEWAY_PORT=8080` (required -- must match the port in Public Networking)
     - `OPENCLAW_GATEWAY_TOKEN` (required; treat as an admin secret)
-    - `OPENCLAW_STATE_DIR=/data/.openclaw` (recommended)
-    - `OPENCLAW_WORKSPACE_DIR=/data/workspace` (recommended)
+    - `OPENCLAW_STATE_DIR=/data/.openclaw` (required for persistent state)
+    - `OPENCLAW_WORKSPACE_DIR=/data/workspace` (required for a persistent workspace)
 
 
 
@@ -57,6 +57,12 @@ Connect
     Open `https://<your-railway-domain>/openclaw` and connect using the configured shared secret. The template uses `OPENCLAW_GATEWAY_TOKEN` by default; if you replace it with password auth, use that password instead.
 
 
+
+From the Railway shell, run the read-only deployment preflight:
+
+```bash
+openclaw doctor --json
+```
 
 ## What you get
 
@@ -77,9 +83,12 @@ Export your state, config, auth profiles, and workspace:
 
 ```bash
 openclaw backup create
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
 ```
 
-This creates a portable backup archive with OpenClaw state plus any configured workspace. See [Backup](/cli/backup) for details.
+Restore verifies and extracts into a fresh staging directory; activation is a
+separate offline step. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the rollback warnings and activation sequence.
 
 ## Next steps
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Exec approvals"
 source: "https://docs.openclaw.ai/tools/exec-approvals"
-source_hash: "45ec5f9ab9e5b46da84e59c53df6ae4c752cb1d50a21b07d2c3aaa2a4fcdaf69"
+source_hash: "c9fd40a3a2f78b2d8bfbdb81b583d0c940dd8c32875b77698cd28fe117d57b37"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/exec-approvals.md"
@@ -64,7 +64,7 @@ Exec approvals are enforced locally on the execution host:
 
 Note
 
-Per-session `/exec` overrides are not included. Run `/exec` in the relevant session to inspect its current defaults. See [session overrides](/tools/exec#session-overrides-exec).
+Per-session `/exec` overrides are not included. Run `/exec` in the relevant session to inspect its current defaults. See [session overrides](/tools/exec#session-overrides-%2Fexec).
 
 Full CLI reference (flags, JSON output, allowlist add/remove): [Approvals CLI](/cli/approvals).
 
@@ -311,18 +311,15 @@ openclaw exec-policy preset yolo
 Updates both local `tools.exec.host/security/ask` and the local approvals
 file defaults (including `askFallback: "full"`). It is intentionally
 local-only. To change gateway-host or node-host approvals remotely, use
-`openclaw approvals set --gateway` or `openclaw approvals set --node
-<id|name|ip>`.
+`openclaw approvals set --gateway` or
+`openclaw approvals set --node <id|name|ip>`.
 
 Other built-in presets: `cautious` (`host=gateway`, `security=allowlist`,
 `ask=on-miss`, `askFallback=deny`) and `deny-all` (`host=gateway`,
 `security=deny`, `ask=off`, `askFallback=deny`). Apply the same way:
 `openclaw exec-policy preset cautious`.
 
-To set individual fields instead of a full preset, use
-`openclaw exec-policy set --host <auto|sandbox|gateway|node> --security
-<deny|allowlist|full> --ask <off|on-miss|always> --ask-fallback
-<deny|allowlist|full>` with any subset of those flags.
+To set individual fields instead of a full preset, use `openclaw exec-policy set --host <auto|sandbox|gateway|node> --security <deny|allowlist|full> --ask <off|on-miss|always> --ask-fallback <deny|allowlist|full>` with any subset of those flags.
 
 ### Node host
 

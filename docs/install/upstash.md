@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Upstash Box"
 source: "https://docs.openclaw.ai/install/upstash"
-source_hash: "bf009195b9606668b5f071fee293511c56de8288ad955c0059de0da62b7c55af"
+source_hash: "32d3f9a11df150fc67efbc67fab3162b517b0d8a2c8f4b7de431c1625336ed46"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/upstash.md"
@@ -55,18 +55,20 @@ sudo npm install -g openclaw
 ## Run onboarding
 
 ```bash
-openclaw onboard --install-daemon
+openclaw onboard --no-install-daemon
 ```
 
 Follow the prompts. Copy the dashboard URL and token when onboarding finishes.
 
 ## Start the Gateway
 
-Configure the Gateway for the Box network and start it in the background:
+Keep the Gateway on loopback for the SSH tunnel, then start one unsupervised
+process in the background:
 
 ```bash
-openclaw config set gateway.bind lan
-nohup openclaw gateway > gateway.log 2>&1 &
+openclaw config set gateway.bind loopback
+nohup openclaw gateway run > gateway.log 2>&1 &
+openclaw doctor --json
 ```
 
 With the SSH tunnel active, open the dashboard URL locally:
@@ -81,8 +83,12 @@ Set this command as the Box init script so the Gateway restarts when the Box
 starts:
 
 ```bash
-nohup openclaw gateway > gateway.log 2>&1 &
+nohup openclaw gateway run > gateway.log 2>&1 &
 ```
+
+Onboarding deliberately skips daemon installation in this guide. The Box init
+script is the single owner of Gateway startup, so two processes do not contend
+for the same lock and port.
 
 ## Troubleshooting
 

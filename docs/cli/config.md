@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "5b3fd4cae4d0b66a2985a95f3aaf3c1d71743989c24a7b776c8750c499a23aee"
+source_hash: "a599751837c8b22e72733a157d5b7bf5c29d05a1e477300e196a963c25ad669b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -246,7 +246,7 @@ AccordionGroup
 
 Common flags
 
-    - `--provider-source <env|file|exec>`
+    - `--provider-source <env|file|exec|store>`
     - `--provider-timeout-ms <ms>` (`file`, `exec`)
 
 
@@ -487,7 +487,7 @@ If dry-run fails
 
     - `config schema validation failed`: your post-change config shape is invalid; fix the path/value or provider/ref object shape.
     - `Config policy validation failed: unsupported SecretRef usage`: move that credential back to plaintext/string input; keep SecretRefs on supported surfaces only.
-    - `SecretRef assignment(s) could not be resolved`: the referenced provider/ref cannot currently resolve (missing env var, invalid file pointer, exec provider failure, or provider/source mismatch).
+    - `SecretRef assignment(s) could not be resolved`: the referenced provider/ref cannot currently resolve (missing env/store name, invalid file pointer, exec provider failure, or provider/source mismatch).
     - `model reference validation failed`: a changed text-model primary or fallback is unknown; run `openclaw models list` and choose an available model.
     - `Dry run note: skipped <n> exec SecretRef resolvability check(s)`: rerun with `--allow-exec` if you need exec resolvability validation.
     - For batch mode, fix failing entries and rerun `--dry-run` before writing.
@@ -504,7 +504,7 @@ After every successful `config set` / `config patch` / `config unset`, the CLI p
 | `Change will apply without restarting the gateway.` | Hot reload picks it up automatically.  |
 | `No gateway restart needed.`                        | Nothing runtime-relevant changed.      |
 
-Writes to `plugins.entries` (or any subpath) always require a restart, since the CLI cannot prove every plugin's reload metadata is loaded.
+Effective changes to `plugins.entries` (or any subpath) require a restart, since the CLI cannot prove every plugin's reload metadata is loaded. Idempotent writes with no effective diff report `No gateway restart needed.`
 
 ## Write safety
 

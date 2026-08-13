@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy"
 source: "https://docs.openclaw.ai/cli/policy"
-source_hash: "04dae85557f26fb37260edbc698b80783e8eb1cf2b8a3169c38fc26fc998d67f"
+source_hash: "8e48ce589511b027c985b733a12f32a16b23d48bc40267223cd3cd7283f6f6e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/policy.md"
@@ -51,7 +51,7 @@ is present under it (unsupported sections or keys fail as
 `policy/policy-jsonc-invalid` instead of being silently ignored). Minimal
 example covering every supported section:
 
-```jsonc
+```jsonc validate=false
 {
   "channels": {
     "denyRules": [

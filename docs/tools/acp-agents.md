@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents"
 source: "https://docs.openclaw.ai/tools/acp-agents"
-source_hash: "cf4393b81fb56468222fdbdc5cf47eb2f769b96c863e14cc44f0cc6989d09c6f"
+source_hash: "1001dade62a15e53c218845e646b1efdaad316d7f8745555a5485a2dc5751530"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents.md"
@@ -417,9 +417,9 @@ Use `agents.entries.*.runtime` to define ACP defaults once per agent:
 ```json5
 {
   agents: {
+    ownership: "explicit",
     entries: {
       codex: {
-        default: true,
         runtime: {
           type: "acp",
           acp: {

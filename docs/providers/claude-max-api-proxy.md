@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claude Max API proxy"
 source: "https://docs.openclaw.ai/providers/claude-max-api-proxy"
-source_hash: "d052364e8d7c2f6aa9da4f36ea579f8506e34ac8a4862799b9285daa3b770847"
+source_hash: "9cf810629db8d648dcbcd6eda68f5e2ed715b93551ccd7e634332e8eb1d0184e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/claude-max-api-proxy.md"
@@ -107,8 +107,10 @@ Configure OpenClaw
     ```json5
     {
       env: {
-        OPENAI_API_KEY: "not-needed",
-        OPENAI_BASE_URL: "http://localhost:3456/v1",
+        vars: {
+          OPENAI_API_KEY: "not-needed",
+          OPENAI_BASE_URL: "http://localhost:3456/v1",
+        },
       },
       agents: {
         defaults: {

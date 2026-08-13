@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DeepSeek"
 source: "https://docs.openclaw.ai/providers/deepseek"
-source_hash: "6e384a15ed4c239ac47e3923e1fec72e39edf341d8243812d9afcdad980dd9f8"
+source_hash: "ea6a2c2fceda3b040065fc000b38cf4ac91ad8f0a125743ffb63470e01e2735f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/deepseek.md"
@@ -150,7 +150,7 @@ preserve the replay payload DeepSeek requires.
 
 ```json5
 {
-  env: { DEEPSEEK_API_KEY: "sk-..." },
+  env: { vars: { DEEPSEEK_API_KEY: "sk-..." } },
   agents: {
     defaults: {
       model: { primary: "deepseek/deepseek-v4-pro" },

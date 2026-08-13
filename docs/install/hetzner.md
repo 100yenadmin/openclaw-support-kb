@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hetzner"
 source: "https://docs.openclaw.ai/install/hetzner"
-source_hash: "5d15413fd1734e81336ae000e8405acc2fb96ded7e1c38831fdfb4f54ea03520"
+source_hash: "2e6b0cda21a74e8f2b0574b4827cb82ee55d939e247390da69aaf5ca82014761"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/hetzner.md"
@@ -155,15 +155,19 @@ Docker Compose configuration
         env_file:
           - .env
         environment:
-          - HOME=/home/node
-          - NODE_ENV=production
-          - TERM=xterm-256color
-          - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-          - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-          - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
-          - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
-          - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
-          - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+          HOME: /home/node
+          NODE_ENV: production
+          TERM: xterm-256color
+          OPENCLAW_STATE_DIR: /home/node/.openclaw
+          OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
+          OPENCLAW_CONFIG_DIR: /home/node/.openclaw
+          OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
+          OPENCLAW_GATEWAY_BIND: ${OPENCLAW_GATEWAY_BIND}
+          OPENCLAW_GATEWAY_PORT: ${OPENCLAW_GATEWAY_PORT}
+          OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN}
+          GOG_KEYRING_PASSWORD: ${GOG_KEYRING_PASSWORD}
+          XDG_CONFIG_HOME: ${XDG_CONFIG_HOME}
+          PATH: /home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         volumes:
           - ${OPENCLAW_CONFIG_DIR}:/home/node/.openclaw
           - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
@@ -183,6 +187,10 @@ Docker Compose configuration
             "--allow-unconfigured",
           ]
     ```
+
+    The `.env` paths are host-side bind-mount sources. The service overrides
+    them with `/home/node/...` paths inside the container so the non-root
+    `node` user never tries to write to a host-only path.
 
     `--allow-unconfigured` is only for bootstrap convenience, not a substitute for real gateway configuration. Still set auth (`gateway.auth.token` or password) and a safe bind mode for your deployment.
 

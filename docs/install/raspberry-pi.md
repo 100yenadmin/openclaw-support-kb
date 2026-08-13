@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
-source_hash: "da58955b3e5060fbd3a19ea5e68bef8480eaf414eb94216804fd6f5de4a489c9"
+source_hash: "d0519fc866667b404153d34f14b43750279df48001c314c81d13f6a81350724a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/raspberry-pi.md"
@@ -227,7 +227,12 @@ These survive reboots and benefit from SSD over SD card for both performance and
 
 ```bash
 openclaw backup create
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
 ```
+
+Restore verifies and extracts into a fresh staging directory; activation is a
+separate offline step. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the rollback warnings and activation sequence.
 
 ## Troubleshooting
 

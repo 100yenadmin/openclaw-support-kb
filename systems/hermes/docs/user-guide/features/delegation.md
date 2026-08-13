@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Subagent Delegation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation"
-source_hash: "28b3587dd53968c4743d6df0cae5fd4f5ba64d82a5b1f228998e7124635a5eba"
+source_hash: "3b5627767c1191d623ede08f546a9d629ab55caf37e4e77cb0e87a19bf510de8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/delegation.md"
@@ -380,6 +380,37 @@ For **durable execution** that must survive session closure or process restart, 
 - Only the final summary enters the parent's context, keeping token usage efficient
 - Subagents inherit the parent's **API key, provider configuration, and credential pool** (enabling key rotation on rate limits)
 
+## Worktree Isolation
+
+By default, subagents share the parent's working directory — fine for research
+and read-heavy work, but parallel children editing the same repo can collide.
+Set `delegation.worktree_isolation: true` to give each child its own git
+worktree, branched from the repo's current `HEAD` (inspired by Muse Code's
+`--subagent-worktree-isolation`):
+
+```yaml
+delegation:
+  worktree_isolation: true   # default: false
+```
+
+With isolation on:
+
+- Each child starts its terminal in `<repo>/.worktrees/subagent-<id>` on its
+  own branch `hermes-subagent/subagent-<id>`, and its goal message tells it to
+  work and commit there.
+- The parent's checkout stays untouched; children can't clobber each other's
+  edits.
+- When a child finishes, its result entry gains a `worktree` field reporting
+  `path`, `branch`, `commits` (ahead of the base), and `dirty`. The parent
+  reviews or merges each branch (`git log <branch>`, `git merge <branch>`).
+- A worktree left with **no commits and a clean tree is pruned automatically**
+  (`pruned: true`); anything holding work is kept.
+
+Scope: opt-in, git-only, and local-terminal-backend-only. In a non-git
+directory, on docker/ssh/modal backends, or if worktree creation fails, the
+setting degrades silently to today's shared-workspace behavior — never an
+error.
+
 ## Delegation vs execute_code
 
 | Factor | delegate_task | execute_code |
@@ -401,6 +432,7 @@ For **durable execution** that must survive session closure or process restart, 
 delegation:
   max_iterations: 50                        # Max turns per child (default: 50)
   # max_concurrent_children: 3              # Parallel children per batch (default: 3)
+  # worktree_isolation: false               # Give each child its own git worktree (see Worktree Isolation above)
   # max_spawn_depth: 1                      # Tree depth (floor 1, no ceiling, default 1 = flat). Raise to 2 to allow orchestrator children to spawn leaves; 3+ for deeper trees.
   # orchestrator_enabled: true              # Disable to force all children to leaf role.
   model: "google/gemini-3-flash-preview"             # Optional provider/model override

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session management"
 source: "https://docs.openclaw.ai/concepts/session"
-source_hash: "e74e187fc3a17c1c1251395d2e02552b65ae255c06015fef0caa9c2c7adad243"
+source_hash: "2fc309608f6713a8246ab036b351182c785343d59c344d6b715701e3e3a0ee6f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session.md"
@@ -202,6 +202,13 @@ Session store reads do not prune or cap entries during Gateway startup, so
 startup and isolated cron sessions do not pay for a full store cleanup.
 `openclaw sessions cleanup --enforce` applies the cap immediately.
 
+`maxEntries` counts only eviction-eligible session rows. Protected rows -
+archived or pinned sessions, active or admitted work, model-locked sessions,
+and durable external conversation pointers - stay outside that allowance, so
+the total stored row count can exceed `maxEntries`. Cleanup does not unprotect
+those rows; unarchive, unpin, or explicitly delete sessions you no longer want
+to retain.
+
 Gateway model-run probe sessions are short-lived by default. Rows matching
 `agent:*:explicit:model-run-<uuid>` use fixed `24h` retention, but cleanup is
 pressure-gated: it only removes stale probe rows when session-entry
@@ -213,10 +220,10 @@ Maintenance preserves durable external conversation pointers, including group
 sessions and thread-scoped chat sessions, while still allowing synthetic cron,
 hook, heartbeat, ACP, and sub-agent entries to age out.
 
-Archived sessions are user-shelved and exempt from every automatic maintenance
-path, including age pruning, entry caps, model-run cleanup, and disk-budget
-eviction. They remain archived until you unarchive them or explicitly delete
-them.
+Archived and pinned sessions are user-protected and exempt from every automatic
+maintenance path, including age pruning, entry caps, model-run cleanup, and
+disk-budget eviction. They remain protected until you unarchive, unpin, or
+explicitly delete them.
 
 If you previously used DM isolation and later returned `session.dmScope` to
 `main`, preview stale peer-keyed DM rows with

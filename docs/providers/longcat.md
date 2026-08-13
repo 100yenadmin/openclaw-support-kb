@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LongCat"
 source: "https://docs.openclaw.ai/providers/longcat"
-source_hash: "9750044903f9297f740106d4186b1b9d1832373472c4e01cd8b09b878d2562ef"
+source_hash: "a0b99e4cf5282eee16ab77a8a371df6820bf8ec2f008546ac60fc1c8e6f38d0b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/longcat.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/providers/longcat
 
 [LongCat](https://longcat.ai) provides a hosted API for LongCat-2.0, a
 reasoning model built for coding and agentic workloads. OpenClaw provides the
-official `longcat` plugin for LongCat's OpenAI-compatible endpoint.
+official LongCat plugin for LongCat's OpenAI-compatible endpoint.
 
 | Property   | Value                              |
 | ---------- | ---------------------------------- |
@@ -69,7 +69,7 @@ primary model is already configured.
 ### Non-interactive setup
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice longcat-api-key \
   --longcat-api-key "$LONGCAT_API_KEY"
@@ -90,7 +90,7 @@ the provider's expected message shape.
 
 The built-in catalog uses LongCat's pay-as-you-go list prices in USD per million
 tokens: $0.75 uncached input, $0.015 cached input, and $2.95 output. LongCat may
-offer temporary discounts; the [pricing page](https://longcat.chat/platform/docs/Pricing/LongCat-2.0.html)
+offer temporary discounts; the [pricing page](https://longcat.chat/platform/docs/pricing/long-cat-2.0)
 and your billing records are authoritative.
 
 ## Self-hosted LongCat-2.0

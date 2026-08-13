@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Anthropic"
 source: "https://docs.openclaw.ai/providers/anthropic"
-source_hash: "e68485eba40b5c350385faad50b99160600f30acc06026b6c77b2cf79ef26f33"
+source_hash: "9556de29abd23cca32ebe5800721ede4ce14afb457b60e08a5481bd0caa236e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/anthropic.md"
@@ -96,7 +96,7 @@ Verify the model is available
 
     ```json5
     {
-      env: { ANTHROPIC_API_KEY: "example-anthropic-key-not-real" },
+      env: { vars: { ANTHROPIC_API_KEY: "example-anthropic-key-not-real" } },
       agents: { defaults: { model: { primary: "anthropic/claude-opus-5" } } },
     }
     ```
@@ -503,10 +503,10 @@ Per-agent cache overrides
             },
           },
         },
-        list: [
-          { id: "research", default: true },
-          { id: "alerts", params: { cacheRetention: "none" } },
-        ],
+        entries: {
+          research: { default: true },
+          alerts: { params: { cacheRetention: "none" } },
+        },
       },
     }
     ```

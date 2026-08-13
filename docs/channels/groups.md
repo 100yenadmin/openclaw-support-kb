@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "70b1868fbaa9243e21752168424fcdcf3c7d78ea7c5f369d77b6de6c0ac84873"
+source_hash: "41daa56d54c62ff30c6b3182697f455440d4adebc3b50ee603a2c2c371660e4e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -223,7 +223,7 @@ Related:
 
 - Configuration keys and defaults: [Gateway configuration](/gateway/config-agents#agentsdefaultssandbox)
 - Debugging why a tool is blocked: [Sandbox vs Tool Policy vs Elevated](/gateway/sandbox-vs-tool-policy-vs-elevated)
-- Bind mounts details: [Sandboxing](/gateway/sandboxing#custom-bind-mounts)
+- Bind mounts details: [Sandboxing](/gateway/sandboxing#multiple-folders-for-one-agent)
 
 ## Display labels
 

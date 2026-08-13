@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "cf11dac4e9a932fb0603bf0ff8ed70589dba15e77f7e7a7bc318bd61f874f98d"
+source_hash: "ba420aad467d04809eb237e078396a66804077a5328c61a22a94d21a40f280cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -298,7 +298,9 @@ When an automatic update is due, the campaign waits for active work to finish,
 then starts a one-minute countdown. Once that countdown starts, new work does
 not reset it or return the campaign to waiting. A 15-minute hard deadline starts
 the update even if work remains, using the normal restart drain and
-session-recovery path.
+session-recovery path. Open terminal sessions do not defer the countdown or
+apply. The Gateway restart ends these process-local PTYs, and terminal sessions
+are not recovered afterward.
 
 An admin can use **Hold 1 h** once to postpone the campaign and shift its hard
 deadline, or choose **Update now** from the sidebar update card or
@@ -490,12 +492,24 @@ Gateway and restore the verified pre-update filesystem, volume, or VM snapshot.
 Preserve the current state separately before restoring because this removes
 changes made after the snapshot.
 
-Broad `openclaw backup create` archives support creation and verification, but
-not in-place whole-archive activation. Extract a broad archive into a staging
-directory and use its `manifest.json` source-to-archive mapping for an offline
-restore. `openclaw backup sqlite restore` likewise writes a verified database
-to a fresh target; activating that target remains an explicit offline operator
-step.
+Restore a broad archive to a fresh staging directory with the current CLI:
+
+```bash
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
+```
+
+The command verifies the archive and its SQLite databases before extraction.
+Activation remains an explicit offline step: stop the Gateway, move the
+restored asset tree into place or point `OPENCLAW_STATE_DIR` at the restored
+state asset, run `openclaw doctor`, then restart.
+
+Treat a state restore as time travel. Ratcheting channel credentials, especially
+WhatsApp, can desynchronize and require relinking. Approvals and
+delivery/dedupe state roll back too, and plugin `node_modules` trees are not
+archived. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the complete activation and recovery sequence. `openclaw backup sqlite
+restore` likewise writes a verified database to a fresh target; activating that
+target remains an explicit offline operator step.
 
 ### Verify the rollback
 

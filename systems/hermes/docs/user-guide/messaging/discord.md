@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "467c87fdf559e4b10bbf3d18960a7abfd33afb7c3079c6c2a74146fa1c02a97a"
+source_hash: "5e6f9ce24997a4c34de7864e7d05a4783343a06c08b90530bbe363758c3fc457"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -839,11 +839,17 @@ No Discord access policy configured; inbound Discord messages will be denied by 
 
 Hermes 0.18 intentionally fails closed on externally reachable adapters. A Discord bot with no `DISCORD_ALLOWED_USERS`, no `DISCORD_ALLOWED_ROLES`, no `DISCORD_ALLOWED_CHANNELS`, and no explicit allow-all flag will connect successfully but deny inbound users before normal message handling.
 
-### "Disallowed Intents" error on startup
+### "Privileged intents" / `PrivilegedIntentsRequired` error on startup
 
-**Cause**: Your code requests intents that aren't enabled in the Developer Portal.
+**Cause**: Hermes requests privileged Gateway Intents that are not enabled for your bot in the Developer Portal. Discord then rejects the WebSocket connection. Hermes always requests **Message Content Intent**. It also requests **Server Members Intent** when your allowlist uses usernames (not numeric IDs) or when `DISCORD_ALLOWED_ROLES` is set. Presence Intent is not required.
 
-**Fix**: Enable all three Privileged Gateway Intents (Presence, Server Members, Message Content) in the Bot settings, then restart.
+**Fix**:
+
+1. Go to [Developer Portal](https://discord.com/developers/applications) → your app → Bot → Privileged Gateway Intents.
+2. Enable **Message Content Intent** (required). Enable **Server Members Intent** if you use usernames or role allowlists.
+3. Click **Save Changes**, then restart the gateway (`hermes gateway restart`).
+
+The gateway log should name the exact intent(s) Hermes requested. Until they are enabled, Discord will keep rejecting the connection — this is a portal configuration error, not a flaky network issue.
 
 ### Bot can't see messages in a specific channel
 

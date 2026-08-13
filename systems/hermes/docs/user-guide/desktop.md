@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop App"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "53ae2965012888f2a5dd4890f920983ffc6e5fd3587ed073a71d35d7f4d958f0"
+source_hash: "abac4d79edb4d1a34498e8b8db70c4fdbbeb0b53ba2e262af1470e827a913509"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -178,6 +178,7 @@ The app also surfaces the broader Hermes management surface so you don't have to
 - **Session-list overhaul** — a reworked session list with archiving and general session hygiene to keep the list manageable as it grows.
 - **Search sessions by id** — find a specific session directly by its id.
 - **Concurrent multi-profile sessions** — run sessions across multiple [profiles](./profiles.md) at the same time, and reference a session in another profile with cross-profile `@session` links.
+- **Export / import a profile** — share a whole setup as a single file. **⌘K → Export profile…** (or right-click a profile square in the rail) writes a `.tar.gz` with skills, memory, persona, crons, plugins, and settings; API keys are stripped. Exporting from the desktop also bundles your appearance and interface — skin, light/dark mode, custom themes, the profile's rail color, and your window layout — so an imported profile arrives looking the way the sender had it. Import via **⌘K → Import profile…** or the button beside the rail's **+**; it applies the overlay and drops you into the new profile. The same archive works with `/export` / `/import` in chat and `hermes profile export` / `import` from a shell. See [Export and import a profile file](./profile-distributions.md#export-and-import-a-profile-file).
 
 ## Updating
 

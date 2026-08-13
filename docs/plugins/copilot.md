@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Copilot SDK harness"
 source: "https://docs.openclaw.ai/plugins/copilot"
-source_hash: "8668368ff9d6562e25c3b9132b9462262d280ba40f5b576d49b23bebd8ff0feb"
+source_hash: "573ea9ccc05b1e4b001b2131566013638a8e517b2962dc1a842fdf23b1b33f65"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/copilot.md"
@@ -20,7 +20,7 @@ agent loop: native tool execution, native compaction (`infiniteSessions`), and
 CLI-managed thread state under `copilotHome`. OpenClaw still owns chat
 channels, session files, model selection, dynamic tools (bridged), approvals,
 media delivery, the visible transcript mirror, `/btw` side questions (see
-[Side questions (`/btw`)](#side-questions-btw)), and `openclaw doctor`.
+[Side questions (`/btw`)](/plugins/copilot#side-questions-%2Fbtw)), and `openclaw doctor`.
 
 For the broader model/provider/runtime split, start with
 [Agent runtimes](/concepts/agent-runtimes).

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Windows"
 source: "https://docs.openclaw.ai/platforms/windows"
-source_hash: "3c688eef5df12fb2a71f38ef65bc839a6b2c42549526391018d173f6ad5fe814"
+source_hash: "10625bc539daf5e5206563f87889f53a97602dbe8981f2d55cbab74dfc87ce99"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/windows.md"
@@ -154,7 +154,7 @@ openclaw gateway status --json
 For CLI-only use without a managed Gateway service:
 
 ```powershell
-openclaw onboard --non-interactive --skip-health
+openclaw onboard --non-interactive --accept-risk --skip-health
 openclaw gateway run
 ```
 

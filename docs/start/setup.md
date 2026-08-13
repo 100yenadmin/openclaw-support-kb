@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Setup"
 source: "https://docs.openclaw.ai/start/setup"
-source_hash: "c3dd1ca7ca35f21e4a1e29841b8ed6ea364459a7ffff1a8a9db441755e5afe95"
+source_hash: "d6a73c2bf5d8f4a8f567eafe50dfed372830ac6949227adbbab0e0c4b1bd00b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/setup.md"
@@ -154,7 +154,7 @@ Use this when debugging auth or deciding what to back up:
 
 - **WhatsApp**: `~/.openclaw/credentials/whatsapp/<accountId>/creds.json`
 - **Telegram bot token**: config/env or `channels.telegram.tokenFile` (regular file only; symlinks rejected)
-- **Discord bot token**: config/env or SecretRef (env/file/exec providers)
+- **Discord bot token**: config/env or SecretRef (env/file/exec/store providers)
 - **Slack tokens**: config/env (`channels.slack.*`)
 - **Pairing allowlists**:
   - `~/.openclaw/credentials/<channel>-allowFrom.json` (default account)

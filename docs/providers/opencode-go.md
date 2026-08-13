@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenCode Go"
 source: "https://docs.openclaw.ai/providers/opencode-go"
-source_hash: "4d9b332dfb2737dbea9e6ad0f9ffa2447bfa05ce735fc06432a4939b7a7e1b71"
+source_hash: "4d4dfd4e19d242c61d0dd194894db23aa2d33d40be69fc1ae6c1f4983a154068"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/opencode-go.md"
@@ -91,7 +91,7 @@ Verify models are available
 
 ```json5
 {
-  env: { OPENCODE_API_KEY: "YOUR_API_KEY_HERE" }, // pragma: allowlist secret
+  env: { vars: { OPENCODE_API_KEY: "YOUR_API_KEY_HERE" } }, // pragma: allowlist secret
   agents: { defaults: { model: { primary: "opencode-go/kimi-k3" } } },
 }
 ```

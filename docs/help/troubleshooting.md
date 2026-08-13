@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "0babe16cb722c6b9f78413451f6e3837f2d369420efa8971a767a4ef8f97627c"
+source_hash: "6e16369d6ec7e614de2af1bb13ef8159a5691fc1864343451867f3dffbf087a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
@@ -154,7 +154,7 @@ openclaw plugins inspect <plugin-id> --runtime --json
 openclaw plugins enable <plugin-id>
 ```
 
-Reference: [Operator install policy](/tools/skills-config#operator-install-policy-securityinstallpolicy)
+Reference: [Operator install policy](/tools/skills-config#operator-install-policy-security-installpolicy)
 
 ## Plugin present but blocked by suspicious ownership
 

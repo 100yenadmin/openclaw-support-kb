@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QQ Bot plugin"
 source: "https://docs.openclaw.ai/plugins/reference/qqbot"
-source_hash: "e469853d2dfbbb874802dff65502081319fc2651fbcf009417ae8fed5fa03f88"
+source_hash: "71113fcbfa507c4c17ad6184d740c49a15bc9b4e4e15ca9e26b2a5e33818b4c9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/qqbot.md"
@@ -19,8 +19,8 @@ OpenClaw QQ Bot channel plugin for group and direct-message workflows.
 
 ## Distribution
 
-- Package: `@openclaw/qqbot`
-- Install route: npm; ClawHub
+- Package: `@tencent-connect/openclaw-qqbot`
+- Install route: npm
 
 ## Surface
 

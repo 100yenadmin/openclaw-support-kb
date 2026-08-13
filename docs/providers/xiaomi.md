@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Xiaomi MiMo"
 source: "https://docs.openclaw.ai/providers/xiaomi"
-source_hash: "cb5bbf0877243e72a53a9e2fcdee1a3f090ccedea8cec80eb2775ee2d033cc72"
+source_hash: "5a0ea385fb5635120e6ea158c0795bc5f9a19581630e77084ba6dd5fa37d86c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/xiaomi.md"
@@ -185,7 +185,7 @@ mono Opus with `ffmpeg` before delivery.
 
 ```json5
 {
-  env: { XIAOMI_API_KEY: "your-key" },
+  env: { vars: { XIAOMI_API_KEY: "your-key" } },
   agents: { defaults: { model: { primary: "xiaomi/mimo-v2.5" } } },
   models: {
     mode: "merge",
@@ -225,7 +225,7 @@ Token Plan:
 
 ```json5
 {
-  env: { XIAOMI_TOKEN_PLAN_API_KEY: "tp-your-key" },
+  env: { vars: { XIAOMI_TOKEN_PLAN_API_KEY: "tp-your-key" } },
   agents: { defaults: { model: { primary: "xiaomi-token-plan/mimo-v2.5-pro" } } },
   models: {
     mode: "merge",

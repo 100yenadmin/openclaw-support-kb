@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tencent Cloud (TokenHub / TokenPlan)"
 source: "https://docs.openclaw.ai/providers/tencent"
-source_hash: "b2d0f4fdb30c73e1b8252af24f805e8eac7849083e12a5286d65902b22a96d27"
+source_hash: "101b05246f9617557274f82bf060a63c6e71630fbd7fefa45887e3d17bb9ffec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/tencent.md"
@@ -51,7 +51,7 @@ openclaw onboard --auth-choice tokenhub-api-key
 ```
 
 ```bash TokenHub direct flag
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice tokenhub-api-key \
   --tokenhub-api-key "$TOKENHUB_API_KEY"
 ```
@@ -61,7 +61,7 @@ openclaw onboard --auth-choice tokenplan-api-key
 ```
 
 ```bash TokenPlan direct flag
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --auth-choice tokenplan-api-key \
   --tokenplan-api-key "$TOKENPLAN_API_KEY"
 ```

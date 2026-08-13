@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WSL2 + Windows + remote Chrome CDP troubleshooting"
 source: "https://docs.openclaw.ai/tools/browser-wsl2-windows-remote-cdp-troubleshooting"
-source_hash: "4e5044b7c63f6563591d8adaa7bfa5de0d2d060e0ea89f51fb795e6bb282069e"
+source_hash: "0ec0581dd0ead7f9ce5d171eded7c094868b9dfbef540627900aec4330d583f2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/browser-wsl2-windows-remote-cdp-troubleshooting.md"
@@ -155,7 +155,6 @@ Point OpenClaw at the address reachable from WSL2:
       remote: {
         cdpUrl: "http://WINDOWS_HOST_OR_IP:9222",
         attachOnly: true,
-        color: "#00AA00",
       },
     },
   },

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ElevenLabs"
 source: "https://docs.openclaw.ai/providers/elevenlabs"
-source_hash: "3e28507c2cb27e2895ef3e1dd3d7ae1d95d4d33137114be4ada7d4907bbfa220"
+source_hash: "7d30584bfba3c67fed51dce05480cbe8b23ffbc12ceb54471ddd83a1a1e66f23"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/elevenlabs.md"
@@ -66,9 +66,9 @@ Use Scribe v2 for inbound audio attachments and short recorded voice segments:
 {
   tools: {
     media: {
+      models: [{ provider: "elevenlabs", model: "scribe_v2", capabilities: ["audio"] }],
       audio: {
         enabled: true,
-        models: [{ provider: "elevenlabs", model: "scribe_v2" }],
       },
     },
   },

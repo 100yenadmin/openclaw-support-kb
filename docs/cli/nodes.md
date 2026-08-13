@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Nodes"
 source: "https://docs.openclaw.ai/cli/nodes"
-source_hash: "26ca524c1d690f649980a6b854f486062836ed798e1a837a6ab78eace0c523ce"
+source_hash: "46b9455226afc124ef22e06de364e48af26d4c3eb8a0531170b28d7583b9d116"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/nodes.md"
@@ -53,6 +53,7 @@ These commands drive the gateway-owned `node.pair.*` store, separate from device
   - commandless request: `operator.pairing`
   - ordinary node commands: `operator.pairing` + `operator.write`
   - admin-sensitive commands (`system.run`, `system.run.prepare`, `system.which`, `browser.proxy`, `browser.proxy.upload.v1`, `fs.listDir`, and `system.execApprovals.get/set`): `operator.pairing` + `operator.admin`
+- These requirements classify node commands relayed through `node.invoke`. The top-level Gateway `fs.listDir` RPC needs `operator.write` for workspace-contained host browsing and `operator.admin` when `nodeId` is present.
 - `remove` scope: `operator.pairing` can remove non-operator node rows; a device-token caller revoking its own node role on a mixed-role device additionally needs `operator.admin`.
 
 ## Invoke

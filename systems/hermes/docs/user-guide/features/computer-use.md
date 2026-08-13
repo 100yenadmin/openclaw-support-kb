@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/features/computer-use.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use"
-source_hash: "1e6b13a37e8cf858f6dbbc51228a7b23e2af0226877422ba86bc7289e217f479"
+source_hash: "c28c07596080d0e7b2f611a4993bc590e4a1088f5ed0316c14d4aece98b58c37"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/computer-use.md"
@@ -54,10 +54,18 @@ no-foreground invariant, click-dispatch internals — see
 
 ## Enabling
 
-Pick whichever path is most convenient — both run the same upstream
-installer:
+**Fresh installs already have the driver.** The Hermes installer
+(`install.sh` / `install.ps1`) pre-installs `cua-driver` (best-effort;
+pass `--skip-computer-use` / `-SkipComputerUse` to opt out), so enabling
+Computer Use is just a config flip:
 
-**Option 1: dedicated CLI command (most direct).**
+- **`hermes tools`** → pick `🖱️  Computer Use` — installs the driver
+  automatically if it's still missing.
+- **Dashboard / desktop app** → toggle the Computer Use toolset — if the
+  driver is missing, the toggle kicks off the install in the background
+  automatically (watch progress in the toolset panel).
+
+**Manual fallback (older installs, skipped installer step):**
 
 ```
 hermes computer-use install
@@ -66,11 +74,6 @@ hermes computer-use install
 This fetches and runs the upstream cua-driver installer — `install.sh`
 on macOS/Linux, `install.ps1` on Windows. Use `hermes computer-use
 status` to verify the install.
-
-**Option 2: enable the toolset interactively.**
-
-1. Run `hermes tools`, pick `🖱️  Computer Use (macOS/Windows/Linux)`.
-2. The setup runs the upstream installer (same as Option 1).
 
 After installing, regardless of which path you took, grant the
 platform-appropriate prereqs:

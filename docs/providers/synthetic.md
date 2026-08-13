@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Synthetic"
 source: "https://docs.openclaw.ai/providers/synthetic"
-source_hash: "e8293152fafc2225f1195941ac1440168593ab50a944b183ea94068aee1c7a2f"
+source_hash: "041620e625ee34b00eaf479647e72116b25453365f1a308742911878852891cb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/synthetic.md"
@@ -68,7 +68,7 @@ changes its base URL, override `models.providers.synthetic.baseUrl`.
 
 ```json5
 {
-  env: { SYNTHETIC_API_KEY: "sk-..." },
+  env: { vars: { SYNTHETIC_API_KEY: "sk-..." } },
   agents: {
     defaults: {
       model: { primary: "synthetic/hf:MiniMaxAI/MiniMax-M3" },

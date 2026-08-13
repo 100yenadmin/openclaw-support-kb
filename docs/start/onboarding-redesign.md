@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding redesign"
 source: "https://docs.openclaw.ai/start/onboarding-redesign"
-source_hash: "a0849be6098fbe62b1477026138bcdde300f4d50a847c84909089f8caa834002"
+source_hash: "255e583735a1462a906d3621d85978a4f2f74dc28e15ffff3ab520b53fb14672"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding-redesign.md"
@@ -45,8 +45,8 @@ Design principles (decided, do not relitigate casually):
 - **The hatch is a ceremony**: same thread, avatar swap, the agent names itself
   and picks its own face. The custodian teaches the hierarchy once: "ask me
   about the system, or just ask your agent — it relays."
-- **Trust is tiered by source**: official catalog entries may be pre-selected;
-  third-party ClawHub skills are never pre-selected regardless of model
+- **Trust is tiered by source**: official catalog entries may be preselected;
+  third-party ClawHub skills are never preselected regardless of model
   ranking, and their labels say they install the publisher's code.
 - **Configured installs are sacred**: re-running onboarding is a verification
   pass. It never re-applies setup and never restarts the Gateway service.
@@ -121,7 +121,7 @@ Remote-gateway onboarding keeps its legacy conversational handoff
   explicit cap is passed).
 - **Supply-chain guard**: ClawHub listing text is publisher-controlled and
   reaches the matcher prompt, so a listing can promote itself to
-  "recommended". Only official catalog entries may be pre-selected; ClawHub
+  "recommended". Only official catalog entries may be preselected; ClawHub
   skills always require an explicit tick and are labeled "third-party ClawHub
   skill; installs its publisher's code".
 - Node command `device.apps` (TS node-host, Android envelope parity), sharing
@@ -332,7 +332,7 @@ restart` from the real environment and verify the plist. Product follow-up:
 - Magical scan with kill switch, not consent-first (phase 1; persistent output
   discloses model and ClawHub use before scanning, and the results note repeats it).
 - Full vertical including the node `device.apps` command (phase 1).
-- Third-party ClawHub skills are never pre-selected and are labeled as
+- Third-party ClawHub skills are never preselected and are labeled as
   installing the publisher's code; official entries may be pre-checked
   (phase 1, shipped security posture).
 - Two access cards, not three; consent front-loaded into the choice (phase 2).

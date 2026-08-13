@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automated GitHub PR Comments with Webhooks"
 source: "https://hermes-agent.nousresearch.com/docs/guides/webhook-github-pr-review"
-source_hash: "a1627833b65085305d861b763dbbd722ff7256cd19129e7fb11ed6f1b846b538"
+source_hash: "7033e8bcdd00568cafc659015375dbd5370dac8367704f7e5b6db7b0f3a65629"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/webhook-github-pr-review.md"
@@ -100,7 +100,7 @@ platforms:
 | `deliver_extra.pr_number` | Resolves to the PR number from the payload. |
 
 :::note The payload does not contain code
-The GitHub webhook payload includes PR metadata (title, description, branch names, URLs) but **not the diff**. The prompt above instructs the agent to run `gh pr diff` to fetch the actual changes. The `terminal` tool is included in the default `hermes-webhook` toolset, so no extra configuration is needed.
+The GitHub webhook payload includes PR metadata (title, description, branch names, URLs) but **not the diff**. The prompt above instructs the agent to run `gh pr diff` to fetch the actual changes. The default `hermes-webhook` toolset is deliberately constrained (web search/extract, vision, clarify — **no terminal**) because webhook payloads can carry untrusted content. To let this route run `gh`, add a per-route toolset grant: `toolsets: ["terminal", "web"]` on the route config — see [Per-route toolsets](/docs/user-guide/messaging/webhooks#per-route-toolsets).
 :::
 
 ---

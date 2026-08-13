@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "vLLM"
 source: "https://docs.openclaw.ai/providers/vllm"
-source_hash: "8e952f50282159dc725d02f992e643bd93c23c8606f45b687b0d3629d1e315cd"
+source_hash: "d8a0cbf4273663ead9d345bbb7fc8e6b7ec1b4043eb3d91c76b677b9fe6e9180"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/vllm.md"
@@ -76,7 +76,7 @@ Tip
 For non-interactive setup (CI, scripting), pass the base URL, key, and model directly:
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice vllm \
   --custom-base-url "http://127.0.0.1:8000/v1" \

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Oracle Cloud"
 source: "https://docs.openclaw.ai/install/oracle"
-source_hash: "d0f4afbba13655c8834436169d70b1bd11c3e478b0285c4cd34511697f91034f"
+source_hash: "a24479785566727ba22e7e2ae632f5de2d3cec8cc654c1b3780d3d61b302d88b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/oracle.md"
@@ -112,6 +112,7 @@ Configure the gateway
     openclaw config set gateway.tailscale.mode serve
     openclaw config set gateway.trustedProxies '["127.0.0.1"]'
 
+    openclaw gateway install
     systemctl --user restart openclaw-gateway.service
     ```
 
@@ -207,7 +208,12 @@ These survive reboots. To take a portable snapshot:
 
 ```bash
 openclaw backup create
+openclaw backup restore <archive.tar.gz> --target <fresh-directory>
 ```
+
+Restore verifies and extracts into a fresh staging directory; activation is a
+separate offline step. See [Restore a full archive](/install/backups#restore-a-full-archive)
+for the rollback warnings and activation sequence.
 
 ## Fallback: SSH tunnel
 

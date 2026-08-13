@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voice wake"
 source: "https://docs.openclaw.ai/nodes/voicewake"
-source_hash: "c32e8ba29b4e72ba4e9554d1ed6e2c2813ce1cb008f557d67d09fe0257a307c9"
+source_hash: "d6d705d8ae48b9d60ffdea197f0c14d865e1627342984785c3c36312ab392585"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/voicewake.md"
@@ -36,10 +36,9 @@ Wake words and routing rules live in the Gateway state database, `~/.openclaw/st
 
 ### Routing (trigger to target)
 
-| Method                  | Params                               | Result                               |
-| ----------------------- | ------------------------------------ | ------------------------------------ |
-| `voicewake.routing.get` | none                                 | `{ config: VoiceWakeRoutingConfig }` |
-| `voicewake.routing.set` | `{ config: VoiceWakeRoutingConfig }` | `{ config: VoiceWakeRoutingConfig }` |
+| Method                  | Params | Result                               |
+| ----------------------- | ------ | ------------------------------------ |
+| `voicewake.routing.get` | none   | `{ config: VoiceWakeRoutingConfig }` |
 
 ```json
 {

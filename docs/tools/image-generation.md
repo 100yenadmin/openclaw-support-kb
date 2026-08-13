@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Image generation"
 source: "https://docs.openclaw.ai/tools/image-generation"
-source_hash: "f035240351a2180a30132412f6f619521afb1df5811d22ad06239370541c1e29"
+source_hash: "e7198948722b235ae394c63c8c8cd33b19bef9275159a90e3cdd9e637bad372f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/image-generation.md"
@@ -16,12 +16,12 @@ Source: https://docs.openclaw.ai/tools/image-generation
 The `image_generate` tool creates and edits images through your configured
 providers. In chat sessions it runs asynchronously: OpenClaw records a
 background task, returns the task id immediately, and wakes the agent when
-the provider finishes. The completion agent follows the session's normal
-visible-reply mode: automatic final reply delivery when configured, or
-`message(action="send")` when the session requires the message tool. If the
-requester session is inactive or its active wake fails, OpenClaw sends an
-idempotent direct fallback with the generated images so the result is not
-lost.
+the provider finishes. The task record stays silent, while the completion
+agent follows the session's current visible-reply contract with a short
+user-facing caption and every structured generated attachment. If generation
+fails, the agent returns a concise visible failure instead. If the requester
+session is inactive or its active wake fails, OpenClaw sends an idempotent
+direct fallback with the generated images so the result is not lost.
 
 Note
 
@@ -72,8 +72,8 @@ Ask the agent
 
     The agent calls `image_generate` automatically. No tool allow-listing
     needed - it is enabled by default when a provider is available. The tool
-    returns a background task id, then the completion agent sends the
-    generated attachment through the `message` tool when it is ready.
+    returns a background task id, then the completion agent replies with every
+    generated attachment when it is ready.
 
 
 

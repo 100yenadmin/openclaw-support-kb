@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Featherless AI"
 source: "https://docs.openclaw.ai/providers/featherless"
-source_hash: "fa3437a7708c9b912c0c491be678faee6640bdade5d53f3127ee61376aa35061"
+source_hash: "314c6efb863725b033e20318ee7490264cee37f4a1b2aa7f23d22de519d9c5fc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/featherless.md"
@@ -47,7 +47,7 @@ openclaw onboard --auth-choice featherless-api-key
 For non-interactive setup:
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice featherless-api-key \
   --featherless-api-key "$FEATHERLESS_API_KEY"

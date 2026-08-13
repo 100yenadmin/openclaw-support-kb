@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Together AI"
 source: "https://docs.openclaw.ai/providers/together"
-source_hash: "d7383dca70fde1818721cd2db559f65fcdfa578a71a86ba20ee78969572df814"
+source_hash: "d3a400ff231599a94741ad57c9e2f79bf196cb7285f1206699a967ebdb6f242e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/together.md"
@@ -60,7 +60,7 @@ Set a default model
 ### Non-interactive example
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice together-api-key \
   --together-api-key "$TOGETHER_API_KEY"

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zalo personal"
 source: "https://docs.openclaw.ai/channels/zalouser"
-source_hash: "056c1fbcffee99901d35953e00452b26797be3cf56eba8895c2e1f98c163346a"
+source_hash: "28154d938253c2744f66229e5cbe8f88723905b61c165f716d59e102a818aa91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/zalouser.md"
@@ -166,9 +166,10 @@ Accounts map to `zalouser` profiles in OpenClaw state. Example:
   channels: {
     zalouser: {
       enabled: true,
-      defaultAccount: "default",
+      groupPolicy: "allowlist",
+      defaultAccount: "work",
       accounts: {
-        work: { enabled: true, profile: "work" },
+        work: { enabled: true, profile: "work", groupPolicy: "allowlist" },
       },
     },
   },

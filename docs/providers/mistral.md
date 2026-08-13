@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral"
 source: "https://docs.openclaw.ai/providers/mistral"
-source_hash: "2b85877a9a2dfefadda8799485fefa346369a9891f748d222bd1b5a65187909d"
+source_hash: "45df252018b08cf6feb02c470346aa18ed65d3a45a7d6cafe36879f1aee479d5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/mistral.md"
@@ -67,7 +67,7 @@ Set a default model
 
     ```json5
     {
-      env: { MISTRAL_API_KEY: "sk-..." },
+      env: { vars: { MISTRAL_API_KEY: "sk-..." } },
       agents: { defaults: { model: { primary: "mistral/mistral-large-latest" } } },
     }
     ```
@@ -115,9 +115,9 @@ Use Voxtral for batch audio transcription through the media understanding pipeli
 {
   tools: {
     media: {
+      models: [{ provider: "mistral", model: "voxtral-mini-latest", capabilities: ["audio"] }],
       audio: {
         enabled: true,
-        models: [{ provider: "mistral", model: "voxtral-mini-latest" }],
       },
     },
   },

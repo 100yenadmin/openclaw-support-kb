@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "exe.dev"
 source: "https://docs.openclaw.ai/install/exe-dev"
-source_hash: "de6eac2e81f216a162ddaa2101918ae7f241a88d5a6edaaf5a8cdf96bafb4406"
+source_hash: "bfc923324f0b4cb7484ad5b4b51e1a25bfdf40aa9f48a5f4262d265e7294e45a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/exe-dev.md"
@@ -35,7 +35,7 @@ This guide assumes exe.dev's default **exeuntu** image. Map packages accordingly
 Shelley, exe.dev's agent, can install OpenClaw from a prompt:
 
 ```text
-Set up OpenClaw (https://docs.openclaw.ai/install) on this VM. Use the non-interactive and accept-risk flags for openclaw onboarding. Add the supplied auth or token as needed. Configure nginx to forward from the default port 18789 to the root location on the default enabled site config, making sure to enable Websocket support. Pairing is done by "openclaw devices list" and "openclaw devices approve <request id>". Make sure the dashboard shows that OpenClaw's health is OK. exe.dev handles forwarding from port 8000 to port 80/443 and HTTPS for us, so the final "reachable" should be <vm-name>.exe.xyz, without port specification.
+Set up OpenClaw (https://docs.openclaw.ai/install) on this VM. Use the non-interactive and accept-risk flags for openclaw onboarding. Add the supplied auth or token as needed. Configure nginx to forward from the default port 18789 to the root location on the default enabled site config, making sure to enable Websocket support. Set gateway.controlUi.allowedOrigins to the exact https://<vm-name>.exe.xyz origin, and set gateway.trustedProxies to ["127.0.0.1"] because nginx connects to the Gateway over loopback and overwrites X-Forwarded-For. Pairing is done by "openclaw devices list" and "openclaw devices approve <request id>". Make sure the dashboard shows that OpenClaw's health is OK. exe.dev handles forwarding from port 8000 to port 80/443 and HTTPS for us, so the final "reachable" should be <vm-name>.exe.xyz, without port specification.
 ```
 
 ## Manual installation
@@ -118,6 +118,24 @@ Configure nginx to proxy to port 8000
     ```
 
     Overwrite forwarding headers instead of preserving client-supplied chains. OpenClaw trusts forwarded IP metadata only from explicitly configured proxies, and append-style `X-Forwarded-For` chains are treated as a hardening risk.
+
+
+
+
+Trust nginx and allow the public browser origin
+
+    Configure the exact public origin and trust only the loopback nginx hop:
+
+    ```bash
+    openclaw config set gateway.controlUi.allowedOrigins '["https://<vm-name>.exe.xyz"]' --strict-json
+    openclaw config set gateway.trustedProxies '["127.0.0.1"]' --strict-json
+    openclaw gateway restart
+    ```
+
+    The browser origin check is fail-closed for public hostnames. The proxy
+    allowlist lets OpenClaw use nginx's overwritten `X-Forwarded-For` value
+    instead of treating every request as if it originated from the loopback
+    proxy. Keep this list limited to proxies you control.
 
 
 

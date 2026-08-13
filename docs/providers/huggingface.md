@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hugging Face (inference)"
 source: "https://docs.openclaw.ai/providers/huggingface"
-source_hash: "ea5ec9bd0e234380caa516f0cbd04c3cae5b25a893f3905f90d372ef9644ab0b"
+source_hash: "8b45cc6b8a533a8971a4339c8a002c4d74f2298438ce01f730bb9db8eeab330f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/huggingface.md"
@@ -76,7 +76,7 @@ Verify the model is available
 ### Non-interactive setup
 
 ```bash
-openclaw onboard --non-interactive \
+openclaw onboard --non-interactive --accept-risk --skip-health \
   --mode local \
   --auth-choice huggingface-api-key \
   --huggingface-api-key "$HF_TOKEN"

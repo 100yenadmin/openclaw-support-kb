@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Built-in Tools Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/tools-reference"
-source_hash: "a384fce07f75b8fb463e44814d6695d293c5430b0db70ba5136461a5331a9857"
+source_hash: "b0515e2b2ae3d907e4e8bdc2e2ca19d50730215c3fbb6591f9e42356ef32b0fb"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/tools-reference.md"
@@ -55,7 +55,7 @@ These two tools live in the `browser` toolset but only register when a Chrome De
 
 | Tool | Description | Requires environment |
 |------|-------------|----------------------|
-| `clarify` | Ask the user a question when you need clarification, feedback, or a decision before proceeding. Supports three modes: 1. **Single-select multiple choice** — up to 4 choices; the user picks one or types their own answer via a 5th 'Other' option. 2. **Multi-select multiple choice** — `multi_select=true` renders checkboxes and returns a list of selected choices. 3. **Open-ended** — no choices; the user types a free-form response. On the classic CLI multi-select uses Space-to-toggle checkboxes; on messaging platforms without native checkbox UIs the user replies with comma/space-separated numbers (e.g. "1, 3") or the option text. | — |
+| `clarify` | Ask the user a question when you need clarification, feedback, or a decision before proceeding. Supports three modes: 1. **Single-select multiple choice** — up to 4 choices; the user picks one or types their own answer via a 5th 'Other' option. 2. **Multi-select multiple choice** — `multi_select=true` renders checkboxes and returns a list of selected choices. 3. **Open-ended** — no choices; the user types a free-form response. Choices are ordered best-first, so the first one is labelled `(Recommended)` on every surface and is the default highlight; the label is presentation only and is stripped from the answer the agent reads. On the classic CLI multi-select uses Space-to-toggle checkboxes; on messaging platforms without native checkbox UIs the user replies with comma/space-separated numbers (e.g. "1, 3") or the option text. | — |
 
 ## `code_execution` toolset
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop Plugin SDK (@hermes/plugin-sdk)"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/desktop-plugin-sdk"
-source_hash: "e3647e1555d6ea08aa9851ab893d06482b090978cffd4cf6abde247aadde9b20"
+source_hash: "87ed836b345c8fc1c8d622662e60c7d7be4c030759e2d57697f03d0435c67928"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/desktop-plugin-sdk.md"
@@ -390,6 +390,10 @@ ctx.os.openExternal(url)                   // OS default handler (browser, mail,
 ctx.os.revealPath(path)                    // reveal in Finder / Explorer → Promise<boolean>
 ctx.os.writeClipboard(text)                // system clipboard → Promise<boolean>
 host.navigate('/route')                    // hash-route navigation
+host.openSession(id, { profile?, intent? }) // open a stored session core-style;
+                                           //   profile: soft-swap to that profile's backend first
+                                           //   intent: 'in-place' (default) | 'stack' | 'tab' | 'window'
+host.newChat(profile?)                     // fresh chat draft, optionally in another profile
 host.onEvent(type, fn)                     // gateway event stream ('*' = all); returns disposer
 host.logs(...)                             // tail an app log file
 host.status()                              // one-shot system status snapshot
@@ -398,7 +402,13 @@ host.request<T>(method, params?)           // gateway JSON-RPC — the real powe
 ```
 
 `host.request` is the same JSON-RPC the app itself uses (sessions, config, skills,
-cron, kanban, …). `host.onEvent` streams live gateway events (message deltas,
+cron, kanban, …). Profile-shaped plugins get first-class methods too:
+`profiles.list` (each profile + its most recent conversation as
+`last_session`; pass `include_sessions: false` to skip the per-profile DB
+probe) and `profiles.create` (`name`, `description`, `clone_from`,
+`clone_all`, `no_skills`, `soul`, optional `model` + `provider` pin) — the
+ws twins of the dashboard's `/api/profiles` REST routes.
+`host.onEvent` streams live gateway events (message deltas,
 session lifecycle, tool activity). Listeners are isolated — a throw in your
 listener can't affect app dispatch. Every `host` door is async-safe: a sync throw
 from an internal helper (e.g. no desktop bridge in a plain browser) becomes a

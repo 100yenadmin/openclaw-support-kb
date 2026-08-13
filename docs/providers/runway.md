@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Runway"
 source: "https://docs.openclaw.ai/providers/runway"
-source_hash: "5cf0c0492284bbe0353e1037416c05b7de3d999935eccecb213bc59f6ef7d2f5"
+source_hash: "e101b8da8a6dcd827aa89b577d43e651562bc5efab3f339dc866e94e3cd5b0b5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/runway.md"
@@ -121,6 +121,6 @@ Video generation
 
 Configuration reference
 
-    Agent default settings including video generation model.
+    Agent default settings including `mediaModels.video`.
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "MiniMax"
 source: "https://docs.openclaw.ai/providers/minimax"
-source_hash: "7375da3b9943e405afa27abeb74d5a2a5e0264567b7fd9481d3c45dd6f2d2628"
+source_hash: "c77560a6a7152368795d65f63aa0eee44a0f3b5beb5fa8d5f8a440b58048bec9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/minimax.md"
@@ -170,7 +170,7 @@ Verify the model is available
 
     ```json5
     {
-      env: { MINIMAX_API_KEY: "sk-..." },
+      env: { vars: { MINIMAX_API_KEY: "sk-..." } },
       agents: { defaults: { model: { primary: "minimax/MiniMax-M3" } } },
       models: {
         mode: "merge",
@@ -430,7 +430,7 @@ Fallback example
 
     ```json5
     {
-      env: { MINIMAX_API_KEY: "sk-..." },
+      env: { vars: { MINIMAX_API_KEY: "sk-..." } },
       agents: {
         defaults: {
           models: {

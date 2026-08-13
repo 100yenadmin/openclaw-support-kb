@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "981c9ea4d646b7a17f4db8837ae3076653564af08581b06bd12228dd37d05336"
+source_hash: "290ce4e974be2c3a75a4a86f2a29b65d1796adec8c1d282e20d059b099e52aed"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -71,10 +71,9 @@ observation side effects.
 
 Trigger eligibility is enforced by the host before it invokes the handler. A
 hook registered with `eligibleTriggers: ["heartbeat", "cron"]` is therefore
-inactive for user turns and does not block recovery of an interrupted user
-turn. Omitted, empty, malformed, or partly unknown lists remain unrestricted
-so dispatch and recovery fail closed. Other hook kinds do not accept this
-option.
+inactive for user turns, including a recovered user turn. Omitted, empty,
+malformed, or partly unknown lists remain unrestricted, so the hook runs for
+those turns. Other hook kinds do not accept this option.
 
 Operators can set hook budgets without patching plugin code:
 
@@ -217,7 +216,6 @@ For `sessions.create` calls with `parentSessionKey` and `emitCommandHooks: true`
 | Hook                             | Purpose                                                                                              |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `gateway_start` / `gateway_stop` | Start or stop plugin-owned services with the Gateway                                                 |
-| `deactivate`                     | Deprecated compatibility alias for `gateway_stop`; use `gateway_stop` in new plugins                 |
 | `cron_reconciled`                | Reconcile against the complete Gateway cron state after startup or reload                            |
 | `cron_changed`                   | Observe Gateway-owned cron lifecycle changes (added, updated, removed, started, finished, scheduled) |
 | **`before_install`**             | Inspect staged skill or plugin install material from a loaded plugin runtime                         |
@@ -759,7 +757,8 @@ Use message hooks for channel-level routing and delivery policy:
 
 - `message_received`: observe inbound content, sender, `threadId`,
   `messageId`, `senderId`, optional run/session correlation, ordered `media`,
-  and metadata.
+  normalized `location`, stable `providerUpdate` identity when supplied by the
+  channel, and metadata.
 - `message_sending`: rewrite `content` or return `{ cancel: true }`.
 - `reply_payload_sending`: rewrite normalized `ReplyPayload` objects
   (including `presentation`, `delivery`, media refs, and text) or return
@@ -848,6 +847,10 @@ Use `gateway_start` to start general plugin services and `gateway_stop` to
 clean up long-running resources. The cron scheduler can still be loading when
 `gateway_start` runs, so do not use it as the baseline signal for an external
 cron projection.
+
+The legacy `api.on("deactivate", ...)` alias was removed in August 2026. Use
+`gateway_stop` for cleanup; see the
+[migration note](/plugins/sdk-migration#deactivate-hook-alias).
 
 Do not rely on the internal `gateway:startup` hook for plugin-owned runtime
 services.
@@ -1045,13 +1048,11 @@ before the next major release:
 - **Plaintext channel envelopes** in `inbound_claim` and `message_received`
   handlers. Read `BodyForAgent` and the structured user-context blocks
   instead of parsing flat envelope text. See
-  [Plaintext channel envelopes → BodyForAgent](/plugins/sdk-migration#active-deprecations).
+  [Plaintext channel envelopes → BodyForAgent](/plugins/sdk-migration#removal-timeline).
 - **`subagent_spawning`** remains for compatibility with older plugins, but
   new plugins should not return thread routing from it. Core prepares
   `thread: true` subagent bindings through channel session-binding adapters
   before `subagent_spawned` fires.
-- **`deactivate`** remains as a deprecated cleanup compatibility alias until
-  after 2026-08-16. New plugins should use `gateway_stop`.
 - **`onResolution` in `before_tool_call`** now uses the typed
   `PluginApprovalResolution` union (`allow-once` / `allow-always` / `deny` /
   `timeout` / `cancelled`) instead of a free-form `string`.
@@ -1063,7 +1064,7 @@ before the next major release:
 For the full list - memory capability registration, provider thinking
 profile, external auth providers, provider discovery types, task runtime
 accessors, and the `command-auth` → `command-status` rename - see
-[Plugin SDK migration → Active deprecations](/plugins/sdk-migration#active-deprecations).
+[Plugin SDK migration → Active deprecations](/plugins/sdk-migration#removal-timeline).
 
 ## Related
 

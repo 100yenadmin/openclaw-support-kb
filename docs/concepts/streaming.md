@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "8c9ed20e1d5ce93a1ac0572ac236a42177ce0253e89e7a22df56f063ba274b9c"
+source_hash: "6c82d1424e43749249dd07d79bee8d709b2cbfafde5e1e8fcd5da69dbc491546"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -189,14 +189,14 @@ instead of being overwritten in one editable draft.
 
 ### Channel mapping
 
-Discord defaults to `off` when `streaming` is unset, Telegram defaults to
-`progress`, and Slack, Mattermost, and MS Teams default to `partial`.
+Discord defaults to `off` when `streaming` is unset, Telegram and Slack default
+to `progress`, and Mattermost and MS Teams default to `partial`.
 
 | Channel    | `off`         | `partial` | `block` | `progress`                        |
 | ---------- | ------------- | --------- | ------- | --------------------------------- |
 | Telegram   | Yes           | Yes       | Yes     | editable progress draft (default) |
 | Discord    | Yes (default) | Yes       | Yes     | editable progress draft (opt-in)  |
-| Slack      | Yes           | Yes       | Yes     | Yes                               |
+| Slack      | Yes           | Yes       | Yes     | Block Kit session card (default)  |
 | Mattermost | Yes           | Yes       | Yes     | Yes                               |
 | MS Teams   | Yes           | Yes       | Yes     | native progress stream            |
 
@@ -209,7 +209,7 @@ Slack-only:
 
 - `channels.slack.streaming.nativeTransport` toggles Slack native streaming API
   calls (`chat.startStream`/`chat.appendStream`/`chat.stopStream`) when
-  `channels.slack.streaming.mode="partial"` (default: `true`).
+  `channels.slack.streaming.mode="partial"` (`nativeTransport` defaults to `true`).
 - Slack native streaming and Slack assistant thread status require a reply
   thread target. Top-level DMs do not show that thread-style preview, but can
   still use Slack draft preview posts and edits.
@@ -276,14 +276,17 @@ Slack-only:
 - `partial` can use Slack native streaming (`chat.startStream`/`append`/`stop`)
   when available.
 - `block` uses append-style draft previews.
-- `progress` uses status preview text, then the final answer.
+- `progress` maintains one live Block Kit session card, finalizes it to success
+  or error, and always posts the assistant's final text as a separate message.
+- Terminal cards include **Open in OpenClaw** when `gateway.publicOrigin` is set.
+  Slack's native plan/task stream remains opt-in through
+  `streaming.progress.nativeTaskCards: true`.
 - Top-level DMs without a reply thread use draft preview posts and edits
   instead of Slack native streaming.
 - Native and draft preview streaming suppress block replies for that turn, so a
   Slack reply is streamed by one delivery path only.
-- Final media/error payloads and progress finals do not create throwaway draft
-  messages; only text/block finals that can edit the preview flush pending
-  draft text.
+- A successful turn with no visible reply still deletes its draft card. A
+  failed no-reply turn retains the card in its error state.
 
 ### Mattermost
 
@@ -343,11 +346,11 @@ Supported surfaces:
   `streaming.preview.toolProgress` or `streaming.progress.toolProgress` to
   `false` for that channel (both default `true`, and both are honored in every
   mode). To keep tool-progress lines visible while hiding command/exec text,
-  set `streaming.preview.commandText` to `"status"` or
-  `streaming.progress.commandText` to `"status"`; the default is `"raw"` to
-  preserve released behavior. This policy is shared by draft/progress channels
+  set `streaming.preview.commandText` or `streaming.progress.commandText` to
+  `"status"` (the default). Set either option to `"raw"` to opt into command
+  text. This policy is shared by draft/progress channels
   that use OpenClaw's compact progress renderer, including Discord, Matrix,
-  Microsoft Teams, Mattermost, Slack draft previews, and Telegram. To disable
+  Microsoft Teams, Mattermost, Slack session cards, and Telegram. To disable
   preview edits entirely, set `streaming.mode` to `off`.
 
 ## Progress draft rendering
@@ -361,6 +364,9 @@ channel:
 | `streaming.progress.maxLineChars` | `120`         | Max characters per compact line before truncation (word-aware) |
 | `streaming.progress.label`        | `"auto"`      | Draft title; a custom string, or `false` to hide it            |
 | `streaming.progress.labels`       | built-in pool | Candidate labels used when `label: "auto"`                     |
+
+Slack always renders progress mode as its fixed session-card layout; these
+limits still bound the activity rows and plan text inside that card.
 
 ### Commentary progress lane
 

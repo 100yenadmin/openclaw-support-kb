@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LiteLLM"
 source: "https://docs.openclaw.ai/providers/litellm"
-source_hash: "1805264ee5eef8ddfdb0cf21e53e1d352ec1473615adc544e381e6a5679013a7"
+source_hash: "14f6492d5395b703d245d8f63c6bfb767f15acb283af63f623f818928fe84240"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/litellm.md"
@@ -31,7 +31,7 @@ Onboarding (recommended)
     For non-interactive setup against a remote proxy, pass the proxy URL explicitly:
 
     ```bash
-    openclaw onboard --non-interactive --accept-risk --auth-choice litellm-api-key \
+    openclaw onboard --non-interactive --accept-risk --skip-health --auth-choice litellm-api-key \
       --litellm-api-key "$LITELLM_API_KEY" --custom-base-url "https://litellm.example/v1"
     ```
 

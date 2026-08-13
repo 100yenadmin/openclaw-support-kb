@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin entry points"
 source: "https://docs.openclaw.ai/plugins/sdk-entrypoints"
-source_hash: "e6a547ee270afe7b2cc098fdfbf04f6292a1df9418d060045977ce87616dc797"
+source_hash: "a12529f3443e5be77670a66714acf950100873e3072fc740dd9edd404ec517d0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-entrypoints.md"
@@ -159,7 +159,7 @@ export default definePluginEntry({
   `resolveCreateSession({ agentId })` must return a config-derived model/runtime
   target before OpenClaw advertises creation or calls `startTerminalSession`.
   Use
-  [`api.runtime.agent.resolveSessionCatalogCreateTarget(...)`](/plugins/sdk-runtime#apiruntimeagent)
+  [`api.runtime.agent.resolveSessionCatalogCreateTarget(...)`](/plugins/sdk-runtime#api-runtime-agent)
   to apply the host's runtime and model-allowlist policy instead of duplicating
   it.
 
