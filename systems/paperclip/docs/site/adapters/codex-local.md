@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "codex-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/codex-local.md"
-source_hash: "970fc5f1fd0124ab78185280fc7b96a366355b25abccdeb7f308e0dc0e6e772e"
+source_hash: "a85e47e65bb685bed61d93c7d3ea4b8def1acc9b7da55cdbae0cbee42a202378"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/codex-local.md"
@@ -159,7 +159,7 @@ change.
 For manual local CLI usage outside heartbeat runs (for example running as `codexcoder` directly), use:
 
 ```sh
-pnpm paperclipai agent local-cli codexcoder --company-id <company-id>
+pnpm exec paperclipai agent local-cli codexcoder --company-id <company-id>
 ```
 
 This installs any missing skills, creates an agent API key, and prints shell exports to run as that agent.

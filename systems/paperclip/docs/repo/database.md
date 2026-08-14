@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "a91a4f410b51f2fe46e6b4bf915b46d2cd2421dd184e4b621ece709b7c6fe958"
+source_hash: "43304141f08f3274ee955e77e6fae7685b512f7f33e8268fab9662debd67598f"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -285,7 +285,7 @@ pnpm paperclipai configure --section secrets
 Inline secret migration command:
 
 ```sh
-pnpm paperclipai secrets migrate-inline-env --company-id <company-id> --apply
+pnpm exec paperclipai secrets migrate-inline-env --company-id <company-id> --apply
 
 # direct database maintenance fallback
 pnpm secrets:migrate-inline-env --apply

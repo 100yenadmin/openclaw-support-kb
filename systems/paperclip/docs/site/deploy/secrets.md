@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "low-level script for direct database maintenance"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/secrets.md"
-source_hash: "45d0675377a5ba6feb68a88418f629ccf7bc4e2cfa1b532213c4dce2fd82c7f5"
+source_hash: "7c3091919b7493e4317e717459d854fb4ecb1b6d692a0fb803446e1eec3e8148"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/secrets.md"
@@ -221,7 +221,7 @@ Validate secrets config:
 
 ```sh
 pnpm paperclipai doctor
-pnpm paperclipai secrets doctor --company-id <company-id>
+pnpm exec paperclipai secrets doctor --company-id <company-id>
 ```
 
 ### Environment Overrides
@@ -493,8 +493,8 @@ store.
 If you have existing agents with inline API keys in their config, migrate them to encrypted secret refs:
 
 ```sh
-pnpm paperclipai secrets migrate-inline-env --company-id <company-id>
-pnpm paperclipai secrets migrate-inline-env --company-id <company-id> --apply
+pnpm exec paperclipai secrets migrate-inline-env --company-id <company-id>
+pnpm exec paperclipai secrets migrate-inline-env --company-id <company-id> --apply
 
 # low-level script for direct database maintenance
 pnpm secrets:migrate-inline-env         # dry run
@@ -511,7 +511,7 @@ Company exports include only environment declarations. They do not include
 secret IDs, provider references, encrypted material, or plaintext values.
 
 ```sh
-pnpm paperclipai secrets declarations --company-id <company-id> --kind secret
+pnpm exec paperclipai secrets declarations --company-id <company-id> --kind secret
 ```
 
 Before importing a package into another instance, use those declarations to

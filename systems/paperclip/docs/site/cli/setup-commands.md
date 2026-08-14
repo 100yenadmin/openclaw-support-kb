@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "setup-commands"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/setup-commands.md"
-source_hash: "7ab2eccde5b092c895f2c4c5aa8a2a426578b7ea86667166455cb2ba9dbbfbb7"
+source_hash: "7e2e559d53939cd1f4ee7e15d139280298db878463d199cb72acb5fe2301445d"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/setup-commands.md"
@@ -122,7 +122,7 @@ This now includes bind-oriented deployment settings such as `PAPERCLIP_BIND` and
 Allow a private hostname for authenticated/private mode:
 
 ```sh
-pnpm paperclipai allowed-hostname my-tailscale-host
+pnpm exec paperclipai allowed-hostname my-tailscale-host
 ```
 
 ## Local Storage Paths

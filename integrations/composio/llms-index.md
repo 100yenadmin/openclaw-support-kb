@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "ba57ec6b85b64e44f8f1f99150262e3f6ca758603c3a1819c7dc4a21fc1d3b1a"
+source_hash: "d3ae4fb01e2ad60a97607387f2487a1b2b8f905b380265423e990c9f00cd7bce"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -126,16 +126,16 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/logs.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
-- https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/organization.md
+- https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/tool-router.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md
+- https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-events.md
-- https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
-- https://docs.composio.dev/reference/api-reference/tool-router.md
 
 ## API Reference (v3.0, legacy — supported, not for new code)
 
@@ -144,17 +144,17 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
-- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
+- https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
+- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md
-- https://docs.composio.dev/reference/v3/api-reference/toolkits.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
+- https://docs.composio.dev/reference/v3/api-reference/toolkits.md
 - https://docs.composio.dev/reference/v3/api-reference/tools.md
 - https://docs.composio.dev/reference/v3/api-reference/triggers.md
-- https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
 
 ## SDK and product reference (version-independent)
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Build a Hermes Plugin"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/plugins"
-source_hash: "088daac5dc5014be6a99415208ce4261ef4cf01e2208e31c13466092bfee4709"
+source_hash: "a4fdfc7e9db91323d45ba3def00bf566cf15aaceb32e96b6f68f63d73626bc37"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/plugins/index.md"
@@ -265,6 +265,25 @@ config keys (`plugins.entries.<id>.allow_tool_override`, …) still work but
 are deprecated — declare capabilities instead so users get a single,
 auditable consent screen. Capabilities are consent + audit, **not a
 sandbox**: they gate host API surfaces, nothing more.
+
+**Pip-distributed plugins** have no `plugin.yaml` directory once installed,
+so declare capabilities in distribution metadata instead, via the companion
+`hermes_agent.plugin_capabilities` entry-point group. Each declaration is
+named `<plugin-id>.<capability-id>` and points at the same object as your
+`hermes_agent.plugins` entry point:
+
+```toml
+[project.entry-points."hermes_agent.plugins"]
+calculator = "my_pkg:register"
+
+[project.entry-points."hermes_agent.plugin_capabilities"]
+"calculator.tools.override" = "my_pkg:register"
+```
+
+Hermes reads these from installed metadata without importing your code, so
+`hermes plugins capabilities` and the consent flow stay accurate for pip
+installs.
+
 ### Manifest v2 reference
 
 `plugin.yaml` also supports an additive **v2 schema** (#64165). Every field is

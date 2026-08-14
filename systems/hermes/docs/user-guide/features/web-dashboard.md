@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "4d5d1e8b0e16d5fa937c8e0175fe7329b55d2a28a3ce46ac332fcd9a60926eb8"
+source_hash: "040ffad9e0cd4dcb9caf5e2cb3bd2de6b9adad07404c6d9e81ef687e9be42473"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -117,6 +117,26 @@ The landing page shows a live overview of your installation:
 - **Recent sessions** — list of the 20 most recent sessions with model, message count, token usage, and a preview of the conversation
 
 The status page auto-refreshes every 5 seconds.
+
+#### Resource pressure banner
+
+When the host is running low on memory or disk, a banner appears at the top of
+the dashboard (fed by the same status poll — no extra requests):
+
+- **"Your agent is almost out of memory and may restart"** — system available
+  memory has dropped to *elevated* (< 128 MiB or < 15%) or *critical*
+  (< 64 MiB or < 5%) levels, as sampled by the gateway's 30-second heartbeat.
+- **"Your agent restarted unexpectedly, most likely because it ran out of
+  memory"** — the lifecycle ledger recorded an unclean exit under memory
+  pressure on the previous boot (a suspected OOM kill).
+- **Disk warnings** — the volume holding `~/.hermes` is nearly full
+  (*elevated* below 512 MB free, *critical* below 256 MB free).
+
+Only the most severe active warning shows at a time (disk critical > memory
+critical > OOM restart > disk elevated > memory elevated). Dismissals are
+scoped to the current gateway boot: dismissing a warning surfaces the next
+active one, a gateway restart or an escalation (elevated → critical) re-opens
+it, and a stale heartbeat renders nothing rather than a spurious alert.
 
 ### Chat
 
@@ -427,6 +447,29 @@ a chat under the selected profile.
 ### GET /api/status
 
 Returns agent version, gateway status, platform states, and active session count.
+
+The response also carries two advisory resource blocks (they never affect the
+`components`/`overall` health verdict):
+
+- **`memory`** — distilled from the gateway's 30-second heartbeat and the
+  lifecycle ledger. Fields: `pressure` (`ok` / `elevated` / `critical` /
+  `unknown`), `gateway_rss_mb`, `system_total_mb`, `system_available_mb`,
+  `swap_used_mb`, `sampled_at`, `boot_id`, `last_boot_unclean`,
+  `last_boot_suspected_oom`. Pressure is `elevated` below 128 MiB (or 15%) of
+  available system memory and `critical` below 64 MiB (or 5%) — the same
+  levels at which a subsequent unclean exit would be flagged as a suspected
+  OOM kill. Heartbeats older than 150 seconds (or future-dated) keep their
+  numbers but degrade `pressure` to `unknown`, so a dead gateway's last
+  sample can't masquerade as a live reading.
+- **`disk`** — a live `shutil.disk_usage()` sample of the volume holding
+  `~/.hermes`. Fields: `pressure`, `free_mb`, `total_mb`, `used_percent`,
+  `sampled_at`. Pressure is `elevated` below 512 MB free (or ≥85% used with
+  under 4 GB headroom) and `critical` below 256 MB free (or ≥95% used with
+  under 1 GB headroom).
+
+Both collectors are fail-safe: any sampling error degrades the block to
+`{"pressure": "unknown"}` instead of failing the status endpoint. The numbers
+are coarse (whole MB, whole-percent) since `/api/status` is public.
 
 ### GET /api/sessions
 

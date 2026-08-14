@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "e80d73a97952bd463f273f16582602d7e697485788baf8da8c3c193f9611b8ea"
+source_hash: "8dc5d67031593a20512b568460c6ac1f605634f96e802b8391e329e051fb44b7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -199,6 +199,26 @@ providers:
 ```
 
 With discovery off, the model picker (`hermes model`, `/model`) shows the configured list instead of a live probe.
+
+For an Anthropic-compatible gateway that resolves a bare model alias only
+after receiving the request, opt the alias into native prompt-cache markers
+with the per-model `prompt_caching` capability:
+
+```yaml
+providers:
+  anthropic-proxy:
+    api: https://gateway.example.com/anthropic
+    transport: anthropic_messages
+    models:
+      fable:
+        context_length: 1000000
+        prompt_caching: true
+```
+
+Hermes matches this declaration to the exact provider route and runtime model
+id, without rewriting the alias. Set `prompt_caching: false` to explicitly
+disable cache markers for a model; when omitted, Hermes keeps its normal
+provider and model capability detection.
 
 :::note Legacy format
 Older configs used a top-level `custom_providers:` list (with `base_url` instead of `api`). It still works and is auto-migrated to the `providers:` dict on `hermes update` (config v12).

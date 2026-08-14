@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Developing"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEVELOPING.md"
-source_hash: "b5b892524a46379cba3717ef4b865dae6d698689d89f495fff85379c94b596c2"
+source_hash: "577def6b9cf1feda68fe787b30ad03d0d3779c7a645e1a065aaf7489a8275b58"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/developing.md"
@@ -248,7 +248,7 @@ pnpm dev --authenticated-private
 Allow additional private hostnames (for example custom Tailscale hostnames):
 
 ```sh
-pnpm paperclipai allowed-hostname dotta-macbook-pro
+pnpm exec paperclipai allowed-hostname dotta-macbook-pro
 ```
 
 ## Test Commands
@@ -555,7 +555,7 @@ Repair an already-created repo-managed worktree and reseed its isolated instance
 
 ```sh
 cd /path/to/paperclip/.paperclip/worktrees/PAP-884-ai-commits-component
-pnpm paperclipai worktree init --force --seed-mode minimal \
+pnpm exec paperclipai worktree init --force --seed-mode minimal \
   --name PAP-884-ai-commits-component \
   --from-config ~/.paperclip/instances/default/config.json
 ```
@@ -887,15 +887,15 @@ Paperclip CLI now includes client-side control-plane commands in addition to set
 Quick examples:
 
 ```sh
-pnpm paperclipai issue list --company-id <company-id>
-pnpm paperclipai issue create --company-id <company-id> --title "Investigate checkout conflict"
-pnpm paperclipai issue update <issue-id> --status in_progress --comment "Started triage"
+pnpm exec paperclipai issue list --company-id <company-id>
+pnpm exec paperclipai issue create --company-id <company-id> --title "Investigate checkout conflict"
+pnpm exec paperclipai issue update <issue-id> --status in_progress --comment "Started triage"
 ```
 
 Set defaults once with context profiles:
 
 ```sh
-pnpm paperclipai context set --api-base http://localhost:3100 --company-id <company-id>
+pnpm exec paperclipai context set --api-base http://localhost:3100 --company-id <company-id>
 ```
 
 Then run commands without repeating flags:
@@ -979,4 +979,4 @@ Networking behavior for this smoke script:
 
 - auto-detects and prints a Paperclip host URL reachable from inside OpenClaw Docker
 - default container-side host alias is `host.docker.internal` (override with `PAPERCLIP_HOST_FROM_CONTAINER` / `PAPERCLIP_HOST_PORT`)
-- if Paperclip rejects container hostnames in authenticated/private mode, allow `host.docker.internal` via `pnpm paperclipai allowed-hostname host.docker.internal` and restart Paperclip
+- if Paperclip rejects container hostnames in authenticated/private mode, allow `host.docker.internal` via `pnpm exec paperclipai allowed-hostname host.docker.internal` and restart Paperclip

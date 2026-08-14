@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "-> {\"status\":\"ok\"}"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/local-development.md"
-source_hash: "8cbe331c352773b2dcd26868d282055317f86a0b3092d7fdc7187f2252c5296b"
+source_hash: "8de7bb8a0224c7bd23a9c7f148b345f0239dab06cdbf0deb7776c8727a674f94"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/local-development.md"
@@ -82,7 +82,7 @@ pnpm dev --authenticated-private
 Allow additional private hostnames:
 
 ```sh
-pnpm paperclipai allowed-hostname dotta-macbook-pro
+pnpm exec paperclipai allowed-hostname dotta-macbook-pro
 ```
 
 For full setup and troubleshooting, see [Tailscale Private Access](/deploy/tailscale-private-access).

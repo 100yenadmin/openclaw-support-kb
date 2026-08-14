@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Messaging Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging"
-source_hash: "af56782ac9f2bacf81d6a6332bed73f33f55ba3e4a13db811d2d36dafa951393"
+source_hash: "1981bb900c9ed71c5d98de88daa91324971a006500eca3a5b12756c294c4119a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/index.md"
@@ -533,14 +533,15 @@ When the agent running a background session uses `terminal(background=true)` to 
 
 ```yaml
 display:
-  background_process_notifications: all    # all | result | error | off
+  background_process_notifications: concise    # concise | all | result | error | off
 ```
 
 | Mode | What you receive |
 |------|-----------------|
-| `all` | Running-output updates **and** the final completion message (default) |
-| `result` | Only the final completion message (regardless of exit code) |
-| `error` | Only the final message when the exit code is non-zero |
+| `concise` | One-line status message on completion; failures append a short output tail (default) |
+| `all` | Running-output updates **and** the final raw-output message |
+| `result` | Only the final raw-output completion message (regardless of exit code) |
+| `error` | Only the final raw-output message when the exit code is non-zero |
 | `off` | No process watcher messages at all |
 
 You can also set this via environment variable:
