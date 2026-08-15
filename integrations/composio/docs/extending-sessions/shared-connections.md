@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Shared connections"
-source: "https://docs.composio.dev/docs/shared-connections.md"
-source_hash: "0e67e73534bd881ef12c9eafadddb17e4bb88016db1c3234d019b18a610e92c2"
+source: "https://docs.composio.dev/docs/extending-sessions/shared-connections.md"
+source_hash: "20c5314b7a56bdb85dd7570caa0909021c1db801ea5813f2468cb6cfb8be09b6"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "shared-connections.md"
-original_doc_path: "shared-connections.md"
+doc_path: "extending-sessions/shared-connections.md"
+original_doc_path: "extending-sessions/shared-connections.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Shared connections (/docs/shared-connections)
-Source: https://docs.composio.dev/docs/shared-connections.md
+# Shared connections (/docs/extending-sessions/shared-connections)
+Source: https://docs.composio.dev/docs/extending-sessions/shared-connections.md
 
 
 By default, a connected account is **PRIVATE**: only the `userID` that created it can use it. A **SHARED** connection can be reached by other `userID`s, subject to a per-connection access control list (ACL).

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Configuring Sessions"
 source: "https://docs.composio.dev/docs/configuring-sessions.md"
-source_hash: "d09f791c0be48a1d2f2941b5371121b4497534e03959a5b19d532b32ea878c29"
+source_hash: "4cae31f8ea123d414b8bc98c05551cd448a22a32c337d9380e09cbff500b4f86"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "configuring-sessions.md"
@@ -430,7 +430,7 @@ Keep the preloaded set small, generally fewer than 20 tools, to avoid context bl
 `sessionPreset` / `session_preset`, or custom-tool `preload`.
 
 > `preload.tools` is not supported when `multiAccount.enable` is true. See
-[Managing multiple connected accounts](/docs/managing-multiple-connected-accounts).
+[Managing multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts).
 
 **Python:**
 
@@ -520,7 +520,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-See [White-labeling authentication](/docs/white-labeling-authentication) for branding, or [Managed vs custom auth](/docs/custom-app-vs-managed-app) for toolkits that require your own credentials.
+See [White-labeling authentication](/docs/authentication/white-labeling-authentication) for branding, or [Managed vs custom auth](/docs/authentication/custom-app-vs-managed-app) for toolkits that require your own credentials.
 
 ## Account selection [#account-selection]
 
@@ -551,7 +551,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-> Arrays are the preferred format for `connectedAccounts`. A single string (e.g. `"ca_work_gmail"`) is still accepted for backwards compatibility and is automatically coerced to a single-element array. Only one account per toolkit is allowed when [multi-account mode](/docs/managing-multiple-connected-accounts) is disabled.
+> Arrays are the preferred format for `connectedAccounts`. A single string (e.g. `"ca_work_gmail"`) is still accepted for backwards compatibility and is automatically coerced to a single-element array. Only one account per toolkit is allowed when [multi-account mode](/docs/authentication/managing-multiple-connected-accounts) is disabled.
 
 ### Precedence [#precedence]
 
@@ -695,7 +695,7 @@ console.log(connectionRequest.redirectUrl);
 const connectedAccount = await connectionRequest.waitForConnection();
 ```
 
-For more details, see [Manually authenticating users](/docs/manually-authenticating).
+For more details, see [Manually authenticating users](/docs/authentication/manually-authenticating).
 
 ### toolkits() [#toolkits]
 

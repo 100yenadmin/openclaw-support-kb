@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "secrets"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/api/secrets.md"
-source_hash: "c8c9edad53c8580494620371437da7ca5de764b7fce9effc095bc92cb734b119"
+source_hash: "6892e6583d10840d87cdaae3d52d0b8a61f0d65e4eecb23d0cc7177be905d68b"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/api/secrets.md"
@@ -132,7 +132,7 @@ credentials must not be stored in Paperclip `company_secrets`.
 The equivalent CLI check is:
 
 ```sh
-pnpm exec paperclipai secrets doctor --company-id {companyId}
+npx paperclipai secrets doctor --company-id {companyId}
 ```
 
 ## Provider Vaults
@@ -503,7 +503,7 @@ as declarations in the package manifest. Exports omit secret values, secret IDs,
 provider references, and encrypted provider material. Use:
 
 ```sh
-pnpm exec paperclipai secrets declarations --company-id {companyId}
+npx paperclipai secrets declarations --company-id {companyId}
 ```
 
 to inspect the declarations that an export would emit before moving a package.

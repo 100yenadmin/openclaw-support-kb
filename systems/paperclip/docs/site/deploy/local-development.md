@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "-> {\"status\":\"ok\"}"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/local-development.md"
-source_hash: "8de7bb8a0224c7bd23a9c7f148b345f0239dab06cdbf0deb7776c8727a674f94"
+source_hash: "0e6005a083f386c02e03de44728ff7d71f9ed0f79d78d6a570e5c5a309caf7bd"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/local-development.md"
@@ -82,7 +82,7 @@ pnpm dev --authenticated-private
 Allow additional private hostnames:
 
 ```sh
-pnpm exec paperclipai allowed-hostname dotta-macbook-pro
+npx paperclipai allowed-hostname dotta-macbook-pro
 ```
 
 For full setup and troubleshooting, see [Tailscale Private Access](/deploy/tailscale-private-access).
@@ -102,10 +102,10 @@ curl http://localhost:3100/api/companies
 For safer parallel local experiments, initialize a dedicated worktree instance instead of reusing your main checkout:
 
 ```sh
-pnpm paperclipai worktree:make local-lab --seed-mode minimal
+npx paperclipai worktree:make local-lab --seed-mode minimal
 cd ~/paperclip-local-lab
 pnpm paperclipai worktree env                       # inspect generated env exports
-eval "$(pnpm paperclipai worktree env)"             # bash/zsh
+eval "$(npx paperclipai worktree env)"             # bash/zsh
 pnpm paperclipai run
 pnpm paperclipai doctor
 ```
@@ -113,14 +113,15 @@ pnpm paperclipai doctor
 If the experiment gets noisy, repair or reseed the worktree without touching the main branch:
 
 ```sh
-pnpm paperclipai worktree repair --branch paperclip-local-lab
-pnpm paperclipai worktree reseed --from . --to paperclip-local-lab
+# worktree repair rebuilds the local checkout metadata, so run the checked-out CLI through the direct-exec form.
+node cli/node_modules/tsx/dist/cli.mjs cli/src/index.ts worktree repair --branch paperclip-local-lab
+npx paperclipai worktree reseed --from . --to paperclip-local-lab
 ```
 
 When done, shut it down and remove the isolated state explicitly:
 
 ```sh
-pnpm paperclipai worktree:cleanup local-lab --force
+npx paperclipai worktree:cleanup local-lab --force
 ```
 
 ## Reset Dev Data

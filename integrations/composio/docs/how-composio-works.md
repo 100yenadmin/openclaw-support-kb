@@ -2,7 +2,7 @@
 type: composio_doc
 title: "What is a session?"
 source: "https://docs.composio.dev/docs/how-composio-works.md"
-source_hash: "a24eeeabef3c31e36793ac02168b962502eac03fd71cc7a5c6713973ed84eca5"
+source_hash: "b90cc9d661346f923388c18eedf3b62411353d95c1c2d45a6e9d98c5a74de7f2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "how-composio-works.md"
@@ -67,7 +67,7 @@ A user is an identifier from your app. Composio stores connections under that ID
     * **Avoid:** email addresses (they can change)
     * **Never:** `default` in production (it exposes other users' data)
 
-A user can connect multiple accounts for the same toolkit, like work and personal Gmail. Use the same userID, then select the connected account when a session needs a specific one. See [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts).
+A user can connect multiple accounts for the same toolkit, like work and personal Gmail. Use the same userID, then select the connected account when a session needs a specific one. See [Managing multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts).
 
 ## Meta tools [#meta-tools]
 
@@ -83,7 +83,7 @@ When a tool needs a connection, the session generates a Connect Link with `sessi
 
 In chat, the agent can pause, ask the user to connect an app, then retry the tool once auth completes. Composio manages the OAuth redirects, token exchange, and refresh. Once a user connects a toolkit, the connected account persists and future sessions reuse it without re-authentication.
 
-For OAuth toolkits, Composio uses [managed apps](/docs/custom-app-vs-managed-app) by default. Bring your own app when you need your own branding, scopes, or consent screen.
+For OAuth toolkits, Composio uses [managed apps](/docs/authentication/custom-app-vs-managed-app) by default. Bring your own app when you need your own branding, scopes, or consent screen.
 
 ## Sandbox [#sandbox]
 

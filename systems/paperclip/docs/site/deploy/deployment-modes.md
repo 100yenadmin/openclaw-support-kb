@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Set during onboard"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/deployment-modes.md"
-source_hash: "edae503755068920e5f4376e7e551ea995a64bef02828889c34cd350a06c7aec"
+source_hash: "e09908a17a62ebf02d8c9faf751449de34c1c1a7a66e2f99edc46056e8968e41"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/deployment-modes.md"
@@ -60,7 +60,7 @@ pnpm paperclipai onboard
 Allow custom Tailscale hostnames:
 
 ```sh
-pnpm exec paperclipai allowed-hostname my-machine
+npx paperclipai allowed-hostname my-machine
 ```
 
 ### `authenticated` + `public`

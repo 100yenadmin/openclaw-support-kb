@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Scheduled Tasks (Cron)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron"
-source_hash: "b487f577b3c45071df044928c875aa8bc775b808c50bb658fda546d9eb7b56c8"
+source_hash: "76790aba04247da89fb4d2a97cfd7c292cebec78689626cac1bb153e67a1b6c4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/cron.md"
@@ -528,6 +528,16 @@ cron:
 ```
 
 Or set the `HERMES_CRON_SCRIPT_TIMEOUT` environment variable. The resolution order is: env var → config.yaml → 3600s default.
+
+Cron also bounds post-run session and agent-resource cleanup. This happens after the LLM turn returns, so it is separate from the inactivity timeout. The default is 10 seconds per cleanup operation. If a storage or client finalizer stops returning, the scheduler logs an error, releases the job's in-flight guard, and allows later runs to dispatch instead of skipping that job forever.
+
+```yaml
+# ~/.hermes/config.yaml
+cron:
+  cleanup_timeout_seconds: 10
+```
+
+Set `cleanup_timeout_seconds: 0` only to restore the legacy unbounded cleanup behavior.
 
 ## No-agent mode (script-only jobs)
 

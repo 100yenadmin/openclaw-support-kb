@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Feedback Voting — Local Data Guide"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/feedback-voting.md"
-source_hash: "db0ce3e2a8eab4dcd40edf42ab7bf63d07e17c87a8884ed23b751004221374f8"
+source_hash: "cde066a373d99c191cfbc702183fdeed908a44bf95ba551ef49d80e2fd59af37"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/feedback-voting.md"
@@ -54,7 +54,7 @@ Shows a color-coded summary: vote counts, per-trace details with reasons, and ex
 paperclipai feedback report
 
 # Point to a different server or company
-pnpm exec paperclipai feedback report --api-base http://127.0.0.1:3000 --company-id <company-id>
+npx paperclipai feedback report --api-base http://127.0.0.1:3000 --company-id <company-id>
 
 # Include raw payload dumps in the report
 pnpm paperclipai feedback report --payloads
@@ -130,7 +130,7 @@ Exports are full by default. `traces/` keeps the Paperclip envelope, while `full
 
 ```bash
 # Custom server and output directory
-pnpm exec paperclipai feedback export --api-base http://127.0.0.1:3000 --company-id <company-id> --out ./my-export
+npx paperclipai feedback export --api-base http://127.0.0.1:3000 --company-id <company-id> --out ./my-export
 ```
 
 ### Reading an exported trace

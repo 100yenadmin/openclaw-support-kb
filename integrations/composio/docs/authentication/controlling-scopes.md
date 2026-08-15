@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Controlling scopes"
-source: "https://docs.composio.dev/docs/controlling-scopes.md"
-source_hash: "f0638fa99a61fc6064cdc31349e38ea77c2f65a6e9c361a2807594989cd759ea"
+source: "https://docs.composio.dev/docs/authentication/controlling-scopes.md"
+source_hash: "efbff9a4ac4944e1aba414b690f0aa9c694e00b564ad3dd3ef76d1980621e560"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "controlling-scopes.md"
-original_doc_path: "controlling-scopes.md"
+doc_path: "authentication/controlling-scopes.md"
+original_doc_path: "authentication/controlling-scopes.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Controlling scopes (/docs/controlling-scopes)
-Source: https://docs.composio.dev/docs/controlling-scopes.md
+# Controlling scopes (/docs/authentication/controlling-scopes)
+Source: https://docs.composio.dev/docs/authentication/controlling-scopes.md
 
 
 Scopes are the permissions an OAuth toolkit grants your app: read email, write to a repo, manage calendar events. Composio requests a sensible set of default scopes for each toolkit, so most apps never set scopes at all. Override them when the defaults grant too much or too little: to follow least privilege, or to reach an API the defaults don't cover.
@@ -151,6 +151,6 @@ const session = await composio.create('user_123', {
 
 ## Next [#next]
 
-- [White-labeling authentication](/docs/white-labeling-authentication): Remove Composio branding from your auth flows
+- [White-labeling authentication](/docs/authentication/white-labeling-authentication): Remove Composio branding from your auth flows
 
 ---

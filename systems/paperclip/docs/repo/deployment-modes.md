@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Deployment Modes"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEPLOYMENT-MODES.md"
-source_hash: "d10466502c626d013d2404218448c8bda59338c3b72b23da7425b78c57e85cdf"
+source_hash: "bafa6f1fb75088a2b18a54674cbedd32dd425f390c83244a028da0aa66f50f31"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/deployment-modes.md"
@@ -105,8 +105,8 @@ Examples:
 
 ```sh
 pnpm paperclipai onboard --yes
-pnpm paperclipai onboard --yes --bind lan
-pnpm paperclipai run --bind tailnet
+npx paperclipai onboard --yes --bind lan
+npx paperclipai run --bind tailnet
 ```
 
 `configure --section server` follows the same interactive behavior.

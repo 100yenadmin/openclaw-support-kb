@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "developer-guide/adding-platform-adapters"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "9ffdac6e708fd71c71e9b48b02468b0b575158592de2791d3a1adc04c26ea98f"
+source_hash: "4695ee573a7bac2e0bfc9993564d1660ed5e6d8e4a882bf786b4817469c1f9b0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -75,6 +75,34 @@ optional_env:
     description: "Default channel for cron delivery"
     password: false
 ```
+
+#### Outbound client tools: `provides_tools`
+
+`kind: platform` plugins are **deferred**: the adapter module (and its SDK
+imports) only load when a gateway, cron, or `send_message` path first asks the
+platform registry for the platform. If your plugin also ships outbound *client
+tools* the agent should be able to call from any session (the bundled `a2a`
+plugin's `a2a_call` / `a2a_discover` etc.), put them in a dedicated `tools.py`
+with a `register_tools(ctx)` function and declare them in the manifest:
+
+```yaml
+provides_tools:
+  - my_platform_call
+  - my_platform_list
+```
+
+With `provides_tools` declared, Hermes imports only `tools.py` during plugin
+discovery and registers the client tools in every process — CLI and TUI
+included — while the adapter stays deferred. Keep the package `__init__.py`
+import-light and pull the adapter in from inside `register()` so the eager
+import stays cheap. Without the field, nothing changes: the whole plugin stays
+deferred.
+
+Users enable the toolset per platform like any other, e.g.
+`hermes tools enable my_platform --platform cli`, or by listing the toolset
+key under `platform_toolsets` in `config.yaml`. Plugin platform names are
+also valid `--platform` targets, so an inbound session on your platform can
+be granted its own outbound tools.
 
 ### adapter.py
 

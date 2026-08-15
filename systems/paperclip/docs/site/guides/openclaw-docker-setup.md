@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Running OpenClaw in Docker (Local Development)"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/openclaw-docker-setup.md"
-source_hash: "4a2606ed68367f35a217ac20a4470a5305af529c958bc2ef11df2275dbb9924d"
+source_hash: "fcb7da4a1b3b0e070662b505b95721698c96fc827577c45be4e8f5c99c79cf60"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/openclaw-docker-setup.md"
@@ -100,7 +100,7 @@ PAPERCLIP_COOKIE="your_session_cookie=..." pnpm smoke:openclaw-join
 - If Paperclip rejects the container-visible host with a hostname error, allow it from host:
 
 ```bash
-pnpm exec paperclipai allowed-hostname host.docker.internal
+npx paperclipai allowed-hostname host.docker.internal
 ```
 
 Then restart Paperclip and rerun the smoke script.
@@ -108,7 +108,7 @@ Then restart Paperclip and rerun the smoke script.
 - Authenticated/private mode: ensure hostnames are in the allowed list when required:
 
 ```bash
-pnpm exec paperclipai allowed-hostname <host>
+npx paperclipai allowed-hostname <host>
 ```
 
 ## Prerequisites

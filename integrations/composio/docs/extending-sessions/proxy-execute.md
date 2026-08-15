@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/extending-sessions/proxy-execute.md"
-source_hash: "0eb16d3fb56a590ece90e3e1e306573f1223048acf8393343d06e50c70fbd27b"
+source_hash: "951d6a6a568f8c5aebcd085c7ee3fb02392f78c4a167eac8201424c983be56ec"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/proxy-execute.md"
@@ -103,12 +103,12 @@ The call returns the upstream response verbatim:
 
 `status` and `data` reflect exactly what the toolkit API returned, so check `status` and branch on the common failures.
 
-| Status                  | Typical cause                                                   | How to resolve                                                                                              |
-| ----------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `400 Bad Request`       | Malformed endpoint path, invalid body, or unsupported `method`. | Check the upstream API docs for the expected shape. The proxy doesn't validate upstream schemas.            |
-| `401 Unauthorized`      | The connected account's token expired or was revoked.           | Re-authenticate the user, or [import fresh credentials](/docs/importing-existing-connections).              |
-| `403 Forbidden`         | The user's OAuth scopes or API key don't cover this endpoint.   | Update the [auth config scopes](/docs/auth-configuration/custom-auth-configs) and have the user re-consent. |
-| `429 Too Many Requests` | Upstream rate limit (GitHub, Google, and so on).                | Honor the `Retry-After` header and back off. Composio doesn't retry automatically.                          |
+| Status                  | Typical cause                                                   | How to resolve                                                                                                |
+| ----------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `400 Bad Request`       | Malformed endpoint path, invalid body, or unsupported `method`. | Check the upstream API docs for the expected shape. The proxy doesn't validate upstream schemas.              |
+| `401 Unauthorized`      | The connected account's token expired or was revoked.           | Re-authenticate the user, or [import fresh credentials](/docs/authentication/importing-existing-connections). |
+| `403 Forbidden`         | The user's OAuth scopes or API key don't cover this endpoint.   | Update the [auth config scopes](/docs/auth-configuration/custom-auth-configs) and have the user re-consent.   |
+| `429 Too Many Requests` | Upstream rate limit (GitHub, Google, and so on).                | Honor the `Retry-After` header and back off. Composio doesn't retry automatically.                            |
 
 ## Next [#next]
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skills System"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
-source_hash: "044e45f1111cd117580c2138c7d1fe964c59ab5b599a104b00460924c44fd049"
+source_hash: "565cc2f9bf9fb3276e6a73400d0135e2ee1f1f5e2c4ec92bb9f05c54d5277d0a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skills.md"
@@ -483,10 +483,12 @@ below lets you require human review before those changes land.
 
 ### When the Agent Creates Skills
 
-- After completing a complex task (5+ tool calls) successfully
+The system prompt asks the agent to record a non-trivial workflow with `skill_manage` for
+future reuse. In practice that covers:
+
+- When it worked out a multi-step workflow worth repeating
 - When it hit errors or dead ends and found the working path
 - When the user corrected its approach
-- When it discovered a non-trivial workflow
 
 ### Actions
 

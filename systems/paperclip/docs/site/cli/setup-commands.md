@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "setup-commands"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/setup-commands.md"
-source_hash: "7e2e559d53939cd1f4ee7e15d139280298db878463d199cb72acb5fe2301445d"
+source_hash: "d7b3bd99a22566fb9643abe9e8b7498bce39fef3ce66a699126f0241f1ba5a7c"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/setup-commands.md"
@@ -40,7 +40,7 @@ Does:
 Choose a specific instance:
 
 ```sh
-pnpm paperclipai run --instance dev
+npx paperclipai run --instance dev
 ```
 
 ## `paperclipai onboard`
@@ -122,7 +122,7 @@ This now includes bind-oriented deployment settings such as `PAPERCLIP_BIND` and
 Allow a private hostname for authenticated/private mode:
 
 ```sh
-pnpm exec paperclipai allowed-hostname my-tailscale-host
+npx paperclipai allowed-hostname my-tailscale-host
 ```
 
 ## Local Storage Paths
@@ -144,6 +144,6 @@ PAPERCLIP_HOME=/custom/home PAPERCLIP_INSTANCE_ID=dev pnpm paperclipai run
 Or pass `--data-dir` directly on any command:
 
 ```sh
-pnpm paperclipai run --data-dir ./tmp/paperclip-dev
-pnpm paperclipai doctor --data-dir ./tmp/paperclip-dev
+npx paperclipai run --data-dir ./tmp/paperclip-dev
+npx paperclipai doctor --data-dir ./tmp/paperclip-dev
 ```

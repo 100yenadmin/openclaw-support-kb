@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop Native Sign-In (RFC 8252)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/desktop-native-signin"
-source_hash: "691ee8bad7bbe20a0928e930694c28922aecafc111f5f27a75fb622f82d35ddd"
+source_hash: "e83371a97b8a489a46f8ce2d7b1e2400f4a6ba44ea45fd043f7a68075aae4291"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/desktop-native-signin.md"
@@ -110,13 +110,16 @@ tool blocks the loopback listener, or you close the browser tab — the app
 
 ## For gateway operators
 
-Native sign-in is available automatically on any gated gateway that has a
-brokerable OAuth provider registered (e.g. the bundled **Nous** provider). No
-configuration is required — the `/auth/native/*` routes and the `auth_flows`
-advertisement are part of the dashboard-auth subsystem. Password-only and
-token-only providers do not advertise `native_pkce` (there is no upstream
-redirect to broker), and those deployments continue to use their existing
-login.
+Native sign-in is available automatically on any gated gateway with an
+interactive session provider registered. No configuration is required — the
+`/auth/native/*` routes and the `auth_flows` advertisement are part of the
+dashboard-auth subsystem. OAuth providers (e.g. the bundled **Nous** provider)
+broker the upstream IDP redirect; password providers (e.g. the bundled
+**basic-auth** plugin) land the system browser on the gateway's `/login`
+credential form instead — which is what lets OS password managers (macOS
+Passwords, etc.) autofill the form, something no embedded desktop webview can
+offer. Token-only credentials (e.g. drain) are not interactive sign-ins and do
+not advertise `native_pkce`.
 
 The relevant endpoints (all public, pre-auth bootstrap, same as the existing
 `/auth/*` OAuth routes):

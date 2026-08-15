@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Importing existing connections"
-source: "https://docs.composio.dev/docs/importing-existing-connections.md"
-source_hash: "7f450324b68d6cd2f21a1f026099380a9cbac3648c8dbe0dc15ef2ccfebf0614"
+source: "https://docs.composio.dev/docs/authentication/importing-existing-connections.md"
+source_hash: "2a50f5fc3863f73afcd1fd304905c430d0d752d23d794f5f91df5eccc3399917"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "importing-existing-connections.md"
-original_doc_path: "importing-existing-connections.md"
+doc_path: "authentication/importing-existing-connections.md"
+original_doc_path: "authentication/importing-existing-connections.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Importing existing connections (/docs/importing-existing-connections)
-Source: https://docs.composio.dev/docs/importing-existing-connections.md
+# Importing existing connections (/docs/authentication/importing-existing-connections)
+Source: https://docs.composio.dev/docs/authentication/importing-existing-connections.md
 
 
 If your users have already authenticated with a service and you have their credentials (API keys, bearer tokens, etc.), you can pass those directly into Composio. No re-authentication required.
@@ -29,7 +29,7 @@ This is useful when:
 
 ## Prerequisites [#prerequisites]
 
-1. **An [auth config](/docs/programmatic-auth-configs)** for the toolkit you're importing into
+1. **An [auth config](/docs/authentication/programmatic-auth-configs)** for the toolkit you're importing into
 2. **The existing credentials** for each user (API keys, bearer tokens, username/password, etc.)
 3. **A userID** for each user. Any string that uniquely identifies them in your system.
 
@@ -84,7 +84,7 @@ If you manage your own OAuth flow and already have an access token for a service
 
 Since you're providing your own token, Composio won't handle OAuth refresh. You're responsible for refreshing the token on your end and pushing the updated value to Composio via the [PATCH method](#updating-credentials) whenever it changes.
 
-After [creating an auth config](/docs/programmatic-auth-configs) with `authScheme: "BEARER_TOKEN"`, use the snippet below to create a connected account:
+After [creating an auth config](/docs/authentication/programmatic-auth-configs) with `authScheme: "BEARER_TOKEN"`, use the snippet below to create a connected account:
 
 **Python:**
 
@@ -317,6 +317,6 @@ const session = await composio.create('user_123', {
 
 ## Next [#next]
 
-- [Managing multiple accounts](/docs/managing-multiple-connected-accounts): Pin and select connected accounts for a user
+- [Managing multiple accounts](/docs/authentication/managing-multiple-connected-accounts): Pin and select connected accounts for a user
 
 ---

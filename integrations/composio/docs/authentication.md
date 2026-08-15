@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Authentication"
 source: "https://docs.composio.dev/docs/authentication.md"
-source_hash: "6bff1bc7ce9fa721819cb264f29a8e4a6cccde7040da8396fce04389bcdf8dc8"
+source_hash: "5fdd1384e661db442e8a78a9403168b454d457bcce40ce62a1582fb028176f84"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication.md"
@@ -38,7 +38,7 @@ Every session includes the [`COMPOSIO_MANAGE_CONNECTIONS`](/toolkits/meta-tools/
 
 The user signs in on the hosted link and Composio stores the resulting connected account. Credentials never pass through your app or the model, so it's safe to surface the link right in the chat.
 
-You only need a [custom auth config](/docs/custom-app-vs-managed-app) to bring your own OAuth app, request specific scopes, or use a toolkit without managed auth.
+You only need a [custom auth config](/docs/authentication/custom-app-vs-managed-app) to bring your own OAuth app, request specific scopes, or use a toolkit without managed auth.
 
 ## In-chat authentication [#in-chat-authentication]
 
@@ -71,20 +71,20 @@ const session = await composio.create("user_123", {
 
 Don't want to wait for the agent? Call `session.authorize()` to generate a Connect Link on demand, for onboarding, a settings page, or a pre-flight check before a task.
 
-- [Manual auth management](/docs/manually-authenticating): Generate Connect Links yourself, check connection status, and disable in-chat prompts.
+- [Manual auth management](/docs/authentication/manually-authenticating): Generate Connect Links yourself, check connection status, and disable in-chat prompts.
 
-- [Multiple connected accounts](/docs/managing-multiple-connected-accounts): Let one user choose between work, personal, or other accounts.
+- [Multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts): Let one user choose between work, personal, or other accounts.
 
-- [Shared connections](/docs/shared-connections): Share one connected account with a controlled set of users.
+- [Shared connections](/docs/extending-sessions/shared-connections): Share one connected account with a controlled set of users.
 
-- [Import existing connections](/docs/importing-existing-connections): Bring credentials your application already stores into Composio.
+- [Import existing connections](/docs/authentication/importing-existing-connections): Bring credentials your application already stores into Composio.
 
-- [Managed vs custom auth](/docs/custom-app-vs-managed-app): Decide whether to use Composio credentials or your own OAuth app.
+- [Managed vs custom auth](/docs/authentication/custom-app-vs-managed-app): Decide whether to use Composio credentials or your own OAuth app.
 
-- [Programmatic auth configs](/docs/programmatic-auth-configs): Create auth configs in code and attach them to sessions.
+- [Programmatic auth configs](/docs/authentication/programmatic-auth-configs): Create auth configs in code and attach them to sessions.
 
-- [Control OAuth scopes](/docs/controlling-scopes): Choose the permissions requested when a user connects.
+- [Control OAuth scopes](/docs/authentication/controlling-scopes): Choose the permissions requested when a user connects.
 
-- [White-label authentication](/docs/white-labeling-authentication): Use your own OAuth app and remove Composio branding.
+- [White-label authentication](/docs/authentication/white-labeling-authentication): Use your own OAuth app and remove Composio branding.
 
 ---

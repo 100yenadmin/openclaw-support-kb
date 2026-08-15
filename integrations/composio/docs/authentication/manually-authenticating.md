@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Manual auth management"
-source: "https://docs.composio.dev/docs/manually-authenticating.md"
-source_hash: "6176d949f0506ef0751a99e8fb1f7437f942fe4d5be6270c5e21c59a4e406d4f"
+source: "https://docs.composio.dev/docs/authentication/manually-authenticating.md"
+source_hash: "5da0785d59e86976732b80839c105fad46b60e072ab57fff9fc6554fb0df0ae6"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "manually-authenticating.md"
-original_doc_path: "manually-authenticating.md"
+doc_path: "authentication/manually-authenticating.md"
+original_doc_path: "authentication/manually-authenticating.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Manual auth management (/docs/manually-authenticating)
-Source: https://docs.composio.dev/docs/manually-authenticating.md
+# Manual auth management (/docs/authentication/manually-authenticating)
+Source: https://docs.composio.dev/docs/authentication/manually-authenticating.md
 
 
 Manual authentication lets you connect users to toolkits outside the chat flow. Reach for it when you want to:
@@ -218,6 +218,6 @@ console.log("All toolkits connected!");
 
 ## Next [#next]
 
-- [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts): Let a user connect work and personal accounts for the same toolkit, then pick which one runs
+- [Managing multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts): Let a user connect work and personal accounts for the same toolkit, then pick which one runs
 
 ---

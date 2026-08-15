@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Managed vs custom auth"
-source: "https://docs.composio.dev/docs/custom-app-vs-managed-app.md"
-source_hash: "e3712e9d0d8b7af3e263eea20ff7deb153c4500f154cac8e69d2323975fec839"
+source: "https://docs.composio.dev/docs/authentication/custom-app-vs-managed-app.md"
+source_hash: "9d89822e09837e2aa7849db65462f9afb73db487ed99266e766f04bd9d4b62db"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "custom-app-vs-managed-app.md"
-original_doc_path: "custom-app-vs-managed-app.md"
+doc_path: "authentication/custom-app-vs-managed-app.md"
+original_doc_path: "authentication/custom-app-vs-managed-app.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Managed vs custom auth (/docs/custom-app-vs-managed-app)
-Source: https://docs.composio.dev/docs/custom-app-vs-managed-app.md
+# Managed vs custom auth (/docs/authentication/custom-app-vs-managed-app)
+Source: https://docs.composio.dev/docs/authentication/custom-app-vs-managed-app.md
 
 
 Composio supports two ways to authenticate users with toolkits.
@@ -30,7 +30,7 @@ Managed apps are the default. Every toolkit that supports OAuth has a Composio m
 
 * **You're building and iterating.** No OAuth app registration, no credentials to manage. Create a session and start testing immediately.
 * **Default scopes cover your needs.** Composio requests sensible defaults for each toolkit.
-* **Branding on consent screens doesn't matter yet.** Users will see "Composio wants to access your account" during OAuth. Fine for internal tools, prototypes, and development. You can still [white-label the Connect Link page](/docs/white-labeling-authentication#customizing-the-connect-link) with your logo and app title without needing your own OAuth app.
+* **Branding on consent screens doesn't matter yet.** Users will see "Composio wants to access your account" during OAuth. Fine for internal tools, prototypes, and development. You can still [white-label the Connect Link page](/docs/authentication/white-labeling-authentication#customizing-the-connect-link) with your logo and app title without needing your own OAuth app.
 
 ## When to use a custom auth config [#when-to-use-a-custom-auth-config]
 
@@ -47,7 +47,7 @@ Bring your own credentials when any of these apply:
 
 To check whether a toolkit already has a Composio managed app, see the [managed auth toolkit list](/toolkits/managed-auth). You can still create a custom auth config for branding, scopes, rate limits, polling intervals, or custom instances.
 
-The steps below use the dashboard. To create auth configs in code instead, for example one per customer, see [Programmatic auth configs](/docs/programmatic-auth-configs).
+The steps below use the dashboard. To create auth configs in code instead, for example one per customer, see [Programmatic auth configs](/docs/authentication/programmatic-auth-configs).
 
 #### Create the auth config in the Composio dashboard
 
@@ -142,6 +142,6 @@ Some toolkits don't have Composio managed auth. For these, the setup is the same
 
 ## Next [#next]
 
-- [Programmatic auth configs](/docs/programmatic-auth-configs): Create auth configs in code and pass them to a session
+- [Programmatic auth configs](/docs/authentication/programmatic-auth-configs): Create auth configs in code and pass them to a session
 
 ---

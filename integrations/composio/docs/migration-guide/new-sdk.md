@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "ee99b7ebc0eb365faeb61ce89409ce0b3e1756eed5ad5153bf2172bc5a2f98b0"
+source_hash: "182545de85abb9199e0f5ad97adf6e412c0f188fc23891dfcbf7cf4294804580"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -710,7 +710,7 @@ const authConfig = await composio.authConfigs.create('LINEAR', {
 
 console.log(authConfig);
 ```
-For using custom authentication credentials, refer to the [Programmatic Auth Configs](/docs/programmatic-auth-configs) documentation.
+For using custom authentication credentials, refer to the [Programmatic Auth Configs](/docs/authentication/programmatic-auth-configs) documentation.
 
 > The callback URL for creating custom OAuth configs is now `https://backend.composio.dev/api/v3/toolkits/auth/callback`. The previous URL was `https://backend.composio.dev/api/v1/auth-apps/add`.
 

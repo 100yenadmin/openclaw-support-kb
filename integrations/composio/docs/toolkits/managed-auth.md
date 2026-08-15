@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managed Auth"
 source: "https://docs.composio.dev/toolkits/managed-auth.md"
-source_hash: "26d6975b14b018bf9dff3c5298b66a795703505e92f1221a8fcf013f70631155"
+source_hash: "11c1c2a8083c6228c183b3290f28a8444465ae26cf5aa29c31e8206ce82a6e47"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "toolkits/managed-auth.md"
@@ -53,7 +53,7 @@ You need a custom auth config when you want to:
 * **Request specific scopes** beyond Composio's defaults.
 * **Use a toolkit without managed auth**, where you supply an API key, bearer token, or instance details.
 
-See [Managed vs custom auth](/docs/custom-app-vs-managed-app) for the full decision guide and setup steps. You can mix the two: use your own credentials for some toolkits and managed auth for the rest.
+See [Managed vs custom auth](/docs/authentication/custom-app-vs-managed-app) for the full decision guide and setup steps. You can mix the two: use your own credentials for some toolkits and managed auth for the rest.
 
 ## Find a toolkit [#find-a-toolkit]
 

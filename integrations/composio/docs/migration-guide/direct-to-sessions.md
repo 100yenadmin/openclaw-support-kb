@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from Direct Tools to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/direct-to-sessions.md"
-source_hash: "c79723a3747b5e696effc1fc37fed4e8386cabc099bd8ec159ae093dcbb5d5e2"
+source_hash: "e2ae7a3f7962fbd638fdbfdfc84a8b749037eec4e3b7ed6b61e370928be8580b"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/direct-to-sessions.md"
@@ -252,7 +252,7 @@ const session = await composio.create("user_123", {
 });
 ```
 
-If you don't specify, the most recently connected account is used. See [Managing multiple connected accounts](/docs/managing-multiple-connected-accounts) for details.
+If you don't specify, the most recently connected account is used. See [Managing multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts) for details.
 
 ## Triggers [#triggers]
 
@@ -264,7 +264,7 @@ See [Triggers](/docs/triggers) for setup instructions.
 
 If you've set up white-labeled OAuth screens with custom auth configs, those carry over automatically. Just pass the same auth config IDs to your session via `auth_configs` / `authConfigs`. Your users will continue to see your branding on consent screens.
 
-See [White-labeling authentication](/docs/white-labeling-authentication) for more.
+See [White-labeling authentication](/docs/authentication/white-labeling-authentication) for more.
 
 ## Next [#next]
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "experimental-features"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/board-operator/experimental-features.md"
-source_hash: "0c7acb5b752725c692d6b56f6b8aa96b91c1c642f20580a403c80db96e1c6bab"
+source_hash: "dad7bd2b9d18329ca431ef767a7906be4c9b3ef71b0d1aeecd567a752cf12229"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/board-operator/experimental-features.md"
@@ -41,7 +41,7 @@ The CLI exposes the same surface:
 
 ```sh
 pnpm paperclipai instance settings:experimental
-pnpm exec paperclipai instance settings:experimental:update --payload-json '{...}'
+npx paperclipai instance settings:experimental:update --payload-json '{...}'
 ```
 
 Those commands change the same opt-in settings that the UI manages.

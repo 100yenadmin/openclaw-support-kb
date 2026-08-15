@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP (Model Context Protocol)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp"
-source_hash: "9138d00e24e07c528bafd051ac50e17a5aeca47a14d48ad58e15d4142328ec89"
+source_hash: "5b272fef45c17d353655a0e79cf0ebe600ebe408ab41376d22e18baf8864fed4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/mcp.md"
@@ -194,6 +194,23 @@ after a Hermes update if a manifest version changed.
 
 To add an MCP to the catalog, open a PR against
 [`optional-mcps/`](https://github.com/NousResearch/hermes-agent/tree/main/optional-mcps).
+
+### Suggestion metadata (`suggest:`)
+
+A manifest may declare an optional `suggest:` block with `keywords:` and/or
+`hosts:` lists. UI surfaces (currently the Desktop app's composer) use it to
+offer a one-click "Add &lt;server&gt;" pill when your draft mentions one of the
+keywords as a completed word, or contains a pasted link whose hostname ends
+with one of the host suffixes. It is purely advisory — installs still flow
+through the same validated catalog/config paths — and most hosted remote
+entries (Atlassian, Sentry, Notion, Stripe, Vercel, Supabase, and friends)
+declare it.
+
+GitHub is deliberately **not** in the catalog: its hosted MCP requires each
+client to bring its own OAuth app (generic dynamic client registration is
+rejected), and Hermes's bundled `github/*` skills driving the `gh` CLI are a
+more capable integration. On Desktop, GitHub mentions instead offer the
+`github-auth` skill when `gh` isn't signed in yet.
 
 ## Two kinds of MCP servers
 

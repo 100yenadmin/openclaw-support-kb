@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Glossary"
 source: "https://docs.composio.dev/reference/glossary.md"
-source_hash: "fb42a3433b1d27dcda7c21a376dd3ddc3984bb7c946f8d5fdf728afb76037132"
+source_hash: "54e4ec45649c1e07fe967685971825c9bdd3a6cb9481e10451f50fb4a195e46e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/glossary.md"
@@ -43,7 +43,7 @@ A hosted page where a user authorizes access to a toolkit. It is returned as a `
 
 ### Connected Account
 
-A stored set of credentials (OAuth tokens or API keys) linked to a userID, created when a user authenticates with a toolkit. Composio refreshes OAuth tokens automatically, and a user can have [multiple connected accounts](/docs/managing-multiple-connected-accounts) for the same toolkit. IDs are prefixed `ca_`.
+A stored set of credentials (OAuth tokens or API keys) linked to a userID, created when a user authenticates with a toolkit. Composio refreshes OAuth tokens automatically, and a user can have [multiple connected accounts](/docs/authentication/managing-multiple-connected-accounts) for the same toolkit. IDs are prefixed `ca_`.
 
 ### Connection Request
 
@@ -63,7 +63,7 @@ An open protocol for connecting AI models to external tools. Create a session wi
 
 ### Manual Authentication
 
-Authenticating users from your own code with `session.authorize()` or `connectedAccounts.link()`, rather than letting the agent handle it through in-chat authentication. See [Manual authentication](/docs/manually-authenticating).
+Authenticating users from your own code with `session.authorize()` or `connectedAccounts.link()`, rather than letting the agent handle it through in-chat authentication. See [Manual authentication](/docs/authentication/manually-authenticating).
 
 ### Meta Tools
 
@@ -147,7 +147,7 @@ An identifier from your application that Composio uses to scope connected accoun
 
 ### White-Labeling
 
-Customizing the auth experience so users see your brand during the OAuth flow. You provide your own OAuth credentials, redirect URIs, and branding. See [White-labeling authentication](/docs/white-labeling-authentication).
+Customizing the auth experience so users see your brand during the OAuth flow. You provide your own OAuth credentials, redirect URIs, and branding. See [White-labeling authentication](/docs/authentication/white-labeling-authentication).
 
 ### Sandbox
 

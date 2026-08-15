@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "claude-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/claude-local.md"
-source_hash: "15d9ef663885429b422620b47f2621bb92e71fcd88ea9dc38775fa57e0f78393"
+source_hash: "2637b6a6ba85810ad531daba1d324414b30f1ffeb13fdcd271e929f90ad7e979"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/claude-local.md"
@@ -120,7 +120,7 @@ therefore shadows any Codex login already present inside the sandbox image.
 For manual local CLI usage outside heartbeat runs (for example running as `claudecoder` directly), use:
 
 ```sh
-pnpm exec paperclipai agent local-cli claudecoder --company-id <company-id>
+npx paperclipai agent local-cli claudecoder --company-id <company-id>
 ```
 
 This installs Paperclip skills in `~/.claude/skills`, creates an agent API key, and prints shell exports to run as that agent.

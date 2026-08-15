@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Connected Accounts"
 source: "https://docs.composio.dev/reference/api-reference/connected-accounts.md"
-source_hash: "0d86c4580fa4d3d1b3a5ab70199d029a02345375d622dec0e3f89a47ca46a1a4"
+source_hash: "f70b39f070dad3b6bd25d025637d5cd966b71c1a2fb6ab61cf32d6be71ff46cc"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/connected-accounts.md"
@@ -25,7 +25,7 @@ A connected account is a single user's authorized connection to a toolkit. It st
 
 Composio creates a connected account when a user completes the flow defined by an [auth config](/reference/api-reference/auth-configs). From there you manage its full lifecycle:
 
-* **Create or link**: start a new connection, or generate an auth link session for the user to authorize. See [manually authenticating users](/docs/manually-authenticating).
+* **Create or link**: start a new connection, or generate an auth link session for the user to authorize. See [manually authenticating users](/docs/authentication/manually-authenticating).
 * **Refresh**: renew authentication for an account whose tokens have expired.
 * **Enable, disable, or update**: change an account's status or metadata without removing it.
 * **Revoke or delete**: revoke the grant at the provider, or remove the account from Composio.
@@ -36,7 +36,7 @@ Each account is addressed by its `nanoid`. List endpoints accept filters so you 
 
 A Composio Connect Link is a hosted, secure sign-in page. You create one with the create auth link session endpoint, redirect the user to the returned URL, and Composio handles the rest: the user signs in, Composio creates the connected account, and Composio stores and refreshes its tokens. Credentials never pass through your app. This works for all Composio managed connections, with no OAuth credentials to set up.
 
-By default a connected account is `PRIVATE` and usable only by its owning user. Mark one `SHARED` to let other users reach it through a per-connection access control list. See [shared connections](/docs/shared-connections).
+By default a connected account is `PRIVATE` and usable only by its owning user. Mark one `SHARED` to let other users reach it through a per-connection access control list. See [shared connections](/docs/extending-sessions/shared-connections).
 
 These endpoints use your project API key in the `x-api-key` header.
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "440c6edb2b1ff8d2dac4a92a623f3f6b0bc11de285b982b5008b6bc718c9d64e"
+source_hash: "ec89fe79ece15499606a727213fc70d99b6a08f818a5c8a306c604a784d9428c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -283,6 +283,14 @@ There are two ways to enter multi-line messages:
   2. Returns the sum
 ```
 
+`Ctrl+J` and backslash continuation are enabled by default, matching Claude Code / Codex / OpenCode multiline shortcuts. On supported terminals such as iTerm2, Hermes also requests extended key reporting so `Shift+Enter` arrives as a distinct newline key. If your terminal sends LF for plain `Enter` and you need the legacy `Ctrl+J`-as-submit fallback, opt out:
+
+```yaml
+# ~/.hermes/config.yaml
+display:
+  cli_multiline_shortcuts: false
+```
+
 :::info
 Pasting multi-line text is supported — use any of the newline keys above, or simply paste content directly.
 :::
@@ -298,7 +306,7 @@ Most terminals send the same byte sequence for `Enter` and `Shift+Enter` by defa
 | Windows Terminal Preview 1.25+ | Supported once the Kitty protocol is enabled in settings |
 | macOS Terminal.app, stock Windows Terminal (stable) | Not supported — `Shift+Enter` is indistinguishable from `Enter` |
 
-Where the terminal cannot distinguish them, `Alt+Enter` and `Ctrl+J` continue to work everywhere. **On Windows Terminal specifically, `Alt+Enter` is captured by the terminal (toggles fullscreen) and never reaches Hermes — use `Ctrl+Enter` (delivered as `Ctrl+J`) or `Ctrl+J` directly for a newline.**
+Where the terminal cannot distinguish them, `Alt+Enter` and `Ctrl+J` continue to work by default. **On Windows Terminal specifically, `Alt+Enter` is captured by the terminal (toggles fullscreen) and never reaches Hermes — use `Ctrl+Enter` (delivered as `Ctrl+J`) or `Ctrl+J` directly for a newline.**
 
 ## Redirecting the Agent Mid-Turn
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "tailscale-private-access"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/tailscale-private-access.md"
-source_hash: "8d2ed5e28def5b0d94d6eeaaca6c66908f8c5336fbc8ebaa451eb24b4a980771"
+source_hash: "d12544899aad69896637bd64ca701c37188394754b3f436902e88a0c87af6fa1"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/tailscale-private-access.md"
@@ -76,7 +76,7 @@ http://my-macbook.tailnet.ts.net:3100
 If you access Paperclip with a custom private hostname, add it to the allowlist:
 
 ```sh
-pnpm exec paperclipai allowed-hostname my-macbook.tailnet.ts.net
+npx paperclipai allowed-hostname my-macbook.tailnet.ts.net
 ```
 
 ## 5. Verify the server is reachable

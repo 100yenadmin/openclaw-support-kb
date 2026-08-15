@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Managing multiple connected accounts"
-source: "https://docs.composio.dev/docs/managing-multiple-connected-accounts.md"
-source_hash: "afa1c471d9f28800afc2b8e8ff09c63d98058c220a5ea8f7cb80b0def2871b9d"
+source: "https://docs.composio.dev/docs/authentication/managing-multiple-connected-accounts.md"
+source_hash: "9c06cbe65efc685dcf7c0aa055202bf0e71ccc7d262e610b7e212948c0ce5c11"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "managing-multiple-connected-accounts.md"
-original_doc_path: "managing-multiple-connected-accounts.md"
+doc_path: "authentication/managing-multiple-connected-accounts.md"
+original_doc_path: "authentication/managing-multiple-connected-accounts.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Managing multiple connected accounts (/docs/managing-multiple-connected-accounts)
-Source: https://docs.composio.dev/docs/managing-multiple-connected-accounts.md
+# Managing multiple connected accounts (/docs/authentication/managing-multiple-connected-accounts)
+Source: https://docs.composio.dev/docs/authentication/managing-multiple-connected-accounts.md
 
 
 Users can connect multiple accounts for the same toolkit (e.g., personal and work Gmail accounts). This guide covers how to enable multi-account mode, label accounts with aliases, and select which account to use.
@@ -215,6 +215,6 @@ for (const toolkit of toolkits.items) {
 
 ## Next [#next]
 
-- [Shared connections](/docs/shared-connections): Make one connected account usable by multiple users with a per-user access control list
+- [Shared connections](/docs/extending-sessions/shared-connections): Make one connected account usable by multiple users with a per-user access control list
 
 ---

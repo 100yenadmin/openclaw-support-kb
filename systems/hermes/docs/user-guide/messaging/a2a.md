@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/messaging/a2a.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/a2a"
-source_hash: "2191bc567e1e623e596d6ae5a0f380615ff0e921862abd70a7c39b0cf2345daf"
+source_hash: "cf5203f8516a7c21f5d87252518feba9136e352d45dc7e5cf8d8f5a15c6d33a0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/a2a.md"
@@ -48,7 +48,15 @@ gateway:
         port: 9900
 ```
 
-The outbound client tools ship as the `a2a` toolset, **off by default** — enable it with `hermes tools`.
+The outbound client tools ship as the `a2a` toolset, **off by default** — enable it per platform:
+
+```bash
+hermes tools enable a2a --platform cli        # CLI/TUI sessions
+hermes tools enable a2a --platform telegram   # or any messaging platform
+hermes tools enable a2a --platform a2a        # let inbound A2A tasks call peers (agent chaining)
+```
+
+The tools are available in every process type — CLI, TUI, gateway, and cron — without the inbound platform needing to be enabled.
 
 ## Outbound: calling other agents
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Telegram"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram"
-source_hash: "08014dfc8f1029a8b34e1c9a3ff50f95e98e6df2b9d87f28ca811bb4381f4640"
+source_hash: "c43198ef9ea65b82a7ed266a3a188093ecc911fdb4f3cf2e6a9c1ae245b21b8d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/telegram.md"
@@ -335,6 +335,8 @@ TELEGRAM_PROXY=socks5://127.0.0.1:1080
 Supported schemes: `http://`, `https://`, `socks5://`.
 
 The proxy applies to both the main Telegram connection and the fallback IP transport. If no Telegram-specific proxy is set, the gateway falls back to `HTTPS_PROXY` / `HTTP_PROXY` / `ALL_PROXY` (or macOS system proxy auto-detection).
+
+If the fallback IP discovery path is unhealthy on your host, set `HERMES_TELEGRAM_DISABLE_FALLBACK_IPS=true` to keep cold connect on the plain `api.telegram.org` path. You can also bound DNS-over-HTTPS fallback discovery with `HERMES_TELEGRAM_FALLBACK_DISCOVERY_TIMEOUT` in seconds; the default is `5`.
 
 ## Home Channel
 

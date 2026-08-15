@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Migrating from MCP servers to Sessions"
 source: "https://docs.composio.dev/docs/migration-guide/mcp-servers-to-sessions.md"
-source_hash: "ca2fbb874036e3db7aa0f996133a36d9135f144e8ab6a09e5c098a0b7b5a672f"
+source_hash: "bef757a39384700ce96ee780277546f9e40a102a17634965829b93df92bdf19a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/mcp-servers-to-sessions.md"
@@ -229,11 +229,11 @@ spans them all (`toolkits=["gmail", "slack", "github"]`). Fewer moving parts.
 session once and keep using it across calls; see [Configuring Sessions](/docs/configuring-sessions).
 * **Sharing one account across users** — sessions support **shared connections**
 (`account_type:"SHARED"` + an allow/deny ACL), pinned per session. See
-[Shared connections](/docs/shared-connections).
+[Shared connections](/docs/extending-sessions/shared-connections).
 * **Tenant-specific params** (SharePoint sub-site, Jira subdomain) — prefill them via shared
 credentials on the auth config.
 * **White-labeling carries over** — pass the same white-labeled auth config IDs; users keep seeing
-your branding on consent screens. See [White-labeling authentication](/docs/white-labeling-authentication).
+your branding on consent screens. See [White-labeling authentication](/docs/authentication/white-labeling-authentication).
 * **Triggers** — unchanged; continue using `composio.triggers.*` and webhooks (triggers aren't part
 of sessions yet).
 * **Dashboard** — sessions are created via the SDK. For no-code, personal app connections, use

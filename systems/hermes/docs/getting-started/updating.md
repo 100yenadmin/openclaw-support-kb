@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Updating & Uninstalling"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/updating"
-source_hash: "b250821daf0c4206a9b7b0746d2f46be1a753ab7bfc39c216b60f91c98b71253"
+source_hash: "1bd4f451d2ea92d8743b3ffad780dd62abbc66321ea174f1d4463cf2325552f4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/updating.md"
@@ -120,6 +120,14 @@ $ hermes update
 Close the listed processes and re-run. If you're sure the concurrent process won't interfere (rare — usually only useful when an antivirus shim is mis-attributed), pass `--force` to skip the check. In that case the updater will still retry the `.exe` rename with exponential backoff and, on stubborn locks, schedule the replacement for next reboot via `MoveFileEx(MOVEFILE_DELAY_UNTIL_REBOOT)` so the update can complete.
 
 A second, separate guard refuses to touch the venv while any process is running from its Python interpreter (the Desktop app's backend, a gateway, a Python REPL). Those processes keep native extension files (`.pyd`) locked, and a dependency sync that dies partway on an access-denied error strands the install between versions. This guard is **not** bypassed by `--force`; if you're certain the detected holders are false positives, use the explicit `hermes update --force-venv`.
+
+#### Windows venv recreation is transactional
+
+When the Windows installer must recreate an existing `venv`, it first moves the old directory to a unique `venv.stale.*` name, then creates and verifies the replacement. The old tree is deleted only after the dependency install completes and the baseline imports pass in the new tree — until then it is the rollback source (recorded in `venv.pending-backup`).
+
+If the move cannot be completed, the installer stops and leaves the live `venv` untouched. If `uv` fails or reports success without creating the interpreter, any partial replacement is moved to `venv.failed.*` and the previous venv is restored. This keeps the health and blocker checks usable after a failed install.
+
+A `venv.stale.*` or `venv.failed.*` directory can remain when another process still owns a file handle. Close Hermes Desktop, gateways, and Python processes using the install, then retry the install/update; parked directories are cleaned up best-effort after a successful recreation.
 
 Expected output looks like:
 

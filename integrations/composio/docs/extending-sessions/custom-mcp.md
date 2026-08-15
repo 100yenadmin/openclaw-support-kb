@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom MCP"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md"
-source_hash: "02bf5d9fe29643c7f2f0e1cfaa6b844ae2dcae63eeebfdede4f6d0d0f315100e"
+source_hash: "5e74fd941bb031f3bb863cc1cfe0085273d6aa10a80478fc5b1b9604f5ce2ce1"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-mcp.md"
@@ -405,6 +405,6 @@ See [Toolkit Versioning](/docs/tools-direct/toolkit-versioning) for more example
 
 - [Configuring Sessions](/docs/configuring-sessions): Configure toolkit and tool filtering
 
-- [Managing Multiple Connected Accounts](/docs/managing-multiple-connected-accounts): Select a connected account explicitly
+- [Managing Multiple Connected Accounts](/docs/authentication/managing-multiple-connected-accounts): Select a connected account explicitly
 
 ---

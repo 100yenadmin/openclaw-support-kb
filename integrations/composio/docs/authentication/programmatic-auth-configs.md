@@ -1,20 +1,20 @@
 ---
 type: composio_doc
 title: "Programmatic auth configs"
-source: "https://docs.composio.dev/docs/programmatic-auth-configs.md"
-source_hash: "3edc705ffe7109fc70b28164e23399cb2c3675af2e8fc42549448fcac18ba69b"
+source: "https://docs.composio.dev/docs/authentication/programmatic-auth-configs.md"
+source_hash: "1a235bb3f829d0d63d0ca7196b8b8b56d655aceb6d5f116a872844bc357660c9"
 system: "composio"
 kb_namespace: "composio"
-doc_path: "programmatic-auth-configs.md"
-original_doc_path: "programmatic-auth-configs.md"
+doc_path: "authentication/programmatic-auth-configs.md"
+original_doc_path: "authentication/programmatic-auth-configs.md"
 duplicate_index: 1
 ---
 
 Source System: Composio Integration
 Local KB namespace: composio
 
-# Programmatic auth configs (/docs/programmatic-auth-configs)
-Source: https://docs.composio.dev/docs/programmatic-auth-configs.md
+# Programmatic auth configs (/docs/authentication/programmatic-auth-configs)
+Source: https://docs.composio.dev/docs/authentication/programmatic-auth-configs.md
 
 
 An [auth config](/docs/authentication#behind-the-scenes) is a blueprint for how a toolkit authenticates: the method, scopes, and credentials. Most of the time you create one in the [dashboard](https://dashboard.composio.dev/~/project/auth-configs?utm_source=docs\&utm_medium=content\&utm_campaign=docs-programmatic-auth-configs) and reuse it. Create them in code when you provision auth dynamically: a config per customer, per environment, or spun up and torn down as part of your app's lifecycle.
@@ -103,7 +103,7 @@ const authConfig = await composio.authConfigs.create('notion', {
 });
 ```
 
-> Omit `oauth_redirect_uri` to use Composio's default callback. Set it only when you [route the callback through your own domain](/docs/white-labeling-authentication#routing-the-callback-through-your-domain).
+> Omit `oauth_redirect_uri` to use Composio's default callback. Set it only when you [route the callback through your own domain](/docs/authentication/white-labeling-authentication#routing-the-callback-through-your-domain).
 
 ## Other auth types [#other-auth-types]
 
@@ -211,6 +211,6 @@ console.log(fields);
 
 ## Next [#next]
 
-- [Controlling scopes](/docs/controlling-scopes): Override the default OAuth scopes Composio requests for a toolkit
+- [Controlling scopes](/docs/authentication/controlling-scopes): Override the default OAuth scopes Composio requests for a toolkit
 
 ---
