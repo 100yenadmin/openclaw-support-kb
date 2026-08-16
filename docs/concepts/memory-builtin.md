@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Builtin memory engine"
 source: "https://docs.openclaw.ai/concepts/memory-builtin"
-source_hash: "382910a0a7d2dd3aa1050e16ef812ffd2e0b6ac883c3213522d59b2531640654"
+source_hash: "02150b0ed5a0a0bba346b8e378d7ed7c268d86dbfc4314ad1d96aca607dbdba2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-builtin.md"
@@ -48,8 +48,8 @@ To set a provider explicitly:
 
 Without an embedding provider, only keyword search is available.
 
-To force local GGUF embeddings, install the official llama.cpp provider
-plugin, then point `local.modelPath` at a GGUF file:
+To force local GGUF embeddings, install and configure the official llama.cpp
+provider, then point `local.modelPath` at a GGUF file:
 
 ```bash
 openclaw plugins install @openclaw/llama-cpp-provider
@@ -62,7 +62,7 @@ openclaw plugins install @openclaw/llama-cpp-provider
       provider: "local",
       fallback: "none",
       local: {
-        modelPath: "~/.node-llama-cpp/models/embeddinggemma-300m-qat-Q8_0.gguf",
+        modelPath: "~/.openclaw/models/llama.cpp/hf_ggml-org_embeddinggemma-300m-qat-Q8_0.gguf",
       },
     },
   },
@@ -78,7 +78,7 @@ openclaw plugins install @openclaw/llama-cpp-provider
 | Gemini            | `gemini`            | Supports multimodal (image + audio) |
 | GitHub Copilot    | `github-copilot`    | Uses your Copilot subscription      |
 | LM Studio         | `lmstudio`          | Local/self-hosted                   |
-| Local             | `local`             | `@openclaw/llama-cpp-provider`      |
+| Local             | `local`             | OpenClaw-managed llama.cpp server   |
 | Mistral           | `mistral`           |                                     |
 | Ollama            | `ollama`            | Local/self-hosted                   |
 | OpenAI            | `openai`            | Default: `text-embedding-3-small`   |
@@ -177,7 +177,8 @@ with automatic user modeling.
 **Memory search disabled?** Check `openclaw memory status`. If no provider is
 detected, set one explicitly or add an API key.
 
-**Local provider not detected?** Confirm the local path exists and run:
+**Local provider not detected?** Run interactive llama.cpp setup once, confirm
+the local path exists, and run:
 
 ```bash
 openclaw memory status --deep --agent main

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voyage plugin"
 source: "https://docs.openclaw.ai/plugins/reference/voyage"
-source_hash: "ad13c009c3b06cb6a309a8d774e51ef142b3e8e8be408f2c90441485032b0ca8"
+source_hash: "9a730e8650cad9c890887dc0b10fc651dd3cabcd4f47ff71f25ef9009dfb18c7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/voyage.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/voyage
 
 # Voyage plugin
 
-Adds memory embedding provider support.
+Adds embedding provider support, including memory search.
 
 ## Distribution
 
@@ -24,6 +24,6 @@ Adds memory embedding provider support.
 
 ## Surface
 
-contracts: `memoryEmbeddingProviders`
+contracts: `embeddingProviders`
 
 ---

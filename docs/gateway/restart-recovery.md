@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Restart recovery"
 source: "https://docs.openclaw.ai/gateway/restart-recovery"
-source_hash: "27dbd5f2ef5f0ae4a78e6504e5ddf2398f2b4e8349c82162222b13a242c0a8ab"
+source_hash: "a5fb70e864227f5c1e3f51f7809ac8ec63451030e54b107d82caa36a178c8a1a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/restart-recovery.md"
@@ -36,6 +36,10 @@ and what the automatic resume looks like.
 | Scheduled (cron) jobs         | SQLite cron store                           | Schedules persist; the scheduler re-arms on boot                        |
 | Restart continuation          | SQLite restart sentinel                     | One-shot follow-up dispatched to the session that asked for the restart |
 | Gateway terminal PTYs         | Process memory                              | End with the old process; terminal sessions are not recovered           |
+
+Pending delivery rows drain or retry after restart. Failed rows discard their
+payload; only reusable or crash-ambiguous owners keep a minimal bounded or
+permanent receipt that prevents duplicate delivery.
 
 ## Graceful restarts drain first
 

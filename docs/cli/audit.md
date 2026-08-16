@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audit records"
 source: "https://docs.openclaw.ai/cli/audit"
-source_hash: "8eefe4d3441bfea62144bd9db03c219e04558978893fcaae51b04d4ca690643b"
+source_hash: "7440a38e14d4ba6f069497718f85295ad3bebeb8f6ed25e7623b4f70b99e80c4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/audit.md"
@@ -140,6 +140,23 @@ profile linking does not orphan ownership, while run inspection consumes the
 immutable connection-time audit fact. Ordinary session provenance stores no
 display label. An optional bounded, secret-redacted label can be retained only
 in execution identity after that audit storage is explicitly enabled.
+
+An admitted channel run can also show a pseudonymized person invoker. The
+trusted active registered native plugin produces the remote participant fact;
+core verifies its exact record, registry epoch, scope, and one-shot handoff.
+The resulting `boundary-verified` assurance describes that in-process boundary,
+not an independent core query to the remote service. Identity never comes from
+the conversation, room, route, account, thread, message, transport, session
+key, or display name. A collected run shows the person only when all queued
+inputs carry valid evidence for the same participant; mixed or missing evidence
+shows an unknown invoker. Its `channel/admission` receipt is enforced only when
+the participant affected every contributing access decision; otherwise it is
+attribution-only.
+
+For channel ingress, `unknown` means a supported integration could not supply
+valid host-bound evidence; it never means allowed. `unsupported` is reserved
+for a named path with no authoritative Phase 0 integration. A plugin-provided
+sender or structurally copied resolver result cannot upgrade either state.
 
 A terminal approval receipt shows `allowed` or `denied`, its stable reason
 code, enforcement state, authoritative source boundary, policy and grant

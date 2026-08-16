@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandboxing"
 source: "https://docs.openclaw.ai/gateway/sandboxing"
-source_hash: "9c197e634bc32a24614d6acdaff20bac4678430dbea34000704962581934803a"
+source_hash: "3e1dc9ab2fbabb360f3460c33caaaa887d266a368d55bc8993779b4d854595fd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/sandboxing.md"
@@ -471,6 +471,8 @@ Optional: build the sandbox browser image
 
 
 By default, local container sandboxes run with **no network**. Override with `agents.defaults.sandbox.docker.network`.
+
+The default-off [secret egress proxy](/gateway/secrets#secret-egress-proxy) is Gateway-loopback only. Sandbox exec receives the proxy and CA environment variables when the feature is enabled, but container loopback does not reach the Gateway host, and the default `network: "none"` blocks egress entirely. Sandbox/container proxy reachability is not implemented; do not enable sandbox networking expecting secret substitution to work in this release.
 
 Note
 

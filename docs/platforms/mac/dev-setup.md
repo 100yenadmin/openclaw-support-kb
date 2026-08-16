@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
-source_hash: "7bbf877f87e5237fe70c241d516c25c0eda826fbfe11818089f1f9a660fd5be7"
+source_hash: "b3ccab1ab71cba7dfeb20b976d4b3ae2ad5685fc112265a05226260651f0eb14"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/dev-setup.md"
@@ -38,6 +38,12 @@ pnpm install
 
 Outputs `dist/OpenClaw.app`. Without an Apple Developer ID certificate, the
 script falls back to ad-hoc signing.
+
+Set `OPENCLAW_SKIP_MLX_TTS=1` to package a dev/proof build without the local
+MLX voice helper. This skips the `openclaw-mlx-tts` binary and its large
+mlx-swift Metal shader stack, which some beta Xcode toolchains cannot compile.
+The resulting app has no on-device MLX voice; it is rejected for `release`
+builds, which must ship the helper.
 
 For dev run modes, signing flags, and Team ID troubleshooting, see
 [apps/macos/README.md](https://github.com/openclaw/openclaw/blob/main/apps/macos/README.md).
@@ -77,6 +83,26 @@ xcrun swift --version
 ```
 
 If versions don't match, update macOS/Xcode and re-run the build.
+
+### Build fails: MLX voice helper Metal shaders
+
+On a beta-only Xcode toolchain (for example Xcode 27 with the macOS 27 SDK),
+only the `openclaw-mlx-tts` helper may fail while the main app builds fine. The
+mlx-swift Metal compilation errors non-deterministically (a different `.metal`
+file each run, `Could not read serialized diagnostics file` then a nonzero
+`metal` exit), because the beta `metal` compiler and its separately downloaded
+Metal Toolchain are still unstable. This is an upstream toolchain issue, not an
+OpenClaw one.
+
+If you do not need on-device MLX voice, skip the helper:
+
+```bash
+OPENCLAW_SKIP_MLX_TTS=1 ./scripts/package-mac-app.sh
+```
+
+Otherwise, install the Metal Toolchain
+(`xcodebuild -downloadComponent MetalToolchain`) and build from a stable Xcode
+release.
 
 ### App crashes on permission grant
 

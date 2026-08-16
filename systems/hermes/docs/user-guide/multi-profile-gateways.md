@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/multi-profile-gateways.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways"
-source_hash: "a909638ce8677d4c7485e9a828a5fdf44c030419e77fcb4261b8755aa87e5e37"
+source_hash: "a9240828bcfc148e5552ac0b90a5bb27bbd91f4a3ad85f7ad973939b26c93b2c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-profile-gateways.md"
@@ -26,7 +26,9 @@ across profiles, preventing the host from sleeping, and recovering from common
 launchd/systemd quirks.
 
 If you only run one Hermes agent, you don't need this page — see
-[Profiles](./profiles.md) for the basics.
+[Profiles](./profiles.md) for the basics. And if your instances live on
+*different* machines that one desktop app should reach simultaneously, see
+[Connecting Desktop to Many Hermes Instances](./multi-connection-desktop.md).
 
 ## When to use this
 

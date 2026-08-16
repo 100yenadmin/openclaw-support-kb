@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway"
 source: "https://docs.openclaw.ai/cli/gateway"
-source_hash: "754f71a94b0363ebef99a9efb19a6299a1d34e6f65fa7dbe0aea126a26648846"
+source_hash: "a9efeb793ee89adf0f65bb970f15482671f1565ea2f49e7dfdf56ac15a960ae0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/gateway.md"
@@ -99,7 +99,11 @@ ParamField
 
 ParamField
 
-  Allow a dev Gateway to auto-configure channels from ambient environment variables. Requires `--dev`.
+  Allow the Gateway to auto-configure channels from ambient environment variables. By default, channels require an explicit `channels.<id>` config block.
+
+ParamField
+
+  Deprecated alias for `--ambient-channels`.
 
 ParamField
 
@@ -185,7 +189,7 @@ Named profiles must also use the native service identity derived from `OPENCLAW_
 
 Set `OPENCLAW_SUPERVISOR_MODE=external` only when another process manager owns the Gateway lifecycle. In this mode:
 
-- `openclaw gateway restart` preserves the existing safe, forced, and bounded-wait behavior while targeting the verified running Gateway instead of launchd, systemd, or Task Scheduler.
+- `openclaw gateway restart` preserves the existing safe, forced, and bounded-wait behavior while targeting the verified running Gateway instead of launchd, systemd, or Task Scheduler. Exact-lock restart delivery runs inside that Gateway, so a replacement CLI does not migrate shared state before the old process hands off.
 - Native service install, start, stop, and uninstall operations are refused with guidance to use the external supervisor.
 - OpenClaw self-update is refused so the supervisor can stop the Gateway, replace and finalize the runtime, and restart it safely.
 - A fresh-process restart writes a bounded SQLite handoff before clean exit. If persistence fails, the Gateway falls back to an in-process restart instead of exiting without a consumable handoff.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory"
 source: "https://docs.openclaw.ai/cli/memory"
-source_hash: "83666688df7ba7c22ad041ceaf1e917dffbc07c79540fd78fa1e3635dc759ceb"
+source_hash: "22cffef59bc1d04d84525268bb66c7447373af131101975d068125e29cbdfea9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/memory.md"
@@ -56,7 +56,10 @@ openclaw memory index [--agent <id>] [--force] [--verbose]
 
 Same per-agent scoping as `status`. `--force` runs a full reindex instead of
 an incremental one. `--verbose` prints per-agent provider, model, sources, and
-extra-path details before showing indexing progress.
+extra-path details before showing indexing progress. The completion message
+reports the indexed file count. An empty corpus is a successful no-op: the
+command reports the resolved workspace path and that nothing was indexed, and
+leaves the missing `memory/` directory for the first memory write to create.
 
 ## `memory search`
 

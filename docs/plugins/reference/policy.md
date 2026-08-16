@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy plugin"
 source: "https://docs.openclaw.ai/plugins/reference/policy"
-source_hash: "0bf20a0eb919cd3e16ef20a39a7e9f29b2554eb4e2293b9a718503803aa5c255"
+source_hash: "80bc986d7de58e8e20f35f456a911370de6615669b170f506a06fbde0f9f39fd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/policy.md"
@@ -43,6 +43,10 @@ OpenClaw settings and workspace declarations as evidence, and reports drift
 through `openclaw policy check` and `openclaw doctor --lint`. A clean policy
 check emits policy, evidence, findings, and attestation hashes that operators
 can record for audit.
+
+`openclaw policy check`, `watch`, and workspace-relative `compare` accept
+`--agent <id>`. Explicit multi-agent fleets must select the workspace owner;
+the plugin does not infer one from roster order.
 
 `openclaw policy compare --baseline <file>` compares one policy file to another
 policy file. It is config-level conformance only: it uses policy rule metadata

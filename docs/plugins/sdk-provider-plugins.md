@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "69976f7bd2d1990bd73e0f413621934be974b6d6d7355369197840076bfed3f5"
+source_hash: "6235bde05bc26bb0771f2e007dd8a3411dad05a42ee46100b436adbc03be45b2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -993,8 +993,8 @@ Embeddings
 
         Declare the same id in `contracts.embeddingProviders`. This is the
         general embedding contract for reusable vector generation, including
-        memory search. `registerMemoryEmbeddingProvider(...)` is deprecated
-        compatibility for existing memory-specific adapters.
+        memory search. The retired memory-specific registrar and manifest
+        contract are no longer accepted.
 
 
 Image and video generation

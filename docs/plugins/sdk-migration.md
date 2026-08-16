@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "86e281c910ce334289e0cbb917879c9d801be59aeb18a1c1d53a2898f48ad571"
+source_hash: "ed67e3cdd701fb95e3bb9e07fee831ffec6683026533e8f96ba8102738904dac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -147,17 +147,15 @@ review date; removal still requires the reader condition in the final column.
 ### Published channel setup compatibility
 
 Slack, Discord, Signal, and Microsoft Teams packages published through
-`2026.7.1` import channel-specific config schemas from
+`2026.7.1` imported channel-specific config schemas from
 `openclaw/plugin-sdk/bundled-channel-config-schema`. The published Slack and
-Discord packages also import `createLegacyCompatChannelDmPolicy` and
+Discord packages also imported `createLegacyCompatChannelDmPolicy` and
 `promptLegacyChannelAllowFromForAccount` from
 `openclaw/plugin-sdk/setup-runtime`.
 
-Those exports remain available as deprecated runtime compatibility adapters.
-New and republished plugins should own their config schemas and setup policy
-locally, using generic primitives from `channel-config-schema` and
-`setup-runtime`. The compatibility exports can be removed only after the
-minimum supported published package versions no longer import them.
+Those compatibility exports were removed in August 2026. Channel plugins must
+own their config schemas and setup policy locally, using generic primitives
+from `channel-config-schema` and `setup-runtime`.
 
 ### Channel setup input field compatibility
 
@@ -533,11 +531,7 @@ Migrate channel route helpers
     consistently across native approvals, reply suppression, inbound dedupe,
     cron delivery, and session routing.
 
-    Do not add new uses of `ChannelMessagingAdapter.parseExplicitTarget` or
-    `resolveChannelRouteTargetWithParser(...)` from
-    `plugin-sdk/channel-route` - those are deprecated and remain only for older
-    plugins. New channel plugins should use
-    `messaging.targetResolver.resolveTarget(...)` for target-id normalization
+    Channel plugins use `messaging.targetResolver.resolveTarget(...)` for target-id normalization
     and directory-miss fallback,
     `messaging.inferTargetChatType(...)` when core needs an early peer kind,
     and `messaging.resolveOutboundSessionRoute(...)` for provider-native
@@ -737,11 +731,8 @@ Accordion
     });
     ```
 
-    `subagent_spawning`, `PluginHookSubagentSpawningEvent`,
-    `PluginHookSubagentSpawningResult`, and
-    `SubagentLifecycleHookRunner.runSubagentSpawning(...)` remain only as
-    deprecated compatibility surfaces while external plugins migrate, removed
-    after 2026-08-30.
+    The `subagent_spawning` hook and its event/result types were removed in
+    August 2026 after thread binding moved to the core session-binding path.
 
 
 
@@ -843,10 +834,9 @@ Memory embedding provider API
     `contracts.embeddingProviders`.
 
     The generic embedding provider contract is reusable outside memory and is
-    the supported path for new providers. The memory-specific registration API
-    remains wired as deprecated compatibility while existing providers
-    migrate. Plugin inspection reports non-bundled usage as compatibility
-    debt.
+    the supported path for every provider. The memory-specific registration API
+    and manifest contract were removed after the **2026-08-21** migration
+    deadline.
 
 
 

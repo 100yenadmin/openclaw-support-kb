@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Portals"
 source: "https://docs.openclaw.ai/gateway/portals"
-source_hash: "30cdb44c9e4740d35b40d075e8e4d9285d640bee01fd30ebe1574444cc39c542"
+source_hash: "8c6e3fb41b12b7fce581e89bd8bebe2c86e5a7eb2600c4d1fcff24b9acad81c4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/portals.md"
@@ -60,6 +60,36 @@ The Gateway never executes these commands automatically. The agent reads the fil
 The application must honor `PORT`. Use `PUBLIC_URL` when it needs to generate absolute URLs.
 
 The proxy rewrites `Host` to the local target, so typical development servers such as Vite and Next.js need no additional configuration. WebSockets and hot module replacement are proxied through the same portal.
+
+## Availability and configuration
+
+Portals add no dedicated configuration key. The `portal` tool follows ordinary tool policy, described in [Tools configuration](/gateway/config-tools).
+
+Out of the box:
+
+- `portal` belongs to `group:ui` and the `coding` profile, so coding agents have it while `messaging` and `minimal` agents do not.
+- Sandboxed sessions never receive it, because opening a portal starts a listener on the Gateway host.
+- It is blocked for HTTP `POST /tools/invoke` and restricted to the session owner, the same treatment `terminal` gets.
+
+To turn portals off everywhere, deny the tool in the global policy:
+
+```json5
+{
+  tools: { deny: ["portal"] },
+}
+```
+
+To turn them off for a single agent, leaving the others unchanged:
+
+```json5
+{
+  agents: { entries: { "<agentId>": { tools: { deny: ["portal"] } } } },
+}
+```
+
+`tools.profile`, `tools.allow`, `byProvider`, and `toolsBySender` apply to `portal` as they do to any other tool, so portals can also be limited to specific providers, models, or senders without a portal-specific setting.
+
+One consequence worth planning for: portal listeners bind the same interfaces as the Gateway. A Gateway bound to a LAN or tailnet address publishes its portal listener ports on that network too. Reaching one still requires the portal token, but deny the tool when the Gateway host must not offer operator-reachable application ports at all.
 
 ## Security model
 

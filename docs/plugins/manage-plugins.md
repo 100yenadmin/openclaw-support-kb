@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Manage plugins"
 source: "https://docs.openclaw.ai/plugins/manage-plugins"
-source_hash: "a8424ea9a167e947100a250b9ccedd6d5ede48bc5ce92a439e5e943121e7e391"
+source_hash: "ff213d3fa21d4c371ead1b33025b9edf62024c95a4d05086078c8114f7667d98"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/manage-plugins.md"
@@ -230,6 +230,12 @@ package by any child id; the preview names the package owner and all siblings
 that will be removed. The managed install directory is removed once unless you
 pass `--keep-files`. A running managed Gateway restarts automatically when the
 uninstall changes plugin source.
+
+If an installed Claw references the plugin, preview and uninstall print the
+affected Claw package names. Ordinary plugin uninstall can still proceed and
+may break those Claws; use `openclaw claws status` to review ownership first.
+Removing a Claw releases its plugin reference but retains the process-wide
+plugin by default.
 
 In Nix mode (`OPENCLAW_NIX_MODE=1`), plugin install, update, uninstall,
 enable, and disable are all disabled; manage those choices in the Nix source

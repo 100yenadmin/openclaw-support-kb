@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas plugin refactor"
 source: "https://docs.openclaw.ai/refactor/canvas"
-source_hash: "450feb3363fc88d6c5acdff183c878b11149a329d8e880b659da7d05cd76bb7b"
+source_hash: "8c0033c243e2b36d12b5b19e7043f9e3f7ee7dad4c59c05fc030d9a2a1443c1c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/canvas.md"
@@ -115,7 +115,7 @@ Before calling the refactor complete:
 - `rg "createCanvasHostHandler|handleA2uiHttpRequest" src/gateway` returns no gateway runtime ownership.
 - `rg "apps/shared/OpenClawKit/Tools/CanvasA2UI|canvas-a2ui-copy|extensions/canvas/src/host/a2ui" scripts .github package.json` finds only compatibility wrappers or plugin-owned paths.
 - `pnpm plugins:inventory:check` passes.
-- `pnpm plugin-sdk:api:check` passes, or generated API contract records are intentionally updated and reviewed.
+- `pnpm plugin-sdk:api:diff --base "$(git merge-base origin/main HEAD)" --head HEAD` reports the intended API changes.
 - Targeted Canvas tests pass.
 - Changed-lanes tests pass for Canvas host/A2UI paths.
 - PR body explicitly says Canvas is experimental and plugin-backed.
@@ -131,7 +131,7 @@ pnpm test extensions/canvas/src/config-migration.test.ts src/commands/doctor-leg
 pnpm test test/scripts/changed-lanes.test.ts test/scripts/build-all.test.ts extensions/canvas/scripts/bundle-a2ui.test.ts test/scripts/bundled-plugin-assets.test.ts extensions/canvas/scripts/copy-a2ui.test.ts src/infra/run-node.test.ts
 pnpm tsgo:extensions
 pnpm plugins:inventory:check
-pnpm plugin-sdk:api:check
+pnpm plugin-sdk:api:diff --base "$(git merge-base origin/main HEAD)" --head HEAD
 ```
 
 Run `pnpm build` before push if runtime barrel, lazy import, packaging, or published plugin surfaces change.

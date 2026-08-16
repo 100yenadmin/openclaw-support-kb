@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Claws"
 source: "https://docs.openclaw.ai/cli/claws"
-source_hash: "fa1a91075de49eef134f1eb575badd5c168a651aba45b1fe7334a6a2a45cdb8a"
+source_hash: "b429f7ac47c3f30d0d5ada8d3da952bc3fc70d0e246c2130809500d74d16aa06"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/claws.md"
@@ -26,6 +26,10 @@ Enable the command surface explicitly:
 ```bash
 export OPENCLAW_EXPERIMENTAL_CLAWS=1
 ```
+
+For human-readable `claws add`, OpenClaw prints the experimental warning before
+changing state. JSON mode keeps stdout machine-readable and identifies the
+contract with `"stability": "experimental"`.
 
 The current CLI reads a local package directory, `CLAW.md`, or grouped JSON manifest.
 Publishing, searching, and installing whole Claws through ClawHub are a
@@ -480,6 +484,10 @@ credentials, sessions, and unowned local state are excluded.
 
 | Command                             | Purpose                                             |
 | ----------------------------------- | --------------------------------------------------- |
+| `claws create [path]`               | Create a minimal local Claw project.                |
+| `claws validate [path]`             | Validate project inputs and package contents.       |
+| `claws dev [path]`                  | Build and preview locally without mutation.         |
+| `claws build [path] --out <tgz>`    | Build a deterministic package artifact.             |
 | `claws inspect <source>`            | Validate a package directory or grouped manifest.   |
 | `claws add <source>`                | Preview or create one new agent and workspace.      |
 | `claws status [claw-or-agent]`      | Report installed state, ownership, and drift.       |
@@ -488,6 +496,12 @@ credentials, sessions, and unowned local state are excluded.
 | `claws export <agent> --out <path>` | Create a portable package from an installed agent.  |
 
 Use `--json` for experimental machine-readable output.
+
+Successful commands exit `0`. Validation errors, blocked plans, missing
+targets, and both `failed` and `partial` mutation results exit `1`. Inspect the
+JSON `status` and `error.code` fields to distinguish a failure that made no
+change from a partial result that requires `claws status`, `openclaw doctor`,
+and a new preview before retrying.
 
 ## See also
 

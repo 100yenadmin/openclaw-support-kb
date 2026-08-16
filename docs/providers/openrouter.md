@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenRouter"
 source: "https://docs.openclaw.ai/providers/openrouter"
-source_hash: "e245a5628305f85e5b882932c4167fbad529430e13997c20eb829552c9e30435"
+source_hash: "877581264d36d238e789e8ee3aa7a526227e199b77342b62863d4f172de5af02"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openrouter.md"
@@ -137,10 +137,16 @@ under `agents.defaults.mediaModels.image`:
 }
 ```
 
-OpenClaw sends image requests to OpenRouter's chat-completions image API with
-`modalities: ["image", "text"]`. Gemini image models additionally receive
-`aspectRatio` and `resolution` hints through OpenRouter's `image_config`; other
-image models do not. Use `agents.defaults.mediaModels.image.timeoutMs` for
+OpenClaw sends canonical OpenRouter image requests to the dedicated image API
+(`POST /api/v1/images`). Gemini image models additionally receive
+`aspect_ratio` and `resolution` hints, and image edits pass source images as
+`input_references`. Generated images come back as base64 (`b64_json`) with an
+optional `media_type`; when `media_type` is absent, OpenClaw sniffs the image
+format from the bytes.
+
+Configured custom OpenRouter `baseUrl` destinations retain the existing
+chat-completions image route for compatibility with proxies that do not expose
+the dedicated endpoint. Use `agents.defaults.mediaModels.image.timeoutMs` for
 slower models; the `image_generate` tool's per-call `timeoutMs` still wins.
 
 ## Video generation

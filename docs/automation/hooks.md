@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/automation/hooks"
-source_hash: "6575ebc2f42b9a66e7dd0262da6ea32b74ed1ad40e79b0f4bdd4fafa15bbf8bf"
+source_hash: "7f02e73c582627f64aa33bcc0b99efd746d8d1ca382b21368684964fda5f9200"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/hooks.md"
@@ -119,7 +119,7 @@ Detailed documentation goes here.
 | `export`   | Named export to use (defaults to `"default"`)        |
 | `os`       | Required platforms (e.g., `["darwin", "linux"]`)     |
 | `requires` | Required `bins`, `anyBins`, `env`, or `config` paths |
-| `always`   | Bypass eligibility checks (boolean)                  |
+| `always`   | Bypass `requires.*` checks on a compatible OS        |
 | `hookKey`  | Config key override (defaults to the hook name)      |
 | `homepage` | Docs URL shown by `openclaw hooks info`              |
 | `install`  | Installation methods                                 |

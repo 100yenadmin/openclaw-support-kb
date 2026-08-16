@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "377b905e53ba05b82430b88c945aec7e55ae4ef2628c03506eaefda6a52dae74"
+source_hash: "8072f38edda1a3c97f150eb6b35fef7a02e322249d872a627764a4828fbf07b9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -161,7 +161,8 @@ that asks for a broader role or broader scopes creates a new pending upgrade
 request.
 
 A connected limited Control UI can file that same pending request through its
-**Request admin** banner without attempting a broader reconnect. The request is
+**Request admin** banner without attempting a broader reconnect. The banner can
+collapse into a persistent **Limited access** chip that reopens the action. The request is
 bound to the signed device identity on the live connection. Approval still
 comes from `device.pair.approve` and therefore requires `operator.pairing` plus
 authority for every requested scope. After approval rotates the operator token,

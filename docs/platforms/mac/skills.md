@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/skills"
-source_hash: "49b00e6f41311a783cc2130782b4f6cdc7c7136670789f264d966bbd0baa07a4"
+source_hash: "1ebb6735314081676637af579d83b8c1a20031000055ccd656760df8613934d7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/skills.md"
@@ -24,7 +24,7 @@ The macOS app surfaces OpenClaw skills via the gateway; it does not parse skills
 
 - `metadata.openclaw.install` defines install options (brew/node/go/uv/download).
 - The app calls `skills.install` to run installers on the gateway host.
-- Operator-owned `security.installPolicy` (`enabled`, `targets`, `exec`) can block gateway-backed skill installs before installer metadata runs. Built-in dangerous-code scanning (used for plugin installs) is not wired into the skill install flow.
+- Operator-owned `security.installPolicy` (`enabled`, `targets`, `exec`) runs before installer metadata. `block` results and policy failures stop the install. A `warn` result also stops the gateway-backed request: review it with the matching direct CLI when one exists, or change the policy to allow the reviewed request, then retry.
 - If every install option is `download`, the gateway surfaces all download choices.
 - Otherwise the gateway picks one preferred installer using current install preferences (`skills.install.preferBrew`, `skills.install.nodeManager`) and host binaries: Homebrew first when `preferBrew` is enabled and `brew` is present, then `uv`, then the configured node manager, then Homebrew again if available (even without `preferBrew`), then `go`, then `download`.
 - Node install labels reflect the configured node manager, including `yarn`.

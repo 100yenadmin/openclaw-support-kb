@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Fly.io"
 source: "https://docs.openclaw.ai/install/fly"
-source_hash: "db983540e4cc87ddc6da3e7bd49165e0ca903d1a1856adb703f4c11ed86e46ff"
+source_hash: "b6ff1b00afb133556f1b282196e8cdbdbb890801f7ca0c18e07cc55487f4e86c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/fly.md"
@@ -222,9 +222,9 @@ Create config file
 
     Replace `https://my-openclaw.fly.dev` with your real Fly app origin. Gateway startup seeds local Control UI origins from the runtime `--bind` and `--port` values so first boot can proceed before config exists, but browser access through Fly still needs the exact HTTPS origin listed in `gateway.controlUi.allowedOrigins`.
 
-    The Discord token can come from either:
+    The `channels.discord` block above enables Discord. Its token can come from either:
 
-    - Environment variable `DISCORD_BOT_TOKEN` (recommended for secrets); no need to add it to config, the gateway reads it automatically
+    - Environment variable `DISCORD_BOT_TOKEN` (recommended for secrets); the configured default account reads it automatically
     - Config file `channels.discord.token`
 
     Restart to apply:

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Amazon Bedrock plugin"
 source: "https://docs.openclaw.ai/plugins/reference/amazon-bedrock"
-source_hash: "5cd0c6be9ea78ba3a93603c2494e43c461c46bffb82451826ba7a69a36c10781"
+source_hash: "1d6bcbe2559ecb1392f94bae1386b6d8525614cf8c1d75ba59272fb62f73d0d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/amazon-bedrock.md"
@@ -24,7 +24,7 @@ OpenClaw Amazon Bedrock provider plugin with model discovery, embeddings, and gu
 
 ## Surface
 
-providers: `amazon-bedrock`; contracts: `memoryEmbeddingProviders`
+providers: `amazon-bedrock`; contracts: `embeddingProviders`
 
 ## Related docs
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local model services"
 source: "https://docs.openclaw.ai/gateway/local-model-services"
-source_hash: "53d25c6c217b247352396329b49223a2a448d3c6a08b9d6a92ae1c96e46e4eee"
+source_hash: "768ae6f5a77062116bf87323bbf96f3878c18df038b5a058e3d4448bfe512a91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-model-services.md"
@@ -30,6 +30,18 @@ OpenClaw does not install launchd, systemd, Docker, or any daemon for this. The 
 Startup is serialized per configured provider and command/argument/env set, so concurrent chat and embedding requests for the same service do not spawn duplicate servers. Each request holds its own lease until response handling completes, so idle shutdown waits for every in-flight model and embedding request. Configured provider aliases remain distinct: two aliases can point at different GPU hosts without collapsing onto the same Ollama, LM Studio, or OpenAI-compatible adapter id.
 
 If another OpenClaw process already has a healthy server at the same `healthUrl`, this process reuses it without adopting it (each process only manages the child it personally started). Startup and exit logs include bounded, redacted child-output tails plus timing and exit details; configured environment values are never emitted.
+
+## Managed llama.cpp
+
+The official llama.cpp provider generates this shape automatically. Its guided
+setup installs a pinned, verified `llama-server`, writes an absolute command and
+router preset, selects a free loopback port, and stores the resulting `baseUrl`
+and `localService` config. Chat and local embeddings lease the same managed
+router through the normal OpenAI-compatible transports.
+
+Do not copy a generated command path between machines. Run llama.cpp setup on
+each Gateway host so OpenClaw selects and verifies the matching platform build.
+See [llama.cpp Provider](/plugins/llama-cpp).
 
 ## Config shape
 

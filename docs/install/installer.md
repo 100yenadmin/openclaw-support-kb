@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Installer internals"
 source: "https://docs.openclaw.ai/install/installer"
-source_hash: "3e836adfdd0c574c860cfddb809fe21ed0db6c450bcce2db13b22d9cd45cb77b"
+source_hash: "346aeb05833c4685520b516f9efe78f77e921a401d7b2c164bd246355bf639cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/installer.md"
@@ -251,6 +251,12 @@ Install OpenClaw under prefix
     - `npm` method (default): installs under the prefix with npm, then writes wrapper to `<prefix>/bin/openclaw`
     - `git` method: clones/updates a checkout (default `~/openclaw`) and still writes the wrapper to `<prefix>/bin/openclaw`
 
+
+
+Verify the installed CLI
+
+    Runs `<prefix>/bin/openclaw --version` and stops with an error unless the
+    installed wrapper exits successfully with a nonempty version.
 
 
 Refresh loaded gateway service

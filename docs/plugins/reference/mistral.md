@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Mistral plugin"
 source: "https://docs.openclaw.ai/plugins/reference/mistral"
-source_hash: "6b6afe4091626b4b32dd708e7e699f80d6ec01299410bb6b4ba67b76bfb56b79"
+source_hash: "e9556d0bde2ad0b47d0c306e1d929d84e7ee5ce267300f9f5bdd756024d31596"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/mistral.md"
@@ -24,7 +24,7 @@ Adds Mistral model provider support to OpenClaw.
 
 ## Surface
 
-providers: `mistral`; contracts: `mediaUnderstandingProviders`, `memoryEmbeddingProviders`, `realtimeTranscriptionProviders`
+providers: `mistral`; contracts: `embeddingProviders`, `mediaUnderstandingProviders`, `realtimeTranscriptionProviders`
 
 ## Related docs
 

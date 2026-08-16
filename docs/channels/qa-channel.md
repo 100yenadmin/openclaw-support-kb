@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "QA channel"
 source: "https://docs.openclaw.ai/channels/qa-channel"
-source_hash: "3eb7b17bd24bd4f1552256ee99dabfc8f143164925d1f61aed8e569752078f52"
+source_hash: "093e65544bf4c950b9e887eb2736b26a7ff015306716480fab3f6d233fe1fd3a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/qa-channel.md"
@@ -82,6 +82,15 @@ Full repo-backed scenario suite:
 
 ```bash
 pnpm openclaw qa suite
+```
+
+The isolated `channel-participant-identity-inspection` scenario enables
+execution identity before startup, exercises DM, group, senderless, same- and
+mixed-participant collect paths, proves an ingress rejection creates no audit
+rows, and compares JSON plus human CLI inspection across Gateway restart:
+
+```bash
+pnpm openclaw qa suite --scenario channel-participant-identity-inspection
 ```
 
 Runs scenarios in parallel against the QA gateway lane. See [QA overview](/concepts/qa-e2e-automation) for scenarios, profiles, and provider modes.

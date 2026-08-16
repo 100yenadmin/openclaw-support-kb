@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Backups"
 source: "https://docs.openclaw.ai/install/backups"
-source_hash: "419a1fe4eed91dbabf738f18ecb950796707102d0ffee14a58da9eac509ae766"
+source_hash: "a56f6823de11ff6f3eca60e42006b22a7b2411ca8c1a2e43071985873d748283"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/backups.md"
@@ -253,7 +253,7 @@ openclaw backup restore "$ARCHIVE" --target ./restored-openclaw
 ```
 
 The target must not exist or must be empty. OpenClaw verifies archive structure,
-the manifest, hardlinks, and SQLite databases before it writes the target. A
+the manifest, hardlinks, symbolic-link containment, and SQLite databases before it writes the target. A
 non-empty target is refused, and a failed extraction cleans its incomplete
 output. The command never touches the live state directory and has no force or
 in-place mode. Treat the restored directory as sensitive: it can contain
@@ -266,7 +266,9 @@ Warning
   relinking. Approvals and delivery/dedupe state also roll back, so review
   pending approvals before resuming the Gateway. Plugin `node_modules` trees
   are not archived; after activation, run `openclaw plugins update <id>` or
-  reinstall with `openclaw plugins install <spec> --force`.
+  reinstall with `openclaw plugins install <spec> --force`. Run `openclaw
+  skills list` or start an agent session to regenerate the omitted
+  `plugin-skills/` symlink index from current plugin metadata.
 
 The manifest records `archiveRoot`, the original paths under `paths`, and an
 `assets[]` list. Each asset includes its `kind`, original `sourcePath`, and

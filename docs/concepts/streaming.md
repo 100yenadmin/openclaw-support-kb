@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "6c82d1424e43749249dd07d79bee8d709b2cbfafde5e1e8fcd5da69dbc491546"
+source_hash: "59b0367e2391e7b2c7cc6dc1bcb98bce6f06930f6f56f946264dc13eb61f69da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -276,11 +276,14 @@ Slack-only:
 - `partial` can use Slack native streaming (`chat.startStream`/`append`/`stop`)
   when available.
 - `block` uses append-style draft previews.
-- `progress` maintains one live Block Kit session card, finalizes it to success
-  or error, and always posts the assistant's final text as a separate message.
-- Terminal cards include **Open in OpenClaw** when `gateway.publicOrigin` is set.
-  Slack's native plan/task stream remains opt-in through
-  `streaming.progress.nativeTaskCards: true`.
+- `progress` streams Slack's native agent card by default: one message carries
+  narration, the live plan/task card, and the final answer. The card appears
+  only for turns that do real work, so plain questions are answered without one.
+  `streaming.progress.nativeTaskCards: false` falls back to the Block Kit
+  session card, which finalizes to success or error and posts the assistant's
+  final text as a separate message.
+- Cards include **Open in OpenClaw** only when the session is actually openable:
+  `gateway.publicOrigin` is set and `gateway.controlUi.enabled` is not `false`.
 - Top-level DMs without a reply thread use draft preview posts and edits
   instead of Slack native streaming.
 - Native and draft preview streaming suppress block replies for that turn, so a

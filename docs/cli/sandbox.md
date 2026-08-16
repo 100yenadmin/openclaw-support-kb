@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sandbox CLI"
 source: "https://docs.openclaw.ai/cli/sandbox"
-source_hash: "5c7dfe88feba5cb5bcd5f734665bc3f54e88c3415cb0b78f29ccda8092d04b52"
+source_hash: "069ccc5af9c52395717ab25a4c88d9ca9f64b69d067af7dcb7cb5fcf37db4172"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sandbox.md"
@@ -67,6 +67,7 @@ openclaw sandbox explain --json
 ```
 
 Unlike `recreate --session`, this accepts short session names (for example `main`) and expands them against the resolved agent.
+An explicit `--agent` is sufficient for multi-agent fleets with no implicit owner; sandbox explanation does not require or guess a default first.
 
 ## Why recreate is needed
 

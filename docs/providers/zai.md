@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Z.AI"
 source: "https://docs.openclaw.ai/providers/zai"
-source_hash: "9875006530ba6802b894cc19d47de2cac46aaee624c7f084ba9571e181ace907"
+source_hash: "ccbe00a44c8a30cb3c91dae30e81f795d6d3706e6de34256f053615c35d44dbe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/zai.md"
@@ -27,7 +27,7 @@ OpenClaw uses the `zai` provider with a Z.AI API key.
 ## GLM models
 
 GLM is a model family, not a separate provider. In OpenClaw, GLM models use
-refs such as `zai/glm-5.2`: provider `zai`, model id `glm-5.2`.
+refs such as `zai/glm-5.3`: provider `zai`, model id `glm-5.3`.
 
 ## Getting started
 
@@ -107,8 +107,8 @@ Verify the model is listed
 | ------------------- | --------------------------------------------- | ------------- |
 | `zai-global`        | `https://api.z.ai/api/paas/v4`                | `glm-5.2`     |
 | `zai-cn`            | `https://open.bigmodel.cn/api/paas/v4`        | `glm-5.2`     |
-| `zai-coding-global` | `https://api.z.ai/api/coding/paas/v4`         | `glm-5.2`     |
-| `zai-coding-cn`     | `https://open.bigmodel.cn/api/coding/paas/v4` | `glm-5.2`     |
+| `zai-coding-global` | `https://api.z.ai/api/coding/paas/v4`         | `glm-5.3`     |
+| `zai-coding-cn`     | `https://open.bigmodel.cn/api/coding/paas/v4` | `glm-5.3`     |
 
 Z.AI also publishes the Anthropic-compatible Coding Plan base URL
 `https://api.z.ai/api/anthropic`. OpenClaw's Z.AI choices use the documented
@@ -168,12 +168,12 @@ you want to force a specific Coding Plan or general API surface.
   models: {
     providers: {
       zai: {
-        // GLM-5.2 uses the Coding Plan endpoint.
+        // GLM-5.3 uses the Coding Plan endpoint.
         baseUrl: "https://api.z.ai/api/coding/paas/v4",
       },
     },
   },
-  agents: { defaults: { model: { primary: "zai/glm-5.2" } } },
+  agents: { defaults: { model: { primary: "zai/glm-5.3" } } },
 }
 ```
 
@@ -190,31 +190,43 @@ The manifest-backed catalog currently includes:
 
 | Model ref          | Notes                                             |
 | ------------------ | ------------------------------------------------- |
-| `zai/glm-5.2`      | Default; 1M context                               |
+| `zai/glm-5.3`      | Coding Plan default; 1,048,576-token context      |
+| `zai/glm-5.2`      | General API default; 1M context                   |
 | `zai/glm-5-turbo`  | OpenClaw-optimized text model; 200K context       |
 | `zai/glm-5v-turbo` | Multimodal coding model; 200K context             |
 | `zai/glm-5.1`      | Deprecated; hidden unless configured; use GLM-5.2 |
 
-Catalog token-cost metadata follows Z.AI's current
-[pay-as-you-go pricing](https://docs.z.ai/guides/overview/pricing). Coding Plan
-subscriptions use plan quota instead of per-token billing; see the live
+Pay-as-you-go catalog rows follow Z.AI's current
+[API pricing](https://docs.z.ai/guides/overview/pricing). GLM-5.3 is currently a
+Coding Plan model, so its local catalog cost is zero; Coding Plan subscriptions
+use plan quota instead of per-token billing. See the live
 [subscription page](https://z.ai/subscribe) for plan pricing and availability.
 
 Tip
 
-GLM models are available as `zai/<model>` (example: `zai/glm-5.2`).
+GLM models are available as `zai/<model>` (example: `zai/glm-5.3`).
 
 Note
 
-All fresh Z.AI setup paths default to `zai/glm-5.2`. On the Coding Plan endpoints,
-auto-detection falls back to
-`glm-5.1` and then `glm-4.7` when the key/plan does not expose GLM-5.2. GLM
-versions and availability can change; run `openclaw models list --all --provider zai`
-to see the catalog known to your installed version.
+Fresh Coding Plan setup defaults to `zai/glm-5.3`; general API setup remains on
+`zai/glm-5.2`. On Coding Plan endpoints, auto-detection falls back through
+`glm-5.1` and `glm-4.7` when a key or regional endpoint does not expose GLM-5.3
+directly. Z.AI currently routes Coding Plan requests for GLM-5.2 and GLM-5.1 to
+GLM-5.3. Run
+`openclaw models list --all --provider zai` to see the catalog known to your
+installed version.
 
 ## Thinking levels
 
 Tabs
+
+
+GLM-5.3
+
+    Levels: `low`, `high`, and `max` (default `max`). OpenClaw maps these to
+    Z.AI's `reasoning_effort` request field. An explicit `off` setting sends
+    `thinking: { type: "disabled" }`; Z.AI treats disabled thinking as its
+    lightweight `low` effort rather than disabling reasoning entirely.
 
 
 GLM-5.2
@@ -280,7 +292,7 @@ Preserved thinking
       agents: {
         defaults: {
           models: {
-            "zai/glm-5.2": {
+            "zai/glm-5.3": {
               params: { preserveThinking: true },
             },
           },

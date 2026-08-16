@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Admin HTTP RPC plugin"
 source: "https://docs.openclaw.ai/plugins/admin-http-rpc"
-source_hash: "b1a9d23f1364942f3c403958ee5a0e8cdebf28b9391095e03cff7da8ded89ad7"
+source_hash: "f07e6fe0077644ae97ec52782a6709426059036af63518c32e8cfdd7216c1e0c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/admin-http-rpc.md"
@@ -112,7 +112,7 @@ Treat this plugin as a full Gateway operator surface.
 - Trusted identity-bearing HTTP auth (`trusted-proxy` mode) honors `x-openclaw-scopes` when present.
 - `gateway.auth.mode="none"` means this route is unauthenticated if the plugin is enabled. Use that only behind a private ingress you fully trust.
 - Requests dispatch through the same Gateway method handlers and scope checks as WebSocket RPC, after the plugin route auth passes.
-- The route remains reachable during a prepared suspension lease. Bounded request validation and the local `commands.list` discovery response remain available. Of the methods dispatched into the Gateway, only `gateway.suspend.prepare`, `gateway.suspend.status`, and `gateway.suspend.resume` may run while admission is closed; other allowlisted methods return the normal retryable Gateway `UNAVAILABLE` response.
+- The route remains reachable during a prepared suspension lease. Bounded request validation and the local `commands.list` discovery response remain available. Of the methods dispatched into the Gateway, `gateway.suspend.prepare`, `gateway.suspend.status`, `gateway.suspend.resume`, and an exact targeted non-safe `gateway.restart.request` may run while admission is closed; safe, untargeted, and other allowlisted methods return the normal retryable Gateway `UNAVAILABLE` response.
 - Keep this route on loopback, tailnet, or a private trusted ingress. Do not expose it directly to the public internet. Use separate gateways when callers cross trust boundaries.
 
 ## Request

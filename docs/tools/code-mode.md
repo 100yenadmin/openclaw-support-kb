@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Code Mode"
 source: "https://docs.openclaw.ai/tools/code-mode"
-source_hash: "4e73d732abe59b2d0ebcc4898d7c01b4e2905f1db03d23021007487077113841"
+source_hash: "afd03f15a2a5bfc539865654bb63b2643d2c067f865691af405ddfb0980ccf17"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/code-mode.md"
@@ -299,17 +299,17 @@ plugin's catalog; core only reads the generic compat field.
 
 Bundled provider catalogs currently flag these models as `"preferred"`:
 
-| Provider  | Models                                                                                                                                       |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| anthropic | `claude-fable-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-mythos-5`, `claude-opus-4-8`, `claude-haiku-4-5`                               |
-| deepseek  | `deepseek-v4-pro`, `deepseek-v4-flash`                                                                                                       |
-| google    | `gemini-3-flash-preview`, `gemini-3.1-pro-preview`, `gemini-3.1-flash-lite`, `gemini-3.5-flash`, `gemini-3.5-flash-lite`, `gemini-3.6-flash` |
-| kimi      | `k3`, `k3-256k`                                                                                                                              |
-| minimax   | `MiniMax-M3`                                                                                                                                 |
-| moonshot  | `kimi-k3`                                                                                                                                    |
-| openai    | `gpt-5.6`, `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`, `gpt-5.5`, `gpt-5.5-pro`                                                          |
-| xiaomi    | `mimo-v2.5`                                                                                                                                  |
-| zai       | `glm-5.2`, `glm-5.1`                                                                                                                         |
+| Provider  | Models                                                                                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| anthropic | `claude-fable-5`, `claude-opus-5`, `claude-sonnet-5`, `claude-mythos-5`, `claude-opus-4-8`, `claude-haiku-4-5`                                                   |
+| deepseek  | `deepseek-v4-pro`, `deepseek-v4-flash`                                                                                                                           |
+| google    | `gemini-3-flash-preview`, `gemini-3.1-pro-preview`, `gemini-3.1-flash-lite`, `gemini-3.5-flash`, `gemini-3.5-flash-lite`, `gemini-3.6-flash`, `gemini-3.7-flash` |
+| kimi      | `k3`, `k3-256k`                                                                                                                                                  |
+| minimax   | `MiniMax-M3`                                                                                                                                                     |
+| moonshot  | `kimi-k3`                                                                                                                                                        |
+| openai    | `gpt-5.6`, `gpt-5.6-sol`, `gpt-5.6-terra`, `gpt-5.6-luna`, `gpt-5.5`, `gpt-5.5-pro`                                                                              |
+| xiaomi    | `mimo-v2.5`                                                                                                                                                      |
+| zai       | `glm-5.3`, `glm-5.2`, `glm-5.1`                                                                                                                                  |
 
 Everything else, including all Ollama-served local models, stays unflagged and
 keeps normal tool exposure under `"auto"`.

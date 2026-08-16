@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "openclaw status"
 source: "https://docs.openclaw.ai/cli/status"
-source_hash: "4031efa84696bd6ec2ee0ae3edc89923741da584348567bbad4e2803b745e173"
+source_hash: "2ae9812d278de1cbd6c66048b31b64423e6893bee72bcfe70efc030c6c439132"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/status.md"
@@ -20,6 +20,7 @@ openclaw status
 openclaw status --all
 openclaw status --deep
 openclaw status --usage
+openclaw status --usage --agent work
 ```
 
 | Flag                    | Description                                                                                                     |
@@ -27,6 +28,7 @@ openclaw status --usage
 | `--all`                 | Full diagnosis (read-only, pasteable). Includes security audit, plugin compatibility, and memory-vector probes. |
 | `--deep`                | Runs live probes (WhatsApp Web + Telegram + Discord + Slack + Signal). Also enables the security audit.         |
 | `--usage`               | Prints normalized provider usage windows as `X% left`.                                                          |
+| `--agent <id>`          | Selects the agent auth/profile scope for `--usage`. Required when an explicit multi-agent fleet has no default. |
 | `--json`                | Machine-readable output.                                                                                        |
 | `--timeout <ms>`        | Probe timeout in milliseconds (default: `10000`).                                                               |
 | `--verbose` / `--debug` | Also print the raw Gateway target resolution before the report.                                                 |
@@ -66,6 +68,10 @@ and `openclaw memory status --deep`.
 ## Usage and quota
 
 - `--usage` prints normalized provider usage windows as `X% left`.
+- In an explicit multi-agent setup, `--usage` reads the auth profiles owned by
+  `agents.defaults.systemAgent.agentId` by default. Pass `--agent <id>` to
+  inspect another agent; without either owner, OpenClaw does not guess one
+  agent's credentials from an ambiguous roster.
 - MiniMax's raw `usage_percent` / `usagePercent` fields are remaining quota,
   so OpenClaw inverts them before display; count-based fields win when
   present. `model_remains` responses prefer the chat-model entry, derive the

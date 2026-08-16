@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Creating skills"
 source: "https://docs.openclaw.ai/tools/creating-skills"
-source_hash: "5e8ee2704d2f73e41dcf83d96d77f85c3b01a36142eaeb7dce612023ce3eeef3"
+source_hash: "197405152d56e70fd49eacdb3828fc5ad62197fd3c6fc13a37a660afec9f6a2f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/creating-skills.md"
@@ -157,7 +157,7 @@ Gating options
     | `requires.env` | Each env var must exist in the process or config |
     | `requires.config` | Each `openclaw.json` path must be truthy |
     | `os` | Platform filter: `["darwin"]`, `["linux"]`, `["win32"]` |
-    | `always` | Set `true` to skip all gates and always include the skill |
+    | `always` | Include on a compatible OS even when `requires.*` checks fail |
 
     Full reference: [Skills — Gating](/tools/skills#gating).
 

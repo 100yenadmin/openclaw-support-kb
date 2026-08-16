@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio plugin"
 source: "https://docs.openclaw.ai/plugins/reference/lmstudio"
-source_hash: "352a19c586fa4adfcc622325daf1462fbc2e39028ed47fc1d2535f8e1f561ebe"
+source_hash: "c800adba9437ffe624d13b5c224907feb04949c5f27534b84482d11568f71e91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/lmstudio.md"
@@ -24,7 +24,7 @@ Adds LM Studio model provider support to OpenClaw.
 
 ## Surface
 
-providers: `lmstudio`; contracts: `memoryEmbeddingProviders`
+providers: `lmstudio`; contracts: `embeddingProviders`
 
 ## Related docs
 

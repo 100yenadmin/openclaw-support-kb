@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Adding capabilities (contributor guide)"
 source: "https://docs.openclaw.ai/plugins/adding-capabilities"
-source_hash: "8dc2a5a3d7805119e4256bbd10754c363f1d75a16ecccb332680ac6fb740be7b"
+source_hash: "d9ebdd265e666dc33e930a1bc083b5d23ea59e8f72e89fa37fbd7ffc0a0e93a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/adding-capabilities.md"
@@ -114,8 +114,9 @@ can consume embeddings without depending on the memory engine. Memory search
 also consumes generic `embeddingProviders`.
 
 The older memory-specific registration API and `memoryEmbeddingProviders`
-contract are deprecated. Use `registerEmbeddingProvider` and
-`embeddingProviders` for all new embedding providers.
+contract were removed after their August 2026 migration window. Use
+`registerEmbeddingProvider` and `embeddingProviders` for every embedding
+provider.
 
 ## Review checklist
 
