@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Updating & Uninstalling"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/updating"
-source_hash: "1bd4f451d2ea92d8743b3ffad780dd62abbc66321ea174f1d4463cf2325552f4"
+source_hash: "acc0793f204f258704710b91e22b3f98fa342bc0732bab284f00500faa57fa9b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/updating.md"
@@ -271,6 +271,10 @@ hermes uninstall
 ```
 
 The uninstaller gives you the option to keep your configuration files (`~/.hermes/`) for a future reinstall.
+
+:::tip Moving to a new machine rather than leaving?
+Take your setup with you before removing anything: `hermes backup` captures the entire `~/.hermes` directory including credentials, while `hermes profile export` packs a single profile with credentials excluded by design (so an export alone is not a full backup). See [`hermes backup` vs `hermes profile export`](/reference/faq#hermes-backup-vs-hermes-profile-export).
+:::
 
 ### Manual Uninstall
 

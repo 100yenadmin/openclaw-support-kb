@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "6467f16d86a6c289e168c728fa36a0b45ef319bc89eafe5fe8da055702f7e4be"
+source_hash: "766564ed09979d33bd4e8937847679deb201683b9b6d30ba8b615027dd220cd4"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -126,15 +126,15 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/logs.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
-- https://docs.composio.dev/reference/api-reference/organization-management.md
-- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/organization.md
-- https://docs.composio.dev/reference/api-reference/tool-router.md
+- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md
 - https://docs.composio.dev/reference/api-reference/triggers.md
-- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/api-reference/organization-management.md
+- https://docs.composio.dev/reference/api-reference/tool-router.md
 - https://docs.composio.dev/reference/api-reference/webhook-events.md
+- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
 
 ## API Reference (v3.0, legacy — supported, not for new code)
@@ -147,8 +147,8 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/organization-management.md
+- https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md
 - https://docs.composio.dev/reference/v3/api-reference/tools.md

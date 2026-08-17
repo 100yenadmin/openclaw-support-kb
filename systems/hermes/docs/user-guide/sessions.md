@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Sessions"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/sessions"
-source_hash: "4774d1f782a64694755fe3c551a71b714dcb76ccf9cef760478fc1e3f7c68474"
+source_hash: "04edb58ad6ea7864e9e50bbf61631a133609151e6a5dd4b48249311fcf37fbb4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/sessions.md"
@@ -474,6 +474,28 @@ hermes sessions rename 20250305_091523_a1b2c3d4 debugging auth flow
 ```
 
 If the title is already in use by another session, an error is shown.
+
+### Pin a Session
+
+Pinning sets a durable "keep" flag: pinned sessions are exempt from the
+`sessions.auto_archive` stale sweep and always appear in listings. It is the
+same flag the Desktop sidebar's Pinned section uses — pin from either surface
+and both see it.
+
+```bash
+# Pin one or more sessions (unique ID prefixes work)
+hermes sessions pin 20250305_091523_a1b2c3d4
+hermes sessions pin 20250305 20250306
+
+# Remove the pin
+hermes sessions unpin 20250305_091523_a1b2c3d4
+
+# List pinned sessions
+hermes sessions pinned
+
+# Machine-readable output, e.g. for a nightly backup of your pin set
+hermes sessions pinned --json > pinned-sessions.json
+```
 
 ### Prune Old Sessions
 

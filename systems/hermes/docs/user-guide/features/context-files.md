@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Files"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files"
-source_hash: "bc9539916e43895e4717e44f8ec9bbffe6274bcc89f2b3dd2eb06d7886820bcb"
+source_hash: "30684d02459101880baeaa3f4746739652d9d0e3cee1ae09c488673c42838fc8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/context-files.md"
@@ -26,6 +26,7 @@ Hermes Agent automatically discovers and loads context files that shape how it b
 | File | Purpose | Discovery |
 |------|---------|-----------|
 | **.hermes.md** / **HERMES.md** | Project instructions (highest priority) | Walks to git root |
+| **AGENTS.override.md** | Personal, per-directory override of AGENTS.md (typically gitignored) | CWD at startup + subdirectories progressively |
 | **AGENTS.md** | Project instructions, conventions, architecture | CWD at startup + subdirectories progressively |
 | **CLAUDE.md** | Claude Code context files (also detected) | CWD at startup + subdirectories progressively |
 | **SOUL.md** | Global personality and tone customization for this Hermes instance | `HERMES_HOME/SOUL.md` only |
@@ -33,7 +34,9 @@ Hermes Agent automatically discovers and loads context files that shape how it b
 | **.cursor/rules/*.mdc** | Cursor IDE rule modules | CWD only |
 
 :::info Priority system
-Only **one** project context type is loaded per session (first match wins): `.hermes.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`. **SOUL.md** is always loaded independently as the agent identity (slot #1).
+Only **one** project context type is loaded per session (first match wins): `.hermes.md` → `AGENTS.override.md` → `AGENTS.md` → `CLAUDE.md` → `.cursorrules`. **SOUL.md** is always loaded independently as the agent identity (slot #1).
+
+If an `AGENTS.override.md` exists next to an `AGENTS.md`, the override is loaded **instead of** the committed file — keep a personal (usually gitignored) `AGENTS.override.md` when you want different instructions than the ones checked into the repo, without editing the tracked `AGENTS.md`.
 :::
 
 ## AGENTS.md

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins"
-source_hash: "a57fe08fe895e6bc7a09672b5933b169e5f3bc8ac24df9d4a7fbc255664927e3"
+source_hash: "a58eeb01ca85607c91c70f788a3aa3e7cda49da991bba2a96bc4b80ecdf7516f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/plugins.md"
@@ -598,6 +598,36 @@ listed as warning comments in the emitted YAML, not as installable entries.
 The `skills:` list is parsed and displayed at install time but not yet
 auto-installed — install those manually for now (`hermes skills`). Wiring
 skill-hub ids into pack install is a documented follow-up seam.
+
+### Install-time security scanning
+
+Every `hermes plugins install` and `hermes plugins update` runs a static
+security scan over the plugin tree before it is activated (inspired by
+Claude Cowork's skill & plugin security scanning). The scanner reuses the
+same threat-pattern engine as the [Skills Hub guard](/user-guide/features/skills)
+— exfiltration of credential stores, reverse shells, destructive commands,
+persistence mechanisms, obfuscated execution, and prompt injection in
+documentation files — with plugin-aware exemptions: a provider plugin
+reading its **own** API key from the environment (the documented
+`requires_env` pattern) is not flagged.
+
+Three verdicts, matching Cowork's pass/warn/fail:
+
+| Verdict | Behavior |
+|---|---|
+| **safe** | Installs normally, no extra output |
+| **caution** | Findings are shown; you confirm `Install anyway? [y/N]` (or pass `--force`) |
+| **dangerous** | Blocked. `--force` does **not** override |
+
+On `hermes plugins update`, a dangerous verdict on the updated tree
+disables the plugin until you review the findings and re-enable it.
+
+Scanning is on by default; disable it in `config.yaml`:
+
+```yaml
+plugins:
+  scan_on_install: false
+```
 
 ### Interactive UI
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Git Worktrees"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/git-worktrees"
-source_hash: "9284033c78286c1928b3a646e1a44abfd6f7dda13f9d378c78b71b07ba0ae882"
+source_hash: "fc9ad4da814326920052c991543e9236c2140a5ae3e2b83fbc6115e30be97f1d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/git-worktrees.md"
@@ -48,6 +48,25 @@ With worktrees, each agent gets:
 See also: [Checkpoints and /rollback](./checkpoints-and-rollback.md).
 
 ## Quick Start: Creating a Worktree
+
+### From inside a session: `/worktree new`
+
+The fastest path (inspired by Copilot CLI's `/worktree new`): from an
+interactive CLI session, run
+
+```
+/worktree new my-experiment
+```
+
+Hermes creates `.worktrees/my-experiment/` inside the repo (branch
+`hermes/my-experiment`, based on the freshly-fetched remote tip unless
+`worktree_sync: false`), and retargets the session's terminal and file tools
+into it — no restart needed. Omit the name to get a random `hermes-<id>`
+tree. `/worktree` alone shows the active tree; `/worktree list` lists all of
+them. On exit the tree is kept only if it has unpushed commits, exactly like
+`hermes -w`.
+
+### Manually with git
 
 From your main repository (containing `.git/`), create a new worktree for a feature branch:
 

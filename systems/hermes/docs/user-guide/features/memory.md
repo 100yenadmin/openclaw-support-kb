@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Persistent Memory"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory"
-source_hash: "ec5d665dcf93619871d5d981a3c359a1cf750a2009e3b7c4b53569530e72addf"
+source_hash: "e5f54fc0c3b7cc5c094e7701c8f479efaef747c1c7d9f02d25146a3444dbe03b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory.md"
@@ -329,6 +329,24 @@ identical and skill capture near-identical to the main-model review.
 
 Leave it at `auto` (or set it to your main model) and nothing changes — the
 review keeps running on the main model with the full warm-cache replay.
+
+### Disabling automatic reviews (`enabled`)
+
+The review fork can burn a meaningful share of total tokens on busy hosts.
+Operators can disable it without zeroing nudge intervals:
+
+```yaml
+auxiliary:
+  background_review:
+    enabled: true              # false = skip automatic post-turn forks
+```
+
+With `enabled: false`, automatic post-turn forks do not spawn; manual
+`/refine` still works.
+
+Fork usage is persisted in `session_model_usage` with `task='background_review'`
+and a completion line is written to `agent.log`
+(`Background review complete: thread=bg-review calls=… in=… out=… result=…`).
 
 ## Controlling skill writes (`skills.write_approval`)
 

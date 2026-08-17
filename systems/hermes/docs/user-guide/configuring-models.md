@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "user-guide/configuring-models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "4fc935b2eea34244c970988bc130889c25dac2ee21256cf405d7e8b6c437707b"
+source_hash: "82dd57befc8b6efb3ab949f7973dabddaf804d190e768387943e8eeaf9f92299"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -303,12 +303,19 @@ model_aliases:
     provider: x-ai
 ```
 
-**Short string form (`model.aliases.<name>: provider/model`)** — convenient from the shell because `hermes config set` only writes scalar values, but it can't carry a custom `base_url`:
+**Short string form (`model.aliases.<name>: provider/model`)** — convenient from the shell because `hermes config set` writes scalars and now also parses inline list/mapping literals, though this short alias form still can't carry a custom `base_url`:
 
 ```bash
 hermes config set model.aliases.fav anthropic/claude-opus-4.6
 hermes config set model.aliases.grok x-ai/grok-4
 ```
+
+> `hermes config set` also accepts inline **list/mapping literals** (JSON/YAML flow style). Quote them so your shell passes them through intact:
+>
+> ```bash
+> hermes config set platform_toolsets.line '["clarify", "file", "web"]'
+> hermes config set display.tool_progress_overrides '{"terminal": "off"}'
+> ```
 
 Both paths feed the same loader (`hermes_cli/model_switch.py`). Entries declared in `model_aliases:` take precedence over `model.aliases:` entries with the same name.
 
