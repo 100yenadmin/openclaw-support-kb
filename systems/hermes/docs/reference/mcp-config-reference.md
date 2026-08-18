@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "MCP Config Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference"
-source_hash: "fa67c6a55f9a95817dba3974bc467dad5b3ecab2e20b832ee87ff06deb697476"
+source_hash: "b72ce83f2ef762810e8a3be60ced8c36f87e1e3630bac06bda4904b05235bd6c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/mcp-config-reference.md"
@@ -69,6 +69,7 @@ mcp_servers:
 | `enabled` | bool | both | Skip the server entirely when false |
 | `timeout` | number | both | Tool call timeout in seconds (default: `300`) |
 | `connect_timeout` | number | both | Initial connection timeout in seconds (default: `60`) |
+| `protocol` | string | both | Protocol-era negotiation: `auto` (default — legacy `initialize` handshake first, falling back to the 2026-07-28 `server/discover` stateless probe when the server rejects the handshake as modern-only), `stateless` (probe `server/discover` first; one legacy retry), or `legacy` (handshake only, no fallback) |
 | `supports_parallel_tool_calls` | bool | both | Allow tools from this server to run concurrently |
 | `skip_preflight` | bool | HTTP | Bypass the fail-fast content-type probe for valid Streamable HTTP endpoints whose HEAD/GET answers a non-MCP content type (default: `false`) |
 | `transport` | string | HTTP | Set to `sse` to use the SSE transport instead of Streamable HTTP |

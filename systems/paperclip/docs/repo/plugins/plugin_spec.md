@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Plugin System Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/PLUGIN_SPEC.md"
-source_hash: "4d5492119880c3169c62a3bf1c8c52a45b8da45c7b1595f2e2448d9fed1876af"
+source_hash: "f483a78b0bcd24e488746c564b9e17dccf10e2df2ac9bf32bc7d076d659990a7"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/plugin_spec.md"
@@ -413,6 +413,11 @@ Rules:
   - `projects` → `projects.managed`
   - `routines` → `routines.managed`
   - `skills` → `skills.managed`
+- an `environmentDrivers` entry with `kind: "sandbox_provider"` declares sandbox
+  capabilities through `sandboxCapabilities`. See the
+  [sandbox provider capability contract](./SANDBOX_PROVIDER_CAPABILITIES.md) for
+  the supported keys, the worker-method prerequisites, and the narrowing and
+  failure rules.
 
 ## 11. Agent Tools
 

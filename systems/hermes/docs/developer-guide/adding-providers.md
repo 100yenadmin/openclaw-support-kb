@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Adding Providers"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-providers"
-source_hash: "5a4495f519548d9a8bee7c40f71e9f8c434a90b0135919706119076461dc4fc0"
+source_hash: "5cd5f820596c3762cef0f21ef2fe15e0090ff3eca6d8918c947a88cfcf11bb1d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-providers.md"
@@ -47,7 +47,7 @@ A built-in provider has to line up across a few layers:
 The important abstraction is `api_mode`.
 
 - Most providers use `chat_completions`.
-- Codex uses `codex_responses`.
+- Codex and Meta Model API (`api.meta.ai` — Muse Spark) use `codex_responses` (auto-sends `prompt_cache_retention: 24h` for prompt caching; `api.meta.ai` achieves 93–99% cache hits only on `/v1/responses`).
 - Anthropic uses `anthropic_messages`.
 - A new non-OpenAI protocol usually means adding a new adapter and a new `api_mode` branch.
 
@@ -78,7 +78,7 @@ Use this when the provider does not behave like OpenAI chat completions.
 
 Examples in-tree today:
 
-- `codex_responses`
+- `codex_responses` (OpenAI Codex, xAI Grok, and Meta Muse Spark via `api.meta.ai` — the latter auto-sends `prompt_cache_retention: 24h`)
 - `anthropic_messages`
 
 This path includes everything from Path A plus:

@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "6d258505f306da54b39dd161c416fdcce0befac1a50e8d0dc90b19a870b05376"
+source_hash: "fd1b31f056b6744417e09f1f48726600750f8998ed2f1df86baf10b1eec0b89e"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -341,6 +341,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [brevo](https://clawskills.sh/skills/yujesyoga-brevo) - Brevo (formerly Sendinblue) email marketing API for managing contacts, lists,.
 - [socialecho-social-media-management-agent](https://clawskills.sh/skills/socialecho-net-socialecho-social-media-management-agent) - SocialEcho API team account article report queries.
 - [postiz](https://clawskills.sh/skills/nevo-david-postiz) - Schedule social media posts and threads across 28+ platforms.
+- [lumail](https://clawhub.ai/melvynx/lumail) - Manage email marketing campaigns via CLI.
 - [sequenzy-email-marketing](https://clawhub.ai/polnikale/sequenzy-email-marketing) - Authorized email automation for agents.
 - [tempguru-event-staffing-ordering](https://clawhub.ai/kissmyabs32/tempguru-event-staffing-ordering) - Order W-2 temporary event staff across 345 US/Canada markets.
 - [posteahora](https://clawhub.ai/sashadiz/posteahora) - Schedule and publish social posts across every major network.

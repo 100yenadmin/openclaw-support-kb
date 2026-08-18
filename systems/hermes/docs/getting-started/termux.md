@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Android / Termux"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/termux"
-source_hash: "587d01f53c86dd5bfe0174f6a08ef3930e0696d36f4b1fcdd1964d8e3afc0dda"
+source_hash: "26f55cb6821fab2f186cbcefb228ba39d15a6a71f3b1754bf5fb891915bd2acc"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/termux.md"
@@ -56,6 +56,38 @@ A few features still need desktop/server-style dependencies that are not publish
 - Android may still suspend Termux background jobs, so gateway persistence is best-effort rather than a normal managed service
 
 That does not stop Hermes from working well as a phone-native CLI agent — it just means the recommended mobile install is intentionally narrower than the desktop/server install.
+
+---
+
+## Community-maintained native `pkg` option
+
+:::caution Contributor-operated distribution
+This APT repository is **community-maintained by `@adybag14-cyber` and is not an official NousResearch distribution**. NousResearch does not build, sign, host, or audit these packages. Enabling the repository means trusting the contributor-operated repository and its signing key. Termux itself remains a Tier 2 / best-effort platform.
+:::
+
+For users who prefer a native package-manager install rather than building Python/Rust dependencies on the phone, a community-maintained APT repository is available. The repository bootstrap and packaging sources are published in [`adybag14-cyber/termux-python`](https://github.com/adybag14-cyber/termux-python), with the Hermes package build in [`adybag14-cyber/termux-hermes`](https://github.com/adybag14-cyber/termux-hermes).
+
+Install the repository key/source and Hermes with:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/adybag14-cyber/termux-python/main/scripts/setup_apt_repo.sh | bash
+pkg install hermes-agent
+```
+
+The repository signing-key fingerprint currently documented by the community distribution is:
+
+```text
+EAD24A2124EFA7393A78B7B14699F966313F7A6B
+```
+
+APT-managed Hermes installs are marked with install method `apt`. Hermes therefore does not run its Git self-updater against package-owned files; use the package manager instead:
+
+```bash
+pkg update
+pkg upgrade hermes-agent
+```
+
+Packaging/repository/signing problems for this option should be reported to the community packaging repositories above. Hermes runtime bugs can still be reported here, keeping in mind that Android/Termux support is best-effort.
 
 ---
 
