@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "17e754a5d866be3dd599c0a977cb4bf5c68cc08ad4617800986cb7e38de39b52"
+source_hash: "db416a696f662af813a0357ff597a388c7eb6ea8f35dcc9b374b679407443f4d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -68,17 +68,14 @@ Note
 
 
 
-Run onboarding
+Complete onboarding
 
-    ```bash
-    openclaw onboard --install-daemon
-    ```
-
-    The wizard walks you through choosing a model provider, setting an API key,
-    and configuring the Gateway. QuickStart is usually only a few minutes, but
-    provider sign-in, channel pairing, daemon install, network downloads, skills,
-    or optional plugins can make full onboarding take longer. Skip optional
-    steps and return later with `openclaw configure`.
+    The installer starts the onboarding wizard automatically. Follow it to choose
+    a model provider, set an API key, and configure the Gateway. QuickStart is
+    usually only a few minutes, but provider sign-in, channel pairing, daemon
+    install, network downloads, skills, or optional plugins can make full
+    onboarding take longer. Skip optional steps and return later with
+    `openclaw configure`.
 
     See [Onboarding (CLI)](/start/wizard) for the full reference.
 

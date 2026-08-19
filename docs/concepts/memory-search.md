@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory search"
 source: "https://docs.openclaw.ai/concepts/memory-search"
-source_hash: "32bd39bd6dfa5b2bb48e21e2a30a60ad32d66cbbe318ccdef564f806487a0f91"
+source_hash: "17444879349d44079854aa29ae970dfbca137aaea5f2c04eee539b630450cb02"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-search.md"
@@ -189,12 +189,12 @@ conversations. This is opt-in: set `experimental.sessionMemory: true` and add
 `"sessions"` to `sources` (default `sources` is `["memory"]`).
 
 Session hits obey `tools.sessions.visibility`: the default `"tree"` exposes the
-current session, sessions it spawned, and same-agent group sessions watched
-through ambient group awareness. With `session.dmScope: "main"`, a multi-user
-DM setup shares that main session, so users routed there can recall content
-from its watched groups. Use a per-peer `dmScope` for DM isolation, or set
-visibility to `"self"` to opt out of ambient watched-session reads. Other
-unrelated same-agent sessions still require `"agent"` visibility.
+current session and sessions it spawned. When the caller is the canonical main
+session, `tree` covers every same-agent session. With `session.dmScope: "main"`,
+a multi-user DM setup shares that main session and its recall scope. Use a
+per-peer `dmScope` for DM isolation, or set visibility to `"self"` for strict
+current-session recall. Non-main callers still need `"agent"` visibility for
+unrelated same-agent sessions.
 
 ## Troubleshooting
 

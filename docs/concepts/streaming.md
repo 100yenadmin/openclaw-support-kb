@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Streaming and chunking"
 source: "https://docs.openclaw.ai/concepts/streaming"
-source_hash: "59b0367e2391e7b2c7cc6dc1bcb98bce6f06930f6f56f946264dc13eb61f69da"
+source_hash: "ebad2475a00d3736183436bb2207ebd63b17d90044baf9a1ddbd80a253aae5f9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/streaming.md"
@@ -263,11 +263,9 @@ Slack-only:
 - `block` mode uses draft chunking (`draftChunk`).
 - Preview streaming is skipped when Discord block streaming is explicitly
   enabled.
-- `progress` mode appends a small `-#` activity receipt (thought/tool-call
-  counts and elapsed time) to the final answer and deletes the status draft
-  once that answer is delivered, so busy channels keep no orphaned tool log
-  above the reply. Error finals keep the draft as the record of the failed
-  turn.
+- `progress` mode deletes the status draft once the final answer is delivered,
+  so busy channels keep no orphaned tool log above the reply. Error finals keep
+  the draft as the record of the failed turn.
 - Final media, error, and explicit-reply payloads cancel pending previews
   without flushing a new draft, then use normal delivery.
 

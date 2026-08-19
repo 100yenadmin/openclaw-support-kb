@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "33244bcce67ee6d37f054d18fa8abcd96e72266119491abdcac9f77984270760"
+source_hash: "db7e55d4d73f7ea14bd8571df04c012afedf66374026018e7c0ecac48e8dd2e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -92,28 +92,30 @@ Tabs
 
 npm
 
+    On npm 12 or npm 11.16+:
+
     ```bash
-    npm install -g openclaw@latest
+    npm install -g openclaw@latest --allow-scripts=openclaw
     openclaw onboard --install-daemon
     ```
+
+    On npm 11.15 and earlier, use the same command without
+    `--allow-scripts=openclaw`.
 
 
 Note
 
-    npm 12 blocks package lifecycle scripts by default, so the command above
-    skips OpenClaw's `preinstall` and `postinstall` steps — npm reports them
-    as `blocked because they are not covered by allowScripts`. Allow them
-    explicitly:
+    npm 12 blocks unapproved package lifecycle scripts by default. The
+    `--allow-scripts=openclaw` option explicitly allows OpenClaw's `preinstall`
+    and `postinstall` steps; without it, npm reports them as `blocked because
+    they are not covered by allowScripts`.
 
-    ```bash
-    npm install -g openclaw@latest --allow-scripts openclaw
-    ```
-
-    npm 11.16.x only warns that the scripts are `not yet covered by
-    allowScripts` and still runs them. If you want to clear that warning, be
-    aware that the `npm approve-scripts openclaw` command it suggests does not
-    work for a global install — it fails with `ENOMATCH  No installed packages
-    match: openclaw`. npm 11.12 and earlier have no such policy.
+    npm 11.16 accepts the option but otherwise only warns that the scripts are
+    `not yet covered by allowScripts` and still runs them. npm 11.15 and earlier
+    have neither the policy nor the option, so their command must be unflagged.
+    The `npm approve-scripts openclaw`
+    command suggested by npm 11.16 does not work for a global install — it fails
+    with `ENOMATCH  No installed packages match: openclaw`.
 
 
 
@@ -144,14 +146,16 @@ Note
 bun
 
     ```bash
-    bun add -g openclaw@latest
+    bun add -g --trust openclaw@latest
     openclaw onboard --install-daemon
     ```
 
 
 Note
 
-    Bun can install the global package, but the resulting `openclaw` executable requires a supported Node runtime because OpenClaw state uses `node:sqlite`.
+    `--trust` allows OpenClaw's package lifecycle scripts for this install. Bun
+    can install the global package, but the resulting `openclaw` executable
+    requires a supported Node runtime because OpenClaw state uses `node:sqlite`.
 
 
 

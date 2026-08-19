@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent bindings"
 source: "https://docs.openclaw.ai/concepts/agent-bindings"
-source_hash: "fffec24b5f912e641d16fa296d379683828fe413775cf24354c792dc59392eb8"
+source_hash: "8e180d8f073bbbc1129d508fafe8a751ab11756074674482d6f0314c04aa50f1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-bindings.md"
@@ -100,6 +100,7 @@ Every binding requires `agentId` and `match.channel`. The optional route-match f
 - `guildId` and `teamId`: channel-specific group-space constraints
 - `roles`: Discord role IDs, evaluated together with the guild constraint
 - `session.dmScope`: an optional session-scoping override for matched direct messages
+- `session.groupScope`: an optional `main` or `per-group` override for matched groups and channels
 
 Precedence is by specificity: concrete conversation and group-space matches win over account and channel fallbacks. Within the same tier, the first binding in config order wins — put narrow rules before broad ones when they share a tier.
 

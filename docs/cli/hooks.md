@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hooks"
 source: "https://docs.openclaw.ai/cli/hooks"
-source_hash: "0a75acc6c0d15ae08a517381c0224de005fd9c8d5f0ac17c44ce6758703c0fd3"
+source_hash: "48b45bac492e1ce73a5d60896cf4fda26a4f46d02f6daa4f208958a79e2d18e2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/hooks.md"
@@ -64,10 +64,14 @@ Prints a ready/not-ready count summary; with hooks not ready, lists each with it
 ## Enable a hook
 
 ```bash
-openclaw hooks enable <name>
+openclaw hooks enable <name> [--agent <id>]
 ```
 
 Adds/updates `hooks.internal.entries.<name>.enabled = true` in config and also flips the `hooks.internal.enabled` master switch on (the gateway does not load any internal hook handler until at least one is configured). Fails if the hook does not exist, is plugin-managed, or is not eligible (missing requirements).
+
+`--agent <id>` selects the workspace used to discover the hook and is required
+when multiple agents are configured without an implicit owner. The persisted
+hook entry is global and applies wherever that hook key is discovered.
 
 Plugin-managed hooks show `plugin:<id>` in `hooks list` and cannot be enabled/disabled here; enable or disable the owning plugin instead.
 
@@ -76,7 +80,7 @@ Restart the gateway after enabling (macOS menu bar app restart, or restart your 
 ## Disable a hook
 
 ```bash
-openclaw hooks disable <name>
+openclaw hooks disable <name> [--agent <id>]
 ```
 
 Sets `hooks.internal.entries.<name>.enabled = false`. Restart the gateway afterward.

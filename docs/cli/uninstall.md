@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/cli/uninstall"
-source_hash: "6937544e3da8086459b13c9d7561b3ceefb20ac73df08b571204205aa1b468ff"
+source_hash: "467dd66f3f2f2e4297959e55a368199167bba781a2adbbade395487a7658abdf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/uninstall.md"
@@ -47,8 +47,13 @@ openclaw uninstall --dry-run
 
 ## Notes
 
+Uninstall reports each requested scope and exits nonzero if any requested cleanup fails or is blocked. A failed gateway service inspection, stop, or uninstall blocks state and workspace mutation, but independent macOS app cleanup is still attempted. After service teardown is safe, other permitted scopes continue so failures can be reported together. On non-macOS systems, `--app` reports that the scope is not applicable.
+
 - Run `openclaw backup create` first for a restorable snapshot before removing
   state or workspaces.
+- Before removing state, `--state` requires exclusive state ownership. If an
+  unmanaged or externally supervised Gateway is still running, uninstall
+  refuses and asks you to stop it first.
 - `--state` preserves configured workspace directories unless `--workspace` is
   also selected.
 

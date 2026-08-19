@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas"
 source: "https://docs.openclaw.ai/platforms/mac/canvas"
-source_hash: "d347ed06c5a00514a1b798fad744ae7397ceced03e633b3422dae0ae798ae0aa"
+source_hash: "3ceb47af8c40dc7d6d57e29c79f3484c8767531601728e384e663849f67afba4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/canvas.md"
@@ -68,6 +68,8 @@ Gateway-hosted targets under `/__openclaw__/canvas/` and
 `/__openclaw__/a2ui/` are resolved through the node session's current scoped
 Canvas URL. The app refreshes that short-lived capability before navigation;
 you do not need to construct or copy a capability URL yourself.
+
+`show_widget` can target `node_panel` to open its hosted document in this panel. These widget documents are render-only in the panel; interactive widget actions remain disabled.
 
 ## A2UI in Canvas
 

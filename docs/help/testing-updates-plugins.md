@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Testing: updates and plugins"
 source: "https://docs.openclaw.ai/help/testing-updates-plugins"
-source_hash: "ae996222a82855ba8f5f46424696ccab48581a2618433db16c8c4c97657b11bf"
+source_hash: "b5ae63411a2eb420d5a3d6246a306aa41a866a9f925c6ae05b09550ab3cfc388"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/testing-updates-plugins.md"
@@ -141,14 +141,31 @@ pnpm test:docker:published-upgrade-survivor
 OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC=openclaw@latest \
 OPENCLAW_UPGRADE_SURVIVOR_SCENARIO=bootstrap-persona \
 pnpm test:docker:published-upgrade-survivor
+
+OPENCLAW_UPGRADE_SURVIVOR_BASELINE_SPEC=openclaw@2026.7.1-2 \
+OPENCLAW_UPGRADE_SURVIVOR_SCENARIO=sqlite-volume \
+pnpm test:docker:published-upgrade-survivor
 ```
 
 Available scenarios: `base`, `acpx-openclaw-tools-bridge`, `feishu-channel`,
 `bootstrap-persona`, `channel-post-core-restore`, `plugin-deps-cleanup`,
 `configured-plugin-installs`, `stale-source-plugin-shadow`, `tilde-log-path`,
-and `versioned-runtime-deps`. In aggregate runs, `OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues`
-(alias `far-reaching`) expands to all scenarios, including the
-configured-plugin install migration.
+`meeting-transcripts-sqlite`, `versioned-runtime-deps`, `cron-scheduled-authority`,
+and `sqlite-volume`. In aggregate runs,
+`OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=reported-issues` expands the release-soak
+fixtures but excludes the expensive `sqlite-volume` scenario. Use
+`OPENCLAW_UPGRADE_SURVIVOR_SCENARIOS=far-reaching` to include it.
+
+The `sqlite-volume` scenario combines configured Matrix, Discord, and Telegram
+plugin/channel state with 4,800 sessions, 23,890 transcript events, and 2,200
+cron crawl jobs by default. It verifies exact JSONL-to-SQLite and cron migration,
+legacy archival, database integrity, a second idempotent Doctor run, and Gateway
+startup. Scale it with `OPENCLAW_UPGRADE_SURVIVOR_VOLUME_SESSIONS`,
+`OPENCLAW_UPGRADE_SURVIVOR_VOLUME_EVENTS_PER_SESSION`, and
+`OPENCLAW_UPGRADE_SURVIVOR_VOLUME_CRON_JOBS`. The default Doctor budgets are 120
+seconds for migration and 60 seconds for the idempotent pass; override them with
+`OPENCLAW_UPGRADE_SURVIVOR_VOLUME_MIGRATION_BUDGET_SECONDS` and
+`OPENCLAW_UPGRADE_SURVIVOR_VOLUME_IDEMPOTENCE_BUDGET_SECONDS` on slower hosts.
 
 Full update migration is intentionally separate from Full Release CI. Use the
 manual `Update Migration` workflow when the release question is "can every

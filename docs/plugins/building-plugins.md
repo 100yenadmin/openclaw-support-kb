@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building plugins"
 source: "https://docs.openclaw.ai/plugins/building-plugins"
-source_hash: "af01b2411c60e717fe7dbaef9e6de59609d63c82ad8199598a31b804ee5efa8d"
+source_hash: "dad3b31304da3a3f89e165fe0e52e884a78b353bb9c51ac77a61b6043659c784"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/building-plugins.md"
@@ -328,6 +328,11 @@ Optional tools control whether a tool is exposed to the model. Use
 [plugin permission requests](/plugins/plugin-permission-requests) when a tool
 or hook should ask for approval after the model selects it and before the
 action runs.
+
+`toolMetadata.<tool>.profiles` adds a plugin tool to named built-in profile
+allowlists. For example, `"profiles": ["coding", "messaging"]` exposes it in
+those profiles without adding a core catalog entry. Explicit operator
+allowlists and deny rules remain authoritative.
 
 Use optional tools for side effects, unusual binaries, or capabilities that
 should not be exposed by default. Tool names must not conflict with core tool

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security"
 source: "https://docs.openclaw.ai/cli/security"
-source_hash: "1924c46dc7868905c3d204b1b941c0b340b8402e6dde9cf084407b3e67ca4ed1"
+source_hash: "71ed172fd09a0d405aeddc4430c9124ee9062267922b4461340e1a6c88863f6e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/security.md"
@@ -38,6 +38,7 @@ If Gateway password auth is supplied only at startup, pass the same value with `
 **DM/trust model**
 
 - Warns when multiple DM senders share the main session and recommends secure DM mode: `session.dmScope="per-channel-peer"` (or `per-account-channel-peer` for multi-account channels) for shared inboxes. This is cooperative/shared-inbox hardening, not isolation for mutually untrusted operators; split trust boundaries with separate gateways (or separate OS users/hosts) for that.
+- Emits `security.trust_model.group_scope_main` when global `session.groupScope="main"` or a binding override merges group/channel rooms into the main session. Every member of each matched room shares that context, so reserve this for trusted rooms (see [Groups](/channels/groups#session-keys)).
 - Emits `security.trust_model.multi_user_heuristic` when config suggests likely shared-user ingress (for example open DM/group policy, configured group targets, or wildcard sender rules) — OpenClaw's default trust model is personal-assistant (one operator), not hostile multi-tenant isolation. For intentional shared-user setups: sandbox all sessions, keep filesystem access workspace-scoped, and keep personal/private identities or credentials off that runtime.
 - Warns when small models (`<=300B` parameters) are used without sandboxing and with web/browser tools enabled.
 

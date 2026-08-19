@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "208b220d35122301043cdded66eb31ec8b9734783d73d8ebb772376d89655788"
+source_hash: "1dc9bf7d4cd408708442568883e6ec1f8eb02f682ee15439d909d50f1ed887bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -61,11 +61,13 @@ does not set this flag.
 Harnesses with an independently managed native surface can also declare
 `conversationToolPolicySafeDenyTools` using canonical OpenClaw tool names. Core
 preserves the native surface only when every expanded deny is a known core tool
-in that audited safe list. Finite allowlists, undeclared or unknown tool names,
-wildcards, and groups containing any undeclared name remain native-surface
-restrictions. Omit the list to retain the conservative behavior where every
-explicit restriction isolates the native surface. Because omissions fail
-closed, new tools cannot silently relax the policy boundary.
+in that audited safe list and passes the matching names in
+`params.pluginHarnessToolPolicySafeDeniedTools`. The harness must disable any
+native equivalents for those names. Finite allowlists, undeclared or unknown
+tool names, wildcards, and groups containing any undeclared name remain
+native-surface restrictions. Omit the list to retain the conservative behavior
+where every explicit restriction isolates the native surface. Because omissions
+fail closed, new tools cannot silently relax the policy boundary.
 
 Omit the declaration when any native capability can bypass those layers.
 OpenClaw then visibly rejects explicitly restricted turns before invoking the
@@ -384,6 +386,14 @@ bounded action fact while keeping identity and policy authority closure-bound. T
 binds the host-resolved run, sandbox, requester, route, and approval identity;
 plugins must not reconstruct those fields or retain the capability after the
 attempt returns. Calls made after attempt settlement fail closed.
+
+When trajectory capture has a valid host-owned session target,
+`params.hostCapabilities.trajectory` provides closure-bound `recordEvent(...)`
+and `flush()` operations. The host adds session attribution, bounds and redacts
+event data, and persists it through the canonical trajectory store. Treat the
+capability as optional, send only structured non-secret facts, and await
+`flush()` before the attempt settles; do not infer storage paths or create a
+plugin-side fallback when the capability is absent.
 
 New harnesses should implement `AgentHarnessV2` and type prepared attempts as
 `AgentHarnessAttemptParamsV2`, `EmbeddedRunAttemptParamsV2`, and

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Full release validation"
 source: "https://docs.openclaw.ai/reference/full-release-validation"
-source_hash: "597e1b75b93947a4fcc882583dd9443b62543377b262aead2187a875955044c3"
+source_hash: "4b912f71fcf206b82b4c8ab9091441f8960810e9fd66d36f804c4697e95873ec"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/full-release-validation.md"
@@ -284,7 +284,7 @@ Valid filter ids are defined in the reusable live/E2E workflow, including
 `docker-live-models`, `live-gateway-docker`,
 `live-gateway-anthropic-docker`, `live-gateway-google-docker`,
 `live-gateway-minimax-docker`, `live-gateway-advisory-docker`,
-`live-cli-backend-docker`, `live-acp-bind-docker`, and
+`live-cli-backend-docker`, `live-cli-cache-docker`, `live-acp-bind-docker`, and
 `live-codex-harness-docker`.
 
 For a focused QA transport rerun, set `rerun_group=qa-live` and use the

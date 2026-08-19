@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bot Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/bot-mode"
-source_hash: "0b6a99f38f3dcf2891c839e75ecfa0eaef4f1cdd796fd2fa514e1d60ced82818"
+source_hash: "2fae1baea9760d405e0319cef573757fb3969aef8666fe59923adeadb21b75b7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/bot-mode.md"
@@ -63,7 +63,7 @@ With a single connection (the common case) the picker is hidden and the Bot is c
 Remote-creation notes:
 
 - **Clone source** is a profile of the *target* machine (its `default`) — a remote box doesn't have your local profiles to clone.
-- The live Capabilities tab binds to your active gateway, so a remote-target draft uses the staged Skills/Tools/MCP checklists instead; both read the target machine's catalog.
+- The live Capabilities tab pins to the target machine's backend, so skills, tools, and MCP servers you configure during creation land on the machine the Bot will live on. (Older desktop builds fall back to staged Skills/Tools/MCP checklists for remote targets; both read the target machine's catalog.)
 - Cancelling the dialog discards the draft profile on whichever machine it was created.
 
 **Edit Profile** (right-click a Bot) reopens the same surface on the live profile any time: avatar, title, description, model pin, skills, toolsets, MCP servers, and the full SOUL.md.
@@ -74,7 +74,8 @@ Remote-creation notes:
 
 Every Bot gets a face:
 
-- **Geometric faces** — 7 shapes × 10 colors, with blinking eyes that scan while the Bot works.
+- **Blob faces** (default) — a deterministic soft-body face drawn from the Bot's name: same name, same face, forever. While you type a name in New Agent the face follows it live; hit **Randomize** to re-roll, **Lock face** to keep the one you like even if the name changes, or pin one of the six silhouettes (round, organic, boxy, nub, cloud, sun) while everything else still comes from the name.
+- **Geometric faces** — the classic 7 shapes × 10 colors, with blinking eyes that scan while the Bot works.
 - **An uploaded image** — any picture you like.
 - **An AI-generated portrait** — when an image backend is configured, generated in place (this rides the standard `image.generate` RPC and works over both local and remote gateways).
 - **A pixel pet** — a companion from the [petdex gallery](./features/pets.md) that bounces beside the avatar while the Bot is busy. Run `hermes pets` in a terminal to explore the gallery.
@@ -108,7 +109,7 @@ Bots message each other with attribution, and you can hand work off from any cha
 
 - **@mentions** — type `@researcher have a look at this` in any chat and the active Bot hands the message off, waits for the reply, and reports back. Mention names are validated against the live roster, so an email address or an unknown `@` passes through untouched.
 - **@mentions across machines** — mentioning a Bot that lives on another registered connection (use its `@name-device` handle when names collide) delivers over the Connections registry in the background: the active Bot stays on this device, the desktop routes the message to the recipient's machine, and the reply is relayed back attributed to that agent. Your window's gateway never switches.
-- **Direct messages** — a Bot reaches a teammate's Bot Chat through the standard CLI: `hermes -p <bot> chat --in ~ -c "Bot Chat" --create-if-missing -Q -q "Message from 🤖 <sender> (@<sender>): ..."`. The receiving Bot sees the message the next time it runs and knows how to reply, because the messaging protocol is part of its Bot Chat system prompt.
+- **Direct messages** — a Bot reaches a teammate's Bot Chat through the standard CLI: it writes the message to a temp file (opening with the `Message from 🤖 <sender> (@<sender>):` prefix), then runs `hermes -p <bot> chat --in ~ -c "Bot Chat" --create-if-missing -Q --query-file <file>`. The file transport means nothing is shell-interpreted — quotes, `$(...)`, and backticks in the message arrive verbatim. The receiving Bot sees the message the next time it runs and knows how to reply, because the messaging protocol is part of its Bot Chat system prompt.
 
 The backend teaches each Bot's canonical Bot Chat session the messaging protocol automatically at prompt-build time — including when a teammate opens it headlessly from the CLI. Only the canonical Bot Chat gets the protocol section; your regular sessions and your SOUL.md stay untouched. This is controlled by `agent.bot_mode_protocol` in `config.yaml` (default: on):
 
@@ -128,8 +129,8 @@ Bots on one machine can message Bots on **another machine's gateway** without an
 ```bash
 hermes peer add spark --url http://spark.lan:8377 --key <API_SERVER_KEY>
 hermes peer list
-hermes peer dm spark "Message from 🤖 dixie (@dixie): disk status?"
-hermes peer dm spark/researcher "..."   # named profile on a multiplexed peer
+hermes peer dm spark < /tmp/dm.txt        # message body from a file (nothing shell-interpreted)
+hermes peer dm spark/researcher < /tmp/dm.txt   # named profile on a multiplexed peer
 ```
 
 `hermes peer dm` delivers into the remote agent's canonical Bot Chat over the peer's existing API server, runs one agent turn there, and prints the reply on stdout — the exact cross-machine twin of the local `hermes -p <bot> chat` command.

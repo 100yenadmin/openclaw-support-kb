@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Google"
 source: "https://docs.composio.dev/docs/providers/google.md"
-source_hash: "f6c499c73e3843cd7036ba07fc688b6f74a9279eab777022332636d56acd68d7"
+source_hash: "1ab5b32aaf146e9fbbca37fe4d35c0aa5ea6707d142cd2740dd35e253f591315"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/google.md"
@@ -21,7 +21,7 @@ The Google provider formats Composio tools for [Gemini](https://ai.google.dev/) 
 
 ### gemini
 
-In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed callables, and the `google-genai` SDK's Automatic Function Calling executes tool calls inside the chat loop for you. In TypeScript, the Google provider transforms Composio tools into Gemini function declarations, and you run the loop: execute each call with `composio.provider.executeToolCall`, feed the result back, and repeat until the model replies with text.
+In Python, the Gemini provider (`composio_gemini`) wraps Composio tools as typed callables, and the `google-genai` SDK's Automatic Function Calling executes tool calls inside the chat loop for you. In TypeScript, the Google provider transforms Composio tools into Gemini function declarations, and you run the loop: execute each call with `session.execute`, feed the result back, and repeat until the model replies with text.
 
 Object arguments that declare no properties preserve arbitrary nested keys in both providers. The TypeScript provider also adds `type: "object"` to schema nodes that declare `properties` without a type, which is the shape Gemini expects for object schemas.
 
@@ -92,19 +92,16 @@ let response = await chat.sendMessage({
     message: "Send an email to john@example.com with the subject 'Hello' and body 'Hello from Composio!'",
 });
 
-// Agentic loop: keep executing tool calls until the model responds with text
+// Agentic loop: run each tool call with session.execute() until the model responds with text
 while (response.functionCalls && response.functionCalls.length > 0) {
     const parts: Part[] = [];
     for (const fc of response.functionCalls) {
-        const result = await composio.provider.executeToolCall("user_123", {
-            name: fc.name || '',
-            args: (fc.args || {}) as Record<string, unknown>,
-        });
+        const result = await session.execute(fc.name || '', (fc.args || {}) as Record<string, unknown>);
         parts.push({
             functionResponse: {
                 id: fc.id,
                 name: fc.name,
-                response: JSON.parse(result),
+                response: result.error ? { error: result.error } : result.data,
             },
         });
     }
@@ -113,6 +110,8 @@ while (response.functionCalls && response.functionCalls.length > 0) {
 
 console.log(response.text);
 ```
+> In TypeScript, execute session tools with `session.execute(toolSlug, arguments)`, as shown above. The provider's `executeToolCall` helper executes tools through the direct path, which does not carry your session — session meta-tools (`COMPOSIO_SEARCH_TOOLS`, `COMPOSIO_MANAGE_CONNECTIONS`, …) are rejected there with `"can only be called inside a tool-router session"`. Use `executeToolCall` only with tools fetched via [`tools.get`](/docs/tools-direct/executing-tools), not with `session.tools()`. Unlike the [OpenAI](/docs/providers/openai) and [Anthropic](/docs/providers/anthropic) helpers, the Google provider's `executeToolCall` does not yet accept a session. (The Python Gemini tab is unaffected: Automatic Function Calling runs provider-wrapped callables, which carry the session.)
+
 ### adk
 
 The Google ADK provider transforms Composio tools into ADK's `FunctionTool` format. Unlike Gemini function calling, ADK runs the tool loop for you: hand the tools to an `Agent`, and the `Runner` executes calls and continues until the agent produces a final response. ADK integration is Python-only.

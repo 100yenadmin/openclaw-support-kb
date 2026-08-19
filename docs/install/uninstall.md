@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Uninstall"
 source: "https://docs.openclaw.ai/install/uninstall"
-source_hash: "9c6809d2fa5a489291f67fd25698e47018191e20cce2a8a62c1e3af25c6f92cf"
+source_hash: "a5a11cc658d246ad981d076f7a005e942208c18bfe11600e8fcb749302b77451"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/uninstall.md"
@@ -19,6 +19,8 @@ Two paths:
 - **Manual service removal** if the CLI is gone but the service is still running.
 
 ## Easy path (CLI still installed)
+
+The command attempts independent requested cleanup scopes and returns a nonzero status if any scope fails or is blocked. Service teardown remains the safety gate for state and workspace deletion; if that gate fails, those data scopes are preserved while app cleanup is still attempted. Partial cleanup is reported explicitly and is never followed by an unconditional completion result.
 
 Recommended: use the built-in uninstaller:
 

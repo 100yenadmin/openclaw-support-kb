@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "144c5908bcd99461839636b3a61a6ca6e5ffb61909a7e32c648fcc7c0403689d"
+source_hash: "39bb064e5b4daf9160246bbb8f0741685d059cbfa5f52801396538fc30d5be8f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -485,7 +485,7 @@ Index session transcripts and surface them via `memory_search`:
 
 Warning
 
-Session indexing is opt-in and runs asynchronously. Results can be slightly stale. Session logs live on disk, so treat filesystem access as the trust boundary.
+Session indexing is opt-in and runs asynchronously. Results can be slightly stale. Active transcripts live in the agent's SQLite database, while retained transcript artifacts can live on disk. Treat access to both as part of the same trust boundary.
 
 Note
 
@@ -501,10 +501,11 @@ when you intentionally want both representations.
 
 Ordinary model-invoked session transcript search obeys
 [`tools.sessions.visibility`](/gateway/config-tools#tools-sessions). The default
-`tree` visibility exposes the current session, sessions it spawned, and
-same-agent group sessions watched through ambient group awareness. Other
-unrelated sessions require `agent` visibility (or `all` only when cross-agent
-recall is also required and agent-to-agent policy allows it).
+`tree` visibility exposes the current session and sessions it spawned. When
+the caller is the canonical main session, it covers every same-agent session.
+Non-main callers require `agent` visibility for unrelated same-agent sessions
+(or `all` when cross-agent recall is also required and agent-to-agent policy
+allows it).
 
 `rememberAcrossConversations` does not widen that setting. It supplies a
 separate runtime-only authorization limited to same-agent private

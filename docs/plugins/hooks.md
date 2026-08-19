@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin hooks"
 source: "https://docs.openclaw.ai/plugins/hooks"
-source_hash: "7e85fd22a639783e9be162f80705416c4292f6bd317051563283ad0a5b3e0e08"
+source_hash: "27b6022c7a1ae1bdcb07dd406fd11265e8fa92a03e397e7b1487c67e7a238687"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/hooks.md"
@@ -675,9 +675,9 @@ bodies, or provider request IDs. These hooks include stable metadata such as
 `durationMs`/`outcome`, and `upstreamRequestIdHash` when OpenClaw can derive a
 bounded provider request-id hash. When the runtime has resolved
 context-window metadata, the hook event and context also include
-`contextTokenBudget`, the effective token budget after model/config/agent
-caps, plus `contextWindowSource` and `contextWindowReferenceTokens` when a
-lower cap was applied.
+`contextTokenBudget`, the effective token budget after model configuration,
+fixed model contracts, and runtime discovery, plus `contextWindowSource` and
+`contextWindowReferenceTokens` when a lower cap was applied.
 
 `before_agent_finalize` runs only when a harness is about to accept a natural
 final assistant answer. It is not the `/stop` cancellation path and does not

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Managing multiple connected accounts"
 source: "https://docs.composio.dev/docs/authentication/managing-multiple-connected-accounts.md"
-source_hash: "9c06cbe65efc685dcf7c0aa055202bf0e71ccc7d262e610b7e212948c0ce5c11"
+source_hash: "e7683784ce6811eac6390a6457e98c4907b0a46844961f5bd2cc3faf83f7ce54"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication/managing-multiple-connected-accounts.md"
@@ -129,7 +129,7 @@ const session = await composio.create("user_123");
 const connectionRequest = await session.authorize("gmail", { alias: "work-gmail" });
 ```
 
-The direct-execution methods `connectedAccounts.initiate()` and `connectedAccounts.link()` accept the same `alias` parameter.
+The direct-execution methods `connectedAccounts.initiate()` and `connectedAccounts.link()` accept the same `alias` parameter. To create another active connection for the same user and auth config, also pass `allow_multiple=True` in Python or `allowMultiple: true` in TypeScript.
 
 ### Updating or clearing an alias [#updating-or-clearing-an-alias]
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Operate the Teams Meeting Pipeline"
 source: "https://hermes-agent.nousresearch.com/docs/guides/operate-teams-meeting-pipeline"
-source_hash: "86f04a7937aadffeab281ad45955fcbde7b4499e988661db4ee7429c9cbad699"
+source_hash: "7830a35c05a6b70f14613dd53a846653d3c06d4b196e1b9b14cbdcd58c5d0af1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/operate-teams-meeting-pipeline.md"
@@ -173,7 +173,14 @@ hermes teams-pipeline run <job-id>
 ```bash
 hermes teams-pipeline fetch --meeting-id <meeting-id>
 hermes teams-pipeline fetch --join-web-url "<join-url>"
+hermes teams-pipeline fetch --join-web-url "<join-url>" --organizer-user-id <entra-user-id>
 ```
+
+Pass `--organizer-user-id` (the organizer's Microsoft Entra user ID) to resolve
+through the organizer-scoped `/users/{id}/onlineMeetings` Graph path. This is
+required for Teams `/meet/` short URLs, which Graph rejects on the
+`/communications/onlineMeetings` endpoint. Webhook-driven jobs derive the
+organizer automatically from the notification's `@odata.id`.
 
 ## Routine Runbook
 

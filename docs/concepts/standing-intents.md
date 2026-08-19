@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Standing intents"
 source: "https://docs.openclaw.ai/concepts/standing-intents"
-source_hash: "879a12aeb000c8a820f5efb6e09dc5813da243a14db53519f58628e0af86613d"
+source_hash: "a3718012a87b04c4edb317279c419fa8cd12c3b96594414380f9283300177e3e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/standing-intents.md"
@@ -29,9 +29,13 @@ Put aspirations in `MEMORY.md`, a project note, or another maintained Markdown f
 
 ## Create an event-based intent
 
-Standing intents are owner-directed memory. Only command owners recognized by
-`commands.ownerAllowFrom` can see or use the `intent` tool to create, list, or
-cancel them; other senders do not receive that tool.
+Standing intents are owner-directed memory. Channel owners recognized by
+`commands.ownerAllowFrom` can use the `intent` tool to create, list, or cancel
+them; other senders do not receive that tool. Authenticated Gateway/Control UI
+administrators and the local CLI can inspect and cancel existing intents, but
+creation requires an authenticated channel and sender identity. If either is
+missing, OpenClaw refuses creation and asks the operator to retry from an
+authenticated channel conversation.
 
 Ask the agent to create the intent and name the event clearly:
 
@@ -40,6 +44,10 @@ When someone mentions the launch checklist, remind me to confirm the rollback ow
 ```
 
 The agent uses the `intent` tool with a description and trigger keywords. It can also narrow the intent to one conversation channel identifier or sender identifier, set an expiry, reduce or increase the fire budget, or change the cooldown.
+
+The default scope is the current channel and sender. An explicit `anywhere` or
+`anyone` scope still requires the creating sender identity: the matching hook
+cannot safely enforce a senderless owner principal on later channel turns.
 
 Defaults are intentionally conservative:
 

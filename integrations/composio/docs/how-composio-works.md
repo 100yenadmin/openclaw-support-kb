@@ -2,7 +2,7 @@
 type: composio_doc
 title: "What is a session?"
 source: "https://docs.composio.dev/docs/how-composio-works.md"
-source_hash: "b90cc9d661346f923388c18eedf3b62411353d95c1c2d45a6e9d98c5a74de7f2"
+source_hash: "b575e7400b7611c44fff102ef526bc728c672a301e1423f8eaf27463d26f85e9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "how-composio-works.md"
@@ -76,6 +76,27 @@ A session gives your agent meta tools, a small fixed set that discover, authenti
 The agent searches for relevant tools, authenticates if needed, and executes them through the same session. Meta-tool calls share context, so the agent searches in one call and executes in the next without losing state. See the [Meta Tools reference](/toolkits/meta-tools) for each tool's input and output schema.
 
 Know the exact tools upfront? The [direct tools preset](/docs/configuring-sessions#direct-tools-preset) returns them directly from `session.tools()` with no search step, while keeping session auth, connected accounts, and the workbench.
+
+## Executing session tools [#executing-session-tools]
+
+When your model asks to call a session tool, execute it with `session.execute()`. It routes the call through the session's tool router, which is the only place session meta-tools run:
+
+**Python:**
+
+```python
+result = session.execute("COMPOSIO_SEARCH_TOOLS", arguments={"queries": [{"use_case": "send an email"}]})
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create("user_123");
+const result = await session.execute("COMPOSIO_SEARCH_TOOLS", { queries: [{ use_case: "send an email" }] });
+```
+
+Do not execute session tools with `tools.execute()`, or by passing a user ID to a provider's `handle_tool_calls` helper — both take the direct execution path, which does not carry your session, and meta-tools fail there with `"can only be called inside a tool-router session"`. The [OpenAI](/docs/providers/openai) and [Anthropic](/docs/providers/anthropic) helpers also accept the session itself (`handle_tool_calls(response=response, session=session)` in Python, `handleToolCalls(session, response)` in TypeScript), which routes through the session while keeping provider argument normalization.
 
 ## Authentication [#authentication]
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel routing"
 source: "https://docs.openclaw.ai/channels/channel-routing"
-source_hash: "59c13a38f34857db20f798fa6fc915e945408f647f9fe3ebfd1c044167f0879d"
+source_hash: "31b68da863ccd47d5b6bc4dde38a95cd29188816e3a4b7fbdc6534d06a2fd228"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/channel-routing.md"
@@ -51,10 +51,16 @@ Even when direct-message conversation history is shared with main, sandbox and
 tool policy use a derived per-account direct-chat runtime key for external DMs
 so channel-originated messages are not treated like local main-session runs.
 
-Groups and channels remain isolated per channel:
+With the default `session.groupScope: "per-group"`, groups and channels remain
+isolated per channel:
 
 - Groups: `agent:<agentId>:<channel>:group:<id>`
 - Channels/rooms: `agent:<agentId>:<channel>:channel:<id>`
+
+Set `session.groupScope: "main"` to route all non-direct peers into the agent's
+main session, or use `bindings[].session.groupScope` for selected rooms. The
+binding override wins over the global value. This changes shared context only;
+mention gating and replies still use the originating group or channel.
 
 Threads:
 
@@ -142,7 +148,11 @@ Example:
   },
   bindings: [
     { match: { channel: "slack", teamId: "T123" }, agentId: "support" },
-    { match: { channel: "telegram", peer: { kind: "group", id: "-100123" } }, agentId: "support" },
+    {
+      match: { channel: "slack", peer: { kind: "channel", id: "C0123TEAM" } },
+      agentId: "support",
+      session: { groupScope: "main" },
+    },
   ],
 }
 ```

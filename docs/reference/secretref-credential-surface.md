@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "625c6bfc7b0c466b25077d3cddd0b3b5dba1a6ddc4492c5646bf00abe1d30ba6"
+source_hash: "ea45c610c28795b182addcbe2c0649428495c52ff73f847e45d7949ba93d36d7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
@@ -136,6 +136,18 @@ The lists below are generated from the source target registry and checked agains
 - `profiles.*.tokenRef` (`type: "token"`; unsupported when `auth.profiles.<id>.mode = "oauth"`)
 
 [//]: # "secretref-supported-list-end"
+
+### Node-host connection targets
+
+- `gateway.cloudflareAccess.clientId`
+- `gateway.cloudflareAccess.clientSecret`
+
+These fields live in the node host's canonical `node_host_config` SQLite row,
+not `openclaw.json`. They accept the same SecretInput forms and resolve through
+the configured SecretRef providers when the node starts. The conventional
+`CF_ACCESS_CLIENT_ID` / `CF_ACCESS_CLIENT_SECRET` fallback persists env refs for
+these fields automatically. They are not targets for `secrets configure` or
+`secrets apply`.
 
 Notes:
 

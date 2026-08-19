@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "b24d8f1735d01fda58ce09030df612f860a087291f67e8449a13c9d529e5c7c7"
+source_hash: "4d0d352487bd3572f02a779471d72e62e6bbc16fe2d8f973a5198679952d0673"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -47,6 +47,8 @@ OPENAI_API_KEY=xxxxxxxxx
 
 The [Responses API](https://platform.openai.com/docs/api-reference/responses) is the recommended way to build agentic flows with OpenAI. You pass `previous_response_id` on each turn so the model keeps the prior context, and you send back only the new `function_call_output` items.
 
+> Passing a session to `handle_tool_calls` / `handleToolCalls` requires `composio` newer than 0.19.0 (Python) or `@composio/core` ≥ 0.17.0 with `@composio/openai` ≥ 0.12.0 (TypeScript). On earlier versions, execute session tools with [`session.execute()`](/docs/how-composio-works#executing-session-tools).
+
 **Python:**
 
 ```python
@@ -78,14 +80,18 @@ while True:
     tool_calls = [o for o in response.output if o.type == "function_call"]
     if not tool_calls:
         break
-    results = composio.provider.handle_tool_calls(response=response, user_id="user_123")
+    results = composio.provider.handle_tool_calls(response=response, session=session)
     response = client.responses.create(
         model="gpt-5.2",
         tools=tools,
         previous_response_id=response.id,
         input=[
-            {"type": "function_call_output", "call_id": tool_calls[i].call_id, "output": json.dumps(result)}
-            for i, result in enumerate(results)
+            {
+                "type": "function_call_output",
+                "call_id": call.call_id,
+                "output": json.dumps(results[i]),
+            }
+            for i, call in enumerate(tool_calls)
         ]
     )
 
@@ -126,16 +132,12 @@ while (true) {
     const toolCalls = response.output.filter((o) => o.type === "function_call");
     if (toolCalls.length === 0) break;
 
-    const results = await composio.provider.handleToolCalls("user_123", response.output);
+    const outputs = await composio.provider.handleToolCalls(session, response.output);
     response = await client.responses.create({
         model: "gpt-5.2",
         tools: tools,
         previous_response_id: response.id,
-        input: results.map((result, i) => ({
-            type: "function_call_output" as const,
-            call_id: toolCalls[i].call_id,
-            output: JSON.stringify(result),
-        })),
+        input: outputs,
     });
 }
 
@@ -171,6 +173,8 @@ OPENAI_API_KEY=xxxxxxxxx
 
 The [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) generates a model response from a list of messages. You keep the full message list yourself and append each assistant message and its `tool` results before the next call.
 
+> Passing a session to `handle_tool_calls` / `handleToolCalls` requires `composio` newer than 0.19.0 (Python) or `@composio/core` ≥ 0.17.0 with `@composio/openai` ≥ 0.12.0 (TypeScript). On earlier versions, execute session tools with [`session.execute()`](/docs/how-composio-works#executing-session-tools).
+
 **Python:**
 
 ```python
@@ -198,7 +202,7 @@ response = client.chat.completions.create(
 
 # Agentic loop: keep executing tool calls until the model responds with text
 while response.choices[0].message.tool_calls:
-    results = composio.provider.handle_tool_calls(response=response, user_id="user_123")
+    results = composio.provider.handle_tool_calls(response=response, session=session)
     messages.append(response.choices[0].message)
     for i, tc in enumerate(response.choices[0].message.tool_calls):
         messages.append({
@@ -245,15 +249,9 @@ let response = await client.chat.completions.create({
 
 // Agentic loop: keep executing tool calls until the model responds with text
 while (response.choices[0].message.tool_calls) {
-    const results = await composio.provider.handleToolCalls("user_123", response);
+    const results = await composio.provider.handleToolCalls(session, response);
     messages.push(response.choices[0].message);
-    for (const [i, tc] of response.choices[0].message.tool_calls.entries()) {
-        messages.push({
-            role: "tool",
-            tool_call_id: tc.id,
-            content: JSON.stringify(results[i]),
-        });
-    }
+    messages.push(...results);
     response = await client.chat.completions.create({
         model: "gpt-5.2",
         tools: tools,
@@ -345,9 +343,11 @@ console.log(result.finalOutput);
 
 The OpenAI integration ships three providers, one per API surface:
 
-* **`OpenAIResponsesProvider`** for the Responses API. `handleToolCalls` executes the tool calls and returns `function_call_output` items keyed by `call_id`. You pair it with `previous_response_id` so you only resend new outputs each turn.
+* **`OpenAIResponsesProvider`** for the Responses API. `handleToolCalls` executes each `function_call` and returns `function_call_output` items keyed by `call_id`, paired with `previous_response_id` so you only resend new outputs each turn.
 * **`OpenAIProvider`** for the Chat Completions API. This is the SDK default, so `new Composio()` with no provider uses it. You keep the full message list and append each assistant message plus its `tool` results yourself.
-* **`OpenAIAgentsProvider`** for the Agents SDK. Tools come with execution wired in, so the SDK runs the loop and you do not call `handleToolCalls` at all.
+* **`OpenAIAgentsProvider`** for the Agents SDK. Tools come with execution wired in, so the SDK runs the loop for you.
+
+> Pass the session to `handleToolCalls` / `handle_tool_calls` when the model received tools from `session.tools()`. The helper preserves the provider's argument normalization and executes every call through that session. For tools fetched via [`tools.get`](/docs/tools-direct/executing-tools), pass the user ID instead.
 
 Use the Responses or Agents provider for new agentic flows; reach for Chat Completions when you are extending an existing Chat Completions codebase.
 

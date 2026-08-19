@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker"
 source: "https://docs.openclaw.ai/install/docker"
-source_hash: "686b7f3acdc4c22b15ed22779a3a90c8597e1098718623a4260698b23f2c6c06"
+source_hash: "096e49129e2e497f11aca3a89c2e124071f014d0c35118dc13611d1e4c2fe5f8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker.md"
@@ -247,10 +247,11 @@ OPENCLAW_DOCKER_BUILD_NODE_OPTIONS=--max-old-space-size=4096 OPENCLAW_DOCKER_BUI
 `OPENCLAW_EXTENSIONS` selects plugin manifest ids from the source checkout;
 existing source-directory names are also accepted when they differ. The Docker
 build resolves the selection to source directories once, installs production
-dependencies, and, when a selected plugin is published separately with
-`openclaw.build.bundledDist: false`, compiles its runtime into the root bundled
-dist. This Docker-only packaging does not change the plugin's npm or ClawHub
-artifact contract. Unknown, invalid, or ambiguous ids fail the image build.
+dependencies, and includes the selected plugin runtime in the image. Source
+checkouts also compile first-party plugins published separately with
+`openclaw.build.bundledDist: false`; that marker still preserves the plugin's
+external npm or ClawHub ownership and does not change either artifact contract.
+Unknown, invalid, or ambiguous ids fail the image build.
 Known dependency/source-only ids keep their existing source and dependency
 staging without gaining a compiled root dist entry. A selected plugin with
 unified build entries must compile successfully; unselected external plugin

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
-source_hash: "d0519fc866667b404153d34f14b43750279df48001c314c81d13f6a81350724a"
+source_hash: "6d49a3d1b2738a70a8dfcde35380c78f237c82395c6a21867dc5c7a5bb34a871"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/raspberry-pi.md"
@@ -110,7 +110,7 @@ Add swap (important for 2 GB or less)
 Install OpenClaw
 
     ```bash
-    curl -fsSL https://openclaw.ai/install.sh | bash
+    curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
     ```
 
 

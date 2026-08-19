@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Skills"
 source: "https://docs.openclaw.ai/tools/skills"
-source_hash: "843792c9d06acb9d543d8144c2f0308a80cb75109bb11a4e17073eed555d6f7c"
+source_hash: "b295eef3743863bb8cfb3f2f595a32058bd01012b299a20665163ead6f311695"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/skills.md"
@@ -47,14 +47,15 @@ ClawHub
 OpenClaw loads from these sources, **highest precedence first**. When the same
 skill name appears in multiple places, the highest source wins.
 
-| Priority    | Source                 | Path                                    |
-| ----------- | ---------------------- | --------------------------------------- |
-| 1 — highest | Workspace skills       | `<workspace>/skills`                    |
-| 2           | Project agent skills   | `<workspace>/.agents/skills`            |
-| 3           | Personal agent skills  | `~/.agents/skills` (default state only) |
-| 4           | Managed / local skills | `<state-dir>/skills`                    |
-| 5           | Bundled skills         | shipped with the install                |
-| 6 — lowest  | Extra directories      | `skills.load.extraDirs` + plugin skills |
+| Priority    | Source                 | Path                                     |
+| ----------- | ---------------------- | ---------------------------------------- |
+| 1 — highest | Workspace skills       | `<workspace>/skills`                     |
+| 2           | Project agent skills   | `<workspace>/.agents/skills`             |
+| 3           | Personal agent skills  | `~/.agents/skills` (default state only)  |
+| 4           | Managed / local skills | `<state-dir>/skills`                     |
+| 5           | Bundled skills         | shipped with the install                 |
+| 5           | Custodian skills       | shipped; configured Custodian agent only |
+| 6 — lowest  | Extra directories      | `skills.load.extraDirs` + plugin skills  |
 
 Skill roots support grouped layouts. OpenClaw discovers a skill whenever
 `SKILL.md` appears anywhere under a configured root (up to 6 levels deep):
@@ -67,6 +68,10 @@ Skill roots support grouped layouts. OpenClaw discovers a skill whenever
 The folder path is for organization only. The skill's name and slash command
 come from the `name` frontmatter field (or the directory name when `name` is
 missing). Agent allowlists (below) also match on this `name`.
+
+The release-versioned [Custodian skill library](/tools/custodian-skills) shares
+the bundled precedence tier but is absent for every agent except the configured
+system/Custodian agent.
 
 Note
 
@@ -171,15 +176,18 @@ Use $github and $release_notes to summarize this change for the release.
 ```
 
 OpenClaw resolves explicit references from authorized senders on every channel
-against the current agent's eligible, user-invocable skills and tells the model
-to read each referenced `SKILL.md` before acting. A single message can reference up to eight distinct skills;
-OpenClaw returns a visible error instead of ignoring extra references. The `$`
-form is composable prompt text; `/release_notes ...`
-remains the standalone command form and may use direct tool dispatch when the
-skill declares `command-dispatch: tool`. Common uppercase shell variables such
-as `$HOME`, `$PATH`, and `$EDITOR` remain ordinary text; use lowercase
-`$home`, `$path`, or `$editor` to reference skills with those names. Escape a
-reference as `\$name` when it should stay literal.
+and on generic Gateway, CLI, and webhook agent turns. It matches the current
+agent's eligible, user-invocable skills and tells the model to read each
+referenced `SKILL.md` before acting. A single message can reference up to eight
+distinct skills; OpenClaw returns a visible error instead of ignoring extra or
+allowlist-hidden references. The `$` form is composable prompt text. On channel
+messages, `/release_notes ...` remains the standalone command form and may use
+direct tool dispatch when the skill declares `command-dispatch: tool`; generic
+agent turns expand the same leading skill command as model instructions without
+running the channel command dispatcher. Common uppercase shell variables such
+as `$HOME`, `$PATH`, and `$EDITOR` remain ordinary text; use lowercase `$home`,
+`$path`, or `$editor` to reference skills with those names. Escape a reference
+as `\$name` when it should stay literal.
 
 Skills with `disable-model-invocation: true` stay out of the `$` picker and the
 model's normal prompt, so the model cannot select them on its own. An authorized

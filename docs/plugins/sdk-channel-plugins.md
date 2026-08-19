@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building channel plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-plugins"
-source_hash: "4b8109dd5f14fb9c1501ee8b410983d1ba816f5762d51bcddb8fe59bf29a4518"
+source_hash: "bfd60accebb1bed3217648adeef82278e62f07d1935428996bc7c52b2e01b3a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-plugins.md"
@@ -934,6 +934,14 @@ ResolvedAccount
     `principalId` is absent and an undefined result is reported as unverified.
     Diagnostics never invent a peer ID. Keep both callbacks pure and
     import-safe because read-only diagnostics run without channel runtime.
+
+    Channel-specific security diagnostics can use `security.collectWarnings`.
+    Legacy string results are warning severity. Return the structured
+    `SecurityAuditFinding` shape (`checkId`, `severity`, `title`, `detail`, and
+    optional `remediation`) when the producer must declare informational or
+    critical severity; the same finding is used by Doctor and the main security
+    audit. Use `collectAuditFindings` only for diagnostics that should appear in
+    the full security audit but not Doctor.
 
 
 What createChatChannelPlugin does for you

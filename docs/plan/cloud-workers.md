@@ -1,8 +1,8 @@
 ---
 type: openclaw_doc
-title: "Cloud workers plan"
+title: "Cloud workers historical plan"
 source: "https://docs.openclaw.ai/plan/cloud-workers"
-source_hash: "8c5ab1f07f8dff3d79f1b4d391e44c271059a6983dd267ca46894f8eb8d212c5"
+source_hash: "362cb190b6baad20bf6901735629bbcb35f4a695a07244eb8e1e60b871d7909d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plan/cloud-workers.md"
@@ -10,12 +10,14 @@ original_doc_path: "plan/cloud-workers.md"
 duplicate_index: 1
 ---
 
-# Cloud workers plan
+# Cloud workers historical plan
 Source: https://docs.openclaw.ai/plan/cloud-workers
 
 ## Status
 
-Proposal, revision 3. Not implemented. Direction agreed 2026-07; revision 2 incorporated adversarial review findings (dedicated worker protocol, placement/environment state machines, git-aware inbound sync, one-way v1 handoff, controlled-egress security wording). Revision 3 settles the sync ownership model (worker authors commits, gateway adopts and publishes), adds a no-git plain sync mode, fixes worker exec at full-within-box, moves internet policy to provision time, and restores agent dispatch to milestone 3.
+Superseded historical proposal. The implemented architecture is documented in [Runners and execution environments](/plan/runners) and [Cloud workers](/gateway/cloud-workers): Crabbox provisions a node-backed `worker-turn` lease, the worker child dials the Gateway's authenticated public worker route, and workspace transfer uses the node channel. The former dedicated loopback listener, SSH reverse-forward carrier, and SSH-launched worker-turn path have been removed. SSH remains a separate `remote-exec` workspace transport and desktop carrier.
+
+The sections below preserve the pre-convergence design record and are not the current runtime contract.
 
 ## Problem
 
@@ -98,15 +100,17 @@ RPCs: `environments.create`, `environments.destroy`, extended `environments.list
 No bespoke worker artifact, and no dependence on npm availability:
 
 - Canonical install for all modes: a gateway-produced, content-hashed worker bundle (the gateway's own build output packed as a tarball), pushed over SSH and installed on the box. This covers dev builds and unreleased commits by construction.
-- `npm i -g openclaw@<exact gateway version>` is an optimization when the gateway runs a released version; never `latest`.
+- On npm 12 or npm 11.16+, `npm i -g openclaw@<exact gateway version> --allow-scripts=openclaw` is an optimization when the gateway runs a released version; never `latest`. On npm 11.15 and earlier, omit `--allow-scripts=openclaw`.
 - Bootstrap is idempotent; a warm lease with a matching bundle hash skips install. Raw machines may need a networked toolchain phase (Node runtime) — part of the setup phase, closed afterwards.
 - Handshake verifies worker build hash, protocol feature set, and runtime compatibility. The existing gateway version/protocol checks are insufficient for this (SSH-tunneled nodes are exempted from exact-version rejection), so worker admission does its own exact-build check.
 
 Worker mode (`openclaw worker`) is an entry point, not a fork: connection handling plus the embedded agent runner, with session persistence and model calls backed by gateway RPCs. It must not start gateway surfaces: no channels, no plugin auto-start beyond the session toolset, throwaway state dir, no local auth profiles.
 
-### 3. Transport: everything over SSH
+### 3. Historical transport proposal: everything over SSH
 
-The gateway owns connectivity; the worker requires nothing but sshd:
+This section describes the superseded carrier. Current `worker-turn` environments use authenticated node connectivity; only `remote-exec` workspace operations retain pinned SSH.
+
+The original proposal had the gateway own connectivity while the worker required nothing but sshd:
 
 - Gateway opens SSH to the worker (credentials from the provider lease, host key pinned from provisioning output — no `StrictHostKeyChecking=no`) and establishes a reverse tunnel forwarding a worker-local socket to the gateway's WS endpoint.
 - Control/model traffic and workspace transfer use separate SSH connections with the same pinned trust material so rsync cannot head-of-line-block token streams.

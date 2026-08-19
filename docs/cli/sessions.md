@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Sessions"
 source: "https://docs.openclaw.ai/cli/sessions"
-source_hash: "813a085bb78b91dab61594d6bc4b6ba25d068c14dc7b84996f776b8f641018b6"
+source_hash: "4e1d79e23ccc978358ea50078ded54e778763fa8a5565c606e124d02d97178f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/sessions.md"
@@ -36,15 +36,20 @@ openclaw sessions --json
 
 Flags:
 
-| Flag                 | Description                                                            |
-| -------------------- | ---------------------------------------------------------------------- |
-| `--agent <id>`       | One configured agent store (required for multiple explicit agents).    |
-| `--all-agents`       | Aggregate all configured agent stores.                                 |
-| `--store <path>`     | Explicit store path (cannot combine with `--agent` or `--all-agents`). |
-| `--active <minutes>` | Only show sessions updated within the past N minutes.                  |
-| `--limit <n\|all>`   | Max rows to output (default `100`; `all` restores full output).        |
-| `--json`             | Machine-readable output.                                               |
-| `--verbose`          | Verbose logging.                                                       |
+| Flag                 | Description                                                                   |
+| -------------------- | ----------------------------------------------------------------------------- |
+| `--agent <id>`       | One configured agent store (required for multiple explicit agents).           |
+| `--all-agents`       | Aggregate all configured agent stores.                                        |
+| `--store <path>`     | Legacy store selector path (cannot combine with `--agent` or `--all-agents`). |
+| `--active <minutes>` | Only show sessions updated within the past N minutes.                         |
+| `--limit <n\|all>`   | Max rows to output (default `100`; `all` restores full output).               |
+| `--json`             | Machine-readable output.                                                      |
+| `--verbose`          | Verbose logging.                                                              |
+
+`--store` accepts the documented legacy selector form, including `sessions.json`
+and suffixless custom selectors. OpenClaw resolves that selector to its physical
+SQLite target, verifies the target exists and is usable, and reports the physical
+path it actually read.
 
 `openclaw sessions` and the Gateway `sessions.list` RPC are bounded by default
 so large long-lived stores cannot monopolize the CLI process or Gateway event
@@ -70,8 +75,8 @@ skipped.
 {
   "path": null,
   "stores": [
-    { "agentId": "main", "path": "/home/user/.openclaw/agents/main/sessions/sessions.json" },
-    { "agentId": "work", "path": "/home/user/.openclaw/agents/work/sessions/sessions.json" }
+    { "agentId": "main", "path": "/home/user/.openclaw/agents/main/agent/openclaw-agent.sqlite" },
+    { "agentId": "work", "path": "/home/user/.openclaw/agents/work/agent/openclaw-agent.sqlite" }
   ],
   "allAgents": true,
   "count": 2,
@@ -302,8 +307,8 @@ openclaw sessions compact "agent:work:main" --agent work --json
 - Without `--max-lines`, the Gateway LLM-summarizes the transcript. The CLI
   does not impose a client deadline by default; the Gateway owns the
   configured compaction lifecycle.
-- With `--max-lines <n>`, it truncates to the last `n` transcript lines and
-  archives the prior transcript as a `.bak` sidecar.
+- With `--max-lines <n>`, it permanently truncates the SQLite transcript to the
+  last `n` lines. This path does not create a backup archive.
 - `--agent <id>`: agent that owns the session; required for `global` keys.
 - `--url` / `--token` / `--password`: Gateway connection overrides.
 - `--timeout <ms>`: optional client-side RPC timeout in milliseconds.
@@ -347,7 +352,6 @@ Example truncate response (`--max-lines 200`):
   "ok": true,
   "key": "agent:main:main",
   "compacted": true,
-  "archived": "/home/user/.openclaw/agents/main/sessions/transcripts/<id>.jsonl.bak",
   "kept": 200
 }
 ```

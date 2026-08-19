@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ollama"
 source: "https://docs.openclaw.ai/providers/ollama"
-source_hash: "106b12f58f5da3489a8b52c4af297f74113349647012619e76b8191927055f0e"
+source_hash: "ccee3d3d9c3282dc2ae92c2cf54b94602c85d7bb4cf59e97cf42edd14b82e606"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/ollama.md"
@@ -479,7 +479,7 @@ timeout and cap `num_ctx`:
 ```
 
 This timeout applies to inbound image understanding and to the explicit
-`image` tool. `models.providers.ollama.timeoutSeconds` still controls the
+`view_image` tool. `models.providers.ollama.timeoutSeconds` still controls the
 underlying Ollama HTTP request guard for normal model calls.
 
 Live verification:
@@ -631,7 +631,6 @@ LAN Ollama host with manual models
             apiKey: "ollama-local",
             api: "ollama",
             timeoutSeconds: 300,
-            contextWindow: 32768,
             maxTokens: 8192,
             models: [
               {
@@ -639,6 +638,7 @@ LAN Ollama host with manual models
                 name: "qwen3.5:9b",
                 reasoning: true,
                 input: ["text"],
+                contextTokens: 32768,
                 params: {
                   num_ctx: 32768,
                   thinking: false,
@@ -657,9 +657,9 @@ LAN Ollama host with manual models
     }
     ```
 
-    `contextWindow` is OpenClaw's context budget; `params.num_ctx` is sent to
-    Ollama. Keep them aligned when hardware cannot run the model's full
-    advertised context.
+    `contextTokens` caps OpenClaw's active-input budget; `params.num_ctx` sets
+    Ollama's request context. Keep them aligned when hardware cannot run the
+    model's full advertised context.
 
 
 
@@ -757,17 +757,19 @@ Multiple Ollama hosts
             baseUrl: "http://mini.local:11434",
             apiKey: "ollama-local",
             api: "ollama",
-            contextWindow: 32768,
-            models: [{ id: "gemma4", name: "gemma4", input: ["text"] }],
+            models: [
+              { id: "gemma4", name: "gemma4", input: ["text"], contextTokens: 32768 },
+            ],
           },
           "ollama-large": {
             baseUrl: "http://gpu-box.local:11434",
             apiKey: "ollama-local",
             api: "ollama",
             timeoutSeconds: 420,
-            contextWindow: 131072,
             maxTokens: 16384,
-            models: [{ id: "qwen3.5:27b", name: "qwen3.5:27b", input: ["text"] }],
+            models: [
+              { id: "qwen3.5:27b", name: "qwen3.5:27b", input: ["text"], contextTokens: 131072 },
+            ],
           },
         },
       },
@@ -814,12 +816,12 @@ Lean local model profile
             baseUrl: "http://127.0.0.1:11434",
             apiKey: "ollama-local",
             api: "ollama",
-            contextWindow: 32768,
             models: [
               {
                 id: "gemma4",
                 name: "gemma4",
                 input: ["text"],
+                contextTokens: 32768,
                 params: { num_ctx: 32768 },
                 compat: { supportsTools: false },
               },
@@ -1027,17 +1029,17 @@ Context windows
     Modelfiles; otherwise it falls back to OpenClaw's default Ollama context
     window.
 
-    Provider-level `contextWindow`, `contextTokens`, and `maxTokens` set
-    defaults for every model under that provider and can be overridden per
-    model. `contextWindow` is OpenClaw's own prompt/compaction budget. Native
+    Per-model `contextWindow` declares native window metadata, and per-model
+    `contextTokens` caps active input. Provider-level `maxTokens` remains an
+    output-token default; a model entry can override it. Native
     `/api/chat` requests leave `options.num_ctx` unset unless you set
     `params.num_ctx` explicitly, so Ollama applies its own model,
     `OLLAMA_CONTEXT_LENGTH`, or VRAM-based default; invalid, zero, negative,
-    or non-finite `params.num_ctx` values are ignored. If an older config used
-    only `contextWindow`/`maxTokens` to force native request context, run
-    `openclaw doctor --fix` to copy those into `params.num_ctx`. The
+    or non-finite `params.num_ctx` values are ignored. After upgrading an older
+    configuration, run `openclaw doctor --fix`, then set `params.num_ctx`
+    explicitly when you need to force native request context. The
     OpenAI-compatible adapter still injects `options.num_ctx` by default from
-    the configured `params.num_ctx` or `contextWindow`; disable with
+    `params.num_ctx` or the matching model entry's `contextWindow`; disable with
     `injectNumCtxForOpenAICompat: false` if the upstream rejects `options`.
 
     Native model entries also accept common Ollama runtime options under
@@ -1057,11 +1059,11 @@ Context windows
       models: {
         providers: {
           ollama: {
-            contextWindow: 32768,
             models: [
               {
                 id: "llama3.3",
                 contextWindow: 131072,
+                contextTokens: 32768,
                 maxTokens: 65536,
                 params: {
                   num_ctx: 32768,
@@ -1405,12 +1407,12 @@ Large-context model is too slow or runs out of memory
       models: {
         providers: {
           ollama: {
-            contextWindow: 32768,
             maxTokens: 8192,
             models: [
               {
                 id: "qwen3.5:9b",
                 name: "qwen3.5:9b",
+                contextTokens: 32768,
                 params: { num_ctx: 32768, thinking: false },
               },
             ],
@@ -1420,7 +1422,7 @@ Large-context model is too slow or runs out of memory
     }
     ```
 
-    Lower `contextWindow` if OpenClaw sends too much prompt. Lower
+    Lower the model entry's `contextTokens` if OpenClaw sends too much prompt. Lower
     `params.num_ctx` if Ollama's runtime context is too large for the machine.
     Lower `maxTokens` if generation runs too long.
 

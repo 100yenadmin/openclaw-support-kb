@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Remote access"
 source: "https://docs.openclaw.ai/gateway/remote"
-source_hash: "8967599670073e3007607fa49b047bcd91e9bdf0667082717e44a5ec25cd8129"
+source_hash: "fd462660302c066ca448eb87ffe72691e4ff613ec00260e59127fb9d60c93569"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/remote.md"
@@ -98,6 +98,100 @@ For a Gateway already reachable on a trusted LAN or Tailnet, use direct mode:
   },
 }
 ```
+
+## Gateway behind an identity-aware proxy
+
+To deploy this way from scratch — tunnel, Access application, Gateway trusted-proxy
+auth, and node routes — see [Cloudflare Tunnel and Access](/gateway/cloudflare-access).
+This section covers only the client side: how a CLI, TUI, or app authenticates to that
+edge.
+
+Use `gateway.remote.edgeAuth` when an identity-aware proxy must authenticate the
+WebSocket upgrade before traffic reaches the Gateway. Header values are
+`SecretInput` fields, so they can come from `env`, `file`, `exec`, or `store`
+secret providers without placing credentials directly in the config.
+
+For Cloudflare Access, a generic exec secret provider can obtain a short-lived
+application token from an operator-installed `cloudflared` binary:
+
+```json5
+{
+  secrets: {
+    providers: {
+      "cloudflare-access": {
+        source: "exec",
+        command: "/usr/local/bin/cloudflared",
+        args: ["access", "token", "-app=https://gateway.example"],
+        jsonOnly: false,
+        passEnv: ["HOME"],
+        trustedDirs: ["/usr/local/bin"],
+      },
+    },
+  },
+  gateway: {
+    mode: "remote",
+    remote: {
+      url: "wss://gateway.example",
+      edgeAuth: {
+        "Cf-Access-Token": {
+          source: "exec",
+          provider: "cloudflare-access",
+          id: "token",
+        },
+      },
+    },
+  },
+}
+```
+
+`secrets.providers.*.command` must be an absolute path; replace
+`/usr/local/bin/cloudflared` with the real, non-symlink install location on your
+host, such as the resolved executable under a Homebrew prefix, and keep
+`trustedDirs` pointing at the directory that actually holds it.
+
+Exec providers run with a scrubbed environment. `cloudflared` reads its cached
+application token from the user's home directory, so `passEnv: ["HOME"]` is
+required; without it the provider exits non-zero and no header is produced.
+Run `cloudflared access login <gateway-url>` once first so a token exists to
+read.
+
+For a Cloudflare Access service token, provide the two fixed headers from any
+supported secret provider. This example reads them from environment-backed
+SecretRefs:
+
+```json5
+{
+  secrets: {
+    providers: {
+      default: { source: "env" },
+    },
+  },
+  gateway: {
+    mode: "remote",
+    remote: {
+      url: "wss://gateway.example",
+      edgeAuth: {
+        "CF-Access-Client-Id": {
+          source: "env",
+          provider: "default",
+          id: "CF_ACCESS_CLIENT_ID",
+        },
+        "CF-Access-Client-Secret": {
+          source: "env",
+          provider: "default",
+          id: "CF_ACCESS_CLIENT_SECRET",
+        },
+      },
+    },
+  },
+}
+```
+
+OpenClaw's Gateway connection code never runs `cloudflared` itself and has no
+Cloudflare dependency or login flow. Only the generic exec secret provider
+invokes the exact command an operator configures. Resolved edge-auth headers are
+sent only when the target matches the configured `gateway.remote.url` scope,
+only over `wss://`, and never across redirects.
 
 ## Credential precedence
 

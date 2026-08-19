@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daytona"
 source: "https://docs.openclaw.ai/install/daytona"
-source_hash: "830227d7f41ddf3d70abff53fdfb451daa005453cfff3ea5bef7628d8e7c2c8f"
+source_hash: "ec4fb3c40c8a662d8bca5e658b8194aab91d9f5330d975f4bbc15e33f60f486e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/daytona.md"
@@ -253,8 +253,11 @@ personal-number mode, and self-chat details: [WhatsApp](/channels/whatsapp).
 The snapshot's global npm tree is owned by root, so plain `openclaw update`
 cannot write to it. Update from the sandbox SSH session with:
 
+The command below is for npm 12 or npm 11.16+. On npm 11.15 and earlier,
+omit `--allow-scripts=openclaw`.
+
 ```bash
-sudo env "PATH=$PATH" npm install --global openclaw@latest
+sudo env "PATH=$PATH" npm install --global openclaw@latest --allow-scripts=openclaw
 openclaw doctor
 ```
 

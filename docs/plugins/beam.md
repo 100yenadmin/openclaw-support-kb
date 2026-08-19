@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Beam plugin"
 source: "https://docs.openclaw.ai/plugins/beam"
-source_hash: "010110a3d340843dcdff005ee09be1e0b8860366a27a0a2d7616d2ae9926a5e2"
+source_hash: "b51740333dbac1dfd2df5a937bcc362072be09af99ae2c2a65062a6539c6b572"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/beam.md"
@@ -146,7 +146,7 @@ Beam can also act as the sender: an opt-in mirror that continuously publishes th
 }
 ```
 
-- `endpoint` (required): the remote receiver URL. HTTPS is enforced for non-loopback hosts; plaintext `http://` is accepted only for `localhost`/`127.0.0.1`/`::1` development.
+- `endpoint` (required): the final remote receiver URL. Redirect responses (301, 302, 303, 307, and 308) are not followed; configure the destination URL directly. After a redirect, repeated polls are suppressed for the current mirror service instance. A Gateway restart probes the configured endpoint once again so a receiver corrected at the same URL can recover. HTTPS is enforced for non-loopback hosts; plaintext `http://` is accepted only for `localhost`/`127.0.0.1`/`::1` development.
 - `token`: Gateway credential for the remote receiver, sent as `Authorization: Bearer`. Accepts a plain string or a secret reference; a configured-but-unresolved token pauses mirroring instead of sending unauthenticated requests. Deployments fronted by an identity-aware proxy need an ingress that accepts this bearer credential.
 - `catalogs` (required): the session catalog ids to mirror, as explicit per-catalog consent — an omitted or empty list mirrors nothing. The local `beam` receiver catalog is always excluded so two mirrored Gateways cannot re-mirror each other's rows.
 - `pollSeconds` (default 30, minimum 10): how often the mirror scans local catalogs.
@@ -175,6 +175,10 @@ The mirror applies the same redaction contract as the beam skill before anything
 `429 Too Many Requests`
 
 : The authenticated client exceeded the bounded request or concurrency limit. Retry after the current minute window.
+
+`beam mirror upload blocked ... receiver returned redirect`
+
+: The configured mirror endpoint returned a redirect. Beam does not follow redirects and suppresses repeated attempts for the current service instance; set `mirror.endpoint` to the final receiver URL. A Gateway restart probes the configured endpoint once again.
 
 ## Related
 

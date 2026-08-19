@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin compatibility"
 source: "https://docs.openclaw.ai/plugins/compatibility"
-source_hash: "94097599a0925797aa2a05b55aacf4504e821c74c87a77ea91022cff535480e4"
+source_hash: "0af9bf5dc36119e67f4e4b371a6ed395307fc3821808e061949a8b5b4f1f4235"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/compatibility.md"
@@ -118,6 +118,18 @@ its reported migration condition is satisfied and its reader references are
 cleared; the existing `--fail-on-eligible-compat` gate continues to apply only
 to dated `deprecated` records. Reader references are surface-token matches for
 triage; use the published-artifact sweep before authorizing removal.
+
+### Auth profile cooldown classifications
+
+`AuthProfileStore.usageStats[*].cooldownReason` remains the closed canonical
+`AuthProfileFailureReason` union. Host policy records WHAM HTTP 401 as `auth`
+and HTTP 403 as `auth_permanent`.
+
+`cooldownClassification` is an optional additive host diagnostic. Its current
+values are `wham_token_expired` and `wham_account_dead`. Plugins that display
+this field must keep a default or fallback for future optional classifications.
+Canonical failover uses `resolveProfilesUnavailableReason`; the diagnostic is
+presentation state only and must never be used as authorization.
 
 ### Channel prompt-context identifier aliases
 

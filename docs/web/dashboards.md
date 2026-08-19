@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session Dashboards"
 source: "https://docs.openclaw.ai/web/dashboards"
-source_hash: "ebd8c37bdfbbe600e5b675cfb4a2e7ce46e17144c4eb9fbd742ce4eda6c0d02b"
+source_hash: "d2723093db897360d5aeff1b09282176f13d84cc5ee325568b35b30cc29fe7b9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboards.md"
@@ -31,6 +31,12 @@ the most recently updated thread first. Open any row to go directly to that
 thread's `/dashboard/<agent>/<sessionRef>` URL. An open Dashboards page updates
 as threads are renamed, archived, deleted, or switched between Chat and
 Dashboard, including after a Gateway reconnect.
+
+Use **Open full-screen dashboard** on a row to open its board as a standalone
+browser document with no sidebar, top bar, or chat. The close button returns to
+the previous page. Inside a session, use the fullscreen button beside the
+Chat / Split / Dashboard switch to enter or leave browser fullscreen while the
+board is visible.
 
 The Chat or Dashboard face preference is stored server-side per thread. It
 therefore follows you when you connect to the same gateway from another device.
@@ -78,6 +84,9 @@ never needs the agent.
   tabs, switch the visible tab, and move or hide the chat dock. Ask "put the
   chat on the left and show the finance tab" and watch it happen.
 
+  Switching the visible tab or chat dock requires a connected Control UI. If
+  none is connected, the command returns `UNAVAILABLE`; open the Control UI and retry.
+
 ## What widgets are allowed to do
 
 A widget that only renders needs no approval — it appears instantly, exactly
@@ -112,6 +121,20 @@ in chat can be pinned like any widget. Pinned apps come back to life on the
 board with fresh sessions; by default they are display-only, and granting the
 widget its declared server tools makes it fully interactive — with the same
 one-tap, revision-bound approval as everything else.
+
+## A2UI widgets
+
+When the Canvas plugin is enabled, agents can render A2UI JSONL as a dashboard
+widget. A2UI widgets use the same stable name, tab, size, pinning, sandbox, and
+update-in-place behavior as HTML widgets. The renderer is loaded from the
+Gateway's capability-scoped A2UI asset route; the renderer bundle is not copied
+into each widget, and the Canvas file host does not need to be enabled.
+
+A2UI actions use the normal widget bridge. By default, clicks become quiet
+session notices that the agent sees on its next turn. If the widget declares
+and receives the `prompt` grant, its actions can instead send a visible prompt
+into the thread. Disabling the Canvas plugin removes the A2UI kind and leaves
+stored widgets visibly unavailable until the plugin is enabled again.
 
 ## Good to know
 

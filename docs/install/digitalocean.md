@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "DigitalOcean"
 source: "https://docs.openclaw.ai/install/digitalocean"
-source_hash: "957c9e493520b86b464195b43a9f9a5e712fccc83eb67aa9506a6d2e011d140d"
+source_hash: "b4f546457d3619736b7a504306276adbb9121f5bff393c1a05e305d5e8ce5c41"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/digitalocean.md"
@@ -62,8 +62,8 @@ Connect and install
     curl -fsSL https://deb.nodesource.com/setup_26.x | bash -
     apt install -y nodejs
 
-    # Install OpenClaw
-    curl -fsSL https://openclaw.ai/install.sh | bash
+    # Install OpenClaw; run onboarding later as the non-root owner.
+    curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
 
     # Create the non-root user that will own OpenClaw state and services.
     adduser openclaw

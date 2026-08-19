@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "2944cbf7b0cf671332d9371d844399d5f544039f9572efbd9be727e1b70a7544"
+source_hash: "2ce738f6daebf967b40049d099a5e7d12ad64654fe3dcca0aa7653da5c11fd27"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -239,6 +239,8 @@ verbose / trace / fast / reasoning safety
 
 
 Model switching details
+
+        - Prefer choosing the model when creating a session. Changing it in an established session is an advanced operation because model context limits, prompt/tool behavior, and prompt-cache behavior can differ. See [Choose a model for a session](/concepts/models#choose-a-model-for-a-session).
 
         **Scope in one line:** a direct owner/admin `/model <model>` changes the session and requests a best-effort configured-default update; `-s` changes only the current session. When an agent inherits `agents.defaults.model`, the update target is that shared global fallback.
 

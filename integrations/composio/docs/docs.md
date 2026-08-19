@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Welcome"
 source: "https://docs.composio.dev/docs.md"
-source_hash: "dd4ead3042d5e0df54109da35c4a525f84b1ca9d431b8b01d70c1f286fa9329c"
+source_hash: "5319549c9998f56cfee7a8f0a1c5d8aff6eefa1c69d48e30da8de1067858f5d9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "docs.md"
@@ -23,7 +23,7 @@ Source: https://docs.composio.dev/docs.md
 
 **Platform**
 
-Add Composio tools and authentication to your own agent or application.
+Build Composio into your own agent or application — tools, auth, and triggers for every one of your users.
 
 - [Quickstart](/docs/quickstart): Build an agent that discovers tools and works across your apps.
 - [Framework guides](/docs/providers): Use OpenAI, Anthropic, Vercel AI SDK, or another framework.
@@ -31,9 +31,9 @@ Add Composio tools and authentication to your own agent or application.
 
 ### Use Composio
 
-**For you**
+**For You**
 
-Connect an existing coding agent or terminal to Composio.
+Use Composio from the agents you already have — Claude Code, Codex, Cursor, or your terminal.
 
 - [Agent plugins](/docs/agent-plugins): Install the native Composio plugin for Codex or Claude Code.
 - [Composio CLI](/docs/cli): Search, connect, and run tools from your terminal.

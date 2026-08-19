@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/cli/tui"
-source_hash: "1710b3d250456dcbbae5d31397cb052b3be8e320fc66ec8d78289fe086a1bb2b"
+source_hash: "a6aa196b65f9f2aa544c03baa7887a561f782f908e80e1fdbc4e3b0f071ec610"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/tui.md"
@@ -74,6 +74,10 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
 - With no URL/host target or explicit `--url`, `tui` resolves configured Gateway
   auth SecretRefs for token/password auth when possible (`env`/`file`/`exec`/`store`
   providers).
+- When the configured remote Gateway is behind an identity-aware proxy, `tui`
+  resolves `gateway.remote.edgeAuth` SecretInputs and sends those headers only
+  to that configured Gateway scope. URL or host targets for other origins never
+  inherit them.
 - With no explicit URL or port, `tui` follows the active local Gateway port
   recorded by the running Gateway. Explicit `--url`, `OPENCLAW_GATEWAY_URL`,
   `OPENCLAW_GATEWAY_PORT`, and remote Gateway config keep precedence.
@@ -99,6 +103,7 @@ Aliases: `openclaw chat` and `openclaw terminal` invoke this command with
 | The Gateway predates short-link resolution | Copy the full session key from that Gateway's Control UI.                                                                                        |
 | Session missing or short ref ambiguous     | For the configured/local Gateway, run `openclaw sessions list`; for a URL/host target, choose a longer or full key in that Gateway's Control UI. |
 | Gateway unreachable                        | The error names the selected origin. For a `*.ts.net` host, connect Tailscale and confirm the Gateway is reachable on the tailnet.               |
+| Identity-aware proxy rejected the upgrade  | Configure `gateway.remote.edgeAuth` for the configured remote Gateway; the error includes the relevant remote-access docs link.                  |
 | Stored device token revoked or rotated     | Rotate it with `openclaw devices rotate --device <deviceId> --role operator`, then reconnect.                                                    |
 | TLS certificate pin mismatch               | The original TLS fingerprint error passes through unchanged; verify the configured or explicit pin before retrying.                              |
 

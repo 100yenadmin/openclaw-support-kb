@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Reset"
 source: "https://docs.openclaw.ai/cli/reset"
-source_hash: "d077454934d931af49ce01f6853811572ea0e4216968e81c1e2c9b053ba94bd3"
+source_hash: "2d155b2ed7c7bb632f904e2709bcaa8b510f208c376ad3d4019976cf84236cbe"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/reset.md"
@@ -45,6 +45,7 @@ openclaw reset --scope full --yes --non-interactive
 ## Notes
 
 - Run `openclaw backup create` first for a restorable snapshot before removing local state.
+- Before removing the state directory, `full` requires exclusive state ownership. If an unmanaged or externally supervised Gateway is still running, reset refuses and asks you to stop it first.
 - Workspace setup state and attestations are rows in the shared SQLite database, so `full` removes them with the state directory; there are no current attestation sidecar files to remove separately.
 - Without `--scope`, `openclaw reset` prompts interactively for the scope to remove.
 - `--non-interactive` is only valid when both `--scope` and `--yes` are set.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Pairing"
 source: "https://docs.openclaw.ai/channels/pairing"
-source_hash: "cf861e5f0094fc047c5a10573ec87b7ada81ff23664f904c41b5c9a980628cf5"
+source_hash: "a3a4bdb40ecaca0708664f9b9493ba79dd2e7ead85e5185c09c117e3e6875635"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/pairing.md"
@@ -211,12 +211,14 @@ emulator host. Non-loopback plaintext routes receive limited access. Tailnet
 CGNAT addresses, `.ts.net` names, and public hosts still fail closed before
 QR/setup-code issuance.
 
-For `gateway.bind=lan` setup URLs, OpenClaw detects persistent Tailscale Serve
-HTTPS roots that proxy the active Gateway's loopback port and advertises them
-alongside the LAN route. The setup command adds this fallback only
-for `lan`; `custom` and `tailnet` keep their explicitly advertised routes. The
-iOS app probes the advertised routes in order and saves the first reachable
-endpoint.
+OpenClaw advertises Tailscale setup URLs only when it owns the route through
+`gateway.tailscale.mode=serve|funnel`. Legacy external Serve routes that proxy a
+`gateway.bind=lan` listener are not advertised because the ordinary listener
+rejects Tailscale-shaped proxy ingress. Run `openclaw doctor` to preview the
+safe default-route migration, then `openclaw doctor --fix` and restart the
+Gateway. Custom Serve ports and Tailscale Services require manual migration.
+For a retired `gateway.tailscale.serviceName` config, Doctor disables managed
+ingress and prints the command needed to clear the retained Service route.
 
 ### Approve a node device
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin dependency resolution"
 source: "https://docs.openclaw.ai/plugins/dependency-resolution"
-source_hash: "a2135a8aacaf85125ff746abb95c9b16e0ed767d9270f3bc6d15fb608a18b7b9"
+source_hash: "b452feadd58e0d97b6b2c94fbddeac5e91fc25ef021d706db35a5c8c2a8a806d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/dependency-resolution.md"
@@ -206,9 +206,15 @@ the repository root does not prepare bundled plugin dependencies.
 
 | Install shape                    | Bundled plugin location               | Dependency owner                                                     |
 | -------------------------------- | ------------------------------------- | -------------------------------------------------------------------- |
-| `npm install -g openclaw`        | Built runtime tree inside the package | OpenClaw package and explicit plugin install/update/doctor flows     |
+| Global npm install               | Built runtime tree inside the package | OpenClaw package and explicit plugin install/update/doctor flows     |
 | Git checkout plus `pnpm install` | `extensions/<id>` workspace packages  | The pnpm workspace, including each plugin package's own dependencies |
 | `openclaw plugins install ...`   | Managed npm project/git/ClawHub root  | The plugin install/update flow                                       |
+
+For the global npm row, use
+`npm install -g openclaw --allow-scripts=openclaw` on npm 12 or npm 11.16+.
+On npm 11.15 and earlier, omit `--allow-scripts=openclaw`. Plugin dependency
+convergence remains intentionally script-disabled and continues to use the
+`--ignore-scripts` commands above.
 
 ## Legacy cleanup
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "ec89fe79ece15499606a727213fc70d99b6a08f818a5c8a306c604a784d9428c"
+source_hash: "7e973e41a66a99ec32f5b50e491c56cb1d2fb9cc1e40bfdd041d37fea1fbd719"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -37,6 +37,11 @@ hermes
 
 # Single query mode (non-interactive)
 hermes chat -q "Hello"
+
+# Single query from a file or stdin — nothing is shell-interpreted, so
+# arbitrary text (quotes, $(...), backticks) arrives verbatim
+hermes chat --query-file prompt.txt
+hermes chat --query-file - < prompt.txt
 
 # With a specific model
 hermes chat --model "anthropic/claude-sonnet-4"

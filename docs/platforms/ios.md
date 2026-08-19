@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "iOS app"
 source: "https://docs.openclaw.ai/platforms/ios"
-source_hash: "a92bebc140612b7765faa75c22d718a9cfce009ac22f3d434c17a22ede062e70"
+source_hash: "a77e3692e4828407b88b8304c5a6e4af4d4d94cf138348f287314cbd99de8a60"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/ios.md"
@@ -64,9 +64,6 @@ creation has a token or password auth path.
 
 3. In the iOS app, open **Settings** -> **Gateway**, scan the QR code (or paste
    the setup code), and connect.
-
-   If the setup code contains both LAN and Tailscale Serve routes, the app
-   probes them in order and saves the first reachable endpoint.
 
    Paired gateways remain in the **Gateways** list. The checkmark identifies
    the focused gateway; use the bolt control on another row to keep its

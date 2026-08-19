@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Web search"
 source: "https://docs.openclaw.ai/tools/web"
-source_hash: "0b7780eca37ae93b1c3d35840aab7008a9c511ee4b5c49fac560bb00ebc77393"
+source_hash: "c2eda3799bb9f0e2bbb3987da5a4ddafbdab1532170b61fee0c14cb1090f17b4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/web.md"
@@ -334,8 +334,10 @@ namespace.
   search; other managed providers remain available
 - Restricting the Codex native tool surface also keeps managed `web_search`
   available
-- When `allowedDomains` is set, automatic managed fallback fails closed if
-  hosted search is unavailable so the native allowlist cannot be bypassed
+- When `allowedDomains` is set, it restricts both hosted `web_search` and
+  managed `web_fetch` on turns where native hosted search is active. Turns
+  using a managed search provider are unchanged. Automatic managed search
+  fallback also fails closed if hosted search is unavailable.
 - Tool-disabled LLM-only runs disable both native and managed search
 - `tools.web.search.enabled: false` disables both managed and native search
 

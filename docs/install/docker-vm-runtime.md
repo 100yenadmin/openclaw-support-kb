@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
-source_hash: "580eb2d9c6228c4b3063b9761ceecb0704e5ac4e94170ef7e0734ef033d9dbff"
+source_hash: "116ce30fd510add80ba7cf60f28bb06481ce4ae1ead232d1483f9814385f1082"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker-vm-runtime.md"
@@ -13,7 +13,74 @@ duplicate_index: 1
 # Docker VM runtime
 Source: https://docs.openclaw.ai/install/docker-vm-runtime
 
-Shared runtime steps for VM-based Docker installs such as GCP, Hetzner, and similar VPS providers.
+Use this runtime flow after provisioning a VM and installing Docker. Provider
+guides such as [GCP](/install/gcp) and [Hetzner](/install/hetzner) own VM
+creation, firewall rules, SSH access, and the tunnel back to your laptop. This
+page owns the Docker setup shared by those hosts.
+
+## Before you begin
+
+You need:
+
+- A Debian or Ubuntu VM with Docker Engine and Docker Compose v2
+- At least 2 GB RAM for a source image build; 4 GB is more reliable
+- The OpenClaw source checkout on the VM
+- Provider and model credentials for onboarding
+- An SSH-only or otherwise restricted provider firewall; do not expose the
+  Gateway port directly to the public Internet
+
+From the VM:
+
+```bash
+git clone https://github.com/openclaw/openclaw.git
+cd openclaw
+docker --version
+docker compose version
+```
+
+## Prepare persistent host state
+
+The maintained setup script defaults state to the current VM user's home:
+
+```bash
+export OPENCLAW_CONFIG_DIR="$HOME/.openclaw"
+export OPENCLAW_WORKSPACE_DIR="$HOME/.openclaw/workspace"
+export OPENCLAW_AUTH_PROFILE_SECRET_DIR="$HOME/.openclaw-auth-profile-secrets"
+```
+
+Override those paths before setup if your VM uses a dedicated data disk. Keep
+all three directories in backups. The auth-profile secret directory contains
+the local encryption key for OAuth-backed auth profile token material, so it
+must persist but remain separate from `OPENCLAW_CONFIG_DIR`.
+
+## Run the maintained Docker setup
+
+```bash
+./scripts/docker/setup.sh
+```
+
+The script creates the host directories, builds `openclaw:local`, runs
+onboarding, generates a Gateway token, synchronizes `.env`, and starts the
+Gateway through the repository's `docker-compose.yml`. The Compose file pins
+container-side state to `/home/node/.openclaw` while using the host paths above
+as bind-mount sources.
+
+To use an official prebuilt image instead of building from source:
+
+```bash
+export OPENCLAW_IMAGE="ghcr.io/openclaw/openclaw:latest"
+./scripts/docker/setup.sh
+```
+
+For unattended setup, provider SecretRefs, extra mounts, sandbox setup, and all
+supported environment variables, use the full [Docker guide](/install/docker).
+
+Warning
+
+`OPENCLAW_GATEWAY_BIND=lan` is the normal container setting: `loopback` would
+limit the Gateway to the container's own network namespace. Keep the published
+host port private with the cloud firewall, then reach it through the SSH tunnel
+from the provider guide.
 
 ## Bake required binaries into the image
 
@@ -31,7 +98,7 @@ These are examples, not a complete list. Docker Compose builds the repo-root
 `Dockerfile`, so extend that file rather than creating a standalone example or
 replacing its contents. The repository Dockerfile has required
 `workspace-deps`, build, runtime-assets, and final runtime stages. Its manifest
-extraction covers the `packages/*` and selected `extensions/*` workspaces before
+extraction covers the `packages/*` and selected plugin workspaces before
 `pnpm install --frozen-lockfile`.
 
 For Debian packages, prefer the existing build argument:
@@ -44,7 +111,6 @@ For downloaded release binaries such as `gog`, `goplaces`, or `wacli`, add the
 download and install commands to the repo-root `Dockerfile` final runtime stage,
 after its package-install blocks and before `USER node`. Preserve the existing
 non-root uid 1000 setup, `tini` entrypoint, health check, and `openclaw` symlink.
-Then rebuild and restart the containers.
 
 Note
 
@@ -53,16 +119,16 @@ reviewed pins instead of changing them to floating `FROM node:24-bookworm`
 references. For ARM-based VMs, choose `arm64` release assets for extra binaries;
 for reproducible builds, use versioned asset URLs and verify their checksums.
 
-## Build and launch
+Rebuild the customized image without repeating onboarding:
 
 ```bash
-docker compose build
-docker compose up -d openclaw-gateway
+OPENCLAW_SKIP_ONBOARDING=1 ./scripts/docker/setup.sh
 ```
 
-If the build fails with `Killed` or exit code 137 during `pnpm install --frozen-lockfile`, the VM is out of memory. Use a larger machine class before retrying.
+If the build fails with `Killed` or exit code 137 during dependency installation
+or bundling, the VM is out of memory. Resize it before retrying.
 
-Verify binaries:
+Verify baked binaries:
 
 ```bash
 docker compose exec openclaw-gateway which gog
@@ -70,52 +136,55 @@ docker compose exec openclaw-gateway which goplaces
 docker compose exec openclaw-gateway which wacli
 ```
 
-Expected output:
-
-```text
-/usr/local/bin/gog
-/usr/local/bin/goplaces
-/usr/local/bin/wacli
-```
-
-Verify the gateway is up:
+## Verify and administer the Gateway
 
 ```bash
-docker compose logs -f openclaw-gateway
+docker compose ps
+docker compose logs --tail=100 openclaw-gateway
 curl -fsS http://127.0.0.1:18789/healthz
+docker compose run --rm openclaw-cli dashboard --no-open
 ```
 
-`/healthz` returning a 200 response confirms the gateway process is listening and healthy; the built-in image `HEALTHCHECK` polls the same endpoint.
+`/healthz` returning a 200 response confirms that the Gateway process is
+listening. The image `HEALTHCHECK` polls the same endpoint. If the Control UI
+requires device approval:
+
+```bash
+docker compose run --rm openclaw-cli devices list
+docker compose run --rm openclaw-cli devices approve <requestId>
+```
 
 ## What persists where
 
-OpenClaw runs in Docker, but Docker is not the source of truth. All long-lived state must survive restarts, rebuilds, and reboots.
+OpenClaw runs in Docker, but the container filesystem is not the source of
+truth. Long-lived state must survive restarts, rebuilds, and reboots.
 
-| Component              | Location                                               | Persistence mechanism  | Notes                                                                                                               |
-| ---------------------- | ------------------------------------------------------ | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Gateway config         | `/home/node/.openclaw/`                                | Host volume mount      | Includes `openclaw.json`                                                                                            |
-| Channel/provider creds | `/home/node/.openclaw/credentials/`                    | Host volume mount      | Channel and provider credential material                                                                            |
-| Model auth profiles    | `/home/node/.openclaw/agents/`                         | Host volume mount      | `agents/<agentId>/agent/auth-profiles.json` (OAuth, API keys)                                                       |
-| Legacy OAuth key file  | `/home/node/.config/openclaw/`                         | Host volume mount      | Read-only compat for pre-migration OAuth sidecars; `openclaw doctor --fix` migrates these into `auth-profiles.json` |
-| Skill configs          | `/home/node/.openclaw/skills/`                         | Host volume mount      | Skill-level state                                                                                                   |
-| Agent workspace        | `/home/node/.openclaw/workspace/`                      | Host volume mount      | Code and agent artifacts                                                                                            |
-| WhatsApp session       | `/home/node/.openclaw/`                                | Host volume mount      | Preserves QR login                                                                                                  |
-| Gmail keyring          | `/home/node/.openclaw/`                                | Host volume + password | Requires `GOG_KEYRING_PASSWORD`                                                                                     |
-| Plugin packages        | `/home/node/.openclaw/npm`, `/home/node/.openclaw/git` | Host volume mount      | Downloadable plugin package roots                                                                                   |
-| External binaries      | `/usr/local/bin/`                                      | Docker image           | Must be baked at build time                                                                                         |
-| Node runtime           | Container filesystem                                   | Docker image           | Rebuilt every image build                                                                                           |
-| OS packages            | Container filesystem                                   | Docker image           | Do not install at runtime                                                                                           |
-| Docker container       | Ephemeral                                              | Restartable            | Safe to destroy                                                                                                     |
+| Component            | Container location                  | Persistence mechanism       | Notes                                                                      |
+| -------------------- | ----------------------------------- | --------------------------- | -------------------------------------------------------------------------- |
+| Gateway state/config | `/home/node/.openclaw/`             | `OPENCLAW_CONFIG_DIR` mount | Includes `openclaw.json`, shared state, and installed plugin package roots |
+| Agent workspace      | `/home/node/.openclaw/workspace/`   | Workspace mount             | Code and agent artifacts                                                   |
+| Channel credentials  | `/home/node/.openclaw/credentials/` | Config mount                | Channel credential material                                                |
+| Model auth profiles  | `/home/node/.openclaw/agents/`      | Config mount                | `agents/<agentId>/agent/auth-profiles.json`                                |
+| Auth-profile key     | `/home/node/.config/openclaw/`      | Secret-directory mount      | Encryption key material; keep separate from the config mount               |
+| Skill state          | `/home/node/.openclaw/skills/`      | Config mount                | Skill-level state                                                          |
+| External binaries    | `/usr/local/bin/`                   | Docker image                | Must be baked at build time                                                |
+| Node and OS packages | Container filesystem                | Docker image                | Rebuilt with the image; do not install at runtime                          |
+| Docker container     | Ephemeral                           | Restartable                 | Safe to replace after mounted state is verified                            |
 
-## Updates
+## Update OpenClaw
 
-To update OpenClaw on the VM:
+For a source-built image:
 
 ```bash
-git pull
-docker compose build
-docker compose up -d
+git pull --ff-only
+OPENCLAW_SKIP_ONBOARDING=1 ./scripts/docker/setup.sh
+docker compose run --rm openclaw-cli doctor --json
 ```
+
+For a pinned or prebuilt image, update `OPENCLAW_IMAGE` to the intended tag or
+digest before rerunning the setup script. Routine image upgrades run startup-safe
+migrations against the mounted state; see [Upgrading container images](/install/docker#upgrading-container-images)
+for recovery when a migration cannot complete automatically.
 
 ## Related
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Models"
 source: "https://docs.openclaw.ai/cli/models"
-source_hash: "014941df2fcfd57f6afc58354f54d28ff3a90e21b6250c446fd02f45b05adf97"
+source_hash: "8fb22c3003252ff6908f16e9a82fa607fe33356fd776d962e866b19b550af9d4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/models.md"
@@ -36,6 +36,8 @@ openclaw models scan
 ```
 
 `status`, `list`, and `auth` subcommands accept `--agent <id>` to target a configured agent; `scan`, `aliases`, and `fallbacks`/`image-fallbacks` always use the configured default agent, and `set`/`set-image` reject `--agent` outright. When omitted, `--agent`-aware commands use `OPENCLAW_AGENT_DIR` if set, otherwise the configured default agent.
+
+`models set` and `models set-image` require the provider to be declared by an installed plugin or configured under `models.providers`. An unknown provider exits nonzero without changing config. If the provider is known but the model is absent from the local catalog, the command saves the selection and prints a warning because newly released and self-hosted models may not be cataloged yet. `openclaw doctor --json` reports configured unknown providers; add `--severity-min info` to also see active models that the local catalog cannot confirm.
 
 ### Status
 

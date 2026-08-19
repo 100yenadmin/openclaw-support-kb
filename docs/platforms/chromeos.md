@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ChromeOS"
 source: "https://docs.openclaw.ai/platforms/chromeos"
-source_hash: "6d0ce7d086c494388e50729dad1a816de083932273532f1757e5805b067ad52a"
+source_hash: "13b57cf9c119636d1f536d63348553e239f1afa78df28119a844451d25fdc4d9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/chromeos.md"
@@ -60,7 +60,9 @@ Full server guidance lives in the [Linux guide](/platforms/linux) and the
 ## Prefer the native install over Docker
 
 On a single user Chromebook, use the native npm install (the installer script,
-or a global `npm i -g openclaw@latest`) rather than [Docker](/install/docker).
+or `npm i -g openclaw@latest --allow-scripts=openclaw` on npm 12 or npm
+11.16+) rather than [Docker](/install/docker). On npm 11.15 and earlier, omit
+`--allow-scripts=openclaw`.
 
 Docker works inside Crostini, but Docker in Crostini adds friction: if you use
 the Claude Code CLI as your model runtime, it has to be installed and logged in

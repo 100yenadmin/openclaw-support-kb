@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "1f51ea0d0473ac1915330ec8578e8165e029d7607c9f84917f979410765660fa"
+source_hash: "09abfaa401bcb5ebc217ef9e2a313fcab433bc1cf5298fb3b7d601f5a138a15c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -481,9 +481,10 @@ The branch already has a real shared SQLite base:
   TypeScript and the macOS companion. The row's `raw_json` remains authoritative
   for protocol CAS hashes; typed columns are write-time projections.
 - TypeScript device identity and device-auth tokens use typed
-  `device_identities` and `device_auth_tokens` rows, with doctor-only legacy JSON
-  import kept outside the runtime owners. Gateway-origin-scoped tokens use the
-  lazy additive `gateway_origin_device_tokens` table.
+  `device_identities` and `device_auth_tokens` rows. Gateway startup may import
+  a valid retired primary identity under the startup migration lease; invalid
+  canonical identity repair remains Doctor-only. Gateway-origin-scoped tokens
+  use the lazy additive `gateway_origin_device_tokens` table.
 - GitHub Copilot token exchange cache uses the shared SQLite plugin-state table
   under `github-copilot/token-cache/default`. It is provider-owned cache state,
   so it intentionally does not add a host schema table.
@@ -502,10 +503,11 @@ The branch already has a real shared SQLite base:
 - Android notification recent-package history uses typed
   `android_notification_recent_packages` rows. Runtime no longer migrates or
   reads the old SharedPreferences CSV keys.
-- Device identity creation fails closed when legacy `identity/device.json`
-  exists, when the SQLite identity row is invalid, or when the SQLite identity
-  store cannot be opened. Doctor imports and removes that file first, so runtime
-  startup cannot silently rotate pairing identity before migration.
+- Device identity creation fails closed when a legacy `identity/device.json`
+  cannot be safely imported, when the SQLite identity row is invalid, or when
+  the SQLite identity store cannot be opened. Gateway startup and Doctor both
+  verify the imported key before removing the retired file, so startup cannot
+  silently rotate pairing identity during migration.
 - Device identity selection is a SQLite row key, not a JSON file locator. Tests
   and gateway helpers pass explicit identity keys; only doctor migration and the
   fail-closed startup gate know the retired `identity/device.json` filename.

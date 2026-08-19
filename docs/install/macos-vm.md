@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS VMs"
 source: "https://docs.openclaw.ai/install/macos-vm"
-source_hash: "7e2b054b942c7eebbef4a2dee7233c481edc06fe1eafd93ea5670b316b836024"
+source_hash: "78edba6df646822c81f7209a411ff0ee2746cad407d2e61ae844b62508e45419"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/macos-vm.md"
@@ -121,10 +121,11 @@ Replace `youruser` with the account you created, and the IP with your VM's IP.
 
 ## 6) Install OpenClaw
 
-Inside the VM:
+Inside the VM, use the following command on npm 12 or npm 11.16+. On npm 11.15
+and earlier, omit `--allow-scripts=openclaw`.
 
 ```bash
-npm install -g openclaw@latest
+npm install -g openclaw@latest --allow-scripts=openclaw
 openclaw onboard --install-daemon
 ```
 

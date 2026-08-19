@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Voicecall"
 source: "https://docs.openclaw.ai/cli/voicecall"
-source_hash: "50d83baf347274ce0590dc411b6b8b0cf32df0bc2d00e744d87364cc669f8029"
+source_hash: "f0cb227f34be9dd9eba7b46848f74d31c2e75ee3bf4b70d8192419a585f8d7a5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/voicecall.md"
@@ -21,7 +21,15 @@ plugin is installed and enabled.
 When the Gateway is running, operational commands (`call`, `start`,
 `continue`, `speak`, `dtmf`, `end`, `status`) route to that Gateway's
 voice-call runtime. If no Gateway is reachable, they fall back to a standalone
-CLI runtime.
+CLI runtime. `status` uses the persisted call store instead of starting that
+runtime.
+
+Fallback is limited to transport-level absence. If the Gateway responds with a
+request or authentication error, or does not answer before the timeout, the
+command exits nonzero and points to `openclaw gateway status`; it does not start
+a second webhook server. If standalone fallback cannot bind the configured
+`serve.port`, the error identifies the likely running Gateway instead of
+printing a raw `EADDRINUSE` failure.
 
 ## Subcommands
 
@@ -194,7 +202,10 @@ JSON with `recordsScanned`, `turnLatency`, and `listenWait` summaries.
 ### `expose`
 
 Enable, disable, or change the Tailscale serve/funnel configuration for the
-voice webhook.
+voice webhook. When realtime or streaming audio is enabled, the command also
+exposes or clears that mode's WebSocket stream path. The external HTTPS port
+comes from `tailscale.port` (default `443`); Funnel supports `443`, `8443`, or
+`10000`.
 
 | Flag                  | Default                                   | Description                                     |
 | --------------------- | ----------------------------------------- | ----------------------------------------------- |

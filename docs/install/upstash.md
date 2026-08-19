@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Upstash Box"
 source: "https://docs.openclaw.ai/install/upstash"
-source_hash: "32d3f9a11df150fc67efbc67fab3162b517b0d8a2c8f4b7de431c1625336ed46"
+source_hash: "4567fd93145eaa9518fb1812cbbf22422593d008412058434b35eb980263c3da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/upstash.md"
@@ -46,10 +46,11 @@ The keepalive options reduce idle tunnel drops during onboarding.
 
 ## Install OpenClaw
 
-Inside the Box:
+Inside the Box, use the following command on npm 12 or npm 11.16+. On npm 11.15
+and earlier, omit `--allow-scripts=openclaw`.
 
 ```bash
-sudo npm install -g openclaw
+sudo npm install -g openclaw --allow-scripts=openclaw
 ```
 
 ## Run onboarding

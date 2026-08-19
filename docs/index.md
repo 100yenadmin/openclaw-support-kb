@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "bdcab9d0c4dd9905acaaa964ea5dd176ca2f717186894a5f1a2c1808205fd526"
+source_hash: "25caa3e1f0ec49e29c0fd6c76a689af54e8f13d82d466aaa07572d8ee5aad2c0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -195,9 +195,14 @@ Steps
 
 Install OpenClaw
 
+    On npm 12 or npm 11.16+:
+
     ```bash
-    npm install -g openclaw@latest
+    npm install -g openclaw@latest --allow-scripts=openclaw
     ```
+
+    On npm 11.15 and earlier, omit `--allow-scripts=openclaw`.
+
 
 
 Onboard and install the service

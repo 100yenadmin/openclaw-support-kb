@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration examples"
 source: "https://docs.openclaw.ai/gateway/configuration-examples"
-source_hash: "8842868f12348ca73bff2e85fb85b707366a764d5f577171c766ccfefb160269"
+source_hash: "ffdfe662fd97405df28b9a6c48fe4a0db2d678056d111d475804c1bc82bef695"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration-examples.md"
@@ -430,7 +430,7 @@ Save to `~/.openclaw/openclaw.json` and you can DM the bot from that number.
       token: "gateway-token",
       allowTailscale: true,
     },
-    tailscale: { mode: "serve", resetOnExit: false },
+    tailscale: { mode: "serve" },
     remote: { url: "ws://gateway-host.ts.net:18789", token: "remote-token" },
     reload: { mode: "hybrid" },
   },

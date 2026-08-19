@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Security audit checks"
 source: "https://docs.openclaw.ai/gateway/security/audit-checks"
-source_hash: "9cb44ddb392e504f040b4d1a4e1b6962c81234eb5c0e2b556043c00c736596f4"
+source_hash: "be5c32bb4a46ee7ec7b24da317312a9945f22f09add95ee2a9cee05a5f02c58c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/security/audit-checks.md"
@@ -60,7 +60,6 @@ exhaustive):
 | `gateway.control_ui.allowed_origins_required`                   | critical           | Non-loopback Control UI without explicit browser-origin allowlist                       | `gateway.controlUi.allowedOrigins`                                                                      | no       |
 | `gateway.control_ui.allowed_origins_wildcard`                   | warn/critical      | `allowedOrigins=["*"]` disables browser-origin allowlisting                             | `gateway.controlUi.allowedOrigins`                                                                      | no       |
 | `gateway.control_ui.host_header_origin_fallback`                | warn/critical      | Enables Host-header origin fallback (DNS rebinding hardening downgrade)                 | `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback`                                            | no       |
-| `gateway.control_ui.device_auth_disabled`                       | critical           | Retired device-auth bypass migration still permits remediation access                   | complete **Secure this browser** pairing (`gateway.controlUi.deviceAuthMigration` state)                | no       |
 | `gateway.real_ip_fallback_enabled`                              | warn/critical      | Trusting `X-Real-IP` fallback can enable source-IP spoofing via proxy misconfig         | `gateway.allowRealIpFallback`, `gateway.trustedProxies`                                                 | no       |
 | `gateway.token_too_short`                                       | warn               | Short shared token is easier to brute force                                             | `gateway.auth.token`                                                                                    | no       |
 | `gateway.auth_no_rate_limit`                                    | warn               | Exposed auth without rate limiting increases brute-force risk                           | `gateway.auth.rateLimit`                                                                                | no       |

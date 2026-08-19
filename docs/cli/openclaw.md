@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw setup agent"
 source: "https://docs.openclaw.ai/cli/openclaw"
-source_hash: "81e9e8cdd05e49d504401824f3abd7678f3cc5f91907d98a74635974f5e05bdb"
+source_hash: "9920c4b293fd7ebbced6bcd159759ff28dc0f961dbc8ce96d2f38543d07e1a57"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/openclaw.md"
@@ -115,6 +115,12 @@ Starting a guided setup flow also runs immediately: channel setup (`connect tele
 `import memory` is copy-only rather than a config write. It detects supported local agent homes, lets you choose the available sources, and copies new memory files into the existing default agent workspace without importing config, credentials, or skills. It requires completed onboarding and reports confirmed imports, nothing-to-import results, provider failures, and failures where some files may already have been copied. No Gateway restart is needed. Use the Control UI's [Import Memory page](/web/control-ui#import-assistant-memory) when you need to target another agent or replace an existing import.
 
 Persistent operations require conversational approval (or `--yes` for a direct command): write config, `config set`, `config set-ref`, setup/onboarding bootstrap, change the default model, start/stop/restart the Gateway, create agents, and install plugins.
+
+Configured agents can ask OpenClaw to create another agent through their
+`openclaw` tool. The request enters the same typed create-agent operation and
+operator approval flow used by Ask OpenClaw; the approval summary names the
+requesting agent. OpenClaw remains the executor, and approved creation records
+that requesting agent as the new agent's creator.
 
 Doctor repairs are unavailable inside OpenClaw because they can rewrite the provider, authentication, or default-agent inference route powering the session. Exit OpenClaw and run `openclaw doctor --fix` in a terminal. Read-only `doctor` remains available inside OpenClaw.
 
@@ -251,10 +257,9 @@ Message-channel rescue mode never uses the model-assisted planner. Remote rescue
 Embedded runtimes and the Codex app-server harness enforce the ring-zero
 restriction directly: the run carries an OpenClaw tool allow-list with only
 the `openclaw` tool. For Codex, OpenClaw also disables environments, native
-execution, multi-agent, goal, app/plugin, skill/MCP, web-search, and
-`request_user_input` surfaces for that run. Codex still injects its inert native `update_plan`
-utility; it can update the model's temporary checklist but cannot write files
-or OpenClaw configuration. CLI harnesses do not consume OpenClaw's allow-list,
+execution, multi-agent, goal, app/plugin, skill/MCP, web-search,
+`request_user_input`, and its native planning utility for that run. CLI
+harnesses do not consume OpenClaw's allow-list,
 so OpenClaw admits only backends whose own tool-selection contract can prove
 the same restriction:
 

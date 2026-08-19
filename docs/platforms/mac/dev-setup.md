@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS dev setup"
 source: "https://docs.openclaw.ai/platforms/mac/dev-setup"
-source_hash: "b3ccab1ab71cba7dfeb20b976d4b3ae2ad5685fc112265a05226260651f0eb14"
+source_hash: "2602281b1bfc9a64a7bd9f2ed32fd9223a5cfaf889832761e7a93eb209bc4063"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/dev-setup.md"
@@ -63,12 +63,17 @@ matching user-space CLI and runtime before starting the Gateway wizard.
 
 For manual development recovery, install the matching CLI yourself:
 
+The npm command below is for npm 12 or npm 11.16+. On npm 11.15 and earlier,
+omit `--allow-scripts=openclaw`.
+
 ```bash
-npm install -g openclaw@<version>
+npm install -g openclaw@<version> --allow-scripts=openclaw
 ```
 
-`pnpm add -g openclaw@<version>` and `bun add -g openclaw@<version>` also
-work. Node remains the recommended runtime for the Gateway itself.
+`pnpm add -g --allow-build=openclaw openclaw@<version>` and
+`bun add -g --trust openclaw@<version>` also work. Bun's `--trust` allows the
+OpenClaw lifecycle scripts for that install. Node remains the recommended
+runtime for the Gateway itself.
 
 ## Troubleshooting
 

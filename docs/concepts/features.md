@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "b3a349b1da1692cdeb3ac33d284eb22c4a8022d2a669aab7604777772e92e149"
+source_hash: "dc65feb9e3d3cf527d25e9a2f3f71f329b4b939b881319fd082d821a50d83fe3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -66,7 +66,7 @@ Mobile nodes
 
 - Embedded agent runtime with tool streaming
 - Multi-agent routing with isolated sessions per workspace or sender
-- Sessions: direct chats collapse into shared `main`; groups are isolated
+- Sessions: direct chats collapse into shared `main`; groups are isolated by default
 - Streaming and chunking for long responses
 
 **Auth and providers:**

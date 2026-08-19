@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "72c35687e4afb0e342698dfe8ea2cfc7b34100e6ab0f1f2745bf3c726c04e24c"
+source_hash: "b6995d970b08867b1322b28a3049eae6cb33b5eb3ff244f1941e6bd010e0485e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -71,6 +71,26 @@ state directories and config paths remain unchanged.
   and pure side-effect commands may omit `--json` when they have no meaningful
   report to return.
 - Long-running commands show a progress indicator (OSC 9;4 when supported).
+
+### JSON failures
+
+Successful JSON payloads remain command-specific. When a command in JSON output
+mode fails, it exits nonzero and writes one JSON document to stdout with this
+envelope:
+
+```json
+{
+  "ok": false,
+  "error": {
+    "type": "cli_error",
+    "message": "Description of the failure"
+  }
+}
+```
+
+A command may add domain-specific fields, such as per-item results, beside this
+envelope. Failure messages are sanitized. Human-readable diagnostics may also be
+written to stderr, so scripts should parse stdout and still check the exit status.
 
 ## Color palette
 
