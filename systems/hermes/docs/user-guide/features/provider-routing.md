@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/provider-routing"
+title: "Provider Routing"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing"
-source_hash: "e9bf707f485fee8d53628ce9bb95ee88279484e118760569ce68fbf2120c91f1"
+source_hash: "e0de1a530495eabcc43b480ef08e992b0aa0cc556e3a3f63e166738cfde54bef"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/provider-routing.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/provider-routing.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/provider-routing
+# Provider Routing
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

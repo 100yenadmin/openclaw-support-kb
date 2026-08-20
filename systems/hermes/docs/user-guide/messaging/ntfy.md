@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/ntfy.md"
+title: "ntfy"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy"
-source_hash: "3b5e30b862ffb496b05e2a354e96f6110c38a37019bac39209a64c7cbc8c9a81"
+source_hash: "f1555d1758d2b8f58b51cd6b7457adb1c4ee76b505e69f97f23e3ccb0d11387e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/ntfy.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/ntfy.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/ntfy.md
+# ntfy
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

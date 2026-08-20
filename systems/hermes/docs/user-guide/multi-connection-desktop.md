@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/multi-connection-desktop.md"
+title: "Connecting Desktop to Many Hermes Instances"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-connection-desktop"
-source_hash: "32e1106aa039ecf155b307d6ea65a6a6471edb95a906e3ece56fdb640828cd8c"
+source_hash: "3b2663dd4288db58eee719a1d12d330002254b0f88d6512f1e1d05f4c84e8504"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-connection-desktop.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/multi-connection-desktop.md"
 duplicate_index: 1
 ---
 
-# user-guide/multi-connection-desktop.md
+# Connecting Desktop to Many Hermes Instances
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
@@ -252,6 +252,13 @@ connection in parallel:
 Each instance reports independently, so one unreachable box never wedges the
 batch. Backends that manage updates externally (Docker, Nix) refuse politely
 with their own message, per row.
+
+You rarely need the Settings button, though: once more than one update target
+exists, the app's regular update affordances (**Update now** on the About
+panel, ⌘K **Update Hermes**, the update-ready toast) run the same fan-out
+automatically — active backend first, then every other eligible gateway, then
+the desktop app itself last. See
+[Updating](./desktop.md#updating) in the desktop guide.
 
 ## Security notes
 

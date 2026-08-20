@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/secrets/bitwarden.md"
+title: "Bitwarden Secrets Manager"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets/bitwarden"
-source_hash: "e8b9734431fb0be6e05bf84eba94eee3f1d68f121b19683df56814068cb389ce"
+source_hash: "638c18e01716d412fb2a36ac727db20988fd17d07a0a2ddd4972ed122976963e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/bitwarden.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/secrets/bitwarden.md"
 duplicate_index: 1
 ---
 
-# user-guide/secrets/bitwarden.md
+# Bitwarden Secrets Manager
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

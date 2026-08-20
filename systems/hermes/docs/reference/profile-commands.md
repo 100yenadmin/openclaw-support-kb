@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "reference/profile-commands"
+title: "Profile Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/profile-commands"
-source_hash: "c12aac5c2b9a66a6712552a45fda0dc7c254a55c65ad13e1a1f3f6dc2d948021"
+source_hash: "b6fbef267683b3040ff7f47789588f6877ac0f786de63e081e299bd2d1129bb0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/profile-commands.md"
@@ -10,7 +10,7 @@ original_doc_path: "reference/profile-commands.md"
 duplicate_index: 1
 ---
 
-# reference/profile-commands
+# Profile Commands Reference
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

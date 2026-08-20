@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/egress/iron-proxy.md"
+title: "Egress credential-injection proxy (iron-proxy)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/egress/iron-proxy"
-source_hash: "05a06e8483b83a3755840212010cb92b14aad6ec173fe80c433a8f99eb7c0317"
+source_hash: "af4736bbe825f34385e80745002b97da9638c5addb3e2ad4f41221748ab5152b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/egress/iron-proxy.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/egress/iron-proxy.md"
 duplicate_index: 1
 ---
 
-# user-guide/egress/iron-proxy.md
+# Egress credential-injection proxy (iron-proxy)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

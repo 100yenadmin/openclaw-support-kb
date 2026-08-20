@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/kanban-worker-lanes.md"
+title: "Kanban worker lanes"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban-worker-lanes"
-source_hash: "8b867b1ec349301909e0eae53c83259773d1b7d2ade7398be79ccb8a48369f6d"
+source_hash: "de3db95732d15b3289dbf48147fc597f12a932ab0b3f1992459c1866e6dce09c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban-worker-lanes.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/kanban-worker-lanes.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/kanban-worker-lanes.md
+# Kanban worker lanes
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "developer-guide/subagent-lifecycle-api.md"
+title: "Public Subagent Lifecycle API"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/subagent-lifecycle-api"
-source_hash: "7f5369c7d6eb989891ad8c278ce483b9e500d21512a2d1d615e00e506983855e"
+source_hash: "d9b9a02881cc9555085a09a8bbd5c964329b092ae9fae6dd0253b609878174f9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/subagent-lifecycle-api.md"
@@ -10,7 +10,7 @@ original_doc_path: "developer-guide/subagent-lifecycle-api.md"
 duplicate_index: 1
 ---
 
-# developer-guide/subagent-lifecycle-api.md
+# Public Subagent Lifecycle API
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

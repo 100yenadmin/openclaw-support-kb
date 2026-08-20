@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "developer-guide/adding-platform-adapters"
+title: "Adding a Platform Adapter"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters"
-source_hash: "4695ee573a7bac2e0bfc9993564d1660ed5e6d8e4a882bf786b4817469c1f9b0"
+source_hash: "26185d4dd1f9519c7bf9e18cc4ec89afb89470a4b64775c074c836218d5d2428"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/adding-platform-adapters.md"
@@ -10,7 +10,7 @@ original_doc_path: "developer-guide/adding-platform-adapters.md"
 duplicate_index: 1
 ---
 
-# developer-guide/adding-platform-adapters
+# Adding a Platform Adapter
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

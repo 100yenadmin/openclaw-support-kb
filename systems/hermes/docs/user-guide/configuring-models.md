@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/configuring-models"
+title: "Configuring Models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "82dd57befc8b6efb3ab949f7973dabddaf804d190e768387943e8eeaf9f92299"
+source_hash: "d3f523d677c832c99c5219441a7bc4dbfd899874d4095426697878ef294a2591"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/configuring-models.md"
 duplicate_index: 1
 ---
 
-# user-guide/configuring-models
+# Configuring Models
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

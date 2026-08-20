@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/spotify.md"
+title: "Spotify"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/spotify"
-source_hash: "b096fa1c321cde6056c7d3f88fdbe06e97e3f344cda1496a21a3f103456fdb8e"
+source_hash: "596d2709cce2b25dfe9121f1248ab3fbafcdaf255f46c3d387145dc25617605d"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/spotify.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/spotify.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/spotify.md
+# Spotify
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

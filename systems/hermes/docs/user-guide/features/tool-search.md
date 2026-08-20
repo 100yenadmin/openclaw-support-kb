@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/tool-search.md"
+title: "Tool Search"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-search"
-source_hash: "8cf754495e0ac0fa55011e99f86c0d86d7383b1ea048f461623cbac8c87d89d4"
+source_hash: "f19bf0e234fd8e6a257fac094c2fb3efd25508eac8b565537590ee9347e8c24a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-search.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/tool-search.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/tool-search.md
+# Tool Search
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

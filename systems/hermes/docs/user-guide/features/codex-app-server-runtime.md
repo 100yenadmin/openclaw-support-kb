@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/codex-app-server-runtime.md"
+title: "Codex App-Server Runtime (optional)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime"
-source_hash: "d9eaef8266155120fd2138fede57077164e235b2113f57a2e3ca480d54e63733"
+source_hash: "2cac6beb12dda0ccaae9b67276fcb0aacca7641e3a89c877316834db57cc68f4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/codex-app-server-runtime.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/codex-app-server-runtime.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/codex-app-server-runtime.md
+# Codex App-Server Runtime (optional)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

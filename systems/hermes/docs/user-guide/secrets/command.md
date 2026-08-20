@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/secrets/command.md"
+title: "Command Helper Secret Source"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets/command"
-source_hash: "a69d5f3f47226dfb615d95f542b52b7e908966c516b4fb255c2964170c44c53b"
+source_hash: "684625fa20b422717c8199ff891808761f6e98a72425237c5b72ccd33ca54fd8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/command.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/secrets/command.md"
 duplicate_index: 1
 ---
 
-# user-guide/secrets/command.md
+# Command Helper Secret Source
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

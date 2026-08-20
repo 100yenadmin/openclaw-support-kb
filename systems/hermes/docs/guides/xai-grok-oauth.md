@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "xAI Grok OAuth (SuperGrok / X Premium+)"
 source: "https://hermes-agent.nousresearch.com/docs/guides/xai-grok-oauth"
-source_hash: "69fdaa7682a59f4f96696b52be7423cb5f26cc4fe6f22b91409beca056fcfb25"
+source_hash: "10a5251c8dd7aa350eaa3b6cc16b445e11872780828a6acd54aa38173df8d3c0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/xai-grok-oauth.md"
@@ -174,6 +174,7 @@ The `x_search` toolset auto-enables whenever xAI credentials (a SuperGrok / X Pr
 | Chat | `grok-4.20-0309-non-reasoning` | Non-reasoning variant |
 | Chat | `grok-4.20-multi-agent-0309` | Multi-agent variant |
 | Image | `grok-imagine-image` | Default; ~5–10 s |
+| Image | `grok-imagine-image-2.0` | Typography/layout-aware; strongest quality; ~10–20 s |
 | Image | `grok-imagine-image-quality` | Higher fidelity; ~10–20 s |
 | Video | `grok-imagine-video` | Text-to-video |
 | Video | `grok-imagine-video-1.5-preview` | Image-to-video; dated alias `grok-imagine-video-1.5-2026-05-30` |

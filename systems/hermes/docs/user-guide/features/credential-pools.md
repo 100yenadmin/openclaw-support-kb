@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/credential-pools"
+title: "Credential Pools"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools"
-source_hash: "5ec7db27b48540e1f9546ab5171512995d0ecde9f5a6da33caccdb8398045bf6"
+source_hash: "171f1b9a8f0c3aae07eaaeaec6ec11c6fd2130d761d90f258f7162dad7df2445"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/credential-pools.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/credential-pools.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/credential-pools
+# Credential Pools
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

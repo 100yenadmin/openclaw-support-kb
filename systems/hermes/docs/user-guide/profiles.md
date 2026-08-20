@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/profiles"
+title: "Profiles: Running Multiple Agents"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profiles"
-source_hash: "154997114ea0b58e7104896ba721f299fc9c01e91e3cf5081f4d6df21fd9e6c8"
+source_hash: "94cf995a7eb13b598c10a97532ac2eaea259f56583b949329b7e9161007929f6"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profiles.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/profiles.md"
 duplicate_index: 1
 ---
 
-# user-guide/profiles
+# Profiles: Running Multiple Agents
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

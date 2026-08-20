@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/homeassistant"
+title: "Home Assistant"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/homeassistant"
-source_hash: "b23ee04919cb2649aea1024ee67cf92454bf8bbd4bddcb9d6483b3f13d513799"
+source_hash: "de925d1883dfd9e5c4172cccc3671022a4c5bddeddb5545f8495c30f085e8e20"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/homeassistant.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/homeassistant.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/homeassistant
+# Home Assistant
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

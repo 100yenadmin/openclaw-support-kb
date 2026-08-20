@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/secrets/onepassword.md"
+title: "1Password"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets/onepassword"
-source_hash: "cf5f3cb601df7f554139d0e4bc98fdff241dff25f73eaad0ba56db1c19b8a3af"
+source_hash: "eea108c95bb1032e32f81069db53f4dcccb6171bc469192ab4d5ebdeb81b82e9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/onepassword.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/secrets/onepassword.md"
 duplicate_index: 1
 ---
 
-# user-guide/secrets/onepassword.md
+# 1Password
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

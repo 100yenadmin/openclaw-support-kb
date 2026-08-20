@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/browser"
+title: "Browser Automation"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/browser"
-source_hash: "acd38aa9ca640d3f6be929586475d3e1f43bb06318789924bc41ff5db81f4ad2"
+source_hash: "9f521e2b380835c33ba8aed6de097bc86f665db519714448332f25cfd53d70de"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/browser.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/browser.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/browser
+# Browser Automation
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
@@ -73,6 +73,10 @@ BROWSER_USE_API_KEY=***
 ```
 
 Get your API key at [browser-use.com](https://browser-use.com).
+
+:::note Selecting the provider
+The `.env` keys above supply **credentials only**. The active cloud browser is chosen by the `browser.cloud_provider` selection written by `hermes tools` → Browser Automation (`browserbase`, `browser-use`, `camofox`, or `nous` for the Nous Subscription). Once a selection exists, adding or removing a key does not switch providers — and a selected provider with a missing key errors with guidance to run `hermes tools` instead of silently rerouting. Never-configured setups still autodetect from available credentials.
+:::
 
 ### Browser Use mode (default)
 
@@ -249,7 +253,7 @@ The rewrite only applies to page navigation URLs with loopback hosts (`localhost
 
 Or configure via `hermes tools` → Browser Automation → Camofox.
 
-When `CAMOFOX_URL` is set, all browser tools automatically route through Camofox instead of Browserbase or agent-browser.
+Camofox is selected like any other browser backend: pick **Camofox** in `hermes tools` → Browser Automation, which writes `browser.cloud_provider: camofox` to `config.yaml`. `CAMOFOX_URL` is only the server address — setting it no longer selects the backend by itself once a browser selection exists (never-configured setups still autodetect it).
 
 #### Persistent browser sessions
 

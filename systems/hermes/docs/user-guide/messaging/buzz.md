@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/buzz.md"
+title: "Buzz"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/buzz"
-source_hash: "40097f6600710686169e6ec05dc30746309331e3dd2c25121f83214b9a26b3fd"
+source_hash: "da26556584b3e094952a598b1750e4d3f711cbda64c1964cfc3f8cc6106c30b8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/buzz.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/buzz.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/buzz.md
+# Buzz
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

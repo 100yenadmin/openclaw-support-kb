@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/a2a.md"
+title: "A2A (Agent-to-Agent)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/a2a"
-source_hash: "cf5203f8516a7c21f5d87252518feba9136e352d45dc7e5cf8d8f5a15c6d33a0"
+source_hash: "03ffefd77c0fbb2cfbc53fb8d1db988b1c2aa45596af5ec114eb36f4e52ee308"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/a2a.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/a2a.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/a2a.md
+# A2A (Agent-to-Agent)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

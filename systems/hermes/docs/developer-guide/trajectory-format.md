@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "developer-guide/trajectory-format.md"
+title: "Trajectory Format"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/trajectory-format"
-source_hash: "5e497622f513e4d4bb52699ea3522e9f82947d0cae4a74a3f14f7a26bf1a7021"
+source_hash: "c90246b0d3f3bbd2422a59d34f56233ff178e167e91abe2e838a493018930cda"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/trajectory-format.md"
@@ -10,7 +10,7 @@ original_doc_path: "developer-guide/trajectory-format.md"
 duplicate_index: 1
 ---
 
-# developer-guide/trajectory-format.md
+# Trajectory Format
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

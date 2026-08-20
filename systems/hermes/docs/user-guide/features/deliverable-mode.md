@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/deliverable-mode.md"
+title: "Deliverable Mode (Artifacts in Chat)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/deliverable-mode"
-source_hash: "083161d408550a987d1115546ee3f94e47fbaf6cf9954f06828e04dbac3bf6f6"
+source_hash: "3353d761b36c03cad73c43f6a65ae234309f03ac0c27be5eb22aa50271bf7634"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/deliverable-mode.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/deliverable-mode.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/deliverable-mode.md
+# Deliverable Mode (Artifacts in Chat)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Integrations"
 source: "https://hermes-agent.nousresearch.com/docs/integrations"
-source_hash: "f3fdb03f039c35d9c9e2ecb9b548b6e71343f71fcbe8dad97f1a093032fd961e"
+source_hash: "f56ba2a326004bc07120dcc29e8b10e6199a3f4d9175d32384e769004bab8aa4"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "integrations/index.md"
@@ -47,7 +47,7 @@ The `web_search` and `web_extract` tools support eight backend providers, config
 | **SearXNG** | `SEARXNG_URL` | ✔ | — | — |
 | **Brave** (free tier) | `BRAVE_SEARCH_API_KEY` | ✔ | — | — |
 | **DuckDuckGo** (ddgs) | _(none)_ | ✔ | — | — |
-| **Tavily** | `TAVILY_API_KEY` | ✔ | ✔ | ✔ |
+| **Tavily** | `TAVILY_API_KEY` (optional) | ✔ | ✔ | — |
 | **Exa** | `EXA_API_KEY` | ✔ | ✔ | — |
 | **Parallel** | `PARALLEL_API_KEY` | ✔ | ✔ | — |
 | **xAI** | `XAI_API_KEY` | ✔ | — | — |
@@ -59,7 +59,7 @@ web:
   backend: firecrawl    # firecrawl | searxng | brave-free | ddgs | tavily | exa | parallel | xai
 ```
 
-If `web.backend` is not set, the backend is auto-detected from whichever API key is available. Self-hosted Firecrawl is also supported via `FIRECRAWL_API_URL`.
+If `web.backend` is not set, the backend is auto-detected from whichever API key is available. Self-hosted Firecrawl is also supported via `FIRECRAWL_API_URL`. Selecting Tavily in `hermes tools` works without a key.
 
 ## Browser Automation
 

@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/fallback-providers"
+title: "Fallback Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "4c6fde63449c0cc88d19d3163ccfe83e87a0fbd7d1e5b025b88aba6b85cf3661"
+source_hash: "138553c06f82c2c47898234751b1c1ec4d7f351ea1b26491388a4cac7662cd65"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/fallback-providers.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/fallback-providers
+# Fallback Providers
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

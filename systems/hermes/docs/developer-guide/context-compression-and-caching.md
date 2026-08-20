@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "developer-guide/context-compression-and-caching"
+title: "Context Compression and Caching"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-compression-and-caching"
-source_hash: "ae4b27fbb8ee9bd32403dc0945b7b22f688a2dfc226b95e35ab9767130c3583a"
+source_hash: "22baa01fb5620a6c348e85ab890b35417d521966b869c68f3546621bd401f69f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-compression-and-caching.md"
@@ -10,7 +10,7 @@ original_doc_path: "developer-guide/context-compression-and-caching.md"
 duplicate_index: 1
 ---
 
-# developer-guide/context-compression-and-caching
+# Context Compression and Caching
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

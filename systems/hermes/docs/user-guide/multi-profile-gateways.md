@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/multi-profile-gateways.md"
+title: "Running Many Gateways at Once"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways"
-source_hash: "a9240828bcfc148e5552ac0b90a5bb27bbd91f4a3ad85f7ad973939b26c93b2c"
+source_hash: "571388640457684346a9899e4c7dd0c7fb3b7166b2cb6985bb4e0bc216f033c7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/multi-profile-gateways.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/multi-profile-gateways.md"
 duplicate_index: 1
 ---
 
-# user-guide/multi-profile-gateways.md
+# Running Many Gateways at Once
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

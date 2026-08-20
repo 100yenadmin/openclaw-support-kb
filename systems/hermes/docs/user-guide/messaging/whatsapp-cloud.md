@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "WhatsApp Business (Cloud API)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp-cloud"
-source_hash: "bbde98d04e7aa314c11191384d42b1ebedfc210bc1d56cc0a84e3d1056effc71"
+source_hash: "f317dc3d45014284bcf731c9d44741dd769819691126d31fd8dc6f4e29620aab"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/whatsapp-cloud.md"
@@ -378,15 +378,14 @@ If the model emits tool-call-shaped text instead of a structured call, it usuall
 
 ### STT (voice note transcription) returns empty / "could not transcribe"
 
-The default `stt.provider: local` requires `pip install faster-whisper`.  If you're a Nous subscriber, you can route STT through Meta's managed audio gateway instead:
+The default `stt.provider: local` requires `pip install faster-whisper`.  If you're a Nous subscriber, you can route STT through the managed gateway instead — select **Nous Subscription** for speech-to-text in `hermes tools`, or set it directly:
 
 ```bash
-hermes config set stt.provider openai
-hermes config set stt.use_gateway true
+hermes config set stt.provider nous
 hermes gateway restart
 ```
 
-This uses your Nous Portal access token instead of needing a separate OpenAI key.
+This uses your Nous Portal access token instead of needing a separate OpenAI key. (Older docs suggested `stt.use_gateway true` — that flag is legacy; the provider selection alone controls routing now.)
 
 ---
 

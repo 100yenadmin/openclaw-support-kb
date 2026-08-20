@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/secrets/index.md"
+title: "Secrets"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/secrets"
-source_hash: "414f44196c7451344fd2af1e4c974c7ccd4ddf72070bef9f03de904c952d5d5f"
+source_hash: "0da7ec3c306a074394717c9d1f5e645810a0ab5a0921960d3d9c88d5c0cda389"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/secrets/index.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/secrets/index.md"
 duplicate_index: 1
 ---
 
-# user-guide/secrets/index.md
+# Secrets
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

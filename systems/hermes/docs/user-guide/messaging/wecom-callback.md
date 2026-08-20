@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/wecom-callback.md"
+title: "WeCom Callback (Self-Built App)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom-callback"
-source_hash: "62709a4add6a70356d8a2bf5caa344fd49eac1372240ac5371b755d003b73749"
+source_hash: "193f579979782a205cdb30cfc642422408b16d91fc633937cd1107ebba0beef5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/wecom-callback.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/wecom-callback.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/wecom-callback.md
+# WeCom Callback (Self-Built App)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

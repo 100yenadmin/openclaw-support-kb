@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Interface"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/cli"
-source_hash: "7e973e41a66a99ec32f5b50e491c56cb1d2fb9cc1e40bfdd041d37fea1fbd719"
+source_hash: "3a48f9cea12a3557eaaa6f7550fcd9dc764f377546360f3d306e502b5b6cbc76"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/cli.md"
@@ -70,6 +70,43 @@ hermes chat --verbose
 hermes -w                         # Interactive mode in worktree
 hermes -w -z "Fix issue #123"     # Single query in worktree
 ```
+
+### Worktree cleanup
+
+`hermes -w` sessions create disposable worktrees under `<repo>/.worktrees/`.
+A conservative pruner runs automatically at startup (it only removes clean,
+fully-merged scratch trees past an age threshold), but preserved trees and
+merged local branches still accumulate on busy machines. Reclaim them
+explicitly:
+
+```bash
+hermes worktree list              # audit: age, size, verdict, reason per tree
+hermes worktree prune             # remove safe trees + delete merged branches
+hermes worktree prune --dry-run   # show the plan without changing anything
+hermes worktree prune --trees-only     # leave local branches alone
+hermes worktree prune --branches-only  # leave worktrees alone
+```
+
+Inside a session, `/worktree prune [--dry-run]` does the same (and never
+touches the tree the session is running in).
+
+Safety guarantees (all modes, any age):
+
+- Uncommitted **tracked** changes are never deleted.
+- **Unique unpushed commits** are never deleted — commits that were
+  rebase/squash-merged upstream are detected via `git cherry`
+  patch-equivalence and count as merged, which is what lets the dominant
+  "merged PR, tree preserved forever" leak finally reclaim.
+- Trees **in use by a running hermes session** are never touched.
+- **Untracked-only scratch** (PR body drafts, notes) is archived to
+  `~/.hermes/archive/worktree-prune/` before its tree is removed — never
+  destroyed.
+- Branch deletion is content-gated, not name-gated: any local branch whose
+  commits are all on upstream is safe to delete; branches with unique work,
+  checked-out branches, and `main`/`master`/`develop` are always kept.
+
+When `.worktrees/` grows past 10 trees or 5 GB, startup prints a one-line
+notice pointing at these commands.
 
 ### Plugin management
 

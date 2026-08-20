@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/vision"
+title: "Vision & Image Paste"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/vision"
-source_hash: "e0ee66a4b4391d7715543adb80e0aea1d2036717d4da4d1d68a996b32761fd87"
+source_hash: "3d4f45448b99ed1addf714aed92da65138b6814fdf9721d637fa34d453076ba9"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/vision.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/vision.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/vision
+# Vision & Image Paste
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

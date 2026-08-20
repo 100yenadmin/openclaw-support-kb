@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bot Mode"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/bot-mode"
-source_hash: "2fae1baea9760d405e0319cef573757fb3969aef8666fe59923adeadb21b75b7"
+source_hash: "9d1d4c6ab0b2dada60cfe73ac2a6d62a0308b25fdbca98827c9bbeb2d472d2b5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/bot-mode.md"
@@ -108,6 +108,7 @@ Groups are standalone rows in the same activity-ordered roster as Bot DMs. A Bot
 Bots message each other with attribution, and you can hand work off from any chat:
 
 - **@mentions** — type `@researcher have a look at this` in any chat and the active Bot hands the message off, waits for the reply, and reports back. Mention names are validated against the live roster, so an email address or an unknown `@` passes through untouched.
+- **Renamed Bots keep their tags in sync** — give a Bot a friendly name (the pencil in its chat header, or `hermes profile rename`) and it becomes taggable by that name: a Bot titled *Research Buddy* answers to `@research-buddy` (and `@researchbuddy`), in regular chats and in group rooms alike. The composer's `@` autocomplete offers the renamed tag and also matches when you type the old profile name, which keeps resolving too.
 - **@mentions across machines** — mentioning a Bot that lives on another registered connection (use its `@name-device` handle when names collide) delivers over the Connections registry in the background: the active Bot stays on this device, the desktop routes the message to the recipient's machine, and the reply is relayed back attributed to that agent. Your window's gateway never switches.
 - **Direct messages** — a Bot reaches a teammate's Bot Chat through the standard CLI: it writes the message to a temp file (opening with the `Message from 🤖 <sender> (@<sender>):` prefix), then runs `hermes -p <bot> chat --in ~ -c "Bot Chat" --create-if-missing -Q --query-file <file>`. The file transport means nothing is shell-interpreted — quotes, `$(...)`, and backticks in the message arrive verbatim. The receiving Bot sees the message the next time it runs and knows how to reply, because the messaging protocol is part of its Bot Chat system prompt.
 

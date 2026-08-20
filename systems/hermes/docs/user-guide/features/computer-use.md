@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/computer-use.md"
+title: "Computer Use"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use"
-source_hash: "c2f9db395478a4563d662937cb4c58e8a505332ee50d3028d45147ea911a697d"
+source_hash: "c5cf0323d922048473bbb78e79f988bdac2c05c63d4778476f40d982757c7683"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/computer-use.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/computer-use.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/computer-use.md
+# Computer Use
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
@@ -297,6 +297,23 @@ the model substitutes the platform's idiomatic shortcut and app name):
 
 During all of this, your cursor stays wherever you left it and the email
 app never comes to front.
+
+## Receiving the actual screenshot
+
+Screenshots taken during computer control are normally internal — they exist
+so the model can see the screen, and the agent replies in text. But every
+image capture also saves a bounded, shareable copy under Hermes' image cache
+and reports its path, so on attachment-capable surfaces (Telegram, Discord,
+Desktop, and other gateway platforms) you can simply ask:
+
+> *"Send me a screenshot of my screen."*
+
+and the agent delivers the real image as a native attachment, not just a
+description. On the CLI there is no attachment channel, so the agent gives
+you the saved file's path instead.
+
+Only the 20 most recent capture files are kept, and screenshots are never
+sent automatically — only when you ask for one.
 
 ## Provider compatibility
 

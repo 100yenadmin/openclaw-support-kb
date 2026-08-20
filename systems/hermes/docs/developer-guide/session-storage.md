@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "developer-guide/session-storage"
+title: "Session Storage"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/session-storage"
-source_hash: "fa8c3c3c0a9c810960a5f09c7b4ac99f8ad77f49c168b2ca78a68fc1d06b0e86"
+source_hash: "27cb5acaa322f7d8862c5ba9cfd0a5be36a4e8ef9703b3746180387a784a28e2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/session-storage.md"
@@ -10,7 +10,7 @@ original_doc_path: "developer-guide/session-storage.md"
 duplicate_index: 1
 ---
 
-# developer-guide/session-storage
+# Session Storage
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

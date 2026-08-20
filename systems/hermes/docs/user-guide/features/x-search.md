@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/x-search.md"
+title: "X (Twitter) Search"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search"
-source_hash: "c5d1f057dfa326a4cb89aaf8cc8f6a3607165555d3b35c4f10f023205869814f"
+source_hash: "f5d7353eeff6c2c1c04509e75a632f4655970c3d2d61e43634d5f609f151be0a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/x-search.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/x-search.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/x-search.md
+# X (Twitter) Search
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

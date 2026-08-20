@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/irc.md"
+title: "IRC"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/irc"
-source_hash: "29a4bf116f2b6933f3e742793e9a6e41d03874673312c36a553fbfdf34777860"
+source_hash: "43a24aa86a9edbf6d7fc533d0fb1ec66a299addb760ea50dd2a769da7f165b82"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/irc.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/irc.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/irc.md
+# IRC
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

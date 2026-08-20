@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Desktop App"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "a5610200c542b676705b203ff936af90c4ec4277b4dba523efc851a0c714f804"
+source_hash: "51784ef15f5605e37041b2c3587a5f9a8b643bab8a15be1963b792ae194c070e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -260,6 +260,10 @@ chats decide who replies: [Bot Mode: A Roster of Agents](./bot-mode.md).
 
 The app checks for updates in the background and offers a one-click update when one is ready.
 
+The desktop app and the Hermes backend it talks to update on separate clocks — the app package on your machine, the backend wherever it runs. When more than one update target exists (a remote gateway, or several registered gateways), the update affordances (**Update now** on the About panel, the ⌘K **Update Hermes** row, and the update-ready toast) update **everything**: the connected backend first, then every other eligible registered gateway (Hermes Cloud entries are platform-managed and skipped), and the desktop app itself last, since applying the client update relaunches the app. Single-machine installs keep the one-button experience.
+
+After any backend update, the app also re-checks its own version and warns with a one-click **Update desktop app** action if the GUI is still behind — so updating a remote backend can never silently leave you on a stale desktop build.
+
 The [manual update process](https://hermes-agent.nousresearch.com/docs/getting-started/updating) also works with the GUI.
 
 ## Uninstalling
@@ -436,6 +440,20 @@ rm -rf "$HOME/.hermes/hermes-agent/venv"
 # Reset a stuck macOS microphone prompt
 tccutil reset Microphone com.nousresearch.hermes
 ```
+
+### "The host key has CHANGED since you last connected" (SSH remote)
+
+If your SSH remote was reinstalled or its host key rotated, SSH fails closed
+and Desktop latches an error overlay instead of retrying (retrying can never
+succeed until the stale key is cleared). Verify the change is expected, then
+remove the old entry and retry from the overlay:
+
+```bash
+ssh-keygen -R <host>
+```
+
+Click **Retry** (or re-apply the connection in Settings → Gateway) after
+clearing the entry — the latch resets and the next boot dials fresh.
 
 ### "Build desktop app" stuck on Electron download
 

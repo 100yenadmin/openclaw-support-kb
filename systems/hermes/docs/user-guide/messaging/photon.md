@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/photon.md"
+title: "Photon iMessage"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/photon"
-source_hash: "64340799175488d091931e147ff7818b73b6fbfc65dd8d0fd7342b7ba34235a0"
+source_hash: "c6e47754d4cbd7154f858a6bd7520d69816b65816848bf1c46a83fef2df5da60"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/photon.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/photon.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/photon.md
+# Photon iMessage
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

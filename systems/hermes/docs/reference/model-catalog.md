@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "reference/model-catalog"
+title: "Model Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/model-catalog"
-source_hash: "e76163ba8294f341f860a7e9ac045f9f43f2616d0a388c0ac0eed55514f6687d"
+source_hash: "c510cf0c3aeeb1924f36041ab1f21ce6661ea8e1dbcacc1e372b63b74061769e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/model-catalog.md"
@@ -10,7 +10,7 @@ original_doc_path: "reference/model-catalog.md"
 duplicate_index: 1
 ---
 
-# reference/model-catalog
+# Model Catalog
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

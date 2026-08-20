@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/egress/index.md"
+title: "Egress proxy"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/egress"
-source_hash: "a2922fb162155e41949055f2cfea7012ceb74d96cd3c9a6642e0dea915b855e4"
+source_hash: "50be09ba7be3d278344a2acbddc58bc5e14068f22be49f7b3bd326e66f561a85"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/egress/index.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/egress/index.md"
 duplicate_index: 1
 ---
 
-# user-guide/egress/index.md
+# Egress proxy
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

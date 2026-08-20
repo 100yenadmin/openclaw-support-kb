@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/simplex.md"
+title: "SimpleX Chat"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex"
-source_hash: "e27476ddc0b13c08481424d8052f499df6221e4fd3eed6bf16f7ed6bd438c3cc"
+source_hash: "280a8610b3948918098c4367d80161e2e1e0c384d79bff0475765f40f570dfa8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/simplex.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/simplex.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/simplex.md
+# SimpleX Chat
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

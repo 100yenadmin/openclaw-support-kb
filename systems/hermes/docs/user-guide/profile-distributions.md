@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/profile-distributions.md"
+title: "Profile Distributions: Share a Whole Agent"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions"
-source_hash: "cb26cd371c10878fcfc96988e55769d27f49b10f1d6cbcb33838c84d478b2c6e"
+source_hash: "89a9a14646755f69c695074a9684ad3d0c3dd6d1ee8849f82205c3d5b46e936c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/profile-distributions.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/profile-distributions.md"
 duplicate_index: 1
 ---
 
-# user-guide/profile-distributions.md
+# Profile Distributions: Share a Whole Agent
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

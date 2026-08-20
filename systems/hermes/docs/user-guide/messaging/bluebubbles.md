@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/bluebubbles.md"
+title: "BlueBubbles (iMessage)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/bluebubbles"
-source_hash: "b2c11c4cf1200a5455d499bf086a15096058ad203fd33595319e5565e5e734b2"
+source_hash: "afd9458afed5b6795b7ddce410688ed7ada5363de81bce6624430beb138ff6aa"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/bluebubbles.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/bluebubbles.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/bluebubbles.md
+# BlueBubbles (iMessage)
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

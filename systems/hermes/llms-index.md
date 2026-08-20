@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "a1da6f0d8308fedf0ef4dcbecaf7ad113d5280b065c0d407d46f35a77749f47d"
+source_hash: "2bd4dbf88ee2f4bc164dca8951b238c3196642cc1a8c8f4951d843449e0b88e0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -29,6 +29,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Updating](https://hermes-agent.nousresearch.com/docs/getting-started/updating): How to update Hermes Agent to the latest version or uninstall it
 - [Termux (Android)](https://hermes-agent.nousresearch.com/docs/getting-started/termux): Run Hermes Agent directly on an Android phone with Termux
 - [Nix Setup](https://hermes-agent.nousresearch.com/docs/getting-started/nix-setup): Install and deploy Hermes Agent with Nix — from quick `nix run` to fully declarative NixOS module with container mode
+- [Platform Support](https://hermes-agent.nousresearch.com/docs/getting-started/platform-support): Which operating systems, distribution methods, and features Hermes Agent supports.
 
 ## Using Hermes
 
@@ -42,6 +43,23 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Docker Backend](https://hermes-agent.nousresearch.com/docs/user-guide/docker): Running Hermes Agent in Docker and using Docker as a terminal backend
 - [Security](https://hermes-agent.nousresearch.com/docs/user-guide/security): Security model, dangerous command approval, user authorization, container isolation, and production deployment best practices
 - [Checkpoints & Rollback](https://hermes-agent.nousresearch.com/docs/user-guide/checkpoints-and-rollback): Filesystem safety nets for destructive operations using shadow git repos and automatic snapshots
+- [Bot Mode](https://hermes-agent.nousresearch.com/docs/user-guide/bot-mode): Turn your Hermes profiles into a roster of named Bots — each with its own chat, role, model, memory, skills, and avatar. Bots run routines, share group chats, and message each other.
+- [Desktop App](https://hermes-agent.nousresearch.com/docs/user-guide/desktop): The native Hermes desktop app — a polished experience for chatting with Hermes, with streaming tool output, side-by-side previews, a file browser, voice, cron, profiles, skills, and settings. macOS, Windows, and Linux.
+- [Egress proxy](https://hermes-agent.nousresearch.com/docs/user-guide/egress)
+- [Egress credential-injection proxy (iron-proxy)](https://hermes-agent.nousresearch.com/docs/user-guide/egress/iron-proxy)
+- [Import from Other Agents](https://hermes-agent.nousresearch.com/docs/user-guide/import-from-other-agents): One-command import of a Claude Code (~/.claude) or OpenAI Codex CLI (~/.codex) setup into Hermes — instructions, allowlists, MCP servers, skills, and memories.
+- [Managed Scope](https://hermes-agent.nousresearch.com/docs/user-guide/managed-scope): Administrator-pinned, user-immutable config and secrets via a system-level managed directory
+- [Connecting Desktop to Many Hermes Instances](https://hermes-agent.nousresearch.com/docs/user-guide/multi-connection-desktop)
+- [Running Many Gateways at Once](https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways)
+- [Profile Distributions: Share a Whole Agent](https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions)
+- [Secrets](https://hermes-agent.nousresearch.com/docs/user-guide/secrets)
+- [Bitwarden Secrets Manager](https://hermes-agent.nousresearch.com/docs/user-guide/secrets/bitwarden)
+- [Command Helper Secret Source](https://hermes-agent.nousresearch.com/docs/user-guide/secrets/command)
+- [1Password](https://hermes-agent.nousresearch.com/docs/user-guide/secrets/onepassword)
+- [Google Workspace — Gmail, Calendar, Drive, Sheets & Docs](https://hermes-agent.nousresearch.com/docs/user-guide/skills/google-workspace): Send email, manage calendar events, search Drive, read/write Sheets, and access Docs — all through OAuth2-authenticated Google APIs
+- [Which File Does What?](https://hermes-agent.nousresearch.com/docs/user-guide/which-file-does-what): SOUL.md vs USER.md vs MEMORY.md vs AGENTS.md — a one-page map of the agent's files, who writes each one, and when the agent actually sees them
+- [Windows (Native) Guide](https://hermes-agent.nousresearch.com/docs/user-guide/windows-native): Run Hermes Agent natively on Windows 10 / 11 — install, feature matrix, UTF-8 console, Git Bash, gateway as a Scheduled Task, editor handling, PATH, uninstall, and common pitfalls
+- [Windows (WSL2) Guide](https://hermes-agent.nousresearch.com/docs/user-guide/windows-wsl-quickstart): Run Hermes Agent on Windows via WSL2 — setup, filesystem access between Windows and Linux, networking, and common pitfalls
 
 ## Core Features
 
@@ -56,6 +74,26 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Personality & SOUL.md](https://hermes-agent.nousresearch.com/docs/user-guide/features/personality): Customize Hermes Agent's personality with a global SOUL.md, built-in personalities, and custom persona definitions
 - [Plugins](https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins): Extend Hermes with custom tools, hooks, and integrations via the plugin system
 - [Built-in Plugins](https://hermes-agent.nousresearch.com/docs/user-guide/features/built-in-plugins): Plugins shipped with Hermes Agent that run automatically via lifecycle hooks — disk-cleanup and friends
+- [Codex App-Server Runtime (optional)](https://hermes-agent.nousresearch.com/docs/user-guide/features/codex-app-server-runtime)
+- [Computer Use](https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use)
+- [Deliverable Mode (Artifacts in Chat)](https://hermes-agent.nousresearch.com/docs/user-guide/features/deliverable-mode): How the agent ships generated charts, PDFs, spreadsheets, and other files as native attachments in messaging platforms.
+- [Document Extraction](https://hermes-agent.nousresearch.com/docs/user-guide/features/document-extraction): How read_file converts PDFs, Office documents, and notebooks to text — and what to do when a PDF is scanned images
+- [Extending the Dashboard](https://hermes-agent.nousresearch.com/docs/user-guide/features/extending-the-dashboard): Build themes and plugins for the Hermes web dashboard — palettes, typography, layouts, custom tabs, shell slots, page-scoped slots, and backend API routes
+- [Session Heartbeats](https://hermes-agent.nousresearch.com/docs/user-guide/features/heartbeat): A recurring prompt that re-enters your current session whenever it's idle — /heartbeat every 10m Check the deployment.
+- [Kanban worker lanes](https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban-worker-lanes)
+- [Recurring Loops](https://hermes-agent.nousresearch.com/docs/user-guide/features/loops): Re-run a prompt on a recurring interval inside your session — Hermes' take on Claude Code's /loop.
+- [LSP — Semantic Diagnostics](https://hermes-agent.nousresearch.com/docs/user-guide/features/lsp): Real language servers (pyright, gopls, rust-analyzer, …) wired into the post-write lint check used by write_file and patch.
+- [Mixture of Agents](https://hermes-agent.nousresearch.com/docs/user-guide/features/mixture-of-agents): Create named MoA presets that appear as selectable models under the Mixture of Agents provider
+- [Pets (Petdex Mascots)](https://hermes-agent.nousresearch.com/docs/user-guide/features/pets): Adopt an animated mascot that reacts to agent activity across the CLI, TUI, and desktop app
+- [Skins & Themes](https://hermes-agent.nousresearch.com/docs/user-guide/features/skins): Customize the Hermes CLI with built-in and user-defined skins
+- [Spotify](https://hermes-agent.nousresearch.com/docs/user-guide/features/spotify)
+- [Subscription Proxy](https://hermes-agent.nousresearch.com/docs/user-guide/features/subscription-proxy): Use your Nous Portal subscription (or other OAuth provider) as an OpenAI-compatible endpoint for external apps
+- [Nous Tool Gateway](https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway): One subscription, every tool. Web search, image generation, TTS, and cloud browsers — all routed through Nous Portal with no extra API keys.
+- [Tool Search](https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-search)
+- [Wake Word](https://hermes-agent.nousresearch.com/docs/user-guide/features/wake-word): Hands-free 'Hey Hermes' wake word — start a voice session by speaking, the 'Hey Siri' way
+- [Web Dashboard](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard): Browser-based administration panel for managing configuration, API keys, MCP servers, messaging pairing, webhooks, the gateway, memory, credentials, sessions, logs, analytics, cron jobs, and skills
+- [Web Search & Extract](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search): Search the web and extract page content with multiple backend providers — including free self-hosted SearXNG.
+- [X (Twitter) Search](https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search): Search X (Twitter) posts and threads from within the agent using xAI's built-in x_search Responses tool — works with either a SuperGrok OAuth login or an XAI_API_KEY.
 
 ## Automation
 
@@ -71,14 +109,14 @@ Repo: https://github.com/NousResearch/hermes-agent
 ## Media & Web
 
 - [Voice Mode](https://hermes-agent.nousresearch.com/docs/user-guide/features/voice-mode): Real-time voice conversations with Hermes Agent — CLI, Telegram, Discord (DMs, text channels, and voice channels)
-- [Browser](https://hermes-agent.nousresearch.com/docs/user-guide/features/browser)
-- [Vision](https://hermes-agent.nousresearch.com/docs/user-guide/features/vision)
-- [Image Generation](https://hermes-agent.nousresearch.com/docs/user-guide/features/image-generation)
+- [Browser](https://hermes-agent.nousresearch.com/docs/user-guide/features/browser): Control browsers with multiple providers, local Chromium-family browsers via CDP, or cloud browsers for web interaction, form filling, scraping, and more.
+- [Vision](https://hermes-agent.nousresearch.com/docs/user-guide/features/vision): Paste images from your clipboard into the Hermes CLI for multimodal vision analysis.
+- [Image Generation](https://hermes-agent.nousresearch.com/docs/user-guide/features/image-generation): Generate images via FAL.ai — 11 models including FLUX 2, GPT Image (1.5 & 2), Nano Banana Pro, Ideogram, Recraft V4 Pro, Krea 2, and more, selectable via `hermes tools`.
 - [Text-to-Speech](https://hermes-agent.nousresearch.com/docs/user-guide/features/tts): Text-to-speech and voice message transcription across all platforms
 
 ## Messaging Platforms
 
-- [Overview](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/index): Chat with Hermes from Telegram, Discord, Slack, WhatsApp, Signal, SMS, Email, Home Assistant, Mattermost, Matrix, DingTalk, Yuanbao, Microsoft Teams, LINE, Raft, Webhooks, or any OpenAI-compatible frontend via the API server — architecture and setup overview
+- [Overview](https://hermes-agent.nousresearch.com/docs/user-guide/messaging): Chat with Hermes from Telegram, Discord, Slack, WhatsApp, Signal, SMS, Email, Home Assistant, Mattermost, Matrix, DingTalk, Yuanbao, Microsoft Teams, LINE, Raft, Webhooks, or any OpenAI-compatible frontend via the API server — architecture and setup overview
 - [Telegram](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram): Set up Hermes Agent as a Telegram bot
 - [Discord](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord): Set up Hermes Agent as a Discord bot
 - [Slack](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack): Set up Hermes Agent as a Slack bot using Socket Mode
@@ -88,20 +126,45 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [SMS](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/sms): Set up Hermes Agent as an SMS chatbot via Twilio
 - [Matrix](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/matrix): Set up Hermes Agent as a Matrix bot
 - [Mattermost](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/mattermost): Set up Hermes Agent as a Mattermost bot
-- [Home Assistant](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/homeassistant)
+- [Home Assistant](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/homeassistant): Control your smart home with Hermes Agent via Home Assistant integration.
 - [Webhooks](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/webhooks): Receive events from GitHub, GitLab, and other services to trigger Hermes agent runs
+- [A2A (Agent-to-Agent)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/a2a)
+- [BlueBubbles (iMessage)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/bluebubbles)
+- [Buzz](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/buzz)
+- [DingTalk](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/dingtalk): Set up Hermes Agent as a DingTalk chatbot
+- [Feishu / Lark](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/feishu): Set up Hermes Agent as a Feishu or Lark bot
+- [Google Chat](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/google_chat): Set up Hermes Agent as a Google Chat bot using Cloud Pub/Sub
+- [IRC](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/irc)
+- [LINE](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/line): Set up Hermes Agent as a LINE Messaging API bot
+- [Microsoft Graph Webhook Listener](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/msgraph-webhook): Receive Microsoft Graph change notifications (meetings, calendar, chat, etc.) in Hermes
+- [ntfy](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/ntfy)
+- [Open WebUI](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/open-webui): Connect Open WebUI to Hermes Agent via the OpenAI-compatible API server
+- [Photon iMessage](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/photon)
+- [QQ Bot](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/qqbot)
+- [Raft](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/raft): Connect Hermes Agent to Raft as an external agent via wake-channel bridge
+- [Hermes Relay](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/relay): Connect Hermes to messaging platforms through a relay connector that owns the platform credentials — enrollment, capabilities, config, and troubleshooting
+- [SimpleX Chat](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/simplex)
+- [Microsoft Teams](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams): Set up Hermes Agent as a Microsoft Teams bot
+- [Teams Meetings](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/teams-meetings): Set up the Microsoft Teams meeting summary pipeline with Microsoft Graph webhooks
+- [WeCom (Enterprise WeChat)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom): Connect Hermes Agent to WeCom via the AI Bot WebSocket gateway
+- [WeCom Callback (Self-Built App)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/wecom-callback)
+- [Weixin (WeChat)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/weixin): Connect Hermes Agent to personal WeChat accounts via the iLink Bot API
+- [WhatsApp Business (Cloud API)](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/whatsapp-cloud): Set up Hermes Agent as a WhatsApp bot via Meta's official Business Cloud API
+- [Yuanbao](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/yuanbao): Connect Hermes Agent to the Yuanbao enterprise messaging platform via WebSocket gateway
 
 ## Integrations
 
-- [Integrations Overview](https://hermes-agent.nousresearch.com/docs/integrations/index)
+- [Integrations Overview](https://hermes-agent.nousresearch.com/docs/integrations)
 - [Providers](https://hermes-agent.nousresearch.com/docs/integrations/providers)
 - [MCP (Model Context Protocol)](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp): Connect Hermes Agent to external tool servers via MCP — and control exactly which MCP tools Hermes loads
 - [ACP (Agent Context Protocol)](https://hermes-agent.nousresearch.com/docs/user-guide/features/acp): Use Hermes Agent inside ACP-compatible editors and collaboration platforms
 - [API Server](https://hermes-agent.nousresearch.com/docs/user-guide/features/api-server): Expose hermes-agent as an OpenAI-compatible API for any frontend
 - [Honcho Memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/honcho): AI-native persistent memory via Honcho — dialectic reasoning, multi-agent user modeling, and deep personalization
-- [Provider Routing](https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing)
-- [Fallback Providers](https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers)
-- [Credential Pools](https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools)
+- [Provider Routing](https://hermes-agent.nousresearch.com/docs/user-guide/features/provider-routing): Configure OpenRouter or Nous Portal provider preferences to optimize for cost, speed, or quality.
+- [Fallback Providers](https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers): Configure automatic failover to backup LLM providers when your primary model is unavailable.
+- [Credential Pools](https://hermes-agent.nousresearch.com/docs/user-guide/features/credential-pools): Pool multiple API keys or OAuth tokens per provider for automatic rotation and rate limit recovery.
+- [Buzz Integration](https://hermes-agent.nousresearch.com/docs/integrations/buzz): All three ways to connect Hermes Agent to Buzz — Block's Nostr-based human+agent workspace
+- [Nous Portal](https://hermes-agent.nousresearch.com/docs/integrations/nous-portal): One subscription, 300+ frontier models, and the Tool Gateway — the recommended way to run Hermes Agent
 
 ## Guides & Tutorials
 
@@ -113,11 +176,32 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Use MCP with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-mcp-with-hermes): A practical guide to connecting MCP servers to Hermes Agent, filtering their tools, and using them safely in real workflows
 - [Use Voice Mode with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-voice-mode-with-hermes): A practical guide to setting up and using Hermes voice mode across CLI, Telegram, Discord, and Discord voice channels
 - [Use SOUL.md with Hermes](https://hermes-agent.nousresearch.com/docs/guides/use-soul-with-hermes): How to use SOUL.md to shape Hermes Agent's default voice, what belongs there, and how it differs from AGENTS.md and /personality
-- [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/guides/build-a-hermes-plugin)
 - [Automate with Cron](https://hermes-agent.nousresearch.com/docs/guides/automate-with-cron): Real-world automation patterns using Hermes cron — monitoring, reports, pipelines, and multi-skill workflows
 - [Work with Skills](https://hermes-agent.nousresearch.com/docs/guides/work-with-skills): Find, install, use, and create skills — on-demand knowledge that teaches Hermes new workflows
 - [Delegation Patterns](https://hermes-agent.nousresearch.com/docs/guides/delegation-patterns): When and how to use subagent delegation — patterns for parallel research, code review, and multi-file work
 - [GitHub PR Review Agent](https://hermes-agent.nousresearch.com/docs/guides/github-pr-review-agent): Build an automated AI code reviewer that monitors your repos, reviews pull requests, and delivers feedback — hands-free
+- [Give Your Agent Its Own Email Address](https://hermes-agent.nousresearch.com/docs/guides/agent-email-address): Set up a dedicated mailbox your agent can read and send from using the bundled Himalaya skill, with a cron polling pattern and safety notes
+- [Automation Blueprints](https://hermes-agent.nousresearch.com/docs/guides/automation-blueprints): Ready-to-use automation blueprints — scheduled tasks, GitHub event triggers, API webhooks, and multi-skill workflows
+- [AWS Bedrock](https://hermes-agent.nousresearch.com/docs/guides/aws-bedrock): Use Hermes Agent with Amazon Bedrock — native Converse API, IAM authentication, Guardrails, and cross-region inference
+- [Microsoft Foundry](https://hermes-agent.nousresearch.com/docs/guides/azure-foundry): Use Hermes Agent with Microsoft Foundry — OpenAI-style and Anthropic-style endpoints, auto-detection of transport and deployed models
+- [Script-Only Cron Jobs (No LLM)](https://hermes-agent.nousresearch.com/docs/guides/cron-script-only): Classic watchdog cron jobs that skip the LLM entirely — a script runs on schedule and its stdout gets delivered to your messaging platform. Memory alerts, disk alerts, CI pings, periodic health checks.
+- [Cron Troubleshooting](https://hermes-agent.nousresearch.com/docs/guides/cron-troubleshooting): Diagnose and fix common Hermes cron issues — jobs not firing, delivery failures, skill loading errors, and performance problems
+- [Desktop Native Sign-In (RFC 8252)](https://hermes-agent.nousresearch.com/docs/guides/desktop-native-signin): How the Hermes Desktop app signs in to a gated gateway using your system browser and PKCE — no embedded webview, no session cookies
+- [Google Gemini](https://hermes-agent.nousresearch.com/docs/guides/google-gemini): Use Hermes Agent with Google Gemini — native AI Studio API, API-key setup, tool calling, streaming, and quota guidance
+- [Google Vertex AI](https://hermes-agent.nousresearch.com/docs/guides/google-vertex): Use Hermes Agent with Gemini on Google Cloud Vertex AI — OAuth2 service account or ADC, GCP billing and quotas, no static API key
+- [Run Hermes Locally with Ollama — Zero API Cost](https://hermes-agent.nousresearch.com/docs/guides/local-ollama-setup): Step-by-step guide to running Hermes Agent entirely on your own machine with Ollama and open-weight models like Gemma 4, no cloud API keys or paid subscriptions needed
+- [Register a Microsoft Graph Application](https://hermes-agent.nousresearch.com/docs/guides/microsoft-graph-app-registration): Azure portal walkthrough for creating the app registration that powers the Teams meeting pipeline
+- [Migrate from OpenClaw](https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw): Complete guide to migrating your OpenClaw / Clawdbot setup to Hermes Agent — what gets migrated, how config maps, and what to check after.
+- [MiniMax OAuth](https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth): Log into MiniMax via browser OAuth and use MiniMax-M2.7 models in Hermes Agent — no API key required
+- [OAuth over SSH / Remote Hosts](https://hermes-agent.nousresearch.com/docs/guides/oauth-over-ssh): How to complete browser-based OAuth (Spotify, MCP servers) when Hermes runs on a remote machine, container, or behind a jump box
+- [Operate the Teams Meeting Pipeline](https://hermes-agent.nousresearch.com/docs/guides/operate-teams-meeting-pipeline): Runbook, go-live checklist, and operator worksheet for the Microsoft Teams meeting pipeline
+- [Pipe Script Output to Messaging Platforms](https://hermes-agent.nousresearch.com/docs/guides/pipe-script-output): Send text from any shell script, cron job, CI hook, or monitoring daemon to Telegram, Discord, Slack, Signal, and other platforms using `hermes send`.
+- [Run Hermes Agent with Nous Portal](https://hermes-agent.nousresearch.com/docs/guides/run-hermes-with-nous-portal): Start-to-finish walkthrough: subscribe, set up, switch models, enable gateway tools, and verify routing
+- [Run Nemotron 3 Ultra free in Hermes Agent](https://hermes-agent.nousresearch.com/docs/guides/run-nemotron-3-ultra-free): Try NVIDIA Nemotron 3 Ultra on Nous Portal — free June 4–18 — with day 0 support in Hermes Agent
+- [Running Hermes on a Personal or Work Machine](https://hermes-agent.nousresearch.com/docs/guides/secure-hermes-on-a-work-machine): A security-posture walkthrough for running Hermes Agent on the machine you live on — what the defaults protect, how to tighten further, and how to undo mistakes
+- [Troubleshooting: \"My Agent Feels Dumber\"](https://hermes-agent.nousresearch.com/docs/guides/troubleshooting-agent-quality): A diagnostic checklist for when Hermes seems less capable than before or forgets things mid-session — model switches, context pressure, wrong context detection, and the frozen memory snapshot
+- [Automated GitHub PR Comments with Webhooks](https://hermes-agent.nousresearch.com/docs/guides/webhook-github-pr-review): Connect Hermes to GitHub so it automatically fetches PR diffs, reviews code changes, and posts comments — triggered by webhooks with no manual prompting
+- [xAI Grok OAuth (SuperGrok / X Premium+)](https://hermes-agent.nousresearch.com/docs/guides/xai-grok-oauth): Sign in with your SuperGrok or X Premium+ subscription to use Grok models in Hermes Agent — no API key required
 
 ## Developer Guide
 
@@ -134,6 +218,27 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Adding Platform Adapters](https://hermes-agent.nousresearch.com/docs/developer-guide/adding-platform-adapters)
 - [Creating Skills](https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills): How to create skills for Hermes Agent — SKILL.md format, guidelines, and publishing
 - [Extending the CLI](https://hermes-agent.nousresearch.com/docs/developer-guide/extending-the-cli): Build wrapper CLIs that extend the Hermes TUI with custom widgets, keybindings, and layout changes
+- [ACP Internals](https://hermes-agent.nousresearch.com/docs/developer-guide/acp-internals): How the ACP adapter works: lifecycle, sessions, event bridge, approvals, and tool rendering
+- [Browser Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/browser-provider-plugin): How to build a cloud browser backend plugin for Hermes Agent
+- [Browser CDP Supervisor](https://hermes-agent.nousresearch.com/docs/developer-guide/browser-supervisor): How Hermes detects and responds to native JS dialogs and interacts with cross-origin iframes via a persistent CDP connection.
+- [Codebase Ownership Map](https://hermes-agent.nousresearch.com/docs/developer-guide/codebase-ownership): Which directories belong to which subsystem, and where the right docs entry point lives for each
+- [Context Engine Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/context-engine-plugin): How to build a context engine plugin that replaces the built-in ContextCompressor
+- [Cron Internals](https://hermes-agent.nousresearch.com/docs/developer-guide/cron-internals): How Hermes stores, schedules, edits, pauses, skill-loads, and delivers cron jobs
+- [Desktop Plugin SDK (@hermes/plugin-sdk)](https://hermes-agent.nousresearch.com/docs/developer-guide/desktop-plugin-sdk): Extend the native Hermes Desktop app — panes, pages, sidebar nav, status bar, palette commands, keybinds, themes, and a scoped backend namespace, with one import and no build step.
+- [Egress proxy internals](https://hermes-agent.nousresearch.com/docs/developer-guide/egress-internals): How the iron-proxy egress firewall integrates with Hermes — module layout, lifecycle, security invariants, and extension points
+- [Image Generation Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/image-gen-provider-plugin): How to build an image-generation backend plugin for Hermes Agent
+- [Memory Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/memory-provider-plugin): How to build a memory provider plugin for Hermes Agent
+- [Model Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/model-provider-plugin): How to build a model provider (inference backend) plugin for Hermes Agent
+- [Plugin LLM Access](https://hermes-agent.nousresearch.com/docs/developer-guide/plugin-llm-access): Run any LLM call from inside a plugin via ctx.llm — chat or structured, sync or async. Host-owned auth, fail-closed trust gate, optional JSON Schema validation.
+- [Build a Hermes Plugin](https://hermes-agent.nousresearch.com/docs/developer-guide/plugins): Step-by-step guide to building a complete Hermes plugin with tools, hooks, data files, and skills
+- [Programmatic Integration](https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration): Three protocols for driving hermes-agent from external programs: ACP, the TUI gateway JSON-RPC, and the OpenAI-compatible HTTP API
+- [Secret Source Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/secret-source-plugin): How to build a secret-manager backend plugin for Hermes Agent
+- [Public Subagent Lifecycle API](https://hermes-agent.nousresearch.com/docs/developer-guide/subagent-lifecycle-api)
+- [Tools Runtime](https://hermes-agent.nousresearch.com/docs/developer-guide/tools-runtime): Runtime behavior of the tool registry, toolsets, dispatch, and terminal environments
+- [Trajectory Format](https://hermes-agent.nousresearch.com/docs/developer-guide/trajectory-format)
+- [Video Generation Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/video-gen-provider-plugin): How to build a video-generation backend plugin for Hermes Agent
+- [Web Search Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/web-search-provider-plugin): How to build a web-search/extract/crawl backend plugin for Hermes Agent
+- [TUI & Desktop from Worktrees](https://hermes-agent.nousresearch.com/docs/developer-guide/worktree-ui-dev): Run the Ink TUI and Electron desktop app from a git worktree without a full npm install per checkout
 
 ## Reference
 
@@ -144,7 +249,13 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Tools Reference](https://hermes-agent.nousresearch.com/docs/reference/tools-reference): Authoritative reference for Hermes built-in tools, grouped by toolset
 - [Toolsets Reference](https://hermes-agent.nousresearch.com/docs/reference/toolsets-reference): Reference for Hermes core, composite, platform, and dynamic toolsets
 - [MCP Config Reference](https://hermes-agent.nousresearch.com/docs/reference/mcp-config-reference): Reference for Hermes Agent MCP configuration keys, filtering semantics, and utility-tool policy
-- [Model Catalog](https://hermes-agent.nousresearch.com/docs/reference/model-catalog)
+- [Model Catalog](https://hermes-agent.nousresearch.com/docs/reference/model-catalog): Remotely-hosted manifest driving curated model picker lists for OpenRouter and Nous Portal.
 - [Bundled Skills Catalog](https://hermes-agent.nousresearch.com/docs/reference/skills-catalog): Table of all ~90 skills bundled with Hermes
 - [Optional Skills Catalog](https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog): Table of ~60 additional installable skills
 - [FAQ & Troubleshooting](https://hermes-agent.nousresearch.com/docs/reference/faq): Frequently asked questions and solutions to common issues with Hermes Agent
+- [Automation Blueprints Catalog](https://hermes-agent.nousresearch.com/docs/reference/automation-blueprints-catalog): Ready-to-run automation blueprints — set one up from the dashboard, CLI, TUI, any messenger, or the desktop app.
+- [CLI Symbols Glossary](https://hermes-agent.nousresearch.com/docs/reference/cli-symbols): What every symbol in the Hermes terminal UI means — transcript markers, status-bar badges, overlay glyphs, and approval prompts.
+
+## More
+
+- [User Stories & Use Cases](https://hermes-agent.nousresearch.com/docs/user-stories): Real stories from the Hermes Agent community — what people are actually building, scraped from X, GitHub, Reddit, Hacker News, YouTube, blogs, and podcasts.

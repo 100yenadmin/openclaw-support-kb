@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/features/kanban-tutorial"
+title: "Kanban tutorial"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban-tutorial"
-source_hash: "971bfcd9809da0401cd2b44580f442ecfc3067d1d95b66275ede181cad703973"
+source_hash: "d06e86e526c74330571558c6097f4d74e9168e206481c01c6a6c7bb5b2321ea5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban-tutorial.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/features/kanban-tutorial.md"
 duplicate_index: 1
 ---
 
-# user-guide/features/kanban-tutorial
+# Kanban tutorial
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent

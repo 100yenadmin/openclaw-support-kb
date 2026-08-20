@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "user-guide/messaging/qqbot.md"
+title: "QQ Bot"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/qqbot"
-source_hash: "fe0fb75aa7fe5e4e31f4c1c6378bf3a4e346b97458c075afad3d0b2e0f504a06"
+source_hash: "e030bef4d7deec0e0efe4ebdae213530f437c1d4950729859ccdc27dea2dc89f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/qqbot.md"
@@ -10,7 +10,7 @@ original_doc_path: "user-guide/messaging/qqbot.md"
 duplicate_index: 1
 ---
 
-# user-guide/messaging/qqbot.md
+# QQ Bot
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
