@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "2bd4dbf88ee2f4bc164dca8951b238c3196642cc1a8c8f4951d843449e0b88e0"
+source_hash: "a3ae5fe433302e2ad6f9a444cc773b8a785b968300afa774cb10268f4223273b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -190,6 +190,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Google Gemini](https://hermes-agent.nousresearch.com/docs/guides/google-gemini): Use Hermes Agent with Google Gemini — native AI Studio API, API-key setup, tool calling, streaming, and quota guidance
 - [Google Vertex AI](https://hermes-agent.nousresearch.com/docs/guides/google-vertex): Use Hermes Agent with Gemini on Google Cloud Vertex AI — OAuth2 service account or ADC, GCP billing and quotas, no static API key
 - [Run Hermes Locally with Ollama — Zero API Cost](https://hermes-agent.nousresearch.com/docs/guides/local-ollama-setup): Step-by-step guide to running Hermes Agent entirely on your own machine with Ollama and open-weight models like Gemma 4, no cloud API keys or paid subscriptions needed
+- [Manage Hermes Cloud with MCP](https://hermes-agent.nousresearch.com/docs/guides/manage-hermes-cloud-with-mcp): Connect Hermes Agent to the Nous Portal MCP server so your local agent can list, start, stop, and manage your Hermes Cloud instances conversationally
 - [Register a Microsoft Graph Application](https://hermes-agent.nousresearch.com/docs/guides/microsoft-graph-app-registration): Azure portal walkthrough for creating the app registration that powers the Teams meeting pipeline
 - [Migrate from OpenClaw](https://hermes-agent.nousresearch.com/docs/guides/migrate-from-openclaw): Complete guide to migrating your OpenClaw / Clawdbot setup to Hermes Agent — what gets migrated, how config maps, and what to check after.
 - [MiniMax OAuth](https://hermes-agent.nousresearch.com/docs/guides/minimax-oauth): Log into MiniMax via browser OAuth and use MiniMax-M2.7 models in Hermes Agent — no API key required

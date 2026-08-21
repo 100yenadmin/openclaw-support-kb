@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "codex-local"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/codex-local.md"
-source_hash: "bcc852d12c45e20b9b6c3249431e44b7a725009f4f8ab916d8a45e1cfb545dca"
+source_hash: "e8308f621b9ffa8b4d8deb4cb2433b57b433499c489fbb99fba10d721fbda038"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/codex-local.md"
@@ -149,10 +149,10 @@ fleet with ChatGPT-subscription credentials.
   classification in rather than making `codex-home.ts` inspect execution
   targets on its own.
 
-Because the warning touches authentication behavior, implementation must go
-through the security-review gate. Treat this docs section as the follow-up
-implementation spec, not as authorization to add the warning in a docs-only
-change.
+Because the warning touches authentication behavior, its implementation
+needs a maintainer security review before merge. Treat this docs section as
+the follow-up implementation spec, not as authorization to add the warning in
+a docs-only change.
 
 ## Manual Local CLI
 

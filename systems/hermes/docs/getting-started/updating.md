@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Updating & Uninstalling"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/updating"
-source_hash: "b7b416e5a6dc6817050aca76ee0022e2aa74db0e7909098b56184479ed84ac98"
+source_hash: "408700025e8984b02e62a87456887f3f1df742567ac081810f39a10440dadd47"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/updating.md"
@@ -78,6 +78,16 @@ updates:
 - `discard` — auto-stash and drop the stash after the pull, so the update always lands on a clean tree. Use this only on machines where you never intend to keep local edits to the Hermes source. It stash-drops (not `git reset --hard` + `git clean -fd`), so ignored paths like `node_modules`, `venv`, and build outputs are never touched.
 
 In the desktop app this is **Settings → Advanced → In-App Update Local Changes**.
+
+**Desktop updates never auto-restore.** The desktop updater invokes `hermes update --keep-stash`: local source edits are still stashed so the update can proceed, but they are **not** re-applied afterward — they stay parked in `git stash` and the update log prints the exact `git stash apply <ref>` command to bring them back. This prevents local edits from silently riding along across desktop updates and breaking the freshly updated install. (`non_interactive_local_changes: discard` still wins if you've opted into discarding.) To restore parked changes manually:
+
+```bash
+cd ~/.hermes/hermes-agent   # or your install root
+git stash list --format='%gd %H %s'   # find the hermes-update-autostash entry
+git stash apply stash@{0}
+```
+
+You can pass `--keep-stash` to a terminal `hermes update` too if you want the same never-reapply behavior interactively.
 
 ### Preview-only: `hermes update --check`
 
@@ -183,7 +193,7 @@ You no longer need to wrap `hermes update` in `screen` or `tmux` to survive a te
 ### Checking your current version
 
 ```bash
-hermes version
+hermes --version
 ```
 
 Compare against the latest release at the [GitHub releases page](https://github.com/NousResearch/hermes-agent/releases).

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Web Search & Extract"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search"
-source_hash: "7be0166a378a30e17368cc2569bc8a54d00fc7354ebc60f30f3a48c3ad222dc1"
+source_hash: "7af70be298164fb5520f9de317a87b7fb5d5ab7ab0af9cdd04544d246b9f2696"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-search.md"
@@ -385,6 +385,8 @@ If no backend has **ever** been selected (no `web.backend` / per-capability key 
 | *(nothing set at all)* | keyless ring: exa / parallel / tavily / firecrawl / keenable (round-robin) |
 
 **Keyless free-tier ring:** when *no* credential above is present, requests rotate across five vendors' public free tiers (Exa, Parallel, Tavily, Firecrawl, Keenable) so web tools work on a fresh install with zero setup — and a rate-limited request fails over to the next vendor in the ring automatically. Pin one vendor in `hermes tools` to stop the rotation (the ring is then only used as failover succession on throttles). All free tiers are vendor-rate-limited under burst load; sustained normal usage goes through fine. Set `web.keyless_fallback: false` to turn the tier off — with it off and no credentials, web tools are unavailable until a provider is configured.
+
+**One-shot keyless rescue for keyed backends:** when your chosen/keyed backend fails a call (bad key, outage, upstream 5xx), that single call automatically retries on the keyless free-tier ring instead of erroring — the result notes which vendor served it and why (`rescued_from` / `backend_error`). The failover is never sticky: the very next `web_search`/`web_extract` call attempts your chosen backend again. Disable with `web.keyless_rescue: false` (also off whenever `keyless_fallback` is off).
 
 xAI Web Search is **not** in the auto-detection chain — having `XAI_API_KEY` set (or being signed in via xAI Grok OAuth) does not automatically route web traffic through xAI, since those credentials are also used for inference / TTS / image gen and the user may want a different backend for web. Opt in explicitly with `web.backend: "xai"`.
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Android / Termux"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/termux"
-source_hash: "26f55cb6821fab2f186cbcefb228ba39d15a6a71f3b1754bf5fb891915bd2acc"
+source_hash: "fbaffd7dd262c1bb91042838f1bcbce0b03821f8cdc3e3590da73406f50e9424"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/termux.md"
@@ -170,7 +170,7 @@ ln -sf "$PWD/venv/bin/hermes" "$PREFIX/bin/hermes"
 ### 6. Verify the install
 
 ```bash
-hermes version
+hermes --version
 hermes doctor
 ```
 

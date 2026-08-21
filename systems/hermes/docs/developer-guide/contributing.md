@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Contributing"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/contributing"
-source_hash: "de04d1308f8c1251e630c06b32e4a8a71ec764aa469effc4e65dd422e8020fca"
+source_hash: "8b23eeb041bee0b7a81705511df4dbe2fe726cd7a694dc06274d8480fe72ca2a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/contributing.md"
@@ -300,7 +300,7 @@ When you ask Hermes to review a PR in a repository that has `.agents/checks/`, t
 ## Reporting Issues
 
 - Use [GitHub Issues](https://github.com/NousResearch/hermes-agent/issues)
-- Include: OS, Python version, Hermes version (`hermes version`), full error traceback
+- Include: OS, Python version, Hermes version (`hermes --version`), full error traceback
 - Include steps to reproduce
 - Check existing issues before creating duplicates
 - For security vulnerabilities, please report privately

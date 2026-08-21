@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Install from npm via API"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/overview.md"
-source_hash: "c6f238a876a8c4f540275334b80d1d1c60bc6bf3a4ed578830d66c3eca9c5e62"
+source_hash: "5adbc31bb1630a8a61175c28bdf032752c190631bfc03a90b440147733290e6f"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/overview.md"
@@ -39,6 +39,7 @@ When a heartbeat fires, Paperclip:
 | [Claude Code](/adapters/claude-local) | `claude_local` | Runs Claude Code CLI locally, with a native ACP engine when available |
 | [Codex](/adapters/codex-local) | `codex_local` | Runs OpenAI Codex CLI locally, with a native ACP engine when available |
 | [Gemini CLI](/adapters/gemini-local) | `gemini_local` | Runs Gemini CLI locally (experimental — adapter package exists, not yet in stable type enum) |
+| [Kimi Code CLI](/adapters/kimi-local) | `kimi_local` | Runs Kimi Code CLI locally through ACP, with headless `-p` mode as a fallback |
 | OpenCode | `opencode_local` | Runs OpenCode CLI locally (multi-provider `provider/model`) |
 | Cursor | `cursor` | Runs Cursor in background mode |
 | Pi | `pi_local` | Runs an embedded Pi agent locally |

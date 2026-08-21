@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nix & NixOS Setup"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/nix-setup"
-source_hash: "776ba1b5af2e7c682bcf159132c3ace5bc717fecaaddc8c59eabe9aba3b3f391"
+source_hash: "3deff64ca912446960340687a74b829ae2512e9f08820d9d5a977db163c86327"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/nix-setup.md"
@@ -160,7 +160,7 @@ Setting `addToSystemPackages = true` does two things: puts the `hermes` CLI on y
 :::info
 When `container.enable = true` and `addToSystemPackages = true`, **every** `hermes` command on the host automatically routes into the managed container. This means your interactive CLI session runs inside the same environment as the gateway service — with access to all container-installed packages and tools.
 
-- The routing is transparent: `hermes chat`, `hermes sessions list`, `hermes version`, etc. all exec into the container under the hood
+- The routing is transparent: `hermes chat`, `hermes sessions list`, `hermes --version`, etc. all exec into the container under the hood
 - All CLI flags are forwarded as-is
 - If the container isn't running, the CLI retries briefly (5s with a spinner for interactive use, 10s silently for scripts) then fails with a clear error — no silent fallback
 - For developers working on the hermes codebase, set `HERMES_DEV=1` to bypass container routing and run the local checkout directly
@@ -204,7 +204,7 @@ systemctl status hermes-agent
 journalctl -u hermes-agent -f
 
 # If addToSystemPackages is true, test the CLI
-hermes version
+hermes --version
 hermes config       # shows the generated config
 ```
 
@@ -694,7 +694,7 @@ journalctl --user -u hermes-agent -f
 launchctl list | grep hermes
 tail -f ~/Library/Logs/hermes-agent.log
 
-hermes version
+hermes --version
 hermes config     # shows the configuration that Nix wrote
 ```
 
@@ -950,7 +950,7 @@ nix build .#checks.x86_64-linux.config-roundtrip    # merge script preserves use
 
 | Check | What it tests |
 |---|---|
-| `package-contents` | `hermes` and `hermes-agent` binaries exist and `hermes version` runs |
+| `package-contents` | `hermes` and `hermes-agent` binaries exist and `hermes --version` runs |
 | `entry-points-sync` | Every `[project.scripts]` entry in `pyproject.toml` has a wrapped binary in the Nix package |
 | `cli-commands` | `hermes --help` exposes `gateway` and `config` subcommands |
 | `managed-guard` | `HERMES_MANAGED=true hermes config set ...` prints the NixOS error |
@@ -1193,7 +1193,7 @@ nix-store --query --roots $(docker exec hermes-agent readlink /data/current-pack
 | `Cannot save configuration: managed by NixOS` | CLI guards active | Edit `configuration.nix` and `nixos-rebuild switch` |
 | `No adapter available for discord` (or telegram/slack) | Messaging deps missing from the sealed Nix venv | Install `#messaging` variant: `nix profile install ...#messaging`. For NixOS module: `extraDependencyGroups = [ "messaging" ]`. Check `journalctl -u hermes-agent` for `FeatureUnavailable` or `requirements not met` for the underlying error. |
 | Container recreated unexpectedly | `extraVolumes`, `extraOptions`, or `image` changed | Expected — writable layer resets. Reinstall packages or use a custom image |
-| `hermes version` shows old version | Container not restarted | `systemctl restart hermes-agent` |
+| `hermes --version` shows old version | Container not restarted | `systemctl restart hermes-agent` |
 | Permission denied on `/var/lib/hermes` | State dir is `0750 hermes:hermes` | Use `docker exec` or `sudo -u hermes` |
 | `nix-collect-garbage` removed hermes | GC root missing | Restart the service (preStart recreates the GC root) |
 | `no container with name or ID "hermes-agent"` (Podman) | Podman rootful container not visible to regular user | Add passwordless sudo for podman (see [Container Mode](#container-mode) section) |

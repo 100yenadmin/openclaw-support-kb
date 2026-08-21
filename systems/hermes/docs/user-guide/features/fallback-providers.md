@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Fallback Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/fallback-providers"
-source_hash: "138553c06f82c2c47898234751b1c1ec4d7f351ea1b26491388a4cac7662cd65"
+source_hash: "3edab7824b28ade2b6b9c7a4e7db7befe2f874aa9a647d7eb34cf35584f7924f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/fallback-providers.md"
@@ -85,6 +85,7 @@ Each entry requires both `provider` and `model`. Entries missing either field ar
 | OpenCode Zen | `opencode-zen` | `OPENCODE_ZEN_API_KEY` |
 | CommandCode | `commandcode` (alias `commandcode-chat`; Claude via `commandcode-anthropic`) | `COMMANDCODE_API_KEY` |
 | OpenCode Go | `opencode-go` | `OPENCODE_GO_API_KEY` |
+| OpenCode Free | `opencode-free` | — (keyless, no credential) |
 | Kilo Code | `kilocode` | `KILOCODE_API_KEY` |
 | Xiaomi MiMo | `xiaomi` | `XIAOMI_API_KEY` |
 | Arcee AI | `arcee` | `ARCEEAI_API_KEY` |

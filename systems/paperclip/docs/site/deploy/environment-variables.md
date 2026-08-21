@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "environment-variables"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/environment-variables.md"
-source_hash: "cbb0d46c06014a0c563f0111b884f69bea636d25824316c600f5a0c1306d5c31"
+source_hash: "d9ff4af48c641bfae6ccbe2e41309ff6917dfa4c4384391604397adbdf2d41a5"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/environment-variables.md"
@@ -37,6 +37,33 @@ All environment variables that Paperclip uses for server configuration.
 | `PAPERCLIP_DEPLOYMENT_MODE` | `local_trusted` | Runtime mode override |
 | `PAPERCLIP_DEPLOYMENT_EXPOSURE` | `private` | Exposure policy when deployment mode is `authenticated` |
 | `PAPERCLIP_API_URL` | (auto-derived) | Paperclip API base URL. When set externally (e.g., via Kubernetes ConfigMap, load balancer, or reverse proxy), the server preserves the value instead of deriving it from the listen host and port. Useful for deployments where the public-facing URL differs from the local bind address. |
+| `PAPERCLIP_HIDDEN_SETTINGS` | (unset) | Comma-separated settings surfaces to hide from the UI and floor at the API, for operators hosting Paperclip for others (managed cloud, internal shared server). See [Hiding settings surfaces](#hiding-settings-surfaces). |
+
+### Hiding settings surfaces
+
+`PAPERCLIP_HIDDEN_SETTINGS` takes keys from the registry in
+`packages/shared/src/settings-visibility.ts`:
+
+- Any instance settings page: `instance.profile`, `instance.environments`,
+  `instance.access`, `instance.heartbeats`, `instance.experimental`,
+  `instance.plugins`, `instance.adapters` — removed from navigation and
+  routing (the General page is the settings root and stays visible). Hiding
+  `instance.access`, `instance.plugins`, or `instance.adapters` also floors
+  their management endpoints with `403 settings_operator_managed`; hiding
+  `instance.experimental` floors every experimental toggle write.
+- Any Instance → General section: `instance.general.censorUsernameInLogs`,
+  `instance.general.keyboardShortcuts`, `instance.general.backupRetention`,
+  `instance.general.feedbackDataSharingPreference` (each also rejects
+  value-changing writes via `PATCH /api/instance/settings/general`), plus the
+  UI-only `instance.general.deploymentStatus` and `instance.general.signOut`.
+- Any experimental toggle: `instance.experimental.<flagKey>` (e.g.
+  `instance.experimental.enableSmokeLab`) — the card disappears and
+  value-changing writes are rejected.
+
+Unknown keys are logged and ignored, so one list can be rolled across a fleet
+of mixed app versions. With the variable unset nothing is hidden and behavior
+is identical to earlier releases. Hiding a toggle does not change its value;
+pair hiding with the desired default where it matters.
 
 ## Secrets
 
