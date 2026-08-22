@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Via the Paperclip UI"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/adapters/external-adapters.md"
-source_hash: "d4049098dd67c451e74a1e51aac80351b4a4803d168e2d405cf32351aa2a8b27"
+source_hash: "fda154259218a6138b21a9f6e85c4de24b5ca816c279b444f736c1be3166cf3c"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/adapters/external-adapters.md"
@@ -92,7 +92,7 @@ my-adapter/
     "picocolors": "^1.1.0"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^24.0.0",
     "typescript": "^5.7.0"
   }
 }

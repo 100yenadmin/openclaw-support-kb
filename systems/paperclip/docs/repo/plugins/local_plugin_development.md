@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Local Plugin Development"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/plugins/LOCAL_PLUGIN_DEVELOPMENT.md"
-source_hash: "38bfa78057c8508346726aa8d7bd0480552876ac3a3c26c4f1ece98e57d3e967"
+source_hash: "0e46f80cdbc18fddf658417ba68166b7c70aa1ccdb45cf9683a5ba6722a5da69"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/plugins/local_plugin_development.md"
@@ -29,7 +29,7 @@ pause controls, and consistent audits instead of hidden daemon behavior.
 
 ## Prerequisites
 
-- Node.js 22+ and `pnpm`.
+- Node.js 24.11+ and `pnpm`.
 - A local Paperclip checkout you can run from source. Local plugin installs read source from disk, so the running server must be able to see the path you give it.
 
 ## The five steps

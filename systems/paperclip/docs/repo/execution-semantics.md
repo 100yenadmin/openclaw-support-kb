@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Execution Semantics"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/execution-semantics.md"
-source_hash: "1a6cbf0920eb19ad3fc6fff063fa62c6db57e45c6e2d963c84f319ff5190cae8"
+source_hash: "61cb493583036f001721cceda3e2e8f271bf1cb37dbf1bbdb72477b05163dcfa"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/execution-semantics.md"
@@ -169,6 +169,8 @@ Pre-dispatch configuration validation is a distinct gate that runs after ownersh
 > Before a run is dispatched, required secret/env bindings are validated; missing bindings produce a surfaced configuration-incomplete blocker, not a dispatched run.
 
 A configuration-incomplete result is a gate outcome, not a runtime failure. It is one of the active gates that a checkout-time or dispatch-time check can surface instead of starting a run, and it leaves the issue in an explicit waiting state that names the missing binding. Surfacing the blocker keeps the issue healthy under the liveness contract while preventing a run that is guaranteed to fail once it cannot resolve its required secret/env bindings. A dispatched-then-failed run is the wrong shape for missing configuration: the missing binding is a known pre-dispatch condition, so the control plane must surface it as a configuration-incomplete blocker rather than letting the run start and then fail.
+
+An unresolved workspace base ref is another configuration-incomplete condition. A `git_worktree` workspace bases a fresh worktree on a configured base ref. Paperclip first fetches a remote-only ref before dispatch: it maps an unqualified name (for example `fix/foo`) or a remote-tracking name (for example `origin/fix/foo`) to `origin/<branch>`, runs the authenticated fetch, and re-checks the commit. A ref that resolves lets work continue on the resolved commit. A ref that is still unresolvable after the fetch produces a configuration-incomplete blocker that names the requested ref, rather than a dispatched-then-failed run. Because the adapter never started, Paperclip queues no missing-comment retry. The recovery action dedupes by the canonical remote ref (`origin/<branch>`), not the operator spelling. Two equivalent spellings of one remote branch, for example `fix/foo` and `origin/fix/foo`, share one recovery identity, so a repeated failure reuses the active action and does not reset the attempt count or post a second notice. A different remote branch is a distinct blocker. Paperclip resolves the prior recovery action, creates a new action for the new ref, and notifies the operator with the new ref instead of overwriting the active action of the prior ref.
 
 ## 6. Parent/Sub-Issue vs Blockers
 

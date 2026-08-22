@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Automate Anything with Cron"
 source: "https://hermes-agent.nousresearch.com/docs/guides/automate-with-cron"
-source_hash: "2904537c8ffe450977440eb53ff91070eb23de3349a48f26c31ac566f0f4510e"
+source_hash: "44893c9691e58940dad954d9875903c14caf1d817379b23db263125437f49369"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/automate-with-cron.md"
@@ -136,7 +136,7 @@ Otherwise, provide a concise summary of the activity." --name "Repo watcher" --d
 ```
 
 :::warning Self-Contained Prompts
-Notice how the prompt includes the exact `gh` commands. The cron agent has no memory of previous runs or your preferences — spell everything out.
+Notice how the prompt includes the exact `gh` commands. The cron agent has no conversation history from previous runs — spell everything out. (Persistent memory does load, so durable preferences saved to MEMORY.md carry over, but don't rely on it for job-critical details.)
 :::
 
 ---
@@ -259,6 +259,28 @@ The `--deliver` flag controls where results go:
 | `slack` | `--deliver slack` | Your Slack home channel |
 | Specific chat | `--deliver telegram:-1001234567890` | A specific Telegram group |
 | Threaded | `--deliver telegram:-1001234567890:17585` | A specific Telegram topic thread |
+| Bot Chat | `--deliver bot-chat` | Inject output into this profile's canonical Bot Chat — the bot reads it and responds |
+| Bot Chat (named) | `--deliver bot-chat:research` | Another local profile's Bot Chat |
+
+### Bot Chat delivery
+
+`bot-chat` targets deliver the job's output **into a profile's canonical "Bot
+Chat" session as a real message** — the bot receives it like any other message,
+acts on anything that needs action, and responds in that chat. This is the
+target to use when you want a bot to *see and react to* scheduled output
+instead of just having it archived in Run history.
+
+Things to know:
+
+- **Machine-local.** The profile must exist on the machine running the
+  scheduler (`hermes profile list`). Names are validated at create time;
+  profiles on other gateways/machines cannot be targeted.
+- **Costs a bot turn.** Each delivery runs a full agent turn in the target
+  bot's Bot Chat — budget accordingly for high-frequency jobs.
+- **Combinable.** `--deliver bot-chat,telegram` posts to the bot AND your
+  Telegram home channel. The `all` token never expands to bot-chat targets.
+- The delivered message is prefixed so the bot knows it came from a scheduled
+  job, not from you.
 
 ---
 

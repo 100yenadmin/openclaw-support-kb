@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "quickstart"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/start/quickstart.md"
-source_hash: "c3a65a65393b33fd47cf81d7427fa67712edb064556e6ffaafb41eb87b4a575f"
+source_hash: "f493abdda06c2c74e05f8548ab306f2e74852d89b6d7cef9752116954703c73a"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/start/quickstart.md"
@@ -43,7 +43,7 @@ npx paperclipai run
 
 ## Local Development
 
-For contributors working on Paperclip itself. Prerequisites: Node.js 20+ and pnpm 9+.
+For contributors working on Paperclip itself. Prerequisites: Node.js 24.11+ and pnpm 9+.
 
 Clone the repository, then:
 

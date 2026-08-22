@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "a3ae5fe433302e2ad6f9a444cc773b8a785b968300afa774cb10268f4223273b"
+source_hash: "c54541d35fb83e5d7bea8e823500640a93d3fd46be64a56104bfd212fb4edca2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -182,7 +182,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [GitHub PR Review Agent](https://hermes-agent.nousresearch.com/docs/guides/github-pr-review-agent): Build an automated AI code reviewer that monitors your repos, reviews pull requests, and delivers feedback — hands-free
 - [Give Your Agent Its Own Email Address](https://hermes-agent.nousresearch.com/docs/guides/agent-email-address): Set up a dedicated mailbox your agent can read and send from using the bundled Himalaya skill, with a cron polling pattern and safety notes
 - [Automation Blueprints](https://hermes-agent.nousresearch.com/docs/guides/automation-blueprints): Ready-to-use automation blueprints — scheduled tasks, GitHub event triggers, API webhooks, and multi-skill workflows
-- [AWS Bedrock](https://hermes-agent.nousresearch.com/docs/guides/aws-bedrock): Use Hermes Agent with Amazon Bedrock — native Converse API, IAM authentication, Guardrails, and cross-region inference
+- [AWS Bedrock](https://hermes-agent.nousresearch.com/docs/guides/aws-bedrock): Use Hermes Agent with Amazon Bedrock — native Converse API, Anthropic SDK routing, OpenAI models via Bedrock Mantle, IAM authentication, Guardrails, and cross-region inference
 - [Microsoft Foundry](https://hermes-agent.nousresearch.com/docs/guides/azure-foundry): Use Hermes Agent with Microsoft Foundry — OpenAI-style and Anthropic-style endpoints, auto-detection of transport and deployed models
 - [Script-Only Cron Jobs (No LLM)](https://hermes-agent.nousresearch.com/docs/guides/cron-script-only): Classic watchdog cron jobs that skip the LLM entirely — a script runs on schedule and its stdout gets delivered to your messaging platform. Memory alerts, disk alerts, CI pings, periodic health checks.
 - [Cron Troubleshooting](https://hermes-agent.nousresearch.com/docs/guides/cron-troubleshooting): Diagnose and fix common Hermes cron issues — jobs not firing, delivery failures, skill loading errors, and performance problems

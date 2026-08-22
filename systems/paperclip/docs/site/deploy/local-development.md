@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "-> {\"status\":\"ok\"}"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/local-development.md"
-source_hash: "0e6005a083f386c02e03de44728ff7d71f9ed0f79d78d6a570e5c5a309caf7bd"
+source_hash: "0e291b620854bdb2389d688333f6da02d0d9b943f9afca8914834e703385c564"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/local-development.md"
@@ -25,7 +25,7 @@ Run Paperclip locally with zero external dependencies.
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 24.11+
 - pnpm 9+
 
 ## Start Dev Server

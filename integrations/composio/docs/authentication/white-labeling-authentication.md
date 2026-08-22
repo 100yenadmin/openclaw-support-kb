@@ -2,7 +2,7 @@
 type: composio_doc
 title: "White-labeling authentication"
 source: "https://docs.composio.dev/docs/authentication/white-labeling-authentication.md"
-source_hash: "c05fa5e251b71f511ce42855009155db747ab38927fa4c736cf03eb2f3c77cee"
+source_hash: "5589cd79b3370c62392fa0ebcf62e80dec991addeedfe1baeb761aa77bdc9668"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication/white-labeling-authentication.md"
@@ -109,7 +109,7 @@ app = FastAPI()
 
 @app.get("/api/composio-redirect")
 def composio_redirect(request: Request):
-    composio_url = "https://backend.composio.dev/api/v3.1/toolkits/auth/callback"
+    composio_url = "https://backend.composio.dev/api/v1/auth-apps/add"
     return RedirectResponse(url=f"{composio_url}?{request.url.query}")
 ```
 
@@ -120,7 +120,7 @@ def composio_redirect(request: Request):
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const composioUrl = "https://backend.composio.dev/api/v3.1/toolkits/auth/callback";
+  const composioUrl = "https://backend.composio.dev/api/v1/auth-apps/add";
   const params = new URLSearchParams(req.query as Record<string, string>);
   res.redirect(302, `${composioUrl}?${params.toString()}`);
 }

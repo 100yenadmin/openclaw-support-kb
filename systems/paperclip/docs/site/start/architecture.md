@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "architecture"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/start/architecture.md"
-source_hash: "5305f1c8699301645d2378743f5ceeb7b054aa613c2ca41300ccc342af7ede2e"
+source_hash: "6ae811903152600304d7caf651b326e7085e30ed10bd8215fe96390cd8284ecc"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/start/architecture.md"
@@ -47,7 +47,7 @@ Paperclip is a monorepo with four main layers.
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 19, Vite 6, React Router 7, Radix UI, Tailwind CSS 4, TanStack Query |
-| Backend | Node.js 20+, Express.js 5, TypeScript |
+| Backend | Node.js 24.11+, Express.js 5, TypeScript |
 | Database | PostgreSQL 17 (or embedded PGlite), Drizzle ORM |
 | Auth | Better Auth (sessions + API keys) |
 | Adapters | Claude Code CLI, Codex CLI, shell process, HTTP webhook |

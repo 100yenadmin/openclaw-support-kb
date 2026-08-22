@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Programmatic auth configs"
 source: "https://docs.composio.dev/docs/authentication/programmatic-auth-configs.md"
-source_hash: "1a235bb3f829d0d63d0ca7196b8b8b56d655aceb6d5f116a872844bc357660c9"
+source_hash: "338d5d8ed112fb5140f5928ab16c1b3ed50b5d2e0f438d063e77f30fa52fa8d6"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "authentication/programmatic-auth-configs.md"
@@ -59,7 +59,7 @@ console.log(authConfig.id); // ac_xxxxxxxx
 Bring your own OAuth app to show your branding on consent screens, request custom scopes, or get a dedicated rate-limit quota. Register the app in the provider's developer portal, set its authorized redirect URI to Composio's callback, then pass the client ID and secret.
 
 ```
-https://backend.composio.dev/api/v3.1/toolkits/auth/callback
+https://backend.composio.dev/api/v1/auth-apps/add
 ```
 
 **Python:**
@@ -79,7 +79,7 @@ auth_config = composio.auth_configs.create(
         "credentials": {
             "client_id": os.environ["NOTION_CLIENT_ID"],
             "client_secret": os.environ["NOTION_CLIENT_SECRET"],
-            "oauth_redirect_uri": "https://backend.composio.dev/api/v3.1/toolkits/auth/callback",
+            "oauth_redirect_uri": "https://backend.composio.dev/api/v1/auth-apps/add",
         },
     },
 )
@@ -98,7 +98,7 @@ const authConfig = await composio.authConfigs.create('notion', {
   credentials: {
     client_id: process.env.NOTION_CLIENT_ID!,
     client_secret: process.env.NOTION_CLIENT_SECRET!,
-    oauth_redirect_uri: 'https://backend.composio.dev/api/v3.1/toolkits/auth/callback',
+    oauth_redirect_uri: 'https://backend.composio.dev/api/v1/auth-apps/add',
   },
 });
 ```

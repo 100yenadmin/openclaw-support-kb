@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Running OpenClaw in Docker (Local Development)"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/guides/openclaw-docker-setup.md"
-source_hash: "fcb7da4a1b3b0e070662b505b95721698c96fc827577c45be4e8f5c99c79cf60"
+source_hash: "f53e41fdaf467899728d78c0fe96f95dc0081a691a9f2d5cb9496000b5b7eabb"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/guides/openclaw-docker-setup.md"
@@ -334,7 +334,7 @@ This issue does not affect the Docker Sandbox approach.
 
 ### Node version mismatch in community template images
 
-Some community-built sandbox templates (e.g. `olegselajev241/openclaw-dmr:latest`) ship Node 20, but OpenClaw requires Node >=22.12.0. Use our locally built `openclaw:local` image as the sandbox template instead, which includes Node 22.
+Some community-built sandbox templates (e.g. `olegselajev241/openclaw-dmr:latest`) ship Node 20, but OpenClaw requires Node >=22.12.0. Use our locally built `openclaw:local` image as the sandbox template instead, which includes Node 24.
 
 ### Gateway takes ~15 seconds to respond after start
 
