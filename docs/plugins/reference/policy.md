@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Policy plugin"
 source: "https://docs.openclaw.ai/plugins/reference/policy"
-source_hash: "80bc986d7de58e8e20f35f456a911370de6615669b170f506a06fbde0f9f39fd"
+source_hash: "33bf9e99c1b6027083e6a040119868b9307a8be7da123427e987c6b236f198ac"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/policy.md"
@@ -24,7 +24,7 @@ Adds policy-backed doctor checks for workspace conformance.
 
 ## Surface
 
-plugin
+CLI commands: `openclaw policy`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

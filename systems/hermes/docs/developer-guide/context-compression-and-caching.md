@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Compression and Caching"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-compression-and-caching"
-source_hash: "22baa01fb5620a6c348e85ab890b35417d521966b869c68f3546621bd401f69f"
+source_hash: "11a2961693a4e5969f94bee12c1ea912090894e6ab20dec63b763f83e918e1f7"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-compression-and-caching.md"
@@ -210,6 +210,22 @@ To keep the 85% autoraise but hide only the one-time notice:
 ```bash
 hermes config set compression.codex_gpt55_autoraise_notice false
 ```
+
+### Codex large-context `-900k` picker variants (opt-in)
+
+The ChatGPT Codex backend *advertises* a 272K window for the gpt-5.4 and
+gpt-5.6 (Sol/Terra/Luna) families, but actually accepts ~911K input tokens
+for ChatGPT-subscription accounts (live-verified Aug 2026). Hermes keeps the
+**advertised 272K as the default** for the base slugs — a bigger window means
+more tokens per request and much faster subscription-usage burn, so the large
+window is strictly opt-in.
+
+To use the large window, pick the explicit `-900k` variant in `/model` (e.g.
+`gpt-5.6-sol-900k`, `gpt-5.6-terra-900k`, `gpt-5.6-luna-900k`,
+`gpt-5.4-900k`). These are Hermes-side aliases: the suffix is stripped before
+the model id is sent to the backend, and pricing/usage accounting treats them
+as the base model. Slugs that genuinely enforce 272K (gpt-5.5, gpt-5.4-mini)
+have no `-900k` variant.
 
 ### Codex app-server thread compaction
 

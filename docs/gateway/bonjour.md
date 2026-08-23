@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bonjour discovery"
 source: "https://docs.openclaw.ai/gateway/bonjour"
-source_hash: "dcee58777bb3ed8837fdc9120ab15532ab654712cd29580b7bb53897a76f437e"
+source_hash: "fcbda5d4b7e4b839c148323db56f82def0449cb9f8e9b687690a4839cb895be4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/bonjour.md"
@@ -91,7 +91,6 @@ Only the gateway advertises `_openclaw-gw._tcp`. LAN multicast advertising comes
 | `gatewayTls=1`                | Only when TLS is enabled.                                                      |
 | `gatewayTlsSha256=<sha256>`   | Only when TLS is enabled and a fingerprint is available.                       |
 | `gatewayDirectReachable=1`    | Only when the gateway is directly reachable (not only via a relay/proxy path). |
-| `canvasPort=<port>`           | Only when the canvas host is enabled; currently the same as `gatewayPort`.     |
 | `tailnetDns=<magicdns>`       | mDNS full mode only; optional hint when Tailnet is available.                  |
 | `sshPort=<port>`              | Full mode only; omitted in minimal and off modes.                              |
 | `cliPath=<path>`              | Full mode only; omitted in minimal and off modes.                              |

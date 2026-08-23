@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Proxy execute"
 source: "https://docs.composio.dev/docs/extending-sessions/proxy-execute.md"
-source_hash: "951d6a6a568f8c5aebcd085c7ee3fb02392f78c4a167eac8201424c983be56ec"
+source_hash: "b534af44851115b7b07cc3d078139c7b869552b9c1f595ccf7ed3dc3bfa9d83e"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/proxy-execute.md"
@@ -49,8 +49,8 @@ response = session.proxy_execute(
     ],
 )
 
-print(response.status)
-print(response.data)
+print(response["status"])
+print(response["data"])
 ```
 
 **TypeScript:**
@@ -88,14 +88,45 @@ The `endpoint` is a path relative to the toolkit's base URL (`/repos/...` resolv
 
 ## Response shape [#response-shape]
 
-The call returns the upstream response verbatim:
+The call forwards the upstream response's status, headers, and parsed body.
+Both SDKs expose the same fields; each spells them the way its language does, so
+TypeScript reads them as properties and Python as dictionary keys.
 
-| Field        | Type                     | Description                                                                                |
-| ------------ | ------------------------ | ------------------------------------------------------------------------------------------ |
-| `status`     | `number`                 | HTTP status code from the upstream API.                                                    |
-| `data`       | `unknown`                | Parsed JSON body the API returned.                                                         |
-| `headers`    | `Record<string, string>` | Response headers.                                                                          |
-| `binaryData` | `object`                 | Present only when the upstream returns a file (`url`, `contentType`, `size`, `expiresAt`). |
+| TypeScript   | Python        | Type                                                | Description                                                                                                       |
+| ------------ | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `status`     | `status`      | `number` / `int`                                    | HTTP status code from the upstream API.                                                                           |
+| `data`       | `data`        | `unknown` / `Any`                                   | Parsed JSON body the API returned. Optional in TypeScript; in Python the key is always present but may be `None`. |
+| `headers`    | `headers`     | `Record<string, string>` / `dict[str, str] \| None` | Response headers. Optional in TypeScript; in Python the key is always present but may be `None`.                  |
+| `binaryData` | `binary_data` | `object` / `dict`                                   | Present only when the upstream returns a file.                                                                    |
+
+When the upstream returns a file, the binary entry carries `url`, `contentType`,
+`size`, and `expiresAt` in TypeScript, and `url`, `content_type`, `size`, and
+`expires_at` in Python. `expires_at` may be absent in TypeScript and `None` in
+Python when the upstream gives no expiry. The key is absent entirely when the
+response is not a file, so check for it before reading:
+
+**Python:**
+
+```python
+if "binary_data" in response:
+    print(response["binary_data"]["url"])
+```
+
+**TypeScript:**
+
+```typescript
+import { Composio } from '@composio/core';
+const composio = new Composio({ apiKey: 'your_api_key' });
+const session = await composio.create('user_123', { toolkits: ['github'] });
+const response = await session.proxyExecute({
+  toolkit: 'github',
+  endpoint: '/repos/composiohq/composio/issues/1',
+  method: 'GET',
+});
+if (response.binaryData) {
+  console.log(response.binaryData.url);
+}
+```
 
 > Don't set the `Authorization` header yourself through `parameters`. Composio injects the correct one from the connected account's auth scheme, and setting it manually overrides that credential and usually produces a `401`.
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Canvas plugin"
 source: "https://docs.openclaw.ai/plugins/reference/canvas"
-source_hash: "e1962ec2a037728b56ed6d5a43447396d9bda92322270d086d37efbbef6dc78c"
+source_hash: "80d27e6e8e6bbf415e10fc7c40005d63621a446087fd62d8531f9009d0c61af5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/canvas.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/canvas
 
 # Canvas plugin
 
-Experimental Canvas control and A2UI rendering surfaces for paired nodes.
+Presents hosted widget documents on paired macOS panels.
 
 ## Distribution
 

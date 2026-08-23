@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "ACP agents — setup"
 source: "https://docs.openclaw.ai/tools/acp-agents-setup"
-source_hash: "c9b54033f28a5627246e3d04b5015028e67066a37e0bd51535b493bb462ffe78"
+source_hash: "646632047311cbe535cab783f632f90e3bb8a45750d4ec3344f8f7ae6c3a3cf9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/acp-agents-setup.md"
@@ -289,7 +289,10 @@ Restart the gateway after changing this value.
 
 ## Permission configuration
 
-ACP sessions run non-interactively — there is no TTY to approve or deny file-write and shell-exec permission prompts. The acpx plugin provides two config keys that control how permissions are handled:
+ACP sessions run without an interactive TTY for file-write and shell-exec
+permission prompts. This does not disable ACP form or URL elicitation during a
+channel-delivered turn: those requests use transient Gateway questions instead.
+The acpx plugin provides two config keys that control harness permissions:
 
 These ACPX harness permissions are separate from OpenClaw exec approvals and separate from CLI-backend vendor bypass flags such as Claude CLI `--permission-mode bypassPermissions`. ACPX `approve-all` is the harness-level break-glass switch for ACP sessions.
 

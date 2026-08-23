@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "SecretRef credential surface"
 source: "https://docs.openclaw.ai/reference/secretref-credential-surface"
-source_hash: "ea45c610c28795b182addcbe2c0649428495c52ff73f847e45d7949ba93d36d7"
+source_hash: "e7e2bb3afc1dbc0955275465cb5d66c3c2c52b69ac5aba4907ec2f91c4b20f05"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/secretref-credential-surface.md"
@@ -96,9 +96,11 @@ The lists below are generated from the source target registry and checked agains
 - `channels.clickclack.accounts.*.token`
 - `channels.discord.token`
 - `channels.discord.pluralkit.token`
+- `channels.discord.voice.realtime.providers.*.apiKey`
 - `channels.discord.voice.tts.providers.*.apiKey`
 - `channels.discord.accounts.*.token`
 - `channels.discord.accounts.*.pluralkit.token`
+- `channels.discord.accounts.*.voice.realtime.providers.*.apiKey`
 - `channels.discord.accounts.*.voice.tts.providers.*.apiKey`
 - `channels.irc.password`
 - `channels.irc.nickserv.password`
@@ -123,6 +125,7 @@ The lists below are generated from the source target registry and checked agains
 - `channels.nextcloud-talk.apiPassword`
 - `channels.nextcloud-talk.accounts.*.botSecret`
 - `channels.nextcloud-talk.accounts.*.apiPassword`
+- `channels.nostr.privateKey`
 - `channels.zalo.botToken`
 - `channels.zalo.webhookSecret`
 - `channels.zalo.accounts.*.botToken`

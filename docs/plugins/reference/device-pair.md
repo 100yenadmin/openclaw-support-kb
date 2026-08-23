@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Device Pair plugin"
 source: "https://docs.openclaw.ai/plugins/reference/device-pair"
-source_hash: "4226c2c224c9cd9b3b0fadf085c7b5662a0b2fcd37215dc12b87bcf742723709"
+source_hash: "90efd10dfdb523198ddd4df80784f6542e8e10534271b609e9549b80f0a524b6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/device-pair.md"
@@ -24,6 +24,6 @@ Generate setup codes and approve device pairing requests.
 
 ## Surface
 
-commands: `/pair`
+slash commands: `/pair`
 
 ---

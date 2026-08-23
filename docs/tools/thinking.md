@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Thinking levels"
 source: "https://docs.openclaw.ai/tools/thinking"
-source_hash: "fd2ed66ef81c311888525b9fe2e122f21edc779a5006069b617ef137978791a1"
+source_hash: "4799fd2147e5ef181ed5f8603685fe66320fb1d9910f2e1afa239e4f92e025a4"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/thinking.md"
@@ -67,7 +67,7 @@ Source: https://docs.openclaw.ai/tools/thinking
 ## Application by agent
 
 - **Embedded OpenClaw**: the resolved level is passed to the in-process OpenClaw agent runtime.
-- **Claude CLI backend**: concrete non-off levels are passed to Claude Code as `--effort` when using `claude-cli`; `adaptive` removes configured effort flags and delegates effective effort to Claude Code's environment, settings, and model defaults. See [CLI backends](/gateway/cli-backends).
+- **Claude CLI backend**: concrete levels are mapped to Claude Code `--effort`; models that allow fixed budgets also receive a matching `MAX_THINKING_TOKENS` launch value. `adaptive` removes both configured effort flags and fixed-budget overrides, delegating effective thinking to Claude Code's environment, settings, and model defaults. See [CLI backends](/gateway/cli-backends).
 
 ## Fast mode (/fast)
 

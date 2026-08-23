@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discovery and transports"
 source: "https://docs.openclaw.ai/gateway/discovery"
-source_hash: "4b61b7c051f3fc852fcf558a0363c95a8b39822c302f055bda0621633c2611d8"
+source_hash: "c893cae54366c7986ad4f56eb528568b63c622ec94e751541774621394666d9e"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/discovery.md"
@@ -79,10 +79,6 @@ Troubleshooting and beacon details: [Bonjour](/gateway/bonjour).
   | `tailnetDns=<magicdns>`     | Optional hint; auto-detected when Tailscale is available.                                                                                                        |
   | `sshPort=<port>`            | Present only when `discovery.mdns.mode="full"`; omitted (SSH defaults to `22`) in the default `"minimal"` mode, on both the LAN advertiser and wide-area DNS-SD. |
   | `cliPath=<path>`            | Same `discovery.mdns.mode="full"` gate as `sshPort`; a remote-install hint for the CLI path.                                                                     |
-
-  A `canvasPort` TXT key is defined in the plugin discovery contract for a
-  future canvas host port, but no current code path sets a value, so it is
-  never emitted today.
 
 Security notes:
 

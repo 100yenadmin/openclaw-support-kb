@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "f29fe3c68e2a8701882fc8966917b3720ab3e8248ca78cbaf3f4a83720398ae4"
+source_hash: "a31f5d55d65253648ea449e668b41edb1dff0e99cded39f593f68754600d9907"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/daemon.md"
@@ -36,8 +36,10 @@ openclaw daemon uninstall
 | `install`   | `--port`, `--runtime <node>`, `--token`, `--wrapper <path>`, `--force`, `--json`                 |
 | `uninstall` | `--json`                                                                                         |
 | `start`     | `--json`                                                                                         |
-| `stop`      | `--json`, `--disable` (launchd only: persistently suppress KeepAlive/RunAtLoad until next start) |
+| `stop`      | `--force`, `--json`, `--disable` (launchd only: suppress KeepAlive/RunAtLoad until next start)   |
 | `restart`   | `--force`, `--safe`, `--skip-deferral`, `--wait <duration>`, `--json`                            |
+
+`--json` is accepted before or after every subcommand (for example, `daemon --json status` and `daemon status --json`).
 
 - `status`: shows service install state (launchd/systemd/schtasks) and probes Gateway health.
 - `install`: installs the service; `--force` reinstalls/overwrites an existing install.

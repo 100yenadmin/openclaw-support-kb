@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Database-first state refactor"
 source: "https://docs.openclaw.ai/refactor/database-first"
-source_hash: "09abfaa401bcb5ebc217ef9e2a313fcab433bc1cf5298fb3b7d601f5a138a15c"
+source_hash: "3597e50b8c91cfae6040cd9747f0a357112a1f8b51d8a477d053f048219b6b26"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "refactor/database-first.md"
@@ -1192,10 +1192,9 @@ sessionId})`; create, branch, continue, list, and fork flows live in their
   stay temp materializations because channel delivery still needs a file path;
   their expiry metadata is SQLite-owned without JSON sidecars.
 - Canvas managed documents now use shared SQLite `plugin_blob_entries` instead
-  of a default `state/canvas/documents` directory. The Canvas host serves those
-  blobs directly; local files are created only for explicit `host.root`
-  operator content or temporary materialization when a downstream media reader
-  requires a path.
+  of a default `state/canvas/documents` directory. The hosted document route
+  serves those blobs directly; local files are created only for temporary
+  materialization when a downstream media reader requires a path.
 - File Transfer audit decisions now use shared SQLite `plugin_state_entries`
   instead of the unbounded `audit/file-transfer.jsonl` runtime log. Doctor
   imports the legacy JSONL audit file into plugin state and removes the source

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding (CLI)"
 source: "https://docs.openclaw.ai/start/wizard"
-source_hash: "618b65c74e50f91d111df49615201626ed08a1aa3626c3c17010f8df90329f35"
+source_hash: "087b31f489db09946793c2b9d1a5ee7d81547d5b8a62f32449d58e26033052a8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/wizard.md"
@@ -130,8 +130,12 @@ menu is built from the current installation:
 - With a configured default model, **Keep existing model config** appears first
   and is selected by default, followed by **QuickStart (recommended)** and
   **Manual setup**.
-- Each detected migration source adds an **Import from &lt;source&gt;** choice
-  after the setup choices.
+- When a migration provider is available, **Import from another agent** appears
+  after the setup choices. Selecting it opens provider-specific entries such as
+  **Import from Claude**, **Import from Codex**, and **Import from Hermes**.
+  Detected sources appear first with their paths; other available providers ask
+  for a source path. Use Back from the provider list to return to **Setup mode**
+  before an import begins.
 
 Pass `--flow quickstart` or `--flow manual` (alias `advanced`) to select a
 classic setup flow and skip that prompt. Import flags select the import flow

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Logging"
 source: "https://docs.openclaw.ai/logging"
-source_hash: "c081f48cafbedaf75339882d0525911dcecb877a2c5dfff655272eb295f6a8bb"
+source_hash: "9bbaf5b0dc4725872410706de687d85e6cba3892cb5c1ae11f1326f1f0ea295d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "logging.md"
@@ -320,6 +320,15 @@ File logs and session transcripts stay JSONL, but matching secret values are
 masked before the line or message is written to disk. Redaction is best-effort:
 it applies to text-bearing message content and log strings, not every
 identifier or binary payload field.
+
+Model-visible tool-result text uses narrower assignment matching so source code
+remains intact. Registered secrets and explicit credential forms, including
+structured fields, authorization headers, URL credentials, and known token
+formats, remain masked. Direct reads of `.env` files apply
+broader assignment masking before their content becomes a tool result. Other
+config and source reads preserve opaque values; register actual secrets instead
+of relying on key-name matching. Bare source assignments such as
+`token = timeObserverToken` remain unchanged.
 
 The built-in defaults cover common API credentials and payment-credential field
 names such as card number, CVC/CVV, shared payment token, and payment credential

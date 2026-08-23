@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Vault plugin"
 source: "https://docs.openclaw.ai/plugins/reference/vault"
-source_hash: "296bd97b41a572a50e91d0ba59fde8d2443f6ddbaa11ddf265d3b271c8fa70f2"
+source_hash: "c9879d8c2e3da7796fc67df03a3fe582b7cfdb72bca75cbfbbc97e1ca49e3a49"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/vault.md"
@@ -24,7 +24,7 @@ HashiCorp Vault SecretRef provider integration.
 
 ## Surface
 
-plugin
+CLI commands: `openclaw vault`
 
 ## Related docs
 

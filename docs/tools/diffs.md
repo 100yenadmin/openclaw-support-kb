@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Diffs"
 source: "https://docs.openclaw.ai/tools/diffs"
-source_hash: "cd0ca02461f85cb4136a8635696ee9fa1c75997a2d8763bed440666a969b471c"
+source_hash: "c9c08a8a21a0d5e4545b30be882f62790cb27881ebd7acd59e226187b06b2c7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/diffs.md"
@@ -17,7 +17,7 @@ Source: https://docs.openclaw.ai/tools/diffs
 
 Input: `before` + `after` text, or a unified `patch` (mutually exclusive).
 
-Output: a gateway viewer URL for canvas presentation, a rendered PNG/PDF file path for message delivery, or both.
+Output: a gateway viewer URL for browser presentation, a rendered PNG/PDF file path for message delivery, or both.
 
 ## Quick start
 
@@ -54,7 +54,7 @@ Tabs
 
 view
 
-        Canvas-first flows: agents call `diffs` with `mode: "view"` and open `details.viewerUrl` with `canvas present`.
+        Browser flows: agents call `diffs` with `mode: "view"` and open `details.viewerUrl` in a browser.
 
 
 file
@@ -442,7 +442,7 @@ Artifact not found
 
 ## Operational guidance
 
-- Prefer `mode: "view"` for local interactive reviews in canvas.
+- Prefer `mode: "view"` for local interactive reviews in a browser.
 - Prefer `mode: "file"` for outbound chat channels that need an attachment.
 - Keep `allowRemoteViewer` disabled unless your deployment requires remote viewer URLs.
 - Set an explicit short `ttlSeconds` for sensitive diffs.

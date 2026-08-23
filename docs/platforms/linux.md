@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux app"
 source: "https://docs.openclaw.ai/platforms/linux"
-source_hash: "2e8d6392977df2b2678d8693989b2542d33b1a55afb7f10ea67a34eacf2954b8"
+source_hash: "93249b7fc84e2d57a4faa14d7ce021889245034eb3dd2c821b3797410971bfc0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/linux.md"
@@ -31,7 +31,6 @@ The OpenClaw Linux companion is a Tauri desktop app for a local Gateway. It:
   offers to import detected Claude Code, Codex, or Hermes memories into the
   agent workspace (the same import stays available later under
   Settings → Import Memory)
-- renders agent-driven Canvas and bundled A2UI content for a colocated CLI node host
 - remains available from the system tray when its window is closed
 
 ### Host sleep
@@ -121,14 +120,6 @@ the shortcut settings are hidden and the tray item remains the entry point.
 After an accepted send, Quick Chat stays open and streams the selected agent's
 plain-text reply below the composer. Press `Esc` to dismiss the bar and its reply;
 `Ctrl+Enter` still opens the dashboard.
-
-### Canvas
-
-Linux Canvas uses two cooperating processes. `openclaw node run` remains the single Gateway node connection; the bundled `linux-canvas` plugin forwards `canvas.*` calls to the running desktop app over a user-only Unix socket. The app owns one on-demand WebView window, including the bundled A2UI renderer and action bridge back to the agent.
-
-The plugin is enabled by default. It advertises Canvas only when the desktop socket exists at `$XDG_RUNTIME_DIR/openclaw-canvas.sock`, or `/tmp/openclaw-canvas-$UID.sock` when `XDG_RUNTIME_DIR` is unavailable. Disable it with `plugins.entries.linux-canvas.enabled: false`. On a headless Linux server without the desktop app, Canvas is not advertised.
-
-Linux v1 uses one Canvas window. HTTP and HTTPS pages are renderable, but A2UI actions are accepted only from the bundled renderer.
 
 ## CLI and SSH alternative
 

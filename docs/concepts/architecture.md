@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway architecture"
 source: "https://docs.openclaw.ai/concepts/architecture"
-source_hash: "ac11762d03926f9cd1e9830e1e29d93c379f12f2ea5d51bdcd55fb1605221a36"
+source_hash: "cd049a4117a85a74dd4711945ad08bc5f38c733b917f796c565004eba699f2a3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/architecture.md"
@@ -23,9 +23,9 @@ Source: https://docs.openclaw.ai/concepts/architecture
 - **Nodes** (macOS/iOS/Android/headless) also connect over **WebSocket**, but
   declare `role: node` with explicit caps/commands.
 - One Gateway per host; it is the only place that opens a WhatsApp session.
-- The **canvas host** is served by the Gateway HTTP server under:
-  - `/__openclaw__/canvas/` (agent-editable HTML/CSS/JS)
-  - `/__openclaw__/a2ui/` (A2UI host)
+- The **hosted widget surface** is served by the Gateway HTTP server under:
+  - `/__openclaw__/canvas/` (hosted widget documents)
+  - `/__openclaw__/a2ui/` (A2UI renderer assets)
 
   It uses the same port as the Gateway (default `18789`).
 
@@ -49,7 +49,8 @@ Source: https://docs.openclaw.ai/concepts/architecture
 - Connect to the **same WS server** with `role: node`.
 - Provide a device identity in `connect`; pairing is **device-based** (role `node`) and
   approval lives in the device pairing store.
-- Expose commands like `canvas.*`, `camera.*`, `screen.record`, `location.get`.
+- Expose commands like `camera.*`, `screen.record`, and `location.get`; the
+  macOS app also exposes widget-panel commands under `canvas.*`.
 
 Protocol details: [Gateway protocol](/gateway/protocol)
 

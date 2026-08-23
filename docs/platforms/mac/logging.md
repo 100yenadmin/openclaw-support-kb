@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "macOS logging"
 source: "https://docs.openclaw.ai/platforms/mac/logging"
-source_hash: "b45e155011b25d30ba03c348613524cc7625b44c6b7ed9273a7b2152672b4fbd"
+source_hash: "293f75aa6fad351311343ccec2ed62f20040109559556e86939fde1d032ffa7d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/logging.md"
@@ -26,6 +26,12 @@ The macOS app logs through swift-log (unified logging by default) and can also w
 - Clear: **Debug pane -> Logs -> App logging -> "Clear"** deletes the active file and all backups.
 
 Treat the file as sensitive; do not share it without review.
+
+## Export unified logs as JSON
+
+Run `./scripts/clawlog.sh --json` to write recent unified-log events as one JSON array to stdout, or add `--output logs.json` to write the array to a file without printing it. The default output contains the last 50 log records; use `--lines 1` for the most recent record or `--all` for every matching record. `--lines` counts complete records in JSON mode, not physical lines.
+
+JSON export cannot be combined with `--follow` or `--list-categories`. Use those options without `--json`.
 
 ## Unified logging private data on macOS
 

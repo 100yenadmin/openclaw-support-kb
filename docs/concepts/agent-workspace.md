@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent workspace"
 source: "https://docs.openclaw.ai/concepts/agent-workspace"
-source_hash: "c095702b91b8057594e80b69bc82298611526d6aa55a2a174308870b72200279"
+source_hash: "81489dcea36bec1feb33ab4586349b0c0bbbd1b7760677487ace097ae264c321"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-workspace.md"
@@ -121,11 +121,6 @@ MEMORY.md - curated long-term memory (optional)
 skills/ - workspace skills (optional)
 
     Workspace-specific skills. Highest-precedence skill location for that workspace, ahead of project agent skills, personal agent skills, managed skills, bundled skills, and `skills.load.extraDirs` when names collide.
-
-
-canvas/ - Canvas UI files (optional)
-
-    Canvas UI files for node displays (for example `canvas/index.html`).
 
 
 Note

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloud workers historical plan"
 source: "https://docs.openclaw.ai/plan/cloud-workers"
-source_hash: "362cb190b6baad20bf6901735629bbcb35f4a695a07244eb8e1e60b871d7909d"
+source_hash: "0c5a2b3d13a3918f8d4e0f37afaccd07c9eb32971523d95f5fa46e3950b153bf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plan/cloud-workers.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plan/cloud-workers
 
 ## Status
 
-Superseded historical proposal. The implemented architecture is documented in [Runners and execution environments](/plan/runners) and [Cloud workers](/gateway/cloud-workers): Crabbox provisions a node-backed `worker-turn` lease, the worker child dials the Gateway's authenticated public worker route, and workspace transfer uses the node channel. The former dedicated loopback listener, SSH reverse-forward carrier, and SSH-launched worker-turn path have been removed. SSH remains a separate `remote-exec` workspace transport and desktop carrier.
+Superseded historical proposal. The implemented architecture is documented in [Runners and execution environments](/plan/runners) and [Cloud workers](/gateway/cloud-workers): Crabbox provisions a node-backed `worker-turn` lease with current reconnect-scoped v6 supervisor proof, the worker child dials the Gateway's authenticated public worker route, and workspace transfer uses the node channel. The former dedicated loopback listener, SSH reverse-forward carrier, and SSH-launched worker-turn path have been removed. SSH remains a separate `remote-exec` workspace transport and desktop carrier.
 
 The sections below preserve the pre-convergence design record and are not the current runtime contract.
 
@@ -162,6 +162,13 @@ Runtime placement is a SQLite-owned state machine keyed to the session, not a pa
 `local → requested → provisioning → syncing → starting → active(worker) → draining → reconciling → local | reclaimed | failed`
 
 It persists environment id, transition generation, active owner epoch, workspace base manifest, worker bundle hash, and last ACK cursors. Turn admission atomically claims placement before either loop starts a turn, so a local message admitted against a stale snapshot can never race a worker turn — exactly one loop owns the session at any time.
+
+Device runner availability is a process-current projection, not another
+placement state. An active device placement stays active while its exact v6
+runner proof is absent. The default is to wait. Explicit Gateway continuation
+persists one abandonment bit on the move intent, force-closes the remote owner,
+and resumes from the last Gateway-synced workspace without replay; the UI warns
+that unsynced device files and in-flight work may be lost.
 
 UI:
 

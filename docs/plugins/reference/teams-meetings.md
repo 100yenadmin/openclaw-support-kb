@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Microsoft Teams meetings plugin"
 source: "https://docs.openclaw.ai/plugins/reference/teams-meetings"
-source_hash: "b4465bf73fc472255dcf5685797ca76c373b6b6bca4d23146b021782882606e8"
+source_hash: "d19bdd0c6df0794f4d7624e7c99283792f866efe95a489c0dbab32b25e8debce"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/teams-meetings.md"
@@ -24,7 +24,7 @@ Join Microsoft Teams meetings as a Chrome browser guest.
 
 ## Surface
 
-contracts: `tools`, `transcriptSourceProviders`
+CLI commands: `openclaw teamsmeetings`; contracts: `tools`, `transcriptSourceProviders`
 
 ## Related docs
 

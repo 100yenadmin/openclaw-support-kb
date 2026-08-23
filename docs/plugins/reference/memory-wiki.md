@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Wiki plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-wiki"
-source_hash: "be1278dc5f80018653932796bc0e4eacd01ce1a5fa62f6745a90c9e481823e78"
+source_hash: "afe3ce1f4a19121e0aa4caecdec6ede5bc66d45cf7d991d1de5402f469466b7b"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-wiki.md"
@@ -24,7 +24,7 @@ Persistent wiki compiler and Obsidian-friendly knowledge vault for OpenClaw.
 
 ## Surface
 
-contracts: `tools`; skills
+CLI commands: `openclaw wiki`; contracts: `tools`; skills
 
 ## Related docs
 

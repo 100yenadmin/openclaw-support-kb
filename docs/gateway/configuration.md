@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "94d2481fef479b104d1457406920bb2b1f8f00cefd878fc64f4463122455c838"
+source_hash: "f2e2bec13fd3e805c8eb5c21fe58f362cf552d3ed436fb23a68f1fd11ee6b230"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -454,7 +454,7 @@ Configure cron jobs
     ```
 
     - `sessionRetention`: prune completed isolated run sessions from SQLite session rows (default `24h`; set `false` or a zero duration such as `"0h"` to disable).
-    - Run history automatically keeps the newest 2000 terminal rows per job; lost rows retain their 24-hour cleanup window.
+    - Terminal run history is retained for 7 days (`lost` rows for 24 hours), with the newest 2000 rows per job and history class enforced as an additional ceiling.
     - See [Cron jobs](/automation/cron-jobs) for feature overview and CLI examples.
 
 

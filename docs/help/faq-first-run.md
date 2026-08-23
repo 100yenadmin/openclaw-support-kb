@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ: first-run setup"
 source: "https://docs.openclaw.ai/help/faq-first-run"
-source_hash: "9cb852515e16ff14f595aa4d0e40c4f05e3a9153098dafa57d355ceb6537ff6a"
+source_hash: "df1e08c2fb1cd4474ca4644a260a6cb247e873332df1e7dcd6fc74ab679ed813"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq-first-run.md"
@@ -180,7 +180,8 @@ Does it run on Raspberry Pi?
     the Gateway (models call out to cloud APIs), even a modest Pi handles the load.
 
     A small Pi/VPS can also host just the Gateway while you pair **nodes** on your
-    laptop/phone for local screen/camera/canvas or command execution. See [Nodes](/nodes).
+    laptop/phone for local screen/camera or command execution. A paired Mac can
+    also present hosted widgets in its native panel. See [Nodes](/nodes).
 
     Full setup walkthrough: [Raspberry Pi](/install/raspberry-pi).
 
@@ -485,7 +486,7 @@ Where are the cloud/VPS install guides?
     treat the host as the source of truth and back it up.
 
     Pair **nodes** (Mac/iOS/Android/headless) to that cloud Gateway for local
-    screen/camera/canvas or command execution on your laptop while the Gateway stays in
+    screen/camera or command execution on your laptop while the Gateway stays in
     the cloud.
 
     Hub: [Platforms](/platforms). Remote access: [Gateway remote](/gateway/remote).
@@ -750,7 +751,8 @@ If I buy a Mac mini to run OpenClaw, can I connect it to my MacBook Pro?
 
     Yes. The **Mac mini can run the Gateway**, and your MacBook Pro connects as a **node**
     (companion device). Nodes do not run the Gateway - they add capabilities like
-    screen/camera/canvas and `system.run` on that device.
+    screen/camera and `system.run` on that device. A Mac node can also present
+    hosted widgets in its native panel.
 
     Common pattern: Gateway on the always-on Mac mini; MacBook Pro runs the macOS app or a
     node host and pairs to the Gateway. Check with `openclaw nodes status` / `openclaw nodes list`.

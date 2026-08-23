@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenClaw"
 source: "https://docs.openclaw.ai/"
-source_hash: "25caa3e1f0ec49e29c0fd6c76a689af54e8f13d82d466aaa07572d8ee5aad2c0"
+source_hash: "5c85074145e9642dde391c111c5bd00fae3d9d2073e7b90def06404ed1e758c1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "index.md"
@@ -185,7 +185,7 @@ Web Control UI
 
 Mobile nodes
 
-    Pair iOS and Android nodes for Canvas, camera, and voice-enabled workflows.
+    Pair iOS and Android nodes for camera, screen, and voice-enabled workflows.
 
 
 ## Quick start
@@ -285,7 +285,7 @@ Channels
 
 Nodes
 
-    iOS and Android nodes with pairing, Canvas, camera, and device actions.
+    iOS and Android nodes with pairing, camera, screen, and device actions.
 
 
 Help

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix plugin"
 source: "https://docs.openclaw.ai/plugins/reference/matrix"
-source_hash: "c97cab0c6c8b8b08680039ea10c2fdf8ae1d28b9d1c2b979726f2d573a6cbf3d"
+source_hash: "5360467c3692b8c0064272cecea8e6f085afdc87e566fa44c967857959580b33"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/matrix.md"
@@ -24,7 +24,7 @@ OpenClaw Matrix channel plugin for rooms and direct messages.
 
 ## Surface
 
-channels: `matrix`
+channels: `matrix`; CLI commands: `openclaw matrix`
 
 ## Related docs
 

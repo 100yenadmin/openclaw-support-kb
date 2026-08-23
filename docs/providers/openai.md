@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OpenAI"
 source: "https://docs.openclaw.ai/providers/openai"
-source_hash: "9c8b10bcfdf9ee32e4c8bbe82245535616c196753df6dd52b2958ee27599db2a"
+source_hash: "a4b45b08e215a1f64176b6a413750b7a750e3adeae3b651869703f6f5d0428fb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/openai.md"
@@ -1072,9 +1072,9 @@ Realtime voice
     credentials on different sides of the trust boundary. Platform auth mints
     an ephemeral client secret and the browser exchanges SDP directly with
     OpenAI. OAuth auth stays in the Gateway: the existing single-use offer
-    broker sends raw `application/sdp` to
-    `/v1/realtime/calls?model=<model>` and returns only the answer SDP. The
-    OAuth token never reaches the browser. A configured Platform credential
+    broker sends multipart `sdp` plus the canonical browser `session` policy
+    to `/v1/realtime/calls` and returns only the answer SDP. The OAuth token
+    never reaches the browser. A configured Platform credential
     that cannot be resolved still fails closed; repair or remove that source
     before OAuth fallback can apply.
 

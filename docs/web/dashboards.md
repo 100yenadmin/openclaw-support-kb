@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session Dashboards"
 source: "https://docs.openclaw.ai/web/dashboards"
-source_hash: "d2723093db897360d5aeff1b09282176f13d84cc5ee325568b35b30cc29fe7b9"
+source_hash: "d0606a62e67a8d4305d72c8c39052e6e6317427a125a82576fcfea1ee2856324"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboards.md"
@@ -32,11 +32,12 @@ thread's `/dashboard/<agent>/<sessionRef>` URL. An open Dashboards page updates
 as threads are renamed, archived, deleted, or switched between Chat and
 Dashboard, including after a Gateway reconnect.
 
-Use **Open full-screen dashboard** on a row to open its board as a standalone
-browser document with no sidebar, top bar, or chat. The close button returns to
-the previous page. Inside a session, use the fullscreen button beside the
-Chat / Split / Dashboard switch to enter or leave browser fullscreen while the
-board is visible.
+Use **Open dashboard in focus mode** on a row to open its board as a standalone
+browser document at `/focus/dashboard/<agent>/<sessionRef>`, with no sidebar,
+top bar, or chat. This focus presentation does not invoke browser fullscreen;
+the close button returns to the previous page. Inside a session, use the
+fullscreen button beside the Chat / Split / Dashboard switch to enter or leave
+browser fullscreen while the board is visible.
 
 The Chat or Dashboard face preference is stored server-side per thread. It
 therefore follows you when you connect to the same gateway from another device.
@@ -127,8 +128,9 @@ one-tap, revision-bound approval as everything else.
 When the Canvas plugin is enabled, agents can render A2UI JSONL as a dashboard
 widget. A2UI widgets use the same stable name, tab, size, pinning, sandbox, and
 update-in-place behavior as HTML widgets. The renderer is loaded from the
-Gateway's capability-scoped A2UI asset route; the renderer bundle is not copied
-into each widget, and the Canvas file host does not need to be enabled.
+Gateway's `/__openclaw__/a2ui/` asset route, so the renderer bundle is not
+copied into each widget. The Canvas plugin and its hosted routes must be
+enabled; both are enabled by default.
 
 A2UI actions use the normal widget bridge. By default, clicks become quiet
 session notices that the agent sees on its next turn. If the widget declares

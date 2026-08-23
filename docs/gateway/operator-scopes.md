@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Operator scopes"
 source: "https://docs.openclaw.ai/gateway/operator-scopes"
-source_hash: "56a0bd27d330bdc8e387282d41e1f3babdd407d91d681c0dc5c4c7fec0cf771b"
+source_hash: "0311160d212b5355654a3d748b587cb8f9f6916ed23e948842c8a40754b5bfbd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/operator-scopes.md"
@@ -108,8 +108,11 @@ dispatch so authorization failures have one canonical structured response:
 - `environments.list` needs `operator.read`. Session placement methods derive
   their scope from the requested target before schema validation:
   `sessions.dispatch` needs `operator.write` for `deviceId` and
-  `operator.admin` for `profileId`; `sessions.move` needs `operator.write` for
-  Gateway or device targets and `operator.admin` for profile targets;
+  `operator.admin` for `profileId` or a target-less
+  `cloudWorkers.projectProfiles` lookup; `sessions.move` needs `operator.write`
+  for Gateway or device targets and `operator.admin` for profile targets;
+  `abandonSource: true` remains `operator.write` but is schema-valid only with
+  a Gateway target and runtime-valid only for an exact offline device source;
   `sessions.reclaim` remains `operator.write`. Malformed dispatch params or a
   malformed move target use `operator.write` so the handler can return the
   precise schema error. All three methods retain session ownership,

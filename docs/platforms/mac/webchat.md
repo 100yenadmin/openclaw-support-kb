@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WebChat (macOS)"
 source: "https://docs.openclaw.ai/platforms/mac/webchat"
-source_hash: "0a3165a05e8621c74d5b912d422da96694bf21387916161e8e0f4b3fb836a98c"
+source_hash: "a427354de8974c403c9d0c7ad9272cdc563ae4ba8ed860562ed5bfbf339ed10c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "platforms/mac/webchat.md"
@@ -56,7 +56,7 @@ The dashboard header shows a Gateway picker when the Mac app has at least two
 configured Gateways. Choose a Gateway to replace the current dashboard in the
 same window, or Option-click it to open a separate dashboard window. **Set as
 primary…** makes the viewed token-authenticated profile the Mac app's primary
-Gateway after confirmation; this resets Talk Mode, canvas, and chat
+Gateway after confirmation; this resets Talk Mode, the widget panel, and chat
 connections. While connected, the sidebar footer also shows the current Gateway
 and marks it when it is primary. Password-only profiles can be viewed but cannot
 be made primary.

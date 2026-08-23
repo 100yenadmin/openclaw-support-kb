@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Paperclip Specification"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/SPEC.md"
-source_hash: "369a366c6549f2396746f60938ad2d9a74cc882b21c2a40e5e142036658ff401"
+source_hash: "dff919282aff12ecbe05c8d5c3f37f99277b2fe2e4f9a7153d8ce97931a8bf6d"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/spec.md"
@@ -442,6 +442,7 @@ Paperclip manages task-linked work artifacts: issue documents (rich-text plans, 
 When an agent crashes or disappears mid-task, Paperclip does **not** auto-reassign or auto-release the task. Instead:
 
 - Paperclip surfaces stale tasks (tasks in `in_progress` with no recent activity) through dashboards and reporting
+- Paperclip may perform bounded continuity repair with the same assigned agent; when that is exhausted or unsafe, it opens a board-owned recovery action without waking a substitute agent
 - Paperclip does not fail silently — the auditing and visibility tools make problems obvious
 - Recovery is handled by humans or by emergent processes (e.g. a project manager agent whose job is to monitor for stale work and surface it)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Honcho memory"
 source: "https://docs.openclaw.ai/concepts/memory-honcho"
-source_hash: "739715f346cc484ae465fa1433243e6c2523c17d37bfaf980c98c8f6f56cb43b"
+source_hash: "dac58d9a3b49ea3fbcf93ef15fb56833211118c653fa89521d6b9d85c532c39a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/memory-honcho.md"
@@ -94,8 +94,8 @@ For self-hosted instances, point `baseUrl` to your local server (for example
 ## Migrating existing memory
 
 If you have existing workspace memory files (`USER.md`, `MEMORY.md`,
-`IDENTITY.md`, `memory/`, `canvas/`), `openclaw honcho setup` detects and
-offers to migrate them.
+`IDENTITY.md`, `memory/`), `openclaw honcho setup` detects and offers to
+migrate them.
 
 Info
 

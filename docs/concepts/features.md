@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Features"
 source: "https://docs.openclaw.ai/concepts/features"
-source_hash: "dc65feb9e3d3cf527d25e9a2f3f71f329b4b939b881319fd082d821a50d83fe3"
+source_hash: "1ffdefe854f7fcd3a432a3e7305fa03f01beab60895a5429ec3a6f59a4898a8a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/features.md"
@@ -88,8 +88,8 @@ Mobile nodes
 
 - WebChat and browser Control UI
 - macOS menu bar companion app
-- iOS node with pairing, Canvas, camera, screen recording, location, and voice
-- Android node with pairing, chat, voice, Canvas, camera, and device commands
+- iOS node with pairing, camera, screen recording, location, and voice
+- Android node with pairing, chat, voice, camera, and device commands
 
 **Tools and automation:**
 

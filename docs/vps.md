@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Linux server"
 source: "https://docs.openclaw.ai/vps"
-source_hash: "fc24b016080b0e70c0a585d39514cb567387e741a3815ecba040444db4ed1470"
+source_hash: "9ac6d3d7a82ab30c85f4d257373bd32de53da656c22ff4d9e855278beba37e70"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "vps.md"
@@ -104,8 +104,9 @@ Security model details: [Security](/gateway/security).
 ## Using nodes with a VPS
 
 You can keep the Gateway in the cloud and pair **nodes** on your local devices
-(Mac/iOS/Android/headless). Nodes provide local screen/camera/canvas and `system.run`
-capabilities while the Gateway stays in the cloud.
+(Mac/iOS/Android/headless). Nodes provide local screen/camera and `system.run`
+capabilities while the Gateway stays in the cloud. A paired Mac can also present
+hosted widgets in its native panel.
 
 Docs: [Nodes](/nodes), [Nodes CLI](/cli/nodes).
 

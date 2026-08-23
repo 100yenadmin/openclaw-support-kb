@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "LM Studio"
 source: "https://docs.openclaw.ai/providers/lmstudio"
-source_hash: "bf64d9e9374681450b3683a4793fc8e413029040e8ebc499c4649c64a6a5f742"
+source_hash: "78ea2cf2499bfde724e73fb7f2f5247bc9bef225e48551f9f4683514cac42138"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers/lmstudio.md"
@@ -202,7 +202,8 @@ loopback on that machine:
 ```
 
 `lmstudio` automatically trusts its configured endpoint for model requests, including loopback,
-LAN, and tailnet hosts (except metadata/link-local origins). Any custom/local OpenAI-compatible
+LAN, and tailnet hosts (except metadata, link-local, and local-use NAT64
+`64:ff9b:1::/48` origins). Any custom/local OpenAI-compatible
 provider entry gets the same exact-origin trust. Requests to a different private host or port still
 require `models.providers.<id>.request.allowPrivateNetwork: true`; set it to `false` to opt out of
 the default trust.

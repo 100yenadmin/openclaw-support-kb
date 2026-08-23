@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Gateway logging"
 source: "https://docs.openclaw.ai/gateway/logging"
-source_hash: "d504a4b4372f3384e6f95f1c4580ee57902830f19ca8326e3fc9749572849101"
+source_hash: "e509574bb8af773e9f4c45e5f7ab449570422aa234eaed76eb992611dea1ee6d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/logging.md"
@@ -64,6 +64,15 @@ Tune console verbosity independently:
 ## Redaction
 
 OpenClaw masks sensitive tokens before log or transcript output leaves the process. This redaction policy applies at console, file-log, OTLP log-record, and session transcript text sinks, so matching secret values are masked before JSONL lines or messages are written to disk.
+
+Model-visible tool-result text preserves ambiguous source assignments such as
+`token = timeObserverToken`. Registered secrets and explicit credential forms,
+including structured fields, authorization headers, URL credentials, and known
+token formats, remain masked. Direct reads of `.env`
+files apply broader assignment masking before their content becomes a tool
+result. Other config and source reads preserve opaque values; register actual
+secrets instead of relying on key-name matching. Other transcript fields and
+diagnostic sinks retain broad assignment matching.
 
 - Sensitive-value redaction is always enabled.
 - `logging.redactPatterns`: array of regex strings (overrides defaults)

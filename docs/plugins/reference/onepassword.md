@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onepassword plugin"
 source: "https://docs.openclaw.ai/plugins/reference/onepassword"
-source_hash: "e3d67e7ac01fe5d692332528cdf44474dbb00ba151f357d7b1bf68820f5c9054"
+source_hash: "cf87cf67d292cf37a6f55e00488c138eff8ff399446834fabd8a842a677e2d73"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/onepassword.md"
@@ -24,7 +24,7 @@ Source: https://docs.openclaw.ai/plugins/reference/onepassword
 
 ## Surface
 
-contracts: `tools`
+CLI commands: `openclaw onepassword`; contracts: `tools`
 
 ## Related docs
 

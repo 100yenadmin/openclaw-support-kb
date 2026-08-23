@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "CLI reference"
 source: "https://docs.openclaw.ai/cli"
-source_hash: "b6995d970b08867b1322b28a3049eae6cb33b5eb3ff244f1941e6bd010e0485e"
+source_hash: "970eb57df3f3449b651ccfc2aa240d332fdbf193e96746e170cc8d48fea29cb2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli.md"
@@ -357,8 +357,7 @@ openclaw [--dev] [--profile <name>] <command>
     invoke
     notify
     push
-    canvas snapshot|present|hide|navigate|eval
-    canvas a2ui push|reset
+    canvas present|hide|navigate
     camera list|snap|clip
     screen record
     location get

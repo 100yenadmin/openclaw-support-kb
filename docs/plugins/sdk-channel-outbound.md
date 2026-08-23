@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Channel outbound API"
 source: "https://docs.openclaw.ai/plugins/sdk-channel-outbound"
-source_hash: "8bbfe4e189233d811d628f77db9550bcfd718598fb6de3ec4602ab237395d521"
+source_hash: "64657fb7132899680c61dc5f8be11fee52c80c0818b40be988dedcc33d1370eb"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-channel-outbound.md"
@@ -153,9 +153,14 @@ the channel boundary instead of rewriting marker text after sanitization.
 A `MessageReceipt` records the result returned by a channel adapter. Concrete
 platform message identifiers show that the platform send path accepted the
 message; they do not prove that a recipient's device displayed or read it.
-Receipts without platform message identifiers are local receipt metadata only.
-Channels with read receipts or device-delivery state should track those facts
-through a separate channel-specific path.
+Destination and routing identifiers such as chat, channel, room, conversation,
+or recipient JID are metadata, never `platformMessageIds`. Receipts without
+platform message identifiers are local receipt metadata only. A
+provider-observed receipt thread overrides the requested route thread. If a
+batch contains conflicting provider threads, each part retains its thread and
+the aggregate receipt omits `threadId`. Channels with read receipts or
+device-delivery state should track those facts through a separate
+channel-specific path.
 
 If a channel adapter can prove that retrying a failure cannot duplicate a
 recipient-visible send and no finalization-capable call began, throw

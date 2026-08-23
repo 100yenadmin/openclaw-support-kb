@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background exec and process tool"
 source: "https://docs.openclaw.ai/gateway/background-process"
-source_hash: "2fea08fd4bce57370610d3c6a48fcb0d32c4e266c2af3d112d31651faa804bf8"
+source_hash: "24b14bed5e65c54e6263936f4b38b540204d7a8933370271c936668b0cf8a8a9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/background-process.md"
@@ -67,7 +67,7 @@ Behavior:
 
 ## Child process bridging
 
-When spawning long-running child processes outside the exec/process tools (CLI respawns, gateway helpers), attach the child-process bridge helper so termination signals forward and listeners detach on exit/error. This avoids orphaned processes on systemd and keeps shutdown consistent across platforms.
+When spawning long-running child processes outside the exec/process tools (CLI respawns, gateway helpers), attach the child-process bridge helper so termination signals forward and listeners detach on exit/close. This avoids orphaned processes on systemd and keeps shutdown consistent across platforms.
 
 ## process tool
 

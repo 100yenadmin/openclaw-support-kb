@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Overview"
 source: "https://docs.openclaw.ai/tools"
-source_hash: "ec15226793f600cbfabd3a3ff03f8dab2fbe0a048ce881854098cc3371877ed9"
+source_hash: "499c013ded8c00026170be1543cfd8091d9bb80b85924ad2d26a365780d849cc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools.md"
@@ -132,8 +132,8 @@ Common plugin-provided tools include:
   output
 - [Tool Search](/tools/tool-search) for discovering and calling large tool
   catalogs without putting every schema in the prompt
-- [Canvas](/plugins/reference/canvas) for node Canvas control and A2UI
-  rendering
+- [Canvas](/plugins/reference/canvas) for the macOS widget-panel presenter and
+  A2UI dashboard content
 
 ## Configure access and approvals
 

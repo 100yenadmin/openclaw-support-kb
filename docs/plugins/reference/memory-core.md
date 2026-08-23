@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory Core plugin"
 source: "https://docs.openclaw.ai/plugins/reference/memory-core"
-source_hash: "8f358c6ed35fb5dca15cbaf0539e173808ae120875d546213424994e36e629ea"
+source_hash: "a111d07a3ec01fe2399016d1a3ffc069c636f7585088b8f827a1ff1c0eba241f"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/memory-core.md"
@@ -24,6 +24,6 @@ Adds agent-callable tools.
 
 ## Surface
 
-commands: `/dreaming`; contracts: `tools`
+CLI commands: `openclaw memory`; slash commands: `/dreaming`; contracts: `tools`
 
 ---

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Network"
 source: "https://docs.openclaw.ai/network"
-source_hash: "237168b17ca565e97f5dde8c985206d46374a741f3c78d120cef0ec54a90c8c9"
+source_hash: "834dd94b7a7604e4c94c4b8558a27cb653413ee0f6fa6a891907c318640ec28a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "network.md"
@@ -25,7 +25,7 @@ Most operations flow through the Gateway (`openclaw gateway`), a single long-run
   shared-secret token/password auth, or a correctly configured non-loopback
   `trusted-proxy` deployment.
 - **One Gateway per host** is recommended. For isolation, run multiple gateways with isolated profiles and ports ([Multiple Gateways](/gateway/multiple-gateways)).
-- **Canvas host** is served on the same port as the Gateway (`/__openclaw__/canvas/`, `/__openclaw__/a2ui/`), protected by Gateway auth when bound beyond loopback.
+- **Hosted widget documents and A2UI renderer assets** are served on the same port as the Gateway (`/__openclaw__/canvas/`, `/__openclaw__/a2ui/`), protected by Gateway auth when bound beyond loopback.
 - **Remote access** is typically an SSH tunnel or Tailscale VPN ([Remote Access](/gateway/remote)).
 
 Key references:

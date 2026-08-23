@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Provider directory"
 source: "https://docs.openclaw.ai/providers"
-source_hash: "6a632a0f69e57aee273751fcfe4f22b80821403a1d6211b18a3f7556d5f0a1c3"
+source_hash: "f5d214093cdfeb46bc4db9480a34d59294bc51aeb616c9153dbd3e842af07299"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "providers.md"
@@ -60,6 +60,7 @@ Looking for chat channel docs (WhatsApp/Telegram/Discord/Slack/Mattermost (plugi
 - [inferrs (local models)](/providers/inferrs)
 - [Kilocode](/providers/kilocode)
 - [LiteLLM (unified gateway)](/providers/litellm)
+- [llama.cpp (managed or existing server)](/plugins/llama-cpp)
 - [LM Studio (local models)](/providers/lmstudio)
 - [LongCat](/providers/longcat)
 - [MiniMax](/providers/minimax)

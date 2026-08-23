@@ -2,7 +2,7 @@
 type: openclaw_skill_index
 title: "Awesome OpenClaw Skills Snapshot"
 source: "https://github.com/VoltAgent/awesome-openclaw-skills"
-source_hash: "fd1b31f056b6744417e09f1f48726600750f8998ed2f1df86baf10b1eec0b89e"
+source_hash: "0f38a437b52b30dfaf9643e9b80b31164ffc69517f03120b6e989a29010ec836"
 system: "openclaw"
 kb_namespace: "openclaw"
 ---
@@ -256,6 +256,7 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [skywork-search](https://clawskills.sh/skills/gxcun17-skywork-search) - AI-powered web search for real-time information  retrieve up-to-date content.
 - [tavily](https://clawhub.ai/bert-builder/tavily) - AI-optimized web search using Tavily Search API.
 - [newsflash](https://clawhub.ai/zatmonkey/newsflash) - Corroborated real-time news briefings and alerts for agents.
+- [openclaw-search-skills](https://clawhub.ai/blessonism/skills/openclaw-search-skills) - Multi-source deep search with structured research reports.
 
 - [adhd-assistant](https://clawskills.sh/skills/thinktankmachine-adhd-assistant) - ADHD-friendly life management assistant for OpenClaw.
 - [adhd-ssistant](https://clawskills.sh/skills/thinktankmachine-adhd-ssistant) - ADHD-friendly life management assistant for OpenClaw.
@@ -398,6 +399,8 @@ Fetch candidate skill code at a pinned commit, scan it, and verify OpenClaw skil
 - [agent-sentinel](https://clawskills.sh/skills/jimmystacks-agent-sentinel) - The operational circuit breaker for this agent.
 
 - [agentbase](https://clawskills.sh/skills/revmischa-agentbase) - Shared knowledge base for AI agents via MCP.
+- [avoid-ai-writing](https://clawhub.ai/conorbronsdon/skills/avoid-ai-writing) - Audit and rewrite text to remove AI writing patterns.
+- [model-hierarchy-skill](https://clawhub.ai/zscole/skills/model-hierarchy-skill) - Route tasks to cheaper models based on complexity.
 
 - [add-analytics](https://clawskills.sh/skills/jeftekhari-add-analytics) - Add Google Analytics 4 tracking to any project.
 - [amplitude-automation](https://clawskills.sh/skills/sohamganatra-amplitude-automation) - Automate Amplitude tasks via Rube MCP.

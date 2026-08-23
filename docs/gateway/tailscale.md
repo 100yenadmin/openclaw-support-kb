@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tailscale"
 source: "https://docs.openclaw.ai/gateway/tailscale"
-source_hash: "5c5670b2809a38ed8f7a9877a4091ccc874543dbf6a5511c1031c5f6d54c880c"
+source_hash: "4aba5f3d504243a31a404ac1f1d171a0a482ec05c4e61373dcbbb7b4b269d0dc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/tailscale.md"
@@ -83,6 +83,11 @@ When a bindable Tailnet IPv4 is present, the Gateway also requires `http://127.0
 
 Prefer `OPENCLAW_GATEWAY_PASSWORD` over committing a password to disk.
 
+The Funnel URL also remains usable from devices inside the tailnet. Tailscale marks public
+requests as Funnel traffic but sends tailnet peers through its Serve identity path instead;
+OpenClaw recognizes both paths on its dedicated listener and still requires the configured
+Funnel password.
+
 ## CLI examples
 
 ```bash
@@ -135,7 +140,8 @@ This compatibility path does not grant managed Tailscale semantics: `gateway.aut
 ### Tailscale prerequisites and limits
 
 - Serve requires HTTPS enabled for your tailnet; the CLI prompts if it is missing.
-- Serve injects Tailscale identity headers; Funnel does not.
+- Tailnet Serve traffic injects Tailscale identity headers. Public Funnel traffic uses a Funnel
+  marker instead, while tailnet access to the same Funnel URL follows the Serve identity path.
 - OpenClaw-managed Serve/Funnel proxy to a dedicated `127.0.0.1:<ephemeral-port>` listener while ordinary local clients keep the configured Gateway port. Startup fails closed rather than sharing listener provenance, and the foreground claim releases the route when its Gateway owner disappears.
 - Funnel requires Tailscale v1.38.3+, MagicDNS, HTTPS enabled, and a funnel node attribute.
 - Funnel only supports ports `443`, `8443`, and `10000` over TLS.

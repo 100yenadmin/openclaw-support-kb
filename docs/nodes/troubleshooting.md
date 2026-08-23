@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Node troubleshooting"
 source: "https://docs.openclaw.ai/nodes/troubleshooting"
-source_hash: "5ddc8bdab322e818228d3fa758bd14a837905717f9882f1c2c7c838043997f51"
+source_hash: "5177889041f5e48e762a7538b1943d17f0367facda108bfaf5675045e8d4c79a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/troubleshooting.md"
@@ -77,13 +77,12 @@ Healthy signals:
 
 ## Foreground requirements
 
-`canvas.*`, `camera.*`, and `screen.*` are foreground-only on iOS/Android nodes.
+`camera.*` and `screen.*` are foreground-only on iOS/Android nodes.
 
 Quick check and fix:
 
 ```bash
 openclaw nodes describe --node <idOrNameOrIp>
-openclaw nodes canvas snapshot --node <idOrNameOrIp>
 openclaw logs --follow
 ```
 

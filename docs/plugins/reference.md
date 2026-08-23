@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin reference"
 source: "https://docs.openclaw.ai/plugins/reference"
-source_hash: "604f0ecfe51f215457907c3d651792e5d5f2f2d27155e7672def4fb9beac0e27"
+source_hash: "4aa1820ed269771e50695e07aa01826253b2ad5aee003106a6421e454e52768d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference.md"
@@ -23,7 +23,7 @@ Regenerate it with:
 pnpm plugins:inventory:gen
 ```
 
-Use [Plugin inventory](/plugins/plugin-inventory) to browse all 149
+Use [Plugin inventory](/plugins/plugin-inventory) to browse all 148
 generated plugin reference pages by distribution, package, and description.
 
 ---

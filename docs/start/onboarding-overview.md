@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding overview"
 source: "https://docs.openclaw.ai/start/onboarding-overview"
-source_hash: "960eb30e4f5fa287ebadf6977164d734ae7a253fdcf176b213b20c8709d6b38d"
+source_hash: "07e076860438be0852257503b1b1c3829ad187bd7addf3e4ed6ebd025da1f929"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding-overview.md"
@@ -78,7 +78,7 @@ run `openclaw onboard` to change the model provider or its authentication.
 Use `openclaw onboard --classic` for detailed model/auth, channel, skill,
 remote Gateway, or import setup. Adding `--install-daemon` also selects the
 classic flow and installs the background service in one step. Use `openclaw
-openclaw` for conversational non-inference setup and repair. `openclaw
+setup` for conversational non-inference setup and repair. `openclaw
 onboard --modern` is a compatibility alias that uses the same live-inference
 gate.
 

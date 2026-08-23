@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Nous Tool Gateway"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway"
-source_hash: "5394635c172451dcf679b0d592f77262c7dc54f8df9eef3978be697cf784789a"
+source_hash: "374bd1b7145fda4ee7a0d21726573ba9b02ed7a9bccdb49ce449236240a48e28"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/tool-gateway.md"
@@ -95,6 +95,15 @@ Tools marked "active via Nous subscription" are going through the gateway. Anyth
 The Tool Gateway is a **paid-subscription** feature. Free-tier Nous accounts can use Portal for inference but don't include managed tools — [upgrade your plan](https://portal.nousresearch.com/manage-subscription) to unlock the gateway.
 
 Some accounts are also entitled to a **free tool pool** — a small managed-tool allowance that covers gateway tool calls without a paid subscription. When a free pool is available, the gateway surfaces it and shows a setup prompt on first use, so you can opt in and start using managed tools right away.
+
+## The enablement checklist
+
+Picking a Nous model (`hermes model`) offers a per-tool checklist of gateway backends. Its behavior respects your existing setup:
+
+- Tools you've explicitly pointed at another backend (e.g. `web.backend: searxng`, `browser.cloud_provider: camofox`) are **never offered** — your selection can't be accidentally overwritten.
+- Tools configured via environment variables alone (e.g. `SEARXNG_URL`, `CAMOFOX_URL`) are offered **unchecked**, labeled to keep your own backend.
+- Only genuinely unconfigured tools come pre-checked.
+- Declines stick: if you submit the checklist with a tool unchecked, it won't be pre-checked on future Nous model swaps (stored in `tool_gateway_declined_tools` in `config.yaml`; checking it later clears the decline).
 
 ## Mix and match
 

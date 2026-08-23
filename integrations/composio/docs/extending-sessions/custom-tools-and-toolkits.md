@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Custom Tools and Toolkits"
 source: "https://docs.composio.dev/docs/extending-sessions/custom-tools-and-toolkits.md"
-source_hash: "b5b18da226fe95bc27bcb7dd0ff7541d77cb7f47e9c64f99c5f77a7b84b2f112"
+source_hash: "aa7a1361d6b24cb3ae213579550f9a24dca875b21d771177c308e74d5f066295"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "extending-sessions/custom-tools-and-toolkits.md"
@@ -243,7 +243,7 @@ def send_promo_email(input: PromoEmailInput, ctx):
         method="POST",
         body={"raw": raw},
     )
-    return {"status": res.status, "to": input.to}
+    return {"status": res["status"], "to": input.to}
 ```
 
 **Bind to a session**

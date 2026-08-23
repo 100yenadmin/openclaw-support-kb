@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Building provider plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-provider-plugins"
-source_hash: "6235bde05bc26bb0771f2e007dd8a3411dad05a42ee46100b436adbc03be45b2"
+source_hash: "3f268f1f037351cb0589dd9e01e0c1115f668739e94e8c1296fb65862934d317"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-provider-plugins.md"
@@ -499,8 +499,10 @@ Add dynamic model resolution
     });
     ```
 
-    If resolving requires a network call, use `prepareDynamicModel` for async
-    warm-up - `resolveDynamicModel` runs again after it completes.
+    If resolving requires a network call, return the requested model directly
+    from `prepareDynamicModel`. OpenClaw applies the same configured overrides
+    and normalization as synchronous dynamic resolution. Existing hooks that
+    return nothing still retry `resolveDynamicModel` after preparation.
 
 
 
@@ -713,7 +715,7 @@ Common provider hooks
       | `resolveExternalAuthProfiles` | Overlay provider-owned external auth profiles for CLI/app-managed credentials |
       | `shouldDeferSyntheticProfileAuth` | Lower synthetic stored-profile placeholders behind env/config auth |
       | `resolveDynamicModel` | Accept arbitrary upstream model IDs |
-      | `prepareDynamicModel` | Async metadata fetch before resolving |
+      | `prepareDynamicModel` | Return an asynchronously discovered model, or warm reusable metadata before sync resolution |
       | `normalizeResolvedModel` | Transport rewrites before the runner |
       | `normalizeToolSchemas` | Provider-owned tool-schema cleanup before registration |
       | `inspectToolSchemas` | Provider-owned tool-schema diagnostics |

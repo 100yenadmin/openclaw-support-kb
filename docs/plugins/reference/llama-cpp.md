@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Llama Cpp plugin"
 source: "https://docs.openclaw.ai/plugins/reference/llama-cpp"
-source_hash: "26ee3f76e4ea4b90f0780db414c65f499410e7ffe86906443da6bf76a5e521f9"
+source_hash: "c7e716c3ddce949c28dbfea38d83d1618b3e051a2f724ce63cdb3354c418f39c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/llama-cpp.md"
@@ -15,7 +15,7 @@ Source: https://docs.openclaw.ai/plugins/reference/llama-cpp
 
 # Llama Cpp plugin
 
-Managed local llama.cpp server for GGUF chat and embeddings.
+Managed and external llama.cpp servers for GGUF chat and embeddings.
 
 ## Distribution
 

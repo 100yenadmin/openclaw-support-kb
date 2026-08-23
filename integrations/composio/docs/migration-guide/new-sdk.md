@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "182545de85abb9199e0f5ad97adf6e412c0f188fc23891dfcbf7cf4294804580"
+source_hash: "1a3871086e4eb5eb3cf52e750948838e81d98a6925fcc0b5057fcf153e97c9a4"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -565,7 +565,7 @@ def get_issue_info(input: GetIssueInfoInput, ctx) -> dict:
         endpoint=f"/repos/composiohq/composio/issues/{input.issue_number}",
         method="GET",
     )
-    return {"data": result.data}
+    return {"data": result["data"]}
 
 session = composio.create(
     user_id="default",

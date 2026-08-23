@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "OAuth"
 source: "https://docs.openclaw.ai/concepts/oauth"
-source_hash: "2026295d552d2bdee3ae6cc17bab9525121052cc698c30b5876d27e6514c9163"
+source_hash: "e5ef801349685cb9b5d9cc2ce5daefb814aeffc39708188c0d9e396e472be885"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/oauth.md"
@@ -77,9 +77,20 @@ Older installations may still contain `auth-profiles.json`, `auth-state.json`,
 per-agent `auth.json`, or shared `credentials/oauth.json`. Run
 `openclaw doctor --fix` once after upgrading. Doctor imports verified values,
 records a migration receipt, and renames the original file to a timestamped
-archive. Runtime never reads these retired files and reports
-`AUTH_PROFILE_MIGRATION_REQUIRED` when a legacy credential source has not been
-migrated.
+archive.
+
+Runtime never reads these retired files. What happens when one is still present
+depends on whether the SQLite store can already serve credentials for that
+agent:
+
+- The store holds profiles: the retired file is leftover bytes. Runtime logs a
+  one-time warning naming the file and keeps working; Doctor archives it on the
+  next `--fix`. Doctor never overwrites a usable stored credential with imported
+  values, so the file cannot resurrect a stale token.
+- The store is empty: the credentials still live only in that file, so runtime
+  fails closed for that agent with `AUTH_PROFILE_MIGRATION_REQUIRED` rather than
+  falling through to environment auth. Gateway startup degrades this owner to
+  configured-unavailable instead of refusing to start.
 
 The database and migration sources respect `$OPENCLAW_STATE_DIR`. Full reference: [/gateway/configuration-reference#auth-storage](/gateway/configuration-reference#auth-storage)
 

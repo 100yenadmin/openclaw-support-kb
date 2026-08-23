@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Local models"
 source: "https://docs.openclaw.ai/gateway/local-models"
-source_hash: "3f5699320b1b0a9d22713716c52c4678cba740f460661e2f1991789b47cac197"
+source_hash: "cb2b150d23c94a02feb0e4cab0459f8ca90bf3eada7afe543be2907f112c8fdc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/local-models.md"
@@ -169,7 +169,7 @@ MLX (`mlx_lm.server`), vLLM, SGLang, LiteLLM, OAI-proxy, or any custom gateway w
 }
 ```
 
-Custom/local provider entries trust their exact configured `baseUrl` origin for guarded model requests, including loopback, LAN, tailnet, and private DNS hosts. Metadata/link-local origins are always blocked regardless. Requests to other private origins still need `models.providers.<id>.request.allowPrivateNetwork: true`; set the trust flag to `false` to opt out of exact-origin trust.
+Custom/local provider entries trust their exact configured `baseUrl` origin for guarded model requests, including loopback, LAN, tailnet, and private DNS hosts. Metadata, link-local, and local-use NAT64 (`64:ff9b:1::/48`) origins remain blocked without explicit opt-in. Requests to other private origins still need `models.providers.<id>.request.allowPrivateNetwork: true`; set the trust flag to `false` to opt out of exact-origin trust.
 
 `models.providers.<id>.models[].id` is provider-local - do not include the provider prefix. For an MLX server started with `mlx_lm.server --model mlx-community/Qwen3-30B-A3B-6bit`:
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Workboard plugin"
 source: "https://docs.openclaw.ai/plugins/reference/workboard"
-source_hash: "13da161fbac7dfe95251d76edad0176650d39682c4bf258d9da40ab1c5bda03e"
+source_hash: "fcbb52cbf9675366fd967420934cefbae6418c006ff972b1e89f4d4d76a7a2f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/workboard.md"
@@ -24,7 +24,7 @@ Dashboard workboard for agent-owned issues and sessions.
 
 ## Surface
 
-contracts: `tools`; dashboard data bindings: `workboard.cards.list`, `workboard.stats`, `workboard.boards.list`; dashboard action verbs: `workboard.dispatch`
+CLI commands: `openclaw workboard`; contracts: `tools`; dashboard data bindings: `workboard.cards.list`, `workboard.stats`, `workboard.boards.list`; dashboard action verbs: `workboard.dispatch`
 
 ## Related docs
 

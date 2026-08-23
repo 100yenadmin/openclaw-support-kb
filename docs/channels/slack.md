@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "fd32be12d5eac249fff3be5c9cc6c61372b38a49dcf62e9fd697daafa3e4ad15"
+source_hash: "1ba307b9266f251e0b64fc5f23bc07dabcc2d74d22e550702bcebf636a01aeea"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/slack.md"
@@ -1555,7 +1555,7 @@ The default scope (`"group-mentions"`) does not fire ack reactions in direct mes
 - `off`: disable live preview streaming.
 - `partial`: replace preview text with the latest partial output. Set this to restore the previous default behavior.
 - `block`: append chunked preview updates.
-- `progress` (default): maintain one live Block Kit session card in the thread while work runs, finalize that card in place, and send the assistant's final text as a separate message.
+- `progress` (default): show structured progress in one native task card when Slack supports it, with a Block Kit session-card fallback.
 - `streaming.preview.toolProgress`: when draft preview is active, route tool/progress updates into the same edited preview message (default: `true`). Set `false` to keep separate tool/progress messages.
 - `streaming.preview.commandText` / `streaming.progress.commandText`: `status` keeps compact tool-progress lines while hiding raw command/exec text (default); set `raw` to opt into command text.
 
@@ -1583,6 +1583,28 @@ In `progress` mode, Slack's native agent card is the default: the whole turn is 
 
 Set `channels.slack.streaming.progress.nativeTaskCards` to `false` to fall back to the Block Kit session card, which posts a separate message showing title, narration, plan checklist, recent activity, tool/file totals, and elapsed time, and finalizes to success or error.
 
+Set `channels.slack.streaming.progress.style` to `"compact"` for one plain-text progress draft instead of either card surface. With the other progress controls below, commentary appears as italic text only, and an eligible final text answer replaces that same Slack message:
+
+```json5
+{
+  channels: {
+    slack: {
+      streaming: {
+        mode: "progress",
+        progress: {
+          style: "compact",
+          label: false,
+          commentary: true,
+          toolProgress: false,
+        },
+      },
+    },
+  },
+}
+```
+
+Slack still uses normal final delivery when the reply cannot safely replace the draft, including media, errors, oversized text, split block payloads, custom outbound identity, or an edit failure.
+
 Both surfaces link the session with **Open in OpenClaw**, but only when that link can work: `gateway.publicOrigin` must be set (the externally reachable Gateway origin) and the Control UI must not be disabled via `gateway.controlUi.enabled: false`. Installations that leave `publicOrigin` unset — where there is no way to reach OpenClaw from Slack — get no link rather than a dead one. If the Control UI is served below a path prefix, also set `gateway.controlUi.basePath`.
 
 - A reply thread must be available for native text streaming and Slack assistant thread status to appear. Thread selection still follows `replyToMode`.
@@ -1608,7 +1630,7 @@ Use draft preview instead of Slack native text streaming:
 }
 ```
 
-Opt in to Slack native progress task cards:
+Select Slack native progress task cards explicitly:
 
 ```json5
 {

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Camera capture"
 source: "https://docs.openclaw.ai/nodes/camera"
-source_hash: "5c3d6fa085fed61183638d054574f0ee172f853d5df669f90a5ca79045538cae"
+source_hash: "afc8288743aaff6893f4dd838f71526c4df1e5db014b2e0ccc1bfe5b3edb8cb0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "nodes/camera.md"
@@ -54,7 +54,7 @@ All camera access is gated behind a user-controlled setting per platform.
 
 ### iOS foreground requirement
 
-Like `canvas.*`, the iOS node only allows `camera.*` commands in the **foreground**. Background invocations return `NODE_BACKGROUND_UNAVAILABLE`.
+The iOS node only allows `camera.*` commands in the **foreground**. Background invocations return `NODE_BACKGROUND_UNAVAILABLE`.
 
 ### CLI helper
 
@@ -87,7 +87,7 @@ The app prompts for runtime permissions when possible.
 
 ### Android foreground requirement
 
-Like `canvas.*`, the Android node only allows `camera.*` commands in the **foreground**. Background invocations return `NODE_BACKGROUND_UNAVAILABLE: command requires foreground`.
+The Android node only allows `camera.*` commands in the **foreground**. Background invocations return `NODE_BACKGROUND_UNAVAILABLE: command requires foreground`.
 
 ### Android commands (via Gateway `node.invoke`)
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Talk Voice plugin"
 source: "https://docs.openclaw.ai/plugins/reference/talk-voice"
-source_hash: "2488cb9283daf0ac1b3571ba086bcade9d7b4919a534dca2f30f8a20dfe2420c"
+source_hash: "fae294da71322b214407fb8893bee249c234c979b4330a0dd394fe2b08586596"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/talk-voice.md"
@@ -24,7 +24,7 @@ Manage Talk voice selection (list/set).
 
 ## Surface
 
-commands: `/voice`
+slash commands: `/voice`
 
 <!-- openclaw-plugin-reference:manual-start -->
 

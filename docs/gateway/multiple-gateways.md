@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Multiple gateways"
 source: "https://docs.openclaw.ai/gateway/multiple-gateways"
-source_hash: "1b3c086f44c1cf67c01c828d399c6e1274f3f02819c82bc7c24acc877796414b"
+source_hash: "2a7cee819b4ae77643d69d7aa7989c4f5e0be712f2aacbd3bb729b13c9f6b1c9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/multiple-gateways.md"
@@ -107,7 +107,7 @@ enforces unique state-directory ownership even when
 Base port = `gateway.port` (or `OPENCLAW_GATEWAY_PORT` / `--port`).
 
 - Browser control service port = base + 2 (loopback only).
-- Canvas host is served on the Gateway HTTP server itself (same port as `gateway.port`).
+- Hosted widget documents and A2UI renderer assets are served on the Gateway HTTP server itself (same port as `gateway.port`).
 - Browser profile CDP ports auto-allocate from `browser control port + 9` through `+ 108`.
 
 Override any of these in config or env and you must keep them unique per instance.

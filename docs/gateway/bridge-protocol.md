@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Bridge protocol"
 source: "https://docs.openclaw.ai/gateway/bridge-protocol"
-source_hash: "dee865f3f6e356a1119f6a61528050453a97450820655a6b159989464bbeff2c"
+source_hash: "35f8c8569aa6a3e0e46de4e7ad248c5745d5f656d83a76901c37d5f3c486627a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/bridge-protocol.md"
@@ -50,7 +50,7 @@ Client to gateway:
 
 Gateway to client:
 
-- `invoke` / `invoke-res`: node commands (`canvas.*`, `camera.*`, `screen.record`, `location.get`, `sms.send`).
+- `invoke` / `invoke-res`: node commands (`canvas.present`, `canvas.hide`, `canvas.navigate`, `camera.*`, `screen.record`, `location.get`, `sms.send`).
 - `event`: chat updates for subscribed sessions.
 - `ping` / `pong`: keepalive.
 

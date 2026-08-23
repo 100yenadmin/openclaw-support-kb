@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Tool plugins"
 source: "https://docs.openclaw.ai/plugins/tool-plugins"
-source_hash: "da3fb11c263c59bfe5e8e8b09d4e52ffd5b51957e462b467f44ed684f7401e1d"
+source_hash: "e83c85c3a1a2d643390591d35a2f196d5e307f7e012b28d7ce93abba4e2af2cf"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/tool-plugins.md"
@@ -158,6 +158,12 @@ tool({
 });
 ```
 
+Factories can use `toolContext.delivery?.send({ text, mediaUrl })` for outbound
+messages in the active conversation. The host chooses the destination,
+account, thread, and local-media policy; plugins cannot retarget this helper,
+and retained copies stop working after the turn closes. The helper is unavailable
+for channels whose delivery is owned by a Gateway transport.
+
 Factories still declare a fixed tool name up front. Use `definePluginEntry`
 directly when the plugin computes tool names dynamically or combines tools
 with hooks, services, providers, or commands.
@@ -238,7 +244,8 @@ or sensitive values in schema descriptions because trusted output metadata can
 become model-visible.
 Use `{ additionalProperties: false }` on object layers when you want a complete
 compact output hint; open or truncated schemas remain available through
-`tools.describe(...)` but are not advertised as complete quick-index contracts.
+the callable catalog handle's `describe()` but are not advertised as complete
+quick-index contracts.
 
 Factory tools declare `outputSchema` on the concrete `AnyAgentTool` they
 return. The static `tool({ factory })` declaration does not accept a separate

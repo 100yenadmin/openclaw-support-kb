@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Oc Path plugin"
 source: "https://docs.openclaw.ai/plugins/reference/oc-path"
-source_hash: "0115e4daf554d4a190dad62535147b5c1ccf61c027f31b2e0344634b151027c3"
+source_hash: "a6cdc6e5b9ade820c8f9ae8d9a55042c219600e3a73c704a42d580c03c18f453"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/oc-path.md"
@@ -24,7 +24,7 @@ Adds the openclaw path CLI for oc:// workspace file addressing.
 
 ## Surface
 
-plugin
+CLI commands: `openclaw path`
 
 ## Related docs
 

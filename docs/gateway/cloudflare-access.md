@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Cloudflare Tunnel and Access"
 source: "https://docs.openclaw.ai/gateway/cloudflare-access"
-source_hash: "849d6bc8578fac088240f29bc9c99b9b1c989028ac4a627491e761abc0b1c1c6"
+source_hash: "ab9fcb14f68fa4aec66ab59105a24fe13a02229bbc4cc1e2d7dc4a6ab195fd28"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/cloudflare-access.md"
@@ -98,14 +98,32 @@ the only path for external traffic.
 
 ## Step 4: Decide how nodes and workers get in
 
-Access protects every route on the hostname, including the ones nodes use. Pick one:
+Access protects every route on the hostname, including the ones nodes use. A node can
+authenticate to Access on every leg it needs — the join request, the main Gateway
+WebSocket, the worker socket, and worker transfers — so the recommended path exposes
+nothing publicly.
 
-- **Exempt the self-authenticating routes.** Allow `/j/*` and `/__openclaw__/worker`
-  without Access identity, and keep WebSocket upgrade enabled on the worker route. Both
-  enforce their own short-lived credentials, so they do not depend on Access. See
-  [Nodes](/nodes#gateway-deployments-that-cannot-host-nodes).
-- **Use an Access service token.** Add a Service Auth policy and give the node
-  `gateway.cloudflareAccess.clientId` / `clientSecret`. See [Node CLI](/cli/node).
+**Recommended: give the node an Access service token.** Add a Service Auth policy to the
+application, then on the node host:
+
+```bash
+export CF_ACCESS_CLIENT_ID="<client-id>"
+export CF_ACCESS_CLIENT_SECRET="<client-secret>"
+openclaw connect https://gateway.example/j/<code> --service
+```
+
+`openclaw connect` persists these as env SecretRefs under
+`gateway.cloudflareAccess.clientId` / `clientSecret`; see [Node CLI](/cli/node). The only
+cost is that the node needs those two values before the join command, so a join link is no
+longer paste-and-go on its own.
+
+**Alternative: exempt the self-authenticating routes.** Allow `/j/*` and
+`/__openclaw__/worker` without Access identity, keeping WebSocket upgrade enabled on the
+worker route. Both enforce their own short-lived credentials — a join code is single-use
+with a TTL, rate-limited per IP, and answers failures with an opaque 404; worker admission
+carries its own expiring credential. This keeps join links paste-and-go, at the cost of
+making those two routes publicly reachable. Prefer the service token unless you need that
+onboarding flow. See [Nodes](/nodes#gateway-deployments-that-cannot-host-nodes).
 
 If you do neither, `openclaw connect` fails against the tunnel even though the browser
 works, because the join request is redirected to the Access login page.

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Zoom meetings plugin"
 source: "https://docs.openclaw.ai/plugins/reference/zoom-meetings"
-source_hash: "17e779dced95fe2ef2ee542b01cca746aed6eb88bafe2e9662a5f8dfbb8120c3"
+source_hash: "057b5c05a5abdd5eaedf02f1e9a72ec4136b5633a0ab845e33c20a267d76edc5"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/reference/zoom-meetings.md"
@@ -24,7 +24,7 @@ Join Zoom meetings as a Chrome browser guest.
 
 ## Surface
 
-contracts: `tools`, `transcriptSourceProviders`
+CLI commands: `openclaw zoommeetings`; contracts: `tools`, `transcriptSourceProviders`
 
 ## Related docs
 
