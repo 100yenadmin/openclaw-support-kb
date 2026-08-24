@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "8649cb56cd6bf73d4617781f2b3412f245bf8c476c9fd683325667bf5ad154e4"
+source_hash: "9b41110a85c29cca80a5d4fee6bb4cf28d00fd54598bacef26e8c7b2d4066269"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -1586,20 +1586,20 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 - https://docs.composio.dev/reference/api-reference/api-keys.md
 - https://docs.composio.dev/reference/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/files.md
 - https://docs.composio.dev/reference/api-reference/logs.md
-- https://docs.composio.dev/reference/api-reference/organization.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
-- https://docs.composio.dev/reference/api-reference/connected-accounts.md
-- https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/organization.md
 - https://docs.composio.dev/reference/api-reference/tool-router.md
-- https://docs.composio.dev/reference/api-reference/organization-management.md
+- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md
 - https://docs.composio.dev/reference/api-reference/triggers.md
-- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
-- https://docs.composio.dev/reference/api-reference/webhook-events.md
+- https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/api-reference/webhook-events.md
+- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 
 ## API Reference (v3.0, legacy — supported, not for new code)
 
@@ -1608,21 +1608,30 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
-- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
-- https://docs.composio.dev/reference/v3/api-reference/mcp.md
+- https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/tools.md
-- https://docs.composio.dev/reference/v3/api-reference/tool-router.md
-- https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/v3/api-reference/mcp.md
 - https://docs.composio.dev/reference/v3/api-reference/triggers.md
+- https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/v3/api-reference/tool-router.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md
-- https://docs.composio.dev/reference/v3/api-reference/projects.md
+- https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
+- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 
 ## SDK and product reference (version-independent)
 
 - https://docs.composio.dev/reference/glossary.md
+- https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
+- https://docs.composio.dev/reference/sdk-reference/python/composio.md
+- https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
+- https://docs.composio.dev/reference/sdk-reference/python.md
+- https://docs.composio.dev/reference/sdk-reference/python/mcp.md
+- https://docs.composio.dev/reference/sdk-reference/python/session.md
+- https://docs.composio.dev/reference/sdk-reference/python/toolkits.md
+- https://docs.composio.dev/reference/sdk-reference/python/tools.md
+- https://docs.composio.dev/reference/sdk-reference/python/triggers.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/auth-configs.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/composio.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/connected-accounts.md
@@ -1636,15 +1645,6 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/sdk-reference/typescript/toolkits.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/tools.md
 - https://docs.composio.dev/reference/sdk-reference/typescript/triggers.md
-- https://docs.composio.dev/reference/sdk-reference/python/auth-configs.md
-- https://docs.composio.dev/reference/sdk-reference/python/composio.md
-- https://docs.composio.dev/reference/sdk-reference/python/connected-accounts.md
-- https://docs.composio.dev/reference/sdk-reference/python.md
-- https://docs.composio.dev/reference/sdk-reference/python/mcp.md
-- https://docs.composio.dev/reference/sdk-reference/python/session.md
-- https://docs.composio.dev/reference/sdk-reference/python/toolkits.md
-- https://docs.composio.dev/reference/sdk-reference/python/tools.md
-- https://docs.composio.dev/reference/sdk-reference/python/triggers.md
 
 ## Toolkits
 

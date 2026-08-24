@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Context Compression and Caching"
 source: "https://hermes-agent.nousresearch.com/docs/developer-guide/context-compression-and-caching"
-source_hash: "11a2961693a4e5969f94bee12c1ea912090894e6ab20dec63b763f83e918e1f7"
+source_hash: "1c86b5b78c15a9b7f9142d38d726630edeedc53646eee4d4d9e154ea9895584b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "developer-guide/context-compression-and-caching.md"
@@ -226,6 +226,11 @@ To use the large window, pick the explicit `-900k` variant in `/model` (e.g.
 the model id is sent to the backend, and pricing/usage accounting treats them
 as the base model. Slugs that genuinely enforce 272K (gpt-5.5, gpt-5.4-mini)
 have no `-900k` variant.
+
+Compaction thresholds follow the window: base slugs (272K) get the **85%
+autoraise** described above, while `-900k` variants keep your global
+`compression.threshold` (default 50%, ~450K) — the autoraise exists to stop
+wasting a small window, which a 900K window doesn't need.
 
 ### Codex app-server thread compaction
 

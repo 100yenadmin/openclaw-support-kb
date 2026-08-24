@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuring Models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "d3f523d677c832c99c5219441a7bc4dbfd899874d4095426697878ef294a2591"
+source_hash: "0c6351afb8f3ff41b5ebdf8daf0618b28dbefe991b4e17a1bbf3dd4d0323569f"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -212,15 +212,15 @@ providers:
 
 With discovery off, the model picker (`hermes model`, `/model`) shows the configured list instead of a live probe.
 
-For an Anthropic-compatible gateway that resolves a bare model alias only
-after receiving the request, opt the alias into native prompt-cache markers
-with the per-model `prompt_caching` capability:
+For a gateway that resolves a bare model alias only after receiving the
+request, opt the alias into prompt-cache markers with the per-model
+`prompt_caching` capability:
 
 ```yaml
 providers:
-  anthropic-proxy:
-    api: https://gateway.example.com/anthropic
-    transport: anthropic_messages
+  model-proxy:
+    api: https://gateway.example.com/v1
+    transport: openai_chat  # or anthropic_messages
     models:
       fable:
         context_length: 1000000
@@ -228,9 +228,12 @@ providers:
 ```
 
 Hermes matches this declaration to the exact provider route and runtime model
-id, without rewriting the alias. Set `prompt_caching: false` to explicitly
-disable cache markers for a model; when omitted, Hermes keeps its normal
-provider and model capability detection.
+id, without rewriting the alias or inferring support from its provider name,
+host, or model family. The marker layout follows the configured transport:
+`openai_chat` uses the OpenAI-compatible envelope layout and
+`anthropic_messages` uses the native inner-block layout. Set
+`prompt_caching: false` to explicitly disable cache markers for a model; when
+omitted, Hermes keeps its normal provider and model capability detection.
 
 :::note Legacy format
 Older configs used a top-level `custom_providers:` list (with `base_url` instead of `api`). It still works and is auto-migrated to the `providers:` dict on `hermes update` (config v12).
