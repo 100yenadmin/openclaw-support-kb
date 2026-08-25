@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Quickstart"
 source: "https://docs.composio.dev/docs/quickstart.md"
-source_hash: "4631e37403c4649d1bc6e76cd38473c48ba8d6edd9eab107419c4f9ca5512586"
+source_hash: "84280da817acd40290b8cae077852cdb2b0f538bfe9df44e61c7d1a86b438597"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "quickstart.md"
@@ -30,6 +30,8 @@ Pick your framework below. A Composio [session](/docs/how-composio-works) gives 
 **Python:**
 
 The Composio Python SDK requires **Python 3.10 or newer**.
+
+> **Do not install composio-core**: The current Python package is `composio`. The package `composio-core` is the legacy v1 SDK — it calls deprecated APIs and does not work with sessions. If an older tutorial or an AI coding assistant suggests it, install `composio` instead. See the [migration guide](/docs/migration-guide/new-sdk).
 
 **TypeScript:**
 
@@ -155,6 +157,8 @@ readline.close();
 #### Install
 
 **Python:**
+
+> **Do not install composio-core**: The current Python package is `composio`. The package `composio-core` is the legacy v1 SDK — it calls deprecated APIs and does not work with sessions. If an older tutorial or an AI coding assistant suggests it, install `composio` instead. See the [migration guide](/docs/migration-guide/new-sdk).
 
 **TypeScript:**
 

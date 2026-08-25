@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Webhook Endpoints"
 source: "https://docs.composio.dev/reference/api-reference/webhook-endpoints.md"
-source_hash: "f14b8d44720be6a590df773a56b626d57605a19b9e34536903b28b9810cd5bfd"
+source_hash: "76d2d300f70988047756406f92f7e6b22a14d1363657e69b3c2433429209d747"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/webhook-endpoints.md"
@@ -38,11 +38,5 @@ This is distinct from [webhook subscriptions](/reference/api-reference/webhook-s
 | `GET` | `/api/v3.1/webhook_endpoints/{nano_id}` | [Get webhook endpoint](/reference/api-reference/webhook-endpoints/getWebhookEndpointsByNanoId) |
 | `POST` | `/api/v3.1/webhook_endpoints/{nano_id}` | [Put webhook endpoint configuration](/reference/api-reference/webhook-endpoints/postWebhookEndpointsByNanoId) |
 | `PATCH` | `/api/v3.1/webhook_endpoints/{nano_id}` | [Update webhook endpoint configuration](/reference/api-reference/webhook-endpoints/patchWebhookEndpointsByNanoId) |
-
----
-
-
-# Toolkits
-
 
 ---

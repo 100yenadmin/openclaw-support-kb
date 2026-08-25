@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "Web Dashboard"
+title: "Hermes Web Dashboard"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard"
-source_hash: "c710f56f15cedfb648e101552af92ab3bc5d887c108b94b921ddfcb74061da37"
+source_hash: "56e913b6a0de0fe939cd2de554b326de74cf83a0aecdcc5c73dc46a34e52e57c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/web-dashboard.md"
@@ -10,14 +10,14 @@ original_doc_path: "user-guide/features/web-dashboard.md"
 duplicate_index: 1
 ---
 
-# Web Dashboard
+# Hermes Web Dashboard
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
 Source: https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard
 
 
-# Web Dashboard
+# Hermes Web Dashboard
 
 The web dashboard is a browser-based UI for managing your Hermes Agent installation. Instead of editing YAML files or running CLI commands, you can configure settings, manage API keys, and monitor sessions from a clean web interface.
 

@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "Quickstart"
+title: "Hermes Agent Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "aa414e2c5add69d5c8e87d14816770445d6bcb0bdd569cc037407c1bebf56dfe"
+source_hash: "c9c86dd3e8f8010c1f9e4b38b83cdd77ba48983236a884d3875beb77ada7c924"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -10,14 +10,14 @@ original_doc_path: "getting-started/quickstart.md"
 duplicate_index: 1
 ---
 
-# Quickstart
+# Hermes Agent Quickstart
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
 Source: https://hermes-agent.nousresearch.com/docs/getting-started/quickstart
 
 
-# Quickstart
+# Hermes Agent Quickstart
 
 This guide gets you from zero to a working Hermes setup that survives real use. Install, choose a provider, verify a working chat, and know exactly what to do when something breaks.
 

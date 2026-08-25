@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins"
-source_hash: "7dbd6e1f8ebeb809002a0b40b7bb8f3c8b5225d2f62a5a9698dc280a5546f3e6"
+source_hash: "cfcd33d99c22630596f9e229c14d34e274b7587a776a225cb739a0875c0bf718"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/plugins.md"
@@ -124,6 +124,7 @@ Every `ctx.*` API below is available inside a plugin's `register(ctx)` function.
 | Register an image-generation backend | `ctx.register_image_gen_provider(provider)` — see [Image Generation Provider Plugins](/developer-guide/image-gen-provider-plugin) |
 | Register a video-generation backend | `ctx.register_video_gen_provider(provider)` — see [Video Generation Provider Plugins](/developer-guide/video-gen-provider-plugin) |
 | Register a context-compression engine | `ctx.register_context_engine(engine)` — see [Context Engine Plugins](/developer-guide/context-engine-plugin) |
+| Register a terminal execution backend (cloud sandbox) | `ctx.register_terminal_environment_provider(provider)` — see [Terminal Environment Plugins](/developer-guide/terminal-environment-plugin) |
 | Route human approval prompts | `ctx.register_approval_transport(name, present_fn)` — see [Approval transports](#approval-transports) |
 | Register a memory backend | Subclass `MemoryProvider` in `plugins/memory/<name>/__init__.py` — see [Memory Provider Plugins](/developer-guide/memory-provider-plugin) (uses a separate discovery system) |
 | Run a host-owned LLM call | `ctx.llm.complete(...)` / `ctx.llm.complete_structured(...)` — borrow the user's active model + auth for a one-shot completion with optional JSON schema validation. See [Plugin LLM Access](/developer-guide/plugin-llm-access) |

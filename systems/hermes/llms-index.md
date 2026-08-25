@@ -2,7 +2,7 @@
 type: hermes_docs_index
 title: "Hermes Agent Documentation Index"
 source: "https://hermes-agent.nousresearch.com/docs/llms.txt"
-source_hash: "c54541d35fb83e5d7bea8e823500640a93d3fd46be64a56104bfd212fb4edca2"
+source_hash: "41a1c7693bd6e6621bfd4e531870593709b9370cc0eb01e1658ea4958293d544"
 system: "hermes"
 kb_namespace: "hermes-agent"
 ---
@@ -44,7 +44,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Security](https://hermes-agent.nousresearch.com/docs/user-guide/security): Security model, dangerous command approval, user authorization, container isolation, and production deployment best practices
 - [Checkpoints & Rollback](https://hermes-agent.nousresearch.com/docs/user-guide/checkpoints-and-rollback): Filesystem safety nets for destructive operations using shadow git repos and automatic snapshots
 - [Bot Mode](https://hermes-agent.nousresearch.com/docs/user-guide/bot-mode): Turn your Hermes profiles into a roster of named Bots — each with its own chat, role, model, memory, skills, and avatar. Bots run routines, share group chats, and message each other.
-- [Desktop App](https://hermes-agent.nousresearch.com/docs/user-guide/desktop): The native Hermes desktop app — a polished experience for chatting with Hermes, with streaming tool output, side-by-side previews, a file browser, voice, cron, profiles, skills, and settings. macOS, Windows, and Linux.
+- [Hermes Desktop](https://hermes-agent.nousresearch.com/docs/user-guide/desktop): The native Hermes desktop app — a polished experience for chatting with Hermes, with streaming tool output, side-by-side previews, a file browser, voice, cron, profiles, skills, and settings. macOS, Windows, and Linux.
 - [Egress proxy](https://hermes-agent.nousresearch.com/docs/user-guide/egress)
 - [Egress credential-injection proxy (iron-proxy)](https://hermes-agent.nousresearch.com/docs/user-guide/egress/iron-proxy)
 - [Import from Other Agents](https://hermes-agent.nousresearch.com/docs/user-guide/import-from-other-agents): One-command import of a Claude Code (~/.claude) or OpenAI Codex CLI (~/.codex) setup into Hermes — instructions, allowlists, MCP servers, skills, and memories.
@@ -91,7 +91,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Nous Tool Gateway](https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-gateway): One subscription, every tool. Web search, image generation, TTS, and cloud browsers — all routed through Nous Portal with no extra API keys.
 - [Tool Search](https://hermes-agent.nousresearch.com/docs/user-guide/features/tool-search)
 - [Wake Word](https://hermes-agent.nousresearch.com/docs/user-guide/features/wake-word): Hands-free 'Hey Hermes' wake word — start a voice session by speaking, the 'Hey Siri' way
-- [Web Dashboard](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard): Browser-based administration panel for managing configuration, API keys, MCP servers, messaging pairing, webhooks, the gateway, memory, credentials, sessions, logs, analytics, cron jobs, and skills
+- [Hermes Web Dashboard](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-dashboard): Browser-based administration panel for managing configuration, API keys, MCP servers, messaging pairing, webhooks, the gateway, memory, credentials, sessions, logs, analytics, cron jobs, and skills
 - [Web Search & Extract](https://hermes-agent.nousresearch.com/docs/user-guide/features/web-search): Search the web and extract page content with multiple backend providers — including free self-hosted SearXNG.
 - [X (Twitter) Search](https://hermes-agent.nousresearch.com/docs/user-guide/features/x-search): Search X (Twitter) posts and threads from within the agent using xAI's built-in x_search Responses tool — works with either a SuperGrok OAuth login or an XAI_API_KEY.
 
@@ -235,6 +235,7 @@ Repo: https://github.com/NousResearch/hermes-agent
 - [Programmatic Integration](https://hermes-agent.nousresearch.com/docs/developer-guide/programmatic-integration): Three protocols for driving hermes-agent from external programs: ACP, the TUI gateway JSON-RPC, and the OpenAI-compatible HTTP API
 - [Secret Source Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/secret-source-plugin): How to build a secret-manager backend plugin for Hermes Agent
 - [Public Subagent Lifecycle API](https://hermes-agent.nousresearch.com/docs/developer-guide/subagent-lifecycle-api)
+- [Terminal Environment Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/terminal-environment-plugin)
 - [Tools Runtime](https://hermes-agent.nousresearch.com/docs/developer-guide/tools-runtime): Runtime behavior of the tool registry, toolsets, dispatch, and terminal environments
 - [Trajectory Format](https://hermes-agent.nousresearch.com/docs/developer-guide/trajectory-format)
 - [Video Generation Provider Plugins](https://hermes-agent.nousresearch.com/docs/developer-guide/video-gen-provider-plugin): How to build a video-generation backend plugin for Hermes Agent

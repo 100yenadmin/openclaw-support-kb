@@ -2,7 +2,7 @@
 type: paperclip_docs_index
 title: "Paperclip Mission Control Documentation Index"
 source: "https://paperclip.ing/llms.txt"
-source_hash: "9275b1a6f11a765735d6ec8070beaccb5b16f46393a28d227b7ad8c5c908e784"
+source_hash: "c6156fd34c9c82064357f656b073e05c2c316a68397ba5adaa6a0be57be151f9"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 ---
@@ -70,6 +70,15 @@ With Paperclip, tasks are ticket-based, context flows from goals to tasks automa
 The full source code is available on GitHub. You can browse the implementation, read the code directly, and contribute:
 
 https://github.com/paperclipai/paperclip
+
+## Machine-Readable Endpoints
+
+- OpenAPI spec for this site: https://paperclip.ing/openapi.json
+- MCP endpoint (streamable HTTP, resources only): https://paperclip.ing/mcp
+- Sitemap: https://paperclip.ing/sitemap.xml
+- API catalog: https://paperclip.ing/.well-known/api-catalog
+- Agent skills: https://paperclip.ing/.well-known/agent-skills/index.json
+- Runtime API docs (self-hosted product): https://docs.paperclip.ing/reference/api/overview
 
 ## Links
 

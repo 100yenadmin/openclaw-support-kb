@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Signal"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/signal"
-source_hash: "9ef5e61e94665b7ab9bfe4ce7f7aac211b7de8afea742a987d97495ef9427bcf"
+source_hash: "f2abd3af9ff24204fa2e03d66878a80446c27ef026b78c57ea5a38320374c23c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/signal.md"
@@ -193,6 +193,10 @@ Signal messages render with **native formatting** instead of literal markdown ch
 **Reactions.** The agent can react to messages via the standard reaction API; reactions surface in Signal as emoji reactions on the referenced message rather than as extra text.
 
 None of this requires additional config — it ships on by default in recent signal-cli builds. If your `signal-cli` version is too old, Hermes falls back to plaintext delivery and logs a one-time warning.
+
+### Long Messages
+
+Signal caps a single message at **8,000 characters**. Hermes splits longer responses into numbered chunks (`(1/3)`, `(2/3)`, …) automatically instead of truncating them. This applies to every delivery path — live conversation replies, cron job deliveries, `hermes send`, and MCP `send_message` calls — and native formatting (bold, italic, code, spoilers) is preserved across chunk boundaries.
 
 ### Typing Indicators
 

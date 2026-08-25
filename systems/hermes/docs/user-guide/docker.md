@@ -1,8 +1,8 @@
 ---
 type: hermes_doc
-title: "Docker"
+title: "Hermes Docker Setup"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/docker"
-source_hash: "7c14759e16addfa25285a455ce0b259d5c19be8144c2b869d870e2b83cad82b1"
+source_hash: "e3a2777eb312a9aad44210d4c89a33a107ffce4bd88bfa04f771a14a8ff83d04"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/docker.md"
@@ -10,14 +10,14 @@ original_doc_path: "user-guide/docker.md"
 duplicate_index: 1
 ---
 
-# Docker
+# Hermes Docker Setup
 
 Source System: Hermes Agent
 Local KB namespace: hermes-agent
 Source: https://hermes-agent.nousresearch.com/docs/user-guide/docker
 
 
-# Hermes Agent — Docker
+# Hermes Docker Setup
 
 There are two distinct ways Docker intersects with Hermes Agent:
 
@@ -814,6 +814,16 @@ docker run -d \
 ```
 
 `docker exec hermes <cmd>` automatically drops to UID 10000 too — see [`docker exec` automatically drops to the `hermes` user](#docker-exec-automatically-drops-to-the-hermes-user) for details and the per-invocation opt-out.
+
+### "Permission denied" on every `docker exec` (install dir locked to 0700)
+
+Images built before late August 2026 had a bug where writing a credential file directly under `/opt/hermes` restricted that directory to `0700`, locking the `hermes` user (UID 10000) out of the install tree. Every new `docker exec` then fails with `Permission denied`.
+
+Pulling a newer image and recreating the container fixes it permanently (the install dir ships as `0755` and current releases no longer restrict it). If you need to recover a running container in place without recreating it:
+
+```sh
+docker exec -u root hermes chmod 0755 /opt/hermes
+```
 
 ### Browser tools not working
 

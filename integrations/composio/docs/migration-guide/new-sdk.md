@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Our next generation SDKs"
 source: "https://docs.composio.dev/docs/migration-guide/new-sdk.md"
-source_hash: "1a3871086e4eb5eb3cf52e750948838e81d98a6925fcc0b5057fcf153e97c9a4"
+source_hash: "429df43249b2d16a1640c6d94210ca3eb1e416c257ad43452ac5a5d7aa7c4b13"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "migration-guide/new-sdk.md"
@@ -19,7 +19,7 @@ Source: https://docs.composio.dev/docs/migration-guide/new-sdk.md
 
 > **Legacy · written December 2025.** This is a point-in-time migration/legacy guide and may describe outdated APIs. For current guidance, see https://docs.composio.dev.
 
-> This guide covers migrating from the legacy SDK (v1) to the current SDK (v3). The recommended way to use Composio is now through **sessions** — see [Migrating from Direct Tools to Sessions](/docs/migration-guide/direct-to-sessions) or [Configuring Sessions](/docs/configuring-sessions) if you're starting fresh.
+> This guide covers migrating from the legacy SDK (v1) — `composio-core` on PyPI and npm — to the current SDK (v3): `composio` on PyPI, `@composio/core` on npm. Provider packages such as `composio-openai` kept their names across the rewrite: current releases work with v3, v1-era releases don't. The recommended way to use Composio is now through **sessions** — see [Migrating from Direct Tools to Sessions](/docs/migration-guide/direct-to-sessions) or [Configuring Sessions](/docs/configuring-sessions) if you're starting fresh.
 
 In the last few months, we have experienced very rapid growth in usage of our platform. As such, our team has been working hard to radically improve the performance and developer experience of our platform.
 
