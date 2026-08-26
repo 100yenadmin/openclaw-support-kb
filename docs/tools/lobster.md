@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Lobster"
 source: "https://docs.openclaw.ai/tools/lobster"
-source_hash: "8c47b2a5028a429b1212015d7a16e368c296586d85de32dd33b564e4eaaefc4e"
+source_hash: "743c47b14d3e44055fb549b2c1bad165eda3aed38b825b8bbd05f11b3551fd09"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/lobster.md"
@@ -358,13 +358,6 @@ approval requests without custom jq/heredoc glue. Resume state is stored as
 small JSON files under the Lobster state directory (`~/.lobster/state` by
 default, override with `LOBSTER_STATE_DIR`); the token itself only encodes a
 pointer to that state, not the full pipeline state.
-
-## OpenProse
-
-OpenProse pairs well with Lobster: use `/prose` to orchestrate multi-agent
-prep, then run a Lobster pipeline for deterministic approvals. If a Prose
-program needs Lobster, allow the `lobster` tool for sub-agents via
-`tools.subagents.tools`. See [OpenProse](/prose).
 
 ## Safety
 

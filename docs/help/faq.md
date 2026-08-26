@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "FAQ"
 source: "https://docs.openclaw.ai/help/faq"
-source_hash: "e89c61cf15c9fe9170e0f166429fcb2d40b68fe440068346de59ba1f3ec845bc"
+source_hash: "a6bb2e1eac1dc9f0075ffd321411fea1b4be5db6fe51f74136073bd580d54c91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/faq.md"
@@ -1190,14 +1190,14 @@ Why am I getting heartbeat messages every 30 minutes?
       agents: {
         defaults: {
           heartbeat: {
-            every: "2h", // or "0m" to disable
+            every: "2h", // or "0m" to disable recurring cadence
           },
         },
       },
     }
     ```
 
-    Heartbeat instructions live in the monitor's cron scratch. Effectively empty scratch skips the heartbeat run to save API calls; without scratch, the heartbeat still runs and the model decides what to do.
+    Heartbeat instructions live in the monitor's cron scratch. Effectively empty scratch skips the heartbeat run to save API calls; without scratch, the heartbeat still runs and the model decides what to do. `0m` does not block targeted event-driven wakes, such as a background exec completion follow-up; those can still run one agent turn without enabling recurring cadence.
 
     Per-agent overrides use `agents.entries.*.heartbeat`. Docs: [Heartbeat](/gateway/heartbeat).
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent runtimes"
 source: "https://docs.openclaw.ai/concepts/agent-runtimes"
-source_hash: "078e9464f9a8629e9a46ce6933a1b7993b11f83100924a07fba3d39bbf68cf36"
+source_hash: "bf26c24df5ff58656c5b107f73011bafc71eb98d91f4324125dd4e29d2fe24a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/agent-runtimes.md"
@@ -177,9 +177,11 @@ CLI backend aliases differ from embedded harness ids. Preferred Claude CLI form:
 }
 ```
 
-Legacy refs such as `claude-cli/claude-opus-4-7` remain supported for
-compatibility, but new config should keep the provider/model canonical and
-put the execution backend in provider/model runtime policy.
+Legacy refs such as `claude-cli/claude-opus-4-7` are accepted as compatibility
+input, but new config should keep the provider/model canonical and put the
+execution backend in provider/model runtime policy. Run `openclaw doctor --fix`
+to rewrite persisted legacy model selections, model-map keys, and explicit
+`modelPolicy.allow` entries to that canonical shape.
 
 Legacy `codex-cli/*` refs are different: doctor migrates them to `openai/*` so
 they run through the Codex app-server harness instead of preserving a Codex

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session synchronization and attachment"
 source: "https://docs.openclaw.ai/concepts/session-attachment"
-source_hash: "a410fdd3946b03cd63213ad6bd9b27ecfe010adf1ab5a8eae1e5c5671717ba2e"
+source_hash: "5893f59b50eda6573867e3b03625b009702cc497464d7de96bff05e1e75ee9bc"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/session-attachment.md"
@@ -77,15 +77,12 @@ ten recent candidates, so clients can ask you for a longer prefix without
 guessing. See [Control UI URLs](/web/urls) for the complete literal encoding and
 stability contract.
 
-### Current and older Gateways
+### Gateway version requirement
 
-Current Gateways resolve short references at the session store owner. The
-Control UI and CLI then use the returned canonical key.
-
-An older Gateway may reject the additive `shortId` selector. The Control UI can
-fall back to its older bounded list search, scanning at most five pages. The CLI
-does not recreate that paging policy: it tells you to copy the full session key
-from that Gateway's Control UI or upgrade the Gateway.
+The Gateway resolves short references at the session store owner, and the
+Control UI and CLI use the returned canonical key. Short links require a current
+Gateway. If an older or custom Gateway rejects the `shortId` selector, upgrade
+it or use a full session key.
 
 ## Choose how to continue
 

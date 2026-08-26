@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Updating"
 source: "https://docs.openclaw.ai/install/updating"
-source_hash: "ae848d840ec6b9d9ea9b25e36ce6f3a4434507926550e2725dfa64b3c9ec6d3a"
+source_hash: "57d1c780aa4a025b8db0dd49efae7f7210753674558e3599da267abede62dfcd"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/updating.md"
@@ -335,9 +335,13 @@ Every failed apply ends the campaign so the UI does not remain on
 in the restart sentinel and surface after the Gateway returns; direct
 unsupervised failures remain in the running Gateway's logs.
 
-`OPENCLAW_NO_AUTO_UPDATE=1` and external-supervisor mode disable automatic
-applies entirely. Startup update hints can still run unless
-`update.checkOnStart` is also disabled.
+`update.checkOnStart: false` disables all automatic update checks, feature
+statistics, and update notices, even when `update.auto.enabled` is `true`.
+`OPENCLAW_NO_AUTO_UPDATE=1` also disables automatic checks and applies.
+External-supervisor mode disables automatic applies; startup update hints can
+still run unless `update.checkOnStart` is also disabled. See
+[Usage telemetry and update checks](/gateway/telemetry) for the information
+sent by the daily check and optional anonymous feature statistics.
 
 The gateway also logs an update hint on startup (disable with
 `update.checkOnStart: false`). Stored extended-stable selections use this

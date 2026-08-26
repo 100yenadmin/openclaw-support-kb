@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "WhatsApp"
 source: "https://docs.openclaw.ai/channels/whatsapp"
-source_hash: "f7cee4401bfdc8066c41384bdf81ccfa0ffe78f607181582473d16e321533cfc"
+source_hash: "0a8096d04a4372750f4202d0687e7c64c420f3657a18eb9064bd9effa60002f3"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/whatsapp.md"
@@ -520,7 +520,7 @@ Per-account override: `channels.whatsapp.accounts.<id>.reactionLevel`.
 }
 ```
 
-Notes: the reaction is sent immediately after inbound is accepted (pre-reply); omit `messages.ackReaction` or set it to `""` for no acknowledgment. Failures are logged but do not block reply delivery. The default scope is `"group-mentions"`; use `"all"` for direct messages and all eligible groups.
+Notes: the reaction is sent immediately after inbound is accepted (pre-reply); omit `messages.ackReaction` or set it to `""` for no acknowledgment. Failures are logged but do not block reply delivery. The default scope is `"group-mentions"`; use `"all"` for direct messages and all eligible groups. In a group whose activation is `always`, `"group-mentions"` acks every message rather than only mention-triggered turns, because activation stands in for the mention check.
 
 ## Lifecycle status reactions
 

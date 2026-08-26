@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Config"
 source: "https://docs.openclaw.ai/cli/config"
-source_hash: "9da9c963a00688b9163b36224b1cfb8ae389de56ace0c6799e58436c4fffa654"
+source_hash: "628798eea84b4446e04239da47b4a982fafb86946d46bc8d9998af2114b2a481"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/config.md"
@@ -67,7 +67,9 @@ openclaw config set 'agents.entries.work.tools.exec.node' "node-id-or-name"
 
 Reads a value from the redacted config snapshot (secrets never print). `--json` prints the same redacted value as JSON; otherwise strings/numbers/booleans print bare and objects/arrays print as formatted JSON.
 
-When the path is missing, `--json` writes `{ "error": "Config path not found: <path>" }` to stdout and exits with status 1. Without `--json`, the diagnostic remains on stderr.
+A schema-valid but unset path explains that the runtime default applies; an unknown path suggests
+`openclaw config schema`. With `--json`, both use the standard [CLI JSON failure envelope](/cli#json-failures)
+on stdout and exit with status 1. Without `--json`, diagnostics remain on stderr.
 
 ```bash
 openclaw config get browser.executablePath

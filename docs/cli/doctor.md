@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Doctor"
 source: "https://docs.openclaw.ai/cli/doctor"
-source_hash: "b83c5ff92fa4167a6fe696ca5ac287ff0f61f612e1a26eed96de2c033c57cd7c"
+source_hash: "e260acc95bcef1cb4a1690ddaff532cdbc7b594a9bfacf8c051ddd5bfdf3c1e7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/doctor.md"
@@ -107,7 +107,7 @@ openclaw channels status --probe
 | `--skip <id>`                   | With `--lint`: skip a check id. Repeatable.                                                                                                                                             |
 | `--only <id>`                   | With `--lint`: run only the given check id(s). Repeatable.                                                                                                                              |
 
-`--severity-min`, `--all`, `--only`, and `--skip` are only accepted together with `--lint`. Bare `--json` uses the default read-only lint check selection but keeps Doctor's advisory exit behavior. It cannot be combined with `--repair`, `--fix`, or `--force` unless another machine mode owns the command.
+`--severity-min`, `--all`, `--only`, and `--skip` are only accepted together with `--lint`. Bare `--json` uses the default read-only lint check selection but keeps Doctor's advisory exit behavior. Both read-only postures reject `--repair`, `--fix`, `--force`, `--yes`, and `--generate-gateway-token`. Explicit `--lint` also rejects `--session-sqlite` modes and their selectors, including `--github-issue`. Other machine modes can still use `--json` for their own output.
 
 ## Lint mode
 

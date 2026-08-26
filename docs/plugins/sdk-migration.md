@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Plugin SDK migration"
 source: "https://docs.openclaw.ai/plugins/sdk-migration"
-source_hash: "6924c7177b2b7e5e4db4d74e63b2a9736d22243fa2b846e365de32b92dfe7057"
+source_hash: "013ffa852052b1c5c2246a6288a28f7ab4748e35f38e356bd32840a5ce2da4da"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-migration.md"
@@ -1043,7 +1043,9 @@ await gateway.request("talk.session.create", {
   sessionKey: "main",
 });
 await gateway.request("talk.session.appendAudio", { sessionId, audioBase64 });
-await gateway.request("talk.session.cancelOutput", { sessionId, reason: "barge-in" });
+// Capture this before stopping playback from the active output `talk.event`.
+const turnId = activeOutputTalkEvent.talkEvent.turnId;
+await gateway.request("talk.session.cancelOutput", { sessionId, turnId, reason: "barge-in" });
 await gateway.request("talk.session.submitToolResult", {
   sessionId,
   callId,

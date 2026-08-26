@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "environment-variables"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/environment-variables.md"
-source_hash: "d9ff4af48c641bfae6ccbe2e41309ff6917dfa4c4384391604397adbdf2d41a5"
+source_hash: "6018d34da2b0a6d488c5a1e70394b148205931044b6ccb0e2724c13cf399f8ae"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/environment-variables.md"
@@ -59,6 +59,15 @@ All environment variables that Paperclip uses for server configuration.
 - Any experimental toggle: `instance.experimental.<flagKey>` (e.g.
   `instance.experimental.enableSmokeLab`) — the card disappears and
   value-changing writes are rejected.
+- Any top-level company settings page: `company.members`, `company.invites`,
+  `company.secrets`, `company.export`, `company.import` — removed from the
+  settings sidebar, tab bar, and routing (the company General page is the
+  settings root and stays visible). These are UI-visibility keys: the
+  membership, invite, secret, and export APIs stay live for agents and
+  integrations. `company.import` is the exception — hiding it also floors
+  every company-import route with `403 settings_operator_managed`. On
+  cloud-managed instances import is floored unconditionally with
+  `403 cloud_managed`, independent of this variable.
 
 Unknown keys are logged and ignored, so one list can be rolled across a fleet
 of mixed app versions. With the variable unset nothing is hidden and behavior

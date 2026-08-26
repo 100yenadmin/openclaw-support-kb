@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Directory"
 source: "https://docs.openclaw.ai/cli/directory"
-source_hash: "279e1e23de7c4bc1bc81a9ad15dc55db520ab8b4d63cc5d557cf9007813aabc2"
+source_hash: "2380615a4644b1994b05317e6e69307d6c7e1c94d44f19f3f4f452135ebb1745"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/directory.md"
@@ -26,8 +26,9 @@ Results are meant to be pasted into other commands, especially `openclaw message
 - `--json`: output JSON
 
 Default output renders IDs and names in a table. Empty list results name the channel and account
-that were queried; JSON list output uses an empty array (`[]`). Failures exit nonzero and use an
-`{ "error": "..." }` object in JSON mode.
+that were queried; JSON list output uses an empty array (`[]`). Failures exit nonzero and use the
+canonical `{ "ok": false, "error": { "type": "cli_error", "message": "..." } }` envelope in
+JSON mode.
 
 ## Notes
 

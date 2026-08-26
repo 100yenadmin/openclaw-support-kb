@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Configuration"
 source: "https://docs.openclaw.ai/gateway/configuration"
-source_hash: "f2e2bec13fd3e805c8eb5c21fe58f362cf552d3ed436fb23a68f1fd11ee6b230"
+source_hash: "2a911c707da6575502a524d36514ca9fa4511e86499d81b56a0356f02221d17d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/configuration.md"
@@ -434,7 +434,7 @@ Set up heartbeat (periodic check-ins)
     }
     ```
 
-    - `every`: duration string (`30m`, `2h`). Set `0m` to disable. Default: `30m`.
+    - `every`: duration string (`30m`, `2h`). Set `0m` to disable recurring cadence; targeted event-driven wakes can still run one agent turn. Default: `30m`.
     - `target`: `owner` (default operator DM) | `last` (latest conversation, including groups) | `none` (internal only) | `<channel-id>`
     - `directPolicy`: `allow` (default) or `block` for DM-style heartbeat targets
     - See [Heartbeat](/gateway/heartbeat) for the full guide.

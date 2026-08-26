@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Presence"
 source: "https://docs.openclaw.ai/concepts/presence"
-source_hash: "0373a50f7357d64c58e8bfcf1050be00284e85e162ba7444f1d5b8b3d94f7470"
+source_hash: "9c974d87c75d3884dab7b2591313158857babe270517159b7f0863dd77f2a773"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "concepts/presence.md"
@@ -31,9 +31,10 @@ Presence entries are structured objects with fields like:
 
 - `instanceId` (optional but strongly recommended): stable client identity (usually `connect.client.instanceId`)
 - `host`: human-friendly host name
-- `ip`: best-effort IP address
+- `ip`: best-effort IP address; the [geolocation plugin](/plugins/geolocation) resolves it to a coarse city where one is available
 - `version`: client version string
 - `deviceFamily` / `modelIdentifier`: hardware hints
+- `timeZone`: self-reported IANA zone (for example `Europe/Vienna`); browsers report it during connect, and it stays useful when the connecting IP is loopback, tunneled, or CGNAT
 - `mode`: `ui`, `webchat`, `cli`, `backend`, `node`, `probe`, `test`
 - `lastInputSeconds`: seconds since last user input, if known
 - `reason`: free-form client-supplied string; the Gateway itself only emits `self`, `connect`, and `disconnect`

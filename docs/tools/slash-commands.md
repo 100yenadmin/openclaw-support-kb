@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slash commands"
 source: "https://docs.openclaw.ai/tools/slash-commands"
-source_hash: "2ce738f6daebf967b40049d099a5e7d12ad64654fe3dcca0aa7653da5c11fd27"
+source_hash: "7a50b3eb4ec592d5b96b0df8619474511740605c0e35240a33c4a9f9eb748958"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "tools/slash-commands.md"
@@ -365,7 +365,7 @@ QQBot-only: `/bot-ping`, `/bot-version`, `/bot-help`, `/bot-upgrade`, `/bot-logs
 User-invocable skills are exposed as slash commands:
 
 - `/skill <name> [input]` always works as the generic entrypoint.
-- Skills may register as direct commands (e.g. `/prose` for OpenProse).
+- Skills may register as direct commands using their declared skill name.
 - Native skill-command registration is controlled by `commands.nativeSkills` and
   `channels.<provider>.commands.nativeSkills`.
 - Names are sanitized to `a-z0-9_` (max 32 chars); collisions get numeric suffixes.
@@ -378,8 +378,7 @@ Skill command dispatch
     By default, skill commands route to the model as a normal request.
 
     Skills can declare `command-dispatch: tool` to route directly to a tool
-    (deterministic, no model involvement). Example: `/prose` (OpenProse plugin)
-    — see [OpenProse](/prose).
+    (deterministic, no model involvement).
 
 
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Dashboard Architecture"
 source: "https://docs.openclaw.ai/web/dashboard-architecture"
-source_hash: "e4aa1f170f8cd08ad5d4a88d7ea7e07059222644f35cd2b2a30718950dfcb13b"
+source_hash: "312aba3c0e68ad88d9ccf817dc34b91c4007d0ce06f98af0853810366a007ad7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboard-architecture.md"
@@ -183,14 +183,16 @@ Shared infrastructure underneath (this is where the simplification lands):
   `pending` on the board: a placeholder card lists them human-readably with
   one-tap **Allow**/**Reject**. Grants are per widget name; for `html` widgets
   they are byte-frozen (sha256), and changed bytes keep the grant only if the
-  declaration shrank. User-clicked links are ordinary navigation rather than a
-  grant capability and open in a new tab for every rendered widget.
+  declaration shrank. Wrapper-authored board widgets forward user-clicked
+  `http`/`https` new-tab links to the Control UI host; this ordinary navigation
+  needs no grant and never grants iframe popup permissions.
 - **Authoring shim.** The document wrapper injects `window.openclaw.prompt`,
   `window.openclaw.state`, `window.openclaw.data`, `window.openclaw.action`,
   `window.openclaw.cron`, and the host-provided
   `window.openclaw.host.controlUiBaseUrl` as the stable author API. Dashboard
-  calls share one view-ticket-bound request channel; size reporting and theme
-  tokens remain separate host notifications.
+  calls and trusted new-tab link clicks share one view-ticket-bound request
+  channel. The host opens links with `noopener,noreferrer`; size reporting and
+  theme tokens remain separate host notifications.
 
 ### Plugin capability declarations
 

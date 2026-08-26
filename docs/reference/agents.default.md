@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Default AGENTS.md"
 source: "https://docs.openclaw.ai/reference/AGENTS.default"
-source_hash: "8bac1aa088910f8dcf35444ad97492d7172a6fc5fb1b67be9d90565a91d7596a"
+source_hash: "a563df1703af5c0f6b361f99d2ed69047569a53c55d657d88dfa6e56a0bd7be1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/agents.default.md"
@@ -113,7 +113,7 @@ Example roster for a personal-assistant workspace; swap in whichever skills fit 
 
 - **mcporter** - tool server runtime/CLI for managing external skill backends.
 - **Peekaboo** - fast macOS screenshots with optional AI vision analysis.
-- **camsnap** - capture frames, clips, or motion alerts from RTSP/ONVIF security cams.
+- **camsnap** - capture frames, clips, or motion alerts from RTSP/ONVIF security cams and local webcams, including USB pan/tilt/zoom control.
 - **oracle** - OpenAI-ready agent CLI with session replay and browser control.
 - **eightctl** - control your sleep, from the terminal.
 - **imsg** - send, read, stream iMessage & SMS.

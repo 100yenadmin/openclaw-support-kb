@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Memory Providers"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers"
-source_hash: "3ed3e16ddd4a9b42619f49a543ed3f604ba96e230f058912c3d48662e28641cd"
+source_hash: "57034c0be68f6ab0821f8e89c5f3cfebee269ea074162e7a1e1a0c9183dd751a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/memory-providers.md"
@@ -343,6 +343,9 @@ live in `ovcli.conf` (`OPENVIKING_CLI_CONFIG_FILE` or
 
 `OPENVIKING_ACCOUNT` and `OPENVIKING_USER` are used for local/trusted mode.
 `OPENVIKING_AGENT` is Hermes' peer ID in OpenViking for peer-scoped memories.
+Hermes sends `User-Agent: openviking-memory-hermes/<version>` on OpenViking
+requests. This standard harness identifier contains no per-user identifier and
+does not add a separate request.
 
 ---
 

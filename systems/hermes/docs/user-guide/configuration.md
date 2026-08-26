@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Agent Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "daa0f5872bf98c1d286ac6ad7be9100f76701fd01e60fedc9e7e977b39c20d27"
+source_hash: "f4d97c33e298abbb9d4639e1c3eb5fc59af41fb67286d51c959b8fbd2951e809"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -276,6 +276,7 @@ terminal:
   # Cross-process container reuse (defaults match the "one long-lived
   # container shared across sessions" contract — see Container lifecycle).
   docker_persist_across_processes: true   # Reuse container across Hermes restarts
+  docker_shared_container_key: ""         # Opt in trusted profiles to one identity
   docker_orphan_reaper: true              # Sweep abandoned Exited containers at startup
 
   # Cross-backend lifecycle settings (apply to docker as well)
@@ -297,9 +298,9 @@ Every Hermes-managed container is tagged with three labels so subsequent process
 
 - `hermes-agent=1` — marks it as Hermes-managed
 - `hermes-task-id=<sanitized task_id>` — keys the per-task reuse probe
-- `hermes-profile=<sanitized profile name>` — scopes reuse and reaping to the active Hermes profile
+- `hermes-profile=<sanitized profile name>` — scopes reuse and reaping to the active Hermes profile by default; when `docker_shared_container_key` is set, its sanitized value is used instead
 
-On startup, Hermes runs `docker ps --filter label=hermes-task-id=<id> --filter label=hermes-profile=<profile>` and **attaches to the existing container** when it finds one. If the container is `exited` (e.g. after a Docker daemon restart), it's `docker start`'d and reused — filesystem state and any installed packages survive, but in-container background processes do not.
+On startup, Hermes runs `docker ps --filter label=hermes-task-id=<id> --filter label=hermes-profile=<identity>` and **attaches to the existing container** when it finds one. The identity is the active profile unless `docker_shared_container_key` explicitly opts trusted profiles into a common value. If the container is `exited` (e.g. after a Docker daemon restart), it's `docker start`'d and reused — filesystem state and any installed packages survive, but in-container background processes do not.
 
 When a Hermes process exits — `/quit`, closing a TUI session, gateway shutdown, even SIGKILL — the cleanup path is a **no-op for the container in default mode**. The container keeps running. The next Hermes process attaches to it in milliseconds via the label probe. This is the behavior the "one long-lived container shared across sessions" contract requires: it's the only way background processes (npm watchers, dev servers, long-running pytest) survive across sessions.
 
@@ -316,6 +317,7 @@ Edge cases worth knowing:
 
 - **OOM kill of in-container PID 1** transitions the container to `Exited`. Next reuse will `docker start` it; filesystem state survives, bg processes do not.
 - **Switching profiles** isolates containers from each other — a container labeled `hermes-profile=work` is invisible to a Hermes process running under `hermes-profile=research`. The orphan reaper is profile-scoped too, so cross-profile containers don't get reaped accidentally, but they also won't get cleaned up automatically until you start Hermes again under their original profile.
+- **Explicit cross-profile sharing** — set the same non-empty `docker_shared_container_key` under `terminal:` for profiles that intentionally collaborate in one trusted workspace. This replaces only their container identity label; task, egress, and network compatibility checks still apply. Profiles without the key remain isolated. The identity label is derived from the key with a short digest suffix, so similar-looking keys (`team/workspace` vs `team_workspace`) never collide into one container. **Important: a shared container is created once, by whichever profile starts it first** — that profile's `docker_image`, volumes, shm size, and other immutable Docker settings win, and later profiles attach to it as-is; differing settings in their configs are ignored until the container is removed and recreated. Profiles sharing a key should agree on image and mounts.
 
 Parallel subagents spawned via `delegate_task(tasks=[...])` share this one container — concurrent `cd`, env mutations, and writes to the same path will collide. If a subagent needs an isolated sandbox, it must register a per-task image override via `register_task_env_overrides()`, which RL and benchmark environments (TerminalBench2, HermesSweEnv, etc.) do automatically for their per-task Docker images.
 
@@ -342,6 +344,7 @@ Every key under `terminal:` has an env-var override of the form `TERMINAL_<KEY_U
 | `TERMINAL_DOCKER_RUN_AS_HOST_USER` | `docker_run_as_host_user` | `true` / `false` |
 | `TERMINAL_DOCKER_NETWORK` | `docker_network` | `true` / `false` — default `true`; `false` = `--network=none` |
 | `TERMINAL_DOCKER_PERSIST_ACROSS_PROCESSES` | `docker_persist_across_processes` | `true` / `false` — default `true` |
+| `TERMINAL_DOCKER_SHARED_CONTAINER_KEY` | `docker_shared_container_key` | Explicit shared identity for trusted profiles; empty by default |
 | `TERMINAL_DOCKER_ORPHAN_REAPER` | `docker_orphan_reaper` | `true` / `false` — default `true` |
 | `TERMINAL_CONTAINER_CPU` | `container_cpu` | CPU cores |
 | `TERMINAL_CONTAINER_MEMORY` | `container_memory` | MB |
@@ -2521,6 +2524,8 @@ The delegation provider uses the same credential resolution as CLI/gateway start
 **Precedence:** `delegation.base_url` in config → `delegation.provider` in config → parent provider (inherited). `delegation.model` in config → parent model (inherited). Setting just `model` without `provider` changes only the model name while keeping the parent's credentials (useful for switching models within the same provider like OpenRouter).
 
 **Width and depth:** `max_concurrent_children` caps how many subagents run in parallel per batch (default `3`, floor of 1, no ceiling). Can also be set via the `DELEGATION_MAX_CONCURRENT_CHILDREN` env var. When the model submits a `tasks` array longer than the cap, `delegate_task` returns a tool error explaining the limit rather than silently truncating. `max_spawn_depth` controls the delegation tree depth (clamped to 1-3). At the default `1`, delegation is flat: children cannot spawn grandchildren, and passing `role="orchestrator"` silently degrades to `leaf`. Raise to `2` so orchestrator children can spawn leaf grandchildren; `3` for three-level trees. The agent opts into orchestration per call via `role="orchestrator"`; `orchestrator_enabled: false` forces every child back to leaf regardless. Cost scales multiplicatively — at `max_spawn_depth: 3` with `max_concurrent_children: 3`, the tree can reach 3×3×3 = 27 concurrent leaf agents. See [Subagent Delegation → Depth Limit and Nested Orchestration](features/delegation.md#depth-limit-and-nested-orchestration) for usage patterns.
+
+**Child process notifications:** background processes started by subagents route their completion/watch notifications to the parent conversation, but those are **suppressed** there by default — the child's consolidated result is the deliverable. Set `delegation.surface_child_process_notifications: true` to deliver them (with subagent attribution). Delegation results themselves are never suppressed. See [Subagent Delegation → Child background-process notifications](features/delegation.md#child-background-process-notifications).
 
 ## Clarify
 

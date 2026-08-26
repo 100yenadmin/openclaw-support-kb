@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docs hubs"
 source: "https://docs.openclaw.ai/start/hubs"
-source_hash: "32d4e53bf1baa5597ab59d8ffcb3f6b7b465ae6964466a007e08d716d4682b53"
+source_hash: "4eabd88057fa0fadabfe3c5065f0b0063a15fd2290f89e5793be983b1c9fe0b8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/hubs.md"
@@ -111,7 +111,6 @@ Use these hubs to discover every page, including deep dives and reference docs t
 ## Tools + automation
 
 - [Tools surface](/tools)
-- [OpenProse](/prose)
 - [CLI reference](/cli)
 - [Exec tool](/tools/exec)
 - [PDF tool](/tools/pdf)

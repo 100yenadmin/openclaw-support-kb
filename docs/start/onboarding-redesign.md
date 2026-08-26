@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboarding redesign"
 source: "https://docs.openclaw.ai/start/onboarding-redesign"
-source_hash: "255e583735a1462a906d3621d85978a4f2f74dc28e15ffff3ab520b53fb14672"
+source_hash: "ea1f476cc234f261a6dc934318fd1a2a0148f2f5c607a355c10f03f2d3f674c8"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/onboarding-redesign.md"
@@ -132,7 +132,7 @@ Remote-gateway onboarding keeps its legacy conversational handoff
   source). Once-semantics (offer only until accepted, stored scan) also lands
   with the phase 5 store; today a rerun re-offers.
 - Also fixed: custom `completeSetupInference` prompts no longer inherit the
-  32-token verification-probe output cap (`SETUP_INFERENCE_TEST_MAX_TOKENS`
+  bounded verification-probe output cap (`SETUP_INFERENCE_TEST_MAX_TOKENS`
   applies to the "reply OK" probe only).
 
 ### Phase 2 — CLI custodian spine (PR #109841)

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Discord"
 source: "https://docs.openclaw.ai/channels/discord"
-source_hash: "040cdd570978d15c8a19550f4943d9931a1a98b6ad95aa44f790c78a96347300"
+source_hash: "308b606c24f5723d0f31af46fcbd717b8be5acad6558fb81dbb1ca9f91c62824"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/discord.md"
@@ -1252,9 +1252,29 @@ Discord message actions cover messaging, channel admin, moderation, presence, an
 Core examples:
 
 - messaging: `sendMessage`, `readMessages`, `editMessage`, `deleteMessage`, `threadReply`
-- reactions: `react`, `reactions`, `emojiList`
+- reactions: `react`, `reactions`, `emoji-list`
 - moderation: `timeout`, `kick`, `ban`
 - presence: `setPresence`
+
+Use `emoji-list` to discover the current server's custom emoji:
+
+```json
+{ "action": "emoji-list", "channel": "discord", "limit": 25 }
+```
+
+`guildId` defaults to the current conversation's server; provide it explicitly to query another server. Results are sorted by name, and `limit` defaults to and cannot exceed 100:
+
+```json
+{
+  "ok": true,
+  "emojis": [
+    { "name": "dance", "identifier": "dance:456", "animated": true },
+    { "name": "party", "identifier": "party:123" }
+  ]
+}
+```
+
+Pass `identifier` directly to `react`. Discord accepts Unicode emoji, custom `name:id` identifiers, and the `<:name:id>` or `<a:name:id>` forms. `emoji-list`, `react`, and `reactions` are all controlled by `channels.discord.actions.reactions`.
 
 The `event-create` action accepts an optional `image` parameter (URL or local file path) to set the scheduled event cover image.
 

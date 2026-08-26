@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Telegram"
 source: "https://docs.openclaw.ai/channels/telegram"
-source_hash: "581e0c28b414334506c109c2cabf06ac72b8edb015cebd11a3b845d499d9eca2"
+source_hash: "f4369160dda89561577a7577a47804df76f3ec92b717487867257b44de474983"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/telegram.md"
@@ -638,14 +638,29 @@ Telegram message actions for agents and automation
 
     - `sendMessage` (`to`, `content`, optional `mediaUrl`, `replyToMessageId`, `messageThreadId`)
     - `react` (`chatId`, `messageId`, `emoji`)
+    - `emoji-list` (optional `chatId`, `limit`)
     - `deleteMessage` (`chatId`, `messageId`)
     - `editMessage` (`chatId`, `messageId`, `content` or `caption`, optional `presentation` inline buttons; button-only edits update reply markup)
     - `createForumTopic` (`chatId`, `name`, optional `iconColor`, `iconCustomEmojiId`)
 
     Ergonomic aliases: `send`, `react`, `delete`, `edit`, `sticker`, `sticker-search`, `topic-create`.
 
-    Gating: `channels.telegram.actions.sendMessage`, `deleteMessage`, `reactions`, `sticker` (default: disabled). `edit`, `createForumTopic`, and `editForumTopic` are enabled by default with no dedicated toggle.
+    Gating: `channels.telegram.actions.sendMessage`, `deleteMessage`, `reactions`, `sticker` (default: disabled). `reactions` controls both `react` and `emoji-list`. `edit`, `createForumTopic`, and `editForumTopic` are enabled by default with no dedicated toggle.
     Runtime sends use the active config/secrets snapshot from startup/reload, so action paths do not re-resolve `SecretRef` values per send.
+
+    Use `emoji-list` to inspect reactions in the current trusted chat and account. Agents cannot inspect another chat; direct operators may provide a different `chatId`. `limit` defaults to and cannot exceed 100:
+
+```json
+{
+  "ok": true,
+  "emojis": [
+    { "name": "👍", "identifier": "👍" },
+    { "identifier": "5368324170671202286", "type": "custom_emoji" }
+  ]
+}
+```
+
+    Pass a Unicode identifier or numeric custom emoji identifier directly to `react`. Chats without reaction restrictions return the known standard Telegram reactions and a `note` explaining that all standard reactions are allowed. When Telegram rejects a reaction and the chat's allowed Unicode reactions are known, the error includes a short sample of valid alternatives.
 
     Reaction removal semantics: [/tools/reactions](/tools/reactions).
 

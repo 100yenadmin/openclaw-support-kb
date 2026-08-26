@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Background tasks"
 source: "https://docs.openclaw.ai/automation/tasks"
-source_hash: "eb2c020e24e6fbf21d25f884dc31befc59e36ec259fd8162fade64e8f21b4ce4"
+source_hash: "3cb4e30f52cf46a880fa1fbb792d6db0353df9b97379c24cfeba859092ecd6c9"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "automation/tasks.md"
@@ -463,8 +463,15 @@ Tasks and sessions
 
 Tasks and agent runs
 
-    A task's `runId` links to the agent run doing the work. Agent lifecycle events (start, end, error) automatically update the task status - you do not need to manage the lifecycle manually.
+A task's `runId` links to the agent run doing the work. Agent lifecycle events (start, end, error) automatically update the task status - you do not need to manage the lifecycle manually.
 
+When execution identity collection is enabled, OpenClaw also binds the exact
+admitted `contextId` and `executionId` to Gateway CLI, ACP, and automation task
+rows and their mirrored flow rows. This is inspection provenance only: `runId`
+remains correlation, task/flow status remains authoritative, and a missing or
+mismatched binding never changes execution or settlement. `openclaw audit
+--execution <id> --explain` adapts the existing rows without copying task or
+flow content into the generic decision-fact table.
 
 ## Related
 

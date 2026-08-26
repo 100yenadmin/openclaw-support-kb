@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Scheduled Tasks (Cron)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron"
-source_hash: "acff9d033a0aa11685647a5b5026026ba807770c723a46af61e76b0cb6bf03ae"
+source_hash: "2a71596dd7d27edde0fa695be084fb8f89a97cbd43a97c14724130d7d423670a"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/cron.md"
@@ -361,6 +361,34 @@ streak alongside a failing job's last run. One-shot jobs never nudge.
 cron:
   failure_nudge_threshold: 3   # default; 0 disables the nudge
 ```
+
+### Failure incidents: acknowledge a known failure
+
+A recurring job that keeps failing with the *same* error pings you on every
+run. Each failure is also recorded as a durable **incident**, keyed by the
+job plus a normalized signature of the error text, in the same per-profile
+ledger database as the execution history.
+
+```bash
+hermes cron incidents                 # list incidents (newest activity first)
+hermes cron incidents --state alerted # filter: detected | alerted | closed
+hermes cron incidents ack <id>        # acknowledge — stop re-pinging
+```
+
+Acknowledging an incident silences the per-run failure ping for that exact
+signature only. Nothing else changes: the run history still records every
+failure, the failure streak keeps counting, and the moment the job starts
+failing with a *different* error a new incident is minted and alerts fire
+again. A successful run doesn't touch incidents — they are per-signature, not
+per-job.
+
+Incident lifecycle: `detected` (failure recorded) → `alerted` (at least one
+failure ping reached delivery) → `closed` (acknowledged; terminal for that
+signature). Stored error text is secret-redacted and truncated before it is
+written.
+
+Recording is always on and costs nothing to ignore — no ping is ever
+suppressed until you explicitly `ack`.
 
 ## Delivery options
 

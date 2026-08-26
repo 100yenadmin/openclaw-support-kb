@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Daemon"
 source: "https://docs.openclaw.ai/cli/daemon"
-source_hash: "a31f5d55d65253648ea449e668b41edb1dff0e99cded39f593f68754600d9907"
+source_hash: "16c1314c926d4ee2b786b6789f72a21895cd9e59666b66382769184105268344"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/daemon.md"
@@ -44,7 +44,7 @@ openclaw daemon uninstall
 - `status`: shows service install state (launchd/systemd/schtasks) and probes Gateway health.
 - `install`: installs the service; `--force` reinstalls/overwrites an existing install.
 - `restart --safe`: asks the running Gateway to preflight active work and schedule one coalesced restart after work drains, bounded to 5 minutes. When that budget expires, the restart is forced anyway. Plain `restart` uses the service manager directly; `--force` is the immediate override.
-- `restart --safe --skip-deferral`: bypasses the active-work deferral gate so the Gateway restarts immediately even when blockers are reported. Requires `--safe`.
+- `restart --safe --skip-deferral`: bypasses only the active-work deferral gate. Shutdown may still wait for pending replies to drain before the Gateway process exits. Requires `--safe`.
 
 ## Notes
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Docker VM runtime"
 source: "https://docs.openclaw.ai/install/docker-vm-runtime"
-source_hash: "116ce30fd510add80ba7cf60f28bb06481ce4ae1ead232d1483f9814385f1082"
+source_hash: "5da619771ea19d1addef6a3c2aeb774a4afa033c38d7df0ac1a5ea5e2da7bb4a"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/docker-vm-runtime.md"
@@ -23,7 +23,8 @@ page owns the Docker setup shared by those hosts.
 You need:
 
 - A Debian or Ubuntu VM with Docker Engine and Docker Compose v2
-- At least 2 GB RAM for a source image build; 4 GB is more reliable
+- At least 6 GB RAM for a source image build; smaller hosts should use the
+  official pre-built image below
 - The OpenClaw source checkout on the VM
 - Provider and model credentials for onboarding
 - An SSH-only or otherwise restricted provider firewall; do not expose the

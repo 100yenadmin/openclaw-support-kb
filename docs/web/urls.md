@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Control UI URLs"
 source: "https://docs.openclaw.ai/web/urls"
-source_hash: "fd8d62499013162953495be3c70c4a0c12715759241c0ef5c5437caf80cfa14e"
+source_hash: "ac5904bd9287e72aad60acd3095609244a6759fe4a1b2cfd54f346d8135f3fb1"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/urls.md"
@@ -111,10 +111,6 @@ the UI does not guess. It shows a small disambiguation view with the matching
 display names, agents, and longer id prefixes. Use a longer prefix to make the
 URL unique. Current Gateways return at most ten recent candidates; when that
 bound is reached, the view treats the result as incomplete instead of guessing.
-Against an older Gateway that predates short-id resolve support, the UI falls
-back to the prior bounded list search, scanning at most five pages of results.
-It likewise reports an incomplete search instead of guessing when that fallback
-cannot prove uniqueness.
 
 To continue one of these links in the terminal or attach a coding harness, see
 [Session synchronization and attachment](/concepts/session-attachment).

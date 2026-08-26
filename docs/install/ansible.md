@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Ansible"
 source: "https://docs.openclaw.ai/install/ansible"
-source_hash: "1982047030ddc8be18250d3770f76e36353e6dcd6aeaff11a0a6d560c4f507bb"
+source_hash: "57b29e74da9dfbf87d76cef08ae01648bc113f8c2c5220c63224761d0f514dae"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/ansible.md"
@@ -104,13 +104,15 @@ sudo systemctl status openclaw
 # View live logs
 sudo journalctl -u openclaw -f
 
-# Restart gateway
-sudo systemctl restart openclaw
+# Restart gateway (run as openclaw user)
+openclaw gateway restart
 
 # Channel login (run as openclaw user)
 sudo -i -u openclaw
 openclaw channels login --channel <name>
 ```
+
+`openclaw gateway restart` records managed restart intent. For a system-scope service, follow the exact `sudo systemctl restart <unit>` command it prints.
 
 ## Security architecture
 

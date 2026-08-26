@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Getting started"
 source: "https://docs.openclaw.ai/start/getting-started"
-source_hash: "db416a696f662af813a0357ff597a388c7eb6ea8f35dcc9b374b679407443f4d"
+source_hash: "79e5e8552ef2d4c63354874e19b080225dc988aecc71a5168854ce2594bcad53"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "start/getting-started.md"
@@ -142,6 +142,20 @@ openclaw gateway restart
 openclaw dashboard
 ```
 
+## If setup does not work
+
+One command turns the current state of your install into a diagnosis you can act on:
+
+```bash
+openclaw triage
+```
+
+It runs read-only health checks, writes a sanitized prompt describing what it found, and then offers to hand that prompt to a coding agent it detects on your machine — Claude Code, Codex CLI, or the built-in OpenClaw agent — so the agent starts with the diagnosis already loaded. Pick "just print the commands" if you would rather run the handoff yourself.
+
+Nothing leaves your machine until you choose an agent, and secrets, tokens, raw chat payloads, and raw logs are excluded from the prompt.
+
+To read the findings yourself instead, run [`openclaw doctor`](/cli/doctor). For symptom-first routes, see [Troubleshooting](/help/troubleshooting).
+
 ## What to do next
 
 Columns
@@ -182,5 +196,7 @@ Full reference: [Environment variables](/help/environment).
 - [Install overview](/install)
 - [Channels overview](/channels)
 - [Setup](/start/setup)
+- [Triage](/cli/triage)
+- [Troubleshooting](/help/troubleshooting)
 
 ---

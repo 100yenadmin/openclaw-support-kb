@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Matrix"
 source: "https://docs.openclaw.ai/channels/matrix"
-source_hash: "989022f6d6ea974b908239fd0db8076bf8f9bd7c3e014c815fe2850f7dba9e78"
+source_hash: "f6a137587b464e109ca19bd34664073e4509da7fce361b77703aaf9cf731b864"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/matrix.md"
@@ -620,8 +620,11 @@ Outbound reaction tooling is gated by `channels.matrix.actions.reactions`:
 
 - `react` adds a reaction to a Matrix event.
 - `reactions` lists the current reaction summary for a Matrix event.
+- `emoji-list` discovers custom emoji from the current conversation's room packs and your personal pack.
 - `emoji=""` removes the bot's own reactions on that event.
 - `remove: true` removes only the specified emoji reaction from the bot.
+
+`emoji-list` reads MSC2545 `im.ponies.room_emotes` packs from the authorized current room and `im.ponies.user_emotes` account data. It returns up to 100 sorted entries such as `{ "name": "party", "identifier": "party", "url": "mxc://example.org/party" }`; sticker-only entries are excluded. Pass `identifier` to `react`: it is the plain shortcode stored directly as the Matrix reaction's `m.relates_to.key`, not the `mxc://` media URL. Custom-reaction rendering depends on the Matrix client, so `url` is included separately for clients or agents that need the image.
 
 **Resolution order** (first defined value wins):
 

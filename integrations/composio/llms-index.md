@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "e14ec824c859b3e53aaca441cd5f6d75813c3eb5ce2b55ca9a9f76d99e8a93f1"
+source_hash: "7f09278b614a7311a381b9a4d11c85fa41619ff4ae96c71d0fb44f79be26fbd5"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -15,7 +15,7 @@ Source: https://docs.composio.dev/llms.txt
 
 # Composio Documentation
 
-> Composio powers 1000+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.
+> Composio powers 1,300+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.
 
 > **For AI agents:** Route by intent. To build an application, start with [Quickstart](https://docs.composio.dev/docs/quickstart.md) or [Providers](https://docs.composio.dev/docs/providers.md) and use `composio.create(user_id)` + `session.tools()`. To use Composio from Codex or Claude Code without explicit MCP intent, install the [native agent plugin](https://docs.composio.dev/docs/agent-plugins.md). To connect an existing client over MCP, use [Composio Connect](https://docs.composio.dev/docs/composio-connect.md). When an application creates a session and needs MCP transport, use [Sessions via MCP](https://docs.composio.dev/docs/sessions-via-mcp.md). See any page's .md endpoint for full usage instructions.
 
@@ -1585,20 +1585,20 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/authenticating-to-composio.md
 - https://docs.composio.dev/reference/authenticating-to-composio/project-api-key-permissions.md
 - https://docs.composio.dev/reference/api-reference/api-keys.md
-- https://docs.composio.dev/reference/api-reference/auth-configs.md
-- https://docs.composio.dev/reference/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/api-reference/files.md
-- https://docs.composio.dev/reference/api-reference/logs.md
 - https://docs.composio.dev/reference/api-reference/mcp.md
-- https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/organization.md
-- https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/connected-accounts.md
+- https://docs.composio.dev/reference/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/api-reference/logs.md
+- https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/tool-router.md
+- https://docs.composio.dev/reference/api-reference/projects.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md
-- https://docs.composio.dev/reference/api-reference/triggers.md
-- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-events.md
+- https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
+- https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
 
 ## API Reference (v3.0, legacy — supported, not for new code)
@@ -1610,15 +1610,15 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/files.md
-- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/projects.md
+- https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
+- https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/toolkits.md
 - https://docs.composio.dev/reference/v3/api-reference/tools.md
-- https://docs.composio.dev/reference/v3/api-reference/triggers.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/v3/api-reference/webhook-subscriptions.md
+- https://docs.composio.dev/reference/v3/api-reference/triggers.md
 
 ## SDK and product reference (version-independent)
 

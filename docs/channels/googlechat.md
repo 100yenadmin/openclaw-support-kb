@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Google Chat"
 source: "https://docs.openclaw.ai/channels/googlechat"
-source_hash: "df41b641a9b9cb69b21ca3403c9e99e5d317a1e94570027cf364f64a8e579b11"
+source_hash: "8507520a97dd71baa4e6697b235d8e06309806a9c03403cf37000ebcc883eb48"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/googlechat.md"
@@ -214,6 +214,8 @@ Bot
  is typing..._` placeholder and edits it into the first reply; `none` disables it; `reaction` requires user OAuth and currently falls back to `message` with a logged error under service-account auth.
 - Inbound attachments (first attachment per message) are downloaded through the Chat API into the media pipeline, capped by `mediaMaxMb` (default 20).
 - Bot-authored messages are ignored by default. With `allowBots: true`, accepted bot messages use shared [bot loop protection](/channels/bot-loop-protection): configure `channels.defaults.botLoopProtection`, then override with `channels.googlechat.botLoopProtection` or `channels.googlechat.groups.<space>.botLoopProtection`.
+
+Custom emoji listing is unavailable because Google Chat's `customEmojis.list` endpoint requires user authentication with the `chat.customemojis` or `chat.customemojis.readonly` scope. This plugin authenticates exclusively as a service account with the `chat.bot` scope, which cannot access that endpoint.
 
 Secrets reference details: [Secrets Management](/gateway/secrets).
 

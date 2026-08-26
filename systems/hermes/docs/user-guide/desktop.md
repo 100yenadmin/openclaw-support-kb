@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Desktop"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop"
-source_hash: "846c3ad0c068efb6ec6f2349e22056f86ea8d5fc0dd7fa1afe14de8dee48b4e0"
+source_hash: "c72d03e137a4d7ff0a33b3f536be797ac64d1f8ba2cf83ba046204dc9b81fc74"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/desktop.md"
@@ -556,17 +556,46 @@ macOS/Windows signing and notarization run automatically when the relevant crede
 macOS remembers permission grants (Full Disk Access, Desktop/Downloads/Documents,
 Accessibility, Automation, microphone) against the app's *code-signing identity*,
 not its path. Locally built and self-updated apps are signed with a stable
-identifier-pinned ad-hoc signature, so grants persist across updates out of the
-box.
+identifier-pinned ad-hoc signature, so grants persist across updates.
+
+One-time note: grants made to builds *before* the identifier-pinned signing
+fix (PR #73681) carry the old cdhash-pinned requirement. macOS keeps showing the
+toggle as ON for those stale grants but still re-prompts, because the stored
+grant no longer matches the rebuilt binary — and the modern prompt has no Allow
+button, so it looks like there is nothing to re-check. If that happens, reset
+the stale grant once and re-grant:
+
+```bash
+tccutil reset ScreenCapture com.nousresearch.hermes   # repeat per service
+```
+
+then toggle the fresh entry ON in System Settings and fully quit & relaunch
+Hermes. Grants are stable from then on.
 
 For the strongest guarantee — a certificate-anchored identity, the same
 mechanism yabai/skhd users rely on — create a self-signed code-signing
-certificate once and tell Hermes to use it:
+certificate once and tell Hermes to use it. The one-shot command does
+everything (creates the certificate in your login keychain, grants `codesign`
+access, writes the config, and re-signs the packaged app):
+
+```bash
+hermes desktop --setup-tcc-identity
+```
+
+Or do it manually:
 
 1. Keychain Access → Certificate Assistant → **Create a Certificate…**
 2. Name: `Hermes Local Signing`, Identity Type: *Self-Signed Root*,
    Certificate Type: **Code Signing**.
-3. `hermes config set desktop.macos_signing_identity "Hermes Local Signing"`
+3. In Keychain Access, double-click the new certificate → **Trust** → set
+   **Code Signing** to *Always Trust* (an imported self-signed certificate is
+   not a valid signing identity until it is trusted for code signing —
+   `security find-identity -v -p codesigning` should list it afterwards).
+4. `hermes config set desktop.macos_signing_identity "Hermes Local Signing"`
+
+Use `--identity <name>` with the command to create/use a differently named
+certificate (default: `Hermes Local Signing`). The command is idempotent —
+re-run it after updates to re-point the config and re-sign the rebuilt app.
 
 The next update re-signs the rebuilt app with that certificate; every TCC grant
 survives. No Apple Developer account is required. Notarized release builds are

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "List issues"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/control-plane-commands.md"
-source_hash: "3e3b51430240afee41985e8918d2ca55013a1b3ad7c41da8cbc1f66a23803ad4"
+source_hash: "f792d4d8ac830b9150da84f2a43ee2b4668a0c683557decb488f2dd6ce7a9535"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/control-plane-commands.md"
@@ -74,6 +74,10 @@ npx paperclipai company import \
   --new-company-name "Acme Imported" \
   --include company,agents
 ```
+
+`company import` is unavailable against cloud-managed instances — the
+server answers `403` with `code: "cloud_managed"`. Export remains available
+there.
 
 With agent authentication, use `company list` or `company current` to resolve
 the scoped company. `company list` first tries the board-wide list; if that is

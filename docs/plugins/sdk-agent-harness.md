@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Agent harness plugins"
 source: "https://docs.openclaw.ai/plugins/sdk-agent-harness"
-source_hash: "b28b4eaf5615d0692f967242828e997eb10542e4edce03e64362a1031c3717fe"
+source_hash: "e875692cec8485311f35164ce1f538d2dd624ab6ab0ad40474f8c784e5bee750"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "plugins/sdk-agent-harness.md"
@@ -226,6 +226,12 @@ Native agent servers often have ambient built-in tools even when OpenClaw sends
 an empty tool list. Disable and attest those native capabilities for the fresh
 turn, use a separate transport that can serialize a true zero-tool request, or
 leave the capability unsupported.
+
+Audit evidence follows the same boundary. OpenClaw can record registered plugin
+ownership and run admission, but it cannot claim an external native side effect
+from an ACP update or transcript. A side effect wholly inside that runtime is
+`unsupported` unless an adapter invokes an OpenClaw-owned callback before the
+action. Do not reconstruct the callback from native tool status events.
 
 ### Delegated execution
 

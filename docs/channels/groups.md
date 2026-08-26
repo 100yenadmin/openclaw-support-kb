@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Groups"
 source: "https://docs.openclaw.ai/channels/groups"
-source_hash: "86e5f3cb6c49b0b223d94f10bd2880342647c205cf5430d64c883b553c2acfa6"
+source_hash: "38eb2179f253a7a0af3d21582559c0c1d0e6e7b5573e2a9eb59eb4748e5f2593"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/groups.md"
@@ -360,7 +360,7 @@ Supported implicit mention facts are channel-specific:
 | Quote of the bot      | WhatsApp, Zalo personal                          |
 | Bot joined the thread | Mattermost, Slack, Tlon                          |
 
-Each fact defaults to enabled when the channel produces it. Set the corresponding `implicitMentions` flag to `false` to stop that fact from bypassing mention gating; native explicit mentions remain unaffected. A flag has no effect on channels that do not produce that fact.
+Each fact defaults to enabled when the channel produces it. Among bundled channels, Mattermost, Slack, and Tlon read the corresponding `implicitMentions` flag; set it to `false` to stop that fact from bypassing mention gating. Native explicit mentions remain unaffected. The other bundled producers listed above do not currently read `implicitMentions`, so their facts always count as mentions and the flag cannot turn them off. A flag also has no effect on channels that do not produce that fact.
 
 ```json5
 {

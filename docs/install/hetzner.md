@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Hetzner"
 source: "https://docs.openclaw.ai/install/hetzner"
-source_hash: "9604d0407740464c7175f2c1da343c33cdb95dedbee97f7ce285c7ed41190591"
+source_hash: "4518762301c5dfd361b0d31477fd637f70b7047062228c19da0b9fd71ff45a08"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/hetzner.md"
@@ -38,8 +38,10 @@ Steps
 
 Create the server
 
-    In Hetzner Cloud, create a Debian or Ubuntu server with at least 2 GB RAM
-    for a source image build. Add your SSH key during provisioning.
+    In Hetzner Cloud, create a Debian or Ubuntu server with at least 6 GB RAM
+    for a source image build. On a smaller server, use the official pre-built
+    image described in [Docker VM runtime](/install/docker-vm-runtime). Add your
+    SSH key during provisioning.
 
     Connect as root:
 

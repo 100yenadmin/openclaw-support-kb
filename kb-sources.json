@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T09:55:58.065Z",
+  "generatedAt": "2026-08-26T10:01:17.906Z",
   "physicalGbrainSourceId": "openclaw-support-kb",
   "note": "This v1 repo installs as one GBrain source for backwards compatibility. Agents must use logical namespaces and source/path filters to avoid mixing OpenClaw, Hermes, Paperclip, and Composio facts.",
   "logicalSources": [
@@ -23,7 +23,7 @@
         "OpenClaw",
         "Source: https://docs.openclaw.ai"
       ],
-      "count": 779
+      "count": 782
     },
     {
       "id": "hermes-agent",

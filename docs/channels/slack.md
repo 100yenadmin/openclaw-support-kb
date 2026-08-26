@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Slack"
 source: "https://docs.openclaw.ai/channels/slack"
-source_hash: "1ba307b9266f251e0b64fc5f23bc07dabcc2d74d22e550702bcebf636a01aeea"
+source_hash: "53195b14c86e94c7b9dc5bc67987ad62dfe1cb1b48de1d74facc5b2d9268e968"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "channels/slack.md"
@@ -1321,6 +1321,26 @@ Available action groups in current Slack tooling:
 
 Current Slack message actions include `send`, `upload-file`, `download-file`, `read`, `edit`, `delete`, `pin`, `unpin`, `list-pins`, `member-info`, and `emoji-list`. `download-file` accepts Slack file IDs shown in inbound file placeholders and returns image previews for images or local file metadata for other file types.
 
+Use `emoji-list` to discover workspace custom emoji and aliases:
+
+```json
+{ "action": "emoji-list", "channel": "slack", "limit": 25 }
+```
+
+Results are sorted by shortcode name. `limit` defaults to and cannot exceed 100:
+
+```json
+{
+  "ok": true,
+  "emojis": [
+    { "name": "celebrate", "identifier": "celebrate", "aliasOf": "party" },
+    { "name": "party", "identifier": "party" }
+  ]
+}
+```
+
+Use an entry's `identifier` directly as the `react` emoji; surrounding colons are optional. `channels.slack.actions.emojiList` controls discovery separately from the `reactions` gate, and the app needs the `emoji:read` scope.
+
 ## Access control and routing
 
 Tabs
@@ -2025,7 +2045,7 @@ Primary reference: [Configuration reference - Slack](/gateway/config-channels#sl
 
 High-signal Slack fields
 
-- mode/auth: `identity`, `mode`, `botToken`, `appToken`, `userToken`, `signingSecret`, `webhookPath`, `accounts.*`
+- mode/auth: `postAs`, `mode`, `botToken`, `appToken`, `userToken`, `signingSecret`, `webhookPath`, `accounts.*`
 - DM access: `dm.enabled`, `dmPolicy`, `allowFrom` (legacy: `dm.policy`, `dm.allowFrom`), `dm.groupEnabled`, `dm.groupChannels`
 - compatibility toggle: `dangerouslyAllowNameMatching` (break-glass; keep off unless needed)
 - channel access: `groupPolicy`, `channels.*`, `channels.*.users`, `channels.*.requireMention`, `implicitMentions.*`

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "General troubleshooting"
 source: "https://docs.openclaw.ai/help/troubleshooting"
-source_hash: "6e16369d6ec7e614de2af1bb13ef8159a5691fc1864343451867f3dffbf087a3"
+source_hash: "0214c63b7dee863b5b1807e6c49e9ea123434408f35be59888b844c67a7523c2"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "help/troubleshooting.md"
@@ -20,6 +20,7 @@ Triage front door. 2 minutes to a diagnosis, then jump to the deep page.
 Run this ladder in order:
 
 ```bash
+openclaw triage
 openclaw status
 openclaw status --all
 openclaw gateway probe
@@ -31,6 +32,7 @@ openclaw logs --follow
 
 Good output, one line each:
 
+- `openclaw triage` writes a sanitized, agent-ready diagnosis and, when the Gateway is reachable, a support archive. See [Triage](/cli/triage) for agent handoff options.
 - `openclaw status` shows configured channels, no auth errors.
 - `openclaw status --all` produces a full, shareable report.
 - `openclaw gateway probe` shows `Reachable: yes`. `Capability: ...` is the

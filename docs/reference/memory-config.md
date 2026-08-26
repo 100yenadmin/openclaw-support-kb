@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Memory configuration reference"
 source: "https://docs.openclaw.ai/reference/memory-config"
-source_hash: "39bb064e5b4daf9160246bbb8f0741685d059cbfa5f52801396538fc30d5be8f"
+source_hash: "73969c75bfd17ed7c1d49a25ada61125611094e64a87b90433a1c08643367116"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "reference/memory-config.md"
@@ -193,15 +193,15 @@ Use `provider: "openai-compatible"` for a generic OpenAI-compatible
 
 ParamField
 
-  Custom API base URL.
+  Custom API base URL. Provider credentials and headers are inherited only when this resolves to the provider's configured destination.
 
 ParamField
 
-  Override API key.
+  API key owned by the remote destination. Set this when `remote.baseUrl` points somewhere other than the provider's configured destination.
 
 ParamField
 
-  Extra HTTP headers (merged with provider defaults).
+  Extra HTTP headers owned by the remote destination. Provider defaults are merged only for the provider's configured destination.
 
 ```json5
 {
@@ -229,14 +229,29 @@ Gemini
 
     | Key                    | Type     | Default                | Description                                |
     | ---------------------- | -------- | ---------------------- | ------------------------------------------- |
-    | `model`                | `string` | `gemini-embedding-001` | Also supports `gemini-embedding-2-preview` |
-    | `outputDimensionality` | `number` | `3072`                 | For Embedding 2: 768, 1536, or 3072        |
+    | `model`                | `string` | `gemini-embedding-001` | Also supports `gemini-embedding-2`         |
+    | `outputDimensionality` | `number` | `3072`                 | 128-3072; recommended: 768, 1536, or 3072  |
+
+    The legacy `gemini-embedding-2-preview` identifier remains accepted during
+    migration to the stable model.
 
 
 Warning
 
     Changing model or `outputDimensionality` changes the index identity. OpenClaw
     pauses vector search until you explicitly rebuild the memory index.
+
+    Upgrading any existing configuration that already uses
+    `gemini-embedding-2` can trigger the same pause even when you do not edit the
+    configuration. Before this release, the stable model's dimension was
+    omitted from index identity whether `outputDimensionality` was absent or
+    explicitly set. After upgrade, an absent setting resolves to 3072, while an
+    explicit setting between 128 and 3072 becomes part of the identity. The
+    default `gemini-embedding-001` keeps its existing identity when this setting
+    is absent; an explicitly configured value that was previously ignored now
+    also changes the identity. For either path, check the affected agent with
+    `openclaw memory status --deep --agent <id>`, then rebuild when ready with
+    `openclaw memory index --force --agent <id>`.
 
 
 
@@ -446,9 +461,9 @@ Index images and audio alongside Markdown using Gemini Embedding 2:
 
 Note
 
-Only applies to files in `extraPaths`. Default memory roots stay Markdown-only. Requires `gemini-embedding-2-preview`. `fallback` must be `"none"`.
+Only applies to files in `extraPaths`. Default memory roots stay Markdown-only. Requires `gemini-embedding-2` (the legacy preview identifier is also accepted). `fallback` must be `"none"`.
 
-Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`, `.heic`, `.heif` (images); `.mp3`, `.wav`, `.ogg`, `.opus`, `.m4a`, `.aac`, `.flac` (audio).
+Supported formats: `.jpg`, `.jpeg`, `.png` (images); `.mp3`, `.wav` (audio).
 
 ---
 

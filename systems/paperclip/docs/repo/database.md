@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "87a01f4c074e22523ba94c3a5218ec12f8689f873b19ef079b3afb22ef53ff87"
+source_hash: "116dcb84e95201f209645343938ab942040e1e06cb9bad467b44251a5f4fff38"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -215,6 +215,39 @@ The decisions desk stores queue membership, decide-by/snooze state, and retentio
 Triage writes serialize on the company and attention-source identity so concurrent partial updates preserve both fields and produce monotonic history versions.
 
 `decision_retention` tracks the last observed source `activityAt`, Keep, reversible archive provenance, and monotonic source/archive versions. `decision_archive_notification_outbox` has a unique key over company, source identity, archive version, and immutable origin agent so repeated sweeps cannot enqueue duplicate notifications; delivery claims are retryable and coalesced per agent.
+
+## Native runner persistence
+
+Native runner state is additive to the existing heartbeat tables. Every existing
+`heartbeat_runs` row defaults to `runtime_mode = 'legacy'`; adding these columns
+does not select the native runtime or start a runner process. Native execution can
+record its resolved runtime profile, provider session, driver, completion
+contract, durable event cursor, and finalization phase on the run when a later
+rollout explicitly selects it.
+
+`completion_contracts`, `native_run_results`, `native_run_finalizations`,
+`work_assessments`, `status_decisions`, and `status_decision_effects` form the
+append-oriented evidence and status-decision chain. Unique fingerprints,
+versions, ordinals, and idempotency keys make retries deterministic. Composite
+foreign keys bind every contract, result, assessment, decision, effect, and
+finalization to one company, issue, and run. The database rejects mixed-owner
+evidence even when every referenced ID exists. Native source identities on
+`heartbeat_run_events` are nullable so legacy events remain readable without
+rewriting historical rows. Per-run native source identifiers are unique, while
+the existing legacy sequence behavior remains unchanged. The hidden native
+coordinator serializes on its bound `heartbeat_runs` row, allocates
+`next_event_seq`, and commits a validated PRP event before the transport sends
+its cumulative ACK. Byte-equivalent source retries return the existing cursor;
+gaps and conflicting replays fail closed. Accepted structured results enter the
+finalization ledger, whose retry time and owner lease are checked under a row
+lock. None of these writes selects a runtime or changes a legacy run's execution
+path.
+
+Issue `status_version` advances only when `status` changes. The JavaScript backup
+path includes user-defined functions and triggers so a restored database keeps
+that invariant. Removing or disabling a future native rollout flag must not
+delete these records; persisted experimental runs remain available for recovery
+and inspection.
 
 ## Plugin database namespaces
 

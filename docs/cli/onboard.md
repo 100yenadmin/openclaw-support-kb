@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Onboard"
 source: "https://docs.openclaw.ai/cli/onboard"
-source_hash: "ead6e9a5cde13b3835edf4193e561e57dd225c0cc7e0efd9b3e3959db542e3ed"
+source_hash: "258d2bc0d0e44d0f80e2a19978c1907beb4d45cbda5b88a8825b08917a798fa6"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "cli/onboard.md"
@@ -151,6 +151,9 @@ workspace through their normal setup flow. On a rerun with an existing agent
 roster, onboarding preserves the configured fleet workspace: the classic
 wizard shows both paths and requires explicit confirmation before moving it,
 while non-interactive setup warns and keeps the current value.
+For an explicitly managed multi-agent fleet, provider setup updates the configured
+system agent's model and aliases without replacing fleet-wide model defaults or
+another agent's model.
 
 After inference passes, onboarding checks for memories from supported local AI
 tools: Claude Code auto-memory, Codex consolidated memories, and Hermes memory

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Audit history"
 source: "https://docs.openclaw.ai/gateway/audit"
-source_hash: "d9a0ae529f1641813266c27d59aa349ef57f410d9965523d728f828499697c54"
+source_hash: "d258b9c98b6fe0ee7051200003d2d4116770a2b1563146f0f92a982c45d3247d"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "gateway/audit.md"
@@ -48,6 +48,16 @@ Shared outbound delivery is another owner-native source. Queue admission and
 platform-send start use a lazy progress companion, while terminal message rows
 remain in the activity ledger. Run inspection merges both sources directly;
 neither is copied into the generic decision-fact table.
+
+Scheduled runs, background tasks, and task flows are owner-native sources too.
+After exact run admission, a lazy lifecycle metadata table binds the admitted
+context and execution ids to the canonical `cron_run_receipts`, `task_runs`, or
+`flow_runs` row. Inspection joins that metadata to the owner row directly and
+preserves its status, including skipped, failed, timed-out, cancelled, blocked,
+and lost outcomes. A `runId` alone never joins one of these rows to an
+execution. Legacy, missing, deleted, corrupt, or mismatched bindings remain
+unknown or absent; they never change task behavior and are never copied into
+`execution_decision_facts`.
 
 ## Run identity inspection
 
@@ -119,7 +129,30 @@ If the private parent token was unavailable, the child remains inspectable but
 the missing parent context, execution, and run evidence is explicit. ACP spawn
 itself is observable. Actions performed wholly inside an external ACP runtime
 without a callback are reported as unsupported evidence, never inferred from
-task or transcript text.
+task or transcript text. After admission, the ACP lifecycle owner records that
+receipt when the prompt is submitted, using the exact admitted execution token.
+It does not claim that a native side effect occurred; adapter authors must add
+an authoritative native-action callback to provide stronger evidence.
+
+Registered plugin runtime calls add bounded facts only after exact run
+admission. A `before_tool_call` hook records its own allow or block as an
+enforced plugin gate; fail-closed hook errors are denials, while a configured
+fail-open error remains unknown. Separate owner-native approval rows remain the
+authority when a hook requests approval.
+
+Plugin-owned node actions distinguish the Gateway gate from the action result.
+Pairing, live connection, command capability, plugin policy, and active
+authority checks are enforced. A node-reported success is attribution-only. If
+the plugin policy returns without calling the supplied node callback, the
+action is unknown with `node.action_callback` missing; OpenClaw does not infer a
+send from the plugin result.
+
+An attached worker records its current credential, bundle/version/features,
+owner epoch, and turn-claim admission as one enforced gate. The existing
+placement and worker-operation rows stay authoritative; their hashes,
+credentials, tokens, environment ids, and session ids are not copied into the
+generic receipt. Admission success proves only that the worker may connect, not
+that a later worker action succeeded.
 
 The foundation records direct local CLI ingress, Gateway boot-system ingress,
 and admitted channel participants at their authoritative producers. For a
@@ -142,6 +175,15 @@ runtime binding are present, but no durable invoker principal is supplied at
 this boundary. A run becomes
 `attribution-only` only when an authoritative ingress supplies an invoker fact.
 Neither state means that identity affected an allow or deny decision.
+
+Configured webhook mapping ids identify only the matched ingress source. They
+do not authenticate a person, service, or invoker. Shared hook authentication
+and direct `/hooks/agent` requests therefore remain unattributed unless another
+authoritative principal producer exists. A mapping transform that suppresses a
+request before admission returns its normal HTTP response but creates no run,
+execution identity, task, or decision receipt. Restart recovery records system
+attribution only after the current durable recovery owner admits the exact
+attempt.
 
 Authenticated Gateway attach records immutable audit facts once. Session
 creation separately reads the live canonical durable profile id so a profile
@@ -182,6 +224,12 @@ The binding remains diagnostic provenance. Only an exact target-validation,
 message-policy, or turn-capability denial that changed the result is
 `enforced`. Portable actions and early suppressions without a durable owner
 record use the generic fact owner on the same audit-writer FIFO.
+
+Cron, task, and flow lifecycle receipts are `attribution-only` and have a
+`not-applicable` decision outcome. They report what the authoritative lifecycle
+owner retained; they do not claim an authorization decision. Their cursors are
+opaque and source-specific. Existing numeric cursors and `a:`, `m:`, and `g:`
+cursors remain accepted; newer owner stages use `c:`, `t:`, and `f:`.
 
 When the same `runId` has a retained terminal row in `operator_approvals`, the
 inspector also reads its owner-local `operator_approval_execution_identities`

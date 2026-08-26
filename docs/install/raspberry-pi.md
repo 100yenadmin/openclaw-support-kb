@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Raspberry Pi"
 source: "https://docs.openclaw.ai/install/raspberry-pi"
-source_hash: "6d49a3d1b2738a70a8dfcde35380c78f237c82395c6a21867dc5c7a5bb34a871"
+source_hash: "3a9859d16b0c97036411a8d554ced79310ca6b2b0e1d2cab739aaeb2a1cb406c"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install/raspberry-pi.md"
@@ -178,7 +178,7 @@ echo 'gpu_mem=16' | sudo tee -a /boot/config.txt
 sudo systemctl disable bluetooth
 ```
 
-**systemd drop-in for stable restarts** -- If this Pi is mostly running OpenClaw, add a service drop-in:
+**systemd drop-in for host-specific startup tuning** -- The managed unit owns the generic restart policy (`Restart=always`, `RestartSec=5`). If this Pi is mostly running OpenClaw, add a service drop-in for host-specific startup settings only:
 
 ```bash
 systemctl --user edit openclaw-gateway.service
@@ -188,8 +188,6 @@ systemctl --user edit openclaw-gateway.service
 [Service]
 Environment=OPENCLAW_NO_RESPAWN=1
 Environment=NODE_COMPILE_CACHE=/var/tmp/openclaw-compile-cache
-Restart=always
-RestartSec=2
 TimeoutStartSec=90
 ```
 

@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Install"
 source: "https://docs.openclaw.ai/install"
-source_hash: "db7e55d4d73f7ea14bd8571df04c012afedf66374026018e7c0ecac48e8dd2e7"
+source_hash: "f769d939973e9306ad803329aa38dbe3c1abd2390a95f07c787c0b5ee64c23a0"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "install.md"
@@ -18,6 +18,18 @@ Source: https://docs.openclaw.ai/install
 - **Node 22.22.3+, 24.15+, or 25.9+** - Node 26 is the recommended default; the installer script provisions it automatically when Node is missing.
 - **macOS, Linux, or Windows** - Windows users can start with the native Windows Hub app, the PowerShell CLI installer, or a WSL2 Gateway. See [Windows](/platforms/windows).
 - `pnpm` is only needed if you build from source.
+
+## Download the desktop app
+
+Prefer a normal app download over the CLI? OpenClaw ships desktop companions:
+
+- **Windows**: the [Windows Hub](/platforms/windows#recommended-windows-hub) companion app — a signed installer you download and run like any Windows app, with setup, tray status, chat, and node mode:
+  - [OpenClawCompanion-Setup-x64.exe](https://github.com/openclaw/openclaw-windows-node/releases/latest/download/OpenClawCompanion-Setup-x64.exe)
+  - [OpenClawCompanion-Setup-arm64.exe](https://github.com/openclaw/openclaw-windows-node/releases/latest/download/OpenClawCompanion-Setup-arm64.exe)
+  - All Hub releases: [Windows Hub releases page](https://github.com/openclaw/openclaw-windows-node/releases/latest)
+- **macOS**: the [macOS menu bar app](/platforms/macos) — download the `OpenClaw-<version>.dmg` (preferred) or `.zip` asset from [OpenClaw GitHub releases](https://github.com/openclaw/openclaw/releases), then install and launch **OpenClaw.app**. See the [macOS app page](/platforms/macos) for details, including what to do when the newest release ships no macOS asset.
+
+Both desktop apps can provision a local Gateway during first-run setup, or connect to an existing remote Gateway.
 
 ## Recommended: installer script
 

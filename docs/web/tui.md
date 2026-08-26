@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "TUI"
 source: "https://docs.openclaw.ai/web/tui"
-source_hash: "d41ee5cf5d448d9acc2cae240116a4ce3f60eeab4fd71c08d8a67b2d47042033"
+source_hash: "515ef043e06c5b4732fe3835935f23e18caf0f9c5219bc822a382aa398187a91"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/tui.md"
@@ -112,12 +112,12 @@ Core:
 - `/gateway-status` (alias `/gwstatus`; shows Gateway connection status directly)
 - `/agent <id>` (or `/agents`)
 - `/session <key>` (or `/sessions`)
-- `/model <provider/model>` (or `/models`)
+- `/model <provider/model|default>` (or `/models`; `default` clears the session override)
 
 Session controls:
 
-- `/think <off|minimal|low|medium|high>` (higher tiers may add levels like `xhigh`/`max` depending on the model)
-- `/fast <status|auto|on|off>`
+- `/think <off|minimal|low|medium|high|default>` (higher tiers may add levels like `xhigh`/`max` depending on the model; `default` clears the session override)
+- `/fast <status|auto|on|off|default>` (`default` clears the session override)
 - `/verbose <on|full|off>`
 - `/trace <on|off>`
 - `/reasoning <on|off|stream>`

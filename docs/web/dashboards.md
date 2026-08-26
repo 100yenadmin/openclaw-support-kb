@@ -2,7 +2,7 @@
 type: openclaw_doc
 title: "Session Dashboards"
 source: "https://docs.openclaw.ai/web/dashboards"
-source_hash: "d0606a62e67a8d4305d72c8c39052e6e6317427a125a82576fcfea1ee2856324"
+source_hash: "eac2e7f17d90d98d1834087d435f610203396b023e36cf37487f720b402522a7"
 system: "openclaw"
 kb_namespace: "openclaw"
 doc_path: "web/dashboards.md"
@@ -80,10 +80,15 @@ never needs the agent.
   bottom — pick the side from the small arrow on the header switch — and
   resizes like the sidebar. Choose Dashboard to hide the chat entirely; the
   agent still hears you when you bring it back.
-- **Agent parity.** Everything you can do, the agent can do with its
-  `dashboard` tool: add, update, move, resize, and remove widgets, manage
-  tabs, switch the visible tab, and move or hide the chat dock. Ask "put the
-  chat on the left and show the finance tab" and watch it happen.
+- **Agent parity.** The agent's `dashboard` tool creates or updates trusted
+  plugin widgets, moves, resizes, and removes widgets, manages tabs, switches
+  the visible tab, and moves or hides the chat dock. The `show_widget` tool
+  creates or refreshes custom HTML and registered-source widgets; updating an
+  existing widget uses `pin: true`, the same `name`, and new `widget_code`.
+  Board snapshots identify each widget's `contentOwner` and, when applicable,
+  `registeredContentKind`; remove a widget before replacing its content owner
+  or registered source kind.
+  Ask "put the chat on the left and show the finance tab" and watch it happen.
 
   Switching the visible tab or chat dock requires a connected Control UI. If
   none is connected, the command returns `UNAVAILABLE`; open the Control UI and retry.
