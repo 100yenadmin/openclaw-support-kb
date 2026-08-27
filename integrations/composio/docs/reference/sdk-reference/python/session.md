@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session"
 source: "https://docs.composio.dev/reference/sdk-reference/python/session.md"
-source_hash: "fd2d03194b09fda008f7919ea4aeeb87ee4b784868904ce52aca4a4aebb0b377"
+source_hash: "76556c1c37a9a191d529e2ce763fbde1174119d6e0df8eea6768bd26e75fd32d"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/session.md"
@@ -176,7 +176,7 @@ def custom_toolkits() -> List[RegisteredCustomToolkit]
 Proxy an API call through Composio's auth layer.
 
 ```python
-def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], body: Any = ..., parameters: List[Dict[str, Any | None]] = ...) -> SessionProxyExecuteResponse
+def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], body: Any = ..., parameters: List[Dict[str, Any | None]] = ...) -> ToolRouterSessionProxyExecuteResponse
 ```
 
 **Parameters**
@@ -191,7 +191,7 @@ def proxy_execute(toolkit: str, endpoint: str, method: Literal['GET', 'POST', 'P
 
 **Returns**
 
-`SessionProxyExecuteResponse` — Proxied API response
+`ToolRouterSessionProxyExecuteResponse` — Proxied API response
 
 ***
 
@@ -234,6 +234,6 @@ def delete() -> ToolRouterSessionDeleteResponse
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tool_router_session.py#L85)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tool_router_session.py#L86)
 
 ---

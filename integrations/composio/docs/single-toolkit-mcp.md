@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Single Toolkit MCP"
 source: "https://docs.composio.dev/docs/single-toolkit-mcp.md"
-source_hash: "41a3f87442889cc92ebbea5a9941715da9d317c13ae43f34a51fd57cbd720dde"
+source_hash: "35f7671bd7d5ac09ec909e9acc3ea0b2b37ec2ec3991e1b01130bfa0fea337a2"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "single-toolkit-mcp.md"
@@ -313,7 +313,6 @@ Use with Anthropic, OpenAI, and other frameworks
 - https://docs.composio.dev/kb/topic/account-billing-and-security
 - https://docs.composio.dev/kb/toolkits
 - https://docs.composio.dev/kb/toolkit/gmail
-- https://docs.composio.dev/kb/toolkit/composio
 - https://docs.composio.dev/kb/toolkit/github
 - https://docs.composio.dev/kb/toolkit/googlecalendar
 - https://docs.composio.dev/kb/toolkit/notion
@@ -328,7 +327,6 @@ Use with Anthropic, OpenAI, and other frameworks
 - https://docs.composio.dev/kb/toolkit/hubspot
 - https://docs.composio.dev/kb/toolkit/linear
 - https://docs.composio.dev/kb/toolkit/airtable
-- https://docs.composio.dev/kb/toolkit/codeinterpreter
 - https://docs.composio.dev/kb/toolkit/serpapi
 - https://docs.composio.dev/kb/toolkit/jira
 - https://docs.composio.dev/kb/toolkit/firecrawl
@@ -336,22 +334,14 @@ Use with Anthropic, OpenAI, and other frameworks
 - https://docs.composio.dev/kb/toolkit/youtube
 - https://docs.composio.dev/kb/toolkit/slackbot
 - https://docs.composio.dev/kb/toolkit/canvas
-- https://docs.composio.dev/kb/toolkit/bitbucket
 - https://docs.composio.dev/kb/toolkit/googletasks
 - https://docs.composio.dev/kb/toolkit/discord
 - https://docs.composio.dev/kb/toolkit/figma
-- https://docs.composio.dev/kb/toolkit/composio_search
 - https://docs.composio.dev/kb/toolkit/reddit
-- https://docs.composio.dev/kb/toolkit/cal
 - https://docs.composio.dev/kb/toolkit/wrike
-- https://docs.composio.dev/kb/toolkit/exa
-- https://docs.composio.dev/kb/toolkit/sentry
 - https://docs.composio.dev/kb/toolkit/snowflake
-- https://docs.composio.dev/kb/toolkit/hackernews
-- https://docs.composio.dev/kb/toolkit/elevenlabs
 - https://docs.composio.dev/kb/toolkit/microsoft_teams
 - https://docs.composio.dev/kb/toolkit/asana
-- https://docs.composio.dev/kb/toolkit/peopledatalabs
 - https://docs.composio.dev/kb/toolkit/shopify
 - https://docs.composio.dev/kb/toolkit/linkedin
 - https://docs.composio.dev/kb/toolkit/google_maps
@@ -362,1283 +352,69 @@ Use with Anthropic, OpenAI, and other frameworks
 - https://docs.composio.dev/kb/toolkit/calendly
 - https://docs.composio.dev/kb/toolkit/trello
 - https://docs.composio.dev/kb/toolkit/apollo
-- https://docs.composio.dev/kb/toolkit/semrush
-- https://docs.composio.dev/kb/toolkit/mem0
-- https://docs.composio.dev/kb/toolkit/neon
-- https://docs.composio.dev/kb/toolkit/weathermap
 - https://docs.composio.dev/kb/toolkit/posthog
 - https://docs.composio.dev/kb/toolkit/clickup
-- https://docs.composio.dev/kb/toolkit/brevo
 - https://docs.composio.dev/kb/toolkit/stripe
 - https://docs.composio.dev/kb/toolkit/klaviyo
-- https://docs.composio.dev/kb/toolkit/browserbase_tool
 - https://docs.composio.dev/kb/toolkit/mailchimp
 - https://docs.composio.dev/kb/toolkit/attio
 - https://docs.composio.dev/kb/toolkit/googlemeet
-- https://docs.composio.dev/kb/toolkit/text_to_pdf
 - https://docs.composio.dev/kb/toolkit/zoho
-- https://docs.composio.dev/kb/toolkit/fireflies
 - https://docs.composio.dev/kb/toolkit/dropbox
-- https://docs.composio.dev/kb/toolkit/shortcut
 - https://docs.composio.dev/kb/toolkit/confluence
-- https://docs.composio.dev/kb/toolkit/freshdesk
-- https://docs.composio.dev/kb/toolkit/borneo
-- https://docs.composio.dev/kb/toolkit/mixpanel
-- https://docs.composio.dev/kb/toolkit/coda
-- https://docs.composio.dev/kb/toolkit/acculynx
 - https://docs.composio.dev/kb/toolkit/ahrefs
-- https://docs.composio.dev/kb/toolkit/affinity
-- https://docs.composio.dev/kb/toolkit/amplitude
-- https://docs.composio.dev/kb/toolkit/heygen
-- https://docs.composio.dev/kb/toolkit/agencyzoom
 - https://docs.composio.dev/kb/toolkit/googlebigquery
-- https://docs.composio.dev/kb/toolkit/microsoft_clarity
-- https://docs.composio.dev/kb/toolkit/coinbase
 - https://docs.composio.dev/kb/toolkit/monday
-- https://docs.composio.dev/kb/toolkit/semanticscholar
-- https://docs.composio.dev/kb/toolkit/sendgrid
-- https://docs.composio.dev/kb/toolkit/junglescout
 - https://docs.composio.dev/kb/toolkit/pipedrive
-- https://docs.composio.dev/kb/toolkit/bamboohr
 - https://docs.composio.dev/kb/toolkit/whatsapp
-- https://docs.composio.dev/kb/toolkit/dynamics365
 - https://docs.composio.dev/kb/toolkit/zendesk
-- https://docs.composio.dev/kb/toolkit/googlephotos
-- https://docs.composio.dev/kb/toolkit/lmnt
-- https://docs.composio.dev/kb/toolkit/metaads
-- https://docs.composio.dev/kb/toolkit/zenrows
 - https://docs.composio.dev/kb/toolkit/googlesuper
 - https://docs.composio.dev/kb/toolkit/browser_tool
-- https://docs.composio.dev/kb/toolkit/yousearch
-- https://docs.composio.dev/kb/toolkit/linkup
-- https://docs.composio.dev/kb/toolkit/listennotes
-- https://docs.composio.dev/kb/toolkit/typefully
-- https://docs.composio.dev/kb/toolkit/bolna
 - https://docs.composio.dev/kb/toolkit/rocketlane
 - https://docs.composio.dev/kb/toolkit/zoom
-- https://docs.composio.dev/kb/toolkit/onepage
-- https://docs.composio.dev/kb/toolkit/entelligence
-- https://docs.composio.dev/kb/toolkit/retellai
 - https://docs.composio.dev/kb/toolkit/servicenow
 - https://docs.composio.dev/kb/toolkit/googleads
 - https://docs.composio.dev/kb/toolkit/pagerduty
-- https://docs.composio.dev/kb/toolkit/toneden
-- https://docs.composio.dev/kb/toolkit/rafflys
-- https://docs.composio.dev/kb/toolkit/finage
-- https://docs.composio.dev/kb/toolkit/fomo
-- https://docs.composio.dev/kb/toolkit/bannerbear
-- https://docs.composio.dev/kb/toolkit/miro
 - https://docs.composio.dev/kb/toolkit/share_point
-- https://docs.composio.dev/kb/toolkit/mocean
-- https://docs.composio.dev/kb/toolkit/formcarry
-- https://docs.composio.dev/kb/toolkit/appdrag
-- https://docs.composio.dev/kb/toolkit/metatextai
-- https://docs.composio.dev/kb/toolkit/breezy_hr
 - https://docs.composio.dev/kb/toolkit/launch_darkly
-- https://docs.composio.dev/kb/toolkit/mailerlite
-- https://docs.composio.dev/kb/toolkit/contentful
-- https://docs.composio.dev/kb/toolkit/close
-- https://docs.composio.dev/kb/toolkit/docmosis
-- https://docs.composio.dev/kb/toolkit/ably
-- https://docs.composio.dev/kb/toolkit/more_trees
 - https://docs.composio.dev/kb/toolkit/netsuite
-- https://docs.composio.dev/kb/toolkit/moz
-- https://docs.composio.dev/kb/toolkit/recallai
-- https://docs.composio.dev/kb/toolkit/apaleo
-- https://docs.composio.dev/kb/toolkit/survey_monkey
 - https://docs.composio.dev/kb/toolkit/zoho_books
-- https://docs.composio.dev/kb/toolkit/zoho_inventory
 - https://docs.composio.dev/kb/toolkit/facebook
-- https://docs.composio.dev/kb/toolkit/tinypng
-- https://docs.composio.dev/kb/toolkit/mopinion
-- https://docs.composio.dev/kb/toolkit/crustdata
-- https://docs.composio.dev/kb/toolkit/webex
-- https://docs.composio.dev/kb/toolkit/brandfetch
 - https://docs.composio.dev/kb/toolkit/canva
-- https://docs.composio.dev/kb/toolkit/digicert
-- https://docs.composio.dev/kb/toolkit/dailybot
-- https://docs.composio.dev/kb/toolkit/linkhut
-- https://docs.composio.dev/kb/toolkit/dropbox_sign
-- https://docs.composio.dev/kb/toolkit/timely
-- https://docs.composio.dev/kb/toolkit/box
-- https://docs.composio.dev/kb/toolkit/smugmug
-- https://docs.composio.dev/kb/toolkit/productboard
-- https://docs.composio.dev/kb/toolkit/blackbaud
 - https://docs.composio.dev/kb/toolkit/webflow
-- https://docs.composio.dev/kb/toolkit/amcards
-- https://docs.composio.dev/kb/toolkit/simplesat
-- https://docs.composio.dev/kb/toolkit/flutterwave
-- https://docs.composio.dev/kb/toolkit/hackerrank_work
-- https://docs.composio.dev/kb/toolkit/freshbooks
-- https://docs.composio.dev/kb/toolkit/process_street
-- https://docs.composio.dev/kb/toolkit/screenshotone
-- https://docs.composio.dev/kb/toolkit/chatwork
-- https://docs.composio.dev/kb/toolkit/klipfolio
-- https://docs.composio.dev/kb/toolkit/demio
-- https://docs.composio.dev/kb/toolkit/altoviz
-- https://docs.composio.dev/kb/toolkit/d2lbrightspace
-- https://docs.composio.dev/kb/toolkit/blackboard
-- https://docs.composio.dev/kb/toolkit/lever
-- https://docs.composio.dev/kb/toolkit/zoho_bigin
-- https://docs.composio.dev/kb/toolkit/pandadoc
-- https://docs.composio.dev/kb/toolkit/workiom
-- https://docs.composio.dev/kb/toolkit/lexoffice
-- https://docs.composio.dev/kb/toolkit/gorgias
 - https://docs.composio.dev/kb/toolkit/google_analytics
-- https://docs.composio.dev/kb/toolkit/todoist
-- https://docs.composio.dev/kb/toolkit/zoho_desk
-- https://docs.composio.dev/kb/toolkit/ashby
-- https://docs.composio.dev/kb/toolkit/datarobot
-- https://docs.composio.dev/kb/toolkit/ngrok
-- https://docs.composio.dev/kb/toolkit/square
-- https://docs.composio.dev/kb/toolkit/yandex
-- https://docs.composio.dev/kb/toolkit/baserow
-- https://docs.composio.dev/kb/toolkit/dialpad
-- https://docs.composio.dev/kb/toolkit/formsite
 - https://docs.composio.dev/kb/toolkit/ynab
 - https://docs.composio.dev/kb/toolkit/kommo
-- https://docs.composio.dev/kb/toolkit/tisane
-- https://docs.composio.dev/kb/toolkit/coinmarketcal
-- https://docs.composio.dev/kb/toolkit/browseai
-- https://docs.composio.dev/kb/toolkit/maintainx
-- https://docs.composio.dev/kb/toolkit/tinyurl
-- https://docs.composio.dev/kb/toolkit/bitwarden
-- https://docs.composio.dev/kb/toolkit/epic_games
-- https://docs.composio.dev/kb/toolkit/timecamp
-- https://docs.composio.dev/kb/toolkit/piggy
-- https://docs.composio.dev/kb/toolkit/alchemy
-- https://docs.composio.dev/kb/toolkit/gumroad
-- https://docs.composio.dev/kb/toolkit/foursquare
-- https://docs.composio.dev/kb/toolkit/open_sea
-- https://docs.composio.dev/kb/toolkit/humanloop
-- https://docs.composio.dev/kb/toolkit/zoominfo
 - https://docs.composio.dev/kb/toolkit/gong
-- https://docs.composio.dev/kb/toolkit/placekey
-- https://docs.composio.dev/kb/toolkit/datagma
-- https://docs.composio.dev/kb/toolkit/servicem8
-- https://docs.composio.dev/kb/toolkit/textrazor
-- https://docs.composio.dev/kb/toolkit/bubble
-- https://docs.composio.dev/kb/toolkit/chmeetings
-- https://docs.composio.dev/kb/toolkit/cloudflare
-- https://docs.composio.dev/kb/toolkit/harvest
-- https://docs.composio.dev/kb/toolkit/wakatime
 - https://docs.composio.dev/kb/toolkit/xero
-- https://docs.composio.dev/kb/toolkit/boldsign
-- https://docs.composio.dev/kb/toolkit/active_campaign
 - https://docs.composio.dev/kb/toolkit/zoho_mail
-- https://docs.composio.dev/kb/toolkit/mural
-- https://docs.composio.dev/kb/toolkit/brex
 - https://docs.composio.dev/kb/toolkit/intercom
-- https://docs.composio.dev/kb/toolkit/highlevel
-- https://docs.composio.dev/kb/toolkit/eventbrite
-- https://docs.composio.dev/kb/toolkit/beeminder
-- https://docs.composio.dev/kb/toolkit/rocket_reach
-- https://docs.composio.dev/kb/toolkit/interzoid
-- https://docs.composio.dev/kb/toolkit/exist
-- https://docs.composio.dev/kb/toolkit/zenserp
-- https://docs.composio.dev/kb/toolkit/zoho_invoice
-- https://docs.composio.dev/kb/toolkit/stack_exchange
-- https://docs.composio.dev/kb/toolkit/botbaba
-- https://docs.composio.dev/kb/toolkit/datadog
-- https://docs.composio.dev/kb/toolkit/waboxapp
-- https://docs.composio.dev/kb/toolkit/echtpost
-- https://docs.composio.dev/kb/toolkit/0codekit
-- https://docs.composio.dev/kb/toolkit/_1password
-- https://docs.composio.dev/kb/toolkit/_21risk
-- https://docs.composio.dev/kb/toolkit/_2chat
-- https://docs.composio.dev/kb/toolkit/44api
-- https://docs.composio.dev/kb/toolkit/abstract
-- https://docs.composio.dev/kb/toolkit/abuselpdb
-- https://docs.composio.dev/kb/toolkit/abyssale
-- https://docs.composio.dev/kb/toolkit/accredible_certificates
-- https://docs.composio.dev/kb/toolkit/active_merge
-- https://docs.composio.dev/kb/toolkit/active_trail
-- https://docs.composio.dev/kb/toolkit/adafruit_io
-- https://docs.composio.dev/kb/toolkit/addressfinder
-- https://docs.composio.dev/kb/toolkit/addresszen
-- https://docs.composio.dev/kb/toolkit/adrapid
-- https://docs.composio.dev/kb/toolkit/adtraction
-- https://docs.composio.dev/kb/toolkit/adyntel
-- https://docs.composio.dev/kb/toolkit/aeroleads
-- https://docs.composio.dev/kb/toolkit/affinda
-- https://docs.composio.dev/kb/toolkit/agent_mail
-- https://docs.composio.dev/kb/toolkit/agentql
-- https://docs.composio.dev/kb/toolkit/agenty
-- https://docs.composio.dev/kb/toolkit/agiled
-- https://docs.composio.dev/kb/toolkit/agility_cms
-- https://docs.composio.dev/kb/toolkit/ai_ml_api
-- https://docs.composio.dev/kb/toolkit/aimtell
-- https://docs.composio.dev/kb/toolkit/airparser
-- https://docs.composio.dev/kb/toolkit/airtop
-- https://docs.composio.dev/kb/toolkit/aivoov
-- https://docs.composio.dev/kb/toolkit/aiwyn_tax_mcp
-- https://docs.composio.dev/kb/toolkit/algodocs
-- https://docs.composio.dev/kb/toolkit/algolia
-- https://docs.composio.dev/kb/toolkit/all_images_ai
-- https://docs.composio.dev/kb/toolkit/alltrails_mcp
-- https://docs.composio.dev/kb/toolkit/alpaca
-- https://docs.composio.dev/kb/toolkit/alpha_vantage
-- https://docs.composio.dev/kb/toolkit/alttext_ai
-- https://docs.composio.dev/kb/toolkit/alt_text_lab
-- https://docs.composio.dev/kb/toolkit/amara
-- https://docs.composio.dev/kb/toolkit/ambee
-- https://docs.composio.dev/kb/toolkit/ambient_weather
-- https://docs.composio.dev/kb/toolkit/anchor_browser
-- https://docs.composio.dev/kb/toolkit/android_texter
-- https://docs.composio.dev/kb/toolkit/anonyflow
-- https://docs.composio.dev/kb/toolkit/anthropic_administrator
-- https://docs.composio.dev/kb/toolkit/apexverify
-- https://docs.composio.dev/kb/toolkit/api_labz
-- https://docs.composio.dev/kb/toolkit/api_ninjas
-- https://docs.composio.dev/kb/toolkit/api_sports
-- https://docs.composio.dev/kb/toolkit/api_bible
-- https://docs.composio.dev/kb/toolkit/api2pdf
-- https://docs.composio.dev/kb/toolkit/apiflash
-- https://docs.composio.dev/kb/toolkit/apiframe
-- https://docs.composio.dev/kb/toolkit/apify
-- https://docs.composio.dev/kb/toolkit/apify_mcp
-- https://docs.composio.dev/kb/toolkit/apilio
-- https://docs.composio.dev/kb/toolkit/apipie_ai
-- https://docs.composio.dev/kb/toolkit/apiverve
-- https://docs.composio.dev/kb/toolkit/appcircle
-- https://docs.composio.dev/kb/toolkit/appointo
-- https://docs.composio.dev/kb/toolkit/apptivegrid
-- https://docs.composio.dev/kb/toolkit/appveyor
-- https://docs.composio.dev/kb/toolkit/arena
-- https://docs.composio.dev/kb/toolkit/arize_ax
-- https://docs.composio.dev/kb/toolkit/artificial_analysis
-- https://docs.composio.dev/kb/toolkit/aryn
-- https://docs.composio.dev/kb/toolkit/ascora
-- https://docs.composio.dev/kb/toolkit/asin_data_api
-- https://docs.composio.dev/kb/toolkit/assemblyai
-- https://docs.composio.dev/kb/toolkit/astica_ai
-- https://docs.composio.dev/kb/toolkit/async_interview
-- https://docs.composio.dev/kb/toolkit/autobound
-- https://docs.composio.dev/kb/toolkit/autom
-- https://docs.composio.dev/kb/toolkit/avoma
-- https://docs.composio.dev/kb/toolkit/aws_marketplace_mcp
-- https://docs.composio.dev/kb/toolkit/ayrshare
-- https://docs.composio.dev/kb/toolkit/backendless
-- https://docs.composio.dev/kb/toolkit/bannerbite
-- https://docs.composio.dev/kb/toolkit/baremetrics
-- https://docs.composio.dev/kb/toolkit/bart
-- https://docs.composio.dev/kb/toolkit/basecamp
-- https://docs.composio.dev/kb/toolkit/baselinker
-- https://docs.composio.dev/kb/toolkit/basin
-- https://docs.composio.dev/kb/toolkit/beaconchain
-- https://docs.composio.dev/kb/toolkit/beaconstac
-- https://docs.composio.dev/kb/toolkit/beamer
-- https://docs.composio.dev/kb/toolkit/bench
-- https://docs.composio.dev/kb/toolkit/benchmark_email
-- https://docs.composio.dev/kb/toolkit/benzinga
-- https://docs.composio.dev/kb/toolkit/bestbuy
-- https://docs.composio.dev/kb/toolkit/better_proposals
-- https://docs.composio.dev/kb/toolkit/better_stack
-- https://docs.composio.dev/kb/toolkit/bettercontact
-- https://docs.composio.dev/kb/toolkit/bidsketch
-- https://docs.composio.dev/kb/toolkit/big_data_cloud
-- https://docs.composio.dev/kb/toolkit/bigmailer
-- https://docs.composio.dev/kb/toolkit/bigml
-- https://docs.composio.dev/kb/toolkit/bigpicture_io
-- https://docs.composio.dev/kb/toolkit/bika
-- https://docs.composio.dev/kb/toolkit/billsby
-- https://docs.composio.dev/kb/toolkit/bing_webmaster_tools
-- https://docs.composio.dev/kb/toolkit/bitly
-- https://docs.composio.dev/kb/toolkit/bitquery
-- https://docs.composio.dev/kb/toolkit/bland_ai
-- https://docs.composio.dev/kb/toolkit/blazemeter
-- https://docs.composio.dev/kb/toolkit/blocknative
-- https://docs.composio.dev/kb/toolkit/blooio
-- https://docs.composio.dev/kb/toolkit/bluebarry
-- https://docs.composio.dev/kb/toolkit/boloforms
-- https://docs.composio.dev/kb/toolkit/bolt_iot
-- https://docs.composio.dev/kb/toolkit/bonsai
-- https://docs.composio.dev/kb/toolkit/bookingmood
-- https://docs.composio.dev/kb/toolkit/booqable
-- https://docs.composio.dev/kb/toolkit/botdog
-- https://docs.composio.dev/kb/toolkit/botmape
-- https://docs.composio.dev/kb/toolkit/botpenguin
-- https://docs.composio.dev/kb/toolkit/botpress
-- https://docs.composio.dev/kb/toolkit/botsonic
-- https://docs.composio.dev/kb/toolkit/botstar
-- https://docs.composio.dev/kb/toolkit/botster
-- https://docs.composio.dev/kb/toolkit/bouncer
-- https://docs.composio.dev/kb/toolkit/bouncify
-- https://docs.composio.dev/kb/toolkit/boxhero
-- https://docs.composio.dev/kb/toolkit/braintrust
-- https://docs.composio.dev/kb/toolkit/breathehr
-- https://docs.composio.dev/kb/toolkit/breeze
-- https://docs.composio.dev/kb/toolkit/brightdata
-- https://docs.composio.dev/kb/toolkit/brilliant_directories
-- https://docs.composio.dev/kb/toolkit/browseract
-- https://docs.composio.dev/kb/toolkit/browserless
-- https://docs.composio.dev/kb/toolkit/btcpay_server
-- https://docs.composio.dev/kb/toolkit/buffer
-- https://docs.composio.dev/kb/toolkit/bugbug
-- https://docs.composio.dev/kb/toolkit/bugherd
-- https://docs.composio.dev/kb/toolkit/bugsnag
-- https://docs.composio.dev/kb/toolkit/builder_io
-- https://docs.composio.dev/kb/toolkit/buildkite
-- https://docs.composio.dev/kb/toolkit/builtwith
-- https://docs.composio.dev/kb/toolkit/bulk_email_checker
-- https://docs.composio.dev/kb/toolkit/bulkpublish
-- https://docs.composio.dev/kb/toolkit/bunnycdn
-- https://docs.composio.dev/kb/toolkit/byteforms
-- https://docs.composio.dev/kb/toolkit/cabinpanda
-- https://docs.composio.dev/kb/toolkit/calendarhero
-- https://docs.composio.dev/kb/toolkit/callerapi
-- https://docs.composio.dev/kb/toolkit/callingly
-- https://docs.composio.dev/kb/toolkit/callpage
-- https://docs.composio.dev/kb/toolkit/camb_ai
-- https://docs.composio.dev/kb/toolkit/campaign_cleaner
-- https://docs.composio.dev/kb/toolkit/campayn
-- https://docs.composio.dev/kb/toolkit/canny
-- https://docs.composio.dev/kb/toolkit/capsule_crm
-- https://docs.composio.dev/kb/toolkit/captions
-- https://docs.composio.dev/kb/toolkit/capturekit
-- https://docs.composio.dev/kb/toolkit/carbone
-- https://docs.composio.dev/kb/toolkit/cardclan
-- https://docs.composio.dev/kb/toolkit/cardly
-- https://docs.composio.dev/kb/toolkit/carsxe
-- https://docs.composio.dev/kb/toolkit/castingwords
-- https://docs.composio.dev/kb/toolkit/cats
-- https://docs.composio.dev/kb/toolkit/cdr_platform
-- https://docs.composio.dev/kb/toolkit/celigo
-- https://docs.composio.dev/kb/toolkit/census_bureau
-- https://docs.composio.dev/kb/toolkit/centralstationcrm
-- https://docs.composio.dev/kb/toolkit/certifier
-- https://docs.composio.dev/kb/toolkit/cert_seal
-- https://docs.composio.dev/kb/toolkit/chameleon
-- https://docs.composio.dev/kb/toolkit/charla
-- https://docs.composio.dev/kb/toolkit/chaser
-- https://docs.composio.dev/kb/toolkit/chatbotkit
-- https://docs.composio.dev/kb/toolkit/chatfai
-- https://docs.composio.dev/kb/toolkit/chatforma
-- https://docs.composio.dev/kb/toolkit/checkflow
-- https://docs.composio.dev/kb/toolkit/cincopa
-- https://docs.composio.dev/kb/toolkit/circleci
-- https://docs.composio.dev/kb/toolkit/claid_ai
-- https://docs.composio.dev/kb/toolkit/clarity_ai_mcp
-- https://docs.composio.dev/kb/toolkit/classmarker
-- https://docs.composio.dev/kb/toolkit/clearout
-- https://docs.composio.dev/kb/toolkit/clickhouse
-- https://docs.composio.dev/kb/toolkit/clickmeeting
-- https://docs.composio.dev/kb/toolkit/clicksend
-- https://docs.composio.dev/kb/toolkit/clientary
-- https://docs.composio.dev/kb/toolkit/clockify
-- https://docs.composio.dev/kb/toolkit/cloro
-- https://docs.composio.dev/kb/toolkit/cloudcart
-- https://docs.composio.dev/kb/toolkit/cloudconvert
-- https://docs.composio.dev/kb/toolkit/cloudflare_api_key
-- https://docs.composio.dev/kb/toolkit/cloudflare_browser_rendering
-- https://docs.composio.dev/kb/toolkit/cloudinary
-- https://docs.composio.dev/kb/toolkit/cloudlayer
-- https://docs.composio.dev/kb/toolkit/cloud_pdf
-- https://docs.composio.dev/kb/toolkit/cloudpress
-- https://docs.composio.dev/kb/toolkit/cloudsmith
-- https://docs.composio.dev/kb/toolkit/coassemble
-- https://docs.composio.dev/kb/toolkit/codacy
-- https://docs.composio.dev/kb/toolkit/codemagic
-- https://docs.composio.dev/kb/toolkit/codereadr
-- https://docs.composio.dev/kb/toolkit/cody
-- https://docs.composio.dev/kb/toolkit/coinmarketcap
-- https://docs.composio.dev/kb/toolkit/coinranking
-- https://docs.composio.dev/kb/toolkit/college_football_data
-- https://docs.composio.dev/kb/toolkit/cometapi
-- https://docs.composio.dev/kb/toolkit/commcare
-- https://docs.composio.dev/kb/toolkit/company_url_finder
-- https://docs.composio.dev/kb/toolkit/companycam
-- https://docs.composio.dev/kb/toolkit/companyenrich
-- https://docs.composio.dev/kb/toolkit/conductor
-- https://docs.composio.dev/kb/toolkit/configcat
-- https://docs.composio.dev/kb/toolkit/connecteam
-- https://docs.composio.dev/kb/toolkit/consensus
-- https://docs.composio.dev/kb/toolkit/constant_contact
-- https://docs.composio.dev/kb/toolkit/contacts_plus
-- https://docs.composio.dev/kb/toolkit/contentdrips
-- https://docs.composio.dev/kb/toolkit/contentful_graphql
-- https://docs.composio.dev/kb/toolkit/context_dev
-- https://docs.composio.dev/kb/toolkit/context7_mcp
-- https://docs.composio.dev/kb/toolkit/contractbook
-- https://docs.composio.dev/kb/toolkit/control_d
-- https://docs.composio.dev/kb/toolkit/conversion_tools
-- https://docs.composio.dev/kb/toolkit/convertapi
-- https://docs.composio.dev/kb/toolkit/convex
-- https://docs.composio.dev/kb/toolkit/conveyor
-- https://docs.composio.dev/kb/toolkit/convolo_ai
-- https://docs.composio.dev/kb/toolkit/copyleaks
-- https://docs.composio.dev/kb/toolkit/coresignal
-- https://docs.composio.dev/kb/toolkit/corrently
-- https://docs.composio.dev/kb/toolkit/countdown_api
-- https://docs.composio.dev/kb/toolkit/coupa
-- https://docs.composio.dev/kb/toolkit/cradl_ai
-- https://docs.composio.dev/kb/toolkit/craftmypdf
-- https://docs.composio.dev/kb/toolkit/crawlbase
-- https://docs.composio.dev/kb/toolkit/creatomate
-- https://docs.composio.dev/kb/toolkit/crisp
-- https://docs.composio.dev/kb/toolkit/cronfree_time_scheduler
-- https://docs.composio.dev/kb/toolkit/cronly
-- https://docs.composio.dev/kb/toolkit/crowdin
-- https://docs.composio.dev/kb/toolkit/crowterminal
-- https://docs.composio.dev/kb/toolkit/cults
-- https://docs.composio.dev/kb/toolkit/curated
-- https://docs.composio.dev/kb/toolkit/currencyscoop
-- https://docs.composio.dev/kb/toolkit/currents_api
-- https://docs.composio.dev/kb/toolkit/cursor
-- https://docs.composio.dev/kb/toolkit/customerio
-- https://docs.composio.dev/kb/toolkit/customgpt
-- https://docs.composio.dev/kb/toolkit/customjs
-- https://docs.composio.dev/kb/toolkit/cutt_ly
-- https://docs.composio.dev/kb/toolkit/dadata_ru
-- https://docs.composio.dev/kb/toolkit/daffy
-- https://docs.composio.dev/kb/toolkit/daily
-- https://docs.composio.dev/kb/toolkit/dart
-- https://docs.composio.dev/kb/toolkit/data247
-- https://docs.composio.dev/kb/toolkit/databox
 - https://docs.composio.dev/kb/toolkit/databricks
-- https://docs.composio.dev/kb/toolkit/dataforseo
-- https://docs.composio.dev/kb/toolkit/datascope
 - https://docs.composio.dev/kb/toolkit/daytona
-- https://docs.composio.dev/kb/toolkit/deadline_funnel
-- https://docs.composio.dev/kb/toolkit/debounce
-- https://docs.composio.dev/kb/toolkit/deepgram
-- https://docs.composio.dev/kb/toolkit/deepimage
-- https://docs.composio.dev/kb/toolkit/deepseek
-- https://docs.composio.dev/kb/toolkit/deepwiki_mcp
-- https://docs.composio.dev/kb/toolkit/delighted
-- https://docs.composio.dev/kb/toolkit/deployhq
-- https://docs.composio.dev/kb/toolkit/desktime
-- https://docs.composio.dev/kb/toolkit/detrack
-- https://docs.composio.dev/kb/toolkit/devto
-- https://docs.composio.dev/kb/toolkit/dev_cycle
-- https://docs.composio.dev/kb/toolkit/devin_mcp
-- https://docs.composio.dev/kb/toolkit/devolens
-- https://docs.composio.dev/kb/toolkit/dialmycalls
-- https://docs.composio.dev/kb/toolkit/dice_mcp
-- https://docs.composio.dev/kb/toolkit/dictionary_api
-- https://docs.composio.dev/kb/toolkit/didit
-- https://docs.composio.dev/kb/toolkit/diffbot
-- https://docs.composio.dev/kb/toolkit/digital_humani
 - https://docs.composio.dev/kb/toolkit/digital_ocean
-- https://docs.composio.dev/kb/toolkit/dnsfilter
-- https://docs.composio.dev/kb/toolkit/dock_certs
-- https://docs.composio.dev/kb/toolkit/docker_hub
-- https://docs.composio.dev/kb/toolkit/docnify
-- https://docs.composio.dev/kb/toolkit/docparser
-- https://docs.composio.dev/kb/toolkit/docraptor
-- https://docs.composio.dev/kb/toolkit/docsautomator
-- https://docs.composio.dev/kb/toolkit/docsbot_ai
-- https://docs.composio.dev/kb/toolkit/docsumo
-- https://docs.composio.dev/kb/toolkit/docugenerate
-- https://docs.composio.dev/kb/toolkit/documenso
-- https://docs.composio.dev/kb/toolkit/documentero
-- https://docs.composio.dev/kb/toolkit/documint
-- https://docs.composio.dev/kb/toolkit/docupilot
-- https://docs.composio.dev/kb/toolkit/docupipe
-- https://docs.composio.dev/kb/toolkit/docupost
-- https://docs.composio.dev/kb/toolkit/docuseal
-- https://docs.composio.dev/kb/toolkit/donately
-- https://docs.composio.dev/kb/toolkit/doppler
-- https://docs.composio.dev/kb/toolkit/doppler_marketing_automation
-- https://docs.composio.dev/kb/toolkit/doppler_secretops
-- https://docs.composio.dev/kb/toolkit/dotsimple
-- https://docs.composio.dev/kb/toolkit/dovetail
-- https://docs.composio.dev/kb/toolkit/dpd2
-- https://docs.composio.dev/kb/toolkit/draftable
-- https://docs.composio.dev/kb/toolkit/dreamstudio
-- https://docs.composio.dev/kb/toolkit/dripcel
-- https://docs.composio.dev/kb/toolkit/dromo
-- https://docs.composio.dev/kb/toolkit/drop_to_cdn
-- https://docs.composio.dev/kb/toolkit/dropcontact
-- https://docs.composio.dev/kb/toolkit/dub
-- https://docs.composio.dev/kb/toolkit/dungeon_fighter_online
-- https://docs.composio.dev/kb/toolkit/dynamic_mockups
-- https://docs.composio.dev/kb/toolkit/dynapictures
-- https://docs.composio.dev/kb/toolkit/dynosend
-- https://docs.composio.dev/kb/toolkit/e2b
-- https://docs.composio.dev/kb/toolkit/eagle_doc
-- https://docs.composio.dev/kb/toolkit/easy_email_verification
-- https://docs.composio.dev/kb/toolkit/ecologi
-- https://docs.composio.dev/kb/toolkit/eden_ai
-- https://docs.composio.dev/kb/toolkit/edworking
-- https://docs.composio.dev/kb/toolkit/egnyte
-- https://docs.composio.dev/kb/toolkit/elai
-- https://docs.composio.dev/kb/toolkit/elasticsearch
-- https://docs.composio.dev/kb/toolkit/eledo
-- https://docs.composio.dev/kb/toolkit/elevenreader
-- https://docs.composio.dev/kb/toolkit/elorus
-- https://docs.composio.dev/kb/toolkit/emailable
-- https://docs.composio.dev/kb/toolkit/emaillistverify
-- https://docs.composio.dev/kb/toolkit/emailoctopus
-- https://docs.composio.dev/kb/toolkit/emelia
-- https://docs.composio.dev/kb/toolkit/encodian
-- https://docs.composio.dev/kb/toolkit/endorsal
-- https://docs.composio.dev/kb/toolkit/enforcedflow
-- https://docs.composio.dev/kb/toolkit/engage
-- https://docs.composio.dev/kb/toolkit/enginemailer
-- https://docs.composio.dev/kb/toolkit/enigma
-- https://docs.composio.dev/kb/toolkit/eodhd_apis
-- https://docs.composio.dev/kb/toolkit/eranol
-- https://docs.composio.dev/kb/toolkit/erpnext
-- https://docs.composio.dev/kb/toolkit/esignatures
-- https://docs.composio.dev/kb/toolkit/esignatures_io
-- https://docs.composio.dev/kb/toolkit/espocrm
-- https://docs.composio.dev/kb/toolkit/esputnik
-- https://docs.composio.dev/kb/toolkit/etermin
-- https://docs.composio.dev/kb/toolkit/evenium
-- https://docs.composio.dev/kb/toolkit/eventee
-- https://docs.composio.dev/kb/toolkit/eventzilla
-- https://docs.composio.dev/kb/toolkit/everhour
-- https://docs.composio.dev/kb/toolkit/eversign
-- https://docs.composio.dev/kb/toolkit/excalidraw_mcp
 - https://docs.composio.dev/kb/toolkit/excel
-- https://docs.composio.dev/kb/toolkit/exceptionless
-- https://docs.composio.dev/kb/toolkit/expofp
-- https://docs.composio.dev/kb/toolkit/extracta_ai
-- https://docs.composio.dev/kb/toolkit/extrovert
-- https://docs.composio.dev/kb/toolkit/faceup
-- https://docs.composio.dev/kb/toolkit/fairing
-- https://docs.composio.dev/kb/toolkit/fal_ai
-- https://docs.composio.dev/kb/toolkit/faraday
 - https://docs.composio.dev/kb/toolkit/fathom
-- https://docs.composio.dev/kb/toolkit/feathery
-- https://docs.composio.dev/kb/toolkit/feedbear
-- https://docs.composio.dev/kb/toolkit/felt
-- https://docs.composio.dev/kb/toolkit/fibery
-- https://docs.composio.dev/kb/toolkit/fidel_api
-- https://docs.composio.dev/kb/toolkit/files_com
-- https://docs.composio.dev/kb/toolkit/filetopdf
-- https://docs.composio.dev/kb/toolkit/fillout_forms
-- https://docs.composio.dev/kb/toolkit/findymail
-- https://docs.composio.dev/kb/toolkit/finerworks
-- https://docs.composio.dev/kb/toolkit/fingertip
-- https://docs.composio.dev/kb/toolkit/finmei
-- https://docs.composio.dev/kb/toolkit/finmo
-- https://docs.composio.dev/kb/toolkit/firebase
-- https://docs.composio.dev/kb/toolkit/fireberry
-- https://docs.composio.dev/kb/toolkit/fireworks_ai
-- https://docs.composio.dev/kb/toolkit/firmao
-- https://docs.composio.dev/kb/toolkit/fixer
-- https://docs.composio.dev/kb/toolkit/fixer_io
-- https://docs.composio.dev/kb/toolkit/flatfile
-- https://docs.composio.dev/kb/toolkit/fleetio
-- https://docs.composio.dev/kb/toolkit/flexisign
-- https://docs.composio.dev/kb/toolkit/float
-- https://docs.composio.dev/kb/toolkit/flotiq
-- https://docs.composio.dev/kb/toolkit/flowiseai
-- https://docs.composio.dev/kb/toolkit/fluxguard
-- https://docs.composio.dev/kb/toolkit/fly
-- https://docs.composio.dev/kb/toolkit/folk
-- https://docs.composio.dev/kb/toolkit/follow_up_boss
-- https://docs.composio.dev/kb/toolkit/forcemanager
-- https://docs.composio.dev/kb/toolkit/formbricks
-- https://docs.composio.dev/kb/toolkit/formcrafts
-- https://docs.composio.dev/kb/toolkit/formdesk
-- https://docs.composio.dev/kb/toolkit/fraudlabs_pro
-- https://docs.composio.dev/kb/toolkit/freeagent
-- https://docs.composio.dev/kb/toolkit/freshservice
-- https://docs.composio.dev/kb/toolkit/fullenrich
-- https://docs.composio.dev/kb/toolkit/fusedesk
-- https://docs.composio.dev/kb/toolkit/futureagi
-- https://docs.composio.dev/kb/toolkit/gagelist
-- https://docs.composio.dev/kb/toolkit/gamma
-- https://docs.composio.dev/kb/toolkit/gan_ai
-- https://docs.composio.dev/kb/toolkit/gatherup
 - https://docs.composio.dev/kb/toolkit/gemini
-- https://docs.composio.dev/kb/toolkit/gender_api
-- https://docs.composio.dev/kb/toolkit/genderapi_io
-- https://docs.composio.dev/kb/toolkit/genderize
-- https://docs.composio.dev/kb/toolkit/geoapify
-- https://docs.composio.dev/kb/toolkit/geocodio
-- https://docs.composio.dev/kb/toolkit/geokeo
-- https://docs.composio.dev/kb/toolkit/getform
-- https://docs.composio.dev/kb/toolkit/getprospect
-- https://docs.composio.dev/kb/toolkit/get_transcribe
-- https://docs.composio.dev/kb/toolkit/gift_up
-- https://docs.composio.dev/kb/toolkit/gigasheet
-- https://docs.composio.dev/kb/toolkit/giphy
-- https://docs.composio.dev/kb/toolkit/gist
-- https://docs.composio.dev/kb/toolkit/gitea
 - https://docs.composio.dev/kb/toolkit/gitlab
-- https://docs.composio.dev/kb/toolkit/givebutter
-- https://docs.composio.dev/kb/toolkit/gladia
-- https://docs.composio.dev/kb/toolkit/glasp
-- https://docs.composio.dev/kb/toolkit/gleap
-- https://docs.composio.dev/kb/toolkit/globalping
-- https://docs.composio.dev/kb/toolkit/gocardless_mcp
-- https://docs.composio.dev/kb/toolkit/godaddy_mcp
-- https://docs.composio.dev/kb/toolkit/godial
-- https://docs.composio.dev/kb/toolkit/gofile
-- https://docs.composio.dev/kb/toolkit/goodbits
-- https://docs.composio.dev/kb/toolkit/goody
-- https://docs.composio.dev/kb/toolkit/google_address_validation
-- https://docs.composio.dev/kb/toolkit/google_admin
-- https://docs.composio.dev/kb/toolkit/google_chat
 - https://docs.composio.dev/kb/toolkit/google_classroom
-- https://docs.composio.dev/kb/toolkit/google_cloud_vision
-- https://docs.composio.dev/kb/toolkit/google_data_studio
-- https://docs.composio.dev/kb/toolkit/google_search_console
 - https://docs.composio.dev/kb/toolkit/googleslides
-- https://docs.composio.dev/kb/toolkit/googlecontacts
-- https://docs.composio.dev/kb/toolkit/googleforms
-- https://docs.composio.dev/kb/toolkit/gorilladesk
-- https://docs.composio.dev/kb/toolkit/gosquared
-- https://docs.composio.dev/kb/toolkit/gradium
-- https://docs.composio.dev/kb/toolkit/grafana
-- https://docs.composio.dev/kb/toolkit/grafbase
 - https://docs.composio.dev/kb/toolkit/granola_mcp
-- https://docs.composio.dev/kb/toolkit/granted_mcp
-- https://docs.composio.dev/kb/toolkit/graphhopper
-- https://docs.composio.dev/kb/toolkit/greenhouse
-- https://docs.composio.dev/kb/toolkit/griptape
-- https://docs.composio.dev/kb/toolkit/grist
-- https://docs.composio.dev/kb/toolkit/grok
-- https://docs.composio.dev/kb/toolkit/groqcloud
-- https://docs.composio.dev/kb/toolkit/gtmetrix
-- https://docs.composio.dev/kb/toolkit/gusto
-- https://docs.composio.dev/kb/toolkit/habitica
-- https://docs.composio.dev/kb/toolkit/hackmd
-- https://docs.composio.dev/kb/toolkit/handwrite
-- https://docs.composio.dev/kb/toolkit/handwrytten
-- https://docs.composio.dev/kb/toolkit/happy_scribe
-- https://docs.composio.dev/kb/toolkit/hashnode
-- https://docs.composio.dev/kb/toolkit/headout
-- https://docs.composio.dev/kb/toolkit/heartbeat
-- https://docs.composio.dev/kb/toolkit/heights_platform
-- https://docs.composio.dev/kb/toolkit/helloleads
-- https://docs.composio.dev/kb/toolkit/hello_tracks
-- https://docs.composio.dev/kb/toolkit/help_scout
-- https://docs.composio.dev/kb/toolkit/helpdesk
-- https://docs.composio.dev/kb/toolkit/help_spot
-- https://docs.composio.dev/kb/toolkit/helpwise
-- https://docs.composio.dev/kb/toolkit/here
-- https://docs.composio.dev/kb/toolkit/hex
-- https://docs.composio.dev/kb/toolkit/heyreach
-- https://docs.composio.dev/kb/toolkit/heyy
-- https://docs.composio.dev/kb/toolkit/heyzine
-- https://docs.composio.dev/kb/toolkit/highergov
-- https://docs.composio.dev/kb/toolkit/hive
-- https://docs.composio.dev/kb/toolkit/hjarni
-- https://docs.composio.dev/kb/toolkit/holded
-- https://docs.composio.dev/kb/toolkit/honeybadger
-- https://docs.composio.dev/kb/toolkit/honeycomb_mcp
-- https://docs.composio.dev/kb/toolkit/honeyhive
-- https://docs.composio.dev/kb/toolkit/hookdeck
-- https://docs.composio.dev/kb/toolkit/hostinger
-- https://docs.composio.dev/kb/toolkit/hotspotsystem
-- https://docs.composio.dev/kb/toolkit/html_to_image
-- https://docs.composio.dev/kb/toolkit/htmlcss_to_image
-- https://docs.composio.dev/kb/toolkit/hub_planner
-- https://docs.composio.dev/kb/toolkit/hugging_face
-- https://docs.composio.dev/kb/toolkit/hitl
-- https://docs.composio.dev/kb/toolkit/humanitix
-- https://docs.composio.dev/kb/toolkit/hunter
-- https://docs.composio.dev/kb/toolkit/hypeauditor
-- https://docs.composio.dev/kb/toolkit/hyperbrowser
-- https://docs.composio.dev/kb/toolkit/hyperise
-- https://docs.composio.dev/kb/toolkit/hystruct
-- https://docs.composio.dev/kb/toolkit/ibm_x_force_exchange
-- https://docs.composio.dev/kb/toolkit/icypeas
-- https://docs.composio.dev/kb/toolkit/identitycheck
-- https://docs.composio.dev/kb/toolkit/ignav_flights
-- https://docs.composio.dev/kb/toolkit/ignisign
-- https://docs.composio.dev/kb/toolkit/ilert
-- https://docs.composio.dev/kb/toolkit/i_love_pdf
-- https://docs.composio.dev/kb/toolkit/imagekit_io
-- https://docs.composio.dev/kb/toolkit/imagerouter
-- https://docs.composio.dev/kb/toolkit/imagior
-- https://docs.composio.dev/kb/toolkit/imejis_io
-- https://docs.composio.dev/kb/toolkit/imgbb
-- https://docs.composio.dev/kb/toolkit/imgix
-- https://docs.composio.dev/kb/toolkit/inblog
-- https://docs.composio.dev/kb/toolkit/incident_io
-- https://docs.composio.dev/kb/toolkit/influxdb_cloud
-- https://docs.composio.dev/kb/toolkit/inistate
-- https://docs.composio.dev/kb/toolkit/insighto_ai
-- https://docs.composio.dev/kb/toolkit/instacart
 - https://docs.composio.dev/kb/toolkit/instagram
 - https://docs.composio.dev/kb/toolkit/instantly
-- https://docs.composio.dev/kb/toolkit/instatus
-- https://docs.composio.dev/kb/toolkit/intelliprint
-- https://docs.composio.dev/kb/toolkit/invalid_bounce
-- https://docs.composio.dev/kb/toolkit/invofox
-- https://docs.composio.dev/kb/toolkit/inworld_ai
-- https://docs.composio.dev/kb/toolkit/ip2location
-- https://docs.composio.dev/kb/toolkit/ip2location_io
-- https://docs.composio.dev/kb/toolkit/ip2proxy
-- https://docs.composio.dev/kb/toolkit/ip2whois
-- https://docs.composio.dev/kb/toolkit/ipdata_co
-- https://docs.composio.dev/kb/toolkit/ipgeolocation
-- https://docs.composio.dev/kb/toolkit/ipinfo_io
-- https://docs.composio.dev/kb/toolkit/iplocate
-- https://docs.composio.dev/kb/toolkit/iqair_airvisual
-- https://docs.composio.dev/kb/toolkit/iterable
-- https://docs.composio.dev/kb/toolkit/iterate
-- https://docs.composio.dev/kb/toolkit/itm_platform
-- https://docs.composio.dev/kb/toolkit/jam
-- https://docs.composio.dev/kb/toolkit/jigsawstack
-- https://docs.composio.dev/kb/toolkit/jobnimbus
-- https://docs.composio.dev/kb/toolkit/jogg_ai
-- https://docs.composio.dev/kb/toolkit/jotform
-- https://docs.composio.dev/kb/toolkit/jumpcloud
-- https://docs.composio.dev/kb/toolkit/kadoa
-- https://docs.composio.dev/kb/toolkit/kaggle
-- https://docs.composio.dev/kb/toolkit/kaleido
-- https://docs.composio.dev/kb/toolkit/kanban_tool
-- https://docs.composio.dev/kb/toolkit/kanbanize
-- https://docs.composio.dev/kb/toolkit/kapso
-- https://docs.composio.dev/kb/toolkit/keen_io
-- https://docs.composio.dev/kb/toolkit/keyword
-- https://docs.composio.dev/kb/toolkit/keyzy
-- https://docs.composio.dev/kb/toolkit/kibana
 - https://docs.composio.dev/kb/toolkit/kickbox
-- https://docs.composio.dev/kb/toolkit/kieai
-- https://docs.composio.dev/kb/toolkit/kintone
-- https://docs.composio.dev/kb/toolkit/kit
-- https://docs.composio.dev/kb/toolkit/klazify
-- https://docs.composio.dev/kb/toolkit/knack
-- https://docs.composio.dev/kb/toolkit/ko_fi
-- https://docs.composio.dev/kb/toolkit/kobotoolbox
-- https://docs.composio.dev/kb/toolkit/kontent_ai
-- https://docs.composio.dev/kb/toolkit/kraken_io
-- https://docs.composio.dev/kb/toolkit/l2s
-- https://docs.composio.dev/kb/toolkit/lagrowthmachine
-- https://docs.composio.dev/kb/toolkit/labs64_netlicensing
-- https://docs.composio.dev/kb/toolkit/lakera_guard
-- https://docs.composio.dev/kb/toolkit/landbot
-- https://docs.composio.dev/kb/toolkit/langbase
-- https://docs.composio.dev/kb/toolkit/langfuse
-- https://docs.composio.dev/kb/toolkit/laposta
-- https://docs.composio.dev/kb/toolkit/lc_cx
-- https://docs.composio.dev/kb/toolkit/leadboxer
-- https://docs.composio.dev/kb/toolkit/leadfeeder
-- https://docs.composio.dev/kb/toolkit/leadiq
-- https://docs.composio.dev/kb/toolkit/leadoku
-- https://docs.composio.dev/kb/toolkit/leexi
-- https://docs.composio.dev/kb/toolkit/leiga
-- https://docs.composio.dev/kb/toolkit/lemlist
-- https://docs.composio.dev/kb/toolkit/lemon_squeezy
-- https://docs.composio.dev/kb/toolkit/lessonspace
-- https://docs.composio.dev/kb/toolkit/lettr
-- https://docs.composio.dev/kb/toolkit/leverly
-- https://docs.composio.dev/kb/toolkit/line
-- https://docs.composio.dev/kb/toolkit/linguapop
-- https://docs.composio.dev/kb/toolkit/linkedin_ads
-- https://docs.composio.dev/kb/toolkit/linkly
-- https://docs.composio.dev/kb/toolkit/listclean
-- https://docs.composio.dev/kb/toolkit/livesession
-- https://docs.composio.dev/kb/toolkit/llmwhisperer
-- https://docs.composio.dev/kb/toolkit/lob
-- https://docs.composio.dev/kb/toolkit/lodgify
-- https://docs.composio.dev/kb/toolkit/logo_dev
-- https://docs.composio.dev/kb/toolkit/lokalise
-- https://docs.composio.dev/kb/toolkit/loomio
-- https://docs.composio.dev/kb/toolkit/loops_so
-- https://docs.composio.dev/kb/toolkit/loyverse
-- https://docs.composio.dev/kb/toolkit/luma_labs
-- https://docs.composio.dev/kb/toolkit/lumify
-- https://docs.composio.dev/kb/toolkit/lusha
-- https://docs.composio.dev/kb/toolkit/lyzr
-- https://docs.composio.dev/kb/toolkit/magicslides
-- https://docs.composio.dev/kb/toolkit/magnetic
-- https://docs.composio.dev/kb/toolkit/mailbluster
-- https://docs.composio.dev/kb/toolkit/mailboxlayer
-- https://docs.composio.dev/kb/toolkit/mailcheck
-- https://docs.composio.dev/kb/toolkit/mailcoach
-- https://docs.composio.dev/kb/toolkit/mailercheck
-- https://docs.composio.dev/kb/toolkit/mailercloud
-- https://docs.composio.dev/kb/toolkit/mailersend
-- https://docs.composio.dev/kb/toolkit/mails_so
-- https://docs.composio.dev/kb/toolkit/mailslurp
-- https://docs.composio.dev/kb/toolkit/mailsoftly
-- https://docs.composio.dev/kb/toolkit/mailtrap
-- https://docs.composio.dev/kb/toolkit/make
-- https://docs.composio.dev/kb/toolkit/malwarebytes_mcp
-- https://docs.composio.dev/kb/toolkit/manus
-- https://docs.composio.dev/kb/toolkit/manyreach
-- https://docs.composio.dev/kb/toolkit/mapbox
-- https://docs.composio.dev/kb/toolkit/mapulus
 - https://docs.composio.dev/kb/toolkit/marketstack
-- https://docs.composio.dev/kb/toolkit/markup_ai
-- https://docs.composio.dev/kb/toolkit/matterport
-- https://docs.composio.dev/kb/toolkit/maxio
-- https://docs.composio.dev/kb/toolkit/melo
-- https://docs.composio.dev/kb/toolkit/mem
-- https://docs.composio.dev/kb/toolkit/memberspot
-- https://docs.composio.dev/kb/toolkit/memberstack
-- https://docs.composio.dev/kb/toolkit/membervault
-- https://docs.composio.dev/kb/toolkit/mercury_mcp
-- https://docs.composio.dev/kb/toolkit/mermaid_chart_mcp
-- https://docs.composio.dev/kb/toolkit/metabase
-- https://docs.composio.dev/kb/toolkit/metaphor
-- https://docs.composio.dev/kb/toolkit/mezmo
 - https://docs.composio.dev/kb/toolkit/onenote
-- https://docs.composio.dev/kb/toolkit/microsoft_power_bi
-- https://docs.composio.dev/kb/toolkit/microsoft_todo
-- https://docs.composio.dev/kb/toolkit/mindbody
-- https://docs.composio.dev/kb/toolkit/minelead
-- https://docs.composio.dev/kb/toolkit/minerstat
-- https://docs.composio.dev/kb/toolkit/mintlify
-- https://docs.composio.dev/kb/toolkit/missive
-- https://docs.composio.dev/kb/toolkit/mistral_ai
-- https://docs.composio.dev/kb/toolkit/mixmax
-- https://docs.composio.dev/kb/toolkit/mobbin_mcp
-- https://docs.composio.dev/kb/toolkit/moco
-- https://docs.composio.dev/kb/toolkit/modelry
-- https://docs.composio.dev/kb/toolkit/modem
-- https://docs.composio.dev/kb/toolkit/moderationapi
-- https://docs.composio.dev/kb/toolkit/monday_mcp
-- https://docs.composio.dev/kb/toolkit/moneybird
-- https://docs.composio.dev/kb/toolkit/moonclerk
-- https://docs.composio.dev/kb/toolkit/moosend
-- https://docs.composio.dev/kb/toolkit/mospi_mcp
-- https://docs.composio.dev/kb/toolkit/motion
-- https://docs.composio.dev/kb/toolkit/mrscraper
-- https://docs.composio.dev/kb/toolkit/msg91
-- https://docs.composio.dev/kb/toolkit/mx_technologies
-- https://docs.composio.dev/kb/toolkit/mx_toolbox
-- https://docs.composio.dev/kb/toolkit/myemailverifier
-- https://docs.composio.dev/kb/toolkit/namsor
-- https://docs.composio.dev/kb/toolkit/nango
-- https://docs.composio.dev/kb/toolkit/nano_nets
-- https://docs.composio.dev/kb/toolkit/nanonets_ocr
-- https://docs.composio.dev/kb/toolkit/nasa
-- https://docs.composio.dev/kb/toolkit/nasdaq
-- https://docs.composio.dev/kb/toolkit/needle
-- https://docs.composio.dev/kb/toolkit/neetoform
-- https://docs.composio.dev/kb/toolkit/neo4j
-- https://docs.composio.dev/kb/toolkit/nethunt_crm
-- https://docs.composio.dev/kb/toolkit/netlicensing
-- https://docs.composio.dev/kb/toolkit/neuronwriter
-- https://docs.composio.dev/kb/toolkit/neutrino
-- https://docs.composio.dev/kb/toolkit/neverbounce
-- https://docs.composio.dev/kb/toolkit/new_relic
-- https://docs.composio.dev/kb/toolkit/news_api
-- https://docs.composio.dev/kb/toolkit/nextdns
-- https://docs.composio.dev/kb/toolkit/niftyimages
-- https://docs.composio.dev/kb/toolkit/ninox
-- https://docs.composio.dev/kb/toolkit/nmkr_studio
-- https://docs.composio.dev/kb/toolkit/nocodb
-- https://docs.composio.dev/kb/toolkit/nocrm_io
-- https://docs.composio.dev/kb/toolkit/noloco
-- https://docs.composio.dev/kb/toolkit/northflank
-- https://docs.composio.dev/kb/toolkit/notebook_lm
-- https://docs.composio.dev/kb/toolkit/nozbe_teams
-- https://docs.composio.dev/kb/toolkit/npm
-- https://docs.composio.dev/kb/toolkit/ntfy
-- https://docs.composio.dev/kb/toolkit/nusii_proposals
-- https://docs.composio.dev/kb/toolkit/nutrient_document_web_services_api
-- https://docs.composio.dev/kb/toolkit/nutshell
-- https://docs.composio.dev/kb/toolkit/ocr_web_service
-- https://docs.composio.dev/kb/toolkit/ocrspace
 - https://docs.composio.dev/kb/toolkit/odoo
-- https://docs.composio.dev/kb/toolkit/oksign
-- https://docs.composio.dev/kb/toolkit/ollama
-- https://docs.composio.dev/kb/toolkit/omnisend
-- https://docs.composio.dev/kb/toolkit/onedesk
-- https://docs.composio.dev/kb/toolkit/onesignal_rest_api
-- https://docs.composio.dev/kb/toolkit/onesignal_user_auth
-- https://docs.composio.dev/kb/toolkit/onesimpleapi
-- https://docs.composio.dev/kb/toolkit/onetapcheckin
-- https://docs.composio.dev/kb/toolkit/oneup
-- https://docs.composio.dev/kb/toolkit/onlyoffice_docspace
-- https://docs.composio.dev/kb/toolkit/onlysocial
 - https://docs.composio.dev/kb/toolkit/openai
-- https://docs.composio.dev/kb/toolkit/opencage
-- https://docs.composio.dev/kb/toolkit/opengraph_io
-- https://docs.composio.dev/kb/toolkit/openlayer
-- https://docs.composio.dev/kb/toolkit/openperplex
-- https://docs.composio.dev/kb/toolkit/open_register
-- https://docs.composio.dev/kb/toolkit/openrouter
-- https://docs.composio.dev/kb/toolkit/openui
-- https://docs.composio.dev/kb/toolkit/openweather_api
-- https://docs.composio.dev/kb/toolkit/optimoroute
-- https://docs.composio.dev/kb/toolkit/order_desk
-- https://docs.composio.dev/kb/toolkit/orshot
-- https://docs.composio.dev/kb/toolkit/outline
-- https://docs.composio.dev/kb/toolkit/owl_protocol
-- https://docs.composio.dev/kb/toolkit/page_x
-- https://docs.composio.dev/kb/toolkit/page_vitals
-- https://docs.composio.dev/kb/toolkit/paperform
-- https://docs.composio.dev/kb/toolkit/paradym
-- https://docs.composio.dev/kb/toolkit/parallel
-- https://docs.composio.dev/kb/toolkit/parma
-- https://docs.composio.dev/kb/toolkit/parsehub
-- https://docs.composio.dev/kb/toolkit/parsera
-- https://docs.composio.dev/kb/toolkit/parseur
-- https://docs.composio.dev/kb/toolkit/parsio
-- https://docs.composio.dev/kb/toolkit/parsio_io
-- https://docs.composio.dev/kb/toolkit/passcreator
-- https://docs.composio.dev/kb/toolkit/passslot
-- https://docs.composio.dev/kb/toolkit/payhere
-- https://docs.composio.dev/kb/toolkit/payhip
-- https://docs.composio.dev/kb/toolkit/paypal
-- https://docs.composio.dev/kb/toolkit/paystack
-- https://docs.composio.dev/kb/toolkit/pdf_api_io
-- https://docs.composio.dev/kb/toolkit/pdf_co
-- https://docs.composio.dev/kb/toolkit/pdf4me
-- https://docs.composio.dev/kb/toolkit/pdfgen
-- https://docs.composio.dev/kb/toolkit/pdfless
-- https://docs.composio.dev/kb/toolkit/pdfmonkey
-- https://docs.composio.dev/kb/toolkit/penpot
-- https://docs.composio.dev/kb/toolkit/perigon
-- https://docs.composio.dev/kb/toolkit/persistiq
-- https://docs.composio.dev/kb/toolkit/persona
-- https://docs.composio.dev/kb/toolkit/pexels
-- https://docs.composio.dev/kb/toolkit/phantombuster
-- https://docs.composio.dev/kb/toolkit/piloterr
-- https://docs.composio.dev/kb/toolkit/pilvio
-- https://docs.composio.dev/kb/toolkit/pinata
-- https://docs.composio.dev/kb/toolkit/pinecone
-- https://docs.composio.dev/kb/toolkit/pingdom
-- https://docs.composio.dev/kb/toolkit/pinterest
-- https://docs.composio.dev/kb/toolkit/pinterest_ads
-- https://docs.composio.dev/kb/toolkit/pipeline_crm
-- https://docs.composio.dev/kb/toolkit/placid
-- https://docs.composio.dev/kb/toolkit/plain
-- https://docs.composio.dev/kb/toolkit/planly
-- https://docs.composio.dev/kb/toolkit/planyo_online_booking
-- https://docs.composio.dev/kb/toolkit/plasmic
-- https://docs.composio.dev/kb/toolkit/platerecognizer
-- https://docs.composio.dev/kb/toolkit/plausible_analytics
-- https://docs.composio.dev/kb/toolkit/plisio
-- https://docs.composio.dev/kb/toolkit/plivo
-- https://docs.composio.dev/kb/toolkit/pneumatic
-- https://docs.composio.dev/kb/toolkit/pocketsmith
-- https://docs.composio.dev/kb/toolkit/pointagram
-- https://docs.composio.dev/kb/toolkit/polygon
-- https://docs.composio.dev/kb/toolkit/polygon_io
-- https://docs.composio.dev/kb/toolkit/polymarket_us
-- https://docs.composio.dev/kb/toolkit/polymarket
-- https://docs.composio.dev/kb/toolkit/poof
-- https://docs.composio.dev/kb/toolkit/pophive_mcp
-- https://docs.composio.dev/kb/toolkit/postal_data_api
-- https://docs.composio.dev/kb/toolkit/postalytics
-- https://docs.composio.dev/kb/toolkit/postgrid
-- https://docs.composio.dev/kb/toolkit/postgrid_verify
-- https://docs.composio.dev/kb/toolkit/postiz_mcp
-- https://docs.composio.dev/kb/toolkit/postman
-- https://docs.composio.dev/kb/toolkit/postmark
-- https://docs.composio.dev/kb/toolkit/predict_leads
-- https://docs.composio.dev/kb/toolkit/prerender
-- https://docs.composio.dev/kb/toolkit/printautopilot
-- https://docs.composio.dev/kb/toolkit/printify
-- https://docs.composio.dev/kb/toolkit/prisma
-- https://docs.composio.dev/kb/toolkit/prismic
-- https://docs.composio.dev/kb/toolkit/proabono
-- https://docs.composio.dev/kb/toolkit/procfu
-- https://docs.composio.dev/kb/toolkit/productlane
-- https://docs.composio.dev/kb/toolkit/project_bubble
-- https://docs.composio.dev/kb/toolkit/prompt_hub
-- https://docs.composio.dev/kb/toolkit/promptlayer
-- https://docs.composio.dev/kb/toolkit/promptmate_io
-- https://docs.composio.dev/kb/toolkit/proofly
-- https://docs.composio.dev/kb/toolkit/prospeo
-- https://docs.composio.dev/kb/toolkit/proxiedmail
-- https://docs.composio.dev/kb/toolkit/pumble
-- https://docs.composio.dev/kb/toolkit/push_by_techulus
-- https://docs.composio.dev/kb/toolkit/push_alert
-- https://docs.composio.dev/kb/toolkit/pushbullet
-- https://docs.composio.dev/kb/toolkit/pushinator
-- https://docs.composio.dev/kb/toolkit/pushover
-- https://docs.composio.dev/kb/toolkit/pylon_mcp
-- https://docs.composio.dev/kb/toolkit/quaderno
 - https://docs.composio.dev/kb/toolkit/quickbooks
-- https://docs.composio.dev/kb/toolkit/quintadb
-- https://docs.composio.dev/kb/toolkit/quo
-- https://docs.composio.dev/kb/toolkit/radar
-- https://docs.composio.dev/kb/toolkit/ragic
-- https://docs.composio.dev/kb/toolkit/ragie
-- https://docs.composio.dev/kb/toolkit/railway
-- https://docs.composio.dev/kb/toolkit/raindrop
-- https://docs.composio.dev/kb/toolkit/raisely
 - https://docs.composio.dev/kb/toolkit/ramp
-- https://docs.composio.dev/kb/toolkit/rawg_video_games_database
-- https://docs.composio.dev/kb/toolkit/razorpay
-- https://docs.composio.dev/kb/toolkit/re_amaze
-- https://docs.composio.dev/kb/toolkit/readwise_reader
-- https://docs.composio.dev/kb/toolkit/realphonevalidation
-- https://docs.composio.dev/kb/toolkit/recruitee
-- https://docs.composio.dev/kb/toolkit/redcircle_api
-- https://docs.composio.dev/kb/toolkit/reddit_ads
-- https://docs.composio.dev/kb/toolkit/redirect_pizza
-- https://docs.composio.dev/kb/toolkit/referralrock
-- https://docs.composio.dev/kb/toolkit/refiner
-- https://docs.composio.dev/kb/toolkit/reloadly
-- https://docs.composio.dev/kb/toolkit/remarkety
-- https://docs.composio.dev/kb/toolkit/remote_retrieval
-- https://docs.composio.dev/kb/toolkit/remove_bg
-- https://docs.composio.dev/kb/toolkit/render
-- https://docs.composio.dev/kb/toolkit/renderform
-- https://docs.composio.dev/kb/toolkit/rentman
-- https://docs.composio.dev/kb/toolkit/repairshopr
-- https://docs.composio.dev/kb/toolkit/replicate
-- https://docs.composio.dev/kb/toolkit/reply
-- https://docs.composio.dev/kb/toolkit/reply_io
-- https://docs.composio.dev/kb/toolkit/request_tracker
-- https://docs.composio.dev/kb/toolkit/resend
-- https://docs.composio.dev/kb/toolkit/respond_io
-- https://docs.composio.dev/kb/toolkit/retailed
-- https://docs.composio.dev/kb/toolkit/retently
-- https://docs.composio.dev/kb/toolkit/rev_ai
-- https://docs.composio.dev/kb/toolkit/rev
-- https://docs.composio.dev/kb/toolkit/revolt
-- https://docs.composio.dev/kb/toolkit/ritekit
-- https://docs.composio.dev/kb/toolkit/rize
-- https://docs.composio.dev/kb/toolkit/rkvst
-- https://docs.composio.dev/kb/toolkit/roam
-- https://docs.composio.dev/kb/toolkit/roboflow
-- https://docs.composio.dev/kb/toolkit/rocketadmin
-- https://docs.composio.dev/kb/toolkit/rollbar
-- https://docs.composio.dev/kb/toolkit/rootly
-- https://docs.composio.dev/kb/toolkit/rosette_text_analytics
-- https://docs.composio.dev/kb/toolkit/route4me
-- https://docs.composio.dev/kb/toolkit/rudderstack_transformation
-- https://docs.composio.dev/kb/toolkit/runpod
-- https://docs.composio.dev/kb/toolkit/runway
-- https://docs.composio.dev/kb/toolkit/safetyculture
-- https://docs.composio.dev/kb/toolkit/salesflare
-- https://docs.composio.dev/kb/toolkit/salesforce_service_cloud
-- https://docs.composio.dev/kb/toolkit/salesmate
-- https://docs.composio.dev/kb/toolkit/salesrobot
-- https://docs.composio.dev/kb/toolkit/sanity
-- https://docs.composio.dev/kb/toolkit/sap_successfactors
-- https://docs.composio.dev/kb/toolkit/saperly
-- https://docs.composio.dev/kb/toolkit/satismeter
-- https://docs.composio.dev/kb/toolkit/saucelabs
-- https://docs.composio.dev/kb/toolkit/scale_ai
-- https://docs.composio.dev/kb/toolkit/scheduleonce
-- https://docs.composio.dev/kb/toolkit/scrape_do
-- https://docs.composio.dev/kb/toolkit/scrapegraph_ai
-- https://docs.composio.dev/kb/toolkit/scrapfly
-- https://docs.composio.dev/kb/toolkit/scrapingant
-- https://docs.composio.dev/kb/toolkit/scrapingbee
-- https://docs.composio.dev/kb/toolkit/screenshot_api
-- https://docs.composio.dev/kb/toolkit/screenshot_fyi
-- https://docs.composio.dev/kb/toolkit/seam
-- https://docs.composio.dev/kb/toolkit/search_api
-- https://docs.composio.dev/kb/toolkit/seat_geek
-- https://docs.composio.dev/kb/toolkit/securitytrails
-- https://docs.composio.dev/kb/toolkit/seek_table
-- https://docs.composio.dev/kb/toolkit/segment
-- https://docs.composio.dev/kb/toolkit/segmetrics
-- https://docs.composio.dev/kb/toolkit/sendbird
-- https://docs.composio.dev/kb/toolkit/sendbird_ai_chabot
-- https://docs.composio.dev/kb/toolkit/sender
-- https://docs.composio.dev/kb/toolkit/sendfox
-- https://docs.composio.dev/kb/toolkit/sendlane
-- https://docs.composio.dev/kb/toolkit/sendloop
-- https://docs.composio.dev/kb/toolkit/sendspark
-- https://docs.composio.dev/kb/toolkit/sensibo
-- https://docs.composio.dev/kb/toolkit/seqera
-- https://docs.composio.dev/kb/toolkit/sequenzy
-- https://docs.composio.dev/kb/toolkit/serpdog
-- https://docs.composio.dev/kb/toolkit/serphouse
-- https://docs.composio.dev/kb/toolkit/serply
-- https://docs.composio.dev/kb/toolkit/serveravatar
-- https://docs.composio.dev/kb/toolkit/sevdesk
-- https://docs.composio.dev/kb/toolkit/seven_io
-- https://docs.composio.dev/kb/toolkit/sharepoint_graph
-- https://docs.composio.dev/kb/toolkit/shipday
-- https://docs.composio.dev/kb/toolkit/shipengine
-- https://docs.composio.dev/kb/toolkit/shippo
-- https://docs.composio.dev/kb/toolkit/short_io
-- https://docs.composio.dev/kb/toolkit/short_menu
-- https://docs.composio.dev/kb/toolkit/shorten_rest
-- https://docs.composio.dev/kb/toolkit/shortpixel
-- https://docs.composio.dev/kb/toolkit/shotstack
-- https://docs.composio.dev/kb/toolkit/sideshow
-- https://docs.composio.dev/kb/toolkit/sideshow_mcp
-- https://docs.composio.dev/kb/toolkit/sidetracker
-- https://docs.composio.dev/kb/toolkit/signaturely
-- https://docs.composio.dev/kb/toolkit/signpath
-- https://docs.composio.dev/kb/toolkit/signwell
-- https://docs.composio.dev/kb/toolkit/similarweb_digitalrank_api
-- https://docs.composio.dev/kb/toolkit/simla_com
-- https://docs.composio.dev/kb/toolkit/simple_analytics
-- https://docs.composio.dev/kb/toolkit/simplekpi
-- https://docs.composio.dev/kb/toolkit/simple_localize
-- https://docs.composio.dev/kb/toolkit/simplero
-- https://docs.composio.dev/kb/toolkit/siteleaf
-- https://docs.composio.dev/kb/toolkit/sitespeakai
-- https://docs.composio.dev/kb/toolkit/skyfire
-- https://docs.composio.dev/kb/toolkit/skyvern
-- https://docs.composio.dev/kb/toolkit/slazzer
-- https://docs.composio.dev/kb/toolkit/slidesgpt_mcp
-- https://docs.composio.dev/kb/toolkit/slite
-- https://docs.composio.dev/kb/toolkit/smartlead
-- https://docs.composio.dev/kb/toolkit/smartproxy
-- https://docs.composio.dev/kb/toolkit/sms_alert
-- https://docs.composio.dev/kb/toolkit/smtp2go
 - https://docs.composio.dev/kb/toolkit/snapchat
-- https://docs.composio.dev/kb/toolkit/sncf
-- https://docs.composio.dev/kb/toolkit/snowflake_basic
-- https://docs.composio.dev/kb/toolkit/softr
-- https://docs.composio.dev/kb/toolkit/solcast
-- https://docs.composio.dev/kb/toolkit/soundcloud
-- https://docs.composio.dev/kb/toolkit/sourcegraph
-- https://docs.composio.dev/kb/toolkit/specific
-- https://docs.composio.dev/kb/toolkit/speechmatics
-- https://docs.composio.dev/kb/toolkit/splitwise
-- https://docs.composio.dev/kb/toolkit/spoki
-- https://docs.composio.dev/kb/toolkit/spondyr
 - https://docs.composio.dev/kb/toolkit/spotify
-- https://docs.composio.dev/kb/toolkit/spotlightr
-- https://docs.composio.dev/kb/toolkit/spydra
-- https://docs.composio.dev/kb/toolkit/sslmate_cert_spotter_api
-- https://docs.composio.dev/kb/toolkit/stack_ai
-- https://docs.composio.dev/kb/toolkit/stackby
-- https://docs.composio.dev/kb/toolkit/stannp
-- https://docs.composio.dev/kb/toolkit/starshipit
-- https://docs.composio.dev/kb/toolkit/starton
-- https://docs.composio.dev/kb/toolkit/statuscake
-- https://docs.composio.dev/kb/toolkit/storeganise
-- https://docs.composio.dev/kb/toolkit/storerocket
-- https://docs.composio.dev/kb/toolkit/stormboard
-- https://docs.composio.dev/kb/toolkit/stormglass_io
-- https://docs.composio.dev/kb/toolkit/storyblok
 - https://docs.composio.dev/kb/toolkit/strava
-- https://docs.composio.dev/kb/toolkit/streamtime
-- https://docs.composio.dev/kb/toolkit/studio_by_ai21_labs
-- https://docs.composio.dev/kb/toolkit/suitedash
-- https://docs.composio.dev/kb/toolkit/supabase_mcp
-- https://docs.composio.dev/kb/toolkit/supabase2_mcp
-- https://docs.composio.dev/kb/toolkit/supadata
-- https://docs.composio.dev/kb/toolkit/superchat
-- https://docs.composio.dev/kb/toolkit/supermemory
-- https://docs.composio.dev/kb/toolkit/supersaas
-- https://docs.composio.dev/kb/toolkit/supportbee
-- https://docs.composio.dev/kb/toolkit/supportivekoala
-- https://docs.composio.dev/kb/toolkit/surecontact
-- https://docs.composio.dev/kb/toolkit/svix
-- https://docs.composio.dev/kb/toolkit/swaggerhub
-- https://docs.composio.dev/kb/toolkit/swarmsyncai
-- https://docs.composio.dev/kb/toolkit/sympla
-- https://docs.composio.dev/kb/toolkit/synthflow_ai
-- https://docs.composio.dev/kb/toolkit/taggun
-- https://docs.composio.dev/kb/toolkit/talenthr
-- https://docs.composio.dev/kb/toolkit/tally
-- https://docs.composio.dev/kb/toolkit/tapfiliate
-- https://docs.composio.dev/kb/toolkit/taskrabbit_mcp
-- https://docs.composio.dev/kb/toolkit/tave
-- https://docs.composio.dev/kb/toolkit/tavily_mcp
-- https://docs.composio.dev/kb/toolkit/taxjar
-- https://docs.composio.dev/kb/toolkit/teamcamp
-- https://docs.composio.dev/kb/toolkit/teamwork
 - https://docs.composio.dev/kb/toolkit/telegram
-- https://docs.composio.dev/kb/toolkit/telnyx
-- https://docs.composio.dev/kb/toolkit/teltel
-- https://docs.composio.dev/kb/toolkit/templated
-- https://docs.composio.dev/kb/toolkit/textcortex
-- https://docs.composio.dev/kb/toolkit/textit
-- https://docs.composio.dev/kb/toolkit/thanks_io
-- https://docs.composio.dev/kb/toolkit/the_odds_api
-- https://docs.composio.dev/kb/toolkit/the_org
-- https://docs.composio.dev/kb/toolkit/ticketmaster
 - https://docs.composio.dev/kb/toolkit/ticktick
-- https://docs.composio.dev/kb/toolkit/tidb_cloud
-- https://docs.composio.dev/kb/toolkit/tidy
 - https://docs.composio.dev/kb/toolkit/tiktok
-- https://docs.composio.dev/kb/toolkit/timelinesai
-- https://docs.composio.dev/kb/toolkit/timelink
-- https://docs.composio.dev/kb/toolkit/tinyfish_mcp
-- https://docs.composio.dev/kb/toolkit/tldv
-- https://docs.composio.dev/kb/toolkit/toggl
-- https://docs.composio.dev/kb/toolkit/toggl_track
-- https://docs.composio.dev/kb/toolkit/token_metrics
-- https://docs.composio.dev/kb/toolkit/tomba
-- https://docs.composio.dev/kb/toolkit/tomtom
-- https://docs.composio.dev/kb/toolkit/tpscheck
-- https://docs.composio.dev/kb/toolkit/trackdesk
-- https://docs.composio.dev/kb/toolkit/transloadit
-- https://docs.composio.dev/kb/toolkit/triggercmd
-- https://docs.composio.dev/kb/toolkit/tripadvisor
-- https://docs.composio.dev/kb/toolkit/tripadvisor_content_api
-- https://docs.composio.dev/kb/toolkit/trivago_mcp
-- https://docs.composio.dev/kb/toolkit/truvera
-- https://docs.composio.dev/kb/toolkit/turbot_pipes
-- https://docs.composio.dev/kb/toolkit/turso
-- https://docs.composio.dev/kb/toolkit/twelve_data
-- https://docs.composio.dev/kb/toolkit/twittershots
-- https://docs.composio.dev/kb/toolkit/twocaptcha
-- https://docs.composio.dev/kb/toolkit/typecast
-- https://docs.composio.dev/kb/toolkit/typeform
-- https://docs.composio.dev/kb/toolkit/typless
-- https://docs.composio.dev/kb/toolkit/u301
-- https://docs.composio.dev/kb/toolkit/unifi
-- https://docs.composio.dev/kb/toolkit/unione
-- https://docs.composio.dev/kb/toolkit/unisender
-- https://docs.composio.dev/kb/toolkit/uniswap_api
-- https://docs.composio.dev/kb/toolkit/updown_io
-- https://docs.composio.dev/kb/toolkit/uplisting
-- https://docs.composio.dev/kb/toolkit/upload_to_url
-- https://docs.composio.dev/kb/toolkit/upload_post
-- https://docs.composio.dev/kb/toolkit/uploadcare
-- https://docs.composio.dev/kb/toolkit/uptimerobot
-- https://docs.composio.dev/kb/toolkit/userflow
-- https://docs.composio.dev/kb/toolkit/userlist
-- https://docs.composio.dev/kb/toolkit/v0
-- https://docs.composio.dev/kb/toolkit/vapi
-- https://docs.composio.dev/kb/toolkit/vast_ai
-- https://docs.composio.dev/kb/toolkit/vectorshift
-- https://docs.composio.dev/kb/toolkit/veo
-- https://docs.composio.dev/kb/toolkit/vercel
-- https://docs.composio.dev/kb/toolkit/verifi_email
-- https://docs.composio.dev/kb/toolkit/verifiedemail
-- https://docs.composio.dev/kb/toolkit/veriphone
-- https://docs.composio.dev/kb/toolkit/veryfi
-- https://docs.composio.dev/kb/toolkit/vestaboard
-- https://docs.composio.dev/kb/toolkit/viator_mcp
-- https://docs.composio.dev/kb/toolkit/video_db
-- https://docs.composio.dev/kb/toolkit/viral_loops
-- https://docs.composio.dev/kb/toolkit/virustotal
-- https://docs.composio.dev/kb/toolkit/visualping
-- https://docs.composio.dev/kb/toolkit/vlm_run
-- https://docs.composio.dev/kb/toolkit/wachete
-- https://docs.composio.dev/kb/toolkit/waiverfile
-- https://docs.composio.dev/kb/toolkit/wanikani
-- https://docs.composio.dev/kb/toolkit/wati
-- https://docs.composio.dev/kb/toolkit/webcrawlerapi
-- https://docs.composio.dev/kb/toolkit/webpushr
-- https://docs.composio.dev/kb/toolkit/webscraper_io
-- https://docs.composio.dev/kb/toolkit/webscraping_ai
-- https://docs.composio.dev/kb/toolkit/webvizio
-- https://docs.composio.dev/kb/toolkit/weights_and_biases
-- https://docs.composio.dev/kb/toolkit/whautomate
-- https://docs.composio.dev/kb/toolkit/whoisfreaks
-- https://docs.composio.dev/kb/toolkit/whop
-- https://docs.composio.dev/kb/toolkit/winston_ai
-- https://docs.composio.dev/kb/toolkit/wisepops
-- https://docs.composio.dev/kb/toolkit/wistia
-- https://docs.composio.dev/kb/toolkit/wit_ai
-- https://docs.composio.dev/kb/toolkit/wix
-- https://docs.composio.dev/kb/toolkit/wix_mcp
-- https://docs.composio.dev/kb/toolkit/wiza
-- https://docs.composio.dev/kb/toolkit/wolfram_alpha_api
-- https://docs.composio.dev/kb/toolkit/woodpecker_co
-- https://docs.composio.dev/kb/toolkit/woop_social
-- https://docs.composio.dev/kb/toolkit/wordpress_com
-- https://docs.composio.dev/kb/toolkit/workable
 - https://docs.composio.dev/kb/toolkit/workday
-- https://docs.composio.dev/kb/toolkit/worksnaps
-- https://docs.composio.dev/kb/toolkit/world_news_api
-- https://docs.composio.dev/kb/toolkit/writer
-- https://docs.composio.dev/kb/toolkit/wufoo
-- https://docs.composio.dev/kb/toolkit/xata
-- https://docs.composio.dev/kb/toolkit/y_gy
-- https://docs.composio.dev/kb/toolkit/yelp
-- https://docs.composio.dev/kb/toolkit/youtube_transcript
-- https://docs.composio.dev/kb/toolkit/zep
-- https://docs.composio.dev/kb/toolkit/zeplin
-- https://docs.composio.dev/kb/toolkit/zernio_mcp
-- https://docs.composio.dev/kb/toolkit/zerobounce
-- https://docs.composio.dev/kb/toolkit/zigpoll
-- https://docs.composio.dev/kb/toolkit/ziprecruiter_mcp
-- https://docs.composio.dev/kb/toolkit/zixflow
-- https://docs.composio.dev/kb/toolkit/zoom_chat
-- https://docs.composio.dev/kb/toolkit/zulip
-- https://docs.composio.dev/kb/toolkit/zylvie
-- https://docs.composio.dev/kb/toolkit/zyte_api
 
 ---
 
@@ -2446,6 +1222,74 @@ Some generated descriptions may advertise a larger limit; the deployed endpoint 
 
 ---
 
+# Move a Composio Integration from Prototype to Production (/kb/guide/platform-production-readiness)
+
+## Replace example user IDs with stable application user IDs [#replace-example-user-ids-with-stable-application-user-ids]
+
+Create sessions and connected accounts with a stable identifier from the
+application database, such as a UUID or primary key. Do not use an email
+address that can change, and never use `default` in production. Composio uses
+the user ID to isolate connections and tool calls, so each application user
+must resolve to the same Composio user ID across sessions.
+
+* [Authentication and user IDs](https://docs.composio.dev/docs/authentication)
+* [How Composio sessions work](https://docs.composio.dev/docs/how-composio-works)
+
+## Isolate environments with separate Composio projects when needed [#isolate-environments-with-separate-composio-projects-when-needed]
+
+A Composio project scopes its API keys, connected accounts, auth configs, and
+webhooks. Use separate projects for development, staging, and production when
+those resources must not overlap. Use the API key for the intended project in
+each deployment, and create environment-specific auth configs when the OAuth
+apps, scopes, or provider credentials differ.
+
+* [Composio glossary: Project](https://docs.composio.dev/reference/glossary#project)
+* [Configure authentication](https://docs.composio.dev/docs/tools-direct/authenticating-tools)
+
+## Switch from managed auth only when production requirements call for it [#switch-from-managed-auth-only-when-production-requirements-call-for-it]
+
+Composio managed auth is suitable for development, internal tools, and early
+prototypes. Create a custom auth config when users must see the application's
+own OAuth brand, the integration needs custom scopes or a dedicated provider
+quota, polling requirements differ, or the provider uses a custom instance.
+Pass the resulting auth config ID to the session; creating the config alone
+does not make the session use it.
+
+* [Managed vs custom auth](https://docs.composio.dev/docs/authentication/custom-app-vs-managed-app)
+* [Controlling OAuth scopes](https://docs.composio.dev/docs/authentication/controlling-scopes)
+
+## Restrict the production session to the capabilities the agent needs [#restrict-the-production-session-to-the-capabilities-the-agent-needs]
+
+Set toolkit, tool, and behavior-tag filters when creating the session. For a
+sensitive or deterministic workflow, prefer an explicit allowlist of exact
+tool slugs. For a broader read-only agent, filter on `readOnlyHint` and disable
+`destructiveHint`, then inspect the resulting tool set before rollout.
+
+* [Configure session tool access](https://docs.composio.dev/docs/configuring-sessions)
+* [Create read-only and restricted sessions](/kb/guide/platform-session-tool-policies)
+
+## Reuse a stored session until the user or configuration changes [#reuse-a-stored-session-until-the-user-or-configuration-changes]
+
+Store the session ID and restore it with `composio.use(session_id)` instead of
+creating a new session for every turn. Create a new session for a different
+user or a materially different setup, such as a new tool policy or auth-config
+mapping. A session preserves its scoped runtime state, but it is not the
+language model's conversation memory.
+
+* [Reuse a session](https://docs.composio.dev/docs/how-composio-works#how-sessions-behave)
+
+## Test production trigger handling through the real webhook path [#test-production-trigger-handling-through-the-real-webhook-path]
+
+The local `subscribe()` stream is useful for inspecting events, but it bypasses
+the production webhook handler and signature verification. Before rollout,
+forward events to the real local handler or use a tunnel, verify the signed
+payload with `parse()`, and then register the production HTTPS webhook URL for
+the production project.
+
+* [Receive trigger events locally and in production](https://docs.composio.dev/docs/setting-up-triggers/subscribing-to-events)
+
+---
+
 # Project API Key Permissions (/kb/guide/platform-project-api-key-permissions)
 
 ## Proxy Execute requires an explicitly allowed Project API key [#proxy-execute-requires-an-explicitly-allowed-project-api-key]
@@ -2577,6 +1421,148 @@ The override above can be applied directly; no release-specific promise is requi
 
 ---
 
+# Create Read-Only and Restricted Composio Sessions (/kb/guide/platform-session-tool-policies)
+
+## Filter a broad read-only session with behavior tags [#filter-a-broad-read-only-session-with-behavior-tags]
+
+Use session-level behavior tags when the agent may discover tools across
+multiple toolkits but should only receive tools marked as read-only. The same
+filters are enforced when the session executes tools.
+
+**Python**
+
+```python
+session = composio.sessions.create(
+    user_id="user_123",
+    tags={
+        "enable": ["readOnlyHint"],
+        "disable": ["destructiveHint"],
+    },
+)
+```
+
+**TypeScript**
+
+```text
+const session = await composio.create("user_123", {
+  tags: {
+    enable: ["readOnlyHint"],
+    disable: ["destructiveHint"],
+  },
+});
+```
+
+Behavior tags describe tool behavior. Inspect the tools the session exposes
+before rollout, especially when a workflow handles sensitive data.
+
+* [Filter tools by tags](https://docs.composio.dev/docs/configuring-sessions#filtering-tools-by-tags)
+
+## Use exact tool allowlists for the narrowest policy [#use-exact-tool-allowlists-for-the-narrowest-policy]
+
+For a workflow with a known set of operations, allow only the exact tool slugs
+it requires. An allowlist avoids admitting a newly added tool merely because it
+shares a toolkit or behavior tag.
+
+**Python**
+
+```python
+session = composio.sessions.create(
+    user_id="user_123",
+    tools={
+        "gmail": {"enable": ["GMAIL_FETCH_EMAILS"]},
+        "github": {"enable": ["GITHUB_GET_AN_ISSUE"]},
+    },
+)
+```
+
+**TypeScript**
+
+```text
+const session = await composio.create("user_123", {
+  tools: {
+    gmail: { enable: ["GMAIL_FETCH_EMAILS"] },
+    github: { enable: ["GITHUB_GET_AN_ISSUE"] },
+  },
+});
+```
+
+* [Enable and disable specific tools](https://docs.composio.dev/docs/configuring-sessions#enabling-or-disabling-specific-tools)
+
+## Combine provider scopes with session tool restrictions [#combine-provider-scopes-with-session-tool-restrictions]
+
+OAuth scopes control what the provider grants to a connected account. Session
+filters control which Composio tools the agent can discover and execute. Use
+both layers for least privilege: request only the provider scopes the use case
+needs, then restrict the session to the intended tools.
+
+Changing an auth config's scopes affects new connections only. Existing users
+keep their prior grants until they reconnect. Pass the intended auth config ID
+to the session, keyed by toolkit, or the session will not request those scopes.
+
+* [Control OAuth scopes](https://docs.composio.dev/docs/authentication/controlling-scopes)
+* [Select an auth config in a session](https://docs.composio.dev/docs/authentication/custom-app-vs-managed-app#create-a-custom-auth-config)
+
+## Apply toolkit-specific exceptions without widening every toolkit [#apply-toolkit-specific-exceptions-without-widening-every-toolkit]
+
+Set a global tag policy and override it only for a named toolkit. This is safer
+than relaxing the global policy for the entire session.
+
+**Python**
+
+```python
+session = composio.sessions.create(
+    user_id="user_123",
+    tags=["readOnlyHint"],
+    tools={
+        "github": {"tags": {"disable": ["destructiveHint"]}},
+        "gmail": {"tags": ["readOnlyHint"]},
+    },
+)
+```
+
+**TypeScript**
+
+```text
+const session = await composio.create("user_123", {
+  tags: ["readOnlyHint"],
+  tools: {
+    github: { tags: { disable: ["destructiveHint"] } },
+    gmail: { tags: ["readOnlyHint"] },
+  },
+});
+```
+
+* [Toolkit-specific tag filters](https://docs.composio.dev/docs/configuring-sessions#filtering-tools-by-tags)
+
+## Disable the session sandbox when the workflow does not need code execution [#disable-the-session-sandbox-when-the-workflow-does-not-need-code-execution]
+
+Session tool filters govern app tools. Sessions also include remote sandbox
+tools by default. Disable the sandbox for a tightly constrained workflow that
+does not need Python, shell, file processing, or remote workbench execution.
+
+**Python**
+
+```python
+session = composio.sessions.create(
+    user_id="user_123",
+    tags=["readOnlyHint"],
+    sandbox={"enable": False},
+)
+```
+
+**TypeScript**
+
+```text
+const session = await composio.create("user_123", {
+  tags: ["readOnlyHint"],
+  sandbox: { enable: false },
+});
+```
+
+* [Disable the session sandbox](https://docs.composio.dev/docs/configuring-sessions#disabling-the-sandbox)
+
+---
+
 # Tool Router Workbench Retention (/kb/guide/platform-tool-router-workbench)
 
 Use this when customers ask whether Tool Router workbench state persists forever, or whether personal data used in the remote workbench is retained indefinitely.
@@ -2643,7 +1629,7 @@ After upgrading, fetch the exact tool again and verify every internal `$ref` has
 
 ## Ahrefs actions must call api.ahrefs.com, not ahrefs.com [#ahrefs-actions-must-call-apiahrefscom-not-ahrefscom]
 
-Ahrefs API calls should use the API host [https://api.ahrefs.com/v3](https://api.ahrefs.com/v3). If Ahrefs actions or connection checks are hitting [https://ahrefs.com/v3](https://ahrefs.com/v3) and returning 404 HTML, treat it as a connector base-URL configuration problem rather than an API-key or request-payload issue. Confirm the failing request is using api.ahrefs.com; if it is not, contact Composio support with the redacted request or log ID for connector review.
+Ahrefs API calls should use the API host `https://api.ahrefs.com/v3`. If Ahrefs actions or connection checks are hitting `https://ahrefs.com/v3` and returning 404 HTML, treat it as a connector base-URL configuration problem rather than an API-key or request-payload issue. Confirm the failing request is using api.ahrefs.com; if it is not, contact Composio support with the redacted request or log ID for connector review.
 
 ---
 
@@ -2799,11 +1785,12 @@ Use this guide to configure Canvas authentication and permissions, set up trigge
 
 # ClickUp (/kb/guide/toolkits-clickup)
 
-## ClickUp uses your OAuth or API-key credentials [#clickup-uses-your-oauth-or-api-key-credentials]
+## ClickUp supports managed OAuth, custom OAuth, and API-key credentials [#clickup-supports-managed-oauth-custom-oauth-and-api-key-credentials]
 
-Create the ClickUp auth config with your OAuth app or API-key
-credentials. In newer SDK/API flows, use the v3 auth config nano ID (`ac_...`)
-rather than older v1/v2 integration assumptions.
+Use Composio-managed OAuth for the standard connection flow. Use a custom
+ClickUp OAuth app or API-key credentials when you need greater control.
+In newer SDK/API flows, use the v3 auth config nano ID (`ac_...`) rather than
+older v1/v2 integration assumptions.
 
 ## ClickUp custom OAuth should use the Composio callback URL registered in the ClickUp app [#clickup-custom-oauth-should-use-the-composio-callback-url-registered-in-the-clickup-app]
 
@@ -2811,7 +1798,7 @@ For ClickUp custom OAuth, make sure the redirect URL in the ClickUp app matches 
 
 ## ClickUp folders and tasks are supported through `CLICKUP_GET_FOLDERS` and `CLICKUP_GET_TASKS` [#clickup-folders-and-tasks-are-supported-through-clickup_get_folders-and-clickup_get_tasks]
 
-For ClickUp folder/task-list workflows, use supported tools such as `CLICKUP_GET_FOLDERS` and `CLICKUP_GET_TASKS`. If a more specific ClickUp endpoint is missing, submit it through the Composio request portal.
+For ClickUp folder/task-list workflows, use supported tools such as `CLICKUP_GET_FOLDERS` and `CLICKUP_GET_TASKS`. If a more specific ClickUp endpoint is missing, request that tool through the standard tool-request flow.
 
 ---
 
@@ -2859,17 +1846,17 @@ The Databricks API key credentials are entered during the connection flow. In co
 
 # DigitalOcean authentication (/kb/guide/toolkits-digital-ocean)
 
-## DigitalOcean supports customer-owned OAuth2 or a personal access token [#digitalocean-supports-customer-owned-oauth2-or-a-personal-access-token]
+## DigitalOcean supports managed OAuth2, custom OAuth2, or a personal access token [#digitalocean-supports-managed-oauth2-custom-oauth2-or-a-personal-access-token]
 
 The current `digital_ocean` toolkit supports OAuth2 and API-key authentication.
-For OAuth2, create a DigitalOcean OAuth app and use its client ID and secret in
-a custom Composio auth config. Register the exact callback URI shown by the
-current Composio flow.
+Use Composio-managed OAuth for the standard connection flow. Use a custom
+DigitalOcean OAuth app when you need control over provider settings;
+register the exact callback URI shown by the current Composio flow.
 
 For API-key authentication, provide a DigitalOcean Personal Access Token in the
 `bearer_token` connection field. If OAuth fails before consent, compare the
-authorization request with the customer-owned app registration and use the API
-key path only when it matches the customer's security requirements.
+authorization request with your custom app registration and use the API-key path
+only when it matches your security requirements.
 
 ---
 
@@ -3237,15 +2224,15 @@ Older pinned Google Calendar toolkit versions can drop or remap filters such as 
 
 # Google Classroom (/kb/guide/toolkits-google-classroom)
 
-Use this guide to configure customer-owned Google OAuth for Google Classroom and troubleshoot consent, scope, or token failures.
+Use this guide to choose managed or customer-owned Google OAuth for Google Classroom and troubleshoot consent, scope, or token failures.
 
-## Configure custom Google OAuth for Google Classroom [#configure-custom-google-oauth-for-google-classroom]
+## Configure Google OAuth for Google Classroom [#configure-google-oauth-for-google-classroom]
 
-**Follow the Google Apps credential setup guide.** For a step-by-step guide to creating and configuring Google OAuth credentials with Composio, see [How to create OAuth2 credentials for Google Apps](https://composio.dev/auth/googleapps).
+**Follow the Google Apps credential setup guide for custom OAuth.** For a step-by-step guide to creating and configuring Google OAuth credentials with Composio, see [How to create OAuth2 credentials for Google Apps](https://composio.dev/auth/googleapps).
 
-**Enable the Google Classroom API in the credential's Cloud project.** When using custom credentials, enable the Google Classroom API in the Google Cloud project that owns the credentials. After enabling it under **APIs & Services**, wait a few minutes and retry.
+**Enable the Google Classroom API for custom OAuth.** Enable the Google Classroom API in the Google Cloud project that owns the credentials. After enabling it under **APIs & Services**, wait a few minutes and retry.
 
-**Set the consent-screen name and current redirect URL.** Google Classroom currently uses customer-owned OAuth credentials. Configure the app name and branding in the Google Cloud project that owns those credentials, and use the redirect URL shown by Composio's current auth-config flow.
+**Choose managed or customer-owned OAuth.** Use Composio-managed OAuth for the standard connection flow. Use a custom Google OAuth app when you need control over scopes, consent-screen branding, or Google Cloud project policy. For custom OAuth, configure the app name and branding in that project and use the redirect URL shown by Composio's current auth-config flow.
 
 ## Troubleshoot Google Classroom OAuth and tool calls [#troubleshoot-google-classroom-oauth-and-tool-calls]
 
@@ -3328,17 +2315,17 @@ For Google toolkits, creating a new authConfig with the customer's OAuth app cre
 
 # Google BigQuery (/kb/guide/toolkits-googlebigquery)
 
-## BigQuery supports customer-owned OAuth2 and Google service-account auth [#bigquery-supports-customer-owned-oauth2-and-google-service-account-auth]
+## BigQuery supports managed OAuth2, custom OAuth2, and service-account auth [#bigquery-supports-managed-oauth2-custom-oauth2-and-service-account-auth]
 
-Create an auth config with the customer's Google OAuth app or service-account
-credentials. The current catalog does not advertise Composio-managed BigQuery
-OAuth. For OAuth, configure and verify the required Google scopes and use the
-redirect URL shown by Composio. For service-account auth, grant the service
-account only the BigQuery permissions required by the intended tools.
+Use Composio-managed OAuth for the standard connection flow. Use a custom Google
+OAuth app when you need control over scopes, consent-screen branding,
+or Google Cloud project policy. Service-account authentication is also available;
+grant the service account only the BigQuery permissions required by the intended
+tools.
 
 If Google blocks an OAuth consent flow, check the OAuth app's verification,
 test-user, organizational-policy, and requested-scope settings before treating
-the failure as a Composio-side problem. Generate a fresh auth link after correcting
+the failure as a Composio problem. Generate a fresh auth link after correcting
 the Google Cloud configuration.
 
 ---
@@ -3355,12 +2342,9 @@ Use this guide to create and edit Google Docs content, configure Google OAuth, m
 
 ## Configure Google OAuth [#configure-google-oauth]
 
-**Use a customer-owned OAuth2 app.** Create the Google Docs auth config with the customer's Google OAuth app and the
-required scopes. The current catalog does not advertise a separate bearer-token
-auth scheme for Google Docs. A Composio Project API key authenticates SDK/API
-calls to Composio; it is not a replacement for the user's Google OAuth grant.
+**Choose managed or customer-owned OAuth2.** Use Composio-managed OAuth for the standard connection flow. Create a custom auth config with your Google OAuth app when you need control over scopes, consent-screen branding, or Google Cloud project policy. A Composio Project API key authenticates SDK/API calls to Composio; it is not a replacement for the user's Google OAuth grant.
 
-**Verify sensitive scopes for production use.** Google may block OAuth consent when an app requests unverified sensitive scopes. For production Google Docs/Workspace usage with sensitive scopes, use a verified OAuth app and complete the required Google verification/CASA process where applicable. Without verification, users may see warnings or app-blocked errors.
+**Verify sensitive scopes for production use.** Google may block OAuth consent when an app requests unverified sensitive scopes. For production Google Docs or Workspace usage with sensitive scopes, use a verified OAuth app and complete the required Google verification or CASA process where applicable. Without verification, users may see warnings or app-blocked errors.
 
 **Execute through Composio instead of reading provider tokens.** Provider tokens are redacted from connected-account API responses. Use Composio tool execution or Proxy Execute instead of reading access or refresh tokens from connected-account data.
 
@@ -3374,7 +2358,7 @@ calls to Composio; it is not a replacement for the user's Google OAuth grant.
 
 ## Connect through Platform or Connect MCP [#connect-through-platform-or-connect-mcp]
 
-**Connect the app separately on each surface.** Connections created on Platform (`dashboard.composio.dev`) are isolated from For You / Connect MCP and do not carry over. To use Google Docs/Sheets/Workspace through Connect MCP, ask the MCP server to connect the app from the client flow and complete that OAuth flow.
+**Connect the app separately on each surface.** Connections created on Platform (`dashboard.composio.dev`) are isolated from For You / Connect MCP and do not carry over. To use Google Docs, Sheets, or Workspace through Connect MCP, ask the MCP server to connect the app from the client flow and complete that OAuth flow.
 
 ---
 
@@ -3427,7 +2411,7 @@ Google Super is a separate toolkit with its own tool slugs. If the connected acc
 
 ## Configure Meet scopes and enable the Google Meet API before creating Meet spaces [#configure-meet-scopes-and-enable-the-google-meet-api-before-creating-meet-spaces]
 
-For Meet space creation/settings through Google Super, include the Meet scopes [https://www.googleapis.com/auth/meetings.space.created](https://www.googleapis.com/auth/meetings.space.created) and [https://www.googleapis.com/auth/meetings.space.settings](https://www.googleapis.com/auth/meetings.space.settings) in the auth config, then initiate a new connection so the new scopes are granted. Also enable the Google Meet API in the Google Cloud Console project backing the OAuth app.
+For Meet space creation/settings through Google Super, include the Meet scopes `https://www.googleapis.com/auth/meetings.space.created` and `https://www.googleapis.com/auth/meetings.space.settings` in the auth config, then initiate a new connection so the new scopes are granted. Also enable the Google Meet API in the Google Cloud Console project backing the OAuth app.
 
 ## Fetch transcript entries by first resolving the conference record [#fetch-transcript-entries-by-first-resolving-the-conference-record]
 
@@ -3542,15 +2526,15 @@ Use this guide to configure a Google Super connection and run Google Workspace a
 
 # Google Tasks (/kb/guide/toolkits-googletasks)
 
-Use this guide to configure customer-owned Google OAuth for Google Tasks and troubleshoot consent, scope, or token failures.
+Use this guide to choose managed or customer-owned Google OAuth for Google Tasks and troubleshoot consent, scope, or token failures.
 
-## Configure custom Google OAuth for Google Tasks [#configure-custom-google-oauth-for-google-tasks]
+## Configure Google OAuth for Google Tasks [#configure-google-oauth-for-google-tasks]
 
-**Follow the Google Apps credential setup guide.** For a step-by-step guide to creating and configuring Google OAuth credentials with Composio, see [How to create OAuth2 credentials for Google Apps](https://composio.dev/auth/googleapps).
+**Follow the Google Apps credential setup guide for custom OAuth.** For a step-by-step guide to creating and configuring Google OAuth credentials with Composio, see [How to create OAuth2 credentials for Google Apps](https://composio.dev/auth/googleapps).
 
-**Enable the Google Tasks API in the credential's Cloud project.** When using custom credentials, enable the Google Tasks API in the Google Cloud project that owns the credentials. After enabling it under **APIs & Services**, wait a few minutes and retry.
+**Enable the Google Tasks API for custom OAuth.** Enable the Google Tasks API in the Google Cloud project that owns the credentials. After enabling it under **APIs & Services**, wait a few minutes and retry.
 
-**Set the consent-screen name and current redirect URL.** Google Tasks currently uses customer-owned OAuth credentials. Configure the app name and branding in the Google Cloud project that owns those credentials, and use the redirect URL shown by Composio's current auth-config flow.
+**Choose managed or customer-owned OAuth.** Use Composio-managed OAuth for the standard connection flow. Use a custom Google OAuth app when you need control over scopes, consent-screen branding, or Google Cloud project policy. For custom OAuth, configure the app name and branding in that project and use the redirect URL shown by Composio's current auth-config flow.
 
 ## Troubleshoot Google Tasks OAuth and tool calls [#troubleshoot-google-tasks-oauth-and-tool-calls]
 
@@ -4006,6 +2990,10 @@ For a custom Monday OAuth app, add the Composio redirect URL/callback URL to the
 
 `MONDAY_UPDATE_ITEM` expects the body in a format Monday's API accepts. If you pass JSON-like text or strings containing quotes/special characters, escape those characters and send a suitable string rather than unsupported raw structured content.
 
+## Tool Router may prefer `MONDAY_MCP` over `MONDAY` when both are available [#tool-router-may-prefer-monday_mcp-over-monday-when-both-are-available]
+
+If both `MONDAY` and `MONDAY_MCP` are enabled, Tool Router may choose `MONDAY_MCP` for search/execution. If you specifically need the regular Monday toolkit, disable `monday_mcp` in the session or narrow toolkit availability so `COMPOSIO_SEARCH_TOOLS` returns the intended tools.
+
 ## Monday scopes come from the OAuth app and do not need separate Composio-side setup in the common flow [#monday-scopes-come-from-the-oauth-app-and-do-not-need-separate-composio-side-setup-in-the-common-flow]
 
 For Monday, the scopes configured on the Monday OAuth app are picked up during authorization. In the common flow, there is no separate Composio-side scope configuration required unless you intentionally request a subset.
@@ -4196,17 +3184,17 @@ Use this guide to configure Pipedrive authentication, initiate connections, and 
 
 ## Configure Pipedrive authentication [#configure-pipedrive-authentication]
 
-**Choose the authentication mode that fits the deployment.** Use Composio-managed OAuth for the standard connection flow. Use your own Pipedrive OAuth app or API key when you need control over app settings, scopes, branding, or provider policy.
+**Use custom OAuth or API-key credentials.** Composio-managed OAuth is not currently available for Pipedrive. Create a custom auth config with your Pipedrive OAuth app, or use API-key authentication when that better fits your security requirements.
 
-**Pass the workspace subdomain during OAuth initiation.** When initiating a Pipedrive OAuth connection, pass the Pipedrive workspace subdomain/domain expected by the auth config. For example, if the workspace is `your-workspace.pipedrive.com`, pass `your-workspace` rather than the full hostname.
+**Pass the workspace subdomain during OAuth initiation.** When initiating a Pipedrive OAuth connection, pass the Pipedrive workspace subdomain or domain expected by the auth config. For example, if the workspace is `your-workspace.pipedrive.com`, pass `your-workspace` rather than the full hostname.
 
-**Complete custom OAuth setup through Composio.** For Pipedrive custom OAuth, enable the app in Composio and complete setup there with the customer's own developer app credentials. Do not try to install the custom app directly from Pipedrive's OAuth app settings. During the Composio connection flow, provide the Pipedrive subdomain when requested.
+**Complete custom OAuth setup through Composio.** Enable the app in Composio and complete setup there with your developer app credentials. Do not try to install the custom app directly from Pipedrive's OAuth app settings. During the Composio connection flow, provide the Pipedrive subdomain when requested.
 
-**Let hosted auth links collect required fields.** Use hosted auth links when you want Composio to collect required provider-specific fields during connection initiation. You can also inspect the auth config/toolkit metadata to see the expected input fields before starting the Pipedrive connection.
+**Let hosted auth links collect required fields.** Use hosted auth links when you want Composio to collect required provider-specific fields during connection initiation. You can also inspect the auth config or toolkit metadata to see the expected input fields before starting the connection.
 
 ## Initiate Pipedrive connections and use triggers [#initiate-pipedrive-connections-and-use-triggers]
 
-**Pass a callback URL when initiating auth.** When initiating a Pipedrive connection through SDK/API, pass `callback_url` or `callbackUrl` in the connection initiation call. Composio redirects the user to that URL after the provider authentication flow completes.
+**Pass a callback URL when initiating auth.** When initiating a Pipedrive connection through SDK or API, pass `callback_url` or `callbackUrl` in the connection initiation call. Composio redirects the user to that URL after the provider authentication flow completes.
 
 **Check the current trigger catalog before relying on a count.** Pipedrive has trigger support. Verify the current trigger list in the toolkit catalog before naming an exact count.
 
@@ -4270,12 +3258,12 @@ Use this guide to configure QuickBooks OAuth for the correct environment, mainta
 
 For Claude Code Reddit MCP OAuth callback failures on the legacy MCP path, switch the MCP server URL to `https://connect.composio.dev/mcp`. Remove the old `x-api-key` header and configure the current `x-consumer-api-key` header from the AI Clients setup. Connect MCP can then start the Reddit authorization flow from the client.
 
-## Reddit supports OAuth 2.0 custom credentials in auth configs [#reddit-supports-oauth-20-custom-credentials-in-auth-configs]
+## Reddit supports managed and customer-owned OAuth 2.0 [#reddit-supports-managed-and-customer-owned-oauth-20]
 
-Reddit uses customer-owned OAuth 2.0 credentials. Create the Reddit auth config
-with the customer's Reddit client ID and client secret after Reddit has approved
-the app for the intended access. This gives the customer control over provider
-app settings and credentials.
+Use Composio-managed OAuth for the standard connection flow. Create a custom
+auth config with the customer's Reddit client ID and client secret when they
+need control over provider app settings and credentials. Make sure Reddit has
+approved a custom app for its intended access before using it in production.
 
 ## Reddit toolkit behavior can change when Reddit changes its API or enforcement policies [#reddit-toolkit-behavior-can-change-when-reddit-changes-its-api-or-enforcement-policies]
 
@@ -4647,9 +3635,9 @@ Use this guide to configure Spotify OAuth and scopes, then use Spotify through M
 
 ## Configure Spotify OAuth and scopes [#configure-spotify-oauth-and-scopes]
 
-**Choose managed or customer-owned OAuth.** Use the managed OAuth flow for the standard connection. Configure your own Spotify OAuth app when you need control over scopes, provider app settings, or branding.
+**Use a customer-owned OAuth app.** Composio-managed OAuth is not currently available for Spotify. Create a custom auth config with your Spotify client ID and client secret, then have each user complete the Spotify authorization flow.
 
-**Add library scopes before reconnecting.** If Spotify tools need library access, ensure scopes such as `user-library-read` and `user-library-modify` are present in the auth config. After adding scopes, reconnect so the new scopes are granted on the connected account.
+**Add library scopes before reconnecting.** If Spotify tools need library access, ensure scopes such as `user-library-read` and `user-library-modify` are present in the auth config. After adding scopes, reconnect so the connected account receives the new grants.
 
 **Add playlist-write scopes before reconnecting.** If playlist write actions return Spotify `403 Insufficient client scope`, make sure the auth config requests `playlist-modify-public`, `playlist-modify-private`, or both as appropriate. Add the scopes before reconnecting; reconnecting an unchanged auth config preserves the same missing-scope problem.
 
@@ -4657,11 +3645,11 @@ This is separate from older playlist endpoint issues. A call can reach the curre
 
 ## Use Spotify through MCP, custom toolkits, and triggers [#use-spotify-through-mcp-custom-toolkits-and-triggers]
 
-**Avoid names that collide with the built-in toolkit.** If creating a custom Spotify-related toolkit, avoid naming it exactly `Spotify` because a built-in Spotify toolkit already exists. Use a distinct name such as `spotify-custom` to avoid slug/name collision errors.
+**Avoid names that collide with the built-in toolkit.** If creating a custom Spotify-related toolkit, avoid naming it exactly `Spotify` because a built-in Spotify toolkit already exists. Use a distinct name such as `spotify-custom` to avoid slug or name collision errors.
 
 **Add Spotify from the MCP configs page.** To use Spotify through MCP, create or edit an MCP config from the platform MCP configs page and add Spotify to that server. Then use the generated MCP URL in the MCP client.
 
-**Check the current trigger catalog when an event is missing.** Spotify is listed among trigger-capable toolkits, with three Spotify triggers. If a needed Spotify trigger is missing, submit the exact event through the Composio request portal.
+**Check the current trigger catalog when an event is missing.** Spotify is listed among trigger-capable toolkits, with three Spotify triggers. If the event you need is missing, submit it through the standard trigger-request flow.
 
 ---
 
@@ -4797,21 +3785,21 @@ Use this guide to connect Trello with OAuth1, route users through current MCP fl
 
 ## Connect Trello with OAuth1 [#connect-trello-with-oauth1]
 
-Create a customer-owned Trello OAuth1 auth config and have each user complete the provider authorization flow. The current catalog does not advertise a separate bearer-token auth scheme for Trello.
+Use Composio-managed OAuth1 for the standard connection flow. Create a custom OAuth1 auth config when you need control over the Trello provider app, and have each user complete the authorization flow.
 
 ## Route Trello through current MCP and Connect flows [#route-trello-through-current-mcp-and-connect-flows]
 
-**Route each call to the correct user or account.** For multi-user Trello MCP usage, create the Trello auth config and have users complete the auth flow. Then route MCP calls to the right user/connection by appending `user_id=<external-user-id>` or `connected_account_id=<ca_...>` to the MCP server URL, for example `/mcp?user_id=abcd`.
+**Route each call to the correct user or account.** For multi-user Trello MCP usage, create the Trello auth config and have users complete the auth flow. Then route MCP calls to the right user or connection by appending `user_id=<external-user-id>` or `connected_account_id=<ca_...>` to the MCP server URL, for example `/mcp?user_id=abcd`.
 
-**Use the generated MCP configuration in Cursor.** To use Trello in Cursor, create a Trello MCP instance/server in Composio, select the Trello tools, then run or add the generated MCP command/config in Cursor. Complete the Trello account connection when prompted by the MCP flow.
+**Use the generated MCP configuration in Cursor.** To use Trello in Cursor, create a Trello MCP instance or server in Composio, select the Trello tools, then run or add the generated MCP command or config in Cursor. Complete the Trello account connection when prompted by the MCP flow.
 
 **Migrate legacy MCP endpoints.** If you are using `https://mcp.composio.dev/trello` or another legacy Trello MCP endpoint, migrate to Tool Router or Composio Connect. Tool Router and Connect are the supported path for current integrations.
 
 ## Resolve Trello users and trigger board IDs [#resolve-trello-users-and-trigger-board-ids]
 
-**Get the authenticated Trello user.** Use `TRELLO_GET_MEMBERS_BY_ID_MEMBER` with `idMember` set to `me` to retrieve the authenticated Trello user/member for the current connection.
+**Get the authenticated Trello user.** Use `TRELLO_GET_MEMBERS_BY_ID_MEMBER` with `idMember` set to `me` to retrieve the authenticated Trello user or member for the current connection.
 
-**Validate board IDs before creating triggers.** If Trello triggers fail, verify the board ID first. Use tools such as `TRELLO_GET_ORGANIZATIONS_BOARDS_BY_ID_ORG` or `TRELLO_GET_BOARDS_BY_ID_BOARD` to retrieve/confirm the board ID, then recreate or retry the trigger with the valid board ID.
+**Validate board IDs before creating triggers.** If Trello triggers fail, verify the board ID first. Use tools such as `TRELLO_GET_ORGANIZATIONS_BOARDS_BY_ID_ORG` or `TRELLO_GET_BOARDS_BY_ID_BOARD` to retrieve or confirm the board ID, then recreate or retry the trigger with the valid board ID.
 
 ---
 
@@ -4821,9 +3809,10 @@ Use this guide to configure Twitter/X authentication, choose the credentials eac
 
 ## Configure Twitter/X authentication [#configure-twitterx-authentication]
 
-**Choose managed or customer-owned OAuth.** Use the current managed OAuth flow for the standard connection. Your own X
-developer app remains appropriate when you need control over
-app settings, provider plan, scopes, or branding.
+**Use a customer-owned OAuth app.** Composio-managed credentials are not available for the Twitter toolkit. Create an app in the X Developer Portal, then create a custom Composio auth config with that app's credentials before connecting an account. This has been required since managed Twitter credentials were removed in February 2026.
+
+* [Twitter toolkit authentication details](https://docs.composio.dev/toolkits/twitter)
+* [Managed Twitter credentials removal](https://docs.composio.dev/docs/changelog/2026/02/12)
 
 **Match the current Composio callback exactly.** For Twitter OAuth callback mismatch errors, configure the Twitter/X developer app with the exact callback shown by the current Composio auth-config flow. Do not use a legacy v1 callback from older examples.
 
@@ -4831,15 +3820,15 @@ app settings, provider plan, scopes, or branding.
 
 **Follow X's post-length rules.** Twitter/X enforces strict post length limits. For normal posts, keep the content under 280 characters and follow X's official character-counting behavior, since URLs, Unicode, and special characters may be counted by provider-specific rules.
 
-**Use the Application Bearer Token for app-only actions.** Several X actions—including recent/full-archive search and counts, post lookup by IDs, post usage, label-stream, and compliance-job actions—use app-only authentication. They read the `Application Bearer Token` from the Twitter auth config, not the connected user's OAuth access token.
+**Use the Application Bearer Token for app-only actions.** Several X actions—including recent or full-archive search and counts, post lookup by IDs, post usage, label-stream, and compliance-job actions—use app-only authentication. They read the `Application Bearer Token` from the Twitter auth config, not the connected user's OAuth access token.
 
 If user-token actions succeed but these actions return 401, verify that the bearer token comes from the same X Developer App as the OAuth client credentials and that the app's X API plan allows the endpoint. Adding user OAuth scopes does not repair an invalid app bearer token. Reconnect only when the user grant also needs to change.
 
 ## Troubleshoot developer-app and toolkit-version errors [#troubleshoot-developer-app-and-toolkit-version-errors]
 
-**Fix `client-not-enrolled` and `App not linked to project` in the X developer app.** These errors usually mean the Twitter/X developer app is not correctly connected to a Twitter developer project, or the OAuth app configuration is stale after X's API model changes. Verify the app is linked to a project, configured according to the Twitter setup guide, and aligned with the current X API requirements. If the connected account is already `EXPIRED`, recreate the connection after fixing the app configuration.
+**Fix `client-not-enrolled` and `App not linked to project` in the X developer app.** These errors usually mean the Twitter/X developer app is not correctly connected to a Twitter developer project, or the OAuth app configuration is stale after X's API model changes. Verify the app is linked to a project, configured according to the Twitter setup guide, and aligned with current X API requirements. If the connected account is already `EXPIRED`, recreate the connection after fixing the app configuration.
 
-**Update older toolkit versions for X v2 support.** The current Twitter/X toolkit uses v2 endpoints. If you see behavior that looks like older endpoints, check the toolkit version and retry on the latest available version.
+**Update older toolkit versions for X v2 support.** The current Twitter/X toolkit uses v2 endpoints. If behavior looks like an older endpoint, check the toolkit version and retry on the latest available version.
 
 ---
 
@@ -4953,12 +3942,12 @@ Connect MCP servers and Platform MCP servers are independent. A connection visib
 
 # YNAB authentication (/kb/guide/toolkits-ynab)
 
-## YNAB uses a customer-owned OAuth app [#ynab-uses-a-customer-owned-oauth-app]
+## YNAB supports managed and customer-owned OAuth [#ynab-supports-managed-and-customer-owned-oauth]
 
-The current `ynab` toolkit supports OAuth2 and requires a YNAB application's
-client ID and client secret. Create the app under YNAB's developer settings,
-register the exact redirect URI shown by the current Composio auth-config flow,
-and connect through that custom config.
+Use Composio-managed OAuth for the standard connection flow. Create a custom
+auth config with the customer's YNAB client ID and client secret when they need
+control over the provider app. For custom OAuth, register the exact redirect URI
+shown by the current Composio auth-config flow.
 
 If YNAB reports that an application is restricted, review the YNAB app's
 current review and access-token restrictions. An app intended only for its

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Plugins"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/plugins"
-source_hash: "cfcd33d99c22630596f9e229c14d34e274b7587a776a225cb739a0875c0bf718"
+source_hash: "c27820793077d66426a80d006002c69872ef1df4ede245554cf9eb1daa08d108"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/plugins.md"
@@ -169,6 +169,13 @@ plugins:
     - disk-cleanup
   disabled:       # optional deny-list — always wins if a name appears in both
     - noisy-plugin
+  # Optional: wall-clock cap (seconds) for timeout-bounded in-process Python
+  # plugin hook callbacks (hot-path observers + pre_tool_call). Default 30;
+  # set 0 to disable; values above 600 are clamped. Timed-out pre_tool_call
+  # callbacks fail closed (block the tool). Caller-thread hooks such as
+  # subagent_stop are never moved onto a timeout worker.
+  # Shell hooks keep their own per-entry timeout under the top-level hooks: key.
+  hook_callback_timeout: 30
 ```
 
 Three ways to flip state:

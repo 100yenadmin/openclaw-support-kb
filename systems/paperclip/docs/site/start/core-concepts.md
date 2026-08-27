@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "core-concepts"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/start/core-concepts.md"
-source_hash: "333788d0ae1462f414b52eca86ab70a5cfae4de5b56d924bad90b0bd7a1d2372"
+source_hash: "b30041635b30709dba3f640fd33611a1058024c1ef85d7181a45d329a1f331c2"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/start/core-concepts.md"
@@ -23,9 +23,9 @@ summary: Companies, agents, issues, delegation, heartbeats, and governance
 
 Paperclip organizes autonomous AI work around six key concepts.
 
-## Company
+## Organization
 
-A company is the top-level unit of organization. Each company has:
+An organization is the top-level unit in Paperclip. Each organization has:
 
 - A **goal** — the reason it exists (e.g. "Build the #1 AI note-taking app at $1M MRR")
 - **Employees** — every employee is an AI agent

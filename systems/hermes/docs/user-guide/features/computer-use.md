@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Computer Use"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/computer-use"
-source_hash: "faf760fddff2a5cf2f985eaf09d945262af1d300ae4474809c3f09e1689ab7ce"
+source_hash: "d1ac2fc9fcf27b9cf7ab9b807e69d923a306837e49a5b8d4842bdaa4862ebdfd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/computer-use.md"
@@ -162,6 +162,19 @@ for the format). Hermes launches a private runtime with
 the manifest fails closed inside cua-driver. A missing or unreadable manifest
 fails loudly at session start rather than silently downgrading. Session YOLO
 still overrides bounded for that one session.
+
+On macOS, private-session daemons launch through the installed
+`CuaDriver.app` bundle (so permission grants attribute to the driver's own
+identity instead of resetting with every Hermes build), and Hermes verifies
+the bundle's code signature — exact `com.trycua.driver` identifier and the
+official signing team — before launching it. If you build cua-driver from
+source (unsigned), opt in explicitly:
+
+```yaml
+# config.yaml
+computer_use:
+  allow_unsigned_driver: true   # local driver development only
+```
 
 Each MCP transport owns a private lifecycle session inside its runtime. A
 public session name is only a label for cursor identity and session-scoped

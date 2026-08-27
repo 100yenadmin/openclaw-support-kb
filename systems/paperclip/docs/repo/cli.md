@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "CLI Reference"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/CLI.md"
-source_hash: "0e53a312853cee6de18c3f2477dc01d65e207feb835749bf7db0b19c9a65dc2d"
+source_hash: "7394a3514b733200474ce50c254006310e27628d2d768167bf94628fdbdc6c7c"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/cli.md"
@@ -315,7 +315,7 @@ npx paperclipai context set --api-key-env-var-name PAPERCLIP_API_KEY
 export PAPERCLIP_API_KEY=...
 ```
 
-## Company Commands
+## Organization Commands
 
 ```sh
 npx paperclipai company list
@@ -651,7 +651,7 @@ npx paperclipai skills install paperclipai:optional:browser:agent-browser --comp
 External GitHub, skills.sh, local-path, and URL sources still go through
 `skills import`; catalog commands are for the app-shipped catalog only.
 
-### Company library
+### Organization library
 
 ```sh
 npx paperclipai skills list --company-id <company-id>
@@ -780,7 +780,7 @@ bootstrap credentials in Paperclip secrets.
 
 Per-company provider vaults (multiple vault instances per provider, default
 vault selection, coming-soon GCP/Vault) can be configured from the board UI under
-`Company Settings → Secrets → Provider vaults` or through the provider-config CLI
+`Organization Settings → Secrets → Provider vaults` or through the provider-config CLI
 commands above. See the
 [secrets deploy guide](../docs/deploy/secrets.md#provider-vaults) and
 [API reference](../docs/api/secrets.md#provider-vaults) for the contract.

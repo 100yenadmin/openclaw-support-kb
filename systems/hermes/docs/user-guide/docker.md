@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Docker Setup"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/docker"
-source_hash: "e3a2777eb312a9aad44210d4c89a33a107ffce4bd88bfa04f771a14a8ff83d04"
+source_hash: "8505299b5b0bd2716ffd938543aeae2256cf26d77b3db47140809f34c563bdb8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/docker.md"
@@ -150,6 +150,24 @@ There are three bundled ways to satisfy the second condition:
 - **Self-hosted OIDC** — to authenticate against your own identity provider via standard OpenID Connect: the `dashboard_auth/self_hosted` provider activates when `HERMES_DASHBOARD_OIDC_ISSUER` + `HERMES_DASHBOARD_OIDC_CLIENT_ID` are set.
 
 Whichever you choose, the gate redirects callers to a login page before they can reach any protected route. See [Web Dashboard → Authentication](features/web-dashboard.md#authentication-gated-mode) for all three providers.
+
+When a reverse proxy such as Traefik or nginx runs in another container, its
+bridge-network address is not trusted by default. Set the dashboard's public
+URL and trust only that proxy's exact IP, or a bounded CIDR for a dedicated
+proxy network, in the mounted `config.yaml`:
+
+```yaml
+dashboard:
+  public_url: "https://dashboard.example.com"
+  trusted_proxies:
+    - "172.20.0.5"
+    # Or, if the proxy address is dynamic on a dedicated network:
+    # - "172.20.0.0/24"
+```
+
+This allows the proxy's `X-Forwarded-Proto: https` to control secure OAuth
+cookies while leaving forwarding headers from other peers untrusted. Do not
+use `*`, `0.0.0.0/0`, or `::/0`; Hermes rejects those unbounded entries.
 
 If no provider is registered and the bind is non-loopback, the dashboard **fails closed at startup** with a specific error pointing at the missing env var. There is no longer an escape hatch that serves the dashboard unauthenticated on a public bind: `HERMES_DASHBOARD_INSECURE=1` is now a deprecated no-op (it logs a warning and is ignored). Configure a provider, or bind `HERMES_DASHBOARD_HOST=127.0.0.1` and reach the dashboard over an SSH tunnel / Tailscale instead.
 

@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Vercel AI SDK"
 source: "https://docs.composio.dev/docs/providers/vercel.md"
-source_hash: "182ec3b6c7732faeb1a2faa4b44a35cea8af028209c14de73892193c4b61ab8f"
+source_hash: "deedb2e156b3b7e207199a606b517ac76d7147ab3932170b32633d4f71acc2b3"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/vercel.md"
@@ -56,7 +56,7 @@ console.log(text);
 ```
 ## Provider specifics [#provider-specifics]
 
-**Strict mode.** Some models reject tool schemas that contain optional parameters. Pass `strict: true` to the provider to drop every non-required property from each tool's input schema before it reaches the AI SDK:
+**Strict mode.** Some models reject tool schemas that contain optional parameters. Pass `strict: true` to the provider to normalize each tool's input schema for OpenAI structured outputs before it reaches the AI SDK: every object lists all of its properties in `required` and is closed, and optional properties stay available but accept `null`. A `null` is dropped before the tool runs unless the tool's own schema accepts `null` for that parameter, so nullable fields still receive an explicit `null`. Tools whose schema cannot be expressed in strict mode, such as objects that accept arbitrary keys, `allOf`, `prefixItems`, or unresolved `$ref`s, keep their original schema and log a warning:
 
 ```typescript
 // @noErrors

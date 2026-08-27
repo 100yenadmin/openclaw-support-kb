@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Session files"
 source: "https://docs.composio.dev/reference/sdk-reference/typescript/session-files.md"
-source_hash: "643d56f729de826330f732f50b78a5f189697ce14b282a691b00714de08e180c"
+source_hash: "d8488463386f1196a4a46f1375c7838f86dd6557db26a8b55cd61f19dc3262f0"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/typescript/session-files.md"
@@ -149,10 +149,10 @@ async upload(input: string | File | ArrayBuffer | Uint8Array, options?: ToolRout
 
 **Parameters**
 
-| Name       | Type                                          | Description                                                            |              |
-| ---------- | --------------------------------------------- | ---------------------------------------------------------------------- | ------------ |
-| `input`    | `string \| File \| ArrayBuffer \| Uint8Array` | File path (string), native File, or raw buffer (ArrayBuffer            | Uint8Array). |
-| `options?` | `ToolRouterSessionFilesMountUploadOptions`    | Optional configuration. When passing a buffer, remotePath is required. |              |
+| Name       | Type                                          | Description                                                                 |
+| ---------- | --------------------------------------------- | --------------------------------------------------------------------------- |
+| `input`    | `string \| File \| ArrayBuffer \| Uint8Array` | File path (string), native File, or raw buffer (ArrayBuffer \| Uint8Array). |
+| `options?` | `ToolRouterSessionFilesMountUploadOptions`    | Optional configuration. When passing a buffer, remotePath is required.      |
 
 **Returns**
 

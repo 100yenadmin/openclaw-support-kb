@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Tools"
 source: "https://docs.composio.dev/reference/sdk-reference/python/tools.md"
-source_hash: "d8a5fecf6b53f55d46b5ba0d86aeba5fcce0de2464073d79a552324e0171641c"
+source_hash: "378e1e33058b76ea45f124a1cba70726f2a926c7e246f4f644b3931b106eeb8a"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/sdk-reference/python/tools.md"
@@ -192,6 +192,6 @@ def proxy(endpoint: str, method: Literal['GET', 'POST', 'PUT', 'DELETE', 'PATCH'
 
 ***
 
-[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tools.py#L89)
+[View source](https://github.com/composiohq/composio/blob/next/python/composio/core/models/tools.py#L119)
 
 ---

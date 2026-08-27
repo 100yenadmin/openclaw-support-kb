@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Agent Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "f4d97c33e298abbb9d4639e1c3eb5fc59af41fb67286d51c959b8fbd2951e809"
+source_hash: "7a0c9136d85639dcfab4069eee3f45592da295b3cd9cbb5314b7171963e775c2"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -99,6 +99,39 @@ value to `0`, `false`, or `null` to disable the adjustment. On Windows and in
 sandboxes
 where the limit cannot be changed, startup continues without changing the
 limit.
+
+## Database Settings
+
+The `database:` section controls how Hermes opens its SQLite state database
+(`state.db`), which stores sessions, messages, and gateway routing:
+
+```yaml
+database:
+  # Journal mode for state.db: wal (default) or delete.
+  # Use delete on filesystems where WAL is unsafe (network mounts, some
+  # virtiofs setups). Note: an existing on-disk WAL database is never
+  # live-downgraded — Hermes keeps WAL and logs an error telling you the
+  # configured delete did not apply. To convert an existing database, stop
+  # every process using it and run a one-time offline
+  # `PRAGMA journal_mode=DELETE` on the file.
+  journal_mode: wal
+
+  # Durability level for every state.db connection: OFF, NORMAL, FULL,
+  # EXTRA (or 0-3). Unset leaves SQLite's compile-time default, which
+  # differs between interpreter builds. On macOS this is a floor, not a
+  # pin: values below FULL are refused to protect against Darwin fsync
+  # reordering; EXTRA is honored.
+  # synchronous: FULL
+
+  # Optional WAL sizing pragmas (integers). Unset = SQLite defaults.
+  # wal_autocheckpoint: 1000     # pages between automatic checkpoints
+  # journal_size_limit: 67108864 # cap the WAL/journal size in bytes
+```
+
+Hermes also warns (once per process per database) when an existing
+database's on-disk journal mode is silently flipped to WAL on open — for
+example a database an operator had manually converted to `delete` — and
+names `database.journal_mode` as the setting that makes the choice stick.
 
 ## Environment Variable Substitution
 
@@ -839,7 +872,7 @@ compression:
   threshold: 0.50                                   # Compress at this % of context limit
   threshold_tokens: null                            # Absolute token cap (optional) — takes lower of ratio vs absolute
   target_ratio: 0.20                                # Fraction of threshold to preserve as recent tail
-  tail_mode: legacy                                 # Tail retention: "legacy" (0.20×window verbatim tail) or "lean" (clamped 2.5% tail, 10K-25K, with digests + anchor index + session_search recovery pointers in the summary — ~3x fewer retained tokens after compaction)
+  tail_mode: lean                                   # Tail retention: "lean" (default — clamped 2.5% tail, 10K-25K, with digests + anchor index + session_search recovery pointers in the summary; ~3x fewer retained tokens after compaction) or "legacy" (0.20×threshold verbatim tail)
   protect_last_n: 20                                # Min recent messages to keep uncompressed
   protect_first_n: 3                                # Non-system head messages pinned across compactions (0 = pin nothing)
   in_place: true                                    # Compact on the same session id (no rotation) — see below
@@ -2610,6 +2643,7 @@ dashboard:
   theme: "default"            # "default" | "midnight" | "ember" | "mono" | "cyberpunk" | "rose"
   show_token_analytics: false # Re-enable the (local-estimate-only) token/cost analytics surfaces
   public_url: ""              # Full public authority for OAuth redirect_uri (env: HERMES_DASHBOARD_PUBLIC_URL)
+  trusted_proxies: []         # Proxy IPs/CIDRs allowed to supply X-Forwarded-* headers
   oauth:                      # Portal OAuth gate (engaged with --host and not --insecure)
     client_id: ""             # agent:{instance_id} — Portal provisions this
     portal_url: ""            # blank → plugin default (production Portal)
@@ -2631,6 +2665,7 @@ dashboard:
 - `theme` — dashboard visual theme.
 - `show_token_analytics` — off by default. The Analytics page and token/cost figures are a **local lower-bound estimate** (they exclude auxiliary calls, retries, fallbacks, and cache writes), so they can read far below the provider bill. Set `true` only if you understand they're not billing.
 - `public_url` — when set, this is the complete authority (scheme + host + optional path prefix) the OAuth `redirect_uri` is built from. Set it for deploys behind reverse proxies that don't reliably forward `X-Forwarded-*` headers. Leave empty to use proxy-header reconstruction.
+- `trusted_proxies` — IP addresses or bounded CIDR networks allowed to supply `X-Forwarded-Proto` and `X-Forwarded-For`. Loopback remains trusted automatically. Configure this when the TLS reverse proxy connects from another container or host. Prefer the proxy's exact IP; use a small dedicated network only when its address is dynamic. Wildcards and `/0` networks are rejected.
 - `oauth` / `basic_auth` / `drain_auth` — auth provider config read by the bundled dashboard-auth plugins. The drain secret itself is **not** set here; it's provisioned via the `HERMES_DASHBOARD_DRAIN_SECRET` env var. See [Web Dashboard](/user-guide/features/web-dashboard) for full auth setup.
 - `ws_ping_interval` / `ws_ping_timeout` — WebSocket keepalive tuning for non-loopback binds (loopback connections never ping). Raise these on high-latency links (Tailscale, distant SSH tunnels) where the 20 s defaults can manufacture spurious 1006 disconnects.
 - `ws_orphan_reap_grace_s` — how long a WS-detached session waits before the orphan reaper collects it. Raise alongside the keepalive values if clients reconnect slowly. (`HERMES_TUI_WS_ORPHAN_REAP_GRACE_S` remains as an internal override.)

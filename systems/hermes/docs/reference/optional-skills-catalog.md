@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Optional Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog"
-source_hash: "475aba1c2b8c8bb61bdc8660d90c04924451741e69741e0bc049c6804a86b5b7"
+source_hash: "cee37f4fd83225811b45be247d4c663481fac3470dce3260d72bbe99523b2598"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/optional-skills-catalog.md"
@@ -111,7 +111,7 @@ hermes skills uninstall <skill-name>
 
 | Skill | Description |
 |-------|-------------|
-| [**agentmail**](/docs/user-guide/skills/optional/email/email-agentmail) | Give the agent its own inbox: send and receive email. |
+| [**agentmail**](/docs/user-guide/skills/optional/email/email-agentmail) | Use when an agent needs AgentMail CLI email inboxes. |
 
 ## finance
 
@@ -255,6 +255,7 @@ hermes skills uninstall <skill-name>
 | [**cloudflare-temporary-deploy**](/docs/user-guide/skills/optional/web-development/web-development-cloudflare-temporary-deploy) | Deploy a Worker live, no account, via wrangler --temporary. |
 | [**har-derived-api-client**](/docs/user-guide/skills/optional/web-development/web-development-har-derived-api-client) | Record a site's XHR into a HAR, derive an HTTP client. |
 | [**page-agent**](/docs/user-guide/skills/optional/web-development/web-development-page-agent) | Embed an in-page natural-language GUI copilot in web apps. |
+| [**publish-site**](/docs/user-guide/skills/optional/web-development/web-development-publish-site) | Versioned site deploys to GitHub/Cloudflare/Netlify Pages. |
 
 ## yuanbao
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Bundled Skills Catalog"
 source: "https://hermes-agent.nousresearch.com/docs/reference/skills-catalog"
-source_hash: "5311b131c69a4385bdabd1eb52f119896af18faecf7ba56cc808e8bd17c9dafc"
+source_hash: "ebe5e947552c1d35c75650a60071132e46eb17bf47fda0c9f1172b7ace6f43a5"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/skills-catalog.md"
@@ -40,7 +40,7 @@ If a skill is missing from this list but present in the repo, the catalog is reg
 |-------|-------------|------|
 | [`claude-code`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-claude-code) | Delegate coding to Claude Code CLI (features, PRs). | `autonomous-ai-agents/claude-code` |
 | [`codex`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-codex) | Delegate coding to OpenAI Codex CLI (features, PRs). | `autonomous-ai-agents/codex` |
-| [`computer-use`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-computer-use) | Drive the desktop in the background without stealing focus. | `autonomous-ai-agents/computer-use` |
+| [`computer-use`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-computer-use) | Drive the desktop background-first; escalate on signal. | `autonomous-ai-agents/computer-use` |
 | [`hermes-agent`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-hermes-agent) | Use, configure, theme, extend, and orchestrate Hermes Agent. | `autonomous-ai-agents/hermes-agent` |
 | [`merge-reconciler`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-merge-reconciler) | Neutral third-party resolution of agent merge conflicts. | `autonomous-ai-agents/merge-reconciler` |
 | [`opencode`](/docs/user-guide/skills/bundled/autonomous-ai-agents/autonomous-ai-agents-opencode) | Delegate coding to OpenCode CLI (features, PR review). | `autonomous-ai-agents/opencode` |

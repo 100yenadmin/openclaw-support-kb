@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Toolkits"
 source: "https://docs.composio.dev/reference/api-reference/toolkits.md"
-source_hash: "9aafa743d8185af8e95c299f15c7d77df3a79d90a52ccfa2466694941e4e4722"
+source_hash: "3c1b719bd5fdb6d9f0d96763f2e0b7333507d531611c2df7995dfd5fa856574f"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "reference/api-reference/toolkits.md"
@@ -42,6 +42,8 @@ To browse toolkits visually, see the [toolkits catalog](/toolkits). For the conc
 | Method | Path | Endpoint |
 | --- | --- | --- |
 | `DELETE` | `/api/v3.1/custom/toolkits/{slug}` | [Delete a custom toolkit](/reference/api-reference/toolkits/deleteCustomToolkitsBySlug) |
+| `POST` | `/api/v3.1/toolkits/{toolkit_slug}/scopes/recommended` | [Get required scopes](/reference/api-reference/toolkits/recommendToolkitScopes) |
+| `GET` | `/api/v3.1/toolkits/{toolkit_slug}/scopes/grant_context` | [List grant_context options](/reference/api-reference/toolkits/recommendToolkitScopesGrantContext) |
 | `GET` | `/api/v3.1/toolkits` | [List available toolkits](/reference/api-reference/toolkits/getToolkits) |
 | `GET` | `/api/v3.1/toolkits/categories` | [List toolkit categories](/reference/api-reference/toolkits/getToolkitsCategories) |
 | `POST` | `/api/v3.1/custom/toolkits/upsert` | [Upsert a custom toolkit](/reference/api-reference/toolkits/postCustomToolkitsUpsert) |

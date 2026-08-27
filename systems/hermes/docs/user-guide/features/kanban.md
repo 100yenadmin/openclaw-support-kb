@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Kanban (Multi-Agent Board)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban"
-source_hash: "dca050e22d0944be9a0bf1f8d27ea91c86a4c819925cc0cf7637b9b9dc0c2390"
+source_hash: "8beea3a5330eb63f7c5fab83c16b25e32e64be073920a3619b8e361cc0f3f06b"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/kanban.md"
@@ -1047,6 +1047,8 @@ A subscription removes itself automatically once the task reaches `done` or `arc
 | `wake` | no | yes | You only want the agent to act on the event, with no separate ping. |
 
 A "wake" forges a synthetic inbound message to the destination gateway agent so it takes a normal turn (reads the comment + result, reasons, replies) instead of getting a one-line passive notification. It only fires when the notifier runs inside a live gateway process; otherwise a `notify+wake` subscription still delivers its passive message, while a `wake`-only subscription does nothing in that process.
+
+**Which events wake.** The ones that hand a decision back to the origin: `completed`, `blocked`, `gave_up`, `crashed`, `timed_out`, `review_requested` (a worker finished the implementation and handed off via `kanban_request_review`) and `block_loop_detected` (the task was routed to `triage` after repeated blocks). `status`, `archived` and `unblocked` are delivered but never wake — they are bookkeeping transitions, not decisions. When a `completed` or `review_requested` event carries a summary, that handoff rides the wake turn, so the woken agent sees what the worker actually did.
 
 `--chat-type` (`dm` | `group` | `channel` | `thread`) records the originating chat's type so a woken turn resolves the operator's **real** session: `build_session_key` keys groups, channels, and threads differently from DMs, so an inaccurate `chat_type` would route the wake into a separate, context-less session. The `/kanban` auto-subscribe and slash-command paths capture this automatically — you only set it by hand when subscribing a chat from a script or cron. Omit it to leave an existing subscription unchanged (new subscriptions default to `dm`).
 

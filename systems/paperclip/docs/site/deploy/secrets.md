@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "low-level script for direct database maintenance"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/secrets.md"
-source_hash: "dc5f0dc904a3a3edabeb42d56eccf64aa72be2071ab4c0fae96321f4ff3f1376"
+source_hash: "e6e75562d9e5c3728dcb0875ffd68fb074554dd92bff3edb1def0b73373e8494"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/deploy/secrets.md"
@@ -272,7 +272,7 @@ default provider — no migration is required.
 
 ### Where to configure
 
-Open `Company Settings → Secrets` in the board UI and switch to the
+Open `Organization Settings → Secrets` in the board UI and switch to the
 `Provider vaults` tab. From there you can:
 
 - Create a vault for any supported provider family.

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Scheduled Tasks (Cron)"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/cron"
-source_hash: "2a71596dd7d27edde0fa695be084fb8f89a97cbd43a97c14724130d7d423670a"
+source_hash: "976f4cf53a6525b089645872a66bc3e95bb1895deef0dcdd06dd65ad8da4b968"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/cron.md"
@@ -491,7 +491,7 @@ cron:
   mirror_delivery: false   # set true to make cron deliveries continuable
 ```
 
-Behaviour is **thread-preferred**, scoped to the job's origin chat:
+Behaviour is **thread-preferred**, scoped to the job's own conversation:
 
 - **Thread-capable platforms** (Telegram topics, Discord/Slack threads): each
   delivery opens its own dedicated thread and the brief is seeded into that
@@ -502,8 +502,19 @@ Behaviour is **thread-preferred**, scoped to the job's origin chat:
   is mirrored into the origin DM session instead — the DM itself is the
   continuation surface.
 
-Only the origin chat is ever touched: fan-out / broadcast targets (`all`,
-explicit other-chat deliveries) are never made continuable. The mirror is
+Only the job's **own conversation** is ever touched:
+
+- the **origin chat** the job was created in;
+- the **home-channel fallback** when `deliver: origin` captured no origin (jobs
+  created by scripts or the API rather than from a live gateway chat) — the
+  user's primary conversation standing in for the origin;
+- a job's **single explicit `platform:chat` target**, but only when the job
+  itself opts in with `attach_to_session: true` — the job author declares that
+  target a conversation. The global `mirror_delivery` flag alone never makes an
+  explicitly-addressed chat continuable.
+
+Broadcast / fan-out targets (`all`, bare-platform home channels) are never made
+continuable. The mirror is
 written as a labelled user turn (`[Cron delivery: <task name>]`), which keeps
 the conversation history alternation-safe across all model providers.
 

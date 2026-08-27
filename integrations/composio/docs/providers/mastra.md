@@ -2,7 +2,7 @@
 type: composio_doc
 title: "Mastra"
 source: "https://docs.composio.dev/docs/providers/mastra.md"
-source_hash: "a621be6a693fa75a0cf4acee943ed85fd16c06ab4072a0e8a7a3175db5b21385"
+source_hash: "ed13051100119f7d92f3e055244768bc4bd1deb60dd06b834771204f5f0a2ad9"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/mastra.md"
@@ -61,7 +61,7 @@ console.log(text);
 ```
 ## Provider specifics [#provider-specifics]
 
-**Strict mode.** Pass `strict: true` to drop every non-required property from each tool's input schema before Mastra compiles it:
+**Strict mode.** Pass `strict: true` to normalize each tool's input schema for OpenAI structured outputs before Mastra compiles it: every object lists all of its properties in `required` and is closed, and optional properties stay available but accept `null`. A `null` is dropped before the tool runs unless the tool's own schema accepts `null` for that parameter, so nullable fields still receive an explicit `null`. Tools whose schema cannot be expressed in strict mode, such as objects that accept arbitrary keys, `allOf`, `prefixItems`, or unresolved `$ref`s, keep their original schema and log a warning:
 
 ```typescript
 // @noErrors

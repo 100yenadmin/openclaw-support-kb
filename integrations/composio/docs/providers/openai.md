@@ -2,7 +2,7 @@
 type: composio_doc
 title: "OpenAI"
 source: "https://docs.composio.dev/docs/providers/openai.md"
-source_hash: "4d0d352487bd3572f02a779471d72e62e6bbc16fe2d8f973a5198679952d0673"
+source_hash: "7d2c5d7e7fa2a6634d9db0cd460bdaf5d07a185296fdd649cb6109a1c429d290"
 system: "composio"
 kb_namespace: "composio"
 doc_path: "providers/openai.md"
@@ -338,7 +338,6 @@ const result = await run(
 
 console.log(result.finalOutput);
 ```
-
 ## Provider specifics [#provider-specifics]
 
 The OpenAI integration ships three providers, one per API surface:
@@ -346,6 +345,28 @@ The OpenAI integration ships three providers, one per API surface:
 * **`OpenAIResponsesProvider`** for the Responses API. `handleToolCalls` executes each `function_call` and returns `function_call_output` items keyed by `call_id`, paired with `previous_response_id` so you only resend new outputs each turn.
 * **`OpenAIProvider`** for the Chat Completions API. This is the SDK default, so `new Composio()` with no provider uses it. You keep the full message list and append each assistant message plus its `tool` results yourself.
 * **`OpenAIAgentsProvider`** for the Agents SDK. Tools come with execution wired in, so the SDK runs the loop for you.
+
+**Strict mode.** Pass `strict: true` or `strict=True` to `OpenAIResponsesProvider`, or pass `strict: true` to the TypeScript `OpenAIAgentsProvider`, to normalize each tool's input schema for [structured outputs](https://platform.openai.com/docs/guides/structured-outputs). The Python Agents SDK provider does not support strict mode yet. Every object lists all of its properties in `required` and is closed, while optional properties stay available but accept `null`. A `null` is dropped before the tool runs unless the tool's own schema accepts `null` for that parameter. Tools whose schema strict mode cannot express, such as objects that accept arbitrary keys, `allOf`, `prefixItems`, or unresolved `$ref`s, are sent without strict mode and log a warning.
+
+**Python:**
+
+```python
+from composio import Composio
+from composio_openai import OpenAIResponsesProvider
+
+composio = Composio(provider=OpenAIResponsesProvider(strict=True))
+```
+**TypeScript:**
+
+```typescript
+// @noErrors
+import { Composio } from "@composio/core";
+import { OpenAIResponsesProvider } from "@composio/openai";
+
+const composio = new Composio({
+  provider: new OpenAIResponsesProvider({ strict: true }),
+});
+```
 
 > Pass the session to `handleToolCalls` / `handle_tool_calls` when the model received tools from `session.tools()`. The helper preserves the provider's argument normalization and executes every call through that session. For tools fetched via [`tools.get`](/docs/tools-direct/executing-tools), pass the user ID instead.
 
