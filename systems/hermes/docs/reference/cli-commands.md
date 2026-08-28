@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Commands Reference"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-commands"
-source_hash: "eb4fced0e4ba7a7b828a04cd9a93e794fd0640b9121465780bc84f0debedd147"
+source_hash: "3e6dca9a848d2277e6dacf1b3d7840df696f671e25b5def3cf7b6d3a5ae16bff"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-commands.md"
@@ -124,8 +124,9 @@ Common options:
 
 | Option | Description |
 |--------|-------------|
-| `-q`, `--query "..."` | One-shot, non-interactive prompt. |
-| `--query-file PATH` | Read the one-shot prompt from a file (`-` = stdin). Nothing is shell-interpreted, so quotes, `$(...)`, and backticks arrive verbatim — use this for programmatic or untrusted message bodies (Bot Mode teammate DMs use it). Mutually exclusive with `-q`. |
+| `-q`, `--query "..."` | Seed the session with a prompt. On a real TTY the prompt is submitted **literally** as the first turn of a normal interactive session (it is never parsed as a slash command or `!` shell escape) and the session stays open — ideal for OS launchers and desktop integrations. With `--oneshot`, `-Q`, or non-TTY stdio it answers and exits. |
+| `--query-file PATH` | Read the query from a file (`-` = stdin). Nothing is shell-interpreted, so quotes, `$(...)`, and backticks arrive verbatim — use this for programmatic or untrusted message bodies (Bot Mode teammate DMs use it). Mutually exclusive with `-q`. |
+| `--oneshot` | With `-q`/`--query-file`: answer the query and exit (the pre-0.21 single-query behavior) instead of seeding an interactive session. Implied on non-TTY stdio and by `-Q`. |
 | `-m`, `--model <model>` | Override the model for this run. |
 | `-t`, `--toolsets <csv>` | Enable a comma-separated set of toolsets. |
 | `--provider <provider>` | Force a provider: `auto`, `openrouter`, `nous`, `openai-codex`, `copilot-acp`, `copilot`, `anthropic`, `gemini`, `huggingface`, `novita` (aliases `novita-ai`, `novitaai`), `openai-api`, `zai`, `kimi-coding`, `kimi-coding-cn`, `minimax`, `minimax-cn`, `minimax-oauth`, `kilocode`, `xiaomi`, `arcee`, `gmi`, `upstage` (alias `solar`), `alibaba`, `alibaba-coding-plan` (alias `alibaba_coding`), `deepseek`, `nvidia`, `ollama-cloud`, `xai` (alias `grok`), `xai-oauth` (alias `grok-oauth`), `qwen-oauth`, `bedrock`, `opencode-zen`, `opencode-go`, `opencode-free` (aliases `free`, `opencode_free`; keyless), `commandcode`, `commandcode-anthropic`, `ai-gateway`, `azure-foundry`, `lmstudio`, `stepfun`, `tencent-tokenhub` (alias `tencent`, `tokenhub`). |
@@ -148,7 +149,8 @@ Examples:
 
 ```bash
 hermes
-hermes chat -q "Summarize the latest PRs"
+hermes chat -q "Summarize the latest PRs"          # seeds an interactive session
+hermes chat --oneshot -q "Summarize the latest PRs"  # answer and exit
 hermes chat --provider openrouter --model anthropic/claude-sonnet-4.6
 hermes chat --toolsets web,terminal,skills
 hermes chat --quiet -q "Return only JSON"
@@ -183,7 +185,7 @@ hermes -z "…" --provider openrouter --model openai/gpt-5.5
 HERMES_INFERENCE_MODEL=anthropic/claude-sonnet-4.6 hermes -z "…"
 ```
 
-Same agent, same tools, same skills — just strips every interactive / cosmetic layer. If you need tool output in the transcript too, use `hermes chat -q` instead; `-z` is explicitly for "I only want the final answer".
+Same agent, same tools, same skills — just strips every interactive / cosmetic layer. If you need tool output in the transcript too, use `hermes chat --oneshot -q` instead; `-z` is explicitly for "I only want the final answer".
 
 #### `--usage-file` — JSON usage report for pipelines
 

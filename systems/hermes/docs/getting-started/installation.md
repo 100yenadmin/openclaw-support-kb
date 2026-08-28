@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Installation"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/installation"
-source_hash: "ac86e2186af4a81600d6c61bd08df21f6d789e15ad9a91da4ec846d325d6caf0"
+source_hash: "3b2f69fe2f2d22f8bd5b41eab63995f55d971df3312a57a28e928d6b6491f2e0"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/installation.md"
@@ -107,7 +107,7 @@ You don't need to rebuild your setup from scratch. Restore a full backup with `h
 
 - **uv** (fast Python package manager)
 - **Python 3.11** (via uv, no sudo needed)
-- **Node.js v22** (for browser automation and WhatsApp bridge)
+- **Node.js v26** (for browser automation and WhatsApp bridge; existing system Node 22.22+, 24.11+, or 26+ is used as-is)
 - **ripgrep** (fast file search)
 - **ffmpeg** (audio format conversion for TTS)
 

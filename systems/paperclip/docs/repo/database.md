@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Database"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DATABASE.md"
-source_hash: "116dcb84e95201f209645343938ab942040e1e06cb9bad467b44251a5f4fff38"
+source_hash: "fde912de5bfe3acfc02e30c6da55025d22faee08dcf2f82f5cd3704dae9094d0"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/database.md"
@@ -184,6 +184,14 @@ When authoring migrations or one-time backfills:
 - Use `CREATE INDEX CONCURRENTLY` for large existing tables when the migration can run outside a transaction and must avoid long write locks.
 - Split schema changes, index creation, and data backfill into separate phases so each step has clear locking and rollback behavior.
 - Treat the `check:migrations` CI gate as the enforcement backstop for these rules. If it flags a migration, rewrite the migration or add a suppression comment with the indexed predicate, batch bound, and reason the remaining scan is safe.
+
+## Migration snapshots
+
+`drizzle-kit generate` diffs `packages/db/src/schema/` against the newest snapshot in `packages/db/src/migrations/meta/`. That snapshot must describe the schema that every migration produces when they run in order. A snapshot that drifts from the schema makes the *next* migration wrong, because `generate` folds the drift into it. The drift can add a column that an earlier migration already created, which makes that migration fail on a fresh database. It can also drop a column that the schema still uses.
+
+- Create every migration with `pnpm --filter @paperclipai/db generate`. Do not hand-write a snapshot.
+- Do not hand-edit a snapshot to resolve a merge conflict. Renumber your migration and run `generate` again, as `packages/db/.gitattributes` describes.
+- `packages/db/src/migration-snapshot-drift.test.ts` is the enforcement backstop. It repeats the diff that `generate` performs and fails when the newest snapshot no longer matches `packages/db/src/schema/`.
 
 ## Resource membership tables
 

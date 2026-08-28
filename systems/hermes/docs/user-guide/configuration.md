@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Agent Configuration"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuration"
-source_hash: "7a0c9136d85639dcfab4069eee3f45592da295b3cd9cbb5314b7171963e775c2"
+source_hash: "78f707604640367fabb4e7d06a6d1feb19052c6dc5e55fb976fed9c75399de27"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuration.md"
@@ -187,6 +187,7 @@ Hermes supports seven terminal backends. Each determines where the agent's shell
 terminal:
   backend: local    # local | docker | ssh | modal | daytona | vercel_sandbox | singularity
   cwd: "."          # Gateway/cron working directory (CLI always uses launch dir)
+  temp_dir: ""      # Session temp root; empty = TMPDIR, else ~/.hermes/cache/terminal
   font_family: ""   # Desktop terminal font; e.g. "MesloLGS NF"
   timeout: 180      # Per-command timeout in seconds
   home_mode: auto   # auto | real | profile — subprocess HOME policy
@@ -195,6 +196,18 @@ terminal:
   modal_image: "nikolaik/python-nodejs:python3.11-nodejs20"                 # Container image for Modal backend
   daytona_image: "nikolaik/python-nodejs:python3.11-nodejs20"               # Container image for Daytona backend
 ```
+
+`terminal.temp_dir` controls where Hermes puts session temp artifacts on the
+local backend — background-process logs/pid/exit files, code-execution
+sandboxes, and spilled tool results. When it's empty (the default), Hermes
+honors an explicit `TMPDIR`/`TMP`/`TEMP` from the environment and otherwise
+uses a managed directory on real storage at `~/.hermes/cache/terminal`
+instead of `/tmp` — on many distros (Arch-based setups in particular) `/tmp`
+is a small RAM-backed tmpfs that Hermes session artifacts can fill under
+load. The managed directory is auto-pruned: artifacts older than 72 hours are
+swept hourly by gateway housekeeping and once per process on CLI-only
+installs. Set `temp_dir` to an existing absolute path to redirect session
+temp anywhere else; user-set paths are never auto-pruned.
 
 `terminal.font_family` controls the embedded terminal in Hermes Desktop. It accepts either one locally installed family name (for example, `MesloLGS NF`) or a CSS font stack. Hermes appends its bundled JetBrains Mono stack as a fallback, and an empty value keeps the default. You can edit the same profile-scoped setting in **Settings → Appearance → Terminal Font**; no Google Fonts download or system-font permission is required.
 
@@ -384,6 +397,7 @@ Every key under `terminal:` has an env-var override of the form `TERMINAL_<KEY_U
 | `TERMINAL_CONTAINER_DISK` | `container_disk` | MB |
 | `TERMINAL_CONTAINER_PERSISTENT` | `container_persistent` | `true` / `false` — controls the bind-mount workspace dirs, distinct from `docker_persist_across_processes` |
 | `TERMINAL_LIFETIME_SECONDS` | `lifetime_seconds` | Idle reaper window |
+| `TERMINAL_TEMP_DIR` | `temp_dir` | Session temp root (local backend) |
 | `TERMINAL_TIMEOUT` | `timeout` | Per-command timeout |
 | `HERMES_DOCKER_BINARY` | _none_ | Force a specific docker/podman binary path |
 
@@ -911,7 +925,7 @@ Older configs with `compression.summary_model`, `compression.summary_provider`, 
 
 The value is the **first rung** of an escalating ladder, not a fixed interval: consecutive failures for the same session wait `1x`, `3x`, then `9x` this value, capped at one hour. A session whose summary model is permanently broken therefore backs off instead of retrying forever on a fixed interval, and a run that actually shrinks the transcript resets it to the first rung. Escalation is per-session and process-local — a gateway restart resets it to the first rung while the cooldown deadline itself survives.
 
-`context_timeout_seconds` (default `120`) is the same **inactivity budget** for in-agent `compress_context` — the conversation loop, preflight compaction, and manual `/compress` — so a hung summary model cannot stall a session indefinitely. Streamed summary tokens extend the wait; only a silent worker is cut off. On timeout Hermes skips compaction, keeps the existing messages, and warns the user. Set to `0` to disable. Gateway session hygiene keeps its own `hygiene_timeout_seconds` path and is not double-wrapped.
+`context_timeout_seconds` (default `120`) is the same **inactivity budget** for in-agent `compress_context` — the conversation loop, preflight compaction, and manual `/compress` — so a hung summary model cannot stall a session indefinitely. Streamed summary tokens extend the wait; only a silent worker is cut off. On timeout Hermes retries the summary once against the first entry of `auxiliary.compression.fallback_chain` (using that entry's own `timeout` when it declares one) — a stalled route never raises, so the auxiliary client's own fallback handling cannot see it. Only if that attempt also fails, or no fallback chain is configured, does Hermes skip compaction, keep the existing messages, and warn the user. Set to `0` to disable. Gateway session hygiene keeps its own `hygiene_timeout_seconds` path and is not double-wrapped.
 
 `context_total_ceiling_seconds` (default `600`) bounds the in-agent **pre-commit** wait (summary / stream phase) even while tokens are still moving. It is clamped to at least `context_timeout_seconds`. The exact guarantee: **the summary phase is bounded by this ceiling; the commit phase is logged and surfaced if it exceeds it.** Once the worker has entered the compression commit fence and SessionDB mutation is in flight, the commit is never abandoned mid-flight — that would risk transcript divergence — but the wait is no longer silent: if the commit runs past the ceiling, Hermes logs the overrun (WARNING, escalating to ERROR on repeat), sends a one-shot warning through the user-visible warning channel, and keeps waiting in bounded increments until the commit completes.
 

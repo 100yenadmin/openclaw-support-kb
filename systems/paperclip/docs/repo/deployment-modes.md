@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Deployment Modes"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/DEPLOYMENT-MODES.md"
-source_hash: "bafa6f1fb75088a2b18a54674cbedd32dd425f390c83244a028da0aa66f50f31"
+source_hash: "35ceb79f2aaa0e4e4c063215067151ab5e4222069f971033a6a9418780c365bb"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/deployment-modes.md"
@@ -191,7 +191,7 @@ future public-hosted setup design explicitly changes this policy.
 
 ## 11. Relationship to Other Docs
 
-- implementation plan: `doc/plans/deployment-auth-mode-consolidation.md`
+- implementation plan: `doc/plans/2026-02-23-deployment-auth-mode-consolidation.md`
 - V1 contract: `doc/SPEC-implementation.md`
 - operator workflows: `doc/DEVELOPING.md` and `doc/CLI.md`
 - invite/join state map: `doc/spec/invite-flow.md`

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Cron Troubleshooting"
 source: "https://hermes-agent.nousresearch.com/docs/guides/cron-troubleshooting"
-source_hash: "a940aeef1821480039aebfc3233760e99cf490f498123183418d5a24891c9728"
+source_hash: "9e18f236238dbb1227edbb7d0052403e2a9834a75dd307d4b06ad474bba84bee"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "guides/cron-troubleshooting.md"
@@ -111,6 +111,14 @@ By default, cron responses are wrapped with a header and footer (`cron.wrap_resp
 cron:
   wrap_response: false
 ```
+
+### Check 5: Relay-fronted platforms (Hermes Cloud / Team Gateway)
+
+When a platform's credential lives in the relay connector (e.g. Slack or Discord fronted by a Team Gateway) rather than in your local `.env`, the **running gateway's live relay adapter is the only sender** — there is no standalone delivery path.
+
+- Scheduled fires work as long as the gateway is running: its ticker owns relay-fronted delivery.
+- A standalone `hermes cron run <id>` automatically **forwards the run to the gateway** over the api_server (`POST /api/jobs/{id}/run`). This requires the `api_server` platform to be enabled with an `API_SERVER_KEY` (16+ characters). A `--prompt` / `cronjob(action='run', prompt=...)` context is forwarded with it and applies to that single fire only.
+- If the gateway is not reachable, the run fails with a "relay-fronted … start the gateway" error instead of the misleading `platform 'slack' not configured/enabled`. Start the gateway and retry.
 
 ---
 

@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "Execution Semantics"
 source: "https://github.com/paperclipai/paperclip/blob/master/doc/execution-semantics.md"
-source_hash: "14557842ed4526ba027ef0be50a415306a08084307013239b474eda528f59576"
+source_hash: "75fe5c74864c24d68fd992cfcf6131503c083cae764f9f70ec2d7019a1383c89"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "repo/execution-semantics.md"
@@ -393,6 +393,12 @@ The state `projectWorkspaceId` plus `executionWorkspaceId` without `projectId` i
 Workspace incoherence feeds into the same non-terminal liveness and stranded assigned-work model as a disappeared run. The recovery path should first fail or reject the incoherent wake, then either repair and requeue one bounded continuation for the same assignee or surface an explicit recovery action. It must not leave an agent-owned `in_progress` issue healthy solely because a wake record exists that would invoke the adapter in the wrong cwd, a non-git directory where git is required, an unrelated project workspace, or an unrecoverable missing worktree.
 
 For runtime-created `git_worktree` execution workspaces, branch coherence is part of workspace coherence. The persisted execution workspace branch is the recorded branch for future dispatch. Reusing that workspace must verify that the worktree is still registered and that `HEAD` is on the recorded branch. Successful run finalization must perform the same check before recording `workspace_finalize=succeeded`. If the run switched to a publishing/PR branch without updating the execution workspace record, finalization may auto-restore the recorded branch only when the worktree is clean, still registered, and the recorded branch points at the current `HEAD`; the repair is recorded as a workspace operation before the successful finalize row. If that safe repair cannot be proven, finalization records a failed workspace finalize and the run fails with bounded evidence for the expected and actual branch. A branch change is sanctioned when a control-plane path updates the execution workspace record before finalization, when publishing work happens in a separate worktree and the managed issue worktree remains on its recorded branch, or when the finalizer performs this clean same-commit restoration.
+
+### ACP startup handshake bound
+
+An adapter-backed live path also requires that the ACP startup handshake itself cannot hang forever. The engine bounds the handshake with a fixed startup deadline and a poll of the duplex control-channel disposition. Either condition ends the handshake and reports a closed, typed code, so the issue can reach a settled disposition instead of staying `in_progress` with no observable next action.
+
+The handshake failure code is distinct from a session-identity mismatch. A timeout or a duplex-channel loss during startup must not be reported as the same code as a failed session resume, because the two need different operator responses.
 
 ### Explicit recovery actions
 

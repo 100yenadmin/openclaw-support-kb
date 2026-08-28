@@ -2,7 +2,7 @@
 type: composio_docs_index
 title: "Composio Documentation Index"
 source: "https://docs.composio.dev/llms.txt"
-source_hash: "620d4bcbfe4e419f289c23c6f1cd156e947bfa999c197918ac6e7db0ab641cb6"
+source_hash: "8508e67f319775d4967485dd6a8c1799c7dde977e7d7506708b26737410a919b"
 system: "composio"
 kb_namespace: "composio"
 ---
@@ -371,13 +371,13 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/api-reference/organization.md
 - https://docs.composio.dev/reference/api-reference/organization-management.md
 - https://docs.composio.dev/reference/api-reference/projects.md
+- https://docs.composio.dev/reference/api-reference/tool-router.md
 - https://docs.composio.dev/reference/api-reference/toolkits.md
 - https://docs.composio.dev/reference/api-reference/tools.md
 - https://docs.composio.dev/reference/api-reference/triggers.md
 - https://docs.composio.dev/reference/api-reference/webhook-endpoints.md
 - https://docs.composio.dev/reference/api-reference/webhook-events.md
 - https://docs.composio.dev/reference/api-reference/webhook-subscriptions.md
-- https://docs.composio.dev/reference/api-reference/tool-router.md
 
 ## API Reference (v3.0, legacy — supported, not for new code)
 
@@ -386,9 +386,9 @@ Source: https://docs.composio.dev/llms.txt
 - https://docs.composio.dev/reference/v3.md
 - https://docs.composio.dev/reference/v3/rate-limits.md
 - https://docs.composio.dev/reference/v3/api-reference/auth-configs.md
+- https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/connected-accounts.md
 - https://docs.composio.dev/reference/v3/api-reference/mcp.md
-- https://docs.composio.dev/reference/v3/api-reference/files.md
 - https://docs.composio.dev/reference/v3/api-reference/organization-management.md
 - https://docs.composio.dev/reference/v3/api-reference/projects.md
 - https://docs.composio.dev/reference/v3/api-reference/tool-router.md
