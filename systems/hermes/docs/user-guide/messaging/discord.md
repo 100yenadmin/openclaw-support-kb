@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Discord"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/discord"
-source_hash: "5e6f9ce24997a4c34de7864e7d05a4783343a06c08b90530bbe363758c3fc457"
+source_hash: "c73fe83e38b4b9ce084f622cf15b182aa7a5693a8f9ecd15688d66acdef638d1"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/discord.md"
@@ -661,7 +661,7 @@ Hermes automatically registers installed skills as **native Discord Application 
 - Each skill becomes a Discord slash command (e.g., `/code-review`, `/ascii-art`)
 - Skills accept an optional `args` string parameter
 - Discord has a limit of 100 application commands per bot — if you have more skills than available slots, extra skills are skipped with a warning in the logs
-- Skills are registered during bot startup alongside built-in commands like `/model`, `/reset`, and `/background`
+- Skills are registered during bot startup alongside built-in commands like `/model`, `/reset`, and `/bg`
 
 No extra configuration is needed — any skill installed via `hermes skills install` is automatically registered as a Discord slash command on the next gateway restart.
 

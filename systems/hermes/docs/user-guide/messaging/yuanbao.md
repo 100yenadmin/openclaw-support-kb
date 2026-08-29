@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Yuanbao"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/yuanbao"
-source_hash: "dd46735b7e86b86ca7504c6ca712c2cf67b029ac06c0f763e91036210bfdb24c"
+source_hash: "2636091ff3cc0d78c158b4e806c6ea7b0671fad088d432b24444c3161abbfca8"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/yuanbao.md"
@@ -336,7 +336,7 @@ Results are delivered to your home channel.
 Run long operations without blocking the conversation:
 
 ```
-/background Analyze all files in the archive
+/bg Analyze all files in the archive
 ```
 
 ### Cross-Platform Messages

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Slack"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/slack"
-source_hash: "8e179cd46788ac07951bdb8c9200b0bebd43d180f8f3d187e76c3713c202c366"
+source_hash: "25a0fc17030994522ffda03b9545120365189f09c521c94e31dfd78b98c2c57e"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/slack.md"
@@ -314,7 +314,7 @@ Then in Slack:
 ### Legacy `/hermes <subcommand>` still works
 
 For backward compatibility with older manifests, you can still type
-`/hermes btw run the tests` — Hermes routes it the same way as `/btw
+`/hermes bg run the tests` — Hermes routes it the same way as `/bg
 run the tests`. Free-form questions also work: `/hermes what's the
 weather?` is treated as a regular message.
 

@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "TUI"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/tui"
-source_hash: "ee0d61e87183f304b9803c84023ffc63d089abeed7e92d95957bdef9d6e53beb"
+source_hash: "56ac7e2b9a602033101061fa76e4fdf34802189686a38c83ae02812bff6b428c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/tui.md"
@@ -229,7 +229,7 @@ The status line also shows:
 - **Working directory with git branch** — `~/projects/hermes-agent (docs/two-week-gap-sweep)`. The branch suffix updates when you `git checkout` in a side terminal (mtime-cached) so the TUI reflects your actual active branch, not whatever it was at launch.
 - **Per-prompt elapsed time** — `⏱ 12s/3m 45s` while the turn is running (live), frozen to `⏲ 32s / 3m 45s` after the turn completes. First number is time since last user message; second is total session duration. Resets on every new prompt.
 - **`🗜️ N`** — number of times the running session has been auto-compressed. Appears once the first compression fires.
-- **`▶ N`** — number of `/background` tasks currently running in this session. Appears whenever at least one task is in flight.
+- **`▶ N`** — number of `/bg` tasks currently running in this session. Appears whenever at least one task is in flight.
 - **`⚠ YOLO`** — visible warning whenever YOLO mode is on (`hermes --yolo`, `/yolo`, or `HERMES_YOLO_MODE=1`). The same badge also appears in the startup banner so you cannot launch an auto-approving session without noticing.
 
 ## Configuration

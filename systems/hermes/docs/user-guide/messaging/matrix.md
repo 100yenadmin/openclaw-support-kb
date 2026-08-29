@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Matrix"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/messaging/matrix"
-source_hash: "612fb8b825c265eb1ef73e9ab50018ad52a83e06ddb8e92808aa8d7d91295075"
+source_hash: "db7366751fa88ca63a6bfd16c1ca1d336b9cab02da8e41d0fc4c933567532c92"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/messaging/matrix.md"
@@ -566,7 +566,7 @@ To find a Room ID: in Element, go to the room → **Settings** → **Advanced** 
 
 Hermes supports the same gateway commands in Matrix that it supports on other
 messaging platforms, including `/commands`, `/model`, `/stop`, `/queue`,
-`/steer`, `/goal`, `/subgoal`, `/background`, `/bg`, `/btw`, `/tasks`, and
+`/steer`, `/goal`, `/subgoal`, `/bg`, `/btw`, `/tasks`, and
 `/yolo`.
 
 Some Matrix clients reserve leading `/` for local client commands and may not

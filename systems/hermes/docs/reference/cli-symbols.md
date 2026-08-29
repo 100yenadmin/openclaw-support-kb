@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "CLI Symbols Glossary"
 source: "https://hermes-agent.nousresearch.com/docs/reference/cli-symbols"
-source_hash: "18b84896fd88254df527126683c7f41a0452f57f01c37974dae28f4aea24ec35"
+source_hash: "17d39652f865b76bd9a647ffae82f21428da77ea0978e92e54baa922db2e8969"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "reference/cli-symbols.md"
@@ -56,7 +56,7 @@ The single line at the bottom of the TUI. Segments appear only when relevant and
 | `⏱` | Per-prompt elapsed time while the turn runs, e.g. `⏱ 12s/3m 45s` (turn time / session time). |
 | `⏲` | The same timer, frozen after the turn completes. |
 | `cmp N` | The session has been auto-compressed N times. |
-| `▶ N` | N `/background` tasks currently running. |
+| `▶ N` | N `/bg` tasks currently running. |
 | `⚠ YOLO` | YOLO mode is on (auto-approval). Also shown in the startup banner. |
 | `⛓ N` | N subagents currently active. |
 | `↩ resumes when subagent finishes` | Reassurance shown while you are idle but delegated work is still in flight — the result returns on its own. |
