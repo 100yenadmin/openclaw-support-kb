@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Configuring Models"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/configuring-models"
-source_hash: "0c6351afb8f3ff41b5ebdf8daf0618b28dbefe991b4e17a1bbf3dd4d0323569f"
+source_hash: "1582071a286adb1f7a56cbef1ffa997f3d3db2103834e16da7578d354ee50ddd"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/configuring-models.md"
@@ -182,7 +182,7 @@ When `fallback_chain` is absent, `auto` uses the top-level `fallback_providers` 
 
 ## Per-provider request options
 
-Provider entries (`providers.<name>` in the `providers:` dict, or items in the legacy `custom_providers` list) accept two knobs that shape how Hermes talks to the endpoint:
+Provider entries (`providers.<name>` in the `providers:` dict, or items in the legacy `custom_providers` list) accept knobs that shape how Hermes talks to the endpoint:
 
 **`extra_headers`** — a mapping of extra HTTP headers attached to every LLM request routed to that provider's base URL. They are applied last, after URL/profile defaults and user header overrides, so they survive credential swaps and client rebuilds. Useful for Cloudflare Access service tokens, proxy auth, or custom bearer schemes:
 
@@ -211,6 +211,16 @@ providers:
 ```
 
 With discovery off, the model picker (`hermes model`, `/model`) shows the configured list instead of a live probe.
+
+**`openai_native_compaction`** — set this capability to `true` only for an OpenAI-compatible endpoint that you trust with conversation content. Native compaction sends its payload to that provider's configured `base_url`:
+
+```yaml
+providers:
+  trusted-proxy:
+    api: https://llm.internal.example.com/v1
+    capabilities:
+      openai_native_compaction: true
+```
 
 For a gateway that resolves a bare model alias only after receiving the
 request, opt the alias into prompt-cache markers with the per-model

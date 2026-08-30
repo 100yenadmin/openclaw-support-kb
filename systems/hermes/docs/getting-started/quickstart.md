@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Hermes Agent Quickstart"
 source: "https://hermes-agent.nousresearch.com/docs/getting-started/quickstart"
-source_hash: "c9c86dd3e8f8010c1f9e4b38b83cdd77ba48983236a884d3875beb77ada7c924"
+source_hash: "ccd6cce7b073afc6f17c62073ef19042cd5a9fe7aeef9c893c3bec01d8d4834c"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "getting-started/quickstart.md"
@@ -144,9 +144,12 @@ Good defaults:
 | **xAI** | Grok models via direct API | Set `XAI_API_KEY` |
 | **xAI Grok OAuth** | SuperGrok / Premium+ subscription, no API key needed | `hermes model` → xAI Grok OAuth |
 | **NovitaAI** | Multi-model API gateway | Set `NOVITA_API_KEY` |
+| **Ramp Router** | Responses-native LLM gateway routing across OpenAI/Anthropic/xAI/... | Set `RAMP_ROUTER_API_KEY` |
+| **Nebius Token Factory** | Open models on Nebius AI cloud | Set `NEBIUS_API_KEY` |
 | **StepFun** | Step Plan models | Set `STEPFUN_API_KEY` |
 | **Xiaomi MiMo** | Xiaomi-hosted models | Set `XIAOMI_API_KEY` |
 | **Tencent TokenHub** | Tencent-hosted models | Set `TOKENHUB_API_KEY` |
+| **Tencent TokenPlan** | Tencent Hy models via Anthropic-style endpoint | Set `TOKENPLAN_API_KEY` |
 | **Ollama Cloud** | Managed Ollama-hosted models | Set `OLLAMA_API_KEY` |
 | **LM Studio** | Local desktop app exposing an OpenAI-compatible API | Set `LM_API_KEY` (and `LM_BASE_URL` if non-default) |
 | **Qwen OAuth** | Qwen Portal browser OAuth — no API key needed | `hermes model` → Qwen OAuth |

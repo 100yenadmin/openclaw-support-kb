@@ -2,10 +2,10 @@
 type: composio_toolkit_catalog
 title: "Composio Toolkit Catalog Snapshot"
 source: "https://composio.dev/toolkits"
-source_hash: "9dcac60289555286efdacd99f5059e2e2de6ebbedfca8faea797261271c12113"
+source_hash: "9197cc475ae74af11dbf2cde62e36e69f963262834865d6e121009ab82b51aa9"
 system: "composio"
 kb_namespace: "composio"
-catalog_snapshot_sha256: "7e5588dfc7a536c3df0d1e19ac6378a0641d6cffa189bef14e3eecece82e876f"
+catalog_snapshot_sha256: "3c9ad257b9d3987959ea95347caf0592bf9857c5feafcac62d98adc15284ee94"
 ---
 
 # Composio Toolkit Catalog Snapshot
@@ -66,6 +66,7 @@ No rendered toolkit text captured.
 - share_point/framework/claude-cowork - https://composio.dev/toolkits/share_point/framework/claude-cowork
 - todoist/framework/codex - https://composio.dev/toolkits/todoist/framework/codex
 - share_point/framework/claude-code - https://composio.dev/toolkits/share_point/framework/claude-code
+- freshdesk/framework/claude-code - https://composio.dev/toolkits/freshdesk/framework/claude-code
 - servicenow/framework/claude-code - https://composio.dev/toolkits/servicenow/framework/claude-code
 - cloudflare/framework/hermes-agent - https://composio.dev/toolkits/cloudflare/framework/hermes-agent
 - affinity/framework/claude-code - https://composio.dev/toolkits/affinity/framework/claude-code
@@ -75,6 +76,7 @@ No rendered toolkit text captured.
 - cursor/framework/claude-cowork - https://composio.dev/toolkits/cursor/framework/claude-cowork
 - clickup/framework/codex - https://composio.dev/toolkits/clickup/framework/codex
 - clockify/framework/claude-code - https://composio.dev/toolkits/clockify/framework/claude-code
+- basecamp/framework/claude-code - https://composio.dev/toolkits/basecamp/framework/claude-code
 - share_point - https://composio.dev/toolkits/share_point
 - share_point/framework/codex - https://composio.dev/toolkits/share_point/framework/codex
 

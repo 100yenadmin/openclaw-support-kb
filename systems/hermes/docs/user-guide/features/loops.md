@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Recurring Loops"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/loops"
-source_hash: "87b1c1ed5392a6474d3bd1fb70a7965aecbdd98d60a4046b0a2848bff7dd8caf"
+source_hash: "8b1cc3a93763aa8a63c4fdbfeb341b736e2087ee76a25881b291ddc0312bb044"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/loops.md"
@@ -41,8 +41,8 @@ When the work should run **unattended** — overnight, on a real schedule, survi
 What you'll see:
 
 1. **Loop accepted** — `↻ Loop set (every 5m): check the deploy status…`
-2. **First wakeup in 5m** — while the session is idle, Hermes injects the wakeup and runs a normal turn against current state.
-3. **Repeat** — every 5 minutes, until a stop condition fires or you stop it.
+2. **First wakeup fires right away** — on the next idle poll (gateway: the next 15s watcher scan), Hermes injects the wakeup and runs a normal turn against current state.
+3. **Repeat** — every 5 minutes after that, until a stop condition fires or you stop it.
 
 Loop a slash command just as easily:
 
@@ -89,7 +89,7 @@ Examples:
 
 | Command | What it does |
 |---|---|
-| `/loop [interval] <prompt> [--times N] [--until <cond>]` | Start (or replace) the loop for this session. |
+| `/loop [interval] <prompt> [--times N] [--until <cond>]` | Start (or replace) the loop for this session. The first wakeup fires immediately; later ones follow the cadence. |
 | `/loop` or `/loop status` | Show cadence, ticks fired, and time to the next wakeup. |
 | `/loop pause` | Stop firing without losing the loop. |
 | `/loop resume` | Pick it back up. |

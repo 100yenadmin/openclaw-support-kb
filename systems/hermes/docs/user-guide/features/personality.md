@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Personality & SOUL.md"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/personality"
-source_hash: "8b809a18dc7e6f79e56845a1155706f2fee4fbdf8a75c958bce29f12de4c3367"
+source_hash: "46161713beade7f83e76c6fb897e02eb9240107a0bb58593ba3f944ca979e034"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/personality.md"
@@ -137,7 +137,7 @@ The content goes through:
 - prompt-injection scanning
 - truncation if it is too large
 
-If the file is empty, whitespace-only, or cannot be read, Hermes falls back to a built-in default identity ("You are Hermes Agent, an intelligent AI assistant created by Nous Research..."). This fallback also applies when `skip_context_files` is set (e.g., in subagent/delegation contexts).
+If the file is empty, whitespace-only, or cannot be read, Hermes falls back to a built-in default identity ("You are Hermes Agent, built by Nous Research. Be direct: match the length of your reply to the weight of the ask..."). This fallback also applies when `skip_context_files` is set (e.g., in subagent/delegation contexts).
 
 ## Security scanning
 

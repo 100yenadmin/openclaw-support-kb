@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Skills System"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
-source_hash: "8c2fba5568cfc7b3753d4d6b872fd2a8943ec4ad17d0a514cbdb76dac1d8f599"
+source_hash: "b02497778eda0c48022e4da6045bc6e477b0dc555264d8ea32e31ebc3d9bfa71"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/skills.md"
@@ -69,7 +69,7 @@ Every installed skill is automatically available as a slash command:
 /gif-search funny cats
 /axolotl help me fine-tune Llama 3 on my dataset
 /github-pr-workflow create a PR for the auth refactor
-/plan design a rollout for migrating our auth provider
+/songsee analyze the frequency spread of this mix
 
 # Just the skill name loads it and lets the agent ask what you need:
 /excalidraw
@@ -95,7 +95,7 @@ that happen to start with `/` (like file paths) are never swallowed:
 For combinations you use repeatedly, prefer a [skill bundle](#skill-bundles) —
 same effect under one short command.
 
-The bundled `plan` skill is a good example. Running `/plan [request]` loads the skill's instructions, telling Hermes to inspect context if needed, write a markdown implementation plan instead of executing the task, and save the result under `.hermes/plans/` relative to the active workspace/backend working directory.
+(Plan mode works the same way but is a built-in command now: `/plan [request]` tells Hermes to inspect context if needed, write a markdown implementation plan instead of executing the task, and save the result under `.hermes/plans/` relative to the active workspace/backend working directory.)
 
 You can also interact with skills through natural conversation:
 

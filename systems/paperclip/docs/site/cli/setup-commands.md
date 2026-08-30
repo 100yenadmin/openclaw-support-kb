@@ -2,7 +2,7 @@
 type: paperclip_doc
 title: "setup-commands"
 source: "https://github.com/paperclipai/paperclip/blob/master/docs/cli/setup-commands.md"
-source_hash: "d7b3bd99a22566fb9643abe9e8b7498bce39fef3ce66a699126f0241f1ba5a7c"
+source_hash: "c64b8ea829b5ab007972e38d44272e74760cec2008eb215d66fb5a358725752d"
 system: "paperclip"
 kb_namespace: "paperclip-mission-control"
 doc_path: "site/cli/setup-commands.md"
@@ -64,10 +64,16 @@ Start immediately after onboarding:
 pnpm paperclipai onboard --run
 ```
 
-Non-interactive defaults + immediate start (opens browser on server listen):
+Non-interactive defaults + immediate start (prints the URL without opening a browser):
 
 ```sh
 pnpm paperclipai onboard --yes
+```
+
+Browser opening is opt-in. Set the environment variable explicitly when that is the desired behavior:
+
+```sh
+PAPERCLIP_OPEN_ON_LISTEN=true pnpm paperclipai onboard --yes
 ```
 
 On an existing install, `--yes` now preserves the current config and just starts Paperclip with that setup.

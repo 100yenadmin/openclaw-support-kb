@@ -7,7 +7,7 @@ system: "composio"
 kb_namespace: "composio"
 docs_full_sha256: "ba16891b03cdfa70dc6ee491702f106c18b1e52ebbcf9d93603c41e7e3c104c9"
 docs_index_sha256: "e3cab4786be510ca8f87134c52c3c738ef4e8a66103999bfdad3e27fe48b0c07"
-toolkit_catalog_sha256: "7e5588dfc7a536c3df0d1e19ac6378a0641d6cffa189bef14e3eecece82e876f"
+toolkit_catalog_sha256: "3c9ad257b9d3987959ea95347caf0592bf9857c5feafcac62d98adc15284ee94"
 ---
 
 # Composio Integration Guide For OpenClaw Agents

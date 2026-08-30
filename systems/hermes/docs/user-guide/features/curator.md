@@ -2,7 +2,7 @@
 type: hermes_doc
 title: "Curator"
 source: "https://hermes-agent.nousresearch.com/docs/user-guide/features/curator"
-source_hash: "5d670a21b506a646db41b7cbf49265fa15211a8dfc66aeaf63a0444252bbf6e9"
+source_hash: "0b582fa5b3ab5cb902d0d17a6d9927cc954dc94578f00026f5876aec4f59b662"
 system: "hermes"
 kb_namespace: "hermes-agent"
 doc_path: "user-guide/features/curator.md"
@@ -328,7 +328,7 @@ Skills named in any cron job's `skills:` list are protected the same way for **a
 
 Only **agent-created** skills can be pinned — `hermes curator pin` refuses on bundled and hub-installed skills with an explanatory message if you try. Hub-installed skills are never subject to curator mutation. Bundled built-in skills are only touched when `curator.prune_builtins: true` (the default), and even then only archived after `archive_after_days` of non-use — never patched, consolidated, or deleted. Set `curator.prune_builtins: false` to exempt bundled skills entirely.
 
-A small set of **protected built-ins** is hardcoded as never-archivable and never-consolidatable, regardless of `curator.prune_builtins`, pin state, or LLM judgment. These back load-bearing UX — for example, `plan` powers the `/plan` slash-command flow — so silently archiving one would turn its slash command into an "Unknown command" error with no signal to you. Protected built-ins are filtered out of the curator's candidate list entirely, so the consolidation pass never sees them.
+A small set of **protected built-ins** can be hardcoded as never-archivable and never-consolidatable, regardless of `curator.prune_builtins`, pin state, or LLM judgment. These back load-bearing UX, so silently archiving one would turn its slash command into an "Unknown command" error with no signal to you. (The set is currently empty — `plan`, its original member, graduated to a built-in `/plan` command with no skill on disk.) Protected built-ins are filtered out of the curator's candidate list entirely, so the consolidation pass never sees them.
 
 If you want a stronger guarantee than "no deletion" — for instance, freezing a skill's content entirely while the agent still reads it — edit `~/.hermes/skills/<name>/SKILL.md` directly with your editor. The pin guards tool-driven deletion, not your own filesystem access.
 
